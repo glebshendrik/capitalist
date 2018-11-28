@@ -49,6 +49,8 @@
 		FAD88F5A21AEC1F800BE7BC1 /* UsersServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5621AEC1F700BE7BC1 /* UsersServiceProtocol.swift */; };
 		FAD88F5B21AEC1F800BE7BC1 /* DevicesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5721AEC1F700BE7BC1 /* DevicesServiceProtocol.swift */; };
 		FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5C21AEC28300BE7BC1 /* User.swift */; };
+		FAD88F5F21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5E21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift */; };
+		FAD88F6121AEC61800BE7BC1 /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F6021AEC61800BE7BC1 /* AccountCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,8 @@
 		FAD88F5621AEC1F700BE7BC1 /* UsersServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersServiceProtocol.swift; sourceTree = "<group>"; };
 		FAD88F5721AEC1F700BE7BC1 /* DevicesServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesServiceProtocol.swift; sourceTree = "<group>"; };
 		FAD88F5C21AEC28300BE7BC1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FAD88F5E21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FAD88F6021AEC61800BE7BC1 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +211,7 @@
 			children = (
 				FAD88F4221AEBE3E00BE7BC1 /* Protocols */,
 				FAD88F4521AEBE7400BE7BC1 /* NotificationsCoordinator.swift */,
+				FAD88F6021AEC61800BE7BC1 /* AccountCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -269,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD88F4321AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift */,
+				FAD88F5E21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -427,8 +433,10 @@
 			files = (
 				FAD88F2C21AEB78A00BE7BC1 /* NotificationsHandlerProtocol.swift in Sources */,
 				FAD88EFC21AEA86E00BE7BC1 /* ViewController.swift in Sources */,
+				FAD88F5F21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift in Sources */,
 				FAD88F1521AEB52C00BE7BC1 /* ServicesAssembly.swift in Sources */,
 				FAD88F5221AEC1A500BE7BC1 /* APIClient.swift in Sources */,
+				FAD88F6121AEC61800BE7BC1 /* AccountCoordinator.swift in Sources */,
 				FAD88F3D21AEBB4200BE7BC1 /* UserSessionManager.swift in Sources */,
 				FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */,
 				FAD88F2821AEB75800BE7BC1 /* NotificationCategory.swift in Sources */,
