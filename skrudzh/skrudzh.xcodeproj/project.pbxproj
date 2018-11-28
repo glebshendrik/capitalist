@@ -13,6 +13,42 @@
 		FAD88EFF21AEA86E00BE7BC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88EFD21AEA86E00BE7BC1 /* Main.storyboard */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
 		FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */; };
+		FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F0C21AEB24F00BE7BC1 /* ApplicationAssembly.swift */; };
+		FAD88F0F21AEB45A00BE7BC1 /* ManagersAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F0E21AEB45A00BE7BC1 /* ManagersAssembly.swift */; };
+		FAD88F1321AEB48800BE7BC1 /* ApplicationRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F1221AEB48800BE7BC1 /* ApplicationRouterProtocol.swift */; };
+		FAD88F1521AEB52C00BE7BC1 /* ServicesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F1421AEB52C00BE7BC1 /* ServicesAssembly.swift */; };
+		FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F1621AEB53F00BE7BC1 /* CoordinatorsAssembly.swift */; };
+		FAD88F1D21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F1C21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift */; };
+		FAD88F1F21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F1E21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift */; };
+		FAD88F2121AEB6ED00BE7BC1 /* NavigatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F2021AEB6ED00BE7BC1 /* NavigatorProtocol.swift */; };
+		FAD88F2421AEB71000BE7BC1 /* NotificationsManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F2321AEB71000BE7BC1 /* NotificationsManagerProtocol.swift */; };
+		FAD88F2621AEB72800BE7BC1 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F2521AEB72800BE7BC1 /* NotificationsManager.swift */; };
+		FAD88F2821AEB75800BE7BC1 /* NotificationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F2721AEB75800BE7BC1 /* NotificationCategory.swift */; };
+		FAD88F2A21AEB77200BE7BC1 /* NotificationAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F2921AEB77200BE7BC1 /* NotificationAction.swift */; };
+		FAD88F2C21AEB78A00BE7BC1 /* NotificationsHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F2B21AEB78A00BE7BC1 /* NotificationsHandlerProtocol.swift */; };
+		FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F2D21AEB79F00BE7BC1 /* NotificationsHandler.swift */; };
+		FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F2F21AEB7BD00BE7BC1 /* NotificationItem.swift */; };
+		FAD88F3221AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3121AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift */; };
+		FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3421AEB8BD00BE7BC1 /* ApplicationExtensions.swift */; };
+		FAD88F3721AEB8F200BE7BC1 /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3621AEB8F200BE7BC1 /* FirstLaunch.swift */; };
+		FAD88F3921AEBAA600BE7BC1 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3821AEBAA600BE7BC1 /* Session.swift */; };
+		FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3A21AEBABD00BE7BC1 /* ApplicationRouter.swift */; };
+		FAD88F3D21AEBB4200BE7BC1 /* UserSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3C21AEBB4200BE7BC1 /* UserSessionManager.swift */; };
+		FAD88F3F21AEBDDB00BE7BC1 /* UIMessagePresenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3E21AEBDDB00BE7BC1 /* UIMessagePresenterManager.swift */; };
+		FAD88F4121AEBDF900BE7BC1 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4021AEBDF900BE7BC1 /* Navigator.swift */; };
+		FAD88F4421AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4321AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift */; };
+		FAD88F4621AEBE7400BE7BC1 /* NotificationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4521AEBE7400BE7BC1 /* NotificationsCoordinator.swift */; };
+		FAD88F4D21AEC1A500BE7BC1 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4721AEC1A400BE7BC1 /* AuthenticationService.swift */; };
+		FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4821AEC1A400BE7BC1 /* Service.swift */; };
+		FAD88F4F21AEC1A500BE7BC1 /* UsersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4921AEC1A400BE7BC1 /* UsersService.swift */; };
+		FAD88F5021AEC1A500BE7BC1 /* DevicesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4A21AEC1A400BE7BC1 /* DevicesService.swift */; };
+		FAD88F5121AEC1A500BE7BC1 /* API in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F4B21AEC1A400BE7BC1 /* API */; };
+		FAD88F5221AEC1A500BE7BC1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4C21AEC1A500BE7BC1 /* APIClient.swift */; };
+		FAD88F5821AEC1F800BE7BC1 /* APIClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5421AEC1F700BE7BC1 /* APIClientProtocol.swift */; };
+		FAD88F5921AEC1F800BE7BC1 /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5521AEC1F700BE7BC1 /* AuthenticationServiceProtocol.swift */; };
+		FAD88F5A21AEC1F800BE7BC1 /* UsersServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5621AEC1F700BE7BC1 /* UsersServiceProtocol.swift */; };
+		FAD88F5B21AEC1F800BE7BC1 /* DevicesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5721AEC1F700BE7BC1 /* DevicesServiceProtocol.swift */; };
+		FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5C21AEC28300BE7BC1 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +62,42 @@
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAD88F0321AEA87300BE7BC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAD88F0521AEA87300BE7BC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAD88F0C21AEB24F00BE7BC1 /* ApplicationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
+		FAD88F0E21AEB45A00BE7BC1 /* ManagersAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagersAssembly.swift; sourceTree = "<group>"; };
+		FAD88F1221AEB48800BE7BC1 /* ApplicationRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationRouterProtocol.swift; sourceTree = "<group>"; };
+		FAD88F1421AEB52C00BE7BC1 /* ServicesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesAssembly.swift; sourceTree = "<group>"; };
+		FAD88F1621AEB53F00BE7BC1 /* CoordinatorsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorsAssembly.swift; sourceTree = "<group>"; };
+		FAD88F1C21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManagerProtocol.swift; sourceTree = "<group>"; };
+		FAD88F1E21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMessagePresenterManagerProtocol.swift; sourceTree = "<group>"; };
+		FAD88F2021AEB6ED00BE7BC1 /* NavigatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorProtocol.swift; sourceTree = "<group>"; };
+		FAD88F2321AEB71000BE7BC1 /* NotificationsManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManagerProtocol.swift; sourceTree = "<group>"; };
+		FAD88F2521AEB72800BE7BC1 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
+		FAD88F2721AEB75800BE7BC1 /* NotificationCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCategory.swift; sourceTree = "<group>"; };
+		FAD88F2921AEB77200BE7BC1 /* NotificationAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAction.swift; sourceTree = "<group>"; };
+		FAD88F2B21AEB78A00BE7BC1 /* NotificationsHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsHandlerProtocol.swift; sourceTree = "<group>"; };
+		FAD88F2D21AEB79F00BE7BC1 /* NotificationsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsHandler.swift; sourceTree = "<group>"; };
+		FAD88F2F21AEB7BD00BE7BC1 /* NotificationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationItem.swift; sourceTree = "<group>"; };
+		FAD88F3121AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepAliveNotificationItem.swift; sourceTree = "<group>"; };
+		FAD88F3421AEB8BD00BE7BC1 /* ApplicationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationExtensions.swift; sourceTree = "<group>"; };
+		FAD88F3621AEB8F200BE7BC1 /* FirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
+		FAD88F3821AEBAA600BE7BC1 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		FAD88F3A21AEBABD00BE7BC1 /* ApplicationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationRouter.swift; sourceTree = "<group>"; };
+		FAD88F3C21AEBB4200BE7BC1 /* UserSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManager.swift; sourceTree = "<group>"; };
+		FAD88F3E21AEBDDB00BE7BC1 /* UIMessagePresenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMessagePresenterManager.swift; sourceTree = "<group>"; };
+		FAD88F4021AEBDF900BE7BC1 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		FAD88F4321AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FAD88F4521AEBE7400BE7BC1 /* NotificationsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCoordinator.swift; sourceTree = "<group>"; };
+		FAD88F4721AEC1A400BE7BC1 /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		FAD88F4821AEC1A400BE7BC1 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		FAD88F4921AEC1A400BE7BC1 /* UsersService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersService.swift; sourceTree = "<group>"; };
+		FAD88F4A21AEC1A400BE7BC1 /* DevicesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesService.swift; sourceTree = "<group>"; };
+		FAD88F4B21AEC1A400BE7BC1 /* API */ = {isa = PBXFileReference; lastKnownFileType = folder; path = API; sourceTree = "<group>"; };
+		FAD88F4C21AEC1A500BE7BC1 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		FAD88F5421AEC1F700BE7BC1 /* APIClientProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClientProtocol.swift; sourceTree = "<group>"; };
+		FAD88F5521AEC1F700BE7BC1 /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
+		FAD88F5621AEC1F700BE7BC1 /* UsersServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersServiceProtocol.swift; sourceTree = "<group>"; };
+		FAD88F5721AEC1F700BE7BC1 /* DevicesServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesServiceProtocol.swift; sourceTree = "<group>"; };
+		FAD88F5C21AEC28300BE7BC1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +150,13 @@
 		FAD88EF821AEA86E00BE7BC1 /* skrudzh */ = {
 			isa = PBXGroup;
 			children = (
+				FAD88F0B21AEB22600BE7BC1 /* Assembly */,
+				FAD88F3321AEB89000BE7BC1 /* Helpers */,
+				FAD88F1821AEB62D00BE7BC1 /* Coordinators */,
+				FAD88F1921AEB63500BE7BC1 /* Services */,
+				FAD88F1021AEB46300BE7BC1 /* Managers */,
+				FAD88F1B21AEB65800BE7BC1 /* Models */,
+				FAD88F1A21AEB65200BE7BC1 /* UI */,
 				FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */,
 				FAD88EFB21AEA86E00BE7BC1 /* ViewController.swift */,
 				FAD88EFD21AEA86E00BE7BC1 /* Main.storyboard */,
@@ -86,6 +165,123 @@
 				FAD88F0521AEA87300BE7BC1 /* Info.plist */,
 			);
 			path = skrudzh;
+			sourceTree = "<group>";
+		};
+		FAD88F0B21AEB22600BE7BC1 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F0C21AEB24F00BE7BC1 /* ApplicationAssembly.swift */,
+				FAD88F0E21AEB45A00BE7BC1 /* ManagersAssembly.swift */,
+				FAD88F1421AEB52C00BE7BC1 /* ServicesAssembly.swift */,
+				FAD88F1621AEB53F00BE7BC1 /* CoordinatorsAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		FAD88F1021AEB46300BE7BC1 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F2221AEB6FB00BE7BC1 /* Notifications */,
+				FAD88F1121AEB47100BE7BC1 /* Protocols */,
+				FAD88F3A21AEBABD00BE7BC1 /* ApplicationRouter.swift */,
+				FAD88F3C21AEBB4200BE7BC1 /* UserSessionManager.swift */,
+				FAD88F3E21AEBDDB00BE7BC1 /* UIMessagePresenterManager.swift */,
+				FAD88F4021AEBDF900BE7BC1 /* Navigator.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		FAD88F1121AEB47100BE7BC1 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F1221AEB48800BE7BC1 /* ApplicationRouterProtocol.swift */,
+				FAD88F1C21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift */,
+				FAD88F1E21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift */,
+				FAD88F2021AEB6ED00BE7BC1 /* NavigatorProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		FAD88F1821AEB62D00BE7BC1 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F4221AEBE3E00BE7BC1 /* Protocols */,
+				FAD88F4521AEBE7400BE7BC1 /* NotificationsCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		FAD88F1921AEB63500BE7BC1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F5321AEC1CE00BE7BC1 /* Protocols */,
+				FAD88F4B21AEC1A400BE7BC1 /* API */,
+				FAD88F4C21AEC1A500BE7BC1 /* APIClient.swift */,
+				FAD88F4721AEC1A400BE7BC1 /* AuthenticationService.swift */,
+				FAD88F4A21AEC1A400BE7BC1 /* DevicesService.swift */,
+				FAD88F4821AEC1A400BE7BC1 /* Service.swift */,
+				FAD88F4921AEC1A400BE7BC1 /* UsersService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FAD88F1A21AEB65200BE7BC1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		FAD88F1B21AEB65800BE7BC1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F3821AEBAA600BE7BC1 /* Session.swift */,
+				FAD88F5C21AEC28300BE7BC1 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FAD88F2221AEB6FB00BE7BC1 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F2321AEB71000BE7BC1 /* NotificationsManagerProtocol.swift */,
+				FAD88F2521AEB72800BE7BC1 /* NotificationsManager.swift */,
+				FAD88F2721AEB75800BE7BC1 /* NotificationCategory.swift */,
+				FAD88F2921AEB77200BE7BC1 /* NotificationAction.swift */,
+				FAD88F2B21AEB78A00BE7BC1 /* NotificationsHandlerProtocol.swift */,
+				FAD88F2D21AEB79F00BE7BC1 /* NotificationsHandler.swift */,
+				FAD88F2F21AEB7BD00BE7BC1 /* NotificationItem.swift */,
+				FAD88F3121AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		FAD88F3321AEB89000BE7BC1 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F3421AEB8BD00BE7BC1 /* ApplicationExtensions.swift */,
+				FAD88F3621AEB8F200BE7BC1 /* FirstLaunch.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		FAD88F4221AEBE3E00BE7BC1 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F4321AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		FAD88F5321AEC1CE00BE7BC1 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F5421AEC1F700BE7BC1 /* APIClientProtocol.swift */,
+				FAD88F5521AEC1F700BE7BC1 /* AuthenticationServiceProtocol.swift */,
+				FAD88F5721AEC1F700BE7BC1 /* DevicesServiceProtocol.swift */,
+				FAD88F5621AEC1F700BE7BC1 /* UsersServiceProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */,
+				FAD88F5121AEC1A500BE7BC1 /* API in Resources */,
 				FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */,
 				FAD88EFF21AEA86E00BE7BC1 /* Main.storyboard in Resources */,
 			);
@@ -228,8 +425,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD88F2C21AEB78A00BE7BC1 /* NotificationsHandlerProtocol.swift in Sources */,
 				FAD88EFC21AEA86E00BE7BC1 /* ViewController.swift in Sources */,
+				FAD88F1521AEB52C00BE7BC1 /* ServicesAssembly.swift in Sources */,
+				FAD88F5221AEC1A500BE7BC1 /* APIClient.swift in Sources */,
+				FAD88F3D21AEBB4200BE7BC1 /* UserSessionManager.swift in Sources */,
+				FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */,
+				FAD88F2821AEB75800BE7BC1 /* NotificationCategory.swift in Sources */,
+				FAD88F4121AEBDF900BE7BC1 /* Navigator.swift in Sources */,
+				FAD88F2621AEB72800BE7BC1 /* NotificationsManager.swift in Sources */,
+				FAD88F2A21AEB77200BE7BC1 /* NotificationAction.swift in Sources */,
+				FAD88F3F21AEBDDB00BE7BC1 /* UIMessagePresenterManager.swift in Sources */,
+				FAD88F5A21AEC1F800BE7BC1 /* UsersServiceProtocol.swift in Sources */,
+				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
+				FAD88F4421AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift in Sources */,
+				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
+				FAD88F4621AEBE7400BE7BC1 /* NotificationsCoordinator.swift in Sources */,
+				FAD88F3221AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift in Sources */,
 				FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */,
+				FAD88F1F21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift in Sources */,
+				FAD88F0F21AEB45A00BE7BC1 /* ManagersAssembly.swift in Sources */,
+				FAD88F4F21AEC1A500BE7BC1 /* UsersService.swift in Sources */,
+				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
+				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,
+				FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */,
+				FAD88F1D21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift in Sources */,
+				FAD88F5921AEC1F800BE7BC1 /* AuthenticationServiceProtocol.swift in Sources */,
+				FAD88F3921AEBAA600BE7BC1 /* Session.swift in Sources */,
+				FAD88F2421AEB71000BE7BC1 /* NotificationsManagerProtocol.swift in Sources */,
+				FAD88F3721AEB8F200BE7BC1 /* FirstLaunch.swift in Sources */,
+				FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */,
+				FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */,
+				FAD88F1321AEB48800BE7BC1 /* ApplicationRouterProtocol.swift in Sources */,
+				FAD88F5821AEC1F800BE7BC1 /* APIClientProtocol.swift in Sources */,
+				FAD88F2121AEB6ED00BE7BC1 /* NavigatorProtocol.swift in Sources */,
+				FAD88F5B21AEC1F800BE7BC1 /* DevicesServiceProtocol.swift in Sources */,
+				FAD88F5021AEC1A500BE7BC1 /* DevicesService.swift in Sources */,
+				FAD88F4D21AEC1A500BE7BC1 /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
