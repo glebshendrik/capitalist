@@ -25,16 +25,16 @@ struct APIResourceRequest {
         return try JSONEncoding.default.encode(urlRequest, with: [resource.keyPath.singular : payload])
     }
     
-    private static func payload(for resource: APIResource) -> [String : Any?]? {
+    private static func payload(for resource: APIResource) -> [String : Any]? {
         switch resource {
-        case .createUser(let userForm):
-            return userForm.toJSON()
-        case .updateUser(let user):
-            return Mapper(context: nil, shouldIncludeNilValues: true).toJSON(user)
+        case .createUser(let form):
+            return encode(form)
+        case .updateUser(let form):
+            return encode(form)
         case .changePassword(let form):
-            return form.toJSON()
+            return encode(form)
         case .resetPassword(let form):
-            return form.toJSON()
+            return encode(form)
         case .createConfirmationCode(let email):
             return [ "email" : email ]
         case .createSession(let email, let password):
@@ -44,5 +44,9 @@ struct APIResourceRequest {
         default:
             return nil
         }
+    }
+    
+    private static func encode<T>(_ encodable: T) -> [String : Any]? where T : Encodable {
+        return try? JSONEncoder().encodeJSONObject(encodable)
     }
 }

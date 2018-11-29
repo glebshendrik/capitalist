@@ -8,7 +8,6 @@
 
 import Foundation
 import PromiseKit
-import ObjectMapper
 
 class Service {
     fileprivate let apiClient: APIClientProtocol
@@ -17,15 +16,15 @@ class Service {
         self.apiClient = apiClient
     }
     
-    func request<T>(_ resource: APIResource) -> Promise<T> where T: Mappable {
+    func request<T>(_ resource: APIResource) -> Promise<T> where T: Decodable {
         return apiClient.request(resource)
     }
     
-    func request<T>(_ resource: APIResource) -> Promise<[T]> where T: Mappable {
-        return apiClient.request(resource)
+    func request<T>(_ resource: APIResource) -> Promise<[T]> where T: Decodable {
+        return apiClient.requestCollection(resource)
     }
     
-    func request<T>(_ resource: APIResource) -> Promise<([T], Int?)> where T: Mappable {
+    func request<T>(_ resource: APIResource) -> Promise<([T], Int?)> where T: Decodable {
         return apiClient.request(resource)
     }
     

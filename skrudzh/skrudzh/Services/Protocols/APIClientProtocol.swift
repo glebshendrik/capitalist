@@ -11,9 +11,9 @@ import Alamofire
 import PromiseKit
 
 protocol APIClientProtocol {
-    func request<T>(_ resource: APIResource) -> Promise<T> where T : Codable
-    func request<T>(_ resource: APIResource) -> Promise<[T]> where T : Codable
-    func request<T>(_ resource: APIResource) -> Promise<([T], Int?)> where T : Codable
+    func request<T>(_ resource: APIResource) -> Promise<T> where T : Decodable
+    func requestCollection<T>(_ resource: APIResource) -> Promise<[T]> where T : Decodable
+    func request<T>(_ resource: APIResource) -> Promise<([T], Int?)> where T : Decodable
     func request(_ resource: APIResource) -> Promise<Void>
     func request(_ resource: APIResource) -> Promise<[String : Any]>
 }

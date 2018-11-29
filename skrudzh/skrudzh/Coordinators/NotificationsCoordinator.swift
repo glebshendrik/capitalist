@@ -61,21 +61,21 @@ extension NotificationsCoordinator {
         notificationsManager.cancelAllSceduledNotifications()
     }
     
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification, in state: UIApplicationState) {
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification, in state: UIApplication.State) {
         notificationsManager.application(application, didReceive: notification, in: state)
     }
     
-    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: @escaping () -> Void, applicationStateWhenReceivedNotification state: UIApplicationState) {
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: @escaping () -> Void, applicationStateWhenReceivedNotification state: UIApplication.State) {
         
         notificationsManager.application(application, handleActionWithIdentifier: identifier, forLocalNotification: notification, completionHandler: completionHandler, applicationStateWhenReceivedNotification: state)
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void, applicationStateWhenReceivedNotification state: UIApplicationState) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void, applicationStateWhenReceivedNotification state: UIApplication.State) {
         
         notificationsManager.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler, applicationStateWhenReceivedNotification: state)
     }
     
-    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable: Any], completionHandler: @escaping () -> Void, applicationStateWhenReceivedNotification state: UIApplicationState) {
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable: Any], completionHandler: @escaping () -> Void, applicationStateWhenReceivedNotification state: UIApplication.State) {
         
         notificationsManager.application(application, handleActionWithIdentifier: identifier, forRemoteNotification: userInfo, completionHandler: completionHandler, applicationStateWhenReceivedNotification: state)
     }

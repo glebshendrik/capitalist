@@ -7,8 +7,8 @@
 //
 
 protocol Navigatable {
-    var viewController: ViewControllers { get }
-    func navigate(to viewController: ViewControllers)
+    var viewController: Infrastructure.ViewController { get }
+    func navigate(to viewController: Infrastructure.ViewController)
 }
 
 protocol Updatable {
@@ -24,8 +24,8 @@ protocol Scrollable {
 }
 
 protocol NavigatorProtocol {
-    func isDestinationViewControllerVisible(_ viewController: ViewControllers) -> Bool
-    func navigate(to viewController: ViewControllers)
+    func isDestinationViewControllerVisible(_ viewController: Infrastructure.ViewController) -> Bool
+    func navigate(to viewController: Infrastructure.ViewController)
     func triggerDestinationUpdate()
     func updateBadges()
 }

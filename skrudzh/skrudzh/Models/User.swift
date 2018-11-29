@@ -7,67 +7,14 @@
 //
 
 import Foundation
-import ObjectMapper
 
-enum Gender: String {
-    case male = "male"
-    case female = "female"
-    
-    var displayName: String {
-        switch self {
-        case .male:
-            return "Male"
-        case .female:
-            return "Female"
-        }
-    }
-    
-    var value: Int {
-        return Gender.all().index(of: self)!
-    }
-    
-    static func gender(by index: Int) -> Gender? {
-        return Gender.all().item(at: index)
-    }
-    
-    static func all() -> [Gender] {
-        return [.male, .female]
-    }
-    
-    static func allOptional() -> [Gender?] {
-        return [nil, .male, .female]
-    }
-}
-
-extension Gender : CustomStringConvertible {
-    var description: String {
-        return displayName
-    }
-}
-
-extension Gender : Hashable {
-    var hashValue: Int {
-        return rawValue.hashValue
-    }
-    
-    static func ==(lhs: Gender, rhs: Gender) -> Bool {
-        return lhs.hashValue == rhs.hashValue
-    }
-}
-
-class User : Codable {
-    var id: Int?
-    var email: String?
-    var firstname: String?
-    var lastname: String?
-    var city: String?
-    var country: String?
-    var languages: [String]?
-    var gender: Gender?
-    var provider: AuthProvider?
-    var providerUserId: String?
-    var birthday: Date?
-    var photoUrl: String?
+struct User : Decodable {
+    let id: Int
+    let email: String
+    let firstname: String?
+    let lastname: String?
+    let guest: Bool
+    let registrationConfirmed: Bool
     
     var fullname: String? {
         if let firstname = firstname, !firstname.isEmpty, let lastname = lastname, !lastname.isEmpty {
@@ -79,93 +26,69 @@ class User : Codable {
         }
         
         return nil
-        
     }
     
-    init() {
-        
-    }
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        id              <- map["id"]
-        email           <- map["email"]
-        firstname       <- map["firstname"]
-        lastname        <- map["lastname"]
-        city            <- map["city"]
-        country         <- map["country"]
-        languages       <- map["languages"]
-        gender          <- map["gender"]
-        provider        <- map["provider"]
-        providerUserId  <- map["provider_user_id"]
-        birthday        <- (map["birthday"], CustomDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSSZ"))
-        photoUrl        <- map["photo_url"]
+    enum CodingKeys: String, CodingKey {
+        case id
+        case email
+        case firstname
+        case lastname
+        case guest
+        case registrationConfirmed = "registration_confirmed"
     }
 }
 
-class UserCreationForm : Mappable {
-    var email: String?
-    var password: String?
-    var passwordConfirmation: String?
+struct UserUpdatingForm : Encodable {
+    let userId: Int
+    let firstname: String?
+    let lastname: String?
     
-    init() {
-        
-    }
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        email                   <- map["email"]
-        password                <- map["password"]
-        passwordConfirmation    <- map["password_confirmation"]
+    enum CodingKeys: String, CodingKey {
+        case firstname
+        case lastname
     }
 }
 
-class ChangePasswordForm : Mappable {
-    var userId: Int?
-    var oldPassword: String?
-    var newPassword: String?
-    var newPasswordConfirmation: String?
+struct UserCreationForm : Encodable {
+    let email: String
+    let firstname: String?
+    let lastname: String?
+    let password: String
+    let passwordConfirmation: String
     
-    init() {
-        
-    }
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        userId                      <- map["user_id"]
-        oldPassword                 <- map["old_password"]
-        newPassword                 <- map["new_password"]
-        newPasswordConfirmation     <- map["new_password_confirmation"]
+    enum CodingKeys: String, CodingKey {
+        case email
+        case firstname
+        case lastname
+        case password
+        case passwordConfirmation = "password_confirmation"
     }
 }
 
-class ResetPasswordForm : Mappable {
-    var email: String?
-    var confirmationCode: String?
-    var newPassword: String?
-    var newPasswordConfirmation: String?
+struct ChangePasswordForm : Encodable {
+    let userId: Int
+    let oldPassword: String
+    let newPassword: String
+    let newPasswordConfirmation: String
     
-    init() {
-        
+    enum CodingKeys: String, CodingKey {
+        case userId = "user_id"
+        case oldPassword = "old_password"
+        case newPassword = "new_password"
+        case newPasswordConfirmation = "new_password_confirmation"
     }
+}
+
+struct ResetPasswordForm : Encodable {
+    let email: String
+    let confirmationCode: String
+    let newPassword: String
+    let newPasswordConfirmation: String
     
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        email                       <- map["email"]
-        confirmationCode            <- map["confirmation_code"]
-        newPassword                 <- map["new_password"]
-        newPasswordConfirmation     <- map["new_password_confirmation"]
-    }
+    enum CodingKeys: String, CodingKey {
+        case email
+        case confirmationCode = "password_reset_confirmation_code"
+        case newPassword = "new_password"
+        case newPasswordConfirmation = "new_password_confirmation"
+    }    
 }

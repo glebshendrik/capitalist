@@ -103,7 +103,7 @@ class ApplicationAssembly: Assembly {
     }
     
     func registerStoryboards(in container: Container) {
-        for storyboard in Storyboard.all() {
+        for storyboard in Infrastructure.Storyboard.all() {
             container.register(UIStoryboard.self, name: storyboard.name) { r in
                 return SwinjectStoryboard.create(name: storyboard.name, bundle: nil, container: r)
                 }.inObjectScope(.container)

@@ -12,7 +12,7 @@ import PromiseKit
 protocol AccountCoordinatorProtocol {
     func authenticate(email: String, password: String) -> Promise<Session>
     func createAndAuthenticateUser(with userForm: UserCreationForm) -> Promise<Session>
-    func update(user: User) -> Promise<Void>
+    func updateUser(with userForm: UserUpdatingForm) -> Promise<Void>
     func changePassword(with changePasswordForm: ChangePasswordForm) -> Promise<Void>
     func resetPassword(with resetPasswordForm: ResetPasswordForm) -> Promise<Void>
     func createConfirmationCode(email: String) -> Promise<Void>

@@ -32,33 +32,33 @@ class APIClient : APIClientProtocol {
         self.userSessionManager = userSessionManager
     }
     
-    func request<T>(_ resource: APIResource) -> Promise<T> where T : Mappable {
-        return performRequest(resource).then { (json, _) in
+    func request<T>(_ resource: APIResource) -> Promise<T> where T : Decodable {
+        return performRequest(resource).map { (json, _) in
             if  let jsonDictionary = json as? [String : Any],
                 let objectDictionary = jsonDictionary[resource.keyPath.singular] as? [String : Any],
-                let object = T(JSON: objectDictionary) {
-                return Promise(value: object)
+                let object = try? JSONDecoder().decode(T.self, withJSONObject: objectDictionary) {
+                return object
             }
-            return Promise(error: APIRequestError.mappingFailed)
+            throw APIRequestError.mappingFailed
         }
     }
     
-    func request<T>(_ resource: APIResource) -> Promise<[T]> where T : Mappable {
-        return self.request(resource).then { (array, _) in
-            return Promise(value: array)
+    func requestCollection<T>(_ resource: APIResource) -> Promise<[T]> where T : Decodable {
+        return self.request(resource).map { (array, _) in
+            return array
         }
     }
     
-    func request<T>(_ resource: APIResource) -> Promise<([T], Int?)> where T : Mappable {
-        return performRequest(resource).then { (json, response) -> Promise<([T], Int?)> in
+    func request<T>(_ resource: APIResource) -> Promise<([T], Int?)> where T : Decodable {
+        return performRequest(resource).map { (json, response) in
             if  let jsonDictionary = json as? [String : Any],
-                let arrayOfDictionaries = jsonDictionary[resource.keyPath.plural] as? [[String : Any]] {
+                let arrayOfDictionaries = jsonDictionary[resource.keyPath.plural] as? [[String : Any]],
+                let objects = try? JSONDecoder().decode([T].self, withJSONObject: arrayOfDictionaries) {
                 
-                let objects = Mapper<T>().mapArray(JSONArray: arrayOfDictionaries)
                 let totalCount = (response.response?.allHeaderFields["Items_total_count"] as? String)?.int
-                return Promise(value: (objects, totalCount))
+                return (objects, totalCount)
             }
-            return Promise(error: APIRequestError.mappingFailed)
+            throw APIRequestError.mappingFailed
         }
     }
     
@@ -67,16 +67,16 @@ class APIClient : APIClientProtocol {
     }
     
     func request(_ resource: APIResource) -> Promise<[String : Any]> {
-        return performRequest(resource).then { (json, _) -> Promise<[String : Any]> in
+        return performRequest(resource).map { (json, _) in
             if  let jsonDictionary = json as? [String : Any] {
                 
-                return Promise(value: jsonDictionary)
+                return jsonDictionary
             }
-            return Promise(error: APIRequestError.mappingFailed)
+            throw APIRequestError.mappingFailed
         }
     }
     
-    fileprivate func performRequest(_ resource: APIResource) -> Promise<(Any, PMKDataResponse)> {
+    fileprivate func performRequest(_ resource: APIResource) -> Promise<(json: Any, response: PMKAlamofireDataResponse)> {
         
         guard var request = try? resource.asURLRequest() else {
             return Promise(error: APIRequestError.sendingFailed)
@@ -92,17 +92,18 @@ class APIClient : APIClientProtocol {
         return Alamofire
             .request(request)
             .validate(requestValidator)
-            .responseJSON(with: .response)
-            .recover { error -> (Any, PMKDataResponse) in
-                switch (error as NSError).code {
-                case NSURLErrorNotConnectedToInternet, NSURLErrorNetworkConnectionLost:
-                    throw APIRequestError.noConnection
-                case NSURLErrorTimedOut:
-                    throw APIRequestError.timedOut
-                default:
-                    throw error
-                }
-        }
+            .responseJSON()
+//            .responseJSON(with: .response)
+//            .recover { error -> (Any, PMKAlamofireDataResponse) in
+//                switch (error as NSError).code {
+//                case NSURLErrorNotConnectedToInternet, NSURLErrorNetworkConnectionLost:
+//                    throw APIRequestError.noConnection
+//                case NSURLErrorTimedOut:
+//                    throw APIRequestError.timedOut
+//                default:
+//                    throw error
+//                }
+//        }
     }
     
     fileprivate func requestValidator(request: URLRequest?, response: HTTPURLResponse, data: Data?) -> Request.ValidationResult {

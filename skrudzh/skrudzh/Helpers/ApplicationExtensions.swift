@@ -194,28 +194,28 @@ extension Date {
         return Calendar.current.dateComponents([.day], from: self, to: Date()).day!
     }
     
-    var ageVerbose: String {
-        let components: [Calendar.Component] = [.year, .month, .day, .hour]
-        let diff = (Date() - self).in(components).filter { $0.value > 0 }
-        if diff.count == 0 { return "Just created" }
-        return components
-            .flatMap {
-                guard let value = diff[$0] else { return nil }
-                switch $0 {
-                case .year:
-                    return "\(value) years"
-                case .month:
-                    return "\(value) months"
-                case .day:
-                    return "\(value) days"
-                case .hour:
-                    return "\(value) hours"
-                default:
-                    return nil
-                }
-            }
-            .joined(separator: ", ")
-    }
+//    var ageVerbose: String {
+//        let components: [Calendar.Component] = [.year, .month, .day, .hour]
+//        let diff = (Date() - self).in(components).filter { $0.value > 0 }
+//        if diff.count == 0 { return "Just created" }
+//        return components
+//            .compactMap {
+//                guard let value = diff[$0] else { return nil }
+//                switch $0 {
+//                case .year:
+//                    return "\(value) years"
+//                case .month:
+//                    return "\(value) months"
+//                case .day:
+//                    return "\(value) days"
+//                case .hour:
+//                    return "\(value) hours"
+//                default:
+//                    return nil
+//                }
+//            }
+//            .joined(separator: ", ")
+//    }
 }
 
 extension UILabel {
@@ -287,5 +287,19 @@ extension Array where Element == String {
         else {
             self = []
         }
+    }
+}
+
+extension JSONEncoder {
+    func encodeJSONObject<T: Encodable>(_ value: T, options opt: JSONSerialization.ReadingOptions = []) throws -> [String : Any] {
+        let data = try encode(value)
+        return try JSONSerialization.jsonObject(with: data, options: opt) as! [String : Any]
+    }
+}
+
+extension JSONDecoder {
+    func decode<T: Decodable>(_ type: T.Type, withJSONObject object: Any, options opt: JSONSerialization.WritingOptions = []) throws -> T {
+        let data = try JSONSerialization.data(withJSONObject: object, options: opt)
+        return try decode(T.self, from: data)
     }
 }

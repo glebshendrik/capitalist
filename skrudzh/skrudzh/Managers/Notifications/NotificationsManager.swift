@@ -36,45 +36,45 @@ class NotificationsManager: NSObject, NotificationsManagerProtocol {
     
     var systemNotificationsEnabled: Promise<Bool> {
         if #available(iOS 10.0, *) {
-            return Promise { fulfill, reject in
+            return Promise<Bool> { seal in
                 notificationCenter.getNotificationSettings { settings in
-                    fulfill(settings.authorizationStatus == .authorized)
+                    seal.fulfill(settings.authorizationStatus == .authorized)
                 }
             }
         } else {
-            guard let settings = UIApplication.shared.currentUserNotificationSettings else { return Promise(value: false) }
-            return Promise(value: settings.types.contains(.alert) || settings.types.contains(.sound) || settings.types.contains(.badge))
+            guard let settings = UIApplication.shared.currentUserNotificationSettings else { return .value(false) }
+            return .value(settings.types.contains(.alert) || settings.types.contains(.sound) || settings.types.contains(.badge))
         }
     }
     
     init(notificationsHandler: NotificationsHandlerProtocol) {
         self.notificationsHandler = notificationsHandler
-        defaultOtherNotificationsFireTime = Date().startOfDay + 9.hours
+        defaultOtherNotificationsFireTime = Date().dateAt(.startOfDay) + 9.hours
     }
     
     
     func enableNotifications() -> Promise<Void> {
-        return systemNotificationsEnabled.then { systemEnabled -> Promise<Void> in
+        return systemNotificationsEnabled.map { systemEnabled -> Void in
             guard !systemEnabled else {
                 // even if notifications already enabled
                 // register device token in case new user logged in
                 UIApplication.shared.registerForRemoteNotifications()
-                return Promise(error: NotificationsManagerError.notificationsAlreadyEnabled)
+                throw NotificationsManagerError.notificationsAlreadyEnabled
             }
             self.registerForNotifications(inApplication: UIApplication.shared)
-            return Promise(value: ())
+            return ()
         }
     }
     
     func disableNotifications() -> Promise<Void> {
         unregisterForNotifications(inApplication: UIApplication.shared)
-        return Promise(value: ())
+        return .value(())
     }
     
     func rescheduleKeepAliveNotifications() {
         cancelKeepAliveNotifications()
         
-        _ = systemNotificationsEnabled.then { systemNotificationsEnabled -> Void in
+        _ = systemNotificationsEnabled.done { systemNotificationsEnabled in
             
             guard systemNotificationsEnabled else { return }
             do { try self.scheduleKeepAliveNotifications(startingFrom: self.defaultOtherNotificationsFireTime) } catch {}
@@ -233,7 +233,7 @@ class NotificationsManager: NSObject, NotificationsManagerProtocol {
         let content = UNMutableNotificationContent()
         content.title = item.alertTitle
         content.body = item.alertBody
-        content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
         content.categoryIdentifier = item.category.identifier
         content.badge = NSNumber(value: (content.badge ?? 0).intValue + item.applicationIconBadgeNumberAddition)
         let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: item.fireDate)
@@ -244,7 +244,7 @@ class NotificationsManager: NSObject, NotificationsManagerProtocol {
     
     fileprivate func cancelScheduledNotification(with identifier: String) {
         
-        _ = scheduledNotificationsIdentifiers().then { identifiers -> Void in
+        _ = scheduledNotificationsIdentifiers().done { identifiers in
             for notificationId in identifiers {
                 if notificationId == identifier {
                     if #available(iOS 10.0, *) {
@@ -265,14 +265,14 @@ class NotificationsManager: NSObject, NotificationsManagerProtocol {
     
     fileprivate func scheduledNotificationsIdentifiers() -> Promise<[String]> {
         if #available(iOS 10.0, *) {
-            return Promise { fulfill, reject in
+            return Promise<[String]> { seal in
                 notificationCenter.getPendingNotificationRequests { requests in
-                    fulfill(requests.flatMap { $0.identifier })
+                    seal.fulfill(requests.compactMap { $0.identifier })
                 }
             }
         }
         else {
-            return Promise(value: scheduledLocalNotifications.flatMap { $0.identifier })
+            return .value(scheduledLocalNotifications.compactMap { $0.identifier })
         }
     }
 }

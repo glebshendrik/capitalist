@@ -57,7 +57,7 @@ extension NotificationCategory {
         }
     }
     
-    func destinationViewController(with action: NotificationAction?) -> ViewController? {
+    func destinationViewController(with action: NotificationAction?) -> Infrastructure.ViewController? {
         if let action = action, action == NotificationAction.cancel {
             return nil
         }

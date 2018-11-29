@@ -22,7 +22,7 @@ enum APIResource: URLRequestConvertible {
     // Users
     case createUser(form: UserCreationForm)
     case showUser(id: Int)
-    case updateUser(user: User)
+    case updateUser(form: UserUpdatingForm)
     case changePassword(form: ChangePasswordForm)
     case resetPassword(form: ResetPasswordForm)
     case createConfirmationCode(email: String)

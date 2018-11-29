@@ -68,13 +68,13 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
         actions: [MessageDialogAction],
         from viewController: UIViewController) -> Promise<MessageDialogAction> {
         
-        return Promise { fulfill, reject in
+        return Promise<MessageDialogAction> { seal in
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             
             // Add the actions
             for action in actions {
                 
-                let style: UIAlertActionStyle = {
+                let style: UIAlertAction.Style = {
                     switch action.category {
                     case .normal, .dismissal:
                         return .default
@@ -84,7 +84,7 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
                 }()
                 
                 alertController.addAction(UIAlertAction(title: action.title, style:style, handler: { _ in
-                    fulfill(action)
+                    seal.fulfill(action)
                 }))
             }
             

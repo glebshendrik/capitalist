@@ -15,8 +15,7 @@ enum ResetPasswordFormError: Error {
 
 protocol UsersServiceProtocol {
     func createUser(with userForm: UserCreationForm) -> Promise<User>
-    func createUser(with user: User) -> Promise<User>
-    func update(user: User) -> Promise<Void>
+    func updateUser(with userForm: UserUpdatingForm) -> Promise<Void>
     func changePassword(with changePasswordForm: ChangePasswordForm) -> Promise<Void>
     func resetPassword(with resetPasswordForm: ResetPasswordForm) -> Promise<Void>
     func createConfirmationCode(email: String) -> Promise<Void>

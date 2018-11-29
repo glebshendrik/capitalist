@@ -16,9 +16,7 @@ class CoordinatorsAssembly: Assembly {
                                       authenticationService: r.resolve(AuthenticationServiceProtocol.self)!,
                                       usersService: r.resolve(UsersServiceProtocol.self)!,
                                       router: r.resolve(ApplicationRouterProtocol.self)!,
-                                      notificationsCoordinator: r.resolve(NotificationsCoordinatorProtocol.self)!,
-                                      vkService: r.resolve(VKServiceProtocol.self)!,
-                                      fbService: r.resolve(FBServiceProtocol.self)!)
+                                      notificationsCoordinator: r.resolve(NotificationsCoordinatorProtocol.self)!)
         }
         
         container.register(NotificationsCoordinatorProtocol.self) { r in

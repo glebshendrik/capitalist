@@ -39,7 +39,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     
     func authenticate(email: String, password: String) -> Promise<Session> {
         let authenticationPromise = authenticationService.authenticate(email: email, password: password)
-        _ = authenticationPromise.then { session -> Void in
+        _ = authenticationPromise.done { session in
             self.userSessionManager.save(session: session)
             self.router.route()
         }
@@ -48,25 +48,28 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     
     func createAndAuthenticateUser(with userForm: UserCreationForm) -> Promise<Session> {
         return usersService.createUser(with: userForm).then { user in
-            return self.authenticate(email: userForm.email!, password: userForm.password!)
+            return self.authenticate(email: userForm.email, password: userForm.password)
         }
     }
     
-    func update(user: User) -> Promise<Void> {
-        return usersService.update(user: user)
+    func updateUser(with userForm: UserUpdatingForm) -> Promise<Void> {
+        return usersService.updateUser(with: userForm)
     }
     
     func changePassword(with changePasswordForm: ChangePasswordForm) -> Promise<Void> {
-        changePasswordForm.userId = userSessionManager.currentSession?.userId
-        return usersService.changePassword(with: changePasswordForm)
+        guard let currentUserId = userSessionManager.currentSession?.userId else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        let form = ChangePasswordForm(userId: currentUserId,
+                                      oldPassword: changePasswordForm.oldPassword,
+                                      newPassword: changePasswordForm.newPassword,
+                                      newPasswordConfirmation: changePasswordForm.newPasswordConfirmation)
+        return usersService.changePassword(with: form)
     }
     
     func resetPassword(with resetPasswordForm: ResetPasswordForm) -> Promise<Void> {
-        guard let email = resetPasswordForm.email, let password = resetPasswordForm.newPassword else {
-            return Promise(error: ResetPasswordFormError.invalidCredentials)
-        }
         return usersService.resetPassword(with: resetPasswordForm).then { _ -> Promise<Void> in
-            return self.authenticate(email: email, password: password).asVoid()
+            return self.authenticate(email: resetPasswordForm.email, password: resetPasswordForm.newPassword).asVoid()
         }
     }
     
@@ -87,7 +90,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         notificationsCoordinator.cancelAllSceduledNotifications()
         router.route()
         guard let session = previousSession else {
-            return Promise(value: ())
+            return .value(())
         }
         return self.authenticationService.destroy(session: session)
     }

@@ -10,14 +10,14 @@ import UIKit
 import Swinject
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
-    fileprivate let storyboards: [Infrastructure.Storyboard: UIStoryboard]
-    fileprivate let window: UIWindow
-    fileprivate let userSessionManager: UserSessionManagerProtocol
-    fileprivate let usersService: UsersServiceProtocol
-    fileprivate let notificationsCoordinator: NotificationsCoordinatorProtocol
+    private let storyboards: [Infrastructure.Storyboard: UIStoryboard]
+    private let window: UIWindow
+    private let userSessionManager: UserSessionManagerProtocol
+    private let usersService: UsersServiceProtocol
+    private let notificationsCoordinator: NotificationsCoordinatorProtocol
     private var accountCoordinator: AccountCoordinatorProtocol!
     
-    fileprivate var launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil
+    private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     
     init(with storyboards: [Infrastructure.Storyboard: UIStoryboard],
          window: UIWindow,
@@ -36,20 +36,12 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         accountCoordinator = resolver.resolve(AccountCoordinatorProtocol.self)!
     }
     
-    func start(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+    func start(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
         if FirstLaunch().isFirstLaunch {
             userSessionManager.forgetSession()
         }
         self.launchOptions = launchOptions
         route()
-    }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return true
-    }
-    
-    func application(_ app: UIApplication, open url: URL, sourceApplication: String?) -> Bool {
-        return true
     }
     
     func route() {
@@ -67,24 +59,19 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     fileprivate func beginAuthorizedUserFlow() {
         _ = usersService.loadUser(with: userSessionManager.currentSession!.userId)
-            .then { user -> Void in
+            .done { _ in 
                 self.showMainViewController()
-                self.accountCoordinator.sync(user: user).then {
-                    print("User was synchronized")
-                    }.catch { e in
-                        print("User was not synchronized: \(e)")
-                }
             }.catch { _ in
                 self.showUserJoinScreen()
         }
     }
     
     fileprivate func showLandingScreen() {
-        show(.LandingViewController)
+//        show(.LandingViewController)
     }
     
     func showMainViewController() {
-        show(.MainTabBarController)
+//        show(.MainTabBarController)
         notificationsCoordinator.updateBadges()
         //        _ = notificationsCoordinator.enableNotifications()
         handleNotificationFromLaunch()
@@ -93,13 +80,13 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     fileprivate func handleNotificationFromLaunch() {
         guard let launchOptions = launchOptions else { return }
         
-        if let remoteNotificationPayload = launchOptions[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
+        if let remoteNotificationPayload = launchOptions[UIApplication.LaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
             notificationsCoordinator.application(UIApplication.shared,
                                                  didReceiveRemoteNotification: remoteNotificationPayload,
                                                  fetchCompletionHandler: { _ in },
                                                  applicationStateWhenReceivedNotification: .background)
         }
-        else if let localNotification = launchOptions[UIApplicationLaunchOptionsKey.localNotification] as? UILocalNotification {
+        else if let localNotification = launchOptions[UIApplication.LaunchOptionsKey.localNotification] as? UILocalNotification {
             notificationsCoordinator.application(UIApplication.shared, didReceive: localNotification, in: .background)
         }
         
@@ -107,16 +94,24 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     fileprivate func showUserJoinScreen() {
-        show(.JoinNavigationController)
+//        show(.JoinNavigationController)
     }
     
-    func show(_ type: Infrastructure.ViewControllers) {
-        window.rootViewController = viewController(type)
+    func show(_ viewController: Infrastructure.ViewController) {
+        window.rootViewController = self.viewController(viewController)
     }
     
-    func viewController(_ type: Infrastructure.ViewControllers) -> UIViewController {
-        let storyboard = self.storyboards[type.storyboard]
+    func viewController(_ viewController: Infrastructure.ViewController) -> UIViewController {
+        let storyboard = self.storyboards[viewController.storyboard]
         assert(storyboard != nil, "Storyboard should be registered before first use.")
-        return storyboard!.instantiateViewController(withIdentifier: type.identifier)
+        return storyboard!.instantiateViewController(withIdentifier: viewController.identifier)
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, sourceApplication: String?) -> Bool {
+        return true
     }
 }

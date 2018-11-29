@@ -42,7 +42,6 @@
 		FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4821AEC1A400BE7BC1 /* Service.swift */; };
 		FAD88F4F21AEC1A500BE7BC1 /* UsersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4921AEC1A400BE7BC1 /* UsersService.swift */; };
 		FAD88F5021AEC1A500BE7BC1 /* DevicesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4A21AEC1A400BE7BC1 /* DevicesService.swift */; };
-		FAD88F5121AEC1A500BE7BC1 /* API in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F4B21AEC1A400BE7BC1 /* API */; };
 		FAD88F5221AEC1A500BE7BC1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F4C21AEC1A500BE7BC1 /* APIClient.swift */; };
 		FAD88F5821AEC1F800BE7BC1 /* APIClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5421AEC1F700BE7BC1 /* APIClientProtocol.swift */; };
 		FAD88F5921AEC1F800BE7BC1 /* AuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5521AEC1F700BE7BC1 /* AuthenticationServiceProtocol.swift */; };
@@ -51,6 +50,12 @@
 		FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5C21AEC28300BE7BC1 /* User.swift */; };
 		FAD88F5F21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F5E21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift */; };
 		FAD88F6121AEC61800BE7BC1 /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F6021AEC61800BE7BC1 /* AccountCoordinator.swift */; };
+		FAD88F7521AFD64000BE7BC1 /* APIResourceQueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F6F21AFD63F00BE7BC1 /* APIResourceQueryParameters.swift */; };
+		FAD88F7621AFD64000BE7BC1 /* APIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F7021AFD63F00BE7BC1 /* APIResource.swift */; };
+		FAD88F7721AFD64000BE7BC1 /* APIResourceMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F7121AFD63F00BE7BC1 /* APIResourceMethod.swift */; };
+		FAD88F7821AFD64000BE7BC1 /* APIResourcePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F7221AFD63F00BE7BC1 /* APIResourcePath.swift */; };
+		FAD88F7921AFD64000BE7BC1 /* APIResourceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F7321AFD63F00BE7BC1 /* APIResourceRequest.swift */; };
+		FAD88F7A21AFD64000BE7BC1 /* APIResourceKeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F7421AFD63F00BE7BC1 /* APIResourceKeyPath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,7 +98,6 @@
 		FAD88F4821AEC1A400BE7BC1 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		FAD88F4921AEC1A400BE7BC1 /* UsersService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersService.swift; sourceTree = "<group>"; };
 		FAD88F4A21AEC1A400BE7BC1 /* DevicesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesService.swift; sourceTree = "<group>"; };
-		FAD88F4B21AEC1A400BE7BC1 /* API */ = {isa = PBXFileReference; lastKnownFileType = folder; path = API; sourceTree = "<group>"; };
 		FAD88F4C21AEC1A500BE7BC1 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		FAD88F5421AEC1F700BE7BC1 /* APIClientProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClientProtocol.swift; sourceTree = "<group>"; };
 		FAD88F5521AEC1F700BE7BC1 /* AuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
@@ -102,6 +106,12 @@
 		FAD88F5C21AEC28300BE7BC1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FAD88F5E21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FAD88F6021AEC61800BE7BC1 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
+		FAD88F6F21AFD63F00BE7BC1 /* APIResourceQueryParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIResourceQueryParameters.swift; path = skrudzh/Services/API/APIResourceQueryParameters.swift; sourceTree = SOURCE_ROOT; };
+		FAD88F7021AFD63F00BE7BC1 /* APIResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIResource.swift; path = skrudzh/Services/API/APIResource.swift; sourceTree = SOURCE_ROOT; };
+		FAD88F7121AFD63F00BE7BC1 /* APIResourceMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIResourceMethod.swift; path = skrudzh/Services/API/APIResourceMethod.swift; sourceTree = SOURCE_ROOT; };
+		FAD88F7221AFD63F00BE7BC1 /* APIResourcePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIResourcePath.swift; path = skrudzh/Services/API/APIResourcePath.swift; sourceTree = SOURCE_ROOT; };
+		FAD88F7321AFD63F00BE7BC1 /* APIResourceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIResourceRequest.swift; path = skrudzh/Services/API/APIResourceRequest.swift; sourceTree = SOURCE_ROOT; };
+		FAD88F7421AFD63F00BE7BC1 /* APIResourceKeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIResourceKeyPath.swift; path = skrudzh/Services/API/APIResourceKeyPath.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,8 +229,8 @@
 		FAD88F1921AEB63500BE7BC1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				FAD88F6221AFD59B00BE7BC1 /* API */,
 				FAD88F5321AEC1CE00BE7BC1 /* Protocols */,
-				FAD88F4B21AEC1A400BE7BC1 /* API */,
 				FAD88F4C21AEC1A500BE7BC1 /* APIClient.swift */,
 				FAD88F4721AEC1A400BE7BC1 /* AuthenticationService.swift */,
 				FAD88F4A21AEC1A400BE7BC1 /* DevicesService.swift */,
@@ -290,6 +300,20 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		FAD88F6221AFD59B00BE7BC1 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F7021AFD63F00BE7BC1 /* APIResource.swift */,
+				FAD88F7421AFD63F00BE7BC1 /* APIResourceKeyPath.swift */,
+				FAD88F7121AFD63F00BE7BC1 /* APIResourceMethod.swift */,
+				FAD88F7221AFD63F00BE7BC1 /* APIResourcePath.swift */,
+				FAD88F6F21AFD63F00BE7BC1 /* APIResourceQueryParameters.swift */,
+				FAD88F7321AFD63F00BE7BC1 /* APIResourceRequest.swift */,
+			);
+			name = API;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -351,7 +375,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */,
-				FAD88F5121AEC1A500BE7BC1 /* API in Resources */,
 				FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */,
 				FAD88EFF21AEA86E00BE7BC1 /* Main.storyboard in Resources */,
 			);
@@ -437,6 +460,7 @@
 				FAD88F1521AEB52C00BE7BC1 /* ServicesAssembly.swift in Sources */,
 				FAD88F5221AEC1A500BE7BC1 /* APIClient.swift in Sources */,
 				FAD88F6121AEC61800BE7BC1 /* AccountCoordinator.swift in Sources */,
+				FAD88F7921AFD64000BE7BC1 /* APIResourceRequest.swift in Sources */,
 				FAD88F3D21AEBB4200BE7BC1 /* UserSessionManager.swift in Sources */,
 				FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */,
 				FAD88F2821AEB75800BE7BC1 /* NotificationCategory.swift in Sources */,
@@ -445,6 +469,10 @@
 				FAD88F2A21AEB77200BE7BC1 /* NotificationAction.swift in Sources */,
 				FAD88F3F21AEBDDB00BE7BC1 /* UIMessagePresenterManager.swift in Sources */,
 				FAD88F5A21AEC1F800BE7BC1 /* UsersServiceProtocol.swift in Sources */,
+				FAD88F7521AFD64000BE7BC1 /* APIResourceQueryParameters.swift in Sources */,
+				FAD88F7A21AFD64000BE7BC1 /* APIResourceKeyPath.swift in Sources */,
+				FAD88F7821AFD64000BE7BC1 /* APIResourcePath.swift in Sources */,
+				FAD88F7721AFD64000BE7BC1 /* APIResourceMethod.swift in Sources */,
 				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
 				FAD88F4421AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift in Sources */,
 				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
@@ -463,6 +491,7 @@
 				FAD88F2421AEB71000BE7BC1 /* NotificationsManagerProtocol.swift in Sources */,
 				FAD88F3721AEB8F200BE7BC1 /* FirstLaunch.swift in Sources */,
 				FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */,
+				FAD88F7621AFD64000BE7BC1 /* APIResource.swift in Sources */,
 				FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */,
 				FAD88F1321AEB48800BE7BC1 /* ApplicationRouterProtocol.swift in Sources */,
 				FAD88F5821AEC1F800BE7BC1 /* APIClientProtocol.swift in Sources */,

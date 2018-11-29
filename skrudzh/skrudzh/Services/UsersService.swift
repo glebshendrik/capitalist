@@ -15,12 +15,8 @@ class UsersService : Service, UsersServiceProtocol {
         return request(APIResource.createUser(form: userForm))
     }
     
-    func createUser(with user: User) -> Promise<User> {
-        return request(APIResource.createFulfilledUser(user: user))
-    }
-    
-    func update(user: User) -> Promise<Void> {
-        return request(APIResource.updateUser(user: user))
+    func updateUser(with userForm: UserUpdatingForm) -> Promise<Void> {
+        return request(APIResource.updateUser(form: userForm))
     }
     
     func changePassword(with changePasswordForm: ChangePasswordForm) -> Promise<Void> {
