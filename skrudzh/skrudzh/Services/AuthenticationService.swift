@@ -11,7 +11,7 @@ import PromiseKit
 
 class AuthenticationService : Service, AuthenticationServiceProtocol {
     
-    func authenticate(email: String, password: String) -> Promise<Session> {
+    func authenticate(email: String?, password: String?) -> Promise<Session> {
         return request(APIResource.createSession(email: email, password: password))
     }
         

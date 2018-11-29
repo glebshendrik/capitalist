@@ -10,6 +10,6 @@ import Foundation
 import PromiseKit
 
 protocol AuthenticationServiceProtocol {
-    func authenticate(email: String, password: String) -> Promise<Session>
+    func authenticate(email: String?, password: String?) -> Promise<Session>
     func destroy(session: Session) -> Promise<Void>
 }

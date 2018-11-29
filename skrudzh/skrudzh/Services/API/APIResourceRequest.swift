@@ -38,6 +38,9 @@ struct APIResourceRequest {
         case .createConfirmationCode(let email):
             return [ "email" : email ]
         case .createSession(let email, let password):
+            guard let email = email, let password = password else {
+                return [:]
+            }
             return ["email" : email, "password" : password]
         case .registerDeviceToken(let deviceToken, _):
             return [ "device_token" : deviceToken ]

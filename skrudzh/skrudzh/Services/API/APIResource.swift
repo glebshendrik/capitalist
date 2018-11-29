@@ -29,7 +29,7 @@ enum APIResource: URLRequestConvertible {
     case registerDeviceToken(deviceToken: String, userId: Int)
     
     // Sessions
-    case createSession(email: String, password: String)
+    case createSession(email: String?, password: String?)
     case destroySession(session: Session)
     
     var method: HTTPMethod {

@@ -36,8 +36,12 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         self.router = router
         self.notificationsCoordinator = notificationsCoordinator
     }
+        
+    func joinAsGuest() -> Promise<Session> {
+        return authenticate(email: nil, password: nil)
+    }
     
-    func authenticate(email: String, password: String) -> Promise<Session> {
+    func authenticate(email: String?, password: String?) -> Promise<Session> {
         let authenticationPromise = authenticationService.authenticate(email: email, password: password)
         _ = authenticationPromise.done { session in
             self.userSessionManager.save(session: session)

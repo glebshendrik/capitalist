@@ -10,7 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol AccountCoordinatorProtocol {
-    func authenticate(email: String, password: String) -> Promise<Session>
+    func joinAsGuest() -> Promise<Session>
+    func authenticate(email: String?, password: String?) -> Promise<Session>
     func createAndAuthenticateUser(with userForm: UserCreationForm) -> Promise<Session>
     func updateUser(with userForm: UserUpdatingForm) -> Promise<Void>
     func changePassword(with changePasswordForm: ChangePasswordForm) -> Promise<Void>

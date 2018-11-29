@@ -13,7 +13,6 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private let storyboards: [Infrastructure.Storyboard: UIStoryboard]
     private let window: UIWindow
     private let userSessionManager: UserSessionManagerProtocol
-    private let usersService: UsersServiceProtocol
     private let notificationsCoordinator: NotificationsCoordinatorProtocol
     private var accountCoordinator: AccountCoordinatorProtocol!
     
@@ -22,13 +21,11 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     init(with storyboards: [Infrastructure.Storyboard: UIStoryboard],
          window: UIWindow,
          userSessionManager: UserSessionManagerProtocol,
-         usersService: UsersServiceProtocol,
          notificationsCoordinator: NotificationsCoordinatorProtocol) {
         
         self.storyboards = storyboards
         self.window = window
         self.userSessionManager = userSessionManager
-        self.usersService = usersService
         self.notificationsCoordinator = notificationsCoordinator
     }
     
@@ -45,29 +42,48 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     func route() {
+        guard userSessionManager.isUserAuthenticated else {
+            // If the user is not authenticated ask for login
+            showJoiningAsGuestScreen()
+            _ = accountCoordinator.joinAsGuest()
+            return
+        }
+        
         // Show the extended splash screen (or landing page)
         showLandingScreen()
         
-        guard userSessionManager.isUserAuthenticated else {
-            // If the user is not authenticated ask for login
-            showUserJoinScreen()
-            return
-        }
         // Begin authorized user experience flow
         beginAuthorizedUserFlow()
     }
     
     fileprivate func beginAuthorizedUserFlow() {
-        _ = usersService.loadUser(with: userSessionManager.currentSession!.userId)
-            .done { _ in 
+        _ = accountCoordinator.loadCurrentUser()
+            .done { _ in
                 self.showMainViewController()
-            }.catch { _ in
-                self.showUserJoinScreen()
+            }.catch { error in
+                if self.errorIsNotFoundOrNotAuthorized(error: error) {
+                    self.userSessionManager.forgetSession()
+                }
+                self.route()
+        }
+    }
+    
+    fileprivate func errorIsNotFoundOrNotAuthorized(error: Error) -> Bool {
+        switch error {
+        case APIRequestError.notAuthorized,
+             APIRequestError.notFound:
+            return true
+        default:
+            return false
         }
     }
     
     fileprivate func showLandingScreen() {
 //        show(.LandingViewController)
+    }
+    
+    fileprivate func showJoiningAsGuestScreen() {
+        //        show(.LandingViewController)
     }
     
     func showMainViewController() {
