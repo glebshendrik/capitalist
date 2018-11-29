@@ -16,6 +16,7 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.5.2):
     - PromiseKit/CorePromise
+  - SideMenu (5.0.2)
   - SVProgressHUD (2.2.5)
   - SwiftDate (5.0.10)
   - SwifterSwift (4.6.0):
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - Locksmith (~> 4.0)
   - PromiseKit (~> 6.5)
   - PromiseKit/Alamofire (~> 6.5)
+  - SideMenu
   - SVProgressHUD (~> 2.2)
   - SwiftDate (~> 5.0)
   - SwifterSwift (~> 4.6)
@@ -60,6 +62,7 @@ SPEC REPOS:
     - CWStatusBarNotification
     - Locksmith
     - PromiseKit
+    - SideMenu
     - SVProgressHUD
     - SwiftDate
     - SwifterSwift
@@ -73,6 +76,7 @@ SPEC CHECKSUMS:
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
+  SideMenu: e5094f0b2e7d9609e100a90ae69025abd994f882
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: fcdaa7ca22a903faf6d7ed231239a88d174dcae3
   SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
@@ -80,6 +84,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 024b431001b83911bdc78dddde53530f70d7ec7b
+PODFILE CHECKSUM: ebdfe11994df63f36be231647b00a0e8f8cbd107
 
 COCOAPODS: 1.5.3

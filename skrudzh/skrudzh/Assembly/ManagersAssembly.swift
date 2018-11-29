@@ -25,7 +25,6 @@ class ManagersAssembly: Assembly {
                 with: storyboards,
                 window: r.resolve(UIWindow.self)!,
                 userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
-                usersService: r.resolve(UsersServiceProtocol.self)!,
                 notificationsCoordinator: r.resolve(NotificationsCoordinatorProtocol.self)!)
             }
             .inObjectScope(.container)

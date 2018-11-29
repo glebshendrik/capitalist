@@ -17,7 +17,8 @@ struct Infrastructure {
         var name: String { return self.rawValue }
         
         static func all() -> [Storyboard] {
-            return [.Join, .Main, .Onboarding, .Profile, .Settings, .Credits, .FAQ, .Blog]
+//            return [.Join, .Main, .Onboarding, .Profile, .Settings, .Credits, .FAQ, .Blog]
+            return [.Main]
         }
     }
 
@@ -32,6 +33,7 @@ struct Infrastructure {
     //    case SignUpViewController
         
         // Main
+        case MainViewController
     //    case MainTabBarController
         
         var identifier: String {
@@ -39,7 +41,7 @@ struct Infrastructure {
         }
         
         var storyboard: Storyboard {
-            return .Join
+            return .Main
     //        switch self {
     //        case .LandingViewController,
     //             .JoinNavigationController,

@@ -17,4 +17,5 @@ target 'skrudzh' do
   pod 'SwiftDate', '~> 5.0'
   pod 'SwifterSwift', '~> 4.6'
   pod 'CWStatusBarNotification', '~> 2.3'
+  pod 'SideMenu'
 end

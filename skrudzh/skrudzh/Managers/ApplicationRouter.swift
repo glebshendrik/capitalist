@@ -45,7 +45,9 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         guard userSessionManager.isUserAuthenticated else {
             // If the user is not authenticated ask for login
             showJoiningAsGuestScreen()
-            _ = accountCoordinator.joinAsGuest()
+            _ = accountCoordinator.joinAsGuest().catch { _ in
+                self.route()
+            }
             return
         }
         
@@ -79,16 +81,18 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     fileprivate func showLandingScreen() {
+        show(.MainViewController)
 //        show(.LandingViewController)
     }
     
     fileprivate func showJoiningAsGuestScreen() {
+        show(.MainViewController)
         //        show(.LandingViewController)
     }
     
     func showMainViewController() {
-//        show(.MainTabBarController)
-        notificationsCoordinator.updateBadges()
+        show(.MainViewController)
+//        notificationsCoordinator.updateBadges()
         //        _ = notificationsCoordinator.enableNotifications()
         handleNotificationFromLaunch()
     }

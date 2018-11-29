@@ -25,7 +25,7 @@ struct APIResourceRequest {
         return try JSONEncoding.default.encode(urlRequest, with: [resource.keyPath.singular : payload])
     }
     
-    private static func payload(for resource: APIResource) -> [String : Any]? {
+    private static func payload(for resource: APIResource) -> [String : Any?]? {
         switch resource {
         case .createUser(let form):
             return encode(form)
@@ -39,7 +39,7 @@ struct APIResourceRequest {
             return [ "email" : email ]
         case .createSession(let email, let password):
             guard let email = email, let password = password else {
-                return [:]
+                return [ "email" : nil ]
             }
             return ["email" : email, "password" : password]
         case .registerDeviceToken(let deviceToken, _):
