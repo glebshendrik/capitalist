@@ -8,6 +8,7 @@
 
 import UIKit
 import Swinject
+import SideMenu
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private let storyboards: [Infrastructure.Storyboard: UIStoryboard]
@@ -93,6 +94,9 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     func showMainViewController() {
         _ = show(.MainViewController)
+        if let menuLeftNavigationController = viewController(.MenuNavigationController) as? UISideMenuNavigationController {
+            SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
+        }        
     }
     
     fileprivate func showUserJoinScreen() {
@@ -118,6 +122,8 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: UIControl.State.highlighted)
+        
+        UINavigationBar.appearance().barTintColor = UIColor(red: 242 / 255.0, green: 245 / 255.0, blue: 254 / 255.0, alpha: 1.0)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

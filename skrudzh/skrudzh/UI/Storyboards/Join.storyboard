@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Rubik-Regular.ttf">
+            <string>Rubik-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Landing View Controller-->
         <scene sceneID="e3D-MG-vkS">
@@ -52,5 +57,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vax-kW-hOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--Авторизация-->
+        <scene sceneID="knS-bS-72Z">
+            <objects>
+                <viewController storyboardIdentifier="JoinViewController" title="Авторизация" id="74v-0d-Diq" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dda-j8-9X0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="join-image" translatesAutoresizingMaskIntoConstraints="NO" id="Zgd-42-TDD">
+                                <rect key="frame" x="130.5" y="161" width="114" height="96"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6m-a9-cnV">
+                                <rect key="frame" x="59.5" y="519" width="256" height="40"/>
+                                <color key="backgroundColor" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="gkP-k7-OnF"/>
+                                    <constraint firstAttribute="width" constant="256" id="zLQ-I3-NQD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                                <state key="normal" title="СОЗДАТЬ ПРОФИЛЬ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfq-un-cM0">
+                                <rect key="frame" x="59.5" y="571" width="256" height="40"/>
+                                <color key="backgroundColor" red="0.54509803921568623" green="0.59607843137254901" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="256" id="NsX-xD-Ixy"/>
+                                    <constraint firstAttribute="height" constant="40" id="VYx-A0-Egq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                                <state key="normal" title="У МЕНЯ ЕСТЬ ПРОФИЛЬ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9bk-8Q-V5R" firstAttribute="bottom" secondItem="Nfq-un-cM0" secondAttribute="bottom" constant="56" id="2JN-O4-PVD"/>
+                            <constraint firstItem="Zgd-42-TDD" firstAttribute="centerX" secondItem="Dda-j8-9X0" secondAttribute="centerX" id="L8F-iB-hdn"/>
+                            <constraint firstItem="Nfq-un-cM0" firstAttribute="centerX" secondItem="Dda-j8-9X0" secondAttribute="centerX" id="eID-kn-YQU"/>
+                            <constraint firstItem="e6m-a9-cnV" firstAttribute="centerX" secondItem="Dda-j8-9X0" secondAttribute="centerX" id="emq-8M-wgJ"/>
+                            <constraint firstItem="Zgd-42-TDD" firstAttribute="top" secondItem="Dda-j8-9X0" secondAttribute="top" constant="161" id="lMr-uq-yZr"/>
+                            <constraint firstItem="Nfq-un-cM0" firstAttribute="top" secondItem="e6m-a9-cnV" secondAttribute="bottom" constant="12" id="zkO-CU-hcr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9bk-8Q-V5R"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hgi-Rd-3py" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1492" y="91"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="join-image" width="114" height="96"/>
+    </resources>
 </document>

@@ -36,6 +36,7 @@ struct Infrastructure {
         // Main
         case MainViewController
         case MenuViewController
+        case MenuNavigationController
     //    case MainTabBarController
         
         var identifier: String {
@@ -47,7 +48,8 @@ struct Infrastructure {
             case .LandingViewController:
                 return .Join
             case .MainViewController,
-                 .MenuViewController:
+                 .MenuViewController,
+                 .MenuNavigationController:
                 return .Main
             }
         }

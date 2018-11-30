@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,7 +41,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="qoi-tj-vrk" kind="show" id="rhs-ft-VKj"/>
+                                            <segue destination="KmV-et-jjl" kind="show" id="6I4-JW-ZF9"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="rVx-Cw-8Od" style="IBUITableViewCellStyleDefault" id="Ne8-78-Uq6">
@@ -164,43 +164,24 @@
             </objects>
             <point key="canvasLocation" x="-788" y="174"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="UeM-No-1i8">
+        <!--JoinViewController-->
+        <scene sceneID="W5H-yc-UTh">
             <objects>
-                <viewController id="qoi-tj-vrk" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Rss-fv-UrV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вход" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3G-8V-qt6">
-                                <rect key="frame" x="156" y="317" width="63" height="33"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="u3G-8V-qt6" firstAttribute="centerX" secondItem="Rss-fv-UrV" secondAttribute="centerX" id="2qC-Mu-yP3"/>
-                            <constraint firstItem="u3G-8V-qt6" firstAttribute="centerY" secondItem="Rss-fv-UrV" secondAttribute="centerY" id="KxF-hh-cfh"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="yrl-ep-ddW"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lqp-wT-tQT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="Join" storyboardName="Join" referencedIdentifier="JoinViewController" id="KmV-et-jjl" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xJl-ph-AEA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-78" y="-102"/>
+            <point key="canvasLocation" x="-66" y="-100"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="lXX-sC-DZf">
             <objects>
-                <viewController id="527-2C-xUs" sceneMemberID="viewController">
+                <viewController id="527-2C-xUs" customClass="MainViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D5A-mu-huD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Главный экран" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzD-Xy-AtD">
-                                <rect key="frame" x="94.5" y="317" width="186" height="33"/>
+                                <rect key="frame" x="94.5" y="285" width="186" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -229,9 +210,14 @@
         <scene sceneID="YX2-C6-VaL">
             <objects>
                 <navigationController storyboardIdentifier="MainViewController" id="Kfi-BE-rMg" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jLH-eK-5ml">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="jLH-eK-5ml">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="527-2C-xUs" kind="relationship" relationship="rootViewController" id="56C-qP-aOS"/>
@@ -244,7 +230,7 @@
         <!--Side Menu Navigation Controller-->
         <scene sceneID="qyg-2J-dD7">
             <objects>
-                <navigationController navigationBarHidden="YES" id="Tdq-ff-IYk" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MenuNavigationController" navigationBarHidden="YES" id="Tdq-ff-IYk" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fi3-pi-hLo">
                         <autoresizingMask key="autoresizingMask"/>
