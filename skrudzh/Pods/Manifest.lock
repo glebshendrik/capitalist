@@ -17,6 +17,7 @@ PODS:
   - PromiseKit/UIKit (6.5.2):
     - PromiseKit/CorePromise
   - SideMenu (5.0.2)
+  - StaticDataTableViewController (2.5.0)
   - SVProgressHUD (2.2.5)
   - SwiftDate (5.0.10)
   - SwifterSwift (4.6.0):
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - PromiseKit (~> 6.5)
   - PromiseKit/Alamofire (~> 6.5)
   - SideMenu
+  - StaticDataTableViewController
   - SVProgressHUD (~> 2.2)
   - SwiftDate (~> 5.0)
   - SwifterSwift (~> 4.6)
@@ -63,6 +65,7 @@ SPEC REPOS:
     - Locksmith
     - PromiseKit
     - SideMenu
+    - StaticDataTableViewController
     - SVProgressHUD
     - SwiftDate
     - SwifterSwift
@@ -77,6 +80,7 @@ SPEC CHECKSUMS:
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   SideMenu: e5094f0b2e7d9609e100a90ae69025abd994f882
+  StaticDataTableViewController: 0c5c4a47861446dd3cfd52530ae801ec7662ce26
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: fcdaa7ca22a903faf6d7ed231239a88d174dcae3
   SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
@@ -84,6 +88,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: ebdfe11994df63f36be231647b00a0e8f8cbd107
+PODFILE CHECKSUM: ac086efe9a766b5d468a939d06e5bb1e94e80448
 
 COCOAPODS: 1.5.3

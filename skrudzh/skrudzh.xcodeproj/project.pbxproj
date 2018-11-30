@@ -55,6 +55,10 @@
 		FAD88F7921AFD64000BE7BC1 /* APIResourceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F7321AFD63F00BE7BC1 /* APIResourceRequest.swift */; };
 		FAD88F7A21AFD64000BE7BC1 /* APIResourceKeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F7421AFD63F00BE7BC1 /* APIResourceKeyPath.swift */; };
 		FAD88F8021B02A5000BE7BC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F7F21B02A5000BE7BC1 /* Main.storyboard */; };
+		FAD88F8221B0F95A00BE7BC1 /* Join.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F8121B0F95A00BE7BC1 /* Join.storyboard */; };
+		FAD88F8421B0FB7800BE7BC1 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F8321B0FB7800BE7BC1 /* LandingViewController.swift */; };
+		FAD88F8821B1181600BE7BC1 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F8721B1181600BE7BC1 /* MenuViewController.swift */; };
+		FAD88F8C21B1228F00BE7BC1 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F8B21B1228E00BE7BC1 /* MenuViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +114,10 @@
 		FAD88F7321AFD63F00BE7BC1 /* APIResourceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIResourceRequest.swift; path = skrudzh/Services/API/APIResourceRequest.swift; sourceTree = SOURCE_ROOT; };
 		FAD88F7421AFD63F00BE7BC1 /* APIResourceKeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIResourceKeyPath.swift; path = skrudzh/Services/API/APIResourceKeyPath.swift; sourceTree = SOURCE_ROOT; };
 		FAD88F7F21B02A5000BE7BC1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		FAD88F8121B0F95A00BE7BC1 /* Join.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Join.storyboard; sourceTree = "<group>"; };
+		FAD88F8321B0FB7800BE7BC1 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		FAD88F8721B1181600BE7BC1 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		FAD88F8B21B1228E00BE7BC1 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,8 +317,7 @@
 				FAD88F6F21AFD63F00BE7BC1 /* APIResourceQueryParameters.swift */,
 				FAD88F7321AFD63F00BE7BC1 /* APIResourceRequest.swift */,
 			);
-			name = API;
-			path = "New Group";
+			path = API;
 			sourceTree = "<group>";
 		};
 		FAD88F7B21B027B500BE7BC1 /* Views */ = {
@@ -323,6 +330,7 @@
 		FAD88F7C21B027BF00BE7BC1 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				FAD88F8921B1226900BE7BC1 /* Main */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -330,6 +338,8 @@
 		FAD88F7D21B027C600BE7BC1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FAD88F8621B117CF00BE7BC1 /* Join */,
+				FAD88F8521B117BC00BE7BC1 /* Main */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -339,8 +349,41 @@
 			children = (
 				FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */,
 				FAD88F7F21B02A5000BE7BC1 /* Main.storyboard */,
+				FAD88F8121B0F95A00BE7BC1 /* Join.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FAD88F8521B117BC00BE7BC1 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F8721B1181600BE7BC1 /* MenuViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		FAD88F8621B117CF00BE7BC1 /* Join */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F8321B0FB7800BE7BC1 /* LandingViewController.swift */,
+			);
+			path = Join;
+			sourceTree = "<group>";
+		};
+		FAD88F8921B1226900BE7BC1 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F8A21B1227600BE7BC1 /* Menu */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		FAD88F8A21B1227600BE7BC1 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F8B21B1228E00BE7BC1 /* MenuViewModel.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,6 +448,7 @@
 			files = (
 				FAD88F8021B02A5000BE7BC1 /* Main.storyboard in Resources */,
 				FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */,
+				FAD88F8221B0F95A00BE7BC1 /* Join.storyboard in Resources */,
 				FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +494,7 @@
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/StaticDataTableViewController/StaticDataTableViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
@@ -467,6 +512,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StaticDataTableViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
@@ -493,6 +539,7 @@
 				FAD88F7921AFD64000BE7BC1 /* APIResourceRequest.swift in Sources */,
 				FAD88F3D21AEBB4200BE7BC1 /* UserSessionManager.swift in Sources */,
 				FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */,
+				FAD88F8C21B1228F00BE7BC1 /* MenuViewModel.swift in Sources */,
 				FAD88F2821AEB75800BE7BC1 /* NotificationCategory.swift in Sources */,
 				FAD88F4121AEBDF900BE7BC1 /* Navigator.swift in Sources */,
 				FAD88F2621AEB72800BE7BC1 /* NotificationsManager.swift in Sources */,
@@ -528,7 +575,9 @@
 				FAD88F2121AEB6ED00BE7BC1 /* NavigatorProtocol.swift in Sources */,
 				FAD88F5B21AEC1F800BE7BC1 /* DevicesServiceProtocol.swift in Sources */,
 				FAD88F5021AEC1A500BE7BC1 /* DevicesService.swift in Sources */,
+				FAD88F8421B0FB7800BE7BC1 /* LandingViewController.swift in Sources */,
 				FAD88F4D21AEC1A500BE7BC1 /* AuthenticationService.swift in Sources */,
+				FAD88F8821B1181600BE7BC1 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

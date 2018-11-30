@@ -18,15 +18,16 @@ struct Infrastructure {
         
         static func all() -> [Storyboard] {
 //            return [.Join, .Main, .Onboarding, .Profile, .Settings, .Credits, .FAQ, .Blog]
-            return [.Main]
+            return [.Main, .Join]
         }
     }
 
     enum ViewController : String {
         
         // Join
-        case JoinViewController
-    //    case LandingViewController
+        case LandingViewController
+//        case JoinViewController
+    //
     //    case JoinNavigationController
     //    case JoinViewController
     //    case SignInViewController
@@ -34,6 +35,7 @@ struct Infrastructure {
         
         // Main
         case MainViewController
+        case MenuViewController
     //    case MainTabBarController
         
         var identifier: String {
@@ -41,47 +43,13 @@ struct Infrastructure {
         }
         
         var storyboard: Storyboard {
-            return .Main
-    //        switch self {
-    //        case .LandingViewController,
-    //             .JoinNavigationController,
-    //             .JoinViewController,
-    //             .SignInViewController,
-    //             .SignUpViewController:
-    //            return .Join
-    //        case .MainTabBarController:
-    //            return .Main
-    //        case .AccountViewController,
-    //             .AccountSettingsViewController,
-    //             .AccountEditViewController,
-    //             .PlayerViewController,
-    //             .PlayerEditViewController,
-    //             .PlayerEditNavigationController,
-    //             .UserPlayerDetailsViewController:
-    //            return .Account
-    //        case .PlayerVacancyViewController,
-    //             .PlayerVacancyEditViewController,
-    //             .PlayerVacancyEditNavigationController,
-    //             .TeamVacancyViewController,
-    //             .TeamVacancyEditViewController,
-    //             .TeamVacancyEditNavigationController:
-    //            return .Vacancies
-    //        case .OffersViewController,
-    //             .OfferedPlayerNavigationController,
-    //             .OfferedTeamNavigationController,
-    //             .OfferedPlayerViewController,
-    //             .OfferedTeamViewController,
-    //             .LikedOfferViewController:
-    //            return .Offers
-    //        case .TeamsViewController,
-    //             .TeamViewController,
-    //             .TeamDetailsViewController,
-    //             .TeamMemberEditViewController,
-    //             .TeamEditViewController,
-    //             .TeamEditNavigationController,
-    //             .TeamVacanciesViewController:
-    //            return .Teams
-    //        }
+            switch self {
+            case .LandingViewController:
+                return .Join
+            case .MainViewController,
+                 .MenuViewController:
+                return .Main
+            }
         }
     }
 }
@@ -115,20 +83,19 @@ class ApplicationAssembly: Assembly {
     func registerViewControllers(in container: Container) {
         
         
-        // AccountViewController
-//        container.registerForRedRoverStoryboard(AccountViewController.self) { (r, c) in
-//            c.viewModel = r.resolve(AccountViewModel.self)
-//            c.router = r.resolve(ApplicationRouterProtocol.self)
-//        }
+        // MenuViewController
+        container.registerForSkrudzhStoryboard(MenuViewController.self) { (r, c) in
+            c.viewModel = r.resolve(MenuViewModel.self)
+        }
         
         
     }
     
     func registerViewModels(in container: Container) {
         // SignInViewModel
-//        container.register(SignInViewModel.self) { r in
-//            return SignInViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
-//        }
+        container.register(MenuViewModel.self) { r in
+            return MenuViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
+        }
         
         
     }

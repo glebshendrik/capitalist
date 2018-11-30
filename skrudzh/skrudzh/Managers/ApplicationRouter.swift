@@ -38,6 +38,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             userSessionManager.forgetSession()
         }
         self.launchOptions = launchOptions
+        setupAppearance()
         route()
     }
     
@@ -81,20 +82,50 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     fileprivate func showLandingScreen() {
-        show(.MainViewController)
-//        show(.LandingViewController)
+        _ = show(.LandingViewController)
     }
     
     fileprivate func showJoiningAsGuestScreen() {
-        show(.MainViewController)
-        //        show(.LandingViewController)
+        if let landingViewController = show(.LandingViewController) as? LandingViewController {
+            landingViewController.update(loadingMessage: "Создание учетной записи гостя...")
+        }
     }
     
     func showMainViewController() {
-        show(.MainViewController)
-//        notificationsCoordinator.updateBadges()
-        //        _ = notificationsCoordinator.enableNotifications()
-        handleNotificationFromLaunch()
+        _ = show(.MainViewController)
+    }
+    
+    fileprivate func showUserJoinScreen() {
+//        show(.JoinNavigationController)
+    }
+    
+    func show(_ viewController: Infrastructure.ViewController) -> UIViewController? {
+        window.rootViewController = self.viewController(viewController)
+        return window.rootViewController
+    }
+    
+    func viewController(_ viewController: Infrastructure.ViewController) -> UIViewController {
+        let storyboard = self.storyboards[viewController.storyboard]
+        assert(storyboard != nil, "Storyboard should be registered before first use.")
+        return storyboard!.instantiateViewController(withIdentifier: viewController.identifier)
+    }
+    
+    func setupAppearance() {
+        let backArrowImage = UIImage(named: "back-button-icon")
+        let renderedImage = backArrowImage?.withRenderingMode(.alwaysOriginal)
+        UINavigationBar.appearance().backIndicatorImage = renderedImage
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = renderedImage
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: UIControl.State.highlighted)
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, sourceApplication: String?) -> Bool {
+        return true
     }
     
     fileprivate func handleNotificationFromLaunch() {
@@ -111,27 +142,5 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         }
         
         self.launchOptions = nil
-    }
-    
-    fileprivate func showUserJoinScreen() {
-//        show(.JoinNavigationController)
-    }
-    
-    func show(_ viewController: Infrastructure.ViewController) {
-        window.rootViewController = self.viewController(viewController)
-    }
-    
-    func viewController(_ viewController: Infrastructure.ViewController) -> UIViewController {
-        let storyboard = self.storyboards[viewController.storyboard]
-        assert(storyboard != nil, "Storyboard should be registered before first use.")
-        return storyboard!.instantiateViewController(withIdentifier: viewController.identifier)
-    }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return true
-    }
-    
-    func application(_ app: UIApplication, open url: URL, sourceApplication: String?) -> Bool {
-        return true
     }
 }
