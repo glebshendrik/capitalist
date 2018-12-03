@@ -50,8 +50,8 @@ struct UserUpdatingForm : Encodable {
 }
 
 struct UserCreationForm : Encodable {
-    let email: String
-    let firstname: String?
+    var email: String
+    var firstname: String?
     let lastname: String?
     let password: String
     let passwordConfirmation: String
@@ -62,6 +62,14 @@ struct UserCreationForm : Encodable {
         case lastname
         case password
         case passwordConfirmation = "password_confirmation"
+    }
+    
+    static func build() -> UserCreationForm {
+        return UserCreationForm(email: "",
+                                firstname: "",
+                                lastname: "",
+                                password: "",
+                                passwordConfirmation: "")
     }
 }
 

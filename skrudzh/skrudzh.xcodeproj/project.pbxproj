@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		ACA15497C062BEC12449D2F3 /* Pods_skrudzh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A6F359936A24B73097CB3A /* Pods_skrudzh.framework */; };
+		FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */; };
+		FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */; };
 		FA26813E21B178D300FADED1 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */; };
 		FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813421B178D200FADED1 /* Rubik-Bold.ttf */; };
 		FA26814021B178D300FADED1 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813521B178D200FADED1 /* Rubik-Light.ttf */; };
@@ -77,6 +79,8 @@
 		28A6F359936A24B73097CB3A /* Pods_skrudzh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_skrudzh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA97C1FC00F8ED22CFC7287 /* Pods-skrudzh.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skrudzh.release.xcconfig"; path = "Pods/Target Support Files/Pods-skrudzh/Pods-skrudzh.release.xcconfig"; sourceTree = "<group>"; };
 		C419C22762BA0505AF64D6FC /* Pods-skrudzh.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skrudzh.debug.xcconfig"; path = "Pods/Target Support Files/Pods-skrudzh/Pods-skrudzh.debug.xcconfig"; sourceTree = "<group>"; };
+		FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		FA26813421B178D200FADED1 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		FA26813521B178D200FADED1 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
@@ -171,6 +175,14 @@
 				28A6F359936A24B73097CB3A /* Pods_skrudzh.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA165CD421B4EF5500EAA16B /* Join */ = {
+			isa = PBXGroup;
+			children = (
+				FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */,
+			);
+			path = Join;
 			sourceTree = "<group>";
 		};
 		FA26813121B178A100FADED1 /* Resources */ = {
@@ -381,6 +393,7 @@
 		FAD88F7C21B027BF00BE7BC1 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				FA165CD421B4EF5500EAA16B /* Join */,
 				FAD88F8921B1226900BE7BC1 /* Main */,
 			);
 			path = ViewModels;
@@ -418,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD88F8321B0FB7800BE7BC1 /* LandingViewController.swift */,
+				FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -633,11 +647,13 @@
 				FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */,
 				FAD88F7621AFD64000BE7BC1 /* APIResource.swift in Sources */,
 				FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */,
+				FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */,
 				FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */,
 				FAD88F1321AEB48800BE7BC1 /* ApplicationRouterProtocol.swift in Sources */,
 				FAD88F5821AEC1F800BE7BC1 /* APIClientProtocol.swift in Sources */,
 				FAD88F2121AEB6ED00BE7BC1 /* NavigatorProtocol.swift in Sources */,
 				FAD88F5B21AEC1F800BE7BC1 /* DevicesServiceProtocol.swift in Sources */,
+				FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */,
 				FAD88F5021AEC1A500BE7BC1 /* DevicesService.swift in Sources */,
 				FAD88F8421B0FB7800BE7BC1 /* LandingViewController.swift in Sources */,
 				FAD88F4D21AEC1A500BE7BC1 /* AuthenticationService.swift in Sources */,
