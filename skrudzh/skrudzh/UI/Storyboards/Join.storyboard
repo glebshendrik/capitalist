@@ -131,7 +131,7 @@
         <!--Вход-->
         <scene sceneID="Wua-yR-sMC">
             <objects>
-                <tableViewController title="Вход" id="Afc-hf-J34" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LoginViewController" title="Вход" id="Afc-hf-J34" customClass="LoginViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fdl-2u-tAx" customClass="TPKeyboardAvoidingTableView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -260,6 +260,9 @@
                                                             <real key="value" value="20"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapLoginButton:" destination="Afc-hf-J34" eventType="touchUpInside" id="bvF-JT-1Dg"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -269,8 +272,26 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="38" id="TmG-gr-KEK">
+                                        <rect key="frame" x="0.0" y="302" width="375" height="38"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TmG-gr-KEK" id="QYu-lZ-uyq">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="iEl-yg-ZVr">
+                                                    <rect key="frame" x="169" y="0.0" width="37" height="37"/>
+                                                    <color key="color" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="iEl-yg-ZVr" firstAttribute="top" secondItem="QYu-lZ-uyq" secondAttribute="top" id="1g7-6R-CqQ"/>
+                                                <constraint firstItem="iEl-yg-ZVr" firstAttribute="centerX" secondItem="QYu-lZ-uyq" secondAttribute="centerX" id="Aim-ZB-Bf0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="70" id="Lam-sW-cJe">
-                                        <rect key="frame" x="0.0" y="302" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="340" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lam-sW-cJe" id="GeI-eT-M4s">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -303,6 +324,12 @@
                             <outlet property="delegate" destination="Afc-hf-J34" id="I0i-7S-lZi"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="activityIndicatorCell" destination="TmG-gr-KEK" id="PF3-gD-MmY"/>
+                        <outlet property="emailTextField" destination="SZq-aH-qus" id="Js2-6u-vXg"/>
+                        <outlet property="loginButton" destination="aiX-hC-1Cu" id="hrQ-N8-UcI"/>
+                        <outlet property="passwordTextField" destination="2QE-YU-bse" id="b3q-w5-gBp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FT9-Uz-XJn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
