@@ -45,9 +45,12 @@ class RegistrationViewModel {
         
         let validationResults : [ValidationResultProtocol] =
             [validate(firstname: firstname),
-             validate(email: email),
-             validate(password: password),
-             validate(passwordConfirmation: passwordConfirmation, password: password)]
+             Validator.validate(email: email, key: UserCreationForm.CodingKeys.email),
+             Validator.validate(password: password, key: UserCreationForm.CodingKeys.password),
+             Validator.validate(passwordConfirmation: passwordConfirmation,                                
+                                password: password,
+                                passwordConfirmationKey: UserCreationForm.CodingKeys.passwordConfirmation,
+                                passwordKey: UserCreationForm.CodingKeys.password)]
         
         let failureResults = validationResults.filter { !$0.isSucceeded }
         
@@ -75,37 +78,4 @@ class RegistrationViewModel {
         return .success(key: UserCreationForm.CodingKeys.firstname,
                         value: firstname)
     }
-    
-    func validate(email: String?) -> ValidationResult<String> {
-        guard let email = email, !email.isEmpty else {
-            return .failure(key: UserCreationForm.CodingKeys.email,
-                            reasons: [ValidationErrorReason.required])
-        }
-        return .success(key: UserCreationForm.CodingKeys.email,
-                        value: email)
-    }
-    
-    func validate(password: String?) -> ValidationResult<String> {
-        guard let password = password, !password.isEmpty else {
-            return .failure(key: UserCreationForm.CodingKeys.password,
-                            reasons: [ValidationErrorReason.required])
-        }
-        return .success(key: UserCreationForm.CodingKeys.password,
-                        value: password)
-    }
-    
-    func validate(passwordConfirmation: String?, password: String?) -> ValidationResult<String> {
-        guard let passwordConfirmation = passwordConfirmation, !passwordConfirmation.isEmpty else {
-            return .failure(key: UserCreationForm.CodingKeys.passwordConfirmation,
-                            reasons: [ValidationErrorReason.required])
-        }
-        guard password == passwordConfirmation else {
-            return .failure(key: UserCreationForm.CodingKeys.passwordConfirmation,
-                            reasons: [ValidationErrorReason.notEqual(to: UserCreationForm.CodingKeys.password)])
-        }
-        return .success(key: UserCreationForm.CodingKeys.passwordConfirmation,
-                        value: passwordConfirmation)
-    }
-    
-    
 }

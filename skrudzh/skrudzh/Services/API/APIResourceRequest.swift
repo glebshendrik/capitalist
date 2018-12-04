@@ -37,11 +37,12 @@ struct APIResourceRequest {
             return encode(form)
         case .createConfirmationCode(let email):
             return [ "email" : email ]
-        case .createSession(let email, let password):
-            guard let email = email, let password = password else {
-                return [ "email" : nil ]
-            }
-            return ["email" : email, "password" : password]
+        case .createSession(let form):
+            return encode(form)
+//            guard let email = form.email, let password = form.password else {
+//                return [ "email" : nil ]
+//            }
+//            return ["email" : email, "password" : password]
         case .registerDeviceToken(let deviceToken, _):
             return [ "device_token" : deviceToken ]
         default:

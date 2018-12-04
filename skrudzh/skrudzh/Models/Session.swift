@@ -29,3 +29,13 @@ struct Session : Decodable {
         userId = user.id
     }
 }
+
+struct SessionCreationForm : Encodable {
+    let email: String?
+    let password: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case email
+        case password
+    }
+}

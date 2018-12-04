@@ -65,3 +65,40 @@ extension ValidationResult : ValidationResultProtocol {
         }
     }
 }
+
+class Validator {
+    static func validate(email: String?, key: CodingKey) -> ValidationResult<String> {
+        guard let email = email, !email.isEmpty else {
+            return .failure(key: key,
+                            reasons: [ValidationErrorReason.required])
+        }
+        return .success(key: key,
+                        value: email)
+    }
+    
+    static func validate(password: String?, key: CodingKey) -> ValidationResult<String> {
+        guard let password = password, !password.isEmpty else {
+            return .failure(key: key,
+                            reasons: [ValidationErrorReason.required])
+        }
+        return .success(key: key,
+                        value: password)
+    }
+    
+    static func validate(passwordConfirmation: String?,
+                         password: String?,
+                         passwordConfirmationKey: CodingKey,
+                         passwordKey: CodingKey) -> ValidationResult<String> {
+        
+        guard let passwordConfirmation = passwordConfirmation, !passwordConfirmation.isEmpty else {
+            return .failure(key: passwordConfirmationKey,
+                            reasons: [ValidationErrorReason.required])
+        }
+        guard password == passwordConfirmation else {
+            return .failure(key: passwordConfirmationKey,
+                            reasons: [ValidationErrorReason.notEqual(to: passwordKey)])
+        }
+        return .success(key: passwordConfirmationKey,
+                        value: passwordConfirmation)
+    }
+}

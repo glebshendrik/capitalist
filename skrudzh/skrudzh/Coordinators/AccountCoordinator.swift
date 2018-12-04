@@ -38,12 +38,12 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     }
         
     func joinAsGuest() -> Promise<Session> {
-        return authenticate(email: nil, password: nil)
+        return authenticate(with: SessionCreationForm(email: nil, password: nil))
     }
     
-    func authenticate(email: String?, password: String?) -> Promise<Session> {
+    func authenticate(with form: SessionCreationForm) -> Promise<Session> {
         return  firstly {
-                    authenticationService.authenticate(email: email, password: password)
+                    authenticationService.authenticate(form: form)
                 }.get { session in
                     self.userSessionManager.save(session: session)
                     self.router.route()
@@ -54,7 +54,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return  firstly {
                     usersService.createUser(with: userForm)
                 }.then { user in
-                    self.authenticate(email: userForm.email, password: userForm.password)
+                    self.authenticate(with: SessionCreationForm(email: userForm.email, password: userForm.password))
                 }
     }
     
@@ -77,7 +77,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return  firstly {
                     usersService.resetPassword(with: resetPasswordForm)
                 }.then { _ in
-                    self.authenticate(email: resetPasswordForm.email, password: resetPasswordForm.newPassword)
+                    self.authenticate(with: SessionCreationForm(email: resetPasswordForm.email, password: resetPasswordForm.newPassword))
                 }.asVoid()
     }
     
