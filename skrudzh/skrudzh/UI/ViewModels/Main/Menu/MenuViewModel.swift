@@ -26,6 +26,13 @@ class MenuViewModel {
         return user.guest
     }
     
+    var isRegistrationConfirmed: Bool {
+        guard let user = currentUser else {
+            return false
+        }
+        return user.registrationConfirmed
+    }
+    
     var currentUserName: String? {
         return currentUser?.fullname
     }

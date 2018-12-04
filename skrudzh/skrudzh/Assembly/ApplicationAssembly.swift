@@ -77,11 +77,10 @@ class ApplicationAssembly: Assembly {
     }
     
     func registerViewControllers(in container: Container) {
-        
-        
         // MenuViewController
         container.registerForSkrudzhStoryboard(MenuViewController.self) { (r, c) in
             c.viewModel = r.resolve(MenuViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         
         // RegistrationViewController

@@ -11,12 +11,13 @@ import SideMenu
 import StaticDataTableViewController
 import PromiseKit
 
-class MenuViewController : StaticDataTableViewController {
+class MenuViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol {
     
     @IBOutlet weak var joinCell: UITableViewCell!
     @IBOutlet weak var profileCell: UITableViewCell!
     
     var viewModel: MenuViewModel!
+    var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +36,32 @@ class MenuViewController : StaticDataTableViewController {
     }
     
     @objc func refreshData() {
-        refreshControl?.beginRefreshing(in: tableView, animated: true)
-        _ = viewModel.loadData().ensure {
+        showActivityIndicator()
+        
+        firstly {
+            viewModel.loadData()
+        }.catch { _ in
+            
+            
+        }.finally {
+            self.notifyIfRegistrationNotConfirmed()
             self.updateUI(animated: true)
-            self.refreshControl?.endRefreshing()
+            self.hideActivityIndicator()
         }
+    }
+    
+    private func notifyIfRegistrationNotConfirmed() {
+        if !self.viewModel.isRegistrationConfirmed {
+            messagePresenterManager.show(navBarMessage: "Необходимо подтвердить регистрацию! Мы отправили вам письмо с инструкциями", theme: .warning)
+        }
+    }
+    
+    private func showActivityIndicator(animated: Bool = true) {
+        refreshControl?.beginRefreshing(in: tableView, animated: animated)
+    }
+    
+    private func hideActivityIndicator() {
+        refreshControl?.endRefreshing()
     }
     
     private func setupUI() {
