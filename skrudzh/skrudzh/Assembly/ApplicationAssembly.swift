@@ -12,12 +12,12 @@ import SwinjectStoryboard
 struct Infrastructure {
 
     enum Storyboard : String {
-        case Join, Main
+        case Join, Main, Profile
         
         var name: String { return self.rawValue }
         
         static func all() -> [Storyboard] {
-            return [.Main, .Join]
+            return [.Main, .Join, .Profile]
         }
     }
 
@@ -32,6 +32,9 @@ struct Infrastructure {
         case MenuViewController
         case MenuNavigationController
         
+        // Profile
+        case ProfileViewController
+        
         var identifier: String {
             return self.rawValue
         }
@@ -45,6 +48,8 @@ struct Infrastructure {
                  .MenuViewController,
                  .MenuNavigationController:
                 return .Main
+            case .ProfileViewController:
+                return .Profile
             }
         }
     }
@@ -88,6 +93,12 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(RegistrationViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
+        
+        // ProfileViewController
+        container.registerForSkrudzhStoryboard(ProfileViewController.self) { (r, c) in
+            c.viewModel = r.resolve(ProfileViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -99,6 +110,11 @@ class ApplicationAssembly: Assembly {
         // RegistrationViewModel
         container.register(RegistrationViewModel.self) { r in
             return RegistrationViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
+        }
+        
+        // ProfileViewModel
+        container.register(ProfileViewModel.self) { r in
+            return ProfileViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
         }
     }
     

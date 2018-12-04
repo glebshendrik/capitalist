@@ -10,6 +10,9 @@
 		ACA15497C062BEC12449D2F3 /* Pods_skrudzh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A6F359936A24B73097CB3A /* Pods_skrudzh.framework */; };
 		FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */; };
 		FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */; };
+		FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA165CD921B652BE00EAA16B /* Profile.storyboard */; };
+		FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CDC21B6530C00EAA16B /* ProfileViewModel.swift */; };
+		FA165CE021B6540600EAA16B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CDF21B6540600EAA16B /* ProfileViewController.swift */; };
 		FA26813E21B178D300FADED1 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */; };
 		FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813421B178D200FADED1 /* Rubik-Bold.ttf */; };
 		FA26814021B178D300FADED1 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813521B178D200FADED1 /* Rubik-Light.ttf */; };
@@ -81,6 +84,9 @@
 		C419C22762BA0505AF64D6FC /* Pods-skrudzh.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skrudzh.debug.xcconfig"; path = "Pods/Target Support Files/Pods-skrudzh/Pods-skrudzh.debug.xcconfig"; sourceTree = "<group>"; };
 		FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		FA165CD921B652BE00EAA16B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		FA165CDC21B6530C00EAA16B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		FA165CDF21B6540600EAA16B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		FA26813421B178D200FADED1 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		FA26813521B178D200FADED1 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
@@ -183,6 +189,22 @@
 				FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */,
 			);
 			path = Join;
+			sourceTree = "<group>";
+		};
+		FA165CDB21B652F600EAA16B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FA165CDC21B6530C00EAA16B /* ProfileViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		FA165CDE21B653F300EAA16B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FA165CDF21B6540600EAA16B /* ProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		FA26813121B178A100FADED1 /* Resources */ = {
@@ -393,6 +415,7 @@
 		FAD88F7C21B027BF00BE7BC1 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				FA165CDB21B652F600EAA16B /* Profile */,
 				FA165CD421B4EF5500EAA16B /* Join */,
 				FAD88F8921B1226900BE7BC1 /* Main */,
 			);
@@ -402,6 +425,7 @@
 		FAD88F7D21B027C600BE7BC1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FA165CDE21B653F300EAA16B /* Profile */,
 				FAD88F8621B117CF00BE7BC1 /* Join */,
 				FAD88F8521B117BC00BE7BC1 /* Main */,
 			);
@@ -414,6 +438,7 @@
 				FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */,
 				FAD88F7F21B02A5000BE7BC1 /* Main.storyboard */,
 				FAD88F8121B0F95A00BE7BC1 /* Join.storyboard */,
+				FA165CD921B652BE00EAA16B /* Profile.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -522,6 +547,7 @@
 				FA26814521B178D300FADED1 /* OFL.txt in Resources */,
 				FA26814021B178D300FADED1 /* Rubik-Light.ttf in Resources */,
 				FA26814321B178D300FADED1 /* Rubik-Italic.ttf in Resources */,
+				FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */,
 				FA26814821B178D300FADED1 /* Rubik-BoldItalic.ttf in Resources */,
 				FA26814621B178D300FADED1 /* Rubik-BlackItalic.ttf in Resources */,
 				FA26814221B178D300FADED1 /* Rubik-Black.ttf in Resources */,
@@ -620,6 +646,7 @@
 				FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */,
 				FAD88F8C21B1228F00BE7BC1 /* MenuViewModel.swift in Sources */,
 				FAD88F2821AEB75800BE7BC1 /* NotificationCategory.swift in Sources */,
+				FA165CE021B6540600EAA16B /* ProfileViewController.swift in Sources */,
 				FAD88F4121AEBDF900BE7BC1 /* Navigator.swift in Sources */,
 				FAD88F2621AEB72800BE7BC1 /* NotificationsManager.swift in Sources */,
 				FAD88F2A21AEB77200BE7BC1 /* NotificationAction.swift in Sources */,
@@ -640,6 +667,7 @@
 				FAD88F4F21AEC1A500BE7BC1 /* UsersService.swift in Sources */,
 				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
 				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,
+				FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */,
 				FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */,
 				FAD88F1D21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift in Sources */,
 				FAD88F5921AEC1F800BE7BC1 /* AuthenticationServiceProtocol.swift in Sources */,

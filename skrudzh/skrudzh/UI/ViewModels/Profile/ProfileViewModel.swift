@@ -1,16 +1,15 @@
 //
-//  MenuViewModel.swift
+//  ProfileViewModel.swift
 //  skrudzh
 //
-//  Created by Alexander Petropavlovsky on 30/11/2018.
+//  Created by Alexander Petropavlovsky on 04/12/2018.
 //  Copyright © 2018 rubikon. All rights reserved.
 //
 
 import Foundation
 import PromiseKit
 
-class MenuViewModel {
-    
+class ProfileViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     
     private var currentUser: User? = nil
@@ -19,13 +18,6 @@ class MenuViewModel {
         return currentUser != nil
     }
     
-    var isCurrentUserGuest: Bool {
-        guard let user = currentUser else {
-            return true
-        }
-        return user.guest
-    }    
-    
     var shouldNotifyAboutRegistrationConfirmation: Bool {
         guard let user = currentUser, !user.guest else {
             return false
@@ -33,8 +25,12 @@ class MenuViewModel {
         return !user.registrationConfirmed
     }
     
-    var currentUserName: String? {
-        return currentUser?.fullname
+    var currentUserFirstname: String? {
+        return currentUser?.firstname
+    }
+    
+    var currentUserEmail: String? {
+        return currentUser?.email
     }
     
     init(accountCoordinator: AccountCoordinatorProtocol) {
@@ -42,8 +38,12 @@ class MenuViewModel {
     }
     
     func loadData() -> Promise<Void> {
-        return accountCoordinator.loadCurrentUser().done { user in
+        return accountCoordinator.loadCurrentUser().get { user in
             self.currentUser = user
         }.asVoid()
+    }
+    
+    func logOut() -> Promise<Void> {
+        return accountCoordinator.logout()
     }
 }

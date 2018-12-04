@@ -51,7 +51,7 @@ class MenuViewController : StaticDataTableViewController, UIMessagePresenterMana
     }
     
     private func notifyIfRegistrationNotConfirmed() {
-        if !self.viewModel.isRegistrationConfirmed {
+        if viewModel.shouldNotifyAboutRegistrationConfirmation {
             messagePresenterManager.show(navBarMessage: "Необходимо подтвердить регистрацию! Мы отправили вам письмо с инструкциями", theme: .warning)
         }
     }

@@ -34,7 +34,8 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
         show(message: navBarMessage,
              theme: theme,
              presentationStyle: .top,
-             duration: navBarPresentingDuration)
+             duration: navBarPresentingDuration,
+             interactive: true)
     }
     
     func show(validationMessage: String) {
@@ -75,7 +76,7 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
         config.duration = .seconds(seconds: duration)
         
         // Dim the background like a popover view. Hide when the background is tapped.
-        config.dimMode = interactive ? .none : .gray(interactive: interactive)
+        config.dimMode = .gray(interactive: interactive)
         
         // The interactive pan-to-hide gesture.
         config.interactiveHide = interactive

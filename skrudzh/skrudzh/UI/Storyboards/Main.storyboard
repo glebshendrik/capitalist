@@ -65,6 +65,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ltB-EC-YKG" kind="show" id="MPj-xi-fyl"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="u21-Jw-Xay" imageView="5w6-IU-KlG" style="IBUITableViewCellStyleDefault" id="xVd-E0-lqY">
                                         <rect key="frame" x="0.0" y="88" width="375" height="44"/>
@@ -176,6 +179,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJl-ph-AEA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-66" y="-100"/>
+        </scene>
+        <!--ProfileViewController-->
+        <scene sceneID="NLT-M8-Suv">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileViewController" id="ltB-EC-YKG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Ch-AP-r6m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-111" y="72"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="lXX-sC-DZf">
