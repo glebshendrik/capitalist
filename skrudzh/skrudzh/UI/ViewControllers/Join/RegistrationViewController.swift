@@ -59,9 +59,9 @@ class RegistrationViewController : StaticDataTableViewController, UIMessagePrese
         reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
     }
     
-    private func show(errors: [String: String]) {
-        for (attribute, validationMessage) in errors {
-            messagePresenterManager.show(validationMessage: "\(attribute) \(validationMessage)")
+    private func show(errors: [String: String]) {        
+        for (_, validationMessage) in errors {
+            messagePresenterManager.show(validationMessage: validationMessage)
         }
     }
     
