@@ -109,7 +109,7 @@ extension UIViewController {
     
     func handleCommonNetworkError(error: Error) {
         guard let messagePresenterManager = (self as? UIMessagePresenterManagerDependantProtocol)?.messagePresenterManager else { return }
-        messagePresenterManager.showNavBarMessage(message: message(for: error), category: NavBarMessageCategory.error)
+        messagePresenterManager.show(navBarMessage: message(for: error), theme: .error)
     }
     
     fileprivate func message(for error: Error) -> String {

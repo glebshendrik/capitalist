@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import SwiftMessages
 
 enum MessageDialogActionCategory {
     case normal, destructive, dismissal
@@ -18,10 +19,6 @@ struct MessageDialogAction {
     let category: MessageDialogActionCategory
 }
 
-enum NavBarMessageCategory {
-    case error, normal
-}
-
 protocol UIMessagePresenterManagerDependantProtocol {
     var messagePresenterManager: UIMessagePresenterManagerProtocol! { get set }
 }
@@ -30,8 +27,9 @@ protocol UIMessagePresenterManagerProtocol {
     func showHUD()
     func showHUD(with message: String)
     func dismissHUD()
-    func showNavBarMessage(message: String, category: NavBarMessageCategory)
-    func showNotificationMessage(message: String, actionOnTap: @escaping () -> ())
+    func show(navBarMessage: String, theme: Theme)
+    func show(validationMessage: String)
+    func show(notificationMessage: String, actionOnTap: @escaping () -> ())
     func showAlert(
         title: String,
         message: String,

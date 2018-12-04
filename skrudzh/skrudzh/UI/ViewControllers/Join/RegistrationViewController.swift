@@ -12,7 +12,7 @@ import PromiseKit
 import StaticDataTableViewController
 import SwiftMessages
 
-class RegistrationViewController : StaticDataTableViewController {
+class RegistrationViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol {
     
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -22,6 +22,7 @@ class RegistrationViewController : StaticDataTableViewController {
     @IBOutlet weak var activityIndicatorCell: UITableViewCell!
     
     var viewModel: RegistrationViewModel!
+    var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -34,14 +35,11 @@ class RegistrationViewController : StaticDataTableViewController {
         registerButton.isEnabled = false
         
         firstly {
-            after(seconds: 5)
-        }.then {
-            self.viewModel.registerWith(firstname: self.firstnameTextField.text,
-                                        email: self.emailTextField.text,
-                                        password: self.passwordTextField.text,
-                                        passwordConfirmation: self.passwordConfirmationTextField.text)
-        }
-        .catch { error in
+            viewModel.registerWith(firstname: self.firstnameTextField.text,
+                                   email: self.emailTextField.text,
+                                   password: self.passwordTextField.text,
+                                   passwordConfirmation: self.passwordConfirmationTextField.text)
+        }.catch { error in
             switch error {
             case RegistrationError.validation(let validationResults):
                 self.show(validationResults: validationResults)
@@ -58,20 +56,21 @@ class RegistrationViewController : StaticDataTableViewController {
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
         cell(activityIndicatorCell, setHidden: hidden)
-        reloadData(animated: animated, insert: .bottom, reload: .fade, delete: .top)
+        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
     }
     
     private func show(errors: [String: String]) {
         for (attribute, validationMessage) in errors {
-            show(validationMessage: "\(attribute) \(validationMessage)")
+            messagePresenterManager.show(validationMessage: "\(attribute) \(validationMessage)")
         }
     }
     
     private func show(validationResults: [UserCreationForm.CodingKeys: [ValidationErrorReason]]) {
-        for (key, reasons) in validationResults {
-            for reason in reasons {
+        
+        for key in validationResults.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
+            for reason in validationResults[key] ?? [] {
                 let message = validationMessageFor(key: key, reason: reason)
-                show(validationMessage: message)
+                messagePresenterManager.show(validationMessage: message)
             }
         }
     }
@@ -97,42 +96,5 @@ class RegistrationViewController : StaticDataTableViewController {
         case (_, _):
             return "Ошибка ввода"
         }
-    }
-    
-    private func show(validationMessage: String) {
-        var config = SwiftMessages.Config()
-        
-        // Slide up from the bottom.
-        config.presentationStyle = .bottom
-        
-        // Display in a window at the specified window level: UIWindow.Level.statusBar
-        // displays over the status bar while UIWindow.Level.normal displays under.
-        config.presentationContext = .automatic
-        
-        // Disable the default auto-hiding behavior.
-        config.duration = .seconds(seconds: 1.5)
-        
-        // Dim the background like a popover view. Hide when the background is tapped.
-        config.dimMode = .gray(interactive: false)
-        
-        // Disable the interactive pan-to-hide gesture.
-        config.interactiveHide = false
-        
-        // Specify a status bar style to if the message is displayed directly under the status bar.
-        config.preferredStatusBarStyle = .lightContent
-        
-        // Specify one or more event listeners to respond to show and hide events.
-//        config.eventListeners.append() { event in
-//            if case .didHide = event { print("yep") }
-//        }
-        
-        let view = MessageView.viewFromNib(layout: .messageView)
-        view.configureTheme(.error)
-        view.configureDropShadow()
-        view.configureContent(title: "", body: validationMessage)
-        view.button?.isHidden = true
-        
-        SwiftMessages.pauseBetweenMessages = 0.01
-        SwiftMessages.show(config: config, view: view)
     }
 }

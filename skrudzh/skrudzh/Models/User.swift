@@ -61,7 +61,7 @@ struct UserCreationForm : Encodable {
         case firstname
         case lastname
         case password
-        case passwordConfirmation = "password_confirmation"
+        case passwordConfirmation = "password_confirmation"        
     }
     
     static func build() -> UserCreationForm {

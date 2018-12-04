@@ -8,12 +8,14 @@
 
 import Foundation
 import SVProgressHUD
-import CWStatusBarNotification
 import PromiseKit
+import SwiftMessages
 
 class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
     
-    private let presentingDuration = 3.0
+    private let notificationPresentingDuration = 3.0
+    private let navBarPresentingDuration = 3.0
+    private let validationPresentingDuration = 1.5
     
     func showHUD() {
         SVProgressHUD.show()
@@ -28,38 +30,72 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
         SVProgressHUD.dismiss()
     }
     
-    func showNavBarMessage(message: String, category: NavBarMessageCategory) {
-        showMessage(message: message, category: category)
+    func show(navBarMessage: String, theme: Theme) {
+        show(message: navBarMessage,
+             theme: theme,
+             presentationStyle: .top,
+             duration: navBarPresentingDuration)
     }
     
-    func showNotificationMessage(message: String, actionOnTap: @escaping () -> ()) {
-        showMessage(message: message, category: .normal, actionOnTap: actionOnTap)
+    func show(validationMessage: String) {
+        show(message: validationMessage,
+             theme: .error,
+             presentationStyle: .bottom,
+             duration: validationPresentingDuration)
     }
     
-    fileprivate func showMessage(message: String, category: NavBarMessageCategory, actionOnTap: (() -> ())? = nil) {
-        let statusBarNotification = createStatusBarNotification(for: category)
+    func show(notificationMessage: String, actionOnTap: @escaping () -> ()) {
+        show(message: notificationMessage,
+             theme: .info,
+             presentationStyle: .top,
+             duration: notificationPresentingDuration,
+             interactive: true,
+             actionOnTap: actionOnTap)
+    }
+    
+    
+    
+    private func show(message: String,
+                      theme: Theme,
+                      presentationStyle: SwiftMessages.PresentationStyle,
+                      duration: TimeInterval,
+                      interactive: Bool = false,
+                      actionOnTap: (() -> ())? = nil) {
         
-        statusBarNotification.notificationTappedBlock = {
-            statusBarNotification.dismiss()
+        SwiftMessages.pauseBetweenMessages = 0.01
+        
+        var config = SwiftMessages.Config()
+
+        config.presentationStyle = presentationStyle
+        
+        // Display in a window at the specified window level: UIWindow.Level.statusBar
+        // displays over the status bar while UIWindow.Level.normal displays under.
+        config.presentationContext = .window(windowLevel: .normal)
+        
+        config.duration = .seconds(seconds: duration)
+        
+        // Dim the background like a popover view. Hide when the background is tapped.
+        config.dimMode = interactive ? .none : .gray(interactive: interactive)
+        
+        // The interactive pan-to-hide gesture.
+        config.interactiveHide = interactive
+        
+        // Specify a status bar style to if the message is displayed directly under the status bar.
+        config.preferredStatusBarStyle = .lightContent
+        
+        let view = MessageView.viewFromNib(layout: .cardView)
+        
+        view.configureTheme(theme)
+        view.configureDropShadow()
+        view.configureContent(title: "", body: message)
+        view.button?.isHidden = true
+        
+        view.tapHandler = { _ in
+            SwiftMessages.hide()
             actionOnTap?()
         }
         
-        statusBarNotification.display(withMessage: message, forDuration: presentingDuration)
-    }
-    
-    fileprivate func createStatusBarNotification(for messageCategory: NavBarMessageCategory) -> CWStatusBarNotification {
-        let notification = CWStatusBarNotification()
-        notification.notificationStyle = .navigationBarNotification
-        notification.notificationAnimationInStyle = .top
-        notification.notificationAnimationOutStyle = .top
-        notification.multiline = true
-        notification.notificationLabelBackgroundColor = messageCategory == .error
-            ? UIColor.init(red: 210 / 255.0, green: 50 / 255.0, blue: 55 / 255.0, alpha: 1.0)
-            : .black
-        notification.notificationLabelTextColor = .white
-        notification.notificationLabelFont = UIFont.systemFont(ofSize: 16.0)
-        
-        return notification
+        SwiftMessages.show(config: config, view: view)
     }
     
     func showAlert(

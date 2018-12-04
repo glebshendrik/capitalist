@@ -87,6 +87,7 @@ class ApplicationAssembly: Assembly {
         // RegistrationViewController
         container.registerForSkrudzhStoryboard(RegistrationViewController.self) { (r, c) in
             c.viewModel = r.resolve(RegistrationViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
     }
     

@@ -33,7 +33,7 @@ class NotificationsHandler: NotificationsHandlerProtocol {
                 navigator.triggerDestinationUpdate()
             }
             else if message != nil || title != nil {
-                messagePresenterManager.showNotificationMessage(message: (message ?? (title ?? ""))) {
+                messagePresenterManager.show(notificationMessage: (message ?? (title ?? ""))) {
                     self.navigateToDestination(of: category, with: action)
                 }
             }
