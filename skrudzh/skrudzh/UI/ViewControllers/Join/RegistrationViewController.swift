@@ -89,7 +89,7 @@ class RegistrationViewController : StaticDataTableViewController, UIMessagePrese
             return "Некорректный пароль"
         case (.passwordConfirmation, .required):
             return "Подтвердите пароль"
-        case (.passwordConfirmation, .notEqual(to: .password)):
+        case (.passwordConfirmation, .notEqual(to: UserCreationForm.CodingKeys.password)):
             return "Подтверждение не совпадает с паролем"
         case (.passwordConfirmation, _):
             return "Некорректняое подтверждение пароля"

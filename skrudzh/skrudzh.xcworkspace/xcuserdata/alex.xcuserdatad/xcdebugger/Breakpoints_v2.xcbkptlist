@@ -175,7 +175,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "93"
             endingLineNumber = "93"
-            landmarkName = "registerWith(firstname:email:password:passwordConfirmation:)"
+            landmarkName = "validate(password:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -190,9 +190,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "validate(email:)"
-            landmarkType = "7">
+            endingLineNumber = "138">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -206,9 +204,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "validate(password:)"
-            landmarkType = "7">
+            endingLineNumber = "147">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -222,9 +218,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "validate(passwordConfirmation:password:)"
-            landmarkType = "7">
+            endingLineNumber = "156">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -239,7 +233,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "95"
             endingLineNumber = "95"
-            landmarkName = "registerWith(firstname:email:password:passwordConfirmation:)"
+            landmarkName = "validate(password:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -255,7 +249,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
             endingLineNumber = "88"
-            landmarkName = "registerWith(firstname:email:password:passwordConfirmation:)"
+            landmarkName = "validate(password:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -302,9 +296,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "validate(firstname:email:password:passwordConfirmation:)"
-            landmarkType = "7">
+            endingLineNumber = "112">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -318,9 +310,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "validate(firstname:email:password:passwordConfirmation:)"
-            landmarkType = "7">
+            endingLineNumber = "121">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

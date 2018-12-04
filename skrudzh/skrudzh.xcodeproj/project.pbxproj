@@ -13,6 +13,8 @@
 		FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA165CD921B652BE00EAA16B /* Profile.storyboard */; };
 		FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CDC21B6530C00EAA16B /* ProfileViewModel.swift */; };
 		FA165CE021B6540600EAA16B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CDF21B6540600EAA16B /* ProfileViewController.swift */; };
+		FA165CE221B65F0300EAA16B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CE121B65F0300EAA16B /* LoginViewModel.swift */; };
+		FA165CE421B65F2F00EAA16B /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CE321B65F2F00EAA16B /* ValidationResult.swift */; };
 		FA26813E21B178D300FADED1 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */; };
 		FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813421B178D200FADED1 /* Rubik-Bold.ttf */; };
 		FA26814021B178D300FADED1 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813521B178D200FADED1 /* Rubik-Light.ttf */; };
@@ -87,6 +89,8 @@
 		FA165CD921B652BE00EAA16B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		FA165CDC21B6530C00EAA16B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		FA165CDF21B6540600EAA16B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		FA165CE121B65F0300EAA16B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		FA165CE321B65F2F00EAA16B /* ValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResult.swift; sourceTree = "<group>"; };
 		FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		FA26813421B178D200FADED1 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		FA26813521B178D200FADED1 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */,
+				FA165CE121B65F0300EAA16B /* LoginViewModel.swift */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -368,6 +373,7 @@
 			children = (
 				FAD88F3421AEB8BD00BE7BC1 /* ApplicationExtensions.swift */,
 				FAD88F3621AEB8F200BE7BC1 /* FirstLaunch.swift */,
+				FA165CE321B65F2F00EAA16B /* ValidationResult.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -643,6 +649,7 @@
 				FAD88F6121AEC61800BE7BC1 /* AccountCoordinator.swift in Sources */,
 				FAD88F7921AFD64000BE7BC1 /* APIResourceRequest.swift in Sources */,
 				FAD88F3D21AEBB4200BE7BC1 /* UserSessionManager.swift in Sources */,
+				FA165CE221B65F0300EAA16B /* LoginViewModel.swift in Sources */,
 				FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */,
 				FAD88F8C21B1228F00BE7BC1 /* MenuViewModel.swift in Sources */,
 				FAD88F2821AEB75800BE7BC1 /* NotificationCategory.swift in Sources */,
@@ -664,6 +671,7 @@
 				FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */,
 				FAD88F1F21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift in Sources */,
 				FAD88F0F21AEB45A00BE7BC1 /* ManagersAssembly.swift in Sources */,
+				FA165CE421B65F2F00EAA16B /* ValidationResult.swift in Sources */,
 				FAD88F4F21AEC1A500BE7BC1 /* UsersService.swift in Sources */,
 				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
 				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,
