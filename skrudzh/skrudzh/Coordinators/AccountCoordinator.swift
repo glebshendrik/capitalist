@@ -42,18 +42,20 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     }
     
     func authenticate(email: String?, password: String?) -> Promise<Session> {
-        let authenticationPromise = authenticationService.authenticate(email: email, password: password)
-        _ = authenticationPromise.done { session in
-            self.userSessionManager.save(session: session)
-            self.router.route()
-        }
-        return authenticationPromise
+        return  firstly {
+                    authenticationService.authenticate(email: email, password: password)
+                }.get { session in
+                    self.userSessionManager.save(session: session)
+                    self.router.route()
+                }
     }
     
     func createAndAuthenticateUser(with userForm: UserCreationForm) -> Promise<Session> {
-        return usersService.createUser(with: userForm).then { user in
-            return self.authenticate(email: userForm.email, password: userForm.password)
-        }
+        return  firstly {
+                    usersService.createUser(with: userForm)
+                }.then { user in
+                    self.authenticate(email: userForm.email, password: userForm.password)
+                }
     }
     
     func updateUser(with userForm: UserUpdatingForm) -> Promise<Void> {
@@ -72,9 +74,11 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     }
     
     func resetPassword(with resetPasswordForm: ResetPasswordForm) -> Promise<Void> {
-        return usersService.resetPassword(with: resetPasswordForm).then { _ -> Promise<Void> in
-            return self.authenticate(email: resetPasswordForm.email, password: resetPasswordForm.newPassword).asVoid()
-        }
+        return  firstly {
+                    usersService.resetPassword(with: resetPasswordForm)
+                }.then { _ in
+                    self.authenticate(email: resetPasswordForm.email, password: resetPasswordForm.newPassword)
+                }.asVoid()
     }
     
     func createConfirmationCode(email: String) -> Promise<Void> {

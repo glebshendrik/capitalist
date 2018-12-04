@@ -84,7 +84,10 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(MenuViewModel.self)
         }
         
-        
+        // RegistrationViewController
+        container.registerForSkrudzhStoryboard(RegistrationViewController.self) { (r, c) in
+            c.viewModel = r.resolve(RegistrationViewModel.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -93,7 +96,10 @@ class ApplicationAssembly: Assembly {
             return MenuViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
         }
         
-        
+        // RegistrationViewModel
+        container.register(RegistrationViewModel.self) { r in
+            return RegistrationViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
+        }
     }
     
     static func resolveAppDelegateDependencies(appDelegate: AppDelegate) {

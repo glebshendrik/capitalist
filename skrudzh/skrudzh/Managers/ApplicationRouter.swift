@@ -9,8 +9,10 @@
 import UIKit
 import Swinject
 import SideMenu
+import PromiseKit
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
+    
     private let storyboards: [Infrastructure.Storyboard: UIStoryboard]
     private let window: UIWindow
     private let userSessionManager: UserSessionManagerProtocol
@@ -30,7 +32,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         self.notificationsCoordinator = notificationsCoordinator
     }
     
-    func initDependencies(with resolver: Resolver) {
+    func initDependencies(with resolver: Swinject.Resolver) {
         accountCoordinator = resolver.resolve(AccountCoordinatorProtocol.self)!
     }
     
@@ -61,14 +63,15 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     fileprivate func beginAuthorizedUserFlow() {
-        _ = accountCoordinator.loadCurrentUser()
-            .done { _ in
-                self.showMainViewController()
-            }.catch { error in
-                if self.errorIsNotFoundOrNotAuthorized(error: error) {
-                    self.userSessionManager.forgetSession()
-                }
-                self.route()
+        firstly {
+            accountCoordinator.loadCurrentUser()
+        }.done { _ in
+            self.showMainViewController()
+        }.catch { error in
+            if self.errorIsNotFoundOrNotAuthorized(error: error) {
+                self.userSessionManager.forgetSession()
+            }
+            self.route()
         }
     }
     

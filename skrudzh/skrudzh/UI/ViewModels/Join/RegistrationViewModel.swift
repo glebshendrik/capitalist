@@ -18,7 +18,7 @@ enum ValidationErrorReason {
     case invalid
     case tooShort
     case tooLong
-    case notEqual(to: CodingKey)
+    case notEqual(to: UserCreationForm.CodingKeys)
 }
 
 protocol ValidationResultProtocol {
@@ -135,7 +135,7 @@ class RegistrationViewModel {
     }
     
     func validate(email: String?) -> ValidationResult<String> {
-        guard let email = email else {
+        guard let email = email, !email.isEmpty else {
             return .failure(key: UserCreationForm.CodingKeys.email,
                             reasons: [ValidationErrorReason.required])
         }
@@ -144,7 +144,7 @@ class RegistrationViewModel {
     }
     
     func validate(password: String?) -> ValidationResult<String> {
-        guard let password = password else {
+        guard let password = password, !password.isEmpty else {
             return .failure(key: UserCreationForm.CodingKeys.password,
                             reasons: [ValidationErrorReason.required])
         }
@@ -153,7 +153,7 @@ class RegistrationViewModel {
     }
     
     func validate(passwordConfirmation: String?, password: String?) -> ValidationResult<String> {
-        guard let passwordConfirmation = passwordConfirmation else {
+        guard let passwordConfirmation = passwordConfirmation, !passwordConfirmation.isEmpty else {
             return .failure(key: UserCreationForm.CodingKeys.passwordConfirmation,
                             reasons: [ValidationErrorReason.required])
         }

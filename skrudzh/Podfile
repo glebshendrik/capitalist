@@ -19,4 +19,5 @@ target 'skrudzh' do
   pod 'CWStatusBarNotification', '~> 2.3'
   pod 'SideMenu'
   pod 'StaticDataTableViewController'
+  pod 'SwiftMessages'
 end
