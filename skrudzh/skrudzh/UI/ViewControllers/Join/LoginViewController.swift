@@ -28,13 +28,13 @@ class LoginViewController : StaticDataTableViewController, UIMessagePresenterMan
     }
     
     @IBAction func didTapLoginButton(_ sender: Any) {
-        
+        view.endEditing(true)
         setActivityIndicator(hidden: false)
         loginButton.isEnabled = false
         
         firstly {
-            viewModel.loginWith(email: self.emailTextField.text,
-                                password: self.passwordTextField.text)
+            viewModel.loginWith(email: self.emailTextField.text?.trimmed,
+                                password: self.passwordTextField.text?.trimmed)
         }.catch { error in
             switch error {
             case LoginError.validation(let validationResults):

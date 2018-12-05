@@ -30,15 +30,15 @@ class RegistrationViewController : StaticDataTableViewController, UIMessagePrese
     }
     
     @IBAction func didTapRegisterButton(_ sender: Any) {
-        
+        view.endEditing(true)
         setActivityIndicator(hidden: false)
         registerButton.isEnabled = false
         
         firstly {
-            viewModel.registerWith(firstname: self.firstnameTextField.text,
-                                   email: self.emailTextField.text,
-                                   password: self.passwordTextField.text,
-                                   passwordConfirmation: self.passwordConfirmationTextField.text)
+            viewModel.registerWith(firstname: self.firstnameTextField.text?.trimmed,
+                                   email: self.emailTextField.text?.trimmed,
+                                   password: self.passwordTextField.text?.trimmed,
+                                   passwordConfirmation: self.passwordConfirmationTextField.text?.trimmed)
         }.catch { error in
             switch error {
             case RegistrationError.validation(let validationResults):

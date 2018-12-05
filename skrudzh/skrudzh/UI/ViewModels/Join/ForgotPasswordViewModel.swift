@@ -20,7 +20,7 @@ class ForgotPasswordViewModel {
         self.accountCoordinator = accountCoordinator
     }
     
-    func createPasswordResetCodeWith(email: String?) -> Promise<PasswordResetCodeForm> {
+    func createPasswordResetCodeWith(email: String?) -> Promise<Void> {
         return  firstly {
                     validate(email: email)
                 }.then { passwordResetCodeForm in

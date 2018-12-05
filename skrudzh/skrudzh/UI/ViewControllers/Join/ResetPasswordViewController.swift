@@ -39,25 +39,25 @@ class ResetPasswordViewController : StaticDataTableViewController, UIMessagePres
     }
     
     @IBAction func didTapResetPasswordButton(_ sender: Any) {
-        
+        view.endEditing(true)
         setActivityIndicator(hidden: false)
         resetPasswordButton.isEnabled = false
         
         firstly {
             viewModel.resetPasswordWith(email: email,
-                                        passwordResetCode: passwordResetCodeTextField.text,
-                                        password: passwordTextField.text,
-                                        passwordConfirmation: passwordConfirmationTextField.text)
+                                        passwordResetCode: passwordResetCodeTextField.text?.trimmed,
+                                        password: passwordTextField.text?.trimmed,
+                                        passwordConfirmation: passwordConfirmationTextField.text?.trimmed)
             }.catch { error in
                 switch error {
                 case ResetPasswordError.validation(let validationResults):
                     self.show(validationResults: validationResults)
-                case ResetPasswordError.emailInvalid:
-                    self.messagePresenterManager.show(navBarMessage: "Не удалось изменить пароль", theme: .error)
+                case APIRequestError.notFound:
+                    self.messagePresenterManager.show(navBarMessage: "Пользователь с таким адресом не найден", theme: .error)
                 case APIRequestError.forbidden:
-                    self.messagePresenterManager.show(navBarMessage: "Код восстановления больше не действует. Вернитесь назад и сгенерируйте новый", theme: .error)
+                    self.messagePresenterManager.show(navBarMessage: "Код восстановления неверный или больше не действует", theme: .error)
                 case APIRequestError.notAuthorized:
-                    self.messagePresenterManager.show(navBarMessage: "Пароль изменен, но войти с ним не удалось. Возможно изменился email", theme: .error)
+                    self.messagePresenterManager.show(navBarMessage: "Пароль изменен, но войти не удалось", theme: .error)
                 case APIRequestError.unprocessedEntity(let errors):
                     self.show(errors: errors)
                 default:
@@ -92,6 +92,12 @@ class ResetPasswordViewController : StaticDataTableViewController, UIMessagePres
     
     private func validationMessageFor(key: ResetPasswordForm.CodingKeys, reason: ValidationErrorReason) -> String {
         switch (key, reason) {
+        case (.email, .required):
+            return "Укажите Email"
+        case (.email, .invalid):
+            return "Некорректный Email"
+        case (.email, _):
+            return "Некорректный Email"
         case (.passwordResetCode, .required):
             return "Укажите код восстановления"
         case (.passwordResetCode, _):

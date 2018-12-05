@@ -93,8 +93,9 @@ struct ResetPasswordForm : Encodable {
     let passwordConfirmation: String
     
     enum CodingKeys: String, CodingKey {
+        case email
         case passwordResetCode = "password_reset_code"
-        case password = "password"
+        case password
         case passwordConfirmation = "password_confirmation"
     }    
 }

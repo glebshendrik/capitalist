@@ -11,7 +11,6 @@ import PromiseKit
 
 enum ResetPasswordError : Error {
     case validation(validationResults: [ResetPasswordForm.CodingKeys : [ValidationErrorReason]])
-    case emailInvalid
 }
 
 class ResetPasswordViewModel {
@@ -40,24 +39,22 @@ class ResetPasswordViewModel {
                   password: String?,
                   passwordConfirmation: String?) -> Promise<ResetPasswordForm> {
         
-        guard let email = email, !email.isEmpty else {
-            return Promise(error: ResetPasswordError.emailInvalid)
-        }
-        
         let validationResults : [ValidationResultProtocol] =
-            [Validator.validate(required: passwordResetCode, key: ResetPasswordForm.CodingKeys.passwordResetCode),
+            [Validator.validate(email: email, key: ResetPasswordForm.CodingKeys.email),
+             Validator.validate(required: passwordResetCode, key: ResetPasswordForm.CodingKeys.passwordResetCode),
              Validator.validate(password: password, key: ResetPasswordForm.CodingKeys.password),
              Validator.validate(passwordConfirmation: passwordConfirmation,
                                 password: password,
                                 passwordConfirmationKey: ResetPasswordForm.CodingKeys.passwordConfirmation,
                                 passwordKey: ResetPasswordForm.CodingKeys.password)]
+        
         let failureResultsHash : [ResetPasswordForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         
         if let failureResultsHash = failureResultsHash {
             return Promise(error: ResetPasswordError.validation(validationResults: failureResultsHash))
         }
         
-        return .value(ResetPasswordForm(email: email,
+        return .value(ResetPasswordForm(email: email!,
                                         passwordResetCode: passwordResetCode!,
                                         password: password!,
                                         passwordConfirmation: passwordConfirmation!))

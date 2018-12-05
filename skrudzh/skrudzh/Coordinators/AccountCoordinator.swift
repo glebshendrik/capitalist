@@ -77,16 +77,13 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return  firstly {
                     usersService.resetPassword(with: resetPasswordForm)
                 }.then { _ in
-                    self.authenticate(with: SessionCreationForm(email: resetPasswordForm.email, password: resetPasswordForm.password))
+                    self.authenticate(with: SessionCreationForm(email: resetPasswordForm.email,
+                                                                password: resetPasswordForm.password))
                 }.asVoid()
     }
     
-    func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<PasswordResetCodeForm> {
-        return  firstly {
-                    usersService.createPasswordResetCode(with: passwordResetCodeForm)
-                }.then { _ -> Promise<PasswordResetCodeForm> in
-                    .value(passwordResetCodeForm)
-                }
+    func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<Void> {
+        return usersService.createPasswordResetCode(with: passwordResetCodeForm)
     }
     
     func loadCurrentUser() -> Promise<User> {

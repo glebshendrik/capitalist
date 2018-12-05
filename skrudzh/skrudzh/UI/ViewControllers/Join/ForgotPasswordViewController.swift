@@ -26,7 +26,7 @@ class ForgotPasswordViewController : StaticDataTableViewController, UIMessagePre
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
     var email: String? {
-        return emailTextField.text
+        return emailTextField.text?.trimmed
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,23 +35,23 @@ class ForgotPasswordViewController : StaticDataTableViewController, UIMessagePre
     }
     
     @IBAction func didTapCreatePasswordResetCodeButton(_ sender: Any) {
-        
+        view.endEditing(true)
         setActivityIndicator(hidden: false)
         createPasswordResetCodeButton.isEnabled = false
         
         firstly {
-            viewModel.createPasswordResetCodeWith(email: self.emailTextField.text)
-        }.done { passwordResetCodeForm in
-            self.showResetPasswordScreen(passwordResetCodeForm: passwordResetCodeForm)
+            viewModel.createPasswordResetCodeWith(email: email)
+        }.done {
+            self.showResetPasswordScreen()
         }
         .catch { error in
             switch error {
             case ForgotPasswordError.validation(let validationResults):
                 self.show(validationResults: validationResults)
             case APIRequestError.notFound:
-                self.messagePresenterManager.show(validationMessage: "Пользователь с таким адресом не найден")
+                self.messagePresenterManager.show(navBarMessage: "Пользователь с таким адресом не найден", theme: .error)
             default:
-                self.messagePresenterManager.show(navBarMessage: "Ошибка при создании кода восстановления", theme: .error)
+                self.messagePresenterManager.show(navBarMessage: "Ошибка при создании кода восстановления пароля", theme: .error)
             }
         }.finally {
             self.setActivityIndicator(hidden: true)
@@ -59,7 +59,7 @@ class ForgotPasswordViewController : StaticDataTableViewController, UIMessagePre
         }
     }
     
-    func showResetPasswordScreen(passwordResetCodeForm: PasswordResetCodeForm) {
+    func showResetPasswordScreen() {
         self.messagePresenterManager.show(navBarMessage: "Мы отправили код для смены пароля на ваш Email", theme: .success)
         performSegue(withIdentifier: "ShowResetPasswordScreen", sender: self)
     }
