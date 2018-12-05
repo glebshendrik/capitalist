@@ -16,6 +16,7 @@
 		FA165CE221B65F0300EAA16B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CE121B65F0300EAA16B /* LoginViewModel.swift */; };
 		FA165CE421B65F2F00EAA16B /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CE321B65F2F00EAA16B /* ValidationResult.swift */; };
 		FA165CE621B6669500EAA16B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CE521B6669500EAA16B /* LoginViewController.swift */; };
+		FA165CE821B7654100EAA16B /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CE721B7654100EAA16B /* ForgotPasswordViewModel.swift */; };
 		FA26813E21B178D300FADED1 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */; };
 		FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813421B178D200FADED1 /* Rubik-Bold.ttf */; };
 		FA26814021B178D300FADED1 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813521B178D200FADED1 /* Rubik-Light.ttf */; };
@@ -93,6 +94,7 @@
 		FA165CE121B65F0300EAA16B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		FA165CE321B65F2F00EAA16B /* ValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResult.swift; sourceTree = "<group>"; };
 		FA165CE521B6669500EAA16B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FA165CE721B7654100EAA16B /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		FA26813421B178D200FADED1 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		FA26813521B178D200FADED1 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			children = (
 				FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */,
 				FA165CE121B65F0300EAA16B /* LoginViewModel.swift */,
+				FA165CE721B7654100EAA16B /* ForgotPasswordViewModel.swift */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
 				FAD88F4421AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift in Sources */,
 				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
+				FA165CE821B7654100EAA16B /* ForgotPasswordViewModel.swift in Sources */,
 				FAD88F4621AEBE7400BE7BC1 /* NotificationsCoordinator.swift in Sources */,
 				FAD88F3221AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift in Sources */,
 				FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */,

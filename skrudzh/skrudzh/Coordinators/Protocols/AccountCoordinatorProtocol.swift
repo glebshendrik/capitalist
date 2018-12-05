@@ -16,7 +16,7 @@ protocol AccountCoordinatorProtocol {
     func updateUser(with userForm: UserUpdatingForm) -> Promise<Void>
     func changePassword(with changePasswordForm: ChangePasswordForm) -> Promise<Void>
     func resetPassword(with resetPasswordForm: ResetPasswordForm) -> Promise<Void>
-    func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<Void>
+    func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<PasswordResetCodeForm>
     func loadCurrentUser() -> Promise<User>
     func logout() -> Promise<Void>
 }

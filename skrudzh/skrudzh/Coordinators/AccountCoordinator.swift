@@ -81,8 +81,12 @@ class AccountCoordinator : AccountCoordinatorProtocol {
                 }.asVoid()
     }
     
-    func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<Void> {
-        return usersService.createPasswordResetCode(with: passwordResetCodeForm)
+    func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<PasswordResetCodeForm> {
+        return  firstly {
+                    usersService.createPasswordResetCode(with: passwordResetCodeForm)
+                }.then { _ -> Promise<PasswordResetCodeForm> in
+                    .value(passwordResetCodeForm)
+                }
     }
     
     func loadCurrentUser() -> Promise<User> {
