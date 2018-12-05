@@ -67,22 +67,21 @@ extension ValidationResult : ValidationResultProtocol {
 }
 
 class Validator {
-    static func validate(email: String?, key: CodingKey) -> ValidationResult<String> {
-        guard let email = email, !email.isEmpty else {
+    static func validate(required: String?, key: CodingKey) -> ValidationResult<String> {
+        guard let required = required, !required.isEmpty else {
             return .failure(key: key,
                             reasons: [ValidationErrorReason.required])
         }
         return .success(key: key,
-                        value: email)
+                        value: required)
+    }
+    
+    static func validate(email: String?, key: CodingKey) -> ValidationResult<String> {
+        return validate(required: email, key: key)
     }
     
     static func validate(password: String?, key: CodingKey) -> ValidationResult<String> {
-        guard let password = password, !password.isEmpty else {
-            return .failure(key: key,
-                            reasons: [ValidationErrorReason.required])
-        }
-        return .success(key: key,
-                        value: password)
+        return validate(required: password, key: key)
     }
     
     static func validate(passwordConfirmation: String?,
@@ -90,15 +89,29 @@ class Validator {
                          passwordConfirmationKey: CodingKey,
                          passwordKey: CodingKey) -> ValidationResult<String> {
         
-        guard let passwordConfirmation = passwordConfirmation, !passwordConfirmation.isEmpty else {
-            return .failure(key: passwordConfirmationKey,
-                            reasons: [ValidationErrorReason.required])
-        }
+        let requiredValidationResult = validate(required: passwordConfirmation, key: passwordConfirmationKey)
+        if !requiredValidationResult.isSucceeded { return requiredValidationResult }
+        
         guard password == passwordConfirmation else {
             return .failure(key: passwordConfirmationKey,
                             reasons: [ValidationErrorReason.notEqual(to: passwordKey)])
         }
-        return .success(key: passwordConfirmationKey,
-                        value: passwordConfirmation)
+        return requiredValidationResult
+    }
+    
+    static func failureResultsHash<T>(from validationResults: [ValidationResultProtocol]) -> [T : [ValidationErrorReason]]? {
+        let failureResults = validationResults.filter { !$0.isSucceeded }
+        
+        if failureResults.isEmpty { return nil }
+        
+        let failureResultsHash: [T : [ValidationErrorReason]] =
+            failureResults
+                .reduce(into: [:]) { hash, failureResult in
+                    
+                    if let key = failureResult.key as? T {
+                        hash[key] = failureResult.failureReasons
+                    }
+        }
+        return failureResultsHash
     }
 }

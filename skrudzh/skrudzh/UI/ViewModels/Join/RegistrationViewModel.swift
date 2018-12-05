@@ -47,26 +47,17 @@ class RegistrationViewModel {
             [validate(firstname: firstname),
              Validator.validate(email: email, key: UserCreationForm.CodingKeys.email),
              Validator.validate(password: password, key: UserCreationForm.CodingKeys.password),
-             Validator.validate(passwordConfirmation: passwordConfirmation,                                
+             Validator.validate(passwordConfirmation: passwordConfirmation,
                                 password: password,
                                 passwordConfirmationKey: UserCreationForm.CodingKeys.passwordConfirmation,
                                 passwordKey: UserCreationForm.CodingKeys.password)]
         
-        let failureResults = validationResults.filter { !$0.isSucceeded }
+        let failureResultsHash : [UserCreationForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         
-        guard failureResults.isEmpty else {
-            let failureResultsHash: [UserCreationForm.CodingKeys : [ValidationErrorReason]] =
-                failureResults
-                    .reduce(into: [:]) { hash, failureResult in
-                        
-                        if let key = failureResult.key as? UserCreationForm.CodingKeys {
-                            hash[key] = failureResult.failureReasons
-                        }
-            }
+        if let failureResultsHash = failureResultsHash {
             return Promise(error: RegistrationError.validation(validationResults: failureResultsHash))
-            
         }
-        
+                
         return .value(UserCreationForm(email: email!,
                                        firstname: firstname,
                                        lastname: "",

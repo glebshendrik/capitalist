@@ -33,23 +33,14 @@ class LoginViewModel {
     func validate(email: String?,
                   password: String?) -> Promise<SessionCreationForm> {
         
-        let validationResults : [ValidationResultProtocol] =            
+        let validationResults : [ValidationResultProtocol] =
             [Validator.validate(email: email, key: SessionCreationForm.CodingKeys.email),
              Validator.validate(password: password, key: SessionCreationForm.CodingKeys.password)]
         
-        let failureResults = validationResults.filter { !$0.isSucceeded }
+        let failureResultsHash : [SessionCreationForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         
-        guard failureResults.isEmpty else {
-            let failureResultsHash: [SessionCreationForm.CodingKeys : [ValidationErrorReason]] =
-                failureResults
-                    .reduce(into: [:]) { hash, failureResult in
-                        
-                        if let key = failureResult.key as? SessionCreationForm.CodingKeys {
-                            hash[key] = failureResult.failureReasons
-                        }
-            }
+        if let failureResultsHash = failureResultsHash {
             return Promise(error: LoginError.validation(validationResults: failureResultsHash))
-            
         }
         
         return .value(SessionCreationForm(email: email,

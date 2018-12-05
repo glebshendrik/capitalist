@@ -33,19 +33,10 @@ class ForgotPasswordViewModel {
         let validationResults : [ValidationResultProtocol] =
             [Validator.validate(email: email, key: PasswordResetCodeForm.CodingKeys.email)]
         
-        let failureResults = validationResults.filter { !$0.isSucceeded }
+        let failureResultsHash : [PasswordResetCodeForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         
-        guard failureResults.isEmpty else {
-            let failureResultsHash: [PasswordResetCodeForm.CodingKeys : [ValidationErrorReason]] =
-                failureResults
-                    .reduce(into: [:]) { hash, failureResult in
-                        
-                        if let key = failureResult.key as? PasswordResetCodeForm.CodingKeys {
-                            hash[key] = failureResult.failureReasons
-                        }
-            }
+        if let failureResultsHash = failureResultsHash {
             return Promise(error: ForgotPasswordError.validation(validationResults: failureResultsHash))
-            
         }
         
         return .value(PasswordResetCodeForm(email: email!))
