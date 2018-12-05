@@ -28,6 +28,7 @@ struct Infrastructure {
         case RegistrationViewController
         case LoginViewController
         case ForgotPasswordViewController
+        case ResetPasswordViewController
         
         // Main
         case MainViewController
@@ -46,7 +47,8 @@ struct Infrastructure {
             case .LandingViewController,
                  .RegistrationViewController,
                  .LoginViewController,
-                 .ForgotPasswordViewController:
+                 .ForgotPasswordViewController,
+                 .ResetPasswordViewController:
                 return .Join
             case .MainViewController,
                  .MenuViewController,
@@ -115,6 +117,12 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(ForgotPasswordViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
+        
+        // ResetPasswordViewController
+        container.registerForSkrudzhStoryboard(ResetPasswordViewController.self) { (r, c) in
+            c.viewModel = r.resolve(ResetPasswordViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -141,6 +149,11 @@ class ApplicationAssembly: Assembly {
         // ForgotPasswordViewModel
         container.register(ForgotPasswordViewModel.self) { r in
             return ForgotPasswordViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
+        }
+        
+        // ResetPasswordViewModel
+        container.register(ResetPasswordViewModel.self) { r in
+            return ResetPasswordViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
         }
     }
     

@@ -743,7 +743,7 @@
         <!--Восстановление пароля-->
         <scene sceneID="sCg-hX-TF5">
             <objects>
-                <tableViewController title="Восстановление пароля" id="MT3-Zt-RXL" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ResetPasswordViewController" title="Восстановление пароля" id="MT3-Zt-RXL" customClass="ResetPasswordViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="iGv-Gh-KGh" customClass="TPKeyboardAvoidingTableView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -907,12 +907,33 @@
                                                             <real key="value" value="20"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapResetPasswordButton:" destination="MT3-Zt-RXL" eventType="touchUpInside" id="nse-VK-mjZ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Idh-en-oL0" firstAttribute="leading" secondItem="51H-GA-Rdt" secondAttribute="leading" constant="32" id="FGJ-r0-lou"/>
                                                 <constraint firstItem="Idh-en-oL0" firstAttribute="centerY" secondItem="51H-GA-Rdt" secondAttribute="centerY" id="i5U-5W-XXj"/>
                                                 <constraint firstAttribute="trailing" secondItem="Idh-en-oL0" secondAttribute="trailing" constant="32" id="uSB-px-WBz"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="38" id="5CB-fQ-IeM">
+                                        <rect key="frame" x="0.0" y="500" width="375" height="38"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5CB-fQ-IeM" id="2nt-l3-50I">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bf9-Pv-kmR">
+                                                    <rect key="frame" x="169" y="0.0" width="37" height="37"/>
+                                                    <color key="color" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bf9-Pv-kmR" firstAttribute="top" secondItem="2nt-l3-50I" secondAttribute="top" id="6f8-Q4-kOi"/>
+                                                <constraint firstItem="bf9-Pv-kmR" firstAttribute="centerX" secondItem="2nt-l3-50I" secondAttribute="centerX" id="xIf-2h-6sE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -924,6 +945,13 @@
                             <outlet property="delegate" destination="MT3-Zt-RXL" id="zIa-IB-vnX"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="activityIndicatorCell" destination="5CB-fQ-IeM" id="xZ9-GS-h77"/>
+                        <outlet property="passwordConfirmationTextField" destination="lzC-5K-EKj" id="j2u-pz-QJm"/>
+                        <outlet property="passwordResetCodeTextField" destination="NC5-2G-zLN" id="WcC-k3-7Hr"/>
+                        <outlet property="passwordTextField" destination="dzJ-an-Jvn" id="fpP-EM-qAO"/>
+                        <outlet property="resetPasswordButton" destination="Idh-en-oL0" id="zB4-mz-iz4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zqS-C6-F6g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

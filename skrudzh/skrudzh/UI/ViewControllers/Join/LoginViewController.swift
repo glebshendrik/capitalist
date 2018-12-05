@@ -42,7 +42,7 @@ class LoginViewController : StaticDataTableViewController, UIMessagePresenterMan
             case APIRequestError.notAuthorized:
                 self.messagePresenterManager.show(validationMessage: "Неверный email или пароль")
             default:
-                return
+                self.messagePresenterManager.show(navBarMessage: "Ошибка при входе", theme: .error)
             }
         }.finally {
             self.setActivityIndicator(hidden: true)
@@ -76,7 +76,7 @@ class LoginViewController : StaticDataTableViewController, UIMessagePresenterMan
         case (.password, .required):
             return "Укажите пароль"
         case (.password, _):
-            return "Некорректный пароль"        
+            return "Некорректный пароль"
         }
     }
 }

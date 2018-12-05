@@ -46,7 +46,7 @@ class RegistrationViewController : StaticDataTableViewController, UIMessagePrese
             case APIRequestError.unprocessedEntity(let errors):
                 self.show(errors: errors)
             default:
-                return
+                self.messagePresenterManager.show(navBarMessage: "Ошибка при регистрации", theme: .error)
             }
         }.finally {
             self.setActivityIndicator(hidden: true)
@@ -92,7 +92,7 @@ class RegistrationViewController : StaticDataTableViewController, UIMessagePrese
         case (.passwordConfirmation, .notEqual(to: UserCreationForm.CodingKeys.password)):
             return "Подтверждение не совпадает с паролем"
         case (.passwordConfirmation, _):
-            return "Некорректняое подтверждение пароля"
+            return "Некорректное подтверждение пароля"
         case (_, _):
             return "Ошибка ввода"
         }

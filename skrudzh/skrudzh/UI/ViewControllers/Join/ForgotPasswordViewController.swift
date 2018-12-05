@@ -16,10 +16,6 @@ protocol ForgotPasswordOutputProtocol {
     var email: String? { get }
 }
 
-protocol ResetPasswordInputProtocol {
-    func set(email: String?)
-}
-
 class ForgotPasswordViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol, ForgotPasswordOutputProtocol {
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -55,7 +51,7 @@ class ForgotPasswordViewController : StaticDataTableViewController, UIMessagePre
             case APIRequestError.notFound:
                 self.messagePresenterManager.show(validationMessage: "Пользователь с таким адресом не найден")
             default:
-                return
+                self.messagePresenterManager.show(navBarMessage: "Ошибка при создании кода восстановления", theme: .error)
             }
         }.finally {
             self.setActivityIndicator(hidden: true)
