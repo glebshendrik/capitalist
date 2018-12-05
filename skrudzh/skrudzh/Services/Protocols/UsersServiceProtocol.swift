@@ -18,6 +18,6 @@ protocol UsersServiceProtocol {
     func updateUser(with userForm: UserUpdatingForm) -> Promise<Void>
     func changePassword(with changePasswordForm: ChangePasswordForm) -> Promise<Void>
     func resetPassword(with resetPasswordForm: ResetPasswordForm) -> Promise<Void>
-    func createConfirmationCode(email: String) -> Promise<Void>
+    func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<Void>
     func loadUser(with id: Int) -> Promise<User>
 }

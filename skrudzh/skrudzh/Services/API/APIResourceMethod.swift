@@ -14,7 +14,7 @@ struct APIResourceMethod {
         switch resource {
         case .createUser,
              .createSession,
-             .createConfirmationCode:
+             .createPasswordResetCode:
             return .post
         case .showUser:
             return .get

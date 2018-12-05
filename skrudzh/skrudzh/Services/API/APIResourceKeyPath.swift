@@ -24,8 +24,8 @@ struct APIResourceKeyPath {
              .resetPassword,
              .registerDeviceToken:
             return ResourceKeyPath(singular: "user", plural: "users")
-        case .createConfirmationCode:
-            return ResourceKeyPath(singular: "confirmation_code", plural: "confirmation_codes")
+        case .createPasswordResetCode:
+            return ResourceKeyPath(singular: "password_reset_code", plural: "password_reset_codes")
         case .createSession,
              .destroySession(_):
             return ResourceKeyPath(singular: "session", plural: "sessions")

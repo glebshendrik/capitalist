@@ -27,8 +27,8 @@ class UsersService : Service, UsersServiceProtocol {
         return request(APIResource.resetPassword(form: resetPasswordForm))
     }
     
-    func createConfirmationCode(email: String) -> Promise<Void> {
-        return request(APIResource.createConfirmationCode(email: email))
+    func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<Void> {
+        return request(APIResource.createPasswordResetCode(form: passwordResetCodeForm))
     }
     
     func loadUser(with id: Int) -> Promise<User> {

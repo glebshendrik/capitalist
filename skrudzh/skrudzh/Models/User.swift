@@ -80,7 +80,6 @@ struct ChangePasswordForm : Encodable {
     let newPasswordConfirmation: String
     
     enum CodingKeys: String, CodingKey {
-        case userId = "user_id"
         case oldPassword = "old_password"
         case newPassword = "new_password"
         case newPasswordConfirmation = "new_password_confirmation"
@@ -89,14 +88,22 @@ struct ChangePasswordForm : Encodable {
 
 struct ResetPasswordForm : Encodable {
     let email: String
-    let confirmationCode: String
-    let newPassword: String
-    let newPasswordConfirmation: String
+    let passwordResetCode: String
+    let password: String
+    let passwordConfirmation: String
+    
+    enum CodingKeys: String, CodingKey {
+        case passwordResetCode = "password_reset_code"
+        case password = "password"
+        case passwordConfirmation = "password_confirmation"
+    }    
+}
+
+struct PasswordResetCodeForm : Encodable {
+    let email: String
     
     enum CodingKeys: String, CodingKey {
         case email
-        case confirmationCode = "password_reset_confirmation_code"
-        case newPassword = "new_password"
-        case newPasswordConfirmation = "new_password_confirmation"
-    }    
+    }
 }
+

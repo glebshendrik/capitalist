@@ -25,7 +25,7 @@ enum APIResource: URLRequestConvertible {
     case updateUser(form: UserUpdatingForm)
     case changePassword(form: ChangePasswordForm)
     case resetPassword(form: ResetPasswordForm)
-    case createConfirmationCode(email: String)
+    case createPasswordResetCode(form: PasswordResetCodeForm)
     case registerDeviceToken(deviceToken: String, userId: Int)
     
     // Sessions
