@@ -108,10 +108,10 @@ class ResetPasswordViewController : StaticDataTableViewController, UIMessagePres
             return "Некорректный пароль"
         case (.passwordConfirmation, .required):
             return "Подтвердите пароль"
-        case (.passwordConfirmation, .notEqual(to: UserCreationForm.CodingKeys.password)):
+        case (.passwordConfirmation, .notEqual(to: ResetPasswordForm.CodingKeys.password)):
             return "Подтверждение не совпадает с паролем"
         case (.passwordConfirmation, _):
-            return "Некорректное подтверждение пароля"
+            return "Некорректное изменение пароля"
         }
     }
 }
