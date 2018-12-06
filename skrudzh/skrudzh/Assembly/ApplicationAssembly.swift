@@ -155,6 +155,11 @@ class ApplicationAssembly: Assembly {
         container.register(ResetPasswordViewModel.self) { r in
             return ResetPasswordViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
         }
+        
+        // ChangePasswordViewModel
+        container.register(ChangePasswordViewModel.self) { r in
+            return ChangePasswordViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
+        }
     }
     
     static func resolveAppDelegateDependencies(appDelegate: AppDelegate) {

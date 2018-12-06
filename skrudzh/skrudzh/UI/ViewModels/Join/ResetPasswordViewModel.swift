@@ -59,6 +59,4 @@ class ResetPasswordViewModel {
                                         password: password!,
                                         passwordConfirmation: passwordConfirmation!))
     }
-    
-    
 }

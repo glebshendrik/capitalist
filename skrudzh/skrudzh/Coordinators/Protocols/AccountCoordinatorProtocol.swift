@@ -10,6 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol AccountCoordinatorProtocol {
+    var currentSession: Session? { get }
     func joinAsGuest() -> Promise<Session>
     func authenticate(with form: SessionCreationForm) -> Promise<Session>
     func createAndAuthenticateUser(with userForm: UserCreationForm) -> Promise<Session>

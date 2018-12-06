@@ -24,6 +24,10 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     private let router: ApplicationRouterProtocol
     private let notificationsCoordinator: NotificationsCoordinatorProtocol
     
+    var currentSession: Session? {
+        return userSessionManager.currentSession
+    }
+    
     init(userSessionManager: UserSessionManagerProtocol,
          authenticationService: AuthenticationServiceProtocol,
          usersService: UsersServiceProtocol,
