@@ -6,7 +6,7 @@
 //  Copyright © 2018 rubikon. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import TPKeyboardAvoiding
 import PromiseKit
 import StaticDataTableViewController

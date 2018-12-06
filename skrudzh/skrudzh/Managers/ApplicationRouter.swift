@@ -119,13 +119,9 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     func setupAppearance() {
         let backArrowImage = UIImage(named: "back-button-icon")
-        let renderedImage = backArrowImage?.withRenderingMode(.alwaysOriginal)
+        let renderedImage = backArrowImage?.withRenderingMode(.alwaysOriginal)        
         UINavigationBar.appearance().backIndicatorImage = renderedImage
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = renderedImage
-        
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: UIControl.State.highlighted)
-        
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = renderedImage                
         UINavigationBar.appearance().barTintColor = UIColor(red: 242 / 255.0, green: 245 / 255.0, blue: 254 / 255.0, alpha: 1.0)
     }
     

@@ -123,6 +123,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9bk-8Q-V5R"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Авторизация" id="4w3-Ka-PUe">
+                        <barButtonItem key="backBarButtonItem" title=" " id="g0q-tl-LCK"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hgi-Rd-3py" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -174,7 +178,7 @@
                                                             <rect key="frame" x="20" y="0.0" width="271" height="44"/>
                                                             <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress" smartDashesType="yes" textContentType="email"/>
                                                         </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.94117647058823528" green="0.95686274509803915" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
@@ -324,6 +328,9 @@
                             <outlet property="delegate" destination="Afc-hf-J34" id="I0i-7S-lZi"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Вход" id="7lA-pk-06U">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Yye-OE-ikQ"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorCell" destination="TmG-gr-KEK" id="PF3-gD-MmY"/>
                         <outlet property="emailTextField" destination="SZq-aH-qus" id="Js2-6u-vXg"/>
@@ -482,6 +489,9 @@
                             <outlet property="delegate" destination="oFs-5E-1H9" id="dml-ft-odQ"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Восстановление пароля" id="MI4-mw-1Av">
+                        <barButtonItem key="backBarButtonItem" title=" " id="4GT-GC-vwv"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorCell" destination="iVB-8o-cYi" id="haV-yv-MWD"/>
                         <outlet property="createPasswordResetCodeButton" destination="eJ0-6e-auH" id="gqF-bx-IHI"/>

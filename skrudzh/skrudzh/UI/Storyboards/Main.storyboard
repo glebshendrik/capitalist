@@ -161,7 +161,9 @@
                             <outlet property="delegate" destination="QiM-ZW-5Ox" id="rBO-dt-DVA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="J0S-r7-Ihw"/>
+                    <navigationItem key="navigationItem" id="J0S-r7-Ihw">
+                        <barButtonItem key="backBarButtonItem" title=" " id="SWv-gv-ZGk"/>
+                    </navigationItem>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="joinCell" destination="Sm4-PD-tIW" id="umI-o1-s7o"/>
@@ -211,6 +213,7 @@
                         <viewLayoutGuide key="safeArea" id="Pi7-z4-Q1W"/>
                     </view>
                     <navigationItem key="navigationItem" id="Feu-pv-oBa">
+                        <barButtonItem key="backBarButtonItem" title=" " id="kao-ST-0QI"/>
                         <barButtonItem key="leftBarButtonItem" image="menu-button-icon" id="8SK-CX-6Ge">
                             <connections>
                                 <segue destination="Tdq-ff-IYk" kind="presentation" id="BpM-OV-2qa"/>
