@@ -266,11 +266,11 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPK-Gk-Qnj">
                                                     <rect key="frame" x="32" y="6" width="311" height="44"/>
                                                     <subviews>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Код восстановления" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0eO-2F-rHD">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Текущий пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0eO-2F-rHD">
                                                             <rect key="frame" x="20" y="0.0" width="271" height="44"/>
                                                             <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" textContentType="one-time-code"/>
+                                                            <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                         </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.94117647059999998" green="0.95686274510000002" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
