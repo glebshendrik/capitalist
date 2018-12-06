@@ -37,6 +37,9 @@ class ChangePasswordViewController : StaticDataTableViewController, UIMessagePre
             viewModel.changePasswordWith(oldPassword: oldPasswordTextField.text?.trimmed,
                                          newPassword: newPasswordTextField.text?.trimmed,
                                          newPasswordConfirmation: newPasswordConfirmationTextField.text?.trimmed)
+            }.done {
+                self.messagePresenterManager.show(navBarMessage: "Пароль успешно изменен", theme: .success)
+                self.navigationController?.popViewController(animated: true)
             }.catch { error in
                 switch error {
                 case ChangePasswordError.validation(let validationResults):

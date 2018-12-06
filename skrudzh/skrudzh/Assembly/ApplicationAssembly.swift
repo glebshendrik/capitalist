@@ -37,6 +37,7 @@ struct Infrastructure {
         
         // Profile
         case ProfileViewController
+        case ChangePasswordViewController
         
         var identifier: String {
             return self.rawValue
@@ -54,7 +55,8 @@ struct Infrastructure {
                  .MenuViewController,
                  .MenuNavigationController:
                 return .Main
-            case .ProfileViewController:
+            case .ProfileViewController,
+                 .ChangePasswordViewController:
                 return .Profile
             }
         }
@@ -121,6 +123,12 @@ class ApplicationAssembly: Assembly {
         // ResetPasswordViewController
         container.registerForSkrudzhStoryboard(ResetPasswordViewController.self) { (r, c) in
             c.viewModel = r.resolve(ResetPasswordViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
+        
+        // ChangePasswordViewController
+        container.registerForSkrudzhStoryboard(ChangePasswordViewController.self) { (r, c) in
+            c.viewModel = r.resolve(ChangePasswordViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
     }

@@ -231,7 +231,7 @@
         <!--Смена пароля-->
         <scene sceneID="vXi-is-yxn">
             <objects>
-                <tableViewController storyboardIdentifier="ChangePasswordViewController" title="Смена пароля" id="AJD-0T-0XS" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ChangePasswordViewController" title="Смена пароля" id="AJD-0T-0XS" customClass="ChangePasswordViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PiN-KO-t0K" customClass="TPKeyboardAvoidingTableView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -395,6 +395,9 @@
                                                             <real key="value" value="20"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapChangePasswordButton:" destination="AJD-0T-0XS" eventType="touchUpInside" id="iNU-7y-imB"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -430,6 +433,13 @@
                             <outlet property="delegate" destination="AJD-0T-0XS" id="REi-F5-Zgz"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="activityIndicatorCell" destination="P7m-Lm-g10" id="Nvh-0d-u5p"/>
+                        <outlet property="changePasswordButton" destination="iUY-Xx-WOm" id="0Fc-sQ-X2B"/>
+                        <outlet property="newPasswordConfirmationTextField" destination="P1Z-V2-qcm" id="ZXR-ol-n3f"/>
+                        <outlet property="newPasswordTextField" destination="ESB-Q0-UBd" id="n7Y-D7-bH4"/>
+                        <outlet property="oldPasswordTextField" destination="0eO-2F-rHD" id="M7a-za-21W"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fK1-D6-UEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
