@@ -14,6 +14,7 @@ class MainViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        print("Did run before \(className): \(didRunBefore)")
     }
     
     private func setupUI() {

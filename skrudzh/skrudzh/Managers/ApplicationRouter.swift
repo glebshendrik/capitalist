@@ -37,7 +37,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     func start(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
-        if FirstLaunch().isFirstLaunch {
+        if UIFlowManager.isFirstAppLaunch {
             userSessionManager.forgetSession()
         }
         self.launchOptions = launchOptions
@@ -66,7 +66,13 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         firstly {
             accountCoordinator.loadCurrentUser()
         }.done { _ in
-            self.showMainViewController()
+            if UIFlowManager.wasShownOnboarding {
+                self.showMainViewController()
+            }
+            else {
+                self.showOnboardingViewController()
+            }
+            
         }.catch { error in
             if self.errorIsNotFoundOrNotAuthorized(error: error) {
                 self.userSessionManager.forgetSession()
@@ -100,6 +106,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         if let menuLeftNavigationController = viewController(.MenuNavigationController) as? UISideMenuNavigationController {
             SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
         }        
+    }
+    
+    func showOnboardingViewController() {
+        showMainViewController()
     }
         
     func show(_ viewController: Infrastructure.ViewController) -> UIViewController? {

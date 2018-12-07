@@ -303,3 +303,13 @@ extension JSONDecoder {
         return try decode(T.self, from: data)
     }
 }
+
+extension UIViewController {
+    var className: String {
+        return String(describing: type(of: self))
+    }
+    
+    var didRunBefore: Bool {
+        return UIFlowManager.reachedPoint(key: className)
+    }
+}

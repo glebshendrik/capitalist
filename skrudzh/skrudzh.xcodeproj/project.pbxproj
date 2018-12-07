@@ -56,7 +56,7 @@
 		FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F2F21AEB7BD00BE7BC1 /* NotificationItem.swift */; };
 		FAD88F3221AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3121AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift */; };
 		FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3421AEB8BD00BE7BC1 /* ApplicationExtensions.swift */; };
-		FAD88F3721AEB8F200BE7BC1 /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3621AEB8F200BE7BC1 /* FirstLaunch.swift */; };
+		FAD88F3721AEB8F200BE7BC1 /* UIFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3621AEB8F200BE7BC1 /* UIFlowManager.swift */; };
 		FAD88F3921AEBAA600BE7BC1 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3821AEBAA600BE7BC1 /* Session.swift */; };
 		FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3A21AEBABD00BE7BC1 /* ApplicationRouter.swift */; };
 		FAD88F3D21AEBB4200BE7BC1 /* UserSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F3C21AEBB4200BE7BC1 /* UserSessionManager.swift */; };
@@ -144,7 +144,7 @@
 		FAD88F2F21AEB7BD00BE7BC1 /* NotificationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationItem.swift; sourceTree = "<group>"; };
 		FAD88F3121AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepAliveNotificationItem.swift; sourceTree = "<group>"; };
 		FAD88F3421AEB8BD00BE7BC1 /* ApplicationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationExtensions.swift; sourceTree = "<group>"; };
-		FAD88F3621AEB8F200BE7BC1 /* FirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
+		FAD88F3621AEB8F200BE7BC1 /* UIFlowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFlowManager.swift; sourceTree = "<group>"; };
 		FAD88F3821AEBAA600BE7BC1 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		FAD88F3A21AEBABD00BE7BC1 /* ApplicationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationRouter.swift; sourceTree = "<group>"; };
 		FAD88F3C21AEBB4200BE7BC1 /* UserSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManager.swift; sourceTree = "<group>"; };
@@ -398,7 +398,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD88F3421AEB8BD00BE7BC1 /* ApplicationExtensions.swift */,
-				FAD88F3621AEB8F200BE7BC1 /* FirstLaunch.swift */,
+				FAD88F3621AEB8F200BE7BC1 /* UIFlowManager.swift */,
 				FA165CE321B65F2F00EAA16B /* ValidationResult.swift */,
 			);
 			path = Helpers;
@@ -725,7 +725,7 @@
 				FAD88F5921AEC1F800BE7BC1 /* AuthenticationServiceProtocol.swift in Sources */,
 				FAD88F3921AEBAA600BE7BC1 /* Session.swift in Sources */,
 				FAD88F2421AEB71000BE7BC1 /* NotificationsManagerProtocol.swift in Sources */,
-				FAD88F3721AEB8F200BE7BC1 /* FirstLaunch.swift in Sources */,
+				FAD88F3721AEB8F200BE7BC1 /* UIFlowManager.swift in Sources */,
 				FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */,
 				FAD88F7621AFD64000BE7BC1 /* APIResource.swift in Sources */,
 				FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */,
