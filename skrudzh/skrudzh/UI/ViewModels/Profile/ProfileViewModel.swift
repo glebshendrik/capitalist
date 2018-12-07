@@ -14,6 +14,10 @@ class ProfileViewModel {
     
     private var currentUser: User? = nil
     
+    var user: User? {
+        return currentUser
+    }
+    
     var isCurrentUserLoaded: Bool {
         return currentUser != nil
     }

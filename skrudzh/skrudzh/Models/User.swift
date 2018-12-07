@@ -41,11 +41,14 @@ struct User : Decodable {
 struct UserUpdatingForm : Encodable {
     let userId: Int
     let firstname: String?
-    let lastname: String?
     
     enum CodingKeys: String, CodingKey {
         case firstname
-        case lastname
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(firstname, forKey: .firstname)        
     }
 }
 

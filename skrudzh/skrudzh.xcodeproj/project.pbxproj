@@ -34,6 +34,8 @@
 		FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26814921B1833E00FADED1 /* MainViewController.swift */; };
 		FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */; };
 		FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */; };
+		FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */; };
+		FAC3B9BC21BA002E0015A12F /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9BB21BA002E0015A12F /* ProfileEditViewModel.swift */; };
 		FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
 		FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */; };
@@ -118,6 +120,8 @@
 		FA26814921B1833E00FADED1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		FAC3B9BB21BA002E0015A12F /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		FAD88EF621AEA86E00BE7BC1 /* skrudzh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skrudzh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 			children = (
 				FA165CDC21B6530C00EAA16B /* ProfileViewModel.swift */,
 				FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */,
+				FAC3B9BB21BA002E0015A12F /* ProfileEditViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -227,6 +232,7 @@
 			children = (
 				FA165CDF21B6540600EAA16B /* ProfileViewController.swift */,
 				FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */,
+				FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -674,6 +680,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAD88F2C21AEB78A00BE7BC1 /* NotificationsHandlerProtocol.swift in Sources */,
+				FAC3B9BC21BA002E0015A12F /* ProfileEditViewModel.swift in Sources */,
 				FAD88F5F21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift in Sources */,
 				FAD88F1521AEB52C00BE7BC1 /* ServicesAssembly.swift in Sources */,
 				FAD88F5221AEC1A500BE7BC1 /* APIClient.swift in Sources */,
@@ -687,6 +694,7 @@
 				FA165CEC21B7766900EAA16B /* ResetPasswordViewModel.swift in Sources */,
 				FA165CE021B6540600EAA16B /* ProfileViewController.swift in Sources */,
 				FAD88F4121AEBDF900BE7BC1 /* Navigator.swift in Sources */,
+				FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */,
 				FAD88F2621AEB72800BE7BC1 /* NotificationsManager.swift in Sources */,
 				FAD88F2A21AEB77200BE7BC1 /* NotificationAction.swift in Sources */,
 				FAD88F3F21AEBDDB00BE7BC1 /* UIMessagePresenterManager.swift in Sources */,

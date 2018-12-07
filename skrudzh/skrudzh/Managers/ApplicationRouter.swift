@@ -101,11 +101,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
         }        
     }
-    
-    fileprivate func showUserJoinScreen() {
-//        show(.JoinNavigationController)
-    }
-    
+        
     func show(_ viewController: Infrastructure.ViewController) -> UIViewController? {
         window.rootViewController = self.viewController(viewController)
         return window.rootViewController
@@ -119,10 +115,22 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     func setupAppearance() {
         let backArrowImage = UIImage(named: "back-button-icon")
-        let renderedImage = backArrowImage?.withRenderingMode(.alwaysOriginal)        
+        let renderedImage = backArrowImage?.withRenderingMode(.alwaysOriginal)
         UINavigationBar.appearance().backIndicatorImage = renderedImage
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = renderedImage                
-        UINavigationBar.appearance().barTintColor = UIColor(red: 242 / 255.0, green: 245 / 255.0, blue: 254 / 255.0, alpha: 1.0)
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = renderedImage
+        
+        let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
+                          NSAttributedString.Key.foregroundColor : UIColor.init(red: 0.42,
+                                                                                green: 0.58,
+                                                                                blue: 0.98,
+                                                                                alpha: 1)]
+        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: UIControl.State.highlighted)
+        
+        UINavigationBar.appearance().barTintColor = UIColor(red: 242 / 255.0,
+                                                            green: 245 / 255.0,
+                                                            blue: 254 / 255.0,
+                                                            alpha: 1.0)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

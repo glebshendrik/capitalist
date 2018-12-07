@@ -213,7 +213,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Изм." id="RIb-UX-y0w">
                             <color key="tintColor" red="0.42112261056900024" green="0.57786506414413452" blue="0.98554342985153198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="AJD-0T-0XS" kind="show" id="yaB-h2-q0w"/>
+                                <segue destination="RLj-Yk-v2t" kind="presentation" identifier="ShowProfileEditScreen" id="bKc-Xt-wXU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -445,10 +445,10 @@
             </objects>
             <point key="canvasLocation" x="1274" y="451"/>
         </scene>
-        <!--Редактировать-->
+        <!--Редактирование профиля-->
         <scene sceneID="5mt-Ds-hFh">
             <objects>
-                <tableViewController storyboardIdentifier="UpdateProfileViewController" title="Редактировать" id="Hgf-UE-tuK" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ProfileEditViewController" title="Редактирование профиля" id="Hgf-UE-tuK" customClass="ProfileEditViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lsR-5y-XU3" customClass="TPKeyboardAvoidingTableView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -490,7 +490,7 @@
                                                             <rect key="frame" x="20" y="0.0" width="271" height="44"/>
                                                             <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                                            <textInputTraits key="textInputTraits" textContentType="given-name"/>
                                                         </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.94117647059999998" green="0.95686274510000002" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -541,11 +541,24 @@
                             <outlet property="delegate" destination="Hgf-UE-tuK" id="MPT-A7-bEW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Редактировать" id="efJ-yy-COC">
+                    <navigationItem key="navigationItem" title="Редактирование профиля" id="efJ-yy-COC">
                         <barButtonItem key="backBarButtonItem" title=" " id="Iwk-Rd-uLw"/>
-                        <barButtonItem key="leftBarButtonItem" title="Отмена" id="pLu-U6-3h0"/>
-                        <barButtonItem key="rightBarButtonItem" title="Сохр." id="cZz-m4-Ddz"/>
+                        <barButtonItem key="leftBarButtonItem" title="Отмена" id="pLu-U6-3h0">
+                            <connections>
+                                <action selector="didTapCancelButton:" destination="Hgf-UE-tuK" id="feJ-v1-yHY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Сохр." id="cZz-m4-Ddz">
+                            <connections>
+                                <action selector="didTapSaveButton:" destination="Hgf-UE-tuK" id="PeQ-rV-M0k"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicatorCell" destination="MNd-w6-AY6" id="jvm-aL-0CK"/>
+                        <outlet property="firstnameTextField" destination="V3I-O6-ah2" id="IVB-8L-lsn"/>
+                        <outlet property="saveButton" destination="cZz-m4-Ddz" id="haP-C6-XNM"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfY-jU-ana" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -574,7 +587,4 @@
         <image name="little-right-arrow-icon" width="4" height="7"/>
         <image name="reset-password-image" width="96" height="112"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="yaB-h2-q0w"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -131,6 +131,12 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(ChangePasswordViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
+        
+        // ProfileEditViewController
+        container.registerForSkrudzhStoryboard(ProfileEditViewController.self) { (r, c) in
+            c.viewModel = r.resolve(ProfileEditViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -167,6 +173,11 @@ class ApplicationAssembly: Assembly {
         // ChangePasswordViewModel
         container.register(ChangePasswordViewModel.self) { r in
             return ChangePasswordViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
+        }
+        
+        // ProfileEditViewModel
+        container.register(ProfileEditViewModel.self) { r in
+            return ProfileEditViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
         }
     }
     

@@ -13,10 +13,6 @@ import SwiftMessages
 
 class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
     
-    private let notificationPresentingDuration = 3.0
-    private let navBarPresentingDuration = 3.0
-    private let validationPresentingDuration = 1.5
-    
     func showHUD() {
         SVProgressHUD.show()
     }
@@ -31,10 +27,16 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
     }
     
     func show(navBarMessage: String, theme: Theme) {
+        show(navBarMessage: navBarMessage,
+             theme: theme,
+             duration: .short)
+    }
+    
+    func show(navBarMessage: String, theme: Theme, duration: Duration) {
         show(message: navBarMessage,
              theme: theme,
              presentationStyle: .top,
-             duration: navBarPresentingDuration,
+             duration: duration.rawValue,
              interactive: true)
     }
     
@@ -42,19 +44,17 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
         show(message: validationMessage,
              theme: .error,
              presentationStyle: .bottom,
-             duration: validationPresentingDuration)
+             duration: Duration.short.rawValue)
     }
     
     func show(notificationMessage: String, actionOnTap: @escaping () -> ()) {
         show(message: notificationMessage,
              theme: .info,
              presentationStyle: .top,
-             duration: notificationPresentingDuration,
+             duration: Duration.normal.rawValue,
              interactive: true,
              actionOnTap: actionOnTap)
     }
-    
-    
     
     private func show(message: String,
                       theme: Theme,

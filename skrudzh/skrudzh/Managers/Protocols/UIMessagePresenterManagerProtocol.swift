@@ -14,6 +14,12 @@ enum MessageDialogActionCategory {
     case normal, destructive, dismissal
 }
 
+enum Duration : TimeInterval {
+    case short = 1
+    case normal = 3.0
+    case long = 5.0
+}
+
 struct MessageDialogAction {
     let title: String
     let category: MessageDialogActionCategory
@@ -28,6 +34,7 @@ protocol UIMessagePresenterManagerProtocol {
     func showHUD(with message: String)
     func dismissHUD()
     func show(navBarMessage: String, theme: Theme)
+    func show(navBarMessage: String, theme: Theme, duration: Duration)
     func show(validationMessage: String)
     func show(notificationMessage: String, actionOnTap: @escaping () -> ())
     func showAlert(

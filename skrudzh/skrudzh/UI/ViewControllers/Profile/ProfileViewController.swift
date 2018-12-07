@@ -10,7 +10,12 @@ import UIKit
 import PromiseKit
 import StaticDataTableViewController
 
-class ProfileViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol {
+protocol ProfileViewOutputProtocol {
+    var user: User? { get }
+}
+
+class ProfileViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol {
+    
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: ProfileViewModel!
     
@@ -18,6 +23,9 @@ class ProfileViewController : StaticDataTableViewController, UIMessagePresenterM
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
     
+    var user: User? {
+        return viewModel.user
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +52,13 @@ class ProfileViewController : StaticDataTableViewController, UIMessagePresenterM
         }
     }
     
-    
-    func updateUI(animated: Bool = false) {
-        firstnameLabel.text = viewModel.currentUserFirstname
-        emailLabel.text = viewModel.currentUserEmail
-        // Reloads data in the table view
-        reloadData(animated: animated)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == "ShowProfileEditScreen",
+            let destinationNavigationController = segue.destination as? UINavigationController,
+            let destination = destinationNavigationController.topViewController as? ProfileEditViewController {
+            
+                destination.set(user: viewModel.user)
+        }
     }
     
     // Re fetch data from the server
@@ -60,13 +69,20 @@ class ProfileViewController : StaticDataTableViewController, UIMessagePresenterM
         firstly {
             viewModel.loadData()
         }.catch { _ in
-            
+            self.messagePresenterManager.show(navBarMessage: "Возникла проблема при загрузке данных профиля", theme: .error)
             
         }.finally {            
             self.updateUI(animated: true)
             self.hideActivityIndicator()
             self.logoutButton.isEnabled = true
         }
+    }
+    
+    private func updateUI(animated: Bool = false) {
+        firstnameLabel.text = viewModel.currentUserFirstname
+        emailLabel.text = viewModel.currentUserEmail
+        // Reloads data in the table view
+        reloadData(animated: animated)
     }
     
     private func showActivityIndicator(animated: Bool = true) {

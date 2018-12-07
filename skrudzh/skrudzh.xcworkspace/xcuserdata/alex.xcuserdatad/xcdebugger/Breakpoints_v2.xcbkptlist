@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Managers/ApplicationRouter.swift"
-            timestampString = "565796166.419458"
+            timestampString = "565841848.078265"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Managers/ApplicationRouter.swift"
-            timestampString = "565796166.422407"
+            timestampString = "565841848.078974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "69"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Managers/ApplicationRouter.swift"
-            timestampString = "565796166.422604"
+            timestampString = "565841848.079165"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MenuViewController.swift"
-            timestampString = "565683709.476913"
+            timestampString = "565841848.079332"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Managers/ApplicationRouter.swift"
-            timestampString = "565796166.422861"
+            timestampString = "565841848.079652"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Managers/ApplicationRouter.swift"
-            timestampString = "565796166.423034"
+            timestampString = "565841848.079824"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Join/RegistrationViewController.swift"
-            timestampString = "565796166.423224"
+            timestampString = "565841848.079975"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -174,7 +174,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "72"
-            endingLineNumber = "72">
+            endingLineNumber = "72"
+            landmarkName = "RegistrationViewModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -188,7 +190,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "72"
-            endingLineNumber = "72">
+            endingLineNumber = "72"
+            landmarkName = "RegistrationViewModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -202,7 +206,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "72"
-            endingLineNumber = "72">
+            endingLineNumber = "72"
+            landmarkName = "RegistrationViewModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -212,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Join/RegistrationViewController.swift"
-            timestampString = "565796166.4233921"
+            timestampString = "565841848.080195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
@@ -228,7 +234,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Join/RegistrationViewController.swift"
-            timestampString = "565796166.423499"
+            timestampString = "565841848.080373"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
