@@ -36,6 +36,8 @@
 		FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */; };
 		FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */; };
 		FAC3B9BC21BA002E0015A12F /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9BB21BA002E0015A12F /* ProfileEditViewModel.swift */; };
+		FAC3B9BE21BE0D1F0015A12F /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAC3B9BD21BE0D1F0015A12F /* Onboarding.storyboard */; };
+		FAC3B9C121BE15EC0015A12F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9C021BE15EC0015A12F /* OnboardingViewController.swift */; };
 		FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
 		FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */; };
@@ -122,6 +124,8 @@
 		FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		FAC3B9BB21BA002E0015A12F /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
+		FAC3B9BD21BE0D1F0015A12F /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		FAC3B9C021BE15EC0015A12F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		FAD88EF621AEA86E00BE7BC1 /* skrudzh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skrudzh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -261,6 +265,14 @@
 				FA26813D21B178D200FADED1 /* Rubik-BoldItalic.ttf */,
 			);
 			path = Rubik;
+			sourceTree = "<group>";
+		};
+		FAC3B9BF21BE15CE0015A12F /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				FAC3B9C021BE15EC0015A12F /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		FAD88EED21AEA86E00BE7BC1 = {
@@ -457,6 +469,7 @@
 		FAD88F7D21B027C600BE7BC1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FAC3B9BF21BE15CE0015A12F /* Onboarding */,
 				FA165CDE21B653F300EAA16B /* Profile */,
 				FAD88F8621B117CF00BE7BC1 /* Join */,
 				FAD88F8521B117BC00BE7BC1 /* Main */,
@@ -471,6 +484,7 @@
 				FAD88F7F21B02A5000BE7BC1 /* Main.storyboard */,
 				FAD88F8121B0F95A00BE7BC1 /* Join.storyboard */,
 				FA165CD921B652BE00EAA16B /* Profile.storyboard */,
+				FAC3B9BD21BE0D1F0015A12F /* Onboarding.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -590,6 +604,7 @@
 				FA26814521B178D300FADED1 /* OFL.txt in Resources */,
 				FA26814021B178D300FADED1 /* Rubik-Light.ttf in Resources */,
 				FA26814321B178D300FADED1 /* Rubik-Italic.ttf in Resources */,
+				FAC3B9BE21BE0D1F0015A12F /* Onboarding.storyboard in Resources */,
 				FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */,
 				FA26814821B178D300FADED1 /* Rubik-BoldItalic.ttf in Resources */,
 				FA26814621B178D300FADED1 /* Rubik-BlackItalic.ttf in Resources */,
@@ -738,6 +753,7 @@
 				FAD88F5B21AEC1F800BE7BC1 /* DevicesServiceProtocol.swift in Sources */,
 				FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */,
 				FAD88F5021AEC1A500BE7BC1 /* DevicesService.swift in Sources */,
+				FAC3B9C121BE15EC0015A12F /* OnboardingViewController.swift in Sources */,
 				FAD88F8421B0FB7800BE7BC1 /* LandingViewController.swift in Sources */,
 				FAD88F4D21AEC1A500BE7BC1 /* AuthenticationService.swift in Sources */,
 				FA165CEE21B7846C00EAA16B /* ResetPasswordViewController.swift in Sources */,

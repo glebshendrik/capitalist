@@ -12,12 +12,12 @@ import SwinjectStoryboard
 struct Infrastructure {
 
     enum Storyboard : String {
-        case Join, Main, Profile
+        case Join, Main, Profile, Onboarding
         
         var name: String { return self.rawValue }
         
         static func all() -> [Storyboard] {
-            return [.Main, .Join, .Profile]
+            return [.Main, .Join, .Profile, .Onboarding]
         }
     }
 
@@ -39,6 +39,17 @@ struct Infrastructure {
         case ProfileViewController
         case ChangePasswordViewController
         
+        // Onboarding
+        case OnboardingViewController
+        case OnboardingPage1ViewController
+        case OnboardingPage2ViewController
+        case OnboardingPage3ViewController
+        case OnboardingPage4ViewController
+        case OnboardingPage5ViewController
+        case OnboardingPage6ViewController
+        case OnboardingPage7ViewController
+        case OnboardingPage8ViewController
+        
         var identifier: String {
             return self.rawValue
         }
@@ -58,6 +69,16 @@ struct Infrastructure {
             case .ProfileViewController,
                  .ChangePasswordViewController:
                 return .Profile
+            case .OnboardingViewController,
+                 .OnboardingPage1ViewController,
+                 .OnboardingPage2ViewController,
+                 .OnboardingPage3ViewController,
+                 .OnboardingPage4ViewController,
+                 .OnboardingPage5ViewController,
+                 .OnboardingPage6ViewController,
+                 .OnboardingPage7ViewController,
+                 .OnboardingPage8ViewController:
+                return .Onboarding
             }
         }
     }
@@ -136,6 +157,11 @@ class ApplicationAssembly: Assembly {
         container.registerForSkrudzhStoryboard(ProfileEditViewController.self) { (r, c) in
             c.viewModel = r.resolve(ProfileEditViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
+        
+        // OnboardingViewController
+        container.registerForSkrudzhStoryboard(OnboardingViewController.self) { (r, c) in
+            c.router = r.resolve(ApplicationRouterProtocol.self)
         }
     }
     
