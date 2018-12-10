@@ -102,11 +102,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     func showMainViewController() {
-        showOnboardingViewController()
-//        _ = show(.MainViewController)
-//        if let menuLeftNavigationController = viewController(.MenuNavigationController) as? UISideMenuNavigationController {
-//            SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
-//        }        
+        _ = show(.MainViewController)
+        if let menuLeftNavigationController = viewController(.MenuNavigationController) as? UISideMenuNavigationController {
+            SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
+        }        
     }
     
     func showOnboardingViewController() {
