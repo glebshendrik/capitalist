@@ -20,7 +20,7 @@ class Service {
         return apiClient.request(resource)
     }
     
-    func request<T>(_ resource: APIResource) -> Promise<[T]> where T: Decodable {
+    func requestCollection<T>(_ resource: APIResource) -> Promise<[T]> where T: Decodable {
         return apiClient.requestCollection(resource)
     }
     

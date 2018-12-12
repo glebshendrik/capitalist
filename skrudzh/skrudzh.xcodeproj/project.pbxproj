@@ -40,6 +40,8 @@
 		FAC3B9C121BE15EC0015A12F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9C021BE15EC0015A12F /* OnboardingViewController.swift */; };
 		FAC3B9C321BE74CE0015A12F /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9C221BE74CE0015A12F /* OnboardingPageViewController.swift */; };
 		FAC3B9C521C0EB7A0015A12F /* IncomeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9C421C0EB790015A12F /* IncomeSource.swift */; };
+		FAC3B9C721C0F2B00015A12F /* IncomeSourcesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9C621C0F2AF0015A12F /* IncomeSourcesServiceProtocol.swift */; };
+		FAC3B9C921C0F4610015A12F /* IncomeSourcesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9C821C0F4610015A12F /* IncomeSourcesService.swift */; };
 		FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
 		FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */; };
@@ -130,6 +132,8 @@
 		FAC3B9C021BE15EC0015A12F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		FAC3B9C221BE74CE0015A12F /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		FAC3B9C421C0EB790015A12F /* IncomeSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSource.swift; sourceTree = "<group>"; };
+		FAC3B9C621C0F2AF0015A12F /* IncomeSourcesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourcesServiceProtocol.swift; sourceTree = "<group>"; };
+		FAC3B9C821C0F4610015A12F /* IncomeSourcesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourcesService.swift; sourceTree = "<group>"; };
 		FAD88EF621AEA86E00BE7BC1 /* skrudzh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skrudzh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -372,6 +376,7 @@
 				FAD88F4A21AEC1A400BE7BC1 /* DevicesService.swift */,
 				FAD88F4821AEC1A400BE7BC1 /* Service.swift */,
 				FAD88F4921AEC1A400BE7BC1 /* UsersService.swift */,
+				FAC3B9C821C0F4610015A12F /* IncomeSourcesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -438,6 +443,7 @@
 				FAD88F5521AEC1F700BE7BC1 /* AuthenticationServiceProtocol.swift */,
 				FAD88F5721AEC1F700BE7BC1 /* DevicesServiceProtocol.swift */,
 				FAD88F5621AEC1F700BE7BC1 /* UsersServiceProtocol.swift */,
+				FAC3B9C621C0F2AF0015A12F /* IncomeSourcesServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -713,6 +719,7 @@
 				FAD88F8C21B1228F00BE7BC1 /* MenuViewModel.swift in Sources */,
 				FAD88F2821AEB75800BE7BC1 /* NotificationCategory.swift in Sources */,
 				FA165CEC21B7766900EAA16B /* ResetPasswordViewModel.swift in Sources */,
+				FAC3B9C921C0F4610015A12F /* IncomeSourcesService.swift in Sources */,
 				FA165CE021B6540600EAA16B /* ProfileViewController.swift in Sources */,
 				FAD88F4121AEBDF900BE7BC1 /* Navigator.swift in Sources */,
 				FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */,
@@ -753,6 +760,7 @@
 				FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */,
 				FA165CE621B6669500EAA16B /* LoginViewController.swift in Sources */,
 				FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */,
+				FAC3B9C721C0F2B00015A12F /* IncomeSourcesServiceProtocol.swift in Sources */,
 				FAC3B9C321BE74CE0015A12F /* OnboardingPageViewController.swift in Sources */,
 				FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */,
 				FAD88F1321AEB48800BE7BC1 /* ApplicationRouterProtocol.swift in Sources */,
