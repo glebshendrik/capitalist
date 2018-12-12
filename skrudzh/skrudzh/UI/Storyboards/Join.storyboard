@@ -63,7 +63,7 @@
         <!--Авторизация-->
         <scene sceneID="knS-bS-72Z">
             <objects>
-                <viewController storyboardIdentifier="JoinViewController" title="Авторизация" id="74v-0d-Diq" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JoinViewController" title="Авторизация" id="74v-0d-Diq" customClass="JoinViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dda-j8-9X0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

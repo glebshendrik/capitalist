@@ -9,8 +9,10 @@
 import UIKit
 import SideMenu
 
-class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
-
+class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
+    
+    var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
+    
     var viewModel: MainViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
@@ -20,13 +22,17 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         print("Did run before \(className): \(didRunBefore)")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
+    }
+    
     private func setupUI() {
         setupNavigationBar()
         setupMainMenu()
     }
     
     private func setupNavigationBar() {
-        // 48 53 79
         let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
                           NSAttributedString.Key.foregroundColor : UIColor.init(red: 48 / 255.0,
                                                                                 green: 53 / 255.0,
@@ -35,6 +41,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        // 64 69 97
     }
     
     private func setupMainMenu() {        

@@ -105,7 +105,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         _ = show(.MainViewController)
         if let menuLeftNavigationController = viewController(.MenuNavigationController) as? UISideMenuNavigationController {
             SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
-        }        
+        }
     }
     
     func showOnboardingViewController() {
@@ -137,10 +137,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: UIControl.State.highlighted)
         
-        UINavigationBar.appearance().barTintColor = UIColor(red: 242 / 255.0,
-                                                            green: 245 / 255.0,
-                                                            blue: 254 / 255.0,
-                                                            alpha: 1.0)
+        UINavigationBar.appearance().barTintColor = UIColor.navBarColor
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

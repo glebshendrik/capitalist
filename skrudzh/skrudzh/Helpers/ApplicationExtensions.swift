@@ -313,3 +313,76 @@ extension UIViewController {
         return UIFlowManager.reachedPoint(key: className)
     }
 }
+
+extension UIColor {
+    static var mainNavBarColor: UIColor {
+        return UIColor(red: 64 / 255.0,
+                       green: 69 / 255.0,
+                       blue: 97 / 255.0,
+                       alpha: 1.0)
+    }
+    
+    static var navBarColor: UIColor {
+        return UIColor(red: 242 / 255.0,
+                       green: 245 / 255.0,
+                       blue: 254 / 255.0,
+                       alpha: 1.0)
+    }
+}
+
+/// Navigation bar colors for `ColorableNavigationController`, called on `push` & `pop` actions
+public protocol NavigationBarColorable: class {
+    var navigationTintColor: UIColor? { get }
+    var navigationBarTintColor: UIColor? { get }
+}
+
+public extension NavigationBarColorable {
+    var navigationTintColor: UIColor? { return nil }
+}
+
+/**
+ UINavigationController with different colors support of UINavigationBar.
+ To use it please adopt needed child view controllers to protocol `NavigationBarColorable`.
+ - note: Don't forget to set initial tint and barTint colors
+ */
+open class ColorableNavigationController: UINavigationController {
+    private var previousViewController: UIViewController? {
+        guard viewControllers.count > 1 else {
+            return nil
+        }
+        return viewControllers[viewControllers.count - 2]
+    }
+    
+    override open func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        if let colors = viewController as? NavigationBarColorable {
+            self.setNavigationBarColors(colors)
+        }
+        
+        super.pushViewController(viewController, animated: animated)
+    }
+    
+    override open func popViewController(animated: Bool) -> UIViewController? {
+        if let colors = self.previousViewController as? NavigationBarColorable {
+            self.setNavigationBarColors(colors)
+        }
+        
+        // Let's start pop action or we can't get transitionCoordinator()
+        let popViewController = super.popViewController(animated: animated)
+        
+        // Secure situation if user cancelled transition
+        transitionCoordinator?.animate(alongsideTransition: nil, completion: { [weak self] (context) in
+            guard let colors = self?.topViewController as? NavigationBarColorable else { return }
+            self?.setNavigationBarColors(colors)
+        })
+        
+        return popViewController
+    }
+    
+    private func setNavigationBarColors(_ colors: NavigationBarColorable) {
+        if let tintColor = colors.navigationTintColor {
+            self.navigationBar.tintColor = tintColor
+        }
+        
+        self.navigationBar.barTintColor = colors.navigationBarTintColor
+    }
+}

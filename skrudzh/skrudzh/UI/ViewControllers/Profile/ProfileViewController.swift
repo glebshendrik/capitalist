@@ -14,8 +14,10 @@ protocol ProfileViewOutputProtocol {
     var user: User? { get }
 }
 
-class ProfileViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol {
+class ProfileViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol, NavigationBarColorable {
     
+    var navigationBarTintColor: UIColor? = UIColor.navBarColor
+
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: ProfileViewModel!
     

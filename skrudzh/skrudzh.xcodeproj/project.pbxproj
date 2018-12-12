@@ -45,6 +45,7 @@
 		FAC3B9CB21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CA21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift */; };
 		FAC3B9CD21C0F7670015A12F /* IncomeSourcesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */; };
 		FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CE21C11F850015A12F /* MainViewModel.swift */; };
+		FAC3B9D121C131390015A12F /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9D021C131390015A12F /* JoinViewController.swift */; };
 		FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
 		FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */; };
@@ -140,6 +141,7 @@
 		FAC3B9CA21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourcesCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourcesCoordinator.swift; sourceTree = "<group>"; };
 		FAC3B9CE21C11F850015A12F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		FAC3B9D021C131390015A12F /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		FAD88EF621AEA86E00BE7BC1 /* skrudzh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skrudzh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD88F8321B0FB7800BE7BC1 /* LandingViewController.swift */,
+				FAC3B9D021C131390015A12F /* JoinViewController.swift */,
 				FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */,
 				FA165CE521B6669500EAA16B /* LoginViewController.swift */,
 				FA165CE921B769B500EAA16B /* ForgotPasswordViewController.swift */,
@@ -773,6 +776,7 @@
 				FA165CE621B6669500EAA16B /* LoginViewController.swift in Sources */,
 				FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */,
 				FAC3B9C721C0F2B00015A12F /* IncomeSourcesServiceProtocol.swift in Sources */,
+				FAC3B9D121C131390015A12F /* JoinViewController.swift in Sources */,
 				FAC3B9C321BE74CE0015A12F /* OnboardingPageViewController.swift in Sources */,
 				FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */,
 				FAD88F1321AEB48800BE7BC1 /* ApplicationRouterProtocol.swift in Sources */,

@@ -193,28 +193,32 @@
         <!--Main View Controller-->
         <scene sceneID="lXX-sC-DZf">
             <objects>
-                <viewController id="527-2C-xUs" customClass="MainViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="527-2C-xUs" customClass="MainViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D5A-mu-huD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Главный экран" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzD-Xy-AtD">
-                                <rect key="frame" x="94.5" y="285" width="186" height="33"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2n-9h-iVJ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                                <color key="backgroundColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="4sF-cF-PzE"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="wzD-Xy-AtD" firstAttribute="centerX" secondItem="D5A-mu-huD" secondAttribute="centerX" id="VcO-YR-DgS"/>
-                            <constraint firstItem="wzD-Xy-AtD" firstAttribute="centerY" secondItem="D5A-mu-huD" secondAttribute="centerY" id="WD8-SG-6os"/>
+                            <constraint firstAttribute="trailing" secondItem="p2n-9h-iVJ" secondAttribute="trailing" id="OXz-fO-aKU"/>
+                            <constraint firstItem="p2n-9h-iVJ" firstAttribute="leading" secondItem="D5A-mu-huD" secondAttribute="leading" id="gws-Er-tUt"/>
+                            <constraint firstItem="p2n-9h-iVJ" firstAttribute="top" secondItem="D5A-mu-huD" secondAttribute="top" id="ptB-r9-EBU"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Pi7-z4-Q1W"/>
+                        <viewLayoutGuide key="safeArea" id="uZP-da-pZ0"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="Feu-pv-oBa">
                         <barButtonItem key="backBarButtonItem" title=" " id="kao-ST-0QI"/>
                         <barButtonItem key="leftBarButtonItem" image="menu-button-icon" id="8SK-CX-6Ge">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="Tdq-ff-IYk" kind="presentation" id="BpM-OV-2qa"/>
                             </connections>
@@ -225,10 +229,10 @@
             </objects>
             <point key="canvasLocation" x="-2724" y="173"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Colorable Navigation Controller-->
         <scene sceneID="YX2-C6-VaL">
             <objects>
-                <navigationController storyboardIdentifier="MainViewController" id="Kfi-BE-rMg" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainViewController" id="Kfi-BE-rMg" customClass="ColorableNavigationController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="jLH-eK-5ml">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
