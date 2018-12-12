@@ -44,6 +44,7 @@
 		FAC3B9C921C0F4610015A12F /* IncomeSourcesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9C821C0F4610015A12F /* IncomeSourcesService.swift */; };
 		FAC3B9CB21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CA21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift */; };
 		FAC3B9CD21C0F7670015A12F /* IncomeSourcesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */; };
+		FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CE21C11F850015A12F /* MainViewModel.swift */; };
 		FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
 		FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */; };
@@ -138,6 +139,7 @@
 		FAC3B9C821C0F4610015A12F /* IncomeSourcesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourcesService.swift; sourceTree = "<group>"; };
 		FAC3B9CA21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourcesCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourcesCoordinator.swift; sourceTree = "<group>"; };
+		FAC3B9CE21C11F850015A12F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		FAD88EF621AEA86E00BE7BC1 /* skrudzh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skrudzh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD88F8A21B1227600BE7BC1 /* Menu */,
+				FAC3B9CE21C11F850015A12F /* MainViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
 				FAC3B9C521C0EB7A0015A12F /* IncomeSource.swift in Sources */,
 				FAD88F4421AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift in Sources */,
+				FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */,
 				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
 				FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */,
 				FA165CE821B7654100EAA16B /* ForgotPasswordViewModel.swift in Sources */,

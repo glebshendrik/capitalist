@@ -117,6 +117,12 @@ class ApplicationAssembly: Assembly {
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         
+        // MainViewController
+        container.registerForSkrudzhStoryboard(MainViewController.self) { (r, c) in
+            c.viewModel = r.resolve(MainViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
+        
         // RegistrationViewController
         container.registerForSkrudzhStoryboard(RegistrationViewController.self) { (r, c) in
             c.viewModel = r.resolve(RegistrationViewModel.self)
@@ -204,6 +210,11 @@ class ApplicationAssembly: Assembly {
         // ProfileEditViewModel
         container.register(ProfileEditViewModel.self) { r in
             return ProfileEditViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
+        }
+        
+        // MainViewModel
+        container.register(MainViewModel.self) { r in
+            return MainViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!)
         }
     }
     

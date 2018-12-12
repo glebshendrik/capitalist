@@ -9,7 +9,10 @@
 import UIKit
 import SideMenu
 
-class MainViewController : UIViewController {
+class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
+
+    var viewModel: MainViewModel!
+    var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
