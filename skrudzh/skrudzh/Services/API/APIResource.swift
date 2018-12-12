@@ -32,6 +32,13 @@ enum APIResource: URLRequestConvertible {
     case createSession(form: SessionCreationForm)
     case destroySession(session: Session)
     
+    // IncomeSources
+    case createIncomeSource(form: IncomeSourceCreationForm)
+    case showIncomeSource(id: Int)
+    case indexIncomeSources(userId: Int)
+    case updateIncomeSource(form: IncomeSourceUpdatingForm)
+    case destroyIncomeSource(id: Int)
+    
     var method: HTTPMethod {
         return APIResourceMethod.method(for: self)
     }

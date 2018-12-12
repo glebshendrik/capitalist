@@ -27,22 +27,16 @@ struct APIResourceRequest {
     
     private static func payload(for resource: APIResource) -> [String : Any?]? {
         switch resource {
-        case .createUser(let form):
-            return encode(form)
-        case .updateUser(let form):
-            return encode(form)
-        case .changePassword(let form):
-            return encode(form)
-        case .resetPassword(let form):
-            return encode(form)
-        case .createPasswordResetCode(let form):
-            return encode(form)
-        case .createSession(let form):
-            return encode(form)
-        case .registerDeviceToken(let deviceToken, _):
-            return [ "device_token" : deviceToken ]
-        default:
-            return nil
+        case .createUser(let form):                         return encode(form)
+        case .updateUser(let form):                         return encode(form)
+        case .changePassword(let form):                     return encode(form)
+        case .resetPassword(let form):                      return encode(form)
+        case .createPasswordResetCode(let form):            return encode(form)
+        case .createSession(let form):                      return encode(form)
+        case .registerDeviceToken(let deviceToken, _):      return [ "device_token" : deviceToken ]
+        case .createIncomeSource(let form):                 return encode(form)
+        case .updateIncomeSource(let form):                 return encode(form)
+        default:                                            return nil
         }
     }
     

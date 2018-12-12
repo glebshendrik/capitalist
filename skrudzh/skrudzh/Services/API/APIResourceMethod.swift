@@ -14,16 +14,21 @@ struct APIResourceMethod {
         switch resource {
         case .createUser,
              .createSession,
-             .createPasswordResetCode:
+             .createPasswordResetCode,
+             .createIncomeSource:
             return .post
-        case .showUser:
+        case .showUser,
+             .showIncomeSource,
+             .indexIncomeSources:
             return .get
         case .updateUser,
              .changePassword,
              .resetPassword,
-             .registerDeviceToken:
+             .registerDeviceToken,
+             .updateIncomeSource:
             return .put
-        case .destroySession:
+        case .destroySession,
+             .destroyIncomeSource:
             return .delete
         }
     }

@@ -17,9 +17,14 @@ struct APIResourcePath {
         case .changePassword(let form):                     return "/users/\(form.userId)/password"
         case .resetPassword:                                return "/users/new_password"
         case .createPasswordResetCode:                      return "/password_reset_codes"
+        case .registerDeviceToken(_, let userId):           return "/users/\(userId)/device_token"
         case .createSession:                                return "/sessions"
         case .destroySession(let session):                  return "/sessions/\(session.token)"
-        case .registerDeviceToken(_, let userId):           return "/users/\(userId)/device_token"
+        case .createIncomeSource(let form):                 return "/users/\(form.userId)/income_sources"
+        case .showIncomeSource(let id):                     return "/income_sources/\(id)"
+        case .indexIncomeSources(let userId):               return "/users/\(userId)/income_sources"
+        case .updateIncomeSource(let form):                 return "/income_sources/\(form.id)"
+        case .destroyIncomeSource(let id):                  return "/income_sources/\(id)"        
         }
     }
 }
