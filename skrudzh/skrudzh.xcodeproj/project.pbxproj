@@ -39,6 +39,7 @@
 		FAC3B9BE21BE0D1F0015A12F /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAC3B9BD21BE0D1F0015A12F /* Onboarding.storyboard */; };
 		FAC3B9C121BE15EC0015A12F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9C021BE15EC0015A12F /* OnboardingViewController.swift */; };
 		FAC3B9C321BE74CE0015A12F /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9C221BE74CE0015A12F /* OnboardingPageViewController.swift */; };
+		FAC3B9C521C0EB7A0015A12F /* IncomeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9C421C0EB790015A12F /* IncomeSource.swift */; };
 		FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
 		FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */; };
@@ -128,6 +129,7 @@
 		FAC3B9BD21BE0D1F0015A12F /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		FAC3B9C021BE15EC0015A12F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		FAC3B9C221BE74CE0015A12F /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		FAC3B9C421C0EB790015A12F /* IncomeSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSource.swift; sourceTree = "<group>"; };
 		FAD88EF621AEA86E00BE7BC1 /* skrudzh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skrudzh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 			children = (
 				FAD88F3821AEBAA600BE7BC1 /* Session.swift */,
 				FAD88F5C21AEC28300BE7BC1 /* User.swift */,
+				FAC3B9C421C0EB790015A12F /* IncomeSource.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 				FAD88F7821AFD64000BE7BC1 /* APIResourcePath.swift in Sources */,
 				FAD88F7721AFD64000BE7BC1 /* APIResourceMethod.swift in Sources */,
 				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
+				FAC3B9C521C0EB7A0015A12F /* IncomeSource.swift in Sources */,
 				FAD88F4421AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift in Sources */,
 				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
 				FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */,
