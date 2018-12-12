@@ -31,5 +31,9 @@ class ServicesAssembly: Assembly {
                 apiClient: r.resolve(APIClientProtocol.self)!)
         }
         
+        container.register(IncomeSourcesServiceProtocol.self) { r in
+            return IncomeSourcesService(
+                apiClient: r.resolve(APIClientProtocol.self)!)
+        }
     }
 }

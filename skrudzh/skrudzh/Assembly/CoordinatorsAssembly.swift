@@ -24,6 +24,11 @@ class CoordinatorsAssembly: Assembly {
                                             devicesService: r.resolve(DevicesServiceProtocol.self)!,
                                             notificationsManager: r.resolve(NotificationsManagerProtocol.self)!,
                                             navigator: r.resolve(NavigatorProtocol.self)!)
-        }        
+        }
+        
+        container.register(IncomeSourcesCoordinatorProtocol.self) { r in
+            return IncomeSourcesCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
+                                            incomeSourcesService: r.resolve(IncomeSourcesServiceProtocol.self)!)
+        }
     }
 }
