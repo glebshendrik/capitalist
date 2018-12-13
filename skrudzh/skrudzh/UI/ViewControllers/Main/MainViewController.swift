@@ -35,12 +35,12 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBAction func didTapAddIncomeSourceButton(_ sender: Any) {
     }
     
-    private func loadData() {
+    private func loadData(scrollToEndWhenUpdated: Bool = false) {
         messagePresenterManager.showHUD(with: "Загрузка данных")
         firstly {
             viewModel.loadIncomeSources()
         }.done {
-            self.updateUI()
+            self.updateUI(scrollToEnd: scrollToEndWhenUpdated)
         }
         .catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
@@ -49,14 +49,36 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         }        
     }
     
-    private func updateUI() {
+    private func updateUI(scrollToEnd: Bool = false) {
         incomeSourcesCollectionView.performBatchUpdates({
             let indexSet = IndexSet(integersIn: 0...0)
             self.incomeSourcesCollectionView.reloadSections(indexSet)
-        }, completion: nil)
+        }, completion: { _ in
+            if scrollToEnd && self.viewModel.numberOfIncomeSources > 0 {
+                self.incomeSourcesCollectionView.scrollToItem(at: IndexPath(item: self.viewModel.numberOfIncomeSources - 1,
+                                                                            section: 0),
+                                                              at: .right,
+                                                              animated: true)
+            }
+            
+        })
     }
 }
 
+extension MainViewController : IncomeSourceEditViewControllerDelegate {
+    func didCreate() {
+        loadData(scrollToEndWhenUpdated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == "ShowIncomeSourceCreationScreen",
+            let destinationNavigationController = segue.destination as? UINavigationController,
+            let destination = destinationNavigationController.topViewController as? IncomeSourceEditInputProtocol {
+            
+            destination.set(delegate: self)
+        }
+    }
+}
 
 extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {

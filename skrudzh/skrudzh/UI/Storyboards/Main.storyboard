@@ -217,7 +217,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="didTapAddIncomeSourceButton:" destination="527-2C-xUs" eventType="touchUpInside" id="ClL-z8-wJH"/>
-                                            <segue destination="3XU-fL-51n" kind="presentation" id="Afj-mm-zuU"/>
+                                            <segue destination="3XU-fL-51n" kind="presentation" identifier="ShowIncomeSourceCreationScreen" id="Afj-mm-zuU"/>
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bh4-RC-uKP">
@@ -345,7 +345,7 @@
                                                     <rect key="frame" x="32" y="0.0" width="311" height="72"/>
                                                     <color key="textColor" red="0.52156862745098043" green="0.5725490196078431" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>

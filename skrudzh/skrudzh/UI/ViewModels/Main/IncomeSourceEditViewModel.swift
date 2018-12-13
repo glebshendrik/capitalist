@@ -31,7 +31,7 @@ class IncomeSourceEditViewModel {
     }
     
     var isNew: Bool {
-        return incomeSource != nil
+        return incomeSource == nil
     }
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,

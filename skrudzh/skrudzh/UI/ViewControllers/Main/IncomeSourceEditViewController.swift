@@ -16,6 +16,7 @@ protocol IncomeSourceEditViewControllerDelegate {
 
 protocol IncomeSourceEditInputProtocol {
     func set(incomeSource: IncomeSource)
+    func set(delegate: IncomeSourceEditViewControllerDelegate?)
 }
 
 class IncomeSourceEditViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
@@ -28,7 +29,8 @@ class IncomeSourceEditViewController : StaticDataTableViewController, UIMessageP
 
     var viewModel: IncomeSourceEditViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
-    var delegate: IncomeSourceEditViewControllerDelegate?
+    
+    private var delegate: IncomeSourceEditViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,6 +134,10 @@ extension IncomeSourceEditViewController {
 }
 
 extension IncomeSourceEditViewController : IncomeSourceEditInputProtocol {
+    func set(delegate: IncomeSourceEditViewControllerDelegate?) {
+        self.delegate = delegate
+    }
+    
     func set(incomeSource: IncomeSource) {
         viewModel.set(incomeSource: incomeSource)
     }
@@ -152,6 +158,7 @@ extension IncomeSourceEditViewController {
         navigationController?.navigationBar.titleTextAttributes = attributes        
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        navigationItem.title = viewModel.isNew ? "Новый источник доходов" : "Источник доходов"
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {

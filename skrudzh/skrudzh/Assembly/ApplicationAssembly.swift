@@ -171,6 +171,12 @@ class ApplicationAssembly: Assembly {
         container.registerForSkrudzhStoryboard(OnboardingViewController.self) { (r, c) in
             c.router = r.resolve(ApplicationRouterProtocol.self)
         }
+        
+        // IncomeSourceEditViewController
+        container.registerForSkrudzhStoryboard(IncomeSourceEditViewController.self) { (r, c) in
+            c.viewModel = r.resolve(IncomeSourceEditViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -217,6 +223,12 @@ class ApplicationAssembly: Assembly {
         // MainViewModel
         container.register(MainViewModel.self) { r in
             return MainViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!)
+        }
+        
+        // IncomeSourceEditViewModel
+        container.register(IncomeSourceEditViewModel.self) { r in
+            return IncomeSourceEditViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!,
+                                             accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
         }
     }
     
