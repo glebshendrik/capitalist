@@ -217,6 +217,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="didTapAddIncomeSourceButton:" destination="527-2C-xUs" eventType="touchUpInside" id="ClL-z8-wJH"/>
+                                            <segue destination="3XU-fL-51n" kind="presentation" id="Afj-mm-zuU"/>
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bh4-RC-uKP">
@@ -322,6 +323,56 @@
             </objects>
             <point key="canvasLocation" x="-2724" y="173"/>
         </scene>
+        <!--Источник доходов-->
+        <scene sceneID="bkG-Sv-TaS">
+            <objects>
+                <tableViewController id="Hsl-CQ-JmL" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HiE-xx-YOh" customClass="TPKeyboardAvoidingTableView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <sections>
+                            <tableViewSection id="1EC-F1-rgi">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="72" id="kB3-oR-YoJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kB3-oR-YoJ" id="HgM-bQ-iYV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gv1-qk-RVl">
+                                                    <rect key="frame" x="32" y="0.0" width="311" height="72"/>
+                                                    <color key="textColor" red="0.52156862745098043" green="0.5725490196078431" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gv1-qk-RVl" firstAttribute="top" secondItem="HgM-bQ-iYV" secondAttribute="top" id="Cvq-2t-MZD"/>
+                                                <constraint firstItem="gv1-qk-RVl" firstAttribute="leading" secondItem="HgM-bQ-iYV" secondAttribute="leading" constant="32" id="KNr-MP-He3"/>
+                                                <constraint firstAttribute="bottom" secondItem="gv1-qk-RVl" secondAttribute="bottom" id="SpA-Aj-Lub"/>
+                                                <constraint firstAttribute="trailing" secondItem="gv1-qk-RVl" secondAttribute="trailing" constant="32" id="W4f-Fc-Cbo"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Hsl-CQ-JmL" id="dCa-Hu-hgR"/>
+                            <outlet property="delegate" destination="Hsl-CQ-JmL" id="Nz2-zO-jOG"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Источник доходов" id="O45-Qi-TsM">
+                        <barButtonItem key="leftBarButtonItem" title="Отмена" id="dhG-ni-5tQ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Сохр." id="2n1-U8-KpW"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PKj-XG-hZf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1784.8" y="907.1964017991005"/>
+        </scene>
         <!--Colorable Navigation Controller-->
         <scene sceneID="YX2-C6-VaL">
             <objects>
@@ -361,6 +412,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="38S-qc-ipp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1740" y="174"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KqG-Bc-tum">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3XU-fL-51n" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="G9P-Ex-5TZ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Hsl-CQ-JmL" kind="relationship" relationship="rootViewController" id="Xl4-6w-Vjz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7my-y4-OkW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2724" y="906.29685157421295"/>
         </scene>
     </scenes>
     <resources>
