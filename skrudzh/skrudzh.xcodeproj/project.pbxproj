@@ -34,6 +34,7 @@
 		FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26814921B1833E00FADED1 /* MainViewController.swift */; };
 		FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */; };
 		FA9F962A21C2A86B00FD64C1 /* IncomeSourceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */; };
+		FA9F962C21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */; };
 		FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */; };
 		FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */; };
 		FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */; };
@@ -133,6 +134,7 @@
 		FA26814921B1833E00FADED1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceViewModel.swift; sourceTree = "<group>"; };
 		FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewController.swift; sourceTree = "<group>"; };
+		FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
@@ -555,6 +557,7 @@
 				FAD88F8A21B1227600BE7BC1 /* Menu */,
 				FAC3B9CE21C11F850015A12F /* MainViewModel.swift */,
 				FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */,
+				FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 				FA165CE621B6669500EAA16B /* LoginViewController.swift in Sources */,
 				FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */,
 				FAC3B9C721C0F2B00015A12F /* IncomeSourcesServiceProtocol.swift in Sources */,
+				FA9F962C21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift in Sources */,
 				FAC3B9D121C131390015A12F /* JoinViewController.swift in Sources */,
 				FAC3B9C321BE74CE0015A12F /* OnboardingPageViewController.swift in Sources */,
 				FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */,
