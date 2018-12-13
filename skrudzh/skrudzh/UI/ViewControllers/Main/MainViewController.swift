@@ -8,6 +8,8 @@
 
 import UIKit
 import SideMenu
+import PromiseKit
+import SwifterSwift
 
 class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
@@ -16,10 +18,13 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     var viewModel: MainViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
+    @IBOutlet weak var incomeSourcesCollectionView: UICollectionView!
+    @IBOutlet weak var addIncomeSourceButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        print("Did run before \(className): \(didRunBefore)")
+        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,9 +32,70 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
     }
     
+    @IBAction func didTapAddIncomeSourceButton(_ sender: Any) {
+    }
+    
+    private func loadData() {
+        messagePresenterManager.showHUD(with: "Загрузка данных")
+        firstly {
+            viewModel.loadIncomeSources()
+        }.done {
+            self.updateUI()
+        }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
+        }.finally {
+            self.messagePresenterManager.dismissHUD()
+        }        
+    }
+    
+    private func updateUI() {
+        incomeSourcesCollectionView.performBatchUpdates({
+            let indexSet = IndexSet(integersIn: 0...0)
+            self.incomeSourcesCollectionView.reloadSections(indexSet)
+        }, completion: nil)
+    }
+}
+
+
+extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        guard collectionView == incomeSourcesCollectionView else { return 0 }
+        
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard collectionView == incomeSourcesCollectionView else { return 0 }
+        
+        return viewModel.numberOfIncomeSources
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard   collectionView == incomeSourcesCollectionView,
+                let cell = incomeSourcesCollectionView.dequeueReusableCell(withReuseIdentifier: "IncomeSourceCollectionViewCell", for: indexPath) as? IncomeSourceCollectionViewCell,
+                let incomeSourceViewModel = viewModel.incomeSourceViewModel(at: indexPath) else {
+                    
+                    return UICollectionViewCell()
+        }
+        
+        cell.viewModel = incomeSourceViewModel
+        return cell
+    }
+    
+    
+}
+
+extension MainViewController {
     private func setupUI() {
+        setupIncomeSourcesCollectionView()
         setupNavigationBar()
         setupMainMenu()
+    }
+    
+    private func setupIncomeSourcesCollectionView() {
+        incomeSourcesCollectionView.delegate = self
+        incomeSourcesCollectionView.dataSource = self
     }
     
     private func setupNavigationBar() {
@@ -41,10 +107,9 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        // 64 69 97
     }
     
-    private func setupMainMenu() {        
+    private func setupMainMenu() {
         SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
         SideMenuManager.default.menuFadeStatusBar = false

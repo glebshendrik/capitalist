@@ -316,9 +316,9 @@ extension UIViewController {
 
 extension UIColor {
     static var mainNavBarColor: UIColor {
-        return UIColor(red: 64 / 255.0,
-                       green: 69 / 255.0,
-                       blue: 97 / 255.0,
+        return UIColor(red: 47 / 255.0,
+                       green: 58 / 255.0,
+                       blue: 88 / 255.0,
                        alpha: 1.0)
     }
     

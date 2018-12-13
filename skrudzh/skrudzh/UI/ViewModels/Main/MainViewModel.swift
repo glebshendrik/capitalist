@@ -14,6 +14,10 @@ class MainViewModel {
     
     private var incomeSourceViewModels: [IncomeSourceViewModel] = []
     
+    var numberOfIncomeSources: Int {
+        return incomeSourceViewModels.count
+    }
+    
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
     }
@@ -25,25 +29,8 @@ class MainViewModel {
                     self.incomeSourceViewModels = incomeSources.map { IncomeSourceViewModel(incomeSource: $0)}
                 }.asVoid()
     }
-}
-
-class IncomeSourceViewModel {
     
-    private let incomeSource: IncomeSource
-    
-    var id: Int {
-        return incomeSource.id
-    }
-    
-    var name: String {
-        return incomeSource.name
-    }
-    
-    var iconURL: URL? {
-        return incomeSource.iconURL
-    }
-    
-    init(incomeSource: IncomeSource) {
-        self.incomeSource = incomeSource
+    func incomeSourceViewModel(at indexPath: IndexPath) -> IncomeSourceViewModel? {
+        return incomeSourceViewModels.item(at: indexPath.row)
     }
 }

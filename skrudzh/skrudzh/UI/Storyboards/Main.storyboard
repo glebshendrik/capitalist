@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -200,9 +201,97 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2n-9h-iVJ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
-                                <color key="backgroundColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oe2-Rf-vgb">
+                                        <rect key="frame" x="16" y="16" width="40" height="40"/>
+                                        <color key="backgroundColor" red="0.22352941176470587" green="0.27843137254901962" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="9wf-KZ-2fC"/>
+                                            <constraint firstAttribute="height" constant="40" id="X5b-RD-Bhx"/>
+                                        </constraints>
+                                        <state key="normal" image="plus-icon-blue"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapAddIncomeSourceButton:" destination="527-2C-xUs" eventType="touchUpInside" id="ClL-z8-wJH"/>
+                                        </connections>
+                                    </button>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bh4-RC-uKP">
+                                        <rect key="frame" x="64" y="0.0" width="311" height="72"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="8" id="xyg-3q-QY0">
+                                            <size key="itemSize" width="72" height="40"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IncomeSourceCollectionViewCell" id="gnE-1F-jOc" customClass="IncomeSourceCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="16" width="72" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="72" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2G7-Ae-kuC">
+                                                            <rect key="frame" x="0.0" y="0.0" width="72" height="40"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зарплата" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B5k-yr-pdi">
+                                                                    <rect key="frame" x="8" y="8" width="56" height="11"/>
+                                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="9"/>
+                                                                    <color key="textColor" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="98 000 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bkF-fm-2rr">
+                                                                    <rect key="frame" x="8" y="21" width="56" height="15"/>
+                                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.22352941176470587" green="0.27843137254901962" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstItem="B5k-yr-pdi" firstAttribute="top" secondItem="2G7-Ae-kuC" secondAttribute="top" constant="8" id="IKs-DT-bdK"/>
+                                                                <constraint firstItem="B5k-yr-pdi" firstAttribute="leading" secondItem="2G7-Ae-kuC" secondAttribute="leading" constant="8" id="LCu-Ko-PI0"/>
+                                                                <constraint firstAttribute="trailing" secondItem="B5k-yr-pdi" secondAttribute="trailing" constant="8" id="U1k-Ky-znn"/>
+                                                                <constraint firstAttribute="trailing" secondItem="bkF-fm-2rr" secondAttribute="trailing" constant="8" id="V8z-65-uFQ"/>
+                                                                <constraint firstItem="bkF-fm-2rr" firstAttribute="leading" secondItem="2G7-Ae-kuC" secondAttribute="leading" constant="8" id="aai-1o-BVN"/>
+                                                                <constraint firstAttribute="bottom" secondItem="bkF-fm-2rr" secondAttribute="bottom" constant="4" id="clo-lK-2nt"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="4"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                    </subviews>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="2G7-Ae-kuC" secondAttribute="bottom" id="4sx-Wx-x36"/>
+                                                    <constraint firstItem="2G7-Ae-kuC" firstAttribute="leading" secondItem="gnE-1F-jOc" secondAttribute="leading" id="Fv6-VR-1ax"/>
+                                                    <constraint firstItem="2G7-Ae-kuC" firstAttribute="top" secondItem="gnE-1F-jOc" secondAttribute="top" id="Lpb-o1-oXq"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2G7-Ae-kuC" secondAttribute="trailing" id="eld-Ve-6SK"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="incomeAmountLabel" destination="bkF-fm-2rr" id="UUM-uN-E92"/>
+                                                    <outlet property="nameLabel" destination="B5k-yr-pdi" id="YYj-pH-KFA"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18431372549019609" green="0.22745098039215686" blue="0.34509803921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="4sF-cF-PzE"/>
+                                    <constraint firstItem="Bh4-RC-uKP" firstAttribute="top" secondItem="p2n-9h-iVJ" secondAttribute="top" id="7Jj-A4-hgJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bh4-RC-uKP" secondAttribute="trailing" id="bjf-vH-cRs"/>
+                                    <constraint firstItem="oe2-Rf-vgb" firstAttribute="top" secondItem="p2n-9h-iVJ" secondAttribute="top" constant="16" id="ewx-Tn-XZe"/>
+                                    <constraint firstItem="oe2-Rf-vgb" firstAttribute="leading" secondItem="p2n-9h-iVJ" secondAttribute="leading" constant="16" id="fwo-kW-QAO"/>
+                                    <constraint firstItem="Bh4-RC-uKP" firstAttribute="leading" secondItem="oe2-Rf-vgb" secondAttribute="trailing" constant="8" id="sjd-bC-s7r"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bh4-RC-uKP" secondAttribute="bottom" id="yeG-fh-TRn"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -224,6 +313,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addIncomeSourceButton" destination="oe2-Rf-vgb" id="Vsx-Ib-BAb"/>
+                        <outlet property="incomeSourcesCollectionView" destination="Bh4-RC-uKP" id="aOY-fZ-NMq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6X-Vx-icx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -275,6 +368,7 @@
         <image name="faq-menu-item-icon" width="16" height="17"/>
         <image name="join-menu-item-icon" width="16.5" height="13"/>
         <image name="menu-button-icon" width="16" height="11"/>
+        <image name="plus-icon-blue" width="16" height="16"/>
         <image name="settings-menu-item-icon" width="16" height="16"/>
         <image name="statistics-menu-item-icon" width="16" height="16"/>
     </resources>

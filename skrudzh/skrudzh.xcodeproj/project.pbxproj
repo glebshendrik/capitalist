@@ -32,6 +32,7 @@
 		FA26814721B178D300FADED1 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813C21B178D200FADED1 /* Rubik-Regular.ttf */; };
 		FA26814821B178D300FADED1 /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813D21B178D200FADED1 /* Rubik-BoldItalic.ttf */; };
 		FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26814921B1833E00FADED1 /* MainViewController.swift */; };
+		FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */; };
 		FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */; };
 		FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */; };
 		FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */; };
@@ -46,6 +47,7 @@
 		FAC3B9CD21C0F7670015A12F /* IncomeSourcesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */; };
 		FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CE21C11F850015A12F /* MainViewModel.swift */; };
 		FAC3B9D121C131390015A12F /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9D021C131390015A12F /* JoinViewController.swift */; };
+		FAC3B9D421C2796C0015A12F /* IncomeSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */; };
 		FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
 		FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */; };
@@ -128,6 +130,7 @@
 		FA26813C21B178D200FADED1 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		FA26813D21B178D200FADED1 /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
 		FA26814921B1833E00FADED1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 		FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourcesCoordinator.swift; sourceTree = "<group>"; };
 		FAC3B9CE21C11F850015A12F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9D021C131390015A12F /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAD88EF621AEA86E00BE7BC1 /* skrudzh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skrudzh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -290,6 +294,14 @@
 				FAC3B9C221BE74CE0015A12F /* OnboardingPageViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		FAC3B9D221C279450015A12F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		FAD88EED21AEA86E00BE7BC1 = {
@@ -474,6 +486,7 @@
 		FAD88F7B21B027B500BE7BC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FAC3B9D221C279450015A12F /* Main */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -538,6 +551,7 @@
 			children = (
 				FAD88F8A21B1227600BE7BC1 /* Menu */,
 				FAC3B9CE21C11F850015A12F /* MainViewModel.swift */,
+				FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -760,9 +774,11 @@
 				FAD88F0F21AEB45A00BE7BC1 /* ManagersAssembly.swift in Sources */,
 				FA165CE421B65F2F00EAA16B /* ValidationResult.swift in Sources */,
 				FAD88F4F21AEC1A500BE7BC1 /* UsersService.swift in Sources */,
+				FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */,
 				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
 				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,
 				FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */,
+				FAC3B9D421C2796C0015A12F /* IncomeSourceCollectionViewCell.swift in Sources */,
 				FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */,
 				FAD88F1D21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift in Sources */,
 				FAD88F5921AEC1F800BE7BC1 /* AuthenticationServiceProtocol.swift in Sources */,
