@@ -35,6 +35,7 @@ struct Infrastructure {
         case MenuViewController
         case MenuNavigationController
         case IncomeSourceEditViewController
+        case IncomeSourceEditNavigationController
         
         // Profile
         case ProfileViewController
@@ -66,7 +67,8 @@ struct Infrastructure {
             case .MainViewController,
                  .MenuViewController,
                  .MenuNavigationController,
-                 .IncomeSourceEditViewController:
+                 .IncomeSourceEditViewController,
+                 .IncomeSourceEditNavigationController:
                 return .Main
             case .ProfileViewController,
                  .ChangePasswordViewController:
@@ -123,6 +125,7 @@ class ApplicationAssembly: Assembly {
         container.registerForSkrudzhStoryboard(MainViewController.self) { (r, c) in
             c.viewModel = r.resolve(MainViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+            c.router = r.resolve(ApplicationRouterProtocol.self)
         }
         
         // RegistrationViewController

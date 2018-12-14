@@ -12,6 +12,8 @@ import PromiseKit
 
 protocol IncomeSourceEditViewControllerDelegate {
     func didCreate()
+    func didUpdate()
+    func didRemove()
 }
 
 protocol IncomeSourceEditInputProtocol {
@@ -24,7 +26,9 @@ class IncomeSourceEditViewController : StaticDataTableViewController, UIMessageP
     @IBOutlet weak var incomeSourceNameTextField: UITextField!
     @IBOutlet weak var activityIndicatorCell: UITableViewCell!
     @IBOutlet weak var saveButton: UIBarButtonItem!
-
+    @IBOutlet weak var removeCell: UITableViewCell!
+    @IBOutlet weak var removeButton: UIButton!
+    
     var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
 
     var viewModel: IncomeSourceEditViewModel!
@@ -42,6 +46,7 @@ class IncomeSourceEditViewController : StaticDataTableViewController, UIMessageP
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
         setActivityIndicator(hidden: true, animated: false)
+        setRemoveButton(hidden: viewModel.isNew)
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
@@ -50,6 +55,10 @@ class IncomeSourceEditViewController : StaticDataTableViewController, UIMessageP
     
     @IBAction func didTapCancelButton(_ sender: Any) {
         close()
+    }
+    
+    @IBAction func didTapRemoveButton(_ sender: Any) {
+        remove()
     }
     
     private func save() {
@@ -62,7 +71,10 @@ class IncomeSourceEditViewController : StaticDataTableViewController, UIMessageP
         }.done {
             if self.viewModel.isNew {
                 self.delegate?.didCreate()
-            }            
+            }
+            else {
+                self.delegate?.didUpdate()
+            }
             self.close()
         }.catch { error in
             switch error {
@@ -79,6 +91,24 @@ class IncomeSourceEditViewController : StaticDataTableViewController, UIMessageP
         }.finally {
             self.setActivityIndicator(hidden: true)
             self.saveButton.isEnabled = true
+        }
+    }
+    
+    private func remove() {
+        setActivityIndicator(hidden: false)
+        removeButton.isEnabled = false
+        
+        firstly {
+            viewModel.removeIncomeSource()
+        }.done {
+            self.delegate?.didRemove()
+            self.close()
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении источника доходов",
+                                              theme: .error)
+        }.finally {
+            self.setActivityIndicator(hidden: true)
+            self.removeButton.isEnabled = true
         }
     }
     
@@ -163,6 +193,11 @@ extension IncomeSourceEditViewController {
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
         cell(activityIndicatorCell, setHidden: hidden)
+        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+    }
+    
+    private func setRemoveButton(hidden: Bool, animated: Bool = true) {
+        cell(removeCell, setHidden: hidden)
         reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
     }
 }

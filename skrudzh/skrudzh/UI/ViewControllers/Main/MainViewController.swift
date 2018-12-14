@@ -17,6 +17,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     var viewModel: MainViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var router: ApplicationRouterProtocol!
     
     @IBOutlet weak var incomeSourcesCollectionView: UICollectionView!
     @IBOutlet weak var addIncomeSourceButton: UIButton!
@@ -70,6 +71,14 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
         loadData(scrollToEndWhenUpdated: true)
     }
     
+    func didUpdate() {
+        loadData()
+    }
+    
+    func didRemove() {
+        loadData()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == "ShowIncomeSourceCreationScreen",
             let destinationNavigationController = segue.destination as? UINavigationController,
@@ -77,6 +86,19 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
             
             destination.set(delegate: self)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if  let selectedIncomeSource = viewModel.incomeSourceViewModel(at: indexPath)?.incomeSource,
+            let incomeSourceEditNavigationController = router.viewController(.IncomeSourceEditNavigationController) as? UINavigationController,
+            let incomeSourceEditViewController = incomeSourceEditNavigationController.topViewController as? IncomeSourceEditInputProtocol {
+            
+            incomeSourceEditViewController.set(delegate: self)
+            incomeSourceEditViewController.set(incomeSource: selectedIncomeSource)
+            
+            present(incomeSourceEditNavigationController, animated: true, completion: nil)
+        }
+        
     }
 }
 

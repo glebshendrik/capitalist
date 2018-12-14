@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Rubik-Medium.ttf">
+            <string>Rubik-Medium</string>
+        </array>
         <array key="Rubik-Regular.ttf">
             <string>Rubik-Regular</string>
         </array>
@@ -220,7 +223,7 @@
                                             <segue destination="3XU-fL-51n" kind="presentation" identifier="ShowIncomeSourceCreationScreen" id="Afj-mm-zuU"/>
                                         </connections>
                                     </button>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bh4-RC-uKP">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bh4-RC-uKP">
                                         <rect key="frame" x="64" y="0.0" width="311" height="72"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="8" id="xyg-3q-QY0">
@@ -356,8 +359,42 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="52" id="vIs-18-E2x">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="52"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vIs-18-E2x" id="5Ze-3p-DFi">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zB4-GC-Cks">
+                                                    <rect key="frame" x="32" y="6" width="311" height="40"/>
+                                                    <color key="backgroundColor" red="0.22352941179999999" green="0.2784313725" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="csD-pw-QNs"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
+                                                    <state key="normal" title="УДАЛИТЬ">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="20"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapRemoveButton:" destination="Hsl-CQ-JmL" eventType="touchUpInside" id="eFK-7y-jwz"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="zB4-GC-Cks" firstAttribute="centerY" secondItem="5Ze-3p-DFi" secondAttribute="centerY" id="Ko9-ol-ztK"/>
+                                                <constraint firstItem="zB4-GC-Cks" firstAttribute="leading" secondItem="5Ze-3p-DFi" secondAttribute="leading" constant="32" id="hoz-CD-7RE"/>
+                                                <constraint firstAttribute="trailing" secondItem="zB4-GC-Cks" secondAttribute="trailing" constant="32" id="kC8-f8-S76"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="38" id="sbk-Kz-n3b">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="38"/>
+                                        <rect key="frame" x="0.0" y="124" width="375" height="38"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sbk-Kz-n3b" id="3Xl-bf-ERa">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
@@ -397,6 +434,8 @@
                     <connections>
                         <outlet property="activityIndicatorCell" destination="sbk-Kz-n3b" id="L3y-DO-Qco"/>
                         <outlet property="incomeSourceNameTextField" destination="gv1-qk-RVl" id="Zpk-tL-n5R"/>
+                        <outlet property="removeButton" destination="zB4-GC-Cks" id="5Tt-nS-P6x"/>
+                        <outlet property="removeCell" destination="vIs-18-E2x" id="QNl-jM-k1E"/>
                         <outlet property="saveButton" destination="2n1-U8-KpW" id="5Lj-58-qYY"/>
                     </connections>
                 </tableViewController>
@@ -447,7 +486,7 @@
         <!--Colorable Navigation Controller-->
         <scene sceneID="KqG-Bc-tum">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3XU-fL-51n" customClass="ColorableNavigationController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="IncomeSourceEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="3XU-fL-51n" customClass="ColorableNavigationController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="G9P-Ex-5TZ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

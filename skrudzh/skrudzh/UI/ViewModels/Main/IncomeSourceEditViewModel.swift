@@ -48,6 +48,13 @@ class IncomeSourceEditViewModel {
         return isNew ? createIncomeSource(with: name) : updateIncomeSource(with: name)
     }
     
+    func removeIncomeSource() -> Promise<Void> {
+        guard let incomeSourceId = incomeSource?.id else {
+            return Promise(error: IncomeSourceUpdatingError.updatingIncomeSourceIsNotSpecified)
+        }
+        return incomeSourcesCoordinator.destroy(by: incomeSourceId)
+    }
+    
     private func createIncomeSource(with name: String?) -> Promise<Void> {
         return  firstly {
                     validateCreation(with: name)

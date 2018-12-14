@@ -10,7 +10,7 @@ import Foundation
 
 class IncomeSourceViewModel {
     
-    private let incomeSource: IncomeSource
+    public private(set) var incomeSource: IncomeSource
     
     var id: Int {
         return incomeSource.id
