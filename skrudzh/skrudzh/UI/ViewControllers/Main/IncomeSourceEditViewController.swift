@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import StaticDataTableViewController
 import PromiseKit
 
 protocol IncomeSourceEditViewControllerDelegate {
@@ -21,12 +20,11 @@ protocol IncomeSourceEditInputProtocol {
     func set(delegate: IncomeSourceEditViewControllerDelegate?)
 }
 
-class IncomeSourceEditViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
+class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
-    @IBOutlet weak var incomeSourceNameTextField: UITextField!
-    @IBOutlet weak var activityIndicatorCell: UITableViewCell!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var removeCell: UITableViewCell!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var removeButton: UIButton!
     
     var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
@@ -35,6 +33,11 @@ class IncomeSourceEditViewController : StaticDataTableViewController, UIMessageP
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
     private var delegate: IncomeSourceEditViewControllerDelegate?
+    
+    private var editTableController: IncomeSourceEditTableController?
+    private var incomeSourceName: String? {
+        return editTableController?.incomeSourceNameTextField?.text?.trimmed
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +70,7 @@ class IncomeSourceEditViewController : StaticDataTableViewController, UIMessageP
         saveButton.isEnabled = false
         
         firstly {
-            viewModel.saveIncomeSource(with: self.incomeSourceNameTextField.text?.trimmed)
+            viewModel.saveIncomeSource(with: self.incomeSourceName)
         }.done {
             if self.viewModel.isNew {
                 self.delegate?.didCreate()
@@ -173,7 +176,14 @@ extension IncomeSourceEditViewController : IncomeSourceEditInputProtocol {
     }
     
     private func updateUI() {
-        incomeSourceNameTextField.text = viewModel.name
+        editTableController?.incomeSourceNameTextField?.text = viewModel.name
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showEditTableView",
+            let viewController = segue.destination as? IncomeSourceEditTableController {
+            editTableController = viewController
+        }
     }
 }
 
@@ -192,12 +202,22 @@ extension IncomeSourceEditViewController {
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        cell(activityIndicatorCell, setHidden: hidden)
-        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+        guard animated else {
+            activityIndicator.isHidden = hidden
+            return
+        }
+        UIView.transition(with: activityIndicator, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            self.activityIndicator.isHidden = hidden
+        })
     }
     
     private func setRemoveButton(hidden: Bool, animated: Bool = true) {
-        cell(removeCell, setHidden: hidden)
-        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+        guard animated else {
+            removeButton.isHidden = hidden
+            return
+        }
+        UIView.transition(with: removeButton, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            self.removeButton.isHidden = hidden
+        })
     }
 }

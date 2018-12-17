@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "10ABD92F85ED78E15F5947414587E983"
-               BlueprintName = "Swinject"
+               BlueprintIdentifier = "384C55D60731FE49DCBE68D504B2DB63"
+               BlueprintName = "SkyFloatingLabelTextField"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Swinject.framework">
+               BuildableName = "SkyFloatingLabelTextField.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

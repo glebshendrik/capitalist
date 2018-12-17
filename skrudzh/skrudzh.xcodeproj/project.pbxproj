@@ -32,6 +32,7 @@
 		FA26814721B178D300FADED1 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813C21B178D200FADED1 /* Rubik-Regular.ttf */; };
 		FA26814821B178D300FADED1 /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813D21B178D200FADED1 /* Rubik-BoldItalic.ttf */; };
 		FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26814921B1833E00FADED1 /* MainViewController.swift */; };
+		FA6270A321C7A87300CC0269 /* IncomeSourceEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */; };
 		FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */; };
 		FA9F962A21C2A86B00FD64C1 /* IncomeSourceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */; };
 		FA9F962C21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */; };
@@ -132,6 +133,7 @@
 		FA26813C21B178D200FADED1 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		FA26813D21B178D200FADED1 /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
 		FA26814921B1833E00FADED1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditTableController.swift; sourceTree = "<group>"; };
 		FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceViewModel.swift; sourceTree = "<group>"; };
 		FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewController.swift; sourceTree = "<group>"; };
 		FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewModel.swift; sourceTree = "<group>"; };
@@ -534,6 +536,7 @@
 				FAD88F8721B1181600BE7BC1 /* MenuViewController.swift */,
 				FA26814921B1833E00FADED1 /* MainViewController.swift */,
 				FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */,
+				FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/StaticDataTableViewController/StaticDataTableViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
@@ -718,6 +722,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StaticDataTableViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
@@ -767,6 +772,7 @@
 				FAC3B9C521C0EB7A0015A12F /* IncomeSource.swift in Sources */,
 				FAD88F4421AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift in Sources */,
 				FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */,
+				FA6270A321C7A87300CC0269 /* IncomeSourceEditTableController.swift in Sources */,
 				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
 				FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */,
 				FA165CE821B7654100EAA16B /* ForgotPasswordViewModel.swift in Sources */,

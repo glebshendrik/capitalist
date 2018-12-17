@@ -22,11 +22,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "566412511.016644"
+            timestampString = "566737393.942083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
@@ -35,14 +35,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "skrudzh.APIClient.(requestValidator in _4C626C62865474A3BB8F579F561075F8)(request: Swift.Optional&lt;Foundation.URLRequest&gt;, response: __C.NSHTTPURLResponse, data: Swift.Optional&lt;Foundation.Data&gt;) -&gt; Alamofire.Request.ValidationResult"
                   moduleName = "skrudzh"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/Services/APIClient.swift"
-                  timestampString = "566412810.208347"
+                  timestampString = "566737394.5520231"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
@@ -50,14 +50,14 @@
                   offsetFromSymbolStart = "72">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "skrudzh.APIClient.(requestValidator in _4C626C62865474A3BB8F579F561075F8)(request: Swift.Optional&lt;Foundation.URLRequest&gt;, response: __C.NSHTTPURLResponse, data: Swift.Optional&lt;Foundation.Data&gt;) -&gt; Alamofire.Request.ValidationResult"
                   moduleName = "skrudzh"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/Services/APIClient.swift"
-                  timestampString = "566412810.213375"
+                  timestampString = "566737394.557691"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
@@ -111,8 +111,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
             endingLineNumber = "33"
-            landmarkName = "updateUI(animated:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -262,11 +262,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "566412568.7410361"
+            timestampString = "566737393.942919"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
@@ -278,11 +278,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "566412592.446499"
+            timestampString = "566737393.943077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
@@ -291,14 +291,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "skrudzh.APIClient.request&lt;A where A: Swift.Decodable&gt;(skrudzh.APIResource) -&gt; PromiseKit.Promise&lt;A&gt;"
                   moduleName = "skrudzh"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/Services/APIClient.swift"
-                  timestampString = "566412810.376392"
+                  timestampString = "566737394.731266"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "36"
@@ -306,14 +306,14 @@
                   offsetFromSymbolStart = "40">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Any, PromiseKit.PMKAlamofireDataResponse) throws -&gt; A in skrudzh.APIClient.request&lt;A where A: Swift.Decodable&gt;(skrudzh.APIResource) -&gt; PromiseKit.Promise&lt;A&gt;"
                   moduleName = "skrudzh"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/Services/APIClient.swift"
-                  timestampString = "566412810.378767"
+                  timestampString = "566737394.733646"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "37"
@@ -342,7 +342,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Coordinators/IncomeSourcesCoordinator.swift"
@@ -358,11 +358,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewModels/Main/IncomeSourceEditViewModel.swift"
-            timestampString = "566455930.4415981"
+            timestampString = "566738807.98753"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
@@ -374,11 +374,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewModels/Main/IncomeSourceEditViewModel.swift"
-            timestampString = "566455930.4446419"
+            timestampString = "566738807.993001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
@@ -387,33 +387,33 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "skrudzh.IncomeSourceEditViewModel.(createIncomeSource in _053C26352D26FD5F5C2285C9E533F517)(with: Swift.Optional&lt;Swift.String&gt;) -&gt; PromiseKit.Promise&lt;()&gt;"
                   moduleName = "skrudzh"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/UI/ViewModels/Main/IncomeSourceEditViewModel.swift"
-                  timestampString = "566412810.402866"
+                  timestampString = "566737394.762709"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
                   offsetFromSymbolStart = "144">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 () -&gt; PromiseKit.Promise&lt;skrudzh.IncomeSourceCreationForm&gt; in skrudzh.IncomeSourceEditViewModel.(createIncomeSource in _053C26352D26FD5F5C2285C9E533F517)(with: Swift.Optional&lt;Swift.String&gt;) -&gt; PromiseKit.Promise&lt;()&gt;"
                   moduleName = "skrudzh"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/UI/ViewModels/Main/IncomeSourceEditViewModel.swift"
-                  timestampString = "566412810.405818"
+                  timestampString = "566737394.766207"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
                   offsetFromSymbolStart = "36">
                </Location>
             </Locations>
@@ -426,7 +426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewModels/Main/IncomeSourceEditViewModel.swift"
-            timestampString = "566455930.444936"
+            timestampString = "566738807.9933029"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
@@ -442,11 +442,11 @@
                   moduleName = "skrudzh"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/UI/ViewModels/Main/IncomeSourceEditViewModel.swift"
-                  timestampString = "566412810.413227"
+                  timestampString = "566747186.654251"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "79"
-                  endingLineNumber = "79"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
                   offsetFromSymbolStart = "144">
                </Location>
                <Location
@@ -457,14 +457,46 @@
                   moduleName = "skrudzh"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/UI/ViewModels/Main/IncomeSourceEditViewModel.swift"
-                  timestampString = "566412810.415453"
+                  timestampString = "566747186.657262"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
                   offsetFromSymbolStart = "36">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/UI/ViewControllers/Main/IncomeSourceEditViewController.swift"
+            timestampString = "566753270.9796669"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/UI/ViewControllers/Main/IncomeSourceEditTableController.swift"
+            timestampString = "566753270.984526"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "didChangeName(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

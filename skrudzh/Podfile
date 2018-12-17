@@ -20,4 +20,5 @@ target 'skrudzh' do
   pod 'SideMenu'
   pod 'StaticDataTableViewController'
   pod 'SwiftMessages'
+  pod 'SkyFloatingLabelTextField'
 end
