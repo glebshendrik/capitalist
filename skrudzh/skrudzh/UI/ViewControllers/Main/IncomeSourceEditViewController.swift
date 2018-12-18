@@ -22,7 +22,6 @@ protocol IncomeSourceEditInputProtocol {
 
 class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
-    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var removeButton: UIButton!
@@ -120,6 +119,20 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
     }
 }
 
+extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelegate {
+    func validationNeeded() {
+        validateUI()
+    }
+    
+    private func validateUI() {
+        let isFormValid = viewModel.isFormValid(with: incomeSourceName)
+        let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
+        let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
+        saveButton.isEnabled = isFormValid
+        saveButton.backgroundColor = isFormValid ? validColor : invalidColor
+    }
+}
+
 extension IncomeSourceEditViewController {
     private func show(errors: [String: String]) {
         for (_, validationMessage) in errors {
@@ -177,12 +190,14 @@ extension IncomeSourceEditViewController : IncomeSourceEditInputProtocol {
     
     private func updateUI() {
         editTableController?.incomeSourceNameTextField?.text = viewModel.name
+        validateUI()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEditTableView",
             let viewController = segue.destination as? IncomeSourceEditTableController {
             editTableController = viewController
+            viewController.delegate = self
         }
     }
 }

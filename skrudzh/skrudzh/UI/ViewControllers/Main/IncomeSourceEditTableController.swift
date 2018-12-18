@@ -9,14 +9,27 @@
 import UIKit
 import SkyFloatingLabelTextField
 
+protocol IncomeSourceEditTableControllerDelegate {
+    func validationNeeded()
+}
+
 class IncomeSourceEditTableController : UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var incomeSourceNameTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var nameBackground: UIView!
     @IBOutlet weak var nameIconContainer: UIView!
     
+    var delegate: IncomeSourceEditTableControllerDelegate?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        update(textField: incomeSourceNameTextField)
+        incomeSourceNameTextField.titleFormatter = { $0 }
+        delegate?.validationNeeded()
+    }
     
     @IBAction func didChangeName(_ sender: SkyFloatingLabelTextField) {
         update(textField: sender)
+        delegate?.validationNeeded()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -29,12 +42,6 @@ class IncomeSourceEditTableController : UITableViewController, UITextFieldDelega
         if let floatingLabelTextField = textField as? SkyFloatingLabelTextField {
             update(textField: floatingLabelTextField)
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        update(textField: incomeSourceNameTextField)
-        incomeSourceNameTextField.titleFormatter = { $0 }
     }
     
     private func update(textField: SkyFloatingLabelTextField) {
