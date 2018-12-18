@@ -60,7 +60,23 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
     }
     
     @IBAction func didTapRemoveButton(_ sender: Any) {
-        remove()
+        let alertController = UIAlertController(title: "Удалить источник доходов?",
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        
+        alertController.addAction(title: "Удалить",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: { _ in
+                                    self.remove()
+                                })
+        
+        alertController.addAction(title: "Отмена",
+                                  style: .cancel,
+                                  isEnabled: true,
+                                  handler: nil)
+        
+        present(alertController, animated: true)
     }
     
     private func save() {
