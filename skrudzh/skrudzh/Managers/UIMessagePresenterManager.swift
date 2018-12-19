@@ -10,6 +10,7 @@ import Foundation
 import SVProgressHUD
 import PromiseKit
 import SwiftMessages
+import SwifterSwift
 
 class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
     
@@ -44,7 +45,8 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
         show(message: validationMessage,
              theme: .error,
              presentationStyle: .bottom,
-             duration: Duration.short.rawValue)
+             duration: Duration.short.rawValue,
+             interactive: true)
     }
     
     func show(notificationMessage: String, actionOnTap: @escaping () -> ()) {
@@ -65,38 +67,84 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
         
         SwiftMessages.pauseBetweenMessages = 0.01
         
+        let config = messageConfig(presentationStyle: presentationStyle,
+                                   duration: duration,
+                                   interactive: interactive)
+        
+        let view = messageView(message: message,
+                               theme: theme,
+                               presentationStyle: presentationStyle,
+                               actionOnTap: actionOnTap)
+        
+        SwiftMessages.show(config: config, view: view)
+    }
+    
+    private func messageConfig(presentationStyle: SwiftMessages.PresentationStyle,
+                               duration: TimeInterval,
+                               interactive: Bool) -> SwiftMessages.Config {
         var config = SwiftMessages.Config()
-
         config.presentationStyle = presentationStyle
-        
-        // Display in a window at the specified window level: UIWindow.Level.statusBar
-        // displays over the status bar while UIWindow.Level.normal displays under.
-        config.presentationContext = .window(windowLevel: .normal)
-        
+        config.presentationContext = .window(windowLevel: .statusBar)
         config.duration = .seconds(seconds: duration)
-        
-        // Dim the background like a popover view. Hide when the background is tapped.
         config.dimMode = .gray(interactive: interactive)
-        
-        // The interactive pan-to-hide gesture.
         config.interactiveHide = interactive
+        config.preferredStatusBarStyle = .default
+        return config
+    }
+    
+    private func messageView(message: String,
+                             theme: Theme,
+                             presentationStyle: SwiftMessages.PresentationStyle,
+                             actionOnTap: (() -> ())?) -> MessageView {
         
-        // Specify a status bar style to if the message is displayed directly under the status bar.
-        config.preferredStatusBarStyle = .lightContent
+        var layout = MessageView.Layout.cardView
+        if case Theme.error = theme {
+            layout = .messageView
+        }
         
-        let view = MessageView.viewFromNib(layout: .cardView)
+        let view = MessageView.viewFromNib(layout: layout)
         
-        view.configureTheme(theme)
         view.configureDropShadow()
         view.configureContent(title: "", body: message)
-        view.button?.isHidden = true
+        
+        view.iconImageView?.isHidden = true
+        
+        view.button?.setTitle(nil, for: .normal)
+        
+        
+        if case Theme.error = theme {
+            view.configureTheme(backgroundColor: UIColor(red: 254 / 255.0, green: 249 / 255.0, blue: 249 / 255.0, alpha: 1),
+                                foregroundColor: UIColor(red: 0.33, green: 0.29, blue: 0.29, alpha: 1))
+            view.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 14)
+            
+            var edges: UIRectEdge = []
+            if case SwiftMessages.PresentationStyle.bottom = presentationStyle {
+                edges = [.top]
+            } else if case SwiftMessages.PresentationStyle.top = presentationStyle {
+                edges = [.bottom]
+            }
+            view.addBorders(edges: edges,
+                            color: UIColor(red: 1, green: 0.22, blue: 0.27, alpha: 1),
+                            thickness: 2)
+        }
+        else {
+            view.configureTheme(theme)
+        }
+        
+        view.button?.backgroundColor = UIColor.clear
+        view.button?.tintColor = view.titleLabel?.textColor
+        view.button?.setImage(UIImage(named: "message-close-icon"), for: .normal)
+        
+        view.buttonTapHandler = { _ in
+            SwiftMessages.hide()
+        }
         
         view.tapHandler = { _ in
             SwiftMessages.hide()
             actionOnTap?()
         }
         
-        SwiftMessages.show(config: config, view: view)
+        return view
     }
     
     func showAlert(

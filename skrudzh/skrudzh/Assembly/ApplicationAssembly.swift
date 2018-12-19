@@ -121,6 +121,10 @@ class ApplicationAssembly: Assembly {
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         
+        // LandingViewController
+        container.registerForSkrudzhStoryboard(LandingViewController.self) { (r, c) in
+        }
+        
         // MainViewController
         container.registerForSkrudzhStoryboard(MainViewController.self) { (r, c) in
             c.viewModel = r.resolve(MainViewModel.self)
