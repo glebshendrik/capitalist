@@ -12,7 +12,7 @@ import PromiseKit
 import StaticDataTableViewController
 import SwiftMessages
 
-class ChangePasswordViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol {
+class ChangePasswordViewController : StaticDataTableViewController {
     
     @IBOutlet weak var oldPasswordTextField: UITextField!
     @IBOutlet weak var newPasswordTextField: UITextField!
@@ -22,6 +22,11 @@ class ChangePasswordViewController : StaticDataTableViewController, UIMessagePre
     
     var viewModel: ChangePasswordViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        registerFields()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -37,61 +42,53 @@ class ChangePasswordViewController : StaticDataTableViewController, UIMessagePre
             viewModel.changePasswordWith(oldPassword: oldPasswordTextField.text?.trimmed,
                                          newPassword: newPasswordTextField.text?.trimmed,
                                          newPasswordConfirmation: newPasswordConfirmationTextField.text?.trimmed)
-            }.done {
-                self.messagePresenterManager.show(navBarMessage: "Пароль успешно изменен", theme: .success)
-                self.navigationController?.popViewController(animated: true)
-            }.catch { error in
-                switch error {
-                case ChangePasswordError.validation(let validationResults):
-                    self.show(validationResults: validationResults)
-                case APIRequestError.unprocessedEntity(let errors):
-                    self.show(errors: errors)
-                default:
-                    self.messagePresenterManager.show(navBarMessage: "Невозможно изменить пароль", theme: .error)
-                }
-            }.finally {
+        }.done {
+            self.messagePresenterManager.show(navBarMessage: "Пароль успешно изменен", theme: .success)
+            self.navigationController?.popViewController(animated: true)
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Невозможно изменить пароль", theme: .error)
+            self.validateUI()
+        }.finally {
                 self.setActivityIndicator(hidden: true)
                 self.changePasswordButton.isEnabled = true
         }
+    }
+    
+    @IBAction func didChangeText(_ sender: UITextField) {
+        didChangeEditing(sender)
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
         cell(activityIndicatorCell, setHidden: hidden)
         reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
     }
+}
+
+extension ChangePasswordViewController : FieldsViewControllerProtocol {
     
-    private func show(errors: [String: String]) {
-        for (_, validationMessage) in errors {
-            messagePresenterManager.show(validationMessage: validationMessage)
-        }
+    var fieldsViewModel: FieldsViewModel {
+        return viewModel
     }
     
-    private func show(validationResults: [ChangePasswordForm.CodingKeys: [ValidationErrorReason]]) {
-        
-        for key in validationResults.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
-            for reason in validationResults[key] ?? [] {
-                let message = validationMessageFor(key: key, reason: reason)
-                messagePresenterManager.show(validationMessage: message)
-            }
-        }
+    func registerFields() {
+        fieldsViewModel.register(oldPasswordTextField,
+                                 attributeName: ChangePasswordForm.CodingKeys.oldPassword.stringValue,
+                                 codingKey: ChangePasswordForm.CodingKeys.oldPassword)
+        fieldsViewModel.register(newPasswordTextField,
+                                 attributeName: "password",
+                                 codingKey: ChangePasswordForm.CodingKeys.newPassword)
+        fieldsViewModel.register(newPasswordConfirmationTextField,
+                                 attributeName: "password_confirmation",
+                                 codingKey: ChangePasswordForm.CodingKeys.newPasswordConfirmation)
+    }
+}
+
+extension ChangePasswordViewController : UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        didBeginEditing(textField)
     }
     
-    private func validationMessageFor(key: ChangePasswordForm.CodingKeys, reason: ValidationErrorReason) -> String {
-        switch (key, reason) {
-        case (.oldPassword, .required):
-            return "Укажите текущий пароль"
-        case (.oldPassword, _):
-            return "Некорректный текущий пароль"
-        case (.newPassword, .required):
-            return "Укажите новый пароль"
-        case (.newPassword, _):
-            return "Некорректный новый пароль"
-        case (.newPasswordConfirmation, .required):
-            return "Подтвердите новый пароль"
-        case (.newPasswordConfirmation, .notEqual(to: ChangePasswordForm.CodingKeys.newPassword)):
-            return "Подтверждение не совпадает с новым паролем"
-        case (.newPasswordConfirmation, _):
-            return "Некорректное подтверждение нового пароля"
-        }
+    func textFieldDidEndEditing(_ textField: UITextField) {
     }
 }

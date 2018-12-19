@@ -233,7 +233,7 @@
         <scene sceneID="vXi-is-yxn">
             <objects>
                 <tableViewController storyboardIdentifier="ChangePasswordViewController" title="Смена пароля" id="AJD-0T-0XS" customClass="ChangePasswordViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PiN-KO-t0K" customClass="TPKeyboardAvoidingTableView">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PiN-KO-t0K" customClass="TPKeyboardAvoidingTableView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -272,6 +272,10 @@
                                                             <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                                            <connections>
+                                                                <action selector="didChangeText:" destination="AJD-0T-0XS" eventType="editingChanged" id="58n-bZ-9dB"/>
+                                                                <outlet property="delegate" destination="AJD-0T-0XS" id="nqe-YM-lB3"/>
+                                                            </connections>
                                                         </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.94117647059999998" green="0.95686274510000002" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -311,6 +315,10 @@
                                                             <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
+                                                            <connections>
+                                                                <action selector="didChangeText:" destination="AJD-0T-0XS" eventType="editingChanged" id="92P-rO-qeh"/>
+                                                                <outlet property="delegate" destination="AJD-0T-0XS" id="Zi2-V7-e9J"/>
+                                                            </connections>
                                                         </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.94117647059999998" green="0.95686274510000002" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -350,6 +358,10 @@
                                                             <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                                            <connections>
+                                                                <action selector="didChangeText:" destination="AJD-0T-0XS" eventType="editingChanged" id="o7P-s4-wv3"/>
+                                                                <outlet property="delegate" destination="AJD-0T-0XS" id="wLC-ur-7Jy"/>
+                                                            </connections>
                                                         </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.94117647059999998" green="0.95686274510000002" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>

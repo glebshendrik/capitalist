@@ -10,11 +10,10 @@ import Foundation
 import PromiseKit
 
 enum ChangePasswordError : Error {
-    case validation(validationResults: [ChangePasswordForm.CodingKeys : [ValidationErrorReason]])
     case currentSessionDoesNotExist
 }
 
-class ChangePasswordViewModel {
+class ChangePasswordViewModel : FieldsViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     
     init(accountCoordinator: AccountCoordinatorProtocol) {
@@ -24,13 +23,24 @@ class ChangePasswordViewModel {
     func changePasswordWith(oldPassword: String?,
                             newPassword: String?,
                             newPasswordConfirmation: String?) -> Promise<Void> {
+        
+        clearErrors()
+        
         return  firstly {
-            validate(oldPassword: oldPassword,
+                    validate(oldPassword: oldPassword,
                      newPassword: newPassword,
                      newPasswordConfirmation: newPasswordConfirmation)
-            }.then { changePasswordForm in
-                self.accountCoordinator.changePassword(with: changePasswordForm)
-        }
+                }.then { changePasswordForm in
+                    self.accountCoordinator.changePassword(with: changePasswordForm)
+                }.recover { error in
+                    if case APIRequestError.forbidden = error {
+                        let key = ChangePasswordForm.CodingKeys.oldPassword
+                        let validationMessage = self.validationMessageFor(key: key,
+                                                                          reason: ValidationErrorReason.invalid)
+                        self.fieldViewModelBy(codingKey: key)?.set(errors: [validationMessage])
+                    }
+                    try self.recover(error: error)
+                }
     }
     
     func validate(oldPassword: String?,
@@ -45,10 +55,8 @@ class ChangePasswordViewModel {
                                 passwordConfirmationKey: ChangePasswordForm.CodingKeys.newPasswordConfirmation,
                                 passwordKey: ChangePasswordForm.CodingKeys.newPassword)]
         
-        let failureResultsHash : [ChangePasswordForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
-        
-        if let failureResultsHash = failureResultsHash {
-            return Promise(error: ChangePasswordError.validation(validationResults: failureResultsHash))
+        if let errorPromise : Promise<ChangePasswordForm> = validationErrorPromise(for: validationResults) {
+            return errorPromise
         }
         
         guard let currentUserId = accountCoordinator.currentSession?.userId else {
@@ -61,5 +69,29 @@ class ChangePasswordViewModel {
                                          newPasswordConfirmation: newPasswordConfirmation!))
     }
     
+    override func validationMessage(for key: CodingKey, reason: ValidationErrorReason) -> String? {
+        guard let codingKey = key as? ChangePasswordForm.CodingKeys else {
+            return nil
+        }
+        return validationMessageFor(key: codingKey, reason: reason)
+    }
     
+    private func validationMessageFor(key: ChangePasswordForm.CodingKeys, reason: ValidationErrorReason) -> String {
+        switch (key, reason) {
+        case (.oldPassword, .required):
+            return "Укажите текущий пароль"
+        case (.oldPassword, _):
+            return "Некорректный текущий пароль"
+        case (.newPassword, .required):
+            return "Укажите новый пароль"
+        case (.newPassword, _):
+            return "Некорректный новый пароль"
+        case (.newPasswordConfirmation, .required):
+            return "Подтвердите новый пароль"
+        case (.newPasswordConfirmation, .notEqual(to: ChangePasswordForm.CodingKeys.newPassword)):
+            return "Подтверждение не совпадает с новым паролем"
+        case (.newPasswordConfirmation, _):
+            return "Некорректное подтверждение нового пароля"
+        }
+    }
 }
