@@ -16,7 +16,7 @@ protocol ForgotPasswordOutputProtocol {
     var email: String? { get }
 }
 
-class ForgotPasswordViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol, ForgotPasswordOutputProtocol {
+class ForgotPasswordViewController : StaticDataTableViewController, ForgotPasswordOutputProtocol {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var createPasswordResetCodeButton: UIButton!
@@ -27,6 +27,11 @@ class ForgotPasswordViewController : StaticDataTableViewController, UIMessagePre
     
     var email: String? {
         return emailTextField.text?.trimmed
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        registerFields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,19 +49,17 @@ class ForgotPasswordViewController : StaticDataTableViewController, UIMessagePre
         }.done {
             self.showResetPasswordScreen()
         }
-        .catch { error in
-            switch error {
-            case ForgotPasswordError.validation(let validationResults):
-                self.show(validationResults: validationResults)
-            case APIRequestError.notFound:
-                self.messagePresenterManager.show(navBarMessage: "Пользователь с таким адресом не найден", theme: .error)
-            default:
-                self.messagePresenterManager.show(navBarMessage: "Ошибка при создании кода восстановления пароля", theme: .error)
-            }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка при создании кода восстановления пароля", theme: .error)
+            self.validateUI()
         }.finally {
             self.setActivityIndicator(hidden: true)
             self.createPasswordResetCodeButton.isEnabled = true
         }
+    }
+    
+    @IBAction func didChangeText(_ sender: UITextField) {
+        didChangeEditing(sender)
     }
     
     func showResetPasswordScreen() {
@@ -75,23 +78,27 @@ class ForgotPasswordViewController : StaticDataTableViewController, UIMessagePre
         cell(activityIndicatorCell, setHidden: hidden)
         reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
     }
+}
+
+extension ForgotPasswordViewController : FieldsViewControllerProtocol {
     
-    private func show(validationResults: [PasswordResetCodeForm.CodingKeys: [ValidationErrorReason]]) {
-        
-        for key in validationResults.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
-            for reason in validationResults[key] ?? [] {
-                let message = validationMessageFor(key: key, reason: reason)
-                messagePresenterManager.show(validationMessage: message)
-            }
-        }
+    var fieldsViewModel: FieldsViewModel {
+        return viewModel
     }
     
-    private func validationMessageFor(key: PasswordResetCodeForm.CodingKeys, reason: ValidationErrorReason) -> String {
-        switch (key, reason) {
-        case (.email, .required):
-            return "Укажите Email"
-        case (.email, _):
-            return "Некорректный Email"
-        }
+    func registerFields() {
+        fieldsViewModel.register(emailTextField,
+                                 attributeName: PasswordResetCodeForm.CodingKeys.email.stringValue,
+                                 codingKey: PasswordResetCodeForm.CodingKeys.email)
+    }
+}
+
+extension ForgotPasswordViewController : UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        didBeginEditing(textField)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
     }
 }

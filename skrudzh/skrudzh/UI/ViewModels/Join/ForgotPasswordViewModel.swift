@@ -9,11 +9,7 @@
 import Foundation
 import PromiseKit
 
-enum ForgotPasswordError : Error {
-    case validation(validationResults: [PasswordResetCodeForm.CodingKeys : [ValidationErrorReason]])
-}
-
-class ForgotPasswordViewModel {
+class ForgotPasswordViewModel : FieldsViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     
     init(accountCoordinator: AccountCoordinatorProtocol) {
@@ -21,10 +17,18 @@ class ForgotPasswordViewModel {
     }
     
     func createPasswordResetCodeWith(email: String?) -> Promise<Void> {
+        
+        clearErrors()
+        
         return  firstly {
                     validate(email: email)
                 }.then { passwordResetCodeForm in
                     self.accountCoordinator.createPasswordResetCode(with: passwordResetCodeForm)
+                }.recover { error in
+                    if case APIRequestError.notFound = error {
+                        self.fieldViewModelBy(codingKey: PasswordResetCodeForm.CodingKeys.email)?.set(errors: ["Пользователь с таким адресом не найден"])                    
+                    }
+                    try self.recover(error: error)
                 }
     }
     
@@ -33,12 +37,26 @@ class ForgotPasswordViewModel {
         let validationResults : [ValidationResultProtocol] =
             [Validator.validate(email: email, key: PasswordResetCodeForm.CodingKeys.email)]
         
-        let failureResultsHash : [PasswordResetCodeForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
-        
-        if let failureResultsHash = failureResultsHash {
-            return Promise(error: ForgotPasswordError.validation(validationResults: failureResultsHash))
+        if let errorPromise : Promise<PasswordResetCodeForm> = validationErrorPromise(for: validationResults) {
+            return errorPromise
         }
         
         return .value(PasswordResetCodeForm(email: email!))
+    }
+    
+    override func validationMessage(for key: CodingKey, reason: ValidationErrorReason) -> String? {
+        guard let codingKey = key as? PasswordResetCodeForm.CodingKeys else {
+            return nil
+        }
+        return validationMessageFor(key: codingKey, reason: reason)
+    }
+    
+    private func validationMessageFor(key: PasswordResetCodeForm.CodingKeys, reason: ValidationErrorReason) -> String {
+        switch (key, reason) {
+        case (.email, .required):
+            return "Укажите Email"
+        case (.email, _):
+            return "Некорректный Email"
+        }
     }
 }
