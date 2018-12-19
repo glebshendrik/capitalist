@@ -16,7 +16,7 @@ protocol ResetPasswordInputProtocol {
     func set(email: String?)
 }
 
-class ResetPasswordViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol, ResetPasswordInputProtocol {
+class ResetPasswordViewController : StaticDataTableViewController, ResetPasswordInputProtocol {
     
     @IBOutlet weak var passwordResetCodeTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -28,6 +28,11 @@ class ResetPasswordViewController : StaticDataTableViewController, UIMessagePres
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
     private var email: String?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        registerFields()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,68 +55,53 @@ class ResetPasswordViewController : StaticDataTableViewController, UIMessagePres
                                         passwordConfirmation: passwordConfirmationTextField.text?.trimmed)
             }.catch { error in
                 switch error {
-                case ResetPasswordError.validation(let validationResults):
-                    self.show(validationResults: validationResults)
                 case APIRequestError.notFound:
                     self.messagePresenterManager.show(navBarMessage: "Пользователь с таким адресом не найден", theme: .error)
-                case APIRequestError.forbidden:
-                    self.messagePresenterManager.show(navBarMessage: "Код восстановления неверный или больше не действует", theme: .error)
-                case APIRequestError.notAuthorized:
-                    self.messagePresenterManager.show(navBarMessage: "Пароль изменен, но войти не удалось", theme: .error)
-                case APIRequestError.unprocessedEntity(let errors):
-                    self.show(errors: errors)
                 default:
                     self.messagePresenterManager.show(navBarMessage: "Ошибка при изменении пароля", theme: .error)
                 }
+                self.validateUI()
             }.finally {
                 self.setActivityIndicator(hidden: true)
                 self.resetPasswordButton.isEnabled = true
         }
     }
     
+    @IBAction func didChangeText(_ sender: UITextField) {
+        didChangeEditing(sender)
+    }
+    
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
         cell(activityIndicatorCell, setHidden: hidden)
         reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
     }
+}
+
+extension ResetPasswordViewController : FieldsViewControllerProtocol {
     
-    private func show(errors: [String: String]) {
-        for (_, validationMessage) in errors {
-            messagePresenterManager.show(validationMessage: validationMessage)
-        }
+    var fieldsViewModel: FieldsViewModel {
+        return viewModel
     }
     
-    private func show(validationResults: [ResetPasswordForm.CodingKeys: [ValidationErrorReason]]) {
-        
-        for key in validationResults.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
-            for reason in validationResults[key] ?? [] {
-                let message = validationMessageFor(key: key, reason: reason)
-                messagePresenterManager.show(validationMessage: message)
-            }
-        }
+    func registerFields() {
+        fieldsViewModel.register(passwordResetCodeTextField,
+                                 attributeName: ResetPasswordForm.CodingKeys.passwordResetCode.stringValue,
+                                 codingKey: ResetPasswordForm.CodingKeys.passwordResetCode)
+        fieldsViewModel.register(passwordTextField,
+                                 attributeName: ResetPasswordForm.CodingKeys.password.stringValue,
+                                 codingKey: ResetPasswordForm.CodingKeys.password)
+        fieldsViewModel.register(passwordConfirmationTextField,
+                                 attributeName: ResetPasswordForm.CodingKeys.passwordConfirmation.stringValue,
+                                 codingKey: ResetPasswordForm.CodingKeys.passwordConfirmation)
+    }
+}
+
+extension ResetPasswordViewController : UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        didBeginEditing(textField)
     }
     
-    private func validationMessageFor(key: ResetPasswordForm.CodingKeys, reason: ValidationErrorReason) -> String {
-        switch (key, reason) {
-        case (.email, .required):
-            return "Укажите Email"
-        case (.email, .invalid):
-            return "Некорректный Email"
-        case (.email, _):
-            return "Некорректный Email"
-        case (.passwordResetCode, .required):
-            return "Укажите код восстановления"
-        case (.passwordResetCode, _):
-            return "Некорректный код восстановления"
-        case (.password, .required):
-            return "Укажите пароль"
-        case (.password, _):
-            return "Некорректный пароль"
-        case (.passwordConfirmation, .required):
-            return "Подтвердите пароль"
-        case (.passwordConfirmation, .notEqual(to: ResetPasswordForm.CodingKeys.password)):
-            return "Подтверждение не совпадает с паролем"
-        case (.passwordConfirmation, _):
-            return "Некорректное изменение пароля"
-        }
+    func textFieldDidEndEditing(_ textField: UITextField) {
     }
 }
