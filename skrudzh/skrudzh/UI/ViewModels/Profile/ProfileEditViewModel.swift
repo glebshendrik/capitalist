@@ -10,11 +10,10 @@ import Foundation
 import PromiseKit
 
 enum ProfileEditError : Error {
-    case validation(validationResults: [UserUpdatingForm.CodingKeys : [ValidationErrorReason]])
     case currentSessionDoesNotExist
 }
 
-class ProfileEditViewModel {
+class ProfileEditViewModel : FieldsViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     
     private var user: User? = nil
@@ -32,10 +31,15 @@ class ProfileEditViewModel {
     }
     
     func updateProfileWith(firstname: String?) -> Promise<Void> {
+        
+        clearErrors()
+        
         return  firstly {
                     validate(firstname: firstname)
                 }.then { userUpdatingForm in
                     self.accountCoordinator.updateUser(with: userUpdatingForm)
+                }.recover { error in
+                    try self.recover(error: error)
                 }
     }
     
@@ -44,10 +48,8 @@ class ProfileEditViewModel {
         let validationResults : [ValidationResultProtocol] =
             [validate(firstname: firstname)]
         
-        let failureResultsHash : [UserUpdatingForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
-        
-        if let failureResultsHash = failureResultsHash {
-            return Promise(error: ProfileEditError.validation(validationResults: failureResultsHash))
+        if let errorPromise : Promise<UserUpdatingForm> = validationErrorPromise(for: validationResults) {
+            return errorPromise
         }
         
         guard let currentUserId = accountCoordinator.currentSession?.userId else {
@@ -61,5 +63,19 @@ class ProfileEditViewModel {
     func validate(firstname: String?) -> ValidationResult<String?> {
         return .success(key: UserUpdatingForm.CodingKeys.firstname,
                         value: firstname)
+    }
+    
+    override func validationMessage(for key: CodingKey, reason: ValidationErrorReason) -> String? {
+        guard let codingKey = key as? UserUpdatingForm.CodingKeys else {
+            return nil
+        }
+        return validationMessageFor(key: codingKey, reason: reason)
+    }
+    
+    private func validationMessageFor(key: UserUpdatingForm.CodingKeys, reason: ValidationErrorReason) -> String {
+        switch (key, reason) {
+        case (.firstname, _):
+            return "Некорректное имя"
+        }
     }
 }

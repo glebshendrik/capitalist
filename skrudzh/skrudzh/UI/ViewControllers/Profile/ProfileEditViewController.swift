@@ -17,7 +17,7 @@ protocol ProfileEditInputProtocol {
     func set(user: User?)
 }
 
-class ProfileEditViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileEditInputProtocol {
+class ProfileEditViewController : StaticDataTableViewController, ProfileEditInputProtocol {
     
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -30,6 +30,7 @@ class ProfileEditViewController : StaticDataTableViewController, UIMessagePresen
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        registerFields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,15 +52,9 @@ class ProfileEditViewController : StaticDataTableViewController, UIMessagePresen
         }.done {
             self.messagePresenterManager.show(navBarMessage: "Данные профиля успешно сохранены", theme: .success)
             self.close()
-        }.catch { error in
-            switch error {
-            case ProfileEditError.validation(let validationResults):
-                self.show(validationResults: validationResults)
-            case APIRequestError.unprocessedEntity(let errors):
-                self.show(errors: errors)
-            default:
-                self.messagePresenterManager.show(navBarMessage: "Невозможно изменить данные профиля", theme: .error)
-            }
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Невозможно изменить данные профиля", theme: .error)
+            self.validateUI()
         }.finally {
             self.setActivityIndicator(hidden: true)
             self.saveButton.isEnabled = true
@@ -68,6 +63,10 @@ class ProfileEditViewController : StaticDataTableViewController, UIMessagePresen
     
     @IBAction func didTapCancelButton(_ sender: Any) {
         close()
+    }
+    
+    @IBAction func didChangeText(_ sender: UITextField) {
+        didChangeEditing(sender)
     }
     
     private func close() {
@@ -82,27 +81,27 @@ class ProfileEditViewController : StaticDataTableViewController, UIMessagePresen
         cell(activityIndicatorCell, setHidden: hidden)
         reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
     }
+}
+
+extension ProfileEditViewController : FieldsViewControllerProtocol {
     
-    private func show(errors: [String: String]) {
-        for (_, validationMessage) in errors {
-            messagePresenterManager.show(validationMessage: validationMessage)
-        }
+    var fieldsViewModel: FieldsViewModel {
+        return viewModel
     }
     
-    private func show(validationResults: [UserUpdatingForm.CodingKeys: [ValidationErrorReason]]) {
-        
-        for key in validationResults.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
-            for reason in validationResults[key] ?? [] {
-                let message = validationMessageFor(key: key, reason: reason)
-                messagePresenterManager.show(validationMessage: message)
-            }
-        }
+    func registerFields() {
+        fieldsViewModel.register(firstnameTextField,
+                                 attributeName: UserUpdatingForm.CodingKeys.firstname.stringValue,
+                                 codingKey: UserUpdatingForm.CodingKeys.firstname)
+    }
+}
+
+extension ProfileEditViewController : UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        didBeginEditing(textField)
     }
     
-    private func validationMessageFor(key: UserUpdatingForm.CodingKeys, reason: ValidationErrorReason) -> String {
-        switch (key, reason) {
-        case (.firstname, _):
-            return "Некорректное имя"
-        }
+    func textFieldDidEndEditing(_ textField: UITextField) {
     }
 }
