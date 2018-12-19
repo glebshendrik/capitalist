@@ -139,7 +139,7 @@ extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelega
     func validationNeeded() {
         validateUI()
     }
-    
+        
     private func validateUI() {
         let isFormValid = viewModel.isFormValid(with: incomeSourceName)
         let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
