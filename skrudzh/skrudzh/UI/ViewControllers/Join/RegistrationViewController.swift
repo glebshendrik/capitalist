@@ -12,7 +12,7 @@ import PromiseKit
 import StaticDataTableViewController
 import SwiftMessages
 
-class RegistrationViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol {
+class RegistrationViewController : StaticDataTableViewController {
     
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -21,12 +21,12 @@ class RegistrationViewController : StaticDataTableViewController, UIMessagePrese
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var activityIndicatorCell: UITableViewCell!
     
-    var viewModel: RegistrationViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var viewModel: RegistrationViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerTextFields()
+        registerFields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,70 +63,29 @@ class RegistrationViewController : StaticDataTableViewController, UIMessagePrese
     }
 }
 
-extension RegistrationViewController {
+extension RegistrationViewController : FieldsViewControllerProtocol {
     
-    typealias FieldSettings = (background: UIColor, border: UIColor, borderWidth: CGFloat)
-    
-    private func registerTextFields() {
-        viewModel.register(emailTextField,
-                           attributeName: UserCreationForm.CodingKeys.email.stringValue,
-                           codingKey: UserCreationForm.CodingKeys.email)
-        viewModel.register(passwordTextField,
-                           attributeName: UserCreationForm.CodingKeys.password.stringValue,
-                           codingKey: UserCreationForm.CodingKeys.password)
-        viewModel.register(passwordConfirmationTextField,
-                           attributeName: UserCreationForm.CodingKeys.passwordConfirmation.stringValue,
-                           codingKey: UserCreationForm.CodingKeys.passwordConfirmation)
+    var fieldsViewModel: FieldsViewModel {
+        return viewModel
     }
     
-    private func validateUI() {
-        viewModel.fieldViewModels.forEach { fieldViewModel in
-            if let textField = fieldViewModel.field as? UITextField {
-                set(textField: textField, valid: fieldViewModel.valid)
-            }
-        }
-    }
-    
-    private func set(textField: UITextField, valid: Bool) {
-        let settings = valid ? validSettings() : invalidSettings()
-        
-        textField.superview?.backgroundColor = settings.background
-        textField.superview?.borderColor = settings.border
-        textField.superview?.borderWidth = settings.borderWidth
-    }
-    
-    private func validSettings() -> FieldSettings {
-        return (background: UIColor(red: 0.95, green: 0.96, blue: 1, alpha: 1),
-                border: UIColor.clear,
-                borderWidth: 0)
-    }
-    
-    private func invalidSettings() -> FieldSettings {
-        return (background: UIColor(red: 1, green: 0.98, blue: 0.98, alpha: 1),
-                border: UIColor(red: 1, green: 0.22, blue: 0.27, alpha: 1),
-                borderWidth: 1)
-    }
-    
-    private func show(errors: [String]) {
-        for error in errors {
-            messagePresenterManager.show(validationMessage: error)
-        }
+    func registerFields() {
+        fieldsViewModel.register(emailTextField,
+                                 attributeName: UserCreationForm.CodingKeys.email.stringValue,
+                                 codingKey: UserCreationForm.CodingKeys.email)
+        fieldsViewModel.register(passwordTextField,
+                                 attributeName: UserCreationForm.CodingKeys.password.stringValue,
+                                 codingKey: UserCreationForm.CodingKeys.password)
+        fieldsViewModel.register(passwordConfirmationTextField,
+                                 attributeName: UserCreationForm.CodingKeys.passwordConfirmation.stringValue,
+                                 codingKey: UserCreationForm.CodingKeys.passwordConfirmation)
     }
 }
 
 extension RegistrationViewController : UITextFieldDelegate {
     
-    private func didChangeEditing(_ textField: UITextField) {
-        if let fieldViewModel = viewModel.fieldViewModelBy(field: textField) {
-            fieldViewModel.removeErrors()
-            set(textField: textField, valid: fieldViewModel.valid)
-        }
-    }
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let fieldViewModel = viewModel.fieldViewModelBy(field: textField) {
-            show(errors: fieldViewModel.errors)
-        }
+        didBeginEditing(textField)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

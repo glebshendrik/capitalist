@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum ValidationError : Error {
+    case invalid(failures: [ValidationResultProtocol])
+}
+
 enum ValidationErrorReason {
     case required
     case invalid
