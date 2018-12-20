@@ -284,14 +284,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="iEl-yg-ZVr">
-                                                    <rect key="frame" x="169" y="0.0" width="37" height="37"/>
-                                                    <color key="color" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                </activityIndicatorView>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="DCg-3R-wG6">
+                                                    <rect key="frame" x="160" y="3.5" width="55" height="31"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="iEl-yg-ZVr" firstAttribute="top" secondItem="QYu-lZ-uyq" secondAttribute="top" id="1g7-6R-CqQ"/>
-                                                <constraint firstItem="iEl-yg-ZVr" firstAttribute="centerX" secondItem="QYu-lZ-uyq" secondAttribute="centerX" id="Aim-ZB-Bf0"/>
+                                                <constraint firstItem="DCg-3R-wG6" firstAttribute="centerY" secondItem="QYu-lZ-uyq" secondAttribute="centerY" id="064-k9-Kw6"/>
+                                                <constraint firstItem="DCg-3R-wG6" firstAttribute="centerX" secondItem="QYu-lZ-uyq" secondAttribute="centerX" id="IQC-ZZ-hxN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -335,6 +334,7 @@
                     <connections>
                         <outlet property="activityIndicatorCell" destination="TmG-gr-KEK" id="PF3-gD-MmY"/>
                         <outlet property="emailTextField" destination="SZq-aH-qus" id="Js2-6u-vXg"/>
+                        <outlet property="loaderImageView" destination="DCg-3R-wG6" id="7LU-qq-aBM"/>
                         <outlet property="loginButton" destination="aiX-hC-1Cu" id="hrQ-N8-UcI"/>
                         <outlet property="passwordTextField" destination="2QE-YU-bse" id="b3q-w5-gBp"/>
                     </connections>
@@ -464,14 +464,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fu0-Dz-l4r">
-                                                    <rect key="frame" x="169" y="0.0" width="37" height="37"/>
-                                                    <color key="color" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                </activityIndicatorView>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="UjU-gv-g5a">
+                                                    <rect key="frame" x="160" y="3.5" width="55" height="31"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="fu0-Dz-l4r" firstAttribute="centerX" secondItem="faX-My-dbA" secondAttribute="centerX" id="2ew-fb-Lwr"/>
-                                                <constraint firstItem="fu0-Dz-l4r" firstAttribute="top" secondItem="faX-My-dbA" secondAttribute="top" id="PCv-pT-gv1"/>
+                                                <constraint firstItem="UjU-gv-g5a" firstAttribute="centerY" secondItem="faX-My-dbA" secondAttribute="centerY" id="IGR-e9-CwD"/>
+                                                <constraint firstItem="UjU-gv-g5a" firstAttribute="centerX" secondItem="faX-My-dbA" secondAttribute="centerX" id="yPN-8j-idz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -501,6 +500,7 @@
                         <outlet property="activityIndicatorCell" destination="iVB-8o-cYi" id="haV-yv-MWD"/>
                         <outlet property="createPasswordResetCodeButton" destination="eJ0-6e-auH" id="gqF-bx-IHI"/>
                         <outlet property="emailTextField" destination="yyU-5r-6sH" id="g6h-r6-ide"/>
+                        <outlet property="loaderImageView" destination="UjU-gv-g5a" id="LHM-Uu-yc6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5bq-ea-xry" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -739,14 +739,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hdi-hO-7h5">
-                                                    <rect key="frame" x="169" y="0.0" width="37" height="37"/>
-                                                    <color key="color" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                </activityIndicatorView>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="kCA-Bm-6b2">
+                                                    <rect key="frame" x="160" y="3.5" width="55" height="31"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="hdi-hO-7h5" firstAttribute="centerX" secondItem="MZN-KY-moP" secondAttribute="centerX" id="9vj-Ku-MoD"/>
-                                                <constraint firstItem="hdi-hO-7h5" firstAttribute="top" secondItem="MZN-KY-moP" secondAttribute="top" id="YG0-ob-zPb"/>
+                                                <constraint firstItem="kCA-Bm-6b2" firstAttribute="centerY" secondItem="MZN-KY-moP" secondAttribute="centerY" id="OtD-Oi-1Ic"/>
+                                                <constraint firstItem="kCA-Bm-6b2" firstAttribute="centerX" secondItem="MZN-KY-moP" secondAttribute="centerX" id="pRw-oG-ghv"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -762,6 +761,7 @@
                         <outlet property="activityIndicatorCell" destination="vFk-ax-avA" id="tRe-g0-kyg"/>
                         <outlet property="emailTextField" destination="FTL-1d-Tu6" id="fhg-t9-aSJ"/>
                         <outlet property="firstnameTextField" destination="jF1-iO-GOk" id="lcb-9b-cdn"/>
+                        <outlet property="loaderImageView" destination="kCA-Bm-6b2" id="pkD-do-2qm"/>
                         <outlet property="passwordConfirmationTextField" destination="kv4-fZ-Vgq" id="yH5-wr-JwO"/>
                         <outlet property="passwordTextField" destination="EwF-ZT-J0G" id="JjW-Cp-Xlc"/>
                         <outlet property="registerButton" destination="q56-4Z-gDC" id="UOE-yY-8pN"/>
@@ -969,14 +969,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bf9-Pv-kmR">
-                                                    <rect key="frame" x="169" y="0.0" width="37" height="37"/>
-                                                    <color key="color" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                </activityIndicatorView>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="QgX-qE-9LM">
+                                                    <rect key="frame" x="160" y="3.5" width="55" height="31"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="bf9-Pv-kmR" firstAttribute="top" secondItem="2nt-l3-50I" secondAttribute="top" id="6f8-Q4-kOi"/>
-                                                <constraint firstItem="bf9-Pv-kmR" firstAttribute="centerX" secondItem="2nt-l3-50I" secondAttribute="centerX" id="xIf-2h-6sE"/>
+                                                <constraint firstItem="QgX-qE-9LM" firstAttribute="centerY" secondItem="2nt-l3-50I" secondAttribute="centerY" id="JVc-73-acQ"/>
+                                                <constraint firstItem="QgX-qE-9LM" firstAttribute="centerX" secondItem="2nt-l3-50I" secondAttribute="centerX" id="crN-8T-R5f"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -990,6 +989,7 @@
                     </tableView>
                     <connections>
                         <outlet property="activityIndicatorCell" destination="5CB-fQ-IeM" id="xZ9-GS-h77"/>
+                        <outlet property="loaderImageView" destination="QgX-qE-9LM" id="n7e-4t-b6B"/>
                         <outlet property="passwordConfirmationTextField" destination="lzC-5K-EKj" id="j2u-pz-QJm"/>
                         <outlet property="passwordResetCodeTextField" destination="NC5-2G-zLN" id="WcC-k3-7Hr"/>
                         <outlet property="passwordTextField" destination="dzJ-an-Jvn" id="fpP-EM-qAO"/>
@@ -1004,6 +1004,7 @@
     <resources>
         <image name="coin-loader-1" width="120" height="120"/>
         <image name="join-image" width="114" height="96"/>
+        <image name="loader-1" width="55" height="31"/>
         <image name="reset-code-image" width="96" height="111"/>
         <image name="reset-password-image" width="96" height="112"/>
     </resources>

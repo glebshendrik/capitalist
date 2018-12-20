@@ -22,6 +22,7 @@ class ProfileEditViewController : StaticDataTableViewController, ProfileEditInpu
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var activityIndicatorCell: UITableViewCell!
+    @IBOutlet weak var loaderImageView: UIImageView!
     
     var viewModel: ProfileEditViewModel!
     
@@ -31,6 +32,7 @@ class ProfileEditViewController : StaticDataTableViewController, ProfileEditInpu
         super.viewDidLoad()
         updateUI()
         registerFields()
+        loaderImageView.showLoader()
     }
     
     override func viewWillAppear(_ animated: Bool) {

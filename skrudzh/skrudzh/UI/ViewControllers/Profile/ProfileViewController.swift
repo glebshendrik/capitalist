@@ -24,6 +24,10 @@ class ProfileViewController : StaticDataTableViewController, UIMessagePresenterM
     @IBOutlet weak var firstnameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var activityIndicatorCell: UITableViewCell!
+    @IBOutlet weak var loaderImageView: UIImageView!
+    
+    private var loaderView: LoaderView!
     
     var user: User? {
         return viewModel.user
@@ -35,12 +39,14 @@ class ProfileViewController : StaticDataTableViewController, UIMessagePresenterM
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updateUI()
         refreshData()
+        self.setActivityIndicator(hidden: true, animated: false)
     }
     
     @IBAction func didTapLogoutButton(_ sender: Any) {
-        messagePresenterManager.showHUD(with: "Выход...")
+        self.setActivityIndicator(hidden: false)
         logoutButton.isEnabled = false
         
         firstly {
@@ -49,7 +55,7 @@ class ProfileViewController : StaticDataTableViewController, UIMessagePresenterM
             
             
         }.finally {
-            self.messagePresenterManager.dismissHUD()
+            self.setActivityIndicator(hidden: true)
             self.logoutButton.isEnabled = true
         }
     }
@@ -74,8 +80,8 @@ class ProfileViewController : StaticDataTableViewController, UIMessagePresenterM
             self.messagePresenterManager.show(navBarMessage: "Возникла проблема при загрузке данных профиля", theme: .error)
             
         }.finally {            
-            self.updateUI(animated: true)
             self.hideActivityIndicator()
+            self.updateUI(animated: true)
             self.logoutButton.isEnabled = true
         }
     }
@@ -92,17 +98,35 @@ class ProfileViewController : StaticDataTableViewController, UIMessagePresenterM
     }
     
     private func hideActivityIndicator() {
-        refreshControl?.endRefreshing()
+        self.refreshControl?.endRefreshing()
+    }
+    
+    private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
+        cell(activityIndicatorCell, setHidden: hidden)
+        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
     }
     
     private func setupUI() {
         setupRefreshControl()
+        loaderImageView.showLoader()
     }
     
     private func setupRefreshControl() {
         refreshControl = UIRefreshControl()
+        refreshControl?.backgroundColor = .clear
+        refreshControl?.tintColor = .clear
         refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-    }
-    
+        if let objOfRefreshView = Bundle.main.loadNibNamed("LoaderView",
+                                                           owner: self,
+                                                           options: nil)?.first as? LoaderView,
+            let refreshControl = refreshControl {
+            
+            loaderView = objOfRefreshView
+            loaderView.imageView.showLoader()
+            loaderView.frame = refreshControl.frame
+            refreshControl.removeSubviews()
+            refreshControl.addSubview(loaderView)
+        }
+    }    
 }
 

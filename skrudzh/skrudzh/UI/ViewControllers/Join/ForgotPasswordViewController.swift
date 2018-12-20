@@ -21,6 +21,7 @@ class ForgotPasswordViewController : StaticDataTableViewController, ForgotPasswo
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var createPasswordResetCodeButton: UIButton!
     @IBOutlet weak var activityIndicatorCell: UITableViewCell!
+    @IBOutlet weak var loaderImageView: UIImageView!
     
     var viewModel: ForgotPasswordViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -32,6 +33,7 @@ class ForgotPasswordViewController : StaticDataTableViewController, ForgotPasswo
     override func viewDidLoad() {
         super.viewDidLoad()
         registerFields()
+        loaderImageView.showLoader()
     }
     
     override func viewWillAppear(_ animated: Bool) {

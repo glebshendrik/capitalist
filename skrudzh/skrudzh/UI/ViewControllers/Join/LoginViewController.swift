@@ -18,6 +18,7 @@ class LoginViewController : StaticDataTableViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var activityIndicatorCell: UITableViewCell!
+    @IBOutlet weak var loaderImageView: UIImageView!
     
     var viewModel: LoginViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -25,6 +26,7 @@ class LoginViewController : StaticDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerFields()
+        loaderImageView.showLoader()
     }
     
     override func viewWillAppear(_ animated: Bool) {

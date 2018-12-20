@@ -23,6 +23,7 @@ class ResetPasswordViewController : StaticDataTableViewController, ResetPassword
     @IBOutlet weak var passwordConfirmationTextField: UITextField!
     @IBOutlet weak var resetPasswordButton: UIButton!
     @IBOutlet weak var activityIndicatorCell: UITableViewCell!
+    @IBOutlet weak var loaderImageView: UIImageView!
     
     var viewModel: ResetPasswordViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -32,6 +33,7 @@ class ResetPasswordViewController : StaticDataTableViewController, ResetPassword
     override func viewDidLoad() {
         super.viewDidLoad()
         registerFields()
+        loaderImageView.showLoader()
     }
     
     override func viewWillAppear(_ animated: Bool) {

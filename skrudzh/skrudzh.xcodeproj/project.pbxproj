@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		ACA15497C062BEC12449D2F3 /* Pods_skrudzh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A6F359936A24B73097CB3A /* Pods_skrudzh.framework */; };
+		FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADF621CBE56100805288 /* LoaderView.swift */; };
+		FA0CADF921CBE58F00805288 /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0CADF821CBE58F00805288 /* LoaderView.xib */; };
 		FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */; };
 		FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */; };
 		FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA165CD921B652BE00EAA16B /* Profile.storyboard */; };
@@ -111,6 +113,8 @@
 		28A6F359936A24B73097CB3A /* Pods_skrudzh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_skrudzh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA97C1FC00F8ED22CFC7287 /* Pods-skrudzh.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skrudzh.release.xcconfig"; path = "Pods/Target Support Files/Pods-skrudzh/Pods-skrudzh.release.xcconfig"; sourceTree = "<group>"; };
 		C419C22762BA0505AF64D6FC /* Pods-skrudzh.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skrudzh.debug.xcconfig"; path = "Pods/Target Support Files/Pods-skrudzh/Pods-skrudzh.debug.xcconfig"; sourceTree = "<group>"; };
+		FA0CADF621CBE56100805288 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
+		FA0CADF821CBE58F00805288 /* LoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
 		FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		FA165CD921B652BE00EAA16B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -240,6 +244,15 @@
 				28A6F359936A24B73097CB3A /* Pods_skrudzh.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA0CADF321CBE41F00805288 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FA0CADF621CBE56100805288 /* LoaderView.swift */,
+				FA0CADF821CBE58F00805288 /* LoaderView.xib */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		FA165CD421B4EF5500EAA16B /* Join */ = {
@@ -515,6 +528,7 @@
 		FAD88F7B21B027B500BE7BC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA0CADF321CBE41F00805288 /* Common */,
 				FAC3B9D221C279450015A12F /* Main */,
 			);
 			path = Views;
@@ -667,6 +681,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAD88F8021B02A5000BE7BC1 /* Main.storyboard in Resources */,
+				FA0CADF921CBE58F00805288 /* LoaderView.xib in Resources */,
 				FA26814721B178D300FADED1 /* Rubik-Regular.ttf in Resources */,
 				FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */,
 				FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */,
@@ -826,6 +841,7 @@
 				FAC3B9CD21C0F7670015A12F /* IncomeSourcesCoordinator.swift in Sources */,
 				FAD88F2421AEB71000BE7BC1 /* NotificationsManagerProtocol.swift in Sources */,
 				FAD88F3721AEB8F200BE7BC1 /* UIFlowManager.swift in Sources */,
+				FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */,
 				FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */,
 				FAD88F7621AFD64000BE7BC1 /* APIResource.swift in Sources */,
 				FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */,

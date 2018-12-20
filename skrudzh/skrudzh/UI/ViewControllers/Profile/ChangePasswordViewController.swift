@@ -19,6 +19,7 @@ class ChangePasswordViewController : StaticDataTableViewController {
     @IBOutlet weak var newPasswordConfirmationTextField: UITextField!
     @IBOutlet weak var changePasswordButton: UIButton!
     @IBOutlet weak var activityIndicatorCell: UITableViewCell!
+    @IBOutlet weak var loaderImageView: UIImageView!
     
     var viewModel: ChangePasswordViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -26,6 +27,7 @@ class ChangePasswordViewController : StaticDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerFields()
+        loaderImageView.showLoader()
     }
     
     override func viewWillAppear(_ animated: Bool) {

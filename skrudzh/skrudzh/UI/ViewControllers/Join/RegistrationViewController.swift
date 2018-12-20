@@ -20,6 +20,7 @@ class RegistrationViewController : StaticDataTableViewController {
     @IBOutlet weak var passwordConfirmationTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var activityIndicatorCell: UITableViewCell!
+    @IBOutlet weak var loaderImageView: UIImageView!
     
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: RegistrationViewModel!
@@ -27,6 +28,7 @@ class RegistrationViewController : StaticDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerFields()
+        loaderImageView.showLoader()
     }
     
     override func viewWillAppear(_ animated: Bool) {
