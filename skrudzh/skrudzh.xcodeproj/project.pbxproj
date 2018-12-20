@@ -56,7 +56,7 @@
 		FAC3B9D421C2796C0015A12F /* IncomeSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */; };
 		FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
-		FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */; };
+		FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* Launch.storyboard */; };
 		FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F0C21AEB24F00BE7BC1 /* ApplicationAssembly.swift */; };
 		FAD88F0F21AEB45A00BE7BC1 /* ManagersAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F0E21AEB45A00BE7BC1 /* ManagersAssembly.swift */; };
 		FAD88F1321AEB48800BE7BC1 /* ApplicationRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F1221AEB48800BE7BC1 /* ApplicationRouterProtocol.swift */; };
@@ -161,7 +161,7 @@
 		FAD88EF621AEA86E00BE7BC1 /* skrudzh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skrudzh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FAD88F0321AEA87300BE7BC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FAD88F0321AEA87300BE7BC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Launch.storyboard; sourceTree = "<group>"; };
 		FAD88F0521AEA87300BE7BC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAD88F0C21AEB24F00BE7BC1 /* ApplicationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
 		FAD88F0E21AEB45A00BE7BC1 /* ManagersAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagersAssembly.swift; sourceTree = "<group>"; };
@@ -546,9 +546,9 @@
 		FAD88F7E21B027D500BE7BC1 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */,
-				FAD88F7F21B02A5000BE7BC1 /* Main.storyboard */,
+				FAD88F0221AEA87300BE7BC1 /* Launch.storyboard */,
 				FAD88F8121B0F95A00BE7BC1 /* Join.storyboard */,
+				FAD88F7F21B02A5000BE7BC1 /* Main.storyboard */,
 				FA165CD921B652BE00EAA16B /* Profile.storyboard */,
 				FAC3B9BD21BE0D1F0015A12F /* Onboarding.storyboard */,
 			);
@@ -669,7 +669,7 @@
 				FAD88F8021B02A5000BE7BC1 /* Main.storyboard in Resources */,
 				FA26814721B178D300FADED1 /* Rubik-Regular.ttf in Resources */,
 				FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */,
-				FAD88F0421AEA87300BE7BC1 /* LaunchScreen.storyboard in Resources */,
+				FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */,
 				FA26814421B178D300FADED1 /* Rubik-LightItalic.ttf in Resources */,
 				FA26813E21B178D300FADED1 /* Rubik-MediumItalic.ttf in Resources */,
 				FAD88F8221B0F95A00BE7BC1 /* Join.storyboard in Resources */,
@@ -854,12 +854,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		FAD88F0221AEA87300BE7BC1 /* LaunchScreen.storyboard */ = {
+		FAD88F0221AEA87300BE7BC1 /* Launch.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				FAD88F0321AEA87300BE7BC1 /* Base */,
 			);
-			name = LaunchScreen.storyboard;
+			name = Launch.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
