@@ -16,6 +16,8 @@ class MenuViewController : StaticDataTableViewController, UIMessagePresenterMana
     @IBOutlet weak var joinCell: UITableViewCell!
     @IBOutlet weak var profileCell: UITableViewCell!
     
+    private var loaderView: LoaderView!
+    
     var viewModel: MenuViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
@@ -70,6 +72,19 @@ class MenuViewController : StaticDataTableViewController, UIMessagePresenterMana
     
     private func setupRefreshControl() {
         refreshControl = UIRefreshControl()
+        refreshControl?.backgroundColor = .clear
+        refreshControl?.tintColor = .clear
         refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-    }
+        if let objOfRefreshView = Bundle.main.loadNibNamed("LoaderView",
+                                                           owner: self,
+                                                           options: nil)?.first as? LoaderView,
+            let refreshControl = refreshControl {
+            
+            loaderView = objOfRefreshView
+            loaderView.imageView.showLoader()
+            loaderView.frame = refreshControl.frame
+            refreshControl.removeSubviews()
+            refreshControl.addSubview(loaderView)
+        }
+    }    
 }
