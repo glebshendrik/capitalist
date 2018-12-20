@@ -15,9 +15,7 @@ class LandingViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loaderImageView.animationImages = [Int](1...15).compactMap { UIImage(named: "coin-loader-\($0)") }
-        loaderImageView.animationDuration = 1
-        loaderImageView.startAnimating()
+        loaderImageView.showCoinLoader()
     }
     
     func update(loadingMessage: String) {

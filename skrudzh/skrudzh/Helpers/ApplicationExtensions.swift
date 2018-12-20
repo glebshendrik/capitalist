@@ -431,3 +431,17 @@ extension UIView {
         return borders
     }
 }
+
+extension UIImageView {
+    func showCoinLoader() {
+        self.animationImages = [Int](1...15).compactMap { UIImage(named: "coin-loader-\($0)") }
+        self.animationDuration = 1
+        self.startAnimating()
+    }
+    
+    func showLoader() {
+        self.animationImages = [Int](1...20).compactMap { UIImage(named: "loader-\($0)") }
+        self.animationDuration = 1.5
+        self.startAnimating()
+    }
+}
