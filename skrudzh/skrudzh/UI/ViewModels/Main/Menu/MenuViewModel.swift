@@ -33,8 +33,12 @@ class MenuViewModel {
         return !user.registrationConfirmed
     }
     
-    var currentUserName: String? {
-        return currentUser?.fullname
+    var profileTitle: String? {
+        var firstname = currentUser?.firstname
+        if firstname != nil && firstname!.trimmed.isEmpty {
+            firstname = nil
+        }
+        return firstname ?? currentUser?.email
     }
     
     init(accountCoordinator: AccountCoordinatorProtocol) {

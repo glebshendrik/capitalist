@@ -34,6 +34,7 @@ class MenuViewController : StaticDataTableViewController, UIMessagePresenterMana
     func updateUI(animated: Bool = false) {
         cell(joinCell, setHidden: !viewModel.isCurrentUserLoaded || !viewModel.isCurrentUserGuest)
         cell(profileCell, setHidden: !viewModel.isCurrentUserLoaded || viewModel.isCurrentUserGuest)
+        profileCell.textLabel?.text = viewModel.profileTitle
         reloadData(animated: animated)
     }
     
