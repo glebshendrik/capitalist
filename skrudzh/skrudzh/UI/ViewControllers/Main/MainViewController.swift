@@ -21,6 +21,8 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBOutlet weak var incomeSourcesCollectionView: UICollectionView!
     @IBOutlet weak var addIncomeSourceButton: UIButton!
+    @IBOutlet weak var incomeSourcesActivityIndicator: UIView!
+    @IBOutlet weak var incomeSourcesLoader: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +39,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     }
     
     private func loadData(scrollToEndWhenUpdated: Bool = false) {
-        messagePresenterManager.showHUD(with: "Загрузка данных")
+        setIncomeSourcesActivityIndicator(hidden: false)
         firstly {
             viewModel.loadIncomeSources()
         }.done {
@@ -46,7 +48,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         .catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
         }.finally {
-            self.messagePresenterManager.dismissHUD()
+            self.setIncomeSourcesActivityIndicator(hidden: true)
         }        
     }
     
@@ -135,6 +137,7 @@ extension MainViewController {
         setupIncomeSourcesCollectionView()
         setupNavigationBar()
         setupMainMenu()
+        setupLoaders()
     }
     
     private func setupIncomeSourcesCollectionView() {
@@ -157,5 +160,20 @@ extension MainViewController {
         SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
         SideMenuManager.default.menuFadeStatusBar = false
+    }
+    
+    private func setupLoaders() {
+        incomeSourcesLoader.showLoader()
+        setIncomeSourcesActivityIndicator(hidden: true, animated: false)
+    }
+    
+    private func setIncomeSourcesActivityIndicator(hidden: Bool, animated: Bool = true) {
+        guard animated else {
+            incomeSourcesActivityIndicator.isHidden = hidden
+            return
+        }
+        UIView.transition(with: incomeSourcesActivityIndicator, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            self.incomeSourcesActivityIndicator.isHidden = hidden
+        })
     }
 }

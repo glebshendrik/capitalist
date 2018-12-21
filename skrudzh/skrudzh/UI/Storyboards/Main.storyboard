@@ -286,6 +286,25 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwf-gf-SNF">
+                                        <rect key="frame" x="64" y="16" width="311" height="40"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="l6v-CB-nnI">
+                                                <rect key="frame" x="128" y="4.5" width="55" height="31"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.18289822340011597" green="0.22552517056465149" blue="0.34480100870132446" alpha="0.75353167808219179" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="l6v-CB-nnI" firstAttribute="centerY" secondItem="fwf-gf-SNF" secondAttribute="centerY" id="4zo-2p-a9G"/>
+                                            <constraint firstItem="l6v-CB-nnI" firstAttribute="centerX" secondItem="fwf-gf-SNF" secondAttribute="centerX" id="cpx-tt-pKY"/>
+                                            <constraint firstAttribute="height" constant="40" id="wS6-Ml-cuv"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.18431372549019609" green="0.22745098039215686" blue="0.34509803921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -294,6 +313,9 @@
                                     <constraint firstAttribute="trailing" secondItem="Bh4-RC-uKP" secondAttribute="trailing" id="bjf-vH-cRs"/>
                                     <constraint firstItem="oe2-Rf-vgb" firstAttribute="top" secondItem="p2n-9h-iVJ" secondAttribute="top" constant="16" id="ewx-Tn-XZe"/>
                                     <constraint firstItem="oe2-Rf-vgb" firstAttribute="leading" secondItem="p2n-9h-iVJ" secondAttribute="leading" constant="16" id="fwo-kW-QAO"/>
+                                    <constraint firstItem="fwf-gf-SNF" firstAttribute="leading" secondItem="oe2-Rf-vgb" secondAttribute="trailing" constant="8" id="gzE-Ze-1NO"/>
+                                    <constraint firstItem="fwf-gf-SNF" firstAttribute="centerY" secondItem="p2n-9h-iVJ" secondAttribute="centerY" id="ioC-D7-YRa"/>
+                                    <constraint firstAttribute="trailing" secondItem="fwf-gf-SNF" secondAttribute="trailing" id="jKB-dm-kvf"/>
                                     <constraint firstItem="Bh4-RC-uKP" firstAttribute="leading" secondItem="oe2-Rf-vgb" secondAttribute="trailing" constant="8" id="sjd-bC-s7r"/>
                                     <constraint firstAttribute="bottom" secondItem="Bh4-RC-uKP" secondAttribute="bottom" id="yeG-fh-TRn"/>
                                 </constraints>
@@ -319,12 +341,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addIncomeSourceButton" destination="oe2-Rf-vgb" id="Vsx-Ib-BAb"/>
+                        <outlet property="incomeSourcesActivityIndicator" destination="fwf-gf-SNF" id="itM-3B-I0D"/>
                         <outlet property="incomeSourcesCollectionView" destination="Bh4-RC-uKP" id="aOY-fZ-NMq"/>
+                        <outlet property="incomeSourcesLoader" destination="l6v-CB-nnI" id="URL-iQ-PRr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6X-Vx-icx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2724" y="173"/>
+            <point key="canvasLocation" x="-2724" y="172.26386806596702"/>
         </scene>
         <!--Источник доходов-->
         <scene sceneID="bkG-Sv-TaS">
@@ -518,7 +542,7 @@
                         <viewLayoutGuide key="safeArea" id="fZZ-E3-wFU"/>
                     </view>
                     <navigationItem key="navigationItem" id="0J7-tA-y5z">
-                        <barButtonItem key="leftBarButtonItem" image="close-icon" id="auv-6z-2Aj">
+                        <barButtonItem key="rightBarButtonItem" image="close-icon" id="auv-6z-2Aj">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapCancelButton:" destination="XSV-72-Slk" id="pfS-VL-rQe"/>
