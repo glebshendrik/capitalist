@@ -22,9 +22,9 @@ protocol IncomeSourceEditInputProtocol {
 
 class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var removeButton: UIButton!
+    @IBOutlet weak var loaderImageView: UIImageView!
     
     var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
 
@@ -221,6 +221,7 @@ extension IncomeSourceEditViewController : IncomeSourceEditInputProtocol {
 extension IncomeSourceEditViewController {
     private func setupUI() {
         setupNavigationBar()
+        loaderImageView.showLoader()
     }
     
     private func setupNavigationBar() {
@@ -234,11 +235,11 @@ extension IncomeSourceEditViewController {
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
         guard animated else {
-            activityIndicator.isHidden = hidden
+            loaderImageView.isHidden = hidden
             return
         }
-        UIView.transition(with: activityIndicator, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            self.activityIndicator.isHidden = hidden
+        UIView.transition(with: loaderImageView, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            self.loaderImageView.isHidden = hidden
         })
     }
     

@@ -37,14 +37,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Войти" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HBL-RA-8gd">
-                                                    <rect key="frame" x="48" y="0.0" width="311" height="44"/>
+                                                    <rect key="frame" x="47" y="0.0" width="312" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.18823529411764706" green="0.20784313725490194" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="join-menu-item-icon" id="zrh-2J-gY9">
-                                                    <rect key="frame" x="16" y="15" width="17" height="13"/>
+                                                    <rect key="frame" x="16" y="15" width="16" height="13"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -329,7 +329,6 @@
         <!--Источник доходов-->
         <scene sceneID="bkG-Sv-TaS">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PKj-XG-hZf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="IncomeSourceEditTableController" id="Hsl-CQ-JmL" customClass="IncomeSourceEditTableController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HiE-xx-YOh" customClass="TPKeyboardAvoidingTableView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
@@ -445,6 +444,7 @@
                         <outlet property="nameIconContainer" destination="zPI-nh-2vU" id="O9R-rd-w1Z"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PKj-XG-hZf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-788" y="921.58920539730138"/>
         </scene>
@@ -496,21 +496,20 @@
                                     <action selector="didTapRemoveButton:" destination="XSV-72-Slk" eventType="touchUpInside" id="ZBi-Kv-RrN"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="yeW-xz-Kqa">
-                                <rect key="frame" x="169" y="490" width="37" height="37"/>
-                                <color key="color" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="0TN-hE-wWD">
+                                <rect key="frame" x="160" y="496" width="55" height="31"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fZZ-E3-wFU" firstAttribute="trailing" secondItem="v3t-Bu-Ras" secondAttribute="trailing" constant="32" id="43S-K2-DzX"/>
                             <constraint firstItem="fZZ-E3-wFU" firstAttribute="trailing" secondItem="LVd-n1-nuQ" secondAttribute="trailing" constant="32" id="7M5-8q-7LF"/>
-                            <constraint firstItem="LVd-n1-nuQ" firstAttribute="top" secondItem="yeW-xz-Kqa" secondAttribute="bottom" constant="4" id="IW8-8K-YR5"/>
+                            <constraint firstItem="0TN-hE-wWD" firstAttribute="centerX" secondItem="Fal-46-alb" secondAttribute="centerX" id="D3A-c0-bkA"/>
                             <constraint firstItem="LVd-n1-nuQ" firstAttribute="leading" secondItem="fZZ-E3-wFU" secondAttribute="leading" constant="32" id="Ikd-Zr-sfZ"/>
+                            <constraint firstItem="LVd-n1-nuQ" firstAttribute="top" secondItem="0TN-hE-wWD" secondAttribute="bottom" constant="4" id="Lcr-LZ-Bcb"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="bottom" secondItem="fZZ-E3-wFU" secondAttribute="bottom" id="UlC-vo-Vfb"/>
                             <constraint firstItem="v3t-Bu-Ras" firstAttribute="leading" secondItem="fZZ-E3-wFU" secondAttribute="leading" constant="32" id="Uyo-bR-f5q"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="top" secondItem="fZZ-E3-wFU" secondAttribute="top" id="XtM-Io-gVG"/>
-                            <constraint firstItem="yeW-xz-Kqa" firstAttribute="centerX" secondItem="Fal-46-alb" secondAttribute="centerX" id="bfr-68-5kb"/>
                             <constraint firstItem="fZZ-E3-wFU" firstAttribute="trailing" secondItem="fSE-gp-P7u" secondAttribute="trailing" id="gX2-Ac-UY7"/>
                             <constraint firstItem="fZZ-E3-wFU" firstAttribute="bottom" secondItem="LVd-n1-nuQ" secondAttribute="bottom" constant="32" id="nie-K0-LAv"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="leading" secondItem="fZZ-E3-wFU" secondAttribute="leading" id="p1T-1p-4Uv"/>
@@ -527,7 +526,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="yeW-xz-Kqa" id="3es-YO-Aeb"/>
+                        <outlet property="loaderImageView" destination="0TN-hE-wWD" id="Pyl-L5-Kch"/>
                         <outlet property="removeButton" destination="v3t-Bu-Ras" id="Cyl-1e-WiQ"/>
                         <outlet property="saveButton" destination="LVd-n1-nuQ" id="dIT-jK-Go0"/>
                     </connections>
@@ -602,6 +601,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="DKq-ob-JpV"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DpC-Bs-582" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -612,7 +612,8 @@
         <image name="blog-menu-item-icon" width="17" height="12"/>
         <image name="close-icon" width="12" height="12"/>
         <image name="faq-menu-item-icon" width="16" height="17"/>
-        <image name="join-menu-item-icon" width="16.5" height="13"/>
+        <image name="join-menu-item-icon" width="16" height="13"/>
+        <image name="loader-1" width="55" height="31"/>
         <image name="menu-button-icon" width="16" height="11"/>
         <image name="plus-icon-blue" width="16" height="16"/>
         <image name="remove-icon" width="17" height="20"/>
