@@ -9,14 +9,6 @@
 import Foundation
 import PromiseKit
 
-enum AuthProvider1Error : Error {
-    case emailHasAlreadyUsed
-    case userIdIsNotSpecified
-    case authenticationIsCancelled
-    case canNotGetProviderSessionData
-    case canNotGetProviderUserData
-}
-
 class IncomeSourcesCoordinator : IncomeSourcesCoordinatorProtocol {
     private let userSessionManager: UserSessionManagerProtocol
     private let incomeSourcesService: IncomeSourcesServiceProtocol

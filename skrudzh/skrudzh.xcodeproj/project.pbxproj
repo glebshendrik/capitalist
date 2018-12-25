@@ -13,6 +13,8 @@
 		FA0CADFD21D257F400805288 /* ExpenseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADFC21D257F400805288 /* ExpenseSource.swift */; };
 		FA0CADFF21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADFE21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift */; };
 		FA0CAE0121D25F5300805288 /* ExpenseSourcesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE0021D25F5300805288 /* ExpenseSourcesService.swift */; };
+		FA0CAE0321D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE0221D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift */; };
+		FA0CAE0521D2615900805288 /* ExpenseSourcesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE0421D2615900805288 /* ExpenseSourcesCoordinator.swift */; };
 		FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */; };
 		FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */; };
 		FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA165CD921B652BE00EAA16B /* Profile.storyboard */; };
@@ -121,6 +123,8 @@
 		FA0CADFC21D257F400805288 /* ExpenseSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSource.swift; sourceTree = "<group>"; };
 		FA0CADFE21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesServiceProtocol.swift; sourceTree = "<group>"; };
 		FA0CAE0021D25F5300805288 /* ExpenseSourcesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesService.swift; sourceTree = "<group>"; };
+		FA0CAE0221D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FA0CAE0421D2615900805288 /* ExpenseSourcesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesCoordinator.swift; sourceTree = "<group>"; };
 		FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		FA165CD921B652BE00EAA16B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -431,6 +435,7 @@
 				FAD88F4521AEBE7400BE7BC1 /* NotificationsCoordinator.swift */,
 				FAD88F6021AEC61800BE7BC1 /* AccountCoordinator.swift */,
 				FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */,
+				FA0CAE0421D2615900805288 /* ExpenseSourcesCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -504,6 +509,7 @@
 				FAD88F4321AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift */,
 				FAD88F5E21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift */,
 				FAC3B9CA21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift */,
+				FA0CAE0221D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -810,6 +816,7 @@
 				FAD88F4121AEBDF900BE7BC1 /* Navigator.swift in Sources */,
 				FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */,
 				FAD88F2621AEB72800BE7BC1 /* NotificationsManager.swift in Sources */,
+				FA0CAE0321D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift in Sources */,
 				FAD88F2A21AEB77200BE7BC1 /* NotificationAction.swift in Sources */,
 				FAD88F3F21AEBDDB00BE7BC1 /* UIMessagePresenterManager.swift in Sources */,
 				FAD88F5A21AEC1F800BE7BC1 /* UsersServiceProtocol.swift in Sources */,
@@ -821,6 +828,7 @@
 				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
 				FAC3B9C521C0EB7A0015A12F /* IncomeSource.swift in Sources */,
 				FAD88F4421AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift in Sources */,
+				FA0CAE0521D2615900805288 /* ExpenseSourcesCoordinator.swift in Sources */,
 				FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */,
 				FA6270A321C7A87300CC0269 /* IncomeSourceEditTableController.swift in Sources */,
 				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
