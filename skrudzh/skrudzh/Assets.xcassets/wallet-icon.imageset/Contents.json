@@ -2,25 +2,22 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "plus-icon-blue.png",
+      "filename" : "wallet-icon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "plus-icon-blue@2x.png",
+      "filename" : "wallet-icon@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "plus-icon-blue@3x.png",
+      "filename" : "wallet-icon@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }
