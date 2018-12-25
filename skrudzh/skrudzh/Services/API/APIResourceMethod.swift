@@ -15,20 +15,25 @@ struct APIResourceMethod {
         case .createUser,
              .createSession,
              .createPasswordResetCode,
-             .createIncomeSource:
+             .createIncomeSource,
+             .createExpenseSource:
             return .post
         case .showUser,
              .showIncomeSource,
-             .indexIncomeSources:
+             .indexIncomeSources,
+             .showExpenseSource,
+             .indexExpenseSources:
             return .get
         case .updateUser,
              .changePassword,
              .resetPassword,
              .registerDeviceToken,
-             .updateIncomeSource:
+             .updateIncomeSource,
+             .updateExpenseSource:
             return .put
         case .destroySession,
-             .destroyIncomeSource:
+             .destroyIncomeSource,
+             .destroyExpenseSource:
             return .delete
         }
     }

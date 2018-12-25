@@ -36,6 +36,8 @@ struct APIResourceRequest {
         case .registerDeviceToken(let deviceToken, _):      return [ "device_token" : deviceToken ]
         case .createIncomeSource(let form):                 return encode(form)
         case .updateIncomeSource(let form):                 return encode(form)
+        case .createExpenseSource(let form):                return encode(form)
+        case .updateExpenseSource(let form):                return encode(form)
         default:                                            return nil
         }
     }

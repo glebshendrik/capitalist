@@ -39,6 +39,13 @@ enum APIResource: URLRequestConvertible {
     case updateIncomeSource(form: IncomeSourceUpdatingForm)
     case destroyIncomeSource(id: Int)
     
+    // ExpenseSources
+    case createExpenseSource(form: ExpenseSourceCreationForm)
+    case showExpenseSource(id: Int)
+    case indexExpenseSources(userId: Int)
+    case updateExpenseSource(form: ExpenseSourceUpdatingForm)
+    case destroyExpenseSource(id: Int)
+    
     var method: HTTPMethod {
         return APIResourceMethod.method(for: self)
     }
