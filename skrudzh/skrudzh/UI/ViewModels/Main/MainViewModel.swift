@@ -11,15 +11,23 @@ import PromiseKit
 
 class MainViewModel {
     private let incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol
+    private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     
     private var incomeSourceViewModels: [IncomeSourceViewModel] = []
+    private var expenseSourceViewModels: [ExpenseSourceViewModel] = []
     
     var numberOfIncomeSources: Int {
         return incomeSourceViewModels.count
     }
     
-    init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol) {
+    var numberOfExpenseSources: Int {
+        return expenseSourceViewModels.count
+    }
+    
+    init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
+         expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
+        self.expenseSourcesCoordinator = expenseSourcesCoordinator
     }
     
     func loadIncomeSources() -> Promise<Void> {
@@ -30,7 +38,19 @@ class MainViewModel {
                 }.asVoid()
     }
     
+    func loadExpenseSources() -> Promise<Void> {
+        return  firstly {
+                    expenseSourcesCoordinator.index()
+                }.get { expenseSources in
+                    self.expenseSourceViewModels = expenseSources.map { ExpenseSourceViewModel(expenseSource: $0)}
+                }.asVoid()
+    }
+    
     func incomeSourceViewModel(at indexPath: IndexPath) -> IncomeSourceViewModel? {
         return incomeSourceViewModels.item(at: indexPath.row)
+    }
+    
+    func expenseSourceViewModel(at indexPath: IndexPath) -> ExpenseSourceViewModel? {
+        return expenseSourceViewModels.item(at: indexPath.row)
     }
 }

@@ -15,6 +15,7 @@
 		FA0CAE0121D25F5300805288 /* ExpenseSourcesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE0021D25F5300805288 /* ExpenseSourcesService.swift */; };
 		FA0CAE0321D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE0221D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift */; };
 		FA0CAE0521D2615900805288 /* ExpenseSourcesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE0421D2615900805288 /* ExpenseSourcesCoordinator.swift */; };
+		FA0CAE0721D266F100805288 /* ExpenseSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE0621D266F100805288 /* ExpenseSourceViewModel.swift */; };
 		FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */; };
 		FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */; };
 		FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA165CD921B652BE00EAA16B /* Profile.storyboard */; };
@@ -125,6 +126,7 @@
 		FA0CAE0021D25F5300805288 /* ExpenseSourcesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesService.swift; sourceTree = "<group>"; };
 		FA0CAE0221D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FA0CAE0421D2615900805288 /* ExpenseSourcesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesCoordinator.swift; sourceTree = "<group>"; };
+		FA0CAE0621D266F100805288 /* ExpenseSourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceViewModel.swift; sourceTree = "<group>"; };
 		FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		FA165CD921B652BE00EAA16B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 				FAC3B9CE21C11F850015A12F /* MainViewModel.swift */,
 				FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */,
 				FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */,
+				FA0CAE0621D266F100805288 /* ExpenseSourceViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -853,6 +856,7 @@
 				FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */,
 				FA6270A621CA3ED600CC0269 /* FieldViewModel.swift in Sources */,
 				FA0CADFF21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift in Sources */,
+				FA0CAE0721D266F100805288 /* ExpenseSourceViewModel.swift in Sources */,
 				FAC3B9D421C2796C0015A12F /* IncomeSourceCollectionViewCell.swift in Sources */,
 				FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */,
 				FAD88F1D21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift in Sources */,
