@@ -11,6 +11,8 @@
 		FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADF621CBE56100805288 /* LoaderView.swift */; };
 		FA0CADF921CBE58F00805288 /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0CADF821CBE58F00805288 /* LoaderView.xib */; };
 		FA0CADFD21D257F400805288 /* ExpenseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADFC21D257F400805288 /* ExpenseSource.swift */; };
+		FA0CADFF21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADFE21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift */; };
+		FA0CAE0121D25F5300805288 /* ExpenseSourcesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE0021D25F5300805288 /* ExpenseSourcesService.swift */; };
 		FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */; };
 		FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */; };
 		FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA165CD921B652BE00EAA16B /* Profile.storyboard */; };
@@ -117,6 +119,8 @@
 		FA0CADF621CBE56100805288 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		FA0CADF821CBE58F00805288 /* LoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
 		FA0CADFC21D257F400805288 /* ExpenseSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSource.swift; sourceTree = "<group>"; };
+		FA0CADFE21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesServiceProtocol.swift; sourceTree = "<group>"; };
+		FA0CAE0021D25F5300805288 /* ExpenseSourcesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesService.swift; sourceTree = "<group>"; };
 		FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		FA165CD921B652BE00EAA16B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -442,6 +446,7 @@
 				FAD88F4821AEC1A400BE7BC1 /* Service.swift */,
 				FAD88F4921AEC1A400BE7BC1 /* UsersService.swift */,
 				FAC3B9C821C0F4610015A12F /* IncomeSourcesService.swift */,
+				FA0CAE0021D25F5300805288 /* ExpenseSourcesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -511,6 +516,7 @@
 				FAD88F5721AEC1F700BE7BC1 /* DevicesServiceProtocol.swift */,
 				FAD88F5621AEC1F700BE7BC1 /* UsersServiceProtocol.swift */,
 				FAC3B9C621C0F2AF0015A12F /* IncomeSourcesServiceProtocol.swift */,
+				FA0CADFE21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -809,6 +815,7 @@
 				FAD88F5A21AEC1F800BE7BC1 /* UsersServiceProtocol.swift in Sources */,
 				FAD88F7521AFD64000BE7BC1 /* APIResourceQueryParameters.swift in Sources */,
 				FAD88F7A21AFD64000BE7BC1 /* APIResourceKeyPath.swift in Sources */,
+				FA0CAE0121D25F5300805288 /* ExpenseSourcesService.swift in Sources */,
 				FAD88F7821AFD64000BE7BC1 /* APIResourcePath.swift in Sources */,
 				FAD88F7721AFD64000BE7BC1 /* APIResourceMethod.swift in Sources */,
 				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
@@ -837,6 +844,7 @@
 				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,
 				FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */,
 				FA6270A621CA3ED600CC0269 /* FieldViewModel.swift in Sources */,
+				FA0CADFF21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift in Sources */,
 				FAC3B9D421C2796C0015A12F /* IncomeSourceCollectionViewCell.swift in Sources */,
 				FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */,
 				FAD88F1D21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift in Sources */,
