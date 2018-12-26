@@ -1,34 +1,34 @@
 //
-//  IncomeSourceEditViewController.swift
+//  ExpenseSourceEditViewController.swift
 //  skrudzh
 //
-//  Created by Alexander Petropavlovsky on 13/12/2018.
+//  Created by Alexander Petropavlovsky on 26/12/2018.
 //  Copyright © 2018 rubikon. All rights reserved.
 //
 
 import UIKit
 import PromiseKit
 
-protocol IncomeSourceEditViewControllerDelegate {
-    func didCreateIncomeSource()
-    func didUpdateIncomeSource()
-    func didRemoveIncomeSource()
+protocol ExpenseSourceEditViewControllerDelegate {
+    func didCreateExpenseSource()
+    func didUpdateExpenseSource()
+    func didRemoveExpenseSource()
 }
 
-protocol IncomeSourceEditInputProtocol {
-    func set(incomeSource: IncomeSource)
-    func set(delegate: IncomeSourceEditViewControllerDelegate?)
+protocol ExpenseSourceEditInputProtocol {
+    func set(expenseSource: ExpenseSource)
+    func set(delegate: ExpenseSourceEditViewControllerDelegate?)
 }
 
-class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
+class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var loaderImageView: UIImageView!
     
     var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
-
-    var viewModel: IncomeSourceEditViewModel!
+    
+    var viewModel: ExpenseSourceEditViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
     private var delegate: IncomeSourceEditViewControllerDelegate?
@@ -69,7 +69,7 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
                                   isEnabled: true,
                                   handler: { _ in
                                     self.remove()
-                                })
+        })
         
         alertController.addAction(title: "Отмена",
                                   style: .cancel,
@@ -86,29 +86,29 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
         
         firstly {
             viewModel.saveIncomeSource(with: self.incomeSourceName)
-        }.done {
-            if self.viewModel.isNew {
-                self.delegate?.didCreateIncomeSource()
-            }
-            else {
-                self.delegate?.didUpdateIncomeSource()
-            }
-            self.close()
-        }.catch { error in
-            switch error {
-            case IncomeSourceCreationError.validation(let validationResults):
-                self.showCreateionValidationResults(validationResults)
-            case IncomeSourceUpdatingError.validation(let validationResults):
-                self.showUpdatingValidationResults(validationResults)
-            case APIRequestError.unprocessedEntity(let errors):
-                self.show(errors: errors)
-            default:
-                self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении источника доходов",
-                                                  theme: .error)
-            }
-        }.finally {
-            self.setActivityIndicator(hidden: true)
-            self.saveButton.isEnabled = true
+            }.done {
+                if self.viewModel.isNew {
+                    self.delegate?.didCreateIncomeSource()
+                }
+                else {
+                    self.delegate?.didUpdateIncomeSource()
+                }
+                self.close()
+            }.catch { error in
+                switch error {
+                case IncomeSourceCreationError.validation(let validationResults):
+                    self.showCreateionValidationResults(validationResults)
+                case IncomeSourceUpdatingError.validation(let validationResults):
+                    self.showUpdatingValidationResults(validationResults)
+                case APIRequestError.unprocessedEntity(let errors):
+                    self.show(errors: errors)
+                default:
+                    self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении источника доходов",
+                                                      theme: .error)
+                }
+            }.finally {
+                self.setActivityIndicator(hidden: true)
+                self.saveButton.isEnabled = true
         }
     }
     
@@ -118,15 +118,15 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
         
         firstly {
             viewModel.removeIncomeSource()
-        }.done {
-            self.delegate?.didRemoveIncomeSource()
-            self.close()
-        }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении источника доходов",
-                                              theme: .error)
-        }.finally {
-            self.setActivityIndicator(hidden: true)
-            self.removeButton.isEnabled = true
+            }.done {
+                self.delegate?.didRemoveIncomeSource()
+                self.close()
+            }.catch { _ in
+                self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении источника доходов",
+                                                  theme: .error)
+            }.finally {
+                self.setActivityIndicator(hidden: true)
+                self.removeButton.isEnabled = true
         }
     }
     
@@ -139,7 +139,7 @@ extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelega
     func validationNeeded() {
         validateUI()
     }
-        
+    
     private func validateUI() {
         let isFormValid = viewModel.isFormValid(with: incomeSourceName)
         let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
@@ -227,7 +227,7 @@ extension IncomeSourceEditViewController {
     private func setupNavigationBar() {
         let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
                           NSAttributedString.Key.foregroundColor : UIColor.white]
-        navigationController?.navigationBar.titleTextAttributes = attributes        
+        navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.title = viewModel.isNew ? "Новый источник доходов" : "Источник доходов"

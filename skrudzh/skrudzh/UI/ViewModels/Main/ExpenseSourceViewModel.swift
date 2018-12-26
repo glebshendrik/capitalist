@@ -24,6 +24,10 @@ class ExpenseSourceViewModel {
         return expenseSource.amount
     }
     
+    var iconURL: URL? {
+        return expenseSource.iconURL
+    }
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
     }

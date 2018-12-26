@@ -36,6 +36,8 @@ struct Infrastructure {
         case MenuNavigationController
         case IncomeSourceEditViewController
         case IncomeSourceEditNavigationController
+        case ExpenseSourceEditNavigationController
+        case ExpenseSourceEditViewController
         
         // Profile
         case ProfileViewController
@@ -68,7 +70,9 @@ struct Infrastructure {
                  .MenuViewController,
                  .MenuNavigationController,
                  .IncomeSourceEditViewController,
-                 .IncomeSourceEditNavigationController:
+                 .IncomeSourceEditNavigationController,
+                 .ExpenseSourceEditNavigationController,
+                 .ExpenseSourceEditViewController:
                 return .Main
             case .ProfileViewController,
                  .ChangePasswordViewController:
@@ -229,7 +233,8 @@ class ApplicationAssembly: Assembly {
         
         // MainViewModel
         container.register(MainViewModel.self) { r in
-            return MainViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!)
+            return MainViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!,
+                                 expenseSourcesCoordinator: r.resolve(ExpenseSourcesCoordinatorProtocol.self)!)
         }
         
         // IncomeSourceEditViewModel
