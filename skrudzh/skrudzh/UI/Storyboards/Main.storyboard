@@ -365,6 +365,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="didTapAddExpenseSourceButton:" destination="527-2C-xUs" eventType="touchUpInside" id="L7K-xJ-J8r"/>
+                                            <segue destination="o81-b5-tvU" kind="presentation" identifier="ShowExpenseSourceCreationScreen" id="TAX-Hl-mko"/>
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kEZ-X3-1wh">
@@ -792,10 +793,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DpC-Bs-582" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Income Source Edit View Controller-->
+        <!--Expense Source Edit View Controller-->
         <scene sceneID="cUY-H9-yKs">
             <objects>
-                <viewController storyboardIdentifier="IncomeSourceEditViewController" id="8fD-85-d78" customClass="IncomeSourceEditViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExpenseSourceEditViewController" id="8fD-85-d78" customClass="ExpenseSourceEditViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xYC-tQ-Qch">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -803,6 +804,9 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vde-Ty-o4B">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <segue destination="YzM-aR-OkL" kind="embed" identifier="showEditTableView" id="uK6-Mk-gq2"/>
+                                </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tx5-0J-GXm">
                                 <rect key="frame" x="32" y="531" width="311" height="40"/>
@@ -894,12 +898,12 @@
             </objects>
             <point key="canvasLocation" x="-2724" y="1615"/>
         </scene>
-        <!--Источник доходов-->
+        <!--Источник трат-->
         <scene sceneID="kY1-TP-8I9">
             <objects>
-                <tableViewController storyboardIdentifier="IncomeSourceEditTableController" id="YzM-aR-OkL" customClass="IncomeSourceEditTableController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ExpenseSourceEditTableController" id="YzM-aR-OkL" customClass="ExpenseSourceEditTableController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RDx-NI-izQ" customClass="TPKeyboardAvoidingTableView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -948,8 +952,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="didChangeName:" destination="YzM-aR-OkL" eventType="editingChanged" id="2cb-kL-X9o"/>
-                                                        <outlet property="delegate" destination="YzM-aR-OkL" id="Tq2-CN-yyJ"/>
+                                                        <action selector="didChangeName:" destination="YzM-aR-OkL" eventType="editingChanged" id="FPg-7L-YvC"/>
+                                                        <outlet property="delegate" destination="YzM-aR-OkL" id="jEW-Q8-HxU"/>
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDV-Vw-lnc">
@@ -994,6 +998,93 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="WOH-1k-92o">
+                                        <rect key="frame" x="0.0" y="75" width="375" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WOH-1k-92o" id="E0T-2P-ra1">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="4bq-Ns-VHB" customClass="MoneyTextField" customModule="skrudzh" customModuleProvider="target">
+                                                    <rect key="frame" x="72" y="10" width="271" height="49"/>
+                                                    <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="decimalPad"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                            <color key="value" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                            <color key="value" red="0.26274509800000001" green="0.33333333329999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Сумма"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Сумма"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didChangeAmount:" destination="YzM-aR-OkL" eventType="editingChanged" id="CoJ-9z-KdU"/>
+                                                        <outlet property="delegate" destination="YzM-aR-OkL" id="dtF-OR-BJP"/>
+                                                    </connections>
+                                                </textField>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7L-11-mvt">
+                                                    <rect key="frame" x="16" y="22.5" width="36" height="36"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="amount-icon" translatesAutoresizingMaskIntoConstraints="NO" id="t08-wx-bmM">
+                                                            <rect key="frame" x="10" y="9" width="16" height="18"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="t08-wx-bmM" firstAttribute="centerY" secondItem="Q7L-11-mvt" secondAttribute="centerY" id="1AB-bP-GxF"/>
+                                                        <constraint firstAttribute="width" constant="36" id="47K-0K-ZU9"/>
+                                                        <constraint firstAttribute="height" constant="36" id="Ess-5E-WAZ"/>
+                                                        <constraint firstItem="t08-wx-bmM" firstAttribute="centerX" secondItem="Q7L-11-mvt" secondAttribute="centerX" id="dMa-dM-MMP"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="18"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F9I-yi-CXF">
+                                                    <rect key="frame" x="0.0" y="74" width="375" height="1"/>
+                                                    <color key="backgroundColor" red="0.5450980392" green="0.59607843140000005" blue="0.6588235294" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="wsr-L1-vmM"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="F9I-yi-CXF" firstAttribute="leading" secondItem="E0T-2P-ra1" secondAttribute="leading" id="0pl-SB-BxQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="4bq-Ns-VHB" secondAttribute="bottom" constant="16" id="9oo-Kx-goR"/>
+                                                <constraint firstAttribute="trailing" secondItem="4bq-Ns-VHB" secondAttribute="trailing" constant="32" id="Cel-uL-gI6"/>
+                                                <constraint firstAttribute="trailing" secondItem="F9I-yi-CXF" secondAttribute="trailing" id="EYE-Mb-z9g"/>
+                                                <constraint firstItem="4bq-Ns-VHB" firstAttribute="leading" secondItem="Q7L-11-mvt" secondAttribute="trailing" constant="20" id="Moa-OA-5nP"/>
+                                                <constraint firstItem="4bq-Ns-VHB" firstAttribute="top" secondItem="E0T-2P-ra1" secondAttribute="top" constant="10" id="Zam-tC-rJf"/>
+                                                <constraint firstAttribute="bottom" secondItem="F9I-yi-CXF" secondAttribute="bottom" id="aC8-He-oLM"/>
+                                                <constraint firstItem="Q7L-11-mvt" firstAttribute="centerY" secondItem="E0T-2P-ra1" secondAttribute="centerY" constant="3" id="ggF-t1-PPC"/>
+                                                <constraint firstItem="Q7L-11-mvt" firstAttribute="leading" secondItem="E0T-2P-ra1" secondAttribute="leading" constant="16" id="oy6-hj-rD2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1002,14 +1093,17 @@
                             <outlet property="delegate" destination="YzM-aR-OkL" id="dMb-tK-efU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Источник доходов" id="qug-Oi-Z5f">
+                    <navigationItem key="navigationItem" title="Источник трат" id="qug-Oi-Z5f">
                         <barButtonItem key="leftBarButtonItem" title="Отмена" id="NQp-St-k9J"/>
                         <barButtonItem key="rightBarButtonItem" title="Сохр." id="Mo5-wn-wfi"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="incomeSourceNameTextField" destination="ez5-J8-Stf" id="Lgd-yR-wBx"/>
-                        <outlet property="nameBackground" destination="oig-5s-V1c" id="ufS-HM-VRc"/>
-                        <outlet property="nameIconContainer" destination="GDV-Vw-lnc" id="jYJ-tj-IAg"/>
+                        <outlet property="amountBackground" destination="E0T-2P-ra1" id="roO-JL-hzS"/>
+                        <outlet property="amountIconContainer" destination="Q7L-11-mvt" id="nqz-dg-QUl"/>
+                        <outlet property="expenseSourceAmountTextField" destination="4bq-Ns-VHB" id="e3L-tR-nuB"/>
+                        <outlet property="expenseSourceNameTextField" destination="ez5-J8-Stf" id="aLa-G7-nMk"/>
+                        <outlet property="nameBackground" destination="oig-5s-V1c" id="RvJ-N5-DHV"/>
+                        <outlet property="nameIconContainer" destination="GDV-Vw-lnc" id="12b-39-PJU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m3j-NM-Az7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1018,6 +1112,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="amount-icon" width="16" height="18.5"/>
         <image name="blog-menu-item-icon" width="17" height="12"/>
         <image name="close-icon" width="12" height="12"/>
         <image name="credits-menu-item-icon" width="18" height="12"/>

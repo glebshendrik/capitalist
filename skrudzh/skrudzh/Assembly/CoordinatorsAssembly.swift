@@ -30,5 +30,10 @@ class CoordinatorsAssembly: Assembly {
             return IncomeSourcesCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
                                             incomeSourcesService: r.resolve(IncomeSourcesServiceProtocol.self)!)
         }
+        
+        container.register(ExpenseSourcesCoordinatorProtocol.self) { r in
+            return ExpenseSourcesCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
+                                            expenseSourcesService: r.resolve(ExpenseSourcesServiceProtocol.self)!)
+        }
     }
 }

@@ -103,6 +103,19 @@ class Validator {
         return requiredValidationResult
     }
     
+    static func validate(money: Int?, key: CodingKey) -> ValidationResult<Int> {
+        guard let money = money else {
+            return .failure(key: key,
+                            reasons: [ValidationErrorReason.required])
+        }
+        guard money >= 0 else {
+            return .failure(key: key,
+                            reasons: [ValidationErrorReason.invalid])
+        }
+        return .success(key: key,
+                        value: money)
+    }
+    
     static func failureResultsHash<T>(from validationResults: [ValidationResultProtocol]) -> [T : [ValidationErrorReason]]? {
         let failureResults = validationResults.filter { !$0.isSucceeded }
         

@@ -31,11 +31,17 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     var viewModel: ExpenseSourceEditViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
-    private var delegate: IncomeSourceEditViewControllerDelegate?
+    private var delegate: ExpenseSourceEditViewControllerDelegate?
     
-    private var editTableController: IncomeSourceEditTableController?
-    private var incomeSourceName: String? {
-        return editTableController?.incomeSourceNameTextField?.text?.trimmed
+    private var editTableController: ExpenseSourceEditTableController?
+    private var expenseSourceName: String? {
+        return editTableController?.expenseSourceNameTextField?.text?.trimmed
+    }
+    private var expenseSourceAmount: String? {
+        return editTableController?.expenseSourceAmountTextField?.text?.trimmed
+    }
+    private var expenseSourceIconURL: URL? {
+        return nil
     }
     
     override func viewDidLoad() {
@@ -60,7 +66,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     }
     
     @IBAction func didTapRemoveButton(_ sender: Any) {
-        let alertController = UIAlertController(title: "Удалить источник доходов?",
+        let alertController = UIAlertController(title: "Удалить источник трат?",
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
         
@@ -85,30 +91,30 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
         saveButton.isEnabled = false
         
         firstly {
-            viewModel.saveIncomeSource(with: self.incomeSourceName)
-            }.done {
-                if self.viewModel.isNew {
-                    self.delegate?.didCreateIncomeSource()
-                }
-                else {
-                    self.delegate?.didUpdateIncomeSource()
-                }
-                self.close()
-            }.catch { error in
-                switch error {
-                case IncomeSourceCreationError.validation(let validationResults):
-                    self.showCreateionValidationResults(validationResults)
-                case IncomeSourceUpdatingError.validation(let validationResults):
-                    self.showUpdatingValidationResults(validationResults)
-                case APIRequestError.unprocessedEntity(let errors):
-                    self.show(errors: errors)
-                default:
-                    self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении источника доходов",
-                                                      theme: .error)
-                }
-            }.finally {
-                self.setActivityIndicator(hidden: true)
-                self.saveButton.isEnabled = true
+            viewModel.saveExpenseSource(with: self.expenseSourceName, amount: self.expenseSourceAmount, iconURL: self.expenseSourceIconURL)
+        }.done {
+            if self.viewModel.isNew {
+                self.delegate?.didCreateExpenseSource()
+            }
+            else {
+                self.delegate?.didUpdateExpenseSource()
+            }
+            self.close()
+        }.catch { error in
+            switch error {
+            case ExpenseSourceCreationError.validation(let validationResults):
+                self.showCreateionValidationResults(validationResults)
+            case ExpenseSourceUpdatingError.validation(let validationResults):
+                self.showUpdatingValidationResults(validationResults)
+            case APIRequestError.unprocessedEntity(let errors):
+                self.show(errors: errors)
+            default:
+                self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении источника трат",
+                                                  theme: .error)
+            }
+        }.finally {
+            self.setActivityIndicator(hidden: true)
+            self.saveButton.isEnabled = true
         }
     }
     
@@ -117,16 +123,16 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
         removeButton.isEnabled = false
         
         firstly {
-            viewModel.removeIncomeSource()
-            }.done {
-                self.delegate?.didRemoveIncomeSource()
-                self.close()
-            }.catch { _ in
-                self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении источника доходов",
-                                                  theme: .error)
-            }.finally {
-                self.setActivityIndicator(hidden: true)
-                self.removeButton.isEnabled = true
+            viewModel.removeExpenseSource()
+        }.done {
+            self.delegate?.didRemoveExpenseSource()
+            self.close()
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении источника трат",
+                                              theme: .error)
+        }.finally {
+            self.setActivityIndicator(hidden: true)
+            self.removeButton.isEnabled = true
         }
     }
     
@@ -135,13 +141,13 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     }
 }
 
-extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelegate {
+extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
     func validationNeeded() {
         validateUI()
     }
     
     private func validateUI() {
-        let isFormValid = viewModel.isFormValid(with: incomeSourceName)
+        let isFormValid = viewModel.isFormValid(with: expenseSourceName, amount: expenseSourceAmount, iconURL: expenseSourceIconURL)
         let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
         let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
         saveButton.isEnabled = isFormValid
@@ -149,14 +155,14 @@ extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelega
     }
 }
 
-extension IncomeSourceEditViewController {
+extension ExpenseSourceEditViewController {
     private func show(errors: [String: String]) {
         for (_, validationMessage) in errors {
             messagePresenterManager.show(validationMessage: validationMessage)
         }
     }
     
-    private func showCreateionValidationResults(_ validationResults: [IncomeSourceCreationForm.CodingKeys: [ValidationErrorReason]]) {
+    private func showCreateionValidationResults(_ validationResults: [ExpenseSourceCreationForm.CodingKeys: [ValidationErrorReason]]) {
         
         for key in validationResults.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
             for reason in validationResults[key] ?? [] {
@@ -166,16 +172,20 @@ extension IncomeSourceEditViewController {
         }
     }
     
-    private func creationValidationMessageFor(key: IncomeSourceCreationForm.CodingKeys, reason: ValidationErrorReason) -> String {
+    private func creationValidationMessageFor(key: ExpenseSourceCreationForm.CodingKeys, reason: ValidationErrorReason) -> String {
         switch (key, reason) {
         case (.name, .required):
             return "Укажите название"
+        case (.amountCents, .required):
+            return "Укажите сумму"
+        case (.amountCents, .invalid):
+            return "Некорректная сумма"
         case (_, _):
             return "Ошибка ввода"
         }
     }
     
-    private func showUpdatingValidationResults(_ validationResults: [IncomeSourceUpdatingForm.CodingKeys: [ValidationErrorReason]]) {
+    private func showUpdatingValidationResults(_ validationResults: [ExpenseSourceUpdatingForm.CodingKeys: [ValidationErrorReason]]) {
         
         for key in validationResults.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
             for reason in validationResults[key] ?? [] {
@@ -185,40 +195,46 @@ extension IncomeSourceEditViewController {
         }
     }
     
-    private func updatingValidationMessageFor(key: IncomeSourceUpdatingForm.CodingKeys, reason: ValidationErrorReason) -> String {
+    private func updatingValidationMessageFor(key: ExpenseSourceUpdatingForm.CodingKeys, reason: ValidationErrorReason) -> String {
         switch (key, reason) {
         case (.name, .required):
             return "Укажите название"
+        case (.amountCents, .required):
+            return "Укажите сумму"
+        case (.amountCents, .invalid):
+            return "Некорректная сумма"
         case (_, _):
             return "Ошибка ввода"
         }
     }
 }
 
-extension IncomeSourceEditViewController : IncomeSourceEditInputProtocol {
-    func set(delegate: IncomeSourceEditViewControllerDelegate?) {
+extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
+    func set(delegate: ExpenseSourceEditViewControllerDelegate?) {
         self.delegate = delegate
     }
     
-    func set(incomeSource: IncomeSource) {
-        viewModel.set(incomeSource: incomeSource)
+    func set(expenseSource: ExpenseSource) {
+        viewModel.set(expenseSource: expenseSource)
     }
     
     private func updateUI() {
-        editTableController?.incomeSourceNameTextField?.text = viewModel.name
+        editTableController?.expenseSourceNameTextField?.text = viewModel.name        
+        editTableController?.expenseSourceAmountTextField?.set(number: viewModel.amountNumber)
+        // TODO: set icon
         validateUI()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEditTableView",
-            let viewController = segue.destination as? IncomeSourceEditTableController {
+            let viewController = segue.destination as? ExpenseSourceEditTableController {
             editTableController = viewController
             viewController.delegate = self
         }
     }
 }
 
-extension IncomeSourceEditViewController {
+extension ExpenseSourceEditViewController {
     private func setupUI() {
         setupNavigationBar()
         loaderImageView.showLoader()
@@ -230,7 +246,7 @@ extension IncomeSourceEditViewController {
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationItem.title = viewModel.isNew ? "Новый источник доходов" : "Источник доходов"
+        navigationItem.title = viewModel.isNew ? "Новый источник трат" : "Источник трат"
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {

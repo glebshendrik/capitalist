@@ -20,6 +20,7 @@
 		FA0CAE0B21D3C1D900805288 /* ExpenseSourceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE0A21D3C1D900805288 /* ExpenseSourceEditViewController.swift */; };
 		FA0CAE0D21D3C1F100805288 /* ExpenseSourceEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE0C21D3C1F100805288 /* ExpenseSourceEditTableController.swift */; };
 		FA0CAE1121D3C23000805288 /* ExpenseSourceEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE1021D3C23000805288 /* ExpenseSourceEditViewModel.swift */; };
+		FA0CAE1321D52CB400805288 /* MoneyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE1221D52CB300805288 /* MoneyTextField.swift */; };
 		FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */; };
 		FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */; };
 		FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA165CD921B652BE00EAA16B /* Profile.storyboard */; };
@@ -135,6 +136,7 @@
 		FA0CAE0A21D3C1D900805288 /* ExpenseSourceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceEditViewController.swift; sourceTree = "<group>"; };
 		FA0CAE0C21D3C1F100805288 /* ExpenseSourceEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceEditTableController.swift; sourceTree = "<group>"; };
 		FA0CAE1021D3C23000805288 /* ExpenseSourceEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceEditViewModel.swift; sourceTree = "<group>"; };
+		FA0CAE1221D52CB300805288 /* MoneyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTextField.swift; sourceTree = "<group>"; };
 		FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		FA165CD921B652BE00EAA16B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			children = (
 				FA0CADF621CBE56100805288 /* LoaderView.swift */,
 				FA0CADF821CBE58F00805288 /* LoaderView.xib */,
+				FA0CAE1221D52CB300805288 /* MoneyTextField.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -881,6 +884,7 @@
 				FAD88F3721AEB8F200BE7BC1 /* UIFlowManager.swift in Sources */,
 				FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */,
 				FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */,
+				FA0CAE1321D52CB400805288 /* MoneyTextField.swift in Sources */,
 				FAD88F7621AFD64000BE7BC1 /* APIResource.swift in Sources */,
 				FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */,
 				FA165CE621B6669500EAA16B /* LoginViewController.swift in Sources */,

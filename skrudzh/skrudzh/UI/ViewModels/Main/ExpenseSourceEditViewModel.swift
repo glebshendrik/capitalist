@@ -29,9 +29,14 @@ class ExpenseSourceEditViewModel {
     var name: String? {
         return expenseSource?.name
     }
+        
+    var amountCents: Int? {
+        return expenseSource?.amountCents
+    }
     
-    var amount: String? {
-        return expenseSource?.amount
+    var amountNumber: NSDecimalNumber? {
+        guard let cents = amountCents else { return nil }
+        return NSDecimalNumber(value: cents).dividing(by: 100)
     }
     
     var iconURL: URL? {
@@ -52,88 +57,142 @@ class ExpenseSourceEditViewModel {
         self.expenseSource = expenseSource
     }
     
-    func isFormValid(with name: String?, amount: String?) -> Bool {
-        return isNew ? isCreationFormValid(with: name) : isUpdatingFormValid(with: name)
+    func isFormValid(with name: String?,
+                     amount: String?,
+                     iconURL: URL?) -> Bool {
+        let amountCents = formatToCents(amount)
+        return isNew
+            ? isCreationFormValid(with: name, amountCents: amountCents, iconURL: iconURL)
+            : isUpdatingFormValid(with: name, amountCents: amountCents, iconURL: iconURL)
     }
     
-    func saveIncomeSource(with name: String?) -> Promise<Void> {
-        return isNew ? createIncomeSource(with: name) : updateIncomeSource(with: name)
+    func saveExpenseSource(with name: String?,
+                           amount: String?,
+                           iconURL: URL?) -> Promise<Void> {
+        let amountCents = formatToCents(amount)
+        return isNew
+            ? createExpenseSource(with: name, amountCents: amountCents, iconURL: iconURL)
+            : updateExpenseSource(with: name, amountCents: amountCents, iconURL: iconURL)
     }
     
-    func removeIncomeSource() -> Promise<Void> {
-        guard let incomeSourceId = incomeSource?.id else {
-            return Promise(error: IncomeSourceUpdatingError.updatingIncomeSourceIsNotSpecified)
+    func removeExpenseSource() -> Promise<Void> {
+        guard let expenseSourceId = expenseSource?.id else {
+            return Promise(error: ExpenseSourceUpdatingError.updatingExpenseSourceIsNotSpecified)
         }
-        return incomeSourcesCoordinator.destroy(by: incomeSourceId)
+        return expenseSourcesCoordinator.destroy(by: expenseSourceId)
     }
     
-    private func isCreationFormValid(with name: String?, amount: String?) -> Bool {
-        return validateCreation(with: name) == nil
-    }
-    
-    private func isUpdatingFormValid(with name: String?, amount: String?) -> Bool {
-        return validateUpdating(with: name) == nil
-    }
-    
-    private func createIncomeSource(with name: String?) -> Promise<Void> {
-        return  firstly {
-            validateCreationForm(with: name)
-            }.then { incomeSourceCreationForm -> Promise<IncomeSource> in
-                self.incomeSourcesCoordinator.create(with: incomeSourceCreationForm)
-            }.asVoid()
-    }
-    
-    private func updateIncomeSource(with name: String?) -> Promise<Void> {
-        return  firstly {
-            validateUpdatingForm(with: name)
-            }.then { incomeSourceUpdatingForm in
-                self.incomeSourcesCoordinator.update(with: incomeSourceUpdatingForm)
+    private func formatToCents(_ amount: String?) -> Int? {
+        guard let stringAmount = amount else {
+            return nil
+            
         }
-    }
-    
-    private func validateCreationForm(with name: String?, amount: String?) -> Promise<IncomeSourceCreationForm> {
         
-        if let failureResultsHash = validateCreation(with: name) {
-            return Promise(error: IncomeSourceCreationError.validation(validationResults: failureResultsHash))
+        let formatter = NumberFormatter()
+        formatter.generatesDecimalNumbers = true
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        
+        guard let decimal = formatter.number(from: stringAmount) as? NSDecimalNumber else {
+            return nil
+        }
+        return decimal.multiplying(by: 100).intValue
+    }
+}
+
+// Creation
+extension ExpenseSourceEditViewModel {
+    private func isCreationFormValid(with name: String?,
+                                     amountCents: Int?,
+                                     iconURL: URL?) -> Bool {
+        return validateCreation(with: name, amountCents: amountCents, iconURL: iconURL) == nil
+    }
+    
+    private func createExpenseSource(with name: String?,
+                                     amountCents: Int?,
+                                     iconURL: URL?) -> Promise<Void> {
+        return  firstly {
+                    validateCreationForm(with: name, amountCents: amountCents, iconURL: iconURL)
+                }.then { expenseSourceCreationForm -> Promise<ExpenseSource> in
+                    self.expenseSourcesCoordinator.create(with: expenseSourceCreationForm)
+                }.asVoid()
+    }
+    
+    private func validateCreationForm(with name: String?,
+                                      amountCents: Int?,
+                                      iconURL: URL?) -> Promise<ExpenseSourceCreationForm> {
+        
+        if let failureResultsHash = validateCreation(with: name, amountCents: amountCents, iconURL: iconURL) {
+            return Promise(error: ExpenseSourceCreationError.validation(validationResults: failureResultsHash))
         }
         
         guard let currentUserId = accountCoordinator.currentSession?.userId else {
-            return Promise(error: IncomeSourceCreationError.currentSessionDoesNotExist)
+            return Promise(error: ExpenseSourceCreationError.currentSessionDoesNotExist)
         }
         
-        return .value(IncomeSourceCreationForm(userId: currentUserId,
-                                               name: name!))
+        return .value(ExpenseSourceCreationForm(userId: currentUserId,
+                                                name: name!,
+                                                amountCents: amountCents!,
+                                                iconURL: iconURL))
     }
     
-    private func validateUpdatingForm(with name: String?, amount: String?) -> Promise<IncomeSourceUpdatingForm> {
-        
-        if let failureResultsHash = validateUpdating(with: name) {
-            return Promise(error: IncomeSourceUpdatingError.validation(validationResults: failureResultsHash))
-        }
-        
-        guard let incomeSourceId = incomeSource?.id else {
-            return Promise(error: IncomeSourceUpdatingError.updatingIncomeSourceIsNotSpecified)
-        }
-        
-        return .value(IncomeSourceUpdatingForm(id: incomeSourceId,
-                                               name: name!))
-    }
-    
-    private func validateCreation(with name: String?, amount: String?) -> [IncomeSourceCreationForm.CodingKeys : [ValidationErrorReason]]? {
+    private func validateCreation(with name: String?,
+                                  amountCents: Int?,
+                                  iconURL: URL?) -> [ExpenseSourceCreationForm.CodingKeys : [ValidationErrorReason]]? {
         let validationResults : [ValidationResultProtocol] =
-            [Validator.validate(required: name, key: IncomeSourceCreationForm.CodingKeys.name)]
+            [Validator.validate(required: name, key: ExpenseSourceCreationForm.CodingKeys.name),
+             Validator.validate(money: amountCents, key: ExpenseSourceCreationForm.CodingKeys.amountCents)]
         
-        let failureResultsHash : [IncomeSourceCreationForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
+        let failureResultsHash : [ExpenseSourceCreationForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         
         return failureResultsHash
     }
+}
+
+// Updating
+extension ExpenseSourceEditViewModel {
+    private func isUpdatingFormValid(with name: String?,
+                                     amountCents: Int?,
+                                     iconURL: URL?) -> Bool {
+        return validateUpdating(with: name, amountCents: amountCents, iconURL: iconURL) == nil
+    }
     
-    private func validateUpdating(with name: String?, amount: String?) -> [IncomeSourceUpdatingForm.CodingKeys : [ValidationErrorReason]]? {
+    private func updateExpenseSource(with name: String?,
+                                     amountCents: Int?,
+                                     iconURL: URL?) -> Promise<Void> {
+        return  firstly {
+                    validateUpdatingForm(with: name, amountCents: amountCents, iconURL: iconURL)
+                }.then { expenseSourceUpdatingForm in
+                    self.expenseSourcesCoordinator.update(with: expenseSourceUpdatingForm)
+                }
+    }
+    
+    private func validateUpdatingForm(with name: String?,
+                                      amountCents: Int?,
+                                      iconURL: URL?) -> Promise<ExpenseSourceUpdatingForm> {
+        
+        if let failureResultsHash = validateUpdating(with: name, amountCents: amountCents, iconURL: iconURL) {
+            return Promise(error: ExpenseSourceUpdatingError.validation(validationResults: failureResultsHash))
+        }
+        
+        guard let expenseSourceId = expenseSource?.id else {
+            return Promise(error: ExpenseSourceUpdatingError.updatingExpenseSourceIsNotSpecified)
+        }
+        
+        return .value(ExpenseSourceUpdatingForm(id: expenseSourceId,
+                                                name: name!,
+                                                amountCents: amountCents!,
+                                                iconURL: iconURL))
+    }
+    
+    private func validateUpdating(with name: String?,
+                                  amountCents: Int?,
+                                  iconURL: URL?) -> [ExpenseSourceUpdatingForm.CodingKeys : [ValidationErrorReason]]? {
         
         let validationResults : [ValidationResultProtocol] =
-            [Validator.validate(required: name, key: IncomeSourceUpdatingForm.CodingKeys.name)]
+            [Validator.validate(required: name, key: ExpenseSourceUpdatingForm.CodingKeys.name),
+             Validator.validate(money: amountCents, key: ExpenseSourceUpdatingForm.CodingKeys.amountCents)]
         
-        let failureResultsHash : [IncomeSourceUpdatingForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
+        let failureResultsHash : [ExpenseSourceUpdatingForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         
         return failureResultsHash
     }

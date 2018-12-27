@@ -123,7 +123,7 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
     }
 }
 
-extension MainViewController {
+extension MainViewController : ExpenseSourceEditViewControllerDelegate {
     func didCreateExpenseSource() {
         loadExpenseSources(scrollToEndWhenUpdated: true)
     }

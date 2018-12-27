@@ -13,6 +13,7 @@ struct ExpenseSource : Decodable {
     let name: String
     let amountCurrency: String
     let amount: String
+    let amountCents: Int
     let iconURL: URL?
     
     enum CodingKeys: String, CodingKey {
@@ -20,6 +21,7 @@ struct ExpenseSource : Decodable {
         case name
         case amountCurrency = "amount_currency"
         case amount
+        case amountCents = "amount_cents"
         case iconURL = "icon_url"
     }
     
@@ -38,13 +40,20 @@ struct ExpenseSourceCreationForm : Encodable {
         case amountCurrency = "amount_currency"
         case amountCents = "amount_cents"
     }
+    
+    init(userId: Int, name: String, amountCents: Int, iconURL: URL?) {
+        self.userId = userId
+        self.name = name
+        self.amountCents = amountCents
+        self.iconURL = iconURL
+    }
 }
 
 struct ExpenseSourceUpdatingForm : Encodable {
     let id: Int
     let name: String
-    let iconURL: URL?
     let amountCents: Int
+    let iconURL: URL?    
     
     enum CodingKeys: String, CodingKey {
         case name
