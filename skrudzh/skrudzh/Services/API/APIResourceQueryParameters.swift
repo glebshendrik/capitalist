@@ -12,6 +12,8 @@ struct APIResourceQueryParameters {
     static func queryParameters(for resource: APIResource) -> [String : String] {
         let params = [String : String]()
         switch resource {
+        case .indexIcons(let category):
+            return ["category" : category.rawValue]
         default:
             break
         }

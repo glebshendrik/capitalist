@@ -30,6 +30,7 @@ struct APIResourcePath {
         case .indexExpenseSources(let userId):              return "/users/\(userId)/expense_sources"
         case .updateExpenseSource(let form):                return "/expense_sources/\(form.id)"
         case .destroyExpenseSource(let id):                 return "/expense_sources/\(id)"
+        case .indexIcons:                                   return "/icons"
         }
     }
 }

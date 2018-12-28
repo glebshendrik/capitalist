@@ -41,6 +41,8 @@ struct APIResourceKeyPath {
              .updateExpenseSource,
              .destroyExpenseSource:
             return ResourceKeyPath(singular: "expense_source", plural: "expense_sources")
+        case .indexIcons:
+            return ResourceKeyPath(singular: "icon", plural: "icons")
         }
     }
 }

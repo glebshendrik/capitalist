@@ -22,7 +22,8 @@ struct APIResourceMethod {
              .showIncomeSource,
              .indexIncomeSources,
              .showExpenseSource,
-             .indexExpenseSources:
+             .indexExpenseSources,
+             .indexIcons:
             return .get
         case .updateUser,
              .changePassword,
