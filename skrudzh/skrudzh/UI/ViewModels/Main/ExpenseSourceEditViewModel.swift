@@ -38,6 +38,8 @@ class ExpenseSourceEditViewModel {
         return expenseSource?.iconURL
     }
     
+    var selectedIconURL: URL?
+    
     var isNew: Bool {
         return expenseSource == nil
     }
@@ -50,6 +52,7 @@ class ExpenseSourceEditViewModel {
     
     func set(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
+        selectedIconURL = iconURL
     }
     
     func isFormValid(with name: String?,

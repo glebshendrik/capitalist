@@ -40,8 +40,8 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     private var expenseSourceAmount: String? {
         return editTableController?.expenseSourceAmountTextField?.text?.trimmed
     }
-    private var expenseSourceIconURL: URL? {
-        return nil
+    private var selectedIconURL: URL? {
+        return viewModel.selectedIconURL
     }
     
     override func viewDidLoad() {
@@ -91,7 +91,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
         saveButton.isEnabled = false
         
         firstly {
-            viewModel.saveExpenseSource(with: self.expenseSourceName, amount: self.expenseSourceAmount, iconURL: self.expenseSourceIconURL)
+            viewModel.saveExpenseSource(with: self.expenseSourceName, amount: self.expenseSourceAmount, iconURL: self.selectedIconURL)
         }.done {
             if self.viewModel.isNew {
                 self.delegate?.didCreateExpenseSource()
@@ -142,12 +142,17 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
 }
 
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
+    func didSelectIcon(icon: Icon) {
+        viewModel.selectedIconURL = icon.url
+        updateIconUI()
+    }
+    
     func validationNeeded() {
         validateUI()
     }
     
     private func validateUI() {
-        let isFormValid = viewModel.isFormValid(with: expenseSourceName, amount: expenseSourceAmount, iconURL: expenseSourceIconURL)
+        let isFormValid = viewModel.isFormValid(with: expenseSourceName, amount: expenseSourceAmount, iconURL: selectedIconURL)
         let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
         let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
         saveButton.isEnabled = isFormValid
@@ -221,8 +226,12 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
     private func updateUI() {
         editTableController?.expenseSourceNameTextField?.text = viewModel.name        
         editTableController?.expenseSourceAmountTextField?.text = viewModel.amount
-        // TODO: set icon
+        updateIconUI()
         validateUI()
+    }
+    
+    private func updateIconUI() {
+        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: "smile-icon")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SwifterSwift
 import SwiftDate
+import AlamofireImage
 
 extension UITableView {
     func reloadData(with animation: UITableView.RowAnimation) {
@@ -476,5 +477,25 @@ extension UIViewController {
                                             animated: true)
             }
         })
+    }
+}
+
+extension UIImageView {
+    func setImage(with url: URL?, placeholderName: String) {
+        self.af_cancelImageRequest()
+        let placeholderImage = UIImage(named: placeholderName)
+        if let imageURL = url {
+            self.af_setImage(withURL: imageURL,
+                             placeholderImage: placeholderImage,
+                             filter: nil,
+                             progress: nil,
+                             progressQueue: DispatchQueue.main,
+                             imageTransition: UIImageView.ImageTransition.crossDissolve(0.3),
+                             runImageTransitionIfCached: false,
+                             completion: nil)
+        }
+        else {
+            self.image = placeholderImage
+        }
     }
 }

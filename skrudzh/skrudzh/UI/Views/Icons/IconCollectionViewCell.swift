@@ -19,20 +19,6 @@ class IconCollectionViewCell : UICollectionViewCell {
     }
     
     func updateUI() {
-        iconImageView.af_cancelImageRequest()
-        let placeholderImage = UIImage(named: "wallet-icon")
-        if let iconURL = viewModel?.url {
-            iconImageView.af_setImage(withURL: iconURL,
-                                      placeholderImage: placeholderImage,
-                                      filter: nil,
-                                      progress: nil,
-                                      progressQueue: DispatchQueue.main,
-                                      imageTransition: UIImageView.ImageTransition.crossDissolve(0.3),
-                                      runImageTransitionIfCached: false,
-                                      completion: nil)
-        }
-        else {
-            iconImageView.image = placeholderImage
-        }
+        iconImageView.setImage(with: viewModel?.url, placeholderName: "smile-icon")
     }
 }

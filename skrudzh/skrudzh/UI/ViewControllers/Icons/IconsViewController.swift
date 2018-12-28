@@ -15,6 +15,7 @@ protocol IconsViewControllerDelegate {
 
 protocol IconsViewControllerInputProtocol {
     func set(iconCategory: IconCategory)
+    func set(delegate: IconsViewControllerDelegate)
 }
 
 class IconsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
@@ -30,6 +31,7 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
     override func viewDidLoad() {
         super.viewDidLoad()
         loader.showLoader()
+        loadData()
     }
     
     private func loadData() {
@@ -48,6 +50,10 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
 }
 
 extension IconsViewController : IconsViewControllerInputProtocol {
+    func set(delegate: IconsViewControllerDelegate) {
+        self.delegate = delegate
+    }
+    
     func set(iconCategory: IconCategory) {
         viewModel.iconCategory = iconCategory
     }

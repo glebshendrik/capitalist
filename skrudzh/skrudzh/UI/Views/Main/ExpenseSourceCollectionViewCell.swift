@@ -23,21 +23,7 @@ class ExpenseSourceCollectionViewCell : UICollectionViewCell {
     func updateUI() {
         nameLabel.text = viewModel?.name
         amountLabel.text = viewModel?.amount
-        iconImageView.af_cancelImageRequest()
-        let placeholderImage = UIImage(named: "wallet-icon")
-        if let iconURL = viewModel?.iconURL {
-            iconImageView.af_setImage(withURL: iconURL,
-                                      placeholderImage: placeholderImage,
-                                      filter: nil,
-                                      progress: nil,
-                                      progressQueue: DispatchQueue.main,
-                                      imageTransition: UIImageView.ImageTransition.crossDissolve(0.3),
-                                      runImageTransitionIfCached: false,
-                                      completion: nil)
-        }
-        else {
-            iconImageView.image = placeholderImage
-        }
+        iconImageView.setImage(with: viewModel?.iconURL, placeholderName: "wallet-icon")
     }
 }
 

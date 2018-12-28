@@ -11,6 +11,7 @@ import SkyFloatingLabelTextField
 
 protocol ExpenseSourceEditTableControllerDelegate {
     func validationNeeded()
+    func didSelectIcon(icon: Icon)
 }
 
 class ExpenseSourceEditTableController : UITableViewController, UITextFieldDelegate {
@@ -21,6 +22,8 @@ class ExpenseSourceEditTableController : UITableViewController, UITextFieldDeleg
     @IBOutlet weak var expenseSourceAmountTextField: MoneyTextField!
     @IBOutlet weak var amountBackground: UIView!
     @IBOutlet weak var amountIconContainer: UIView!
+    
+    @IBOutlet weak var iconImageView: UIImageView!
     
     var delegate: ExpenseSourceEditTableControllerDelegate?
     
@@ -39,7 +42,6 @@ class ExpenseSourceEditTableController : UITableViewController, UITextFieldDeleg
     }
     
     @IBAction func didChangeAmount(_ sender: MoneyTextField) {
-//        sender.formatText()
         update(textField: sender)
         delegate?.validationNeeded()
     }
@@ -110,5 +112,19 @@ class ExpenseSourceEditTableController : UITableViewController, UITextFieldDeleg
         case (false, false):
             return (inactiveBackgroundColor, inavtiveTextColor, inavtiveTextColor, bigPlaceholderFont, inactiveIconBackground)
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowExpenseSourceIcons",
+            let iconsViewController = segue.destination as? IconsViewControllerInputProtocol {
+            iconsViewController.set(iconCategory: .expenseSource)
+            iconsViewController.set(delegate: self)
+        }
+    }
+}
+
+extension ExpenseSourceEditTableController : IconsViewControllerDelegate {
+    func didSelectIcon(icon: Icon) {
+        delegate?.didSelectIcon(icon: icon)
     }
 }
