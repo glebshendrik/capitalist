@@ -29,14 +29,9 @@ class ExpenseSourceEditViewModel {
     var name: String? {
         return expenseSource?.name
     }
-        
-    var amountCents: Int? {
-        return expenseSource?.amountCents
-    }
-    
-    var amountNumber: NSDecimalNumber? {
-        guard let cents = amountCents else { return nil }
-        return NSDecimalNumber(value: cents).dividing(by: 100)
+            
+    var amount: String? {
+        return expenseSource?.amountCents.moneyDecimalString
     }
     
     var iconURL: URL? {
@@ -60,7 +55,7 @@ class ExpenseSourceEditViewModel {
     func isFormValid(with name: String?,
                      amount: String?,
                      iconURL: URL?) -> Bool {
-        let amountCents = formatToCents(amount)
+        let amountCents = amount?.intMoney
         return isNew
             ? isCreationFormValid(with: name, amountCents: amountCents, iconURL: iconURL)
             : isUpdatingFormValid(with: name, amountCents: amountCents, iconURL: iconURL)
@@ -69,7 +64,7 @@ class ExpenseSourceEditViewModel {
     func saveExpenseSource(with name: String?,
                            amount: String?,
                            iconURL: URL?) -> Promise<Void> {
-        let amountCents = formatToCents(amount)
+        let amountCents = amount?.intMoney
         return isNew
             ? createExpenseSource(with: name, amountCents: amountCents, iconURL: iconURL)
             : updateExpenseSource(with: name, amountCents: amountCents, iconURL: iconURL)
@@ -82,21 +77,7 @@ class ExpenseSourceEditViewModel {
         return expenseSourcesCoordinator.destroy(by: expenseSourceId)
     }
     
-    private func formatToCents(_ amount: String?) -> Int? {
-        guard let stringAmount = amount else {
-            return nil
-            
-        }
-        
-        let formatter = NumberFormatter()
-        formatter.generatesDecimalNumbers = true
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        
-        guard let decimal = formatter.number(from: stringAmount) as? NSDecimalNumber else {
-            return nil
-        }
-        return decimal.multiplying(by: 100).intValue
-    }
+    
 }
 
 // Creation

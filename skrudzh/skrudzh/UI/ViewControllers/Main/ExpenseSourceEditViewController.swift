@@ -220,7 +220,7 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
     
     private func updateUI() {
         editTableController?.expenseSourceNameTextField?.text = viewModel.name        
-        editTableController?.expenseSourceAmountTextField?.set(number: viewModel.amountNumber)
+        editTableController?.expenseSourceAmountTextField?.text = viewModel.amount
         // TODO: set icon
         validateUI()
     }
