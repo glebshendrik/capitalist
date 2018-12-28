@@ -35,5 +35,9 @@ class CoordinatorsAssembly: Assembly {
             return ExpenseSourcesCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
                                             expenseSourcesService: r.resolve(ExpenseSourcesServiceProtocol.self)!)
         }
+        
+        container.register(IconsCoordinatorProtocol.self) { r in
+            return IconsCoordinator(iconsService: r.resolve(IconsServiceProtocol.self)!)
+        }
     }
 }

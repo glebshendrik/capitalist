@@ -24,6 +24,8 @@
 		FA0CAE1521D669C000805288 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE1421D669C000805288 /* Icon.swift */; };
 		FA0CAE1721D66C8700805288 /* IconsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE1621D66C8700805288 /* IconsServiceProtocol.swift */; };
 		FA0CAE1921D66CCD00805288 /* IconsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE1821D66CCD00805288 /* IconsService.swift */; };
+		FA0CAE1B21D66F9A00805288 /* IconsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE1A21D66F9A00805288 /* IconsCoordinatorProtocol.swift */; };
+		FA0CAE1D21D66FC200805288 /* IconsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE1C21D66FC200805288 /* IconsCoordinator.swift */; };
 		FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */; };
 		FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */; };
 		FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA165CD921B652BE00EAA16B /* Profile.storyboard */; };
@@ -143,6 +145,8 @@
 		FA0CAE1421D669C000805288 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		FA0CAE1621D66C8700805288 /* IconsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsServiceProtocol.swift; sourceTree = "<group>"; };
 		FA0CAE1821D66CCD00805288 /* IconsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsService.swift; sourceTree = "<group>"; };
+		FA0CAE1A21D66F9A00805288 /* IconsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FA0CAE1C21D66FC200805288 /* IconsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsCoordinator.swift; sourceTree = "<group>"; };
 		FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		FA165CD921B652BE00EAA16B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -456,6 +460,7 @@
 				FAD88F6021AEC61800BE7BC1 /* AccountCoordinator.swift */,
 				FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */,
 				FA0CAE0421D2615900805288 /* ExpenseSourcesCoordinator.swift */,
+				FA0CAE1C21D66FC200805288 /* IconsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 				FAD88F5E21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift */,
 				FAC3B9CA21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift */,
 				FA0CAE0221D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift */,
+				FA0CAE1A21D66F9A00805288 /* IconsCoordinatorProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -868,6 +874,7 @@
 				FA165CEA21B769B500EAA16B /* ForgotPasswordViewController.swift in Sources */,
 				FAD88F3221AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift in Sources */,
 				FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */,
+				FA0CAE1B21D66F9A00805288 /* IconsCoordinatorProtocol.swift in Sources */,
 				FAC3B9CB21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift in Sources */,
 				FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */,
 				FA0CADFD21D257F400805288 /* ExpenseSource.swift in Sources */,
@@ -898,6 +905,7 @@
 				FA0CAE1321D52CB400805288 /* MoneyTextField.swift in Sources */,
 				FAD88F7621AFD64000BE7BC1 /* APIResource.swift in Sources */,
 				FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */,
+				FA0CAE1D21D66FC200805288 /* IconsCoordinator.swift in Sources */,
 				FA165CE621B6669500EAA16B /* LoginViewController.swift in Sources */,
 				FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */,
 				FA0CAE1721D66C8700805288 /* IconsServiceProtocol.swift in Sources */,
