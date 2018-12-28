@@ -1226,8 +1226,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cBt-oL-kFp">
-                                <rect key="frame" x="0.0" y="20" width="375" height="583"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cBt-oL-kFp">
+                                <rect key="frame" x="0.0" y="20" width="375" height="533"/>
                                 <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="klB-9y-uR6" customClass="PagedCollectionViewLayout" customModule="skrudzh" customModuleProvider="target">
                                     <userDefinedRuntimeAttributes>
@@ -1331,6 +1331,11 @@
                                     <outlet property="delegate" destination="EOg-T1-SCz" id="O0W-3D-yFF"/>
                                 </connections>
                             </collectionView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="mBG-M8-ATA">
+                                <rect key="frame" x="176" y="551" width="23" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.77647058823529413" green="0.80392156862745101" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sk-Pn-uXc">
                                 <rect key="frame" x="0.0" y="20" width="375" height="583"/>
                                 <subviews>
@@ -1350,16 +1355,18 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="mBG-M8-ATA" firstAttribute="centerX" secondItem="UxO-Gc-YoK" secondAttribute="centerX" id="4AL-l5-RuH"/>
                             <constraint firstItem="KbE-TK-HZs" firstAttribute="bottom" secondItem="1sk-Pn-uXc" secondAttribute="bottom" id="A2P-4U-q1l"/>
+                            <constraint firstItem="KbE-TK-HZs" firstAttribute="bottom" secondItem="mBG-M8-ATA" secondAttribute="bottom" constant="15" id="BzP-dh-ymp"/>
                             <constraint firstItem="1sk-Pn-uXc" firstAttribute="top" secondItem="KbE-TK-HZs" secondAttribute="top" id="GYJ-IF-OaC"/>
-                            <constraint firstItem="KbE-TK-HZs" firstAttribute="bottom" secondItem="cBt-oL-kFp" secondAttribute="bottom" id="OfU-ie-8dg"/>
                             <constraint firstItem="cBt-oL-kFp" firstAttribute="leading" secondItem="KbE-TK-HZs" secondAttribute="leading" id="Z5n-Gd-3Lz"/>
                             <constraint firstItem="KbE-TK-HZs" firstAttribute="trailing" secondItem="cBt-oL-kFp" secondAttribute="trailing" id="e3Q-eW-BfS"/>
                             <constraint firstItem="cBt-oL-kFp" firstAttribute="top" secondItem="KbE-TK-HZs" secondAttribute="top" id="hOC-oA-xx7"/>
                             <constraint firstItem="1sk-Pn-uXc" firstAttribute="leading" secondItem="KbE-TK-HZs" secondAttribute="leading" id="tdN-cC-YJ4"/>
                             <constraint firstItem="KbE-TK-HZs" firstAttribute="trailing" secondItem="1sk-Pn-uXc" secondAttribute="trailing" id="uKX-Mk-Krn"/>
+                            <constraint firstItem="KbE-TK-HZs" firstAttribute="bottom" secondItem="cBt-oL-kFp" secondAttribute="bottom" constant="50" id="yyA-6d-PLx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KbE-TK-HZs"/>
                     </view>
@@ -1367,11 +1374,12 @@
                         <outlet property="activityIndicator" destination="1sk-Pn-uXc" id="d1s-Vt-yMI"/>
                         <outlet property="iconsCollectionView" destination="cBt-oL-kFp" id="TRh-4Z-dEE"/>
                         <outlet property="loader" destination="gDk-1J-QyI" id="0dx-8g-1zo"/>
+                        <outlet property="pageControl" destination="mBG-M8-ATA" id="7ck-To-GF5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2qZ-BA-a9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="273" y="1635"/>
+            <point key="canvasLocation" x="272.80000000000001" y="1634.9325337331336"/>
         </scene>
     </scenes>
     <resources>

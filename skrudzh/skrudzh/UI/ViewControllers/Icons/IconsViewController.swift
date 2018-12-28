@@ -22,6 +22,7 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
     @IBOutlet weak var iconsCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIView!
     @IBOutlet weak var loader: UIImageView!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     var viewModel: IconsViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -59,13 +60,28 @@ extension IconsViewController : IconsViewControllerInputProtocol {
     }
 }
 
-extension IconsViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension IconsViewController : UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfIcons
+        let count = viewModel.numberOfIcons
+        let pagesCount : Int = (count / 24)
+        pageControl.numberOfPages = pagesCount
+        pageControl.isHidden = pagesCount <= 1
+        
+        return count
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        
+        pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
