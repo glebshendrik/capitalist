@@ -30,6 +30,7 @@
 		FA0CAE2221D679D100805288 /* IconsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE2121D679D100805288 /* IconsViewController.swift */; };
 		FA0CAE2621D67A7100805288 /* IconViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE2521D67A7100805288 /* IconViewModel.swift */; };
 		FA0CAE2821D67B7F00805288 /* IconsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE2721D67B7F00805288 /* IconsViewModel.swift */; };
+		FA0CAE2A21D69E2600805288 /* PagedCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CAE2921D69E2600805288 /* PagedCollectionViewLayout.swift */; };
 		FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */; };
 		FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */; };
 		FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA165CD921B652BE00EAA16B /* Profile.storyboard */; };
@@ -155,6 +156,7 @@
 		FA0CAE2121D679D100805288 /* IconsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsViewController.swift; sourceTree = "<group>"; };
 		FA0CAE2521D67A7100805288 /* IconViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconViewModel.swift; sourceTree = "<group>"; };
 		FA0CAE2721D67B7F00805288 /* IconsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsViewModel.swift; sourceTree = "<group>"; };
+		FA0CAE2921D69E2600805288 /* PagedCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedCollectionViewLayout.swift; sourceTree = "<group>"; };
 		FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		FA165CD521B4EF6800EAA16B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		FA165CD921B652BE00EAA16B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				FA0CADF621CBE56100805288 /* LoaderView.swift */,
 				FA0CADF821CBE58F00805288 /* LoaderView.xib */,
 				FA0CAE1221D52CB300805288 /* MoneyTextField.swift */,
+				FA0CAE2921D69E2600805288 /* PagedCollectionViewLayout.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -867,6 +870,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA0CAE2A21D69E2600805288 /* PagedCollectionViewLayout.swift in Sources */,
 				FA0CAE0921D39D3C00805288 /* ExpenseSourceCollectionViewCell.swift in Sources */,
 				FAD88F2C21AEB78A00BE7BC1 /* NotificationsHandlerProtocol.swift in Sources */,
 				FAC3B9BC21BA002E0015A12F /* ProfileEditViewModel.swift in Sources */,
