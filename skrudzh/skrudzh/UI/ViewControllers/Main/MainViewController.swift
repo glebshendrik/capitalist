@@ -255,31 +255,4 @@ extension MainViewController {
         set(incomeSourcesActivityIndicator, hidden: true, animated: false)
         set(expenseSourcesActivityIndicator, hidden: true, animated: false)
     }
-    
-    private func set(_ activityIndicator: UIView, hidden: Bool, animated: Bool = true) {
-        guard animated else {
-            activityIndicator.isHidden = hidden
-            return
-        }
-        UIView.transition(with: activityIndicator,
-                          duration: 0.3,
-                          options: .transitionCrossDissolve,
-                          animations: {
-            activityIndicator.isHidden = hidden
-        })
-    }
-    
-    private func update(_ collectionView: UICollectionView, scrollToEnd: Bool = false) {
-        let numberOfItems = self.collectionView(collectionView, numberOfItemsInSection: 0)
-        collectionView.performBatchUpdates({
-            let indexSet = IndexSet(integersIn: 0...0)
-            collectionView.reloadSections(indexSet)
-        }, completion: { _ in
-            if scrollToEnd && numberOfItems > 0 {
-                collectionView.scrollToItem(at: IndexPath(item: numberOfItems - 1, section: 0),
-                                            at: .right,
-                                            animated: true)
-            }            
-        })
-    }
 }
