@@ -20,5 +20,7 @@ class IconCollectionViewCell : UICollectionViewCell {
     
     func updateUI() {
         iconImageView.setImage(with: viewModel?.url, placeholderName: "smile-icon")
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale        
     }
 }
