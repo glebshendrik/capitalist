@@ -11,7 +11,7 @@ import Alamofire
 
 struct APIResourceRequest {
     static func urlRequest(for resource: APIResource) throws -> URLRequest {
-        let url = try APIResource.baseURLString.asURL()
+        let url = try APIResource.baseURLString.asURL().appendingQueryParameters(resource.urlStringQueryParameters)
         var urlRequest = URLRequest(url: url.appendingPathComponent(resource.path))
         urlRequest.httpMethod = resource.method.rawValue
         return try jsonEncoding(of: urlRequest, for: resource)

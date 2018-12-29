@@ -23,6 +23,10 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
     @IBOutlet weak var activityIndicator: UIView!
     @IBOutlet weak var loader: UIImageView!
     @IBOutlet weak var pageControl: UIPageControl!
+    private var pagedCollectionViewLayout: PagedCollectionViewLayout? {
+        return iconsCollectionView.collectionViewLayout as? PagedCollectionViewLayout
+    }
+    
     
     var viewModel: IconsViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -40,13 +44,28 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
         firstly {
             viewModel.loadIcons()
         }.done {
-            self.update(self.iconsCollectionView)
+            self.updateUI()
         }
         .catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки иконок", theme: .error)
         }.finally {
             self.set(self.activityIndicator, hidden: true)
         }
+    }
+    
+    private func updateUI() {
+        updatePageControl()
+        update(iconsCollectionView)
+    }
+    
+    func updatePageControl() {
+        guard let pagedCollectionViewLayout = pagedCollectionViewLayout else {
+            pageControl.isHidden = true
+            return
+        }
+        let pagesCount = pagedCollectionViewLayout.numberOfPages
+        pageControl.numberOfPages = pagesCount
+        pageControl.isHidden = pagesCount <= 1
     }
 }
 
@@ -66,21 +85,14 @@ extension IconsViewController : UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let count = viewModel.numberOfIcons
-        let pagesCount : Int = (count / 24)
-        pageControl.numberOfPages = pagesCount
-        pageControl.isHidden = pagesCount <= 1
-        
-        return count
+        return viewModel.numberOfIcons
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        
         pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        
         pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
     

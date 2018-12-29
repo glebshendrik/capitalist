@@ -52,6 +52,14 @@ open class PagedCollectionViewLayout : UICollectionViewLayout {
         }
     }
     
+    var numberOfPages: Int {
+        guard   let collectionView = collectionView,
+            let count = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0) else { return 0 }
+        
+        let pageSize = rows * columns
+        return (count + pageSize - 1) / pageSize
+    }
+    
     open override func prepare() {
         super.prepare()
         
@@ -114,13 +122,11 @@ open class PagedCollectionViewLayout : UICollectionViewLayout {
     
     open override var collectionViewContentSize: CGSize {
         
-        guard   let collectionView = collectionView,
-                let count = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0) else { return CGSize.zero }
+        guard let collectionView = collectionView else { return CGSize.zero }
         
         let size = collectionView.bounds.size
         let collectionViewWidth = collectionView.frame.size.width
-        let pageSize = rows * columns
-        let newSize = CGSize(width: ((count + pageSize - 1) / pageSize).cgFloat * collectionViewWidth,
+        let newSize = CGSize(width: numberOfPages.cgFloat * collectionViewWidth,
                              height: size.height)
         
         return newSize
