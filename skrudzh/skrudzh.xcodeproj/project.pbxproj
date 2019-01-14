@@ -133,6 +133,7 @@
 		FAED7D9C21EC618000BF6FE1 /* BasketsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9B21EC618000BF6FE1 /* BasketsService.swift */; };
 		FAED7D9E21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9D21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift */; };
 		FAED7DA021EC65B200BF6FE1 /* BasketsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9F21EC65B200BF6FE1 /* BasketsCoordinator.swift */; };
+		FAED7DA221EC6BA300BF6FE1 /* ExpenseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DA121EC6BA300BF6FE1 /* ExpenseCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -267,6 +268,7 @@
 		FAED7D9B21EC618000BF6FE1 /* BasketsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsService.swift; sourceTree = "<group>"; };
 		FAED7D9D21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FAED7D9F21EC65B200BF6FE1 /* BasketsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsCoordinator.swift; sourceTree = "<group>"; };
+		FAED7DA121EC6BA300BF6FE1 /* ExpenseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -548,6 +550,7 @@
 				FAD88F5C21AEC28300BE7BC1 /* User.swift */,
 				FAC3B9C421C0EB790015A12F /* IncomeSource.swift */,
 				FA0CADFC21D257F400805288 /* ExpenseSource.swift */,
+				FAED7DA121EC6BA300BF6FE1 /* ExpenseCategory.swift */,
 				FA0CAE1421D669C000805288 /* Icon.swift */,
 				FAED7D9721EC4C0D00BF6FE1 /* Basket.swift */,
 			);
@@ -887,6 +890,7 @@
 			files = (
 				FA0CAE2A21D69E2600805288 /* PagedCollectionViewLayout.swift in Sources */,
 				FA0CAE0921D39D3C00805288 /* ExpenseSourceCollectionViewCell.swift in Sources */,
+				FAED7DA221EC6BA300BF6FE1 /* ExpenseCategory.swift in Sources */,
 				FAD88F2C21AEB78A00BE7BC1 /* NotificationsHandlerProtocol.swift in Sources */,
 				FAC3B9BC21BA002E0015A12F /* ProfileEditViewModel.swift in Sources */,
 				FAD88F5F21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift in Sources */,
