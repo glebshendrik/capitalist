@@ -136,6 +136,8 @@
 		FAED7DA221EC6BA300BF6FE1 /* ExpenseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DA121EC6BA300BF6FE1 /* ExpenseCategory.swift */; };
 		FAED7DA421EC7FB600BF6FE1 /* ExpenseCategoriesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DA321EC7FB600BF6FE1 /* ExpenseCategoriesServiceProtocol.swift */; };
 		FAED7DA621EC801E00BF6FE1 /* ExpenseCategoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DA521EC801E00BF6FE1 /* ExpenseCategoriesService.swift */; };
+		FAED7DA821EC8B3700BF6FE1 /* ExpenseCategoriesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DA721EC8B3700BF6FE1 /* ExpenseCategoriesCoordinatorProtocol.swift */; };
+		FAED7DAA21EC8B6C00BF6FE1 /* ExpenseCategoriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DA921EC8B6C00BF6FE1 /* ExpenseCategoriesCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -273,6 +275,8 @@
 		FAED7DA121EC6BA300BF6FE1 /* ExpenseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategory.swift; sourceTree = "<group>"; };
 		FAED7DA321EC7FB600BF6FE1 /* ExpenseCategoriesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoriesServiceProtocol.swift; sourceTree = "<group>"; };
 		FAED7DA521EC801E00BF6FE1 /* ExpenseCategoriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoriesService.swift; sourceTree = "<group>"; };
+		FAED7DA721EC8B3700BF6FE1 /* ExpenseCategoriesCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoriesCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FAED7DA921EC8B6C00BF6FE1 /* ExpenseCategoriesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoriesCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -512,6 +516,7 @@
 				FAD88F6021AEC61800BE7BC1 /* AccountCoordinator.swift */,
 				FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */,
 				FA0CAE0421D2615900805288 /* ExpenseSourcesCoordinator.swift */,
+				FAED7DA921EC8B6C00BF6FE1 /* ExpenseCategoriesCoordinator.swift */,
 				FA0CAE1C21D66FC200805288 /* IconsCoordinator.swift */,
 				FAED7D9F21EC65B200BF6FE1 /* BasketsCoordinator.swift */,
 			);
@@ -594,6 +599,7 @@
 				FAD88F5E21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift */,
 				FAC3B9CA21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift */,
 				FA0CAE0221D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift */,
+				FAED7DA721EC8B3700BF6FE1 /* ExpenseCategoriesCoordinatorProtocol.swift */,
 				FA0CAE1A21D66F9A00805288 /* IconsCoordinatorProtocol.swift */,
 				FAED7D9D21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift */,
 			);
@@ -941,6 +947,7 @@
 				FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */,
 				FA165CE821B7654100EAA16B /* ForgotPasswordViewModel.swift in Sources */,
 				FAED7D9C21EC618000BF6FE1 /* BasketsService.swift in Sources */,
+				FAED7DA821EC8B3700BF6FE1 /* ExpenseCategoriesCoordinatorProtocol.swift in Sources */,
 				FAD88F4621AEBE7400BE7BC1 /* NotificationsCoordinator.swift in Sources */,
 				FA0CAE0D21D3C1F100805288 /* ExpenseSourceEditTableController.swift in Sources */,
 				FA165CEA21B769B500EAA16B /* ForgotPasswordViewController.swift in Sources */,
@@ -1000,6 +1007,7 @@
 				FAD88F5021AEC1A500BE7BC1 /* DevicesService.swift in Sources */,
 				FAC3B9C121BE15EC0015A12F /* OnboardingViewController.swift in Sources */,
 				FA0CAE0B21D3C1D900805288 /* ExpenseSourceEditViewController.swift in Sources */,
+				FAED7DAA21EC8B6C00BF6FE1 /* ExpenseCategoriesCoordinator.swift in Sources */,
 				FAD88F8421B0FB7800BE7BC1 /* LandingViewController.swift in Sources */,
 				FAD88F4D21AEC1A500BE7BC1 /* AuthenticationService.swift in Sources */,
 				FA165CEE21B7846C00EAA16B /* ResetPasswordViewController.swift in Sources */,
