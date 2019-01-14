@@ -40,6 +40,11 @@ class ServicesAssembly: Assembly {
             return ExpenseSourcesService(
                 apiClient: r.resolve(APIClientProtocol.self)!)
         }
+        
+        container.register(ExpenseCategoriesServiceProtocol.self) { r in
+            return ExpenseCategoriesService(
+                apiClient: r.resolve(APIClientProtocol.self)!)
+        }
                 
         container.register(IconsServiceProtocol.self) { r in
             return IconsService(

@@ -134,6 +134,8 @@
 		FAED7D9E21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9D21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift */; };
 		FAED7DA021EC65B200BF6FE1 /* BasketsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9F21EC65B200BF6FE1 /* BasketsCoordinator.swift */; };
 		FAED7DA221EC6BA300BF6FE1 /* ExpenseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DA121EC6BA300BF6FE1 /* ExpenseCategory.swift */; };
+		FAED7DA421EC7FB600BF6FE1 /* ExpenseCategoriesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DA321EC7FB600BF6FE1 /* ExpenseCategoriesServiceProtocol.swift */; };
+		FAED7DA621EC801E00BF6FE1 /* ExpenseCategoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DA521EC801E00BF6FE1 /* ExpenseCategoriesService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -269,6 +271,8 @@
 		FAED7D9D21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FAED7D9F21EC65B200BF6FE1 /* BasketsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsCoordinator.swift; sourceTree = "<group>"; };
 		FAED7DA121EC6BA300BF6FE1 /* ExpenseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategory.swift; sourceTree = "<group>"; };
+		FAED7DA321EC7FB600BF6FE1 /* ExpenseCategoriesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoriesServiceProtocol.swift; sourceTree = "<group>"; };
+		FAED7DA521EC801E00BF6FE1 /* ExpenseCategoriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoriesService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -526,6 +530,7 @@
 				FAD88F4921AEC1A400BE7BC1 /* UsersService.swift */,
 				FAC3B9C821C0F4610015A12F /* IncomeSourcesService.swift */,
 				FA0CAE0021D25F5300805288 /* ExpenseSourcesService.swift */,
+				FAED7DA521EC801E00BF6FE1 /* ExpenseCategoriesService.swift */,
 				FA0CAE1821D66CCD00805288 /* IconsService.swift */,
 				FAED7D9B21EC618000BF6FE1 /* BasketsService.swift */,
 			);
@@ -604,6 +609,7 @@
 				FAD88F5621AEC1F700BE7BC1 /* UsersServiceProtocol.swift */,
 				FAC3B9C621C0F2AF0015A12F /* IncomeSourcesServiceProtocol.swift */,
 				FA0CADFE21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift */,
+				FAED7DA321EC7FB600BF6FE1 /* ExpenseCategoriesServiceProtocol.swift */,
 				FA0CAE1621D66C8700805288 /* IconsServiceProtocol.swift */,
 				FAED7D9921EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift */,
 			);
@@ -961,6 +967,8 @@
 				FA0CAE0721D266F100805288 /* ExpenseSourceViewModel.swift in Sources */,
 				FAC3B9D421C2796C0015A12F /* IncomeSourceCollectionViewCell.swift in Sources */,
 				FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */,
+				FAED7DA421EC7FB600BF6FE1 /* ExpenseCategoriesServiceProtocol.swift in Sources */,
+				FAED7DA621EC801E00BF6FE1 /* ExpenseCategoriesService.swift in Sources */,
 				FAD88F1D21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift in Sources */,
 				FAD88F5921AEC1F800BE7BC1 /* AuthenticationServiceProtocol.swift in Sources */,
 				FAD88F3921AEBAA600BE7BC1 /* Session.swift in Sources */,
