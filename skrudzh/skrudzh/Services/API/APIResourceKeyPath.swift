@@ -43,6 +43,9 @@ struct APIResourceKeyPath {
             return ResourceKeyPath(singular: "expense_source", plural: "expense_sources")
         case .indexIcons:
             return ResourceKeyPath(singular: "icon", plural: "icons")
+        case .indexBaskets,
+             .showBasket:
+            return ResourceKeyPath(singular: "basket", plural: "baskets")
         }
     }
 }

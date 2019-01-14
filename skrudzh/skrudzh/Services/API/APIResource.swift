@@ -49,6 +49,10 @@ enum APIResource: URLRequestConvertible {
     // Icons
     case indexIcons(category: IconCategory)
     
+    // Baskets
+    case indexBaskets(userId: Int)
+    case showBasket(id: Int)
+    
     var method: HTTPMethod {
         return APIResourceMethod.method(for: self)
     }
