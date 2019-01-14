@@ -38,6 +38,8 @@ struct APIResourceRequest {
         case .updateIncomeSource(let form):                 return encode(form)
         case .createExpenseSource(let form):                return encode(form)
         case .updateExpenseSource(let form):                return encode(form)
+        case .createExpenseCategory(let form):              return encode(form)
+        case .updateExpenseCategory(let form):              return encode(form)
         default:                                            return nil
         }
     }
