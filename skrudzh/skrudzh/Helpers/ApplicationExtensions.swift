@@ -435,7 +435,7 @@ extension UIView {
 
 extension UIImageView {
     func showCoinLoader() {
-        self.animationImages = [Int](1...15).compactMap { UIImage(named: "coin-loader-\($0)") }
+        self.animationImages = [Int](1...16).compactMap { UIImage(named: "coin-loader-\($0)") }
         self.animationDuration = 1
         self.startAnimating()
     }
