@@ -45,5 +45,10 @@ class ServicesAssembly: Assembly {
             return IconsService(
                 apiClient: r.resolve(APIClientProtocol.self)!)
         }
+        
+        container.register(BasketsServiceProtocol.self) { r in
+            return BasketsService(
+                apiClient: r.resolve(APIClientProtocol.self)!)
+        }
     }
 }
