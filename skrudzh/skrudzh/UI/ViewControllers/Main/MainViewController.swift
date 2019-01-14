@@ -30,6 +30,26 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBOutlet weak var expenseSourcesLoader: UIImageView!
     
+    @IBOutlet weak var joyBasketProgressConstraint: NSLayoutConstraint!
+    @IBOutlet weak var riskBasketProgressConstraint: NSLayoutConstraint!
+    @IBOutlet weak var safeBasketProgressConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var joyBasketSpentLabel: UILabel!
+    @IBOutlet weak var joyBasketTitleLabel: UILabel!
+    @IBOutlet weak var joyBasketSelectionIndicator: UIView!
+    
+    @IBOutlet weak var riskBasketSpentLabel: UILabel!
+    @IBOutlet weak var riskBasketTitleLabel: UILabel!
+    @IBOutlet weak var riskBasketSelectionIndicator: UIView!
+    
+    @IBOutlet weak var safeBasketSpentLabel: UILabel!
+    @IBOutlet weak var safeBasketTitleLabel: UILabel!
+    @IBOutlet weak var safeBasketSelectionIndicator: UIView!
+    
+    @IBOutlet weak var joyExpenseCategoriesContainerLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var riskExpenseCategoriesContainerLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var safeExpenseCategoriesLeftConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -46,6 +66,16 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBAction func didTapAddExpenseSourceButton(_ sender: Any) {
     }
+    
+    @IBAction func didTapJoyBasket(_ sender: Any) {
+    }
+    
+    @IBAction func didTapRiskBasket(_ sender: Any) {
+    }
+    
+    @IBAction func didTapSafeBasket(_ sender: Any) {
+    }
+    
     
     private func loadData() {
         loadIncomeSources()
