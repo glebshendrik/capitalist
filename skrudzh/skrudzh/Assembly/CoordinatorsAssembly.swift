@@ -39,5 +39,10 @@ class CoordinatorsAssembly: Assembly {
         container.register(IconsCoordinatorProtocol.self) { r in
             return IconsCoordinator(iconsService: r.resolve(IconsServiceProtocol.self)!)
         }
+        
+        container.register(BasketsCoordinatorProtocol.self) { r in
+            return BasketsCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,                                      
+                                      basketsService: r.resolve(BasketsServiceProtocol.self)!)
+        }
     }
 }

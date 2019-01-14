@@ -131,6 +131,8 @@
 		FAED7D9821EC4C0D00BF6FE1 /* Basket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9721EC4C0D00BF6FE1 /* Basket.swift */; };
 		FAED7D9A21EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9921EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift */; };
 		FAED7D9C21EC618000BF6FE1 /* BasketsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9B21EC618000BF6FE1 /* BasketsService.swift */; };
+		FAED7D9E21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9D21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift */; };
+		FAED7DA021EC65B200BF6FE1 /* BasketsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9F21EC65B200BF6FE1 /* BasketsCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -263,6 +265,8 @@
 		FAED7D9721EC4C0D00BF6FE1 /* Basket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basket.swift; sourceTree = "<group>"; };
 		FAED7D9921EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsServiceProtocol.swift; sourceTree = "<group>"; };
 		FAED7D9B21EC618000BF6FE1 /* BasketsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsService.swift; sourceTree = "<group>"; };
+		FAED7D9D21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FAED7D9F21EC65B200BF6FE1 /* BasketsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -503,6 +507,7 @@
 				FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */,
 				FA0CAE0421D2615900805288 /* ExpenseSourcesCoordinator.swift */,
 				FA0CAE1C21D66FC200805288 /* IconsCoordinator.swift */,
+				FAED7D9F21EC65B200BF6FE1 /* BasketsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -582,6 +587,7 @@
 				FAC3B9CA21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift */,
 				FA0CAE0221D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift */,
 				FA0CAE1A21D66F9A00805288 /* IconsCoordinatorProtocol.swift */,
+				FAED7D9D21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -912,9 +918,11 @@
 				FAD88F7821AFD64000BE7BC1 /* APIResourcePath.swift in Sources */,
 				FAD88F7721AFD64000BE7BC1 /* APIResourceMethod.swift in Sources */,
 				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
+				FAED7DA021EC65B200BF6FE1 /* BasketsCoordinator.swift in Sources */,
 				FA0CAE2621D67A7100805288 /* IconViewModel.swift in Sources */,
 				FAED7D9821EC4C0D00BF6FE1 /* Basket.swift in Sources */,
 				FAC3B9C521C0EB7A0015A12F /* IncomeSource.swift in Sources */,
+				FAED7D9E21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift in Sources */,
 				FAD88F4421AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift in Sources */,
 				FA0CAE0521D2615900805288 /* ExpenseSourcesCoordinator.swift in Sources */,
 				FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */,
