@@ -25,8 +25,8 @@ class BasketsViewModel {
         return basketViewModelBy(basketType: .safe)?.monthlySpent
     }
     
-    var monthlySpent: String {
-        return basketsMonthlySpentCents.moneyStringWithCurrency(symbol: "₽") ?? "0 ₽"
+    var monthlySpent: String? {
+        return basketsMonthlySpentCents.moneyStringWithCurrency(symbol: "₽")
     }
     
     var joyBasketRatio: CGFloat {

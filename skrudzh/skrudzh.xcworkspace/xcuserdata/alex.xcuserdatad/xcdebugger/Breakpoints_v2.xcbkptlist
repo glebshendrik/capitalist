@@ -538,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "569257008.1195509"
+            timestampString = "569263178.55572"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "loadBaskets()"
             landmarkType = "7">
          </BreakpointContent>
@@ -660,7 +660,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewModels/Main/BasketsViewModel.swift"
-            timestampString = "569257008.121941"
+            timestampString = "569263178.5599149"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
@@ -676,11 +676,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "569257008.122578"
+            timestampString = "569263178.560775"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "updateBasketExpenseCategoriesContainer()"
             landmarkType = "7">
          </BreakpointContent>
@@ -692,11 +692,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "569257008.123244"
+            timestampString = "569263178.56103"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "updateBasketExpenseCategoriesContainer()"
             landmarkType = "7">
          </BreakpointContent>

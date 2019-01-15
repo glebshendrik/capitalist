@@ -69,20 +69,21 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBAction func didTapJoyBasket(_ sender: Any) {
         viewModel.basketsViewModel.selectBasketBy(basketType: .joy)
+        viewModel.basketsViewModel.append(cents: 1, basketType: .joy)
         updateBasketsUI()
     }
     
     @IBAction func didTapRiskBasket(_ sender: Any) {
         viewModel.basketsViewModel.selectBasketBy(basketType: .risk)
+        viewModel.basketsViewModel.append(cents: 1, basketType: .risk)
         updateBasketsUI()
     }
     
     @IBAction func didTapSafeBasket(_ sender: Any) {
         viewModel.basketsViewModel.selectBasketBy(basketType: .safe)
+        viewModel.basketsViewModel.append(cents: 1, basketType: .safe)
         updateBasketsUI()
     }
-    
-    
     
     private func loadData() {
         loadIncomeSources()
@@ -115,7 +116,7 @@ extension MainViewController {
     }
     
     private func updateBasketsRatiosUI() {
-        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.1, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.5, initialSpringVelocity: 0.1, options: .curveEaseInOut, animations: {
             
             self.joyBasketProgressConstraint = self.joyBasketProgressConstraint.setMultiplier(multiplier: self.viewModel.basketsViewModel.joyBasketRatio)
             
@@ -138,30 +139,30 @@ extension MainViewController {
                           options: .transitionCrossDissolve,
                           animations: {
                             
-                            self.joyBasketSpentLabel.text = self.viewModel.basketsViewModel.joyBasketMonthlySpent
-                            self.joyBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isJoyBasketSelected ? selectedTextColor : unselectedTextColor
-                            self.joyBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isJoyBasketSelected
-                            
-                            self.riskBasketSpentLabel.text = self.viewModel.basketsViewModel.riskBasketMonthlySpent
-                            self.riskBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isRiskBasketSelected ? selectedTextColor : unselectedTextColor
-                            self.riskBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isRiskBasketSelected
-                            
-                            self.safeBasketSpentLabel.text = self.viewModel.basketsViewModel.safeBasketMonthlySpent
-                            self.safeBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isSafeBasketSelected ? selectedTextColor : unselectedTextColor
-                            self.safeBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isSafeBasketSelected
+            self.joyBasketSpentLabel.text = self.viewModel.basketsViewModel.joyBasketMonthlySpent
+            self.joyBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isJoyBasketSelected ? selectedTextColor : unselectedTextColor
+            self.joyBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isJoyBasketSelected
+            
+            self.riskBasketSpentLabel.text = self.viewModel.basketsViewModel.riskBasketMonthlySpent
+            self.riskBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isRiskBasketSelected ? selectedTextColor : unselectedTextColor
+            self.riskBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isRiskBasketSelected
+            
+            self.safeBasketSpentLabel.text = self.viewModel.basketsViewModel.safeBasketMonthlySpent
+            self.safeBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isSafeBasketSelected ? selectedTextColor : unselectedTextColor
+            self.safeBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isSafeBasketSelected
         })
-        
-        
-        
     }
     
     private func updateBasketExpenseCategoriesContainer() {
+        let lowPriority = UILayoutPriority(integerLiteral: 998)
+        let highPriority = UILayoutPriority(integerLiteral: 999)
+        
         UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.5, initialSpringVelocity: 0.1, options: .curveEaseInOut, animations: {
             
-            self.joyExpenseCategoriesContainerLeftConstraint.priority = self.viewModel.basketsViewModel.isJoyBasketSelected ? UILayoutPriority(integerLiteral: 999) : UILayoutPriority(integerLiteral: 998)
-            self.riskExpenseCategoriesContainerLeftConstraint.priority = self.viewModel.basketsViewModel.isRiskBasketSelected ? UILayoutPriority(integerLiteral: 999) : UILayoutPriority(integerLiteral: 998)
-            self.safeExpenseCategoriesLeftConstraint.priority = self.viewModel.basketsViewModel.isSafeBasketSelected ? UILayoutPriority(integerLiteral: 999) : UILayoutPriority(integerLiteral: 998)
-                        
+            self.joyExpenseCategoriesContainerLeftConstraint.priority = self.viewModel.basketsViewModel.isJoyBasketSelected ? highPriority : lowPriority
+            self.riskExpenseCategoriesContainerLeftConstraint.priority = self.viewModel.basketsViewModel.isRiskBasketSelected ? highPriority : lowPriority
+            self.safeExpenseCategoriesLeftConstraint.priority = self.viewModel.basketsViewModel.isSafeBasketSelected ? highPriority : lowPriority
+            
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
