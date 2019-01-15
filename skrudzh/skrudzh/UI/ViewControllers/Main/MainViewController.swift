@@ -53,7 +53,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        loadData()
+        loadData()        
     }
     
     override func viewWillAppear(_ animated: Bool) {

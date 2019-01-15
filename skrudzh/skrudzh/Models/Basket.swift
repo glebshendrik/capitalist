@@ -17,11 +17,13 @@ enum BasketType : String, Codable {
 struct Basket : Decodable {
     let id: Int
     let basketType: BasketType
-    let monthlySpent: String
+    var monthlySpentCents: Int
+    let monthlySpentCurrency: String
     
     enum CodingKeys: String, CodingKey {
         case id
         case basketType = "basket_type"
-        case monthlySpent = "monthly_spent"
+        case monthlySpentCents = "monthly_spent_cents"
+        case monthlySpentCurrency = "monthly_spent_currency"
     }
 }

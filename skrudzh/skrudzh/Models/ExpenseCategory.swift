@@ -16,7 +16,8 @@ struct ExpenseCategory : Decodable {
     let basketType: BasketType
     let monthlyPlannedCurrency: String
     let monthlyPlannedCents: Int
-    let monthlySpent: String
+    let monthlySpentCents: Int
+    let monthlySpentCurrency: String
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -26,7 +27,8 @@ struct ExpenseCategory : Decodable {
         case basketType = "basket_type"
         case monthlyPlannedCurrency = "monthly_planned_currency"
         case monthlyPlannedCents = "monthly_planned_cents"
-        case monthlySpent = "monthly_spent"
+        case monthlySpentCents = "monthly_spent_cents"
+        case monthlySpentCurrency = "monthly_spent_currency"
     }
     
 }
