@@ -248,7 +248,8 @@ class ApplicationAssembly: Assembly {
         // MainViewModel
         container.register(MainViewModel.self) { r in
             return MainViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!,
-                                 expenseSourcesCoordinator: r.resolve(ExpenseSourcesCoordinatorProtocol.self)!)
+                                 expenseSourcesCoordinator: r.resolve(ExpenseSourcesCoordinatorProtocol.self)!,
+                                 basketsCoordinator: r.resolve(BasketsCoordinatorProtocol.self)!)
         }
         
         // IncomeSourceEditViewModel

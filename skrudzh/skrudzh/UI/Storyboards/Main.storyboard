@@ -794,15 +794,15 @@
                                     <constraint firstItem="Es8-MZ-PJD" firstAttribute="leading" secondItem="uUj-IS-hQl" secondAttribute="trailing" id="JzY-JC-ASZ"/>
                                     <constraint firstItem="yh5-Gh-kqK" firstAttribute="leading" secondItem="Es8-MZ-PJD" secondAttribute="trailing" id="Qy8-bs-LfR"/>
                                     <constraint firstAttribute="bottom" secondItem="uUj-IS-hQl" secondAttribute="bottom" id="U0S-sX-k5b"/>
-                                    <constraint firstItem="uUj-IS-hQl" firstAttribute="leading" secondItem="DLF-Af-F6p" secondAttribute="leading" id="UCf-Kj-kN1"/>
+                                    <constraint firstItem="uUj-IS-hQl" firstAttribute="leading" secondItem="DLF-Af-F6p" secondAttribute="leading" priority="999" id="UCf-Kj-kN1"/>
                                     <constraint firstAttribute="bottom" secondItem="Es8-MZ-PJD" secondAttribute="bottom" id="Vgu-um-tF4"/>
                                     <constraint firstItem="Es8-MZ-PJD" firstAttribute="width" secondItem="DLF-Af-F6p" secondAttribute="width" id="ZKq-6q-Ynh"/>
                                     <constraint firstItem="yh5-Gh-kqK" firstAttribute="width" secondItem="DLF-Af-F6p" secondAttribute="width" id="bgO-rP-IOY"/>
                                     <constraint firstItem="uUj-IS-hQl" firstAttribute="width" secondItem="DLF-Af-F6p" secondAttribute="width" id="cgL-5s-VEZ"/>
                                     <constraint firstItem="Es8-MZ-PJD" firstAttribute="top" secondItem="DLF-Af-F6p" secondAttribute="top" id="fAU-Es-CNo"/>
                                     <constraint firstItem="uUj-IS-hQl" firstAttribute="top" secondItem="DLF-Af-F6p" secondAttribute="top" id="gNa-EY-fNF"/>
-                                    <constraint firstItem="Es8-MZ-PJD" firstAttribute="leading" secondItem="DLF-Af-F6p" secondAttribute="leading" priority="999" id="nFe-Sp-Wcc"/>
-                                    <constraint firstItem="yh5-Gh-kqK" firstAttribute="leading" secondItem="DLF-Af-F6p" secondAttribute="leading" priority="999" id="qod-DS-NdX"/>
+                                    <constraint firstItem="Es8-MZ-PJD" firstAttribute="leading" secondItem="DLF-Af-F6p" secondAttribute="leading" priority="998" id="nFe-Sp-Wcc"/>
+                                    <constraint firstItem="yh5-Gh-kqK" firstAttribute="leading" secondItem="DLF-Af-F6p" secondAttribute="leading" priority="998" id="qod-DS-NdX"/>
                                 </constraints>
                             </view>
                         </subviews>

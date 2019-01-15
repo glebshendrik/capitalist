@@ -68,18 +68,26 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     }
     
     @IBAction func didTapJoyBasket(_ sender: Any) {
+        viewModel.basketsViewModel.selectBasketBy(basketType: .joy)
+        updateBasketsUI()
     }
     
     @IBAction func didTapRiskBasket(_ sender: Any) {
+        viewModel.basketsViewModel.selectBasketBy(basketType: .risk)
+        updateBasketsUI()
     }
     
     @IBAction func didTapSafeBasket(_ sender: Any) {
+        viewModel.basketsViewModel.selectBasketBy(basketType: .safe)
+        updateBasketsUI()
     }
+    
     
     
     private func loadData() {
         loadIncomeSources()
         loadExpenseSources()
+        loadBaskets()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -97,6 +105,81 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     }
     
     
+}
+
+extension MainViewController {
+    private func updateBasketsUI() {
+        updateBasketsRatiosUI()
+        updateBasketsTabsUI()
+        updateBasketExpenseCategoriesContainer()
+    }
+    
+    private func updateBasketsRatiosUI() {
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.1, options: .curveEaseInOut, animations: {
+            
+            self.joyBasketProgressConstraint = self.joyBasketProgressConstraint.setMultiplier(multiplier: self.viewModel.basketsViewModel.joyBasketRatio)
+            
+            self.riskBasketProgressConstraint = self.riskBasketProgressConstraint.setMultiplier(multiplier: self.viewModel.basketsViewModel.riskBasketRatio)
+            
+            self.safeBasketProgressConstraint = self.safeBasketProgressConstraint.setMultiplier(multiplier: self.viewModel.basketsViewModel.safeBasketRatio)
+            
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
+        
+    }
+    
+    private func updateBasketsTabsUI() {
+        let selectedTextColor = UIColor(red: 0.25, green: 0.27, blue: 0.38, alpha: 1)
+        let unselectedTextColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
+        
+        UIView.transition(with: view,
+                          duration: 0.1,
+                          options: .transitionCrossDissolve,
+                          animations: {
+                            
+                            self.joyBasketSpentLabel.text = self.viewModel.basketsViewModel.joyBasketMonthlySpent
+                            self.joyBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isJoyBasketSelected ? selectedTextColor : unselectedTextColor
+                            self.joyBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isJoyBasketSelected
+                            
+                            self.riskBasketSpentLabel.text = self.viewModel.basketsViewModel.riskBasketMonthlySpent
+                            self.riskBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isRiskBasketSelected ? selectedTextColor : unselectedTextColor
+                            self.riskBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isRiskBasketSelected
+                            
+                            self.safeBasketSpentLabel.text = self.viewModel.basketsViewModel.safeBasketMonthlySpent
+                            self.safeBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isSafeBasketSelected ? selectedTextColor : unselectedTextColor
+                            self.safeBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isSafeBasketSelected
+        })
+        
+        
+        
+    }
+    
+    private func updateBasketExpenseCategoriesContainer() {
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.5, initialSpringVelocity: 0.1, options: .curveEaseInOut, animations: {
+            
+            self.joyExpenseCategoriesContainerLeftConstraint.priority = self.viewModel.basketsViewModel.isJoyBasketSelected ? UILayoutPriority(integerLiteral: 999) : UILayoutPriority(integerLiteral: 998)
+            self.riskExpenseCategoriesContainerLeftConstraint.priority = self.viewModel.basketsViewModel.isRiskBasketSelected ? UILayoutPriority(integerLiteral: 999) : UILayoutPriority(integerLiteral: 998)
+            self.safeExpenseCategoriesLeftConstraint.priority = self.viewModel.basketsViewModel.isSafeBasketSelected ? UILayoutPriority(integerLiteral: 999) : UILayoutPriority(integerLiteral: 998)
+                        
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private func loadBaskets() {
+//        set(incomeSourcesActivityIndicator, hidden: false)
+        firstly {
+            viewModel.loadBaskets()
+        }.done {
+            self.updateBasketsUI()
+        }
+        .catch { e in
+            print(e)
+            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки корзин", theme: .error)
+        }.finally {
+//            self.set(self.incomeSourcesActivityIndicator, hidden: true)
+        }
+    }
 }
 
 extension MainViewController : IncomeSourceEditViewControllerDelegate {
