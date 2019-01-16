@@ -741,17 +741,118 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUj-IS-hQl">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="394"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Удовольствие" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh5-g2-utb">
-                                                <rect key="frame" x="130" y="187" width="115" height="20"/>
-                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BDY-K1-ch7">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="394"/>
+                                                <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <collectionViewLayout key="collectionViewLayout" id="6w6-MW-6uv" customClass="PagedCollectionViewLayout" customModule="skrudzh" customModuleProvider="target">
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="columns">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="rows">
+                                                            <integer key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="size" keyPath="itemSize">
+                                                            <size key="value" width="68" height="85"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </collectionViewLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IconCollectionViewCell" id="s22-FT-zsz" customClass="ExpenseCategoryCollectionViewCell">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIf-Jo-V5z">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                    <subviews>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6y-lk-5Tt">
+                                                                            <rect key="frame" x="5" y="5" width="40" height="40"/>
+                                                                            <subviews>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-icon" translatesAutoresizingMaskIntoConstraints="NO" id="4VU-Hd-H7E">
+                                                                                    <rect key="frame" x="7.5" y="9" width="25" height="22"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="BkS-8n-yaH"/>
+                                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="25" id="q1h-4u-Scp"/>
+                                                                                    </constraints>
+                                                                                </imageView>
+                                                                            </subviews>
+                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <constraints>
+                                                                                <constraint firstItem="4VU-Hd-H7E" firstAttribute="centerX" secondItem="X6y-lk-5Tt" secondAttribute="centerX" id="0PJ-tZ-BWK"/>
+                                                                                <constraint firstAttribute="height" constant="40" id="KiG-B2-kOa"/>
+                                                                                <constraint firstAttribute="width" constant="40" id="Mnp-gM-cFF"/>
+                                                                                <constraint firstItem="4VU-Hd-H7E" firstAttribute="centerY" secondItem="X6y-lk-5Tt" secondAttribute="centerY" id="vjQ-lA-m8d"/>
+                                                                            </constraints>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                                    <color key="value" red="0.1960784314" green="0.1960784314" blue="0.2784313725" alpha="0.059999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                                    <size key="value" width="0.0" height="6"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                                    <real key="value" value="1"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                                    <real key="value" value="8"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                    <real key="value" value="20"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
+                                                                        </view>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstItem="X6y-lk-5Tt" firstAttribute="centerX" secondItem="VIf-Jo-V5z" secondAttribute="centerX" id="4Zf-41-Nf0"/>
+                                                                        <constraint firstItem="X6y-lk-5Tt" firstAttribute="centerY" secondItem="VIf-Jo-V5z" secondAttribute="centerY" id="qp3-8C-aNm"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="20"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                            <size key="value" width="0.0" height="5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                            <real key="value" value="1"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                            <real key="value" value="5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                            <color key="value" red="0.1960784314" green="0.1960784314" blue="0.2784313725" alpha="0.19667701200000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                            </subviews>
+                                                        </view>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="VIf-Jo-V5z" secondAttribute="bottom" id="5SO-tP-WKc"/>
+                                                            <constraint firstItem="VIf-Jo-V5z" firstAttribute="leading" secondItem="s22-FT-zsz" secondAttribute="leading" id="9hZ-DO-e7l"/>
+                                                            <constraint firstAttribute="trailing" secondItem="VIf-Jo-V5z" secondAttribute="trailing" id="P11-kw-jXX"/>
+                                                            <constraint firstItem="VIf-Jo-V5z" firstAttribute="top" secondItem="s22-FT-zsz" secondAttribute="top" id="s5a-Da-QBa"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <outlet property="iconImageView" destination="4VU-Hd-H7E" id="Kxu-mm-dRE"/>
+                                                        </connections>
+                                                    </collectionViewCell>
+                                                </cells>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="EOg-T1-SCz" id="0dc-Ou-f3b"/>
+                                                    <outlet property="delegate" destination="EOg-T1-SCz" id="j6g-c7-OSh"/>
+                                                </connections>
+                                            </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="yh5-g2-utb" firstAttribute="centerY" secondItem="uUj-IS-hQl" secondAttribute="centerY" id="8Ss-Wq-H55"/>
-                                            <constraint firstItem="yh5-g2-utb" firstAttribute="centerX" secondItem="uUj-IS-hQl" secondAttribute="centerX" id="hH5-P6-dXt"/>
+                                            <constraint firstItem="BDY-K1-ch7" firstAttribute="top" secondItem="uUj-IS-hQl" secondAttribute="top" id="7MP-RA-hNc"/>
+                                            <constraint firstAttribute="trailing" secondItem="BDY-K1-ch7" secondAttribute="trailing" id="Ahh-WK-fD8"/>
+                                            <constraint firstAttribute="bottom" secondItem="BDY-K1-ch7" secondAttribute="bottom" id="CU8-Np-Gcs"/>
+                                            <constraint firstItem="BDY-K1-ch7" firstAttribute="leading" secondItem="uUj-IS-hQl" secondAttribute="leading" id="TOo-df-rg8"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Es8-MZ-PJD">

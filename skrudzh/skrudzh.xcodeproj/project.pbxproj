@@ -140,6 +140,8 @@
 		FAED7DAA21EC8B6C00BF6FE1 /* ExpenseCategoriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DA921EC8B6C00BF6FE1 /* ExpenseCategoriesCoordinator.swift */; };
 		FAED7DAC21ED876A00BF6FE1 /* BasketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DAB21ED876A00BF6FE1 /* BasketViewModel.swift */; };
 		FAED7DAE21EDDD3800BF6FE1 /* BasketsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DAD21EDDD3800BF6FE1 /* BasketsViewModel.swift */; };
+		FAED7DB021EFA0CE00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */; };
+		FAED7DB221EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -281,6 +283,8 @@
 		FAED7DA921EC8B6C00BF6FE1 /* ExpenseCategoriesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoriesCoordinator.swift; sourceTree = "<group>"; };
 		FAED7DAB21ED876A00BF6FE1 /* BasketViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewModel.swift; sourceTree = "<group>"; };
 		FAED7DAD21EDDD3800BF6FE1 /* BasketsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsViewModel.swift; sourceTree = "<group>"; };
+		FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,6 +440,7 @@
 			children = (
 				FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */,
 				FA0CAE0821D39D3B00805288 /* ExpenseSourceCollectionViewCell.swift */,
+				FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -723,6 +728,7 @@
 				FA0CAE1021D3C23000805288 /* ExpenseSourceEditViewModel.swift */,
 				FAED7DAB21ED876A00BF6FE1 /* BasketViewModel.swift */,
 				FAED7DAD21EDDD3800BF6FE1 /* BasketsViewModel.swift */,
+				FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -913,6 +919,7 @@
 				FAC3B9BC21BA002E0015A12F /* ProfileEditViewModel.swift in Sources */,
 				FAD88F5F21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift in Sources */,
 				FAD88F1521AEB52C00BE7BC1 /* ServicesAssembly.swift in Sources */,
+				FAED7DB221EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift in Sources */,
 				FAD88F5221AEC1A500BE7BC1 /* APIClient.swift in Sources */,
 				FAD88F6121AEC61800BE7BC1 /* AccountCoordinator.swift in Sources */,
 				FAD88F7921AFD64000BE7BC1 /* APIResourceRequest.swift in Sources */,
@@ -958,6 +965,7 @@
 				FA0CAE0D21D3C1F100805288 /* ExpenseSourceEditTableController.swift in Sources */,
 				FA165CEA21B769B500EAA16B /* ForgotPasswordViewController.swift in Sources */,
 				FAD88F3221AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift in Sources */,
+				FAED7DB021EFA0CE00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift in Sources */,
 				FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */,
 				FA0CAE1B21D66F9A00805288 /* IconsCoordinatorProtocol.swift in Sources */,
 				FAC3B9CB21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift in Sources */,
