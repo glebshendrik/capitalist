@@ -69,4 +69,11 @@ struct ExpenseCategoryUpdatingForm : Encodable {
         case monthlyPlannedCurrency = "monthly_planned_currency"
         case monthlyPlannedCents = "monthly_planned_cents"
     }
+    
+    init(id: Int, name: String, iconURL: URL?, monthlyPlannedCents: Int) {
+        self.id = id
+        self.name = name
+        self.iconURL = iconURL
+        self.monthlyPlannedCents = monthlyPlannedCents
+    }
 }

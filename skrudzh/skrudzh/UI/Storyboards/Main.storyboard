@@ -846,7 +846,7 @@
                                                                                     <real key="value" value="1"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                    <real key="value" value="5"/>
+                                                                                    <real key="value" value="4"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                                                                     <color key="value" red="0.54509803921568623" green="0.59607843137254901" blue="0.6588235294117647" alpha="0.19667701200000001" colorSpace="custom" customColorSpace="sRGB"/>
