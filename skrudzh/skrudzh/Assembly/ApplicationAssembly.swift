@@ -39,6 +39,8 @@ struct Infrastructure {
         case ExpenseSourceEditNavigationController
         case ExpenseSourceEditViewController
         case IconsViewController
+        case ExpenseCategoryEditNavigationController
+        case ExpenseCategoryEditViewController
         
         // Profile
         case ProfileViewController
@@ -74,7 +76,9 @@ struct Infrastructure {
                  .IncomeSourceEditNavigationController,
                  .ExpenseSourceEditNavigationController,
                  .ExpenseSourceEditViewController,
-                 .IconsViewController:
+                 .IconsViewController,
+                 .ExpenseCategoryEditNavigationController,
+                 .ExpenseCategoryEditViewController:
                 return .Main
             case .ProfileViewController,
                  .ChangePasswordViewController:
@@ -202,6 +206,12 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(IconsViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
+        
+        // ExpenseCategoryEditViewController
+        container.registerForSkrudzhStoryboard(ExpenseCategoryEditViewController.self) { (r, c) in
+            c.viewModel = r.resolve(ExpenseCategoryEditViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -268,6 +278,12 @@ class ApplicationAssembly: Assembly {
         // IconsViewModel
         container.register(IconsViewModel.self) { r in
             return IconsViewModel(iconsCoordinator: r.resolve(IconsCoordinatorProtocol.self)!)
+        }
+        
+        // ExpenseCategoryEditViewModel
+        container.register(ExpenseCategoryEditViewModel.self) { r in
+            return ExpenseCategoryEditViewModel(expenseCategoriesCoordinator: r.resolve(ExpenseCategoriesCoordinatorProtocol.self)!,
+                                              accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
         }
     }
     

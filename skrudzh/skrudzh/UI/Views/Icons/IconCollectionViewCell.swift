@@ -19,7 +19,8 @@ class IconCollectionViewCell : UICollectionViewCell {
     }
     
     func updateUI() {
-        iconImageView.setImage(with: viewModel?.url, placeholderName: "smile-icon")
+        iconImageView.setImage(with: viewModel?.url, placeholderName: "smile-icon", renderingMode: .alwaysTemplate)
+        iconImageView.tintColor = UIColor.gray
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale        
     }

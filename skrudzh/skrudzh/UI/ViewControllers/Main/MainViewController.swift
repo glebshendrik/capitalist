@@ -308,17 +308,17 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
     }
 }
 
-extension MainViewController {
-    func didCreateExpenseCategory() {
-//        loadExpenseSources(scrollToEndWhenUpdated: true)
+extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
+    func didCreateExpenseCategory(with basketType: BasketType) {
+        loadExpenseCategories(by: basketType)
     }
     
-    func didUpdateExpenseCategory() {
-//        loadExpenseSources()
+    func didUpdateExpenseCategory(with basketType: BasketType) {
+        loadExpenseCategories(by: basketType)
     }
     
-    func didRemoveExpenseCategory() {
-//        loadExpenseSources()
+    func didRemoveExpenseCategory(with basketType: BasketType) {
+        loadExpenseCategories(by: basketType)
     }
     
     private func expenseCategoriesActivityIndicator(by basketType: BasketType) -> UIView {
@@ -359,21 +359,22 @@ extension MainViewController {
     }
     
     private func didSelectExpenseCategory(at indexPath: IndexPath, basketType: BasketType) {
-        if viewModel.isAddCategoryItem(indexPath: indexPath, basketType: basketType) {
-            // show create expense category pass basketType
-        } else {
+        
+        if  let expenseCategoryEditNavigationController = router.viewController(.ExpenseCategoryEditNavigationController) as? UINavigationController,
+            let expenseCategoryEditViewController = expenseCategoryEditNavigationController.topViewController as? ExpenseCategoryEditInputProtocol {
+
+            expenseCategoryEditViewController.set(delegate: self)
+            expenseCategoryEditViewController.set(basketType: basketType)
             
+            if let selectedExpenseCategory = viewModel.expenseCategoryViewModel(at: indexPath, basketType: basketType)?.expenseCategory {
+                
+                expenseCategoryEditViewController.set(expenseCategory: selectedExpenseCategory)
+            } else if !viewModel.isAddCategoryItem(indexPath: indexPath, basketType: basketType) {
+                return
+            }
+                        
+            present(expenseCategoryEditNavigationController, animated: true, completion: nil)
         }
-//        if  let selectedExpenseCategory = viewModel.expenseCategoryViewModel(at: indexPath, basketType: basketType)?.expenseCategory,
-//            let expenseCategoryEditNavigationController = router.viewController(.ExpenseCategoryEditNavigationController) as? UINavigationController,
-//            let expenseCategoryEditViewController = expenseCategoryEditNavigationController.topViewController as? ExpenseCategoryEditInputProtocol {
-//
-//            expenseCategoryEditViewController.set(delegate: self)
-//            expenseCategoryEditViewController.set(expenseCategory: selectedExpenseCategory)
-//            expenseCategoryEditViewController.set(basketType: basketType)
-//
-//            present(expenseCategoryEditNavigationController, animated: true, completion: nil)
-//        }
     }
     
     func expenseCategoryCollectionViewCell(forItemAt indexPath: IndexPath, basketType: BasketType) -> UICollectionViewCell {

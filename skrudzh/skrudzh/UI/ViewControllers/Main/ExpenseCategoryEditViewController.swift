@@ -10,13 +10,14 @@ import UIKit
 import PromiseKit
 
 protocol ExpenseCategoryEditViewControllerDelegate {
-    func didCreateExpenseCategory()
-    func didUpdateExpenseCategory()
-    func didRemoveExpenseCategory()
+    func didCreateExpenseCategory(with basketType: BasketType)
+    func didUpdateExpenseCategory(with basketType: BasketType)
+    func didRemoveExpenseCategory(with basketType: BasketType)
 }
 
 protocol ExpenseCategoryEditInputProtocol {
     func set(expenseCategory: ExpenseCategory)
+    func set(basketType: BasketType)
     func set(delegate: ExpenseCategoryEditViewControllerDelegate?)
 }
 
@@ -96,10 +97,10 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
                                           monthlyPlanned: self.expenseCategoryMonthlyPlanned)
         }.done {
             if self.viewModel.isNew {
-                self.delegate?.didCreateExpenseCategory()
+                self.delegate?.didCreateExpenseCategory(with: self.viewModel.basketType!)
             }
             else {
-                self.delegate?.didUpdateExpenseCategory()
+                self.delegate?.didUpdateExpenseCategory(with: self.viewModel.basketType!)
             }
             self.close()
         }.catch { error in
@@ -127,7 +128,7 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
         firstly {
             viewModel.removeExpenseCategory()
         }.done {
-            self.delegate?.didRemoveExpenseCategory()
+            self.delegate?.didRemoveExpenseCategory(with: self.viewModel.basketType!)
             self.close()
         }.catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении категории трат",
@@ -225,6 +226,10 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditInputProtocol {
     
     func set(expenseCategory: ExpenseCategory) {
         viewModel.set(expenseCategory: expenseCategory)
+    }
+    
+    func set(basketType: BasketType) {
+        viewModel.set(basketType: basketType)
     }
     
     private func updateUI() {
