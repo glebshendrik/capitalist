@@ -10,9 +10,12 @@ import Foundation
 import PromiseKit
 
 class ExpenseCategoriesCoordinator : ExpenseCategoriesCoordinatorProtocol {
+    private let userSessionManager: UserSessionManagerProtocol
     private let expenseCategoriesService: ExpenseCategoriesServiceProtocol
     
-    init(expenseCategoriesService: ExpenseCategoriesServiceProtocol) {
+    init(userSessionManager: UserSessionManagerProtocol,
+         expenseCategoriesService: ExpenseCategoriesServiceProtocol) {
+        self.userSessionManager = userSessionManager
         self.expenseCategoriesService = expenseCategoriesService
     }
     
@@ -24,8 +27,24 @@ class ExpenseCategoriesCoordinator : ExpenseCategoriesCoordinatorProtocol {
         return expenseCategoriesService.show(by: id)
     }
     
-    func index(for basketId: Int) -> Promise<[ExpenseCategory]> {
-        return expenseCategoriesService.index(for: basketId)
+    func index(for basketType: BasketType) -> Promise<[ExpenseCategory]> {
+        
+        guard let currentSession = userSessionManager.currentSession else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        
+        func basketId() -> Int {
+            switch basketType {
+            case .joy:
+                return currentSession.joyBasketId
+            case .risk:
+                return currentSession.riskBasketId
+            case .safe:
+                return currentSession.safeBasketId
+            }
+        }
+        
+        return expenseCategoriesService.index(for: basketId())
     }
     
     func update(with updatingForm: ExpenseCategoryUpdatingForm) -> Promise<Void> {

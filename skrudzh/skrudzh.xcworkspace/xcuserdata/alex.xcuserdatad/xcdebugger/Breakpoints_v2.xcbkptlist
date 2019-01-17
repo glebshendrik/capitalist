@@ -538,12 +538,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "569263178.55572"
+            timestampString = "569432860.096328"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "updateBasketExpenseCategoriesContainer()"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "loadBaskets()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -660,7 +660,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewModels/Main/BasketsViewModel.swift"
-            timestampString = "569263178.5599149"
+            timestampString = "569432860.0996799"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
@@ -676,12 +676,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "569263178.560775"
+            timestampString = "569432860.10276"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "updateBasketsTabsUI()"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "updateBasketExpenseCategoriesContainer()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -692,12 +692,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "569263178.56103"
+            timestampString = "569432860.1039391"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "updateBasketsTabsUI()"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "updateBasketExpenseCategoriesContainer()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

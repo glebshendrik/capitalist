@@ -840,7 +840,7 @@
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                    <size key="value" width="0.0" height="5"/>
+                                                                                    <size key="value" width="0.0" height="4"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                                                                                     <real key="value" value="1"/>
@@ -849,7 +849,7 @@
                                                                                     <real key="value" value="5"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                                    <color key="value" red="0.1960784314" green="0.1960784314" blue="0.2784313725" alpha="0.19667701200000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="value" red="0.54509803921568623" green="0.59607843137254901" blue="0.6588235294117647" alpha="0.19667701200000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="20"/>
@@ -907,7 +907,7 @@
                                                             <outlet property="progressView" destination="s7Q-cD-SeN" id="2cO-kr-GT3"/>
                                                         </connections>
                                                     </collectionViewCell>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddExpenseCategoryCollectionViewCell" id="r1r-Pd-kWN" customClass="AddExpenseCategoryCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddExpenseCategoryCollectionViewCell" id="r1r-Pd-kWN">
                                                         <rect key="frame" x="77.5" y="0.0" width="65" height="85"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -925,7 +925,11 @@
                                                                                     <subviews>
                                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="zmx-ez-FXB">
                                                                                             <rect key="frame" x="12" y="12" width="16" height="16"/>
-                                                                                            <color key="tintColor" red="0.61960784313725492" green="0.6588235294117647" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <userDefinedRuntimeAttributes>
+                                                                                                <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                                                                    <color key="value" red="0.61960784310000006" green="0.6588235294" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                                </userDefinedRuntimeAttribute>
+                                                                                            </userDefinedRuntimeAttributes>
                                                                                         </imageView>
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" red="0.89411764705882346" green="0.9137254901960784" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -943,10 +947,10 @@
                                                                                             <size key="value" width="0.0" height="6"/>
                                                                                         </userDefinedRuntimeAttribute>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                                            <real key="value" value="1"/>
+                                                                                            <real key="value" value="0.0"/>
                                                                                         </userDefinedRuntimeAttribute>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                            <real key="value" value="8"/>
+                                                                                            <real key="value" value="0.0"/>
                                                                                         </userDefinedRuntimeAttribute>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                             <real key="value" value="20"/>
@@ -963,16 +967,16 @@
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                    <size key="value" width="0.0" height="5"/>
+                                                                                    <size key="value" width="0.0" height="0.0"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                                    <real key="value" value="1"/>
+                                                                                    <real key="value" value="0.0"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                    <real key="value" value="5"/>
+                                                                                    <real key="value" value="0.0"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                                    <color key="value" red="0.1960784314" green="0.1960784314" blue="0.2784313725" alpha="0.19667701200000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="value" red="0.54509803921568623" green="0.59607843137254901" blue="0.6588235294117647" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="20"/>
@@ -1004,9 +1008,6 @@
                                                             <constraint firstAttribute="bottom" secondItem="YI7-Ws-lF3" secondAttribute="bottom" id="cbD-FY-DSM"/>
                                                         </constraints>
                                                         <size key="customSize" width="65" height="85"/>
-                                                        <connections>
-                                                            <outlet property="iconImageView" destination="zmx-ez-FXB" id="VIb-DS-Vcc"/>
-                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                                 <connections>
@@ -1147,16 +1148,16 @@
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                    <size key="value" width="0.0" height="5"/>
+                                                                                    <size key="value" width="0.0" height="4"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                                                                                     <real key="value" value="1"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                    <real key="value" value="5"/>
+                                                                                    <real key="value" value="4"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                                    <color key="value" red="0.1960784314" green="0.1960784314" blue="0.2784313725" alpha="0.19667701200000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="value" red="0.54509803921568623" green="0.59607843137254901" blue="0.6588235294117647" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="20"/>
@@ -1214,7 +1215,7 @@
                                                             <outlet property="progressView" destination="Un4-T9-9LT" id="aXc-9u-5nA"/>
                                                         </connections>
                                                     </collectionViewCell>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddExpenseCategoryCollectionViewCell" id="J9F-Q0-t7B" customClass="AddExpenseCategoryCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddExpenseCategoryCollectionViewCell" id="J9F-Q0-t7B">
                                                         <rect key="frame" x="77.5" y="0.0" width="65" height="85"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1232,7 +1233,11 @@
                                                                                     <subviews>
                                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="Xjf-fp-Xjx">
                                                                                             <rect key="frame" x="12" y="12" width="16" height="16"/>
-                                                                                            <color key="tintColor" red="0.61960784310000006" green="0.6588235294" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <userDefinedRuntimeAttributes>
+                                                                                                <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                                                                    <color key="value" red="0.61960784313725492" green="0.6588235294117647" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                                </userDefinedRuntimeAttribute>
+                                                                                            </userDefinedRuntimeAttributes>
                                                                                         </imageView>
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" red="0.89411764709999997" green="0.91372549020000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1270,13 +1275,13 @@
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                    <size key="value" width="0.0" height="5"/>
+                                                                                    <size key="value" width="0.0" height="0.0"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                                    <real key="value" value="1"/>
+                                                                                    <real key="value" value="0.0"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                    <real key="value" value="5"/>
+                                                                                    <real key="value" value="0.0"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                                                                     <color key="value" red="0.1960784314" green="0.1960784314" blue="0.2784313725" alpha="0.19667701200000001" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1311,9 +1316,6 @@
                                                             <constraint firstItem="hhh-tC-Xfc" firstAttribute="leading" secondItem="J9F-Q0-t7B" secondAttribute="leading" id="wBn-Yg-EE6"/>
                                                         </constraints>
                                                         <size key="customSize" width="65" height="85"/>
-                                                        <connections>
-                                                            <outlet property="iconImageView" destination="Xjf-fp-Xjx" id="zDW-Am-rA1"/>
-                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                                 <connections>
@@ -1454,16 +1456,16 @@
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                    <size key="value" width="0.0" height="5"/>
+                                                                                    <size key="value" width="0.0" height="4"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                                                                                     <real key="value" value="1"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                    <real key="value" value="5"/>
+                                                                                    <real key="value" value="4"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                                    <color key="value" red="0.1960784314" green="0.1960784314" blue="0.2784313725" alpha="0.19667701200000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="value" red="0.54509803921568623" green="0.59607843137254901" blue="0.6588235294117647" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="20"/>
@@ -1521,7 +1523,7 @@
                                                             <outlet property="progressView" destination="xpW-UA-3iU" id="gZ9-Jz-ivC"/>
                                                         </connections>
                                                     </collectionViewCell>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddExpenseCategoryCollectionViewCell" id="QPb-hw-JpO" customClass="AddExpenseCategoryCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddExpenseCategoryCollectionViewCell" id="QPb-hw-JpO">
                                                         <rect key="frame" x="77.5" y="0.0" width="65" height="85"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1539,7 +1541,11 @@
                                                                                     <subviews>
                                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="Ns2-HQ-naB">
                                                                                             <rect key="frame" x="12" y="12" width="16" height="16"/>
-                                                                                            <color key="tintColor" red="0.61960784310000006" green="0.6588235294" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <userDefinedRuntimeAttributes>
+                                                                                                <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                                                                    <color key="value" red="0.61960784313725492" green="0.6588235294117647" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                                </userDefinedRuntimeAttribute>
+                                                                                            </userDefinedRuntimeAttributes>
                                                                                         </imageView>
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" red="0.89411764709999997" green="0.91372549020000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1577,13 +1583,13 @@
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                    <size key="value" width="0.0" height="5"/>
+                                                                                    <size key="value" width="0.0" height="0.0"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                                    <real key="value" value="1"/>
+                                                                                    <real key="value" value="0.0"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                    <real key="value" value="5"/>
+                                                                                    <real key="value" value="0.0"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                                                                     <color key="value" red="0.1960784314" green="0.1960784314" blue="0.2784313725" alpha="0.19667701200000001" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1618,9 +1624,6 @@
                                                             <constraint firstItem="dnf-rr-9tu" firstAttribute="top" secondItem="QPb-hw-JpO" secondAttribute="top" id="wSb-A3-a6a"/>
                                                         </constraints>
                                                         <size key="customSize" width="65" height="85"/>
-                                                        <connections>
-                                                            <outlet property="iconImageView" destination="Ns2-HQ-naB" id="Qv3-TQ-Y5I"/>
-                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                                 <connections>

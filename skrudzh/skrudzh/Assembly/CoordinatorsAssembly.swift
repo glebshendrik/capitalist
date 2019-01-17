@@ -37,7 +37,8 @@ class CoordinatorsAssembly: Assembly {
         }
         
         container.register(ExpenseCategoriesCoordinatorProtocol.self) { r in
-            return ExpenseCategoriesCoordinator(expenseCategoriesService: r.resolve(ExpenseCategoriesServiceProtocol.self)!)
+            return ExpenseCategoriesCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
+                                                expenseCategoriesService: r.resolve(ExpenseCategoriesServiceProtocol.self)!)
         }
         
         container.register(IconsCoordinatorProtocol.self) { r in

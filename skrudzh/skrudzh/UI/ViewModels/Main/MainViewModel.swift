@@ -13,6 +13,7 @@ class MainViewModel {
     private let incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let basketsCoordinator: BasketsCoordinatorProtocol
+    private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
     
     private var incomeSourceViewModels: [IncomeSourceViewModel] = []
     private var expenseSourceViewModels: [ExpenseSourceViewModel] = []
@@ -30,23 +31,25 @@ class MainViewModel {
     }
     
     var numberOfJoyExpenseCategories: Int {
-        return joyExpenseCategoryViewModels.count + 1
+        return numberOfExpenseCategories(with: .joy) + 1
     }
     
     var numberOfRiskExpenseCategories: Int {
-        return riskExpenseCategoryViewModels.count + 1
+        return numberOfExpenseCategories(with: .risk) + 1
     }
     
     var numberOfSafeExpenseCategories: Int {
-        return safeExpenseCategoryViewModels.count + 1
+        return numberOfExpenseCategories(with: .safe) + 1
     }
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
-         basketsCoordinator: BasketsCoordinatorProtocol) {
+         basketsCoordinator: BasketsCoordinatorProtocol,
+         expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.basketsCoordinator = basketsCoordinator
+        self.expenseCategoriesCoordinator = expenseCategoriesCoordinator
     }
     
     func loadIncomeSources() -> Promise<Void> {
@@ -73,11 +76,54 @@ class MainViewModel {
                 }.asVoid()
     }
     
+    func loadExpenseCategories(by basketType: BasketType) -> Promise<Void> {
+        
+        return  firstly {
+                    expenseCategoriesCoordinator.index(for: basketType)
+                }.get { expenseCategories in
+                    
+                    let expenseCategoryViewModels = expenseCategories.map { ExpenseCategoryViewModel(expenseCategory: $0)}
+                    
+                    switch basketType {
+                    case .joy:
+                        self.joyExpenseCategoryViewModels = expenseCategoryViewModels
+                    case .risk:
+                        self.riskExpenseCategoryViewModels = expenseCategoryViewModels
+                    case .safe:
+                        self.safeExpenseCategoryViewModels = expenseCategoryViewModels
+                    }
+
+                }.asVoid()
+    }
+    
     func incomeSourceViewModel(at indexPath: IndexPath) -> IncomeSourceViewModel? {
         return incomeSourceViewModels.item(at: indexPath.row)
     }
     
     func expenseSourceViewModel(at indexPath: IndexPath) -> ExpenseSourceViewModel? {
         return expenseSourceViewModels.item(at: indexPath.row)
+    }
+    
+    func expenseCategoryViewModel(at indexPath: IndexPath, basketType: BasketType) -> ExpenseCategoryViewModel? {
+        return expenseCategoryViewModels(by: basketType).item(at: indexPath.row)
+    }
+    
+    func isAddCategoryItem(indexPath: IndexPath, basketType: BasketType) -> Bool {
+        return indexPath.row == numberOfExpenseCategories(with: basketType)
+    }
+    
+    private func numberOfExpenseCategories(with basketType: BasketType) -> Int {
+        return expenseCategoryViewModels(by: basketType).count
+    }
+    
+    private func expenseCategoryViewModels(by basketType: BasketType) -> [ExpenseCategoryViewModel] {
+        switch basketType {
+        case .joy:
+            return joyExpenseCategoryViewModels
+        case .risk:
+            return riskExpenseCategoryViewModels
+        case .safe:
+            return safeExpenseCategoryViewModels
+        }
     }
 }

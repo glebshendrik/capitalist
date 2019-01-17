@@ -103,6 +103,9 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         loadIncomeSources()
         loadExpenseSources()
         loadBaskets()
+        loadExpenseCategories(by: .joy)
+        loadExpenseCategories(by: .risk)
+        loadExpenseCategories(by: .safe)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -305,6 +308,96 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
     }
 }
 
+extension MainViewController {
+    func didCreateExpenseCategory() {
+//        loadExpenseSources(scrollToEndWhenUpdated: true)
+    }
+    
+    func didUpdateExpenseCategory() {
+//        loadExpenseSources()
+    }
+    
+    func didRemoveExpenseCategory() {
+//        loadExpenseSources()
+    }
+    
+    private func expenseCategoriesActivityIndicator(by basketType: BasketType) -> UIView {
+        switch basketType {
+        case .joy:
+            return joyExpenseCategoriesActivityIndicator
+        case .risk:
+            return riskExpenseCategoriesActivityIndicator
+        case .safe:
+            return safeExpenseCategoriesActivityIndicator
+        }
+    }
+    
+    private func expenseCategoriesCollectionView(by basketType: BasketType) -> UICollectionView {
+        switch basketType {
+        case .joy:
+            return joyExpenseCategoriesCollectionView
+        case .risk:
+            return riskExpenseCategoriesCollectionView
+        case .safe:
+            return safeExpenseCategoriesCollectionView
+        }
+    }
+    
+    private func loadExpenseCategories(by basketType: BasketType, scrollToEndWhenUpdated: Bool = false) {
+        set(expenseCategoriesActivityIndicator(by: basketType), hidden: false)
+        firstly {
+            viewModel.loadExpenseCategories(by: basketType)
+        }.done {
+            self.update(self.expenseCategoriesCollectionView(by: basketType),
+                        scrollToEnd: scrollToEndWhenUpdated)
+        }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки категорий трат", theme: .error)
+        }.finally {
+            self.set(self.expenseCategoriesActivityIndicator(by: basketType), hidden: true)
+        }
+    }
+    
+    private func didSelectExpenseCategory(at indexPath: IndexPath, basketType: BasketType) {
+        if viewModel.isAddCategoryItem(indexPath: indexPath, basketType: basketType) {
+            // show create expense category pass basketType
+        } else {
+            
+        }
+//        if  let selectedExpenseCategory = viewModel.expenseCategoryViewModel(at: indexPath, basketType: basketType)?.expenseCategory,
+//            let expenseCategoryEditNavigationController = router.viewController(.ExpenseCategoryEditNavigationController) as? UINavigationController,
+//            let expenseCategoryEditViewController = expenseCategoryEditNavigationController.topViewController as? ExpenseCategoryEditInputProtocol {
+//
+//            expenseCategoryEditViewController.set(delegate: self)
+//            expenseCategoryEditViewController.set(expenseCategory: selectedExpenseCategory)
+//            expenseCategoryEditViewController.set(basketType: basketType)
+//
+//            present(expenseCategoryEditNavigationController, animated: true, completion: nil)
+//        }
+    }
+    
+    func expenseCategoryCollectionViewCell(forItemAt indexPath: IndexPath, basketType: BasketType) -> UICollectionViewCell {
+        
+        let collectionView = expenseCategoriesCollectionView(by: basketType)
+        
+        if viewModel.isAddCategoryItem(indexPath: indexPath, basketType: basketType) {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "AddExpenseCategoryCollectionViewCell",
+                                                      for: indexPath)
+        }
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseCategoryCollectionViewCell",
+                                                            for: indexPath) as? ExpenseCategoryCollectionViewCell,
+            let expenseCategoryViewModel = viewModel.expenseCategoryViewModel(at: indexPath,
+                                                                              basketType: basketType) else {
+                
+                return UICollectionViewCell()
+        }
+        
+        cell.viewModel = expenseCategoryViewModel
+        return cell
+    }
+}
+
 extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         switch collectionView {
@@ -331,17 +424,26 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch collectionView {
-        case incomeSourcesCollectionView:   return incomeSourceCollectionViewCell(forItemAt: indexPath)
-        case expenseSourcesCollectionView:  return expenseSourceCollectionViewCell(forItemAt: indexPath)
-        default:                            return UICollectionViewCell()
+        case incomeSourcesCollectionView:           return incomeSourceCollectionViewCell(forItemAt: indexPath)
+        case expenseSourcesCollectionView:          return expenseSourceCollectionViewCell(forItemAt: indexPath)
+        case joyExpenseCategoriesCollectionView:    return expenseCategoryCollectionViewCell(forItemAt: indexPath,
+                                                                                             basketType: .joy)
+        case riskExpenseCategoriesCollectionView:   return expenseCategoryCollectionViewCell(forItemAt: indexPath,
+                                                                                             basketType: .risk)
+        case safeExpenseCategoriesCollectionView:   return expenseCategoryCollectionViewCell(forItemAt: indexPath,
+                                                                                             basketType: .safe)
+        default:                                    return UICollectionViewCell()
         }
 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
-        case incomeSourcesCollectionView:   didSelectIncomeSource(at: indexPath)
-        case expenseSourcesCollectionView:  didSelectExpenseSource(at: indexPath)
+        case incomeSourcesCollectionView:           didSelectIncomeSource(at: indexPath)
+        case expenseSourcesCollectionView:          didSelectExpenseSource(at: indexPath)
+        case joyExpenseCategoriesCollectionView:    didSelectExpenseCategory(at: indexPath, basketType: .joy)
+        case riskExpenseCategoriesCollectionView:   didSelectExpenseCategory(at: indexPath, basketType: .risk)
+        case safeExpenseCategoriesCollectionView:   didSelectExpenseCategory(at: indexPath, basketType: .safe)
         default: return
         }
     }

@@ -12,7 +12,7 @@ import PromiseKit
 protocol ExpenseCategoriesCoordinatorProtocol {
     func create(with creationForm: ExpenseCategoryCreationForm) -> Promise<ExpenseCategory>
     func show(by id: Int) -> Promise<ExpenseCategory>
-    func index(for basketId: Int) -> Promise<[ExpenseCategory]>
+    func index(for basketType: BasketType) -> Promise<[ExpenseCategory]>
     func update(with updatingForm: ExpenseCategoryUpdatingForm) -> Promise<Void>
     func destroy(by id: Int) -> Promise<Void>
 }
