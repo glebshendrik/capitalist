@@ -481,13 +481,15 @@ extension UIViewController {
 }
 
 extension UIImageView {
-    func setImage(with url: URL?, placeholderName: String) {
+    func setImage(with url: URL?, placeholderName: String, renderingMode: UIImage.RenderingMode = .automatic) {
         self.af_cancelImageRequest()
-        let placeholderImage = UIImage(named: placeholderName)
+        let placeholderImage = UIImage(named: placeholderName)?.withRenderingMode(.alwaysTemplate)
         if let imageURL = url {
             self.af_setImage(withURL: imageURL,
                              placeholderImage: placeholderImage,
-                             filter: nil,
+                             filter: DynamicImageFilter("TemplateImageFilter") { image in
+                                return image.withRenderingMode(renderingMode)
+                             },
                              progress: nil,
                              progressQueue: DispatchQueue.main,
                              imageTransition: UIImageView.ImageTransition.crossDissolve(0.3),

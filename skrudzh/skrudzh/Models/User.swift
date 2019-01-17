@@ -15,6 +15,9 @@ struct User : Decodable {
     let lastname: String?
     let guest: Bool
     let registrationConfirmed: Bool
+    let joyBasketId: Int
+    let riskBasketId: Int
+    let safeBasketId: Int
     
     var fullname: String? {
         if let firstname = firstname, !firstname.isEmpty, let lastname = lastname, !lastname.isEmpty {
@@ -35,6 +38,9 @@ struct User : Decodable {
         case lastname
         case guest
         case registrationConfirmed = "registration_confirmed"
+        case joyBasketId = "joy_basket_id"
+        case riskBasketId = "risk_basket_id"
+        case safeBasketId = "safe_basket_id"
     }
 }
 

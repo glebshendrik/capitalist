@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
+  - CircleProgressView (1.2.0)
   - CWStatusBarNotification (2.3.5)
   - Locksmith (4.0.0)
   - PromiseKit (6.5.2):
@@ -48,6 +49,7 @@ PODS:
 
 DEPENDENCIES:
   - AlamofireImage
+  - CircleProgressView (~> 1.0)
   - CWStatusBarNotification (~> 2.3)
   - Locksmith (~> 4.0)
   - PromiseKit (~> 6.5)
@@ -67,6 +69,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
+    - CircleProgressView
     - CWStatusBarNotification
     - Locksmith
     - PromiseKit
@@ -84,6 +87,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
+  CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
@@ -98,6 +102,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: 61f42a085142ad91d14c21f4b7bf945796e848a9
+PODFILE CHECKSUM: 0f306f94ec55aa18034c03a5c2bd9334ac67f78b
 
 COCOAPODS: 1.5.3

@@ -10,7 +10,7 @@ import Locksmith
 
 private enum SessionKeys : String {
     ///ProviderName key for saving Provider.name which is a string representation of auth provider
-    case Account, Tokens, AccessToken, UserId
+    case Account, Tokens, AccessToken, UserId, JoyBasketId, RiskBasketId, SafeBasketId
 }
 
 class UserSessionManager: UserSessionManagerProtocol {
@@ -28,14 +28,24 @@ class UserSessionManager: UserSessionManagerProtocol {
     func save(session: Session) {
         saveData(session.token, withKey: SessionKeys.AccessToken.rawValue, inService: SessionKeys.Tokens.rawValue)
         saveData(session.userId, withKey: SessionKeys.UserId.rawValue, inService: SessionKeys.Tokens.rawValue)
+        saveData(session.joyBasketId, withKey: SessionKeys.JoyBasketId.rawValue, inService: SessionKeys.Tokens.rawValue)
+        saveData(session.riskBasketId, withKey: SessionKeys.RiskBasketId.rawValue, inService: SessionKeys.Tokens.rawValue)
+        saveData(session.safeBasketId, withKey: SessionKeys.SafeBasketId.rawValue, inService: SessionKeys.Tokens.rawValue)
     }
     
     func loadStoredSession() -> Session? {
         if let data = accountDataInStorageInService(SessionKeys.Tokens.rawValue),
             let token = data[SessionKeys.AccessToken.rawValue] as? String,
-            let userId = data[SessionKeys.UserId.rawValue] as? Int {
+            let userId = data[SessionKeys.UserId.rawValue] as? Int,
+            let joyBasketId = data[SessionKeys.JoyBasketId.rawValue] as? Int,
+            let riskBasketId = data[SessionKeys.RiskBasketId.rawValue] as? Int,
+            let safeBasketId = data[SessionKeys.SafeBasketId.rawValue] as? Int {
             
-            return Session(token: token, userId: userId)
+            return Session(token: token,
+                           userId: userId,
+                           joyBasketId: joyBasketId,
+                           riskBasketId: riskBasketId,
+                           safeBasketId: safeBasketId)
         }
         return nil
     }

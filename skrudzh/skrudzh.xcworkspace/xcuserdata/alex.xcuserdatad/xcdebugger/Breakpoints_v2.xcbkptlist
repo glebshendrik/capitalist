@@ -543,7 +543,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "179"
             endingLineNumber = "179"
-            landmarkName = "loadBaskets()"
+            landmarkName = "updateBasketExpenseCategoriesContainer()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -681,7 +681,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "162"
             endingLineNumber = "162"
-            landmarkName = "updateBasketExpenseCategoriesContainer()"
+            landmarkName = "updateBasketsTabsUI()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -697,7 +697,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "163"
             endingLineNumber = "163"
-            landmarkName = "updateBasketExpenseCategoriesContainer()"
+            landmarkName = "updateBasketsTabsUI()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

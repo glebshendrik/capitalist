@@ -32,9 +32,14 @@ class ExpenseCategoryViewModel {
         return expenseCategory.monthlyPlannedCents > 0
     }
     
-    var monthlySpentProgress: Float {
+    var monthlySpentProgress: Double {
         guard areMonthlyExpensesPlanned else { return 0 }
-        return Float(expenseCategory.monthlySpentCents) / Float(expenseCategory.monthlyPlannedCents)
+        let progress = Double(expenseCategory.monthlySpentCents) / Double(expenseCategory.monthlyPlannedCents)
+        return progress > 1.0 ? 1.0 : progress
+    }
+    
+    var isMonthlyPlanCompleted: Bool {
+        return monthlySpentProgress == 1.0
     }
     
     var iconURL: URL? {

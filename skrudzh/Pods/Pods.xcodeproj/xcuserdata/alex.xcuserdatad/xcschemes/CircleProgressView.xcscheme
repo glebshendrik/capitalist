@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "67ECD321C9D80D991A918A8173BE65AE"
-               BlueprintName = "TPKeyboardAvoiding"
+               BlueprintIdentifier = "3BB1053CF08B8D3AF399C0135CA2E1A6"
+               BlueprintName = "CircleProgressView"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "TPKeyboardAvoiding.framework">
+               BuildableName = "CircleProgressView.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

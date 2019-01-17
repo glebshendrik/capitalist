@@ -142,6 +142,7 @@
 		FAED7DAE21EDDD3800BF6FE1 /* BasketsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DAD21EDDD3800BF6FE1 /* BasketsViewModel.swift */; };
 		FAED7DB021EFA0CE00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */; };
 		FAED7DB221EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */; };
+		FAED7DB421F056E900BF6FE1 /* AddExpenseCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DB321F056E900BF6FE1 /* AddExpenseCategoryCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -285,6 +286,7 @@
 		FAED7DAD21EDDD3800BF6FE1 /* BasketsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsViewModel.swift; sourceTree = "<group>"; };
 		FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryViewModel.swift; sourceTree = "<group>"; };
+		FAED7DB321F056E900BF6FE1 /* AddExpenseCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -441,6 +443,7 @@
 				FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */,
 				FA0CAE0821D39D3B00805288 /* ExpenseSourceCollectionViewCell.swift */,
 				FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */,
+				FAED7DB321F056E900BF6FE1 /* AddExpenseCategoryCollectionViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -867,6 +870,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/CWStatusBarNotification/CWStatusBarNotification.framework",
+				"${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework",
 				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -887,6 +891,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CWStatusBarNotification.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -984,6 +989,7 @@
 				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
 				FA6270AA21CA93D100CC0269 /* FieldsViewModel.swift in Sources */,
 				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,
+				FAED7DB421F056E900BF6FE1 /* AddExpenseCategoryCollectionViewCell.swift in Sources */,
 				FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */,
 				FA6270A621CA3ED600CC0269 /* FieldViewModel.swift in Sources */,
 				FA0CADFF21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift in Sources */,

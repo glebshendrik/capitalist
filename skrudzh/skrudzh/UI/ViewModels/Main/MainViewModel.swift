@@ -17,6 +17,9 @@ class MainViewModel {
     private var incomeSourceViewModels: [IncomeSourceViewModel] = []
     private var expenseSourceViewModels: [ExpenseSourceViewModel] = []
     public private(set) var basketsViewModel: BasketsViewModel = BasketsViewModel(baskets: [])
+    private var joyExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
+    private var riskExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
+    private var safeExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
     
     var numberOfIncomeSources: Int {
         return incomeSourceViewModels.count
@@ -24,6 +27,18 @@ class MainViewModel {
     
     var numberOfExpenseSources: Int {
         return expenseSourceViewModels.count
+    }
+    
+    var numberOfJoyExpenseCategories: Int {
+        return joyExpenseCategoryViewModels.count + 1
+    }
+    
+    var numberOfRiskExpenseCategories: Int {
+        return riskExpenseCategoryViewModels.count + 1
+    }
+    
+    var numberOfSafeExpenseCategories: Int {
+        return safeExpenseCategoryViewModels.count + 1
     }
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,

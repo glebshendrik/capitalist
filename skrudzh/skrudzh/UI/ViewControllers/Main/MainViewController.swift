@@ -21,13 +21,14 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBOutlet weak var incomeSourcesCollectionView: UICollectionView!
     @IBOutlet weak var addIncomeSourceButton: UIButton!
+    
     @IBOutlet weak var incomeSourcesActivityIndicator: UIView!
     @IBOutlet weak var incomeSourcesLoader: UIImageView!
     
     @IBOutlet weak var expenseSourcesCollectionView: UICollectionView!
     @IBOutlet weak var addExpenseSourceButton: UIButton!
-    @IBOutlet weak var expenseSourcesActivityIndicator: UIView!
     
+    @IBOutlet weak var expenseSourcesActivityIndicator: UIView!
     @IBOutlet weak var expenseSourcesLoader: UIImageView!
     
     @IBOutlet weak var joyBasketProgressConstraint: NSLayoutConstraint!
@@ -50,6 +51,19 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var riskExpenseCategoriesContainerLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var safeExpenseCategoriesLeftConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var joyExpenseCategoriesCollectionView: UICollectionView!
+    @IBOutlet weak var riskExpenseCategoriesCollectionView: UICollectionView!
+    @IBOutlet weak var safeExpenseCategoriesCollectionView: UICollectionView!
+    
+    @IBOutlet weak var joyExpenseCategoriesActivityIndicator: UIView!
+    @IBOutlet weak var joyExpenseCategoriesLoader: UIImageView!
+    
+    @IBOutlet weak var riskExpenseCategoriesActivityIndicator: UIView!
+    @IBOutlet weak var riskExpenseCategoriesLoader: UIImageView!
+    
+    @IBOutlet weak var safeExpenseCategoriesActivityIndicator: UIView!
+    @IBOutlet weak var safeExpenseCategoriesLoader: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -68,20 +82,20 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     }
     
     @IBAction func didTapJoyBasket(_ sender: Any) {
-        viewModel.basketsViewModel.selectBasketBy(basketType: .joy)
-        viewModel.basketsViewModel.append(cents: 1, basketType: .joy)
-        updateBasketsUI()
+        didTapBasket(with: .joy)
     }
     
     @IBAction func didTapRiskBasket(_ sender: Any) {
-        viewModel.basketsViewModel.selectBasketBy(basketType: .risk)
-        viewModel.basketsViewModel.append(cents: 1, basketType: .risk)
-        updateBasketsUI()
+        didTapBasket(with: .risk)
     }
     
     @IBAction func didTapSafeBasket(_ sender: Any) {
-        viewModel.basketsViewModel.selectBasketBy(basketType: .safe)
-        viewModel.basketsViewModel.append(cents: 1, basketType: .safe)
+        didTapBasket(with: .safe)
+    }
+    
+    private func didTapBasket(with basketType: BasketType) {
+        viewModel.basketsViewModel.selectBasketBy(basketType: basketType)
+        viewModel.basketsViewModel.append(cents: 1, basketType: basketType)
         updateBasketsUI()
     }
     
@@ -294,17 +308,23 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
 extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         switch collectionView {
-        case incomeSourcesCollectionView:   return 1
-        case expenseSourcesCollectionView:  return 1
-        default:                            return 0
+        case incomeSourcesCollectionView:           return 1
+        case expenseSourcesCollectionView:          return 1
+        case joyExpenseCategoriesCollectionView:    return 1
+        case riskExpenseCategoriesCollectionView:   return 1
+        case safeExpenseCategoriesCollectionView:   return 1
+        default:                                    return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
-        case incomeSourcesCollectionView:   return viewModel.numberOfIncomeSources
-        case expenseSourcesCollectionView:  return viewModel.numberOfExpenseSources
-        default:                            return 0
+        case incomeSourcesCollectionView:           return viewModel.numberOfIncomeSources
+        case expenseSourcesCollectionView:          return viewModel.numberOfExpenseSources
+        case joyExpenseCategoriesCollectionView:    return viewModel.numberOfJoyExpenseCategories
+        case riskExpenseCategoriesCollectionView:   return viewModel.numberOfRiskExpenseCategories
+        case safeExpenseCategoriesCollectionView:   return viewModel.numberOfSafeExpenseCategories
+        default:                                    return 0
         }
     }
     
@@ -331,6 +351,7 @@ extension MainViewController {
     private func setupUI() {
         setupIncomeSourcesCollectionView()
         setupExpenseSourcesCollectionView()
+        setupExpenseCategoriesCollectionView()
         setupNavigationBar()
         setupMainMenu()
         setupLoaders()
@@ -344,6 +365,17 @@ extension MainViewController {
     private func setupExpenseSourcesCollectionView() {
         expenseSourcesCollectionView.delegate = self
         expenseSourcesCollectionView.dataSource = self
+    }
+    
+    private func setupExpenseCategoriesCollectionView() {
+        joyExpenseCategoriesCollectionView.delegate = self
+        joyExpenseCategoriesCollectionView.dataSource = self
+        
+        riskExpenseCategoriesCollectionView.delegate = self
+        riskExpenseCategoriesCollectionView.dataSource = self
+        
+        safeExpenseCategoriesCollectionView.delegate = self
+        safeExpenseCategoriesCollectionView.dataSource = self
     }
     
     private func setupNavigationBar() {
@@ -366,7 +398,13 @@ extension MainViewController {
     private func setupLoaders() {
         incomeSourcesLoader.showLoader()
         expenseSourcesLoader.showLoader()
+        joyExpenseCategoriesLoader.showLoader()
+        riskExpenseCategoriesLoader.showLoader()
+        safeExpenseCategoriesLoader.showLoader()
         set(incomeSourcesActivityIndicator, hidden: true, animated: false)
         set(expenseSourcesActivityIndicator, hidden: true, animated: false)
+        set(joyExpenseCategoriesActivityIndicator, hidden: true, animated: false)
+        set(riskExpenseCategoriesActivityIndicator, hidden: true, animated: false)
+        set(safeExpenseCategoriesActivityIndicator, hidden: true, animated: false)
     }
 }

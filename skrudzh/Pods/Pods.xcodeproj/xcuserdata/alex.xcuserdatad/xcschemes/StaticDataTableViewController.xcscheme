@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "129A8D3EA22F647D1E1464795A658D8C"
+               BlueprintIdentifier = "BE4C3353AA661876528F022945857680"
                BlueprintName = "StaticDataTableViewController"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "StaticDataTableViewController.framework">
