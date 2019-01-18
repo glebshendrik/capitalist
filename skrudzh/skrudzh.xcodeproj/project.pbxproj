@@ -144,7 +144,6 @@
 		FAED7DAE21EDDD3800BF6FE1 /* BasketsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DAD21EDDD3800BF6FE1 /* BasketsViewModel.swift */; };
 		FAED7DB021EFA0CE00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */; };
 		FAED7DB221EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */; };
-		FAED7DB421F056E900BF6FE1 /* AddExpenseCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DB321F056E900BF6FE1 /* AddExpenseCategoryCollectionViewCell.swift */; };
 		FAED7DB621F0E35100BF6FE1 /* ExpenseCategoryEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DB521F0E35000BF6FE1 /* ExpenseCategoryEditViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -291,7 +290,6 @@
 		FAED7DAD21EDDD3800BF6FE1 /* BasketsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsViewModel.swift; sourceTree = "<group>"; };
 		FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryViewModel.swift; sourceTree = "<group>"; };
-		FAED7DB321F056E900BF6FE1 /* AddExpenseCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAED7DB521F0E35000BF6FE1 /* ExpenseCategoryEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -449,7 +447,6 @@
 				FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */,
 				FA0CAE0821D39D3B00805288 /* ExpenseSourceCollectionViewCell.swift */,
 				FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */,
-				FAED7DB321F056E900BF6FE1 /* AddExpenseCategoryCollectionViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1000,7 +997,6 @@
 				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
 				FA6270AA21CA93D100CC0269 /* FieldsViewModel.swift in Sources */,
 				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,
-				FAED7DB421F056E900BF6FE1 /* AddExpenseCategoryCollectionViewCell.swift in Sources */,
 				FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */,
 				FA6270A621CA3ED600CC0269 /* FieldViewModel.swift in Sources */,
 				FA0CADFF21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift in Sources */,

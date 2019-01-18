@@ -240,7 +240,24 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditInputProtocol {
     }
     
     private func updateIconUI() {
-        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: "wallet-icon")
+        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: "smile-icon", renderingMode: .alwaysTemplate)
+        
+        let joyColor = UIColor(red: 1, green: 0.85, blue: 0.27, alpha: 1)
+        let riskColor = UIColor(red: 0.49, green: 0.52, blue: 1, alpha: 1)
+        let safeColor = UIColor(red: 0.13, green: 0.86, blue: 0.27, alpha: 1)
+        
+        func basketColor() -> UIColor {
+            switch viewModel.basketType! {
+            case .joy:
+                return joyColor
+            case .risk:
+                return riskColor
+            case .safe:
+                return safeColor
+            }
+        }
+        
+        editTableController?.iconImageView.tintColor = basketColor()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

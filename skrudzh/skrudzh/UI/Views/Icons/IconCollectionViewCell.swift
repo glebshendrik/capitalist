@@ -20,7 +20,7 @@ class IconCollectionViewCell : UICollectionViewCell {
     
     func updateUI() {
         iconImageView.setImage(with: viewModel?.url, placeholderName: "smile-icon", renderingMode: .alwaysTemplate)
-        iconImageView.tintColor = UIColor.gray
+        iconImageView.tintColor = UIColor(red: 0.25, green: 0.27, blue: 0.38, alpha: 1)
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale        
     }

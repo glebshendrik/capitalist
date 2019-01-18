@@ -103,7 +103,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     private func didTapBasket(with basketType: BasketType) {
         viewModel.basketsViewModel.selectBasketBy(basketType: basketType)
-        viewModel.basketsViewModel.append(cents: 1, basketType: basketType)
+//        viewModel.basketsViewModel.append(cents: 1, basketType: basketType)
         updateBasketsUI()
     }
     
@@ -319,14 +319,26 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
 extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
     func didCreateExpenseCategory(with basketType: BasketType) {
         loadExpenseCategories(by: basketType)
+        guard case basketType = BasketType.joy else {
+            didCreateIncomeSource()
+            return
+        }
     }
     
     func didUpdateExpenseCategory(with basketType: BasketType) {
         loadExpenseCategories(by: basketType)
+        guard case basketType = BasketType.joy else {
+            didUpdateIncomeSource()
+            return
+        }
     }
     
     func didRemoveExpenseCategory(with basketType: BasketType) {
         loadExpenseCategories(by: basketType)
+        guard case basketType = BasketType.joy else {
+            didRemoveIncomeSource()
+            return
+        }
     }
     
     private func expenseCategoriesActivityIndicator(by basketType: BasketType) -> UIView {
@@ -370,6 +382,7 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
             self.update(self.expenseCategoriesCollectionView(by: basketType),
                         scrollToEnd: scrollToEndWhenUpdated)
             self.updateExpenseCategoriesPageControl(by: basketType)
+            self.updateBasketsRatiosUI()
         }
         .catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки категорий трат", theme: .error)

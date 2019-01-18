@@ -231,7 +231,8 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
     }
     
     private func updateIconUI() {
-        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: "wallet-icon")
+        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: "wallet-icon", renderingMode: .alwaysTemplate)
+        editTableController?.iconImageView.tintColor = UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

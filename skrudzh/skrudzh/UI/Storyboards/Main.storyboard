@@ -2189,8 +2189,8 @@
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile-icon" translatesAutoresizingMaskIntoConstraints="NO" id="2jt-y6-Ut0">
                                                                     <rect key="frame" x="10.5" y="10.5" width="23" height="23"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="Fu9-K2-A5W"/>
-                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="30" id="o1P-t2-b4k"/>
+                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="Fu9-K2-A5W"/>
+                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="23" id="o1P-t2-b4k"/>
                                                                     </constraints>
                                                                 </imageView>
                                                             </subviews>
@@ -2514,10 +2514,10 @@
                                                             <rect key="frame" x="12" y="12" width="40" height="40"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-icon" translatesAutoresizingMaskIntoConstraints="NO" id="cUm-GL-AQZ">
-                                                                    <rect key="frame" x="7.5" y="9" width="25" height="22"/>
+                                                                    <rect key="frame" x="9.5" y="9.5" width="21" height="21"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="pH4-XB-aLJ"/>
-                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="25" id="xux-KJ-aS0"/>
+                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="21" id="pH4-XB-aLJ"/>
+                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="21" id="xux-KJ-aS0"/>
                                                                     </constraints>
                                                                 </imageView>
                                                             </subviews>
@@ -2774,8 +2774,8 @@
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile-icon" translatesAutoresizingMaskIntoConstraints="NO" id="YIy-E3-h3E">
                                                                     <rect key="frame" x="10.5" y="10.5" width="23" height="23"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="30" id="PLZ-5O-mqd"/>
-                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="W1X-1k-aYe"/>
+                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="23" id="PLZ-5O-mqd"/>
+                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="W1X-1k-aYe"/>
                                                                     </constraints>
                                                                 </imageView>
                                                             </subviews>

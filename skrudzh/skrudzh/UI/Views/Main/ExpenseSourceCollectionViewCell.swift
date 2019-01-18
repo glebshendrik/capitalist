@@ -23,7 +23,8 @@ class ExpenseSourceCollectionViewCell : UICollectionViewCell {
     func updateUI() {
         nameLabel.text = viewModel?.name
         amountLabel.text = viewModel?.amount
-        iconImageView.setImage(with: viewModel?.iconURL, placeholderName: "wallet-icon")
+        iconImageView.setImage(with: viewModel?.iconURL, placeholderName: "wallet-icon", renderingMode: .alwaysTemplate)
+        iconImageView.tintColor = UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
     }
 }
 
