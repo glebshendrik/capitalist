@@ -79,5 +79,8 @@ class ExpenseCategoryCollectionViewCell : UICollectionViewCell {
         iconImageView.tintColor = iconTintColor()
         progressView.centerFillColor = progressInnerColor()
         progressView.trackFillColor = basketColor()
+        
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
     }
 }

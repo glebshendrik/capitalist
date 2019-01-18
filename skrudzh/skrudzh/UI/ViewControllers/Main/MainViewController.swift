@@ -57,17 +57,25 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBOutlet weak var joyExpenseCategoriesActivityIndicator: UIView!
     @IBOutlet weak var joyExpenseCategoriesLoader: UIImageView!
+    @IBOutlet weak var joyExpenseCategoriesPageControl: UIPageControl!
     
     @IBOutlet weak var riskExpenseCategoriesActivityIndicator: UIView!
     @IBOutlet weak var riskExpenseCategoriesLoader: UIImageView!
+    @IBOutlet weak var riskExpenseCategoriesPageControl: UIPageControl!
     
     @IBOutlet weak var safeExpenseCategoriesActivityIndicator: UIView!
     @IBOutlet weak var safeExpenseCategoriesLoader: UIImageView!
+    @IBOutlet weak var safeExpenseCategoriesPageControl: UIPageControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         loadData()        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        layoutUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -343,6 +351,17 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
         }
     }
     
+    private func expenseCategoriesPageControl(by basketType: BasketType) -> UIPageControl {
+        switch basketType {
+        case .joy:
+            return joyExpenseCategoriesPageControl
+        case .risk:
+            return riskExpenseCategoriesPageControl
+        case .safe:
+            return safeExpenseCategoriesPageControl
+        }
+    }
+    
     private func loadExpenseCategories(by basketType: BasketType, scrollToEndWhenUpdated: Bool = false) {
         set(expenseCategoriesActivityIndicator(by: basketType), hidden: false)
         firstly {
@@ -350,12 +369,27 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
         }.done {
             self.update(self.expenseCategoriesCollectionView(by: basketType),
                         scrollToEnd: scrollToEndWhenUpdated)
+            self.updateExpenseCategoriesPageControl(by: basketType)
         }
         .catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки категорий трат", theme: .error)
         }.finally {
             self.set(self.expenseCategoriesActivityIndicator(by: basketType), hidden: true)
         }
+    }
+    
+    private func updateExpenseCategoriesPageControl(by basketType: BasketType) {
+        let collectionView = expenseCategoriesCollectionView(by: basketType)
+        let pageControl = expenseCategoriesPageControl(by: basketType)
+        
+        guard let layout = collectionView.collectionViewLayout as? PagedCollectionViewLayout else {
+            pageControl.isHidden = true
+            return
+        }
+        
+        let pagesCount = layout.numberOfPages
+        pageControl.numberOfPages = pagesCount
+        pageControl.isHidden = pagesCount <= 1
     }
     
     private func didSelectExpenseCategory(at indexPath: IndexPath, basketType: BasketType) {
@@ -399,7 +433,7 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
     }
 }
 
-extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         switch collectionView {
         case incomeSourcesCollectionView:           return 1
@@ -448,6 +482,30 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         default: return
         }
     }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        updatePageControl(for: scrollView)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        updatePageControl(for: scrollView)
+    }
+    
+    private func updatePageControl(for scrollView: UIScrollView) {
+        guard let collectionView = scrollView as? UICollectionView else { return }
+        
+        switch collectionView {
+        case joyExpenseCategoriesCollectionView:    updatePageControl(basketType: .joy)
+        case riskExpenseCategoriesCollectionView:   updatePageControl(basketType: .risk)
+        case safeExpenseCategoriesCollectionView:   updatePageControl(basketType: .safe)
+        default: return
+        }
+    }
+    
+    private func updatePageControl(basketType: BasketType) {
+        let collectionView = expenseCategoriesCollectionView(by: basketType)
+        expenseCategoriesPageControl(by: basketType).currentPage = Int(collectionView.contentOffset.x) / Int(collectionView.frame.width)
+    }    
 }
 
 extension MainViewController {
@@ -470,6 +528,8 @@ extension MainViewController {
         expenseSourcesCollectionView.dataSource = self
     }
     
+    
+    
     private func setupExpenseCategoriesCollectionView() {
         joyExpenseCategoriesCollectionView.delegate = self
         joyExpenseCategoriesCollectionView.dataSource = self
@@ -479,6 +539,25 @@ extension MainViewController {
         
         safeExpenseCategoriesCollectionView.delegate = self
         safeExpenseCategoriesCollectionView.dataSource = self
+        
+        updateExpenseCategoriesPageControl(by: .joy)
+        updateExpenseCategoriesPageControl(by: .risk)
+        updateExpenseCategoriesPageControl(by: .safe)
+    }
+    
+    private func layoutUI() {
+        layoutExpenseCategoriesCollectionView(by: .joy)
+        layoutExpenseCategoriesCollectionView(by: .risk)
+        layoutExpenseCategoriesCollectionView(by: .safe)
+    }
+    
+    private func layoutExpenseCategoriesCollectionView(by basketType: BasketType) {
+        let collectionView = expenseCategoriesCollectionView(by: basketType)
+        if let layout = collectionView.collectionViewLayout as? PagedCollectionViewLayout {
+            layout.itemSize = CGSize(width: 68, height: 85)
+            layout.columns = 4
+            layout.rows = Int(collectionView.bounds.size.height / layout.itemSize.height)
+        }
     }
     
     private func setupNavigationBar() {

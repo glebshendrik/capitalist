@@ -742,7 +742,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="394"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BDY-K1-ch7">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="394"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="384"/>
                                                 <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <collectionViewLayout key="collectionViewLayout" id="6w6-MW-6uv" customClass="PagedCollectionViewLayout" customModule="skrudzh" customModuleProvider="target">
                                                     <userDefinedRuntimeAttributes>
@@ -750,7 +750,7 @@
                                                             <integer key="value" value="4"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="rows">
-                                                            <integer key="value" value="3"/>
+                                                            <integer key="value" value="4"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="size" keyPath="itemSize">
                                                             <size key="value" width="68" height="85"/>
@@ -1033,6 +1033,11 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="2Pi-lo-2Mc">
+                                                <rect key="frame" x="176" y="365" width="23" height="37"/>
+                                                <color key="pageIndicatorTintColor" red="0.77647058820000003" green="0.80392156859999997" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="currentPageIndicatorTintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </pageControl>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1040,17 +1045,19 @@
                                             <constraint firstItem="BDY-K1-ch7" firstAttribute="top" secondItem="uUj-IS-hQl" secondAttribute="top" id="7MP-RA-hNc"/>
                                             <constraint firstItem="I7X-zT-CXv" firstAttribute="top" secondItem="uUj-IS-hQl" secondAttribute="top" id="9BG-FP-hZo"/>
                                             <constraint firstAttribute="trailing" secondItem="BDY-K1-ch7" secondAttribute="trailing" id="Ahh-WK-fD8"/>
-                                            <constraint firstAttribute="bottom" secondItem="BDY-K1-ch7" secondAttribute="bottom" id="CU8-Np-Gcs"/>
+                                            <constraint firstAttribute="bottom" secondItem="BDY-K1-ch7" secondAttribute="bottom" constant="10" id="CU8-Np-Gcs"/>
                                             <constraint firstItem="BDY-K1-ch7" firstAttribute="leading" secondItem="uUj-IS-hQl" secondAttribute="leading" id="TOo-df-rg8"/>
                                             <constraint firstItem="I7X-zT-CXv" firstAttribute="leading" secondItem="uUj-IS-hQl" secondAttribute="leading" id="aoy-zj-fYj"/>
+                                            <constraint firstAttribute="bottom" secondItem="2Pi-lo-2Mc" secondAttribute="bottom" constant="-8" id="f2c-yV-FZK"/>
                                             <constraint firstAttribute="bottom" secondItem="I7X-zT-CXv" secondAttribute="bottom" id="nqC-7i-hUl"/>
+                                            <constraint firstItem="2Pi-lo-2Mc" firstAttribute="centerX" secondItem="uUj-IS-hQl" secondAttribute="centerX" id="on5-B3-dcU"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Es8-MZ-PJD" userLabel="risk categories">
                                         <rect key="frame" x="375" y="0.0" width="375" height="394"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wWY-WA-ket">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="394"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="384"/>
                                                 <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <collectionViewLayout key="collectionViewLayout" id="jVA-F7-hbN" customClass="PagedCollectionViewLayout" customModule="skrudzh" customModuleProvider="target">
                                                     <userDefinedRuntimeAttributes>
@@ -1341,15 +1348,22 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="Lia-A0-o7E">
+                                                <rect key="frame" x="176" y="365" width="23" height="37"/>
+                                                <color key="pageIndicatorTintColor" red="0.77647058820000003" green="0.80392156859999997" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="currentPageIndicatorTintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </pageControl>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="wWY-WA-ket" secondAttribute="bottom" id="2OP-GU-5ab"/>
+                                            <constraint firstAttribute="bottom" secondItem="wWY-WA-ket" secondAttribute="bottom" constant="10" id="2OP-GU-5ab"/>
                                             <constraint firstAttribute="bottom" secondItem="V19-Lc-7wm" secondAttribute="bottom" id="6ok-Jy-j59"/>
                                             <constraint firstItem="wWY-WA-ket" firstAttribute="leading" secondItem="Es8-MZ-PJD" secondAttribute="leading" id="DCk-ma-csr"/>
                                             <constraint firstItem="V19-Lc-7wm" firstAttribute="top" secondItem="Es8-MZ-PJD" secondAttribute="top" id="Dql-aB-bQw"/>
+                                            <constraint firstItem="Lia-A0-o7E" firstAttribute="centerX" secondItem="Es8-MZ-PJD" secondAttribute="centerX" id="EsD-ud-yfo"/>
                                             <constraint firstAttribute="trailing" secondItem="wWY-WA-ket" secondAttribute="trailing" id="EvF-zl-GLw"/>
                                             <constraint firstItem="V19-Lc-7wm" firstAttribute="leading" secondItem="Es8-MZ-PJD" secondAttribute="leading" id="ISN-2f-eVT"/>
+                                            <constraint firstAttribute="bottom" secondItem="Lia-A0-o7E" secondAttribute="bottom" constant="-8" id="Zs0-wJ-3T5"/>
                                             <constraint firstAttribute="trailing" secondItem="V19-Lc-7wm" secondAttribute="trailing" id="b4k-FK-g5n"/>
                                             <constraint firstItem="wWY-WA-ket" firstAttribute="top" secondItem="Es8-MZ-PJD" secondAttribute="top" id="fI0-hg-7te"/>
                                         </constraints>
@@ -1358,7 +1372,7 @@
                                         <rect key="frame" x="750" y="0.0" width="375" height="394"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cbf-3I-MTe">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="394"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="384"/>
                                                 <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <collectionViewLayout key="collectionViewLayout" id="A4y-zI-21j" customClass="PagedCollectionViewLayout" customModule="skrudzh" customModuleProvider="target">
                                                     <userDefinedRuntimeAttributes>
@@ -1649,6 +1663,11 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="mfo-kH-MYa">
+                                                <rect key="frame" x="176" y="365" width="23" height="37"/>
+                                                <color key="pageIndicatorTintColor" red="0.77647058820000003" green="0.80392156859999997" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="currentPageIndicatorTintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </pageControl>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1657,9 +1676,11 @@
                                             <constraint firstAttribute="trailing" secondItem="u2Z-6i-dtI" secondAttribute="trailing" id="Wzu-M6-gSq"/>
                                             <constraint firstAttribute="trailing" secondItem="cbf-3I-MTe" secondAttribute="trailing" id="brk-5V-wkl"/>
                                             <constraint firstItem="cbf-3I-MTe" firstAttribute="leading" secondItem="yh5-Gh-kqK" secondAttribute="leading" id="lVb-i2-UdI"/>
+                                            <constraint firstAttribute="bottom" secondItem="mfo-kH-MYa" secondAttribute="bottom" constant="-8" id="vDa-u2-gen"/>
                                             <constraint firstItem="u2Z-6i-dtI" firstAttribute="leading" secondItem="yh5-Gh-kqK" secondAttribute="leading" id="vGz-XI-KVn"/>
                                             <constraint firstAttribute="bottom" secondItem="u2Z-6i-dtI" secondAttribute="bottom" id="vTF-yC-e9S"/>
-                                            <constraint firstAttribute="bottom" secondItem="cbf-3I-MTe" secondAttribute="bottom" id="yHJ-8P-2c6"/>
+                                            <constraint firstItem="mfo-kH-MYa" firstAttribute="centerX" secondItem="yh5-Gh-kqK" secondAttribute="centerX" id="vf1-Or-mrQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="cbf-3I-MTe" secondAttribute="bottom" constant="10" id="yHJ-8P-2c6"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1727,6 +1748,7 @@
                         <outlet property="joyExpenseCategoriesCollectionView" destination="BDY-K1-ch7" id="6ra-cF-TiG"/>
                         <outlet property="joyExpenseCategoriesContainerLeftConstraint" destination="UCf-Kj-kN1" id="wmc-Qa-j0k"/>
                         <outlet property="joyExpenseCategoriesLoader" destination="Fxg-qF-Lvh" id="8dP-xw-hrZ"/>
+                        <outlet property="joyExpenseCategoriesPageControl" destination="2Pi-lo-2Mc" id="VAv-O3-DS6"/>
                         <outlet property="riskBasketProgressConstraint" destination="jRR-te-vpH" id="4Vu-Js-zTu"/>
                         <outlet property="riskBasketSelectionIndicator" destination="S7l-Bw-M7n" id="oYn-fj-o0T"/>
                         <outlet property="riskBasketSpentLabel" destination="Lhk-En-c2M" id="K16-Ll-tT6"/>
@@ -1735,6 +1757,7 @@
                         <outlet property="riskExpenseCategoriesCollectionView" destination="wWY-WA-ket" id="hFc-7v-sie"/>
                         <outlet property="riskExpenseCategoriesContainerLeftConstraint" destination="nFe-Sp-Wcc" id="nAJ-Hh-a4A"/>
                         <outlet property="riskExpenseCategoriesLoader" destination="Nid-av-JHO" id="HOW-y0-gVb"/>
+                        <outlet property="riskExpenseCategoriesPageControl" destination="Lia-A0-o7E" id="BuK-HA-22J"/>
                         <outlet property="safeBasketProgressConstraint" destination="58c-GT-XYu" id="VCD-9Z-2C7"/>
                         <outlet property="safeBasketSelectionIndicator" destination="KmS-sK-zTI" id="saW-V8-nWd"/>
                         <outlet property="safeBasketSpentLabel" destination="AeG-Ce-uxJ" id="coB-h5-Pnm"/>
@@ -1743,6 +1766,7 @@
                         <outlet property="safeExpenseCategoriesCollectionView" destination="cbf-3I-MTe" id="Khi-mn-Xcz"/>
                         <outlet property="safeExpenseCategoriesLeftConstraint" destination="qod-DS-NdX" id="b23-G0-Wfb"/>
                         <outlet property="safeExpenseCategoriesLoader" destination="EkC-7E-d6Q" id="JfT-bR-SZ0"/>
+                        <outlet property="safeExpenseCategoriesPageControl" destination="mfo-kH-MYa" id="Isk-Uo-LJw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6X-Vx-icx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2477,17 +2501,17 @@
                                 </collectionViewLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IconCollectionViewCell" id="C8b-Ov-wjo" customClass="IconCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Veb-42-d72">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojG-Kn-bpz">
-                                                            <rect key="frame" x="5" y="5" width="40" height="40"/>
+                                                            <rect key="frame" x="12" y="12" width="40" height="40"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-icon" translatesAutoresizingMaskIntoConstraints="NO" id="cUm-GL-AQZ">
                                                                     <rect key="frame" x="7.5" y="9" width="25" height="22"/>
@@ -2554,6 +2578,7 @@
                                             <constraint firstItem="Veb-42-d72" firstAttribute="top" secondItem="C8b-Ov-wjo" secondAttribute="top" id="ohh-XX-O1e"/>
                                             <constraint firstItem="Veb-42-d72" firstAttribute="leading" secondItem="C8b-Ov-wjo" secondAttribute="leading" id="tdW-E0-CpO"/>
                                         </constraints>
+                                        <size key="customSize" width="64" height="64"/>
                                         <connections>
                                             <outlet property="iconImageView" destination="cUm-GL-AQZ" id="ptM-vY-RrT"/>
                                         </connections>

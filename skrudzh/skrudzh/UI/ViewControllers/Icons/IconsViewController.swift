@@ -39,6 +39,11 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
         loadData()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        layoutUI()
+    }
+    
     private func loadData() {
         set(activityIndicator, hidden: false)
         firstly {
@@ -66,6 +71,14 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
         let pagesCount = pagedCollectionViewLayout.numberOfPages
         pageControl.numberOfPages = pagesCount
         pageControl.isHidden = pagesCount <= 1
+    }
+    
+    private func layoutUI() {
+        if let layout = iconsCollectionView.collectionViewLayout as? PagedCollectionViewLayout {
+            layout.itemSize = CGSize(width: 64, height: 64)
+            layout.columns = 4
+            layout.rows = Int(iconsCollectionView.bounds.size.height / layout.itemSize.height)
+        }
     }
 }
 
