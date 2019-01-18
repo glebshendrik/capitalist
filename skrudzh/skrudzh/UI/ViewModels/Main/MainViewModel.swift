@@ -17,7 +17,7 @@ class MainViewModel {
     
     private var incomeSourceViewModels: [IncomeSourceViewModel] = []
     private var expenseSourceViewModels: [ExpenseSourceViewModel] = []
-    public private(set) var basketsViewModel: BasketsViewModel = BasketsViewModel(baskets: [])
+    public private(set) var basketsViewModel: BasketsViewModel = BasketsViewModel(baskets: [], basketTypeToSelect: .joy)
     private var joyExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
     private var riskExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
     private var safeExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
@@ -72,7 +72,7 @@ class MainViewModel {
         return  firstly {
                     basketsCoordinator.index()
                 }.get { baskets in
-                    self.basketsViewModel = BasketsViewModel(baskets: baskets)
+                    self.basketsViewModel = BasketsViewModel(baskets: baskets, basketTypeToSelect: self.basketsViewModel.selectedBasketType)
                 }.asVoid()
     }
     

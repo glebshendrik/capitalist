@@ -75,9 +75,10 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
     
     private func layoutUI() {
         if let layout = iconsCollectionView.collectionViewLayout as? PagedCollectionViewLayout {
-            layout.itemSize = CGSize(width: 64, height: 64)
+            layout.itemSize = CGSize(width: 64, height: 85)
             layout.columns = 4
             layout.rows = Int(iconsCollectionView.bounds.size.height / layout.itemSize.height)
+            layout.edgeInsets = UIEdgeInsets(horizontal: 30, vertical: 5)
         }
     }
 }

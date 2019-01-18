@@ -319,6 +319,7 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
 extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
     func didCreateExpenseCategory(with basketType: BasketType) {
         loadExpenseCategories(by: basketType)
+        loadBaskets()
         guard case basketType = BasketType.joy else {
             didCreateIncomeSource()
             return
@@ -335,6 +336,7 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
     
     func didRemoveExpenseCategory(with basketType: BasketType) {
         loadExpenseCategories(by: basketType)
+        loadBaskets()
         guard case basketType = BasketType.joy else {
             didRemoveIncomeSource()
             return
@@ -381,8 +383,7 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
         }.done {
             self.update(self.expenseCategoriesCollectionView(by: basketType),
                         scrollToEnd: scrollToEndWhenUpdated)
-            self.updateExpenseCategoriesPageControl(by: basketType)
-            self.updateBasketsRatiosUI()
+            self.updateExpenseCategoriesPageControl(by: basketType)            
         }
         .catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки категорий трат", theme: .error)
@@ -567,9 +568,10 @@ extension MainViewController {
     private func layoutExpenseCategoriesCollectionView(by basketType: BasketType) {
         let collectionView = expenseCategoriesCollectionView(by: basketType)
         if let layout = collectionView.collectionViewLayout as? PagedCollectionViewLayout {
-            layout.itemSize = CGSize(width: 68, height: 85)
+            layout.itemSize = CGSize(width: 68, height: 105)
             layout.columns = 4
             layout.rows = Int(collectionView.bounds.size.height / layout.itemSize.height)
+            layout.edgeInsets = UIEdgeInsets(horizontal: 30, vertical: 5)
         }
     }
     

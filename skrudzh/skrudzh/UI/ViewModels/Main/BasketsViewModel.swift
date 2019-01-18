@@ -57,6 +57,10 @@ class BasketsViewModel {
         return isBasketSelectedWith(basketType: .safe)
     }
     
+    var selectedBasketType: BasketType? {
+        return selectedBasketViewModel()?.basketType
+    }
+    
     private var joyBasketMonthlySpentCents: Int {
         return basketViewModelBy(basketType: .joy)?.monthlySpentCents ?? 0
     }
@@ -73,9 +77,9 @@ class BasketsViewModel {
         return joyBasketMonthlySpentCents + riskBasketMonthlySpentCents + safeBasketMonthlySpentCents
     }
     
-    init(baskets: [Basket]) {
+    init(baskets: [Basket], basketTypeToSelect: BasketType?) {
         basketViewModels = baskets.map { BasketViewModel(basket: $0) }
-        selectBasketBy(basketType: .joy)
+        selectBasketBy(basketType: basketTypeToSelect ?? .joy)
         updateRatios()
     }
     
