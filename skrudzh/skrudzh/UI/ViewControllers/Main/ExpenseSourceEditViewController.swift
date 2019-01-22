@@ -256,7 +256,7 @@ extension ExpenseSourceEditViewController {
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationItem.title = viewModel.isNew ? "Новый источник трат" : "Источник трат"
+        navigationItem.title = viewModel.isNew ? "Новый кошелек" : "Кошелек"
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
