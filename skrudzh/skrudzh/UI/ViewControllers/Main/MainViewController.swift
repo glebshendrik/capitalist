@@ -20,14 +20,10 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     var router: ApplicationRouterProtocol!
     
     @IBOutlet weak var incomeSourcesCollectionView: UICollectionView!
-    @IBOutlet weak var addIncomeSourceButton: UIButton!
-    
     @IBOutlet weak var incomeSourcesActivityIndicator: UIView!
     @IBOutlet weak var incomeSourcesLoader: UIImageView!
     
     @IBOutlet weak var expenseSourcesCollectionView: UICollectionView!
-    @IBOutlet weak var addExpenseSourceButton: UIButton!
-    
     @IBOutlet weak var expenseSourcesActivityIndicator: UIView!
     @IBOutlet weak var expenseSourcesLoader: UIImageView!
     
@@ -83,12 +79,6 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
     }
     
-    @IBAction func didTapAddIncomeSourceButton(_ sender: Any) {
-    }
-    
-    @IBAction func didTapAddExpenseSourceButton(_ sender: Any) {
-    }
-    
     @IBAction func didTapJoyBasket(_ sender: Any) {
         didTapBasket(with: .joy)
     }
@@ -103,7 +93,6 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     private func didTapBasket(with basketType: BasketType) {
         viewModel.basketsViewModel.selectBasketBy(basketType: basketType)
-//        viewModel.basketsViewModel.append(cents: 1, basketType: basketType)
         updateBasketsUI()
     }
     
@@ -115,22 +104,6 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         loadExpenseCategories(by: .risk)
         loadExpenseCategories(by: .safe)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == "ShowIncomeSourceCreationScreen",
-            let destinationNavigationController = segue.destination as? UINavigationController,
-            let destination = destinationNavigationController.topViewController as? IncomeSourceEditInputProtocol {
-            
-            destination.set(delegate: self)
-        } else if  segue.identifier == "ShowExpenseSourceCreationScreen",
-            let destinationNavigationController = segue.destination as? UINavigationController,
-            let destination = destinationNavigationController.topViewController as? ExpenseSourceEditInputProtocol {
-            
-            destination.set(delegate: self)
-        }
-    }
-    
-    
 }
 
 extension MainViewController {
@@ -210,7 +183,7 @@ extension MainViewController {
 
 extension MainViewController : IncomeSourceEditViewControllerDelegate {
     func didCreateIncomeSource() {
-        loadIncomeSources(scrollToEndWhenUpdated: true)
+        loadIncomeSources()
     }
     
     func didUpdateIncomeSource() {
@@ -237,22 +210,33 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
     }
     
     private func didSelectIncomeSource(at indexPath: IndexPath) {
-        if  let selectedIncomeSource = viewModel.incomeSourceViewModel(at: indexPath)?.incomeSource,
-            let incomeSourceEditNavigationController = router.viewController(.IncomeSourceEditNavigationController) as? UINavigationController,
+        if  let incomeSourceEditNavigationController = router.viewController(.IncomeSourceEditNavigationController) as? UINavigationController,
             let incomeSourceEditViewController = incomeSourceEditNavigationController.topViewController as? IncomeSourceEditInputProtocol {
             
             incomeSourceEditViewController.set(delegate: self)
-            incomeSourceEditViewController.set(incomeSource: selectedIncomeSource)
+            
+            if let selectedIncomeSource = viewModel.incomeSourceViewModel(at: indexPath)?.incomeSource {
+                
+                incomeSourceEditViewController.set(incomeSource: selectedIncomeSource)
+                
+            } else if !viewModel.isAddIncomeSourceItem(indexPath: indexPath) {
+                return
+            }
             
             present(incomeSourceEditNavigationController, animated: true, completion: nil)
-        }
+        }        
     }
     
     func incomeSourceCollectionViewCell(forItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if viewModel.isAddIncomeSourceItem(indexPath: indexPath) {
+            return incomeSourcesCollectionView.dequeueReusableCell(withReuseIdentifier: "AddIncomeSourceCollectionViewCell",
+                                                                   for: indexPath)
+        }
+        
         guard let cell = incomeSourcesCollectionView.dequeueReusableCell(withReuseIdentifier: "IncomeSourceCollectionViewCell",
-                                                                         for: indexPath) as? IncomeSourceCollectionViewCell,
-              let incomeSourceViewModel = viewModel.incomeSourceViewModel(at: indexPath) else {
+                                                            for: indexPath) as? IncomeSourceCollectionViewCell,
+            let incomeSourceViewModel = viewModel.incomeSourceViewModel(at: indexPath) else {
                 
                 return UICollectionViewCell()
         }
@@ -264,7 +248,7 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
 
 extension MainViewController : ExpenseSourceEditViewControllerDelegate {
     func didCreateExpenseSource() {
-        loadExpenseSources(scrollToEndWhenUpdated: true)
+        loadExpenseSources()
     }
     
     func didUpdateExpenseSource() {
@@ -279,33 +263,43 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
         set(expenseSourcesActivityIndicator, hidden: false)
         firstly {
             viewModel.loadExpenseSources()
-            }.done {
-                self.update(self.expenseSourcesCollectionView,
-                            scrollToEnd: scrollToEndWhenUpdated)
-            }
-            .catch { _ in
-                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки источников трат", theme: .error)
-            }.finally {
-                self.set(self.expenseSourcesActivityIndicator, hidden: true)
+        }.done {
+            self.update(self.expenseSourcesCollectionView,
+                        scrollToEnd: scrollToEndWhenUpdated)
+        }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки источников трат", theme: .error)
+        }.finally {
+            self.set(self.expenseSourcesActivityIndicator, hidden: true)
         }
     }
     
     private func didSelectExpenseSource(at indexPath: IndexPath) {
-        if  let selectedExpenseSource = viewModel.expenseSourceViewModel(at: indexPath)?.expenseSource,
-            let expenseSourceEditNavigationController = router.viewController(.ExpenseSourceEditNavigationController) as? UINavigationController,
+        if  let expenseSourceEditNavigationController = router.viewController(.ExpenseSourceEditNavigationController) as? UINavigationController,
             let expenseSourceEditViewController = expenseSourceEditNavigationController.topViewController as? ExpenseSourceEditInputProtocol {
             
             expenseSourceEditViewController.set(delegate: self)
-            expenseSourceEditViewController.set(expenseSource: selectedExpenseSource)
+            
+            if let selectedExpenseSource = viewModel.expenseSourceViewModel(at: indexPath)?.expenseSource {
+                
+                expenseSourceEditViewController.set(expenseSource: selectedExpenseSource)
+                
+            } else if !viewModel.isAddExpenseSourceItem(indexPath: indexPath) {
+                return
+            }
             
             present(expenseSourceEditNavigationController, animated: true, completion: nil)
         }
     }
     
     func expenseSourceCollectionViewCell(forItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if viewModel.isAddExpenseSourceItem(indexPath: indexPath) {
+            return expenseSourcesCollectionView.dequeueReusableCell(withReuseIdentifier: "AddExpenseSourceCollectionViewCell",
+                                                                   for: indexPath)
+        }
         
         guard let cell = expenseSourcesCollectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseSourceCollectionViewCell",
-                                                                          for: indexPath) as? ExpenseSourceCollectionViewCell,
+                                                                         for: indexPath) as? ExpenseSourceCollectionViewCell,
             let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) else {
                 
                 return UICollectionViewCell()
@@ -563,6 +557,8 @@ extension MainViewController {
         layoutExpenseCategoriesCollectionView(by: .joy)
         layoutExpenseCategoriesCollectionView(by: .risk)
         layoutExpenseCategoriesCollectionView(by: .safe)
+        layoutIncomeSourcesCollectionView()
+        layoutExpenseSourcesCollectionView()
     }
     
     private func layoutExpenseCategoriesCollectionView(by basketType: BasketType) {
@@ -573,6 +569,44 @@ extension MainViewController {
             layout.rows = Int(collectionView.bounds.size.height / layout.itemSize.height)
             layout.edgeInsets = UIEdgeInsets(horizontal: 30, vertical: 5)
         }
+    }
+    
+    private func layoutIncomeSourcesCollectionView() {
+        fillLayout(collectionView: incomeSourcesCollectionView,
+                   itemHeight: 48.0,
+                   innerSpace: 10.0,
+                   outerSpace: 16.0,
+                   columns: 3)
+    }
+    
+    private func layoutExpenseSourcesCollectionView() {
+        fillLayout(collectionView: expenseSourcesCollectionView,
+                   itemHeight: 54.0,
+                   innerSpace: 10.0,
+                   outerSpace: 16.0,
+                   columns: 2)
+    }
+    
+    private func fillLayout(collectionView: UICollectionView,
+                            itemHeight: CGFloat,
+                            innerSpace: CGFloat,
+                            outerSpace: CGFloat,
+                            columns: Int) {
+        
+        if let layout = collectionView.collectionViewLayout as? PagedCollectionViewLayout {
+            
+            let containerWidth = incomeSourcesCollectionView.bounds.size.width
+            
+            layout.columns = columns
+            layout.rows = 1
+            layout.edgeInsets = UIEdgeInsets(horizontal: outerSpace * 2, vertical: 0)
+            
+            let width = CGFloat(containerWidth - layout.edgeInsets.horizontal - CGFloat(layout.columns - 1) * innerSpace) / CGFloat(layout.columns)
+            
+            layout.itemSize = CGSize(width: width, height: itemHeight)
+            
+        }
+        
     }
     
     private func setupNavigationBar() {

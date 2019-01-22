@@ -23,11 +23,11 @@ class MainViewModel {
     private var safeExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
     
     var numberOfIncomeSources: Int {
-        return incomeSourceViewModels.count
+        return incomeSourceViewModels.count + 1
     }
     
     var numberOfExpenseSources: Int {
-        return expenseSourceViewModels.count
+        return expenseSourceViewModels.count + 1
     }
     
     var numberOfJoyExpenseCategories: Int {
@@ -96,8 +96,16 @@ class MainViewModel {
                 }.asVoid()
     }
     
+    func isAddIncomeSourceItem(indexPath: IndexPath) -> Bool {
+        return indexPath.row == incomeSourceViewModels.count
+    }
+    
     func incomeSourceViewModel(at indexPath: IndexPath) -> IncomeSourceViewModel? {
         return incomeSourceViewModels.item(at: indexPath.row)
+    }
+    
+    func isAddExpenseSourceItem(indexPath: IndexPath) -> Bool {
+        return indexPath.row == expenseSourceViewModels.count
     }
     
     func expenseSourceViewModel(at indexPath: IndexPath) -> ExpenseSourceViewModel? {
