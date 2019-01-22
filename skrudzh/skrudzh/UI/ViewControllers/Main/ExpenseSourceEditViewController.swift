@@ -182,9 +182,9 @@ extension ExpenseSourceEditViewController {
         case (.name, .required):
             return "Укажите название"
         case (.amountCents, .required):
-            return "Укажите сумму"
+            return "Укажите текущий баланс"
         case (.amountCents, .invalid):
-            return "Некорректная сумма"
+            return "Некорректный текущий баланс"
         case (_, _):
             return "Ошибка ввода"
         }
@@ -205,9 +205,9 @@ extension ExpenseSourceEditViewController {
         case (.name, .required):
             return "Укажите название"
         case (.amountCents, .required):
-            return "Укажите сумму"
+            return "Укажите текущий баланс"
         case (.amountCents, .invalid):
-            return "Некорректная сумма"
+            return "Некорректный текущий баланс"
         case (_, _):
             return "Ошибка ввода"
         }

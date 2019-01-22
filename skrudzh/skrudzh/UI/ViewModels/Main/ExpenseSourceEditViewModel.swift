@@ -31,7 +31,7 @@ class ExpenseSourceEditViewModel {
     }
             
     var amount: String? {
-        return expenseSource?.amountCents.moneyDecimalString
+        return (expenseSource?.amountCents ?? 0).moneyDecimalString
     }
     
     var iconURL: URL? {

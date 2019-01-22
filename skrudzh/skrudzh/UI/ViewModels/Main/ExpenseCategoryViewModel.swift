@@ -21,7 +21,7 @@ class ExpenseCategoryViewModel {
     }
     
     var monthlyPlanned: String? {
-        return expenseCategory.monthlyPlannedCents.moneyStringWithCurrency(symbol: "₽")
+        return expenseCategory.monthlyPlannedCents?.moneyStringWithCurrency(symbol: "₽")
     }
     
     var monthlySpent: String? {
@@ -29,12 +29,13 @@ class ExpenseCategoryViewModel {
     }
     
     var areMonthlyExpensesPlanned: Bool {
-        return expenseCategory.monthlyPlannedCents > 0
+        guard let monthlyPlannedCents = expenseCategory.monthlyPlannedCents else { return false }
+        return monthlyPlannedCents > 0
     }
     
     var monthlySpentProgress: Double {
-        guard areMonthlyExpensesPlanned else { return 0 }
-        let progress = Double(expenseCategory.monthlySpentCents) / Double(expenseCategory.monthlyPlannedCents)
+        guard areMonthlyExpensesPlanned, let monthlyPlannedCents = expenseCategory.monthlyPlannedCents else { return 0 }
+        let progress = Double(expenseCategory.monthlySpentCents) / Double(monthlyPlannedCents)
         return progress > 1.0 ? 1.0 : progress
     }
     

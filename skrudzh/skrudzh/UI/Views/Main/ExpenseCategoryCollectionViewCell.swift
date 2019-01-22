@@ -72,6 +72,7 @@ class ExpenseCategoryCollectionViewCell : UICollectionViewCell {
         nameLabel.text = viewModel.name
         monthlySpentLabel.text = viewModel.monthlySpent
         monthlyPlannedLabel.text = viewModel.monthlyPlanned
+        monthlyPlannedLabel.isHidden = !viewModel.areMonthlyExpensesPlanned
         iconImageView.setImage(with: viewModel.iconURL,
                                placeholderName: "smile-icon",
                                renderingMode: .alwaysTemplate)

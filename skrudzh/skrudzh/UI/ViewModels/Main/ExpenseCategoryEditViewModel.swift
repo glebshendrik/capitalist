@@ -32,7 +32,7 @@ class ExpenseCategoryEditViewModel {
     }
     
     var monthlyPlanned: String? {
-        return expenseCategory?.monthlyPlannedCents.moneyDecimalString
+        return expenseCategory?.monthlyPlannedCents?.moneyDecimalString
     }
     
     var iconURL: URL? {
@@ -133,15 +133,14 @@ extension ExpenseCategoryEditViewModel {
         return .value(ExpenseCategoryCreationForm(name: name!,
                                                   iconURL: iconURL,
                                                   basketId: basketId,
-                                                  monthlyPlannedCents: monthlyPlannedCents!))
+                                                  monthlyPlannedCents: monthlyPlannedCents))
     }
     
     private func validateCreation(with name: String?,
                                   iconURL: URL?,
                                   monthlyPlannedCents: Int?) -> [ExpenseCategoryCreationForm.CodingKeys : [ValidationErrorReason]]? {
         let validationResults : [ValidationResultProtocol] =
-            [Validator.validate(required: name, key: ExpenseCategoryCreationForm.CodingKeys.name),
-             Validator.validate(money: monthlyPlannedCents, key: ExpenseCategoryCreationForm.CodingKeys.monthlyPlannedCents)]
+            [Validator.validate(required: name, key: ExpenseCategoryCreationForm.CodingKeys.name)]
         
         let failureResultsHash : [ExpenseCategoryCreationForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         
@@ -182,7 +181,7 @@ extension ExpenseCategoryEditViewModel {
         return .value(ExpenseCategoryUpdatingForm(id: expenseCategoryId,
                                                   name: name!,
                                                   iconURL: iconURL,
-                                                  monthlyPlannedCents: monthlyPlannedCents!))
+                                                  monthlyPlannedCents: monthlyPlannedCents))
     }
     
     private func validateUpdating(with name: String?,
@@ -190,8 +189,7 @@ extension ExpenseCategoryEditViewModel {
                                   monthlyPlannedCents: Int?) -> [ExpenseCategoryUpdatingForm.CodingKeys : [ValidationErrorReason]]? {
         
         let validationResults : [ValidationResultProtocol] =
-            [Validator.validate(required: name, key: ExpenseCategoryUpdatingForm.CodingKeys.name),
-             Validator.validate(money: monthlyPlannedCents, key: ExpenseCategoryUpdatingForm.CodingKeys.monthlyPlannedCents)]
+            [Validator.validate(required: name, key: ExpenseCategoryUpdatingForm.CodingKeys.name)]
         
         let failureResultsHash : [ExpenseCategoryUpdatingForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import TPKeyboardAvoiding
 import PromiseKit
 import StaticDataTableViewController
 import SwiftMessages

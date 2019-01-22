@@ -10,6 +10,7 @@ import UIKit
 import Swinject
 import SideMenu
 import PromiseKit
+import IQKeyboardManager
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
@@ -41,6 +42,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             userSessionManager.forgetSession()
         }
         self.launchOptions = launchOptions
+        setupKeyboardManager()
         setupAppearance()
         route()
     }
@@ -138,6 +140,15 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: UIControl.State.highlighted)
         
         UINavigationBar.appearance().barTintColor = UIColor.navBarColor
+    }
+    
+    private func setupKeyboardManager() {
+        let keyboardManager = IQKeyboardManager.shared()
+        keyboardManager.isEnabled = true
+        keyboardManager.shouldResignOnTouchOutside = true
+        keyboardManager.shouldShowToolbarPlaceholder = false
+        keyboardManager.toolbarDoneBarButtonItemText = ""
+        keyboardManager.toolbarDoneBarButtonItemImage = UIImage(named: "close-icon")?.withRenderingMode(.alwaysTemplate)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

@@ -1841,7 +1841,7 @@
         <scene sceneID="bkG-Sv-TaS">
             <objects>
                 <tableViewController storyboardIdentifier="IncomeSourceEditTableController" id="Hsl-CQ-JmL" customClass="IncomeSourceEditTableController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HiE-xx-YOh" customClass="TPKeyboardAvoidingTableView">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HiE-xx-YOh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2228,7 +2228,7 @@
         <scene sceneID="kY1-TP-8I9">
             <objects>
                 <tableViewController storyboardIdentifier="ExpenseSourceEditTableController" id="YzM-aR-OkL" customClass="ExpenseSourceEditTableController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RDx-NI-izQ" customClass="TPKeyboardAvoidingTableView">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RDx-NI-izQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2453,8 +2453,8 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Сумма"/>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Сумма"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Текущий баланс"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Укажите текущий баланс"/>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
                                                             <real key="value" value="0.0"/>
                                                         </userDefinedRuntimeAttribute>
@@ -2809,11 +2809,11 @@
             </objects>
             <point key="canvasLocation" x="-2724" y="2385"/>
         </scene>
-        <!--Источник трат-->
+        <!--Категория трат-->
         <scene sceneID="jPm-GF-pG4">
             <objects>
                 <tableViewController storyboardIdentifier="ExpenseCategoryEditTableController" id="30m-bg-INw" customClass="ExpenseCategoryEditTableController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="iJB-Wl-z8x" customClass="TPKeyboardAvoidingTableView">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="iJB-Wl-z8x">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3038,8 +3038,8 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Сумма"/>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Сумма"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Планирую тратить в месяц"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Планирую тратить в месяц"/>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
                                                             <real key="value" value="0.0"/>
                                                         </userDefinedRuntimeAttribute>
@@ -3105,7 +3105,7 @@
                             <outlet property="delegate" destination="30m-bg-INw" id="TeZ-f2-HsR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Источник трат" id="nan-Dn-I5U">
+                    <navigationItem key="navigationItem" title="Категория трат" id="nan-Dn-I5U">
                         <barButtonItem key="backBarButtonItem" title=" " id="IdS-By-tYb"/>
                         <barButtonItem key="leftBarButtonItem" title="Отмена" id="sci-w7-Z7f"/>
                         <barButtonItem key="rightBarButtonItem" title="Сохр." id="fer-Uo-IbO"/>

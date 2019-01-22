@@ -14,8 +14,8 @@ struct ExpenseCategory : Decodable {
     let iconURL: URL?
     let basketId: Int
     let basketType: BasketType
-    let monthlyPlannedCurrency: String
-    let monthlyPlannedCents: Int
+    let monthlyPlannedCurrency: String?
+    let monthlyPlannedCents: Int?
     let monthlySpentCents: Int
     let monthlySpentCurrency: String
     
@@ -37,8 +37,8 @@ struct ExpenseCategoryCreationForm : Encodable {
     let name: String
     let iconURL: URL?
     let basketId: Int
-    let monthlyPlannedCurrency: String = "RUB"
-    let monthlyPlannedCents: Int
+    let monthlyPlannedCurrency: String? = "RUB"
+    let monthlyPlannedCents: Int?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -48,7 +48,7 @@ struct ExpenseCategoryCreationForm : Encodable {
         case monthlyPlannedCents = "monthly_planned_cents"
     }
     
-    init(name: String, iconURL: URL?, basketId: Int, monthlyPlannedCents: Int) {
+    init(name: String, iconURL: URL?, basketId: Int, monthlyPlannedCents: Int?) {
         self.name = name
         self.iconURL = iconURL
         self.basketId = basketId
@@ -60,8 +60,8 @@ struct ExpenseCategoryUpdatingForm : Encodable {
     let id: Int
     let name: String
     let iconURL: URL?
-    let monthlyPlannedCurrency: String = "RUB"
-    let monthlyPlannedCents: Int
+    let monthlyPlannedCurrency: String? = "RUB"
+    let monthlyPlannedCents: Int?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -70,10 +70,18 @@ struct ExpenseCategoryUpdatingForm : Encodable {
         case monthlyPlannedCents = "monthly_planned_cents"
     }
     
-    init(id: Int, name: String, iconURL: URL?, monthlyPlannedCents: Int) {
+    init(id: Int, name: String, iconURL: URL?, monthlyPlannedCents: Int?) {
         self.id = id
         self.name = name
         self.iconURL = iconURL
         self.monthlyPlannedCents = monthlyPlannedCents
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(iconURL, forKey: .iconURL)
+        try container.encode(monthlyPlannedCurrency, forKey: .monthlyPlannedCurrency)
+        try container.encode(monthlyPlannedCents, forKey: .monthlyPlannedCents)
     }
 }
