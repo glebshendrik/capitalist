@@ -2029,7 +2029,7 @@
                         <viewLayoutGuide key="safeArea" id="fZZ-E3-wFU"/>
                     </view>
                     <navigationItem key="navigationItem" id="0J7-tA-y5z">
-                        <barButtonItem key="rightBarButtonItem" image="close-icon" id="auv-6z-2Aj">
+                        <barButtonItem key="rightBarButtonItem" image="circle-close-icon" id="auv-6z-2Aj">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapCancelButton:" destination="XSV-72-Slk" id="pfS-VL-rQe"/>
@@ -2189,7 +2189,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bLy-zo-z3W">
                         <barButtonItem key="backBarButtonItem" title=" " id="Np5-2E-0f9"/>
-                        <barButtonItem key="rightBarButtonItem" image="close-icon" id="SIi-yC-uCm">
+                        <barButtonItem key="rightBarButtonItem" image="circle-close-icon" id="SIi-yC-uCm">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapCancelButton:" destination="8fD-85-d78" id="aIs-k9-ZRu"/>
@@ -2774,8 +2774,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="6w2-PT-uRb">
                         <barButtonItem key="backBarButtonItem" title=" " id="Dnt-p9-05E"/>
-                        <barButtonItem key="rightBarButtonItem" image="close-icon" id="JGP-Z8-XOg">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <barButtonItem key="rightBarButtonItem" image="circle-close-icon" id="JGP-Z8-XOg">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapCancelButton:" destination="WoP-TF-ejQ" id="4vr-7L-5iD"/>
                             </connections>
@@ -3128,7 +3128,7 @@
     <resources>
         <image name="amount-icon" width="16" height="18.5"/>
         <image name="blog-menu-item-icon" width="17" height="12"/>
-        <image name="close-icon" width="12" height="12"/>
+        <image name="circle-close-icon" width="24" height="24"/>
         <image name="credits-menu-item-icon" width="18" height="12"/>
         <image name="faq-menu-item-icon" width="16" height="17"/>
         <image name="join-menu-item-icon" width="16" height="13"/>
