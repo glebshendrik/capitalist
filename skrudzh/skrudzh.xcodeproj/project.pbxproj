@@ -61,6 +61,7 @@
 		FA6270AD21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270AC21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift */; };
 		FA6918A221F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */; };
 		FA6918A421F0EF03003639F6 /* ExpenseCategoryEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */; };
+		FA8382B621F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */; };
 		FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */; };
 		FA9F962A21C2A86B00FD64C1 /* IncomeSourceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */; };
 		FA9F962C21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */; };
@@ -205,6 +206,7 @@
 		FA6270AC21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsViewControllerProtocol.swift; sourceTree = "<group>"; };
 		FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditViewController.swift; sourceTree = "<group>"; };
 		FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditTableController.swift; sourceTree = "<group>"; };
+		FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentIncomeSourceCreationMessageViewController.swift; sourceTree = "<group>"; };
 		FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceViewModel.swift; sourceTree = "<group>"; };
 		FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewController.swift; sourceTree = "<group>"; };
 		FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewModel.swift; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 				FA0CAE0C21D3C1F100805288 /* ExpenseSourceEditTableController.swift */,
 				FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */,
 				FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */,
+				FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -875,6 +878,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-skrudzh/Pods-skrudzh-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/CWStatusBarNotification/CWStatusBarNotification.framework",
 				"${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
@@ -896,6 +900,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CWStatusBarNotification.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
@@ -946,6 +951,7 @@
 				FA165CE021B6540600EAA16B /* ProfileViewController.swift in Sources */,
 				FAD88F4121AEBDF900BE7BC1 /* Navigator.swift in Sources */,
 				FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */,
+				FA8382B621F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift in Sources */,
 				FA0CAE1F21D6785E00805288 /* IconCollectionViewCell.swift in Sources */,
 				FAD88F2621AEB72800BE7BC1 /* NotificationsManager.swift in Sources */,
 				FA0CAE0321D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift in Sources */,

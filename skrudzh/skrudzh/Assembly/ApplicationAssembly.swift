@@ -41,6 +41,7 @@ struct Infrastructure {
         case IconsViewController
         case ExpenseCategoryEditNavigationController
         case ExpenseCategoryEditViewController
+        case DependentIncomeSourceCreationMessageViewController
         
         // Profile
         case ProfileViewController
@@ -78,7 +79,8 @@ struct Infrastructure {
                  .ExpenseSourceEditViewController,
                  .IconsViewController,
                  .ExpenseCategoryEditNavigationController,
-                 .ExpenseCategoryEditViewController:
+                 .ExpenseCategoryEditViewController,
+                 .DependentIncomeSourceCreationMessageViewController:
                 return .Main
             case .ProfileViewController,
                  .ChangePasswordViewController:

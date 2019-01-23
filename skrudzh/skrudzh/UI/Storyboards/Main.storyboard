@@ -219,6 +219,145 @@
             </objects>
             <point key="canvasLocation" x="-111" y="72"/>
         </scene>
+        <!--Dependent Income Source Creation Message View Controller-->
+        <scene sceneID="r6F-K0-q6u">
+            <objects>
+                <viewController storyboardIdentifier="DependentIncomeSourceCreationMessageViewController" id="5bm-WQ-6c3" customClass="DependentIncomeSourceCreationMessageViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lsi-HF-Rab">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRb-kY-V8o">
+                                <rect key="frame" x="16" y="80" width="343" height="531"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Эта категория трат относится к корзине «Риски», она может приносить прибыль" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJc-Cd-Ezl">
+                                        <rect key="frame" x="16" y="39" width="311" height="60.5"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
+                                        <color key="textColor" red="0.24705882352941178" green="0.27450980392156865" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U9v-Ss-8fc">
+                                        <rect key="frame" x="0.0" y="99.5" width="343" height="259"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="risk-large-image" translatesAutoresizingMaskIntoConstraints="NO" id="O5M-S6-zP7">
+                                                <rect key="frame" x="98.5" y="68.5" width="146" height="122"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="O5M-S6-zP7" firstAttribute="centerX" secondItem="U9v-Ss-8fc" secondAttribute="centerX" id="JLv-hL-eEq"/>
+                                            <constraint firstItem="O5M-S6-zP7" firstAttribute="centerY" secondItem="U9v-Ss-8fc" secondAttribute="centerY" id="ghP-0I-PNE"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Поэтому мы создаем для вас новый источник дохода" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qU9-MC-rol">
+                                        <rect key="frame" x="16" y="358.5" width="311" height="40.5"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
+                                        <color key="textColor" red="0.2470588235" green="0.27450980390000002" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Slf-At-r0v">
+                                        <rect key="frame" x="16" y="431" width="311" height="40"/>
+                                        <color key="backgroundColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="FsV-Aa-GdY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
+                                        <state key="normal" title="ПОНЯЛ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapGetItButton:" destination="5bm-WQ-6c3" eventType="touchUpInside" id="BHx-tn-NRq"/>
+                                            <action selector="didTapSaveButton:" destination="XSV-72-Slk" eventType="touchUpInside" id="NLr-ph-zlq"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Больше не показывать это сообщение" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yK-FS-41K">
+                                        <rect key="frame" x="78" y="496.5" width="221" height="14.5"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                                        <color key="textColor" red="0.2470588235" green="0.27450980390000002" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NcJ-tH-sxm" customClass="BEMCheckBox">
+                                        <rect key="frame" x="48" y="489.5" width="25" height="25"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="fEQ-4U-7a1"/>
+                                            <constraint firstAttribute="width" constant="25" id="u3b-6N-QmY"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                                                <color key="value" red="0.42044270038604736" green="0.57721489667892456" blue="0.98310011625289917" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="onCheckColor">
+                                                <color key="value" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Slf-At-r0v" firstAttribute="leading" secondItem="yRb-kY-V8o" secondAttribute="leading" constant="16" id="39t-nw-0kw"/>
+                                    <constraint firstItem="U9v-Ss-8fc" firstAttribute="top" secondItem="HJc-Cd-Ezl" secondAttribute="bottom" id="56L-eL-uf6"/>
+                                    <constraint firstItem="HJc-Cd-Ezl" firstAttribute="leading" secondItem="yRb-kY-V8o" secondAttribute="leading" constant="16" id="5rQ-ml-eiz"/>
+                                    <constraint firstAttribute="bottom" secondItem="4yK-FS-41K" secondAttribute="bottom" constant="20" id="8f6-ls-HcJ"/>
+                                    <constraint firstItem="HJc-Cd-Ezl" firstAttribute="top" secondItem="yRb-kY-V8o" secondAttribute="top" constant="39" id="Eq7-9v-pyM"/>
+                                    <constraint firstItem="U9v-Ss-8fc" firstAttribute="leading" secondItem="yRb-kY-V8o" secondAttribute="leading" id="K2T-Fi-6ku"/>
+                                    <constraint firstItem="qU9-MC-rol" firstAttribute="top" secondItem="U9v-Ss-8fc" secondAttribute="bottom" id="KL5-iw-ygH"/>
+                                    <constraint firstAttribute="trailing" secondItem="U9v-Ss-8fc" secondAttribute="trailing" id="Qn4-v7-Rwd"/>
+                                    <constraint firstAttribute="trailing" secondItem="HJc-Cd-Ezl" secondAttribute="trailing" constant="16" id="TZp-jF-fVz"/>
+                                    <constraint firstAttribute="trailing" secondItem="qU9-MC-rol" secondAttribute="trailing" constant="16" id="TgS-kE-6IX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Slf-At-r0v" secondAttribute="trailing" constant="16" id="VZT-6X-ekm"/>
+                                    <constraint firstItem="NcJ-tH-sxm" firstAttribute="centerY" secondItem="4yK-FS-41K" secondAttribute="centerY" constant="-2" id="Xn4-1g-wUf"/>
+                                    <constraint firstItem="Slf-At-r0v" firstAttribute="top" secondItem="qU9-MC-rol" secondAttribute="bottom" constant="32" id="XzA-nI-aQu"/>
+                                    <constraint firstAttribute="bottom" secondItem="Slf-At-r0v" secondAttribute="bottom" constant="60" id="e2r-64-3kw"/>
+                                    <constraint firstItem="4yK-FS-41K" firstAttribute="centerX" secondItem="yRb-kY-V8o" secondAttribute="centerX" constant="17" id="e77-Co-WkT"/>
+                                    <constraint firstItem="4yK-FS-41K" firstAttribute="leading" secondItem="NcJ-tH-sxm" secondAttribute="trailing" constant="5" id="eph-YB-8MJ"/>
+                                    <constraint firstItem="qU9-MC-rol" firstAttribute="leading" secondItem="yRb-kY-V8o" secondAttribute="leading" constant="16" id="nTc-wY-cTQ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0Y-Vl-agR">
+                                <rect key="frame" x="331" y="26" width="28" height="28"/>
+                                <state key="normal" image="dark-circle-close-icon"/>
+                                <connections>
+                                    <action selector="didTapGetItButton:" destination="5bm-WQ-6c3" eventType="touchUpInside" id="qXA-2x-UEV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.16078431372549018" green="0.20000000000000001" blue="0.30980392156862746" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="yRb-kY-V8o" firstAttribute="top" secondItem="z0Y-Vl-agR" secondAttribute="bottom" constant="26" id="Cbh-xX-YUC"/>
+                            <constraint firstItem="9eR-IO-eFs" firstAttribute="trailing" secondItem="yRb-kY-V8o" secondAttribute="trailing" constant="16" id="EcW-4K-o0W"/>
+                            <constraint firstItem="9eR-IO-eFs" firstAttribute="bottom" secondItem="yRb-kY-V8o" secondAttribute="bottom" constant="56" id="PnI-7d-Dnn"/>
+                            <constraint firstItem="yRb-kY-V8o" firstAttribute="leading" secondItem="9eR-IO-eFs" secondAttribute="leading" constant="16" id="eN3-fK-quO"/>
+                            <constraint firstItem="z0Y-Vl-agR" firstAttribute="top" secondItem="Lsi-HF-Rab" secondAttribute="top" constant="26" id="wXD-rr-4NT"/>
+                            <constraint firstAttribute="trailing" secondItem="z0Y-Vl-agR" secondAttribute="trailing" constant="16" id="xYz-I4-BuJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9eR-IO-eFs"/>
+                    </view>
+                    <connections>
+                        <outlet property="basketImageView" destination="O5M-S6-zP7" id="cKT-0j-LkL"/>
+                        <outlet property="checkBox" destination="NcJ-tH-sxm" id="D6w-dc-KgO"/>
+                        <outlet property="messageLabel" destination="qU9-MC-rol" id="fX1-cQ-Goi"/>
+                        <outlet property="titleLabel" destination="HJc-Cd-Ezl" id="xj0-Cv-SQH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zRq-Qd-aby" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2737" y="-525"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="lXX-sC-DZf">
             <objects>
@@ -3130,6 +3269,7 @@
         <image name="blog-menu-item-icon" width="17" height="12"/>
         <image name="circle-close-icon" width="24" height="24"/>
         <image name="credits-menu-item-icon" width="18" height="12"/>
+        <image name="dark-circle-close-icon" width="28" height="28"/>
         <image name="faq-menu-item-icon" width="16" height="17"/>
         <image name="join-menu-item-icon" width="16" height="13"/>
         <image name="loader-1" width="55" height="31"/>
@@ -3137,6 +3277,7 @@
         <image name="plus-icon-blue" width="16" height="16"/>
         <image name="profile-menu-item-icon" width="17" height="17"/>
         <image name="remove-icon" width="17" height="20"/>
+        <image name="risk-large-image" width="146" height="122"/>
         <image name="settings-menu-item-icon" width="16" height="16"/>
         <image name="smile-icon" width="23" height="23"/>
         <image name="statistics-menu-item-icon" width="16" height="16"/>

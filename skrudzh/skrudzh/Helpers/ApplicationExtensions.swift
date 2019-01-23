@@ -311,7 +311,7 @@ extension UIViewController {
     }
     
     var didRunBefore: Bool {
-        return UIFlowManager.reachedPoint(key: className)
+        return UIFlowManager.reachPoint(key: className)
     }
 }
 

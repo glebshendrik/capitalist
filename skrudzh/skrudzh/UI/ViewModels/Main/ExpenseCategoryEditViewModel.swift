@@ -24,7 +24,7 @@ class ExpenseCategoryEditViewModel {
     private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
     
-    private var expenseCategory: ExpenseCategory? = nil
+    public private(set) var expenseCategory: ExpenseCategory? = nil
     public private(set) var basketType: BasketType? = nil
     
     var name: String? {

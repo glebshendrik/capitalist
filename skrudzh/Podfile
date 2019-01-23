@@ -22,4 +22,5 @@ target 'skrudzh' do
   pod 'SwiftMessages'
   pod 'SkyFloatingLabelTextField'
   pod 'CircleProgressView', '~> 1.0'
+  pod 'BEMCheckBox'
 end

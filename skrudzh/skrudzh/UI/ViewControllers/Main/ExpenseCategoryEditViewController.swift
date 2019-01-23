@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 
 protocol ExpenseCategoryEditViewControllerDelegate {
-    func didCreateExpenseCategory(with basketType: BasketType)
+    func didCreateExpenseCategory(with basketType: BasketType, name: String)
     func didUpdateExpenseCategory(with basketType: BasketType)
     func didRemoveExpenseCategory(with basketType: BasketType)
 }
@@ -96,13 +96,14 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
                                           iconURL: self.selectedIconURL,
                                           monthlyPlanned: self.expenseCategoryMonthlyPlanned)
         }.done {
-            if self.viewModel.isNew {
-                self.delegate?.didCreateExpenseCategory(with: self.viewModel.basketType!)
-            }
-            else {
-                self.delegate?.didUpdateExpenseCategory(with: self.viewModel.basketType!)
-            }
-            self.close()
+            self.close(completion: {
+                if self.viewModel.isNew {
+                    self.delegate?.didCreateExpenseCategory(with: self.viewModel.basketType!, name: self.expenseCategoryName!)
+                }
+                else {
+                    self.delegate?.didUpdateExpenseCategory(with: self.viewModel.basketType!)
+                }
+            })
         }.catch { error in
             switch error {
             case ExpenseCategoryCreationError.validation(let validationResults):
@@ -139,8 +140,8 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
         }
     }
     
-    private func close() {
-        navigationController?.dismiss(animated: true, completion: nil)
+    private func close(completion: (() -> Void)? = nil) {
+        navigationController?.dismiss(animated: true, completion: completion)
     }
 }
 

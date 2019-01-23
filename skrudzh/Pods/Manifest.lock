@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
+  - BEMCheckBox (1.4.1)
   - CircleProgressView (1.2.0)
   - CWStatusBarNotification (2.3.5)
   - IQKeyboardManager (6.2.0)
@@ -49,6 +50,7 @@ PODS:
 
 DEPENDENCIES:
   - AlamofireImage
+  - BEMCheckBox
   - CircleProgressView (~> 1.0)
   - CWStatusBarNotification (~> 2.3)
   - IQKeyboardManager
@@ -69,6 +71,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
+    - BEMCheckBox
     - CircleProgressView
     - CWStatusBarNotification
     - IQKeyboardManager
@@ -87,6 +90,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
+  BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
@@ -102,6 +106,6 @@ SPEC CHECKSUMS:
   Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
 
-PODFILE CHECKSUM: 439aa581736bdc588a599b506ee0ac03e248f9f5
+PODFILE CHECKSUM: d3cbd41c1527caa59727c5d4bc013f9fca25e4ef
 
 COCOAPODS: 1.5.3

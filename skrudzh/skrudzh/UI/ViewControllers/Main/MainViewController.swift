@@ -311,12 +311,40 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
 }
 
 extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
-    func didCreateExpenseCategory(with basketType: BasketType) {
+    func didCreateExpenseCategory(with basketType: BasketType, name: String) {
         loadExpenseCategories(by: basketType)
         loadBaskets()
         guard case basketType = BasketType.joy else {
+            showDependentIncomeSourceMessage(basketType: basketType, name: name)
             didCreateIncomeSource()
             return
+        }
+    }
+    
+    private func showDependentIncomeSourceMessage(basketType: BasketType, name: String) {
+        if let dependentIncomeSourceCreationMessageViewController = router.viewController(.DependentIncomeSourceCreationMessageViewController) as? DependentIncomeSourceCreationMessageViewController,
+            let point = uiPoint(of: basketType),
+            !UIFlowManager.reached(point: point) {
+            
+            dependentIncomeSourceCreationMessageViewController.basketType = basketType
+            dependentIncomeSourceCreationMessageViewController.name = name
+            
+            dependentIncomeSourceCreationMessageViewController.modalPresentationStyle = .overCurrentContext
+            dependentIncomeSourceCreationMessageViewController.modalTransitionStyle = .crossDissolve
+            present(dependentIncomeSourceCreationMessageViewController, animated: true, completion: nil)
+
+        }
+
+    }
+    
+    private func uiPoint(of basketType: BasketType) -> UIFlowPoint? {
+        switch basketType {
+        case .risk:
+            return .dependentRiskIncomeSourceMessage
+        case .safe:
+            return .dependentSafeIncomeSourceMessage
+        default:
+            return nil
         }
     }
     
