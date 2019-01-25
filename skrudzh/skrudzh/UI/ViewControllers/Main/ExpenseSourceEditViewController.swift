@@ -34,12 +34,19 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     private var delegate: ExpenseSourceEditViewControllerDelegate?
     
     private var editTableController: ExpenseSourceEditTableController?
+    
     private var expenseSourceName: String? {
         return editTableController?.expenseSourceNameTextField?.text?.trimmed
     }
+    
     private var expenseSourceAmount: String? {
         return editTableController?.expenseSourceAmountTextField?.text?.trimmed
     }
+    
+    private var expenseSourceGoalAmount: String? {
+        return editTableController?.expenseSourceGoalAmountTextField?.text?.trimmed
+    }
+    
     private var selectedIconURL: URL? {
         return viewModel.selectedIconURL
     }
@@ -66,7 +73,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     }
     
     @IBAction func didTapRemoveButton(_ sender: Any) {
-        let alertController = UIAlertController(title: "Удалить источник трат?",
+        let alertController = UIAlertController(title: "Удалить кошелек?",
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
         
@@ -91,7 +98,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
         saveButton.isEnabled = false
         
         firstly {
-            viewModel.saveExpenseSource(with: self.expenseSourceName, amount: self.expenseSourceAmount, iconURL: self.selectedIconURL)
+            viewModel.saveExpenseSource(with: self.expenseSourceName, amount: self.expenseSourceAmount, iconURL: self.selectedIconURL, goalAmount: self.expenseSourceGoalAmount)
         }.done {
             if self.viewModel.isNew {
                 self.delegate?.didCreateExpenseSource()
@@ -109,7 +116,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
             case APIRequestError.unprocessedEntity(let errors):
                 self.show(errors: errors)
             default:
-                self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении источника трат",
+                self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении кошелька",
                                                   theme: .error)
             }
         }.finally {
@@ -128,7 +135,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
             self.delegate?.didRemoveExpenseSource()
             self.close()
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении источника трат",
+            self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении кошелька",
                                               theme: .error)
         }.finally {
             self.setActivityIndicator(hidden: true)
@@ -142,6 +149,17 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
 }
 
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
+    var isExpenseSourceGoalType: Bool {
+        return viewModel.isGoal
+    }
+    
+    func didSwitchType(isGoal: Bool) {
+        viewModel.isGoal = isGoal
+        updateIconUI()
+        updateGoalUI()
+        validateUI()
+    }
+    
     func didSelectIcon(icon: Icon) {
         viewModel.selectedIconURL = icon.url
         updateIconUI()
@@ -152,7 +170,7 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
     }
     
     private func validateUI() {
-        let isFormValid = viewModel.isFormValid(with: expenseSourceName, amount: expenseSourceAmount, iconURL: selectedIconURL)
+        let isFormValid = viewModel.isFormValid(with: expenseSourceName, amount: expenseSourceAmount, iconURL: selectedIconURL, goalAmount: expenseSourceGoalAmount)
         let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
         let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
         saveButton.isEnabled = isFormValid
@@ -185,6 +203,10 @@ extension ExpenseSourceEditViewController {
             return "Укажите текущий баланс"
         case (.amountCents, .invalid):
             return "Некорректный текущий баланс"
+        case (.goalAmountCents, .required):
+            return "Укажите сколько вы хотите накопить"
+        case (.goalAmountCents, .invalid):
+            return "Некорректная сумма цели"
         case (_, _):
             return "Ошибка ввода"
         }
@@ -208,6 +230,10 @@ extension ExpenseSourceEditViewController {
             return "Укажите текущий баланс"
         case (.amountCents, .invalid):
             return "Некорректный текущий баланс"
+        case (.goalAmountCents, .required):
+            return "Укажите сколько вы хотите накопить"
+        case (.goalAmountCents, .invalid):
+            return "Некорректная сумма цели"
         case (_, _):
             return "Ошибка ввода"
         }
@@ -226,12 +252,21 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
     private func updateUI() {
         editTableController?.expenseSourceNameTextField?.text = viewModel.name        
         editTableController?.expenseSourceAmountTextField?.text = viewModel.amount
+        editTableController?.expenseSourceGoalAmountTextField?.text = viewModel.goalAmount
         updateIconUI()
+        updateGoalUI()
         validateUI()
     }
     
+    private func updateGoalUI() {
+        editTableController?.setTypeSwitch(hidden: !viewModel.isNew)
+        editTableController?.setGoalAmount(hidden: !viewModel.isGoal)
+        editTableController?.updateUI()
+    }
+    
     private func updateIconUI() {
-        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: "wallet-icon", renderingMode: .alwaysTemplate)
+        let placeholderName = viewModel.isGoal ? "goal-wallet-icon" : "wallet-icon"
+        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: placeholderName, renderingMode: .alwaysTemplate)
         editTableController?.iconImageView.tintColor = UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
     }
     

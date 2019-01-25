@@ -8,13 +8,22 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import StaticDataTableViewController
 
 protocol ExpenseSourceEditTableControllerDelegate {
+    var isExpenseSourceGoalType: Bool { get }
     func validationNeeded()
     func didSelectIcon(icon: Icon)
+    func didSwitchType(isGoal: Bool)
 }
 
-class ExpenseSourceEditTableController : UITableViewController, UITextFieldDelegate {
+class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFieldDelegate {
+    @IBOutlet weak var generalExpenseSourceTabTitleLabel: UILabel!
+    @IBOutlet weak var generalExpenseSourceTabSelectionIndicator: UIView!
+    
+    @IBOutlet weak var goalExpenseSourceTabTitleLabel: UILabel!
+    @IBOutlet weak var goalExpenseSourceTabSelectionIndicator: UIView!
+    
     @IBOutlet weak var expenseSourceNameTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var nameBackground: UIView!
     @IBOutlet weak var nameIconContainer: UIView!
@@ -23,17 +32,58 @@ class ExpenseSourceEditTableController : UITableViewController, UITextFieldDeleg
     @IBOutlet weak var amountBackground: UIView!
     @IBOutlet weak var amountIconContainer: UIView!
     
+    @IBOutlet weak var expenseSourceGoalAmountTextField: MoneyTextField!
+    @IBOutlet weak var goalAmountBackground: UIView!
+    @IBOutlet weak var goalAmountIconContainer: UIView!
+        
     @IBOutlet weak var iconImageView: UIImageView!
     
+    @IBOutlet weak var typeSwitchCell: UITableViewCell!
+    @IBOutlet weak var goalAmountCell: UITableViewCell!
+    
     var delegate: ExpenseSourceEditTableControllerDelegate?
+    
+    var iconCategory: IconCategory {
+        return isGoal ? .expenseSourceGoal : .expenseSource
+    }
+    
+    var isGoal: Bool {
+        guard let delegate = delegate else { return false }
+        return delegate.isExpenseSourceGoalType
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         update(textField: expenseSourceNameTextField)
         update(textField: expenseSourceAmountTextField)
+        update(textField: expenseSourceGoalAmountTextField)
         expenseSourceNameTextField.titleFormatter = { $0 }
         expenseSourceAmountTextField.titleFormatter = { $0 }
+        expenseSourceGoalAmountTextField.titleFormatter = { $0 }
         delegate?.validationNeeded()
+    }
+    
+    func updateUI(animated: Bool = true) {
+        let selectedTypeLabelTextColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
+        let unselectedTypeLabelTextColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
+        
+        generalExpenseSourceTabTitleLabel.textColor = isGoal ? unselectedTypeLabelTextColor : selectedTypeLabelTextColor        
+        goalExpenseSourceTabTitleLabel.textColor = isGoal ? selectedTypeLabelTextColor : unselectedTypeLabelTextColor
+        
+        generalExpenseSourceTabSelectionIndicator.isHidden = isGoal
+        goalExpenseSourceTabSelectionIndicator.isHidden = !isGoal
+        
+        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+    }
+    
+    func setTypeSwitch(hidden: Bool, animated: Bool = true, reload: Bool = false) {
+        cell(typeSwitchCell, setHidden: hidden)
+        if reload { updateUI(animated: animated) }
+    }
+    
+    func setGoalAmount(hidden: Bool, animated: Bool = true, reload: Bool = false) {
+        cell(goalAmountCell, setHidden: hidden)
+        if reload { updateUI(animated: animated) }
     }
     
     @IBAction func didChangeName(_ sender: SkyFloatingLabelTextField) {
@@ -44,6 +94,20 @@ class ExpenseSourceEditTableController : UITableViewController, UITextFieldDeleg
     @IBAction func didChangeAmount(_ sender: MoneyTextField) {
         update(textField: sender)
         delegate?.validationNeeded()
+    }
+    
+    @IBAction func didChangeGoalAmount(_ sender: MoneyTextField) {
+        update(textField: sender)
+        delegate?.validationNeeded()
+    }
+    
+    @IBAction func didTapGeneralExpenseSource(_ sender: Any) {
+        delegate?.didSwitchType(isGoal: false)
+        
+    }
+    
+    @IBAction func didTapGoalExpenseSource(_ sender: Any) {
+        delegate?.didSwitchType(isGoal: true)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -80,6 +144,8 @@ class ExpenseSourceEditTableController : UITableViewController, UITextFieldDeleg
             return nameIconContainer
         case expenseSourceAmountTextField:
             return amountIconContainer
+        case expenseSourceGoalAmountTextField:
+            return goalAmountIconContainer
         default:
             return nil
         }
@@ -117,7 +183,7 @@ class ExpenseSourceEditTableController : UITableViewController, UITextFieldDeleg
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowExpenseSourceIcons",
             let iconsViewController = segue.destination as? IconsViewControllerInputProtocol {
-            iconsViewController.set(iconCategory: .expenseSource)
+            iconsViewController.set(iconCategory: iconCategory)
             iconsViewController.set(delegate: self)
         }
     }

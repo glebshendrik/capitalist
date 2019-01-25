@@ -10,7 +10,10 @@ import Foundation
 
 enum IconCategory : String, Codable {
     case expenseSource = "expense_source"
+    case expenseSourceGoal = "expense_source_goal"
     case expenseCategoryJoy = "expense_category_joy"
+    case expenseCategoryRisk = "expense_category_risk"
+    case expenseCategorySafe = "expense_category_safe"
 }
 
 struct Icon : Decodable {

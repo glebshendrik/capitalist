@@ -28,6 +28,20 @@ class ExpenseSourceViewModel {
         return expenseSource.iconURL
     }
     
+    var isGoal: Bool {
+        return expenseSource.isGoal
+    }
+    
+    var goalProgress: Double {
+        guard isGoal, let goalAmountCents = expenseSource.goalAmountCents else { return 0 }
+        let progress = Double(expenseSource.amountCents) / Double(goalAmountCents)
+        return progress > 1.0 ? 1.0 : progress
+    }
+    
+    var isGoalCompleted: Bool {
+        return goalProgress == 1.0
+    }
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
     }

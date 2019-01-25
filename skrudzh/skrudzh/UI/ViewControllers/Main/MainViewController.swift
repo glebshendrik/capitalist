@@ -298,15 +298,29 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
                                                                    for: indexPath)
         }
         
-        guard let cell = expenseSourcesCollectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseSourceCollectionViewCell",
-                                                                         for: indexPath) as? ExpenseSourceCollectionViewCell,
-            let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) else {
+        guard let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath)
+             else {
                 
                 return UICollectionViewCell()
         }
         
-        cell.viewModel = expenseSourceViewModel
-        return cell
+        if expenseSourceViewModel.isGoal,
+            let cell = expenseSourcesCollectionView.dequeueReusableCell(withReuseIdentifier: "GoalExpenseSourceCollectionViewCell",
+                                                                       for: indexPath) as? GoalExpenseSourceCollectionViewCell {
+            
+            cell.viewModel = expenseSourceViewModel
+            return cell
+        }
+        
+        if !expenseSourceViewModel.isGoal,
+            let cell = expenseSourcesCollectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseSourceCollectionViewCell",
+                                                                         for: indexPath) as? ExpenseSourceCollectionViewCell {
+                
+            cell.viewModel = expenseSourceViewModel
+            return cell
+        }
+        
+        return UICollectionViewCell()
     }
 }
 
@@ -318,33 +332,6 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
             showDependentIncomeSourceMessage(basketType: basketType, name: name)
             didCreateIncomeSource()
             return
-        }
-    }
-    
-    private func showDependentIncomeSourceMessage(basketType: BasketType, name: String) {
-        if let dependentIncomeSourceCreationMessageViewController = router.viewController(.DependentIncomeSourceCreationMessageViewController) as? DependentIncomeSourceCreationMessageViewController,
-            let point = uiPoint(of: basketType),
-            !UIFlowManager.reached(point: point) {
-            
-            dependentIncomeSourceCreationMessageViewController.basketType = basketType
-            dependentIncomeSourceCreationMessageViewController.name = name
-            
-            dependentIncomeSourceCreationMessageViewController.modalPresentationStyle = .overCurrentContext
-            dependentIncomeSourceCreationMessageViewController.modalTransitionStyle = .crossDissolve
-            present(dependentIncomeSourceCreationMessageViewController, animated: true, completion: nil)
-
-        }
-
-    }
-    
-    private func uiPoint(of basketType: BasketType) -> UIFlowPoint? {
-        switch basketType {
-        case .risk:
-            return .dependentRiskIncomeSourceMessage
-        case .safe:
-            return .dependentSafeIncomeSourceMessage
-        default:
-            return nil
         }
     }
     
@@ -362,6 +349,33 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
         guard case basketType = BasketType.joy else {
             didRemoveIncomeSource()
             return
+        }
+    }
+    
+    private func showDependentIncomeSourceMessage(basketType: BasketType, name: String) {
+        if let dependentIncomeSourceCreationMessageViewController = router.viewController(.DependentIncomeSourceCreationMessageViewController) as? DependentIncomeSourceCreationMessageViewController,
+            let point = uiPoint(of: basketType),
+            !UIFlowManager.reached(point: point) {
+            
+            dependentIncomeSourceCreationMessageViewController.basketType = basketType
+            dependentIncomeSourceCreationMessageViewController.name = name
+            
+            dependentIncomeSourceCreationMessageViewController.modalPresentationStyle = .overCurrentContext
+            dependentIncomeSourceCreationMessageViewController.modalTransitionStyle = .crossDissolve
+            present(dependentIncomeSourceCreationMessageViewController, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
+    private func uiPoint(of basketType: BasketType) -> UIFlowPoint? {
+        switch basketType {
+        case .risk:
+            return .dependentRiskIncomeSourceMessage
+        case .safe:
+            return .dependentSafeIncomeSourceMessage
+        default:
+            return nil
         }
     }
     
