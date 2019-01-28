@@ -35,6 +35,12 @@ class ExpenseSourceCollectionViewCell : UICollectionViewCell {
         iconImageView.setImage(with: viewModel?.iconURL, placeholderName: placeholderName, renderingMode: .alwaysTemplate)
         iconImageView.tintColor = imageTintColor
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        stopWiggling()
+    }
 }
 
 

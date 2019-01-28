@@ -22,5 +22,11 @@ class IncomeSourceCollectionViewCell : UICollectionViewCell {
         nameLabel.text = viewModel?.name
         incomeAmountLabel.text = viewModel?.incomesAmount
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        stopWiggling()
+    }
 }
 

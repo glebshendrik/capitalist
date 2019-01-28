@@ -22,24 +22,36 @@ class MainViewModel {
     private var riskExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
     private var safeExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
     
+    private var editing: Bool = false
+    
     var numberOfIncomeSources: Int {
-        return incomeSourceViewModels.count + 1
+        return editing
+            ? incomeSourceViewModels.count
+            : incomeSourceViewModels.count + 1
     }
     
     var numberOfExpenseSources: Int {
-        return expenseSourceViewModels.count + 1
+        return editing
+            ? expenseSourceViewModels.count
+            : expenseSourceViewModels.count + 1
     }
     
     var numberOfJoyExpenseCategories: Int {
-        return numberOfExpenseCategories(with: .joy) + 1
+        return editing
+            ? numberOfExpenseCategories(with: .joy)
+            : numberOfExpenseCategories(with: .joy) + 1
     }
     
     var numberOfRiskExpenseCategories: Int {
-        return numberOfExpenseCategories(with: .risk) + 1
+        return editing
+            ? numberOfExpenseCategories(with: .risk)
+            : numberOfExpenseCategories(with: .risk) + 1
     }
     
     var numberOfSafeExpenseCategories: Int {
-        return numberOfExpenseCategories(with: .safe) + 1
+        return editing
+            ? numberOfExpenseCategories(with: .safe)
+            : numberOfExpenseCategories(with: .safe) + 1
     }
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
@@ -120,7 +132,32 @@ class MainViewModel {
         return indexPath.row == numberOfExpenseCategories(with: basketType)
     }
     
+    func set(editing: Bool) {
+        self.editing = editing
+    }
+    
+    func moveIncomeSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        incomeSourceViewModels.insert(incomeSourceViewModels.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+    }
+    
+    func moveExpenseSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        expenseSourceViewModels.insert(expenseSourceViewModels.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+    }
+    
+    func moveExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, basketType: BasketType) {
+        
+        switch basketType {
+        case .joy:
+            joyExpenseCategoryViewModels.insert(joyExpenseCategoryViewModels.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+        case .risk:
+            riskExpenseCategoryViewModels.insert(riskExpenseCategoryViewModels.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+        case .safe:
+            safeExpenseCategoryViewModels.insert(safeExpenseCategoryViewModels.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+        }
+    }
+    
     private func numberOfExpenseCategories(with basketType: BasketType) -> Int {
+        
         return expenseCategoryViewModels(by: basketType).count
     }
     

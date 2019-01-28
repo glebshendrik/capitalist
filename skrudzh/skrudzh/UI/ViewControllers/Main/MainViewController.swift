@@ -63,6 +63,9 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var safeExpenseCategoriesLoader: UIImageView!
     @IBOutlet weak var safeExpenseCategoriesPageControl: UIPageControl!
     
+    private var movingIndexPath: IndexPath? = nil
+    private var movingCollectionView: UICollectionView? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -508,18 +511,57 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        switch collectionView {
-        case incomeSourcesCollectionView:           return incomeSourceCollectionViewCell(forItemAt: indexPath)
-        case expenseSourcesCollectionView:          return expenseSourceCollectionViewCell(forItemAt: indexPath)
-        case joyExpenseCategoriesCollectionView:    return expenseCategoryCollectionViewCell(forItemAt: indexPath,
-                                                                                             basketType: .joy)
-        case riskExpenseCategoriesCollectionView:   return expenseCategoryCollectionViewCell(forItemAt: indexPath,
-                                                                                             basketType: .risk)
-        case safeExpenseCategoriesCollectionView:   return expenseCategoryCollectionViewCell(forItemAt: indexPath,
-                                                                                             basketType: .safe)
-        default:                                    return UICollectionViewCell()
+        func collectionViewCell() -> UICollectionViewCell {
+            switch collectionView {
+            case incomeSourcesCollectionView:           return incomeSourceCollectionViewCell(forItemAt: indexPath)
+            case expenseSourcesCollectionView:          return expenseSourceCollectionViewCell(forItemAt: indexPath)
+            case joyExpenseCategoriesCollectionView:    return expenseCategoryCollectionViewCell(forItemAt: indexPath,
+                                                                                                 basketType: .joy)
+            case riskExpenseCategoriesCollectionView:   return expenseCategoryCollectionViewCell(forItemAt: indexPath,
+                                                                                                 basketType: .risk)
+            case safeExpenseCategoriesCollectionView:   return expenseCategoryCollectionViewCell(forItemAt: indexPath,
+                                                                                                 basketType: .safe)
+            default:                                    return UICollectionViewCell()
+            }
         }
-
+        
+        let cell = collectionViewCell()
+        
+        if isEditing {
+            cell.startWiggling()
+        } else {
+            cell.stopWiggling()
+        }
+        
+        if indexPath == movingIndexPath {
+            cell.alpha = 0.7
+            cell.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+        } else {
+            cell.alpha = 1.0
+            cell.transform = CGAffineTransform.identity
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        switch collectionView {
+        case incomeSourcesCollectionView:           viewModel.moveIncomeSource(from: sourceIndexPath,
+                                                                               to: destinationIndexPath)
+        case expenseSourcesCollectionView:          viewModel.moveExpenseSource(from: sourceIndexPath,
+                                                                                to: destinationIndexPath)
+        case joyExpenseCategoriesCollectionView:    viewModel.moveExpenseCategory(from: sourceIndexPath,
+                                                                                  to: destinationIndexPath,
+                                                                                  basketType: .joy)
+        case riskExpenseCategoriesCollectionView:   viewModel.moveExpenseCategory(from: sourceIndexPath,
+                                                                                  to: destinationIndexPath,
+                                                                                  basketType: .risk)
+        case safeExpenseCategoriesCollectionView:   viewModel.moveExpenseCategory(from: sourceIndexPath,
+                                                                                  to: destinationIndexPath,
+                                                                                  basketType: .safe)
+        default: return
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -566,6 +608,7 @@ extension MainViewController {
         setupNavigationBar()
         setupMainMenu()
         setupLoaders()
+        setupGestureRecognizers()
     }
     
     private func setupIncomeSourcesCollectionView() {
@@ -578,7 +621,19 @@ extension MainViewController {
         expenseSourcesCollectionView.dataSource = self
     }
     
+    private func setupGestureRecognizers() {
+        setupGestureRecognizer(for: incomeSourcesCollectionView)
+        setupGestureRecognizer(for: expenseSourcesCollectionView)
+        setupGestureRecognizer(for: joyExpenseCategoriesCollectionView)
+        setupGestureRecognizer(for: riskExpenseCategoriesCollectionView)
+        setupGestureRecognizer(for: safeExpenseCategoriesCollectionView)
+    }
     
+    private func setupGestureRecognizer(for collectionView: UICollectionView) {
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(gesture:))) // this
+        collectionView.addGestureRecognizer(gestureRecognizer)
+        gestureRecognizer.minimumPressDuration = 0.3
+    }
     
     private func setupExpenseCategoriesCollectionView() {
         joyExpenseCategoriesCollectionView.delegate = self
@@ -679,5 +734,85 @@ extension MainViewController {
         set(joyExpenseCategoriesActivityIndicator, hidden: true, animated: false)
         set(riskExpenseCategoriesActivityIndicator, hidden: true, animated: false)
         set(safeExpenseCategoriesActivityIndicator, hidden: true, animated: false)
+    }
+}
+
+extension MainViewController {
+    @objc func longPressed(gesture: UILongPressGestureRecognizer) {
+        movingCollectionView = gesture.view as? UICollectionView
+        
+        guard let movingCollectionView = movingCollectionView else { return }
+        
+        let location = gesture.location(in: movingCollectionView)
+        movingIndexPath = movingCollectionView.indexPathForItem(at: location)
+        
+        switch gesture.state {
+        case .began:
+            guard let indexPath = movingIndexPath else { return }
+            
+            let cell = movingCollectionView.cellForItem(at: indexPath)
+            
+            setEditing(true, animated: true)
+            movingCollectionView.beginInteractiveMovementForItem(at: indexPath)
+            cell?.stopWiggling()
+            animatePickingUp(cell: cell)
+        case .changed:
+            movingCollectionView.updateInteractiveMovementTargetPosition(location)
+        default:
+            gesture.state == .ended
+                ? movingCollectionView.endInteractiveMovement()
+                : movingCollectionView.cancelInteractiveMovement()
+            
+            guard let indexPath = movingIndexPath else { return }
+            
+            let cell = movingCollectionView.cellForItem(at: indexPath)
+            
+            animatePuttingDown(cell: cell)
+            movingIndexPath = nil
+        }
+        
+    }
+    
+    func animatePickingUp(cell: UICollectionViewCell?) {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { () -> Void in
+            cell?.alpha = 0.7
+            cell?.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+        }, completion: { finished in
+            
+        })
+    }
+    
+    func animatePuttingDown(cell: UICollectionViewCell?) {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { () -> Void in
+            cell?.alpha = 1.0
+            cell?.transform = CGAffineTransform.identity
+        }, completion: { finished in
+            cell?.startWiggling()
+        })
+    }
+    
+    func startWigglingAllVisibleCells() {
+        let cells = incomeSourcesCollectionView.visibleCells + expenseSourcesCollectionView.visibleCells + joyExpenseCategoriesCollectionView.visibleCells + riskExpenseCategoriesCollectionView.visibleCells + safeExpenseCategoriesCollectionView.visibleCells
+        
+        for cell in cells {
+            isEditing
+                ? cell.startWiggling()
+                : cell.stopWiggling()
+        }
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: true)
+        viewModel?.set(editing: true)
+        updateCollectionViews()
+        startWigglingAllVisibleCells()
+    }
+    
+    private func updateCollectionViews() {
+        update(incomeSourcesCollectionView)
+        update(expenseSourcesCollectionView)
+        update(joyExpenseCategoriesCollectionView)
+        update(riskExpenseCategoriesCollectionView)
+        update(safeExpenseCategoriesCollectionView)
     }
 }
