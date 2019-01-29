@@ -535,13 +535,17 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         
         let cell = collectionViewCell()
         
+        guard let editableCell = cell as? EditableCell else { return cell }
+        
         if isEditing {
             if indexPath != movingIndexPath || collectionView != movingCollectionView {
-                cell.startWiggling()
+                editableCell.set(editing: true)
             }
         } else {
-            cell.stopWiggling()
+            editableCell.set(editing: false)
         }
+        
+        editableCell.delegate = self
         
         guard collectionView == movingCollectionView else { return cell }
         
@@ -614,6 +618,18 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }    
 }
 
+extension MainViewController : EditableCellDelegate {
+    func didTapDeleteButton(cell: EditableCell) {
+        
+    }
+    
+    func didTapEditButton(cell: EditableCell) {
+        
+    }
+    
+    
+}
+
 extension MainViewController {
     private func setupUI() {
         setupIncomeSourcesCollectionView()
@@ -623,6 +639,7 @@ extension MainViewController {
         setupMainMenu()
         setupLoaders()
         setupGestureRecognizers()
+        setupNotifications()
     }
     
     private func setupIncomeSourcesCollectionView() {
@@ -664,6 +681,14 @@ extension MainViewController {
         updateExpenseCategoriesPageControl(by: .safe)
     }
     
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    @objc private func appMovedToForeground() {
+        setVisibleCells(editing: isEditing)
+    }
+    
     private func layoutUI() {
         layoutExpenseCategoriesCollectionView(by: .joy)
         layoutExpenseCategoriesCollectionView(by: .risk)
@@ -685,16 +710,16 @@ extension MainViewController {
     private func layoutIncomeSourcesCollectionView() {
         fillLayout(collectionView: incomeSourcesCollectionView,
                    itemHeight: 56.0,
-                   innerSpace: 10.0,
-                   outerSpace: 16.0,
+                   innerSpace: 2.0,
+                   outerSpace: 8.0,
                    columns: 3)
     }
     
     private func layoutExpenseSourcesCollectionView() {
         fillLayout(collectionView: expenseSourcesCollectionView,
                    itemHeight: 62.0,
-                   innerSpace: 10.0,
-                   outerSpace: 16.0,
+                   innerSpace: 2.0,
+                   outerSpace: 8.0,
                    columns: 2)
     }
     
@@ -800,7 +825,7 @@ extension MainViewController : UICollectionViewDelegateFlowLayout {
             
             movingCollectionView.updateInteractiveMovementTargetPosition(location)
             
-            cell?.stopWiggling()
+            (cell as? EditableCell)?.set(editing: false)
             animatePickingUp(cell: cell)
         case .changed:
             
@@ -857,7 +882,7 @@ extension MainViewController : UICollectionViewDelegateFlowLayout {
             cell?.alpha = 1.0
             cell?.transform = CGAffineTransform.identity
         }, completion: { finished in
-            cell?.startWiggling()
+            (cell as? EditableCell)?.set(editing: true)
         })
     }
     
