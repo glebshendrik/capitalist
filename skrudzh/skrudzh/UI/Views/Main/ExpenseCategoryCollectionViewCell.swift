@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 import CircleProgressView
 
-class ExpenseCategoryCollectionViewCell : UICollectionViewCell {
+class ExpenseCategoryCollectionViewCell : EditableCell {
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var progressView: CircleProgressView!
@@ -83,11 +83,5 @@ class ExpenseCategoryCollectionViewCell : UICollectionViewCell {
         
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        stopWiggling()
-    }
+    }        
 }

@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 import CircleProgressView
 
-class ExpenseSourceCollectionViewCell : UICollectionViewCell {
+class ExpenseSourceCollectionViewCell : EditableCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
@@ -34,13 +34,8 @@ class ExpenseSourceCollectionViewCell : UICollectionViewCell {
         amountLabel.text = viewModel?.amount
         iconImageView.setImage(with: viewModel?.iconURL, placeholderName: placeholderName, renderingMode: .alwaysTemplate)
         iconImageView.tintColor = imageTintColor
-    }
+    }    
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        stopWiggling()
-    }
 }
 
 

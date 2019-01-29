@@ -545,6 +545,7 @@ extension UICollectionViewCell {
         wiggle.duration = randomInterval(interval: 0.1, variance: 0.025)
         wiggle.repeatCount = Float.infinity
         
+        
         contentView.layer.add(wiggle, forKey: "wiggle")
         
         let bounce = CAKeyframeAnimation(keyPath: "transform.translation.y")
@@ -553,6 +554,7 @@ extension UICollectionViewCell {
         bounce.autoreverses = true
         bounce.duration = randomInterval(interval: 0.12, variance: 0.025)
         bounce.repeatCount = Float.infinity
+        
         
         contentView.layer.add(bounce, forKey: "bounce")
     }

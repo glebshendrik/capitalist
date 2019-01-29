@@ -65,6 +65,11 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     private var movingIndexPath: IndexPath? = nil
     private var movingCollectionView: UICollectionView? = nil
+    private var offsetForCollectionViewCellBeingMoved: CGPoint = .zero
+    
+    @IBOutlet weak var editDoneButton: UIButton!
+    @IBOutlet weak var editDoneButtonHeightConstraint: NSLayoutConstraint!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +99,9 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         didTapBasket(with: .safe)
     }
     
+    @IBAction func didTapEditDoneButton(_ sender: Any) {
+        setEditing(false, animated: true)
+    }
     private func didTapBasket(with basketType: BasketType) {
         viewModel.basketsViewModel.selectBasketBy(basketType: basketType)
         updateBasketsUI()
@@ -528,14 +536,18 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         let cell = collectionViewCell()
         
         if isEditing {
-            cell.startWiggling()
+            if indexPath != movingIndexPath || collectionView != movingCollectionView {
+                cell.startWiggling()
+            }
         } else {
             cell.stopWiggling()
         }
         
+        guard collectionView == movingCollectionView else { return cell }
+        
         if indexPath == movingIndexPath {
-            cell.alpha = 0.7
-            cell.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            cell.alpha = 0.99
+            cell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         } else {
             cell.alpha = 1.0
             cell.transform = CGAffineTransform.identity
@@ -565,6 +577,8 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard !isEditing else { return }
+        
         switch collectionView {
         case incomeSourcesCollectionView:           didSelectIncomeSource(at: indexPath)
         case expenseSourcesCollectionView:          didSelectExpenseSource(at: indexPath)
@@ -661,7 +675,7 @@ extension MainViewController {
     private func layoutExpenseCategoriesCollectionView(by basketType: BasketType) {
         let collectionView = expenseCategoriesCollectionView(by: basketType)
         if let layout = collectionView.collectionViewLayout as? PagedCollectionViewLayout {
-            layout.itemSize = CGSize(width: 68, height: 105)
+            layout.itemSize = CGSize(width: 68, height: 109)
             layout.columns = 4
             layout.rows = Int(collectionView.bounds.size.height / layout.itemSize.height)
             layout.edgeInsets = UIEdgeInsets(horizontal: 30, vertical: 5)
@@ -670,7 +684,7 @@ extension MainViewController {
     
     private func layoutIncomeSourcesCollectionView() {
         fillLayout(collectionView: incomeSourcesCollectionView,
-                   itemHeight: 48.0,
+                   itemHeight: 56.0,
                    innerSpace: 10.0,
                    outerSpace: 16.0,
                    columns: 3)
@@ -678,7 +692,7 @@ extension MainViewController {
     
     private func layoutExpenseSourcesCollectionView() {
         fillLayout(collectionView: expenseSourcesCollectionView,
-                   itemHeight: 54.0,
+                   itemHeight: 62.0,
                    innerSpace: 10.0,
                    outerSpace: 16.0,
                    columns: 2)
@@ -737,26 +751,64 @@ extension MainViewController {
     }
 }
 
-extension MainViewController {
+extension MainViewController : UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     @objc func longPressed(gesture: UILongPressGestureRecognizer) {
         movingCollectionView = gesture.view as? UICollectionView
         
         guard let movingCollectionView = movingCollectionView else { return }
         
         let location = gesture.location(in: movingCollectionView)
-        movingIndexPath = movingCollectionView.indexPathForItem(at: location)
+        
         
         switch gesture.state {
         case .began:
+            if !isEditing {
+                setEditing(true, animated: true)
+                return
+            }
+            movingIndexPath = movingCollectionView.indexPathForItem(at: location)
+            
             guard let indexPath = movingIndexPath else { return }
             
             let cell = movingCollectionView.cellForItem(at: indexPath)
             
-            setEditing(true, animated: true)
+            
+            
             movingCollectionView.beginInteractiveMovementForItem(at: indexPath)
+            
+            
+            
+            // This is the class variable I mentioned above
+            if let cell = cell {
+                offsetForCollectionViewCellBeingMoved = offsetOfTouchFrom(recognizer: gesture, inCell: cell)
+            }
+            
+            // This is the vanilla location of the touch that alone would make the cell's center snap to your touch location
+            var location = gesture.location(in: movingCollectionView)
+            
+            /* These two lines add the offset calculated a couple lines up to
+             the normal location to make it so you can drag from any part of the
+             cell and have it stay where your finger is. */
+            
+            location.x += offsetForCollectionViewCellBeingMoved.x
+            location.y += offsetForCollectionViewCellBeingMoved.y
+            
+            movingCollectionView.updateInteractiveMovementTargetPosition(location)
+            
             cell?.stopWiggling()
             animatePickingUp(cell: cell)
         case .changed:
+            
+            var location = gesture.location(in: movingCollectionView)
+            
+            location.x += offsetForCollectionViewCellBeingMoved.x
+            location.y += offsetForCollectionViewCellBeingMoved.y
+            
             movingCollectionView.updateInteractiveMovementTargetPosition(location)
         default:
             gesture.state == .ended
@@ -773,10 +825,28 @@ extension MainViewController {
         
     }
     
+    func offsetOfTouchFrom(recognizer: UIGestureRecognizer, inCell cell: UICollectionViewCell) -> CGPoint {
+        
+        let locationOfTouchInCell = recognizer.location(in: cell)
+        
+        let cellCenterX = cell.frame.width / 2
+        let cellCenterY = cell.frame.height / 2
+        
+        let cellCenter = CGPoint(x: cellCenterX, y: cellCenterY)
+        
+        var offSetPoint = CGPoint.zero
+        
+        offSetPoint.y = cellCenter.y - locationOfTouchInCell.y
+        offSetPoint.x = cellCenter.x - locationOfTouchInCell.x
+        
+        return offSetPoint
+        
+    }
+    
     func animatePickingUp(cell: UICollectionViewCell?) {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { () -> Void in
-            cell?.alpha = 0.7
-            cell?.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            cell?.alpha = 0.99
+            cell?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         }, completion: { finished in
             
         })
@@ -791,21 +861,30 @@ extension MainViewController {
         })
     }
     
-    func startWigglingAllVisibleCells() {
+    func setVisibleCells(editing: Bool) {
         let cells = incomeSourcesCollectionView.visibleCells + expenseSourcesCollectionView.visibleCells + joyExpenseCategoriesCollectionView.visibleCells + riskExpenseCategoriesCollectionView.visibleCells + safeExpenseCategoriesCollectionView.visibleCells
         
         for cell in cells {
-            isEditing
-                ? cell.startWiggling()
-                : cell.stopWiggling()
+            (cell as? EditableCell)?.set(editing: editing)
         }
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: true)
-        viewModel?.set(editing: true)
+        guard editing != isEditing else { return }
+        
+        super.setEditing(editing, animated: animated)
+        
+        viewModel?.set(editing: editing)
+        
         updateCollectionViews()
-        startWigglingAllVisibleCells()
+        
+        setVisibleCells(editing: editing)
+        
+        UIView.animate(withDuration: 0.1) {
+            self.editDoneButton.alpha = editing ? 1.0 : 0.0
+            self.editDoneButtonHeightConstraint.constant = editing ? 30 : 0
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func updateCollectionViews() {

@@ -74,14 +74,14 @@ open class PagedCollectionViewLayout : UICollectionViewLayout {
         if columns == 1 {
             offsetX += (rect.width - itemSize.width) / 2.0
         } else {
-            marginX = Double((rect.width - columns.cgFloat * itemSize.width) / (columns.cgFloat - 1))
+            marginX = Double((rect.width - CGFloat(columns) * itemSize.width) / (CGFloat(columns) - 1))
         }
         
         var marginY = 0.0
         if self.rows == 1 {
             offsetY += (rect.height - itemSize.height) / 2.0
         } else {
-            marginY = Double((rect.height - rows.cgFloat * itemSize.height) / (rows.cgFloat - 1))
+            marginY = Double((rect.height - CGFloat(rows) * itemSize.height) / (CGFloat(rows) - 1))
         }
         
         let pageSize = rows * columns
@@ -97,8 +97,8 @@ open class PagedCollectionViewLayout : UICollectionViewLayout {
             
             let attr = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: number, section: 0))
             
-            attr.frame = CGRect(x: offsetX + collectionView.bounds.width * page.cgFloat + (marginX.cgFloat + itemSize.width) * col.cgFloat,
-                                y: offsetY + (marginY.cgFloat + itemSize.height) * row.cgFloat,
+            attr.frame = CGRect(x: offsetX + collectionView.bounds.width * CGFloat(page) + (CGFloat(marginX) + itemSize.width) * CGFloat(col),
+                                y: offsetY + (CGFloat(marginY) + itemSize.height) * CGFloat(row),
                                 width: itemSize.width,
                                 height: itemSize.height)
             
@@ -126,9 +126,19 @@ open class PagedCollectionViewLayout : UICollectionViewLayout {
         
         let size = collectionView.bounds.size
         let collectionViewWidth = collectionView.frame.size.width
-        let newSize = CGSize(width: numberOfPages.cgFloat * collectionViewWidth,
+        let newSize = CGSize(width: CGFloat(numberOfPages) * collectionViewWidth,
                              height: size.height)
         
         return newSize
+    }
+    
+    override open func layoutAttributesForInteractivelyMovingItem(at indexPath: IndexPath, withTargetPosition position: CGPoint) -> UICollectionViewLayoutAttributes {
+        
+        let attributes = super.layoutAttributesForInteractivelyMovingItem(at: indexPath, withTargetPosition: position)
+        
+        attributes.alpha = 0.99
+        attributes.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        
+        return attributes
     }
 }
