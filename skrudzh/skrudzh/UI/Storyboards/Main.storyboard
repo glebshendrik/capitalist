@@ -432,7 +432,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0h-VB-SFF">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                                                    <rect key="frame" x="56" y="0.0" width="16" height="16"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="16" id="YM5-FH-k60"/>
@@ -473,11 +473,11 @@
                                                                 <constraint firstItem="yri-3a-Es2" firstAttribute="trailing" secondItem="2G7-Ae-kuC" secondAttribute="trailing" constant="4" id="00n-HQ-MM3"/>
                                                                 <constraint firstAttribute="trailing" secondItem="2G7-Ae-kuC" secondAttribute="trailing" constant="4" id="3u4-ct-Vf7"/>
                                                                 <constraint firstAttribute="bottom" secondItem="2G7-Ae-kuC" secondAttribute="bottom" constant="4" id="KPj-ke-idQ"/>
+                                                                <constraint firstItem="Z0h-VB-SFF" firstAttribute="trailing" secondItem="2G7-Ae-kuC" secondAttribute="trailing" constant="4" id="V9B-pU-Bo5"/>
                                                                 <constraint firstItem="Z0h-VB-SFF" firstAttribute="top" secondItem="2G7-Ae-kuC" secondAttribute="top" constant="-4" id="X3M-iZ-k2I"/>
                                                                 <constraint firstItem="2G7-Ae-kuC" firstAttribute="top" secondItem="6JV-c1-Mfb" secondAttribute="top" constant="4" id="azY-k0-7kK"/>
                                                                 <constraint firstItem="yri-3a-Es2" firstAttribute="bottom" secondItem="2G7-Ae-kuC" secondAttribute="bottom" constant="4" id="lwh-Th-Uzf"/>
                                                                 <constraint firstItem="2G7-Ae-kuC" firstAttribute="leading" secondItem="6JV-c1-Mfb" secondAttribute="leading" constant="4" id="pJI-7A-UCh"/>
-                                                                <constraint firstItem="Z0h-VB-SFF" firstAttribute="leading" secondItem="2G7-Ae-kuC" secondAttribute="leading" constant="-4" id="rOA-Oz-jcs"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -905,7 +905,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGc-3q-ZoB">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                                                    <rect key="frame" x="104" y="0.0" width="16" height="16"/>
                                                                     <color key="backgroundColor" red="0.25490196079999999" green="0.29411764709999999" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="16" id="6uE-Pp-X32"/>
@@ -947,10 +947,10 @@
                                                                 <constraint firstItem="Sf4-qE-O4t" firstAttribute="bottom" secondItem="pfa-b1-5kr" secondAttribute="bottom" constant="4" id="BNw-1U-GX6"/>
                                                                 <constraint firstItem="bGc-3q-ZoB" firstAttribute="top" secondItem="pfa-b1-5kr" secondAttribute="top" constant="-4" id="JHp-uW-32o"/>
                                                                 <constraint firstAttribute="trailing" secondItem="pfa-b1-5kr" secondAttribute="trailing" constant="4" id="NXf-vU-sLi"/>
+                                                                <constraint firstItem="bGc-3q-ZoB" firstAttribute="trailing" secondItem="pfa-b1-5kr" secondAttribute="trailing" constant="4" id="XeS-5a-h6F"/>
                                                                 <constraint firstAttribute="bottom" secondItem="pfa-b1-5kr" secondAttribute="bottom" constant="4" id="htW-nd-BgF"/>
                                                                 <constraint firstItem="Sf4-qE-O4t" firstAttribute="trailing" secondItem="pfa-b1-5kr" secondAttribute="trailing" constant="4" id="jN9-ZH-AT3"/>
                                                                 <constraint firstItem="pfa-b1-5kr" firstAttribute="top" secondItem="9i7-j2-BCK" secondAttribute="top" constant="4" id="kzn-7n-Hgt"/>
-                                                                <constraint firstItem="bGc-3q-ZoB" firstAttribute="leading" secondItem="pfa-b1-5kr" secondAttribute="leading" constant="-4" id="lDd-9D-chJ"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -1072,7 +1072,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="553-dD-BSH">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                                                    <rect key="frame" x="104" y="0.0" width="16" height="16"/>
                                                                     <color key="backgroundColor" red="0.25490196079999999" green="0.29411764709999999" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="16" id="P50-41-f5d"/>
@@ -1110,10 +1110,10 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstItem="553-dD-BSH" firstAttribute="leading" secondItem="xLA-KY-BSI" secondAttribute="leading" constant="-4" id="4oq-R0-86d"/>
                                                                 <constraint firstItem="xLA-KY-BSI" firstAttribute="leading" secondItem="Bnf-VB-waC" secondAttribute="leading" constant="4" id="80O-ek-AbA"/>
                                                                 <constraint firstAttribute="trailing" secondItem="xLA-KY-BSI" secondAttribute="trailing" constant="4" id="9yH-5v-exy"/>
                                                                 <constraint firstAttribute="bottom" secondItem="xLA-KY-BSI" secondAttribute="bottom" constant="4" id="XDl-YT-eMs"/>
+                                                                <constraint firstItem="553-dD-BSH" firstAttribute="trailing" secondItem="xLA-KY-BSI" secondAttribute="trailing" constant="4" id="abh-hL-n36"/>
                                                                 <constraint firstItem="553-dD-BSH" firstAttribute="top" secondItem="xLA-KY-BSI" secondAttribute="top" constant="-4" id="edl-Sx-RgH"/>
                                                                 <constraint firstItem="HAE-Az-stL" firstAttribute="trailing" secondItem="xLA-KY-BSI" secondAttribute="trailing" constant="4" id="guW-To-4sC"/>
                                                                 <constraint firstItem="xLA-KY-BSI" firstAttribute="top" secondItem="Bnf-VB-waC" secondAttribute="top" constant="4" id="l9B-0a-zVh"/>
@@ -1242,17 +1242,17 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </collectionViewLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseCategoryCollectionViewCell" id="s22-FT-zsz" customClass="ExpenseCategoryCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
+                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseCategoryCollectionViewCell" id="s22-FT-zsz" customClass="ExpenseCategoryCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cm-uX-JxC">
+                                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cm-uX-JxC">
                                                                     <rect key="frame" x="0.0" y="0.0" width="68" height="101"/>
                                                                     <subviews>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIf-Jo-V5z" userLabel="shadow container">
+                                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIf-Jo-V5z" userLabel="shadow container">
                                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6y-lk-5Tt" userLabel="container">
@@ -1310,7 +1310,7 @@
                                                                                             <real key="value" value="8"/>
                                                                                         </userDefinedRuntimeAttribute>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                            <real key="value" value="20"/>
+                                                                                            <real key="value" value="27"/>
                                                                                         </userDefinedRuntimeAttribute>
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </view>
@@ -1341,7 +1341,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </view>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHB-Pe-tkt">
-                                                                            <rect key="frame" x="4" y="4" width="16" height="16"/>
+                                                                            <rect key="frame" x="48" y="4" width="16" height="16"/>
                                                                             <color key="backgroundColor" red="0.25490196078431371" green="0.29411764705882354" blue="0.41568627450980389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="16" id="A08-od-KOo"/>
@@ -1409,8 +1409,8 @@
                                                                         <constraint firstItem="LAz-Lj-e9A" firstAttribute="bottom" secondItem="VIf-Jo-V5z" secondAttribute="bottom" constant="-4" id="Y0k-lq-RRI"/>
                                                                         <constraint firstItem="Qad-rP-5H4" firstAttribute="top" secondItem="diJ-h1-w5n" secondAttribute="bottom" constant="2" id="ciJ-Wi-kXe"/>
                                                                         <constraint firstItem="50p-lr-aEi" firstAttribute="leading" secondItem="1cm-uX-JxC" secondAttribute="leading" id="dYW-R0-tqw"/>
+                                                                        <constraint firstItem="fHB-Pe-tkt" firstAttribute="trailing" secondItem="VIf-Jo-V5z" secondAttribute="trailing" constant="-4" id="dbR-CW-NC9"/>
                                                                         <constraint firstItem="diJ-h1-w5n" firstAttribute="top" secondItem="VIf-Jo-V5z" secondAttribute="bottom" constant="-4" id="lMh-OC-38Z"/>
-                                                                        <constraint firstItem="fHB-Pe-tkt" firstAttribute="leading" secondItem="VIf-Jo-V5z" secondAttribute="leading" constant="4" id="oOa-zb-DSK"/>
                                                                         <constraint firstItem="LAz-Lj-e9A" firstAttribute="trailing" secondItem="VIf-Jo-V5z" secondAttribute="trailing" constant="-4" id="t8C-sa-VTr"/>
                                                                     </constraints>
                                                                 </view>
@@ -1440,10 +1440,10 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YI7-Ws-lF3">
+                                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YI7-Ws-lF3">
                                                                     <rect key="frame" x="0.0" y="0.0" width="68" height="101"/>
                                                                     <subviews>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQd-8w-JCS" userLabel="shadow container">
+                                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQd-8w-JCS" userLabel="shadow container">
                                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="An6-Q1-Nkc" userLabel="container">
@@ -1599,17 +1599,17 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </collectionViewLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseCategoryCollectionViewCell" id="HIx-fB-aL6" customClass="ExpenseCategoryCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
+                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseCategoryCollectionViewCell" id="HIx-fB-aL6" customClass="ExpenseCategoryCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfK-sH-S8s">
+                                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfK-sH-S8s">
                                                                     <rect key="frame" x="0.0" y="0.0" width="68" height="101"/>
                                                                     <subviews>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ynM-cA-swt" userLabel="shadow container">
+                                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ynM-cA-swt" userLabel="shadow container">
                                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v89-V6-VMg" userLabel="container">
@@ -1698,7 +1698,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </view>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrJ-di-Q2q">
-                                                                            <rect key="frame" x="4" y="4" width="16" height="16"/>
+                                                                            <rect key="frame" x="48" y="4" width="16" height="16"/>
                                                                             <color key="backgroundColor" red="0.25490196079999999" green="0.29411764709999999" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="16" id="I49-Ds-QCv"/>
@@ -1754,10 +1754,10 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
+                                                                        <constraint firstItem="hrJ-di-Q2q" firstAttribute="trailing" secondItem="ynM-cA-swt" secondAttribute="trailing" constant="-4" id="01L-ez-FWD"/>
                                                                         <constraint firstItem="hrJ-di-Q2q" firstAttribute="top" secondItem="ynM-cA-swt" secondAttribute="top" constant="4" id="0Vh-cl-NqX"/>
                                                                         <constraint firstAttribute="trailing" secondItem="qY5-Lq-5aW" secondAttribute="trailing" id="B3b-tS-JBQ"/>
                                                                         <constraint firstItem="qY5-Lq-5aW" firstAttribute="top" secondItem="fYR-nt-BOQ" secondAttribute="bottom" constant="2" id="BZj-rG-ERu"/>
-                                                                        <constraint firstItem="hrJ-di-Q2q" firstAttribute="leading" secondItem="ynM-cA-swt" secondAttribute="leading" constant="4" id="FV9-kv-E3y"/>
                                                                         <constraint firstItem="ynM-cA-swt" firstAttribute="centerX" secondItem="RfK-sH-S8s" secondAttribute="centerX" id="GwF-C5-GMx"/>
                                                                         <constraint firstItem="fYR-nt-BOQ" firstAttribute="top" secondItem="ynM-cA-swt" secondAttribute="bottom" constant="-4" id="N66-Oz-e2V"/>
                                                                         <constraint firstItem="PM1-aW-xxu" firstAttribute="bottom" secondItem="ynM-cA-swt" secondAttribute="bottom" constant="-4" id="SEd-Pg-cNG"/>
@@ -1956,17 +1956,17 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </collectionViewLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseCategoryCollectionViewCell" id="lnQ-xQ-wgq" customClass="ExpenseCategoryCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
+                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseCategoryCollectionViewCell" id="lnQ-xQ-wgq" customClass="ExpenseCategoryCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULS-zn-fOt">
+                                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULS-zn-fOt">
                                                                     <rect key="frame" x="0.0" y="0.0" width="68" height="101"/>
                                                                     <subviews>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0M-uW-fwa" userLabel="shadow container">
+                                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0M-uW-fwa" userLabel="shadow container">
                                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZFM-hG-fqk" userLabel="container">
@@ -2055,7 +2055,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </view>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a5h-wl-bb2">
-                                                                            <rect key="frame" x="4" y="4" width="16" height="16"/>
+                                                                            <rect key="frame" x="48" y="4" width="16" height="16"/>
                                                                             <color key="backgroundColor" red="0.25490196079999999" green="0.29411764709999999" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="16" id="jZg-ed-u2x"/>
@@ -2124,7 +2124,7 @@
                                                                         <constraint firstItem="a5h-wl-bb2" firstAttribute="top" secondItem="D0M-uW-fwa" secondAttribute="top" constant="4" id="jIH-hS-lgz"/>
                                                                         <constraint firstItem="D0M-uW-fwa" firstAttribute="top" secondItem="ULS-zn-fOt" secondAttribute="top" id="l8X-VW-rZJ"/>
                                                                         <constraint firstItem="pcg-uH-PgO" firstAttribute="leading" secondItem="ULS-zn-fOt" secondAttribute="leading" id="lPE-Kx-zsD"/>
-                                                                        <constraint firstItem="a5h-wl-bb2" firstAttribute="leading" secondItem="D0M-uW-fwa" secondAttribute="leading" constant="4" id="sgZ-7J-Afm"/>
+                                                                        <constraint firstItem="a5h-wl-bb2" firstAttribute="trailing" secondItem="D0M-uW-fwa" secondAttribute="trailing" constant="-4" id="rMP-hO-4si"/>
                                                                         <constraint firstItem="EtU-hk-JRn" firstAttribute="leading" secondItem="ULS-zn-fOt" secondAttribute="leading" id="yUF-CN-fmp"/>
                                                                     </constraints>
                                                                 </view>
