@@ -568,15 +568,15 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
                                                                      to: destinationIndexPath)
         case expenseSourcesCollectionView:          moveExpenseSource(from: sourceIndexPath,
                                                                       to: destinationIndexPath)
-        case joyExpenseCategoriesCollectionView:    viewModel.moveExpenseCategory(from: sourceIndexPath,
-                                                                                  to: destinationIndexPath,
-                                                                                  basketType: .joy)
-        case riskExpenseCategoriesCollectionView:   viewModel.moveExpenseCategory(from: sourceIndexPath,
-                                                                                  to: destinationIndexPath,
-                                                                                  basketType: .risk)
-        case safeExpenseCategoriesCollectionView:   viewModel.moveExpenseCategory(from: sourceIndexPath,
-                                                                                  to: destinationIndexPath,
-                                                                                  basketType: .safe)
+        case joyExpenseCategoriesCollectionView:    moveExpenseCategory(from: sourceIndexPath,
+                                                                        to: destinationIndexPath,
+                                                                        basketType: .joy)
+        case riskExpenseCategoriesCollectionView:   moveExpenseCategory(from: sourceIndexPath,
+                                                                        to: destinationIndexPath,
+                                                                        basketType: .risk)
+        case safeExpenseCategoriesCollectionView:   moveExpenseCategory(from: sourceIndexPath,
+                                                                        to: destinationIndexPath,
+                                                                        basketType: .safe)
         default: return
         }
     }
@@ -608,6 +608,23 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
             self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка кошельков", theme: .error)
         }.finally {
             self.set(self.expenseSourcesActivityIndicator, hidden: true)
+        }
+    }
+    
+    private func moveExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, basketType: BasketType) {
+        
+        set(expenseCategoriesActivityIndicator(by: basketType), hidden: false)
+        firstly {
+            viewModel.moveExpenseCategory(from: sourceIndexPath,
+                                          to: destinationIndexPath,
+                                          basketType: basketType)
+            }.done {
+                self.update(self.expenseCategoriesCollectionView(by: basketType))
+            }
+            .catch { _ in
+                self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка категорий трат", theme: .error)
+            }.finally {
+                self.set(self.expenseCategoriesActivityIndicator(by: basketType), hidden: true)
         }
     }
     

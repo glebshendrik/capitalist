@@ -36,6 +36,7 @@ struct APIResourcePath {
         case .showExpenseCategory(let id):                  return "/expense_categories/\(id)"
         case .indexExpenseCategories(let basketId):         return "/baskets/\(basketId)/expense_categories"
         case .updateExpenseCategory(let form):              return "/expense_categories/\(form.id)"
+        case .updateExpenseCategoryPosition(let form):       return "/expense_categories/\(form.id)"
         case .destroyExpenseCategory(let id):               return "/expense_categories/\(id)"
         case .indexIcons:                                   return "/icons"
         case .indexBaskets(let userId):                     return "/users/\(userId)/baskets"

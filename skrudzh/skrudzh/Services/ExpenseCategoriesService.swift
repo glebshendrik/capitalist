@@ -26,6 +26,10 @@ class ExpenseCategoriesService : Service, ExpenseCategoriesServiceProtocol {
         return request(APIResource.updateExpenseCategory(form: updatingForm))
     }
     
+    func updatePosition(with updatingForm: ExpenseCategoryPositionUpdatingForm) -> Promise<Void> {
+        return request(APIResource.updateExpenseCategoryPosition(form: updatingForm))
+    }
+    
     func destroy(by id: Int) -> Promise<Void> {
         return request(APIResource.destroyExpenseCategory(id: id))
     }

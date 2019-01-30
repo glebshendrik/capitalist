@@ -53,6 +53,7 @@ enum APIResource: URLRequestConvertible {
     case showExpenseCategory(id: Int)
     case indexExpenseCategories(basketId: Int)
     case updateExpenseCategory(form: ExpenseCategoryUpdatingForm)
+    case updateExpenseCategoryPosition(form: ExpenseCategoryPositionUpdatingForm)
     case destroyExpenseCategory(id: Int)
     
     // Icons

@@ -160,15 +160,49 @@ class MainViewModel {
         }
     }
     
-    func moveExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, basketType: BasketType) {
+    func moveJoyExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Promise<Void> {
+        
+        let movingExpenseCategory = joyExpenseCategoryViewModels.remove(at: sourceIndexPath.item)
+        joyExpenseCategoryViewModels.insert(movingExpenseCategory, at: destinationIndexPath.item)
+        
+        return move(expenseCategory: movingExpenseCategory.expenseCategory, to: destinationIndexPath.item)
+    }
+    
+    func moveRiskExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Promise<Void> {
+        
+        let movingExpenseCategory = riskExpenseCategoryViewModels.remove(at: sourceIndexPath.item)
+        riskExpenseCategoryViewModels.insert(movingExpenseCategory, at: destinationIndexPath.item)
+        
+        return move(expenseCategory: movingExpenseCategory.expenseCategory, to: destinationIndexPath.item)
+    }
+    
+    func moveSafeExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Promise<Void> {
+        
+        let movingExpenseCategory = safeExpenseCategoryViewModels.remove(at: sourceIndexPath.item)
+        safeExpenseCategoryViewModels.insert(movingExpenseCategory, at: destinationIndexPath.item)
+        
+        return move(expenseCategory: movingExpenseCategory.expenseCategory, to: destinationIndexPath.item)
+    }
+    
+    func move(expenseCategory: ExpenseCategory, to position: Int) -> Promise<Void> {
+        let updatePositionForm = ExpenseCategoryPositionUpdatingForm(id: expenseCategory.id,
+                                                                     position: position)
+        return  firstly {
+                    expenseCategoriesCoordinator.updatePosition(with: updatePositionForm)
+                }.then {
+                    self.loadExpenseCategories(by: expenseCategory.basketType)
+                }
+    }
+    
+    func moveExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, basketType: BasketType) -> Promise<Void> {
         
         switch basketType {
         case .joy:
-            joyExpenseCategoryViewModels.insert(joyExpenseCategoryViewModels.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+            return moveJoyExpenseCategory(from: sourceIndexPath, to: destinationIndexPath)
         case .risk:
-            riskExpenseCategoryViewModels.insert(riskExpenseCategoryViewModels.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+            return moveRiskExpenseCategory(from: sourceIndexPath, to: destinationIndexPath)
         case .safe:
-            safeExpenseCategoryViewModels.insert(safeExpenseCategoryViewModels.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+            return moveSafeExpenseCategory(from: sourceIndexPath, to: destinationIndexPath)
         }
     }
     

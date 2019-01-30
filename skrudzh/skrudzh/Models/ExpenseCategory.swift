@@ -18,6 +18,7 @@ struct ExpenseCategory : Decodable {
     let monthlyPlannedCents: Int?
     let monthlySpentCents: Int
     let monthlySpentCurrency: String
+    let order: Int
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -29,6 +30,7 @@ struct ExpenseCategory : Decodable {
         case monthlyPlannedCents = "monthly_planned_cents"
         case monthlySpentCents = "monthly_spent_cents"
         case monthlySpentCurrency = "monthly_spent_currency"
+        case order = "row_order"
     }
     
 }
@@ -83,5 +85,14 @@ struct ExpenseCategoryUpdatingForm : Encodable {
         try container.encode(iconURL, forKey: .iconURL)
         try container.encode(monthlyPlannedCurrency, forKey: .monthlyPlannedCurrency)
         try container.encode(monthlyPlannedCents, forKey: .monthlyPlannedCents)
+    }
+}
+
+struct ExpenseCategoryPositionUpdatingForm : Encodable {
+    let id: Int
+    let position: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case position = "row_order_position"
     }
 }

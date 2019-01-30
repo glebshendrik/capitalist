@@ -47,6 +47,7 @@ struct APIResourceKeyPath {
              .showExpenseCategory,
              .indexExpenseCategories,
              .updateExpenseCategory,
+             .updateExpenseCategoryPosition,
              .destroyExpenseCategory:
             return ResourceKeyPath(singular: "expense_category", plural: "expense_categories")
         case .indexIcons:

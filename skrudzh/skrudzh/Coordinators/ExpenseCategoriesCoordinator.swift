@@ -51,6 +51,10 @@ class ExpenseCategoriesCoordinator : ExpenseCategoriesCoordinatorProtocol {
         return expenseCategoriesService.update(with: updatingForm)
     }
     
+    func updatePosition(with updatingForm: ExpenseCategoryPositionUpdatingForm) -> Promise<Void> {
+        return expenseCategoriesService.updatePosition(with: updatingForm)
+    }
+    
     func destroy(by id: Int) -> Promise<Void> {
         return expenseCategoriesService.destroy(by: id)
     }
