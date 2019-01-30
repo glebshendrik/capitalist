@@ -17,6 +17,7 @@ struct ExpenseSource : Decodable {
     let iconURL: URL?
     let isGoal: Bool
     let goalAmountCents: Int?
+    let order: Int
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -27,6 +28,7 @@ struct ExpenseSource : Decodable {
         case iconURL = "icon_url"
         case isGoal = "is_goal"
         case goalAmountCents = "goal_amount_cents"
+        case order = "row_order"
     }
     
 }
@@ -73,3 +75,13 @@ struct ExpenseSourceUpdatingForm : Encodable {
         case goalAmountCents = "goal_amount_cents"
     }
 }
+
+struct ExpenseSourcePositionUpdatingForm : Encodable {
+    let id: Int
+    let position: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case position = "row_order_position"
+    }
+}
+

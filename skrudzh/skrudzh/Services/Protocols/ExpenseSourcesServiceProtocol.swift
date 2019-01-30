@@ -14,5 +14,6 @@ protocol ExpenseSourcesServiceProtocol {
     func show(by id: Int) -> Promise<ExpenseSource>
     func index(for userId: Int) -> Promise<[ExpenseSource]>
     func update(with updatingForm: ExpenseSourceUpdatingForm) -> Promise<Void>
+    func updatePosition(with updatingForm: ExpenseSourcePositionUpdatingForm) -> Promise<Void>
     func destroy(by id: Int) -> Promise<Void>
 }

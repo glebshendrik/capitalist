@@ -37,6 +37,7 @@ enum APIResource: URLRequestConvertible {
     case showIncomeSource(id: Int)
     case indexIncomeSources(userId: Int)
     case updateIncomeSource(form: IncomeSourceUpdatingForm)
+    case updateIncomeSourcePosition(form: IncomeSourcePositionUpdatingForm)
     case destroyIncomeSource(id: Int)
     
     // ExpenseSources
@@ -44,6 +45,7 @@ enum APIResource: URLRequestConvertible {
     case showExpenseSource(id: Int)
     case indexExpenseSources(userId: Int)
     case updateExpenseSource(form: ExpenseSourceUpdatingForm)
+    case updateExpenseSourcePosition(form: ExpenseSourcePositionUpdatingForm)
     case destroyExpenseSource(id: Int)
     
     // ExpenseCategories

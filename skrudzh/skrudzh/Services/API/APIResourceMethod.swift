@@ -38,6 +38,9 @@ struct APIResourceMethod {
              .updateExpenseSource,
              .updateExpenseCategory:
             return .put
+        case .updateIncomeSourcePosition,
+             .updateExpenseSourcePosition:
+            return .patch
         case .destroySession,
              .destroyIncomeSource,
              .destroyExpenseSource,

@@ -33,12 +33,14 @@ struct APIResourceKeyPath {
              .showIncomeSource,
              .indexIncomeSources,
              .updateIncomeSource,
+             .updateIncomeSourcePosition,
              .destroyIncomeSource:
             return ResourceKeyPath(singular: "income_source", plural: "income_sources")
         case .createExpenseSource,
              .showExpenseSource,
              .indexExpenseSources,
              .updateExpenseSource,
+             .updateExpenseSourcePosition,
              .destroyExpenseSource:
             return ResourceKeyPath(singular: "expense_source", plural: "expense_sources")
         case .createExpenseCategory,

@@ -13,12 +13,14 @@ struct IncomeSource : Decodable {
     let name: String
     let currency: String?
     let iconURL: URL?
+    let order: Int
     
     enum CodingKeys: String, CodingKey {
         case id
         case name
         case currency
         case iconURL = "icon_url"
+        case order = "row_order"
     }
 
 }
@@ -40,5 +42,14 @@ struct IncomeSourceUpdatingForm : Encodable {
     
     enum CodingKeys: String, CodingKey {
         case name
+    }
+}
+
+struct IncomeSourcePositionUpdatingForm : Encodable {
+    let id: Int
+    let position: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case position = "row_order_position"
     }
 }

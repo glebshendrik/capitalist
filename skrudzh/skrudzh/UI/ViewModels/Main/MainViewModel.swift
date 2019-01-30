@@ -136,12 +136,28 @@ class MainViewModel {
         self.editing = editing
     }
     
-    func moveIncomeSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        incomeSourceViewModels.insert(incomeSourceViewModels.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+    func moveIncomeSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Promise<Void> {
+        let movingIncomeSource = incomeSourceViewModels.remove(at: sourceIndexPath.item)
+        incomeSourceViewModels.insert(movingIncomeSource, at: destinationIndexPath.item)
+        
+        return  firstly {
+                    incomeSourcesCoordinator.updatePosition(with: IncomeSourcePositionUpdatingForm(id: movingIncomeSource.id,
+                                                                                                   position: destinationIndexPath.item))
+                }.then {
+                    self.loadIncomeSources()
+                }
     }
     
-    func moveExpenseSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        expenseSourceViewModels.insert(expenseSourceViewModels.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+    func moveExpenseSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Promise<Void> {
+        let movingExpenseSource = expenseSourceViewModels.remove(at: sourceIndexPath.item)
+        expenseSourceViewModels.insert(movingExpenseSource, at: destinationIndexPath.item)
+        
+        return  firstly {
+            expenseSourcesCoordinator.updatePosition(with: ExpenseSourcePositionUpdatingForm(id: movingExpenseSource.id,
+                                                                                           position: destinationIndexPath.item))
+            }.then {
+                self.loadExpenseSources()
+        }
     }
     
     func moveExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, basketType: BasketType) {

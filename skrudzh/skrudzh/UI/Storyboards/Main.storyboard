@@ -275,18 +275,18 @@
                                             <action selector="didTapSaveButton:" destination="XSV-72-Slk" eventType="touchUpInside" id="NLr-ph-zlq"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Больше не показывать это сообщение" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yK-FS-41K">
-                                        <rect key="frame" x="78" y="496.5" width="221" height="14.5"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
-                                        <color key="textColor" red="0.2470588235" green="0.27450980390000002" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Больше не показывать" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yK-FS-41K">
+                                        <rect key="frame" x="112.5" y="494" width="152" height="17"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                        <color key="textColor" red="0.52156862745098043" green="0.5725490196078431" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NcJ-tH-sxm" customClass="BEMCheckBox">
-                                        <rect key="frame" x="48" y="489.5" width="25" height="25"/>
+                                        <rect key="frame" x="88.5" y="493.5" width="16" height="16"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="fEQ-4U-7a1"/>
-                                            <constraint firstAttribute="width" constant="25" id="u3b-6N-QmY"/>
+                                            <constraint firstAttribute="height" constant="16" id="fEQ-4U-7a1"/>
+                                            <constraint firstAttribute="width" constant="16" id="u3b-6N-QmY"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="NO"/>
@@ -294,10 +294,13 @@
                                                 <real key="value" value="2"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
-                                                <color key="value" red="0.42044270038604736" green="0.57721489667892456" blue="0.98310011625289917" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.52156862745098043" green="0.5725490196078431" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="onCheckColor">
                                                 <color key="value" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                <color key="value" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -315,11 +318,11 @@
                                     <constraint firstAttribute="trailing" secondItem="HJc-Cd-Ezl" secondAttribute="trailing" constant="16" id="TZp-jF-fVz"/>
                                     <constraint firstAttribute="trailing" secondItem="qU9-MC-rol" secondAttribute="trailing" constant="16" id="TgS-kE-6IX"/>
                                     <constraint firstAttribute="trailing" secondItem="Slf-At-r0v" secondAttribute="trailing" constant="16" id="VZT-6X-ekm"/>
-                                    <constraint firstItem="NcJ-tH-sxm" firstAttribute="centerY" secondItem="4yK-FS-41K" secondAttribute="centerY" constant="-2" id="Xn4-1g-wUf"/>
+                                    <constraint firstItem="NcJ-tH-sxm" firstAttribute="centerY" secondItem="4yK-FS-41K" secondAttribute="centerY" constant="-1" id="Xn4-1g-wUf"/>
                                     <constraint firstItem="Slf-At-r0v" firstAttribute="top" secondItem="qU9-MC-rol" secondAttribute="bottom" constant="32" id="XzA-nI-aQu"/>
                                     <constraint firstAttribute="bottom" secondItem="Slf-At-r0v" secondAttribute="bottom" constant="60" id="e2r-64-3kw"/>
                                     <constraint firstItem="4yK-FS-41K" firstAttribute="centerX" secondItem="yRb-kY-V8o" secondAttribute="centerX" constant="17" id="e77-Co-WkT"/>
-                                    <constraint firstItem="4yK-FS-41K" firstAttribute="leading" secondItem="NcJ-tH-sxm" secondAttribute="trailing" constant="5" id="eph-YB-8MJ"/>
+                                    <constraint firstItem="4yK-FS-41K" firstAttribute="leading" secondItem="NcJ-tH-sxm" secondAttribute="trailing" constant="8" id="eph-YB-8MJ"/>
                                     <constraint firstItem="qU9-MC-rol" firstAttribute="leading" secondItem="yRb-kY-V8o" secondAttribute="leading" constant="16" id="nTc-wY-cTQ"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -3919,7 +3922,7 @@
         <image name="remove-icon" width="17" height="20"/>
         <image name="risk-large-image" width="146" height="122"/>
         <image name="settings-menu-item-icon" width="16" height="16"/>
-        <image name="small-cross-icon" width="7" height="7"/>
+        <image name="small-cross-icon" width="8" height="8"/>
         <image name="smile-icon" width="23" height="23"/>
         <image name="statistics-menu-item-icon" width="16" height="16"/>
         <image name="type-icon" width="14" height="14"/>

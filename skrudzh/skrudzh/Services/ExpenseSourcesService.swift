@@ -26,6 +26,10 @@ class ExpenseSourcesService : Service, ExpenseSourcesServiceProtocol {
         return request(APIResource.updateExpenseSource(form: updatingForm))
     }
     
+    func updatePosition(with updatingForm: ExpenseSourcePositionUpdatingForm) -> Promise<Void> {
+        return request(APIResource.updateExpenseSourcePosition(form: updatingForm))
+    }
+    
     func destroy(by id: Int) -> Promise<Void> {
         return request(APIResource.destroyExpenseSource(id: id))
     }

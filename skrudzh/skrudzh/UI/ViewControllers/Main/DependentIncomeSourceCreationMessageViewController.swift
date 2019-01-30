@@ -20,6 +20,7 @@ class DependentIncomeSourceCreationMessageViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         updateUI()
     }
     
@@ -28,6 +29,10 @@ class DependentIncomeSourceCreationMessageViewController : UIViewController {
             _ = UIFlowManager.reach(point: point)
         }
         dismiss(animated: true, completion: nil)
+    }
+    
+    private func setupUI() {
+        checkBox.boxType = .square
     }
     
     private func updateUI() {

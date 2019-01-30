@@ -213,7 +213,8 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
             self.update(self.incomeSourcesCollectionView,
                         scrollToEnd: scrollToEndWhenUpdated)
         }
-        .catch { _ in
+        .catch { e in
+            print(e)
             self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки источников доходов", theme: .error)
         }.finally {
             self.set(self.incomeSourcesActivityIndicator, hidden: true)
@@ -563,10 +564,10 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
         switch collectionView {
-        case incomeSourcesCollectionView:           viewModel.moveIncomeSource(from: sourceIndexPath,
-                                                                               to: destinationIndexPath)
-        case expenseSourcesCollectionView:          viewModel.moveExpenseSource(from: sourceIndexPath,
-                                                                                to: destinationIndexPath)
+        case incomeSourcesCollectionView:           moveIncomeSource(from: sourceIndexPath,
+                                                                     to: destinationIndexPath)
+        case expenseSourcesCollectionView:          moveExpenseSource(from: sourceIndexPath,
+                                                                      to: destinationIndexPath)
         case joyExpenseCategoriesCollectionView:    viewModel.moveExpenseCategory(from: sourceIndexPath,
                                                                                   to: destinationIndexPath,
                                                                                   basketType: .joy)
@@ -577,6 +578,36 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
                                                                                   to: destinationIndexPath,
                                                                                   basketType: .safe)
         default: return
+        }
+    }
+    
+    private func moveIncomeSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        set(incomeSourcesActivityIndicator, hidden: false)
+        firstly {
+            viewModel.moveIncomeSource(from: sourceIndexPath,
+                                       to: destinationIndexPath)
+        }.done {
+            self.update(self.incomeSourcesCollectionView)
+        }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка источников доходов", theme: .error)
+        }.finally {
+            self.set(self.incomeSourcesActivityIndicator, hidden: true)
+        }
+    }
+    
+    private func moveExpenseSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        set(expenseSourcesActivityIndicator, hidden: false)
+        firstly {
+            viewModel.moveExpenseSource(from: sourceIndexPath,
+                                        to: destinationIndexPath)
+        }.done {
+            self.update(self.expenseSourcesCollectionView)
+        }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка кошельков", theme: .error)
+        }.finally {
+            self.set(self.expenseSourcesActivityIndicator, hidden: true)
         }
     }
     

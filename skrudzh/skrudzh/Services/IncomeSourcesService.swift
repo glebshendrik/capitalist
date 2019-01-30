@@ -26,6 +26,10 @@ class IncomeSourcesService : Service, IncomeSourcesServiceProtocol {
         return request(APIResource.updateIncomeSource(form: updatingForm))
     }
     
+    func updatePosition(with updatingForm: IncomeSourcePositionUpdatingForm) -> Promise<Void> {
+        return request(APIResource.updateIncomeSourcePosition(form: updatingForm))
+    }
+    
     func destroy(by id: Int) -> Promise<Void> {
         return request(APIResource.destroyIncomeSource(id: id))
     }
