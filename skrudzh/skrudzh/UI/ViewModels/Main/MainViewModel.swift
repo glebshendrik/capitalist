@@ -153,11 +153,11 @@ class MainViewModel {
         expenseSourceViewModels.insert(movingExpenseSource, at: destinationIndexPath.item)
         
         return  firstly {
-            expenseSourcesCoordinator.updatePosition(with: ExpenseSourcePositionUpdatingForm(id: movingExpenseSource.id,
+                    expenseSourcesCoordinator.updatePosition(with: ExpenseSourcePositionUpdatingForm(id: movingExpenseSource.id,
                                                                                            position: destinationIndexPath.item))
-            }.then {
-                self.loadExpenseSources()
-        }
+                }.then {
+                    self.loadExpenseSources()
+                }
     }
     
     func moveJoyExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Promise<Void> {
@@ -204,6 +204,30 @@ class MainViewModel {
         case .safe:
             return moveSafeExpenseCategory(from: sourceIndexPath, to: destinationIndexPath)
         }
+    }
+    
+    func removeIncomeSource(by id: Int) -> Promise<Void> {
+        return  firstly {
+                    incomeSourcesCoordinator.destroy(by: id)
+                }.then {
+                    self.loadIncomeSources()
+                }
+    }
+    
+    func removeExpenseSource(by id: Int) -> Promise<Void> {
+        return  firstly {
+                    expenseSourcesCoordinator.destroy(by: id)
+                }.then {
+                    self.loadExpenseSources()
+                }
+    }
+    
+    func removeExpenseCategory(by id: Int, basketType: BasketType) -> Promise<Void> {
+        return  firstly {
+                    expenseCategoriesCoordinator.destroy(by: id)
+                }.then {
+                    self.loadExpenseCategories(by: basketType)
+                }
     }
     
     private func numberOfExpenseCategories(with basketType: BasketType) -> Int {

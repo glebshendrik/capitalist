@@ -85,6 +85,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
+        appMovedToForeground()
     }
     
     @IBAction func didTapJoyBasket(_ sender: Any) {
@@ -222,21 +223,27 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
     }
     
     private func didSelectIncomeSource(at indexPath: IndexPath) {
+        guard viewModel.isAddIncomeSourceItem(indexPath: indexPath) else { return }
+        
+        showNewIncomeSourceScreen()
+    }
+    
+    private func showNewIncomeSourceScreen() {
+        showEditScreen(incomeSource: nil)
+    }
+    
+    private func showEditScreen(incomeSource: IncomeSource?) {
         if  let incomeSourceEditNavigationController = router.viewController(.IncomeSourceEditNavigationController) as? UINavigationController,
             let incomeSourceEditViewController = incomeSourceEditNavigationController.topViewController as? IncomeSourceEditInputProtocol {
             
             incomeSourceEditViewController.set(delegate: self)
             
-            if let selectedIncomeSource = viewModel.incomeSourceViewModel(at: indexPath)?.incomeSource {
-                
-                incomeSourceEditViewController.set(incomeSource: selectedIncomeSource)
-                
-            } else if !viewModel.isAddIncomeSourceItem(indexPath: indexPath) {
-                return
+            if let incomeSource = incomeSource {
+                incomeSourceEditViewController.set(incomeSource: incomeSource)
             }
             
             present(incomeSourceEditNavigationController, animated: true, completion: nil)
-        }        
+        }
     }
     
     func incomeSourceCollectionViewCell(forItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -255,6 +262,35 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
         
         cell.viewModel = incomeSourceViewModel
         return cell
+    }
+    
+    private func moveIncomeSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        set(incomeSourcesActivityIndicator, hidden: false)
+        firstly {
+            viewModel.moveIncomeSource(from: sourceIndexPath,
+                                   to: destinationIndexPath)
+        }.done {
+            self.update(self.incomeSourcesCollectionView)
+        }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка источников доходов", theme: .error)
+        }.finally {
+            self.set(self.incomeSourcesActivityIndicator, hidden: true)
+        }
+    }
+    
+    private func removeIncomeSource(by id: Int) {
+        set(incomeSourcesActivityIndicator, hidden: false)
+        firstly {
+            viewModel.removeIncomeSource(by: id)
+        }.done {
+            self.update(self.incomeSourcesCollectionView)
+        }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления источника дохода", theme: .error)
+        }.finally {
+            self.set(self.incomeSourcesActivityIndicator, hidden: true)
+        }
     }
 }
 
@@ -287,17 +323,22 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
     }
     
     private func didSelectExpenseSource(at indexPath: IndexPath) {
+        guard viewModel.isAddExpenseSourceItem(indexPath: indexPath) else { return }
+        showNewExpenseSourceScreen()
+    }
+    
+    private func showNewExpenseSourceScreen() {
+        showEditScreen(expenseSource: nil)
+    }
+    
+    private func showEditScreen(expenseSource: ExpenseSource?) {
         if  let expenseSourceEditNavigationController = router.viewController(.ExpenseSourceEditNavigationController) as? UINavigationController,
             let expenseSourceEditViewController = expenseSourceEditNavigationController.topViewController as? ExpenseSourceEditInputProtocol {
             
             expenseSourceEditViewController.set(delegate: self)
             
-            if let selectedExpenseSource = viewModel.expenseSourceViewModel(at: indexPath)?.expenseSource {
-                
-                expenseSourceEditViewController.set(expenseSource: selectedExpenseSource)
-                
-            } else if !viewModel.isAddExpenseSourceItem(indexPath: indexPath) {
-                return
+            if let expenseSource = expenseSource {
+                expenseSourceEditViewController.set(expenseSource: expenseSource)
             }
             
             present(expenseSourceEditNavigationController, animated: true, completion: nil)
@@ -333,6 +374,35 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
         }
         
         return UICollectionViewCell()
+    }
+    
+    private func moveExpenseSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        set(expenseSourcesActivityIndicator, hidden: false)
+        firstly {
+            viewModel.moveExpenseSource(from: sourceIndexPath,
+                                        to: destinationIndexPath)
+            }.done {
+                self.update(self.expenseSourcesCollectionView)
+            }
+            .catch { _ in
+                self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка кошельков", theme: .error)
+            }.finally {
+                self.set(self.expenseSourcesActivityIndicator, hidden: true)
+        }
+    }
+    
+    private func removeExpenseSource(by id: Int) {
+        set(expenseSourcesActivityIndicator, hidden: false)
+        firstly {
+            viewModel.removeExpenseSource(by: id)
+        }.done {
+            self.update(self.expenseSourcesCollectionView)
+        }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления кошелька", theme: .error)
+        }.finally {
+            self.set(self.expenseSourcesActivityIndicator, hidden: true)
+        }
     }
 }
 
@@ -455,20 +525,26 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
     }
     
     private func didSelectExpenseCategory(at indexPath: IndexPath, basketType: BasketType) {
+        guard viewModel.isAddCategoryItem(indexPath: indexPath, basketType: basketType) else { return }
         
+        showNewExpenseCategoryScreen(basketType: basketType)
+    }
+    
+    private func showNewExpenseCategoryScreen(basketType: BasketType) {
+        showEditScreen(expenseCategory: nil, basketType: basketType)
+    }
+    
+    private func showEditScreen(expenseCategory: ExpenseCategory?, basketType: BasketType) {
         if  let expenseCategoryEditNavigationController = router.viewController(.ExpenseCategoryEditNavigationController) as? UINavigationController,
             let expenseCategoryEditViewController = expenseCategoryEditNavigationController.topViewController as? ExpenseCategoryEditInputProtocol {
-
+            
             expenseCategoryEditViewController.set(delegate: self)
             expenseCategoryEditViewController.set(basketType: basketType)
             
-            if let selectedExpenseCategory = viewModel.expenseCategoryViewModel(at: indexPath, basketType: basketType)?.expenseCategory {
-                
-                expenseCategoryEditViewController.set(expenseCategory: selectedExpenseCategory)
-            } else if !viewModel.isAddCategoryItem(indexPath: indexPath, basketType: basketType) {
-                return
+            if let expenseCategory = expenseCategory {
+                expenseCategoryEditViewController.set(expenseCategory: expenseCategory)
             }
-                        
+            
             present(expenseCategoryEditNavigationController, animated: true, completion: nil)
         }
     }
@@ -492,6 +568,37 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
         
         cell.viewModel = expenseCategoryViewModel
         return cell
+    }
+    
+    private func moveExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, basketType: BasketType) {
+        
+        set(expenseCategoriesActivityIndicator(by: basketType), hidden: false)
+        firstly {
+            viewModel.moveExpenseCategory(from: sourceIndexPath,
+                                          to: destinationIndexPath,
+                                          basketType: basketType)
+            }.done {
+                self.update(self.expenseCategoriesCollectionView(by: basketType))
+            }
+            .catch { _ in
+                self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка категорий трат", theme: .error)
+            }.finally {
+                self.set(self.expenseCategoriesActivityIndicator(by: basketType), hidden: true)
+        }
+    }
+    
+    private func removeExpenseCategory(by id: Int, basketType: BasketType) {
+        set(expenseCategoriesActivityIndicator(by: basketType), hidden: false)
+        firstly {
+            viewModel.removeExpenseCategory(by: id, basketType: basketType)
+        }.done {
+            self.update(self.expenseCategoriesCollectionView(by: basketType))
+        }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления категории трат", theme: .error)
+        }.finally {
+            self.set(self.expenseCategoriesActivityIndicator(by: basketType), hidden: true)
+        }
     }
 }
 
@@ -581,53 +688,6 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
-    private func moveIncomeSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        set(incomeSourcesActivityIndicator, hidden: false)
-        firstly {
-            viewModel.moveIncomeSource(from: sourceIndexPath,
-                                       to: destinationIndexPath)
-        }.done {
-            self.update(self.incomeSourcesCollectionView)
-        }
-        .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка источников доходов", theme: .error)
-        }.finally {
-            self.set(self.incomeSourcesActivityIndicator, hidden: true)
-        }
-    }
-    
-    private func moveExpenseSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        set(expenseSourcesActivityIndicator, hidden: false)
-        firstly {
-            viewModel.moveExpenseSource(from: sourceIndexPath,
-                                        to: destinationIndexPath)
-        }.done {
-            self.update(self.expenseSourcesCollectionView)
-        }
-        .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка кошельков", theme: .error)
-        }.finally {
-            self.set(self.expenseSourcesActivityIndicator, hidden: true)
-        }
-    }
-    
-    private func moveExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, basketType: BasketType) {
-        
-        set(expenseCategoriesActivityIndicator(by: basketType), hidden: false)
-        firstly {
-            viewModel.moveExpenseCategory(from: sourceIndexPath,
-                                          to: destinationIndexPath,
-                                          basketType: basketType)
-            }.done {
-                self.update(self.expenseCategoriesCollectionView(by: basketType))
-            }
-            .catch { _ in
-                self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка категорий трат", theme: .error)
-            }.finally {
-                self.set(self.expenseCategoriesActivityIndicator(by: basketType), hidden: true)
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard !isEditing else { return }
         
@@ -668,14 +728,57 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
 
 extension MainViewController : EditableCellDelegate {
     func didTapDeleteButton(cell: EditableCell) {
+        var alertTitle = ""
+        var removeAction: ((UIAlertAction) -> Void)? = nil
         
+        if let incomeSourceId = (cell as? IncomeSourceCollectionViewCell)?.viewModel?.id {
+            alertTitle = "Удалить источник доходов?"
+            removeAction = { _ in
+                self.removeIncomeSource(by: incomeSourceId)
+            }
+        }
+        if let expenseSourceId = (cell as? ExpenseSourceCollectionViewCell)?.viewModel?.id {
+            alertTitle = "Удалить кошелек?"
+            removeAction = { _ in
+                self.removeExpenseSource(by: expenseSourceId)
+            }
+        }
+        if let expenseCategoryViewModel = (cell as? ExpenseCategoryCollectionViewCell)?.viewModel {
+            alertTitle = "Удалить категорию трат?"
+            removeAction = { _ in
+                self.removeExpenseCategory(by: expenseCategoryViewModel.id, basketType: expenseCategoryViewModel.expenseCategory.basketType)
+            }
+        }
+        
+        let alertController = UIAlertController(title: alertTitle,
+                                                message: nil,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(title: "Удалить",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: removeAction)
+        
+        alertController.addAction(title: "Отмена",
+                                  style: .cancel,
+                                  isEnabled: true,
+                                  handler: nil)
+        
+        present(alertController, animated: true)
     }
     
     func didTapEditButton(cell: EditableCell) {
-        
-    }
-    
-    
+        if let incomeSource = (cell as? IncomeSourceCollectionViewCell)?.viewModel?.incomeSource {
+            showEditScreen(incomeSource: incomeSource)
+        }
+        if let expenseSource = (cell as? ExpenseSourceCollectionViewCell)?.viewModel?.expenseSource {
+            showEditScreen(expenseSource: expenseSource)
+        }
+        if let expenseCategoryViewModel = (cell as? ExpenseCategoryCollectionViewCell)?.viewModel {
+            showEditScreen(expenseCategory: expenseCategoryViewModel.expenseCategory,
+                           basketType: expenseCategoryViewModel.expenseCategory.basketType)
+        }
+    }    
 }
 
 extension MainViewController {
@@ -824,7 +927,7 @@ extension MainViewController {
     }
 }
 
-extension MainViewController : UICollectionViewDelegateFlowLayout {
+extension MainViewController {
     
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         return true
