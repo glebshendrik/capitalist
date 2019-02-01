@@ -16,7 +16,7 @@ class ExpenseSourceCollectionViewCell : EditableCell {
     @IBOutlet weak var iconImageView: UIImageView!
     
     var placeholderName: String {
-        return "wallet-icon"
+        return "wallet-default-icon"
     }
     
     var imageTintColor: UIColor {

@@ -69,12 +69,23 @@ class ExpenseCategoryCollectionViewCell : EditableCell {
             }
         }
         
+        func defaultIconName() -> String {
+            switch viewModel.expenseCategory.basketType {
+            case .joy:
+                return "joy-default-icon"
+            case .risk:
+                return "risk-default-icon"
+            case .safe:
+                return "safe-default-icon"
+            }
+        }
+        
         nameLabel.text = viewModel.name
         monthlySpentLabel.text = viewModel.monthlySpent
         monthlyPlannedLabel.text = viewModel.monthlyPlanned
         monthlyPlannedLabel.isHidden = !viewModel.areMonthlyExpensesPlanned
         iconImageView.setImage(with: viewModel.iconURL,
-                               placeholderName: "smile-icon",
+                               placeholderName: defaultIconName(),
                                renderingMode: .alwaysTemplate)
         progressView.progress = viewModel.monthlySpentProgress
         iconImageView.tintColor = iconTintColor()

@@ -265,7 +265,7 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
     }
     
     private func updateIconUI() {
-        let placeholderName = viewModel.isGoal ? "goal-wallet-icon" : "wallet-icon"
+        let placeholderName = viewModel.isGoal ? "wallet-goal-default-icon" : "wallet-default-icon"
         editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: placeholderName, renderingMode: .alwaysTemplate)
         editTableController?.iconImageView.tintColor = UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
     }

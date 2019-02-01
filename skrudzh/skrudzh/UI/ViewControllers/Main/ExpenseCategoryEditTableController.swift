@@ -10,6 +10,7 @@ import UIKit
 import SkyFloatingLabelTextField
 
 protocol ExpenseCategoryEditTableControllerDelegate {
+    var basketType: BasketType { get }
     func validationNeeded()
     func didSelectIcon(icon: Icon)
 }
@@ -26,6 +27,18 @@ class ExpenseCategoryEditTableController : UITableViewController, UITextFieldDel
     @IBOutlet weak var iconImageView: UIImageView!
     
     var delegate: ExpenseCategoryEditTableControllerDelegate?
+    
+    var iconCategory: IconCategory {
+        guard let basketType = delegate?.basketType else { return .expenseCategoryJoy }
+        switch basketType {
+        case .joy:
+            return .expenseCategoryJoy
+        case .risk:
+            return .expenseCategoryRisk
+        case .safe:
+            return .expenseCategorySafe
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,7 +130,7 @@ class ExpenseCategoryEditTableController : UITableViewController, UITextFieldDel
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowExpenseCategoryIcons",
             let iconsViewController = segue.destination as? IconsViewControllerInputProtocol {
-            iconsViewController.set(iconCategory: .expenseCategoryJoy)
+            iconsViewController.set(iconCategory: iconCategory)
             iconsViewController.set(delegate: self)
         }
     }

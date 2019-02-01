@@ -146,6 +146,10 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
 }
 
 extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableControllerDelegate {
+    var basketType: BasketType {
+        return viewModel.basketType ?? .joy
+    }
+    
     func didSelectIcon(icon: Icon) {
         viewModel.selectedIconURL = icon.url
         updateIconUI()
@@ -241,7 +245,19 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditInputProtocol {
     }
     
     private func updateIconUI() {
-        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: "smile-icon", renderingMode: .alwaysTemplate)
+        
+        func defaultIconName() -> String {
+            switch viewModel.basketType! {
+            case .joy:
+                return "joy-default-icon"
+            case .risk:
+                return "risk-default-icon"
+            case .safe:
+                return "safe-default-icon"
+            }
+        }
+        
+        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: defaultIconName(), renderingMode: .alwaysTemplate)
         
         let joyColor = UIColor(red: 1, green: 0.85, blue: 0.27, alpha: 1)
         let riskColor = UIColor(red: 0.49, green: 0.52, blue: 1, alpha: 1)
