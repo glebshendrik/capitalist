@@ -27,7 +27,7 @@ class GoalExpenseSourceCollectionViewCell : ExpenseSourceCollectionViewCell {
                 return .white
             }
             
-            return imageTintColor.darken(by: 0.1)
+            return UIColor(red: 107.0 / 255.0, green: 147.0 / 255.0, blue: 251.0 / 255.0, alpha: 1)
         }
         
         func iconTintColor() -> UIColor {

@@ -3327,6 +3327,9 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Veb-42-d72">
                                                     <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                                     <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow-circle" translatesAutoresizingMaskIntoConstraints="NO" id="S18-R4-cWh">
+                                                            <rect key="frame" x="0.0" y="4" width="64" height="64"/>
+                                                        </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojG-Kn-bpz">
                                                             <rect key="frame" x="5" y="5" width="54" height="54"/>
                                                             <subviews>
@@ -3349,15 +3352,6 @@
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                                                     <color key="value" red="0.19607843137254902" green="0.19607843137254902" blue="0.27843137254901962" alpha="0.059999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                    <size key="value" width="0.0" height="6"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                    <real key="value" value="1"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                    <real key="value" value="8"/>
-                                                                </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                     <real key="value" value="27"/>
                                                                 </userDefinedRuntimeAttribute>
@@ -3366,24 +3360,19 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="S18-R4-cWh" firstAttribute="height" secondItem="Veb-42-d72" secondAttribute="height" id="IZd-Ze-vLa"/>
                                                         <constraint firstItem="ojG-Kn-bpz" firstAttribute="centerY" secondItem="Veb-42-d72" secondAttribute="centerY" id="Qw7-QN-vdl"/>
                                                         <constraint firstItem="ojG-Kn-bpz" firstAttribute="centerX" secondItem="Veb-42-d72" secondAttribute="centerX" id="Uu0-Ba-QhY"/>
+                                                        <constraint firstItem="S18-R4-cWh" firstAttribute="centerX" secondItem="Veb-42-d72" secondAttribute="centerX" id="cUZ-xa-YRY"/>
+                                                        <constraint firstItem="S18-R4-cWh" firstAttribute="centerY" secondItem="Veb-42-d72" secondAttribute="centerY" constant="4" id="npQ-xx-K6c"/>
+                                                        <constraint firstItem="S18-R4-cWh" firstAttribute="width" secondItem="Veb-42-d72" secondAttribute="width" id="zT4-RF-Y6Y"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <real key="value" value="32"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                            <size key="value" width="0.0" height="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                            <color key="value" red="0.19607843137254902" green="0.19607843137254902" blue="0.27843137254901962" alpha="0.19667701198630136" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
