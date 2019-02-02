@@ -1252,6 +1252,13 @@
                                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cm-uX-JxC">
                                                                     <rect key="frame" x="0.0" y="0.0" width="68" height="101"/>
                                                                     <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow-circle" translatesAutoresizingMaskIntoConstraints="NO" id="xhm-1K-RzW">
+                                                                            <rect key="frame" x="0.0" y="6" width="68" height="68"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="68" id="bPb-6j-Gqq"/>
+                                                                                <constraint firstAttribute="height" constant="68" id="jou-tG-t41"/>
+                                                                            </constraints>
+                                                                        </imageView>
                                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIf-Jo-V5z" userLabel="shadow container">
                                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
                                                                             <subviews>
@@ -1298,16 +1305,7 @@
                                                                                     </constraints>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                                            <color key="value" red="0.1960784314" green="0.1960784314" blue="0.2784313725" alpha="0.059999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                            <size key="value" width="0.0" height="6"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                                            <real key="value" value="1"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                            <real key="value" value="8"/>
+                                                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         </userDefinedRuntimeAttribute>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                             <real key="value" value="27"/>
@@ -1323,17 +1321,8 @@
                                                                                 <constraint firstItem="X6y-lk-5Tt" firstAttribute="centerY" secondItem="VIf-Jo-V5z" secondAttribute="centerY" id="qp3-8C-aNm"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
-                                                                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                    <size key="value" width="0.0" height="4"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                                    <real key="value" value="1"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                    <real key="value" value="4"/>
-                                                                                </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                                    <color key="value" red="0.54509803921568623" green="0.59607843137254901" blue="0.6588235294117647" alpha="0.19667701200000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="34"/>
@@ -1398,6 +1387,7 @@
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="diJ-h1-w5n" secondAttribute="trailing" id="0Zw-3e-53z"/>
+                                                                        <constraint firstItem="xhm-1K-RzW" firstAttribute="centerX" secondItem="VIf-Jo-V5z" secondAttribute="centerX" id="3gr-2H-Pog"/>
                                                                         <constraint firstItem="diJ-h1-w5n" firstAttribute="leading" secondItem="1cm-uX-JxC" secondAttribute="leading" id="671-Ad-KY9"/>
                                                                         <constraint firstAttribute="trailing" secondItem="50p-lr-aEi" secondAttribute="trailing" id="6rG-ZB-lvO"/>
                                                                         <constraint firstItem="VIf-Jo-V5z" firstAttribute="centerX" secondItem="1cm-uX-JxC" secondAttribute="centerX" id="9db-VC-A69"/>
@@ -1407,6 +1397,7 @@
                                                                         <constraint firstItem="Qad-rP-5H4" firstAttribute="leading" secondItem="1cm-uX-JxC" secondAttribute="leading" id="ThN-92-N5R"/>
                                                                         <constraint firstAttribute="bottom" secondItem="50p-lr-aEi" secondAttribute="bottom" id="Wi2-2x-yLE"/>
                                                                         <constraint firstItem="LAz-Lj-e9A" firstAttribute="bottom" secondItem="VIf-Jo-V5z" secondAttribute="bottom" constant="-4" id="Y0k-lq-RRI"/>
+                                                                        <constraint firstItem="xhm-1K-RzW" firstAttribute="centerY" secondItem="VIf-Jo-V5z" secondAttribute="centerY" constant="6" id="ZqQ-gK-oeo"/>
                                                                         <constraint firstItem="Qad-rP-5H4" firstAttribute="top" secondItem="diJ-h1-w5n" secondAttribute="bottom" constant="2" id="ciJ-Wi-kXe"/>
                                                                         <constraint firstItem="50p-lr-aEi" firstAttribute="leading" secondItem="1cm-uX-JxC" secondAttribute="leading" id="dYW-R0-tqw"/>
                                                                         <constraint firstItem="fHB-Pe-tkt" firstAttribute="trailing" secondItem="VIf-Jo-V5z" secondAttribute="trailing" constant="-4" id="dbR-CW-NC9"/>
@@ -1609,6 +1600,13 @@
                                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfK-sH-S8s">
                                                                     <rect key="frame" x="0.0" y="0.0" width="68" height="101"/>
                                                                     <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow-circle" translatesAutoresizingMaskIntoConstraints="NO" id="37G-rf-bih">
+                                                                            <rect key="frame" x="0.0" y="6" width="68" height="68"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="68" id="E3f-fY-HpX"/>
+                                                                                <constraint firstAttribute="height" constant="68" id="OnF-tz-r4v"/>
+                                                                            </constraints>
+                                                                        </imageView>
                                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ynM-cA-swt" userLabel="shadow container">
                                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
                                                                             <subviews>
@@ -1655,16 +1653,7 @@
                                                                                     </constraints>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                                            <color key="value" red="0.1960784314" green="0.1960784314" blue="0.2784313725" alpha="0.059999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                            <size key="value" width="0.0" height="6"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                                            <real key="value" value="1"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                            <real key="value" value="8"/>
+                                                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         </userDefinedRuntimeAttribute>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                             <real key="value" value="27"/>
@@ -1680,17 +1669,8 @@
                                                                                 <constraint firstItem="v89-V6-VMg" firstAttribute="centerY" secondItem="ynM-cA-swt" secondAttribute="centerY" id="znv-h1-uLk"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
-                                                                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                    <size key="value" width="0.0" height="4"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                                    <real key="value" value="1"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                    <real key="value" value="4"/>
-                                                                                </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                                    <color key="value" red="0.54509803921568623" green="0.59607843137254901" blue="0.6588235294117647" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="34"/>
@@ -1762,11 +1742,13 @@
                                                                         <constraint firstItem="fYR-nt-BOQ" firstAttribute="top" secondItem="ynM-cA-swt" secondAttribute="bottom" constant="-4" id="N66-Oz-e2V"/>
                                                                         <constraint firstItem="PM1-aW-xxu" firstAttribute="bottom" secondItem="ynM-cA-swt" secondAttribute="bottom" constant="-4" id="SEd-Pg-cNG"/>
                                                                         <constraint firstItem="Lx6-Jp-nCD" firstAttribute="leading" secondItem="RfK-sH-S8s" secondAttribute="leading" id="Tla-9Q-7gK"/>
+                                                                        <constraint firstItem="37G-rf-bih" firstAttribute="centerX" secondItem="ynM-cA-swt" secondAttribute="centerX" id="VrC-aM-ghC"/>
                                                                         <constraint firstItem="ynM-cA-swt" firstAttribute="top" secondItem="RfK-sH-S8s" secondAttribute="top" id="WU6-iI-8iz"/>
                                                                         <constraint firstItem="qY5-Lq-5aW" firstAttribute="leading" secondItem="RfK-sH-S8s" secondAttribute="leading" id="YLC-Lx-L5g"/>
                                                                         <constraint firstItem="fYR-nt-BOQ" firstAttribute="leading" secondItem="RfK-sH-S8s" secondAttribute="leading" id="a8p-eb-oIR"/>
                                                                         <constraint firstAttribute="bottom" secondItem="Lx6-Jp-nCD" secondAttribute="bottom" id="erz-QR-PsB"/>
                                                                         <constraint firstItem="PM1-aW-xxu" firstAttribute="trailing" secondItem="ynM-cA-swt" secondAttribute="trailing" constant="-4" id="gI0-lp-R2p"/>
+                                                                        <constraint firstItem="37G-rf-bih" firstAttribute="centerY" secondItem="ynM-cA-swt" secondAttribute="centerY" constant="6" id="mRV-Ut-85h"/>
                                                                         <constraint firstAttribute="trailing" secondItem="fYR-nt-BOQ" secondAttribute="trailing" id="r1F-Hy-f8N"/>
                                                                         <constraint firstAttribute="trailing" secondItem="Lx6-Jp-nCD" secondAttribute="trailing" id="w30-b5-5B3"/>
                                                                     </constraints>
@@ -1966,6 +1948,13 @@
                                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULS-zn-fOt">
                                                                     <rect key="frame" x="0.0" y="0.0" width="68" height="101"/>
                                                                     <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow-circle" translatesAutoresizingMaskIntoConstraints="NO" id="Itw-La-P22">
+                                                                            <rect key="frame" x="0.0" y="6" width="68" height="68"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="68" id="DTO-4w-V13"/>
+                                                                                <constraint firstAttribute="height" constant="68" id="i9H-gB-PGL"/>
+                                                                            </constraints>
+                                                                        </imageView>
                                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0M-uW-fwa" userLabel="shadow container">
                                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
                                                                             <subviews>
@@ -2012,16 +2001,7 @@
                                                                                     </constraints>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                                            <color key="value" red="0.1960784314" green="0.1960784314" blue="0.2784313725" alpha="0.059999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                            <size key="value" width="0.0" height="6"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                                            <real key="value" value="1"/>
-                                                                                        </userDefinedRuntimeAttribute>
-                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                            <real key="value" value="8"/>
+                                                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         </userDefinedRuntimeAttribute>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                             <real key="value" value="27"/>
@@ -2037,17 +2017,8 @@
                                                                                 <constraint firstItem="ZFM-hG-fqk" firstAttribute="centerY" secondItem="D0M-uW-fwa" secondAttribute="centerY" id="zuS-pu-ecG"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
-                                                                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                                    <size key="value" width="0.0" height="4"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                                    <real key="value" value="1"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                                    <real key="value" value="4"/>
-                                                                                </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                                    <color key="value" red="0.54509803921568623" green="0.59607843137254901" blue="0.6588235294117647" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="34"/>
@@ -2113,6 +2084,7 @@
                                                                     <constraints>
                                                                         <constraint firstItem="AaR-vF-hhb" firstAttribute="bottom" secondItem="D0M-uW-fwa" secondAttribute="bottom" constant="-4" id="0be-nz-3Ve"/>
                                                                         <constraint firstAttribute="trailing" secondItem="EtU-hk-JRn" secondAttribute="trailing" id="9Pq-rG-27I"/>
+                                                                        <constraint firstItem="Itw-La-P22" firstAttribute="centerX" secondItem="D0M-uW-fwa" secondAttribute="centerX" id="Gwi-za-V6G"/>
                                                                         <constraint firstAttribute="trailing" secondItem="pcg-uH-PgO" secondAttribute="trailing" id="HbH-FT-L5x"/>
                                                                         <constraint firstItem="bkr-iP-0NH" firstAttribute="leading" secondItem="ULS-zn-fOt" secondAttribute="leading" id="K7I-AG-xyb"/>
                                                                         <constraint firstAttribute="trailing" secondItem="bkr-iP-0NH" secondAttribute="trailing" id="MyX-d3-dwI"/>
@@ -2125,6 +2097,7 @@
                                                                         <constraint firstItem="D0M-uW-fwa" firstAttribute="top" secondItem="ULS-zn-fOt" secondAttribute="top" id="l8X-VW-rZJ"/>
                                                                         <constraint firstItem="pcg-uH-PgO" firstAttribute="leading" secondItem="ULS-zn-fOt" secondAttribute="leading" id="lPE-Kx-zsD"/>
                                                                         <constraint firstItem="a5h-wl-bb2" firstAttribute="trailing" secondItem="D0M-uW-fwa" secondAttribute="trailing" constant="-4" id="rMP-hO-4si"/>
+                                                                        <constraint firstItem="Itw-La-P22" firstAttribute="centerY" secondItem="D0M-uW-fwa" secondAttribute="centerY" constant="6" id="wMl-z3-NbF"/>
                                                                         <constraint firstItem="EtU-hk-JRn" firstAttribute="leading" secondItem="ULS-zn-fOt" secondAttribute="leading" id="yUF-CN-fmp"/>
                                                                     </constraints>
                                                                 </view>
@@ -3244,8 +3217,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jFe-FN-Ffx">
                                                     <rect key="frame" x="16" y="22.5" width="36" height="36"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="amount-icon" translatesAutoresizingMaskIntoConstraints="NO" id="mp0-mQ-MAQ">
-                                                            <rect key="frame" x="10" y="9" width="16" height="18"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="planned-amount-icon" translatesAutoresizingMaskIntoConstraints="NO" id="mp0-mQ-MAQ">
+                                                            <rect key="frame" x="8" y="7.5" width="20" height="21"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3838,8 +3811,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uI3-vi-yqF">
                                                     <rect key="frame" x="16" y="22.5" width="36" height="36"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="amount-icon" translatesAutoresizingMaskIntoConstraints="NO" id="zMb-GV-A52">
-                                                            <rect key="frame" x="10" y="9" width="16" height="18"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="planned-amount-icon" translatesAutoresizingMaskIntoConstraints="NO" id="zMb-GV-A52">
+                                                            <rect key="frame" x="8" y="7.5" width="20" height="21"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3917,11 +3890,13 @@
         <image name="loader-1" width="55" height="31"/>
         <image name="menu-button-icon" width="16" height="11"/>
         <image name="pen-icon" width="8" height="8"/>
+        <image name="planned-amount-icon" width="20" height="21.5"/>
         <image name="plus-icon-blue" width="16" height="16"/>
         <image name="profile-menu-item-icon" width="17" height="17"/>
         <image name="remove-icon" width="17" height="20"/>
         <image name="risk-large-image" width="146" height="122"/>
         <image name="settings-menu-item-icon" width="16" height="16"/>
+        <image name="shadow-circle" width="52" height="52"/>
         <image name="small-cross-icon" width="8" height="8"/>
         <image name="smile-icon" width="23" height="23"/>
         <image name="statistics-menu-item-icon" width="16" height="16"/>
@@ -3929,6 +3904,6 @@
         <image name="wallet-icon" width="30" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iiB-Cu-Dri"/>
+        <segue reference="YjD-qx-ivd"/>
     </inferredMetricsTieBreakers>
 </document>
