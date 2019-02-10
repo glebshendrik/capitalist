@@ -18,6 +18,7 @@ struct User : Decodable {
     let joyBasketId: Int
     let riskBasketId: Int
     let safeBasketId: Int
+    let currency: Currency
     
     var fullname: String? {
         if let firstname = firstname, !firstname.isEmpty, let lastname = lastname, !lastname.isEmpty {
@@ -41,6 +42,7 @@ struct User : Decodable {
         case joyBasketId = "joy_basket_id"
         case riskBasketId = "risk_basket_id"
         case safeBasketId = "safe_basket_id"
+        case currency = "default_currency"
     }
 }
 
@@ -55,6 +57,20 @@ struct UserUpdatingForm : Encodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(firstname, forKey: .firstname)        
+    }
+}
+
+struct UserSettingsUpdatingForm : Encodable {
+    let userId: Int
+    let currency: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case currency = "default_currency"
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(currency, forKey: .currency)
     }
 }
 

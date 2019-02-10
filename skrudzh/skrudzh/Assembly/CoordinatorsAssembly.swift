@@ -49,5 +49,13 @@ class CoordinatorsAssembly: Assembly {
             return BasketsCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,                                      
                                       basketsService: r.resolve(BasketsServiceProtocol.self)!)
         }
+        
+        container.register(SettingsCoordinatorProtocol.self) { r in
+            return SettingsCoordinator(usersService: r.resolve(UsersServiceProtocol.self)!)
+        }
+        
+        container.register(CurrenciesCoordinatorProtocol.self) { r in
+            return CurrenciesCoordinator(currenciesService: r.resolve(CurrenciesServiceProtocol.self)!)
+        }
     }
 }

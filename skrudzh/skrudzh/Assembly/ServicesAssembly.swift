@@ -55,5 +55,10 @@ class ServicesAssembly: Assembly {
             return BasketsService(
                 apiClient: r.resolve(APIClientProtocol.self)!)
         }
+        
+        container.register(CurrenciesServiceProtocol.self) { r in
+            return CurrenciesService(
+                apiClient: r.resolve(APIClientProtocol.self)!)
+        }
     }
 }

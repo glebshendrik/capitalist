@@ -14,6 +14,7 @@ struct APIResourcePath {
         case .createUser:                                   return "/users"
         case .showUser(let id):                             return "/users/\(id)"
         case .updateUser(let form):                         return "/users/\(form.userId)"
+        case .updateUserSettings(let form):                 return "/users/\(form.userId)"
         case .changePassword(let form):                     return "/users/\(form.userId)/password"
         case .resetPassword:                                return "/users/new_password"
         case .createPasswordResetCode:                      return "/password_reset_codes"
@@ -41,6 +42,7 @@ struct APIResourcePath {
         case .indexIcons:                                   return "/icons"
         case .indexBaskets(let userId):                     return "/users/\(userId)/baskets"
         case .showBasket(let id):                           return "/baskets/\(id)"
+        case .indexCurrencies:                              return "/currencies"
         }
     }
 }

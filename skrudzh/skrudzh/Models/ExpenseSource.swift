@@ -14,6 +14,7 @@ struct ExpenseSource : Decodable {
     let amountCurrency: String
     let amount: String
     let amountCents: Int
+    let currency: Currency
     let iconURL: URL?
     let isGoal: Bool
     let goalAmountCents: Int?
@@ -29,6 +30,7 @@ struct ExpenseSource : Decodable {
         case isGoal = "is_goal"
         case goalAmountCents = "goal_amount_cents"
         case order = "row_order"
+        case currency = "currency"
     }
     
 }

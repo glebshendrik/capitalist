@@ -23,6 +23,7 @@ enum APIResource: URLRequestConvertible {
     case createUser(form: UserCreationForm)
     case showUser(id: Int)
     case updateUser(form: UserUpdatingForm)
+    case updateUserSettings(form: UserSettingsUpdatingForm)
     case changePassword(form: ChangePasswordForm)
     case resetPassword(form: ResetPasswordForm)
     case createPasswordResetCode(form: PasswordResetCodeForm)
@@ -62,6 +63,9 @@ enum APIResource: URLRequestConvertible {
     // Baskets
     case indexBaskets(userId: Int)
     case showBasket(id: Int)
+    
+    // Currencies
+    case indexCurrencies
     
     var method: HTTPMethod {
         return APIResourceMethod.method(for: self)

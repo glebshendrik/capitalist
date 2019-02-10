@@ -11,7 +11,7 @@ import Foundation
 struct IncomeSource : Decodable {
     let id: Int
     let name: String
-    let currency: String?
+    let currency: Currency
     let iconURL: URL?
     let order: Int
     

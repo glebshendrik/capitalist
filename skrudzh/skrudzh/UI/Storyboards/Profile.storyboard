@@ -72,7 +72,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Александр" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tol-nr-lf0">
-                                                    <rect key="frame" x="31" y="43" width="313" height="17"/>
+                                                    <rect key="frame" x="31" y="43" width="538" height="17"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -102,7 +102,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="petalvlad@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsB-3L-vXj">
-                                                    <rect key="frame" x="31" y="31" width="313" height="17"/>
+                                                    <rect key="frame" x="31" y="31" width="538" height="17"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -153,7 +153,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="little-right-arrow-icon" translatesAutoresizingMaskIntoConstraints="NO" id="6cJ-BO-o96">
-                                                    <rect key="frame" x="340" y="29.5" width="4" height="7"/>
+                                                    <rect key="frame" x="565" y="29.5" width="4" height="7"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -175,7 +175,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuF-dS-LK2">
-                                                    <rect key="frame" x="32" y="42" width="311" height="40"/>
+                                                    <rect key="frame" x="32" y="42" width="536" height="40"/>
                                                     <color key="backgroundColor" red="0.44705882349999998" green="0.50196078430000002" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="XKU-nH-9Ar"/>
@@ -209,7 +209,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="IWC-Zt-ePJ">
-                                                    <rect key="frame" x="160" y="3.5" width="55" height="31"/>
+                                                    <rect key="frame" x="272.5" y="3.5" width="55" height="31"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -269,7 +269,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reset-password-image" translatesAutoresizingMaskIntoConstraints="NO" id="TFh-AD-15Q">
-                                                    <rect key="frame" x="139.5" y="70" width="96" height="112"/>
+                                                    <rect key="frame" x="252" y="70" width="96" height="112"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -286,10 +286,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPK-Gk-Qnj">
-                                                    <rect key="frame" x="32" y="6" width="311" height="44"/>
+                                                    <rect key="frame" x="32" y="6" width="536" height="44"/>
                                                     <subviews>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Текущий пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0eO-2F-rHD">
-                                                            <rect key="frame" x="20" y="0.0" width="271" height="44"/>
+                                                            <rect key="frame" x="20" y="0.0" width="496" height="44"/>
                                                             <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -329,10 +329,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zoe-9h-lEf">
-                                                    <rect key="frame" x="32" y="6" width="311" height="44"/>
+                                                    <rect key="frame" x="32" y="6" width="536" height="44"/>
                                                     <subviews>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Новый пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ESB-Q0-UBd">
-                                                            <rect key="frame" x="20" y="0.0" width="271" height="44"/>
+                                                            <rect key="frame" x="20" y="0.0" width="496" height="44"/>
                                                             <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
@@ -372,10 +372,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YjR-ss-rPQ">
-                                                    <rect key="frame" x="32" y="6" width="311" height="44"/>
+                                                    <rect key="frame" x="32" y="6" width="536" height="44"/>
                                                     <subviews>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Новый пароль еще раз" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P1Z-V2-qcm">
-                                                            <rect key="frame" x="20" y="0.0" width="271" height="44"/>
+                                                            <rect key="frame" x="20" y="0.0" width="496" height="44"/>
                                                             <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -415,7 +415,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUY-Xx-WOm">
-                                                    <rect key="frame" x="32" y="6" width="311" height="40"/>
+                                                    <rect key="frame" x="32" y="6" width="536" height="40"/>
                                                     <color key="backgroundColor" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="6eg-Vt-SBm"/>
@@ -449,7 +449,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="WmW-xH-Gck">
-                                                    <rect key="frame" x="160" y="3.5" width="55" height="31"/>
+                                                    <rect key="frame" x="272.5" y="3.5" width="55" height="31"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -520,10 +520,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Zg-mk-COj">
-                                                    <rect key="frame" x="32" y="6" width="311" height="44"/>
+                                                    <rect key="frame" x="32" y="6" width="536" height="44"/>
                                                     <subviews>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Имя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V3I-O6-ah2">
-                                                            <rect key="frame" x="20" y="0.0" width="271" height="44"/>
+                                                            <rect key="frame" x="20" y="0.0" width="496" height="44"/>
                                                             <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" textContentType="given-name"/>

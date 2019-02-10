@@ -12,12 +12,12 @@ import SwinjectStoryboard
 struct Infrastructure {
 
     enum Storyboard : String {
-        case Join, Main, Profile, Onboarding
+        case Join, Main, Profile, Onboarding, Settings
         
         var name: String { return self.rawValue }
         
         static func all() -> [Storyboard] {
-            return [.Main, .Join, .Profile, .Onboarding]
+            return [.Main, .Join, .Profile, .Onboarding, .Settings]
         }
     }
 
@@ -46,6 +46,9 @@ struct Infrastructure {
         // Profile
         case ProfileViewController
         case ChangePasswordViewController
+        
+        // Settings
+        case SettingsViewController
         
         // Onboarding
         case OnboardingViewController
@@ -95,6 +98,8 @@ struct Infrastructure {
                  .OnboardingPage7ViewController,
                  .OnboardingPage8ViewController:
                 return .Onboarding
+            case .SettingsViewController:
+                return .Settings
             }
         }
     }
@@ -214,6 +219,12 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(ExpenseCategoryEditViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
+        
+        // SettingsViewController
+        container.registerForSkrudzhStoryboard(SettingsViewController.self) { (r, c) in
+            c.viewModel = r.resolve(SettingsViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -286,6 +297,16 @@ class ApplicationAssembly: Assembly {
         container.register(ExpenseCategoryEditViewModel.self) { r in
             return ExpenseCategoryEditViewModel(expenseCategoriesCoordinator: r.resolve(ExpenseCategoriesCoordinatorProtocol.self)!,
                                               accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
+        }
+        
+        // SettingsViewModel
+        container.register(SettingsViewModel.self) { r in
+            return SettingsViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
+        }
+        
+        // CurrenciesViewModel
+        container.register(CurrenciesViewModel.self) { r in
+            return CurrenciesViewModel(currenciesCoordinator: r.resolve(CurrenciesCoordinatorProtocol.self)!)
         }
     }
     

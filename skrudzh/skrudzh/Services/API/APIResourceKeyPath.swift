@@ -20,6 +20,7 @@ struct APIResourceKeyPath {
         case .createUser,
              .showUser,
              .updateUser,
+             .updateUserSettings,
              .changePassword,
              .resetPassword,
              .registerDeviceToken:
@@ -55,6 +56,8 @@ struct APIResourceKeyPath {
         case .indexBaskets,
              .showBasket:
             return ResourceKeyPath(singular: "basket", plural: "baskets")
+        case .indexCurrencies:
+            return ResourceKeyPath(singular: "currency", plural: "currencies")
         }
     }
 }

@@ -29,6 +29,7 @@ struct APIResourceRequest {
         switch resource {
         case .createUser(let form):                         return encode(form)
         case .updateUser(let form):                         return encode(form)
+        case .updateUserSettings(let form):                 return encode(form)
         case .changePassword(let form):                     return encode(form)
         case .resetPassword(let form):                      return encode(form)
         case .createPasswordResetCode(let form):            return encode(form)

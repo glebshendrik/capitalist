@@ -28,7 +28,8 @@ struct APIResourceMethod {
              .indexBaskets,
              .showBasket,
              .indexExpenseCategories,
-             .showExpenseCategory:
+             .showExpenseCategory,
+             .indexCurrencies:
             return .get
         case .updateUser,
              .changePassword,
@@ -40,7 +41,8 @@ struct APIResourceMethod {
             return .put
         case .updateIncomeSourcePosition,
              .updateExpenseSourcePosition,
-             .updateExpenseCategoryPosition:
+             .updateExpenseCategoryPosition,
+             .updateUserSettings:
             return .patch
         case .destroySession,
              .destroyIncomeSource,

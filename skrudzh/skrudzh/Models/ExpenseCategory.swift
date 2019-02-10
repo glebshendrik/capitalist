@@ -18,6 +18,7 @@ struct ExpenseCategory : Decodable {
     let monthlyPlannedCents: Int?
     let monthlySpentCents: Int
     let monthlySpentCurrency: String
+    let currency: Currency
     let order: Int
     
     enum CodingKeys: String, CodingKey {
@@ -31,6 +32,7 @@ struct ExpenseCategory : Decodable {
         case monthlySpentCents = "monthly_spent_cents"
         case monthlySpentCurrency = "monthly_spent_currency"
         case order = "row_order"
+        case currency = "currency"
     }
     
 }
