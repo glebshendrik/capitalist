@@ -37,11 +37,10 @@ class SettingsViewController : StaticDataTableViewController, UIMessagePresenter
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == "ShowProfileEditScreen",
-            let destinationNavigationController = segue.destination as? UINavigationController,
-            let destination = destinationNavigationController.topViewController as? ProfileEditViewController {
+        if  segue.identifier == "showCurrenciesScreen",
+            let destination = segue.destination as? CurrenciesViewControllerInputProtocol {
             
-            destination.set(user: viewModel.user)
+            destination.set(delegate: self)
         }
     }
     
@@ -93,5 +92,30 @@ class SettingsViewController : StaticDataTableViewController, UIMessagePresenter
             refreshControl.removeSubviews()
             refreshControl.addSubview(loaderView)
         }
+    }
+}
+
+extension SettingsViewController : CurrenciesViewControllerDelegate {
+    func didSelectCurrency(currency: Currency) {
+        update(currency: currency)
+    }
+    
+    func update(currency: Currency) {
+        dirtyUpdate(currency: currency)
+        showActivityIndicator()
+        
+        firstly {
+            viewModel.update(currency: currency)
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Возникла проблема при обновлении валюты", theme: .error)
+            
+        }.finally {
+            self.hideActivityIndicator()
+            self.updateUI(animated: true)
+        }
+    }
+    
+    private func dirtyUpdate(currency: Currency) {
+        currencyLabel.text = currency.code
     }
 }

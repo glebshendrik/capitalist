@@ -17,8 +17,6 @@ struct Currency : Decodable {
     let symbolFirst: Bool
     let priority: Int
     let thousandsSeparator: String
-    let smallestDenomination: Int
-    
     
     enum CodingKeys: String, CodingKey {
         case code = "iso_code"
@@ -29,6 +27,5 @@ struct Currency : Decodable {
         case symbolFirst = "symbol_first"
         case priority = "priority"
         case thousandsSeparator = "thousands_separator"
-        case smallestDenomination = "smallest_denomination"
     }
 }

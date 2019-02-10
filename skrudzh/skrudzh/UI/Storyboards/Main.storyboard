@@ -3481,7 +3481,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </collectionViewLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IconCollectionViewCell" id="EaO-b2-sih" customClass="IconCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrencyCollectionViewCell" id="EaO-b2-sih" customClass="CurrencyCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -3550,6 +3550,9 @@
                                             <constraint firstItem="Z96-7J-J8H" firstAttribute="leading" secondItem="EaO-b2-sih" secondAttribute="leading" id="mAm-JH-131"/>
                                         </constraints>
                                         <size key="customSize" width="64" height="64"/>
+                                        <connections>
+                                            <outlet property="codeLabel" destination="gGd-vk-WlD" id="X2a-ye-0y0"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -3597,10 +3600,10 @@
                         <viewLayoutGuide key="safeArea" id="bvb-02-O8D"/>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="cRA-5m-AuT" id="3n9-mO-grK"/>
-                        <outlet property="iconsCollectionView" destination="crN-eW-gA5" id="uFD-rJ-3Od"/>
-                        <outlet property="loader" destination="vfZ-l3-ICh" id="ZdY-Dd-wQw"/>
-                        <outlet property="pageControl" destination="t1J-9i-87D" id="xa8-Nz-7r1"/>
+                        <outlet property="activityIndicator" destination="cRA-5m-AuT" id="ChN-4U-lwM"/>
+                        <outlet property="currenciesCollectionView" destination="crN-eW-gA5" id="EIY-13-mr6"/>
+                        <outlet property="loader" destination="vfZ-l3-ICh" id="BIl-oI-Ole"/>
+                        <outlet property="pageControl" destination="t1J-9i-87D" id="zFn-fN-0se"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PJi-FY-Tn2" userLabel="First Responder" sceneMemberID="firstResponder"/>

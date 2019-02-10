@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "571164270.6015691"
+            timestampString = "571505005.72744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
@@ -250,7 +250,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "571164270.624876"
+            timestampString = "571505005.728264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
@@ -266,7 +266,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "571164270.625574"
+            timestampString = "571505005.728381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
@@ -550,11 +550,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "571164270.626242"
+            timestampString = "571505005.728923"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
@@ -570,7 +570,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "571164270.626888"
+            timestampString = "571505005.7290339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
@@ -586,7 +586,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "571164270.62758"
+            timestampString = "571505005.729118"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "61"
@@ -602,7 +602,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "571164270.627915"
+            timestampString = "571505005.729225"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "75"
@@ -618,7 +618,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "571164270.628454"
+            timestampString = "571505005.729369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
@@ -630,11 +630,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "571164270.62887"
+            timestampString = "571505005.729499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -948,7 +948,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "571164270.629563"
+            timestampString = "571505005.73011"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
@@ -964,7 +964,7 @@
                   moduleName = "skrudzh"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/Services/APIClient.swift"
-                  timestampString = "571162077.88184"
+                  timestampString = "571504652.479553"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"
@@ -979,7 +979,7 @@
                   moduleName = "skrudzh"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/Services/APIClient.swift"
-                  timestampString = "571162077.885551"
+                  timestampString = "571504652.482677"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "71"
@@ -987,6 +987,38 @@
                   offsetFromSymbolStart = "36">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/Services/APIClient.swift"
+            timestampString = "571505005.73022"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "request(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/Services/APIClient.swift"
+            timestampString = "571505005.730342"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "request(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

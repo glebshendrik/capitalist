@@ -87,6 +87,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="tKj-nU-ejy" secondAttribute="trailing" constant="31" id="uWF-Nb-1Bz"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="IfY-Rr-JlH" kind="show" identifier="showCurrenciesScreen" id="srG-z9-V3J"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -107,6 +110,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OSi-us-WM8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="164" y="38"/>
+        </scene>
+        <!--CurrenciesViewController-->
+        <scene sceneID="Aq1-n5-t7L">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="CurrenciesViewController" id="IfY-Rr-JlH" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rmz-Ya-W7R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="830" y="-106"/>
         </scene>
     </scenes>
     <resources>
