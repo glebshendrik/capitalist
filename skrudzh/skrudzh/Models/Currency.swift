@@ -11,6 +11,7 @@ import Foundation
 struct Currency : Decodable {
     let code: String
     let name: String
+    let translatedName: String
     let symbol: String
     let subunitToUnit: Int
     let decimalMark: String
@@ -21,6 +22,7 @@ struct Currency : Decodable {
     enum CodingKeys: String, CodingKey {
         case code = "iso_code"
         case name = "name"
+        case translatedName = "translated_name"
         case symbol = "symbol"
         case subunitToUnit = "subunit_to_unit"
         case decimalMark = "decimal_mark"

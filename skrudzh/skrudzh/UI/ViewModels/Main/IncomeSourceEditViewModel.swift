@@ -12,6 +12,7 @@ import PromiseKit
 enum IncomeSourceCreationError : Error {
     case validation(validationResults: [IncomeSourceCreationForm.CodingKeys : [ValidationErrorReason]])
     case currentSessionDoesNotExist
+    case currencyIsNotSpecified
 }
 
 enum IncomeSourceUpdatingError : Error {
@@ -30,6 +31,16 @@ class IncomeSourceEditViewModel {
         return incomeSource?.name
     }
     
+    var selectedCurrency: Currency? = nil
+    
+    var selectedCurrencyName: String? {
+        return selectedCurrency?.translatedName
+    }
+    
+    var selectedCurrencyCode: String? {
+        return selectedCurrency?.code
+    }
+    
     var isNew: Bool {
         return incomeSource == nil
     }
@@ -37,11 +48,20 @@ class IncomeSourceEditViewModel {
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
-        self.accountCoordinator = accountCoordinator
+        self.accountCoordinator = accountCoordinator        
     }
     
     func set(incomeSource: IncomeSource) {
         self.incomeSource = incomeSource
+        selectedCurrency = incomeSource.currency
+    }
+    
+    func loadDefaultCurrency() -> Promise<Void> {
+        return  firstly {
+                    accountCoordinator.loadCurrentUser()
+                }.done { user in
+                    self.selectedCurrency = user.currency
+                }
     }
     
     func isFormValid(with name: String?) -> Bool {
@@ -93,8 +113,13 @@ class IncomeSourceEditViewModel {
             return Promise(error: IncomeSourceCreationError.currentSessionDoesNotExist)
         }
         
+        guard let currencyCode = selectedCurrencyCode else {
+            return Promise(error: IncomeSourceCreationError.currencyIsNotSpecified)
+        }
+        
         return .value(IncomeSourceCreationForm(userId: currentUserId,
-                                               name: name!))
+                                               name: name!,
+                                               currency: currencyCode))
     }
     
     private func validateUpdatingForm(with name: String?) -> Promise<IncomeSourceUpdatingForm> {

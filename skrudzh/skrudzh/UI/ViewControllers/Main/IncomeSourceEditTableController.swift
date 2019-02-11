@@ -10,20 +10,26 @@ import UIKit
 import SkyFloatingLabelTextField
 
 protocol IncomeSourceEditTableControllerDelegate {
+    var canChangeCurrency: Bool { get }
     func validationNeeded()
+    func didSelectCurrency(currency: Currency)
 }
 
 class IncomeSourceEditTableController : UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var incomeSourceNameTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var nameBackground: UIView!
     @IBOutlet weak var nameIconContainer: UIView!
+    @IBOutlet weak var currencyTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var changeCurrencyIndicator: UIImageView!
     
     var delegate: IncomeSourceEditTableControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         update(textField: incomeSourceNameTextField)
+        update(textField: currencyTextField)
         incomeSourceNameTextField.titleFormatter = { $0 }
+        currencyTextField.titleFormatter = { $0 }
         delegate?.validationNeeded()
     }
     
@@ -41,6 +47,22 @@ class IncomeSourceEditTableController : UITableViewController, UITextFieldDelega
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let floatingLabelTextField = textField as? SkyFloatingLabelTextField {
             update(textField: floatingLabelTextField)
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if  identifier == "showCurrenciesScreen",
+            let delegate = delegate {
+            return delegate.canChangeCurrency
+        }
+        return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == "showCurrenciesScreen",
+            let destination = segue.destination as? CurrenciesViewControllerInputProtocol {
+            
+            destination.set(delegate: self)
         }
     }
     
@@ -96,5 +118,11 @@ class IncomeSourceEditTableController : UITableViewController, UITextFieldDelega
         case (false, false):
             return (inactiveBackgroundColor, inavtiveTextColor, inavtiveTextColor, bigPlaceholderFont, inactiveIconBackground)
         }
+    }
+}
+
+extension IncomeSourceEditTableController : CurrenciesViewControllerDelegate {
+    func didSelectCurrency(currency: Currency) {
+        delegate?.didSelectCurrency(currency: currency)
     }
 }

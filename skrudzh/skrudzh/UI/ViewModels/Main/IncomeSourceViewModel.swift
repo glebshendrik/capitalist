@@ -21,7 +21,9 @@ class IncomeSourceViewModel {
     }
     
     var incomesAmount: String {
-        return "0 ₽"
+        let amount = 0
+        let symbol = incomeSource.currency.symbol
+        return incomeSource.currency.symbolFirst ? "\(symbol) \(amount)" : "\(amount) \(symbol)"
     }
     
     init(incomeSource: IncomeSource) {

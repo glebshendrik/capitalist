@@ -28,7 +28,7 @@ struct IncomeSource : Decodable {
 struct IncomeSourceCreationForm : Encodable {
     let userId: Int
     let name: String
-    let currency: String = "RUB"
+    let currency: String
     
     enum CodingKeys: String, CodingKey {
         case name

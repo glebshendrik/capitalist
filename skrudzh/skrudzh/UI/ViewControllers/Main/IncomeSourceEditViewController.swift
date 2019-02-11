@@ -47,7 +47,6 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
-        setActivityIndicator(hidden: true, animated: false)
         setRemoveButton(hidden: viewModel.isNew)
     }
     
@@ -136,8 +135,21 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
 }
 
 extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelegate {
+    var canChangeCurrency: Bool {
+        return viewModel.isNew
+    }
+    
     func validationNeeded() {
         validateUI()
+    }
+    
+    func didSelectCurrency(currency: Currency) {
+        update(currency: currency)
+    }
+    
+    func update(currency: Currency) {
+        viewModel.selectedCurrency = currency
+        editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
     }
         
     private func validateUI() {
@@ -206,6 +218,8 @@ extension IncomeSourceEditViewController : IncomeSourceEditInputProtocol {
     
     private func updateUI() {
         editTableController?.incomeSourceNameTextField?.text = viewModel.name
+        editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
+        editTableController?.changeCurrencyIndicator?.isHidden = !canChangeCurrency
         validateUI()
     }
     
@@ -222,6 +236,25 @@ extension IncomeSourceEditViewController {
     private func setupUI() {
         setupNavigationBar()
         loaderImageView.showLoader()
+        editTableController?.tableView.allowsSelection = canChangeCurrency
+        guard viewModel.isNew else {
+            setActivityIndicator(hidden: true)
+            return
+        }
+        loadDefaultCurrency()
+    }
+    
+    private func loadDefaultCurrency() {
+        setActivityIndicator(hidden: false)
+        saveButton.isEnabled = false
+        
+        _ = firstly {            
+                viewModel.loadDefaultCurrency()
+            }.ensure {
+                self.updateUI()
+                self.setActivityIndicator(hidden: true)
+                self.saveButton.isEnabled = true
+            }
     }
     
     private func setupNavigationBar() {
