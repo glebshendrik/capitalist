@@ -12,6 +12,7 @@ import PromiseKit
 enum ExpenseCategoryCreationError : Error {
     case validation(validationResults: [ExpenseCategoryCreationForm.CodingKeys : [ValidationErrorReason]])
     case basketIsNotSpecified
+    case currencyIsNotSpecified
 }
 
 enum ExpenseCategoryUpdatingError : Error {
@@ -32,7 +33,8 @@ class ExpenseCategoryEditViewModel {
     }
     
     var monthlyPlanned: String? {
-        return expenseCategory?.monthlyPlannedCents?.moneyDecimalString
+        guard let currency = selectedCurrency else { return nil }        
+        return expenseCategory?.monthlyPlannedCents?.moneyDecimalString(with: currency)
     }
     
     var iconURL: URL? {
@@ -40,6 +42,16 @@ class ExpenseCategoryEditViewModel {
     }
     
     var selectedIconURL: URL?
+    
+    var selectedCurrency: Currency? = nil
+    
+    var selectedCurrencyName: String? {
+        return selectedCurrency?.translatedName
+    }
+    
+    var selectedCurrencyCode: String? {
+        return selectedCurrency?.code
+    }
     
     var isNew: Bool {
         return expenseCategory == nil
@@ -54,6 +66,15 @@ class ExpenseCategoryEditViewModel {
     func set(expenseCategory: ExpenseCategory) {
         self.expenseCategory = expenseCategory
         selectedIconURL = iconURL
+        selectedCurrency = expenseCategory.currency
+    }
+    
+    func loadDefaultCurrency() -> Promise<Void> {
+        return  firstly {
+                    accountCoordinator.loadCurrentUser()
+                }.done { user in
+                    self.selectedCurrency = user.currency
+                }
     }
     
     func set(basketType: BasketType) {
@@ -63,7 +84,10 @@ class ExpenseCategoryEditViewModel {
     func isFormValid(with name: String?,
                      iconURL: URL?,
                      monthlyPlanned: String?) -> Bool {
-        let monthlyPlannedCents = monthlyPlanned?.intMoney
+        guard let currency = selectedCurrency else { return false }
+        
+        let monthlyPlannedCents = monthlyPlanned?.intMoney(with: currency)
+        
         return isNew
             ? isCreationFormValid(with: name, iconURL: iconURL, monthlyPlannedCents: monthlyPlannedCents)
             : isUpdatingFormValid(with: name, iconURL: iconURL, monthlyPlannedCents: monthlyPlannedCents)
@@ -72,7 +96,12 @@ class ExpenseCategoryEditViewModel {
     func saveExpenseCategory(with name: String?,
                              iconURL: URL?,
                              monthlyPlanned: String?) -> Promise<Void> {
-        let monthlyPlannedCents = monthlyPlanned?.intMoney
+        guard let currency = selectedCurrency else {
+            return Promise(error: ExpenseCategoryCreationError.currencyIsNotSpecified)
+        }        
+        
+        let monthlyPlannedCents = monthlyPlanned?.intMoney(with: currency)
+        
         return isNew
             ? createExpenseCategory(with: name, iconURL: iconURL, monthlyPlannedCents: monthlyPlannedCents)
             : updateExpenseCategory(with: name, iconURL: iconURL, monthlyPlannedCents: monthlyPlannedCents)
@@ -130,10 +159,15 @@ extension ExpenseCategoryEditViewModel {
             return Promise(error: ExpenseCategoryCreationError.basketIsNotSpecified)
         }
         
+        guard let currencyCode = selectedCurrencyCode else {
+            return Promise(error: ExpenseCategoryCreationError.currencyIsNotSpecified)
+        }
+        
         return .value(ExpenseCategoryCreationForm(name: name!,
                                                   iconURL: iconURL,
                                                   basketId: basketId,
-                                                  monthlyPlannedCents: monthlyPlannedCents))
+                                                  monthlyPlannedCents: monthlyPlannedCents,
+                                                  currency: currencyCode))
     }
     
     private func validateCreation(with name: String?,

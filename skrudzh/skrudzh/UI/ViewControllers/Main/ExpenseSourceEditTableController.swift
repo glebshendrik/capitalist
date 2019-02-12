@@ -12,9 +12,11 @@ import StaticDataTableViewController
 
 protocol ExpenseSourceEditTableControllerDelegate {
     var isExpenseSourceGoalType: Bool { get }
+    var canChangeCurrency: Bool { get }
     func validationNeeded()
     func didSelectIcon(icon: Icon)
     func didSwitchType(isGoal: Bool)
+    func didSelectCurrency(currency: Currency)
 }
 
 class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFieldDelegate {
@@ -27,6 +29,9 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
     @IBOutlet weak var expenseSourceNameTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var nameBackground: UIView!
     @IBOutlet weak var nameIconContainer: UIView!
+    
+    @IBOutlet weak var currencyTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var changeCurrencyIndicator: UIImageView!
     
     @IBOutlet weak var expenseSourceAmountTextField: MoneyTextField!
     @IBOutlet weak var amountBackground: UIView!
@@ -57,9 +62,11 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
         update(textField: expenseSourceNameTextField)
         update(textField: expenseSourceAmountTextField)
         update(textField: expenseSourceGoalAmountTextField)
+        update(textField: currencyTextField)
         expenseSourceNameTextField.titleFormatter = { $0 }
         expenseSourceAmountTextField.titleFormatter = { $0 }
         expenseSourceGoalAmountTextField.titleFormatter = { $0 }
+        currencyTextField.titleFormatter = { $0 }
         delegate?.validationNeeded()
     }
     
@@ -180,11 +187,24 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
         }
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if  identifier == "showCurrenciesScreen",
+            let delegate = delegate {
+            return delegate.canChangeCurrency
+        }
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowExpenseSourceIcons",
             let iconsViewController = segue.destination as? IconsViewControllerInputProtocol {
             iconsViewController.set(iconCategory: iconCategory)
             iconsViewController.set(delegate: self)
+        }
+        if  segue.identifier == "showCurrenciesScreen",
+            let destination = segue.destination as? CurrenciesViewControllerInputProtocol {
+            
+            destination.set(delegate: self)
         }
     }
 }
@@ -192,5 +212,11 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
 extension ExpenseSourceEditTableController : IconsViewControllerDelegate {
     func didSelectIcon(icon: Icon) {
         delegate?.didSelectIcon(icon: icon)
+    }
+}
+
+extension ExpenseSourceEditTableController : CurrenciesViewControllerDelegate {
+    func didSelectCurrency(currency: Currency) {
+        delegate?.didSelectCurrency(currency: currency)
     }
 }

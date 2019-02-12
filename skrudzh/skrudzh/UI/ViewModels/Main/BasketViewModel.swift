@@ -24,8 +24,12 @@ class BasketViewModel {
         return basket.monthlySpentCents
     }
     
+    var currency: Currency {
+        return basket.currency
+    }
+    
     var monthlySpent: String? {
-        return monthlySpentCents.moneyStringWithCurrency(symbol: "₽")
+        return monthlySpentCents.moneyCurrencyString(with: currency)
     }
     
     var selected: Bool = false

@@ -39,7 +39,7 @@ struct ExpenseSourceCreationForm : Encodable {
     let userId: Int
     let name: String
     let iconURL: URL?
-    let amountCurrency: String = "RUB"
+    let amountCurrency: String
     let amountCents: Int
     let isGoal: Bool
     let goalAmountCents: Int?
@@ -53,13 +53,14 @@ struct ExpenseSourceCreationForm : Encodable {
         case goalAmountCents = "goal_amount_cents"
     }
     
-    init(userId: Int, name: String, amountCents: Int, iconURL: URL?, isGoal: Bool, goalAmountCents: Int?) {
+    init(userId: Int, name: String, amountCents: Int, iconURL: URL?, isGoal: Bool, goalAmountCents: Int?, currency: String) {
         self.userId = userId
         self.name = name
         self.amountCents = amountCents
         self.iconURL = iconURL
         self.isGoal = isGoal
         self.goalAmountCents = goalAmountCents
+        self.amountCurrency = currency
     }
 }
 

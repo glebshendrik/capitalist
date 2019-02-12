@@ -20,12 +20,16 @@ class ExpenseCategoryViewModel {
         return expenseCategory.name
     }
     
+    var currency: Currency {
+        return expenseCategory.currency
+    }
+    
     var monthlyPlanned: String? {
-        return expenseCategory.monthlyPlannedCents?.moneyStringWithCurrency(symbol: "₽")
+        return expenseCategory.monthlyPlannedCents?.moneyCurrencyString(with: currency)
     }
     
     var monthlySpent: String? {
-        return expenseCategory.monthlySpentCents.moneyStringWithCurrency(symbol: "₽")
+        return expenseCategory.monthlySpentCents.moneyCurrencyString(with: currency)
     }
     
     var areMonthlyExpensesPlanned: Bool {

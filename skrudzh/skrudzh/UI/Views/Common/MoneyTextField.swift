@@ -10,12 +10,28 @@ import UIKit
 import SkyFloatingLabelTextField
 
 class MoneyTextField: SkyFloatingLabelTextField {
-    private var currencyFormatter: NumberFormatter = Formatter.currency
-    private var decimalFormatter: NumberFormatter = Formatter.decimal
+    private var currencyFormatter: NumberFormatter?
+    private var decimalFormatter: NumberFormatter?
+    
+    var currency: Currency? = nil {
+        didSet {
+            updateCurrencyFormatter()
+        }
+    }
+    
+    private func updateCurrencyFormatter() {
+        guard let currency = currency else {
+            currencyFormatter = nil
+            decimalFormatter = nil
+            return
+        }
+        currencyFormatter = Formatter.currency(with: currency)
+        decimalFormatter = Formatter.decimal(with: currency)
+    }
     
     var numberValue: NSNumber? {
         guard let textValue = text else { return nil }
-        return currencyFormatter.number(from: textValue)
+        return currencyFormatter?.number(from: textValue)
     }
     
     override func didMoveToSuperview() {
@@ -27,7 +43,7 @@ class MoneyTextField: SkyFloatingLabelTextField {
     
     @objc internal func textFieldEditingDidBegin(_ sender: UITextField) {
         guard let value = numberValue else { return }
-        text = decimalFormatter.string(from: value)
+        text = decimalFormatter?.string(from: value)
     }
     
     @objc internal func textFieldEditingChanged(_ sender: UITextField) {
@@ -36,12 +52,13 @@ class MoneyTextField: SkyFloatingLabelTextField {
     
     @objc internal func textFieldEditingDidEnd(_ sender: UITextField) {
         guard let textValue = text,
-            let value = decimalFormatter.number(from: textValue) else { return }
-        text = decimalFormatter.string(from: value)
+            let value = decimalFormatter?.number(from: textValue) else { return }
+        text = decimalFormatter?.string(from: value)
     }
     
     private func formattedText() -> String? {
         guard   let textValue = text,
+                let currencyFormatter = currencyFormatter,
                 textValue.contains(currencyFormatter.decimalSeparator) else {
             // don't format nil text or if it doesn't conrain decimal separator yet
             return text
@@ -100,45 +117,50 @@ extension NumberFormatter {
 }
 
 struct Formatter {
-    static var decimal : NumberFormatter {
+    static func decimal(with currency: Currency) -> NumberFormatter {
+        let currencyFormatter = Formatter.currency(with: currency)
         let formatter = NumberFormatter(numberStyle: .decimal)
         formatter.groupingSeparator = ""
         formatter.generatesDecimalNumbers = true
-        formatter.minimumFractionDigits = Formatter.currency.minimumFractionDigits
-        formatter.maximumFractionDigits = Formatter.currency.maximumFractionDigits
+        formatter.minimumFractionDigits = currencyFormatter.minimumFractionDigits
+        formatter.maximumFractionDigits = currencyFormatter.maximumFractionDigits
         return formatter
     }
     
-    static var currency : NumberFormatter {
+    static func currency(with currency: Currency) -> NumberFormatter {
         let formatter = NumberFormatter(numberStyle: .currency)
-        formatter.locale = Locale.current
+//        formatter.locale = Locale.current
+        formatter.currencyCode = currency.code
+        formatter.currencySymbol = currency.symbol
+        formatter.internationalCurrencySymbol = currency.symbol
+        formatter.maximumFractionDigits = Int(log10(Double(currency.subunitToUnit)))
+        formatter.minimumFractionDigits = 0
+        
         return formatter
     }
 }
 
 extension String {
-    var intMoney: Int? {
-        guard let decimal = Formatter.decimal.number(from: self) as? NSDecimalNumber else {
+    func intMoney(with currency: Currency) -> Int? {
+        guard let decimal = Formatter.decimal(with: currency).number(from: self) as? NSDecimalNumber else {
             return nil
         }
-        let multiplyFactor = NSDecimalNumber(value: 10).raising(toPower: Formatter.decimal.maximumFractionDigits)
+        let multiplyFactor = NSDecimalNumber(value: currency.subunitToUnit)
         return decimal.multiplying(by: multiplyFactor).intValue
     }
 }
 
 extension Int {
-    var moneyNumber: NSDecimalNumber {
-        let divideFactor = NSDecimalNumber(value: 10).raising(toPower: Formatter.currency.maximumFractionDigits)
+    func moneyNumber(with currency: Currency) -> NSDecimalNumber {
+        let divideFactor = NSDecimalNumber(value: currency.subunitToUnit)
         return NSDecimalNumber(value: self).dividing(by: divideFactor)
     }
     
-    var moneyDecimalString: String? {
-        return Formatter.decimal.string(from: moneyNumber)
+    func moneyDecimalString(with currency: Currency) -> String? {
+        return Formatter.decimal(with: currency).string(from: moneyNumber(with: currency))
     }
     
-    func moneyStringWithCurrency(symbol: String) -> String? {
-        let formatter = Formatter.currency
-        formatter.currencySymbol = symbol
-        return formatter.string(from: moneyNumber)
+    func moneyCurrencyString(with currency: Currency) -> String? {
+        return Formatter.currency(with: currency).string(from: moneyNumber(with: currency))
     }
 }

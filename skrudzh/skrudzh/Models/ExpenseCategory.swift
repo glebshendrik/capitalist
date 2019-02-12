@@ -41,7 +41,7 @@ struct ExpenseCategoryCreationForm : Encodable {
     let name: String
     let iconURL: URL?
     let basketId: Int
-    let monthlyPlannedCurrency: String? = "RUB"
+    let monthlyPlannedCurrency: String
     let monthlyPlannedCents: Int?
     
     enum CodingKeys: String, CodingKey {
@@ -52,11 +52,12 @@ struct ExpenseCategoryCreationForm : Encodable {
         case monthlyPlannedCents = "monthly_planned_cents"
     }
     
-    init(name: String, iconURL: URL?, basketId: Int, monthlyPlannedCents: Int?) {
+    init(name: String, iconURL: URL?, basketId: Int, monthlyPlannedCents: Int?, currency: String) {
         self.name = name
         self.iconURL = iconURL
         self.basketId = basketId
         self.monthlyPlannedCents = monthlyPlannedCents
+        self.monthlyPlannedCurrency = currency
     }
 }
 

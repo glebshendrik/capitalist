@@ -59,8 +59,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
-        setActivityIndicator(hidden: true, animated: false)
+        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor        
         setRemoveButton(hidden: viewModel.isNew)
     }
     
@@ -149,6 +148,19 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
 }
 
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
+    var canChangeCurrency: Bool {
+        return viewModel.isNew
+    }
+    
+    func didSelectCurrency(currency: Currency) {
+        update(currency: currency)
+    }
+    
+    func update(currency: Currency) {
+        viewModel.selectedCurrency = currency
+        updateCurrencyUI()
+    }
+    
     var isExpenseSourceGoalType: Bool {
         return viewModel.isGoal
     }
@@ -253,9 +265,17 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
         editTableController?.expenseSourceNameTextField?.text = viewModel.name        
         editTableController?.expenseSourceAmountTextField?.text = viewModel.amount
         editTableController?.expenseSourceGoalAmountTextField?.text = viewModel.goalAmount
+        updateCurrencyUI()
         updateIconUI()
         updateGoalUI()
         validateUI()
+    }
+    
+    private func updateCurrencyUI() {
+        editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
+        editTableController?.changeCurrencyIndicator?.isHidden = !canChangeCurrency
+        editTableController?.expenseSourceAmountTextField?.currency = viewModel.selectedCurrency
+        editTableController?.expenseSourceGoalAmountTextField?.currency = viewModel.selectedCurrency
     }
     
     private func updateGoalUI() {
@@ -283,6 +303,25 @@ extension ExpenseSourceEditViewController {
     private func setupUI() {
         setupNavigationBar()
         loaderImageView.showLoader()
+        editTableController?.tableView.allowsSelection = canChangeCurrency
+        guard viewModel.isNew else {
+            setActivityIndicator(hidden: true)
+            return
+        }
+        loadDefaultCurrency()
+    }
+    
+    private func loadDefaultCurrency() {
+        setActivityIndicator(hidden: false)
+        saveButton.isEnabled = false
+        
+        _ = firstly {
+                viewModel.loadDefaultCurrency()
+            }.ensure {
+                self.updateUI()
+                self.setActivityIndicator(hidden: true)
+                self.saveButton.isEnabled = true
+            }
     }
     
     private func setupNavigationBar() {

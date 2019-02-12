@@ -12,6 +12,7 @@ import PromiseKit
 enum ExpenseSourceCreationError : Error {
     case validation(validationResults: [ExpenseSourceCreationForm.CodingKeys : [ValidationErrorReason]])
     case currentSessionDoesNotExist
+    case currencyIsNotSpecified
 }
 
 enum ExpenseSourceUpdatingError : Error {
@@ -31,11 +32,13 @@ class ExpenseSourceEditViewModel {
     }
             
     var amount: String? {
-        return (expenseSource?.amountCents ?? 0).moneyDecimalString
+        guard let currency = selectedCurrency else { return nil }
+        return (expenseSource?.amountCents ?? 0).moneyDecimalString(with: currency)
     }
     
     var goalAmount: String? {
-        return expenseSource?.goalAmountCents?.moneyDecimalString
+        guard let currency = selectedCurrency else { return nil }
+        return expenseSource?.goalAmountCents?.moneyDecimalString(with: currency)
     }
     
     var iconURL: URL? {
@@ -43,6 +46,16 @@ class ExpenseSourceEditViewModel {
     }
     
     var selectedIconURL: URL?
+    
+    var selectedCurrency: Currency? = nil
+    
+    var selectedCurrencyName: String? {
+        return selectedCurrency?.translatedName
+    }
+    
+    var selectedCurrencyCode: String? {
+        return selectedCurrency?.code
+    }
     
     var isNew: Bool {
         return expenseSource == nil
@@ -60,14 +73,25 @@ class ExpenseSourceEditViewModel {
         self.expenseSource = expenseSource
         selectedIconURL = iconURL
         isGoal = expenseSource.isGoal
+        selectedCurrency = expenseSource.currency
+    }
+    
+    func loadDefaultCurrency() -> Promise<Void> {
+        return  firstly {
+                    accountCoordinator.loadCurrentUser()
+                }.done { user in
+                    self.selectedCurrency = user.currency
+                }
     }
     
     func isFormValid(with name: String?,
                      amount: String?,
                      iconURL: URL?,
                      goalAmount: String?) -> Bool {
-        let amountCents = amount?.intMoney
-        let goalAmountCents = goalAmount?.intMoney
+        guard let currency = selectedCurrency else { return false }
+        
+        let amountCents = amount?.intMoney(with: currency)
+        let goalAmountCents = goalAmount?.intMoney(with: currency)
         
         return isNew
             ? isCreationFormValid(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents)
@@ -78,8 +102,12 @@ class ExpenseSourceEditViewModel {
                            amount: String?,
                            iconURL: URL?,
                            goalAmount: String?) -> Promise<Void> {
-        let amountCents = amount?.intMoney
-        let goalAmountCents = goalAmount?.intMoney
+        guard let currency = selectedCurrency else {
+            return Promise(error: ExpenseSourceCreationError.currencyIsNotSpecified)
+        }
+        
+        let amountCents = amount?.intMoney(with: currency)
+        let goalAmountCents = goalAmount?.intMoney(with: currency)
         
         return isNew
             ? createExpenseSource(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents)
@@ -129,12 +157,17 @@ extension ExpenseSourceEditViewModel {
             return Promise(error: ExpenseSourceCreationError.currentSessionDoesNotExist)
         }
         
+        guard let currencyCode = selectedCurrencyCode else {
+            return Promise(error: ExpenseSourceCreationError.currencyIsNotSpecified)
+        }
+        
         return .value(ExpenseSourceCreationForm(userId: currentUserId,
                                                 name: name!,
                                                 amountCents: amountCents!,
                                                 iconURL: iconURL,
                                                 isGoal: isGoal,
-                                                goalAmountCents: goalAmountCents))
+                                                goalAmountCents: goalAmountCents,
+                                                currency: currencyCode))
     }
     
     private func validateCreation(with name: String?,

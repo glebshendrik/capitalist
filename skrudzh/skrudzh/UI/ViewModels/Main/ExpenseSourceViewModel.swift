@@ -21,7 +21,11 @@ class ExpenseSourceViewModel {
     }
     
     var amount: String {
-        return expenseSource.amountCents.moneyStringWithCurrency(symbol: "₽") ?? "0 ₽"
+        return expenseSource.amountCents.moneyCurrencyString(with: currency) ?? ""
+    }
+    
+    var currency: Currency {
+        return expenseSource.currency
     }
     
     var iconURL: URL? {

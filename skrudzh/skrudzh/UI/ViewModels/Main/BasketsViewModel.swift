@@ -26,7 +26,8 @@ class BasketsViewModel {
     }
     
     var monthlySpent: String? {
-        return basketsMonthlySpentCents.moneyStringWithCurrency(symbol: "₽")
+        guard let currency = basketViewModels.first?.currency else { return nil }
+        return basketsMonthlySpentCents.moneyCurrencyString(with: currency)
     }
     
     var joyBasketRatio: CGFloat {
