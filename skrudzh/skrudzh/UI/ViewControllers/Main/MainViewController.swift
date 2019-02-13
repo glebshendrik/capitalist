@@ -19,6 +19,8 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var router: ApplicationRouterProtocol!
     
+    static var finantialDataInvalidatedNotification = NSNotification.Name("finantialDataInvalidatedNotification")
+    
     @IBOutlet weak var incomeSourcesCollectionView: UICollectionView!
     @IBOutlet weak var incomeSourcesActivityIndicator: UIView!
     @IBOutlet weak var incomeSourcesLoader: UIImageView!
@@ -834,10 +836,15 @@ extension MainViewController {
     
     private func setupNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(finantialDataInvalidated), name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
     
     @objc private func appMovedToForeground() {
         setVisibleCells(editing: isEditing)
+    }
+    
+    @objc private func finantialDataInvalidated() {
+        loadData()
     }
     
     private func layoutUI() {

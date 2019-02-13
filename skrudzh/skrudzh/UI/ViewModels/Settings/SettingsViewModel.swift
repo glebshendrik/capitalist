@@ -33,6 +33,11 @@ class SettingsViewModel : ProfileViewModel {
         let form = UserSettingsUpdatingForm(userId: currentUserId, currency: currency.code)
         return  firstly {
                     settingsCoordinator.updateUserSettings(with: form)
+                }.get {
+                    
+                    NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+                    
+                    
                 }.then { _ in
                     return self.loadData()
                 }

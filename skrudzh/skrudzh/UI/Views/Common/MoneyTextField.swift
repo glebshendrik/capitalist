@@ -135,7 +135,13 @@ struct Formatter {
         formatter.internationalCurrencySymbol = currency.symbol
         formatter.maximumFractionDigits = Int(log10(Double(currency.subunitToUnit)))
         formatter.minimumFractionDigits = 0
+        formatter.positiveFormat = formatter.positiveFormat.replacingOccurrences(of: "¤", with: "")
+        formatter.positiveFormat = formatter.positiveFormat.replacingOccurrences(of: " ", with: "")
         
+        if let format = formatter.positiveFormat {
+            formatter.positiveFormat = currency.symbolFirst ? "¤\(format)" : "\(format)¤"
+        }
+
         return formatter
     }
 }
