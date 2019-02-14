@@ -11,14 +11,19 @@ import SkyFloatingLabelTextField
 
 protocol ExpenseCategoryEditTableControllerDelegate {
     var basketType: BasketType { get }
+    var canChangeCurrency: Bool { get }
     func validationNeeded()
     func didSelectIcon(icon: Icon)
+    func didSelectCurrency(currency: Currency)
 }
 
 class ExpenseCategoryEditTableController : UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var expenseCategoryNameTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var nameBackground: UIView!
     @IBOutlet weak var nameIconContainer: UIView!
+    
+    @IBOutlet weak var currencyTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var changeCurrencyIndicator: UIImageView!
     
     @IBOutlet weak var expenseCategoryMonthlyPlannedTextField: MoneyTextField!
     @IBOutlet weak var monthlyPlannedBackground: UIView!
@@ -44,8 +49,10 @@ class ExpenseCategoryEditTableController : UITableViewController, UITextFieldDel
         super.viewDidLoad()
         update(textField: expenseCategoryNameTextField)
         update(textField: expenseCategoryMonthlyPlannedTextField)
+        update(textField: currencyTextField)
         expenseCategoryNameTextField.titleFormatter = { $0 }
         expenseCategoryMonthlyPlannedTextField.titleFormatter = { $0 }
+        currencyTextField.titleFormatter = { $0 }
         delegate?.validationNeeded()
     }
     
@@ -127,11 +134,24 @@ class ExpenseCategoryEditTableController : UITableViewController, UITextFieldDel
         }
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if  identifier == "showCurrenciesScreen",
+            let delegate = delegate {
+            return delegate.canChangeCurrency
+        }
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowExpenseCategoryIcons",
             let iconsViewController = segue.destination as? IconsViewControllerInputProtocol {
             iconsViewController.set(iconCategory: iconCategory)
             iconsViewController.set(delegate: self)
+        }
+        if  segue.identifier == "showCurrenciesScreen",
+            let destination = segue.destination as? CurrenciesViewControllerInputProtocol {
+            
+            destination.set(delegate: self)
         }
     }
 }
@@ -139,5 +159,11 @@ class ExpenseCategoryEditTableController : UITableViewController, UITextFieldDel
 extension ExpenseCategoryEditTableController : IconsViewControllerDelegate {
     func didSelectIcon(icon: Icon) {
         delegate?.didSelectIcon(icon: icon)
+    }
+}
+
+extension ExpenseCategoryEditTableController : CurrenciesViewControllerDelegate {
+    func didSelectCurrency(currency: Currency) {
+        delegate?.didSelectCurrency(currency: currency)
     }
 }

@@ -53,8 +53,7 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
-        setActivityIndicator(hidden: true, animated: false)
+        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor        
         setRemoveButton(hidden: viewModel.isNew)
     }
     
@@ -146,6 +145,19 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
 }
 
 extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableControllerDelegate {
+    var canChangeCurrency: Bool {
+        return viewModel.isNew
+    }
+    
+    func didSelectCurrency(currency: Currency) {
+        update(currency: currency)
+    }
+    
+    func update(currency: Currency) {
+        viewModel.selectedCurrency = currency
+        updateCurrencyUI()
+    }
+    
     var basketType: BasketType {
         return viewModel.basketType ?? .joy
     }
@@ -240,8 +252,15 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditInputProtocol {
     private func updateUI() {
         editTableController?.expenseCategoryNameTextField?.text = viewModel.name
         editTableController?.expenseCategoryMonthlyPlannedTextField?.text = viewModel.monthlyPlanned
+        updateCurrencyUI()
         updateIconUI()
         validateUI()
+    }
+    
+    private func updateCurrencyUI() {
+        editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
+        editTableController?.changeCurrencyIndicator?.isHidden = !canChangeCurrency
+        editTableController?.expenseCategoryMonthlyPlannedTextField?.currency = viewModel.selectedCurrency
     }
     
     private func updateIconUI() {
@@ -290,6 +309,25 @@ extension ExpenseCategoryEditViewController {
     private func setupUI() {
         setupNavigationBar()
         loaderImageView.showLoader()
+        editTableController?.tableView.allowsSelection = canChangeCurrency
+        guard viewModel.isNew else {
+            setActivityIndicator(hidden: true)
+            return
+        }
+        loadDefaultCurrency()
+    }
+    
+    private func loadDefaultCurrency() {
+        setActivityIndicator(hidden: false)
+        saveButton.isEnabled = false
+        
+        _ = firstly {
+                viewModel.loadDefaultCurrency()
+            }.ensure {
+                self.updateUI()
+                self.setActivityIndicator(hidden: true)
+                self.saveButton.isEnabled = true
+            }
     }
     
     private func setupNavigationBar() {
