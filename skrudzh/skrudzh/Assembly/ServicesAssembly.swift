@@ -60,5 +60,11 @@ class ServicesAssembly: Assembly {
             return CurrenciesService(
                 apiClient: r.resolve(APIClientProtocol.self)!)
         }
+        
+        container.register(IncomesServiceProtocol.self) { r in
+            return IncomesService(
+                apiClient: r.resolve(APIClientProtocol.self)!)
+        }
+        
     }
 }
