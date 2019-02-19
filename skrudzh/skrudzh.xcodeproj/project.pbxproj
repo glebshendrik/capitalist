@@ -62,6 +62,7 @@
 		FA6918A221F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */; };
 		FA6918A421F0EF03003639F6 /* ExpenseCategoryEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */; };
 		FA715E5221FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */; };
+		FA7CB4D7221C20B300FAAC0F /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4D6221C20B300FAAC0F /* Income.swift */; };
 		FA7DB72B22102B6D00559878 /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DB72A22102B6D00559878 /* CurrencyViewModel.swift */; };
 		FA7DB72D22102BF900559878 /* CurrenciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DB72C22102BF900559878 /* CurrenciesViewModel.swift */; };
 		FA7DB72F22102EDB00559878 /* CurrenciesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DB72E22102EDB00559878 /* CurrenciesServiceProtocol.swift */; };
@@ -222,6 +223,7 @@
 		FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditViewController.swift; sourceTree = "<group>"; };
 		FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditTableController.swift; sourceTree = "<group>"; };
 		FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalExpenseSourceCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA7CB4D6221C20B300FAAC0F /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		FA7DB72A22102B6D00559878 /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
 		FA7DB72C22102BF900559878 /* CurrenciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesViewModel.swift; sourceTree = "<group>"; };
 		FA7DB72E22102EDB00559878 /* CurrenciesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesServiceProtocol.swift; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 				FA0CAE1421D669C000805288 /* Icon.swift */,
 				FAED7D9721EC4C0D00BF6FE1 /* Basket.swift */,
 				FAA91270220B35F600F2C251 /* Currency.swift */,
+				FA7CB4D6221C20B300FAAC0F /* Income.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1117,6 +1120,7 @@
 				FAD88F2421AEB71000BE7BC1 /* NotificationsManagerProtocol.swift in Sources */,
 				FAD88F3721AEB8F200BE7BC1 /* UIFlowManager.swift in Sources */,
 				FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */,
+				FA7CB4D7221C20B300FAAC0F /* Income.swift in Sources */,
 				FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */,
 				FA0CAE1321D52CB400805288 /* MoneyTextField.swift in Sources */,
 				FAD88F7621AFD64000BE7BC1 /* APIResource.swift in Sources */,
