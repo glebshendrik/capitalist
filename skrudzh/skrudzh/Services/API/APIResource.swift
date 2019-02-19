@@ -67,6 +67,11 @@ enum APIResource: URLRequestConvertible {
     // Currencies
     case indexCurrencies
     
+    // Incomes
+    case createIncome(form: IncomeCreationForm)
+    case updateIncome(form: IncomeUpdatingForm)
+    case destroyIncome(id: Int)
+    
     var method: HTTPMethod {
         return APIResourceMethod.method(for: self)
     }

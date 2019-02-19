@@ -17,7 +17,8 @@ struct APIResourceMethod {
              .createPasswordResetCode,
              .createIncomeSource,
              .createExpenseSource,
-             .createExpenseCategory:
+             .createExpenseCategory,
+             .createIncome:
             return .post
         case .showUser,
              .showIncomeSource,
@@ -37,7 +38,8 @@ struct APIResourceMethod {
              .registerDeviceToken,
              .updateIncomeSource,
              .updateExpenseSource,
-             .updateExpenseCategory:
+             .updateExpenseCategory,
+             .updateIncome:
             return .put
         case .updateIncomeSourcePosition,
              .updateExpenseSourcePosition,
@@ -47,7 +49,8 @@ struct APIResourceMethod {
         case .destroySession,
              .destroyIncomeSource,
              .destroyExpenseSource,
-             .destroyExpenseCategory:
+             .destroyExpenseCategory,
+             .destroyIncome:
             return .delete
         }
     }
