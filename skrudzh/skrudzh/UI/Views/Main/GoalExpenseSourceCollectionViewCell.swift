@@ -44,5 +44,5 @@ class GoalExpenseSourceCollectionViewCell : ExpenseSourceCollectionViewCell {
         progressView.trackFillColor = imageTintColor
         
         
-    }
+    }        
 }

@@ -8,7 +8,10 @@
 
 import Foundation
 
-class ExpenseSourceViewModel {
+class ExpenseSourceViewModel : TransactionStartable {
+    var canStartTransaction: Bool {
+        return !isGoal || isGoalCompleted
+    }
     
     public private(set) var expenseSource: ExpenseSource
     

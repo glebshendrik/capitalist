@@ -8,7 +8,10 @@
 
 import Foundation
 
-class IncomeSourceViewModel {
+class IncomeSourceViewModel : TransactionStartable {
+    var canStartTransaction: Bool {
+        return true
+    }
     
     public private(set) var incomeSource: IncomeSource
     

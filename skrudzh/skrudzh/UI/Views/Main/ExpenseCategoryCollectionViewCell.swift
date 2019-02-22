@@ -96,3 +96,9 @@ class ExpenseCategoryCollectionViewCell : EditableCell {
         layer.rasterizationScale = UIScreen.main.scale
     }        
 }
+
+extension ExpenseCategoryCollectionViewCell : TransactionCompletable {
+    func canComplete(startable: TransactionStartable) -> Bool {
+        return false
+    }
+}

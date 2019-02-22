@@ -59,6 +59,8 @@
 		FA6270A621CA3ED600CC0269 /* FieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A521CA3ED600CC0269 /* FieldViewModel.swift */; };
 		FA6270AA21CA93D100CC0269 /* FieldsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A921CA93D100CC0269 /* FieldsViewModel.swift */; };
 		FA6270AD21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270AC21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift */; };
+		FA66FB69222048BC00708C71 /* EditableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66FB68222048BC00708C71 /* EditableCell.swift */; };
+		FA66FB6D22204B3100708C71 /* Transactionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66FB6C22204B3100708C71 /* Transactionable.swift */; };
 		FA6918A221F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */; };
 		FA6918A421F0EF03003639F6 /* ExpenseCategoryEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */; };
 		FA715E5221FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */; };
@@ -224,6 +226,8 @@
 		FA6270A521CA3ED600CC0269 /* FieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldViewModel.swift; sourceTree = "<group>"; };
 		FA6270A921CA93D100CC0269 /* FieldsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsViewModel.swift; sourceTree = "<group>"; };
 		FA6270AC21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsViewControllerProtocol.swift; sourceTree = "<group>"; };
+		FA66FB68222048BC00708C71 /* EditableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableCell.swift; sourceTree = "<group>"; };
+		FA66FB6C22204B3100708C71 /* Transactionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transactionable.swift; sourceTree = "<group>"; };
 		FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditViewController.swift; sourceTree = "<group>"; };
 		FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditTableController.swift; sourceTree = "<group>"; };
 		FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalExpenseSourceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -531,6 +535,8 @@
 				FA0CAE0821D39D3B00805288 /* ExpenseSourceCollectionViewCell.swift */,
 				FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */,
 				FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */,
+				FA66FB68222048BC00708C71 /* EditableCell.swift */,
+				FA66FB6C22204B3100708C71 /* Transactionable.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1084,6 +1090,7 @@
 				FAD88F4421AEBE4A00BE7BC1 /* NotificationsCoordinatorProtocol.swift in Sources */,
 				FA0CAE0521D2615900805288 /* ExpenseSourcesCoordinator.swift in Sources */,
 				FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */,
+				FA66FB69222048BC00708C71 /* EditableCell.swift in Sources */,
 				FA6270A321C7A87300CC0269 /* IncomeSourceEditTableController.swift in Sources */,
 				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
 				FA7DB73522102FBE00559878 /* CurrenciesCoordinator.swift in Sources */,
@@ -1109,6 +1116,7 @@
 				FAD88F0F21AEB45A00BE7BC1 /* ManagersAssembly.swift in Sources */,
 				FAA9127F220D24AD00F2C251 /* SettingsCoordinator.swift in Sources */,
 				FAED7D9A21EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift in Sources */,
+				FA66FB6D22204B3100708C71 /* Transactionable.swift in Sources */,
 				FA6270AD21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift in Sources */,
 				FA165CE421B65F2F00EAA16B /* ValidationResult.swift in Sources */,
 				FAD88F4F21AEC1A500BE7BC1 /* UsersService.swift in Sources */,

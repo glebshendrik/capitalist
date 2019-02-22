@@ -745,7 +745,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "211"
             endingLineNumber = "211"
-            landmarkName = "didCreateIncomeSource()"
+            landmarkName = "didUpdateIncomeSource()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1082,22 +1082,6 @@
             startingLineNumber = "134"
             endingLineNumber = "134"
             landmarkName = "currency(with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "572530878.940744"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1143"
-            endingLineNumber = "1143"
-            landmarkName = "dragged(gesture:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
