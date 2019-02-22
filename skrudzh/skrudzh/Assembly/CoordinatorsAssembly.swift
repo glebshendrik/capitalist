@@ -57,5 +57,9 @@ class CoordinatorsAssembly: Assembly {
         container.register(CurrenciesCoordinatorProtocol.self) { r in
             return CurrenciesCoordinator(currenciesService: r.resolve(CurrenciesServiceProtocol.self)!)
         }
+        
+        container.register(IncomesCoordinatorProtocol.self) { r in
+            return IncomesCoordinator(incomesService: r.resolve(IncomesServiceProtocol.self)!)
+        }
     }
 }

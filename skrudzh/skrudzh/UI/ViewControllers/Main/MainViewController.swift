@@ -69,9 +69,20 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     private var movingCollectionView: UICollectionView? = nil
     private var offsetForCollectionViewCellBeingMoved: CGPoint = .zero
     
+    private var transactionStartedIndexPath: IndexPath? = nil
+    private var transactionStartedCollectionView: UICollectionView? = nil
+    private var offsetForTransactionImageBeingMoved: CGPoint = .zero
+    private var transactionStartedCell: UICollectionViewCell? = nil
+    private var dropCandidateCell: UICollectionViewCell? = nil
+    
     @IBOutlet weak var editDoneButton: UIButton!
     @IBOutlet weak var editDoneButtonHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var transactionDraggingElement: UIView!
+    
+    var isTransactionStarted: Bool {
+        return transactionStartedCollectionView != nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -811,12 +822,13 @@ extension MainViewController {
         setupGestureRecognizer(for: joyExpenseCategoriesCollectionView)
         setupGestureRecognizer(for: riskExpenseCategoriesCollectionView)
         setupGestureRecognizer(for: safeExpenseCategoriesCollectionView)
+        setupPanGestureRecognizer()
     }
     
     private func setupGestureRecognizer(for collectionView: UICollectionView) {
-        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(gesture:))) // this
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(gesture:)))
         collectionView.addGestureRecognizer(gestureRecognizer)
-        gestureRecognizer.minimumPressDuration = 0.3
+        gestureRecognizer.minimumPressDuration = 1.0
     }
     
     private func setupExpenseCategoriesCollectionView() {
@@ -952,6 +964,7 @@ extension MainViewController {
         case .began:
             if !isEditing {
                 setEditing(true, animated: true)
+                transactionDraggingElement.isHidden = true
                 return
             }
             movingIndexPath = movingCollectionView.indexPathForItem(at: location)
@@ -1076,5 +1089,186 @@ extension MainViewController {
         update(joyExpenseCategoriesCollectionView)
         update(riskExpenseCategoriesCollectionView)
         update(safeExpenseCategoriesCollectionView)
+    }
+}
+
+extension MainViewController {
+    private func setupPanGestureRecognizer() {
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(dragged(gesture:)))
+        self.view.addGestureRecognizer(gestureRecognizer)
+        gestureRecognizer.minimumPressDuration = 0.15
+        gestureRecognizer.delegate = self
+    }
+    
+    func animateTransactionStarted(at cell: UICollectionViewCell?) {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { () -> Void in
+            cell?.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        }, completion: { finished in
+            
+        })
+    }
+    
+    func animateTransactionDropCandidate(at cell: UICollectionViewCell?) {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { () -> Void in
+            cell?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        }, completion: { finished in
+            
+        })
+    }
+    
+    func animateTransactionFinished(cell: UICollectionViewCell?) {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { () -> Void in
+            cell?.transform = CGAffineTransform.identity
+        }, completion: { finished in
+        })
+    }
+    
+    @objc func dragged(gesture: UIPanGestureRecognizer) {
+        
+        guard !isEditing else { return }
+        
+        
+        
+        
+        
+        
+        switch gesture.state {
+        case .began:
+            var locationInView = gesture.location(in: self.view)
+            
+            let collectionViews: [UICollectionView] = [incomeSourcesCollectionView,
+                                                       expenseSourcesCollectionView]
+            
+            transactionStartedCollectionView = collectionViews.first(where: { collectionView in
+                let pointInside = self.view.convert(locationInView, to: collectionView)
+                return collectionView.bounds.contains(pointInside)
+            })
+            
+            guard let transactionStartedCollectionView = transactionStartedCollectionView else { return }
+            
+            transactionStartedCollectionView.panGestureRecognizer.isEnabled = false
+            transactionStartedCollectionView.panGestureRecognizer.isEnabled = true
+            
+            var location = gesture.location(in: transactionStartedCollectionView)
+            
+            transactionStartedIndexPath = transactionStartedCollectionView.indexPathForItem(at: location)
+
+            guard let indexPath = transactionStartedIndexPath else { return }
+
+            let cell = transactionStartedCollectionView.cellForItem(at: indexPath)
+
+            // This is the class variable I mentioned above
+            if let cell = cell {
+                transactionStartedCell = cell
+                offsetForTransactionImageBeingMoved = offsetOfTouchFrom(recognizer: gesture, inCell: cell)
+            }
+
+
+            locationInView.y -= 30
+            
+            transactionDraggingElement.isHidden = false
+            transactionDraggingElement.center = locationInView
+            animateTransactionStarted(at: cell)
+        case .changed:
+            
+            guard let transactionStartedCollectionView = transactionStartedCollectionView else {
+                animateTransactionFinished(cell: dropCandidateCell)
+                return
+            }
+            
+            transactionStartedCollectionView.panGestureRecognizer.isEnabled = false
+            transactionStartedCollectionView.panGestureRecognizer.isEnabled = true
+            
+            var locationInView = gesture.location(in: self.view)
+
+            locationInView.y -= 30
+            
+            transactionDraggingElement.center = locationInView
+            
+            func intersectedCell() -> UICollectionViewCell? {
+                let collectionViews: [UICollectionView] = [expenseSourcesCollectionView,
+                                                           joyExpenseCategoriesCollectionView,
+                                                           riskExpenseCategoriesCollectionView,
+                                                           safeExpenseCategoriesCollectionView]
+                
+                guard let intersectedCollectionView = collectionViews.first(where: { collectionView in
+                    let pointInside = self.view.convert(locationInView, to: collectionView)
+                    
+                    return collectionView.bounds.contains(pointInside)
+                }) else { return nil }
+                
+                guard intersectedCollectionView != transactionStartedCollectionView else { return nil }
+                
+                var location = gesture.location(in: intersectedCollectionView)
+                
+//                gesture.
+                location.y -= 30
+                
+                guard let indexPath = intersectedCollectionView.indexPathForItem(at: location) else { return nil }
+                
+                return intersectedCollectionView.cellForItem(at: indexPath)
+            }
+            
+            guard let cell = intersectedCell() else {
+                animateTransactionFinished(cell: dropCandidateCell)
+                self.dropCandidateCell = nil
+                return
+            }
+            animateTransactionFinished(cell: dropCandidateCell)
+            dropCandidateCell = cell
+            animateTransactionDropCandidate(at: cell)
+            
+        default:
+            guard let transactionStartedCell = transactionStartedCell else {
+                transactionDraggingElement.isHidden = true
+                return
+            }
+            if let dropCandidateCell = dropCandidateCell {
+                animateTransactionCompleted(from: transactionStartedCell, to: dropCandidateCell)
+            } else {
+                animateTransactionCancelled(from: transactionStartedCell)
+            }
+            self.dropCandidateCell = nil
+            self.transactionStartedCell = nil
+        }
+    }
+    
+    private func animateTransactionCompleted(from fromCell: UICollectionViewCell, to toCell: UICollectionViewCell) {
+        UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options: [.calculationModeLinear], animations: {
+            // Add animations
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1, animations: {
+                self.transactionDraggingElement.center = toCell.convert(toCell.contentView.center, to: self.view)
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.4, animations: {
+                self.transactionDraggingElement.transform = CGAffineTransform(scaleX: 0, y: 0)
+                fromCell.transform = CGAffineTransform.identity
+                toCell.transform = CGAffineTransform.identity
+            })
+        }, completion:{ _ in
+            self.transactionDraggingElement.isHidden = true
+            self.transactionDraggingElement.transform = CGAffineTransform.identity
+        })
+    }
+    
+    private func animateTransactionCancelled(from cell: UICollectionViewCell) {
+        UIView.animateKeyframes(withDuration: 0.6, delay: 0.0, options: [.calculationModeLinear], animations: {
+            // Add animations
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.2, animations: {
+                self.transactionDraggingElement.center = cell.convert(cell.contentView.center, to: self.view)
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.4, animations: {
+                self.transactionDraggingElement.transform = CGAffineTransform(scaleX: 0, y: 0)
+                cell.transform = CGAffineTransform.identity
+            })
+        }, completion:{ _ in
+            self.transactionDraggingElement.isHidden = true
+            self.transactionDraggingElement.transform = CGAffineTransform.identity
+        })
+    }
+}
+
+extension MainViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

@@ -2309,9 +2309,25 @@
                                     <action selector="didTapEditDoneButton:" destination="527-2C-xUs" eventType="touchUpInside" id="nrm-g9-JXe"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gku-Sf-ydu">
+                                <rect key="frame" x="157.5" y="271.5" width="60" height="60"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="money-icon" translatesAutoresizingMaskIntoConstraints="NO" id="dUt-AC-D2O">
+                                        <rect key="frame" x="3" y="5" width="54" height="50"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="dUt-AC-D2O" firstAttribute="centerY" secondItem="Gku-Sf-ydu" secondAttribute="centerY" id="L49-TT-LWy"/>
+                                    <constraint firstItem="dUt-AC-D2O" firstAttribute="centerX" secondItem="Gku-Sf-ydu" secondAttribute="centerX" id="aOJ-0Q-qcP"/>
+                                    <constraint firstAttribute="width" constant="60" id="cVA-G0-KoI"/>
+                                    <constraint firstAttribute="height" constant="60" id="hLk-WV-whF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Gku-Sf-ydu" firstAttribute="centerX" secondItem="D5A-mu-huD" secondAttribute="centerX" id="0Wo-Sf-0pc"/>
                             <constraint firstItem="Pqg-XA-9pr" firstAttribute="top" secondItem="4tN-KR-M2Q" secondAttribute="bottom" id="3FT-FS-XI0"/>
                             <constraint firstItem="uZP-da-pZ0" firstAttribute="trailing" secondItem="4tN-KR-M2Q" secondAttribute="trailing" id="4Ir-3x-TB0"/>
                             <constraint firstItem="Pqg-XA-9pr" firstAttribute="trailing" secondItem="uZP-da-pZ0" secondAttribute="trailing" id="5gA-0d-loG"/>
@@ -2323,6 +2339,7 @@
                             <constraint firstAttribute="trailing" secondItem="p2n-9h-iVJ" secondAttribute="trailing" id="OXz-fO-aKU"/>
                             <constraint firstItem="uZP-da-pZ0" firstAttribute="trailing" secondItem="DLF-Af-F6p" secondAttribute="trailing" id="QMs-Fx-xCt"/>
                             <constraint firstItem="ioQ-2O-oOH" firstAttribute="top" secondItem="DLF-Af-F6p" secondAttribute="bottom" id="Ynh-Ek-tb2"/>
+                            <constraint firstItem="Gku-Sf-ydu" firstAttribute="centerY" secondItem="D5A-mu-huD" secondAttribute="centerY" id="eAs-Dl-7GS"/>
                             <constraint firstItem="p2n-9h-iVJ" firstAttribute="leading" secondItem="D5A-mu-huD" secondAttribute="leading" id="gws-Er-tUt"/>
                             <constraint firstItem="DLF-Af-F6p" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" id="jiv-a7-LRH"/>
                             <constraint firstItem="p2n-9h-iVJ" firstAttribute="top" secondItem="D5A-mu-huD" secondAttribute="top" id="ptB-r9-EBU"/>
@@ -2376,6 +2393,7 @@
                         <outlet property="safeExpenseCategoriesLeftConstraint" destination="qod-DS-NdX" id="b23-G0-Wfb"/>
                         <outlet property="safeExpenseCategoriesLoader" destination="EkC-7E-d6Q" id="JfT-bR-SZ0"/>
                         <outlet property="safeExpenseCategoriesPageControl" destination="mfo-kH-MYa" id="Isk-Uo-LJw"/>
+                        <outlet property="transactionDraggingElement" destination="Gku-Sf-ydu" id="zXF-bV-pI7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6X-Vx-icx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4335,6 +4353,7 @@
         <image name="little-right-arrow-icon" width="4" height="7"/>
         <image name="loader-1" width="55" height="31"/>
         <image name="menu-button-icon" width="16" height="11"/>
+        <image name="money-icon" width="54" height="50"/>
         <image name="pen-icon" width="8" height="8"/>
         <image name="planned-amount-icon" width="20" height="21.5"/>
         <image name="plus-icon-blue" width="16" height="16"/>
