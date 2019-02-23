@@ -45,7 +45,7 @@ extension ExpenseSourceCollectionViewCell : Transactionable {
     }
     
     func canComplete(startable: TransactionStartable) -> Bool {
-        return false
+        return startable is IncomeSourceCollectionViewCell || startable is ExpenseSourceCollectionViewCell
     }
 }
 

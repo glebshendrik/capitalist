@@ -99,6 +99,6 @@ class ExpenseCategoryCollectionViewCell : EditableCell {
 
 extension ExpenseCategoryCollectionViewCell : TransactionCompletable {
     func canComplete(startable: TransactionStartable) -> Bool {
-        return false
+        return startable is ExpenseSourceCollectionViewCell
     }
 }

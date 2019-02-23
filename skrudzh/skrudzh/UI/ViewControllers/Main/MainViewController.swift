@@ -70,8 +70,16 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     private var offsetForCollectionViewCellBeingMoved: CGPoint = .zero
     
     private var transactionStartedCollectionView: UICollectionView? = nil
+    private var transactionStartedIndexPath: IndexPath? = nil
     private var transactionStartedCell: UICollectionViewCell? = nil
+    
+    private var dropCandidateCollectionView: UICollectionView? = nil
+    private var dropCandidateIndexPath: IndexPath? = nil
     private var dropCandidateCell: UICollectionViewCell? = nil
+    
+    private var startedWaitingAtTheEdge: Date? = nil
+    private var waitingEdge: UIRectEdge? = nil
+    
     @IBOutlet weak var transactionDraggingElement: UIView!
 
     @IBOutlet weak var editDoneButton: UIButton!
@@ -1124,21 +1132,36 @@ extension MainViewController {
             
             var locationInCollectionView = gesture.location(in: transactionStartedCollectionView)
             
-            guard let indexPath = transactionStartedCollectionView.indexPathForItem(at: locationInCollectionView) else {
+            transactionStartedIndexPath = transactionStartedCollectionView.indexPathForItem(at: locationInCollectionView)
+            
+            guard let indexPath = transactionStartedIndexPath else {
 
                 self.transactionStartedCollectionView = nil
                 return
             }
-
-            transactionStartedCell = transactionStartedCollectionView.cellForItem(at: indexPath)
+            
+            guard   let cell = transactionStartedCollectionView.cellForItem(at: indexPath),
+                    let transactionStartable = cell as? TransactionStartable,
+                    transactionStartable.canStartTransaction else {
+                        
+                self.transactionStartedCollectionView = nil
+                self.transactionStartedIndexPath = nil
+                self.transactionStartedCell = nil
+                transactionDraggingElement.isHidden = true
+                return
+            }
+            
+            transactionStartedCell = cell
             transactionDraggingElement.isHidden = false
             transactionDraggingElement.center = locationInView.applying(CGAffineTransform(translationX: 0, y: -30))
-            animateTransactionStarted(cell: transactionStartedCell)
+            animateTransactionStarted(cell: cell)
             
         case .changed:
             
-            guard let transactionStartedCollectionView = transactionStartedCollectionView else {
-                animateTransactionFinished(cell: transactionStartedCell)
+            guard   let transactionStartedCollectionView = transactionStartedCollectionView,
+                    let transactionStartedIndexPath = transactionStartedIndexPath,
+                    let transactionStartedCell = transactionStartedCollectionView.cellForItem(at: transactionStartedIndexPath) else {
+                animateTransactionFinished(cell: self.transactionStartedCell)
                 animateTransactionFinished(cell: dropCandidateCell)
                 return
             }
@@ -1149,51 +1172,132 @@ extension MainViewController {
 
             transactionDraggingElement.center = locationInView.applying(CGAffineTransform(translationX: 0, y: -30))
             
-            func intersectedCell() -> UICollectionViewCell? {
-                let collectionViews: [UICollectionView] = [expenseSourcesCollectionView,
-                                                           joyExpenseCategoriesCollectionView,
-                                                           riskExpenseCategoriesCollectionView,
-                                                           safeExpenseCategoriesCollectionView]
-                
-                guard let intersectedCollectionView = collectionViews.first(where: { collectionView in
-                    let pointInside = self.view.convert(locationInView, to: collectionView)
-                    
-                    return collectionView.bounds.contains(pointInside)
-                }) else { return nil }
-                
-                
-                let location = gesture.location(in: intersectedCollectionView).applying(CGAffineTransform(translationX: 0, y: -30))
-                
-                guard let indexPath = intersectedCollectionView.indexPathForItem(at: location) else { return nil }
-                
-                return intersectedCollectionView.cellForItem(at: indexPath)
-            }
             
-            let cell = intersectedCell()
+            let collectionViews: [UICollectionView] = [expenseSourcesCollectionView,
+                                                       joyExpenseCategoriesCollectionView,
+                                                       riskExpenseCategoriesCollectionView,
+                                                       safeExpenseCategoriesCollectionView]
             
-            func checkIfDropCandidate() -> Bool {
-                guard cell != dropCandidateCell else { return false }
-                return true
-            }
-            
-            guard checkIfDropCandidate() else { return }
-
-            animateTransactionFinished(cell: dropCandidateCell)
-            dropCandidateCell = cell
-            animateTransactionDropCandidate(cell: cell)
-            
-        default:
-            guard let transactionStartedCell = transactionStartedCell else {
-                transactionDraggingElement.isHidden = true
+            guard let intersectedCollectionView = collectionViews.first(where: { collectionView in
+                let pointInside = self.view.convert(locationInView, to: collectionView)
+                
+                return collectionView.bounds.contains(pointInside)
+            }) else {
+                animateTransactionFinished(cell: dropCandidateCell)
+                dropCandidateCollectionView = nil
+                dropCandidateIndexPath = nil
+                dropCandidateCell = nil
                 return
             }
-            if let dropCandidateCell = dropCandidateCell {
+            
+            if dropCandidateCollectionView != intersectedCollectionView {
+                startedWaitingAtTheEdge = Date()
+            }
+            
+            func getWaitingEdge() -> UIRectEdge? {
+                if locationInView.x < 50 {
+                    return .left
+                }
+                if locationInView.x > (self.view.frame.size.width - 50) {
+                    return .right
+                }
+                return nil
+            }
+            
+            let edge = getWaitingEdge()
+            
+            if waitingEdge != edge {
+                waitingEdge = edge
+                startedWaitingAtTheEdge = Date()
+            }
+            
+            dropCandidateCollectionView = intersectedCollectionView
+            
+            let location = gesture.location(in: intersectedCollectionView).applying(CGAffineTransform(translationX: 0, y: -30))
+            
+            let indexPath = intersectedCollectionView.indexPathForItem(at: location)
+            
+            if dropCandidateCollectionView == transactionStartedCollectionView && indexPath == transactionStartedIndexPath {
+                animateTransactionFinished(cell: dropCandidateCell)
+                dropCandidateIndexPath = nil
+                dropCandidateCell = nil
+                return
+            }
+            
+            dropCandidateIndexPath = indexPath
+            
+            guard let dropCandidateIndexPath = dropCandidateIndexPath else {
+                animateTransactionFinished(cell: dropCandidateCell)
+                dropCandidateCell = nil
+                print("has no indexpath")
+                if  let edge = waitingEdge,
+                    let waitingAtEdge = startedWaitingAtTheEdge,
+                    Date().timeIntervalSince(waitingAtEdge) > 2 {
+                    
+                    let xOffset = edge == .right ? self.view.frame.size.width : -self.view.frame.size.width
+                    intersectedCollectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
+                }
+                if self.startedWaitingAtTheEdge == nil {
+                    self.startedWaitingAtTheEdge = Date()
+                }
+                print("date \(self.startedWaitingAtTheEdge), edge \(waitingEdge)")
+                return
+            }
+            print("has indexpath")
+            startedWaitingAtTheEdge = nil
+            
+            guard let intersectedCell = intersectedCollectionView.cellForItem(at: dropCandidateIndexPath) else {
+                animateTransactionFinished(cell: dropCandidateCell)
+                self.dropCandidateIndexPath = nil
+                dropCandidateCell = nil
+                return
+            }
+            
+            func checkIfDropCandidate() -> Bool {
+//                guard intersectedCell != transactionStartedCell else { return false }
+                guard let transactionCompletable = intersectedCell as? TransactionCompletable else { return false }
+                guard let transactionStartable = transactionStartedCollectionView.cellForItem(at: transactionStartedIndexPath) as? TransactionStartable else { return false }
+                
+                return transactionCompletable.canComplete(startable: transactionStartable)
+            }
+            
+            if dropCandidateCell != intersectedCell {
+                animateTransactionFinished(cell: dropCandidateCell)
+            }
+            
+            guard checkIfDropCandidate() else {
+                self.dropCandidateIndexPath = nil
+                dropCandidateCell = nil
+                return
+            }
+            
+            dropCandidateCell = intersectedCell
+            animateTransactionDropCandidate(cell: dropCandidateCell)
+            
+        default:
+            func exit() {
+                self.dropCandidateCollectionView = nil
+                self.dropCandidateIndexPath = nil
+                self.dropCandidateCell = nil
+                self.transactionStartedCollectionView = nil
+                self.transactionStartedIndexPath = nil
+                self.transactionStartedCell = nil
+            }
+            guard   let transactionStartedCollectionView = transactionStartedCollectionView,
+                    let transactionStartedIndexPath = transactionStartedIndexPath,
+                    let transactionStartedCell = transactionStartedCollectionView.cellForItem(at: transactionStartedIndexPath) else {
+                transactionDraggingElement.isHidden = true
+                exit()
+                return
+            }
+            if  let dropCandidateCollectionView = dropCandidateCollectionView,
+                let dropCandidateIndexPath = dropCandidateIndexPath,
+                let dropCandidateCell = dropCandidateCollectionView.cellForItem(at: dropCandidateIndexPath) {
                 animateTransactionCompleted(from: transactionStartedCell, to: dropCandidateCell)
             } else {
                 animateTransactionCancelled(from: transactionStartedCell)
             }
-            self.dropCandidateCell = nil
-            self.transactionStartedCell = nil
+            exit()
         }
     }
     
