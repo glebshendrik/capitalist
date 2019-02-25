@@ -42,7 +42,5 @@ class GoalExpenseSourceCollectionViewCell : ExpenseSourceCollectionViewCell {
         progressView.progress = viewModel.goalProgress
         progressView.centerFillColor = progressInnerColor()
         progressView.trackFillColor = imageTintColor
-        
-        
     }        
 }

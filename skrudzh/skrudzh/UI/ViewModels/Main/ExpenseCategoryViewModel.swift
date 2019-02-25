@@ -55,3 +55,9 @@ class ExpenseCategoryViewModel {
         self.expenseCategory = expenseCategory
     }
 }
+
+extension ExpenseCategoryViewModel : TransactionCompletable {
+    func canComplete(startable: TransactionStartable) -> Bool {
+        return startable is ExpenseSourceViewModel
+    }
+}

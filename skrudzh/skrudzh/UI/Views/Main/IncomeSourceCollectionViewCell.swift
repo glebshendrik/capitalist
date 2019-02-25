@@ -8,12 +8,7 @@
 
 import UIKit
 
-class IncomeSourceCollectionViewCell : EditableCell, TransactionStartable {
-    var canStartTransaction: Bool {
-        guard let viewModel = viewModel else { return false }
-        return viewModel.canStartTransaction
-    }
-    
+class IncomeSourceCollectionViewCell : EditableCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var incomeAmountLabel: UILabel!
     

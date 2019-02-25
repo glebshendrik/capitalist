@@ -8,11 +8,7 @@
 
 import Foundation
 
-class ExpenseSourceViewModel : TransactionStartable {
-    var canStartTransaction: Bool {
-        return !isGoal || isGoalCompleted
-    }
-    
+class ExpenseSourceViewModel {
     public private(set) var expenseSource: ExpenseSource
     
     var id: Int {
@@ -51,5 +47,20 @@ class ExpenseSourceViewModel : TransactionStartable {
     
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
+    }
+    
+    
+}
+
+extension ExpenseSourceViewModel : Transactionable {
+    var canStartTransaction: Bool {
+        return !isGoal || isGoalCompleted
+    }
+    
+    func canComplete(startable: TransactionStartable) -> Bool {
+        if let startableExpenseSourceViewModel = startable as? ExpenseSourceViewModel {
+            return startableExpenseSourceViewModel.id != self.id
+        }
+        return startable is IncomeSourceViewModel
     }
 }

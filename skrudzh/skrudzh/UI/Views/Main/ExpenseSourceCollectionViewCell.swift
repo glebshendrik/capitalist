@@ -37,18 +37,3 @@ class ExpenseSourceCollectionViewCell : EditableCell {
     }    
     
 }
-
-extension ExpenseSourceCollectionViewCell : Transactionable {
-    var canStartTransaction: Bool {
-        guard let viewModel = viewModel else { return false }
-        return viewModel.canStartTransaction
-    }
-    
-    func canComplete(startable: TransactionStartable) -> Bool {
-        return startable is IncomeSourceCollectionViewCell || startable is ExpenseSourceCollectionViewCell
-    }
-}
-
-
-
-

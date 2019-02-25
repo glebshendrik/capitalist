@@ -728,14 +728,44 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         
         editableCell.delegate = self
         
-        guard collectionView == movingCollectionView else { return cell }
+        if collectionView == movingCollectionView {
+            if indexPath == movingIndexPath {
+                cell.alpha = 0.99
+                cell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            } else {
+                cell.alpha = 1.0
+                cell.transform = CGAffineTransform.identity
+            }
+        }
         
-        if indexPath == movingIndexPath {
-            cell.alpha = 0.99
-            cell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        } else {
-            cell.alpha = 1.0
-            cell.transform = CGAffineTransform.identity
+        if collectionView == transactionStartedCollectionView {
+            if indexPath == transactionStartedIndexPath {
+                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }
+            else {
+                cell.transform = CGAffineTransform.identity
+            }
+        }
+        
+        if collectionView == dropCandidateCollectionView {
+            if indexPath == dropCandidateIndexPath {
+                cell.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            }
+            else {
+                cell.transform = CGAffineTransform.identity
+            }
+        }
+        
+        if collectionView == transactionStartedCollectionView && collectionView == dropCandidateCollectionView {
+            if indexPath == transactionStartedIndexPath {
+                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }
+            else if indexPath == dropCandidateIndexPath {
+                cell.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            }
+            else {
+                cell.transform = CGAffineTransform.identity
+            }
         }
         
         return cell
@@ -1162,12 +1192,11 @@ extension MainViewController {
         gestureRecognizer.delegate = self
     }
     
-    private func switchOffScrolling(for collectionView: UICollectionView) {
+    private func switchOffScrolling(for collectionView: UICollectionView?) {
+        guard let collectionView = collectionView else { return }
         collectionView.panGestureRecognizer.isEnabled = false
         collectionView.panGestureRecognizer.isEnabled = true
     }
-    
-    
     
     private func detectCollectionViewIntersection(at location: CGPoint,
                                                   in view: UIView,
@@ -1223,9 +1252,6 @@ extension MainViewController {
     }
     
     private func getWaitingEdge(at location: CGPoint, in view: UIView) -> UIRectEdge? {
-//        if dropCandidateIndexPath != nil {
-//            return nil
-//        }
         if location.x < 50 {
             return .left
         }
@@ -1237,6 +1263,54 @@ extension MainViewController {
     
     private func updateWaitingEdge(at location: CGPoint, in view: UIView) {
         waitingEdge = getWaitingEdge(at: location, in: view)
+    }
+    
+    private func canStartTransaction(collectionView: UICollectionView?, indexPath: IndexPath?) -> Bool {
+        guard   let collectionView = collectionView,
+                let indexPath = indexPath,
+                let transactionStartable = transactionStartable(collectionView: collectionView, indexPath: indexPath) else { return false }
+        return transactionStartable.canStartTransaction
+    }
+    
+    private func transactionStartable(collectionView: UICollectionView, indexPath: IndexPath) -> TransactionStartable? {
+        switch collectionView {
+        case incomeSourcesCollectionView:
+            return viewModel.incomeSourceViewModel(at: indexPath)
+        case expenseSourcesCollectionView:
+            return viewModel.expenseSourceViewModel(at: indexPath)
+        default:
+            return nil
+        }
+    }
+    
+    private func canCompleteTransaction(transactionStartedCollectionView: UICollectionView?,
+                                        transactionStartedIndexPath: IndexPath?,
+                                        completionCandidateCollectionView: UICollectionView?,
+                                        completionCandidateIndexPath: IndexPath?) -> Bool {
+        guard   let transactionStartedCollectionView = transactionStartedCollectionView,
+                let transactionStartedIndexPath = transactionStartedIndexPath,
+                let completionCandidateCollectionView = completionCandidateCollectionView,
+                let completionCandidateIndexPath = completionCandidateIndexPath else { return false }
+        
+        guard   let transactionStartable = transactionStartable(collectionView: transactionStartedCollectionView, indexPath: transactionStartedIndexPath),
+                let transactionCompletable = transactionCompletable(collectionView: completionCandidateCollectionView, indexPath: completionCandidateIndexPath) else { return false }
+        
+        return transactionCompletable.canComplete(startable: transactionStartable)
+    }
+    
+    private func transactionCompletable(collectionView: UICollectionView, indexPath: IndexPath) -> TransactionCompletable? {
+        switch collectionView {
+        case expenseSourcesCollectionView:
+            return viewModel.expenseSourceViewModel(at: indexPath)
+        case joyExpenseCategoriesCollectionView:
+            return viewModel.expenseCategoryViewModel(at: indexPath, basketType: .joy)
+        case riskExpenseCategoriesCollectionView:
+            return viewModel.expenseCategoryViewModel(at: indexPath, basketType: .risk)
+        case safeExpenseCategoriesCollectionView:
+            return viewModel.expenseCategoryViewModel(at: indexPath, basketType: .safe)
+        default:
+            return nil
+        }
     }
     
     @objc func didRecognizeTransactionGesture(gesture: UILongPressGestureRecognizer) {
@@ -1263,18 +1337,14 @@ extension MainViewController {
                                                                  with: gesture,
                                                                  collectionViewsPool: collectionViews)
             
-            
             transactionStartedCollectionView = intersections?.collectionView
-            guard let transactionStartedCollectionView = transactionStartedCollectionView else { return }
-            switchOffScrolling(for: transactionStartedCollectionView)
-            
             transactionStartedIndexPath = intersections?.indexPath
-            guard let indexPath = transactionStartedIndexPath else { return }
             
             guard   let cell = intersections?.cell,
-                    let transactionStartable = cell as? TransactionStartable,
-                    transactionStartable.canStartTransaction else {
+                    canStartTransaction(collectionView: transactionStartedCollectionView,
+                                        indexPath: transactionStartedIndexPath) else {
                         
+                
                 self.transactionStartedCollectionView = nil
                 transactionDraggingElement.isHidden = true
                 return
@@ -1282,7 +1352,8 @@ extension MainViewController {
             
             transactionStartedCell = cell
             updateDraggingElementPosition()
-
+            switchOffScrolling(for: transactionStartedCollectionView)
+            
         case .changed:
             
             guard   let transactionStartedCollectionView = transactionStartedCollectionView,
@@ -1313,30 +1384,30 @@ extension MainViewController {
             
             dropCandidateCollectionView = intersections?.collectionView
             
+            updateWaitingEdge(at: locationInView, in: self.view)
+            
             if dropCandidateCollectionView == transactionStartedCollectionView && intersections?.indexPath == transactionStartedIndexPath {
                 dropCandidateIndexPath = nil
                 return
             }
             
-            func checkIfDropCandidate() -> Bool {
-                guard let transactionCompletable = intersections?.cell as? TransactionCompletable else { return false }
-                guard let transactionStartable = transactionStartedCollectionView.cellForItem(at: transactionStartedIndexPath) as? TransactionStartable else { return false }
-                
-                return transactionCompletable.canComplete(startable: transactionStartable)
-            }
+            let canComplete = canCompleteTransaction(transactionStartedCollectionView: transactionStartedCollectionView,
+                                                     transactionStartedIndexPath: transactionStartedIndexPath,
+                                                     completionCandidateCollectionView: dropCandidateCollectionView,
+                                                     completionCandidateIndexPath: intersections?.indexPath)
             
-            dropCandidateIndexPath = checkIfDropCandidate() ? intersections?.indexPath : nil
-            dropCandidateCell = checkIfDropCandidate() ? intersections?.cell : nil
-            
-            updateWaitingEdge(at: locationInView, in: self.view)
+            dropCandidateIndexPath = canComplete ? intersections?.indexPath : nil
+            dropCandidateCell = canComplete ? intersections?.cell : nil
             
         default:
             guard   let transactionStartedCollectionView = transactionStartedCollectionView,
-                    let transactionStartedIndexPath = transactionStartedIndexPath,
-                    let transactionStartedCell = transactionStartedCollectionView.cellForItem(at: transactionStartedIndexPath) else {
+                    let transactionStartedIndexPath = transactionStartedIndexPath else {
                 transactionDraggingElement.isHidden = true
                 return
             }
+            
+            let transactionStartedCell = transactionStartedCollectionView.cellForItem(at: transactionStartedIndexPath)
+            
             if  let dropCandidateCollectionView = dropCandidateCollectionView,
                 let dropCandidateIndexPath = dropCandidateIndexPath,
                 let dropCandidateCell = dropCandidateCollectionView.cellForItem(at: dropCandidateIndexPath) {
@@ -1365,14 +1436,14 @@ extension MainViewController {
         }, completion: nil)
     }
     
-    private func animateTransactionCompleted(from fromCell: UICollectionViewCell, to toCell: UICollectionViewCell) {
+    private func animateTransactionCompleted(from fromCell: UICollectionViewCell?, to toCell: UICollectionViewCell) {
         UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options: [.calculationModeLinear], animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1, animations: {
                 self.transactionDraggingElement.center = toCell.convert(toCell.contentView.center, to: self.view)
             })
             UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.4, animations: {
                 self.transactionDraggingElement.transform = CGAffineTransform(scaleX: 0, y: 0)
-                fromCell.transform = CGAffineTransform.identity
+                fromCell?.transform = CGAffineTransform.identity
                 toCell.transform = CGAffineTransform.identity
             })
         }, completion:{ _ in
@@ -1383,14 +1454,16 @@ extension MainViewController {
         })
     }
     
-    private func animateTransactionCancelled(from cell: UICollectionViewCell) {
+    private func animateTransactionCancelled(from cell: UICollectionViewCell?) {
         UIView.animateKeyframes(withDuration: 0.6, delay: 0.0, options: [.calculationModeLinear], animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.2, animations: {
-                self.transactionDraggingElement.center = cell.convert(cell.contentView.center, to: self.view)
+                if let cell = cell {
+                    self.transactionDraggingElement.center = cell.convert(cell.contentView.center, to: self.view)
+                }                
             })
             UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.4, animations: {
                 self.transactionDraggingElement.transform = CGAffineTransform(scaleX: 0, y: 0)
-                cell.transform = CGAffineTransform.identity
+                cell?.transform = CGAffineTransform.identity
             })
         }, completion:{ _ in
             self.transactionDraggingElement.isHidden = true
