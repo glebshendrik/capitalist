@@ -69,10 +69,12 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     private var movingCollectionView: UICollectionView? = nil
     private var offsetForCollectionViewCellBeingMoved: CGPoint = .zero
     
+    private var transactionStartedLocation: CGPoint? = nil
     private var transactionStartedCollectionView: UICollectionView? = nil {
         didSet {
             if transactionStartedCollectionView != oldValue {
                 transactionStartedIndexPath = nil
+                transactionStartedLocation = nil
             }
         }
     }
@@ -1313,6 +1315,17 @@ extension MainViewController {
         }
     }
     
+    func updateDraggingElement(location: CGPoint, transform: CGAffineTransform) {
+        guard let transactionStartedLocation = transactionStartedLocation else {
+            transactionDraggingElement.isHidden = true
+            return
+        }
+        if transactionDraggingElement.isHidden {
+            transactionDraggingElement.isHidden = location.distance(from: transactionStartedLocation) < 10
+        }
+        transactionDraggingElement.center = location.applying(transform)
+    }
+    
     @objc func didRecognizeTransactionGesture(gesture: UILongPressGestureRecognizer) {
         
         guard !isEditing else { return }
@@ -1320,14 +1333,8 @@ extension MainViewController {
         let locationInView = gesture.location(in: self.view)
         let verticalTranslationTransformation = CGAffineTransform(translationX: 0, y: -30)
         
-        func updateDraggingElementPosition() {
-            transactionDraggingElement.isHidden = false
-            transactionDraggingElement.center = locationInView.applying(verticalTranslationTransformation)
-        }
-        
         switch gesture.state {
         case .began:
-            
             
             let collectionViews: [UICollectionView] = [incomeSourcesCollectionView,
                                                        expenseSourcesCollectionView]
@@ -1350,8 +1357,9 @@ extension MainViewController {
                 return
             }
             
+            transactionStartedLocation = locationInView
             transactionStartedCell = cell
-            updateDraggingElementPosition()
+            updateDraggingElement(location: locationInView, transform: verticalTranslationTransformation)
             switchOffScrolling(for: transactionStartedCollectionView)
             
         case .changed:
@@ -1365,7 +1373,7 @@ extension MainViewController {
             
             switchOffScrolling(for: transactionStartedCollectionView)
             
-            updateDraggingElementPosition()
+            updateDraggingElement(location: locationInView, transform: verticalTranslationTransformation)
             
             
             let collectionViews: [UICollectionView] = [expenseSourcesCollectionView,
@@ -1459,7 +1467,7 @@ extension MainViewController {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.2, animations: {
                 if let cell = cell {
                     self.transactionDraggingElement.center = cell.convert(cell.contentView.center, to: self.view)
-                }                
+                }
             })
             UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.4, animations: {
                 self.transactionDraggingElement.transform = CGAffineTransform(scaleX: 0, y: 0)
