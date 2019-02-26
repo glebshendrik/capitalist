@@ -121,18 +121,15 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         }
     }
     
-    private var startedWaitingAtTheEdge: Date? = nil
+    private var waitingAtTheEdgeTimer: Timer? = nil
     
     private var waitingEdge: UIRectEdge? = nil {
         didSet {
             if waitingEdge != oldValue {
                 initializeWaitingAtTheEdge()
-            } else if waitingEdge != nil  {
-                if waitTooLongOnTheEdge() {
-                    changeWaitingPage()
-                }
-            } else {
-                startedWaitingAtTheEdge = nil
+            } else if waitingEdge == nil  {
+                waitingAtTheEdgeTimer?.invalidate()
+                waitingAtTheEdgeTimer = nil
             }
         }
     }
@@ -920,7 +917,7 @@ extension MainViewController {
     private func setupRearrangeGestureRecognizer(for collectionView: UICollectionView) {
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didRecognizeRearrangeGesture(gesture:)))
         collectionView.addGestureRecognizer(gestureRecognizer)
-        gestureRecognizer.minimumPressDuration = 1.0
+        gestureRecognizer.minimumPressDuration = 1.5
     }
     
     private func setupExpenseCategoriesCollectionView() {
@@ -1019,8 +1016,8 @@ extension MainViewController {
     }
     
     private func setupMainMenu() {
-        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
-        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
+//        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
+//        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
         SideMenuManager.default.menuFadeStatusBar = false
     }
     
@@ -1225,19 +1222,15 @@ extension MainViewController {
     }
     
     private func initializeWaitingAtTheEdge() {
+        waitingAtTheEdgeTimer?.invalidate()
         if dropCandidateCollectionView != nil && waitingEdge != nil {
-            startedWaitingAtTheEdge = Date()
+            waitingAtTheEdgeTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(changeWaitingPage), userInfo: nil, repeats: false)
         } else {
-            startedWaitingAtTheEdge = nil
+            waitingAtTheEdgeTimer = nil
         }
     }
     
-    private func waitTooLongOnTheEdge() -> Bool {
-        guard let waitingAtEdge = startedWaitingAtTheEdge else { return false }
-        return Date().timeIntervalSince(waitingAtEdge) > 2
-    }
-    
-    private func changeWaitingPage() {
+    @objc private func changeWaitingPage() {
         guard   let edge = waitingEdge,
                 let dropCandidateCollectionView = dropCandidateCollectionView else { return }
         
@@ -1250,7 +1243,7 @@ extension MainViewController {
             offset = dropCandidateCollectionView.contentSize.width - offsetDiff
         }
         dropCandidateCollectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
-        startedWaitingAtTheEdge = Date()
+        initializeWaitingAtTheEdge()
     }
     
     private func getWaitingEdge(at location: CGPoint, in view: UIView) -> UIRectEdge? {
@@ -1321,7 +1314,7 @@ extension MainViewController {
             return
         }
         if transactionDraggingElement.isHidden {
-            transactionDraggingElement.isHidden = location.distance(from: transactionStartedLocation) < 10
+            transactionDraggingElement.isHidden = location.distance(from: transactionStartedLocation) < 3
         }
         transactionDraggingElement.center = location.applying(transform)
     }
