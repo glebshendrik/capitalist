@@ -8,12 +8,20 @@
 
 import Foundation
 
-protocol TransactionStartable {
+protocol Transactionable {
+    var id: Int { get }
+    var name: String { get }
+    var iconURL: URL? { get }
+    var currency: Currency { get }
+    var amount: String { get }
+}
+
+protocol TransactionStartable : Transactionable {
     var canStartTransaction: Bool { get }
 }
 
-protocol TransactionCompletable {
+protocol TransactionCompletable : Transactionable {
     func canComplete(startable: TransactionStartable) -> Bool
 }
 
-typealias Transactionable = TransactionStartable & TransactionCompletable
+

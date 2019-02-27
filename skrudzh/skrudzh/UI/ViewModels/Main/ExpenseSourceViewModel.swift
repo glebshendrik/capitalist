@@ -52,7 +52,7 @@ class ExpenseSourceViewModel {
     
 }
 
-extension ExpenseSourceViewModel : Transactionable {
+extension ExpenseSourceViewModel : TransactionStartable, TransactionCompletable {
     var canStartTransaction: Bool {
         return !isGoal || isGoalCompleted
     }

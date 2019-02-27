@@ -1411,12 +1411,43 @@ extension MainViewController {
             
             if  let dropCandidateCollectionView = dropCandidateCollectionView,
                 let dropCandidateIndexPath = dropCandidateIndexPath,
-                let dropCandidateCell = dropCandidateCollectionView.cellForItem(at: dropCandidateIndexPath) {
-                animateTransactionCompleted(from: transactionStartedCell, to: dropCandidateCell)
+                let dropCandidateCell = dropCandidateCollectionView.cellForItem(at: dropCandidateIndexPath),
+                let transactionStartable = transactionStartable(collectionView: transactionStartedCollectionView, indexPath: transactionStartedIndexPath),
+                let transactionCompletable = transactionCompletable(collectionView: dropCandidateCollectionView, indexPath: dropCandidateIndexPath) {
+                
+                animateTransactionCompleted(from: transactionStartedCell, to: dropCandidateCell, completed: {
+                    self.showTransactionEditScreen(transactionStartable: transactionStartable, transactionCompletable: transactionCompletable)
+                })
+                
             } else {
                 animateTransactionCancelled(from: transactionStartedCell)
             }
         }
+    }
+    
+    private func showTransactionEditScreen(transactionStartable: TransactionStartable, transactionCompletable: TransactionCompletable) {
+        switch (transactionStartable, transactionCompletable) {
+        case (let startable as IncomeSourceViewModel, let completable as ExpenseSourceViewModel):
+            showIncomeEditScreen(incomeSourceStartable: startable, expenseSourceCompletable: completable)
+        case (let startable as ExpenseSourceViewModel, let completable as ExpenseSourceViewModel):
+            showFundsMoveEditScreen(expenseSourceStartable: startable, expenseSourceCompletable: completable)
+        case (let startable as ExpenseSourceViewModel, let completable as ExpenseCategoryViewModel):
+            showExpenseEditScreen(expenseSourceStartable: startable, expenseCategoryCompletable: completable)
+        default:
+            return
+        }
+    }
+    
+    private func showIncomeEditScreen(incomeSourceStartable: IncomeSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
+        
+    }
+    
+    private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
+        
+    }
+    
+    private func showExpenseEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseCategoryCompletable: ExpenseCategoryViewModel) {
+        
     }
     
     private func animateTransactionStarted(cell: UICollectionViewCell?) {
@@ -1437,7 +1468,8 @@ extension MainViewController {
         }, completion: nil)
     }
     
-    private func animateTransactionCompleted(from fromCell: UICollectionViewCell?, to toCell: UICollectionViewCell) {
+    private func animateTransactionCompleted(from fromCell: UICollectionViewCell?, to toCell: UICollectionViewCell, completed: (() -> Void)? = nil) {
+        
         UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options: [.calculationModeLinear], animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1, animations: {
                 self.transactionDraggingElement.center = toCell.convert(toCell.contentView.center, to: self.view)
@@ -1452,6 +1484,7 @@ extension MainViewController {
             self.transactionDraggingElement.transform = CGAffineTransform.identity
             self.transactionStartedCollectionView = nil
             self.dropCandidateCollectionView = nil
+            completed?()
         })
     }
     

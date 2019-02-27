@@ -116,6 +116,19 @@ class Validator {
                         value: money)
     }
     
+    static func validate(pastDate: Date?, key: CodingKey) -> ValidationResult<Date> {
+        guard let pastDate = pastDate else {
+            return .failure(key: key,
+                            reasons: [ValidationErrorReason.required])
+        }
+        guard pastDate <= Date() else {
+            return .failure(key: key,
+                            reasons: [ValidationErrorReason.invalid])
+        }
+        return .success(key: key,
+                        value: pastDate)
+    }
+    
     static func failureResultsHash<T>(from validationResults: [ValidationResultProtocol]) -> [T : [ValidationErrorReason]]? {
         let failureResults = validationResults.filter { !$0.isSucceeded }
         

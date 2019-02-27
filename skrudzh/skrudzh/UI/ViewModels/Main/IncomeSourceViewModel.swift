@@ -23,8 +23,20 @@ class IncomeSourceViewModel : TransactionStartable {
         return incomeSource.name
     }
     
+    var currency: Currency {
+        return incomeSource.currency
+    }
+    
     var incomesAmount: String {
-        return 0.moneyCurrencyString(with: incomeSource.currency) ?? ""
+        return 0.moneyCurrencyString(with: currency) ?? ""
+    }
+    
+    var iconURL: URL? {
+        return nil
+    }
+    
+    var amount: String? {
+        return incomesAmount
     }
     
     init(incomeSource: IncomeSource) {

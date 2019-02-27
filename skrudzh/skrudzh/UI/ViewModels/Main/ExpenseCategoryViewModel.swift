@@ -57,6 +57,10 @@ class ExpenseCategoryViewModel {
 }
 
 extension ExpenseCategoryViewModel : TransactionCompletable {
+    var amount: String {
+        return monthlySpent ?? ""
+    }
+    
     func canComplete(startable: TransactionStartable) -> Bool {
         return startable is ExpenseSourceViewModel
     }
