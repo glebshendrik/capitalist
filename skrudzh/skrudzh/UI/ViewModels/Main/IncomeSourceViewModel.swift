@@ -9,6 +9,7 @@
 import Foundation
 
 class IncomeSourceViewModel : TransactionStartable {
+    
     var canStartTransaction: Bool {
         return true
     }
@@ -35,7 +36,7 @@ class IncomeSourceViewModel : TransactionStartable {
         return nil
     }
     
-    var amount: String? {
+    var amount: String {
         return incomesAmount
     }
     

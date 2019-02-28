@@ -9,29 +9,6 @@
 import UIKit
 import PromiseKit
 
-
-protocol TransactionEditViewControllerDelegate {
-    func didCreateIncome()
-    func didUpdateIncome()
-    func didRemoveIncome()
-    
-    func didCreateFundsMove()
-    func didUpdateFundsMove()
-    func didRemoveFundsMove()
-    
-    func didCreateExpense()
-    func didUpdateExpense()
-    func didRemoveExpense()
-}
-
-protocol TransactionEditInputProtocol {
-    func set(income: Income)
-//    func set(fundsMove: FundsMove)
-//    func set(expense: Expense)
-    func set(transactionStartable: TransactionStartable, transactionCompletable: TransactionCompletable)
-    func set(delegate: TransactionEditViewControllerDelegate?)
-}
-
 class TransactionEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -39,13 +16,28 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     @IBOutlet weak var loaderImageView: UIImageView!
     
     var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
-    
-    var viewModel: IncomeSourceEditViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var editTableController: TransactionEditTableController?
     
-    private var delegate: TransactionEditViewControllerDelegate?
+    var viewModel: TransactionEditViewModel! { return nil }
     
-    private var editTableController: TransactionEditTableController?
+    var amount: String? {
+        return viewModel.needCurrencyExchange ? editTableController?.exchangeStartableAmountTextField.text : editTableController?.amountTextField.text
+    }
+    
+    var convertedAmount: String? {
+        return viewModel.needCurrencyExchange ? editTableController?.exchangeCompletableAmountTextField.text : amount
+    }
+    
+    var comment: String? {
+        return nil
+//        return editTableController?.commentTextField.text
+    }
+    
+    var gotAt: Date {
+        return Date()
+//        return editTableController?.datePicker.date
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +49,10 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
         setRemoveButton(hidden: viewModel.isNew)
+        setActivityIndicator(hidden: true)
     }
+    
+    
     
     @IBAction func didTapSaveButton(_ sender: Any) {
         save()
@@ -68,7 +63,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     }
     
     @IBAction func didTapRemoveButton(_ sender: Any) {
-        let alertController = UIAlertController(title: "Удалить источник доходов?",
+        let alertController = UIAlertController(title: viewModel.removeQuestion,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
         
@@ -87,33 +82,50 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         present(alertController, animated: true)
     }
     
+    func isFormValid(amount: String?,
+                     convertedAmount: String?,
+                     comment: String?,
+                     gotAt: Date?) -> Bool {
+        return false
+    }
+    
+    func savePromise(amount: String?,
+                     convertedAmount: String?,
+                     comment: String?,
+                     gotAt: Date?) -> Promise<Void> {
+        return Promise.value(())
+    }
+    
+    func savePromiseResolved() {
+    }
+    
+    func catchSaveError(_ error: Error) {
+    }
+    
+    func removePromise() -> Promise<Void> {
+        return Promise.value(())
+    }
+    
+    func removePromiseResolved() {
+        
+    }
+    
+    func catchRemoveError(_ error: Error) {
+        
+    }
+    
     private func save() {
         view.endEditing(true)
         setActivityIndicator(hidden: false)
         saveButton.isEnabled = false
         
         firstly {
-            viewModel.saveIncome(with: self.incomeSourceName)
+            savePromise(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
         }.done {
-            if self.viewModel.isNew {
-                self.delegate?.didCreateIncomeSource()
-            }
-            else {
-                self.delegate?.didUpdateIncomeSource()
-            }
+            self.savePromiseResolved()
             self.close()
         }.catch { error in
-            switch error {
-            case IncomeSourceCreationError.validation(let validationResults):
-                self.showCreateionValidationResults(validationResults)
-            case IncomeSourceUpdatingError.validation(let validationResults):
-                self.showUpdatingValidationResults(validationResults)
-            case APIRequestError.unprocessedEntity(let errors):
-                self.show(errors: errors)
-            default:
-                self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении источника доходов",
-                                                  theme: .error)
-            }
+            self.catchSaveError(error)
         }.finally {
             self.setActivityIndicator(hidden: true)
             self.saveButton.isEnabled = true
@@ -125,130 +137,54 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         removeButton.isEnabled = false
         
         firstly {
-            viewModel.removeIncomeSource()
-            }.done {
-                self.delegate?.didRemoveIncomeSource()
-                self.close()
-            }.catch { _ in
-                self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении источника доходов",
-                                                  theme: .error)
-            }.finally {
-                self.setActivityIndicator(hidden: true)
-                self.removeButton.isEnabled = true
+            removePromise()
+        }.done {
+            self.removePromiseResolved()
+            self.close()
+        }.catch { error in
+            self.catchRemoveError(error)
+            
+        }.finally {
+            self.setActivityIndicator(hidden: true)
+            self.removeButton.isEnabled = true
+        }
+    }
+    
+    private func loadExchangeRate() {
+        setActivityIndicator(hidden: false)
+        saveButton.isEnabled = false
+        
+        firstly {
+            viewModel.loadExchangeRate()
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке курса валют",
+                                              theme: .error)
+        }.finally {
+            self.setActivityIndicator(hidden: true)
+            self.saveButton.isEnabled = true
         }
     }
     
     private func close() {
+        view.endEditing(true)
         navigationController?.dismiss(animated: true, completion: nil)
     }
 }
 
-//extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelegate {
-//    var canChangeCurrency: Bool {
-//        return viewModel.isNew
-//    }
-//
-//    func validationNeeded() {
-//        validateUI()
-//    }
-//
-//    func didSelectCurrency(currency: Currency) {
-//        update(currency: currency)
-//    }
-//
-//    func update(currency: Currency) {
-//        viewModel.selectedCurrency = currency
-//        editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
-//    }
-//
-//    private func validateUI() {
-//        let isFormValid = viewModel.isFormValid(with: incomeSourceName)
-//        let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
-//        let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
-//        saveButton.isEnabled = isFormValid
-//        saveButton.backgroundColor = isFormValid ? validColor : invalidColor
-//    }
-//}
-
-extension TransactionEditViewController {
-    private func show(errors: [String: String]) {
-        for (_, validationMessage) in errors {
-            messagePresenterManager.show(validationMessage: validationMessage)
-        }
+extension TransactionEditViewController : TransactionEditTableControllerDelegate {
+    func didChangeAmount() {
+        editTableController?.exchangeCompletableAmountTextField.text = viewModel.convert(amount: editTableController?.exchangeStartableAmountTextField.text)
     }
     
-    private func showCreateionValidationResults(_ validationResults: [IncomeSourceCreationForm.CodingKeys: [ValidationErrorReason]]) {
-        
-        for key in validationResults.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
-            for reason in validationResults[key] ?? [] {
-                let message = creationValidationMessageFor(key: key, reason: reason)
-                messagePresenterManager.show(validationMessage: message)
-            }
-        }
-    }
-    
-    private func creationValidationMessageFor(key: IncomeSourceCreationForm.CodingKeys, reason: ValidationErrorReason) -> String {
-        switch (key, reason) {
-        case (.name, .required):
-            return "Укажите название"
-        case (_, _):
-            return "Ошибка ввода"
-        }
-    }
-    
-    private func showUpdatingValidationResults(_ validationResults: [IncomeSourceUpdatingForm.CodingKeys: [ValidationErrorReason]]) {
-        
-        for key in validationResults.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
-            for reason in validationResults[key] ?? [] {
-                let message = updatingValidationMessageFor(key: key, reason: reason)
-                messagePresenterManager.show(validationMessage: message)
-            }
-        }
-    }
-    
-    private func updatingValidationMessageFor(key: IncomeSourceUpdatingForm.CodingKeys, reason: ValidationErrorReason) -> String {
-        switch (key, reason) {
-        case (.name, .required):
-            return "Укажите название"
-        case (_, _):
-            return "Ошибка ввода"
-        }
-    }
-}
-
-extension TransactionEditViewController : TransactionEditInputProtocol {
-    func set(delegate: TransactionEditViewControllerDelegate?) {
-        self.delegate = delegate
-    }
-    
-    func set(incomeSource: IncomeSource) {
-        viewModel.set(incomeSource: incomeSource)
-    }
-    
-    private func updateUI() {
-        editTableController?.incomeSourceNameTextField?.text = viewModel.name
-        editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
-        editTableController?.changeCurrencyIndicator?.isHidden = !canChangeCurrency
-        validateUI()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showEditTableView",
-            let viewController = segue.destination as? IncomeSourceEditTableController {
-            editTableController = viewController
-            viewController.delegate = self
-        }
-    }
-}
-
-extension TransactionEditViewController {
     private func setupUI() {
         setupNavigationBar()
         loaderImageView.showLoader()
-        editTableController?.tableView.allowsSelection = canChangeCurrency
         guard viewModel.isNew else {
             setActivityIndicator(hidden: true)
             return
+        }
+        if viewModel.needCurrencyExchange {
+            loadExchangeRate()
         }
     }
         
@@ -258,7 +194,7 @@ extension TransactionEditViewController {
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationItem.title = viewModel.isNew ? "Новый источник доходов" : "Источник доходов"
+        navigationItem.title = viewModel.title
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
@@ -280,4 +216,73 @@ extension TransactionEditViewController {
             self.removeButton.isHidden = hidden
         })
     }
+    
+    private func updateUI() {
+        // startable
+        editTableController?.startableNameTextField.text = viewModel.startableName
+        editTableController?.startableBalanceLabel.text = viewModel.startableAmount
+        editTableController?.startableIconImageView.setImage(with: viewModel.startableIconURL,
+                                                             placeholderName: viewModel.startableIconDefaultImageName,
+                                                             renderingMode: .alwaysTemplate)
+        editTableController?.startableNameTextField.selectedTitle = viewModel.startableTitle
+        editTableController?.startableNameTextField.placeholder = viewModel.startableTitle
+        
+        // completable
+        editTableController?.completableNameTextField.text = viewModel.completableName
+        editTableController?.completableBalanceLabel.text = viewModel.completableAmount
+        editTableController?.completableIconImageView.setImage(with: viewModel.completableIconURL,
+                                                               placeholderName: viewModel.completableIconDefaultImageName,
+                                                               renderingMode: .alwaysTemplate)
+        editTableController?.completableNameTextField.selectedTitle = viewModel.completableTitle
+        editTableController?.completableNameTextField.placeholder = viewModel.completableTitle
+        
+        // amount
+        editTableController?.amountTextField.text = viewModel.amount
+        editTableController?.amountTextField.selectedTitle = viewModel.completableAmountTitle
+        editTableController?.amountTextField.placeholder = viewModel.completableAmountTitle
+        editTableController?.amountCurrencyLabel.text = viewModel.completableCurrencyCode
+        
+        // exchange amounts
+        editTableController?.exchangeStartableAmountTextField.text = viewModel.amount
+        editTableController?.exchangeStartableAmountCurrencyLabel.text = viewModel.startableCurrencyCode
+        editTableController?.exchangeCompletableAmountTextField.text = viewModel.convertedAmount
+        editTableController?.exchangeCompletableAmountCurrencyLabel.text = viewModel.completableCurrencyCode
+        
+        editTableController?.update(needsExchange: viewModel.needCurrencyExchange)
+        
+        validateUI()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showEditTableView",
+            let viewController = segue.destination as? TransactionEditTableController {
+            editTableController = viewController
+            viewController.delegate = self
+        }
+    }
+    
+    func validationNeeded() {
+        validateUI()
+    }
+    
+    func didSaveAtYesterday() {
+        save()
+    }
+    
+    func needsFirstResponder() {
+        if viewModel.needCurrencyExchange {
+            editTableController?.exchangeStartableAmountTextField.becomeFirstResponder()
+        } else {
+            editTableController?.amountTextField.becomeFirstResponder()
+        }
+    }
+    
+    private func validateUI() {
+//        let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
+//        let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
+        saveButton.isEnabled = self.isFormValid(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
+//        saveButton.backgroundColor = isFormValid ? validColor : invalidColor
+    }
+    
+    
 }

@@ -84,6 +84,9 @@
 		FA7DB73522102FBE00559878 /* CurrenciesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DB73422102FBE00559878 /* CurrenciesCoordinator.swift */; };
 		FA7DB738221032BC00559878 /* CurrencyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DB737221032BC00559878 /* CurrencyCollectionViewCell.swift */; };
 		FA7DB73A2210332D00559878 /* CurrenciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DB7392210332D00559878 /* CurrenciesViewController.swift */; };
+		FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */; };
+		FA817488222821DC00EE6116 /* ExchangeRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817487222821DC00EE6116 /* ExchangeRatesService.swift */; };
+		FA81748A222822FB00EE6116 /* ExchangeRatesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */; };
 		FA8382B621F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */; };
 		FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */; };
 		FA9F962A21C2A86B00FD64C1 /* IncomeSourceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */; };
@@ -258,6 +261,9 @@
 		FA7DB73422102FBE00559878 /* CurrenciesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesCoordinator.swift; sourceTree = "<group>"; };
 		FA7DB737221032BC00559878 /* CurrencyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA7DB7392210332D00559878 /* CurrenciesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesViewController.swift; sourceTree = "<group>"; };
+		FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesServiceProtocol.swift; sourceTree = "<group>"; };
+		FA817487222821DC00EE6116 /* ExchangeRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesService.swift; sourceTree = "<group>"; };
+		FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesCoordinator.swift; sourceTree = "<group>"; };
 		FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentIncomeSourceCreationMessageViewController.swift; sourceTree = "<group>"; };
 		FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceViewModel.swift; sourceTree = "<group>"; };
 		FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewController.swift; sourceTree = "<group>"; };
@@ -641,6 +647,7 @@
 				FAA9127E220D24AD00F2C251 /* SettingsCoordinator.swift */,
 				FA7DB73422102FBE00559878 /* CurrenciesCoordinator.swift */,
 				FA7CB4DE221C324200FAAC0F /* IncomesCoordinator.swift */,
+				FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -662,6 +669,7 @@
 				FAED7D9B21EC618000BF6FE1 /* BasketsService.swift */,
 				FA7DB73022102F1200559878 /* CurrenciesService.swift */,
 				FA7CB4DA221C2C9D00FAAC0F /* IncomesService.swift */,
+				FA817487222821DC00EE6116 /* ExchangeRatesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -751,6 +759,7 @@
 				FAED7D9921EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift */,
 				FA7DB72E22102EDB00559878 /* CurrenciesServiceProtocol.swift */,
 				FA7CB4D8221C2A7D00FAAC0F /* IncomesServiceProtocol.swift */,
+				FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1138,6 +1147,7 @@
 				FA0CAE1921D66CCD00805288 /* IconsService.swift in Sources */,
 				FAED7DAE21EDDD3800BF6FE1 /* BasketsViewModel.swift in Sources */,
 				FAD88F1F21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift in Sources */,
+				FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */,
 				FAD88F0F21AEB45A00BE7BC1 /* ManagersAssembly.swift in Sources */,
 				FAA9127F220D24AD00F2C251 /* SettingsCoordinator.swift in Sources */,
 				FAED7D9A21EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift in Sources */,
@@ -1159,6 +1169,7 @@
 				FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */,
 				FAED7DA421EC7FB600BF6FE1 /* ExpenseCategoriesServiceProtocol.swift in Sources */,
 				FAED7DA621EC801E00BF6FE1 /* ExpenseCategoriesService.swift in Sources */,
+				FA81748A222822FB00EE6116 /* ExchangeRatesCoordinator.swift in Sources */,
 				FAD88F1D21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift in Sources */,
 				FAD88F5921AEC1F800BE7BC1 /* AuthenticationServiceProtocol.swift in Sources */,
 				FAD88F3921AEBAA600BE7BC1 /* Session.swift in Sources */,
@@ -1191,6 +1202,7 @@
 				FAD88F2121AEB6ED00BE7BC1 /* NavigatorProtocol.swift in Sources */,
 				FAA9127B220C8B2500F2C251 /* SettingsViewModel.swift in Sources */,
 				FA0CAE1121D3C23000805288 /* ExpenseSourceEditViewModel.swift in Sources */,
+				FA817488222821DC00EE6116 /* ExchangeRatesService.swift in Sources */,
 				FAD88F5B21AEC1F800BE7BC1 /* DevicesServiceProtocol.swift in Sources */,
 				FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */,
 				FAED7DB621F0E35100BF6FE1 /* ExpenseCategoryEditViewModel.swift in Sources */,

@@ -14,6 +14,8 @@ struct APIResourceQueryParameters {
         switch resource {
         case .indexIcons(let category):
             return ["category" : category.rawValue]
+        case .findExchangeRate(let from, let to):
+            return ["from" : from, "to" : to ]
         default:
             break
         }

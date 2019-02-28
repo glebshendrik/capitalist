@@ -25,6 +25,36 @@ enum APIRequestError: Error {
     case upgradeRequired
 }
 
+extension Formatter {
+    static let iso8601: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        return formatter
+    }()
+}
+
+extension JSONDecoder.DateDecodingStrategy {
+    static let iso8601withFractionalSeconds = custom {
+        let container = try $0.singleValueContainer()
+        let string = try container.decode(String.self)
+        guard let date = Formatter.iso8601.date(from: string) else {
+            throw DecodingError.dataCorruptedError(in: container,
+                                                   debugDescription: "Invalid date: " + string)
+        }
+        return date
+    }
+}
+
+extension JSONEncoder.DateEncodingStrategy {
+    static let iso8601withFractionalSeconds = custom {
+        var container = $1.singleValueContainer()
+        try container.encode(Formatter.iso8601.string(from: $0))
+    }
+}
+
 class APIClient : APIClientProtocol {
     private let userSessionManager: UserSessionManagerProtocol!
     
@@ -34,9 +64,11 @@ class APIClient : APIClientProtocol {
     
     func request<T>(_ resource: APIResource) -> Promise<T> where T : Decodable {
         return performRequest(resource).map { (json, _) in
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
             if  let jsonDictionary = json as? [String : Any],
                 let objectDictionary = jsonDictionary[resource.keyPath.singular] as? [String : Any],
-                let object = try? JSONDecoder().decode(T.self, withJSONObject: objectDictionary) {
+                let object = try? decoder.decode(T.self, withJSONObject: objectDictionary) {
                 return object
             }
             throw APIRequestError.mappingFailed

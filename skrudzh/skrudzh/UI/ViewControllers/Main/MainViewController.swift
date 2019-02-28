@@ -1439,7 +1439,15 @@ extension MainViewController {
     }
     
     private func showIncomeEditScreen(incomeSourceStartable: IncomeSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
-        
+        if  let incomeEditNavigationController = router.viewController(.IncomeEditNavigationController) as? UINavigationController,
+            let incomeEditViewController = incomeEditNavigationController.topViewController as? IncomeEditInputProtocol {
+            
+            incomeEditViewController.set(delegate: self)
+            
+            incomeEditViewController.set(startable: incomeSourceStartable, completable: expenseSourceCompletable)
+            
+            present(incomeEditNavigationController, animated: true, completion: nil)
+        }
     }
     
     private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
@@ -1505,6 +1513,26 @@ extension MainViewController {
             self.transactionStartedCollectionView = nil
             self.dropCandidateCollectionView = nil
         })
+    }
+}
+
+extension MainViewController: IncomeEditViewControllerDelegate {
+    func didCreateIncome() {
+        loadIncomeSources()
+        loadBaskets()
+        loadExpenseSources()
+    }
+    
+    func didUpdateIncome() {
+        loadIncomeSources()
+        loadBaskets()
+        loadExpenseSources()
+    }
+    
+    func didRemoveIncome() {
+        loadIncomeSources()
+        loadBaskets()
+        loadExpenseSources()
     }
 }
 

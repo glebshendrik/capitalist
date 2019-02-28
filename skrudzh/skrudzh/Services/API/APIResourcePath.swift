@@ -46,6 +46,7 @@ struct APIResourcePath {
         case .createIncome(let form):                       return "/users/\(form.userId)/incomes"
         case .updateIncome(let form):                       return "/incomes/\(form.id)"
         case .destroyIncome(let id):                        return "/incomes/\(id)"
+        case .findExchangeRate:                             return "/exchange_rates/find_by"
         }
     }
 }

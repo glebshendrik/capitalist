@@ -62,6 +62,8 @@ struct APIResourceKeyPath {
              .updateIncome,
              .destroyIncome:
             return ResourceKeyPath(singular: "income", plural: "incomes")
+        case .findExchangeRate:
+            return ResourceKeyPath(singular: "exchange_rate", plural: "exchange_rates")
         }
     }
 }

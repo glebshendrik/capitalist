@@ -51,6 +51,8 @@ struct APIResourceRequest {
     }
     
     private static func encode<T>(_ encodable: T) -> [String : Any]? where T : Encodable {
-        return try? JSONEncoder().encodeJSONObject(encodable)
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601withFractionalSeconds
+        return try? encoder.encodeJSONObject(encodable)
     }
 }

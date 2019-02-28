@@ -43,6 +43,8 @@ struct Infrastructure {
         case ExpenseCategoryEditViewController
         case DependentIncomeSourceCreationMessageViewController
         case CurrenciesViewController
+        case IncomeEditNavigationController
+        case IncomeEditViewController
         
         // Profile
         case ProfileViewController
@@ -85,7 +87,9 @@ struct Infrastructure {
                  .ExpenseCategoryEditNavigationController,
                  .ExpenseCategoryEditViewController,
                  .DependentIncomeSourceCreationMessageViewController,
-                 .CurrenciesViewController:
+                 .CurrenciesViewController,
+                 .IncomeEditNavigationController,
+                 .IncomeEditViewController:
                 return .Main
             case .ProfileViewController,
                  .ChangePasswordViewController:
@@ -233,6 +237,12 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(CurrenciesViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
+        
+        // IncomeEditViewController
+        container.registerForSkrudzhStoryboard(IncomeEditViewController.self) { (r, c) in
+            c.incomeEditViewModel = r.resolve(IncomeEditViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -316,6 +326,13 @@ class ApplicationAssembly: Assembly {
         // CurrenciesViewModel
         container.register(CurrenciesViewModel.self) { r in
             return CurrenciesViewModel(currenciesCoordinator: r.resolve(CurrenciesCoordinatorProtocol.self)!)
+        }
+        
+        // IncomeEditViewModel
+        container.register(IncomeEditViewModel.self) { r in
+            return IncomeEditViewModel(incomesCoordinator: r.resolve(IncomesCoordinatorProtocol.self)!,
+                                       accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!,
+                                       exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!)
         }
     }
     

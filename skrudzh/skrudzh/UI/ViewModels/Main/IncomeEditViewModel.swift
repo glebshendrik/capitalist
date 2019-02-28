@@ -32,7 +32,7 @@ class IncomeEditViewModel : TransactionEditViewModel {
     
     private var income: Income? = nil
     
-    var isNew: Bool {
+    override var isNew: Bool {
         return income == nil
     }
     
@@ -68,22 +68,30 @@ class IncomeEditViewModel : TransactionEditViewModel {
         return "Сумма пополнения"
     }
     
-    var amount: String? {
+    override var amount: String? {
         guard let currency = startableCurrency else { return nil }
         return (income?.amountCents ?? 0).moneyDecimalString(with: currency)
     }
     
-    var convertedAmount: String? {
+    override var convertedAmount: String? {
         guard let convertedCurrency = completableCurrency else { return nil }
         return (income?.convertedAmountCents ?? 0).moneyDecimalString(with: convertedCurrency)
+    }
+    
+    override var startableIconDefaultImageName: String {
+        return "lamp-icon"
+    }
+    
+    override var completableIconDefaultImageName: String {
+        return "expense-source-icon"
     }
     
     init(incomesCoordinator: IncomesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol) {
-        super.init(exchangeRatesCoordinator: exchangeRatesCoordinator)
         self.incomesCoordinator = incomesCoordinator
         self.accountCoordinator = accountCoordinator
+        super.init(exchangeRatesCoordinator: exchangeRatesCoordinator)        
     }
     
     func set(income: Income) {
@@ -95,15 +103,6 @@ class IncomeEditViewModel : TransactionEditViewModel {
     func set(startable: IncomeSourceViewModel, completable: ExpenseSourceViewModel) {
         self.startable = startable
         self.completable = completable
-    }
-    
-    func convert(amount: String?) -> String? {
-        guard   let currency = startableCurrency,
-                let convertedCurrency = completableCurrency,
-                let amountCents = amount?.intMoney(with: currency) else { return nil }
-        
-        let convertedAmountCents = Int((Float(amountCents) * exchangeRate).rounded())
-        return convertedAmountCents.moneyDecimalString(with: convertedCurrency)
     }
     
     func isFormValid(amount: String?,

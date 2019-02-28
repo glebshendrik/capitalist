@@ -61,5 +61,9 @@ class CoordinatorsAssembly: Assembly {
         container.register(IncomesCoordinatorProtocol.self) { r in
             return IncomesCoordinator(incomesService: r.resolve(IncomesServiceProtocol.self)!)
         }
+        
+        container.register(ExchangeRatesCoordinatorProtocol.self) { r in
+            return ExchangeRatesCoordinator(exchangeRatesService: r.resolve(ExchangeRatesServiceProtocol.self)!)
+        }
     }
 }

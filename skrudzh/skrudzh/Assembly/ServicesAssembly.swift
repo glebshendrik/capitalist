@@ -66,5 +66,10 @@ class ServicesAssembly: Assembly {
                 apiClient: r.resolve(APIClientProtocol.self)!)
         }
         
+        container.register(ExchangeRatesServiceProtocol.self) { r in
+            return ExchangeRatesService(
+                apiClient: r.resolve(APIClientProtocol.self)!)
+        }
+        
     }
 }

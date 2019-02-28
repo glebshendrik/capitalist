@@ -30,7 +30,8 @@ struct APIResourceMethod {
              .showBasket,
              .indexExpenseCategories,
              .showExpenseCategory,
-             .indexCurrencies:
+             .indexCurrencies,
+             .findExchangeRate:
             return .get
         case .updateUser,
              .changePassword,
