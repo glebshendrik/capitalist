@@ -29,7 +29,7 @@ class IncomeSourceViewModel : TransactionStartable {
     }
     
     var incomesAmount: String {
-        return 0.moneyCurrencyString(with: currency) ?? ""
+        return incomeSource.monthlyGotCents.moneyCurrencyString(with: currency) ?? ""
     }
     
     var iconURL: URL? {

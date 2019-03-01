@@ -4591,6 +4591,7 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lamp-icon" translatesAutoresizingMaskIntoConstraints="NO" id="dXu-J6-xXS">
                                                             <rect key="frame" x="12.5" y="9.5" width="11" height="17"/>
+                                                            <color key="tintColor" red="0.40784313725490196" green="0.56470588235294117" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="17" id="UGp-xf-VSL"/>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="17" id="pme-Zs-hM1"/>
@@ -4689,6 +4690,7 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="expense-source-icon" translatesAutoresizingMaskIntoConstraints="NO" id="u6q-Tv-WSd">
                                                             <rect key="frame" x="9.5" y="11.5" width="17" height="13"/>
+                                                            <color key="tintColor" red="0.40784313725490196" green="0.56470588235294117" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="17" id="0SS-nN-9lV"/>
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="17" id="Myk-dv-EsL"/>

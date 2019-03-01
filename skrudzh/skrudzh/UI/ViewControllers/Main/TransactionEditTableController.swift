@@ -76,12 +76,12 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
         delegate?.needsFirstResponder()
     }
     
-    @IBAction func didChangeAmount(_ sender: SkyFloatingLabelTextField) {
+    @IBAction func didChangeAmount(_ sender: MoneyTextField) {
         update(textField: sender)
         delegate?.validationNeeded()
     }
     
-    @IBAction func didChangeStartableAmount(_ sender: SkyFloatingLabelTextField) {
+    @IBAction func didChangeStartableAmount(_ sender: MoneyTextField) {
         update(textField: sender)
         delegate?.didChangeAmount()
         delegate?.validationNeeded()

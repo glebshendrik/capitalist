@@ -56,7 +56,7 @@ class IncomeEditViewController : TransactionEditViewController {
         case APIRequestError.unprocessedEntity(let errors):
             self.show(errors: errors)
         default:
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении источника доходов",
+            self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении дохода",
                                               theme: .error)
         }
     }
@@ -70,7 +70,7 @@ class IncomeEditViewController : TransactionEditViewController {
     }
     
     override func catchRemoveError(_ error: Error) {
-        self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении источника доходов",
+        self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении дохода",
                                           theme: .error)
     }
     

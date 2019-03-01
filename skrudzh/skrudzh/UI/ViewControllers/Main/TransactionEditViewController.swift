@@ -241,11 +241,15 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         editTableController?.amountTextField.selectedTitle = viewModel.completableAmountTitle
         editTableController?.amountTextField.placeholder = viewModel.completableAmountTitle
         editTableController?.amountCurrencyLabel.text = viewModel.completableCurrencyCode
+        editTableController?.amountTextField?.currency = viewModel.startableCurrency
         
         // exchange amounts
         editTableController?.exchangeStartableAmountTextField.text = viewModel.amount
+        editTableController?.exchangeStartableAmountTextField.currency = viewModel.startableCurrency
         editTableController?.exchangeStartableAmountCurrencyLabel.text = viewModel.startableCurrencyCode
+        
         editTableController?.exchangeCompletableAmountTextField.text = viewModel.convertedAmount
+        editTableController?.exchangeCompletableAmountTextField.currency = viewModel.completableCurrency
         editTableController?.exchangeCompletableAmountCurrencyLabel.text = viewModel.completableCurrencyCode
         
         editTableController?.update(needsExchange: viewModel.needCurrencyExchange)
