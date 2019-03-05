@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
+  - ALTextInputBar (1.1.8)
   - BEMCheckBox (1.4.1)
   - CircleProgressView (1.2.0)
   - CWStatusBarNotification (2.3.5)
@@ -50,6 +51,7 @@ PODS:
 
 DEPENDENCIES:
   - AlamofireImage
+  - ALTextInputBar (from `https://github.com/bclymer/ALTextInputBar`, branch `master`)
   - BEMCheckBox
   - CircleProgressView (~> 1.0)
   - CWStatusBarNotification (~> 2.3)
@@ -87,9 +89,20 @@ SPEC REPOS:
     - Swinject
     - SwinjectStoryboard
 
+EXTERNAL SOURCES:
+  ALTextInputBar:
+    :branch: master
+    :git: https://github.com/bclymer/ALTextInputBar
+
+CHECKOUT OPTIONS:
+  ALTextInputBar:
+    :commit: 3b82e4cdb81fa42705ef84066f4fe82f29c1bbc8
+    :git: https://github.com/bclymer/ALTextInputBar
+
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
+  ALTextInputBar: 6c160c51958903c5f7b9d158e19f9c4113ae351b
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
@@ -106,6 +119,6 @@ SPEC CHECKSUMS:
   Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
 
-PODFILE CHECKSUM: d3cbd41c1527caa59727c5d4bc013f9fca25e4ef
+PODFILE CHECKSUM: e9646c9264cfd7bbe87ec7e910c6e1745c4380db
 
 COCOAPODS: 1.5.3

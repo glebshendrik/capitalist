@@ -25,6 +25,8 @@ class TransactionEditViewModel {
     var amount: String? { return nil }
     var convertedAmount: String? { return nil }
     
+    var comment: String? = nil
+    
     var isNew: Bool { return true }
     
     var startableIconURL: URL? {

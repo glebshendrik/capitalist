@@ -87,6 +87,7 @@
 		FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */; };
 		FA817488222821DC00EE6116 /* ExchangeRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817487222821DC00EE6116 /* ExchangeRatesService.swift */; };
 		FA81748A222822FB00EE6116 /* ExchangeRatesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */; };
+		FA81748C222E2B8700EE6116 /* TransactionCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81748B222E2B8700EE6116 /* TransactionCommentViewController.swift */; };
 		FA8382B621F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */; };
 		FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */; };
 		FA9F962A21C2A86B00FD64C1 /* IncomeSourceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */; };
@@ -264,6 +265,7 @@
 		FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesServiceProtocol.swift; sourceTree = "<group>"; };
 		FA817487222821DC00EE6116 /* ExchangeRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesService.swift; sourceTree = "<group>"; };
 		FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesCoordinator.swift; sourceTree = "<group>"; };
+		FA81748B222E2B8700EE6116 /* TransactionCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCommentViewController.swift; sourceTree = "<group>"; };
 		FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentIncomeSourceCreationMessageViewController.swift; sourceTree = "<group>"; };
 		FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceViewModel.swift; sourceTree = "<group>"; };
 		FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewController.swift; sourceTree = "<group>"; };
@@ -845,6 +847,7 @@
 				FA66FB6E22250C8E00708C71 /* TransactionEditViewController.swift */,
 				FA66FB7022250DC000708C71 /* TransactionEditTableController.swift */,
 				FA66FB7222269EC900708C71 /* IncomeEditViewController.swift */,
+				FA81748B222E2B8700EE6116 /* TransactionCommentViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1013,6 +1016,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-skrudzh/Pods-skrudzh-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ALTextInputBar/ALTextInputBar.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
@@ -1035,6 +1039,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ALTextInputBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
@@ -1162,6 +1167,7 @@
 				FA6270AA21CA93D100CC0269 /* FieldsViewModel.swift in Sources */,
 				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,
 				FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */,
+				FA81748C222E2B8700EE6116 /* TransactionCommentViewController.swift in Sources */,
 				FA6270A621CA3ED600CC0269 /* FieldViewModel.swift in Sources */,
 				FA0CADFF21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift in Sources */,
 				FA0CAE0721D266F100805288 /* ExpenseSourceViewModel.swift in Sources */,

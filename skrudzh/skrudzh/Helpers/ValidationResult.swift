@@ -116,6 +116,19 @@ class Validator {
                         value: money)
     }
     
+    static func validate(positiveMoney: Int?, key: CodingKey) -> ValidationResult<Int> {
+        guard let money = positiveMoney else {
+            return .failure(key: key,
+                            reasons: [ValidationErrorReason.required])
+        }
+        guard money > 0 else {
+            return .failure(key: key,
+                            reasons: [ValidationErrorReason.invalid])
+        }
+        return .success(key: key,
+                        value: money)
+    }
+    
     static func validate(pastDate: Date?, key: CodingKey) -> ValidationResult<Date> {
         guard let pastDate = pastDate else {
             return .failure(key: key,

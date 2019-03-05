@@ -152,15 +152,25 @@ class APIClient : APIClientProtocol {
         case 422:
             if let validData = data {
                 do {
-                    let errors = try JSONSerialization.jsonObject(with: validData) as! [String : [String]]
                     var errorMessages = [String : String]()
-                    errors.forEach { (attr, messages) in
-                        var errorsMessage = messages.reduce("") {combinedMessage, message in "\(combinedMessage) \(message),"}
+                    if let errorsMessages = try JSONSerialization.jsonObject(with: validData) as? [String : [String]] {
                         
-                        errorsMessage.remove(at: errorsMessage.startIndex)
-                        errorsMessage.remove(at: errorsMessage.index(before: errorsMessage.endIndex))
                         
-                        errorMessages[attr] = errorsMessage
+                        errorsMessages.forEach { (attr, messages) in
+                            var errorsMessage = messages.reduce("") {combinedMessage, message in "\(combinedMessage) \(message),"}
+                            
+                            errorsMessage.remove(at: errorsMessage.startIndex)
+                            errorsMessage.remove(at: errorsMessage.index(before: errorsMessage.endIndex))
+                            
+                            errorMessages[attr] = errorsMessage
+                        }
+
+                    } else if let errorsMessage = try JSONSerialization.jsonObject(with: validData) as? [String : String] {
+                        
+                        errorMessages = errorsMessage
+
+                    } else {
+                        errorMessages["error"] = "Server Error"
                     }
                     return .failure(APIRequestError.unprocessedEntity(errors: errorMessages))
                 } catch {

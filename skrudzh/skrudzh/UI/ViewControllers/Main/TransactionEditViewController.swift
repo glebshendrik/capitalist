@@ -17,6 +17,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     
     var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var router: ApplicationRouterProtocol!
     var editTableController: TransactionEditTableController?
     
     var viewModel: TransactionEditViewModel! { return nil }
@@ -30,8 +31,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     }
     
     var comment: String? {
-        return nil
-//        return editTableController?.commentTextField.text
+        return viewModel.comment
     }
     
     var gotAt: Date {
@@ -134,7 +134,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     
     private func remove() {
         setActivityIndicator(hidden: false)
-        removeButton.isEnabled = false
+        removeButton.isUserInteractionEnabled = false
         
         firstly {
             removePromise()
@@ -146,7 +146,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
             
         }.finally {
             self.setActivityIndicator(hidden: true)
-            self.removeButton.isEnabled = true
+            self.removeButton.isUserInteractionEnabled = true
         }
     }
     
@@ -281,12 +281,23 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         }
     }
     
-    private func validateUI() {
-//        let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
-//        let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
-        saveButton.isEnabled = self.isFormValid(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
-//        saveButton.backgroundColor = isFormValid ? validColor : invalidColor
+    func didTapComment() {
+        let transactionCommentController = TransactionCommentViewController()
+        transactionCommentController.set(delegate: self)
+        
+        transactionCommentController.set(comment: comment)
+        transactionCommentController.modalPresentationStyle = .custom
+        present(transactionCommentController, animated: true, completion: nil)        
     }
     
+    private func validateUI() {
+        saveButton.isEnabled = self.isFormValid(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
+    }
+}
+
+extension TransactionEditViewController : TransactionCommentViewControllerDelegate {
+    func didSave(comment: String?) {
+        viewModel.comment = comment
+    }
     
 }

@@ -242,6 +242,7 @@ class ApplicationAssembly: Assembly {
         container.registerForSkrudzhStoryboard(IncomeEditViewController.self) { (r, c) in
             c.incomeEditViewModel = r.resolve(IncomeEditViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+            c.router = r.resolve(ApplicationRouterProtocol.self)
         }
     }
     

@@ -96,6 +96,7 @@ class IncomeEditViewModel : TransactionEditViewModel {
     
     func set(income: Income) {
         self.income = income
+        self.comment = income.comment
         self.startable = IncomeSourceViewModel(incomeSource: income.incomeSource)
         self.completable = ExpenseSourceViewModel(expenseSource: income.expenseSource)
     }
@@ -212,8 +213,8 @@ extension IncomeEditViewModel {
         
         let validationResults : [ValidationResultProtocol] =
             [Validator.validate(pastDate: gotAt, key: IncomeCreationForm.CodingKeys.gotAt),
-             Validator.validate(money: amountCents, key: IncomeCreationForm.CodingKeys.amountCents),
-             Validator.validate(money: convertedAmountCents, key: IncomeCreationForm.CodingKeys.convertedAmountCents)]
+             Validator.validate(positiveMoney: amountCents, key: IncomeCreationForm.CodingKeys.amountCents),
+             Validator.validate(positiveMoney: convertedAmountCents, key: IncomeCreationForm.CodingKeys.convertedAmountCents)]
         
         let failureResultsHash : [IncomeCreationForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         
@@ -285,8 +286,8 @@ extension IncomeEditViewModel {
         
         let validationResults : [ValidationResultProtocol] =
             [Validator.validate(pastDate: gotAt, key: IncomeUpdatingForm.CodingKeys.gotAt),
-             Validator.validate(money: amountCents, key: IncomeUpdatingForm.CodingKeys.amountCents),
-             Validator.validate(money: convertedAmountCents, key: IncomeUpdatingForm.CodingKeys.convertedAmountCents)]
+             Validator.validate(positiveMoney: amountCents, key: IncomeUpdatingForm.CodingKeys.amountCents),
+             Validator.validate(positiveMoney: convertedAmountCents, key: IncomeUpdatingForm.CodingKeys.convertedAmountCents)]
         
         let failureResultsHash : [IncomeUpdatingForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         

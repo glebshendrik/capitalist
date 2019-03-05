@@ -94,7 +94,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     private func save() {
         view.endEditing(true)
         setActivityIndicator(hidden: false)
-        saveButton.isEnabled = false
+        saveButton.isUserInteractionEnabled = false
         
         firstly {
             viewModel.saveExpenseSource(with: self.expenseSourceName, amount: self.expenseSourceAmount, iconURL: self.selectedIconURL, goalAmount: self.expenseSourceGoalAmount)
@@ -120,7 +120,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
             }
         }.finally {
             self.setActivityIndicator(hidden: true)
-            self.saveButton.isEnabled = true
+            self.saveButton.isUserInteractionEnabled = true
         }
     }
     
@@ -138,7 +138,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
                                               theme: .error)
         }.finally {
             self.setActivityIndicator(hidden: true)
-            self.removeButton.isEnabled = true
+            self.removeButton.isUserInteractionEnabled = true
         }
     }
     
@@ -185,7 +185,7 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
         let isFormValid = viewModel.isFormValid(with: expenseSourceName, amount: expenseSourceAmount, iconURL: selectedIconURL, goalAmount: expenseSourceGoalAmount)
         let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
         let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
-        saveButton.isEnabled = isFormValid
+        saveButton.isUserInteractionEnabled = isFormValid
         saveButton.backgroundColor = isFormValid ? validColor : invalidColor
     }
 }

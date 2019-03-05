@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C1FF626560C201E3D1344F5E80C4895E"
-               BlueprintName = "StaticDataTableViewController"
+               BlueprintIdentifier = "C564345D06DF811B0AFF98A8575C8A0D"
+               BlueprintName = "ALTextInputBar"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "StaticDataTableViewController.framework">
+               BuildableName = "ALTextInputBar.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
