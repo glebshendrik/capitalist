@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import SwiftDate
 
 class TransactionEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
@@ -35,8 +36,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     }
     
     var gotAt: Date {
-        return Date()
-//        return editTableController?.datePicker.date
+        return viewModel.gotAt ?? Date()
     }
     
     override func viewDidLoad() {
@@ -51,8 +51,6 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         setRemoveButton(hidden: viewModel.isNew)
         setActivityIndicator(hidden: true)
     }
-    
-    
     
     @IBAction func didTapSaveButton(_ sender: Any) {
         save()
@@ -270,6 +268,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func didSaveAtYesterday() {
+        didSelect(date: Date() - 1.days)
         save()
     }
     
@@ -282,22 +281,34 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func didTapComment() {
-        let transactionCommentController = TransactionCommentViewController()
-        transactionCommentController.set(delegate: self)
-        
-        transactionCommentController.set(comment: comment)
-        transactionCommentController.modalPresentationStyle = .custom
-        present(transactionCommentController, animated: true, completion: nil)        
+        let commentController = CommentViewController()
+        commentController.set(delegate: self)
+        commentController.set(comment: comment)
+        commentController.modalPresentationStyle = .custom
+        present(commentController, animated: true, completion: nil)
+    }
+    
+    func didTapCalendar() {
+        let datePickerController = DatePickerViewController()
+        datePickerController.set(delegate: self)
+        datePickerController.set(date: gotAt)
+        datePickerController.modalPresentationStyle = .custom
+        present(datePickerController, animated: true, completion: nil)
     }
     
     private func validateUI() {
-        saveButton.isEnabled = self.isFormValid(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
+//        saveButton.isEnabled = self.isFormValid(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
     }
 }
 
-extension TransactionEditViewController : TransactionCommentViewControllerDelegate {
+extension TransactionEditViewController : CommentViewControllerDelegate {
     func didSave(comment: String?) {
         viewModel.comment = comment
     }
-    
+}
+
+extension TransactionEditViewController : DatePickerViewControllerDelegate {
+    func didSelect(date: Date?) {
+        viewModel.gotAt = date
+    }
 }

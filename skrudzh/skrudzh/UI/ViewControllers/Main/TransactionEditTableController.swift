@@ -16,6 +16,7 @@ protocol TransactionEditTableControllerDelegate {
     func didSaveAtYesterday()
     func didChangeAmount()
     func didTapComment()
+    func didTapCalendar()
 }
 
 class TransactionEditTableController : StaticDataTableViewController, UITextFieldDelegate {
@@ -47,8 +48,6 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     @IBOutlet weak var exchangeCompletableAmountBackground: UIView!
     @IBOutlet weak var exchangeStartableAmountBackground: UIView!
     @IBOutlet weak var exchangesWhiteLine: UIView!
-    
-    weak var datePicker: UIDatePicker!
     
     @IBOutlet weak var yesterdayButton: UIButton!
     @IBOutlet weak var calendarButton: UIButton!
@@ -97,9 +96,12 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     }
     
     @IBAction func didTapCalendarButton(_ sender: Any) {
+        view.endEditing(true)
+        delegate?.didTapCalendar()
     }
     
     @IBAction func didTapCommentButton(_ sender: Any) {
+        view.endEditing(true)
         delegate?.didTapComment()
     }
     

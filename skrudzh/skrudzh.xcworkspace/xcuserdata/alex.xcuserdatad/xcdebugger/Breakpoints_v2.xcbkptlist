@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewModels/Main/IncomeEditViewModel.swift"
-            timestampString = "573467908.92651"
+            timestampString = "573545404.390142"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "114"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/IncomeSourceEditViewController.swift"
-            timestampString = "573467908.927119"
+            timestampString = "573545404.400721"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/IncomeSourceEditViewController.swift"
-            timestampString = "573467908.930455"
+            timestampString = "573545404.404729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "82"
@@ -58,13 +58,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/IncomeSourceEditViewController.swift"
-            timestampString = "573467908.9312561"
+            timestampString = "573545404.4056441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
             endingLineNumber = "54"
             landmarkName = "didTapSaveButton(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/UI/ViewControllers/Common/DatePickerViewController.swift"
+            timestampString = "573545404.406407"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "toolbarContainer"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

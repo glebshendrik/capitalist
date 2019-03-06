@@ -97,6 +97,7 @@ class IncomeEditViewModel : TransactionEditViewModel {
     func set(income: Income) {
         self.income = income
         self.comment = income.comment
+        self.gotAt = income.gotAt
         self.startable = IncomeSourceViewModel(incomeSource: income.incomeSource)
         self.completable = ExpenseSourceViewModel(expenseSource: income.expenseSource)
     }

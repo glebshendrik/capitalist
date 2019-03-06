@@ -26,6 +26,7 @@ class TransactionEditViewModel {
     var convertedAmount: String? { return nil }
     
     var comment: String? = nil
+    var gotAt: Date? = nil
     
     var isNew: Bool { return true }
     

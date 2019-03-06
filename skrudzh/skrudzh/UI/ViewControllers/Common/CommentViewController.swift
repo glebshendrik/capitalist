@@ -9,20 +9,20 @@
 import UIKit
 import ALTextInputBar
 
-protocol TransactionCommentViewControllerDelegate {
+protocol CommentViewControllerDelegate {
     func didSave(comment: String?)
 }
 
-protocol TransactionCommentViewControllerInputProtocol {
+protocol CommentViewControllerInputProtocol {
     func set(comment: String?)
-    func set(delegate: TransactionCommentViewControllerDelegate?)
+    func set(delegate: CommentViewControllerDelegate?)
 }
 
-class TransactionCommentViewController : UIViewController, TransactionCommentViewControllerInputProtocol {
+class CommentViewController : UIViewController, CommentViewControllerInputProtocol {
     
     let textInputBar = ALTextInputBar()
     
-    private var delegate: TransactionCommentViewControllerDelegate? = nil
+    private var delegate: CommentViewControllerDelegate? = nil
     
     override var inputAccessoryView: UIView? {
         get {
@@ -67,7 +67,7 @@ class TransactionCommentViewController : UIViewController, TransactionCommentVie
         textInputBar.roundTopCorners(radius: 8.0)
     }
     
-    func set(delegate: TransactionCommentViewControllerDelegate?) {
+    func set(delegate: CommentViewControllerDelegate?) {
         self.delegate = delegate
     }
     
@@ -131,7 +131,7 @@ class TransactionCommentViewController : UIViewController, TransactionCommentVie
     }
 }
 
-extension TransactionCommentViewController: UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
+extension CommentViewController: UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return self
     }
@@ -155,11 +155,12 @@ extension TransactionCommentViewController: UIViewControllerTransitioningDelegat
             
             backgroundView.alpha = 0
             
-            UIView.animate(withDuration: 0.01, delay: 0, options: [.curveEaseOut], animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
                 self.backgroundView.alpha = 1
             }, completion: { (finished) in
-                transitionContext.completeTransition(true)
+                
             })
+            transitionContext.completeTransition(true)
         } else {
             UIView.animate(withDuration: 0.4, delay: 0, options: [.curveEaseOut], animations: {
                 self.backgroundView.alpha = 0
