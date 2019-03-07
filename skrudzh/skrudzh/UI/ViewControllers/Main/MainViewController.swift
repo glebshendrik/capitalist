@@ -1451,11 +1451,27 @@ extension MainViewController {
     }
     
     private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
-        
+        if  let fundsMoveEditNavigationController = router.viewController(.FundsMoveEditNavigationController) as? UINavigationController,
+            let fundsMoveEditViewController = fundsMoveEditNavigationController.topViewController as? FundsMoveEditInputProtocol {
+            
+            fundsMoveEditViewController.set(delegate: self)
+            
+            fundsMoveEditViewController.set(startable: expenseSourceStartable, completable: expenseSourceCompletable)
+            
+            present(fundsMoveEditNavigationController, animated: true, completion: nil)
+        }
     }
     
     private func showExpenseEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseCategoryCompletable: ExpenseCategoryViewModel) {
-        
+        if  let expenseEditNavigationController = router.viewController(.ExpenseEditNavigationController) as? UINavigationController,
+            let expenseEditViewController = expenseEditNavigationController.topViewController as? ExpenseEditInputProtocol {
+            
+            expenseEditViewController.set(delegate: self)
+            
+            expenseEditViewController.set(startable: expenseSourceStartable, completable: expenseCategoryCompletable)
+            
+            present(expenseEditNavigationController, animated: true, completion: nil)
+        }
     }
     
     private func animateTransactionStarted(cell: UICollectionViewCell?) {
@@ -1518,20 +1534,59 @@ extension MainViewController {
 
 extension MainViewController: IncomeEditViewControllerDelegate {
     func didCreateIncome() {
-        loadIncomeSources()
-        loadBaskets()
-        loadExpenseSources()
+        updateIncomeDependentData()
     }
     
     func didUpdateIncome() {
+        updateIncomeDependentData()
+    }
+    
+    func didRemoveIncome() {
+        updateIncomeDependentData()
+    }
+    
+    private func updateIncomeDependentData() {
         loadIncomeSources()
         loadBaskets()
         loadExpenseSources()
     }
+}
+
+extension MainViewController: ExpenseEditViewControllerDelegate {
+    func didCreateExpense() {
+        updateExpenseDependentData()
+    }
     
-    func didRemoveIncome() {
-        loadIncomeSources()
+    func didUpdateExpense() {
+        updateExpenseDependentData()
+    }
+    
+    func didRemoveExpense() {
+        updateExpenseDependentData()
+    }
+    
+    private func updateExpenseDependentData() {
         loadBaskets()
+        loadExpenseSources()
+        guard let basketType = viewModel.basketsViewModel.selectedBasketType else { return }
+        loadExpenseCategories(by: basketType)
+    }
+}
+
+extension MainViewController: FundsMoveEditViewControllerDelegate {
+    func didCreateFundsMove() {
+        updateFundsMoveDependentData()
+    }
+    
+    func didUpdateFundsMove() {
+        updateFundsMoveDependentData()
+    }
+    
+    func didRemoveFundsMove() {
+        updateFundsMoveDependentData()
+    }
+    
+    private func updateFundsMoveDependentData() {
         loadExpenseSources()
     }
 }

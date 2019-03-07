@@ -45,6 +45,10 @@ struct Infrastructure {
         case CurrenciesViewController
         case IncomeEditNavigationController
         case IncomeEditViewController
+        case ExpenseEditNavigationController
+        case ExpenseEditViewController
+        case FundsMoveEditNavigationController
+        case FundsMoveEditViewController
         
         // Profile
         case ProfileViewController
@@ -89,7 +93,11 @@ struct Infrastructure {
                  .DependentIncomeSourceCreationMessageViewController,
                  .CurrenciesViewController,
                  .IncomeEditNavigationController,
-                 .IncomeEditViewController:
+                 .IncomeEditViewController,
+                 .ExpenseEditNavigationController,
+                 .ExpenseEditViewController,
+                 .FundsMoveEditNavigationController,
+                 .FundsMoveEditViewController:
                 return .Main
             case .ProfileViewController,
                  .ChangePasswordViewController:
@@ -241,6 +249,20 @@ class ApplicationAssembly: Assembly {
         // IncomeEditViewController
         container.registerForSkrudzhStoryboard(IncomeEditViewController.self) { (r, c) in
             c.incomeEditViewModel = r.resolve(IncomeEditViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+            c.router = r.resolve(ApplicationRouterProtocol.self)
+        }
+        
+        // ExpenseEditViewController
+        container.registerForSkrudzhStoryboard(ExpenseEditViewController.self) { (r, c) in
+            c.expenseEditViewModel = r.resolve(ExpenseEditViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+            c.router = r.resolve(ApplicationRouterProtocol.self)
+        }
+        
+        // FundsMoveEditViewController
+        container.registerForSkrudzhStoryboard(FundsMoveEditViewController.self) { (r, c) in
+            c.fundsMoveEditViewModel = r.resolve(FundsMoveEditViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
             c.router = r.resolve(ApplicationRouterProtocol.self)
         }
