@@ -103,6 +103,7 @@
 		FAA4260A2230F74300B64925 /* FundsMovesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA426092230F74300B64925 /* FundsMovesCoordinatorProtocol.swift */; };
 		FAA4260C2230F78300B64925 /* ExpensesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4260B2230F78300B64925 /* ExpensesCoordinator.swift */; };
 		FAA4260E2230F7CC00B64925 /* FundsMovesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4260D2230F7CC00B64925 /* FundsMovesCoordinator.swift */; };
+		FAA426102230FCD400B64925 /* ExpenseEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4260F2230FCD400B64925 /* ExpenseEditViewModel.swift */; };
 		FAA91271220B35F600F2C251 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA91270220B35F600F2C251 /* Currency.swift */; };
 		FAA91273220C710300F2C251 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA91272220C710300F2C251 /* Settings.storyboard */; };
 		FAA91276220C79EA00F2C251 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA91275220C79EA00F2C251 /* SettingsViewController.swift */; };
@@ -292,6 +293,7 @@
 		FAA426092230F74300B64925 /* FundsMovesCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsMovesCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FAA4260B2230F78300B64925 /* ExpensesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCoordinator.swift; sourceTree = "<group>"; };
 		FAA4260D2230F7CC00B64925 /* FundsMovesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsMovesCoordinator.swift; sourceTree = "<group>"; };
+		FAA4260F2230FCD400B64925 /* ExpenseEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditViewModel.swift; sourceTree = "<group>"; };
 		FAA91270220B35F600F2C251 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		FAA91272220C710300F2C251 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		FAA91275220C79EA00F2C251 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -913,6 +915,7 @@
 				FAED7DB521F0E35000BF6FE1 /* ExpenseCategoryEditViewModel.swift */,
 				FA66FB742226AB0A00708C71 /* TransactionEditViewModel.swift */,
 				FA66FB7A2226E92C00708C71 /* IncomeEditViewModel.swift */,
+				FAA4260F2230FCD400B64925 /* ExpenseEditViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1262,6 +1265,7 @@
 				FA0CAE0B21D3C1D900805288 /* ExpenseSourceEditViewController.swift in Sources */,
 				FAED7DAA21EC8B6C00BF6FE1 /* ExpenseCategoriesCoordinator.swift in Sources */,
 				FAD88F8421B0FB7800BE7BC1 /* LandingViewController.swift in Sources */,
+				FAA426102230FCD400B64925 /* ExpenseEditViewModel.swift in Sources */,
 				FAA426042230F5E600B64925 /* ExpensesService.swift in Sources */,
 				FAD88F4D21AEC1A500BE7BC1 /* AuthenticationService.swift in Sources */,
 				FA165CEE21B7846C00EAA16B /* ResetPasswordViewController.swift in Sources */,

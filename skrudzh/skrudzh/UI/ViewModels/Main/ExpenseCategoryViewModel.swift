@@ -24,6 +24,10 @@ class ExpenseCategoryViewModel {
         return expenseCategory.currency
     }
     
+    var basketType: BasketType {
+        return expenseCategory.basketType
+    }
+    
     var monthlyPlanned: String? {
         return expenseCategory.monthlyPlannedCents?.moneyCurrencyString(with: currency)
     }
