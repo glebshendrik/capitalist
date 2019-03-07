@@ -335,6 +335,20 @@ class ApplicationAssembly: Assembly {
                                        accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!,
                                        exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!)
         }
+        
+        // ExpenseEditViewModel
+        container.register(ExpenseEditViewModel.self) { r in
+            return ExpenseEditViewModel(expensesCoordinator: r.resolve(ExpensesCoordinatorProtocol.self)!,
+                                       accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!,
+                                       exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!)
+        }
+        
+        // FundMoveEditViewModel
+        container.register(FundsMoveEditViewModel.self) { r in
+            return FundsMoveEditViewModel(fundsMovesCoordinator: r.resolve(FundsMovesCoordinatorProtocol.self)!,
+                                        accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!,
+                                        exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!)
+        }
     }
     
     static func resolveAppDelegateDependencies(appDelegate: AppDelegate) {

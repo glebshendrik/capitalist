@@ -104,6 +104,7 @@
 		FAA4260C2230F78300B64925 /* ExpensesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4260B2230F78300B64925 /* ExpensesCoordinator.swift */; };
 		FAA4260E2230F7CC00B64925 /* FundsMovesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4260D2230F7CC00B64925 /* FundsMovesCoordinator.swift */; };
 		FAA426102230FCD400B64925 /* ExpenseEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4260F2230FCD400B64925 /* ExpenseEditViewModel.swift */; };
+		FAA4261222311C2100B64925 /* FundsMoveEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4261122311C2100B64925 /* FundsMoveEditViewModel.swift */; };
 		FAA91271220B35F600F2C251 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA91270220B35F600F2C251 /* Currency.swift */; };
 		FAA91273220C710300F2C251 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA91272220C710300F2C251 /* Settings.storyboard */; };
 		FAA91276220C79EA00F2C251 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA91275220C79EA00F2C251 /* SettingsViewController.swift */; };
@@ -294,6 +295,7 @@
 		FAA4260B2230F78300B64925 /* ExpensesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCoordinator.swift; sourceTree = "<group>"; };
 		FAA4260D2230F7CC00B64925 /* FundsMovesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsMovesCoordinator.swift; sourceTree = "<group>"; };
 		FAA4260F2230FCD400B64925 /* ExpenseEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditViewModel.swift; sourceTree = "<group>"; };
+		FAA4261122311C2100B64925 /* FundsMoveEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsMoveEditViewModel.swift; sourceTree = "<group>"; };
 		FAA91270220B35F600F2C251 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		FAA91272220C710300F2C251 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		FAA91275220C79EA00F2C251 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -916,6 +918,7 @@
 				FA66FB742226AB0A00708C71 /* TransactionEditViewModel.swift */,
 				FA66FB7A2226E92C00708C71 /* IncomeEditViewModel.swift */,
 				FAA4260F2230FCD400B64925 /* ExpenseEditViewModel.swift */,
+				FAA4261122311C2100B64925 /* FundsMoveEditViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1191,6 +1194,7 @@
 				FAC3B9CB21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift in Sources */,
 				FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */,
 				FA6918A421F0EF03003639F6 /* ExpenseCategoryEditTableController.swift in Sources */,
+				FAA4261222311C2100B64925 /* FundsMoveEditViewModel.swift in Sources */,
 				FA0CADFD21D257F400805288 /* ExpenseSource.swift in Sources */,
 				FA0CAE1921D66CCD00805288 /* IconsService.swift in Sources */,
 				FAED7DAE21EDDD3800BF6FE1 /* BasketsViewModel.swift in Sources */,
