@@ -72,6 +72,16 @@ enum APIResource: URLRequestConvertible {
     case updateIncome(form: IncomeUpdatingForm)
     case destroyIncome(id: Int)
     
+    // Expenses
+    case createExpense(form: ExpenseCreationForm)
+    case updateExpense(form: ExpenseUpdatingForm)
+    case destroyExpense(id: Int)
+    
+    // FundsMoves
+    case createFundsMove(form: FundsMoveCreationForm)
+    case updateFundsMove(form: FundsMoveUpdatingForm)
+    case destroyFundsMove(id: Int)
+    
     // ExchangeRates
     case findExchangeRate(from: String, to: String)
     

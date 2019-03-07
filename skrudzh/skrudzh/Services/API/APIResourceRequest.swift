@@ -46,6 +46,10 @@ struct APIResourceRequest {
         case .updateExpenseCategoryPosition(let form):      return encode(form)
         case .createIncome(let form):                       return encode(form)
         case .updateIncome(let form):                       return encode(form)
+        case .createExpense(let form):                      return encode(form)
+        case .updateExpense(let form):                      return encode(form)
+        case .createFundsMove(let form):                    return encode(form)
+        case .updateFundsMove(let form):                    return encode(form)
         default:                                            return nil
         }
     }

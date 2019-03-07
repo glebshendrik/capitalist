@@ -71,5 +71,14 @@ class ServicesAssembly: Assembly {
                 apiClient: r.resolve(APIClientProtocol.self)!)
         }
         
+        container.register(ExpensesServiceProtocol.self) { r in
+            return ExpensesService(
+                apiClient: r.resolve(APIClientProtocol.self)!)
+        }
+        
+        container.register(FundsMovesServiceProtocol.self) { r in
+            return FundsMovesService(
+                apiClient: r.resolve(APIClientProtocol.self)!)
+        }
     }
 }

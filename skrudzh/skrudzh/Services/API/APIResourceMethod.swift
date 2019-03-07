@@ -18,7 +18,9 @@ struct APIResourceMethod {
              .createIncomeSource,
              .createExpenseSource,
              .createExpenseCategory,
-             .createIncome:
+             .createIncome,
+             .createExpense,
+             .createFundsMove:
             return .post
         case .showUser,
              .showIncomeSource,
@@ -40,7 +42,9 @@ struct APIResourceMethod {
              .updateIncomeSource,
              .updateExpenseSource,
              .updateExpenseCategory,
-             .updateIncome:
+             .updateIncome,
+             .updateExpense,
+             .updateFundsMove:
             return .put
         case .updateIncomeSourcePosition,
              .updateExpenseSourcePosition,
@@ -51,7 +55,9 @@ struct APIResourceMethod {
              .destroyIncomeSource,
              .destroyExpenseSource,
              .destroyExpenseCategory,
-             .destroyIncome:
+             .destroyIncome,
+             .destroyExpense,
+             .destroyFundsMove:
             return .delete
         }
     }

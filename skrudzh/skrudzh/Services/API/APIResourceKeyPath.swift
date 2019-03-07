@@ -62,6 +62,14 @@ struct APIResourceKeyPath {
              .updateIncome,
              .destroyIncome:
             return ResourceKeyPath(singular: "income", plural: "incomes")
+        case .createExpense,
+             .updateExpense,
+             .destroyExpense:
+            return ResourceKeyPath(singular: "expense", plural: "expenses")
+        case .createFundsMove,
+             .updateFundsMove,
+             .destroyFundsMove:
+            return ResourceKeyPath(singular: "funds_move", plural: "funds_moves")
         case .findExchangeRate:
             return ResourceKeyPath(singular: "exchange_rate", plural: "exchange_rates")
         }
