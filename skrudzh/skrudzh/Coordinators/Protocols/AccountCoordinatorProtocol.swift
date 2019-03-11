@@ -20,5 +20,6 @@ protocol AccountCoordinatorProtocol {
     func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<Void>
     func loadCurrentUser() -> Promise<User>
     func logout() -> Promise<Void>
+    func loadCurrentUserBudget() -> Promise<Budget>
 }
 

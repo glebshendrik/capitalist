@@ -97,6 +97,13 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return usersService.loadUser(with: currentUserId)
     }
     
+    func loadCurrentUserBudget() -> Promise<Budget> {
+        guard let currentUserId = userSessionManager.currentSession?.userId else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        return usersService.loadUserBudget(with: currentUserId)
+    }
+    
     func logout() -> Promise<Void> {
         let previousSession = userSessionManager.currentSession
         userSessionManager.forgetSession()

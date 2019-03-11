@@ -21,4 +21,5 @@ protocol UsersServiceProtocol {
     func resetPassword(with resetPasswordForm: ResetPasswordForm) -> Promise<Void>
     func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<Void>
     func loadUser(with id: Int) -> Promise<User>
+    func loadUserBudget(with userId: Int) -> Promise<Budget>
 }

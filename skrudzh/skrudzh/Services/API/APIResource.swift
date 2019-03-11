@@ -85,6 +85,9 @@ enum APIResource: URLRequestConvertible {
     // ExchangeRates
     case findExchangeRate(from: String, to: String)
     
+    // Budget
+    case showBudget(userId: Int)
+    
     var method: HTTPMethod {
         return APIResourceMethod.method(for: self)
     }

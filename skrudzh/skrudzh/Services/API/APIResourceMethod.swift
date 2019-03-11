@@ -33,7 +33,8 @@ struct APIResourceMethod {
              .indexExpenseCategories,
              .showExpenseCategory,
              .indexCurrencies,
-             .findExchangeRate:
+             .findExchangeRate,
+             .showBudget:
             return .get
         case .updateUser,
              .changePassword,

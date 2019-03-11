@@ -37,5 +37,9 @@ class UsersService : Service, UsersServiceProtocol {
     
     func loadUser(with id: Int) -> Promise<User> {
         return request(APIResource.showUser(id: id))
-    }    
+    }
+    
+    func loadUserBudget(with userId: Int) -> Promise<Budget> {
+        return request(APIResource.showBudget(userId: userId))
+    }
 }

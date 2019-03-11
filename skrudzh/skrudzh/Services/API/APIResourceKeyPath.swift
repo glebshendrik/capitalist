@@ -72,6 +72,8 @@ struct APIResourceKeyPath {
             return ResourceKeyPath(singular: "funds_move", plural: "funds_moves")
         case .findExchangeRate:
             return ResourceKeyPath(singular: "exchange_rate", plural: "exchange_rates")
+        case .showBudget:
+            return ResourceKeyPath(singular: "budget", plural: "budgets")
         }
     }
 }

@@ -53,6 +53,7 @@ struct APIResourcePath {
         case .createFundsMove(let form):                    return "/users/\(form.userId)/funds_moves"
         case .updateFundsMove(let form):                    return "/funds_moves/\(form.id)"
         case .destroyFundsMove(let id):                     return "/funds_moves/\(id)"
+        case .showBudget(let userId):                       return "/users/\(userId)/budget"
         }
     }
 }
