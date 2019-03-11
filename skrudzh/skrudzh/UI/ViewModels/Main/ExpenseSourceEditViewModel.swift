@@ -235,7 +235,7 @@ extension ExpenseSourceEditViewModel {
         
         var validationResults : [ValidationResultProtocol] =
             [Validator.validate(required: name, key: ExpenseSourceUpdatingForm.CodingKeys.name),
-             Validator.validate(money: amountCents, key: ExpenseSourceUpdatingForm.CodingKeys.amountCents)]
+             Validator.validate(balance: amountCents, key: ExpenseSourceUpdatingForm.CodingKeys.amountCents)]
         
         if isGoal {
             validationResults.append(Validator.validate(money: goalAmountCents, key: ExpenseSourceUpdatingForm.CodingKeys.goalAmountCents))
