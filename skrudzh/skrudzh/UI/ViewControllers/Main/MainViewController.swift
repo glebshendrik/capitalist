@@ -65,6 +65,8 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var safeExpenseCategoriesLoader: UIImageView!
     @IBOutlet weak var safeExpenseCategoriesPageControl: UIPageControl!
     
+    private var budgetView: BudgetView!
+    
     private var movingIndexPath: IndexPath? = nil
     private var movingCollectionView: UICollectionView? = nil
     private var offsetForCollectionViewCellBeingMoved: CGPoint = .zero
@@ -181,6 +183,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     }
     
     private func loadData() {
+        loadBudget()
         loadIncomeSources()
         loadExpenseSources()
         loadBaskets()
@@ -262,6 +265,34 @@ extension MainViewController {
         }.finally {
 //            self.set(self.incomeSourcesActivityIndicator, hidden: true)
         }
+    }
+}
+
+extension MainViewController {
+    private func loadBudget() {
+        firstly {
+            viewModel.loadBudget()
+        }.done {
+            self.updateBudgetUI()
+        }
+        .catch { e in
+            print(e)
+            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки баланса", theme: .error)
+        }.finally {
+                
+        }
+    }
+    
+    private func updateBudgetUI() {
+        UIView.transition(with: view,
+                          duration: 0.1,
+                          options: .transitionCrossDissolve,
+                          animations: {
+                            
+                            self.budgetView.balanceLabel.text = self.viewModel.balance
+                            self.budgetView.monthlySpentLabel.text = self.viewModel.monthlySpent
+                            self.budgetView.monthlyPlannedLabel.text = self.viewModel.monthlyPlanned
+        })
     }
 }
 
@@ -369,14 +400,17 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
 extension MainViewController : ExpenseSourceEditViewControllerDelegate {
     func didCreateExpenseSource() {
         loadExpenseSources()
+        loadBudget()
     }
     
     func didUpdateExpenseSource() {
         loadExpenseSources()
+        loadBudget()
     }
     
     func didRemoveExpenseSource() {
         loadExpenseSources()
+        loadBudget()
     }
     
     private func loadExpenseSources(scrollToEndWhenUpdated: Bool = false) {
@@ -482,6 +516,7 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
     func didCreateExpenseCategory(with basketType: BasketType, name: String) {
         loadExpenseCategories(by: basketType)
         loadBaskets()
+        loadBudget()
         guard case basketType = BasketType.joy else {
             showDependentIncomeSourceMessage(basketType: basketType, name: name)
             didCreateIncomeSource()
@@ -491,6 +526,7 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
     
     func didUpdateExpenseCategory(with basketType: BasketType) {
         loadExpenseCategories(by: basketType)
+        loadBudget()
         guard case basketType = BasketType.joy else {
             didUpdateIncomeSource()
             return
@@ -500,6 +536,7 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
     func didRemoveExpenseCategory(with basketType: BasketType) {
         loadExpenseCategories(by: basketType)
         loadBaskets()
+        loadBudget()
         guard case basketType = BasketType.joy else {
             didRemoveIncomeSource()
             return
@@ -1013,6 +1050,8 @@ extension MainViewController {
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        self.budgetView = BudgetView(frame: CGRect.zero)
+        navigationItem.titleView = self.budgetView
     }
     
     private func setupMainMenu() {
@@ -1547,6 +1586,7 @@ extension MainViewController: IncomeEditViewControllerDelegate {
     
     private func updateIncomeDependentData() {
         loadIncomeSources()
+        loadBudget()
         loadBaskets()
         loadExpenseSources()
     }
@@ -1566,6 +1606,7 @@ extension MainViewController: ExpenseEditViewControllerDelegate {
     }
     
     private func updateExpenseDependentData() {
+        loadBudget()
         loadBaskets()
         loadExpenseSources()
         guard let basketType = viewModel.basketsViewModel.selectedBasketType else { return }
@@ -1586,7 +1627,7 @@ extension MainViewController: FundsMoveEditViewControllerDelegate {
         updateFundsMoveDependentData()
     }
     
-    private func updateFundsMoveDependentData() {
+    private func updateFundsMoveDependentData() {        
         loadExpenseSources()
     }
 }

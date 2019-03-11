@@ -141,7 +141,7 @@ struct Formatter {
         if let format = formatter.positiveFormat {
             formatter.positiveFormat = currency.symbolFirst ? "¤\(format)" : "\(format)¤"
         }
-
+        
         return formatter
     }
 }
@@ -167,6 +167,46 @@ extension Int {
     }
     
     func moneyCurrencyString(with currency: Currency) -> String? {
-        return Formatter.currency(with: currency).string(from: moneyNumber(with: currency))
+        let formatter = Formatter.currency(with: currency)
+        let number = moneyNumber(with: currency)
+        
+        struct Abbreviation {
+            var threshold: Double
+            var divisor: NSNumber
+            var suffix: String
+        }
+        
+        let abbreviations = [Abbreviation(      threshold: 1000000.0, divisor: 1000.0, suffix: "k"),
+                             Abbreviation(   threshold: 1000000000.0, divisor: 1000000.0, suffix: "M"),
+                             Abbreviation(threshold: 1000000000000.0, divisor: 1000000000.0, suffix: "M+"),]
+        
+        let startValue = number.doubleValue.abs
+        
+        let abbreviation = abbreviations.last(where: { startValue >= $0.threshold }) ?? Abbreviation(threshold: 0.0, divisor: 1.0, suffix: "")
+        
+        formatter.multiplier = NSNumber(value: 1.0 / abbreviation.divisor.doubleValue)
+        formatter.positiveFormat = formatter.positiveFormat.replacingOccurrences(of: "¤", with: "")
+        formatter.positiveFormat = formatter.positiveFormat.replacingOccurrences(of: " ", with: "")
+        formatter.negativeFormat = formatter.negativeFormat.replacingOccurrences(of: "¤", with: "")
+        formatter.negativeFormat = formatter.negativeFormat.replacingOccurrences(of: " ", with: "")
+        
+        if let format = formatter.positiveFormat {
+            formatter.positiveFormat = currency.symbolFirst ? "¤\(format)\(abbreviation.suffix)" : "\(format)\(abbreviation.suffix) ¤"
+        }
+        
+        if let format = formatter.negativeFormat {
+            formatter.negativeFormat = currency.symbolFirst ? "¤\(format)\(abbreviation.suffix)" : "\(format)\(abbreviation.suffix) ¤"
+        }
+        
+        guard var formattedString = formatter.string(from: number) else { return nil }
+        
+        if  let firstSuffixCharacter = abbreviation.suffix.first,
+            let indexOfFirstSuffixCharacter = formattedString.firstIndex(of: firstSuffixCharacter) {
+            let indexOfSpace = formattedString.index(before: indexOfFirstSuffixCharacter)
+            formattedString.remove(at: indexOfSpace)
+            return formattedString
+        }
+
+        return formattedString
     }
 }

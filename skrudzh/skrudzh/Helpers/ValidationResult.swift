@@ -130,7 +130,7 @@ class Validator {
     }
     
     static func validate(balance: Int?, key: CodingKey) -> ValidationResult<Int> {
-        guard let money = positiveMoney else {
+        guard let money = balance else {
             return .failure(key: key,
                             reasons: [ValidationErrorReason.required])
         }

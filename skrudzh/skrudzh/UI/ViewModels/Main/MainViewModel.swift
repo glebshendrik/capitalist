@@ -14,6 +14,7 @@ class MainViewModel {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let basketsCoordinator: BasketsCoordinatorProtocol
     private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
+    private let accountCoordinator: AccountCoordinatorProtocol
     
     private var incomeSourceViewModels: [IncomeSourceViewModel] = []
     private var expenseSourceViewModels: [ExpenseSourceViewModel] = []
@@ -54,14 +55,20 @@ class MainViewModel {
             : numberOfExpenseCategories(with: .safe) + 1
     }
     
+    var balance: String = ""
+    var monthlySpent: String = ""
+    var monthlyPlanned: String = ""
+    
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          basketsCoordinator: BasketsCoordinatorProtocol,
-         expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol) {
+         expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
+         accountCoordinator: AccountCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.basketsCoordinator = basketsCoordinator
         self.expenseCategoriesCoordinator = expenseCategoriesCoordinator
+        self.accountCoordinator = accountCoordinator
     }
     
     func loadIncomeSources() -> Promise<Void> {
@@ -105,6 +112,17 @@ class MainViewModel {
                         self.safeExpenseCategoryViewModels = expenseCategoryViewModels
                     }
 
+                }.asVoid()
+    }
+    
+    func loadBudget() -> Promise<Void> {
+        return  firstly {
+                    accountCoordinator.loadCurrentUserBudget()
+                }.get { budget in
+                    let budgetViewModel = BudgetViewModel(budget: budget)
+                    self.balance = budgetViewModel.balance
+                    self.monthlySpent = budgetViewModel.monthlySpent
+                    self.monthlyPlanned = budgetViewModel.monthlyPlanned
                 }.asVoid()
     }
     

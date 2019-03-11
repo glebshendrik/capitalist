@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Rubik-Regular.ttf">
+            <string>Rubik-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BudgetView" customModule="skrudzh" customModuleProvider="target">
+            <connections>
+                <outlet property="balanceLabel" destination="dtW-M2-Erw" id="TGv-3a-8ZM"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="ueS-V1-jYE"/>
+                <outlet property="monthlyPlannedLabel" destination="0iT-Dh-1Um" id="lff-mi-hS4"/>
+                <outlet property="monthlySpentLabel" destination="06Y-MA-dra" id="giv-hr-fQd"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="266" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Pff-5Y-Jbh">
+                    <rect key="frame" x="0.0" y="0.0" width="266" height="44"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dng-1L-sg7">
+                            <rect key="frame" x="0.0" y="0.0" width="88.5" height="44"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Баланс" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puF-dS-XpW">
+                                    <rect key="frame" x="23.5" y="6.5" width="42" height="14.5"/>
+                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                                    <color key="textColor" red="0.61960784313725492" green="0.66666666666666663" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ht-PG-Txu">
+                                    <rect key="frame" x="0.0" y="22" width="88.5" height="0.0"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" id="TcK-9H-mWt"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtW-M2-Erw">
+                                    <rect key="frame" x="44.5" y="23" width="0.0" height="0.0"/>
+                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="7Ht-PG-Txu" firstAttribute="leading" secondItem="dng-1L-sg7" secondAttribute="leading" id="BId-hP-yQw"/>
+                                <constraint firstItem="7Ht-PG-Txu" firstAttribute="top" secondItem="puF-dS-XpW" secondAttribute="bottom" constant="1" id="Nbr-Iu-gOi"/>
+                                <constraint firstItem="7Ht-PG-Txu" firstAttribute="centerY" secondItem="dng-1L-sg7" secondAttribute="centerY" id="Pwd-ta-bi8"/>
+                                <constraint firstItem="puF-dS-XpW" firstAttribute="centerX" secondItem="dng-1L-sg7" secondAttribute="centerX" id="Vtg-Qj-z51"/>
+                                <constraint firstItem="dtW-M2-Erw" firstAttribute="centerX" secondItem="dng-1L-sg7" secondAttribute="centerX" id="cIz-zV-wRi"/>
+                                <constraint firstAttribute="trailing" secondItem="7Ht-PG-Txu" secondAttribute="trailing" id="fW5-3x-gVh"/>
+                                <constraint firstItem="dtW-M2-Erw" firstAttribute="top" secondItem="7Ht-PG-Txu" secondAttribute="bottom" constant="1" id="j86-sJ-1nO"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivZ-H3-Hwr">
+                            <rect key="frame" x="88.5" y="0.0" width="89" height="44"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Расход" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8XI-D4-lga">
+                                    <rect key="frame" x="24" y="6.5" width="41.5" height="14.5"/>
+                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                                    <color key="textColor" red="0.61960784310000006" green="0.66666666669999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfL-ci-XHV">
+                                    <rect key="frame" x="0.0" y="22" width="89" height="0.0"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" id="lu2-3B-Co9"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="06Y-MA-dra">
+                                    <rect key="frame" x="44.5" y="23" width="0.0" height="0.0"/>
+                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="06Y-MA-dra" firstAttribute="top" secondItem="LfL-ci-XHV" secondAttribute="bottom" constant="1" id="7HU-nx-ZxA"/>
+                                <constraint firstItem="06Y-MA-dra" firstAttribute="centerX" secondItem="ivZ-H3-Hwr" secondAttribute="centerX" id="C8S-3q-zYB"/>
+                                <constraint firstItem="8XI-D4-lga" firstAttribute="centerX" secondItem="ivZ-H3-Hwr" secondAttribute="centerX" id="H8Z-Vp-v9M"/>
+                                <constraint firstItem="LfL-ci-XHV" firstAttribute="leading" secondItem="ivZ-H3-Hwr" secondAttribute="leading" id="QzK-Gx-UcS"/>
+                                <constraint firstItem="LfL-ci-XHV" firstAttribute="top" secondItem="8XI-D4-lga" secondAttribute="bottom" constant="1" id="Uqi-Sh-pqR"/>
+                                <constraint firstAttribute="trailing" secondItem="LfL-ci-XHV" secondAttribute="trailing" id="qbV-aq-oIW"/>
+                                <constraint firstItem="LfL-ci-XHV" firstAttribute="centerY" secondItem="ivZ-H3-Hwr" secondAttribute="centerY" id="zBc-wG-0Qa"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Mz-Hd-CGJ">
+                            <rect key="frame" x="177.5" y="0.0" width="88.5" height="44"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Планы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71v-Jz-VZT">
+                                    <rect key="frame" x="25" y="6.5" width="38" height="14.5"/>
+                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                                    <color key="textColor" red="0.61960784310000006" green="0.66666666669999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlZ-Hb-gaz">
+                                    <rect key="frame" x="0.0" y="22" width="88.5" height="0.0"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" id="nQN-Hd-9dR"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iT-Dh-1Um">
+                                    <rect key="frame" x="44" y="23" width="0.0" height="0.0"/>
+                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="0iT-Dh-1Um" firstAttribute="centerX" secondItem="1Mz-Hd-CGJ" secondAttribute="centerX" id="4B0-xF-pmv"/>
+                                <constraint firstItem="0iT-Dh-1Um" firstAttribute="top" secondItem="rlZ-Hb-gaz" secondAttribute="bottom" constant="1" id="MDq-3c-RFZ"/>
+                                <constraint firstItem="rlZ-Hb-gaz" firstAttribute="top" secondItem="71v-Jz-VZT" secondAttribute="bottom" constant="1" id="NL6-mA-KNg"/>
+                                <constraint firstItem="71v-Jz-VZT" firstAttribute="centerX" secondItem="1Mz-Hd-CGJ" secondAttribute="centerX" id="bdr-6q-yQr"/>
+                                <constraint firstItem="rlZ-Hb-gaz" firstAttribute="centerY" secondItem="1Mz-Hd-CGJ" secondAttribute="centerY" id="iRN-jg-bEd"/>
+                                <constraint firstItem="rlZ-Hb-gaz" firstAttribute="leading" secondItem="1Mz-Hd-CGJ" secondAttribute="leading" id="jtd-6C-Odr"/>
+                                <constraint firstAttribute="trailing" secondItem="rlZ-Hb-gaz" secondAttribute="trailing" id="pT4-Q6-SBH"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Pff-5Y-Jbh" secondAttribute="trailing" id="IfY-dM-QIe"/>
+                <constraint firstItem="Pff-5Y-Jbh" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Uaf-uK-yoh"/>
+                <constraint firstItem="Pff-5Y-Jbh" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="YhN-Li-MU4"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Pff-5Y-Jbh" secondAttribute="bottom" id="vfI-ts-uSr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="51.200000000000003" y="-125.93703148425789"/>
+        </view>
+    </objects>
+</document>

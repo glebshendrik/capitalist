@@ -2356,6 +2356,9 @@
                                 <segue destination="Tdq-ff-IYk" kind="presentation" id="BpM-OV-2qa"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="statistics-icon" id="Qvu-n8-Lri">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="editDoneButton" destination="ioQ-2O-oOH" id="s4S-Cb-MpS"/>
@@ -5331,6 +5334,7 @@
         <image name="shadow-circle" width="52" height="52"/>
         <image name="small-cross-icon" width="8" height="8"/>
         <image name="smile-icon" width="23" height="23"/>
+        <image name="statistics-icon" width="16" height="16"/>
         <image name="statistics-menu-item-icon" width="16" height="16"/>
         <image name="type-icon" width="14" height="14"/>
         <image name="wallet-icon" width="30" height="22"/>

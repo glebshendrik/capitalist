@@ -314,7 +314,8 @@ class ApplicationAssembly: Assembly {
             return MainViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!,
                                  expenseSourcesCoordinator: r.resolve(ExpenseSourcesCoordinatorProtocol.self)!,
                                  basketsCoordinator: r.resolve(BasketsCoordinatorProtocol.self)!,
-                                 expenseCategoriesCoordinator: r.resolve(ExpenseCategoriesCoordinatorProtocol.self)!)
+                                 expenseCategoriesCoordinator: r.resolve(ExpenseCategoriesCoordinatorProtocol.self)!,
+                                 accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
         }
         
         // IncomeSourceEditViewModel
