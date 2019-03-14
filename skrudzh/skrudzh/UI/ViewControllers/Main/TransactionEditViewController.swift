@@ -340,7 +340,7 @@ extension TransactionEditViewController : IncomeSourceSelectViewControllerDelega
 
 extension TransactionEditViewController : ExpenseSourceSelectViewControllerDelegate {
     func didSelect(startableExpenseSourceViewModel: ExpenseSourceViewModel) {
-        viewModel.completable = startableExpenseSourceViewModel
+        viewModel.startable = startableExpenseSourceViewModel
         updateUI()
         loadExchangeRate()
     }
@@ -350,4 +350,14 @@ extension TransactionEditViewController : ExpenseSourceSelectViewControllerDeleg
         updateUI()
         loadExchangeRate()
     }
+}
+
+extension TransactionEditViewController : ExpenseCategorySelectViewControllerDelegate {
+    
+    func didSelect(expenseCategoryViewModel: ExpenseCategoryViewModel) {
+        viewModel.completable = expenseCategoryViewModel
+        updateUI()
+        loadExchangeRate()
+    }
+    
 }

@@ -316,7 +316,7 @@ extension ExpenseCategoryEditViewController {
     private func setupUI() {
         setupNavigationBar()
         loaderImageView.showLoader()
-        editTableController?.tableView.allowsSelection = canChangeCurrency
+//        editTableController?.tableView.allowsSelection = canChangeCurrency
         guard viewModel.isNew else {
             setActivityIndicator(hidden: true)
             return

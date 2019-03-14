@@ -30,7 +30,9 @@ class ExpenseSourceTableViewCell : UITableViewCell {
     func updateUI() {
         nameLabel.text = viewModel?.name
         amountLabel.text = viewModel?.amount
-        iconImageView.setImage(with: viewModel?.iconURL, placeholderName: placeholderName, renderingMode: .alwaysTemplate)
+        iconImageView.setImage(with: viewModel?.iconURL,
+                               placeholderName: placeholderName,
+                               renderingMode: .alwaysTemplate)
         iconImageView.tintColor = imageTintColor
     }    
 }

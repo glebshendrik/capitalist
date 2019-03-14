@@ -15,7 +15,8 @@ class SlideUpContainerViewController : UIViewController {
     @IBOutlet weak var verticalOffsetConstraint: NSLayoutConstraint!
     weak var viewControllerToAdd: UIViewController? = nil
     
-    var isPresenting = false
+    private var isPresenting = false
+    private var originalPosition: CGPoint = CGPoint.zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,7 @@ class SlideUpContainerViewController : UIViewController {
     
     private func setupUI() {
         configureBackground()
+        configureContentView()
         addChild()
     }
     
@@ -53,13 +55,71 @@ class SlideUpContainerViewController : UIViewController {
         backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapBackgroundView(_:))))
     }
     
+    private func configureContentView() {
+        contentView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(didPanContentView(_:))))
+    }
+    
     @objc func didTapBackgroundView(_ sender: UITapGestureRecognizer) {
         close()
+    }
+    
+    @objc func didPanContentView(_ panGesture: UIPanGestureRecognizer) {
+        let locationInView = panGesture.location(in: view)
+        
+        switch panGesture.state {
+        case .began:
+            originalPosition = locationInView
+        case .changed:
+            if locationInView.y > originalPosition.y {
+                verticalOffsetConstraint = verticalOffsetConstraint.setMultiplier(multiplier: (0.35 * view.frame.height + (locationInView.y - originalPosition.y)) / view.frame.height)
+                view.layoutIfNeeded()
+            }
+        case .ended:
+            let velocity = panGesture.velocity(in: contentView)
+            
+            if velocity.y >= 500 || verticalOffsetConstraint.multiplier >= 0.5 {
+                animateSlideDown {
+                    self.dismiss(animated: false, completion: nil)
+                }
+                
+            } else {
+                animateSlideUp()
+            }
+        case .cancelled, .failed:
+            animateSlideUp()
+        default:
+           break
+        }
     }
     
     private func close() {
         dismiss(animated: true, completion: nil)
     }
+    
+    private func animateSlideDown(completion: (() -> ())? = nil) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
+            self.backgroundView.alpha = 0
+            self.verticalOffsetConstraint = self.verticalOffsetConstraint.setMultiplier(multiplier: 1)
+            self.view.layoutIfNeeded()
+        }, completion: { (isCompleted) in
+            if isCompleted {
+                completion?()
+            }
+        })
+    }
+    
+    private func animateSlideUp(completion: (() -> ())? = nil) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
+            self.backgroundView.alpha = 1
+            self.verticalOffsetConstraint = self.verticalOffsetConstraint.setMultiplier(multiplier: 0.35)
+            self.view.layoutIfNeeded()
+        }, completion: { (isCompleted) in
+            if isCompleted {
+                completion?()
+            }
+        })
+    }
+    
 }
 
 extension SlideUpContainerViewController: UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
@@ -87,23 +147,15 @@ extension SlideUpContainerViewController: UIViewControllerTransitioningDelegate,
             
             backgroundView.alpha = 0
             verticalOffsetConstraint = verticalOffsetConstraint.setMultiplier(multiplier: 1)
-            self.view.layoutIfNeeded()
-            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
-                self.backgroundView.alpha = 1
-                self.verticalOffsetConstraint = self.verticalOffsetConstraint.setMultiplier(multiplier: 0.35)
-                self.view.layoutIfNeeded()
-            }, completion: { (finished) in
+            view.layoutIfNeeded()
+            animateSlideUp {
                 transitionContext.completeTransition(true)
-            })
+            }
             
         } else {
-            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
-                self.backgroundView.alpha = 0
-                self.verticalOffsetConstraint = self.verticalOffsetConstraint.setMultiplier(multiplier: 1)
-                self.view.layoutIfNeeded()
-            }, completion: { (finished) in
+            animateSlideDown {
                 transitionContext.completeTransition(true)
-            })
+            }
         }
     }
 }

@@ -80,6 +80,28 @@ class FundsMoveEditViewController : TransactionEditViewController {
                               gotAt: Date?) -> Bool {
         return fundsMoveEditViewModel.isFormValid(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
     }
+    
+    override func didTapStartable() {
+        if let expenseSourceSelectViewController = router.viewController(.ExpenseSourceSelectViewController) as? ExpenseSourceSelectViewController {
+            
+            expenseSourceSelectViewController.set(delegate: self,
+                                                  skipExpenseSourceId: viewModel.completable?.id,
+                                                  selectionType: .startable)
+            
+            slideUp(viewController: expenseSourceSelectViewController)
+        }
+    }
+    
+    override func didTapCompletable() {
+        if let expenseSourceSelectViewController = router.viewController(.ExpenseSourceSelectViewController) as? ExpenseSourceSelectViewController {
+            
+            expenseSourceSelectViewController.set(delegate: self,
+                                                  skipExpenseSourceId: viewModel.startable?.id,
+                                                  selectionType: .completable)
+            
+            slideUp(viewController: expenseSourceSelectViewController)
+        }
+    }
 }
 
 extension FundsMoveEditViewController : FundsMoveEditInputProtocol {

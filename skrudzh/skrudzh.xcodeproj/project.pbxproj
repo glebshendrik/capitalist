@@ -50,6 +50,9 @@
 		FA16FC6F223A81F70053C273 /* ExpenseSourcesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC6E223A81F70053C273 /* ExpenseSourcesViewModel.swift */; };
 		FA16FC71223A82930053C273 /* ExpenseSourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC70223A82930053C273 /* ExpenseSourceTableViewCell.swift */; };
 		FA16FC73223A82FA0053C273 /* ExpenseSourceSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC72223A82FA0053C273 /* ExpenseSourceSelectViewController.swift */; };
+		FA16FC75223AA9870053C273 /* ExpenseCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC74223AA9870053C273 /* ExpenseCategoryTableViewCell.swift */; };
+		FA16FC77223AAA650053C273 /* ExpenseCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC76223AAA650053C273 /* ExpenseCategoriesViewModel.swift */; };
+		FA16FC79223AAC930053C273 /* ExpenseCategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC78223AAC930053C273 /* ExpenseCategorySelectViewController.swift */; };
 		FA26813E21B178D300FADED1 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */; };
 		FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813421B178D200FADED1 /* Rubik-Bold.ttf */; };
 		FA26814021B178D300FADED1 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813521B178D200FADED1 /* Rubik-Light.ttf */; };
@@ -254,6 +257,9 @@
 		FA16FC6E223A81F70053C273 /* ExpenseSourcesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesViewModel.swift; sourceTree = "<group>"; };
 		FA16FC70223A82930053C273 /* ExpenseSourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceTableViewCell.swift; sourceTree = "<group>"; };
 		FA16FC72223A82FA0053C273 /* ExpenseSourceSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceSelectViewController.swift; sourceTree = "<group>"; };
+		FA16FC74223AA9870053C273 /* ExpenseCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		FA16FC76223AAA650053C273 /* ExpenseCategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoriesViewModel.swift; sourceTree = "<group>"; };
+		FA16FC78223AAC930053C273 /* ExpenseCategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategorySelectViewController.swift; sourceTree = "<group>"; };
 		FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		FA26813421B178D200FADED1 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		FA26813521B178D200FADED1 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
@@ -617,6 +623,7 @@
 				FAE3BBCE2236668300FF1397 /* BudgetView.swift */,
 				FA16FC6C223A61B80053C273 /* IncomeSourceTableViewCell.swift */,
 				FA16FC70223A82930053C273 /* ExpenseSourceTableViewCell.swift */,
+				FA16FC74223AA9870053C273 /* ExpenseCategoryTableViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -920,6 +927,7 @@
 				FAA426152231296A00B64925 /* FundsMoveEditViewController.swift */,
 				FA16FC6A223A5B110053C273 /* IncomeSourceSelectViewController.swift */,
 				FA16FC72223A82FA0053C273 /* ExpenseSourceSelectViewController.swift */,
+				FA16FC78223AAC930053C273 /* ExpenseCategorySelectViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -958,6 +966,7 @@
 				FAE3BBD022367D0400FF1397 /* BudgetViewModel.swift */,
 				FA16FC68223A5A060053C273 /* IncomeSourcesViewModel.swift */,
 				FA16FC6E223A81F70053C273 /* ExpenseSourcesViewModel.swift */,
+				FA16FC76223AAA650053C273 /* ExpenseCategoriesViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1166,6 +1175,7 @@
 				FAD88F5221AEC1A500BE7BC1 /* APIClient.swift in Sources */,
 				FAD88F6121AEC61800BE7BC1 /* AccountCoordinator.swift in Sources */,
 				FAD88F7921AFD64000BE7BC1 /* APIResourceRequest.swift in Sources */,
+				FA16FC79223AAC930053C273 /* ExpenseCategorySelectViewController.swift in Sources */,
 				FAD88F3D21AEBB4200BE7BC1 /* UserSessionManager.swift in Sources */,
 				FA165CE221B65F0300EAA16B /* LoginViewModel.swift in Sources */,
 				FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */,
@@ -1187,6 +1197,7 @@
 				FAD88F4121AEBDF900BE7BC1 /* Navigator.swift in Sources */,
 				FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */,
 				FAA426002230F57400B64925 /* ExpensesServiceProtocol.swift in Sources */,
+				FA16FC75223AA9870053C273 /* ExpenseCategoryTableViewCell.swift in Sources */,
 				FA81748E222F800200EE6116 /* DatePickerViewController.swift in Sources */,
 				FA8382B621F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift in Sources */,
 				FA0CAE1F21D6785E00805288 /* IconCollectionViewCell.swift in Sources */,
@@ -1204,6 +1215,7 @@
 				FA66FB792226D37000708C71 /* ExchangeRate.swift in Sources */,
 				FAD88F7821AFD64000BE7BC1 /* APIResourcePath.swift in Sources */,
 				FAD88F7721AFD64000BE7BC1 /* APIResourceMethod.swift in Sources */,
+				FA16FC77223AAA650053C273 /* ExpenseCategoriesViewModel.swift in Sources */,
 				FA7CB4D9221C2A7D00FAAC0F /* IncomesServiceProtocol.swift in Sources */,
 				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
 				FAED7DA021EC65B200BF6FE1 /* BasketsCoordinator.swift in Sources */,

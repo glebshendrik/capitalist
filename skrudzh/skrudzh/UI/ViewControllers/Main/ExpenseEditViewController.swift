@@ -80,6 +80,26 @@ class ExpenseEditViewController : TransactionEditViewController {
                               gotAt: Date?) -> Bool {
         return expenseEditViewModel.isFormValid(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
     }
+    
+    override func didTapStartable() {
+        if let expenseSourceSelectViewController = router.viewController(.ExpenseSourceSelectViewController) as? ExpenseSourceSelectViewController {
+            
+            expenseSourceSelectViewController.set(delegate: self,
+                                                  skipExpenseSourceId: nil,
+                                                  selectionType: .startable)
+            
+            slideUp(viewController: expenseSourceSelectViewController)
+        }
+    }
+    
+    override func didTapCompletable() {
+        if let expenseCategorySelectViewController = router.viewController(.ExpenseCategorySelectViewController) as? ExpenseCategorySelectViewController {
+                        
+            expenseCategorySelectViewController.set(delegate: self)
+            
+            slideUp(viewController: expenseCategorySelectViewController)
+        }
+    }
 }
 
 extension ExpenseEditViewController : ExpenseEditInputProtocol {

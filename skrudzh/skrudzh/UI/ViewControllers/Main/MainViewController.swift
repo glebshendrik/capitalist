@@ -978,7 +978,7 @@ extension MainViewController {
     private func setupRearrangeGestureRecognizer(for collectionView: UICollectionView) {
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didRecognizeRearrangeGesture(gesture:)))
         collectionView.addGestureRecognizer(gestureRecognizer)
-        gestureRecognizer.minimumPressDuration = 1.5
+        gestureRecognizer.minimumPressDuration = 0.95
     }
     
     private func setupExpenseCategoriesCollectionView() {
@@ -1286,7 +1286,7 @@ extension MainViewController {
     
     private func initializeWaitingAtTheEdge() {
         waitingAtTheEdgeTimer?.invalidate()
-        if dropCandidateCollectionView != nil && waitingEdge != nil {
+        if dropCandidateCollectionView != nil && waitingEdge != nil && !isEditing {
             waitingAtTheEdgeTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(changeWaitingPage), userInfo: nil, repeats: false)
         } else {
             waitingAtTheEdgeTimer = nil
@@ -1294,8 +1294,14 @@ extension MainViewController {
     }
     
     @objc private func changeWaitingPage() {
-        guard   let edge = waitingEdge,
-                let dropCandidateCollectionView = dropCandidateCollectionView else { return }
+        guard   !isEditing,
+                let edge = waitingEdge,
+                let dropCandidateCollectionView = dropCandidateCollectionView else {
+                    
+                    initializeWaitingAtTheEdge()
+                    return
+                    
+        }
         
         let offsetDiff = edge == .right ? self.view.frame.size.width : -self.view.frame.size.width
         var offset = dropCandidateCollectionView.contentOffset.x + offsetDiff
@@ -1633,8 +1639,9 @@ extension MainViewController: ExpenseEditViewControllerDelegate {
         loadBudget()
         loadBaskets()
         loadExpenseSources()
-        guard let basketType = viewModel.basketsViewModel.selectedBasketType else { return }
-        loadExpenseCategories(by: basketType)
+        loadExpenseCategories(by: .joy)
+        loadExpenseCategories(by: .risk)
+        loadExpenseCategories(by: .safe)
     }
 }
 

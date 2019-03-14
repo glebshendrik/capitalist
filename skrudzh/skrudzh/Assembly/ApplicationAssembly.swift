@@ -52,6 +52,7 @@ struct Infrastructure {
         case SlideUpContainerViewController
         case IncomeSourceSelectViewController
         case ExpenseSourceSelectViewController
+        case ExpenseCategorySelectViewController
         
         // Profile
         case ProfileViewController
@@ -103,7 +104,8 @@ struct Infrastructure {
                  .FundsMoveEditViewController,
                  .SlideUpContainerViewController,
                  .IncomeSourceSelectViewController,
-                 .ExpenseSourceSelectViewController:
+                 .ExpenseSourceSelectViewController,
+                 .ExpenseCategorySelectViewController:
                 return .Main
             case .ProfileViewController,
                  .ChangePasswordViewController:
@@ -291,6 +293,12 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(ExpenseSourcesViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
+        
+        // ExpenseCategorySelectViewController
+        container.registerForSkrudzhStoryboard(ExpenseCategorySelectViewController.self) { (r, c) in
+            c.viewModel = r.resolve(ExpenseCategoriesViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -406,6 +414,11 @@ class ApplicationAssembly: Assembly {
         // ExpenseSourcesViewModel
         container.register(ExpenseSourcesViewModel.self) { r in
             return ExpenseSourcesViewModel(expenseSourcesCoordinator: r.resolve(ExpenseSourcesCoordinatorProtocol.self)!)
+        }
+        
+        // ExpenseCategoriesViewModel
+        container.register(ExpenseCategoriesViewModel.self) { r in
+            return ExpenseCategoriesViewModel(expenseCategoriesCoordinator: r.resolve(ExpenseCategoriesCoordinatorProtocol.self)!)
         }
     }
     
