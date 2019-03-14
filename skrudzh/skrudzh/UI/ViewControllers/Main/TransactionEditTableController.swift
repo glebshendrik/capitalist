@@ -17,6 +17,8 @@ protocol TransactionEditTableControllerDelegate {
     func didChangeAmount()
     func didTapComment()
     func didTapCalendar()
+    func didTapStartable()
+    func didTapCompletable()
 }
 
 class TransactionEditTableController : StaticDataTableViewController, UITextFieldDelegate {
@@ -25,12 +27,14 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     @IBOutlet weak var startableIconContainer: UIView!
     @IBOutlet weak var startableIconImageView: UIImageView!
     @IBOutlet weak var startableBalanceLabel: UILabel!
+    @IBOutlet weak var startableCell: UITableViewCell!
     
     @IBOutlet weak var completableNameTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var completableBackground: UIView!
     @IBOutlet weak var completableIconContainer: UIView!
     @IBOutlet weak var completableIconImageView: UIImageView!
     @IBOutlet weak var completableBalanceLabel: UILabel!
+    @IBOutlet weak var completableCell: UITableViewCell!
     
     @IBOutlet weak var amountCell: UITableViewCell!
     @IBOutlet weak var amountTextField: MoneyTextField!
@@ -231,14 +235,14 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
         setExchangeAmountsCell(hidden: !needsExchange)
     }
     
-    func setAmountCell(hidden: Bool, animated: Bool = true, reload: Bool = false) {
+    func setAmountCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
         cell(amountCell, setHidden: hidden)
         if reload {
             updateTable(animated: animated)
         }
     }
     
-    func setExchangeAmountsCell(hidden: Bool, animated: Bool = true, reload: Bool = false) {
+    func setExchangeAmountsCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
         cell(exchangeAmountsCell, setHidden: hidden)
         if reload {
             updateTable(animated: animated)
@@ -249,7 +253,15 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
         reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        tableView.deselectRow(at: indexPath, animated: false)
+        if cell == startableCell {
+            delegate?.didTapStartable()
+        }
         
+        if cell == completableCell {
+            delegate?.didTapCompletable()
+        }
     }
 }

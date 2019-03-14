@@ -5097,6 +5097,7 @@
                         <outlet property="commentButton" destination="Q3u-E3-gyJ" id="obg-m9-xXR"/>
                         <outlet property="completableBackground" destination="rgu-ju-QlL" id="5r5-LE-7AD"/>
                         <outlet property="completableBalanceLabel" destination="JmE-G5-fJP" id="2oN-nq-yoe"/>
+                        <outlet property="completableCell" destination="0MX-W9-Laa" id="VHu-pv-gk7"/>
                         <outlet property="completableIconContainer" destination="RJP-SX-ueX" id="olW-CX-wmH"/>
                         <outlet property="completableIconImageView" destination="u6q-Tv-WSd" id="ooZ-Ca-xHx"/>
                         <outlet property="completableNameTextField" destination="2Wi-Cq-sbI" id="Wyd-sA-V52"/>
@@ -5112,6 +5113,7 @@
                         <outlet property="exchangesWhiteLine" destination="Upq-Un-ioU" id="b6x-RK-nnD"/>
                         <outlet property="startableBackground" destination="l3K-Px-mCf" id="5xB-7p-CNJ"/>
                         <outlet property="startableBalanceLabel" destination="467-YG-ZpJ" id="Bra-1P-Nu2"/>
+                        <outlet property="startableCell" destination="cgw-Xw-bzj" id="9ui-Vl-Ryu"/>
                         <outlet property="startableIconContainer" destination="O82-0v-dLL" id="she-fO-4aA"/>
                         <outlet property="startableIconImageView" destination="dXu-J6-xXS" id="PBN-9g-HUP"/>
                         <outlet property="startableNameTextField" destination="Lbe-DJ-bfo" id="aa7-km-Lrj"/>
@@ -5121,6 +5123,135 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3I9-IQ-7oC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-617" y="3887"/>
+        </scene>
+        <!--Slide Up Container View Controller-->
+        <scene sceneID="Lh3-hz-nLI">
+            <objects>
+                <viewController storyboardIdentifier="SlideUpContainerViewController" id="Lyy-eQ-Wuu" customClass="SlideUpContainerViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZOs-WH-uhc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPD-Ey-EWQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="233.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wiz-qS-9oP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajY-28-T9K">
+                                <rect key="frame" x="0.0" y="233.5" width="375" height="433.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CPD-Ey-EWQ" firstAttribute="height" secondItem="ZOs-WH-uhc" secondAttribute="height" multiplier="35:100" id="082-G2-qL9"/>
+                            <constraint firstAttribute="bottom" secondItem="wiz-qS-9oP" secondAttribute="bottom" id="A1I-gP-k7m"/>
+                            <constraint firstItem="ajY-28-T9K" firstAttribute="width" secondItem="ZOs-WH-uhc" secondAttribute="width" id="Ctt-oo-CzK"/>
+                            <constraint firstItem="ldQ-S5-l4f" firstAttribute="trailing" secondItem="wiz-qS-9oP" secondAttribute="trailing" id="ME0-Vr-9Yt"/>
+                            <constraint firstItem="ajY-28-T9K" firstAttribute="top" secondItem="CPD-Ey-EWQ" secondAttribute="bottom" id="NhV-wg-j6M"/>
+                            <constraint firstItem="CPD-Ey-EWQ" firstAttribute="width" secondItem="ZOs-WH-uhc" secondAttribute="width" id="S8p-TU-7e7"/>
+                            <constraint firstItem="CPD-Ey-EWQ" firstAttribute="centerX" secondItem="ZOs-WH-uhc" secondAttribute="centerX" id="WLj-wC-dbO"/>
+                            <constraint firstItem="ajY-28-T9K" firstAttribute="centerX" secondItem="ZOs-WH-uhc" secondAttribute="centerX" id="ZRt-4z-ez7"/>
+                            <constraint firstItem="wiz-qS-9oP" firstAttribute="leading" secondItem="ldQ-S5-l4f" secondAttribute="leading" id="efq-zO-hkn"/>
+                            <constraint firstItem="wiz-qS-9oP" firstAttribute="top" secondItem="ZOs-WH-uhc" secondAttribute="top" id="emm-WR-eRf"/>
+                            <constraint firstItem="CPD-Ey-EWQ" firstAttribute="top" secondItem="ZOs-WH-uhc" secondAttribute="top" id="xap-so-Pru"/>
+                            <constraint firstItem="ajY-28-T9K" firstAttribute="height" secondItem="ZOs-WH-uhc" secondAttribute="height" multiplier="65:100" id="xgM-Nb-wPR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ldQ-S5-l4f"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundView" destination="wiz-qS-9oP" id="sxh-EY-iR7"/>
+                        <outlet property="contentView" destination="ajY-28-T9K" id="mr9-k9-EoJ"/>
+                        <outlet property="verticalOffsetConstraint" destination="082-G2-qL9" id="M2j-Wr-oaZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lb1-qH-NvE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="223" y="3915"/>
+        </scene>
+        <!--Income Source Select View Controller-->
+        <scene sceneID="A1x-yw-mmD">
+            <objects>
+                <viewController storyboardIdentifier="IncomeSourceSelectViewController" id="1Xd-fV-sc1" customClass="IncomeSourceSelectViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X2N-SN-3Yi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Источники дохода" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTL-e8-6qX">
+                                <rect key="frame" x="16" y="8" width="343" height="15"/>
+                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                                <color key="textColor" red="0.2627450980392157" green="0.33333333333333331" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="zab-T9-nnv">
+                                <rect key="frame" x="160" y="318" width="55" height="31"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gyv-hC-fs9">
+                                <rect key="frame" x="0.0" y="27" width="375" height="640"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IncomeSourceTableViewCell" rowHeight="60" id="PJR-gw-NAb" customClass="IncomeSourceTableViewCell" customModule="skrudzh" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PJR-gw-NAb" id="4CE-fN-UCy">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Labelasdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfw-ck-Yd0">
+                                                    <rect key="frame" x="16" y="20.5" width="182" height="19"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
+                                                    <color key="textColor" red="0.47450980392156861" green="0.51764705882352935" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPG-g9-K7K">
+                                                    <rect key="frame" x="214" y="21" width="145" height="18"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
+                                                    <color key="textColor" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vPG-g9-K7K" firstAttribute="centerY" secondItem="4CE-fN-UCy" secondAttribute="centerY" id="PLN-LA-JGR"/>
+                                                <constraint firstItem="Pfw-ck-Yd0" firstAttribute="leading" secondItem="4CE-fN-UCy" secondAttribute="leading" constant="16" id="gM4-WN-BoJ"/>
+                                                <constraint firstItem="vPG-g9-K7K" firstAttribute="leading" secondItem="Pfw-ck-Yd0" secondAttribute="trailing" constant="16" id="gel-bH-6ie"/>
+                                                <constraint firstAttribute="trailing" secondItem="vPG-g9-K7K" secondAttribute="trailing" constant="16" id="he3-CV-U4c"/>
+                                                <constraint firstItem="Pfw-ck-Yd0" firstAttribute="centerY" secondItem="4CE-fN-UCy" secondAttribute="centerY" id="pzB-a6-RKt"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="incomeAmountLabel" destination="vPG-g9-K7K" id="a2r-Jz-GNO"/>
+                                            <outlet property="nameLabel" destination="Pfw-ck-Yd0" id="a27-P1-khH"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Gyv-hC-fs9" firstAttribute="top" secondItem="eTL-e8-6qX" secondAttribute="bottom" constant="4" id="0MU-Ch-Pc2"/>
+                            <constraint firstItem="zab-T9-nnv" firstAttribute="centerY" secondItem="X2N-SN-3Yi" secondAttribute="centerY" id="2lx-WN-kdJ"/>
+                            <constraint firstItem="Gyv-hC-fs9" firstAttribute="leading" secondItem="YGL-jy-uoK" secondAttribute="leading" id="4rj-Q7-TVi"/>
+                            <constraint firstItem="YGL-jy-uoK" firstAttribute="bottom" secondItem="Gyv-hC-fs9" secondAttribute="bottom" id="Sos-29-fjU"/>
+                            <constraint firstItem="eTL-e8-6qX" firstAttribute="leading" secondItem="X2N-SN-3Yi" secondAttribute="leading" constant="16" id="UOd-da-Fcx"/>
+                            <constraint firstItem="zab-T9-nnv" firstAttribute="centerX" secondItem="X2N-SN-3Yi" secondAttribute="centerX" id="Z0H-B5-fCm"/>
+                            <constraint firstItem="YGL-jy-uoK" firstAttribute="trailing" secondItem="Gyv-hC-fs9" secondAttribute="trailing" id="cgG-1v-JOi"/>
+                            <constraint firstItem="eTL-e8-6qX" firstAttribute="top" secondItem="X2N-SN-3Yi" secondAttribute="top" constant="8" id="pBK-BE-WUh"/>
+                            <constraint firstAttribute="trailing" secondItem="eTL-e8-6qX" secondAttribute="trailing" constant="16" id="wMK-gF-meC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YGL-jy-uoK"/>
+                    </view>
+                    <connections>
+                        <outlet property="loader" destination="zab-T9-nnv" id="2qO-II-cLE"/>
+                        <outlet property="tableView" destination="Gyv-hC-fs9" id="DBK-U4-gvj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uhl-V6-uxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1212" y="3511"/>
         </scene>
         <!--Expense Edit View Controller-->
         <scene sceneID="kLy-37-4K7">
@@ -5340,7 +5471,7 @@
         <image name="wallet-icon" width="30" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OAp-8q-YDW"/>
+        <segue reference="sFk-mx-J97"/>
         <segue reference="hif-TF-5lN"/>
         <segue reference="YjD-qx-ivd"/>
     </inferredMetricsTieBreakers>

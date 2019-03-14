@@ -80,6 +80,28 @@ class IncomeEditViewController : TransactionEditViewController {
                               gotAt: Date?) -> Bool {
         return incomeEditViewModel.isFormValid(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
     }
+    
+    override func didTapStartable() {
+        if let incomeSourceSelectViewController = router.viewController(.IncomeSourceSelectViewController) as? IncomeSourceSelectViewController {
+            
+            incomeSourceSelectViewController.set(delegate: self)
+            slideUp(viewController: incomeSourceSelectViewController)
+        }
+    }
+    
+    override func didTapCompletable() {
+        
+    }
+}
+
+extension IncomeEditViewController : IncomeSourceSelectViewControllerDelegate {
+    
+    func didSelect(incomeSourceViewModel: IncomeSourceViewModel) {
+        viewModel.startable = incomeSourceViewModel
+        updateUI()
+        loadExchangeRate()
+    }
+    
 }
 
 extension IncomeEditViewController : IncomeEditInputProtocol {

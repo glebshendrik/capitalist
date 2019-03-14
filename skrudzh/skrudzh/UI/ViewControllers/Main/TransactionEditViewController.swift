@@ -148,7 +148,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         }
     }
     
-    private func loadExchangeRate() {
+    func loadExchangeRate() {
         setActivityIndicator(hidden: false)
         saveButton.isEnabled = false
         
@@ -160,6 +160,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         }.finally {
             self.setActivityIndicator(hidden: true)
             self.saveButton.isEnabled = true
+            self.updateUI()
         }
     }
     
@@ -170,6 +171,15 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
 }
 
 extension TransactionEditViewController : TransactionEditTableControllerDelegate {
+    
+    @objc func didTapStartable() {
+        
+    }
+    
+    @objc func didTapCompletable() {
+        
+    }
+    
     func didChangeAmount() {
         editTableController?.exchangeCompletableAmountTextField.text = viewModel.convert(amount: editTableController?.exchangeStartableAmountTextField.text)
     }
@@ -177,10 +187,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     private func setupUI() {
         setupNavigationBar()
         loaderImageView.showLoader()
-        guard viewModel.isNew else {
-            setActivityIndicator(hidden: true)
-            return
-        }
+        setActivityIndicator(hidden: true)
         if viewModel.needCurrencyExchange {
             loadExchangeRate()
         }
@@ -215,8 +222,15 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         })
     }
     
-    private func updateUI() {
-        // startable
+    func updateUI() {
+        updateStartableUI()
+        updateCompletableUI()
+        updateAmountUI()
+        updateExchangeAmountsUI()
+        validateUI()
+    }
+    
+    private func updateStartableUI() {
         editTableController?.startableNameTextField.text = viewModel.startableName
         editTableController?.startableBalanceLabel.text = viewModel.startableAmount
         editTableController?.startableIconImageView.setImage(with: viewModel.startableIconURL,
@@ -224,8 +238,9 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
                                                              renderingMode: .alwaysTemplate)
         editTableController?.startableNameTextField.selectedTitle = viewModel.startableTitle
         editTableController?.startableNameTextField.placeholder = viewModel.startableTitle
-        
-        // completable
+    }
+    
+    private func updateCompletableUI() {
         editTableController?.completableNameTextField.text = viewModel.completableName
         editTableController?.completableBalanceLabel.text = viewModel.completableAmount
         editTableController?.completableIconImageView.setImage(with: viewModel.completableIconURL,
@@ -233,15 +248,17 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
                                                                renderingMode: .alwaysTemplate)
         editTableController?.completableNameTextField.selectedTitle = viewModel.completableTitle
         editTableController?.completableNameTextField.placeholder = viewModel.completableTitle
-        
-        // amount
+    }
+    
+    private func updateAmountUI() {
         editTableController?.amountTextField.text = viewModel.amount
         editTableController?.amountTextField.selectedTitle = viewModel.completableAmountTitle
         editTableController?.amountTextField.placeholder = viewModel.completableAmountTitle
         editTableController?.amountCurrencyLabel.text = viewModel.completableCurrencyCode
         editTableController?.amountTextField?.currency = viewModel.startableCurrency
-        
-        // exchange amounts
+    }
+    
+    private func updateExchangeAmountsUI() {
         editTableController?.exchangeStartableAmountTextField.text = viewModel.amount
         editTableController?.exchangeStartableAmountTextField.currency = viewModel.startableCurrency
         editTableController?.exchangeStartableAmountCurrencyLabel.text = viewModel.startableCurrencyCode
@@ -251,8 +268,6 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         editTableController?.exchangeCompletableAmountCurrencyLabel.text = viewModel.completableCurrencyCode
         
         editTableController?.update(needsExchange: viewModel.needCurrencyExchange)
-        
-        validateUI()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

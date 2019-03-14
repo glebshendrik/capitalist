@@ -49,6 +49,8 @@ struct Infrastructure {
         case ExpenseEditViewController
         case FundsMoveEditNavigationController
         case FundsMoveEditViewController
+        case SlideUpContainerViewController
+        case IncomeSourceSelectViewController
         
         // Profile
         case ProfileViewController
@@ -97,7 +99,9 @@ struct Infrastructure {
                  .ExpenseEditNavigationController,
                  .ExpenseEditViewController,
                  .FundsMoveEditNavigationController,
-                 .FundsMoveEditViewController:
+                 .FundsMoveEditViewController,
+                 .SlideUpContainerViewController,
+                 .IncomeSourceSelectViewController:
                 return .Main
             case .ProfileViewController,
                  .ChangePasswordViewController:
@@ -266,6 +270,19 @@ class ApplicationAssembly: Assembly {
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
             c.router = r.resolve(ApplicationRouterProtocol.self)
         }
+        
+        // SlideUpContainerViewController
+        container.registerForSkrudzhStoryboard(SlideUpContainerViewController.self) { (r, c) in
+//            c.fundsMoveEditViewModel = r.resolve(FundsMoveEditViewModel.self)
+//            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+//            c.router = r.resolve(ApplicationRouterProtocol.self)
+        }
+        
+        // IncomeSourceSelectViewController
+        container.registerForSkrudzhStoryboard(IncomeSourceSelectViewController.self) { (r, c) in
+            c.viewModel = r.resolve(IncomeSourcesViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -371,6 +388,11 @@ class ApplicationAssembly: Assembly {
             return FundsMoveEditViewModel(fundsMovesCoordinator: r.resolve(FundsMovesCoordinatorProtocol.self)!,
                                         accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!,
                                         exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!)
+        }
+        
+        // IncomeSourcesViewModel
+        container.register(IncomeSourcesViewModel.self) { r in
+            return IncomeSourcesViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!)
         }
     }
     
