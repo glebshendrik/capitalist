@@ -114,11 +114,11 @@ class ExpenseSourceEditViewModel {
             : updateExpenseSource(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents)
     }
     
-    func removeExpenseSource() -> Promise<Void> {
+    func removeExpenseSource(deleteTransactions: Bool) -> Promise<Void> {
         guard let expenseSourceId = expenseSource?.id else {
             return Promise(error: ExpenseSourceUpdatingError.updatingExpenseSourceIsNotSpecified)
         }
-        return expenseSourcesCoordinator.destroy(by: expenseSourceId)
+        return expenseSourcesCoordinator.destroy(by: expenseSourceId, deleteTransactions: deleteTransactions)
     }
     
     

@@ -13,9 +13,15 @@ struct APIResourceQueryParameters {
         let params = [String : String]()
         switch resource {
         case .indexIcons(let category):
-            return ["category" : category.rawValue]
+            return [ "category" : category.rawValue ]
         case .findExchangeRate(let from, let to):
-            return ["from" : from, "to" : to ]
+            return [ "from" : from, "to" : to ]
+        case .destroyIncomeSource(_, let deleteTransactions):
+            return [ "delete_transactions" : deleteTransactions.string ]
+        case .destroyExpenseSource(_, let deleteTransactions):
+            return [ "delete_transactions" : deleteTransactions.string ]
+        case .destroyExpenseCategory(_, let deleteTransactions):
+            return [ "delete_transactions" : deleteTransactions.string ]
         default:
             break
         }

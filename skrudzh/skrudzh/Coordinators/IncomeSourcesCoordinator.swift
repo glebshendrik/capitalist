@@ -43,7 +43,7 @@ class IncomeSourcesCoordinator : IncomeSourcesCoordinatorProtocol {
         return incomeSourcesService.updatePosition(with: updatingForm)
     }
     
-    func destroy(by id: Int) -> Promise<Void> {
-        return incomeSourcesService.destroy(by: id)
+    func destroy(by id: Int, deleteTransactions: Bool) -> Promise<Void> {
+        return incomeSourcesService.destroy(by: id, deleteTransactions: deleteTransactions)
     }
 }

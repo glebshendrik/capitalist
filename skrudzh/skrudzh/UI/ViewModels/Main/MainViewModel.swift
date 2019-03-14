@@ -224,16 +224,16 @@ class MainViewModel {
         }
     }
     
-    func removeIncomeSource(by id: Int) -> Promise<Void> {
-        return incomeSourcesCoordinator.destroy(by: id)
+    func removeIncomeSource(by id: Int, deleteTransactions: Bool) -> Promise<Void> {
+        return incomeSourcesCoordinator.destroy(by: id, deleteTransactions: deleteTransactions)
     }
     
-    func removeExpenseSource(by id: Int) -> Promise<Void> {
-        return expenseSourcesCoordinator.destroy(by: id)
+    func removeExpenseSource(by id: Int, deleteTransactions: Bool) -> Promise<Void> {
+        return expenseSourcesCoordinator.destroy(by: id, deleteTransactions: deleteTransactions)
     }
     
-    func removeExpenseCategory(by id: Int, basketType: BasketType) -> Promise<Void> {
-        return expenseCategoriesCoordinator.destroy(by: id)
+    func removeExpenseCategory(by id: Int, basketType: BasketType, deleteTransactions: Bool) -> Promise<Void> {
+        return expenseCategoriesCoordinator.destroy(by: id, deleteTransactions: deleteTransactions)
     }
     
     private func numberOfExpenseCategories(with basketType: BasketType) -> Int {

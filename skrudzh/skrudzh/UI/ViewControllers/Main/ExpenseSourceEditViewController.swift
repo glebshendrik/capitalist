@@ -74,13 +74,20 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     @IBAction func didTapRemoveButton(_ sender: Any) {
         let alertController = UIAlertController(title: "Удалить кошелек?",
                                                 message: nil,
-                                                preferredStyle: .actionSheet)
+                                                preferredStyle: .alert)
         
         alertController.addAction(title: "Удалить",
                                   style: .destructive,
                                   isEnabled: true,
                                   handler: { _ in
-                                    self.remove()
+                                    self.remove(deleteTransactions: false)
+        })
+        
+        alertController.addAction(title: "Удалить вместе с транзакциями",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: { _ in
+                                    self.remove(deleteTransactions: true)
         })
         
         alertController.addAction(title: "Отмена",
@@ -124,12 +131,12 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
         }
     }
     
-    private func remove() {
+    private func remove(deleteTransactions: Bool) {
         setActivityIndicator(hidden: false)
         removeButton.isEnabled = false
         
         firstly {
-            viewModel.removeExpenseSource()
+            viewModel.removeExpenseSource(deleteTransactions: deleteTransactions)
         }.done {
             self.delegate?.didRemoveExpenseSource()
             self.close()

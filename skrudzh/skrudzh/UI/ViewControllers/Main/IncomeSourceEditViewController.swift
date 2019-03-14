@@ -61,14 +61,21 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
     @IBAction func didTapRemoveButton(_ sender: Any) {
         let alertController = UIAlertController(title: "Удалить источник доходов?",
                                                 message: nil,
-                                                preferredStyle: .actionSheet)
+                                                preferredStyle: .alert)
         
         alertController.addAction(title: "Удалить",
                                   style: .destructive,
                                   isEnabled: true,
                                   handler: { _ in
-                                    self.remove()
+                                    self.remove(deleteTransactions: false)
                                 })
+        
+        alertController.addAction(title: "Удалить вместе с транзакциями",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: { _ in
+                                    self.remove(deleteTransactions: true)
+        })
         
         alertController.addAction(title: "Отмена",
                                   style: .cancel,
@@ -111,12 +118,12 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
         }
     }
     
-    private func remove() {
+    private func remove(deleteTransactions: Bool) {
         setActivityIndicator(hidden: false)
         removeButton.isUserInteractionEnabled = false
         
         firstly {
-            viewModel.removeIncomeSource()
+            viewModel.removeIncomeSource(deleteTransactions: deleteTransactions)
         }.done {
             self.delegate?.didRemoveIncomeSource()
             self.close()

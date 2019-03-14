@@ -15,5 +15,5 @@ protocol ExpenseCategoriesServiceProtocol {
     func index(for basketId: Int) -> Promise<[ExpenseCategory]>
     func update(with updatingForm: ExpenseCategoryUpdatingForm) -> Promise<Void>
     func updatePosition(with updatingForm: ExpenseCategoryPositionUpdatingForm) -> Promise<Void>
-    func destroy(by id: Int) -> Promise<Void>
+    func destroy(by id: Int, deleteTransactions: Bool) -> Promise<Void>
 }

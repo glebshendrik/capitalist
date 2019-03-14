@@ -384,10 +384,10 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
         }
     }
     
-    private func removeIncomeSource(by id: Int) {
+    private func removeIncomeSource(by id: Int, deleteTransactions: Bool) {
         set(incomeSourcesActivityIndicator, hidden: false)
         firstly {
-            viewModel.removeIncomeSource(by: id)
+            viewModel.removeIncomeSource(by: id, deleteTransactions: deleteTransactions)
         }.done {
             self.didRemoveIncomeSource()
         }
@@ -503,10 +503,10 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
         }
     }
     
-    private func removeExpenseSource(by id: Int) {
+    private func removeExpenseSource(by id: Int, deleteTransactions: Bool) {
         set(expenseSourcesActivityIndicator, hidden: false)
         firstly {
-            viewModel.removeExpenseSource(by: id)
+            viewModel.removeExpenseSource(by: id, deleteTransactions: deleteTransactions)
         }.done {
             self.didRemoveExpenseSource()
         }
@@ -702,10 +702,10 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
         }
     }
     
-    private func removeExpenseCategory(by id: Int, basketType: BasketType) {
+    private func removeExpenseCategory(by id: Int, basketType: BasketType, deleteTransactions: Bool) {
         set(expenseCategoriesActivityIndicator(by: basketType), hidden: false)
         firstly {
-            viewModel.removeExpenseCategory(by: id, basketType: basketType)
+            viewModel.removeExpenseCategory(by: id, basketType: basketType, deleteTransactions: deleteTransactions)
         }.done {
             self.didRemoveExpenseCategory(with: basketType)
         }
@@ -874,23 +874,37 @@ extension MainViewController : EditableCellDelegate {
     func didTapDeleteButton(cell: EditableCell) {
         var alertTitle = ""
         var removeAction: ((UIAlertAction) -> Void)? = nil
+        var removeWithTransactionsAction: ((UIAlertAction) -> Void)? = nil
         
         if let incomeSourceId = (cell as? IncomeSourceCollectionViewCell)?.viewModel?.id {
             alertTitle = "Удалить источник доходов?"
             removeAction = { _ in
-                self.removeIncomeSource(by: incomeSourceId)
+                self.removeIncomeSource(by: incomeSourceId, deleteTransactions: false)
+            }
+            removeWithTransactionsAction = { _ in
+                self.removeIncomeSource(by: incomeSourceId, deleteTransactions: true)
             }
         }
         if let expenseSourceId = (cell as? ExpenseSourceCollectionViewCell)?.viewModel?.id {
             alertTitle = "Удалить кошелек?"
             removeAction = { _ in
-                self.removeExpenseSource(by: expenseSourceId)
+                self.removeExpenseSource(by: expenseSourceId, deleteTransactions: false)
+            }
+            removeWithTransactionsAction = { _ in
+                self.removeExpenseSource(by: expenseSourceId, deleteTransactions: true)
             }
         }
         if let expenseCategoryViewModel = (cell as? ExpenseCategoryCollectionViewCell)?.viewModel {
             alertTitle = "Удалить категорию трат?"
             removeAction = { _ in
-                self.removeExpenseCategory(by: expenseCategoryViewModel.id, basketType: expenseCategoryViewModel.expenseCategory.basketType)
+                self.removeExpenseCategory(by: expenseCategoryViewModel.id,
+                                           basketType: expenseCategoryViewModel.expenseCategory.basketType,
+                                           deleteTransactions: false)
+            }
+            removeWithTransactionsAction = { _ in
+                self.removeExpenseCategory(by: expenseCategoryViewModel.id,
+                                           basketType: expenseCategoryViewModel.expenseCategory.basketType,
+                                           deleteTransactions: true)
             }
         }
         
@@ -902,6 +916,11 @@ extension MainViewController : EditableCellDelegate {
                                   style: .destructive,
                                   isEnabled: true,
                                   handler: removeAction)
+        
+        alertController.addAction(title: "Удалить вместе с транзакциями",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: removeWithTransactionsAction)
         
         alertController.addAction(title: "Отмена",
                                   style: .cancel,

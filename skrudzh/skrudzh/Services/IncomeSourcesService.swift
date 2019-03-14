@@ -30,8 +30,8 @@ class IncomeSourcesService : Service, IncomeSourcesServiceProtocol {
         return request(APIResource.updateIncomeSourcePosition(form: updatingForm))
     }
     
-    func destroy(by id: Int) -> Promise<Void> {
-        return request(APIResource.destroyIncomeSource(id: id))
+    func destroy(by id: Int, deleteTransactions: Bool) -> Promise<Void> {
+        return request(APIResource.destroyIncomeSource(id: id, deleteTransactions: deleteTransactions))
     }
     
     

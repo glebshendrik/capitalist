@@ -68,13 +68,20 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
     @IBAction func didTapRemoveButton(_ sender: Any) {
         let alertController = UIAlertController(title: "Удалить категорию трат?",
                                                 message: nil,
-                                                preferredStyle: .actionSheet)
+                                                preferredStyle: .alert)
         
         alertController.addAction(title: "Удалить",
                                   style: .destructive,
                                   isEnabled: true,
                                   handler: { _ in
-                                    self.remove()
+                                    self.remove(deleteTransactions: false)
+        })
+        
+        alertController.addAction(title: "Удалить вместе с транзакциями",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: { _ in
+                                    self.remove(deleteTransactions: true)
         })
         
         alertController.addAction(title: "Отмена",
@@ -121,12 +128,12 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
         }
     }
     
-    private func remove() {
+    private func remove(deleteTransactions: Bool) {
         setActivityIndicator(hidden: false)
         removeButton.isUserInteractionEnabled = false
         
         firstly {
-            viewModel.removeExpenseCategory()
+            viewModel.removeExpenseCategory(deleteTransactions: deleteTransactions)
         }.done {
             self.delegate?.didRemoveExpenseCategory(with: self.viewModel.basketType!)
             self.close()

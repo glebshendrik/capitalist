@@ -107,11 +107,11 @@ class ExpenseCategoryEditViewModel {
             : updateExpenseCategory(with: name, iconURL: iconURL, monthlyPlannedCents: monthlyPlannedCents)
     }
     
-    func removeExpenseCategory() -> Promise<Void> {
+    func removeExpenseCategory(deleteTransactions: Bool) -> Promise<Void> {
         guard let expenseCategoryId = expenseCategory?.id else {
             return Promise(error: ExpenseCategoryUpdatingError.updatingExpenseCategoryIsNotSpecified)
         }
-        return expenseCategoriesCoordinator.destroy(by: expenseCategoryId)
+        return expenseCategoriesCoordinator.destroy(by: expenseCategoryId, deleteTransactions: deleteTransactions)
     }
     
     func basketId(by basketType: BasketType) -> Int? {
