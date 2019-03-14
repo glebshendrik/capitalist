@@ -70,12 +70,12 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     
     override var amount: String? {
         guard let currency = startableCurrency else { return nil }
-        return (fundsMove?.amountCents ?? 0).moneyDecimalString(with: currency)
+        return fundsMove?.amountCents.moneyDecimalString(with: currency)
     }
     
     override var convertedAmount: String? {
         guard let convertedCurrency = completableCurrency else { return nil }
-        return (fundsMove?.convertedAmountCents ?? 0).moneyDecimalString(with: convertedCurrency)
+        return fundsMove?.convertedAmountCents.moneyDecimalString(with: convertedCurrency)
     }
     
     override var startableIconDefaultImageName: String {

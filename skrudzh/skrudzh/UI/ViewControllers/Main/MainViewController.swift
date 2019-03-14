@@ -307,6 +307,8 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
     
     func didRemoveIncomeSource() {
         loadIncomeSources()
+        loadBudget()
+        loadExpenseSources()
     }
     
     private func loadIncomeSources(scrollToEndWhenUpdated: Bool = false) {
@@ -387,12 +389,11 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
         firstly {
             viewModel.removeIncomeSource(by: id)
         }.done {
-            self.update(self.incomeSourcesCollectionView)
+            self.didRemoveIncomeSource()
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления источника дохода", theme: .error)
-        }.finally {
             self.set(self.incomeSourcesActivityIndicator, hidden: true)
+            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления источника дохода", theme: .error)
         }
     }
 }
@@ -411,6 +412,11 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
     func didRemoveExpenseSource() {
         loadExpenseSources()
         loadBudget()
+        loadBaskets()
+        loadIncomeSources()
+        loadExpenseCategories(by: .joy)
+        loadExpenseCategories(by: .safe)
+        loadExpenseCategories(by: .risk)
     }
     
     private func loadExpenseSources(scrollToEndWhenUpdated: Bool = false) {
@@ -502,12 +508,11 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
         firstly {
             viewModel.removeExpenseSource(by: id)
         }.done {
-            self.update(self.expenseSourcesCollectionView)
+            self.didRemoveExpenseSource()
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления кошелька", theme: .error)
-        }.finally {
             self.set(self.expenseSourcesActivityIndicator, hidden: true)
+            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления кошелька", theme: .error)
         }
     }
 }
@@ -537,6 +542,7 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
         loadExpenseCategories(by: basketType)
         loadBaskets()
         loadBudget()
+        loadExpenseSources()
         guard case basketType = BasketType.joy else {
             didRemoveIncomeSource()
             return
@@ -701,12 +707,11 @@ extension MainViewController : ExpenseCategoryEditViewControllerDelegate {
         firstly {
             viewModel.removeExpenseCategory(by: id, basketType: basketType)
         }.done {
-            self.update(self.expenseCategoriesCollectionView(by: basketType))
+            self.didRemoveExpenseCategory(with: basketType)
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления категории трат", theme: .error)
-        }.finally {
             self.set(self.expenseCategoriesActivityIndicator(by: basketType), hidden: true)
+            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления категории трат", theme: .error)
         }
     }
 }

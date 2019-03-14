@@ -47,8 +47,8 @@
                                         <constraint firstAttribute="height" id="TcK-9H-mWt"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtW-M2-Erw">
-                                    <rect key="frame" x="44.5" y="23" width="0.0" height="0.0"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="dtW-M2-Erw">
+                                    <rect key="frame" x="2" y="23" width="83.5" height="0.0"/>
                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -57,11 +57,12 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="7Ht-PG-Txu" firstAttribute="leading" secondItem="dng-1L-sg7" secondAttribute="leading" id="BId-hP-yQw"/>
+                                <constraint firstAttribute="trailing" secondItem="dtW-M2-Erw" secondAttribute="trailing" constant="3" id="LZf-Ol-1bd"/>
                                 <constraint firstItem="7Ht-PG-Txu" firstAttribute="top" secondItem="puF-dS-XpW" secondAttribute="bottom" constant="1" id="Nbr-Iu-gOi"/>
                                 <constraint firstItem="7Ht-PG-Txu" firstAttribute="centerY" secondItem="dng-1L-sg7" secondAttribute="centerY" id="Pwd-ta-bi8"/>
                                 <constraint firstItem="puF-dS-XpW" firstAttribute="centerX" secondItem="dng-1L-sg7" secondAttribute="centerX" id="Vtg-Qj-z51"/>
-                                <constraint firstItem="dtW-M2-Erw" firstAttribute="centerX" secondItem="dng-1L-sg7" secondAttribute="centerX" id="cIz-zV-wRi"/>
                                 <constraint firstAttribute="trailing" secondItem="7Ht-PG-Txu" secondAttribute="trailing" id="fW5-3x-gVh"/>
+                                <constraint firstItem="dtW-M2-Erw" firstAttribute="leading" secondItem="dng-1L-sg7" secondAttribute="leading" constant="2" id="ibZ-Xl-wgH"/>
                                 <constraint firstItem="dtW-M2-Erw" firstAttribute="top" secondItem="7Ht-PG-Txu" secondAttribute="bottom" constant="1" id="j86-sJ-1nO"/>
                             </constraints>
                         </view>
@@ -81,8 +82,8 @@
                                         <constraint firstAttribute="height" id="lu2-3B-Co9"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="06Y-MA-dra">
-                                    <rect key="frame" x="44.5" y="23" width="0.0" height="0.0"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="06Y-MA-dra">
+                                    <rect key="frame" x="3" y="23" width="83" height="0.0"/>
                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -95,7 +96,9 @@
                                 <constraint firstItem="8XI-D4-lga" firstAttribute="centerX" secondItem="ivZ-H3-Hwr" secondAttribute="centerX" id="H8Z-Vp-v9M"/>
                                 <constraint firstItem="LfL-ci-XHV" firstAttribute="leading" secondItem="ivZ-H3-Hwr" secondAttribute="leading" id="QzK-Gx-UcS"/>
                                 <constraint firstItem="LfL-ci-XHV" firstAttribute="top" secondItem="8XI-D4-lga" secondAttribute="bottom" constant="1" id="Uqi-Sh-pqR"/>
+                                <constraint firstItem="06Y-MA-dra" firstAttribute="leading" secondItem="ivZ-H3-Hwr" secondAttribute="leading" constant="3" id="j04-w5-wFy"/>
                                 <constraint firstAttribute="trailing" secondItem="LfL-ci-XHV" secondAttribute="trailing" id="qbV-aq-oIW"/>
+                                <constraint firstAttribute="trailing" secondItem="06Y-MA-dra" secondAttribute="trailing" constant="3" id="yyX-V0-YY0"/>
                                 <constraint firstItem="LfL-ci-XHV" firstAttribute="centerY" secondItem="ivZ-H3-Hwr" secondAttribute="centerY" id="zBc-wG-0Qa"/>
                             </constraints>
                         </view>
@@ -115,8 +118,8 @@
                                         <constraint firstAttribute="height" id="nQN-Hd-9dR"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iT-Dh-1Um">
-                                    <rect key="frame" x="44" y="23" width="0.0" height="0.0"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="0iT-Dh-1Um">
+                                    <rect key="frame" x="3" y="23" width="83.5" height="0.0"/>
                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -124,13 +127,14 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="0iT-Dh-1Um" firstAttribute="centerX" secondItem="1Mz-Hd-CGJ" secondAttribute="centerX" id="4B0-xF-pmv"/>
+                                <constraint firstItem="0iT-Dh-1Um" firstAttribute="leading" secondItem="1Mz-Hd-CGJ" secondAttribute="leading" constant="3" id="Fyx-pz-2sI"/>
                                 <constraint firstItem="0iT-Dh-1Um" firstAttribute="top" secondItem="rlZ-Hb-gaz" secondAttribute="bottom" constant="1" id="MDq-3c-RFZ"/>
                                 <constraint firstItem="rlZ-Hb-gaz" firstAttribute="top" secondItem="71v-Jz-VZT" secondAttribute="bottom" constant="1" id="NL6-mA-KNg"/>
                                 <constraint firstItem="71v-Jz-VZT" firstAttribute="centerX" secondItem="1Mz-Hd-CGJ" secondAttribute="centerX" id="bdr-6q-yQr"/>
                                 <constraint firstItem="rlZ-Hb-gaz" firstAttribute="centerY" secondItem="1Mz-Hd-CGJ" secondAttribute="centerY" id="iRN-jg-bEd"/>
                                 <constraint firstItem="rlZ-Hb-gaz" firstAttribute="leading" secondItem="1Mz-Hd-CGJ" secondAttribute="leading" id="jtd-6C-Odr"/>
                                 <constraint firstAttribute="trailing" secondItem="rlZ-Hb-gaz" secondAttribute="trailing" id="pT4-Q6-SBH"/>
+                                <constraint firstAttribute="trailing" secondItem="0iT-Dh-1Um" secondAttribute="trailing" constant="2" id="rHh-Re-4QH"/>
                             </constraints>
                         </view>
                     </subviews>

@@ -176,9 +176,9 @@ extension Int {
             var suffix: String
         }
         
-        let abbreviations = [Abbreviation(      threshold: 1000000.0, divisor: 1000.0, suffix: "k"),
-                             Abbreviation(   threshold: 1000000000.0, divisor: 1000000.0, suffix: "M"),
-                             Abbreviation(threshold: 1000000000000.0, divisor: 1000000000.0, suffix: "M+"),]
+        let abbreviations = [Abbreviation(      threshold: 1000000.0, divisor: 1000.0, suffix: "k "),
+                             Abbreviation(   threshold: 1000000000.0, divisor: 1000000.0, suffix: "M "),
+                             Abbreviation(threshold: 1000000000000.0, divisor: 10000000000.0, suffix: "M+ "),]
         
         let startValue = number.doubleValue.abs
         
@@ -191,11 +191,11 @@ extension Int {
         formatter.negativeFormat = formatter.negativeFormat.replacingOccurrences(of: " ", with: "")
         
         if let format = formatter.positiveFormat {
-            formatter.positiveFormat = currency.symbolFirst ? "¤\(format)\(abbreviation.suffix)" : "\(format)\(abbreviation.suffix) ¤"
+            formatter.positiveFormat = currency.symbolFirst ? "¤\(format)\(abbreviation.suffix)" : "\(format)\(abbreviation.suffix)¤"
         }
         
         if let format = formatter.negativeFormat {
-            formatter.negativeFormat = currency.symbolFirst ? "¤\(format)\(abbreviation.suffix)" : "\(format)\(abbreviation.suffix) ¤"
+            formatter.negativeFormat = currency.symbolFirst ? "¤\(format)\(abbreviation.suffix)" : "\(format)\(abbreviation.suffix)¤"
         }
         
         guard var formattedString = formatter.string(from: number) else { return nil }
