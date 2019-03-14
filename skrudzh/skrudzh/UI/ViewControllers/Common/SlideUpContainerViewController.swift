@@ -13,6 +13,7 @@ class SlideUpContainerViewController : UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var verticalOffsetConstraint: NSLayoutConstraint!
+    weak var viewControllerToAdd: UIViewController? = nil
     
     var isPresenting = false
     
@@ -26,7 +27,8 @@ class SlideUpContainerViewController : UIViewController {
         contentView.roundTopCorners(radius: 8.0)
     }
     
-    func add(viewController: UIViewController) {
+    private func addChild() {
+        guard let viewController = viewControllerToAdd else { return }
         addChild(viewController)
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(viewController.view)
@@ -43,6 +45,7 @@ class SlideUpContainerViewController : UIViewController {
     
     private func setupUI() {
         configureBackground()
+        addChild()
     }
     
     private func configureBackground() {
@@ -112,10 +115,9 @@ extension UIViewController {
             
             slideUpContainerViewController.modalPresentationStyle = .custom
             slideUpContainerViewController.transitioningDelegate = slideUpContainerViewController
+            slideUpContainerViewController.viewControllerToAdd = viewController
             
-            present(slideUpContainerViewController, animated: true) {
-                slideUpContainerViewController.add(viewController: viewController)
-            }
+            present(slideUpContainerViewController, animated: true)
             
         }
     }

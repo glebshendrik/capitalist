@@ -47,6 +47,9 @@
 		FA16FC69223A5A060053C273 /* IncomeSourcesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC68223A5A060053C273 /* IncomeSourcesViewModel.swift */; };
 		FA16FC6B223A5B110053C273 /* IncomeSourceSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC6A223A5B110053C273 /* IncomeSourceSelectViewController.swift */; };
 		FA16FC6D223A61B80053C273 /* IncomeSourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC6C223A61B80053C273 /* IncomeSourceTableViewCell.swift */; };
+		FA16FC6F223A81F70053C273 /* ExpenseSourcesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC6E223A81F70053C273 /* ExpenseSourcesViewModel.swift */; };
+		FA16FC71223A82930053C273 /* ExpenseSourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC70223A82930053C273 /* ExpenseSourceTableViewCell.swift */; };
+		FA16FC73223A82FA0053C273 /* ExpenseSourceSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16FC72223A82FA0053C273 /* ExpenseSourceSelectViewController.swift */; };
 		FA26813E21B178D300FADED1 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */; };
 		FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813421B178D200FADED1 /* Rubik-Bold.ttf */; };
 		FA26814021B178D300FADED1 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813521B178D200FADED1 /* Rubik-Light.ttf */; };
@@ -248,6 +251,9 @@
 		FA16FC68223A5A060053C273 /* IncomeSourcesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourcesViewModel.swift; sourceTree = "<group>"; };
 		FA16FC6A223A5B110053C273 /* IncomeSourceSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceSelectViewController.swift; sourceTree = "<group>"; };
 		FA16FC6C223A61B80053C273 /* IncomeSourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceTableViewCell.swift; sourceTree = "<group>"; };
+		FA16FC6E223A81F70053C273 /* ExpenseSourcesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesViewModel.swift; sourceTree = "<group>"; };
+		FA16FC70223A82930053C273 /* ExpenseSourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceTableViewCell.swift; sourceTree = "<group>"; };
+		FA16FC72223A82FA0053C273 /* ExpenseSourceSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceSelectViewController.swift; sourceTree = "<group>"; };
 		FA26813321B178D200FADED1 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		FA26813421B178D200FADED1 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		FA26813521B178D200FADED1 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
@@ -610,6 +616,7 @@
 				FAA4261922365DEE00B64925 /* BudgetView.xib */,
 				FAE3BBCE2236668300FF1397 /* BudgetView.swift */,
 				FA16FC6C223A61B80053C273 /* IncomeSourceTableViewCell.swift */,
+				FA16FC70223A82930053C273 /* ExpenseSourceTableViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -912,6 +919,7 @@
 				FAA426132231275F00B64925 /* ExpenseEditViewController.swift */,
 				FAA426152231296A00B64925 /* FundsMoveEditViewController.swift */,
 				FA16FC6A223A5B110053C273 /* IncomeSourceSelectViewController.swift */,
+				FA16FC72223A82FA0053C273 /* ExpenseSourceSelectViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -949,6 +957,7 @@
 				FA66FB6C22204B3100708C71 /* Transactionable.swift */,
 				FAE3BBD022367D0400FF1397 /* BudgetViewModel.swift */,
 				FA16FC68223A5A060053C273 /* IncomeSourcesViewModel.swift */,
+				FA16FC6E223A81F70053C273 /* ExpenseSourcesViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1211,6 +1220,7 @@
 				FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */,
 				FA66FB69222048BC00708C71 /* EditableCell.swift in Sources */,
 				FA6270A321C7A87300CC0269 /* IncomeSourceEditTableController.swift in Sources */,
+				FA16FC6F223A81F70053C273 /* ExpenseSourcesViewModel.swift in Sources */,
 				FAA425FE2230F30D00B64925 /* FundsMove.swift in Sources */,
 				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
 				FA7DB73522102FBE00559878 /* CurrenciesCoordinator.swift in Sources */,
@@ -1236,6 +1246,7 @@
 				FA0CAE1921D66CCD00805288 /* IconsService.swift in Sources */,
 				FAED7DAE21EDDD3800BF6FE1 /* BasketsViewModel.swift in Sources */,
 				FAD88F1F21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift in Sources */,
+				FA16FC73223A82FA0053C273 /* ExpenseSourceSelectViewController.swift in Sources */,
 				FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */,
 				FAD88F0F21AEB45A00BE7BC1 /* ManagersAssembly.swift in Sources */,
 				FAA9127F220D24AD00F2C251 /* SettingsCoordinator.swift in Sources */,
@@ -1249,6 +1260,7 @@
 				FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */,
 				FAED7DAC21ED876A00BF6FE1 /* BasketViewModel.swift in Sources */,
 				FA16FC67223A30710053C273 /* SlideUpContainerViewController.swift in Sources */,
+				FA16FC71223A82930053C273 /* ExpenseSourceTableViewCell.swift in Sources */,
 				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
 				FA6270AA21CA93D100CC0269 /* FieldsViewModel.swift in Sources */,
 				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,

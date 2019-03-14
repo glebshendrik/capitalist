@@ -90,18 +90,15 @@ class IncomeEditViewController : TransactionEditViewController {
     }
     
     override func didTapCompletable() {
-        
+        if let expenseSourceSelectViewController = router.viewController(.ExpenseSourceSelectViewController) as? ExpenseSourceSelectViewController {
+            
+            expenseSourceSelectViewController.set(delegate: self,
+                                                  skipExpenseSourceId: viewModel.startable?.id,
+                                                  selectionType: .completable)
+            
+            slideUp(viewController: expenseSourceSelectViewController)
+        }
     }
-}
-
-extension IncomeEditViewController : IncomeSourceSelectViewControllerDelegate {
-    
-    func didSelect(incomeSourceViewModel: IncomeSourceViewModel) {
-        viewModel.startable = incomeSourceViewModel
-        updateUI()
-        loadExchangeRate()
-    }
-    
 }
 
 extension IncomeEditViewController : IncomeEditInputProtocol {

@@ -327,3 +327,27 @@ extension TransactionEditViewController : DatePickerViewControllerDelegate {
         viewModel.gotAt = date
     }
 }
+
+extension TransactionEditViewController : IncomeSourceSelectViewControllerDelegate {
+    
+    func didSelect(incomeSourceViewModel: IncomeSourceViewModel) {
+        viewModel.startable = incomeSourceViewModel
+        updateUI()
+        loadExchangeRate()
+    }
+    
+}
+
+extension TransactionEditViewController : ExpenseSourceSelectViewControllerDelegate {
+    func didSelect(startableExpenseSourceViewModel: ExpenseSourceViewModel) {
+        viewModel.completable = startableExpenseSourceViewModel
+        updateUI()
+        loadExchangeRate()
+    }
+    
+    func didSelect(completableExpenseSourceViewModel: ExpenseSourceViewModel) {
+        viewModel.completable = completableExpenseSourceViewModel
+        updateUI()
+        loadExchangeRate()
+    }
+}
