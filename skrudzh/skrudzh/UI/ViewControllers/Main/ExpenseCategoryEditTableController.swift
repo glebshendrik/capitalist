@@ -8,6 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import StaticDataTableViewController
 
 protocol ExpenseCategoryEditTableControllerDelegate {
     var basketType: BasketType { get }
@@ -15,9 +16,10 @@ protocol ExpenseCategoryEditTableControllerDelegate {
     func validationNeeded()
     func didSelectIcon(icon: Icon)
     func didSelectCurrency(currency: Currency)
+    func didSelectIncomeSourceCurrency(currency: Currency)
 }
 
-class ExpenseCategoryEditTableController : UITableViewController, UITextFieldDelegate {
+class ExpenseCategoryEditTableController : StaticDataTableViewController, UITextFieldDelegate {
     @IBOutlet weak var expenseCategoryNameTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var nameBackground: UIView!
     @IBOutlet weak var nameIconContainer: UIView!
@@ -25,13 +27,23 @@ class ExpenseCategoryEditTableController : UITableViewController, UITextFieldDel
     @IBOutlet weak var currencyTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var changeCurrencyIndicator: UIImageView!
     
+    @IBOutlet weak var incomeSourceCurrencyCell: UITableViewCell!
+    @IBOutlet weak var incomeSourceCurrencyTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var changeIncomeSourceCurrencyIndicator: UIImageView!
+    
     @IBOutlet weak var expenseCategoryMonthlyPlannedTextField: MoneyTextField!
     @IBOutlet weak var monthlyPlannedBackground: UIView!
     @IBOutlet weak var monthlyPlannedIconContainer: UIView!
     
     @IBOutlet weak var iconImageView: UIImageView!
     
-    var delegate: ExpenseCategoryEditTableControllerDelegate?
+    private var incomeSourceCurrencyDelegate: IncomeSourceCurrencyDelegate?
+    
+    var delegate: ExpenseCategoryEditTableControllerDelegate? {
+        didSet {
+            incomeSourceCurrencyDelegate = IncomeSourceCurrencyDelegate(delegate: delegate)
+        }
+    }
     
     var iconCategory: IconCategory {
         guard let basketType = delegate?.basketType else { return .expenseCategoryJoy }
@@ -50,9 +62,11 @@ class ExpenseCategoryEditTableController : UITableViewController, UITextFieldDel
         update(textField: expenseCategoryNameTextField)
         update(textField: expenseCategoryMonthlyPlannedTextField)
         update(textField: currencyTextField)
+        update(textField: incomeSourceCurrencyTextField)
         expenseCategoryNameTextField.titleFormatter = { $0 }
         expenseCategoryMonthlyPlannedTextField.titleFormatter = { $0 }
         currencyTextField.titleFormatter = { $0 }
+        incomeSourceCurrencyTextField.titleFormatter = { $0 }
         delegate?.validationNeeded()
     }
     
@@ -153,6 +167,28 @@ class ExpenseCategoryEditTableController : UITableViewController, UITextFieldDel
             
             destination.set(delegate: self)
         }
+        if  segue.identifier == "showIncomeSourceCurrenciesScreen",
+            let destination = segue.destination as? CurrenciesViewControllerInputProtocol,
+            let incomeSourceCurrencyDelegate = incomeSourceCurrencyDelegate {
+            
+            destination.set(delegate: incomeSourceCurrencyDelegate)
+        }
+    }
+        
+    func setIncomeSourceCurrency(hidden: Bool) {
+        cell(incomeSourceCurrencyCell, setHidden: hidden)
+    }
+}
+
+class IncomeSourceCurrencyDelegate : CurrenciesViewControllerDelegate {
+    let delegate: ExpenseCategoryEditTableControllerDelegate?
+    
+    init(delegate: ExpenseCategoryEditTableControllerDelegate?) {
+        self.delegate = delegate
+    }
+    
+    func didSelectCurrency(currency: Currency) {
+        delegate?.didSelectIncomeSourceCurrency(currency: currency)
     }
 }
 

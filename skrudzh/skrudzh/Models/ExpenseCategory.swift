@@ -19,6 +19,8 @@ struct ExpenseCategory : Decodable {
     let monthlySpentCents: Int
     let monthlySpentCurrency: String
     let currency: Currency
+    let incomeSourceDependentCurrency: Currency
+    let incomeSourceCurrency: String
     let order: Int
     
     enum CodingKeys: String, CodingKey {
@@ -33,6 +35,8 @@ struct ExpenseCategory : Decodable {
         case monthlySpentCurrency = "monthly_spent_currency"
         case order = "row_order"
         case currency = "currency"
+        case incomeSourceDependentCurrency = "income_source_dependent_currency"
+        case incomeSourceCurrency = "income_source_currency"
     }
     
 }
@@ -43,6 +47,7 @@ struct ExpenseCategoryCreationForm : Encodable {
     let basketId: Int
     let monthlyPlannedCurrency: String
     let monthlyPlannedCents: Int?
+    let incomeSourceCurrency: String
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -50,14 +55,16 @@ struct ExpenseCategoryCreationForm : Encodable {
         case basketId = "basket_id"
         case monthlyPlannedCurrency = "monthly_planned_currency"
         case monthlyPlannedCents = "monthly_planned_cents"
+        case incomeSourceCurrency = "income_source_currency"
     }
     
-    init(name: String, iconURL: URL?, basketId: Int, monthlyPlannedCents: Int?, currency: String) {
+    init(name: String, iconURL: URL?, basketId: Int, monthlyPlannedCents: Int?, currency: String, incomeSourceCurrency: String) {
         self.name = name
         self.iconURL = iconURL
         self.basketId = basketId
         self.monthlyPlannedCents = monthlyPlannedCents
         self.monthlyPlannedCurrency = currency
+        self.incomeSourceCurrency = incomeSourceCurrency
     }
 }
 
@@ -65,13 +72,11 @@ struct ExpenseCategoryUpdatingForm : Encodable {
     let id: Int
     let name: String
     let iconURL: URL?
-    let monthlyPlannedCurrency: String? = "RUB"
     let monthlyPlannedCents: Int?
     
     enum CodingKeys: String, CodingKey {
         case name
         case iconURL = "icon_url"
-        case monthlyPlannedCurrency = "monthly_planned_currency"
         case monthlyPlannedCents = "monthly_planned_cents"
     }
     
@@ -85,8 +90,7 @@ struct ExpenseCategoryUpdatingForm : Encodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        try container.encode(iconURL, forKey: .iconURL)
-        try container.encode(monthlyPlannedCurrency, forKey: .monthlyPlannedCurrency)
+        try container.encode(iconURL, forKey: .iconURL)        
         try container.encode(monthlyPlannedCents, forKey: .monthlyPlannedCents)
     }
 }

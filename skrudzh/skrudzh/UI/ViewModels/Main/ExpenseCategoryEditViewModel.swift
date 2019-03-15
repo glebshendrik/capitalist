@@ -13,6 +13,7 @@ enum ExpenseCategoryCreationError : Error {
     case validation(validationResults: [ExpenseCategoryCreationForm.CodingKeys : [ValidationErrorReason]])
     case basketIsNotSpecified
     case currencyIsNotSpecified
+    case incomeSourceCurrencyIsNotSpecified
 }
 
 enum ExpenseCategoryUpdatingError : Error {
@@ -53,8 +54,22 @@ class ExpenseCategoryEditViewModel {
         return selectedCurrency?.code
     }
     
+    var selectedIncomeSourceCurrency: Currency? = nil
+    
+    var selectedIncomeSourceCurrencyName: String? {
+        return selectedIncomeSourceCurrency?.translatedName
+    }
+    
+    var selectedIncomeSourceCurrencyCode: String? {
+        return selectedIncomeSourceCurrency?.code
+    }
+    
     var isNew: Bool {
         return expenseCategory == nil
+    }
+    
+    var canChangeIncomeSourceCurrency: Bool {
+        return isNew && basketType != .joy
     }
     
     init(expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
@@ -67,6 +82,7 @@ class ExpenseCategoryEditViewModel {
         self.expenseCategory = expenseCategory
         selectedIconURL = iconURL
         selectedCurrency = expenseCategory.currency
+        selectedIncomeSourceCurrency = expenseCategory.incomeSourceDependentCurrency
     }
     
     func loadDefaultCurrency() -> Promise<Void> {
@@ -74,6 +90,7 @@ class ExpenseCategoryEditViewModel {
                     accountCoordinator.loadCurrentUser()
                 }.done { user in
                     self.selectedCurrency = user.currency
+                    self.selectedIncomeSourceCurrency = user.currency
                 }
     }
     
@@ -163,11 +180,16 @@ extension ExpenseCategoryEditViewModel {
             return Promise(error: ExpenseCategoryCreationError.currencyIsNotSpecified)
         }
         
+        guard let incomeSourceCurrencyCode = selectedIncomeSourceCurrencyCode else {
+            return Promise(error: ExpenseCategoryCreationError.incomeSourceCurrencyIsNotSpecified)
+        }
+        
         return .value(ExpenseCategoryCreationForm(name: name!,
                                                   iconURL: iconURL,
                                                   basketId: basketId,
                                                   monthlyPlannedCents: monthlyPlannedCents,
-                                                  currency: currencyCode))
+                                                  currency: currencyCode,
+                                                  incomeSourceCurrency: incomeSourceCurrencyCode))
     }
     
     private func validateCreation(with name: String?,

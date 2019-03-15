@@ -4226,8 +4226,102 @@
                                             <segue destination="ByI-OE-pnV" kind="show" identifier="showCurrenciesScreen" id="hif-TF-5lN"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="yR4-XV-WfA">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="ffJ-8P-OhN">
                                         <rect key="frame" x="0.0" y="269" width="375" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ffJ-8P-OhN" id="3pa-rS-KR6">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Xvg-Hs-UAG" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                    <rect key="frame" x="72" y="10" width="271" height="48"/>
+                                                    <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                            <color key="value" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                            <color key="value" red="0.26274509800000001" green="0.33333333329999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта дохода"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Валюта дохода"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="Hsl-CQ-JmL" id="prN-6H-vrY"/>
+                                                    </connections>
+                                                </textField>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="little-right-arrow-icon" translatesAutoresizingMaskIntoConstraints="NO" id="HYP-KR-xyI">
+                                                    <rect key="frame" x="348" y="37" width="4" height="7"/>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UGj-xU-rXB">
+                                                    <rect key="frame" x="16" y="22.5" width="36" height="36"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="currency-icon" translatesAutoresizingMaskIntoConstraints="NO" id="L0v-bu-1mj">
+                                                            <rect key="frame" x="8.5" y="8.5" width="19" height="19"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.8980392157" green="0.91372549020000005" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="L0v-bu-1mj" firstAttribute="centerX" secondItem="UGj-xU-rXB" secondAttribute="centerX" id="9YB-PX-epM"/>
+                                                        <constraint firstAttribute="width" constant="36" id="aN1-z1-COi"/>
+                                                        <constraint firstAttribute="height" constant="36" id="cKU-md-E5P"/>
+                                                        <constraint firstItem="L0v-bu-1mj" firstAttribute="centerY" secondItem="UGj-xU-rXB" secondAttribute="centerY" id="jdw-7q-KEA"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="18"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNv-cY-xG2">
+                                                    <rect key="frame" x="0.0" y="74" width="375" height="1"/>
+                                                    <color key="backgroundColor" red="0.5450980392" green="0.59607843140000005" blue="0.6588235294" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="YSU-2U-ryR"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="HYP-KR-xyI" firstAttribute="leading" secondItem="Xvg-Hs-UAG" secondAttribute="trailing" constant="5" id="0ok-9h-yG1"/>
+                                                <constraint firstAttribute="bottom" secondItem="KNv-cY-xG2" secondAttribute="bottom" id="Dee-K8-fHb"/>
+                                                <constraint firstItem="KNv-cY-xG2" firstAttribute="top" secondItem="Xvg-Hs-UAG" secondAttribute="bottom" constant="16" id="G1R-cy-fUj"/>
+                                                <constraint firstItem="Xvg-Hs-UAG" firstAttribute="leading" secondItem="UGj-xU-rXB" secondAttribute="trailing" constant="20" id="OSb-va-4j8"/>
+                                                <constraint firstItem="UGj-xU-rXB" firstAttribute="centerY" secondItem="3pa-rS-KR6" secondAttribute="centerY" constant="3" id="YoX-sm-CBu"/>
+                                                <constraint firstAttribute="trailing" secondItem="Xvg-Hs-UAG" secondAttribute="trailing" constant="32" id="aLW-ER-246"/>
+                                                <constraint firstItem="Xvg-Hs-UAG" firstAttribute="top" secondItem="3pa-rS-KR6" secondAttribute="top" constant="10" id="fqg-He-eyf"/>
+                                                <constraint firstAttribute="trailing" secondItem="KNv-cY-xG2" secondAttribute="trailing" id="j6n-ZU-UBd"/>
+                                                <constraint firstItem="UGj-xU-rXB" firstAttribute="leading" secondItem="3pa-rS-KR6" secondAttribute="leading" constant="16" id="nNS-qg-lhh"/>
+                                                <constraint firstItem="HYP-KR-xyI" firstAttribute="centerY" secondItem="3pa-rS-KR6" secondAttribute="centerY" constant="3" id="nVN-2s-FeS"/>
+                                                <constraint firstItem="KNv-cY-xG2" firstAttribute="leading" secondItem="3pa-rS-KR6" secondAttribute="leading" id="qAN-mh-DnO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <segue destination="ByI-OE-pnV" kind="show" identifier="showIncomeSourceCurrenciesScreen" id="1gI-L1-F6i"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="yR4-XV-WfA">
+                                        <rect key="frame" x="0.0" y="344" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yR4-XV-WfA" id="g80-CW-oWS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -4328,10 +4422,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="changeCurrencyIndicator" destination="Dem-QY-r36" id="tI0-Gu-l0i"/>
+                        <outlet property="changeIncomeSourceCurrencyIndicator" destination="HYP-KR-xyI" id="R4m-lR-pML"/>
                         <outlet property="currencyTextField" destination="yoT-KC-wXl" id="NQV-mK-bRc"/>
                         <outlet property="expenseCategoryMonthlyPlannedTextField" destination="y6A-na-TcR" id="Spa-xe-X4d"/>
                         <outlet property="expenseCategoryNameTextField" destination="Kfk-6q-YMY" id="5Sc-BC-YqA"/>
                         <outlet property="iconImageView" destination="YIy-E3-h3E" id="2vy-xL-iCo"/>
+                        <outlet property="incomeSourceCurrencyCell" destination="ffJ-8P-OhN" id="cYJ-QZ-BW4"/>
+                        <outlet property="incomeSourceCurrencyTextField" destination="Xvg-Hs-UAG" id="nwF-xe-rVx"/>
                         <outlet property="monthlyPlannedBackground" destination="g80-CW-oWS" id="Q3D-wq-J0Y"/>
                         <outlet property="monthlyPlannedIconContainer" destination="uI3-vi-yqF" id="QyD-Bv-Hyv"/>
                         <outlet property="nameBackground" destination="enH-92-ymp" id="fxb-iE-Yz0"/>
@@ -5689,7 +5786,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="sFk-mx-J97"/>
-        <segue reference="hif-TF-5lN"/>
+        <segue reference="1gI-L1-F6i"/>
         <segue reference="YjD-qx-ivd"/>
     </inferredMetricsTieBreakers>
 </document>

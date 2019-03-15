@@ -102,9 +102,7 @@ class SlideUpContainerViewController : UIViewController {
             self.verticalOffsetConstraint = self.verticalOffsetConstraint.setMultiplier(multiplier: 1)
             self.view.layoutIfNeeded()
         }, completion: { (isCompleted) in
-            if isCompleted {
-                completion?()
-            }
+            completion?()
         })
     }
     
@@ -114,9 +112,7 @@ class SlideUpContainerViewController : UIViewController {
             self.verticalOffsetConstraint = self.verticalOffsetConstraint.setMultiplier(multiplier: 0.35)
             self.view.layoutIfNeeded()
         }, completion: { (isCompleted) in
-            if isCompleted {
-                completion?()
-            }
+            completion?()
         })
     }
     

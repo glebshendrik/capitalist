@@ -160,9 +160,18 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableController
         update(currency: currency)
     }
     
+    func didSelectIncomeSourceCurrency(currency: Currency) {
+        update(incomeSourceCurrency: currency)
+    }
+    
     func update(currency: Currency) {
         viewModel.selectedCurrency = currency
         updateCurrencyUI()
+    }
+    
+    func update(incomeSourceCurrency: Currency) {
+        viewModel.selectedIncomeSourceCurrency = incomeSourceCurrency
+        updateIncomeSourceCurrencyUI()
     }
     
     var basketType: BasketType {
@@ -260,6 +269,7 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditInputProtocol {
         editTableController?.expenseCategoryNameTextField?.text = viewModel.name
         editTableController?.expenseCategoryMonthlyPlannedTextField?.text = viewModel.monthlyPlanned
         updateCurrencyUI()
+        updateIncomeSourceCurrencyUI()
         updateIconUI()
         validateUI()
     }
@@ -268,6 +278,12 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditInputProtocol {
         editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
         editTableController?.changeCurrencyIndicator?.isHidden = !canChangeCurrency
         editTableController?.expenseCategoryMonthlyPlannedTextField?.currency = viewModel.selectedCurrency
+    }
+    
+    private func updateIncomeSourceCurrencyUI() {
+        editTableController?.incomeSourceCurrencyTextField?.text = viewModel.selectedIncomeSourceCurrencyName
+        editTableController?.changeIncomeSourceCurrencyIndicator?.isHidden = !viewModel.canChangeIncomeSourceCurrency
+        editTableController?.setIncomeSourceCurrency(hidden: !viewModel.canChangeIncomeSourceCurrency)
     }
     
     private func updateIconUI() {
