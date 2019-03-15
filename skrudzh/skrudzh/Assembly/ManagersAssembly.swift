@@ -25,7 +25,8 @@ class ManagersAssembly: Assembly {
                 with: storyboards,
                 window: r.resolve(UIWindow.self)!,
                 userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
-                notificationsCoordinator: r.resolve(NotificationsCoordinatorProtocol.self)!)
+                notificationsCoordinator: r.resolve(NotificationsCoordinatorProtocol.self)!,
+                soundsManager: r.resolve(SoundsManagerProtocol.self)!)
             }
             .inObjectScope(.container)
             .initCompleted { resolver, router in
@@ -57,6 +58,11 @@ class ManagersAssembly: Assembly {
         container.register(NavigatorProtocol.self) { r in
             return Navigator(window: r.resolve(UIWindow.self)!)
             }.inObjectScope(.container)
+        
+        // SoundsManager
+        container.register(SoundsManagerProtocol.self) { r in
+            return SoundsManager()
+        }.inObjectScope(.container)
         
     }
     

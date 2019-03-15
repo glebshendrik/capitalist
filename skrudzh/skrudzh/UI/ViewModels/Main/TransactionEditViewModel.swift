@@ -30,6 +30,15 @@ class TransactionEditViewModel {
     
     var isNew: Bool { return true }
     
+    var hasComment: Bool {
+        guard let comment = comment else { return false }
+        return !comment.isEmpty && !comment.isWhitespace
+    }
+    
+    var hasGotAtDate: Bool {
+        return gotAt != nil
+    }
+    
     var startableIconURL: URL? {
         return startable?.iconURL
     }

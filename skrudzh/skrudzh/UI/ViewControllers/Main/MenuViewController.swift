@@ -19,7 +19,7 @@ class MenuViewController : StaticDataTableViewController, UIMessagePresenterMana
     private var loaderView: LoaderView!
     
     var viewModel: MenuViewModel!
-    var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var messagePresenterManager: UIMessagePresenterManagerProtocol!    
     
     override func viewDidLoad() {
         super.viewDidLoad()

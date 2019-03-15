@@ -230,6 +230,19 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         validateUI()
     }
     
+    private func updateToolbarUI() {
+        
+        let commentImage = viewModel.hasComment ? #imageLiteral(resourceName: "selected-comment-icon") : #imageLiteral(resourceName: "comment-icon")
+        
+        let calendarImage = viewModel.hasGotAtDate ? #imageLiteral(resourceName: "selected-calendar-icon") : #imageLiteral(resourceName: "calendar-icon")
+        
+        UIView.transition(with: removeButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
+            self.editTableController?.commentButton.setImage(commentImage.withRenderingMode(.alwaysTemplate), for: .normal)
+            self.editTableController?.calendarButton.setImage(calendarImage.withRenderingMode(.alwaysTemplate), for: .normal)
+        })
+        
+    }
+    
     private func updateStartableUI() {
         editTableController?.startableNameTextField.text = viewModel.startableName
         editTableController?.startableBalanceLabel.text = viewModel.startableAmount
@@ -318,13 +331,15 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
 
 extension TransactionEditViewController : CommentViewControllerDelegate {
     func didSave(comment: String?) {
-        viewModel.comment = comment
+        viewModel.comment = comment?.trimmed
+        updateToolbarUI()
     }
 }
 
 extension TransactionEditViewController : DatePickerViewControllerDelegate {
     func didSelect(date: Date?) {
         viewModel.gotAt = date
+        updateToolbarUI()
     }
 }
 

@@ -19,18 +19,21 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private let userSessionManager: UserSessionManagerProtocol
     private let notificationsCoordinator: NotificationsCoordinatorProtocol
     private var accountCoordinator: AccountCoordinatorProtocol!
+    private let soundsManager: SoundsManagerProtocol
     
     private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     
     init(with storyboards: [Infrastructure.Storyboard: UIStoryboard],
          window: UIWindow,
          userSessionManager: UserSessionManagerProtocol,
-         notificationsCoordinator: NotificationsCoordinatorProtocol) {
+         notificationsCoordinator: NotificationsCoordinatorProtocol,
+         soundsManager: SoundsManagerProtocol) {
         
         self.storyboards = storyboards
         self.window = window
         self.userSessionManager = userSessionManager
         self.notificationsCoordinator = notificationsCoordinator
+        self.soundsManager = soundsManager
     }
     
     func initDependencies(with resolver: Swinject.Resolver) {
@@ -39,7 +42,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     func start(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
         if UIFlowManager.isFirstAppLaunch {
-            userSessionManager.forgetSession()
+            userSessionManager.forgetSession()            
+        }
+        if !UIFlowManager.reach(point: .soundsManagerInitialization) {
+            soundsManager.setSounds(enabled: true)
         }
         self.launchOptions = launchOptions
         setupKeyboardManager()

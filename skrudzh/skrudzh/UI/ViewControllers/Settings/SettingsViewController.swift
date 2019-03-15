@@ -18,6 +18,7 @@ class SettingsViewController : StaticDataTableViewController, UIMessagePresenter
     var viewModel: SettingsViewModel!
     
     @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var playSoundsSwitch: UISwitch!
     
     private var loaderView: LoaderView!
     
@@ -42,6 +43,10 @@ class SettingsViewController : StaticDataTableViewController, UIMessagePresenter
             
             destination.set(delegate: self)
         }
+    }
+    
+    @IBAction func didSwitchPlaySounds(_ sender: Any) {
+        viewModel.setSounds(enabled: playSoundsSwitch.isOn)
     }
     
     // Re fetch data from the server
@@ -74,6 +79,7 @@ class SettingsViewController : StaticDataTableViewController, UIMessagePresenter
     
     private func setupUI() {
         setupRefreshControl()
+        playSoundsSwitch.setOn(viewModel.soundsEnabled, animated: false)
     }
     
     private func setupRefreshControl() {

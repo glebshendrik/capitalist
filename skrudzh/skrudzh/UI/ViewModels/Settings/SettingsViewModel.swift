@@ -12,17 +12,27 @@ import PromiseKit
 class SettingsViewModel : ProfileViewModel {
     private let settingsCoordinator: SettingsCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
+    private let soundsManager: SoundsManagerProtocol
     
     var currency: String? {
         return user?.currency.code
     }
-        
+    
+    var soundsEnabled: Bool {
+        return soundsManager.soundsEnabled
+    }
+    
     init(accountCoordinator: AccountCoordinatorProtocol,
-         settingsCoordinator: SettingsCoordinatorProtocol) {
+         settingsCoordinator: SettingsCoordinatorProtocol,
+         soundsManager: SoundsManagerProtocol) {
         self.accountCoordinator = accountCoordinator
         self.settingsCoordinator = settingsCoordinator
+        self.soundsManager = soundsManager
         super.init(accountCoordinator: accountCoordinator)
-        
+    }
+    
+    func setSounds(enabled: Bool) {
+        soundsManager.setSounds(enabled: enabled)
     }
     
     func update(currency: Currency) -> Promise<Void> {

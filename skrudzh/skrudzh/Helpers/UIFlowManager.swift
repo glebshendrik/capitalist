@@ -13,6 +13,7 @@ enum UIFlowPoint : String {
     case onboarding = "com.rubiconapp.skrudzh.onboarding"
     case dependentRiskIncomeSourceMessage
     case dependentSafeIncomeSourceMessage
+    case soundsManagerInitialization
 }
 
 class UIFlowManager {

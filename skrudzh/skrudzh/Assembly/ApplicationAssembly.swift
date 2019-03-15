@@ -169,6 +169,7 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(MainViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
             c.router = r.resolve(ApplicationRouterProtocol.self)
+            c.soundsManager = r.resolve(SoundsManagerProtocol.self)
         }
         
         // RegistrationViewController
@@ -377,7 +378,8 @@ class ApplicationAssembly: Assembly {
         // SettingsViewModel
         container.register(SettingsViewModel.self) { r in            
             return SettingsViewModel(accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!,
-                                     settingsCoordinator: r.resolve(SettingsCoordinatorProtocol.self)!)
+                                     settingsCoordinator: r.resolve(SettingsCoordinatorProtocol.self)!,
+                                     soundsManager: r.resolve(SoundsManagerProtocol.self)!)
         }
         
         // CurrenciesViewModel

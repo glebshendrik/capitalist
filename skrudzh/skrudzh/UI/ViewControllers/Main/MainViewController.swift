@@ -18,6 +18,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     var viewModel: MainViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var router: ApplicationRouterProtocol!
+    var soundsManager: SoundsManagerProtocol!
     
     static var finantialDataInvalidatedNotification = NSNotification.Name("finantialDataInvalidatedNotification")
     
@@ -1497,6 +1498,7 @@ extension MainViewController {
     }
     
     private func showTransactionEditScreen(transactionStartable: TransactionStartable, transactionCompletable: TransactionCompletable) {
+        soundsManager.playTransactionStartedSound()
         switch (transactionStartable, transactionCompletable) {
         case (let startable as IncomeSourceViewModel, let completable as ExpenseSourceViewModel):
             showIncomeEditScreen(incomeSourceStartable: startable, expenseSourceCompletable: completable)
@@ -1605,6 +1607,7 @@ extension MainViewController {
 
 extension MainViewController: IncomeEditViewControllerDelegate {
     func didCreateIncome() {
+        soundsManager.playTransactionCompletedSound()
         updateIncomeDependentData()
     }
     
@@ -1626,6 +1629,7 @@ extension MainViewController: IncomeEditViewControllerDelegate {
 
 extension MainViewController: ExpenseEditViewControllerDelegate {
     func didCreateExpense() {
+        soundsManager.playTransactionCompletedSound()
         updateExpenseDependentData()
     }
     
@@ -1649,6 +1653,7 @@ extension MainViewController: ExpenseEditViewControllerDelegate {
 
 extension MainViewController: FundsMoveEditViewControllerDelegate {
     func didCreateFundsMove() {
+        soundsManager.playTransactionCompletedSound()
         updateFundsMoveDependentData()
     }
     
