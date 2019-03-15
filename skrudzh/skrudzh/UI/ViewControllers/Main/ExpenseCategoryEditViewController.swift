@@ -23,7 +23,7 @@ protocol ExpenseCategoryEditInputProtocol {
 
 class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var loaderImageView: UIImageView!
     
@@ -95,7 +95,7 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
     private func save() {
         view.endEditing(true)
         setActivityIndicator(hidden: false)
-        saveButton.isUserInteractionEnabled = false
+        saveButton.isEnabled = false
         
         firstly {
             viewModel.saveExpenseCategory(with: self.expenseCategoryName,
@@ -124,7 +124,7 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
             }
         }.finally {
             self.setActivityIndicator(hidden: true)
-            self.saveButton.isUserInteractionEnabled = true
+            self.saveButton.isEnabled = true
         }
     }
     
@@ -188,13 +188,13 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableController
     }
     
     private func validateUI() {
-        let isFormValid = viewModel.isFormValid(with: expenseCategoryName,
-                                                iconURL: selectedIconURL,
-                                                monthlyPlanned: expenseCategoryMonthlyPlanned)
-        let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
-        let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
-        saveButton.isUserInteractionEnabled = isFormValid
-        saveButton.backgroundColor = isFormValid ? validColor : invalidColor
+//        let isFormValid = viewModel.isFormValid(with: expenseCategoryName,
+//                                                iconURL: selectedIconURL,
+//                                                monthlyPlanned: expenseCategoryMonthlyPlanned)
+//        let invalidColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
+//        let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
+//        saveButton.isEnabled = isFormValid
+//        saveButton.backgroundColor = isFormValid ? validColor : invalidColor
     }
 }
 

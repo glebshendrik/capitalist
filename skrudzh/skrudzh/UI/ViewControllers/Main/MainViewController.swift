@@ -1117,6 +1117,8 @@ extension MainViewController {
             if !isEditing {
                 setEditing(true, animated: true)
                 transactionDraggingElement.isHidden = true
+                transactionStartedCollectionView = nil
+                dropCandidateCollectionView = nil
                 return
             }
             movingIndexPath = movingCollectionView.indexPathForItem(at: location)

@@ -2637,27 +2637,8 @@
                                     <segue destination="Hsl-CQ-JmL" kind="embed" identifier="showEditTableView" id="RbB-Rn-KfO"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LVd-n1-nuQ">
-                                <rect key="frame" x="32" y="531" width="311" height="40"/>
-                                <color key="backgroundColor" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="3iN-Hx-hRO"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                <state key="normal" title="СОХРАНИТЬ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapSaveButton:" destination="XSV-72-Slk" eventType="touchUpInside" id="3hr-03-Pgs"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3t-Bu-Ras">
-                                <rect key="frame" x="32" y="459" width="311" height="40"/>
+                                <rect key="frame" x="32" y="490" width="311" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="AWv-B3-cDx"/>
@@ -2671,39 +2652,42 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="0TN-hE-wWD">
-                                <rect key="frame" x="160" y="496" width="55" height="31"/>
+                                <rect key="frame" x="160" y="540" width="55" height="31"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fZZ-E3-wFU" firstAttribute="trailing" secondItem="v3t-Bu-Ras" secondAttribute="trailing" constant="32" id="43S-K2-DzX"/>
-                            <constraint firstItem="fZZ-E3-wFU" firstAttribute="trailing" secondItem="LVd-n1-nuQ" secondAttribute="trailing" constant="32" id="7M5-8q-7LF"/>
+                            <constraint firstItem="0TN-hE-wWD" firstAttribute="top" secondItem="v3t-Bu-Ras" secondAttribute="bottom" constant="10" id="7em-ko-OqN"/>
                             <constraint firstItem="0TN-hE-wWD" firstAttribute="centerX" secondItem="Fal-46-alb" secondAttribute="centerX" id="D3A-c0-bkA"/>
-                            <constraint firstItem="LVd-n1-nuQ" firstAttribute="leading" secondItem="fZZ-E3-wFU" secondAttribute="leading" constant="32" id="Ikd-Zr-sfZ"/>
-                            <constraint firstItem="LVd-n1-nuQ" firstAttribute="top" secondItem="0TN-hE-wWD" secondAttribute="bottom" constant="4" id="Lcr-LZ-Bcb"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="bottom" secondItem="fZZ-E3-wFU" secondAttribute="bottom" id="UlC-vo-Vfb"/>
                             <constraint firstItem="v3t-Bu-Ras" firstAttribute="leading" secondItem="fZZ-E3-wFU" secondAttribute="leading" constant="32" id="Uyo-bR-f5q"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="top" secondItem="fZZ-E3-wFU" secondAttribute="top" id="XtM-Io-gVG"/>
                             <constraint firstItem="fZZ-E3-wFU" firstAttribute="trailing" secondItem="fSE-gp-P7u" secondAttribute="trailing" id="gX2-Ac-UY7"/>
-                            <constraint firstItem="fZZ-E3-wFU" firstAttribute="bottom" secondItem="LVd-n1-nuQ" secondAttribute="bottom" constant="32" id="nie-K0-LAv"/>
+                            <constraint firstItem="fZZ-E3-wFU" firstAttribute="bottom" secondItem="0TN-hE-wWD" secondAttribute="bottom" constant="32" id="o4N-45-uCm"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="leading" secondItem="fZZ-E3-wFU" secondAttribute="leading" id="p1T-1p-4Uv"/>
-                            <constraint firstItem="LVd-n1-nuQ" firstAttribute="top" secondItem="v3t-Bu-Ras" secondAttribute="bottom" constant="32" id="rKP-C3-RJc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fZZ-E3-wFU"/>
                     </view>
                     <navigationItem key="navigationItem" id="0J7-tA-y5z">
                         <barButtonItem key="backBarButtonItem" title=" " id="CE8-T8-AnT"/>
-                        <barButtonItem key="rightBarButtonItem" image="circle-close-icon" id="auv-6z-2Aj">
+                        <barButtonItem key="leftBarButtonItem" image="circle-close-icon" id="auv-6z-2Aj">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapCancelButton:" destination="XSV-72-Slk" id="pfS-VL-rQe"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="save-circle-icon" id="37n-py-Kw0">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="didTapSaveButton:" destination="XSV-72-Slk" id="KI8-kT-0Q6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="loaderImageView" destination="0TN-hE-wWD" id="Pyl-L5-Kch"/>
                         <outlet property="removeButton" destination="v3t-Bu-Ras" id="Cyl-1e-WiQ"/>
-                        <outlet property="saveButton" destination="LVd-n1-nuQ" id="dIT-jK-Go0"/>
+                        <outlet property="saveButton" destination="37n-py-Kw0" id="h8q-ca-eqM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUd-Nx-Yos" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2797,27 +2781,8 @@
                                     <segue destination="YzM-aR-OkL" kind="embed" identifier="showEditTableView" id="uK6-Mk-gq2"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tx5-0J-GXm">
-                                <rect key="frame" x="32" y="531" width="311" height="40"/>
-                                <color key="backgroundColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="cmf-wl-SdA"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                <state key="normal" title="СОХРАНИТЬ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapSaveButton:" destination="8fD-85-d78" eventType="touchUpInside" id="efC-Sf-Tvs"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAc-BC-dhT">
-                                <rect key="frame" x="32" y="459" width="311" height="40"/>
+                                <rect key="frame" x="32" y="490" width="311" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="3sw-eG-qHj"/>
@@ -2831,39 +2796,42 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="oco-cH-2oZ">
-                                <rect key="frame" x="160" y="496" width="55" height="31"/>
+                                <rect key="frame" x="160" y="540" width="55" height="31"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="oco-cH-2oZ" firstAttribute="top" secondItem="vAc-BC-dhT" secondAttribute="bottom" constant="10" id="7WH-4n-gbk"/>
                             <constraint firstItem="Vde-Ty-o4B" firstAttribute="bottom" secondItem="5dF-w9-bRB" secondAttribute="bottom" id="9fW-uK-ZRX"/>
-                            <constraint firstItem="tx5-0J-GXm" firstAttribute="top" secondItem="oco-cH-2oZ" secondAttribute="bottom" constant="4" id="FOJ-af-cMb"/>
-                            <constraint firstItem="5dF-w9-bRB" firstAttribute="trailing" secondItem="tx5-0J-GXm" secondAttribute="trailing" constant="32" id="INI-cc-sYU"/>
                             <constraint firstItem="oco-cH-2oZ" firstAttribute="centerX" secondItem="xYC-tQ-Qch" secondAttribute="centerX" id="Jtv-Fk-Lsl"/>
                             <constraint firstItem="Vde-Ty-o4B" firstAttribute="top" secondItem="5dF-w9-bRB" secondAttribute="top" id="Y32-ot-InA"/>
                             <constraint firstItem="Vde-Ty-o4B" firstAttribute="leading" secondItem="5dF-w9-bRB" secondAttribute="leading" id="YTu-Xw-HcV"/>
                             <constraint firstItem="vAc-BC-dhT" firstAttribute="leading" secondItem="5dF-w9-bRB" secondAttribute="leading" constant="32" id="dr0-ez-Dhd"/>
                             <constraint firstItem="5dF-w9-bRB" firstAttribute="trailing" secondItem="vAc-BC-dhT" secondAttribute="trailing" constant="32" id="jg3-2c-MZG"/>
-                            <constraint firstItem="tx5-0J-GXm" firstAttribute="top" secondItem="vAc-BC-dhT" secondAttribute="bottom" constant="32" id="mvy-wI-pOw"/>
                             <constraint firstItem="5dF-w9-bRB" firstAttribute="trailing" secondItem="Vde-Ty-o4B" secondAttribute="trailing" id="oxe-ov-LRx"/>
-                            <constraint firstItem="tx5-0J-GXm" firstAttribute="leading" secondItem="5dF-w9-bRB" secondAttribute="leading" constant="32" id="uKe-Vc-PD2"/>
-                            <constraint firstItem="5dF-w9-bRB" firstAttribute="bottom" secondItem="tx5-0J-GXm" secondAttribute="bottom" constant="32" id="zwe-o0-sE5"/>
+                            <constraint firstItem="5dF-w9-bRB" firstAttribute="bottom" secondItem="oco-cH-2oZ" secondAttribute="bottom" constant="32" id="wQX-Ug-xJN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5dF-w9-bRB"/>
                     </view>
                     <navigationItem key="navigationItem" id="bLy-zo-z3W">
                         <barButtonItem key="backBarButtonItem" title=" " id="Np5-2E-0f9"/>
-                        <barButtonItem key="rightBarButtonItem" image="circle-close-icon" id="SIi-yC-uCm">
+                        <barButtonItem key="leftBarButtonItem" image="circle-close-icon" id="SIi-yC-uCm">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapCancelButton:" destination="8fD-85-d78" id="aIs-k9-ZRu"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="save-circle-icon" id="RFM-aT-1oi">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="didTapSaveButton:" destination="8fD-85-d78" id="YVb-J1-58H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="loaderImageView" destination="oco-cH-2oZ" id="0uf-ui-sU4"/>
                         <outlet property="removeButton" destination="vAc-BC-dhT" id="6vg-6e-z0P"/>
-                        <outlet property="saveButton" destination="tx5-0J-GXm" id="8JD-9E-nvR"/>
+                        <outlet property="saveButton" destination="RFM-aT-1oi" id="PM9-co-wbn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kip-bi-H9Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3840,27 +3808,8 @@
                                     <segue destination="30m-bg-INw" kind="embed" identifier="showEditTableView" id="XXE-he-6JO"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQ9-vJ-r5T">
-                                <rect key="frame" x="32" y="531" width="311" height="40"/>
-                                <color key="backgroundColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="cQ5-lo-ULU"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                <state key="normal" title="СОХРАНИТЬ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapSaveButton:" destination="WoP-TF-ejQ" eventType="touchUpInside" id="rGB-EQ-kkU"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KID-hQ-wGa">
-                                <rect key="frame" x="32" y="459" width="311" height="40"/>
+                                <rect key="frame" x="32" y="490" width="311" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="GaW-ug-TtL"/>
@@ -3874,39 +3823,42 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Nlr-vv-JIf">
-                                <rect key="frame" x="160" y="496" width="55" height="31"/>
+                                <rect key="frame" x="160" y="540" width="55" height="31"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Nlr-vv-JIf" firstAttribute="centerX" secondItem="tWB-kJ-bVQ" secondAttribute="centerX" id="1b7-oo-hhx"/>
                             <constraint firstItem="VHR-eQ-WeD" firstAttribute="leading" secondItem="YGC-Kx-yjb" secondAttribute="leading" id="1uB-tl-aNx"/>
-                            <constraint firstItem="SQ9-vJ-r5T" firstAttribute="top" secondItem="Nlr-vv-JIf" secondAttribute="bottom" constant="4" id="2pH-2a-R6w"/>
-                            <constraint firstItem="YGC-Kx-yjb" firstAttribute="bottom" secondItem="SQ9-vJ-r5T" secondAttribute="bottom" constant="32" id="61P-rA-H1c"/>
-                            <constraint firstItem="SQ9-vJ-r5T" firstAttribute="top" secondItem="KID-hQ-wGa" secondAttribute="bottom" constant="32" id="BZR-iB-WxT"/>
-                            <constraint firstItem="SQ9-vJ-r5T" firstAttribute="leading" secondItem="YGC-Kx-yjb" secondAttribute="leading" constant="32" id="DeM-KM-djI"/>
                             <constraint firstItem="VHR-eQ-WeD" firstAttribute="bottom" secondItem="YGC-Kx-yjb" secondAttribute="bottom" id="I23-19-4oK"/>
                             <constraint firstItem="YGC-Kx-yjb" firstAttribute="trailing" secondItem="KID-hQ-wGa" secondAttribute="trailing" constant="32" id="Mzy-LX-JVm"/>
                             <constraint firstItem="KID-hQ-wGa" firstAttribute="leading" secondItem="YGC-Kx-yjb" secondAttribute="leading" constant="32" id="PzG-zN-a9b"/>
-                            <constraint firstItem="YGC-Kx-yjb" firstAttribute="trailing" secondItem="SQ9-vJ-r5T" secondAttribute="trailing" constant="32" id="SvX-MN-AIu"/>
                             <constraint firstItem="VHR-eQ-WeD" firstAttribute="top" secondItem="YGC-Kx-yjb" secondAttribute="top" id="TGw-L5-oeD"/>
                             <constraint firstItem="YGC-Kx-yjb" firstAttribute="trailing" secondItem="VHR-eQ-WeD" secondAttribute="trailing" id="bJc-f6-Mdp"/>
+                            <constraint firstItem="YGC-Kx-yjb" firstAttribute="bottom" secondItem="Nlr-vv-JIf" secondAttribute="bottom" constant="32" id="nXs-Qa-348"/>
+                            <constraint firstItem="Nlr-vv-JIf" firstAttribute="top" secondItem="KID-hQ-wGa" secondAttribute="bottom" constant="10" id="wzx-Kq-iH8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YGC-Kx-yjb"/>
                     </view>
                     <navigationItem key="navigationItem" id="6w2-PT-uRb">
                         <barButtonItem key="backBarButtonItem" title=" " id="Dnt-p9-05E"/>
-                        <barButtonItem key="rightBarButtonItem" image="circle-close-icon" id="JGP-Z8-XOg">
+                        <barButtonItem key="leftBarButtonItem" image="circle-close-icon" id="JGP-Z8-XOg">
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapCancelButton:" destination="WoP-TF-ejQ" id="4vr-7L-5iD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="save-circle-icon" id="SR6-OZ-yNj">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="didTapSaveButton:" destination="WoP-TF-ejQ" id="hD0-X8-AQe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="loaderImageView" destination="Nlr-vv-JIf" id="HJd-TS-2eZ"/>
                         <outlet property="removeButton" destination="KID-hQ-wGa" id="mVK-mS-8LB"/>
-                        <outlet property="saveButton" destination="SQ9-vJ-r5T" id="rid-7Y-eE7"/>
+                        <outlet property="saveButton" destination="SR6-OZ-yNj" id="9g9-Yr-vYz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YuR-Mr-nBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
