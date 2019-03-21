@@ -73,5 +73,10 @@ class CoordinatorsAssembly: Assembly {
         container.register(FundsMovesCoordinatorProtocol.self) { r in
             return FundsMovesCoordinator(fundsMovesService: r.resolve(FundsMovesServiceProtocol.self)!)
         }
+        
+        container.register(HistoryTransactionsCoordinatorProtocol.self) { r in
+            return HistoryTransactionsCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
+                                                  historyTransactionsService: r.resolve(HistoryTransactionsServiceProtocol.self)!)
+        }
     }
 }

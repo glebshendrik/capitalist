@@ -88,6 +88,9 @@ enum APIResource: URLRequestConvertible {
     // Budget
     case showBudget(userId: Int)
     
+    // HistoryTransactions
+    case indexHistoryTransactions(userId: Int)
+    
     var method: HTTPMethod {
         return APIResourceMethod.method(for: self)
     }

@@ -34,7 +34,8 @@ struct APIResourceMethod {
              .showExpenseCategory,
              .indexCurrencies,
              .findExchangeRate,
-             .showBudget:
+             .showBudget,
+             .indexHistoryTransactions:
             return .get
         case .updateUser,
              .changePassword,

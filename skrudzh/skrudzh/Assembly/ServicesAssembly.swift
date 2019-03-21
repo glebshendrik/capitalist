@@ -80,5 +80,10 @@ class ServicesAssembly: Assembly {
             return FundsMovesService(
                 apiClient: r.resolve(APIClientProtocol.self)!)
         }
+        
+        container.register(HistoryTransactionsServiceProtocol.self) { r in
+            return HistoryTransactionsService(
+                apiClient: r.resolve(APIClientProtocol.self)!)
+        }
     }
 }

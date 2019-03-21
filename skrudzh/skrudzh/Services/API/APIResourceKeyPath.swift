@@ -74,6 +74,8 @@ struct APIResourceKeyPath {
             return ResourceKeyPath(singular: "exchange_rate", plural: "exchange_rates")
         case .showBudget:
             return ResourceKeyPath(singular: "budget", plural: "budgets")
+        case .indexHistoryTransactions:
+            return ResourceKeyPath(singular: "history_transaction", plural: "history_transactions")
         }
     }
 }
