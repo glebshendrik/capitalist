@@ -166,13 +166,14 @@ extension Int {
         return Formatter.decimal(with: currency).string(from: moneyNumber(with: currency))
     }
     
-    func moneyCurrencyString(with currency: Currency) -> String? {
+    func moneyCurrencyString(with currency: Currency, shouldRound: Bool = true) -> String? {
         let formatter = Formatter.currency(with: currency)
-        let number = moneyNumber(with: currency)
+        
+        var number = moneyNumber(with: currency)
         
         struct Abbreviation {
             var threshold: Double
-            var divisor: NSNumber
+            var divisor: NSDecimalNumber
             var suffix: String
         }
         
@@ -184,7 +185,18 @@ extension Int {
         
         let abbreviation = abbreviations.last(where: { startValue >= $0.threshold }) ?? Abbreviation(threshold: 0.0, divisor: 1.0, suffix: "")
         
-        formatter.multiplier = NSNumber(value: 1.0 / abbreviation.divisor.doubleValue)
+        number = number.dividing(by: abbreviation.divisor)
+
+        if shouldRound {
+            let roundingHandler = NSDecimalNumberHandler(roundingMode: .down,
+                                                         scale: 0,
+                                                         raiseOnExactness: false,
+                                                         raiseOnOverflow: false,
+                                                         raiseOnUnderflow: false,
+                                                         raiseOnDivideByZero: false)
+            number = number.rounding(accordingToBehavior: roundingHandler)
+        }
+        
         formatter.positiveFormat = formatter.positiveFormat.replacingOccurrences(of: "¤", with: "")
         formatter.positiveFormat = formatter.positiveFormat.replacingOccurrences(of: " ", with: "")
         formatter.negativeFormat = formatter.negativeFormat.replacingOccurrences(of: "¤", with: "")

@@ -89,6 +89,9 @@
 		FA6F2E8B22435052008C160F /* HistoryTransactionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F2E8A22435052008C160F /* HistoryTransactionsService.swift */; };
 		FA6F2E8D224350B3008C160F /* HistoryTransactionsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F2E8C224350B3008C160F /* HistoryTransactionsCoordinatorProtocol.swift */; };
 		FA6F2E8F224350E7008C160F /* HistoryTransactionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F2E8E224350E7008C160F /* HistoryTransactionsCoordinator.swift */; };
+		FA6F2E922244C8D9008C160F /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F2E912244C8D9008C160F /* StatisticsViewModel.swift */; };
+		FA6F2E942244D033008C160F /* HistoryTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F2E932244D033008C160F /* HistoryTransactionViewModel.swift */; };
+		FA6F2E96224515DE008C160F /* HistoryTransactionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F2E95224515DE008C160F /* HistoryTransactionFilter.swift */; };
 		FA715E5221FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */; };
 		FA7CB4D7221C20B300FAAC0F /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4D6221C20B300FAAC0F /* Income.swift */; };
 		FA7CB4D9221C2A7D00FAAC0F /* IncomesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4D8221C2A7D00FAAC0F /* IncomesServiceProtocol.swift */; };
@@ -305,6 +308,9 @@
 		FA6F2E8A22435052008C160F /* HistoryTransactionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionsService.swift; sourceTree = "<group>"; };
 		FA6F2E8C224350B3008C160F /* HistoryTransactionsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionsCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FA6F2E8E224350E7008C160F /* HistoryTransactionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionsCoordinator.swift; sourceTree = "<group>"; };
+		FA6F2E912244C8D9008C160F /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		FA6F2E932244D033008C160F /* HistoryTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionViewModel.swift; sourceTree = "<group>"; };
+		FA6F2E95224515DE008C160F /* HistoryTransactionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionFilter.swift; sourceTree = "<group>"; };
 		FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalExpenseSourceCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA7CB4D6221C20B300FAAC0F /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		FA7CB4D8221C2A7D00FAAC0F /* IncomesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesServiceProtocol.swift; sourceTree = "<group>"; };
@@ -587,6 +593,16 @@
 				FA16FC66223A30700053C273 /* SlideUpContainerViewController.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		FA6F2E902244C8B4008C160F /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				FA6F2E912244C8D9008C160F /* StatisticsViewModel.swift */,
+				FA6F2E932244D033008C160F /* HistoryTransactionViewModel.swift */,
+				FA6F2E95224515DE008C160F /* HistoryTransactionFilter.swift */,
+			);
+			path = Statistics;
 			sourceTree = "<group>";
 		};
 		FA7DB72822102B4200559878 /* Currencies */ = {
@@ -904,6 +920,7 @@
 		FAD88F7C21B027BF00BE7BC1 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				FA6F2E902244C8B4008C160F /* Statistics */,
 				FA7DB72922102B5100559878 /* Currencies */,
 				FAA91279220C8B0F00F2C251 /* Settings */,
 				FA0CAE2421D67A6000805288 /* Icons */,
@@ -1228,6 +1245,7 @@
 				FAA426182236518200B64925 /* Budget.swift in Sources */,
 				FAA426022230F5BA00B64925 /* FundsMovesServiceProtocol.swift in Sources */,
 				FA7DB72D22102BF900559878 /* CurrenciesViewModel.swift in Sources */,
+				FA6F2E96224515DE008C160F /* HistoryTransactionFilter.swift in Sources */,
 				FA0CAE2821D67B7F00805288 /* IconsViewModel.swift in Sources */,
 				FA0CAE1521D669C000805288 /* Icon.swift in Sources */,
 				FAA4260C2230F78300B64925 /* ExpensesCoordinator.swift in Sources */,
@@ -1242,6 +1260,7 @@
 				FAD88F2621AEB72800BE7BC1 /* NotificationsManager.swift in Sources */,
 				FAA426162231296A00B64925 /* FundsMoveEditViewController.swift in Sources */,
 				FA0CAE0321D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift in Sources */,
+				FA6F2E922244C8D9008C160F /* StatisticsViewModel.swift in Sources */,
 				FAD88F2A21AEB77200BE7BC1 /* NotificationAction.swift in Sources */,
 				FAD88F3F21AEBDDB00BE7BC1 /* UIMessagePresenterManager.swift in Sources */,
 				FAD88F5A21AEC1F800BE7BC1 /* UsersServiceProtocol.swift in Sources */,
@@ -1255,6 +1274,7 @@
 				FAD88F7821AFD64000BE7BC1 /* APIResourcePath.swift in Sources */,
 				FAD88F7721AFD64000BE7BC1 /* APIResourceMethod.swift in Sources */,
 				FA16FC77223AAA650053C273 /* ExpenseCategoriesViewModel.swift in Sources */,
+				FA6F2E942244D033008C160F /* HistoryTransactionViewModel.swift in Sources */,
 				FA7CB4D9221C2A7D00FAAC0F /* IncomesServiceProtocol.swift in Sources */,
 				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
 				FAED7DA021EC65B200BF6FE1 /* BasketsCoordinator.swift in Sources */,
@@ -1522,13 +1542,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PMR25G57DV;
+				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = skrudzh/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rubikonapp.skrudzh1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.realtransitapps.threebaskets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -1543,13 +1563,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PMR25G57DV;
+				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = skrudzh/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rubikonapp.skrudzh1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.realtransitapps.threebaskets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;

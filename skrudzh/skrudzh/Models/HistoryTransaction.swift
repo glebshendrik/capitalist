@@ -12,12 +12,12 @@ enum TransactionableType : String, Codable {
     case income = "Income"
     case expense = "Expense"
     case fundsMove = "FundsMove"
-    
-//    enum CodingKeys: String, CodingKey {
-//        case income = "Income"
-//        case expense = "Expense"
-//        case fundsMove = "FundsMove"
-//    }
+}
+
+enum HistoryTransactionSourceOrDestinationType : String, Codable {
+    case incomeSource = "IncomeSource"
+    case expenseSource = "ExpenseSource"
+    case expenseCategory = "ExpenseCategory"
 }
 
 struct HistoryTransaction : Decodable {
@@ -26,16 +26,17 @@ struct HistoryTransaction : Decodable {
     let transactionableType: TransactionableType
     let transactionableId: Int
     let sourceId: Int
-    let sourceType: String
+    let sourceType: HistoryTransactionSourceOrDestinationType
     let destinationId: Int
-    let destinationType: String
+    let destinationType: HistoryTransactionSourceOrDestinationType
     let sourceTitle: String
     let destinationTitle: String
-    let destinationIconUrl: String?
+    let destinationIconURL: URL?
     let currency: Currency
     let amountCents: Int
     let gotAt: Date
     let comment: String?
+    let basketType: BasketType?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -48,11 +49,12 @@ struct HistoryTransaction : Decodable {
         case destinationType = "destination_type"
         case sourceTitle = "source_title"
         case destinationTitle = "destination_title"
-        case destinationIconUrl = "destination_icon_url"
+        case destinationIconURL = "destination_icon_url"
         case currency = "currency_object"
         case amountCents = "amount_cents"
         case gotAt = "got_at"
         case comment
+        case basketType = "basket_type"
     }
     
 }
