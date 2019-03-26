@@ -1253,7 +1253,7 @@ extension MainViewController {
     private func setupTransactionGestureRecognizer() {
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didRecognizeTransactionGesture(gesture:)))
         self.view.addGestureRecognizer(gestureRecognizer)
-        gestureRecognizer.minimumPressDuration = 0.15
+        gestureRecognizer.minimumPressDuration = 0.03
         gestureRecognizer.delegate = self
     }
     
@@ -1265,7 +1265,6 @@ extension MainViewController {
     
     private func detectCollectionViewIntersection(at location: CGPoint,
                                                   in view: UIView,
-                                                  with gestureRecognizer: UIGestureRecognizer,
                                                   collectionViewsPool: [UICollectionView],
                                                   transformation: CGAffineTransform = CGAffineTransform(translationX: 0, y: 0)) -> CollectionViewIntersection {
         
@@ -1276,7 +1275,7 @@ extension MainViewController {
             return nil
         }
         
-        let locationInCollectionView = gestureRecognizer.location(in: intersectedCollectionView).applying(transformation)
+        let locationInCollectionView = view.convert(location, to: intersectedCollectionView).applying(transformation)
         
         guard let indexPath = intersectedCollectionView.indexPathForItem(at: locationInCollectionView) else {
             return (collectionView: intersectedCollectionView, indexPath: nil, cell: nil)
@@ -1406,7 +1405,6 @@ extension MainViewController {
             
             let intersections = detectCollectionViewIntersection(at: locationInView,
                                                                  in: self.view,
-                                                                 with: gesture,
                                                                  collectionViewsPool: collectionViews)
             
             transactionStartedCollectionView = intersections?.collectionView
@@ -1448,7 +1446,6 @@ extension MainViewController {
             
             let intersections = detectCollectionViewIntersection(at: locationInView,
                                                                  in: self.view,
-                                                                 with: gesture,
                                                                  collectionViewsPool: collectionViews,
                                                                  transformation: verticalTranslationTransformation)
             
@@ -1673,5 +1670,45 @@ extension MainViewController: FundsMoveEditViewControllerDelegate {
 extension MainViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        
+        if touch.view is UIButton {
+            return false
+        }
+        
+        let locationInView = touch.location(in: self.view)
+        
+        let collectionViews: [UICollectionView] = [incomeSourcesCollectionView,
+                                                   expenseSourcesCollectionView,
+                                                   joyExpenseCategoriesCollectionView,
+                                                   riskExpenseCategoriesCollectionView,
+                                                   safeExpenseCategoriesCollectionView]
+            
+        let intersections = detectCollectionViewIntersection(at: locationInView,
+                                                             in: self.view,
+                                                             collectionViewsPool: collectionViews)
+            
+        guard   let collectionView = intersections?.collectionView,
+                let indexPath = intersections?.indexPath else {
+            return true
+        }
+        
+        
+        switch collectionView {
+        case incomeSourcesCollectionView:
+            return !viewModel.isAddIncomeSourceItem(indexPath: indexPath)
+        case expenseSourcesCollectionView:
+            return !viewModel.isAddExpenseSourceItem(indexPath: indexPath)
+        case joyExpenseCategoriesCollectionView:
+            return !viewModel.isAddCategoryItem(indexPath: indexPath, basketType: .joy)
+        case riskExpenseCategoriesCollectionView:
+            return !viewModel.isAddCategoryItem(indexPath: indexPath, basketType: .risk)
+        case safeExpenseCategoriesCollectionView:
+            return !viewModel.isAddCategoryItem(indexPath: indexPath, basketType: .safe)
+        default:
+            return true
+        }
     }
 }

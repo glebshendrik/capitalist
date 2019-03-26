@@ -35,7 +35,8 @@ class MoneyTextField: SkyFloatingLabelTextField {
     }
     
     override func didMoveToSuperview() {
-        keyboardType = .decimalPad        
+        keyboardType = .decimalPad
+
         addTarget(self, action: #selector(textFieldEditingDidBegin(_:)), for: UIControl.Event.editingDidBegin)
         addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: UIControl.Event.editingChanged)
         addTarget(self, action: #selector(textFieldEditingDidEnd(_:)), for: UIControl.Event.editingDidEnd)
@@ -57,12 +58,26 @@ class MoneyTextField: SkyFloatingLabelTextField {
     }
     
     private func formattedText() -> String? {
-        guard   let textValue = text,
-                let currencyFormatter = currencyFormatter,
-                textValue.contains(currencyFormatter.decimalSeparator) else {
+        guard   var textValue = text,
+                let currencyFormatter = currencyFormatter else {
             // don't format nil text or if it doesn't conrain decimal separator yet
             return text
         }
+        
+//        NSString *locDecSeparator = [[NSLocale currentLocale] decimalSeparator];
+        // Check if inputstr does not contain the Locale decimal separator
+        if !textValue.contains(currencyFormatter.decimalSeparator) {
+            //  No LocaleDecimalSeparator in inputstr or wrong LocaleDecimalSeparator in inputstr
+            //  If there is a "." in inputstr replace by ","
+            if textValue.contains(".") {
+                textValue = textValue.replacingOccurrences(of: ".", with: currencyFormatter.decimalSeparator)
+            } else if textValue.contains(",") {
+                //  Else replace "," by "."
+                textValue = textValue.replacingOccurrences(of: ",", with: currencyFormatter.decimalSeparator)
+            }
+        }
+        
+        guard textValue.contains(currencyFormatter.decimalSeparator) else { return textValue }
         
         guard currencyFormatter.maximumFractionDigits > 0 else {
             // remove decimal separator if max fraction digits <= 0
@@ -120,6 +135,7 @@ struct Formatter {
     static func decimal(with currency: Currency) -> NumberFormatter {
         let currencyFormatter = Formatter.currency(with: currency)
         let formatter = NumberFormatter(numberStyle: .decimal)
+        formatter.locale = Locale.current
         formatter.groupingSeparator = ""
         formatter.generatesDecimalNumbers = true
         formatter.minimumFractionDigits = currencyFormatter.minimumFractionDigits
@@ -129,12 +145,13 @@ struct Formatter {
     
     static func currency(with currency: Currency) -> NumberFormatter {
         let formatter = NumberFormatter(numberStyle: .currency)
-//        formatter.locale = Locale.current
+        formatter.locale = Locale.current
         formatter.currencyCode = currency.code
         formatter.currencySymbol = currency.symbol
         formatter.internationalCurrencySymbol = currency.symbol
         formatter.maximumFractionDigits = Int(log10(Double(currency.subunitToUnit)))
         formatter.minimumFractionDigits = 0
+        
         formatter.positiveFormat = formatter.positiveFormat.replacingOccurrences(of: "¤", with: "")
         formatter.positiveFormat = formatter.positiveFormat.replacingOccurrences(of: " ", with: "")
         
@@ -183,9 +200,12 @@ extension Int {
         
         let startValue = number.doubleValue.abs
         
-        let abbreviation = abbreviations.last(where: { startValue >= $0.threshold }) ?? Abbreviation(threshold: 0.0, divisor: 1.0, suffix: "")
+        let abbreviation = abbreviations.last(where: { startValue >= $0.threshold })
+        let suffix = abbreviation?.suffix ?? ""
         
-        number = number.dividing(by: abbreviation.divisor)
+        if let abbreviation = abbreviation {
+            number = number.dividing(by: abbreviation.divisor)
+        }
 
         if shouldRound {
             let roundingHandler = NSDecimalNumberHandler(roundingMode: .down,
@@ -195,6 +215,9 @@ extension Int {
                                                          raiseOnUnderflow: false,
                                                          raiseOnDivideByZero: false)
             number = number.rounding(accordingToBehavior: roundingHandler)
+            formatter.numberStyle = .none
+            formatter.roundingMode = .down
+            formatter.maximumFractionDigits = 0
         }
         
         formatter.positiveFormat = formatter.positiveFormat.replacingOccurrences(of: "¤", with: "")
@@ -203,16 +226,16 @@ extension Int {
         formatter.negativeFormat = formatter.negativeFormat.replacingOccurrences(of: " ", with: "")
         
         if let format = formatter.positiveFormat {
-            formatter.positiveFormat = currency.symbolFirst ? "¤\(format)\(abbreviation.suffix)" : "\(format)\(abbreviation.suffix)¤"
+            formatter.positiveFormat = currency.symbolFirst ? "¤\(format)\(suffix)" : "\(format)\(suffix)¤"
         }
         
         if let format = formatter.negativeFormat {
-            formatter.negativeFormat = currency.symbolFirst ? "¤\(format)\(abbreviation.suffix)" : "\(format)\(abbreviation.suffix)¤"
+            formatter.negativeFormat = currency.symbolFirst ? "¤\(format)\(suffix)" : "\(format)\(suffix)¤"
         }
         
         guard var formattedString = formatter.string(from: number) else { return nil }
         
-        if  let firstSuffixCharacter = abbreviation.suffix.first,
+        if  let firstSuffixCharacter = suffix.first,
             let indexOfFirstSuffixCharacter = formattedString.firstIndex(of: firstSuffixCharacter) {
             let indexOfSpace = formattedString.index(before: indexOfFirstSuffixCharacter)
             formattedString.remove(at: indexOfSpace)
