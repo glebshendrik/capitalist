@@ -15,6 +15,7 @@ protocol TransactionEditTableControllerDelegate {
     func needsFirstResponder()
     func didSaveAtYesterday()
     func didChangeAmount()
+    func didChangeConvertedAmount()
     func didTapComment()
     func didTapCalendar()
     func didTapStartable()
@@ -92,6 +93,7 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     
     @IBAction func didChangeConvertedAmount(_ sender: MoneyTextField) {
         update(textField: sender)
+        delegate?.didChangeConvertedAmount()
         delegate?.validationNeeded()
     }
     

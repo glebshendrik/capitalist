@@ -173,6 +173,17 @@ extension String {
     }
 }
 
+extension NSDecimalNumber {
+    func moneyNumber(with currency: Currency) -> NSDecimalNumber {
+        let divideFactor = NSDecimalNumber(value: currency.subunitToUnit)
+        return self.dividing(by: divideFactor)
+    }
+    
+    func moneyDecimalString(with currency: Currency) -> String? {
+        return Formatter.decimal(with: currency).string(from: moneyNumber(with: currency))
+    }
+}
+
 extension Int {
     func moneyNumber(with currency: Currency) -> NSDecimalNumber {
         let divideFactor = NSDecimalNumber(value: currency.subunitToUnit)

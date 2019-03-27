@@ -1253,7 +1253,7 @@ extension MainViewController {
     private func setupTransactionGestureRecognizer() {
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didRecognizeTransactionGesture(gesture:)))
         self.view.addGestureRecognizer(gestureRecognizer)
-        gestureRecognizer.minimumPressDuration = 0.03
+        gestureRecognizer.minimumPressDuration = 0.0525
         gestureRecognizer.delegate = self
     }
     

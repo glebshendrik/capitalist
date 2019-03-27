@@ -152,6 +152,8 @@
 		FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CE21C11F850015A12F /* MainViewModel.swift */; };
 		FAC3B9D121C131390015A12F /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9D021C131390015A12F /* JoinViewController.swift */; };
 		FAC3B9D421C2796C0015A12F /* IncomeSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */; };
+		FACC01E4224B52460044A747 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC01E3224B52460044A747 /* StatisticsViewController.swift */; };
+		FACC01E6224B52B20044A747 /* Statistics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FACC01E5224B52B20044A747 /* Statistics.storyboard */; };
 		FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
 		FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* Launch.storyboard */; };
@@ -372,6 +374,8 @@
 		FAC3B9CE21C11F850015A12F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9D021C131390015A12F /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceCollectionViewCell.swift; sourceTree = "<group>"; };
+		FACC01E3224B52460044A747 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		FACC01E5224B52B20044A747 /* Statistics.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Statistics.storyboard; sourceTree = "<group>"; };
 		FAD88EF621AEA86E00BE7BC1 /* skrudzh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skrudzh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -673,6 +677,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		FACC01E2224B52200044A747 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				FACC01E3224B52460044A747 /* StatisticsViewController.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		FAD88EED21AEA86E00BE7BC1 = {
 			isa = PBXGroup;
 			children = (
@@ -936,6 +948,7 @@
 		FAD88F7D21B027C600BE7BC1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FACC01E2224B52200044A747 /* Statistics */,
 				FA7DB72822102B4200559878 /* Currencies */,
 				FAA91274220C79CD00F2C251 /* Settings */,
 				FA0CAE2021D679C000805288 /* Icons */,
@@ -957,6 +970,7 @@
 				FA165CD921B652BE00EAA16B /* Profile.storyboard */,
 				FAC3B9BD21BE0D1F0015A12F /* Onboarding.storyboard */,
 				FAA91272220C710300F2C251 /* Settings.storyboard */,
+				FACC01E5224B52B20044A747 /* Statistics.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1105,6 +1119,7 @@
 				FAA91273220C710300F2C251 /* Settings.storyboard in Resources */,
 				FA0CADF921CBE58F00805288 /* LoaderView.xib in Resources */,
 				FA26814721B178D300FADED1 /* Rubik-Regular.ttf in Resources */,
+				FACC01E6224B52B20044A747 /* Statistics.storyboard in Resources */,
 				FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */,
 				FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */,
 				FA16FC82223BBE0E0053C273 /* coin-roll-drop.wav in Resources */,
@@ -1368,6 +1383,7 @@
 				FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */,
 				FA0CAE1D21D66FC200805288 /* IconsCoordinator.swift in Sources */,
 				FA165CE621B6669500EAA16B /* LoginViewController.swift in Sources */,
+				FACC01E4224B52460044A747 /* StatisticsViewController.swift in Sources */,
 				FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */,
 				FA0CAE1721D66C8700805288 /* IconsServiceProtocol.swift in Sources */,
 				FAC3B9C721C0F2B00015A12F /* IncomeSourcesServiceProtocol.swift in Sources */,

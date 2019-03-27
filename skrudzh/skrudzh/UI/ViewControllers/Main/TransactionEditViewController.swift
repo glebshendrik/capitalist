@@ -24,11 +24,35 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     var viewModel: TransactionEditViewModel! { return nil }
     
     var amount: String? {
-        return viewModel.needCurrencyExchange ? editTableController?.exchangeStartableAmountTextField.text : editTableController?.amountTextField.text
+        if !viewModel.needCurrencyExchange {
+            return editTableController?.amountTextField.text
+        }
+        
+        if let text = editTableController?.exchangeStartableAmountTextField.text?.trimmed,
+            !text.isEmpty {
+            return text
+        }
+        
+        guard let convertedAmountText = editTableController?.exchangeCompletableAmountTextField.text?.trimmed,
+            !convertedAmountText.isEmpty else { return nil }
+        
+        return viewModel.convert(amount: convertedAmountText, isForwardConversion: false)
     }
     
     var convertedAmount: String? {
-        return viewModel.needCurrencyExchange ? editTableController?.exchangeCompletableAmountTextField.text : amount
+        if !viewModel.needCurrencyExchange {
+            return editTableController?.amountTextField.text
+        }
+        
+        if let text = editTableController?.exchangeCompletableAmountTextField.text?.trimmed,
+            !text.isEmpty {
+            return text
+        }
+        
+        guard let amountText = editTableController?.exchangeStartableAmountTextField.text?.trimmed,
+            !amountText.isEmpty else { return nil }
+        
+        return viewModel.convert(amount: amountText, isForwardConversion: true)
     }
     
     var comment: String? {
@@ -181,7 +205,11 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func didChangeAmount() {
-        editTableController?.exchangeCompletableAmountTextField.text = viewModel.convert(amount: editTableController?.exchangeStartableAmountTextField.text)
+        editTableController?.exchangeCompletableAmountTextField.placeholder = viewModel.convert(amount: editTableController?.exchangeStartableAmountTextField.text, isForwardConversion: true) ?? "Сумма"
+    }
+    
+    func didChangeConvertedAmount() {
+        editTableController?.exchangeStartableAmountTextField.placeholder = viewModel.convert(amount: editTableController?.exchangeCompletableAmountTextField.text, isForwardConversion: false) ?? "Сумма"
     }
     
     private func setupUI() {

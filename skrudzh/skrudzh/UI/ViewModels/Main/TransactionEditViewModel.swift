@@ -110,12 +110,32 @@ class TransactionEditViewModel {
                 }
     }
     
-    func convert(amount: String?) -> String? {
+    func convert(amount: String?, isForwardConversion: Bool = true) -> String? {
         guard   let currency = startableCurrency,
                 let convertedCurrency = completableCurrency,
-                let amountCents = amount?.intMoney(with: currency) else { return nil }
+            let amountCents = amount?.intMoney(with: isForwardConversion ? currency : convertedCurrency) else { return nil }
         
-        let convertedAmountCents = Int((Float(amountCents) * exchangeRate).rounded())
-        return convertedAmountCents.moneyDecimalString(with: convertedCurrency)
+        let amountCentsNumber = NSDecimalNumber(integerLiteral: amountCents)
+        let currencySubunitToUnit = NSDecimalNumber(integerLiteral: currency.subunitToUnit)
+        let convertedCurrencySubunitToUnit = NSDecimalNumber(integerLiteral: convertedCurrency.subunitToUnit)
+        let exchangeRateNumber = NSDecimalNumber(floatLiteral: Double(exchangeRate))
+        
+        func convert() -> NSDecimalNumber {
+            if isForwardConversion {
+                return amountCentsNumber
+                            .multiplying(by: convertedCurrencySubunitToUnit)
+                            .multiplying(by: exchangeRateNumber)
+                            .dividing(by: currencySubunitToUnit)
+            }
+            return amountCentsNumber
+                .dividing(by: exchangeRateNumber
+                                    .multiplying(by: convertedCurrencySubunitToUnit)
+                                    .dividing(by: currencySubunitToUnit))
+        }
+        
+        
+        let convertedAmountCents = convert()
+            
+        return convertedAmountCents.moneyDecimalString(with: isForwardConversion ? convertedCurrency : currency)
     }
 }
