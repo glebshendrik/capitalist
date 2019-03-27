@@ -12,12 +12,12 @@ import SwinjectStoryboard
 struct Infrastructure {
 
     enum Storyboard : String {
-        case Join, Main, Profile, Onboarding, Settings
+        case Join, Main, Profile, Onboarding, Settings, Statistics
         
         var name: String { return self.rawValue }
         
         static func all() -> [Storyboard] {
-            return [.Main, .Join, .Profile, .Onboarding, .Settings]
+            return [.Main, .Join, .Profile, .Onboarding, .Settings, .Statistics]
         }
     }
 
@@ -72,6 +72,9 @@ struct Infrastructure {
         case OnboardingPage7ViewController
         case OnboardingPage8ViewController
         
+        // Statistics
+        case StatisticsViewController
+        
         var identifier: String {
             return self.rawValue
         }
@@ -122,6 +125,8 @@ struct Infrastructure {
                 return .Onboarding
             case .SettingsViewController:
                 return .Settings
+            case .StatisticsViewController:
+                return .Statistics
             }
         }
     }
