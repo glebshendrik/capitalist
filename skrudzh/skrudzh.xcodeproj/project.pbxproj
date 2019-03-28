@@ -112,6 +112,7 @@
 		FA81748C222E2B8700EE6116 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81748B222E2B8700EE6116 /* CommentViewController.swift */; };
 		FA81748E222F800200EE6116 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81748D222F800200EE6116 /* DatePickerViewController.swift */; };
 		FA8382B621F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */; };
+		FA927D30224CE2BB002AA2CE /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA927D2F224CE2BB002AA2CE /* FilterCollectionViewCell.swift */; };
 		FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */; };
 		FA9F962A21C2A86B00FD64C1 /* IncomeSourceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */; };
 		FA9F962C21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */; };
@@ -347,6 +348,7 @@
 		FA81748B222E2B8700EE6116 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		FA81748D222F800200EE6116 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentIncomeSourceCreationMessageViewController.swift; sourceTree = "<group>"; };
+		FA927D2F224CE2BB002AA2CE /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceViewModel.swift; sourceTree = "<group>"; };
 		FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewController.swift; sourceTree = "<group>"; };
 		FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewModel.swift; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 				FACC01FA224CBF150044A747 /* HistoryTransactionsSectionHeaderView.xib */,
 				FACC01FC224CC65B0044A747 /* StatisticsTitleView.swift */,
 				FACC0200224CCDEE0044A747 /* StatisticsTitleView.xib */,
+				FA927D2F224CE2BB002AA2CE /* FilterCollectionViewCell.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -1360,6 +1363,7 @@
 				FA66FB69222048BC00708C71 /* EditableCell.swift in Sources */,
 				FA6F2E8B22435052008C160F /* HistoryTransactionsService.swift in Sources */,
 				FA6270A321C7A87300CC0269 /* IncomeSourceEditTableController.swift in Sources */,
+				FA927D30224CE2BB002AA2CE /* FilterCollectionViewCell.swift in Sources */,
 				FACC01F3224BC3440044A747 /* StatisticsViewSection.swift in Sources */,
 				FA16FC6F223A81F70053C273 /* ExpenseSourcesViewModel.swift in Sources */,
 				FAA425FE2230F30D00B64925 /* FundsMove.swift in Sources */,

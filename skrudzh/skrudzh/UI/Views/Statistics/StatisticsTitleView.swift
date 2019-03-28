@@ -9,7 +9,7 @@
 import UIKit
 
 protocol StatisticsTitleViewDelegate {
-    func didTapRemoveRangeButton()
+    func didTapRemoveDateRangeButton()
 }
 
 class StatisticsTitleView : NavigationBarCustomTitleView {
@@ -25,7 +25,7 @@ class StatisticsTitleView : NavigationBarCustomTitleView {
     }
     
     @IBAction func didTapRemoveRangeButton(_ sender: Any) {
-        delegate?.didTapRemoveRangeButton()
+        delegate?.didTapRemoveDateRangeButton()
     }
     
     func updateUI() {

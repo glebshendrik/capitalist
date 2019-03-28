@@ -25,6 +25,126 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
     }
 }
 
+// Show Other Screens
+extension StatisticsViewController {
+    private func showFiltersSelectionView() {
+        
+    }
+    
+    private func showEdit(historyTransaction: HistoryTransactionViewModel) {
+        
+    }
+}
+
+extension MainViewController: IncomeEditViewControllerDelegate {
+    func didCreateIncome() {
+        soundsManager.playTransactionCompletedSound()
+        updateIncomeDependentData()
+    }
+    
+    func didUpdateIncome() {
+        updateIncomeDependentData()
+    }
+    
+    func didRemoveIncome() {
+        updateIncomeDependentData()
+    }
+    
+    private func updateIncomeDependentData() {
+        loadIncomeSources()
+        loadBudget()
+        loadBaskets()
+        loadExpenseSources()
+    }
+}
+
+extension MainViewController: ExpenseEditViewControllerDelegate {
+    func didCreateExpense() {
+        soundsManager.playTransactionCompletedSound()
+        updateExpenseDependentData()
+    }
+    
+    func didUpdateExpense() {
+        updateExpenseDependentData()
+    }
+    
+    func didRemoveExpense() {
+        updateExpenseDependentData()
+    }
+    
+    private func updateExpenseDependentData() {
+        loadBudget()
+        loadBaskets()
+        loadExpenseSources()
+        loadExpenseCategories(by: .joy)
+        loadExpenseCategories(by: .risk)
+        loadExpenseCategories(by: .safe)
+    }
+}
+
+extension MainViewController: FundsMoveEditViewControllerDelegate {
+    func didCreateFundsMove() {
+        soundsManager.playTransactionCompletedSound()
+        updateFundsMoveDependentData()
+    }
+    
+    func didUpdateFundsMove() {
+        updateFundsMoveDependentData()
+    }
+    
+    func didRemoveFundsMove() {
+        updateFundsMoveDependentData()
+    }
+    
+    private func updateFundsMoveDependentData() {
+        loadExpenseSources()
+    }
+}
+
+// Filters
+extension StatisticsViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.numberOfSourceOrDestinationFilters
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCollectionViewCell", for: indexPath) as? FilterCollectionViewCell,
+            let filter = viewModel.sourceOrDestinationFilter(at: indexPath) else {
+            return UICollectionViewCell()
+        }
+        
+        cell.viewModel = filter
+        cell.delegate = self
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        guard let filter = viewModel.sourceOrDestinationFilter(at: indexPath) else {
+            return CGSize.zero
+        }
+        
+        let titleSize = filter.title.size(withAttributes: [
+                NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)
+            ])
+        let edgeInsets = UIEdgeInsets(top: 5.0, left: 6.0, bottom: 3.0, right: 13.0)
+        let size = CGSize(width: titleSize.width + edgeInsets.horizontal, height: titleSize.height + edgeInsets.vertical)
+        
+        return size
+    }
+    
+}
+
+// Statistics Sections
 extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections
@@ -57,11 +177,35 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard   let section = viewModel.section(at: indexPath.section),
+                let historyTransactionsSection = section as? HistoryTransactionsSection,
+                let historyTransactionViewModel = historyTransactionsSection.historyTransactionViewModel(at: indexPath.row) else { return }
         
+        showEdit(historyTransaction: historyTransactionViewModel)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat.leastNonzeroMagnitude
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let section = viewModel.section(at: indexPath.section) else { return 0 }
+        
+        switch section {
+        case is SourceOrDestinationFilterEditSection:
+            return 50.0
+        case is GraphSection:
+            return 145.0
+        case is HistoryTransactionsLoadingSection:
+            return 50.0
+        case is HistoryTransactionsHeaderSection:
+            return 40.0
+        case is HistoryTransactionsSection:
+            return 54.0
+        default:
+            return CGFloat.leastNonzeroMagnitude
+        }
     }
 }
 
@@ -85,6 +229,7 @@ extension StatisticsViewController {
     
     private func setupNavigationBar() {
         titleView = StatisticsTitleView(frame: CGRect.zero)
+        titleView.delegate = self
         navigationItem.titleView = titleView
     }
     
@@ -121,3 +266,20 @@ extension StatisticsViewController {
         
     }
 }
+
+// FilterCellDelegate
+extension StatisticsViewController : FilterCellDelegate {
+    func didTapDeleteButton(filter: SourceOrDestinationHistoryTransactionFilter) {
+        viewModel.remove(sourceOrDestinationFilter: filter)
+        updateUI()
+    }
+}
+
+// StatisticsTitleViewDelegate
+extension StatisticsViewController : StatisticsTitleViewDelegate {
+    func didTapRemoveDateRangeButton() {
+        viewModel.removeDateRangeFilter()
+        updateUI()
+    }
+}
+

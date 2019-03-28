@@ -75,6 +75,10 @@ class HistoryTransactionViewModel {
         return historyTransaction.comment
     }
     
+    var basketType: BasketType? {
+        return historyTransaction.basketType
+    }
+    
     init(historyTransaction: HistoryTransaction) {
         self.historyTransaction = historyTransaction
     }

@@ -135,6 +135,15 @@ extension StatisticsViewModel {
         updatePresentationData()
     }
     
+    func removeDateRangeFilter() {
+        set(dateRangeFilter: nil)
+    }
+    
+    func remove(sourceOrDestinationFilter: SourceOrDestinationHistoryTransactionFilter) {
+        let filters = filtersViewModel.sourceOrDestinationFilters.filter { $0.id != sourceOrDestinationFilter.id }
+        set(sourceOrDestinationFilters: filters)
+    }
+    
     func sourceOrDestinationFilter(at indexPath: IndexPath) -> SourceOrDestinationHistoryTransactionFilter? {
         return filtersViewModel.sourceOrDestinationFilter(at: indexPath)
     }

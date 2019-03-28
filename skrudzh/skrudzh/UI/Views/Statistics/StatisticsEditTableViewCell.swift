@@ -8,6 +8,14 @@
 
 import UIKit
 
+protocol StatisticsEditTableViewCellDelegate {
+    func didTapStatisticsEditButton()
+}
+
 class StatisticsEditTableViewCell : UITableViewCell {
+    var delegate: StatisticsEditTableViewCellDelegate?
     
+    @IBAction func didTapStatisticsEditButton(_ sender: Any) {
+        delegate?.didTapStatisticsEditButton()
+    }
 }

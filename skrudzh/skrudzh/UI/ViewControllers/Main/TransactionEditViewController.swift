@@ -255,6 +255,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         updateCompletableUI()
         updateAmountUI()
         updateExchangeAmountsUI()
+        updateToolbarUI()
         validateUI()
     }
     
