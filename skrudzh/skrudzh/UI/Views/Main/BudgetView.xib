@@ -18,7 +18,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BudgetView" customModule="skrudzh" customModuleProvider="target">
             <connections>
                 <outlet property="balanceLabel" destination="dtW-M2-Erw" id="TGv-3a-8ZM"/>
-                <outlet property="contentView" destination="iN0-l3-epB" id="ueS-V1-jYE"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="u6B-cs-KJR"/>
                 <outlet property="monthlyPlannedLabel" destination="0iT-Dh-1Um" id="lff-mi-hS4"/>
                 <outlet property="monthlySpentLabel" destination="06Y-MA-dra" id="giv-hr-fQd"/>
             </connections>

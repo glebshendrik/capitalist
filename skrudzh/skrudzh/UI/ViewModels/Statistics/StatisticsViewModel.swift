@@ -105,8 +105,8 @@ extension StatisticsViewModel {
 
 // Filters
 extension StatisticsViewModel {
-    var dateRangeFilterTitle: String? {
-        return filtersViewModel.dateRangeFilterTitle
+    var dateRangeFilter: DateRangeHistoryTransactionFilter? {
+        return filtersViewModel.dateRangeFilter
     }
     
     var numberOfSourceOrDestinationFilters: Int {
