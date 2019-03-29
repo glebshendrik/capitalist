@@ -83,9 +83,13 @@ class APIClient : APIClientProtocol {
     
     func request<T>(_ resource: APIResource) -> Promise<([T], Int?)> where T : Decodable {
         return performRequest(resource).map { (json, response) in
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
+            
             if  let jsonDictionary = json as? [String : Any],
                 let arrayOfDictionaries = jsonDictionary[resource.keyPath.plural] as? [[String : Any]],
-                let objects = try? JSONDecoder().decode([T].self, withJSONObject: arrayOfDictionaries) {
+                let objects = try? decoder.decode([T].self, withJSONObject: arrayOfDictionaries) {
                 
                 let totalCount = (response.response?.allHeaderFields["Items_total_count"] as? String)?.int
                 return (objects, totalCount)

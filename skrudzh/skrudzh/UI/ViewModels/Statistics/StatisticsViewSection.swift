@@ -43,7 +43,7 @@ class HistoryTransactionsSection : StatisticsViewSection {
     var numberOfRows: Int { return historyTransactionViewModels.count }
     var title: String? { return date.dateString(ofStyle: .full) }
     
-    private let date: Date
+    let date: Date
     private let historyTransactionViewModels: [HistoryTransactionViewModel]
     
     init(date: Date,

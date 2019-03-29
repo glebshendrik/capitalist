@@ -13,7 +13,7 @@ import SwiftDate
 import AlamofireImage
 
 extension UITableView {
-    func reloadData(with animation: UITableView.RowAnimation) {
+    func reloadData(with animation: UITableView.RowAnimation) {        
         reloadSections(IndexSet(integersIn: 0..<numberOfSections), with: animation)
     }
 }

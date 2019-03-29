@@ -9,5 +9,10 @@
 import UIKit
 
 class HistoryTransactionsLoadingTableViewCell : UITableViewCell {
+    @IBOutlet weak var loaderImageView: UIImageView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        loaderImageView.showLoader()
+    }
 }

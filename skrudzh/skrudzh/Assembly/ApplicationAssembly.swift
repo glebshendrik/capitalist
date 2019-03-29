@@ -305,6 +305,12 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(ExpenseCategoriesViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
+        
+        // StatisticsViewController
+        container.registerForSkrudzhStoryboard(StatisticsViewController.self) { (r, c) in
+            c.viewModel = r.resolve(StatisticsViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -426,6 +432,24 @@ class ApplicationAssembly: Assembly {
         // ExpenseCategoriesViewModel
         container.register(ExpenseCategoriesViewModel.self) { r in
             return ExpenseCategoriesViewModel(expenseCategoriesCoordinator: r.resolve(ExpenseCategoriesCoordinatorProtocol.self)!)
+        }
+        
+        // StatisticsViewModel
+        container.register(StatisticsViewModel.self) { r in
+            return StatisticsViewModel(historyTransactionsViewModel: r.resolve(HistoryTransactionsViewModel.self)!,
+                                       filtersViewModel: r.resolve(FiltersViewModel.self)!)
+        }
+        
+        // HistoryTransactionsViewModel
+        container.register(HistoryTransactionsViewModel.self) { r in
+            return HistoryTransactionsViewModel(historyTransactionsCoordinator: r.resolve(HistoryTransactionsCoordinatorProtocol.self)!,
+                                                exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!,
+                                                accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
+        }
+        
+        // FiltersViewModel
+        container.register(FiltersViewModel.self) { r in
+            return FiltersViewModel()
         }
     }
     

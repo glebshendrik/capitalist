@@ -9,13 +9,22 @@
 import UIKit
 import PromiseKit
 
-class StatisticsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
+class StatisticsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
+    
+    var navigationBarTintColor: UIColor? = UIColor.navBarColor
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: StatisticsViewModel!
     
     private var titleView: StatisticsTitleView!
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var filtersCollectionView: UICollectionView!
+    
+    @IBOutlet weak var incomesContainer: UIView!
+    @IBOutlet weak var expensesContainer: UIView!
+    
+    @IBOutlet weak var incomesAmountLabel: UILabel!
+    @IBOutlet weak var expensesAmountLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,88 +32,64 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
         updateUI()
         loadData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = UIColor.navBarColor
+    }
+    
+    @IBAction func didTapFiltersSelectionButton(_ sender: Any) {
+    }
+    
 }
 
-// Show Other Screens
-extension StatisticsViewController {
+// Show other screens and handle delegate calls
+extension StatisticsViewController : IncomeEditViewControllerDelegate, ExpenseEditViewControllerDelegate, FundsMoveEditViewControllerDelegate {
+    
     private func showFiltersSelectionView() {
-        
+        // TODO
     }
     
     private func showEdit(historyTransaction: HistoryTransactionViewModel) {
-        
+        // TODO
     }
-}
-
-extension MainViewController: IncomeEditViewControllerDelegate {
+    
     func didCreateIncome() {
-        soundsManager.playTransactionCompletedSound()
-        updateIncomeDependentData()
     }
     
     func didUpdateIncome() {
-        updateIncomeDependentData()
+        loadData()
     }
     
     func didRemoveIncome() {
-        updateIncomeDependentData()
+        loadData()
     }
     
-    private func updateIncomeDependentData() {
-        loadIncomeSources()
-        loadBudget()
-        loadBaskets()
-        loadExpenseSources()
-    }
-}
-
-extension MainViewController: ExpenseEditViewControllerDelegate {
     func didCreateExpense() {
-        soundsManager.playTransactionCompletedSound()
-        updateExpenseDependentData()
     }
     
     func didUpdateExpense() {
-        updateExpenseDependentData()
+        loadData()
     }
     
     func didRemoveExpense() {
-        updateExpenseDependentData()
+        loadData()
     }
     
-    private func updateExpenseDependentData() {
-        loadBudget()
-        loadBaskets()
-        loadExpenseSources()
-        loadExpenseCategories(by: .joy)
-        loadExpenseCategories(by: .risk)
-        loadExpenseCategories(by: .safe)
-    }
-}
-
-extension MainViewController: FundsMoveEditViewControllerDelegate {
     func didCreateFundsMove() {
-        soundsManager.playTransactionCompletedSound()
-        updateFundsMoveDependentData()
     }
     
     func didUpdateFundsMove() {
-        updateFundsMoveDependentData()
+        loadData()
     }
     
     func didRemoveFundsMove() {
-        updateFundsMoveDependentData()
-    }
-    
-    private func updateFundsMoveDependentData() {
-        loadExpenseSources()
+        loadData()
     }
 }
 
 // Filters
 extension StatisticsViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -134,10 +119,10 @@ extension StatisticsViewController : UICollectionViewDelegate, UICollectionViewD
         }
         
         let titleSize = filter.title.size(withAttributes: [
-                NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)
+                NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 11.0) ?? UIFont.boldSystemFont(ofSize: 11)
             ])
         let edgeInsets = UIEdgeInsets(top: 5.0, left: 6.0, bottom: 3.0, right: 13.0)
-        let size = CGSize(width: titleSize.width + edgeInsets.horizontal, height: titleSize.height + edgeInsets.vertical)
+        let size = CGSize(width: titleSize.width + edgeInsets.horizontal, height: 20.0)
         
         return size
     }
@@ -156,7 +141,33 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        
+        guard let section = viewModel.section(at: indexPath.section) else { return UITableViewCell() }
+        
+        func cell(for identifier: String) -> UITableViewCell {
+            return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        }
+        
+        switch section {
+        case is SourceOrDestinationFilterEditSection:
+            return cell(for: "StatisticsEditTableViewCell")
+        case is GraphSection:
+            return cell(for: "GraphTableViewCell")
+        case is HistoryTransactionsLoadingSection:
+            return cell(for: "HistoryTransactionsLoadingTableViewCell")
+        case is HistoryTransactionsHeaderSection:
+            return cell(for: "HistoryTransactionsHeaderTableViewCell")
+        case is HistoryTransactionsSection:
+            guard   let cell = cell(for: "HistoryTransactionTableViewCell") as? HistoryTransactionTableViewCell,
+                    let historyTransactionsSection = section as? HistoryTransactionsSection,
+                    let historyTransactionViewModel = historyTransactionsSection.historyTransactionViewModel(at: indexPath.row) else { return UITableViewCell() }
+            
+            cell.viewModel = historyTransactionViewModel
+            
+            return cell
+        default:
+            return UITableViewCell()
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -164,8 +175,12 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
                 let section = viewModel.section(at: section) as? HistoryTransactionsSection else { return nil }
 
         headerView.section = section
-
+        headerView.contentView.backgroundColor = UIColor(red: 244.0 / 255.0, green: 247.0 / 255.0, blue: 254.0 / 255.0, alpha: 1.0)
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -186,32 +201,34 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let section = viewModel.section(at: indexPath.section) else { return 0 }
         
         switch section {
         case is SourceOrDestinationFilterEditSection:
-            return 50.0
+            return 44.0
         case is GraphSection:
             return 145.0
         case is HistoryTransactionsLoadingSection:
-            return 50.0
+            return 44.0
         case is HistoryTransactionsHeaderSection:
-            return 40.0
+            return 44.0
         case is HistoryTransactionsSection:
             return 54.0
         default:
             return CGFloat.leastNonzeroMagnitude
         }
-    }
+    }    
 }
 
 // Setups, Updates, Loaders
 extension StatisticsViewController {
+    
+    func set(sourceOrDestinationFilter: SourceOrDestinationHistoryTransactionFilter) {
+        viewModel.set(sourceOrDestinationFilter: sourceOrDestinationFilter)
+    }
+    
     private func loadData() {
+        setLoading()
         _ = firstly {
                 viewModel.loadData()                
             }.catch { _ in
@@ -219,6 +236,11 @@ extension StatisticsViewController {
             }.finally {
                 self.updateUI()
         }
+    }
+    
+    private func setLoading() {
+        viewModel.setDataLoading()
+        updateUI()
     }
     
     private func setupUI() {
@@ -234,12 +256,14 @@ extension StatisticsViewController {
     }
     
     private func setupFiltersUI() {
-        
+        filtersCollectionView.delegate = self
+        filtersCollectionView.dataSource = self        
     }
     
     private func setupHistoryTransactionsUI() {
         viewModel.updatePresentationData()
-        
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(UINib(nibName: "HistoryTransactionsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: HistoryTransactionsSectionHeaderView.reuseIdentifier)
     }
     
@@ -255,15 +279,19 @@ extension StatisticsViewController {
     }
     
     private func updateFiltersUI() {
-        
+        update(filtersCollectionView)
     }
     
     private func updateHistoryTransactionsUI() {
-        
+        tableView.reloadData()//(with: .automatic)
     }
     
     private func updateBalanceUI() {
-        
+        incomesContainer.isHidden = !viewModel.hasIncomeTransactions
+        expensesContainer.isHidden = !viewModel.hasExpenseTransactions
+
+        incomesAmountLabel.text = viewModel.filteredIncomesAmount
+        expensesAmountLabel.text = viewModel.filteredExpensesAmount
     }
 }
 

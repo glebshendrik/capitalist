@@ -18,7 +18,7 @@ class StatisticsViewModel {
     private let historyTransactionsViewModel: HistoryTransactionsViewModel
     private let filtersViewModel: FiltersViewModel
     
-    public private(set) var isDataLoaded: Bool = false
+    public private(set) var isDataLoading: Bool = false
     
     private var sections: [StatisticsViewSection] = []
     private var historyTransactionsSections: [HistoryTransactionsSection] = []
@@ -31,6 +31,11 @@ class StatisticsViewModel {
          filtersViewModel: FiltersViewModel) {
         self.historyTransactionsViewModel = historyTransactionsViewModel
         self.filtersViewModel = filtersViewModel
+    }
+    
+    func setDataLoading() {
+        isDataLoading = true
+        updateSections()
     }
     
     func updatePresentationData() {
@@ -56,7 +61,9 @@ class StatisticsViewModel {
     
     private func updateHistoryTransactionsSections() {
         let groups = historyTransactionsViewModel.filteredHistoryTransactionViewModels.groupByKey { $0.gotAt.dateAtStartOf(.day) }
-        historyTransactionsSections = groups.map { HistoryTransactionsSection(date: $0.key, historyTransactionViewModels: $0.value) }
+        historyTransactionsSections = groups
+            .map { HistoryTransactionsSection(date: $0.key, historyTransactionViewModels: $0.value) }
+            .sorted(by: { $0.date > $1.date })
     }
     
     private func updateSections() {
@@ -65,10 +72,9 @@ class StatisticsViewModel {
             sections.append(SourceOrDestinationFilterEditSection())
         }
         sections.append(GraphSection())
-        if !isDataLoaded {
+        if isDataLoading {
             sections.append(HistoryTransactionsLoadingSection())
-        }
-        if historyTransactionsSections.count > 0 {
+        } else if historyTransactionsSections.count > 0 {
             sections.append(HistoryTransactionsHeaderSection())
             sections.append(contentsOf: historyTransactionsSections)
         }
@@ -94,10 +100,11 @@ extension StatisticsViewModel {
     }
     
     func loadData() -> Promise<Void> {
+        setDataLoading()
         return  firstly {
                     historyTransactionsViewModel.loadData()
                 }.ensure {
-                    self.isDataLoaded = true
+                    self.isDataLoading = false
                     self.updatePresentationData()                    
                 }
     }

@@ -328,10 +328,24 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
         }
     }
     
+    private func showStatistics(with filterViewModel: SourceOrDestinationHistoryTransactionFilter) {
+        if  let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController {
+            
+            statisticsViewController.set(sourceOrDestinationFilter: filterViewModel)
+            
+            navigationController?.pushViewController(statisticsViewController)
+        }
+    }
+    
     private func didSelectIncomeSource(at indexPath: IndexPath) {
-        guard viewModel.isAddIncomeSourceItem(indexPath: indexPath) else { return }
-        
-        showNewIncomeSourceScreen()
+        if viewModel.isAddIncomeSourceItem(indexPath: indexPath) {
+            showNewIncomeSourceScreen()
+        } else if let incomeSourceViewModel = viewModel.incomeSourceViewModel(at: indexPath) {
+            let filterViewModel = SourceOrDestinationHistoryTransactionFilter(id: incomeSourceViewModel.id,
+                                                                              title: incomeSourceViewModel.name,
+                                                                              type: .incomeSource)
+            showStatistics(with: filterViewModel)
+        }
     }
     
     private func showNewIncomeSourceScreen() {
