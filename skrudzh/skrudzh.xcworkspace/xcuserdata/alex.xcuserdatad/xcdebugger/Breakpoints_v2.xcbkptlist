@@ -106,13 +106,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575573569.96243"
+            timestampString = "575816677.780197"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "275"
             endingLineNumber = "275"
-            landmarkName = "loadBudget()"
-            landmarkType = "7">
+            landmarkName = "MainViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -122,13 +122,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575573569.966469"
+            timestampString = "575816677.822723"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "274"
             endingLineNumber = "274"
-            landmarkName = "loadBudget()"
-            landmarkType = "7">
+            landmarkName = "isTransactionStarted"
+            landmarkType = "24">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -170,12 +170,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575573569.966677"
+            timestampString = "575816677.824061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "277"
             endingLineNumber = "277"
-            landmarkName = "loadBudget()"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -186,12 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575573569.96692"
+            timestampString = "575816677.825326"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "280"
             endingLineNumber = "280"
-            landmarkName = "loadBudget()"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -202,12 +202,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575573569.967078"
+            timestampString = "575816677.826317"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "557"
             endingLineNumber = "557"
-            landmarkName = "didRemoveExpenseCategory(with:)"
+            landmarkName = "didRemoveExpenseSource()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -218,12 +218,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575573569.9672559"
+            timestampString = "575816677.8271281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "915"
             endingLineNumber = "915"
-            landmarkName = "didTapDeleteButton(cell:)"
+            landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -362,12 +362,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575573569.967847"
+            timestampString = "575816677.828591"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1691"
-            endingLineNumber = "1691"
-            landmarkName = "gestureRecognizer(_:shouldReceive:)"
+            startingLineNumber = "1703"
+            endingLineNumber = "1703"
+            landmarkName = "didCreateFundsMove()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -378,12 +378,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575573569.968123"
+            timestampString = "575816677.829438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1285"
             endingLineNumber = "1285"
-            landmarkName = "detectCollectionViewIntersection(at:in:collectionViewsPool:transformation:)"
+            landmarkName = "didRecognizeRearrangeGesture(gesture:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -426,12 +426,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575573569.968343"
+            timestampString = "575816677.830326"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1697"
-            endingLineNumber = "1697"
-            landmarkName = "gestureRecognizer(_:shouldReceive:)"
+            startingLineNumber = "1709"
+            endingLineNumber = "1709"
+            landmarkName = "didRemoveFundsMove()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -630,7 +630,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
@@ -646,7 +646,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/Services/APIClient.swift"
@@ -656,6 +656,70 @@
             startingLineNumber = "90"
             endingLineNumber = "90"
             landmarkName = "request(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/UI/ViewControllers/Main/Main/ExpenseCategoryEditDelegateExtension.swift"
+            timestampString = "575831825.6955349"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "didSelectExpenseCategory(at:basketType:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/UI/ViewControllers/Main/Main/CollectionsControllingExtension.swift"
+            timestampString = "575831825.696547"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/UI/ViewControllers/Main/Main/TransactionsControllingExtension.swift"
+            timestampString = "575831825.6974159"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "didRecognizeTransactionGesture(gesture:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/UI/ViewControllers/Main/Main/TransactionsControllingExtension.swift"
+            timestampString = "575831825.707358"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "didRecognizeTransactionGesture(gesture:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
