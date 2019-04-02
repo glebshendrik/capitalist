@@ -12,7 +12,10 @@ protocol StatisticsEditTableViewCellDelegate {
     func didTapStatisticsEditButton()
 }
 
-class StatisticsEditTableViewCell : UITableViewCell {
+class StatisticsEditTableViewCell : UITableViewCell {    
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var editButtonTitleLabel: UILabel!
+    
     var delegate: StatisticsEditTableViewCellDelegate?
     
     @IBAction func didTapStatisticsEditButton(_ sender: Any) {

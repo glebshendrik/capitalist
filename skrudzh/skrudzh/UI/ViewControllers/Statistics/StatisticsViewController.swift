@@ -25,6 +25,7 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
     
     @IBOutlet weak var incomesAmountLabel: UILabel!
     @IBOutlet weak var expensesAmountLabel: UILabel!
+    @IBOutlet weak var filtersHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,10 +120,10 @@ extension StatisticsViewController : UICollectionViewDelegate, UICollectionViewD
         }
         
         let titleSize = filter.title.size(withAttributes: [
-                NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 11.0) ?? UIFont.boldSystemFont(ofSize: 11)
+                NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 13.0) ?? UIFont.boldSystemFont(ofSize: 13)
             ])
-        let edgeInsets = UIEdgeInsets(top: 5.0, left: 6.0, bottom: 3.0, right: 13.0)
-        let size = CGSize(width: titleSize.width + edgeInsets.horizontal, height: 20.0)
+        let edgeInsets = UIEdgeInsets(top: 5.0, left: 6.0, bottom: 3.0, right: 23.0)
+        let size = CGSize(width: titleSize.width + edgeInsets.horizontal, height: 24.0)
         
         return size
     }
@@ -150,7 +151,11 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         
         switch section {
         case is SourceOrDestinationFilterEditSection:
-            return cell(for: "StatisticsEditTableViewCell")
+            guard let cell = cell(for: "StatisticsEditTableViewCell") as? StatisticsEditTableViewCell else { return UITableViewCell() }
+            
+            cell.editButtonTitleLabel.text = viewModel.editFilterTitle
+            
+            return cell
         case is GraphSection:
             return cell(for: "GraphTableViewCell")
         case is HistoryTransactionsLoadingSection:
@@ -192,12 +197,12 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         guard   let section = viewModel.section(at: indexPath.section),
                 let historyTransactionsSection = section as? HistoryTransactionsSection,
                 let historyTransactionViewModel = historyTransactionsSection.historyTransactionViewModel(at: indexPath.row) else { return }
         
-        showEdit(historyTransaction: historyTransactionViewModel)
-        tableView.deselectRow(at: indexPath, animated: true)
+        showEdit(historyTransaction: historyTransactionViewModel)        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -205,7 +210,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         
         switch section {
         case is SourceOrDestinationFilterEditSection:
-            return 44.0
+            return 36.0
         case is GraphSection:
             return 145.0
         case is HistoryTransactionsLoadingSection:
@@ -280,6 +285,10 @@ extension StatisticsViewController {
     
     private func updateFiltersUI() {
         update(filtersCollectionView)
+        filtersHeightConstraint.constant = viewModel.hasSourceOrDestinationFilters ? 36.0 : 0.0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func updateHistoryTransactionsUI() {

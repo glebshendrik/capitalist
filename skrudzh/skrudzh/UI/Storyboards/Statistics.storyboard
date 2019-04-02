@@ -27,41 +27,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZf-m1-Nc8">
-                                <rect key="frame" x="0.0" y="64" width="375" height="42"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="24"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tqd-M8-erU">
-                                        <rect key="frame" x="16" y="11" width="359" height="20"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="16" y="0.0" width="359" height="24"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="rnW-Kl-Cfo"/>
+                                            <constraint firstAttribute="height" constant="24" id="rnW-Kl-Cfo"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YM5-5w-Aec">
-                                            <size key="itemSize" width="50" height="20"/>
+                                            <size key="itemSize" width="50" height="24"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilterCollectionViewCell" id="sfh-Vo-Xex" customClass="FilterCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="24"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HrN-Wm-alR">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="24"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XD2-ZK-AER">
-                                                                    <rect key="frame" x="6" y="3.5" width="31" height="13.5"/>
-                                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="11"/>
+                                                                    <rect key="frame" x="6" y="4.5" width="31" height="15.5"/>
+                                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1s-BI-bvH">
-                                                                    <rect key="frame" x="41" y="-1" width="5" height="22"/>
+                                                                    <rect key="frame" x="32" y="1" width="12" height="22"/>
                                                                     <color key="tintColor" red="0.59215686274509804" green="0.70196078431372544" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <state key="normal" image="filter-delete-icon"/>
+                                                                    <state key="normal" image="close-icon"/>
                                                                     <connections>
                                                                         <action selector="didTapDeleteButton:" destination="sfh-Vo-Xex" eventType="touchUpInside" id="hpG-8h-OIJ"/>
                                                                     </connections>
@@ -71,13 +71,13 @@
                                                             <constraints>
                                                                 <constraint firstItem="l1s-BI-bvH" firstAttribute="centerY" secondItem="XD2-ZK-AER" secondAttribute="centerY" id="910-lv-cyp"/>
                                                                 <constraint firstItem="XD2-ZK-AER" firstAttribute="leading" secondItem="HrN-Wm-alR" secondAttribute="leading" constant="6" id="9xf-gI-hQH"/>
-                                                                <constraint firstAttribute="trailing" secondItem="l1s-BI-bvH" secondAttribute="trailing" constant="4" id="Xpp-b6-o5X"/>
+                                                                <constraint firstAttribute="trailing" secondItem="l1s-BI-bvH" secondAttribute="trailing" constant="6" id="Xpp-b6-o5X"/>
                                                                 <constraint firstAttribute="trailing" secondItem="XD2-ZK-AER" secondAttribute="trailing" constant="13" id="nwp-nR-2HJ"/>
                                                                 <constraint firstItem="XD2-ZK-AER" firstAttribute="centerY" secondItem="HrN-Wm-alR" secondAttribute="centerY" id="wjX-fk-tvb"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="2"/>
+                                                                    <real key="value" value="3"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
@@ -97,12 +97,12 @@
                                         </cells>
                                     </collectionView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="tqd-M8-erU" firstAttribute="centerY" secondItem="KZf-m1-Nc8" secondAttribute="centerY" id="8Tm-12-3IM"/>
                                     <constraint firstItem="tqd-M8-erU" firstAttribute="leading" secondItem="KZf-m1-Nc8" secondAttribute="leading" constant="16" id="Oir-dc-Lpb"/>
                                     <constraint firstAttribute="trailing" secondItem="tqd-M8-erU" secondAttribute="trailing" id="rQJ-Tj-3Vk"/>
-                                    <constraint firstAttribute="height" constant="42" id="tgL-Eg-sFB"/>
+                                    <constraint firstAttribute="height" constant="24" id="tgL-Eg-sFB"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FIQ-VY-4e3">
@@ -175,9 +175,9 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="AAA-Y3-NVh">
-                                <rect key="frame" x="0.0" y="106" width="375" height="517"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <color key="sectionIndexBackgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="535"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StatisticsEditTableViewCell" id="vUJ-rh-AyW" customClass="StatisticsEditTableViewCell" customModule="skrudzh" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
@@ -186,20 +186,32 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lk-yR-Cvp">
-                                                    <rect key="frame" x="87.5" y="4" width="200" height="36"/>
-                                                    <color key="backgroundColor" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Редактировать источник дохода" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moL-Og-ncV">
+                                                    <rect key="frame" x="97.5" y="4" width="180" height="36"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                                                    <color key="textColor" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="8lk-yR-Cvp">
+                                                    <rect key="frame" x="97.5" y="4" width="180" height="36"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="Srb-91-61r"/>
-                                                        <constraint firstAttribute="width" constant="200" id="dDm-Td-NFp"/>
+                                                        <constraint firstAttribute="width" constant="180" id="dDm-Td-NFp"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                                    <state key="normal" title="РЕДАКТИРОВАТЬ">
+                                                    <state key="normal">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="18"/>
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="0.0"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
@@ -208,10 +220,18 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="moL-Og-ncV" firstAttribute="centerX" secondItem="B1h-Ut-IMj" secondAttribute="centerX" id="7q6-aJ-TYb"/>
                                                 <constraint firstItem="8lk-yR-Cvp" firstAttribute="centerY" secondItem="B1h-Ut-IMj" secondAttribute="centerY" id="N6e-O0-kbE"/>
+                                                <constraint firstItem="moL-Og-ncV" firstAttribute="height" secondItem="8lk-yR-Cvp" secondAttribute="height" id="afr-nu-3Gu"/>
+                                                <constraint firstItem="moL-Og-ncV" firstAttribute="width" secondItem="8lk-yR-Cvp" secondAttribute="width" id="fj4-9i-wki"/>
                                                 <constraint firstItem="8lk-yR-Cvp" firstAttribute="centerX" secondItem="B1h-Ut-IMj" secondAttribute="centerX" id="uhq-rz-oyR"/>
+                                                <constraint firstItem="moL-Og-ncV" firstAttribute="centerY" secondItem="B1h-Ut-IMj" secondAttribute="centerY" id="yNd-UC-WP4"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="editButton" destination="8lk-yR-Cvp" id="Ojj-7w-lq8"/>
+                                            <outlet property="editButtonTitleLabel" destination="moL-Og-ncV" id="1mS-9x-ZWt"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GraphTableViewCell" rowHeight="145" id="Idv-2e-wsd" customClass="GraphTableViewCell" customModule="skrudzh" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.5" width="375" height="145"/>
@@ -351,12 +371,12 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="KZf-m1-Nc8" firstAttribute="top" secondItem="5NP-Zg-AdE" secondAttribute="top" id="Abq-oV-Q7z"/>
                             <constraint firstItem="5NP-Zg-AdE" firstAttribute="trailing" secondItem="AAA-Y3-NVh" secondAttribute="trailing" id="Cf4-zP-655"/>
                             <constraint firstItem="FIQ-VY-4e3" firstAttribute="top" secondItem="AAA-Y3-NVh" secondAttribute="bottom" id="FuO-8f-Cn2"/>
                             <constraint firstItem="AAA-Y3-NVh" firstAttribute="top" secondItem="KZf-m1-Nc8" secondAttribute="bottom" id="K6I-2y-OB3"/>
-                            <constraint firstItem="KZf-m1-Nc8" firstAttribute="top" secondItem="5NP-Zg-AdE" secondAttribute="top" id="LbH-Fq-QLc"/>
                             <constraint firstItem="AAA-Y3-NVh" firstAttribute="leading" secondItem="5NP-Zg-AdE" secondAttribute="leading" id="Y1n-Vq-CT4"/>
                             <constraint firstItem="KZf-m1-Nc8" firstAttribute="leading" secondItem="5NP-Zg-AdE" secondAttribute="leading" id="ZCB-OB-mzy"/>
                             <constraint firstItem="5NP-Zg-AdE" firstAttribute="bottom" secondItem="FIQ-VY-4e3" secondAttribute="bottom" id="cPN-C8-T9g"/>
@@ -380,6 +400,7 @@
                         <outlet property="expensesAmountLabel" destination="2cp-9G-wuU" id="qDC-m1-2y7"/>
                         <outlet property="expensesContainer" destination="g8j-Gv-eiK" id="ju2-Ji-WhJ"/>
                         <outlet property="filtersCollectionView" destination="tqd-M8-erU" id="Mmi-Rj-psy"/>
+                        <outlet property="filtersHeightConstraint" destination="tgL-Eg-sFB" id="VOw-1b-ugK"/>
                         <outlet property="incomesAmountLabel" destination="j78-vr-Uk1" id="WpN-XE-hyL"/>
                         <outlet property="incomesContainer" destination="zT7-zl-Ckv" id="6MW-af-NGu"/>
                         <outlet property="tableView" destination="AAA-Y3-NVh" id="qNy-BQ-QaP"/>
@@ -391,7 +412,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="filter-delete-icon" width="5" height="5"/>
+        <image name="close-icon" width="12" height="12"/>
         <image name="filters-icon" width="18" height="17"/>
         <image name="joy-default-icon" width="20" height="20"/>
         <image name="loader-1" width="55" height="31"/>

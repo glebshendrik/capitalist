@@ -29,6 +29,18 @@ class FiltersViewModel {
         return sourceOrDestinationFilters.first
     }
     
+    var editFilterTitle: String? {
+        guard let filter = singleSourceOrDestinationFilter else { return nil }
+        switch filter.type {
+        case .incomeSource:
+            return "Редактировать источник дохода \"\(filter.title)\""
+        case .expenseSource:
+            return "Редактировать кошелек \"\(filter.title)\""
+        case .expenseCategory:
+            return "Редактировать категорию трат \"\(filter.title)\""
+        }
+    }
+    
     func set(sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter]) {
         self.sourceOrDestinationFilters = sourceOrDestinationFilters
     }

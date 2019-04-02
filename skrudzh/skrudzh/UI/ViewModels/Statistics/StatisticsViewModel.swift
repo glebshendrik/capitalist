@@ -120,6 +120,14 @@ extension StatisticsViewModel {
         return filtersViewModel.numberOfSourceOrDestinationFilters
     }
     
+    var editFilterTitle: String? {
+        return filtersViewModel.editFilterTitle
+    }
+    
+    var hasSourceOrDestinationFilters: Bool {
+        return numberOfSourceOrDestinationFilters > 0
+    }
+    
     var isSingleSourceOrDestinationFilterSelected: Bool {
         return filtersViewModel.isSingleSourceOrDestinationFilterSelected
     }
