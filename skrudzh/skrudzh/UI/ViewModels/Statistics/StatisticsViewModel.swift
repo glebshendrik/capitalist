@@ -108,6 +108,16 @@ extension StatisticsViewModel {
                     self.updatePresentationData()                    
                 }
     }
+    
+    func reloadFilterAndData() -> Promise<Void> {
+        setDataLoading()
+        return  firstly {
+                    when(fulfilled: filtersViewModel.reloadFilter(), historyTransactionsViewModel.loadData())
+                }.ensure {
+                    self.isDataLoading = false
+                    self.updatePresentationData()
+                }
+    }
 }
 
 // Filters

@@ -110,9 +110,8 @@ extension MainViewController {
         if viewModel.isAddCategoryItem(indexPath: indexPath, basketType: basketType) {
             showNewExpenseCategoryScreen(basketType: basketType)
         } else if let expenseCategoryViewModel = viewModel.expenseCategoryViewModel(at: indexPath, basketType: basketType) {
-            let filterViewModel = SourceOrDestinationHistoryTransactionFilter(id: expenseCategoryViewModel.id,
-                                                                              title: expenseCategoryViewModel.name,
-                                                                              type: .expenseCategory)
+            
+            let filterViewModel = ExpenseCategoryHistoryTransactionFilter(expenseCategoryViewModel: expenseCategoryViewModel)
             showStatistics(with: filterViewModel)
         }
     }

@@ -449,7 +449,9 @@ class ApplicationAssembly: Assembly {
         
         // FiltersViewModel
         container.register(FiltersViewModel.self) { r in
-            return FiltersViewModel()
+            return FiltersViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!,
+                                    expenseSourcesCoordinator: r.resolve(ExpenseSourcesCoordinatorProtocol.self)!,
+                                    expenseCategoriesCoordinator: r.resolve(ExpenseCategoriesCoordinatorProtocol.self)!)
         }
     }
     

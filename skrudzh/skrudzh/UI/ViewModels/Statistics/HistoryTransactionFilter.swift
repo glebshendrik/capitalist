@@ -24,30 +24,59 @@ class SourceOrDestinationHistoryTransactionFilter : HistoryTransactionFilter {
     }
 }
 
-class IncomeSourceHistoryTransactionFilter : SourceOrDestinationHistoryTransactionFilter {
+class SelectableSourceOrDestinationHistoryTransactionFilter : SourceOrDestinationHistoryTransactionFilter {
+    public private(set) var isSelected: Bool
+    
+    init(id: Int, title: String, type: HistoryTransactionSourceOrDestinationType, isSelected: Bool = false) {
+        self.isSelected = isSelected
+        super.init(id: id, title: title, type: type)
+    }
+    
+    func set(selected: Bool) {
+        isSelected = selected
+    }
+    
+    func toggle() {
+        set(selected: !isSelected)
+    }
+    
+    func select() {
+        set(selected: true)
+    }
+    
+    func deselect() {
+        set(selected: false)
+    }
+}
+
+class IncomeSourceHistoryTransactionFilter : SelectableSourceOrDestinationHistoryTransactionFilter {
     let incomeSourceViewModel: IncomeSourceViewModel
     
-    init(incomeSourceViewModel: IncomeSourceViewModel) {
+    init(incomeSourceViewModel: IncomeSourceViewModel, isSelected: Bool = false) {
         self.incomeSourceViewModel = incomeSourceViewModel
-        super.init(id: incomeSourceViewModel.id, title: incomeSourceViewModel.name, type: .incomeSource)
+        super.init(id: incomeSourceViewModel.id, title: incomeSourceViewModel.name, type: .incomeSource, isSelected: isSelected)
     }
 }
 
-class ExpenseSourceHistoryTransactionFilter : SourceOrDestinationHistoryTransactionFilter {
+class ExpenseSourceHistoryTransactionFilter : SelectableSourceOrDestinationHistoryTransactionFilter {
     let expenseSourceViewModel: ExpenseSourceViewModel
     
-    init(expenseSourceViewModel: ExpenseSourceViewModel) {
+    init(expenseSourceViewModel: ExpenseSourceViewModel, isSelected: Bool = false) {
         self.expenseSourceViewModel = expenseSourceViewModel
-        super.init(id: expenseSourceViewModel.id, title: expenseSourceViewModel.name, type: .expenseSource)
+        super.init(id: expenseSourceViewModel.id, title: expenseSourceViewModel.name, type: .expenseSource, isSelected: isSelected)
     }
 }
 
-class ExpenseCategoryHistoryTransactionFilter : SourceOrDestinationHistoryTransactionFilter {
+class ExpenseCategoryHistoryTransactionFilter : SelectableSourceOrDestinationHistoryTransactionFilter {
     let expenseCategoryViewModel: ExpenseCategoryViewModel
     
-    init(expenseCategoryViewModel: ExpenseCategoryViewModel) {
+    var basketType: BasketType {
+        return expenseCategoryViewModel.basketType
+    }
+    
+    init(expenseCategoryViewModel: ExpenseCategoryViewModel, isSelected: Bool = false) {
         self.expenseCategoryViewModel = expenseCategoryViewModel
-        super.init(id: expenseCategoryViewModel.id, title: expenseCategoryViewModel.name, type: .expenseCategory)
+        super.init(id: expenseCategoryViewModel.id, title: expenseCategoryViewModel.name, type: .expenseCategory, isSelected: isSelected)
     }
 }
 
@@ -90,6 +119,11 @@ class DateRangeHistoryTransactionFilter : HistoryTransactionFilter {
     }
     
     init(fromDate: Date, toDate: Date) {
+        self.fromDate = fromDate
+        self.toDate = toDate
+    }
+    
+    init(fromDate: Date?, toDate: Date?) {
         self.fromDate = fromDate
         self.toDate = toDate
     }

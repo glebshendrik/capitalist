@@ -36,9 +36,8 @@ extension MainViewController {
         if viewModel.isAddExpenseSourceItem(indexPath: indexPath) {
             showNewExpenseSourceScreen()
         } else if let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) {
-            let filterViewModel = SourceOrDestinationHistoryTransactionFilter(id: expenseSourceViewModel.id,
-                                                                              title: expenseSourceViewModel.name,
-                                                                              type: .expenseSource)
+            
+            let filterViewModel = ExpenseSourceHistoryTransactionFilter(expenseSourceViewModel: expenseSourceViewModel)
             showStatistics(with: filterViewModel)
         }
     }

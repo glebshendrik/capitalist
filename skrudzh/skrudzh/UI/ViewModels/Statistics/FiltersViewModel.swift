@@ -7,8 +7,13 @@
 //
 
 import Foundation
+import PromiseKit
 
 class FiltersViewModel {
+    private let incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol
+    private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
+    private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
+    
     public private(set) var sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter] = []
     public private(set) var dateRangeFilter: DateRangeHistoryTransactionFilter? = nil
     
@@ -41,6 +46,26 @@ class FiltersViewModel {
         }
     }
     
+    init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
+         expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
+         expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol) {
+        self.incomeSourcesCoordinator = incomeSourcesCoordinator
+        self.expenseSourcesCoordinator = expenseSourcesCoordinator
+        self.expenseCategoriesCoordinator = expenseCategoriesCoordinator
+    }
+    
+    func reloadFilter() -> Promise<Void> {
+        guard let filter = singleSourceOrDestinationFilter else { return Promise.value(()) }
+        switch filter.type {
+        case .incomeSource:
+            return updateIncomeSourceFilter(with: filter.id)
+        case .expenseSource:
+            return updateExpenseSourceFilter(with: filter.id)
+        case .expenseCategory:
+            return updateExpenseCategoryFilter(with: filter.id)
+        }
+    }
+    
     func set(sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter]) {
         self.sourceOrDestinationFilters = sourceOrDestinationFilters
     }
@@ -51,5 +76,38 @@ class FiltersViewModel {
     
     func sourceOrDestinationFilter(at indexPath: IndexPath) -> SourceOrDestinationHistoryTransactionFilter? {
         return sourceOrDestinationFilters.item(at: indexPath.row)
+    }
+    
+    private func updateIncomeSourceFilter(with id: Int) -> Promise<Void> {
+        return  firstly {
+                    incomeSourcesCoordinator.show(by: id)
+                }.get { incomeSource in
+                    let filter = SourceOrDestinationHistoryTransactionFilter(id: incomeSource.id,
+                                                                             title: incomeSource.name,
+                                                                             type: .incomeSource)
+                    self.set(sourceOrDestinationFilters: [filter])
+                }.asVoid()
+    }
+    
+    private func updateExpenseSourceFilter(with id: Int) -> Promise<Void> {
+        return  firstly {
+                    expenseSourcesCoordinator.show(by: id)
+                }.get { expenseSource in
+                    let filter = SourceOrDestinationHistoryTransactionFilter(id: expenseSource.id,
+                                                                             title: expenseSource.name,
+                                                                             type: .expenseSource)
+                    self.set(sourceOrDestinationFilters: [filter])
+                }.asVoid()
+    }
+    
+    private func updateExpenseCategoryFilter(with id: Int) -> Promise<Void> {
+        return  firstly {
+                    expenseCategoriesCoordinator.show(by: id)
+                }.get { expenseCategory in
+                    let filter = SourceOrDestinationHistoryTransactionFilter(id: expenseCategory.id,
+                                                                             title: expenseCategory.name,
+                                                                             type: .expenseCategory)
+                    self.set(sourceOrDestinationFilters: [filter])
+                }.asVoid()
     }
 }

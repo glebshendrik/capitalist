@@ -98,18 +98,18 @@ class HistoryTransactionsViewModel {
     
     private func loadDefaultCurrency() -> Promise<Void> {
         return  firstly {
-            accountCoordinator.loadCurrentUser()
-            }.get { user in
-                self.defaultCurrency = user.currency
-            }.asVoid()
+                    accountCoordinator.loadCurrentUser()
+                }.get { user in
+                    self.defaultCurrency = user.currency
+                }.asVoid()
     }
     
     private func loadHistoryTransactions() -> Promise<Void> {
         return  firstly {
-            historyTransactionsCoordinator.index()
-            }.get { historyTransactions in
-                self.allHistoryTransactionViewModels = historyTransactions.map { HistoryTransactionViewModel(historyTransaction: $0) }
-            }.asVoid()
+                    historyTransactionsCoordinator.index()
+                }.get { historyTransactions in
+                    self.allHistoryTransactionViewModels = historyTransactions.map { HistoryTransactionViewModel(historyTransaction: $0) }
+                }.asVoid()
     }
     
     private func loadExchangeRates() -> Promise<Void> {
@@ -118,15 +118,15 @@ class HistoryTransactionsViewModel {
         }
         let fromCurrencyCodes = allCurrencyCodes.filter { $0 != defaultCurrencyCode }
         return  firstly {
-            when(fulfilled: fromCurrencyCodes.map { loadExchangeRate(fromCurrencyCode: $0,
+                    when(fulfilled: fromCurrencyCodes.map { loadExchangeRate(fromCurrencyCode: $0,
                                                                      toCurrencyCode: defaultCurrencyCode)} )
-            }.get { rates in
-                self.exchangeRates = [String : Float]()
-                
-                for exchangeRate in rates {
-                    self.exchangeRates[exchangeRate.from] = exchangeRate.rate
-                }
-            }.asVoid()
+                }.get { rates in
+                    self.exchangeRates = [String : Float]()
+                    
+                    for exchangeRate in rates {
+                        self.exchangeRates[exchangeRate.from] = exchangeRate.rate
+                    }
+                }.asVoid()
     }
     
     private func loadExchangeRate(fromCurrencyCode: String, toCurrencyCode: String) -> Promise<ExchangeRate> {
