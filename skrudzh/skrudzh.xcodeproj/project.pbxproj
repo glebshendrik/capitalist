@@ -117,6 +117,10 @@
 		FA7276D5225361700086D4D1 /* SettingUpControllingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276D4225361700086D4D1 /* SettingUpControllingExtension.swift */; };
 		FA7276D822537BF30086D4D1 /* FiltersSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276D722537BF30086D4D1 /* FiltersSelectionViewModel.swift */; };
 		FA7276DA22539F510086D4D1 /* FiltersSelectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276D922539F510086D4D1 /* FiltersSelectionViewSection.swift */; };
+		FA7276DC225490490086D4D1 /* DateRangeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276DB225490490086D4D1 /* DateRangeCollectionViewCell.swift */; };
+		FA7276DE2254A0400086D4D1 /* SelectableFilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276DD2254A0400086D4D1 /* SelectableFilterCollectionViewCell.swift */; };
+		FA7276E02254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276DF2254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift */; };
+		FA7276E22254A6890086D4D1 /* FiltersSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276E12254A6890086D4D1 /* FiltersSelectionViewController.swift */; };
 		FA7CB4D7221C20B300FAAC0F /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4D6221C20B300FAAC0F /* Income.swift */; };
 		FA7CB4D9221C2A7D00FAAC0F /* IncomesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4D8221C2A7D00FAAC0F /* IncomesServiceProtocol.swift */; };
 		FA7CB4DB221C2C9D00FAAC0F /* IncomesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4DA221C2C9D00FAAC0F /* IncomesService.swift */; };
@@ -377,6 +381,10 @@
 		FA7276D4225361700086D4D1 /* SettingUpControllingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUpControllingExtension.swift; sourceTree = "<group>"; };
 		FA7276D722537BF30086D4D1 /* FiltersSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersSelectionViewModel.swift; sourceTree = "<group>"; };
 		FA7276D922539F510086D4D1 /* FiltersSelectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersSelectionViewSection.swift; sourceTree = "<group>"; };
+		FA7276DB225490490086D4D1 /* DateRangeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA7276DD2254A0400086D4D1 /* SelectableFilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableFilterCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA7276DF2254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersSelectionSectionHeaderView.swift; sourceTree = "<group>"; };
+		FA7276E12254A6890086D4D1 /* FiltersSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersSelectionViewController.swift; sourceTree = "<group>"; };
 		FA7CB4D6221C20B300FAAC0F /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		FA7CB4D8221C2A7D00FAAC0F /* IncomesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesServiceProtocol.swift; sourceTree = "<group>"; };
 		FA7CB4DA221C2C9D00FAAC0F /* IncomesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesService.swift; sourceTree = "<group>"; };
@@ -801,6 +809,7 @@
 			isa = PBXGroup;
 			children = (
 				FA7276D622537B880086D4D1 /* Statistics */,
+				FA7276E12254A6890086D4D1 /* FiltersSelectionViewController.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -818,6 +827,9 @@
 				FACC01FC224CC65B0044A747 /* StatisticsTitleView.swift */,
 				FACC0200224CCDEE0044A747 /* StatisticsTitleView.xib */,
 				FA927D2F224CE2BB002AA2CE /* FilterCollectionViewCell.swift */,
+				FA7276DB225490490086D4D1 /* DateRangeCollectionViewCell.swift */,
+				FA7276DD2254A0400086D4D1 /* SelectableFilterCollectionViewCell.swift */,
+				FA7276DF2254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -1317,6 +1329,7 @@
 				"${BUILT_PRODUCTS_DIR}/ALTextInputBar/ALTextInputBar.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/AlignedCollectionViewFlowLayout/AlignedCollectionViewFlowLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/CWStatusBarNotification/CWStatusBarNotification.framework",
 				"${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework",
@@ -1340,6 +1353,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ALTextInputBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlignedCollectionViewFlowLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CWStatusBarNotification.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressView.framework",
@@ -1490,7 +1504,9 @@
 				FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */,
 				FA0CAE1B21D66F9A00805288 /* IconsCoordinatorProtocol.swift in Sources */,
 				FAC3B9CB21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift in Sources */,
+				FA7276E22254A6890086D4D1 /* FiltersSelectionViewController.swift in Sources */,
 				FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */,
+				FA7276DE2254A0400086D4D1 /* SelectableFilterCollectionViewCell.swift in Sources */,
 				FA6918A421F0EF03003639F6 /* ExpenseCategoryEditTableController.swift in Sources */,
 				FAA4261222311C2100B64925 /* FundsMoveEditViewModel.swift in Sources */,
 				FA0CADFD21D257F400805288 /* ExpenseSource.swift in Sources */,
@@ -1558,6 +1574,7 @@
 				FA0CAE1D21D66FC200805288 /* IconsCoordinator.swift in Sources */,
 				FA7276B722524FBF0086D4D1 /* EditableCellDelegateExtension.swift in Sources */,
 				FA165CE621B6669500EAA16B /* LoginViewController.swift in Sources */,
+				FA7276DC225490490086D4D1 /* DateRangeCollectionViewCell.swift in Sources */,
 				FACC01E4224B52460044A747 /* StatisticsViewController.swift in Sources */,
 				FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */,
 				FA0CAE1721D66C8700805288 /* IconsServiceProtocol.swift in Sources */,
@@ -1574,6 +1591,7 @@
 				FAA9127B220C8B2500F2C251 /* SettingsViewModel.swift in Sources */,
 				FA0CAE1121D3C23000805288 /* ExpenseSourceEditViewModel.swift in Sources */,
 				FA817488222821DC00EE6116 /* ExchangeRatesService.swift in Sources */,
+				FA7276E02254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift in Sources */,
 				FA16FC69223A5A060053C273 /* IncomeSourcesViewModel.swift in Sources */,
 				FAA426062230F61E00B64925 /* FundsMovesService.swift in Sources */,
 				FAD88F5B21AEC1F800BE7BC1 /* DevicesServiceProtocol.swift in Sources */,

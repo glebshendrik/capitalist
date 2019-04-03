@@ -100,12 +100,12 @@ class DateRangeHistoryTransactionFilter : HistoryTransactionFilter {
     
     var fromDateString: String? {
         guard let fromDate = fromDate else { return nil }
-        return fromDate.dateString(ofStyle: .full)
+        return fromDate.dateString(ofStyle: .short)
     }
     
     var toDateString: String? {
         guard let toDate = toDate else { return nil }
-        return toDate.dateString(ofStyle: .full)
+        return toDate.dateString(ofStyle: .short)
     }
     
     init(fromDate: Date) {

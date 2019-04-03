@@ -42,43 +42,32 @@ class FiltersSelectionViewModel {
     
     var fromDateMaxDate: Date?
     var toDateMinDate: Date?
-    
-    var fromDateTitle: String? {
-        guard let fromDate = fromDate else {
-            return "Начало периода"
-        }
-        return fromDate.dateString(ofStyle: .full)
-    }
-    
-    var toDateTitle: String? {
-        guard let toDate = toDate else {
-            return "Конец периода"
-        }
-        return toDate.dateString(ofStyle: .full)
-    }
-    
-    var isFromDateSelected: Bool {
-        return fromDate != nil
-    }
-    
-    var isToDateSelected: Bool {
-        return toDate != nil
-    }
-    
+        
     private var incomeSourceFiltersSection: IncomeSourceFiltersSection? = nil
     private var expenseSourceFiltersSection: ExpenseSourceFiltersSection? = nil
     private var joyExpenseCategoryFiltersSection: JoyExpenseCategoryFiltersSection? = nil
     private var riskExpenseCategoryFiltersSection: RiskExpenseCategoryFiltersSection? = nil
     private var safeExpenseCategoryFiltersSection: SafeExpenseCategoryFiltersSection? = nil
     
-    private var sections: [FiltersSelectionViewSection] {
-        let collection: [FiltersSelectionViewSection?] = [DateRangeFilterSection(),
-                                                          incomeSourceFiltersSection,
-                                                          expenseSourceFiltersSection,
-                                                          joyExpenseCategoryFiltersSection,
-                                                          riskExpenseCategoryFiltersSection,
-                                                          safeExpenseCategoryFiltersSection]
-        return collection.compactMap { $0 }
+    private var sections: [FiltersSelectionViewSection] = []
+    
+    var selectedFilters: [SourceOrDestinationHistoryTransactionFilter] {
+        
+        let filtersSections: [SourceOrDestinationHistoryTransactionFiltersSection?] =
+            [incomeSourceFiltersSection,
+             expenseSourceFiltersSection,
+             joyExpenseCategoryFiltersSection,
+             riskExpenseCategoryFiltersSection,
+             safeExpenseCategoryFiltersSection]
+        
+        return filtersSections.compactMap { $0 }.flatMap { $0.selectedFilters }
+    }
+    
+    var selectedDateRangeFilter: DateRangeHistoryTransactionFilter? {
+        if fromDate == nil && toDate == nil {
+            return nil
+        }
+        return DateRangeHistoryTransactionFilter(fromDate: fromDate, toDate: toDate)
     }
     
     var numberOfSections: Int {
@@ -117,11 +106,25 @@ class FiltersSelectionViewModel {
     }
     
     func loadFilters() -> Promise<Void> {
-        return  when(fulfilled: loadIncomeSourceFilters(),
-                     loadExpenseSourceFilters(),
-                     loadExpenseCategoryFilters(basketType: .joy),
-                     loadExpenseCategoryFilters(basketType: .risk),
-                     loadExpenseCategoryFilters(basketType: .safe))
+        return  firstly {
+                    when(fulfilled: loadIncomeSourceFilters(),
+                         loadExpenseSourceFilters(),
+                         loadExpenseCategoryFilters(basketType: .joy),
+                         loadExpenseCategoryFilters(basketType: .risk),
+                         loadExpenseCategoryFilters(basketType: .safe))
+                }.ensure {
+                    self.setupSections()
+                }
+    }
+    
+    private func setupSections() {
+        let collection: [FiltersSelectionViewSection?] = [DateRangeFilterSection(),
+                                                          incomeSourceFiltersSection,
+                                                          expenseSourceFiltersSection,
+                                                          joyExpenseCategoryFiltersSection,
+                                                          riskExpenseCategoryFiltersSection,
+                                                          safeExpenseCategoryFiltersSection]
+        sections = collection.compactMap { $0 }
     }
     
     private func loadIncomeSourceFilters() -> Promise<Void> {

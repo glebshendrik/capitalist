@@ -39,7 +39,7 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
         navigationController?.navigationBar.barTintColor = UIColor.navBarColor
     }
     
-    @IBAction func didTapFiltersSelectionButton(_ sender: Any) {
-        showFiltersSelectionView()
-    }    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        prepareSegue(segue)
+    }
 }

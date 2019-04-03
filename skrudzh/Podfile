@@ -23,5 +23,6 @@ target 'skrudzh' do
   pod 'SkyFloatingLabelTextField'
   pod 'CircleProgressView', '~> 1.0'
   pod 'BEMCheckBox'
+  pod 'AlignedCollectionViewFlowLayout'
   pod 'ALTextInputBar', git: 'https://github.com/bclymer/ALTextInputBar', branch: 'master'
 end

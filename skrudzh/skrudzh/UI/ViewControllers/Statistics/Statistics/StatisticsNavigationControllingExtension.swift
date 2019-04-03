@@ -90,19 +90,33 @@ extension StatisticsViewController : IncomeSourceEditViewControllerDelegate, Exp
 
 extension StatisticsViewController : StatisticsEditTableViewCellDelegate {
     func didTapStatisticsEditButton() {
-        
+        // TODO
     }
 }
 
-extension StatisticsViewController {
-    func showFiltersSelectionView() {
+extension StatisticsViewController : FiltersSelectionViewControllerDelegate {
+    
+    func prepareSegue(_ segue: UIStoryboardSegue) {
+        guard   segue.identifier == "showFiltersSelectionScreen",
+                let destinationNavigationController = segue.destination as? UINavigationController,
+                let destination = destinationNavigationController.topViewController as? FiltersSelectionViewController else { return }
         
+        destination.delegate = self
+        destination.set(dateRangeFilter: viewModel.dateRangeFilter,
+                        sourceOrDestinationFilters: viewModel.sourceOrDestinationFilters)
+        
+    }
+    
+    func didSelectFilters(dateRangeFilter: DateRangeHistoryTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter]) {
+        
+        viewModel.set(dateRangeFilter: dateRangeFilter, sourceOrDestinationFilters: sourceOrDestinationFilters)
+        updateUI()
     }
 }
 
 extension StatisticsViewController {
     func showEdit(historyTransaction: HistoryTransactionViewModel) {
-        
+        // TODO
     }
 }
 

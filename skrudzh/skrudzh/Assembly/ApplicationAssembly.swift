@@ -74,6 +74,7 @@ struct Infrastructure {
         
         // Statistics
         case StatisticsViewController
+        case FiltersSelectionViewController
         
         var identifier: String {
             return self.rawValue
@@ -125,7 +126,8 @@ struct Infrastructure {
                 return .Onboarding
             case .SettingsViewController:
                 return .Settings
-            case .StatisticsViewController:
+            case .StatisticsViewController,
+                 .FiltersSelectionViewController:
                 return .Statistics
             }
         }
@@ -311,6 +313,12 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(StatisticsViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
+        
+        // FiltersSelectionViewController
+        container.registerForSkrudzhStoryboard(FiltersSelectionViewController.self) { (r, c) in
+            c.viewModel = r.resolve(FiltersSelectionViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -450,6 +458,13 @@ class ApplicationAssembly: Assembly {
         // FiltersViewModel
         container.register(FiltersViewModel.self) { r in
             return FiltersViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!,
+                                    expenseSourcesCoordinator: r.resolve(ExpenseSourcesCoordinatorProtocol.self)!,
+                                    expenseCategoriesCoordinator: r.resolve(ExpenseCategoriesCoordinatorProtocol.self)!)
+        }
+        
+        // FiltersSelectionViewModel
+        container.register(FiltersSelectionViewModel.self) { r in
+            return FiltersSelectionViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!,
                                     expenseSourcesCoordinator: r.resolve(ExpenseSourcesCoordinatorProtocol.self)!,
                                     expenseCategoriesCoordinator: r.resolve(ExpenseCategoriesCoordinatorProtocol.self)!)
         }

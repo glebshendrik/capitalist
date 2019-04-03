@@ -126,6 +126,10 @@ extension StatisticsViewModel {
         return filtersViewModel.dateRangeFilter
     }
     
+    var sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter] {
+        return filtersViewModel.sourceOrDestinationFilters
+    }
+    
     var numberOfSourceOrDestinationFilters: Int {
         return filtersViewModel.numberOfSourceOrDestinationFilters
     }
@@ -157,6 +161,12 @@ extension StatisticsViewModel {
     
     func set(dateRangeFilter: DateRangeHistoryTransactionFilter?) {
         filtersViewModel.set(dateRangeFilter: dateRangeFilter)
+        updatePresentationData()
+    }
+    
+    func set(dateRangeFilter: DateRangeHistoryTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter]) {
+        filtersViewModel.set(dateRangeFilter: dateRangeFilter)
+        filtersViewModel.set(sourceOrDestinationFilters: sourceOrDestinationFilters)
         updatePresentationData()
     }
     

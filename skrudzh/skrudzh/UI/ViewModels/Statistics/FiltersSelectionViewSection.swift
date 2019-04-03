@@ -24,6 +24,10 @@ class SourceOrDestinationHistoryTransactionFiltersSection : FiltersSelectionView
     
     private let filters: [SelectableSourceOrDestinationHistoryTransactionFilter]
     
+    var selectedFilters: [SourceOrDestinationHistoryTransactionFilter] {
+        return filters.filter { $0.isSelected } 
+    }
+    
     init(title: String, filters: [SelectableSourceOrDestinationHistoryTransactionFilter]) {
         self.title = title
         self.filters = filters

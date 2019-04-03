@@ -107,6 +107,14 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
         updateDateLabel()
     }
     
+    func set(date: Date?, minDate: Date?, maxDate: Date?, mode: UIDatePicker.Mode = .date) {
+        datePicker.date = date ?? Date()
+        datePicker.minimumDate = minDate
+        datePicker.maximumDate = maxDate ?? Date()
+        datePicker.datePickerMode = mode
+        updateDateLabel()
+    }
+    
     private func setupUI() {
         configureBackground()
         configureInputTextField()
@@ -149,7 +157,9 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
     }
     
     private func updateDateLabel() {
-        toolbarTitleLabel.text = datePicker.date.dateTimeString(ofStyle: .short)
+        toolbarTitleLabel.text = datePicker.datePickerMode == .dateAndTime ? datePicker.date.dateTimeString(ofStyle: .short) : datePicker.date.dateString(ofStyle: .short)
+        datePickerToolbar.updateConstraintsIfNeeded()
+        datePickerToolbar.sizeToFit()
     }
     
     private func close() {
