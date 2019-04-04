@@ -97,6 +97,9 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="pYA-eK-Fxt" kind="show" id="fO5-Yn-0Az"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="BE2-VS-Nrb" imageView="TGA-nL-Nni" style="IBUITableViewCellStyleDefault" id="bl8-wo-IKw">
                                         <rect key="frame" x="0.0" y="132" width="375" height="44"/>
@@ -229,6 +232,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xUd-UP-aEZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-165" y="252"/>
+        </scene>
+        <!--StatisticsViewController-->
+        <scene sceneID="w0Q-52-dal">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Statistics" referencedIdentifier="StatisticsViewController" id="pYA-eK-Fxt" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fzq-fX-swI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-182" y="367"/>
         </scene>
         <!--Dependent Income Source Creation Message View Controller-->
         <scene sceneID="r6F-K0-q6u">
@@ -2358,6 +2369,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="statistics-icon" id="Qvu-n8-Lri">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="pYA-eK-Fxt" kind="show" id="KwI-3J-1v6"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -5740,5 +5754,6 @@
         <segue reference="sFk-mx-J97"/>
         <segue reference="1gI-L1-F6i"/>
         <segue reference="YjD-qx-ivd"/>
+        <segue reference="KwI-3J-1v6"/>
     </inferredMetricsTieBreakers>
 </document>

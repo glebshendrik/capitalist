@@ -179,7 +179,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         
         firstly {
             viewModel.loadData()
-        }.catch { _ in
+        }.catch { 
             self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке данных",
                                               theme: .error)
             self.close()

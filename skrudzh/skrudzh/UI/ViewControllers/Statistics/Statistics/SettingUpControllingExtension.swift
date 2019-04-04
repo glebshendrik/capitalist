@@ -50,12 +50,15 @@ extension StatisticsViewController {
         viewModel.set(sourceOrDestinationFilter: sourceOrDestinationFilter)
     }
     
-    
-    
     func setupUI() {
         setupNavigationBar()
         setupFiltersUI()
         setupHistoryTransactionsUI()
+        setupFooterOverlayUI()
+    }
+    
+    func layoutSubviews() {
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: incomesContainer.frame.size.height, right: 0)
     }
     
     private func setupNavigationBar() {
@@ -75,6 +78,18 @@ extension StatisticsViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "HistoryTransactionsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: HistoryTransactionsSectionHeaderView.reuseIdentifier)
     }
+    
+    private func setupFooterOverlayUI() {        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = footerOverlayView.bounds
+        gradientLayer.colors = [
+            UIColor(red: 0.96, green: 0.97, blue: 1, alpha: 0.0).cgColor,
+            UIColor(red: 0.96, green: 0.97, blue: 1, alpha: 0.1).cgColor,
+            UIColor(red: 0.96, green: 0.97, blue: 1, alpha: 1).cgColor
+        ]
+        
+        footerOverlayView.layer.insertSublayer(gradientLayer, at: 0)
+    }
 }
 
 extension StatisticsViewController {
@@ -91,7 +106,7 @@ extension StatisticsViewController {
     
     private func updateFiltersUI() {
         update(filtersCollectionView)
-        filtersHeightConstraint.constant = viewModel.hasSourceOrDestinationFilters ? 36.0 : 0.0
+        filtersHeightConstraint.constant = viewModel.hasSourceOrDestinationFilters ? 36.0 : 0.0        
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }

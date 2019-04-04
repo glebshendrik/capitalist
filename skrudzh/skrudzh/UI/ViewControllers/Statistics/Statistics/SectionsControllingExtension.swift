@@ -96,7 +96,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         case is HistoryTransactionsHeaderSection:
             return 44.0
         case is HistoryTransactionsSection:
-            return 54.0
+            return 70.0
         default:
             return CGFloat.leastNonzeroMagnitude
         }

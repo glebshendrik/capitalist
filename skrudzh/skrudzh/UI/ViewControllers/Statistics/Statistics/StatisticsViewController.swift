@@ -27,16 +27,22 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
     @IBOutlet weak var expensesAmountLabel: UILabel!
     @IBOutlet weak var filtersHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var footerOverlayView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        updateUI()
         loadData(financialDataInvalidated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = UIColor.navBarColor
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        layoutSubviews()        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
