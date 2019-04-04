@@ -67,6 +67,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         super.viewDidLoad()
         setupUI()
         updateUI()
+        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -172,7 +173,25 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         }
     }
     
-    func loadExchangeRate() {
+    func loadData() {
+        setActivityIndicator(hidden: false)
+        saveButton.isEnabled = false
+        
+        firstly {
+            viewModel.loadData()
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке данных",
+                                              theme: .error)
+            self.close()
+        }.finally {
+            self.setActivityIndicator(hidden: true)
+            self.saveButton.isEnabled = true
+            self.updateUI()
+            self.needsFirstResponder()
+        }
+    }
+    
+    private func loadExchangeRate() {
         setActivityIndicator(hidden: false)
         saveButton.isEnabled = false
         
@@ -216,9 +235,6 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         setupNavigationBar()
         loaderImageView.showLoader()
         setActivityIndicator(hidden: true)
-        if viewModel.needCurrencyExchange {
-            loadExchangeRate()
-        }
     }
         
     private func setupNavigationBar() {

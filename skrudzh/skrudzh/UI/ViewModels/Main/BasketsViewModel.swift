@@ -27,7 +27,7 @@ class BasketsViewModel {
     
     var monthlySpent: String? {
         guard let currency = basketViewModels.first?.currency else { return nil }
-        return basketsMonthlySpentCents.moneyCurrencyString(with: currency)
+        return basketsMonthlySpentCents.moneyCurrencyString(with: currency, shouldRound: true)
     }
     
     var joyBasketRatio: CGFloat {

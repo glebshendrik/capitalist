@@ -20,6 +20,10 @@ class ExpensesCoordinator : ExpensesCoordinatorProtocol {
         return expensesService.create(with: creationForm)
     }
     
+    func show(by id: Int) -> Promise<Expense> {
+        return expensesService.show(by: id)
+    }
+    
     func update(with updatingForm: ExpenseUpdatingForm) -> Promise<Void> {
         return expensesService.update(with: updatingForm)
     }

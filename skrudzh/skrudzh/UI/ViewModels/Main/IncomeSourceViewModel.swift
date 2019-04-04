@@ -24,23 +24,27 @@ class IncomeSourceViewModel : TransactionStartable {
         return incomeSource.name
     }
     
-    var currency: Currency {
-        return incomeSource.currency
+    var amountRounded: String {
+        return amount(shouldRound: true)
     }
     
-    var incomesAmount: String {
-        return incomeSource.monthlyGotCents.moneyCurrencyString(with: currency) ?? ""
+    var amount: String {
+        return amount(shouldRound: false)
+    }
+    
+    var currency: Currency {
+        return incomeSource.currency
     }
     
     var iconURL: URL? {
         return nil
     }
     
-    var amount: String {
-        return incomesAmount
-    }
-    
     init(incomeSource: IncomeSource) {
         self.incomeSource = incomeSource
+    }
+    
+    private func amount(shouldRound: Bool) -> String {
+        return incomeSource.monthlyGotCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }
 }

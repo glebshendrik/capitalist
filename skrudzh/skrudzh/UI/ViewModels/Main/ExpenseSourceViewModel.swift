@@ -19,8 +19,12 @@ class ExpenseSourceViewModel {
         return expenseSource.name
     }
     
+    var amountRounded: String {
+        return amount(shouldRound: true)
+    }
+    
     var amount: String {
-        return expenseSource.amountCents.moneyCurrencyString(with: currency) ?? ""
+        return amount(shouldRound: false)
     }
     
     var currency: Currency {
@@ -49,7 +53,9 @@ class ExpenseSourceViewModel {
         self.expenseSource = expenseSource
     }
     
-    
+    private func amount(shouldRound: Bool) -> String {
+        return expenseSource.amountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
+    }
 }
 
 extension ExpenseSourceViewModel : TransactionStartable, TransactionCompletable {

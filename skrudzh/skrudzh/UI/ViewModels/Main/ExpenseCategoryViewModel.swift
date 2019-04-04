@@ -29,11 +29,15 @@ class ExpenseCategoryViewModel {
     }
     
     var monthlyPlanned: String? {
-        return expenseCategory.monthlyPlannedCents?.moneyCurrencyString(with: currency)
+        return expenseCategory.monthlyPlannedCents?.moneyCurrencyString(with: currency, shouldRound: true)
+    }
+    
+    var monthlySpentRounded: String? {
+        return monthlySpent(shouldRound: true)
     }
     
     var monthlySpent: String? {
-        return expenseCategory.monthlySpentCents.moneyCurrencyString(with: currency)
+        return monthlySpent(shouldRound: false)
     }
     
     var areMonthlyExpensesPlanned: Bool {
@@ -58,9 +62,17 @@ class ExpenseCategoryViewModel {
     init(expenseCategory: ExpenseCategory) {
         self.expenseCategory = expenseCategory
     }
+    
+    private func monthlySpent(shouldRound: Bool) -> String? {
+        return expenseCategory.monthlySpentCents.moneyCurrencyString(with: currency, shouldRound: shouldRound)
+    }
 }
 
 extension ExpenseCategoryViewModel : TransactionCompletable {
+    var amountRounded: String {
+        return monthlySpentRounded ?? ""
+    }
+    
     var amount: String {
         return monthlySpent ?? ""
     }

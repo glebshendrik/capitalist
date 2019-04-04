@@ -11,6 +11,7 @@ import PromiseKit
 
 protocol FundsMovesServiceProtocol {
     func create(with creationForm: FundsMoveCreationForm) -> Promise<FundsMove>
+    func show(by id: Int) -> Promise<FundsMove>
     func update(with updatingForm: FundsMoveUpdatingForm) -> Promise<Void>
     func destroy(by id: Int) -> Promise<Void>
 }

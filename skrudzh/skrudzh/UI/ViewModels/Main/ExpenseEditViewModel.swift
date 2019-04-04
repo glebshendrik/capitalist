@@ -31,11 +31,7 @@ class ExpenseEditViewModel : TransactionEditViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     
     private var expense: Expense? = nil
-    
-    override var isNew: Bool {
-        return expense == nil
-    }
-    
+        
     var expenseSourceStartable: ExpenseSourceViewModel? {
         return startable as? ExpenseSourceViewModel
     }
@@ -103,6 +99,10 @@ class ExpenseEditViewModel : TransactionEditViewModel {
         super.init(exchangeRatesCoordinator: exchangeRatesCoordinator)
     }
     
+    func set(expenseId: Int) {
+        transactionableId = expenseId
+    }
+    
     func set(expense: Expense) {
         self.expense = expense
         self.comment = expense.comment
@@ -114,6 +114,14 @@ class ExpenseEditViewModel : TransactionEditViewModel {
     func set(startable: ExpenseSourceViewModel, completable: ExpenseCategoryViewModel) {
         self.startable = startable
         self.completable = completable
+    }
+    
+    override func loadTransactionPromise(transactionableId: Int) -> Promise<Void> {
+        return  firstly {
+                    expensesCoordinator.show(by: transactionableId)
+                }.get { expense in
+                    self.set(expense: expense)
+                }.asVoid()
     }
     
     func isFormValid(amount: String?,

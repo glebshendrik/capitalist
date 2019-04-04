@@ -90,7 +90,61 @@ extension StatisticsViewController : IncomeSourceEditViewControllerDelegate, Exp
 
 extension StatisticsViewController : StatisticsEditTableViewCellDelegate {
     func didTapStatisticsEditButton() {
-        // TODO
+        guard let filter = viewModel.singleSourceOrDestinationFilter else { return }
+        
+        switch filter {
+        case let incomeSourceFilter as IncomeSourceHistoryTransactionFilter:
+            showEditScreen(incomeSource: incomeSourceFilter.incomeSourceViewModel.incomeSource)
+        case let expenseSourceFilter as ExpenseSourceHistoryTransactionFilter:
+            showEditScreen(expenseSource: expenseSourceFilter.expenseSourceViewModel.expenseSource)
+        case let expenseCategoryFilter as ExpenseCategoryHistoryTransactionFilter:
+            showEditScreen(expenseCategory: expenseCategoryFilter.expenseCategoryViewModel.expenseCategory, basketType: expenseCategoryFilter.basketType)
+        default:
+            return
+        }
+    }
+    
+    func showEditScreen(incomeSource: IncomeSource?) {
+        if  let incomeSourceEditNavigationController = router.viewController(.IncomeSourceEditNavigationController) as? UINavigationController,
+            let incomeSourceEditViewController = incomeSourceEditNavigationController.topViewController as? IncomeSourceEditInputProtocol {
+            
+            incomeSourceEditViewController.set(delegate: self)
+            
+            if let incomeSource = incomeSource {
+                incomeSourceEditViewController.set(incomeSource: incomeSource)
+            }
+            
+            present(incomeSourceEditNavigationController, animated: true, completion: nil)
+        }
+    }
+    
+    func showEditScreen(expenseSource: ExpenseSource?) {
+        if  let expenseSourceEditNavigationController = router.viewController(.ExpenseSourceEditNavigationController) as? UINavigationController,
+            let expenseSourceEditViewController = expenseSourceEditNavigationController.topViewController as? ExpenseSourceEditInputProtocol {
+            
+            expenseSourceEditViewController.set(delegate: self)
+            
+            if let expenseSource = expenseSource {
+                expenseSourceEditViewController.set(expenseSource: expenseSource)
+            }
+            
+            present(expenseSourceEditNavigationController, animated: true, completion: nil)
+        }
+    }
+    
+    func showEditScreen(expenseCategory: ExpenseCategory?, basketType: BasketType) {
+        if  let expenseCategoryEditNavigationController = router.viewController(.ExpenseCategoryEditNavigationController) as? UINavigationController,
+            let expenseCategoryEditViewController = expenseCategoryEditNavigationController.topViewController as? ExpenseCategoryEditInputProtocol {
+            
+            expenseCategoryEditViewController.set(delegate: self)
+            expenseCategoryEditViewController.set(basketType: basketType)
+            
+            if let expenseCategory = expenseCategory {
+                expenseCategoryEditViewController.set(expenseCategory: expenseCategory)
+            }
+            
+            present(expenseCategoryEditNavigationController, animated: true, completion: nil)
+        }
     }
 }
 
@@ -116,7 +170,52 @@ extension StatisticsViewController : FiltersSelectionViewControllerDelegate {
 
 extension StatisticsViewController {
     func showEdit(historyTransaction: HistoryTransactionViewModel) {
-        // TODO
+        switch historyTransaction.transactionableType {
+        case .income:
+            showIncomeEditScreen(incomeId: historyTransaction.transactionableId)
+        case .fundsMove:
+            showFundsMoveEditScreen(fundsMoveId: historyTransaction.transactionableId)
+        case .expense:
+            showExpenseEditScreen(expenseId: historyTransaction.transactionableId)
+        default:
+            return
+        }
+    }
+    
+    private func showIncomeEditScreen(incomeId: Int) {
+        if  let incomeEditNavigationController = router.viewController(.IncomeEditNavigationController) as? UINavigationController,
+            let incomeEditViewController = incomeEditNavigationController.topViewController as? IncomeEditInputProtocol {
+            
+            incomeEditViewController.set(delegate: self)
+            
+            incomeEditViewController.set(incomeId: incomeId)
+            
+            present(incomeEditNavigationController, animated: true, completion: nil)
+        }
+    }
+    
+    private func showFundsMoveEditScreen(fundsMoveId: Int) {
+        if  let fundsMoveEditNavigationController = router.viewController(.FundsMoveEditNavigationController) as? UINavigationController,
+            let fundsMoveEditViewController = fundsMoveEditNavigationController.topViewController as? FundsMoveEditInputProtocol {
+            
+            fundsMoveEditViewController.set(delegate: self)
+            
+            fundsMoveEditViewController.set(fundsMoveId: fundsMoveId)
+            
+            present(fundsMoveEditNavigationController, animated: true, completion: nil)
+        }
+    }
+    
+    private func showExpenseEditScreen(expenseId: Int) {
+        if  let expenseEditNavigationController = router.viewController(.ExpenseEditNavigationController) as? UINavigationController,
+            let expenseEditViewController = expenseEditNavigationController.topViewController as? ExpenseEditInputProtocol {
+            
+            expenseEditViewController.set(delegate: self)
+            
+            expenseEditViewController.set(expenseId: expenseId)
+            
+            present(expenseEditNavigationController, animated: true, completion: nil)
+        }
     }
 }
 

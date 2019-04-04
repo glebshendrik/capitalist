@@ -82,9 +82,7 @@ class FiltersViewModel {
         return  firstly {
                     incomeSourcesCoordinator.show(by: id)
                 }.get { incomeSource in
-                    let filter = SourceOrDestinationHistoryTransactionFilter(id: incomeSource.id,
-                                                                             title: incomeSource.name,
-                                                                             type: .incomeSource)
+                    let filter = IncomeSourceHistoryTransactionFilter(incomeSourceViewModel: IncomeSourceViewModel(incomeSource: incomeSource))
                     self.set(sourceOrDestinationFilters: [filter])
                 }.asVoid()
     }
@@ -93,9 +91,7 @@ class FiltersViewModel {
         return  firstly {
                     expenseSourcesCoordinator.show(by: id)
                 }.get { expenseSource in
-                    let filter = SourceOrDestinationHistoryTransactionFilter(id: expenseSource.id,
-                                                                             title: expenseSource.name,
-                                                                             type: .expenseSource)
+                    let filter = ExpenseSourceHistoryTransactionFilter(expenseSourceViewModel: ExpenseSourceViewModel(expenseSource: expenseSource))
                     self.set(sourceOrDestinationFilters: [filter])
                 }.asVoid()
     }
@@ -104,9 +100,7 @@ class FiltersViewModel {
         return  firstly {
                     expenseCategoriesCoordinator.show(by: id)
                 }.get { expenseCategory in
-                    let filter = SourceOrDestinationHistoryTransactionFilter(id: expenseCategory.id,
-                                                                             title: expenseCategory.name,
-                                                                             type: .expenseCategory)
+                    let filter = ExpenseCategoryHistoryTransactionFilter(expenseCategoryViewModel: ExpenseCategoryViewModel(expenseCategory: expenseCategory))
                     self.set(sourceOrDestinationFilters: [filter])
                 }.asVoid()
     }

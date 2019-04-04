@@ -142,7 +142,7 @@ class HistoryTransactionsViewModel {
                 ? $0.amountCents
                 : convert(amountCents: $0.amountCents, fromCurrency: $0.currency) }
             .sum()
-            .moneyCurrencyString(with: currency)
+            .moneyCurrencyString(with: currency, shouldRound: false)
     }
     
     private func convert(amountCents: Int, fromCurrency: Currency) -> Int {

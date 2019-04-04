@@ -46,7 +46,7 @@ class ExpenseCategoryTableViewCell : UITableViewCell {
         }
         
         nameLabel.text = viewModel.name
-        monthlySpentLabel.text = viewModel.monthlySpent
+        monthlySpentLabel.text = viewModel.monthlySpentRounded
         iconImageView.setImage(with: viewModel.iconURL,
                                placeholderName: defaultIconName(),
                                renderingMode: .alwaysTemplate)

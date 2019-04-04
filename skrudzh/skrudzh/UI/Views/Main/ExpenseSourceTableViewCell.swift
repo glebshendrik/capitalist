@@ -29,7 +29,7 @@ class ExpenseSourceTableViewCell : UITableViewCell {
     
     func updateUI() {
         nameLabel.text = viewModel?.name
-        amountLabel.text = viewModel?.amount
+        amountLabel.text = viewModel?.amountRounded
         iconImageView.setImage(with: viewModel?.iconURL,
                                placeholderName: placeholderName,
                                renderingMode: .alwaysTemplate)

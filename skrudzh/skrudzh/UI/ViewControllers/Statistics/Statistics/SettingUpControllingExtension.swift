@@ -10,11 +10,16 @@ import UIKit
 import PromiseKit
 
 extension StatisticsViewController {
-    func loadData() {
+    func loadData(financialDataInvalidated: Bool = true) {
         setLoading()
         _ = firstly {
                 viewModel.loadData()
-            }.catch { _ in
+            }.get{
+                if financialDataInvalidated {
+                    NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+                }
+            }
+            .catch { _ in
                 self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
             }.finally {
                 self.updateUI()
@@ -25,6 +30,8 @@ extension StatisticsViewController {
         setLoading()
         _ = firstly {
                 viewModel.reloadFilterAndData()
+            }.get{
+                NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
             }.catch { _ in
                 self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
             }.finally {

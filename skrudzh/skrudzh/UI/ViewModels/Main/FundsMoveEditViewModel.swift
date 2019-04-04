@@ -30,11 +30,7 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     private let fundsMovesCoordinator: FundsMovesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
     
-    private var fundsMove: FundsMove? = nil
-    
-    override var isNew: Bool {
-        return fundsMove == nil
-    }
+    private var fundsMove: FundsMove? = nil    
     
     var expenseSourceFromStartable: ExpenseSourceViewModel? {
         return startable as? ExpenseSourceViewModel
@@ -94,6 +90,10 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         super.init(exchangeRatesCoordinator: exchangeRatesCoordinator)
     }
     
+    func set(fundsMoveId: Int) {
+        transactionableId = fundsMoveId
+    }
+    
     func set(fundsMove: FundsMove) {
         self.fundsMove = fundsMove
         self.comment = fundsMove.comment
@@ -105,6 +105,14 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel) {
         self.startable = startable
         self.completable = completable
+    }
+    
+    override func loadTransactionPromise(transactionableId: Int) -> Promise<Void> {
+        return  firstly {
+                    fundsMovesCoordinator.show(by: transactionableId)
+                }.get { fundsMove in
+                    self.set(fundsMove: fundsMove)
+                }.asVoid()
     }
     
     func isFormValid(amount: String?,

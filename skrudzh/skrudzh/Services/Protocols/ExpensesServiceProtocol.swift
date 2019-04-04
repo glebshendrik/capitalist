@@ -11,6 +11,7 @@ import PromiseKit
 
 protocol ExpensesServiceProtocol {
     func create(with creationForm: ExpenseCreationForm) -> Promise<Expense>
+    func show(by id: Int) -> Promise<Expense>
     func update(with updatingForm: ExpenseUpdatingForm) -> Promise<Void>
     func destroy(by id: Int) -> Promise<Void>
 }

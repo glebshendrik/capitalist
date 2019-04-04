@@ -14,6 +14,10 @@ class IncomesService : Service, IncomesServiceProtocol {
         return request(APIResource.createIncome(form: creationForm))
     }
     
+    func show(by id: Int) -> Promise<Income> {
+        return request(APIResource.showIncome(id: id))
+    }
+    
     func update(with updatingForm: IncomeUpdatingForm) -> Promise<Void> {
         return request(APIResource.updateIncome(form: updatingForm))
     }

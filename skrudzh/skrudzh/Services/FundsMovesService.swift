@@ -14,6 +14,10 @@ class FundsMovesService : Service, FundsMovesServiceProtocol {
         return request(APIResource.createFundsMove(form: creationForm))
     }
     
+    func show(by id: Int) -> Promise<FundsMove> {
+        return request(APIResource.showFundsMove(id: id))
+    }
+    
     func update(with updatingForm: FundsMoveUpdatingForm) -> Promise<Void> {
         return request(APIResource.updateFundsMove(form: updatingForm))
     }

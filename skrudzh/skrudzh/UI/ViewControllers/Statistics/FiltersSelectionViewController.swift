@@ -28,13 +28,18 @@ class FiltersSelectionViewController : UIViewController, UIMessagePresenterManag
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-//        updateUI()
+        updateUI()
         loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = UIColor.navBarColor
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {

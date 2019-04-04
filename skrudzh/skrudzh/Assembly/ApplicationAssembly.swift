@@ -312,6 +312,7 @@ class ApplicationAssembly: Assembly {
         container.registerForSkrudzhStoryboard(StatisticsViewController.self) { (r, c) in
             c.viewModel = r.resolve(StatisticsViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+            c.router = r.resolve(ApplicationRouterProtocol.self)
         }
         
         // FiltersSelectionViewController

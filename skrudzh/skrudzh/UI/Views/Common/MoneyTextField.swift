@@ -194,7 +194,7 @@ extension Int {
         return Formatter.decimal(with: currency).string(from: moneyNumber(with: currency))
     }
     
-    func moneyCurrencyString(with currency: Currency, shouldRound: Bool = true) -> String? {
+    func moneyCurrencyString(with currency: Currency, shouldRound: Bool) -> String? {
         let formatter = Formatter.currency(with: currency)
         
         var number = moneyNumber(with: currency)

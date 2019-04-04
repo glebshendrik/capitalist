@@ -20,6 +20,10 @@ class IncomesCoordinator : IncomesCoordinatorProtocol {
         return incomesService.create(with: creationForm)
     }
     
+    func show(by id: Int) -> Promise<Income> {
+        return incomesService.show(by: id)
+    }
+    
     func update(with updatingForm: IncomeUpdatingForm) -> Promise<Void> {
         return incomesService.update(with: updatingForm)
     }

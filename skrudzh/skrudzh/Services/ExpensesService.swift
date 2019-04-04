@@ -14,6 +14,10 @@ class ExpensesService : Service, ExpensesServiceProtocol {
         return request(APIResource.createExpense(form: creationForm))
     }
     
+    func show(by id: Int) -> Promise<Expense> {
+        return request(APIResource.showExpense(id: id))
+    }
+    
     func update(with updatingForm: ExpenseUpdatingForm) -> Promise<Void> {
         return request(APIResource.updateExpense(form: updatingForm))
     }

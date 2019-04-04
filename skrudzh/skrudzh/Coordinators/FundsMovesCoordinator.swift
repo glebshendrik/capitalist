@@ -20,6 +20,10 @@ class FundsMovesCoordinator : FundsMovesCoordinatorProtocol {
         return fundsMovesService.create(with: creationForm)
     }
     
+    func show(by id: Int) -> Promise<FundsMove> {
+        return fundsMovesService.show(by: id)
+    }
+    
     func update(with updatingForm: FundsMoveUpdatingForm) -> Promise<Void> {
         return fundsMovesService.update(with: updatingForm)
     }

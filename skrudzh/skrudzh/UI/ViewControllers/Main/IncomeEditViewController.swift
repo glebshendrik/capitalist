@@ -17,7 +17,7 @@ protocol IncomeEditViewControllerDelegate {
 
 protocol IncomeEditInputProtocol {
     func set(delegate: IncomeEditViewControllerDelegate?)
-    func set(income: Income)
+    func set(incomeId: Int)
     func set(startable: IncomeSourceViewModel, completable: ExpenseSourceViewModel)
 }
 
@@ -107,8 +107,8 @@ extension IncomeEditViewController : IncomeEditInputProtocol {
         self.delegate = delegate
     }
     
-    func set(income: Income) {
-        incomeEditViewModel.set(income: income)
+    func set(incomeId: Int) {
+        incomeEditViewModel.set(incomeId: incomeId)
     }
     
     func set(startable: IncomeSourceViewModel, completable: ExpenseSourceViewModel) {

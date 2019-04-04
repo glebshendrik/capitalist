@@ -14,7 +14,7 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
     var navigationBarTintColor: UIColor? = UIColor.navBarColor
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: StatisticsViewModel!
-    
+    var router: ApplicationRouterProtocol!
     var titleView: StatisticsTitleView!
     
     @IBOutlet weak var tableView: UITableView!
@@ -31,7 +31,7 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
         super.viewDidLoad()
         setupUI()
         updateUI()
-        loadData()
+        loadData(financialDataInvalidated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {

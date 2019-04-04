@@ -81,7 +81,7 @@ class ExpenseCategoryCollectionViewCell : EditableCell {
         }
         
         nameLabel.text = viewModel.name
-        monthlySpentLabel.text = viewModel.monthlySpent
+        monthlySpentLabel.text = viewModel.monthlySpentRounded
         monthlyPlannedLabel.text = viewModel.monthlyPlanned
         monthlyPlannedLabel.isHidden = !viewModel.areMonthlyExpensesPlanned
         iconImageView.setImage(with: viewModel.iconURL,

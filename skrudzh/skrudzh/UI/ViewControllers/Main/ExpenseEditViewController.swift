@@ -17,7 +17,7 @@ protocol ExpenseEditViewControllerDelegate {
 
 protocol ExpenseEditInputProtocol {
     func set(delegate: ExpenseEditViewControllerDelegate?)
-    func set(expense: Expense)
+    func set(expenseId: Int)
     func set(startable: ExpenseSourceViewModel, completable: ExpenseCategoryViewModel)
 }
 
@@ -108,8 +108,8 @@ extension ExpenseEditViewController : ExpenseEditInputProtocol {
         self.delegate = delegate
     }
     
-    func set(expense: Expense) {
-        expenseEditViewModel.set(expense: expense)
+    func set(expenseId: Int) {
+        expenseEditViewModel.set(expenseId: expenseId)
     }
     
     func set(startable: ExpenseSourceViewModel, completable: ExpenseCategoryViewModel) {

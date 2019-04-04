@@ -9,8 +9,14 @@
 import Foundation
 import PromiseKit
 
+enum TransactionError : Error {
+    case transactionIsNotSpecified
+}
+
 class TransactionEditViewModel {
     private var exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol
+    
+    var transactionableId: Int?
     
     var startable: TransactionStartable? = nil
     var completable: TransactionCompletable? = nil
@@ -28,7 +34,9 @@ class TransactionEditViewModel {
     var comment: String? = nil
     var gotAt: Date? = nil
     
-    var isNew: Bool { return true }
+    var isNew: Bool {
+        return transactionableId == nil        
+    }
     
     var hasComment: Bool {
         guard let comment = comment else { return false }
@@ -97,17 +105,15 @@ class TransactionEditViewModel {
         self.exchangeRatesCoordinator = exchangeRatesCoordinator
     }
     
-    func loadExchangeRate() -> Promise<Void> {
-        guard   needCurrencyExchange,
-                let fromCurrencyCode = startableCurrencyCode,
-                let toCurrencyCode = completableCurrencyCode else {
-            return Promise.value(())
+    func loadData() -> Promise<Void> {
+        if isNew {
+            return loadExchangeRate()
         }
-        return  firstly {
-                    exchangeRatesCoordinator.show(from: fromCurrencyCode, to: toCurrencyCode)
-                }.done { exchangeRate in
-                    self.exchangeRate = exchangeRate.rate
-                }
+        return loadTransaction()
+    }
+    
+    func loadTransactionPromise(transactionableId: Int) -> Promise<Void> {
+        return Promise.value(())
     }
     
     func convert(amount: String?, isForwardConversion: Bool = true) -> String? {
@@ -137,5 +143,29 @@ class TransactionEditViewModel {
         let convertedAmountCents = convert()
             
         return convertedAmountCents.moneyDecimalString(with: isForwardConversion ? convertedCurrency : currency)
+    }
+    
+    func loadExchangeRate() -> Promise<Void> {
+        guard   needCurrencyExchange,
+            let fromCurrencyCode = startableCurrencyCode,
+            let toCurrencyCode = completableCurrencyCode else {
+                return Promise.value(())
+        }
+        return  firstly {
+                    exchangeRatesCoordinator.show(from: fromCurrencyCode, to: toCurrencyCode)
+                }.done { exchangeRate in
+                    self.exchangeRate = exchangeRate.rate
+                }
+    }
+    
+    private func loadTransaction() -> Promise<Void> {
+        guard let transactionableId = transactionableId else {
+            return Promise(error: TransactionError.transactionIsNotSpecified)
+        }
+        return  firstly {
+                    loadTransactionPromise(transactionableId: transactionableId)
+                }.then {
+                    self.loadExchangeRate()
+                }
     }
 }

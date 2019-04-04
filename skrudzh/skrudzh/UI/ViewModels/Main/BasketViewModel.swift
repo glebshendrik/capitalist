@@ -29,7 +29,7 @@ class BasketViewModel {
     }
     
     var monthlySpent: String? {
-        return monthlySpentCents.moneyCurrencyString(with: currency)
+        return monthlySpentCents.moneyCurrencyString(with: currency, shouldRound: true)
     }
     
     var selected: Bool = false

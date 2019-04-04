@@ -20,6 +20,6 @@ class IncomeSourceTableViewCell : UITableViewCell {
     
     func updateUI() {
         nameLabel.text = viewModel?.name
-        incomeAmountLabel.text = viewModel?.incomesAmount
+        incomeAmountLabel.text = viewModel?.amountRounded
     }
 }

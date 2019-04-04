@@ -17,7 +17,7 @@ protocol FundsMoveEditViewControllerDelegate {
 
 protocol FundsMoveEditInputProtocol {
     func set(delegate: FundsMoveEditViewControllerDelegate?)
-    func set(fundsMove: FundsMove)
+    func set(fundsMoveId: Int)
     func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel)
 }
 
@@ -110,8 +110,8 @@ extension FundsMoveEditViewController : FundsMoveEditInputProtocol {
         self.delegate = delegate
     }
     
-    func set(fundsMove: FundsMove) {
-        fundsMoveEditViewModel.set(fundsMove: fundsMove)
+    func set(fundsMoveId: Int) {
+        fundsMoveEditViewModel.set(fundsMoveId: fundsMoveId)
     }
     
     func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel) {

@@ -13,6 +13,7 @@ protocol Transactionable {
     var name: String { get }
     var iconURL: URL? { get }
     var currency: Currency { get }
+    var amountRounded: String { get }
     var amount: String { get }
 }
 
