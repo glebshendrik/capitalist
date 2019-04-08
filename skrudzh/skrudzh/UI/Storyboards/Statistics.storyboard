@@ -164,29 +164,32 @@
                                             <outlet property="editButtonTitleLabel" destination="moL-Og-ncV" id="1mS-9x-ZWt"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GraphTableViewCell" rowHeight="145" id="Idv-2e-wsd" customClass="GraphTableViewCell" customModule="skrudzh" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99.5" width="375" height="145"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GraphTableViewCell" rowHeight="300" id="Idv-2e-wsd" customClass="GraphTableViewCell" customModule="skrudzh" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="99.5" width="375" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Idv-2e-wsd" id="Grw-HC-76U">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="График" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H05-UG-hGt">
-                                                    <rect key="frame" x="158" y="62" width="59" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DuS-0d-Ama" customClass="LineChartView" customModule="Charts">
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="300"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="H05-UG-hGt" firstAttribute="centerY" secondItem="Grw-HC-76U" secondAttribute="centerY" id="ddQ-dc-Tgk"/>
-                                                <constraint firstItem="H05-UG-hGt" firstAttribute="centerX" secondItem="Grw-HC-76U" secondAttribute="centerX" id="qQ5-bC-pMg"/>
+                                                <constraint firstAttribute="bottom" secondItem="DuS-0d-Ama" secondAttribute="bottom" id="JF7-Tn-v7C"/>
+                                                <constraint firstAttribute="trailing" secondItem="DuS-0d-Ama" secondAttribute="trailing" constant="16" id="NSD-bq-PIM"/>
+                                                <constraint firstItem="DuS-0d-Ama" firstAttribute="top" secondItem="Grw-HC-76U" secondAttribute="top" id="lvj-Ml-DDc"/>
+                                                <constraint firstItem="DuS-0d-Ama" firstAttribute="leading" secondItem="Grw-HC-76U" secondAttribute="leading" constant="16" id="ve4-3A-oHy"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="lineChartView" destination="DuS-0d-Ama" id="Rt4-SO-lsp"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryTransactionsLoadingTableViewCell" id="NcV-Ca-dcd" customClass="HistoryTransactionsLoadingTableViewCell" customModule="skrudzh" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="244.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="399.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NcV-Ca-dcd" id="99w-HQ-OH2">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -207,7 +210,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryTransactionsHeaderTableViewCell" id="PR7-Na-oq4" customClass="HistoryTransactionsHeaderTableViewCell" customModule="skrudzh" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="288.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="443.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PR7-Na-oq4" id="LYc-0d-zRs">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -229,7 +232,7 @@
                                         <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryTransactionTableViewCell" rowHeight="70" id="RXu-p2-jsG" customClass="HistoryTransactionTableViewCell" customModule="skrudzh" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="332.5" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="487.5" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RXu-p2-jsG" id="36k-HC-LTK">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>

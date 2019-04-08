@@ -35,7 +35,11 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             
             return cell
         case is GraphSection:
-            return cell(for: "GraphTableViewCell")
+            guard let cell = cell(for: "GraphTableViewCell") as? GraphTableViewCell else { return UITableViewCell() }
+                        
+            cell.viewModel = viewModel.graphViewModel
+            
+            return cell
         case is HistoryTransactionsLoadingSection:
             return cell(for: "HistoryTransactionsLoadingTableViewCell")
         case is HistoryTransactionsHeaderSection:
@@ -90,7 +94,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         case is SourceOrDestinationFilterEditSection:
             return 36.0
         case is GraphSection:
-            return 145.0
+            return 300.0
         case is HistoryTransactionsLoadingSection:
             return 44.0
         case is HistoryTransactionsHeaderSection:

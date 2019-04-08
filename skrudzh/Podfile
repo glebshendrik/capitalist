@@ -25,4 +25,5 @@ target 'skrudzh' do
   pod 'BEMCheckBox'
   pod 'AlignedCollectionViewFlowLayout'
   pod 'ALTextInputBar', git: 'https://github.com/bclymer/ALTextInputBar', branch: 'master'
+  pod 'Charts'
 end

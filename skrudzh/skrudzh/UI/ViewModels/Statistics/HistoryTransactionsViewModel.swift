@@ -14,18 +14,19 @@ class HistoryTransactionsViewModel {
     private let historyTransactionsCoordinator: HistoryTransactionsCoordinatorProtocol
     private let exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
+    private let currencyConverter: CurrencyConverterProtocol
     
-    private var defaultCurrency: Currency? = nil
     private var allCurrencyCodes: [String] = []
+    private var defaultCurrency: Currency? = nil
     private var exchangeRates: [String : Float] = [String : Float]()
+    
+    public private(set) var filteredHistoryTransactionViewModels: [HistoryTransactionViewModel] = []
     
     private var allHistoryTransactionViewModels: [HistoryTransactionViewModel] = [] {
         didSet {
             allCurrencyCodes = allHistoryTransactionViewModels.map { $0.currency.code }.withoutDuplicates()
         }
     }
-    
-    public private(set) var filteredHistoryTransactionViewModels: [HistoryTransactionViewModel] = []
     
     var hasIncomeTransactions: Bool {
         return filteredHistoryTransactionViewModels.any { $0.sourceType == .incomeSource }
@@ -45,10 +46,12 @@ class HistoryTransactionsViewModel {
     
     init(historyTransactionsCoordinator: HistoryTransactionsCoordinatorProtocol,
          exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol,
+         currencyConverter: CurrencyConverterProtocol) {
         self.historyTransactionsCoordinator = historyTransactionsCoordinator
         self.exchangeRatesCoordinator = exchangeRatesCoordinator
         self.accountCoordinator = accountCoordinator
+        self.currencyConverter = currencyConverter
     }
     
     func loadData() -> Promise<Void> {
@@ -136,20 +139,44 @@ class HistoryTransactionsViewModel {
     private func historyTransactionsAmount(type: HistoryTransactionSourceOrDestinationType) -> String? {
         guard let currency = defaultCurrency else { return nil }
         
-        return filteredHistoryTransactionViewModels
+        let transactions = filteredHistoryTransactionViewModels
             .filter { $0.sourceType == type || $0.destinationType == type }
-            .map { $0.currency.code == currency.code
-                ? $0.amountCents
-                : convert(amountCents: $0.amountCents, fromCurrency: $0.currency) }
-            .sum()
-            .moneyCurrencyString(with: currency, shouldRound: false)
+        
+        let amount = historyTransactionsAmount(transactions: transactions)
+        
+        return amount.moneyCurrencyString(with: currency, shouldRound: false)
     }
     
-    private func convert(amountCents: Int, fromCurrency: Currency) -> Int {
+    func historyTransactionsAmount(transactions: [HistoryTransactionViewModel]) -> NSDecimalNumber {
+        guard let currency = defaultCurrency else { return 0.0 }
+        
+        return transactions
+            .map { $0.currency.code == currency.code
+                ? NSDecimalNumber(integerLiteral: $0.amountCents)
+                : convert(cents: $0.amountCents, fromCurrency: $0.currency, toCurrency: currency) }
+            .reduce(0, +)
+    }
+    
+    func historyTransactionsAmountMoney(transactions: [HistoryTransactionViewModel]) -> NSDecimalNumber {
+        guard let currency = defaultCurrency else { return 0.0 }
+        
+        return historyTransactionsAmount(transactions: transactions).moneyNumber(with: currency)
+    }
+    
+    private func convert(cents: Int, fromCurrency: Currency, toCurrency: Currency) -> NSDecimalNumber {
+        
         guard let exchangeRate = exchangeRates[fromCurrency.code] else { return 0 }
         
-        let convertedAmountCents = Int((Float(amountCents) * exchangeRate).rounded())
-        
-        return convertedAmountCents
+        return currencyConverter.convert(cents: cents,
+                                         fromCurrency: fromCurrency,
+                                         toCurrency: toCurrency,
+                                         exchangeRate: Double(exchangeRate),
+                                         forward: true)
+    }
+    
+    func roundedAmountString(amountCents: Double) -> String? {
+        guard let currency = defaultCurrency else { return nil }
+        let amount = NSDecimalNumber(floatLiteral: amountCents)
+        return amount.moneyCurrencyString(with: currency, shouldRound: true)
     }
 }

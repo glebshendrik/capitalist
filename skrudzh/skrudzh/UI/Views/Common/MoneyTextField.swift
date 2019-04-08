@@ -182,17 +182,6 @@ extension NSDecimalNumber {
     func moneyDecimalString(with currency: Currency) -> String? {
         return Formatter.decimal(with: currency).string(from: moneyNumber(with: currency))
     }
-}
-
-extension Int {
-    func moneyNumber(with currency: Currency) -> NSDecimalNumber {
-        let divideFactor = NSDecimalNumber(value: currency.subunitToUnit)
-        return NSDecimalNumber(value: self).dividing(by: divideFactor)
-    }
-    
-    func moneyDecimalString(with currency: Currency) -> String? {
-        return Formatter.decimal(with: currency).string(from: moneyNumber(with: currency))
-    }
     
     func moneyCurrencyString(with currency: Currency, shouldRound: Bool) -> String? {
         let formatter = Formatter.currency(with: currency)
@@ -217,7 +206,7 @@ extension Int {
         if let abbreviation = abbreviation {
             number = number.dividing(by: abbreviation.divisor)
         }
-
+        
         if shouldRound {
             let roundingHandler = NSDecimalNumberHandler(roundingMode: .down,
                                                          scale: 0,
@@ -252,7 +241,25 @@ extension Int {
             formattedString.remove(at: indexOfSpace)
             return formattedString
         }
-
+        
         return formattedString
+    }
+}
+
+func +(lhs: NSDecimalNumber, rhs: NSDecimalNumber) -> NSDecimalNumber {
+    return lhs.adding(rhs)
+}
+
+extension Int {
+    func moneyNumber(with currency: Currency) -> NSDecimalNumber {
+        return NSDecimalNumber(integerLiteral: self).moneyNumber(with: currency)
+    }
+    
+    func moneyDecimalString(with currency: Currency) -> String? {
+        return NSDecimalNumber(integerLiteral: self).moneyDecimalString(with: currency)
+    }
+    
+    func moneyCurrencyString(with currency: Currency, shouldRound: Bool) -> String? {
+        return NSDecimalNumber(integerLiteral: self).moneyCurrencyString(with: currency, shouldRound: shouldRound)
     }
 }

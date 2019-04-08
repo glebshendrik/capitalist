@@ -64,6 +64,10 @@ class ManagersAssembly: Assembly {
             return SoundsManager()
         }.inObjectScope(.container)
         
+        // CurrencyConverterProtocol
+        container.register(CurrencyConverterProtocol.self) { r in
+            return CurrencyConverter()
+        }.inObjectScope(.container)
     }
     
 }

@@ -84,10 +84,11 @@ class IncomeEditViewModel : TransactionEditViewModel {
     
     init(incomesCoordinator: IncomesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
-         exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol) {
+         exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
+         currencyConverter: CurrencyConverterProtocol) {
         self.incomesCoordinator = incomesCoordinator
         self.accountCoordinator = accountCoordinator
-        super.init(exchangeRatesCoordinator: exchangeRatesCoordinator)        
+        super.init(exchangeRatesCoordinator: exchangeRatesCoordinator, currencyConverter: currencyConverter)
     }
     
     func set(incomeId: Int) {

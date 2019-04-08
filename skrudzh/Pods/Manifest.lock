@@ -5,6 +5,9 @@ PODS:
   - AlignedCollectionViewFlowLayout (1.1.2)
   - ALTextInputBar (1.1.8)
   - BEMCheckBox (1.4.1)
+  - Charts (3.2.1):
+    - Charts/Core (= 3.2.1)
+  - Charts/Core (3.2.1)
   - CircleProgressView (1.2.0)
   - CWStatusBarNotification (2.3.5)
   - IQKeyboardManager (6.2.0)
@@ -55,6 +58,7 @@ DEPENDENCIES:
   - AlignedCollectionViewFlowLayout
   - ALTextInputBar (from `https://github.com/bclymer/ALTextInputBar`, branch `master`)
   - BEMCheckBox
+  - Charts
   - CircleProgressView (~> 1.0)
   - CWStatusBarNotification (~> 2.3)
   - IQKeyboardManager
@@ -77,6 +81,7 @@ SPEC REPOS:
     - AlamofireImage
     - AlignedCollectionViewFlowLayout
     - BEMCheckBox
+    - Charts
     - CircleProgressView
     - CWStatusBarNotification
     - IQKeyboardManager
@@ -108,6 +113,7 @@ SPEC CHECKSUMS:
   AlignedCollectionViewFlowLayout: ee2ef451e741ec08f8e0967d828001e2f051c20a
   ALTextInputBar: 6c160c51958903c5f7b9d158e19f9c4113ae351b
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
+  Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
   CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
@@ -123,6 +129,6 @@ SPEC CHECKSUMS:
   Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
 
-PODFILE CHECKSUM: 94578fc7b73243c6db255eaf35154ea763489631
+PODFILE CHECKSUM: a27c2e1708acdfe158030f724842288e58d200e4
 
 COCOAPODS: 1.5.3

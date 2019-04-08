@@ -84,10 +84,11 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     
     init(fundsMovesCoordinator: FundsMovesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
-         exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol) {
+         exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
+         currencyConverter: CurrencyConverterProtocol) {
         self.fundsMovesCoordinator = fundsMovesCoordinator
         self.accountCoordinator = accountCoordinator
-        super.init(exchangeRatesCoordinator: exchangeRatesCoordinator)
+        super.init(exchangeRatesCoordinator: exchangeRatesCoordinator, currencyConverter: currencyConverter)
     }
     
     func set(fundsMoveId: Int) {

@@ -93,10 +93,11 @@ class ExpenseEditViewModel : TransactionEditViewModel {
     
     init(expensesCoordinator: ExpensesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
-         exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol) {
+         exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
+         currencyConverter: CurrencyConverterProtocol) {
         self.expensesCoordinator = expensesCoordinator
         self.accountCoordinator = accountCoordinator
-        super.init(exchangeRatesCoordinator: exchangeRatesCoordinator)
+        super.init(exchangeRatesCoordinator: exchangeRatesCoordinator, currencyConverter: currencyConverter)
     }
     
     func set(expenseId: Int) {

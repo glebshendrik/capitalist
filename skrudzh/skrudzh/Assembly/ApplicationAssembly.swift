@@ -411,21 +411,24 @@ class ApplicationAssembly: Assembly {
         container.register(IncomeEditViewModel.self) { r in
             return IncomeEditViewModel(incomesCoordinator: r.resolve(IncomesCoordinatorProtocol.self)!,
                                        accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!,
-                                       exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!)
+                                       exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!,
+                                       currencyConverter: r.resolve(CurrencyConverterProtocol.self)!)
         }
         
         // ExpenseEditViewModel
         container.register(ExpenseEditViewModel.self) { r in
             return ExpenseEditViewModel(expensesCoordinator: r.resolve(ExpensesCoordinatorProtocol.self)!,
                                        accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!,
-                                       exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!)
+                                       exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!,
+                                       currencyConverter: r.resolve(CurrencyConverterProtocol.self)!)
         }
         
         // FundMoveEditViewModel
         container.register(FundsMoveEditViewModel.self) { r in
             return FundsMoveEditViewModel(fundsMovesCoordinator: r.resolve(FundsMovesCoordinatorProtocol.self)!,
                                         accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!,
-                                        exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!)
+                                        exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!,
+                                        currencyConverter: r.resolve(CurrencyConverterProtocol.self)!)
         }
         
         // IncomeSourcesViewModel
@@ -453,7 +456,7 @@ class ApplicationAssembly: Assembly {
         container.register(HistoryTransactionsViewModel.self) { r in
             return HistoryTransactionsViewModel(historyTransactionsCoordinator: r.resolve(HistoryTransactionsCoordinatorProtocol.self)!,
                                                 exchangeRatesCoordinator: r.resolve(ExchangeRatesCoordinatorProtocol.self)!,
-                                                accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!)
+                                                accountCoordinator: r.resolve(AccountCoordinatorProtocol.self)!, currencyConverter: r.resolve(CurrencyConverterProtocol.self)!)
         }
         
         // FiltersViewModel

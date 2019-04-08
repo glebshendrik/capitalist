@@ -14,7 +14,8 @@ enum TransactionError : Error {
 }
 
 class TransactionEditViewModel {
-    private var exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol
+    private let exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol
+    private let currencyConverter: CurrencyConverterProtocol
     
     var transactionableId: Int?
     
@@ -101,8 +102,10 @@ class TransactionEditViewModel {
     
     var exchangeRate: Float = 1.0
     
-    init(exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol) {
+    init(exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
+         currencyConverter: CurrencyConverterProtocol) {
         self.exchangeRatesCoordinator = exchangeRatesCoordinator
+        self.currencyConverter = currencyConverter
     }
     
     func loadData() -> Promise<Void> {
@@ -121,26 +124,7 @@ class TransactionEditViewModel {
                 let convertedCurrency = completableCurrency,
             let amountCents = amount?.intMoney(with: isForwardConversion ? currency : convertedCurrency) else { return nil }
         
-        let amountCentsNumber = NSDecimalNumber(integerLiteral: amountCents)
-        let currencySubunitToUnit = NSDecimalNumber(integerLiteral: currency.subunitToUnit)
-        let convertedCurrencySubunitToUnit = NSDecimalNumber(integerLiteral: convertedCurrency.subunitToUnit)
-        let exchangeRateNumber = NSDecimalNumber(floatLiteral: Double(exchangeRate))
-        
-        func convert() -> NSDecimalNumber {
-            if isForwardConversion {
-                return amountCentsNumber
-                            .multiplying(by: convertedCurrencySubunitToUnit)
-                            .multiplying(by: exchangeRateNumber)
-                            .dividing(by: currencySubunitToUnit)
-            }
-            return amountCentsNumber
-                .dividing(by: exchangeRateNumber
-                                    .multiplying(by: convertedCurrencySubunitToUnit)
-                                    .dividing(by: currencySubunitToUnit))
-        }
-        
-        
-        let convertedAmountCents = convert()
+        let convertedAmountCents = currencyConverter.convert(cents: amountCents, fromCurrency: currency, toCurrency: convertedCurrency, exchangeRate: Double(exchangeRate), forward: isForwardConversion)
             
         return convertedAmountCents.moneyDecimalString(with: isForwardConversion ? convertedCurrency : currency)
     }

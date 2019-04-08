@@ -17,6 +17,7 @@ enum StatisticsError : Error {
 class StatisticsViewModel {    
     private let historyTransactionsViewModel: HistoryTransactionsViewModel
     private let filtersViewModel: FiltersViewModel
+    let graphViewModel: GraphViewModel
     
     public private(set) var isDataLoading: Bool = false
     
@@ -31,6 +32,7 @@ class StatisticsViewModel {
          filtersViewModel: FiltersViewModel) {
         self.historyTransactionsViewModel = historyTransactionsViewModel
         self.filtersViewModel = filtersViewModel
+        self.graphViewModel = GraphViewModel(historyTransactionsViewModel: self.historyTransactionsViewModel)
     }
     
     func setDataLoading() {
@@ -40,6 +42,7 @@ class StatisticsViewModel {
     
     func updatePresentationData() {
         filterHistoryTransactions()
+        updateGraphData()
         updateHistoryTransactionsSections()
         updateSections()
     }
@@ -57,6 +60,10 @@ class StatisticsViewModel {
         historyTransactionsViewModel
             .filterHistoryTransactions(sourceOrDestinationFilters: filtersViewModel.sourceOrDestinationFilters,
                                        dateRangeFilter: filtersViewModel.dateRangeFilter)
+    }
+    
+    private func updateGraphData() {
+        self.graphViewModel.updateChartsData()
     }
     
     private func updateHistoryTransactionsSections() {
