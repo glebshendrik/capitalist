@@ -8,6 +8,7 @@
 
 import Foundation
 import Charts
+import RandomColorSwift
 
 enum GraphType {
     case income
@@ -51,6 +52,14 @@ class GraphViewModel {
     
     private var dataPoints: [Date] = []
     
+    var maxDataPoint: Double {
+        return Double(dataPoints.last?.timeIntervalSince1970 ?? 0.0)
+    }
+    
+    var minDataPoint: Double {
+        return Double(dataPoints.first?.timeIntervalSince1970 ?? 0.0)
+    }
+    
     var numberOfDataPoints: Int {
         return dataPoints.count
     }
@@ -70,6 +79,10 @@ class GraphViewModel {
         didSet {
             updateChartsData()
         }
+    }
+    
+    var currency: Currency? {
+        return historyTransactionsViewModel.defaultCurrency
     }
     
     public private(set) var incomeChartData: LineChartData? = nil
@@ -100,8 +113,15 @@ class GraphViewModel {
     }
     
     private func updateDataPoints() {
-        dataPoints = datesRange(from: transactions.last?.gotAt.dateAtStartOf(graphPeriodScale.asUnit),
-                                to: transactions.first?.gotAt.dateAtStartOf(graphPeriodScale.asUnit))
+        var range = datesRange(from: transactions.last?.gotAt.dateAtStartOf(graphPeriodScale.asUnit),
+                               to: transactions.first?.gotAt.dateAtStartOf(graphPeriodScale.asUnit))
+        if  range.count == 1,
+            let first = range.first,
+            let date = Calendar.current.date(byAdding: graphPeriodScale.asUnit, value: -1, to: first) {
+            
+            range.insert(date, at: 0)
+        }
+        dataPoints = range
     }
     
     private func datesRange(from: Date?, to: Date?) -> [Date] {
@@ -128,6 +148,8 @@ class GraphViewModel {
     }
     
     private func updateIncomeChartData() {
+        guard let currency = currency else { return }
+        
         var incomeSourceDataSets: [Int : LineChartDataSet] = [:]
         var incomeSourceSums: [Int : Double] = [:]
         var valuesHash = [Date : [Int: Double]]()
@@ -151,7 +173,7 @@ class GraphViewModel {
                 let incomeSourceId = incomeTransactionsByDateAndIncomeSourceGroup.key
                 let incomeTransactionsByDateAndIncomeSource = incomeTransactionsByDateAndIncomeSourceGroup.value
                 
-                let value = historyTransactionsViewModel.historyTransactionsAmountMoney(transactions: incomeTransactionsByDateAndIncomeSource).doubleValue
+                let value = historyTransactionsViewModel.historyTransactionsAmount(transactions: incomeTransactionsByDateAndIncomeSource).doubleValue
                 
                 valuesHash[date]?[incomeSourceId] = value
                 
@@ -165,15 +187,16 @@ class GraphViewModel {
                     dataSet.lineWidth = 1
                     dataSet.circleRadius = 0
                     dataSet.drawCircleHoleEnabled = false
-                    dataSet.valueFont = UIFont(name: "Rubik-Regular", size: 12)!
-                    dataSet.valueTextColor = .black
                     dataSet.drawValuesEnabled = false
                     dataSet.fillAlpha = 1.0
                     dataSet.mode = .horizontalBezier
-                    let color = ChartColorTemplates.colorful().randomItem ?? .red
+                    let color = randomColor(hue: .random, luminosity: .random)
                     dataSet.fillColor = color
                     dataSet.colors = [color]
+                    dataSet.drawHorizontalHighlightIndicatorEnabled = false
+                    dataSet.drawVerticalHighlightIndicatorEnabled = false
                     incomeSourceDataSets[incomeSourceId] = dataSet
+                    
                     
                 }
                 
@@ -186,13 +209,14 @@ class GraphViewModel {
         }
         
         for date in dataPoints {
+            var valueAccumulator = 0.0
             for incomeSourceId in incomeSourcesOrdered {
-                var valueAccumulator = 0.0
                 if let dataSet = incomeSourceDataSets[incomeSourceId] {
                     
                     let value: Double = valueAccumulator + (valuesHash[date]?[incomeSourceId] ?? 0.0)
+                    let entry = ChartDataEntry(x: date.timeIntervalSince1970, y: value, data: date as AnyObject)
                     
-                    _ = dataSet.addEntryOrdered(ChartDataEntry(x: date.timeIntervalSince1970, y: value, data: date as AnyObject))
+                    _ = dataSet.addEntryOrdered(entry)
                     
                     valueAccumulator = value
                 }
@@ -200,8 +224,17 @@ class GraphViewModel {
             
         }
         let sorderDataSets = incomeSourcesOrdered.compactMap { incomeSourceDataSets[$0] }
+        
+        for i in 0 ..< sorderDataSets.count {
+            if let previousDataSet = sorderDataSets.item(at: i - 1) {
+                sorderDataSets[i].fillFormatter = AreaFillFormatter(fillLineDataSet: previousDataSet)
+            }
+        }
+        
+//        LineChartDataSet
         incomeChartData = LineChartData(dataSets: sorderDataSets)
-        incomeChartData?.setValueFormatter(LargeValueFormatter(appendix: nil))        
+        
+        incomeChartData?.setValueFormatter(CurrencyValueFormatter(currency: currency))
     }
 
     private func updateIncomePieChartData() {
@@ -229,41 +262,19 @@ class GraphViewModel {
     }
 }
 
-private let MAX_LENGTH = 5
-
-@objc protocol Testing123 { }
-
-public class LargeValueFormatter: NSObject, IValueFormatter, IAxisValueFormatter {
+public class CurrencyValueFormatter: NSObject, IValueFormatter, IAxisValueFormatter {
     
-    /// Suffix to be appended after the values.
-    ///
-    /// **default**: suffix: ["", "k", "m", "b", "t"]
-    public var suffix = ["", "k", "m", "b", "t"]
+    let currency: Currency
     
-    /// An appendix text to be added at the end of the formatted value.
-    public var appendix: String?
-    
-    public init(appendix: String? = nil) {
-        self.appendix = appendix
+    init(currency: Currency) {
+        self.currency = currency
     }
     
     fileprivate func format(value: Double) -> String {
-        var sig = value
-        var length = 0
-        let maxLength = suffix.count - 1
         
-        while sig >= 1000.0 && length < maxLength {
-            sig /= 1000.0
-            length += 1
-        }
+        let amount = NSDecimalNumber(floatLiteral: value)
         
-        var r = String(format: "%2.f", sig) + suffix[length]
-        
-        if let appendix = appendix {
-            r += appendix
-        }
-        
-        return r
+        return amount.moneyCurrencyString(with: currency, shouldRound: true) ?? amount.stringValue
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {

@@ -26,4 +26,5 @@ target 'skrudzh' do
   pod 'AlignedCollectionViewFlowLayout'
   pod 'ALTextInputBar', git: 'https://github.com/bclymer/ALTextInputBar', branch: 'master'
   pod 'Charts'
+  pod 'RandomColorSwift'
 end

@@ -17,7 +17,7 @@ class HistoryTransactionsViewModel {
     private let currencyConverter: CurrencyConverterProtocol
     
     private var allCurrencyCodes: [String] = []
-    private var defaultCurrency: Currency? = nil
+    var defaultCurrency: Currency? = nil
     private var exchangeRates: [String : Float] = [String : Float]()
     
     public private(set) var filteredHistoryTransactionViewModels: [HistoryTransactionViewModel] = []
@@ -157,12 +157,6 @@ class HistoryTransactionsViewModel {
             .reduce(0, +)
     }
     
-    func historyTransactionsAmountMoney(transactions: [HistoryTransactionViewModel]) -> NSDecimalNumber {
-        guard let currency = defaultCurrency else { return 0.0 }
-        
-        return historyTransactionsAmount(transactions: transactions).moneyNumber(with: currency)
-    }
-    
     private func convert(cents: Int, fromCurrency: Currency, toCurrency: Currency) -> NSDecimalNumber {
         
         guard let exchangeRate = exchangeRates[fromCurrency.code] else { return 0 }
@@ -172,11 +166,5 @@ class HistoryTransactionsViewModel {
                                          toCurrency: toCurrency,
                                          exchangeRate: Double(exchangeRate),
                                          forward: true)
-    }
-    
-    func roundedAmountString(amountCents: Double) -> String? {
-        guard let currency = defaultCurrency else { return nil }
-        let amount = NSDecimalNumber(floatLiteral: amountCents)
-        return amount.moneyCurrencyString(with: currency, shouldRound: true)
-    }
+    }    
 }

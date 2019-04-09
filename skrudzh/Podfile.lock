@@ -24,6 +24,7 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.5.2):
     - PromiseKit/CorePromise
+  - RandomColorSwift (1.0.0)
   - SideMenu (5.0.2)
   - SkyFloatingLabelTextField (3.6.0)
   - StaticDataTableViewController (2.5.0)
@@ -65,6 +66,7 @@ DEPENDENCIES:
   - Locksmith (~> 4.0)
   - PromiseKit (~> 6.5)
   - PromiseKit/Alamofire (~> 6.5)
+  - RandomColorSwift
   - SideMenu
   - SkyFloatingLabelTextField
   - StaticDataTableViewController
@@ -87,6 +89,7 @@ SPEC REPOS:
     - IQKeyboardManager
     - Locksmith
     - PromiseKit
+    - RandomColorSwift
     - SideMenu
     - SkyFloatingLabelTextField
     - StaticDataTableViewController
@@ -119,6 +122,7 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
+  RandomColorSwift: 9f85058b721665d52d239ca166a913e083506444
   SideMenu: e5094f0b2e7d9609e100a90ae69025abd994f882
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
   StaticDataTableViewController: 0c5c4a47861446dd3cfd52530ae801ec7662ce26
@@ -129,6 +133,6 @@ SPEC CHECKSUMS:
   Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
 
-PODFILE CHECKSUM: a27c2e1708acdfe158030f724842288e58d200e4
+PODFILE CHECKSUM: 987ebb2afdd453aadf8fc2592e45217631496d38
 
 COCOAPODS: 1.5.3
