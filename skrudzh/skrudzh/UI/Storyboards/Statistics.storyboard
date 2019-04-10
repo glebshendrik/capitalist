@@ -180,7 +180,7 @@
                                                         </view>
                                                         <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJD-So-3Ur">
                                                             <rect key="frame" x="187" y="30" width="1" height="190"/>
-                                                            <color key="backgroundColor" red="0.4528774888013698" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="1" id="ZY5-AG-vwB"/>
                                                             </constraints>
@@ -217,6 +217,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="currentDateLabel" destination="86H-Yn-5nQ" id="NnM-XI-Iiw"/>
+                                            <outlet property="currentPositionMarker" destination="sJD-So-3Ur" id="cBq-xK-EaS"/>
                                             <outlet property="lineChartView" destination="DuS-0d-Ama" id="Rt4-SO-lsp"/>
                                         </connections>
                                     </tableViewCell>

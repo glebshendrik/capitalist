@@ -41,6 +41,20 @@ enum GraphPeriodScale {
             return .year
         }
     }
+    
+    var dateFormat: String {
+        switch self {
+        case .days,
+             .weeks:
+            return "dd.MM.yy"
+        case .months:
+            return "MMM, yy"
+        case .quarters:
+            return "Q`yy"
+        case .years:
+            return "yyyy"
+        }
+    }
 }
 
 class GraphViewModel {
@@ -50,14 +64,24 @@ class GraphViewModel {
         return historyTransactionsViewModel.filteredHistoryTransactionViewModels
     }
     
-    private var dataPoints: [Date] = []
-    
-    var maxDataPoint: Double {
-        return Double(dataPoints.last?.timeIntervalSince1970 ?? 0.0)
+    private var dataPoints: [Date] = [] {
+        didSet {
+            lineChartCurrentPoint = maxDataPoint
+        }
     }
     
-    var minDataPoint: Double {
-        return Double(dataPoints.first?.timeIntervalSince1970 ?? 0.0)
+    var maxDataPoint: Double? {
+        guard let date = dataPoints.last else { return nil }
+        return Double(date.timeIntervalSince1970)
+    }
+    
+    var minDataPoint: Double? {
+        guard let date = dataPoints.first else { return nil }
+        return Double(date.timeIntervalSince1970)
+    }
+    
+    var hasData: Bool {
+        return numberOfDataPoints > 0
     }
     
     var numberOfDataPoints: Int {
@@ -65,8 +89,27 @@ class GraphViewModel {
     }
     
     var granularity: Double {
-        guard numberOfDataPoints > 1 else { return 1.0 }
-        return dataPoints[1].timeIntervalSince1970 - dataPoints[0].timeIntervalSince1970
+        guard numberOfDataPoints > 1 else { return 0.0 }
+        return (dataPoints[1].timeIntervalSince1970 - dataPoints[0].timeIntervalSince1970)
+    }
+    
+    var labelsCount: Int {
+        return numberOfDataPoints < 5 ? numberOfDataPoints : 5
+    }
+    
+    var visibleXRangeMaximum: Double {
+        return Double(labelsCount - 1) * granularity
+    }
+    
+    var shouldLimitMinimumValueToZero: Bool {
+        switch graphType {
+        case .income,
+             .expenses,
+             .incomeAndExpenses:
+            return true
+        default:
+            return false
+        }
     }
     
     var graphType: GraphType = .income {
@@ -81,8 +124,19 @@ class GraphViewModel {
         }
     }
     
+    var dateFormat: String {
+        return graphPeriodScale.dateFormat
+    }
+    
     var currency: Currency? {
         return historyTransactionsViewModel.defaultCurrency
+    }
+    
+    var lineChartCurrentPoint: Double? = nil
+    
+    var lineChartCurrentPointDate: Date? {
+        guard let point = lineChartCurrentPoint else { return nil }
+        return Date(timeIntervalSince1970: point)
     }
     
     public private(set) var incomeChartData: LineChartData? = nil
@@ -118,33 +172,11 @@ class GraphViewModel {
         if  range.count == 1,
             let first = range.first,
             let date = Calendar.current.date(byAdding: graphPeriodScale.asUnit, value: -1, to: first) {
-            
+
             range.insert(date, at: 0)
         }
+        
         dataPoints = range
-    }
-    
-    private func datesRange(from: Date?, to: Date?) -> [Date] {
-        guard   let from = from,
-                let to = to,
-                to >= from else {
-        
-                    
-                    return [Date]()
-                }
-        
-        var tempDate = from
-        var array = [tempDate]
-        
-        while tempDate < to {
-            guard let nextDate = Calendar.current.date(byAdding: graphPeriodScale.asUnit, value: 1, to: tempDate) else {
-                return [Date]()
-            }
-            tempDate = nextDate
-            array.append(tempDate)
-        }
-        
-        return array
     }
     
     private func updateIncomeChartData() {
@@ -260,32 +292,29 @@ class GraphViewModel {
     private func updateNetWorthChartData() {
         
     }
+    
+    private func datesRange(from: Date?, to: Date?) -> [Date] {
+        guard   let from = from,
+            let to = to,
+            to >= from else {
+                
+                
+                return [Date]()
+        }
+        
+        var tempDate = from
+        var array = [tempDate]
+        
+        while tempDate < to {
+            guard let nextDate = Calendar.current.date(byAdding: graphPeriodScale.asUnit, value: 1, to: tempDate) else {
+                return [Date]()
+            }
+            tempDate = nextDate
+            array.append(tempDate)
+        }
+        
+        return array
+    }
 }
 
-public class CurrencyValueFormatter: NSObject, IValueFormatter, IAxisValueFormatter {
-    
-    let currency: Currency
-    
-    init(currency: Currency) {
-        self.currency = currency
-    }
-    
-    fileprivate func format(value: Double) -> String {
-        
-        let amount = NSDecimalNumber(floatLiteral: value)
-        
-        return amount.moneyCurrencyString(with: currency, shouldRound: true) ?? amount.stringValue
-    }
-    
-    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return format(value: value)
-    }
-    
-    public func stringForValue(
-        _ value: Double,
-        entry: ChartDataEntry,
-        dataSetIndex: Int,
-        viewPortHandler: ViewPortHandler?) -> String {
-        return format(value: value)
-    }
-}
+

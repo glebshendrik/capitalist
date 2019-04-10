@@ -9,28 +9,13 @@
 import UIKit
 import Charts
 
-private class DateValueFormatter: NSObject, IAxisValueFormatter {
-    private let dateFormatter = DateFormatter()
-    
-    override init() {
-        super.init()
-//        dateFormatter.dateFormat = "MMM, yy"
-        dateFormatter.dateFormat = "dd/MM"
-    }
-    
-    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
-    }
-}
-
 class GraphTableViewCell : UITableViewCell {
     @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet weak var currentDateLabel: UILabel!
+    @IBOutlet weak var currentPositionMarker: UIView!
     
     private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM"
-        return formatter
+        return DateFormatter()
     }()
     
     var viewModel: GraphViewModel? = nil {
@@ -39,15 +24,21 @@ class GraphTableViewCell : UITableViewCell {
         }
     }
     
-    private func updateUI() {
-        guard   let viewModel = viewModel,
-                let currency = viewModel.currency else { return }
-        
-//        lineChartView.delegate = self
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupUI()
+        updateUI()
+    }
+    
+    private func setupUI() {
+        setupLineChart()
+    }
+    
+    private func setupLineChart() {
+        lineChartView.delegate = self
         
         lineChartView.leftAxis.enabled = true
         lineChartView.rightAxis.enabled = false
-
         
         
         lineChartView.scaleXEnabled = false
@@ -57,7 +48,7 @@ class GraphTableViewCell : UITableViewCell {
         lineChartView.dragEnabled = true
         
         lineChartView.leftAxis.drawZeroLineEnabled = false
-        lineChartView.leftAxis.axisMinimum = 0
+
         lineChartView.leftAxis.labelPosition = .insideChart
         lineChartView.leftAxis.yOffset = -8.0
         
@@ -69,159 +60,128 @@ class GraphTableViewCell : UITableViewCell {
         
         lineChartView.xAxis.drawAxisLineEnabled = true
         lineChartView.xAxis.drawGridLinesEnabled = false
-        lineChartView.xAxis.valueFormatter = DateValueFormatter()
-
-        lineChartView.xAxis.axisMaximum = viewModel.maxDataPoint
-        lineChartView.xAxis.axisMinimum = viewModel.minDataPoint
         
-        lineChartView.delegate = self
-        
-        let labelsCount = viewModel.numberOfDataPoints < 7 ? viewModel.numberOfDataPoints : 7
-        
-        lineChartView.xAxis.setLabelCount(labelsCount, force: true)
         lineChartView.xAxis.forceLabelsEnabled = true
         lineChartView.xAxis.labelPosition = .bottom
-//        lineChartView.xAxis.drawLabelsEnabled = false
+        
         
         lineChartView.drawBordersEnabled = false
         lineChartView.drawGridBackgroundEnabled = false
-        lineChartView.leftAxis.valueFormatter = CurrencyValueFormatter(currency: currency)
         
         lineChartView.legend.enabled = false
         
         lineChartView.renderer = LineChartAreasRenderer(dataProvider: lineChartView, animator: lineChartView.chartAnimator, viewPortHandler: lineChartView.viewPortHandler)
         
-        if viewModel.numberOfDataPoints > 0 {
-            lineChartView.xAxis.granularity = viewModel.granularity            
+
+    }
+    
+    private func updateUI() {
+        updateCurrentPositionMarker()
+        updateDateFormatter()
+        updateLineChart()
+    }
+    
+    private func updateCurrentPositionMarker() {
+        currentPositionMarker.isHidden = !(viewModel?.hasData ?? false)
+    }
+    
+    private func updateDateFormatter() {
+        guard   let viewModel = viewModel else { return }
+        dateFormatter.dateFormat = viewModel.dateFormat
+    }
+    
+    private func updateLineChart() {
+        lineChartView.clear()
+        lineChartView.leftAxis.resetCustomAxisMin()
+        updateLineChartCurrentPointUI()
+        
+        guard   let viewModel = viewModel,
+                let currency = viewModel.currency,
+                viewModel.hasData else { return }
+        
+        lineChartView.xAxis.valueFormatter = DateValueFormatter(dateFormat: viewModel.dateFormat)
+        lineChartView.leftAxis.valueFormatter = CurrencyValueFormatter(currency: currency)
+        
+        if viewModel.shouldLimitMinimumValueToZero {
+            lineChartView.leftAxis.axisMinimum = 0
         }
+
+        lineChartView.xAxis.setLabelCount(viewModel.labelsCount, force: true)
+        lineChartView.xAxis.granularity = viewModel.granularity
         
         lineChartView.data = viewModel.incomeChartData
         
-        if viewModel.numberOfDataPoints > 0 {
-            lineChartView.setVisibleXRangeMaximum(Double(labelsCount - 1) * lineChartView.xAxis.granularity)
-            lineChartView.moveViewToX(lineChartView.chartXMax)
-            currentDateLabel.text = dateFormatter.string(from: Date(timeIntervalSince1970: lineChartView.chartXMax))
-        }
+        lineChartView.setVisibleXRangeMaximum(viewModel.visibleXRangeMaximum)
+        lineChartView.zoom(scaleX: 0.0, scaleY: 0.0, x: 0.0, y: 0.0)
+        lineChartView.moveViewToX(viewModel.lineChartCurrentPoint ?? lineChartView.chartXMax)        
         
     }
 }
 
 extension GraphTableViewCell : ChartViewDelegate {
     func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
-        let point = lineChartView.getEntryByTouchPoint(point: CGPoint(x: lineChartView.frame.size.width / 2.0, y: 0.0))
-        if let date = point?.x {
-            currentDateLabel.text = dateFormatter.string(from: Date(timeIntervalSince1970: date))
+        
+        switch chartView {
+        case lineChartView:
+            let point = lineChartView.getEntryByTouchPoint(point: CGPoint(x: lineChartView.frame.size.width / 2.0, y: 0.0))?.x
+            updateLineChart(currentPoint: point)
+        default:
+            return
         }
+    }
+    
+    private func updateLineChart(currentPoint: Double?) {
+        viewModel?.lineChartCurrentPoint = currentPoint
+        updateLineChartCurrentPointUI()
+    }
+    
+    private func updateLineChartCurrentPointUI() {
+        if let date = viewModel?.lineChartCurrentPointDate {
+            currentDateLabel.text = dateFormatter.string(from: date)
+        } else {
+            currentDateLabel.text = nil
+        }
+        
     }
 }
 
-class AreaFillFormatter: IFillFormatter {
+class DateValueFormatter: NSObject, IAxisValueFormatter {
+    private let dateFormatter = DateFormatter()
     
-    let fillLineDataSet: LineChartDataSet
-    
-    init(fillLineDataSet: LineChartDataSet) {
-        self.fillLineDataSet = fillLineDataSet
+    init(dateFormat: String) {
+        super.init()
+        dateFormatter.dateFormat = dateFormat
     }
     
-    public func getFillLinePosition(dataSet: ILineChartDataSet, dataProvider: LineChartDataProvider) -> CGFloat {
-        return 0.0
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
     }
-    
-    public func getFillLineDataSet() -> LineChartDataSet {
-        return fillLineDataSet
-    }
-    
 }
 
-class LineChartAreasRenderer: LineChartRenderer {
+class CurrencyValueFormatter: NSObject, IValueFormatter, IAxisValueFormatter {
     
-    override open func drawCubicFill(
-        context: CGContext,
-        dataSet: ILineChartDataSet,
-        spline: CGMutablePath,
-        matrix: CGAffineTransform,
-        bounds: XBounds)
-    {
-        if bounds.range <= 0
-        {
-            return
-        }
-        
-        guard   let areaFillFormatter = dataSet.fillFormatter as? AreaFillFormatter,
-                let previousSpline = generateSpline(for: areaFillFormatter.fillLineDataSet, bounds: bounds) else {
-            super.drawCubicFill(context: context, dataSet: dataSet, spline: spline, matrix: matrix, bounds: bounds)
-            return
-        }
-        
-        let reversed =  UIBezierPath(cgPath: previousSpline).reversing().cgPath
-        
-        var reversedSplineStart = CGPoint(x: CGFloat(areaFillFormatter.fillLineDataSet.entryForIndex(bounds.min + bounds.range)?.x ?? 0.0),
-                                          y: CGFloat(areaFillFormatter.fillLineDataSet.entryForIndex(bounds.min + bounds.range)?.y ?? 0.0))
-        reversedSplineStart = reversedSplineStart.applying(matrix)
-        
-        var splineStart = CGPoint(x: CGFloat(dataSet.entryForIndex(bounds.min)?.x ?? 0.0),
-                                  y: CGFloat(dataSet.entryForIndex(bounds.min)?.y ?? 0.0))
-        splineStart = splineStart.applying(matrix)
-        
-        spline.addLine(to: reversedSplineStart)
-        spline.addPath(reversed)
-        spline.addLine(to: splineStart)
-        
-        spline.closeSubpath()
-        
-        if dataSet.fill != nil
-        {
-            drawFilledPath(context: context, path: spline, fill: dataSet.fill!, fillAlpha: dataSet.fillAlpha)
-        }
-        else
-        {
-            drawFilledPath(context: context, path: spline, fillColor: dataSet.fillColor, fillAlpha: dataSet.fillAlpha)
-        }
+    let currency: Currency
+    
+    init(currency: Currency) {
+        self.currency = currency
     }
     
-    private func generateSpline(for dataSet: ILineChartDataSet, bounds: XBounds) -> CGPath? {
-        guard   let dataProvider = dataProvider,
-            bounds.range >= 1 else { return nil }
-        
-        let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
-        
-        let phaseY = animator.phaseY
-        
-        // the path for the cubic-spline
-        let cubicPath = CGMutablePath()
-        
-        let valueToPixelMatrix = trans.valueToPixelMatrix
-        
-        var prev: ChartDataEntry! = dataSet.entryForIndex(bounds.min)
-        var cur: ChartDataEntry! = prev
-        
-        if cur == nil { return nil }
-        
-        // let the spline start
-        cubicPath.move(to: CGPoint(x: CGFloat(cur.x), y: CGFloat(cur.y * phaseY)), transform: valueToPixelMatrix)
-        
-        for j in stride(from: (bounds.min + 1), through: bounds.range + bounds.min, by: 1)
-        {
-            prev = cur
-            cur = dataSet.entryForIndex(j)
-            
-            let cpx = CGFloat(prev.x + (cur.x - prev.x) / 2.0)
-            
-            cubicPath.addCurve(
-                to: CGPoint(
-                    x: CGFloat(cur.x),
-                    y: CGFloat(cur.y * phaseY)),
-                control1: CGPoint(
-                    x: cpx,
-                    y: CGFloat(prev.y * phaseY)),
-                control2: CGPoint(
-                    x: cpx,
-                    y: CGFloat(cur.y * phaseY)),
-                transform: valueToPixelMatrix)
-        }
-        
-        return cubicPath
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return format(value: value)
     }
     
+    public func stringForValue(
+        _ value: Double,
+        entry: ChartDataEntry,
+        dataSetIndex: Int,
+        viewPortHandler: ViewPortHandler?) -> String {
+        return format(value: value)
+    }
     
+    fileprivate func format(value: Double) -> String {
+        
+        let amount = NSDecimalNumber(floatLiteral: value)
+        
+        return amount.moneyCurrencyString(with: currency, shouldRound: true) ?? amount.stringValue
+    }
 }
