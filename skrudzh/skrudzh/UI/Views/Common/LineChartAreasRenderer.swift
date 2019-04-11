@@ -29,6 +29,13 @@ class AreaFillFormatter: IFillFormatter {
 
 class LineChartAreasRenderer: LineChartRenderer {
     
+    override func isDrawingValuesAllowed(dataProvider: ChartDataProvider?) -> Bool {
+        guard let data = dataProvider?.data,
+              !viewPortHandler.scaleX.isFinite else { return false }
+        
+        return data.entryCount < Int(CGFloat(dataProvider?.maxVisibleCount ?? 0) * viewPortHandler.scaleX)
+    }
+    
     override open func drawCubicFill(
         context: CGContext,
         dataSet: ILineChartDataSet,

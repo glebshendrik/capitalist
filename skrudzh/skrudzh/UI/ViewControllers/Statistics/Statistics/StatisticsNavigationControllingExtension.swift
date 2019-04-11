@@ -177,8 +177,6 @@ extension StatisticsViewController {
             showFundsMoveEditScreen(fundsMoveId: historyTransaction.transactionableId)
         case .expense:
             showExpenseEditScreen(expenseId: historyTransaction.transactionableId)
-        default:
-            return
         }
     }
     
@@ -230,5 +228,53 @@ extension StatisticsViewController : StatisticsTitleViewDelegate {
     func didTapRemoveDateRangeButton() {
         viewModel.removeDateRangeFilter()
         updateUI()
+    }
+}
+
+extension StatisticsViewController : GraphTableViewCellDelegate {
+    func didTapGraphTypeButton() {
+        let alertController = UIAlertController(title: nil,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        
+        for graphType in GraphType.switchList {
+            alertController.addAction(title: graphType.title,
+                                      style: .default,
+                                      isEnabled: true,
+                                      handler: { _ in
+                                        self.viewModel.graphViewModel.graphType = graphType
+                                        self.updateUI()
+            })
+        }
+        
+        alertController.addAction(title: "Отмена",
+                                  style: .cancel,
+                                  isEnabled: true,
+                                  handler: nil)
+        
+        present(alertController, animated: true)
+    }
+    
+    func didTapGraphScaleButton() {
+        let alertController = UIAlertController(title: nil,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        
+        for graphScale in GraphPeriodScale.switchList {
+            alertController.addAction(title: graphScale.title,
+                                      style: .default,
+                                      isEnabled: true,
+                                      handler: { _ in
+                                        self.viewModel.graphViewModel.graphPeriodScale = graphScale
+                                        self.updateUI()
+            })
+        }
+        
+        alertController.addAction(title: "Отмена",
+                                  style: .cancel,
+                                  isEnabled: true,
+                                  handler: nil)
+        
+        present(alertController, animated: true)
     }
 }

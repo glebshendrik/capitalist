@@ -147,13 +147,14 @@ class HistoryTransactionsViewModel {
         return amount.moneyCurrencyString(with: currency, shouldRound: false)
     }
     
-    func historyTransactionsAmount(transactions: [HistoryTransactionViewModel]) -> NSDecimalNumber {
+    func historyTransactionsAmount(transactions: [HistoryTransactionViewModel],
+                                   amountCentsForTransaction: ((HistoryTransactionViewModel) -> Int) = { $0.amountCents }) -> NSDecimalNumber {
         guard let currency = defaultCurrency else { return 0.0 }
         
         return transactions
             .map { $0.currency.code == currency.code
-                ? NSDecimalNumber(integerLiteral: $0.amountCents)
-                : convert(cents: $0.amountCents, fromCurrency: $0.currency, toCurrency: currency) }
+                ? NSDecimalNumber(integerLiteral: amountCentsForTransaction($0))
+                : convert(cents: amountCentsForTransaction($0), fromCurrency: $0.currency, toCurrency: currency) }
             .reduce(0, +)
     }
     

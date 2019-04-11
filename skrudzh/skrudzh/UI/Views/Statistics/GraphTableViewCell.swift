@@ -9,10 +9,19 @@
 import UIKit
 import Charts
 
+protocol GraphTableViewCellDelegate {
+    func didTapGraphTypeButton()
+    func didTapGraphScaleButton()
+}
+
 class GraphTableViewCell : UITableViewCell {
     @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet weak var currentDateLabel: UILabel!
     @IBOutlet weak var currentPositionMarker: UIView!
+    @IBOutlet weak var graphTypeSwitchButton: UIButton!
+    @IBOutlet weak var graphScaleSwitchButton: UIButton!
+    
+    var delegate: GraphTableViewCellDelegate?
     
     private lazy var dateFormatter: DateFormatter = {
         return DateFormatter()
@@ -29,9 +38,22 @@ class GraphTableViewCell : UITableViewCell {
         setupUI()
         updateUI()
     }
+    @IBAction func didTapGraphTypeButton(_ sender: Any) {
+        delegate?.didTapGraphTypeButton()
+    }
+    
+    @IBAction func didTapGraphScaleButton(_ sender: Any) {
+        delegate?.didTapGraphScaleButton()
+    }
     
     private func setupUI() {
         setupLineChart()
+        setupButtons()
+    }
+    
+    private func setupButtons() {
+        graphTypeSwitchButton.setImageToRight()
+        graphScaleSwitchButton.setImageToRight()
     }
     
     private func setupLineChart() {
@@ -40,11 +62,10 @@ class GraphTableViewCell : UITableViewCell {
         lineChartView.leftAxis.enabled = true
         lineChartView.rightAxis.enabled = false
         
-        
         lineChartView.scaleXEnabled = false
-        lineChartView.scaleYEnabled = false
+        lineChartView.scaleYEnabled = true
         lineChartView.pinchZoomEnabled = false
-        lineChartView.doubleTapToZoomEnabled = false
+        lineChartView.doubleTapToZoomEnabled = true
         lineChartView.dragEnabled = true
         
         lineChartView.leftAxis.drawZeroLineEnabled = false
@@ -55,7 +76,7 @@ class GraphTableViewCell : UITableViewCell {
         lineChartView.dragDecelerationFrictionCoef = 0.95
         
         lineChartView.drawMarkers = false
-        lineChartView.setViewPortOffsets(left: 0, top: 30, right: 0, bottom: 30)
+        lineChartView.setViewPortOffsets(left: 0, top: 30, right: 0, bottom: 40)
         lineChartView.setDragOffsetX(lineChartView.frame.width / 2)
         
         lineChartView.xAxis.drawAxisLineEnabled = true
@@ -64,11 +85,11 @@ class GraphTableViewCell : UITableViewCell {
         lineChartView.xAxis.forceLabelsEnabled = true
         lineChartView.xAxis.labelPosition = .bottom
         
-        
         lineChartView.drawBordersEnabled = false
         lineChartView.drawGridBackgroundEnabled = false
         
-        lineChartView.legend.enabled = false
+        lineChartView.legend.enabled = true
+        lineChartView.legend.yOffset = 0
         
         lineChartView.renderer = LineChartAreasRenderer(dataProvider: lineChartView, animator: lineChartView.chartAnimator, viewPortHandler: lineChartView.viewPortHandler)
         
@@ -76,9 +97,15 @@ class GraphTableViewCell : UITableViewCell {
     }
     
     private func updateUI() {
+        updateButtons()
         updateCurrentPositionMarker()
         updateDateFormatter()
         updateLineChart()
+    }
+    
+    private func updateButtons() {
+        graphTypeSwitchButton.setTitle(viewModel?.graphType.title, for: .normal)
+        graphScaleSwitchButton.setTitle(viewModel?.graphPeriodScale.title, for: .normal)
     }
     
     private func updateCurrentPositionMarker() {
@@ -109,11 +136,11 @@ class GraphTableViewCell : UITableViewCell {
         lineChartView.xAxis.setLabelCount(viewModel.labelsCount, force: true)
         lineChartView.xAxis.granularity = viewModel.granularity
         
-        lineChartView.data = viewModel.incomeChartData
+        lineChartView.data = viewModel.lineChartData
         
         lineChartView.setVisibleXRangeMaximum(viewModel.visibleXRangeMaximum)
         lineChartView.zoom(scaleX: 0.0, scaleY: 0.0, x: 0.0, y: 0.0)
-        lineChartView.moveViewToX(viewModel.lineChartCurrentPoint ?? lineChartView.chartXMax)        
+        lineChartView.moveViewToX(viewModel.lineChartCurrentPointWithOffset ?? lineChartView.chartXMax)
         
     }
 }

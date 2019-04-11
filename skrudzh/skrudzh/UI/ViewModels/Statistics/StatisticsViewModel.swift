@@ -158,6 +158,17 @@ extension StatisticsViewModel {
     }
     
     func set(sourceOrDestinationFilter: SourceOrDestinationHistoryTransactionFilter) {
+        func graphType(by filterType: HistoryTransactionSourceOrDestinationType) -> GraphType {
+            switch sourceOrDestinationFilter.type {
+            case .incomeSource:
+                return .income
+            case .expenseSource:
+                return .cashFlow
+            case .expenseCategory:
+                return .expenses
+            }
+        }
+        graphViewModel.graphType = graphType(by: sourceOrDestinationFilter.type)
         set(sourceOrDestinationFilters: [sourceOrDestinationFilter])
     }
     
