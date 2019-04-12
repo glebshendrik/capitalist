@@ -277,4 +277,9 @@ extension StatisticsViewController : GraphTableViewCellDelegate {
         
         present(alertController, animated: true)
     }
+    
+    func didTapLinePieSwitchButton() {
+        viewModel.graphViewModel.switchLinePieChart()
+        updateUI()
+    }
 }

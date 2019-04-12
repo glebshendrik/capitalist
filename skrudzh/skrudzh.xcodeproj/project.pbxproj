@@ -139,6 +139,16 @@
 		FA81748A222822FB00EE6116 /* ExchangeRatesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */; };
 		FA81748C222E2B8700EE6116 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81748B222E2B8700EE6116 /* CommentViewController.swift */; };
 		FA81748E222F800200EE6116 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81748D222F800200EE6116 /* DatePickerViewController.swift */; };
+		FA835D422260742400A592F2 /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D412260742400A592F2 /* GraphType.swift */; };
+		FA835D442260744500A592F2 /* GraphPeriodScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D432260744500A592F2 /* GraphPeriodScale.swift */; };
+		FA835D462260751800A592F2 /* GraphDataPresentingAttributesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D452260751800A592F2 /* GraphDataPresentingAttributesExtension.swift */; };
+		FA835D48226076F700A592F2 /* GraphDataCalculatingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D47226076F700A592F2 /* GraphDataCalculatingExtension.swift */; };
+		FA835D4A2260789B00A592F2 /* IncomeGraphDataCalculatingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D492260789B00A592F2 /* IncomeGraphDataCalculatingExtension.swift */; };
+		FA835D4C226078E300A592F2 /* ExpensesGraphDataCalculatingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D4B226078E200A592F2 /* ExpensesGraphDataCalculatingExtension.swift */; };
+		FA835D4E22607A1100A592F2 /* IncomeAndExpensesGraphDataCalculatingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D4D22607A1100A592F2 /* IncomeAndExpensesGraphDataCalculatingExtension.swift */; };
+		FA835D5022607A7200A592F2 /* CashFlowGraphDataCalculatingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D4F22607A7200A592F2 /* CashFlowGraphDataCalculatingExtension.swift */; };
+		FA835D5222607B8600A592F2 /* NetWorthGraphDataCalculatingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D5122607B8600A592F2 /* NetWorthGraphDataCalculatingExtension.swift */; };
+		FA835D562260CA7C00A592F2 /* PieChartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D552260CA7C00A592F2 /* PieChartCollectionViewCell.swift */; };
 		FA8382B621F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */; };
 		FA84E7E5225625E300C0A274 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7E4225625E300C0A274 /* GraphViewModel.swift */; };
 		FA84E7E722562E5B00C0A274 /* CurrencyConverterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7E622562E5B00C0A274 /* CurrencyConverterProtocol.swift */; };
@@ -407,6 +417,16 @@
 		FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesCoordinator.swift; sourceTree = "<group>"; };
 		FA81748B222E2B8700EE6116 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		FA81748D222F800200EE6116 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		FA835D412260742400A592F2 /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
+		FA835D432260744500A592F2 /* GraphPeriodScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPeriodScale.swift; sourceTree = "<group>"; };
+		FA835D452260751800A592F2 /* GraphDataPresentingAttributesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDataPresentingAttributesExtension.swift; sourceTree = "<group>"; };
+		FA835D47226076F700A592F2 /* GraphDataCalculatingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDataCalculatingExtension.swift; sourceTree = "<group>"; };
+		FA835D492260789B00A592F2 /* IncomeGraphDataCalculatingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeGraphDataCalculatingExtension.swift; sourceTree = "<group>"; };
+		FA835D4B226078E200A592F2 /* ExpensesGraphDataCalculatingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesGraphDataCalculatingExtension.swift; sourceTree = "<group>"; };
+		FA835D4D22607A1100A592F2 /* IncomeAndExpensesGraphDataCalculatingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeAndExpensesGraphDataCalculatingExtension.swift; sourceTree = "<group>"; };
+		FA835D4F22607A7200A592F2 /* CashFlowGraphDataCalculatingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowGraphDataCalculatingExtension.swift; sourceTree = "<group>"; };
+		FA835D5122607B8600A592F2 /* NetWorthGraphDataCalculatingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorthGraphDataCalculatingExtension.swift; sourceTree = "<group>"; };
+		FA835D552260CA7C00A592F2 /* PieChartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentIncomeSourceCreationMessageViewController.swift; sourceTree = "<group>"; };
 		FA84E7E4225625E300C0A274 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		FA84E7E622562E5B00C0A274 /* CurrencyConverterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterProtocol.swift; sourceTree = "<group>"; };
@@ -697,6 +717,7 @@
 		FA6F2E902244C8B4008C160F /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				FA835D40226073F400A592F2 /* Graph */,
 				FA6F2E912244C8D9008C160F /* StatisticsViewModel.swift */,
 				FACC01F2224BC3440044A747 /* StatisticsViewSection.swift */,
 				FACC01EE224B81310044A747 /* FiltersViewModel.swift */,
@@ -705,7 +726,6 @@
 				FA6F2E932244D033008C160F /* HistoryTransactionViewModel.swift */,
 				FA7276D722537BF30086D4D1 /* FiltersSelectionViewModel.swift */,
 				FA7276D922539F510086D4D1 /* FiltersSelectionViewSection.swift */,
-				FA84E7E4225625E300C0A274 /* GraphViewModel.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -773,6 +793,23 @@
 			path = Currencies;
 			sourceTree = "<group>";
 		};
+		FA835D40226073F400A592F2 /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				FA84E7E4225625E300C0A274 /* GraphViewModel.swift */,
+				FA835D412260742400A592F2 /* GraphType.swift */,
+				FA835D432260744500A592F2 /* GraphPeriodScale.swift */,
+				FA835D452260751800A592F2 /* GraphDataPresentingAttributesExtension.swift */,
+				FA835D47226076F700A592F2 /* GraphDataCalculatingExtension.swift */,
+				FA835D492260789B00A592F2 /* IncomeGraphDataCalculatingExtension.swift */,
+				FA835D4B226078E200A592F2 /* ExpensesGraphDataCalculatingExtension.swift */,
+				FA835D4D22607A1100A592F2 /* IncomeAndExpensesGraphDataCalculatingExtension.swift */,
+				FA835D4F22607A7200A592F2 /* CashFlowGraphDataCalculatingExtension.swift */,
+				FA835D5122607B8600A592F2 /* NetWorthGraphDataCalculatingExtension.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
 		FAA91274220C79CD00F2C251 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,6 +866,7 @@
 			children = (
 				FACC01E8224B5F5F0044A747 /* StatisticsEditTableViewCell.swift */,
 				FACC01EC224B5FA90044A747 /* GraphTableViewCell.swift */,
+				FA835D552260CA7C00A592F2 /* PieChartCollectionViewCell.swift */,
 				FACC01F4224BC4B40044A747 /* HistoryTransactionsLoadingTableViewCell.swift */,
 				FACC01F6224BD24D0044A747 /* HistoryTransactionsHeaderTableViewCell.swift */,
 				FACC01EA224B5F800044A747 /* HistoryTransactionTableViewCell.swift */,
@@ -1348,6 +1386,7 @@
 				"${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
+				"${BUILT_PRODUCTS_DIR}/MSPeekCollectionViewDelegateImplementation/MSPeekCollectionViewDelegateImplementation.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RandomColorSwift/RandomColorSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -1374,6 +1413,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSPeekCollectionViewDelegateImplementation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RandomColorSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -1462,6 +1502,8 @@
 				FA6F2E922244C8D9008C160F /* StatisticsViewModel.swift in Sources */,
 				FAD88F2A21AEB77200BE7BC1 /* NotificationAction.swift in Sources */,
 				FAD88F3F21AEBDDB00BE7BC1 /* UIMessagePresenterManager.swift in Sources */,
+				FA835D462260751800A592F2 /* GraphDataPresentingAttributesExtension.swift in Sources */,
+				FA835D562260CA7C00A592F2 /* PieChartCollectionViewCell.swift in Sources */,
 				FAD88F5A21AEC1F800BE7BC1 /* UsersServiceProtocol.swift in Sources */,
 				FA16FC7D223BA9B50053C273 /* SoundsManager.swift in Sources */,
 				FA16FC6D223A61B80053C273 /* IncomeSourceTableViewCell.swift in Sources */,
@@ -1478,6 +1520,7 @@
 				FA6F2E942244D033008C160F /* HistoryTransactionViewModel.swift in Sources */,
 				FA7CB4D9221C2A7D00FAAC0F /* IncomesServiceProtocol.swift in Sources */,
 				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
+				FA835D4C226078E300A592F2 /* ExpensesGraphDataCalculatingExtension.swift in Sources */,
 				FAED7DA021EC65B200BF6FE1 /* BasketsCoordinator.swift in Sources */,
 				FA7DB72B22102B6D00559878 /* CurrencyViewModel.swift in Sources */,
 				FA6918A221F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift in Sources */,
@@ -1507,6 +1550,7 @@
 				FA66FB772226D2E000708C71 /* ExchangeRatesCoordinatorProtocol.swift in Sources */,
 				FA165CE821B7654100EAA16B /* ForgotPasswordViewModel.swift in Sources */,
 				FA16FC7B223BA88F0053C273 /* SoundsManagerProtocol.swift in Sources */,
+				FA835D442260744500A592F2 /* GraphPeriodScale.swift in Sources */,
 				FACC01F7224BD24D0044A747 /* HistoryTransactionsHeaderTableViewCell.swift in Sources */,
 				FAED7D9C21EC618000BF6FE1 /* BasketsService.swift in Sources */,
 				FA7276BB225250380086D4D1 /* RearrangeControllingExtension.swift in Sources */,
@@ -1523,6 +1567,7 @@
 				FA7CB4DB221C2C9D00FAAC0F /* IncomesService.swift in Sources */,
 				FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */,
 				FA0CAE1B21D66F9A00805288 /* IconsCoordinatorProtocol.swift in Sources */,
+				FA835D4A2260789B00A592F2 /* IncomeGraphDataCalculatingExtension.swift in Sources */,
 				FAC3B9CB21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift in Sources */,
 				FA7276E22254A6890086D4D1 /* FiltersSelectionViewController.swift in Sources */,
 				FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */,
@@ -1575,6 +1620,7 @@
 				FA0CAE2221D679D100805288 /* IconsViewController.swift in Sources */,
 				FA715E5221FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift in Sources */,
 				FAA91276220C79EA00F2C251 /* SettingsViewController.swift in Sources */,
+				FA835D48226076F700A592F2 /* GraphDataCalculatingExtension.swift in Sources */,
 				FAC3B9CD21C0F7670015A12F /* IncomeSourcesCoordinator.swift in Sources */,
 				FAA9127D220D249100F2C251 /* SettingsCoordinatorProtocol.swift in Sources */,
 				FA7276AF22524B190086D4D1 /* IncomeSourceEditDelegateExtension.swift in Sources */,
@@ -1604,6 +1650,7 @@
 				FAC3B9D121C131390015A12F /* JoinViewController.swift in Sources */,
 				FAC3B9C321BE74CE0015A12F /* OnboardingPageViewController.swift in Sources */,
 				FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */,
+				FA835D422260742400A592F2 /* GraphType.swift in Sources */,
 				FA9F962A21C2A86B00FD64C1 /* IncomeSourceEditViewController.swift in Sources */,
 				FAD88F1321AEB48800BE7BC1 /* ApplicationRouterProtocol.swift in Sources */,
 				FAD88F5821AEC1F800BE7BC1 /* APIClientProtocol.swift in Sources */,
@@ -1612,6 +1659,8 @@
 				FA0CAE1121D3C23000805288 /* ExpenseSourceEditViewModel.swift in Sources */,
 				FA817488222821DC00EE6116 /* ExchangeRatesService.swift in Sources */,
 				FA7276E02254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift in Sources */,
+				FA835D5022607A7200A592F2 /* CashFlowGraphDataCalculatingExtension.swift in Sources */,
+				FA835D5222607B8600A592F2 /* NetWorthGraphDataCalculatingExtension.swift in Sources */,
 				FA16FC69223A5A060053C273 /* IncomeSourcesViewModel.swift in Sources */,
 				FAA426062230F61E00B64925 /* FundsMovesService.swift in Sources */,
 				FAD88F5B21AEC1F800BE7BC1 /* DevicesServiceProtocol.swift in Sources */,
@@ -1628,6 +1677,7 @@
 				FAD88F8421B0FB7800BE7BC1 /* LandingViewController.swift in Sources */,
 				FAA426102230FCD400B64925 /* ExpenseEditViewModel.swift in Sources */,
 				FAA426042230F5E600B64925 /* ExpensesService.swift in Sources */,
+				FA835D4E22607A1100A592F2 /* IncomeAndExpensesGraphDataCalculatingExtension.swift in Sources */,
 				FAD88F4D21AEC1A500BE7BC1 /* AuthenticationService.swift in Sources */,
 				FA7276A9225249B00086D4D1 /* TransactionController.swift in Sources */,
 				FA165CEE21B7846C00EAA16B /* ResetPasswordViewController.swift in Sources */,

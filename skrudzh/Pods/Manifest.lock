@@ -12,6 +12,7 @@ PODS:
   - CWStatusBarNotification (2.3.5)
   - IQKeyboardManager (6.2.0)
   - Locksmith (4.0.0)
+  - MSPeekCollectionViewDelegateImplementation (0.13.0)
   - PromiseKit (6.5.2):
     - PromiseKit/CorePromise (= 6.5.2)
     - PromiseKit/Foundation (= 6.5.2)
@@ -64,6 +65,7 @@ DEPENDENCIES:
   - CWStatusBarNotification (~> 2.3)
   - IQKeyboardManager
   - Locksmith (~> 4.0)
+  - MSPeekCollectionViewDelegateImplementation
   - PromiseKit (~> 6.5)
   - PromiseKit/Alamofire (~> 6.5)
   - RandomColorSwift
@@ -88,6 +90,7 @@ SPEC REPOS:
     - CWStatusBarNotification
     - IQKeyboardManager
     - Locksmith
+    - MSPeekCollectionViewDelegateImplementation
     - PromiseKit
     - RandomColorSwift
     - SideMenu
@@ -121,6 +124,7 @@ SPEC CHECKSUMS:
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
+  MSPeekCollectionViewDelegateImplementation: 9141e80f032a831a5fc7d42b66bd3ba3f8fa3c1c
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   RandomColorSwift: 9f85058b721665d52d239ca166a913e083506444
   SideMenu: e5094f0b2e7d9609e100a90ae69025abd994f882
@@ -133,6 +137,6 @@ SPEC CHECKSUMS:
   Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
 
-PODFILE CHECKSUM: 987ebb2afdd453aadf8fc2592e45217631496d38
+PODFILE CHECKSUM: 88c220559b99c80006420a591134da64f00cf0e9
 
 COCOAPODS: 1.5.3

@@ -8,18 +8,28 @@
 
 import UIKit
 import Charts
+import MSPeekCollectionViewDelegateImplementation
 
 protocol GraphTableViewCellDelegate {
     func didTapGraphTypeButton()
     func didTapGraphScaleButton()
+    func didTapLinePieSwitchButton()
 }
 
 class GraphTableViewCell : UITableViewCell {
     @IBOutlet weak var lineChartView: LineChartView!
+    @IBOutlet weak var pieChartsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var lineChartViewContainer: UIView!
+    @IBOutlet weak var pieChartsViewContainer: UIView!
+    
     @IBOutlet weak var currentDateLabel: UILabel!
     @IBOutlet weak var currentPositionMarker: UIView!
     @IBOutlet weak var graphTypeSwitchButton: UIButton!
     @IBOutlet weak var graphScaleSwitchButton: UIButton!
+    @IBOutlet weak var linePieSwitchButton: UIButton!
+    
+    let pieChartsCollectionViewPeekDelegate = MSPeekCollectionViewDelegateImplementation(cellSpacing: 10, cellPeekWidth: 50, scrollThreshold: 150, maximumItemsToScroll: 1, numberOfItemsToShow: 1, scrollDirection: .horizontal)
     
     var delegate: GraphTableViewCellDelegate?
     
@@ -46,14 +56,25 @@ class GraphTableViewCell : UITableViewCell {
         delegate?.didTapGraphScaleButton()
     }
     
+    @IBAction func didTapLinePieChartSwitchButton(_ sender: Any) {
+        delegate?.didTapLinePieSwitchButton()
+    }
+    
     private func setupUI() {
         setupLineChart()
+        setupPieChartsCollectionView()
         setupButtons()
     }
     
     private func setupButtons() {
         graphTypeSwitchButton.setImageToRight()
         graphScaleSwitchButton.setImageToRight()
+    }
+    
+    private func setupPieChartsCollectionView() {        
+        pieChartsCollectionView.configureForPeekingDelegate()
+        pieChartsCollectionView.delegate = pieChartsCollectionViewPeekDelegate
+        pieChartsCollectionView.dataSource = self
     }
     
     private func setupLineChart() {
@@ -76,7 +97,7 @@ class GraphTableViewCell : UITableViewCell {
         lineChartView.dragDecelerationFrictionCoef = 0.95
         
         lineChartView.drawMarkers = false
-        lineChartView.setViewPortOffsets(left: 0, top: 30, right: 0, bottom: 40)
+        lineChartView.setViewPortOffsets(left: 0, top: 30, right: 0, bottom: 30)
         lineChartView.setDragOffsetX(lineChartView.frame.width / 2)
         
         lineChartView.xAxis.drawAxisLineEnabled = true
@@ -88,8 +109,7 @@ class GraphTableViewCell : UITableViewCell {
         lineChartView.drawBordersEnabled = false
         lineChartView.drawGridBackgroundEnabled = false
         
-        lineChartView.legend.enabled = true
-        lineChartView.legend.yOffset = 0
+        lineChartView.legend.enabled = false
         
         lineChartView.renderer = LineChartAreasRenderer(dataProvider: lineChartView, animator: lineChartView.chartAnimator, viewPortHandler: lineChartView.viewPortHandler)
         
@@ -101,15 +121,27 @@ class GraphTableViewCell : UITableViewCell {
         updateCurrentPositionMarker()
         updateDateFormatter()
         updateLineChart()
+        updatePieChartsCollectionView()
     }
     
     private func updateButtons() {
         graphTypeSwitchButton.setTitle(viewModel?.graphType.title, for: .normal)
         graphScaleSwitchButton.setTitle(viewModel?.graphPeriodScale.title, for: .normal)
+        
+        linePieSwitchButton.isHidden = viewModel?.linePieChartSwitchHidden ?? true
+        
+        if let imageName = viewModel?.linePieChartSwitchIconName {
+            linePieSwitchButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+    }
+    
+    private func updatePieChartsCollectionView() {
+        pieChartsViewContainer.isHidden = viewModel?.pieChartHidden ?? true
+        pieChartsCollectionView.reloadData()
     }
     
     private func updateCurrentPositionMarker() {
-        currentPositionMarker.isHidden = !(viewModel?.hasData ?? false)
+        currentPositionMarker.isHidden = viewModel?.isLineChartCurrentPositionMarkerHidden ?? true
     }
     
     private func updateDateFormatter() {
@@ -118,6 +150,8 @@ class GraphTableViewCell : UITableViewCell {
     }
     
     private func updateLineChart() {
+        lineChartViewContainer.isHidden = viewModel?.lineChartHidden ?? false
+        
         lineChartView.clear()
         lineChartView.leftAxis.resetCustomAxisMin()
         updateLineChartCurrentPointUI()
@@ -170,6 +204,41 @@ extension GraphTableViewCell : ChartViewDelegate {
         }
         
     }
+}
+
+extension GraphTableViewCell : UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel?.numberOfPieCharts ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PieChartCollectionViewCell", for: indexPath) as? PieChartCollectionViewCell,
+            let pieChartData = viewModel?.pieChartData(at: indexPath) else {
+                return UICollectionViewCell()
+        }
+        
+        cell.chartData = pieChartData
+        
+        return cell
+    }
+    
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        updatePieChartsPage()
+//    }
+//    
+//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+//        updatePieChartsPage()
+//    }
+//    
+//    private func updatePieChartsPage() {
+//        let page = Int(pieChartsCollectionView.contentOffset.x) / Int(pieChartsCollectionView.frame.width)
+//    }
 }
 
 class DateValueFormatter: NSObject, IAxisValueFormatter {

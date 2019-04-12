@@ -27,4 +27,5 @@ target 'skrudzh' do
   pod 'ALTextInputBar', git: 'https://github.com/bclymer/ALTextInputBar', branch: 'master'
   pod 'Charts'
   pod 'RandomColorSwift'
+  pod 'MSPeekCollectionViewDelegateImplementation'
 end
