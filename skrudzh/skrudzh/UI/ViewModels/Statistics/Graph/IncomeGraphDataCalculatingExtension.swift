@@ -21,7 +21,8 @@ extension GraphViewModel {
                               titleForTransaction: { $0.sourceTitle },
                               accumulateValuesHistory: false,
                               accumulateValuesForDate: true,
-                              fillDataSetAreas: true)
+                              fillDataSetAreas: true,
+                              colorForTransaction: { self.color(for: $0) } )
     }
     
     func calculateIncomePieChartDatas() -> [PieChartData] {
@@ -30,10 +31,20 @@ extension GraphViewModel {
                              periodScale: graphPeriodScale,
                              keyForTransaction: { $0.sourceId },
                              amountForTransactions: { self.amount(for: $0) },
-                             titleForTransaction: { $0.sourceTitle })
+                             titleForTransaction: { $0.sourceTitle },
+                             colorForTransaction: { self.color(for: $0) })
         
     }
     
+    func calculateIncomePieChartsAmounts() -> [String] {
+        return pieChartsAmounts(for: transactions,
+                                currency: currency,
+                                periodScale: graphPeriodScale,
+                                amountForTransactions: { self.amount(for: $0) })
+    }
     
-    
+    private func color(for transaction: HistoryTransactionViewModel) -> UIColor? {
+        guard let idIndex = incomeSourceIds.firstIndex(of: transaction.sourceId) else { return nil }
+        return colors.item(at: idIndex)
+    }
 }

@@ -75,9 +75,14 @@ extension GraphViewModel {
                               accumulateValuesHistory: true,
                               accumulateValuesForDate: false,
                               fillDataSetAreas: false,
-                              colorForTransaction: nil,
+                              colorForTransaction: { self.color(for: $0) },
                               oppositeKeyForTransaction: { oppositeKey(for: $0) },
                               oppositeAmountForTransactions: { oppositeAmount(for: $0) },
                               oppositeTitleForTransaction: { oppositeTitle(for: $0) })
+    }
+    
+    private func color(for transaction: HistoryTransactionViewModel) -> UIColor? {
+        guard let idIndex = expenseSourceIds.firstIndex(of: transaction.sourceId) else { return nil }
+        return colors.item(at: idIndex)
     }
 }

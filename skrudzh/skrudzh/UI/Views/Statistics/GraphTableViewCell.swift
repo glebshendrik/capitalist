@@ -29,7 +29,7 @@ class GraphTableViewCell : UITableViewCell {
     @IBOutlet weak var graphScaleSwitchButton: UIButton!
     @IBOutlet weak var linePieSwitchButton: UIButton!
     
-    let pieChartsCollectionViewPeekDelegate = MSPeekCollectionViewDelegateImplementation(cellSpacing: 10, cellPeekWidth: 50, scrollThreshold: 150, maximumItemsToScroll: 1, numberOfItemsToShow: 1, scrollDirection: .horizontal)
+    let pieChartsCollectionViewPeekDelegate = CollectionViewItemsPeekPresenter(cellSpacing: 10, cellPeekWidth: 50, maximumItemsToScroll: 1, numberOfItemsToShow: 1, scrollDirection: .horizontal)
     
     var delegate: GraphTableViewCellDelegate?
     
@@ -57,6 +57,7 @@ class GraphTableViewCell : UITableViewCell {
     }
     
     @IBAction func didTapLinePieChartSwitchButton(_ sender: Any) {
+        lineChartView.clear()
         delegate?.didTapLinePieSwitchButton()
     }
     
@@ -75,6 +76,7 @@ class GraphTableViewCell : UITableViewCell {
         pieChartsCollectionView.configureForPeekingDelegate()
         pieChartsCollectionView.delegate = pieChartsCollectionViewPeekDelegate
         pieChartsCollectionView.dataSource = self
+        pieChartsCollectionViewPeekDelegate.contentOffsetDelegate = self
     }
     
     private func setupLineChart() {
@@ -82,6 +84,11 @@ class GraphTableViewCell : UITableViewCell {
         
         lineChartView.leftAxis.enabled = true
         lineChartView.rightAxis.enabled = false
+        lineChartView.noDataText = "Недостаточно данных"
+        
+        lineChartView.noDataFont = UIFont(name: "Rubik-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        lineChartView.leftAxis.labelFont = UIFont(name: "Rubik-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12)
+        lineChartView.xAxis.labelFont = UIFont(name: "Rubik-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12)
         
         lineChartView.scaleXEnabled = false
         lineChartView.scaleYEnabled = true
@@ -138,6 +145,15 @@ class GraphTableViewCell : UITableViewCell {
     private func updatePieChartsCollectionView() {
         pieChartsViewContainer.isHidden = viewModel?.pieChartHidden ?? true
         pieChartsCollectionView.reloadData()
+        
+        
+        
+        if let offset = viewModel?.pieChartsCollectionContentOffset {
+            pieChartsCollectionView.setContentOffset(offset, animated: false)
+        } else if let lastItemIndexPath = pieChartsCollectionView.indexPathForLastItem,
+                  lastItemIndexPath.item > 0  {
+            pieChartsCollectionView.scrollToItem(at: lastItemIndexPath, at: .centeredHorizontally, animated: false)
+        }
     }
     
     private func updateCurrentPositionMarker() {
@@ -206,7 +222,10 @@ extension GraphTableViewCell : ChartViewDelegate {
     }
 }
 
-extension GraphTableViewCell : UICollectionViewDataSource {
+extension GraphTableViewCell : UICollectionViewDataSource, CollectionViewContentOffsetDelegate {
+    func didChangeContentOffset(_ contentOffset: CGPoint) {
+        viewModel?.pieChartsCollectionContentOffset = contentOffset
+    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -219,26 +238,14 @@ extension GraphTableViewCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PieChartCollectionViewCell", for: indexPath) as? PieChartCollectionViewCell,
-            let pieChartData = viewModel?.pieChartData(at: indexPath) else {
+            let pieChartViewModel = viewModel?.pieChartViewModel(at: indexPath) else {
                 return UICollectionViewCell()
         }
         
-        cell.chartData = pieChartData
+        cell.viewModel = pieChartViewModel
         
         return cell
     }
-    
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        updatePieChartsPage()
-//    }
-//    
-//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-//        updatePieChartsPage()
-//    }
-//    
-//    private func updatePieChartsPage() {
-//        let page = Int(pieChartsCollectionView.contentOffset.x) / Int(pieChartsCollectionView.frame.width)
-//    }
 }
 
 class DateValueFormatter: NSObject, IAxisValueFormatter {
@@ -279,5 +286,22 @@ class CurrencyValueFormatter: NSObject, IValueFormatter, IAxisValueFormatter {
         let amount = NSDecimalNumber(floatLiteral: value)
         
         return amount.moneyCurrencyString(with: currency, shouldRound: true) ?? amount.stringValue
+    }
+}
+
+protocol CollectionViewContentOffsetDelegate {
+    func didChangeContentOffset(_ contentOffset: CGPoint)
+}
+
+class CollectionViewItemsPeekPresenter : MSPeekCollectionViewDelegateImplementation {
+    
+    var contentOffsetDelegate: CollectionViewContentOffsetDelegate? = nil
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        contentOffsetDelegate?.didChangeContentOffset(scrollView.contentOffset)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        contentOffsetDelegate?.didChangeContentOffset(scrollView.contentOffset)
     }
 }

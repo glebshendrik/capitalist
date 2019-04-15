@@ -62,7 +62,7 @@ extension GraphViewModel {
                        accumulateValuesHistory: Bool,
                        accumulateValuesForDate: Bool,
                        fillDataSetAreas: Bool,
-                       colorForTransaction: ((HistoryTransactionViewModel) -> UIColor)? = nil,
+                       colorForTransaction: ((HistoryTransactionViewModel) -> UIColor?)? = nil,
                        oppositeKeyForTransaction: ((HistoryTransactionViewModel) -> Int)? = nil,
                        oppositeAmountForTransactions: (([HistoryTransactionViewModel]) -> NSDecimalNumber)? = nil,
                        oppositeTitleForTransaction: ((HistoryTransactionViewModel) -> String)? = nil) -> LineChartData? {
@@ -207,6 +207,7 @@ extension GraphViewModel {
         dataSet.drawValuesEnabled = false
         dataSet.fillAlpha = 0.85
         dataSet.mode = .horizontalBezier
+        dataSet.resetColors()
         
         let color = color ?? randomColor(hue: .random, luminosity: isEven ? .dark : .light)
         dataSet.fillColor = color
@@ -218,13 +219,39 @@ extension GraphViewModel {
         return dataSet
     }
     
+    func pieChartsAmounts(for transactions: [HistoryTransactionViewModel],
+                          currency: Currency?,
+                          periodScale: GraphPeriodScale,
+                          amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber) -> [String] {
+        
+        guard let currency = currency else { return [] }
+        
+        let transactionsByDateGroups = transactions.groupByKey { $0.gotAt.dateAtStartOf(periodScale.asUnit) }
+        
+        let amountsByDate = transactionsByDateGroups.compactMapKeysAndValues { (date, transactionsByDate) -> (Date, String)? in
+
+            guard let amount = amountForTransactions(transactionsByDate).moneyCurrencyString(with: currency, shouldRound: true) else { return nil }
+            
+            return (date, amount)
+        }
+        
+        return dataPoints.compactMap { date -> String? in
+            
+            func emptyAmount() -> String? {
+                return 0.moneyCurrencyString(with: currency, shouldRound: false)
+            }
+            
+            return amountsByDate[date] ?? emptyAmount()
+        }
+    }
+    
     func pieChartDatas(for transactions: [HistoryTransactionViewModel],
                        currency: Currency?,
                        periodScale: GraphPeriodScale,
                        keyForTransaction: @escaping (HistoryTransactionViewModel) -> Int,
                        amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber,
                        titleForTransaction: @escaping (HistoryTransactionViewModel) -> String,
-                       colorForTransaction: ((HistoryTransactionViewModel) -> UIColor)? = nil) -> [PieChartData] {
+                       colorForTransaction: ((HistoryTransactionViewModel) -> UIColor?)? = nil) -> [PieChartData] {
         
         let transactionsByDateGroups = transactions.groupByKey { $0.gotAt.dateAtStartOf(periodScale.asUnit) }
         
@@ -236,7 +263,8 @@ extension GraphViewModel {
                                                periodScale: periodScale,
                                                keyForTransaction: keyForTransaction,
                                                amountForTransactions: amountForTransactions,
-                                               titleForTransaction: titleForTransaction) else { return nil }
+                                               titleForTransaction: titleForTransaction,
+                                               colorForTransaction: colorForTransaction) else { return nil }
             return (date, chartData)
         }
         
@@ -245,8 +273,8 @@ extension GraphViewModel {
             func emptyPieChartData() -> PieChartData? {
                 let title = date.string(withFormat: periodScale.dateFormat)
                 let dataSet = createPieDataSet(title: title)
-                dataSet.addColor(.darkGray)
-                _ = dataSet.addEntry(PieChartDataEntry(value: 1.0))
+                dataSet.addColor(.gray)
+                _ = dataSet.addEntryOrdered(PieChartDataEntry(value: 1.0))
                 let data = createPieChartData(with: dataSet,
                                               currency: currency)                
                 return data
@@ -266,12 +294,13 @@ extension GraphViewModel {
                               keyForTransaction: @escaping (HistoryTransactionViewModel) -> Int,
                               amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber,
                               titleForTransaction: @escaping (HistoryTransactionViewModel) -> String,
-                              colorForTransaction: ((HistoryTransactionViewModel) -> UIColor)? = nil) -> PieChartData? {
+                              colorForTransaction: ((HistoryTransactionViewModel) -> UIColor?)? = nil) -> PieChartData? {
         
         guard let currency = currency else { return nil }
         
         let title = date.string(withFormat: periodScale.dateFormat)
         let dataSet = createPieDataSet(title: title)
+        let amount = amountForTransactions(transactions)
         
         let transactionsByDateAndKeyGroups = transactions.groupByKey { keyForTransaction($0) }
         
@@ -280,15 +309,15 @@ extension GraphViewModel {
             let key = transactionsByDateAndKeyGroup.key
             let transactionsByDateAndKey = transactionsByDateAndKeyGroup.value
             
-            let value = amountForTransactions(transactionsByDateAndKey).doubleValue
+            let value = amountForTransactions(transactionsByDateAndKey)
+            let percents = value.multiplying(byPowerOf10: 2).dividing(by: amount)
             
             if let transaction = transactionsByDateAndKey.first,
-                case let title = titleForTransaction(transaction) {
+                case let title = percentsFormatter.string(from: percents) {
                 
                 let color = colorForTransaction?(transaction) ?? randomColor(hue: .random, luminosity: dataSet.values.count.isEven ? .dark : .light)
-                
-                _ = dataSet.addEntryOrdered(PieChartDataEntry(value: value, label: title, data: key as AnyObject))
                 dataSet.addColor(color)
+                _ = dataSet.addEntryOrdered(PieChartDataEntry(value: value.doubleValue, label: title, data: key as AnyObject))
                 
             }
             
@@ -307,7 +336,12 @@ extension GraphViewModel {
     
     private func createPieDataSet(title: String) -> PieChartDataSet {
         let dataSet = PieChartDataSet(values: [], label: title)
-        dataSet.drawValuesEnabled = true
+        dataSet.drawValuesEnabled = false
+        dataSet.sliceSpace = 0
+        dataSet.xValuePosition = .insideSlice
+        dataSet.entryLabelFont  = UIFont(name: "Rubik-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        dataSet.entryLabelColor = .black        
+        dataSet.resetColors()
         return dataSet
     }
 }

@@ -26,6 +26,34 @@ extension GraphViewModel {
         }
     }
     
+    var incomeSourceIds: [Int] {
+        return transactions
+            .filter { $0.sourceType == HistoryTransactionSourceOrDestinationType.incomeSource }
+            .map { $0.sourceId }
+            .withoutDuplicates()
+            .sorted()
+    }
+    
+    var expenseSourceIds: [Int] {
+        let asSources = transactions
+            .filter { $0.sourceType == HistoryTransactionSourceOrDestinationType.expenseSource }
+            .map { $0.sourceId }
+        
+        let asDestinations = transactions
+            .filter { $0.destinationType == HistoryTransactionSourceOrDestinationType.expenseSource }
+            .map { $0.destinationId }
+        
+        return (asSources + asDestinations).withoutDuplicates().sorted()
+    }
+    
+    var expenseCategoryIds: [Int] {
+        return transactions
+            .filter { $0.destinationType == HistoryTransactionSourceOrDestinationType.expenseCategory }
+            .map { $0.destinationId }
+            .withoutDuplicates()
+            .sorted()
+    }
+    
     var currency: Currency? {
         return historyTransactionsViewModel.defaultCurrency
     }
@@ -72,6 +100,7 @@ extension GraphViewModel {
     }
     
     var visibleXRangeMaximum: Double {
+        guard numberOfDataPoints > 1 else { return 1.0 }
         return Double(labelsCount - 1) * granularity
     }
     
@@ -132,8 +161,30 @@ extension GraphViewModel {
         return pieChartDatas.count
     }
     
+    var colors: [UIColor] {
+        
+        return ["e6194B", "3cb44b", "ffe119", "4363d8", "f58231", "911eb4", "42d4f4", "f032e6", "bfef45", "fabebe", "469990", "e6beff", "9A6324", "fffac8", "800000", "aaffc3", "808000", "ffd8b1", "000075", "a9a9a9"]
+            .map { UIColor(hexString: $0) }
+            .compactMap  { $0 }        
+    }
+    
+    func pieChartViewModel(at indexPath: IndexPath) -> PieChartViewModel? {
+        guard   let data = pieChartData(at: indexPath),
+                let date = formattedDataPoint(at: indexPath),
+                let amount = pieChartAmount(at: indexPath) else { return nil }
+        return PieChartViewModel(chartData: data, date: date, amount: amount)
+    }
+    
     func pieChartData(at indexPath: IndexPath) -> PieChartData? {
         return pieChartDatas.item(at: indexPath.item)
+    }
+    
+    func pieChartAmount(at indexPath: IndexPath) -> String? {
+        return pieChartsAmounts.item(at: indexPath.item)
+    }
+    
+    func formattedDataPoint(at indexPath: IndexPath) -> String? {
+        return dataPoints.item(at: indexPath.item)?.string(withFormat: dateFormat)
     }
     
     func switchLinePieChart() {
