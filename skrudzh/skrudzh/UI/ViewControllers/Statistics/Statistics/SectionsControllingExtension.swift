@@ -22,35 +22,40 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         
         guard let section = viewModel.section(at: indexPath.section) else { return UITableViewCell() }
         
-        func cell(for identifier: String) -> UITableViewCell {
+        func dequeueCell(for identifier: String) -> UITableViewCell {
             return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         }
         
         switch section {
         case is SourceOrDestinationFilterEditSection:
-            guard let cell = cell(for: "StatisticsEditTableViewCell") as? StatisticsEditTableViewCell else { return UITableViewCell() }
+            guard let cell = dequeueCell(for: "StatisticsEditTableViewCell") as? StatisticsEditTableViewCell else { return UITableViewCell() }
             
             cell.editButtonTitleLabel.text = viewModel.editFilterTitle
             cell.delegate = self
             
             return cell
         case is GraphSection:
-            guard let cell = cell(for: "GraphTableViewCell") as? GraphTableViewCell else { return UITableViewCell() }
+            guard let graphSection = section as? GraphSection,
+                  let graphCellType = graphSection.cellType(at: indexPath) else { return UITableViewCell() }
             
-            cell.delegate = self
-            cell.viewModel = viewModel.graphViewModel
+//            guard let cell = cell(for: "GraphTableViewCell") as? GraphTableViewCell else {  }
+            
+            let cell = dequeueCell(for: graphCellType.identifier)
+            
+//            cell.delegate = self
+//            cell.viewModel = viewModel.graphViewModel
             
             return cell
         case is HistoryTransactionsLoadingSection:
-            guard let cell = cell(for: "HistoryTransactionsLoadingTableViewCell") as? HistoryTransactionsLoadingTableViewCell else { return UITableViewCell() }
+            guard let cell = dequeueCell(for: "HistoryTransactionsLoadingTableViewCell") as? HistoryTransactionsLoadingTableViewCell else { return UITableViewCell() }
             
             cell.loaderImageView.showLoader()
             
             return cell
         case is HistoryTransactionsHeaderSection:
-            return cell(for: "HistoryTransactionsHeaderTableViewCell")
+            return dequeueCell(for: "HistoryTransactionsHeaderTableViewCell")
         case is HistoryTransactionsSection:
-            guard   let cell = cell(for: "HistoryTransactionTableViewCell") as? HistoryTransactionTableViewCell,
+            guard   let cell = dequeueCell(for: "HistoryTransactionTableViewCell") as? HistoryTransactionTableViewCell,
                 let historyTransactionsSection = section as? HistoryTransactionsSection,
                 let historyTransactionViewModel = historyTransactionsSection.historyTransactionViewModel(at: indexPath.row) else { return UITableViewCell() }
             

@@ -53,7 +53,7 @@ class FiltersViewModel {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.expenseCategoriesCoordinator = expenseCategoriesCoordinator
     }
-    
+        
     func reloadFilter() -> Promise<Void> {
         guard let filter = singleSourceOrDestinationFilter else { return Promise.value(()) }
         switch filter.type {

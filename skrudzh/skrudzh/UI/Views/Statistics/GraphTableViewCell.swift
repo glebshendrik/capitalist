@@ -13,6 +13,7 @@ import MSPeekCollectionViewDelegateImplementation
 protocol GraphTableViewCellDelegate {
     func didTapGraphTypeButton()
     func didTapGraphScaleButton()
+    func didTapAggregationTypeButton()
     func didTapLinePieSwitchButton()
 }
 

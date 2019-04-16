@@ -17,14 +17,24 @@ class GraphViewModel {
     var graphType: GraphType = .incomeAndExpenses {
         didSet {
             updateChartsData()
+            updateAggregationType()
+        }
+    }
+    
+    var aggregationType: AggregationType = .total {
+        didSet {
+            updateGraphFilters()
         }
     }
     
     var graphPeriodScale: GraphPeriodScale = .days {
         didSet {
             updateChartsData()
+            updateGraphFilters()
         }
     }
+    
+    var areGraphFiltersShown: Bool = false
     
     public private(set) var dataPoints: [Date] = [] {
         didSet {
@@ -48,6 +58,7 @@ class GraphViewModel {
     public private(set) var lineChartData: LineChartData? = nil
     public private(set) var pieChartDatas: [PieChartData] = []
     public private(set) var pieChartsAmounts: [String] = []
+    var graphFilters: [GraphHistoryTransactionFilter] = []
     
     init(historyTransactionsViewModel: HistoryTransactionsViewModel) {
         self.historyTransactionsViewModel = historyTransactionsViewModel

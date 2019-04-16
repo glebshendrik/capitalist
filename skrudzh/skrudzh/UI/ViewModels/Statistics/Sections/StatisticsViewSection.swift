@@ -20,12 +20,6 @@ class SourceOrDestinationFilterEditSection : StatisticsViewSection {
     var title: String? { return nil }
 }
 
-class GraphSection : StatisticsViewSection {
-    var isSectionHeaderVisible: Bool { return false }
-    var numberOfRows: Int { return 1 }
-    var title: String? { return nil }
-}
-
 class HistoryTransactionsLoadingSection : StatisticsViewSection {
     var isSectionHeaderVisible: Bool { return false }
     var numberOfRows: Int { return 1 }
@@ -36,23 +30,4 @@ class HistoryTransactionsHeaderSection : StatisticsViewSection {
     var isSectionHeaderVisible: Bool { return true }
     var numberOfRows: Int { return 1 }
     var title: String? { return nil }
-}
-
-class HistoryTransactionsSection : StatisticsViewSection {
-    var isSectionHeaderVisible: Bool { return true }
-    var numberOfRows: Int { return historyTransactionViewModels.count }
-    var title: String? { return date.dateString(ofStyle: .full) }
-    
-    let date: Date
-    private let historyTransactionViewModels: [HistoryTransactionViewModel]
-    
-    init(date: Date,
-         historyTransactionViewModels: [HistoryTransactionViewModel]) {
-        self.date = date
-        self.historyTransactionViewModels = historyTransactionViewModels
-    }
-    
-    func historyTransactionViewModel(at index: Int) -> HistoryTransactionViewModel? {
-        return historyTransactionViewModels.item(at: index)
-    }
 }

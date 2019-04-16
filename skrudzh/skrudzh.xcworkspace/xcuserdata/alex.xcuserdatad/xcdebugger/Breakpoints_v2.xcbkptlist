@@ -956,9 +956,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "pieChartViewModel(at:)"
-            landmarkType = "7">
+            endingLineNumber = "172">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -990,22 +988,6 @@
             startingLineNumber = "52"
             endingLineNumber = "52"
             landmarkName = "updateUI()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/Graph/GraphDataCalculatingExtension.swift"
-            timestampString = "577035515.541586"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
-            landmarkName = "pieChartData(for:transactions:currency:periodScale:keyForTransaction:amountForTransactions:titleForTransaction:colorForTransaction:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

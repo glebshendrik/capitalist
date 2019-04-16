@@ -232,42 +232,53 @@ extension StatisticsViewController : StatisticsTitleViewDelegate {
 }
 
 extension StatisticsViewController : GraphTableViewCellDelegate {
-    func didTapGraphTypeButton() {
-        let alertController = UIAlertController(title: nil,
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
         
-        for graphType in GraphType.switchList {
-            alertController.addAction(title: graphType.title,
-                                      style: .default,
-                                      isEnabled: true,
-                                      handler: { _ in
-                                        self.viewModel.graphViewModel.graphType = graphType
-                                        self.updateUI()
+    func didTapGraphTypeButton() {
+        let actions = GraphType.switchList.map { graphType in
+            return UIAlertAction(title: graphType.title,
+                                 style: .default,
+                                 handler: { _ in
+                                    self.viewModel.set(graphType: graphType)
+                                    self.updateUI()
             })
         }
         
-        alertController.addAction(title: "Отмена",
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: nil)
-        
-        present(alertController, animated: true)
+        showActionSheet(with: actions)
     }
     
     func didTapGraphScaleButton() {
+        let actions = GraphPeriodScale.switchList.map { graphScale in
+            return UIAlertAction(title: graphScale.title,
+                                 style: .default,
+                                 handler: { _ in
+                                    self.viewModel.set(graphScale: graphScale)
+                                    self.updateUI()
+            })
+        }
+        
+        showActionSheet(with: actions)
+    }
+    
+    func didTapAggregationTypeButton() {
+        let actions = viewModel.aggregationTypes.map { aggregationType in
+            return UIAlertAction(title: aggregationType.title,
+                                 style: .default,
+                                 handler: { _ in
+                                    self.viewModel.set(aggregationType: aggregationType)
+                                    self.updateUI()
+            })
+        }
+        
+        showActionSheet(with: actions)
+    }
+    
+    private func showActionSheet(with actions: [UIAlertAction]) {
         let alertController = UIAlertController(title: nil,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
         
-        for graphScale in GraphPeriodScale.switchList {
-            alertController.addAction(title: graphScale.title,
-                                      style: .default,
-                                      isEnabled: true,
-                                      handler: { _ in
-                                        self.viewModel.graphViewModel.graphPeriodScale = graphScale
-                                        self.updateUI()
-            })
+        for action in actions {
+            alertController.addAction(action)
         }
         
         alertController.addAction(title: "Отмена",
@@ -279,7 +290,7 @@ extension StatisticsViewController : GraphTableViewCellDelegate {
     }
     
     func didTapLinePieSwitchButton() {
-        viewModel.graphViewModel.switchLinePieChart()
+        viewModel.switchLinePieChart()
         updateUI()
     }
 }

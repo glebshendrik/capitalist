@@ -17,12 +17,12 @@ enum StatisticsError : Error {
 class StatisticsViewModel {    
     private let historyTransactionsViewModel: HistoryTransactionsViewModel
     private let filtersViewModel: FiltersViewModel
-    let graphViewModel: GraphViewModel
     
     public private(set) var isDataLoading: Bool = false
     
     private var sections: [StatisticsViewSection] = []
     private var historyTransactionsSections: [HistoryTransactionsSection] = []
+    private let graphSection: GraphSection
     
     var numberOfSections: Int {
         return sections.count
@@ -32,7 +32,7 @@ class StatisticsViewModel {
          filtersViewModel: FiltersViewModel) {
         self.historyTransactionsViewModel = historyTransactionsViewModel
         self.filtersViewModel = filtersViewModel
-        self.graphViewModel = GraphViewModel(historyTransactionsViewModel: self.historyTransactionsViewModel)
+        graphSection = GraphSection(viewModel: GraphViewModel(historyTransactionsViewModel: self.historyTransactionsViewModel))
     }
     
     func setDataLoading() {
@@ -63,7 +63,7 @@ class StatisticsViewModel {
     }
     
     private func updateGraphData() {
-        self.graphViewModel.updateChartsData()
+        graphSection.viewModel.updateChartsData()
     }
     
     private func updateHistoryTransactionsSections() {
@@ -78,7 +78,7 @@ class StatisticsViewModel {
         if filtersViewModel.isSingleSourceOrDestinationFilterSelected {
             sections.append(SourceOrDestinationFilterEditSection())
         }
-        sections.append(GraphSection())
+        sections.append(graphSection)
         if isDataLoading {
             sections.append(HistoryTransactionsLoadingSection())
         } else if historyTransactionsSections.count > 0 {
@@ -167,8 +167,8 @@ extension StatisticsViewModel {
             case .expenseCategory:
                 return .expenses
             }
-        }
-        graphViewModel.graphType = graphType(by: sourceOrDestinationFilter.type)
+        }        
+        set(graphType: graphType(by: sourceOrDestinationFilter.type))
         set(sourceOrDestinationFilters: [sourceOrDestinationFilter])
     }
     
@@ -199,5 +199,28 @@ extension StatisticsViewModel {
     
     func sourceOrDestinationFilter(at indexPath: IndexPath) -> SourceOrDestinationHistoryTransactionFilter? {
         return filtersViewModel.sourceOrDestinationFilter(at: indexPath)
+    }
+}
+
+// Graph
+extension StatisticsViewModel {
+    var aggregationTypes: [AggregationType] {
+        return graphSection.viewModel.aggregationTypes
+    }
+    
+    func set(graphType: GraphType) {
+        graphSection.viewModel.graphType = graphType
+    }
+    
+    func set(graphScale: GraphPeriodScale) {
+        graphSection.viewModel.graphPeriodScale = graphScale
+    }
+    
+    func set(aggregationType: AggregationType) {
+        graphSection.viewModel.aggregationType = aggregationType
+    }
+    
+    func switchLinePieChart() {
+        graphSection.viewModel.switchLinePieChart()
     }
 }
