@@ -49,6 +49,7 @@ class GraphTableViewCell : UITableViewCell {
         setupUI()
         updateUI()
     }
+    
     @IBAction func didTapGraphTypeButton(_ sender: Any) {
         delegate?.didTapGraphTypeButton()
     }
@@ -226,6 +227,7 @@ extension GraphTableViewCell : ChartViewDelegate {
 extension GraphTableViewCell : UICollectionViewDataSource, CollectionViewContentOffsetDelegate {
     func didChangeContentOffset(_ contentOffset: CGPoint) {
         viewModel?.pieChartsCollectionContentOffset = contentOffset
+        viewModel?.currentPieChartIndex = pieChartsCollectionViewPeekDelegate.scrollView(pieChartsCollectionView, indexForItemAtContentOffset: contentOffset)        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

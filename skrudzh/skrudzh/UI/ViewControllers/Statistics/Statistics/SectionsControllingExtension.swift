@@ -38,12 +38,30 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             guard let graphSection = section as? GraphSection,
                   let graphCellType = graphSection.cellType(at: indexPath) else { return UITableViewCell() }
             
-//            guard let cell = cell(for: "GraphTableViewCell") as? GraphTableViewCell else {  }
-            
             let cell = dequeueCell(for: graphCellType.identifier)
             
-//            cell.delegate = self
-//            cell.viewModel = viewModel.graphViewModel
+            if let graphCell = cell as? GraphTableViewCell {
+                graphCell.delegate = self
+                graphCell.viewModel = graphSection.viewModel
+                return graphCell
+            }
+            
+            if let graphFiltersToggleCell = cell as? GraphFiltersToggleTableViewCell {
+                graphFiltersToggleCell.delegate = self
+                graphFiltersToggleCell.viewModel = graphSection.viewModel
+                return graphFiltersToggleCell
+            }
+            
+            if let graphTotalCell = cell as? GraphTotalTableViewCell {
+                graphTotalCell.viewModel = graphSection.viewModel
+                return graphTotalCell
+            }
+            
+            if let graphFilterCell = cell as? GraphFilterTableViewCell,
+                      let filterViewModel = graphSection.viewModel.graphFilterViewModel(at: indexPath)  {
+                graphFilterCell.viewModel = filterViewModel
+                return graphFilterCell
+            }
             
             return cell
         case is HistoryTransactionsLoadingSection:

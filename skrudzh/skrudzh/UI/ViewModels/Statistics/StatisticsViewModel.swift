@@ -223,4 +223,8 @@ extension StatisticsViewModel {
     func switchLinePieChart() {
         graphSection.viewModel.switchLinePieChart()
     }
+    
+    func toggleGraphFilters() {
+        graphSection.viewModel.toggleFilters()
+    }
 }

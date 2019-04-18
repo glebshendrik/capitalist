@@ -10,7 +10,6 @@ import Foundation
 
 enum AggregationType {
     case percent
-    case budget
     case total
     case average
     case maximum
@@ -20,8 +19,6 @@ enum AggregationType {
         switch self {
         case .percent:
             return "Проценты"
-        case .budget:
-            return "Запланировано"
         case .total:
             return "Сумма"
         case .average:

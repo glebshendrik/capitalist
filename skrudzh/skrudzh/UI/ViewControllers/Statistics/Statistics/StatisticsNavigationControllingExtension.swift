@@ -294,3 +294,11 @@ extension StatisticsViewController : GraphTableViewCellDelegate {
         updateUI()
     }
 }
+
+extension StatisticsViewController : GraphFiltersToggleDelegate {
+    func didTapFiltersToggleButton() {
+        viewModel.toggleGraphFilters()
+        updateUI()
+    }
+    
+}

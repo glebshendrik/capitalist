@@ -54,11 +54,14 @@ class GraphViewModel {
     
     var lineChartCurrentPoint: Double? = nil
     var pieChartsCollectionContentOffset: CGPoint? = nil
+    var currentPieChartIndex: Int? = nil
     
     public private(set) var lineChartData: LineChartData? = nil
     public private(set) var pieChartDatas: [PieChartData] = []
     public private(set) var pieChartsAmounts: [String] = []
     var graphFilters: [GraphHistoryTransactionFilter] = []
+    var filtersAggregatedTotal: Double? = nil
+    var filtersTotalByDate: [Date: Double] = [:]
     
     init(historyTransactionsViewModel: HistoryTransactionsViewModel) {
         self.historyTransactionsViewModel = historyTransactionsViewModel

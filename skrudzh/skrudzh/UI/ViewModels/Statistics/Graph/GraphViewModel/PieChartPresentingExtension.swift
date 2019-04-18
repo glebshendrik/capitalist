@@ -12,7 +12,12 @@ import RandomColorSwift
 import SwifterSwift
 
 extension GraphViewModel {
-        
+    
+    var pieChartCurrentPointDate: Date? {
+        guard let index = currentPieChartIndex else { return nil }
+        return dataPoints.item(at: index)
+    }
+    
     var numberOfPieCharts: Int {
         return pieChartDatas.count
     }
