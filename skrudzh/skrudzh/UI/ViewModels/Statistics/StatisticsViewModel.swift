@@ -17,22 +17,32 @@ enum StatisticsError : Error {
 class StatisticsViewModel {    
     private let historyTransactionsViewModel: HistoryTransactionsViewModel
     private let filtersViewModel: FiltersViewModel
+    let graphViewModel: GraphViewModel
     
     public private(set) var isDataLoading: Bool = false
     
     private var sections: [StatisticsViewSection] = []
-    private var historyTransactionsSections: [HistoryTransactionsSection] = []
-    private let graphSection: GraphSection
+    private var historyTransactionsSections: [HistoryTransactionsSection] = []    
+    private let graphFiltersSection: GraphFiltersSection
     
     var numberOfSections: Int {
         return sections.count
+    }
+    
+    var graphFiltersSectionIndex: Int? {
+        return sections.firstIndex { $0.type == .graphFilters }
+    }
+    
+    var graphSectionIndex: Int? {
+        return sections.firstIndex { $0.type == .graph }
     }
     
     init(historyTransactionsViewModel: HistoryTransactionsViewModel,
          filtersViewModel: FiltersViewModel) {
         self.historyTransactionsViewModel = historyTransactionsViewModel
         self.filtersViewModel = filtersViewModel
-        graphSection = GraphSection(viewModel: GraphViewModel(historyTransactionsViewModel: self.historyTransactionsViewModel))
+        graphViewModel = GraphViewModel(historyTransactionsViewModel: self.historyTransactionsViewModel)
+        graphFiltersSection = GraphFiltersSection(viewModel: graphViewModel)
     }
     
     func setDataLoading() {
@@ -63,7 +73,7 @@ class StatisticsViewModel {
     }
     
     private func updateGraphData() {
-        graphSection.viewModel.updateChartsData()
+        graphViewModel.updateChartsData()
     }
     
     private func updateHistoryTransactionsSections() {
@@ -78,7 +88,12 @@ class StatisticsViewModel {
         if filtersViewModel.isSingleSourceOrDestinationFilterSelected {
             sections.append(SourceOrDestinationFilterEditSection())
         }
-        sections.append(graphSection)
+        
+        sections.append(GraphSection())
+        
+        updateGraphFiltersSection()
+        sections.append(graphFiltersSection)
+        
         if isDataLoading {
             sections.append(HistoryTransactionsLoadingSection())
         } else if historyTransactionsSections.count > 0 {
@@ -205,26 +220,34 @@ extension StatisticsViewModel {
 // Graph
 extension StatisticsViewModel {
     var aggregationTypes: [AggregationType] {
-        return graphSection.viewModel.aggregationTypes
+        return graphViewModel.aggregationTypes
     }
     
     func set(graphType: GraphType) {
-        graphSection.viewModel.graphType = graphType
+        graphViewModel.graphType = graphType
     }
     
     func set(graphScale: GraphPeriodScale) {
-        graphSection.viewModel.graphPeriodScale = graphScale
+        graphViewModel.graphPeriodScale = graphScale
     }
     
     func set(aggregationType: AggregationType) {
-        graphSection.viewModel.aggregationType = aggregationType
+        graphViewModel.aggregationType = aggregationType
     }
     
     func switchLinePieChart() {
-        graphSection.viewModel.switchLinePieChart()
+        graphViewModel.switchLinePieChart()
     }
     
     func toggleGraphFilters() {
-        graphSection.viewModel.toggleFilters()
+        graphViewModel.toggleFilters()
+    }
+    
+    func updateGraphFiltersSection() {
+        graphFiltersSection.updateRows()
+    }
+    
+    func graphFilterViewModel(at index: Int) -> GraphHistoryTransactionFilter? {
+        return graphViewModel.graphFilterViewModel(at: index)
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 
 extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections
     }
@@ -35,30 +36,31 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             
             return cell
         case is GraphSection:
-            guard let graphSection = section as? GraphSection,
-                  let graphCellType = graphSection.cellType(at: indexPath) else { return UITableViewCell() }
+            guard let cell = dequeueCell(for: "GraphTableViewCell") as? GraphTableViewCell else { return UITableViewCell() }
             
-            let cell = dequeueCell(for: graphCellType.identifier)
+            cell.delegate = self
+            cell.viewModel = viewModel.graphViewModel
             
-            if let graphCell = cell as? GraphTableViewCell {
-                graphCell.delegate = self
-                graphCell.viewModel = graphSection.viewModel
-                return graphCell
-            }
+            return cell
+        case is GraphFiltersSection:
+            guard let graphFiltersSection = section as? GraphFiltersSection,
+                let cellType = graphFiltersSection.cellType(at: indexPath) else { return UITableViewCell() }
+            
+            let cell = dequeueCell(for: cellType.identifier)
             
             if let graphFiltersToggleCell = cell as? GraphFiltersToggleTableViewCell {
                 graphFiltersToggleCell.delegate = self
-                graphFiltersToggleCell.viewModel = graphSection.viewModel
+                graphFiltersToggleCell.viewModel = viewModel.graphViewModel
                 return graphFiltersToggleCell
             }
             
             if let graphTotalCell = cell as? GraphTotalTableViewCell {
-                graphTotalCell.viewModel = graphSection.viewModel
+                graphTotalCell.viewModel = viewModel.graphViewModel
                 return graphTotalCell
             }
             
             if let graphFilterCell = cell as? GraphFilterTableViewCell,
-                      let filterViewModel = graphSection.viewModel.graphFilterViewModel(at: indexPath)  {
+                let filterViewModel = viewModel.graphFilterViewModel(at: graphFiltersSection.filterIndex(fromSectionIndexPath: indexPath) )  {
                 graphFilterCell.viewModel = filterViewModel
                 return graphFilterCell
             }
@@ -123,6 +125,8 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             return 36.0
         case is GraphSection:
             return 370.0
+        case is GraphFiltersSection:
+            return 44.0
         case is HistoryTransactionsLoadingSection:
             return 44.0
         case is HistoryTransactionsHeaderSection:
@@ -132,5 +136,9 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         default:
             return CGFloat.leastNonzeroMagnitude
         }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 400.0
     }
 }

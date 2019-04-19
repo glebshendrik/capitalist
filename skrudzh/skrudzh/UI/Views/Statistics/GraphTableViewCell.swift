@@ -15,6 +15,7 @@ protocol GraphTableViewCellDelegate {
     func didTapGraphScaleButton()
     func didTapAggregationTypeButton()
     func didTapLinePieSwitchButton()
+    func graphFiltersAndTotalUpdateNeeded()
 }
 
 class GraphTableViewCell : UITableViewCell {
@@ -29,6 +30,7 @@ class GraphTableViewCell : UITableViewCell {
     @IBOutlet weak var graphTypeSwitchButton: UIButton!
     @IBOutlet weak var graphScaleSwitchButton: UIButton!
     @IBOutlet weak var linePieSwitchButton: UIButton!
+    @IBOutlet weak var aggregationTypeSwitchButton: UIButton!
     
     let pieChartsCollectionViewPeekDelegate = CollectionViewItemsPeekPresenter(cellSpacing: 10, cellPeekWidth: 50, maximumItemsToScroll: 1, numberOfItemsToShow: 1, scrollDirection: .horizontal)
     
@@ -63,6 +65,10 @@ class GraphTableViewCell : UITableViewCell {
         delegate?.didTapLinePieSwitchButton()
     }
     
+    @IBAction func didTapAggregationTypeSwitchButton(_ sender: Any) {
+        delegate?.didTapAggregationTypeButton()
+    }
+    
     private func setupUI() {
         setupLineChart()
         setupPieChartsCollectionView()
@@ -72,6 +78,7 @@ class GraphTableViewCell : UITableViewCell {
     private func setupButtons() {
         graphTypeSwitchButton.setImageToRight()
         graphScaleSwitchButton.setImageToRight()
+        aggregationTypeSwitchButton.setImageToRight()
     }
     
     private func setupPieChartsCollectionView() {        
@@ -121,7 +128,6 @@ class GraphTableViewCell : UITableViewCell {
         lineChartView.legend.enabled = false
         
         lineChartView.renderer = LineChartAreasRenderer(dataProvider: lineChartView, animator: lineChartView.chartAnimator, viewPortHandler: lineChartView.viewPortHandler)
-        
 
     }
     
@@ -136,6 +142,7 @@ class GraphTableViewCell : UITableViewCell {
     private func updateButtons() {
         graphTypeSwitchButton.setTitle(viewModel?.graphType.title, for: .normal)
         graphScaleSwitchButton.setTitle(viewModel?.graphPeriodScale.title, for: .normal)
+        aggregationTypeSwitchButton.setTitle(viewModel?.aggregationType.title, for: .normal)
         
         linePieSwitchButton.isHidden = viewModel?.linePieChartSwitchHidden ?? true
         
@@ -147,8 +154,6 @@ class GraphTableViewCell : UITableViewCell {
     private func updatePieChartsCollectionView() {
         pieChartsViewContainer.isHidden = viewModel?.pieChartHidden ?? true
         pieChartsCollectionView.reloadData()
-        
-        
         
         if let offset = viewModel?.pieChartsCollectionContentOffset {
             pieChartsCollectionView.setContentOffset(offset, animated: false)
@@ -172,7 +177,6 @@ class GraphTableViewCell : UITableViewCell {
         
         lineChartView.clear()
         lineChartView.leftAxis.resetCustomAxisMin()
-        updateLineChartCurrentPointUI()
         
         guard   let viewModel = viewModel,
                 let currency = viewModel.currency,
@@ -210,24 +214,23 @@ extension GraphTableViewCell : ChartViewDelegate {
     }
     
     private func updateLineChart(currentPoint: Double?) {
-        viewModel?.lineChartCurrentPoint = currentPoint
-        updateLineChartCurrentPointUI()
+        if viewModel?.lineChartCurrentPoint != currentPoint {
+            viewModel?.lineChartCurrentPoint = currentPoint
+            updateLineChartCurrentPointUI()
+        }
+        
     }
     
     private func updateLineChartCurrentPointUI() {
-        if let date = viewModel?.lineChartCurrentPointDate {
-            currentDateLabel.text = dateFormatter.string(from: date)
-        } else {
-            currentDateLabel.text = nil
-        }
-        
+        delegate?.graphFiltersAndTotalUpdateNeeded()
     }
 }
 
 extension GraphTableViewCell : UICollectionViewDataSource, CollectionViewContentOffsetDelegate {
     func didChangeContentOffset(_ contentOffset: CGPoint) {
         viewModel?.pieChartsCollectionContentOffset = contentOffset
-        viewModel?.currentPieChartIndex = pieChartsCollectionViewPeekDelegate.scrollView(pieChartsCollectionView, indexForItemAtContentOffset: contentOffset)        
+        viewModel?.currentPieChartIndex = pieChartsCollectionViewPeekDelegate.scrollView(pieChartsCollectionView, indexForItemAtContentOffset: contentOffset)
+        delegate?.graphFiltersAndTotalUpdateNeeded()
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

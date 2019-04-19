@@ -33,9 +33,11 @@ class GraphFilterTableViewCell : UITableViewCell {
         guard let viewModel = viewModel,
               let aggregationType = viewModel.aggregationType,
               let aggregatedValue = viewModel.aggregated,
-              let value = viewModel.amount  else { return }
+              let value = viewModel.amount,
+              let percent = viewModel.percent else { return }
         
         let valueNumber = NSDecimalNumber(floatLiteral: value)
+        let percentNumber = NSDecimalNumber(floatLiteral: percent)
         let aggregatedValueNumber = NSDecimalNumber(floatLiteral: aggregatedValue)
         
         titleLabel.textColor = viewModel.color        
@@ -43,7 +45,7 @@ class GraphFilterTableViewCell : UITableViewCell {
         valueLabel.text = valueNumber.moneyCurrencyString(with: viewModel.currency, shouldRound: false)
         
         if aggregationType == .percent {
-            aggregatedValueLabel.text = percentsFormatter.string(from: aggregatedValueNumber)
+            aggregatedValueLabel.text = percentsFormatter.string(from: percentNumber)
         } else {
             aggregatedValueLabel.text = aggregatedValueNumber.moneyCurrencyString(with: viewModel.currency, shouldRound: false)
         }

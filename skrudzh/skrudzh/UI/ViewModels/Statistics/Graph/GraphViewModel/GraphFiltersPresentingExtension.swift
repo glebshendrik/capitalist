@@ -19,9 +19,7 @@ extension GraphViewModel {
             return [.percent, .total, .average, .maximum, .minimum]
         case .incomeAndExpenses:
             return [.total, .average, .maximum, .minimum]
-        case .cashFlow:
-            return [.percent, .average, .maximum, .minimum]
-        case .netWorth:
+        case .cashFlow, .netWorth:
             return [.average, .maximum, .minimum]
         }
     }
@@ -60,15 +58,19 @@ extension GraphViewModel {
         switch graphType {
         case .income, .incomePie, .expenses, .expensesPie, .incomeAndExpenses:
             return .total
-        case .cashFlow:
-            return .percent
-        case .netWorth:
+        case .cashFlow, .netWorth:
             return .average
         }
     }
     
     func updateAggregationType() {
         aggregationType = defaultAggregationType(for: graphType)
+    }
+    
+    func updateGraphFiltersVisibility() {
+        if graphType == .incomeAndExpenses || graphType == .netWorth {
+            areGraphFiltersShown = true
+        }
     }
     
     func updateGraphFilters() {
@@ -83,16 +85,30 @@ extension GraphViewModel {
             graphFilters = calculateIncomeAndExpensesFilters()
         case .netWorth:
             graphFilters = calculateNetWorthFilters()
-        }
+        }        
         updateTotal()
+        updateGraphFiltersAggregationType()
+        updateGraphFiltersCurrentDate()
+    }
+    
+    func updateAggregatedTotal() {
+        filtersAggregatedTotal = graphFilters.compactMap { $0.aggregatedValues[aggregationType] }.reduce(0.0, +)
     }
     
     func updateTotal() {
-        filtersAggregatedTotal = graphFilters.compactMap { $0.aggregatedValues[aggregationType] }.reduce(0.0, +)
+        updateAggregatedTotal()
         filtersTotalByDate = [Date : Double]()
         for date in dataPoints {
             filtersTotalByDate[date] = graphFilters.compactMap { $0.values[date] }.reduce(0.0, +)            
         }
+    }
+    
+    func updateGraphFiltersAggregationType() {
+        graphFilters.forEach { $0.aggregationType = self.aggregationType }
+    }
+    
+    func updateGraphFiltersCurrentDate() {
+        graphFilters.forEach { $0.date = self.currentDate }
     }
     
     func calculateGraphFilters(for transactions: [HistoryTransactionViewModel],
@@ -203,21 +219,27 @@ extension GraphViewModel {
             filters[filter.key]?.aggregatedValues[AggregationType.minimum] = min
             filters[filter.key]?.aggregatedValues[AggregationType.maximum] = max
             filters[filter.key]?.aggregatedValues[AggregationType.average] = average
+            filters[filter.key]?.aggregatedValues[AggregationType.percent] = 0.0
         }
         
-        let total = filters.values.compactMap { $0.aggregatedValues[AggregationType.total] }.reduce(0.0, +)
-        
-        for filter in filters {
-            let filterTotal = filter.value.aggregatedValues[AggregationType.total] ?? 0.0
-            let percents = filterTotal * 100.0 / total
-            filters[filter.key]?.aggregatedValues[AggregationType.percent] = percents
+        for date in dataPoints {
+            let total = filters.values.compactMap { $0.values[date] }.reduce(0.0, +)
+            for key in filters.keys {
+                if let value = filters[key]?.values[date],
+                    total > 0 {
+                    let percents = value * 100.0 / total
+                    filters[key]?.percents[date] = percents
+                } else {
+                    filters[key]?.percents[date] = 0.0
+                }
+            }
         }
-        
+                
         return filters.values.map { $0 }.sorted { $0.total >= $1.total }
     }
     
-    func graphFilterViewModel(at indexPath: IndexPath) -> GraphHistoryTransactionFilter? {
-        return graphFilters.item(at: indexPath.row)
+    func graphFilterViewModel(at index: Int) -> GraphHistoryTransactionFilter? {
+        return graphFilters.item(at: index)
     }
     
     var incomeSourceIds: [Int] {

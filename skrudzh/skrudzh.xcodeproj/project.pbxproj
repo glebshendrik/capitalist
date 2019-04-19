@@ -95,6 +95,7 @@
 		FA715E5221FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */; };
 		FA7176FF22683275008ADF94 /* GraphFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7176FE22683275008ADF94 /* GraphFilterTableViewCell.swift */; };
 		FA71770122683299008ADF94 /* GraphTotalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71770022683299008ADF94 /* GraphTotalTableViewCell.swift */; };
+		FA7177032269DEC6008ADF94 /* GraphFiltersSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7177022269DEC6008ADF94 /* GraphFiltersSection.swift */; };
 		FA7276A9225249B00086D4D1 /* TransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276A8225249B00086D4D1 /* TransactionController.swift */; };
 		FA7276AB22524A9C0086D4D1 /* BasketsControllingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276AA22524A9C0086D4D1 /* BasketsControllingExtension.swift */; };
 		FA7276AD22524AEC0086D4D1 /* BudgetControllingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276AC22524AEC0086D4D1 /* BudgetControllingExtension.swift */; };
@@ -384,6 +385,7 @@
 		FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalExpenseSourceCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA7176FE22683275008ADF94 /* GraphFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphFilterTableViewCell.swift; sourceTree = "<group>"; };
 		FA71770022683299008ADF94 /* GraphTotalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTotalTableViewCell.swift; sourceTree = "<group>"; };
+		FA7177022269DEC6008ADF94 /* GraphFiltersSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphFiltersSection.swift; sourceTree = "<group>"; };
 		FA7276A8225249B00086D4D1 /* TransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionController.swift; sourceTree = "<group>"; };
 		FA7276AA22524A9C0086D4D1 /* BasketsControllingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsControllingExtension.swift; sourceTree = "<group>"; };
 		FA7276AC22524AEC0086D4D1 /* BudgetControllingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetControllingExtension.swift; sourceTree = "<group>"; };
@@ -829,6 +831,7 @@
 			children = (
 				FACC01F2224BC3440044A747 /* StatisticsViewSection.swift */,
 				FA835D652265F21F00A592F2 /* GraphSection.swift */,
+				FA7177022269DEC6008ADF94 /* GraphFiltersSection.swift */,
 				FA835D672265F23F00A592F2 /* HistoryTransactionsSection.swift */,
 			);
 			path = Sections;
@@ -1642,6 +1645,7 @@
 				FAA4261222311C2100B64925 /* FundsMoveEditViewModel.swift in Sources */,
 				FA0CADFD21D257F400805288 /* ExpenseSource.swift in Sources */,
 				FA0CAE1921D66CCD00805288 /* IconsService.swift in Sources */,
+				FA7177032269DEC6008ADF94 /* GraphFiltersSection.swift in Sources */,
 				FAED7DAE21EDDD3800BF6FE1 /* BasketsViewModel.swift in Sources */,
 				FAD88F1F21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift in Sources */,
 				FA16FC73223A82FA0053C273 /* ExpenseSourceSelectViewController.swift in Sources */,

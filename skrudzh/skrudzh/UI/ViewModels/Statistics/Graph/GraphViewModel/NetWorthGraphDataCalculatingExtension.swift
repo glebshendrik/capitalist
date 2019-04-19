@@ -99,6 +99,19 @@ extension GraphViewModel {
             filters[filter.key]?.aggregatedValues[AggregationType.percent] = 0.0
         }
         
+        for date in dataPoints {
+            let total = filters.values.compactMap { $0.values[date] }.reduce(0.0, +)
+            for key in filters.keys {
+                if let value = filters[key]?.values[date],
+                    total > 0 {
+                    let percents = value * 100.0 / total
+                    filters[key]?.percents[date] = percents
+                } else {
+                    filters[key]?.percents[date] = 0.0
+                }
+            }
+        }
+        
         return filters.values.map { $0 }.sorted { $0.total >= $1.total }
     }
 }

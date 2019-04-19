@@ -17,10 +17,16 @@ class GraphHistoryTransactionFilter : SourceOrDestinationHistoryTransactionFilte
     
     var aggregatedValues: [AggregationType : Double] = [:]
     var values: [Date : Double] = [:]
+    var percents: [Date : Double] = [:]
     
     var amount: Double? {
         guard let date = date else { return nil }
         return values[date]
+    }
+    
+    var percent: Double? {
+        guard let date = date else { return nil }
+        return percents[date]
     }
     
     var total: Double {

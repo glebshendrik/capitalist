@@ -96,8 +96,29 @@ extension StatisticsViewController {
     func updateUI() {
         updateNavigationBar()
         updateFiltersUI()
+        updateGraphFiltersSection()
         updateHistoryTransactionsUI()
-        updateBalanceUI()
+        updateBalanceUI()        
+    }
+    
+    func updateGraphFiltersSection() {        
+        viewModel.updateGraphFiltersSection()
+    }
+    
+    func updateGraphFilters(updateGraph: Bool = false) {
+        updateGraphFiltersSection()
+        if let graphFiltersSectionIndex = viewModel.graphFiltersSectionIndex {
+            var indexSet = IndexSet(integer: graphFiltersSectionIndex)
+            
+            if  let graphSectionIndex = viewModel.graphSectionIndex,
+                updateGraph {
+                indexSet = IndexSet(arrayLiteral: graphSectionIndex, graphFiltersSectionIndex)
+            }
+            
+            UIView.performWithoutAnimation {
+                self.tableView.reloadSections(indexSet, with: .none)                
+            }
+        }
     }
     
     private func updateNavigationBar() {

@@ -232,6 +232,9 @@ extension StatisticsViewController : StatisticsTitleViewDelegate {
 }
 
 extension StatisticsViewController : GraphTableViewCellDelegate {
+    func graphFiltersAndTotalUpdateNeeded() {
+        updateGraphFilters()
+    }    
         
     func didTapGraphTypeButton() {
         let actions = GraphType.switchList.map { graphType in
@@ -264,8 +267,8 @@ extension StatisticsViewController : GraphTableViewCellDelegate {
             return UIAlertAction(title: aggregationType.title,
                                  style: .default,
                                  handler: { _ in
-                                    self.viewModel.set(aggregationType: aggregationType)
-                                    self.updateUI()
+                                    self.viewModel.set(aggregationType: aggregationType)                                    
+                                    self.updateGraphFilters(updateGraph: true)
             })
         }
         

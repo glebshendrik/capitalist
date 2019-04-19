@@ -12,6 +12,7 @@ class HistoryTransactionsSection : StatisticsViewSection {
     var isSectionHeaderVisible: Bool { return true }
     var numberOfRows: Int { return historyTransactionViewModels.count }
     var title: String? { return date.dateString(ofStyle: .full) }
+    var type: StatisticsViewSectionType { return .transactions }
     
     let date: Date
     private let historyTransactionViewModels: [HistoryTransactionViewModel]

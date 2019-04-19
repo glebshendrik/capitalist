@@ -18,23 +18,24 @@ class GraphViewModel {
         didSet {
             updateChartsData()
             updateAggregationType()
+            updateGraphFiltersVisibility()
         }
     }
     
     var aggregationType: AggregationType = .total {
         didSet {
-            updateGraphFilters()
+            updateGraphFiltersAggregationType()
+            updateAggregatedTotal()
         }
     }
     
     var graphPeriodScale: GraphPeriodScale = .days {
         didSet {
-            updateChartsData()
-            updateGraphFilters()
+            updateChartsData()            
         }
     }
     
-    var areGraphFiltersShown: Bool = false
+    var areGraphFiltersShown: Bool = true
     
     public private(set) var dataPoints: [Date] = [] {
         didSet {
@@ -42,6 +43,32 @@ class GraphViewModel {
             pieChartsCollectionContentOffset = nil
         }
     }
+    
+    var lineChartCurrentPoint: Double? = nil {
+        didSet {
+            currentDate = lineChartCurrentPointDate
+        }
+    }
+    var pieChartsCollectionContentOffset: CGPoint? = nil
+    var currentPieChartIndex: Int? = nil {
+        didSet {
+            currentDate = pieChartCurrentPointDate
+        }
+    }
+    
+    var currentDate: Date? = nil {
+        didSet {
+            updateGraphFiltersCurrentDate()
+        }
+    }
+    
+    public private(set) var lineChartData: LineChartData? = nil
+    public private(set) var pieChartDatas: [PieChartData] = []
+    public private(set) var pieChartsAmounts: [String] = []
+    
+    var graphFilters: [GraphHistoryTransactionFilter] = []
+    var filtersAggregatedTotal: Double? = nil
+    var filtersTotalByDate: [Date: Double] = [:]
     
     lazy var percentsFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -51,17 +78,6 @@ class GraphViewModel {
         formatter.percentSymbol = "%"
         return formatter
     }()
-    
-    var lineChartCurrentPoint: Double? = nil
-    var pieChartsCollectionContentOffset: CGPoint? = nil
-    var currentPieChartIndex: Int? = nil
-    
-    public private(set) var lineChartData: LineChartData? = nil
-    public private(set) var pieChartDatas: [PieChartData] = []
-    public private(set) var pieChartsAmounts: [String] = []
-    var graphFilters: [GraphHistoryTransactionFilter] = []
-    var filtersAggregatedTotal: Double? = nil
-    var filtersTotalByDate: [Date: Double] = [:]
     
     init(historyTransactionsViewModel: HistoryTransactionsViewModel) {
         self.historyTransactionsViewModel = historyTransactionsViewModel
@@ -88,6 +104,8 @@ class GraphViewModel {
         case .netWorth:
             lineChartData = calculateNetWorthChartData()
         }
+        
+        updateGraphFilters()
     }
     
     private func updateDataPoints() {
