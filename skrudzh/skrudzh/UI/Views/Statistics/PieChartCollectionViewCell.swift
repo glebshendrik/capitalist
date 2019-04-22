@@ -79,6 +79,9 @@ class PieChartCollectionViewCell : UICollectionViewCell {
                                        range: NSRange(rangeOfAmount, in: string))                
         
         pieChartView.centerAttributedText = attributedString
+        
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
     }
 }
 

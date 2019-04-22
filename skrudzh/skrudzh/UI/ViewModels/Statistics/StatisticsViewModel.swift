@@ -140,6 +140,15 @@ extension StatisticsViewModel {
                     self.updatePresentationData()
                 }
     }
+    
+    func reloadFilter() -> Promise<Void> {
+        return  firstly {
+                    filtersViewModel.reloadFilter()
+                }.ensure {
+                    self.isDataLoading = false
+                    self.updatePresentationData()
+                }
+    }
 }
 
 // Filters
@@ -176,11 +185,11 @@ extension StatisticsViewModel {
         func graphType(by filterType: HistoryTransactionSourceOrDestinationType) -> GraphType {
             switch sourceOrDestinationFilter.type {
             case .incomeSource:
-                return .income
+                return .incomePie
             case .expenseSource:
                 return .cashFlow
             case .expenseCategory:
-                return .expenses
+                return .expensesPie
             }
         }        
         set(graphType: graphType(by: sourceOrDestinationFilter.type))
@@ -215,12 +224,20 @@ extension StatisticsViewModel {
     func sourceOrDestinationFilter(at indexPath: IndexPath) -> SourceOrDestinationHistoryTransactionFilter? {
         return filtersViewModel.sourceOrDestinationFilter(at: indexPath)
     }
+    
+    func singleSourceOrDestinationFilterEqualsTo(filter: GraphHistoryTransactionFilter) -> Bool {
+        return singleSourceOrDestinationFilter?.id == filter.id && singleSourceOrDestinationFilter?.type == filter.type
+    }
 }
 
 // Graph
 extension StatisticsViewModel {
     var aggregationTypes: [AggregationType] {
         return graphViewModel.aggregationTypes
+    }
+    
+    var areGraphFiltersInteractable: Bool {
+        return graphViewModel.areGraphFiltersInteractable
     }
     
     func set(graphType: GraphType) {
@@ -249,5 +266,13 @@ extension StatisticsViewModel {
     
     func graphFilterViewModel(at index: Int) -> GraphHistoryTransactionFilter? {
         return graphViewModel.graphFilterViewModel(at: index)
+    }
+    
+    func canFilterTransactions(with filter: GraphHistoryTransactionFilter) -> Bool {
+        return graphViewModel.canFilterTransactions(with: filter)
+    }
+    
+    func handleIncomeAndExpensesFilterTap(with filter: GraphHistoryTransactionFilter) {
+        graphViewModel.handleIncomeAndExpensesFilterTap(with: filter)
     }
 }

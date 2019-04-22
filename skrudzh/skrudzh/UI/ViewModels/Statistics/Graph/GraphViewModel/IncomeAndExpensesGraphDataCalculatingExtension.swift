@@ -55,6 +55,14 @@ extension GraphViewModel {
         }
     }
     
+    func transactionableTypeBy(incomeAndExpensesDataSetKey: Int) -> TransactionableType? {
+        switch incomeAndExpensesDataSetKey {
+        case 0:         return .expense
+        case 1:         return .income
+        default:        return nil
+        }
+    }
+    
     private func title(by transactionableType: TransactionableType) -> String {
         switch transactionableType {
         case .expense:      return "Расходы"

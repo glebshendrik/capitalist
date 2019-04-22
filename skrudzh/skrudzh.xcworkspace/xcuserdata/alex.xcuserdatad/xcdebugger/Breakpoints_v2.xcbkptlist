@@ -4,83 +4,13 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Main/IncomeEditViewModel.swift"
-            timestampString = "576576833.732275"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "isFormValid(amount:convertedAmount:comment:gotAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/IncomeSourceEditViewController.swift"
-            timestampString = "575572596.422049"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "validateUI()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/IncomeSourceEditViewController.swift"
-            timestampString = "575572596.42488"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "save()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/IncomeSourceEditViewController.swift"
-            timestampString = "575572596.425519"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "didTapSaveButton(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Common/DatePickerViewController.swift"
-            timestampString = "576065794.996123"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "toolbarContainer"
-            landmarkType = "24">
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -89,156 +19,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575816677.780197"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
+            timestampString = "577643614.632127"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
-            landmarkName = "MainViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575816677.822723"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
-            landmarkName = "isTransactionStarted"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "skrudzh.MainViewController.(loadBudget in _2A6C6BC5EC014E86265C40392E65B3E0)() -&gt; ()"
-                  moduleName = "skrudzh"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-                  timestampString = "574016913.008992"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "273"
-                  endingLineNumber = "273"
-                  offsetFromSymbolStart = "116">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; PromiseKit.Promise&lt;()&gt; in skrudzh.MainViewController.(loadBudget in _2A6C6BC5EC014E86265C40392E65B3E0)() -&gt; ()"
-                  moduleName = "skrudzh"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-                  timestampString = "574016913.011657"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "274"
-                  endingLineNumber = "274"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575816677.824061"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575816677.825326"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575816677.826317"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "557"
-            endingLineNumber = "557"
-            landmarkName = "didRemoveExpenseSource()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575816677.8271281"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "915"
-            endingLineNumber = "915"
-            landmarkName = "collectionView(_:cellForItemAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/IncomeEditViewController.swift"
-            timestampString = "576065794.9971139"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "didTapStartable()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/TransactionEditTableController.swift"
-            timestampString = "575358474.236255"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -246,16 +32,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Common/SlideUpContainerViewController.swift"
-            timestampString = "574346399.157263"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SettingUpControllingExtension.swift"
+            timestampString = "577643614.643635"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "slideUp(viewController:)"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "reloadFilterAndData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -265,13 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/IncomeEditViewController.swift"
-            timestampString = "576065794.997799"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SettingUpControllingExtension.swift"
+            timestampString = "577643614.679976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "isFormValid(amount:convertedAmount:comment:gotAt:)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "reloadFilterAndData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -281,13 +67,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/IncomeEditViewController.swift"
-            timestampString = "576065794.9980659"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SettingUpControllingExtension.swift"
+            timestampString = "577643614.681288"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "reloadFilterAndData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SettingUpControllingExtension.swift"
+            timestampString = "577643614.682956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
             endingLineNumber = "38"
-            landmarkName = "savePromise(amount:convertedAmount:comment:gotAt:)"
+            landmarkName = "reloadFilterAndData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -297,379 +99,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Main/IncomeEditViewModel.swift"
-            timestampString = "576576833.733636"
+            filePath = "skrudzh/UI/ViewModels/Statistics/StatisticsViewModel.swift"
+            timestampString = "577643614.684467"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "saveIncome(amount:convertedAmount:comment:gotAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/Views/Common/MoneyTextField.swift"
-            timestampString = "577380609.248104"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "decimal(with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575816677.828591"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1703"
-            endingLineNumber = "1703"
-            landmarkName = "didCreateFundsMove()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575816677.829438"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1285"
-            endingLineNumber = "1285"
-            landmarkName = "didRecognizeRearrangeGesture(gesture:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "skrudzh.MainViewController.(detectCollectionViewIntersection in _2A6C6BC5EC014E86265C40392E65B3E0)(at: __C.CGPoint, in: __C.UIView, collectionViewsPool: Swift.Array&lt;__C.UICollectionView&gt;, transformation: __C.CGAffineTransform) -&gt; Swift.Optional&lt;(collectionView: __C.UICollectionView, indexPath: Swift.Optional&lt;Foundation.IndexPath&gt;, cell: Swift.Optional&lt;__C.UICollectionViewCell&gt;)&gt;"
-                  moduleName = "skrudzh"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-                  timestampString = "575289430.8738641"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1271"
-                  endingLineNumber = "1271"
-                  offsetFromSymbolStart = "140">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UICollectionView) -&gt; Swift.Bool in skrudzh.MainViewController.(detectCollectionViewIntersection in _2A6C6BC5EC014E86265C40392E65B3E0)(at: __C.CGPoint, in: __C.UIView, collectionViewsPool: Swift.Array&lt;__C.UICollectionView&gt;, transformation: __C.CGAffineTransform) -&gt; Swift.Optional&lt;(collectionView: __C.UICollectionView, indexPath: Swift.Optional&lt;Foundation.IndexPath&gt;, cell: Swift.Optional&lt;__C.UICollectionViewCell&gt;)&gt;"
-                  moduleName = "skrudzh"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-                  timestampString = "575289430.878824"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1272"
-                  endingLineNumber = "1272"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/MainViewController.swift"
-            timestampString = "575816677.830326"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1709"
-            endingLineNumber = "1709"
-            landmarkName = "didRemoveFundsMove()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/ExpenseEditViewController.swift"
-            timestampString = "576065794.999557"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "savePromise(amount:convertedAmount:comment:gotAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Main/ExpenseEditViewModel.swift"
-            timestampString = "576576833.734303"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "createExpense(amountCents:convertedAmountCents:comment:gotAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "575573569.968876"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "request(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "575573569.9691761"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "request(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Any, PromiseKit.PMKAlamofireDataResponse) throws -&gt; A in skrudzh.APIClient.request&lt;A where A: Swift.Decodable&gt;(skrudzh.APIResource) -&gt; PromiseKit.Promise&lt;A&gt;"
-                  moduleName = "skrudzh"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/Services/APIClient.swift"
-                  timestampString = "575302570.096426"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "1704">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Any, PromiseKit.PMKAlamofireDataResponse) throws -&gt; A in skrudzh.APIClient.request&lt;A where A: Swift.Decodable&gt;(skrudzh.APIResource) -&gt; PromiseKit.Promise&lt;A&gt;"
-                  moduleName = "skrudzh"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/Services/APIClient.swift"
-                  timestampString = "575302570.098981"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "1792">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Main/TransactionEditViewModel.swift"
-            timestampString = "576576833.734655"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/Views/Common/MoneyTextField.swift"
-            timestampString = "577380609.2485271"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
-            landmarkName = "moneyCurrencyString(with:shouldRound:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "575573569.970304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "request(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/Services/APIClient.swift"
-            timestampString = "575573569.970504"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "request(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/Main/ExpenseCategoryEditDelegateExtension.swift"
-            timestampString = "576065795.001932"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "didSelectExpenseCategory(at:basketType:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/Main/CollectionsControllingExtension.swift"
-            timestampString = "576065795.002708"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "collectionView(_:didSelectItemAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/Main/TransactionsControllingExtension.swift"
-            timestampString = "576065795.003814"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "didRecognizeTransactionGesture(gesture:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/Main/TransactionsControllingExtension.swift"
-            timestampString = "576065795.004626"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
-            landmarkName = "didRecognizeTransactionGesture(gesture:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/StatisticsNavigationControllingExtension.swift"
-            timestampString = "577380609.248867"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "didTapStatisticsEditButton()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Main/TransactionEditViewModel.swift"
-            timestampString = "576576833.7351969"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "TransactionEditViewModel"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Main/TransactionEditViewController.swift"
-            timestampString = "576576833.73552"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "loadData()"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "reloadFilterAndData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -680,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
-            timestampString = "577380609.249236"
+            timestampString = "577643614.686092"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -692,128 +128,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/GraphViewModel.swift"
-            timestampString = "576690009.606753"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
+            timestampString = "577643614.6866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
-            landmarkName = "updateChartsData()"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/StatisticsViewModel.swift"
-            timestampString = "577380609.24977"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
+            timestampString = "577643614.686956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "updatePresentationData()"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/StatisticsViewModel.swift"
-            timestampString = "577380609.249958"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "updateHistoryTransactionsSections()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/StatisticsViewModel.swift"
-            timestampString = "577380609.250087"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
+            timestampString = "577643614.687368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
             endingLineNumber = "45"
-            landmarkName = "init(historyTransactionsViewModel:filtersViewModel:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/Charts/Source/Charts/Renderers/ChartDataRendererBase.swift"
-            timestampString = "576666312.430976"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "isDrawingValuesAllowed(dataProvider:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/Charts/Source/Charts/Formatters/DefaultFillFormatter.swift"
-            timestampString = "576504233.171062"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "getFillLinePosition(dataSet:dataProvider:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/Charts/Source/Charts/Renderers/LineChartRenderer.swift"
-            timestampString = "576576833.750084"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
-            landmarkName = "drawHorizontalBezier(context:dataSet:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/Views/Statistics/GraphTableViewCell.swift"
-            timestampString = "577380609.250348"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "updateLineChart()"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -823,29 +179,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/GraphViewModel.swift"
-            timestampString = "576690009.614965"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
+            timestampString = "577643614.687722"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "lineChartCurrentPointDate"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/GraphViewModel.swift"
-            timestampString = "576690009.616057"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "435"
-            endingLineNumber = "435"
-            landmarkName = "datesRange(from:to:)"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -855,90 +195,76 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/GraphViewModel.swift"
-            timestampString = "576690009.6224869"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
+            timestampString = "577643614.688062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "475"
-            endingLineNumber = "475"
-            landmarkName = "lineChartData(for:currency:periodScale:keyForTransaction:amountForTransactions:titleForTransaction:accumulateValuesHistory:accumulateValuesForDate:fillDataSetAreas:colorForTransaction:oppositeKeyForTransaction:oppositeAmountForTransactions:oppositeTitleForTransaction:)"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/Views/Statistics/GraphTableViewCell.swift"
-            timestampString = "577380609.250657"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
+            timestampString = "577643614.68838"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "updateLineChart()"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/Views/Statistics/GraphTableViewCell.swift"
-            timestampString = "577380609.250816"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
+            timestampString = "577643614.688822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "updatePieChartsCollectionView()"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/Views/Statistics/GraphTableViewCell.swift"
-            timestampString = "577380609.250981"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/FiltersControllingExtension.swift"
+            timestampString = "577641708.55457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "updatePieChartsCollectionView()"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/Graph/GraphDataPresentingAttributesExtension.swift"
-            timestampString = "577035515.539555"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/FiltersControllingExtension.swift"
+            timestampString = "577641708.5553139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/Views/Statistics/GraphTableViewCell.swift"
-            timestampString = "577380609.251214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -949,13 +275,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/Views/Statistics/PieChartCollectionViewCell.swift"
-            timestampString = "577035515.541085"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/FiltersControllingExtension.swift"
+            timestampString = "577641708.555521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "updateUI()"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "collectionView(_:layout:sizeForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -965,14 +291,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/Graph/GraphViewModel/GraphFiltersPresentingExtension.swift"
-            timestampString = "577380609.251466"
+            filePath = "skrudzh/UI/ViewModels/Statistics/StatisticsViewModel.swift"
+            timestampString = "577643614.690922"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "shouldShowTotal"
-            landmarkType = "24">
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "graphType(by:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -981,221 +307,61 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/Graph/GraphViewModel/GraphFiltersPresentingExtension.swift"
-            timestampString = "577380609.251652"
+            filePath = "skrudzh/UI/ViewModels/Statistics/StatisticsViewModel.swift"
+            timestampString = "577643614.691082"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "graphType(by:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/FiltersControllingExtension.swift"
+            timestampString = "577641708.555922"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
             endingLineNumber = "37"
-            landmarkName = "shouldShowFiltersToggle"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SettingUpControllingExtension.swift"
-            timestampString = "577380609.2519211"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "updateUI()"
+            landmarkName = "collectionView(_:layout:sizeForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SettingUpControllingExtension.swift"
-            timestampString = "577380609.252889"
+            filePath = "skrudzh/UI/ViewControllers/Main/Main/IncomeSourceEditDelegateExtension.swift"
+            timestampString = "577640053.2900881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "updateGraphFiltersSection()"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "incomeSourceCollectionViewCell(forItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SettingUpControllingExtension.swift"
-            timestampString = "577380609.253575"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "updateGraphFilters(updateGraph:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
-            timestampString = "577380609.254105"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/Views/Statistics/GraphFilterTableViewCell.swift"
-            timestampString = "577380609.254351"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "updateUI()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/Views/Statistics/GraphFilterTableViewCell.swift"
-            timestampString = "577380609.254567"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "updateUI()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/Sections/GraphFiltersSection.swift"
-            timestampString = "577380609.25475"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "updateRows()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/Sections/GraphFiltersSection.swift"
-            timestampString = "577380609.254987"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "updateRows()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/Sections/GraphFiltersSection.swift"
-            timestampString = "577380609.255136"
+            filePath = "skrudzh/UI/ViewControllers/Main/Main/ExpenseSourceEditDelegateExtension.swift"
+            timestampString = "577640106.978838"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
             endingLineNumber = "54"
-            landmarkName = "updateRows()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
-            timestampString = "577380609.255273"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/StatisticsNavigationControllingExtension.swift"
-            timestampString = "577380609.255486"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
-            landmarkName = "graphFiltersAndTotalUpdateNeeded()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SectionsControllingExtension.swift"
-            timestampString = "577380609.255811"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Statistics/Statistics/SettingUpControllingExtension.swift"
-            timestampString = "577380609.256009"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "updateGraphFilters(updateGraph:)"
+            landmarkName = "expenseSourceCollectionViewCell(forItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1205,13 +371,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/Views/Statistics/GraphTotalTableViewCell.swift"
-            timestampString = "577380609.256663"
+            filePath = "skrudzh/UI/ViewControllers/Main/Main/ExpenseSourceEditDelegateExtension.swift"
+            timestampString = "577640111.752743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "updateUI()"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "expenseSourceCollectionViewCell(forItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1221,13 +387,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Statistics/Graph/GraphViewModel/GraphFiltersPresentingExtension.swift"
-            timestampString = "577380609.256806"
+            filePath = "skrudzh/UI/ViewControllers/Main/Main/ExpenseCategoryEditDelegateExtension.swift"
+            timestampString = "577640139.699218"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "updateTotal()"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "expenseCategoryCollectionViewCell(forItemAt:basketType:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/UI/ViewControllers/Main/Main/CollectionsControllingExtension.swift"
+            timestampString = "577640211.3352081"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "collectionViewCell()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/UI/Views/Statistics/GraphTableViewCell.swift"
+            timestampString = "577643614.691595"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

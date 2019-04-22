@@ -16,6 +16,7 @@ class GraphViewModel {
     
     var graphType: GraphType = .incomeAndExpenses {
         didSet {
+            guard graphType != oldValue else { return }
             updateChartsData()
             updateAggregationType()
             updateGraphFiltersVisibility()
@@ -24,6 +25,7 @@ class GraphViewModel {
     
     var aggregationType: AggregationType = .total {
         didSet {
+            guard aggregationType != oldValue else { return }
             updateGraphFiltersAggregationType()
             updateAggregatedTotal()
         }
@@ -31,6 +33,7 @@ class GraphViewModel {
     
     var graphPeriodScale: GraphPeriodScale = .days {
         didSet {
+            guard graphPeriodScale != oldValue else { return }
             updateChartsData()            
         }
     }
@@ -58,6 +61,7 @@ class GraphViewModel {
     
     var currentDate: Date? = nil {
         didSet {
+            guard currentDate != oldValue else { return }
             updateGraphFiltersCurrentDate()
         }
     }
@@ -85,6 +89,10 @@ class GraphViewModel {
     
     func updateChartsData() {
         updateDataPoints()
+        
+        lineChartData = nil
+        pieChartDatas = []
+        pieChartsAmounts = []
         
         switch graphType {
         case .income:

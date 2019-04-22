@@ -137,6 +137,8 @@ class GraphTableViewCell : UITableViewCell {
         updateDateFormatter()
         updateLineChart()
         updatePieChartsCollectionView()
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
     }
     
     private func updateButtons() {

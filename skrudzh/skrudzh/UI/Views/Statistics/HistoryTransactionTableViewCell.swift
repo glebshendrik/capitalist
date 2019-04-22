@@ -77,6 +77,9 @@ class HistoryTransactionTableViewCell : UITableViewCell {
         sourceTitleLabel.text = viewModel.sourceTitle
         destinationTitleLabel.text = viewModel.destinationTitle
         amountLabel.text = viewModel.amount
+        
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
     }
 }
 

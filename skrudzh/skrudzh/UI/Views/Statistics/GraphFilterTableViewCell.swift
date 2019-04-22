@@ -49,5 +49,8 @@ class GraphFilterTableViewCell : UITableViewCell {
         } else {
             aggregatedValueLabel.text = aggregatedValueNumber.moneyCurrencyString(with: viewModel.currency, shouldRound: false)
         }
+        
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
     }
 }

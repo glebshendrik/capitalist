@@ -39,6 +39,19 @@ extension StatisticsViewController {
         }
     }
     
+    func reloadFilter() {
+        setLoading()
+        _ = firstly {
+                viewModel.reloadFilter()
+            }.get{
+                NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+            }.catch { _ in
+                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
+            }.finally {
+                self.updateUI()
+        }
+    }
+    
     private func setLoading() {
         viewModel.setDataLoading()
         updateUI()
@@ -126,8 +139,13 @@ extension StatisticsViewController {
     }
     
     private func updateFiltersUI() {
-        update(filtersCollectionView)
-        filtersHeightConstraint.constant = viewModel.hasSourceOrDestinationFilters ? 36.0 : 0.0        
+//        update(filtersCollectionView)
+        UIView.performWithoutAnimation {
+            filtersCollectionView.reloadData()
+            filtersCollectionView.performBatchUpdates(nil, completion: nil)
+        }
+//        filtersCollectionView.reloadData()
+        filtersHeightConstraint.constant = viewModel.hasSourceOrDestinationFilters ? 36.0 : 0.0
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }

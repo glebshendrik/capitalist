@@ -13,6 +13,38 @@ import SwifterSwift
 
 extension GraphViewModel {
     
+    var incomeSourceIds: [Int] {
+        return transactions
+            .filter { $0.sourceType == HistoryTransactionSourceOrDestinationType.incomeSource }
+            .map { $0.sourceId }
+            .withoutDuplicates()
+            .sorted()
+    }
+    
+    var expenseSourceIds: [Int] {
+        let asSources = transactions
+            .filter { $0.sourceType == HistoryTransactionSourceOrDestinationType.expenseSource }
+            .map { $0.sourceId }
+        
+        let asDestinations = transactions
+            .filter { $0.destinationType == HistoryTransactionSourceOrDestinationType.expenseSource }
+            .map { $0.destinationId }
+        
+        return (asSources + asDestinations).withoutDuplicates().sorted()
+    }
+    
+    var expenseCategoryIds: [Int] {
+        return transactions
+            .filter { $0.destinationType == HistoryTransactionSourceOrDestinationType.expenseCategory }
+            .map { $0.destinationId }
+            .withoutDuplicates()
+            .sorted()
+    }
+    
+    var areGraphFiltersInteractable: Bool {
+        return graphType != .netWorth
+    }
+    
     var aggregationTypes: [AggregationType] {
         switch graphType {
         case .income, .incomePie, .expenses, .expensesPie:
@@ -242,31 +274,21 @@ extension GraphViewModel {
         return graphFilters.item(at: index)
     }
     
-    var incomeSourceIds: [Int] {
-        return transactions
-            .filter { $0.sourceType == HistoryTransactionSourceOrDestinationType.incomeSource }
-            .map { $0.sourceId }
-            .withoutDuplicates()
-            .sorted()
+    func canFilterTransactions(with filter: GraphHistoryTransactionFilter) -> Bool {
+        return graphType != .incomeAndExpenses && graphType != .netWorth
     }
     
-    var expenseSourceIds: [Int] {
-        let asSources = transactions
-            .filter { $0.sourceType == HistoryTransactionSourceOrDestinationType.expenseSource }
-            .map { $0.sourceId }
-        
-        let asDestinations = transactions
-            .filter { $0.destinationType == HistoryTransactionSourceOrDestinationType.expenseSource }
-            .map { $0.destinationId }
-        
-        return (asSources + asDestinations).withoutDuplicates().sorted()
-    }
+    func handleIncomeAndExpensesFilterTap(with filter: GraphHistoryTransactionFilter) {
+        guard graphType == .incomeAndExpenses,
+              let transactionableType = transactionableTypeBy(incomeAndExpensesDataSetKey: filter.id) else { return }
+        switch transactionableType {
+        case .income:
+            graphType = .incomePie
+        case .expense:
+            graphType = .expensesPie
+        default:
+            return
+        }
+    }    
     
-    var expenseCategoryIds: [Int] {
-        return transactions
-            .filter { $0.destinationType == HistoryTransactionSourceOrDestinationType.expenseCategory }
-            .map { $0.destinationId }
-            .withoutDuplicates()
-            .sorted()
-    }
 }

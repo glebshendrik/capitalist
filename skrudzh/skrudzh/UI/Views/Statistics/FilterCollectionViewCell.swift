@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol FilterCellDelegate {
+protocol FilterCellDelegate: class {
     func didTapDeleteButton(filter: SourceOrDestinationHistoryTransactionFilter)
 }
 
 class FilterCollectionViewCell : UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
-    var delegate: FilterCellDelegate?
+    weak var delegate: FilterCellDelegate?
     
     var viewModel: SourceOrDestinationHistoryTransactionFilter? {
         didSet {

@@ -46,5 +46,7 @@ class GraphTotalTableViewCell : UITableViewCell {
             aggregatedValueLabel.text = aggregatedValueNumber.moneyCurrencyString(with: currency, shouldRound: false)
         }
         
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
     }
 }
