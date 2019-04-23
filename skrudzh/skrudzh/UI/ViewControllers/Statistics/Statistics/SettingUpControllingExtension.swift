@@ -139,12 +139,10 @@ extension StatisticsViewController {
     }
     
     private func updateFiltersUI() {
-//        update(filtersCollectionView)
         UIView.performWithoutAnimation {
             filtersCollectionView.reloadData()
             filtersCollectionView.performBatchUpdates(nil, completion: nil)
         }
-//        filtersCollectionView.reloadData()
         filtersHeightConstraint.constant = viewModel.hasSourceOrDestinationFilters ? 36.0 : 0.0
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()

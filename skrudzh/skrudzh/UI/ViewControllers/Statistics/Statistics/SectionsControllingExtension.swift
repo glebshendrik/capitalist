@@ -86,8 +86,15 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             cell.loaderImageView.showLoader()
             
             return cell
-        case is HistoryTransactionsHeaderSection:
-            return dequeueCell(for: "HistoryTransactionsHeaderTableViewCell")
+        case is HistoryTransactionsHeaderSection:            
+            guard let cell = dequeueCell(for: "HistoryTransactionsHeaderTableViewCell") as? HistoryTransactionsHeaderTableViewCell else {
+                return UITableViewCell()
+                
+            }
+            
+            cell.delegate = self
+            
+            return cell
         case is HistoryTransactionsSection:
             guard   let cell = dequeueCell(for: "HistoryTransactionTableViewCell") as? HistoryTransactionTableViewCell,
                 let historyTransactionsSection = section as? HistoryTransactionsSection,
@@ -171,7 +178,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         case is HistoryTransactionsLoadingSection:
             return 44.0
         case is HistoryTransactionsHeaderSection:
-            return 44.0
+            return 92.0
         case is HistoryTransactionsSection:
             return 70.0
         default:

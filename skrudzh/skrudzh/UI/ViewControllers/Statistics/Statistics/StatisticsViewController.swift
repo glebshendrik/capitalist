@@ -48,8 +48,4 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         prepareSegue(segue)
     }
-    
-    @IBAction func didTapExportButton(_ sender: Any) {
-        exportTransactions()
-    }
 }

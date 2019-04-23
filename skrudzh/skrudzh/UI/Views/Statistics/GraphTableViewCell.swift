@@ -32,6 +32,7 @@ class GraphTableViewCell : UITableViewCell {
     @IBOutlet weak var linePieSwitchButton: UIButton!
     @IBOutlet weak var aggregationTypeSwitchButton: UIButton!
     
+    @IBOutlet weak var pieChartsNoDataLabel: UILabel!
     let pieChartsCollectionViewPeekDelegate = CollectionViewItemsPeekPresenter(cellSpacing: 10, cellPeekWidth: 50, maximumItemsToScroll: 1, numberOfItemsToShow: 1, scrollDirection: .horizontal)
     
     var delegate: GraphTableViewCellDelegate?
@@ -154,6 +155,7 @@ class GraphTableViewCell : UITableViewCell {
     }
     
     private func updatePieChartsCollectionView() {
+        pieChartsNoDataLabel.isHidden = (viewModel?.pieChartHidden ?? true) || (viewModel?.hasData ?? true)
         pieChartsViewContainer.isHidden = viewModel?.pieChartHidden ?? true
         pieChartsCollectionView.reloadData()
         

@@ -40,7 +40,7 @@ class ExportManager : ExportManagerProtocol {
                                 "Currency",
                                 "Comment"])
             
-            for transaction in transactions {
+            for transaction in transactions.sorted(by: { $0.gotAt <= $1.gotAt }) {
                 let amount = transaction.amountCents.moneyDecimalString(with: transaction.currency) ?? "?"
                 try csv.write(row: [transaction.gotAt.iso8601String,
                                     transaction.transactionableType.rawValue,

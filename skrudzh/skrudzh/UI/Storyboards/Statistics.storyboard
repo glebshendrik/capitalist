@@ -491,13 +491,22 @@
                                                                 </collectionViewCell>
                                                             </cells>
                                                         </collectionView>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Недостаточно данных для показа статистики" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="C78-Gv-YZU">
+                                                            <rect key="frame" x="32" y="125" width="311" height="36"/>
+                                                            <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
+                                                            <color key="textColor" red="0.25098039220000001" green="0.30980392159999998" blue="0.46666666670000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="xd2-0y-CBs" secondAttribute="trailing" id="3s3-cZ-cSG"/>
                                                         <constraint firstItem="xd2-0y-CBs" firstAttribute="leading" secondItem="lwR-Wj-ST8" secondAttribute="leading" id="DIp-gD-bim"/>
+                                                        <constraint firstAttribute="trailing" secondItem="C78-Gv-YZU" secondAttribute="trailing" constant="32" id="Dlx-lQ-OcS"/>
                                                         <constraint firstItem="xd2-0y-CBs" firstAttribute="top" secondItem="lwR-Wj-ST8" secondAttribute="top" id="OCt-QI-OW3"/>
+                                                        <constraint firstItem="C78-Gv-YZU" firstAttribute="leading" secondItem="lwR-Wj-ST8" secondAttribute="leading" constant="32" id="pGn-RA-Bzu"/>
                                                         <constraint firstAttribute="bottom" secondItem="xd2-0y-CBs" secondAttribute="bottom" id="u3U-tc-rSD"/>
+                                                        <constraint firstItem="C78-Gv-YZU" firstAttribute="centerY" secondItem="lwR-Wj-ST8" secondAttribute="centerY" id="yzC-Q9-Keq"/>
                                                     </constraints>
                                                 </view>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86H-Yn-5nQ">
@@ -540,6 +549,7 @@
                                             <outlet property="lineChartViewContainer" destination="m7K-eb-M9j" id="Zo4-WV-X27"/>
                                             <outlet property="linePieSwitchButton" destination="ZKG-Ak-Uao" id="YtB-uW-vd6"/>
                                             <outlet property="pieChartsCollectionView" destination="xd2-0y-CBs" id="epS-Z6-5Sk"/>
+                                            <outlet property="pieChartsNoDataLabel" destination="C78-Gv-YZU" id="4ze-4g-Pgg"/>
                                             <outlet property="pieChartsViewContainer" destination="lwR-Wj-ST8" id="VhU-0d-7lX"/>
                                         </connections>
                                     </tableViewCell>
@@ -547,7 +557,7 @@
                                         <rect key="frame" x="0.0" y="601.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NcV-Ca-dcd" id="99w-HQ-OH2">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="sdw-Rn-vNN">
@@ -564,30 +574,67 @@
                                             <outlet property="loaderImageView" destination="sdw-Rn-vNN" id="rlX-1G-VmE"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryTransactionsHeaderTableViewCell" id="PR7-Na-oq4" customClass="HistoryTransactionsHeaderTableViewCell" customModule="skrudzh" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="645.5" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryTransactionsHeaderTableViewCell" rowHeight="92" id="PR7-Na-oq4" customClass="HistoryTransactionsHeaderTableViewCell" customModule="skrudzh" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="645.5" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PR7-Na-oq4" id="LYc-0d-zRs">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rAa-PR-Sta">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="28" id="8VJ-Rf-s0V"/>
+                                                    </constraints>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SaN-oZ-uBQ">
+                                                    <rect key="frame" x="87.5" y="12" width="200" height="32"/>
+                                                    <color key="backgroundColor" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="UYn-uk-Z4p"/>
+                                                        <constraint firstAttribute="width" constant="200" id="ohp-NE-Nmu"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="11"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="3"/>
+                                                    <state key="normal" title="ЭКСПОРТ СТАТИСТИКИ" image="export-icon">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="titleColorForHighlighted">
+                                                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapExportButton:" destination="PR7-Na-oq4" eventType="touchUpInside" id="7Vu-Hq-7c4"/>
+                                                    </connections>
+                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="История операций" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Dx-JW-lXN">
-                                                    <rect key="frame" x="16" y="12" width="343" height="20"/>
+                                                    <rect key="frame" x="16" y="59.5" width="343" height="20"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
                                                     <color key="textColor" red="0.24705882352941178" green="0.27450980392156865" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="6Dx-JW-lXN" firstAttribute="top" secondItem="LYc-0d-zRs" secondAttribute="top" constant="12" id="0j0-jE-eqK"/>
+                                                <constraint firstItem="SaN-oZ-uBQ" firstAttribute="centerX" secondItem="LYc-0d-zRs" secondAttribute="centerX" id="0Fx-Aa-tqU"/>
+                                                <constraint firstItem="rAa-PR-Sta" firstAttribute="leading" secondItem="LYc-0d-zRs" secondAttribute="leading" id="F7j-jP-s38"/>
                                                 <constraint firstAttribute="trailing" secondItem="6Dx-JW-lXN" secondAttribute="trailing" constant="16" id="FYW-D0-DCe"/>
+                                                <constraint firstAttribute="bottom" secondItem="6Dx-JW-lXN" secondAttribute="bottom" constant="12" id="HqZ-87-sO9"/>
+                                                <constraint firstAttribute="trailing" secondItem="rAa-PR-Sta" secondAttribute="trailing" id="IrI-Ek-KDA"/>
+                                                <constraint firstItem="rAa-PR-Sta" firstAttribute="top" secondItem="LYc-0d-zRs" secondAttribute="top" id="ZeV-6h-3TF"/>
+                                                <constraint firstItem="SaN-oZ-uBQ" firstAttribute="top" secondItem="LYc-0d-zRs" secondAttribute="top" constant="12" id="pA5-Bj-A62"/>
                                                 <constraint firstItem="6Dx-JW-lXN" firstAttribute="leading" secondItem="LYc-0d-zRs" secondAttribute="leading" constant="16" id="xia-9E-3en"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryTransactionTableViewCell" rowHeight="70" id="RXu-p2-jsG" customClass="HistoryTransactionTableViewCell" customModule="skrudzh" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="689.5" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="737.5" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RXu-p2-jsG" id="36k-HC-LTK">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
@@ -672,16 +719,16 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zT7-zl-Ckv">
-                                        <rect key="frame" x="0.0" y="0.0" width="155.5" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j78-vr-Uk1">
-                                                <rect key="frame" x="16" y="8" width="131.5" height="16"/>
+                                                <rect key="frame" x="16" y="8" width="163.5" height="16"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.30980392156862746" blue="0.46666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Доход" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLm-Xo-bc7">
-                                                <rect key="frame" x="16" y="24" width="131.5" height="12"/>
+                                                <rect key="frame" x="16" y="24" width="163.5" height="12"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="10"/>
                                                 <color key="textColor" red="0.47450980392156861" green="0.51764705882352935" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -697,27 +744,17 @@
                                             <constraint firstAttribute="trailing" secondItem="j78-vr-Uk1" secondAttribute="trailing" constant="8" id="yOj-ys-hKY"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXF-16-7Hs">
-                                        <rect key="frame" x="159.5" y="7.5" width="56" height="29"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                        <state key="normal" title="Экспорт">
-                                            <color key="titleColor" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didTapExportButton:" destination="ACm-3q-bxC" eventType="touchUpInside" id="txL-hQ-FB8"/>
-                                        </connections>
-                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8j-Gv-eiK">
-                                        <rect key="frame" x="219.5" y="0.0" width="155.5" height="44"/>
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cp-9G-wuU">
-                                                <rect key="frame" x="8" y="8" width="131.5" height="16"/>
+                                                <rect key="frame" x="8" y="8" width="163.5" height="16"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.30980392159999998" blue="0.46666666670000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Расход" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgd-DD-dX5">
-                                                <rect key="frame" x="8" y="24" width="131.5" height="12"/>
+                                                <rect key="frame" x="8" y="24" width="163.5" height="12"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="10"/>
                                                 <color key="textColor" red="0.47450980390000003" green="0.51764705879999995" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -736,16 +773,14 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="zT7-zl-Ckv" firstAttribute="width" secondItem="FIQ-VY-4e3" secondAttribute="width" multiplier="1:2" id="34e-jJ-VDx"/>
                                     <constraint firstItem="zT7-zl-Ckv" firstAttribute="leading" secondItem="FIQ-VY-4e3" secondAttribute="leading" id="BTD-gU-bU7"/>
-                                    <constraint firstItem="iXF-16-7Hs" firstAttribute="centerX" secondItem="FIQ-VY-4e3" secondAttribute="centerX" id="DHF-Yy-xWI"/>
                                     <constraint firstItem="zT7-zl-Ckv" firstAttribute="top" secondItem="FIQ-VY-4e3" secondAttribute="top" id="PJX-VJ-o3l"/>
-                                    <constraint firstItem="g8j-Gv-eiK" firstAttribute="leading" secondItem="iXF-16-7Hs" secondAttribute="trailing" constant="4" id="Teg-dU-FEA"/>
                                     <constraint firstAttribute="bottom" secondItem="zT7-zl-Ckv" secondAttribute="bottom" id="V4e-df-QFA"/>
                                     <constraint firstAttribute="trailing" secondItem="g8j-Gv-eiK" secondAttribute="trailing" id="YBp-XV-ihw"/>
                                     <constraint firstAttribute="bottom" secondItem="g8j-Gv-eiK" secondAttribute="bottom" id="bO6-bx-eD3"/>
                                     <constraint firstItem="g8j-Gv-eiK" firstAttribute="top" secondItem="FIQ-VY-4e3" secondAttribute="top" id="dTq-w4-emB"/>
-                                    <constraint firstItem="iXF-16-7Hs" firstAttribute="centerY" secondItem="FIQ-VY-4e3" secondAttribute="centerY" id="fGq-0m-W4V"/>
-                                    <constraint firstItem="iXF-16-7Hs" firstAttribute="leading" secondItem="zT7-zl-Ckv" secondAttribute="trailing" constant="4" id="l9W-Qy-hZh"/>
+                                    <constraint firstItem="g8j-Gv-eiK" firstAttribute="leading" secondItem="zT7-zl-Ckv" secondAttribute="trailing" id="n0b-au-sQ7"/>
                                     <constraint firstAttribute="height" constant="44" id="rao-aN-VRE"/>
                                 </constraints>
                             </view>
@@ -1091,6 +1126,7 @@
         <image name="calendar-small-icon" width="13" height="12"/>
         <image name="close-circle-blue-icon" width="28" height="28.5"/>
         <image name="close-icon" width="12" height="12"/>
+        <image name="export-icon" width="12" height="14"/>
         <image name="filters-icon" width="18" height="17"/>
         <image name="joy-default-icon" width="20" height="20"/>
         <image name="loader-1" width="55" height="31"/>

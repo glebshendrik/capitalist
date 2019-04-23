@@ -305,3 +305,9 @@ extension StatisticsViewController : GraphFiltersToggleDelegate {
     }
     
 }
+
+extension StatisticsViewController : HistoryTransactionsHeaderDelegate {
+    func didTapExportButton() {
+        exportTransactions()
+    }
+}

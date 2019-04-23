@@ -100,7 +100,9 @@ class StatisticsViewModel {
         sections.append(GraphSection())
         
         updateGraphFiltersSection()
-        sections.append(graphFiltersSection)
+        if graphViewModel.hasData {
+            sections.append(graphFiltersSection)
+        }        
         
         if isDataLoading {
             sections.append(HistoryTransactionsLoadingSection())
