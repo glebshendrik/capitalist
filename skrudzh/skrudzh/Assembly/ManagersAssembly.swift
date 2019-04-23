@@ -68,6 +68,11 @@ class ManagersAssembly: Assembly {
         container.register(CurrencyConverterProtocol.self) { r in
             return CurrencyConverter()
         }.inObjectScope(.container)
+        
+        // ExportManagerProtocol
+        container.register(ExportManagerProtocol.self) { r in
+            return ExportManager()
+        }.inObjectScope(.container)
     }
     
 }

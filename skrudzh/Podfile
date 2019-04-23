@@ -28,4 +28,5 @@ target 'skrudzh' do
   pod 'Charts'
   pod 'RandomColorSwift'
   pod 'MSPeekCollectionViewDelegateImplementation'
+  pod 'CSV.swift'
 end

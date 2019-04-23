@@ -449,7 +449,8 @@ class ApplicationAssembly: Assembly {
         // StatisticsViewModel
         container.register(StatisticsViewModel.self) { r in
             return StatisticsViewModel(historyTransactionsViewModel: r.resolve(HistoryTransactionsViewModel.self)!,
-                                       filtersViewModel: r.resolve(FiltersViewModel.self)!)
+                                       filtersViewModel: r.resolve(FiltersViewModel.self)!,
+                                       exportManager: r.resolve(ExportManagerProtocol.self)!)
         }
         
         // HistoryTransactionsViewModel

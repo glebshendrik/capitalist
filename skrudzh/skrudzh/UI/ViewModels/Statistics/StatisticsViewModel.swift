@@ -19,6 +19,8 @@ class StatisticsViewModel {
     private let filtersViewModel: FiltersViewModel
     let graphViewModel: GraphViewModel
     
+    private let exportManager: ExportManagerProtocol
+    
     public private(set) var isDataLoading: Bool = false
     
     private var sections: [StatisticsViewSection] = []
@@ -38,9 +40,11 @@ class StatisticsViewModel {
     }
     
     init(historyTransactionsViewModel: HistoryTransactionsViewModel,
-         filtersViewModel: FiltersViewModel) {
+         filtersViewModel: FiltersViewModel,
+         exportManager: ExportManagerProtocol) {
         self.historyTransactionsViewModel = historyTransactionsViewModel
         self.filtersViewModel = filtersViewModel
+        self.exportManager = exportManager
         graphViewModel = GraphViewModel(historyTransactionsViewModel: self.historyTransactionsViewModel)
         graphFiltersSection = GraphFiltersSection(viewModel: graphViewModel)
     }
@@ -64,6 +68,10 @@ class StatisticsViewModel {
     func historyTransactionViewModel(at indexPath: IndexPath) -> HistoryTransactionViewModel? {
         guard let section = sections.item(at: indexPath.section) as? HistoryTransactionsSection else { return nil }
         return section.historyTransactionViewModel(at: indexPath.row)
+    }
+    
+    func exportTransactions() -> Promise<URL> {
+        return exportManager.export(transactions: historyTransactionsViewModel.filteredHistoryTransactionViewModels)
     }
     
     private func filterHistoryTransactions() {
