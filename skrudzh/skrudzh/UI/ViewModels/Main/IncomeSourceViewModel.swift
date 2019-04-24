@@ -45,6 +45,6 @@ class IncomeSourceViewModel : TransactionStartable {
     }
     
     private func amount(shouldRound: Bool) -> String {
-        return incomeSource.monthlyGotCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
+        return incomeSource.gotCentsAtPeriod.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }
 }

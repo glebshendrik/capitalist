@@ -17,8 +17,8 @@ extension MainViewController {
                           animations: {
                             
                             self.budgetView.balanceLabel.text = self.viewModel.balance
-                            self.budgetView.monthlySpentLabel.text = self.viewModel.monthlySpent
-                            self.budgetView.monthlyPlannedLabel.text = self.viewModel.monthlyPlanned
+                            self.budgetView.spentLabel.text = self.viewModel.spent
+                            self.budgetView.plannedLabel.text = self.viewModel.planned
         })
     }
 }

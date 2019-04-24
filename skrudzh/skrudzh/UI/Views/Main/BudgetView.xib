@@ -19,8 +19,8 @@
             <connections>
                 <outlet property="balanceLabel" destination="dtW-M2-Erw" id="TGv-3a-8ZM"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="u6B-cs-KJR"/>
-                <outlet property="monthlyPlannedLabel" destination="0iT-Dh-1Um" id="lff-mi-hS4"/>
-                <outlet property="monthlySpentLabel" destination="06Y-MA-dra" id="giv-hr-fQd"/>
+                <outlet property="plannedLabel" destination="0iT-Dh-1Um" id="lff-mi-hS4"/>
+                <outlet property="spentLabel" destination="06Y-MA-dra" id="giv-hr-fQd"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

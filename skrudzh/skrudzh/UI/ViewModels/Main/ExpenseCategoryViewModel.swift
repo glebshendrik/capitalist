@@ -28,31 +28,32 @@ class ExpenseCategoryViewModel {
         return expenseCategory.basketType
     }
     
-    var monthlyPlanned: String? {
-        return expenseCategory.monthlyPlannedCents?.moneyCurrencyString(with: currency, shouldRound: true)
+    var planned: String? {
+        return expenseCategory.plannedCentsAtPeriod?.moneyCurrencyString(with: currency, shouldRound: true)
     }
     
-    var monthlySpentRounded: String? {
-        return monthlySpent(shouldRound: true)
+    var spentRounded: String? {
+        return spent(shouldRound: true)
     }
     
-    var monthlySpent: String? {
-        return monthlySpent(shouldRound: false)
+    var spent: String? {
+        return spent(shouldRound: false)
     }
     
-    var areMonthlyExpensesPlanned: Bool {
-        guard let monthlyPlannedCents = expenseCategory.monthlyPlannedCents else { return false }
-        return monthlyPlannedCents > 0
+    var areExpensesPlanned: Bool {
+        guard let plannedCentsAtPeriod = expenseCategory.plannedCentsAtPeriod else { return false }
+        return plannedCentsAtPeriod > 0
     }
     
-    var monthlySpentProgress: Double {
-        guard areMonthlyExpensesPlanned, let monthlyPlannedCents = expenseCategory.monthlyPlannedCents else { return 0 }
-        let progress = Double(expenseCategory.monthlySpentCents) / Double(monthlyPlannedCents)
+    var spendingProgress: Double {
+        guard   areExpensesPlanned,
+                let plannedCentsAtPeriod = expenseCategory.plannedCentsAtPeriod else { return 0 }
+        let progress = Double(expenseCategory.spentCentsAtPeriod) / Double(plannedCentsAtPeriod)
         return progress > 1.0 ? 1.0 : progress
     }
     
-    var isMonthlyPlanCompleted: Bool {
-        return monthlySpentProgress == 1.0
+    var isSpendingProgressCompleted: Bool {
+        return spendingProgress == 1.0
     }
     
     var iconURL: URL? {
@@ -63,18 +64,18 @@ class ExpenseCategoryViewModel {
         self.expenseCategory = expenseCategory
     }
     
-    private func monthlySpent(shouldRound: Bool) -> String? {
-        return expenseCategory.monthlySpentCents.moneyCurrencyString(with: currency, shouldRound: shouldRound)
+    private func spent(shouldRound: Bool) -> String? {
+        return expenseCategory.spentCentsAtPeriod.moneyCurrencyString(with: currency, shouldRound: shouldRound)
     }
 }
 
 extension ExpenseCategoryViewModel : TransactionCompletable {
     var amountRounded: String {
-        return monthlySpentRounded ?? ""
+        return spentRounded ?? ""
     }
     
     var amount: String {
-        return monthlySpent ?? ""
+        return spent ?? ""
     }
     
     func canComplete(startable: TransactionStartable) -> Bool {

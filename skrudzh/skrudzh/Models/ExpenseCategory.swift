@@ -16,8 +16,9 @@ struct ExpenseCategory : Decodable {
     let basketType: BasketType
     let monthlyPlannedCurrency: String?
     let monthlyPlannedCents: Int?
-    let monthlySpentCents: Int
-    let monthlySpentCurrency: String
+    let spentCentsAtPeriod: Int
+    let spentCurrency: String
+    let plannedCentsAtPeriod: Int?
     let currency: Currency
     let incomeSourceDependentCurrency: Currency
     let incomeSourceCurrency: String
@@ -31,8 +32,9 @@ struct ExpenseCategory : Decodable {
         case basketType = "basket_type"
         case monthlyPlannedCurrency = "monthly_planned_currency"
         case monthlyPlannedCents = "monthly_planned_cents"
-        case monthlySpentCents = "monthly_spent_cents"
-        case monthlySpentCurrency = "monthly_spent_currency"
+        case spentCentsAtPeriod = "spent_cents_at_period"
+        case spentCurrency = "spent_currency"
+        case plannedCentsAtPeriod = "planned_cents_at_period"
         case order = "row_order"
         case currency = "currency"
         case incomeSourceDependentCurrency = "income_source_dependent_currency"

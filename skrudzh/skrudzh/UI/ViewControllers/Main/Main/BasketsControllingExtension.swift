@@ -44,15 +44,15 @@ extension MainViewController {
                           options: .transitionCrossDissolve,
                           animations: {
                             
-                            self.joyBasketSpentLabel.text = self.viewModel.basketsViewModel.joyBasketMonthlySpent
+                            self.joyBasketSpentLabel.text = self.viewModel.basketsViewModel.joyBasketSpent
                             self.joyBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isJoyBasketSelected ? selectedTextColor : unselectedTextColor
                             self.joyBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isJoyBasketSelected
                             
-                            self.riskBasketSpentLabel.text = self.viewModel.basketsViewModel.riskBasketMonthlySpent
+                            self.riskBasketSpentLabel.text = self.viewModel.basketsViewModel.riskBasketSpent
                             self.riskBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isRiskBasketSelected ? selectedTextColor : unselectedTextColor
                             self.riskBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isRiskBasketSelected
                             
-                            self.safeBasketSpentLabel.text = self.viewModel.basketsViewModel.safeBasketMonthlySpent
+                            self.safeBasketSpentLabel.text = self.viewModel.basketsViewModel.safeBasketSpent
                             self.safeBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isSafeBasketSelected ? selectedTextColor : unselectedTextColor
                             self.safeBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isSafeBasketSelected
         })

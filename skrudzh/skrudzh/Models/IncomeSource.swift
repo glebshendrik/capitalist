@@ -12,7 +12,7 @@ struct IncomeSource : Decodable {
     let id: Int
     let name: String
     let currency: Currency
-    let monthlyGotCents: Int
+    let gotCentsAtPeriod: Int
     let iconURL: URL?
     let order: Int
     
@@ -20,7 +20,7 @@ struct IncomeSource : Decodable {
         case id
         case name
         case currency
-        case monthlyGotCents = "monthly_got_cents"
+        case gotCentsAtPeriod = "got_cents_at_period"
         case iconURL = "icon_url"
         case order = "row_order"
     }

@@ -13,21 +13,21 @@ class BasketsViewModel {
     private var basketViewModels: [BasketViewModel]
     private var ratioViewModels: [BasketRatioViewModel] = []
     
-    var joyBasketMonthlySpent: String? {
-        return basketViewModelBy(basketType: .joy)?.monthlySpent
+    var joyBasketSpent: String? {
+        return basketViewModelBy(basketType: .joy)?.spent
     }
     
-    var riskBasketMonthlySpent: String? {
-        return basketViewModelBy(basketType: .risk)?.monthlySpent
+    var riskBasketSpent: String? {
+        return basketViewModelBy(basketType: .risk)?.spent
     }
     
-    var safeBasketMonthlySpent: String? {
-        return basketViewModelBy(basketType: .safe)?.monthlySpent
+    var safeBasketSpent: String? {
+        return basketViewModelBy(basketType: .safe)?.spent
     }
     
-    var monthlySpent: String? {
+    var spent: String? {
         guard let currency = basketViewModels.first?.currency else { return nil }
-        return basketsMonthlySpentCents.moneyCurrencyString(with: currency, shouldRound: true)
+        return basketsSpentCents.moneyCurrencyString(with: currency, shouldRound: true)
     }
     
     var joyBasketRatio: CGFloat {
@@ -62,20 +62,20 @@ class BasketsViewModel {
         return selectedBasketViewModel()?.basketType
     }
     
-    private var joyBasketMonthlySpentCents: Int {
-        return basketViewModelBy(basketType: .joy)?.monthlySpentCents ?? 0
+    private var joyBasketSpentCents: Int {
+        return basketViewModelBy(basketType: .joy)?.spentCents ?? 0
     }
     
-    private var riskBasketMonthlySpentCents: Int {
-        return basketViewModelBy(basketType: .risk)?.monthlySpentCents ?? 0
+    private var riskBasketSpentCents: Int {
+        return basketViewModelBy(basketType: .risk)?.spentCents ?? 0
     }
     
-    private var safeBasketMonthlySpentCents: Int {
-        return basketViewModelBy(basketType: .safe)?.monthlySpentCents ?? 0
+    private var safeBasketSpentCents: Int {
+        return basketViewModelBy(basketType: .safe)?.spentCents ?? 0
     }
     
-    private var basketsMonthlySpentCents: Int {
-        return joyBasketMonthlySpentCents + riskBasketMonthlySpentCents + safeBasketMonthlySpentCents
+    private var basketsSpentCents: Int {
+        return joyBasketSpentCents + riskBasketSpentCents + safeBasketSpentCents
     }
     
     init(baskets: [Basket], basketTypeToSelect: BasketType?) {
@@ -96,7 +96,7 @@ class BasketsViewModel {
     
     private func updateRatios() {
         ratioViewModels = basketViewModels
-            .map { BasketRatioViewModel(basketViewModel: $0, basketsMonthlySpentCents: self.basketsMonthlySpentCents) }
+            .map { BasketRatioViewModel(basketViewModel: $0, basketsSpentCents: self.basketsSpentCents) }
             .sorted(by: { $0.ratio < $1.ratio })
         roundRatios()
     }
@@ -130,7 +130,7 @@ class BasketsViewModel {
 
 class BasketRatioViewModel {
     private let basketViewModel: BasketViewModel
-    private let basketsMonthlySpentCents: Int
+    private let basketsSpentCents: Int
     
     var basketType: BasketType {
         return basketViewModel.basketType
@@ -138,16 +138,16 @@ class BasketRatioViewModel {
     
     var ratio: CGFloat = 0.0
     
-    init(basketViewModel: BasketViewModel, basketsMonthlySpentCents: Int) {
+    init(basketViewModel: BasketViewModel, basketsSpentCents: Int) {
         self.basketViewModel = basketViewModel
-        self.basketsMonthlySpentCents = basketsMonthlySpentCents
+        self.basketsSpentCents = basketsSpentCents
         self.ratio = calculateRatio()
     }
     
     private func calculateRatio() -> CGFloat {
-        guard basketsMonthlySpentCents > 0 else { return 1 / 3.0 }
+        guard basketsSpentCents > 0 else { return 1 / 3.0 }
         
-        let originalRatio = CGFloat(basketViewModel.monthlySpentCents) / CGFloat(basketsMonthlySpentCents)
+        let originalRatio = CGFloat(basketViewModel.spentCents) / CGFloat(basketsSpentCents)
         
         if originalRatio < 0.01 {
             return 0.01

@@ -15,8 +15,8 @@ class ExpenseCategoryCollectionViewCell : EditableCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var progressView: CircleProgressView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var monthlySpentLabel: UILabel!
-    @IBOutlet weak var monthlyPlannedLabel: UILabel!
+    @IBOutlet weak var spentLabel: UILabel!
+    @IBOutlet weak var plannedLabel: UILabel!
     
     var viewModel: ExpenseCategoryViewModel? {
         didSet {
@@ -48,14 +48,14 @@ class ExpenseCategoryCollectionViewCell : EditableCell {
         }
         
         func iconTintColor() -> UIColor {
-            if viewModel.isMonthlyPlanCompleted {
+            if viewModel.isSpendingProgressCompleted {
                 return .white
             }
             return basketColor()
         }
         
         func progressInnerColor() -> UIColor {
-            guard viewModel.isMonthlyPlanCompleted else {
+            guard viewModel.isSpendingProgressCompleted else {
                 return .white
             }
             
@@ -81,13 +81,13 @@ class ExpenseCategoryCollectionViewCell : EditableCell {
         }
         
         nameLabel.text = viewModel.name
-        monthlySpentLabel.text = viewModel.monthlySpentRounded
-        monthlyPlannedLabel.text = viewModel.monthlyPlanned
-        monthlyPlannedLabel.isHidden = !viewModel.areMonthlyExpensesPlanned
+        spentLabel.text = viewModel.spentRounded
+        plannedLabel.text = viewModel.planned
+        plannedLabel.isHidden = !viewModel.areExpensesPlanned
         iconImageView.setImage(with: viewModel.iconURL,
                                placeholderName: defaultIconName(),
                                renderingMode: .alwaysTemplate)
-        progressView.progress = viewModel.monthlySpentProgress
+        progressView.progress = viewModel.spendingProgress
         iconImageView.tintColor = iconTintColor()
         progressView.centerFillColor = progressInnerColor()
         progressView.trackFillColor = basketColor()

@@ -20,16 +20,16 @@ class BasketViewModel {
         return basket.basketType
     }
     
-    var monthlySpentCents: Int {
-        return basket.monthlySpentCents
+    var spentCents: Int {
+        return basket.spentCentsAtPeriod
     }
     
     var currency: Currency {
         return basket.currency
     }
     
-    var monthlySpent: String? {
-        return monthlySpentCents.moneyCurrencyString(with: currency, shouldRound: true)
+    var spent: String? {
+        return spentCents.moneyCurrencyString(with: currency, shouldRound: true)
     }
     
     var selected: Bool = false
@@ -39,7 +39,7 @@ class BasketViewModel {
     }
     
     func append(cents: Int) {        
-        basket.monthlySpentCents += cents
+        basket.spentCentsAtPeriod += cents
     }
     
     func select() {

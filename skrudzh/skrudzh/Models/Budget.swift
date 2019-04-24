@@ -11,15 +11,14 @@ import Foundation
 struct Budget : Decodable {
     let currency: Currency
     let balanceCents: Int
-    var monthlySpentCents: Int
-    let monthlyPlannedCents: Int
-    
+    var spentCentsAtPeriod: Int
+    let plannedCentsAtPeriod: Int
     
     enum CodingKeys: String, CodingKey {
         case currency
         case balanceCents = "balance_cents"
-        case monthlySpentCents = "monthly_spent_cents"
-        case monthlyPlannedCents = "monthly_planned_cents"
+        case spentCentsAtPeriod = "spent_cents_at_period"
+        case plannedCentsAtPeriod = "planned_cents_at_period"
         
     }
 }

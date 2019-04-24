@@ -12,7 +12,7 @@ class ExpenseCategoryTableViewCell : UITableViewCell {
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var monthlySpentLabel: UILabel!
+    @IBOutlet weak var spentLabel: UILabel!
     
     var viewModel: ExpenseCategoryViewModel? {
         didSet {
@@ -46,7 +46,7 @@ class ExpenseCategoryTableViewCell : UITableViewCell {
         }
         
         nameLabel.text = viewModel.name
-        monthlySpentLabel.text = viewModel.monthlySpentRounded
+        spentLabel.text = viewModel.spentRounded
         iconImageView.setImage(with: viewModel.iconURL,
                                placeholderName: defaultIconName(),
                                renderingMode: .alwaysTemplate)

@@ -10,6 +10,6 @@ import UIKit
 
 class BudgetView : NavigationBarCustomTitleView {
     @IBOutlet weak var balanceLabel: UILabel!
-    @IBOutlet weak var monthlySpentLabel: UILabel!
-    @IBOutlet weak var monthlyPlannedLabel: UILabel!
+    @IBOutlet weak var spentLabel: UILabel!
+    @IBOutlet weak var plannedLabel: UILabel!
 }

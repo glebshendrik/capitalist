@@ -56,8 +56,8 @@ class MainViewModel {
     }
     
     var balance: String = ""
-    var monthlySpent: String = ""
-    var monthlyPlanned: String = ""
+    var spent: String = ""
+    var planned: String = ""
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
@@ -121,8 +121,8 @@ class MainViewModel {
                 }.get { budget in
                     let budgetViewModel = BudgetViewModel(budget: budget)
                     self.balance = budgetViewModel.balance
-                    self.monthlySpent = budgetViewModel.monthlySpent
-                    self.monthlyPlanned = budgetViewModel.monthlyPlanned
+                    self.spent = budgetViewModel.spent
+                    self.planned = budgetViewModel.planned
                 }.asVoid()
     }
     

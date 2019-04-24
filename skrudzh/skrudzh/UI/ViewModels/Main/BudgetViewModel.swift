@@ -15,12 +15,12 @@ class BudgetViewModel {
         return budget.balanceCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
     }
     
-    var monthlySpent: String {
-        return budget.monthlySpentCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
+    var spent: String {
+        return budget.spentCentsAtPeriod.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
     }
     
-    var monthlyPlanned: String {
-        return budget.monthlyPlannedCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
+    var planned: String {
+        return budget.plannedCentsAtPeriod.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
     }
     
     init(budget: Budget) {
