@@ -18,6 +18,7 @@ class HistoryTransactionsViewModel {
     
     private var allCurrencyCodes: [String] = []
     var defaultCurrency: Currency? = nil
+    var defaultPeriod: AccountingPeriod? = nil
     private var exchangeRates: [String : Float] = [String : Float]()
     
     public private(set) var filteredHistoryTransactionViewModels: [HistoryTransactionViewModel] = []
@@ -104,6 +105,7 @@ class HistoryTransactionsViewModel {
                     accountCoordinator.loadCurrentUser()
                 }.get { user in
                     self.defaultCurrency = user.currency
+                    self.defaultPeriod = user.defaultPeriod
                 }.asVoid()
     }
     

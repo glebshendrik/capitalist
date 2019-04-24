@@ -144,7 +144,7 @@ class GraphTableViewCell : UITableViewCell {
     
     private func updateButtons() {
         graphTypeSwitchButton.setTitle(viewModel?.graphType.title, for: .normal)
-        graphScaleSwitchButton.setTitle(viewModel?.graphPeriodScale.title, for: .normal)
+        graphScaleSwitchButton.setTitle(viewModel?.graphPeriodScale?.title, for: .normal)
         aggregationTypeSwitchButton.setTitle(viewModel?.aggregationType.title, for: .normal)
         
         linePieSwitchButton.isHidden = viewModel?.linePieChartSwitchHidden ?? true
@@ -185,8 +185,9 @@ class GraphTableViewCell : UITableViewCell {
         guard   let viewModel = viewModel,
                 let currency = viewModel.currency,
                 viewModel.hasData else { return }
-        
-        lineChartView.xAxis.valueFormatter = DateValueFormatter(dateFormat: viewModel.dateFormat)
+        if let dateFormat = viewModel.dateFormat {
+            lineChartView.xAxis.valueFormatter = DateValueFormatter(dateFormat: dateFormat)
+        }        
         lineChartView.leftAxis.valueFormatter = CurrencyValueFormatter(currency: currency)
         
         if viewModel.shouldLimitMinimumValueToZero {

@@ -26,7 +26,7 @@ class IdentifiedLineChartDataSet : LineChartDataSet {
 
 extension GraphViewModel {
     
-    func datesRange(from: Date?, to: Date?) -> [Date] {
+    func datesRange(graphPeriodScale: GraphPeriodScale, from: Date?, to: Date?) -> [Date] {
         guard   let from = from,
             let to = to,
             to >= from else {
@@ -55,7 +55,7 @@ extension GraphViewModel {
     
     func lineChartData(for transactions: [HistoryTransactionViewModel],
                        currency: Currency?,
-                       periodScale: GraphPeriodScale,
+                       periodScale: GraphPeriodScale?,
                        keyForTransaction: @escaping (HistoryTransactionViewModel) -> Int,
                        amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber,
                        titleForTransaction: @escaping (HistoryTransactionViewModel) -> String,
@@ -67,7 +67,8 @@ extension GraphViewModel {
                        oppositeAmountForTransactions: (([HistoryTransactionViewModel]) -> NSDecimalNumber)? = nil,
                        oppositeTitleForTransaction: ((HistoryTransactionViewModel) -> String)? = nil) -> LineChartData? {
         
-        guard let currency = currency else { return nil }
+        guard   let currency = currency,
+                let periodScale = periodScale else { return nil }
         
         var dataSets: [Int : LineChartDataSet] = [:]
         var sums: [Int : Double] = [:]

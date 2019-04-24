@@ -81,7 +81,12 @@ class StatisticsViewModel {
     }
     
     private func updateGraphData() {
-        graphViewModel.updateChartsData()
+        if graphViewModel.graphPeriodScale == nil {
+            graphViewModel.updateChartsData(with: historyTransactionsViewModel.defaultPeriod)
+        } else {
+            graphViewModel.updateChartsData()
+        }
+        
     }
     
     private func updateHistoryTransactionsSections() {
@@ -102,7 +107,7 @@ class StatisticsViewModel {
         updateGraphFiltersSection()
         if graphViewModel.hasData {
             sections.append(graphFiltersSection)
-        }        
+        }
         
         if isDataLoading {
             sections.append(HistoryTransactionsLoadingSection())
@@ -195,11 +200,11 @@ extension StatisticsViewModel {
         func graphType(by filterType: HistoryTransactionSourceOrDestinationType) -> GraphType {
             switch sourceOrDestinationFilter.type {
             case .incomeSource:
-                return .incomePie
+                return .income
             case .expenseSource:
                 return .cashFlow
             case .expenseCategory:
-                return .expensesPie
+                return .expenses
             }
         }        
         set(graphType: graphType(by: sourceOrDestinationFilter.type))

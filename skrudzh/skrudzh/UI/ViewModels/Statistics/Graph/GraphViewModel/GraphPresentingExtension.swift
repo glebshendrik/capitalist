@@ -38,8 +38,8 @@ extension GraphViewModel {
         return numberOfDataPoints > 0
     }
     
-    var dateFormat: String {
-        return graphPeriodScale.dateFormat
+    var dateFormat: String? {
+        return graphPeriodScale?.dateFormat
     }
     
     var colors: [UIColor] {
@@ -50,6 +50,7 @@ extension GraphViewModel {
     }
     
     func formattedDataPoint(at indexPath: IndexPath) -> String? {
+        guard let dateFormat = dateFormat else { return nil }
         return dataPoints.item(at: indexPath.item)?.string(withFormat: dateFormat)
     }
     

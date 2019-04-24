@@ -31,7 +31,7 @@ class GraphViewModel {
         }
     }
     
-    var graphPeriodScale: GraphPeriodScale = .days {
+    var graphPeriodScale: GraphPeriodScale? = nil {
         didSet {
             guard graphPeriodScale != oldValue else { return }
             updateChartsData()            
@@ -87,6 +87,23 @@ class GraphViewModel {
         self.historyTransactionsViewModel = historyTransactionsViewModel
     }
     
+    func updateChartsData(with defaultPeriod: AccountingPeriod?) {
+        func scalePeriod(by accountingPeriod: AccountingPeriod?) -> GraphPeriodScale? {
+            guard let accountingPeriod = accountingPeriod else { return nil }
+            switch accountingPeriod {
+            case .week:
+                return .weeks
+            case .month:
+                return .months
+            case .quarter:
+                return .quarters
+            case .year:
+                return .years
+            }
+        }
+        graphPeriodScale = scalePeriod(by: defaultPeriod)
+    }
+    
     func updateChartsData() {
         updateDataPoints()
         
@@ -117,7 +134,13 @@ class GraphViewModel {
     }
     
     private func updateDataPoints() {
-        var range = datesRange(from: transactions.last?.gotAt.dateAtStartOf(graphPeriodScale.asUnit),
+        guard let graphPeriodScale = graphPeriodScale else {
+            dataPoints = []
+            return
+        }
+        
+        var range = datesRange(graphPeriodScale: graphPeriodScale,
+                               from: transactions.last?.gotAt.dateAtStartOf(graphPeriodScale.asUnit),
                                to: transactions.first?.gotAt.dateAtStartOf(graphPeriodScale.asUnit))
         if  range.count == 1,
             pieChartHidden,

@@ -39,10 +39,11 @@ extension GraphViewModel {
     
     func pieChartsAmounts(for transactions: [HistoryTransactionViewModel],
                           currency: Currency?,
-                          periodScale: GraphPeriodScale,
+                          periodScale: GraphPeriodScale?,
                           amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber) -> [String] {
         
-        guard let currency = currency else { return [] }
+        guard   let currency = currency,
+                let periodScale = periodScale else { return [] }
         
         let transactionsByDateGroups = transactions.groupByKey { $0.gotAt.dateAtStartOf(periodScale.asUnit) }
         
@@ -65,11 +66,13 @@ extension GraphViewModel {
     
     func pieChartDatas(for transactions: [HistoryTransactionViewModel],
                        currency: Currency?,
-                       periodScale: GraphPeriodScale,
+                       periodScale: GraphPeriodScale?,
                        keyForTransaction: @escaping (HistoryTransactionViewModel) -> Int,
                        amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber,
                        titleForTransaction: @escaping (HistoryTransactionViewModel) -> String,
                        colorForTransaction: ((HistoryTransactionViewModel) -> UIColor?)? = nil) -> [PieChartData] {
+        
+        guard let periodScale = periodScale else { return [] }
         
         let transactionsByDateGroups = transactions.groupByKey { $0.gotAt.dateAtStartOf(periodScale.asUnit) }
         

@@ -145,7 +145,7 @@ extension GraphViewModel {
     
     func calculateGraphFilters(for transactions: [HistoryTransactionViewModel],
                                currency: Currency?,
-                               periodScale: GraphPeriodScale,
+                               periodScale: GraphPeriodScale?,
                                keyForTransaction: @escaping (HistoryTransactionViewModel) -> Int,
                                amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber,
                                titleForTransaction: @escaping (HistoryTransactionViewModel) -> String,
@@ -156,7 +156,8 @@ extension GraphViewModel {
                                oppositeAmountForTransactions: (([HistoryTransactionViewModel]) -> NSDecimalNumber)? = nil,
                                oppositeTitleForTransaction: ((HistoryTransactionViewModel) -> String)? = nil) -> [GraphHistoryTransactionFilter] {
         
-        guard let currency = currency else { return [] }
+        guard   let currency = currency,
+                let periodScale = periodScale else { return [] }
         
         var filters = [Int : GraphHistoryTransactionFilter]()
         var valuesHash = [Date : [Int: Double]]()
@@ -283,9 +284,9 @@ extension GraphViewModel {
               let transactionableType = transactionableTypeBy(incomeAndExpensesDataSetKey: filter.id) else { return }
         switch transactionableType {
         case .income:
-            graphType = .incomePie
+            graphType = .income
         case .expense:
-            graphType = .expensesPie
+            graphType = .expenses
         default:
             return
         }

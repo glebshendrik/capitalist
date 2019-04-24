@@ -18,7 +18,7 @@ enum GraphType {
     case netWorth
     
     static var switchList: [GraphType] {
-        return [.incomePie, .expensesPie, .incomeAndExpenses, .cashFlow, .netWorth]
+        return [.income, .expenses, .incomeAndExpenses, .cashFlow, .netWorth]
     }
     
     var title: String {
