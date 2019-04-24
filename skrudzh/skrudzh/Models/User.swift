@@ -8,6 +8,26 @@
 
 import Foundation
 
+enum AccountingPeriod : String, Codable {
+    case week
+    case month
+    case quarter
+    case year
+    
+    var title: String {
+        switch self {
+        case .week:
+            return "Неделя"
+        case .month:
+            return "Месяц"
+        case .quarter:
+            return "Квартал"
+        case .year:
+            return "Год"
+        }
+    }
+}
+
 struct User : Decodable {
     let id: Int
     let email: String
@@ -19,6 +39,7 @@ struct User : Decodable {
     let riskBasketId: Int
     let safeBasketId: Int
     let currency: Currency
+    let defaultPeriod: AccountingPeriod
     
     var fullname: String? {
         if let firstname = firstname, !firstname.isEmpty, let lastname = lastname, !lastname.isEmpty {
@@ -43,6 +64,7 @@ struct User : Decodable {
         case riskBasketId = "risk_basket_id"
         case safeBasketId = "safe_basket_id"
         case currency = "default_currency"
+        case defaultPeriod = "default_period"
     }
 }
 
@@ -63,14 +85,22 @@ struct UserUpdatingForm : Encodable {
 struct UserSettingsUpdatingForm : Encodable {
     let userId: Int
     let currency: String?
+    let defaultPeriod: AccountingPeriod?
     
     enum CodingKeys: String, CodingKey {
         case currency = "default_currency"
+        case defaultPeriod = "default_period"
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(currency, forKey: .currency)
+        if let currency = currency {
+            try container.encode(currency, forKey: .currency)
+        }
+        if let defaultPeriod = defaultPeriod {
+            try container.encode(defaultPeriod, forKey: .defaultPeriod)
+        }
+        
     }
 }
 

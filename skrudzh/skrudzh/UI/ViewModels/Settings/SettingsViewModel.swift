@@ -18,6 +18,10 @@ class SettingsViewModel : ProfileViewModel {
         return user?.currency.code
     }
     
+    var period: String? {
+        return user?.defaultPeriod.title
+    }
+    
     var soundsEnabled: Bool {
         return soundsManager.soundsEnabled
     }
@@ -40,9 +44,22 @@ class SettingsViewModel : ProfileViewModel {
             return Promise(error: ProfileEditError.currentSessionDoesNotExist)
         }
         
-        let form = UserSettingsUpdatingForm(userId: currentUserId, currency: currency.code)
+        let form = UserSettingsUpdatingForm(userId: currentUserId, currency: currency.code, defaultPeriod: nil)
+        return update(settings: form)
+    }
+    
+    func update(period: AccountingPeriod) -> Promise<Void> {
+        guard let currentUserId = accountCoordinator.currentSession?.userId else {
+            return Promise(error: ProfileEditError.currentSessionDoesNotExist)
+        }
+        
+        let form = UserSettingsUpdatingForm(userId: currentUserId, currency: nil, defaultPeriod: period)
+        return update(settings: form)
+    }
+    
+    private func update(settings: UserSettingsUpdatingForm) -> Promise<Void> {
         return  firstly {
-                    settingsCoordinator.updateUserSettings(with: form)
+                    settingsCoordinator.updateUserSettings(with: settings)
                 }.get {
                     
                     NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)

@@ -18,6 +18,7 @@ class SettingsViewController : StaticDataTableViewController, UIMessagePresenter
     var viewModel: SettingsViewModel!
     
     @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var periodLabel: UILabel!
     @IBOutlet weak var playSoundsSwitch: UISwitch!
     
     private var loaderView: LoaderView!
@@ -49,6 +50,19 @@ class SettingsViewController : StaticDataTableViewController, UIMessagePresenter
         viewModel.setSounds(enabled: playSoundsSwitch.isOn)
     }
     
+    @IBAction func didTapPeriodButton(_ sender: Any) {
+        let periods: [AccountingPeriod] = [.week, .month, .quarter, .year]
+        let actions = periods.map { period in
+            return UIAlertAction(title: period.title,
+                                 style: .default,
+                                 handler: { _ in
+                                    self.update(period: period)
+                                })
+        }
+        
+        showActionSheet(with: actions)
+    }
+    
     // Re fetch data from the server
     @objc func refreshData() {
         showActivityIndicator()
@@ -66,6 +80,7 @@ class SettingsViewController : StaticDataTableViewController, UIMessagePresenter
     
     private func updateUI(animated: Bool = false) {
         currencyLabel.text = viewModel.currency
+        periodLabel.text = viewModel.period
         reloadData(animated: animated)
     }
     
@@ -123,5 +138,43 @@ extension SettingsViewController : CurrenciesViewControllerDelegate {
     
     private func dirtyUpdate(currency: Currency) {
         currencyLabel.text = currency.code
+    }
+}
+
+extension SettingsViewController {
+    func update(period: AccountingPeriod) {
+        dirtyUpdate(period: period)
+        showActivityIndicator()
+        
+        firstly {
+            viewModel.update(period: period)
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Возникла проблема при обновлении периода", theme: .error)
+            
+        }.finally {
+            self.hideActivityIndicator()
+            self.updateUI(animated: true)
+        }
+    }
+    
+    private func dirtyUpdate(period: AccountingPeriod) {
+        periodLabel.text = period.title
+    }
+    
+    private func showActionSheet(with actions: [UIAlertAction]) {
+        let alertController = UIAlertController(title: nil,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        
+        for action in actions {
+            alertController.addAction(action)
+        }
+        
+        alertController.addAction(title: "Отмена",
+                                  style: .cancel,
+                                  isEnabled: true,
+                                  handler: nil)
+        
+        present(alertController, animated: true)
     }
 }
