@@ -10,12 +10,16 @@ import Foundation
 
 protocol HistoryTransactionFilter {
     var title: String { get }
+    var editable: Bool { get }
 }
 
 class SourceOrDestinationHistoryTransactionFilter : HistoryTransactionFilter {
     var id: Int
     var title: String
     var type: HistoryTransactionSourceOrDestinationType
+    var editable: Bool {
+        return false
+    }
     
     init(id: Int, title: String, type: HistoryTransactionSourceOrDestinationType) {
         self.id = id
@@ -52,6 +56,10 @@ class SelectableSourceOrDestinationHistoryTransactionFilter : SourceOrDestinatio
 class IncomeSourceHistoryTransactionFilter : SelectableSourceOrDestinationHistoryTransactionFilter {
     let incomeSourceViewModel: IncomeSourceViewModel
     
+    override var editable: Bool {
+        return !incomeSourceViewModel.isDeleted
+    }
+    
     init(incomeSourceViewModel: IncomeSourceViewModel, isSelected: Bool = false) {
         self.incomeSourceViewModel = incomeSourceViewModel
         super.init(id: incomeSourceViewModel.id, title: incomeSourceViewModel.name, type: .incomeSource, isSelected: isSelected)
@@ -61,6 +69,10 @@ class IncomeSourceHistoryTransactionFilter : SelectableSourceOrDestinationHistor
 class ExpenseSourceHistoryTransactionFilter : SelectableSourceOrDestinationHistoryTransactionFilter {
     let expenseSourceViewModel: ExpenseSourceViewModel
     
+    override var editable: Bool {
+        return !expenseSourceViewModel.isDeleted
+    }
+    
     init(expenseSourceViewModel: ExpenseSourceViewModel, isSelected: Bool = false) {
         self.expenseSourceViewModel = expenseSourceViewModel
         super.init(id: expenseSourceViewModel.id, title: expenseSourceViewModel.name, type: .expenseSource, isSelected: isSelected)
@@ -69,6 +81,10 @@ class ExpenseSourceHistoryTransactionFilter : SelectableSourceOrDestinationHisto
 
 class ExpenseCategoryHistoryTransactionFilter : SelectableSourceOrDestinationHistoryTransactionFilter {
     let expenseCategoryViewModel: ExpenseCategoryViewModel
+    
+    override var editable: Bool {
+        return !expenseCategoryViewModel.isDeleted
+    }
     
     var basketType: BasketType {
         return expenseCategoryViewModel.basketType
@@ -93,6 +109,10 @@ class DateRangeHistoryTransactionFilter : HistoryTransactionFilter {
                 return ""
         }
         return "\(fromDateString) - \(toDateString)"
+    }
+    
+    var editable: Bool {
+        return false
     }
     
     let fromDate: Date?

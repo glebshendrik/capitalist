@@ -23,6 +23,7 @@ struct ExpenseCategory : Decodable {
     let incomeSourceDependentCurrency: Currency
     let incomeSourceCurrency: String
     let order: Int
+    let deletedAt: Date?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -39,6 +40,7 @@ struct ExpenseCategory : Decodable {
         case currency = "currency"
         case incomeSourceDependentCurrency = "income_source_dependent_currency"
         case incomeSourceCurrency = "income_source_currency"
+        case deletedAt = "deleted_at"
     }
     
 }

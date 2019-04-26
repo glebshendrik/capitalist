@@ -25,8 +25,9 @@ class FiltersViewModel {
         return sourceOrDestinationFilters.count
     }
     
-    var isSingleSourceOrDestinationFilterSelected: Bool {
-        return singleSourceOrDestinationFilter != nil
+    var isSingleSourceOrDestinationFilterSelectedAndEditable: Bool {
+        guard let singleSourceOrDestinationFilter = singleSourceOrDestinationFilter else { return false }
+        return singleSourceOrDestinationFilter.editable
     }
     
     var singleSourceOrDestinationFilter: SourceOrDestinationHistoryTransactionFilter? {

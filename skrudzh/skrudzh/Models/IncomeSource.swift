@@ -15,6 +15,7 @@ struct IncomeSource : Decodable {
     let gotCentsAtPeriod: Int
     let iconURL: URL?
     let order: Int
+    let deletedAt: Date?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -23,6 +24,7 @@ struct IncomeSource : Decodable {
         case gotCentsAtPeriod = "got_cents_at_period"
         case iconURL = "icon_url"
         case order = "row_order"
+        case deletedAt = "deleted_at"
     }
 
 }

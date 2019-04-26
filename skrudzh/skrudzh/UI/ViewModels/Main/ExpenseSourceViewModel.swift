@@ -49,6 +49,10 @@ class ExpenseSourceViewModel {
         return goalProgress == 1.0
     }
     
+    var isDeleted: Bool {
+        return expenseSource.deletedAt != nil
+    }
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
     }

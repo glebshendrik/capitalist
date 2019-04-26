@@ -34,6 +34,8 @@ struct HistoryTransaction : Decodable {
     let destinationIconURL: URL?
     let currency: Currency
     let amountCents: Int
+    let convertedCurrency: Currency
+    let convertedAmountCents: Int
     let gotAt: Date
     let comment: String?
     let basketType: BasketType?
@@ -52,6 +54,8 @@ struct HistoryTransaction : Decodable {
         case destinationIconURL = "destination_icon_url"
         case currency = "currency_object"
         case amountCents = "amount_cents"
+        case convertedCurrency = "converted_currency_object"
+        case convertedAmountCents = "converted_amount_cents"
         case gotAt = "got_at"
         case comment
         case basketType = "basket_type"

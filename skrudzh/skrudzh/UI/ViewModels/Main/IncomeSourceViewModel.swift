@@ -40,6 +40,10 @@ class IncomeSourceViewModel : TransactionStartable {
         return nil
     }
     
+    var isDeleted: Bool {
+        return incomeSource.deletedAt != nil
+    }
+    
     init(incomeSource: IncomeSource) {
         self.incomeSource = incomeSource
     }

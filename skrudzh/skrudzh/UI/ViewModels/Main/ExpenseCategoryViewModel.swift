@@ -60,6 +60,10 @@ class ExpenseCategoryViewModel {
         return expenseCategory.iconURL
     }
     
+    var isDeleted: Bool {
+        return expenseCategory.deletedAt != nil
+    }
+    
     init(expenseCategory: ExpenseCategory) {
         self.expenseCategory = expenseCategory
     }

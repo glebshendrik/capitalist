@@ -25,7 +25,9 @@ class HistoryTransactionsViewModel {
     
     private var allHistoryTransactionViewModels: [HistoryTransactionViewModel] = [] {
         didSet {
-            allCurrencyCodes = allHistoryTransactionViewModels.map { $0.currency.code }.withoutDuplicates()
+            let currencies = allHistoryTransactionViewModels.map { $0.currency.code }.withoutDuplicates()
+            let convertedCurrencies = allHistoryTransactionViewModels.map { $0.convertedCurrency.code }.withoutDuplicates()
+            allCurrencyCodes = (currencies + convertedCurrencies).withoutDuplicates()
         }
     }
     
@@ -150,13 +152,34 @@ class HistoryTransactionsViewModel {
     }
     
     func historyTransactionsAmount(transactions: [HistoryTransactionViewModel],
-                                   amountCentsForTransaction: ((HistoryTransactionViewModel) -> Int) = { $0.amountCents }) -> NSDecimalNumber {
+                                   amountForTransaction: ((HistoryTransactionViewModel) -> (cents: Int, currency: Currency))? = nil) -> NSDecimalNumber {
         guard let currency = defaultCurrency else { return 0.0 }
         
         return transactions
-            .map { $0.currency.code == currency.code
-                ? NSDecimalNumber(integerLiteral: amountCentsForTransaction($0))
-                : convert(cents: amountCentsForTransaction($0), fromCurrency: $0.currency, toCurrency: currency) }
+            .map { transaction -> NSDecimalNumber in
+                
+                if let amountForTransaction = amountForTransaction {
+                    let amount = amountForTransaction(transaction)
+                    let amountCents = amount.cents
+                    let amountCurrency = amount.currency
+                    
+                    return amountCurrency.code == currency.code || amountCents == 0
+                        ? NSDecimalNumber(integerLiteral: amountCents)
+                        : convert(cents: amountCents, fromCurrency: amountCurrency, toCurrency: currency)
+                } else {
+                    
+                    if transaction.currency.code == currency.code {
+                        return NSDecimalNumber(integerLiteral: transaction.amountCents)
+                    }
+                    if transaction.convertedCurrency.code == currency.code {
+                        return NSDecimalNumber(integerLiteral: transaction.convertedAmountCents)
+                    }
+                    
+                    return convert(cents: transaction.calculatingAmountCents,
+                                   fromCurrency: transaction.calculatingCurrency,
+                                   toCurrency: currency)
+                }                
+            }
             .reduce(0, +)
     }
     

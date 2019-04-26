@@ -19,6 +19,7 @@ struct ExpenseSource : Decodable {
     let isGoal: Bool
     let goalAmountCents: Int?
     let order: Int
+    let deletedAt: Date?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -31,6 +32,7 @@ struct ExpenseSource : Decodable {
         case goalAmountCents = "goal_amount_cents"
         case order = "row_order"
         case currency = "currency"
+        case deletedAt = "deleted_at"
     }
     
 }

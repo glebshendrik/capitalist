@@ -76,22 +76,23 @@ extension GraphViewModel {
         }
     }
     
+    
     private func getAmount(for transactions: [HistoryTransactionViewModel]) -> NSDecimalNumber {
-        return historyTransactionsViewModel.historyTransactionsAmount(transactions: transactions, amountCentsForTransaction: { transaction -> Int in
+        return historyTransactionsViewModel.historyTransactionsAmount(transactions: transactions, amountForTransaction: { transaction -> (cents: Int, currency: Currency) in
             switch transaction.transactionableType {
-            case .expense:      return -transaction.amountCents
-            case .income:       return transaction.amountCents
-            case .fundsMove:    return transaction.amountCents
+            case .expense:      return (cents: -transaction.amountCents, currency: transaction.currency)
+            case .income:       return (cents: transaction.convertedAmountCents, currency: transaction.convertedCurrency)
+            case .fundsMove:    return (cents: transaction.convertedAmountCents, currency: transaction.convertedCurrency)
             }
         })
     }
     
     private func oppositeAmount(for transactions: [HistoryTransactionViewModel]) -> NSDecimalNumber {
-        return historyTransactionsViewModel.historyTransactionsAmount(transactions: transactions, amountCentsForTransaction: { transaction -> Int in
+        return historyTransactionsViewModel.historyTransactionsAmount(transactions: transactions, amountForTransaction: { transaction -> (cents: Int, currency: Currency) in
             switch transaction.transactionableType {
-            case .expense:      return 0
-            case .income:       return 0
-            case .fundsMove:    return -transaction.amountCents
+            case .expense:      return (cents: 0, currency: transaction.currency)
+            case .income:       return (cents: 0, currency: transaction.currency)
+            case .fundsMove:    return (cents: -transaction.amountCents, currency: transaction.currency)
             }
         })
     }

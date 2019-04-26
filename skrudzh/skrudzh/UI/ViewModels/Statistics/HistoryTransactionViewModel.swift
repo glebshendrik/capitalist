@@ -55,12 +55,42 @@ class HistoryTransactionViewModel {
         return historyTransaction.amountCents
     }
     
+    var convertedCurrency: Currency {
+        return historyTransaction.convertedCurrency
+    }
+    
+    var convertedAmountCents: Int {
+        return historyTransaction.convertedAmountCents
+    }
+    
+    var calculatingCurrency: Currency {
+        switch transactionableType {
+        case .income:
+            return convertedCurrency
+        case .fundsMove:
+            return convertedCurrency
+        case .expense:
+            return currency
+        }
+    }
+    
+    var calculatingAmountCents: Int {
+        switch transactionableType {
+        case .income:
+            return convertedAmountCents
+        case .fundsMove:
+            return convertedAmountCents
+        case .expense:
+            return amountCents
+        }
+    }
+    
     var gotAt: Date {
         return historyTransaction.gotAt
     }
     
     var amount: String {        
-        guard let transactionAmount = amountCents.moneyCurrencyString(with: currency, shouldRound: false) else { return "" }
+        guard let transactionAmount = calculatingAmountCents.moneyCurrencyString(with: calculatingCurrency, shouldRound: false) else { return "" }
         switch transactionableType {
         case .income:
             return "+\(transactionAmount)"

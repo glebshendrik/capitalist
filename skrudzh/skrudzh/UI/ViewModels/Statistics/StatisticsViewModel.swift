@@ -98,7 +98,7 @@ class StatisticsViewModel {
     
     private func updateSections() {
         sections = []
-        if filtersViewModel.isSingleSourceOrDestinationFilterSelected {
+        if filtersViewModel.isSingleSourceOrDestinationFilterSelectedAndEditable {
             sections.append(SourceOrDestinationFilterEditSection())
         }
         
@@ -188,8 +188,8 @@ extension StatisticsViewModel {
         return numberOfSourceOrDestinationFilters > 0
     }
     
-    var isSingleSourceOrDestinationFilterSelected: Bool {
-        return filtersViewModel.isSingleSourceOrDestinationFilterSelected
+    var isSingleSourceOrDestinationFilterSelectedAndEditable: Bool {
+        return filtersViewModel.isSingleSourceOrDestinationFilterSelectedAndEditable
     }
     
     var singleSourceOrDestinationFilter: SourceOrDestinationHistoryTransactionFilter? {
