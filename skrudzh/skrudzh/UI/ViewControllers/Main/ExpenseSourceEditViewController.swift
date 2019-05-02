@@ -155,8 +155,16 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
 }
 
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
+    var accountType: AccountType {
+        return viewModel.accountType
+    }
+    
+    var canChangeAmount: Bool {
+        return viewModel.canChangeAmount
+    }
+    
     var canChangeCurrency: Bool {
-        return viewModel.isNew
+        return viewModel.canChangeCurrency
     }
     
     func didSelectCurrency(currency: Currency) {
@@ -168,12 +176,8 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
         updateCurrencyUI()
     }
     
-    var isExpenseSourceGoalType: Bool {
-        return viewModel.isGoal
-    }
-    
-    func didSwitchType(isGoal: Bool) {
-        viewModel.isGoal = isGoal
+    func didSwitch(accountType: AccountType) {
+        viewModel.accountType = accountType
         updateIconUI()
         updateGoalUI()
         validateUI()
@@ -272,6 +276,9 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
         editTableController?.expenseSourceNameTextField?.text = viewModel.name        
         editTableController?.expenseSourceAmountTextField?.text = viewModel.amount
         editTableController?.expenseSourceGoalAmountTextField?.text = viewModel.goalAmount
+        
+        editTableController?.expenseSourceAmountTextField?.isUserInteractionEnabled = viewModel.canChangeAmount
+        
         updateCurrencyUI()
         updateIconUI()
         updateGoalUI()

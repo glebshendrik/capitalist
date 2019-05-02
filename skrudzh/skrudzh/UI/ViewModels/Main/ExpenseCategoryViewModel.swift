@@ -83,6 +83,7 @@ extension ExpenseCategoryViewModel : TransactionCompletable {
     }
     
     func canComplete(startable: TransactionStartable) -> Bool {
-        return startable is ExpenseSourceViewModel
+        guard let startableExpenseSourceViewModel = startable as? ExpenseSourceViewModel else { return false }
+        return !startableExpenseSourceViewModel.isDebt
     }
 }

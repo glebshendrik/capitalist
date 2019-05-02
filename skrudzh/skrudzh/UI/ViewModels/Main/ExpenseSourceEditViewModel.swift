@@ -61,7 +61,19 @@ class ExpenseSourceEditViewModel {
         return expenseSource == nil
     }
     
-    var isGoal: Bool = false
+    var canChangeCurrency: Bool {
+        return isNew
+    }
+    
+    var canChangeAmount: Bool {
+        return isNew || accountType != .debt
+    }
+    
+    var accountType: AccountType = .usual
+    
+    var isGoal: Bool {
+        return accountType == .goal
+    }
     
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {
@@ -72,7 +84,7 @@ class ExpenseSourceEditViewModel {
     func set(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         selectedIconURL = iconURL
-        isGoal = expenseSource.isGoal
+        accountType = expenseSource.accountType
         selectedCurrency = expenseSource.currency
     }
     
@@ -165,7 +177,7 @@ extension ExpenseSourceEditViewModel {
                                                 name: name!,
                                                 amountCents: amountCents!,
                                                 iconURL: iconURL,
-                                                isGoal: isGoal,
+                                                accountType: accountType,
                                                 goalAmountCents: goalAmountCents,
                                                 currency: currencyCode))
     }
@@ -178,7 +190,7 @@ extension ExpenseSourceEditViewModel {
             [Validator.validate(required: name, key: ExpenseSourceCreationForm.CodingKeys.name),
              Validator.validate(money: amountCents, key: ExpenseSourceCreationForm.CodingKeys.amountCents)]
         
-        if isGoal {
+        if accountType == .goal {
             validationResults.append(Validator.validate(money: goalAmountCents, key: ExpenseSourceCreationForm.CodingKeys.goalAmountCents))
         }
         
@@ -237,7 +249,7 @@ extension ExpenseSourceEditViewModel {
             [Validator.validate(required: name, key: ExpenseSourceUpdatingForm.CodingKeys.name),
              Validator.validate(balance: amountCents, key: ExpenseSourceUpdatingForm.CodingKeys.amountCents)]
         
-        if isGoal {
+        if accountType == .goal {
             validationResults.append(Validator.validate(money: goalAmountCents, key: ExpenseSourceUpdatingForm.CodingKeys.goalAmountCents))
         }
         

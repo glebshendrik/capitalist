@@ -35,8 +35,12 @@ class ExpenseSourceViewModel {
         return expenseSource.iconURL
     }
     
+    var isDebt: Bool {
+        return expenseSource.accountType == .debt
+    }
+    
     var isGoal: Bool {
-        return expenseSource.isGoal
+        return expenseSource.accountType == .goal
     }
     
     var goalProgress: Double {
@@ -69,8 +73,10 @@ extension ExpenseSourceViewModel : TransactionStartable, TransactionCompletable 
     
     func canComplete(startable: TransactionStartable) -> Bool {
         if let startableExpenseSourceViewModel = startable as? ExpenseSourceViewModel {
-            return startableExpenseSourceViewModel.id != self.id
+            return  startableExpenseSourceViewModel.id != self.id &&
+                    !(startableExpenseSourceViewModel.isDebt && self.isDebt)
         }
-        return startable is IncomeSourceViewModel
+        
+        return (startable is IncomeSourceViewModel) && !self.isDebt
     }
 }

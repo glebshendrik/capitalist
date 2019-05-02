@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum AccountType : String, Codable {
+    case usual
+    case goal
+    case debt
+}
+
 struct ExpenseSource : Decodable {
     let id: Int
     let name: String
@@ -16,10 +22,12 @@ struct ExpenseSource : Decodable {
     let amountCents: Int
     let currency: Currency
     let iconURL: URL?
-    let isGoal: Bool
+    let accountType: AccountType
     let goalAmountCents: Int?
     let order: Int
     let deletedAt: Date?
+    let waitingDebts: [FundsMove]?
+    let waitingLoans: [FundsMove]?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,11 +36,13 @@ struct ExpenseSource : Decodable {
         case amount
         case amountCents = "amount_cents"
         case iconURL = "icon_url"
-        case isGoal = "is_goal"
+        case accountType = "account_type"
         case goalAmountCents = "goal_amount_cents"
         case order = "row_order"
         case currency = "currency"
         case deletedAt = "deleted_at"
+        case waitingDebts = "waiting_debts"
+        case waitingLoans = "waiting_loans"
     }
     
 }
@@ -43,7 +53,7 @@ struct ExpenseSourceCreationForm : Encodable {
     let iconURL: URL?
     let amountCurrency: String
     let amountCents: Int
-    let isGoal: Bool
+    let accountType: AccountType
     let goalAmountCents: Int?
     
     enum CodingKeys: String, CodingKey {
@@ -51,16 +61,16 @@ struct ExpenseSourceCreationForm : Encodable {
         case iconURL = "icon_url"
         case amountCurrency = "amount_currency"
         case amountCents = "amount_cents"
-        case isGoal = "is_goal"
+        case accountType = "account_type"
         case goalAmountCents = "goal_amount_cents"
     }
     
-    init(userId: Int, name: String, amountCents: Int, iconURL: URL?, isGoal: Bool, goalAmountCents: Int?, currency: String) {
+    init(userId: Int, name: String, amountCents: Int, iconURL: URL?, accountType: AccountType, goalAmountCents: Int?, currency: String) {
         self.userId = userId
         self.name = name
         self.amountCents = amountCents
         self.iconURL = iconURL
-        self.isGoal = isGoal
+        self.accountType = accountType
         self.goalAmountCents = goalAmountCents
         self.amountCurrency = currency
     }

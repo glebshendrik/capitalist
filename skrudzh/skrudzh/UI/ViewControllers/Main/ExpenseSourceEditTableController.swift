@@ -11,11 +11,12 @@ import SkyFloatingLabelTextField
 import StaticDataTableViewController
 
 protocol ExpenseSourceEditTableControllerDelegate {
-    var isExpenseSourceGoalType: Bool { get }
+    var accountType: AccountType { get }
     var canChangeCurrency: Bool { get }
+    var canChangeAmount: Bool { get }
     func validationNeeded()
     func didSelectIcon(icon: Icon)
-    func didSwitchType(isGoal: Bool)
+    func didSwitch(accountType: AccountType)
     func didSelectCurrency(currency: Currency)
 }
 
@@ -25,6 +26,9 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
     
     @IBOutlet weak var goalExpenseSourceTabTitleLabel: UILabel!
     @IBOutlet weak var goalExpenseSourceTabSelectionIndicator: UIView!
+    
+    @IBOutlet weak var debtExpenseSourceTabTitleLabel: UILabel!
+    @IBOutlet weak var debtExpenseSourceTabSelectionIndicator: UIView!
     
     @IBOutlet weak var expenseSourceNameTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var nameBackground: UIView!
@@ -49,12 +53,11 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
     var delegate: ExpenseSourceEditTableControllerDelegate?
     
     var iconCategory: IconCategory {
-        return isGoal ? .expenseSourceGoal : .expenseSource
+        return accountType == .goal ? .expenseSourceGoal : .expenseSource
     }
     
-    var isGoal: Bool {
-        guard let delegate = delegate else { return false }
-        return delegate.isExpenseSourceGoalType
+    var accountType: AccountType {
+        return delegate?.accountType ?? .usual
     }
     
     override func viewDidLoad() {
@@ -70,15 +73,43 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
         delegate?.validationNeeded()
     }
     
+    typealias TabAppearance = (textColor: UIColor, isHidden: Bool)
+    
     func updateUI(animated: Bool = true) {
-        let selectedTypeLabelTextColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
-        let unselectedTypeLabelTextColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
         
-        generalExpenseSourceTabTitleLabel.textColor = isGoal ? unselectedTypeLabelTextColor : selectedTypeLabelTextColor        
-        goalExpenseSourceTabTitleLabel.textColor = isGoal ? selectedTypeLabelTextColor : unselectedTypeLabelTextColor
+        func tabsAppearances(for accountType: AccountType) -> (usual: TabAppearance, goal: TabAppearance, debt: TabAppearance) {
+            let selectedColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
+            let unselectedColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
+            
+            let selectedTabAppearance: TabAppearance = (textColor: selectedColor, isHidden: false)
+            let unselectedTabAppearance: TabAppearance = (textColor: unselectedColor, isHidden: true)
+            
+            switch accountType {
+            case .usual:
+                return (usual: selectedTabAppearance,
+                        goal: unselectedTabAppearance,
+                        debt: unselectedTabAppearance)
+            case .goal:
+                return (usual: unselectedTabAppearance,
+                        goal: selectedTabAppearance,
+                        debt: unselectedTabAppearance)
+            case .debt:
+                return (usual: unselectedTabAppearance,
+                        goal: unselectedTabAppearance,
+                        debt: selectedTabAppearance)
+                
+            }
+        }
         
-        generalExpenseSourceTabSelectionIndicator.isHidden = isGoal
-        goalExpenseSourceTabSelectionIndicator.isHidden = !isGoal
+        let tabsAppearance = tabsAppearances(for: accountType)
+        
+        generalExpenseSourceTabTitleLabel.textColor = tabsAppearance.usual.textColor
+        goalExpenseSourceTabTitleLabel.textColor = tabsAppearance.goal.textColor
+        debtExpenseSourceTabTitleLabel.textColor = tabsAppearance.debt.textColor
+        
+        generalExpenseSourceTabSelectionIndicator.isHidden = tabsAppearance.usual.isHidden
+        goalExpenseSourceTabSelectionIndicator.isHidden = tabsAppearance.goal.isHidden
+        debtExpenseSourceTabSelectionIndicator.isHidden = tabsAppearance.debt.isHidden
         
         reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
     }
@@ -92,7 +123,7 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
         cell(goalAmountCell, setHidden: hidden)
         if reload { updateUI(animated: animated) }
     }
-    
+        
     @IBAction func didChangeName(_ sender: SkyFloatingLabelTextField) {
         update(textField: sender)
         delegate?.validationNeeded()
@@ -109,12 +140,16 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
     }
     
     @IBAction func didTapGeneralExpenseSource(_ sender: Any) {
-        delegate?.didSwitchType(isGoal: false)
+        delegate?.didSwitch(accountType: .usual)
         
     }
     
     @IBAction func didTapGoalExpenseSource(_ sender: Any) {
-        delegate?.didSwitchType(isGoal: true)
+        delegate?.didSwitch(accountType: .goal)
+    }
+    
+    @IBAction func didTapDebtExpenseSource(_ sender: Any) {
+        delegate?.didSwitch(accountType: .debt)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
