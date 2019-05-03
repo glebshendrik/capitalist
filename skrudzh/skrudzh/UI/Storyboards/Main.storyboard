@@ -2896,7 +2896,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZR1-Fd-64G">
                                                             <rect key="frame" x="0.0" y="0.0" width="125" height="57"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Кошелек" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJ5-4o-dvi">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обычный" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJ5-4o-dvi">
                                                                     <rect key="frame" x="10" y="0.0" width="105" height="55"/>
                                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                                     <nil key="textColor"/>
@@ -4552,8 +4552,70 @@
                         <sections>
                             <tableViewSection id="dew-p4-6WK">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="45" id="XcR-nQ-sWq">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="45" id="cky-aA-qnG">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cky-aA-qnG" id="dgk-56-YvY">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNY-Kf-HHc">
+                                                    <rect key="frame" x="0.0" y="44" width="375" height="1"/>
+                                                    <color key="backgroundColor" red="0.5450980392" green="0.59607843140000005" blue="0.6588235294" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="BcG-61-oZn"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tch-Zs-NLq">
+                                                    <rect key="frame" x="187" y="0.0" width="1" height="44"/>
+                                                    <color key="backgroundColor" red="0.5450980392" green="0.59607843140000005" blue="0.6588235294" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="1" id="Uli-0q-B7q"/>
+                                                    </constraints>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqo-4R-62o">
+                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="45"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
+                                                    <state key="normal" title="У кого">
+                                                        <color key="titleColor" red="0.47450980390000003" green="0.51764705879999995" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapWhomButton:" destination="7dy-Ys-YgL" eventType="touchUpInside" id="QId-7X-Zw9"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbi-Zb-1pL">
+                                                    <rect key="frame" x="188" y="0.0" width="187" height="45"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
+                                                    <state key="normal" title="Дата возврата">
+                                                        <color key="titleColor" red="0.47450980390000003" green="0.51764705879999995" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapBorrowedTillButton:" destination="7dy-Ys-YgL" eventType="touchUpInside" id="Clo-aj-9we"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.95686274510000002" green="0.96979647869999996" blue="0.99467438460000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="cNY-Kf-HHc" firstAttribute="top" secondItem="tch-Zs-NLq" secondAttribute="bottom" id="4ql-0s-9ZM"/>
+                                                <constraint firstAttribute="trailing" secondItem="cNY-Kf-HHc" secondAttribute="trailing" id="8pX-n8-NMm"/>
+                                                <constraint firstItem="tch-Zs-NLq" firstAttribute="centerX" secondItem="dgk-56-YvY" secondAttribute="centerX" id="L6f-WG-Pac"/>
+                                                <constraint firstAttribute="bottom" secondItem="xbi-Zb-1pL" secondAttribute="bottom" id="MXB-1M-0FX"/>
+                                                <constraint firstItem="cNY-Kf-HHc" firstAttribute="leading" secondItem="dgk-56-YvY" secondAttribute="leading" id="Sia-pa-q38"/>
+                                                <constraint firstItem="xbi-Zb-1pL" firstAttribute="leading" secondItem="tch-Zs-NLq" secondAttribute="trailing" id="cRL-B1-PsR"/>
+                                                <constraint firstAttribute="bottom" secondItem="cNY-Kf-HHc" secondAttribute="bottom" id="czi-Ag-1Ca"/>
+                                                <constraint firstAttribute="bottom" secondItem="nqo-4R-62o" secondAttribute="bottom" id="efh-Fh-FGM"/>
+                                                <constraint firstItem="tch-Zs-NLq" firstAttribute="leading" secondItem="nqo-4R-62o" secondAttribute="trailing" id="fQD-XW-qZf"/>
+                                                <constraint firstItem="nqo-4R-62o" firstAttribute="leading" secondItem="dgk-56-YvY" secondAttribute="leading" id="h1M-vQ-3fr"/>
+                                                <constraint firstItem="xbi-Zb-1pL" firstAttribute="top" secondItem="dgk-56-YvY" secondAttribute="top" id="kbX-H9-pGD"/>
+                                                <constraint firstAttribute="trailing" secondItem="xbi-Zb-1pL" secondAttribute="trailing" id="oTD-ko-WPk"/>
+                                                <constraint firstItem="nqo-4R-62o" firstAttribute="top" secondItem="dgk-56-YvY" secondAttribute="top" id="u7M-le-L6m"/>
+                                                <constraint firstItem="tch-Zs-NLq" firstAttribute="top" secondItem="dgk-56-YvY" secondAttribute="top" id="wTf-1p-l6P"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="45" id="XcR-nQ-sWq">
+                                        <rect key="frame" x="0.0" y="45" width="375" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XcR-nQ-sWq" id="dZr-Ke-xJJ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -4656,7 +4718,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="cgw-Xw-bzj">
-                                        <rect key="frame" x="0.0" y="45" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="90" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cgw-Xw-bzj" id="l3K-Px-mCf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -4752,7 +4814,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="0MX-W9-Laa">
-                                        <rect key="frame" x="0.0" y="120" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="165" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0MX-W9-Laa" id="rgu-ju-QlL">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -4851,7 +4913,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="XAQ-5g-Dor">
-                                        <rect key="frame" x="0.0" y="195" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="240" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XAQ-5g-Dor" id="i14-gh-9gu">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -4946,7 +5008,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="QR5-nu-WSp">
-                                        <rect key="frame" x="0.0" y="270" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="315" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QR5-nu-WSp" id="YBx-go-eQt">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -5200,6 +5262,7 @@
                         <outlet property="amountCurrencyLabel" destination="jEa-hx-PWQ" id="L4X-Wj-FU1"/>
                         <outlet property="amountIconContainer" destination="zs1-d6-haD" id="Osp-YX-rN7"/>
                         <outlet property="amountTextField" destination="14F-aM-4hk" id="xaK-vd-LB7"/>
+                        <outlet property="borrowedTillButton" destination="xbi-Zb-1pL" id="73Q-hk-JlF"/>
                         <outlet property="calendarButton" destination="elw-9a-obx" id="b0N-1x-f0Z"/>
                         <outlet property="commentButton" destination="Q3u-E3-gyJ" id="obg-m9-xXR"/>
                         <outlet property="completableBackground" destination="rgu-ju-QlL" id="5r5-LE-7AD"/>
@@ -5208,6 +5271,7 @@
                         <outlet property="completableIconContainer" destination="RJP-SX-ueX" id="olW-CX-wmH"/>
                         <outlet property="completableIconImageView" destination="u6q-Tv-WSd" id="ooZ-Ca-xHx"/>
                         <outlet property="completableNameTextField" destination="2Wi-Cq-sbI" id="Wyd-sA-V52"/>
+                        <outlet property="debtCell" destination="cky-aA-qnG" id="iHN-Li-tG6"/>
                         <outlet property="exchangeAmountsBackground" destination="YBx-go-eQt" id="IvG-Qu-jly"/>
                         <outlet property="exchangeAmountsCell" destination="QR5-nu-WSp" id="lkf-Gd-Oa9"/>
                         <outlet property="exchangeAmountsIconContainer" destination="grv-2T-Bcg" id="e9X-V4-9XV"/>
@@ -5224,6 +5288,7 @@
                         <outlet property="startableIconContainer" destination="O82-0v-dLL" id="she-fO-4aA"/>
                         <outlet property="startableIconImageView" destination="dXu-J6-xXS" id="PBN-9g-HUP"/>
                         <outlet property="startableNameTextField" destination="Lbe-DJ-bfo" id="aa7-km-Lrj"/>
+                        <outlet property="whomButton" destination="nqo-4R-62o" id="q55-Cv-PCR"/>
                         <outlet property="yesterdayButton" destination="cAf-Jf-ROT" id="3cy-0m-lhJ"/>
                     </connections>
                 </tableViewController>

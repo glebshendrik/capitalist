@@ -40,6 +40,24 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         return completable as? ExpenseSourceViewModel
     }
     
+    override var isDebtOrLoan: Bool {
+        return isDebt || isLoan
+    }
+    
+    var isDebt: Bool {
+        guard !isReturn, let expenseSourceToCompletable = expenseSourceToCompletable else { return false }
+        return expenseSourceToCompletable.isDebt
+    }
+    
+    var isLoan: Bool {
+        guard !isReturn, let expenseSourceFromStartable = expenseSourceFromStartable else { return false }
+        return expenseSourceFromStartable.isDebt
+    }
+    
+    var isReturn: Bool {
+        return fundsMove?.debtTransaction != nil
+    }
+    
     override var title: String? {
         return isNew ? "Новый перевод" : "Изменить перевод"
     }

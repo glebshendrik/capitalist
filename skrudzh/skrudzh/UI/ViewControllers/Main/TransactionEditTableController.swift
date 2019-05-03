@@ -58,6 +58,11 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     @IBOutlet weak var calendarButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     
+    @IBOutlet weak var debtCell: UITableViewCell!
+    @IBOutlet weak var whomButton: UIButton!
+    @IBOutlet weak var borrowedTillButton: UIButton!
+    
+    
     var delegate: TransactionEditTableControllerDelegate?
     
     override func viewDidLoad() {
@@ -109,6 +114,12 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     @IBAction func didTapCommentButton(_ sender: Any) {
         view.endEditing(true)
         delegate?.didTapComment()
+    }
+    
+    @IBAction func didTapWhomButton(_ sender: Any) {
+    }
+    
+    @IBAction func didTapBorrowedTillButton(_ sender: Any) {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

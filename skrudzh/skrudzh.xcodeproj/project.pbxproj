@@ -127,6 +127,7 @@
 		FA7276DE2254A0400086D4D1 /* SelectableFilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276DD2254A0400086D4D1 /* SelectableFilterCollectionViewCell.swift */; };
 		FA7276E02254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276DF2254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift */; };
 		FA7276E22254A6890086D4D1 /* FiltersSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276E12254A6890086D4D1 /* FiltersSelectionViewController.swift */; };
+		FA7462FB227C820F00E6D39B /* FundsMoveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7462FA227C820F00E6D39B /* FundsMoveViewModel.swift */; };
 		FA7CB4D7221C20B300FAAC0F /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4D6221C20B300FAAC0F /* Income.swift */; };
 		FA7CB4D9221C2A7D00FAAC0F /* IncomesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4D8221C2A7D00FAAC0F /* IncomesServiceProtocol.swift */; };
 		FA7CB4DB221C2C9D00FAAC0F /* IncomesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4DA221C2C9D00FAAC0F /* IncomesService.swift */; };
@@ -420,6 +421,7 @@
 		FA7276DD2254A0400086D4D1 /* SelectableFilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableFilterCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA7276DF2254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersSelectionSectionHeaderView.swift; sourceTree = "<group>"; };
 		FA7276E12254A6890086D4D1 /* FiltersSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersSelectionViewController.swift; sourceTree = "<group>"; };
+		FA7462FA227C820F00E6D39B /* FundsMoveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsMoveViewModel.swift; sourceTree = "<group>"; };
 		FA7CB4D6221C20B300FAAC0F /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		FA7CB4D8221C2A7D00FAAC0F /* IncomesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesServiceProtocol.swift; sourceTree = "<group>"; };
 		FA7CB4DA221C2C9D00FAAC0F /* IncomesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesService.swift; sourceTree = "<group>"; };
@@ -1303,6 +1305,7 @@
 				FA16FC68223A5A060053C273 /* IncomeSourcesViewModel.swift */,
 				FA16FC6E223A81F70053C273 /* ExpenseSourcesViewModel.swift */,
 				FA16FC76223AAA650053C273 /* ExpenseCategoriesViewModel.swift */,
+				FA7462FA227C820F00E6D39B /* FundsMoveViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1681,6 +1684,7 @@
 				FA6270AA21CA93D100CC0269 /* FieldsViewModel.swift in Sources */,
 				FA7276C1225251FB0086D4D1 /* FundsMoveEditDelegateExtension.swift in Sources */,
 				FA6F2E8F224350E7008C160F /* HistoryTransactionsCoordinator.swift in Sources */,
+				FA7462FB227C820F00E6D39B /* FundsMoveViewModel.swift in Sources */,
 				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,
 				FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */,
 				FA81748C222E2B8700EE6116 /* CommentViewController.swift in Sources */,

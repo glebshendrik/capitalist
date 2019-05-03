@@ -152,6 +152,19 @@ class Validator {
                         value: pastDate)
     }
     
+    static func validate(futureDate: Date?, key: CodingKey) -> ValidationResult<Date> {
+        guard let futureDate = futureDate else {
+            return .failure(key: key,
+                            reasons: [ValidationErrorReason.required])
+        }
+        guard futureDate >= Date() else {
+            return .failure(key: key,
+                            reasons: [ValidationErrorReason.invalid])
+        }
+        return .success(key: key,
+                        value: futureDate)
+    }
+    
     static func failureResultsHash<T>(from validationResults: [ValidationResultProtocol]) -> [T : [ValidationErrorReason]]? {
         let failureResults = validationResults.filter { !$0.isSucceeded }
         

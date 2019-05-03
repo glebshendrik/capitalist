@@ -57,8 +57,14 @@ class ExpenseSourceViewModel {
         return expenseSource.deletedAt != nil
     }
     
+    public private(set) var waitingDebts: [FundsMoveViewModel] = []
+    public private(set) var waitingLoans: [FundsMoveViewModel] = []
+    
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
+        waitingDebts = expenseSource.waitingDebts?.map { FundsMoveViewModel(fundsMove: $0) } ?? []
+        waitingLoans = expenseSource.waitingLoans?.map { FundsMoveViewModel(fundsMove: $0) } ?? []
     }
     
     private func amount(shouldRound: Bool) -> String {

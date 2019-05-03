@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FundsMove : Decodable {
+class FundsMove : Decodable {
     let id: Int
     let userId: Int
     let expenseSourceFromId: Int
@@ -21,6 +21,9 @@ struct FundsMove : Decodable {
     let convertedCurrency: Currency
     let gotAt: Date
     let comment: String?
+    let whom: String?
+    let borrowedTill: Date?
+    weak var debtTransaction: FundsMove?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -35,6 +38,9 @@ struct FundsMove : Decodable {
         case convertedCurrency = "converted_currency"
         case gotAt = "got_at"
         case comment
+        case borrowedTill = "borrowed_till"
+        case whom
+        case debtTransaction = "debt_transaction"
     }
     
 }
@@ -49,6 +55,9 @@ struct FundsMoveCreationForm : Encodable {
     let convertedAmountCurrency: String
     let gotAt: Date
     let comment: String?
+    let whom: String?
+    let borrowedTill: Date?
+    let debtTransactionId: Int?
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
@@ -60,6 +69,9 @@ struct FundsMoveCreationForm : Encodable {
         case convertedAmountCurrency = "converted_amount_currency"
         case gotAt = "got_at"
         case comment
+        case borrowedTill = "borrowed_till"
+        case whom
+        case debtTransactionId = "debt_transaction_id"
     }
 }
 
@@ -73,6 +85,9 @@ struct FundsMoveUpdatingForm : Encodable {
     let convertedAmountCurrency: String
     let gotAt: Date
     let comment: String?
+    let whom: String?
+    let borrowedTill: Date?
+    
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -84,6 +99,8 @@ struct FundsMoveUpdatingForm : Encodable {
         case convertedAmountCurrency = "converted_amount_currency"
         case gotAt = "got_at"
         case comment
+        case borrowedTill = "borrowed_till"
+        case whom
     }
 }
 
