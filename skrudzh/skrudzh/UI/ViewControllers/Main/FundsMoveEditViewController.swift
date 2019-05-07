@@ -18,7 +18,7 @@ protocol FundsMoveEditViewControllerDelegate {
 protocol FundsMoveEditInputProtocol {
     func set(delegate: FundsMoveEditViewControllerDelegate?)
     func set(fundsMoveId: Int)
-    func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel)
+    func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?)
 }
 
 class FundsMoveEditViewController : TransactionEditViewController {
@@ -102,6 +102,72 @@ class FundsMoveEditViewController : TransactionEditViewController {
             slideUp(viewController: expenseSourceSelectViewController)
         }
     }
+    
+    override func didTapBorrowedTill() {
+        let datePickerController = DatePickerViewController()
+        datePickerController.set(delegate: BorrowedTillDatePickerControllerDelegate(delegate: self))
+        datePickerController.set(date: fundsMoveEditViewModel.borrowedTill, minDate: Date(), maxDate: nil, mode: .date)
+        datePickerController.modalPresentationStyle = .custom
+        present(datePickerController, animated: true, completion: nil)
+    }
+    
+    override func didTapWhom() {
+        let commentController = CommentViewController()
+        commentController.set(delegate: WhomCommentControllerDelegate(delegate: self))
+        commentController.set(comment: fundsMoveEditViewModel.whom, placeholder: fundsMoveEditViewModel.whomPlaceholder)
+        commentController.modalPresentationStyle = .custom
+        present(commentController, animated: true, completion: nil)
+    }
+}
+
+protocol WhomSettingDelegate {
+    func didChange(whom: String?)
+}
+
+class WhomCommentControllerDelegate : CommentViewControllerDelegate {
+    let delegate: WhomSettingDelegate?
+    
+    init(delegate: WhomSettingDelegate?) {
+        self.delegate = delegate
+    }
+    
+    func didSave(comment: String?) {
+        delegate?.didChange(whom: comment?.trimmed)
+    }
+}
+
+protocol BorrowedTillSettingDelegate {
+    func didChange(borrowedTill: Date?)
+}
+
+class BorrowedTillDatePickerControllerDelegate : DatePickerViewControllerDelegate {    
+    let delegate: BorrowedTillSettingDelegate?
+    
+    init(delegate: BorrowedTillSettingDelegate?) {
+        self.delegate = delegate
+    }
+    
+    func didSelect(date: Date?) {
+        delegate?.didChange(borrowedTill: date)
+    }
+}
+
+extension FundsMoveEditViewController : WhomSettingDelegate, BorrowedTillSettingDelegate {
+    func didChange(borrowedTill: Date?) {
+        fundsMoveEditViewModel.borrowedTill = borrowedTill
+        updateDebtUI()
+    }
+    
+    func didChange(whom: String?) {
+        fundsMoveEditViewModel.whom = whom
+        updateDebtUI()
+    }
+    
+    override func updateDebtUI() {
+        super.updateDebtUI()
+        editTableController?.whomButton.setTitle(fundsMoveEditViewModel.whomButtonTitle, for: .normal)
+        editTableController?.borrowedTillButton.setTitle(fundsMoveEditViewModel.borrowedTillButtonTitle, for: .normal)
+    }
 }
 
 extension FundsMoveEditViewController : FundsMoveEditInputProtocol {
@@ -114,8 +180,8 @@ extension FundsMoveEditViewController : FundsMoveEditInputProtocol {
         fundsMoveEditViewModel.set(fundsMoveId: fundsMoveId)
     }
     
-    func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel) {
-        fundsMoveEditViewModel.set(startable: startable, completable: completable)
+    func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {        
+        fundsMoveEditViewModel.set(startable: startable, completable: completable, debtTransaction: debtTransaction)
     }
 }
 

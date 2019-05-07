@@ -60,6 +60,13 @@ class ExpenseSourceViewModel {
     public private(set) var waitingDebts: [FundsMoveViewModel] = []
     public private(set) var waitingLoans: [FundsMoveViewModel] = []
     
+    var hasWaitingDebts: Bool {
+        return waitingDebts.count > 0
+    }
+    
+    var hasWaitingLoans: Bool {
+        return waitingLoans.count > 0
+    }
     
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource

@@ -18,6 +18,8 @@ protocol TransactionEditTableControllerDelegate {
     func didChangeConvertedAmount()
     func didTapComment()
     func didTapCalendar()
+    func didTapWhom()
+    func didTapBorrowedTill()
     func didTapStartable()
     func didTapCompletable()
 }
@@ -117,9 +119,13 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     }
     
     @IBAction func didTapWhomButton(_ sender: Any) {
+        view.endEditing(true)
+        delegate?.didTapWhom()
     }
     
     @IBAction func didTapBorrowedTillButton(_ sender: Any) {
+        view.endEditing(true)
+        delegate?.didTapBorrowedTill()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -257,6 +263,13 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     
     func setExchangeAmountsCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
         cell(exchangeAmountsCell, setHidden: hidden)
+        if reload {
+            updateTable(animated: animated)
+        }
+    }
+    
+    func setDebtCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
+        cell(debtCell, setHidden: hidden)
         if reload {
             updateTable(animated: animated)
         }

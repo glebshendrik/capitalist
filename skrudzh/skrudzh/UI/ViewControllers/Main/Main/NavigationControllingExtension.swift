@@ -108,12 +108,66 @@ extension MainViewController {
     }
     
     private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
+        
+        if expenseSourceStartable.hasWaitingDebts || expenseSourceCompletable.hasWaitingLoans {
+            showDebtsSheet(notReturnTitle: "Занять",
+                           returnTitle: "Возвращение долга",
+                           waitingDebts: expenseSourceStartable.waitingDebts,
+                           expenseSourceStartable: expenseSourceStartable,
+                           expenseSourceCompletable: expenseSourceCompletable,
+                           waitingDebtsType: .debts)
+        } else if expenseSourceCompletable.hasWaitingLoans {
+            showDebtsSheet(notReturnTitle: "Одолжить",
+                           returnTitle: "Возвращение займа",
+                           waitingDebts: expenseSourceCompletable.waitingLoans,
+                           expenseSourceStartable: expenseSourceStartable,
+                           expenseSourceCompletable: expenseSourceCompletable,
+                           waitingDebtsType: .loans)
+        } else {
+            showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, debtTransaction: nil)
+        }
+    }
+    
+    private func showDebtsSheet(notReturnTitle: String, returnTitle: String, waitingDebts: [FundsMoveViewModel], expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, waitingDebtsType: WaitingDebtsType) {
+        let alertController = UIAlertController(title: nil,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        
+        alertController.addAction(title: notReturnTitle,
+                                  style: .default,
+                                  isEnabled: true) { _ in
+                                    self.showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, debtTransaction: nil)
+        }
+        
+        alertController.addAction(title: returnTitle,
+                                  style: .default,
+                                  isEnabled: true) { _ in
+                                    
+                                    self.show(waitingDebts: waitingDebts,
+                                              expenseSourceStartable: expenseSourceStartable,
+                                              expenseSourceCompletable: expenseSourceCompletable,
+                                              waitingDebtsType: waitingDebtsType)
+        }
+        
+        present(alertController, animated: true)
+    }
+    
+    private func show(waitingDebts: [FundsMoveViewModel], expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, waitingDebtsType: WaitingDebtsType) {
+        if let waitingDebtsViewController = router.viewController(.WaitingDebtsViewController) as? WaitingDebtsViewController {
+            
+            waitingDebtsViewController.set(delegate: self, expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, waitingDebts: waitingDebts, waitingDebtsType: waitingDebtsType)
+            
+            slideUp(viewController: waitingDebtsViewController)
+        }
+    }
+    
+    private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
         if  let fundsMoveEditNavigationController = router.viewController(.FundsMoveEditNavigationController) as? UINavigationController,
             let fundsMoveEditViewController = fundsMoveEditNavigationController.topViewController as? FundsMoveEditInputProtocol {
             
             fundsMoveEditViewController.set(delegate: self)
             
-            fundsMoveEditViewController.set(startable: expenseSourceStartable, completable: expenseSourceCompletable)
+            fundsMoveEditViewController.set(startable: expenseSourceStartable, completable: expenseSourceCompletable, debtTransaction: debtTransaction)
             
             present(fundsMoveEditNavigationController, animated: true, completion: nil)
         }
@@ -129,5 +183,11 @@ extension MainViewController {
             
             present(expenseEditNavigationController, animated: true, completion: nil)
         }
+    }
+}
+
+extension MainViewController : WaitingDebtsViewControllerDelegate {
+    func didSelect(debtTransaction: FundsMoveViewModel, expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
+        showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, debtTransaction: debtTransaction)
     }
 }

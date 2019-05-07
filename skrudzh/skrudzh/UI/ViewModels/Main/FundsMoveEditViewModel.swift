@@ -15,6 +15,8 @@ enum FundsMoveCreationError : Error {
     case currencyIsNotSpecified
     case expenseSourceFromIsNotSpecified
     case expenseSourceToIsNotSpecified
+    case debtDestinationIsNotEqualToReturnSource
+    case loanSourceIsNotEqualToReturnDestination
 }
 
 enum FundsMoveUpdatingError : Error {
@@ -23,6 +25,8 @@ enum FundsMoveUpdatingError : Error {
     case currencyIsNotSpecified
     case expenseSourceFromIsNotSpecified
     case expenseSourceToIsNotSpecified
+    case debtDestinationIsNotEqualToReturnSource
+    case loanSourceIsNotEqualToReturnDestination
 }
 
 
@@ -40,6 +44,31 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         return completable as? ExpenseSourceViewModel
     }
     
+    private var debtTransaction: FundsMoveViewModel?
+    var whom: String? = nil
+    var borrowedTill: Date? = nil
+    
+    var whomButtonTitle: String {
+        if let whom = whom {
+            return whom
+        }        
+        return whomPlaceholder
+    }
+    
+    var whomPlaceholder: String {
+        if isLoan {
+            return "У кого"
+        }
+        return "Кому"
+    }
+    
+    var borrowedTillButtonTitle: String? {
+        if let borrowedTill = borrowedTill {
+            return borrowedTill.dateString(ofStyle: .short)
+        }
+        return "Дата возврата"
+    }
+    
     override var isDebtOrLoan: Bool {
         return isDebt || isLoan
     }
@@ -55,11 +84,21 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     }
     
     var isReturn: Bool {
-        return fundsMove?.debtTransaction != nil
+        return debtTransaction != nil
     }
     
     override var title: String? {
-        return isNew ? "Новый перевод" : "Изменить перевод"
+        switch (isNew, isDebt, isLoan, isReturn) {
+        case   (true,  true,   false,  false):  return "Новый долг"
+        case   (true,  false,  true,   false):  return "Новый займ"
+        case   (true,  false,  false,  false):  return "Новый перевод"
+        case   (true,  false,  false,  true):   return "Новый возврат"
+        case   (false, true,   false,  false):  return "Изменить долг"
+        case   (false, false,  true,   false):  return "Изменить займ"
+        case   (false, false,  false,  false):  return "Изменить перевод"
+        case   (false, false,  false,  true):   return "Изменить возврат"
+        default: return nil
+        }
     }
     
     override var removeTitle: String? {
@@ -84,12 +123,28 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     
     override var amount: String? {
         guard let currency = startableCurrency else { return nil }
-        return fundsMove?.amountCents.moneyDecimalString(with: currency)
+        if let fundsMoveAmount = fundsMove?.amountCents.moneyDecimalString(with: currency) {
+            return fundsMoveAmount
+        }
+        if let debtTransaction = debtTransaction {
+            if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id == startable?.id {
+                return debtTransaction.convertedAmountCents.moneyDecimalString(with: debtTransaction.convertedCurrency)
+            }
+        }
+        return nil
     }
     
     override var convertedAmount: String? {
         guard let convertedCurrency = completableCurrency else { return nil }
-        return fundsMove?.convertedAmountCents.moneyDecimalString(with: convertedCurrency)
+        if let fundsMoveAmount = fundsMove?.convertedAmountCents.moneyDecimalString(with: convertedCurrency) {
+            return fundsMoveAmount
+        }
+        if let debtTransaction = debtTransaction {
+            if debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable?.id {
+                return debtTransaction.amountCents.moneyDecimalString(with: debtTransaction.currency)
+            }
+        }
+        return nil
     }
     
     override var startableIconDefaultImageName: String {
@@ -117,13 +172,19 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         self.fundsMove = fundsMove
         self.comment = fundsMove.comment
         self.gotAt = fundsMove.gotAt
+        self.whom = fundsMove.whom
+        self.borrowedTill = fundsMove.borrowedTill
+        if let debtTransaction = fundsMove.debtTransaction {
+            self.debtTransaction = FundsMoveViewModel(fundsMove: debtTransaction)
+        }
         self.startable = ExpenseSourceViewModel(expenseSource: fundsMove.expenseSourceFrom)
         self.completable = ExpenseSourceViewModel(expenseSource: fundsMove.expenseSourceTo)
     }
     
-    func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel) {
+    func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
         self.startable = startable
         self.completable = completable
+        self.debtTransaction = debtTransaction
     }
     
     override func loadTransactionPromise(transactionableId: Int) -> Promise<Void> {
@@ -223,6 +284,15 @@ extension FundsMoveEditViewModel {
             return Promise(error: FundsMoveCreationError.expenseSourceToIsNotSpecified)
         }
         
+        if let debtTransaction = debtTransaction {
+            if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id != startable?.id {
+                return Promise(error: FundsMoveCreationError.debtDestinationIsNotEqualToReturnSource)
+            }
+            if debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id != completable?.id {
+                return Promise(error: FundsMoveCreationError.loanSourceIsNotEqualToReturnDestination)
+            }
+        }
+        
         return .value(FundsMoveCreationForm(userId: currentUserId,
                                           expenseSourceFromId: expenseSourceFromId,
                                           expenseSourceToId: expenseSourceToId,
@@ -231,7 +301,10 @@ extension FundsMoveEditViewModel {
                                           convertedAmountCents: convertedAmountCents!,
                                           convertedAmountCurrency: convertedCurrencyCode,
                                           gotAt: gotAt!,
-                                          comment: comment))
+                                          comment: comment,
+                                          whom: whom,
+                                          borrowedTill: borrowedTill,
+                                          debtTransactionId: debtTransaction?.id))
     }
     
     private func validateCreation(amountCents: Int?,
@@ -296,6 +369,15 @@ extension FundsMoveEditViewModel {
             return Promise(error: FundsMoveUpdatingError.expenseSourceToIsNotSpecified)
         }
         
+        if let debtTransaction = debtTransaction {
+            if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id != startable?.id {
+                return Promise(error: FundsMoveUpdatingError.debtDestinationIsNotEqualToReturnSource)
+            }
+            if debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id != completable?.id {
+                return Promise(error: FundsMoveUpdatingError.loanSourceIsNotEqualToReturnDestination)
+            }
+        }
+        
         return .value(FundsMoveUpdatingForm(id: fundsMoveId,
                                           expenseSourceFromId: expenseSourceFromId,
                                           expenseSourceToId: expenseSourceToId,
@@ -304,7 +386,9 @@ extension FundsMoveEditViewModel {
                                           convertedAmountCents: convertedAmountCents!,
                                           convertedAmountCurrency: convertedCurrencyCode,
                                           gotAt: gotAt!,
-                                          comment: comment))
+                                          comment: comment,
+                                          whom: whom,
+                                          borrowedTill: borrowedTill))
     }
     
     private func validateUpdating(amountCents: Int?,

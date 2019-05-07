@@ -17,14 +17,74 @@ class FundsMoveViewModel {
         return fundsMove.id
     }
     
-    
-    
     var sourceTitle: String {
         return expenseSourceFrom.name
     }
     
     var destinationTitle: String {
         return expenseSourceTo.name
+    }
+    
+    var amount: String {
+        return amountCents.moneyCurrencyString(with: currency, shouldRound: false) ?? ""
+    }
+    
+    var convertedAmount: String {
+        return convertedAmountCents.moneyCurrencyString(with: convertedCurrency, shouldRound: false) ?? ""
+    }
+    
+    var debtAmount: String {
+        return isDebt ? convertedAmount : amount
+    }
+    
+    var gotAt: Date {
+        return fundsMove.gotAt
+    }
+    
+    var gotAtFormatted: String {
+        return gotAt.dateString(ofStyle: .short)
+    }
+    
+    var comment: String? {
+        return fundsMove.comment
+    }
+    
+    var borrowedTillFormatted: String? {
+        return fundsMove.borrowedTill?.dateString(ofStyle: .short)
+    }
+    
+    var borrowedTillLabelTitle: String? {
+        guard let borrowedTillFormatted = borrowedTillFormatted else { return nil }
+        return "До \(borrowedTillFormatted)"
+    }
+    
+    var whom: String? {
+        return fundsMove.whom
+    }
+    
+    var whomLabelTitle: String? {
+        if let whom = whom {
+            return whom
+        }
+        if isDebt {
+            return "Вы одолжили"
+        }
+        if isLoan {
+            return "Вы заняли"
+        }
+        return nil
+    }
+    
+    var isDebt: Bool {
+        return !isReturn && expenseSourceTo.isDebt
+    }
+    
+    var isLoan: Bool {
+        return !isReturn && expenseSourceFrom.isDebt
+    }
+    
+    var isReturn: Bool {
+        return fundsMove.debtTransaction != nil
     }
     
     var currency: Currency {
@@ -44,35 +104,11 @@ class FundsMoveViewModel {
     }
     
     var calculatingCurrency: Currency {
-        return convertedCurrency
+        return fundsMove.convertedCurrency
     }
     
     var calculatingAmountCents: Int {
-        return convertedAmountCents
-    }
-    
-    var gotAt: Date {
-        return fundsMove.gotAt
-    }
-    
-    var amount: String {
-        return calculatingAmountCents.moneyCurrencyString(with: calculatingCurrency, shouldRound: false) ?? ""
-    }
-    
-    var comment: String? {
-        return fundsMove.comment
-    }
-    
-    var isDebt: Bool {
-        return !isReturn && expenseSourceTo.isDebt
-    }
-    
-    var isLoan: Bool {
-        return !isReturn && expenseSourceFrom.isDebt
-    }
-    
-    var isReturn: Bool {
-        return fundsMove.debtTransaction != nil
+        return fundsMove.convertedAmountCents
     }
     
     init(fundsMove: FundsMove) {

@@ -272,6 +272,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         updateAmountUI()
         updateExchangeAmountsUI()
         updateToolbarUI()
+        updateDebtUI()
         validateUI()
     }
     
@@ -286,6 +287,10 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
             self.editTableController?.calendarButton.setImage(calendarImage.withRenderingMode(.alwaysTemplate), for: .normal)
         })
         
+    }
+    
+    @objc func updateDebtUI() {
+        editTableController?.setDebtCell(hidden: !viewModel.isDebtOrLoan)
     }
     
     private func updateStartableUI() {
@@ -355,8 +360,8 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     
     func didTapComment() {
         let commentController = CommentViewController()
-        commentController.set(delegate: self)
-        commentController.set(comment: comment)
+        commentController.set(delegate: self)        
+        commentController.set(comment: comment, placeholder: "Комментарий")
         commentController.modalPresentationStyle = .custom
         present(commentController, animated: true, completion: nil)
     }
@@ -367,6 +372,14 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         datePickerController.set(date: gotAt)
         datePickerController.modalPresentationStyle = .custom
         present(datePickerController, animated: true, completion: nil)
+    }
+    
+    @objc func didTapWhom() {
+        
+    }
+    
+    @objc func didTapBorrowedTill() {
+        
     }
     
     private func validateUI() {

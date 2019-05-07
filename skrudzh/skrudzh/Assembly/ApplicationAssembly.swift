@@ -53,6 +53,7 @@ struct Infrastructure {
         case IncomeSourceSelectViewController
         case ExpenseSourceSelectViewController
         case ExpenseCategorySelectViewController
+        case WaitingDebtsViewController
         
         // Profile
         case ProfileViewController
@@ -109,7 +110,8 @@ struct Infrastructure {
                  .SlideUpContainerViewController,
                  .IncomeSourceSelectViewController,
                  .ExpenseSourceSelectViewController,
-                 .ExpenseCategorySelectViewController:
+                 .ExpenseCategorySelectViewController,
+                 .WaitingDebtsViewController:
                 return .Main
             case .ProfileViewController,
                  .ChangePasswordViewController:
@@ -320,6 +322,12 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(FiltersSelectionViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
+        
+        // WaitingDebtsViewController
+        container.registerForSkrudzhStoryboard(WaitingDebtsViewController.self) { (r, c) in
+            c.viewModel = r.resolve(WaitingDebtsViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -472,6 +480,11 @@ class ApplicationAssembly: Assembly {
             return FiltersSelectionViewModel(incomeSourcesCoordinator: r.resolve(IncomeSourcesCoordinatorProtocol.self)!,
                                     expenseSourcesCoordinator: r.resolve(ExpenseSourcesCoordinatorProtocol.self)!,
                                     expenseCategoriesCoordinator: r.resolve(ExpenseCategoriesCoordinatorProtocol.self)!)
+        }
+        
+        // WaitingDebtsViewModel
+        container.register(WaitingDebtsViewModel.self) { r in
+            return WaitingDebtsViewModel()
         }
     }
     

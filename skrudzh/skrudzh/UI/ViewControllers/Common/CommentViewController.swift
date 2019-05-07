@@ -14,7 +14,7 @@ protocol CommentViewControllerDelegate {
 }
 
 protocol CommentViewControllerInputProtocol {
-    func set(comment: String?)
+    func set(comment: String?, placeholder: String)
     func set(delegate: CommentViewControllerDelegate?)
 }
 
@@ -71,8 +71,9 @@ class CommentViewController : UIViewController, CommentViewControllerInputProtoc
         self.delegate = delegate
     }
     
-    func set(comment: String?) {
+    func set(comment: String?, placeholder: String) {
         textInputBar.textView.text = comment
+        textInputBar.textView.placeholder = placeholder
     }
     
     private func setupUI() {
@@ -95,7 +96,6 @@ class CommentViewController : UIViewController, CommentViewControllerInputProtoc
         
         textInputBar.showTextViewBorder = true
         textInputBar.rightView = rightButton
-        textInputBar.textView.placeholder = "Комментарий"
         textInputBar.textViewCornerRadius = 16
         textInputBar.textViewBackgroundColor = UIColor(red: 0.95, green: 0.96, blue: 1, alpha: 1)
         textInputBar.textViewBorderWidth = 0
