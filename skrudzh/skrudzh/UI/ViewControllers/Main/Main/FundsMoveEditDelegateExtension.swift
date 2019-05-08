@@ -23,6 +23,7 @@ extension MainViewController: FundsMoveEditViewControllerDelegate {
     }
     
     private func updateFundsMoveDependentData() {
+        loadBudget()
         loadExpenseSources()
     }
 }

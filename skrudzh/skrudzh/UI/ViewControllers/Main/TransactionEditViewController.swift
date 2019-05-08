@@ -243,7 +243,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationItem.title = viewModel.title
+        
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
@@ -267,6 +267,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func updateUI() {
+        updateTitleUI()
         updateStartableUI()
         updateCompletableUI()
         updateAmountUI()
@@ -274,6 +275,10 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         updateToolbarUI()
         updateDebtUI()
         validateUI()
+    }
+    
+    private func updateTitleUI() {
+        navigationItem.title = viewModel.title
     }
     
     private func updateToolbarUI() {

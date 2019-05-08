@@ -109,7 +109,7 @@ extension MainViewController {
     
     private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
         
-        if expenseSourceStartable.hasWaitingDebts || expenseSourceCompletable.hasWaitingLoans {
+        if expenseSourceStartable.hasWaitingDebts {
             showDebtsSheet(notReturnTitle: "Занять",
                            returnTitle: "Возвращение долга",
                            waitingDebts: expenseSourceStartable.waitingDebts,
@@ -148,6 +148,8 @@ extension MainViewController {
                                               expenseSourceCompletable: expenseSourceCompletable,
                                               waitingDebtsType: waitingDebtsType)
         }
+        
+        alertController.addAction(title: "Отмена", style: .cancel, isEnabled: true, handler: nil)
         
         present(alertController, animated: true)
     }

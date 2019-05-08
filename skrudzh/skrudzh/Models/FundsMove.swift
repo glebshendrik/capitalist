@@ -23,7 +23,7 @@ class FundsMove : Decodable {
     let comment: String?
     let whom: String?
     let borrowedTill: Date?
-    weak var debtTransaction: FundsMove?
+    let debtTransaction: FundsMove?
     
     enum CodingKeys: String, CodingKey {
         case id

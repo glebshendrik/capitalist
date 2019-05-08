@@ -5911,9 +5911,7 @@
                                             <outlet property="amountLabel" destination="JSB-MY-9Sg" id="t5V-iG-Z7h"/>
                                             <outlet property="borrowedTillLabel" destination="cWs-xM-kZY" id="NY9-rh-38U"/>
                                             <outlet property="gotAtLabel" destination="6Fw-aZ-OaA" id="yx1-EQ-Z30"/>
-                                            <outlet property="incomeAmountLabel" destination="JSB-MY-9Sg" id="xNb-fS-2Hq"/>
-                                            <outlet property="nameLabel" destination="vct-Iw-f4d" id="jYl-1z-385"/>
-                                            <outlet property="whomLabel" destination="vct-Iw-f4d" id="wmV-w2-A7u"/>
+                                            <outlet property="whomLabel" destination="vct-Iw-f4d" id="bKg-LS-VQ9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

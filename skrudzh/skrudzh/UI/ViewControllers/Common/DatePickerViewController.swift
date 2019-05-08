@@ -110,7 +110,7 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
     func set(date: Date?, minDate: Date?, maxDate: Date?, mode: UIDatePicker.Mode = .date) {
         datePicker.date = date ?? Date()
         datePicker.minimumDate = minDate
-        datePicker.maximumDate = maxDate ?? Date()
+        datePicker.maximumDate = maxDate
         datePicker.datePickerMode = mode
         updateDateLabel()
     }

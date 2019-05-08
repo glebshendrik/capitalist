@@ -130,7 +130,11 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
             if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id == startable?.id {
                 return debtTransaction.convertedAmountCents.moneyDecimalString(with: debtTransaction.convertedCurrency)
             }
+            if !needCurrencyExchange && debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable?.id {
+                return debtTransaction.amountCents.moneyDecimalString(with: debtTransaction.currency)
+            }
         }
+        
         return nil
     }
     
