@@ -22,6 +22,10 @@ class ExpenseCategoriesService : Service, ExpenseCategoriesServiceProtocol {
         return requestCollection(APIResource.indexExpenseCategories(basketId: basketId))
     }
     
+    func index(for userId: Int, includedInBalance: Bool) -> Promise<[ExpenseCategory]> {
+        return requestCollection(APIResource.indexUserExpenseCategories(userId: userId, includedInBalance: includedInBalance))
+    }
+    
     func update(with updatingForm: ExpenseCategoryUpdatingForm) -> Promise<Void> {
         return request(APIResource.updateExpenseCategory(form: updatingForm))
     }

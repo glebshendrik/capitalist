@@ -207,22 +207,13 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         }
     }
     
-    private func close() {
+    func close() {
         view.endEditing(true)
         navigationController?.dismiss(animated: true, completion: nil)
     }
 }
 
 extension TransactionEditViewController : TransactionEditTableControllerDelegate {
-    
-    @objc func didTapStartable() {
-        
-    }
-    
-    @objc func didTapCompletable() {
-        
-    }
-    
     func didChangeAmount() {
         editTableController?.exchangeCompletableAmountTextField.placeholder = viewModel.convert(amount: editTableController?.exchangeStartableAmountTextField.text, isForwardConversion: true) ?? "Сумма"
     }
@@ -274,6 +265,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         updateExchangeAmountsUI()
         updateToolbarUI()
         updateDebtUI()
+        updateInBalanceUI()
         validateUI()
     }
     
@@ -295,7 +287,12 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     @objc func updateDebtUI() {
-        editTableController?.setDebtCell(hidden: !viewModel.isDebtOrLoan)
+        editTableController?.setDebtCell(hidden: true)
+        editTableController?.setReturnCell(hidden: true)
+    }
+    
+    @objc func updateInBalanceUI() {
+        editTableController?.setInBalanceCell(hidden: true)
     }
     
     private func updateStartableUI() {
@@ -379,11 +376,27 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         present(datePickerController, animated: true, completion: nil)
     }
     
+    @objc func didTapStartable() {
+        
+    }
+    
+    @objc func didTapCompletable() {
+        
+    }
+    
     @objc func didTapWhom() {
         
     }
     
     @objc func didTapBorrowedTill() {
+        
+    }
+    
+    @objc func didChange(includedInBalance: Bool) {
+        
+    }
+    
+    @objc func didTapReturn() {
         
     }
     

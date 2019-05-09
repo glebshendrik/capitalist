@@ -45,6 +45,7 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     }
     
     private var debtTransaction: FundsMoveViewModel?
+    
     var whom: String? = nil
     var borrowedTill: Date? = nil
     
@@ -69,7 +70,7 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         return "Дата возврата"
     }
     
-    override var isDebtOrLoan: Bool {
+    var isDebtOrLoan: Bool {
         return isDebt || isLoan
     }
     
@@ -85,6 +86,24 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     
     var isReturn: Bool {
         return debtTransaction != nil
+    }
+        
+    var isReturnOptionHidden: Bool {
+        guard   let fundsMove = fundsMove,
+                fundsMove.expenseSourceFrom.id == startable?.id,
+                fundsMove.expenseSourceTo.id == completable?.id else { return true }
+        return isNew || !isDebtOrLoan || fundsMove.isReturned
+    }
+    
+    var returnTitle: String? {
+        guard !isReturnOptionHidden else { return nil }
+        if isLoan {
+            return "Вернуть займ"
+        }
+        if isDebt {
+            return "Вернуть долг"
+        }
+        return nil
     }
     
     override var title: String? {
@@ -189,6 +208,11 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         self.startable = startable
         self.completable = completable
         self.debtTransaction = debtTransaction
+    }
+    
+    func asDebtTransactionForReturn() -> FundsMoveViewModel? {
+        guard let fundsMove = fundsMove else { return nil }
+        return FundsMoveViewModel(fundsMove: fundsMove)
     }
     
     override func loadTransactionPromise(transactionableId: Int) -> Promise<Void> {

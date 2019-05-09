@@ -20,6 +20,8 @@ protocol TransactionEditTableControllerDelegate {
     func didTapCalendar()
     func didTapWhom()
     func didTapBorrowedTill()
+    func didTapReturn()
+    func didChange(includedInBalance: Bool)
     func didTapStartable()
     func didTapCompletable()
 }
@@ -64,6 +66,11 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     @IBOutlet weak var whomButton: UIButton!
     @IBOutlet weak var borrowedTillButton: UIButton!
     
+    @IBOutlet weak var returnCell: UITableViewCell!
+    @IBOutlet weak var returnButton: UIButton!
+    
+    @IBOutlet weak var inBalanceCell: UITableViewCell!
+    @IBOutlet weak var inBalanceSwitch: UISwitch!
     
     var delegate: TransactionEditTableControllerDelegate?
     
@@ -126,6 +133,16 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     @IBAction func didTapBorrowedTillButton(_ sender: Any) {
         view.endEditing(true)
         delegate?.didTapBorrowedTill()
+    }
+    
+    @IBAction func didTapReturnButton(_ sender: Any) {
+        view.endEditing(true)
+        delegate?.didTapReturn()
+    }
+    
+    @IBAction func didSwitchInBalance(_ sender: Any) {
+        view.endEditing(true)
+        delegate?.didChange(includedInBalance: inBalanceSwitch.isOn)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -255,28 +272,34 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     }
     
     func setAmountCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        cell(amountCell, setHidden: hidden)
-        if reload {
-            updateTable(animated: animated)
-        }
+        set(amountCell, hidden: hidden, animated: animated, reload: reload)
     }
     
     func setExchangeAmountsCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        cell(exchangeAmountsCell, setHidden: hidden)
-        if reload {
-            updateTable(animated: animated)
-        }
+        set(exchangeAmountsCell, hidden: hidden, animated: animated, reload: reload)
     }
     
     func setDebtCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        cell(debtCell, setHidden: hidden)
-        if reload {
-            updateTable(animated: animated)
-        }
+        set(debtCell, hidden: hidden, animated: animated, reload: reload)
+    }
+    
+    func setReturnCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
+        set(returnCell, hidden: hidden, animated: animated, reload: reload)
+    }
+    
+    func setInBalanceCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
+        set(inBalanceCell, hidden: hidden, animated: animated, reload: reload)
     }
     
     func updateTable(animated: Bool = true) {
         reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+    }
+    
+    private func set(_ cell: UITableViewCell, hidden: Bool, animated: Bool = true, reload: Bool = true) {
+        self.cell(cell, setHidden: hidden)
+        if reload {
+            updateTable(animated: animated)
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

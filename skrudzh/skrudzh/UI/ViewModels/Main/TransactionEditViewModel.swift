@@ -39,10 +39,6 @@ class TransactionEditViewModel {
         return transactionableId == nil        
     }
     
-    var isDebtOrLoan: Bool {
-        return false
-    }
-    
     var hasComment: Bool {
         guard let comment = comment else { return false }
         return !comment.isEmpty && !comment.isWhitespace

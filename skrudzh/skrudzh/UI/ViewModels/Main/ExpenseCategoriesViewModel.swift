@@ -23,12 +23,9 @@ class ExpenseCategoriesViewModel {
     
     func loadExpenseCategories() -> Promise<Void> {
         return  firstly {
-            when(fulfilled: expenseCategoriesCoordinator.index(for: .joy),
-                            expenseCategoriesCoordinator.index(for: .risk),
-                            expenseCategoriesCoordinator.index(for: .safe))
-        }.get { joyExpenseCategories, riskExpenseCategories, safeExpenseCategories in
-            let categories = joyExpenseCategories + riskExpenseCategories + safeExpenseCategories
-            self.expenseCategoryViewModels = categories.map { ExpenseCategoryViewModel(expenseCategory: $0)}
+            expenseCategoriesCoordinator.index(includedInBalance: false)
+        }.get { expenseCategories in            
+            self.expenseCategoryViewModels = expenseCategories.map { ExpenseCategoryViewModel(expenseCategory: $0)}
         }.asVoid()
     }
     

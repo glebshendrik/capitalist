@@ -22,6 +22,10 @@ struct APIResourceQueryParameters {
             return [ "delete_transactions" : deleteTransactions.string ]
         case .destroyExpenseCategory(_, let deleteTransactions):
             return [ "delete_transactions" : deleteTransactions.string ]
+        case .indexExpenseSources(_, let noDebts):
+            return [ "no_debts" : noDebts.string ]
+        case .indexUserExpenseCategories(_, let includedInBalance):
+            return [ "included_in_balance" : includedInBalance.string ]
         default:
             break
         }

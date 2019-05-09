@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 struct APIResourceMethod {
-    static func method(for resource: APIResource) -> HTTPMethod {
+    static func method(for resource: APIResource) -> HTTPMethod {        
         switch resource {
         case .createUser,
              .createSession,
@@ -31,6 +31,7 @@ struct APIResourceMethod {
              .indexBaskets,
              .showBasket,
              .indexExpenseCategories,
+             .indexUserExpenseCategories,
              .showExpenseCategory,
              .indexCurrencies,
              .findExchangeRate,

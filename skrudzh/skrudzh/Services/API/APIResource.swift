@@ -44,7 +44,7 @@ enum APIResource: URLRequestConvertible {
     // ExpenseSources
     case createExpenseSource(form: ExpenseSourceCreationForm)
     case showExpenseSource(id: Int)
-    case indexExpenseSources(userId: Int)
+    case indexExpenseSources(userId: Int, noDebts: Bool)
     case updateExpenseSource(form: ExpenseSourceUpdatingForm)
     case updateExpenseSourcePosition(form: ExpenseSourcePositionUpdatingForm)
     case destroyExpenseSource(id: Int, deleteTransactions: Bool)
@@ -53,6 +53,7 @@ enum APIResource: URLRequestConvertible {
     case createExpenseCategory(form: ExpenseCategoryCreationForm)
     case showExpenseCategory(id: Int)
     case indexExpenseCategories(basketId: Int)
+    case indexUserExpenseCategories(userId: Int, includedInBalance: Bool)
     case updateExpenseCategory(form: ExpenseCategoryUpdatingForm)
     case updateExpenseCategoryPosition(form: ExpenseCategoryPositionUpdatingForm)
     case destroyExpenseCategory(id: Int, deleteTransactions: Bool)

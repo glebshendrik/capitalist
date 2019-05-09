@@ -100,6 +100,20 @@ class ExpenseEditViewController : TransactionEditViewController {
             slideUp(viewController: expenseCategorySelectViewController)
         }
     }
+    
+    
+}
+
+extension ExpenseEditViewController {
+    override func didChange(includedInBalance: Bool) {
+        expenseEditViewModel.includedInBalance = includedInBalance
+        updateInBalanceUI()
+    }
+    
+    override func updateInBalanceUI() {
+        editTableController?.setInBalanceCell(hidden: !expenseEditViewModel.ableToIncludeInBalance)
+        editTableController?.inBalanceSwitch.setOn(expenseEditViewModel.includedInBalance, animated: false)
+    }
 }
 
 extension ExpenseEditViewController : ExpenseEditInputProtocol {

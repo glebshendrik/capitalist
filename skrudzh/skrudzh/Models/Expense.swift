@@ -21,6 +21,7 @@ struct Expense : Decodable {
     let convertedCurrency: Currency
     let gotAt: Date
     let comment: String?
+    let includedInBalance: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -35,6 +36,7 @@ struct Expense : Decodable {
         case convertedCurrency = "converted_currency"
         case gotAt = "got_at"
         case comment
+        case includedInBalance = "included_in_balance"
     }
     
 }
@@ -49,6 +51,7 @@ struct ExpenseCreationForm : Encodable {
     let convertedAmountCurrency: String
     let gotAt: Date
     let comment: String?
+    let includedInBalance: Bool
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
@@ -60,6 +63,7 @@ struct ExpenseCreationForm : Encodable {
         case convertedAmountCurrency = "converted_amount_currency"
         case gotAt = "got_at"
         case comment
+        case includedInBalance = "included_in_balance"
     }
 }
 
@@ -73,6 +77,7 @@ struct ExpenseUpdatingForm : Encodable {
     let convertedAmountCurrency: String
     let gotAt: Date
     let comment: String?
+    let includedInBalance: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -84,5 +89,6 @@ struct ExpenseUpdatingForm : Encodable {
         case convertedAmountCurrency = "converted_amount_currency"
         case gotAt = "got_at"
         case comment
+        case includedInBalance = "included_in_balance"
     }
 }

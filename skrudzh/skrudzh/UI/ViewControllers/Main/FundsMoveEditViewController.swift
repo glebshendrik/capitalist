@@ -118,6 +118,43 @@ class FundsMoveEditViewController : TransactionEditViewController {
         commentController.modalPresentationStyle = .custom
         present(commentController, animated: true, completion: nil)
     }
+    
+    override func didTapReturn() {
+        guard   let startable = fundsMoveEditViewModel.expenseSourceToCompletable,
+                let completable = fundsMoveEditViewModel.expenseSourceFromStartable,
+                let debtTransaction = fundsMoveEditViewModel.asDebtTransactionForReturn() else { return }
+        
+        showFundsMoveEditScreen(expenseSourceStartable: startable,
+                                expenseSourceCompletable: completable,
+                                debtTransaction: debtTransaction)
+    }
+    
+    private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
+        if  let fundsMoveEditNavigationController = router.viewController(.FundsMoveEditNavigationController) as? UINavigationController,
+            let fundsMoveEditViewController = fundsMoveEditNavigationController.topViewController as? FundsMoveEditInputProtocol {
+            
+            fundsMoveEditViewController.set(delegate: self)
+            
+            fundsMoveEditViewController.set(startable: expenseSourceStartable, completable: expenseSourceCompletable, debtTransaction: debtTransaction)
+            
+            present(fundsMoveEditNavigationController, animated: true, completion: nil)
+        }
+    }
+}
+
+extension FundsMoveEditViewController: FundsMoveEditViewControllerDelegate {
+    func didCreateFundsMove() {
+        close()
+        delegate?.didCreateFundsMove()
+    }
+    
+    func didUpdateFundsMove() {
+        
+    }
+    
+    func didRemoveFundsMove() {
+        
+    }
 }
 
 protocol WhomSettingDelegate {
@@ -163,10 +200,13 @@ extension FundsMoveEditViewController : WhomSettingDelegate, BorrowedTillSetting
         updateDebtUI()
     }
     
-    override func updateDebtUI() {
-        super.updateDebtUI()
+    override func updateDebtUI() {        
+        editTableController?.setDebtCell(hidden: !fundsMoveEditViewModel.isDebtOrLoan)
         editTableController?.whomButton.setTitle(fundsMoveEditViewModel.whomButtonTitle, for: .normal)
         editTableController?.borrowedTillButton.setTitle(fundsMoveEditViewModel.borrowedTillButtonTitle, for: .normal)
+        
+        editTableController?.setReturnCell(hidden: fundsMoveEditViewModel.isReturnOptionHidden)
+        editTableController?.returnButton.setTitle(fundsMoveEditViewModel.returnTitle, for: .normal)
     }
 }
 

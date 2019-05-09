@@ -47,6 +47,7 @@ struct APIResourceKeyPath {
         case .createExpenseCategory,
              .showExpenseCategory,
              .indexExpenseCategories,
+             .indexUserExpenseCategories,
              .updateExpenseCategory,
              .updateExpenseCategoryPosition,
              .destroyExpenseCategory:

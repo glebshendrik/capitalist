@@ -69,6 +69,8 @@
 		FA26814721B178D300FADED1 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813C21B178D200FADED1 /* Rubik-Regular.ttf */; };
 		FA26814821B178D300FADED1 /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26813D21B178D200FADED1 /* Rubik-BoldItalic.ttf */; };
 		FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26814921B1833E00FADED1 /* MainViewController.swift */; };
+		FA30B47022845CCE0017470C /* Balance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA30B46F22845CCE0017470C /* Balance.storyboard */; };
+		FA30B473228474EE0017470C /* BalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B472228474EE0017470C /* BalanceViewController.swift */; };
 		FA6270A321C7A87300CC0269 /* IncomeSourceEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */; };
 		FA6270A621CA3ED600CC0269 /* FieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A521CA3ED600CC0269 /* FieldViewModel.swift */; };
 		FA6270AA21CA93D100CC0269 /* FieldsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A921CA93D100CC0269 /* FieldsViewModel.swift */; };
@@ -365,6 +367,8 @@
 		FA26813C21B178D200FADED1 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		FA26813D21B178D200FADED1 /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
 		FA26814921B1833E00FADED1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		FA30B46F22845CCE0017470C /* Balance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Balance.storyboard; sourceTree = "<group>"; };
+		FA30B472228474EE0017470C /* BalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewController.swift; sourceTree = "<group>"; };
 		FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditTableController.swift; sourceTree = "<group>"; };
 		FA6270A521CA3ED600CC0269 /* FieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldViewModel.swift; sourceTree = "<group>"; };
 		FA6270A921CA93D100CC0269 /* FieldsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsViewModel.swift; sourceTree = "<group>"; };
@@ -730,6 +734,14 @@
 				FA26813D21B178D200FADED1 /* Rubik-BoldItalic.ttf */,
 			);
 			path = Rubik;
+			sourceTree = "<group>";
+		};
+		FA30B471228474DA0017470C /* Balance */ = {
+			isa = PBXGroup;
+			children = (
+				FA30B472228474EE0017470C /* BalanceViewController.swift */,
+			);
+			path = Balance;
 			sourceTree = "<group>";
 		};
 		FA6270A421CA3EB900CC0269 /* Common */ = {
@@ -1226,6 +1238,7 @@
 		FAD88F7D21B027C600BE7BC1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FA30B471228474DA0017470C /* Balance */,
 				FACC01E2224B52200044A747 /* Statistics */,
 				FA7DB72822102B4200559878 /* Currencies */,
 				FAA91274220C79CD00F2C251 /* Settings */,
@@ -1249,6 +1262,7 @@
 				FAC3B9BD21BE0D1F0015A12F /* Onboarding.storyboard */,
 				FAA91272220C710300F2C251 /* Settings.storyboard */,
 				FACC01E5224B52B20044A747 /* Statistics.storyboard */,
+				FA30B46F22845CCE0017470C /* Balance.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1414,6 +1428,7 @@
 				FAC3B9BE21BE0D1F0015A12F /* Onboarding.storyboard in Resources */,
 				FA165CDA21B652BE00EAA16B /* Profile.storyboard in Resources */,
 				FA26814821B178D300FADED1 /* Rubik-BoldItalic.ttf in Resources */,
+				FA30B47022845CCE0017470C /* Balance.storyboard in Resources */,
 				FA26814621B178D300FADED1 /* Rubik-BlackItalic.ttf in Resources */,
 				FACC0201224CCDEE0044A747 /* StatisticsTitleView.xib in Resources */,
 				FA26814221B178D300FADED1 /* Rubik-Black.ttf in Resources */,
@@ -1688,6 +1703,7 @@
 				FA165CE421B65F2F00EAA16B /* ValidationResult.swift in Sources */,
 				FAD88F4F21AEC1A500BE7BC1 /* UsersService.swift in Sources */,
 				FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */,
+				FA30B473228474EE0017470C /* BalanceViewController.swift in Sources */,
 				FAED7DAC21ED876A00BF6FE1 /* BasketViewModel.swift in Sources */,
 				FA16FC67223A30710053C273 /* SlideUpContainerViewController.swift in Sources */,
 				FA16FC71223A82930053C273 /* ExpenseSourceTableViewCell.swift in Sources */,

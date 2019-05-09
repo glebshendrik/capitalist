@@ -47,6 +47,13 @@ class ExpenseCategoriesCoordinator : ExpenseCategoriesCoordinatorProtocol {
         return expenseCategoriesService.index(for: basketId())
     }
     
+    func index(includedInBalance: Bool) -> Promise<[ExpenseCategory]> {
+        guard let currentUserId = userSessionManager.currentSession?.userId else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        return expenseCategoriesService.index(for: currentUserId, includedInBalance: includedInBalance)
+    }
+    
     func update(with updatingForm: ExpenseCategoryUpdatingForm) -> Promise<Void> {
         return expenseCategoriesService.update(with: updatingForm)
     }

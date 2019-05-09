@@ -91,6 +91,13 @@ class ExpenseEditViewModel : TransactionEditViewModel {
         }
     }
     
+    var ableToIncludeInBalance: Bool {
+        guard let expense = expense else { return false }
+        return expense.expenseCategory.basketType != .joy
+    }
+    
+    var includedInBalance: Bool = false
+    
     init(expensesCoordinator: ExpensesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
@@ -108,6 +115,7 @@ class ExpenseEditViewModel : TransactionEditViewModel {
         self.expense = expense
         self.comment = expense.comment
         self.gotAt = expense.gotAt
+        self.includedInBalance = expense.includedInBalance
         self.startable = ExpenseSourceViewModel(expenseSource: expense.expenseSource)
         self.completable = ExpenseCategoryViewModel(expenseCategory: expense.expenseCategory)
     }
@@ -222,7 +230,8 @@ extension ExpenseEditViewModel {
                                          convertedAmountCents: convertedAmountCents!,
                                          convertedAmountCurrency: convertedCurrencyCode,
                                          gotAt: gotAt!,
-                                         comment: comment))
+                                         comment: comment,
+                                         includedInBalance: includedInBalance))
     }
     
     private func validateCreation(amountCents: Int?,
@@ -295,7 +304,8 @@ extension ExpenseEditViewModel {
                                          convertedAmountCents: convertedAmountCents!,
                                          convertedAmountCurrency: convertedCurrencyCode,
                                          gotAt: gotAt!,
-                                         comment: comment))
+                                         comment: comment,
+                                         includedInBalance: includedInBalance))
     }
     
     private func validateUpdating(amountCents: Int?,

@@ -28,11 +28,11 @@ class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
         return expenseSourcesService.show(by: id)
     }
     
-    func index() -> Promise<[ExpenseSource]> {
+    func index(noDebts: Bool) -> Promise<[ExpenseSource]> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return expenseSourcesService.index(for: currentUserId)
+        return expenseSourcesService.index(for: currentUserId, noDebts: noDebts)
     }
     
     func update(with updatingForm: ExpenseSourceUpdatingForm) -> Promise<Void> {

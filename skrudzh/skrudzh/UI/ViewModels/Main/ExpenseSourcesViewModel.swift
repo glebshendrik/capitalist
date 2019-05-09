@@ -25,7 +25,7 @@ class ExpenseSourcesViewModel {
     
     func loadExpenseSources() -> Promise<Void> {
         return  firstly {
-                    expenseSourcesCoordinator.index()
+                    expenseSourcesCoordinator.index(noDebts: false)
                 }.get { expenseSources in
                     self.expenseSourceViewModels = expenseSources
                         .map { ExpenseSourceViewModel(expenseSource: $0)}
