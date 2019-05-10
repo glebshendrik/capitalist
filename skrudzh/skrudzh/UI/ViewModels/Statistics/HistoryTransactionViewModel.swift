@@ -109,6 +109,10 @@ class HistoryTransactionViewModel {
         return historyTransaction.basketType
     }
     
+    var includedInBalance: Bool {
+        return historyTransaction.includedInBalance ?? false
+    }
+    
     init(historyTransaction: HistoryTransaction) {
         self.historyTransaction = historyTransaction
     }

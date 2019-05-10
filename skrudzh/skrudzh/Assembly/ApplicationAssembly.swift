@@ -8,16 +8,17 @@
 
 import Swinject
 import SwinjectStoryboard
+import SwinjectAutoregistration
 
 struct Infrastructure {
 
     enum Storyboard : String {
-        case Join, Main, Profile, Onboarding, Settings, Statistics
+        case Join, Main, Profile, Onboarding, Settings, Statistics, Balance
         
         var name: String { return self.rawValue }
         
         static func all() -> [Storyboard] {
-            return [.Main, .Join, .Profile, .Onboarding, .Settings, .Statistics]
+            return [.Main, .Join, .Profile, .Onboarding, .Settings, .Statistics, .Balance]
         }
     }
 
@@ -77,6 +78,9 @@ struct Infrastructure {
         case StatisticsViewController
         case FiltersSelectionViewController
         
+        // Balance
+        case BalanceViewController
+        
         var identifier: String {
             return self.rawValue
         }
@@ -131,6 +135,8 @@ struct Infrastructure {
             case .StatisticsViewController,
                  .FiltersSelectionViewController:
                 return .Statistics
+            case .BalanceViewController:
+                return .Balance
             }
         }
     }
@@ -328,6 +334,11 @@ class ApplicationAssembly: Assembly {
             c.viewModel = r.resolve(WaitingDebtsViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
+        
+        // BalanceViewController
+        container.registerForSkrudzhStoryboard(BalanceViewController.self) { (r, c) in
+            c.viewModel = r.resolve(BalanceViewModel.self)
+        }
     }
     
     func registerViewModels(in container: Container) {
@@ -486,6 +497,9 @@ class ApplicationAssembly: Assembly {
         container.register(WaitingDebtsViewModel.self) { r in
             return WaitingDebtsViewModel()
         }
+        
+        // BalanceViewModel
+        container.autoregister(BalanceViewModel.self, initializer: BalanceViewModel.init)
     }
     
     static func resolveAppDelegateDependencies(appDelegate: AppDelegate) {
@@ -499,7 +513,19 @@ class ApplicationAssembly: Assembly {
 fileprivate extension Container {
     
     func registerForSkrudzhStoryboard<C:Controller>(_ controllerType: C.Type, name: String? = nil, initCompleted: ((Resolver, C) -> ())? = nil) {
+        
+        
+        
         self.storyboardInitCompleted(controllerType, name: name) { (r, c) in
+            
+            if var messageManagerDependant = c as? UIMessagePresenterManagerDependantProtocol {
+                messageManagerDependant.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+            }
+            
+            if var routerDependant = c as? ApplicationRouterDependantProtocol {
+                routerDependant.router = r.resolve(ApplicationRouterProtocol.self)
+            }
+            
             initCompleted?(r, c)
         }
     }

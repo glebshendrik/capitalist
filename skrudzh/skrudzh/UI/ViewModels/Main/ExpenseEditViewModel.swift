@@ -92,8 +92,8 @@ class ExpenseEditViewModel : TransactionEditViewModel {
     }
     
     var ableToIncludeInBalance: Bool {
-        guard let expense = expense else { return false }
-        return expense.expenseCategory.basketType != .joy
+        let basketType = expenseCategoryCompletable?.basketType ?? .joy
+        return basketType != .joy
     }
     
     var includedInBalance: Bool = false

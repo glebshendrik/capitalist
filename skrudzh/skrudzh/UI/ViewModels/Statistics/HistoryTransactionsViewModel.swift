@@ -81,9 +81,14 @@ class HistoryTransactionsViewModel {
                 filtersHash[filter.type]?[filter.id] = filter
             }
             
-            historyTransactionViewModels = historyTransactionViewModels.filter {
-                (filtersHash[$0.sourceType]?[$0.sourceId] ??
-                    filtersHash[$0.destinationType]?[$0.destinationId]) != nil
+            historyTransactionViewModels = historyTransactionViewModels.filter { transaction -> Bool in
+                
+                guard let matchedFilter = (filtersHash[transaction.sourceType]?[transaction.sourceId] ??
+                    filtersHash[transaction.destinationType]?[transaction.destinationId]) else { return false }
+                if matchedFilter is IncludedInBalanceHistoryTransactionFilter {
+                    return transaction.includedInBalance
+                }
+                return true
             }
         }
         

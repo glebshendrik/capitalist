@@ -11,8 +11,20 @@ import Foundation
 class BudgetViewModel {
     public private(set) var budget: Budget
     
-    var balance: String {
+    var balanceRounded: String {
         return budget.balanceCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
+    }
+    
+    var balance: String {
+        return budget.balanceCents.moneyCurrencyString(with: budget.currency, shouldRound: false) ?? ""
+    }
+    
+    var expenseSourcesBalance: String {
+        return budget.expenseSourcesBalanceCents.moneyCurrencyString(with: budget.currency, shouldRound: false) ?? ""
+    }
+    
+    var includedInBalanceExpenses: String {
+        return budget.includedInBalanceExpensesCents.moneyCurrencyString(with: budget.currency, shouldRound: false) ?? ""
     }
     
     var spent: String {

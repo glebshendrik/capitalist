@@ -120,7 +120,7 @@ class MainViewModel {
                     accountCoordinator.loadCurrentUserBudget()
                 }.get { budget in
                     let budgetViewModel = BudgetViewModel(budget: budget)
-                    self.balance = budgetViewModel.balance
+                    self.balance = budgetViewModel.balanceRounded
                     self.spent = budgetViewModel.spent
                     self.planned = budgetViewModel.planned
                 }.asVoid()

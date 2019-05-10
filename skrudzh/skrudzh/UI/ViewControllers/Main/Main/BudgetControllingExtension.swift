@@ -8,7 +8,10 @@
 
 import UIKit
 
-extension MainViewController {
+extension MainViewController : BudgetViewDelegate {
+    func didTapBalance() {
+        showBalance()
+    }
     
     func updateBudgetUI() {
         UIView.transition(with: view,

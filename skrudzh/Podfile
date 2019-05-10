@@ -6,8 +6,9 @@ target 'skrudzh' do
   use_frameworks!
 
   # Pods for skrudzh
-  pod 'Swinject', '2.5'
+  pod 'Swinject', '2.6.0'
   pod 'SwinjectStoryboard', '2.1'
+  pod 'SwinjectAutoregistration', '2.6.0'
   pod 'Locksmith', '~> 4.0'
   pod 'PromiseKit', '~> 6.5'
   pod 'PromiseKit/Alamofire', '~> 6.5'

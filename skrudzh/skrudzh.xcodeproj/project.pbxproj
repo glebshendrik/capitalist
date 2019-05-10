@@ -71,6 +71,9 @@
 		FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA26814921B1833E00FADED1 /* MainViewController.swift */; };
 		FA30B47022845CCE0017470C /* Balance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA30B46F22845CCE0017470C /* Balance.storyboard */; };
 		FA30B473228474EE0017470C /* BalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B472228474EE0017470C /* BalanceViewController.swift */; };
+		FA30B4762285298B0017470C /* BalanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B4752285298B0017470C /* BalanceViewModel.swift */; };
+		FA30B47822852F410017470C /* BalanceExpenseSourcesTableSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B47722852F410017470C /* BalanceExpenseSourcesTableSupport.swift */; };
+		FA30B47A22852F720017470C /* BalanceExpenseCategoriesTableSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B47922852F720017470C /* BalanceExpenseCategoriesTableSupport.swift */; };
 		FA6270A321C7A87300CC0269 /* IncomeSourceEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */; };
 		FA6270A621CA3ED600CC0269 /* FieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A521CA3ED600CC0269 /* FieldViewModel.swift */; };
 		FA6270AA21CA93D100CC0269 /* FieldsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A921CA93D100CC0269 /* FieldsViewModel.swift */; };
@@ -84,6 +87,10 @@
 		FA66FB772226D2E000708C71 /* ExchangeRatesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66FB762226D2E000708C71 /* ExchangeRatesCoordinatorProtocol.swift */; };
 		FA66FB792226D37000708C71 /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66FB782226D37000708C71 /* ExchangeRate.swift */; };
 		FA66FB7B2226E92C00708C71 /* IncomeEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66FB7A2226E92C00708C71 /* IncomeEditViewModel.swift */; };
+		FA689F302285639600FA75C9 /* BalanceSettingUpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F2F2285639600FA75C9 /* BalanceSettingUpExtension.swift */; };
+		FA689F32228567C000FA75C9 /* BalanceNavigatingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F31228567C000FA75C9 /* BalanceNavigatingExtension.swift */; };
+		FA689F342285681200FA75C9 /* BalanceLoadingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F332285681200FA75C9 /* BalanceLoadingExtension.swift */; };
+		FA689F392285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F382285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift */; };
 		FA6918A221F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */; };
 		FA6918A421F0EF03003639F6 /* ExpenseCategoryEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */; };
 		FA6F2E8722434D59008C160F /* HistoryTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F2E8622434D59008C160F /* HistoryTransaction.swift */; };
@@ -369,6 +376,9 @@
 		FA26814921B1833E00FADED1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FA30B46F22845CCE0017470C /* Balance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Balance.storyboard; sourceTree = "<group>"; };
 		FA30B472228474EE0017470C /* BalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewController.swift; sourceTree = "<group>"; };
+		FA30B4752285298B0017470C /* BalanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewModel.swift; sourceTree = "<group>"; };
+		FA30B47722852F410017470C /* BalanceExpenseSourcesTableSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceExpenseSourcesTableSupport.swift; sourceTree = "<group>"; };
+		FA30B47922852F720017470C /* BalanceExpenseCategoriesTableSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceExpenseCategoriesTableSupport.swift; sourceTree = "<group>"; };
 		FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditTableController.swift; sourceTree = "<group>"; };
 		FA6270A521CA3ED600CC0269 /* FieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldViewModel.swift; sourceTree = "<group>"; };
 		FA6270A921CA93D100CC0269 /* FieldsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsViewModel.swift; sourceTree = "<group>"; };
@@ -382,6 +392,10 @@
 		FA66FB762226D2E000708C71 /* ExchangeRatesCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FA66FB782226D37000708C71 /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
 		FA66FB7A2226E92C00708C71 /* IncomeEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeEditViewModel.swift; sourceTree = "<group>"; };
+		FA689F2F2285639600FA75C9 /* BalanceSettingUpExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSettingUpExtension.swift; sourceTree = "<group>"; };
+		FA689F31228567C000FA75C9 /* BalanceNavigatingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceNavigatingExtension.swift; sourceTree = "<group>"; };
+		FA689F332285681200FA75C9 /* BalanceLoadingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceLoadingExtension.swift; sourceTree = "<group>"; };
+		FA689F382285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveExpenseCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditViewController.swift; sourceTree = "<group>"; };
 		FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditTableController.swift; sourceTree = "<group>"; };
 		FA6F2E8622434D59008C160F /* HistoryTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransaction.swift; sourceTree = "<group>"; };
@@ -740,6 +754,19 @@
 			isa = PBXGroup;
 			children = (
 				FA30B472228474EE0017470C /* BalanceViewController.swift */,
+				FA689F2F2285639600FA75C9 /* BalanceSettingUpExtension.swift */,
+				FA689F31228567C000FA75C9 /* BalanceNavigatingExtension.swift */,
+				FA689F332285681200FA75C9 /* BalanceLoadingExtension.swift */,
+				FA30B47722852F410017470C /* BalanceExpenseSourcesTableSupport.swift */,
+				FA30B47922852F720017470C /* BalanceExpenseCategoriesTableSupport.swift */,
+			);
+			path = Balance;
+			sourceTree = "<group>";
+		};
+		FA30B4742285297B0017470C /* Balance */ = {
+			isa = PBXGroup;
+			children = (
+				FA30B4752285298B0017470C /* BalanceViewModel.swift */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -762,6 +789,14 @@
 				FA16FC66223A30700053C273 /* SlideUpContainerViewController.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		FA689F372285A47E00FA75C9 /* Balance */ = {
+			isa = PBXGroup;
+			children = (
+				FA689F382285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift */,
+			);
+			path = Balance;
 			sourceTree = "<group>";
 		};
 		FA6F2E902244C8B4008C160F /* Statistics */ = {
@@ -1211,6 +1246,7 @@
 		FAD88F7B21B027B500BE7BC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA689F372285A47E00FA75C9 /* Balance */,
 				FACC01E7224B5E540044A747 /* Statistics */,
 				FA7DB7362210329800559878 /* Currencies */,
 				FA0CAE2321D67A4E00805288 /* Icons */,
@@ -1223,6 +1259,7 @@
 		FAD88F7C21B027BF00BE7BC1 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				FA30B4742285297B0017470C /* Balance */,
 				FA6F2E902244C8B4008C160F /* Statistics */,
 				FA7DB72922102B5100559878 /* Currencies */,
 				FAA91279220C8B0F00F2C251 /* Settings */,
@@ -1494,6 +1531,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
+				"${BUILT_PRODUCTS_DIR}/SwinjectAutoregistration/SwinjectAutoregistration.framework",
 				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1522,6 +1560,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectAutoregistration.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectStoryboard.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1550,6 +1589,7 @@
 				FA7CB4DF221C324200FAAC0F /* IncomesCoordinator.swift in Sources */,
 				FAED7DB221EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift in Sources */,
 				FA7CB4DD221C321D00FAAC0F /* IncomesCoordinatorProtocol.swift in Sources */,
+				FA30B47822852F410017470C /* BalanceExpenseSourcesTableSupport.swift in Sources */,
 				FA7DB72F22102EDB00559878 /* CurrenciesServiceProtocol.swift in Sources */,
 				FAD88F5221AEC1A500BE7BC1 /* APIClient.swift in Sources */,
 				FAD88F6121AEC61800BE7BC1 /* AccountCoordinator.swift in Sources */,
@@ -1633,6 +1673,7 @@
 				FAED7D9821EC4C0D00BF6FE1 /* Basket.swift in Sources */,
 				FA66FB6F22250C8F00708C71 /* TransactionEditViewController.swift in Sources */,
 				FA84E7EB225DA9EF00C0A274 /* LineChartAreasRenderer.swift in Sources */,
+				FA30B47A22852F720017470C /* BalanceExpenseCategoriesTableSupport.swift in Sources */,
 				FA7DB73122102F1200559878 /* CurrenciesService.swift in Sources */,
 				FAC3B9C521C0EB7A0015A12F /* IncomeSource.swift in Sources */,
 				FAED7D9E21EC657B00BF6FE1 /* BasketsCoordinatorProtocol.swift in Sources */,
@@ -1657,6 +1698,7 @@
 				FA66FB772226D2E000708C71 /* ExchangeRatesCoordinatorProtocol.swift in Sources */,
 				FA165CE821B7654100EAA16B /* ForgotPasswordViewModel.swift in Sources */,
 				FA16FC7B223BA88F0053C273 /* SoundsManagerProtocol.swift in Sources */,
+				FA30B4762285298B0017470C /* BalanceViewModel.swift in Sources */,
 				FA7176FF22683275008ADF94 /* GraphFilterTableViewCell.swift in Sources */,
 				FA835D442260744500A592F2 /* GraphPeriodScale.swift in Sources */,
 				FACC01F7224BD24D0044A747 /* HistoryTransactionsHeaderTableViewCell.swift in Sources */,
@@ -1724,8 +1766,10 @@
 				FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */,
 				FA6F2E8722434D59008C160F /* HistoryTransaction.swift in Sources */,
 				FAED7DA421EC7FB600BF6FE1 /* ExpenseCategoriesServiceProtocol.swift in Sources */,
+				FA689F302285639600FA75C9 /* BalanceSettingUpExtension.swift in Sources */,
 				FAED7DA621EC801E00BF6FE1 /* ExpenseCategoriesService.swift in Sources */,
 				FA81748A222822FB00EE6116 /* ExchangeRatesCoordinator.swift in Sources */,
+				FA689F32228567C000FA75C9 /* BalanceNavigatingExtension.swift in Sources */,
 				FAD88F1D21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift in Sources */,
 				FAD88F5921AEC1F800BE7BC1 /* AuthenticationServiceProtocol.swift in Sources */,
 				FA7276D5225361700086D4D1 /* SettingUpControllingExtension.swift in Sources */,
@@ -1763,6 +1807,7 @@
 				FA66FB7322269EC900708C71 /* IncomeEditViewController.swift in Sources */,
 				FA9F962C21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift in Sources */,
 				FAC3B9D121C131390015A12F /* JoinViewController.swift in Sources */,
+				FA689F392285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift in Sources */,
 				FAC3B9C321BE74CE0015A12F /* OnboardingPageViewController.swift in Sources */,
 				FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */,
 				FA835D422260742400A592F2 /* GraphType.swift in Sources */,
@@ -1779,6 +1824,7 @@
 				FA16FC69223A5A060053C273 /* IncomeSourcesViewModel.swift in Sources */,
 				FAA426062230F61E00B64925 /* FundsMovesService.swift in Sources */,
 				FA835D602265C05E00A592F2 /* ChartsSwitchPresentingExtension.swift in Sources */,
+				FA689F342285681200FA75C9 /* BalanceLoadingExtension.swift in Sources */,
 				FAD88F5B21AEC1F800BE7BC1 /* DevicesServiceProtocol.swift in Sources */,
 				FAA4260A2230F74300B64925 /* FundsMovesCoordinatorProtocol.swift in Sources */,
 				FA7463012281DDFA00E6D39B /* DebtTableViewCell.swift in Sources */,

@@ -40,6 +40,10 @@ class ExpenseCategoryViewModel {
         return spent(shouldRound: false)
     }
     
+    var includedInBalanceExpensesAmount: String? {
+        return expenseCategory.includedInBalanceExpensesCents?.moneyCurrencyString(with: currency, shouldRound: false)
+    }
+    
     var areExpensesPlanned: Bool {
         guard let plannedCentsAtPeriod = expenseCategory.plannedCentsAtPeriod else { return false }
         return plannedCentsAtPeriod > 0
@@ -68,6 +72,14 @@ class ExpenseCategoryViewModel {
         self.expenseCategory = expenseCategory
     }
     
+    func asHistoryTransactionFilter() -> ExpenseCategoryHistoryTransactionFilter {
+        return ExpenseCategoryHistoryTransactionFilter(expenseCategoryViewModel: self)
+    }
+    
+    func asIncludedInBalanceFilter() -> IncludedInBalanceHistoryTransactionFilter {
+        return IncludedInBalanceHistoryTransactionFilter(expenseCategoryViewModel: self)
+    }
+    
     private func spent(shouldRound: Bool) -> String? {
         return expenseCategory.spentCentsAtPeriod.moneyCurrencyString(with: currency, shouldRound: shouldRound)
     }
@@ -78,7 +90,7 @@ extension ExpenseCategoryViewModel : TransactionCompletable {
         return spentRounded ?? ""
     }
     
-    var amount: String {
+    @objc var amount: String {
         return spent ?? ""
     }
     

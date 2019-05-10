@@ -20,6 +20,14 @@ extension MainViewController {
 }
 
 extension MainViewController {
+    func showBalance() {
+        if  let balanceViewController = router.viewController(.BalanceViewController) as? BalanceViewController {            
+            navigationController?.pushViewController(balanceViewController)
+        }
+    }
+}
+
+extension MainViewController {
     func showNewIncomeSourceScreen() {
         showEditScreen(incomeSource: nil)
     }

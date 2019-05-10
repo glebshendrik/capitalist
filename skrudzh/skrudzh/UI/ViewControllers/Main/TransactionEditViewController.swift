@@ -82,7 +82,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     }
     
     @IBAction func didTapCancelButton(_ sender: Any) {
-        close()
+        close { }
     }
     
     @IBAction func didTapRemoveButton(_ sender: Any) {
@@ -145,8 +145,9 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         firstly {
             savePromise(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
         }.done {
-            self.savePromiseResolved()
-            self.close()
+            self.close {
+                self.savePromiseResolved()
+            }
         }.catch { error in
             self.catchSaveError(error)
         }.finally {
@@ -161,9 +162,10 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         
         firstly {
             removePromise()
-        }.done {
-            self.removePromiseResolved()
-            self.close()
+        }.done {            
+            self.close {
+                self.removePromiseResolved()
+            }
         }.catch { error in
             self.catchRemoveError(error)
             
@@ -180,9 +182,8 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         firstly {
             viewModel.loadData()
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке данных",
-                                              theme: .error)
-            self.close()
+            self.close { self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке данных",
+                                                           theme: .error) }
         }.finally {
             self.setActivityIndicator(hidden: true)
             self.saveButton.isEnabled = true
@@ -207,9 +208,9 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         }
     }
     
-    func close() {
+    func close(completion: @escaping (() -> Void)) {
         view.endEditing(true)
-        navigationController?.dismiss(animated: true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: completion)
     }
 }
 

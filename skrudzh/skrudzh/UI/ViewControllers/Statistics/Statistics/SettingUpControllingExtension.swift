@@ -11,15 +11,13 @@ import PromiseKit
 
 extension StatisticsViewController {
     func loadData(financialDataInvalidated: Bool = true) {
+        if financialDataInvalidated {
+            postFinantialDataUpdated()
+        }
         setLoading()
         _ = firstly {
                 viewModel.loadData()
-            }.get{
-                if financialDataInvalidated {
-                    NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
-                }
-            }
-            .catch { _ in
+            }.catch { _ in
                 self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
             }.finally {
                 self.updateUI()
@@ -27,11 +25,10 @@ extension StatisticsViewController {
     }
     
     func reloadFilterAndData() {
+        postFinantialDataUpdated()
         setLoading()
         _ = firstly {
                 viewModel.reloadFilterAndData()
-            }.get{
-                NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
             }.catch { _ in
                 self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
             }.finally {
@@ -39,17 +36,19 @@ extension StatisticsViewController {
         }
     }
     
-    func reloadFilter() {
+    func reloadFilter() {        
         setLoading()
         _ = firstly {
                 viewModel.reloadFilter()
-            }.get{
-                NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
             }.catch { _ in
                 self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
             }.finally {
                 self.updateUI()
         }
+    }
+    
+    private func postFinantialDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
     
     private func setLoading() {

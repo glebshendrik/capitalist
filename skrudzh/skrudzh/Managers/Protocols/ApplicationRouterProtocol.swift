@@ -9,6 +9,10 @@
 import UIKit
 import Swinject
 
+protocol ApplicationRouterDependantProtocol {
+    var router: ApplicationRouterProtocol! { get set }
+}
+
 protocol ApplicationRouterProtocol {
     func start(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool

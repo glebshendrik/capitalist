@@ -74,6 +74,10 @@ class ExpenseSourceViewModel {
         waitingLoans = expenseSource.waitingLoans?.map { FundsMoveViewModel(fundsMove: $0) } ?? []
     }
     
+    func asHistoryTransactionFilter() -> ExpenseSourceHistoryTransactionFilter {
+        return ExpenseSourceHistoryTransactionFilter(expenseSourceViewModel: self)
+    }
+    
     private func amount(shouldRound: Bool) -> String {
         return expenseSource.amountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }

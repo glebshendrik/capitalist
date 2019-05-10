@@ -563,3 +563,5 @@ extension UIButton {
         self.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
     }
 }
+
+typealias TabAppearance = (textColor: UIColor, isHidden: Bool)

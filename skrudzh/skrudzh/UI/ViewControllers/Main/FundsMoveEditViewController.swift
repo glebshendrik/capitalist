@@ -144,8 +144,9 @@ class FundsMoveEditViewController : TransactionEditViewController {
 
 extension FundsMoveEditViewController: FundsMoveEditViewControllerDelegate {
     func didCreateFundsMove() {
-        close()
-        delegate?.didCreateFundsMove()
+        close {
+            self.delegate?.didUpdateFundsMove()
+        }        
     }
     
     func didUpdateFundsMove() {

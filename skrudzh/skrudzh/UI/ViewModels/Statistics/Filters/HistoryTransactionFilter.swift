@@ -96,6 +96,10 @@ class ExpenseCategoryHistoryTransactionFilter : SelectableSourceOrDestinationHis
     }
 }
 
+class IncludedInBalanceHistoryTransactionFilter : ExpenseCategoryHistoryTransactionFilter {
+    
+}
+
 class DateRangeHistoryTransactionFilter : HistoryTransactionFilter {
     var title: String {
         guard   let fromDateString = fromDateString,

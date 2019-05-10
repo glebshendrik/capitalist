@@ -108,43 +108,25 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Кредиты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BE2-VS-Nrb">
-                                                    <rect key="frame" x="49" y="0.0" width="310" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Баланс" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BE2-VS-Nrb">
+                                                    <rect key="frame" x="47" y="0.0" width="312" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="credits-menu-item-icon" id="TGA-nL-Nni">
-                                                    <rect key="frame" x="16" y="16" width="18" height="12"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="balance-menu-item-icon" id="TGA-nL-Nni">
+                                                    <rect key="frame" x="16" y="16" width="16" height="12"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="MIs-JW-4Ja" imageView="ovk-IU-EKl" style="IBUITableViewCellStyleDefault" id="6bQ-Yt-5bC">
-                                        <rect key="frame" x="0.0" y="176" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6bQ-Yt-5bC" id="ivP-zx-Gmy">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Блог" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MIs-JW-4Ja">
-                                                    <rect key="frame" x="48" y="0.0" width="311" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="blog-menu-item-icon" id="ovk-IU-EKl">
-                                                    <rect key="frame" x="16" y="16" width="17" height="12"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="4Oz-bx-c1y" kind="show" id="Loc-ff-M4E"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="TtX-LK-h4F" imageView="4QQ-Nu-2iP" style="IBUITableViewCellStyleDefault" id="xx5-JN-se6">
-                                        <rect key="frame" x="0.0" y="220" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="176" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xx5-JN-se6" id="W2m-U7-MPR">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -167,27 +149,6 @@
                                             <segue destination="7c0-Ly-HVX" kind="show" id="xgR-WJ-I18"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="DcW-Rn-Gy3" imageView="063-RV-5pD" style="IBUITableViewCellStyleDefault" id="aSb-Ze-DhF">
-                                        <rect key="frame" x="0.0" y="264" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aSb-Ze-DhF" id="JXz-wl-opG">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="FAQ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DcW-Rn-Gy3">
-                                                    <rect key="frame" x="47" y="0.0" width="312" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <color key="textColor" red="0.18823529410000001" green="0.20784313730000001" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="faq-menu-item-icon" id="063-RV-5pD">
-                                                    <rect key="frame" x="16" y="13" width="16" height="17"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -208,6 +169,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qAV-i4-Znc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-788" y="174"/>
+        </scene>
+        <!--BalanceViewController-->
+        <scene sceneID="b3H-Ad-7uc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Balance" referencedIdentifier="BalanceViewController" id="4Oz-bx-c1y" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o8y-Yd-k3U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-206" y="-266"/>
         </scene>
         <!--JoinViewController-->
         <scene sceneID="W5H-yc-UTh">
@@ -6083,17 +6052,15 @@
     </scenes>
     <resources>
         <image name="amount-icon" width="16" height="18.5"/>
-        <image name="blog-menu-item-icon" width="17" height="12"/>
+        <image name="balance-menu-item-icon" width="16" height="11.5"/>
         <image name="calendar-icon" width="19" height="18"/>
         <image name="circle-close-icon" width="24" height="24"/>
         <image name="close-circle-icon" width="24" height="24"/>
         <image name="comment-icon" width="18" height="18"/>
         <image name="convert-arrow-icon" width="8" height="13"/>
-        <image name="credits-menu-item-icon" width="18" height="12"/>
         <image name="currency-icon" width="19" height="19"/>
         <image name="dark-circle-close-icon" width="28" height="28"/>
         <image name="expense-source-icon" width="17" height="13"/>
-        <image name="faq-menu-item-icon" width="16" height="17"/>
         <image name="goal-wallet-icon" width="14" height="14"/>
         <image name="included_in_balance_icon" width="27" height="19"/>
         <image name="join-menu-item-icon" width="16" height="13"/>
@@ -6123,6 +6090,6 @@
         <segue reference="sFk-mx-J97"/>
         <segue reference="hiE-KU-vGg"/>
         <segue reference="iiB-Cu-Dri"/>
-        <segue reference="KwI-3J-1v6"/>
+        <segue reference="fO5-Yn-0Az"/>
     </inferredMetricsTieBreakers>
 </document>

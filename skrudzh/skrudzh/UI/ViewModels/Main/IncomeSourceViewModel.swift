@@ -48,6 +48,10 @@ class IncomeSourceViewModel : TransactionStartable {
         self.incomeSource = incomeSource
     }
     
+    func asHistoryTransactionFilter() -> IncomeSourceHistoryTransactionFilter {
+        return IncomeSourceHistoryTransactionFilter(incomeSourceViewModel: self)
+    }
+    
     private func amount(shouldRound: Bool) -> String {
         return incomeSource.gotCentsAtPeriod.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }

@@ -73,8 +73,6 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
         delegate?.validationNeeded()
     }
     
-    typealias TabAppearance = (textColor: UIColor, isHidden: Bool)
-    
     func updateUI(animated: Bool = true) {
         
         func tabsAppearances(for accountType: AccountType) -> (usual: TabAppearance, goal: TabAppearance, debt: TabAppearance) {

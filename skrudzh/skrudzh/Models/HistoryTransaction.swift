@@ -39,6 +39,13 @@ struct HistoryTransaction : Decodable {
     let gotAt: Date
     let comment: String?
     let basketType: BasketType?
+    let whom: String?
+    let borrowedTill: Date?
+    let isReturned: Bool?
+    let isReturn: Bool?
+    let isDebt: Bool?
+    let isLoan: Bool?
+    let includedInBalance: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -59,6 +66,13 @@ struct HistoryTransaction : Decodable {
         case gotAt = "got_at"
         case comment
         case basketType = "basket_type"
+        case borrowedTill = "borrowed_till"
+        case whom
+        case isReturned = "is_returned"
+        case isReturn = "is_return"
+        case isDebt = "is_debt"
+        case isLoan = "is_loan"
+        case includedInBalance = "included_in_balance"
     }
     
 }

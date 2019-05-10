@@ -52,7 +52,9 @@ PODS:
   - SwiftMessages (6.0.0):
     - SwiftMessages/App (= 6.0.0)
   - SwiftMessages/App (6.0.0)
-  - Swinject (2.5.0)
+  - Swinject (2.6.0)
+  - SwinjectAutoregistration (2.6.0):
+    - Swinject (~> 2.6)
   - SwinjectStoryboard (2.1.0):
     - Swinject (~> 2.5)
 
@@ -78,7 +80,8 @@ DEPENDENCIES:
   - SwiftDate (~> 5.0)
   - SwifterSwift (~> 4.6)
   - SwiftMessages
-  - Swinject (= 2.5)
+  - Swinject (= 2.6.0)
+  - SwinjectAutoregistration (= 2.6.0)
   - SwinjectStoryboard (= 2.1)
 
 SPEC REPOS:
@@ -104,6 +107,7 @@ SPEC REPOS:
     - SwifterSwift
     - SwiftMessages
     - Swinject
+    - SwinjectAutoregistration
     - SwinjectStoryboard
 
 EXTERNAL SOURCES:
@@ -138,9 +142,10 @@ SPEC CHECKSUMS:
   SwiftDate: fcdaa7ca22a903faf6d7ed231239a88d174dcae3
   SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
   SwiftMessages: da7c981256a65b3e58022d9027a36584cf4eccf5
-  Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
+  Swinject: 48a96cda93633cf2860697b4ce76ab5db9ebaca2
+  SwinjectAutoregistration: 93a908f7543c401b0c315305ac0ae501efdbce89
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
 
-PODFILE CHECKSUM: a39bd4e61a39d9aa5e2e200397a0054fc7142d33
+PODFILE CHECKSUM: 32869cf5db47fcd63952d3bbed87675020884bff
 
 COCOAPODS: 1.5.3

@@ -58,6 +58,7 @@ extension MainViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         self.budgetView = BudgetView(frame: CGRect.zero)
+        self.budgetView.delegate = self
         navigationItem.titleView = self.budgetView
     }
     

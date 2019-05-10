@@ -53,6 +53,12 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQr-1a-HLn">
+                                    <rect key="frame" x="0.0" y="0.0" width="88.5" height="44"/>
+                                    <connections>
+                                        <action selector="didTapBalance:" destination="-1" eventType="touchUpInside" id="Osq-2o-Zbg"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -61,9 +67,13 @@
                                 <constraint firstItem="7Ht-PG-Txu" firstAttribute="top" secondItem="puF-dS-XpW" secondAttribute="bottom" constant="1" id="Nbr-Iu-gOi"/>
                                 <constraint firstItem="7Ht-PG-Txu" firstAttribute="centerY" secondItem="dng-1L-sg7" secondAttribute="centerY" id="Pwd-ta-bi8"/>
                                 <constraint firstItem="puF-dS-XpW" firstAttribute="centerX" secondItem="dng-1L-sg7" secondAttribute="centerX" id="Vtg-Qj-z51"/>
+                                <constraint firstItem="sQr-1a-HLn" firstAttribute="top" secondItem="dng-1L-sg7" secondAttribute="top" id="Y1a-4k-NkN"/>
                                 <constraint firstAttribute="trailing" secondItem="7Ht-PG-Txu" secondAttribute="trailing" id="fW5-3x-gVh"/>
+                                <constraint firstAttribute="trailing" secondItem="sQr-1a-HLn" secondAttribute="trailing" id="ha5-ew-riD"/>
                                 <constraint firstItem="dtW-M2-Erw" firstAttribute="leading" secondItem="dng-1L-sg7" secondAttribute="leading" constant="2" id="ibZ-Xl-wgH"/>
                                 <constraint firstItem="dtW-M2-Erw" firstAttribute="top" secondItem="7Ht-PG-Txu" secondAttribute="bottom" constant="1" id="j86-sJ-1nO"/>
+                                <constraint firstAttribute="bottom" secondItem="sQr-1a-HLn" secondAttribute="bottom" id="m2H-J4-baA"/>
+                                <constraint firstItem="sQr-1a-HLn" firstAttribute="leading" secondItem="dng-1L-sg7" secondAttribute="leading" id="qXM-xl-42L"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivZ-H3-Hwr">
