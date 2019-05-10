@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol IncomesServiceProtocol {
-    func create(with creationForm: IncomeCreationForm) -> Promise<Income>
+    func create(with creationForm: IncomeCreationForm, closeActive: Bool) -> Promise<Income>
     func show(by id: Int) -> Promise<Income>
     func update(with updatingForm: IncomeUpdatingForm) -> Promise<Void>
     func destroy(by id: Int) -> Promise<Void>

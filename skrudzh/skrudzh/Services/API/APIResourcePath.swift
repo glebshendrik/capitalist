@@ -44,7 +44,7 @@ struct APIResourcePath {
         case .indexBaskets(let userId):                     return "/users/\(userId)/baskets"
         case .showBasket(let id):                           return "/baskets/\(id)"
         case .indexCurrencies:                              return "/currencies"
-        case .createIncome(let form):                       return "/users/\(form.userId)/incomes"
+        case .createIncome(let form, _):                    return "/users/\(form.userId)/incomes"
         case .showIncome(let id):                           return "/incomes/\(id)"
         case .updateIncome(let form):                       return "/incomes/\(form.id)"
         case .destroyIncome(let id):                        return "/incomes/\(id)"

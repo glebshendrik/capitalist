@@ -16,6 +16,7 @@ struct IncomeSource : Decodable {
     let iconURL: URL?
     let order: Int
     let deletedAt: Date?
+    let isChild: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -25,6 +26,7 @@ struct IncomeSource : Decodable {
         case iconURL = "icon_url"
         case order = "row_order"
         case deletedAt = "deleted_at"
+        case isChild = "is_child"
     }
 
 }

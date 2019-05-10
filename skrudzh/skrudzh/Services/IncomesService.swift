@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 class IncomesService : Service, IncomesServiceProtocol {
-    func create(with creationForm: IncomeCreationForm) -> Promise<Income> {
-        return request(APIResource.createIncome(form: creationForm))
+    func create(with creationForm: IncomeCreationForm, closeActive: Bool) -> Promise<Income> {
+        return request(APIResource.createIncome(form: creationForm, shouldCloseActive: closeActive))
     }
     
     func show(by id: Int) -> Promise<Income> {

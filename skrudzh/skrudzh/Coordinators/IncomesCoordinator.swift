@@ -16,8 +16,8 @@ class IncomesCoordinator : IncomesCoordinatorProtocol {
         self.incomesService = incomesService
     }
     
-    func create(with creationForm: IncomeCreationForm) -> Promise<Income> {
-        return incomesService.create(with: creationForm)
+    func create(with creationForm: IncomeCreationForm, closeActive: Bool) -> Promise<Income> {
+        return incomesService.create(with: creationForm, closeActive: closeActive)
     }
     
     func show(by id: Int) -> Promise<Income> {

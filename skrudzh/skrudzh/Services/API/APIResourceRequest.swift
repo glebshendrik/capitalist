@@ -44,7 +44,7 @@ struct APIResourceRequest {
         case .createExpenseCategory(let form):              return encode(form)
         case .updateExpenseCategory(let form):              return encode(form)
         case .updateExpenseCategoryPosition(let form):      return encode(form)
-        case .createIncome(let form):                       return encode(form)
+        case .createIncome(let form, _):                    return encode(form)
         case .updateIncome(let form):                       return encode(form)
         case .createExpense(let form):                      return encode(form)
         case .updateExpense(let form):                      return encode(form)

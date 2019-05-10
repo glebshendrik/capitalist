@@ -82,6 +82,16 @@ class IncomeEditViewModel : TransactionEditViewModel {
         return "expense-source-icon"
     }
     
+    var isChild: Bool {
+        return incomeSourceStartable?.isChild ?? false
+    }
+    
+    var ableToCloseActive: Bool {
+        return isNew && isChild
+    }
+    
+    var shouldCloseActive: Bool = false
+    
     init(incomesCoordinator: IncomesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
@@ -175,7 +185,7 @@ extension IncomeEditViewModel {
         return  firstly {
                     validateCreationForm(amountCents: amountCents, convertedAmountCents: convertedAmountCents, comment: comment, gotAt: gotAt)
                 }.then { incomeCreationForm -> Promise<Income> in
-                    self.incomesCoordinator.create(with: incomeCreationForm)
+                    self.incomesCoordinator.create(with: incomeCreationForm, closeActive: self.shouldCloseActive)
                 }.asVoid()
     }
     

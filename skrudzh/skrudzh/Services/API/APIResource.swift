@@ -69,7 +69,7 @@ enum APIResource: URLRequestConvertible {
     case indexCurrencies
     
     // Incomes
-    case createIncome(form: IncomeCreationForm)
+    case createIncome(form: IncomeCreationForm, shouldCloseActive: Bool)
     case showIncome(id: Int)
     case updateIncome(form: IncomeUpdatingForm)
     case destroyIncome(id: Int)

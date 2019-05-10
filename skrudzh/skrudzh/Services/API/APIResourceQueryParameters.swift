@@ -26,6 +26,8 @@ struct APIResourceQueryParameters {
             return [ "no_debts" : noDebts.string ]
         case .indexUserExpenseCategories(_, let includedInBalance):
             return [ "included_in_balance" : includedInBalance.string ]
+        case .createIncome(_, let shouldCloseActive):
+            return [ "close_active" : shouldCloseActive.string ]
         default:
             break
         }
