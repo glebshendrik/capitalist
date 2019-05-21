@@ -1,0 +1,49 @@
+/* 
+  RecurrencePicker.strings
+  RecurrencePicker
+
+  Created by Xin Hong on 16/4/7.
+  Copyright © 2016年 Teambition. All rights reserved.
+*/
+
+"Done" = "Done";
+"Close" = "Close";
+
+"frequency.daily" = "Daily";
+"frequency.weekly" = "Weekly";
+"frequency.monthly" = "Monthly";
+"frequency.yearly" = "Yearly";
+
+"unit.day" = "Day";
+"unit.week" = "Week";
+"unit.month" = "Month";
+"unit.year" = "Year";
+
+"pluralUnit.day" = "days";
+"pluralUnit.week" = "weeks";
+"pluralUnit.month" = "months";
+"pluralUnit.year" = "years";
+
+"basicRecurrence.never" = "Never";
+"basicRecurrence.everyDay" = "Every Day";
+"basicRecurrence.everyWeek" = "Every Week";
+"basicRecurrence.everyTwoWeeks" = "Every 2 Weeks";
+"basicRecurrence.everyMonth" = "Every Month";
+"basicRecurrence.everyYear" = "Every Year";
+"basicRecurrence.everyWeekday" = "Every Weekday";
+
+"RecurrencePicker.navigation.title" = "Repeat";
+"RecurrencePicker.textLabel.custom" = "Custom";
+
+"CustomRecurrenceViewController.textLabel.frequency" = "Frequency";
+"CustomRecurrenceViewController.textLabel.interval" = "Every";
+
+"RecurrenceRuleText.basicRecurrence" = "Event will occur every %@.";
+"RecurrenceRuleText.element.on.weekly" = "on ";
+"RecurrenceRuleText.element.on.monthly" = "on the ";
+"RecurrenceRuleText.element.on.yearly" = "in ";
+"RecurrenceRuleText.element.and" = "and ";
+"RecurrenceRuleText.element.comma" = ", ";
+"RecurrenceRuleText.element.day" = "%d";
+"RecurrenceRuleText.everyWeekday" = "Event will occur every weekday.";
+"RecurrenceRuleText.byWeekdaysOrMonthdaysOrMonths" = "Event will occur every %@ %@.";

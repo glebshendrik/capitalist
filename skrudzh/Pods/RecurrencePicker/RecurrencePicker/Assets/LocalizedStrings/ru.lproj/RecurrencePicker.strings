@@ -1,0 +1,60 @@
+/* 
+  RecurrencePicker.strings
+  RecurrencePicker
+
+  Created by Xin Hong on 16/4/7.
+  Copyright © 2016年 Teambition. All rights reserved.
+*/
+
+"Done" = "Готово";
+"Close" = "Закрыть";
+
+"frequency.daily" = "Днями";
+"frequency.weekly" = "Неделями";
+"frequency.monthly" = "Месяцами";
+"frequency.yearly" = "Годами";
+
+"unit.day" = "Каждый день";
+"unit.week" = "Каждую неделю";
+"unit.month" = "Каждый месяц";
+"unit.year" = "Каждый год";
+
+"pluralOneUnit.day" = "Каждый %@ день";
+"pluralUnit.day" = "Каждые %@ дня";
+"pluralManyUnit.day" = "Каждые %@ дней";
+
+"pluralOneUnit.week" = "Каждую %@ неделю";
+"pluralUnit.week" = "Каждые %@ недели";
+"pluralManyUnit.week" = "Каждые %@ недель";
+
+"pluralOneUnit.month" = "Каждый %@ месяц";
+"pluralUnit.month" = "Каждые %@ месяца";
+"pluralManyUnit.month" = "Каждые %@ месяцев";
+
+"pluralOneUnit.year" = "Каждый %@ год";
+"pluralUnit.year" = "Каждые %@ года";
+"pluralManyUnit.year" = "Каждые %@ лет";
+
+"basicRecurrence.never" = "Никогда";
+"basicRecurrence.everyDay" = "Каждый день";
+"basicRecurrence.everyWeek" = "Каждую неделю";
+"basicRecurrence.everyTwoWeeks" = "Каждые 2 недели";
+"basicRecurrence.everyMonth" = "Каждый месяц";
+"basicRecurrence.everyYear" = "Каждый год";
+"basicRecurrence.everyWeekday" = "Каждый будний день";
+
+"RecurrencePicker.navigation.title" = "Повторять";
+"RecurrencePicker.textLabel.custom" = "Установить вручную";
+
+"CustomRecurrenceViewController.textLabel.frequency" = "Частота повтора";
+"CustomRecurrenceViewController.textLabel.interval" = "Интервал повтора";
+
+"RecurrenceRuleText.basicRecurrence" = "%@";
+"RecurrenceRuleText.element.on.weekly" = "–";
+"RecurrenceRuleText.element.on.monthly" = "–";
+"RecurrenceRuleText.element.on.yearly" = "–";
+"RecurrenceRuleText.element.and" = "и";
+"RecurrenceRuleText.element.comma" = ",";
+"RecurrenceRuleText.element.day" = "%dго";
+"RecurrenceRuleText.everyWeekday" = "Каждый будний день";
+"RecurrenceRuleText.byWeekdaysOrMonthdaysOrMonths" = "%@ %@";

@@ -1,0 +1,49 @@
+/* 
+  RecurrencePicker.strings
+  RecurrencePicker
+
+  Created by Xin Hong on 16/4/7.
+  Copyright © 2016年 Teambition. All rights reserved.
+*/
+
+"Done" = "完成";
+"Close" = "關閉";
+
+"frequency.daily" = "每天";
+"frequency.weekly" = "每週";
+"frequency.monthly" = "每月";
+"frequency.yearly" = "每年";
+
+"unit.day" = "天";
+"unit.week" = "週";
+"unit.month" = "月";
+"unit.year" = "年";
+
+"pluralUnit.day" = "天";
+"pluralUnit.week" = "週";
+"pluralUnit.month" = "個月";
+"pluralUnit.year" = "年";
+
+"basicRecurrence.never" = "永不";
+"basicRecurrence.everyDay" = "每天";
+"basicRecurrence.everyWeek" = "每週";
+"basicRecurrence.everyTwoWeeks" = "每兩週";
+"basicRecurrence.everyMonth" = "每月";
+"basicRecurrence.everyYear" = "每年";
+"basicRecurrence.everyWeekday" = "每个平日";
+
+"RecurrencePicker.navigation.title" = "重複";
+"RecurrencePicker.textLabel.custom" = "自定";
+
+"CustomRecurrenceViewController.textLabel.frequency" = "頻率";
+"CustomRecurrenceViewController.textLabel.interval" = "每";
+
+"RecurrenceRuleText.basicRecurrence" = "行程每%@重複一次。";
+"RecurrenceRuleText.element.on.weekly" = "的";
+"RecurrenceRuleText.element.on.monthly" = "的";
+"RecurrenceRuleText.element.on.yearly" = "的";
+"RecurrenceRuleText.element.and" = "和";
+"RecurrenceRuleText.element.comma" = "、";
+"RecurrenceRuleText.element.day" = "%d日";
+"RecurrenceRuleText.everyWeekday" = "行程每週一到週五重複一次。";
+"RecurrenceRuleText.byWeekdaysOrMonthdaysOrMonths" = "行程每%@%@重複一次。";

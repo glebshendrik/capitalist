@@ -1,0 +1,49 @@
+/* 
+  RecurrencePicker.strings
+  RecurrencePicker
+
+  Created by Xin Hong on 16/4/7.
+  Copyright © 2016年 Teambition. All rights reserved.
+*/
+
+"Done" = "완성하다";
+"Close" = "닫기";
+
+"frequency.daily" = "매일";
+"frequency.weekly" = "매주";
+"frequency.monthly" = "매월";
+"frequency.yearly" = "매년";
+
+"unit.day" = "일";
+"unit.week" = "주";
+"unit.month" = "개월";
+"unit.year" = "년";
+
+"pluralUnit.day" = "일";
+"pluralUnit.week" = "주";
+"pluralUnit.month" = "개월";
+"pluralUnit.year" = "년";
+
+"basicRecurrence.never" = "안 함";
+"basicRecurrence.everyDay" = "매일";
+"basicRecurrence.everyWeek" = "매주";
+"basicRecurrence.everyTwoWeeks" = "2주마다";
+"basicRecurrence.everyMonth" = "매월";
+"basicRecurrence.everyYear" = "매년";
+"basicRecurrence.everyWeekday" = "매주 평일마다";
+
+"RecurrencePicker.navigation.title" = "반복";
+"RecurrencePicker.textLabel.custom" = "사용자 설정";
+
+"CustomRecurrenceViewController.textLabel.frequency" = "반복 주기";
+"CustomRecurrenceViewController.textLabel.interval" = "반복";
+
+"RecurrenceRuleText.basicRecurrence" = "%@마다 이벤트 반복";
+"RecurrenceRuleText.element.on.weekly" = "에";
+"RecurrenceRuleText.element.on.monthly" = "에";
+"RecurrenceRuleText.element.on.yearly" = "에";
+"RecurrenceRuleText.element.and" = "및";
+"RecurrenceRuleText.element.comma" = ",";
+"RecurrenceRuleText.element.day" = "%d일";
+"RecurrenceRuleText.everyWeekday" = "매주 평일마다 이벤트 반복";
+"RecurrenceRuleText.byWeekdaysOrMonthdaysOrMonths" = "%@마다 %@ 이벤트 반복";

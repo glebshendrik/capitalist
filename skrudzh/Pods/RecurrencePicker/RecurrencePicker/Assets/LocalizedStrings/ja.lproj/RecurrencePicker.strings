@@ -1,0 +1,49 @@
+/* 
+  RecurrencePicker.strings
+  RecurrencePicker
+
+  Created by Xin Hong on 16/4/7.
+  Copyright © 2016年 Teambition. All rights reserved.
+*/
+
+"Done" = "完成";
+"Close" = "閉鎖";
+
+"frequency.daily" = "毎日";
+"frequency.weekly" = "毎週";
+"frequency.monthly" = "毎月";
+"frequency.yearly" = "毎年";
+
+"unit.day" = "日";
+"unit.week" = "週間";
+"unit.month" = "カ月";
+"unit.year" = "年";
+
+"pluralUnit.day" = "日";
+"pluralUnit.week" = "週間";
+"pluralUnit.month" = "カ月";
+"pluralUnit.year" = "年";
+
+"basicRecurrence.never" = "しない";
+"basicRecurrence.everyDay" = "毎日";
+"basicRecurrence.everyWeek" = "毎週";
+"basicRecurrence.everyTwoWeeks" = "２週間ごと";
+"basicRecurrence.everyMonth" = "毎月";
+"basicRecurrence.everyYear" = "毎年";
+"basicRecurrence.everyWeekday" = "平日に毎日";
+
+"RecurrencePicker.navigation.title" = "繰り返し";
+"RecurrencePicker.textLabel.custom" = "カスタム";
+
+"CustomRecurrenceViewController.textLabel.frequency" = "繰り返しの単位";
+"CustomRecurrenceViewController.textLabel.interval" = "繰り返しの頻度";
+
+"RecurrenceRuleText.basicRecurrence" = "%@ごとにあるイベントです。";
+"RecurrenceRuleText.element.on.weekly" = "に、";
+"RecurrenceRuleText.element.on.monthly" = "に、";
+"RecurrenceRuleText.element.on.yearly" = "に、";
+"RecurrenceRuleText.element.and" = "と";
+"RecurrenceRuleText.element.comma" = "、";
+"RecurrenceRuleText.element.day" = "%d日";
+"RecurrenceRuleText.everyWeekday" = "平日に毎日あるイベントです。";
+"RecurrenceRuleText.byWeekdaysOrMonthdaysOrMonths" = "%@ごと%@にあるイベントです。";

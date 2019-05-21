@@ -27,7 +27,7 @@ PODS:
   - PromiseKit/UIKit (6.5.2):
     - PromiseKit/CorePromise
   - RandomColorSwift (1.0.0)
-  - RecurrencePicker (0.1.2)
+  - RecurrencePicker (0.1.5)
   - SideMenu (5.0.2)
   - SkyFloatingLabelTextField (3.6.0)
   - StaticDataTableViewController (2.5.0)
@@ -74,7 +74,7 @@ DEPENDENCIES:
   - PromiseKit (~> 6.5)
   - PromiseKit/Alamofire (~> 6.5)
   - RandomColorSwift
-  - RecurrencePicker (from `../dependencies/RecurrencePicker/`)
+  - RecurrencePicker
   - SideMenu
   - SkyFloatingLabelTextField
   - StaticDataTableViewController
@@ -101,6 +101,7 @@ SPEC REPOS:
     - MSPeekCollectionViewDelegateImplementation
     - PromiseKit
     - RandomColorSwift
+    - RecurrencePicker
     - SideMenu
     - SkyFloatingLabelTextField
     - StaticDataTableViewController
@@ -116,8 +117,6 @@ EXTERNAL SOURCES:
   ALTextInputBar:
     :branch: master
     :git: https://github.com/bclymer/ALTextInputBar
-  RecurrencePicker:
-    :path: "../dependencies/RecurrencePicker/"
 
 CHECKOUT OPTIONS:
   ALTextInputBar:
@@ -139,7 +138,7 @@ SPEC CHECKSUMS:
   MSPeekCollectionViewDelegateImplementation: 9141e80f032a831a5fc7d42b66bd3ba3f8fa3c1c
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   RandomColorSwift: 9f85058b721665d52d239ca166a913e083506444
-  RecurrencePicker: 90010959e5276c66d52cd233c07e2827217d8e16
+  RecurrencePicker: f4c1c27243ab0546f29b3e1b97824c5c9b483c46
   SideMenu: e5094f0b2e7d9609e100a90ae69025abd994f882
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
   StaticDataTableViewController: 0c5c4a47861446dd3cfd52530ae801ec7662ce26
@@ -151,6 +150,6 @@ SPEC CHECKSUMS:
   SwinjectAutoregistration: 93a908f7543c401b0c315305ac0ae501efdbce89
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
 
-PODFILE CHECKSUM: 29493df1ec5643a4a7173e28d9a38a6422399f84
+PODFILE CHECKSUM: c5796d9264fba4e2624489a50563743ea0ab0edb
 
 COCOAPODS: 1.5.3
