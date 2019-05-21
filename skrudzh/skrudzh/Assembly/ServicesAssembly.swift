@@ -7,83 +7,39 @@
 //
 
 import Swinject
+import SwinjectAutoregistration
 
 class ServicesAssembly: Assembly {
     func assemble(container: Container) {
         
-        container.register(APIClientProtocol.self) { r in
-            return APIClient(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!)
-            }
-            .inObjectScope(.container)
+        container.autoregister(APIClientProtocol.self, initializer: APIClient.init).inObjectScope(.container)        
         
-        container.register(AuthenticationServiceProtocol.self) { r in
-            return AuthenticationService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(AuthenticationServiceProtocol.self, initializer: AuthenticationService.init)
         
-        container.register(UsersServiceProtocol.self) { r in
-            return UsersService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(UsersServiceProtocol.self, initializer: UsersService.init)
         
-        container.register(DevicesServiceProtocol.self) { r in
-            return DevicesService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(DevicesServiceProtocol.self, initializer: DevicesService.init)
+
+        container.autoregister(IncomeSourcesServiceProtocol.self, initializer: IncomeSourcesService.init)
         
-        container.register(IncomeSourcesServiceProtocol.self) { r in
-            return IncomeSourcesService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(ExpenseSourcesServiceProtocol.self, initializer: ExpenseSourcesService.init)
         
-        container.register(ExpenseSourcesServiceProtocol.self) { r in
-            return ExpenseSourcesService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(ExpenseCategoriesServiceProtocol.self, initializer: ExpenseCategoriesService.init)
         
-        container.register(ExpenseCategoriesServiceProtocol.self) { r in
-            return ExpenseCategoriesService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
-                
-        container.register(IconsServiceProtocol.self) { r in
-            return IconsService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(IconsServiceProtocol.self, initializer: IconsService.init)
         
-        container.register(BasketsServiceProtocol.self) { r in
-            return BasketsService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(BasketsServiceProtocol.self, initializer: BasketsService.init)
         
-        container.register(CurrenciesServiceProtocol.self) { r in
-            return CurrenciesService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(CurrenciesServiceProtocol.self, initializer: CurrenciesService.init)
         
-        container.register(IncomesServiceProtocol.self) { r in
-            return IncomesService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(IncomesServiceProtocol.self, initializer: IncomesService.init)
         
-        container.register(ExchangeRatesServiceProtocol.self) { r in
-            return ExchangeRatesService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(ExchangeRatesServiceProtocol.self, initializer: ExchangeRatesService.init)
         
-        container.register(ExpensesServiceProtocol.self) { r in
-            return ExpensesService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(ExpensesServiceProtocol.self, initializer: ExpensesService.init)
         
-        container.register(FundsMovesServiceProtocol.self) { r in
-            return FundsMovesService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(FundsMovesServiceProtocol.self, initializer: FundsMovesService.init)
         
-        container.register(HistoryTransactionsServiceProtocol.self) { r in
-            return HistoryTransactionsService(
-                apiClient: r.resolve(APIClientProtocol.self)!)
-        }
+        container.autoregister(HistoryTransactionsServiceProtocol.self, initializer: HistoryTransactionsService.init)
     }
 }

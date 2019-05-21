@@ -114,6 +114,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         if let menuLeftNavigationController = viewController(.MenuNavigationController) as? UISideMenuNavigationController {
             SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
         }
+        _ = notificationsCoordinator.enableNotifications()
     }
     
     func showOnboardingViewController() {
@@ -165,7 +166,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         return true
     }
     
-    fileprivate func handleNotificationFromLaunch() {
+    private func handleNotificationFromLaunch() {
         guard let launchOptions = launchOptions else { return }
         
         if let remoteNotificationPayload = launchOptions[UIApplication.LaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {

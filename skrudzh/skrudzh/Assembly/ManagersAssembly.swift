@@ -7,6 +7,7 @@
 //
 
 import Swinject
+import SwinjectAutoregistration
 
 class ManagersAssembly: Assembly {
     
@@ -33,46 +34,21 @@ class ManagersAssembly: Assembly {
                 router.initDependencies(with: resolver)
         }
         
-        // UserSessionManagerProtocol
-        container.register(UserSessionManagerProtocol.self) { r in
-            return UserSessionManager()
-            }.inObjectScope(.container)
+        container.autoregister(UserSessionManagerProtocol.self, initializer: UserSessionManager.init).inObjectScope(.container)
         
-        // UIMessagePresenterManagerProtocol
-        container.register(UIMessagePresenterManagerProtocol.self) { r in
-            return UIMessagePresenterManager()
-            }.inObjectScope(.container)
+        container.autoregister(UIMessagePresenterManagerProtocol.self, initializer: UIMessagePresenterManager.init).inObjectScope(.container)
         
-        // NotificationsManagerProtocol
-        container.register(NotificationsManagerProtocol.self) { r in
-            return NotificationsManager(notificationsHandler: r.resolve(NotificationsHandlerProtocol.self)!)
-            }.inObjectScope(.container)
+        container.autoregister(NotificationsManagerProtocol.self, initializer: NotificationsManager.init).inObjectScope(.container)
         
-        // NotificationsHandlerProtocol
-        container.register(NotificationsHandlerProtocol.self) { r in
-            return NotificationsHandler(navigator: r.resolve(NavigatorProtocol.self)!,
-                                        messagePresenterManager: r.resolve(UIMessagePresenterManagerProtocol.self)!)
-            }.inObjectScope(.container)
+        container.autoregister(NotificationsHandlerProtocol.self, initializer: NotificationsHandler.init).inObjectScope(.container)
         
-        // Navigator
-        container.register(NavigatorProtocol.self) { r in
-            return Navigator(window: r.resolve(UIWindow.self)!)
-            }.inObjectScope(.container)
+        container.autoregister(NavigatorProtocol.self, initializer: Navigator.init).inObjectScope(.container)
         
-        // SoundsManager
-        container.register(SoundsManagerProtocol.self) { r in
-            return SoundsManager()
-        }.inObjectScope(.container)
+        container.autoregister(SoundsManagerProtocol.self, initializer: SoundsManager.init).inObjectScope(.container)
         
-        // CurrencyConverterProtocol
-        container.register(CurrencyConverterProtocol.self) { r in
-            return CurrencyConverter()
-        }.inObjectScope(.container)
+        container.autoregister(CurrencyConverterProtocol.self, initializer: CurrencyConverter.init).inObjectScope(.container)
         
-        // ExportManagerProtocol
-        container.register(ExportManagerProtocol.self) { r in
-            return ExportManager()
-        }.inObjectScope(.container)
+        container.autoregister(ExportManagerProtocol.self, initializer: ExportManager.init).inObjectScope(.container)
     }
     
 }

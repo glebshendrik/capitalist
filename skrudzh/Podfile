@@ -30,4 +30,5 @@ target 'skrudzh' do
   pod 'RandomColorSwift'
   pod 'MSPeekCollectionViewDelegateImplementation'
   pod 'CSV.swift'
+  pod 'RecurrencePicker', path: '../dependencies/RecurrencePicker/'
 end

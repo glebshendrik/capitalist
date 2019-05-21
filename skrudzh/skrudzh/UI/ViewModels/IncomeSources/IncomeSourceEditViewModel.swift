@@ -27,6 +27,8 @@ class IncomeSourceEditViewModel {
     
     private var incomeSource: IncomeSource? = nil
     
+    var reminderViewModel: ReminderViewModel = ReminderViewModel()
+    
     var name: String? {
         return incomeSource?.name
     }
@@ -45,14 +47,19 @@ class IncomeSourceEditViewModel {
         return incomeSource == nil
     }
     
+    var reminderTitle: String {
+        return reminderViewModel.isReminderSet ? "Изменить напоминание" : "Установить напоминание"
+    }
+    
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
-        self.accountCoordinator = accountCoordinator        
+        self.accountCoordinator = accountCoordinator
     }
     
     func set(incomeSource: IncomeSource) {
         self.incomeSource = incomeSource
+        reminderViewModel = ReminderViewModel(incomeSource: incomeSource)
         selectedCurrency = incomeSource.currency
     }
     
@@ -119,7 +126,10 @@ class IncomeSourceEditViewModel {
         
         return .value(IncomeSourceCreationForm(userId: currentUserId,
                                                name: name!,
-                                               currency: currencyCode))
+                                               currency: currencyCode,
+                                               reminderStartDate: reminderViewModel.reminderStartDate,
+                                               reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
+                                               reminderMessage: reminderViewModel.reminderMessage))
     }
     
     private func validateUpdatingForm(with name: String?) -> Promise<IncomeSourceUpdatingForm> {
@@ -133,7 +143,10 @@ class IncomeSourceEditViewModel {
         }
         
         return .value(IncomeSourceUpdatingForm(id: incomeSourceId,
-                                               name: name!))
+                                               name: name!,
+                                               reminderStartDate: reminderViewModel.reminderStartDate,
+                                               reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
+                                               reminderMessage: reminderViewModel.reminderMessage))
     }
     
     private func validateCreation(with name: String?) -> [IncomeSourceCreationForm.CodingKeys : [ValidationErrorReason]]? {

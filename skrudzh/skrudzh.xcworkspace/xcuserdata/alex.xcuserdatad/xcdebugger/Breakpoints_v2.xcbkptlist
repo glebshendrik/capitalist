@@ -603,38 +603,6 @@
             endingLineNumber = "181"
             landmarkName = "init(fundsMovesCoordinator:accountCoordinator:exchangeRatesCoordinator:currencyConverter:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "skrudzh.FundsMoveEditViewModel.__allocating_init(fundsMovesCoordinator: skrudzh.FundsMovesCoordinatorProtocol, accountCoordinator: skrudzh.AccountCoordinatorProtocol, exchangeRatesCoordinator: skrudzh.ExchangeRatesCoordinatorProtocol, currencyConverter: skrudzh.CurrencyConverterProtocol) -&gt; skrudzh.FundsMoveEditViewModel"
-                  moduleName = "skrudzh"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/UI/ViewModels/Main/FundsMoveEditViewModel.swift"
-                  timestampString = "579189562.82724"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "skrudzh.FundsMoveEditViewModel.init(fundsMovesCoordinator: skrudzh.FundsMovesCoordinatorProtocol, accountCoordinator: skrudzh.AccountCoordinatorProtocol, exchangeRatesCoordinator: skrudzh.ExchangeRatesCoordinatorProtocol, currencyConverter: skrudzh.CurrencyConverterProtocol) -&gt; skrudzh.FundsMoveEditViewModel"
-                  moduleName = "skrudzh"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alex/Documents/projects/skrudzh-ios/skrudzh/skrudzh/UI/ViewModels/Main/FundsMoveEditViewModel.swift"
-                  timestampString = "579189562.829632"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "72">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -667,6 +635,22 @@
             endingLineNumber = "95"
             landmarkName = "ableToIncludeInBalance"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "skrudzh/AppDelegate.swift"
+            timestampString = "579719322.912104"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "application(_:didRegisterForRemoteNotificationsWithDeviceToken:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

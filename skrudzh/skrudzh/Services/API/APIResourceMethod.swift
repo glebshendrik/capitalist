@@ -44,7 +44,6 @@ struct APIResourceMethod {
         case .updateUser,
              .changePassword,
              .resetPassword,
-             .registerDeviceToken,
              .updateIncomeSource,
              .updateExpenseSource,
              .updateExpenseCategory,
@@ -55,7 +54,8 @@ struct APIResourceMethod {
         case .updateIncomeSourcePosition,
              .updateExpenseSourcePosition,
              .updateExpenseCategoryPosition,
-             .updateUserSettings:
+             .updateUserSettings,
+             .updateDeviceToken:
             return .patch
         case .destroySession,
              .destroyIncomeSource,

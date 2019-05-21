@@ -17,6 +17,9 @@ struct IncomeSource : Decodable {
     let order: Int
     let deletedAt: Date?
     let isChild: Bool?
+    let reminderStartDate: Date?
+    let reminderRecurrenceRule: String?
+    let reminderMessage: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -27,6 +30,9 @@ struct IncomeSource : Decodable {
         case order = "row_order"
         case deletedAt = "deleted_at"
         case isChild = "is_child"
+        case reminderStartDate = "reminder_start_date"
+        case reminderRecurrenceRule = "reminder_recurrence_rule"
+        case reminderMessage = "reminder_message"
     }
 
 }
@@ -35,19 +41,31 @@ struct IncomeSourceCreationForm : Encodable {
     let userId: Int
     let name: String
     let currency: String
+    let reminderStartDate: Date?
+    let reminderRecurrenceRule: String?
+    let reminderMessage: String?
     
     enum CodingKeys: String, CodingKey {
         case name
         case currency
+        case reminderStartDate = "reminder_start_date"
+        case reminderRecurrenceRule = "reminder_recurrence_rule"
+        case reminderMessage = "reminder_message"
     }
 }
 
 struct IncomeSourceUpdatingForm : Encodable {
     let id: Int
     let name: String
+    let reminderStartDate: Date?
+    let reminderRecurrenceRule: String?
+    let reminderMessage: String?
     
     enum CodingKeys: String, CodingKey {
         case name
+        case reminderStartDate = "reminder_start_date"
+        case reminderRecurrenceRule = "reminder_recurrence_rule"
+        case reminderMessage = "reminder_message"
     }
 }
 

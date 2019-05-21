@@ -1,0 +1,29 @@
+{
+  "name": "RecurrencePicker",
+  "version": "0.1.2",
+  "summary": "A short description of RecurrencePicker.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/petalvlad@gmail.com/RecurrencePicker",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "petalvlad@gmail.com": "petalvlad@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/petalvlad@gmail.com/RecurrencePicker.git",
+    "tag": "0.1.2"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "swift_version": "4.2",
+  "source_files": "RecurrencePicker/Classes/**/*",
+  "resources": "RecurrencePicker/**/*.{png,xib,strings,lproj}",
+  "resource_bundles": {
+    "RecurrencePicker": [
+      "RecurrencePicker/**/*.{png,xib,strings,lproj}"
+    ]
+  }
+}

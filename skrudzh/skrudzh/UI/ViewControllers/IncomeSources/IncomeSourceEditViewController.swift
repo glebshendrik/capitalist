@@ -20,7 +20,7 @@ protocol IncomeSourceEditInputProtocol {
     func set(delegate: IncomeSourceEditViewControllerDelegate?)
 }
 
-class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
+class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var removeButton: UIButton!
@@ -30,6 +30,7 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
 
     var viewModel: IncomeSourceEditViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var router: ApplicationRouterProtocol!
     
     private var delegate: IncomeSourceEditViewControllerDelegate?
     
@@ -142,6 +143,7 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
 }
 
 extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelegate {
+   
     var canChangeCurrency: Bool {
         return viewModel.isNew
     }
@@ -154,9 +156,14 @@ extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelega
         update(currency: currency)
     }
     
+    func didTapSetReminder() {
+        showReminderScreen()
+    }
+    
     func update(currency: Currency) {
         viewModel.selectedCurrency = currency
         editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
+        editTableController?.reminderButton.setTitle(viewModel.reminderTitle, for: .normal)
     }
         
     private func validateUI() {
@@ -165,6 +172,23 @@ extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelega
 //        let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
 //        saveButton.isEnabled = isFormValid
 //        saveButton.backgroundColor = isFormValid ? validColor : invalidColor
+    }
+    
+    func showReminderScreen() {
+        if  let reminderEditNavigationController = router.viewController(.ReminderEditNavigationController) as? UINavigationController,
+            let reminderEditViewController = reminderEditNavigationController.topViewController as? ReminderEditViewController {
+            
+            reminderEditViewController.set(reminderViewModel: viewModel.reminderViewModel, delegate: self)
+                        
+            present(reminderEditNavigationController, animated: true, completion: nil)
+        }
+    }
+}
+
+extension IncomeSourceEditViewController : ReminderEditViewControllerDelegate {
+    func didSave(reminderViewModel: ReminderViewModel) {
+        viewModel.reminderViewModel = reminderViewModel
+        updateUI()
     }
 }
 

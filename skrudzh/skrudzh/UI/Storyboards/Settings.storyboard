@@ -191,7 +191,7 @@
         <!--CurrenciesViewController-->
         <scene sceneID="Aq1-n5-t7L">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="CurrenciesViewController" id="IfY-Rr-JlH" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="CurrenciesViewController" id="IfY-Rr-JlH" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmz-Ya-W7R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="830" y="-106"/>

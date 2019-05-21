@@ -7,76 +7,37 @@
 //
 
 import Swinject
+import SwinjectAutoregistration
 
 class CoordinatorsAssembly: Assembly {
     func assemble(container: Container) {
         
-        container.register(AccountCoordinatorProtocol.self) { r in
-            return AccountCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
-                                      authenticationService: r.resolve(AuthenticationServiceProtocol.self)!,
-                                      usersService: r.resolve(UsersServiceProtocol.self)!,
-                                      router: r.resolve(ApplicationRouterProtocol.self)!,
-                                      notificationsCoordinator: r.resolve(NotificationsCoordinatorProtocol.self)!)
-        }
+        container.autoregister(AccountCoordinatorProtocol.self, initializer: AccountCoordinator.init)
         
-        container.register(NotificationsCoordinatorProtocol.self) { r in
-            return NotificationsCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
-                                            devicesService: r.resolve(DevicesServiceProtocol.self)!,
-                                            notificationsManager: r.resolve(NotificationsManagerProtocol.self)!,
-                                            navigator: r.resolve(NavigatorProtocol.self)!)
-        }
+        container.autoregister(NotificationsCoordinatorProtocol.self, initializer: NotificationsCoordinator.init)
         
-        container.register(IncomeSourcesCoordinatorProtocol.self) { r in
-            return IncomeSourcesCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
-                                            incomeSourcesService: r.resolve(IncomeSourcesServiceProtocol.self)!)
-        }
+        container.autoregister(IncomeSourcesCoordinatorProtocol.self, initializer: IncomeSourcesCoordinator.init)
         
-        container.register(ExpenseSourcesCoordinatorProtocol.self) { r in
-            return ExpenseSourcesCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
-                                            expenseSourcesService: r.resolve(ExpenseSourcesServiceProtocol.self)!)
-        }
+        container.autoregister(ExpenseSourcesCoordinatorProtocol.self, initializer: ExpenseSourcesCoordinator.init)
         
-        container.register(ExpenseCategoriesCoordinatorProtocol.self) { r in
-            return ExpenseCategoriesCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
-                                                expenseCategoriesService: r.resolve(ExpenseCategoriesServiceProtocol.self)!)
-        }
+        container.autoregister(ExpenseCategoriesCoordinatorProtocol.self, initializer: ExpenseCategoriesCoordinator.init)
         
-        container.register(IconsCoordinatorProtocol.self) { r in
-            return IconsCoordinator(iconsService: r.resolve(IconsServiceProtocol.self)!)
-        }
+        container.autoregister(IconsCoordinatorProtocol.self, initializer: IconsCoordinator.init)
         
-        container.register(BasketsCoordinatorProtocol.self) { r in
-            return BasketsCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,                                      
-                                      basketsService: r.resolve(BasketsServiceProtocol.self)!)
-        }
+        container.autoregister(BasketsCoordinatorProtocol.self, initializer: BasketsCoordinator.init)
         
-        container.register(SettingsCoordinatorProtocol.self) { r in
-            return SettingsCoordinator(usersService: r.resolve(UsersServiceProtocol.self)!)
-        }
+        container.autoregister(SettingsCoordinatorProtocol.self, initializer: SettingsCoordinator.init)
         
-        container.register(CurrenciesCoordinatorProtocol.self) { r in
-            return CurrenciesCoordinator(currenciesService: r.resolve(CurrenciesServiceProtocol.self)!)
-        }
+        container.autoregister(CurrenciesCoordinatorProtocol.self, initializer: CurrenciesCoordinator.init)
         
-        container.register(IncomesCoordinatorProtocol.self) { r in
-            return IncomesCoordinator(incomesService: r.resolve(IncomesServiceProtocol.self)!)
-        }
+        container.autoregister(IncomesCoordinatorProtocol.self, initializer: IncomesCoordinator.init)
         
-        container.register(ExchangeRatesCoordinatorProtocol.self) { r in
-            return ExchangeRatesCoordinator(exchangeRatesService: r.resolve(ExchangeRatesServiceProtocol.self)!)
-        }
+        container.autoregister(ExchangeRatesCoordinatorProtocol.self, initializer: ExchangeRatesCoordinator.init)
         
-        container.register(ExpensesCoordinatorProtocol.self) { r in
-            return ExpensesCoordinator(expensesService: r.resolve(ExpensesServiceProtocol.self)!)
-        }
+        container.autoregister(ExpensesCoordinatorProtocol.self, initializer: ExpensesCoordinator.init)
         
-        container.register(FundsMovesCoordinatorProtocol.self) { r in
-            return FundsMovesCoordinator(fundsMovesService: r.resolve(FundsMovesServiceProtocol.self)!)
-        }
+        container.autoregister(FundsMovesCoordinatorProtocol.self, initializer: FundsMovesCoordinator.init)
         
-        container.register(HistoryTransactionsCoordinatorProtocol.self) { r in
-            return HistoryTransactionsCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
-                                                  historyTransactionsService: r.resolve(HistoryTransactionsServiceProtocol.self)!)
-        }
+        container.autoregister(HistoryTransactionsCoordinatorProtocol.self, initializer: HistoryTransactionsCoordinator.init)
     }
 }

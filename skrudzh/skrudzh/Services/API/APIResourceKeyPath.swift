@@ -23,7 +23,7 @@ struct APIResourceKeyPath {
              .updateUserSettings,
              .changePassword,
              .resetPassword,
-             .registerDeviceToken:
+             .updateDeviceToken:
             return ResourceKeyPath(singular: "user", plural: "users")
         case .createPasswordResetCode:
             return ResourceKeyPath(singular: "password_reset_code", plural: "password_reset_codes")

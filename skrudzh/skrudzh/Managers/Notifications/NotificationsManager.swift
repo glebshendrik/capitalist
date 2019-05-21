@@ -19,18 +19,18 @@ enum NotificationsManagerError: Error {
 }
 
 class NotificationsManager: NSObject, NotificationsManagerProtocol {
-    fileprivate static let maxNumberOfKeepAliveNotifications: Int = 5
-    fileprivate static let numberOfDaysBetweenKeepAliveNotifications: Int = 3
-    fileprivate let notificationsHandler: NotificationsHandlerProtocol
-    fileprivate let userDefaults = UserDefaults.standard
+    private static let maxNumberOfKeepAliveNotifications: Int = 5
+    private static let numberOfDaysBetweenKeepAliveNotifications: Int = 3
+    private let notificationsHandler: NotificationsHandlerProtocol
+    private let userDefaults = UserDefaults.standard
     let defaultOtherNotificationsFireTime: Date
     
     @available(iOS 10.0, *)
-    fileprivate var notificationCenter: UNUserNotificationCenter {
+    private var notificationCenter: UNUserNotificationCenter {
         return UNUserNotificationCenter.current()
     }
     
-    fileprivate var scheduledLocalNotifications: [UILocalNotification] {
+    private var scheduledLocalNotifications: [UILocalNotification] {
         return UIApplication.shared.scheduledLocalNotifications ?? []
     }
     

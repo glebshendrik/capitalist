@@ -29,6 +29,8 @@ class ExpenseCategoryEditViewModel {
     public private(set) var expenseCategory: ExpenseCategory? = nil
     public private(set) var basketType: BasketType? = nil
     
+    var reminderViewModel: ReminderViewModel = ReminderViewModel()
+    
     var name: String? {
         return expenseCategory?.name
     }
@@ -80,6 +82,7 @@ class ExpenseCategoryEditViewModel {
     
     func set(expenseCategory: ExpenseCategory) {
         self.expenseCategory = expenseCategory
+        reminderViewModel = ReminderViewModel(expenseCategory: expenseCategory)
         selectedIconURL = iconURL
         selectedCurrency = expenseCategory.currency
         selectedIncomeSourceCurrency = expenseCategory.incomeSourceDependentCurrency
@@ -189,7 +192,10 @@ extension ExpenseCategoryEditViewModel {
                                                   basketId: basketId,
                                                   monthlyPlannedCents: monthlyPlannedCents,
                                                   currency: currencyCode,
-                                                  incomeSourceCurrency: incomeSourceCurrencyCode))
+                                                  incomeSourceCurrency: incomeSourceCurrencyCode,
+                                                  reminderStartDate: reminderViewModel.reminderStartDate,
+                                                  reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
+                                                  reminderMessage: reminderViewModel.reminderMessage))
     }
     
     private func validateCreation(with name: String?,
@@ -237,7 +243,10 @@ extension ExpenseCategoryEditViewModel {
         return .value(ExpenseCategoryUpdatingForm(id: expenseCategoryId,
                                                   name: name!,
                                                   iconURL: iconURL,
-                                                  monthlyPlannedCents: monthlyPlannedCents))
+                                                  monthlyPlannedCents: monthlyPlannedCents,
+                                                  reminderStartDate: reminderViewModel.reminderStartDate,
+                                                  reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
+                                                  reminderMessage: reminderViewModel.reminderMessage))
     }
     
     private func validateUpdating(with name: String?,

@@ -9,7 +9,7 @@
 import UIKit
 import SkyFloatingLabelTextField
 
-class MoneyTextField: SkyFloatingLabelTextField {
+class MoneyTextField: FloatingTextField {
     private var currencyFormatter: NumberFormatter?
     private var decimalFormatter: NumberFormatter?
     

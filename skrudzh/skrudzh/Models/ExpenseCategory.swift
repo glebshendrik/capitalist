@@ -25,6 +25,9 @@ struct ExpenseCategory : Decodable {
     let order: Int
     let deletedAt: Date?
     let includedInBalanceExpensesCents: Int?
+    let reminderStartDate: Date?
+    let reminderRecurrenceRule: String?
+    let reminderMessage: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -43,6 +46,9 @@ struct ExpenseCategory : Decodable {
         case incomeSourceCurrency = "income_source_currency"
         case deletedAt = "deleted_at"
         case includedInBalanceExpensesCents = "included_in_balance_expenses_cents"
+        case reminderStartDate = "reminder_start_date"
+        case reminderRecurrenceRule = "reminder_recurrence_rule"
+        case reminderMessage = "reminder_message"
     }
     
 }
@@ -54,6 +60,9 @@ struct ExpenseCategoryCreationForm : Encodable {
     let monthlyPlannedCurrency: String
     let monthlyPlannedCents: Int?
     let incomeSourceCurrency: String
+    let reminderStartDate: Date?
+    let reminderRecurrenceRule: String?
+    let reminderMessage: String?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -62,15 +71,21 @@ struct ExpenseCategoryCreationForm : Encodable {
         case monthlyPlannedCurrency = "monthly_planned_currency"
         case monthlyPlannedCents = "monthly_planned_cents"
         case incomeSourceCurrency = "income_source_currency"
+        case reminderStartDate = "reminder_start_date"
+        case reminderRecurrenceRule = "reminder_recurrence_rule"
+        case reminderMessage = "reminder_message"
     }
     
-    init(name: String, iconURL: URL?, basketId: Int, monthlyPlannedCents: Int?, currency: String, incomeSourceCurrency: String) {
+    init(name: String, iconURL: URL?, basketId: Int, monthlyPlannedCents: Int?, currency: String, incomeSourceCurrency: String, reminderStartDate: Date?, reminderRecurrenceRule: String?, reminderMessage: String?) {
         self.name = name
         self.iconURL = iconURL
         self.basketId = basketId
         self.monthlyPlannedCents = monthlyPlannedCents
         self.monthlyPlannedCurrency = currency
         self.incomeSourceCurrency = incomeSourceCurrency
+        self.reminderStartDate = reminderStartDate
+        self.reminderRecurrenceRule = reminderRecurrenceRule
+        self.reminderMessage = reminderMessage
     }
 }
 
@@ -79,18 +94,27 @@ struct ExpenseCategoryUpdatingForm : Encodable {
     let name: String
     let iconURL: URL?
     let monthlyPlannedCents: Int?
+    let reminderStartDate: Date?
+    let reminderRecurrenceRule: String?
+    let reminderMessage: String?
     
     enum CodingKeys: String, CodingKey {
         case name
         case iconURL = "icon_url"
         case monthlyPlannedCents = "monthly_planned_cents"
+        case reminderStartDate = "reminder_start_date"
+        case reminderRecurrenceRule = "reminder_recurrence_rule"
+        case reminderMessage = "reminder_message"
     }
     
-    init(id: Int, name: String, iconURL: URL?, monthlyPlannedCents: Int?) {
+    init(id: Int, name: String, iconURL: URL?, monthlyPlannedCents: Int?, reminderStartDate: Date?, reminderRecurrenceRule: String?, reminderMessage: String?) {
         self.id = id
         self.name = name
         self.iconURL = iconURL
         self.monthlyPlannedCents = monthlyPlannedCents
+        self.reminderStartDate = reminderStartDate
+        self.reminderRecurrenceRule = reminderRecurrenceRule
+        self.reminderMessage = reminderMessage
     }
     
     func encode(to encoder: Encoder) throws {
@@ -98,6 +122,9 @@ struct ExpenseCategoryUpdatingForm : Encodable {
         try container.encode(name, forKey: .name)
         try container.encode(iconURL, forKey: .iconURL)        
         try container.encode(monthlyPlannedCents, forKey: .monthlyPlannedCents)
+        try container.encode(reminderStartDate, forKey: .reminderStartDate)
+        try container.encode(reminderRecurrenceRule, forKey: .reminderRecurrenceRule)
+        try container.encode(reminderMessage, forKey: .reminderMessage)
     }
 }
 

@@ -1,0 +1,6 @@
+framework module RecurrencePicker {
+  umbrella header "RecurrencePicker-umbrella.h"
+
+  export *
+  module * { export * }
+}

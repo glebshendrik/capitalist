@@ -104,6 +104,15 @@ struct UserSettingsUpdatingForm : Encodable {
     }
 }
 
+struct UserDeviceTokenUpdatingForm : Encodable {
+    let userId: Int
+    let token: String
+    
+    enum CodingKeys: String, CodingKey {
+        case token = "device_token"
+    }    
+}
+
 struct UserCreationForm : Encodable {
     var email: String
     var firstname: String?
