@@ -8,14 +8,14 @@
 
 import Foundation
 import PromiseKit
-import StaticDataTableViewController
+import StaticTableViewController
 import SwiftMessages
 
 protocol ForgotPasswordOutputProtocol {
     var email: String? { get }
 }
 
-class ForgotPasswordViewController : StaticDataTableViewController, ForgotPasswordOutputProtocol {
+class ForgotPasswordViewController : StaticTableViewController, ForgotPasswordOutputProtocol {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var createPasswordResetCodeButton: UIButton!
@@ -31,6 +31,8 @@ class ForgotPasswordViewController : StaticDataTableViewController, ForgotPasswo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        insertAnimation = .top
+        deleteAnimation = .bottom
         registerFields()
         loaderImageView.showLoader()
     }
@@ -76,8 +78,8 @@ class ForgotPasswordViewController : StaticDataTableViewController, ForgotPasswo
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        cell(activityIndicatorCell, setHidden: hidden)
-        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+        set(cells: activityIndicatorCell, hidden: hidden)
+        reloadData(animated: animated)
     }
 }
 

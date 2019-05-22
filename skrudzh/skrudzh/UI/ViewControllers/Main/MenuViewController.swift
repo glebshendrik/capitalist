@@ -8,10 +8,10 @@
 
 import UIKit
 import SideMenu
-import StaticDataTableViewController
+import StaticTableViewController
 import PromiseKit
 
-class MenuViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol {
+class MenuViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol {
     
     @IBOutlet weak var joinCell: UITableViewCell!
     @IBOutlet weak var profileCell: UITableViewCell!
@@ -32,8 +32,8 @@ class MenuViewController : StaticDataTableViewController, UIMessagePresenterMana
     }
     
     func updateUI(animated: Bool = false) {
-        cell(joinCell, setHidden: !viewModel.isCurrentUserLoaded || !viewModel.isCurrentUserGuest)
-        cell(profileCell, setHidden: !viewModel.isCurrentUserLoaded || viewModel.isCurrentUserGuest)
+        set(cells: joinCell, hidden: !viewModel.isCurrentUserLoaded || !viewModel.isCurrentUserGuest)
+        set(cells: profileCell, hidden: !viewModel.isCurrentUserLoaded || viewModel.isCurrentUserGuest)
         profileCell.textLabel?.text = viewModel.profileTitle
         reloadData(animated: animated)
     }
@@ -69,6 +69,8 @@ class MenuViewController : StaticDataTableViewController, UIMessagePresenterMana
     
     private func setupUI() {
         setupRefreshControl()
+        insertAnimation = .top
+        deleteAnimation = .bottom
     }
     
     private func setupRefreshControl() {

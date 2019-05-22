@@ -21,16 +21,15 @@ protocol ExpenseCategoryEditInputProtocol {
     func set(delegate: ExpenseCategoryEditViewControllerDelegate?)
 }
 
-class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
+class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var removeButton: UIButton!
-    @IBOutlet weak var loaderImageView: UIImageView!
     
     var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
     
     var viewModel: ExpenseCategoryEditViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var router: ApplicationRouterProtocol!
     
     private var delegate: ExpenseCategoryEditViewControllerDelegate?
     
@@ -53,8 +52,8 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor        
-        setRemoveButton(hidden: viewModel.isNew)
+        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
+        editTableController?.setRemoveButton(hidden: viewModel.isNew)
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
@@ -65,36 +64,9 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
         close()
     }
     
-    @IBAction func didTapRemoveButton(_ sender: Any) {
-        let alertController = UIAlertController(title: "Удалить категорию трат?",
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        alertController.addAction(title: "Удалить",
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: { _ in
-                                    self.remove(deleteTransactions: false)
-        })
-        
-        alertController.addAction(title: "Удалить вместе с транзакциями",
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: { _ in
-                                    self.remove(deleteTransactions: true)
-        })
-        
-        alertController.addAction(title: "Отмена",
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: nil)
-        
-        present(alertController, animated: true)
-    }
-    
     private func save() {
         view.endEditing(true)
-        setActivityIndicator(hidden: false)
+        editTableController?.showActivityIndicator()
         saveButton.isEnabled = false
         
         firstly {
@@ -123,14 +95,13 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
                                                   theme: .error)
             }
         }.finally {
-            self.setActivityIndicator(hidden: true)
+            self.editTableController?.hideActivityIndicator()
             self.saveButton.isEnabled = true
         }
     }
     
     private func remove(deleteTransactions: Bool) {
-        setActivityIndicator(hidden: false)
-        removeButton.isUserInteractionEnabled = false
+        editTableController?.showActivityIndicator()
         
         firstly {
             viewModel.removeExpenseCategory(deleteTransactions: deleteTransactions)
@@ -141,8 +112,7 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
             self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении категории трат",
                                               theme: .error)
         }.finally {
-            self.setActivityIndicator(hidden: true)
-            self.removeButton.isUserInteractionEnabled = true
+            self.editTableController?.hideActivityIndicator()
         }
     }
     
@@ -152,6 +122,33 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
 }
 
 extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableControllerDelegate {
+    func didTapRemoveButton() {
+        let alertController = UIAlertController(title: "Удалить категорию трат?",
+                                                message: nil,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(title: "Удалить",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: { _ in
+                                    self.remove(deleteTransactions: false)
+        })
+        
+        alertController.addAction(title: "Удалить вместе с транзакциями",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: { _ in
+                                    self.remove(deleteTransactions: true)
+        })
+        
+        alertController.addAction(title: "Отмена",
+                                  style: .cancel,
+                                  isEnabled: true,
+                                  handler: nil)
+        
+        present(alertController, animated: true)
+    }
+    
     var canChangeCurrency: Bool {
         return viewModel.isNew
     }
@@ -195,6 +192,27 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableController
 //        let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
 //        saveButton.isEnabled = isFormValid
 //        saveButton.backgroundColor = isFormValid ? validColor : invalidColor
+    }
+    
+    func didTapSetReminder() {
+        showReminderScreen()
+    }
+    
+    func showReminderScreen() {
+        if  let reminderEditNavigationController = router.viewController(.ReminderEditNavigationController) as? UINavigationController,
+            let reminderEditViewController = reminderEditNavigationController.topViewController as? ReminderEditViewController {
+            
+            reminderEditViewController.set(reminderViewModel: viewModel.reminderViewModel, delegate: self)
+            
+            present(reminderEditNavigationController, animated: true, completion: nil)
+        }
+    }
+}
+
+extension ExpenseCategoryEditViewController : ReminderEditViewControllerDelegate {
+    func didSave(reminderViewModel: ReminderViewModel) {
+        viewModel.reminderViewModel = reminderViewModel
+        updateReminderUI()
     }
 }
 
@@ -271,7 +289,13 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditInputProtocol {
         updateCurrencyUI()
         updateIncomeSourceCurrencyUI()
         updateIconUI()
+        updateReminderUI()
         validateUI()
+    }
+    
+    private func updateReminderUI() {
+        editTableController?.reminderButton.setTitle(viewModel.reminderTitle, for: .normal)
+        editTableController?.reminderLabel.text = viewModel.reminder
     }
     
     private func updateCurrencyUI() {
@@ -331,24 +355,22 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditInputProtocol {
 extension ExpenseCategoryEditViewController {
     private func setupUI() {
         setupNavigationBar()
-        loaderImageView.showLoader()
-//        editTableController?.tableView.allowsSelection = canChangeCurrency
         guard viewModel.isNew else {
-            setActivityIndicator(hidden: true)
+            editTableController?.hideActivityIndicator()
             return
         }
         loadDefaultCurrency()
     }
     
     private func loadDefaultCurrency() {
-        setActivityIndicator(hidden: false)
+        editTableController?.showActivityIndicator()
         saveButton.isEnabled = false
         
         _ = firstly {
                 viewModel.loadDefaultCurrency()
             }.ensure {
                 self.updateUI()
-                self.setActivityIndicator(hidden: true)
+                self.editTableController?.hideActivityIndicator()
                 self.saveButton.isEnabled = true
             }
     }
@@ -360,25 +382,5 @@ extension ExpenseCategoryEditViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.title = viewModel.isNew ? "Новая категория трат" : "Категория трат"
-    }
-    
-    private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        guard animated else {
-            loaderImageView.isHidden = hidden
-            return
-        }
-        UIView.transition(with: loaderImageView, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            self.loaderImageView.isHidden = hidden
-        })
-    }
-    
-    private func setRemoveButton(hidden: Bool, animated: Bool = true) {
-        guard animated else {
-            removeButton.isHidden = hidden
-            return
-        }
-        UIView.transition(with: removeButton, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            self.removeButton.isHidden = hidden
-        })
     }
 }

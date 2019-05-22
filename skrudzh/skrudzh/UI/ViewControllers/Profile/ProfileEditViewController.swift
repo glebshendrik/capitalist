@@ -8,7 +8,7 @@
 
 import Foundation
 import PromiseKit
-import StaticDataTableViewController
+import StaticTableViewController
 import SwiftMessages
 
 
@@ -16,7 +16,7 @@ protocol ProfileEditInputProtocol {
     func set(user: User?)
 }
 
-class ProfileEditViewController : StaticDataTableViewController, ProfileEditInputProtocol {
+class ProfileEditViewController : StaticTableViewController, ProfileEditInputProtocol {
     
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -29,6 +29,7 @@ class ProfileEditViewController : StaticDataTableViewController, ProfileEditInpu
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         updateUI()
         registerFields()
         loaderImageView.showLoader()
@@ -74,13 +75,18 @@ class ProfileEditViewController : StaticDataTableViewController, ProfileEditInpu
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    private func setupUI() {
+        insertAnimation = .top
+        deleteAnimation = .bottom
+    }
+    
     private func updateUI() {
         firstnameTextField.text = viewModel.firstname
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        cell(activityIndicatorCell, setHidden: hidden)
-        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+        set(cells: activityIndicatorCell, hidden: hidden)
+        reloadData(animated: animated)
     }
 }
 

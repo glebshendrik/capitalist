@@ -8,9 +8,9 @@
 
 import UIKit
 import PromiseKit
-import StaticDataTableViewController
+import StaticTableViewController
 
-class SettingsViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
+class SettingsViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
     var navigationBarTintColor: UIColor? = UIColor.navBarColor
     

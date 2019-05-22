@@ -19,7 +19,7 @@ target 'skrudzh' do
   pod 'SwifterSwift', '~> 4.6'
   pod 'CWStatusBarNotification', '~> 2.3'
   pod 'SideMenu'
-  pod 'StaticDataTableViewController'
+  pod 'StaticTableViewController'
   pod 'SwiftMessages'
   pod 'SkyFloatingLabelTextField'
   pod 'CircleProgressView', '~> 1.0'

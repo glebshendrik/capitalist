@@ -10,8 +10,7 @@
 #endif
 #endif
 
-#import "StaticDataTableViewController.h"
 
-FOUNDATION_EXPORT double StaticDataTableViewControllerVersionNumber;
-FOUNDATION_EXPORT const unsigned char StaticDataTableViewControllerVersionString[];
+FOUNDATION_EXPORT double StaticTableViewControllerVersionNumber;
+FOUNDATION_EXPORT const unsigned char StaticTableViewControllerVersionString[];
 

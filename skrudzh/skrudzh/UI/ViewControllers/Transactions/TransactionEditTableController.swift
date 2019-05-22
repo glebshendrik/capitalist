@@ -8,7 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
-import StaticDataTableViewController
+import StaticTableViewController
 
 protocol TransactionEditTableControllerDelegate {
     func validationNeeded()
@@ -26,7 +26,7 @@ protocol TransactionEditTableControllerDelegate {
     func didTapCompletable()
 }
 
-class TransactionEditTableController : StaticDataTableViewController, UITextFieldDelegate {
+class TransactionEditTableController : StaticTableViewController, UITextFieldDelegate {
     @IBOutlet weak var startableNameTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var startableBackground: UIView!
     @IBOutlet weak var startableIconContainer: UIView!
@@ -76,6 +76,8 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        insertAnimation = .top
+        deleteAnimation = .bottom
         update(textField: startableNameTextField)
         update(textField: completableNameTextField)
         update(textField: amountTextField)
@@ -292,11 +294,11 @@ class TransactionEditTableController : StaticDataTableViewController, UITextFiel
     }
     
     func updateTable(animated: Bool = true) {
-        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+        reloadData(animated: animated)
     }
     
-    private func set(_ cell: UITableViewCell, hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        self.cell(cell, setHidden: hidden)
+    private func set(_ cell: UITableViewCell, hidden: Bool, animated: Bool = true, reload: Bool = true) {        
+        set(cells: cell, hidden: hidden)
         if reload {
             updateTable(animated: animated)
         }

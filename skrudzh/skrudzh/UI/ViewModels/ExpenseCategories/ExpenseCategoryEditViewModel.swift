@@ -74,6 +74,14 @@ class ExpenseCategoryEditViewModel {
         return isNew && basketType != .joy
     }
     
+    var reminderTitle: String {
+        return reminderViewModel.isReminderSet ? "Изменить напоминание" : "Установить напоминание"
+    }
+    
+    var reminder: String? {
+        return reminderViewModel.reminder
+    }
+    
     init(expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {
         self.expenseCategoriesCoordinator = expenseCategoriesCoordinator

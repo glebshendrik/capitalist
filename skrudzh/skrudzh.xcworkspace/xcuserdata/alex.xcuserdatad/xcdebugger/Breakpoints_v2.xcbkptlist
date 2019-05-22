@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewControllers/Common/ReminderEditViewController.swift"
-            timestampString = "580216811.833658"
+            filePath = "Pods/StaticTableViewController/Sources/StaticTableViewController.swift"
+            timestampString = "580236421.746976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "recurrencePicker(_:didPickRecurrence:)"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "tableView(_:heightForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/RecurrencePicker/RecurrencePicker/Classes/RecurrencePicker/InternationalControl.swift"
-            timestampString = "580210269.295247"
+            filePath = "Pods/StaticTableViewController/Sources/StaticTableViewController.swift"
+            timestampString = "580236421.749854"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "localizedString(_:comment:)"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "tableView(_:heightForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,29 +41,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "skrudzh/UI/ViewModels/Common/ReminderViewModel.swift"
-            timestampString = "580216811.850216"
+            filePath = "Pods/StaticTableViewController/Sources/StaticTableViewController.swift"
+            timestampString = "580236421.750248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "reminder"
-            landmarkType = "24">
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "tableView(_:heightForRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/RecurrencePicker/RecurrencePicker/Classes/RecurrencePicker/RRule/Iterators.swift"
-            timestampString = "580215302.965578"
+            filePath = "skrudzh/UI/ViewControllers/Common/FloatingFieldsStaticTableViewController.swift"
+            timestampString = "580236608.2352149"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "occurrences(between:and:endless:)"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "hideActivityIndicator(animated:reload:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

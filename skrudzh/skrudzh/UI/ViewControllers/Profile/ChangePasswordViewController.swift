@@ -8,10 +8,10 @@
 
 import Foundation
 import PromiseKit
-import StaticDataTableViewController
+import StaticTableViewController
 import SwiftMessages
 
-class ChangePasswordViewController : StaticDataTableViewController {
+class ChangePasswordViewController : StaticTableViewController {
     
     @IBOutlet weak var oldPasswordTextField: UITextField!
     @IBOutlet weak var newPasswordTextField: UITextField!
@@ -25,6 +25,8 @@ class ChangePasswordViewController : StaticDataTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        insertAnimation = .top
+        deleteAnimation = .bottom
         registerFields()
         loaderImageView.showLoader()
     }
@@ -60,8 +62,8 @@ class ChangePasswordViewController : StaticDataTableViewController {
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        cell(activityIndicatorCell, setHidden: hidden)
-        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+        set(cells: activityIndicatorCell, hidden: hidden)
+        reloadData(animated: animated)
     }
 }
 

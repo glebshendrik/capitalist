@@ -1,0 +1,6 @@
+framework module StaticTableViewController {
+  umbrella header "StaticTableViewController-umbrella.h"
+
+  export *
+  module * { export * }
+}

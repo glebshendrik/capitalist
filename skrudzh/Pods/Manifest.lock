@@ -30,7 +30,7 @@ PODS:
   - RecurrencePicker (0.2.3)
   - SideMenu (5.0.2)
   - SkyFloatingLabelTextField (3.6.0)
-  - StaticDataTableViewController (2.5.0)
+  - StaticTableViewController (1.2.0)
   - SVProgressHUD (2.2.5)
   - SwiftDate (5.0.10)
   - SwifterSwift (4.6.0):
@@ -77,7 +77,7 @@ DEPENDENCIES:
   - RecurrencePicker (= 0.2.3)
   - SideMenu
   - SkyFloatingLabelTextField
-  - StaticDataTableViewController
+  - StaticTableViewController
   - SVProgressHUD (~> 2.2)
   - SwiftDate (~> 5.0)
   - SwifterSwift (~> 4.6)
@@ -104,7 +104,7 @@ SPEC REPOS:
     - RecurrencePicker
     - SideMenu
     - SkyFloatingLabelTextField
-    - StaticDataTableViewController
+    - StaticTableViewController
     - SVProgressHUD
     - SwiftDate
     - SwifterSwift
@@ -141,7 +141,7 @@ SPEC CHECKSUMS:
   RecurrencePicker: d58e95cf2652f602f3dc4530d3d838e5603bdfd4
   SideMenu: e5094f0b2e7d9609e100a90ae69025abd994f882
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
-  StaticDataTableViewController: 0c5c4a47861446dd3cfd52530ae801ec7662ce26
+  StaticTableViewController: cbf8a57221ffa6bad8f3dc9d7863863ee28deee0
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: fcdaa7ca22a903faf6d7ed231239a88d174dcae3
   SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
@@ -150,6 +150,6 @@ SPEC CHECKSUMS:
   SwinjectAutoregistration: 93a908f7543c401b0c315305ac0ae501efdbce89
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
 
-PODFILE CHECKSUM: d667254fa32c58c50b122ae49bb86c49421e4a69
+PODFILE CHECKSUM: 7e50131990da4269a185319a4a79b1a92ac64598
 
 COCOAPODS: 1.5.3

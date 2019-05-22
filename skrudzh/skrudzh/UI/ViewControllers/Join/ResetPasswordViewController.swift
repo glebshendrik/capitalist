@@ -8,14 +8,14 @@
 
 import Foundation
 import PromiseKit
-import StaticDataTableViewController
+import StaticTableViewController
 import SwiftMessages
 
 protocol ResetPasswordInputProtocol {
     func set(email: String?)
 }
 
-class ResetPasswordViewController : StaticDataTableViewController, ResetPasswordInputProtocol {
+class ResetPasswordViewController : StaticTableViewController, ResetPasswordInputProtocol {
     
     @IBOutlet weak var passwordResetCodeTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -31,6 +31,8 @@ class ResetPasswordViewController : StaticDataTableViewController, ResetPassword
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        insertAnimation = .top
+        deleteAnimation = .bottom
         registerFields()
         loaderImageView.showLoader()
     }
@@ -73,8 +75,8 @@ class ResetPasswordViewController : StaticDataTableViewController, ResetPassword
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        cell(activityIndicatorCell, setHidden: hidden)
-        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+        set(cells: activityIndicatorCell, hidden: hidden)
+        reloadData(animated: animated)
     }
 }
 

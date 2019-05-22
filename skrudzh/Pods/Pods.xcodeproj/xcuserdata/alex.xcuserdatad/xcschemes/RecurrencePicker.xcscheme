@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "57DA23C745FEA2FE20F6A3805644B0F5"
+               BlueprintIdentifier = "E5A8E2D8594D9332D5ECD2ECA4033377"
                BlueprintName = "RecurrencePicker"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "RecurrencePicker.framework">

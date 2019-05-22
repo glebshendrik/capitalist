@@ -8,7 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
-import StaticDataTableViewController
+import StaticTableViewController
 
 protocol ExpenseSourceEditTableControllerDelegate {
     var accountType: AccountType { get }
@@ -20,7 +20,7 @@ protocol ExpenseSourceEditTableControllerDelegate {
     func didSelectCurrency(currency: Currency)
 }
 
-class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFieldDelegate {
+class ExpenseSourceEditTableController : StaticTableViewController, UITextFieldDelegate {
     @IBOutlet weak var generalExpenseSourceTabTitleLabel: UILabel!
     @IBOutlet weak var generalExpenseSourceTabSelectionIndicator: UIView!
     
@@ -62,6 +62,8 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        insertAnimation = .top
+        deleteAnimation = .bottom
         update(textField: expenseSourceNameTextField)
         update(textField: expenseSourceAmountTextField)
         update(textField: expenseSourceGoalAmountTextField)
@@ -109,16 +111,16 @@ class ExpenseSourceEditTableController : StaticDataTableViewController, UITextFi
         goalExpenseSourceTabSelectionIndicator.isHidden = tabsAppearance.goal.isHidden
         debtExpenseSourceTabSelectionIndicator.isHidden = tabsAppearance.debt.isHidden
         
-        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+        reloadData(animated: animated)
     }
     
     func setTypeSwitch(hidden: Bool, animated: Bool = true, reload: Bool = false) {
-        cell(typeSwitchCell, setHidden: hidden)
+        set(cells: typeSwitchCell, hidden: hidden)
         if reload { updateUI(animated: animated) }
     }
     
     func setGoalAmount(hidden: Bool, animated: Bool = true, reload: Bool = false) {
-        cell(goalAmountCell, setHidden: hidden)
+        set(cells: goalAmountCell, hidden: hidden)
         if reload { updateUI(animated: animated) }
     }
         

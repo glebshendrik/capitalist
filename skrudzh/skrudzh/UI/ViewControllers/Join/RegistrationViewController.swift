@@ -8,10 +8,10 @@
 
 import UIKit
 import PromiseKit
-import StaticDataTableViewController
+import StaticTableViewController
 import SwiftMessages
 
-class RegistrationViewController : StaticDataTableViewController {
+class RegistrationViewController : StaticTableViewController {
     
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -26,6 +26,8 @@ class RegistrationViewController : StaticDataTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        insertAnimation = .top
+        deleteAnimation = .bottom
         registerFields()
         loaderImageView.showLoader()
     }
@@ -59,8 +61,8 @@ class RegistrationViewController : StaticDataTableViewController {
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        cell(activityIndicatorCell, setHidden: hidden)
-        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+        set(cells: activityIndicatorCell, hidden: hidden)
+        reloadData(animated: animated)
     }
 }
 

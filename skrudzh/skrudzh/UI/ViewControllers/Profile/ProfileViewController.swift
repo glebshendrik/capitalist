@@ -8,13 +8,13 @@
 
 import UIKit
 import PromiseKit
-import StaticDataTableViewController
+import StaticTableViewController
 
 protocol ProfileViewOutputProtocol {
     var user: User? { get }
 }
 
-class ProfileViewController : StaticDataTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol, NavigationBarColorable {
+class ProfileViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol, NavigationBarColorable {
     
     var navigationBarTintColor: UIColor? = UIColor.navBarColor
 
@@ -102,11 +102,13 @@ class ProfileViewController : StaticDataTableViewController, UIMessagePresenterM
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        cell(activityIndicatorCell, setHidden: hidden)
-        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+        set(cells: activityIndicatorCell, hidden: hidden)
+        reloadData(animated: animated)
     }
     
     private func setupUI() {
+        insertAnimation = .top
+        deleteAnimation = .bottom
         setupRefreshControl()
         loaderImageView.showLoader()
     }

@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import StaticDataTableViewController
-import SkyFloatingLabelTextField
 
 protocol ReminderEditTableViewControllerDelegate {
     func didTapStartDate()

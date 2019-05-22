@@ -8,10 +8,10 @@
 
 import Foundation
 import PromiseKit
-import StaticDataTableViewController
+import StaticTableViewController
 import SwiftMessages
 
-class LoginViewController : StaticDataTableViewController {
+class LoginViewController : StaticTableViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -24,6 +24,8 @@ class LoginViewController : StaticDataTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        insertAnimation = .top
+        deleteAnimation = .bottom
         registerFields()
         loaderImageView.showLoader()
     }
@@ -60,8 +62,8 @@ class LoginViewController : StaticDataTableViewController {
     }
     
     private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        cell(activityIndicatorCell, setHidden: hidden)
-        reloadData(animated: animated, insert: .top, reload: .fade, delete: .bottom)
+        set(cells: activityIndicatorCell, hidden: hidden)
+        reloadData(animated: animated)
     }
 }
 

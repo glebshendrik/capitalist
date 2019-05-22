@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CB09EAA786606278F6B49CCF44D53526"
+               BlueprintIdentifier = "66B98430EDCA126A8FC591E0541411A8"
                BuildableName = "RecurrencePicker.bundle"
                BlueprintName = "RecurrencePicker-RecurrencePicker"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CB09EAA786606278F6B49CCF44D53526"
+            BlueprintIdentifier = "66B98430EDCA126A8FC591E0541411A8"
             BuildableName = "RecurrencePicker.bundle"
             BlueprintName = "RecurrencePicker-RecurrencePicker"
             ReferencedContainer = "container:Pods.xcodeproj">
