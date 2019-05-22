@@ -25,6 +25,24 @@
                         <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="Bhu-m5-4e8">
+                            <rect key="frame" x="0.0" y="225" width="375" height="100"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnY-wU-uh1">
+                                    <rect key="frame" x="32" y="0.0" width="311" height="0.0"/>
+                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                    <color key="textColor" red="0.47450980390000003" green="0.51764705879999995" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="XnY-wU-uh1" secondAttribute="trailing" constant="32" id="4c8-nJ-HFx"/>
+                                <constraint firstItem="XnY-wU-uh1" firstAttribute="leading" secondItem="Bhu-m5-4e8" secondAttribute="leading" constant="32" id="9Bn-p8-aRU"/>
+                                <constraint firstItem="XnY-wU-uh1" firstAttribute="top" secondItem="Bhu-m5-4e8" secondAttribute="top" id="9Dg-hp-PJR"/>
+                            </constraints>
+                        </view>
                         <sections>
                             <tableViewSection id="1EC-F1-rgi">
                                 <cells>
@@ -220,13 +238,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yt3-mm-2TG">
-                                                    <rect key="frame" x="0.0" y="74" width="375" height="1"/>
-                                                    <color key="backgroundColor" red="0.5450980392" green="0.59607843140000005" blue="0.6588235294" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="Oa3-Hi-J3q"/>
-                                                    </constraints>
-                                                </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2T-nZ-VWt">
                                                     <rect key="frame" x="32" y="17.5" width="311" height="40"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -246,10 +257,7 @@
                                             <constraints>
                                                 <constraint firstItem="e2T-nZ-VWt" firstAttribute="centerY" secondItem="06z-8r-h8a" secondAttribute="centerY" id="Is0-ir-14m"/>
                                                 <constraint firstItem="e2T-nZ-VWt" firstAttribute="leading" secondItem="06z-8r-h8a" secondAttribute="leading" constant="32" id="bv6-4v-8Cf"/>
-                                                <constraint firstAttribute="trailing" secondItem="yt3-mm-2TG" secondAttribute="trailing" id="fah-Fd-zhU"/>
                                                 <constraint firstAttribute="trailing" secondItem="e2T-nZ-VWt" secondAttribute="trailing" constant="32" id="gck-Mh-qZU"/>
-                                                <constraint firstAttribute="bottom" secondItem="yt3-mm-2TG" secondAttribute="bottom" id="kbr-T5-3Xb"/>
-                                                <constraint firstItem="yt3-mm-2TG" firstAttribute="leading" secondItem="06z-8r-h8a" secondAttribute="leading" id="qDl-ti-Qbz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -272,6 +280,7 @@
                         <outlet property="currencyTextField" destination="c3z-rl-oMR" id="5ge-IH-0pO"/>
                         <outlet property="incomeSourceNameTextField" destination="gv1-qk-RVl" id="htz-7N-0t1"/>
                         <outlet property="reminderButton" destination="e2T-nZ-VWt" id="kmk-t1-yGx"/>
+                        <outlet property="reminderLabel" destination="XnY-wU-uh1" id="MSP-HT-aj1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PKj-XG-hZf" userLabel="First Responder" sceneMemberID="firstResponder"/>

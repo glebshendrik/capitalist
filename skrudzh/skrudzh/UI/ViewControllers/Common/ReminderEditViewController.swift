@@ -42,7 +42,8 @@ class ReminderEditViewController : UIViewController, UIMessagePresenterManagerDe
     }
     
     private func save() {
-        view.endEditing(true)
+        view.endEditing(true)        
+        viewModel.prepareForSaving()
         delegate?.didSave(reminderViewModel: viewModel)
         close()
     }
@@ -99,7 +100,7 @@ extension ReminderEditViewController : ReminderEditTableViewControllerDelegate {
     
     func didTapRecurrence() {
         let recurrencePicker = RecurrencePicker(recurrenceRule: viewModel.recurrenceRule)
-        recurrencePicker.language = .russian
+//        recurrencePicker.language = .russian
         recurrencePicker.calendar = Calendar.current
         recurrencePicker.tintColor = UIColor(hexString: "6B93FB") ?? .black
 

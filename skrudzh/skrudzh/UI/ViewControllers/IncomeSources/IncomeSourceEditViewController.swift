@@ -163,7 +163,6 @@ extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelega
     func update(currency: Currency) {
         viewModel.selectedCurrency = currency
         editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
-        editTableController?.reminderButton.setTitle(viewModel.reminderTitle, for: .normal)
     }
         
     private func validateUI() {
@@ -188,7 +187,7 @@ extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelega
 extension IncomeSourceEditViewController : ReminderEditViewControllerDelegate {
     func didSave(reminderViewModel: ReminderViewModel) {
         viewModel.reminderViewModel = reminderViewModel
-        updateUI()
+        updateReminderUI()
     }
 }
 
@@ -251,7 +250,13 @@ extension IncomeSourceEditViewController : IncomeSourceEditInputProtocol {
         editTableController?.incomeSourceNameTextField?.text = viewModel.name
         editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
         editTableController?.changeCurrencyIndicator?.isHidden = !canChangeCurrency
+        updateReminderUI()
         validateUI()
+    }
+    
+    private func updateReminderUI() {
+        editTableController?.reminderButton.setTitle(viewModel.reminderTitle, for: .normal)        
+        editTableController?.reminderLabel.text = viewModel.reminder
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

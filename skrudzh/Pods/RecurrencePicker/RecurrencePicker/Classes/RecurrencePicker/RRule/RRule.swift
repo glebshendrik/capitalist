@@ -32,10 +32,20 @@ public struct RRule {
 
     public static func ruleFromString(_ string: String) -> RecurrenceRule? {
         let string = string.trimmingCharacters(in: .whitespaces)
-        guard let range = string.range(of: "RRULE:"), range.lowerBound == string.startIndex else {
+        
+        let stringComponents = string.components(separatedBy: "\n").compactMap { (rule) -> String? in
+            if rule.isEmpty {
+                return nil
+            }
+            return rule
+        }
+        
+        guard let ruleComponentString = stringComponents.first else { return nil }
+        
+        guard let range = ruleComponentString.range(of: "RRULE:"), range.lowerBound == ruleComponentString.startIndex else {
             return nil
         }
-        let ruleString = String(string.suffix(from: range.upperBound))
+        let ruleString = String(ruleComponentString.suffix(from: range.upperBound))
         let rules = ruleString.components(separatedBy: ";").compactMap { (rule) -> String? in
             if rule.isEmpty {
                 return nil
@@ -178,7 +188,27 @@ public struct RRule {
             return nil
         }
         recurrenceRule.frequency = frequency
-
+        
+        guard let dateStartComponentString = stringComponents.last else {
+            recurrenceRule.startDate = Date()
+            return recurrenceRule
+        }
+        
+        let dateStartComponents = dateStartComponentString.components(separatedBy: ":").compactMap { (rule) -> String? in
+            if rule.isEmpty {
+                return nil
+            }
+            return rule
+        }
+        
+        if let dateStartString = dateStartComponents.last {
+            if let startDate = dateFormatter.date(from: dateStartString) {
+                recurrenceRule.startDate = startDate
+            } else if let startDate = realDate(dateStartString) {
+                recurrenceRule.startDate = startDate
+            }
+        }
+        
         return recurrenceRule
     }
 
@@ -191,8 +221,6 @@ public struct RRule {
         rruleString += "INTERVAL=\(interval);"
 
         rruleString += "WKST=\(rule.firstDayOfWeek.toSymbol());"
-
-        rruleString += "DTSTART=\(dateFormatter.string(from: rule.startDate as Date));"
 
         if let endDate = rule.recurrenceEnd?.endDate {
             rruleString += "UNTIL=\(dateFormatter.string(from: endDate));"
@@ -281,7 +309,9 @@ public struct RRule {
         if String(rruleString.suffix(from: rruleString.index(rruleString.endIndex, offsetBy: -1))) == ";" {
             rruleString.remove(at: rruleString.index(rruleString.endIndex, offsetBy: -1))
         }
-
+        
+        rruleString += "\nDTSTART:\(dateFormatter.string(from: rule.startDate as Date))"
+        
         return rruleString
     }
     

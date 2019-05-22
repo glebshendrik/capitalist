@@ -55,6 +55,24 @@ func recurrencePicker(_ picker: RecurrencePicker, didPickRecurrence recurrenceRu
 }
 ```
 
+####  RRule usage
+
+Original RRule library is here https://github.com/teambition/RRuleSwift
+
+In this Pod it was adopted to use it with https://github.com/seejohnrun/ice_cube on the server side.
+
+Instead of 
+```swift
+let ruleString = "RRULE:FREQ=WEEKLY;INTERVAL=2;WKST=MO;DTSTART=20160413T133011Z;BYDAY=TU,WE,FR"
+```
+Now rrule string looks like this (DTSTART is on the new line and date value is separated by semicolon)
+```swift
+let ruleString = "RRULE:FREQ=WEEKLY;INTERVAL=2;WKST=MO;BYDAY=TU,WE,FR\nDTSTART:20160413T133011Z"
+```
+
+Also Russian language and formatting a rule to text form was changed.
+
+
 ## Minimum Requirement
 iOS 10.0
 
@@ -63,12 +81,13 @@ RecurrencePicker supports 6 languages: English, Russian, Simplified Chinese, Tra
 
 You can also get a localized rule text string like this:
 ```swift
-let ruleString = "RRULE:FREQ=WEEKLY;INTERVAL=2;WKST=MO;DTSTART=20160413T133011Z;BYDAY=TU,WE,FR"
+let ruleString = "RRULE:FREQ=WEEKLY;INTERVAL=2;WKST=MO;BYDAY=TU,WE,FR\nDTSTART:20160413T133011Z"
 let recurrenceRule = RecurrenceRule(rruleString: ruleString)
 let language: RecurrencePickerLanguage = ...
 let recurrenceRuleText = recurrenceRule?.toText(of: language, occurrenceDate: Date())
 print(recurrenceRuleText)
 // Event will occur every 2 weeks on Tuesday, Wednesday and Friday.
+// Каждые 2 недели - вторник, среда и пятница
 // 事件将每2周于星期二、星期三和星期五重复一次。
 // 行程每2週的星期二、星期三和星期五重複一次。
 // 2주마다 화요일, 수요일 및 금요일에 이벤트 반복

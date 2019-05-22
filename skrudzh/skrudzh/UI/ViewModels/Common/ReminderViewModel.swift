@@ -28,6 +28,19 @@ struct ReminderViewModel {
         return recurrenceRule?.toText(occurrenceDate: reminderStartDate ?? Date())
     }
     
+    var reminder: String? {
+        guard isReminderSet else { return nil }
+        var reminderString = ""
+        if let nextOccurrence = recurrenceRule?.occurrences(between: Date(), and: Date().adding(.year, value: 2)).first {
+            let nextOccurrenceString = nextOccurrence.dateTimeString(ofStyle: DateFormatter.Style.medium)
+            reminderString.append("Следующее напоминание: \(nextOccurrenceString). ")
+        }
+        if let recurrenceRuleText = recurrenceRuleText {
+            reminderString.append("Повторение: \(recurrenceRuleText.lowercased())")
+        }
+        return reminderString
+    }
+    
     var isReminderSet: Bool {
         return reminderStartDate != nil 
     }
@@ -46,5 +59,13 @@ struct ReminderViewModel {
         reminderMessage = expenseCategory.reminderMessage
         reminderStartDate = expenseCategory.reminderStartDate
         reminderRecurrenceRule = expenseCategory.reminderRecurrenceRule
+    }
+    
+    mutating func prepareForSaving() {
+        if  let reminderStartDate = reminderStartDate,
+            var recurrenceRule = recurrenceRule {
+            recurrenceRule.startDate = reminderStartDate
+            reminderRecurrenceRule = recurrenceRule.toRRuleString()
+        }
     }
 }

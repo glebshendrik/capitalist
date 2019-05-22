@@ -27,7 +27,7 @@ PODS:
   - PromiseKit/UIKit (6.5.2):
     - PromiseKit/CorePromise
   - RandomColorSwift (1.0.0)
-  - RecurrencePicker (0.1.5)
+  - RecurrencePicker (0.2.3)
   - SideMenu (5.0.2)
   - SkyFloatingLabelTextField (3.6.0)
   - StaticDataTableViewController (2.5.0)
@@ -74,7 +74,7 @@ DEPENDENCIES:
   - PromiseKit (~> 6.5)
   - PromiseKit/Alamofire (~> 6.5)
   - RandomColorSwift
-  - RecurrencePicker
+  - RecurrencePicker (= 0.2.3)
   - SideMenu
   - SkyFloatingLabelTextField
   - StaticDataTableViewController
@@ -138,7 +138,7 @@ SPEC CHECKSUMS:
   MSPeekCollectionViewDelegateImplementation: 9141e80f032a831a5fc7d42b66bd3ba3f8fa3c1c
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   RandomColorSwift: 9f85058b721665d52d239ca166a913e083506444
-  RecurrencePicker: f4c1c27243ab0546f29b3e1b97824c5c9b483c46
+  RecurrencePicker: d58e95cf2652f602f3dc4530d3d838e5603bdfd4
   SideMenu: e5094f0b2e7d9609e100a90ae69025abd994f882
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
   StaticDataTableViewController: 0c5c4a47861446dd3cfd52530ae801ec7662ce26
@@ -150,6 +150,6 @@ SPEC CHECKSUMS:
   SwinjectAutoregistration: 93a908f7543c401b0c315305ac0ae501efdbce89
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
 
-PODFILE CHECKSUM: c5796d9264fba4e2624489a50563743ea0ab0edb
+PODFILE CHECKSUM: d667254fa32c58c50b122ae49bb86c49421e4a69
 
 COCOAPODS: 1.5.3

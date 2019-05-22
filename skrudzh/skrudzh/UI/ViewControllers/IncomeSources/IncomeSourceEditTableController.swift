@@ -20,6 +20,7 @@ class IncomeSourceEditTableController : FloatingFieldsStaticTableViewController 
     @IBOutlet weak var currencyTextField: FloatingTextField!
     @IBOutlet weak var changeCurrencyIndicator: UIImageView!
     @IBOutlet weak var reminderButton: UIButton!
+    @IBOutlet weak var reminderLabel: UILabel!
     
     var delegate: IncomeSourceEditTableControllerDelegate?
     

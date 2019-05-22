@@ -51,6 +51,10 @@ class IncomeSourceEditViewModel {
         return reminderViewModel.isReminderSet ? "Изменить напоминание" : "Установить напоминание"
     }
     
+    var reminder: String? {
+        return reminderViewModel.reminder
+    }
+    
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator

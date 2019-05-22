@@ -15,7 +15,18 @@ public enum RecurrencePickerLanguage {
     case korean
     case japanese
     case russian
-
+    
+    static var preferred: RecurrencePickerLanguage {
+        if let preferredLocalization = Bundle.preferredLocalizations(from: RecurrencePickerLanguage.all.map { $0.identifier }).first {
+            return RecurrencePickerLanguage.all.first(where: { $0.identifier == preferredLocalization }) ?? .english
+        }
+        return .english
+    }
+    
+    static var all: [RecurrencePickerLanguage] {
+        return [.english, .simplifiedChinese, .traditionalChinese, .korean, .japanese, .russian]
+    }
+    
     internal var identifier: String {
         switch self {
         case .english: return "en"
@@ -34,7 +45,7 @@ internal func LocalizedString(_ key: String, comment: String? = nil) -> String {
 
 public struct InternationalControl {
     public static var shared = InternationalControl()
-    public var language: RecurrencePickerLanguage = .english
+    public var language: RecurrencePickerLanguage = RecurrencePickerLanguage.preferred
 
     internal func localizedString(_ key: String, comment: String? = nil) -> String {
         
