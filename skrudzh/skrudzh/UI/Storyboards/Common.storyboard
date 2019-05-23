@@ -655,6 +655,35 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="bzt-SK-cPQ">
+                                        <rect key="frame" x="0.0" y="225" width="375" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bzt-SK-cPQ" id="n9w-h6-Vby">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4w-Af-gnL">
+                                                    <rect key="frame" x="32" y="0.0" width="311" height="65"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
+                                                    <state key="normal" title="Удалить напоминание" image="remove-icon">
+                                                        <color key="titleColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapRemoveButton:" destination="Z80-N1-n3H" eventType="touchUpInside" id="XEK-6C-q9f"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="e4w-Af-gnL" firstAttribute="top" secondItem="n9w-h6-Vby" secondAttribute="top" id="9ci-8R-t87"/>
+                                                <constraint firstAttribute="bottom" secondItem="e4w-Af-gnL" secondAttribute="bottom" id="Hut-xR-UG7"/>
+                                                <constraint firstItem="e4w-Af-gnL" firstAttribute="leading" secondItem="n9w-h6-Vby" secondAttribute="leading" constant="32" id="gUN-UR-Sbk"/>
+                                                <constraint firstAttribute="trailing" secondItem="e4w-Af-gnL" secondAttribute="trailing" constant="32" id="sVt-1P-UKr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -670,6 +699,7 @@
                         <outlet property="reminderDateTextField" destination="a4P-Ua-8fG" id="E8I-fi-VPr"/>
                         <outlet property="reminderMessageTextField" destination="cXK-3H-14y" id="M9T-Hw-p97"/>
                         <outlet property="reminderRecurrenceCell" destination="OcS-dx-6Hc" id="Aas-7E-zj4"/>
+                        <outlet property="removeCell" destination="bzt-SK-cPQ" id="FUc-Rk-ZJi"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VyR-xz-p7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -746,6 +776,7 @@
         <image name="loader-1" width="55" height="31"/>
         <image name="reminder-date-icon" width="19" height="18"/>
         <image name="reminder-recurrence-icon" width="16" height="16"/>
+        <image name="remove-icon" width="17" height="20"/>
         <image name="save-circle-icon" width="24" height="24"/>
         <image name="shadow-circle" width="52" height="52"/>
         <image name="type-icon" width="14" height="14"/>

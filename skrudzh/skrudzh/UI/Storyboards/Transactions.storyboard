@@ -33,35 +33,13 @@
                                     <segue destination="7dy-Ys-YgL" kind="embed" identifier="showEditTableView" id="sFk-mx-J97"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCd-hs-rxN">
-                                <rect key="frame" x="32" y="490" width="311" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="fzv-Ck-DUz"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
-                                <state key="normal" title="Удалить доход" image="remove-icon">
-                                    <color key="titleColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapRemoveButton:" destination="SQP-HC-aPq" eventType="touchUpInside" id="v73-Oa-oh2"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="pW1-Jg-9OP">
-                                <rect key="frame" x="160" y="540" width="55" height="31"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="pW1-Jg-9OP" firstAttribute="top" secondItem="zCd-hs-rxN" secondAttribute="bottom" constant="10" id="CiW-tG-T9A"/>
                             <constraint firstItem="nKI-96-3Ff" firstAttribute="leading" secondItem="1ap-Mc-Gf7" secondAttribute="leading" id="Fnc-XO-tpq"/>
                             <constraint firstItem="nKI-96-3Ff" firstAttribute="bottom" secondItem="1ap-Mc-Gf7" secondAttribute="bottom" id="Fs6-8P-D5T"/>
-                            <constraint firstItem="pW1-Jg-9OP" firstAttribute="centerX" secondItem="9wJ-o7-PiX" secondAttribute="centerX" id="NvP-g6-GKp"/>
-                            <constraint firstItem="1ap-Mc-Gf7" firstAttribute="bottom" secondItem="pW1-Jg-9OP" secondAttribute="bottom" constant="32" id="blp-fh-8Mk"/>
                             <constraint firstItem="1ap-Mc-Gf7" firstAttribute="trailing" secondItem="nKI-96-3Ff" secondAttribute="trailing" id="jXH-xI-K0M"/>
-                            <constraint firstItem="zCd-hs-rxN" firstAttribute="leading" secondItem="1ap-Mc-Gf7" secondAttribute="leading" constant="32" id="m0p-Iq-8jg"/>
                             <constraint firstItem="nKI-96-3Ff" firstAttribute="top" secondItem="1ap-Mc-Gf7" secondAttribute="top" id="mNJ-tC-eHd"/>
-                            <constraint firstItem="1ap-Mc-Gf7" firstAttribute="trailing" secondItem="zCd-hs-rxN" secondAttribute="trailing" constant="32" id="wgn-yu-K5w"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1ap-Mc-Gf7"/>
                     </view>
@@ -81,8 +59,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="loaderImageView" destination="pW1-Jg-9OP" id="p0q-lH-sfg"/>
-                        <outlet property="removeButton" destination="zCd-hs-rxN" id="K6T-Ob-ZOO"/>
                         <outlet property="saveButton" destination="zyK-Ch-lTf" id="Dm2-D7-Ehj"/>
                     </connections>
                 </viewController>
@@ -121,8 +97,26 @@
                         <sections>
                             <tableViewSection id="dew-p4-6WK">
                                 <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="36" id="C5w-zx-fqd">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C5w-zx-fqd" id="ZwK-Iz-EQ5">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Pxs-wI-Crk">
+                                                    <rect key="frame" x="160" y="2.5" width="55" height="31"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Pxs-wI-Crk" firstAttribute="centerX" secondItem="ZwK-Iz-EQ5" secondAttribute="centerX" id="Obq-qY-hWx"/>
+                                                <constraint firstItem="Pxs-wI-Crk" firstAttribute="centerY" secondItem="ZwK-Iz-EQ5" secondAttribute="centerY" id="w8c-va-I8N"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="45" id="XcR-nQ-sWq">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                        <rect key="frame" x="0.0" y="36" width="375" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XcR-nQ-sWq" id="dZr-Ke-xJJ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -225,7 +219,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="45" id="cky-aA-qnG">
-                                        <rect key="frame" x="0.0" y="45" width="375" height="45"/>
+                                        <rect key="frame" x="0.0" y="81" width="375" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cky-aA-qnG" id="dgk-56-YvY">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -287,7 +281,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="45" id="DaV-WY-Rxp">
-                                        <rect key="frame" x="0.0" y="90" width="375" height="45"/>
+                                        <rect key="frame" x="0.0" y="126" width="375" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DaV-WY-Rxp" id="UFl-Av-2i8">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -333,13 +327,13 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="cgw-Xw-bzj">
-                                        <rect key="frame" x="0.0" y="135" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="171" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cgw-Xw-bzj" id="l3K-Px-mCf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Lbe-DJ-bfo" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Lbe-DJ-bfo" customClass="FloatingTextField" customModule="skrudzh" customModuleProvider="target">
                                                     <rect key="frame" x="72" y="10" width="269.5" height="49"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -372,6 +366,11 @@
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="backgroundView" destination="l3K-Px-mCf" id="d8g-K3-6h5"/>
+                                                        <outlet property="delegate" destination="7dy-Ys-YgL" id="g7g-0u-ExT"/>
+                                                        <outlet property="iconContainer" destination="O82-0v-dLL" id="Lvw-v4-m8k"/>
+                                                    </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O82-0v-dLL">
                                                     <rect key="frame" x="16" y="22.5" width="36" height="36"/>
@@ -429,13 +428,13 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="0MX-W9-Laa">
-                                        <rect key="frame" x="0.0" y="210" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="246" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0MX-W9-Laa" id="rgu-ju-QlL">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Wi-Cq-sbI" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Wi-Cq-sbI" customClass="FloatingTextField" customModule="skrudzh" customModuleProvider="target">
                                                     <rect key="frame" x="72" y="10" width="269.5" height="48"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -468,6 +467,11 @@
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="backgroundView" destination="rgu-ju-QlL" id="GqO-9q-iHP"/>
+                                                        <outlet property="delegate" destination="7dy-Ys-YgL" id="jU2-rX-ga5"/>
+                                                        <outlet property="iconContainer" destination="RJP-SX-ueX" id="VUa-gV-Vhb"/>
+                                                    </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJP-SX-ueX">
                                                     <rect key="frame" x="16" y="22.5" width="36" height="36"/>
@@ -525,13 +529,13 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="TdR-Ev-Prf">
-                                        <rect key="frame" x="0.0" y="285" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="321" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TdR-Ev-Prf" id="del-Ir-GVZ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="rek-Hn-sZs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="rek-Hn-sZs" customClass="FloatingTextField" customModule="skrudzh" customModuleProvider="target">
                                                     <rect key="frame" x="72" y="10" width="230" height="48"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -564,6 +568,11 @@
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="backgroundView" destination="del-Ir-GVZ" id="SuO-C2-KMC"/>
+                                                        <outlet property="delegate" destination="7dy-Ys-YgL" id="zC4-F5-n0O"/>
+                                                        <outlet property="iconContainer" destination="McP-q2-bg7" id="mPP-se-tfq"/>
+                                                    </connections>
                                                 </textField>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4T-da-aBW">
                                                     <rect key="frame" x="310" y="26.5" width="51" height="31"/>
@@ -617,7 +626,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="XAQ-5g-Dor">
-                                        <rect key="frame" x="0.0" y="360" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="396" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XAQ-5g-Dor" id="i14-gh-9gu">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -658,7 +667,9 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didChangeAmount:" destination="7dy-Ys-YgL" eventType="editingChanged" id="Egi-pj-kGd"/>
+                                                        <outlet property="backgroundView" destination="i14-gh-9gu" id="h65-uT-IWV"/>
                                                         <outlet property="delegate" destination="7dy-Ys-YgL" id="yht-qr-dZl"/>
+                                                        <outlet property="iconContainer" destination="zs1-d6-haD" id="XbM-p4-e56"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RUB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEa-hx-PWQ">
@@ -712,7 +723,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="QR5-nu-WSp">
-                                        <rect key="frame" x="0.0" y="435" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="471" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QR5-nu-WSp" id="YBx-go-eQt">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -776,7 +787,9 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                     <connections>
                                                                         <action selector="didChangeStartableAmount:" destination="7dy-Ys-YgL" eventType="editingChanged" id="PTg-XX-X2u"/>
+                                                                        <outlet property="backgroundView" destination="YBx-go-eQt" id="YF5-pg-xI8"/>
                                                                         <outlet property="delegate" destination="7dy-Ys-YgL" id="GeQ-5S-MlH"/>
+                                                                        <outlet property="iconContainer" destination="grv-2T-Bcg" id="ZqQ-cj-uka"/>
                                                                     </connections>
                                                                 </textField>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RUB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdR-Fb-BnF">
@@ -862,7 +875,9 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                     <connections>
                                                                         <action selector="didChangeConvertedAmount:" destination="7dy-Ys-YgL" eventType="editingChanged" id="Rxx-at-NAa"/>
+                                                                        <outlet property="backgroundView" destination="YBx-go-eQt" id="ygu-cm-ynF"/>
                                                                         <outlet property="delegate" destination="7dy-Ys-YgL" id="J7U-fy-36l"/>
+                                                                        <outlet property="iconContainer" destination="grv-2T-Bcg" id="KJu-9X-TDk"/>
                                                                     </connections>
                                                                 </textField>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RUB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yK2-rs-0dW">
@@ -947,6 +962,35 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="bgy-nL-77R">
+                                        <rect key="frame" x="0.0" y="546" width="375" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bgy-nL-77R" id="mHb-Xf-b86">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xew-SX-Imp">
+                                                    <rect key="frame" x="32" y="0.0" width="311" height="65"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
+                                                    <state key="normal" title="Удалить" image="remove-icon">
+                                                        <color key="titleColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapRemoveButton:" destination="7dy-Ys-YgL" eventType="touchUpInside" id="xHK-ce-x3X"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Xew-SX-Imp" firstAttribute="leading" secondItem="mHb-Xf-b86" secondAttribute="leading" constant="32" id="7ju-CL-UDb"/>
+                                                <constraint firstItem="Xew-SX-Imp" firstAttribute="top" secondItem="mHb-Xf-b86" secondAttribute="top" id="OhY-Ml-teP"/>
+                                                <constraint firstAttribute="trailing" secondItem="Xew-SX-Imp" secondAttribute="trailing" constant="32" id="rQF-12-1mF"/>
+                                                <constraint firstAttribute="bottom" secondItem="Xew-SX-Imp" secondAttribute="bottom" id="uxh-lI-oXW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -961,24 +1005,19 @@
                         <barButtonItem key="rightBarButtonItem" title="Сохр." id="p7C-97-aZp"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="amountBackground" destination="i14-gh-9gu" id="e5J-cT-g4s"/>
+                        <outlet property="activityIndicatorCell" destination="C5w-zx-fqd" id="4lx-BL-gM8"/>
                         <outlet property="amountCell" destination="XAQ-5g-Dor" id="wXV-Ef-sOd"/>
                         <outlet property="amountCurrencyLabel" destination="jEa-hx-PWQ" id="L4X-Wj-FU1"/>
-                        <outlet property="amountIconContainer" destination="zs1-d6-haD" id="Osp-YX-rN7"/>
                         <outlet property="amountTextField" destination="14F-aM-4hk" id="xaK-vd-LB7"/>
                         <outlet property="borrowedTillButton" destination="xbi-Zb-1pL" id="73Q-hk-JlF"/>
                         <outlet property="calendarButton" destination="elw-9a-obx" id="b0N-1x-f0Z"/>
                         <outlet property="commentButton" destination="Q3u-E3-gyJ" id="obg-m9-xXR"/>
-                        <outlet property="completableBackground" destination="rgu-ju-QlL" id="5r5-LE-7AD"/>
                         <outlet property="completableBalanceLabel" destination="JmE-G5-fJP" id="2oN-nq-yoe"/>
                         <outlet property="completableCell" destination="0MX-W9-Laa" id="VHu-pv-gk7"/>
-                        <outlet property="completableIconContainer" destination="RJP-SX-ueX" id="olW-CX-wmH"/>
                         <outlet property="completableIconImageView" destination="u6q-Tv-WSd" id="ooZ-Ca-xHx"/>
                         <outlet property="completableNameTextField" destination="2Wi-Cq-sbI" id="Wyd-sA-V52"/>
                         <outlet property="debtCell" destination="cky-aA-qnG" id="iHN-Li-tG6"/>
-                        <outlet property="exchangeAmountsBackground" destination="YBx-go-eQt" id="IvG-Qu-jly"/>
                         <outlet property="exchangeAmountsCell" destination="QR5-nu-WSp" id="lkf-Gd-Oa9"/>
-                        <outlet property="exchangeAmountsIconContainer" destination="grv-2T-Bcg" id="e9X-V4-9XV"/>
                         <outlet property="exchangeCompletableAmountBackground" destination="sUX-QU-inA" id="gNW-Io-TZD"/>
                         <outlet property="exchangeCompletableAmountCurrencyLabel" destination="yK2-rs-0dW" id="tQ9-4B-sts"/>
                         <outlet property="exchangeCompletableAmountTextField" destination="2Sz-m1-TPw" id="xP0-oJ-o0V"/>
@@ -988,12 +1027,13 @@
                         <outlet property="exchangesWhiteLine" destination="Upq-Un-ioU" id="b6x-RK-nnD"/>
                         <outlet property="inBalanceCell" destination="TdR-Ev-Prf" id="kAi-1n-5rn"/>
                         <outlet property="inBalanceSwitch" destination="D4T-da-aBW" id="db7-n1-R1l"/>
+                        <outlet property="loaderImageView" destination="Pxs-wI-Crk" id="ZSI-9x-OK9"/>
+                        <outlet property="removeButton" destination="Xew-SX-Imp" id="hYU-CF-Iao"/>
+                        <outlet property="removeCell" destination="bgy-nL-77R" id="ROh-xI-geB"/>
                         <outlet property="returnButton" destination="hUu-XH-3hY" id="Wwd-Mx-Qfn"/>
                         <outlet property="returnCell" destination="DaV-WY-Rxp" id="S11-q9-6vX"/>
-                        <outlet property="startableBackground" destination="l3K-Px-mCf" id="5xB-7p-CNJ"/>
                         <outlet property="startableBalanceLabel" destination="467-YG-ZpJ" id="Bra-1P-Nu2"/>
                         <outlet property="startableCell" destination="cgw-Xw-bzj" id="9ui-Vl-Ryu"/>
-                        <outlet property="startableIconContainer" destination="O82-0v-dLL" id="she-fO-4aA"/>
                         <outlet property="startableIconImageView" destination="dXu-J6-xXS" id="PBN-9g-HUP"/>
                         <outlet property="startableNameTextField" destination="Lbe-DJ-bfo" id="aa7-km-Lrj"/>
                         <outlet property="whomButton" destination="nqo-4R-62o" id="q55-Cv-PCR"/>
@@ -1019,35 +1059,13 @@
                                     <segue destination="7dy-Ys-YgL" kind="embed" identifier="showEditTableView" id="kYm-Nt-r7H"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKo-De-0co">
-                                <rect key="frame" x="32" y="490" width="311" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="ZVI-H8-8T1"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
-                                <state key="normal" title="Удалить трату" image="remove-icon">
-                                    <color key="titleColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapRemoveButton:" destination="PWG-Pm-I2S" eventType="touchUpInside" id="ZOY-67-Bch"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="7kS-7c-ofv">
-                                <rect key="frame" x="160" y="540" width="55" height="31"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mJn-tm-uNw" firstAttribute="bottom" secondItem="vTZ-UI-0UW" secondAttribute="bottom" id="0WA-YV-CLz"/>
-                            <constraint firstItem="vTZ-UI-0UW" firstAttribute="trailing" secondItem="hKo-De-0co" secondAttribute="trailing" constant="32" id="6eL-zY-emA"/>
                             <constraint firstItem="vTZ-UI-0UW" firstAttribute="trailing" secondItem="mJn-tm-uNw" secondAttribute="trailing" id="FkW-5u-DQQ"/>
-                            <constraint firstItem="7kS-7c-ofv" firstAttribute="centerX" secondItem="Lss-Mi-Thb" secondAttribute="centerX" id="GrK-1R-6QB"/>
                             <constraint firstItem="mJn-tm-uNw" firstAttribute="top" secondItem="vTZ-UI-0UW" secondAttribute="top" id="IaL-9C-UiH"/>
-                            <constraint firstItem="vTZ-UI-0UW" firstAttribute="bottom" secondItem="7kS-7c-ofv" secondAttribute="bottom" constant="32" id="SSw-xS-Wt7"/>
                             <constraint firstItem="mJn-tm-uNw" firstAttribute="leading" secondItem="vTZ-UI-0UW" secondAttribute="leading" id="fKh-4g-yhH"/>
-                            <constraint firstItem="7kS-7c-ofv" firstAttribute="top" secondItem="hKo-De-0co" secondAttribute="bottom" constant="10" id="mcJ-Lb-wWt"/>
-                            <constraint firstItem="hKo-De-0co" firstAttribute="leading" secondItem="vTZ-UI-0UW" secondAttribute="leading" constant="32" id="w9f-bi-BrG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vTZ-UI-0UW"/>
                     </view>
@@ -1067,8 +1085,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="loaderImageView" destination="7kS-7c-ofv" id="xh1-TK-TiZ"/>
-                        <outlet property="removeButton" destination="hKo-De-0co" id="Y6e-wi-JdE"/>
                         <outlet property="saveButton" destination="Xbo-75-iQH" id="Lt6-ab-onV"/>
                     </connections>
                 </viewController>
@@ -1109,33 +1125,11 @@
                                     <segue destination="7dy-Ys-YgL" kind="embed" identifier="showEditTableView" id="OAp-8q-YDW"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHT-kw-n6t">
-                                <rect key="frame" x="32" y="490" width="311" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="tc5-Wc-HMF"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
-                                <state key="normal" title="Удалить перевод средств" image="remove-icon">
-                                    <color key="titleColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapRemoveButton:" destination="wZz-xh-nAE" eventType="touchUpInside" id="rTU-u1-VSe"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Rhx-aM-JDS">
-                                <rect key="frame" x="160" y="540" width="55" height="31"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="KHT-kw-n6t" firstAttribute="leading" secondItem="Or6-rR-jiX" secondAttribute="leading" constant="32" id="56Q-JR-ega"/>
-                            <constraint firstItem="Rhx-aM-JDS" firstAttribute="top" secondItem="KHT-kw-n6t" secondAttribute="bottom" constant="10" id="78V-a4-eYe"/>
-                            <constraint firstItem="Or6-rR-jiX" firstAttribute="trailing" secondItem="KHT-kw-n6t" secondAttribute="trailing" constant="32" id="Fmi-0p-Jdi"/>
-                            <constraint firstItem="Rhx-aM-JDS" firstAttribute="centerX" secondItem="b0C-7j-g1e" secondAttribute="centerX" id="Rbc-Fe-Tge"/>
                             <constraint firstItem="Or6-rR-jiX" firstAttribute="trailing" secondItem="t8j-wr-zqd" secondAttribute="trailing" id="Xr2-SV-0p3"/>
                             <constraint firstItem="t8j-wr-zqd" firstAttribute="leading" secondItem="Or6-rR-jiX" secondAttribute="leading" id="YWK-iG-IAm"/>
-                            <constraint firstItem="Or6-rR-jiX" firstAttribute="bottom" secondItem="Rhx-aM-JDS" secondAttribute="bottom" constant="32" id="fb4-tH-Edj"/>
                             <constraint firstItem="t8j-wr-zqd" firstAttribute="bottom" secondItem="Or6-rR-jiX" secondAttribute="bottom" id="lfY-24-c3j"/>
                             <constraint firstItem="t8j-wr-zqd" firstAttribute="top" secondItem="Or6-rR-jiX" secondAttribute="top" id="t1u-Z4-o8B"/>
                         </constraints>
@@ -1157,8 +1151,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="loaderImageView" destination="Rhx-aM-JDS" id="HSE-Jb-fTu"/>
-                        <outlet property="removeButton" destination="KHT-kw-n6t" id="LD6-ar-6lM"/>
                         <outlet property="saveButton" destination="phO-79-HIV" id="dvh-bU-qkp"/>
                     </connections>
                 </viewController>

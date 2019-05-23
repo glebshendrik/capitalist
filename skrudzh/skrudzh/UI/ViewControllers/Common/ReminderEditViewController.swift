@@ -30,7 +30,8 @@ class ReminderEditViewController : UIViewController, UIMessagePresenterManagerDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor        
+        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
+        editTableController?.setRemoveButton(hidden: !viewModel.isReminderSet)
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
@@ -90,6 +91,11 @@ extension ReminderEditViewController {
 }
 
 extension ReminderEditViewController : ReminderEditTableViewControllerDelegate {
+    func didTapRemoveButton() {
+        viewModel.clear()
+        save()
+    }
+    
     func didTapStartDate() {
         let datePickerController = DatePickerViewController()
         datePickerController.set(delegate: self)
@@ -100,7 +106,7 @@ extension ReminderEditViewController : ReminderEditTableViewControllerDelegate {
     
     func didTapRecurrence() {
         let recurrencePicker = RecurrencePicker(recurrenceRule: viewModel.recurrenceRule)
-//        recurrencePicker.language = .russian
+        recurrencePicker.language = .russian
         recurrencePicker.calendar = Calendar.current
         recurrencePicker.tintColor = UIColor(hexString: "6B93FB") ?? .black
 
@@ -113,7 +119,7 @@ extension ReminderEditViewController : ReminderEditTableViewControllerDelegate {
 
 extension ReminderEditViewController : DatePickerViewControllerDelegate {
     func didSelect(date: Date?) {
-        viewModel.reminderStartDate = date
+        viewModel.reminderStartDate = date?.dateBySet(hour: nil, min: nil, secs: 0)
         updateUI()
     }
 }

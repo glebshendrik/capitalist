@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "skrudzh/UI/ViewControllers/Common/FloatingFieldsStaticTableViewController.swift"
-            timestampString = "580280687.941366"
+            timestampString = "580289922.922385"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "hideActivityIndicator(animated:reload:)"
             landmarkType = "7">
          </BreakpointContent>

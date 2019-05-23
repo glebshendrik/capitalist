@@ -11,6 +11,7 @@ import Swinject
 import SideMenu
 import PromiseKit
 import IQKeyboardManager
+import RecurrencePicker
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
@@ -50,6 +51,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         self.launchOptions = launchOptions
         setupKeyboardManager()
         setupAppearance()
+        setupLocale()
         route()
     }
     
@@ -156,6 +158,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         keyboardManager.shouldShowToolbarPlaceholder = false
         keyboardManager.toolbarDoneBarButtonItemText = ""
         keyboardManager.toolbarDoneBarButtonItemImage = UIImage(named: "close-icon")?.withRenderingMode(.alwaysTemplate)
+    }
+    
+    private func setupLocale() {
+        InternationalControl.shared.language = .russian
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

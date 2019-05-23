@@ -11,6 +11,7 @@ import UIKit
 protocol ReminderEditTableViewControllerDelegate {
     func didTapStartDate()
     func didTapRecurrence()
+    func didTapRemoveButton()
 }
 
 class ReminderEditTableViewController : FloatingFieldsStaticTableViewController {
@@ -18,6 +19,7 @@ class ReminderEditTableViewController : FloatingFieldsStaticTableViewController 
     @IBOutlet weak var recurrenceRuleTextField: FloatingTextField!
     @IBOutlet weak var reminderMessageTextField: FloatingTextField!
     
+    @IBOutlet weak var removeCell: UITableViewCell!
     @IBOutlet weak var reminderRecurrenceCell: UITableViewCell!
     @IBOutlet weak var reminderDateCell: UITableViewCell!
     var delegate: ReminderEditTableViewControllerDelegate?
@@ -35,6 +37,14 @@ class ReminderEditTableViewController : FloatingFieldsStaticTableViewController 
         
     @IBAction func didChangeReminderMessage(_ sender: FloatingTextField) {
         sender.updateAppearance()
+    }
+    
+    @IBAction func didTapRemoveButton(_ sender: Any) {
+        delegate?.didTapRemoveButton()
+    }
+    
+    func setRemoveButton(hidden: Bool) {
+        set(cell: removeCell, hidden: hidden, animated: false, reload: true)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

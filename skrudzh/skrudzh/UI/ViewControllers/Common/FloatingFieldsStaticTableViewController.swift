@@ -17,16 +17,15 @@ class FloatingFieldsStaticTableViewController : StaticTableViewController, UITex
         super.viewDidLoad()
         setupUI()
         loaderImageView?.showLoader()
-//        hideActivityIndicator(animated: false, reload: false)
     }
     
     func showActivityIndicator() {
         guard let activityIndicatorCell = activityIndicatorCell else { return }
-        set(cell: activityIndicatorCell, hidden: false)
+        set(cell: activityIndicatorCell, hidden: false, animated: false)
         tableView.isUserInteractionEnabled = false    
     }
     
-    func hideActivityIndicator(animated: Bool = true, reload: Bool = true) {
+    func hideActivityIndicator(animated: Bool = false, reload: Bool = true) {
         guard let activityIndicatorCell = activityIndicatorCell else { return }
         set(cell: activityIndicatorCell, hidden: true, animated: animated, reload: reload)
         tableView.isUserInteractionEnabled = true
@@ -49,8 +48,7 @@ class FloatingFieldsStaticTableViewController : StaticTableViewController, UITex
         deleteAnimation = .bottom
     }
     
-    func updateTable(animated: Bool = true) {
-        
+    func updateTable(animated: Bool = true) {        
         reloadData(animated: animated)
     }
     

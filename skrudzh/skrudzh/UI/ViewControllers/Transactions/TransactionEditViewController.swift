@@ -13,8 +13,6 @@ import SwiftDate
 class TransactionEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var removeButton: UIButton!
-    @IBOutlet weak var loaderImageView: UIImageView!
     
     var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -73,8 +71,8 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
-        setRemoveButton(hidden: viewModel.isNew)
-        setActivityIndicator(hidden: true)
+        editTableController?.setRemoveButton(hidden: viewModel.isNew)
+        editTableController?.hideActivityIndicator()
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
@@ -83,26 +81,6 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     
     @IBAction func didTapCancelButton(_ sender: Any) {
         close { }
-    }
-    
-    @IBAction func didTapRemoveButton(_ sender: Any) {
-        let alertController = UIAlertController(title: viewModel.removeQuestion,
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
-        
-        alertController.addAction(title: "Удалить",
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: { _ in
-                                    self.remove()
-        })
-        
-        alertController.addAction(title: "Отмена",
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: nil)
-        
-        present(alertController, animated: true)
     }
     
     func isFormValid(amount: String?,
@@ -139,7 +117,8 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     
     private func save() {
         view.endEditing(true)
-        setActivityIndicator(hidden: false)
+        
+        editTableController?.showActivityIndicator()
         saveButton.isEnabled = false
         
         firstly {
@@ -151,14 +130,13 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
         }.catch { error in
             self.catchSaveError(error)
         }.finally {
-            self.setActivityIndicator(hidden: true)
+            self.editTableController?.hideActivityIndicator()
             self.saveButton.isEnabled = true
         }
     }
     
     private func remove() {
-        setActivityIndicator(hidden: false)
-        removeButton.isUserInteractionEnabled = false
+        editTableController?.showActivityIndicator()
         
         firstly {
             removePromise()
@@ -170,13 +148,12 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
             self.catchRemoveError(error)
             
         }.finally {
-            self.setActivityIndicator(hidden: true)
-            self.removeButton.isUserInteractionEnabled = true
+            self.editTableController?.hideActivityIndicator()
         }
     }
     
     func loadData() {
-        setActivityIndicator(hidden: false)
+        editTableController?.showActivityIndicator()
         saveButton.isEnabled = false
         
         firstly {
@@ -185,7 +162,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
             self.close { self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке данных",
                                                            theme: .error) }
         }.finally {
-            self.setActivityIndicator(hidden: true)
+            self.editTableController?.hideActivityIndicator()
             self.saveButton.isEnabled = true
             self.updateUI()
             self.needsFirstResponder()
@@ -193,7 +170,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     }
     
     private func loadExchangeRate() {
-        setActivityIndicator(hidden: false)
+        editTableController?.showActivityIndicator()
         saveButton.isEnabled = false
         
         firstly {
@@ -202,7 +179,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
             self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке курса валют",
                                               theme: .error)
         }.finally {
-            self.setActivityIndicator(hidden: true)
+            self.editTableController?.hideActivityIndicator()
             self.saveButton.isEnabled = true
             self.updateUI()
         }
@@ -215,6 +192,26 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
 }
 
 extension TransactionEditViewController : TransactionEditTableControllerDelegate {
+    func didTapRemoveButton() {
+        let alertController = UIAlertController(title: viewModel.removeQuestion,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        
+        alertController.addAction(title: "Удалить",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: { _ in
+                                    self.remove()
+        })
+        
+        alertController.addAction(title: "Отмена",
+                                  style: .cancel,
+                                  isEnabled: true,
+                                  handler: nil)
+        
+        present(alertController, animated: true)
+    }
+    
     func didChangeAmount() {
         editTableController?.exchangeCompletableAmountTextField.placeholder = viewModel.convert(amount: editTableController?.exchangeStartableAmountTextField.text, isForwardConversion: true) ?? "Сумма"
     }
@@ -225,8 +222,8 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     
     private func setupUI() {
         setupNavigationBar()
-        loaderImageView.showLoader()
-        setActivityIndicator(hidden: true)
+        editTableController?.removeButton.setTitle(viewModel.removeTitle, for: .normal)
+        editTableController?.hideActivityIndicator()
     }
         
     private func setupNavigationBar() {
@@ -236,26 +233,6 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
-    }
-    
-    private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        guard animated else {
-            loaderImageView.isHidden = hidden
-            return
-        }
-        UIView.transition(with: loaderImageView, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            self.loaderImageView.isHidden = hidden
-        })
-    }
-    
-    private func setRemoveButton(hidden: Bool, animated: Bool = true) {
-        guard animated else {
-            removeButton.isHidden = hidden
-            return
-        }
-        UIView.transition(with: removeButton, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            self.removeButton.isHidden = hidden
-        })
     }
     
     func updateUI() {
@@ -280,7 +257,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         
         let calendarImage = viewModel.hasGotAtDate ? #imageLiteral(resourceName: "selected-calendar-icon") : #imageLiteral(resourceName: "calendar-icon")
         
-        UIView.transition(with: removeButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
+        UIView.transition(with: view, duration: 0.1, options: .transitionCrossDissolve, animations: {
             self.editTableController?.commentButton.setImage(commentImage.withRenderingMode(.alwaysTemplate), for: .normal)
             self.editTableController?.calendarButton.setImage(calendarImage.withRenderingMode(.alwaysTemplate), for: .normal)
         })

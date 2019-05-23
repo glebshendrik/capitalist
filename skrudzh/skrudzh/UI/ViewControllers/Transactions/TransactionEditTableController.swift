@@ -24,32 +24,25 @@ protocol TransactionEditTableControllerDelegate {
     func didChange(includedInBalance: Bool)
     func didTapStartable()
     func didTapCompletable()
+    func didTapRemoveButton()
 }
 
-class TransactionEditTableController : StaticTableViewController, UITextFieldDelegate {
-    @IBOutlet weak var startableNameTextField: SkyFloatingLabelTextField!
-    @IBOutlet weak var startableBackground: UIView!
-    @IBOutlet weak var startableIconContainer: UIView!
+class TransactionEditTableController : FloatingFieldsStaticTableViewController {
+    @IBOutlet weak var startableNameTextField: FloatingTextField!
     @IBOutlet weak var startableIconImageView: UIImageView!
     @IBOutlet weak var startableBalanceLabel: UILabel!
     @IBOutlet weak var startableCell: UITableViewCell!
     
-    @IBOutlet weak var completableNameTextField: SkyFloatingLabelTextField!
-    @IBOutlet weak var completableBackground: UIView!
-    @IBOutlet weak var completableIconContainer: UIView!
+    @IBOutlet weak var completableNameTextField: FloatingTextField!
     @IBOutlet weak var completableIconImageView: UIImageView!
     @IBOutlet weak var completableBalanceLabel: UILabel!
     @IBOutlet weak var completableCell: UITableViewCell!
     
     @IBOutlet weak var amountCell: UITableViewCell!
     @IBOutlet weak var amountTextField: MoneyTextField!
-    @IBOutlet weak var amountBackground: UIView!
-    @IBOutlet weak var amountIconContainer: UIView!
     @IBOutlet weak var amountCurrencyLabel: UILabel!
     
     @IBOutlet weak var exchangeAmountsCell: UITableViewCell!
-    @IBOutlet weak var exchangeAmountsBackground: UIView!
-    @IBOutlet weak var exchangeAmountsIconContainer: UIView!
     @IBOutlet weak var exchangeStartableAmountTextField: MoneyTextField!
     @IBOutlet weak var exchangeStartableAmountCurrencyLabel: UILabel!
     @IBOutlet weak var exchangeCompletableAmountTextField: MoneyTextField!
@@ -72,22 +65,18 @@ class TransactionEditTableController : StaticTableViewController, UITextFieldDel
     @IBOutlet weak var inBalanceCell: UITableViewCell!
     @IBOutlet weak var inBalanceSwitch: UISwitch!
     
+    @IBOutlet weak var removeCell: UITableViewCell!
+    @IBOutlet weak var removeButton: UIButton!
+    
     var delegate: TransactionEditTableControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        insertAnimation = .top
-        deleteAnimation = .bottom
         update(textField: startableNameTextField)
         update(textField: completableNameTextField)
         update(textField: amountTextField)
         update(textField: exchangeStartableAmountTextField)
         update(textField: exchangeCompletableAmountTextField)
-        startableNameTextField.titleFormatter = { $0 }
-        completableNameTextField.titleFormatter = { $0 }
-        amountTextField.titleFormatter = { $0 }
-        exchangeStartableAmountTextField.titleFormatter = { $0 }
-        exchangeCompletableAmountTextField.titleFormatter = { $0 }
         delegate?.validationNeeded()
     }
     
@@ -147,161 +136,58 @@ class TransactionEditTableController : StaticTableViewController, UITextFieldDel
         delegate?.didChange(includedInBalance: inBalanceSwitch.isOn)
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let floatingLabelTextField = textField as? SkyFloatingLabelTextField {
+    @IBAction func didTapRemoveButton(_ sender: UIButton) {
+        delegate?.didTapRemoveButton()
+    }
+    
+    override func textFieldDidBeginEditing(_ textField: UITextField) {
+        if let floatingLabelTextField = textField as? FloatingTextField {
             update(textField: floatingLabelTextField)
             exchangeStartableAmountBackground.isHidden = floatingLabelTextField != exchangeStartableAmountTextField
             exchangeCompletableAmountBackground.isHidden = floatingLabelTextField != exchangeCompletableAmountTextField
         }
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let floatingLabelTextField = textField as? SkyFloatingLabelTextField {
+    override func textFieldDidEndEditing(_ textField: UITextField) {
+        if let floatingLabelTextField = textField as? FloatingTextField {
             update(textField: floatingLabelTextField)
             exchangeStartableAmountBackground.isHidden = true
             exchangeCompletableAmountBackground.isHidden = true
         }
     }
     
-    private func update(textField: SkyFloatingLabelTextField) {
-        
-        let focused = textField.isFirstResponder
-        let present = textField.text != nil && !textField.text!.trimmed.isEmpty
-        
-        let textFieldOptions = self.textFieldOptions(focused: focused, present: present)
-        
-        fieldBackground(by: textField)?.backgroundColor = textFieldOptions.background
-        textField.textColor = textFieldOptions.text
-        textField.placeholderFont = textFieldOptions.placeholderFont
-        textField.placeholderColor = textFieldOptions.placeholder
-        textField.titleColor = textFieldOptions.placeholder
-        textField.selectedTitleColor = textFieldOptions.placeholder
+    private func update(textField: FloatingTextField) {        
+        textField.updateAppearance()
+        updateAmountFields()
+    }
 
-        if exchangeCompletableAmountTextField.isFirstResponder || exchangeStartableAmountTextField.isFirstResponder {
-            exchangeStartableAmountTextField.textColor = .white
-            exchangeStartableAmountTextField.placeholderColor = .white
-            exchangeStartableAmountTextField.titleColor = .white
-            exchangeStartableAmountTextField.selectedTitleColor = .white
-            
-            exchangeCompletableAmountTextField.textColor = .white
-            exchangeCompletableAmountTextField.placeholderColor = .white
-            exchangeCompletableAmountTextField.titleColor = .clear
-            exchangeCompletableAmountTextField.selectedTitleColor = .clear
-            exchangesWhiteLine.isHidden = false
-        } else {
-            let dark = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
-            exchangeStartableAmountTextField.textColor = dark
-            exchangeStartableAmountTextField.placeholderColor = dark
-            exchangeStartableAmountTextField.titleColor = dark
-            exchangeStartableAmountTextField.selectedTitleColor = dark
-            
-            exchangeCompletableAmountTextField.textColor = dark
-            exchangeCompletableAmountTextField.placeholderColor = dark
-            exchangeCompletableAmountTextField.titleColor = .clear
-            exchangeCompletableAmountTextField.selectedTitleColor = .clear
-            exchangesWhiteLine.isHidden = true
-        }
-        
-        iconContainer(by: textField)?.backgroundColor = textFieldOptions.iconBackground
-    }
-    
-    private func iconContainer(by textField: UITextField) -> UIView? {
-        switch textField {
-        case startableNameTextField:
-            return startableIconContainer
-        case completableNameTextField:
-            return completableIconContainer
-        case amountTextField:
-            return amountIconContainer
-        case exchangeStartableAmountTextField:
-            return exchangeAmountsIconContainer
-        case exchangeCompletableAmountTextField:
-            return exchangeAmountsIconContainer
-        default:
-            return nil
-        }
-    }
-    
-    private func fieldBackground(by textField: UITextField) -> UIView? {
-        switch textField {
-        case startableNameTextField:
-            return startableBackground
-        case completableNameTextField:
-            return completableBackground
-        case amountTextField:
-            return amountBackground
-        case exchangeStartableAmountTextField:
-            return exchangeAmountsBackground
-        case exchangeCompletableAmountTextField:
-            return exchangeAmountsBackground
-        default:
-            return nil
-        }
-    }
-    
-    private func textFieldOptions(focused: Bool, present: Bool) -> (background: UIColor, text: UIColor, placeholder: UIColor, placeholderFont: UIFont?, iconBackground: UIColor) {
-        
-        let activeBackgroundColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
-        let inactiveBackgroundColor = UIColor(red: 0.96, green: 0.97, blue: 1, alpha: 1)
-        
-        let darkPlaceholderColor = UIColor(red: 0.26, green: 0.33, blue: 0.52, alpha: 1)
-        let lightPlaceholderColor = UIColor.white
-        
-        let inavtiveTextColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
-        let activeTextColor = UIColor.white
-        
-        let bigPlaceholderFont = UIFont(name: "Rubik-Regular", size: 16)
-        let smallPlaceholderFont = UIFont(name: "Rubik-Regular", size: 10)
-        
-        let activeIconBackground = UIColor.white
-        let inactiveIconBackground = UIColor(red: 0.9, green: 0.91, blue: 0.96, alpha: 1)
-        
-        switch (focused, present) {
-        case (true, true):
-            return (activeBackgroundColor, activeTextColor, darkPlaceholderColor, smallPlaceholderFont, activeIconBackground)
-        case (true, false):
-            return (activeBackgroundColor, activeTextColor, lightPlaceholderColor, bigPlaceholderFont, activeIconBackground)
-        case (false, true):
-            return (inactiveBackgroundColor, inavtiveTextColor, inavtiveTextColor, smallPlaceholderFont, inactiveIconBackground)
-        case (false, false):
-            return (inactiveBackgroundColor, inavtiveTextColor, inavtiveTextColor, bigPlaceholderFont, inactiveIconBackground)
-        }
-    }
-    
     func update(needsExchange: Bool) {
         setAmountCell(hidden: needsExchange)
         setExchangeAmountsCell(hidden: !needsExchange)
     }
     
-    func setAmountCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        set(amountCell, hidden: hidden, animated: animated, reload: reload)
+    func setAmountCell(hidden: Bool, animated: Bool = false, reload: Bool = true) {
+        set(cell: amountCell, hidden: hidden, animated: animated, reload: reload)
     }
     
-    func setExchangeAmountsCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        set(exchangeAmountsCell, hidden: hidden, animated: animated, reload: reload)
+    func setExchangeAmountsCell(hidden: Bool, animated: Bool = false, reload: Bool = true) {
+        set(cell: exchangeAmountsCell, hidden: hidden, animated: animated, reload: reload)
     }
     
-    func setDebtCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        set(debtCell, hidden: hidden, animated: animated, reload: reload)
+    func setDebtCell(hidden: Bool, animated: Bool = false, reload: Bool = true) {
+        set(cell: debtCell, hidden: hidden, animated: animated, reload: reload)
     }
     
-    func setReturnCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        set(returnCell, hidden: hidden, animated: animated, reload: reload)
+    func setReturnCell(hidden: Bool, animated: Bool = false, reload: Bool = true) {
+        set(cell: returnCell, hidden: hidden, animated: animated, reload: reload)
     }
     
-    func setInBalanceCell(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        set(inBalanceCell, hidden: hidden, animated: animated, reload: reload)
+    func setInBalanceCell(hidden: Bool, animated: Bool = false, reload: Bool = true) {
+        set(cell: inBalanceCell, hidden: hidden, animated: animated, reload: reload)
     }
     
-    func updateTable(animated: Bool = true) {
-        reloadData(animated: animated)
-    }
-    
-    private func set(_ cell: UITableViewCell, hidden: Bool, animated: Bool = true, reload: Bool = true) {        
-        set(cells: cell, hidden: hidden)
-        if reload {
-            updateTable(animated: animated)
-        }
+    func setRemoveButton(hidden: Bool) {
+        set(cell: removeCell, hidden: hidden, animated: false, reload: true)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -314,5 +200,51 @@ class TransactionEditTableController : StaticTableViewController, UITextFieldDel
         if cell == completableCell {
             delegate?.didTapCompletable()
         }
+    }
+}
+
+extension TransactionEditTableController {
+    typealias FieldAppearance = (text: UIColor, placeholder: UIColor, title: UIColor, selectedTitle: UIColor)
+    
+    private func amountFieldsOptions(isFirstResponders: Bool) -> (startableFieldAppearance: FieldAppearance, completableFieldAppearance: FieldAppearance, whiteLineHidden: Bool) {
+        
+        let dark = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
+        
+        return isFirstResponders
+            ? (startableFieldAppearance: (text: .white,
+                                          placeholder: .white,
+                                          title: .white,
+                                          selectedTitle: .white),
+               completableFieldAppearance: (text: .white,
+                                            placeholder: .white,
+                                            title: .clear,
+                                            selectedTitle: .clear),
+               whiteLineHidden: false)
+            : (startableFieldAppearance: (text: dark,
+                                          placeholder: dark,
+                                          title: dark,
+                                          selectedTitle: dark),
+               completableFieldAppearance: (text: dark,
+                                            placeholder: dark,
+                                            title: .clear,
+                                            selectedTitle: .clear),
+               whiteLineHidden: true)
+    }
+    
+    private func updateAmountFields() {
+        let isFirstResponders = exchangeCompletableAmountTextField.isFirstResponder || exchangeStartableAmountTextField.isFirstResponder
+        
+        let options = amountFieldsOptions(isFirstResponders: isFirstResponders)
+        
+        exchangeStartableAmountTextField.textColor = options.startableFieldAppearance.text
+        exchangeStartableAmountTextField.placeholderColor = options.startableFieldAppearance.placeholder
+        exchangeStartableAmountTextField.titleColor = options.startableFieldAppearance.title
+        exchangeStartableAmountTextField.selectedTitleColor = options.startableFieldAppearance.selectedTitle
+        
+        exchangeCompletableAmountTextField.textColor = options.completableFieldAppearance.text
+        exchangeCompletableAmountTextField.placeholderColor = options.completableFieldAppearance.placeholder
+        exchangeCompletableAmountTextField.titleColor = options.completableFieldAppearance.title
+        exchangeCompletableAmountTextField.selectedTitleColor = options.startableFieldAppearance.selectedTitle
+        exchangesWhiteLine.isHidden = options.whiteLineHidden
     }
 }
