@@ -23,8 +23,6 @@ protocol IncomeSourceEditInputProtocol {
 class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var removeButton: UIButton!
-    @IBOutlet weak var loaderImageView: UIImageView!
     
     var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
 
@@ -47,8 +45,8 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
-        setRemoveButton(hidden: viewModel.isNew)
+        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor        
+        editTableController?.setRemoveButton(hidden: viewModel.isNew)
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
@@ -59,36 +57,9 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
         close()
     }
     
-    @IBAction func didTapRemoveButton(_ sender: Any) {
-        let alertController = UIAlertController(title: "Удалить источник доходов?",
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        alertController.addAction(title: "Удалить",
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: { _ in
-                                    self.remove(deleteTransactions: false)
-                                })
-        
-        alertController.addAction(title: "Удалить вместе с транзакциями",
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: { _ in
-                                    self.remove(deleteTransactions: true)
-        })
-        
-        alertController.addAction(title: "Отмена",
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: nil)
-        
-        present(alertController, animated: true)
-    }
-    
     private func save() {
         view.endEditing(true)
-        setActivityIndicator(hidden: false)
+        editTableController?.showActivityIndicator()
         saveButton.isEnabled = false
         
         firstly {
@@ -114,14 +85,13 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
                                                   theme: .error)
             }
         }.finally {
-            self.setActivityIndicator(hidden: true)
+            self.editTableController?.hideActivityIndicator()
             self.saveButton.isEnabled = true
         }
     }
     
     private func remove(deleteTransactions: Bool) {
-        setActivityIndicator(hidden: false)
-        removeButton.isUserInteractionEnabled = false
+        editTableController?.showActivityIndicator()
         
         firstly {
             viewModel.removeIncomeSource(deleteTransactions: deleteTransactions)
@@ -132,8 +102,7 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
             self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении источника доходов",
                                               theme: .error)
         }.finally {
-            self.setActivityIndicator(hidden: true)
-            self.removeButton.isUserInteractionEnabled = true
+            self.editTableController?.hideActivityIndicator()
         }
     }
     
@@ -143,6 +112,33 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
 }
 
 extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelegate {
+    func didTapRemoveButton() {
+        let alertController = UIAlertController(title: "Удалить источник доходов?",
+                                                message: nil,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(title: "Удалить",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: { _ in
+                                    self.remove(deleteTransactions: false)
+        })
+        
+        alertController.addAction(title: "Удалить вместе с транзакциями",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: { _ in
+                                    self.remove(deleteTransactions: true)
+        })
+        
+        alertController.addAction(title: "Отмена",
+                                  style: .cancel,
+                                  isEnabled: true,
+                                  handler: nil)
+        
+        present(alertController, animated: true)
+    }
+    
    
     var canChangeCurrency: Bool {
         return viewModel.isNew
@@ -271,24 +267,23 @@ extension IncomeSourceEditViewController : IncomeSourceEditInputProtocol {
 extension IncomeSourceEditViewController {
     private func setupUI() {
         setupNavigationBar()
-        loaderImageView.showLoader()
         editTableController?.tableView.allowsSelection = canChangeCurrency
         guard viewModel.isNew else {
-            setActivityIndicator(hidden: true)
+            editTableController?.hideActivityIndicator()
             return
         }
         loadDefaultCurrency()
     }
     
     private func loadDefaultCurrency() {
-        setActivityIndicator(hidden: false)
+        editTableController?.showActivityIndicator()
         saveButton.isEnabled = false
         
         _ = firstly {            
                 viewModel.loadDefaultCurrency()
             }.ensure {
                 self.updateUI()
-                self.setActivityIndicator(hidden: true)
+                self.editTableController?.hideActivityIndicator()
                 self.saveButton.isEnabled = true
             }
     }
@@ -300,25 +295,5 @@ extension IncomeSourceEditViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.title = viewModel.isNew ? "Новый источник доходов" : "Источник доходов"
-    }
-    
-    private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        guard animated else {
-            loaderImageView.isHidden = hidden
-            return
-        }
-        UIView.transition(with: loaderImageView, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            self.loaderImageView.isHidden = hidden
-        })
-    }
-    
-    private func setRemoveButton(hidden: Bool, animated: Bool = true) {
-        guard animated else {
-            removeButton.isHidden = hidden
-            return
-        }
-        UIView.transition(with: removeButton, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            self.removeButton.isHidden = hidden
-        })
     }
 }

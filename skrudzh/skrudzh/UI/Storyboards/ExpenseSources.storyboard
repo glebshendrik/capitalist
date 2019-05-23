@@ -30,35 +30,13 @@
                                     <segue destination="YzM-aR-OkL" kind="embed" identifier="showEditTableView" id="uK6-Mk-gq2"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAc-BC-dhT">
-                                <rect key="frame" x="32" y="490" width="311" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="3sw-eG-qHj"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
-                                <state key="normal" title="Удалить кошелек" image="remove-icon">
-                                    <color key="titleColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapRemoveButton:" destination="8fD-85-d78" eventType="touchUpInside" id="I55-UO-fhd"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="oco-cH-2oZ">
-                                <rect key="frame" x="160" y="540" width="55" height="31"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="oco-cH-2oZ" firstAttribute="top" secondItem="vAc-BC-dhT" secondAttribute="bottom" constant="10" id="7WH-4n-gbk"/>
                             <constraint firstItem="Vde-Ty-o4B" firstAttribute="bottom" secondItem="5dF-w9-bRB" secondAttribute="bottom" id="9fW-uK-ZRX"/>
-                            <constraint firstItem="oco-cH-2oZ" firstAttribute="centerX" secondItem="xYC-tQ-Qch" secondAttribute="centerX" id="Jtv-Fk-Lsl"/>
                             <constraint firstItem="Vde-Ty-o4B" firstAttribute="top" secondItem="5dF-w9-bRB" secondAttribute="top" id="Y32-ot-InA"/>
                             <constraint firstItem="Vde-Ty-o4B" firstAttribute="leading" secondItem="5dF-w9-bRB" secondAttribute="leading" id="YTu-Xw-HcV"/>
-                            <constraint firstItem="vAc-BC-dhT" firstAttribute="leading" secondItem="5dF-w9-bRB" secondAttribute="leading" constant="32" id="dr0-ez-Dhd"/>
-                            <constraint firstItem="5dF-w9-bRB" firstAttribute="trailing" secondItem="vAc-BC-dhT" secondAttribute="trailing" constant="32" id="jg3-2c-MZG"/>
                             <constraint firstItem="5dF-w9-bRB" firstAttribute="trailing" secondItem="Vde-Ty-o4B" secondAttribute="trailing" id="oxe-ov-LRx"/>
-                            <constraint firstItem="5dF-w9-bRB" firstAttribute="bottom" secondItem="oco-cH-2oZ" secondAttribute="bottom" constant="32" id="wQX-Ug-xJN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5dF-w9-bRB"/>
                     </view>
@@ -78,8 +56,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="loaderImageView" destination="oco-cH-2oZ" id="0uf-ui-sU4"/>
-                        <outlet property="removeButton" destination="vAc-BC-dhT" id="6vg-6e-z0P"/>
                         <outlet property="saveButton" destination="RFM-aT-1oi" id="PM9-co-wbn"/>
                     </connections>
                 </viewController>
@@ -283,8 +259,26 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="36" id="grg-Lv-Gox">
+                                        <rect key="frame" x="0.0" y="58" width="375" height="36"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="grg-Lv-Gox" id="7i4-DM-SwD">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="JgI-tt-6th">
+                                                    <rect key="frame" x="160" y="2.5" width="55" height="31"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JgI-tt-6th" firstAttribute="centerX" secondItem="7i4-DM-SwD" secondAttribute="centerX" id="6OU-fG-L21"/>
+                                                <constraint firstItem="JgI-tt-6th" firstAttribute="centerY" secondItem="7i4-DM-SwD" secondAttribute="centerY" id="xhO-g9-2HP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="119" id="avB-j5-ui3">
-                                        <rect key="frame" x="0.0" y="58" width="375" height="119"/>
+                                        <rect key="frame" x="0.0" y="94" width="375" height="119"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="avB-j5-ui3" id="NuC-kw-XGp">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
@@ -385,13 +379,13 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="I7q-L7-ySL">
-                                        <rect key="frame" x="0.0" y="177" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="213" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I7q-L7-ySL" id="oig-5s-V1c">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ez5-J8-Stf" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ez5-J8-Stf" customClass="FloatingTextField" customModule="skrudzh" customModuleProvider="target">
                                                     <rect key="frame" x="72" y="10" width="271" height="49"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -426,7 +420,9 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didChangeName:" destination="YzM-aR-OkL" eventType="editingChanged" id="FPg-7L-YvC"/>
+                                                        <outlet property="backgroundView" destination="oig-5s-V1c" id="h47-Xr-ABc"/>
                                                         <outlet property="delegate" destination="YzM-aR-OkL" id="jEW-Q8-HxU"/>
+                                                        <outlet property="iconContainer" destination="GDV-Vw-lnc" id="A7F-7J-A9g"/>
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDV-Vw-lnc">
@@ -472,13 +468,13 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="TuD-Ts-1S2">
-                                        <rect key="frame" x="0.0" y="252" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="288" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TuD-Ts-1S2" id="jAd-sW-ZI3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="aBj-GQ-FLp" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="aBj-GQ-FLp" customClass="FloatingTextField" customModule="skrudzh" customModuleProvider="target">
                                                     <rect key="frame" x="72" y="10" width="271" height="48"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -511,6 +507,11 @@
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="backgroundView" destination="jAd-sW-ZI3" id="h0d-O1-VGa"/>
+                                                        <outlet property="delegate" destination="YzM-aR-OkL" id="g4B-BG-3Of"/>
+                                                        <outlet property="iconContainer" destination="R8y-3l-CF7" id="EE0-Iz-3Ho"/>
+                                                    </connections>
                                                 </textField>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="little-right-arrow-icon" translatesAutoresizingMaskIntoConstraints="NO" id="kru-jT-JHE">
                                                     <rect key="frame" x="348" y="37" width="4" height="7"/>
@@ -563,7 +564,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="WOH-1k-92o">
-                                        <rect key="frame" x="0.0" y="327" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="363" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WOH-1k-92o" id="E0T-2P-ra1">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -604,7 +605,9 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didChangeAmount:" destination="YzM-aR-OkL" eventType="editingChanged" id="CoJ-9z-KdU"/>
+                                                        <outlet property="backgroundView" destination="E0T-2P-ra1" id="Q5C-dW-aDV"/>
                                                         <outlet property="delegate" destination="YzM-aR-OkL" id="dtF-OR-BJP"/>
+                                                        <outlet property="iconContainer" destination="Q7L-11-mvt" id="AN7-wr-jWO"/>
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7L-11-mvt">
@@ -650,7 +653,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="5VG-O8-JPI">
-                                        <rect key="frame" x="0.0" y="402" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="438" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5VG-O8-JPI" id="JYu-TM-Bxo">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -691,7 +694,9 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didChangeGoalAmount:" destination="YzM-aR-OkL" eventType="editingChanged" id="ANY-g6-XpK"/>
+                                                        <outlet property="backgroundView" destination="JYu-TM-Bxo" id="GJA-Jp-asL"/>
                                                         <outlet property="delegate" destination="YzM-aR-OkL" id="VF2-LC-sTj"/>
+                                                        <outlet property="iconContainer" destination="jFe-FN-Ffx" id="AAO-Ih-0OX"/>
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jFe-FN-Ffx">
@@ -736,6 +741,35 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="4R1-vU-TYo">
+                                        <rect key="frame" x="0.0" y="513" width="375" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4R1-vU-TYo" id="6j7-1Q-BFU">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-fH-lkW">
+                                                    <rect key="frame" x="32" y="0.0" width="311" height="65"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
+                                                    <state key="normal" title="Удалить кошелек" image="remove-icon">
+                                                        <color key="titleColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapRemoveButton:" destination="YzM-aR-OkL" eventType="touchUpInside" id="NmA-hv-Fxf"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="bi9-fH-lkW" secondAttribute="trailing" constant="32" id="0p2-za-5UR"/>
+                                                <constraint firstAttribute="bottom" secondItem="bi9-fH-lkW" secondAttribute="bottom" id="Ha1-Hq-NRV"/>
+                                                <constraint firstItem="bi9-fH-lkW" firstAttribute="top" secondItem="6j7-1Q-BFU" secondAttribute="top" id="IWj-Px-I0C"/>
+                                                <constraint firstItem="bi9-fH-lkW" firstAttribute="leading" secondItem="6j7-1Q-BFU" secondAttribute="leading" constant="32" id="hzM-cN-HwX"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -750,8 +784,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Сохр." id="Mo5-wn-wfi"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="amountBackground" destination="E0T-2P-ra1" id="roO-JL-hzS"/>
-                        <outlet property="amountIconContainer" destination="Q7L-11-mvt" id="nqz-dg-QUl"/>
+                        <outlet property="activityIndicatorCell" destination="grg-Lv-Gox" id="WzZ-Y9-dQZ"/>
                         <outlet property="changeCurrencyIndicator" destination="kru-jT-JHE" id="1Vd-8y-HCy"/>
                         <outlet property="currencyTextField" destination="aBj-GQ-FLp" id="xrQ-U7-alN"/>
                         <outlet property="debtExpenseSourceTabSelectionIndicator" destination="Plw-HP-iJ4" id="9ih-TD-PjY"/>
@@ -761,14 +794,12 @@
                         <outlet property="expenseSourceNameTextField" destination="ez5-J8-Stf" id="aLa-G7-nMk"/>
                         <outlet property="generalExpenseSourceTabSelectionIndicator" destination="vQj-WA-2vw" id="VuD-5J-zA3"/>
                         <outlet property="generalExpenseSourceTabTitleLabel" destination="kJ5-4o-dvi" id="f2q-VH-tLe"/>
-                        <outlet property="goalAmountBackground" destination="JYu-TM-Bxo" id="3sA-n7-efq"/>
                         <outlet property="goalAmountCell" destination="5VG-O8-JPI" id="hm2-Ir-Ffq"/>
-                        <outlet property="goalAmountIconContainer" destination="jFe-FN-Ffx" id="uK7-98-QbT"/>
                         <outlet property="goalExpenseSourceTabSelectionIndicator" destination="yQe-pF-wgF" id="CXy-Ko-MiH"/>
                         <outlet property="goalExpenseSourceTabTitleLabel" destination="8Nq-XM-Mf4" id="Wv7-2O-4ud"/>
                         <outlet property="iconImageView" destination="2jt-y6-Ut0" id="uy9-lg-REI"/>
-                        <outlet property="nameBackground" destination="oig-5s-V1c" id="RvJ-N5-DHV"/>
-                        <outlet property="nameIconContainer" destination="GDV-Vw-lnc" id="12b-39-PJU"/>
+                        <outlet property="loaderImageView" destination="JgI-tt-6th" id="dfA-PB-AxV"/>
+                        <outlet property="removeCell" destination="4R1-vU-TYo" id="Fqu-1U-Nwn"/>
                         <outlet property="typeSwitchCell" destination="XIN-oP-HUz" id="HkR-OF-bYL"/>
                     </connections>
                 </tableViewController>

@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import SkyFloatingLabelTextField
-import StaticTableViewController
 
 protocol ExpenseSourceEditTableControllerDelegate {
     var accountType: AccountType { get }
@@ -18,9 +16,10 @@ protocol ExpenseSourceEditTableControllerDelegate {
     func didSelectIcon(icon: Icon)
     func didSwitch(accountType: AccountType)
     func didSelectCurrency(currency: Currency)
+    func didTapRemoveButton()
 }
 
-class ExpenseSourceEditTableController : StaticTableViewController, UITextFieldDelegate {
+class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController {
     @IBOutlet weak var generalExpenseSourceTabTitleLabel: UILabel!
     @IBOutlet weak var generalExpenseSourceTabSelectionIndicator: UIView!
     
@@ -30,25 +29,20 @@ class ExpenseSourceEditTableController : StaticTableViewController, UITextFieldD
     @IBOutlet weak var debtExpenseSourceTabTitleLabel: UILabel!
     @IBOutlet weak var debtExpenseSourceTabSelectionIndicator: UIView!
     
-    @IBOutlet weak var expenseSourceNameTextField: SkyFloatingLabelTextField!
-    @IBOutlet weak var nameBackground: UIView!
-    @IBOutlet weak var nameIconContainer: UIView!
+    @IBOutlet weak var expenseSourceNameTextField: FloatingTextField!
     
-    @IBOutlet weak var currencyTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var currencyTextField: FloatingTextField!
     @IBOutlet weak var changeCurrencyIndicator: UIImageView!
     
     @IBOutlet weak var expenseSourceAmountTextField: MoneyTextField!
-    @IBOutlet weak var amountBackground: UIView!
-    @IBOutlet weak var amountIconContainer: UIView!
     
     @IBOutlet weak var expenseSourceGoalAmountTextField: MoneyTextField!
-    @IBOutlet weak var goalAmountBackground: UIView!
-    @IBOutlet weak var goalAmountIconContainer: UIView!
-        
+    
     @IBOutlet weak var iconImageView: UIImageView!
     
     @IBOutlet weak var typeSwitchCell: UITableViewCell!
     @IBOutlet weak var goalAmountCell: UITableViewCell!
+    @IBOutlet weak var removeCell: UITableViewCell!
     
     var delegate: ExpenseSourceEditTableControllerDelegate?
     
@@ -62,16 +56,10 @@ class ExpenseSourceEditTableController : StaticTableViewController, UITextFieldD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        insertAnimation = .top
-        deleteAnimation = .bottom
-        update(textField: expenseSourceNameTextField)
-        update(textField: expenseSourceAmountTextField)
-        update(textField: expenseSourceGoalAmountTextField)
-        update(textField: currencyTextField)
-        expenseSourceNameTextField.titleFormatter = { $0 }
-        expenseSourceAmountTextField.titleFormatter = { $0 }
-        expenseSourceGoalAmountTextField.titleFormatter = { $0 }
-        currencyTextField.titleFormatter = { $0 }
+        expenseSourceNameTextField.updateAppearance()
+        currencyTextField.updateAppearance()
+        expenseSourceAmountTextField.updateAppearance()
+        expenseSourceGoalAmountTextField.updateAppearance()
         delegate?.validationNeeded()
     }
     
@@ -114,34 +102,33 @@ class ExpenseSourceEditTableController : StaticTableViewController, UITextFieldD
         reloadData(animated: animated)
     }
     
-    func setTypeSwitch(hidden: Bool, animated: Bool = true, reload: Bool = false) {
+    func setTypeSwitch(hidden: Bool, animated: Bool = true, reload: Bool = true) {
         set(cells: typeSwitchCell, hidden: hidden)
         if reload { updateUI(animated: animated) }
     }
     
-    func setGoalAmount(hidden: Bool, animated: Bool = true, reload: Bool = false) {
+    func setGoalAmount(hidden: Bool, animated: Bool = true, reload: Bool = true) {
         set(cells: goalAmountCell, hidden: hidden)
         if reload { updateUI(animated: animated) }
     }
         
-    @IBAction func didChangeName(_ sender: SkyFloatingLabelTextField) {
-        update(textField: sender)
+    @IBAction func didChangeName(_ sender: FloatingTextField) {
+        sender.updateAppearance()
         delegate?.validationNeeded()
     }
     
     @IBAction func didChangeAmount(_ sender: MoneyTextField) {
-        update(textField: sender)
+        sender.updateAppearance()
         delegate?.validationNeeded()
     }
     
     @IBAction func didChangeGoalAmount(_ sender: MoneyTextField) {
-        update(textField: sender)
+        sender.updateAppearance()
         delegate?.validationNeeded()
     }
     
     @IBAction func didTapGeneralExpenseSource(_ sender: Any) {
         delegate?.didSwitch(accountType: .usual)
-        
     }
     
     @IBAction func didTapGoalExpenseSource(_ sender: Any) {
@@ -152,74 +139,12 @@ class ExpenseSourceEditTableController : StaticTableViewController, UITextFieldD
         delegate?.didSwitch(accountType: .debt)
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let floatingLabelTextField = textField as? SkyFloatingLabelTextField {
-            update(textField: floatingLabelTextField)
-        }
+    @IBAction func didTapRemoveButton(_ sender: UIButton) {
+        delegate?.didTapRemoveButton()
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let floatingLabelTextField = textField as? SkyFloatingLabelTextField {
-            update(textField: floatingLabelTextField)
-        }
-    }
-    
-    private func update(textField: SkyFloatingLabelTextField) {
-        
-        let focused = textField.isFirstResponder
-        let present = textField.text != nil && !textField.text!.trimmed.isEmpty
-        
-        let textFieldOptions = self.textFieldOptions(focused: focused, present: present)
-        
-        textField.superview?.backgroundColor = textFieldOptions.background
-        textField.textColor = textFieldOptions.text
-        textField.placeholderFont = textFieldOptions.placeholderFont
-        textField.placeholderColor = textFieldOptions.placeholder
-        textField.titleColor = textFieldOptions.placeholder
-        textField.selectedTitleColor = textFieldOptions.placeholder
-        iconContainer(by: textField)?.backgroundColor = textFieldOptions.iconBackground
-    }
-    
-    private func iconContainer(by textField: UITextField) -> UIView? {
-        switch textField {
-        case expenseSourceNameTextField:
-            return nameIconContainer
-        case expenseSourceAmountTextField:
-            return amountIconContainer
-        case expenseSourceGoalAmountTextField:
-            return goalAmountIconContainer
-        default:
-            return nil
-        }
-    }
-    
-    private func textFieldOptions(focused: Bool, present: Bool) -> (background: UIColor, text: UIColor, placeholder: UIColor, placeholderFont: UIFont?, iconBackground: UIColor) {
-        
-        let activeBackgroundColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
-        let inactiveBackgroundColor = UIColor(red: 0.96, green: 0.97, blue: 1, alpha: 1)
-        
-        let darkPlaceholderColor = UIColor(red: 0.26, green: 0.33, blue: 0.52, alpha: 1)
-        let lightPlaceholderColor = UIColor.white
-        
-        let inavtiveTextColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
-        let activeTextColor = UIColor.white
-        
-        let bigPlaceholderFont = UIFont(name: "Rubik-Regular", size: 16)
-        let smallPlaceholderFont = UIFont(name: "Rubik-Regular", size: 10)
-        
-        let activeIconBackground = UIColor.white
-        let inactiveIconBackground = UIColor(red: 0.9, green: 0.91, blue: 0.96, alpha: 1)
-        
-        switch (focused, present) {
-        case (true, true):
-            return (activeBackgroundColor, activeTextColor, darkPlaceholderColor, smallPlaceholderFont, activeIconBackground)
-        case (true, false):
-            return (activeBackgroundColor, activeTextColor, lightPlaceholderColor, bigPlaceholderFont, activeIconBackground)
-        case (false, true):
-            return (inactiveBackgroundColor, inavtiveTextColor, inavtiveTextColor, smallPlaceholderFont, inactiveIconBackground)
-        case (false, false):
-            return (inactiveBackgroundColor, inavtiveTextColor, inavtiveTextColor, bigPlaceholderFont, inactiveIconBackground)
-        }
+    func setRemoveButton(hidden: Bool) {
+        set(cell: removeCell, hidden: hidden, animated: false, reload: true)
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

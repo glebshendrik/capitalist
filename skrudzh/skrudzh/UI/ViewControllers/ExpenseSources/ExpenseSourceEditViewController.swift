@@ -23,8 +23,6 @@ protocol ExpenseSourceEditInputProtocol {
 class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var removeButton: UIButton!
-    @IBOutlet weak var loaderImageView: UIImageView!
     
     var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
     
@@ -60,7 +58,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor        
-        setRemoveButton(hidden: viewModel.isNew)
+        editTableController?.setRemoveButton(hidden: viewModel.isNew)
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
@@ -71,7 +69,62 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
         close()
     }
     
-    @IBAction func didTapRemoveButton(_ sender: Any) {
+    private func save() {
+        view.endEditing(true)
+        editTableController?.showActivityIndicator()
+        saveButton.isEnabled = false
+        
+        firstly {
+            viewModel.saveExpenseSource(with: self.expenseSourceName, amount: self.expenseSourceAmount, iconURL: self.selectedIconURL, goalAmount: self.expenseSourceGoalAmount)
+        }.done {
+            if self.viewModel.isNew {
+                self.delegate?.didCreateExpenseSource()
+            }
+            else {
+                self.delegate?.didUpdateExpenseSource()
+            }
+            self.close()
+        }.catch { error in
+            switch error {
+            case ExpenseSourceCreationError.validation(let validationResults):
+                self.showCreateionValidationResults(validationResults)
+            case ExpenseSourceUpdatingError.validation(let validationResults):
+                self.showUpdatingValidationResults(validationResults)
+            case APIRequestError.unprocessedEntity(let errors):
+                self.show(errors: errors)
+            default:
+                self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении кошелька",
+                                                  theme: .error)
+            }
+        }.finally {
+            self.editTableController?.hideActivityIndicator()
+            self.saveButton.isEnabled = true
+        }
+    }
+    
+    private func remove(deleteTransactions: Bool) {
+        editTableController?.showActivityIndicator()
+        
+        firstly {
+            viewModel.removeExpenseSource(deleteTransactions: deleteTransactions)
+        }.done {
+            self.delegate?.didRemoveExpenseSource()
+            self.close()
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении кошелька",
+                                              theme: .error)
+        }.finally {
+            self.editTableController?.hideActivityIndicator()
+        }
+    }
+    
+    private func close() {
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
+    func didTapRemoveButton() {
         let alertController = UIAlertController(title: "Удалить кошелек?",
                                                 message: nil,
                                                 preferredStyle: .alert)
@@ -98,63 +151,6 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
         present(alertController, animated: true)
     }
     
-    private func save() {
-        view.endEditing(true)
-        setActivityIndicator(hidden: false)
-        saveButton.isEnabled = false
-        
-        firstly {
-            viewModel.saveExpenseSource(with: self.expenseSourceName, amount: self.expenseSourceAmount, iconURL: self.selectedIconURL, goalAmount: self.expenseSourceGoalAmount)
-        }.done {
-            if self.viewModel.isNew {
-                self.delegate?.didCreateExpenseSource()
-            }
-            else {
-                self.delegate?.didUpdateExpenseSource()
-            }
-            self.close()
-        }.catch { error in
-            switch error {
-            case ExpenseSourceCreationError.validation(let validationResults):
-                self.showCreateionValidationResults(validationResults)
-            case ExpenseSourceUpdatingError.validation(let validationResults):
-                self.showUpdatingValidationResults(validationResults)
-            case APIRequestError.unprocessedEntity(let errors):
-                self.show(errors: errors)
-            default:
-                self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении кошелька",
-                                                  theme: .error)
-            }
-        }.finally {
-            self.setActivityIndicator(hidden: true)
-            self.saveButton.isEnabled = true
-        }
-    }
-    
-    private func remove(deleteTransactions: Bool) {
-        setActivityIndicator(hidden: false)
-        removeButton.isEnabled = false
-        
-        firstly {
-            viewModel.removeExpenseSource(deleteTransactions: deleteTransactions)
-        }.done {
-            self.delegate?.didRemoveExpenseSource()
-            self.close()
-        }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении кошелька",
-                                              theme: .error)
-        }.finally {
-            self.setActivityIndicator(hidden: true)
-            self.removeButton.isUserInteractionEnabled = true
-        }
-    }
-    
-    private func close() {
-        navigationController?.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
     var accountType: AccountType {
         return viewModel.accountType
     }
@@ -198,6 +194,89 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
 //        let validColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
 //        saveButton.isEnabled = isFormValid
 //        saveButton.backgroundColor = isFormValid ? validColor : invalidColor
+    }
+}
+
+extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
+    func set(delegate: ExpenseSourceEditViewControllerDelegate?) {
+        self.delegate = delegate
+    }
+    
+    func set(expenseSource: ExpenseSource) {
+        viewModel.set(expenseSource: expenseSource)
+    }
+    
+    private func updateUI() {
+        editTableController?.expenseSourceNameTextField?.text = viewModel.name        
+        editTableController?.expenseSourceAmountTextField?.text = viewModel.amount
+        editTableController?.expenseSourceGoalAmountTextField?.text = viewModel.goalAmount
+        
+        editTableController?.expenseSourceAmountTextField?.isUserInteractionEnabled = viewModel.canChangeAmount
+        
+        updateCurrencyUI()
+        updateIconUI()
+        updateGoalUI(animated: false)
+        validateUI()
+    }
+    
+    private func updateCurrencyUI() {
+        editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
+        editTableController?.changeCurrencyIndicator?.isHidden = !canChangeCurrency
+        editTableController?.expenseSourceAmountTextField?.currency = viewModel.selectedCurrency
+        editTableController?.expenseSourceGoalAmountTextField?.currency = viewModel.selectedCurrency
+    }
+    
+    private func updateGoalUI(animated: Bool = true) {
+        editTableController?.setTypeSwitch(hidden: !viewModel.isNew, animated: animated, reload: false)
+        editTableController?.setGoalAmount(hidden: !viewModel.isGoal, animated: animated, reload: false)
+        editTableController?.updateUI()
+    }
+    
+    private func updateIconUI() {
+        let placeholderName = viewModel.isGoal ? "wallet-goal-default-icon" : "wallet-default-icon"
+        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: placeholderName, renderingMode: .alwaysTemplate)
+        editTableController?.iconImageView.tintColor = UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showEditTableView",
+            let viewController = segue.destination as? ExpenseSourceEditTableController {
+            editTableController = viewController
+            viewController.delegate = self
+        }
+    }
+}
+
+extension ExpenseSourceEditViewController {
+    private func setupUI() {
+        setupNavigationBar()
+        guard viewModel.isNew else {
+            editTableController?.hideActivityIndicator()
+            return
+        }
+        loadDefaultCurrency()
+    }
+    
+    private func loadDefaultCurrency() {
+        editTableController?.showActivityIndicator()
+        saveButton.isEnabled = false
+        
+        _ = firstly {
+                viewModel.loadDefaultCurrency()
+            }.ensure {
+                self.updateUI()
+                self.editTableController?.hideActivityIndicator()
+                self.saveButton.isEnabled = true
+            }
+    }
+    
+    private func setupNavigationBar() {
+        let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
+                          NSAttributedString.Key.foregroundColor : UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = attributes
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationItem.title = viewModel.isNew ? "Новый кошелек" : "Кошелек"
     }
 }
 
@@ -260,110 +339,5 @@ extension ExpenseSourceEditViewController {
         case (_, _):
             return "Ошибка ввода"
         }
-    }
-}
-
-extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
-    func set(delegate: ExpenseSourceEditViewControllerDelegate?) {
-        self.delegate = delegate
-    }
-    
-    func set(expenseSource: ExpenseSource) {
-        viewModel.set(expenseSource: expenseSource)
-    }
-    
-    private func updateUI() {
-        editTableController?.expenseSourceNameTextField?.text = viewModel.name        
-        editTableController?.expenseSourceAmountTextField?.text = viewModel.amount
-        editTableController?.expenseSourceGoalAmountTextField?.text = viewModel.goalAmount
-        
-        editTableController?.expenseSourceAmountTextField?.isUserInteractionEnabled = viewModel.canChangeAmount
-        
-        updateCurrencyUI()
-        updateIconUI()
-        updateGoalUI()
-        validateUI()
-    }
-    
-    private func updateCurrencyUI() {
-        editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
-        editTableController?.changeCurrencyIndicator?.isHidden = !canChangeCurrency
-        editTableController?.expenseSourceAmountTextField?.currency = viewModel.selectedCurrency
-        editTableController?.expenseSourceGoalAmountTextField?.currency = viewModel.selectedCurrency
-    }
-    
-    private func updateGoalUI() {
-        editTableController?.setTypeSwitch(hidden: !viewModel.isNew)
-        editTableController?.setGoalAmount(hidden: !viewModel.isGoal)
-        editTableController?.updateUI()
-    }
-    
-    private func updateIconUI() {
-        let placeholderName = viewModel.isGoal ? "wallet-goal-default-icon" : "wallet-default-icon"
-        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: placeholderName, renderingMode: .alwaysTemplate)
-        editTableController?.iconImageView.tintColor = UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showEditTableView",
-            let viewController = segue.destination as? ExpenseSourceEditTableController {
-            editTableController = viewController
-            viewController.delegate = self
-        }
-    }
-}
-
-extension ExpenseSourceEditViewController {
-    private func setupUI() {
-        setupNavigationBar()
-        loaderImageView.showLoader()
-//        editTableController?.tableView.allowsSelection = canChangeCurrency
-        guard viewModel.isNew else {
-            setActivityIndicator(hidden: true)
-            return
-        }
-        loadDefaultCurrency()
-    }
-    
-    private func loadDefaultCurrency() {
-        setActivityIndicator(hidden: false)
-        saveButton.isEnabled = false
-        
-        _ = firstly {
-                viewModel.loadDefaultCurrency()
-            }.ensure {
-                self.updateUI()
-                self.setActivityIndicator(hidden: true)
-                self.saveButton.isEnabled = true
-            }
-    }
-    
-    private func setupNavigationBar() {
-        let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
-                          NSAttributedString.Key.foregroundColor : UIColor.white]
-        navigationController?.navigationBar.titleTextAttributes = attributes
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationItem.title = viewModel.isNew ? "Новый кошелек" : "Кошелек"
-    }
-    
-    private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        guard animated else {
-            loaderImageView.isHidden = hidden
-            return
-        }
-        UIView.transition(with: loaderImageView, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            self.loaderImageView.isHidden = hidden
-        })
-    }
-    
-    private func setRemoveButton(hidden: Bool, animated: Bool = true) {
-        guard animated else {
-            removeButton.isHidden = hidden
-            return
-        }
-        UIView.transition(with: removeButton, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            self.removeButton.isHidden = hidden
-        })
     }
 }

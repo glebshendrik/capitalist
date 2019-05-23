@@ -13,6 +13,7 @@ protocol IncomeSourceEditTableControllerDelegate {
     func validationNeeded()
     func didSelectCurrency(currency: Currency)
     func didTapSetReminder()
+    func didTapRemoveButton()
 }
 
 class IncomeSourceEditTableController : FloatingFieldsStaticTableViewController {
@@ -21,6 +22,7 @@ class IncomeSourceEditTableController : FloatingFieldsStaticTableViewController 
     @IBOutlet weak var changeCurrencyIndicator: UIImageView!
     @IBOutlet weak var reminderButton: UIButton!
     @IBOutlet weak var reminderLabel: UILabel!
+    @IBOutlet weak var removeCell: UITableViewCell!
     
     var delegate: IncomeSourceEditTableControllerDelegate?
     
@@ -38,6 +40,14 @@ class IncomeSourceEditTableController : FloatingFieldsStaticTableViewController 
     
     @IBAction func didTapSetReminder(_ sender: UIButton) {
         delegate?.didTapSetReminder()
+    }
+    
+    @IBAction func didTapRemoveButton(_ sender: UIButton) {
+        delegate?.didTapRemoveButton()
+    }
+    
+    func setRemoveButton(hidden: Bool) {
+        set(cell: removeCell, hidden: hidden, animated: false, reload: true)
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

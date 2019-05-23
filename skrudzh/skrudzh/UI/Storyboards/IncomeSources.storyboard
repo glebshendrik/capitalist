@@ -25,8 +25,8 @@
                         <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="Bhu-m5-4e8">
-                            <rect key="frame" x="0.0" y="225" width="375" height="100"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="Bhu-m5-4e8">
+                            <rect key="frame" x="0.0" y="326" width="375" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnY-wU-uh1">
@@ -46,8 +46,26 @@
                         <sections>
                             <tableViewSection id="1EC-F1-rgi">
                                 <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="36" id="ED3-DG-pRv">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ED3-DG-pRv" id="Z3Q-XW-JQr">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="NCc-XA-jkI">
+                                                    <rect key="frame" x="160" y="2.5" width="55" height="31"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="NCc-XA-jkI" firstAttribute="centerY" secondItem="Z3Q-XW-JQr" secondAttribute="centerY" id="wCL-hN-zTw"/>
+                                                <constraint firstItem="NCc-XA-jkI" firstAttribute="centerX" secondItem="Z3Q-XW-JQr" secondAttribute="centerX" id="zK1-Ni-hlF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="kB3-oR-YoJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="36" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kB3-oR-YoJ" id="HgM-bQ-iYV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -136,7 +154,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="75" id="j7x-HF-uTG">
-                                        <rect key="frame" x="0.0" y="75" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="111" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j7x-HF-uTG" id="AMs-5B-yz4">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -232,7 +250,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="75" id="imr-76-UhL">
-                                        <rect key="frame" x="0.0" y="150" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="186" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="imr-76-UhL" id="06z-8r-h8a">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -262,6 +280,35 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="msp-ta-4vV">
+                                        <rect key="frame" x="0.0" y="261" width="375" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="msp-ta-4vV" id="g0g-kZ-bNG">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIo-Li-wHC">
+                                                    <rect key="frame" x="32" y="0.0" width="311" height="65"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
+                                                    <state key="normal" title="Удалить источник доходов" image="remove-icon">
+                                                        <color key="titleColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapRemoveButton:" destination="Hsl-CQ-JmL" eventType="touchUpInside" id="giT-W6-KeA"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="PIo-Li-wHC" firstAttribute="leading" secondItem="g0g-kZ-bNG" secondAttribute="leading" constant="32" id="9A3-3K-gt1"/>
+                                                <constraint firstAttribute="bottom" secondItem="PIo-Li-wHC" secondAttribute="bottom" id="A4H-rv-zbq"/>
+                                                <constraint firstAttribute="trailing" secondItem="PIo-Li-wHC" secondAttribute="trailing" constant="32" id="RZS-YD-0aB"/>
+                                                <constraint firstItem="PIo-Li-wHC" firstAttribute="top" secondItem="g0g-kZ-bNG" secondAttribute="top" id="zYD-XZ-38v"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -276,11 +323,14 @@
                         <barButtonItem key="rightBarButtonItem" title="Сохр." id="2n1-U8-KpW"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicatorCell" destination="ED3-DG-pRv" id="5jM-n8-nNk"/>
                         <outlet property="changeCurrencyIndicator" destination="XaZ-Ga-d5q" id="few-6L-7CN"/>
                         <outlet property="currencyTextField" destination="c3z-rl-oMR" id="5ge-IH-0pO"/>
                         <outlet property="incomeSourceNameTextField" destination="gv1-qk-RVl" id="htz-7N-0t1"/>
+                        <outlet property="loaderImageView" destination="NCc-XA-jkI" id="AVW-tE-Zy7"/>
                         <outlet property="reminderButton" destination="e2T-nZ-VWt" id="kmk-t1-yGx"/>
                         <outlet property="reminderLabel" destination="XnY-wU-uh1" id="MSP-HT-aj1"/>
+                        <outlet property="removeCell" destination="msp-ta-4vV" id="noU-9k-btb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PKj-XG-hZf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -302,34 +352,12 @@
                                     <segue destination="Hsl-CQ-JmL" kind="embed" identifier="showEditTableView" id="RbB-Rn-KfO"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3t-Bu-Ras">
-                                <rect key="frame" x="32" y="490" width="311" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="AWv-B3-cDx"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
-                                <state key="normal" title="Удалить источник доходов" image="remove-icon">
-                                    <color key="titleColor" red="0.52156862745098043" green="0.5725490196078431" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapRemoveButton:" destination="XSV-72-Slk" eventType="touchUpInside" id="ZBi-Kv-RrN"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="0TN-hE-wWD">
-                                <rect key="frame" x="160" y="540" width="55" height="31"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fZZ-E3-wFU" firstAttribute="trailing" secondItem="v3t-Bu-Ras" secondAttribute="trailing" constant="32" id="43S-K2-DzX"/>
-                            <constraint firstItem="0TN-hE-wWD" firstAttribute="top" secondItem="v3t-Bu-Ras" secondAttribute="bottom" constant="10" id="7em-ko-OqN"/>
-                            <constraint firstItem="0TN-hE-wWD" firstAttribute="centerX" secondItem="Fal-46-alb" secondAttribute="centerX" id="D3A-c0-bkA"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="bottom" secondItem="fZZ-E3-wFU" secondAttribute="bottom" id="UlC-vo-Vfb"/>
-                            <constraint firstItem="v3t-Bu-Ras" firstAttribute="leading" secondItem="fZZ-E3-wFU" secondAttribute="leading" constant="32" id="Uyo-bR-f5q"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="top" secondItem="fZZ-E3-wFU" secondAttribute="top" id="XtM-Io-gVG"/>
                             <constraint firstItem="fZZ-E3-wFU" firstAttribute="trailing" secondItem="fSE-gp-P7u" secondAttribute="trailing" id="gX2-Ac-UY7"/>
-                            <constraint firstItem="fZZ-E3-wFU" firstAttribute="bottom" secondItem="0TN-hE-wWD" secondAttribute="bottom" constant="32" id="o4N-45-uCm"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="leading" secondItem="fZZ-E3-wFU" secondAttribute="leading" id="p1T-1p-4Uv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fZZ-E3-wFU"/>
@@ -350,8 +378,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="loaderImageView" destination="0TN-hE-wWD" id="Pyl-L5-Kch"/>
-                        <outlet property="removeButton" destination="v3t-Bu-Ras" id="Cyl-1e-WiQ"/>
                         <outlet property="saveButton" destination="37n-py-Kw0" id="h8q-ca-eqM"/>
                     </connections>
                 </viewController>
