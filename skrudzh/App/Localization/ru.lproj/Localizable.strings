@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Three Baskets
+
+  Created by Alexander Petropavlovsky on 23/05/2019.
+  Copyright © 2019 Real Tranzit. All rights reserved.
+*/
+
+"DEBT_NOTIFICATION_MESSAGE_KEY" = "Вам должны вернуть долг
+%@ %@
+";
+
+"LOAN_NOTIFICATION_MESSAGE_KEY" = "Вы должны вернуть займ
+%@ %@
+";
+
+"INCOME_REMINDER_NOTIFICATION_MESSAGE_KEY" = "Запланированный доход: %@
+%@
+";
+
+"EXPENSE_REMINDER_NOTIFICATION_MESSAGE_KEY" = "Запланированная трата: %@
+%@
+";
