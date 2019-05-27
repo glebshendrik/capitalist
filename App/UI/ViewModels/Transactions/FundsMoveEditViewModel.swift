@@ -147,10 +147,10 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         }
         if let debtTransaction = debtTransaction {
             if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id == startable?.id {
-                return debtTransaction.convertedAmountCents.moneyDecimalString(with: debtTransaction.convertedCurrency)
+                return debtTransaction.debtAmountLeft
             }
             if !needCurrencyExchange && debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable?.id {
-                return debtTransaction.amountCents.moneyDecimalString(with: debtTransaction.currency)
+                return debtTransaction.loanAmountLeft
             }
         }
         
@@ -164,7 +164,7 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         }
         if let debtTransaction = debtTransaction {
             if debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable?.id {
-                return debtTransaction.amountCents.moneyDecimalString(with: debtTransaction.currency)
+                return debtTransaction.loanAmountLeft
             }
         }
         return nil

@@ -113,7 +113,7 @@ extension UIViewController {
         messagePresenterManager.show(navBarMessage: message(for: error), theme: .error)
     }
     
-    fileprivate func message(for error: Error) -> String {
+    private func message(for error: Error) -> String {
         switch error {
         case APIRequestError.noConnection:
             return "No Internet Connection"

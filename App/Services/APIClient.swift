@@ -112,7 +112,7 @@ class APIClient : APIClientProtocol {
         }
     }
     
-    fileprivate func performRequest(_ resource: APIResource) -> Promise<(json: Any, response: PMKAlamofireDataResponse)> {
+    private func performRequest(_ resource: APIResource) -> Promise<(json: Any, response: PMKAlamofireDataResponse)> {
         
         guard var request = try? resource.asURLRequest() else {
             return Promise(error: APIRequestError.sendingFailed)
@@ -142,7 +142,7 @@ class APIClient : APIClientProtocol {
 //        }
     }
     
-    fileprivate func requestValidator(request: URLRequest?, response: HTTPURLResponse, data: Data?) -> Request.ValidationResult {
+    private func requestValidator(request: URLRequest?, response: HTTPURLResponse, data: Data?) -> Request.ValidationResult {
         
         switch response.statusCode {
         case 401:

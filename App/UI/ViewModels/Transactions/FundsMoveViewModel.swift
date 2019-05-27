@@ -33,8 +33,16 @@ class FundsMoveViewModel {
         return convertedAmountCents.moneyCurrencyString(with: convertedCurrency, shouldRound: false) ?? ""
     }
     
+    var debtAmountLeft: String {
+        return fundsMove.debtAmountCentsLeft?.moneyCurrencyString(with: convertedCurrency, shouldRound: false) ?? ""
+    }
+    
+    var loanAmountLeft: String {
+        return fundsMove.loanAmountCentsLeft?.moneyCurrencyString(with: currency, shouldRound: false) ?? ""
+    }
+    
     var debtAmount: String {
-        return isDebt ? convertedAmount : amount
+        return isDebt ? debtAmountLeft : loanAmountLeft
     }
     
     var gotAt: Date {

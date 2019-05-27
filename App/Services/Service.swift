@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 class Service {
-    fileprivate let apiClient: APIClientProtocol
+    private let apiClient: APIClientProtocol
     
     init(apiClient: APIClientProtocol) {
         self.apiClient = apiClient

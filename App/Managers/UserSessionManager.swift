@@ -57,7 +57,7 @@ class UserSessionManager: UserSessionManagerProtocol {
         catch {}
     }
     
-    fileprivate func saveData(_ data: Any?, withKey key: String, inService service: String) {
+    private func saveData(_ data: Any?, withKey key: String, inService service: String) {
         do {
             guard var accountData = accountDataInStorageInService(service) else {
                 if let data = data {
@@ -78,7 +78,7 @@ class UserSessionManager: UserSessionManagerProtocol {
         }
     }
     
-    fileprivate func accountDataInStorageInService(_ service: String) -> Dictionary<String, AnyObject>? {
+    private func accountDataInStorageInService(_ service: String) -> Dictionary<String, AnyObject>? {
         guard let dict = Locksmith.loadDataForUserAccount(userAccount: SessionKeys.Account.rawValue, inService: service) as Dictionary<String, AnyObject>? else {
             return nil
         }

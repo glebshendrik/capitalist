@@ -24,7 +24,7 @@ class NotificationsManager: NSObject, NotificationsManagerProtocol {
     private static let numberOfDaysBetweenKeepAliveNotifications: Int = 3
     private let notificationsHandler: NotificationsHandlerProtocol
     private let userDefaults = UserDefaults.standard
-    let defaultOtherNotificationsFireTime: Date = Date()
+    let defaultOtherNotificationsFireTime: Date = Date().dateAt(.startOfDay) + 12.hours
     
     private var notificationCenter: UNUserNotificationCenter {
         return UNUserNotificationCenter.current()

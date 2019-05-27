@@ -292,7 +292,7 @@ class CurrencyValueFormatter: NSObject, IValueFormatter, IAxisValueFormatter {
         return format(value: value)
     }
     
-    fileprivate func format(value: Double) -> String {
+    private func format(value: Double) -> String {
         
         let amount = NSDecimalNumber(floatLiteral: value)
         

@@ -57,7 +57,6 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     func route() {
         guard userSessionManager.isUserAuthenticated else {
-            // If the user is not authenticated ask for login
             showJoiningAsGuestScreen()
             _ = accountCoordinator.joinAsGuest().catch { _ in
                 self.route()
@@ -65,14 +64,12 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             return
         }
         
-        // Show the extended splash screen (or landing page)
         showLandingScreen()
         
-        // Begin authorized user experience flow
         beginAuthorizedUserFlow()
     }
     
-    fileprivate func beginAuthorizedUserFlow() {
+    private func beginAuthorizedUserFlow() {
         firstly {
             accountCoordinator.loadCurrentUser()
         }.done { _ in
@@ -91,7 +88,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         }
     }
     
-    fileprivate func errorIsNotFoundOrNotAuthorized(error: Error) -> Bool {
+    private func errorIsNotFoundOrNotAuthorized(error: Error) -> Bool {
         switch error {
         case APIRequestError.notAuthorized,
              APIRequestError.notFound:
@@ -101,11 +98,11 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         }
     }
     
-    fileprivate func showLandingScreen() {
+    private func showLandingScreen() {
         _ = show(.LandingViewController)
     }
     
-    fileprivate func showJoiningAsGuestScreen() {
+    private func showJoiningAsGuestScreen() {
         if let landingViewController = show(.LandingViewController) as? LandingViewController {
             landingViewController.update(loadingMessage: "Создание учетной записи гостя...")
         }

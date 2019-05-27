@@ -11,7 +11,7 @@ import SwiftDate
 
 class KeepAliveNotificationItem: NotificationItem {
     
-    fileprivate static let notificationIdPrefix: String = String(describing: KeepAliveNotificationItem.self)
+    private static let notificationIdPrefix: String = String(describing: KeepAliveNotificationItem.self)
     
     init(apart date: Date, with numberOfDaysBetween: Int, and notificationNumber: Int) {
         let keepaliveTitle = ""

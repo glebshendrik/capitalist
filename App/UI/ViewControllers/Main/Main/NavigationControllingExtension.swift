@@ -163,6 +163,7 @@ extension MainViewController {
     }
     
     private func show(waitingDebts: [FundsMoveViewModel], expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, waitingDebtsType: WaitingDebtsType) {
+        
         if let waitingDebtsViewController = router.viewController(.WaitingDebtsViewController) as? WaitingDebtsViewController {
             
             waitingDebtsViewController.set(delegate: self, expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, waitingDebts: waitingDebts, waitingDebtsType: waitingDebtsType)

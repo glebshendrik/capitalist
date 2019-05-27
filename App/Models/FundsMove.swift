@@ -25,6 +25,8 @@ class FundsMove : Decodable {
     let borrowedTill: Date?
     let debtTransaction: FundsMove?
     let isReturned: Bool
+    let debtAmountCentsLeft: Int?
+    let loanAmountCentsLeft: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -43,6 +45,8 @@ class FundsMove : Decodable {
         case whom
         case debtTransaction = "debt_transaction"
         case isReturned = "is_returned"
+        case debtAmountCentsLeft = "debt_amount_cents_left"
+        case loanAmountCentsLeft = "loan_amount_cents_left"
     }
     
 }
