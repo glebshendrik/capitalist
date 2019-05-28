@@ -69,6 +69,10 @@ class ExpenseSourceEditViewModel {
         return isNew || accountType != .debt
     }
     
+    var amountHidden: Bool {
+        return isNew && accountType == .debt
+    }
+    
     var accountType: AccountType = .usual
     
     var isGoal: Bool {

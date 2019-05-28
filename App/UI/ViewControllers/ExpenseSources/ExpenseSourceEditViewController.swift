@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import StaticTableViewController
 
 protocol ExpenseSourceEditViewControllerDelegate {
     func didCreateExpenseSource()
@@ -175,7 +176,7 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
     func didSwitch(accountType: AccountType) {
         viewModel.accountType = accountType
         updateIconUI()
-        updateGoalUI()
+        updateTableUI()
         validateUI()
     }
     
@@ -215,7 +216,7 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
         
         updateCurrencyUI()
         updateIconUI()
-        updateGoalUI(animated: false)
+        updateTableUI(animated: false)
         validateUI()
     }
     
@@ -226,10 +227,12 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
         editTableController?.expenseSourceGoalAmountTextField?.currency = viewModel.selectedCurrency
     }
     
-    private func updateGoalUI(animated: Bool = true) {
+    private func updateTableUI(animated: Bool = true) {
         editTableController?.setTypeSwitch(hidden: !viewModel.isNew, animated: animated, reload: false)
+        editTableController?.setAmount(hidden: viewModel.amountHidden, animated: animated, reload: false)
         editTableController?.setGoalAmount(hidden: !viewModel.isGoal, animated: animated, reload: false)
-        editTableController?.updateUI()
+        editTableController?.updateTabsAppearence()
+        editTableController?.reloadData(animated: animated)
     }
     
     private func updateIconUI() {

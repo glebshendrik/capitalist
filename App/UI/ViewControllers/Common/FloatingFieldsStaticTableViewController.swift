@@ -45,7 +45,7 @@ class FloatingFieldsStaticTableViewController : StaticTableViewController, UITex
     
     private func setupUI() {
         insertAnimation = .top
-        deleteAnimation = .bottom
+        deleteAnimation = .top
     }
     
     func updateTable(animated: Bool = true) {        

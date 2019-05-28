@@ -41,6 +41,7 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     @IBOutlet weak var iconImageView: UIImageView!
     
     @IBOutlet weak var typeSwitchCell: UITableViewCell!
+    @IBOutlet weak var amountCell: UITableViewCell!
     @IBOutlet weak var goalAmountCell: UITableViewCell!
     @IBOutlet weak var removeCell: UITableViewCell!
     
@@ -63,7 +64,7 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
         delegate?.validationNeeded()
     }
     
-    func updateUI(animated: Bool = true) {
+    func updateTabsAppearence() {
         
         func tabsAppearances(for accountType: AccountType) -> (usual: TabAppearance, goal: TabAppearance, debt: TabAppearance) {
             let selectedColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
@@ -99,17 +100,22 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
         goalExpenseSourceTabSelectionIndicator.isHidden = tabsAppearance.goal.isHidden
         debtExpenseSourceTabSelectionIndicator.isHidden = tabsAppearance.debt.isHidden
         
-        reloadData(animated: animated)
+        
     }
     
     func setTypeSwitch(hidden: Bool, animated: Bool = true, reload: Bool = true) {
         set(cells: typeSwitchCell, hidden: hidden)
-        if reload { updateUI(animated: animated) }
+        if reload { reloadData(animated: animated) }
+    }
+    
+    func setAmount(hidden: Bool, animated: Bool = true, reload: Bool = true) {
+        set(cells: amountCell, hidden: hidden)
+        if reload { reloadData(animated: animated) }
     }
     
     func setGoalAmount(hidden: Bool, animated: Bool = true, reload: Bool = true) {
         set(cells: goalAmountCell, hidden: hidden)
-        if reload { updateUI(animated: animated) }
+        if reload { reloadData(animated: animated) }
     }
         
     @IBAction func didChangeName(_ sender: FloatingTextField) {
