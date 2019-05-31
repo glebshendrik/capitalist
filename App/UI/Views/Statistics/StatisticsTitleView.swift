@@ -12,7 +12,7 @@ protocol StatisticsTitleViewDelegate {
     func didTapRemoveDateRangeButton()
 }
 
-class StatisticsTitleView : NavigationBarCustomTitleView {
+class StatisticsTitleView : CustomView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateRangeLabel: UILabel!
     @IBOutlet weak var removeDateRangeButton: UIButton!

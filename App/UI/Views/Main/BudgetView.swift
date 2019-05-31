@@ -12,7 +12,7 @@ protocol BudgetViewDelegate : class {
     func didTapBalance()
 }
 
-class BudgetView : NavigationBarCustomTitleView {
+class BudgetView : CustomView {
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var spentLabel: UILabel!
     @IBOutlet weak var plannedLabel: UILabel!

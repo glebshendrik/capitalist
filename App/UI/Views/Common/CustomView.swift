@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NavigationBarCustomTitleView : UIView {
+class CustomView : UIView {
     @IBOutlet var contentView: UIView!
     
     var nibName: String {
