@@ -42,6 +42,10 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
         return editTableController?.expenseSourceAmountTextField?.text?.trimmed
     }
     
+    private var expenseSourceCreditLimitAmount: String? {
+        return editTableController?.creditLimitTextField?.text?.trimmed
+    }
+    
     private var expenseSourceGoalAmount: String? {
         return editTableController?.expenseSourceGoalAmountTextField?.text?.trimmed
     }
@@ -76,7 +80,11 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
         saveButton.isEnabled = false
         
         firstly {
-            viewModel.saveExpenseSource(with: self.expenseSourceName, amount: self.expenseSourceAmount, iconURL: self.selectedIconURL, goalAmount: self.expenseSourceGoalAmount)
+            viewModel.saveExpenseSource(with: self.expenseSourceName,
+                                        amount: self.expenseSourceAmount,
+                                        iconURL: self.selectedIconURL,
+                                        goalAmount: self.expenseSourceGoalAmount,
+                                        creditLimit: self.expenseSourceCreditLimitAmount)
         }.done {
             if self.viewModel.isNew {
                 self.delegate?.didCreateExpenseSource()
@@ -125,6 +133,13 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
 }
 
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
+    func didChangeCreditLimit() {
+        if let creditLimit = expenseSourceCreditLimitAmount,
+            creditLimit.isNumeric {
+            editTableController?.expenseSourceAmountTextField.text = creditLimit
+        }
+    }
+    
     func didTapRemoveButton() {
         let alertController = UIAlertController(title: "Удалить кошелек?",
                                                 message: nil,
@@ -208,16 +223,20 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
     }
     
     private func updateUI() {
-        editTableController?.expenseSourceNameTextField?.text = viewModel.name        
-        editTableController?.expenseSourceAmountTextField?.text = viewModel.amount
-        editTableController?.expenseSourceGoalAmountTextField?.text = viewModel.goalAmount
-        
-        editTableController?.expenseSourceAmountTextField?.isUserInteractionEnabled = viewModel.canChangeAmount
-        
+        updateTextFieldsUI()
         updateCurrencyUI()
         updateIconUI()
         updateTableUI(animated: false)
         validateUI()
+    }
+    
+    private func updateTextFieldsUI() {
+        editTableController?.expenseSourceNameTextField?.text = viewModel.name
+        editTableController?.expenseSourceAmountTextField?.text = viewModel.amount
+        editTableController?.expenseSourceGoalAmountTextField?.text = viewModel.goalAmount
+        editTableController?.creditLimitTextField?.text = viewModel.creditLimit
+        
+        editTableController?.expenseSourceAmountTextField?.isUserInteractionEnabled = viewModel.canChangeAmount
     }
     
     private func updateCurrencyUI() {
@@ -225,12 +244,14 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
         editTableController?.changeCurrencyIndicator?.isHidden = !canChangeCurrency
         editTableController?.expenseSourceAmountTextField?.currency = viewModel.selectedCurrency
         editTableController?.expenseSourceGoalAmountTextField?.currency = viewModel.selectedCurrency
+        editTableController?.creditLimitTextField?.currency = viewModel.selectedCurrency
     }
     
     private func updateTableUI(animated: Bool = true) {
         editTableController?.setTypeSwitch(hidden: !viewModel.isNew, animated: animated, reload: false)
         editTableController?.setAmount(hidden: viewModel.amountHidden, animated: animated, reload: false)
         editTableController?.setGoalAmount(hidden: !viewModel.isGoal, animated: animated, reload: false)
+        editTableController?.setCreditLimit(hidden: viewModel.creditLimitHidden, animated: animated, reload: false)
         editTableController?.updateTabsAppearence()
         editTableController?.reloadData(animated: animated)
     }
@@ -312,6 +333,10 @@ extension ExpenseSourceEditViewController {
             return "Укажите сколько вы хотите накопить"
         case (.goalAmountCents, .invalid):
             return "Некорректная сумма цели"
+        case (.creditLimitCents, .required):
+            return "Укажите кредитный лимит (0 для обычного кошелька)"
+        case (.creditLimitCents, .invalid):
+            return "Некорректный кредитный лимит (0 для обычного кошелька)"
         case (_, _):
             return "Ошибка ввода"
         }
@@ -339,6 +364,10 @@ extension ExpenseSourceEditViewController {
             return "Укажите сколько вы хотите накопить"
         case (.goalAmountCents, .invalid):
             return "Некорректная сумма цели"
+        case (.creditLimitCents, .required):
+            return "Укажите кредитный лимит (0 для обычного кошелька)"
+        case (.creditLimitCents, .invalid):
+            return "Некорректный кредитный лимит (0 для обычного кошелька)"
         case (_, _):
             return "Ошибка ввода"
         }

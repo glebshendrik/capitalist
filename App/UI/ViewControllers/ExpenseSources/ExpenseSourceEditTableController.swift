@@ -16,6 +16,7 @@ protocol ExpenseSourceEditTableControllerDelegate {
     func didSelectIcon(icon: Icon)
     func didSwitch(accountType: AccountType)
     func didSelectCurrency(currency: Currency)
+    func didChangeCreditLimit()
     func didTapRemoveButton()
 }
 
@@ -36,12 +37,15 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     
     @IBOutlet weak var expenseSourceAmountTextField: MoneyTextField!
     
+    @IBOutlet weak var creditLimitTextField: MoneyTextField!
+    
     @IBOutlet weak var expenseSourceGoalAmountTextField: MoneyTextField!
     
     @IBOutlet weak var iconImageView: UIImageView!
     
     @IBOutlet weak var typeSwitchCell: UITableViewCell!
     @IBOutlet weak var amountCell: UITableViewCell!
+    @IBOutlet weak var creditLimitCell: UITableViewCell!
     @IBOutlet weak var goalAmountCell: UITableViewCell!
     @IBOutlet weak var removeCell: UITableViewCell!
     
@@ -60,6 +64,7 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
         expenseSourceNameTextField.updateAppearance()
         currencyTextField.updateAppearance()
         expenseSourceAmountTextField.updateAppearance()
+        creditLimitTextField.updateAppearance()
         expenseSourceGoalAmountTextField.updateAppearance()
         delegate?.validationNeeded()
     }
@@ -113,6 +118,11 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
         if reload { reloadData(animated: animated) }
     }
     
+    func setCreditLimit(hidden: Bool, animated: Bool = true, reload: Bool = true) {
+        set(cells: creditLimitCell, hidden: hidden)
+        if reload { reloadData(animated: animated) }
+    }
+    
     func setGoalAmount(hidden: Bool, animated: Bool = true, reload: Bool = true) {
         set(cells: goalAmountCell, hidden: hidden)
         if reload { reloadData(animated: animated) }
@@ -128,6 +138,12 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
         delegate?.validationNeeded()
     }
     
+    @IBAction func didChangeCreditLimit(_ sender: MoneyTextField) {
+        sender.updateAppearance()
+        delegate?.didChangeCreditLimit()
+        delegate?.validationNeeded()
+    }
+        
     @IBAction func didChangeGoalAmount(_ sender: MoneyTextField) {
         sender.updateAppearance()
         delegate?.validationNeeded()

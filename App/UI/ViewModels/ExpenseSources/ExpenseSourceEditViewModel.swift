@@ -36,6 +36,11 @@ class ExpenseSourceEditViewModel {
         return (expenseSource?.amountCents ?? 0).moneyDecimalString(with: currency)
     }
     
+    var creditLimit: String? {
+        guard let currency = selectedCurrency else { return nil }
+        return (expenseSource?.creditLimitCents ?? 0).moneyDecimalString(with: currency)
+    }
+        
     var goalAmount: String? {
         guard let currency = selectedCurrency else { return nil }
         return expenseSource?.goalAmountCents?.moneyDecimalString(with: currency)
@@ -73,6 +78,10 @@ class ExpenseSourceEditViewModel {
         return isNew && accountType == .debt
     }
     
+    var creditLimitHidden: Bool {
+        return accountType != .usual
+    }
+        
     var accountType: AccountType = .usual
     
     var isGoal: Bool {
@@ -103,31 +112,35 @@ class ExpenseSourceEditViewModel {
     func isFormValid(with name: String?,
                      amount: String?,
                      iconURL: URL?,
-                     goalAmount: String?) -> Bool {
+                     goalAmount: String?,
+                     creditLimit: String?) -> Bool {
         guard let currency = selectedCurrency else { return false }
         
         let amountCents = amount?.intMoney(with: currency)
+        let creditLimitCents = creditLimit?.intMoney(with: currency)
         let goalAmountCents = goalAmount?.intMoney(with: currency)
         
         return isNew
-            ? isCreationFormValid(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents)
-            : isUpdatingFormValid(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents)
+            ? isCreationFormValid(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents, creditLimitCents: creditLimitCents)
+            : isUpdatingFormValid(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents, creditLimitCents: creditLimitCents)
     }
     
     func saveExpenseSource(with name: String?,
                            amount: String?,
                            iconURL: URL?,
-                           goalAmount: String?) -> Promise<Void> {
+                           goalAmount: String?,
+                           creditLimit: String?) -> Promise<Void> {
         guard let currency = selectedCurrency else {
             return Promise(error: ExpenseSourceCreationError.currencyIsNotSpecified)
         }
         
         let amountCents = amount?.intMoney(with: currency)
+        let creditLimitCents = creditLimit?.intMoney(with: currency)
         let goalAmountCents = goalAmount?.intMoney(with: currency)
         
         return isNew
-            ? createExpenseSource(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents)
-            : updateExpenseSource(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents)
+            ? createExpenseSource(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents, creditLimitCents: creditLimitCents)
+            : updateExpenseSource(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents, creditLimitCents: creditLimitCents)
     }
     
     func removeExpenseSource(deleteTransactions: Bool) -> Promise<Void> {
@@ -142,30 +155,29 @@ class ExpenseSourceEditViewModel {
 
 // Creation
 extension ExpenseSourceEditViewModel {
-    private func isCreationFormValid(with name: String?,
-                                     amountCents: Int?,
-                                     iconURL: URL?,
-                                     goalAmountCents: Int?) -> Bool {
-        return validateCreation(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents) == nil
-    }
-    
     private func createExpenseSource(with name: String?,
                                      amountCents: Int?,
                                      iconURL: URL?,
-                                     goalAmountCents: Int?) -> Promise<Void> {
+                                     goalAmountCents: Int?,
+                                     creditLimitCents: Int?) -> Promise<Void> {
         return  firstly {
-                    validateCreationForm(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents)
-                }.then { expenseSourceCreationForm -> Promise<ExpenseSource> in
-                    self.expenseSourcesCoordinator.create(with: expenseSourceCreationForm)
-                }.asVoid()
+            validateCreationForm(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents, creditLimitCents: creditLimitCents)
+            }.then { expenseSourceCreationForm -> Promise<ExpenseSource> in
+                self.expenseSourcesCoordinator.create(with: expenseSourceCreationForm)
+            }.asVoid()
     }
+    
+    
+    
+    
     
     private func validateCreationForm(with name: String?,
                                       amountCents: Int?,
                                       iconURL: URL?,
-                                      goalAmountCents: Int?) -> Promise<ExpenseSourceCreationForm> {
+                                      goalAmountCents: Int?,
+                                      creditLimitCents: Int?) -> Promise<ExpenseSourceCreationForm> {
         
-        if let failureResultsHash = validateCreation(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents) {
+        if let failureResultsHash = validateCreation(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents, creditLimitCents: creditLimitCents) {
             return Promise(error: ExpenseSourceCreationError.validation(validationResults: failureResultsHash))
         }
         
@@ -179,17 +191,21 @@ extension ExpenseSourceEditViewModel {
         
         return .value(ExpenseSourceCreationForm(userId: currentUserId,
                                                 name: name!,
-                                                amountCents: amountCents!,
                                                 iconURL: iconURL,
+                                                amountCurrency: currencyCode,
+                                                amountCents: amountCents!,
                                                 accountType: accountType,
                                                 goalAmountCents: goalAmountCents,
-                                                currency: currencyCode))
+                                                goalAmountCurrency: currencyCode,
+                                                creditLimitCents: creditLimitCents,
+                                                creditLimitCurrency: currencyCode))
     }
     
     private func validateCreation(with name: String?,
                                   amountCents: Int?,
                                   iconURL: URL?,
-                                  goalAmountCents: Int?) -> [ExpenseSourceCreationForm.CodingKeys : [ValidationErrorReason]]? {
+                                  goalAmountCents: Int?,
+                                  creditLimitCents: Int?) -> [ExpenseSourceCreationForm.CodingKeys : [ValidationErrorReason]]? {
         var validationResults : [ValidationResultProtocol] =
             [Validator.validate(required: name, key: ExpenseSourceCreationForm.CodingKeys.name),
              Validator.validate(money: amountCents, key: ExpenseSourceCreationForm.CodingKeys.amountCents)]
@@ -198,27 +214,33 @@ extension ExpenseSourceEditViewModel {
             validationResults.append(Validator.validate(money: goalAmountCents, key: ExpenseSourceCreationForm.CodingKeys.goalAmountCents))
         }
         
+        if accountType == .usual {
+            validationResults.append(Validator.validate(money: creditLimitCents, key: ExpenseSourceCreationForm.CodingKeys.creditLimitCents))
+        }
+        
         let failureResultsHash : [ExpenseSourceCreationForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         
         return failureResultsHash
+    }
+    
+    private func isCreationFormValid(with name: String?,
+                                     amountCents: Int?,
+                                     iconURL: URL?,
+                                     goalAmountCents: Int?,
+                                     creditLimitCents: Int?) -> Bool {
+        return validateCreation(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents, creditLimitCents: creditLimitCents) == nil
     }
 }
 
 // Updating
 extension ExpenseSourceEditViewModel {
-    private func isUpdatingFormValid(with name: String?,
-                                     amountCents: Int?,
-                                     iconURL: URL?,
-                                     goalAmountCents: Int?) -> Bool {
-        return validateUpdating(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents) == nil
-    }
-    
     private func updateExpenseSource(with name: String?,
                                      amountCents: Int?,
                                      iconURL: URL?,
-                                     goalAmountCents: Int?) -> Promise<Void> {
+                                     goalAmountCents: Int?,
+                                     creditLimitCents: Int?) -> Promise<Void> {
         return  firstly {
-                    validateUpdatingForm(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents)
+            validateUpdatingForm(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents, creditLimitCents: creditLimitCents)
                 }.then { expenseSourceUpdatingForm in
                     self.expenseSourcesCoordinator.update(with: expenseSourceUpdatingForm)
                 }
@@ -227,9 +249,10 @@ extension ExpenseSourceEditViewModel {
     private func validateUpdatingForm(with name: String?,
                                       amountCents: Int?,
                                       iconURL: URL?,
-                                      goalAmountCents: Int?) -> Promise<ExpenseSourceUpdatingForm> {
+                                      goalAmountCents: Int?,
+                                      creditLimitCents: Int?) -> Promise<ExpenseSourceUpdatingForm> {
         
-        if let failureResultsHash = validateUpdating(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents) {
+        if let failureResultsHash = validateUpdating(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents, creditLimitCents: creditLimitCents) {
             return Promise(error: ExpenseSourceUpdatingError.validation(validationResults: failureResultsHash))
         }
         
@@ -241,13 +264,15 @@ extension ExpenseSourceEditViewModel {
                                                 name: name!,
                                                 amountCents: amountCents!,
                                                 iconURL: iconURL,
-                                                goalAmountCents: goalAmountCents))
+                                                goalAmountCents: goalAmountCents,
+                                                creditLimitCents: creditLimitCents))
     }
     
     private func validateUpdating(with name: String?,
                                   amountCents: Int?,
                                   iconURL: URL?,
-                                  goalAmountCents: Int?) -> [ExpenseSourceUpdatingForm.CodingKeys : [ValidationErrorReason]]? {
+                                  goalAmountCents: Int?,
+                                  creditLimitCents: Int?) -> [ExpenseSourceUpdatingForm.CodingKeys : [ValidationErrorReason]]? {
         
         var validationResults : [ValidationResultProtocol] =
             [Validator.validate(required: name, key: ExpenseSourceUpdatingForm.CodingKeys.name),
@@ -257,8 +282,20 @@ extension ExpenseSourceEditViewModel {
             validationResults.append(Validator.validate(money: goalAmountCents, key: ExpenseSourceUpdatingForm.CodingKeys.goalAmountCents))
         }
         
+        if accountType == .usual {
+            validationResults.append(Validator.validate(money: creditLimitCents, key: ExpenseSourceUpdatingForm.CodingKeys.creditLimitCents))
+        }
+        
         let failureResultsHash : [ExpenseSourceUpdatingForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
         
         return failureResultsHash
+    }
+    
+    private func isUpdatingFormValid(with name: String?,
+                                     amountCents: Int?,
+                                     iconURL: URL?,
+                                     goalAmountCents: Int?,
+                                     creditLimitCents: Int?) -> Bool {
+        return validateUpdating(with: name, amountCents: amountCents, iconURL: iconURL, goalAmountCents: goalAmountCents, creditLimitCents: creditLimitCents) == nil
     }
 }

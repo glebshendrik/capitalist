@@ -24,6 +24,7 @@ struct ExpenseSource : Decodable {
     let iconURL: URL?
     let accountType: AccountType
     let goalAmountCents: Int?
+    let creditLimitCents: Int?
     let order: Int
     let deletedAt: Date?
     let waitingDebts: [FundsMove]?
@@ -43,6 +44,7 @@ struct ExpenseSource : Decodable {
         case deletedAt = "deleted_at"
         case waitingDebts = "waiting_debts"
         case waitingLoans = "waiting_loans"
+        case creditLimitCents = "credit_limit_cents"
     }
     
 }
@@ -55,6 +57,9 @@ struct ExpenseSourceCreationForm : Encodable {
     let amountCents: Int
     let accountType: AccountType
     let goalAmountCents: Int?
+    let goalAmountCurrency: String
+    let creditLimitCents: Int?
+    let creditLimitCurrency: String
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -63,16 +68,9 @@ struct ExpenseSourceCreationForm : Encodable {
         case amountCents = "amount_cents"
         case accountType = "account_type"
         case goalAmountCents = "goal_amount_cents"
-    }
-    
-    init(userId: Int, name: String, amountCents: Int, iconURL: URL?, accountType: AccountType, goalAmountCents: Int?, currency: String) {
-        self.userId = userId
-        self.name = name
-        self.amountCents = amountCents
-        self.iconURL = iconURL
-        self.accountType = accountType
-        self.goalAmountCents = goalAmountCents
-        self.amountCurrency = currency
+        case goalAmountCurrency = "goal_amount_currency"
+        case creditLimitCents = "credit_limit_cents"
+        case creditLimitCurrency = "credit_limit_currency"
     }
 }
 
@@ -82,12 +80,14 @@ struct ExpenseSourceUpdatingForm : Encodable {
     let amountCents: Int
     let iconURL: URL?
     let goalAmountCents: Int?
+    let creditLimitCents: Int?
     
     enum CodingKeys: String, CodingKey {
         case name
         case iconURL = "icon_url"
         case amountCents = "amount_cents"
         case goalAmountCents = "goal_amount_cents"
+        case creditLimitCents = "credit_limit_cents"
     }
 }
 

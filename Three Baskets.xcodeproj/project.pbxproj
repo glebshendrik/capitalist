@@ -153,9 +153,6 @@
 		FA7462FD2281AC5100E6D39B /* WaitingDebtsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7462FC2281AC5100E6D39B /* WaitingDebtsViewModel.swift */; };
 		FA7462FF2281AD2900E6D39B /* WaitingDebtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7462FE2281AD2900E6D39B /* WaitingDebtsViewController.swift */; };
 		FA7463012281DDFA00E6D39B /* DebtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7463002281DDFA00E6D39B /* DebtTableViewCell.swift */; };
-		FA77407A229E5BF600BD35DE /* NumberPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA774079229E5BF600BD35DE /* NumberPad.xib */; };
-		FA794DFA229EC14D00970E84 /* PadDigitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA794DF9229EC14D00970E84 /* PadDigitButton.swift */; };
-		FA794DFC229FDFE900970E84 /* NumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA794DFB229FDFE900970E84 /* NumberPad.swift */; };
 		FA7CB4D7221C20B300FAAC0F /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4D6221C20B300FAAC0F /* Income.swift */; };
 		FA7CB4D9221C2A7D00FAAC0F /* IncomesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4D8221C2A7D00FAAC0F /* IncomesServiceProtocol.swift */; };
 		FA7CB4DB221C2C9D00FAAC0F /* IncomesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4DA221C2C9D00FAAC0F /* IncomesService.swift */; };
@@ -477,9 +474,6 @@
 		FA7462FC2281AC5100E6D39B /* WaitingDebtsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingDebtsViewModel.swift; sourceTree = "<group>"; };
 		FA7462FE2281AD2900E6D39B /* WaitingDebtsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingDebtsViewController.swift; sourceTree = "<group>"; };
 		FA7463002281DDFA00E6D39B /* DebtTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtTableViewCell.swift; sourceTree = "<group>"; };
-		FA774079229E5BF600BD35DE /* NumberPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumberPad.xib; sourceTree = "<group>"; };
-		FA794DF9229EC14D00970E84 /* PadDigitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadDigitButton.swift; sourceTree = "<group>"; };
-		FA794DFB229FDFE900970E84 /* NumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPad.swift; sourceTree = "<group>"; };
 		FA7CB4D6221C20B300FAAC0F /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		FA7CB4D8221C2A7D00FAAC0F /* IncomesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesServiceProtocol.swift; sourceTree = "<group>"; };
 		FA7CB4DA221C2C9D00FAAC0F /* IncomesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesService.swift; sourceTree = "<group>"; };
@@ -691,9 +685,6 @@
 				FA0CAE2921D69E2600805288 /* PagedCollectionViewLayout.swift */,
 				FACC01FE224CC7140044A747 /* CustomView.swift */,
 				FA84E7EA225DA9EF00C0A274 /* LineChartAreasRenderer.swift */,
-				FA794DFB229FDFE900970E84 /* NumberPad.swift */,
-				FA774079229E5BF600BD35DE /* NumberPad.xib */,
-				FA794DF9229EC14D00970E84 /* PadDigitButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1586,7 +1577,6 @@
 				FA630C162292698200242AB3 /* Common.storyboard in Resources */,
 				FA16FC82223BBE0E0053C273 /* coin-roll-drop.wav in Resources */,
 				FA630C18229269F300242AB3 /* IncomeSources.storyboard in Resources */,
-				FA77407A229E5BF600BD35DE /* NumberPad.xib in Resources */,
 				FA16FC81223BBE0E0053C273 /* coins-movement.wav in Resources */,
 				FA630C1A22926B0500242AB3 /* ExpenseSources.storyboard in Resources */,
 				FA6973ED2296D6DD004E6327 /* Localizable.strings in Resources */,
@@ -1833,7 +1823,6 @@
 				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
 				FA7DB73522102FBE00559878 /* CurrenciesCoordinator.swift in Sources */,
 				FA71770122683299008ADF94 /* GraphTotalTableViewCell.swift in Sources */,
-				FA794DFC229FDFE900970E84 /* NumberPad.swift in Sources */,
 				FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */,
 				FA7276DA22539F510086D4D1 /* FiltersSelectionViewSection.swift in Sources */,
 				FA66FB772226D2E000708C71 /* ExchangeRatesCoordinatorProtocol.swift in Sources */,
@@ -1928,7 +1917,6 @@
 				FA7276AF22524B190086D4D1 /* IncomeSourceEditDelegateExtension.swift in Sources */,
 				FAD88F2421AEB71000BE7BC1 /* NotificationsManagerProtocol.swift in Sources */,
 				FACC01FF224CC7140044A747 /* CustomView.swift in Sources */,
-				FA794DFA229EC14D00970E84 /* PadDigitButton.swift in Sources */,
 				FA7276AB22524A9C0086D4D1 /* BasketsControllingExtension.swift in Sources */,
 				FAD88F3721AEB8F200BE7BC1 /* UIFlowManager.swift in Sources */,
 				FA7276B9225250040086D4D1 /* UISettingExtension.swift in Sources */,
