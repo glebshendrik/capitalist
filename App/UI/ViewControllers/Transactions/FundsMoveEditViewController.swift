@@ -70,8 +70,13 @@ class FundsMoveEditViewController : TransactionEditViewController {
     }
     
     override func catchRemoveError(_ error: Error) {
-        self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении перевода средств",
-                                          theme: .error)
+        switch error {
+        case APIRequestError.unprocessedEntity(let errors):
+            self.show(errors: errors)
+        default:
+            self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении перевода средств",
+                                              theme: .error)
+        }        
     }
     
     override func isFormValid(amount: String?,

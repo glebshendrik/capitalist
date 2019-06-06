@@ -45,7 +45,7 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
         show(message: validationMessage,
              theme: .error,
              presentationStyle: .bottom,
-             duration: Duration.short.rawValue,
+             duration: Duration.normal.rawValue,
              interactive: true)
     }
     

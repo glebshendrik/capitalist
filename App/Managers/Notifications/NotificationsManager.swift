@@ -22,6 +22,7 @@ enum NotificationsManagerError: Error {
 class NotificationsManager: NSObject, NotificationsManagerProtocol {
     private static let maxNumberOfKeepAliveNotifications: Int = 5
     private static let numberOfDaysBetweenKeepAliveNotifications: Int = 3
+    private static let numberOfKeepAliveNotificationMessages: Int = 11
     private let notificationsHandler: NotificationsHandlerProtocol
     private let userDefaults = UserDefaults.standard
     let defaultOtherNotificationsFireTime: Date = Date().dateAt(.startOfDay) + 12.hours
@@ -107,10 +108,12 @@ class NotificationsManager: NSObject, NotificationsManagerProtocol {
     }
     
     private func scheduleKeepAliveNotifications(startingFrom date: Date) {
+        let messageNumbers: [Int] = Array(1...NotificationsManager.numberOfKeepAliveNotificationMessages).shuffled()
         for number in 1...NotificationsManager.maxNumberOfKeepAliveNotifications {
             let keepAliveNotificationItem = KeepAliveNotificationItem(apart: date,
                                                                       with: NotificationsManager.numberOfDaysBetweenKeepAliveNotifications,
-                                                                      and: number)
+                                                                      and: number,
+                                                                      messageNumber: messageNumbers[number])
             try? scheduleNotification(with: keepAliveNotificationItem)
         }
     }

@@ -98,9 +98,14 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
         }.done {
             self.delegate?.didRemoveIncomeSource()
             self.close()
-        }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении источника доходов",
-                                              theme: .error)
+        }.catch { error in
+            switch error {
+            case APIRequestError.unprocessedEntity(let errors):
+                self.show(errors: errors)
+            default:
+                self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении источника доходов",
+                                                  theme: .error)
+            }            
         }.finally {
             self.editTableController?.hideActivityIndicator()
         }

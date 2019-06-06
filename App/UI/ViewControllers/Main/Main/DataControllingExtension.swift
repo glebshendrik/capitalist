@@ -19,6 +19,12 @@ extension MainViewController {
         loadExpenseCategories(by: .risk)
         loadExpenseCategories(by: .safe)
     }
+    
+    private func show(errors: [String: String]) {
+        for (_, validationMessage) in errors {
+            messagePresenterManager.show(validationMessage: validationMessage)
+        }
+    }
 }
 
 extension MainViewController {
@@ -91,9 +97,14 @@ extension MainViewController {
         }.done {
             self.didRemoveIncomeSource()
         }
-        .catch { _ in
+        .catch { error in
             self.set(self.incomeSourcesActivityIndicator, hidden: true)
-            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления источника дохода", theme: .error)
+            switch error {
+            case APIRequestError.unprocessedEntity(let errors):
+                self.show(errors: errors)
+            default:
+                self.messagePresenterManager.show(navBarMessage: "Ошибка удаления источника дохода", theme: .error)
+            }
         }
     }
 }
@@ -136,9 +147,14 @@ extension MainViewController {
         }.done {
             self.didRemoveExpenseSource()
         }
-        .catch { _ in
+        .catch { error in
             self.set(self.expenseSourcesActivityIndicator, hidden: true)
-            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления кошелька", theme: .error)
+            switch error {
+            case APIRequestError.unprocessedEntity(let errors):
+                self.show(errors: errors)
+            default:
+                self.messagePresenterManager.show(navBarMessage: "Ошибка удаления кошелька", theme: .error)
+            }
         }
     }
 }

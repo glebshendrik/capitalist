@@ -119,9 +119,15 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
         }.done {
             self.delegate?.didRemoveExpenseSource()
             self.close()
-        }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении кошелька",
-                                              theme: .error)
+        }.catch { error in
+            switch error {
+            case APIRequestError.unprocessedEntity(let errors):
+                self.show(errors: errors)
+            default:
+                self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении кошелька",
+                                                  theme: .error)
+            }
+            
         }.finally {
             self.editTableController?.hideActivityIndicator()
         }
@@ -135,7 +141,8 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
     func didChangeCreditLimit() {
         if let creditLimit = expenseSourceCreditLimitAmount,
-            creditLimit.isNumeric {
+            creditLimit.isNumeric,
+            viewModel.isNew {
             editTableController?.expenseSourceAmountTextField.text = creditLimit
         }
     }
