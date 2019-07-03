@@ -76,6 +76,8 @@ class ProfileEditViewModel : FieldsViewModel {
         switch (key, reason) {
         case (.firstname, _):
             return "Некорректное имя"
+        default:
+            return "Ошибка валидации"
         }
     }
 }

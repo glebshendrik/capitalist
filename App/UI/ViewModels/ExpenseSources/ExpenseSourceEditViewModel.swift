@@ -88,6 +88,10 @@ class ExpenseSourceEditViewModel {
         return accountType == .goal
     }
     
+    var bankButtonHidden: Bool {
+        return accountType != .usual
+    }
+    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator

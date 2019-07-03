@@ -565,3 +565,9 @@ extension UIButton {
 }
 
 typealias TabAppearance = (textColor: UIColor, isHidden: Bool)
+
+extension Locale {
+    static var preferredLanguageCode: String {
+        return String(Locale.preferredLanguages[0].prefix(2))
+    }
+}

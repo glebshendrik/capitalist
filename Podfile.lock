@@ -9,6 +9,9 @@ PODS:
     - Charts/Core (= 3.2.1)
   - Charts/Core (3.2.1)
   - CircleProgressView (1.2.0)
+  - CocoaLumberjack (3.5.3):
+    - CocoaLumberjack/Core (= 3.5.3)
+  - CocoaLumberjack/Core (3.5.3)
   - CSV.swift (2.3.1)
   - CWStatusBarNotification (2.3.5)
   - IQKeyboardManager (6.2.0)
@@ -28,9 +31,17 @@ PODS:
     - PromiseKit/CorePromise
   - RandomColorSwift (1.0.0)
   - RecurrencePicker (0.2.3)
+  - SaltEdge-iOS-Swift (2.1.0):
+    - TrustKit
+  - SDWebImage/Core (5.0.3)
+  - SDWebImageSVGCoder (0.3.0):
+    - SDWebImage/Core (~> 5.0)
+    - SVGKit (>= 2.1)
   - SideMenu (5.0.2)
   - SkyFloatingLabelTextField (3.6.0)
   - StaticTableViewController (1.2.0)
+  - SVGKit (2.1.1):
+    - CocoaLumberjack (~> 3.0)
   - SVProgressHUD (2.2.5)
   - SwiftDate (5.0.10)
   - SwifterSwift (4.6.0):
@@ -58,6 +69,7 @@ PODS:
     - Swinject (~> 2.6)
   - SwinjectStoryboard (2.1.0):
     - Swinject (~> 2.5)
+  - TrustKit (1.6.1)
 
 DEPENDENCIES:
   - AlamofireImage
@@ -75,9 +87,12 @@ DEPENDENCIES:
   - PromiseKit/Alamofire (~> 6.5)
   - RandomColorSwift
   - RecurrencePicker (= 0.2.3)
+  - SaltEdge-iOS-Swift (from `https://github.com/petalvlad/saltedge-ios-swift`, branch `master`)
+  - SDWebImageSVGCoder (~> 0.3)
   - SideMenu
   - SkyFloatingLabelTextField
   - StaticTableViewController
+  - SVGKit (~> 2.1)
   - SVProgressHUD (~> 2.2)
   - SwiftDate (~> 5.0)
   - SwifterSwift (~> 4.6)
@@ -94,6 +109,7 @@ SPEC REPOS:
     - BEMCheckBox
     - Charts
     - CircleProgressView
+    - CocoaLumberjack
     - CSV.swift
     - CWStatusBarNotification
     - IQKeyboardManager
@@ -102,9 +118,12 @@ SPEC REPOS:
     - PromiseKit
     - RandomColorSwift
     - RecurrencePicker
+    - SDWebImage
+    - SDWebImageSVGCoder
     - SideMenu
     - SkyFloatingLabelTextField
     - StaticTableViewController
+    - SVGKit
     - SVProgressHUD
     - SwiftDate
     - SwifterSwift
@@ -112,16 +131,23 @@ SPEC REPOS:
     - Swinject
     - SwinjectAutoregistration
     - SwinjectStoryboard
+    - TrustKit
 
 EXTERNAL SOURCES:
   ALTextInputBar:
     :branch: master
     :git: https://github.com/bclymer/ALTextInputBar
+  SaltEdge-iOS-Swift:
+    :branch: master
+    :git: https://github.com/petalvlad/saltedge-ios-swift
 
 CHECKOUT OPTIONS:
   ALTextInputBar:
     :commit: 3b82e4cdb81fa42705ef84066f4fe82f29c1bbc8
     :git: https://github.com/bclymer/ALTextInputBar
+  SaltEdge-iOS-Swift:
+    :commit: e42977ea4a498dc777b7f8c2fb1d762cb15e98e8
+    :git: https://github.com/petalvlad/saltedge-ios-swift
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -131,6 +157,7 @@ SPEC CHECKSUMS:
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
   CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
+  CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   CSV.swift: d16f671b3090a2c0525d5f2165b18319074aae2b
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
@@ -139,9 +166,13 @@ SPEC CHECKSUMS:
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   RandomColorSwift: 9f85058b721665d52d239ca166a913e083506444
   RecurrencePicker: d58e95cf2652f602f3dc4530d3d838e5603bdfd4
+  SaltEdge-iOS-Swift: cdd2402129a7353f10cd82b615a90e8a18f58f80
+  SDWebImage: d4f87d7d36c8a4d9f9459dc282e0caa057fdf935
+  SDWebImageSVGCoder: 4b354bcdc7d74ce14d9fdb3c9ed9ab2c667f3b57
   SideMenu: e5094f0b2e7d9609e100a90ae69025abd994f882
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
   StaticTableViewController: cbf8a57221ffa6bad8f3dc9d7863863ee28deee0
+  SVGKit: 652cdf7bef8bec8564d04a8511d3ab50c7595fac
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: fcdaa7ca22a903faf6d7ed231239a88d174dcae3
   SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
@@ -149,7 +180,8 @@ SPEC CHECKSUMS:
   Swinject: 48a96cda93633cf2860697b4ce76ab5db9ebaca2
   SwinjectAutoregistration: 93a908f7543c401b0c315305ac0ae501efdbce89
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
+  TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
 
-PODFILE CHECKSUM: 19a733c9bdeb6bd7f85913fcb9caf47473b879db
+PODFILE CHECKSUM: a10ba43e6fdfaeda06a98a19383552f1e4e83be4
 
 COCOAPODS: 1.5.3

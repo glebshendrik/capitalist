@@ -186,5 +186,14 @@ extension ApplicationAssembly {
         // BalanceViewController
         container.registerForSkrudzhStoryboard(ReminderEditViewController.self) { (r, c) in            
         }
+        
+        // ProvidersViewController
+        container.registerForSkrudzhStoryboard(ProvidersViewController.self) { (r, c) in
+            c.viewModel = r.resolve(ProvidersViewModel.self)
+        }
+        
+        // ProviderConnectionViewController
+        container.registerForSkrudzhStoryboard(ProviderConnectionViewController.self) { (r, c) in            
+        }
     }
 }

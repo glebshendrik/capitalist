@@ -1,0 +1,6 @@
+framework module SaltEdge {
+  umbrella header "SaltEdge-iOS-Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}

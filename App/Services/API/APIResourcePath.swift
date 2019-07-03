@@ -59,6 +59,10 @@ struct APIResourcePath {
         case .destroyFundsMove(let id):                     return "/funds_moves/\(id)"
         case .showBudget(let userId):                       return "/users/\(userId)/budget"
         case .indexHistoryTransactions(let userId):         return "/users/\(userId)/history_transactions"
+        case .indexProviderConnections(let userId, _):      return "/users/\(userId)/provider_connections"
+        case .createProviderConnection(let form):           return "/users/\(form.userId)/provider_connections"
+        case .indexAccountConnections(let userId, _):       return "/users/\(userId)/account_connections"
+        case .destroyAccountConnection(let id):             return "/account_connections/\(id)"
         }
     }
 }

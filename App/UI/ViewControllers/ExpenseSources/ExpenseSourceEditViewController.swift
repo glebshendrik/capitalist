@@ -21,7 +21,7 @@ protocol ExpenseSourceEditInputProtocol {
     func set(delegate: ExpenseSourceEditViewControllerDelegate?)
 }
 
-class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
+class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
@@ -29,6 +29,7 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     
     var viewModel: ExpenseSourceEditViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var router: ApplicationRouterProtocol!
     
     private var delegate: ExpenseSourceEditViewControllerDelegate?
     
@@ -138,7 +139,23 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     }
 }
 
+extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate {
+    func didSelect(providerViewModel: ProviderViewModel) {
+        print(providerViewModel.name)
+        updateBankButtonUI()
+    }
+}
+
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
+    
+    func didTapBankButton() {
+        if let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController {
+            
+            providersViewController.delegate = self
+            slideUp(viewController: providersViewController)
+        }
+    }
+    
     func didChangeCreditLimit() {
         if let creditLimit = expenseSourceCreditLimitAmount,
             creditLimit.isNumeric,
@@ -233,6 +250,7 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
         updateTextFieldsUI()
         updateCurrencyUI()
         updateIconUI()
+        updateBankButtonUI()
         updateTableUI(animated: false)
         validateUI()
     }
@@ -258,9 +276,14 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
         editTableController?.setTypeSwitch(hidden: !viewModel.isNew, animated: animated, reload: false)
         editTableController?.setAmount(hidden: viewModel.amountHidden, animated: animated, reload: false)
         editTableController?.setGoalAmount(hidden: !viewModel.isGoal, animated: animated, reload: false)
-        editTableController?.setCreditLimit(hidden: viewModel.creditLimitHidden, animated: animated, reload: false)
+        editTableController?.setCreditLimit(hidden: viewModel.creditLimitHidden, animated: animated, reload: false)        
+        editTableController?.setBankButton(hidden: viewModel.bankButtonHidden, animated: animated, reload: false)
         editTableController?.updateTabsAppearence()
         editTableController?.reloadData(animated: animated)
+    }
+    
+    private func updateBankButtonUI() {
+        
     }
     
     private func updateIconUI() {

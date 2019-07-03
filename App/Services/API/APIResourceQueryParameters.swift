@@ -28,6 +28,10 @@ struct APIResourceQueryParameters {
             return [ "included_in_balance" : includedInBalance.string ]
         case .createIncome(_, let shouldCloseActive):
             return [ "close_active" : shouldCloseActive.string ]
+        case .indexProviderConnections(_, let providerId):
+            return [ "provider_id" : providerId ]
+        case .indexAccountConnections(_, let connectionId):
+            return [ "connection_id" : connectionId ]
         default:
             break
         }

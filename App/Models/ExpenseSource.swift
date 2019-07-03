@@ -29,6 +29,7 @@ struct ExpenseSource : Decodable {
     let deletedAt: Date?
     let waitingDebts: [FundsMove]?
     let waitingLoans: [FundsMove]?
+    let accountConnection: AccountConnection?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -45,6 +46,7 @@ struct ExpenseSource : Decodable {
         case waitingDebts = "waiting_debts"
         case waitingLoans = "waiting_loans"
         case creditLimitCents = "credit_limit_cents"
+        case accountConnection = "account_connection"
     }
     
 }
@@ -60,6 +62,7 @@ struct ExpenseSourceCreationForm : Encodable {
     let goalAmountCurrency: String
     let creditLimitCents: Int?
     let creditLimitCurrency: String
+    let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -71,6 +74,7 @@ struct ExpenseSourceCreationForm : Encodable {
         case goalAmountCurrency = "goal_amount_currency"
         case creditLimitCents = "credit_limit_cents"
         case creditLimitCurrency = "credit_limit_currency"
+        case accountConnectionAttributes = "account_connection_attributes"
     }
 }
 
@@ -81,6 +85,7 @@ struct ExpenseSourceUpdatingForm : Encodable {
     let iconURL: URL?
     let goalAmountCents: Int?
     let creditLimitCents: Int?
+    let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -88,6 +93,7 @@ struct ExpenseSourceUpdatingForm : Encodable {
         case amountCents = "amount_cents"
         case goalAmountCents = "goal_amount_cents"
         case creditLimitCents = "credit_limit_cents"
+        case accountConnectionAttributes = "account_connection_attributes"
     }
 }
 

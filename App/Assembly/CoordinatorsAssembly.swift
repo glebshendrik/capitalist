@@ -39,5 +39,7 @@ class CoordinatorsAssembly: Assembly {
         container.autoregister(FundsMovesCoordinatorProtocol.self, initializer: FundsMovesCoordinator.init)
         
         container.autoregister(HistoryTransactionsCoordinatorProtocol.self, initializer: HistoryTransactionsCoordinator.init)
+        
+        container.autoregister(SaltEdgeCoordinatorProtocol.self, initializer: SaltEdgeCoordinator.init)
     }
 }

@@ -14,7 +14,7 @@ struct Session : Decodable {
     let joyBasketId: Int
     let riskBasketId: Int
     let safeBasketId: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case token
         case user
@@ -35,7 +35,7 @@ struct Session : Decodable {
         userId = user.id
         joyBasketId = user.joyBasketId
         riskBasketId = user.riskBasketId
-        safeBasketId = user.safeBasketId
+        safeBasketId = user.safeBasketId        
     }
 }
 

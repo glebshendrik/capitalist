@@ -18,6 +18,7 @@ protocol ExpenseSourceEditTableControllerDelegate {
     func didSelectCurrency(currency: Currency)
     func didChangeCreditLimit()
     func didTapRemoveButton()
+    func didTapBankButton()
 }
 
 class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController {
@@ -42,12 +43,14 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     @IBOutlet weak var expenseSourceGoalAmountTextField: MoneyTextField!
     
     @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var bankButton: UIButton!
     
     @IBOutlet weak var typeSwitchCell: UITableViewCell!
     @IBOutlet weak var amountCell: UITableViewCell!
     @IBOutlet weak var creditLimitCell: UITableViewCell!
     @IBOutlet weak var goalAmountCell: UITableViewCell!
     @IBOutlet weak var removeCell: UITableViewCell!
+    @IBOutlet weak var bankCell: UITableViewCell!
     
     var delegate: ExpenseSourceEditTableControllerDelegate?
     
@@ -167,6 +170,14 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     
     func setRemoveButton(hidden: Bool) {
         set(cell: removeCell, hidden: hidden, animated: false, reload: true)
+    }
+    
+    @IBAction func didTapBankButton(_ sender: Any) {
+        delegate?.didTapBankButton()
+    }
+    
+    func setBankButton(hidden: Bool, animated: Bool = true, reload: Bool = true) {
+        set(cell: bankCell, hidden: hidden, animated: animated, reload: reload)
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

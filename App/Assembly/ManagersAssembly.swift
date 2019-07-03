@@ -49,6 +49,8 @@ class ManagersAssembly: Assembly {
         container.autoregister(CurrencyConverterProtocol.self, initializer: CurrencyConverter.init).inObjectScope(.container)
         
         container.autoregister(ExportManagerProtocol.self, initializer: ExportManager.init).inObjectScope(.container)
+        
+        container.autoregister(SaltEdgeManagerProtocol.self, initializer: SaltEdgeManager.init).inObjectScope(.container)
     }
     
 }

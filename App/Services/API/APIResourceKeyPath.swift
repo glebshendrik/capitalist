@@ -80,6 +80,12 @@ struct APIResourceKeyPath {
             return ResourceKeyPath(singular: "budget", plural: "budgets")
         case .indexHistoryTransactions:
             return ResourceKeyPath(singular: "history_transaction", plural: "history_transactions")
+        case .indexAccountConnections,
+             .destroyAccountConnection:
+            return ResourceKeyPath(singular: "account_connection", plural: "account_connections")
+        case .indexProviderConnections,
+             .createProviderConnection:
+            return ResourceKeyPath(singular: "provider_connection", plural: "provider_connections")
         }
     }
 }

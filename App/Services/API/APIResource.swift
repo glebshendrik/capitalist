@@ -95,6 +95,14 @@ enum APIResource: URLRequestConvertible {
     // HistoryTransactions
     case indexHistoryTransactions(userId: Int)
     
+    // AccountConnections
+    case indexAccountConnections(userId: Int, connectionId: String)
+    case destroyAccountConnection(id: Int)
+    
+    // ProviderConnections
+    case indexProviderConnections(userId: Int, providerId: String)
+    case createProviderConnection(form: ProviderConnectionCreationForm)
+    
     var method: HTTPMethod {
         return APIResourceMethod.method(for: self)
     }

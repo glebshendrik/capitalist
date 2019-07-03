@@ -40,6 +40,7 @@ struct User : Decodable {
     let safeBasketId: Int
     let currency: Currency
     let defaultPeriod: AccountingPeriod
+    let saltEdgeCustomerSecret: String?
     
     var fullname: String? {
         if let firstname = firstname, !firstname.isEmpty, let lastname = lastname, !lastname.isEmpty {
@@ -65,20 +66,48 @@ struct User : Decodable {
         case safeBasketId = "safe_basket_id"
         case currency = "default_currency"
         case defaultPeriod = "default_period"
+        case saltEdgeCustomerSecret = "salt_edge_customer_secret"
+    }
+}
+
+extension User {
+    var saltEdgeIdentifier: String {
+        #if DEBUG
+        return "3b_staging_user_\(id)"
+        #else
+        return "3b_production_user_\(id)"
+        #endif
     }
 }
 
 struct UserUpdatingForm : Encodable {
     let userId: Int
     let firstname: String?
+    let saltEdgeCustomerSecret: String?
+    
+    init(userId: Int, firstname: String?) {
+        self.init(userId: userId, firstname: firstname, saltEdgeCustomerSecret: nil)
+    }
+    
+    init(userId: Int, firstname: String?, saltEdgeCustomerSecret: String?) {
+        self.userId = userId
+        self.firstname = firstname
+        self.saltEdgeCustomerSecret = saltEdgeCustomerSecret
+    }
     
     enum CodingKeys: String, CodingKey {
         case firstname
+        case saltEdgeCustomerSecret = "salt_edge_customer_secret"
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(firstname, forKey: .firstname)        
+        if let firstname = firstname {
+            try container.encode(firstname, forKey: .firstname)
+        }
+        if let saltEdgeCustomerSecret = saltEdgeCustomerSecret {
+            try container.encode(saltEdgeCustomerSecret, forKey: .saltEdgeCustomerSecret)
+        }        
     }
 }
 

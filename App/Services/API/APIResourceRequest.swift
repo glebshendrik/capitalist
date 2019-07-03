@@ -50,6 +50,7 @@ struct APIResourceRequest {
         case .updateExpense(let form):                      return encode(form)
         case .createFundsMove(let form):                    return encode(form)
         case .updateFundsMove(let form):                    return encode(form)
+        case .createProviderConnection(let form):           return encode(form)
         default:                                            return nil
         }
     }
