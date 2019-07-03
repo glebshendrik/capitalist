@@ -41,5 +41,9 @@ class ServicesAssembly: Assembly {
         container.autoregister(FundsMovesServiceProtocol.self, initializer: FundsMovesService.init)
         
         container.autoregister(HistoryTransactionsServiceProtocol.self, initializer: HistoryTransactionsService.init)
+        
+        container.autoregister(AccountConnectionsServiceProtocol.self, initializer: AccountConnectionsService.init)
+        
+        container.autoregister(ProviderConnectionsServiceProtocol.self, initializer: ProviderConnectionsService.init)
     }
 }

@@ -168,6 +168,10 @@
 		FA7DB73A2210332D00559878 /* CurrenciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DB7392210332D00559878 /* CurrenciesViewController.swift */; };
 		FA7EDFF222CCC0890054EAD3 /* ProviderConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFF122CCC0890054EAD3 /* ProviderConnection.swift */; };
 		FA7EDFF422CCC0990054EAD3 /* AccountConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFF322CCC0990054EAD3 /* AccountConnection.swift */; };
+		FA7EDFF622CCD5BC0054EAD3 /* AccountConnectionsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFF522CCD5BC0054EAD3 /* AccountConnectionsServiceProtocol.swift */; };
+		FA7EDFF822CCD65A0054EAD3 /* ProviderConnectionsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFF722CCD65A0054EAD3 /* ProviderConnectionsServiceProtocol.swift */; };
+		FA7EDFFA22CCD6C90054EAD3 /* AccountConnectionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFF922CCD6C90054EAD3 /* AccountConnectionsService.swift */; };
+		FA7EDFFC22CCD74D0054EAD3 /* ProviderConnectionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFFB22CCD74D0054EAD3 /* ProviderConnectionsService.swift */; };
 		FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */; };
 		FA817488222821DC00EE6116 /* ExchangeRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817487222821DC00EE6116 /* ExchangeRatesService.swift */; };
 		FA81748A222822FB00EE6116 /* ExchangeRatesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */; };
@@ -499,6 +503,10 @@
 		FA7DB7392210332D00559878 /* CurrenciesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesViewController.swift; sourceTree = "<group>"; };
 		FA7EDFF122CCC0890054EAD3 /* ProviderConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConnection.swift; sourceTree = "<group>"; };
 		FA7EDFF322CCC0990054EAD3 /* AccountConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConnection.swift; sourceTree = "<group>"; };
+		FA7EDFF522CCD5BC0054EAD3 /* AccountConnectionsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConnectionsServiceProtocol.swift; sourceTree = "<group>"; };
+		FA7EDFF722CCD65A0054EAD3 /* ProviderConnectionsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConnectionsServiceProtocol.swift; sourceTree = "<group>"; };
+		FA7EDFF922CCD6C90054EAD3 /* AccountConnectionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConnectionsService.swift; sourceTree = "<group>"; };
+		FA7EDFFB22CCD74D0054EAD3 /* ProviderConnectionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConnectionsService.swift; sourceTree = "<group>"; };
 		FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesServiceProtocol.swift; sourceTree = "<group>"; };
 		FA817487222821DC00EE6116 /* ExchangeRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesService.swift; sourceTree = "<group>"; };
 		FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesCoordinator.swift; sourceTree = "<group>"; };
@@ -1282,6 +1290,8 @@
 				FAA426032230F5E600B64925 /* ExpensesService.swift */,
 				FAA426052230F61E00B64925 /* FundsMovesService.swift */,
 				FA6F2E8A22435052008C160F /* HistoryTransactionsService.swift */,
+				FA7EDFF922CCD6C90054EAD3 /* AccountConnectionsService.swift */,
+				FA7EDFFB22CCD74D0054EAD3 /* ProviderConnectionsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1385,6 +1395,8 @@
 				FAA425FF2230F57400B64925 /* ExpensesServiceProtocol.swift */,
 				FAA426012230F5BA00B64925 /* FundsMovesServiceProtocol.swift */,
 				FA6F2E8822434FFE008C160F /* HistoryTransactionsServiceProtocol.swift */,
+				FA7EDFF522CCD5BC0054EAD3 /* AccountConnectionsServiceProtocol.swift */,
+				FA7EDFF722CCD65A0054EAD3 /* ProviderConnectionsServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1933,6 +1945,7 @@
 				FA16FC71223A82930053C273 /* ExpenseSourceTableViewCell.swift in Sources */,
 				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
 				FA6270AA21CA93D100CC0269 /* FieldsViewModel.swift in Sources */,
+				FA7EDFFC22CCD74D0054EAD3 /* ProviderConnectionsService.swift in Sources */,
 				FA7276C1225251FB0086D4D1 /* FundsMoveEditDelegateExtension.swift in Sources */,
 				FA6F2E8F224350E7008C160F /* HistoryTransactionsCoordinator.swift in Sources */,
 				FA7462FB227C820F00E6D39B /* FundsMoveViewModel.swift in Sources */,
@@ -1955,9 +1968,11 @@
 				FA81748A222822FB00EE6116 /* ExchangeRatesCoordinator.swift in Sources */,
 				FA689F32228567C000FA75C9 /* BalanceNavigatingExtension.swift in Sources */,
 				FAD88F1D21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift in Sources */,
+				FA7EDFF822CCD65A0054EAD3 /* ProviderConnectionsServiceProtocol.swift in Sources */,
 				FAD88F5921AEC1F800BE7BC1 /* AuthenticationServiceProtocol.swift in Sources */,
 				FAC9BA6822AFD2E200310F6B /* ProviderConnectionViewController.swift in Sources */,
 				FA7276D5225361700086D4D1 /* SettingUpControllingExtension.swift in Sources */,
+				FA7EDFFA22CCD6C90054EAD3 /* AccountConnectionsService.swift in Sources */,
 				FAD88F3921AEBAA600BE7BC1 /* Session.swift in Sources */,
 				FA0CAE2221D679D100805288 /* IconsViewController.swift in Sources */,
 				FA715E5221FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift in Sources */,
@@ -1989,6 +2004,7 @@
 				FACC01E4224B52460044A747 /* StatisticsViewController.swift in Sources */,
 				FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */,
 				FA0CAE1721D66C8700805288 /* IconsServiceProtocol.swift in Sources */,
+				FA7EDFF622CCD5BC0054EAD3 /* AccountConnectionsServiceProtocol.swift in Sources */,
 				FA630C2A2293A8FC00242AB3 /* FloatingTextField.swift in Sources */,
 				FAC3B9C721C0F2B00015A12F /* IncomeSourcesServiceProtocol.swift in Sources */,
 				FA66FB7322269EC900708C71 /* IncomeEditViewController.swift in Sources */,
