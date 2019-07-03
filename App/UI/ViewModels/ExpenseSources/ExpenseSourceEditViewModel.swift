@@ -24,6 +24,7 @@ enum ExpenseSourceUpdatingError : Error {
 class ExpenseSourceEditViewModel {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
+    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
     
     private var expenseSource: ExpenseSource? = nil
     
@@ -93,9 +94,11 @@ class ExpenseSourceEditViewModel {
     }
     
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol,
+         bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.accountCoordinator = accountCoordinator
+        self.bankConnectionsCoordinator = bankConnectionsCoordinator
     }
     
     func set(expenseSource: ExpenseSource) {
@@ -103,6 +106,25 @@ class ExpenseSourceEditViewModel {
         selectedIconURL = iconURL
         accountType = expenseSource.accountType
         selectedCurrency = expenseSource.currency
+    }
+    
+    func loadProviderConnection(for providerId: String) -> Promise<ProviderConnection> {
+        return bankConnectionsCoordinator.loadProviderConnection(for: providerId)
+    }
+    
+    func createBankConnectionSession(for providerViewModel: ProviderViewModel) -> Promise<ProviderViewModel> {
+        let languageCode = String(Locale.preferredLanguages[0].prefix(2)).lowercased()
+        return  firstly {
+                    bankConnectionsCoordinator.createSaltEdgeConnectSession(providerCode: providerViewModel.code,
+                                                                            languageCode: languageCode)
+                }.then { connectURL -> Promise<ProviderViewModel> in
+                    providerViewModel.connectURL = connectURL
+                    return Promise.value(providerViewModel)
+                }
+    }
+    
+    func createProviderConnection(connectionId: String, connectionSecret: String, providerViewModel: ProviderViewModel) -> Promise<ProviderConnection> {
+        return bankConnectionsCoordinator.createProviderConnection(connectionId: connectionId, connectionSecret: connectionSecret, provider: providerViewModel.provider)
     }
     
     func loadDefaultCurrency() -> Promise<Void> {

@@ -40,6 +40,6 @@ class CoordinatorsAssembly: Assembly {
         
         container.autoregister(HistoryTransactionsCoordinatorProtocol.self, initializer: HistoryTransactionsCoordinator.init)
         
-        container.autoregister(SaltEdgeCoordinatorProtocol.self, initializer: SaltEdgeCoordinator.init)
+        container.autoregister(BankConnectionsCoordinatorProtocol.self, initializer: BankConnectionsCoordinator.init)
     }
 }

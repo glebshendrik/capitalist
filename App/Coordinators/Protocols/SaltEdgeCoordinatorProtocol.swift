@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 import SaltEdge
 
-protocol SaltEdgeCoordinatorProtocol {
+protocol BankConnectionsCoordinatorProtocol {
     func setup()
     func loadProviders(topCountry: String?) -> Promise<[SEProvider]>
     func createConnectSession(providerCode: String, languageCode: String) -> Promise<URL>

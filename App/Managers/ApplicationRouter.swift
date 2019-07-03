@@ -21,7 +21,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private let notificationsCoordinator: NotificationsCoordinatorProtocol
     private var accountCoordinator: AccountCoordinatorProtocol!
     private let soundsManager: SoundsManagerProtocol
-    private var saltEdgeCoordinator: SaltEdgeCoordinatorProtocol!
+    private var saltEdgeCoordinator: BankConnectionsCoordinatorProtocol!
     
     private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     
@@ -40,7 +40,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     func initDependencies(with resolver: Swinject.Resolver) {
         accountCoordinator = resolver.resolve(AccountCoordinatorProtocol.self)!
-        saltEdgeCoordinator = resolver.resolve(SaltEdgeCoordinatorProtocol.self)!
+        saltEdgeCoordinator = resolver.resolve(BankConnectionsCoordinatorProtocol.self)!
     }
     
     func start(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {

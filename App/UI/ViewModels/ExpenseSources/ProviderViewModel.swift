@@ -10,7 +10,15 @@ import Foundation
 import SaltEdge
 
 class ProviderViewModel {    
-    private let provider: SEProvider
+    let provider: SEProvider
+    
+    var id: String {
+        return provider.id
+    }
+    
+    var code: String {
+        return provider.code
+    }
     
     var name: String {
         return provider.name
@@ -19,6 +27,8 @@ class ProviderViewModel {
     var logoURL: URL {
         return provider.logoURL
     }
+    
+    var connectURL: URL? = nil
     
     init(provider: SEProvider) {
         self.provider = provider

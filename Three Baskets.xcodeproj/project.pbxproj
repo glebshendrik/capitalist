@@ -207,8 +207,8 @@
 		FA8AD0DE22C5F1C50084AD19 /* ProviderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0DD22C5F1C50084AD19 /* ProviderViewModel.swift */; };
 		FA8AD0E022C5F4040084AD19 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0DF22C5F4040084AD19 /* ProvidersViewController.swift */; };
 		FA8AD0E222C5F48B0084AD19 /* ProvidersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */; };
-		FA8AD0E422C5F5030084AD19 /* SaltEdgeCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E322C5F5030084AD19 /* SaltEdgeCoordinatorProtocol.swift */; };
-		FA8AD0E622C5F5E60084AD19 /* SaltEdgeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E522C5F5E60084AD19 /* SaltEdgeCoordinator.swift */; };
+		FA8AD0E422C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */; };
+		FA8AD0E622C5F5E60084AD19 /* BankConnectionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */; };
 		FA927D30224CE2BB002AA2CE /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA927D2F224CE2BB002AA2CE /* FilterCollectionViewCell.swift */; };
 		FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */; };
 		FA9F962A21C2A86B00FD64C1 /* IncomeSourceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */; };
@@ -542,8 +542,8 @@
 		FA8AD0DD22C5F1C50084AD19 /* ProviderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderViewModel.swift; sourceTree = "<group>"; };
 		FA8AD0DF22C5F4040084AD19 /* ProvidersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewController.swift; sourceTree = "<group>"; };
 		FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewModel.swift; sourceTree = "<group>"; };
-		FA8AD0E322C5F5030084AD19 /* SaltEdgeCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltEdgeCoordinatorProtocol.swift; sourceTree = "<group>"; };
-		FA8AD0E522C5F5E60084AD19 /* SaltEdgeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltEdgeCoordinator.swift; sourceTree = "<group>"; };
+		FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionsCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionsCoordinator.swift; sourceTree = "<group>"; };
 		FA927D2F224CE2BB002AA2CE /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceViewModel.swift; sourceTree = "<group>"; };
 		FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewController.swift; sourceTree = "<group>"; };
@@ -1264,7 +1264,7 @@
 				FAA4260B2230F78300B64925 /* ExpensesCoordinator.swift */,
 				FAA4260D2230F7CC00B64925 /* FundsMovesCoordinator.swift */,
 				FA6F2E8E224350E7008C160F /* HistoryTransactionsCoordinator.swift */,
-				FA8AD0E522C5F5E60084AD19 /* SaltEdgeCoordinator.swift */,
+				FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1372,7 +1372,7 @@
 				FAA426072230F71100B64925 /* ExpensesCoordinatorProtocol.swift */,
 				FAA426092230F74300B64925 /* FundsMovesCoordinatorProtocol.swift */,
 				FA6F2E8C224350B3008C160F /* HistoryTransactionsCoordinatorProtocol.swift */,
-				FA8AD0E322C5F5030084AD19 /* SaltEdgeCoordinatorProtocol.swift */,
+				FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1870,7 +1870,7 @@
 				FA0CAE0521D2615900805288 /* ExpenseSourcesCoordinator.swift in Sources */,
 				FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */,
 				FA7276AD22524AEC0086D4D1 /* BudgetControllingExtension.swift in Sources */,
-				FA8AD0E622C5F5E60084AD19 /* SaltEdgeCoordinator.swift in Sources */,
+				FA8AD0E622C5F5E60084AD19 /* BankConnectionsCoordinator.swift in Sources */,
 				FA66FB69222048BC00708C71 /* EditableCell.swift in Sources */,
 				FA7276CB22525FFD0086D4D1 /* RearrangeController.swift in Sources */,
 				FA6F2E8B22435052008C160F /* HistoryTransactionsService.swift in Sources */,
@@ -2040,7 +2040,7 @@
 				FAED7DB621F0E35100BF6FE1 /* ExpenseCategoryEditViewModel.swift in Sources */,
 				FA7DB738221032BC00559878 /* CurrencyCollectionViewCell.swift in Sources */,
 				FA630C202292AC5D00242AB3 /* Infrastructure.swift in Sources */,
-				FA8AD0E422C5F5030084AD19 /* SaltEdgeCoordinatorProtocol.swift in Sources */,
+				FA8AD0E422C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift in Sources */,
 				FA66FB752226AB0A00708C71 /* TransactionEditViewModel.swift in Sources */,
 				FAD88F5021AEC1A500BE7BC1 /* DevicesService.swift in Sources */,
 				FAC3B9C121BE15EC0015A12F /* OnboardingViewController.swift in Sources */,

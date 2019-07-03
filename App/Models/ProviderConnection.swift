@@ -21,7 +21,6 @@ struct ProviderConnection : Decodable {
     let providerId: String
     let providerCode: String
     let providerName: String
-    let customerId: String
     let logoURL: URL?
     let status: ConnectionStatus
     let createdAt: Date?
@@ -33,11 +32,10 @@ struct ProviderConnection : Decodable {
         case providerId = "provider_id"
         case providerCode = "provider_code"
         case providerName = "provider_name"
-        case customerId = "customer_id"
         case logoURL = "logo_url"
         case status
         case createdAt = "created_at"
-    }    
+    }
 }
 
 struct ProviderConnectionCreationForm : Encodable {
@@ -47,7 +45,6 @@ struct ProviderConnectionCreationForm : Encodable {
     let providerId: String
     let providerCode: String
     let providerName: String
-    let customerId: String
     let logoURL: URL?
     let status: ConnectionStatus
     
@@ -57,7 +54,6 @@ struct ProviderConnectionCreationForm : Encodable {
         case providerId = "provider_id"
         case providerCode = "provider_code"
         case providerName = "provider_name"
-        case customerId = "customer_id"
         case logoURL = "logo_url"
         case status
     }
