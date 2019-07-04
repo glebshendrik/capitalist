@@ -9,9 +9,11 @@
 import Foundation
 import PromiseKit
 import SaltEdge
+import SwifterSwift
 
 enum BankConnectionError : Error {
     case providerConnectionNotFound
+    case allBankAccountsAlreadyUsed
 }
 
 class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
@@ -77,24 +79,39 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
         return providerConnectionsService.create(with: form)
     }
     
-    func getSaltEdgeConnection(secret: String) -> Promise<SEConnection> {
-        return saltEdgeManager.getConnection(secret: secret)
+    func loadAvailableSaltEdgeAccounts(for providerConnection: ProviderConnection, currencyCode: String?) -> Promise<[SEAccount]> {
+        return  firstly {
+                    when(fulfilled: loadSaltEdgeAccounts(for: providerConnection.connectionSecret),
+                                    loadUsedAccountConnections(for: providerConnection.connectionId))
+                }.then { accounts, accountConnections -> Promise<[SEAccount]> in
+                    
+                    let usedAccountsHash = accountConnections.reduce(into: [String : AccountConnection]()) { (hash, item) in
+                        hash[item.accountId] = item
+                    }
+                    
+                    let availableAccounts = accounts.filter { account in
+                        if let currencyCode = currencyCode, account.currencyCode != currencyCode {
+                            return false
+                        }
+                        return usedAccountsHash[account.id] == nil
+                    }
+                    
+                    return Promise.value(availableAccounts)
+                }
     }
     
-    func removeSaltEdgeConnection(secret: String) -> Promise<Void> {
-        return saltEdgeManager.removeConnection(secret: secret)
-    }
-    
-    func refreshSaltEdgeConnection(secret: String, provider: SEProvider, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void> {
-        return saltEdgeManager.refreshConnection(secret: secret, provider: provider, fetchingDelegate: fetchingDelegate)
-    }
-    
-    func getSaltEdgeProvider(code: String) -> Promise<SEProvider> {
-        return saltEdgeManager.getProvider(code: code)
-    }
-    
-    func loadSaltEdgeAccounts(for connectionSecret: String) -> Promise<[SEAccount]> {
+}
+
+extension BankConnectionsCoordinator {
+    private func loadSaltEdgeAccounts(for connectionSecret: String) -> Promise<[SEAccount]> {
         return saltEdgeManager.loadAccounts(for: connectionSecret)
+    }
+    
+    private func loadUsedAccountConnections(for connectionId: String) -> Promise<[AccountConnection]> {
+        guard let currentUserId = accountCoordinator.currentSession?.userId else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        return accountConnectionsService.index(for: currentUserId, connectionId: connectionId)
     }
 }
 
@@ -132,5 +149,23 @@ extension BankConnectionsCoordinator {
                 }.then {
                     return self.setCustomerSecret(customerSecret: saltEdgeCustomerSecret)
                 }
+    }
+}
+
+extension BankConnectionsCoordinator {
+    private func getSaltEdgeConnection(secret: String) -> Promise<SEConnection> {
+        return saltEdgeManager.getConnection(secret: secret)
+    }
+    
+    private func removeSaltEdgeConnection(secret: String) -> Promise<Void> {
+        return saltEdgeManager.removeConnection(secret: secret)
+    }
+    
+    private func refreshSaltEdgeConnection(secret: String, provider: SEProvider, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void> {
+        return saltEdgeManager.refreshConnection(secret: secret, provider: provider, fetchingDelegate: fetchingDelegate)
+    }
+    
+    private func getSaltEdgeProvider(code: String) -> Promise<SEProvider> {
+        return saltEdgeManager.getProvider(code: code)
     }
 }

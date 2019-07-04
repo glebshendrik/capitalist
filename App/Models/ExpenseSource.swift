@@ -19,12 +19,12 @@ struct ExpenseSource : Decodable {
     let name: String
     let amountCurrency: String
     let amount: String
-    let amountCents: Int
+    var amountCents: Int
     let currency: Currency
     let iconURL: URL?
     let accountType: AccountType
     let goalAmountCents: Int?
-    let creditLimitCents: Int?
+    var creditLimitCents: Int?
     let order: Int
     let deletedAt: Date?
     let waitingDebts: [FundsMove]?

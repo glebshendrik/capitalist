@@ -68,6 +68,7 @@ struct Infrastructure {
         case BankConnectionViewController
         case ProvidersViewController
         case ProviderConnectionViewController
+        case AccountsViewController
         
         // Expense Categories
         case ExpenseCategoryEditNavigationController
@@ -141,7 +142,8 @@ struct Infrastructure {
                  .ExpenseSourceSelectViewController,
                  .BankConnectionViewController,
                  .ProvidersViewController,
-                 .ProviderConnectionViewController:
+                 .ProviderConnectionViewController,
+                 .AccountsViewController:
                 return .ExpenseSources
             case .ExpenseCategoryEditNavigationController,
                  .ExpenseCategoryEditViewController,

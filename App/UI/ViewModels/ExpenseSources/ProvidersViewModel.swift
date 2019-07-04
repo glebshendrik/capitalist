@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 class ProvidersViewModel {
-    private let saltEdgeCoordinator: BankConnectionsCoordinatorProtocol
+    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
     
     private var filteredProviderViewModels: [ProviderViewModel] = []
     private var providerViewModels: [ProviderViewModel] = [] {
@@ -35,13 +35,13 @@ class ProvidersViewModel {
         }
     }
     
-    init(saltEdgeCoordinator: BankConnectionsCoordinatorProtocol) {
-        self.saltEdgeCoordinator = saltEdgeCoordinator
+    init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
+        self.bankConnectionsCoordinator = bankConnectionsCoordinator
     }
     
     func loadProviders() -> Promise<Void> {
         return  firstly {
-                    saltEdgeCoordinator.loadSaltEdgeProviders(topCountry: Locale.preferredLanguageCode.uppercased())
+                    bankConnectionsCoordinator.loadSaltEdgeProviders(topCountry: Locale.preferredLanguageCode.uppercased())
                 }.get { providers in
                     self.providerViewModels = providers.map { ProviderViewModel(provider: $0) }
                 }.asVoid()

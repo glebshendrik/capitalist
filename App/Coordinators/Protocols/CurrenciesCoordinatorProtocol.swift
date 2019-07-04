@@ -11,4 +11,5 @@ import PromiseKit
 
 protocol CurrenciesCoordinatorProtocol {
     func index() -> Promise<[Currency]>
+    func hash() -> Promise<[String : Currency]>
 }

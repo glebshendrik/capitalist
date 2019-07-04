@@ -93,6 +93,18 @@ class ExpenseSourceEditViewModel {
         return accountType != .usual
     }
     
+    var accountConnected: Bool {
+        guard let accountConnectionAttributes = accountConnectionAttributes else {
+            return false
+        }
+        
+        return accountConnectionAttributes.shouldDestroy == nil
+    }
+    
+    var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
+//    var selectedAccountViewModel: AccountViewModel? = nil
+//    var selectedProviderConnection: ProviderConnection? = nil
+    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
@@ -101,11 +113,51 @@ class ExpenseSourceEditViewModel {
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
     }
     
+    func connect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
+        selectedCurrency = accountViewModel.currency
+        selectedIconURL = providerConnection.logoURL
+        
+        var accountConnectionId: Int? = nil
+        if let accountConnectionAttributes = accountConnectionAttributes,
+           accountConnectionAttributes.accountId == accountViewModel.id {
+            accountConnectionId = accountConnectionAttributes.id
+        }
+        
+        accountConnectionAttributes =
+            AccountConnectionNestedAttributes(id: accountConnectionId,
+                                              providerConnectionId: providerConnection.id,
+                                              accountId: accountViewModel.id,
+                                              accountName: accountViewModel.name,
+                                              nature: accountViewModel.nature,
+                                              currencyCode: accountViewModel.currencyCode,
+                                              balance: accountViewModel.amountCents ?? 0,
+                                              connectionId: providerConnection.connectionId,
+                                              shouldDestroy: nil)
+    }
+    
+    func removeAccountConnection() {
+        accountConnectionAttributes?.id = expenseSource?.accountConnection?.id
+        accountConnectionAttributes?.shouldDestroy = true
+    }
+    
     func set(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         selectedIconURL = iconURL
         accountType = expenseSource.accountType
         selectedCurrency = expenseSource.currency
+        if let accountConnection = expenseSource.accountConnection {
+            accountConnectionAttributes =
+                AccountConnectionNestedAttributes(id: accountConnection.id,
+                                                  providerConnectionId: accountConnection.providerConnection.id,
+                                                  accountId: accountConnection.accountId,
+                                                  accountName: accountConnection.accountName,
+                                                  nature: accountConnection.nature,
+                                                  currencyCode: accountConnection.currencyCode,
+                                                  balance: accountConnection.balance,
+                                                  connectionId: accountConnection.connectionId,
+                                                  shouldDestroy: nil)
+        }
+        
     }
     
     func loadProviderConnection(for providerId: String) -> Promise<ProviderConnection> {
@@ -224,7 +276,8 @@ extension ExpenseSourceEditViewModel {
                                                 goalAmountCents: goalAmountCents,
                                                 goalAmountCurrency: currencyCode,
                                                 creditLimitCents: creditLimitCents,
-                                                creditLimitCurrency: currencyCode))
+                                                creditLimitCurrency: currencyCode,
+                                                accountConnectionAttributes: accountConnectionAttributes))
     }
     
     private func validateCreation(with name: String?,
@@ -291,7 +344,8 @@ extension ExpenseSourceEditViewModel {
                                                 amountCents: amountCents!,
                                                 iconURL: iconURL,
                                                 goalAmountCents: goalAmountCents,
-                                                creditLimitCents: creditLimitCents))
+                                                creditLimitCents: creditLimitCents,
+                                                accountConnectionAttributes: accountConnectionAttributes))
     }
     
     private func validateUpdating(with name: String?,

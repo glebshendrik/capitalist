@@ -69,5 +69,7 @@ extension ApplicationAssembly {
         container.autoregister(BalanceViewModel.self, initializer: BalanceViewModel.init)
         
         container.autoregister(ProvidersViewModel.self, initializer: ProvidersViewModel.init)
+        
+        container.autoregister(AccountsViewModel.self, initializer: AccountsViewModel.init)        
     }
 }

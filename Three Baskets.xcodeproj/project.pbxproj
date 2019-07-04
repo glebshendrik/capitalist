@@ -172,6 +172,10 @@
 		FA7EDFF822CCD65A0054EAD3 /* ProviderConnectionsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFF722CCD65A0054EAD3 /* ProviderConnectionsServiceProtocol.swift */; };
 		FA7EDFFA22CCD6C90054EAD3 /* AccountConnectionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFF922CCD6C90054EAD3 /* AccountConnectionsService.swift */; };
 		FA7EDFFC22CCD74D0054EAD3 /* ProviderConnectionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFFB22CCD74D0054EAD3 /* ProviderConnectionsService.swift */; };
+		FA7EDFFE22CDA0BD0054EAD3 /* AccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFFD22CDA0BD0054EAD3 /* AccountsViewController.swift */; };
+		FA7EE00022CDA1940054EAD3 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFFF22CDA1940054EAD3 /* AccountViewModel.swift */; };
+		FA7EE00222CDA1A10054EAD3 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EE00122CDA1A10054EAD3 /* AccountsViewModel.swift */; };
+		FA7EE00422CDA1B30054EAD3 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EE00322CDA1B30054EAD3 /* AccountCell.swift */; };
 		FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */; };
 		FA817488222821DC00EE6116 /* ExchangeRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817487222821DC00EE6116 /* ExchangeRatesService.swift */; };
 		FA81748A222822FB00EE6116 /* ExchangeRatesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */; };
@@ -507,6 +511,10 @@
 		FA7EDFF722CCD65A0054EAD3 /* ProviderConnectionsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConnectionsServiceProtocol.swift; sourceTree = "<group>"; };
 		FA7EDFF922CCD6C90054EAD3 /* AccountConnectionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConnectionsService.swift; sourceTree = "<group>"; };
 		FA7EDFFB22CCD74D0054EAD3 /* ProviderConnectionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConnectionsService.swift; sourceTree = "<group>"; };
+		FA7EDFFD22CDA0BD0054EAD3 /* AccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewController.swift; sourceTree = "<group>"; };
+		FA7EDFFF22CDA1940054EAD3 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
+		FA7EE00122CDA1A10054EAD3 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
+		FA7EE00322CDA1B30054EAD3 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesServiceProtocol.swift; sourceTree = "<group>"; };
 		FA817487222821DC00EE6116 /* ExchangeRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesService.swift; sourceTree = "<group>"; };
 		FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesCoordinator.swift; sourceTree = "<group>"; };
@@ -874,6 +882,7 @@
 				FA16FC72223A82FA0053C273 /* ExpenseSourceSelectViewController.swift */,
 				FAC9BA6722AFD2E200310F6B /* ProviderConnectionViewController.swift */,
 				FA8AD0DF22C5F4040084AD19 /* ProvidersViewController.swift */,
+				FA7EDFFD22CDA0BD0054EAD3 /* AccountsViewController.swift */,
 			);
 			path = ExpenseSources;
 			sourceTree = "<group>";
@@ -920,6 +929,8 @@
 				FA16FC6E223A81F70053C273 /* ExpenseSourcesViewModel.swift */,
 				FA8AD0DD22C5F1C50084AD19 /* ProviderViewModel.swift */,
 				FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */,
+				FA7EDFFF22CDA1940054EAD3 /* AccountViewModel.swift */,
+				FA7EE00122CDA1A10054EAD3 /* AccountsViewModel.swift */,
 			);
 			path = ExpenseSources;
 			sourceTree = "<group>";
@@ -1125,6 +1136,7 @@
 				FA16FC74223AA9870053C273 /* ExpenseCategoryTableViewCell.swift */,
 				FA7463002281DDFA00E6D39B /* DebtTableViewCell.swift */,
 				FA8AD0DB22C5F18C0084AD19 /* ProviderCell.swift */,
+				FA7EE00322CDA1B30054EAD3 /* AccountCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1809,6 +1821,7 @@
 				FA6F2E96224515DE008C160F /* HistoryTransactionFilter.swift in Sources */,
 				FA7276D822537BF30086D4D1 /* FiltersSelectionViewModel.swift in Sources */,
 				FA835D5A2265BC4500A592F2 /* GraphHistoryTransactionFilter.swift in Sources */,
+				FA7EE00022CDA1940054EAD3 /* AccountViewModel.swift in Sources */,
 				FA0CAE2821D67B7F00805288 /* IconsViewModel.swift in Sources */,
 				FA0CAE1521D669C000805288 /* Icon.swift in Sources */,
 				FAA4260C2230F78300B64925 /* ExpensesCoordinator.swift in Sources */,
@@ -1902,6 +1915,7 @@
 				FA835D682265F23F00A592F2 /* HistoryTransactionsSection.swift in Sources */,
 				FA0CAE0D21D3C1F100805288 /* ExpenseSourceEditTableController.swift in Sources */,
 				FA165CEA21B769B500EAA16B /* ForgotPasswordViewController.swift in Sources */,
+				FA7EDFFE22CDA0BD0054EAD3 /* AccountsViewController.swift in Sources */,
 				FACC01F9224CBE400044A747 /* HistoryTransactionsSectionHeaderView.swift in Sources */,
 				FAD88F3221AEB7D500BE7BC1 /* KeepAliveNotificationItem.swift in Sources */,
 				FA7462FF2281AD2900E6D39B /* WaitingDebtsViewController.swift in Sources */,
@@ -1926,6 +1940,7 @@
 				FA16FC73223A82FA0053C273 /* ExpenseSourceSelectViewController.swift in Sources */,
 				FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */,
 				FAD88F0F21AEB45A00BE7BC1 /* ManagersAssembly.swift in Sources */,
+				FA7EE00222CDA1A10054EAD3 /* AccountsViewModel.swift in Sources */,
 				FACC01ED224B5FA90044A747 /* GraphTableViewCell.swift in Sources */,
 				FAA9127F220D24AD00F2C251 /* SettingsCoordinator.swift in Sources */,
 				FA630C242292ADBE00242AB3 /* ViewModelsRegistration.swift in Sources */,
@@ -2027,6 +2042,7 @@
 				FA835D5022607A7200A592F2 /* CashFlowGraphDataCalculatingExtension.swift in Sources */,
 				FA835D5222607B8600A592F2 /* NetWorthGraphDataCalculatingExtension.swift in Sources */,
 				FA16FC69223A5A060053C273 /* IncomeSourcesViewModel.swift in Sources */,
+				FA7EE00422CDA1B30054EAD3 /* AccountCell.swift in Sources */,
 				FAA426062230F61E00B64925 /* FundsMovesService.swift in Sources */,
 				FA835D602265C05E00A592F2 /* ChartsSwitchPresentingExtension.swift in Sources */,
 				FA689F342285681200FA75C9 /* BalanceLoadingExtension.swift in Sources */,

@@ -195,5 +195,10 @@ extension ApplicationAssembly {
         // ProviderConnectionViewController
         container.registerForSkrudzhStoryboard(ProviderConnectionViewController.self) { (r, c) in            
         }
+        
+        // AccountsViewController
+        container.registerForSkrudzhStoryboard(AccountsViewController.self) { (r, c) in
+            c.viewModel = r.resolve(AccountsViewModel.self)
+        }
     }
 }

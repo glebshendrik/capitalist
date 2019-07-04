@@ -19,4 +19,15 @@ class CurrenciesCoordinator : CurrenciesCoordinatorProtocol {
     func index() -> Promise<[Currency]> {
         return currenciesService.index()
     }
+    
+    func hash() -> Promise<[String : Currency]> {
+        return  firstly {
+                    index()
+                }.then { currencies -> Promise<[String : Currency]> in
+                    let hash = currencies.reduce(into: [String : Currency]()) { (hash, item) in
+                        hash[item.code] = item
+                    }
+                    return Promise.value(hash)
+                }
+    }
 }

@@ -139,11 +139,22 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     }
 }
 
-extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, ProviderConnectionViewControllerDelegate {
+extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, ProviderConnectionViewControllerDelegate, AccountsViewControllerDelegate {
     
+    func didSelect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
+        viewModel.connect(accountViewModel: accountViewModel, providerConnection: providerConnection)
+        
+    }
+    
+    func showProviders() {
+        if let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController {
+            
+            providersViewController.delegate = self
+            slideUp(viewController: providersViewController)
+        }
+    }
     
     func didSelect(providerViewModel: ProviderViewModel) {
-        updateBankButtonUI()
         setupProviderConnection(for: providerViewModel)
     }
     
@@ -165,10 +176,12 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     }
     
     func showAccountsViewController(for providerConnection: ProviderConnection) {
-        if let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController {
+        if let accountsViewController = router.viewController(Infrastructure.ViewController.AccountsViewController) as? AccountsViewController {
             
-            providersViewController.delegate = self
-            slideUp(viewController: providersViewController)
+            accountsViewController.delegate = self
+            accountsViewController.viewModel.providerConnection = providerConnection
+            accountsViewController.viewModel.currencyCode = viewModel.isNew ? nil : viewModel.selectedCurrencyCode
+            slideUp(viewController: accountsViewController)
         }
     }
     
@@ -219,10 +232,10 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
     
     func didTapBankButton() {
-        if let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController {
-            
-            providersViewController.delegate = self
-            slideUp(viewController: providersViewController)
+        if viewModel.accountConnected {
+            viewModel.removeAccountConnection()
+        } else {
+            showProviders()
         }
     }
     
