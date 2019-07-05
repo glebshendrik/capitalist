@@ -36,19 +36,19 @@ class ExpenseSourceEditViewController : UIViewController, UIMessagePresenterMana
     private var editTableController: ExpenseSourceEditTableController?
     
     private var expenseSourceName: String? {
-        return editTableController?.expenseSourceNameTextField?.text?.trimmed
+        return editTableController?.nameField?.text?.trimmed
     }
     
     private var expenseSourceAmount: String? {
-        return editTableController?.expenseSourceAmountTextField?.text?.trimmed
+        return editTableController?.amountField?.text?.trimmed
     }
     
     private var expenseSourceCreditLimitAmount: String? {
-        return editTableController?.creditLimitTextField?.text?.trimmed
+        return editTableController?.creditLimitField?.text?.trimmed
     }
     
     private var expenseSourceGoalAmount: String? {
-        return editTableController?.expenseSourceGoalAmountTextField?.text?.trimmed
+        return editTableController?.goalAmountField?.text?.trimmed
     }
     
     private var selectedIconURL: URL? {
@@ -144,6 +144,15 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     func didSelect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
         viewModel.connect(accountViewModel: accountViewModel, providerConnection: providerConnection)
         
+        if expenseSourceName == nil {
+            editTableController?.nameField?.text = accountViewModel.name
+        }
+        
+        editTableController?.amountField?.text = accountViewModel.amount
+        
+        if let creditLimit = accountViewModel.creditLimit {
+            editTableController?.creditLimitField?.text = creditLimit
+        }
     }
     
     func showProviders() {
@@ -229,7 +238,33 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     }
 }
 
+extension ExpenseSourceEditTableController : IconsViewControllerDelegate {
+    func didSelectIcon(icon: Icon) {
+        delegate?.didSelectIcon(icon: icon)
+    }
+}
+
+extension ExpenseSourceEditTableController : CurrenciesViewControllerDelegate {
+    func didSelectCurrency(currency: Currency) {
+        delegate?.didSelectCurrency(currency: currency)
+    }
+}
+
+
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowExpenseSourceIcons",
+            let iconsViewController = segue.destination as? IconsViewControllerInputProtocol {
+            iconsViewController.set(iconCategory: iconCategory)
+            iconsViewController.set(delegate: self)
+        }
+        if  segue.identifier == "showCurrenciesScreen",
+            let destination = segue.destination as? CurrenciesViewControllerInputProtocol {
+            
+            destination.set(delegate: self)
+        }
+    }
     
     func didTapBankButton() {
         if viewModel.accountConnected {
@@ -243,7 +278,7 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
         if let creditLimit = expenseSourceCreditLimitAmount,
             creditLimit.isNumeric,
             viewModel.isNew {
-            editTableController?.expenseSourceAmountTextField.text = creditLimit
+            editTableController?.amountField.text = creditLimit
         }
     }
     
@@ -339,20 +374,20 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
     }
     
     private func updateTextFieldsUI() {
-        editTableController?.expenseSourceNameTextField?.text = viewModel.name
-        editTableController?.expenseSourceAmountTextField?.text = viewModel.amount
-        editTableController?.expenseSourceGoalAmountTextField?.text = viewModel.goalAmount
-        editTableController?.creditLimitTextField?.text = viewModel.creditLimit
+        editTableController?.nameField?.text = viewModel.name
+        editTableController?.amountField?.text = viewModel.amount
+        editTableController?.goalAmountField?.text = viewModel.goalAmount
+        editTableController?.creditLimitField?.text = viewModel.creditLimit
         
-        editTableController?.expenseSourceAmountTextField?.isUserInteractionEnabled = viewModel.canChangeAmount
+        editTableController?.amountField?.isUserInteractionEnabled = viewModel.canChangeAmount
     }
     
     private func updateCurrencyUI() {
-        editTableController?.currencyTextField?.text = viewModel.selectedCurrencyName
-        editTableController?.changeCurrencyIndicator?.isHidden = !canChangeCurrency
-        editTableController?.expenseSourceAmountTextField?.currency = viewModel.selectedCurrency
-        editTableController?.expenseSourceGoalAmountTextField?.currency = viewModel.selectedCurrency
-        editTableController?.creditLimitTextField?.currency = viewModel.selectedCurrency
+        editTableController?.currencyField?.text = viewModel.selectedCurrencyName
+        editTableController?.currencyArrow?.isHidden = !canChangeCurrency
+        editTableController?.amountField?.currency = viewModel.selectedCurrency
+        editTableController?.goalAmountField?.currency = viewModel.selectedCurrency
+        editTableController?.creditLimitField?.currency = viewModel.selectedCurrency
     }
     
     private func updateTableUI(animated: Bool = true) {
@@ -371,8 +406,8 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditInputProtocol {
     
     private func updateIconUI() {
         let placeholderName = viewModel.isGoal ? "wallet-goal-default-icon" : "wallet-default-icon"
-        editTableController?.iconImageView.setImage(with: viewModel.selectedIconURL, placeholderName: placeholderName, renderingMode: .alwaysTemplate)
-        editTableController?.iconImageView.tintColor = UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
+        editTableController?.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: placeholderName, renderingMode: .alwaysTemplate)
+        editTableController?.iconView.tintColor = UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

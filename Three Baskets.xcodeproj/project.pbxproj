@@ -324,6 +324,8 @@
 		FAE3BBCF2236668300FF1397 /* BudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE3BBCE2236668300FF1397 /* BudgetView.swift */; };
 		FAE3BBD122367D0400FF1397 /* BudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE3BBD022367D0400FF1397 /* BudgetViewModel.swift */; };
 		FAE4497F229688C400E3DD27 /* Balance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAE44981229688C400E3DD27 /* Balance.storyboard */; };
+		FAEB0CCB22CF67AE00622994 /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0CCA22CF67AE00622994 /* HighlightButton.swift */; };
+		FAEB0CCD22CF755600622994 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0CCC22CF755600622994 /* Colors.swift */; };
 		FAED7D9821EC4C0D00BF6FE1 /* Basket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9721EC4C0D00BF6FE1 /* Basket.swift */; };
 		FAED7D9A21EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9921EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift */; };
 		FAED7D9C21EC618000BF6FE1 /* BasketsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9B21EC618000BF6FE1 /* BasketsService.swift */; };
@@ -667,6 +669,8 @@
 		FAE3BBD022367D0400FF1397 /* BudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewModel.swift; sourceTree = "<group>"; };
 		FAE44980229688C400E3DD27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Balance.storyboard; sourceTree = "<group>"; };
 		FAE44983229688D100E3DD27 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Balance.strings; sourceTree = "<group>"; };
+		FAEB0CCA22CF67AE00622994 /* HighlightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
+		FAEB0CCC22CF755600622994 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FAED7D9721EC4C0D00BF6FE1 /* Basket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basket.swift; sourceTree = "<group>"; };
 		FAED7D9921EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsServiceProtocol.swift; sourceTree = "<group>"; };
 		FAED7D9B21EC618000BF6FE1 /* BasketsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsService.swift; sourceTree = "<group>"; };
@@ -723,6 +727,7 @@
 				FA0CAE2921D69E2600805288 /* PagedCollectionViewLayout.swift */,
 				FACC01FE224CC7140044A747 /* CustomView.swift */,
 				FA84E7EA225DA9EF00C0A274 /* LineChartAreasRenderer.swift */,
+				FAEB0CCA22CF67AE00622994 /* HighlightButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1363,6 +1368,7 @@
 				FAD88F3421AEB8BD00BE7BC1 /* ApplicationExtensions.swift */,
 				FAD88F3621AEB8F200BE7BC1 /* UIFlowManager.swift */,
 				FA165CE321B65F2F00EAA16B /* ValidationResult.swift */,
+				FAEB0CCC22CF755600622994 /* Colors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1803,6 +1809,7 @@
 				FAD88F2821AEB75800BE7BC1 /* NotificationCategory.swift in Sources */,
 				FA84E7E922562ED700C0A274 /* CurrencyConverter.swift in Sources */,
 				FAA91271220B35F600F2C251 /* Currency.swift in Sources */,
+				FAEB0CCD22CF755600622994 /* Colors.swift in Sources */,
 				FACC01FD224CC65B0044A747 /* StatisticsTitleView.swift in Sources */,
 				FA165CEC21B7766900EAA16B /* ResetPasswordViewModel.swift in Sources */,
 				FA7DB73A2210332D00559878 /* CurrenciesViewController.swift in Sources */,
@@ -1812,6 +1819,7 @@
 				FAA426082230F71100B64925 /* ExpensesCoordinatorProtocol.swift in Sources */,
 				FA7276C5225255030086D4D1 /* TransactionsControllingExtension.swift in Sources */,
 				FA7276D3225361170086D4D1 /* SectionsControllingExtension.swift in Sources */,
+				FAEB0CCB22CF67AE00622994 /* HighlightButton.swift in Sources */,
 				FAC3B9C921C0F4610015A12F /* IncomeSourcesService.swift in Sources */,
 				FAA426182236518200B64925 /* Budget.swift in Sources */,
 				FAA426022230F5BA00B64925 /* FundsMovesServiceProtocol.swift in Sources */,

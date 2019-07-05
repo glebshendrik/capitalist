@@ -315,21 +315,7 @@ extension UIViewController {
     }
 }
 
-extension UIColor {
-    static var mainNavBarColor: UIColor {
-        return UIColor(red: 47 / 255.0,
-                       green: 58 / 255.0,
-                       blue: 88 / 255.0,
-                       alpha: 1.0)
-    }
-    
-    static var navBarColor: UIColor {
-        return UIColor(red: 242 / 255.0,
-                       green: 245 / 255.0,
-                       blue: 254 / 255.0,
-                       alpha: 1.0)
-    }
-}
+
 
 /// Navigation bar colors for `ColorableNavigationController`, called on `push` & `pop` actions
 public protocol NavigationBarColorable: class {

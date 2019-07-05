@@ -7,42 +7,42 @@
 //
 
 import UIKit
+import SDWebImageSVGCoder
 
 protocol ExpenseSourceEditTableControllerDelegate {
-    var accountType: AccountType { get }
-    var canChangeCurrency: Bool { get }
-    var canChangeAmount: Bool { get }
-    func validationNeeded()
-    func didSelectIcon(icon: Icon)
-    func didSwitch(accountType: AccountType)
-    func didSelectCurrency(currency: Currency)
-    func didChangeCreditLimit()
+    func didTap(accountType: AccountType)
+    func didTapIcon()
+    func didTapCurrency()
     func didTapRemoveButton()
-    func didTapBankButton()
+    func didTapBankButton()    
+    func didChangeCreditLimit()
 }
 
 class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController {
-    @IBOutlet weak var generalExpenseSourceTabTitleLabel: UILabel!
-    @IBOutlet weak var generalExpenseSourceTabSelectionIndicator: UIView!
+    @IBOutlet private weak var usualTabLabel: UILabel!
+    @IBOutlet private weak var usualTabSelection: UIView!
     
-    @IBOutlet weak var goalExpenseSourceTabTitleLabel: UILabel!
-    @IBOutlet weak var goalExpenseSourceTabSelectionIndicator: UIView!
+    @IBOutlet private weak var goalTabLabel: UILabel!
+    @IBOutlet private weak var goalTabSelection: UIView!
     
-    @IBOutlet weak var debtExpenseSourceTabTitleLabel: UILabel!
-    @IBOutlet weak var debtExpenseSourceTabSelectionIndicator: UIView!
+    @IBOutlet private weak var debtTabLabel: UILabel!
+    @IBOutlet private weak var debtTabSelection: UIView!
     
-    @IBOutlet weak var expenseSourceNameTextField: FloatingTextField!
+    @IBOutlet weak var nameField: FloatingTextField!
+    @IBOutlet weak var currencyField: FloatingTextField!
+    @IBOutlet weak var amountField: MoneyTextField!
+    @IBOutlet weak var creditLimitField: MoneyTextField!
+    @IBOutlet weak var goalAmountField: MoneyTextField!
     
-    @IBOutlet weak var currencyTextField: FloatingTextField!
-    @IBOutlet weak var changeCurrencyIndicator: UIImageView!
+    @IBOutlet weak var currencyArrow: UIImageView!
+
+    @IBOutlet weak var accountTypeLabel: UILabel!
+
+    @IBOutlet weak var iconContainer: UIView!
+    @IBOutlet weak var iconView: UIImageView!
+    @IBOutlet weak var bankIconView: SVGKFastImageView!
+    @IBOutlet weak var iconPen: UIImageView!
     
-    @IBOutlet weak var expenseSourceAmountTextField: MoneyTextField!
-    
-    @IBOutlet weak var creditLimitTextField: MoneyTextField!
-    
-    @IBOutlet weak var expenseSourceGoalAmountTextField: MoneyTextField!
-    
-    @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var bankButton: UIButton!
     
     @IBOutlet weak var typeSwitchCell: UITableViewCell!
@@ -54,25 +54,57 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     
     var delegate: ExpenseSourceEditTableControllerDelegate?
     
-    var iconCategory: IconCategory {
-        return accountType == .goal ? .expenseSourceGoal : .expenseSource
-    }
-    
-    var accountType: AccountType {
-        return delegate?.accountType ?? .usual
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        expenseSourceNameTextField.updateAppearance()
-        currencyTextField.updateAppearance()
-        expenseSourceAmountTextField.updateAppearance()
-        creditLimitTextField.updateAppearance()
-        expenseSourceGoalAmountTextField.updateAppearance()
-        delegate?.validationNeeded()
+        nameField.updateAppearance()
+        currencyField.updateAppearance()
+        amountField.updateAppearance()
+        creditLimitField.updateAppearance()
+        goalAmountField.updateAppearance()
     }
     
-    func updateTabsAppearence() {
+    // TextFields didChange
+    @IBAction func didChangeFieldText(_ sender: FloatingTextField) {
+        sender.updateAppearance()
+        if sender == creditLimitField {
+            delegate?.didChangeCreditLimit()
+        }
+    }
+    
+    // Buttons didTap
+    
+    @IBAction func didTapUsualTab(_ sender: Any) {
+        delegate?.didTap(accountType: .usual)
+        updateTabsAppearence(accountType: .usual)
+    }
+    
+    @IBAction func didTapGoalTab(_ sender: Any) {
+        delegate?.didTap(accountType: .goal)
+        updateTabsAppearence(accountType: .goal)
+    }
+    
+    @IBAction func didTapDebtTab(_ sender: Any) {
+        delegate?.didTap(accountType: .debt)
+        updateTabsAppearence(accountType: .debt)
+    }
+    
+    @IBAction func didTapIcon(_ sender: Any) {
+        delegate?.didTapIcon()
+    }
+    
+    @IBAction func didTapCurrency(_ sender: Any) {
+        delegate?.didTapCurrency()
+    }
+    
+    @IBAction func didTapBankButton(_ sender: Any) {
+        delegate?.didTapBankButton()
+    }
+    
+    @IBAction func didTapRemoveButton(_ sender: UIButton) {
+        delegate?.didTapRemoveButton()
+    }
+    
+    private func updateTabsAppearence(accountType: AccountType) {
         
         func tabsAppearances(for accountType: AccountType) -> (usual: TabAppearance, goal: TabAppearance, debt: TabAppearance) {
             let selectedColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
@@ -100,116 +132,44 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
         
         let tabsAppearance = tabsAppearances(for: accountType)
         
-        generalExpenseSourceTabTitleLabel.textColor = tabsAppearance.usual.textColor
-        goalExpenseSourceTabTitleLabel.textColor = tabsAppearance.goal.textColor
-        debtExpenseSourceTabTitleLabel.textColor = tabsAppearance.debt.textColor
+        usualTabLabel.textColor = tabsAppearance.usual.textColor
+        goalTabLabel.textColor = tabsAppearance.goal.textColor
+        debtTabLabel.textColor = tabsAppearance.debt.textColor
         
-        generalExpenseSourceTabSelectionIndicator.isHidden = tabsAppearance.usual.isHidden
-        goalExpenseSourceTabSelectionIndicator.isHidden = tabsAppearance.goal.isHidden
-        debtExpenseSourceTabSelectionIndicator.isHidden = tabsAppearance.debt.isHidden
-        
-        
+        usualTabSelection.isHidden = tabsAppearance.usual.isHidden
+        goalTabSelection.isHidden = tabsAppearance.goal.isHidden
+        debtTabSelection.isHidden = tabsAppearance.debt.isHidden
     }
     
-    func setTypeSwitch(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        set(cells: typeSwitchCell, hidden: hidden)
-        if reload { reloadData(animated: animated) }
-    }
+    // Cells visibility
     
-    func setAmount(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        set(cells: amountCell, hidden: hidden)
-        if reload { reloadData(animated: animated) }
-    }
+//    func setTypeSwitch(hidden: Bool, animated: Bool = true, reload: Bool = true) {
+//        set(cells: typeSwitchCell, hidden: hidden)
+//        if reload { reloadData(animated: animated) }
+//    }
+//
+//    func setAmount(hidden: Bool, animated: Bool = true, reload: Bool = true) {
+//        set(cells: amountCell, hidden: hidden)
+//        if reload { reloadData(animated: animated) }
+//    }
+//
+//    func setCreditLimit(hidden: Bool, animated: Bool = true, reload: Bool = true) {
+//        set(cells: creditLimitCell, hidden: hidden)
+//        if reload { reloadData(animated: animated) }
+//    }
+//
+//    func setGoalAmount(hidden: Bool, animated: Bool = true, reload: Bool = true) {
+//        set(cells: goalAmountCell, hidden: hidden)
+//        if reload { reloadData(animated: animated) }
+//    }
+//
+//    func setRemoveButton(hidden: Bool) {
+//        set(cell: removeCell, hidden: hidden, animated: false, reload: true)
+//    }
+//
+//    func setBankButton(hidden: Bool, animated: Bool = true, reload: Bool = true) {
+//        set(cell: bankCell, hidden: hidden, animated: animated, reload: reload)
+//    }
     
-    func setCreditLimit(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        set(cells: creditLimitCell, hidden: hidden)
-        if reload { reloadData(animated: animated) }
-    }
     
-    func setGoalAmount(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        set(cells: goalAmountCell, hidden: hidden)
-        if reload { reloadData(animated: animated) }
-    }
-        
-    @IBAction func didChangeName(_ sender: FloatingTextField) {
-        sender.updateAppearance()
-        delegate?.validationNeeded()
-    }
-    
-    @IBAction func didChangeAmount(_ sender: MoneyTextField) {
-        sender.updateAppearance()
-        delegate?.validationNeeded()
-    }
-    
-    @IBAction func didChangeCreditLimit(_ sender: MoneyTextField) {
-        sender.updateAppearance()
-        delegate?.didChangeCreditLimit()
-        delegate?.validationNeeded()
-    }
-        
-    @IBAction func didChangeGoalAmount(_ sender: MoneyTextField) {
-        sender.updateAppearance()
-        delegate?.validationNeeded()
-    }
-    
-    @IBAction func didTapGeneralExpenseSource(_ sender: Any) {
-        delegate?.didSwitch(accountType: .usual)
-    }
-    
-    @IBAction func didTapGoalExpenseSource(_ sender: Any) {
-        delegate?.didSwitch(accountType: .goal)
-    }
-    
-    @IBAction func didTapDebtExpenseSource(_ sender: Any) {
-        delegate?.didSwitch(accountType: .debt)
-    }
-    
-    @IBAction func didTapRemoveButton(_ sender: UIButton) {
-        delegate?.didTapRemoveButton()
-    }
-    
-    func setRemoveButton(hidden: Bool) {
-        set(cell: removeCell, hidden: hidden, animated: false, reload: true)
-    }
-    
-    @IBAction func didTapBankButton(_ sender: Any) {
-        delegate?.didTapBankButton()
-    }
-    
-    func setBankButton(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-        set(cell: bankCell, hidden: hidden, animated: animated, reload: reload)
-    }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if  identifier == "showCurrenciesScreen",
-            let delegate = delegate {
-            return delegate.canChangeCurrency
-        }
-        return true
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowExpenseSourceIcons",
-            let iconsViewController = segue.destination as? IconsViewControllerInputProtocol {
-            iconsViewController.set(iconCategory: iconCategory)
-            iconsViewController.set(delegate: self)
-        }
-        if  segue.identifier == "showCurrenciesScreen",
-            let destination = segue.destination as? CurrenciesViewControllerInputProtocol {
-            
-            destination.set(delegate: self)
-        }
-    }
-}
-
-extension ExpenseSourceEditTableController : IconsViewControllerDelegate {
-    func didSelectIcon(icon: Icon) {
-        delegate?.didSelectIcon(icon: icon)
-    }
-}
-
-extension ExpenseSourceEditTableController : CurrenciesViewControllerDelegate {
-    func didSelectCurrency(currency: Currency) {
-        delegate?.didSelectCurrency(currency: currency)
-    }
 }

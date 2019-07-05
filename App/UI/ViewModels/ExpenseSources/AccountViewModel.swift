@@ -50,6 +50,10 @@ class AccountViewModel {
         return "\(creditLimit)".intMoney(with: currency)        
     }
     
+    var creditLimit: String? {
+        return creditLimitCents?.moneyCurrencyString(with: currency, shouldRound: false)
+    }
+    
     var cards: String? {
         return account.extra?.cards?.joined(separator: ", ")
     }
