@@ -114,32 +114,19 @@ class APIClient : APIClientProtocol {
     
     private func performRequest(_ resource: APIResource) -> Promise<(json: Any, response: PMKAlamofireDataResponse)> {
         
-        guard var request = try? resource.asURLRequest() else {
-            return Promise(error: APIRequestError.sendingFailed)
+        do {
+            var request = try resource.asURLRequest()
+            if let authToken = self.userSessionManager.currentSession?.token {
+                request.addValue("Token token=\(authToken)",
+                    forHTTPHeaderField: "Authorization")
+            }
+            return Alamofire
+                .request(request)
+                .validate(requestValidator)
+                .responseJSON()
+        } catch {
+            return Promise(error: error)
         }
-        
-        if let authToken = userSessionManager.currentSession?.token {
-            request.addValue("Token token=\(authToken)",
-                forHTTPHeaderField: "Authorization")
-        }
-        
-        //        request.timeoutInterval = 10
-        
-        return Alamofire
-            .request(request)
-            .validate(requestValidator)
-            .responseJSON()
-//            .responseJSON(with: .response)
-//            .recover { error -> (Any, PMKAlamofireDataResponse) in
-//                switch (error as NSError).code {
-//                case NSURLErrorNotConnectedToInternet, NSURLErrorNetworkConnectionLost:
-//                    throw APIRequestError.noConnection
-//                case NSURLErrorTimedOut:
-//                    throw APIRequestError.timedOut
-//                default:
-//                    throw error
-//                }
-//        }
     }
     
     private func requestValidator(request: URLRequest?, response: HTTPURLResponse, data: Data?) -> Request.ValidationResult {
@@ -174,7 +161,7 @@ class APIClient : APIClientProtocol {
                         errorMessages = errorsMessage
 
                     } else {
-                        errorMessages["error"] = "Server Error"
+                        errorMessages["error"] = "Ошибка сервера"
                     }
                     return .failure(APIRequestError.unprocessedEntity(errors: errorMessages))
                 } catch {

@@ -13,10 +13,6 @@ protocol CurrenciesViewControllerDelegate {
     func didSelectCurrency(currency: Currency)
 }
 
-protocol CurrenciesViewControllerInputProtocol {
-    func set(delegate: CurrenciesViewControllerDelegate)
-}
-
 class CurrenciesViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
     @IBOutlet weak var currenciesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIView!
@@ -82,7 +78,7 @@ class CurrenciesViewController : UIViewController, UIMessagePresenterManagerDepe
     }
 }
 
-extension CurrenciesViewController : CurrenciesViewControllerInputProtocol {
+extension CurrenciesViewController {
     func set(delegate: CurrenciesViewControllerDelegate) {
         self.delegate = delegate
     }

@@ -12,6 +12,7 @@ import SkyFloatingLabelTextField
 class FloatingTextField : SkyFloatingLabelTextField {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var iconContainer: UIView!
+    @IBOutlet weak var icon: UIImageView!
     
     func updateAppearance() {
         titleFormatter = { $0 }
@@ -23,6 +24,7 @@ class FloatingTextField : SkyFloatingLabelTextField {
         
         backgroundView.backgroundColor = textFieldOptions.background
         iconContainer.backgroundColor = textFieldOptions.iconBackground
+        icon.tintColor = textFieldOptions.iconTint
         textColor = textFieldOptions.text
         placeholderFont = textFieldOptions.placeholderFont
         placeholderColor = textFieldOptions.placeholder
@@ -30,32 +32,35 @@ class FloatingTextField : SkyFloatingLabelTextField {
         selectedTitleColor = textFieldOptions.placeholder
     }
     
-    private func textFieldOptions(focused: Bool, present: Bool) -> (background: UIColor, text: UIColor, placeholder: UIColor, placeholderFont: UIFont?, iconBackground: UIColor) {
+    private func textFieldOptions(focused: Bool, present: Bool) -> (background: UIColor, text: UIColor, placeholder: UIColor, placeholderFont: UIFont?, iconBackground: UIColor, iconTint: UIColor) {
         
-        let activeBackgroundColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
-        let inactiveBackgroundColor = UIColor(red: 0.96, green: 0.97, blue: 1, alpha: 1)
+        let focusedBackgroundColor = UIColor.by(.blue6B93FB)
+        let unfocusedBackgroundColor = UIColor.by(.dark2A314B)
         
-        let darkPlaceholderColor = UIColor(red: 0.26, green: 0.33, blue: 0.52, alpha: 1)
-        let lightPlaceholderColor = UIColor.white
+        let textColor = UIColor.by(.textFFFFFF)
         
-        let inavtiveTextColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
-        let activeTextColor = UIColor.white
+        let focusedPlaceholderNoTextColor = UIColor.by(.textFFFFFF)
+        let focusedPlaceholderWithTextColor = UIColor.by(.text435585)
+        let unfocusedPlaceholderColor = UIColor.by(.text9EAACC)
         
-        let bigPlaceholderFont = UIFont(name: "Rubik-Regular", size: 16)
+        let bigPlaceholderFont = UIFont(name: "Rubik-Regular", size: 15)
         let smallPlaceholderFont = UIFont(name: "Rubik-Regular", size: 10)
         
-        let activeIconBackground = UIColor.white
-        let inactiveIconBackground = UIColor(red: 0.9, green: 0.91, blue: 0.96, alpha: 1)
+        let focusedIconBackground = UIColor.by(.textFFFFFF)
+        let unfocusedIconBackground = UIColor.by(.gray7984A4)
+        
+        let focusedIconTint = UIColor.by(.blue6B93FB)
+        let unfocusedIconTint = UIColor.by(.textFFFFFF)
         
         switch (focused, present) {
         case (true, true):
-            return (activeBackgroundColor, activeTextColor, darkPlaceholderColor, smallPlaceholderFont, activeIconBackground)
+            return (focusedBackgroundColor, textColor, focusedPlaceholderWithTextColor, smallPlaceholderFont, focusedIconBackground, focusedIconTint)
         case (true, false):
-            return (activeBackgroundColor, activeTextColor, lightPlaceholderColor, bigPlaceholderFont, activeIconBackground)
+            return (focusedBackgroundColor, textColor, focusedPlaceholderNoTextColor, bigPlaceholderFont, focusedIconBackground, focusedIconTint)
         case (false, true):
-            return (inactiveBackgroundColor, inavtiveTextColor, inavtiveTextColor, smallPlaceholderFont, inactiveIconBackground)
+            return (unfocusedBackgroundColor, textColor, unfocusedPlaceholderColor, smallPlaceholderFont, unfocusedIconBackground, unfocusedIconTint)
         case (false, false):
-            return (inactiveBackgroundColor, inavtiveTextColor, inavtiveTextColor, bigPlaceholderFont, inactiveIconBackground)
+            return (unfocusedBackgroundColor, textColor, unfocusedPlaceholderColor, bigPlaceholderFont, unfocusedIconBackground, unfocusedIconTint)
         }
     }
 }

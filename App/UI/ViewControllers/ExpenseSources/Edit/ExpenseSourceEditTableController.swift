@@ -13,9 +13,12 @@ protocol ExpenseSourceEditTableControllerDelegate {
     func didTap(accountType: AccountType)
     func didTapIcon()
     func didTapCurrency()
+    func didChange(name: String?)
+    func didChange(amount: String?)
+    func didChange(creditLimit: String?)
+    func didChange(goalAmount: String?)
+    func didTapBankButton()
     func didTapRemoveButton()
-    func didTapBankButton()    
-    func didChangeCreditLimit()
 }
 
 class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController {
@@ -64,10 +67,22 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     }
     
     // TextFields didChange
+    
     @IBAction func didChangeFieldText(_ sender: FloatingTextField) {
         sender.updateAppearance()
+        let text = sender.text?.trimmed
+        
+        if sender == nameField {
+            delegate?.didChange(name: text)
+        }
+        if sender == amountField {
+            delegate?.didChange(amount: text)
+        }
         if sender == creditLimitField {
-            delegate?.didChangeCreditLimit()
+            delegate?.didChange(creditLimit: text)
+        }
+        if sender == goalAmountField {
+            delegate?.didChange(goalAmount: text)
         }
     }
     
@@ -107,8 +122,8 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     private func updateTabsAppearence(accountType: AccountType) {
         
         func tabsAppearances(for accountType: AccountType) -> (usual: TabAppearance, goal: TabAppearance, debt: TabAppearance) {
-            let selectedColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
-            let unselectedColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
+            let selectedColor = UIColor.by(.textFFFFFF)
+            let unselectedColor = UIColor.by(.text9EAACC)
             
             let selectedTabAppearance: TabAppearance = (textColor: selectedColor, isHidden: false)
             let unselectedTabAppearance: TabAppearance = (textColor: unselectedColor, isHidden: true)

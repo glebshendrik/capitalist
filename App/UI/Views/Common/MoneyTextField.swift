@@ -164,7 +164,8 @@ struct Formatter {
 }
 
 extension String {
-    func intMoney(with currency: Currency) -> Int? {
+    func intMoney(with currency: Currency?) -> Int? {
+        guard let currency = currency else { return nil }
         guard let decimal = Formatter.decimal(with: currency).number(from: self) as? NSDecimalNumber else {
             return nil
         }
@@ -256,6 +257,11 @@ extension Int {
     }
     
     func moneyDecimalString(with currency: Currency) -> String? {
+        return NSDecimalNumber(integerLiteral: self).moneyDecimalString(with: currency)
+    }
+    
+    func moneyDecimalString(with currency: Currency?) -> String? {
+        guard let currency = currency else { return nil }
         return NSDecimalNumber(integerLiteral: self).moneyDecimalString(with: currency)
     }
     

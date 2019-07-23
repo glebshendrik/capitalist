@@ -10,6 +10,7 @@ import Foundation
 
 enum ValidationError : Error {
     case invalid(failures: [ValidationResultProtocol])
+    case invalid(errors: [String : String])
 }
 
 enum ValidationErrorReason {
@@ -71,6 +72,15 @@ extension ValidationResult : ValidationResultProtocol {
 }
 
 class Validator {
+    static func validate(belongsTo: Int?, key: CodingKey) -> ValidationResult<Int> {
+        guard let belongsTo = belongsTo else {
+            return .failure(key: key,
+                            reasons: [ValidationErrorReason.required])
+        }
+        return .success(key: key,
+                        value: belongsTo)
+    }
+    
     static func validate(required: String?, key: CodingKey) -> ValidationResult<String> {
         guard let required = required, !required.isEmpty else {
             return .failure(key: key,
@@ -179,5 +189,75 @@ class Validator {
                     }
         }
         return failureResultsHash
+    }
+    
+    
+    static func isValid(present: Any?) -> Bool {
+        return present != nil
+    }
+    
+    static func isValid(required: String?) -> Bool {
+        guard let required = required, !required.isEmpty else {
+            return false
+        }
+        return true
+    }
+    
+    static func isValid(email: String?) -> Bool {
+        return validate(required: email)
+    }
+    
+    static func isValid(password: String?) -> Bool {
+        return validate(required: password)
+    }
+    
+    static func isValid(passwordConfirmation: String?,
+                         password: String?) -> Bool {
+        
+        return password == passwordConfirmation
+    }
+    
+    static func isValid(money: Int?) -> Bool {
+        guard let money = money else {
+            return false
+        }
+        guard money >= 0 else {
+            return false
+        }
+        return true
+    }
+    
+    static func isValid(positiveMoney: Int?) -> Bool {
+        guard let money = positiveMoney else {
+            return false
+        }
+        guard money > 0 else {
+            return false
+        }
+        return true
+    }
+    
+    static func isValid(balance: Int?) -> Bool {
+        return balance != nil
+    }
+    
+    static func isValid(pastDate: Date?) -> Bool {
+        guard let pastDate = pastDate else {
+            return false
+        }
+        guard pastDate <= Date() else {
+            return false
+        }
+        return true
+    }
+    
+    static func validate(futureDate: Date?) -> Bool {
+        guard let futureDate = futureDate else {
+            return false
+        }
+        guard futureDate >= Date() else {
+            return false
+        }
+        return true
     }
 }

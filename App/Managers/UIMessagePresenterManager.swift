@@ -49,6 +49,12 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
              interactive: true)
     }
     
+    func show(validationMessages: [String: String]) {
+        for (_, validationMessage) in errors {
+            show(validationMessage: validationMessage)
+        }
+    }
+    
     func show(notificationMessage: String, actionOnTap: @escaping () -> ()) {
         show(message: notificationMessage,
              theme: .info,

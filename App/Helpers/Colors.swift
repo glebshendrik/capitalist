@@ -9,16 +9,39 @@
 import UIKit
 import SwifterSwift
 
-extension UIColor {
-    static var mainNavBarColor: UIColor {
-        return UIColor(
-        return UIColor(hexString: "2A314B")!
-    }
+enum ColorAsset : String {
+    case blue6A92FA = "blue 6A92FA"
+    case blue6B93FB = "blue 6B93FB"
+    case blue5B86F7 = "blue 5B86F7"
     
-    static var navBarColor: UIColor {
-        return UIColor(red: 242 / 255.0,
-                       green: 245 / 255.0,
-                       blue: 254 / 255.0,
-                       alpha: 1.0)
+    case dark333D5B = "dark 333D5B"
+    case dark374262 = "dark 374262"
+    case dark1F263E = "dark 1F263E"
+    case dark374467 = "dark 374467"
+    case dark2A314B = "dark 2A314B"
+    
+    case delimeter333D5B = "delimeter 333D5B"
+    case delimeterAFC1FF = "delimeter AFC1FF"
+    case delimeter2F3854 = "delimeter 2F3854"
+    
+    case gray7984A4 = "gray 7984A4"
+    
+    case text435585 = "text 435585"
+    case text8792B2 = "text 8792B2"
+    case text9EAACC = "text 9EAACC"
+    case textFFFFFF = "text FFFFFF"
+    
+    case redE77768 = "red E77768"
+    case redFE3745 = "red FE3745"
+    case green68E79B = "green 68E79B"
+    
+    case joy6EEC99 = "joy 6EEC99"
+    case riskC765F0 = "risk C765F0"
+    case safe4828D1 = "safe 4828D1"
+}
+
+extension UIColor {
+    static func by(_ asset: ColorAsset) -> UIColor {
+        return UIColor(named: asset.rawValue) ?? .purple
     }
 }

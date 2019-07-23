@@ -13,11 +13,6 @@ protocol IconsViewControllerDelegate {
     func didSelectIcon(icon: Icon)
 }
 
-protocol IconsViewControllerInputProtocol {
-    func set(iconCategory: IconCategory)
-    func set(delegate: IconsViewControllerDelegate)
-}
-
 class IconsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
     @IBOutlet weak var iconsCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIView!
@@ -83,7 +78,7 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
     }
 }
 
-extension IconsViewController : IconsViewControllerInputProtocol {
+extension IconsViewController {
     func set(delegate: IconsViewControllerDelegate) {
         self.delegate = delegate
     }

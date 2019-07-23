@@ -36,6 +36,7 @@ protocol UIMessagePresenterManagerProtocol {
     func show(navBarMessage: String, theme: Theme)
     func show(navBarMessage: String, theme: Theme, duration: Duration)
     func show(validationMessage: String)
+    func show(validationMessages: [String: String])
     func show(notificationMessage: String, actionOnTap: @escaping () -> ())
     func showAlert(
         title: String,

@@ -21,15 +21,15 @@ class CustomView : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
+        setup()
     }
     
-    private func commonInit() {
+    func setup() {
         Bundle.main.loadNibNamed(nibName, owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
