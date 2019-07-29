@@ -16,7 +16,7 @@ protocol FiltersSelectionViewControllerDelegate {
 
 class FiltersSelectionViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
-    var navigationBarTintColor: UIColor? = UIColor.navBarColor
+    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
     
     var delegate: FiltersSelectionViewControllerDelegate? = nil
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -33,8 +33,8 @@ class FiltersSelectionViewController : UIViewController, UIMessagePresenterManag
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.navBarColor
+        super.viewWillAppear(animated)        
+        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
     }
     
     override func viewDidLayoutSubviews() {

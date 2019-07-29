@@ -10,7 +10,7 @@ import UIKit
 
 extension ExpenseSourceEditViewController {
     func updateIconUI() {
-        let placeholderName = viewModel.isGoal ? "wallet-goal-default-icon" : "wallet-default-icon"
+        let placeholderName = "" //viewModel.isGoal ? "wallet-goal-default-icon" : "wallet-default-icon"
         tableController?.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: placeholderName, renderingMode: .alwaysTemplate)
         tableController?.iconView.tintColor = UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
     }
@@ -25,17 +25,17 @@ extension ExpenseSourceEditViewController {
     
     func updateTableUI(animated: Bool = true) {
         tableController.set(cell: tableController.typeSwitchCell, hidden: viewModel.isNew, animated: animated, reload: false)
-        tableController?.setTypeSwitch(hidden: !viewModel.isNew, animated: animated, reload: false)
-        tableController?.setAmount(hidden: viewModel.amountHidden, animated: animated, reload: false)
-        tableController?.setGoalAmount(hidden: !viewModel.isGoal, animated: animated, reload: false)
-        tableController?.setCreditLimit(hidden: viewModel.creditLimitHidden, animated: animated, reload: false)
-        tableController?.setBankButton(hidden: viewModel.bankButtonHidden, animated: animated, reload: false)
-        tableController?.updateTabsAppearence()
+//        tableController?.setTypeSwitch(hidden: !viewModel.isNew, animated: animated, reload: false)
+//        tableController?.setAmount(hidden: viewModel.amountHidden, animated: animated, reload: false)
+//        tableController?.setGoalAmount(hidden: !viewModel.isGoal, animated: animated, reload: false)
+//        tableController?.setCreditLimit(hidden: viewModel.creditLimitHidden, animated: animated, reload: false)
+//        tableController?.setBankButton(hidden: viewModel.bankButtonHidden, animated: animated, reload: false)
+//        tableController?.updateTabsAppearence()
         tableController?.reloadData(animated: animated)
     }
     
     func updateTextFieldsUI() {
-        tableController.nameField.text = viewModel.name
+//        tableController.nameField.text = viewModel.name
         tableController.amountField.text = viewModel.amount
         tableController.goalAmountField.text = viewModel.goalAmount
         tableController.creditLimitField.text = viewModel.creditLimit

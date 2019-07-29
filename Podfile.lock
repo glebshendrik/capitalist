@@ -39,6 +39,7 @@ PODS:
     - SVGKit (>= 2.1)
   - SideMenu (5.0.2)
   - SkyFloatingLabelTextField (3.6.0)
+  - SnapKit (4.2.0)
   - StaticTableViewController (1.2.0)
   - SVGKit (2.1.1):
     - CocoaLumberjack (~> 3.0)
@@ -91,6 +92,7 @@ DEPENDENCIES:
   - SDWebImageSVGCoder (~> 0.3)
   - SideMenu
   - SkyFloatingLabelTextField
+  - SnapKit (~> 4.2.0)
   - StaticTableViewController
   - SVGKit (~> 2.1)
   - SVProgressHUD (~> 2.2)
@@ -122,6 +124,7 @@ SPEC REPOS:
     - SDWebImageSVGCoder
     - SideMenu
     - SkyFloatingLabelTextField
+    - SnapKit
     - StaticTableViewController
     - SVGKit
     - SVProgressHUD
@@ -171,6 +174,7 @@ SPEC CHECKSUMS:
   SDWebImageSVGCoder: 4b354bcdc7d74ce14d9fdb3c9ed9ab2c667f3b57
   SideMenu: e5094f0b2e7d9609e100a90ae69025abd994f882
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   StaticTableViewController: cbf8a57221ffa6bad8f3dc9d7863863ee28deee0
   SVGKit: 652cdf7bef8bec8564d04a8511d3ab50c7595fac
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
@@ -182,6 +186,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 688f096033103e66ffcf6ca678211acd7d7be505
   TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
 
-PODFILE CHECKSUM: a10ba43e6fdfaeda06a98a19383552f1e4e83be4
+PODFILE CHECKSUM: 8d0016a608357ab7057bff8e85f43130d0fd5f4b
 
 COCOAPODS: 1.5.3

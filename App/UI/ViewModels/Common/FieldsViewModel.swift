@@ -41,7 +41,8 @@ class FieldsViewModel {
     func recover(error: Error) throws {
         switch error {
         case ValidationError.invalid(let failures):
-            self.addClientValidationErrors(failures)
+            print("asd")
+//            self.addClientValidationErrors(failures)
         case APIRequestError.unprocessedEntity(let errors):
             self.addRemoteValidationErrors(errors)
         default:

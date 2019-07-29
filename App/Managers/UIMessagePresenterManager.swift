@@ -49,8 +49,8 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
              interactive: true)
     }
     
-    func show(validationMessages: [String: String]) {
-        for (_, validationMessage) in errors {
+    func show(validationMessages: [String: String]) {        
+        for (_, validationMessage) in validationMessages {
             show(validationMessage: validationMessage)
         }
     }

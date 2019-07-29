@@ -14,7 +14,7 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
-    var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
+    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var router: ApplicationRouterProtocol!
     var editTableController: TransactionEditTableController?
@@ -69,8 +69,8 @@ class TransactionEditViewController : UIViewController, UIMessagePresenterManage
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
+        super.viewWillAppear(animated)        
+        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
         editTableController?.setRemoveButton(hidden: viewModel.isNew)
         editTableController?.hideActivityIndicator()
     }

@@ -24,7 +24,7 @@ class FloatingTextField : SkyFloatingLabelTextField {
         
         backgroundView.backgroundColor = textFieldOptions.background
         iconContainer.backgroundColor = textFieldOptions.iconBackground
-        icon.tintColor = textFieldOptions.iconTint
+//        icon.tintColor = textFieldOptions.iconTint
         textColor = textFieldOptions.text
         placeholderFont = textFieldOptions.placeholderFont
         placeholderColor = textFieldOptions.placeholder

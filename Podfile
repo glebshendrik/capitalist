@@ -34,4 +34,12 @@ target 'Three Baskets' do
   pod 'SaltEdge-iOS-Swift', git: 'https://github.com/petalvlad/saltedge-ios-swift', branch: 'master'
   pod 'SVGKit', '~> 2.1'
   pod 'SDWebImageSVGCoder', '~> 0.3'
+  pod 'SnapKit', '~> 4.2.0'
+end
+
+post_install do |installer|
+    installer.pods_project.build_configurations.each do |config|
+        config.build_settings.delete('CODE_SIGNING_ALLOWED')
+        config.build_settings.delete('CODE_SIGNING_REQUIRED')
+    end
 end

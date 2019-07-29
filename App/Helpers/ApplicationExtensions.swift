@@ -467,9 +467,9 @@ extension UIViewController {
 }
 
 extension UIImageView {
-    func setImage(with url: URL?, placeholderName: String, renderingMode: UIImage.RenderingMode = .automatic) {
+    func setImage(with url: URL?, placeholderName: String?, renderingMode: UIImage.RenderingMode = .automatic) {
         self.af_cancelImageRequest()
-        let placeholderImage = UIImage(named: placeholderName)?.withRenderingMode(.alwaysTemplate)
+        let placeholderImage = placeholderName != nil ? UIImage(named: placeholderName!)?.withRenderingMode(.alwaysTemplate) : nil
         if let imageURL = url {
             self.af_setImage(withURL: imageURL,
                              placeholderImage: placeholderImage,

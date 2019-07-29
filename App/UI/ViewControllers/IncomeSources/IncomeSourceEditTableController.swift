@@ -60,7 +60,7 @@ class IncomeSourceEditTableController : FloatingFieldsStaticTableViewController 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == "showCurrenciesScreen",
-            let destination = segue.destination as? CurrenciesViewControllerInputProtocol {
+            let destination = segue.destination as? CurrenciesViewController {
             
             destination.set(delegate: self)
         }

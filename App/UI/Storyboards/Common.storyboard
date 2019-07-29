@@ -18,7 +18,7 @@
         <!--Выберите иконку-->
         <scene sceneID="tk1-Lv-vco">
             <objects>
-                <viewController storyboardIdentifier="IconsViewController" title="Выберите иконку" id="EOg-T1-SCz" customClass="IconsViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IconsViewController" title="Выберите иконку" id="EOg-T1-SCz" customClass="IconsViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UxO-Gc-YoK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -26,7 +26,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cBt-oL-kFp">
                                 <rect key="frame" x="0.0" y="20" width="375" height="597"/>
                                 <color key="backgroundColor" red="0.95686274509803915" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <collectionViewLayout key="collectionViewLayout" id="klB-9y-uR6" customClass="PagedCollectionViewLayout" customModule="skrudzh" customModuleProvider="target">
+                                <collectionViewLayout key="collectionViewLayout" id="klB-9y-uR6" customClass="PagedCollectionViewLayout" customModule="Three_Baskets" customModuleProvider="target">
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="columns">
                                             <integer key="value" value="4"/>
@@ -40,7 +40,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </collectionViewLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IconCollectionViewCell" id="C8b-Ov-wjo" customClass="IconCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IconCollectionViewCell" id="C8b-Ov-wjo" customClass="IconCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -171,7 +171,7 @@
         <!--Выберите валюту-->
         <scene sceneID="8OB-do-GkS">
             <objects>
-                <viewController storyboardIdentifier="CurrenciesViewController" title="Выберите валюту" id="ByI-OE-pnV" customClass="CurrenciesViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CurrenciesViewController" title="Выберите валюту" id="ByI-OE-pnV" customClass="CurrenciesViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JeQ-yb-Ls7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -179,7 +179,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="crN-eW-gA5">
                                 <rect key="frame" x="0.0" y="20" width="375" height="597"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <collectionViewLayout key="collectionViewLayout" id="NT2-ec-JcJ" customClass="PagedCollectionViewLayout" customModule="skrudzh" customModuleProvider="target">
+                                <collectionViewLayout key="collectionViewLayout" id="NT2-ec-JcJ" customClass="PagedCollectionViewLayout" customModule="Three_Baskets" customModuleProvider="target">
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="columns">
                                             <integer key="value" value="4"/>
@@ -193,7 +193,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </collectionViewLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrencyCollectionViewCell" id="EaO-b2-sih" customClass="CurrencyCollectionViewCell" customModule="skrudzh" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrencyCollectionViewCell" id="EaO-b2-sih" customClass="CurrencyCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -325,7 +325,7 @@
         <!--Slide Up Container View Controller-->
         <scene sceneID="Lh3-hz-nLI">
             <objects>
-                <viewController storyboardIdentifier="SlideUpContainerViewController" id="Lyy-eQ-Wuu" customClass="SlideUpContainerViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SlideUpContainerViewController" id="Lyy-eQ-Wuu" customClass="SlideUpContainerViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZOs-WH-uhc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -373,7 +373,7 @@
         <!--Напоминание-->
         <scene sceneID="qft-Hm-dtj">
             <objects>
-                <tableViewController storyboardIdentifier="ReminderEditTableViewController" id="Z80-N1-n3H" customClass="ReminderEditTableViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ReminderEditTableViewController" id="Z80-N1-n3H" customClass="ReminderEditTableViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8sh-0J-xUo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -390,7 +390,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="a4P-Ua-8fG" customClass="FloatingTextField" customModule="skrudzh" customModuleProvider="target">
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="a4P-Ua-8fG" customClass="FloatingTextField" customModule="Three_Baskets" customModuleProvider="target">
                                                     <rect key="frame" x="72" y="10" width="271" height="49"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -479,7 +479,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Ztm-g7-Dcq" customClass="FloatingTextField" customModule="skrudzh" customModuleProvider="target">
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Ztm-g7-Dcq" customClass="FloatingTextField" customModule="Three_Baskets" customModuleProvider="target">
                                                     <rect key="frame" x="72" y="10" width="271" height="48"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -573,7 +573,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="cXK-3H-14y" customClass="FloatingTextField" customModule="skrudzh" customModuleProvider="target">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="cXK-3H-14y" customClass="FloatingTextField" customModule="Three_Baskets" customModuleProvider="target">
                                                     <rect key="frame" x="72" y="10" width="271" height="49"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -709,7 +709,7 @@
         <!--Reminder Edit View Controller-->
         <scene sceneID="xoL-nC-NlK">
             <objects>
-                <viewController storyboardIdentifier="ReminderEditViewController" id="DP6-sv-vnQ" customClass="ReminderEditViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReminderEditViewController" id="DP6-sv-vnQ" customClass="ReminderEditViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oUh-CC-2Ol">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -754,7 +754,7 @@
         <!--Colorable Navigation Controller-->
         <scene sceneID="6eB-3N-Olz">
             <objects>
-                <navigationController storyboardIdentifier="ReminderEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="riK-aF-4xo" customClass="ColorableNavigationController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ReminderEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="riK-aF-4xo" customClass="ColorableNavigationController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="vDU-uJ-kdS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

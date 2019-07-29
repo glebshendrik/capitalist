@@ -204,11 +204,11 @@ class Validator {
     }
     
     static func isValid(email: String?) -> Bool {
-        return validate(required: email)
+        return isValid(required: email)
     }
     
     static func isValid(password: String?) -> Bool {
-        return validate(required: password)
+        return isValid(required: password)
     }
     
     static func isValid(passwordConfirmation: String?,

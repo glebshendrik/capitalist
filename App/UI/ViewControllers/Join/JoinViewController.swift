@@ -8,8 +8,8 @@
 
 import UIKit
 
-class JoinViewController : UIViewController, NavigationBarColorable {
-    var navigationBarTintColor: UIColor? = UIColor.navBarColor
+class JoinViewController : UIViewController, NavigationBarColorable {    
+    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
 }
 
 

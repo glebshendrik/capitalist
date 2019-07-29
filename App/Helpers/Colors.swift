@@ -19,6 +19,7 @@ enum ColorAsset : String {
     case dark1F263E = "dark 1F263E"
     case dark374467 = "dark 374467"
     case dark2A314B = "dark 2A314B"
+    case dark404B6F = "dark 404B6F"
     
     case delimeter333D5B = "delimeter 333D5B"
     case delimeterAFC1FF = "delimeter AFC1FF"

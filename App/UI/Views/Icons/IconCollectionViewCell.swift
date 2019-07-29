@@ -21,7 +21,7 @@ class IconCollectionViewCell : UICollectionViewCell {
     func updateUI() {
         guard let viewModel = viewModel else { return }
         
-        func placeholderName() -> String {
+        func placeholderName() -> String {            
             switch viewModel.category {
             case .expenseSource:
                 return "wallet-icon"
@@ -33,6 +33,8 @@ class IconCollectionViewCell : UICollectionViewCell {
                 return "smile-icon"
             case .expenseCategorySafe:
                 return "smile-icon"
+            case .expenseSourceDebt:
+                return "wallet-icon"
             }
         }
         

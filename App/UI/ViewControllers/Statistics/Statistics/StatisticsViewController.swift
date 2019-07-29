@@ -10,8 +10,8 @@ import UIKit
 import PromiseKit
 
 class StatisticsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
-    
-    var navigationBarTintColor: UIColor? = UIColor.navBarColor
+        
+    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: StatisticsViewModel!
     var router: ApplicationRouterProtocol!
@@ -37,7 +37,7 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.navBarColor
+        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
     }
     
     override func viewDidLayoutSubviews() {

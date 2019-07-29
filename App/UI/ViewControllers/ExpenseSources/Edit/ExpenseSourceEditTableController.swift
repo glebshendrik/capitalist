@@ -31,7 +31,7 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     @IBOutlet private weak var debtTabLabel: UILabel!
     @IBOutlet private weak var debtTabSelection: UIView!
     
-    @IBOutlet weak var nameField: FloatingTextField!
+    @IBOutlet weak var nameField: FormTextField!    
     @IBOutlet weak var currencyField: FloatingTextField!
     @IBOutlet weak var amountField: MoneyTextField!
     @IBOutlet weak var creditLimitField: MoneyTextField!
@@ -60,6 +60,7 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.updateAppearance()
+        nameField.addError(message: "Testing very long error so it should place two lines long error so it should place two lines")
         currencyField.updateAppearance()
         amountField.updateAppearance()
         creditLimitField.updateAppearance()
@@ -76,9 +77,11 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
             delegate?.didChange(name: text)
         }
         if sender == amountField {
+            nameField.addError(message: "Testing very long error so it should place two lines long error so it should place two lines")
             delegate?.didChange(amount: text)
         }
         if sender == creditLimitField {
+            nameField.addError(message: "Testing very long error so it should place two lines")
             delegate?.didChange(creditLimit: text)
         }
         if sender == goalAmountField {

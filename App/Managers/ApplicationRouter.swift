@@ -147,8 +147,8 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
                                                                                 alpha: 1)]
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: UIControl.State.highlighted)
-        
-        UINavigationBar.appearance().barTintColor = UIColor.navBarColor
+                
+        UINavigationBar.appearance().barTintColor = UIColor.by(.dark333D5B)
     }
     
     private func setupKeyboardManager() {

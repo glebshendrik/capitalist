@@ -24,7 +24,7 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
-    var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
+    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
 
     var viewModel: IncomeSourceEditViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -44,8 +44,8 @@ class IncomeSourceEditViewController : UIViewController, UIMessagePresenterManag
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor        
+        super.viewWillAppear(animated)        
+        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
         editTableController?.setRemoveButton(hidden: viewModel.isNew)
     }
     

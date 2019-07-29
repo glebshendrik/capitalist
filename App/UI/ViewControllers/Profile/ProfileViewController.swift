@@ -15,8 +15,8 @@ protocol ProfileViewOutputProtocol {
 }
 
 class ProfileViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol, NavigationBarColorable {
-    
-    var navigationBarTintColor: UIColor? = UIColor.navBarColor
+        
+    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
 
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: ProfileViewModel!

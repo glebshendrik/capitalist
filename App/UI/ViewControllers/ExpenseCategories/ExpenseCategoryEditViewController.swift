@@ -24,8 +24,8 @@ protocol ExpenseCategoryEditInputProtocol {
 class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    
-    var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
+        
+    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
     
     var viewModel: ExpenseCategoryEditViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -52,7 +52,7 @@ class ExpenseCategoryEditViewController : UIViewController, UIMessagePresenterMa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
+        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
         editTableController?.setRemoveButton(hidden: viewModel.isNew)
     }
     

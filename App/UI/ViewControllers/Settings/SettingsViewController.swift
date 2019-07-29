@@ -12,7 +12,7 @@ import StaticTableViewController
 
 class SettingsViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
-    var navigationBarTintColor: UIColor? = UIColor.navBarColor
+    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
     
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: SettingsViewModel!
@@ -39,8 +39,8 @@ class SettingsViewController : StaticTableViewController, UIMessagePresenterMana
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == "showCurrenciesScreen",
-            let destination = segue.destination as? CurrenciesViewControllerInputProtocol {
+        if  segue.identifier == "showCurrenciesScreen",            
+            let destination = segue.destination as? CurrenciesViewController {
             
             destination.set(delegate: self)
         }

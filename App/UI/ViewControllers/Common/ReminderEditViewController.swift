@@ -17,7 +17,7 @@ class ReminderEditViewController : UIViewController, UIMessagePresenterManagerDe
     
     var viewModel: ReminderViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
-    var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
+    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
     
     private var delegate: ReminderEditViewControllerDelegate?
     private var editTableController: ReminderEditTableViewController?
@@ -29,8 +29,8 @@ class ReminderEditViewController : UIViewController, UIMessagePresenterManagerDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
+        super.viewWillAppear(animated)        
+        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
         editTableController?.setRemoveButton(hidden: !viewModel.isReminderSet)
     }
     

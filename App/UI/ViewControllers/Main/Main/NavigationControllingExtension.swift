@@ -54,7 +54,7 @@ extension MainViewController {
     
     func showEditScreen(expenseSource: ExpenseSource?) {
         if  let expenseSourceEditNavigationController = router.viewController(.ExpenseSourceEditNavigationController) as? UINavigationController,
-            let expenseSourceEditViewController = expenseSourceEditNavigationController.topViewController as? ExpenseSourceEditInputProtocol {
+            let expenseSourceEditViewController = expenseSourceEditNavigationController.topViewController as? ExpenseSourceEditViewController {
             
             expenseSourceEditViewController.set(delegate: self)
             

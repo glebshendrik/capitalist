@@ -100,17 +100,17 @@ class ExpenseCategoryEditTableController : FloatingFieldsStaticTableViewControll
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowExpenseCategoryIcons",
-            let iconsViewController = segue.destination as? IconsViewControllerInputProtocol {
+            let iconsViewController = segue.destination as? IconsViewController {
             iconsViewController.set(iconCategory: iconCategory)
             iconsViewController.set(delegate: self)
         }
         if  segue.identifier == "showCurrenciesScreen",
-            let destination = segue.destination as? CurrenciesViewControllerInputProtocol {
+            let destination = segue.destination as? CurrenciesViewController {
             
             destination.set(delegate: self)
         }
         if  segue.identifier == "showIncomeSourceCurrenciesScreen",
-            let destination = segue.destination as? CurrenciesViewControllerInputProtocol,
+            let destination = segue.destination as? CurrenciesViewController,
             let incomeSourceCurrencyDelegate = incomeSourceCurrencyDelegate {
             
             destination.set(delegate: incomeSourceCurrencyDelegate)

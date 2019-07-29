@@ -300,7 +300,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обычный" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ta0-0x-WRk">
-                                                    <rect key="frame" x="154.5" y="5" width="66.5" height="18"/>
+                                                    <rect key="frame" x="154.5" y="5" width="66" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="PLn-72-Mdg"/>
                                                     </constraints>
@@ -392,102 +392,30 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ez5-J8-Stf" customClass="FloatingTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="72" y="10" width="271" height="49"/>
-                                                    <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Mx-TR-Ujr" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                            <color key="value" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                                            <color key="value" red="0.26274509800000001" green="0.33333333329999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="type-icon"/>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Название"/>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Название"/>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
                                                             <real key="value" value="0.0"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
                                                             <real key="value" value="1"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="textErrorColor">
-                                                            <color key="value" name="text FFFFFF"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
-                                                            <color key="value" name="text FFFFFF"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="didChangeFieldText:" destination="YzM-aR-OkL" eventType="editingChanged" id="51K-Ou-PgT"/>
-                                                        <outlet property="backgroundView" destination="oig-5s-V1c" id="h47-Xr-ABc"/>
-                                                        <outlet property="delegate" destination="YzM-aR-OkL" id="jEW-Q8-HxU"/>
-                                                        <outlet property="icon" destination="pnf-yG-GNn" id="2kf-e6-IsR"/>
-                                                        <outlet property="iconContainer" destination="GDV-Vw-lnc" id="A7F-7J-A9g"/>
-                                                    </connections>
-                                                </textField>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDV-Vw-lnc">
-                                                    <rect key="frame" x="16" y="22.5" width="36" height="36"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="type-icon" translatesAutoresizingMaskIntoConstraints="NO" id="pnf-yG-GNn">
-                                                            <rect key="frame" x="11" y="11" width="14" height="14"/>
-                                                        </imageView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="0.47450980392156861" green="0.51764705882352935" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="36" id="8FJ-jO-keg"/>
-                                                        <constraint firstItem="pnf-yG-GNn" firstAttribute="centerY" secondItem="GDV-Vw-lnc" secondAttribute="centerY" id="kkQ-VY-Znl"/>
-                                                        <constraint firstAttribute="width" constant="36" id="sLb-g5-wYP"/>
-                                                        <constraint firstItem="pnf-yG-GNn" firstAttribute="centerX" secondItem="GDV-Vw-lnc" secondAttribute="centerX" id="sfJ-mg-4Ae"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="18"/>
-                                                        </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3I2-Qr-Hy4">
-                                                    <rect key="frame" x="0.0" y="74" width="375" height="1"/>
-                                                    <color key="backgroundColor" name="delimeter 2F3854"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="o6K-aX-fz7"/>
-                                                    </constraints>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label long error so we need to do anything with it maybe trim or place to second line" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIw-Hl-cdv">
-                                                    <rect key="frame" x="72" y="50.5" width="271" height="23.5"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="10"/>
-                                                    <color key="textColor" name="red FE3745"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="3I2-Qr-Hy4" secondAttribute="trailing" id="0h8-i7-QSs"/>
-                                                <constraint firstItem="ez5-J8-Stf" firstAttribute="top" secondItem="oig-5s-V1c" secondAttribute="top" constant="10" id="Bye-51-gUD"/>
-                                                <constraint firstItem="xIw-Hl-cdv" firstAttribute="leading" secondItem="ez5-J8-Stf" secondAttribute="leading" id="Cqc-Gl-wig"/>
-                                                <constraint firstItem="GDV-Vw-lnc" firstAttribute="leading" secondItem="oig-5s-V1c" secondAttribute="leading" constant="16" id="GAE-FK-3aJ"/>
-                                                <constraint firstItem="ez5-J8-Stf" firstAttribute="leading" secondItem="GDV-Vw-lnc" secondAttribute="trailing" constant="20" id="Ig2-6B-nb0"/>
-                                                <constraint firstItem="xIw-Hl-cdv" firstAttribute="top" secondItem="ez5-J8-Stf" secondAttribute="bottom" constant="-8.5" id="Ln7-Nd-TQk"/>
-                                                <constraint firstAttribute="bottom" secondItem="ez5-J8-Stf" secondAttribute="bottom" constant="16" id="VGc-gM-dth"/>
-                                                <constraint firstAttribute="trailing" secondItem="ez5-J8-Stf" secondAttribute="trailing" constant="32" id="cVH-hi-Kb0"/>
-                                                <constraint firstAttribute="bottom" secondItem="3I2-Qr-Hy4" secondAttribute="bottom" id="gkh-7F-a6y"/>
-                                                <constraint firstItem="xIw-Hl-cdv" firstAttribute="trailing" secondItem="ez5-J8-Stf" secondAttribute="trailing" id="lgM-A7-DEr"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xIw-Hl-cdv" secondAttribute="bottom" id="xAU-f1-MAV"/>
-                                                <constraint firstItem="3I2-Qr-Hy4" firstAttribute="leading" secondItem="oig-5s-V1c" secondAttribute="leading" id="xNc-3n-KeH"/>
-                                                <constraint firstItem="GDV-Vw-lnc" firstAttribute="centerY" secondItem="oig-5s-V1c" secondAttribute="centerY" constant="3" id="ztz-7W-4p0"/>
+                                                <constraint firstItem="6Mx-TR-Ujr" firstAttribute="top" secondItem="oig-5s-V1c" secondAttribute="top" id="IFN-ds-N0N"/>
+                                                <constraint firstAttribute="trailing" secondItem="6Mx-TR-Ujr" secondAttribute="trailing" id="Msl-76-wx9"/>
+                                                <constraint firstAttribute="bottom" secondItem="6Mx-TR-Ujr" secondAttribute="bottom" id="NUb-ko-gNX"/>
+                                                <constraint firstItem="6Mx-TR-Ujr" firstAttribute="leading" secondItem="oig-5s-V1c" secondAttribute="leading" id="cHt-7q-qdx"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="type-icon"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Название"/>
+                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -877,11 +805,11 @@
                                         <rect key="frame" x="0.0" y="588" width="375" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ycy-Lx-WEB" id="mth-Tk-LET">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CF-wN-0Yc">
-                                                    <rect key="frame" x="88.5" y="11.5" width="198" height="40"/>
+                                                    <rect key="frame" x="89.5" y="11.5" width="196" height="40"/>
                                                     <color key="backgroundColor" name="blue 5B86F7"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="qaf-Dm-pdu"/>
@@ -914,7 +842,7 @@
                                         <rect key="frame" x="0.0" y="640" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4R1-vU-TYo" id="6j7-1Q-BFU">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bi9-fH-lkW">
@@ -977,7 +905,7 @@
                         <outlet property="iconPen" destination="tw4-Tl-g4e" id="S3h-tg-xgB"/>
                         <outlet property="iconView" destination="2jt-y6-Ut0" id="uy9-lg-REI"/>
                         <outlet property="loaderImageView" destination="JgI-tt-6th" id="dfA-PB-AxV"/>
-                        <outlet property="nameField" destination="ez5-J8-Stf" id="aLa-G7-nMk"/>
+                        <outlet property="nameField" destination="6Mx-TR-Ujr" id="rvi-X7-Yj0"/>
                         <outlet property="removeCell" destination="4R1-vU-TYo" id="Fqu-1U-Nwn"/>
                         <outlet property="typeSwitchCell" destination="XIN-oP-HUz" id="HkR-OF-bYL"/>
                         <outlet property="usualTabLabel" destination="kJ5-4o-dvi" id="f2q-VH-tLe"/>
@@ -986,7 +914,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m3j-NM-Az7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-788" y="1679.9100449775115"/>
+            <point key="canvasLocation" x="-729" y="1664"/>
         </scene>
         <!--Expense Source Select View Controller-->
         <scene sceneID="gaB-gC-mKi">
@@ -1017,13 +945,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Labelasdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Blu-op-yb6">
-                                                    <rect key="frame" x="68" y="20.5" width="130" height="19"/>
+                                                    <rect key="frame" x="68" y="20.5" width="132" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.47450980390000003" green="0.51764705879999995" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYS-FF-ARN">
-                                                    <rect key="frame" x="214" y="21" width="145" height="18"/>
+                                                    <rect key="frame" x="216" y="21" width="143" height="18"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                     <color key="textColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1246,13 +1174,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lh3-V4-5Cz">
-                                                    <rect key="frame" x="16" y="8" width="40.5" height="23.5"/>
+                                                    <rect key="frame" x="16" y="8" width="39.5" height="23.5"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggn-8d-2G2">
-                                                    <rect key="frame" x="318.5" y="8" width="40.5" height="23.5"/>
+                                                    <rect key="frame" x="319.5" y="8" width="39.5" height="23.5"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1328,7 +1256,6 @@
         <image name="planned-amount-icon" width="20" height="21.5"/>
         <image name="remove-icon" width="17" height="20"/>
         <image name="save-circle-icon" width="24" height="24"/>
-        <image name="type-icon" width="14" height="14"/>
         <image name="wallet-default-icon" width="29" height="22"/>
         <namedColor name="blue 5B86F7">
             <color red="0.35686274509803922" green="0.52549019607843139" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1341,9 +1268,6 @@
         </namedColor>
         <namedColor name="delimeter 333D5B">
             <color red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="red FE3745">
-            <color red="0.99607843137254903" green="0.21568627450980393" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="text 9EAACC">
             <color red="0.61960784313725492" green="0.66666666666666663" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

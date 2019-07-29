@@ -13,7 +13,7 @@ import SwifterSwift
 
 class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
-    var navigationBarTintColor: UIColor? = UIColor.mainNavBarColor
+    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
     
     var viewModel: MainViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -87,8 +87,8 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.mainNavBarColor
+        super.viewWillAppear(animated)        
+        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
         appMovedToForeground()
     }
     
