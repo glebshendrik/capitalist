@@ -53,13 +53,13 @@ struct ExpenseCategory : Decodable {
     
 }
 
-struct ExpenseCategoryCreationForm : Encodable {
-    let name: String
+struct ExpenseCategoryCreationForm : Encodable, Validatable {
+    let basketId: Int?
     let iconURL: URL?
-    let basketId: Int
-    let monthlyPlannedCurrency: String
+    let name: String?
     let monthlyPlannedCents: Int?
-    let incomeSourceCurrency: String
+    let monthlyPlannedCurrency: String?
+    let incomeSourceCurrency: String?
     let reminderStartDate: Date?
     let reminderRecurrenceRule: String?
     let reminderMessage: String?
@@ -76,23 +76,33 @@ struct ExpenseCategoryCreationForm : Encodable {
         case reminderMessage = "reminder_message"
     }
     
-    init(name: String, iconURL: URL?, basketId: Int, monthlyPlannedCents: Int?, currency: String, incomeSourceCurrency: String, reminderStartDate: Date?, reminderRecurrenceRule: String?, reminderMessage: String?) {
-        self.name = name
-        self.iconURL = iconURL
-        self.basketId = basketId
-        self.monthlyPlannedCents = monthlyPlannedCents
-        self.monthlyPlannedCurrency = currency
-        self.incomeSourceCurrency = incomeSourceCurrency
-        self.reminderStartDate = reminderStartDate
-        self.reminderRecurrenceRule = reminderRecurrenceRule
-        self.reminderMessage = reminderMessage
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if !Validator.isValid(present: basketId) {
+            errors["basket_id"] = "Ошибка сохранения"
+        }
+        
+        if !Validator.isValid(required: name) {
+            errors[CodingKeys.name.rawValue] = "Укажите название"
+        }
+        
+        if  !Validator.isValid(required: monthlyPlannedCurrency) {
+            errors[CodingKeys.monthlyPlannedCurrency.rawValue] = "Укажите валюту"
+        }
+        
+        if  !Validator.isValid(required: incomeSourceCurrency) {
+            errors[CodingKeys.incomeSourceCurrency.rawValue] = "Укажите валюту"
+        }
+        
+        return errors
     }
 }
 
-struct ExpenseCategoryUpdatingForm : Encodable {
-    let id: Int
-    let name: String
+struct ExpenseCategoryUpdatingForm : Encodable, Validatable {
+    let id: Int?
     let iconURL: URL?
+    let name: String?    
     let monthlyPlannedCents: Int?
     let reminderStartDate: Date?
     let reminderRecurrenceRule: String?
@@ -107,16 +117,6 @@ struct ExpenseCategoryUpdatingForm : Encodable {
         case reminderMessage = "reminder_message"
     }
     
-    init(id: Int, name: String, iconURL: URL?, monthlyPlannedCents: Int?, reminderStartDate: Date?, reminderRecurrenceRule: String?, reminderMessage: String?) {
-        self.id = id
-        self.name = name
-        self.iconURL = iconURL
-        self.monthlyPlannedCents = monthlyPlannedCents
-        self.reminderStartDate = reminderStartDate
-        self.reminderRecurrenceRule = reminderRecurrenceRule
-        self.reminderMessage = reminderMessage
-    }
-    
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
@@ -125,6 +125,20 @@ struct ExpenseCategoryUpdatingForm : Encodable {
         try container.encode(reminderStartDate, forKey: .reminderStartDate)
         try container.encode(reminderRecurrenceRule, forKey: .reminderRecurrenceRule)
         try container.encode(reminderMessage, forKey: .reminderMessage)
+    }
+    
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if !Validator.isValid(present: id) {
+            errors["id"] = "Ошибка сохранения"
+        }
+        
+        if !Validator.isValid(required: name) {
+            errors[CodingKeys.name.rawValue] = "Укажите название"
+        }
+                        
+        return errors
     }
 }
 

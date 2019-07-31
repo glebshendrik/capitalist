@@ -9,20 +9,24 @@
 import UIKit
 import PromiseKit
 
-class FormEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol {
+class FormEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
         
     var navigationBarTintColor: UIColor? {
         return UIColor.by(.dark333D5B)
     }
     
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
-    var router: ApplicationRouterProtocol!
+    var factory: UIFactoryProtocol!
     var tableViewController: FloatingFieldsStaticTableViewController!
     
     var shouldLoadData: Bool { return true }
     var formTitle: String { return "" }
     var saveErrorMessage: String { return "Ошибка сохранения" }
     var removeErrorMessage: String { return "Ошибка удаления" }
+    
+    lazy var formFields: [String : FormTextField] = {
+        return registerFormFields()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +45,10 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
             tableViewController = viewController
             setup(tableController: tableViewController)
         }
+    }
+    
+    func registerFormFields() -> [String : FormTextField] {
+        return [:]
     }
     
     func loadData() {
@@ -66,15 +74,30 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
         }.catch { error in
             switch error {
             case ValidationError.invalid(let errors):
-                self.messagePresenterManager.show(validationMessages: errors)
+                self.add(errors: errors)
             case APIRequestError.unprocessedEntity(let errors):
-                self.messagePresenterManager.show(validationMessages: errors)
+                self.add(errors: errors)
             default:
                 self.messagePresenterManager.show(navBarMessage: self.saveErrorMessage,
                                                   theme: .error)
             }
         }.finally {
             self.operationFinished()
+        }
+    }
+    
+    func add(errors: [String : String]) {
+        var unknownErrors = [String : String]()
+        for error in errors {
+            if let formField = formFields[error.key] {
+                formField.addError(message: error.value)
+            }
+            else {
+                unknownErrors[error.key] = error.value
+            }
+        }
+        if !unknownErrors.isEmpty {
+            self.messagePresenterManager.show(validationMessages: unknownErrors)
         }
     }
     
@@ -89,7 +112,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
         }.catch { error in
             switch error {
             case APIRequestError.unprocessedEntity(let errors):
-                self.messagePresenterManager.show(validationMessages: errors)
+                self.add(errors: errors)
             default:
                 self.messagePresenterManager.show(navBarMessage: self.removeErrorMessage,
                                                   theme: .error)

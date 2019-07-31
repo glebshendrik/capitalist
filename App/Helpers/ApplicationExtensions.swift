@@ -557,3 +557,15 @@ extension Locale {
         return String(Locale.preferredLanguages[0].prefix(2))
     }
 }
+
+extension UIViewController {
+    func present(_ viewController: UIViewController?, animated: Bool = true, completion: (() -> Void)? = nil) {
+        guard let viewController = viewController else { return }
+        present(viewController, animated: animated, completion: completion)
+    }
+    
+    func push(_ viewController: UIViewController?, animated: Bool = true) {
+        guard let viewController = viewController else { return }
+        navigationController?.pushViewController(viewController, animated: animated)
+    }
+}

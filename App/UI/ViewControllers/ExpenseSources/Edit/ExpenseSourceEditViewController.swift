@@ -15,10 +15,8 @@ protocol ExpenseSourceEditViewControllerDelegate {
     func didRemoveExpenseSource()
 }
 
-class ExpenseSourceEditViewController : FormEditViewController {
-    
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    
+class ExpenseSourceEditViewController : FormTransactionsDependableEditViewController {
+
     var viewModel: ExpenseSourceEditViewModel!
     var delegate: ExpenseSourceEditViewControllerDelegate?
     var tableController: ExpenseSourceEditTableController!
@@ -29,30 +27,21 @@ class ExpenseSourceEditViewController : FormEditViewController {
     }
     override var saveErrorMessage: String { return "Ошибка при сохранении кошелька" }
     override var removeErrorMessage: String { return "Ошибка при удалении кошелька" }
+    override var removeQuestionMessage: String { return "Удалить кошелек?" }
     
     var deleteTransactions: Bool = false
     
-    @IBAction func didTapSaveButton(_ sender: Any) {
-        save()
-    }
-    
-    @IBAction func didTapCancelButton(_ sender: Any) {
-        close()
+    override func registerFormFields() -> [String : FormTextField] {
+        return [ExpenseSource.CodingKeys.name.rawValue : tableController.nameField,
+                ExpenseSource.CodingKeys.amountCurrency.rawValue : tableController.currencyField,
+                ExpenseSource.CodingKeys.amountCents.rawValue : tableController.amountField,
+                ExpenseSource.CodingKeys.creditLimitCents.rawValue : tableController.creditLimitField,
+                ExpenseSource.CodingKeys.goalAmountCents.rawValue : tableController.goalAmountField]
     }
     
     override func setup(tableController: FloatingFieldsStaticTableViewController) {        
         self.tableController = tableController as? ExpenseSourceEditTableController
         self.tableController.delegate = self
-    }
-    
-    override func operationStarted() {
-        super.operationStarted()
-        saveButton.isEnabled = false
-    }
-    
-    override func operationFinished() {
-        super.operationFinished()
-        self.saveButton.isEnabled = true
     }
     
     override func loadDataPromise() -> Promise<Void> {

@@ -26,7 +26,6 @@ extension ExpenseSourceEditViewController : CurrenciesViewControllerDelegate {
     }
 }
 
-
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
     func didTap(accountType: AccountType) {
         viewModel.accountType = accountType
@@ -35,19 +34,13 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
     }
     
     func didTapIcon() {
-        guard let iconsViewController = router.viewController(.IconsViewController) as? IconsViewController else { return }
-        
-        iconsViewController.set(iconCategory: viewModel.iconCategory)
-        iconsViewController.set(delegate: self)
-        navigationController?.pushViewController(iconsViewController)
+        guard viewModel.canChangeIcon else { return }
+        push(factory.iconsViewController(delegate: self, iconCategory: viewModel.iconCategory))        
     }
     
     func didTapCurrency() {
-        guard   viewModel.canChangeCurrency,
-            let currenciesViewController = router.viewController(.CurrenciesViewController) as? CurrenciesViewController else { return }
-        
-        currenciesViewController.set(delegate: self)
-        navigationController?.pushViewController(currenciesViewController)
+        guard viewModel.canChangeCurrency else { return }
+        push(factory.currenciesViewController(delegate: self))
     }
     
     func didChange(name: String?) {
@@ -73,34 +66,5 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
         } else {
             showProviders()
         }
-    }
-        
-    func didTapRemoveButton() {
-        let alertController = UIAlertController(title: "Удалить кошелек?",
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        alertController.addAction(title: "Удалить",
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: { _ in
-                                    self.deleteTransactions = false
-                                    self.remove()
-        })
-        
-        alertController.addAction(title: "Удалить вместе с транзакциями",
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: { _ in
-                                    self.deleteTransactions = true
-                                    self.remove()
-        })
-        
-        alertController.addAction(title: "Отмена",
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: nil)
-        
-        present(alertController, animated: true)
     }
 }

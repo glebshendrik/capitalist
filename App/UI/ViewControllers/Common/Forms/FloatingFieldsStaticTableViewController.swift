@@ -31,18 +31,6 @@ class FloatingFieldsStaticTableViewController : StaticTableViewController, UITex
         tableView.isUserInteractionEnabled = true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let floatingLabelTextField = textField as? FloatingTextField {
-            floatingLabelTextField.updateAppearance()
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let floatingLabelTextField = textField as? FloatingTextField {
-            floatingLabelTextField.updateAppearance()
-        }
-    }
-    
     private func setupUI() {
         insertAnimation = .top
         deleteAnimation = .top

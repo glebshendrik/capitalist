@@ -37,10 +37,10 @@ struct IncomeSource : Decodable {
 
 }
 
-struct IncomeSourceCreationForm : Encodable {
-    let userId: Int
-    let name: String
-    let currency: String
+struct IncomeSourceCreationForm : Encodable, Validatable {
+    let userId: Int?
+    let name: String?
+    let currency: String?
     let reminderStartDate: Date?
     let reminderRecurrenceRule: String?
     let reminderMessage: String?
@@ -52,11 +52,29 @@ struct IncomeSourceCreationForm : Encodable {
         case reminderRecurrenceRule = "reminder_recurrence_rule"
         case reminderMessage = "reminder_message"
     }
+    
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if !Validator.isValid(present: userId) {
+            errors["user_id"] = "Ошибка сохранения"
+        }
+        
+        if !Validator.isValid(required: name) {
+            errors[CodingKeys.name.rawValue] = "Укажите название"
+        }
+        
+        if  !Validator.isValid(required: currency) {
+            errors[CodingKeys.currency.rawValue] = "Укажите валюту"
+        }
+        
+        return errors
+    }
 }
 
-struct IncomeSourceUpdatingForm : Encodable {
-    let id: Int
-    let name: String
+struct IncomeSourceUpdatingForm : Encodable, Validatable {
+    let id: Int?
+    let name: String?
     let reminderStartDate: Date?
     let reminderRecurrenceRule: String?
     let reminderMessage: String?
@@ -74,6 +92,20 @@ struct IncomeSourceUpdatingForm : Encodable {
         try container.encode(reminderStartDate, forKey: .reminderStartDate)
         try container.encode(reminderRecurrenceRule, forKey: .reminderRecurrenceRule)
         try container.encode(reminderMessage, forKey: .reminderMessage)
+    }
+    
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if !Validator.isValid(present: id) {
+            errors["id"] = "Ошибка сохранения"
+        }
+        
+        if !Validator.isValid(required: name) {
+            errors[CodingKeys.name.rawValue] = "Укажите название"
+        }
+
+        return errors
     }
 }
 

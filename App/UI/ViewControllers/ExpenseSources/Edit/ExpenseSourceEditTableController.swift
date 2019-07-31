@@ -32,12 +32,10 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     @IBOutlet private weak var debtTabSelection: UIView!
     
     @IBOutlet weak var nameField: FormTextField!    
-    @IBOutlet weak var currencyField: FloatingTextField!
-    @IBOutlet weak var amountField: MoneyTextField!
-    @IBOutlet weak var creditLimitField: MoneyTextField!
-    @IBOutlet weak var goalAmountField: MoneyTextField!
-    
-    @IBOutlet weak var currencyArrow: UIImageView!
+    @IBOutlet weak var currencyField: FormTapField!
+    @IBOutlet weak var amountField: FormMoneyTextField!
+    @IBOutlet weak var creditLimitField: FormMoneyTextField!
+    @IBOutlet weak var goalAmountField: FormMoneyTextField!
 
     @IBOutlet weak var accountTypeLabel: UILabel!
 
@@ -59,34 +57,29 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameField.updateAppearance()
-        nameField.addError(message: "Testing very long error so it should place two lines long error so it should place two lines")
-        currencyField.updateAppearance()
-        amountField.updateAppearance()
-        creditLimitField.updateAppearance()
-        goalAmountField.updateAppearance()
+        nameField.textField.addTarget(self, action: #selector(didChangeName(_:)), for: UIControl.Event.editingChanged)
+        currencyField.tapButton.addTarget(self, action: #selector(didTapCurrency(_:)), for: UIControl.Event.touchUpInside)
+        amountField.textField.addTarget(self, action: #selector(didChangeAmount(_:)), for: UIControl.Event.editingChanged)
+        creditLimitField.textField.addTarget(self, action: #selector(didChangeCreditLimit(_:)), for: UIControl.Event.editingChanged)
+        goalAmountField.textField.addTarget(self, action: #selector(didChangeGoalAmount(_:)), for: UIControl.Event.editingChanged)
     }
     
     // TextFields didChange
     
-    @IBAction func didChangeFieldText(_ sender: FloatingTextField) {
-        sender.updateAppearance()
-        let text = sender.text?.trimmed
-        
-        if sender == nameField {
-            delegate?.didChange(name: text)
-        }
-        if sender == amountField {
-            nameField.addError(message: "Testing very long error so it should place two lines long error so it should place two lines")
-            delegate?.didChange(amount: text)
-        }
-        if sender == creditLimitField {
-            nameField.addError(message: "Testing very long error so it should place two lines")
-            delegate?.didChange(creditLimit: text)
-        }
-        if sender == goalAmountField {
-            delegate?.didChange(goalAmount: text)
-        }
+    @objc func didChangeName(_ sender: FloatingTextField) {
+        delegate?.didChange(name: sender.text?.trimmed)
+    }
+    
+    @objc func didChangeAmount(_ sender: FloatingTextField) {
+        delegate?.didChange(amount: sender.text?.trimmed)
+    }
+    
+    @objc func didChangeCreditLimit(_ sender: FloatingTextField) {
+        delegate?.didChange(creditLimit: sender.text?.trimmed)
+    }
+    
+    @objc func didChangeGoalAmount(_ sender: FloatingTextField) {
+        delegate?.didChange(goalAmount: sender.text?.trimmed)
     }
     
     // Buttons didTap
@@ -110,7 +103,7 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
         delegate?.didTapIcon()
     }
     
-    @IBAction func didTapCurrency(_ sender: Any) {
+    @objc func didTapCurrency(_ sender: Any) {
         delegate?.didTapCurrency()
     }
     
@@ -158,36 +151,4 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
         goalTabSelection.isHidden = tabsAppearance.goal.isHidden
         debtTabSelection.isHidden = tabsAppearance.debt.isHidden
     }
-    
-    // Cells visibility
-    
-//    func setTypeSwitch(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-//        set(cells: typeSwitchCell, hidden: hidden)
-//        if reload { reloadData(animated: animated) }
-//    }
-//
-//    func setAmount(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-//        set(cells: amountCell, hidden: hidden)
-//        if reload { reloadData(animated: animated) }
-//    }
-//
-//    func setCreditLimit(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-//        set(cells: creditLimitCell, hidden: hidden)
-//        if reload { reloadData(animated: animated) }
-//    }
-//
-//    func setGoalAmount(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-//        set(cells: goalAmountCell, hidden: hidden)
-//        if reload { reloadData(animated: animated) }
-//    }
-//
-//    func setRemoveButton(hidden: Bool) {
-//        set(cell: removeCell, hidden: hidden, animated: false, reload: true)
-//    }
-//
-//    func setBankButton(hidden: Bool, animated: Bool = true, reload: Bool = true) {
-//        set(cell: bankCell, hidden: hidden, animated: animated, reload: reload)
-//    }
-    
-    
 }

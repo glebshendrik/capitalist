@@ -25,11 +25,11 @@ enum IconCategory : String, Codable {
         case .expenseCategorySafe:
             return ""
         case .expenseSource:
-            return ""
+            return "wallet-default-icon"
         case .expenseSourceGoal:
-            return ""
+            return "wallet-goal-default-icon"
         case .expenseSourceDebt:
-            return ""
+            return "wallet-default-icon"
         }
     }
 }

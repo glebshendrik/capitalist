@@ -9,17 +9,9 @@
 import Foundation
 import PromiseKit
 
-enum IncomeSourceCreationError : Error {
-    case validation(validationResults: [IncomeSourceCreationForm.CodingKeys : [ValidationErrorReason]])
-    case currentSessionDoesNotExist
-    case currencyIsNotSpecified
-}
-
 enum IncomeSourceUpdatingError : Error {
-    case validation(validationResults: [IncomeSourceUpdatingForm.CodingKeys : [ValidationErrorReason]])
     case updatingIncomeSourceIsNotSpecified
 }
-
 
 class IncomeSourceEditViewModel {
     private let incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol
@@ -27,13 +19,15 @@ class IncomeSourceEditViewModel {
     
     private var incomeSource: IncomeSource? = nil
     
+    var name: String? = nil
+    var selectedCurrency: Currency? = nil
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
-    var name: String? {
-        return incomeSource?.name
-    }
+    // Computed
     
-    var selectedCurrency: Currency? = nil
+    var isNew: Bool {
+        return incomeSource == nil
+    }
     
     var selectedCurrencyName: String? {
         return selectedCurrency?.translatedName
@@ -41,10 +35,6 @@ class IncomeSourceEditViewModel {
     
     var selectedCurrencyCode: String? {
         return selectedCurrency?.code
-    }
-    
-    var isNew: Bool {
-        return incomeSource == nil
     }
     
     var reminderTitle: String {
@@ -55,16 +45,22 @@ class IncomeSourceEditViewModel {
         return reminderViewModel.reminder
     }
     
+    // Permissions
+    
+    var canChangeCurrency: Bool {
+        return isNew
+    }
+    
+    // Visibility
+    
+    var removeButtonHidden: Bool {
+        return isNew
+    }
+    
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
         self.accountCoordinator = accountCoordinator
-    }
-    
-    func set(incomeSource: IncomeSource) {
-        self.incomeSource = incomeSource
-        reminderViewModel = ReminderViewModel(incomeSource: incomeSource)
-        selectedCurrency = incomeSource.currency
     }
     
     func loadDefaultCurrency() -> Promise<Void> {
@@ -75,12 +71,24 @@ class IncomeSourceEditViewModel {
                 }
     }
     
-    func isFormValid(with name: String?) -> Bool {
-        return isNew ? isCreationFormValid(with: name) : isUpdatingFormValid(with: name)
+    func set(incomeSource: IncomeSource) {
+        self.incomeSource = incomeSource
+        
+        reminderViewModel = ReminderViewModel(incomeSource: incomeSource)
+        selectedCurrency = incomeSource.currency
+        name = incomeSource.name
     }
     
-    func saveIncomeSource(with name: String?) -> Promise<Void> {
-        return isNew ? createIncomeSource(with: name) : updateIncomeSource(with: name)
+    func isFormValid() -> Bool {
+        return isNew
+            ? isCreationFormValid()
+            : isUpdatingFormValid()
+    }
+    
+    func save() -> Promise<Void> {
+        return isNew
+            ? create()
+            : update()
     }
     
     func removeIncomeSource(deleteTransactions: Bool) -> Promise<Void> {
@@ -89,86 +97,43 @@ class IncomeSourceEditViewModel {
         }
         return incomeSourcesCoordinator.destroy(by: incomeSourceId, deleteTransactions: deleteTransactions)
     }
-    
-    private func isCreationFormValid(with name: String?) -> Bool {
-        return validateCreation(with: name) == nil
+}
+
+// Creation
+extension IncomeSourceEditViewModel {
+    private func create() -> Promise<Void> {
+        return incomeSourcesCoordinator.create(with: creationForm()).asVoid()
     }
     
-    private func isUpdatingFormValid(with name: String?) -> Bool {
-        return validateUpdating(with: name) == nil
+    private func isCreationFormValid() -> Bool {
+        return creationForm().validate() == nil
     }
     
-    private func createIncomeSource(with name: String?) -> Promise<Void> {
-        return  firstly {
-                    validateCreationForm(with: name)
-                }.then { incomeSourceCreationForm -> Promise<IncomeSource> in
-                    self.incomeSourcesCoordinator.create(with: incomeSourceCreationForm)
-                }.asVoid()
+    private func creationForm() -> IncomeSourceCreationForm {        
+        return IncomeSourceCreationForm( userId: accountCoordinator.currentSession?.userId,
+                                         name: name,
+                                         currency: selectedCurrencyCode,
+                                         reminderStartDate: reminderViewModel.reminderStartDate,
+                                         reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
+                                         reminderMessage: reminderViewModel.reminderMessage)
+    }
+}
+
+// Updating
+extension IncomeSourceEditViewModel {
+    private func update() -> Promise<Void> {
+        return incomeSourcesCoordinator.update(with: updatingForm())
     }
     
-    private func updateIncomeSource(with name: String?) -> Promise<Void> {
-        return  firstly {
-            validateUpdatingForm(with: name)
-            }.then { incomeSourceUpdatingForm in
-                self.incomeSourcesCoordinator.update(with: incomeSourceUpdatingForm)
-        }
+    private func isUpdatingFormValid() -> Bool {
+        return updatingForm().validate() == nil
     }
     
-    private func validateCreationForm(with name: String?) -> Promise<IncomeSourceCreationForm> {
-        
-        if let failureResultsHash = validateCreation(with: name) {
-            return Promise(error: IncomeSourceCreationError.validation(validationResults: failureResultsHash))
-        }
-        
-        guard let currentUserId = accountCoordinator.currentSession?.userId else {
-            return Promise(error: IncomeSourceCreationError.currentSessionDoesNotExist)
-        }
-        
-        guard let currencyCode = selectedCurrencyCode else {
-            return Promise(error: IncomeSourceCreationError.currencyIsNotSpecified)
-        }
-        
-        return .value(IncomeSourceCreationForm(userId: currentUserId,
-                                               name: name!,
-                                               currency: currencyCode,
-                                               reminderStartDate: reminderViewModel.reminderStartDate,
-                                               reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
-                                               reminderMessage: reminderViewModel.reminderMessage))
-    }
-    
-    private func validateUpdatingForm(with name: String?) -> Promise<IncomeSourceUpdatingForm> {
-        
-        if let failureResultsHash = validateUpdating(with: name) {
-            return Promise(error: IncomeSourceUpdatingError.validation(validationResults: failureResultsHash))
-        }
-        
-        guard let incomeSourceId = incomeSource?.id else {
-            return Promise(error: IncomeSourceUpdatingError.updatingIncomeSourceIsNotSpecified)
-        }
-        
-        return .value(IncomeSourceUpdatingForm(id: incomeSourceId,
-                                               name: name!,
-                                               reminderStartDate: reminderViewModel.reminderStartDate,
-                                               reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
-                                               reminderMessage: reminderViewModel.reminderMessage))
-    }
-    
-    private func validateCreation(with name: String?) -> [IncomeSourceCreationForm.CodingKeys : [ValidationErrorReason]]? {
-        let validationResults : [ValidationResultProtocol] =
-            [Validator.validate(required: name, key: IncomeSourceCreationForm.CodingKeys.name)]
-        
-        let failureResultsHash : [IncomeSourceCreationForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
-        
-        return failureResultsHash
-    }
-    
-    private func validateUpdating(with name: String?) -> [IncomeSourceUpdatingForm.CodingKeys : [ValidationErrorReason]]? {
-        
-        let validationResults : [ValidationResultProtocol] =
-            [Validator.validate(required: name, key: IncomeSourceUpdatingForm.CodingKeys.name)]
-        
-        let failureResultsHash : [IncomeSourceUpdatingForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
-        
-        return failureResultsHash
+    private func updatingForm() -> IncomeSourceUpdatingForm {
+        return IncomeSourceUpdatingForm(id: incomeSource?.id,
+                                        name: name,
+                                        reminderStartDate: reminderViewModel.reminderStartDate,
+                                        reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
+                                        reminderMessage: reminderViewModel.reminderMessage)
     }
 }

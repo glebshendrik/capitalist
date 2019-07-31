@@ -9,17 +9,15 @@
 import UIKit
 
 protocol IncomeSourceEditTableControllerDelegate {
-    var canChangeCurrency: Bool { get }
-    func validationNeeded()
-    func didSelectCurrency(currency: Currency)
+    func didChange(name: String?)
+    func didTapCurrency()
     func didTapSetReminder()
     func didTapRemoveButton()
 }
 
 class IncomeSourceEditTableController : FloatingFieldsStaticTableViewController {
-    @IBOutlet weak var incomeSourceNameTextField: FloatingTextField!
-    @IBOutlet weak var currencyTextField: FloatingTextField!
-    @IBOutlet weak var changeCurrencyIndicator: UIImageView!
+    @IBOutlet weak var nameField: FormTextField!
+    @IBOutlet weak var currencyField: FormTapField!
     @IBOutlet weak var reminderButton: UIButton!
     @IBOutlet weak var reminderLabel: UILabel!
     @IBOutlet weak var removeCell: UITableViewCell!
@@ -28,14 +26,16 @@ class IncomeSourceEditTableController : FloatingFieldsStaticTableViewController 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        incomeSourceNameTextField.updateAppearance()
-        currencyTextField.updateAppearance()
-        delegate?.validationNeeded()
+        nameField.textField.addTarget(self, action: #selector(didChangeName(_:)), for: UIControl.Event.editingChanged)
+        currencyField.tapButton.addTarget(self, action: #selector(didTapCurrency(_:)), for: UIControl.Event.touchUpInside)
     }
     
-    @IBAction func didChangeName(_ sender: FloatingTextField) {
-        sender.updateAppearance()
-        delegate?.validationNeeded()
+    @objc func didChangeName(_ sender: FloatingTextField) {
+        delegate?.didChange(name: sender.text?.trimmed)
+    }
+    
+    @objc func didTapCurrency(_ sender: Any) {
+        delegate?.didTapCurrency()
     }
     
     @IBAction func didTapSetReminder(_ sender: UIButton) {
@@ -44,31 +44,5 @@ class IncomeSourceEditTableController : FloatingFieldsStaticTableViewController 
     
     @IBAction func didTapRemoveButton(_ sender: UIButton) {
         delegate?.didTapRemoveButton()
-    }
-    
-    func setRemoveButton(hidden: Bool) {
-        set(cell: removeCell, hidden: hidden, animated: false, reload: true)
-    }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if  identifier == "showCurrenciesScreen",
-            let delegate = delegate {
-            return delegate.canChangeCurrency
-        }
-        return true
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == "showCurrenciesScreen",
-            let destination = segue.destination as? CurrenciesViewController {
-            
-            destination.set(delegate: self)
-        }
-    }
-}
-
-extension IncomeSourceEditTableController : CurrenciesViewControllerDelegate {
-    func didSelectCurrency(currency: Currency) {
-        delegate?.didSelectCurrency(currency: currency)
     }
 }

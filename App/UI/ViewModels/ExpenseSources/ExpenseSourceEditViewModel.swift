@@ -75,6 +75,10 @@ class ExpenseSourceEditViewModel {
         return accountConnectionAttributes.shouldDestroy == nil
     }
     
+    var bankButtonTitle: String {
+        return accountConnected ? "Отключить банк" : "Подключить банк"
+    }
+    
     // Permissions
     
     var canChangeIcon: Bool {
@@ -122,7 +126,11 @@ class ExpenseSourceEditViewModel {
     var creditLimitHidden: Bool {
         return accountType != .usual
     }
-        
+    
+    var goalAmountHidden: Bool {
+        return accountType != .goal
+    }
+    
     var bankButtonHidden: Bool {
         return accountType != .usual
     }
