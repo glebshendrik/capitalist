@@ -57,32 +57,23 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameField.textField.addTarget(self, action: #selector(didChangeName(_:)), for: UIControl.Event.editingChanged)
-        currencyField.tapButton.addTarget(self, action: #selector(didTapCurrency(_:)), for: UIControl.Event.touchUpInside)
-        amountField.textField.addTarget(self, action: #selector(didChangeAmount(_:)), for: UIControl.Event.editingChanged)
-        creditLimitField.textField.addTarget(self, action: #selector(didChangeCreditLimit(_:)), for: UIControl.Event.editingChanged)
-        goalAmountField.textField.addTarget(self, action: #selector(didChangeGoalAmount(_:)), for: UIControl.Event.editingChanged)
+        
+        nameField.didChange { [weak self] text in
+            self?.delegate?.didChange(name: text)
+        }
+        currencyField.didTap { [weak self] in
+            self?.delegate?.didTapCurrency()
+        }
+        amountField.didChange { [weak self] text in
+            self?.delegate?.didChange(amount: text)
+        }
+        creditLimitField.didChange { [weak self] text in
+            self?.delegate?.didChange(creditLimit: text)
+        }
+        goalAmountField.didChange { [weak self] text in
+            self?.delegate?.didChange(goalAmount: text)
+        }
     }
-    
-    // TextFields didChange
-    
-    @objc func didChangeName(_ sender: FloatingTextField) {
-        delegate?.didChange(name: sender.text?.trimmed)
-    }
-    
-    @objc func didChangeAmount(_ sender: FloatingTextField) {
-        delegate?.didChange(amount: sender.text?.trimmed)
-    }
-    
-    @objc func didChangeCreditLimit(_ sender: FloatingTextField) {
-        delegate?.didChange(creditLimit: sender.text?.trimmed)
-    }
-    
-    @objc func didChangeGoalAmount(_ sender: FloatingTextField) {
-        delegate?.didChange(goalAmount: sender.text?.trimmed)
-    }
-    
-    // Buttons didTap
     
     @IBAction func didTapUsualTab(_ sender: Any) {
         delegate?.didTap(accountType: .usual)
@@ -101,10 +92,6 @@ class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController
     
     @IBAction func didTapIcon(_ sender: Any) {
         delegate?.didTapIcon()
-    }
-    
-    @objc func didTapCurrency(_ sender: Any) {
-        delegate?.didTapCurrency()
     }
     
     @IBAction func didTapBankButton(_ sender: Any) {

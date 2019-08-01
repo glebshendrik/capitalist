@@ -11,19 +11,17 @@ import SkyFloatingLabelTextField
 import StaticTableViewController
 
 protocol TransactionEditTableControllerDelegate {
-    func validationNeeded()
-    func needsFirstResponder()
-    func didSaveAtYesterday()
-    func didChangeAmount()
-    func didChangeConvertedAmount()
+    func didTapSaveAtYesterday()
     func didTapComment()
     func didTapCalendar()
     func didTapWhom()
     func didTapBorrowedTill()
     func didTapReturn()
-    func didChange(includedInBalance: Bool)
     func didTapStartable()
     func didTapCompletable()
+    func didChange(amount: String?)
+    func didChange(convertedAmount: String?)
+    func didChange(includedInBalance: Bool)
     func didTapRemoveButton()
 }
 

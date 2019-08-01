@@ -34,4 +34,26 @@ class UIFactory : UIFactoryProtocol {
         reminderEditViewController?.set(reminderViewModel: viewModel, delegate: delegate)
         return reminderEditViewController
     }
+    
+    func providersViewController(delegate: ProvidersViewControllerDelegate) -> ProvidersViewController? {
+        let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController
+        providersViewController?.delegate = delegate
+        return providersViewController
+    }
+    
+    func accountsViewController(delegate: AccountsViewControllerDelegate, providerConnection: ProviderConnection, currencyCode: String?) -> AccountsViewController? {
+        
+        let accountsViewController = router.viewController(Infrastructure.ViewController.AccountsViewController) as? AccountsViewController
+        accountsViewController?.delegate = delegate
+        accountsViewController?.viewModel.providerConnection = providerConnection
+        accountsViewController?.viewModel.currencyCode = currencyCode
+        return accountsViewController
+    }
+    
+    func providerConnectionViewController(delegate: ProviderConnectionViewControllerDelegate, providerViewModel: ProviderViewModel) -> ProviderConnectionViewController? {
+        let providerConnectionViewController = router.viewController(Infrastructure.ViewController.ProviderConnectionViewController) as? ProviderConnectionViewController
+        providerConnectionViewController?.delegate = delegate
+        providerConnectionViewController?.providerViewModel = providerViewModel
+        return providerConnectionViewController        
+    }
 }

@@ -22,11 +22,7 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     }
     
     func showProviders() {
-        if let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController {
-            
-            providersViewController.delegate = self
-            slideUp(viewController: providersViewController)
-        }
+        slideUp(viewController: factory.providersViewController(delegate: self))
     }
     
     func didSelect(providerViewModel: ProviderViewModel) {
@@ -51,13 +47,8 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     }
     
     func showAccountsViewController(for providerConnection: ProviderConnection) {
-        if let accountsViewController = router.viewController(Infrastructure.ViewController.AccountsViewController) as? AccountsViewController {
-            
-            accountsViewController.delegate = self
-            accountsViewController.viewModel.providerConnection = providerConnection
-            accountsViewController.viewModel.currencyCode = viewModel.isNew ? nil : viewModel.selectedCurrencyCode
-            slideUp(viewController: accountsViewController)
-        }
+        let currencyCode = viewModel.isNew ? nil : viewModel.selectedCurrencyCode
+        slideUp(viewController: factory.accountsViewController(delegate: self, providerConnection: providerConnection, currencyCode: currencyCode))
     }
     
     func createSaltEdgeConnectSession(for providerViewModel: ProviderViewModel) {
@@ -74,12 +65,8 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     }
     
     func showProviderConnectionViewController(for providerViewModel: ProviderViewModel) {
-        if let providerConnectionViewController = router.viewController(Infrastructure.ViewController.ProviderConnectionViewController) as? ProviderConnectionViewController {
-            
-            providerConnectionViewController.delegate = self
-            providerConnectionViewController.providerViewModel = providerViewModel
-            navigationController?.present(providerConnectionViewController, animated: true, completion: nil)
-        }
+        // navigationController?.
+        present(factory.providerConnectionViewController(delegate: self, providerViewModel: providerViewModel))
     }
     
     func didConnect(connectionId: String, connectionSecret: String, providerViewModel: ProviderViewModel) {

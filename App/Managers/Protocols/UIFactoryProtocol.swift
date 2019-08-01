@@ -16,4 +16,7 @@ protocol UIFactoryProtocol {
     func iconsViewController(delegate: IconsViewControllerDelegate, iconCategory: IconCategory) -> IconsViewController?
     func currenciesViewController(delegate: CurrenciesViewControllerDelegate) -> CurrenciesViewController?
     func reminderEditViewController(delegate: ReminderEditViewControllerDelegate, viewModel: ReminderViewModel) -> ReminderEditViewController?
+    func providersViewController(delegate: ProvidersViewControllerDelegate) -> ProvidersViewController?
+    func accountsViewController(delegate: AccountsViewControllerDelegate, providerConnection: ProviderConnection, currencyCode: String?) -> AccountsViewController?
+    func providerConnectionViewController(delegate: ProviderConnectionViewControllerDelegate, providerViewModel: ProviderViewModel) -> ProviderConnectionViewController?
 }

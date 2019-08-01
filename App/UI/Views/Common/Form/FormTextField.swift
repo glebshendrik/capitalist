@@ -14,19 +14,21 @@ import SnapKit
 class FormTextField : UIView {
     private var didSetupConstraints = false
     
+    private var didChange: ((String?) -> Void)? = nil
+    
     // Subviews
     
-    lazy var textField: FloatingTextField = { return createTextField() }()
+    private lazy var textField: FloatingTextField = { return createTextField() }()
     
-    lazy var iconContainer: UIView = { return UIView() }()
+    private lazy var iconContainer: UIView = { return UIView() }()
     
-    lazy var icon: UIImageView = { return UIImageView() }()
+    private lazy var icon: UIImageView = { return UIImageView() }()
     
-    lazy var vectorIcon: SVGKFastImageView = { return SVGKFastImageView(frame: CGRect.zero) }()
+    private lazy var vectorIcon: SVGKFastImageView = { return SVGKFastImageView(frame: CGRect.zero) }()
     
-    lazy var errorLabel: UILabel = { return UILabel() }()
+    private lazy var errorLabel: UILabel = { return UILabel() }()
     
-    lazy var separator: UIView = { return UIView() }()
+    private lazy var separator: UIView = { return UIView() }()
     
     // Appearance properties
     
@@ -136,6 +138,11 @@ class FormTextField : UIView {
     
     // Computed properties
     
+    var text: String? {
+        get { return textField.text?.trimmed }
+        set { textField.text = newValue }
+    }
+    
     var isTextFieldFocused: Bool {
         return textField.isFirstResponder
     }
@@ -162,6 +169,10 @@ class FormTextField : UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
+    }
+    
+    func didChange(_ didChange: @escaping (_ text: String?) -> Void) {
+        self.didChange = didChange
     }
     
     private func setup() {
@@ -241,6 +252,7 @@ class FormTextField : UIView {
     
     @objc func textFieldEditingChanged(_ textField: UITextField) {
         clearError()
+        didChange?(textField.trimmedText)
     }
     
     @objc func textFieldEditingDidEnd(_ textField: UITextField) {

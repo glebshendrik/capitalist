@@ -10,12 +10,12 @@ import UIKit
 
 extension IncomeSourceEditViewController {
     func updateCurrencyUI() {
-        tableController.currencyField.textField.text = viewModel.selectedCurrencyName
+        tableController.currencyField.text = viewModel.selectedCurrencyName
         tableController.currencyField.isEnabled = viewModel.canChangeCurrency
     }
     
-    func updateTextFieldsUI() {
-        tableController.nameField.textField.text = viewModel.name
+    func updateTextFieldsUI() {        
+        tableController.nameField.text = viewModel.name
     }
     
     func updateReminderUI() {

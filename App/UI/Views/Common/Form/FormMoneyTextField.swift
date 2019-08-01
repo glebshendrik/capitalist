@@ -9,11 +9,14 @@
 import Foundation
 
 class FormMoneyTextField : FormTextField {
-    var moneyTextField: MoneyTextField! {
-        return textField as? MoneyTextField
+    private var moneyTextField: MoneyTextField = MoneyTextField()
+    
+    var currency: Currency? {
+        get { return moneyTextField.currency }
+        set { moneyTextField.currency = newValue }
     }
     
     override func createTextField() -> FloatingTextField {
-        return MoneyTextField()
+        return moneyTextField
     }
 }

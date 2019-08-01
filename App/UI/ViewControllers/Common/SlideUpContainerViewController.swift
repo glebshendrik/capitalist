@@ -157,9 +157,10 @@ extension SlideUpContainerViewController: UIViewControllerTransitioningDelegate,
 }
 
 extension UIViewController {
-    func slideUp(viewController: UIViewController) {
+    func slideUp(viewController: UIViewController?) {
         
-        if let slideUpContainerViewController = UIStoryboard(name: Infrastructure.Storyboard.Common.name, bundle: Bundle.main).instantiateViewController(withIdentifier: Infrastructure.ViewController.SlideUpContainerViewController.identifier) as? SlideUpContainerViewController {
+        if let slideUpContainerViewController = UIStoryboard(name: Infrastructure.Storyboard.Common.name, bundle: Bundle.main).instantiateViewController(withIdentifier: Infrastructure.ViewController.SlideUpContainerViewController.identifier) as? SlideUpContainerViewController,
+            let viewController = viewController {
             
             slideUpContainerViewController.modalPresentationStyle = .custom
             slideUpContainerViewController.transitioningDelegate = slideUpContainerViewController

@@ -24,11 +24,11 @@ extension ExpenseSourceEditViewController {
     }
     
     func updateCurrencyUI() {
-        tableController.currencyField.textField.text = viewModel.selectedCurrencyName
+        tableController.currencyField.text = viewModel.selectedCurrencyName
         tableController.currencyField.isEnabled = viewModel.canChangeCurrency
-        tableController.amountField.moneyTextField.currency = viewModel.selectedCurrency
-        tableController.goalAmountField.moneyTextField.currency = viewModel.selectedCurrency
-        tableController.creditLimitField.moneyTextField.currency = viewModel.selectedCurrency
+        tableController.amountField.currency = viewModel.selectedCurrency
+        tableController.goalAmountField.currency = viewModel.selectedCurrency
+        tableController.creditLimitField.currency = viewModel.selectedCurrency
     }
     
     func updateTableUI(animated: Bool = true) {
@@ -38,15 +38,14 @@ extension ExpenseSourceEditViewController {
         tableController.set(cell: tableController.creditLimitCell, hidden: viewModel.creditLimitHidden, animated: animated, reload: false)
         tableController.set(cell: tableController.bankCell, hidden: viewModel.bankButtonHidden, animated: animated, reload: false)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: animated, reload: false)
-//        tableController?.updateTabsAppearence()
         tableController?.reloadData(animated: animated)
     }
     
     func updateTextFieldsUI() {
-        tableController.nameField.textField.text = viewModel.name
-        tableController.amountField.moneyTextField.text = viewModel.amount
-        tableController.goalAmountField.moneyTextField.text = viewModel.goalAmount
-        tableController.creditLimitField.moneyTextField.text = viewModel.creditLimit        
+        tableController.nameField.text = viewModel.name
+        tableController.amountField.text = viewModel.amount
+        tableController.goalAmountField.text = viewModel.goalAmount
+        tableController.creditLimitField.text = viewModel.creditLimit        
         tableController.amountField.isEnabled = viewModel.canChangeAmount
     }
     

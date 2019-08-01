@@ -25,19 +25,15 @@ class IncomeSourceEditTableController : FloatingFieldsStaticTableViewController 
     var delegate: IncomeSourceEditTableControllerDelegate?
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        nameField.textField.addTarget(self, action: #selector(didChangeName(_:)), for: UIControl.Event.editingChanged)
-        currencyField.tapButton.addTarget(self, action: #selector(didTapCurrency(_:)), for: UIControl.Event.touchUpInside)
+        super.viewDidLoad()        
+        nameField.didChange { [weak self] text in
+            self?.delegate?.didChange(name: text)
+        }
+        currencyField.didTap { [weak self] in
+            self?.delegate?.didTapCurrency()
+        }
     }
-    
-    @objc func didChangeName(_ sender: FloatingTextField) {
-        delegate?.didChange(name: sender.text?.trimmed)
-    }
-    
-    @objc func didTapCurrency(_ sender: Any) {
-        delegate?.didTapCurrency()
-    }
-    
+        
     @IBAction func didTapSetReminder(_ sender: UIButton) {
         delegate?.didTapSetReminder()
     }

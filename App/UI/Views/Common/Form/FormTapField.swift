@@ -10,9 +10,11 @@ import UIKit
 import SnapKit
 
 class FormTapField : FormTextField {
-    lazy var tapButton: UIButton = { return UIButton() }()
+    private var didTap: (() -> Void)? = nil
     
-    lazy var arrow: UIImageView = { return UIImageView() }()
+    private lazy var tapButton: UIButton = { return UIButton() }()
+    
+    private lazy var arrow: UIImageView = { return UIImageView() }()
     
     @IBInspectable var arrowImageName: String = "right-arrow-icon" {
         didSet { updateArrow() }
@@ -20,6 +22,15 @@ class FormTapField : FormTextField {
     
     @IBInspectable var arrowColor: UIColor = UIColor.by(.dark404B6F) {
         didSet { updateArrow() }
+    }
+    
+//    var title: String? {
+//        get { return moneyTextField.currency }
+//        set { moneyTextField.currency = newValue }
+//    }
+    
+    func didTap(_ didTap: @escaping () -> Void) {
+        self.didTap = didTap
     }
     
     override func setupSubviews() {
@@ -42,7 +53,7 @@ class FormTapField : FormTextField {
         }
         
         arrow.snp.makeConstraints { make in
-            make.left.equalTo(textField.snp.right).offset(5)
+//            make.left.equalTo(textField.snp.right).offset(5)
             make.centerY.equalToSuperview().offset(3)
         }
     }
@@ -51,6 +62,7 @@ class FormTapField : FormTextField {
         tapButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(tapButton)
         tapButton.backgroundColor = .clear
+        tapButton.addTarget(self, action: #selector(didButtonTouchUpInside(_:)), for: UIControl.Event.touchUpInside)
     }
     
     func updateTapButton() {
@@ -67,5 +79,10 @@ class FormTapField : FormTextField {
         arrow.image = UIImage(named: arrowImageName)?.withRenderingMode(.alwaysTemplate)
         arrow.tintColor = arrowColor
         arrow.isHidden = !isEnabled
+    }
+    
+    @objc private func didButtonTouchUpInside(_ sender: Any) {
+        guard isEnabled else { return }
+        didTap?()
     }
 }

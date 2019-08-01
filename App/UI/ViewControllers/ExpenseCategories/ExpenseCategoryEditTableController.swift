@@ -36,28 +36,24 @@ class ExpenseCategoryEditTableController : FloatingFieldsStaticTableViewControll
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameField.textField.addTarget(self, action: #selector(didChangeName(_:)), for: UIControl.Event.editingChanged)
-        monthlyPlannedField.textField.addTarget(self, action: #selector(didChangeMonthlyPlanned(_:)), for: UIControl.Event.editingChanged)
-        currencyField.tapButton.addTarget(self, action: #selector(didTapCurrency(_:)), for: UIControl.Event.touchUpInside)
-        incomeSourceCurrencyField.tapButton.addTarget(self, action: #selector(didTapIncomeSourceCurrency(_:)), for: UIControl.Event.touchUpInside)
+        nameField.didChange { [weak self] text in
+            self?.delegate?.didChange(name: text)
+        }
+        monthlyPlannedField.didChange { [weak self] text in
+            self?.delegate?.didChange(monthlyPlanned: text)
+        }
+        currencyField.didTap { [weak self] in
+            self?.delegate?.didTapCurrency()
+        }
+        incomeSourceCurrencyField.didTap { [weak self] in
+            self?.delegate?.didTapIncomeSourceCurrency()
+        }
     }
     
-    @objc func didChangeName(_ sender: FloatingTextField) {
-        delegate?.didChange(name: sender.text?.trimmed)
+    @IBAction func didTapIcon(_ sender: Any) {
+        delegate?.didTapIcon()
     }
     
-    @objc func didChangeMonthlyPlanned(_ sender: FloatingTextField) {
-        delegate?.didChange(monthlyPlanned: sender.text?.trimmed)
-    }
-    
-    @objc func didTapCurrency(_ sender: Any) {
-        delegate?.didTapCurrency()
-    }
-    
-    @objc func didTapIncomeSourceCurrency(_ sender: Any) {
-        delegate?.didTapIncomeSourceCurrency()
-    }
-        
     @IBAction func didTapSetReminder(_ sender: UIButton) {
         delegate?.didTapSetReminder()
     }
