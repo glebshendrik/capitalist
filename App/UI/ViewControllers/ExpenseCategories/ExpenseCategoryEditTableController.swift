@@ -18,7 +18,7 @@ protocol ExpenseCategoryEditTableControllerDelegate {
     func didTapRemoveButton()
 }
 
-class ExpenseCategoryEditTableController : FloatingFieldsStaticTableViewController {
+class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var iconView: UIImageView!
     
     @IBOutlet weak var nameField: FormTextField!

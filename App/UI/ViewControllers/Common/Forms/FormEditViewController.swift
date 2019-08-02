@@ -17,7 +17,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var factory: UIFactoryProtocol!
-    var tableViewController: FloatingFieldsStaticTableViewController!
+    var tableViewController: FormFieldsTableViewController!
     
     var shouldLoadData: Bool { return true }
     var formTitle: String { return "" }
@@ -41,7 +41,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEditTableView",
-            let viewController = segue.destination as? FloatingFieldsStaticTableViewController {
+            let viewController = segue.destination as? FormFieldsTableViewController {
             tableViewController = viewController
             setup(tableController: tableViewController)
         }
@@ -154,7 +154,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
         navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
     }
     
-    func setup(tableController: FloatingFieldsStaticTableViewController) {
+    func setup(tableController: FormFieldsTableViewController) {
         
     }
     

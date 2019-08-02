@@ -36,7 +36,7 @@ class ExpenseCategoryEditViewController : FormTransactionsDependableEditViewCont
                 ExpenseCategory.CodingKeys.monthlyPlannedCents.rawValue : tableController.monthlyPlannedField]
     }
     
-    override func setup(tableController: FloatingFieldsStaticTableViewController) {
+    override func setup(tableController: FormFieldsTableViewController) {
         self.tableController = tableController as? ExpenseCategoryEditTableController
         self.tableController.delegate = self
     }

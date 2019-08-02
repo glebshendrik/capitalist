@@ -34,7 +34,7 @@ class IncomeSourceEditViewController : FormTransactionsDependableEditViewControl
                 IncomeSource.CodingKeys.currency.rawValue : tableController.currencyField]
     }
     
-    override func setup(tableController: FloatingFieldsStaticTableViewController) {
+    override func setup(tableController: FormFieldsTableViewController) {
         self.tableController = tableController as? IncomeSourceEditTableController
         self.tableController.delegate = self
     }

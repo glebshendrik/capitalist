@@ -12,9 +12,9 @@ import SnapKit
 class FormTapField : FormTextField {
     private var didTap: (() -> Void)? = nil
     
-    private lazy var tapButton: UIButton = { return UIButton() }()
+    lazy var tapButton: UIButton = { return UIButton() }()
     
-    private lazy var arrow: UIImageView = { return UIImageView() }()
+    lazy var arrow: UIImageView = { return UIImageView() }()
     
     @IBInspectable var arrowImageName: String = "right-arrow-icon" {
         didSet { updateArrow() }
@@ -23,11 +23,6 @@ class FormTapField : FormTextField {
     @IBInspectable var arrowColor: UIColor = UIColor.by(.dark404B6F) {
         didSet { updateArrow() }
     }
-    
-//    var title: String? {
-//        get { return moneyTextField.currency }
-//        set { moneyTextField.currency = newValue }
-//    }
     
     func didTap(_ didTap: @escaping () -> Void) {
         self.didTap = didTap
@@ -47,14 +42,29 @@ class FormTapField : FormTextField {
     
     override func setupConstraints() {
         super.setupConstraints()
-        
+        setupTapButtonConstraints()
+        setupArrowConstraints()
+    }
+    
+    func setupTapButtonConstraints() {
         tapButton.snp.makeConstraints { make in
             make.left.top.right.bottom.equalToSuperview()
         }
-        
-        arrow.snp.makeConstraints { make in
-//            make.left.equalTo(textField.snp.right).offset(5)
-            make.centerY.equalToSuperview().offset(3)
+    }
+    
+    override func setupSubValueLabelConstraints() {
+        subValueLabel.snp.makeConstraints { make in
+            make.right.equalTo(arrow.snp.left).offset(5)
+            make.centerY.equalTo(3)
+        }
+        subValueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        subValueLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+    }
+    
+    func setupArrowConstraints() {
+        arrow.snp.makeConstraints { make in            
+            make.right.equalTo(-16)
+            make.centerY.equalTo(3)
         }
     }
     
@@ -63,6 +73,12 @@ class FormTapField : FormTextField {
         addSubview(tapButton)
         tapButton.backgroundColor = .clear
         tapButton.addTarget(self, action: #selector(didButtonTouchUpInside(_:)), for: UIControl.Event.touchUpInside)
+    }
+    
+    override func updateTextField() {
+        super.updateTextField()
+        textField.isEnabled = false
+        textField.isUserInteractionEnabled = false
     }
     
     func updateTapButton() {
@@ -81,8 +97,12 @@ class FormTapField : FormTextField {
         arrow.isHidden = !isEnabled
     }
     
-    @objc private func didButtonTouchUpInside(_ sender: Any) {
+    func tap() {
         guard isEnabled else { return }
         didTap?()
+    }
+    
+    @objc private func didButtonTouchUpInside(_ sender: Any) {
+        tap()
     }
 }

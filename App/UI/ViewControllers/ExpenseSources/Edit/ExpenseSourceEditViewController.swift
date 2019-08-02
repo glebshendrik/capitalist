@@ -37,7 +37,7 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
                 ExpenseSource.CodingKeys.goalAmountCents.rawValue : tableController.goalAmountField]
     }
     
-    override func setup(tableController: FloatingFieldsStaticTableViewController) {        
+    override func setup(tableController: FormFieldsTableViewController) {        
         self.tableController = tableController as? ExpenseSourceEditTableController
         self.tableController.delegate = self
     }

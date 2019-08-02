@@ -25,7 +25,7 @@ protocol TransactionEditTableControllerDelegate {
     func didTapRemoveButton()
 }
 
-class TransactionEditTableController : FloatingFieldsStaticTableViewController {
+class TransactionEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var startableNameTextField: FloatingTextField!
     @IBOutlet weak var startableIconImageView: UIImageView!
     @IBOutlet weak var startableBalanceLabel: UILabel!

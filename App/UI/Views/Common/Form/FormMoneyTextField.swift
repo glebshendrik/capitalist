@@ -9,7 +9,7 @@
 import Foundation
 
 class FormMoneyTextField : FormTextField {
-    private var moneyTextField: MoneyTextField = MoneyTextField()
+    var moneyTextField: MoneyTextField = MoneyTextField()
     
     var currency: Currency? {
         get { return moneyTextField.currency }

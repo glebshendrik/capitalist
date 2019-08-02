@@ -9,7 +9,7 @@
 import UIKit
 import StaticTableViewController
 
-class FloatingFieldsStaticTableViewController : StaticTableViewController, UITextFieldDelegate {
+class FormFieldsTableViewController : StaticTableViewController, UITextFieldDelegate {
     @IBOutlet weak var activityIndicatorCell: UITableViewCell?
     @IBOutlet weak var loaderImageView: UIImageView?
     

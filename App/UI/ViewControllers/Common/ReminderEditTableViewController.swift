@@ -14,7 +14,7 @@ protocol ReminderEditTableViewControllerDelegate {
     func didTapRemoveButton()
 }
 
-class ReminderEditTableViewController : FloatingFieldsStaticTableViewController {
+class ReminderEditTableViewController : FormFieldsTableViewController {
     @IBOutlet weak var reminderDateTextField: FloatingTextField!
     @IBOutlet weak var recurrenceRuleTextField: FloatingTextField!
     @IBOutlet weak var reminderMessageTextField: FloatingTextField!

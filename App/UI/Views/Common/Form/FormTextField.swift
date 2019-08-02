@@ -18,17 +18,19 @@ class FormTextField : UIView {
     
     // Subviews
     
-    private lazy var textField: FloatingTextField = { return createTextField() }()
+    lazy var textField: FloatingTextField = { return createTextField() }()
     
-    private lazy var iconContainer: UIView = { return UIView() }()
+    lazy var iconContainer: UIView = { return UIView() }()
     
-    private lazy var icon: UIImageView = { return UIImageView() }()
+    lazy var icon: UIImageView = { return UIImageView() }()
     
-    private lazy var vectorIcon: SVGKFastImageView = { return SVGKFastImageView(frame: CGRect.zero) }()
+    lazy var vectorIcon: SVGKFastImageView = { return SVGKFastImageView(frame: CGRect.zero) }()
     
-    private lazy var errorLabel: UILabel = { return UILabel() }()
+    lazy var errorLabel: UILabel = { return UILabel() }()
     
-    private lazy var separator: UIView = { return UIView() }()
+    lazy var subValueLabel: UILabel = { return UILabel() }()
+    
+    lazy var separator: UIView = { return UIView() }()
     
     // Appearance properties
     
@@ -132,6 +134,14 @@ class FormTextField : UIView {
         didSet { updateSeparator() }
     }
     
+    @IBInspectable var subValueLabelColor: UIColor = UIColor.by(.textFFFFFF) {
+        didSet { updateSubValueLabel() }
+    }
+    
+    @IBInspectable var subValueLabelFont: UIFont = UIFont(name: "Rubik-Regular", size: 15)! {
+        didSet { updateSubValueLabel() }
+    }
+    
     var isEnabled: Bool = true {
         didSet { updateSubviews() }
     }
@@ -141,6 +151,15 @@ class FormTextField : UIView {
     var text: String? {
         get { return textField.text?.trimmed }
         set { textField.text = newValue }
+    }
+    
+    var subValue: String? {
+        get { return subValueLabel.text }
+        set {
+            subValueLabel.text = newValue
+            updateSubValueLabel()
+            updateArrow()
+        }
     }
     
     var isTextFieldFocused: Bool {
@@ -153,6 +172,10 @@ class FormTextField : UIView {
     
     var hasError: Bool {
         return errorLabel.text != nil && !errorLabel.text!.trimmed.isEmpty
+    }
+    
+    var hasSubValue: Bool {
+        return subValue != nil && !subValue!.trimmed.isEmpty
     }
     
     var state: FormTextFieldState {
@@ -187,6 +210,7 @@ class FormTextField : UIView {
         setupIcon()
         setupErrorLabel()
         setupSeparator()
+        setupSubValueLabel()
     }
     
     func updateSubviews() {
@@ -195,37 +219,69 @@ class FormTextField : UIView {
         updateIcon()
         updateErrorLabel()
         updateSeparator()
+        updateSubValueLabel()
     }
     
     func setupConstraints() {
+        setupIconContainerConstraints()
+        setupIconConstraints()
+        setupVectorIconConstraints()
+        setupTextFieldConstraints()
+        setupSeparatorConstraints()
+        setupErrorLabelConstraints()
+        setupSubValueLabelConstraints()
+    }
+    
+    func setupIconContainerConstraints() {
         iconContainer.snp.makeConstraints { make in
             make.width.height.equalTo(36)
             make.left.equalTo(16)
             make.centerY.equalToSuperview().offset(3)
         }
-        
+    }
+    
+    func setupIconConstraints() {
         icon.snp.makeConstraints { make in
             make.width.height.lessThanOrEqualTo(30)
             make.center.equalToSuperview()
         }
-        
+    }
+    
+    func setupVectorIconConstraints() {
         vectorIcon.snp.makeConstraints { make in
             make.width.height.lessThanOrEqualTo(30)
             make.center.equalToSuperview()
         }
-        
+    }
+    
+    func setupTextFieldConstraints() {
         textField.snp.makeConstraints { make in
             make.top.equalTo(10)
-            make.right.equalTo(-32)
+            make.right.equalTo(subValueLabel.snp.left).offset(8)
             make.bottom.equalTo(-16)
             make.left.equalTo(iconContainer.snp.right).offset(20)
         }
-        
+        textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    }
+    
+    func setupSubValueLabelConstraints() {
+        subValueLabel.snp.makeConstraints { make in
+            make.right.equalTo(-16)
+            make.centerY.equalTo(3)
+        }
+        subValueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        subValueLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+    }
+    
+    func setupSeparatorConstraints() {
         separator.snp.makeConstraints { make in
             make.left.bottom.right.equalToSuperview()
             make.height.equalTo(1)
         }
-        
+    }
+    
+    func setupErrorLabelConstraints() {
         errorLabel.snp.makeConstraints { make in
             make.left.equalTo(textField.snp.left)
             make.right.equalTo(textField.snp.right)
@@ -268,10 +324,7 @@ class FormTextField : UIView {
         errorLabel.text = nil
         updateStateAppearance()
     }
-}
-
-// Setup & Update
-extension FormTextField {
+    
     func setupBackground() {
         translatesAutoresizingMaskIntoConstraints = false
     }
@@ -308,6 +361,17 @@ extension FormTextField {
         
         textField.isEnabled = isEnabled
         textField.isUserInteractionEnabled = isEnabled
+    }
+    
+    func setupSubValueLabel() {
+        subValueLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(subValueLabel)
+        subValueLabel.backgroundColor = .clear
+    }
+    
+    func updateSubValueLabel() {
+        subValueLabel.font = subValueLabelFont
+        subValueLabel.textColor = subValueLabelColor
     }
     
     func setupIcon() {

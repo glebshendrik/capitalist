@@ -21,7 +21,7 @@ protocol ExpenseSourceEditTableControllerDelegate {
     func didTapRemoveButton()
 }
 
-class ExpenseSourceEditTableController : FloatingFieldsStaticTableViewController {
+class ExpenseSourceEditTableController : FormFieldsTableViewController {
     @IBOutlet private weak var usualTabLabel: UILabel!
     @IBOutlet private weak var usualTabSelection: UIView!
     

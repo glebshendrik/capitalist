@@ -15,7 +15,7 @@ protocol IncomeSourceEditTableControllerDelegate {
     func didTapRemoveButton()
 }
 
-class IncomeSourceEditTableController : FloatingFieldsStaticTableViewController {
+class IncomeSourceEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!
     @IBOutlet weak var reminderButton: UIButton!
