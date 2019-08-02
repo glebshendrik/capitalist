@@ -1,8 +1,8 @@
 //
-//  FormTextField.swift
+//  FormExchangeField.swift
 //  Three Baskets
 //
-//  Created by Alexander Petropavlovsky on 19/07/2019.
+//  Created by Alexander Petropavlovsky on 02/08/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
 //
 
@@ -11,14 +11,33 @@ import SVGKit
 import SDWebImageSVGCoder
 import SnapKit
 
-class FormTextField : FormField {
-    private var didChange: ((String?) -> Void)? = nil
+class FormExchangeField : FormField {
+    private var didChangeAmount: ((String?) -> Void)? = nil
+    private var didChangeConvertedAmount: ((String?) -> Void)? = nil
     
     // Subviews
     
-    lazy var textField: FloatingTextField = { return createTextField() }()
+    lazy var exchangeContainer: UIView = { return UIView() }()
     
-    lazy var subValueLabel: UILabel = { return UILabel() }()
+    lazy var amountContainer: UIView = { return UIView() }()
+    
+    lazy var convertedAmountContainer: UIView = { return UIView() }()
+    
+    lazy var focusLine: UIView = { return UIView() }()
+    
+    lazy var convertArrow: UIImageView = { return UIImageView() }()
+    
+    lazy var amountField: MoneyTextField = { return MoneyTextField() }()
+    
+    lazy var amountFieldBackground: UIView = { return UIView() }()
+    
+    lazy var amountCurrencyLabel: UILabel = { return UILabel() }()
+    
+    lazy var convertedAmountField: MoneyTextField = { return MoneyTextField() }()
+    
+    lazy var convertedAmountFieldBackground: UIView = { return UIView() }()
+    
+    lazy var convertedAmountCurrencyLabel: UILabel = { return UILabel() }()
     
     // Appearance properties
     
@@ -58,77 +77,147 @@ class FormTextField : FormField {
         didSet { updateTextField() }
     }
     
-    @IBInspectable var lineHeight: CGFloat = 0.0 {
-        didSet { updateTextField() }
-    }
-    
     @IBInspectable var selectedLineHeight: CGFloat = 1.0 {
         didSet { updateTextField() }
     }
     
-    @IBInspectable var placeholder: String? = nil {
+    @IBInspectable var amountPlaceholder: String? = nil {
         didSet { updateTextField() }
     }
     
-    @IBInspectable var subValueLabelColor: UIColor = UIColor.by(.textFFFFFF) {
-        didSet { updateSubValueLabel() }
+    @IBInspectable var convertedAmountPlaceholder: String? = nil {
+        didSet { updateTextField() }
     }
     
-    @IBInspectable var subValueLabelFont: UIFont = UIFont(name: "Rubik-Regular", size: 15)! {
-        didSet { updateSubValueLabel() }
+    @IBInspectable var convertImage: UIImage? = UIImage(named: "") {
+        didSet { updateTextField() }
+    }
+    
+    @IBInspectable var convertImageTint: UIColor = UIColor.by(.textFFFFFF) {
+        didSet { updateTextField() }
+    }
+    
+    @IBInspectable var unfocusedCurrencyColor: UIColor = UIColor.by(.textFFFFFF) {
+        didSet { updateTextField() }
+    }
+    
+    @IBInspectable var focusedCurrencyColor: UIColor = UIColor.by(.textFFFFFF) {
+        didSet { updateTextField() }
+    }
+    
+    @IBInspectable var unfocusedFieldBackgroundColor: UIColor = UIColor.clear {
+        didSet { updateTextField() }
+    }
+    
+    @IBInspectable var focusedFieldBackgroundColor: UIColor = UIColor.by(.textFFFFFF) {
+        didSet { updateTextField() }
     }
     
     // Computed properties
     
-    var text: String? {
-        get { return textField.text?.trimmed }
-        set { textField.text = newValue }
+    var amount: String? {
+        get { return amountField.text?.trimmed }
+        set { amountField.text = newValue }
     }
     
-    var subValue: String? {
-        get { return subValueLabel.text }
+    var convertedAmount: String? {
+        get { return convertedAmountField.text?.trimmed }
+        set { convertedAmountField.text = newValue }
+    }
+    
+    var currency: Currency? {
+        get { return amountField.currency }
         set {
-            subValueLabel.text = newValue
-            updateSubValueLabel()
+            amountField.currency = newValue
+            updateCurrencyLabel()
         }
     }
     
-    var isTextFieldFocused: Bool {
-        return textField.isFirstResponder
+    var convertedCurrency: Currency? {
+        get { return convertedAmountField.currency }
+        set {
+            convertedAmountField.currency = newValue
+            updateConvertedCurrencyLabel()
+        }
     }
     
-    var isTextPresent: Bool {
-        return textField.text != nil && !textField.text!.trimmed.isEmpty
+    var areExchangeFieldsFocused: Bool {
+        return isAmountFieldFocused || isConvertedAmountFieldFocused
     }
     
-    var hasSubValue: Bool {
-        return subValue != nil && !subValue!.trimmed.isEmpty
+    var isAmountFieldFocused: Bool {
+        return amountField.isFirstResponder
     }
     
-    var state: FormTextFieldState {
-        return FormTextFieldState.stateBy(isFocused: isTextFieldFocused, isPresent: isTextPresent, hasError: hasError)
+    var isAmountPresent: Bool {
+        return amount != nil && !amount!.isEmpty
     }
     
-    func didChange(_ didChange: @escaping (_ text: String?) -> Void) {
-        self.didChange = didChange
+    var isConvertedAmountFieldFocused: Bool {
+        return convertedAmountField.isFirstResponder
+    }
+    
+    var isConvertedAmountPresent: Bool {
+        return convertedAmount != nil && !convertedAmount!.isEmpty
+    }
+    
+    
+    
+//    var state: FormTextFieldState {
+//        return FormTextFieldState.stateBy(isFocused: isTextFieldFocused, isPresent: isTextPresent, hasError: hasError)
+//    }
+    
+    func didChangeAmount(_ didChange: @escaping (_ text: String?) -> Void) {
+        self.didChangeAmount = didChange
+    }
+    
+    func didChangeConvertedAmount(_ didChange: @escaping (_ text: String?) -> Void) {
+        self.didChangeConvertedAmount = didChange
     }
     
     override func setupSubviews() {
         super.setupSubviews()
-        setupTextField()
-        setupSubValueLabel()
+        setupContainer()
+        setupAmountContainer()
+        setupConvertedAmountContainer()
+        setupConvertArrow()
+        setupAmountTextField()
+        setupAmountBackground()
+        setupAmountCurrencyLabel()
+        setupConvertedAmountTextField()
+        setupConvertedAmountBackground()
+        setupConvertedAmountCurrencyLabel()
+        setupFocusLine()
     }
     
     override func updateSubviews() {
         super.updateSubviews()
-        updateTextField()
-        updateSubValueLabel()
+        updateContainer()
+        updateAmountContainer()
+        updateConvertedAmountContainer()
+        updateConvertArrow()
+        updateAmountTextField()
+        updateAmountBackground()
+        updateAmountCurrencyLabel()
+        updateConvertedAmountTextField()
+        updateConvertedAmountBackground()
+        updateConvertedAmountCurrencyLabel()
+        updateFocusLine()
     }
     
     override func setupConstraints() {
         super.setupConstraints()
-        setupTextFieldConstraints()
-        setupSubValueLabelConstraints()
+        setupContainerConstraints()
+        setupAmountContainerConstraints()
+        setupConvertedAmountContainerConstraints()
+        setupConvertArrowConstraints()
+        setupAmountTextFieldConstraints()
+        setupAmountBackgroundConstraints()
+        setupAmountCurrencyLabelConstraints()
+        setupConvertedAmountTextFieldConstraints()
+        setupConvertedAmountBackgroundConstraints()
+        setupConvertedAmountCurrencyLabelConstraints()
+        setupFocusLineConstraints()
     }
     
     func setupTextFieldConstraints() {
@@ -160,17 +249,18 @@ class FormTextField : FormField {
         }
     }
     
-    func createTextField() -> FloatingTextField {
-        return FloatingTextField()
-    }
-    
     @objc func textFieldEditingDidBegin(_ textField: UITextField) {
         updateStateAppearance()
     }
     
-    @objc func textFieldEditingChanged(_ textField: UITextField) {
+    @objc func amountFieldEditingChanged(_ textField: UITextField) {
         clearError()
-        didChange?(textField.trimmedText)
+        didChangeAmount?(textField.trimmedText)
+    }
+    
+    @objc func convertedAmountFieldEditingChanged(_ textField: UITextField) {
+        clearError()
+        didChangeConvertedAmount?(textField.trimmedText)
     }
     
     @objc func textFieldEditingDidEnd(_ textField: UITextField) {
@@ -216,17 +306,6 @@ class FormTextField : FormField {
         textField.isUserInteractionEnabled = isEnabled
     }
     
-    func setupSubValueLabel() {
-        subValueLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(subValueLabel)
-        subValueLabel.backgroundColor = .clear
-    }
-    
-    func updateSubValueLabel() {
-        subValueLabel.font = subValueLabelFont
-        subValueLabel.textColor = subValueLabelColor
-    }
-    
     override func updateIcon(forceImageUpdate: Bool = true) {
         super.updateIcon(forceImageUpdate: forceImageUpdate)
         
@@ -239,9 +318,9 @@ class FormTextField : FormField {
     
     override func updateErrorLabel() {
         super.updateErrorLabel()
-        errorLabel.isHidden = isTextFieldFocused
+        errorLabel.isHidden = areExchangeFieldsFocused
     }
-        
+    
     func updateStateAppearance() {
         updateBackground()
         updateIcon(forceImageUpdate: false)

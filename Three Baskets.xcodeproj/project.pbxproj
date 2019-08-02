@@ -82,6 +82,8 @@
 		FA28480122F19DDA003F114A /* UIFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28480022F19DDA003F114A /* UIFactoryProtocol.swift */; };
 		FA28480322F19EB6003F114A /* UIFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28480222F19EB6003F114A /* UIFactory.swift */; };
 		FA28480722F338F2003F114A /* FormSwitchValueField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28480622F338F2003F114A /* FormSwitchValueField.swift */; };
+		FA28480922F47B7A003F114A /* FormExchangeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28480822F47B7A003F114A /* FormExchangeField.swift */; };
+		FA28480B22F47BDD003F114A /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28480A22F47BDD003F114A /* FormField.swift */; };
 		FA30B473228474EE0017470C /* BalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B472228474EE0017470C /* BalanceViewController.swift */; };
 		FA30B4762285298B0017470C /* BalanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B4752285298B0017470C /* BalanceViewModel.swift */; };
 		FA30B47822852F410017470C /* BalanceExpenseSourcesTableSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B47722852F410017470C /* BalanceExpenseSourcesTableSupport.swift */; };
@@ -439,6 +441,8 @@
 		FA28480022F19DDA003F114A /* UIFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFactoryProtocol.swift; sourceTree = "<group>"; };
 		FA28480222F19EB6003F114A /* UIFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFactory.swift; sourceTree = "<group>"; };
 		FA28480622F338F2003F114A /* FormSwitchValueField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSwitchValueField.swift; sourceTree = "<group>"; };
+		FA28480822F47B7A003F114A /* FormExchangeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormExchangeField.swift; sourceTree = "<group>"; };
+		FA28480A22F47BDD003F114A /* FormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
 		FA30B472228474EE0017470C /* BalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewController.swift; sourceTree = "<group>"; };
 		FA30B4752285298B0017470C /* BalanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewModel.swift; sourceTree = "<group>"; };
 		FA30B47722852F410017470C /* BalanceExpenseSourcesTableSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceExpenseSourcesTableSupport.swift; sourceTree = "<group>"; };
@@ -864,11 +868,13 @@
 			children = (
 				FA630C292293A8FC00242AB3 /* FloatingTextField.swift */,
 				FA0CAE1221D52CB300805288 /* MoneyTextField.swift */,
+				FA28480A22F47BDD003F114A /* FormField.swift */,
 				FABA979622E1E36D00E03380 /* FormTextField.swift */,
 				FA2847EB22EEEED7003F114A /* FormTextFieldAppearance.swift */,
 				FA2847E622E9C215003F114A /* FormMoneyTextField.swift */,
 				FA2847E822EED208003F114A /* FormTapField.swift */,
 				FA28480622F338F2003F114A /* FormSwitchValueField.swift */,
+				FA28480822F47B7A003F114A /* FormExchangeField.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -1935,6 +1941,7 @@
 				FA0CAE0321D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift in Sources */,
 				FA6F2E922244C8D9008C160F /* StatisticsViewModel.swift in Sources */,
 				FAD88F2A21AEB77200BE7BC1 /* NotificationAction.swift in Sources */,
+				FA28480922F47B7A003F114A /* FormExchangeField.swift in Sources */,
 				FA28480122F19DDA003F114A /* UIFactoryProtocol.swift in Sources */,
 				FAD88F3F21AEBDDB00BE7BC1 /* UIMessagePresenterManager.swift in Sources */,
 				FA835D462260751800A592F2 /* LineChartPresentingExtension.swift in Sources */,
@@ -2157,6 +2164,7 @@
 				FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */,
 				FA7EDFF422CCC0990054EAD3 /* AccountConnection.swift in Sources */,
 				FA6F2E8922434FFE008C160F /* HistoryTransactionsServiceProtocol.swift in Sources */,
+				FA28480B22F47BDD003F114A /* FormField.swift in Sources */,
 				FA717705226EF69A008ADF94 /* ExportManagerProtocol.swift in Sources */,
 				FAED7DB621F0E35100BF6FE1 /* ExpenseCategoryEditViewModel.swift in Sources */,
 				FA7DB738221032BC00559878 /* CurrencyCollectionViewCell.swift in Sources */,

@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class FormSwitchValueField : FormTapField {
+    private var didSwitch: ((Bool) -> Void)? = nil
+    
     lazy var switchView: UISwitch = { return UISwitch() }()
     
     @IBInspectable var switchOnTintColor: UIColor = UIColor.by(.textFFFFFF) {
@@ -23,6 +25,10 @@ class FormSwitchValueField : FormTapField {
     var value: Bool {
         get { return switchView.isOn }
         set { switchView.setOn(newValue, animated: true) }
+    }
+    
+    @objc func didSwitch(_ didSwitch: @escaping (Bool) -> Void) {
+        self.didSwitch = didSwitch
     }
     
     override func setupSubviews() {
@@ -63,7 +69,7 @@ class FormSwitchValueField : FormTapField {
     func setupSwitch() {
         switchView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(switchView)
-        switchView.addTarget(self, action: #selector(didSwitch(_:)), for: UIControl.Event.valueChanged)
+        switchView.addTarget(self, action: #selector(didSwitchValueChanged(_:)), for: UIControl.Event.valueChanged)
     }
     
     func updateSwitch() {
@@ -82,7 +88,14 @@ class FormSwitchValueField : FormTapField {
         subValueLabel.isHidden = true
     }
     
-    @objc private func didSwitch(_ sender: Any) {
-        tap()
+    @objc private func didSwitchValueChanged(_ sender: Any) {
+        didSwitch?(switchView.isOn)
+    }
+    
+    override func tap() {
+        guard isEnabled else { return }
+        switchView.setOn(!switchView.isOn, animated: true)
+        super.tap()
+        didSwitch?(switchView.isOn)
     }
 }

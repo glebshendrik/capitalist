@@ -11,14 +11,14 @@ import SkyFloatingLabelTextField
 import StaticTableViewController
 
 protocol TransactionEditTableControllerDelegate {
+    func didAppear()
     func didTapSaveAtYesterday()
-    func didTapComment()
     func didTapCalendar()
     func didTapWhom()
     func didTapBorrowedTill()
     func didTapReturn()
-    func didTapStartable()
-    func didTapCompletable()
+    func didTapSource()
+    func didTapDestination()
     func didChange(amount: String?)
     func didChange(convertedAmount: String?)
     func didChange(includedInBalance: Bool)
@@ -26,112 +26,93 @@ protocol TransactionEditTableControllerDelegate {
 }
 
 class TransactionEditTableController : FormFieldsTableViewController {
-    @IBOutlet weak var startableNameTextField: FloatingTextField!
-    @IBOutlet weak var startableIconImageView: UIImageView!
-    @IBOutlet weak var startableBalanceLabel: UILabel!
-    @IBOutlet weak var startableCell: UITableViewCell!
     
-    @IBOutlet weak var completableNameTextField: FloatingTextField!
-    @IBOutlet weak var completableIconImageView: UIImageView!
-    @IBOutlet weak var completableBalanceLabel: UILabel!
-    @IBOutlet weak var completableCell: UITableViewCell!
+    // Fields
+    @IBOutlet weak var sourceField: FormTapField!
+    @IBOutlet weak var destinationField: FormTapField!
+    @IBOutlet weak var amountField: FormMoneyTextField!
+    // Exchange field
+    @IBOutlet weak var sourceAmountTextField: MoneyTextField!
+    @IBOutlet weak var sourceAmountCurrencyLabel: UILabel!
+    @IBOutlet weak var sourceAmountBackground: UIView!
+    @IBOutlet weak var convertedAmountTextField: MoneyTextField!
+    @IBOutlet weak var convertedAmountCurrencyLabel: UILabel!
+    @IBOutlet weak var convertedAmountBackground: UIView!
+    @IBOutlet weak var amountsWhiteLine: UIView!
+    // Exchange field end
+    @IBOutlet weak var inBalanceSwitchField: FormSwitchValueField!
     
+    // Cells
+    @IBOutlet weak var debtCell: UITableViewCell!
+    @IBOutlet weak var returnCell: UITableViewCell!
+    @IBOutlet weak var sourceCell: UITableViewCell!
+    @IBOutlet weak var destinationCell: UITableViewCell!
     @IBOutlet weak var amountCell: UITableViewCell!
-    @IBOutlet weak var amountTextField: MoneyTextField!
-    @IBOutlet weak var amountCurrencyLabel: UILabel!
+    @IBOutlet weak var amountsCell: UITableViewCell!
+    @IBOutlet weak var inBalanceCell: UITableViewCell!
+    @IBOutlet weak var removeCell: UITableViewCell!
     
-    @IBOutlet weak var exchangeAmountsCell: UITableViewCell!
-    @IBOutlet weak var exchangeStartableAmountTextField: MoneyTextField!
-    @IBOutlet weak var exchangeStartableAmountCurrencyLabel: UILabel!
-    @IBOutlet weak var exchangeCompletableAmountTextField: MoneyTextField!
-    @IBOutlet weak var exchangeCompletableAmountCurrencyLabel: UILabel!
-    @IBOutlet weak var exchangeCompletableAmountBackground: UIView!
-    @IBOutlet weak var exchangeStartableAmountBackground: UIView!
-    @IBOutlet weak var exchangesWhiteLine: UIView!
-    
+    // Buttons
     @IBOutlet weak var yesterdayButton: UIButton!
     @IBOutlet weak var calendarButton: UIButton!
-    @IBOutlet weak var commentButton: UIButton!
-    
-    @IBOutlet weak var debtCell: UITableViewCell!
     @IBOutlet weak var whomButton: UIButton!
     @IBOutlet weak var borrowedTillButton: UIButton!
-    
-    @IBOutlet weak var returnCell: UITableViewCell!
     @IBOutlet weak var returnButton: UIButton!
-    
-    @IBOutlet weak var inBalanceCell: UITableViewCell!
-    @IBOutlet weak var inBalanceSwitch: UISwitch!
-    
-    @IBOutlet weak var removeCell: UITableViewCell!
     @IBOutlet weak var removeButton: UIButton!
     
     var delegate: TransactionEditTableControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        update(textField: startableNameTextField)
-        update(textField: completableNameTextField)
-        update(textField: amountTextField)
-        update(textField: exchangeStartableAmountTextField)
-        update(textField: exchangeCompletableAmountTextField)
-        delegate?.validationNeeded()
+        amountField.didChange { [weak self] text in
+            self?.delegate?.didChange(amount: text)
+        }
+        sourceField.didTap { [weak self] in
+            self?.delegate?.didTapSource()
+        }
+        destinationField.didTap { [weak self] in
+            self?.delegate?.didTapDestination()
+        }
+        inBalanceSwitchField.didSwitch { [weak self] includedInBalance in
+            self?.delegate?.didChange(includedInBalance: includedInBalance)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        delegate?.needsFirstResponder()
+        delegate?.didAppear()
     }
     
-    @IBAction func didChangeAmount(_ sender: MoneyTextField) {
-        update(textField: sender)
-        delegate?.validationNeeded()
-    }
-    
-    @IBAction func didChangeStartableAmount(_ sender: MoneyTextField) {
-        update(textField: sender)
-        delegate?.didChangeAmount()
-        delegate?.validationNeeded()
-    }
-    
-    @IBAction func didChangeConvertedAmount(_ sender: MoneyTextField) {
-        update(textField: sender)
-        delegate?.didChangeConvertedAmount()
-        delegate?.validationNeeded()
-    }
+//    @IBAction func didChangeSourceAmount(_ sender: MoneyTextField) {
+//        update(textField: sender)
+//        delegate?.didChangeAmount()
+//        delegate?.validationNeeded()
+//    }
+//
+//    @IBAction func didChangeConvertedAmount(_ sender: MoneyTextField) {
+//        update(textField: sender)
+//        delegate?.didChangeConvertedAmount()
+//        delegate?.validationNeeded()
+//    }
     
     @IBAction func didTapYesterdayButton(_ sender: Any) {
-        delegate?.didSaveAtYesterday()
+        delegate?.didTapSaveAtYesterday()
     }
     
     @IBAction func didTapCalendarButton(_ sender: Any) {
-        view.endEditing(true)
         delegate?.didTapCalendar()
     }
     
-    @IBAction func didTapCommentButton(_ sender: Any) {
-        view.endEditing(true)
-        delegate?.didTapComment()
-    }
-    
     @IBAction func didTapWhomButton(_ sender: Any) {
-        view.endEditing(true)
         delegate?.didTapWhom()
     }
     
     @IBAction func didTapBorrowedTillButton(_ sender: Any) {
-        view.endEditing(true)
         delegate?.didTapBorrowedTill()
     }
     
     @IBAction func didTapReturnButton(_ sender: Any) {
-        view.endEditing(true)
         delegate?.didTapReturn()
-    }
-    
-    @IBAction func didSwitchInBalance(_ sender: Any) {
-        view.endEditing(true)
-        delegate?.didChange(includedInBalance: inBalanceSwitch.isOn)
     }
     
     @IBAction func didTapRemoveButton(_ sender: UIButton) {
@@ -152,53 +133,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
             exchangeStartableAmountBackground.isHidden = true
             exchangeCompletableAmountBackground.isHidden = true
         }
-    }
-    
-    private func update(textField: FloatingTextField) {        
-        textField.updateAppearance()
-        updateAmountFields()
-    }
-
-    func update(needsExchange: Bool) {
-        setAmountCell(hidden: needsExchange)
-        setExchangeAmountsCell(hidden: !needsExchange)
-    }
-    
-    func setAmountCell(hidden: Bool, animated: Bool = false, reload: Bool = true) {
-        set(cell: amountCell, hidden: hidden, animated: animated, reload: reload)
-    }
-    
-    func setExchangeAmountsCell(hidden: Bool, animated: Bool = false, reload: Bool = true) {
-        set(cell: exchangeAmountsCell, hidden: hidden, animated: animated, reload: reload)
-    }
-    
-    func setDebtCell(hidden: Bool, animated: Bool = false, reload: Bool = true) {
-        set(cell: debtCell, hidden: hidden, animated: animated, reload: reload)
-    }
-    
-    func setReturnCell(hidden: Bool, animated: Bool = false, reload: Bool = true) {
-        set(cell: returnCell, hidden: hidden, animated: animated, reload: reload)
-    }
-    
-    func setInBalanceCell(hidden: Bool, animated: Bool = false, reload: Bool = true) {
-        set(cell: inBalanceCell, hidden: hidden, animated: animated, reload: reload)
-    }
-    
-    func setRemoveButton(hidden: Bool) {
-        set(cell: removeCell, hidden: hidden, animated: false, reload: true)
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) else { return }
-        tableView.deselectRow(at: indexPath, animated: false)
-        if cell == startableCell {
-            delegate?.didTapStartable()
-        }
-        
-        if cell == completableCell {
-            delegate?.didTapCompletable()
-        }
-    }
+    }    
 }
 
 extension TransactionEditTableController {
