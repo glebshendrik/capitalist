@@ -224,6 +224,7 @@
 		FA84E7E722562E5B00C0A274 /* CurrencyConverterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7E622562E5B00C0A274 /* CurrencyConverterProtocol.swift */; };
 		FA84E7E922562ED700C0A274 /* CurrencyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7E822562ED700C0A274 /* CurrencyConverter.swift */; };
 		FA84E7EB225DA9EF00C0A274 /* LineChartAreasRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7EA225DA9EF00C0A274 /* LineChartAreasRenderer.swift */; };
+		FA87A43122F9816900E0BFD0 /* FormExchangeFieldAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A43022F9816900E0BFD0 /* FormExchangeFieldAppearance.swift */; };
 		FA8AD0D822BB503C0084AD19 /* SaltEdgeManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0D722BB503C0084AD19 /* SaltEdgeManagerProtocol.swift */; };
 		FA8AD0DA22BE1AB40084AD19 /* SaltEdgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0D922BE1AB40084AD19 /* SaltEdgeManager.swift */; };
 		FA8AD0DC22C5F18C0084AD19 /* ProviderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0DB22C5F18C0084AD19 /* ProviderCell.swift */; };
@@ -585,6 +586,7 @@
 		FA84E7E622562E5B00C0A274 /* CurrencyConverterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterProtocol.swift; sourceTree = "<group>"; };
 		FA84E7E822562ED700C0A274 /* CurrencyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverter.swift; sourceTree = "<group>"; };
 		FA84E7EA225DA9EF00C0A274 /* LineChartAreasRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartAreasRenderer.swift; sourceTree = "<group>"; };
+		FA87A43022F9816900E0BFD0 /* FormExchangeFieldAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormExchangeFieldAppearance.swift; sourceTree = "<group>"; };
 		FA8AD0D722BB503C0084AD19 /* SaltEdgeManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltEdgeManagerProtocol.swift; sourceTree = "<group>"; };
 		FA8AD0D922BE1AB40084AD19 /* SaltEdgeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltEdgeManager.swift; sourceTree = "<group>"; };
 		FA8AD0DB22C5F18C0084AD19 /* ProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderCell.swift; sourceTree = "<group>"; };
@@ -875,6 +877,7 @@
 				FA2847E822EED208003F114A /* FormTapField.swift */,
 				FA28480622F338F2003F114A /* FormSwitchValueField.swift */,
 				FA28480822F47B7A003F114A /* FormExchangeField.swift */,
+				FA87A43022F9816900E0BFD0 /* FormExchangeFieldAppearance.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -1957,6 +1960,7 @@
 				FA66FB792226D37000708C71 /* ExchangeRate.swift in Sources */,
 				FAD88F7821AFD64000BE7BC1 /* APIResourcePath.swift in Sources */,
 				FAD88F7721AFD64000BE7BC1 /* APIResourceMethod.swift in Sources */,
+				FA87A43122F9816900E0BFD0 /* FormExchangeFieldAppearance.swift in Sources */,
 				FA16FC77223AAA650053C273 /* ExpenseCategoriesViewModel.swift in Sources */,
 				FABA979722E1E36E00E03380 /* FormTextField.swift in Sources */,
 				FA8AD0DE22C5F1C50084AD19 /* ProviderViewModel.swift in Sources */,

@@ -21,7 +21,7 @@
         <!--Income Edit View Controller-->
         <scene sceneID="VdT-Qh-dw3">
             <objects>
-                <viewController storyboardIdentifier="IncomeEditViewController" id="SQP-HC-aPq" customClass="IncomeEditViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IncomeEditViewController" id="SQP-HC-aPq" customClass="IncomeEditViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9wJ-o7-PiX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,7 +69,7 @@
         <!--Colorable Navigation Controller-->
         <scene sceneID="lBi-X0-PmN">
             <objects>
-                <navigationController storyboardIdentifier="IncomeEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="BuC-gY-gko" customClass="ColorableNavigationController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="IncomeEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="BuC-gY-gko" customClass="ColorableNavigationController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="OUa-rj-g6b">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -87,7 +87,7 @@
         <!--Transaction Edit Table Controller-->
         <scene sceneID="IZ9-5c-bJZ">
             <objects>
-                <tableViewController storyboardIdentifier="TransactionEditTableController" id="7dy-Ys-YgL" customClass="TransactionEditTableController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TransactionEditTableController" id="7dy-Ys-YgL" customClass="TransactionEditTableController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gVV-1V-bdE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -333,8 +333,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Lbe-DJ-bfo" customClass="FloatingTextField" customModule="skrudzh" customModuleProvider="target">
-                                                    <rect key="frame" x="72" y="10" width="269.5" height="49"/>
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Lbe-DJ-bfo" customClass="FloatingTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="72" y="10" width="270.5" height="49"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -405,7 +405,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="467-YG-ZpJ">
-                                                    <rect key="frame" x="349.5" y="28.5" width="9.5" height="18"/>
+                                                    <rect key="frame" x="350.5" y="28.5" width="8.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                     <color key="textColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -434,8 +434,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Wi-Cq-sbI" customClass="FloatingTextField" customModule="skrudzh" customModuleProvider="target">
-                                                    <rect key="frame" x="72" y="10" width="269.5" height="48"/>
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Wi-Cq-sbI" customClass="FloatingTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="72" y="10" width="270.5" height="48"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -506,7 +506,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JmE-G5-fJP">
-                                                    <rect key="frame" x="349.5" y="28.5" width="9.5" height="18"/>
+                                                    <rect key="frame" x="350.5" y="28.5" width="8.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                     <color key="textColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -535,7 +535,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="rek-Hn-sZs" customClass="FloatingTextField" customModule="skrudzh" customModuleProvider="target">
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="rek-Hn-sZs" customClass="FloatingTextField" customModule="Three_Baskets" customModuleProvider="target">
                                                     <rect key="frame" x="72" y="10" width="230" height="48"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -632,7 +632,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="14F-aM-4hk" customClass="MoneyTextField" customModule="skrudzh" customModuleProvider="target">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="14F-aM-4hk" customClass="MoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
                                                     <rect key="frame" x="72" y="10" width="271" height="49"/>
                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -682,7 +682,7 @@
                                                     <rect key="frame" x="16" y="22.5" width="36" height="36"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="amount-icon" translatesAutoresizingMaskIntoConstraints="NO" id="pvz-XV-kEJ">
-                                                            <rect key="frame" x="10" y="9" width="16" height="18"/>
+                                                            <rect key="frame" x="11" y="9.5" width="14" height="17"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -751,7 +751,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="fop-NM-uYV" customClass="MoneyTextField" customModule="skrudzh" customModuleProvider="target">
+                                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="fop-NM-uYV" customClass="MoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
                                                                     <rect key="frame" x="6" y="0.0" width="86" height="49"/>
                                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -839,7 +839,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Sz-m1-TPw" customClass="MoneyTextField" customModule="skrudzh" customModuleProvider="target">
+                                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Sz-m1-TPw" customClass="MoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
                                                                     <rect key="frame" x="6" y="0.0" width="86" height="49"/>
                                                                     <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
@@ -924,7 +924,7 @@
                                                     <rect key="frame" x="16" y="22.5" width="36" height="36"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="amount-icon" translatesAutoresizingMaskIntoConstraints="NO" id="XVM-5g-ex9">
-                                                            <rect key="frame" x="10" y="9" width="16" height="18"/>
+                                                            <rect key="frame" x="11" y="9.5" width="14" height="17"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1047,7 +1047,7 @@
         <!--Expense Edit View Controller-->
         <scene sceneID="kLy-37-4K7">
             <objects>
-                <viewController storyboardIdentifier="ExpenseEditViewController" id="PWG-Pm-I2S" customClass="ExpenseEditViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExpenseEditViewController" id="PWG-Pm-I2S" customClass="ExpenseEditViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lss-Mi-Thb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1095,7 +1095,7 @@
         <!--Colorable Navigation Controller-->
         <scene sceneID="lD9-Lf-lxJ">
             <objects>
-                <navigationController storyboardIdentifier="ExpenseEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Tom-ay-svh" customClass="ColorableNavigationController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ExpenseEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Tom-ay-svh" customClass="ColorableNavigationController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="PWt-hx-vUS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1113,7 +1113,7 @@
         <!--Funds Move Edit View Controller-->
         <scene sceneID="Fpe-hQ-vAb">
             <objects>
-                <viewController storyboardIdentifier="FundsMoveEditViewController" id="wZz-xh-nAE" customClass="FundsMoveEditViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FundsMoveEditViewController" id="wZz-xh-nAE" customClass="FundsMoveEditViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b0C-7j-g1e">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1161,7 +1161,7 @@
         <!--Colorable Navigation Controller-->
         <scene sceneID="dKm-8M-YKw">
             <objects>
-                <navigationController storyboardIdentifier="FundsMoveEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bBK-5p-g4F" customClass="ColorableNavigationController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FundsMoveEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bBK-5p-g4F" customClass="ColorableNavigationController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="szi-R4-fJy">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1179,7 +1179,7 @@
         <!--Waiting Debts View Controller-->
         <scene sceneID="fMc-SM-Q3H">
             <objects>
-                <viewController storyboardIdentifier="WaitingDebtsViewController" id="jIO-RZ-3BW" customClass="WaitingDebtsViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WaitingDebtsViewController" id="jIO-RZ-3BW" customClass="WaitingDebtsViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NG7-gj-Wd1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1194,7 +1194,7 @@
                                 <rect key="frame" x="0.0" y="26" width="375" height="641"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DebtTableViewCell" rowHeight="52" id="6E1-1I-uhL" customClass="DebtTableViewCell" customModule="skrudzh" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DebtTableViewCell" rowHeight="52" id="6E1-1I-uhL" customClass="DebtTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6E1-1I-uhL" id="Nlh-AJ-3g3">
@@ -1295,7 +1295,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="amount-icon" width="16" height="18.5"/>
+        <image name="amount-icon" width="14.5" height="17"/>
         <image name="calendar-icon" width="19" height="18"/>
         <image name="close-circle-icon" width="24" height="24"/>
         <image name="comment-icon" width="18" height="18"/>

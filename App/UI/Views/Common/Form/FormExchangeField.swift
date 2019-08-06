@@ -42,75 +42,75 @@ class FormExchangeField : FormField {
     // Appearance properties
     
     @IBInspectable var focusedTextColor: UIColor = UIColor.by(.textFFFFFF) {
-        didSet { updateTextField() }
+        didSet { updateTextFields() }
     }
     
     @IBInspectable var unfocusedTextColor: UIColor = UIColor.by(.textFFFFFF) {
-        didSet { updateTextField() }
+        didSet { updateTextFields() }
     }
     
     @IBInspectable var focusedPlaceholderNoTextColor: UIColor = UIColor.by(.textFFFFFF) {
-        didSet { updateTextField() }
+        didSet { updateTextFields() }
     }
     
     @IBInspectable var focusedPlaceholderWithTextColor: UIColor = UIColor.by(.text435585) {
-        didSet { updateTextField() }
+        didSet { updateTextFields() }
     }
     
     @IBInspectable var unfocusedPlaceholderColor: UIColor = UIColor.by(.text9EAACC) {
-        didSet { updateTextField() }
+        didSet { updateTextFields() }
     }
     
     @IBInspectable var bigPlaceholderFont: UIFont = UIFont(name: "Rubik-Regular", size: 15)! {
-        didSet { updateTextField() }
+        didSet { updateTextFields() }
     }
     
     @IBInspectable var smallPlaceholderFont: UIFont = UIFont(name: "Rubik-Regular", size: 10)! {
-        didSet { updateTextField() }
+        didSet { updateTextFields() }
     }
     
     @IBInspectable var lineColor: UIColor = UIColor.clear {
-        didSet { updateTextField() }
+        didSet { updateFocusLine() }
     }
     
     @IBInspectable var selectedLineColor: UIColor = UIColor.by(.textFFFFFF) {
-        didSet { updateTextField() }
+        didSet { updateFocusLine() }
     }
     
     @IBInspectable var selectedLineHeight: CGFloat = 1.0 {
-        didSet { updateTextField() }
+        didSet { updateFocusLine() }
     }
     
     @IBInspectable var amountPlaceholder: String? = nil {
-        didSet { updateTextField() }
+        didSet { updateTextFields() }
     }
     
     @IBInspectable var convertedAmountPlaceholder: String? = nil {
-        didSet { updateTextField() }
+        didSet { updateTextFields() }
     }
     
-    @IBInspectable var convertImage: UIImage? = UIImage(named: "") {
-        didSet { updateTextField() }
+    @IBInspectable var convertImage: UIImage? = UIImage(named: "right-arrow-icon") {
+        didSet { updateConvertArrow() }
     }
     
     @IBInspectable var convertImageTint: UIColor = UIColor.by(.textFFFFFF) {
-        didSet { updateTextField() }
+        didSet { updateConvertArrow() }
     }
     
     @IBInspectable var unfocusedCurrencyColor: UIColor = UIColor.by(.textFFFFFF) {
-        didSet { updateTextField() }
+        didSet { updateCurrencyLabels() }
     }
     
     @IBInspectable var focusedCurrencyColor: UIColor = UIColor.by(.textFFFFFF) {
-        didSet { updateTextField() }
+        didSet { updateCurrencyLabels() }
     }
     
     @IBInspectable var unfocusedFieldBackgroundColor: UIColor = UIColor.clear {
-        didSet { updateTextField() }
+        didSet { updateTextFieldBackgrounds() }
     }
     
     @IBInspectable var focusedFieldBackgroundColor: UIColor = UIColor.by(.textFFFFFF) {
-        didSet { updateTextField() }
+        didSet { updateTextFieldBackgrounds() }
     }
     
     // Computed properties
@@ -129,7 +129,7 @@ class FormExchangeField : FormField {
         get { return amountField.currency }
         set {
             amountField.currency = newValue
-            updateCurrencyLabel()
+            updateAmountCurrencyLabel()
         }
     }
     
@@ -137,7 +137,7 @@ class FormExchangeField : FormField {
         get { return convertedAmountField.currency }
         set {
             convertedAmountField.currency = newValue
-            updateConvertedCurrencyLabel()
+            updateConvertedAmountCurrencyLabel()
         }
     }
     
@@ -161,11 +161,13 @@ class FormExchangeField : FormField {
         return convertedAmount != nil && !convertedAmount!.isEmpty
     }
     
+    var amountTextFieldState: FormTextFieldState {
+        return FormTextFieldState.stateBy(isFocused: isAmountFieldFocused, isPresent: isAmountPresent, hasError: hasError)
+    }
     
-    
-//    var state: FormTextFieldState {
-//        return FormTextFieldState.stateBy(isFocused: isTextFieldFocused, isPresent: isTextPresent, hasError: hasError)
-//    }
+    var convertedAmountTextFieldState: FormTextFieldState {
+        return FormTextFieldState.stateBy(isFocused: isConvertedAmountFieldFocused, isPresent: isConvertedAmountPresent, hasError: hasError)
+    }
     
     func didChangeAmount(_ didChange: @escaping (_ text: String?) -> Void) {
         self.didChangeAmount = didChange
@@ -192,9 +194,6 @@ class FormExchangeField : FormField {
     
     override func updateSubviews() {
         super.updateSubviews()
-        updateContainer()
-        updateAmountContainer()
-        updateConvertedAmountContainer()
         updateConvertArrow()
         updateAmountTextField()
         updateAmountBackground()
@@ -220,31 +219,271 @@ class FormExchangeField : FormField {
         setupFocusLineConstraints()
     }
     
-    func setupTextFieldConstraints() {
-        textField.snp.makeConstraints { make in
+    func setupContainer() {
+        exchangeContainer.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(exchangeContainer)
+    }
+    
+    func setupAmountContainer() {
+        amountContainer.translatesAutoresizingMaskIntoConstraints = false
+        exchangeContainer.addSubview(amountContainer)
+    }
+    
+    func setupConvertedAmountContainer() {
+        convertedAmountContainer.translatesAutoresizingMaskIntoConstraints = false
+        exchangeContainer.addSubview(convertedAmountContainer)
+    }
+    
+    func setupConvertArrow() {
+        convertArrow.translatesAutoresizingMaskIntoConstraints = false
+        exchangeContainer.addSubview(convertArrow)
+    }
+    
+    func setupAmountTextField() {
+        amountField.translatesAutoresizingMaskIntoConstraints = false
+        amountContainer.addSubview(amountField)
+        amountField.titleFormatter = { $0 }
+        amountField.addTarget(self, action: #selector(textFieldEditingDidBegin(_:)), for: UIControl.Event.editingDidBegin)
+        amountField.addTarget(self, action: #selector(amountFieldEditingChanged(_:)), for: UIControl.Event.editingChanged)
+        amountField.addTarget(self, action: #selector(textFieldEditingDidEnd(_:)), for: UIControl.Event.editingDidEnd)
+    }
+    
+    func setupAmountBackground() {
+        amountFieldBackground.translatesAutoresizingMaskIntoConstraints = false
+        amountContainer.addSubview(amountFieldBackground)
+        amountFieldBackground.cornerRadius = 2
+    }
+    
+    func setupAmountCurrencyLabel() {
+        amountCurrencyLabel.translatesAutoresizingMaskIntoConstraints = false
+        amountContainer.addSubview(amountCurrencyLabel)
+    }
+    
+    func setupConvertedAmountTextField() {
+        convertedAmountField.translatesAutoresizingMaskIntoConstraints = false
+        convertedAmountContainer.addSubview(convertedAmountField)
+        convertedAmountField.titleFormatter = { $0 }
+        convertedAmountField.addTarget(self, action: #selector(textFieldEditingDidBegin(_:)), for: UIControl.Event.editingDidBegin)
+        convertedAmountField.addTarget(self, action: #selector(convertedAmountFieldEditingChanged(_:)), for: UIControl.Event.editingChanged)
+        convertedAmountField.addTarget(self, action: #selector(textFieldEditingDidEnd(_:)), for: UIControl.Event.editingDidEnd)
+    }
+    
+    func setupConvertedAmountBackground() {
+        convertedAmountFieldBackground.translatesAutoresizingMaskIntoConstraints = false
+        convertedAmountContainer.addSubview(convertedAmountFieldBackground)
+        convertedAmountFieldBackground.cornerRadius = 2
+    }
+    
+    func setupConvertedAmountCurrencyLabel() {
+        convertedAmountCurrencyLabel.translatesAutoresizingMaskIntoConstraints = false
+        convertedAmountContainer.addSubview(convertedAmountCurrencyLabel)
+    }
+    
+    func setupFocusLine() {
+        focusLine.translatesAutoresizingMaskIntoConstraints = false
+        exchangeContainer.addSubview(focusLine)
+    }
+    
+    override func updateBackground() {
+        let appearanceOptions = self.appearanceOptions()
+        self.backgroundColor = appearanceOptions.fieldAppearance.backgroundColor
+    }
+    
+    override func updateIcon(forceImageUpdate: Bool = true) {
+        super.updateIcon(forceImageUpdate: forceImageUpdate)
+        
+        let appearanceOptions = self.appearanceOptions()
+        
+        iconContainer.backgroundColor = appearanceOptions.fieldAppearance.iconBackgroundColor
+        icon.tintColor = appearanceOptions.fieldAppearance.iconTint
+    }
+    
+    override func updateErrorLabel() {
+        super.updateErrorLabel()
+        errorLabel.isHidden = areExchangeFieldsFocused
+    }
+    
+    func updateConvertArrow() {
+        convertArrow.image = convertImage?.withRenderingMode(.alwaysTemplate)
+        convertArrow.tintColor = convertImageTint
+    }
+    
+    func updateAmountTextField() {
+        let appearanceOptions = self.appearanceOptions().amountAppearance
+        update(amountField, options: appearanceOptions, placeholder: amountPlaceholder)
+    }
+    
+    func updateAmountBackground() {
+        let appearanceOptions = self.appearanceOptions().amountAppearance
+        amountFieldBackground.backgroundColor = appearanceOptions.textBackground
+        amountFieldBackground.isHidden = !isAmountFieldFocused
+    }
+    
+    func updateAmountCurrencyLabel() {
+        let appearanceOptions = self.appearanceOptions().amountAppearance
+        amountCurrencyLabel.text = currency?.code
+        amountCurrencyLabel.textColor = appearanceOptions.currencyColor
+    }
+    
+    func updateConvertedAmountTextField() {
+        let appearanceOptions = self.appearanceOptions().convertedAmountAppearance
+        update(convertedAmountField, options: appearanceOptions, placeholder: convertedAmountPlaceholder)
+        convertedAmountField.titleColor = UIColor.clear
+        convertedAmountField.selectedTitleColor = UIColor.clear
+    }
+    
+    func updateConvertedAmountBackground() {
+        let appearanceOptions = self.appearanceOptions().convertedAmountAppearance
+        convertedAmountFieldBackground.backgroundColor = appearanceOptions.textBackground
+        convertedAmountFieldBackground.isHidden = !isConvertedAmountFieldFocused
+    }
+    
+    func updateConvertedAmountCurrencyLabel() {
+        let appearanceOptions = self.appearanceOptions().convertedAmountAppearance
+        convertedAmountCurrencyLabel.text = convertedCurrency?.code
+        convertedAmountCurrencyLabel.textColor = appearanceOptions.currencyColor
+    }
+    
+    func updateFocusLine() {
+        let appearanceOptions = self.appearanceOptions().fieldAppearance
+        focusLine.backgroundColor = appearanceOptions.focusLineColor
+        focusLine.isHidden = !areExchangeFieldsFocused
+    }
+    
+    func updateTextFields() {
+        updateAmountTextField()
+        updateConvertedAmountTextField()
+    }
+    
+    func updateCurrencyLabels() {
+        updateAmountCurrencyLabel()
+        updateConvertedAmountCurrencyLabel()
+    }
+    
+    func updateTextFieldBackgrounds() {
+        updateAmountBackground()
+        updateConvertedAmountBackground()
+    }
+    
+    func updateStateAppearance() {
+        updateBackground()
+        updateIcon(forceImageUpdate: false)
+        updateTextFields()
+        updateTextFieldBackgrounds()
+        updateCurrencyLabels()
+        updateFocusLine()
+        updateErrorLabel()
+    }
+    
+    private func update(_ textField: MoneyTextField, options: TextAppearanceOptions, placeholder: String?) {
+        textField.textColor = options.textColor
+        textField.placeholderFont = options.placeholderFont
+        textField.placeholderColor = options.placeholderColor
+        textField.titleColor = options.placeholderColor
+        textField.selectedTitleColor = options.placeholderColor
+        
+        textField.placeholder = placeholder
+        textField.selectedTitle = placeholder
+        textField.lineColor = UIColor.clear
+        textField.selectedLineColor = UIColor.clear
+        textField.lineHeight = 0
+        textField.selectedLineHeight = 0
+        
+        textField.isEnabled = isEnabled
+        textField.isUserInteractionEnabled = isEnabled
+    }
+    
+    func setupContainerConstraints() {
+        exchangeContainer.snp.makeConstraints { make in
             make.top.equalTo(10)
-            make.right.equalTo(subValueLabel.snp.left).offset(8)
+            make.right.equalTo(16)
             make.bottom.equalTo(-16)
             make.left.equalTo(iconContainer.snp.right).offset(20)
         }
-        textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
     
-    func setupSubValueLabelConstraints() {
-        subValueLabel.snp.makeConstraints { make in
-            make.right.equalTo(-16)
-            make.centerY.equalTo(3)
+    func setupAmountContainerConstraints() {
+        amountContainer.snp.makeConstraints { make in
+            make.top.bottom.left.equalToSuperview()
+            make.right.equalTo(convertArrow.snp.left).offset(5)
         }
-        subValueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        subValueLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+    }
+    
+    func setupConvertedAmountContainerConstraints() {
+        convertedAmountContainer.snp.makeConstraints { make in
+            make.top.right.bottom.equalToSuperview()
+            make.left.equalTo(convertArrow.snp.right).offset(5)
+        }
+    }
+    
+    func setupConvertArrowConstraints() {
+        convertArrow.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
+    
+    func setupAmountTextFieldConstraints() {
+        amountField.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.left.equalTo(6)
+        }
+        amountField.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        amountField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    }
+    
+    func setupAmountBackgroundConstraints() {
+        amountFieldBackground.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(17)
+            make.bottom.equalTo(3)
+        }
+    }
+    
+    func setupAmountCurrencyLabelConstraints() {
+        amountCurrencyLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(8)
+            make.right.equalTo(-6)
+            make.left.equalTo(amountField.snp.right).offset(8)
+        }
+    }
+    
+    func setupConvertedAmountTextFieldConstraints() {
+        convertedAmountField.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.left.equalTo(6)
+        }
+        convertedAmountField.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        convertedAmountField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    }
+    
+    func setupConvertedAmountBackgroundConstraints() {
+        convertedAmountFieldBackground.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(17)
+            make.bottom.equalTo(3)
+        }
+    }
+    
+    func setupConvertedAmountCurrencyLabelConstraints() {
+        convertedAmountCurrencyLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(8)
+            make.right.equalTo(-6)
+            make.left.equalTo(amountField.snp.right).offset(8)
+        }
+    }
+    
+    func setupFocusLineConstraints() {
+        focusLine.snp.makeConstraints { make in
+            make.height.equalTo(1)
+            make.left.bottom.right.equalToSuperview()
+        }
     }
     
     override func setupErrorLabelConstraints() {
         errorLabel.snp.makeConstraints { make in
-            make.left.equalTo(textField.snp.left)
-            make.right.equalTo(textField.snp.right)
-            make.top.equalTo(textField.snp.bottom).offset(-8)
+            make.left.equalTo(exchangeContainer.snp.left)
+            make.right.equalTo(exchangeContainer.snp.right)
+            make.top.equalTo(exchangeContainer.snp.bottom).offset(-8)
             make.bottom.greaterThanOrEqualToSuperview()
         }
     }
@@ -272,59 +511,5 @@ class FormExchangeField : FormField {
         updateStateAppearance()
     }
     
-    override func updateBackground() {
-        let appearanceOptions = self.appearanceOptions()
-        self.backgroundColor = appearanceOptions.backgroundColor
-    }
     
-    func setupTextField() {
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(textField)
-        textField.titleFormatter = { $0 }
-        textField.addTarget(self, action: #selector(textFieldEditingDidBegin(_:)), for: UIControl.Event.editingDidBegin)
-        textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: UIControl.Event.editingChanged)
-        textField.addTarget(self, action: #selector(textFieldEditingDidEnd(_:)), for: UIControl.Event.editingDidEnd)
-    }
-    
-    func updateTextField() {
-        let appearanceOptions = self.appearanceOptions()
-        
-        textField.textColor = appearanceOptions.textColor
-        textField.placeholderFont = appearanceOptions.placeholderFont
-        textField.placeholderColor = appearanceOptions.placeholderColor
-        textField.titleColor = appearanceOptions.placeholderColor
-        textField.selectedTitleColor = appearanceOptions.placeholderColor
-        
-        textField.placeholder = placeholder
-        textField.selectedTitle = placeholder
-        textField.lineColor = lineColor
-        textField.selectedLineColor = selectedLineColor
-        textField.lineHeight = lineHeight
-        textField.selectedLineHeight = selectedLineHeight
-        
-        textField.isEnabled = isEnabled
-        textField.isUserInteractionEnabled = isEnabled
-    }
-    
-    override func updateIcon(forceImageUpdate: Bool = true) {
-        super.updateIcon(forceImageUpdate: forceImageUpdate)
-        
-        let appearanceOptions = self.appearanceOptions()
-        
-        iconContainer.backgroundColor = appearanceOptions.iconBackgroundColor
-        icon.tintColor = appearanceOptions.iconTint
-        
-    }
-    
-    override func updateErrorLabel() {
-        super.updateErrorLabel()
-        errorLabel.isHidden = areExchangeFieldsFocused
-    }
-    
-    func updateStateAppearance() {
-        updateBackground()
-        updateIcon(forceImageUpdate: false)
-        updateTextField()
-        updateErrorLabel()
-    }
 }

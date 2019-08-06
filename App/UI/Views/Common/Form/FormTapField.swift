@@ -16,7 +16,7 @@ class FormTapField : FormTextField {
     
     lazy var arrow: UIImageView = { return UIImageView() }()
     
-    @IBInspectable var arrowImageName: String = "right-arrow-icon" {
+    @IBInspectable var arrowImage: UIImage? = UIImage(named: "right-arrow-icon") {
         didSet { updateArrow() }
     }
     
@@ -92,7 +92,7 @@ class FormTapField : FormTextField {
     }
     
     func updateArrow() {
-        arrow.image = UIImage(named: arrowImageName)?.withRenderingMode(.alwaysTemplate)
+        arrow.image = arrowImage?.withRenderingMode(.alwaysTemplate)
         arrow.tintColor = arrowColor
         arrow.isHidden = !isEnabled
     }
