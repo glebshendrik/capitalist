@@ -64,16 +64,6 @@ class IncomeEditViewModel : TransactionEditViewModel {
         return "Сумма пополнения"
     }
     
-    override var amount: String? {
-        guard let currency = startableCurrency else { return nil }
-        return income?.amountCents.moneyDecimalString(with: currency)
-    }
-    
-    override var convertedAmount: String? {
-        guard let convertedCurrency = completableCurrency else { return nil }
-        return income?.convertedAmountCents.moneyDecimalString(with: convertedCurrency)
-    }
-    
     override var startableIconDefaultImageName: String {
         return "lamp-icon"
     }
@@ -111,6 +101,12 @@ class IncomeEditViewModel : TransactionEditViewModel {
         self.gotAt = income.gotAt
         self.startable = IncomeSourceViewModel(incomeSource: income.incomeSource)
         self.completable = ExpenseSourceViewModel(expenseSource: income.expenseSource)
+        if let currency = startableCurrency {
+            self.amount = income.amountCents.moneyDecimalString(with: currency)
+        }
+        if let convertedCurrency = completableCurrency {
+            self.convertedAmount = income.convertedAmountCents.moneyDecimalString(with: convertedCurrency)
+        }
     }
     
     func set(startable: IncomeSourceViewModel, completable: ExpenseSourceViewModel) {

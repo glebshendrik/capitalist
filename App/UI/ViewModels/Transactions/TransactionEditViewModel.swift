@@ -21,6 +21,10 @@ class TransactionEditViewModel {
     
     var startable: TransactionStartable? = nil
     var completable: TransactionCompletable? = nil
+    var amount: String? = nil
+    var convertedAmount: String? = nil
+    var comment: String? = nil
+    var gotAt: Date? = nil
     
     var title: String? { return nil }
     var removeTitle: String? { return nil }
@@ -29,11 +33,6 @@ class TransactionEditViewModel {
     var completableTitle: String? { return nil }
     var startableAmountTitle: String? { return nil }
     var completableAmountTitle: String? { return nil }
-    var amount: String? { return nil }
-    var convertedAmount: String? { return nil }
-    
-    var comment: String? = nil
-    var gotAt: Date? = nil
     
     var isNew: Bool {
         return transactionableId == nil        
@@ -46,6 +45,10 @@ class TransactionEditViewModel {
     
     var hasGotAtDate: Bool {
         return gotAt != nil
+    }
+    
+    var calendarTitle: String {
+        return hasGotAtDate ? gotAt!.dateTimeString(ofStyle: .short) : "Выбрать дату"
     }
     
     var startableIconURL: URL? {

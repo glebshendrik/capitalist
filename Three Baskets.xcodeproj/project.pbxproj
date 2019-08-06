@@ -225,6 +225,8 @@
 		FA84E7E922562ED700C0A274 /* CurrencyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7E822562ED700C0A274 /* CurrencyConverter.swift */; };
 		FA84E7EB225DA9EF00C0A274 /* LineChartAreasRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7EA225DA9EF00C0A274 /* LineChartAreasRenderer.swift */; };
 		FA87A43122F9816900E0BFD0 /* FormExchangeFieldAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A43022F9816900E0BFD0 /* FormExchangeFieldAppearance.swift */; };
+		FA87A43322F9BC7800E0BFD0 /* TransactionEditingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A43222F9BC7800E0BFD0 /* TransactionEditingExtension.swift */; };
+		FA87A43522F9BC9300E0BFD0 /* TransactionUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A43422F9BC9300E0BFD0 /* TransactionUIExtension.swift */; };
 		FA8AD0D822BB503C0084AD19 /* SaltEdgeManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0D722BB503C0084AD19 /* SaltEdgeManagerProtocol.swift */; };
 		FA8AD0DA22BE1AB40084AD19 /* SaltEdgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0D922BE1AB40084AD19 /* SaltEdgeManager.swift */; };
 		FA8AD0DC22C5F18C0084AD19 /* ProviderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0DB22C5F18C0084AD19 /* ProviderCell.swift */; };
@@ -587,6 +589,8 @@
 		FA84E7E822562ED700C0A274 /* CurrencyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverter.swift; sourceTree = "<group>"; };
 		FA84E7EA225DA9EF00C0A274 /* LineChartAreasRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartAreasRenderer.swift; sourceTree = "<group>"; };
 		FA87A43022F9816900E0BFD0 /* FormExchangeFieldAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormExchangeFieldAppearance.swift; sourceTree = "<group>"; };
+		FA87A43222F9BC7800E0BFD0 /* TransactionEditingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditingExtension.swift; sourceTree = "<group>"; };
+		FA87A43422F9BC9300E0BFD0 /* TransactionUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionUIExtension.swift; sourceTree = "<group>"; };
 		FA8AD0D722BB503C0084AD19 /* SaltEdgeManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltEdgeManagerProtocol.swift; sourceTree = "<group>"; };
 		FA8AD0D922BE1AB40084AD19 /* SaltEdgeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltEdgeManager.swift; sourceTree = "<group>"; };
 		FA8AD0DB22C5F18C0084AD19 /* ProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderCell.swift; sourceTree = "<group>"; };
@@ -979,6 +983,8 @@
 			isa = PBXGroup;
 			children = (
 				FA66FB6E22250C8E00708C71 /* TransactionEditViewController.swift */,
+				FA87A43222F9BC7800E0BFD0 /* TransactionEditingExtension.swift */,
+				FA87A43422F9BC9300E0BFD0 /* TransactionUIExtension.swift */,
 				FA66FB7022250DC000708C71 /* TransactionEditTableController.swift */,
 				FA66FB7222269EC900708C71 /* IncomeEditViewController.swift */,
 				FAA426132231275F00B64925 /* ExpenseEditViewController.swift */,
@@ -1959,6 +1965,7 @@
 				FA0CAE0121D25F5300805288 /* ExpenseSourcesService.swift in Sources */,
 				FA66FB792226D37000708C71 /* ExchangeRate.swift in Sources */,
 				FAD88F7821AFD64000BE7BC1 /* APIResourcePath.swift in Sources */,
+				FA87A43522F9BC9300E0BFD0 /* TransactionUIExtension.swift in Sources */,
 				FAD88F7721AFD64000BE7BC1 /* APIResourceMethod.swift in Sources */,
 				FA87A43122F9816900E0BFD0 /* FormExchangeFieldAppearance.swift in Sources */,
 				FA16FC77223AAA650053C273 /* ExpenseCategoriesViewModel.swift in Sources */,
@@ -2185,6 +2192,7 @@
 				FAA426042230F5E600B64925 /* ExpensesService.swift in Sources */,
 				FA835D4E22607A1100A592F2 /* IncomeAndExpensesGraphDataCalculatingExtension.swift in Sources */,
 				FAD88F4D21AEC1A500BE7BC1 /* AuthenticationService.swift in Sources */,
+				FA87A43322F9BC7800E0BFD0 /* TransactionEditingExtension.swift in Sources */,
 				FA7276A9225249B00086D4D1 /* TransactionController.swift in Sources */,
 				FA165CEE21B7846C00EAA16B /* ResetPasswordViewController.swift in Sources */,
 				FAD88F8821B1181600BE7BC1 /* MenuViewController.swift in Sources */,

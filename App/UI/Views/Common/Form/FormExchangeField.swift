@@ -45,7 +45,7 @@ class FormExchangeField : FormField {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var unfocusedTextColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var unfocusedTextColor: UIColor = UIColor.by(.text9EAACC) {
         didSet { updateTextFields() }
     }
     
@@ -81,11 +81,11 @@ class FormExchangeField : FormField {
         didSet { updateFocusLine() }
     }
     
-    @IBInspectable var amountPlaceholder: String? = nil {
+    @IBInspectable var amountPlaceholder: String? = "Сумма" {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var convertedAmountPlaceholder: String? = nil {
+    @IBInspectable var convertedAmountPlaceholder: String? = "Сумма" {
         didSet { updateTextFields() }
     }
     
@@ -93,15 +93,15 @@ class FormExchangeField : FormField {
         didSet { updateConvertArrow() }
     }
     
-    @IBInspectable var convertImageTint: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var convertImageTint: UIColor = UIColor.by(.dark404B6F) {
         didSet { updateConvertArrow() }
     }
     
-    @IBInspectable var unfocusedCurrencyColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var unfocusedCurrencyColor: UIColor = UIColor.by(.text606B8A) {
         didSet { updateCurrencyLabels() }
     }
     
-    @IBInspectable var focusedCurrencyColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var focusedCurrencyColor: UIColor = UIColor.by(.textAFC1FF) {
         didSet { updateCurrencyLabels() }
     }
     
@@ -109,7 +109,7 @@ class FormExchangeField : FormField {
         didSet { updateTextFieldBackgrounds() }
     }
     
-    @IBInspectable var focusedFieldBackgroundColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var focusedFieldBackgroundColor: UIColor = UIColor.by(.blue5B7BD1) {
         didSet { updateTextFieldBackgrounds() }
     }
     

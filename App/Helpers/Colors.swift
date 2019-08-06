@@ -13,6 +13,7 @@ enum ColorAsset : String {
     case blue6A92FA = "blue 6A92FA"
     case blue6B93FB = "blue 6B93FB"
     case blue5B86F7 = "blue 5B86F7"
+    case blue5B7BD1 = "blue 5B7BD1"
     
     case dark333D5B = "dark 333D5B"
     case dark374262 = "dark 374262"
@@ -29,7 +30,9 @@ enum ColorAsset : String {
     
     case text435585 = "text 435585"
     case text8792B2 = "text 8792B2"
-    case text9EAACC = "text 9EAACC"
+    case text9EAACC = "text 9EAACC"    
+    case text606B8A = "text 606B8A"
+    case textAFC1FF = "text AFC1FF"
     case textFFFFFF = "text FFFFFF"
     
     case redE77768 = "red E77768"
