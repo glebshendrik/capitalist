@@ -168,7 +168,7 @@ extension FormExchangeField {
     }
     
     
-    private private func focusedPresentTextFieldOptions() -> TextAppearanceOptions {
+    private func focusedPresentTextFieldOptions() -> TextAppearanceOptions {
         return (focusedFieldBackgroundColor,
                 focusedTextColor,
                 focusedCurrencyColor,

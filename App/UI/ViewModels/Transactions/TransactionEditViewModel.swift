@@ -21,89 +21,79 @@ class TransactionEditViewModel {
     
     var startable: TransactionStartable? = nil
     var completable: TransactionCompletable? = nil
-    var amount: String? = nil
-    var convertedAmount: String? = nil
+    var amount: String? = nil {
+        didSet {
+            convertedAmountConverted = convert(amount: amount, isForwardConversion: true)
+        }
+    }
+    var convertedAmount: String? = nil {
+        didSet {
+            amountConverted = convert(amount: convertedAmount, isForwardConversion: false)
+        }
+    }
     var comment: String? = nil
     var gotAt: Date? = nil
+    var amountConverted: String? = nil
+    var convertedAmountConverted: String? = nil
     
-    var title: String? { return nil }
+    var title: String { return "" }
     var removeTitle: String? { return nil }
     var removeQuestion: String? { return nil }
     var startableTitle: String? { return nil }
     var completableTitle: String? { return nil }
     var startableAmountTitle: String? { return nil }
     var completableAmountTitle: String? { return nil }
-    
-    var isNew: Bool {
-        return transactionableId == nil        
+    var amountPlaceholder: String? {
+        return amountConverted ?? startableAmountTitle
     }
+    var convertedAmountPlaceholder: String? {
+        return convertedAmountConverted ?? completableAmountTitle
+    }
+    
+    var isNew: Bool { return transactionableId == nil }
     
     var hasComment: Bool {
         guard let comment = comment else { return false }
         return !comment.isEmpty && !comment.isWhitespace
     }
     
-    var hasGotAtDate: Bool {
-        return gotAt != nil
-    }
+    var hasGotAtDate: Bool { return gotAt != nil }
     
     var calendarTitle: String {
         return hasGotAtDate ? gotAt!.dateTimeString(ofStyle: .short) : "Выбрать дату"
     }
     
-    var startableIconURL: URL? {
-        return startable?.iconURL
-    }
+    var startableIconURL: URL? { return startable?.iconURL }
     
-    var startableIconDefaultImageName: String {
-        return ""
-    }
+    var startableIconDefaultImageName: String { return "" }
     
-    var completableIconURL: URL? {
-        return completable?.iconURL
-    }
+    var completableIconURL: URL? { return completable?.iconURL }
     
-    var completableIconDefaultImageName: String {
-        return ""
-    }
+    var completableIconDefaultImageName: String { return "" }
     
-    var startableName: String? {
-        return startable?.name
-    }
+    var startableName: String? { return startable?.name }
     
-    var completableName: String? {
-        return completable?.name
-    }
+    var completableName: String? { return completable?.name }
     
-    var startableAmount: String? {
-        return startable?.amount
-    }
+    var startableAmount: String? { return startable?.amount }
     
-    var completableAmount: String? {
-        return completable?.amount
-    }
+    var completableAmount: String? { return completable?.amount }
     
-    var startableCurrency: Currency? {
-        return startable?.currency
-    }
+    var startableCurrency: Currency? { return startable?.currency }
     
-    var completableCurrency: Currency? {
-        return completable?.currency
-    }
+    var completableCurrency: Currency? { return completable?.currency }
     
-    var startableCurrencyCode: String? {
-        return startableCurrency?.code
-    }
+    var startableCurrencyCode: String? { return startableCurrency?.code }
     
-    var completableCurrencyCode: String? {
-        return completableCurrency?.code
-    }
+    var completableCurrencyCode: String? { return completableCurrency?.code }
     
     var needCurrencyExchange: Bool {
         return startableCurrency?.code != completableCurrency?.code
     }
     
     var exchangeRate: Float = 1.0
+    
+    var removeButtonHidden: Bool { return isNew }
     
     init(exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
          currencyConverter: CurrencyConverterProtocol) {
@@ -154,5 +144,33 @@ class TransactionEditViewModel {
                 }.then {
                     self.loadExchangeRate()
                 }
+    }
+    
+    func isFormValid() -> Bool {
+        return isNew
+            ? isCreationFormValid()
+            : isUpdatingFormValid()
+    }
+    
+    func save() -> Promise<Void> {
+        return isNew
+            ? create()
+            : update()
+    }
+    
+    func create() -> Promise<Void> {
+        return Promise.value(())
+    }
+    
+    func update() -> Promise<Void> {
+        return Promise.value(())
+    }
+    
+    func isCreationFormValid() -> Bool {
+        return false
+    }
+    
+    func isUpdatingFormValid() -> Bool {
+        return false
     }
 }

@@ -15,99 +15,15 @@ protocol IncomeEditViewControllerDelegate {
     func didRemoveIncome()
 }
 
-protocol IncomeEditInputProtocol {
-    func set(delegate: IncomeEditViewControllerDelegate?)
-    func set(incomeId: Int)
-    func set(startable: IncomeSourceViewModel, completable: ExpenseSourceViewModel)
-}
-
 class IncomeEditViewController : TransactionEditViewController {
     
     var incomeEditViewModel: IncomeEditViewModel!
-    
-    private var delegate: IncomeEditViewControllerDelegate? = nil
+    var delegate: IncomeEditViewControllerDelegate?
     
     override var viewModel: TransactionEditViewModel! {
         return incomeEditViewModel
     }
     
-    override func savePromise(amount: String?,
-                              convertedAmount: String?,
-                              comment: String?,
-                              gotAt: Date?) -> Promise<Void> {
-        return incomeEditViewModel.saveIncome(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
-    }
-    
-    override func savePromiseResolved() {
-        if self.viewModel.isNew {
-            self.delegate?.didCreateIncome()
-        }
-        else {
-            self.delegate?.didUpdateIncome()
-        }
-    }
-    
-    override func catchSaveError(_ error: Error) {
-        switch error {
-        case IncomeCreationError.validation(let validationResults):
-            self.showCreationValidationResults(validationResults)
-        case IncomeUpdatingError.validation(let validationResults):
-            self.showUpdatingValidationResults(validationResults)
-        case APIRequestError.unprocessedEntity(let errors):
-            self.show(errors: errors)
-        default:
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при сохранении дохода",
-                                              theme: .error)
-        }
-    }
-    
-    override func removePromise() -> Promise<Void> {
-        return incomeEditViewModel.removeIncome()
-    }
-    
-    override func removePromiseResolved() {
-        self.delegate?.didRemoveIncome()
-    }
-    
-    override func catchRemoveError(_ error: Error) {
-        switch error {
-        case APIRequestError.unprocessedEntity(let errors):
-            self.show(errors: errors)
-        default:
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при удалении дохода",
-                                              theme: .error)
-        }        
-    }
-    
-    override func isFormValid(amount: String?,
-                              convertedAmount: String?,
-                              comment: String?,
-                              gotAt: Date?) -> Bool {
-        return incomeEditViewModel.isFormValid(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
-    }
-    
-    override func didTapStartable() {
-        if let incomeSourceSelectViewController = router.viewController(.IncomeSourceSelectViewController) as? IncomeSourceSelectViewController {
-            
-            incomeSourceSelectViewController.set(delegate: self)
-            slideUp(viewController: incomeSourceSelectViewController)
-        }
-    }
-    
-    override func didTapCompletable() {
-        if let expenseSourceSelectViewController = router.viewController(.ExpenseSourceSelectViewController) as? ExpenseSourceSelectViewController {
-            
-            expenseSourceSelectViewController.set(delegate: self,
-                                                  skipExpenseSourceId: viewModel.startable?.id,
-                                                  selectionType: .completable)
-            
-            slideUp(viewController: expenseSourceSelectViewController)
-        }
-    }
-}
-
-extension IncomeEditViewController : IncomeEditInputProtocol {
-
     func set(delegate: IncomeEditViewControllerDelegate?) {
         self.delegate = delegate
     }
@@ -119,78 +35,35 @@ extension IncomeEditViewController : IncomeEditInputProtocol {
     func set(startable: IncomeSourceViewModel, completable: ExpenseSourceViewModel) {
         incomeEditViewModel.set(startable: startable, completable: completable)
     }
-}
-
-extension IncomeEditViewController {
-    private func show(errors: [String: String]) {
-        for (_, validationMessage) in errors {
-            messagePresenterManager.show(validationMessage: validationMessage)
+    
+    override func savePromise() -> Promise<Void> {
+        return incomeEditViewModel.save()
+    }
+    
+    override func didSave() {
+        if self.viewModel.isNew {
+            self.delegate?.didCreateIncome()
+        }
+        else {
+            self.delegate?.didUpdateIncome()
         }
     }
     
-    private func showCreationValidationResults(_ validationResults: [IncomeCreationForm.CodingKeys: [ValidationErrorReason]]) {
-        
-        for key in validationResults.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
-            for reason in validationResults[key] ?? [] {
-                let message = creationValidationMessageFor(key: key, reason: reason)
-                messagePresenterManager.show(validationMessage: message)
-            }
-        }
+    override func removePromise() -> Promise<Void> {
+        return incomeEditViewModel.removeIncome()
     }
     
-    private func creationValidationMessageFor(key: IncomeCreationForm.CodingKeys, reason: ValidationErrorReason) -> String {
-        switch (key, reason) {
-        case (.amountCents, .required):
-            return "Укажите сумму дохода"
-        case (.amountCents, .invalid):
-            return "Некорректная сумма дохода"
-        case (.convertedAmountCents, .required):
-            return "Укажите сумму дохода"
-        case (.convertedAmountCents, .invalid):
-            return "Некорректная сумма дохода"
-        case (.gotAt, .required):
-            return "Укажите дату дохода"
-        case (.gotAt, .invalid):
-            return "Некорректная дата дохода"
-        case (.incomeSourceId, .required):
-            return "Укажите источник дохода"
-        case (.expenseSourceId, .required):
-            return "Укажите Кошелек"
-        case (_, _):
-            return "Ошибка ввода"
-        }
+    override func didRemove() {
+        self.delegate?.didRemoveIncome()
     }
     
-    private func showUpdatingValidationResults(_ validationResults: [IncomeUpdatingForm.CodingKeys: [ValidationErrorReason]]) {
-        
-        for key in validationResults.keys.sorted(by: { $0.rawValue < $1.rawValue }) {
-            for reason in validationResults[key] ?? [] {
-                let message = updatingValidationMessageFor(key: key, reason: reason)
-                messagePresenterManager.show(validationMessage: message)
-            }
-        }
+    override func didTapSource() {
+        slideUp(viewController: factory.incomeSourceSelectViewController(delegate: self))
     }
     
-    private func updatingValidationMessageFor(key: IncomeUpdatingForm.CodingKeys, reason: ValidationErrorReason) -> String {
-        switch (key, reason) {
-        case (.amountCents, .required):
-            return "Укажите сумму дохода"
-        case (.amountCents, .invalid):
-            return "Некорректная сумма дохода"
-        case (.convertedAmountCents, .required):
-            return "Укажите сумму дохода"
-        case (.convertedAmountCents, .invalid):
-            return "Некорректная сумма дохода"
-        case (.gotAt, .required):
-            return "Укажите дату дохода"
-        case (.gotAt, .invalid):
-            return "Некорректная дата дохода"
-        case (.incomeSourceId, .required):
-            return "Укажите источник дохода"
-        case (.expenseSourceId, .required):
-            return "Укажите Кошелек"
-        case (_, _):
-            return "Ошибка ввода"
-        }
+    override func didTapDestination() {
+        slideUp(viewController: factory.expenseSourceSelectViewController(delegate: self,
+                                                                          skipExpenseSourceId: viewModel.startable?.id,
+                                                                          selectionType: .completable))        
     }
 }

@@ -80,13 +80,11 @@ extension ApplicationAssembly {
         // IncomeSourceEditViewController
         container.registerForSkrudzhStoryboard(IncomeSourceEditViewController.self) { (r, c) in
             c.viewModel = r.resolve(IncomeSourceEditViewModel.self)
-            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         
         // ExpenseSourceEditViewController
         container.registerForSkrudzhStoryboard(ExpenseSourceEditViewController.self) { (r, c) in
             c.viewModel = r.resolve(ExpenseSourceEditViewModel.self)
-            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         
         // IconsViewController
@@ -98,7 +96,6 @@ extension ApplicationAssembly {
         // ExpenseCategoryEditViewController
         container.registerForSkrudzhStoryboard(ExpenseCategoryEditViewController.self) { (r, c) in
             c.viewModel = r.resolve(ExpenseCategoryEditViewModel.self)
-            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         
         // SettingsViewController
@@ -116,22 +113,16 @@ extension ApplicationAssembly {
         // IncomeEditViewController
         container.registerForSkrudzhStoryboard(IncomeEditViewController.self) { (r, c) in
             c.incomeEditViewModel = r.resolve(IncomeEditViewModel.self)
-            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
-            c.router = r.resolve(ApplicationRouterProtocol.self)
         }
         
         // ExpenseEditViewController
         container.registerForSkrudzhStoryboard(ExpenseEditViewController.self) { (r, c) in
             c.expenseEditViewModel = r.resolve(ExpenseEditViewModel.self)
-            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
-            c.router = r.resolve(ApplicationRouterProtocol.self)
         }
         
         // FundsMoveEditViewController
         container.registerForSkrudzhStoryboard(FundsMoveEditViewController.self) { (r, c) in
             c.fundsMoveEditViewModel = r.resolve(FundsMoveEditViewModel.self)
-            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
-            c.router = r.resolve(ApplicationRouterProtocol.self)
         }
         
         // SlideUpContainerViewController

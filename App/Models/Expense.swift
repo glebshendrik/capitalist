@@ -41,15 +41,15 @@ struct Expense : Decodable {
     
 }
 
-struct ExpenseCreationForm : Encodable {
-    let userId: Int
-    let expenseSourceId: Int
-    let expenseCategoryId: Int
-    let amountCents: Int
-    let amountCurrency: String
-    let convertedAmountCents: Int
-    let convertedAmountCurrency: String
-    let gotAt: Date
+struct ExpenseCreationForm : Encodable, Validatable {
+    let userId: Int?
+    let expenseSourceId: Int?
+    let expenseCategoryId: Int?
+    let amountCents: Int?
+    let amountCurrency: String?
+    let convertedAmountCents: Int?
+    let convertedAmountCurrency: String?
+    let gotAt: Date?
     let comment: String?
     let includedInBalance: Bool
     
@@ -65,17 +65,55 @@ struct ExpenseCreationForm : Encodable {
         case comment
         case includedInBalance = "included_in_balance"
     }
+    
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if !Validator.isValid(present: userId) {
+            errors["user_id"] = "Ошибка сохранения"
+        }
+        
+        if !Validator.isValid(present: expenseSourceId) {
+            errors["expense_source_id"] = "Укажите кошелек"
+        }
+        
+        if !Validator.isValid(present: expenseCategoryId) {
+            errors["expense_category_id"] = "Укажите категорию трат"
+        }
+        
+        if !Validator.isValid(present: amountCurrency) {
+            errors["amount_currency"] = "Укажите валюту"
+        }
+        
+        if !Validator.isValid(present: convertedAmountCurrency) {
+            errors["converted_amount_currency"] = "Укажите валюту конвертации"
+        }
+        
+        if !Validator.isValid(positiveMoney: amountCents) {
+            errors["amount_cents"] = "Укажите сумму списания"
+        }
+        
+        if !Validator.isValid(positiveMoney: convertedAmountCents) {
+            errors["converted_amount_cents"] = "Укажите сумму зачисления"
+        }
+        
+        if !Validator.isValid(pastDate: gotAt) {
+            errors["got_at"] = "Укажите дату транзакции"
+        }
+        
+        return errors
+    }
 }
 
-struct ExpenseUpdatingForm : Encodable {
-    let id: Int
-    let expenseSourceId: Int
-    let expenseCategoryId: Int
-    let amountCents: Int
-    let amountCurrency: String
-    let convertedAmountCents: Int
-    let convertedAmountCurrency: String
-    let gotAt: Date
+struct ExpenseUpdatingForm : Encodable, Validatable {
+    let id: Int?
+    let expenseSourceId: Int?
+    let expenseCategoryId: Int?
+    let amountCents: Int?
+    let amountCurrency: String?
+    let convertedAmountCents: Int?
+    let convertedAmountCurrency: String?
+    let gotAt: Date?
     let comment: String?
     let includedInBalance: Bool
     
@@ -90,5 +128,43 @@ struct ExpenseUpdatingForm : Encodable {
         case gotAt = "got_at"
         case comment
         case includedInBalance = "included_in_balance"
+    }
+    
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if !Validator.isValid(present: id) {
+            errors["id"] = "Ошибка сохранения"
+        }
+        
+        if !Validator.isValid(present: expenseSourceId) {
+            errors["expense_source_id"] = "Укажите кошелек"
+        }
+        
+        if !Validator.isValid(present: expenseCategoryId) {
+            errors["expense_category_id"] = "Укажите категорию трат"
+        }
+        
+        if !Validator.isValid(present: amountCurrency) {
+            errors["amount_currency"] = "Укажите валюту"
+        }
+        
+        if !Validator.isValid(present: convertedAmountCurrency) {
+            errors["converted_amount_currency"] = "Укажите валюту конвертации"
+        }
+        
+        if !Validator.isValid(positiveMoney: amountCents) {
+            errors["amount_cents"] = "Укажите сумму списания"
+        }
+        
+        if !Validator.isValid(positiveMoney: convertedAmountCents) {
+            errors["converted_amount_cents"] = "Укажите сумму зачисления"
+        }
+        
+        if !Validator.isValid(pastDate: gotAt) {
+            errors["got_at"] = "Укажите дату транзакции"
+        }
+        
+        return errors
     }
 }

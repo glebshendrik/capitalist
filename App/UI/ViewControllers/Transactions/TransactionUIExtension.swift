@@ -9,10 +9,6 @@
 import UIKit
 
 extension TransactionEditViewController {
-    func updateTitleUI() {
-        navigationItem.title = viewModel.title
-    }
-    
     func updateToolbarUI() {
         UIView.transition(with: view, duration: 0.1, options: .transitionCrossDissolve, animations: {
             self.tableController.calendarButton.setTitle(self.viewModel.calendarTitle, for: .normal)
@@ -50,8 +46,10 @@ extension TransactionEditViewController {
     
     func updateExchangeAmountsUI() {
         tableController.exchangeField.amount = viewModel.amount
+        tableController.exchangeField.amountPlaceholder = viewModel.amountPlaceholder
         tableController.exchangeField.currency = viewModel.startableCurrency
         tableController.exchangeField.convertedAmount = viewModel.convertedAmount
+        tableController.exchangeField.convertedAmountPlaceholder = viewModel.convertedAmountPlaceholder
         tableController.exchangeField.convertedCurrency = viewModel.completableCurrency
         tableController.set(cell: tableController.exchangeCell, hidden: !viewModel.needCurrencyExchange, animated: false, reload: true)
     }

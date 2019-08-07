@@ -11,11 +11,11 @@ import PromiseKit
 import SwiftDate
 
 class TransactionEditViewController : FormNavBarButtonsEditViewController {
-    
     var viewModel: TransactionEditViewModel! { return nil }
     var tableController: TransactionEditTableController!
     
     override var shouldLoadData: Bool { return true }
+    override var formTitle: String { return viewModel.title }
     
     override func setup(tableController: FormFieldsTableViewController) {
         self.tableController = tableController as? TransactionEditTableController
@@ -28,13 +28,12 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     
     override func updateUI() {
         super.updateUI()
-        updateTitleUI()
+        updateToolbarUI()
+        updateDebtUI()
         updateStartableUI()
         updateCompletableUI()
         updateAmountUI()
         updateExchangeAmountsUI()
-        updateToolbarUI()
-        updateDebtUI()
         updateInBalanceUI()
     }
     

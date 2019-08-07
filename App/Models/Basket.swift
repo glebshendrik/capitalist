@@ -12,6 +12,17 @@ enum BasketType : String, Codable {
     case joy = "joy"
     case risk = "risk"
     case safe = "safe"
+    
+    var iconCategory: IconCategory {
+        switch self {
+        case .joy:
+            return .expenseCategoryJoy
+        case .risk:
+            return .expenseCategoryRisk
+        case .safe:
+            return .expenseCategorySafe
+        }
+    }
 }
 
 struct Basket : Decodable {

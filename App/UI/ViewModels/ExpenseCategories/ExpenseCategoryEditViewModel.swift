@@ -42,18 +42,7 @@ class ExpenseCategoryEditViewModel {
     // Computed
     
     var defaultIconName: String {
-        return iconCategory.defaultIconName
-    }
-    
-    var iconCategory: IconCategory {
-        switch basketType {
-        case .joy:
-            return .expenseCategoryJoy
-        case .risk:
-            return .expenseCategoryRisk
-        case .safe:
-            return .expenseCategorySafe
-        }
+        return basketType.iconCategory.defaultIconName
     }
     
     var selectedCurrencyName: String? {
@@ -166,6 +155,8 @@ class ExpenseCategoryEditViewModel {
         }
     }
 }
+
+
 
 // Creation
 extension ExpenseCategoryEditViewModel {

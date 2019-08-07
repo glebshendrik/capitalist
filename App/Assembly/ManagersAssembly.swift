@@ -51,6 +51,8 @@ class ManagersAssembly: Assembly {
         container.autoregister(ExportManagerProtocol.self, initializer: ExportManager.init).inObjectScope(.container)
         
         container.autoregister(SaltEdgeManagerProtocol.self, initializer: SaltEdgeManager.init).inObjectScope(.container)
+        
+        container.autoregister(UIFactoryProtocol.self, initializer: UIFactory.init).inObjectScope(.container)
     }
     
 }

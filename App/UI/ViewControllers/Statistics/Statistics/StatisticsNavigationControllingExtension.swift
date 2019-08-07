@@ -106,7 +106,7 @@ extension StatisticsViewController : StatisticsEditTableViewCellDelegate {
     
     func showEditScreen(incomeSource: IncomeSource?) {
         if  let incomeSourceEditNavigationController = router.viewController(.IncomeSourceEditNavigationController) as? UINavigationController,
-            let incomeSourceEditViewController = incomeSourceEditNavigationController.topViewController as? IncomeSourceEditInputProtocol {
+            let incomeSourceEditViewController = incomeSourceEditNavigationController.topViewController as? IncomeSourceEditViewController {
             
             incomeSourceEditViewController.set(delegate: self)
             
@@ -134,7 +134,7 @@ extension StatisticsViewController : StatisticsEditTableViewCellDelegate {
     
     func showEditScreen(expenseCategory: ExpenseCategory?, basketType: BasketType) {
         if  let expenseCategoryEditNavigationController = router.viewController(.ExpenseCategoryEditNavigationController) as? UINavigationController,
-            let expenseCategoryEditViewController = expenseCategoryEditNavigationController.topViewController as? ExpenseCategoryEditInputProtocol {
+            let expenseCategoryEditViewController = expenseCategoryEditNavigationController.topViewController as? ExpenseCategoryEditViewController {
             
             expenseCategoryEditViewController.set(delegate: self)
             expenseCategoryEditViewController.set(basketType: basketType)
@@ -182,7 +182,7 @@ extension StatisticsViewController {
     
     private func showIncomeEditScreen(incomeId: Int) {
         if  let incomeEditNavigationController = router.viewController(.IncomeEditNavigationController) as? UINavigationController,
-            let incomeEditViewController = incomeEditNavigationController.topViewController as? IncomeEditInputProtocol {
+            let incomeEditViewController = incomeEditNavigationController.topViewController as? IncomeEditViewController {
             
             incomeEditViewController.set(delegate: self)
             
@@ -194,7 +194,7 @@ extension StatisticsViewController {
     
     private func showFundsMoveEditScreen(fundsMoveId: Int) {
         if  let fundsMoveEditNavigationController = router.viewController(.FundsMoveEditNavigationController) as? UINavigationController,
-            let fundsMoveEditViewController = fundsMoveEditNavigationController.topViewController as? FundsMoveEditInputProtocol {
+            let fundsMoveEditViewController = fundsMoveEditNavigationController.topViewController as? FundsMoveEditViewController {
             
             fundsMoveEditViewController.set(delegate: self)
             
@@ -206,7 +206,7 @@ extension StatisticsViewController {
     
     private func showExpenseEditScreen(expenseId: Int) {
         if  let expenseEditNavigationController = router.viewController(.ExpenseEditNavigationController) as? UINavigationController,
-            let expenseEditViewController = expenseEditNavigationController.topViewController as? ExpenseEditInputProtocol {
+            let expenseEditViewController = expenseEditNavigationController.topViewController as? ExpenseEditViewController {
             
             expenseEditViewController.set(delegate: self)
             

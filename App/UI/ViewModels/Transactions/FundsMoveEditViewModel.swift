@@ -10,25 +10,15 @@ import Foundation
 import PromiseKit
 
 enum FundsMoveCreationError : Error {
-    case validation(validationResults: [FundsMoveCreationForm.CodingKeys : [ValidationErrorReason]])
-    case currentSessionDoesNotExist
-    case currencyIsNotSpecified
-    case expenseSourceFromIsNotSpecified
-    case expenseSourceToIsNotSpecified
     case debtDestinationIsNotEqualToReturnSource
     case loanSourceIsNotEqualToReturnDestination
 }
 
 enum FundsMoveUpdatingError : Error {
-    case validation(validationResults: [FundsMoveUpdatingForm.CodingKeys : [ValidationErrorReason]])
     case updatingFundsMoveIsNotSpecified
-    case currencyIsNotSpecified
-    case expenseSourceFromIsNotSpecified
-    case expenseSourceToIsNotSpecified
     case debtDestinationIsNotEqualToReturnSource
     case loanSourceIsNotEqualToReturnDestination
 }
-
 
 class FundsMoveEditViewModel : TransactionEditViewModel {
     private let fundsMovesCoordinator: FundsMovesCoordinatorProtocol
@@ -49,19 +39,9 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     var whom: String? = nil
     var borrowedTill: Date? = nil
     
-    var whomButtonTitle: String {
-        if let whom = whom {
-            return whom
-        }        
-        return whomPlaceholder
-    }
+    var whomButtonTitle: String { return whom ?? whomPlaceholder }
     
-    var whomPlaceholder: String {
-        if isLoan {
-            return "У кого"
-        }
-        return "Кому"
-    }
+    var whomPlaceholder: String { return isLoan ? "У кого" : "Кому" }
     
     var borrowedTillButtonTitle: String? {
         if let borrowedTill = borrowedTill {
@@ -70,9 +50,7 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         return "Дата возврата"
     }
     
-    var isDebtOrLoan: Bool {
-        return isDebt || isLoan
-    }
+    var isDebtOrLoan: Bool { return isDebt || isLoan }
     
     var isDebt: Bool {
         guard !isReturn, let expenseSourceToCompletable = expenseSourceToCompletable else { return false }
@@ -84,9 +62,7 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         return expenseSourceFromStartable.isDebt
     }
     
-    var isReturn: Bool {
-        return debtTransaction != nil
-    }
+    var isReturn: Bool { return debtTransaction != nil }
         
     var isReturnOptionHidden: Bool {
         guard   let fundsMove = fundsMove,
@@ -106,7 +82,7 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         return nil
     }
     
-    override var title: String? {
+    override var title: String {
         switch (isNew, isDebt, isLoan, isReturn) {
         case   (true,  true,   false,  false):  return "Новый долг"
         case   (true,  false,  true,   false):  return "Новый займ"
@@ -116,67 +92,23 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         case   (false, false,  true,   false):  return "Изменить займ"
         case   (false, false,  false,  false):  return "Изменить перевод"
         case   (false, false,  false,  true):   return "Изменить возврат"
-        default: return nil
+        default: return "Новый перевод"
         }
     }
     
-    override var removeTitle: String? {
-        return isNew ? nil : "Удалить перевод"
-    }
+    override var removeTitle: String? { return isNew ? nil : "Удалить перевод" }
     
-    override var startableTitle: String? {
-        return "Кошелек снятия"
-    }
+    override var startableTitle: String? { return "Кошелек снятия" }
     
-    override var completableTitle: String? {
-        return "Кошелек пополнения"
-    }
+    override var completableTitle: String? { return "Кошелек пополнения" }
     
-    override var startableAmountTitle: String? {
-        return "Сумма списания"
-    }
+    override var startableAmountTitle: String? { return "Сумма списания" }
     
-    override var completableAmountTitle: String? {
-        return "Сумма пополнения"
-    }
+    override var completableAmountTitle: String? { return "Сумма пополнения" }
     
-    override var amount: String? {
-        guard let currency = startableCurrency else { return nil }
-        if let fundsMoveAmount = fundsMove?.amountCents.moneyDecimalString(with: currency) {
-            return fundsMoveAmount
-        }
-        if let debtTransaction = debtTransaction {
-            if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id == startable?.id {
-                return debtTransaction.debtAmountLeft
-            }
-            if !needCurrencyExchange && debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable?.id {
-                return debtTransaction.loanAmountLeft
-            }
-        }
-        
-        return nil
-    }
+    override var startableIconDefaultImageName: String { return "expense-source-icon" }
     
-    override var convertedAmount: String? {
-        guard let convertedCurrency = completableCurrency else { return nil }
-        if let fundsMoveAmount = fundsMove?.convertedAmountCents.moneyDecimalString(with: convertedCurrency) {
-            return fundsMoveAmount
-        }
-        if let debtTransaction = debtTransaction {
-            if debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable?.id {
-                return debtTransaction.loanAmountLeft
-            }
-        }
-        return nil
-    }
-    
-    override var startableIconDefaultImageName: String {
-        return "expense-source-icon"
-    }
-    
-    override var completableIconDefaultImageName: String {
-        return "expense-source-icon"
-    }
+    override var completableIconDefaultImageName: String { return "expense-source-icon" }
     
     init(fundsMovesCoordinator: FundsMovesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
@@ -202,6 +134,30 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         }
         self.startable = ExpenseSourceViewModel(expenseSource: fundsMove.expenseSourceFrom)
         self.completable = ExpenseSourceViewModel(expenseSource: fundsMove.expenseSourceTo)
+        
+        func amountDebt() -> String? {
+            if let debtTransaction = debtTransaction {
+                if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id == startable?.id {
+                    return debtTransaction.debtAmountLeft
+                }
+                if !needCurrencyExchange && debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable?.id {
+                    return debtTransaction.loanAmountLeft
+                }
+            }
+            return nil
+        }
+        
+        func convertedAmountDebt() -> String? {
+            if let debtTransaction = debtTransaction {
+                if debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable?.id {
+                    return debtTransaction.loanAmountLeft
+                }
+            }
+            return nil
+        }
+        
+        amount = fundsMove.amountCents.moneyDecimalString(with: startableCurrency) ?? amountDebt()
+        convertedAmount = fundsMove.convertedAmountCents.moneyDecimalString(with: completableCurrency) ?? convertedAmountDebt()
     }
     
     func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
@@ -223,95 +179,14 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
                 }.asVoid()
     }
     
-    func isFormValid(amount: String?,
-                     convertedAmount: String?,
-                     comment: String?,
-                     gotAt: Date?) -> Bool {
-        
-        guard let currency = startableCurrency,
-            let convertedCurrency = completableCurrency else { return false }
-        
-        let amountCents = amount?.intMoney(with: currency)
-        let convertedAmountCents = convertedAmount?.intMoney(with: convertedCurrency)
-        
-        return isNew
-            ? isCreationFormValid(amountCents: amountCents, convertedAmountCents: convertedAmountCents, comment: comment, gotAt: gotAt)
-            : isUpdatingFormValid(amountCents: amountCents, convertedAmountCents: convertedAmountCents, comment: comment, gotAt: gotAt)
-    }
-    
-    func saveFundsMove(amount: String?,
-                     convertedAmount: String?,
-                     comment: String?,
-                     gotAt: Date?) -> Promise<Void> {
-        
-        guard   let currency = startableCurrency,
-            let convertedCurrency = completableCurrency else {
-                
-                return Promise(error: FundsMoveCreationError.currencyIsNotSpecified)
-        }
-        
-        let amountCents = amount?.intMoney(with: currency)
-        let convertedAmountCents = convertedAmount?.intMoney(with: convertedCurrency)
-        
-        return isNew
-            ? createFundsMove(amountCents: amountCents, convertedAmountCents: convertedAmountCents, comment: comment, gotAt: gotAt)
-            : updateFundsMove(amountCents: amountCents, convertedAmountCents: convertedAmountCents, comment: comment, gotAt: gotAt)
-    }
-    
     func removeFundsMove() -> Promise<Void> {
         guard let fundsMoveId = fundsMove?.id else {
             return Promise(error: FundsMoveUpdatingError.updatingFundsMoveIsNotSpecified)
         }
         return fundsMovesCoordinator.destroy(by: fundsMoveId)
     }
-}
-
-// Creation
-extension FundsMoveEditViewModel {
-    private func isCreationFormValid(amountCents: Int?,
-                                     convertedAmountCents: Int?,
-                                     comment: String?,
-                                     gotAt: Date?) -> Bool {
-        return validateCreation(amountCents: amountCents, convertedAmountCents: convertedAmountCents, comment: comment, gotAt: gotAt) == nil
-    }
     
-    private func createFundsMove(amountCents: Int?,
-                               convertedAmountCents: Int?,
-                               comment: String?,
-                               gotAt: Date?) -> Promise<Void> {
-        return  firstly {
-            validateCreationForm(amountCents: amountCents, convertedAmountCents: convertedAmountCents, comment: comment, gotAt: gotAt)
-            }.then { fundsMoveCreationForm -> Promise<FundsMove> in
-                self.fundsMovesCoordinator.create(with: fundsMoveCreationForm)
-            }.asVoid()
-    }
-    
-    private func validateCreationForm(amountCents: Int?,
-                                      convertedAmountCents: Int?,
-                                      comment: String?,
-                                      gotAt: Date?) -> Promise<FundsMoveCreationForm> {
-        
-        if let failureResultsHash = validateCreation(amountCents: amountCents, convertedAmountCents: convertedAmountCents, comment: comment, gotAt: gotAt) {
-            return Promise(error: FundsMoveCreationError.validation(validationResults: failureResultsHash))
-        }
-        
-        guard let currentUserId = accountCoordinator.currentSession?.userId else {
-            return Promise(error: FundsMoveCreationError.currentSessionDoesNotExist)
-        }
-        
-        guard   let currencyCode = startableCurrency?.code,
-            let convertedCurrencyCode = completableCurrency?.code else {
-                return Promise(error: FundsMoveCreationError.currencyIsNotSpecified)
-        }
-        
-        guard let expenseSourceFromId = expenseSourceFromStartable?.id else {
-            return Promise(error: FundsMoveCreationError.expenseSourceFromIsNotSpecified)
-        }
-        
-        guard let expenseSourceToId = expenseSourceToCompletable?.id else {
-            return Promise(error: FundsMoveCreationError.expenseSourceToIsNotSpecified)
-        }
-        
+    override func create() -> Promise<Void> {
         if let debtTransaction = debtTransaction {
             if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id != startable?.id {
                 return Promise(error: FundsMoveCreationError.debtDestinationIsNotEqualToReturnSource)
@@ -320,83 +195,14 @@ extension FundsMoveEditViewModel {
                 return Promise(error: FundsMoveCreationError.loanSourceIsNotEqualToReturnDestination)
             }
         }
-        
-        return .value(FundsMoveCreationForm(userId: currentUserId,
-                                          expenseSourceFromId: expenseSourceFromId,
-                                          expenseSourceToId: expenseSourceToId,
-                                          amountCents: amountCents!,
-                                          amountCurrency: currencyCode,
-                                          convertedAmountCents: convertedAmountCents!,
-                                          convertedAmountCurrency: convertedCurrencyCode,
-                                          gotAt: gotAt!,
-                                          comment: comment,
-                                          whom: whom,
-                                          borrowedTill: borrowedTill,
-                                          debtTransactionId: debtTransaction?.id))
+        return fundsMovesCoordinator.create(with: creationForm()).asVoid()
     }
     
-    private func validateCreation(amountCents: Int?,
-                                  convertedAmountCents: Int?,
-                                  comment: String?,
-                                  gotAt: Date?) -> [FundsMoveCreationForm.CodingKeys : [ValidationErrorReason]]? {
-        
-        let validationResults : [ValidationResultProtocol] =
-            [Validator.validate(pastDate: gotAt, key: FundsMoveCreationForm.CodingKeys.gotAt),
-             Validator.validate(positiveMoney: amountCents, key: FundsMoveCreationForm.CodingKeys.amountCents),
-             Validator.validate(positiveMoney: convertedAmountCents, key: FundsMoveCreationForm.CodingKeys.convertedAmountCents)]
-        
-        let failureResultsHash : [FundsMoveCreationForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
-        
-        return failureResultsHash
-    }
-}
-
-// Updating
-extension FundsMoveEditViewModel {
-    private func isUpdatingFormValid(amountCents: Int?,
-                                     convertedAmountCents: Int?,
-                                     comment: String?,
-                                     gotAt: Date?) -> Bool {
-        return validateUpdating(amountCents: amountCents, convertedAmountCents: convertedAmountCents, comment: comment, gotAt: gotAt) == nil
+    override func isCreationFormValid() -> Bool {
+        return creationForm().validate() == nil
     }
     
-    private func updateFundsMove(amountCents: Int?,
-                               convertedAmountCents: Int?,
-                               comment: String?,
-                               gotAt: Date?) -> Promise<Void> {
-        return  firstly {
-            validateUpdatingForm(amountCents: amountCents, convertedAmountCents: convertedAmountCents, comment: comment, gotAt: gotAt)
-            }.then { fundsMoveUpdatingForm -> Promise<Void> in
-                self.fundsMovesCoordinator.update(with: fundsMoveUpdatingForm)
-        }
-    }
-    
-    private func validateUpdatingForm(amountCents: Int?,
-                                      convertedAmountCents: Int?,
-                                      comment: String?,
-                                      gotAt: Date?) -> Promise<FundsMoveUpdatingForm> {
-        
-        if let failureResultsHash = validateUpdating(amountCents: amountCents, convertedAmountCents: convertedAmountCents, comment: comment, gotAt: gotAt) {
-            return Promise(error: FundsMoveUpdatingError.validation(validationResults: failureResultsHash))
-        }
-        
-        guard let fundsMoveId = fundsMove?.id else {
-            return Promise(error: FundsMoveUpdatingError.updatingFundsMoveIsNotSpecified)
-        }
-        
-        guard   let currencyCode = startableCurrency?.code,
-            let convertedCurrencyCode = completableCurrency?.code else {
-                return Promise(error: FundsMoveUpdatingError.currencyIsNotSpecified)
-        }
-        
-        guard let expenseSourceFromId = expenseSourceFromStartable?.id else {
-            return Promise(error: FundsMoveUpdatingError.expenseSourceFromIsNotSpecified)
-        }
-        
-        guard let expenseSourceToId = expenseSourceToCompletable?.id else {
-            return Promise(error: FundsMoveUpdatingError.expenseSourceToIsNotSpecified)
-        }
-        
+    override func update() -> Promise<Void> {
         if let debtTransaction = debtTransaction {
             if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id != startable?.id {
                 return Promise(error: FundsMoveUpdatingError.debtDestinationIsNotEqualToReturnSource)
@@ -405,32 +211,45 @@ extension FundsMoveEditViewModel {
                 return Promise(error: FundsMoveUpdatingError.loanSourceIsNotEqualToReturnDestination)
             }
         }
-        
-        return .value(FundsMoveUpdatingForm(id: fundsMoveId,
-                                          expenseSourceFromId: expenseSourceFromId,
-                                          expenseSourceToId: expenseSourceToId,
-                                          amountCents: amountCents!,
-                                          amountCurrency: currencyCode,
-                                          convertedAmountCents: convertedAmountCents!,
-                                          convertedAmountCurrency: convertedCurrencyCode,
-                                          gotAt: gotAt!,
-                                          comment: comment,
-                                          whom: whom,
-                                          borrowedTill: borrowedTill))
+        return fundsMovesCoordinator.update(with: updatingForm())
     }
     
-    private func validateUpdating(amountCents: Int?,
-                                  convertedAmountCents: Int?,
-                                  comment: String?,
-                                  gotAt: Date?) -> [FundsMoveUpdatingForm.CodingKeys : [ValidationErrorReason]]? {
-        
-        let validationResults : [ValidationResultProtocol] =
-            [Validator.validate(pastDate: gotAt, key: FundsMoveUpdatingForm.CodingKeys.gotAt),
-             Validator.validate(positiveMoney: amountCents, key: FundsMoveUpdatingForm.CodingKeys.amountCents),
-             Validator.validate(positiveMoney: convertedAmountCents, key: FundsMoveUpdatingForm.CodingKeys.convertedAmountCents)]
-        
-        let failureResultsHash : [FundsMoveUpdatingForm.CodingKeys : [ValidationErrorReason]]? = Validator.failureResultsHash(from: validationResults)
-        
-        return failureResultsHash
+    override func isUpdatingFormValid() -> Bool {
+        return updatingForm().validate() == nil
+    }
+}
+
+// Creation
+extension FundsMoveEditViewModel {
+    private func creationForm() -> FundsMoveCreationForm {
+        return FundsMoveCreationForm(userId: accountCoordinator.currentSession?.userId,
+                                     expenseSourceFromId: expenseSourceFromStartable?.id,
+                                     expenseSourceToId: expenseSourceToCompletable?.id,
+                                     amountCents: (amount ?? amountConverted)?.intMoney(with: startableCurrency),
+                                     amountCurrency: startableCurrency?.code,
+                                     convertedAmountCents: (convertedAmount ?? convertedAmountConverted)?.intMoney(with: completableCurrency),
+                                     convertedAmountCurrency: completableCurrency?.code,
+                                     gotAt: gotAt,
+                                     comment: comment,
+                                     whom: whom,
+                                     borrowedTill: borrowedTill,
+                                     debtTransactionId: debtTransaction?.id)
+    }
+}
+
+// Updating
+extension FundsMoveEditViewModel {
+    private func updatingForm() -> FundsMoveUpdatingForm {
+        return FundsMoveUpdatingForm(id: fundsMove?.id,
+                                     expenseSourceFromId: expenseSourceFromStartable?.id,
+                                     expenseSourceToId: expenseSourceToCompletable?.id,
+                                     amountCents: (amount ?? amountConverted)?.intMoney(with: startableCurrency),
+                                     amountCurrency: startableCurrency?.code,
+                                     convertedAmountCents: (convertedAmount ?? convertedAmountConverted)?.intMoney(with: completableCurrency),
+                                     convertedAmountCurrency: completableCurrency?.code,
+                                     gotAt: gotAt,
+                                     comment: comment,
+                                     whom: whom,
+                                     borrowedTill: borrowedTill)
     }
 }

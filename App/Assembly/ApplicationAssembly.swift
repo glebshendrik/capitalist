@@ -58,6 +58,10 @@ extension Container {
                 routerDependant.router = r.resolve(ApplicationRouterProtocol.self)
             }
             
+            if var factoryDependant = c as? UIFactoryDependantProtocol {
+                factoryDependant.factory = r.resolve(UIFactoryProtocol.self)
+            }
+            
             initCompleted?(r, c)
         }
     }

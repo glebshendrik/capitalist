@@ -7,8 +7,45 @@
 //
 
 import UIKit
+import SwiftDate
 
 extension TransactionEditViewController : TransactionEditTableControllerDelegate {
+    func didAppear() {
+        if viewModel.needCurrencyExchange {
+            tableController.exchangeField.amountField.becomeFirstResponder()
+        } else {
+            tableController.amountField.textField.becomeFirstResponder()
+        }
+    }
+    
+    func didTapSaveAtYesterday() {
+        didSelect(date: Date() - 1.days)
+        save()
+    }
+    
+    func didTapCalendar() {
+        present(factory.datePickerViewController(delegate: self,
+                                                 date: viewModel.gotAt,
+                                                 minDate: nil,
+                                                 maxDate: Date(),
+                                                 mode: .dateAndTime), animated: true)
+    }
+    
+    func didChange(amount: String?) {
+        viewModel.amount = amount
+        updateAmountUI()
+        updateExchangeAmountsUI()
+    }
+    
+    func didChange(convertedAmount: String?) {
+        viewModel.convertedAmount = convertedAmount
+        updateExchangeAmountsUI()
+    }
+    
+    func didChange(comment: String?) {
+        viewModel.comment = comment
+    }
+    
     func didTapRemoveButton() {
         let alertController = UIAlertController(title: viewModel.removeQuestion,
                                                 message: nil,
@@ -29,91 +66,17 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         present(alertController, animated: true)
     }
     
-    func didChangeAmount() {
-        editTableController?.exchangeCompletableAmountTextField.placeholder = viewModel.convert(amount: editTableController?.exchangeStartableAmountTextField.text, isForwardConversion: true) ?? "Сумма"
-    }
+    @objc func didTapWhom() { }
     
-    func didChangeConvertedAmount() {
-        editTableController?.exchangeStartableAmountTextField.placeholder = viewModel.convert(amount: editTableController?.exchangeCompletableAmountTextField.text, isForwardConversion: false) ?? "Сумма"
-    }
+    @objc func didTapBorrowedTill() { }
     
+    @objc func didTapReturn() { }
     
+    @objc func didTapSource() { }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showEditTableView",
-            let viewController = segue.destination as? TransactionEditTableController {
-            editTableController = viewController
-            viewController.delegate = self
-        }
-    }
+    @objc func didTapDestination() { }
     
-    func validationNeeded() {
-        validateUI()
-    }
-    
-    func didSaveAtYesterday() {
-        didSelect(date: Date() - 1.days)
-        save()
-    }
-    
-    func needsFirstResponder() {
-        if viewModel.needCurrencyExchange {
-            editTableController?.exchangeStartableAmountTextField.becomeFirstResponder()
-        } else {
-            editTableController?.amountTextField.becomeFirstResponder()
-        }
-    }
-    
-    func didTapComment() {
-        let commentController = CommentViewController()
-        commentController.set(delegate: self)
-        commentController.set(comment: comment, placeholder: "Комментарий")
-        commentController.modalPresentationStyle = .custom
-        present(commentController, animated: true, completion: nil)
-    }
-    
-    func didTapCalendar() {
-        let datePickerController = DatePickerViewController()
-        datePickerController.set(delegate: self)
-        datePickerController.set(date: gotAt)
-        datePickerController.modalPresentationStyle = .custom
-        present(datePickerController, animated: true, completion: nil)
-    }
-    
-    @objc func didTapStartable() {
-        
-    }
-    
-    @objc func didTapCompletable() {
-        
-    }
-    
-    @objc func didTapWhom() {
-        
-    }
-    
-    @objc func didTapBorrowedTill() {
-        
-    }
-    
-    @objc func didChange(includedInBalance: Bool) {
-        
-    }
-    
-    @objc func didTapReturn() {
-        
-    }
-    
-    private func validateUI() {
-        //        saveButton.isEnabled = self.isFormValid(amount: amount, convertedAmount: convertedAmount, comment: comment, gotAt: gotAt)
-    }
-}
-
-extension TransactionEditViewController : CommentViewControllerDelegate {
-    func didSave(comment: String?) {
-        viewModel.comment = comment?.trimmed
-        updateToolbarUI()
-    }
+    @objc func didChange(includedInBalance: Bool) { }
 }
 
 extension TransactionEditViewController : DatePickerViewControllerDelegate {
@@ -124,13 +87,11 @@ extension TransactionEditViewController : DatePickerViewControllerDelegate {
 }
 
 extension TransactionEditViewController : IncomeSourceSelectViewControllerDelegate {
-    
     func didSelect(incomeSourceViewModel: IncomeSourceViewModel) {
         viewModel.startable = incomeSourceViewModel
         updateUI()
         loadExchangeRate()
     }
-    
 }
 
 extension TransactionEditViewController : ExpenseSourceSelectViewControllerDelegate {
@@ -148,11 +109,9 @@ extension TransactionEditViewController : ExpenseSourceSelectViewControllerDeleg
 }
 
 extension TransactionEditViewController : ExpenseCategorySelectViewControllerDelegate {
-    
     func didSelect(expenseCategoryViewModel: ExpenseCategoryViewModel) {
         viewModel.completable = expenseCategoryViewModel
         updateUI()
         loadExchangeRate()
     }
-    
 }

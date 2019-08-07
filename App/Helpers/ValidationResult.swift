@@ -191,7 +191,6 @@ class Validator {
         return failureResultsHash
     }
     
-    
     static func isValid(present: Any?) -> Bool {
         return present != nil
     }

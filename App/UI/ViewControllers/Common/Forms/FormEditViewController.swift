@@ -78,12 +78,16 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
             case APIRequestError.unprocessedEntity(let errors):
                 self.add(errors: errors)
             default:
-                self.messagePresenterManager.show(navBarMessage: self.saveErrorMessage,
-                                                  theme: .error)
+                self.handleSave(error)
             }
         }.finally {
             self.operationFinished()
         }
+    }
+    
+    func handleSave(_ error: Error) {
+        self.messagePresenterManager.show(navBarMessage: self.saveErrorMessage,
+                                          theme: .error)
     }
     
     func add(errors: [String : String]) {
@@ -123,8 +127,8 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
         }
     }
     
-    func close() {
-        navigationController?.dismiss(animated: true, completion: nil)
+    func close(completion: (() -> Void)? = nil) {
+        navigationController?.dismiss(animated: true, completion: completion)
     }
     
     func setupUI() {

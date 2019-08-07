@@ -10,7 +10,7 @@ import UIKit
 
 extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableControllerDelegate {
     func didTapIcon() {
-        push(factory.iconsViewController(delegate: self, iconCategory: viewModel.iconCategory))
+        push(factory.iconsViewController(delegate: self, iconCategory: viewModel.basketType.iconCategory))
     }
     
     func didChange(name: String?) {
