@@ -29,7 +29,7 @@ class IncomeSourceEditViewController : FormTransactionsDependableEditViewControl
     override var removeErrorMessage: String { return "Ошибка при удалении источника доходов" }
     override var removeQuestionMessage: String { return "Удалить источник доходов?" }
     
-    override func registerFormFields() -> [String : FormTextField] {
+    override func registerFormFields() -> [String : FormField] {
         return [IncomeSource.CodingKeys.name.rawValue : tableController.nameField,
                 IncomeSource.CodingKeys.currency.rawValue : tableController.currencyField]
     }

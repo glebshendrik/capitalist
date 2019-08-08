@@ -29,7 +29,7 @@ class ExpenseCategoryEditViewController : FormTransactionsDependableEditViewCont
     override var removeErrorMessage: String { return "Ошибка при удалении категории трат" }
     override var removeQuestionMessage: String { return "Удалить категорию трат?" }
     
-    override func registerFormFields() -> [String : FormTextField] {
+    override func registerFormFields() -> [String : FormField] {
         return [ExpenseCategory.CodingKeys.name.rawValue : tableController.nameField,
                 ExpenseCategory.CodingKeys.monthlyPlannedCurrency.rawValue : tableController.currencyField,
                 ExpenseCategory.CodingKeys.incomeSourceCurrency.rawValue : tableController.incomeSourceCurrencyField,

@@ -13,116 +13,81 @@ protocol ReminderEditViewControllerDelegate {
     func didSave(reminderViewModel: ReminderViewModel)
 }
 
-class ReminderEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
+class ReminderEditViewController : FormNavBarButtonsEditViewController {
     
     var viewModel: ReminderViewModel!
-    var messagePresenterManager: UIMessagePresenterManagerProtocol!
-    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
-    
     private var delegate: ReminderEditViewControllerDelegate?
-    private var editTableController: ReminderEditTableViewController?
+    private var tableController: ReminderEditTableViewController!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-        updateUI()
-    }
+    override var formTitle: String { return "Напоминание" }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)        
-        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
-        editTableController?.setRemoveButton(hidden: !viewModel.isReminderSet)
-    }
-    
-    @IBAction func didTapSaveButton(_ sender: Any) {
-        save()
-    }
-    
-    @IBAction func didTapCancelButton(_ sender: Any) {
-        close()
-    }
-    
-    private func save() {
-        view.endEditing(true)
-        viewModel.reminderMessage = editTableController?.reminderMessageTextField?.text 
-        viewModel.prepareForSaving()
-        delegate?.didSave(reminderViewModel: viewModel)
-        close()
-    }
-    
-    private func close() {
-        navigationController?.dismiss(animated: true, completion: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showEditTableView",
-            let viewController = segue.destination as? ReminderEditTableViewController {
-            editTableController = viewController
-            viewController.delegate = self
-        }
-    }
-}
-
-extension ReminderEditViewController {
     func set(reminderViewModel: ReminderViewModel, delegate: ReminderEditViewControllerDelegate?) {
         self.viewModel = reminderViewModel
         self.delegate = delegate
     }
     
-    private func updateUI() {
+    override func setup(tableController: FormFieldsTableViewController) {
+        self.tableController = tableController as? ReminderEditTableViewController
+        self.tableController.delegate = self
+    }
+    
+    override func save() {
+        view.endEditing(true)
+        viewModel.prepareForSaving()
+        delegate?.didSave(reminderViewModel: viewModel)
+        close()
+    }
+    
+    override func updateUI() {
         updateStartDateUI()
         updateRecurrenceRuleUI()
-        editTableController?.reminderMessageTextField?.text = viewModel.reminderMessage
-    }
-    
-    private func updateStartDateUI() {
-        editTableController?.reminderDateTextField?.text = viewModel.startDate
-    }
-    
-    private func updateRecurrenceRuleUI() {
-        editTableController?.recurrenceRuleTextField?.text = viewModel.recurrenceRuleText
+        updateMessageUI()
+        updateRemoveButtonUI()
     }
 }
 
 extension ReminderEditViewController {
-    private func setupUI() {
-        setupNavigationBar()
+    private func updateStartDateUI() {
+        tableController.reminderDateField.text = viewModel.startDate
     }
     
-    private func setupNavigationBar() {
-        let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
-                          NSAttributedString.Key.foregroundColor : UIColor.white]
-        navigationController?.navigationBar.titleTextAttributes = attributes
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationItem.title = "Напоминание"
+    private func updateRecurrenceRuleUI() {
+        tableController.recurrenceRuleField.text = viewModel.recurrenceRuleText
+    }
+    
+    private func updateMessageUI() {
+        tableController.reminderMessageField.text = viewModel.reminderMessage
+    }
+    
+    func updateRemoveButtonUI() {
+        tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden)
     }
 }
 
 extension ReminderEditViewController : ReminderEditTableViewControllerDelegate {
-    func didTapRemoveButton() {
-        viewModel.clear()
-        save()
+    func didChange(message: String?) {
+        viewModel.reminderMessage = message
+        updateMessageUI()
     }
     
     func didTapStartDate() {
-        let datePickerController = DatePickerViewController()
-        datePickerController.set(delegate: self)
-        datePickerController.set(date: viewModel.reminderStartDate, minDate: Date(), maxDate: nil, mode: .dateAndTime)        
-        datePickerController.modalPresentationStyle = .custom
-        present(datePickerController, animated: true, completion: nil)
+        present(factory.datePickerViewController(delegate: self,
+                                         date: viewModel.reminderStartDate,
+                                         minDate: Date(),
+                                         maxDate: nil,
+                                         mode: .dateAndTime))
     }
     
     func didTapRecurrence() {
-        let recurrencePicker = RecurrencePicker(recurrenceRule: viewModel.recurrenceRule)
-        recurrencePicker.language = .russian
-        recurrencePicker.calendar = Calendar.current
-        recurrencePicker.tintColor = UIColor(hexString: "6B93FB") ?? .black
-
-        recurrencePicker.occurrenceDate = viewModel.reminderStartDate ?? Date()
-        recurrencePicker.delegate = self
-
-        navigationController?.pushViewController(recurrencePicker, animated: true)
+        push(factory.recurrencePicker(delegate: self,
+                                      recurrenceRule: viewModel.recurrenceRule,
+                                      ocurrenceDate: viewModel.reminderStartDate,
+                                      language: .russian))
+    }
+    
+    func didTapRemoveButton() {
+        viewModel.clear()
+        save()
     }
 }
 

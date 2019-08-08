@@ -52,6 +52,10 @@ struct ReminderViewModel {
         return reminderStartDate != nil 
     }
     
+    var removeButtonHidden: Bool {
+        return isReminderSet
+    }
+    
     init() {
         
     }

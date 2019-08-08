@@ -29,7 +29,7 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
     override var removeErrorMessage: String { return "Ошибка при удалении кошелька" }
     override var removeQuestionMessage: String { return "Удалить кошелек?" }
     
-    override func registerFormFields() -> [String : FormTextField] {
+    override func registerFormFields() -> [String : FormField] {
         return [ExpenseSource.CodingKeys.name.rawValue : tableController.nameField,
                 ExpenseSource.CodingKeys.amountCurrency.rawValue : tableController.currencyField,
                 ExpenseSource.CodingKeys.amountCents.rawValue : tableController.amountField,

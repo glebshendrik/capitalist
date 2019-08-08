@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RecurrencePicker
 
 protocol UIFactoryDependantProtocol {
     var factory: UIFactoryProtocol! { get set }
@@ -52,5 +53,10 @@ protocol UIFactoryProtocol {
                                      startable: ExpenseSourceViewModel,
                                      completable: ExpenseSourceViewModel,
                                      debtTransaction: FundsMoveViewModel?) -> UINavigationController?
+    
+    func recurrencePicker(delegate: RecurrencePickerDelegate,
+                          recurrenceRule: RecurrenceRule?,
+                          ocurrenceDate: Date?,
+                          language: RecurrencePickerLanguage) -> RecurrencePicker?
     
 }

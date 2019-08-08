@@ -25,6 +25,13 @@ class FundsMoveEditViewController : TransactionEditViewController {
         return fundsMoveEditViewModel
     }
     
+    override func registerFormFields() -> [String : FormField] {
+        return [FundsMove.CodingKeys.expenseSourceFromId.rawValue : tableController.sourceField,
+                FundsMove.CodingKeys.expenseSourceToId.rawValue : tableController.destinationField,
+                FundsMove.CodingKeys.amountCents.rawValue: tableController.amountField,
+                FundsMove.CodingKeys.convertedAmountCents.rawValue: tableController.exchangeField]
+    }
+    
     func set(delegate: FundsMoveEditViewControllerDelegate?) {
         self.delegate = delegate
     }

@@ -19,12 +19,12 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     var factory: UIFactoryProtocol!
     var tableViewController: FormFieldsTableViewController!
     
-    var shouldLoadData: Bool { return true }
+    var shouldLoadData: Bool { return false }
     var formTitle: String { return "" }
     var saveErrorMessage: String { return "Ошибка сохранения" }
     var removeErrorMessage: String { return "Ошибка удаления" }
     
-    lazy var formFields: [String : FormTextField] = {
+    lazy var formFields: [String : FormField] = {
         return registerFormFields()
     }()
     
@@ -47,7 +47,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
         }
     }
     
-    func registerFormFields() -> [String : FormTextField] {
+    func registerFormFields() -> [String : FormField] {
         return [:]
     }
     

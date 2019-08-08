@@ -25,6 +25,13 @@ class ExpenseEditViewController : TransactionEditViewController {
         return expenseEditViewModel
     }
     
+    override func registerFormFields() -> [String : FormField] {
+        return [Expense.CodingKeys.expenseSourceId.rawValue : tableController.sourceField,
+                Expense.CodingKeys.expenseCategoryId.rawValue : tableController.destinationField,
+                Expense.CodingKeys.amountCents.rawValue: tableController.amountField,
+                Expense.CodingKeys.convertedAmountCents.rawValue: tableController.exchangeField]
+    }
+    
     func set(delegate: ExpenseEditViewControllerDelegate?) {
         self.delegate = delegate
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RecurrencePicker
 
 class UIFactory : UIFactoryProtocol {
     private let router: ApplicationRouterProtocol
@@ -126,5 +127,20 @@ class UIFactory : UIFactoryProtocol {
         fundsMoveEditViewController?.set(delegate: delegate)
         fundsMoveEditViewController?.set(startable: startable, completable: completable, debtTransaction: debtTransaction)
         return fundsMoveEditNavigationController
+    }
+    
+    func recurrencePicker(delegate: RecurrencePickerDelegate,
+                          recurrenceRule: RecurrenceRule?,
+                          ocurrenceDate: Date?,
+                          language: RecurrencePickerLanguage) -> RecurrencePicker? {
+        
+        let recurrencePicker = RecurrencePicker(recurrenceRule: recurrenceRule)
+        recurrencePicker.language = language
+        recurrencePicker.calendar = Calendar.current
+        recurrencePicker.tintColor = UIColor(hexString: "6B93FB") ?? .black
+        
+        recurrencePicker.occurrenceDate = ocurrenceDate ?? Date()
+        recurrencePicker.delegate = delegate
+        return recurrencePicker
     }
 }
