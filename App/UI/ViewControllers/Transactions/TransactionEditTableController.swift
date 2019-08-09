@@ -24,7 +24,7 @@ protocol TransactionEditTableControllerDelegate {
     func didTapRemoveButton()
 }
 
-class TransactionEditTableController : FormFieldsTableViewController {
+class TransactionEditTableController : FormFieldsTableViewController, UITextViewDelegate {
     
     // Fields
     @IBOutlet weak var sourceField: FormTapField!
@@ -54,20 +54,53 @@ class TransactionEditTableController : FormFieldsTableViewController {
     
     var delegate: TransactionEditTableControllerDelegate?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        amountField.didChange { [weak self] text in
-            self?.delegate?.didChange(amount: text)
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        delegate?.didAppear()
+    }
+    
+    override func setupUI() {
+        super.setupUI()
+        setupAmountField()
+        setupSourceField()
+        setupDestinationField()
+        setupInBalanceSwitchField()
+        setupExchangeField()
+        setupCommentView()
+    }
+    
+    private func setupSourceField() {
         sourceField.didTap { [weak self] in
             self?.delegate?.didTapSource()
         }
+    }
+    
+    private func setupDestinationField() {
         destinationField.didTap { [weak self] in
             self?.delegate?.didTapDestination()
         }
+    }
+    
+    private func setupInBalanceSwitchField() {
+        inBalanceSwitchField.placeholder = "Оставить на балансе"
+        inBalanceSwitchField.imageName = "included_in_balance_icon"
         inBalanceSwitchField.didSwitch { [weak self] includedInBalance in
             self?.delegate?.didChange(includedInBalance: includedInBalance)
         }
+    }
+    
+    private func setupAmountField() {
+        amountField.placeholder = "Сумма"
+        amountField.imageName = "amount-icon"
+        amountField.didChange { [weak self] text in
+            self?.delegate?.didChange(amount: text)
+        }
+    }
+    
+    private func setupExchangeField() {
+        exchangeField.amountPlaceholder = "Сумма"
+        exchangeField.convertedAmountPlaceholder = "Сумма"
+        exchangeField.imageName = "amount-icon"
         exchangeField.didChangeAmount { [weak self] text in
             self?.delegate?.didChange(amount: text)
         }
@@ -76,9 +109,8 @@ class TransactionEditTableController : FormFieldsTableViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        delegate?.didAppear()
+    private func setupCommentView() {
+        commentView.delegate = self
     }
     
     @IBAction func didTapYesterdayButton(_ sender: Any) {
@@ -103,5 +135,9 @@ class TransactionEditTableController : FormFieldsTableViewController {
     
     @IBAction func didTapRemoveButton(_ sender: UIButton) {
         delegate?.didTapRemoveButton()
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        delegate?.didChange(comment: textView.text?.trimmed)
     }
 }

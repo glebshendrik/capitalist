@@ -15,8 +15,7 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        loaderImageView?.showLoader()
+        setupUI()        
     }
     
     func showActivityIndicator() {
@@ -31,9 +30,11 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
         tableView.isUserInteractionEnabled = true
     }
     
-    private func setupUI() {
+    func setupUI() {
+        loaderImageView?.showLoader()
         insertAnimation = .top
         deleteAnimation = .top
+        tableView.allowsSelection = false
     }
     
     func updateTable(animated: Bool = true) {        

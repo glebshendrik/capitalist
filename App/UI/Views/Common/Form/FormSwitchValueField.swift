@@ -14,7 +14,7 @@ class FormSwitchValueField : FormTapField {
     
     lazy var switchView: UISwitch = { return UISwitch() }()
     
-    @IBInspectable var switchOnTintColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var switchOnTintColor: UIColor = UIColor.by(.blue6B93FB) {
         didSet { updateSwitch() }
     }
     
@@ -49,7 +49,7 @@ class FormSwitchValueField : FormTapField {
     func setupSwitchConstraints() {
         switchView.snp.makeConstraints { make in
             make.right.equalTo(-16)
-            make.centerY.equalTo(3)
+            make.centerY.equalToSuperview().offset(3)
         }
         switchView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         switchView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)

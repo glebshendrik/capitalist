@@ -24,7 +24,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func didTapCalendar() {
-        present(factory.datePickerViewController(delegate: self,
+        modal(factory.datePickerViewController(delegate: self,
                                                  date: viewModel.gotAt,
                                                  minDate: nil,
                                                  maxDate: Date(),

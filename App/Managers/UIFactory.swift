@@ -33,12 +33,12 @@ class UIFactory : UIFactoryProtocol {
     }
     
     func reminderEditViewController(delegate: ReminderEditViewControllerDelegate,
-                                    viewModel: ReminderViewModel) -> ReminderEditViewController? {
+                                    viewModel: ReminderViewModel) -> UINavigationController? {
         
         let reminderEditNavigationController = router.viewController(.ReminderEditNavigationController) as? UINavigationController
         let reminderEditViewController = reminderEditNavigationController?.topViewController as? ReminderEditViewController
         reminderEditViewController?.set(reminderViewModel: viewModel, delegate: delegate)
-        return reminderEditViewController
+        return reminderEditNavigationController
     }
     
     func providersViewController(delegate: ProvidersViewControllerDelegate) -> ProvidersViewController? {

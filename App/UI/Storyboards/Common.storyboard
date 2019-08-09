@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -377,7 +378,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8sh-0J-xUo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
@@ -390,85 +391,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="a4P-Ua-8fG" customClass="FloatingTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="72" y="10" width="271" height="49"/>
-                                                    <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                            <color key="value" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                                            <color key="value" red="0.26274509800000001" green="0.33333333329999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Дата"/>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Дата"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
-                                                            <real key="value" value="0.0"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <outlet property="backgroundView" destination="02E-7B-yPp" id="iWt-GE-Ieg"/>
-                                                        <outlet property="delegate" destination="Z80-N1-n3H" id="sub-No-8CS"/>
-                                                        <outlet property="iconContainer" destination="mrw-kv-l9r" id="KIk-8e-64N"/>
-                                                    </connections>
-                                                </textField>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrw-kv-l9r">
-                                                    <rect key="frame" x="16" y="22.5" width="36" height="36"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reminder-date-icon" translatesAutoresizingMaskIntoConstraints="NO" id="w0t-w1-wIC">
-                                                            <rect key="frame" x="8.5" y="9" width="19" height="18"/>
-                                                            <color key="tintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </imageView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstItem="w0t-w1-wIC" firstAttribute="centerX" secondItem="mrw-kv-l9r" secondAttribute="centerX" id="Ed2-Oh-oKv"/>
-                                                        <constraint firstItem="w0t-w1-wIC" firstAttribute="centerY" secondItem="mrw-kv-l9r" secondAttribute="centerY" id="f0e-sJ-8wc"/>
-                                                        <constraint firstAttribute="width" constant="36" id="q16-8m-Cjj"/>
-                                                        <constraint firstAttribute="height" constant="36" id="wNf-ge-Oyh"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="18"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fp-Wa-QCA">
-                                                    <rect key="frame" x="0.0" y="74" width="375" height="1"/>
-                                                    <color key="backgroundColor" red="0.5450980392" green="0.59607843140000005" blue="0.6588235294" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="p1J-Bo-cUv"/>
-                                                    </constraints>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKu-Pj-xIW" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="8fp-Wa-QCA" firstAttribute="leading" secondItem="02E-7B-yPp" secondAttribute="leading" id="3ev-83-4AU"/>
-                                                <constraint firstItem="a4P-Ua-8fG" firstAttribute="leading" secondItem="mrw-kv-l9r" secondAttribute="trailing" constant="20" id="6n5-kF-sU3"/>
-                                                <constraint firstItem="a4P-Ua-8fG" firstAttribute="top" secondItem="02E-7B-yPp" secondAttribute="top" constant="10" id="HkM-Eo-QJ8"/>
-                                                <constraint firstAttribute="trailing" secondItem="a4P-Ua-8fG" secondAttribute="trailing" constant="32" id="Kxy-sr-aiG"/>
-                                                <constraint firstAttribute="trailing" secondItem="8fp-Wa-QCA" secondAttribute="trailing" id="P0x-Ab-3dr"/>
-                                                <constraint firstAttribute="bottom" secondItem="a4P-Ua-8fG" secondAttribute="bottom" constant="16" id="auC-h6-F8U"/>
-                                                <constraint firstItem="mrw-kv-l9r" firstAttribute="centerY" secondItem="02E-7B-yPp" secondAttribute="centerY" constant="3" id="hf6-FK-ErP"/>
-                                                <constraint firstAttribute="bottom" secondItem="8fp-Wa-QCA" secondAttribute="bottom" id="qVh-pg-znd"/>
-                                                <constraint firstItem="mrw-kv-l9r" firstAttribute="leading" secondItem="02E-7B-yPp" secondAttribute="leading" constant="16" id="sdH-2o-acu"/>
+                                                <constraint firstAttribute="bottom" secondItem="hKu-Pj-xIW" secondAttribute="bottom" id="1Yj-xQ-AB0"/>
+                                                <constraint firstItem="hKu-Pj-xIW" firstAttribute="leading" secondItem="02E-7B-yPp" secondAttribute="leading" id="DCz-gX-NTs"/>
+                                                <constraint firstAttribute="trailing" secondItem="hKu-Pj-xIW" secondAttribute="trailing" id="csx-7o-TSE"/>
+                                                <constraint firstItem="hKu-Pj-xIW" firstAttribute="top" secondItem="02E-7B-yPp" secondAttribute="top" id="qUN-H2-5Kv"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Дата"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="reminder-date-icon"/>
+                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -479,90 +416,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Ztm-g7-Dcq" customClass="FloatingTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="72" y="10" width="271" height="48"/>
-                                                    <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                            <color key="value" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                                            <color key="value" red="0.26274509800000001" green="0.33333333329999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Повторяемость"/>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Повторяемость"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
-                                                            <real key="value" value="0.0"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <outlet property="backgroundView" destination="xgg-72-9Wf" id="I8F-zr-3Vm"/>
-                                                        <outlet property="delegate" destination="Z80-N1-n3H" id="x1t-kn-fyp"/>
-                                                        <outlet property="iconContainer" destination="6PG-Rg-f3Z" id="1OO-oa-Zp1"/>
-                                                    </connections>
-                                                </textField>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="little-right-arrow-icon" translatesAutoresizingMaskIntoConstraints="NO" id="0XS-GZ-RVP">
-                                                    <rect key="frame" x="348" y="37" width="4" height="7"/>
-                                                </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6PG-Rg-f3Z">
-                                                    <rect key="frame" x="16" y="22.5" width="36" height="36"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reminder-recurrence-icon" translatesAutoresizingMaskIntoConstraints="NO" id="L9x-tD-HHd">
-                                                            <rect key="frame" x="10" y="10" width="16" height="16"/>
-                                                            <color key="tintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </imageView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="0.8980392157" green="0.91372549020000005" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="36" id="8lc-j8-Wgl"/>
-                                                        <constraint firstAttribute="height" constant="36" id="JhX-JW-iS4"/>
-                                                        <constraint firstItem="L9x-tD-HHd" firstAttribute="centerY" secondItem="6PG-Rg-f3Z" secondAttribute="centerY" id="NmC-mc-Nia"/>
-                                                        <constraint firstItem="L9x-tD-HHd" firstAttribute="centerX" secondItem="6PG-Rg-f3Z" secondAttribute="centerX" id="cld-r9-1uC"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="18"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNs-YE-uub">
-                                                    <rect key="frame" x="0.0" y="74" width="375" height="1"/>
-                                                    <color key="backgroundColor" red="0.5450980392" green="0.59607843140000005" blue="0.6588235294" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="DHP-tL-XBp"/>
-                                                    </constraints>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BmW-jp-4sd" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="0XS-GZ-RVP" firstAttribute="centerY" secondItem="xgg-72-9Wf" secondAttribute="centerY" constant="3" id="6lg-rc-2Ws"/>
-                                                <constraint firstItem="0XS-GZ-RVP" firstAttribute="leading" secondItem="Ztm-g7-Dcq" secondAttribute="trailing" constant="5" id="A48-46-MY2"/>
-                                                <constraint firstItem="RNs-YE-uub" firstAttribute="top" secondItem="Ztm-g7-Dcq" secondAttribute="bottom" constant="16" id="BhZ-c7-mdr"/>
-                                                <constraint firstItem="Ztm-g7-Dcq" firstAttribute="leading" secondItem="6PG-Rg-f3Z" secondAttribute="trailing" constant="20" id="Ebw-P2-lL6"/>
-                                                <constraint firstAttribute="bottom" secondItem="RNs-YE-uub" secondAttribute="bottom" id="KLW-wa-Nu0"/>
-                                                <constraint firstAttribute="trailing" secondItem="RNs-YE-uub" secondAttribute="trailing" id="Nfn-R2-Ytw"/>
-                                                <constraint firstItem="6PG-Rg-f3Z" firstAttribute="centerY" secondItem="xgg-72-9Wf" secondAttribute="centerY" constant="3" id="cfu-4n-Fyl"/>
-                                                <constraint firstAttribute="trailing" secondItem="Ztm-g7-Dcq" secondAttribute="trailing" constant="32" id="q4H-D1-nEY"/>
-                                                <constraint firstItem="RNs-YE-uub" firstAttribute="leading" secondItem="xgg-72-9Wf" secondAttribute="leading" id="sDG-Kg-fA0"/>
-                                                <constraint firstItem="Ztm-g7-Dcq" firstAttribute="top" secondItem="xgg-72-9Wf" secondAttribute="top" constant="10" id="sjY-x3-0Ld"/>
-                                                <constraint firstItem="6PG-Rg-f3Z" firstAttribute="leading" secondItem="xgg-72-9Wf" secondAttribute="leading" constant="16" id="yz4-Pf-nTu"/>
+                                                <constraint firstAttribute="trailing" secondItem="BmW-jp-4sd" secondAttribute="trailing" id="DR6-NW-V0K"/>
+                                                <constraint firstAttribute="bottom" secondItem="BmW-jp-4sd" secondAttribute="bottom" id="JpK-sl-uXX"/>
+                                                <constraint firstItem="BmW-jp-4sd" firstAttribute="leading" secondItem="xgg-72-9Wf" secondAttribute="leading" id="X8O-EP-aPV"/>
+                                                <constraint firstItem="BmW-jp-4sd" firstAttribute="top" secondItem="xgg-72-9Wf" secondAttribute="top" id="pf6-MK-3Qw"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="little-right-arrow-icon"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Повторяемость"/>
+                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -573,85 +441,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Название" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="cXK-3H-14y" customClass="FloatingTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="72" y="10" width="271" height="49"/>
-                                                    <color key="textColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                            <color key="value" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                                            <color key="value" red="0.26274509800000001" green="0.33333333329999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Сообщение"/>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Сообщение"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
-                                                            <real key="value" value="0.0"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="didChangeReminderMessage:" destination="Z80-N1-n3H" eventType="editingChanged" id="bjL-3A-rYA"/>
-                                                        <outlet property="backgroundView" destination="y5R-US-JGz" id="GZW-6f-mxA"/>
-                                                        <outlet property="delegate" destination="Z80-N1-n3H" id="8eA-kp-9cp"/>
-                                                        <outlet property="iconContainer" destination="HZX-oR-AqL" id="BhO-7t-0EV"/>
-                                                    </connections>
-                                                </textField>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZX-oR-AqL">
-                                                    <rect key="frame" x="16" y="22.5" width="36" height="36"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="type-icon" translatesAutoresizingMaskIntoConstraints="NO" id="YJM-L7-8PM">
-                                                            <rect key="frame" x="11" y="11" width="14" height="14"/>
-                                                        </imageView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstItem="YJM-L7-8PM" firstAttribute="centerX" secondItem="HZX-oR-AqL" secondAttribute="centerX" id="9IL-aA-o68"/>
-                                                        <constraint firstItem="YJM-L7-8PM" firstAttribute="centerY" secondItem="HZX-oR-AqL" secondAttribute="centerY" id="S4E-6q-Q91"/>
-                                                        <constraint firstAttribute="height" constant="36" id="tMo-Uu-zIF"/>
-                                                        <constraint firstAttribute="width" constant="36" id="wHc-3d-OVo"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="18"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Squ-Dh-VN1">
-                                                    <rect key="frame" x="0.0" y="74" width="375" height="1"/>
-                                                    <color key="backgroundColor" red="0.5450980392" green="0.59607843140000005" blue="0.6588235294" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="NgF-qr-kC8"/>
-                                                    </constraints>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2J-om-HaN" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="cXK-3H-14y" secondAttribute="bottom" constant="16" id="0Jp-I4-KmA"/>
-                                                <constraint firstItem="cXK-3H-14y" firstAttribute="top" secondItem="y5R-US-JGz" secondAttribute="top" constant="10" id="4gn-no-eiK"/>
-                                                <constraint firstAttribute="bottom" secondItem="Squ-Dh-VN1" secondAttribute="bottom" id="63P-Fm-lnF"/>
-                                                <constraint firstAttribute="trailing" secondItem="cXK-3H-14y" secondAttribute="trailing" constant="32" id="6vI-pG-wpa"/>
-                                                <constraint firstAttribute="trailing" secondItem="Squ-Dh-VN1" secondAttribute="trailing" id="REu-o8-pDh"/>
-                                                <constraint firstItem="Squ-Dh-VN1" firstAttribute="leading" secondItem="y5R-US-JGz" secondAttribute="leading" id="bRN-pv-Pjg"/>
-                                                <constraint firstItem="cXK-3H-14y" firstAttribute="leading" secondItem="HZX-oR-AqL" secondAttribute="trailing" constant="20" id="hee-gc-tmj"/>
-                                                <constraint firstItem="HZX-oR-AqL" firstAttribute="centerY" secondItem="y5R-US-JGz" secondAttribute="centerY" constant="3" id="rCF-kV-wfT"/>
-                                                <constraint firstItem="HZX-oR-AqL" firstAttribute="leading" secondItem="y5R-US-JGz" secondAttribute="leading" constant="16" id="vZ0-L5-q2X"/>
+                                                <constraint firstAttribute="trailing" secondItem="t2J-om-HaN" secondAttribute="trailing" id="GBL-bK-v2F"/>
+                                                <constraint firstItem="t2J-om-HaN" firstAttribute="top" secondItem="y5R-US-JGz" secondAttribute="top" id="L3T-nD-FLS"/>
+                                                <constraint firstItem="t2J-om-HaN" firstAttribute="leading" secondItem="y5R-US-JGz" secondAttribute="leading" id="cMV-rh-Br2"/>
+                                                <constraint firstAttribute="bottom" secondItem="t2J-om-HaN" secondAttribute="bottom" id="waK-FX-3op"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Сообщение"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="type-icon"/>
+                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -665,10 +469,11 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4w-Af-gnL">
                                                     <rect key="frame" x="32" y="0.0" width="311" height="65"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                    <color key="tintColor" name="text FFFFFF"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                                     <state key="normal" title="Удалить напоминание" image="remove-icon">
-                                                        <color key="titleColor" red="0.52156862749999999" green="0.57254901960000004" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="titleColor" name="text FFFFFF"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="didTapRemoveButton:" destination="Z80-N1-n3H" eventType="touchUpInside" id="XEK-6C-q9f"/>
@@ -694,11 +499,9 @@
                         <barButtonItem key="rightBarButtonItem" title="Сохр." id="YUq-oZ-jSe"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="recurrenceRuleTextField" destination="Ztm-g7-Dcq" id="D2P-oN-3H0"/>
-                        <outlet property="reminderDateCell" destination="Ze9-no-8lX" id="usz-yi-RKa"/>
-                        <outlet property="reminderDateTextField" destination="a4P-Ua-8fG" id="E8I-fi-VPr"/>
-                        <outlet property="reminderMessageTextField" destination="cXK-3H-14y" id="M9T-Hw-p97"/>
-                        <outlet property="reminderRecurrenceCell" destination="OcS-dx-6Hc" id="Aas-7E-zj4"/>
+                        <outlet property="recurrenceRuleField" destination="BmW-jp-4sd" id="b86-H9-Ury"/>
+                        <outlet property="reminderDateField" destination="hKu-Pj-xIW" id="mPm-J5-1RI"/>
+                        <outlet property="reminderMessageField" destination="t2J-om-HaN" id="Ifc-5f-AgC"/>
                         <outlet property="removeCell" destination="bzt-SK-cPQ" id="FUc-Rk-ZJi"/>
                     </connections>
                 </tableViewController>
@@ -772,14 +575,16 @@
     </scenes>
     <resources>
         <image name="circle-close-icon" width="24" height="24"/>
-        <image name="little-right-arrow-icon" width="4" height="7"/>
         <image name="loader-1" width="55" height="31"/>
-        <image name="reminder-date-icon" width="19" height="18"/>
-        <image name="reminder-recurrence-icon" width="16" height="16"/>
         <image name="remove-icon" width="17" height="20"/>
         <image name="save-circle-icon" width="24" height="24"/>
         <image name="shadow-circle" width="52" height="52"/>
-        <image name="type-icon" width="14" height="14"/>
         <image name="wallet-icon" width="30" height="22"/>
+        <namedColor name="dark 2A314B">
+            <color red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="text FFFFFF">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

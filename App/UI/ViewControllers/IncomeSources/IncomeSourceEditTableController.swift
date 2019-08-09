@@ -24,16 +24,28 @@ class IncomeSourceEditTableController : FormFieldsTableViewController {
     
     var delegate: IncomeSourceEditTableControllerDelegate?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()        
+    override func setupUI() {
+        super.setupUI()
+        setupNameField()
+        setupCurrencyField()
+    }
+    
+    private func setupNameField() {
+        nameField.placeholder = "Название"
+        nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
         }
+    }
+    
+    private func setupCurrencyField() {
+        currencyField.placeholder = "Валюта"
+        currencyField.imageName = "currency-icon"
         currencyField.didTap { [weak self] in
             self?.delegate?.didTapCurrency()
         }
     }
-        
+    
     @IBAction func didTapSetReminder(_ sender: UIButton) {
         delegate?.didTapSetReminder()
     }

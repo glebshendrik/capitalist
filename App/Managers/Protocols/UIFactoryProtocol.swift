@@ -20,7 +20,7 @@ protocol UIFactoryProtocol {
     func currenciesViewController(delegate: CurrenciesViewControllerDelegate) -> CurrenciesViewController?
     
     func reminderEditViewController(delegate: ReminderEditViewControllerDelegate,
-                                    viewModel: ReminderViewModel) -> ReminderEditViewController?
+                                    viewModel: ReminderViewModel) -> UINavigationController?
     
     func providersViewController(delegate: ProvidersViewControllerDelegate) -> ProvidersViewController?
     

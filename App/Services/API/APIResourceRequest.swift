@@ -67,7 +67,8 @@ struct APIResourceRequest {
         encoder.dateEncodingStrategy = .iso8601withFractionalSeconds
         
         if  let validatable = encodable as? Validatable,
-            let errors = validatable.validate() {
+            let errors = validatable.validate(),
+            !errors.isEmpty {
             
             throw ValidationError.invalid(errors: errors)
         }

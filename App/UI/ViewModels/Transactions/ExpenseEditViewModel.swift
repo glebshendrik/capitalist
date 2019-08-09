@@ -34,11 +34,7 @@ class ExpenseEditViewModel : TransactionEditViewModel {
     override var startableTitle: String? { return "Кошелек" }
     
     override var completableTitle: String? { return "Категория расходов" }
-    
-    override var startableAmountTitle: String? { return "Сумма списания" }
-    
-    override var completableAmountTitle: String? { return "Сумма расхода" }
-    
+        
     override var startableIconDefaultImageName: String { return "expense-source-icon" }
     
     override var completableIconDefaultImageName: String {
@@ -123,7 +119,7 @@ extension ExpenseEditViewModel {
                                    amountCurrency: startableCurrency?.code,
                                    convertedAmountCents: (convertedAmount ?? convertedAmountConverted)?.intMoney(with: completableCurrency),
                                    convertedAmountCurrency: completableCurrency?.code,
-                                   gotAt: gotAt,
+                                   gotAt: gotAt ?? Date(),
                                    comment: comment,
                                    includedInBalance: includedInBalance)
     }

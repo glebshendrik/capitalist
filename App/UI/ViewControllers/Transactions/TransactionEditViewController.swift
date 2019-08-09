@@ -35,6 +35,9 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         updateAmountUI()
         updateExchangeAmountsUI()
         updateInBalanceUI()
+        updateCommentUI()
+        updateRemoveButtonUI()
+        tableController.reloadData(animated: false)
     }
     
     func loadExchangeRate() {

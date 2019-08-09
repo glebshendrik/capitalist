@@ -41,8 +41,8 @@ class TransactionEditViewModel {
     var removeQuestion: String? { return nil }
     var startableTitle: String? { return nil }
     var completableTitle: String? { return nil }
-    var startableAmountTitle: String? { return nil }
-    var completableAmountTitle: String? { return nil }
+    var startableAmountTitle: String? { return "Сумма" }
+    var completableAmountTitle: String? { return "Сумма" }
     var amountPlaceholder: String? {
         return amountConverted ?? startableAmountTitle
     }

@@ -55,21 +55,50 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     
     var delegate: ExpenseSourceEditTableControllerDelegate?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func setupUI() {
+        super.setupUI()
+        setupNameField()
+        setupCurrencyField()
+        setupAmountField()
+        setupCreditLimitField()
+        setupGoalAmountField()
+    }
+    
+    private func setupNameField() {
+        nameField.placeholder = "Название"
+        nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
         }
+    }
+    
+    private func setupCurrencyField() {
+        currencyField.placeholder = "Валюта"
+        currencyField.imageName = "currency-icon"
         currencyField.didTap { [weak self] in
             self?.delegate?.didTapCurrency()
         }
+    }
+    
+    private func setupAmountField() {
+        amountField.placeholder = "Баланс"
+        amountField.imageName = "amount-icon"
         amountField.didChange { [weak self] text in
             self?.delegate?.didChange(amount: text)
         }
+    }
+    
+    private func setupCreditLimitField() {
+        creditLimitField.placeholder = "Кредитный лимит"
+        creditLimitField.imageName = "credit-limit-icon"
         creditLimitField.didChange { [weak self] text in
             self?.delegate?.didChange(creditLimit: text)
         }
+    }
+    
+    private func setupGoalAmountField() {
+        goalAmountField.placeholder = "Хочу накопить"
+        goalAmountField.imageName = "planned-amount-icon"
         goalAmountField.didChange { [weak self] text in
             self?.delegate?.didChange(goalAmount: text)
         }

@@ -54,8 +54,8 @@ class FormTapField : FormTextField {
     
     override func setupSubValueLabelConstraints() {
         subValueLabel.snp.makeConstraints { make in
-            make.right.equalTo(arrow.snp.left).offset(5)
-            make.centerY.equalTo(3)
+            make.right.equalTo(arrow.snp.left).offset(-10)
+            make.centerY.equalToSuperview().offset(3)
         }
         subValueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         subValueLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
@@ -64,7 +64,9 @@ class FormTapField : FormTextField {
     func setupArrowConstraints() {
         arrow.snp.makeConstraints { make in            
             make.right.equalTo(-16)
-            make.centerY.equalTo(3)
+            make.centerY.equalToSuperview().offset(3)
+            make.width.equalTo(6)
+            make.height.equalTo(11)
         }
     }
     
@@ -77,7 +79,6 @@ class FormTapField : FormTextField {
     
     override func updateTextField() {
         super.updateTextField()
-        textField.isEnabled = false
         textField.isUserInteractionEnabled = false
     }
     

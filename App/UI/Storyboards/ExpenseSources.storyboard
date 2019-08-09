@@ -46,18 +46,18 @@
                         <barButtonItem key="leftBarButtonItem" image="circle-close-icon" id="SIi-yC-uCm">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="didTapCancelButton:" destination="8fD-85-d78" id="aIs-k9-ZRu"/>
+                                <action selector="didTapCancelButton:" destination="8fD-85-d78" id="rMs-Mv-tmv"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="save-circle-icon" id="RFM-aT-1oi">
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="didTapSaveButton:" destination="8fD-85-d78" id="YVb-J1-58H"/>
+                                <action selector="didTapSaveButton:" destination="8fD-85-d78" id="u3e-lp-smM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="saveButton" destination="RFM-aT-1oi" id="PM9-co-wbn"/>
+                        <outlet property="saveButton" destination="RFM-aT-1oi" id="obf-Aq-dGF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kip-bi-H9Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -123,6 +123,7 @@
                                                                 </view>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdL-Pv-PVV">
                                                                     <rect key="frame" x="0.0" y="0.0" width="125" height="57"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                     <connections>
                                                                         <action selector="didTapUsualTab:" destination="YzM-aR-OkL" eventType="touchUpInside" id="0JQ-sz-56O"/>
                                                                     </connections>
@@ -388,9 +389,21 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="I7q-L7-ySL">
                                         <rect key="frame" x="0.0" y="213" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I7q-L7-ySL" id="oig-5s-V1c" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I7q-L7-ySL" id="oig-5s-V1c">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HM-0c-HRV" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="2HM-0c-HRV" secondAttribute="trailing" id="2x4-Aa-rHy"/>
+                                                <constraint firstItem="2HM-0c-HRV" firstAttribute="top" secondItem="oig-5s-V1c" secondAttribute="top" id="6It-cg-vjl"/>
+                                                <constraint firstAttribute="bottom" secondItem="2HM-0c-HRV" secondAttribute="bottom" id="Qx7-vH-Tqv"/>
+                                                <constraint firstItem="2HM-0c-HRV" firstAttribute="leading" secondItem="oig-5s-V1c" secondAttribute="leading" id="ysR-HG-AcC"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="type-icon"/>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Название"/>
@@ -401,9 +414,21 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="TuD-Ts-1S2">
                                         <rect key="frame" x="0.0" y="288" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TuD-Ts-1S2" id="jAd-sW-ZI3" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TuD-Ts-1S2" id="jAd-sW-ZI3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qgx-8l-JdV" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Qgx-8l-JdV" secondAttribute="bottom" id="Eic-eE-dOh"/>
+                                                <constraint firstItem="Qgx-8l-JdV" firstAttribute="top" secondItem="jAd-sW-ZI3" secondAttribute="top" id="JTb-41-1lG"/>
+                                                <constraint firstAttribute="trailing" secondItem="Qgx-8l-JdV" secondAttribute="trailing" id="ZbS-LK-zvJ"/>
+                                                <constraint firstItem="Qgx-8l-JdV" firstAttribute="leading" secondItem="jAd-sW-ZI3" secondAttribute="leading" id="gLt-mM-aP8"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта"/>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="currency-icon"/>
@@ -414,9 +439,21 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="WOH-1k-92o">
                                         <rect key="frame" x="0.0" y="363" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WOH-1k-92o" id="E0T-2P-ra1" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WOH-1k-92o" id="E0T-2P-ra1">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giw-lh-GVR" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="giw-lh-GVR" secondAttribute="trailing" id="AME-L8-4bI"/>
+                                                <constraint firstItem="giw-lh-GVR" firstAttribute="top" secondItem="E0T-2P-ra1" secondAttribute="top" id="Fgx-ot-PdX"/>
+                                                <constraint firstItem="giw-lh-GVR" firstAttribute="leading" secondItem="E0T-2P-ra1" secondAttribute="leading" id="R3l-8L-aK2"/>
+                                                <constraint firstAttribute="bottom" secondItem="giw-lh-GVR" secondAttribute="bottom" id="XbG-7I-mqe"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Текущий баланс"/>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="amount-icon"/>
@@ -427,9 +464,21 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="T4O-YH-nE7">
                                         <rect key="frame" x="0.0" y="438" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T4O-YH-nE7" id="fdC-GW-p5e" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T4O-YH-nE7" id="fdC-GW-p5e">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KCf-I6-YYT" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="KCf-I6-YYT" secondAttribute="bottom" id="3uc-fd-L6M"/>
+                                                <constraint firstItem="KCf-I6-YYT" firstAttribute="top" secondItem="fdC-GW-p5e" secondAttribute="top" id="5do-j6-HnA"/>
+                                                <constraint firstAttribute="trailing" secondItem="KCf-I6-YYT" secondAttribute="trailing" id="iGY-uE-lzE"/>
+                                                <constraint firstItem="KCf-I6-YYT" firstAttribute="leading" secondItem="fdC-GW-p5e" secondAttribute="leading" id="mCx-GQ-RQi"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="credit-limit-icon"/>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Кредитный лимит"/>
@@ -440,9 +489,21 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="5VG-O8-JPI">
                                         <rect key="frame" x="0.0" y="513" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5VG-O8-JPI" id="JYu-TM-Bxo" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5VG-O8-JPI" id="JYu-TM-Bxo">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JhZ-9y-9GX" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="JhZ-9y-9GX" secondAttribute="bottom" id="GMI-Jd-N0b"/>
+                                                <constraint firstItem="JhZ-9y-9GX" firstAttribute="leading" secondItem="JYu-TM-Bxo" secondAttribute="leading" id="I6w-Sy-JIp"/>
+                                                <constraint firstItem="JhZ-9y-9GX" firstAttribute="top" secondItem="JYu-TM-Bxo" secondAttribute="top" id="RpF-dR-Kt0"/>
+                                                <constraint firstAttribute="trailing" secondItem="JhZ-9y-9GX" secondAttribute="trailing" id="ZwX-F2-Wmp"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Хочу накопить"/>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="planned-amount-icon"/>
@@ -454,16 +515,16 @@
                                         <rect key="frame" x="0.0" y="588" width="375" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ycy-Lx-WEB" id="mth-Tk-LET">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CF-wN-0Yc">
-                                                    <rect key="frame" x="89.5" y="11.5" width="196" height="40"/>
+                                                    <rect key="frame" x="84" y="11.5" width="207" height="40"/>
                                                     <color key="backgroundColor" name="blue 5B86F7"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="qaf-Dm-pdu"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <color key="tintColor" name="text FFFFFF"/>
                                                     <inset key="contentEdgeInsets" minX="31" minY="0.0" maxX="23" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="-16" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -500,11 +561,11 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="DI4-2e-E0m"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                                    <color key="tintColor" name="text 9EAACC"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
+                                                    <color key="tintColor" name="text FFFFFF"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                                     <state key="normal" title="Удалить кошелек" image="remove-icon">
-                                                        <color key="titleColor" name="text 9EAACC"/>
+                                                        <color key="titleColor" name="text FFFFFF"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="didTapRemoveButton:" destination="YzM-aR-OkL" eventType="touchUpInside" id="NmA-hv-Fxf"/>
@@ -536,24 +597,24 @@
                         <outlet property="accountTypeLabel" destination="ta0-0x-WRk" id="Lzm-J1-2tT"/>
                         <outlet property="activityIndicatorCell" destination="grg-Lv-Gox" id="WzZ-Y9-dQZ"/>
                         <outlet property="amountCell" destination="WOH-1k-92o" id="ZWs-uf-13c"/>
-                        <outlet property="amountField" destination="E0T-2P-ra1" id="YjA-Q6-r8Z"/>
+                        <outlet property="amountField" destination="giw-lh-GVR" id="5eL-ez-Vct"/>
                         <outlet property="bankButton" destination="9CF-wN-0Yc" id="Ake-jr-Wbm"/>
                         <outlet property="bankCell" destination="ycy-Lx-WEB" id="hpi-ir-JMA"/>
                         <outlet property="bankIconView" destination="Zb4-q4-46o" id="b4i-Zx-PJU"/>
                         <outlet property="creditLimitCell" destination="T4O-YH-nE7" id="1mX-iZ-r8L"/>
-                        <outlet property="creditLimitField" destination="fdC-GW-p5e" id="s1N-mP-jMg"/>
-                        <outlet property="currencyField" destination="jAd-sW-ZI3" id="0Mb-0g-rbM"/>
+                        <outlet property="creditLimitField" destination="KCf-I6-YYT" id="6AS-Nd-bbY"/>
+                        <outlet property="currencyField" destination="Qgx-8l-JdV" id="jhC-QO-whY"/>
                         <outlet property="debtTabLabel" destination="6Bb-EH-lzF" id="157-1B-iLS"/>
                         <outlet property="debtTabSelection" destination="Plw-HP-iJ4" id="9ih-TD-PjY"/>
                         <outlet property="goalAmountCell" destination="5VG-O8-JPI" id="hm2-Ir-Ffq"/>
-                        <outlet property="goalAmountField" destination="JYu-TM-Bxo" id="LcJ-m3-ulZ"/>
+                        <outlet property="goalAmountField" destination="JhZ-9y-9GX" id="Zod-ry-BQp"/>
                         <outlet property="goalTabLabel" destination="8Nq-XM-Mf4" id="Wv7-2O-4ud"/>
                         <outlet property="goalTabSelection" destination="yQe-pF-wgF" id="CXy-Ko-MiH"/>
                         <outlet property="iconContainer" destination="oty-xQ-c7D" id="qEU-5k-Y1B"/>
                         <outlet property="iconPen" destination="tw4-Tl-g4e" id="S3h-tg-xgB"/>
                         <outlet property="iconView" destination="2jt-y6-Ut0" id="uy9-lg-REI"/>
                         <outlet property="loaderImageView" destination="JgI-tt-6th" id="dfA-PB-AxV"/>
-                        <outlet property="nameField" destination="oig-5s-V1c" id="D6V-43-27I"/>
+                        <outlet property="nameField" destination="2HM-0c-HRV" id="hvB-8l-56N"/>
                         <outlet property="removeCell" destination="4R1-vU-TYo" id="Fqu-1U-Nwn"/>
                         <outlet property="typeSwitchCell" destination="XIN-oP-HUz" id="HkR-OF-bYL"/>
                         <outlet property="usualTabLabel" destination="kJ5-4o-dvi" id="f2q-VH-tLe"/>
@@ -593,13 +654,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Labelasdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Blu-op-yb6">
-                                                    <rect key="frame" x="68" y="20.5" width="132" height="19"/>
+                                                    <rect key="frame" x="68" y="20.5" width="130" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.47450980390000003" green="0.51764705879999995" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYS-FF-ARN">
-                                                    <rect key="frame" x="216" y="21" width="143" height="18"/>
+                                                    <rect key="frame" x="214" y="21" width="145" height="18"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                     <color key="textColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -822,13 +883,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lh3-V4-5Cz">
-                                                    <rect key="frame" x="16" y="8" width="39.5" height="23.5"/>
+                                                    <rect key="frame" x="16" y="8" width="40.5" height="23.5"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggn-8d-2G2">
-                                                    <rect key="frame" x="319.5" y="8" width="39.5" height="23.5"/>
+                                                    <rect key="frame" x="318.5" y="8" width="40.5" height="23.5"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -911,9 +972,6 @@
         </namedColor>
         <namedColor name="delimeter 333D5B">
             <color red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="text 9EAACC">
-            <color red="0.61960784313725492" green="0.66666666666666663" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="text FFFFFF">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

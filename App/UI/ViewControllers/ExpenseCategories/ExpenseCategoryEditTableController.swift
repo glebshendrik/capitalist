@@ -20,6 +20,7 @@ protocol ExpenseCategoryEditTableControllerDelegate {
 
 class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var iconView: UIImageView!
+    @IBOutlet weak var iconBackgroundImageView: UIImageView!
     
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!
@@ -34,19 +35,43 @@ class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     
     var delegate: ExpenseCategoryEditTableControllerDelegate?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func setupUI() {
+        super.setupUI()
+        setupNameField()
+        setupCurrencyField()
+        setupIncomeSourceCurrencyField()
+        setupMonthlyPlannedField()
+    }
+    
+    func setupNameField() {
+        nameField.placeholder = "Название"
+        nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
         }
-        monthlyPlannedField.didChange { [weak self] text in
-            self?.delegate?.didChange(monthlyPlanned: text)
-        }
+    }
+    
+    func setupCurrencyField() {
+        currencyField.placeholder = "Валюта"
+        currencyField.imageName = "currency-icon"
         currencyField.didTap { [weak self] in
             self?.delegate?.didTapCurrency()
         }
+    }
+    
+    func setupIncomeSourceCurrencyField() {
+        incomeSourceCurrencyField.placeholder = "Валюта дохода"
+        incomeSourceCurrencyField.imageName = "currency-icon"
         incomeSourceCurrencyField.didTap { [weak self] in
             self?.delegate?.didTapIncomeSourceCurrency()
+        }
+    }
+    
+    func setupMonthlyPlannedField() {
+        monthlyPlannedField.placeholder = "Планирую тратить в месяц"
+        monthlyPlannedField.imageName = "planned-amount-icon"
+        monthlyPlannedField.didChange { [weak self] text in
+            self?.delegate?.didChange(monthlyPlanned: text)
         }
     }
     

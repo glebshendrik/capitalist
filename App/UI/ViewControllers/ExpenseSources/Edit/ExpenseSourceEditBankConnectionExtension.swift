@@ -66,7 +66,7 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     
     func showProviderConnectionViewController(for providerViewModel: ProviderViewModel) {
         // navigationController?.
-        present(factory.providerConnectionViewController(delegate: self, providerViewModel: providerViewModel))
+        modal(factory.providerConnectionViewController(delegate: self, providerViewModel: providerViewModel))
     }
     
     func didConnect(connectionId: String, connectionSecret: String, providerViewModel: ProviderViewModel) {

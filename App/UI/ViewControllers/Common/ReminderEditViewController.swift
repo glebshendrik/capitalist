@@ -60,7 +60,7 @@ extension ReminderEditViewController {
     }
     
     func updateRemoveButtonUI() {
-        tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden)
+        tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, reload: true)
     }
 }
 
@@ -71,7 +71,7 @@ extension ReminderEditViewController : ReminderEditTableViewControllerDelegate {
     }
     
     func didTapStartDate() {
-        present(factory.datePickerViewController(delegate: self,
+        modal(factory.datePickerViewController(delegate: self,
                                          date: viewModel.reminderStartDate,
                                          minDate: Date(),
                                          maxDate: nil,

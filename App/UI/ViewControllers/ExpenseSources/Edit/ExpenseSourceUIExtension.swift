@@ -38,7 +38,7 @@ extension ExpenseSourceEditViewController {
         tableController.set(cell: tableController.creditLimitCell, hidden: viewModel.creditLimitHidden, animated: animated, reload: false)
         tableController.set(cell: tableController.bankCell, hidden: viewModel.bankButtonHidden, animated: animated, reload: false)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: animated, reload: false)
-        tableController?.reloadData(animated: animated)
+        tableController.reloadData(animated: animated)
     }
     
     func updateTextFieldsUI() {

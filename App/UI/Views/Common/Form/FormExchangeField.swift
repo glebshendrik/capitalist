@@ -45,7 +45,7 @@ class FormExchangeField : FormField {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var unfocusedTextColor: UIColor = UIColor.by(.text9EAACC) {
+    @IBInspectable var unfocusedTextColor: UIColor = UIColor.by(.textFFFFFF) {
         didSet { updateTextFields() }
     }
     
@@ -69,6 +69,10 @@ class FormExchangeField : FormField {
         didSet { updateTextFields() }
     }
     
+    @IBInspectable var currencyLabelFont: UIFont = UIFont(name: "Rubik-Regular", size: 13)! {
+        didSet { updateCurrencyLabels() }
+    }
+    
     @IBInspectable var lineColor: UIColor = UIColor.clear {
         didSet { updateFocusLine() }
     }
@@ -86,6 +90,14 @@ class FormExchangeField : FormField {
     }
     
     @IBInspectable var convertedAmountPlaceholder: String? = "Сумма" {
+        didSet { updateTextFields() }
+    }
+    
+    @IBInspectable var amountSelectedTitle: String? = "Сумма" {
+        didSet { updateTextFields() }
+    }
+    
+    @IBInspectable var convertedAmountSelectedTitle: String? = "Сумма" {
         didSet { updateTextFields() }
     }
     
@@ -183,11 +195,11 @@ class FormExchangeField : FormField {
         setupAmountContainer()
         setupConvertedAmountContainer()
         setupConvertArrow()
-        setupAmountTextField()
         setupAmountBackground()
+        setupAmountTextField()
         setupAmountCurrencyLabel()
-        setupConvertedAmountTextField()
         setupConvertedAmountBackground()
+        setupConvertedAmountTextField()
         setupConvertedAmountCurrencyLabel()
         setupFocusLine()
     }
@@ -310,7 +322,7 @@ class FormExchangeField : FormField {
     
     func updateAmountTextField() {
         let appearanceOptions = self.appearanceOptions().amountAppearance
-        update(amountField, options: appearanceOptions, placeholder: amountPlaceholder)
+        update(amountField, options: appearanceOptions, placeholder: amountPlaceholder, selectedTitle: amountSelectedTitle)
     }
     
     func updateAmountBackground() {
@@ -323,11 +335,12 @@ class FormExchangeField : FormField {
         let appearanceOptions = self.appearanceOptions().amountAppearance
         amountCurrencyLabel.text = currency?.code
         amountCurrencyLabel.textColor = appearanceOptions.currencyColor
+        amountCurrencyLabel.font = currencyLabelFont
     }
     
     func updateConvertedAmountTextField() {
         let appearanceOptions = self.appearanceOptions().convertedAmountAppearance
-        update(convertedAmountField, options: appearanceOptions, placeholder: convertedAmountPlaceholder)
+        update(convertedAmountField, options: appearanceOptions, placeholder: convertedAmountPlaceholder, selectedTitle: convertedAmountSelectedTitle)
         convertedAmountField.titleColor = UIColor.clear
         convertedAmountField.selectedTitleColor = UIColor.clear
     }
@@ -342,6 +355,7 @@ class FormExchangeField : FormField {
         let appearanceOptions = self.appearanceOptions().convertedAmountAppearance
         convertedAmountCurrencyLabel.text = convertedCurrency?.code
         convertedAmountCurrencyLabel.textColor = appearanceOptions.currencyColor
+        convertedAmountCurrencyLabel.font = currencyLabelFont
     }
     
     func updateFocusLine() {
@@ -375,7 +389,7 @@ class FormExchangeField : FormField {
         updateErrorLabel()
     }
     
-    private func update(_ textField: MoneyTextField, options: TextAppearanceOptions, placeholder: String?) {
+    private func update(_ textField: MoneyTextField, options: TextAppearanceOptions, placeholder: String?, selectedTitle: String?) {
         textField.textColor = options.textColor
         textField.placeholderFont = options.placeholderFont
         textField.placeholderColor = options.placeholderColor
@@ -383,20 +397,22 @@ class FormExchangeField : FormField {
         textField.selectedTitleColor = options.placeholderColor
         
         textField.placeholder = placeholder
-        textField.selectedTitle = placeholder
+        textField.selectedTitle = selectedTitle
+        textField.title = selectedTitle
         textField.lineColor = UIColor.clear
         textField.selectedLineColor = UIColor.clear
         textField.lineHeight = 0
         textField.selectedLineHeight = 0
+        textField.font = bigPlaceholderFont
         
-        textField.isEnabled = isEnabled
+//        textField.isEnabled = isEnabled
         textField.isUserInteractionEnabled = isEnabled
     }
     
     func setupContainerConstraints() {
         exchangeContainer.snp.makeConstraints { make in
             make.top.equalTo(10)
-            make.right.equalTo(16)
+            make.right.equalTo(-16)
             make.bottom.equalTo(-16)
             make.left.equalTo(iconContainer.snp.right).offset(20)
         }
@@ -405,7 +421,7 @@ class FormExchangeField : FormField {
     func setupAmountContainerConstraints() {
         amountContainer.snp.makeConstraints { make in
             make.top.bottom.left.equalToSuperview()
-            make.right.equalTo(convertArrow.snp.left).offset(5)
+            make.right.equalTo(convertArrow.snp.left).offset(-5)
         }
     }
     
@@ -418,7 +434,10 @@ class FormExchangeField : FormField {
     
     func setupConvertArrowConstraints() {
         convertArrow.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(8)
+            make.width.equalTo(6)
+            make.height.equalTo(11)
         }
     }
     
@@ -435,13 +454,13 @@ class FormExchangeField : FormField {
         amountFieldBackground.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(17)
-            make.bottom.equalTo(3)
+            make.bottom.equalTo(-3)
         }
     }
     
     func setupAmountCurrencyLabelConstraints() {
         amountCurrencyLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(8)
+            make.centerY.equalToSuperview().offset(8)
             make.right.equalTo(-6)
             make.left.equalTo(amountField.snp.right).offset(8)
         }
@@ -460,15 +479,15 @@ class FormExchangeField : FormField {
         convertedAmountFieldBackground.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(17)
-            make.bottom.equalTo(3)
+            make.bottom.equalTo(-3)
         }
     }
     
     func setupConvertedAmountCurrencyLabelConstraints() {
         convertedAmountCurrencyLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(8)
+            make.centerY.equalToSuperview().offset(8)
             make.right.equalTo(-6)
-            make.left.equalTo(amountField.snp.right).offset(8)
+            make.left.equalTo(convertedAmountField.snp.right).offset(8)
         }
     }
     

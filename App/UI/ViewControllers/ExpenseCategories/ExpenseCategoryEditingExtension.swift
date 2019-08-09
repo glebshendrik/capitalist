@@ -33,8 +33,8 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableController
         push(factory.currenciesViewController(delegate: delegate))
     }
     
-    func didTapSetReminder() {
-        present(factory.reminderEditViewController(delegate: self, viewModel: viewModel.reminderViewModel))
+    func didTapSetReminder() {        
+        modal(factory.reminderEditViewController(delegate: self, viewModel: viewModel.reminderViewModel))
     }
 }
 

@@ -53,7 +53,7 @@ struct ReminderViewModel {
     }
     
     var removeButtonHidden: Bool {
-        return isReminderSet
+        return !isReminderSet
     }
     
     init() {

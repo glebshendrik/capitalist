@@ -39,7 +39,12 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     var whom: String? = nil
     var borrowedTill: Date? = nil
     
-    var whomButtonTitle: String { return whom ?? whomPlaceholder }
+    var whomButtonTitle: String {
+        if let whom = whom, !whom.isEmpty {
+            return whom
+        }
+        return whomPlaceholder
+    }
     
     var whomPlaceholder: String { return isLoan ? "У кого" : "Кому" }
     
@@ -101,11 +106,7 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     override var startableTitle: String? { return "Кошелек снятия" }
     
     override var completableTitle: String? { return "Кошелек пополнения" }
-    
-    override var startableAmountTitle: String? { return "Сумма списания" }
-    
-    override var completableAmountTitle: String? { return "Сумма пополнения" }
-    
+        
     override var startableIconDefaultImageName: String { return "expense-source-icon" }
     
     override var completableIconDefaultImageName: String { return "expense-source-icon" }
@@ -134,13 +135,20 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         }
         self.startable = ExpenseSourceViewModel(expenseSource: fundsMove.expenseSourceFrom)
         self.completable = ExpenseSourceViewModel(expenseSource: fundsMove.expenseSourceTo)
-        
+        self.amount = fundsMove.amountCents.moneyDecimalString(with: startableCurrency)
+        self.convertedAmount = fundsMove.convertedAmountCents.moneyDecimalString(with: completableCurrency)
+    }
+    
+    func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
+        self.startable = startable
+        self.completable = completable
+        self.debtTransaction = debtTransaction
         func amountDebt() -> String? {
             if let debtTransaction = debtTransaction {
-                if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id == startable?.id {
+                if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id == startable.id {
                     return debtTransaction.debtAmountLeft
                 }
-                if !needCurrencyExchange && debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable?.id {
+                if !needCurrencyExchange && debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable.id {
                     return debtTransaction.loanAmountLeft
                 }
             }
@@ -149,21 +157,15 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
         
         func convertedAmountDebt() -> String? {
             if let debtTransaction = debtTransaction {
-                if debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable?.id {
+                if debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable.id {
                     return debtTransaction.loanAmountLeft
                 }
             }
             return nil
         }
         
-        amount = fundsMove.amountCents.moneyDecimalString(with: startableCurrency) ?? amountDebt()
-        convertedAmount = fundsMove.convertedAmountCents.moneyDecimalString(with: completableCurrency) ?? convertedAmountDebt()
-    }
-    
-    func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
-        self.startable = startable
-        self.completable = completable
-        self.debtTransaction = debtTransaction
+        self.amount = amountDebt()
+        self.convertedAmount = convertedAmountDebt()
     }
     
     func asDebtTransactionForReturn() -> FundsMoveViewModel? {
@@ -229,7 +231,7 @@ extension FundsMoveEditViewModel {
                                      amountCurrency: startableCurrency?.code,
                                      convertedAmountCents: (convertedAmount ?? convertedAmountConverted)?.intMoney(with: completableCurrency),
                                      convertedAmountCurrency: completableCurrency?.code,
-                                     gotAt: gotAt,
+                                     gotAt: gotAt ?? Date(),
                                      comment: comment,
                                      whom: whom,
                                      borrowedTill: borrowedTill,

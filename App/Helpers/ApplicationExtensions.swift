@@ -559,7 +559,7 @@ extension Locale {
 }
 
 extension UIViewController {
-    func present(_ viewController: UIViewController?, animated: Bool = true, completion: (() -> Void)? = nil) {
+    func modal(_ viewController: UIViewController?, animated: Bool = true, completion: (() -> Void)? = nil) {
         guard let viewController = viewController else { return }
         present(viewController, animated: animated, completion: completion)
     }

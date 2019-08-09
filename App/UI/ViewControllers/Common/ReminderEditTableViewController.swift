@@ -21,19 +21,35 @@ class ReminderEditTableViewController : FormFieldsTableViewController {
     @IBOutlet weak var reminderMessageField: FormTextField!
     
     @IBOutlet weak var removeCell: UITableViewCell!
-    @IBOutlet weak var reminderRecurrenceCell: UITableViewCell!
-    @IBOutlet weak var reminderDateCell: UITableViewCell!
     
     var delegate: ReminderEditTableViewControllerDelegate?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func setupUI() {
+        super.setupUI()
+        setupReminderMessageField()
+        setupReminderDateField()
+        setupRecurrenceRuleField()
+    }
+    
+    func setupReminderMessageField() {
+        reminderMessageField.placeholder = "Сообщение"
+        reminderMessageField.imageName = "type-icon"
         reminderMessageField.didChange { [weak self] text in
             self?.delegate?.didChange(message: text)
         }
+    }
+    
+    func setupReminderDateField() {
+        reminderDateField.placeholder = "Дата"
+        reminderDateField.imageName = "reminder-date-icon"
         reminderDateField.didTap { [weak self] in
             self?.delegate?.didTapStartDate()
         }
+    }
+    
+    func setupRecurrenceRuleField() {
+        recurrenceRuleField.placeholder = "Повторяемость"
+        recurrenceRuleField.imageName = "reminder-recurrence-icon"
         recurrenceRuleField.didTap { [weak self] in
             self?.delegate?.didTapRecurrence()
         }

@@ -142,14 +142,14 @@ class FormField : UIView {
     
     func setupIconConstraints() {
         icon.snp.makeConstraints { make in
-            make.width.height.lessThanOrEqualTo(30)
+            make.width.height.lessThanOrEqualTo(20)
             make.center.equalToSuperview()
         }
     }
     
     func setupVectorIconConstraints() {
         vectorIcon.snp.makeConstraints { make in
-            make.width.height.lessThanOrEqualTo(30)
+            make.width.height.lessThanOrEqualTo(20)
             make.center.equalToSuperview()
         }
     }
@@ -205,6 +205,7 @@ class FormField : UIView {
         iconContainer.addSubview(vectorIcon)
         addSubview(iconContainer)
         iconContainer.cornerRadius = 18
+        icon.contentMode = .scaleAspectFit
     }
     
     func updateIcon(forceImageUpdate: Bool = true) {
@@ -245,9 +246,10 @@ class FormField : UIView {
     
     func setupSeparator() {
         separator.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(separator)
     }
     
     func updateSeparator() {
-        separator.backgroundColor = separatorColor
+        separator.backgroundColor = separatorColor        
     }
 }

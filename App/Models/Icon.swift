@@ -19,11 +19,11 @@ enum IconCategory : String, Codable {
     var defaultIconName: String {
         switch self {
         case .expenseCategoryJoy:
-            return ""
+            return "joy-default-icon"
         case .expenseCategoryRisk:
-            return ""
+            return "risk-default-icon"
         case .expenseCategorySafe:
-            return ""
+            return "safe-default-icon"
         case .expenseSource:
             return "wallet-default-icon"
         case .expenseSourceGoal:

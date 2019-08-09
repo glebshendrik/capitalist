@@ -74,7 +74,7 @@ class FundsMoveEditViewController : TransactionEditViewController {
     }
     
     override func didTapBorrowedTill() {
-        present(factory.datePickerViewController(delegate: BorrowedTillDatePickerControllerDelegate(delegate: self),
+        modal(factory.datePickerViewController(delegate: BorrowedTillDatePickerControllerDelegate(delegate: self),
                                                  date: fundsMoveEditViewModel.borrowedTill,
                                                  minDate: Date(),
                                                  maxDate: nil,
@@ -82,7 +82,7 @@ class FundsMoveEditViewController : TransactionEditViewController {
     }
     
     override func didTapWhom() {
-        present(factory.commentViewController(delegate: WhomCommentControllerDelegate(delegate: self),
+        modal(factory.commentViewController(delegate: WhomCommentControllerDelegate(delegate: self),
                                               text: fundsMoveEditViewModel.whom,
                                               placeholder: fundsMoveEditViewModel.whomPlaceholder))
     }
@@ -99,7 +99,7 @@ class FundsMoveEditViewController : TransactionEditViewController {
     
     private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
         
-        present(factory.fundsMoveEditViewController(delegate: self,
+        modal(factory.fundsMoveEditViewController(delegate: self,
                                                     startable: expenseSourceStartable,
                                                     completable: expenseSourceCompletable,
                                                     debtTransaction: debtTransaction))        

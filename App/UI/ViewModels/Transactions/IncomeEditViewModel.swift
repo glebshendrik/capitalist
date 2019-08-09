@@ -34,11 +34,7 @@ class IncomeEditViewModel : TransactionEditViewModel {
     override var startableTitle: String? { return "Источник доходов" }
     
     override var completableTitle: String? { return "Кошелек для пополнения" }
-    
-    override var startableAmountTitle: String? { return "Сумма дохода" }
-    
-    override var completableAmountTitle: String? { return "Сумма пополнения" }
-    
+        
     override var startableIconDefaultImageName: String { return "lamp-icon" }
     
     override var completableIconDefaultImageName: String { return "expense-source-icon" }
@@ -123,7 +119,7 @@ extension IncomeEditViewModel {
                                   amountCurrency: startableCurrency?.code,
                                   convertedAmountCents: (convertedAmount ?? convertedAmountConverted)?.intMoney(with: completableCurrency),
                                   convertedAmountCurrency: completableCurrency?.code,
-                                  gotAt: gotAt,
+                                  gotAt: gotAt ?? Date(),
                                   comment: comment)
     }
 }

@@ -82,7 +82,10 @@ class FormTextField : FormField {
     
     var text: String? {
         get { return textField.text?.trimmed }
-        set { textField.text = newValue }
+        set {
+            textField.text = newValue
+            updateStateAppearance()
+        }
     }
     
     var subValue: String? {
@@ -134,7 +137,7 @@ class FormTextField : FormField {
     func setupTextFieldConstraints() {
         textField.snp.makeConstraints { make in
             make.top.equalTo(10)
-            make.right.equalTo(subValueLabel.snp.left).offset(8)
+            make.right.equalTo(subValueLabel.snp.left).offset(-8)
             make.bottom.equalTo(-16)
             make.left.equalTo(iconContainer.snp.right).offset(20)
         }
@@ -145,7 +148,7 @@ class FormTextField : FormField {
     func setupSubValueLabelConstraints() {
         subValueLabel.snp.makeConstraints { make in
             make.right.equalTo(-16)
-            make.centerY.equalTo(3)
+            make.centerY.equalToSuperview().offset(3)
         }
         subValueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         subValueLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
@@ -211,6 +214,7 @@ class FormTextField : FormField {
         textField.selectedLineColor = selectedLineColor
         textField.lineHeight = lineHeight
         textField.selectedLineHeight = selectedLineHeight
+        textField.font = bigPlaceholderFont
         
         textField.isEnabled = isEnabled
         textField.isUserInteractionEnabled = isEnabled

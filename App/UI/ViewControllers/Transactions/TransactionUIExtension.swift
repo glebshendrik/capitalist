@@ -41,20 +41,30 @@ extension TransactionEditViewController {
         tableController.amountField.placeholder = viewModel.completableAmountTitle
         tableController.amountField.subValue = viewModel.completableCurrencyCode
         tableController.amountField.currency = viewModel.startableCurrency
-        tableController.set(cell: tableController.amountCell, hidden: viewModel.needCurrencyExchange, animated: false, reload: true)
+        tableController.set(cell: tableController.amountCell, hidden: viewModel.needCurrencyExchange, animated: false, reload: false)
     }
     
     func updateExchangeAmountsUI() {
         tableController.exchangeField.amount = viewModel.amount
         tableController.exchangeField.amountPlaceholder = viewModel.amountPlaceholder
+        tableController.exchangeField.amountSelectedTitle = viewModel.startableAmountTitle
         tableController.exchangeField.currency = viewModel.startableCurrency
         tableController.exchangeField.convertedAmount = viewModel.convertedAmount
         tableController.exchangeField.convertedAmountPlaceholder = viewModel.convertedAmountPlaceholder
+        tableController.exchangeField.convertedAmountSelectedTitle = viewModel.completableAmountTitle
         tableController.exchangeField.convertedCurrency = viewModel.completableCurrency
-        tableController.set(cell: tableController.exchangeCell, hidden: !viewModel.needCurrencyExchange, animated: false, reload: true)
+        tableController.set(cell: tableController.exchangeCell, hidden: !viewModel.needCurrencyExchange, animated: false, reload: false)
     }
     
     @objc func updateInBalanceUI() {
-        tableController.set(cell: tableController.inBalanceCell, hidden: true, animated: false, reload: true)
+        tableController.set(cell: tableController.inBalanceCell, hidden: true, animated: false, reload: false)
+    }
+    
+    func updateCommentUI() {
+        tableController.commentView.text = viewModel.comment
+    }
+    
+    func updateRemoveButtonUI() {
+        tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden)
     }
 }
