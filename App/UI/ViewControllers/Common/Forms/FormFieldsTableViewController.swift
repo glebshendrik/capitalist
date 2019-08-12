@@ -48,3 +48,31 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
         }
     }
 }
+
+class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController {
+    var saveButton: KeyboardHighlightButton = KeyboardHighlightButton()
+    var saveButtonTitle: String { return "Save" }
+    
+    override func setupUI() {
+        super.setupUI()
+        setupSaveButton()
+    }
+    
+    func setupSaveButton() {
+        saveButton.setTitle(saveButtonTitle, for: .normal)
+        saveButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 14)!
+        saveButton.titleLabel?.textColor = UIColor.by(.textFFFFFF)
+        saveButton.backgroundColor = UIColor.by(.blue6A92FA)
+        saveButton.backgroundColorForNormal = UIColor.by(.blue6A92FA)
+        saveButton.backgroundColorForHighlighted = UIColor.by(.blue5B86F7)        
+        saveButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc private func didTapSaveButton(_ sender: UIButton) {
+        didTapSave()
+    }
+    
+    func didTapSave() {
+        
+    }
+}

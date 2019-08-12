@@ -17,29 +17,20 @@ class HighlightButton : UIButton {
             backgroundColor = isHighlighted ? backgroundColorForHighlighted : backgroundColorForNormal
         }
     }
+}
+
+class KeyboardHighlightButton : HighlightButton {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        // This is required to make the view grow vertically
+        self.autoresizingMask = UIView.AutoresizingMask.flexibleHeight
+    }
     
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        commonInit()
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        commonInit()
-//    }
-//    
-//    private func commonInit() {
-//        addTarget(self, action: #selector(touchUp(sender:)), for: UIControl.Event.touchUpInside)
-//        addTarget(self, action: #selector(touchUp(sender:)), for: UIControl.Event.touchUpOutside)
-//        addTarget(self, action: #selector(touchUp(sender:)), for: UIControl.Event.touchCancel)
-//        addTarget(self, action: #selector(touchDown(sender:)), for: UIControl.Event.touchDown)
-//    }
-//    
-//    @objc private func touchDown(sender: UIButton) {
-//        backgroundColor = backgroundColorForHighlighted
-//    }
-//    
-//    @objc private func touchUp(sender: UIButton) {
-//        backgroundColor = backgroundColorForNormal
-//    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: self.bounds.width, height: 56)
+    }    
 }

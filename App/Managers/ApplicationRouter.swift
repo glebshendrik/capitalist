@@ -158,6 +158,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         keyboardManager.shouldShowToolbarPlaceholder = false
         keyboardManager.toolbarDoneBarButtonItemText = ""
         keyboardManager.toolbarDoneBarButtonItemImage = UIImage(named: "close-icon")?.withRenderingMode(.alwaysTemplate)
+        keyboardManager.isEnableAutoToolbar = false
     }
     
     private func setupLocale() {

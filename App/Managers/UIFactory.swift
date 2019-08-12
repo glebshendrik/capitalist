@@ -143,4 +143,8 @@ class UIFactory : UIFactoryProtocol {
         recurrencePicker.delegate = delegate
         return recurrencePicker
     }
+    
+    func forgotPasswordViewController() -> ForgotPasswordViewController? {
+        return router.viewController(.ForgotPasswordViewController) as? ForgotPasswordViewController
+    }
 }

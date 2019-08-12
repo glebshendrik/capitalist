@@ -31,16 +31,16 @@
                                 <rect key="frame" x="16" y="80" width="343" height="531"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Эта категория трат относится к корзине «Риски», она может приносить прибыль" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJc-Cd-Ezl">
-                                        <rect key="frame" x="16" y="39" width="311" height="60.5"/>
+                                        <rect key="frame" x="16" y="39" width="311" height="59.5"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
                                         <color key="textColor" red="0.24705882352941178" green="0.27450980392156865" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U9v-Ss-8fc">
-                                        <rect key="frame" x="0.0" y="99.5" width="343" height="259"/>
+                                        <rect key="frame" x="0.0" y="98.5" width="343" height="260.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="risk-large-image" translatesAutoresizingMaskIntoConstraints="NO" id="O5M-S6-zP7">
-                                                <rect key="frame" x="98.5" y="68.5" width="146" height="122"/>
+                                                <rect key="frame" x="98.5" y="69.5" width="146" height="122"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -50,7 +50,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Поэтому мы создаем для вас новый источник дохода" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qU9-MC-rol">
-                                        <rect key="frame" x="16" y="358.5" width="311" height="40.5"/>
+                                        <rect key="frame" x="16" y="359" width="311" height="40"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
                                         <color key="textColor" red="0.2470588235" green="0.27450980390000002" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -75,13 +75,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Больше не показывать" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yK-FS-41K">
-                                        <rect key="frame" x="112.5" y="494" width="152" height="17"/>
+                                        <rect key="frame" x="113" y="494" width="151" height="17"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                         <color key="textColor" red="0.52156862745098043" green="0.5725490196078431" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NcJ-tH-sxm" customClass="BEMCheckBox">
-                                        <rect key="frame" x="88.5" y="493.5" width="16" height="16"/>
+                                        <rect key="frame" x="89" y="493.5" width="16" height="16"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="fEQ-4U-7a1"/>

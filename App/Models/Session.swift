@@ -39,9 +39,16 @@ struct Session : Decodable {
     }
 }
 
-struct SessionCreationForm : Encodable {
+struct SessionCreationForm : Encodable, Validatable {
     let email: String?
     let password: String?
+    let skipValidation: Bool
+    
+    init(email: String?, password: String?, skipValidation: Bool = false) {
+        self.email = email
+        self.password = password
+        self.skipValidation = skipValidation
+    }
     
     enum CodingKeys: String, CodingKey {
         case email
@@ -52,5 +59,23 @@ struct SessionCreationForm : Encodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(email, forKey: .email)
         try container.encode(password, forKey: .password)
+    }
+    
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if skipValidation {
+            return errors
+        }
+        
+        if !Validator.isValid(email: email) {
+            errors["email"] = "Введите корректный email"
+        }
+        
+        if !Validator.isValid(password: password) {
+            errors["password"] = "Введите корректный пароль"
+        }
+        
+        return errors
     }
 }

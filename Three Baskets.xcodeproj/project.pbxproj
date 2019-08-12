@@ -91,7 +91,6 @@
 		FA6270A321C7A87300CC0269 /* IncomeSourceEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */; };
 		FA6270A621CA3ED600CC0269 /* FieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A521CA3ED600CC0269 /* FieldViewModel.swift */; };
 		FA6270AA21CA93D100CC0269 /* FieldsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A921CA93D100CC0269 /* FieldsViewModel.swift */; };
-		FA6270AD21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270AC21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift */; };
 		FA630C162292698200242AB3 /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA630C152292698200242AB3 /* Common.storyboard */; };
 		FA630C18229269F300242AB3 /* IncomeSources.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA630C17229269F300242AB3 /* IncomeSources.storyboard */; };
 		FA630C1A22926B0500242AB3 /* ExpenseSources.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA630C1922926B0500242AB3 /* ExpenseSources.storyboard */; };
@@ -118,6 +117,9 @@
 		FA689F32228567C000FA75C9 /* BalanceNavigatingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F31228567C000FA75C9 /* BalanceNavigatingExtension.swift */; };
 		FA689F342285681200FA75C9 /* BalanceLoadingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F332285681200FA75C9 /* BalanceLoadingExtension.swift */; };
 		FA689F392285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F382285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift */; };
+		FA6910A82300EF48001209FC /* FormSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6910A72300EF48001209FC /* FormSubmitViewController.swift */; };
+		FA6910AA2300F0B6001209FC /* LoginTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6910A92300F0B6001209FC /* LoginTableController.swift */; };
+		FA6910AC230100F6001209FC /* FieldsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6910AB230100F5001209FC /* FieldsViewControllerProtocol.swift */; };
 		FA6918A221F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */; };
 		FA6918A421F0EF03003639F6 /* ExpenseCategoryEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */; };
 		FA6973ED2296D6DD004E6327 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA6973EF2296D6DD004E6327 /* Localizable.strings */; };
@@ -453,7 +455,6 @@
 		FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditTableController.swift; sourceTree = "<group>"; };
 		FA6270A521CA3ED600CC0269 /* FieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldViewModel.swift; sourceTree = "<group>"; };
 		FA6270A921CA93D100CC0269 /* FieldsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsViewModel.swift; sourceTree = "<group>"; };
-		FA6270AC21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsViewControllerProtocol.swift; sourceTree = "<group>"; };
 		FA630C152292698200242AB3 /* Common.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
 		FA630C17229269F300242AB3 /* IncomeSources.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IncomeSources.storyboard; sourceTree = "<group>"; };
 		FA630C1922926B0500242AB3 /* ExpenseSources.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ExpenseSources.storyboard; sourceTree = "<group>"; };
@@ -480,6 +481,9 @@
 		FA689F31228567C000FA75C9 /* BalanceNavigatingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceNavigatingExtension.swift; sourceTree = "<group>"; };
 		FA689F332285681200FA75C9 /* BalanceLoadingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceLoadingExtension.swift; sourceTree = "<group>"; };
 		FA689F382285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveExpenseCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		FA6910A72300EF48001209FC /* FormSubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSubmitViewController.swift; sourceTree = "<group>"; };
+		FA6910A92300F0B6001209FC /* LoginTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTableController.swift; sourceTree = "<group>"; };
+		FA6910AB230100F5001209FC /* FieldsViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldsViewControllerProtocol.swift; sourceTree = "<group>"; };
 		FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditViewController.swift; sourceTree = "<group>"; };
 		FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditTableController.swift; sourceTree = "<group>"; };
 		FA6973EE2296D6DD004E6327 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -891,6 +895,7 @@
 			children = (
 				FA630C2B2293C07F00242AB3 /* FormFieldsTableViewController.swift */,
 				FA6DDE8422D60401008D14FF /* FormEditViewController.swift */,
+				FA6910A72300EF48001209FC /* FormSubmitViewController.swift */,
 				FA2847FB22F19481003F114A /* FormNavBarButtonsEditViewController.swift */,
 				FA2847FE22F19591003F114A /* FormTransactionsDependableEditViewController.swift */,
 			);
@@ -931,8 +936,8 @@
 		FA6270AB21CA9FD700CC0269 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FA6910AB230100F5001209FC /* FieldsViewControllerProtocol.swift */,
 				FA2847FD22F1948A003F114A /* Forms */,
-				FA6270AC21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift */,
 				FA81748B222E2B8700EE6116 /* CommentViewController.swift */,
 				FA81748D222F800200EE6116 /* DatePickerViewController.swift */,
 				FA16FC66223A30700053C273 /* SlideUpContainerViewController.swift */,
@@ -1615,6 +1620,7 @@
 				FAC3B9D021C131390015A12F /* JoinViewController.swift */,
 				FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */,
 				FA165CE521B6669500EAA16B /* LoginViewController.swift */,
+				FA6910A92300F0B6001209FC /* LoginTableController.swift */,
 				FA165CE921B769B500EAA16B /* ForgotPasswordViewController.swift */,
 				FA165CED21B7846C00EAA16B /* ResetPasswordViewController.swift */,
 			);
@@ -1902,6 +1908,7 @@
 				FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */,
 				FAD88F8C21B1228F00BE7BC1 /* MenuViewModel.swift in Sources */,
 				FAA426142231275F00B64925 /* ExpenseEditViewController.swift in Sources */,
+				FA6910AC230100F6001209FC /* FieldsViewControllerProtocol.swift in Sources */,
 				FA7276B522524F060086D4D1 /* CollectionsControllingExtension.swift in Sources */,
 				FAD88F2821AEB75800BE7BC1 /* NotificationCategory.swift in Sources */,
 				FA84E7E922562ED700C0A274 /* CurrencyConverter.swift in Sources */,
@@ -1943,6 +1950,7 @@
 				FA8382B621F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift in Sources */,
 				FA0CAE1F21D6785E00805288 /* IconCollectionViewCell.swift in Sources */,
 				FA8AD0DC22C5F18C0084AD19 /* ProviderCell.swift in Sources */,
+				FA6910AA2300F0B6001209FC /* LoginTableController.swift in Sources */,
 				FA2847E922EED208003F114A /* FormTapField.swift in Sources */,
 				FA7276C3225252390086D4D1 /* GestureRecognizersControllingExtension.swift in Sources */,
 				FAD88F2621AEB72800BE7BC1 /* NotificationsManager.swift in Sources */,
@@ -2065,7 +2073,6 @@
 				FACC01F5224BC4B40044A747 /* HistoryTransactionsLoadingTableViewCell.swift in Sources */,
 				FA66FB7B2226E92C00708C71 /* IncomeEditViewModel.swift in Sources */,
 				FA66FB6D22204B3100708C71 /* Transactionable.swift in Sources */,
-				FA6270AD21CA9FEB00CC0269 /* FieldsViewControllerProtocol.swift in Sources */,
 				FA2847FA22F0807A003F114A /* ExpenseCategoryUIExtension.swift in Sources */,
 				FAA4260E2230F7CC00B64925 /* FundsMovesCoordinator.swift in Sources */,
 				FA165CE421B65F2F00EAA16B /* ValidationResult.swift in Sources */,
@@ -2162,6 +2169,7 @@
 				FA817488222821DC00EE6116 /* ExchangeRatesService.swift in Sources */,
 				FA28480722F338F2003F114A /* FormSwitchValueField.swift in Sources */,
 				FA7276E02254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift in Sources */,
+				FA6910A82300EF48001209FC /* FormSubmitViewController.swift in Sources */,
 				FA835D5022607A7200A592F2 /* CashFlowGraphDataCalculatingExtension.swift in Sources */,
 				FA835D5222607B8600A592F2 /* NetWorthGraphDataCalculatingExtension.swift in Sources */,
 				FA16FC69223A5A060053C273 /* IncomeSourcesViewModel.swift in Sources */,

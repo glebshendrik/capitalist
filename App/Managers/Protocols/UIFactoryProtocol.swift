@@ -59,4 +59,6 @@ protocol UIFactoryProtocol {
                           ocurrenceDate: Date?,
                           language: RecurrencePickerLanguage) -> RecurrencePicker?
     
+    func forgotPasswordViewController() -> ForgotPasswordViewController?
+    
 }

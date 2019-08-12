@@ -42,7 +42,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     }
         
     func joinAsGuest() -> Promise<Session> {
-        return authenticate(with: SessionCreationForm(email: nil, password: nil))
+        return authenticate(with: SessionCreationForm(email: nil, password: nil, skipValidation: true))
     }
     
     func authenticate(with form: SessionCreationForm) -> Promise<Session> {
