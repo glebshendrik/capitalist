@@ -6,105 +6,62 @@
 //  Copyright © 2018 Real Tranzit. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import PromiseKit
-import StaticTableViewController
-import SwiftMessages
 
-protocol ResetPasswordInputProtocol {
-    func set(email: String?)
-}
-
-class ResetPasswordViewController : StaticTableViewController, ResetPasswordInputProtocol {
-    
-    @IBOutlet weak var passwordResetCodeTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var passwordConfirmationTextField: UITextField!
-    @IBOutlet weak var resetPasswordButton: UIButton!
-    @IBOutlet weak var activityIndicatorCell: UITableViewCell!
-    @IBOutlet weak var loaderImageView: UIImageView!
+class ResetPasswordViewController : FormSubmitViewController {
     
     var viewModel: ResetPasswordViewModel!
-    var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var tableController: ResetPasswordTableController!
     
-    private var email: String?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        insertAnimation = .top
-        deleteAnimation = .bottom
-        registerFields()
-        loaderImageView.showLoader()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setActivityIndicator(hidden: true, animated: false)
-    }
+    override var formTitle: String { return "Смена пароля" }
+    override var saveErrorMessage: String { return "Ошибка при изменении пароля" }
     
     func set(email: String?) {
-        self.email = email
+        self.viewModel.email = email
+    }
+        
+    override func registerFormFields() -> [String : FormField] {
+        return [ResetPasswordForm.CodingKeys.passwordResetCode.rawValue : tableController.codeField,
+                ResetPasswordForm.CodingKeys.password.rawValue : tableController.passwordField,
+                ResetPasswordForm.CodingKeys.passwordConfirmation.rawValue : tableController.confirmationField]
     }
     
-    @IBAction func didTapResetPasswordButton(_ sender: Any) {
-        view.endEditing(true)
-        setActivityIndicator(hidden: false)
-        resetPasswordButton.isEnabled = false
-        
-        firstly {
-            viewModel.resetPasswordWith(email: email,
-                                        passwordResetCode: passwordResetCodeTextField.text?.trimmed,
-                                        password: passwordTextField.text?.trimmed,
-                                        passwordConfirmation: passwordConfirmationTextField.text?.trimmed)
-            }.catch { error in
-                switch error {
-                case APIRequestError.notFound:
-                    self.messagePresenterManager.show(navBarMessage: "Пользователь с таким адресом не найден", theme: .error)
-                default:
-                    self.messagePresenterManager.show(navBarMessage: "Ошибка при изменении пароля", theme: .error)
-                }
-                self.validateUI()
-            }.finally {
-                self.setActivityIndicator(hidden: true)
-                self.resetPasswordButton.isEnabled = true
+    override func setup(tableController: FormFieldsTableViewController) {
+        self.tableController = tableController as? ResetPasswordTableController
+        self.tableController.delegate = self
+    }
+    
+    override func savePromise() -> Promise<Void> {
+        return viewModel.resetPassword()
+    }
+    
+    override func handleSave(_ error: Error) {
+        switch error {
+        case APIRequestError.forbidden:
+            self.messagePresenterManager.show(validationMessage: "Код восстановления неверный или больше не действует")
+        case APIRequestError.notFound:
+            self.messagePresenterManager.show(validationMessage: "Пользователь с таким адресом не найден")
+        default:
+            super.handleSave(error)
         }
     }
-    
-    @IBAction func didChangeText(_ sender: UITextField) {
-        didChangeEditing(sender)
-    }
-    
-    private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        set(cells: activityIndicatorCell, hidden: hidden)
-        reloadData(animated: animated)
-    }
 }
 
-extension ResetPasswordViewController : FieldsViewControllerProtocol {
-    
-    var fieldsViewModel: FieldsViewModel {
-        return viewModel
+extension ResetPasswordViewController : ResetPasswordTableControllerDelegate {    
+    func didChange(code: String?) {
+        viewModel.passwordResetCode = code
     }
     
-    func registerFields() {
-        fieldsViewModel.register(passwordResetCodeTextField,
-                                 attributeName: ResetPasswordForm.CodingKeys.passwordResetCode.stringValue,
-                                 codingKey: ResetPasswordForm.CodingKeys.passwordResetCode)
-        fieldsViewModel.register(passwordTextField,
-                                 attributeName: ResetPasswordForm.CodingKeys.password.stringValue,
-                                 codingKey: ResetPasswordForm.CodingKeys.password)
-        fieldsViewModel.register(passwordConfirmationTextField,
-                                 attributeName: ResetPasswordForm.CodingKeys.passwordConfirmation.stringValue,
-                                 codingKey: ResetPasswordForm.CodingKeys.passwordConfirmation)
-    }
-}
-
-extension ResetPasswordViewController : UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        didBeginEditing(textField)
+    func didChange(password: String?) {
+        viewModel.password = password
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func didChange(passwordConfirmation: String?) {
+        viewModel.passwordConfirmation = passwordConfirmation
+    }
+    
+    func didTapSave() {
+        save()
     }
 }

@@ -54,6 +54,7 @@ class ExpenseCategoryEditViewController : FormTransactionsDependableEditViewCont
     }
     
     override func didSave() {
+        super.didSave()
         if viewModel.isNew {
             delegate?.didCreateExpenseCategory(with: viewModel.basketType, name: viewModel.name!)
         }

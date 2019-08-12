@@ -8,89 +8,49 @@
 
 import UIKit
 import PromiseKit
-import StaticTableViewController
-import SwiftMessages
 
-class RegistrationViewController : StaticTableViewController {
+class RegistrationViewController : FormSubmitViewController {
     
-    @IBOutlet weak var firstnameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var passwordConfirmationTextField: UITextField!
-    @IBOutlet weak var registerButton: UIButton!
-    @IBOutlet weak var activityIndicatorCell: UITableViewCell!
-    @IBOutlet weak var loaderImageView: UIImageView!
-    
-    var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: RegistrationViewModel!
+    var tableController: RegistrationTableController!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        insertAnimation = .top
-        deleteAnimation = .bottom
-        registerFields()
-        loaderImageView.showLoader()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setActivityIndicator(hidden: true, animated: false)
-    }
-    
-    @IBAction func didTapRegisterButton(_ sender: Any) {
-        view.endEditing(true)
-        setActivityIndicator(hidden: false)
-        registerButton.isEnabled = false
+    override var formTitle: String { return "Регистрация" }
+    override var saveErrorMessage: String { return "Ошибка при регистрации" }
         
-        firstly {
-            viewModel.registerWith(firstname: self.firstnameTextField.text?.trimmed,
-                                   email: self.emailTextField.text?.trimmed,
-                                   password: self.passwordTextField.text?.trimmed,
-                                   passwordConfirmation: self.passwordConfirmationTextField.text?.trimmed)
-        }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при регистрации", theme: .error)
-            self.validateUI()
-        }.finally {
-            self.setActivityIndicator(hidden: true)
-            self.registerButton.isEnabled = true
-        }
+    override func registerFormFields() -> [String : FormField] {
+        return [UserCreationForm.CodingKeys.email.rawValue : tableController.emailField,
+                UserCreationForm.CodingKeys.password.rawValue : tableController.passwordField,
+                UserCreationForm.CodingKeys.passwordConfirmation.rawValue : tableController.confirmationField]
     }
     
-    @IBAction func didChangeText(_ sender: UITextField) {
-        didChangeEditing(sender)
+    override func setup(tableController: FormFieldsTableViewController) {
+        self.tableController = tableController as? RegistrationTableController
+        self.tableController.delegate = self
     }
     
-    private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        set(cells: activityIndicatorCell, hidden: hidden)
-        reloadData(animated: animated)
+    override func savePromise() -> Promise<Void> {
+        return viewModel.register()
     }
 }
 
-extension RegistrationViewController : FieldsViewControllerProtocol {
-    
-    var fieldsViewModel: FieldsViewModel {
-        return viewModel
+extension RegistrationViewController : RegistrationTableControllerDelegate {
+    func didChange(name: String?) {
+        viewModel.name = name
     }
     
-    func registerFields() {
-        fieldsViewModel.register(emailTextField,
-                                 attributeName: UserCreationForm.CodingKeys.email.stringValue,
-                                 codingKey: UserCreationForm.CodingKeys.email)
-        fieldsViewModel.register(passwordTextField,
-                                 attributeName: UserCreationForm.CodingKeys.password.stringValue,
-                                 codingKey: UserCreationForm.CodingKeys.password)
-        fieldsViewModel.register(passwordConfirmationTextField,
-                                 attributeName: UserCreationForm.CodingKeys.passwordConfirmation.stringValue,
-                                 codingKey: UserCreationForm.CodingKeys.passwordConfirmation)
-    }
-}
-
-extension RegistrationViewController : UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        didBeginEditing(textField)
+    func didChange(email: String?) {
+        viewModel.email = email
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func didChange(password: String?) {
+        viewModel.password = password
+    }
+    
+    func didChange(passwordConfirmation: String?) {
+        viewModel.passwordConfirmation = passwordConfirmation
+    }
+    
+    func didTapSave() {
+        save()
     }
 }

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "reset-code-image.png",
+      "filename" : "forgot-password-image.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "reset-code-image@2x.png",
+      "filename" : "forgot-password-image@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "reset-code-image@3x.png",
+      "filename" : "forgot-password-image@3x.png",
       "scale" : "3x"
     }
   ],

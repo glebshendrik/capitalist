@@ -34,7 +34,7 @@ class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var removeCell: UITableViewCell!
     
     var delegate: ExpenseCategoryEditTableControllerDelegate?
-
+        
     override func setupUI() {
         super.setupUI()
         setupNameField()
@@ -44,6 +44,7 @@ class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     }
     
     func setupNameField() {
+        register(responder: nameField.textField)
         nameField.placeholder = "Название"
         nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
@@ -68,6 +69,7 @@ class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     }
     
     func setupMonthlyPlannedField() {
+        register(responder: monthlyPlannedField.textField)
         monthlyPlannedField.placeholder = "Планирую тратить в месяц"
         monthlyPlannedField.imageName = "planned-amount-icon"
         monthlyPlannedField.didChange { [weak self] text in

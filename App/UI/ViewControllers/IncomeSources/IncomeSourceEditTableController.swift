@@ -31,6 +31,7 @@ class IncomeSourceEditTableController : FormFieldsTableViewController {
     }
     
     private func setupNameField() {
+        register(responder: nameField.textField)
         nameField.placeholder = "Название"
         nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in

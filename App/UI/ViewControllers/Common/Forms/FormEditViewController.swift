@@ -70,7 +70,6 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
             savePromise()
         }.done {
             self.didSave()
-            self.close()
         }.catch { error in
             switch error {
             case ValidationError.invalid(let errors):
@@ -185,7 +184,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     }
     
     func didSave() {
-        
+        close()
     }
     
     func didRemove() {

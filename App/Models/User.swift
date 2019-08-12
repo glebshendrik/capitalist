@@ -142,12 +142,12 @@ struct UserDeviceTokenUpdatingForm : Encodable {
     }    
 }
 
-struct UserCreationForm : Encodable {
-    var email: String
+struct UserCreationForm : Encodable, Validatable {
+    var email: String?
     var firstname: String?
     let lastname: String?
-    let password: String
-    let passwordConfirmation: String
+    let password: String?
+    let passwordConfirmation: String?
     
     enum CodingKeys: String, CodingKey {
         case email
@@ -157,12 +157,23 @@ struct UserCreationForm : Encodable {
         case passwordConfirmation = "password_confirmation"        
     }
     
-    static func build() -> UserCreationForm {
-        return UserCreationForm(email: "",
-                                firstname: "",
-                                lastname: "",
-                                password: "",
-                                passwordConfirmation: "")
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if !Validator.isValid(email: email) {
+            errors[CodingKeys.email.rawValue] = "Введите корректный email"
+        }
+        
+        if !Validator.isValid(password: password) {
+            errors[CodingKeys.password.rawValue] = "Введите корректный пароль"
+        }
+        
+        if !Validator.isValid(passwordConfirmation: passwordConfirmation,
+                              password: password) {
+            errors[CodingKeys.passwordConfirmation.rawValue] = "Пароли не совпадают"
+        }
+        
+        return errors
     }
 }
 
@@ -179,25 +190,58 @@ struct ChangePasswordForm : Encodable {
     }
 }
 
-struct ResetPasswordForm : Encodable {
-    let email: String
-    let passwordResetCode: String
-    let password: String
-    let passwordConfirmation: String
+struct ResetPasswordForm : Encodable, Validatable {
+    let email: String?
+    let passwordResetCode: String?
+    let password: String?
+    let passwordConfirmation: String?
     
     enum CodingKeys: String, CodingKey {
         case email
         case passwordResetCode = "password_reset_code"
         case password
         case passwordConfirmation = "password_confirmation"
-    }    
+    }
+    
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if !Validator.isValid(email: email) {
+            errors[CodingKeys.email.rawValue] = "Укажите email"
+        }
+        
+        if !Validator.isValid(required: passwordResetCode) {
+            errors[CodingKeys.passwordResetCode.rawValue] = "Введите код подтверждения"
+        }
+        
+        if !Validator.isValid(password: password) {
+            errors[CodingKeys.password.rawValue] = "Введите новый пароль"
+        }
+        
+        if !Validator.isValid(passwordConfirmation: passwordConfirmation,
+                              password: password) {
+            errors[CodingKeys.passwordConfirmation.rawValue] = "Пароли не совпадают"
+        }
+        
+        return errors
+    }
 }
 
-struct PasswordResetCodeForm : Encodable {
-    let email: String
+struct PasswordResetCodeForm : Encodable, Validatable {
+    let email: String?
     
     enum CodingKeys: String, CodingKey {
         case email
+    }
+    
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if !Validator.isValid(email: email) {
+            errors[CodingKeys.email.rawValue] = "Введите корректный email"
+        }
+                
+        return errors
     }
 }
 

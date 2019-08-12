@@ -147,4 +147,10 @@ class UIFactory : UIFactoryProtocol {
     func forgotPasswordViewController() -> ForgotPasswordViewController? {
         return router.viewController(.ForgotPasswordViewController) as? ForgotPasswordViewController
     }
+    
+    func resetPasswordViewController(email: String?) -> ResetPasswordViewController? {
+        let viewController = router.viewController(.ResetPasswordViewController) as? ResetPasswordViewController
+        viewController?.set(email: email)
+        return viewController
+    }
 }

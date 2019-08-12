@@ -30,24 +30,20 @@ class LoginTableController : SaveAccessoryFormFieldsTableViewController {
     }
     
     private func setupLoginField() {
+        register(responder: loginField.textField)
+        setupAsEmail(loginField)
         loginField.placeholder = "Email"
         loginField.imageName = "email-icon"
-        loginField.textField.textContentType = UITextContentType.emailAddress
-        loginField.textField.keyboardType = UIKeyboardType.emailAddress
-        loginField.textField.autocapitalizationType = UITextAutocapitalizationType.none
-        loginField.textField.autocorrectionType = UITextAutocorrectionType.no
-        loginField.textField.inputAccessoryView = saveButton
         loginField.didChange { [weak self] text in
             self?.delegate?.didChange(login: text)
         }
     }
     
     private func setupPasswordField() {
+        register(responder: passwordField.textField)
+        setupAsSecure(passwordField)
         passwordField.placeholder = "Пароль"
         passwordField.imageName = "password-icon"
-        passwordField.textField.isSecureTextEntry = true
-        passwordField.textField.textContentType = UITextContentType.password
-        passwordField.textField.inputAccessoryView = saveButton
         passwordField.didChange { [weak self] text in
             self?.delegate?.didChange(password: text)
         }

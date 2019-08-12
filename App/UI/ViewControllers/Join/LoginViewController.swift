@@ -13,8 +13,7 @@ import SwiftMessages
 
 class LoginViewController : FormSubmitViewController {
     
-    var viewModel: LoginViewModel!
-    private var delegate: LoginTableControllerDelegate?
+    var viewModel: LoginViewModel!    
     var tableController: LoginTableController!
     
     override var formTitle: String { return "Вход" }

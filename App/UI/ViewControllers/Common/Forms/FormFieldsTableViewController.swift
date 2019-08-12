@@ -8,10 +8,15 @@
 
 import UIKit
 import StaticTableViewController
+import IQKeyboardManager
 
-class FormFieldsTableViewController : StaticTableViewController, UITextFieldDelegate {
+class FormFieldsTableViewController : StaticTableViewController, UITextFieldDelegate, UITextViewDelegate {
     @IBOutlet weak var activityIndicatorCell: UITableViewCell?
     @IBOutlet weak var loaderImageView: UIImageView?
+    private var returnKeyHandler: IQKeyboardReturnKeyHandler!
+    
+    var lastResponder: UIView? { return responders.last }
+    var responders: [UIView] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +40,12 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
         insertAnimation = .top
         deleteAnimation = .top
         tableView.allowsSelection = false
+        returnKeyHandler = IQKeyboardReturnKeyHandler(viewController: self)
+        returnKeyHandler.delegate = self
+        returnKeyHandler.lastTextFieldReturnKeyType = .done
     }
     
-    func updateTable(animated: Bool = true) {        
+    func updateTable(animated: Bool = true) {
         reloadData(animated: animated)
     }
     
@@ -47,6 +55,34 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
             updateTable(animated: animated)
         }
     }
+    
+    func register(responder: UIView?) {
+        guard let responder = responder else { return }
+        returnKeyHandler.addTextFieldView(responder)
+        responders.append(responder)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == lastResponder {
+            didTapSave()
+        }
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") {
+            textView.resignFirstResponder()
+            if textView == lastResponder {
+                didTapSave()
+            }
+        }
+        return true
+    }
+    
+    func didTapSave() {
+        
+    }
+    
 }
 
 class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController {
@@ -72,7 +108,17 @@ class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController
         didTapSave()
     }
     
-    func didTapSave() {
-        
+    func setupAsEmail(_ field: FormTextField) {
+        field.textField.textContentType = UITextContentType.emailAddress
+        field.textField.keyboardType = UIKeyboardType.emailAddress
+        field.textField.autocapitalizationType = UITextAutocapitalizationType.none
+        field.textField.autocorrectionType = UITextAutocorrectionType.no
+        field.textField.inputAccessoryView = saveButton
     }
+    
+    func setupAsSecure(_ field: FormTextField) {
+        field.textField.isSecureTextEntry = true
+        field.textField.textContentType = UITextContentType.password
+        field.textField.inputAccessoryView = saveButton
+    }    
 }

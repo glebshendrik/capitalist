@@ -52,6 +52,7 @@ class IncomeSourceEditViewController : FormTransactionsDependableEditViewControl
     }
     
     override func didSave() {
+        super.didSave()
         if self.viewModel.isNew {
             self.delegate?.didCreateIncomeSource()
         }

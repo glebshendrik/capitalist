@@ -55,6 +55,22 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     
     var delegate: ExpenseSourceEditTableControllerDelegate?
     
+    override var lastResponder: UIView? {
+        if !isHidden(cell: goalAmountCell) {
+            return goalAmountField.textField
+        }
+        
+        if !isHidden(cell: creditLimitCell) {
+            return creditLimitField.textField
+        }
+        
+        if !isHidden(cell: amountCell) {
+            return amountField.textField
+        }
+        
+        return nameField.textField
+    }
+    
     override func setupUI() {
         super.setupUI()
         setupNameField()
@@ -65,6 +81,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     }
     
     private func setupNameField() {
+        register(responder: nameField.textField)
         nameField.placeholder = "Название"
         nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
@@ -81,6 +98,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     }
     
     private func setupAmountField() {
+        register(responder: amountField.textField)
         amountField.placeholder = "Баланс"
         amountField.imageName = "amount-icon"
         amountField.didChange { [weak self] text in
@@ -89,6 +107,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     }
     
     private func setupCreditLimitField() {
+        register(responder: creditLimitField.textField)
         creditLimitField.placeholder = "Кредитный лимит"
         creditLimitField.imageName = "credit-limit-icon"
         creditLimitField.didChange { [weak self] text in
@@ -97,6 +116,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     }
     
     private func setupGoalAmountField() {
+        register(responder: goalAmountField.textField)
         goalAmountField.placeholder = "Хочу накопить"
         goalAmountField.imageName = "planned-amount-icon"
         goalAmountField.didChange { [weak self] text in

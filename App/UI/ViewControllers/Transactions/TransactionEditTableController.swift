@@ -24,7 +24,7 @@ protocol TransactionEditTableControllerDelegate {
     func didTapRemoveButton()
 }
 
-class TransactionEditTableController : FormFieldsTableViewController, UITextViewDelegate {
+class TransactionEditTableController : FormFieldsTableViewController {
     
     // Fields
     @IBOutlet weak var sourceField: FormTapField!
@@ -53,7 +53,7 @@ class TransactionEditTableController : FormFieldsTableViewController, UITextView
     @IBOutlet weak var removeButton: UIButton!
     
     var delegate: TransactionEditTableControllerDelegate?
-    
+        
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delegate?.didAppear()
@@ -90,6 +90,7 @@ class TransactionEditTableController : FormFieldsTableViewController, UITextView
     }
     
     private func setupAmountField() {
+        register(responder: amountField.textField)
         amountField.placeholder = "Сумма"
         amountField.imageName = "amount-icon"
         amountField.didChange { [weak self] text in
@@ -98,6 +99,8 @@ class TransactionEditTableController : FormFieldsTableViewController, UITextView
     }
     
     private func setupExchangeField() {
+        register(responder: exchangeField.amountField)
+        register(responder: exchangeField.convertedAmountField)
         exchangeField.amountPlaceholder = "Сумма"
         exchangeField.convertedAmountPlaceholder = "Сумма"
         exchangeField.imageName = "amount-icon"
@@ -110,6 +113,7 @@ class TransactionEditTableController : FormFieldsTableViewController, UITextView
     }
     
     private func setupCommentView() {
+        register(responder: commentView)
         commentView.delegate = self
     }
     

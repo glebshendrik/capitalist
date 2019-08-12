@@ -49,6 +49,7 @@ class ExpenseEditViewController : TransactionEditViewController {
     }
     
     override func didSave() {
+        super.didSave()
         if self.viewModel.isNew {
             self.delegate?.didCreateExpense()
         }

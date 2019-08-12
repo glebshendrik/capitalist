@@ -6,102 +6,55 @@
 //  Copyright © 2018 Real Tranzit. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import PromiseKit
-import StaticTableViewController
-import SwiftMessages
 
-protocol ForgotPasswordOutputProtocol {
-    var email: String? { get }
-}
-
-class ForgotPasswordViewController : StaticTableViewController, ForgotPasswordOutputProtocol {
-    
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var createPasswordResetCodeButton: UIButton!
-    @IBOutlet weak var activityIndicatorCell: UITableViewCell!
-    @IBOutlet weak var loaderImageView: UIImageView!
+class ForgotPasswordViewController : FormSubmitViewController {
     
     var viewModel: ForgotPasswordViewModel!
-    var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var tableController: ForgotPasswordTableController!
     
-    var email: String? {
-        return emailTextField.text?.trimmed
+    override var formTitle: String { return "Восстановление пароля" }
+    override var saveErrorMessage: String { return "Ошибка при создании кода восстановления пароля" }
+    
+    override func registerFormFields() -> [String : FormField] {
+        return [PasswordResetCodeForm.CodingKeys.email.rawValue : tableController.emailField]
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        insertAnimation = .top
-        deleteAnimation = .bottom
-        registerFields()
-        loaderImageView.showLoader()
+    override func setup(tableController: FormFieldsTableViewController) {
+        self.tableController = tableController as? ForgotPasswordTableController
+        self.tableController.delegate = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setActivityIndicator(hidden: true, animated: false)
+    override func savePromise() -> Promise<Void> {
+        return viewModel.createCode()
     }
     
-    @IBAction func didTapCreatePasswordResetCodeButton(_ sender: Any) {
-        view.endEditing(true)
-        setActivityIndicator(hidden: false)
-        createPasswordResetCodeButton.isEnabled = false
-        
-        firstly {
-            viewModel.createPasswordResetCodeWith(email: email)
-        }.done {
-            self.showResetPasswordScreen()
-        }
-        .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при создании кода восстановления пароля", theme: .error)
-            self.validateUI()
-        }.finally {
-            self.setActivityIndicator(hidden: true)
-            self.createPasswordResetCodeButton.isEnabled = true
+    override func handleSave(_ error: Error) {
+        switch error {
+        case APIRequestError.notFound:
+            self.messagePresenterManager.show(validationMessage: "Пользователь с таким адресом не найден")
+        default:
+            super.handleSave(error)
         }
     }
     
-    @IBAction func didChangeText(_ sender: UITextField) {
-        didChangeEditing(sender)
+    override func didSave() {
+        showResetPasswordScreen()
     }
     
     func showResetPasswordScreen() {
-        self.messagePresenterManager.show(navBarMessage: "Мы отправили код для смены пароля на ваш Email", theme: .success)
-        performSegue(withIdentifier: "ShowResetPasswordScreen", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? ResetPasswordInputProtocol,
-            segue.identifier == "ShowResetPasswordScreen" {
-            destination.set(email: email)
-        }
-    }
-    
-    private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        set(cells: activityIndicatorCell, hidden: hidden)
-        reloadData(animated: animated)
-    }
+        messagePresenterManager.show(navBarMessage: "Мы отправили код для смены пароля на ваш Email", theme: .success)
+        push(factory.resetPasswordViewController(email: viewModel.email))
+    }    
 }
 
-extension ForgotPasswordViewController : FieldsViewControllerProtocol {
-    
-    var fieldsViewModel: FieldsViewModel {
-        return viewModel
+extension ForgotPasswordViewController : ForgotPasswordTableControllerDelegate {
+    func didChange(email: String?) {
+        viewModel.email = email
     }
     
-    func registerFields() {
-        fieldsViewModel.register(emailTextField,
-                                 attributeName: PasswordResetCodeForm.CodingKeys.email.stringValue,
-                                 codingKey: PasswordResetCodeForm.CodingKeys.email)
-    }
-}
-
-extension ForgotPasswordViewController : UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        didBeginEditing(textField)
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-    }
+    func didTapSave() {
+        save()
+    }    
 }

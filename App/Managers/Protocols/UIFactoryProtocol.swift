@@ -61,4 +61,6 @@ protocol UIFactoryProtocol {
     
     func forgotPasswordViewController() -> ForgotPasswordViewController?
     
+    func resetPasswordViewController(email: String?) -> ResetPasswordViewController?
+    
 }

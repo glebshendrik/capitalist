@@ -55,6 +55,7 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
     }
     
     override func didSave() {
+        super.didSave()
         if viewModel.isNew {
             delegate?.didCreateExpenseSource()
         }

@@ -295,6 +295,9 @@
 		FACC01FD224CC65B0044A747 /* StatisticsTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC01FC224CC65B0044A747 /* StatisticsTitleView.swift */; };
 		FACC01FF224CC7140044A747 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC01FE224CC7140044A747 /* CustomView.swift */; };
 		FACC0201224CCDEE0044A747 /* StatisticsTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACC0200224CCDEE0044A747 /* StatisticsTitleView.xib */; };
+		FACEC157230133CC00611B2C /* RegistrationTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEC156230133CC00611B2C /* RegistrationTableController.swift */; };
+		FACEC1592301495A00611B2C /* ForgotPasswordTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEC1582301495A00611B2C /* ForgotPasswordTableController.swift */; };
+		FACEC15B2301505F00611B2C /* ResetPasswordTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEC15A2301505F00611B2C /* ResetPasswordTableController.swift */; };
 		FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
 		FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* Launch.storyboard */; };
@@ -662,6 +665,9 @@
 		FACC01FC224CC65B0044A747 /* StatisticsTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTitleView.swift; sourceTree = "<group>"; };
 		FACC01FE224CC7140044A747 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		FACC0200224CCDEE0044A747 /* StatisticsTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatisticsTitleView.xib; sourceTree = "<group>"; };
+		FACEC156230133CC00611B2C /* RegistrationTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTableController.swift; sourceTree = "<group>"; };
+		FACEC1582301495A00611B2C /* ForgotPasswordTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordTableController.swift; sourceTree = "<group>"; };
+		FACEC15A2301505F00611B2C /* ResetPasswordTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordTableController.swift; sourceTree = "<group>"; };
 		FAD88EF621AEA86E00BE7BC1 /* Three Baskets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Three Baskets.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1619,10 +1625,13 @@
 				FAD88F8321B0FB7800BE7BC1 /* LandingViewController.swift */,
 				FAC3B9D021C131390015A12F /* JoinViewController.swift */,
 				FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */,
+				FACEC156230133CC00611B2C /* RegistrationTableController.swift */,
 				FA165CE521B6669500EAA16B /* LoginViewController.swift */,
 				FA6910A92300F0B6001209FC /* LoginTableController.swift */,
 				FA165CE921B769B500EAA16B /* ForgotPasswordViewController.swift */,
+				FACEC1582301495A00611B2C /* ForgotPasswordTableController.swift */,
 				FA165CED21B7846C00EAA16B /* ResetPasswordViewController.swift */,
+				FACEC15A2301505F00611B2C /* ResetPasswordTableController.swift */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -1893,6 +1902,7 @@
 				FAD88F5F21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift in Sources */,
 				FAD88F1521AEB52C00BE7BC1 /* ServicesAssembly.swift in Sources */,
 				FA7CB4DF221C324200FAAC0F /* IncomesCoordinator.swift in Sources */,
+				FACEC1592301495A00611B2C /* ForgotPasswordTableController.swift in Sources */,
 				FAED7DB221EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift in Sources */,
 				FA7CB4DD221C321D00FAAC0F /* IncomesCoordinatorProtocol.swift in Sources */,
 				FA30B47822852F410017470C /* BalanceExpenseSourcesTableSupport.swift in Sources */,
@@ -1973,6 +1983,7 @@
 				FA0CAE0121D25F5300805288 /* ExpenseSourcesService.swift in Sources */,
 				FA66FB792226D37000708C71 /* ExchangeRate.swift in Sources */,
 				FAD88F7821AFD64000BE7BC1 /* APIResourcePath.swift in Sources */,
+				FACEC15B2301505F00611B2C /* ResetPasswordTableController.swift in Sources */,
 				FA87A43522F9BC9300E0BFD0 /* TransactionUIExtension.swift in Sources */,
 				FAD88F7721AFD64000BE7BC1 /* APIResourceMethod.swift in Sources */,
 				FA87A43122F9816900E0BFD0 /* FormExchangeFieldAppearance.swift in Sources */,
@@ -2016,6 +2027,7 @@
 				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
 				FA7DB73522102FBE00559878 /* CurrenciesCoordinator.swift in Sources */,
 				FA71770122683299008ADF94 /* GraphTotalTableViewCell.swift in Sources */,
+				FACEC157230133CC00611B2C /* RegistrationTableController.swift in Sources */,
 				FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */,
 				FA7276DA22539F510086D4D1 /* FiltersSelectionViewSection.swift in Sources */,
 				FA2847E722E9C216003F114A /* FormMoneyTextField.swift in Sources */,
