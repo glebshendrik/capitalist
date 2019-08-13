@@ -80,16 +80,16 @@ extension User {
     }
 }
 
-struct UserUpdatingForm : Encodable {
-    let userId: Int
+struct UserUpdatingForm : Encodable, Validatable {
+    let userId: Int?
     let firstname: String?
     let saltEdgeCustomerSecret: String?
     
-    init(userId: Int, firstname: String?) {
+    init(userId: Int?, firstname: String?) {
         self.init(userId: userId, firstname: firstname, saltEdgeCustomerSecret: nil)
     }
     
-    init(userId: Int, firstname: String?, saltEdgeCustomerSecret: String?) {
+    init(userId: Int?, firstname: String?, saltEdgeCustomerSecret: String?) {
         self.userId = userId
         self.firstname = firstname
         self.saltEdgeCustomerSecret = saltEdgeCustomerSecret
@@ -109,10 +109,20 @@ struct UserUpdatingForm : Encodable {
             try container.encode(saltEdgeCustomerSecret, forKey: .saltEdgeCustomerSecret)
         }        
     }
+    
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if !Validator.isValid(present: userId) {
+            errors["id"] = "Ошибка сохранения"
+        }
+        
+        return errors
+    }
 }
 
 struct UserSettingsUpdatingForm : Encodable {
-    let userId: Int
+    let userId: Int?
     let currency: String?
     let defaultPeriod: AccountingPeriod?
     

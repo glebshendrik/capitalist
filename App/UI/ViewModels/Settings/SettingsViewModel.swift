@@ -40,20 +40,16 @@ class SettingsViewModel : ProfileViewModel {
     }
     
     func update(currency: Currency) -> Promise<Void> {
-        guard let currentUserId = accountCoordinator.currentSession?.userId else {
-            return Promise(error: ProfileEditError.currentSessionDoesNotExist)
-        }
-        
-        let form = UserSettingsUpdatingForm(userId: currentUserId, currency: currency.code, defaultPeriod: nil)
+        let form = UserSettingsUpdatingForm(userId: accountCoordinator.currentSession?.userId,
+                                            currency: currency.code,
+                                            defaultPeriod: nil)
         return update(settings: form)
     }
     
-    func update(period: AccountingPeriod) -> Promise<Void> {
-        guard let currentUserId = accountCoordinator.currentSession?.userId else {
-            return Promise(error: ProfileEditError.currentSessionDoesNotExist)
-        }
-        
-        let form = UserSettingsUpdatingForm(userId: currentUserId, currency: nil, defaultPeriod: period)
+    func update(period: AccountingPeriod) -> Promise<Void> {        
+        let form = UserSettingsUpdatingForm(userId: accountCoordinator.currentSession?.userId,
+                                            currency: nil,
+                                            defaultPeriod: period)
         return update(settings: form)
     }
     

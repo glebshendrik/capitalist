@@ -13,8 +13,8 @@ struct APIResourcePath {
         switch resource {
         case .createUser:                                   return "/users"
         case .showUser(let id):                             return "/users/\(id)"
-        case .updateUser(let form):                         return "/users/\(form.userId)"
-        case .updateUserSettings(let form):                 return "/users/\(form.userId)"
+        case .updateUser(let form):                         return "/users/\(form.userId!)"        
+        case .updateUserSettings(let form):                 return "/users/\(form.userId!)"
         case .updateDeviceToken(let form):                  return "/users/\(form.userId)"
         case .changePassword(let form):                     return "/users/\(form.userId)/password"
         case .resetPassword:                                return "/users/new_password"

@@ -154,7 +154,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     }
     
     func updateNavBarUI() {
-        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
+        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)        
     }
     
     func setup(tableController: FormFieldsTableViewController) {
