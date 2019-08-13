@@ -6,92 +6,61 @@
 //  Copyright © 2018 Real Tranzit. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import PromiseKit
-import StaticTableViewController
-import SwiftMessages
 
-class ChangePasswordViewController : StaticTableViewController {
-    
-    @IBOutlet weak var oldPasswordTextField: UITextField!
-    @IBOutlet weak var newPasswordTextField: UITextField!
-    @IBOutlet weak var newPasswordConfirmationTextField: UITextField!
-    @IBOutlet weak var changePasswordButton: UIButton!
-    @IBOutlet weak var activityIndicatorCell: UITableViewCell!
-    @IBOutlet weak var loaderImageView: UIImageView!
+class ChangePasswordViewController : FormSubmitViewController {
     
     var viewModel: ChangePasswordViewModel!
-    var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var tableController: ChangePasswordTableController!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        insertAnimation = .top
-        deleteAnimation = .bottom
-        registerFields()
-        loaderImageView.showLoader()
+    override var formTitle: String { return "Смена пароля" }
+    override var saveErrorMessage: String { return "Ошибка при изменении пароля" }
+    
+    override func registerFormFields() -> [String : FormField] {
+        return [ChangePasswordForm.CodingKeys.oldPassword.rawValue : tableController.oldPasswordField,
+                "password" : tableController.newPasswordField,
+                ChangePasswordForm.CodingKeys.newPasswordConfirmation.rawValue : tableController.confirmationField]
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setActivityIndicator(hidden: true, animated: false)
+    override func setup(tableController: FormFieldsTableViewController) {
+        self.tableController = tableController as? ChangePasswordTableController
+        self.tableController.delegate = self
     }
     
-    @IBAction func didTapChangePasswordButton(_ sender: Any) {
-        view.endEditing(true)
-        setActivityIndicator(hidden: false)
-        changePasswordButton.isEnabled = false
-        
-        firstly {
-            viewModel.changePasswordWith(oldPassword: oldPasswordTextField.text?.trimmed,
-                                         newPassword: newPasswordTextField.text?.trimmed,
-                                         newPasswordConfirmation: newPasswordConfirmationTextField.text?.trimmed)
-        }.done {
-            self.messagePresenterManager.show(navBarMessage: "Пароль успешно изменен", theme: .success)
-            self.navigationController?.popViewController(animated: true)
-        }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Невозможно изменить пароль", theme: .error)
-            self.validateUI()
-        }.finally {
-                self.setActivityIndicator(hidden: true)
-                self.changePasswordButton.isEnabled = true
+    override func savePromise() -> Promise<Void> {
+        return viewModel.resetPassword()
+    }
+    
+    override func handleSave(_ error: Error) {
+        switch error {
+        case APIRequestError.forbidden:
+            tableController.oldPasswordField.addError(message: "Старый пароль неверен")            
+        default:
+            super.handleSave(error)
         }
     }
     
-    @IBAction func didChangeText(_ sender: UITextField) {
-        didChangeEditing(sender)
-    }
-    
-    private func setActivityIndicator(hidden: Bool, animated: Bool = true) {
-        set(cells: activityIndicatorCell, hidden: hidden)
-        reloadData(animated: animated)
+    override func didSave() {
+        messagePresenterManager.show(navBarMessage: "Пароль успешно изменен", theme: .success)
+        navigationController?.popViewController(animated: true)
     }
 }
 
-extension ChangePasswordViewController : FieldsViewControllerProtocol {
-    
-    var fieldsViewModel: FieldsViewModel {
-        return viewModel
+extension ChangePasswordViewController : ChangePasswordTableControllerDelegate {    
+    func didChange(oldPassword: String?) {
+        viewModel.oldPassword = oldPassword
     }
     
-    func registerFields() {
-        fieldsViewModel.register(oldPasswordTextField,
-                                 attributeName: ChangePasswordForm.CodingKeys.oldPassword.stringValue,
-                                 codingKey: ChangePasswordForm.CodingKeys.oldPassword)
-        fieldsViewModel.register(newPasswordTextField,
-                                 attributeName: "password",
-                                 codingKey: ChangePasswordForm.CodingKeys.newPassword)
-        fieldsViewModel.register(newPasswordConfirmationTextField,
-                                 attributeName: "password_confirmation",
-                                 codingKey: ChangePasswordForm.CodingKeys.newPasswordConfirmation)
-    }
-}
-
-extension ChangePasswordViewController : UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        didBeginEditing(textField)
+    func didChange(newPassword: String?) {
+        viewModel.newPassword = newPassword
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func didChange(newPasswordConfirmation: String?) {
+        viewModel.newPasswordConfirmation = newPasswordConfirmation
+    }
+    
+    func didTapSave() {
+        save()
     }
 }

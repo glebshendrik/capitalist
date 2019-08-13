@@ -187,16 +187,39 @@ struct UserCreationForm : Encodable, Validatable {
     }
 }
 
-struct ChangePasswordForm : Encodable {
-    let userId: Int
-    let oldPassword: String
-    let newPassword: String
-    let newPasswordConfirmation: String
+struct ChangePasswordForm : Encodable, Validatable {
+    let userId: Int?
+    let oldPassword: String?
+    let newPassword: String?
+    let newPasswordConfirmation: String?
     
     enum CodingKeys: String, CodingKey {
         case oldPassword = "old_password"
         case newPassword = "new_password"
         case newPasswordConfirmation = "new_password_confirmation"
+    }
+    
+    func validate() -> [String : String]? {
+        var errors = [String : String]()
+        
+        if !Validator.isValid(present: userId) {
+            errors["user_id"] = "Ошибка сохранения"
+        }
+        
+        if !Validator.isValid(password: oldPassword) {
+            errors[CodingKeys.oldPassword.rawValue] = "Введите старый пароль"
+        }
+        
+        if !Validator.isValid(password: newPassword) {
+            errors[CodingKeys.newPassword.rawValue] = "Введите новый пароль"
+        }
+        
+        if !Validator.isValid(passwordConfirmation: newPasswordConfirmation,
+                              password: newPassword) {
+            errors[CodingKeys.newPasswordConfirmation.rawValue] = "Пароли не совпадают"
+        }
+        
+        return errors
     }
 }
 
