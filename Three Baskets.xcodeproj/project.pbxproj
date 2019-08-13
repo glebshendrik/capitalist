@@ -300,6 +300,7 @@
 		FACEC15B2301505F00611B2C /* ResetPasswordTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEC15A2301505F00611B2C /* ResetPasswordTableController.swift */; };
 		FACEC15D2302AC8900611B2C /* ProfileEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEC15C2302AC8900611B2C /* ProfileEditTableController.swift */; };
 		FACEC15F2302CEBB00611B2C /* ChangePasswordTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEC15E2302CEBB00611B2C /* ChangePasswordTableController.swift */; };
+		FACEC1612302D9CD00611B2C /* SettingsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEC1602302D9CD00611B2C /* SettingsTableController.swift */; };
 		FAD88EFA21AEA86E00BE7BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */; };
 		FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */; };
 		FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD88F0221AEA87300BE7BC1 /* Launch.storyboard */; };
@@ -672,6 +673,7 @@
 		FACEC15A2301505F00611B2C /* ResetPasswordTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordTableController.swift; sourceTree = "<group>"; };
 		FACEC15C2302AC8900611B2C /* ProfileEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTableController.swift; sourceTree = "<group>"; };
 		FACEC15E2302CEBB00611B2C /* ChangePasswordTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordTableController.swift; sourceTree = "<group>"; };
+		FACEC1602302D9CD00611B2C /* SettingsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableController.swift; sourceTree = "<group>"; };
 		FAD88EF621AEA86E00BE7BC1 /* Three Baskets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Three Baskets.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1212,6 +1214,7 @@
 			isa = PBXGroup;
 			children = (
 				FAA91275220C79EA00F2C251 /* SettingsViewController.swift */,
+				FACEC1602302D9CD00611B2C /* SettingsTableController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1919,6 +1922,7 @@
 				FAD88F7921AFD64000BE7BC1 /* APIResourceRequest.swift in Sources */,
 				FA16FC79223AAC930053C273 /* ExpenseCategorySelectViewController.swift in Sources */,
 				FAD88F3D21AEBB4200BE7BC1 /* UserSessionManager.swift in Sources */,
+				FACEC1612302D9CD00611B2C /* SettingsTableController.swift in Sources */,
 				FA165CE221B65F0300EAA16B /* LoginViewModel.swift in Sources */,
 				FA6F2E8D224350B3008C160F /* HistoryTransactionsCoordinatorProtocol.swift in Sources */,
 				FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */,

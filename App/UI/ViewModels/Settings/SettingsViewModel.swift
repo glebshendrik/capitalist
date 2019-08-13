@@ -15,7 +15,7 @@ class SettingsViewModel : ProfileViewModel {
     private let soundsManager: SoundsManagerProtocol
     
     var currency: String? {
-        return user?.currency.code
+        return user?.currency.translatedName
     }
     
     var period: String? {

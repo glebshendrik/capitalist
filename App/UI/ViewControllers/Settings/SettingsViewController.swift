@@ -8,111 +8,63 @@
 
 import UIKit
 import PromiseKit
-import StaticTableViewController
 
-class SettingsViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
-    
-    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
-    
-    var messagePresenterManager: UIMessagePresenterManagerProtocol!
+class SettingsViewController : FormEditViewController {    
     var viewModel: SettingsViewModel!
+    var tableController: SettingsTableController!
     
-    @IBOutlet weak var currencyLabel: UILabel!
-    @IBOutlet weak var periodLabel: UILabel!
-    @IBOutlet weak var playSoundsSwitch: UISwitch!
+    override var shouldLoadData: Bool { return true }
+    override var formTitle: String { return "Настройки" }
+    override var loadErrorMessage: String? { return "Возникла проблема при загрузке настроек" }
     
-    private var loaderView: LoaderView!
-    
-    var user: User? {
-        return viewModel.user
+    override func setup(tableController: FormFieldsTableViewController) {
+        self.tableController = tableController as? SettingsTableController
+        self.tableController.delegate = self
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
+    override func loadDataPromise() -> Promise<Void> {
+        return viewModel.loadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateUI()
-        refreshData()
+    override func updateUI() {
+        super.updateUI()
+        updateCurrencyUI()
+        updatePeriodUI()
+        updateSoundsUI()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == "showCurrenciesScreen",            
-            let destination = segue.destination as? CurrenciesViewController {
-            
-            destination.set(delegate: self)
-        }
+    func updateCurrencyUI() {
+        tableController.currencyField.text = viewModel.currency
     }
     
-    @IBAction func didSwitchPlaySounds(_ sender: Any) {
-        viewModel.setSounds(enabled: playSoundsSwitch.isOn)
+    func updatePeriodUI() {
+        tableController.periodField.text = viewModel.period
     }
     
-    @IBAction func didTapPeriodButton(_ sender: Any) {
-        let periods: [AccountingPeriod] = [.week, .month, .quarter, .year]
-        let actions = periods.map { period in
-            return UIAlertAction(title: period.title,
-                                 style: .default,
-                                 handler: { _ in
-                                    self.update(period: period)
-                                })
-        }
-        
-        showActionSheet(with: actions)
+    func updateSoundsUI() {
+        tableController.soundsSwitchField.value = viewModel.soundsEnabled
+    }
+}
+
+extension SettingsViewController : SettingsTableControllerDelegate {
+    func didChange(soundsOn: Bool) {
+        viewModel.setSounds(enabled: soundsOn)
     }
     
-    // Re fetch data from the server
-    @objc func refreshData() {
-        showActivityIndicator()
-        
-        firstly {
-            viewModel.loadData()
-        }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Возникла проблема при загрузке настроек", theme: .error)
-            
-        }.finally {
-            self.hideActivityIndicator()
-            self.updateUI(animated: true)
-        }
+    func didAppear() {
+        loadData()
     }
     
-    private func updateUI(animated: Bool = false) {
-        currencyLabel.text = viewModel.currency
-        periodLabel.text = viewModel.period
-        reloadData(animated: animated)
+    func didTapCurrency() {
+        push(factory.currenciesViewController(delegate: self))
     }
     
-    private func showActivityIndicator(animated: Bool = true) {
-        refreshControl?.beginRefreshing(in: tableView, animated: animated)
+    func didTapPeriod() {
+        showPeriodsSheet()
     }
     
-    private func hideActivityIndicator() {
-        self.refreshControl?.endRefreshing()
-    }
-    
-    private func setupUI() {
-        setupRefreshControl()
-        playSoundsSwitch.setOn(viewModel.soundsEnabled, animated: false)
-    }
-    
-    private func setupRefreshControl() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.backgroundColor = .clear
-        refreshControl?.tintColor = .clear
-        refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        if let objOfRefreshView = Bundle.main.loadNibNamed("LoaderView",
-                                                           owner: self,
-                                                           options: nil)?.first as? LoaderView,
-            let refreshControl = refreshControl {
-            
-            loaderView = objOfRefreshView
-            loaderView.imageView.showLoader()
-            loaderView.frame = refreshControl.frame
-            refreshControl.removeSubviews()
-            refreshControl.addSubview(loaderView)
-        }
+    func didRefresh() {
+        loadData()
     }
 }
 
@@ -123,7 +75,7 @@ extension SettingsViewController : CurrenciesViewControllerDelegate {
     
     func update(currency: Currency) {
         dirtyUpdate(currency: currency)
-        showActivityIndicator()
+        operationStarted()
         
         firstly {
             viewModel.update(currency: currency)
@@ -131,20 +83,20 @@ extension SettingsViewController : CurrenciesViewControllerDelegate {
             self.messagePresenterManager.show(navBarMessage: "Возникла проблема при обновлении валюты", theme: .error)
             
         }.finally {
-            self.hideActivityIndicator()
-            self.updateUI(animated: true)
+            self.operationFinished()
+            self.updateUI()
         }
     }
     
     private func dirtyUpdate(currency: Currency) {
-        currencyLabel.text = currency.code
+        tableController.currencyField.text = currency.translatedName
     }
 }
 
 extension SettingsViewController {
     func update(period: AccountingPeriod) {
         dirtyUpdate(period: period)
-        showActivityIndicator()
+        operationStarted()
         
         firstly {
             viewModel.update(period: period)
@@ -152,13 +104,26 @@ extension SettingsViewController {
             self.messagePresenterManager.show(navBarMessage: "Возникла проблема при обновлении периода", theme: .error)
             
         }.finally {
-            self.hideActivityIndicator()
-            self.updateUI(animated: true)
+            self.operationFinished()
+            self.updateUI()
         }
     }
     
     private func dirtyUpdate(period: AccountingPeriod) {
-        periodLabel.text = period.title
+        tableController.periodField.text = period.title
+    }
+    
+    private func showPeriodsSheet() {
+        let periods: [AccountingPeriod] = [.week, .month, .quarter, .year]
+        let actions = periods.map { period in
+            return UIAlertAction(title: period.title,
+                                 style: .default,
+                                 handler: { _ in
+                                    self.update(period: period)
+            })
+        }
+        
+        showActionSheet(with: actions)
     }
     
     private func showActionSheet(with actions: [UIAlertAction]) {

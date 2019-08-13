@@ -21,6 +21,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     
     var shouldLoadData: Bool { return false }
     var formTitle: String { return "" }
+    var loadErrorMessage: String? { return nil }
     var saveErrorMessage: String { return "Ошибка сохранения" }
     var removeErrorMessage: String { return "Ошибка удаления" }
     
@@ -56,7 +57,12 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
         
         _ = firstly {
                 loadDataPromise()
-            }.ensure {
+            }.catch { _ in
+                if let loadErrorMessage = self.loadErrorMessage {
+                    self.messagePresenterManager.show(navBarMessage: loadErrorMessage, theme: .error)
+                }
+            }
+            .finally {
                 self.updateUI()
                 self.operationFinished()
             }
