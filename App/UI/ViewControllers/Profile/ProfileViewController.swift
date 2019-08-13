@@ -109,6 +109,7 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
     private func setupUI() {
         insertAnimation = .top
         deleteAnimation = .bottom
+        setupNavigationBar()
         setupRefreshControl()
         loaderImageView.showLoader()
     }
@@ -129,6 +130,15 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
             refreshControl.removeSubviews()
             refreshControl.addSubview(loaderView)
         }
-    }    
+    }
+    
+    func setupNavigationBar() {
+        let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
+                          NSAttributedString.Key.foregroundColor : UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = attributes
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationItem.title = formTitle
+    }
 }
 
