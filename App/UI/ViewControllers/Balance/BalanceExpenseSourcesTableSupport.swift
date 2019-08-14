@@ -39,6 +39,7 @@ class BalanceExpenseSourcesTableSupport : NSObject, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         guard let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) else { return }
         delegate?.didSelect(expenseSource: expenseSourceViewModel)
     }

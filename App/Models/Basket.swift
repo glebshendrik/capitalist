@@ -23,6 +23,17 @@ enum BasketType : String, Codable {
             return .expenseCategorySafe
         }
     }
+    
+    var defaultBackgroundImageName: String {
+        switch self {
+        case .joy:
+            return "joy-category-background-pic"
+        case .risk:
+            return "risk-category-background-pic"
+        case .safe:
+            return "safe-category-background-pic"
+        }
+    }
 }
 
 struct Basket : Decodable {

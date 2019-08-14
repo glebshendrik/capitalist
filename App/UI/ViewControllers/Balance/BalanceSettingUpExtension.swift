@@ -71,8 +71,8 @@ extension BalanceViewController {
         
         func tabsAppearances(for balanceCategory: BalanceCategory) -> (expenseSources: TabAppearance, expenseCategories: TabAppearance) {
             
-            let selectedColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
-            let unselectedColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
+            let selectedColor = UIColor.by(.textFFFFFF)
+            let unselectedColor = UIColor.by(.text9EAACC)
             
             let selectedTabAppearance: TabAppearance = (textColor: selectedColor, isHidden: false)
             let unselectedTabAppearance: TabAppearance = (textColor: unselectedColor, isHidden: true)

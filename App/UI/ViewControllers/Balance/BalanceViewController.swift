@@ -17,7 +17,7 @@ class BalanceViewController : UIViewController, UIMessagePresenterManagerDependa
     var viewModel: BalanceViewModel!
     
     var expenseSourcesSupport: BalanceExpenseSourcesTableSupport?
-    var expenseCategoriesSupport:BalanceExpenseCategoriesTableSupport?
+    var expenseCategoriesSupport: BalanceExpenseCategoriesTableSupport?
     
     @IBOutlet weak var expenseSourcesLabel: UILabel!
     @IBOutlet weak var expenseCategoriesLabel: UILabel!

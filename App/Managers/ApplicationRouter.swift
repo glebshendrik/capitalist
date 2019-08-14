@@ -141,13 +141,9 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = renderedImage
         
         let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
-                          NSAttributedString.Key.foregroundColor : UIColor.init(red: 0.42,
-                                                                                green: 0.58,
-                                                                                blue: 0.98,
-                                                                                alpha: 1)]
+                          NSAttributedString.Key.foregroundColor : UIColor.by(.textFFFFFF)]
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: UIControl.State.highlighted)
-                
         UINavigationBar.appearance().barTintColor = UIColor.by(.dark333D5B)
     }
     
