@@ -11,6 +11,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Rubik-Medium.ttf">
+            <string>Rubik-Medium</string>
+        </array>
         <array key="Rubik-Regular.ttf">
             <string>Rubik-Regular</string>
         </array>
@@ -282,16 +285,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Источники дохода" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTL-e8-6qX">
-                                <rect key="frame" x="16" y="8" width="343" height="14"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
-                                <color key="textColor" red="0.2627450980392157" green="0.33333333333333331" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="16" y="8" width="343" height="19"/>
+                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
+                                <color key="textColor" name="text FFFFFF"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="zab-T9-nnv">
                                 <rect key="frame" x="160" y="318" width="55" height="31"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gyv-hC-fs9">
-                                <rect key="frame" x="0.0" y="26" width="375" height="641"/>
+                                <rect key="frame" x="0.0" y="31" width="375" height="636"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IncomeSourceTableViewCell" rowHeight="60" id="PJR-gw-NAb" customClass="IncomeSourceTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
@@ -304,24 +307,35 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Labelasdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfw-ck-Yd0">
                                                     <rect key="frame" x="16" y="20.5" width="182" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <color key="textColor" red="0.47450980392156861" green="0.51764705882352935" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" name="text FFFFFF"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPG-g9-K7K">
                                                     <rect key="frame" x="214" y="21" width="145" height="18"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                                    <color key="textColor" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" name="text FFFFFF"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBn-f2-Moz">
+                                                    <rect key="frame" x="0.0" y="59" width="375" height="1"/>
+                                                    <color key="backgroundColor" name="delimeter 2F3854"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="HiO-se-u6k"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="eBn-f2-Moz" secondAttribute="trailing" id="FK0-Aa-RUh"/>
                                                 <constraint firstItem="vPG-g9-K7K" firstAttribute="centerY" secondItem="4CE-fN-UCy" secondAttribute="centerY" id="PLN-LA-JGR"/>
+                                                <constraint firstAttribute="bottom" secondItem="eBn-f2-Moz" secondAttribute="bottom" id="V8q-3Z-yDA"/>
+                                                <constraint firstItem="eBn-f2-Moz" firstAttribute="leading" secondItem="4CE-fN-UCy" secondAttribute="leading" id="esO-Xs-zAm"/>
                                                 <constraint firstItem="Pfw-ck-Yd0" firstAttribute="leading" secondItem="4CE-fN-UCy" secondAttribute="leading" constant="16" id="gM4-WN-BoJ"/>
                                                 <constraint firstItem="vPG-g9-K7K" firstAttribute="leading" secondItem="Pfw-ck-Yd0" secondAttribute="trailing" constant="16" id="gel-bH-6ie"/>
                                                 <constraint firstAttribute="trailing" secondItem="vPG-g9-K7K" secondAttribute="trailing" constant="16" id="he3-CV-U4c"/>
                                                 <constraint firstItem="Pfw-ck-Yd0" firstAttribute="centerY" secondItem="4CE-fN-UCy" secondAttribute="centerY" id="pzB-a6-RKt"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="incomeAmountLabel" destination="vPG-g9-K7K" id="a2r-Jz-GNO"/>
@@ -371,6 +385,9 @@
         <image name="save-circle-icon" width="24" height="24"/>
         <namedColor name="dark 2A314B">
             <color red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="delimeter 2F3854">
+            <color red="0.18431372549019609" green="0.2196078431372549" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="text FFFFFF">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

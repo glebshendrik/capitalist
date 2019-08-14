@@ -37,7 +37,15 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.barStyle = .black
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.backgroundImage = UIImage()
+        searchController.searchBar.barTintColor = .red
+        searchController.searchBar.tintColor = .white        
+        searchController.searchBar.backgroundColor = .clear
+        searchController.view.backgroundColor = .clear
         tableView.tableHeaderView = searchController.searchBar
+        tableView.tableHeaderView?.backgroundColor = .clear
     }
     
     private func fetchProviders() {
@@ -80,7 +88,7 @@ extension ProvidersViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
+        return 60
     }
 }
 

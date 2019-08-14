@@ -11,6 +11,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Rubik-Medium.ttf">
+            <string>Rubik-Medium</string>
+        </array>
         <array key="Rubik-Regular.ttf">
             <string>Rubik-Regular</string>
         </array>
@@ -519,7 +522,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CF-wN-0Yc">
-                                                    <rect key="frame" x="84" y="11.5" width="207" height="40"/>
+                                                    <rect key="frame" x="85.5" y="11.5" width="204" height="40"/>
                                                     <color key="backgroundColor" name="blue 5B86F7"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="qaf-Dm-pdu"/>
@@ -634,16 +637,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Кошельки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ih9-OI-Tz7">
-                                <rect key="frame" x="16" y="8" width="343" height="14"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
-                                <color key="textColor" red="0.26274509800000001" green="0.33333333329999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="16" y="8" width="343" height="19"/>
+                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
+                                <color key="textColor" name="text FFFFFF"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-OC-7EH">
                                 <rect key="frame" x="160" y="318" width="55" height="31"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="33c-r7-gKe">
-                                <rect key="frame" x="0.0" y="26" width="375" height="641"/>
+                                <rect key="frame" x="0.0" y="31" width="375" height="636"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpenseSourceTableViewCell" rowHeight="60" id="5xr-sN-e5l" customClass="ExpenseSourceTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
@@ -654,29 +657,29 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Labelasdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Blu-op-yb6">
-                                                    <rect key="frame" x="68" y="20.5" width="130" height="19"/>
+                                                    <rect key="frame" x="68" y="20.5" width="132" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <color key="textColor" red="0.47450980390000003" green="0.51764705879999995" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" name="text FFFFFF"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYS-FF-ARN">
-                                                    <rect key="frame" x="214" y="21" width="145" height="18"/>
+                                                    <rect key="frame" x="216" y="21" width="143" height="18"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                                    <color key="textColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" name="text FFFFFF"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Azq-ox-qLu">
                                                     <rect key="frame" x="16" y="12" width="36" height="36"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="expense-source-icon" translatesAutoresizingMaskIntoConstraints="NO" id="tna-AL-xPZ">
-                                                            <rect key="frame" x="9.5" y="11.5" width="17" height="13"/>
+                                                            <rect key="frame" x="10" y="11.5" width="16" height="13"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="WOv-bd-xuL"/>
-                                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="23" id="uj2-6c-de5"/>
+                                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="16" id="WOv-bd-xuL"/>
+                                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="16" id="uj2-6c-de5"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.89803921568627454" green="0.9137254901960784" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" name="blue 6B93FB"/>
                                                     <constraints>
                                                         <constraint firstItem="tna-AL-xPZ" firstAttribute="centerX" secondItem="Azq-ox-qLu" secondAttribute="centerX" id="Lfl-QV-VlM"/>
                                                         <constraint firstAttribute="width" constant="36" id="Omo-3s-L7p"/>
@@ -689,17 +692,28 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LWU-ov-UmW">
+                                                    <rect key="frame" x="0.0" y="59" width="375" height="1"/>
+                                                    <color key="backgroundColor" name="delimeter 2F3854"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="KbV-Wi-dYS"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="HYS-FF-ARN" firstAttribute="centerY" secondItem="2oy-uA-Jf5" secondAttribute="centerY" id="53g-PR-dUh"/>
                                                 <constraint firstItem="Blu-op-yb6" firstAttribute="centerY" secondItem="2oy-uA-Jf5" secondAttribute="centerY" id="6Yw-Bg-HAu"/>
                                                 <constraint firstAttribute="trailing" secondItem="HYS-FF-ARN" secondAttribute="trailing" constant="16" id="78B-lO-X8M"/>
                                                 <constraint firstItem="Blu-op-yb6" firstAttribute="leading" secondItem="Azq-ox-qLu" secondAttribute="trailing" constant="16" id="WK1-oR-TOJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="LWU-ov-UmW" secondAttribute="bottom" id="ans-oM-Yna"/>
                                                 <constraint firstItem="HYS-FF-ARN" firstAttribute="leading" secondItem="Blu-op-yb6" secondAttribute="trailing" constant="16" id="i8k-h1-kZL"/>
                                                 <constraint firstItem="Azq-ox-qLu" firstAttribute="leading" secondItem="2oy-uA-Jf5" secondAttribute="leading" constant="16" id="kNC-d5-xZb"/>
                                                 <constraint firstItem="Azq-ox-qLu" firstAttribute="centerY" secondItem="2oy-uA-Jf5" secondAttribute="centerY" id="p9T-w3-7Bq"/>
+                                                <constraint firstAttribute="trailing" secondItem="LWU-ov-UmW" secondAttribute="trailing" id="w2a-On-VJM"/>
+                                                <constraint firstItem="LWU-ov-UmW" firstAttribute="leading" secondItem="2oy-uA-Jf5" secondAttribute="leading" id="xai-hx-ays"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="amountLabel" destination="HYS-FF-ARN" id="qcz-ma-gTm"/>
@@ -757,41 +771,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yXx-WL-jte">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yXx-WL-jte">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProviderCell" id="0xd-CH-K0S" customClass="ProviderCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProviderCell" rowHeight="60" id="0xd-CH-K0S" customClass="ProviderCell" customModule="Three_Baskets" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0xd-CH-K0S" id="u9i-gL-cVA">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBv-9q-YSJ">
-                                                    <rect key="frame" x="51.5" y="0.0" width="307.5" height="43.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="68" y="0.0" width="291" height="60"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                    <color key="textColor" name="text FFFFFF"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmk-01-RDa" customClass="SVGKFastImageView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="43.5" height="43.5"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZs-Hc-bjO">
+                                                    <rect key="frame" x="16" y="12" width="36" height="36"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmk-01-RDa" customClass="SVGKFastImageView">
+                                                            <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="fmk-01-RDa" secondAttribute="height" multiplier="1:1" id="Reu-Py-RCf"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="fmk-01-RDa" secondAttribute="height" multiplier="1:1" id="Reu-Py-RCf"/>
+                                                        <constraint firstAttribute="width" constant="36" id="Abm-7P-aQa"/>
+                                                        <constraint firstAttribute="trailing" secondItem="fmk-01-RDa" secondAttribute="trailing" id="Md6-KO-TXn"/>
+                                                        <constraint firstItem="fmk-01-RDa" firstAttribute="top" secondItem="vZs-Hc-bjO" secondAttribute="top" id="SCs-aD-xxv"/>
+                                                        <constraint firstItem="fmk-01-RDa" firstAttribute="leading" secondItem="vZs-Hc-bjO" secondAttribute="leading" id="YQ6-8x-SWv"/>
+                                                        <constraint firstAttribute="bottom" secondItem="fmk-01-RDa" secondAttribute="bottom" id="g4n-rh-9Dp"/>
+                                                        <constraint firstAttribute="height" constant="36" id="ggh-RJ-9PJ"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="18"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYi-tA-x9H">
+                                                    <rect key="frame" x="0.0" y="59" width="375" height="1"/>
+                                                    <color key="backgroundColor" name="delimeter 2F3854"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="zhO-Sv-5rE"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="QBv-9q-YSJ" secondAttribute="trailing" constant="16" id="1L9-na-iIU"/>
+                                                <constraint firstItem="nYi-tA-x9H" firstAttribute="leading" secondItem="u9i-gL-cVA" secondAttribute="leading" id="2ad-th-63Y"/>
+                                                <constraint firstItem="QBv-9q-YSJ" firstAttribute="leading" secondItem="vZs-Hc-bjO" secondAttribute="trailing" constant="16" id="2qa-kw-bQ8"/>
+                                                <constraint firstAttribute="bottom" secondItem="nYi-tA-x9H" secondAttribute="bottom" id="IkE-Qd-jh7"/>
                                                 <constraint firstAttribute="bottom" secondItem="QBv-9q-YSJ" secondAttribute="bottom" id="ZVG-nJ-avD"/>
-                                                <constraint firstItem="fmk-01-RDa" firstAttribute="top" secondItem="u9i-gL-cVA" secondAttribute="top" id="byB-zR-kxo"/>
-                                                <constraint firstItem="fmk-01-RDa" firstAttribute="leading" secondItem="u9i-gL-cVA" secondAttribute="leading" id="rCN-ot-jwu"/>
-                                                <constraint firstAttribute="bottom" secondItem="fmk-01-RDa" secondAttribute="bottom" id="vUt-cs-4Zb"/>
-                                                <constraint firstItem="QBv-9q-YSJ" firstAttribute="leading" secondItem="fmk-01-RDa" secondAttribute="trailing" constant="8" id="vi5-cb-gZF"/>
+                                                <constraint firstItem="vZs-Hc-bjO" firstAttribute="centerY" secondItem="u9i-gL-cVA" secondAttribute="centerY" id="bIY-wa-rtC"/>
+                                                <constraint firstItem="vZs-Hc-bjO" firstAttribute="leading" secondItem="u9i-gL-cVA" secondAttribute="leading" constant="16" id="rWd-tp-piw"/>
+                                                <constraint firstAttribute="trailing" secondItem="nYi-tA-x9H" secondAttribute="trailing" id="wcg-f7-4v2"/>
                                                 <constraint firstItem="QBv-9q-YSJ" firstAttribute="top" secondItem="u9i-gL-cVA" secondAttribute="top" id="xcd-aN-JST"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="logoImageView" destination="fmk-01-RDa" id="we6-xZ-Vhr"/>
                                             <outlet property="titleLabel" destination="QBv-9q-YSJ" id="IzT-ao-s1X"/>
@@ -807,7 +851,7 @@
                                 <rect key="frame" x="160" y="318" width="55" height="31"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZCo-V0-GFh" firstAttribute="bottom" secondItem="yXx-WL-jte" secondAttribute="bottom" id="5pk-aZ-Lf6"/>
                             <constraint firstItem="ZCo-V0-GFh" firstAttribute="trailing" secondItem="yXx-WL-jte" secondAttribute="trailing" id="Jkg-ra-uBE"/>
@@ -883,13 +927,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lh3-V4-5Cz">
-                                                    <rect key="frame" x="16" y="8" width="40.5" height="23.5"/>
+                                                    <rect key="frame" x="16" y="8" width="39.5" height="23.5"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggn-8d-2G2">
-                                                    <rect key="frame" x="318.5" y="8" width="40.5" height="23.5"/>
+                                                    <rect key="frame" x="319.5" y="8" width="39.5" height="23.5"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -963,6 +1007,9 @@
         <image name="wallet-default-icon" width="29" height="22"/>
         <namedColor name="blue 5B86F7">
             <color red="0.35686274509803922" green="0.52549019607843139" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="blue 6B93FB">
+            <color red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="dark 2A314B">
             <color red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
