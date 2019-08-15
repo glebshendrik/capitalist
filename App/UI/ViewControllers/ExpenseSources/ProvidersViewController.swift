@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import SnapKit
 
 protocol ProvidersViewControllerDelegate {
     func didSelect(providerViewModel: ProviderViewModel)
@@ -19,33 +20,40 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var delegate: ProvidersViewControllerDelegate?
     
-    private let searchController = UISearchController(searchResultsController: nil)
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loader: UIImageView!
+    @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var searchClearButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        updateUI()
         fetchProviders()
     }
     
     private func setupUI() {
+        setupLoader()
+        setupSearchBar()
+    }
+    
+    private func setupLoader() {
         loader.showLoader()
         loader.isHidden = true
-        
-        searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.barStyle = .black
-        searchController.searchBar.searchBarStyle = .minimal
-        searchController.searchBar.backgroundImage = UIImage()
-        searchController.searchBar.barTintColor = .red
-        searchController.searchBar.tintColor = .white        
-        searchController.searchBar.backgroundColor = .clear
-        searchController.view.backgroundColor = .clear
-        tableView.tableHeaderView = searchController.searchBar
-        tableView.tableHeaderView?.backgroundColor = .clear
+    }
+    
+    private func setupSearchBar() {
+        searchField.attributedPlaceholder = NSAttributedString(string: "Поиск",
+                                                               attributes: [NSAttributedString.Key.foregroundColor : UIColor.by(.text9EAACC)])
+    }
+    
+    private func updateUI() {
+        tableView.reloadData()
+        updateSearchBar()
+    }
+    
+    private func updateSearchBar() {
+        searchClearButton.isHidden = !viewModel.hasSearchQuery
     }
     
     private func fetchProviders() {
@@ -57,8 +65,24 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
             self.close()
         }.finally {
             self.loader.isHidden = true
-            self.tableView.reloadData()
+            self.updateUI()
         }
+    }
+    
+    @IBAction func didTapClearSearch(_ sender: Any) {
+        searchField.clear()
+        searchField.resignFirstResponder()
+        viewModel.searchQuery = nil
+        updateUI()
+    }
+    
+    @IBAction func didTapLoupe(_ sender: Any) {
+        searchField.becomeFirstResponder()
+    }
+    
+    @IBAction func didChangeSearchQuery(_ sender: Any) {
+        viewModel.searchQuery = searchField.text?.trimmed
+        updateUI()
     }
     
     private func close() {
@@ -98,16 +122,7 @@ extension ProvidersViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let providerViewModel = viewModel.providerViewModel(at: indexPath) else { return }
-        
-        searchController.dismiss(animated: false)
         close()
         delegate?.didSelect(providerViewModel: providerViewModel)
-    }
-}
-
-extension ProvidersViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {        
-        viewModel.searchQuery = searchController.searchBar.text
-        tableView.reloadData()
     }
 }

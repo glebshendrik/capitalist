@@ -23,14 +23,21 @@ class ProvidersViewModel {
         return filteredProviderViewModels.count
     }
     
+    var hasSearchQuery: Bool {
+        guard let searchQuery = searchQuery?.trimmed, !searchQuery.isEmpty else {
+            return false
+        }
+        return true
+    }
+    
     var searchQuery: String? {
         didSet {
-            guard let searchQuery = searchQuery?.trimmed, !searchQuery.isEmpty else {
+            guard hasSearchQuery else {
                 filteredProviderViewModels = providerViewModels
                 return
             }
             filteredProviderViewModels = providerViewModels.filter { provider in
-                return provider.name.lowercased().contains(searchQuery.lowercased())
+                return provider.name.lowercased().contains(searchQuery!.lowercased())
             }
         }
     }
