@@ -12,11 +12,7 @@ import CircleProgressView
 
 class GoalExpenseSourceCollectionViewCell : ExpenseSourceCollectionViewCell {
     @IBOutlet weak var progressView: CircleProgressView!
-    
-    override var placeholderName: String {
-        return "wallet-goal-default-icon"
-    }
-    
+        
     override func updateUI() {
         super.updateUI()
         

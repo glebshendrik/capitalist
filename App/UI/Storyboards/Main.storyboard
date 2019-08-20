@@ -758,7 +758,7 @@
                                                             <subviews>
                                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKz-4a-8Fj">
                                                                     <rect key="frame" x="4" y="0.0" width="46" height="46"/>
-                                                                    <color key="backgroundColor" name="blue 6B93FB"/>
+                                                                    <color key="backgroundColor" name="dark 374467"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="rKz-4a-8Fj" secondAttribute="height" multiplier="1:1" id="WMt-Jb-Oy0"/>
                                                                     </constraints>

@@ -14,13 +14,9 @@ class ExpenseSourceCollectionViewCell : EditableCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
-    
-    var placeholderName: String {
-        return "wallet-default-icon"
-    }
-    
+        
     var imageTintColor: UIColor {
-        return UIColor.by(.dark374262)
+        return UIColor.by(.textFFFFFF)
     }
     
     var viewModel: ExpenseSourceViewModel? {
@@ -32,7 +28,7 @@ class ExpenseSourceCollectionViewCell : EditableCell {
     func updateUI() {
         nameLabel.text = viewModel?.name
         amountLabel.text = viewModel?.amountRounded
-        iconImageView.setImage(with: viewModel?.iconURL, placeholderName: placeholderName, renderingMode: .alwaysTemplate)
+        iconImageView.setImage(with: viewModel?.iconURL, placeholderName: viewModel?.defaultIconName, renderingMode: .alwaysTemplate)
         iconImageView.tintColor = imageTintColor
     }    
     

@@ -35,7 +35,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="nKI-96-3Ff" firstAttribute="leading" secondItem="1ap-Mc-Gf7" secondAttribute="leading" id="Fnc-XO-tpq"/>
                             <constraint firstItem="nKI-96-3Ff" firstAttribute="bottom" secondItem="1ap-Mc-Gf7" secondAttribute="bottom" id="Fs6-8P-D5T"/>
@@ -536,7 +536,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="mJn-tm-uNw" firstAttribute="bottom" secondItem="vTZ-UI-0UW" secondAttribute="bottom" id="0WA-YV-CLz"/>
                             <constraint firstItem="vTZ-UI-0UW" firstAttribute="trailing" secondItem="mJn-tm-uNw" secondAttribute="trailing" id="FkW-5u-DQQ"/>
@@ -602,7 +602,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="Or6-rR-jiX" firstAttribute="trailing" secondItem="t8j-wr-zqd" secondAttribute="trailing" id="Xr2-SV-0p3"/>
                             <constraint firstItem="t8j-wr-zqd" firstAttribute="leading" secondItem="Or6-rR-jiX" secondAttribute="leading" id="YWK-iG-IAm"/>

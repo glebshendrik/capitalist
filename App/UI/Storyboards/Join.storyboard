@@ -24,17 +24,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin-loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="sJx-n0-CPA">
-                                <rect key="frame" x="127.5" y="273.5" width="120" height="120"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="sJx-n0-CPA">
+                                <rect key="frame" x="97.5" y="199" width="180" height="269"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLJ-49-Mhu">
-                                <rect key="frame" x="187.5" y="423.5" width="0.0" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="187.5" y="498" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
+                                <color key="textColor" name="text 9EAACC"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="sJx-n0-CPA" firstAttribute="centerY" secondItem="onM-go-z3r" secondAttribute="centerY" id="0gi-20-N6f"/>
                             <constraint firstItem="zLJ-49-Mhu" firstAttribute="centerX" secondItem="onM-go-z3r" secondAttribute="centerX" id="Kwf-f6-TCu"/>
@@ -1011,10 +1011,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="coin-loader-1" width="120" height="120"/>
         <image name="forgot-password-image" width="128" height="128"/>
         <image name="join-image" width="128" height="138"/>
         <image name="loader-1" width="55" height="31"/>
+        <image name="logo" width="180" height="269.5"/>
         <image name="reset-password-image" width="128" height="135"/>
         <namedColor name="blue 6A92FA">
             <color red="0.41568627450980394" green="0.5725490196078431" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

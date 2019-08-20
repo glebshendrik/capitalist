@@ -16,6 +16,17 @@ enum AccountType : String, Codable {
     case usual
     case goal
     case debt
+    
+    var iconCategory: IconCategory {
+        switch self {
+        case .usual:
+            return .expenseSource
+        case .goal:
+            return .expenseSourceGoal
+        case .debt:
+            return .expenseSourceDebt
+        }
+    }
 }
 
 struct ExpenseSource : Decodable {

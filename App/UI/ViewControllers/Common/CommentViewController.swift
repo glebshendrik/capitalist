@@ -99,13 +99,15 @@ class CommentViewController : UIViewController, CommentViewControllerInputProtoc
         textInputBar.textViewCornerRadius = 16
         textInputBar.textViewBackgroundColor = UIColor(red: 0.95, green: 0.96, blue: 1, alpha: 1)
         textInputBar.textViewBorderWidth = 0
+        textInputBar.textView.font = UIFont(name: "Rubik-Regular", size: 14)
+        textInputBar.textView.textColor = UIColor.by(.text9EAACC)
         
         textInputBar.alwaysShowRightButton = true
         textInputBar.defaultHeight = 64
         textInputBar.textViewBorderPadding = UIEdgeInsets(horizontal: 20, vertical: 6)
         textInputBar.horizontalPadding = 16
         textInputBar.horizontalSpacing = 4
-        textInputBar.backgroundColor = .white
+        textInputBar.backgroundColor = UIColor.by(.dark333D5B)
         textInputBar.roundTopCorners(radius: 8.0)
     }
     

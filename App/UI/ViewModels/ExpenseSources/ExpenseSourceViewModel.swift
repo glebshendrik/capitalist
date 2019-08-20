@@ -68,6 +68,10 @@ class ExpenseSourceViewModel {
         return waitingLoans.count > 0
     }
     
+    var defaultIconName: String {
+        return expenseSource.accountType.iconCategory.defaultIconName
+    }
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         waitingDebts = expenseSource.waitingDebts?.map { FundsMoveViewModel(fundsMove: $0) } ?? []

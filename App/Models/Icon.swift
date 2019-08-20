@@ -29,7 +29,7 @@ enum IconCategory : String, Codable {
         case .expenseSourceGoal:
             return "wallet-goal-default-icon"
         case .expenseSourceDebt:
-            return "wallet-default-icon"
+            return "wallet-debt-default-icon"
         }
     }
 }
