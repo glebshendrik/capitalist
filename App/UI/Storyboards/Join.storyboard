@@ -334,7 +334,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="lgt-59-3Za" firstAttribute="trailing" secondItem="bQ3-x1-Hba" secondAttribute="trailing" id="44Y-sJ-haX"/>
                             <constraint firstItem="lgt-59-3Za" firstAttribute="trailing" secondItem="7wG-hR-ecY" secondAttribute="trailing" id="71h-xf-Sd3"/>
@@ -860,7 +860,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="CEv-VQ-2in" firstAttribute="trailing" secondItem="YX4-TI-DMe" secondAttribute="trailing" id="5IM-U8-a2s"/>
                             <constraint firstItem="CEv-VQ-2in" firstAttribute="bottom" secondItem="YX4-TI-DMe" secondAttribute="bottom" id="Zsi-Qh-Afz"/>
@@ -923,7 +923,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="wUa-DU-I8p" firstAttribute="leading" secondItem="VWA-pe-OYs" secondAttribute="leading" id="2n8-2k-AJb"/>
                             <constraint firstItem="VWA-pe-OYs" firstAttribute="trailing" secondItem="TBG-pP-rMv" secondAttribute="trailing" id="5Mf-08-2xe"/>
@@ -986,7 +986,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="X1U-fB-vgr" firstAttribute="leading" secondItem="et6-8r-xfg" secondAttribute="leading" id="5N8-8Y-7bq"/>
                             <constraint firstItem="et6-8r-xfg" firstAttribute="bottom" secondItem="X1U-fB-vgr" secondAttribute="bottom" id="A1y-we-IoI"/>

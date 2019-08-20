@@ -31,7 +31,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="gku-c4-udw" firstAttribute="leading" secondItem="Hgh-Vw-5qW" secondAttribute="leading" id="0dq-RN-Vdp"/>
                             <constraint firstItem="gku-c4-udw" firstAttribute="top" secondItem="Hgh-Vw-5qW" secondAttribute="top" id="b5B-0c-7Td"/>

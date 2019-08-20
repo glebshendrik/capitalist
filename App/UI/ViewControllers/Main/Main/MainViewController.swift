@@ -13,7 +13,7 @@ import SwifterSwift
 
 class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
-    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
+    var navigationBarTintColor: UIColor? = UIColor.by(.dark2A314B)
     
     var viewModel: MainViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -36,15 +36,12 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBOutlet weak var joyBasketSpentLabel: UILabel!
     @IBOutlet weak var joyBasketTitleLabel: UILabel!
-    @IBOutlet weak var joyBasketSelectionIndicator: UIView!
     
     @IBOutlet weak var riskBasketSpentLabel: UILabel!
     @IBOutlet weak var riskBasketTitleLabel: UILabel!
-    @IBOutlet weak var riskBasketSelectionIndicator: UIView!
     
     @IBOutlet weak var safeBasketSpentLabel: UILabel!
     @IBOutlet weak var safeBasketTitleLabel: UILabel!
-    @IBOutlet weak var safeBasketSelectionIndicator: UIView!
     
     @IBOutlet weak var joyExpenseCategoriesContainerLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var riskExpenseCategoriesContainerLeftConstraint: NSLayoutConstraint!
@@ -88,7 +85,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)        
-        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
+        navigationController?.navigationBar.barTintColor = UIColor.by(.dark2A314B)
         appMovedToForeground()
     }
     

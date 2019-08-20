@@ -36,8 +36,10 @@ extension MainViewController {
     }
     
     private func updateBasketsTabsUI() {
-        let selectedTextColor = UIColor(red: 0.25, green: 0.27, blue: 0.38, alpha: 1)
-        let unselectedTextColor = UIColor(red: 0.52, green: 0.57, blue: 0.63, alpha: 1)
+        let selectedTextColor = UIColor.by(.textFFFFFF)
+        let unselectedTextColor = UIColor.by(.text9EAACC)
+        let selectedAmountFont = UIFont(name: "Rubik-Medium", size: 15)
+        let unselectedAmountFont = UIFont(name: "Rubik-Regular", size: 15)
         
         UIView.transition(with: view,
                           duration: 0.1,
@@ -46,15 +48,21 @@ extension MainViewController {
                             
                             self.joyBasketSpentLabel.text = self.viewModel.basketsViewModel.joyBasketSpent
                             self.joyBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isJoyBasketSelected ? selectedTextColor : unselectedTextColor
-                            self.joyBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isJoyBasketSelected
+                            self.joyBasketSpentLabel.textColor = self.viewModel.basketsViewModel.isJoyBasketSelected ? selectedTextColor : unselectedTextColor
+                            self.joyBasketSpentLabel.font = self.viewModel.basketsViewModel.isJoyBasketSelected ? selectedAmountFont : unselectedAmountFont
+                            
+                            
+
                             
                             self.riskBasketSpentLabel.text = self.viewModel.basketsViewModel.riskBasketSpent
                             self.riskBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isRiskBasketSelected ? selectedTextColor : unselectedTextColor
-                            self.riskBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isRiskBasketSelected
+                            self.riskBasketSpentLabel.textColor = self.viewModel.basketsViewModel.isRiskBasketSelected ? selectedTextColor : unselectedTextColor
+                            self.riskBasketSpentLabel.font = self.viewModel.basketsViewModel.isRiskBasketSelected ? selectedAmountFont : unselectedAmountFont
                             
                             self.safeBasketSpentLabel.text = self.viewModel.basketsViewModel.safeBasketSpent
                             self.safeBasketTitleLabel.textColor = self.viewModel.basketsViewModel.isSafeBasketSelected ? selectedTextColor : unselectedTextColor
-                            self.safeBasketSelectionIndicator.isHidden = !self.viewModel.basketsViewModel.isSafeBasketSelected
+                            self.safeBasketSpentLabel.textColor = self.viewModel.basketsViewModel.isSafeBasketSelected ? selectedTextColor : unselectedTextColor
+                            self.safeBasketSpentLabel.font = self.viewModel.basketsViewModel.isSafeBasketSelected ? selectedAmountFont : unselectedAmountFont
         })
     }
     

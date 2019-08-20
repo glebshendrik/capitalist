@@ -27,36 +27,20 @@ class ExpenseCategoryCollectionViewCell : EditableCell {
     func updateUI() {
         guard let viewModel = viewModel else { return }
         
-        let joyColor = UIColor(red: 1, green: 0.85, blue: 0.27, alpha: 1)
-        let joyBackgroundColor = UIColor(red: 0.99, green: 0.85, blue: 0.32, alpha: 1)
-        
-        let riskColor = UIColor(red: 0.49, green: 0.52, blue: 1, alpha: 1)
-        let riskBackgroundColor = UIColor(red: 0.53, green: 0.56, blue: 1, alpha: 1)
-        
-        let safeColor = UIColor(red: 0.13, green: 0.86, blue: 0.27, alpha: 1)
-        let safeBackgroundColor = UIColor(red: 0.49, green: 0.88, blue: 0.36, alpha: 1)
-        
-        func basketColor() -> UIColor {
-            switch viewModel.expenseCategory.basketType {
-            case .joy:
-                return joyColor
-            case .risk:
-                return riskColor
-            case .safe:
-                return safeColor
-            }
-        }
+        let joyBackgroundColor = UIColor.by(.joy6EEC99)
+        let riskBackgroundColor = UIColor.by(.riskC765F0)
+        let safeBackgroundColor = UIColor.by(.safe4828D1)
+        let joyTrackColor = UIColor.by(.joy6EEC99).withAlphaComponent(0.5)
+        let riskTrackColor = UIColor.by(.riskC765F0).withAlphaComponent(0.5)
+        let safeTrackColor = UIColor.by(.safe4828D1).withAlphaComponent(0.5)
         
         func iconTintColor() -> UIColor {
-            if viewModel.isSpendingProgressCompleted {
-                return .white
-            }
-            return basketColor()
+            return UIColor.by(.textFFFFFF)
         }
         
-        func progressInnerColor() -> UIColor {
-            guard viewModel.isSpendingProgressCompleted else {
-                return .white
+        func progressTrackColor() -> UIColor {
+            guard !viewModel.isSpendingProgressCompleted else {
+                return UIColor.by(.dark1F263E)
             }
             
             switch viewModel.expenseCategory.basketType {
@@ -69,14 +53,41 @@ class ExpenseCategoryCollectionViewCell : EditableCell {
             }
         }
         
-        func defaultIconName() -> String {
+        func progressTrackBackgroundColor() -> UIColor {
+            guard viewModel.areExpensesPlanned else {
+                return .clear
+            }
+            
+            guard !viewModel.isSpendingProgressCompleted else {
+                return UIColor.by(.dark1F263E)
+            }
+            
             switch viewModel.expenseCategory.basketType {
             case .joy:
-                return "joy-default-icon"
+                return joyTrackColor
             case .risk:
-                return "risk-default-icon"
+                return riskTrackColor
             case .safe:
-                return "safe-default-icon"
+                return safeTrackColor
+            }
+        }
+        
+        func defaultIconName() -> String {
+            return viewModel.expenseCategory.basketType.iconCategory.defaultIconName
+        }
+        
+        func progressInnerImage() -> UIImage? {
+            guard !viewModel.isSpendingProgressCompleted else {
+                return nil
+            }
+            
+            switch viewModel.expenseCategory.basketType {
+            case .joy:
+                return UIImage(named: "joy-background")
+            case .risk:
+                return UIImage(named: "risk-background")
+            case .safe:
+                return UIImage(named: "safe-background")
             }
         }
         
@@ -89,8 +100,12 @@ class ExpenseCategoryCollectionViewCell : EditableCell {
                                renderingMode: .alwaysTemplate)
         progressView.progress = viewModel.spendingProgress
         iconImageView.tintColor = iconTintColor()
-        progressView.centerFillColor = progressInnerColor()
-        progressView.trackFillColor = basketColor()
+        
+        progressView.trackWidth = 1.5
+        progressView.trackBackgroundColor = progressTrackBackgroundColor()
+        progressView.centerImage = progressInnerImage()
+        progressView.centerFillColor = UIColor.by(.dark1F263E)
+        progressView.trackFillColor = progressTrackColor()
         
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale

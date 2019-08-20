@@ -350,7 +350,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="M9o-tc-gOe" firstAttribute="trailing" secondItem="I1q-pC-Xqb" secondAttribute="trailing" id="B6D-Cp-RAD"/>
                             <constraint firstItem="I1q-pC-Xqb" firstAttribute="leading" secondItem="M9o-tc-gOe" secondAttribute="leading" id="Cbk-jn-lhx"/>
@@ -602,7 +602,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="FjE-Kq-Uex" firstAttribute="top" secondItem="1Yl-nn-zeg" secondAttribute="top" id="1eq-Bq-ZvI"/>
                             <constraint firstItem="1Yl-nn-zeg" firstAttribute="bottom" secondItem="F70-gt-pod" secondAttribute="bottom" id="3b0-Ja-cyj"/>

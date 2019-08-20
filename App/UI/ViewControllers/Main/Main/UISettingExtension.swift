@@ -53,7 +53,7 @@ extension MainViewController {
                           NSAttributedString.Key.foregroundColor : UIColor.by(.textFFFFFF)]
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.shadowImage = UIImage()        
         self.budgetView = BudgetView(frame: CGRect.zero)
         self.budgetView.delegate = self
         navigationItem.titleView = self.budgetView

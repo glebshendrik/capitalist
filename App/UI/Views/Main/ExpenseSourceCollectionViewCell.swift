@@ -20,7 +20,7 @@ class ExpenseSourceCollectionViewCell : EditableCell {
     }
     
     var imageTintColor: UIColor {
-        return UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
+        return UIColor.by(.dark374262)
     }
     
     var viewModel: ExpenseSourceViewModel? {
