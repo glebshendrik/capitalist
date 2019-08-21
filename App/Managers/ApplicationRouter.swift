@@ -76,7 +76,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         firstly {
             accountCoordinator.loadCurrentUser()
         }.done { _ in
-            if UIFlowManager.wasShownOnboarding {
+            if !UIFlowManager.wasShownOnboarding {
                 self.showMainViewController()
             }
             else {

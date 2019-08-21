@@ -119,7 +119,6 @@
 		FA689F392285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F382285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift */; };
 		FA6910A82300EF48001209FC /* FormSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6910A72300EF48001209FC /* FormSubmitViewController.swift */; };
 		FA6910AA2300F0B6001209FC /* LoginTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6910A92300F0B6001209FC /* LoginTableController.swift */; };
-		FA6910AC230100F6001209FC /* FieldsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6910AB230100F5001209FC /* FieldsViewControllerProtocol.swift */; };
 		FA6918A221F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */; };
 		FA6918A421F0EF03003639F6 /* ExpenseCategoryEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */; };
 		FA6973ED2296D6DD004E6327 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA6973EF2296D6DD004E6327 /* Localizable.strings */; };
@@ -174,6 +173,7 @@
 		FA7462FD2281AC5100E6D39B /* WaitingDebtsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7462FC2281AC5100E6D39B /* WaitingDebtsViewModel.swift */; };
 		FA7462FF2281AD2900E6D39B /* WaitingDebtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7462FE2281AD2900E6D39B /* WaitingDebtsViewController.swift */; };
 		FA7463012281DDFA00E6D39B /* DebtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7463002281DDFA00E6D39B /* DebtTableViewCell.swift */; };
+		FA7C10C8230D615300CC0FD1 /* OnboardingPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7C10C7230D615200CC0FD1 /* OnboardingPagesViewController.swift */; };
 		FA7CB4D7221C20B300FAAC0F /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4D6221C20B300FAAC0F /* Income.swift */; };
 		FA7CB4D9221C2A7D00FAAC0F /* IncomesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4D8221C2A7D00FAAC0F /* IncomesServiceProtocol.swift */; };
 		FA7CB4DB221C2C9D00FAAC0F /* IncomesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CB4DA221C2C9D00FAAC0F /* IncomesService.swift */; };
@@ -489,7 +489,6 @@
 		FA689F382285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveExpenseCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		FA6910A72300EF48001209FC /* FormSubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSubmitViewController.swift; sourceTree = "<group>"; };
 		FA6910A92300F0B6001209FC /* LoginTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTableController.swift; sourceTree = "<group>"; };
-		FA6910AB230100F5001209FC /* FieldsViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldsViewControllerProtocol.swift; sourceTree = "<group>"; };
 		FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditViewController.swift; sourceTree = "<group>"; };
 		FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditTableController.swift; sourceTree = "<group>"; };
 		FA6973EE2296D6DD004E6327 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -546,6 +545,7 @@
 		FA7462FC2281AC5100E6D39B /* WaitingDebtsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingDebtsViewModel.swift; sourceTree = "<group>"; };
 		FA7462FE2281AD2900E6D39B /* WaitingDebtsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingDebtsViewController.swift; sourceTree = "<group>"; };
 		FA7463002281DDFA00E6D39B /* DebtTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtTableViewCell.swift; sourceTree = "<group>"; };
+		FA7C10C7230D615200CC0FD1 /* OnboardingPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPagesViewController.swift; sourceTree = "<group>"; };
 		FA7CB4D6221C20B300FAAC0F /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		FA7CB4D8221C2A7D00FAAC0F /* IncomesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesServiceProtocol.swift; sourceTree = "<group>"; };
 		FA7CB4DA221C2C9D00FAAC0F /* IncomesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesService.swift; sourceTree = "<group>"; };
@@ -950,7 +950,6 @@
 		FA6270AB21CA9FD700CC0269 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				FA6910AB230100F5001209FC /* FieldsViewControllerProtocol.swift */,
 				FA2847FD22F1948A003F114A /* Forms */,
 				FA81748B222E2B8700EE6116 /* CommentViewController.swift */,
 				FA81748D222F800200EE6116 /* DatePickerViewController.swift */,
@@ -1231,6 +1230,7 @@
 			isa = PBXGroup;
 			children = (
 				FAC3B9C021BE15EC0015A12F /* OnboardingViewController.swift */,
+				FA7C10C7230D615200CC0FD1 /* OnboardingPagesViewController.swift */,
 				FAC3B9C221BE74CE0015A12F /* OnboardingPageViewController.swift */,
 			);
 			path = Onboarding;
@@ -1928,7 +1928,6 @@
 				FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */,
 				FAD88F8C21B1228F00BE7BC1 /* MenuViewModel.swift in Sources */,
 				FAA426142231275F00B64925 /* ExpenseEditViewController.swift in Sources */,
-				FA6910AC230100F6001209FC /* FieldsViewControllerProtocol.swift in Sources */,
 				FA7276B522524F060086D4D1 /* CollectionsControllingExtension.swift in Sources */,
 				FACEC15F2302CEBB00611B2C /* ChangePasswordTableController.swift in Sources */,
 				FAD88F2821AEB75800BE7BC1 /* NotificationCategory.swift in Sources */,
@@ -1976,6 +1975,7 @@
 				FA7276C3225252390086D4D1 /* GestureRecognizersControllingExtension.swift in Sources */,
 				FAD88F2621AEB72800BE7BC1 /* NotificationsManager.swift in Sources */,
 				FAA426162231296A00B64925 /* FundsMoveEditViewController.swift in Sources */,
+				FA7C10C8230D615300CC0FD1 /* OnboardingPagesViewController.swift in Sources */,
 				FA0CAE0321D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift in Sources */,
 				FA6F2E922244C8D9008C160F /* StatisticsViewModel.swift in Sources */,
 				FAD88F2A21AEB77200BE7BC1 /* NotificationAction.swift in Sources */,

@@ -8,71 +8,90 @@
 
 import UIKit
 
-class OnboardingPageViewController : UIViewController {
-    var onboardingViewController: OnboardingViewController? {
-        return parent as? OnboardingViewController
-    }
+class OnboardingPageGradientViewController : UIViewController {
+    @IBOutlet weak var overlay: UIView!
     
-    @IBAction func didTapNextButton(_ sender: Any) {
-        goNext()
-    }
+    var firstColor: UIColor { return .clear }
+    var secondColor: UIColor { return .clear }
+    var thirdColor: UIColor { return .clear }
     
-    @IBAction func didTapStartButton(_ sender: Any) {
-        finishOnboarding()
-    }
-    
-    private func goNext() {
-        onboardingViewController?.showNext(after: self)
-    }
-    
-    private func finishOnboarding() {
-        onboardingViewController?.finishOnboarding()
-    }
-}
-
-class OnboardingPage5ViewController : OnboardingPageViewController {
-    @IBOutlet weak var informationLabel: UILabel!
+    var gradient: CAGradientLayer = CAGradientLayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupInformationLabel()
+        setupGradient()
     }
     
-    private func setupInformationLabel() {
-        let string = "Из этой корзины вы инвестируете в бизнес, акции, криптовалюту, форекс и другие инструменты с годовой доходностью от 15 процентов." as NSString
-        
-        let attributedString = NSMutableAttributedString(string: string as String,
-                                                         attributes: [NSAttributedString.Key.font: UIFont(name: "Rubik-Regular", size: 14) as Any])
-        
-        let boldFontAttribute = [NSAttributedString.Key.font: UIFont(name: "Rubik-Medium", size: 14)]
-        
-        
-        attributedString.addAttributes(boldFontAttribute as [NSAttributedString.Key : Any], range: string.range(of: "с годовой доходностью от 15 процентов"))
-        
-        informationLabel.attributedText = attributedString
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.transition(with: self.view,
+                          duration: 0.25,
+                          options: UIView.AnimationOptions.transitionCrossDissolve,
+                          animations: { [weak self] () -> Void in
+                            guard let weakSelf = self else { return }
+                            weakSelf.overlay.layer.addSublayer(weakSelf.gradient)
+            }, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        gradient.removeFromSuperlayer()
+    }
+    
+    func setupGradient() {
+        overlay.layer.compositingFilter = "overlayBlendMode"
+        gradient.colors = [
+            firstColor.cgColor,
+            secondColor.cgColor,
+            thirdColor.cgColor
+        ]
+        gradient.locations = [0, 0.31, 1]
+        gradient.startPoint = CGPoint(x: 0.25, y: 0.5)
+        gradient.endPoint = CGPoint(x: 0.75, y: 0.5)
+        gradient.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 0,
+                                                                                b: 1,
+                                                                                c: -1,
+                                                                                d: 0,
+                                                                                tx: 1,
+                                                                                ty: 0))
+        gradient.bounds = overlay.bounds.insetBy(dx: -0.5 * overlay.bounds.size.width,
+                                                 dy: -0.5 * overlay.bounds.size.height)
+        gradient.position = overlay.center
     }
 }
 
-class OnboardingPage6ViewController : OnboardingPageViewController {
-    @IBOutlet weak var informationLabel: UILabel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupInformationLabel()
+class OnboardingPage4ViewController : OnboardingPageGradientViewController {
+    override var firstColor: UIColor {
+        return UIColor(red: 0.31, green: 0.82, blue: 0.63, alpha: 1)
     }
-    
-    private func setupInformationLabel() {
-        let string = "Реальная инфляция в России 7–8%. Чтобы сохранить деньги, их нужно инвестировать под 10-15% годовых." as NSString
-        
-        let attributedString = NSMutableAttributedString(string: string as String,
-                                                         attributes: [NSAttributedString.Key.font: UIFont(name: "Rubik-Regular", size: 14) as Any])
-        
-        let boldFontAttribute = [NSAttributedString.Key.font: UIFont(name: "Rubik-Medium", size: 14)]
-        
-        
-        attributedString.addAttributes(boldFontAttribute as [NSAttributedString.Key : Any], range: string.range(of: "7–8%"))
-        attributedString.addAttributes(boldFontAttribute as [NSAttributedString.Key : Any], range: string.range(of: "под 10-15% годовых"))
-        
-        informationLabel.attributedText = attributedString
+    override var secondColor: UIColor {
+        return UIColor(red: 0.2, green: 0.71, blue: 0.52, alpha: 1)
+    }
+    override var thirdColor: UIColor {
+        return UIColor(red: 0.12, green: 0.15, blue: 0.23, alpha: 1)
+    }
+}
+
+class OnboardingPage5ViewController : OnboardingPageGradientViewController {
+    override var firstColor: UIColor {
+        return UIColor(red: 0.74, green: 0.46, blue: 0.96, alpha: 1)
+    }
+    override var secondColor: UIColor {
+        return UIColor(red: 0.37, green: 0.18, blue: 0.52, alpha: 1)
+    }
+    override var thirdColor: UIColor {
+        return UIColor(red: 0.12, green: 0.15, blue: 0.23, alpha: 1)
+    }
+}
+
+class OnboardingPage6ViewController : OnboardingPageGradientViewController {
+    override var firstColor: UIColor {
+        return UIColor(red: 0.2, green: 0.13, blue: 0.87, alpha: 1)
+    }
+    override var secondColor: UIColor {
+        return UIColor(red: 0.16, green: 0.11, blue: 0.56, alpha: 1)
+    }
+    override var thirdColor: UIColor {
+        return UIColor(red: 0.12, green: 0.15, blue: 0.23, alpha: 1)
     }
 }

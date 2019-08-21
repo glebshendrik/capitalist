@@ -1,92 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Rubik-Medium.ttf">
-            <string>Rubik-Medium</string>
-        </array>
         <array key="Rubik-Regular.ttf">
             <string>Rubik-Regular</string>
         </array>
     </customFonts>
     <scenes>
         <!--Onboarding View Controller-->
-        <scene sceneID="72Z-zp-mcW">
+        <scene sceneID="fjH-5D-lsN">
             <objects>
-                <pageViewController storyboardIdentifier="OnboardingViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="mid" doubleSided="YES" id="o4w-mN-y2w" customClass="OnboardingViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Gn-Gs-9Ny" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="74" y="65"/>
-        </scene>
-        <!--Onboarding Page View Controller-->
-        <scene sceneID="cnt-yd-S1e">
-            <objects>
-                <viewController storyboardIdentifier="OnboardingPage1ViewController" id="d8f-UW-PO9" customClass="OnboardingPageViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="q00-pi-6Ox">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <viewController storyboardIdentifier="OnboardingViewController" id="sXH-lO-oOm" customClass="OnboardingViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oHA-US-mbb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Привет!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80z-5q-jvF">
-                                <rect key="frame" x="125.5" y="61" width="69" height="22"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
-                                <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-page1-image" translatesAutoresizingMaskIntoConstraints="NO" id="yqD-Cu-9K5">
-                                <rect key="frame" x="45.5" y="137" width="229" height="211"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1D-MD-zWc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <segue destination="o4w-mN-y2w" kind="embed" identifier="showEmbedded" id="dku-3y-mcn"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnY-KY-H2n" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="611" width="375" height="56"/>
+                                <color key="backgroundColor" name="blue 6A92FA"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" priority="750" constant="229" id="ap5-25-dIc"/>
-                                    <constraint firstAttribute="width" secondItem="yqD-Cu-9K5" secondAttribute="height" multiplier="229:211" id="nxe-hC-onQ"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" priority="750" constant="211" id="sb0-zn-Qyv"/>
+                                    <constraint firstAttribute="height" constant="56" id="zfD-2t-AB2"/>
                                 </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhK-em-tSb">
-                                <rect key="frame" x="32" y="473" width="256" height="40"/>
-                                <color key="backgroundColor" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="erH-rM-nsx"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                <state key="normal" title="ПРОДОЛЖИТЬ">
+                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                <state key="normal" title="Продолжить">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                        <color key="value" name="blue 6A92FA"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                        <color key="value" name="delimeter AFC1FF"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="didTapNextButton:" destination="d8f-UW-PO9" eventType="touchUpInside" id="D48-d8-ELm"/>
+                                    <action selector="didTapNextButton:" destination="sXH-lO-oOm" eventType="touchUpInside" id="Vox-hd-dZN"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мы хотим помочь тебе контролировать рассходы, cоздать пассивный доход и стать финансово независимым!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNo-gB-2ac">
-                                <rect key="frame" x="27" y="391" width="266" height="50"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                <color key="textColor" red="0.52000000000000002" green="0.56999999999999995" blue="0.63" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </subviews>
+                        <color key="backgroundColor" name="dark 2A314B"/>
+                        <constraints>
+                            <constraint firstItem="B1D-MD-zWc" firstAttribute="top" secondItem="oHA-US-mbb" secondAttribute="top" id="5pY-yo-rhE"/>
+                            <constraint firstAttribute="trailing" secondItem="B1D-MD-zWc" secondAttribute="trailing" id="7ld-PV-td6"/>
+                            <constraint firstItem="B1D-MD-zWc" firstAttribute="leading" secondItem="oHA-US-mbb" secondAttribute="leading" id="bQQ-gy-G4f"/>
+                            <constraint firstItem="lnY-KY-H2n" firstAttribute="trailing" secondItem="5eP-Ax-Yzv" secondAttribute="trailing" id="hXS-R6-I7E"/>
+                            <constraint firstItem="5eP-Ax-Yzv" firstAttribute="bottom" secondItem="lnY-KY-H2n" secondAttribute="bottom" id="nwV-Hk-pVa"/>
+                            <constraint firstAttribute="bottom" secondItem="B1D-MD-zWc" secondAttribute="bottom" id="rwQ-af-5zo"/>
+                            <constraint firstItem="lnY-KY-H2n" firstAttribute="leading" secondItem="5eP-Ax-Yzv" secondAttribute="leading" id="sN7-Mn-S7x"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5eP-Ax-Yzv"/>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="lnY-KY-H2n" id="UMO-Ub-MSW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FMu-uu-0MH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-754" y="64"/>
+        </scene>
+        <!--Onboarding Pages View Controller-->
+        <scene sceneID="72Z-zp-mcW">
+            <objects>
+                <pageViewController storyboardIdentifier="OnboardingPagesViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="mid" doubleSided="YES" id="o4w-mN-y2w" customClass="OnboardingPagesViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Gn-Gs-9Ny" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="74" y="65"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cnt-yd-S1e">
+            <objects>
+                <viewController storyboardIdentifier="OnboardingPage1ViewController" id="d8f-UW-PO9" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="q00-pi-6Ox">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-1" translatesAutoresizingMaskIntoConstraints="NO" id="yqD-Cu-9K5">
+                                <rect key="frame" x="0.0" y="115" width="375" height="502"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="80z-5q-jvF">
+                                <rect key="frame" x="32" y="36" width="311" height="186.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Привет!">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="32" name="Rubik-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="  ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">Я — Ник, твой личный финансовый советник! 
+Моя миссия — </string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="вывести тебя на уровень финансовой свободы">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=", помогая правильно управлять личным бюджетом.">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
-                            <constraint firstItem="80z-5q-jvF" firstAttribute="top" secondItem="q00-pi-6Ox" secondAttribute="top" constant="61" id="5Zs-Aj-QVF"/>
-                            <constraint firstItem="vhK-em-tSb" firstAttribute="leading" secondItem="jXj-Kh-nPR" secondAttribute="leading" constant="32" id="6ah-6z-vxV"/>
-                            <constraint firstItem="jXj-Kh-nPR" firstAttribute="bottom" secondItem="vhK-em-tSb" secondAttribute="bottom" constant="55" id="8xC-yB-rBB"/>
-                            <constraint firstItem="yqD-Cu-9K5" firstAttribute="top" secondItem="jXj-Kh-nPR" secondAttribute="top" constant="117" id="94z-tS-qHO"/>
-                            <constraint firstItem="80z-5q-jvF" firstAttribute="centerX" secondItem="q00-pi-6Ox" secondAttribute="centerX" id="Ft5-Oq-p3k"/>
-                            <constraint firstItem="yqD-Cu-9K5" firstAttribute="centerX" secondItem="q00-pi-6Ox" secondAttribute="centerX" id="Tgf-3t-f6s"/>
-                            <constraint firstItem="jXj-Kh-nPR" firstAttribute="trailing" secondItem="vhK-em-tSb" secondAttribute="trailing" constant="32" id="cNx-wA-oe9"/>
-                            <constraint firstItem="vhK-em-tSb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bNo-gB-2ac" secondAttribute="bottom" constant="10" id="f2t-kd-sVN"/>
-                            <constraint firstItem="bNo-gB-2ac" firstAttribute="top" secondItem="yqD-Cu-9K5" secondAttribute="bottom" constant="43" id="iNh-pY-F9e"/>
-                            <constraint firstAttribute="trailing" secondItem="bNo-gB-2ac" secondAttribute="trailing" constant="27" id="xry-Q6-rbn"/>
-                            <constraint firstItem="bNo-gB-2ac" firstAttribute="leading" secondItem="jXj-Kh-nPR" secondAttribute="leading" constant="27" id="y6D-o8-6mu"/>
+                            <constraint firstItem="yqD-Cu-9K5" firstAttribute="leading" secondItem="q00-pi-6Ox" secondAttribute="leading" id="0nC-io-mEm"/>
+                            <constraint firstItem="jXj-Kh-nPR" firstAttribute="bottom" secondItem="yqD-Cu-9K5" secondAttribute="bottom" constant="50" id="9d9-uZ-gAU"/>
+                            <constraint firstItem="80z-5q-jvF" firstAttribute="top" secondItem="jXj-Kh-nPR" secondAttribute="top" constant="16" id="IBw-ZD-J7z"/>
+                            <constraint firstItem="jXj-Kh-nPR" firstAttribute="trailing" secondItem="80z-5q-jvF" secondAttribute="trailing" constant="32" id="czI-DS-TvA"/>
+                            <constraint firstAttribute="trailing" secondItem="yqD-Cu-9K5" secondAttribute="trailing" id="dOH-nw-32x"/>
+                            <constraint firstItem="yqD-Cu-9K5" firstAttribute="top" secondItem="jXj-Kh-nPR" secondAttribute="top" constant="95" id="mjI-F6-naR"/>
+                            <constraint firstItem="80z-5q-jvF" firstAttribute="leading" secondItem="jXj-Kh-nPR" secondAttribute="leading" constant="32" id="v5D-gF-nJE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jXj-Kh-nPR"/>
                     </view>
@@ -95,69 +166,53 @@
             </objects>
             <point key="canvasLocation" x="-2017" y="754"/>
         </scene>
-        <!--Onboarding Page View Controller-->
+        <!--View Controller-->
         <scene sceneID="voR-o3-on2">
             <objects>
-                <viewController storyboardIdentifier="OnboardingPage2ViewController" id="VFh-M0-Dtg" customClass="OnboardingPageViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingPage2ViewController" id="VFh-M0-Dtg" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VF9-OU-Z0V">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Для этого мы будем использовать технику «Трёх корзин», которую практикуют:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhX-k4-uXV">
-                                <rect key="frame" x="32" y="61" width="256" height="50"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                <color key="textColor" red="0.52000000000000002" green="0.56999999999999995" blue="0.63" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-page2-image" translatesAutoresizingMaskIntoConstraints="NO" id="e3g-z7-nMf">
-                                <rect key="frame" x="45.5" y="137" width="229" height="206"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="229" id="auH-B2-uS0"/>
-                                    <constraint firstAttribute="width" secondItem="e3g-z7-nMf" secondAttribute="height" multiplier="229:206" id="cMM-Ff-lJi"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="206" id="lt7-Lq-OER"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-1" translatesAutoresizingMaskIntoConstraints="NO" id="L65-jG-pj2">
+                                <rect key="frame" x="0.0" y="115" width="375" height="502"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дональд Трамп, Уоррен Баффет, Илон Маск, Тони Роббинсон и другие миллиардеры" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHG-pr-Khg">
-                                <rect key="frame" x="27" y="391" width="266" height="50"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                <color key="textColor" red="0.52000000000000002" green="0.56999999999999995" blue="0.63" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yQR-gS-l45">
+                                <rect key="frame" x="32" y="36" width="311" height="75"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Есть только один способ стать финансово свободным — ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="тратить меньше, чем зарабатываешь и инвестировать разницу.">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHK-oQ-Kx7">
-                                <rect key="frame" x="32" y="473" width="256" height="40"/>
-                                <color key="backgroundColor" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="f8w-33-xPs"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                <state key="normal" title="ПРОДОЛЖИТЬ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapNextButton:" destination="VFh-M0-Dtg" eventType="touchUpInside" id="4V9-kP-NkV"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="zHG-pr-Khg" secondAttribute="trailing" constant="27" id="9rd-pf-a68"/>
-                            <constraint firstItem="e3g-z7-nMf" firstAttribute="top" secondItem="shE-WT-LbU" secondAttribute="top" constant="117" id="Deg-2C-Fma"/>
-                            <constraint firstItem="GhX-k4-uXV" firstAttribute="leading" secondItem="VF9-OU-Z0V" secondAttribute="leading" constant="32" id="FCr-Vs-dDr"/>
-                            <constraint firstItem="zHG-pr-Khg" firstAttribute="top" secondItem="e3g-z7-nMf" secondAttribute="bottom" constant="48" id="P2z-Kw-CSb"/>
-                            <constraint firstAttribute="trailing" secondItem="GhX-k4-uXV" secondAttribute="trailing" constant="32" id="TRV-SQ-9Fr"/>
-                            <constraint firstItem="rHK-oQ-Kx7" firstAttribute="leading" secondItem="shE-WT-LbU" secondAttribute="leading" constant="32" id="Vlf-yX-mb8"/>
-                            <constraint firstItem="GhX-k4-uXV" firstAttribute="top" secondItem="VF9-OU-Z0V" secondAttribute="top" constant="61" id="WFM-gs-aIb"/>
-                            <constraint firstItem="e3g-z7-nMf" firstAttribute="centerX" secondItem="VF9-OU-Z0V" secondAttribute="centerX" id="frS-Uw-K2L"/>
-                            <constraint firstItem="GhX-k4-uXV" firstAttribute="centerX" secondItem="VF9-OU-Z0V" secondAttribute="centerX" id="gmF-mD-xWW"/>
-                            <constraint firstItem="zHG-pr-Khg" firstAttribute="leading" secondItem="shE-WT-LbU" secondAttribute="leading" constant="27" id="ige-fq-xTC"/>
-                            <constraint firstItem="shE-WT-LbU" firstAttribute="trailing" secondItem="rHK-oQ-Kx7" secondAttribute="trailing" constant="32" id="jWZ-p7-AP2"/>
-                            <constraint firstItem="shE-WT-LbU" firstAttribute="bottom" secondItem="rHK-oQ-Kx7" secondAttribute="bottom" constant="55" id="nsG-CU-Z2p"/>
-                            <constraint firstItem="rHK-oQ-Kx7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zHG-pr-Khg" secondAttribute="bottom" constant="10" id="nwd-T3-gGf"/>
+                            <constraint firstItem="yQR-gS-l45" firstAttribute="top" secondItem="shE-WT-LbU" secondAttribute="top" constant="16" id="6YE-1G-1Xz"/>
+                            <constraint firstItem="L65-jG-pj2" firstAttribute="top" secondItem="shE-WT-LbU" secondAttribute="top" constant="95" id="QP9-SK-IES"/>
+                            <constraint firstItem="shE-WT-LbU" firstAttribute="trailing" secondItem="yQR-gS-l45" secondAttribute="trailing" constant="32" id="Qe0-jm-ObG"/>
+                            <constraint firstItem="L65-jG-pj2" firstAttribute="leading" secondItem="shE-WT-LbU" secondAttribute="leading" id="Thu-LN-XNg"/>
+                            <constraint firstItem="yQR-gS-l45" firstAttribute="leading" secondItem="shE-WT-LbU" secondAttribute="leading" constant="32" id="fAd-3B-lUx"/>
+                            <constraint firstItem="L65-jG-pj2" firstAttribute="trailing" secondItem="shE-WT-LbU" secondAttribute="trailing" id="qMo-SM-iOp"/>
+                            <constraint firstItem="shE-WT-LbU" firstAttribute="bottom" secondItem="L65-jG-pj2" secondAttribute="bottom" constant="50" id="yZ2-ec-hUX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="shE-WT-LbU"/>
                     </view>
@@ -166,59 +221,63 @@
             </objects>
             <point key="canvasLocation" x="-1214" y="753"/>
         </scene>
-        <!--Onboarding Page View Controller-->
+        <!--View Controller-->
         <scene sceneID="ZYb-3D-eRt">
             <objects>
-                <viewController storyboardIdentifier="OnboardingPage3ViewController" id="k79-Wv-ny1" customClass="OnboardingPageViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingPage3ViewController" id="k79-Wv-ny1" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xhu-BQ-58S">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Все расходы вы будете распределять по трём корзинам" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDc-le-Tau">
-                                <rect key="frame" x="35" y="61" width="250" height="64"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
-                                <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-1" translatesAutoresizingMaskIntoConstraints="NO" id="TUs-6T-Bfy">
+                                <rect key="frame" x="0.0" y="115" width="375" height="502"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oYa-Pw-f9g">
+                                <rect key="frame" x="32" y="36" width="311" height="75"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Мы будем использовать технологию ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="«Трёх корзин»">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=", которой придерживаются самые состоятельные люди в мире.">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-page3-image" translatesAutoresizingMaskIntoConstraints="NO" id="Esu-BE-Zuf">
-                                <rect key="frame" x="32" y="137" width="256" height="227"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="256" id="0Fh-jN-bnu"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="227" id="g2e-Ds-DCM"/>
-                                    <constraint firstAttribute="width" secondItem="Esu-BE-Zuf" secondAttribute="height" multiplier="256:227" id="w4o-lN-mNm"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Heh-eZ-E5K">
-                                <rect key="frame" x="32" y="473" width="256" height="40"/>
-                                <color key="backgroundColor" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="DrK-t6-6Dx"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                <state key="normal" title="ПРОДОЛЖИТЬ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapNextButton:" destination="k79-Wv-ny1" eventType="touchUpInside" id="kI7-rn-uMa"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
-                            <constraint firstItem="ZDc-le-Tau" firstAttribute="centerX" secondItem="xhu-BQ-58S" secondAttribute="centerX" id="RGo-ZU-NBG"/>
-                            <constraint firstItem="Heh-eZ-E5K" firstAttribute="leading" secondItem="4bT-xV-UGH" secondAttribute="leading" constant="32" id="Tkv-Zh-iYx"/>
-                            <constraint firstItem="Esu-BE-Zuf" firstAttribute="top" secondItem="4bT-xV-UGH" secondAttribute="top" constant="117" id="bX5-J0-hVQ"/>
-                            <constraint firstAttribute="trailing" secondItem="ZDc-le-Tau" secondAttribute="trailing" constant="35" id="jaI-nw-gHr"/>
-                            <constraint firstItem="Esu-BE-Zuf" firstAttribute="centerX" secondItem="xhu-BQ-58S" secondAttribute="centerX" id="mO2-PA-ddx"/>
-                            <constraint firstItem="ZDc-le-Tau" firstAttribute="top" secondItem="xhu-BQ-58S" secondAttribute="top" constant="61" id="mqi-Ic-J7j"/>
-                            <constraint firstItem="ZDc-le-Tau" firstAttribute="leading" secondItem="xhu-BQ-58S" secondAttribute="leading" constant="35" id="rj8-WS-f9v"/>
-                            <constraint firstItem="4bT-xV-UGH" firstAttribute="bottom" secondItem="Heh-eZ-E5K" secondAttribute="bottom" constant="55" id="rzR-Fx-tRa"/>
-                            <constraint firstItem="4bT-xV-UGH" firstAttribute="trailing" secondItem="Heh-eZ-E5K" secondAttribute="trailing" constant="32" id="zr9-y3-N1x"/>
+                            <constraint firstItem="TUs-6T-Bfy" firstAttribute="top" secondItem="4bT-xV-UGH" secondAttribute="top" constant="95" id="2kn-QA-mQ6"/>
+                            <constraint firstItem="TUs-6T-Bfy" firstAttribute="trailing" secondItem="4bT-xV-UGH" secondAttribute="trailing" id="Dst-nx-lba"/>
+                            <constraint firstItem="4bT-xV-UGH" firstAttribute="trailing" secondItem="oYa-Pw-f9g" secondAttribute="trailing" constant="32" id="Exf-WT-gIc"/>
+                            <constraint firstItem="TUs-6T-Bfy" firstAttribute="leading" secondItem="4bT-xV-UGH" secondAttribute="leading" id="PnP-oK-x61"/>
+                            <constraint firstItem="oYa-Pw-f9g" firstAttribute="leading" secondItem="4bT-xV-UGH" secondAttribute="leading" constant="32" id="ZSC-dq-h1l"/>
+                            <constraint firstItem="4bT-xV-UGH" firstAttribute="bottom" secondItem="TUs-6T-Bfy" secondAttribute="bottom" constant="50" id="cX0-Pe-iOC"/>
+                            <constraint firstItem="oYa-Pw-f9g" firstAttribute="top" secondItem="4bT-xV-UGH" secondAttribute="top" constant="16" id="kkw-Hf-Kz3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4bT-xV-UGH"/>
                     </view>
@@ -227,176 +286,107 @@
             </objects>
             <point key="canvasLocation" x="-385" y="752"/>
         </scene>
-        <!--Onboarding Page View Controller-->
+        <!--Onboarding Page4 View Controller-->
         <scene sceneID="kwC-fQ-XMR">
             <objects>
-                <viewController storyboardIdentifier="OnboardingPage4ViewController" id="3mI-OD-C5C" customClass="OnboardingPageViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingPage4ViewController" id="3mI-OD-C5C" customClass="OnboardingPage4ViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m4D-kA-0fT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-topbar-image" translatesAutoresizingMaskIntoConstraints="NO" id="xra-5X-9M0">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="148"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.62" green="0.67000000000000004" blue="0.80000000000000004" alpha="0.040000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                            <view alpha="0.16" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePv-Vu-2b8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-1" translatesAutoresizingMaskIntoConstraints="NO" id="n0L-T5-xpq">
+                                <rect key="frame" x="0.0" y="115" width="375" height="502"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Удовольствие" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9E-Nt-3hx">
-                                <rect key="frame" x="99.5" y="47" width="121.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
-                                <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="L2y-eX-fRL">
+                                <rect key="frame" x="32" y="36" width="311" height="196"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Удовольствие">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="24" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="  Цель этой корзины —">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" обеспечивать жизнь и воплощать мечты.">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="  В эту категорию попадают ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="расходы на жизнь">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=": еда, жильё, покупки, транспорт, развлечения и прочее. Саморазвитие, материальные цели и благотворительность — тоже здесь.">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZl-ce-KYk">
-                                <rect key="frame" x="32" y="473" width="256" height="40"/>
-                                <color key="backgroundColor" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="P5m-Cq-GfD"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                <state key="normal" title="ПРОДОЛЖИТЬ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapNextButton:" destination="3mI-OD-C5C" eventType="touchUpInside" id="Y2H-Iq-zxo"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-page4-sun-image" translatesAutoresizingMaskIntoConstraints="NO" id="lQB-AT-BKC">
-                                <rect key="frame" x="124" y="93" width="72" height="72"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3FQ-En-uAt">
-                                <rect key="frame" x="16" y="197" width="288" height="77"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-goal-icon" translatesAutoresizingMaskIntoConstraints="NO" id="eyK-DV-kGj">
-                                        <rect key="frame" x="16" y="14" width="18" height="18"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ЦЕЛЬ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLX-AU-KK7">
-                                        <rect key="frame" x="39" y="14.5" width="37" height="17"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                        <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обеспечивать жизнь." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3R-WV-fkd">
-                                        <rect key="frame" x="16" y="46" width="144.5" height="17"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                        <color key="textColor" red="0.52000000000000002" green="0.56999999999999995" blue="0.63" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="77" id="4Mv-MH-2rP"/>
-                                    <constraint firstItem="eyK-DV-kGj" firstAttribute="leading" secondItem="3FQ-En-uAt" secondAttribute="leading" constant="16" id="BoU-RU-CJ4"/>
-                                    <constraint firstItem="nLX-AU-KK7" firstAttribute="leading" secondItem="eyK-DV-kGj" secondAttribute="trailing" constant="5" id="OJf-bp-YyO"/>
-                                    <constraint firstItem="eyK-DV-kGj" firstAttribute="top" secondItem="3FQ-En-uAt" secondAttribute="top" constant="14" id="VmR-y8-s2y"/>
-                                    <constraint firstItem="t3R-WV-fkd" firstAttribute="top" secondItem="eyK-DV-kGj" secondAttribute="bottom" constant="14" id="Wqn-v3-snJ"/>
-                                    <constraint firstItem="t3R-WV-fkd" firstAttribute="leading" secondItem="3FQ-En-uAt" secondAttribute="leading" constant="16" id="oIC-dk-I2q"/>
-                                    <constraint firstItem="nLX-AU-KK7" firstAttribute="centerY" secondItem="eyK-DV-kGj" secondAttribute="centerY" id="zi0-aT-DaP"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.62" green="0.67000000000000004" blue="0.80000000000000004" alpha="0.040000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJ0-i5-S0Q">
-                                <rect key="frame" x="16" y="290" width="288" height="134"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-info-icon" translatesAutoresizingMaskIntoConstraints="NO" id="mKv-gJ-7uO">
-                                        <rect key="frame" x="16" y="14" width="14" height="14"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ИНФОРМАЦИЯ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fu5-cY-gHm">
-                                        <rect key="frame" x="35" y="12.5" width="101" height="17"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                        <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Все повседневные расходы на жизнь: покупки, развлечения, путешествия, медицина, благотворительность, еда, образование и другие." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="9q6-qL-5Du">
-                                        <rect key="frame" x="16" y="42" width="260" height="66.5"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                        <color key="textColor" red="0.52000000000000002" green="0.56999999999999995" blue="0.63" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="9q6-qL-5Du" secondAttribute="trailing" constant="12" id="0jZ-uf-J1w"/>
-                                    <constraint firstAttribute="height" constant="134" id="5fA-ZV-fx5"/>
-                                    <constraint firstItem="9q6-qL-5Du" firstAttribute="leading" secondItem="eJ0-i5-S0Q" secondAttribute="leading" constant="16" id="5gp-iN-B2b"/>
-                                    <constraint firstItem="9q6-qL-5Du" firstAttribute="top" secondItem="mKv-gJ-7uO" secondAttribute="bottom" constant="14" id="Fpc-i5-8EZ"/>
-                                    <constraint firstItem="Fu5-cY-gHm" firstAttribute="centerY" secondItem="mKv-gJ-7uO" secondAttribute="centerY" id="QVG-BE-lLL"/>
-                                    <constraint firstItem="Fu5-cY-gHm" firstAttribute="leading" secondItem="mKv-gJ-7uO" secondAttribute="trailing" constant="5" id="Vks-05-8fv"/>
-                                    <constraint firstItem="mKv-gJ-7uO" firstAttribute="leading" secondItem="eJ0-i5-S0Q" secondAttribute="leading" constant="16" id="XeL-KF-JSo"/>
-                                    <constraint firstItem="mKv-gJ-7uO" firstAttribute="top" secondItem="eJ0-i5-S0Q" secondAttribute="top" constant="14" id="bm1-la-81B"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.62" green="0.67000000000000004" blue="0.80000000000000004" alpha="0.040000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117647058818" green="0.96470588235294119" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
-                            <constraint firstItem="3FQ-En-uAt" firstAttribute="leading" secondItem="SFZ-qT-mX6" secondAttribute="leading" constant="16" id="1Yb-KL-fNA"/>
-                            <constraint firstItem="SFZ-qT-mX6" firstAttribute="trailing" secondItem="bZl-ce-KYk" secondAttribute="trailing" constant="32" id="3Tm-fK-iRY"/>
-                            <constraint firstItem="lQB-AT-BKC" firstAttribute="centerX" secondItem="m4D-kA-0fT" secondAttribute="centerX" id="6kr-xW-LmW"/>
-                            <constraint firstItem="xra-5X-9M0" firstAttribute="top" secondItem="m4D-kA-0fT" secondAttribute="top" id="9ld-fZ-Jw0"/>
-                            <constraint firstItem="xra-5X-9M0" firstAttribute="leading" secondItem="SFZ-qT-mX6" secondAttribute="leading" id="DAy-b2-GMG"/>
-                            <constraint firstItem="O9E-Nt-3hx" firstAttribute="centerX" secondItem="m4D-kA-0fT" secondAttribute="centerX" id="LGU-Xl-9Q7"/>
-                            <constraint firstItem="SFZ-qT-mX6" firstAttribute="bottom" secondItem="bZl-ce-KYk" secondAttribute="bottom" constant="55" id="SvQ-hd-4eI"/>
-                            <constraint firstItem="3FQ-En-uAt" firstAttribute="top" secondItem="lQB-AT-BKC" secondAttribute="bottom" constant="32" id="SyO-Fp-qS8"/>
-                            <constraint firstItem="SFZ-qT-mX6" firstAttribute="trailing" secondItem="eJ0-i5-S0Q" secondAttribute="trailing" constant="16" id="VYi-wG-bca"/>
-                            <constraint firstItem="eJ0-i5-S0Q" firstAttribute="leading" secondItem="SFZ-qT-mX6" secondAttribute="leading" constant="16" id="d0X-Rn-Bmm"/>
-                            <constraint firstItem="xra-5X-9M0" firstAttribute="trailing" secondItem="SFZ-qT-mX6" secondAttribute="trailing" id="eKn-DU-CEW"/>
-                            <constraint firstItem="O9E-Nt-3hx" firstAttribute="top" secondItem="m4D-kA-0fT" secondAttribute="top" constant="47" id="g9v-7G-2Ds"/>
-                            <constraint firstItem="bZl-ce-KYk" firstAttribute="leading" secondItem="SFZ-qT-mX6" secondAttribute="leading" constant="32" id="i6B-NR-a9X"/>
-                            <constraint firstItem="lQB-AT-BKC" firstAttribute="top" secondItem="m4D-kA-0fT" secondAttribute="top" constant="93" id="oe0-kZ-qcC"/>
-                            <constraint firstItem="SFZ-qT-mX6" firstAttribute="trailing" secondItem="3FQ-En-uAt" secondAttribute="trailing" constant="16" id="sEg-j4-4cz"/>
-                            <constraint firstItem="eJ0-i5-S0Q" firstAttribute="top" secondItem="3FQ-En-uAt" secondAttribute="bottom" constant="16" id="viV-Cc-Gio"/>
+                            <constraint firstItem="n0L-T5-xpq" firstAttribute="trailing" secondItem="SFZ-qT-mX6" secondAttribute="trailing" id="5pN-bD-koa"/>
+                            <constraint firstItem="n0L-T5-xpq" firstAttribute="leading" secondItem="SFZ-qT-mX6" secondAttribute="leading" id="EYf-L2-AXC"/>
+                            <constraint firstItem="n0L-T5-xpq" firstAttribute="top" secondItem="SFZ-qT-mX6" secondAttribute="top" constant="95" id="Hld-Pr-YUa"/>
+                            <constraint firstItem="SFZ-qT-mX6" firstAttribute="bottom" secondItem="n0L-T5-xpq" secondAttribute="bottom" constant="50" id="Lor-4G-JJd"/>
+                            <constraint firstItem="SFZ-qT-mX6" firstAttribute="trailing" secondItem="L2y-eX-fRL" secondAttribute="trailing" constant="32" id="awX-I5-uAy"/>
+                            <constraint firstItem="ePv-Vu-2b8" firstAttribute="top" secondItem="m4D-kA-0fT" secondAttribute="top" id="djj-Oe-VrB"/>
+                            <constraint firstItem="L2y-eX-fRL" firstAttribute="leading" secondItem="SFZ-qT-mX6" secondAttribute="leading" constant="32" id="lAt-Fv-oQW"/>
+                            <constraint firstAttribute="bottom" secondItem="ePv-Vu-2b8" secondAttribute="bottom" id="uIg-QQ-xDO"/>
+                            <constraint firstItem="ePv-Vu-2b8" firstAttribute="leading" secondItem="m4D-kA-0fT" secondAttribute="leading" id="wfQ-vF-sER"/>
+                            <constraint firstItem="L2y-eX-fRL" firstAttribute="top" secondItem="SFZ-qT-mX6" secondAttribute="top" constant="16" id="x9n-3Y-575"/>
+                            <constraint firstAttribute="trailing" secondItem="ePv-Vu-2b8" secondAttribute="trailing" id="xcf-4a-s7x"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SFZ-qT-mX6"/>
                     </view>
+                    <connections>
+                        <outlet property="overlay" destination="ePv-Vu-2b8" id="Eg4-xF-4ov"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8uV-yb-bBG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -405,211 +395,84 @@
         <!--Onboarding Page5 View Controller-->
         <scene sceneID="5Tt-M2-TcD">
             <objects>
-                <viewController storyboardIdentifier="OnboardingPage5ViewController" id="awW-3c-ic8" customClass="OnboardingPage5ViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingPage5ViewController" id="awW-3c-ic8" customClass="OnboardingPage5ViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="czK-Xg-L7z">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-topbar-image" translatesAutoresizingMaskIntoConstraints="NO" id="541-ke-nZk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="148"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.62" green="0.67000000000000004" blue="0.80000000000000004" alpha="0.040000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                            <view alpha="0.16" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q2x-ID-d2q">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-1" translatesAutoresizingMaskIntoConstraints="NO" id="dRP-LO-0Ai">
+                                <rect key="frame" x="0.0" y="115" width="375" height="502"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Риск" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTg-yj-a1h">
-                                <rect key="frame" x="139" y="47" width="42" height="22"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
-                                <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jLW-ww-zhI">
+                                <rect key="frame" x="32" y="36" width="311" height="196"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Рост">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="24" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="  Цель этой корзины —">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" преумножить капитал.">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">  Это корзина для рисковых и высокодоходных инвестиций от 10% годовых. Бизнес, акции и другие направления, где вы планируете стремительно зарабатывать.</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFI-DX-fSN">
-                                <rect key="frame" x="32" y="473" width="256" height="40"/>
-                                <color key="backgroundColor" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="boO-TC-3jI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                <state key="normal" title="ПРОДОЛЖИТЬ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapNextButton:" destination="awW-3c-ic8" eventType="touchUpInside" id="gUB-el-Rgj"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-chart-image" translatesAutoresizingMaskIntoConstraints="NO" id="bPQ-Rb-DRZ">
-                                <rect key="frame" x="121.5" y="93" width="77" height="77"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1kR-FO-eDe">
-                                <rect key="frame" x="16" y="202" width="288" height="77"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-goal-icon" translatesAutoresizingMaskIntoConstraints="NO" id="nJb-Hg-aLu">
-                                        <rect key="frame" x="16" y="14" width="18" height="18"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ЦЕЛЬ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGE-JS-mth">
-                                        <rect key="frame" x="39" y="14.5" width="37" height="17"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                        <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Преумножить деньги." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWz-QX-kel">
-                                        <rect key="frame" x="16" y="46" width="146.5" height="17"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                        <color key="textColor" red="0.52000000000000002" green="0.56999999999999995" blue="0.63" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="rGE-JS-mth" firstAttribute="leading" secondItem="nJb-Hg-aLu" secondAttribute="trailing" constant="5" id="4Pm-gI-c1H"/>
-                                    <constraint firstItem="nJb-Hg-aLu" firstAttribute="top" secondItem="1kR-FO-eDe" secondAttribute="top" constant="14" id="5Wm-8s-Q7P"/>
-                                    <constraint firstItem="MWz-QX-kel" firstAttribute="top" secondItem="nJb-Hg-aLu" secondAttribute="bottom" constant="14" id="Gny-BV-RdD"/>
-                                    <constraint firstItem="MWz-QX-kel" firstAttribute="leading" secondItem="1kR-FO-eDe" secondAttribute="leading" constant="16" id="Nz9-ps-kCa"/>
-                                    <constraint firstItem="nJb-Hg-aLu" firstAttribute="leading" secondItem="1kR-FO-eDe" secondAttribute="leading" constant="16" id="iz0-md-96K"/>
-                                    <constraint firstAttribute="height" constant="77" id="kZe-pX-4UW"/>
-                                    <constraint firstItem="rGE-JS-mth" firstAttribute="centerY" secondItem="nJb-Hg-aLu" secondAttribute="centerY" id="kgG-qY-JZp"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.62" green="0.67000000000000004" blue="0.80000000000000004" alpha="0.040000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OrL-VF-vEj">
-                                <rect key="frame" x="16" y="295" width="288" height="134"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-info-icon" translatesAutoresizingMaskIntoConstraints="NO" id="iNx-Vp-fmz">
-                                        <rect key="frame" x="16" y="14" width="14" height="14"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ИНФОРМАЦИЯ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHC-6R-I60">
-                                        <rect key="frame" x="35" y="12.5" width="101" height="17"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                        <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27M-et-158">
-                                        <rect key="frame" x="16" y="42" width="260" height="66.5"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Из этой корзины вы инвестируете в бизнес, акции, криптовалюту, форекс и другие инструменты ">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="NSColor" red="0.52156999999999998" green="0.57255" blue="0.63136999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="14" name="Rubik-Regular"/>
-                                                    <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="13" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                        <tabStops/>
-                                                    </paragraphStyle>
-                                                    <color key="NSStrokeColor" red="0.66666999999999998" green="0.66666999999999998" blue="0.66666999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="с годовой доходностью от 15 процентов">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="NSColor" red="0.52156999999999998" green="0.57255" blue="0.63136999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="14" name="Rubik-Medium"/>
-                                                    <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="13" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                        <tabStops/>
-                                                    </paragraphStyle>
-                                                    <color key="NSStrokeColor" red="0.66666999999999998" green="0.66666999999999998" blue="0.66666999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=".">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="NSColor" red="0.52156999999999998" green="0.57255" blue="0.63136999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="14" name="Rubik-Regular"/>
-                                                    <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="13" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                        <tabStops/>
-                                                    </paragraphStyle>
-                                                    <color key="NSStrokeColor" red="0.66666999999999998" green="0.66666999999999998" blue="0.66666999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="27M-et-158" firstAttribute="top" secondItem="iNx-Vp-fmz" secondAttribute="bottom" constant="14" id="7GM-lV-Ufv"/>
-                                    <constraint firstItem="iNx-Vp-fmz" firstAttribute="leading" secondItem="OrL-VF-vEj" secondAttribute="leading" constant="16" id="91p-uC-HaC"/>
-                                    <constraint firstAttribute="height" constant="134" id="K77-EH-WlB"/>
-                                    <constraint firstAttribute="trailing" secondItem="27M-et-158" secondAttribute="trailing" constant="12" id="MAL-dt-wNT"/>
-                                    <constraint firstItem="GHC-6R-I60" firstAttribute="centerY" secondItem="iNx-Vp-fmz" secondAttribute="centerY" id="SCn-2V-5hg"/>
-                                    <constraint firstItem="27M-et-158" firstAttribute="leading" secondItem="OrL-VF-vEj" secondAttribute="leading" constant="16" id="die-Zc-a5g"/>
-                                    <constraint firstItem="GHC-6R-I60" firstAttribute="leading" secondItem="iNx-Vp-fmz" secondAttribute="trailing" constant="5" id="h3c-pr-m9N"/>
-                                    <constraint firstItem="iNx-Vp-fmz" firstAttribute="top" secondItem="OrL-VF-vEj" secondAttribute="top" constant="14" id="keC-3d-0i9"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.62" green="0.67000000000000004" blue="0.80000000000000004" alpha="0.040000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117649999999" green="0.96470588239999999" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
-                            <constraint firstItem="bPQ-Rb-DRZ" firstAttribute="centerX" secondItem="czK-Xg-L7z" secondAttribute="centerX" id="EtF-Lk-Qeb"/>
-                            <constraint firstItem="541-ke-nZk" firstAttribute="top" secondItem="czK-Xg-L7z" secondAttribute="top" id="KMT-8U-usg"/>
-                            <constraint firstItem="541-ke-nZk" firstAttribute="leading" secondItem="AGZ-PE-5VB" secondAttribute="leading" id="PwE-Lw-awb"/>
-                            <constraint firstItem="sFI-DX-fSN" firstAttribute="leading" secondItem="AGZ-PE-5VB" secondAttribute="leading" constant="32" id="RCs-8w-BSk"/>
-                            <constraint firstItem="OrL-VF-vEj" firstAttribute="top" secondItem="1kR-FO-eDe" secondAttribute="bottom" constant="16" id="S7f-LZ-WdK"/>
-                            <constraint firstItem="yTg-yj-a1h" firstAttribute="top" secondItem="czK-Xg-L7z" secondAttribute="top" constant="47" id="Uqf-6g-9vM"/>
-                            <constraint firstItem="yTg-yj-a1h" firstAttribute="centerX" secondItem="czK-Xg-L7z" secondAttribute="centerX" id="Xo5-qn-CVL"/>
-                            <constraint firstItem="1kR-FO-eDe" firstAttribute="top" secondItem="bPQ-Rb-DRZ" secondAttribute="bottom" constant="32" id="agz-8q-tIz"/>
-                            <constraint firstItem="1kR-FO-eDe" firstAttribute="leading" secondItem="AGZ-PE-5VB" secondAttribute="leading" constant="16" id="av8-GX-5bD"/>
-                            <constraint firstItem="OrL-VF-vEj" firstAttribute="leading" secondItem="AGZ-PE-5VB" secondAttribute="leading" constant="16" id="h1S-3p-Nqe"/>
-                            <constraint firstItem="541-ke-nZk" firstAttribute="trailing" secondItem="AGZ-PE-5VB" secondAttribute="trailing" id="kCs-v8-dtj"/>
-                            <constraint firstItem="AGZ-PE-5VB" firstAttribute="trailing" secondItem="OrL-VF-vEj" secondAttribute="trailing" constant="16" id="lWc-LY-uy1"/>
-                            <constraint firstItem="AGZ-PE-5VB" firstAttribute="bottom" secondItem="sFI-DX-fSN" secondAttribute="bottom" constant="55" id="mZA-qS-oJ2"/>
-                            <constraint firstItem="bPQ-Rb-DRZ" firstAttribute="top" secondItem="czK-Xg-L7z" secondAttribute="top" constant="93" id="vUo-y6-slk"/>
-                            <constraint firstItem="AGZ-PE-5VB" firstAttribute="trailing" secondItem="1kR-FO-eDe" secondAttribute="trailing" constant="16" id="yjH-fL-MPc"/>
-                            <constraint firstItem="AGZ-PE-5VB" firstAttribute="trailing" secondItem="sFI-DX-fSN" secondAttribute="trailing" constant="32" id="zqH-t5-M8H"/>
+                            <constraint firstItem="AGZ-PE-5VB" firstAttribute="trailing" secondItem="jLW-ww-zhI" secondAttribute="trailing" constant="32" id="3dw-QQ-KU5"/>
+                            <constraint firstItem="Q2x-ID-d2q" firstAttribute="top" secondItem="czK-Xg-L7z" secondAttribute="top" id="8C8-Py-I26"/>
+                            <constraint firstItem="jLW-ww-zhI" firstAttribute="top" secondItem="AGZ-PE-5VB" secondAttribute="top" constant="16" id="B6y-4h-Q7Y"/>
+                            <constraint firstAttribute="trailing" secondItem="Q2x-ID-d2q" secondAttribute="trailing" id="C9R-z8-9PF"/>
+                            <constraint firstItem="dRP-LO-0Ai" firstAttribute="top" secondItem="AGZ-PE-5VB" secondAttribute="top" constant="95" id="DI9-v8-tI0"/>
+                            <constraint firstItem="dRP-LO-0Ai" firstAttribute="leading" secondItem="AGZ-PE-5VB" secondAttribute="leading" id="GQu-Lx-mgy"/>
+                            <constraint firstItem="AGZ-PE-5VB" firstAttribute="bottom" secondItem="dRP-LO-0Ai" secondAttribute="bottom" constant="50" id="Iv6-Dy-war"/>
+                            <constraint firstAttribute="bottom" secondItem="Q2x-ID-d2q" secondAttribute="bottom" id="Pdq-C0-aCt"/>
+                            <constraint firstItem="jLW-ww-zhI" firstAttribute="leading" secondItem="AGZ-PE-5VB" secondAttribute="leading" constant="32" id="Y9f-Ee-dap"/>
+                            <constraint firstItem="Q2x-ID-d2q" firstAttribute="leading" secondItem="czK-Xg-L7z" secondAttribute="leading" id="jbb-sP-IRE"/>
+                            <constraint firstItem="dRP-LO-0Ai" firstAttribute="trailing" secondItem="AGZ-PE-5VB" secondAttribute="trailing" id="srM-cM-QlM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="AGZ-PE-5VB"/>
                     </view>
                     <connections>
-                        <outlet property="informationLabel" destination="27M-et-158" id="u5K-Xl-pLp"/>
+                        <outlet property="overlay" destination="Q2x-ID-d2q" id="FVb-QT-Jvp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="StP-H6-tJF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -619,304 +482,232 @@
         <!--Onboarding Page6 View Controller-->
         <scene sceneID="xaW-HL-LPu">
             <objects>
-                <viewController storyboardIdentifier="OnboardingPage6ViewController" id="yS6-D4-DeT" customClass="OnboardingPage6ViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingPage6ViewController" id="yS6-D4-DeT" customClass="OnboardingPage6ViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8gO-4R-hHR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-topbar-image" translatesAutoresizingMaskIntoConstraints="NO" id="xRs-0h-ULB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="148"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.62" green="0.67000000000000004" blue="0.80000000000000004" alpha="0.040000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                            <view alpha="0.16" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPy-JO-ir2">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-1" translatesAutoresizingMaskIntoConstraints="NO" id="y4X-7a-iXg">
+                                <rect key="frame" x="0.0" y="115" width="375" height="502"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Безопасность" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QA5-mD-0bz">
-                                <rect key="frame" x="99.5" y="47" width="121" height="22"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
-                                <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vny-dh-oUL">
+                                <rect key="frame" x="32" y="36" width="311" height="233"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Безопасность">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="24" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="  Цель этой корзины —">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" надежное сохранение капитала и создание медленного роста.">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">  Это ваша подушка безопасности и безбедная старость. Консервативные методы хранения денег: надежные облигации, депозит, недвижимость.  Тратить эти деньги на пустяки — нельзя!</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1O-tA-4c9">
-                                <rect key="frame" x="32" y="473" width="256" height="40"/>
-                                <color key="backgroundColor" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Tvc-Bb-Gup"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                <state key="normal" title="ПРОДОЛЖИТЬ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapNextButton:" destination="yS6-D4-DeT" eventType="touchUpInside" id="d0H-6t-G3B"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-lock-image" translatesAutoresizingMaskIntoConstraints="NO" id="Ime-eS-6AB">
-                                <rect key="frame" x="131.5" y="93" width="57" height="75"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51c-tb-9gs">
-                                <rect key="frame" x="16" y="200" width="288" height="96"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-goal-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Mtn-6y-V3K">
-                                        <rect key="frame" x="16" y="14" width="18" height="18"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ЦЕЛЬ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9q-50-4hc">
-                                        <rect key="frame" x="39" y="14.5" width="37" height="17"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                        <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сохранить средства и создать медленный, стабильный рост." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYi-c4-bw6">
-                                        <rect key="frame" x="16" y="46" width="261" height="33.5"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                        <color key="textColor" red="0.52000000000000002" green="0.56999999999999995" blue="0.63" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="Mtn-6y-V3K" firstAttribute="leading" secondItem="51c-tb-9gs" secondAttribute="leading" constant="16" id="4KB-m7-ErY"/>
-                                    <constraint firstItem="t9q-50-4hc" firstAttribute="leading" secondItem="Mtn-6y-V3K" secondAttribute="trailing" constant="5" id="6P8-zl-ly1"/>
-                                    <constraint firstItem="Mtn-6y-V3K" firstAttribute="top" secondItem="51c-tb-9gs" secondAttribute="top" constant="14" id="BFT-X9-adj"/>
-                                    <constraint firstItem="AYi-c4-bw6" firstAttribute="leading" secondItem="51c-tb-9gs" secondAttribute="leading" constant="16" id="E7m-G9-uaC"/>
-                                    <constraint firstItem="t9q-50-4hc" firstAttribute="centerY" secondItem="Mtn-6y-V3K" secondAttribute="centerY" id="MrD-jH-xA0"/>
-                                    <constraint firstItem="AYi-c4-bw6" firstAttribute="top" secondItem="Mtn-6y-V3K" secondAttribute="bottom" constant="14" id="XAc-9k-DMr"/>
-                                    <constraint firstAttribute="height" constant="96" id="a39-S3-4yG"/>
-                                    <constraint firstAttribute="trailing" secondItem="AYi-c4-bw6" secondAttribute="trailing" constant="11" id="v5s-sT-mVG"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.62" green="0.67000000000000004" blue="0.80000000000000004" alpha="0.040000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7VG-X3-DCV">
-                                <rect key="frame" x="16" y="312" width="288" height="115"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-info-icon" translatesAutoresizingMaskIntoConstraints="NO" id="fWd-GI-Rj5">
-                                        <rect key="frame" x="16" y="14" width="14" height="14"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ИНФОРМАЦИЯ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jik-zu-X7e">
-                                        <rect key="frame" x="35" y="12.5" width="101" height="17"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                        <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wb-Pt-v3r">
-                                        <rect key="frame" x="16" y="42" width="260" height="50"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Реальная инфляция в России ">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="NSColor" red="0.52156862745098043" green="0.56862745098039214" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="14" name="Rubik-Regular"/>
-                                                    <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="13" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                        <tabStops/>
-                                                    </paragraphStyle>
-                                                    <color key="NSStrokeColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <real key="NSStrokeWidth" value="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="7–8%">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="NSColor" red="0.52156862745098043" green="0.56862745098039214" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="14" name="Rubik-Medium"/>
-                                                    <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="13" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                        <tabStops/>
-                                                    </paragraphStyle>
-                                                    <color key="NSStrokeColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <real key="NSStrokeWidth" value="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=". Чтобы сохранить деньги, их нужно инвестировать ">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="NSColor" red="0.52156862745098043" green="0.56862745098039214" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="14" name="Rubik-Regular"/>
-                                                    <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="13" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                        <tabStops/>
-                                                    </paragraphStyle>
-                                                    <color key="NSStrokeColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <real key="NSStrokeWidth" value="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="под 10-15% годовых">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="NSColor" red="0.52156862745098043" green="0.56862745098039214" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="14" name="Rubik-Medium"/>
-                                                    <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="13" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                        <tabStops/>
-                                                    </paragraphStyle>
-                                                    <color key="NSStrokeColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <real key="NSStrokeWidth" value="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=".">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="NSColor" red="0.52156862745098043" green="0.56862745098039214" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="14" name="Rubik-Regular"/>
-                                                    <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="13" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                        <tabStops/>
-                                                    </paragraphStyle>
-                                                    <color key="NSStrokeColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <real key="NSStrokeWidth" value="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="fWd-GI-Rj5" firstAttribute="leading" secondItem="7VG-X3-DCV" secondAttribute="leading" constant="16" id="4jd-qa-sYW"/>
-                                    <constraint firstItem="fWd-GI-Rj5" firstAttribute="top" secondItem="7VG-X3-DCV" secondAttribute="top" constant="14" id="Gcd-Hr-LKX"/>
-                                    <constraint firstItem="2Wb-Pt-v3r" firstAttribute="leading" secondItem="7VG-X3-DCV" secondAttribute="leading" constant="16" id="XdR-PL-SJn"/>
-                                    <constraint firstItem="Jik-zu-X7e" firstAttribute="leading" secondItem="fWd-GI-Rj5" secondAttribute="trailing" constant="5" id="YVg-EB-mlQ"/>
-                                    <constraint firstAttribute="height" constant="115" id="age-Td-RTZ"/>
-                                    <constraint firstItem="2Wb-Pt-v3r" firstAttribute="top" secondItem="fWd-GI-Rj5" secondAttribute="bottom" constant="14" id="rWj-3L-wFk"/>
-                                    <constraint firstAttribute="trailing" secondItem="2Wb-Pt-v3r" secondAttribute="trailing" constant="12" id="vC8-sL-Jut"/>
-                                    <constraint firstItem="Jik-zu-X7e" firstAttribute="centerY" secondItem="fWd-GI-Rj5" secondAttribute="centerY" id="z4B-8T-eBA"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.62" green="0.67000000000000004" blue="0.80000000000000004" alpha="0.040000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117649999999" green="0.96470588239999999" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
-                            <constraint firstItem="7VG-X3-DCV" firstAttribute="top" secondItem="51c-tb-9gs" secondAttribute="bottom" constant="16" id="A5X-4j-xya"/>
-                            <constraint firstItem="51c-tb-9gs" firstAttribute="leading" secondItem="1CN-WL-eEG" secondAttribute="leading" constant="16" id="Acm-ax-t0n"/>
-                            <constraint firstItem="Ime-eS-6AB" firstAttribute="top" secondItem="8gO-4R-hHR" secondAttribute="top" constant="93" id="CAG-fI-KSr"/>
-                            <constraint firstItem="xRs-0h-ULB" firstAttribute="leading" secondItem="1CN-WL-eEG" secondAttribute="leading" id="CM3-Ls-PhX"/>
-                            <constraint firstItem="51c-tb-9gs" firstAttribute="top" secondItem="Ime-eS-6AB" secondAttribute="bottom" constant="32" id="QW9-Y8-9Dt"/>
-                            <constraint firstItem="1CN-WL-eEG" firstAttribute="trailing" secondItem="N1O-tA-4c9" secondAttribute="trailing" constant="32" id="TPR-Zv-nfc"/>
-                            <constraint firstItem="xRs-0h-ULB" firstAttribute="top" secondItem="8gO-4R-hHR" secondAttribute="top" id="UxS-Lt-i0t"/>
-                            <constraint firstItem="1CN-WL-eEG" firstAttribute="bottom" secondItem="N1O-tA-4c9" secondAttribute="bottom" constant="55" id="Wxu-US-Os3"/>
-                            <constraint firstItem="1CN-WL-eEG" firstAttribute="trailing" secondItem="51c-tb-9gs" secondAttribute="trailing" constant="16" id="YOo-zS-K5G"/>
-                            <constraint firstItem="1CN-WL-eEG" firstAttribute="trailing" secondItem="7VG-X3-DCV" secondAttribute="trailing" constant="16" id="bs5-ob-t8O"/>
-                            <constraint firstItem="Ime-eS-6AB" firstAttribute="centerX" secondItem="8gO-4R-hHR" secondAttribute="centerX" id="f6s-hs-Mwp"/>
-                            <constraint firstItem="xRs-0h-ULB" firstAttribute="trailing" secondItem="1CN-WL-eEG" secondAttribute="trailing" id="kki-hN-Df2"/>
-                            <constraint firstItem="7VG-X3-DCV" firstAttribute="leading" secondItem="1CN-WL-eEG" secondAttribute="leading" constant="16" id="pdY-8p-P2g"/>
-                            <constraint firstItem="QA5-mD-0bz" firstAttribute="centerX" secondItem="8gO-4R-hHR" secondAttribute="centerX" id="qIF-Qz-jcS"/>
-                            <constraint firstItem="N1O-tA-4c9" firstAttribute="leading" secondItem="1CN-WL-eEG" secondAttribute="leading" constant="32" id="v4k-K3-FZt"/>
-                            <constraint firstItem="QA5-mD-0bz" firstAttribute="top" secondItem="8gO-4R-hHR" secondAttribute="top" constant="47" id="vu9-Jc-fbS"/>
+                            <constraint firstItem="vny-dh-oUL" firstAttribute="top" secondItem="1CN-WL-eEG" secondAttribute="top" constant="16" id="6S3-Dx-u9Y"/>
+                            <constraint firstItem="y4X-7a-iXg" firstAttribute="leading" secondItem="1CN-WL-eEG" secondAttribute="leading" id="8j9-hs-0qr"/>
+                            <constraint firstItem="vny-dh-oUL" firstAttribute="leading" secondItem="1CN-WL-eEG" secondAttribute="leading" constant="32" id="A2Q-Fc-0o4"/>
+                            <constraint firstAttribute="trailing" secondItem="CPy-JO-ir2" secondAttribute="trailing" id="BeU-4q-Bbo"/>
+                            <constraint firstItem="CPy-JO-ir2" firstAttribute="top" secondItem="8gO-4R-hHR" secondAttribute="top" id="HSz-ps-Xav"/>
+                            <constraint firstItem="y4X-7a-iXg" firstAttribute="top" secondItem="1CN-WL-eEG" secondAttribute="top" constant="95" id="KYo-kP-ZHQ"/>
+                            <constraint firstItem="CPy-JO-ir2" firstAttribute="leading" secondItem="8gO-4R-hHR" secondAttribute="leading" id="LqM-dz-NF5"/>
+                            <constraint firstItem="1CN-WL-eEG" firstAttribute="trailing" secondItem="vny-dh-oUL" secondAttribute="trailing" constant="32" id="h7A-r9-Kmm"/>
+                            <constraint firstItem="y4X-7a-iXg" firstAttribute="trailing" secondItem="1CN-WL-eEG" secondAttribute="trailing" id="lOg-BG-Rfc"/>
+                            <constraint firstAttribute="bottom" secondItem="CPy-JO-ir2" secondAttribute="bottom" id="r8B-4i-ioL"/>
+                            <constraint firstItem="1CN-WL-eEG" firstAttribute="bottom" secondItem="y4X-7a-iXg" secondAttribute="bottom" constant="50" id="vfG-KU-Wih"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1CN-WL-eEG"/>
                     </view>
                     <connections>
-                        <outlet property="informationLabel" destination="2Wb-Pt-v3r" id="fTW-no-ioc"/>
+                        <outlet property="overlay" destination="CPy-JO-ir2" id="Bu0-Nh-UIr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i4U-LU-xnT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1841" y="750"/>
         </scene>
-        <!--Onboarding Page View Controller-->
+        <!--View Controller-->
         <scene sceneID="oQZ-sG-ue0">
             <objects>
-                <viewController storyboardIdentifier="OnboardingPage7ViewController" id="55v-J1-fG7" customClass="OnboardingPageViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingPage7ViewController" id="55v-J1-fG7" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ovQ-cD-KWr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="В какой пропорции лучше распределять деньги?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihj-Nd-awI">
-                                <rect key="frame" x="32" y="58" width="256" height="33.5"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                <color key="textColor" red="0.52156862745098043" green="0.56862745098039214" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-page7-image" translatesAutoresizingMaskIntoConstraints="NO" id="nBT-zp-FMB">
-                                <rect key="frame" x="16" y="138" width="288" height="251"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-1" translatesAutoresizingMaskIntoConstraints="NO" id="SDT-UH-nCc">
+                                <rect key="frame" x="0.0" y="115" width="375" height="502"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Со временем вы будете увеличивать процент в 1 и 2 корзинах" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbv-V0-tAm">
-                                <rect key="frame" x="27" y="407" width="266" height="33.5"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                <color key="textColor" red="0.52156862745098043" green="0.56862745098039214" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vJD-yC-d2Y">
+                                <rect key="frame" x="32" y="36" width="311" height="214.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Для начала рекомендую использовать мою пропорцию распределения средств:
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="10" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Удовольствие: 85% ">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="10" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" Рост: 10% ">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="10" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" Безопасность: 5%">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="10" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" Со временем нужно уменьшать процент в первой корзине и увеличивать процент денег, которые мы инвестируем.">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9l-21-4C3">
-                                <rect key="frame" x="32" y="473" width="256" height="40"/>
-                                <color key="backgroundColor" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="rtV-k3-EMF"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                <state key="normal" title="ПРОДОЛЖИТЬ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapNextButton:" destination="55v-J1-fG7" eventType="touchUpInside" id="PHD-Yu-NhR"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
-                            <constraint firstItem="kRy-iH-ROz" firstAttribute="bottom" secondItem="W9l-21-4C3" secondAttribute="bottom" constant="55" id="2L5-0Z-dYy"/>
-                            <constraint firstItem="nBT-zp-FMB" firstAttribute="centerX" secondItem="ovQ-cD-KWr" secondAttribute="centerX" id="Cc4-it-nl5"/>
-                            <constraint firstItem="W9l-21-4C3" firstAttribute="leading" secondItem="kRy-iH-ROz" secondAttribute="leading" constant="32" id="GFC-sB-ddD"/>
-                            <constraint firstItem="nBT-zp-FMB" firstAttribute="top" secondItem="ovQ-cD-KWr" secondAttribute="top" constant="138" id="KKn-lN-Gum"/>
-                            <constraint firstAttribute="trailing" secondItem="ihj-Nd-awI" secondAttribute="trailing" constant="32" id="S5D-Gd-8no"/>
-                            <constraint firstItem="ihj-Nd-awI" firstAttribute="top" secondItem="ovQ-cD-KWr" secondAttribute="top" constant="58" id="S7e-8X-KAs"/>
-                            <constraint firstItem="kRy-iH-ROz" firstAttribute="trailing" secondItem="W9l-21-4C3" secondAttribute="trailing" constant="32" id="ZkA-V7-m0p"/>
-                            <constraint firstAttribute="trailing" secondItem="nbv-V0-tAm" secondAttribute="trailing" constant="27" id="Zlh-0D-m0j"/>
-                            <constraint firstItem="nbv-V0-tAm" firstAttribute="top" secondItem="nBT-zp-FMB" secondAttribute="bottom" constant="18" id="mJ5-EB-Vnc"/>
-                            <constraint firstItem="ihj-Nd-awI" firstAttribute="leading" secondItem="ovQ-cD-KWr" secondAttribute="leading" constant="32" id="vhD-bM-fT2"/>
-                            <constraint firstItem="ihj-Nd-awI" firstAttribute="centerX" secondItem="ovQ-cD-KWr" secondAttribute="centerX" id="yQz-KB-CTR"/>
-                            <constraint firstItem="nbv-V0-tAm" firstAttribute="leading" secondItem="kRy-iH-ROz" secondAttribute="leading" constant="27" id="yna-xS-7lu"/>
+                            <constraint firstItem="SDT-UH-nCc" firstAttribute="trailing" secondItem="kRy-iH-ROz" secondAttribute="trailing" id="0qO-ko-mfs"/>
+                            <constraint firstItem="vJD-yC-d2Y" firstAttribute="top" secondItem="kRy-iH-ROz" secondAttribute="top" constant="16" id="NVo-b0-tcr"/>
+                            <constraint firstItem="vJD-yC-d2Y" firstAttribute="leading" secondItem="kRy-iH-ROz" secondAttribute="leading" constant="32" id="TlV-qm-DXM"/>
+                            <constraint firstItem="kRy-iH-ROz" firstAttribute="trailing" secondItem="vJD-yC-d2Y" secondAttribute="trailing" constant="32" id="VzB-xZ-y9j"/>
+                            <constraint firstItem="kRy-iH-ROz" firstAttribute="bottom" secondItem="SDT-UH-nCc" secondAttribute="bottom" constant="50" id="adX-YH-6La"/>
+                            <constraint firstItem="SDT-UH-nCc" firstAttribute="leading" secondItem="kRy-iH-ROz" secondAttribute="leading" id="kCH-gs-4vW"/>
+                            <constraint firstItem="SDT-UH-nCc" firstAttribute="top" secondItem="kRy-iH-ROz" secondAttribute="top" constant="95" id="uzW-2X-Oek"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kRy-iH-ROz"/>
                     </view>
@@ -925,62 +716,223 @@
             </objects>
             <point key="canvasLocation" x="2903" y="753"/>
         </scene>
-        <!--Onboarding Page View Controller-->
+        <!--View Controller-->
         <scene sceneID="zrM-pU-zgP">
             <objects>
-                <viewController storyboardIdentifier="OnboardingPage8ViewController" id="Rvi-jO-Zc5" customClass="OnboardingPageViewController" customModule="skrudzh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingPage8ViewController" id="Rvi-jO-Zc5" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jjs-ey-wQP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Куда лучше инвестировать?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyO-Fm-kP0">
-                                <rect key="frame" x="38" y="58" width="244.5" height="21"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
-                                <color key="textColor" red="0.25" green="0.27000000000000002" blue="0.38" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-page8-image" translatesAutoresizingMaskIntoConstraints="NO" id="05S-ct-8C5">
-                                <rect key="frame" x="53" y="118" width="214" height="202"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-1" translatesAutoresizingMaskIntoConstraints="NO" id="s9M-ui-9Xc">
+                                <rect key="frame" x="0.0" y="115" width="375" height="502"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeZ-2R-b7I">
-                                <rect key="frame" x="27" y="358" width="266" height="83"/>
-                                <string key="text">В нашем блоге вы узнаете передовые инструменты для инвестирования, как вырваться из долгов, основы финансовой грамотности и многое другое.</string>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                <color key="textColor" red="0.52000000000000002" green="0.56999999999999995" blue="0.63" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Etj-jp-Iqw">
+                                <rect key="frame" x="32" y="36" width="311" height="214.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Через это приложение я научу тебя множеству вещей:
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="10" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Контролировать">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> доходы и расходы,
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="10" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Вырваться из долгов">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" и быстро ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="делать накопления">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="10" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" Изучать основы ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="финансовой грамотности">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="10" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" Получать надёжные объекты для ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="инвестирования">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Rubik-Regular"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmW-DQ-kmw">
-                                <rect key="frame" x="32" y="473" width="256" height="40"/>
-                                <color key="backgroundColor" red="0.34901960780000002" green="0.48627450979999998" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Q9f-Xx-WTB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                <state key="normal" title="НАЧАТЬ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapStartButton:" destination="Rvi-jO-Zc5" eventType="touchUpInside" id="Hz1-LX-suL"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
-                            <constraint firstItem="CeZ-2R-b7I" firstAttribute="top" secondItem="05S-ct-8C5" secondAttribute="bottom" constant="38" id="ASi-ZP-akf"/>
-                            <constraint firstItem="CeZ-2R-b7I" firstAttribute="leading" secondItem="93C-M2-Dde" secondAttribute="leading" constant="27" id="KP8-mo-NfK"/>
-                            <constraint firstAttribute="trailing" secondItem="CeZ-2R-b7I" secondAttribute="trailing" constant="27" id="SHW-lw-ZDO"/>
-                            <constraint firstItem="XyO-Fm-kP0" firstAttribute="top" secondItem="Jjs-ey-wQP" secondAttribute="top" constant="58" id="TPx-1F-0dY"/>
-                            <constraint firstItem="XyO-Fm-kP0" firstAttribute="centerX" secondItem="Jjs-ey-wQP" secondAttribute="centerX" id="ZKL-0F-QOl"/>
-                            <constraint firstItem="05S-ct-8C5" firstAttribute="top" secondItem="Jjs-ey-wQP" secondAttribute="top" constant="118" id="e8e-zR-HFU"/>
-                            <constraint firstItem="93C-M2-Dde" firstAttribute="bottom" secondItem="RmW-DQ-kmw" secondAttribute="bottom" constant="55" id="jts-hm-f5t"/>
-                            <constraint firstItem="RmW-DQ-kmw" firstAttribute="leading" secondItem="93C-M2-Dde" secondAttribute="leading" constant="32" id="leg-yR-p14"/>
-                            <constraint firstItem="93C-M2-Dde" firstAttribute="trailing" secondItem="RmW-DQ-kmw" secondAttribute="trailing" constant="32" id="rQj-5U-yaL"/>
-                            <constraint firstItem="05S-ct-8C5" firstAttribute="centerX" secondItem="Jjs-ey-wQP" secondAttribute="centerX" id="s9x-WT-8fg"/>
+                            <constraint firstItem="93C-M2-Dde" firstAttribute="bottom" secondItem="s9M-ui-9Xc" secondAttribute="bottom" constant="50" id="NLd-L9-Iqz"/>
+                            <constraint firstItem="s9M-ui-9Xc" firstAttribute="leading" secondItem="93C-M2-Dde" secondAttribute="leading" id="TH6-EP-S8h"/>
+                            <constraint firstItem="s9M-ui-9Xc" firstAttribute="trailing" secondItem="93C-M2-Dde" secondAttribute="trailing" id="ePO-uX-7P4"/>
+                            <constraint firstItem="s9M-ui-9Xc" firstAttribute="top" secondItem="93C-M2-Dde" secondAttribute="top" constant="95" id="hI4-Ox-50X"/>
+                            <constraint firstItem="Etj-jp-Iqw" firstAttribute="top" secondItem="93C-M2-Dde" secondAttribute="top" constant="16" id="lYL-gh-pSH"/>
+                            <constraint firstItem="93C-M2-Dde" firstAttribute="trailing" secondItem="Etj-jp-Iqw" secondAttribute="trailing" constant="32" id="sJ1-fn-ttK"/>
+                            <constraint firstItem="Etj-jp-Iqw" firstAttribute="leading" secondItem="93C-M2-Dde" secondAttribute="leading" constant="32" id="tNe-1Z-2H2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="93C-M2-Dde"/>
                     </view>
@@ -991,16 +943,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="onboarding-chart-image" width="77" height="77"/>
-        <image name="onboarding-goal-icon" width="18" height="18"/>
-        <image name="onboarding-info-icon" width="14" height="14"/>
-        <image name="onboarding-lock-image" width="57" height="75"/>
-        <image name="onboarding-page1-image" width="229.5" height="211.5"/>
-        <image name="onboarding-page2-image" width="229" height="206.5"/>
-        <image name="onboarding-page3-image" width="256" height="227"/>
-        <image name="onboarding-page4-sun-image" width="72" height="72"/>
-        <image name="onboarding-page7-image" width="288" height="251"/>
-        <image name="onboarding-page8-image" width="214.5" height="202.5"/>
-        <image name="onboarding-topbar-image" width="320" height="148"/>
+        <image name="onboarding-1" width="375" height="545.5"/>
+        <namedColor name="blue 6A92FA">
+            <color red="0.41568627450980394" green="0.5725490196078431" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="dark 2A314B">
+            <color red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="delimeter AFC1FF">
+            <color red="0.68627450980392157" green="0.75686274509803919" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

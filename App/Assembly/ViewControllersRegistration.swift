@@ -74,7 +74,10 @@ extension ApplicationAssembly {
         
         // OnboardingViewController
         container.registerForSkrudzhStoryboard(OnboardingViewController.self) { (r, c) in
-            c.router = r.resolve(ApplicationRouterProtocol.self)
+        }
+        
+        // OnboardingPagesViewController
+        container.registerForSkrudzhStoryboard(OnboardingPagesViewController.self) { (r, c) in
         }
         
         // IncomeSourceEditViewController

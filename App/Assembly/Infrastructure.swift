@@ -101,6 +101,7 @@ struct Infrastructure {
         
         // Onboarding
         case OnboardingViewController
+        case OnboardingPagesViewController
         case OnboardingPage1ViewController
         case OnboardingPage2ViewController
         case OnboardingPage3ViewController
@@ -168,6 +169,7 @@ struct Infrastructure {
                  .ChangePasswordViewController:
                 return .Profile
             case .OnboardingViewController,
+                 .OnboardingPagesViewController,
                  .OnboardingPage1ViewController,
                  .OnboardingPage2ViewController,
                  .OnboardingPage3ViewController,
