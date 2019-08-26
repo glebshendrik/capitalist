@@ -48,7 +48,7 @@ extension MainViewController {
             
             movingCollectionView.updateInteractiveMovementTargetPosition(location)
             
-            (cell as? EditableCell)?.set(editing: false)
+            cell?.set(editing: false)
             animatePickingUp(cell: cell)
         case .changed:
             
@@ -105,7 +105,7 @@ extension MainViewController {
             cell?.alpha = 1.0
             cell?.transform = CGAffineTransform.identity
         }, completion: { finished in
-            (cell as? EditableCell)?.set(editing: true)
+            cell?.set(editing: true)
         })
     }
 }
@@ -115,7 +115,7 @@ extension MainViewController {
         let cells = incomeSourcesCollectionView.visibleCells + expenseSourcesCollectionView.visibleCells + joyExpenseCategoriesCollectionView.visibleCells + riskExpenseCategoriesCollectionView.visibleCells + safeExpenseCategoriesCollectionView.visibleCells
         
         for cell in cells {
-            (cell as? EditableCell)?.set(editing: editing)
+            cell.set(editing: editing)
         }
     }
     
@@ -129,11 +129,12 @@ extension MainViewController {
         updateCollectionViews()
         
         setVisibleCells(editing: editing)
-        
-        UIView.animate(withDuration: 0.1) {
+        UIView.animate(withDuration: 0.1, animations: {
             self.editDoneButton.alpha = editing ? 1.0 : 0.0
-            self.editDoneButtonHeightConstraint.constant = editing ? 30 : 0
+            self.editDoneButtonHeightConstraint.constant = editing ? 30 : 30
             self.view.layoutIfNeeded()
+        }) { completed in
+//            self.didCreateExpense()
         }
     }
 }

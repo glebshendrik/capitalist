@@ -9,7 +9,7 @@
 import UIKit
 
 extension MainViewController : EditableCellDelegate {
-    func didTapDeleteButton(cell: EditableCell) {
+    func didTapDeleteButton(cell: EditableCellProtocol) {
         var alertTitle = ""
         var removeAction: ((UIAlertAction) -> Void)? = nil
         var removeWithTransactionsAction: ((UIAlertAction) -> Void)? = nil
@@ -68,7 +68,7 @@ extension MainViewController : EditableCellDelegate {
         present(alertController, animated: true)
     }
     
-    func didTapEditButton(cell: EditableCell) {
+    func didTapEditButton(cell: EditableCellProtocol) {
         if let incomeSource = (cell as? IncomeSourceCollectionViewCell)?.viewModel?.incomeSource {
             showEditScreen(incomeSource: incomeSource)
         }

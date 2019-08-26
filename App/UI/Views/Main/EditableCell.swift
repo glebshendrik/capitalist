@@ -8,12 +8,18 @@
 
 import UIKit
 
-protocol EditableCellDelegate {
-    func didTapDeleteButton(cell: EditableCell)
-    func didTapEditButton(cell: EditableCell)
+protocol EditableCellProtocol {
+    var delegate: EditableCellDelegate? { get set }
+    var deleteButton: UIButton! { get }
+    var editButton: UIButton! { get }    
 }
 
-class EditableCell : UICollectionViewCell {
+protocol EditableCellDelegate {
+    func didTapDeleteButton(cell: EditableCellProtocol)
+    func didTapEditButton(cell: EditableCellProtocol)
+}
+
+class EditableCell : UICollectionViewCell, EditableCellProtocol {
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     var delegate: EditableCellDelegate?
@@ -25,32 +31,35 @@ class EditableCell : UICollectionViewCell {
     @IBAction func didTapEditButton(_ sender: Any) {
         delegate?.didTapEditButton(cell: self)
     }
-    
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        stopWiggling()
+    }
+}
+
+extension UICollectionViewCell {
     func set(editing: Bool) {
+        guard let editableCell = self as? EditableCellProtocol else { return }
         editing
             ? startWiggling()
             : stopWiggling()
         
-        deleteButton.isEnabled = editing
-        UIView.transition(with: deleteButton,
+        editableCell.deleteButton.isEnabled = editing
+        UIView.transition(with: editableCell.deleteButton,
                           duration: 0.1,
                           options: .transitionCrossDissolve,
                           animations: {
-                            self.deleteButton.isHidden = !editing
+                            editableCell.deleteButton.isHidden = !editing
         })
         
-        editButton.isEnabled = editing
-        UIView.transition(with: editButton,
+        editableCell.editButton.isEnabled = editing
+        UIView.transition(with: editableCell.editButton,
                           duration: 0.1,
                           options: .transitionCrossDissolve,
                           animations: {
-                            self.editButton.isHidden = !editing
+                            editableCell.editButton.isHidden = !editing
         })
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        stopWiggling()
     }
     
     func startWiggling() {

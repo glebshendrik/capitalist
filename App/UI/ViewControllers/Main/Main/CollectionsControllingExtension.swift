@@ -49,16 +49,16 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         
         let cell = collectionViewCell()
         
-        guard let editableCell = cell as? EditableCell else { return cell }
+        guard var editableCell = cell as? EditableCellProtocol else { return cell }
         
         if isEditing {
             if indexPath != rearrangeController.movingIndexPath || collectionView != rearrangeController.movingCollectionView {
-                editableCell.set(editing: true)
+                cell.set(editing: true)
             }
-        } else {
-            editableCell.set(editing: false)
+        } else {            
+            cell.set(editing: false)
         }
-        
+                
         editableCell.delegate = self
         
         if collectionView == rearrangeController.movingCollectionView {
