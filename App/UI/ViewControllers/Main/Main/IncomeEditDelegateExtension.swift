@@ -27,5 +27,7 @@ extension MainViewController: IncomeEditViewControllerDelegate {
         loadBudget()
         loadBaskets()
         loadExpenseSources()
+        loadExpenseCategories(by: .risk)
+        loadExpenseCategories(by: .safe)
     }
 }

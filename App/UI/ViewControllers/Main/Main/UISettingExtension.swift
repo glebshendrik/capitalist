@@ -126,7 +126,7 @@ extension MainViewController {
     private func layoutExpenseCategoriesCollectionView(by basketType: BasketType) {
         let collectionView = expenseCategoriesCollectionView(by: basketType)
         if let layout = collectionView.collectionViewLayout as? PagedCollectionViewLayout {
-            layout.itemSize = CGSize(width: 68, height: 109)
+            layout.itemSize = CGSize(width: 68, height: 100)
             layout.columns = 4
             layout.rows = Int(collectionView.bounds.size.height / layout.itemSize.height)
             layout.edgeInsets = UIEdgeInsets(horizontal: 30, vertical: 5)

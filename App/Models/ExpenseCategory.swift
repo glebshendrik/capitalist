@@ -28,6 +28,7 @@ struct ExpenseCategory : Decodable {
     let reminderStartDate: Date?
     let reminderRecurrenceRule: String?
     let reminderMessage: String?
+    let profitCents: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -49,6 +50,7 @@ struct ExpenseCategory : Decodable {
         case reminderStartDate = "reminder_start_date"
         case reminderRecurrenceRule = "reminder_recurrence_rule"
         case reminderMessage = "reminder_message"
+        case profitCents = "profit_cents"
     }
     
 }

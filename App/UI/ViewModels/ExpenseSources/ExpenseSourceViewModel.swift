@@ -27,6 +27,20 @@ class ExpenseSourceViewModel {
         return amount(shouldRound: false)
     }
     
+    var inCredit: Bool {
+        guard let creditLimitCents = expenseSource.creditLimitCents, isUsual else { return false }
+        return expenseSource.amountCents < creditLimitCents
+    }
+    
+    var creditCents: Int? {
+        guard let creditLimitCents = expenseSource.creditLimitCents else { return nil }
+        return creditLimitCents - expenseSource.amountCents
+    }
+    
+    var credit: String? {
+        return creditCents?.moneyCurrencyString(with: currency, shouldRound: false)
+    }
+    
     var currency: Currency {
         return expenseSource.currency
     }
@@ -41,6 +55,10 @@ class ExpenseSourceViewModel {
     
     var isGoal: Bool {
         return expenseSource.accountType == .goal
+    }
+    
+    var isUsual: Bool {
+        return expenseSource.accountType == .usual
     }
     
     var goalProgress: Double {

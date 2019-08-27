@@ -86,7 +86,7 @@ extension ExpenseCategoryCollectionViewCell {
         progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.trackWidth = 1
         progressView.backgroundColor = .clear
-        progressView.transform = CGAffineTransform(rotationAngle: -75 * CGFloat.pi / 180)
+        progressView.transform = CGAffineTransform(rotationAngle: -120 * CGFloat.pi / 180)
         iconContainer.addSubview(progressView)
     }
     
@@ -132,7 +132,7 @@ extension ExpenseCategoryCollectionViewCell {
     func setupPlannedLabel() {
         plannedLabel.translatesAutoresizingMaskIntoConstraints = false
         plannedLabel.textAlignment = .center
-        plannedLabel.font = UIFont(name: "Rubik-Regular", size: 8)
+        plannedLabel.font = UIFont(name: "Rubik-Regular", size: 9)
         plannedContainer.addSubview(plannedLabel)
     }
     
@@ -146,7 +146,7 @@ extension ExpenseCategoryCollectionViewCell {
     
     func setupSpentLabel() {
         spentLabel.translatesAutoresizingMaskIntoConstraints = false
-        spentLabel.font = UIFont(name: "Rubik-Regular", size: 14)
+        spentLabel.font = UIFont(name: "Rubik-Regular", size: 13)
         spentLabel.textColor = UIColor.by(.textFFFFFF)
         spentLabel.textAlignment = .center
         contentView.addSubview(spentLabel)
@@ -241,9 +241,12 @@ extension ExpenseCategoryCollectionViewCell {
             return trackFillColor().withAlphaComponent(0.5)
         }
         
-        progressView.progress = viewModel.spendingProgress * 0.8
+        progressView.progress = viewModel.spendingProgress * 0.67
         progressView.trackBackgroundColor = trackBackgroundColor()
         progressView.trackFillColor = trackFillColor()
+        progressView.centerFillColor = .clear
+        progressView.trackBorderColor = .clear
+        progressView.borderColor = .clear
     }
     
     func updateProgressRingSplitter() {
@@ -319,7 +322,15 @@ extension ExpenseCategoryCollectionViewCell {
     }
     
     func updateProfitLabel() {
-        profitLabel.text = "10000"
+        guard let viewModel = viewModel else { return }
+        profitLabel.isHidden = !viewModel.hasProfit
+        profitLabel.text = viewModel.profit
+        if viewModel.isProfitNegative {
+            profitLabel.textColor = UIColor.by(.redE77768)
+        }
+        else {
+            profitLabel.textColor = UIColor.by(.green68E79B)
+        }
     }
 }
 
@@ -344,7 +355,6 @@ extension ExpenseCategoryCollectionViewCell {
     func setupIconContainerConstraints() {
         iconContainer.snp.makeConstraints { make in
             make.width.height.equalTo(52)
-//            make.top.equalToSuperview()
             make.centerX.equalToSuperview()
         }
     }
@@ -406,45 +416,45 @@ extension ExpenseCategoryCollectionViewCell {
     
     func setupNameLabelConstraints() {
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(iconContainer.snp.bottom).offset(6)
+            make.top.equalTo(iconContainer.snp.bottom).offset(4)
             make.left.right.equalToSuperview()
         }
-        nameLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
-        nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        nameLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        nameLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
     }
     
     func setupSpentLabelConstraints() {
         spentLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(2)
+            make.top.equalTo(nameLabel.snp.bottom).offset(1)
             make.left.right.equalToSuperview()
         }
-        spentLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
-        spentLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        spentLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        spentLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
     }
     
     func setupProfitLabelConstraints() {
         profitLabel.snp.makeConstraints { make in
             make.top.equalTo(spentLabel.snp.bottom).offset(0)
-            make.bottom.greaterThanOrEqualToSuperview()
+            make.bottom.greaterThanOrEqualToSuperview().offset(-7)
             make.left.right.equalToSuperview()
         }
-        profitLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        profitLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        profitLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+        profitLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
     }
     
     func setupDeleteButtonConstraints() {
         deleteButton.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.bottom.equalTo(iconContainer.snp.top).offset(16)
-            make.left.equalTo(iconContainer.snp.right).offset(-16)
+            make.bottom.equalTo(iconContainer.snp.top).offset(14)
+            make.left.equalTo(iconContainer.snp.right).offset(-14)
             make.width.height.equalTo(16)
         }
     }
     
     func setupEditButtonConstraints() {
         editButton.snp.makeConstraints { make in
-            make.top.equalTo(iconContainer.snp.bottom).offset(-16)
-            make.left.equalTo(iconContainer.snp.right).offset(-16)
+            make.top.equalTo(iconContainer.snp.bottom).offset(-14)
+            make.left.equalTo(iconContainer.snp.right).offset(-14)
             make.width.height.equalTo(16)
         }
     }
