@@ -45,5 +45,7 @@ class ServicesAssembly: Assembly {
         container.autoregister(AccountConnectionsServiceProtocol.self, initializer: AccountConnectionsService.init)
         
         container.autoregister(ProviderConnectionsServiceProtocol.self, initializer: ProviderConnectionsService.init)
+        
+        container.autoregister(BorrowsServiceProtocol.self, initializer: BorrowsService.init)
     }
 }

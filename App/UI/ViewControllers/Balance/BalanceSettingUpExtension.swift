@@ -68,7 +68,7 @@ extension BalanceViewController {
     }
     
     func updateTabsUI() {
-        
+                
         func tabsAppearances(for balanceCategory: BalanceCategory) -> (expenseSources: TabAppearance, expenseCategories: TabAppearance) {
             
             let selectedColor = UIColor.by(.textFFFFFF)

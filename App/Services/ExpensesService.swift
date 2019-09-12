@@ -11,18 +11,18 @@ import PromiseKit
 
 class ExpensesService : Service, ExpensesServiceProtocol {
     func create(with creationForm: ExpenseCreationForm) -> Promise<Expense> {
-        return request(APIResource.createExpense(form: creationForm))
+        return request(APIRoute.createExpense(form: creationForm))
     }
     
     func show(by id: Int) -> Promise<Expense> {
-        return request(APIResource.showExpense(id: id))
+        return request(APIRoute.showExpense(id: id))
     }
     
     func update(with updatingForm: ExpenseUpdatingForm) -> Promise<Void> {
-        return request(APIResource.updateExpense(form: updatingForm))
+        return request(APIRoute.updateExpense(form: updatingForm))
     }
     
     func destroy(by id: Int) -> Promise<Void> {
-        return request(APIResource.destroyExpense(id: id))
+        return request(APIRoute.destroyExpense(id: id))
     }
 }

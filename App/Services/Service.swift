@@ -16,23 +16,23 @@ class Service {
         self.apiClient = apiClient
     }
     
-    func request<T>(_ resource: APIResource) -> Promise<T> where T: Decodable {
+    func request<T>(_ resource: APIRoute) -> Promise<T> where T: Decodable {
         return apiClient.request(resource)
     }
     
-    func requestCollection<T>(_ resource: APIResource) -> Promise<[T]> where T: Decodable {
+    func requestCollection<T>(_ resource: APIRoute) -> Promise<[T]> where T: Decodable {
         return apiClient.requestCollection(resource)
     }
     
-    func request<T>(_ resource: APIResource) -> Promise<([T], Int?)> where T: Decodable {
+    func request<T>(_ resource: APIRoute) -> Promise<([T], Int?)> where T: Decodable {
         return apiClient.request(resource)
     }
     
-    func request(_ resource: APIResource) -> Promise<Void> {
+    func request(_ resource: APIRoute) -> Promise<Void> {
         return apiClient.request(resource)
     }
     
-    func request(_ resource: APIResource) -> Promise<[String : Any]> {
+    func request(_ resource: APIRoute) -> Promise<[String : Any]> {
         return apiClient.request(resource)
     }
 }

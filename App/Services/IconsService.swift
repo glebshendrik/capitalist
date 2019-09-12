@@ -11,6 +11,6 @@ import PromiseKit
 
 class IconsService : Service, IconsServiceProtocol {
     func index(with category: IconCategory) -> Promise<[Icon]> {
-        return requestCollection(APIResource.indexIcons(category: category))
+        return requestCollection(APIRoute.indexIcons(category: category))
     }
 }

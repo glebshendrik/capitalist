@@ -62,12 +62,12 @@ class APIClient : APIClientProtocol {
         self.userSessionManager = userSessionManager
     }
     
-    func request<T>(_ resource: APIResource) -> Promise<T> where T : Decodable {
+    func request<T>(_ resource: APIRoute) -> Promise<T> where T : Decodable {
         return performRequest(resource).map { (json, _) in
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
             if  let jsonDictionary = json as? [String : Any],
-                let objectDictionary = jsonDictionary[resource.keyPath.singular] as? [String : Any],
+                let objectDictionary = jsonDictionary[resource.resource.singular] as? [String : Any],
                 let object = try? decoder.decode(T.self, withJSONObject: objectDictionary) {
                 return object
             }
@@ -75,20 +75,20 @@ class APIClient : APIClientProtocol {
         }
     }
     
-    func requestCollection<T>(_ resource: APIResource) -> Promise<[T]> where T : Decodable {
+    func requestCollection<T>(_ resource: APIRoute) -> Promise<[T]> where T : Decodable {
         return self.request(resource).map { (array, _) in
             return array
         }
     }
     
-    func request<T>(_ resource: APIResource) -> Promise<([T], Int?)> where T : Decodable {
+    func request<T>(_ resource: APIRoute) -> Promise<([T], Int?)> where T : Decodable {
         return performRequest(resource).map { (json, response) in
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
             
             if  let jsonDictionary = json as? [String : Any],
-                let arrayOfDictionaries = jsonDictionary[resource.keyPath.plural] as? [[String : Any]],
+                let arrayOfDictionaries = jsonDictionary[resource.resource.plural] as? [[String : Any]],
                 let objects = try? decoder.decode([T].self, withJSONObject: arrayOfDictionaries) {
                 
                 let totalCount = (response.response?.allHeaderFields["Items_total_count"] as? String)?.int
@@ -98,11 +98,11 @@ class APIClient : APIClientProtocol {
         }
     }
     
-    func request(_ resource: APIResource) -> Promise<Void> {
+    func request(_ resource: APIRoute) -> Promise<Void> {
         return performRequest(resource).asVoid()
     }
     
-    func request(_ resource: APIResource) -> Promise<[String : Any]> {
+    func request(_ resource: APIRoute) -> Promise<[String : Any]> {
         return performRequest(resource).map { (json, _) in
             if  let jsonDictionary = json as? [String : Any] {
                 
@@ -112,7 +112,7 @@ class APIClient : APIClientProtocol {
         }
     }
     
-    private func performRequest(_ resource: APIResource) -> Promise<(json: Any, response: PMKAlamofireDataResponse)> {
+    private func performRequest(_ resource: APIRoute) -> Promise<(json: Any, response: PMKAlamofireDataResponse)> {
         
         do {
             var request = try resource.asURLRequest()

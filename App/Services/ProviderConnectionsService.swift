@@ -11,10 +11,10 @@ import PromiseKit
 
 class ProviderConnectionsService : Service, ProviderConnectionsServiceProtocol {
     func index(for userId: Int, providerId: String) -> Promise<[ProviderConnection]> {
-        return requestCollection(APIResource.indexProviderConnections(userId: userId, providerId: providerId))
+        return requestCollection(APIRoute.indexProviderConnections(userId: userId, providerId: providerId))
     }
     
     func create(with creationForm: ProviderConnectionCreationForm) -> Promise<ProviderConnection> {
-        return request(APIResource.createProviderConnection(form: creationForm))
+        return request(APIRoute.createProviderConnection(form: creationForm))
     }
 }

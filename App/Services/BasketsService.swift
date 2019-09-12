@@ -11,10 +11,10 @@ import PromiseKit
 
 class BasketsService : Service, BasketsServiceProtocol {
     func show(by id: Int) -> Promise<Basket> {
-        return request(APIResource.showBasket(id: id))
+        return request(APIRoute.showBasket(id: id))
     }
     
     func index(for userId: Int) -> Promise<[Basket]> {
-        return requestCollection(APIResource.indexBaskets(userId: userId))
+        return requestCollection(APIRoute.indexBaskets(userId: userId))
     }
 }

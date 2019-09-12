@@ -18,25 +18,30 @@ class GoalExpenseSourceCollectionViewCell : ExpenseSourceCollectionViewCell {
         
         guard let viewModel = viewModel else { return }
         
-        func progressInnerColor() -> UIColor {
-            guard viewModel.isGoalCompleted else {
-                return .white
+        func iconTintColor() -> UIColor {
+            if viewModel.isGoalCompleted {
+                return UIColor.by(.blue6B93FB)
+            }
+            return imageTintColor
+        }
+        
+        func centerFillColor() -> UIColor {
+            if viewModel.isGoalCompleted {
+                return UIColor.by(.textFFFFFF)
             }
             
             return UIColor.by(.blue6B93FB)
         }
         
-        func iconTintColor() -> UIColor {
-            if viewModel.isGoalCompleted {
-                return .white
-            }
-            return imageTintColor
+        func trackFillColor() -> UIColor {
+            return UIColor.by(.textFFFFFF)
         }
         
         iconImageView.tintColor = iconTintColor()
         
         progressView.progress = viewModel.goalProgress
-        progressView.centerFillColor = progressInnerColor()
-        progressView.trackFillColor = imageTintColor
+        progressView.centerFillColor = centerFillColor()
+        progressView.trackFillColor = trackFillColor()
+        progressView.trackBackgroundColor = trackFillColor().withAlphaComponent(0.3)
     }        
 }

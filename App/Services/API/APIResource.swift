@@ -1,5 +1,5 @@
 //
-//  APIResource.swift
+//  APIResourceKeyPath.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
@@ -8,119 +8,94 @@
 
 import Foundation
 import Alamofire
-import SwiftDate
 
-enum APIResource: URLRequestConvertible {
-    static var baseURLString: String {
-        #if DEBUG
-            return "https://skrudzh-staging.herokuapp.com"
-        #else
-            return "https://skrudzh-production.herokuapp.com"
-        #endif
-    }
+struct APIResource {
+    let singular: String
+    let plural: String
     
-    // Users
-    case createUser(form: UserCreationForm)
-    case showUser(id: Int)
-    case updateUser(form: UserUpdatingForm)
-    case updateUserSettings(form: UserSettingsUpdatingForm)
-    case changePassword(form: ChangePasswordForm)
-    case resetPassword(form: ResetPasswordForm)
-    case createPasswordResetCode(form: PasswordResetCodeForm)
-    case updateDeviceToken(form: UserDeviceTokenUpdatingForm)
-    
-    // Sessions
-    case createSession(form: SessionCreationForm)
-    case destroySession(session: Session)
-    
-    // IncomeSources
-    case createIncomeSource(form: IncomeSourceCreationForm)
-    case showIncomeSource(id: Int)
-    case indexIncomeSources(userId: Int)
-    case updateIncomeSource(form: IncomeSourceUpdatingForm)
-    case updateIncomeSourcePosition(form: IncomeSourcePositionUpdatingForm)
-    case destroyIncomeSource(id: Int, deleteTransactions: Bool)
-    
-    // ExpenseSources
-    case createExpenseSource(form: ExpenseSourceCreationForm)
-    case showExpenseSource(id: Int)
-    case indexExpenseSources(userId: Int, noDebts: Bool)
-    case updateExpenseSource(form: ExpenseSourceUpdatingForm)
-    case updateExpenseSourcePosition(form: ExpenseSourcePositionUpdatingForm)
-    case destroyExpenseSource(id: Int, deleteTransactions: Bool)
-    
-    // ExpenseCategories
-    case createExpenseCategory(form: ExpenseCategoryCreationForm)
-    case showExpenseCategory(id: Int)
-    case indexExpenseCategories(basketId: Int)
-    case indexUserExpenseCategories(userId: Int, includedInBalance: Bool)
-    case updateExpenseCategory(form: ExpenseCategoryUpdatingForm)
-    case updateExpenseCategoryPosition(form: ExpenseCategoryPositionUpdatingForm)
-    case destroyExpenseCategory(id: Int, deleteTransactions: Bool)
-    
-    // Icons
-    case indexIcons(category: IconCategory)
-    
-    // Baskets
-    case indexBaskets(userId: Int)
-    case showBasket(id: Int)
-    
-    // Currencies
-    case indexCurrencies
-    
-    // Incomes
-    case createIncome(form: IncomeCreationForm, shouldCloseActive: Bool)
-    case showIncome(id: Int)
-    case updateIncome(form: IncomeUpdatingForm)
-    case destroyIncome(id: Int)
-    
-    // Expenses
-    case createExpense(form: ExpenseCreationForm)
-    case showExpense(id: Int)
-    case updateExpense(form: ExpenseUpdatingForm)
-    case destroyExpense(id: Int)
-    
-    // FundsMoves
-    case createFundsMove(form: FundsMoveCreationForm)
-    case showFundsMove(id: Int)
-    case updateFundsMove(form: FundsMoveUpdatingForm)
-    case destroyFundsMove(id: Int)
-    
-    // ExchangeRates
-    case findExchangeRate(from: String, to: String)
-    
-    // Budget
-    case showBudget(userId: Int)
-    
-    // HistoryTransactions
-    case indexHistoryTransactions(userId: Int)
-    
-    // AccountConnections
-    case indexAccountConnections(userId: Int, connectionId: String)
-    case destroyAccountConnection(id: Int)
-    
-    // ProviderConnections
-    case indexProviderConnections(userId: Int, providerId: String)
-    case createProviderConnection(form: ProviderConnectionCreationForm)
-    
-    var method: HTTPMethod {
-        return APIResourceMethod.method(for: self)
-    }
-    
-    var path: String {
-        return APIResourcePath.path(for: self)
-    }
-    
-    var keyPath: ResourceKeyPath {
-        return APIResourceKeyPath.keyPath(for: self)
-    }
-    
-    var urlStringQueryParameters: [String : String] {
-        return APIResourceQueryParameters.queryParameters(for: self)
-    }
-    
-    // MARK: URLRequestConvertible    
-    func asURLRequest() throws -> URLRequest {
-        return try APIResourceRequest.urlRequest(for: self)
+    static func resource(for route: APIRoute) -> APIResource {
+        switch route {
+        case .createUser,
+             .showUser,
+             .updateUser,
+             .updateUserSettings,
+             .changePassword,
+             .resetPassword,
+             .updateDeviceToken:
+            return APIResource(singular: "user", plural: "users")
+        case .createPasswordResetCode:
+            return APIResource(singular: "password_reset_code", plural: "password_reset_codes")
+        case .createSession,
+             .destroySession:
+            return APIResource(singular: "session", plural: "sessions")
+        case .createIncomeSource,
+             .showIncomeSource,
+             .indexIncomeSources,
+             .updateIncomeSource,
+             .updateIncomeSourcePosition,
+             .destroyIncomeSource:
+            return APIResource(singular: "income_source", plural: "income_sources")
+        case .createExpenseSource,
+             .showExpenseSource,
+             .indexExpenseSources,
+             .updateExpenseSource,
+             .updateExpenseSourcePosition,
+             .destroyExpenseSource:
+            return APIResource(singular: "expense_source", plural: "expense_sources")
+        case .createExpenseCategory,
+             .showExpenseCategory,
+             .indexExpenseCategories,
+             .indexUserExpenseCategories,
+             .updateExpenseCategory,
+             .updateExpenseCategoryPosition,
+             .destroyExpenseCategory:
+            return APIResource(singular: "expense_category", plural: "expense_categories")
+        case .indexIcons:
+            return APIResource(singular: "icon", plural: "icons")
+        case .indexBaskets,
+             .showBasket:
+            return APIResource(singular: "basket", plural: "baskets")
+        case .indexCurrencies:
+            return APIResource(singular: "currency", plural: "currencies")
+        case .createIncome,
+             .showIncome,
+             .updateIncome,
+             .destroyIncome:
+            return APIResource(singular: "income", plural: "incomes")
+        case .createExpense,
+             .showExpense,
+             .updateExpense,
+             .destroyExpense:
+            return APIResource(singular: "expense", plural: "expenses")
+        case .createFundsMove,
+             .showFundsMove,
+             .updateFundsMove,
+             .destroyFundsMove:
+            return APIResource(singular: "funds_move", plural: "funds_moves")
+        case .findExchangeRate:
+            return APIResource(singular: "exchange_rate", plural: "exchange_rates")
+        case .showBudget:
+            return APIResource(singular: "budget", plural: "budgets")
+        case .indexHistoryTransactions:
+            return APIResource(singular: "history_transaction", plural: "history_transactions")
+        case .indexAccountConnections,
+             .destroyAccountConnection:
+            return APIResource(singular: "account_connection", plural: "account_connections")
+        case .indexProviderConnections,
+             .createProviderConnection:
+            return APIResource(singular: "provider_connection", plural: "provider_connections")
+        case .createDebt,
+             .showDebt,
+             .indexDebts,
+             .updateDebt,
+             .destroyDebt:
+            return APIResource(singular: "debt", plural: "debts")
+        case .createLoan,
+             .showLoan,
+             .indexLoans,
+             .updateLoan,
+             .destroyLoan:
+            return APIResource(singular: "loan", plural: "loans")
+        }
     }
 }

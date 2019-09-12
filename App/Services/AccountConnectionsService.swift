@@ -11,10 +11,10 @@ import PromiseKit
 
 class AccountConnectionsService : Service, AccountConnectionsServiceProtocol {
     func index(for userId: Int, connectionId: String) -> Promise<[AccountConnection]> {
-        return requestCollection(APIResource.indexAccountConnections(userId: userId, connectionId: connectionId))
+        return requestCollection(APIRoute.indexAccountConnections(userId: userId, connectionId: connectionId))
     }
     
     func destroy(by accountConnectionId: Int) -> Promise<Void> {
-        return request(APIResource.destroyAccountConnection(id: accountConnectionId))
+        return request(APIRoute.destroyAccountConnection(id: accountConnectionId))
     }
 }

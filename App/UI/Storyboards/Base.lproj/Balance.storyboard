@@ -258,7 +258,7 @@
                                                         <rect key="frame" x="160" y="279" width="55" height="31"/>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="0.60386344179999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.29922945205479451" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="oBN-ol-x06" firstAttribute="centerX" secondItem="O6t-j9-tMq" secondAttribute="centerX" id="N3W-1g-uPP"/>
                                                     <constraint firstItem="oBN-ol-x06" firstAttribute="centerY" secondItem="O6t-j9-tMq" secondAttribute="centerY" id="f8c-Zm-2LY"/>
@@ -422,7 +422,7 @@
                                                         <rect key="frame" x="160" y="279" width="55" height="31"/>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="0.60386344179999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="o9a-UG-Xdj" firstAttribute="centerX" secondItem="KW2-X3-LJR" secondAttribute="centerX" id="aii-5E-2dM"/>
                                                     <constraint firstItem="o9a-UG-Xdj" firstAttribute="centerY" secondItem="KW2-X3-LJR" secondAttribute="centerY" id="nh1-RR-Eh9"/>
@@ -506,7 +506,7 @@
     </scenes>
     <resources>
         <image name="expense-source-icon" width="17" height="13"/>
-        <image name="joy-default-icon" width="20" height="20"/>
+        <image name="joy-default-icon" width="18.5" height="18"/>
         <image name="loader-1" width="55" height="31"/>
         <namedColor name="blue 6B93FB">
             <color red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

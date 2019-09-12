@@ -250,7 +250,7 @@ class Validator {
         return true
     }
     
-    static func validate(futureDate: Date?) -> Bool {
+    static func isValid(futureDate: Date?) -> Bool {
         guard let futureDate = futureDate else {
             return false
         }

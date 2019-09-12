@@ -11,6 +11,6 @@ import PromiseKit
 class DevicesService: Service, DevicesServiceProtocol {
     func register(deviceToken: Data, userId: Int) -> Promise<Void> {
         let form = UserDeviceTokenUpdatingForm(userId: userId, token: deviceToken.hexString())
-        return request(APIResource.updateDeviceToken(form: form))
+        return request(APIRoute.updateDeviceToken(form: form))
     }
 }

@@ -11,6 +11,6 @@ import PromiseKit
 
 class CurrenciesService : Service, CurrenciesServiceProtocol {
     func index() -> Promise<[Currency]> {
-        return requestCollection(APIResource.indexCurrencies)
+        return requestCollection(APIRoute.indexCurrencies)
     }
 }

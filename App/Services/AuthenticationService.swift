@@ -12,11 +12,11 @@ import PromiseKit
 class AuthenticationService : Service, AuthenticationServiceProtocol {
     
     func authenticate(form: SessionCreationForm) -> Promise<Session> {
-        return request(APIResource.createSession(form: form))
+        return request(APIRoute.createSession(form: form))
     }
         
     func destroy(session: Session) -> Promise<Void> {
-        return request(APIResource.destroySession(session: session))
+        return request(APIRoute.destroySession(session: session))
     }
     
 }

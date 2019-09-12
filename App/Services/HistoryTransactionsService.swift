@@ -11,6 +11,6 @@ import PromiseKit
 
 class HistoryTransactionsService : Service, HistoryTransactionsServiceProtocol {
     func index(for userId: Int) -> Promise<[HistoryTransaction]> {
-        return requestCollection(APIResource.indexHistoryTransactions(userId: userId))
+        return requestCollection(APIRoute.indexHistoryTransactions(userId: userId))
     }
 }

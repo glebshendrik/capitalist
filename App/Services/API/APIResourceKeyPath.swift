@@ -14,9 +14,9 @@ struct ResourceKeyPath {
     let plural: String
 }
 
-struct APIResourceKeyPath {
-    static func keyPath(for resource: APIResource) -> ResourceKeyPath {
-        switch resource {
+struct APIResource {
+    static func keyPath(for route: APIRoute) -> ResourceKeyPath {
+        switch route {
         case .createUser,
              .showUser,
              .updateUser,
@@ -86,6 +86,18 @@ struct APIResourceKeyPath {
         case .indexProviderConnections,
              .createProviderConnection:
             return ResourceKeyPath(singular: "provider_connection", plural: "provider_connections")
+        case .createDebt,
+             .showDebt,
+             .indexDebts,
+             .updateDebt,
+             .destroyDebt:
+            return ResourceKeyPath(singular: "debt", plural: "debts")
+        case .createLoan,
+             .showLoan,
+             .indexLoans,
+             .updateLoan,
+             .destroyLoan:
+            return ResourceKeyPath(singular: "loan", plural: "loans")
         }
     }
 }

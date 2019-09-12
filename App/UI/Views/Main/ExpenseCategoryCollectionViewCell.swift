@@ -133,6 +133,7 @@ extension ExpenseCategoryCollectionViewCell {
         plannedLabel.translatesAutoresizingMaskIntoConstraints = false
         plannedLabel.textAlignment = .center
         plannedLabel.font = UIFont(name: "Rubik-Regular", size: 9)
+        plannedLabel.adjustsFontSizeToFitWidth = true
         plannedContainer.addSubview(plannedLabel)
     }
     
@@ -394,7 +395,7 @@ extension ExpenseCategoryCollectionViewCell {
     
     func setupPlannedContainerConstraints() {
         plannedContainer.snp.makeConstraints { make in
-            make.width.equalTo(45)
+            make.width.equalTo(46)
             make.height.equalTo(16)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(iconContainer.snp.bottom).offset(2)

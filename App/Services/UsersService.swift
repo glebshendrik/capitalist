@@ -12,34 +12,34 @@ import PromiseKit
 class UsersService : Service, UsersServiceProtocol {
     
     func createUser(with userForm: UserCreationForm) -> Promise<User> {
-        return request(APIResource.createUser(form: userForm))
+        return request(APIRoute.createUser(form: userForm))
     }
     
     func updateUser(with userForm: UserUpdatingForm) -> Promise<Void> {
-        return request(APIResource.updateUser(form: userForm))
+        return request(APIRoute.updateUser(form: userForm))
     }
     
     func updateUserSettings(with settingsForm: UserSettingsUpdatingForm) -> Promise<Void> {
-        return request(APIResource.updateUserSettings(form: settingsForm))
+        return request(APIRoute.updateUserSettings(form: settingsForm))
     }
     
     func changePassword(with changePasswordForm: ChangePasswordForm) -> Promise<Void> {
-        return request(APIResource.changePassword(form: changePasswordForm))
+        return request(APIRoute.changePassword(form: changePasswordForm))
     }
     
     func resetPassword(with resetPasswordForm: ResetPasswordForm) -> Promise<Void> {
-        return request(APIResource.resetPassword(form: resetPasswordForm))
+        return request(APIRoute.resetPassword(form: resetPasswordForm))
     }
     
     func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<Void> {
-        return request(APIResource.createPasswordResetCode(form: passwordResetCodeForm))
+        return request(APIRoute.createPasswordResetCode(form: passwordResetCodeForm))
     }
     
     func loadUser(with id: Int) -> Promise<User> {
-        return request(APIResource.showUser(id: id))
+        return request(APIRoute.showUser(id: id))
     }
     
     func loadUserBudget(with userId: Int) -> Promise<Budget> {
-        return request(APIResource.showBudget(userId: userId))
+        return request(APIRoute.showBudget(userId: userId))
     }
 }

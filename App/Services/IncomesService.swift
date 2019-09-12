@@ -11,18 +11,18 @@ import PromiseKit
 
 class IncomesService : Service, IncomesServiceProtocol {
     func create(with creationForm: IncomeCreationForm, closeActive: Bool) -> Promise<Income> {
-        return request(APIResource.createIncome(form: creationForm, shouldCloseActive: closeActive))
+        return request(APIRoute.createIncome(form: creationForm, shouldCloseActive: closeActive))
     }
     
     func show(by id: Int) -> Promise<Income> {
-        return request(APIResource.showIncome(id: id))
+        return request(APIRoute.showIncome(id: id))
     }
     
     func update(with updatingForm: IncomeUpdatingForm) -> Promise<Void> {
-        return request(APIResource.updateIncome(form: updatingForm))
+        return request(APIRoute.updateIncome(form: updatingForm))
     }
     
     func destroy(by id: Int) -> Promise<Void> {
-        return request(APIResource.destroyIncome(id: id))
+        return request(APIRoute.destroyIncome(id: id))
     }
 }
