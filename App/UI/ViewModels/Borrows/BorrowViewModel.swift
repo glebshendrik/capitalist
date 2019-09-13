@@ -23,12 +23,24 @@ class BorrowViewModel {
         return borrow.name
     }
     
+    var amountRounded: String {
+        return amount(shouldRound: true)
+    }
+    
+    var amount: String {
+        return amount(shouldRound: false)
+    }
+    
     var amountLeftRounded: String {
         return amountLeft(shouldRound: true)
     }
     
     var amountLeft: String {
         return amountLeft(shouldRound: false)
+    }
+    
+    var diplayAmount: String {
+        return amountLeftRounded
     }
     
     var currency: Currency {
@@ -74,6 +86,10 @@ class BorrowViewModel {
     
     init(borrow: Borrow) {
         self.borrow = borrow
+    }
+    
+    private func amount(shouldRound: Bool) -> String {
+        return borrow.amountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }
     
     private func amountLeft(shouldRound: Bool) -> String {

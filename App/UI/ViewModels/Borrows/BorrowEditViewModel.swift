@@ -9,141 +9,181 @@
 import Foundation
 import PromiseKit
 
-enum TransactionError : Error {
-    case transactionIsNotSpecified
+enum BorrowError : Error {
+    case borrowIsNotSpecified
 }
 
-class TransactionEditViewModel {
-    private let exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol
-    private let currencyConverter: CurrencyConverterProtocol
+class BorrowEditViewModel {
+    let borrowsCoordinator: BorrowsCoordinatorProtocol
+    let accountCoordinator: AccountCoordinatorProtocol
     
-    var transactionableId: Int?
+    private var borrow: Borrow? = nil
     
-    var startable: TransactionStartable? = nil
-    var completable: TransactionCompletable? = nil
-    var amount: String? = nil {
-        didSet {
-            convertedAmountConverted = convert(amount: amount, isForwardConversion: true)
-        }
-    }
-    var convertedAmount: String? = nil {
-        didSet {
-            amountConverted = convert(amount: convertedAmount, isForwardConversion: false)
-        }
-    }
-    var comment: String? = nil
-    var gotAt: Date? = nil
-    var amountConverted: String? = nil
-    var convertedAmountConverted: String? = nil
-    
-    var title: String { return "" }
-    var removeTitle: String? { return nil }
-    var removeQuestion: String? { return nil }
-    var startableTitle: String? { return nil }
-    var completableTitle: String? { return nil }
-    var startableAmountTitle: String? { return "Сумма" }
-    var completableAmountTitle: String? { return "Сумма" }
-    var amountPlaceholder: String? {
-        return amountConverted ?? startableAmountTitle
-    }
-    var convertedAmountPlaceholder: String? {
-        return convertedAmountConverted ?? completableAmountTitle
-    }
-    
-    var isNew: Bool { return transactionableId == nil }
+    var isNew: Bool { return borrowId == nil }
     
     var hasComment: Bool {
         guard let comment = comment else { return false }
         return !comment.isEmpty && !comment.isWhitespace
     }
     
-    var hasGotAtDate: Bool { return gotAt != nil }
-    
-    var calendarTitle: String {
-        return hasGotAtDate ? gotAt!.dateTimeString(ofStyle: .short) : "Выбрать дату"
+    var borrowId: Int?
+    var type: BorrowType? = nil
+    var selectedIconURL: URL? = nil
+    var name: String? = nil
+    var selectedCurrency: Currency? = nil
+    var amount: String? = nil    
+    var borrowedAt: Date = Date()
+    var payday: Date? = nil
+    var comment: String? = nil
+    var onBalance: Bool = false
+    var selectedExpenseSourceFrom: ExpenseSourceViewModel? = nil
+    var selectedExpenseSourceTo: ExpenseSourceViewModel? = nil
+    var selectedExpenseSource: ExpenseSourceViewModel? {
+        get {
+            guard let type = type else { return nil }
+            return type == .debt ? selectedExpenseSourceFrom : selectedExpenseSourceTo
+        }
+        set {
+            guard let type = type else { return }
+            if type == .debt {
+                selectedExpenseSourceFrom = newValue
+            }
+            else {
+                selectedExpenseSourceTo = newValue
+            }
+        }
+    }
+    var borrowingTransactionAttributes: BorrowingTransactionNestedAttributes? {
+        guard isNew, !onBalance else { return nil }
+        return BorrowingTransactionNestedAttributes(expenseSourceFromId: selectedExpenseSourceFrom?.id, expenseSourceToId: selectedExpenseSourceTo?.id)
     }
     
-    var startableIconURL: URL? { return startable?.iconURL }
-    
-    var startableIconDefaultImageName: String { return "" }
-    
-    var completableIconURL: URL? { return completable?.iconURL }
-    
-    var completableIconDefaultImageName: String { return "" }
-    
-    var startableName: String? { return startable?.name }
-    
-    var completableName: String? { return completable?.name }
-    
-    var startableAmount: String? { return startable?.amount }
-    
-    var completableAmount: String? { return completable?.amount }
-    
-    var startableCurrency: Currency? { return startable?.currency }
-    
-    var completableCurrency: Currency? { return completable?.currency }
-    
-    var startableCurrencyCode: String? { return startableCurrency?.code }
-    
-    var completableCurrencyCode: String? { return completableCurrency?.code }
-    
-    var needCurrencyExchange: Bool {
-        return startableCurrency?.code != completableCurrency?.code
+    var borrowedAtFormatted: String {
+        return borrowedAt.dateString(ofStyle: .short)
     }
     
-    var exchangeRate: Float = 1.0
+    var paydayFormatted: String? {
+        return payday?.dateString(ofStyle: .short)
+    }
+    
+    var title: String {
+        guard let type = type else { return "" }
+        switch (isNew, type == .debt, type == .loan) {
+        case   (true,  true,   false):      return "Новый долг (вам должны)"
+        case   (true,  false,  true):       return "Новый займ (вы должны)"
+        case   (false,  true,   false):     return "Долг (вам должны)"
+        case   (false,  false,  true):      return "Займ (вы должны)"
+        default: return ""
+        }
+    }
+    
+    var nameTitle: String? {
+        guard let type = type else { return nil }
+        return type == .debt ? "Кто вам должен" : "Кому вы должны"
+    }
+    
+    var amountTitle: String? { return "Сумма" }
+    
+    var borrowedAtTitle: String? {
+        guard let type = type else { return nil }
+        return type == .debt ? "Когда дали в долг" : "Когда взяли взаймы"
+    }
+    
+    var expenseSourceTitle: String? {
+        guard let type = type else { return nil }
+        return type == .debt ? "С какого кошелька" : "На какой кошелек"
+    }
+    
+    var returnTitle: String? {
+        guard let type = type else { return nil }
+        return type == .debt ? "Долг вернули" : "Вернуть займ"
+    }
+    
+    var removeTitle: String? {
+        guard let type = type else { return nil }
+        return type == .debt ? "Удалить долг" : "Удалить займ"
+    }
+    
+    var removeQuestion: String? {
+        guard let type = type else { return nil }
+        return type == .debt ? "Удалить долг?" : "Удалить займ?"
+    }
+    
+    var expenseSourceIconURL: URL? { return selectedExpenseSource?.iconURL }
+    var expenseSourceIconDefaultImageName: String { return IconCategory.expenseSource.defaultIconName }
+    var expenseSourceName: String? { return selectedExpenseSource?.name }
+    var expenseSourceAmount: String? { return selectedExpenseSource?.amount }
+    var expenseSourceCurrency: Currency? { return selectedExpenseSource?.currency }
+    var expenseSourceCurrencyCode: String? { return expenseSourceCurrency?.code }
+    
+    // Visibility
     
     var removeButtonHidden: Bool { return isNew }
+    var returnButtonHidden: Bool {
+        guard !isNew else { return true }
+        guard let borrow = borrow else { return true }
+        return borrow.isReturned
+    }
+    var onBalanceSwitchHidden: Bool { return isNew }
+    var expenseSourceFieldHidden: Bool { return isNew }
     
-    init(exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
-         currencyConverter: CurrencyConverterProtocol) {
-        self.exchangeRatesCoordinator = exchangeRatesCoordinator
-        self.currencyConverter = currencyConverter
+    // Permissions
+    var canChangeCurrency: Bool { return isNew }
+    
+    init(borrowsCoordinator: BorrowsCoordinatorProtocol,
+         accountCoordinator: AccountCoordinatorProtocol) {
+        self.borrowsCoordinator = borrowsCoordinator
+        self.accountCoordinator = accountCoordinator
+    }
+    
+    func set(type: BorrowType, expenseSourceFrom: ExpenseSourceViewModel?, expenseSourceTo: ExpenseSourceViewModel?) {
+        self.type = type
+        self.selectedExpenseSourceFrom = expenseSourceFrom
+        self.selectedExpenseSourceTo = expenseSourceTo
+    }
+    
+    func set(borrowId: Int, type: BorrowType) {
+        self.borrowId = borrowId
+        self.type = type
+    }
+    
+    func set(borrow: Borrow) {
+        self.borrow = borrow
+        self.borrowId = borrow.id
+        self.type = borrow.type
+        self.selectedIconURL = borrow.iconURL
+        self.name = borrow.name
+        self.selectedCurrency = borrow.currency
+        self.amount = borrow.amountCents.moneyDecimalString(with: borrow.currency)
+        self.borrowedAt = borrow.borrowedAt
+        self.payday = borrow.payday
+        self.comment = borrow.comment
+        self.onBalance = true
     }
     
     func loadData() -> Promise<Void> {
         if isNew {
-            return loadExchangeRate()
+            return Promise.value(())
         }
-        return loadTransaction()
+        return loadBorrow()
     }
     
-    func loadTransactionPromise(transactionableId: Int) -> Promise<Void> {
-        return Promise.value(())
+    private func loadBorrowBy(id: Int, type: BorrowType) -> Promise<Borrow> {
+        if type == .debt {
+            return borrowsCoordinator.showDebt(by: id)
+        }
+        return borrowsCoordinator.showLoan(by: id)
     }
     
-    func convert(amount: String?, isForwardConversion: Bool = true) -> String? {
-        guard   let currency = startableCurrency,
-            let convertedCurrency = completableCurrency,
-            let amountCents = amount?.intMoney(with: isForwardConversion ? currency : convertedCurrency) else { return nil }
-        
-        let convertedAmountCents = currencyConverter.convert(cents: amountCents, fromCurrency: currency, toCurrency: convertedCurrency, exchangeRate: Double(exchangeRate), forward: isForwardConversion)
-        
-        return convertedAmountCents.moneyDecimalString(with: isForwardConversion ? convertedCurrency : currency)
-    }
-    
-    func loadExchangeRate() -> Promise<Void> {
-        guard   needCurrencyExchange,
-            let fromCurrencyCode = startableCurrencyCode,
-            let toCurrencyCode = completableCurrencyCode else {
-                return Promise.value(())
+    private func loadBorrow() -> Promise<Void> {
+        guard let borrowId = borrowId, let type = type else {
+            return Promise(error: BorrowError.borrowIsNotSpecified)
         }
         return  firstly {
-            exchangeRatesCoordinator.show(from: fromCurrencyCode, to: toCurrencyCode)
-            }.done { exchangeRate in
-                self.exchangeRate = exchangeRate.rate
-        }
-    }
-    
-    private func loadTransaction() -> Promise<Void> {
-        guard let transactionableId = transactionableId else {
-            return Promise(error: TransactionError.transactionIsNotSpecified)
-        }
-        return  firstly {
-            loadTransactionPromise(transactionableId: transactionableId)
-            }.then {
-                self.loadExchangeRate()
-        }
+                    loadBorrowBy(id: borrowId, type: type)
+                }.get { borrow in
+                    self.set(borrow: borrow)
+                }.asVoid()
     }
     
     func isFormValid() -> Bool {
@@ -158,266 +198,71 @@ class TransactionEditViewModel {
             : update()
     }
     
-    func create() -> Promise<Void> {
-        return Promise.value(())
-    }
-    
-    func update() -> Promise<Void> {
-        return Promise.value(())
-    }
-    
-    func isCreationFormValid() -> Bool {
-        return false
-    }
-    
-    func isUpdatingFormValid() -> Bool {
-        return false
-    }
-}
-
-enum FundsMoveCreationError : Error {
-    case debtDestinationIsNotEqualToReturnSource
-    case loanSourceIsNotEqualToReturnDestination
-}
-
-enum FundsMoveUpdatingError : Error {
-    case updatingFundsMoveIsNotSpecified
-    case debtDestinationIsNotEqualToReturnSource
-    case loanSourceIsNotEqualToReturnDestination
-}
-
-class FundsMoveEditViewModel : TransactionEditViewModel {
-    private let fundsMovesCoordinator: FundsMovesCoordinatorProtocol
-    private let accountCoordinator: AccountCoordinatorProtocol
-    
-    private var fundsMove: FundsMove? = nil
-    
-    var expenseSourceFromStartable: ExpenseSourceViewModel? {
-        return startable as? ExpenseSourceViewModel
-    }
-    
-    var expenseSourceToCompletable: ExpenseSourceViewModel? {
-        return completable as? ExpenseSourceViewModel
-    }
-    
-    private var debtTransaction: FundsMoveViewModel?
-    
-    var whom: String? = nil
-    var borrowedTill: Date? = nil
-    
-    var whomButtonTitle: String {
-        if let whom = whom, !whom.isEmpty {
-            return whom
+    func removeBorrow(deleteTransactions: Bool) -> Promise<Void> {
+        guard let borrowId = borrowId, let type = type else {
+            return Promise(error: BorrowError.borrowIsNotSpecified)
         }
-        return whomPlaceholder
-    }
-    
-    var whomPlaceholder: String { return isLoan ? "У кого" : "Кому" }
-    
-    var borrowedTillButtonTitle: String? {
-        if let borrowedTill = borrowedTill {
-            return borrowedTill.dateString(ofStyle: .short)
+        if type == .debt {
+            return borrowsCoordinator.destroyDebt(by: borrowId, deleteTransactions: deleteTransactions)
         }
-        return "Дата возврата"
-    }
-    
-    var isDebtOrLoan: Bool { return isDebt || isLoan }
-    
-    var isDebt: Bool {
-        guard !isReturn, let expenseSourceToCompletable = expenseSourceToCompletable else { return false }
-        return expenseSourceToCompletable.isDebt
-    }
-    
-    var isLoan: Bool {
-        guard !isReturn, let expenseSourceFromStartable = expenseSourceFromStartable else { return false }
-        return expenseSourceFromStartable.isDebt
-    }
-    
-    var isReturn: Bool { return debtTransaction != nil }
-    
-    var isReturnOptionHidden: Bool {
-        guard   let fundsMove = fundsMove,
-            fundsMove.expenseSourceFrom.id == startable?.id,
-            fundsMove.expenseSourceTo.id == completable?.id else { return true }
-        return isNew || !isDebtOrLoan || fundsMove.isReturned
-    }
-    
-    var returnTitle: String? {
-        guard !isReturnOptionHidden else { return nil }
-        if isLoan {
-            return "Вернуть займ"
-        }
-        if isDebt {
-            return "Вернуть долг"
-        }
-        return nil
-    }
-    
-    override var title: String {
-        switch (isNew, isDebt, isLoan, isReturn) {
-        case   (true,  true,   false,  false):  return "Новый долг"
-        case   (true,  false,  true,   false):  return "Новый займ"
-        case   (true,  false,  false,  false):  return "Новый перевод"
-        case   (true,  false,  false,  true):   return "Новый возврат"
-        case   (false, true,   false,  false):  return "Изменить долг"
-        case   (false, false,  true,   false):  return "Изменить займ"
-        case   (false, false,  false,  false):  return "Изменить перевод"
-        case   (false, false,  false,  true):   return "Изменить возврат"
-        default: return "Новый перевод"
-        }
-    }
-    
-    override var removeTitle: String? { return isNew ? nil : "Удалить перевод" }
-    
-    override var startableTitle: String? { return "Кошелек снятия" }
-    
-    override var completableTitle: String? { return "Кошелек пополнения" }
-    
-    override var startableIconDefaultImageName: String { return "expense-source-icon" }
-    
-    override var completableIconDefaultImageName: String { return "expense-source-icon" }
-    
-    init(fundsMovesCoordinator: FundsMovesCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol,
-         exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
-         currencyConverter: CurrencyConverterProtocol) {
-        self.fundsMovesCoordinator = fundsMovesCoordinator
-        self.accountCoordinator = accountCoordinator
-        super.init(exchangeRatesCoordinator: exchangeRatesCoordinator, currencyConverter: currencyConverter)
-    }
-    
-    func set(fundsMoveId: Int) {
-        transactionableId = fundsMoveId
-    }
-    
-    func set(fundsMove: FundsMove) {
-        self.fundsMove = fundsMove
-        self.comment = fundsMove.comment
-        self.gotAt = fundsMove.gotAt
-        self.whom = fundsMove.whom
-        self.borrowedTill = fundsMove.borrowedTill
-        if let debtTransaction = fundsMove.debtTransaction {
-            self.debtTransaction = FundsMoveViewModel(fundsMove: debtTransaction)
-        }
-        self.startable = ExpenseSourceViewModel(expenseSource: fundsMove.expenseSourceFrom)
-        self.completable = ExpenseSourceViewModel(expenseSource: fundsMove.expenseSourceTo)
-        self.amount = fundsMove.amountCents.moneyDecimalString(with: startableCurrency)
-        self.convertedAmount = fundsMove.convertedAmountCents.moneyDecimalString(with: completableCurrency)
-    }
-    
-    func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
-        self.startable = startable
-        self.completable = completable
-        self.debtTransaction = debtTransaction
-        func amountDebt() -> String? {
-            if let debtTransaction = debtTransaction {
-                if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id == startable.id {
-                    return debtTransaction.debtAmountLeft
-                }
-                if !needCurrencyExchange && debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable.id {
-                    return debtTransaction.loanAmountLeft
-                }
-            }
-            return nil
-        }
-        
-        func convertedAmountDebt() -> String? {
-            if let debtTransaction = debtTransaction {
-                if debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id == completable.id {
-                    return debtTransaction.loanAmountLeft
-                }
-            }
-            return nil
-        }
-        
-        self.amount = amountDebt()
-        self.convertedAmount = convertedAmountDebt()
-    }
-    
-    func asDebtTransactionForReturn() -> FundsMoveViewModel? {
-        guard let fundsMove = fundsMove else { return nil }
-        return FundsMoveViewModel(fundsMove: fundsMove)
-    }
-    
-    override func loadTransactionPromise(transactionableId: Int) -> Promise<Void> {
-        return  firstly {
-            fundsMovesCoordinator.show(by: transactionableId)
-            }.get { fundsMove in
-                self.set(fundsMove: fundsMove)
-            }.asVoid()
-    }
-    
-    func removeFundsMove() -> Promise<Void> {
-        guard let fundsMoveId = fundsMove?.id else {
-            return Promise(error: FundsMoveUpdatingError.updatingFundsMoveIsNotSpecified)
-        }
-        return fundsMovesCoordinator.destroy(by: fundsMoveId)
-    }
-    
-    override func create() -> Promise<Void> {
-        if let debtTransaction = debtTransaction {
-            if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id != startable?.id {
-                return Promise(error: FundsMoveCreationError.debtDestinationIsNotEqualToReturnSource)
-            }
-            if debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id != completable?.id {
-                return Promise(error: FundsMoveCreationError.loanSourceIsNotEqualToReturnDestination)
-            }
-        }
-        return fundsMovesCoordinator.create(with: creationForm()).asVoid()
-    }
-    
-    override func isCreationFormValid() -> Bool {
-        return creationForm().validate() == nil
-    }
-    
-    override func update() -> Promise<Void> {
-        if let debtTransaction = debtTransaction {
-            if debtTransaction.isDebt && debtTransaction.expenseSourceTo.id != startable?.id {
-                return Promise(error: FundsMoveUpdatingError.debtDestinationIsNotEqualToReturnSource)
-            }
-            if debtTransaction.isLoan && debtTransaction.expenseSourceFrom.id != completable?.id {
-                return Promise(error: FundsMoveUpdatingError.loanSourceIsNotEqualToReturnDestination)
-            }
-        }
-        return fundsMovesCoordinator.update(with: updatingForm())
-    }
-    
-    override func isUpdatingFormValid() -> Bool {
-        return updatingForm().validate() == nil
+        return borrowsCoordinator.destroyLoan(by: borrowId, deleteTransactions: deleteTransactions)
     }
 }
 
 // Creation
-extension FundsMoveEditViewModel {
-    private func creationForm() -> FundsMoveCreationForm {
-        return FundsMoveCreationForm(userId: accountCoordinator.currentSession?.userId,
-                                     expenseSourceFromId: expenseSourceFromStartable?.id,
-                                     expenseSourceToId: expenseSourceToCompletable?.id,
-                                     amountCents: (amount ?? amountConverted)?.intMoney(with: startableCurrency),
-                                     amountCurrency: startableCurrency?.code,
-                                     convertedAmountCents: (convertedAmount ?? convertedAmountConverted)?.intMoney(with: completableCurrency),
-                                     convertedAmountCurrency: completableCurrency?.code,
-                                     gotAt: gotAt ?? Date(),
-                                     comment: comment,
-                                     whom: whom,
-                                     borrowedTill: borrowedTill,
-                                     debtTransactionId: debtTransaction?.id)
+extension BorrowEditViewModel {
+    func create() -> Promise<Void> {
+        guard let type = type else {
+            return Promise(error: BorrowError.borrowIsNotSpecified)
+        }
+        if type == .debt {
+            return borrowsCoordinator.createDebt(with: creationForm()).asVoid()
+        }
+        return borrowsCoordinator.createLoan(with: creationForm()).asVoid()
+    }
+    
+    func isCreationFormValid() -> Bool {
+        return creationForm().validate() == nil
+    }
+    
+    private func creationForm() -> BorrowCreationForm {
+        return BorrowCreationForm(userId: accountCoordinator.currentSession?.userId,
+                                 type: type,
+                                 name: name,
+                                 iconURL: selectedIconURL,
+                                 amountCents: amount?.intMoney(with: selectedCurrency),
+                                 amountCurrency: selectedCurrency?.code,
+                                 borrowedAt: borrowedAt,
+                                 payday: payday,
+                                 comment: comment,
+                                 alreadyOnBalance: onBalance,
+                                 borrowingTransactionAttributes: borrowingTransactionAttributes)
     }
 }
 
 // Updating
-extension FundsMoveEditViewModel {
-    private func updatingForm() -> FundsMoveUpdatingForm {
-        return FundsMoveUpdatingForm(id: fundsMove?.id,
-                                     expenseSourceFromId: expenseSourceFromStartable?.id,
-                                     expenseSourceToId: expenseSourceToCompletable?.id,
-                                     amountCents: (amount ?? amountConverted)?.intMoney(with: startableCurrency),
-                                     amountCurrency: startableCurrency?.code,
-                                     convertedAmountCents: (convertedAmount ?? convertedAmountConverted)?.intMoney(with: completableCurrency),
-                                     convertedAmountCurrency: completableCurrency?.code,
-                                     gotAt: gotAt,
-                                     comment: comment,
-                                     whom: whom,
-                                     borrowedTill: borrowedTill)
+extension BorrowEditViewModel {
+    func update() -> Promise<Void> {
+        guard let type = type else {
+            return Promise(error: BorrowError.borrowIsNotSpecified)
+        }
+        if type == .debt {
+            return borrowsCoordinator.updateDebt(with: updatingForm())
+        }
+        return borrowsCoordinator.updateLoan(with: updatingForm())
+    }
+    
+    func isUpdatingFormValid() -> Bool {
+        return updatingForm().validate() == nil
+    }
+    
+    private func updatingForm() -> BorrowUpdatingForm {
+        return BorrowUpdatingForm(id: borrow?.id,
+                                 name: name,
+                                 iconURL: selectedIconURL,
+                                 amountCents: amount?.intMoney(with: selectedCurrency),
+                                 borrowedAt: borrowedAt,
+                                 payday: payday,
+                                 comment: comment)
     }
 }

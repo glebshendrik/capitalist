@@ -32,7 +32,7 @@ class BorrowTableViewCell : UITableViewCell {
     
     func updateUI() {
         nameLabel.text = viewModel?.name
-        amountLabel.text = viewModel?.amountLeftRounded
+        amountLabel.text = viewModel?.diplayAmount
         iconImageView.setImage(with: viewModel?.iconURL,
                                placeholderName: placeholderName,
                                renderingMode: .alwaysTemplate)

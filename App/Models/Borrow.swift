@@ -65,7 +65,7 @@ struct BorrowingTransactionNestedAttributes : Encodable {
 
 struct BorrowCreationForm : Encodable, Validatable {
     var userId: Int?
-    let type: BorrowType
+    let type: BorrowType?
     let name: String?
     let iconURL: URL?
     let amountCents: Int?
@@ -114,7 +114,7 @@ struct BorrowCreationForm : Encodable, Validatable {
             errors[CodingKeys.payday.rawValue] = "Укажите дату возврата"
         }
         
-        if !alreadyOnBalance {
+        if !alreadyOnBalance, let type = type {            
             if type == .debt && !Validator.isValid(present: borrowingTransactionAttributes?.expenseSourceFromId) {
                 errors[BorrowingTransactionNestedAttributes.CodingKeys.expenseSourceFromId.rawValue] = "Укажите кошелек"
             }
