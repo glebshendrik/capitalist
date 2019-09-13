@@ -15,7 +15,8 @@ struct APIRoutePath {
         case .changePassword(let form):                     return "/users/\(form.userId!)/password"
         case .resetPassword:                                return "/users/new_password"
         case .findExchangeRate:                             return "/exchange_rates/find_by"
-        
+        case .firstExpenseSource(let userId, _, _):         return "\(collection(route, userId: userId))/first"
+            
         // Create
         case .createUser:                                   return collection(route)
         case .createPasswordResetCode:                      return collection(route)

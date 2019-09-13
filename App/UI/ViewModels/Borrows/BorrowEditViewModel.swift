@@ -16,6 +16,8 @@ enum BorrowError : Error {
 class BorrowEditViewModel {
     let borrowsCoordinator: BorrowsCoordinatorProtocol
     let accountCoordinator: AccountCoordinatorProtocol
+    let fundsMoveCoordinator: FundsMovesCoordinatorProtocol
+    let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     
     private var borrow: Borrow? = nil
     
@@ -30,7 +32,13 @@ class BorrowEditViewModel {
     var type: BorrowType? = nil
     var selectedIconURL: URL? = nil
     var name: String? = nil
-    var selectedCurrency: Currency? = nil
+    var selectedCurrency: Currency? = nil {
+        didSet {
+            if selectedCurrency?.code != oldValue?.code {
+                selectedExpenseSource = nil
+            }
+        }
+    }
     var amount: String? = nil    
     var borrowedAt: Date = Date()
     var payday: Date? = nil
@@ -57,6 +65,7 @@ class BorrowEditViewModel {
         guard isNew, !onBalance else { return nil }
         return BorrowingTransactionNestedAttributes(expenseSourceFromId: selectedExpenseSourceFrom?.id, expenseSourceToId: selectedExpenseSourceTo?.id)
     }
+    var borrowingTransaction: FundsMoveViewModel? = nil
     
     var borrowedAtFormatted: String {
         return borrowedAt.dateString(ofStyle: .short)
@@ -117,23 +126,32 @@ class BorrowEditViewModel {
     var expenseSourceCurrencyCode: String? { return expenseSourceCurrency?.code }
     
     // Visibility
-    
     var removeButtonHidden: Bool { return isNew }
+    
     var returnButtonHidden: Bool {
-        guard !isNew else { return true }
-        guard let borrow = borrow else { return true }
+        guard !isNew, let borrow = borrow else { return true }
         return borrow.isReturned
     }
-    var onBalanceSwitchHidden: Bool { return isNew }
-    var expenseSourceFieldHidden: Bool { return isNew }
+    
+    var onBalanceSwitchHidden: Bool {
+        return !isNew || selectedCurrency == nil
+    }
+    
+    var expenseSourceFieldHidden: Bool {
+        return !isNew || onBalance || selectedCurrency == nil
+    }
     
     // Permissions
     var canChangeCurrency: Bool { return isNew }
     
     init(borrowsCoordinator: BorrowsCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol,
+         fundsMoveCoordinator: FundsMovesCoordinatorProtocol,
+         expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol) {
         self.borrowsCoordinator = borrowsCoordinator
         self.accountCoordinator = accountCoordinator
+        self.fundsMoveCoordinator = fundsMoveCoordinator
+        self.expenseSourcesCoordinator = expenseSourcesCoordinator
     }
     
     func set(type: BorrowType, expenseSourceFrom: ExpenseSourceViewModel?, expenseSourceTo: ExpenseSourceViewModel?) {
@@ -147,7 +165,7 @@ class BorrowEditViewModel {
         self.type = type
     }
     
-    func set(borrow: Borrow) {
+    private func set(borrow: Borrow) {
         self.borrow = borrow
         self.borrowId = borrow.id
         self.type = borrow.type
@@ -165,7 +183,11 @@ class BorrowEditViewModel {
         if isNew {
             return Promise.value(())
         }
-        return loadBorrow()
+        return  firstly {
+                    loadBorrow()
+                }.then { borrow in
+                    self.loadBorrowingTransaction(id: borrow.borrowingTransactionId)
+                }
     }
     
     private func loadBorrowBy(id: Int, type: BorrowType) -> Promise<Borrow> {
@@ -175,7 +197,7 @@ class BorrowEditViewModel {
         return borrowsCoordinator.showLoan(by: id)
     }
     
-    private func loadBorrow() -> Promise<Void> {
+    private func loadBorrow() -> Promise<Borrow> {
         guard let borrowId = borrowId, let type = type else {
             return Promise(error: BorrowError.borrowIsNotSpecified)
         }
@@ -183,6 +205,28 @@ class BorrowEditViewModel {
                     loadBorrowBy(id: borrowId, type: type)
                 }.get { borrow in
                     self.set(borrow: borrow)
+                }
+    }
+    
+    private func loadBorrowingTransaction(id: Int?) -> Promise<Void> {
+        guard let id = id else {
+            return Promise.value(())
+        }
+        return  firstly {
+                    fundsMoveCoordinator.show(by: id)
+                }.get { fundsMove in
+                    self.borrowingTransaction = FundsMoveViewModel(fundsMove: fundsMove)
+                }.asVoid()
+    }
+    
+    func loadDefaultExpenseSource() -> Promise<Void> {
+        guard let currency = selectedCurrency?.code, selectedExpenseSource == nil else {
+            return Promise.value(())
+        }
+        return  firstly {
+                    expenseSourcesCoordinator.first(accountType: .usual, currency: currency)
+                }.get { expenseSource in
+                    self.selectedExpenseSource = ExpenseSourceViewModel(expenseSource: expenseSource)
                 }.asVoid()
     }
     

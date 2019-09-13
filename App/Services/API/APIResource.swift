@@ -37,6 +37,7 @@ struct APIResource {
             return APIResource(singular: "income_source", plural: "income_sources")
         case .createExpenseSource,
              .showExpenseSource,
+             .firstExpenseSource,
              .indexExpenseSources,
              .updateExpenseSource,
              .updateExpenseSourcePosition,

@@ -25,6 +25,7 @@ struct Borrow : Decodable {
     let comment: String?
     let isReturned: Bool
     let amountCentsLeft: Int
+    let borrowingTransactionId: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -38,6 +39,7 @@ struct Borrow : Decodable {
         case comment
         case isReturned = "is_returned"
         case amountCentsLeft = "amount_cents_left"
+        case borrowingTransactionId = "borrowing_transaction_id"
     }
 }
 

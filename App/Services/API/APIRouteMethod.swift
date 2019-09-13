@@ -29,6 +29,7 @@ struct APIRouteMethod {
              .showIncomeSource,
              .indexIncomeSources,
              .showExpenseSource,
+             .firstExpenseSource,
              .indexExpenseSources,
              .indexIcons,
              .indexBaskets,

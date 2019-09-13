@@ -18,8 +18,12 @@ class ExpenseSourcesService : Service, ExpenseSourcesServiceProtocol {
         return request(APIRoute.showExpenseSource(id: id))
     }
     
-    func index(for userId: Int, noDebts: Bool) -> Promise<[ExpenseSource]> {        
-        return requestCollection(APIRoute.indexExpenseSources(userId: userId, noDebts: noDebts))
+    func first(for userId: Int, accountType: AccountType, currency: String) -> Promise<ExpenseSource> {
+        return request(APIRoute.firstExpenseSource(userId: userId, accountType: accountType, currency: currency))
+    }
+    
+    func index(for userId: Int, noDebts: Bool, currency: String?) -> Promise<[ExpenseSource]> {
+        return requestCollection(APIRoute.indexExpenseSources(userId: userId, noDebts: noDebts, currency: currency))
     }
     
     func update(with updatingForm: ExpenseSourceUpdatingForm) -> Promise<Void> {
