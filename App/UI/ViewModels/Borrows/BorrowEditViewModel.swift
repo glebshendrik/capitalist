@@ -28,6 +28,11 @@ class BorrowEditViewModel {
         return !comment.isEmpty && !comment.isWhitespace
     }
     
+    var expenseSourceSelectionType: ExpenseSourceSelectionType {
+        guard let type = type else { return .startable }
+        return type == .debt ? .startable : .completable
+    }
+    
     var borrowId: Int?
     var type: BorrowType? = nil
     var selectedIconURL: URL? = nil
@@ -113,11 +118,12 @@ class BorrowEditViewModel {
         return type == .debt ? "Удалить долг" : "Удалить займ"
     }
     
-    var removeQuestion: String? {
-        guard let type = type else { return nil }
+    var removeQuestion: String {
+        guard let type = type else { return "Удалить?" }
         return type == .debt ? "Удалить долг?" : "Удалить займ?"
     }
     
+    var iconDefaultImageName: String { return IconCategory.expenseSourceDebt.defaultIconName }
     var expenseSourceIconURL: URL? { return selectedExpenseSource?.iconURL }
     var expenseSourceIconDefaultImageName: String { return IconCategory.expenseSource.defaultIconName }
     var expenseSourceName: String? { return selectedExpenseSource?.name }

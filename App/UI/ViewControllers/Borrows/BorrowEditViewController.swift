@@ -19,24 +19,24 @@ protocol BorrowEditViewControllerDelegate {
 }
 
 class BorrowEditViewController : FormTransactionsDependableEditViewController {
-    
-    var viewModel: ExpenseCategoryEditViewModel!
+    var viewModel: BorrowEditViewModel!
     var tableController: BorrowEditTableController!
     var delegate: BorrowEditViewControllerDelegate?
     
-    override var shouldLoadData: Bool { return viewModel.isNew }
-    override var formTitle: String {
-        return viewModel.isNew ? "Новая категория трат" : "Категория трат"
-    }
-    override var saveErrorMessage: String { return "Ошибка при сохранении категории трат" }
-    override var removeErrorMessage: String { return "Ошибка при удалении категории трат" }
-    override var removeQuestionMessage: String { return "Удалить категорию трат?" }
+    override var shouldLoadData: Bool { return !viewModel.isNew }
+    override var formTitle: String { return viewModel.title }
+    override var saveErrorMessage: String { return "Ошибка при сохранении" }
+    override var removeErrorMessage: String { return "Ошибка при удалении" }
+    override var removeQuestionMessage: String { return viewModel.removeQuestion }
     
     override func registerFormFields() -> [String : FormField] {
-        return [ExpenseCategory.CodingKeys.name.rawValue : tableController.nameField,
-                ExpenseCategory.CodingKeys.monthlyPlannedCurrency.rawValue : tableController.currencyField,
-                ExpenseCategory.CodingKeys.incomeSourceCurrency.rawValue : tableController.incomeSourceCurrencyField,
-                ExpenseCategory.CodingKeys.monthlyPlannedCents.rawValue : tableController.monthlyPlannedField]
+        return [BorrowCreationForm.CodingKeys.name.rawValue : tableController.nameField,
+                BorrowCreationForm.CodingKeys.amountCurrency.rawValue : tableController.currencyField,
+                BorrowCreationForm.CodingKeys.amountCents.rawValue : tableController.amountField,
+                BorrowCreationForm.CodingKeys.borrowedAt.rawValue : tableController.borrowedAtField,
+                BorrowCreationForm.CodingKeys.payday.rawValue : tableController.paydayField,
+                BorrowingTransactionNestedAttributes.CodingKeys.expenseSourceToId.rawValue : tableController.expenseSourceField,
+                BorrowingTransactionNestedAttributes.CodingKeys.expenseSourceFromId.rawValue : tableController.expenseSourceField]
     }
     
     override func setup(tableController: FormFieldsTableViewController) {
@@ -45,7 +45,7 @@ class BorrowEditViewController : FormTransactionsDependableEditViewController {
     }
     
     override func loadDataPromise() -> Promise<Void> {
-        return viewModel.loadDefaultCurrency()
+        return viewModel.loadData()
     }
     
     override func savePromise() -> Promise<Void> {
@@ -53,158 +53,251 @@ class BorrowEditViewController : FormTransactionsDependableEditViewController {
     }
     
     override func removePromise() -> Promise<Void> {
-        return viewModel.removeExpenseCategory(deleteTransactions: deleteTransactions)
+        return viewModel.removeBorrow(deleteTransactions: deleteTransactions)
     }
     
     override func didSave() {
         super.didSave()
-        if viewModel.isNew {
-            delegate?.didCreateExpenseCategory(with: viewModel.basketType, name: viewModel.name!)
+        guard let type = viewModel.type else { return }
+        if type == .debt {
+            viewModel.isNew ? delegate?.didCreateDebt() : delegate?.didUpdateDebt()
         }
         else {
-            delegate?.didUpdateExpenseCategory(with: viewModel.basketType)
+            viewModel.isNew ? delegate?.didCreateLoan() : delegate?.didUpdateLoan()
         }
     }
     
     override func didRemove() {
-        delegate?.didRemoveExpenseCategory(with: viewModel.basketType)
+        guard let type = viewModel.type else { return }
+        type == .debt ? delegate?.didRemoveDebt() : delegate?.didRemoveLoan()
     }
     
     override func updateUI() {
         updateIconUI()
         updateTextFieldsUI()
         updateCurrencyUI()
-        updateIncomeSourceCurrencyUI()
-        updateReminderUI()
+        updateDatesUI()
+        updateExpenseSourceUI()
+        updateReturnButtonUI()
         updateRemoveButtonUI()
+        updateTableUI(animated: true)
     }
 }
 
-extension ExpenseCategoryEditViewController {
-    func set(delegate: ExpenseCategoryEditViewControllerDelegate?) {
+extension BorrowEditViewController {
+    func set(delegate: BorrowEditViewControllerDelegate?) {
         self.delegate = delegate
     }
     
-    func set(expenseCategory: ExpenseCategory) {
-        viewModel.set(expenseCategory: expenseCategory)
+    func set(borrowId: Int, type: BorrowType) {
+        viewModel.set(borrowId: borrowId, type: type)
     }
     
-    func set(basketType: BasketType) {
-        viewModel.set(basketType: basketType)
+    func set(type: BorrowType, expenseSourceFrom: ExpenseSourceViewModel?, expenseSourceTo: ExpenseSourceViewModel?) {
+        viewModel.set(type: type, expenseSourceFrom: expenseSourceFrom, expenseSourceTo: expenseSourceTo)
     }
 }
 
-extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableControllerDelegate {
+extension BorrowEditViewController : BorrowEditTableControllerDelegate {
     func didTapIcon() {
-        push(factory.iconsViewController(delegate: self, iconCategory: viewModel.basketType.iconCategory))
+        push(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSourceDebt))
+    }
+    
+    func didTapCurrency() {
+        guard viewModel.canChangeCurrency else { return }
+        push(factory.currenciesViewController(delegate: self))
+    }
+    
+    func didTapBorrowedAt() {
+        let delegate = BorrowedAtDateSelectionDelegate(delegate: self)
+        modal(factory.datePickerViewController(delegate: delegate,
+                                               date: viewModel.borrowedAt,
+                                               minDate: nil,
+                                               maxDate: Date(),
+                                               mode: .dateAndTime), animated: true)
+    }
+    
+    func didTapPayday() {
+        let delegate = PaydayDateSelectionDelegate(delegate: self)
+        modal(factory.datePickerViewController(delegate: delegate,
+                                               date: viewModel.payday,
+                                               minDate: Date(),
+                                               maxDate: nil,
+                                               mode: .date), animated: true)
+    }
+    
+    func didTapExpenseSource() {
+        slideUp(viewController:
+            factory.expenseSourceSelectViewController(delegate: self,
+                                                      skipExpenseSourceId: nil,
+                                                      selectionType: viewModel.expenseSourceSelectionType))
+    }
+    
+    func didTapReturn() {
+        guard   let startable = fundsMoveEditViewModel.expenseSourceToCompletable,
+            let completable = fundsMoveEditViewModel.expenseSourceFromStartable,
+            let debtTransaction = fundsMoveEditViewModel.asDebtTransactionForReturn() else { return }
+        
+        showFundsMoveEditScreen(expenseSourceStartable: startable,
+                                expenseSourceCompletable: completable,
+                                debtTransaction: debtTransaction)
+    }
+    
+    private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
+        
+        modal(factory.fundsMoveEditViewController(delegate: self,
+                                                  startable: expenseSourceStartable,
+                                                  completable: expenseSourceCompletable,
+                                                  debtTransaction: debtTransaction))
     }
     
     func didChange(name: String?) {
         viewModel.name = name
     }
     
-    func didChange(monthlyPlanned: String?) {
-        viewModel.monthlyPlanned = monthlyPlanned
+    func didChange(amount: String?) {
+        viewModel.amount = amount
     }
     
-    func didTapCurrency() {
-        guard viewModel.canChangeCurrency else { return }
-        let delegate =  ExpenseCategoryCurrencyDelegate(delegate: self)
-        push(factory.currenciesViewController(delegate: delegate))
+    func didChange(alreadyOnBalance: Bool) {
+        viewModel.onBalance = alreadyOnBalance
+        updateExpenseSourceUI()
     }
     
-    func didTapIncomeSourceCurrency() {
-        guard viewModel.canChangeIncomeSourceCurrency else { return }
-        let delegate =  IncomeSourceDependantCurrencyDelegate(delegate: self)
-        push(factory.currenciesViewController(delegate: delegate))
-    }
-    
-    func didTapSetReminder() {
-        modal(factory.reminderEditViewController(delegate: self, viewModel: viewModel.reminderViewModel))
+    func didChange(comment: String?) {
+        viewModel.comment = comment
     }
 }
 
-extension ExpenseCategoryEditViewController : IconsViewControllerDelegate {
+extension BorrowEditViewController : IconsViewControllerDelegate {
     func didSelectIcon(icon: Icon) {
         viewModel.selectedIconURL = icon.url
         updateIconUI()
     }
 }
 
-extension ExpenseCategoryEditViewController : ReminderEditViewControllerDelegate {
-    func didSave(reminderViewModel: ReminderViewModel) {
-        viewModel.reminderViewModel = reminderViewModel
-        updateReminderUI()
+extension BorrowEditViewController : CurrenciesViewControllerDelegate {
+    func didSelectCurrency(currency: Currency) {
+        update(currency: currency)
     }
 }
 
-class IncomeSourceDependantCurrencyDelegate : CurrenciesViewControllerDelegate {
-    let delegate: ExpenseCategoryEditViewController?
+class BorrowedAtDateSelectionDelegate : DatePickerViewControllerDelegate {
+    let delegate: BorrowEditViewController?
     
-    init(delegate: ExpenseCategoryEditViewController?) {
+    init(delegate: BorrowEditViewController?) {
         self.delegate = delegate
     }
     
-    func didSelectCurrency(currency: Currency) {
-        delegate?.update(incomeSourceCurrency: currency)
+    func didSelect(date: Date?) {
+        delegate?.update(borrowedAt: date)
     }
 }
 
-class ExpenseCategoryCurrencyDelegate : CurrenciesViewControllerDelegate {
-    let delegate: ExpenseCategoryEditViewController?
+class PaydayDateSelectionDelegate : DatePickerViewControllerDelegate {
+    let delegate: BorrowEditViewController?
     
-    init(delegate: ExpenseCategoryEditViewController?) {
+    init(delegate: BorrowEditViewController?) {
         self.delegate = delegate
     }
     
-    func didSelectCurrency(currency: Currency) {
-        delegate?.update(currency: currency)
+    func didSelect(date: Date?) {
+        delegate?.update(payday: date)
     }
 }
 
-extension ExpenseCategoryEditViewController {
+extension BorrowEditViewController : ExpenseSourceSelectViewControllerDelegate {
+    func didSelect(startableExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(expenseSource: startableExpenseSourceViewModel)
+    }
+    
+    func didSelect(completableExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(expenseSource: completableExpenseSourceViewModel)
+    }
+}
+
+extension BorrowEditViewController {
     func update(currency: Currency) {
         viewModel.selectedCurrency = currency
         updateCurrencyUI()
     }
     
-    func update(incomeSourceCurrency: Currency) {
-        viewModel.selectedIncomeSourceCurrency = incomeSourceCurrency
-        updateIncomeSourceCurrencyUI()
+    func update(borrowedAt: Date?) {
+        viewModel.borrowedAt = borrowedAt ?? Date()
+        updateDatesUI()
+    }
+    
+    func update(payday: Date?) {
+        viewModel.payday = payday
+        updateDatesUI()
+    }
+    
+    func update(expenseSource: ExpenseSourceViewModel?) {
+        viewModel.selectedExpenseSource = expenseSource
+        updateUI()
     }
 }
 
-extension ExpenseCategoryEditViewController {
+extension BorrowEditViewController {
     func updateIconUI() {
-        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)
+        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.iconDefaultImageName, renderingMode: .alwaysTemplate)
         tableController.iconView.tintColor = UIColor.by(.textFFFFFF)
     }
     
     func updateTextFieldsUI() {
         tableController.nameField.text = viewModel.name
-        tableController.monthlyPlannedField.text = viewModel.monthlyPlanned
+        tableController.nameField.placeholder = viewModel.nameTitle
+        
+        tableController.amountField.text = viewModel.amount
+        tableController.amountField.placeholder = viewModel.amountTitle
+        tableController.amountField.currency = viewModel.selectedCurrency
+        
+        tableController.commentView.text = viewModel.comment ?? ""
+    }
+    
+    func updateDatesUI() {
+        tableController.borrowedAtField.text = viewModel.borrowedAtFormatted
+        tableController.borrowedAtField.placeholder = viewModel.borrowedAtTitle
+        
+        tableController.paydayField.text = viewModel.paydayFormatted
+        tableController.paydayField.placeholder = "Дата возврата"
     }
     
     func updateCurrencyUI() {
-        tableController.currencyField.text = viewModel.selectedCurrencyName
+        tableController.currencyField.text = viewModel.selectedCurrency?.name
         tableController.currencyField.isEnabled = viewModel.canChangeCurrency
-        tableController.monthlyPlannedField.currency = viewModel.selectedCurrency
+        tableController.amountField.currency = viewModel.selectedCurrency
     }
     
-    func updateIncomeSourceCurrencyUI() {
-        tableController.incomeSourceCurrencyField.text = viewModel.selectedIncomeSourceCurrencyName
-        tableController.incomeSourceCurrencyField.isEnabled = viewModel.canChangeIncomeSourceCurrency
-        tableController.set(cell: tableController.incomeSourceCurrencyCell, hidden: !viewModel.canChangeIncomeSourceCurrency)
+    func updateExpenseSourceUI() {
+        tableController.set(cell: tableController.onBalanceCell, hidden: viewModel.onBalanceSwitchHidden)
+        tableController.onBalanceSwitchField.value = viewModel.onBalance
+        
+        tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden)
+        tableController.expenseSourceField.placeholder = viewModel.expenseSourceTitle
+        tableController.expenseSourceField.text = viewModel.expenseSourceName
+        tableController.expenseSourceField.subValue = viewModel.expenseSourceAmount
+        tableController.expenseSourceField.imageName = viewModel.expenseSourceIconDefaultImageName
+        tableController.expenseSourceField.imageURL = viewModel.expenseSourceIconURL
     }
     
-    func updateReminderUI() {
-        tableController.reminderButton.setTitle(viewModel.reminderTitle, for: .normal)
-        tableController.reminderLabel.text = viewModel.reminder
+    func updateReturnButtonUI() {
+        tableController.returnLabel.text = viewModel.returnTitle
+        tableController.set(cell: tableController.returnCell, hidden: viewModel.returnButtonHidden, animated: true)
     }
     
     func updateRemoveButtonUI() {
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden)
     }
+    
+    func updateTableUI(animated: Bool = true) {
+        tableController.set(cell: tableController.onBalanceCell, hidden: viewModel.onBalanceSwitchHidden, animated: animated, reload: false)
+        tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: animated, reload: false)
+        tableController.set(cell: tableController.returnCell, hidden: viewModel.returnButtonHidden, animated: true, reload: false)
+        tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: animated, reload: false)
+        tableController.reloadData(animated: animated)
+    }
+
 }
 
 
