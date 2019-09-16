@@ -45,7 +45,7 @@ enum APIRoute: URLRequestConvertible {
     case createExpenseSource(form: ExpenseSourceCreationForm)
     case showExpenseSource(id: Int)
     case firstExpenseSource(userId: Int, accountType: AccountType, currency: String)
-    case indexExpenseSources(userId: Int, noDebts: Bool, currency: String?)
+    case indexExpenseSources(userId: Int, noDebts: Bool, accountType: AccountType?, currency: String?)
     case updateExpenseSource(form: ExpenseSourceUpdatingForm)
     case updateExpenseSourcePosition(form: ExpenseSourcePositionUpdatingForm)
     case destroyExpenseSource(id: Int, deleteTransactions: Bool)

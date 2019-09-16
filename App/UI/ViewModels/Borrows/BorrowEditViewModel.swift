@@ -257,6 +257,11 @@ class BorrowEditViewModel {
         }
         return borrowsCoordinator.destroyLoan(by: borrowId, deleteTransactions: deleteTransactions)
     }
+    
+    func asReturningBorrow() -> BorrowViewModel? {
+        guard let borrow = borrow else { return nil }
+        return BorrowViewModel(borrow: borrow)
+    }
 }
 
 // Creation

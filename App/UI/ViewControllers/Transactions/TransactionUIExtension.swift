@@ -14,12 +14,7 @@ extension TransactionEditViewController {
             self.tableController.calendarButton.setTitle(self.viewModel.calendarTitle, for: .normal)
         })
     }
-    
-    @objc func updateDebtUI() {
-        tableController.set(cell: tableController.debtCell, hidden: true, animated: false, reload: false)
-        tableController.set(cell: tableController.returnCell, hidden: true, animated: false, reload: true)
-    }
-    
+        
     func updateStartableUI() {
         tableController.sourceField.placeholder = viewModel.startableTitle
         tableController.sourceField.text = viewModel.startableName

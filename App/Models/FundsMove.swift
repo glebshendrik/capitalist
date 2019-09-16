@@ -21,12 +21,12 @@ class FundsMove : Decodable {
     let convertedCurrency: Currency
     let gotAt: Date
     let comment: String?
-    let whom: String?
-    let borrowedTill: Date?
-    let debtTransaction: FundsMove?
-    let isReturned: Bool
-    let debtAmountCentsLeft: Int?
-    let loanAmountCentsLeft: Int?
+//    let whom: String?
+//    let borrowedTill: Date?
+    let returningBorrow: Borrow?
+//    let isReturned: Bool
+//    let debtAmountCentsLeft: Int?
+//    let loanAmountCentsLeft: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -41,12 +41,12 @@ class FundsMove : Decodable {
         case convertedCurrency = "converted_currency"
         case gotAt = "got_at"
         case comment
-        case borrowedTill = "borrowed_till"
-        case whom
-        case debtTransaction = "debt_transaction"
-        case isReturned = "is_returned"
-        case debtAmountCentsLeft = "debt_amount_cents_left"
-        case loanAmountCentsLeft = "loan_amount_cents_left"
+        case returningBorrow = "returning_borrow"
+//        case borrowedTill = "borrowed_till"
+//        case whom
+//        case isReturned = "is_returned"
+//        case debtAmountCentsLeft = "debt_amount_cents_left"
+//        case loanAmountCentsLeft = "loan_amount_cents_left"
     }
     
 }
@@ -61,9 +61,9 @@ struct FundsMoveCreationForm : Encodable, Validatable {
     let convertedAmountCurrency: String?
     let gotAt: Date?
     let comment: String?
-    let whom: String?
-    let borrowedTill: Date?
-    let debtTransactionId: Int?
+//    let whom: String?
+//    let borrowedTill: Date?
+    let returningBorrowId: Int?
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
@@ -75,9 +75,9 @@ struct FundsMoveCreationForm : Encodable, Validatable {
         case convertedAmountCurrency = "converted_amount_currency"
         case gotAt = "got_at"
         case comment
-        case borrowedTill = "borrowed_till"
-        case whom
-        case debtTransactionId = "debt_transaction_id"
+//        case borrowedTill = "borrowed_till"
+//        case whom
+        case returningBorrowId = "returning_borrow_id"
     }
     
     func validate() -> [String : String]? {
@@ -129,8 +129,8 @@ struct FundsMoveUpdatingForm : Encodable, Validatable {
     let convertedAmountCurrency: String?
     let gotAt: Date?
     let comment: String?
-    let whom: String?
-    let borrowedTill: Date?
+//    let whom: String?
+//    let borrowedTill: Date?
     
     
     enum CodingKeys: String, CodingKey {
@@ -143,8 +143,8 @@ struct FundsMoveUpdatingForm : Encodable, Validatable {
         case convertedAmountCurrency = "converted_amount_currency"
         case gotAt = "got_at"
         case comment
-        case borrowedTill = "borrowed_till"
-        case whom
+//        case borrowedTill = "borrowed_till"
+//        case whom
     }
     
     func validate() -> [String : String]? {

@@ -64,7 +64,7 @@ extension ApplicationAssembly {
         
         container.autoregister(FiltersSelectionViewModel.self, initializer: FiltersSelectionViewModel.init)
         
-        container.autoregister(WaitingDebtsViewModel.self, initializer: WaitingDebtsViewModel.init)
+        container.autoregister(WaitingBorrowsViewModel.self, initializer: WaitingBorrowsViewModel.init)
         
         container.autoregister(BalanceViewModel.self, initializer: BalanceViewModel.init)
         

@@ -130,25 +130,22 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
         slideUp(viewController:
             factory.expenseSourceSelectViewController(delegate: self,
                                                       skipExpenseSourceId: nil,
-                                                      selectionType: viewModel.expenseSourceSelectionType))
+                                                      selectionType: viewModel.expenseSourceSelectionType,
+                                                      noDebts: true,
+                                                      accountType: nil,
+                                                      currency: viewModel.selectedCurrency?.code))
     }
     
     func didTapReturn() {
-        guard   let startable = fundsMoveEditViewModel.expenseSourceToCompletable,
-            let completable = fundsMoveEditViewModel.expenseSourceFromStartable,
-            let debtTransaction = fundsMoveEditViewModel.asDebtTransactionForReturn() else { return }
-        
-        showFundsMoveEditScreen(expenseSourceStartable: startable,
-                                expenseSourceCompletable: completable,
-                                debtTransaction: debtTransaction)
+        showReturnTransactionScreen()
     }
     
-    private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
+    private func showReturnTransactionScreen() {
         
         modal(factory.fundsMoveEditViewController(delegate: self,
-                                                  startable: expenseSourceStartable,
-                                                  completable: expenseSourceCompletable,
-                                                  debtTransaction: debtTransaction))
+                                                  startable: nil,
+                                                  completable: nil,
+                                                  borrow: viewModel.asReturningBorrow()))
     }
     
     func didChange(name: String?) {
@@ -300,4 +297,25 @@ extension BorrowEditViewController {
 
 }
 
+extension BorrowEditViewController: FundsMoveEditViewControllerDelegate {
+    func didCreateFundsMove() {
+        close {
+            guard let type = self.viewModel.type else  { return }
+            if type == .debt {
+                self.delegate?.didUpdateDebt()
+            }
+            else {
+                self.delegate?.didUpdateLoan()
+            }
+            
+        }
+    }
 
+    func didUpdateFundsMove() {
+
+    }
+
+    func didRemoveFundsMove() {
+
+    }
+}

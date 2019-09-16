@@ -33,17 +33,17 @@ class FundsMoveViewModel {
         return convertedAmountCents.moneyCurrencyString(with: convertedCurrency, shouldRound: false) ?? ""
     }
     
-    var debtAmountLeft: String {
-        return fundsMove.debtAmountCentsLeft?.moneyCurrencyString(with: convertedCurrency, shouldRound: false) ?? ""
-    }
-    
-    var loanAmountLeft: String {
-        return fundsMove.loanAmountCentsLeft?.moneyCurrencyString(with: currency, shouldRound: false) ?? ""
-    }
-    
-    var debtAmount: String {
-        return isDebt ? debtAmountLeft : loanAmountLeft
-    }
+//    var debtAmountLeft: String {
+//        return fundsMove.debtAmountCentsLeft?.moneyCurrencyString(with: convertedCurrency, shouldRound: false) ?? ""
+//    }
+//
+//    var loanAmountLeft: String {
+//        return fundsMove.loanAmountCentsLeft?.moneyCurrencyString(with: currency, shouldRound: false) ?? ""
+//    }
+//
+//    var debtAmount: String {
+//        return isDebt ? debtAmountLeft : loanAmountLeft
+//    }
     
     var gotAt: Date {
         return fundsMove.gotAt
@@ -57,31 +57,31 @@ class FundsMoveViewModel {
         return fundsMove.comment
     }
     
-    var borrowedTillFormatted: String? {
-        return fundsMove.borrowedTill?.dateString(ofStyle: .short)
-    }
-    
-    var borrowedTillLabelTitle: String? {
-        guard let borrowedTillFormatted = borrowedTillFormatted else { return nil }
-        return "До \(borrowedTillFormatted)"
-    }
-    
-    var whom: String? {
-        return fundsMove.whom
-    }
-    
-    var whomLabelTitle: String? {
-        if let whom = whom {
-            return whom
-        }
-        if isDebt {
-            return "Вы одолжили"
-        }
-        if isLoan {
-            return "Вы заняли"
-        }
-        return nil
-    }
+//    var borrowedTillFormatted: String? {
+//        return fundsMove.borrowedTill?.dateString(ofStyle: .short)
+//    }
+//
+//    var borrowedTillLabelTitle: String? {
+//        guard let borrowedTillFormatted = borrowedTillFormatted else { return nil }
+//        return "До \(borrowedTillFormatted)"
+//    }
+//
+//    var whom: String? {
+//        return fundsMove.whom
+//    }
+//
+//    var whomLabelTitle: String? {
+//        if let whom = whom {
+//            return whom
+//        }
+//        if isDebt {
+//            return "Вы одолжили"
+//        }
+//        if isLoan {
+//            return "Вы заняли"
+//        }
+//        return nil
+//    }
     
     var isDebt: Bool {
         return !isReturn && expenseSourceTo.isDebt
@@ -92,7 +92,7 @@ class FundsMoveViewModel {
     }
     
     var isReturn: Bool {
-        return fundsMove.debtTransaction != nil
+        return fundsMove.returningBorrow != nil
     }
     
     var currency: Currency {

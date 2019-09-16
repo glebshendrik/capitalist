@@ -11,13 +11,14 @@ import SideMenu
 import PromiseKit
 import SwifterSwift
 
-class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
+class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
     
     var navigationBarTintColor: UIColor? = UIColor.by(.dark2A314B)
     
     var viewModel: MainViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var router: ApplicationRouterProtocol!
+    var factory: UIFactoryProtocol!
     var soundsManager: SoundsManagerProtocol!
     
     static var finantialDataInvalidatedNotification = NSNotification.Name("finantialDataInvalidatedNotification")

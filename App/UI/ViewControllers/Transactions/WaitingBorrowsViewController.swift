@@ -8,33 +8,20 @@
 
 import UIKit
 
-enum WaitingDebtsType {
-    case debts, loans
-    
-    var listHeader: String {
-        switch self {
-        case .debts:
-            return "Ваши займы"
-        case .loans:
-            return "Ваши долги"
-        }
-    }
-}
-
-protocol WaitingDebtsViewControllerDelegate : class {
-    func didSelect(debtTransaction: FundsMoveViewModel,
+protocol WaitingBorrowsViewControllerDelegate : class {
+    func didSelect(borrow: BorrowViewModel,
                    expenseSourceStartable: ExpenseSourceViewModel,
                    expenseSourceCompletable: ExpenseSourceViewModel)
 }
 
-class WaitingDebtsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
+class WaitingBorrowsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerTitleLabel: UILabel!
     
-    private weak var delegate: WaitingDebtsViewControllerDelegate? = nil
-    private var waitingDebtsType: WaitingDebtsType = .debts
+    private weak var delegate: WaitingBorrowsViewControllerDelegate? = nil
+    private var borrowType: BorrowType = .debt
     
-    var viewModel: WaitingDebtsViewModel!
+    var viewModel: WaitingBorrowsViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
     var expenseSourceStartable: ExpenseSourceViewModel? = nil
@@ -45,22 +32,22 @@ class WaitingDebtsViewController : UIViewController, UIMessagePresenterManagerDe
         setupUI()
     }
     
-    func set(delegate: WaitingDebtsViewControllerDelegate,
+    func set(delegate: WaitingBorrowsViewControllerDelegate,
              expenseSourceStartable: ExpenseSourceViewModel,
              expenseSourceCompletable: ExpenseSourceViewModel,
-             waitingDebts: [FundsMoveViewModel],
-             waitingDebtsType: WaitingDebtsType) {
+             waitingBorrows: [BorrowViewModel],
+             borrowType: BorrowType) {
         self.delegate = delegate
-        self.viewModel.set(fundsMoveViewModels: waitingDebts)
+        self.viewModel.set(borrowViewModels: waitingBorrows)
         self.expenseSourceStartable = expenseSourceStartable
         self.expenseSourceCompletable = expenseSourceCompletable
-        self.waitingDebtsType = waitingDebtsType
+        self.borrowType = borrowType
     }
     
     private func setupUI() {
         tableView.delegate = self
         tableView.dataSource = self
-        headerTitleLabel.text = waitingDebtsType.listHeader
+        headerTitleLabel.text = borrowType.title
     }
     
     private func close() {
@@ -68,7 +55,7 @@ class WaitingDebtsViewController : UIViewController, UIMessagePresenterManagerDe
     }
 }
 
-extension WaitingDebtsViewController : UITableViewDelegate, UITableViewDataSource {
+extension WaitingBorrowsViewController : UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -78,22 +65,22 @@ extension WaitingDebtsViewController : UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DebtTableViewCell", for: indexPath) as? DebtTableViewCell,
-            let fundsMoveViewModel = viewModel.fundsMoveViewModel(at: indexPath) else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BorrowTableViewCell", for: indexPath) as? BorrowTableViewCell,
+            let borrowViewModel = viewModel.borrowViewModel(at: indexPath) else {
                 return UITableViewCell()
         }
-        cell.viewModel = fundsMoveViewModel
+        cell.viewModel = borrowViewModel
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let fundsMoveViewModel = viewModel.fundsMoveViewModel(at: indexPath) else { return }
+        guard let borrowViewModel = viewModel.borrowViewModel(at: indexPath) else { return }
         close()
         guard let expenseSourceStartable = expenseSourceStartable,
             let expenseSourceCompletable = expenseSourceCompletable else {
                 return
         }
-        delegate?.didSelect(debtTransaction: fundsMoveViewModel,
+        delegate?.didSelect(borrow: borrowViewModel,
                             expenseSourceStartable: expenseSourceStartable,
                             expenseSourceCompletable: expenseSourceCompletable)
     }

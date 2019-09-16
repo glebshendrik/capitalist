@@ -11,6 +11,15 @@ import Foundation
 enum BorrowType : String, Codable {
     case debt = "Debt"
     case loan = "Loan"
+    
+    var title: String {
+        switch self {
+        case .debt:
+            return "Мне должны"
+        case .loan:
+            return "Я должен"
+        }
+    }
 }
 
 struct Borrow : Decodable {

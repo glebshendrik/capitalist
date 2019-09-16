@@ -118,25 +118,25 @@ extension MainViewController {
     private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
         
         if expenseSourceStartable.hasWaitingDebts {
-            showDebtsSheet(notReturnTitle: "Занять",
+            showBorrowsSheet(notReturnTitle: "Занять",
                            returnTitle: "Возвращение долга",
-                           waitingDebts: expenseSourceStartable.waitingDebts,
+                           waitingBorrows: expenseSourceStartable.waitingDebts,
                            expenseSourceStartable: expenseSourceStartable,
                            expenseSourceCompletable: expenseSourceCompletable,
-                           waitingDebtsType: .debts)
+                           borrowType: .debt)
         } else if expenseSourceCompletable.hasWaitingLoans {
-            showDebtsSheet(notReturnTitle: "Одолжить",
+            showBorrowsSheet(notReturnTitle: "Одолжить",
                            returnTitle: "Возвращение займа",
-                           waitingDebts: expenseSourceCompletable.waitingLoans,
+                           waitingBorrows: expenseSourceCompletable.waitingLoans,
                            expenseSourceStartable: expenseSourceStartable,
                            expenseSourceCompletable: expenseSourceCompletable,
-                           waitingDebtsType: .loans)
+                           borrowType: .loan)
         } else {
-            showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, debtTransaction: nil)
+            showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, borrow: nil)
         }
     }
     
-    private func showDebtsSheet(notReturnTitle: String, returnTitle: String, waitingDebts: [FundsMoveViewModel], expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, waitingDebtsType: WaitingDebtsType) {
+    private func showBorrowsSheet(notReturnTitle: String, returnTitle: String, waitingBorrows: [BorrowViewModel], expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, borrowType: BorrowType) {
         let alertController = UIAlertController(title: nil,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
@@ -144,17 +144,17 @@ extension MainViewController {
         alertController.addAction(title: notReturnTitle,
                                   style: .default,
                                   isEnabled: true) { _ in
-                                    self.showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, debtTransaction: nil)
+                                    self.showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, borrow: nil)
         }
         
         alertController.addAction(title: returnTitle,
                                   style: .default,
                                   isEnabled: true) { _ in
                                     
-                                    self.show(waitingDebts: waitingDebts,
+                                    self.show(waitingBorrows: waitingBorrows,
                                               expenseSourceStartable: expenseSourceStartable,
                                               expenseSourceCompletable: expenseSourceCompletable,
-                                              waitingDebtsType: waitingDebtsType)
+                                              borrowType: borrowType)
         }
         
         alertController.addAction(title: "Отмена", style: .cancel, isEnabled: true, handler: nil)
@@ -162,26 +162,21 @@ extension MainViewController {
         present(alertController, animated: true)
     }
     
-    private func show(waitingDebts: [FundsMoveViewModel], expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, waitingDebtsType: WaitingDebtsType) {
+    private func show(waitingBorrows: [BorrowViewModel], expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, borrowType: BorrowType) {
         
-        if let waitingDebtsViewController = router.viewController(.WaitingDebtsViewController) as? WaitingDebtsViewController {
+        if let waitingDebtsViewController = router.viewController(.WaitingDebtsViewController) as? WaitingBorrowsViewController {
             
-            waitingDebtsViewController.set(delegate: self, expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, waitingDebts: waitingDebts, waitingDebtsType: waitingDebtsType)
+            waitingDebtsViewController.set(delegate: self, expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, waitingBorrows: waitingBorrows, borrowType: borrowType)
             
             slideUp(viewController: waitingDebtsViewController)
         }
     }
     
-    private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
-        if  let fundsMoveEditNavigationController = router.viewController(.FundsMoveEditNavigationController) as? UINavigationController,
-            let fundsMoveEditViewController = fundsMoveEditNavigationController.topViewController as? FundsMoveEditViewController {
-            
-            fundsMoveEditViewController.set(delegate: self)
-            
-            fundsMoveEditViewController.set(startable: expenseSourceStartable, completable: expenseSourceCompletable, debtTransaction: debtTransaction)
-            
-            present(fundsMoveEditNavigationController, animated: true, completion: nil)
-        }
+    private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, borrow: BorrowViewModel?) {
+        modal(factory.fundsMoveEditViewController(delegate: self,
+                                                  startable: expenseSourceStartable,
+                                                  completable: expenseSourceCompletable,
+                                                  borrow: borrow))
     }
     
     private func showExpenseEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseCategoryCompletable: ExpenseCategoryViewModel) {
@@ -197,8 +192,8 @@ extension MainViewController {
     }
 }
 
-extension MainViewController : WaitingDebtsViewControllerDelegate {
-    func didSelect(debtTransaction: FundsMoveViewModel, expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
-        showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, debtTransaction: debtTransaction)
+extension MainViewController : WaitingBorrowsViewControllerDelegate {
+    func didSelect(borrow: BorrowViewModel, expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
+        showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, borrow: borrow)
     }
 }

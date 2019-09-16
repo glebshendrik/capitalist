@@ -145,7 +145,7 @@ class FiltersSelectionViewModel {
     
     private func loadExpenseSourceFilters() -> Promise<Void> {
         return  firstly {
-                    expenseSourcesCoordinator.index(noDebts: false)
+                    expenseSourcesCoordinator.index(noDebts: false, accountType: nil, currency: nil)
                 }.get { expenseSources in
                     let expenseSourceFilters: [ExpenseSourceHistoryTransactionFilter] = expenseSources.map { expenseSource in
                         

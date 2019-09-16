@@ -167,8 +167,8 @@ extension ApplicationAssembly {
         }
         
         // WaitingDebtsViewController
-        container.registerForSkrudzhStoryboard(WaitingDebtsViewController.self) { (r, c) in
-            c.viewModel = r.resolve(WaitingDebtsViewModel.self)
+        container.registerForSkrudzhStoryboard(WaitingBorrowsViewController.self) { (r, c) in
+            c.viewModel = r.resolve(WaitingBorrowsViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         

@@ -42,8 +42,8 @@ struct ExpenseSource : Decodable {
     var creditLimitCents: Int?
     let order: Int
     let deletedAt: Date?
-    let waitingDebts: [FundsMove]?
-    let waitingLoans: [FundsMove]?
+    let waitingDebts: [Borrow]?
+    let waitingLoans: [Borrow]?
     let accountConnection: AccountConnection?
     
     enum CodingKeys: String, CodingKey {

@@ -67,7 +67,13 @@ class ExpenseEditViewController : TransactionEditViewController {
     }
 
     override func didTapSource() {
-        slideUp(viewController: factory.expenseSourceSelectViewController(delegate: self, skipExpenseSourceId: nil, selectionType: .startable))
+        slideUp(viewController:
+            factory.expenseSourceSelectViewController(delegate: self,
+                                                      skipExpenseSourceId: nil,
+                                                      selectionType: .startable,
+                                                      noDebts: true,
+                                                      accountType: nil,
+                                                      currency: nil))
     }
     
     override func didTapDestination() {

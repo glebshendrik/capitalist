@@ -12,9 +12,6 @@ protocol TransactionEditTableControllerDelegate {
     func didAppear()
     func didTapSaveAtYesterday()
     func didTapCalendar()
-    func didTapWhom()
-    func didTapBorrowedTill()
-    func didTapReturn()
     func didTapSource()
     func didTapDestination()
     func didChange(amount: String?)
@@ -35,8 +32,6 @@ class TransactionEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var commentView: UITextView!
     
     // Cells
-    @IBOutlet weak var debtCell: UITableViewCell!
-    @IBOutlet weak var returnCell: UITableViewCell!
     @IBOutlet weak var sourceCell: UITableViewCell!
     @IBOutlet weak var destinationCell: UITableViewCell!
     @IBOutlet weak var amountCell: UITableViewCell!
@@ -47,9 +42,6 @@ class TransactionEditTableController : FormFieldsTableViewController {
     // Buttons
     @IBOutlet weak var yesterdayButton: UIButton!
     @IBOutlet weak var calendarButton: UIButton!
-    @IBOutlet weak var whomButton: UIButton!
-    @IBOutlet weak var borrowedTillButton: UIButton!
-    @IBOutlet weak var returnButton: UIButton!
     @IBOutlet weak var removeButton: UIButton!
     
     var delegate: TransactionEditTableControllerDelegate?
@@ -123,19 +115,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
     
     @IBAction func didTapCalendarButton(_ sender: Any) {
         delegate?.didTapCalendar()
-    }
-    
-    @IBAction func didTapWhomButton(_ sender: Any) {
-        delegate?.didTapWhom()
-    }
-    
-    @IBAction func didTapBorrowedTillButton(_ sender: Any) {
-        delegate?.didTapBorrowedTill()
-    }
-    
-    @IBAction func didTapReturnButton(_ sender: Any) {
-        delegate?.didTapReturn()
-    }
+    }    
     
     @IBAction func didTapRemoveButton(_ sender: UIButton) {
         delegate?.didTapRemoveButton()

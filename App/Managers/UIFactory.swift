@@ -102,11 +102,19 @@ class UIFactory : UIFactoryProtocol {
     
     func expenseSourceSelectViewController(delegate: ExpenseSourceSelectViewControllerDelegate,
                                            skipExpenseSourceId: Int?,
-                                           selectionType: ExpenseSourceSelectionType) -> ExpenseSourceSelectViewController? {
+                                           selectionType: ExpenseSourceSelectionType,
+                                           noDebts: Bool,
+                                           accountType: AccountType?,
+                                           currency: String?) -> ExpenseSourceSelectViewController? {
         
         let expenseSourceSelectViewController = router.viewController(.ExpenseSourceSelectViewController) as? ExpenseSourceSelectViewController
         
-        expenseSourceSelectViewController?.set(delegate: delegate, skipExpenseSourceId: skipExpenseSourceId, selectionType: selectionType)
+        expenseSourceSelectViewController?.set(delegate: delegate,
+                                               skipExpenseSourceId: skipExpenseSourceId,
+                                               selectionType: selectionType,
+                                               noDebts: noDebts,
+                                               accountType: accountType,
+                                               currency: currency)
         return expenseSourceSelectViewController
     }
     
@@ -118,14 +126,14 @@ class UIFactory : UIFactoryProtocol {
     }
     
     func fundsMoveEditViewController(delegate: FundsMoveEditViewControllerDelegate,
-                                     startable: ExpenseSourceViewModel,
-                                     completable: ExpenseSourceViewModel,
-                                     debtTransaction: FundsMoveViewModel?) -> UINavigationController? {
+                                     startable: ExpenseSourceViewModel?,
+                                     completable: ExpenseSourceViewModel?,
+                                     borrow: BorrowViewModel?) -> UINavigationController? {
         let fundsMoveEditNavigationController = router.viewController(.FundsMoveEditNavigationController) as? UINavigationController
         let fundsMoveEditViewController = fundsMoveEditNavigationController?.topViewController as? FundsMoveEditViewController
         
         fundsMoveEditViewController?.set(delegate: delegate)
-        fundsMoveEditViewController?.set(startable: startable, completable: completable, debtTransaction: debtTransaction)
+        fundsMoveEditViewController?.set(startable: startable, completable: completable, borrow: borrow)
         return fundsMoveEditNavigationController
     }
     

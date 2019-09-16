@@ -35,9 +35,17 @@ class ExpenseSourceSelectViewController : UIViewController, UIMessagePresenterMa
         loadExpenseSources()
     }
     
-    func set(delegate: ExpenseSourceSelectViewControllerDelegate, skipExpenseSourceId: Int?, selectionType: ExpenseSourceSelectionType) {
+    func set(delegate: ExpenseSourceSelectViewControllerDelegate,
+             skipExpenseSourceId: Int?,
+             selectionType: ExpenseSourceSelectionType,
+             noDebts: Bool,
+             accountType: AccountType?,
+             currency: String?) {
         self.delegate = delegate
         self.viewModel.skipExpenseSourceId = skipExpenseSourceId
+        self.viewModel.noDebts = noDebts
+        self.viewModel.accountType = accountType
+        self.viewModel.currency = currency
         self.selectionType = selectionType
     }
     
@@ -45,14 +53,14 @@ class ExpenseSourceSelectViewController : UIViewController, UIMessagePresenterMa
         set(loader, hidden: false, animated: false)
         firstly {
             viewModel.loadExpenseSources()
-            }.done {
-                self.updateUI()
-            }
-            .catch { e in
-                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки кошельков", theme: .error)
-                self.close()
-            }.finally {
-                self.set(self.loader, hidden: true)
+        }.done {
+            self.updateUI()
+        }
+        .catch { e in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки кошельков", theme: .error)
+            self.close()
+        }.finally {
+            self.set(self.loader, hidden: true)
         }
     }
     

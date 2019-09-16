@@ -29,7 +29,6 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     override func updateUI() {
         super.updateUI()
         updateToolbarUI()
-        updateDebtUI()
         updateStartableUI()
         updateCompletableUI()
         updateAmountUI()

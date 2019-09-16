@@ -135,7 +135,7 @@ class TransactionEditViewModel {
                 }
     }
     
-    private func loadTransaction() -> Promise<Void> {
+    func loadTransaction() -> Promise<Void> {
         guard let transactionableId = transactionableId else {
             return Promise(error: TransactionError.transactionIsNotSpecified)
         }

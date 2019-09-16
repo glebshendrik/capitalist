@@ -28,11 +28,15 @@ struct APIRouteQueryParameters {
             return [ "delete_transactions" : deleteTransactions.string ]
         case .firstExpenseSource(_, let accountType, let currency):
             return [ "account_type" : accountType.rawValue, "currency" : currency ]
-        case .indexExpenseSources(_, let noDebts, let currency):
+        case .indexExpenseSources(_, let noDebts, let accountType, let currency):
+            var indexExpenseSourcesParams = [ "no_debts" : noDebts.string ]
             if let currency = currency {
-                return [ "no_debts" : noDebts.string, "currency" : currency ]
+                indexExpenseSourcesParams["currency"] = currency
             }
-            return [ "no_debts" : noDebts.string ]
+            if let accountType = accountType {
+                indexExpenseSourcesParams["account_type"] = accountType.rawValue
+            }
+            return indexExpenseSourcesParams
         case .indexUserExpenseCategories(_, let includedInBalance):
             return [ "included_in_balance" : includedInBalance.string ]
         case .createIncome(_, let shouldCloseActive):

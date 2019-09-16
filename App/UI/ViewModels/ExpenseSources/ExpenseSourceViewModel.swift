@@ -75,8 +75,8 @@ class ExpenseSourceViewModel {
         return expenseSource.deletedAt != nil
     }
     
-    public private(set) var waitingDebts: [FundsMoveViewModel] = []
-    public private(set) var waitingLoans: [FundsMoveViewModel] = []
+    public private(set) var waitingDebts: [BorrowViewModel] = []
+    public private(set) var waitingLoans: [BorrowViewModel] = []
     
     var hasWaitingDebts: Bool {
         return waitingDebts.count > 0
@@ -92,8 +92,8 @@ class ExpenseSourceViewModel {
     
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
-        waitingDebts = expenseSource.waitingDebts?.map { FundsMoveViewModel(fundsMove: $0) } ?? []
-        waitingLoans = expenseSource.waitingLoans?.map { FundsMoveViewModel(fundsMove: $0) } ?? []
+        waitingDebts = expenseSource.waitingDebts?.map { BorrowViewModel(borrow: $0) } ?? []
+        waitingLoans = expenseSource.waitingLoans?.map { BorrowViewModel(borrow: $0) } ?? []
     }
     
     func asHistoryTransactionFilter() -> ExpenseSourceHistoryTransactionFilter {

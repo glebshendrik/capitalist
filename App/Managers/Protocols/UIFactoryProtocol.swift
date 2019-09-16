@@ -45,14 +45,17 @@ protocol UIFactoryProtocol {
     
     func expenseSourceSelectViewController(delegate: ExpenseSourceSelectViewControllerDelegate,
                                            skipExpenseSourceId: Int?,
-                                           selectionType: ExpenseSourceSelectionType) -> ExpenseSourceSelectViewController?
+                                           selectionType: ExpenseSourceSelectionType,
+                                           noDebts: Bool,
+                                           accountType: AccountType?,
+                                           currency: String?) -> ExpenseSourceSelectViewController?
     
     func expenseCategorySelectViewController(delegate: ExpenseCategorySelectViewControllerDelegate) -> ExpenseCategorySelectViewController?
     
     func fundsMoveEditViewController(delegate: FundsMoveEditViewControllerDelegate,
-                                     startable: ExpenseSourceViewModel,
-                                     completable: ExpenseSourceViewModel,
-                                     debtTransaction: FundsMoveViewModel?) -> UINavigationController?
+                                     startable: ExpenseSourceViewModel?,
+                                     completable: ExpenseSourceViewModel?,
+                                     borrow: BorrowViewModel?) -> UINavigationController?
     
     func recurrencePicker(delegate: RecurrencePickerDelegate,
                           recurrenceRule: RecurrenceRule?,

@@ -65,13 +65,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         
         present(alertController, animated: true)
     }
-    
-    @objc func didTapWhom() { }
-    
-    @objc func didTapBorrowedTill() { }
-    
-    @objc func didTapReturn() { }
-    
+        
     @objc func didTapSource() { }
     
     @objc func didTapDestination() { }
