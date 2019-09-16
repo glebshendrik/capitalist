@@ -23,6 +23,7 @@ struct Infrastructure {
         case Settings
         case Statistics
         case Balance
+        case Borrows
         
         var name: String { return self.rawValue }
         
@@ -34,6 +35,7 @@ struct Infrastructure {
                     .Settings,
                     .Statistics,
                     .Balance,
+                    .Borrows,
                     .IncomeSources,
                     .ExpenseSources,
                     .ExpenseCategories,
@@ -83,7 +85,12 @@ struct Infrastructure {
         case ExpenseEditViewController
         case FundsMoveEditNavigationController
         case FundsMoveEditViewController
-        case WaitingDebtsViewController
+        
+        // Borrows
+        case BorrowsViewController
+        case BorrowEditNavigationController
+        case BorrowEditViewController
+        case WaitingBorrowsViewController
         
         // Common
         case IconsViewController
@@ -156,8 +163,7 @@ struct Infrastructure {
                  .ExpenseEditNavigationController,
                  .ExpenseEditViewController,
                  .FundsMoveEditNavigationController,
-                 .FundsMoveEditViewController,
-                 .WaitingDebtsViewController:
+                 .FundsMoveEditViewController:
                 return .Transactions
             case .IconsViewController,
                  .CurrenciesViewController,
@@ -186,6 +192,11 @@ struct Infrastructure {
                 return .Statistics
             case .BalanceViewController:
                 return .Balance
+            case .BorrowsViewController,
+                 .BorrowEditNavigationController,
+                 .BorrowEditViewController,
+                 .WaitingBorrowsViewController:
+                return .Borrows
             }
         }
     }

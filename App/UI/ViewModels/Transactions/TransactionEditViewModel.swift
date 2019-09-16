@@ -19,16 +19,31 @@ class TransactionEditViewModel {
     
     var transactionableId: Int?
     
-    var startable: TransactionStartable? = nil
-    var completable: TransactionCompletable? = nil
+    var startable: TransactionStartable? = nil {
+        didSet {
+            if startable?.currency.code != oldValue?.currency.code {
+                amount = nil
+                amountConverted = nil
+            }
+        }
+    }
+    var completable: TransactionCompletable? = nil {
+        didSet {
+            if completable?.currency.code != oldValue?.currency.code {
+                convertedAmount = nil
+                convertedAmountConverted = nil
+            }
+        }
+    }
     var amount: String? = nil {
         didSet {
-            convertedAmountConverted = convert(amount: amount, isForwardConversion: true)
+            updateConvertedAmountConverted()
+            
         }
     }
     var convertedAmount: String? = nil {
         didSet {
-            amountConverted = convert(amount: convertedAmount, isForwardConversion: false)
+            updateAmountConverted()
         }
     }
     var comment: String? = nil
@@ -91,7 +106,12 @@ class TransactionEditViewModel {
         return startableCurrency?.code != completableCurrency?.code
     }
     
-    var exchangeRate: Float = 1.0
+    var exchangeRate: Float = 1.0 {
+        didSet {
+            updateAmountConverted()
+            updateConvertedAmountConverted()
+        }
+    }
     
     var removeButtonHidden: Bool { return isNew }
     
@@ -99,6 +119,14 @@ class TransactionEditViewModel {
          currencyConverter: CurrencyConverterProtocol) {
         self.exchangeRatesCoordinator = exchangeRatesCoordinator
         self.currencyConverter = currencyConverter
+    }
+    
+    func updateAmountConverted() {
+        amountConverted = convert(amount: convertedAmount, isForwardConversion: false)
+    }
+    
+    func updateConvertedAmountConverted() {
+        convertedAmountConverted = convert(amount: amount, isForwardConversion: true)
     }
     
     func loadData() -> Promise<Void> {

@@ -23,7 +23,7 @@ class BorrowEditViewController : FormTransactionsDependableEditViewController {
     var tableController: BorrowEditTableController!
     var delegate: BorrowEditViewControllerDelegate?
     
-    override var shouldLoadData: Bool { return !viewModel.isNew }
+    override var shouldLoadData: Bool { return true }
     override var formTitle: String { return viewModel.title }
     override var saveErrorMessage: String { return "Ошибка при сохранении" }
     override var removeErrorMessage: String { return "Ошибка при удалении" }
@@ -217,6 +217,7 @@ extension BorrowEditViewController {
     func update(currency: Currency) {
         viewModel.selectedCurrency = currency
         updateCurrencyUI()
+        updateExpenseSourceUI()
     }
     
     func update(borrowedAt: Date?) {
@@ -279,11 +280,12 @@ extension BorrowEditViewController {
     }
     
     func updateReturnButtonUI() {
-        tableController.returnLabel.text = viewModel.returnTitle
+        tableController.returnButton.setTitle(viewModel.returnTitle, for: .normal)
         tableController.set(cell: tableController.returnCell, hidden: viewModel.returnButtonHidden, animated: true)
     }
     
     func updateRemoveButtonUI() {
+        tableController.removeButton.setTitle(viewModel.removeTitle, for: .normal)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden)
     }
     

@@ -161,4 +161,22 @@ class UIFactory : UIFactoryProtocol {
         viewController?.set(email: email)
         return viewController
     }
+    
+    func borrowEditViewController(delegate: BorrowEditViewControllerDelegate,
+                                  type: BorrowType,
+                                  borrowId: Int?,
+                                  expenseSourceFrom: ExpenseSourceViewModel?,
+                                  expenseSourceTo: ExpenseSourceViewModel?) -> UINavigationController? {
+        let borrowEditNavigationController = router.viewController(.BorrowEditNavigationController) as? UINavigationController
+        let borrowEditViewController = borrowEditNavigationController?.topViewController as? BorrowEditViewController
+        
+        borrowEditViewController?.set(delegate: delegate)
+        if let borrowId = borrowId {
+            borrowEditViewController?.set(borrowId: borrowId, type: type)
+        }
+        else {
+            borrowEditViewController?.set(type: type, expenseSourceFrom: expenseSourceFrom, expenseSourceTo: expenseSourceTo)
+        }
+        return borrowEditNavigationController
+    }
 }

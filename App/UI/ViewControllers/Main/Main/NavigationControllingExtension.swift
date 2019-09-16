@@ -132,6 +132,14 @@ extension MainViewController {
                            expenseSourceCompletable: expenseSourceCompletable,
                            borrowType: .loan)
         } else {
+            showBorrowOrFundsMove(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable)
+        }
+    }
+    
+    private func showBorrowOrFundsMove(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
+        if expenseSourceStartable.isDebt || expenseSourceCompletable.isDebt {
+            showBorrowEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable)
+        } else {
             showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, borrow: nil)
         }
     }
@@ -144,7 +152,7 @@ extension MainViewController {
         alertController.addAction(title: notReturnTitle,
                                   style: .default,
                                   isEnabled: true) { _ in
-                                    self.showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, borrow: nil)
+                                    self.showBorrowOrFundsMove(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable)
         }
         
         alertController.addAction(title: returnTitle,
@@ -164,11 +172,11 @@ extension MainViewController {
     
     private func show(waitingBorrows: [BorrowViewModel], expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, borrowType: BorrowType) {
         
-        if let waitingDebtsViewController = router.viewController(.WaitingDebtsViewController) as? WaitingBorrowsViewController {
+        if let waitingBorrowsViewController = router.viewController(.WaitingBorrowsViewController) as? WaitingBorrowsViewController {
             
-            waitingDebtsViewController.set(delegate: self, expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, waitingBorrows: waitingBorrows, borrowType: borrowType)
+            waitingBorrowsViewController.set(delegate: self, expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, waitingBorrows: waitingBorrows, borrowType: borrowType)
             
-            slideUp(viewController: waitingDebtsViewController)
+            slideUp(viewController: waitingBorrowsViewController)
         }
     }
     
@@ -177,6 +185,15 @@ extension MainViewController {
                                                   startable: expenseSourceStartable,
                                                   completable: expenseSourceCompletable,
                                                   borrow: borrow))
+    }
+    
+    private func showBorrowEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
+        let type = expenseSourceStartable.isDebt ? BorrowType.loan : BorrowType.debt
+        modal(factory.borrowEditViewController(delegate: self,
+                                               type: type,
+                                               borrowId: nil,
+                                               expenseSourceFrom: expenseSourceStartable,
+                                               expenseSourceTo: expenseSourceCompletable))
     }
     
     private func showExpenseEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseCategoryCompletable: ExpenseCategoryViewModel) {

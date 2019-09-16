@@ -40,7 +40,8 @@ class BorrowEditViewModel {
     var selectedCurrency: Currency? = nil {
         didSet {
             if selectedCurrency?.code != oldValue?.code {
-                selectedExpenseSource = nil
+                selectedExpenseSourceFrom = nil
+                selectedExpenseSourceTo = nil
             }
         }
     }
@@ -162,8 +163,13 @@ class BorrowEditViewModel {
     
     func set(type: BorrowType, expenseSourceFrom: ExpenseSourceViewModel?, expenseSourceTo: ExpenseSourceViewModel?) {
         self.type = type
+        if type == .debt {
+            selectedCurrency = expenseSourceTo?.currency
+        } else {
+            selectedCurrency = expenseSourceFrom?.currency
+        }
         self.selectedExpenseSourceFrom = expenseSourceFrom
-        self.selectedExpenseSourceTo = expenseSourceTo
+        self.selectedExpenseSourceTo = expenseSourceTo        
     }
     
     func set(borrowId: Int, type: BorrowType) {
@@ -187,12 +193,34 @@ class BorrowEditViewModel {
     
     func loadData() -> Promise<Void> {
         if isNew {
-            return Promise.value(())
+            return loadDefaults()
         }
         return  firstly {
                     loadBorrow()
                 }.then { borrow in
                     self.loadBorrowingTransaction(id: borrow.borrowingTransactionId)
+                }
+    }
+    
+    func loadDefaults() -> Promise<Void> {
+        guard selectedCurrency == nil else { return Promise.value(()) }
+        return  firstly {
+                    loadDefaultCurrency()
+                }.then {
+                    self.loadDefaultExpenseSource()
+                }
+    }
+    
+    func loadDefaultCurrency() -> Promise<Void> {
+        return  firstly {
+                    accountCoordinator.loadCurrentUser()
+                }.done { user in
+                    self.selectedCurrency = user.currency
+                    if self.isNew {
+                        if self.amount == nil {
+                            self.amount = 0.moneyDecimalString(with: self.selectedCurrency)
+                        }
+                    }
                 }
     }
     

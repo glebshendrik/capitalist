@@ -166,7 +166,7 @@ extension ApplicationAssembly {
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         
-        // WaitingDebtsViewController
+        // WaitingBorrowsViewController
         container.registerForSkrudzhStoryboard(WaitingBorrowsViewController.self) { (r, c) in
             c.viewModel = r.resolve(WaitingBorrowsViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
@@ -193,6 +193,16 @@ extension ApplicationAssembly {
         // AccountsViewController
         container.registerForSkrudzhStoryboard(AccountsViewController.self) { (r, c) in
             c.viewModel = r.resolve(AccountsViewModel.self)
+        }
+        
+        // BorrowsViewController
+        container.registerForSkrudzhStoryboard(BorrowsViewController.self) { (r, c) in
+            c.viewModel = r.resolve(BorrowsViewModel.self)
+        }
+        
+        // BorrowEditViewController
+        container.registerForSkrudzhStoryboard(BorrowEditViewController.self) { (r, c) in
+            c.viewModel = r.resolve(BorrowEditViewModel.self)
         }
     }
 }

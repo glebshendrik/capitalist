@@ -36,7 +36,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var commentView: UITextView!
     
     @IBOutlet weak var returnButton: UIButton!
-    @IBOutlet weak var returnLabel: UILabel!
+    @IBOutlet weak var removeButton: UIButton!
     
     @IBOutlet weak var onBalanceCell: UITableViewCell!
     @IBOutlet weak var expenseSourceCell: UITableViewCell!

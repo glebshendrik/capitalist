@@ -9,10 +9,11 @@
 import UIKit
 import PromiseKit
 
-class BorrowsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, ApplicationRouterDependantProtocol, NavigationBarColorable {
+class BorrowsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, ApplicationRouterDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
     
     var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
     var router: ApplicationRouterProtocol!
+    var factory: UIFactoryProtocol!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: BorrowsViewModel!
     
@@ -85,9 +86,9 @@ extension BorrowsViewController {
         loansSupport = LoansTableSupport(viewModel: viewModel, delegate: self)
         
         debtsTableView.dataSource = debtsSupport
-        loansTableView.delegate = loansSupport
+        loansTableView.dataSource = loansSupport
         
-        debtsTableView.dataSource = debtsSupport
+        debtsTableView.delegate = debtsSupport
         loansTableView.delegate = loansSupport
         
         debtsTableView.tableFooterView = UIView()
@@ -181,19 +182,38 @@ extension BorrowsViewController : LoansTableSupportDelegate, DebtsTableSupportDe
     }
 }
 
-extension BorrowsViewController {
+extension BorrowsViewController : BorrowEditViewControllerDelegate {
+    func didCreateDebt() {
+        loadDebts()
+    }
+    
+    func didCreateLoan() {
+        loadLoans()
+    }
+    
+    func didUpdateDebt() {
+        loadDebts()
+    }
+    
+    func didUpdateLoan() {
+        loadLoans()
+    }
+    
+    func didRemoveDebt() {
+        loadDebts()
+    }
+    
+    func didRemoveLoan() {
+        loadLoans()
+    }
+    
     
     func showBorrow(_ borrow: BorrowViewModel) {
-//        if  let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController {
-//
-//            statisticsViewController.set(sourceOrDestinationFilter: filterViewModel)
-//
-//            navigationController?.pushViewController(statisticsViewController)
-//        }
+        modal(factory.borrowEditViewController(delegate: self, type: borrow.type, borrowId: borrow.id, expenseSourceFrom: nil, expenseSourceTo: nil))
     }
     
     func showNewBorrow() {
-        
+        modal(factory.borrowEditViewController(delegate: self, type: viewModel.selectedBorrowType, borrowId: nil, expenseSourceFrom: nil, expenseSourceTo: nil))
     }
 }
 

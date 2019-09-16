@@ -66,4 +66,10 @@ protocol UIFactoryProtocol {
     
     func resetPasswordViewController(email: String?) -> ResetPasswordViewController?
     
+    func borrowEditViewController(delegate: BorrowEditViewControllerDelegate,
+                                  type: BorrowType,
+                                  borrowId: Int?,
+                                  expenseSourceFrom: ExpenseSourceViewModel?,
+                                  expenseSourceTo: ExpenseSourceViewModel?) -> UINavigationController?
+    
 }

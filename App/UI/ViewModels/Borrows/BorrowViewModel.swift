@@ -39,6 +39,10 @@ class BorrowViewModel {
         return amountLeft(shouldRound: false)
     }
     
+    var amountLeftDecimal: String {
+        return borrow.amountCentsLeft.moneyDecimalString(with: currency) ?? ""
+    }
+    
     var diplayAmount: String {
         return amountLeftRounded
     }

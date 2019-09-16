@@ -59,7 +59,7 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     }
     
     var isReturningLoan: Bool {
-        return isReturn && borrow!.isDebt
+        return isReturn && borrow!.isLoan
     }
     
     var startableFilter: ExpenseSourcesFilter {
@@ -170,18 +170,9 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
     }
     
     func set(startable: ExpenseSourceViewModel?, completable: ExpenseSourceViewModel?, borrow: BorrowViewModel?) {
+        self.borrow = borrow
         self.startable = startable
         self.completable = completable
-        self.borrow = borrow
-        func amountDebt(expenseSource: ExpenseSourceViewModel?) -> String? {
-            guard   let borrow = borrow,
-                    expenseSource?.currency.code == borrow.currency.code else {
-                return nil
-            }
-            return borrow.amountLeft
-        }
-        self.amount = amountDebt(expenseSource: startable)
-        self.convertedAmount = amountDebt(expenseSource: completable)
     }
     
 //    func set(startable: ExpenseSourceViewModel, completable: ExpenseSourceViewModel, debtTransaction: FundsMoveViewModel?) {
@@ -235,6 +226,16 @@ class FundsMoveEditViewModel : TransactionEditViewModel {
                     loadExpenseSourcesFromBorrowingTransaction()
                 }.then {
                     self.loadDefaultDebtExpenseSourceIfNeeded()
+                }.get {
+                    func amountDebt(expenseSource: ExpenseSourceViewModel?) -> String? {
+                        guard   let borrow = self.borrow,
+                            expenseSource?.currency.code == borrow.currency.code else {
+                                return nil
+                        }
+                        return borrow.amountLeftDecimal
+                    }
+                    self.amount = amountDebt(expenseSource: self.expenseSourceFromStartable)
+                    self.convertedAmount = amountDebt(expenseSource: self.expenseSourceToCompletable)
                 }
     }
     

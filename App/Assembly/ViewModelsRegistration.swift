@@ -70,6 +70,10 @@ extension ApplicationAssembly {
         
         container.autoregister(ProvidersViewModel.self, initializer: ProvidersViewModel.init)
         
-        container.autoregister(AccountsViewModel.self, initializer: AccountsViewModel.init)        
+        container.autoregister(AccountsViewModel.self, initializer: AccountsViewModel.init)
+        
+        container.autoregister(BorrowsViewModel.self, initializer: BorrowsViewModel.init)
+        
+        container.autoregister(BorrowEditViewModel.self, initializer: BorrowEditViewModel.init)
     }
 }

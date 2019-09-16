@@ -8,7 +8,33 @@
 
 import UIKit
 
-extension MainViewController: FundsMoveEditViewControllerDelegate {
+extension MainViewController: FundsMoveEditViewControllerDelegate, BorrowEditViewControllerDelegate {
+    func didCreateDebt() {
+        soundsManager.playTransactionCompletedSound()
+        updateFundsMoveDependentData()
+    }
+    
+    func didCreateLoan() {
+        soundsManager.playTransactionCompletedSound()
+        updateFundsMoveDependentData()
+    }
+    
+    func didUpdateDebt() {
+        updateFundsMoveDependentData()
+    }
+    
+    func didUpdateLoan() {
+        updateFundsMoveDependentData()
+    }
+    
+    func didRemoveDebt() {
+        updateFundsMoveDependentData()
+    }
+    
+    func didRemoveLoan() {
+        updateFundsMoveDependentData()
+    }
+    
     func didCreateFundsMove() {
         soundsManager.playTransactionCompletedSound()
         updateFundsMoveDependentData()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 open class PagedCollectionViewLayout : UICollectionViewLayout {
     @IBInspectable
     public var columns: Int = 4
