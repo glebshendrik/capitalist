@@ -79,8 +79,7 @@ class BorrowEditViewController : FormTransactionsDependableEditViewController {
         updateDatesUI()
         updateExpenseSourceUI()
         updateReturnButtonUI()
-        updateRemoveButtonUI()
-        updateTableUI(animated: true)
+        updateRemoveButtonUI(reload: true, animated: true)
     }
 }
 
@@ -141,7 +140,6 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
     }
     
     private func showReturnTransactionScreen() {
-        
         modal(factory.fundsMoveEditViewController(delegate: self,
                                                   startable: nil,
                                                   completable: nil,
@@ -158,7 +156,7 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
     
     func didChange(alreadyOnBalance: Bool) {
         viewModel.onBalance = alreadyOnBalance
-        updateExpenseSourceUI()
+        updateExpenseSourceUI(reload: true, animated: true)
     }
     
     func didChange(comment: String?) {
@@ -217,7 +215,7 @@ extension BorrowEditViewController {
     func update(currency: Currency) {
         viewModel.selectedCurrency = currency
         updateCurrencyUI()
-        updateExpenseSourceUI()
+        updateExpenseSourceUI(reload: true, animated: true)
     }
     
     func update(borrowedAt: Date?) {
@@ -232,7 +230,7 @@ extension BorrowEditViewController {
     
     func update(expenseSource: ExpenseSourceViewModel?) {
         viewModel.selectedExpenseSource = expenseSource
-        updateUI()
+        updateExpenseSourceUI(reload: true, animated: false)
     }
 }
 
@@ -267,33 +265,36 @@ extension BorrowEditViewController {
         tableController.amountField.currency = viewModel.selectedCurrency
     }
     
-    func updateExpenseSourceUI() {
-        tableController.set(cell: tableController.onBalanceCell, hidden: viewModel.onBalanceSwitchHidden)
+    func updateExpenseSourceUI(reload: Bool = false, animated: Bool = false) {
+        tableController.set(cell: tableController.onBalanceCell, hidden: viewModel.onBalanceSwitchHidden, animated: false, reload: false)
         tableController.onBalanceSwitchField.value = viewModel.onBalance
         
-        tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden)
+        tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: false, reload: false)
         tableController.expenseSourceField.placeholder = viewModel.expenseSourceTitle
         tableController.expenseSourceField.text = viewModel.expenseSourceName
         tableController.expenseSourceField.subValue = viewModel.expenseSourceAmount
         tableController.expenseSourceField.imageName = viewModel.expenseSourceIconDefaultImageName
         tableController.expenseSourceField.imageURL = viewModel.expenseSourceIconURL
+        if reload {
+            tableController.reloadData(animated: animated)
+        }
     }
     
-    func updateReturnButtonUI() {
+    func updateReturnButtonUI(reload: Bool = false, animated: Bool = false) {
         tableController.returnButton.setTitle(viewModel.returnTitle, for: .normal)
-        tableController.set(cell: tableController.returnCell, hidden: viewModel.returnButtonHidden, animated: true)
+        tableController.set(cell: tableController.returnCell, hidden: viewModel.returnButtonHidden, animated: animated, reload: reload)
     }
     
-    func updateRemoveButtonUI() {
+    func updateRemoveButtonUI(reload: Bool = false, animated: Bool = false) {
         tableController.removeButton.setTitle(viewModel.removeTitle, for: .normal)
-        tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden)
+        tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: animated, reload: reload)
     }
     
     func updateTableUI(animated: Bool = true) {
-        tableController.set(cell: tableController.onBalanceCell, hidden: viewModel.onBalanceSwitchHidden, animated: animated, reload: false)
-        tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: animated, reload: false)
-        tableController.set(cell: tableController.returnCell, hidden: viewModel.returnButtonHidden, animated: true, reload: false)
-        tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: animated, reload: false)
+        tableController.set(cell: tableController.onBalanceCell, hidden: viewModel.onBalanceSwitchHidden, animated: false, reload: false)
+        tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: false, reload: false)
+        tableController.set(cell: tableController.returnCell, hidden: viewModel.returnButtonHidden, animated: false, reload: false)
+        tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: false, reload: false)
         tableController.reloadData(animated: animated)
     }
 

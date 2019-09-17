@@ -215,12 +215,7 @@ class BorrowEditViewModel {
         return  firstly {
                     accountCoordinator.loadCurrentUser()
                 }.done { user in
-                    self.selectedCurrency = user.currency
-                    if self.isNew {
-                        if self.amount == nil {
-                            self.amount = 0.moneyDecimalString(with: self.selectedCurrency)
-                        }
-                    }
+                    self.selectedCurrency = user.currency                    
                 }
     }
     

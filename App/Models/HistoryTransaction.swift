@@ -46,6 +46,8 @@ struct HistoryTransaction : Decodable {
     let isDebt: Bool?
     let isLoan: Bool?
     let includedInBalance: Bool?
+    let borrowId: Int?
+    let borrowType: BorrowType?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -73,6 +75,8 @@ struct HistoryTransaction : Decodable {
         case isDebt = "is_debt"
         case isLoan = "is_loan"
         case includedInBalance = "included_in_balance"
+        case borrowId = "borrow_id"
+        case borrowType = "borrow_type"
     }
     
 }

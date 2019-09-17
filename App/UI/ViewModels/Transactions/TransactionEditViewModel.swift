@@ -37,8 +37,10 @@ class TransactionEditViewModel {
     }
     var amount: String? = nil {
         didSet {
-            updateConvertedAmountConverted()
-            
+            if !needCurrencyExchange {
+                convertedAmount = amount
+            }
+            updateConvertedAmountConverted()            
         }
     }
     var convertedAmount: String? = nil {
@@ -46,6 +48,21 @@ class TransactionEditViewModel {
             updateAmountConverted()
         }
     }
+    
+    var amountToSave: String? {
+        if let amount = amount, !amount.isEmpty {
+            return amount
+        }
+        return amountConverted
+    }
+    
+    var convertedAmountToSave: String? {
+        if let convertedAmount = convertedAmount, !convertedAmount.isEmpty {
+            return convertedAmount
+        }
+        return convertedAmountConverted        
+    }
+    
     var comment: String? = nil
     var gotAt: Date? = nil
     var amountConverted: String? = nil

@@ -115,9 +115,9 @@ extension IncomeEditViewModel {
         return IncomeCreationForm(userId: accountCoordinator.currentSession?.userId,
                                   incomeSourceId: incomeSourceStartable?.id,
                                   expenseSourceId: expenseSourceCompletable?.id,
-                                  amountCents: (amount ?? amountConverted)?.intMoney(with: startableCurrency),
+                                  amountCents: amountToSave?.intMoney(with: startableCurrency),
                                   amountCurrency: startableCurrency?.code,
-                                  convertedAmountCents: (convertedAmount ?? convertedAmountConverted)?.intMoney(with: completableCurrency),
+                                  convertedAmountCents: convertedAmountToSave?.intMoney(with: completableCurrency),
                                   convertedAmountCurrency: completableCurrency?.code,
                                   gotAt: gotAt ?? Date(),
                                   comment: comment)
@@ -130,9 +130,9 @@ extension IncomeEditViewModel {
         return IncomeUpdatingForm(id: income?.id,
                                   incomeSourceId: incomeSourceStartable?.id,
                                   expenseSourceId: expenseSourceCompletable?.id,
-                                  amountCents: (amount ?? amountConverted)?.intMoney(with: startableCurrency),
+                                  amountCents: amountToSave?.intMoney(with: startableCurrency),
                                   amountCurrency: startableCurrency?.code,
-                                  convertedAmountCents: (convertedAmount ?? convertedAmountConverted)?.intMoney(with: completableCurrency),
+                                  convertedAmountCents: convertedAmountToSave?.intMoney(with: completableCurrency),
                                   convertedAmountCurrency: completableCurrency?.code,
                                   gotAt: gotAt,
                                   comment: comment)

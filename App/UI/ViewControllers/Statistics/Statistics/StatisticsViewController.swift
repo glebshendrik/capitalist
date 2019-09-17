@@ -9,12 +9,13 @@
 import UIKit
 import PromiseKit
 
-class StatisticsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
-        
+class StatisticsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
+    
     var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: StatisticsViewModel!
     var router: ApplicationRouterProtocol!
+    var factory: UIFactoryProtocol!
     var titleView: StatisticsTitleView!
     
     @IBOutlet weak var tableView: UITableView!

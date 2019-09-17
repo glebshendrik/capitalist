@@ -113,6 +113,14 @@ class HistoryTransactionViewModel {
         return historyTransaction.includedInBalance ?? false
     }
     
+    var borrowId: Int? {
+        return historyTransaction.borrowId
+    }
+    
+    var borrowType: BorrowType? {
+        return historyTransaction.borrowType
+    }
+    
     init(historyTransaction: HistoryTransaction) {
         self.historyTransaction = historyTransaction
     }

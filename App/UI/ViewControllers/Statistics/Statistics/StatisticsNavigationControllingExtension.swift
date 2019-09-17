@@ -8,7 +8,30 @@
 
 import UIKit
 
-extension StatisticsViewController : IncomeEditViewControllerDelegate, ExpenseEditViewControllerDelegate, FundsMoveEditViewControllerDelegate {
+extension StatisticsViewController : IncomeEditViewControllerDelegate, ExpenseEditViewControllerDelegate, FundsMoveEditViewControllerDelegate, BorrowEditViewControllerDelegate {
+    func didCreateDebt() {
+        
+    }
+    
+    func didCreateLoan() {
+        
+    }
+    
+    func didUpdateDebt() {
+        loadData()
+    }
+    
+    func didUpdateLoan() {
+        loadData()
+    }
+    
+    func didRemoveDebt() {
+        loadData()
+    }
+    
+    func didRemoveLoan() {
+        loadData()
+    }
     
     func didCreateIncome() {
     }
@@ -174,7 +197,13 @@ extension StatisticsViewController {
         case .income:
             showIncomeEditScreen(incomeId: historyTransaction.transactionableId)
         case .fundsMove:
-            showFundsMoveEditScreen(fundsMoveId: historyTransaction.transactionableId)
+            if let borrowId = historyTransaction.borrowId, let borrowType = historyTransaction.borrowType {
+                showBorrowEditScreen(borrowId: borrowId, borrowType: borrowType)
+            }
+            else {
+                showFundsMoveEditScreen(fundsMoveId: historyTransaction.transactionableId)
+            }
+            
         case .expense:
             showExpenseEditScreen(expenseId: historyTransaction.transactionableId)
         }
@@ -202,6 +231,10 @@ extension StatisticsViewController {
             
             present(fundsMoveEditNavigationController, animated: true, completion: nil)
         }
+    }
+    
+    private func showBorrowEditScreen(borrowId: Int, borrowType: BorrowType) {
+        modal(factory.borrowEditViewController(delegate: self, type: borrowType, borrowId: borrowId, expenseSourceFrom: nil, expenseSourceTo: nil))
     }
     
     private func showExpenseEditScreen(expenseId: Int) {

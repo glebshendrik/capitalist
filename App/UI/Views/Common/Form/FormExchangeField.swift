@@ -129,12 +129,22 @@ class FormExchangeField : FormField {
     
     var amount: String? {
         get { return amountField.text?.trimmed }
-        set { amountField.text = newValue }
+        set {
+            if amount != newValue {
+                clearError()
+            }
+            amountField.text = newValue
+        }
     }
     
     var convertedAmount: String? {
         get { return convertedAmountField.text?.trimmed }
-        set { convertedAmountField.text = newValue }
+        set {            
+            if convertedAmount != newValue {
+                clearError()
+            }
+            convertedAmountField.text = newValue
+        }
     }
     
     var currency: Currency? {

@@ -85,7 +85,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     
     func setupBorrowedAtField() {
         borrowedAtField.placeholder = "Дата займа"
-        borrowedAtField.imageName = "currency-icon"
+        borrowedAtField.imageName = "calendar-icon"
         borrowedAtField.didTap { [weak self] in
             self?.delegate?.didTapBorrowedAt()
         }
@@ -93,7 +93,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     
     func setupPaydayField() {
         paydayField.placeholder = "Дата возврата"
-        paydayField.imageName = "currency-icon"
+        paydayField.imageName = "calendar-icon"
         paydayField.didTap { [weak self] in
             self?.delegate?.didTapPayday()
         }
@@ -109,7 +109,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     
     func setupExpenseSourceField() {
         expenseSourceField.placeholder = "Кошелек"
-        expenseSourceField.imageName = "currency-icon"
+        expenseSourceField.imageName = IconCategory.expenseSource.defaultIconName
         expenseSourceField.didTap { [weak self] in
             self?.delegate?.didTapExpenseSource()
         }

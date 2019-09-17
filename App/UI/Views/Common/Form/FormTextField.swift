@@ -83,6 +83,9 @@ class FormTextField : FormField {
     var text: String? {
         get { return textField.text?.trimmed }
         set {
+            if text != newValue {
+                clearError()
+            }
             textField.text = newValue
             updateStateAppearance()
         }
@@ -91,7 +94,10 @@ class FormTextField : FormField {
     var subValue: String? {
         get { return subValueLabel.text }
         set {
-            subValueLabel.text = newValue
+            if subValue != newValue {
+                clearError()
+            }
+            subValueLabel.text = newValue            
             updateSubValueLabel()
         }
     }
