@@ -71,13 +71,13 @@ class MenuViewController : StaticTableViewController, UIMessagePresenterManagerD
         setupRefreshControl()
         insertAnimation = .top
         deleteAnimation = .bottom
+        setupMenu()
+    }
+    
+    private func setupMenu() {
         if let menuLeftNavigationController = navigationController as? SideMenuNavigationController {
-                    menuLeftNavigationController.presentationStyle.backgroundColor = .clear
-//                    menuLeftNavigationController.presentationStyle.presentingEndAlpha = 1.0
-//                    menuLeftNavigationController.statusBarEndAlpha = 1.0
-//                    menuLeftNavigationController.settings.presentationStyle = .menuSlideIn
-//                    menuLeftNavigationController.presentationStyle.onTopShadowOpacity = 0.0
-                }
+            menuLeftNavigationController.presentationStyle.backgroundColor = .clear
+        }
     }
     
     private func setupRefreshControl() {
