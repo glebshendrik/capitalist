@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -55,7 +55,7 @@
                                                             <rect key="frame" x="5" y="5" width="54" height="54"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-icon" translatesAutoresizingMaskIntoConstraints="NO" id="cUm-GL-AQZ">
-                                                                    <rect key="frame" x="14.5" y="16" width="25" height="22"/>
+                                                                    <rect key="frame" x="19" y="19" width="16" height="16"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="pH4-XB-aLJ"/>
                                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="25" id="xux-KJ-aS0"/>
@@ -121,7 +121,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="gDk-1J-QyI">
-                                        <rect key="frame" x="160" y="308" width="55" height="31"/>
+                                        <rect key="frame" x="179.5" y="315.5" width="16" height="16"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -268,7 +268,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfZ-l3-ICh">
-                                        <rect key="frame" x="160" y="308" width="55" height="31"/>
+                                        <rect key="frame" x="179.5" y="315.5" width="16" height="16"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>

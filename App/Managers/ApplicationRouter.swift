@@ -113,8 +113,8 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     func showMainViewController() {
         _ = show(.MainViewController)
-        if let menuLeftNavigationController = viewController(.MenuNavigationController) as? UISideMenuNavigationController {
-            SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
+        if let menuLeftNavigationController = viewController(.MenuNavigationController) as? SideMenuNavigationController {
+            SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
         }
         notificationsCoordinator.enableNotifications()
     }

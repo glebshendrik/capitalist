@@ -1,9 +1,9 @@
 {
   "name": "RecurrencePicker",
-  "version": "0.1.2",
-  "summary": "A short description of RecurrencePicker.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/petalvlad@gmail.com/RecurrencePicker",
+  "version": "0.3.0",
+  "summary": "An event recurrence rule picker similar to iOS system calendar.",
+  "description": "An event recurrence rule picker similar to iOS system calendar.\n\nRecurrencePicker supports 6 languages: English, Russian, Simplified Chinese, Traditional Chinese, Korean, Japanese.",
+  "homepage": "https://github.com/petalvlad/RecurrencePicker",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,18 +12,19 @@
     "petalvlad@gmail.com": "petalvlad@gmail.com"
   },
   "source": {
-    "git": "https://github.com/petalvlad@gmail.com/RecurrencePicker.git",
-    "tag": "0.1.2"
+    "git": "https://github.com/petalvlad/RecurrencePicker.git",
+    "tag": "0.3.0"
   },
   "platforms": {
     "ios": "10.0"
   },
-  "swift_version": "4.2",
+  "swift_versions": "5",
   "source_files": "RecurrencePicker/Classes/**/*",
-  "resources": "RecurrencePicker/**/*.{png,xib,strings,lproj}",
+  "resources": "RecurrencePicker/**/*.{png,xib,strings,lproj,js}",
   "resource_bundles": {
     "RecurrencePicker": [
-      "RecurrencePicker/**/*.{png,xib,strings,lproj}"
+      "RecurrencePicker/**/*.{png,xib,strings,lproj,js}"
     ]
-  }
+  },
+  "swift_version": "5"
 }

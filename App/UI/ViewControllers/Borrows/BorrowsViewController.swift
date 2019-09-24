@@ -184,27 +184,27 @@ extension BorrowsViewController : LoansTableSupportDelegate, DebtsTableSupportDe
 
 extension BorrowsViewController : BorrowEditViewControllerDelegate {
     func didCreateDebt() {
-        loadDebts()
+        loadDebts(finantialDataInvalidated: true)
     }
     
     func didCreateLoan() {
-        loadLoans()
+        loadLoans(finantialDataInvalidated: true)
     }
     
     func didUpdateDebt() {
-        loadDebts()
+        loadDebts(finantialDataInvalidated: true)
     }
     
     func didUpdateLoan() {
-        loadLoans()
+        loadLoans(finantialDataInvalidated: true)
     }
     
     func didRemoveDebt() {
-        loadDebts()
+        loadDebts(finantialDataInvalidated: true)
     }
     
     func didRemoveLoan() {
-        loadLoans()
+        loadLoans(finantialDataInvalidated: true)
     }
     
     
@@ -224,7 +224,10 @@ extension BorrowsViewController {
         loadDebts()
     }
     
-    private func loadLoans() {
+    private func loadLoans(finantialDataInvalidated: Bool = false) {
+        if finantialDataInvalidated {
+            postFinantialDataUpdated()
+        }
         set(loansActivityIndicator, hidden: false, animated: false)
         firstly {
             viewModel.loadLoans()
@@ -236,7 +239,10 @@ extension BorrowsViewController {
         }
     }
     
-    private func loadDebts() {
+    private func loadDebts(finantialDataInvalidated: Bool = false) {
+        if finantialDataInvalidated {
+            postFinantialDataUpdated()
+        }
         set(debtsActivityIndicator, hidden: false, animated: false)
         firstly {
             viewModel.loadDebts()
@@ -246,5 +252,9 @@ extension BorrowsViewController {
             self.set(self.debtsActivityIndicator, hidden: true)
             self.updateDebtsUI()
         }
+    }
+    
+    private func postFinantialDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
 }

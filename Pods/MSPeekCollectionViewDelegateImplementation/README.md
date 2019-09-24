@@ -72,6 +72,10 @@ delegate = MSPeekCollectionViewDelegateImplementation(cellPeekWidth: 20)
 delegate = MSPeekCollectionViewDelegateImplementation(scrollThreshold: 150)
 ```
 ```swift
+//minimumItemsToScroll is the minimum number of items that can be scrolled
+delegate = MSPeekCollectionViewDelegateImplementation(minimumItemsToScroll: 1)
+```
+```swift
 //maximumItemsToScroll is the maximum number of items that can be scrolled if the scroll distance is large
 delegate = MSPeekCollectionViewDelegateImplementation(maximumItemsToScroll: 3)
 ```
@@ -171,20 +175,47 @@ delegate = MSPeekCollectionViewDelegateImplementation(scrollDirection: layout.sc
 collectionView.configureForPeekingDelegate(scrollDirection: layout.scrollDirection)
 ```
 
-### Listen for index change
-If you want to know whenever the index changes, you can implement the `MSPeekImplementationDelegate`. This delegate has a function
+### Implementing MSPeekImplementationDelegate
+You can implement the delegate of the peek implementation to listen to specific events. This is the protocol of the delegate
 ```swift
-func peekImplementation(_ peekImplementation: MSPeekCollectionViewDelegateImplementation, didChangeActiveIndexTo activeIndex: Int)
+@objc public protocol MSPeekImplementationDelegate: AnyObject {
+    ///Will be called when the current active index has changed
+    @objc optional func peekImplementation(_ peekImplementation: MSPeekCollectionViewDelegateImplementation, didChangeActiveIndexTo activeIndex: Int)
+    ///Will be called when the user taps on a cell at a specific index path
+    @objc optional func peekImplementation(_ peekImplementation: MSPeekCollectionViewDelegateImplementation, didSelectItemAt indexPath: IndexPath)
+}
 ```
-which will be called each time the current index changes.
+
+To listen to those events, you can do something like this:
+```swift
+class ViewController: UIViewController {
+    @IBOutlet weak var collectionView: UICollectionView!
+    var peekImplementation: MSPeekCollectionViewDelegateImplementation!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //Set the collection view
+        //...
+        peekImplementation = MSPeekCollectionViewDelegateImplementation()
+        peekImplementation.delegate = self
+    }
+}
+
+extension ViewController: MSPeekImplementationDelegate {
+    func peekImplementation(_ peekImplementation: MSPeekCollectionViewDelegateImplementation, didChangeActiveIndexTo activeIndex: Int) {
+        print("Changed active index to \(activeIndex)")
+    }
+    
+    func peekImplementation(_ peekImplementation: MSPeekCollectionViewDelegateImplementation, didSelectItemAt indexPath: IndexPath) {
+        print("Selected item at \(indexPath)")
+    }
+}
+```
 
 ### Subclassing
 You can subclass the delegate implementation to integrate other features to it, or listen to certain events:
 ```swift
 class SelectablePeekCollectionViewDelegateImplementation: MSPeekCollectionViewDelegateImplementation {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Item Selected")
-    }
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         super.scrollViewWillBeginDragging(scrollView)

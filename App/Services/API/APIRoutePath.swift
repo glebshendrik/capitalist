@@ -82,8 +82,8 @@ struct APIRoutePath {
         case .destroyExpense(let id):                       return member(route, id: id)
         case .destroyFundsMove(let id):                     return member(route, id: id)
         case .destroyAccountConnection(let id):             return member(route, id: id)
-        case .destroyDebt(let id):                          return member(route, id: id)
-        case .destroyLoan(let id):                          return member(route, id: id)
+        case .destroyDebt(let id, _):                       return member(route, id: id)
+        case .destroyLoan(let id, _):                       return member(route, id: id)
         case .destroySession(let session):                  return member(route, id: session.token)
         }
     }
