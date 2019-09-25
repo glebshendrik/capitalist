@@ -30,20 +30,24 @@ struct APIRoutePath {
         case .createProviderConnection(let form):           return collection(route, userId: form.userId)
         case .createDebt(let form):                         return collection(route, userId: form.userId)
         case .createLoan(let form):                         return collection(route, userId: form.userId)
+        case .createCredit(let form):                       return collection(route, userId: form.userId)
         
         // Index
-        case .indexIcons:                                   return collection(route)
-        case .indexCurrencies:                              return collection(route)
-        case .indexIncomeSources(let userId):               return collection(route, userId: userId)        
-        case .indexExpenseSources(let userId, _, _, _):     return collection(route, userId: userId)
+        case .indexIcons,
+             .indexCurrencies:                              return collection(route)
+            
         case .indexExpenseCategories(let basketId):         return collection(route, basketId: basketId)
-        case .indexUserExpenseCategories(let userId, _):    return collection(route, userId: userId)
-        case .indexBaskets(let userId):                     return collection(route, userId: userId)
-        case .indexHistoryTransactions(let userId):         return collection(route, userId: userId)
-        case .indexProviderConnections(let userId, _):      return collection(route, userId: userId)
-        case .indexAccountConnections(let userId, _):       return collection(route, userId: userId)
-        case .indexDebts(let userId):                       return collection(route, userId: userId)
-        case .indexLoans(let userId):                       return collection(route, userId: userId)
+            
+        case .indexIncomeSources(let userId),
+             .indexExpenseSources(let userId, _, _, _),
+             .indexUserExpenseCategories(let userId, _),
+             .indexBaskets(let userId),
+             .indexHistoryTransactions(let userId),
+             .indexProviderConnections(let userId, _),
+             .indexAccountConnections(let userId, _),
+             .indexDebts(let userId),
+             .indexLoans(let userId),
+             .indexCredits(let userId):                     return collection(route, userId: userId)
         
         // Update
         case .updateUser(let form):                         return member(route, id: form.userId)        
@@ -60,30 +64,35 @@ struct APIRoutePath {
         case .updateFundsMove(let form):                    return member(route, id: form.id)
         case .updateDebt(let form):                         return member(route, id: form.id)
         case .updateLoan(let form):                         return member(route, id: form.id)
+        case .updateCredit(let form):                       return member(route, id: form.id)
             
         // Show
-        case .showUser(let id):                             return member(route, id: id)
-        case .showIncomeSource(let id):                     return member(route, id: id)
-        case .showExpenseSource(let id):                    return member(route, id: id)
-        case .showExpenseCategory(let id):                  return member(route, id: id)
-        case .showBasket(let id):                           return member(route, id: id)
-        case .showIncome(let id):                           return member(route, id: id)
-        case .showExpense(let id):                          return member(route, id: id)
-        case .showFundsMove(let id):                        return member(route, id: id)
-        case .showDebt(let id):                             return member(route, id: id)
-        case .showLoan(let id):                             return member(route, id: id)
+        case .showUser(let id),
+             .showIncomeSource(let id),
+             .showExpenseSource(let id),
+             .showExpenseCategory(let id),
+             .showBasket(let id),
+             .showIncome(let id),
+             .showExpense(let id),
+             .showFundsMove(let id),
+             .showDebt(let id),
+             .showLoan(let id),
+             .showCredit(let id):                           return member(route, id: id)
+            
         case .showBudget(let userId):                       return member(route, userId: userId)
         
         // Destroy
-        case .destroyIncomeSource(let id, _):               return member(route, id: id)
-        case .destroyExpenseSource(let id, _):              return member(route, id: id)
-        case .destroyExpenseCategory(let id, _):            return member(route, id: id)
-        case .destroyIncome(let id):                        return member(route, id: id)
-        case .destroyExpense(let id):                       return member(route, id: id)
-        case .destroyFundsMove(let id):                     return member(route, id: id)
-        case .destroyAccountConnection(let id):             return member(route, id: id)
-        case .destroyDebt(let id, _):                       return member(route, id: id)
-        case .destroyLoan(let id, _):                       return member(route, id: id)
+        case .destroyIncomeSource(let id, _),
+             .destroyExpenseSource(let id, _),
+             .destroyExpenseCategory(let id, _),
+             .destroyIncome(let id),
+             .destroyExpense(let id),
+             .destroyFundsMove(let id),
+             .destroyAccountConnection(let id),
+             .destroyDebt(let id, _),
+             .destroyLoan(let id, _),
+             .destroyCredit(let id, _):                     return member(route, id: id)
+            
         case .destroySession(let session):                  return member(route, id: session.token)
         }
     }

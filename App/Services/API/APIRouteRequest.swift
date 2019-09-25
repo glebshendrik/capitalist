@@ -62,6 +62,8 @@ struct APIRouteRequest {
         case .updateDebt(let form):                         return try encode(form)
         case .createLoan(let form):                         return try encode(form)
         case .updateLoan(let form):                         return try encode(form)
+        case .createCredit(let form):                       return try encode(form)
+        case .updateCredit(let form):                       return try encode(form)
         default:                                            return nil
         }
     }

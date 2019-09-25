@@ -97,6 +97,12 @@ struct APIResource {
              .updateLoan,
              .destroyLoan:
             return APIResource(singular: "loan", plural: "loans")
+        case .createCredit,
+             .showCredit,
+             .indexCredits,
+             .updateCredit,
+             .destroyCredit:
+            return APIResource(singular: "credit", plural: "credits")
         }
     }
 }

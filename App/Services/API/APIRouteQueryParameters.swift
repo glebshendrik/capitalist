@@ -26,6 +26,8 @@ struct APIRouteQueryParameters {
             return [ "delete_transactions" : deleteTransactions.string ]
         case .destroyLoan(_, let deleteTransactions):
             return [ "delete_transactions" : deleteTransactions.string ]
+        case .destroyCredit(_, let deleteTransactions):
+            return [ "delete_transactions" : deleteTransactions.string ]
         case .firstExpenseSource(_, let accountType, let currency):
             return [ "account_type" : accountType.rawValue, "currency" : currency ]
         case .indexExpenseSources(_, let noDebts, let accountType, let currency):
