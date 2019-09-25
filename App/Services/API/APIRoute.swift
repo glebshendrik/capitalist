@@ -101,6 +101,13 @@ enum APIRoute: URLRequestConvertible {
     case updateLoan(form: BorrowUpdatingForm)
     case destroyLoan(id: Int, deleteTransactions: Bool)
     
+    //Credits
+    case createCredit(form: BorrowCreationForm)
+    case indexCredits(userId: Int)
+    case showCredit(id: Int)
+    case updateCredit(form: BorrowUpdatingForm)
+    case destroyCredit(id: Int, deleteTransactions: Bool)
+    
     // ExchangeRates
     case findExchangeRate(from: String, to: String)
     
