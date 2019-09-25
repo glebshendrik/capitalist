@@ -279,6 +279,8 @@
 		FAA9127F220D24AD00F2C251 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA9127E220D24AD00F2C251 /* SettingsCoordinator.swift */; };
 		FABA979722E1E36E00E03380 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA979622E1E36D00E03380 /* FormTextField.swift */; };
 		FABE54DA233A757F00DF2B70 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54D9233A757F00DF2B70 /* Credit.swift */; };
+		FABE54DC233BE50D00DF2B70 /* CreditsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54DB233BE50C00DF2B70 /* CreditsServiceProtocol.swift */; };
+		FABE54DE233BE6C600DF2B70 /* CreditsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54DD233BE6C600DF2B70 /* CreditsService.swift */; };
 		FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */; };
 		FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */; };
 		FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */; };
@@ -667,6 +669,8 @@
 		FAB29A2922AC3B32009946DC /* Three Baskets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Three Baskets.entitlements"; sourceTree = "<group>"; };
 		FABA979622E1E36D00E03380 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		FABE54D9233A757F00DF2B70 /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
+		FABE54DB233BE50C00DF2B70 /* CreditsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsServiceProtocol.swift; sourceTree = "<group>"; };
+		FABE54DD233BE6C600DF2B70 /* CreditsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsService.swift; sourceTree = "<group>"; };
 		FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
@@ -1482,6 +1486,7 @@
 				FA7EDFF922CCD6C90054EAD3 /* AccountConnectionsService.swift */,
 				FA7EDFFB22CCD74D0054EAD3 /* ProviderConnectionsService.swift */,
 				FA0570E9232A350F002B4706 /* BorrowsService.swift */,
+				FABE54DD233BE6C600DF2B70 /* CreditsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1593,6 +1598,7 @@
 				FA7EDFF522CCD5BC0054EAD3 /* AccountConnectionsServiceProtocol.swift */,
 				FA7EDFF722CCD65A0054EAD3 /* ProviderConnectionsServiceProtocol.swift */,
 				FA0570E5232A338F002B4706 /* BorrowsServiceProtocol.swift */,
+				FABE54DB233BE50C00DF2B70 /* CreditsServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2094,6 +2100,7 @@
 				FAD88F1F21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift in Sources */,
 				FA16FC73223A82FA0053C273 /* ExpenseSourceSelectViewController.swift in Sources */,
 				FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */,
+				FABE54DE233BE6C600DF2B70 /* CreditsService.swift in Sources */,
 				FAD88F0F21AEB45A00BE7BC1 /* ManagersAssembly.swift in Sources */,
 				FA7EE00222CDA1A10054EAD3 /* AccountsViewModel.swift in Sources */,
 				FACC01ED224B5FA90044A747 /* GraphTableViewCell.swift in Sources */,
@@ -2116,6 +2123,7 @@
 				FA16FC67223A30710053C273 /* SlideUpContainerViewController.swift in Sources */,
 				FA2847EC22EEEED7003F114A /* FormTextFieldAppearance.swift in Sources */,
 				FA16FC71223A82930053C273 /* ExpenseSourceTableViewCell.swift in Sources */,
+				FABE54DC233BE50D00DF2B70 /* CreditsServiceProtocol.swift in Sources */,
 				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
 				FA6270AA21CA93D100CC0269 /* FieldsViewModel.swift in Sources */,
 				FA7EDFFC22CCD74D0054EAD3 /* ProviderConnectionsService.swift in Sources */,
