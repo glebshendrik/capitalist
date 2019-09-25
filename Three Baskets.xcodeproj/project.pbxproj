@@ -281,6 +281,8 @@
 		FABE54DA233A757F00DF2B70 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54D9233A757F00DF2B70 /* Credit.swift */; };
 		FABE54DC233BE50D00DF2B70 /* CreditsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54DB233BE50C00DF2B70 /* CreditsServiceProtocol.swift */; };
 		FABE54DE233BE6C600DF2B70 /* CreditsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54DD233BE6C600DF2B70 /* CreditsService.swift */; };
+		FABE54E0233BEFA200DF2B70 /* CreditsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54DF233BEFA200DF2B70 /* CreditsCoordinatorProtocol.swift */; };
+		FABE54E2233BEFF100DF2B70 /* CreditsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54E1233BEFF100DF2B70 /* CreditsCoordinator.swift */; };
 		FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */; };
 		FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */; };
 		FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */; };
@@ -671,6 +673,8 @@
 		FABE54D9233A757F00DF2B70 /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
 		FABE54DB233BE50C00DF2B70 /* CreditsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsServiceProtocol.swift; sourceTree = "<group>"; };
 		FABE54DD233BE6C600DF2B70 /* CreditsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsService.swift; sourceTree = "<group>"; };
+		FABE54DF233BEFA200DF2B70 /* CreditsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FABE54E1233BEFF100DF2B70 /* CreditsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsCoordinator.swift; sourceTree = "<group>"; };
 		FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
@@ -1458,6 +1462,7 @@
 				FA6F2E8E224350E7008C160F /* HistoryTransactionsCoordinator.swift */,
 				FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */,
 				FA0570ED232A362F002B4706 /* BorrowsCoordinator.swift */,
+				FABE54E1233BEFF100DF2B70 /* CreditsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1573,6 +1578,7 @@
 				FA6F2E8C224350B3008C160F /* HistoryTransactionsCoordinatorProtocol.swift */,
 				FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */,
 				FA0570EB232A35FC002B4706 /* BorrowsCoordinatorProtocol.swift */,
+				FABE54DF233BEFA200DF2B70 /* CreditsCoordinatorProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2071,6 +2077,7 @@
 				FA84E7E5225625E300C0A274 /* GraphViewModel.swift in Sources */,
 				FAED7DA821EC8B3700BF6FE1 /* ExpenseCategoriesCoordinatorProtocol.swift in Sources */,
 				FA6DDE8222D4D0E6008D14FF /* ExpenseSourceUIExtension.swift in Sources */,
+				FABE54E2233BEFF100DF2B70 /* CreditsCoordinator.swift in Sources */,
 				FAD88F4621AEBE7400BE7BC1 /* NotificationsCoordinator.swift in Sources */,
 				FA835D682265F23F00A592F2 /* HistoryTransactionsSection.swift in Sources */,
 				FA0CAE0D21D3C1F100805288 /* ExpenseSourceEditTableController.swift in Sources */,
@@ -2108,6 +2115,7 @@
 				FA630C242292ADBE00242AB3 /* ViewModelsRegistration.swift in Sources */,
 				FA8AD0DA22BE1AB40084AD19 /* SaltEdgeManager.swift in Sources */,
 				FA2847FC22F19481003F114A /* FormNavBarButtonsEditViewController.swift in Sources */,
+				FABE54E0233BEFA200DF2B70 /* CreditsCoordinatorProtocol.swift in Sources */,
 				FAED7D9A21EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift in Sources */,
 				FACC01F5224BC4B40044A747 /* HistoryTransactionsLoadingTableViewCell.swift in Sources */,
 				FA66FB7B2226E92C00708C71 /* IncomeEditViewModel.swift in Sources */,
