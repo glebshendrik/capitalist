@@ -204,5 +204,15 @@ extension ApplicationAssembly {
         container.registerForSkrudzhStoryboard(BorrowEditViewController.self) { (r, c) in
             c.viewModel = r.resolve(BorrowEditViewModel.self)
         }
+        
+        // CreditsViewController
+        container.registerForSkrudzhStoryboard(CreditsViewController.self) { (r, c) in
+            c.viewModel = r.resolve(CreditsViewModel.self)
+        }
+        
+        // CreditEditViewController
+//        container.registerForSkrudzhStoryboard(CreditEditViewController.self) { (r, c) in
+//            c.viewModel = r.resolve(CreditEditViewModel.self)
+//        }
     }
 }
