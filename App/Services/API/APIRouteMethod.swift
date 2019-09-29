@@ -52,7 +52,8 @@ struct APIRouteMethod {
              .indexLoans,
              .showLoan,
              .indexCredits,
-             .showCredit:
+             .showCredit,
+             .indexCreditTypes:
             return .get
         case .updateUser,
              .changePassword,

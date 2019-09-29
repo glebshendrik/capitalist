@@ -10,10 +10,10 @@ import Foundation
 import RecurrencePicker
 
 struct ReminderViewModel {
-    
-    var reminderMessage: String? = nil
+        
     var reminderStartDate: Date? = nil
     var reminderRecurrenceRule: String? = nil
+    var reminderMessage: String? = nil
     
     var startDate: String? {        
         return reminderStartDate?.dateTimeString(ofStyle: DateFormatter.Style.medium)
@@ -59,17 +59,23 @@ struct ReminderViewModel {
     init() {
         
     }
+     
+    init(reminderStartDate: Date?, reminderRecurrenceRule: String?, reminderMessage: String?) {
+        self.reminderStartDate = reminderStartDate
+        self.reminderRecurrenceRule = reminderRecurrenceRule
+        self.reminderMessage = reminderMessage
+    }
     
     init(incomeSource: IncomeSource) {
-        reminderMessage = incomeSource.reminderMessage
-        reminderStartDate = incomeSource.reminderStartDate
-        reminderRecurrenceRule = incomeSource.reminderRecurrenceRule
+        self.init(reminderStartDate: incomeSource.reminderStartDate,
+                  reminderRecurrenceRule: incomeSource.reminderRecurrenceRule,
+                  reminderMessage: incomeSource.reminderMessage)
     }
     
     init(expenseCategory: ExpenseCategory) {
-        reminderMessage = expenseCategory.reminderMessage
-        reminderStartDate = expenseCategory.reminderStartDate
-        reminderRecurrenceRule = expenseCategory.reminderRecurrenceRule
+        self.init(reminderStartDate: expenseCategory.reminderStartDate,
+                  reminderRecurrenceRule: expenseCategory.reminderRecurrenceRule,
+                  reminderMessage: expenseCategory.reminderMessage)
     }
     
     mutating func prepareForSaving() {

@@ -12,11 +12,18 @@ import PromiseKit
 class CreditsCoordinator : CreditsCoordinatorProtocol {
     private let userSessionManager: UserSessionManagerProtocol
     private let creditsService: CreditsServiceProtocol
+    private let creditTypesService: CreditTypesServiceProtocol
     
     init(userSessionManager: UserSessionManagerProtocol,
-         creditsService: CreditsServiceProtocol) {        
+         creditsService: CreditsServiceProtocol,
+         creditTypesService: CreditTypesServiceProtocol) {
         self.userSessionManager = userSessionManager
         self.creditsService = creditsService
+        self.creditTypesService = creditTypesService
+    }
+    
+    func indexCreditTypes() -> Promise<[CreditType]> {
+        return creditTypesService.indexCreditTypes()
     }
     
     func indexCredits() -> Promise<[Credit]> {

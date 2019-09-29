@@ -20,15 +20,15 @@ class FormSliderField : FormTextField {
     
     lazy var maximumValueLabel: UILabel = { return UILabel() }()
     
-    @IBInspectable var currentMinimumTrackImage: UIImage? = UIImage(named: "right-arrow-icon") {
+    @IBInspectable var currentMinimumTrackImage: UIImage? = UIImage(named: "minimum-track-image") {
         didSet { updateSlider() }
     }
     
-    @IBInspectable var currentMaximumTrackImage: UIImage? = UIImage(named: "right-arrow-icon") {
+    @IBInspectable var currentMaximumTrackImage: UIImage? = UIImage(named: "maximum-track-image") {
         didSet { updateSlider() }
     }
     
-    @IBInspectable var currentThumbImage: UIImage? = UIImage(named: "right-arrow-icon") {
+    @IBInspectable var currentThumbImage: UIImage? = UIImage(named: "thumb") {
         didSet { updateSlider() }
     }
     

@@ -103,6 +103,8 @@ struct APIResource {
              .updateCredit,
              .destroyCredit:
             return APIResource(singular: "credit", plural: "credits")
+        case .indexCreditTypes:
+            return APIResource(singular: "credit_type", plural: "credit_types")
         }
     }
 }

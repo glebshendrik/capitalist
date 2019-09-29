@@ -10,6 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol CreditsCoordinatorProtocol {
+    func indexCreditTypes() -> Promise<[CreditType]>
     func indexCredits() -> Promise<[Credit]>
     func createCredit(with creationForm: CreditCreationForm) -> Promise<Credit>
     func showCredit(by id: Int) -> Promise<Credit>

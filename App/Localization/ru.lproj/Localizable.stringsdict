@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>period unit days</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@period_unit_days@</string>
+		<key>period_unit_days</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d дней</string>
+			<key>one</key>
+			<string>%d день</string>
+			<key>two</key>
+			<string>%d дня</string>
+			<key>few</key>
+			<string>%d дня</string>
+			<key>many</key>
+			<string>%d дней</string>
+			<key>other</key>
+			<string>%d дня</string>
+		</dict>
+	</dict>
+	<key>period unit months</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@period_unit_months@</string>
+		<key>period_unit_months</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d месяцев</string>
+			<key>one</key>
+			<string>%d месяц</string>
+			<key>two</key>
+			<string>%d месяца</string>
+			<key>few</key>
+			<string>%d месяца</string>
+			<key>many</key>
+			<string>%d месяцев</string>
+			<key>other</key>
+			<string>%d месяца</string>
+		</dict>
+	</dict>
+	<key>period unit years</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@period_unit_years@</string>
+		<key>period_unit_years</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d лет</string>
+			<key>one</key>
+			<string>%d год</string>
+			<key>two</key>
+			<string>%d года</string>
+			<key>few</key>
+			<string>%d года</string>
+			<key>many</key>
+			<string>%d лет</string>
+			<key>other</key>
+			<string>%d лет</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

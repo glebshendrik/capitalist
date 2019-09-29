@@ -289,6 +289,12 @@
 		FABE54ED233D115100DF2B70 /* CreditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54EC233D115100DF2B70 /* CreditTableViewCell.swift */; };
 		FABE54EF233D194900DF2B70 /* Credits.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FABE54EE233D194900DF2B70 /* Credits.storyboard */; };
 		FABE54F1233D3B9B00DF2B70 /* FormSliderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54F0233D3B9B00DF2B70 /* FormSliderField.swift */; };
+		FABE54F3233F808000DF2B70 /* CreditEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54F2233F808000DF2B70 /* CreditEditViewModel.swift */; };
+		FABE54F7233F854600DF2B70 /* CreditType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54F6233F854600DF2B70 /* CreditType.swift */; };
+		FABE54F9233F861800DF2B70 /* CreditTypesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54F8233F861800DF2B70 /* CreditTypesServiceProtocol.swift */; };
+		FABE54FB233F865B00DF2B70 /* CreditTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54FA233F865B00DF2B70 /* CreditTypesService.swift */; };
+		FABE54FD233FA9BA00DF2B70 /* CreditTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54FC233FA9BA00DF2B70 /* CreditTypeViewModel.swift */; };
+		FABE5500233FBAA100DF2B70 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = FABE5502233FBAA100DF2B70 /* Localizable.stringsdict */; };
 		FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */; };
 		FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */; };
 		FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */; };
@@ -687,6 +693,13 @@
 		FABE54EC233D115100DF2B70 /* CreditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTableViewCell.swift; sourceTree = "<group>"; };
 		FABE54EE233D194900DF2B70 /* Credits.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Credits.storyboard; sourceTree = "<group>"; };
 		FABE54F0233D3B9B00DF2B70 /* FormSliderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSliderField.swift; sourceTree = "<group>"; };
+		FABE54F2233F808000DF2B70 /* CreditEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditEditViewModel.swift; sourceTree = "<group>"; };
+		FABE54F6233F854600DF2B70 /* CreditType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditType.swift; sourceTree = "<group>"; };
+		FABE54F8233F861800DF2B70 /* CreditTypesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTypesServiceProtocol.swift; sourceTree = "<group>"; };
+		FABE54FA233F865B00DF2B70 /* CreditTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTypesService.swift; sourceTree = "<group>"; };
+		FABE54FC233FA9BA00DF2B70 /* CreditTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTypeViewModel.swift; sourceTree = "<group>"; };
+		FABE5501233FBAA100DF2B70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		FABE5503233FBAA600DF2B70 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
@@ -1312,6 +1325,8 @@
 			children = (
 				FABE54E4233BF6F400DF2B70 /* CreditsViewModel.swift */,
 				FABE54E6233C99B500DF2B70 /* CreditViewModel.swift */,
+				FABE54F2233F808000DF2B70 /* CreditEditViewModel.swift */,
+				FABE54FC233FA9BA00DF2B70 /* CreditTypeViewModel.swift */,
 			);
 			path = Credits;
 			sourceTree = "<group>";
@@ -1530,6 +1545,7 @@
 				FA7EDFFB22CCD74D0054EAD3 /* ProviderConnectionsService.swift */,
 				FA0570E9232A350F002B4706 /* BorrowsService.swift */,
 				FABE54DD233BE6C600DF2B70 /* CreditsService.swift */,
+				FABE54FA233F865B00DF2B70 /* CreditTypesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1566,6 +1582,7 @@
 				FA7EDFF322CCC0990054EAD3 /* AccountConnection.swift */,
 				FA1E63302327DC5900081964 /* Borrow.swift */,
 				FABE54D9233A757F00DF2B70 /* Credit.swift */,
+				FABE54F6233F854600DF2B70 /* CreditType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1643,6 +1660,7 @@
 				FA7EDFF722CCD65A0054EAD3 /* ProviderConnectionsServiceProtocol.swift */,
 				FA0570E5232A338F002B4706 /* BorrowsServiceProtocol.swift */,
 				FABE54DB233BE50C00DF2B70 /* CreditsServiceProtocol.swift */,
+				FABE54F8233F861800DF2B70 /* CreditTypesServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1793,6 +1811,7 @@
 			isa = PBXGroup;
 			children = (
 				FA6973EF2296D6DD004E6327 /* Localizable.strings */,
+				FABE5502233FBAA100DF2B70 /* Localizable.stringsdict */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -1882,6 +1901,7 @@
 				FA1E63292326A56A00081964 /* Borrows.storyboard in Resources */,
 				FA630C18229269F300242AB3 /* IncomeSources.storyboard in Resources */,
 				FA16FC81223BBE0E0053C273 /* coins-movement.wav in Resources */,
+				FABE5500233FBAA100DF2B70 /* Localizable.stringsdict in Resources */,
 				FA630C1A22926B0500242AB3 /* ExpenseSources.storyboard in Resources */,
 				FA6973ED2296D6DD004E6327 /* Localizable.strings in Resources */,
 				FA26814421B178D300FADED1 /* Rubik-LightItalic.ttf in Resources */,
@@ -1983,6 +2003,7 @@
 				FAD88F3D21AEBB4200BE7BC1 /* UserSessionManager.swift in Sources */,
 				FACEC1612302D9CD00611B2C /* SettingsTableController.swift in Sources */,
 				FA165CE221B65F0300EAA16B /* LoginViewModel.swift in Sources */,
+				FABE54F9233F861800DF2B70 /* CreditTypesServiceProtocol.swift in Sources */,
 				FA6F2E8D224350B3008C160F /* HistoryTransactionsCoordinatorProtocol.swift in Sources */,
 				FAD88F3021AEB7BD00BE7BC1 /* NotificationItem.swift in Sources */,
 				FAD88F8C21B1228F00BE7BC1 /* MenuViewModel.swift in Sources */,
@@ -2075,6 +2096,7 @@
 				FA0CAE2621D67A7100805288 /* IconViewModel.swift in Sources */,
 				FA835D622265C0D600A592F2 /* PieChartPresentingExtension.swift in Sources */,
 				FAED7D9821EC4C0D00BF6FE1 /* Basket.swift in Sources */,
+				FABE54F7233F854600DF2B70 /* CreditType.swift in Sources */,
 				FA66FB6F22250C8F00708C71 /* TransactionEditViewController.swift in Sources */,
 				FA84E7EB225DA9EF00C0A274 /* LineChartAreasRenderer.swift in Sources */,
 				FA30B47A22852F720017470C /* BalanceExpenseCategoriesTableSupport.swift in Sources */,
@@ -2102,6 +2124,7 @@
 				FAD88F4E21AEC1A500BE7BC1 /* Service.swift in Sources */,
 				FA7DB73522102FBE00559878 /* CurrenciesCoordinator.swift in Sources */,
 				FA71770122683299008ADF94 /* GraphTotalTableViewCell.swift in Sources */,
+				FABE54FD233FA9BA00DF2B70 /* CreditTypeViewModel.swift in Sources */,
 				FACEC157230133CC00611B2C /* RegistrationTableController.swift in Sources */,
 				FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */,
 				FA7276DA22539F510086D4D1 /* FiltersSelectionViewSection.swift in Sources */,
@@ -2184,6 +2207,7 @@
 				FA7276C1225251FB0086D4D1 /* FundsMoveEditDelegateExtension.swift in Sources */,
 				FA6F2E8F224350E7008C160F /* HistoryTransactionsCoordinator.swift in Sources */,
 				FA7462FB227C820F00E6D39B /* FundsMoveViewModel.swift in Sources */,
+				FABE54F3233F808000DF2B70 /* CreditEditViewModel.swift in Sources */,
 				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,
 				FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */,
 				FA81748C222E2B8700EE6116 /* CommentViewController.swift in Sources */,
@@ -2251,6 +2275,7 @@
 				FA0CAE1721D66C8700805288 /* IconsServiceProtocol.swift in Sources */,
 				FA7EDFF622CCD5BC0054EAD3 /* AccountConnectionsServiceProtocol.swift in Sources */,
 				FA630C2A2293A8FC00242AB3 /* FloatingTextField.swift in Sources */,
+				FABE54FB233F865B00DF2B70 /* CreditTypesService.swift in Sources */,
 				FAC3B9C721C0F2B00015A12F /* IncomeSourcesServiceProtocol.swift in Sources */,
 				FA66FB7322269EC900708C71 /* IncomeEditViewController.swift in Sources */,
 				FA9F962C21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift in Sources */,
@@ -2323,6 +2348,15 @@
 				FA6973F02296D6E4004E6327 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		FABE5502233FBAA100DF2B70 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FABE5501233FBAA100DF2B70 /* en */,
+				FABE5503233FBAA600DF2B70 /* ru */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 		FAD88F0221AEA87300BE7BC1 /* Launch.storyboard */ = {

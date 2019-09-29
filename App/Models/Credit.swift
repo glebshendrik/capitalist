@@ -8,44 +8,6 @@
 
 import Foundation
 
-enum PeriodUnit : String, Codable {
-    case days
-    case months
-    case years    
-}
-
-struct CreditType : Decodable {
-    let id: Int
-    let name: String
-    let localizedKey: String
-    let localizedName: String
-    let periodUnit: PeriodUnit
-    let minValue: Int
-    let maxValue: Int
-    let defaultValue: Int
-    let hasMonthlyPayments: Bool
-    let periodSuperUnit: PeriodUnit
-    let unitsInSuperUnit: Int
-    let rowOrder: Int
-    let deletedAt: Date?
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case localizedKey = "localized_key"
-        case localizedName = "localized_name"
-        case periodUnit = "period_unit"
-        case minValue = "min_value"
-        case maxValue = "max_value"
-        case defaultValue = "default_value"
-        case hasMonthlyPayments = "has_monthly_payments"
-        case periodSuperUnit = "period_super_unit"
-        case unitsInSuperUnit = "units_in_super_unit"
-        case rowOrder = "row_order"
-        case deletedAt = "deleted_at"
-    }
-}
-
 struct Credit : Decodable {
     let id: Int
     let userId: Int
@@ -58,9 +20,13 @@ struct Credit : Decodable {
     let amountLeftCents: Int
     let monthlyPaymentCents: Int?
     let gotAt: Date
+    let period: Int
     let isPaid: Bool
     let deletedAt: Date?
     let expenseCategoryId: Int
+    let reminderStartDate: Date?
+    let reminderRecurrenceRule: String?
+    let reminderMessage: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -74,9 +40,13 @@ struct Credit : Decodable {
         case amountLeftCents = "amount_left_cents"
         case monthlyPaymentCents = "monthly_payment_cents"
         case gotAt = "got_at"
+        case period
         case isPaid = "is_paid"
         case deletedAt = "deleted_at"
         case expenseCategoryId = "expense_category_id"
+        case reminderStartDate = "reminder_start_date"
+        case reminderRecurrenceRule = "reminder_recurrence_rule"
+        case reminderMessage = "reminder_message"
     }
 }
 
@@ -125,7 +95,7 @@ struct CreditCreationForm : Encodable, Validatable {
     let monthlyPaymentCents: Int?
     let gotAt: Date
     let period: Int?
-    let expenseCategoryAttributes: ExpenseCategoryNestedAttributes?
+    let expenseCategoryAttributes: ExpenseCategoryNestedAttributes
     
     enum CodingKeys: String, CodingKey {
         case creditTypeId = "credit_type_id"
@@ -187,7 +157,7 @@ struct CreditUpdatingForm : Encodable, Validatable {
     let monthlyPaymentCents: Int?
     let gotAt: Date
     let period: Int?
-    let expenseCategoryAttributes: ExpenseCategoryNestedAttributes?
+    let expenseCategoryAttributes: ExpenseCategoryNestedAttributes
     
     enum CodingKeys: String, CodingKey {
         case name
