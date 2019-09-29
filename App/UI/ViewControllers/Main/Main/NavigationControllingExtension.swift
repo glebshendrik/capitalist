@@ -73,6 +73,14 @@ extension MainViewController {
     }
     
     func showEditScreen(expenseCategory: ExpenseCategory?, basketType: BasketType) {
+        if let creditId = expenseCategory?.creditId {
+            showCreditEditScreen(creditId: creditId)
+        } else {
+            showExpenseCategoryEditScreen(expenseCategory: expenseCategory, basketType: basketType)
+        }
+    }
+    
+    func showExpenseCategoryEditScreen(expenseCategory: ExpenseCategory?, basketType: BasketType) {
         if  let expenseCategoryEditNavigationController = router.viewController(.ExpenseCategoryEditNavigationController) as? UINavigationController,
             let expenseCategoryEditViewController = expenseCategoryEditNavigationController.topViewController as? ExpenseCategoryEditViewController {
             
@@ -85,6 +93,10 @@ extension MainViewController {
             
             present(expenseCategoryEditNavigationController, animated: true, completion: nil)
         }
+    }
+    
+    func showCreditEditScreen(creditId: Int) {
+        modal(factory.creditEditViewController(delegate: self, creditId: creditId))
     }
 }
 

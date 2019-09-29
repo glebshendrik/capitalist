@@ -211,8 +211,8 @@ extension ApplicationAssembly {
         }
         
         // CreditEditViewController
-//        container.registerForSkrudzhStoryboard(CreditEditViewController.self) { (r, c) in
-//            c.viewModel = r.resolve(CreditEditViewModel.self)
-//        }
+        container.registerForSkrudzhStoryboard(CreditEditViewController.self) { (r, c) in
+            c.viewModel = r.resolve(CreditEditViewModel.self)
+        }
     }
 }

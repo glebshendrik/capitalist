@@ -297,6 +297,7 @@
 		FABE5500233FBAA100DF2B70 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = FABE5502233FBAA100DF2B70 /* Localizable.stringsdict */; };
 		FABE55052340916B00DF2B70 /* CreditEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE55042340916B00DF2B70 /* CreditEditTableController.swift */; };
 		FABE55072340918000DF2B70 /* CreditEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE55062340918000DF2B70 /* CreditEditViewController.swift */; };
+		FABE55092341132200DF2B70 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE55082341132100DF2B70 /* Slider.swift */; };
 		FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */; };
 		FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */; };
 		FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */; };
@@ -704,6 +705,7 @@
 		FABE5503233FBAA600DF2B70 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		FABE55042340916B00DF2B70 /* CreditEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditEditTableController.swift; sourceTree = "<group>"; };
 		FABE55062340918000DF2B70 /* CreditEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditEditViewController.swift; sourceTree = "<group>"; };
+		FABE55082341132100DF2B70 /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
 		FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
@@ -864,6 +866,7 @@
 				FACC01FE224CC7140044A747 /* CustomView.swift */,
 				FA84E7EA225DA9EF00C0A274 /* LineChartAreasRenderer.swift */,
 				FAEB0CCA22CF67AE00622994 /* HighlightButton.swift */,
+				FABE55082341132100DF2B70 /* Slider.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2279,6 +2282,7 @@
 				FA7276DC225490490086D4D1 /* DateRangeCollectionViewCell.swift in Sources */,
 				FACC01E4224B52460044A747 /* StatisticsViewController.swift in Sources */,
 				FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */,
+				FABE55092341132200DF2B70 /* Slider.swift in Sources */,
 				FA0CAE1721D66C8700805288 /* IconsServiceProtocol.swift in Sources */,
 				FA7EDFF622CCD5BC0054EAD3 /* AccountConnectionsServiceProtocol.swift in Sources */,
 				FA630C2A2293A8FC00242AB3 /* FloatingTextField.swift in Sources */,

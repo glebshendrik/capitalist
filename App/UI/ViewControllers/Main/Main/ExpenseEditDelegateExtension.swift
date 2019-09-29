@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension MainViewController: ExpenseEditViewControllerDelegate {
+extension MainViewController: ExpenseEditViewControllerDelegate, CreditEditViewControllerDelegate {
     func didCreateExpense() {
         soundsManager.playTransactionCompletedSound()
         updateExpenseDependentData()
@@ -22,6 +22,18 @@ extension MainViewController: ExpenseEditViewControllerDelegate {
         updateExpenseDependentData()
     }
         
+    func didCreateCredit() {
+        updateExpenseDependentData()
+    }
+
+    func didUpdateCredit() {
+        updateExpenseDependentData()
+    }
+
+    func didRemoveCredit() {
+        updateExpenseDependentData()
+    }
+    
     private func updateExpenseDependentData() {
         loadBudget()
         loadBaskets()

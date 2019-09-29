@@ -32,7 +32,7 @@ class CreditsViewController : UIViewController, UIMessagePresenterManagerDependa
     }
     
     @IBAction func didTapAdd(_ sender: Any) {
-//        showNewCredit()
+        showNewCredit()
     }
 }
 
@@ -102,7 +102,7 @@ extension CreditsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let creditViewModel = viewModel.creditViewModel(at: indexPath) else { return }
-//        showCredit(creditViewModel)
+        showCredit(creditViewModel)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -110,27 +110,27 @@ extension CreditsViewController : UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-//extension CreditsViewController : CreditEditViewControllerDelegate {
-//    func didCreateCredit() {
-//        loadCredits(finantialDataInvalidated: true)
-//    }
-//
-//    func didUpdateCredit() {
-//        loadCredits(finantialDataInvalidated: true)
-//    }
-//
-//    func didRemoveCredit() {
-//        loadCredits(finantialDataInvalidated: true)
-//    }
-//
-//    func showCredit(_ credit: CreditViewModel) {
-//        modal(factory.creditEditViewController(delegate: self, type: credit.type, creditId: credit.id, expenseSourceFrom: nil, expenseSourceTo: nil))
-//    }
-//
-//    func showNewCredit() {
-//        modal(factory.creditEditViewController(delegate: self, type: viewModel.selectedCreditType, creditId: nil, expenseSourceFrom: nil, expenseSourceTo: nil))
-//    }
-//}
+extension CreditsViewController : CreditEditViewControllerDelegate {
+    func didCreateCredit() {
+        loadCredits(finantialDataInvalidated: true)
+    }
+
+    func didUpdateCredit() {
+        loadCredits(finantialDataInvalidated: true)
+    }
+
+    func didRemoveCredit() {
+        loadCredits(finantialDataInvalidated: true)
+    }
+
+    func showCredit(_ credit: CreditViewModel) {
+        modal(factory.creditEditViewController(delegate: self, creditId: credit.id))
+    }
+
+    func showNewCredit() {
+        modal(factory.creditEditViewController(delegate: self, creditId: nil))
+    }
+}
 
 extension CreditsViewController {
     

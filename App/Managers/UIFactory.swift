@@ -179,4 +179,16 @@ class UIFactory : UIFactoryProtocol {
         }
         return borrowEditNavigationController
     }
+    
+    func creditEditViewController(delegate: CreditEditViewControllerDelegate,
+                                  creditId: Int?) -> UINavigationController? {
+        let creditEditNavigationController = router.viewController(.CreditEditNavigationController) as? UINavigationController
+        let creditEditViewController = creditEditNavigationController?.topViewController as? CreditEditViewController
+        
+        creditEditViewController?.set(delegate: delegate)
+        if let creditId = creditId {
+            creditEditViewController?.set(creditId: creditId)
+        }
+        return creditEditNavigationController
+    }
 }

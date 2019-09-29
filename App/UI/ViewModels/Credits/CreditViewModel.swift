@@ -39,8 +39,8 @@ class CreditViewModel {
         return paidAmount(shouldRound: true)
     }
     
-    var paidAmountFormatted: String {
-        return "Всего \(paidAmount)"
+    var amountFormatted: String {
+        return "Всего \(amount)"
     }
     
     var paymentsProgress: Float {

@@ -91,7 +91,6 @@ class CreditTypeViewModel {
         let parentUnitsFormatted = String.localizedStringWithFormat(formatString(for: periodSuperUnit), parentUnits)
         let unitsFormatted = String.localizedStringWithFormat(formatString(for: periodUnit), remainingUnits)
         
-        return "\(parentUnitsFormatted) \(unitsFormatted)"
-
+        return remainingUnits == 0 ? "\(parentUnitsFormatted)" : "\(parentUnitsFormatted) \(unitsFormatted)"
     }
 }

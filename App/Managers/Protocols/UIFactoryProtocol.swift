@@ -72,4 +72,7 @@ protocol UIFactoryProtocol {
                                   expenseSourceFrom: ExpenseSourceViewModel?,
                                   expenseSourceTo: ExpenseSourceViewModel?) -> UINavigationController?
     
+    func creditEditViewController(delegate: CreditEditViewControllerDelegate,
+                                  creditId: Int?) -> UINavigationController?
+    
 }

@@ -88,6 +88,10 @@ class ExpenseCategoryViewModel {
     var isDeleted: Bool {
         return expenseCategory.deletedAt != nil
     }
+        
+    var creditId: Int? {
+        return expenseCategory.creditId
+    }
     
     init(expenseCategory: ExpenseCategory) {
         self.expenseCategory = expenseCategory

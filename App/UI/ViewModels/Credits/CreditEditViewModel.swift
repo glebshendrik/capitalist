@@ -28,6 +28,7 @@ class CreditEditViewModel {
             if selectedCreditType == nil || !selectedCreditType!.hasMonthlyPayments {
                 monthlyPayment = nil
             }
+            period = selectedCreditType?.defaultValue
         }
     }
     var selectedIconURL: URL? = nil
@@ -73,7 +74,7 @@ class CreditEditViewModel {
     }
     
     var periodValue: Float {
-        return Float(period ?? selectedCreditType?.defaultValue ?? 0)
+        return Float(period ?? 0)
     }
     
     // Visibility

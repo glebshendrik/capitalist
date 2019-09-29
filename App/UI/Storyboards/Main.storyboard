@@ -171,6 +171,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <segue destination="RP2-3X-6el" kind="show" id="CUS-lU-kP6"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="TtX-LK-h4F" imageView="4QQ-Nu-2iP" style="IBUITableViewCellStyleDefault" id="xx5-JN-se6">
                                         <rect key="frame" x="0.0" y="292" width="375" height="44"/>
@@ -265,6 +268,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzq-fX-swI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-221" y="160"/>
+        </scene>
+        <!--CreditsViewController-->
+        <scene sceneID="7yb-cQ-jvF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Credits" referencedIdentifier="CreditsViewController" id="RP2-3X-6el" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="zU1-Jf-ca5"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4b6-H8-vFA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-192" y="228"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="lXX-sC-DZf">
@@ -1765,6 +1778,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KwI-3J-1v6"/>
+        <segue reference="fO5-Yn-0Az"/>
     </inferredMetricsTieBreakers>
 </document>

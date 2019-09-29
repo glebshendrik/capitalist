@@ -71,7 +71,8 @@ class CreditEditViewController : FormTransactionsDependableEditViewController {
         updateGotAtUI()
         updatePeriodUI()
         updateReminderUI()
-        updateRemoveButtonUI(reload: true, animated: true)
+        updateRemoveButtonUI()
+        updateTableUI(animated: false)
     }
 }
 

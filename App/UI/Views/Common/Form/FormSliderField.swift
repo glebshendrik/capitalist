@@ -13,8 +13,8 @@ class FormSliderField : FormTextField {
     private var didChange: ((Float) -> Void)? = nil
     
     lazy var baseContainer: UIView = { return UIView() }()
-    
-    lazy var slider: UISlider = { return UISlider() }()
+        
+    lazy var slider: Slider = { return Slider() }()
     
     lazy var minimumValueLabel: UILabel = { return UILabel() }()
     
@@ -183,12 +183,12 @@ class FormSliderField : FormTextField {
     func updateSlider() {
         slider.isEnabled = isEnabled
         slider.isUserInteractionEnabled = isEnabled
-        slider.setMinimumTrackImage(currentMinimumTrackImage, for: .normal)
-        slider.setMaximumTrackImage(currentMaximumTrackImage, for: .normal)
+//        slider.setMinimumTrackImage(currentMinimumTrackImage, for: .normal)
+//        slider.setMaximumTrackImage(currentMaximumTrackImage, for: .normal)
         slider.setThumbImage(currentThumbImage, for: .normal)
         slider.minimumTrackTintColor = minimumTrackTintColor
         slider.maximumTrackTintColor = maximumTrackTintColor
-        slider.thumbTintColor = thumbTintColor
+//        slider.thumbTintColor = thumbTintColor
         slider.minimumValue = minimumValue
         slider.maximumValue = maximumValue
     }
