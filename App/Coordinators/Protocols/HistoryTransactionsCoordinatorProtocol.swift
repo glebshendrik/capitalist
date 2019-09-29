@@ -11,4 +11,5 @@ import PromiseKit
 
 protocol HistoryTransactionsCoordinatorProtocol {
     func index() -> Promise<[HistoryTransaction]>
+    func destroy(historyTransaction: HistoryTransaction) -> Promise<Void>
 }

@@ -115,7 +115,7 @@ extension NSDecimalNumber {
         }
         
         if let format = formatter.negativeFormat {
-            formatter.negativeFormat = currency.symbolFirst ? "¤\(format)\(suffix)" : "\(format)\(suffix)¤"
+            formatter.negativeFormat = currency.symbolFirst ? "-¤\(format)\(suffix)" : "-\(format)\(suffix)¤"
         }
         
         guard var formattedString = formatter.string(from: number) else { return nil }

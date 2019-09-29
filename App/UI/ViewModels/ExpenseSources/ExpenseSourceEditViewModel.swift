@@ -25,16 +25,7 @@ class ExpenseSourceEditViewModel {
     var selectedCurrency: Currency? = nil
     var name: String? = nil
     var amount: String? = nil
-    var creditLimit: String? = nil {
-        didSet {
-            if let creditLimit = creditLimit,
-                creditLimit.isNumeric,
-                isNew {
-                
-                amount = creditLimit
-            }
-        }
-    }
+    var creditLimit: String? = nil
     var goalAmount: String? = nil
     var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
     
@@ -152,14 +143,6 @@ class ExpenseSourceEditViewModel {
                     accountCoordinator.loadCurrentUser()
                 }.done { user in
                     self.selectedCurrency = user.currency
-                    if self.isNew {
-                        if self.amount == nil {
-                            self.amount = 0.moneyDecimalString(with: self.selectedCurrency)
-                        }
-                        if self.creditLimit == nil {
-                            self.creditLimit = 0.moneyDecimalString(with: self.selectedCurrency)
-                        }
-                    }
                 }
     }
     
@@ -226,11 +209,11 @@ extension ExpenseSourceEditViewModel {
                                          name: name,
                                          iconURL: selectedIconURL,
                                          amountCurrency: selectedCurrency?.code,
-                                         amountCents: amount?.intMoney(with: selectedCurrency),
+                                         amountCents: (amount ?? "0").intMoney(with: selectedCurrency),
                                          accountType: accountType,
                                          goalAmountCents: goalAmount?.intMoney(with: selectedCurrency),
                                          goalAmountCurrency: selectedCurrency?.code,
-                                         creditLimitCents: creditLimit?.intMoney(with: selectedCurrency),
+                                         creditLimitCents: (creditLimit ?? "0").intMoney(with: selectedCurrency),
                                          creditLimitCurrency: selectedCurrency?.code,
                                          accountConnectionAttributes: accountConnectionAttributes)
     }

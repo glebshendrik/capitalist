@@ -37,6 +37,11 @@ class ExpenseCategoryCollectionViewCell : UICollectionViewCell, EditableCellProt
             updateUI()
         }
     }
+        
+    var canDelete: Bool {
+        guard let viewModel = viewModel else { return true }
+        return !viewModel.isCredit
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

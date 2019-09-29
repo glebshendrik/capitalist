@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource {
     
@@ -109,6 +110,44 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         default:
             return UITableViewCell()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        guard let section = viewModel.section(at: indexPath.section) else {
+            return false
+        }        
+        return section is HistoryTransactionsSection
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+
+        guard   editingStyle == .delete,
+                let section = viewModel.section(at: indexPath.section) as? HistoryTransactionsSection,
+                let historyTransactionViewModel = section.historyTransactionViewModel(at: indexPath.row) else {
+            return
+        }
+        askToDelete(historyTransactionViewModel: historyTransactionViewModel)
+    }
+    
+    func askToDelete(historyTransactionViewModel: HistoryTransactionViewModel) {
+        let alertController = UIAlertController(title: "Удалить транзакцию?",
+                                                message: nil,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(title: "Удалить",
+                                  style: .destructive,
+                                  isEnabled: true,
+                                  handler: { [weak self] _ in
+                                    self?.removeTransaction(historyTransactionViewModel: historyTransactionViewModel)
+                                })
+        
+        
+        alertController.addAction(title: "Отмена",
+                                  style: .cancel,
+                                  isEnabled: true,
+                                  handler: nil)
+        
+        present(alertController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

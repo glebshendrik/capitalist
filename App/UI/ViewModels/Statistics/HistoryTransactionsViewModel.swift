@@ -107,6 +107,10 @@ class HistoryTransactionsViewModel {
         filteredHistoryTransactionViewModels = historyTransactionViewModels
     }
     
+    func removeTransaction(historyTransactionViewModel: HistoryTransactionViewModel) -> Promise<Void> {        
+        return historyTransactionsCoordinator.destroy(historyTransaction: historyTransactionViewModel.historyTransaction)
+    }
+    
     private func loadDefaultCurrency() -> Promise<Void> {
         return  firstly {
                     accountCoordinator.loadCurrentUser()

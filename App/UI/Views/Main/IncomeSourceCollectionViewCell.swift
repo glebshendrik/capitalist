@@ -18,6 +18,11 @@ class IncomeSourceCollectionViewCell : EditableCell {
         }
     }
     
+    override var canDelete: Bool {
+        guard let viewModel = viewModel else { return super.canDelete }
+        return !viewModel.isChild
+    }
+    
     func updateUI() {
         nameLabel.text = viewModel?.name
         incomeAmountLabel.text = viewModel?.amountRounded

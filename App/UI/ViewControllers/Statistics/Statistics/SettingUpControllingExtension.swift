@@ -47,6 +47,19 @@ extension StatisticsViewController {
         }
     }
     
+    func removeTransaction(historyTransactionViewModel: HistoryTransactionViewModel) {
+        setLoading()
+        
+        firstly {
+            viewModel.removeTransaction(historyTransactionViewModel: historyTransactionViewModel)
+        }.done {
+            self.loadData(financialDataInvalidated: true)
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления транзакции", theme: .error)
+            self.updateUI()
+        }
+    }
+    
     private func postFinantialDataUpdated() {
         NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }

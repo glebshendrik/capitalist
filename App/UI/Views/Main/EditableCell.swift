@@ -11,7 +11,8 @@ import UIKit
 protocol EditableCellProtocol {
     var delegate: EditableCellDelegate? { get set }
     var deleteButton: UIButton! { get }
-    var editButton: UIButton! { get }    
+    var editButton: UIButton! { get }
+    var canDelete: Bool { get }
 }
 
 protocol EditableCellDelegate {
@@ -23,6 +24,10 @@ class EditableCell : UICollectionViewCell, EditableCellProtocol {
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     var delegate: EditableCellDelegate?
+    
+    var canDelete: Bool {
+        return true
+    }
     
     @IBAction func didTapDeleteButton(_ sender: Any) {
         delegate?.didTapDeleteButton(cell: self)
@@ -45,12 +50,12 @@ extension UICollectionViewCell {
             ? startWiggling()
             : stopWiggling()
         
-        editableCell.deleteButton.isEnabled = editing
+        editableCell.deleteButton.isEnabled = editing && editableCell.canDelete
         UIView.transition(with: editableCell.deleteButton,
                           duration: 0.1,
                           options: .transitionCrossDissolve,
                           animations: {
-                            editableCell.deleteButton.isHidden = !editing
+                            editableCell.deleteButton.isHidden = !editing || !editableCell.canDelete
         })
         
         editableCell.editButton.isEnabled = editing

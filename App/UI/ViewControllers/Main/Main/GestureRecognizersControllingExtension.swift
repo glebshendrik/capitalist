@@ -10,7 +10,8 @@ import UIKit
 
 extension MainViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        guard let longPressureRecognizer = gestureRecognizer as? UILongPressGestureRecognizer else { return true }
+        return !longPressureRecognizers.contains(longPressureRecognizer)
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {

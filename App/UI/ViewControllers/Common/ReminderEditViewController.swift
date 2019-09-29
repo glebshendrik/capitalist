@@ -67,7 +67,7 @@ extension ReminderEditViewController {
 extension ReminderEditViewController : ReminderEditTableViewControllerDelegate {
     func didChange(message: String?) {
         viewModel.reminderMessage = message
-        updateMessageUI()
+//        updateMessageUI()
     }
     
     func didTapStartDate() {

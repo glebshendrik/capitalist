@@ -20,6 +20,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     var router: ApplicationRouterProtocol!
     var factory: UIFactoryProtocol!
     var soundsManager: SoundsManagerProtocol!
+    var longPressureRecognizers: [UILongPressGestureRecognizer] = []
     
     static var finantialDataInvalidatedNotification = NSNotification.Name("finantialDataInvalidatedNotification")
     

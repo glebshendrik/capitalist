@@ -16,7 +16,7 @@ struct IncomeSource : Decodable {
     let iconURL: URL?
     let order: Int
     let deletedAt: Date?
-    let isChild: Bool?
+    let isChild: Bool
     let reminderStartDate: Date?
     let reminderRecurrenceRule: String?
     let reminderMessage: String?

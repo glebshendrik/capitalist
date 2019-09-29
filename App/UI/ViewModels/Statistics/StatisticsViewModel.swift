@@ -164,6 +164,11 @@ extension StatisticsViewModel {
                     self.updatePresentationData()
                 }
     }
+    
+    func removeTransaction(historyTransactionViewModel: HistoryTransactionViewModel) -> Promise<Void> {
+        setDataLoading()
+        return historyTransactionsViewModel.removeTransaction(historyTransactionViewModel: historyTransactionViewModel)
+    }
 }
 
 // Filters

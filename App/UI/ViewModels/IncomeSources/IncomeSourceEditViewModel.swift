@@ -53,8 +53,8 @@ class IncomeSourceEditViewModel {
     
     // Visibility
     
-    var removeButtonHidden: Bool {
-        return isNew
+    var removeButtonHidden: Bool {        
+        return isNew || incomeSource!.isChild
     }
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,

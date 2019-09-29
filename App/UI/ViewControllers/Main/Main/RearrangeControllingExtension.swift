@@ -128,6 +128,8 @@ extension MainViewController {
         
         updateCollectionViews()
         
+        updateLongPressureRecognizers()
+        
         setVisibleCells(editing: editing)
         UIView.animate(withDuration: 0.1, animations: {
             self.editDoneButton.alpha = editing ? 1.0 : 0.0
@@ -135,6 +137,12 @@ extension MainViewController {
             self.view.layoutIfNeeded()
         }) { completed in
 //            self.didCreateExpense()
+        }
+    }
+    
+    private func updateLongPressureRecognizers() {
+        longPressureRecognizers.forEach {
+            $0.minimumPressDuration = isEditing ? fastPressDuration : slowPressDuration
         }
     }
 }

@@ -10,6 +10,14 @@ import UIKit
 import SideMenu
 
 extension MainViewController {
+    var fastPressDuration: TimeInterval {
+        return 0.0525
+    }
+    
+    var slowPressDuration: TimeInterval {
+        return 0.5
+    }
+    
     func setupUI() {
         setupIncomeSourcesCollectionView()
         setupExpenseSourcesCollectionView()
@@ -90,13 +98,15 @@ extension MainViewController {
     private func setupRearrangeGestureRecognizer(for collectionView: UICollectionView) {
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didRecognizeRearrangeGesture(gesture:)))
         collectionView.addGestureRecognizer(gestureRecognizer)
-        gestureRecognizer.minimumPressDuration = 0.95
+        gestureRecognizer.minimumPressDuration = slowPressDuration
+        gestureRecognizer.delegate = self
+        longPressureRecognizers.append(gestureRecognizer)
     }
     
     private func setupTransactionGestureRecognizer() {
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didRecognizeTransactionGesture(gesture:)))
         self.view.addGestureRecognizer(gestureRecognizer)
-        gestureRecognizer.minimumPressDuration = 0.0525
+        gestureRecognizer.minimumPressDuration = fastPressDuration
         gestureRecognizer.delegate = self
     }
     
