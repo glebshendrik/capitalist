@@ -64,10 +64,26 @@ class CreditEditViewModel {
         
     var iconDefaultImageName: String { return IconCategory.expenseSourceDebt.defaultIconName }
     
+    var minValue: Float {
+        return Float(selectedCreditType?.minValue ?? 0)
+    }
+        
+    var maxValue: Float {
+        return Float(selectedCreditType?.maxValue ?? 1)
+    }
+    
+    var periodValue: Float {
+        return Float(period ?? selectedCreditType?.defaultValue ?? 0)
+    }
+    
     // Visibility
     var monthlyPaymentFieldHidden: Bool {
         guard let creditType = selectedCreditType else { return true }
         return !creditType.hasMonthlyPayments
+    }
+    
+    var periodFieldHidden: Bool {
+        return selectedCreditType == nil
     }
     
     var removeButtonHidden: Bool { return isNew }
@@ -76,6 +92,8 @@ class CreditEditViewModel {
     var canChangeCurrency: Bool { return isNew }
     
     var canChangeCreditType: Bool { return isNew }
+    
+    var canChangeAlreadyPaid: Bool { return isNew }
     
     init(creditsCoordinator: CreditsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {

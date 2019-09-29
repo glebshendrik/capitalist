@@ -27,7 +27,7 @@ class CreditTypeViewModel {
         return creditType.minValue
     }
     
-    var minValueFormatter: String {
+    var minValueFormatted: String {
         return formatted(value: minValue)
     }
     
@@ -35,7 +35,7 @@ class CreditTypeViewModel {
         return creditType.maxValue
     }
     
-    var maxValueFormatter: String {
+    var maxValueFormatted: String {
         return formatted(value: maxValue)
     }
     

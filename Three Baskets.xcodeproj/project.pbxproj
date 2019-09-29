@@ -295,6 +295,8 @@
 		FABE54FB233F865B00DF2B70 /* CreditTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54FA233F865B00DF2B70 /* CreditTypesService.swift */; };
 		FABE54FD233FA9BA00DF2B70 /* CreditTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54FC233FA9BA00DF2B70 /* CreditTypeViewModel.swift */; };
 		FABE5500233FBAA100DF2B70 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = FABE5502233FBAA100DF2B70 /* Localizable.stringsdict */; };
+		FABE55052340916B00DF2B70 /* CreditEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE55042340916B00DF2B70 /* CreditEditTableController.swift */; };
+		FABE55072340918000DF2B70 /* CreditEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE55062340918000DF2B70 /* CreditEditViewController.swift */; };
 		FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */; };
 		FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */; };
 		FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */; };
@@ -700,6 +702,8 @@
 		FABE54FC233FA9BA00DF2B70 /* CreditTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTypeViewModel.swift; sourceTree = "<group>"; };
 		FABE5501233FBAA100DF2B70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		FABE5503233FBAA600DF2B70 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		FABE55042340916B00DF2B70 /* CreditEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditEditTableController.swift; sourceTree = "<group>"; };
+		FABE55062340918000DF2B70 /* CreditEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditEditViewController.swift; sourceTree = "<group>"; };
 		FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
@@ -1335,6 +1339,8 @@
 			isa = PBXGroup;
 			children = (
 				FABE54E9233CFFA600DF2B70 /* CreditsViewController.swift */,
+				FABE55062340918000DF2B70 /* CreditEditViewController.swift */,
+				FABE55042340916B00DF2B70 /* CreditEditTableController.swift */,
 			);
 			path = Credits;
 			sourceTree = "<group>";
@@ -2258,6 +2264,7 @@
 				FA28480322F19EB6003F114A /* UIFactory.swift in Sources */,
 				FA7CB4D7221C20B300FAAC0F /* Income.swift in Sources */,
 				FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */,
+				FABE55052340916B00DF2B70 /* CreditEditTableController.swift in Sources */,
 				FA0CAE1321D52CB400805288 /* MoneyTextField.swift in Sources */,
 				FACC01EF224B81310044A747 /* FiltersViewModel.swift in Sources */,
 				FAD88F7621AFD64000BE7BC1 /* APIRoute.swift in Sources */,
@@ -2319,6 +2326,7 @@
 				FA630C202292AC5D00242AB3 /* Infrastructure.swift in Sources */,
 				FA0570F2232A6CF2002B4706 /* DebtsTableSupport.swift in Sources */,
 				FA8AD0E422C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift in Sources */,
+				FABE55072340918000DF2B70 /* CreditEditViewController.swift in Sources */,
 				FA66FB752226AB0A00708C71 /* TransactionEditViewModel.swift in Sources */,
 				FAD88F5021AEC1A500BE7BC1 /* DevicesService.swift in Sources */,
 				FAC3B9C121BE15EC0015A12F /* OnboardingViewController.swift in Sources */,
