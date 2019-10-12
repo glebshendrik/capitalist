@@ -51,5 +51,7 @@ class ServicesAssembly: Assembly {
         container.autoregister(CreditsServiceProtocol.self, initializer: CreditsService.init)
         
         container.autoregister(CreditTypesServiceProtocol.self, initializer: CreditTypesService.init)
+        
+        container.autoregister(ActiveTypesServiceProtocol.self, initializer: ActiveTypesService.init)
     }
 }
