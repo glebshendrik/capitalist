@@ -284,6 +284,8 @@
 		FAB5BE45235213E2000466AE /* ActiveTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE44235213E2000466AE /* ActiveTypesService.swift */; };
 		FAB5BE472352176B000466AE /* ActivesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE462352176B000466AE /* ActivesServiceProtocol.swift */; };
 		FAB5BE49235217ED000466AE /* ActivesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE48235217ED000466AE /* ActivesService.swift */; };
+		FAB5BE4B235218DD000466AE /* ActivesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE4A235218DD000466AE /* ActivesCoordinatorProtocol.swift */; };
+		FAB5BE4D2352193C000466AE /* ActivesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE4C2352193C000466AE /* ActivesCoordinator.swift */; };
 		FABA979722E1E36E00E03380 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA979622E1E36D00E03380 /* FormTextField.swift */; };
 		FABE54DA233A757F00DF2B70 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54D9233A757F00DF2B70 /* Credit.swift */; };
 		FABE54DC233BE50D00DF2B70 /* CreditsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54DB233BE50C00DF2B70 /* CreditsServiceProtocol.swift */; };
@@ -698,6 +700,8 @@
 		FAB5BE44235213E2000466AE /* ActiveTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTypesService.swift; sourceTree = "<group>"; };
 		FAB5BE462352176B000466AE /* ActivesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivesServiceProtocol.swift; sourceTree = "<group>"; };
 		FAB5BE48235217ED000466AE /* ActivesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivesService.swift; sourceTree = "<group>"; };
+		FAB5BE4A235218DD000466AE /* ActivesCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivesCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FAB5BE4C2352193C000466AE /* ActivesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivesCoordinator.swift; sourceTree = "<group>"; };
 		FABA979622E1E36D00E03380 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		FABE54D9233A757F00DF2B70 /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
 		FABE54DB233BE50C00DF2B70 /* CreditsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -1539,6 +1543,7 @@
 				FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */,
 				FA0570ED232A362F002B4706 /* BorrowsCoordinator.swift */,
 				FABE54E1233BEFF100DF2B70 /* CreditsCoordinator.swift */,
+				FAB5BE4C2352193C000466AE /* ActivesCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1662,6 +1667,7 @@
 				FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */,
 				FA0570EB232A35FC002B4706 /* BorrowsCoordinatorProtocol.swift */,
 				FABE54DF233BEFA200DF2B70 /* CreditsCoordinatorProtocol.swift */,
+				FAB5BE4A235218DD000466AE /* ActivesCoordinatorProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2322,6 +2328,7 @@
 				FA2847F422F0560D003F114A /* IncomeSourceEditingExtension.swift in Sources */,
 				FAC3B9C321BE74CE0015A12F /* OnboardingPageViewController.swift in Sources */,
 				FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */,
+				FAB5BE4B235218DD000466AE /* ActivesCoordinatorProtocol.swift in Sources */,
 				FA835D422260742400A592F2 /* GraphType.swift in Sources */,
 				FA9F962A21C2A86B00FD64C1 /* IncomeSourceEditViewController.swift in Sources */,
 				FAD88F1321AEB48800BE7BC1 /* ApplicationRouterProtocol.swift in Sources */,
@@ -2362,6 +2369,7 @@
 				FA66FB752226AB0A00708C71 /* TransactionEditViewModel.swift in Sources */,
 				FAD88F5021AEC1A500BE7BC1 /* DevicesService.swift in Sources */,
 				FAC3B9C121BE15EC0015A12F /* OnboardingViewController.swift in Sources */,
+				FAB5BE4D2352193C000466AE /* ActivesCoordinator.swift in Sources */,
 				FA0CAE0B21D3C1D900805288 /* ExpenseSourceEditViewController.swift in Sources */,
 				FA0570EE232A362F002B4706 /* BorrowsCoordinator.swift in Sources */,
 				FAED7DAA21EC8B6C00BF6FE1 /* ExpenseCategoriesCoordinator.swift in Sources */,

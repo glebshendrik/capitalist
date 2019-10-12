@@ -1,5 +1,5 @@
 //
-//  ActivesServiceProtocol.swift
+//  ActivesCoordinatorProtocol.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 12/10/2019.
@@ -9,9 +9,10 @@
 import Foundation
 import PromiseKit
 
-protocol ActivesServiceProtocol {
-    func indexActives(for basketId: Int) -> Promise<[Active]>
-    func indexUserActives(for userId: Int) -> Promise<[Active]>
+protocol ActivesCoordinatorProtocol {
+    func indexActiveTypes() -> Promise<[ActiveType]>
+    func indexActives(for basketType: BasketType) -> Promise<[Active]>
+    func indexUserActives() -> Promise<[Active]>
     func createActive(with creationForm: ActiveCreationForm) -> Promise<Active>
     func showActive(by id: Int) -> Promise<Active>
     func updateActive(with updatingForm: ActiveUpdatingForm) -> Promise<Void>

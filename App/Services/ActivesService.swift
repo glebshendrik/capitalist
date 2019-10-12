@@ -14,7 +14,7 @@ class ActivesService : Service, ActivesServiceProtocol {
         return requestCollection(APIRoute.indexActives(basketId: basketId))
     }
     
-    func index(for userId: Int) -> Promise<[Active]> {
+    func indexUserActives(for userId: Int) -> Promise<[Active]> {
         return requestCollection(APIRoute.indexUserActives(userId: userId))
     }
     
