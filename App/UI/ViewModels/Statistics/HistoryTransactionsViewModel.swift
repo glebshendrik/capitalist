@@ -11,7 +11,7 @@ import PromiseKit
 import SwifterSwift
 
 class HistoryTransactionsViewModel {
-    private let historyTransactionsCoordinator: HistoryTransactionsCoordinatorProtocol
+    private let historyTransactionsCoordinator: TransactionsCoordinatorProtocol
     private let exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
     private let currencyConverter: CurrencyConverterProtocol
@@ -47,7 +47,7 @@ class HistoryTransactionsViewModel {
         return historyTransactionsAmount(type: .expenseCategory)
     }
     
-    init(historyTransactionsCoordinator: HistoryTransactionsCoordinatorProtocol,
+    init(historyTransactionsCoordinator: TransactionsCoordinatorProtocol,
          exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          currencyConverter: CurrencyConverterProtocol) {

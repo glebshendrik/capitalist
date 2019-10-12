@@ -31,17 +31,11 @@ class ServicesAssembly: Assembly {
         container.autoregister(BasketsServiceProtocol.self, initializer: BasketsService.init)
         
         container.autoregister(CurrenciesServiceProtocol.self, initializer: CurrenciesService.init)
-        
-        container.autoregister(IncomesServiceProtocol.self, initializer: IncomesService.init)
-        
+                
         container.autoregister(ExchangeRatesServiceProtocol.self, initializer: ExchangeRatesService.init)
-        
-        container.autoregister(ExpensesServiceProtocol.self, initializer: ExpensesService.init)
-        
-        container.autoregister(FundsMovesServiceProtocol.self, initializer: FundsMovesService.init)
-        
-        container.autoregister(HistoryTransactionsServiceProtocol.self, initializer: HistoryTransactionsService.init)
-        
+                
+        container.autoregister(TransactionsServiceProtocol.self, initializer: TransactionsService.init)
+                
         container.autoregister(AccountConnectionsServiceProtocol.self, initializer: AccountConnectionsService.init)
         
         container.autoregister(ProviderConnectionsServiceProtocol.self, initializer: ProviderConnectionsService.init)

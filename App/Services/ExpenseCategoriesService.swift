@@ -18,11 +18,11 @@ class ExpenseCategoriesService : Service, ExpenseCategoriesServiceProtocol {
         return request(APIRoute.showExpenseCategory(id: id))
     }
     
-    func index(for basketId: Int) -> Promise<[ExpenseCategory]> {
+    func indexExpenseCategories(for basketId: Int) -> Promise<[ExpenseCategory]> {
         return requestCollection(APIRoute.indexExpenseCategories(basketId: basketId))
     }
     
-    func index(for userId: Int, includedInBalance: Bool) -> Promise<[ExpenseCategory]> {
+    func indexUserExpenseCategories(for userId: Int) -> Promise<[ExpenseCategory]> {
         return requestCollection(APIRoute.indexUserExpenseCategories(userId: userId, includedInBalance: includedInBalance))
     }
     

@@ -13,7 +13,7 @@ protocol ExpenseCategoriesCoordinatorProtocol {
     func create(with creationForm: ExpenseCategoryCreationForm) -> Promise<ExpenseCategory>
     func show(by id: Int) -> Promise<ExpenseCategory>
     func index(for basketType: BasketType) -> Promise<[ExpenseCategory]>
-    func index(includedInBalance: Bool) -> Promise<[ExpenseCategory]>
+    func index() -> Promise<[ExpenseCategory]>
     func update(with updatingForm: ExpenseCategoryUpdatingForm) -> Promise<Void>
     func updatePosition(with updatingForm: ExpenseCategoryPositionUpdatingForm) -> Promise<Void>
     func destroy(by id: Int, deleteTransactions: Bool) -> Promise<Void>

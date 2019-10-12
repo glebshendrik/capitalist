@@ -39,10 +39,9 @@ struct APIRouteQueryParameters {
                 indexExpenseSourcesParams["account_type"] = accountType.rawValue
             }
             return indexExpenseSourcesParams
-        case .indexUserExpenseCategories(_, let includedInBalance):
-            return [ "included_in_balance" : includedInBalance.string ]
-        case .createIncome(_, let shouldCloseActive):
-            return [ "close_active" : shouldCloseActive.string ]
+        case .indexTransactions(_, let transactionType):
+            guard let transactionType = transactionType else { return params }
+            return [ "transaction_type" : transactionType.rawValue ]
         case .indexProviderConnections(_, let providerId):
             return [ "provider_id" : providerId ]
         case .indexAccountConnections(_, let connectionId):

@@ -58,27 +58,16 @@ struct APIResource {
             return APIResource(singular: "basket", plural: "baskets")
         case .indexCurrencies:
             return APIResource(singular: "currency", plural: "currencies")
-        case .createIncome,
-             .showIncome,
-             .updateIncome,
-             .destroyIncome:
-            return APIResource(singular: "income", plural: "incomes")
-        case .createExpense,
-             .showExpense,
-             .updateExpense,
-             .destroyExpense:
-            return APIResource(singular: "expense", plural: "expenses")
-        case .createFundsMove,
-             .showFundsMove,
-             .updateFundsMove,
-             .destroyFundsMove:
-            return APIResource(singular: "funds_move", plural: "funds_moves")
+        case .indexTransactions,
+             .createTransaction,
+             .showTransaction,
+             .updateTransaction,
+             .destroyTransaction:
+            return APIResource(singular: "transaction", plural: "transactions")
         case .findExchangeRate:
             return APIResource(singular: "exchange_rate", plural: "exchange_rates")
         case .showBudget:
             return APIResource(singular: "budget", plural: "budgets")
-        case .indexHistoryTransactions:
-            return APIResource(singular: "history_transaction", plural: "history_transactions")
         case .indexAccountConnections,
              .destroyAccountConnection:
             return APIResource(singular: "account_connection", plural: "account_connections")

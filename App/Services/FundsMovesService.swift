@@ -9,7 +9,11 @@
 import Foundation
 import PromiseKit
 
-class FundsMovesService : Service, FundsMovesServiceProtocol {
+class TransactionsService : Service, TransactionsServiceProtocol {
+    func index(for userId: Int) -> Promise<[Transaction]> {
+        return requestCollection(APIRoute.indexTransactions(userId: userId))
+    }
+    
     func create(with creationForm: FundsMoveCreationForm) -> Promise<FundsMove> {
         return request(APIRoute.createFundsMove(form: creationForm))
     }
