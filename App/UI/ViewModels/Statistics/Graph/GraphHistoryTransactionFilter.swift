@@ -38,7 +38,7 @@ class GraphHistoryTransactionFilter : SourceOrDestinationHistoryTransactionFilte
         return aggregatedValues[aggregationType]
     }
     
-    init(id: Int, title: String, type: HistoryTransactionSourceOrDestinationType, color: UIColor, сurrency: Currency) {
+    init(id: Int, title: String, type: TransactionSourceOrDestinationType, color: UIColor, сurrency: Currency) {
         self.color = color
         self.currency = сurrency
         super.init(id: id, title: title, type: type)

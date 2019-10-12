@@ -28,21 +28,21 @@ class HistoryTransactionsCoordinator : HistoryTransactionsCoordinatorProtocol {
         self.expensesCoordinator = expensesCoordinator
     }
     
-    func index() -> Promise<[HistoryTransaction]> {
+    func index() -> Promise<[Transaction]> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
         return historyTransactionsService.index(for: currentUserId)
     }
     
-    func destroy(historyTransaction: HistoryTransaction) -> Promise<Void> {
-        switch historyTransaction.transactionableType {
+    func destroy(historyTransaction: Transaction) -> Promise<Void> {
+        switch historyTransaction.transactionType {
         case .income:
-            return incomesCoordinator.destroy(by: historyTransaction.transactionableId)
+            return incomesCoordinator.destroy(by: historyTransaction.id)
         case .fundsMove:
-            return fundsMovesCoordinator.destroy(by: historyTransaction.transactionableId)
-        case .expense:
-            return expensesCoordinator.destroy(by: historyTransaction.transactionableId)
+            return fundsMovesCoordinator.destroy(by: historyTransaction.id)
+        default:
+            return expensesCoordinator.destroy(by: historyTransaction.id)
         }
     }
 }

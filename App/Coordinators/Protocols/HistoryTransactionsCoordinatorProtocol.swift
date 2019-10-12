@@ -10,6 +10,6 @@ import Foundation
 import PromiseKit
 
 protocol HistoryTransactionsCoordinatorProtocol {
-    func index() -> Promise<[HistoryTransaction]>
-    func destroy(historyTransaction: HistoryTransaction) -> Promise<Void>
+    func index() -> Promise<[Transaction]>
+    func destroy(historyTransaction: Transaction) -> Promise<Void>
 }

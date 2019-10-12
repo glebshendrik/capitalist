@@ -16,12 +16,12 @@ protocol HistoryTransactionFilter {
 class SourceOrDestinationHistoryTransactionFilter : HistoryTransactionFilter {
     var id: Int
     var title: String
-    var type: HistoryTransactionSourceOrDestinationType
+    var type: TransactionSourceOrDestinationType
     var editable: Bool {
         return false
     }
     
-    init(id: Int, title: String, type: HistoryTransactionSourceOrDestinationType) {
+    init(id: Int, title: String, type: TransactionSourceOrDestinationType) {
         self.id = id
         self.title = title
         self.type = type
@@ -31,7 +31,7 @@ class SourceOrDestinationHistoryTransactionFilter : HistoryTransactionFilter {
 class SelectableSourceOrDestinationHistoryTransactionFilter : SourceOrDestinationHistoryTransactionFilter {
     public private(set) var isSelected: Bool
     
-    init(id: Int, title: String, type: HistoryTransactionSourceOrDestinationType, isSelected: Bool = false) {
+    init(id: Int, title: String, type: TransactionSourceOrDestinationType, isSelected: Bool = false) {
         self.isSelected = isSelected
         super.init(id: id, title: title, type: type)
     }

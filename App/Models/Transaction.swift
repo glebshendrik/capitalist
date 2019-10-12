@@ -1,60 +1,85 @@
 //
-//  FundsMove.swift
+//  HistoryTransaction.swift
 //  Three Baskets
 //
-//  Created by Alexander Petropavlovsky on 07/03/2019.
+//  Created by Alexander Petropavlovsky on 21/03/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
 //
 
 import Foundation
 
-class FundsMove : Decodable {
+enum TransactionType : String, Codable {
+    case income = "income"
+    case expense = "expense"
+    case fundsMove = "funds_move"
+}
+
+enum TransactionSourceOrDestinationType : String, Codable {
+    case incomeSource = "IncomeSource"
+    case expenseSource = "ExpenseSource"
+    case expenseCategory = "ExpenseCategory"
+    case active = "Active"
+}
+
+struct Transaction : Decodable {
     let id: Int
     let userId: Int
-    let expenseSourceFromId: Int
-    let expenseSourceToId: Int
-    let expenseSourceFrom: ExpenseSource
-    let expenseSourceTo: ExpenseSource
-    let amountCents: Int
+    let transactionType: TransactionType
+    let sourceId: Int
+    let sourceType: TransactionSourceOrDestinationType
+    let destinationId: Int
+    let destinationType: TransactionSourceOrDestinationType
+    let sourceTitle: String
+    let destinationTitle: String
+    let destinationIconURL: URL?
     let currency: Currency
-    let convertedAmountCents: Int
+    let amountCents: Int
     let convertedCurrency: Currency
+    let convertedAmountCents: Int
     let gotAt: Date
     let comment: String?
-//    let whom: String?
-//    let borrowedTill: Date?
+    let basketType: BasketType?
+    let whom: String?
+    let payday: Date?
+    let isReturned: Bool?
+    let borrow: Borrow?
     let returningBorrow: Borrow?
-//    let isReturned: Bool
-//    let debtAmountCentsLeft: Int?
-//    let loanAmountCentsLeft: Int?
+    let borrowType: BorrowType?
     
     enum CodingKeys: String, CodingKey {
         case id
         case userId = "user_id"
-        case expenseSourceFromId = "expense_source_from_id"
-        case expenseSourceToId = "expense_source_to_id"
-        case expenseSourceFrom = "expense_source_from"
-        case expenseSourceTo = "expense_source_to"
+        case transactionType = "transaction_type"
+        case sourceId = "source_id"
+        case sourceType = "source_type"
+        case destinationId = "destination_id"
+        case destinationType = "destination_type"
+        case sourceTitle = "source_title"
+        case destinationTitle = "destination_title"
+        case destinationIconURL = "destination_icon_url"
+        case currency = "currency_object"
         case amountCents = "amount_cents"
-        case currency
+        case convertedCurrency = "converted_currency_object"
         case convertedAmountCents = "converted_amount_cents"
-        case convertedCurrency = "converted_currency"
         case gotAt = "got_at"
         case comment
+        case basketType = "basket_type"
+        case payday = "payday"
+        case whom
+        case isReturned = "is_returned"
+        case borrow = "borrow"
         case returningBorrow = "returning_borrow"
-//        case borrowedTill = "borrowed_till"
-//        case whom
-//        case isReturned = "is_returned"
-//        case debtAmountCentsLeft = "debt_amount_cents_left"
-//        case loanAmountCentsLeft = "loan_amount_cents_left"
+        case borrowType = "borrow_type"
     }
     
 }
 
-struct FundsMoveCreationForm : Encodable, Validatable {
+struct TransactionCreationForm : Encodable, Validatable {
     let userId: Int?
-    let expenseSourceFromId: Int?
-    let expenseSourceToId: Int?
+    let sourceId: Int?
+    let sourceType: TransactionSourceOrDestinationType?
+    let destinationId: Int?
+    let destinationType: TransactionSourceOrDestinationType?
     let amountCents: Int?
     let amountCurrency: String?
     let convertedAmountCents: Int?
@@ -65,8 +90,10 @@ struct FundsMoveCreationForm : Encodable, Validatable {
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
-        case expenseSourceFromId = "expense_source_from_id"
-        case expenseSourceToId = "expense_source_to_id"
+        case sourceId = "source_id"
+        case sourceType = "source_type"
+        case destinationId = "destination_id"
+        case destinationType = "destination_type"
         case amountCents = "amount_cents"
         case amountCurrency = "amount_currency"
         case convertedAmountCents = "converted_amount_cents"
@@ -83,12 +110,12 @@ struct FundsMoveCreationForm : Encodable, Validatable {
             errors["user_id"] = "Ошибка сохранения"
         }
         
-        if !Validator.isValid(present: expenseSourceFromId) {
-            errors["expense_source_from_id"] = "Укажите кошелек снятия"
+        if !Validator.isValid(present: sourceId) {
+            errors["source_id"] = "Укажите источник"
         }
         
-        if !Validator.isValid(present: expenseSourceToId) {
-            errors["expense_source_to_id"] = "Укажите кошелек пополнения"
+        if !Validator.isValid(present: destinationId) {
+            errors["destination_id"] = "Укажите назначение"
         }
         
         if !Validator.isValid(present: amountCurrency) {
@@ -115,10 +142,12 @@ struct FundsMoveCreationForm : Encodable, Validatable {
     }
 }
 
-struct FundsMoveUpdatingForm : Encodable, Validatable {
+struct TransactionUpdatingForm : Encodable, Validatable {
     let id: Int?
-    let expenseSourceFromId: Int?
-    let expenseSourceToId: Int?
+    let sourceId: Int?
+    let sourceType: TransactionSourceOrDestinationType?
+    let destinationId: Int?
+    let destinationType: TransactionSourceOrDestinationType?
     let amountCents: Int?
     let amountCurrency: String?
     let convertedAmountCents: Int?
@@ -128,8 +157,10 @@ struct FundsMoveUpdatingForm : Encodable, Validatable {
     
     enum CodingKeys: String, CodingKey {
         case id
-        case expenseSourceFromId = "expense_source_from_id"
-        case expenseSourceToId = "expense_source_to_id"
+        case sourceId = "source_id"
+        case sourceType = "source_type"
+        case destinationId = "destination_id"
+        case destinationType = "destination_type"
         case amountCents = "amount_cents"
         case amountCurrency = "amount_currency"
         case convertedAmountCents = "converted_amount_cents"
@@ -145,12 +176,12 @@ struct FundsMoveUpdatingForm : Encodable, Validatable {
             errors["id"] = "Ошибка сохранения"
         }
         
-        if !Validator.isValid(present: expenseSourceFromId) {
-            errors["expense_source_from_id"] = "Укажите кошелек снятия"
+        if !Validator.isValid(present: sourceId) {
+            errors["source_id"] = "Укажите источник"
         }
         
-        if !Validator.isValid(present: expenseSourceToId) {
-            errors["expense_source_to_id"] = "Укажите кошелек пополнения"
+        if !Validator.isValid(present: destinationId) {
+            errors["destination_id"] = "Укажите назначение"
         }
         
         if !Validator.isValid(present: amountCurrency) {
@@ -176,4 +207,3 @@ struct FundsMoveUpdatingForm : Encodable, Validatable {
         return errors
     }
 }
-

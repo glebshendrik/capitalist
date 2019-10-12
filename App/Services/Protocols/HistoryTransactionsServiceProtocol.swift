@@ -10,6 +10,6 @@ import Foundation
 import PromiseKit
 
 protocol HistoryTransactionsServiceProtocol {
-    func index(for userId: Int) -> Promise<[HistoryTransaction]>
+    func index(for userId: Int) -> Promise<[Transaction]>
 }
 

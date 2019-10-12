@@ -72,7 +72,7 @@ class HistoryTransactionsViewModel {
         
         if sourceOrDestinationFilters.count > 0 {
             
-            var filtersHash = [HistoryTransactionSourceOrDestinationType : [Int : SourceOrDestinationHistoryTransactionFilter]]()
+            var filtersHash = [TransactionSourceOrDestinationType : [Int : SourceOrDestinationHistoryTransactionFilter]]()
             
             for filter in sourceOrDestinationFilters {
                 if filtersHash[filter.type] == nil {
@@ -85,9 +85,7 @@ class HistoryTransactionsViewModel {
                 
                 guard let matchedFilter = (filtersHash[transaction.sourceType]?[transaction.sourceId] ??
                     filtersHash[transaction.destinationType]?[transaction.destinationId]) else { return false }
-                if matchedFilter is IncludedInBalanceHistoryTransactionFilter {
-                    return transaction.includedInBalance
-                }
+                
                 return true
             }
         }
@@ -149,7 +147,7 @@ class HistoryTransactionsViewModel {
         return exchangeRatesCoordinator.show(from: fromCurrencyCode, to: toCurrencyCode)
     }
     
-    private func historyTransactionsAmount(type: HistoryTransactionSourceOrDestinationType) -> String? {
+    private func historyTransactionsAmount(type: TransactionSourceOrDestinationType) -> String? {
         guard let currency = defaultCurrency else { return nil }
         
         let transactions = filteredHistoryTransactionViewModels

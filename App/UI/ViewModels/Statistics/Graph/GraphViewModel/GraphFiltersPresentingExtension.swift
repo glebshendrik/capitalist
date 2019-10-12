@@ -15,7 +15,7 @@ extension GraphViewModel {
     
     var incomeSourceIds: [Int] {
         return transactions
-            .filter { $0.sourceType == HistoryTransactionSourceOrDestinationType.incomeSource }
+            .filter { $0.sourceType == TransactionSourceOrDestinationType.incomeSource }
             .map { $0.sourceId }
             .withoutDuplicates()
             .sorted()
@@ -23,11 +23,11 @@ extension GraphViewModel {
     
     var expenseSourceIds: [Int] {
         let asSources = transactions
-            .filter { $0.sourceType == HistoryTransactionSourceOrDestinationType.expenseSource }
+            .filter { $0.sourceType == TransactionSourceOrDestinationType.expenseSource }
             .map { $0.sourceId }
         
         let asDestinations = transactions
-            .filter { $0.destinationType == HistoryTransactionSourceOrDestinationType.expenseSource }
+            .filter { $0.destinationType == TransactionSourceOrDestinationType.expenseSource }
             .map { $0.destinationId }
         
         return (asSources + asDestinations).withoutDuplicates().sorted()
@@ -35,7 +35,7 @@ extension GraphViewModel {
     
     var expenseCategoryIds: [Int] {
         return transactions
-            .filter { $0.destinationType == HistoryTransactionSourceOrDestinationType.expenseCategory }
+            .filter { $0.destinationType == TransactionSourceOrDestinationType.expenseCategory }
             .map { $0.destinationId }
             .withoutDuplicates()
             .sorted()
@@ -150,7 +150,7 @@ extension GraphViewModel {
                                amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber,
                                titleForTransaction: @escaping (HistoryTransactionViewModel) -> String,
                                accumulateValuesHistory: Bool,
-                               filterType: HistoryTransactionSourceOrDestinationType,
+                               filterType: TransactionSourceOrDestinationType,
                                colorForTransaction: ((HistoryTransactionViewModel) -> UIColor?)? = nil,
                                oppositeKeyForTransaction: ((HistoryTransactionViewModel) -> Int)? = nil,
                                oppositeAmountForTransactions: (([HistoryTransactionViewModel]) -> NSDecimalNumber)? = nil,

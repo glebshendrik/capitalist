@@ -44,6 +44,8 @@ class FiltersViewModel {
             return "Редактировать кошелек \"\(filter.title)\""
         case .expenseCategory:
             return "Редактировать категорию трат \"\(filter.title)\""
+        default:
+            return "Редактировать"
         }
     }
     
@@ -56,13 +58,13 @@ class FiltersViewModel {
     }
         
     func reloadFilter() -> Promise<Void> {
-        guard let filter = singleSourceOrDestinationFilter else { return Promise.value(()) }
+        guard let filter = singleSourceOrDestinationFilter else { return Promise.value(()) }        
         switch filter.type {
         case .incomeSource:
             return updateIncomeSourceFilter(with: filter.id)
         case .expenseSource:
             return updateExpenseSourceFilter(with: filter.id)
-        case .expenseCategory:
+        default:
             return updateExpenseCategoryFilter(with: filter.id)
         }
     }

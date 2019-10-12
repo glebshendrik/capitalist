@@ -32,6 +32,8 @@ class HistoryTransactionTableViewCell : UITableViewCell {
                     return UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
                 }
                 return basketColor(basketType: basketType)
+            default:
+                return .white
             }
         }
         
@@ -57,7 +59,7 @@ class HistoryTransactionTableViewCell : UITableViewCell {
             }
         }
         
-        func defaultDestinationIconName() -> String {
+        func defaultDestinationIconName() -> String {            
             switch viewModel.destinationType {
             case .incomeSource, .expenseSource:
                 return "wallet-default-icon"
@@ -66,6 +68,8 @@ class HistoryTransactionTableViewCell : UITableViewCell {
                     return ""
                 }
                 return expenseCategoryIconPlaceholderName(basketType: basketType)
+            default:
+                return "wallet-default-icon"
             }
         }
         

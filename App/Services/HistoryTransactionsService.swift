@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 class HistoryTransactionsService : Service, HistoryTransactionsServiceProtocol {
-    func index(for userId: Int) -> Promise<[HistoryTransaction]> {
+    func index(for userId: Int) -> Promise<[Transaction]> {
         return requestCollection(APIRoute.indexHistoryTransactions(userId: userId))
     }
 }

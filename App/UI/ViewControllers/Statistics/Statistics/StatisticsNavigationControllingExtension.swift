@@ -195,17 +195,17 @@ extension StatisticsViewController {
     func showEdit(historyTransaction: HistoryTransactionViewModel) {
         switch historyTransaction.transactionableType {
         case .income:
-            showIncomeEditScreen(incomeId: historyTransaction.transactionableId)
+            showIncomeEditScreen(incomeId: historyTransaction.id)
         case .fundsMove:
             if let borrowId = historyTransaction.borrowId, let borrowType = historyTransaction.borrowType {
                 showBorrowEditScreen(borrowId: borrowId, borrowType: borrowType)
             }
             else {
-                showFundsMoveEditScreen(fundsMoveId: historyTransaction.transactionableId)
+                showFundsMoveEditScreen(fundsMoveId: historyTransaction.id)
             }
             
         case .expense:
-            showExpenseEditScreen(expenseId: historyTransaction.transactionableId)
+            showExpenseEditScreen(expenseId: historyTransaction.id)
         }
     }
     

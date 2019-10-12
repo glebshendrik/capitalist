@@ -9,13 +9,17 @@
 import Foundation
 
 class HistoryTransactionViewModel {
-    let historyTransaction: HistoryTransaction
+    let historyTransaction: Transaction
+    
+    var id: Int {
+        return historyTransaction.id
+    }
     
     var sourceId: Int {
         return historyTransaction.sourceId
     }
     
-    var sourceType: HistoryTransactionSourceOrDestinationType {
+    var sourceType: TransactionSourceOrDestinationType {
         return historyTransaction.sourceType
     }
     
@@ -27,7 +31,7 @@ class HistoryTransactionViewModel {
         return historyTransaction.destinationId
     }
     
-    var destinationType: HistoryTransactionSourceOrDestinationType {
+    var destinationType: TransactionSourceOrDestinationType {
         return historyTransaction.destinationType
     }
     
@@ -38,13 +42,9 @@ class HistoryTransactionViewModel {
     var destinationIconURL: URL? {
         return historyTransaction.destinationIconURL
     }
-    
-    var transactionableId: Int {
-        return historyTransaction.transactionableId
-    }
-    
-    var transactionableType: TransactionableType {
-        return historyTransaction.transactionableType
+        
+    var transactionableType: TransactionType {
+        return historyTransaction.transactionType
     }
     
     var currency: Currency {
@@ -105,23 +105,19 @@ class HistoryTransactionViewModel {
         return historyTransaction.comment
     }
     
-    var basketType: BasketType? {
+    var basketType: BasketType? {        
         return historyTransaction.basketType
     }
-    
-    var includedInBalance: Bool {
-        return historyTransaction.includedInBalance ?? false
-    }
-    
+        
     var borrowId: Int? {
-        return historyTransaction.borrowId
+        return historyTransaction.borrow?.id
     }
     
     var borrowType: BorrowType? {
         return historyTransaction.borrowType
     }
     
-    init(historyTransaction: HistoryTransaction) {
+    init(historyTransaction: Transaction) {
         self.historyTransaction = historyTransaction
     }
 }

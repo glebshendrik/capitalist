@@ -39,7 +39,7 @@ extension GraphViewModel {
                                      colorForTransaction: { self.color(by: $0.transactionableType) })
     }
     
-    func transactionableType(by incomeAndExpensesKey: Int) -> TransactionableType {
+    func transactionableType(by incomeAndExpensesKey: Int) -> TransactionType {
         switch incomeAndExpensesKey {
         case 0:     return .expense
         case 1:     return .income
@@ -47,7 +47,7 @@ extension GraphViewModel {
         }
     }
     
-    func incomeAndExpensesDataSetKey(by transactionableType: TransactionableType) -> Int {
+    func incomeAndExpensesDataSetKey(by transactionableType: TransactionType) -> Int {
         switch transactionableType {
         case .expense:      return 0
         case .income:       return 1
@@ -55,7 +55,7 @@ extension GraphViewModel {
         }
     }
     
-    func transactionableTypeBy(incomeAndExpensesDataSetKey: Int) -> TransactionableType? {
+    func transactionableTypeBy(incomeAndExpensesDataSetKey: Int) -> TransactionType? {
         switch incomeAndExpensesDataSetKey {
         case 0:         return .expense
         case 1:         return .income
@@ -63,7 +63,7 @@ extension GraphViewModel {
         }
     }
     
-    private func title(by transactionableType: TransactionableType) -> String {
+    private func title(by transactionableType: TransactionType) -> String {
         switch transactionableType {
         case .expense:      return "Расходы"
         case .income:       return "Доход"
@@ -71,7 +71,7 @@ extension GraphViewModel {
         }
     }
     
-    private func color(by transactionableType: TransactionableType) -> UIColor {
+    private func color(by transactionableType: TransactionType) -> UIColor {
         switch transactionableType {
         case .expense:      return .red
         case .income:       return Color.Material.green

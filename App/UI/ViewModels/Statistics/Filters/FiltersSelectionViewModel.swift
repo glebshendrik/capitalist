@@ -19,7 +19,7 @@ class FiltersSelectionViewModel {
             calculatePassedFiltersHash()
         }
     }
-    private var passedFiltersHash: [HistoryTransactionSourceOrDestinationType : [Int : SourceOrDestinationHistoryTransactionFilter]] = [:]
+    private var passedFiltersHash: [TransactionSourceOrDestinationType : [Int : SourceOrDestinationHistoryTransactionFilter]] = [:]
     
     public private(set) var dateRangeFilter: DateRangeHistoryTransactionFilter? = nil {
         didSet {
@@ -187,7 +187,7 @@ class FiltersSelectionViewModel {
     }
     
     private func calculatePassedFiltersHash() {
-        passedFiltersHash = [HistoryTransactionSourceOrDestinationType : [Int : SourceOrDestinationHistoryTransactionFilter]]()
+        passedFiltersHash = [TransactionSourceOrDestinationType : [Int : SourceOrDestinationHistoryTransactionFilter]]()
         
         for filter in sourceOrDestinationFilters {
             if passedFiltersHash[filter.type] == nil {
