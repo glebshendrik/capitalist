@@ -45,7 +45,7 @@ class ExpenseCategoryViewModel {
     }
     
     var profit: String? {
-        guard hasProfit, let profit = expenseCategory.profitCents?.moneyCurrencyString(with: currency, shouldRound: false) else { return nil }
+        guard hasProfit, let profit = expenseCategory.profitCents?.moneyCurrencyString(with: currency, shouldRound: true) else { return nil }
         var sign = ""
         if isProfitPositive { sign = "+" }
         return "\(sign)\(profit)"
