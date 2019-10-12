@@ -24,7 +24,8 @@ struct APIRouteMethod {
              .createProviderConnection,
              .createDebt,
              .createLoan,
-             .createCredit:
+             .createCredit,
+             .createActive:
             return .post
         case .showUser,
              .showIncomeSource,
@@ -53,7 +54,11 @@ struct APIRouteMethod {
              .showLoan,
              .indexCredits,
              .showCredit,
-             .indexCreditTypes:
+             .indexCreditTypes,
+             .indexActives,
+             .indexUserActives,
+             .showActive,
+             .indexActiveTypes:
             return .get
         case .updateUser,
              .changePassword,
@@ -66,13 +71,15 @@ struct APIRouteMethod {
              .updateFundsMove,
              .updateDebt,
              .updateLoan,
-             .updateCredit:
+             .updateCredit,
+             .updateActive:
             return .put
         case .updateIncomeSourcePosition,
              .updateExpenseSourcePosition,
              .updateExpenseCategoryPosition,
              .updateUserSettings,
-             .updateDeviceToken:
+             .updateDeviceToken,
+             .updateActivePosition:
             return .patch
         case .destroySession,
              .destroyIncomeSource,
@@ -84,7 +91,8 @@ struct APIRouteMethod {
              .destroyAccountConnection,
              .destroyDebt,
              .destroyLoan,
-             .destroyCredit:
+             .destroyCredit,
+             .destroyActive:
             return .delete
         }
     }

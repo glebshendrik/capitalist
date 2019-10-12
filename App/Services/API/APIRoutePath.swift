@@ -31,13 +31,16 @@ struct APIRoutePath {
         case .createDebt(let form):                         return collection(route, userId: form.userId)
         case .createLoan(let form):                         return collection(route, userId: form.userId)
         case .createCredit(let form):                       return collection(route, userId: form.userId)
+        case .createActive(let form):                       return collection(route, userId: form.userId)
         
         // Index
         case .indexIcons,
              .indexCurrencies,
-             .indexCreditTypes:                             return collection(route)
+             .indexCreditTypes,
+             .indexActiveTypes:                             return collection(route)
             
         case .indexExpenseCategories(let basketId):         return collection(route, basketId: basketId)
+        case .indexActives(let basketId):                   return collection(route, basketId: basketId)
             
         case .indexIncomeSources(let userId),
              .indexExpenseSources(let userId, _, _, _),
@@ -48,7 +51,8 @@ struct APIRoutePath {
              .indexAccountConnections(let userId, _),
              .indexDebts(let userId),
              .indexLoans(let userId),
-             .indexCredits(let userId):                     return collection(route, userId: userId)
+             .indexCredits(let userId),
+             .indexUserActives(let userId):                 return collection(route, userId: userId)
         
         // Update
         case .updateUser(let form):                         return member(route, id: form.userId)        
@@ -66,6 +70,8 @@ struct APIRoutePath {
         case .updateDebt(let form):                         return member(route, id: form.id)
         case .updateLoan(let form):                         return member(route, id: form.id)
         case .updateCredit(let form):                       return member(route, id: form.id)
+        case .updateActive(let form):                       return member(route, id: form.id)
+        case .updateActivePosition(let form):               return member(route, id: form.id)
             
         // Show
         case .showUser(let id),
@@ -78,7 +84,8 @@ struct APIRoutePath {
              .showFundsMove(let id),
              .showDebt(let id),
              .showLoan(let id),
-             .showCredit(let id):                           return member(route, id: id)
+             .showCredit(let id),
+             .showActive(let id):                           return member(route, id: id)
             
         case .showBudget(let userId):                       return member(route, userId: userId)
         
@@ -92,7 +99,8 @@ struct APIRoutePath {
              .destroyAccountConnection(let id),
              .destroyDebt(let id, _),
              .destroyLoan(let id, _),
-             .destroyCredit(let id, _):                     return member(route, id: id)
+             .destroyCredit(let id, _),
+             .destroyActive(let id, _):                     return member(route, id: id)
             
         case .destroySession(let session):                  return member(route, id: session.token)
         }

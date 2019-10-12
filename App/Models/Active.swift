@@ -138,3 +138,12 @@ struct ActiveUpdatingForm : Encodable, Validatable {
         return errors
     }
 }
+
+struct ActivePositionUpdatingForm : Encodable {
+    let id: Int
+    let position: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case position = "row_order_position"
+    }
+}

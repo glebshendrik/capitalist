@@ -105,6 +105,16 @@ struct APIResource {
             return APIResource(singular: "credit", plural: "credits")
         case .indexCreditTypes:
             return APIResource(singular: "credit_type", plural: "credit_types")
+        case .createActive,
+             .showActive,
+             .indexActives,
+             .indexUserActives,
+             .updateActive,
+             .updateActivePosition,
+             .destroyActive:
+            return APIResource(singular: "active", plural: "actives")
+        case .indexActiveTypes:
+            return APIResource(singular: "active_type", plural: "active_types")
         }
     }
 }
