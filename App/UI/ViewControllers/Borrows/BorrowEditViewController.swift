@@ -35,8 +35,8 @@ class BorrowEditViewController : FormTransactionsDependableEditViewController {
                 BorrowCreationForm.CodingKeys.amountCents.rawValue : tableController.amountField,
                 BorrowCreationForm.CodingKeys.borrowedAt.rawValue : tableController.borrowedAtField,
                 BorrowCreationForm.CodingKeys.payday.rawValue : tableController.paydayField,
-                BorrowingTransactionNestedAttributes.CodingKeys.expenseSourceToId.rawValue : tableController.expenseSourceField,
-                BorrowingTransactionNestedAttributes.CodingKeys.expenseSourceFromId.rawValue : tableController.expenseSourceField]
+                BorrowingTransactionNestedAttributes.CodingKeys.destinationId.rawValue : tableController.expenseSourceField,
+                BorrowingTransactionNestedAttributes.CodingKeys.sourceId.rawValue : tableController.expenseSourceField]
     }
     
     override func setup(tableController: FormFieldsTableViewController) {

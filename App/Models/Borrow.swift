@@ -53,24 +53,31 @@ struct Borrow : Decodable {
 }
 
 struct BorrowingTransactionNestedAttributes : Encodable {
-    let expenseSourceFromId: Int?
-    let expenseSourceToId: Int?
+    let sourceId: Int?
+    let sourceType: TransactionSourceOrDestinationType = .expenseSource
+    let destinationId: Int?
+    let destinationType: TransactionSourceOrDestinationType = .expenseSource
     
     enum CodingKeys: String, CodingKey {
-        case expenseSourceFromId = "expense_source_from_id"
-        case expenseSourceToId = "expense_source_to_id"
+        case sourceId = "source_id"
+        case sourceType = "source_type"
+        case destinationId = "destination_id"
+        case destinationType = "destination_type"
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-        if let expenseSourceFromId = expenseSourceFromId {
-            try container.encode(expenseSourceFromId, forKey: .expenseSourceFromId)
+        if let sourceId = sourceId {
+            try container.encode(sourceId, forKey: .sourceId)
         }
         
-        if let expenseSourceToId = expenseSourceToId {
-            try container.encode(expenseSourceToId, forKey: .expenseSourceToId)
+        if let destinationId = destinationId {
+            try container.encode(destinationId, forKey: .destinationId)
         }
+        
+        try container.encode(sourceType, forKey: .sourceType)
+        try container.encode(destinationType, forKey: .destinationType)
     }
 }
 
@@ -126,11 +133,11 @@ struct BorrowCreationForm : Encodable, Validatable {
         }
         
         if !alreadyOnBalance, let type = type {            
-            if type == .debt && !Validator.isValid(present: borrowingTransactionAttributes?.expenseSourceFromId) {
-                errors[BorrowingTransactionNestedAttributes.CodingKeys.expenseSourceFromId.rawValue] = "Укажите кошелек"
+            if type == .debt && !Validator.isValid(present: borrowingTransactionAttributes?.sourceId) {
+                errors[BorrowingTransactionNestedAttributes.CodingKeys.sourceId.rawValue] = "Укажите кошелек"
             }
-            if type == .loan && !Validator.isValid(present: borrowingTransactionAttributes?.expenseSourceToId) {
-                errors[BorrowingTransactionNestedAttributes.CodingKeys.expenseSourceToId.rawValue] = "Укажите кошелек"
+            if type == .loan && !Validator.isValid(present: borrowingTransactionAttributes?.destinationId) {
+                errors[BorrowingTransactionNestedAttributes.CodingKeys.destinationId.rawValue] = "Укажите кошелек"
             }
         }
         return errors

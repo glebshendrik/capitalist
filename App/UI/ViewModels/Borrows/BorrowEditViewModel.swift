@@ -69,7 +69,7 @@ class BorrowEditViewModel {
     }
     var borrowingTransactionAttributes: BorrowingTransactionNestedAttributes? {
         guard isNew, !onBalance else { return nil }
-        return BorrowingTransactionNestedAttributes(expenseSourceFromId: selectedExpenseSourceFrom?.id, expenseSourceToId: selectedExpenseSourceTo?.id)
+        return BorrowingTransactionNestedAttributes(sourceId: selectedExpenseSourceFrom?.id, destinationId: selectedExpenseSourceTo?.id)
     }
     var borrowingTransaction: FundsMoveViewModel? = nil
     
