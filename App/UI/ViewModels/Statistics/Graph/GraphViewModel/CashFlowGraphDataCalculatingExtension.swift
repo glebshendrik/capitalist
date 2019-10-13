@@ -28,7 +28,7 @@ extension GraphViewModel {
                               oppositeTitleForTransaction: { self.oppositeTitle(for: $0) })
     }
     
-    func calculateCashflowFilters() -> [GraphHistoryTransactionFilter] {
+    func calculateCashflowFilters() -> [GraphTransactionFilter] {
         
         return calculateGraphFilters(for: transactions,
                                      currency: currency,
@@ -44,32 +44,32 @@ extension GraphViewModel {
                                      oppositeTitleForTransaction: { self.oppositeTitle(for: $0) })
     }
     
-    private func key(for transaction: HistoryTransactionViewModel) -> Int {
-        switch transaction.transactionableType {
+    private func key(for transaction: TransactionViewModel) -> Int {
+        switch transaction.type {
         case .expense:      return transaction.sourceId
         case .income:       return transaction.destinationId
         case .fundsMove:    return transaction.destinationId
         }
     }
     
-    private func oppositeKey(for transaction: HistoryTransactionViewModel) -> Int {
-        switch transaction.transactionableType {
+    private func oppositeKey(for transaction: TransactionViewModel) -> Int {
+        switch transaction.type {
         case .expense:      return transaction.sourceId
         case .income:       return transaction.destinationId
         case .fundsMove:    return transaction.sourceId
         }
     }
     
-    private func title(for transaction: HistoryTransactionViewModel) -> String {
-        switch transaction.transactionableType {
+    private func title(for transaction: TransactionViewModel) -> String {
+        switch transaction.type {
         case .expense:      return transaction.sourceTitle
         case .income:       return transaction.destinationTitle
         case .fundsMove:    return transaction.destinationTitle
         }
     }
     
-    private func oppositeTitle(for transaction: HistoryTransactionViewModel) -> String {
-        switch transaction.transactionableType {
+    private func oppositeTitle(for transaction: TransactionViewModel) -> String {
+        switch transaction.type {
         case .expense:      return transaction.sourceTitle
         case .income:       return transaction.destinationTitle
         case .fundsMove:    return transaction.sourceTitle
@@ -77,9 +77,9 @@ extension GraphViewModel {
     }
     
     
-    private func getAmount(for transactions: [HistoryTransactionViewModel]) -> NSDecimalNumber {
-        return historyTransactionsViewModel.historyTransactionsAmount(transactions: transactions, amountForTransaction: { transaction -> (cents: Int, currency: Currency) in
-            switch transaction.transactionableType {
+    private func getAmount(for transactions: [TransactionViewModel]) -> NSDecimalNumber {
+        return transactionsViewModel.transactionsAmount(transactions: transactions, amountForTransaction: { transaction -> (cents: Int, currency: Currency) in
+            switch transaction.type {
             case .expense:      return (cents: -transaction.amountCents, currency: transaction.currency)
             case .income:       return (cents: transaction.convertedAmountCents, currency: transaction.convertedCurrency)
             case .fundsMove:    return (cents: transaction.convertedAmountCents, currency: transaction.convertedCurrency)
@@ -87,9 +87,9 @@ extension GraphViewModel {
         })
     }
     
-    private func oppositeAmount(for transactions: [HistoryTransactionViewModel]) -> NSDecimalNumber {
-        return historyTransactionsViewModel.historyTransactionsAmount(transactions: transactions, amountForTransaction: { transaction -> (cents: Int, currency: Currency) in
-            switch transaction.transactionableType {
+    private func oppositeAmount(for transactions: [TransactionViewModel]) -> NSDecimalNumber {
+        return transactionsViewModel.transactionsAmount(transactions: transactions, amountForTransaction: { transaction -> (cents: Int, currency: Currency) in
+            switch transaction.type {
             case .expense:      return (cents: 0, currency: transaction.currency)
             case .income:       return (cents: 0, currency: transaction.currency)
             case .fundsMove:    return (cents: -transaction.amountCents, currency: transaction.currency)
@@ -97,7 +97,7 @@ extension GraphViewModel {
         })
     }
     
-    private func color(for transaction: HistoryTransactionViewModel) -> UIColor? {
+    private func color(for transaction: TransactionViewModel) -> UIColor? {
         guard let idIndex = expenseSourceIds.firstIndex(of: transaction.sourceId) else { return nil }
         return colors.item(at: idIndex)
     }

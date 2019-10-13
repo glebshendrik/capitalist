@@ -49,23 +49,23 @@ extension GraphViewModel {
         return array
     }
     
-    func amount(for transactions: [HistoryTransactionViewModel]) -> NSDecimalNumber {
-        return historyTransactionsViewModel.historyTransactionsAmount(transactions: transactions)
+    func amount(for transactions: [TransactionViewModel]) -> NSDecimalNumber {
+        return transactionsViewModel.transactionsAmount(transactions: transactions)
     }
     
-    func lineChartData(for transactions: [HistoryTransactionViewModel],
+    func lineChartData(for transactions: [TransactionViewModel],
                        currency: Currency?,
                        periodScale: GraphPeriodScale?,
-                       keyForTransaction: @escaping (HistoryTransactionViewModel) -> Int,
-                       amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber,
-                       titleForTransaction: @escaping (HistoryTransactionViewModel) -> String,
+                       keyForTransaction: @escaping (TransactionViewModel) -> Int,
+                       amountForTransactions: @escaping ([TransactionViewModel]) -> NSDecimalNumber,
+                       titleForTransaction: @escaping (TransactionViewModel) -> String,
                        accumulateValuesHistory: Bool,
                        accumulateValuesForDate: Bool,
                        fillDataSetAreas: Bool,
-                       colorForTransaction: ((HistoryTransactionViewModel) -> UIColor?)? = nil,
-                       oppositeKeyForTransaction: ((HistoryTransactionViewModel) -> Int)? = nil,
-                       oppositeAmountForTransactions: (([HistoryTransactionViewModel]) -> NSDecimalNumber)? = nil,
-                       oppositeTitleForTransaction: ((HistoryTransactionViewModel) -> String)? = nil) -> LineChartData? {
+                       colorForTransaction: ((TransactionViewModel) -> UIColor?)? = nil,
+                       oppositeKeyForTransaction: ((TransactionViewModel) -> Int)? = nil,
+                       oppositeAmountForTransactions: (([TransactionViewModel]) -> NSDecimalNumber)? = nil,
+                       oppositeTitleForTransaction: ((TransactionViewModel) -> String)? = nil) -> LineChartData? {
         
         guard   let currency = currency,
                 let periodScale = periodScale else { return nil }
@@ -75,11 +75,11 @@ extension GraphViewModel {
         var valuesHash = [Date : [Int: Double]]()
         
         
-        func collectValues(for transactionsByDate: [HistoryTransactionViewModel],
+        func collectValues(for transactionsByDate: [TransactionViewModel],
                            date: Date,
-                           keyFor: ((HistoryTransactionViewModel) -> Int)?,
-                           amountFor: (([HistoryTransactionViewModel]) -> NSDecimalNumber)?,
-                           titleFor: ((HistoryTransactionViewModel) -> String)?) {
+                           keyFor: ((TransactionViewModel) -> Int)?,
+                           amountFor: (([TransactionViewModel]) -> NSDecimalNumber)?,
+                           titleFor: ((TransactionViewModel) -> String)?) {
             
             guard   let keyFor = keyFor,
                 let amountFor = amountFor,

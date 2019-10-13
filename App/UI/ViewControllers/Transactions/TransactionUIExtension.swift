@@ -15,51 +15,48 @@ extension TransactionEditViewController {
         })
     }
         
-    func updateStartableUI() {
-        tableController.sourceField.placeholder = viewModel.startableTitle
-        tableController.sourceField.text = viewModel.startableName
-        tableController.sourceField.subValue = viewModel.startableAmount
-        tableController.sourceField.imageName = viewModel.startableIconDefaultImageName
-        tableController.sourceField.imageURL = viewModel.startableIconURL
+    func updateSourceUI() {
+        tableController.sourceField.placeholder = viewModel.sourceTitle
+        tableController.sourceField.text = viewModel.sourceName
+        tableController.sourceField.subValue = viewModel.sourceAmount
+        tableController.sourceField.imageName = viewModel.sourceIconDefaultImageName
+        tableController.sourceField.imageURL = viewModel.sourceIconURL
     }
     
-    func updateCompletableUI() {
-        tableController.destinationField.placeholder = viewModel.completableTitle
-        tableController.destinationField.text = viewModel.completableName
-        tableController.destinationField.subValue = viewModel.completableAmount
-        tableController.destinationField.imageName = viewModel.completableIconDefaultImageName
-        tableController.destinationField.imageURL = viewModel.completableIconURL
+    func updateDestinationUI() {
+        tableController.destinationField.placeholder = viewModel.destinationTitle
+        tableController.destinationField.text = viewModel.destinationName
+        tableController.destinationField.subValue = viewModel.destinationAmount
+        tableController.destinationField.imageName = viewModel.destinationIconDefaultImageName
+        tableController.destinationField.imageURL = viewModel.destinationIconURL
     }
     
     func updateAmountUI() {
         tableController.amountField.text = viewModel.amount
-        tableController.amountField.placeholder = viewModel.completableAmountTitle
-        tableController.amountField.subValue = viewModel.completableCurrencyCode
-        tableController.amountField.currency = viewModel.startableCurrency
-        tableController.set(cell: tableController.amountCell, hidden: viewModel.needCurrencyExchange, animated: false, reload: false)
+        tableController.amountField.placeholder = viewModel.destinationAmountTitle
+        tableController.amountField.subValue = viewModel.destinationCurrencyCode
+        tableController.amountField.currency = viewModel.sourceCurrency
+        tableController.set(cell: tableController.amountCell, hidden: viewModel.amountFieldHidden, animated: false, reload: false)
     }
     
     func updateExchangeAmountsUI() {
         tableController.exchangeField.amount = viewModel.amount
         tableController.exchangeField.amountPlaceholder = viewModel.amountPlaceholder
-        tableController.exchangeField.amountSelectedTitle = viewModel.startableAmountTitle
-        tableController.exchangeField.currency = viewModel.startableCurrency
+        tableController.exchangeField.amountSelectedTitle = viewModel.sourceAmountTitle
+        tableController.exchangeField.currency = viewModel.sourceCurrency
         tableController.exchangeField.convertedAmount = viewModel.convertedAmount
         tableController.exchangeField.convertedAmountPlaceholder = viewModel.convertedAmountPlaceholder
-        tableController.exchangeField.convertedAmountSelectedTitle = viewModel.completableAmountTitle
-        tableController.exchangeField.convertedCurrency = viewModel.completableCurrency
-        tableController.set(cell: tableController.exchangeCell, hidden: !viewModel.needCurrencyExchange, animated: false, reload: false)
+        tableController.exchangeField.convertedAmountSelectedTitle = viewModel.destinationAmountTitle
+        tableController.exchangeField.convertedCurrency = viewModel.destinationCurrency
+        tableController.set(cell: tableController.exchangeCell, hidden: viewModel.exchangeAmountsFieldHidden, animated: false, reload: false)
     }
-    
-    @objc func updateInBalanceUI() {
-        tableController.set(cell: tableController.inBalanceCell, hidden: true, animated: false, reload: false)
-    }
-    
+        
     func updateCommentUI() {
         tableController.commentView.text = viewModel.comment
     }
     
     func updateRemoveButtonUI() {
+        tableController.removeButton.setTitle(viewModel.removeTitle, for: .normal)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden)
     }
 }

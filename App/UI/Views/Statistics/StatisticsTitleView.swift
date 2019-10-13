@@ -18,7 +18,7 @@ class StatisticsTitleView : CustomView {
     @IBOutlet weak var removeDateRangeButton: UIButton!
     
     var delegate: StatisticsTitleViewDelegate?
-    var dateRangeFilter: DateRangeHistoryTransactionFilter? {
+    var dateRangeFilter: DateRangeTransactionFilter? {
         didSet {
             updateUI()
         }

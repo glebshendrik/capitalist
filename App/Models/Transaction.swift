@@ -1,5 +1,5 @@
 //
-//  HistoryTransaction.swift
+//  Transaction.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 21/03/2019.
@@ -14,7 +14,7 @@ enum TransactionType : String, Codable {
     case fundsMove = "funds_move"
 }
 
-enum TransactionSourceOrDestinationType : String, Codable {
+enum TransactionableType : String, Codable {
     case incomeSource = "IncomeSource"
     case expenseSource = "ExpenseSource"
     case expenseCategory = "ExpenseCategory"
@@ -24,11 +24,11 @@ enum TransactionSourceOrDestinationType : String, Codable {
 struct Transaction : Decodable {
     let id: Int
     let userId: Int
-    let transactionType: TransactionType
+    let type: TransactionType
     let sourceId: Int
-    let sourceType: TransactionSourceOrDestinationType
+    let sourceType: TransactionableType
     let destinationId: Int
-    let destinationType: TransactionSourceOrDestinationType
+    let destinationType: TransactionableType
     let sourceTitle: String
     let destinationTitle: String
     let destinationIconURL: URL?
@@ -49,7 +49,7 @@ struct Transaction : Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case userId = "user_id"
-        case transactionType = "transaction_type"
+        case type = "transaction_type"
         case sourceId = "source_id"
         case sourceType = "source_type"
         case destinationId = "destination_id"
@@ -77,9 +77,9 @@ struct Transaction : Decodable {
 struct TransactionCreationForm : Encodable, Validatable {
     let userId: Int?
     let sourceId: Int?
-    let sourceType: TransactionSourceOrDestinationType?
+    let sourceType: TransactionableType?
     let destinationId: Int?
-    let destinationType: TransactionSourceOrDestinationType?
+    let destinationType: TransactionableType?
     let amountCents: Int?
     let amountCurrency: String?
     let convertedAmountCents: Int?
@@ -145,9 +145,9 @@ struct TransactionCreationForm : Encodable, Validatable {
 struct TransactionUpdatingForm : Encodable, Validatable {
     let id: Int?
     let sourceId: Int?
-    let sourceType: TransactionSourceOrDestinationType?
+    let sourceType: TransactionableType?
     let destinationId: Int?
-    let destinationType: TransactionSourceOrDestinationType?
+    let destinationType: TransactionableType?
     let amountCents: Int?
     let amountCurrency: String?
     let convertedAmountCents: Int?

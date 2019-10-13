@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol TransactionsServiceProtocol {
-    func index(for userId: Int, transactionType: TransactionType?) -> Promise<[Transaction]>
-    func create(with creationForm: TransactionCreationForm) -> Promise<FundsMove>
+    func index(for userId: Int, type: TransactionType?) -> Promise<[Transaction]>
+    func create(with creationForm: TransactionCreationForm) -> Promise<Transaction>
     func show(by id: Int) -> Promise<Transaction>
     func update(with updatingForm: TransactionUpdatingForm) -> Promise<Void>
     func destroy(by id: Int) -> Promise<Void>

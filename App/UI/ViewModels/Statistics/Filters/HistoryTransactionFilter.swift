@@ -1,5 +1,5 @@
 //
-//  HistoryTransactionFilter.swift
+//  TransactionFilter.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 22/03/2019.
@@ -8,30 +8,30 @@
 
 import Foundation
 
-protocol HistoryTransactionFilter {
+protocol TransactionFilter {
     var title: String { get }
     var editable: Bool { get }
 }
 
-class SourceOrDestinationHistoryTransactionFilter : HistoryTransactionFilter {
+class SourceOrDestinationTransactionFilter : TransactionFilter {
     var id: Int
     var title: String
-    var type: TransactionSourceOrDestinationType
+    var type: TransactionableType
     var editable: Bool {
         return false
     }
     
-    init(id: Int, title: String, type: TransactionSourceOrDestinationType) {
+    init(id: Int, title: String, type: TransactionableType) {
         self.id = id
         self.title = title
         self.type = type
     }
 }
 
-class SelectableSourceOrDestinationHistoryTransactionFilter : SourceOrDestinationHistoryTransactionFilter {
+class SelectableSourceOrDestinationTransactionFilter : SourceOrDestinationTransactionFilter {
     public private(set) var isSelected: Bool
     
-    init(id: Int, title: String, type: TransactionSourceOrDestinationType, isSelected: Bool = false) {
+    init(id: Int, title: String, type: TransactionableType, isSelected: Bool = false) {
         self.isSelected = isSelected
         super.init(id: id, title: title, type: type)
     }
@@ -53,7 +53,7 @@ class SelectableSourceOrDestinationHistoryTransactionFilter : SourceOrDestinatio
     }
 }
 
-class IncomeSourceHistoryTransactionFilter : SelectableSourceOrDestinationHistoryTransactionFilter {
+class IncomeSourceTransactionFilter : SelectableSourceOrDestinationTransactionFilter {
     let incomeSourceViewModel: IncomeSourceViewModel
     
     override var editable: Bool {
@@ -66,7 +66,7 @@ class IncomeSourceHistoryTransactionFilter : SelectableSourceOrDestinationHistor
     }
 }
 
-class ExpenseSourceHistoryTransactionFilter : SelectableSourceOrDestinationHistoryTransactionFilter {
+class ExpenseSourceTransactionFilter : SelectableSourceOrDestinationTransactionFilter {
     let expenseSourceViewModel: ExpenseSourceViewModel
     
     override var editable: Bool {
@@ -79,7 +79,7 @@ class ExpenseSourceHistoryTransactionFilter : SelectableSourceOrDestinationHisto
     }
 }
 
-class ExpenseCategoryHistoryTransactionFilter : SelectableSourceOrDestinationHistoryTransactionFilter {
+class ExpenseCategoryTransactionFilter : SelectableSourceOrDestinationTransactionFilter {
     let expenseCategoryViewModel: ExpenseCategoryViewModel
     
     override var editable: Bool {
@@ -96,11 +96,11 @@ class ExpenseCategoryHistoryTransactionFilter : SelectableSourceOrDestinationHis
     }
 }
 
-class IncludedInBalanceHistoryTransactionFilter : ExpenseCategoryHistoryTransactionFilter {
+class IncludedInBalanceTransactionFilter : ExpenseCategoryTransactionFilter {
     
 }
 
-class DateRangeHistoryTransactionFilter : HistoryTransactionFilter {
+class DateRangeTransactionFilter : TransactionFilter {
     var title: String {
         guard   let fromDateString = fromDateString,
             let toDateString = toDateString else {

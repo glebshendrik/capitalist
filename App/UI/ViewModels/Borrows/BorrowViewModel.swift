@@ -88,6 +88,10 @@ class BorrowViewModel {
         return "До \(paydayFormatted)"
     }
     
+    var borrowingTransactionId: Int? {
+        return borrow.borrowingTransactionId
+    }
+    
     init(borrow: Borrow) {
         self.borrow = borrow
     }

@@ -11,23 +11,23 @@ import Charts
 
 extension GraphViewModel {
     
-    var transactions: [HistoryTransactionViewModel] {
-        let transactions = historyTransactionsViewModel.filteredHistoryTransactionViewModels
+    var transactions: [TransactionViewModel] {
+        let transactions = transactionsViewModel.filteredTransactionViewModels
         
         switch graphType {
         case .income, .incomePie:
-            return transactions.filter { $0.transactionableType == .income }
+            return transactions.filter { $0.type == .income }
         case .expenses, .expensesPie:
-            return transactions.filter { $0.transactionableType == .expense }
+            return transactions.filter { $0.type == .expense }
         case .incomeAndExpenses, .netWorth:
-            return transactions.filter { $0.transactionableType != .fundsMove }
+            return transactions.filter { $0.type != .fundsMove }
         case .cashFlow:
             return transactions
         }
     }
     
     var currency: Currency? {
-        return historyTransactionsViewModel.defaultCurrency
+        return transactionsViewModel.defaultCurrency
     }
     
     var numberOfDataPoints: Int {

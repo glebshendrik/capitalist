@@ -15,7 +15,7 @@ extension GraphViewModel {
     
     var incomeSourceIds: [Int] {
         return transactions
-            .filter { $0.sourceType == TransactionSourceOrDestinationType.incomeSource }
+            .filter { $0.sourceType == TransactionableType.incomeSource }
             .map { $0.sourceId }
             .withoutDuplicates()
             .sorted()
@@ -23,11 +23,11 @@ extension GraphViewModel {
     
     var expenseSourceIds: [Int] {
         let asSources = transactions
-            .filter { $0.sourceType == TransactionSourceOrDestinationType.expenseSource }
+            .filter { $0.sourceType == TransactionableType.expenseSource }
             .map { $0.sourceId }
         
         let asDestinations = transactions
-            .filter { $0.destinationType == TransactionSourceOrDestinationType.expenseSource }
+            .filter { $0.destinationType == TransactionableType.expenseSource }
             .map { $0.destinationId }
         
         return (asSources + asDestinations).withoutDuplicates().sorted()
@@ -35,7 +35,7 @@ extension GraphViewModel {
     
     var expenseCategoryIds: [Int] {
         return transactions
-            .filter { $0.destinationType == TransactionSourceOrDestinationType.expenseCategory }
+            .filter { $0.destinationType == TransactionableType.expenseCategory }
             .map { $0.destinationId }
             .withoutDuplicates()
             .sorted()
@@ -143,30 +143,30 @@ extension GraphViewModel {
         graphFilters.forEach { $0.date = self.currentDate }
     }
     
-    func calculateGraphFilters(for transactions: [HistoryTransactionViewModel],
+    func calculateGraphFilters(for transactions: [TransactionViewModel],
                                currency: Currency?,
                                periodScale: GraphPeriodScale?,
-                               keyForTransaction: @escaping (HistoryTransactionViewModel) -> Int,
-                               amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber,
-                               titleForTransaction: @escaping (HistoryTransactionViewModel) -> String,
+                               keyForTransaction: @escaping (TransactionViewModel) -> Int,
+                               amountForTransactions: @escaping ([TransactionViewModel]) -> NSDecimalNumber,
+                               titleForTransaction: @escaping (TransactionViewModel) -> String,
                                accumulateValuesHistory: Bool,
-                               filterType: TransactionSourceOrDestinationType,
-                               colorForTransaction: ((HistoryTransactionViewModel) -> UIColor?)? = nil,
-                               oppositeKeyForTransaction: ((HistoryTransactionViewModel) -> Int)? = nil,
-                               oppositeAmountForTransactions: (([HistoryTransactionViewModel]) -> NSDecimalNumber)? = nil,
-                               oppositeTitleForTransaction: ((HistoryTransactionViewModel) -> String)? = nil) -> [GraphHistoryTransactionFilter] {
+                               filterType: TransactionableType,
+                               colorForTransaction: ((TransactionViewModel) -> UIColor?)? = nil,
+                               oppositeKeyForTransaction: ((TransactionViewModel) -> Int)? = nil,
+                               oppositeAmountForTransactions: (([TransactionViewModel]) -> NSDecimalNumber)? = nil,
+                               oppositeTitleForTransaction: ((TransactionViewModel) -> String)? = nil) -> [GraphTransactionFilter] {
         
         guard   let currency = currency,
                 let periodScale = periodScale else { return [] }
         
-        var filters = [Int : GraphHistoryTransactionFilter]()
+        var filters = [Int : GraphTransactionFilter]()
         var valuesHash = [Date : [Int: Double]]()
         
-        func collectValues(for transactionsByDate: [HistoryTransactionViewModel],
+        func collectValues(for transactionsByDate: [TransactionViewModel],
                            date: Date,
-                           keyFor: ((HistoryTransactionViewModel) -> Int)?,
-                           amountFor: (([HistoryTransactionViewModel]) -> NSDecimalNumber)?,
-                           titleFor: ((HistoryTransactionViewModel) -> String)?) {
+                           keyFor: ((TransactionViewModel) -> Int)?,
+                           amountFor: (([TransactionViewModel]) -> NSDecimalNumber)?,
+                           titleFor: ((TransactionViewModel) -> String)?) {
             
             guard   let keyFor = keyFor,
                 let amountFor = amountFor,
@@ -191,7 +191,7 @@ extension GraphViewModel {
                     
                     let color = colorForTransaction?(transaction) ?? randomColor(hue: .random, luminosity: .dark)
                     
-                    filters[key] = GraphHistoryTransactionFilter(id: key, title: title, type: filterType, color: color, сurrency: currency)
+                    filters[key] = GraphTransactionFilter(id: key, title: title, type: filterType, color: color, сurrency: currency)
                     
                 }
                 
@@ -271,18 +271,18 @@ extension GraphViewModel {
         return filters.values.map { $0 }.sorted { $0.total >= $1.total }
     }
     
-    func graphFilterViewModel(at index: Int) -> GraphHistoryTransactionFilter? {
+    func graphFilterViewModel(at index: Int) -> GraphTransactionFilter? {
         return graphFilters.item(at: index)
     }
     
-    func canFilterTransactions(with filter: GraphHistoryTransactionFilter) -> Bool {
+    func canFilterTransactions(with filter: GraphTransactionFilter) -> Bool {
         return graphType != .incomeAndExpenses && graphType != .netWorth
     }
     
-    func handleIncomeAndExpensesFilterTap(with filter: GraphHistoryTransactionFilter) {
+    func handleIncomeAndExpensesFilterTap(with filter: GraphTransactionFilter) {
         guard graphType == .incomeAndExpenses,
-              let transactionableType = transactionableTypeBy(incomeAndExpensesDataSetKey: filter.id) else { return }
-        switch transactionableType {
+              let type = typeBy(incomeAndExpensesDataSetKey: filter.id) else { return }
+        switch type {
         case .income:
             graphType = .income
         case .expense:

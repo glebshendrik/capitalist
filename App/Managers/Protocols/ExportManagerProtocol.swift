@@ -10,5 +10,5 @@ import Foundation
 import PromiseKit
 
 protocol ExportManagerProtocol {
-    func export(transactions: [HistoryTransactionViewModel]) -> Promise<URL>    
+    func export(transactions: [TransactionViewModel]) -> Promise<URL>    
 }

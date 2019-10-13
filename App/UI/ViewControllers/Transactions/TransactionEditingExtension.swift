@@ -65,12 +65,48 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         
         present(alertController, animated: true)
     }
+          
+    func transactionableSelectControllerFor(transactionableType: TransactionableType,
+                                            transactionPart: TransactionPart,
+                                            skipTransactionable: Transactionable?,
+                                            options: ExpenseSourcesFilterOptions) -> UIViewController? {
+        switch transactionableType {
+        case .incomeSource:
+            return factory.incomeSourceSelectViewController(delegate: self)
+        case .expenseSource:
+            return factory.expenseSourceSelectViewController(delegate: self,
+                                                            skipExpenseSourceId: skipTransactionable?.id,
+                                                            selectionType: transactionPart,
+                                                            noDebts: options.noDebts,
+                                                            accountType: options.accountType,
+                                                            currency: options.currency)
+        case .expenseCategory:
+            return factory.expenseCategorySelectViewController(delegate: self)
+        default:
+            return nil
+        }
+    }
+    func didTapSource() {
+        guard let sourceType = viewModel.sourceType else { return }
         
-    @objc func didTapSource() { }
-    
-    @objc func didTapDestination() { }
-    
-    @objc func didChange(includedInBalance: Bool) { }
+        let viewController = transactionableSelectControllerFor(transactionableType: sourceType,
+                                                                transactionPart: .source,
+                                                                skipTransactionable: viewModel.destination,
+                                                                options: viewModel.sourceFilter.options)
+
+        slideUp(viewController: viewController)
+    }
+        
+    func didTapDestination() {
+        guard let destinationType = viewModel.destinationType else { return }
+        
+        let viewController = transactionableSelectControllerFor(transactionableType: destinationType,
+                                                                transactionPart: .destination,
+                                                                skipTransactionable: viewModel.source,
+                                                                options: viewModel.destinationFilter.options)
+
+        slideUp(viewController: viewController)
+    }
 }
 
 extension TransactionEditViewController : DatePickerViewControllerDelegate {
@@ -82,21 +118,21 @@ extension TransactionEditViewController : DatePickerViewControllerDelegate {
 
 extension TransactionEditViewController : IncomeSourceSelectViewControllerDelegate {
     func didSelect(incomeSourceViewModel: IncomeSourceViewModel) {
-        viewModel.startable = incomeSourceViewModel
+        viewModel.source = incomeSourceViewModel
         updateUI()
         loadExchangeRate()
     }
 }
 
 extension TransactionEditViewController : ExpenseSourceSelectViewControllerDelegate {
-    func didSelect(startableExpenseSourceViewModel: ExpenseSourceViewModel) {
-        viewModel.startable = startableExpenseSourceViewModel
+    func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
+        viewModel.source = sourceExpenseSourceViewModel
         updateUI()
         loadExchangeRate()
     }
     
-    func didSelect(completableExpenseSourceViewModel: ExpenseSourceViewModel) {
-        viewModel.completable = completableExpenseSourceViewModel
+    func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
+        viewModel.destination = destinationExpenseSourceViewModel
         updateUI()
         loadExchangeRate()
     }
@@ -104,7 +140,7 @@ extension TransactionEditViewController : ExpenseSourceSelectViewControllerDeleg
 
 extension TransactionEditViewController : ExpenseCategorySelectViewControllerDelegate {
     func didSelect(expenseCategoryViewModel: ExpenseCategoryViewModel) {
-        viewModel.completable = expenseCategoryViewModel
+        viewModel.destination = expenseCategoryViewModel
         updateUI()
         loadExchangeRate()
     }

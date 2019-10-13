@@ -15,7 +15,7 @@ extension MainViewController {
         return self.view
     }
     
-    func transactionStartable(collectionView: UICollectionView, indexPath: IndexPath) -> TransactionStartable? {
+    func transactionSource(collectionView: UICollectionView, indexPath: IndexPath) -> TransactionSource? {
         switch collectionView {
         case incomeSourcesCollectionView:
             return viewModel.incomeSourceViewModel(at: indexPath)
@@ -26,7 +26,7 @@ extension MainViewController {
         }
     }
     
-    private func transactionCompletable(collectionView: UICollectionView, indexPath: IndexPath) -> TransactionCompletable? {
+    private func transactionDestination(collectionView: UICollectionView, indexPath: IndexPath) -> TransactionDestination? {
         switch collectionView {
         case expenseSourcesCollectionView:
             return viewModel.expenseSourceViewModel(at: indexPath)
@@ -44,8 +44,8 @@ extension MainViewController {
     private func canStartTransaction(collectionView: UICollectionView?, indexPath: IndexPath?) -> Bool {
         guard   let collectionView = collectionView,
             let indexPath = indexPath,
-            let transactionStartable = transactionStartable(collectionView: collectionView, indexPath: indexPath) else { return false }
-        return transactionStartable.canStartTransaction
+            let transactionSource = transactionSource(collectionView: collectionView, indexPath: indexPath) else { return false }
+        return transactionSource.isTransactionSource
     }
     
     private func canCompleteTransaction(transactionStartedCollectionView: UICollectionView?,
@@ -57,10 +57,10 @@ extension MainViewController {
             let completionCandidateCollectionView = completionCandidateCollectionView,
             let completionCandidateIndexPath = completionCandidateIndexPath else { return false }
         
-        guard   let transactionStartable = transactionStartable(collectionView: transactionStartedCollectionView, indexPath: transactionStartedIndexPath),
-            let transactionCompletable = transactionCompletable(collectionView: completionCandidateCollectionView, indexPath: completionCandidateIndexPath) else { return false }
+        guard   let transactionSource = transactionSource(collectionView: transactionStartedCollectionView, indexPath: transactionStartedIndexPath),
+            let transactionDestination = transactionDestination(collectionView: completionCandidateCollectionView, indexPath: completionCandidateIndexPath) else { return false }
         
-        return transactionCompletable.canComplete(startable: transactionStartable)
+        return transactionDestination.isTransactionDestinationFor(transactionSource: transactionSource)
     }
 }
 
@@ -258,11 +258,11 @@ extension MainViewController : TransactionControllerDelegate {
             if  let dropCandidateCollectionView = transactionController.dropCandidateCollectionView,
                 let dropCandidateIndexPath = transactionController.dropCandidateIndexPath,
                 let dropCandidateCell = dropCandidateCollectionView.cellForItem(at: dropCandidateIndexPath),
-                let transactionStartable = transactionStartable(collectionView: transactionStartedCollectionView, indexPath: transactionStartedIndexPath),
-                let transactionCompletable = transactionCompletable(collectionView: dropCandidateCollectionView, indexPath: dropCandidateIndexPath) {
+                let transactionSource = transactionSource(collectionView: transactionStartedCollectionView, indexPath: transactionStartedIndexPath),
+                let transactionDestination = transactionDestination(collectionView: dropCandidateCollectionView, indexPath: dropCandidateIndexPath) {
                 
                 animateTransactionCompleted(from: transactionStartedCell, to: dropCandidateCell, completed: {
-                    self.showTransactionEditScreen(transactionStartable: transactionStartable, transactionCompletable: transactionCompletable)
+                    self.showTransactionEditScreen(transactionSource: transactionSource, transactionDestination: transactionDestination)
                 })
                 
             } else {

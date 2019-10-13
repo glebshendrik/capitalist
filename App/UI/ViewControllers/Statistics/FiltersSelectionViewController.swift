@@ -11,7 +11,7 @@ import PromiseKit
 import AlignedCollectionViewFlowLayout
 
 protocol FiltersSelectionViewControllerDelegate {
-    func didSelectFilters(dateRangeFilter: DateRangeHistoryTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter])
+    func didSelectFilters(dateRangeFilter: DateRangeTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter])
 }
 
 class FiltersSelectionViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
@@ -52,7 +52,7 @@ class FiltersSelectionViewController : UIViewController, UIMessagePresenterManag
         close()
     }
     
-    func set(dateRangeFilter: DateRangeHistoryTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter]) {
+    func set(dateRangeFilter: DateRangeTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter]) {
         viewModel.set(dateRangeFilter: dateRangeFilter, sourceOrDestinationFilters: sourceOrDestinationFilters)
     }
 }
@@ -189,9 +189,9 @@ extension FiltersSelectionViewController : UICollectionViewDelegate, UICollectio
             cell.configure(with: self, fromDate: viewModel.fromDate, toDate: viewModel.toDate)
             
             return cell
-        case is SourceOrDestinationHistoryTransactionFiltersSection:
+        case is SourceOrDestinationTransactionFiltersSection:
             guard   let cell = dequeueCell(for: "SelectableFilterCollectionViewCell") as? SelectableFilterCollectionViewCell,
-                let filtersSection = section as? SourceOrDestinationHistoryTransactionFiltersSection,
+                let filtersSection = section as? SourceOrDestinationTransactionFiltersSection,
                 let filterViewModel = filtersSection.filterViewModel(at: indexPath.row) else { return UICollectionViewCell() }
             
             cell.viewModel = filterViewModel
@@ -209,8 +209,8 @@ extension FiltersSelectionViewController : UICollectionViewDelegate, UICollectio
         switch section {
         case is DateRangeFilterSection:
             return CGSize(width: collectionView.frame.size.width - 32.0, height: 28.0)
-        case is SourceOrDestinationHistoryTransactionFiltersSection:
-            guard   let filtersSection = section as? SourceOrDestinationHistoryTransactionFiltersSection,
+        case is SourceOrDestinationTransactionFiltersSection:
+            guard   let filtersSection = section as? SourceOrDestinationTransactionFiltersSection,
                     let filter = filtersSection.filterViewModel(at: indexPath.row) else { return CGSize.zero }
             
             let titleSize = filter.title.size(withAttributes: [
@@ -226,7 +226,7 @@ extension FiltersSelectionViewController : UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        guard   let filtersSection = viewModel.section(at: indexPath.section) as? SourceOrDestinationHistoryTransactionFiltersSection,
+        guard   let filtersSection = viewModel.section(at: indexPath.section) as? SourceOrDestinationTransactionFiltersSection,
                 let filter = filtersSection.filterViewModel(at: indexPath.row) else { return }
         
         filter.toggle()

@@ -101,12 +101,12 @@ class ExpenseCategoryViewModel {
         self.expenseCategory = expenseCategory
     }
     
-    func asHistoryTransactionFilter() -> ExpenseCategoryHistoryTransactionFilter {
-        return ExpenseCategoryHistoryTransactionFilter(expenseCategoryViewModel: self)
+    func asTransactionFilter() -> ExpenseCategoryTransactionFilter {
+        return ExpenseCategoryTransactionFilter(expenseCategoryViewModel: self)
     }
     
-    func asIncludedInBalanceFilter() -> IncludedInBalanceHistoryTransactionFilter {
-        return IncludedInBalanceHistoryTransactionFilter(expenseCategoryViewModel: self)
+    func asIncludedInBalanceFilter() -> IncludedInBalanceTransactionFilter {
+        return IncludedInBalanceTransactionFilter(expenseCategoryViewModel: self)
     }
     
     private func spent(shouldRound: Bool) -> String? {
@@ -114,7 +114,7 @@ class ExpenseCategoryViewModel {
     }
 }
 
-extension ExpenseCategoryViewModel : TransactionCompletable {
+extension ExpenseCategoryViewModel : TransactionDestination {
     var amountRounded: String {
         return spentRounded ?? ""
     }
@@ -123,8 +123,8 @@ extension ExpenseCategoryViewModel : TransactionCompletable {
         return spent ?? ""
     }
     
-    func canComplete(startable: TransactionStartable) -> Bool {
-        guard let startableExpenseSourceViewModel = startable as? ExpenseSourceViewModel else { return false }
-        return !startableExpenseSourceViewModel.isDebt
+    func isTransactionDestinationFor(transactionSource: TransactionSource) -> Bool {
+        guard let sourceExpenseSourceViewModel = transactionSource as? ExpenseSourceViewModel else { return false }
+        return !sourceExpenseSourceViewModel.isDebt
     }
 }

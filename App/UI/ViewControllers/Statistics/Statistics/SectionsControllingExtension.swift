@@ -78,8 +78,8 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             }
             
             return cell
-        case is HistoryTransactionsLoadingSection:
-            guard let cell = dequeueCell(for: "HistoryTransactionsLoadingTableViewCell") as? HistoryTransactionsLoadingTableViewCell else {
+        case is TransactionsLoadingSection:
+            guard let cell = dequeueCell(for: "TransactionsLoadingTableViewCell") as? TransactionsLoadingTableViewCell else {
                 return UITableViewCell()
                 
             }
@@ -87,8 +87,8 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             cell.loaderImageView.showLoader()
             
             return cell
-        case is HistoryTransactionsHeaderSection:            
-            guard let cell = dequeueCell(for: "HistoryTransactionsHeaderTableViewCell") as? HistoryTransactionsHeaderTableViewCell else {
+        case is TransactionsHeaderSection:            
+            guard let cell = dequeueCell(for: "TransactionsHeaderTableViewCell") as? TransactionsHeaderTableViewCell else {
                 return UITableViewCell()
                 
             }
@@ -96,15 +96,15 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             cell.delegate = self
             
             return cell
-        case is HistoryTransactionsSection:
-            guard   let cell = dequeueCell(for: "HistoryTransactionTableViewCell") as? HistoryTransactionTableViewCell,
-                let historyTransactionsSection = section as? HistoryTransactionsSection,
-                let historyTransactionViewModel = historyTransactionsSection.historyTransactionViewModel(at: indexPath.row) else {
+        case is TransactionsSection:
+            guard   let cell = dequeueCell(for: "TransactionTableViewCell") as? TransactionTableViewCell,
+                let transactionsSection = section as? TransactionsSection,
+                let transactionViewModel = transactionsSection.transactionViewModel(at: indexPath.row) else {
                     return UITableViewCell()
                     
             }
             
-            cell.viewModel = historyTransactionViewModel
+            cell.viewModel = transactionViewModel
             
             return cell
         default:
@@ -116,20 +116,20 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         guard let section = viewModel.section(at: indexPath.section) else {
             return false
         }        
-        return section is HistoryTransactionsSection
+        return section is TransactionsSection
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 
         guard   editingStyle == .delete,
-                let section = viewModel.section(at: indexPath.section) as? HistoryTransactionsSection,
-                let historyTransactionViewModel = section.historyTransactionViewModel(at: indexPath.row) else {
+                let section = viewModel.section(at: indexPath.section) as? TransactionsSection,
+                let transactionViewModel = section.transactionViewModel(at: indexPath.row) else {
             return
         }
-        askToDelete(historyTransactionViewModel: historyTransactionViewModel)
+        askToDelete(transactionViewModel: transactionViewModel)
     }
     
-    func askToDelete(historyTransactionViewModel: HistoryTransactionViewModel) {
+    func askToDelete(transactionViewModel: TransactionViewModel) {
         let alertController = UIAlertController(title: "Удалить транзакцию?",
                                                 message: nil,
                                                 preferredStyle: .alert)
@@ -138,7 +138,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
                                   style: .destructive,
                                   isEnabled: true,
                                   handler: { [weak self] _ in
-                                    self?.removeTransaction(historyTransactionViewModel: historyTransactionViewModel)
+                                    self?.removeTransaction(transactionViewModel: transactionViewModel)
                                 })
         
         
@@ -151,8 +151,8 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard   let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HistoryTransactionsSectionHeaderView.reuseIdentifier) as? HistoryTransactionsSectionHeaderView,
-            let section = viewModel.section(at: section) as? HistoryTransactionsSection else { return nil }
+        guard   let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TransactionsSectionHeaderView.reuseIdentifier) as? TransactionsSectionHeaderView,
+            let section = viewModel.section(at: section) as? TransactionsSection else { return nil }
         
         headerView.section = section
         headerView.contentView.backgroundColor = UIColor(red: 244.0 / 255.0, green: 247.0 / 255.0, blue: 254.0 / 255.0, alpha: 1.0)
@@ -166,9 +166,9 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard   let section = viewModel.section(at: section),
             section.isSectionHeaderVisible,
-            section is HistoryTransactionsSection else { return CGFloat.leastNonzeroMagnitude }
+            section is TransactionsSection else { return CGFloat.leastNonzeroMagnitude }
         
-        return HistoryTransactionsSectionHeaderView.requiredHeight
+        return TransactionsSectionHeaderView.requiredHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -194,10 +194,10 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             }
             
             return
-        case let historyTransactionsSection as HistoryTransactionsSection:
-            guard let historyTransactionViewModel = historyTransactionsSection.historyTransactionViewModel(at: indexPath.row) else { return }
+        case let transactionsSection as TransactionsSection:
+            guard let transactionViewModel = transactionsSection.transactionViewModel(at: indexPath.row) else { return }
             
-            showEdit(historyTransaction: historyTransactionViewModel)
+            showEdit(transaction: transactionViewModel)
             return
         default:
             return
@@ -214,11 +214,11 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             return 370.0
         case is GraphFiltersSection:
             return 44.0
-        case is HistoryTransactionsLoadingSection:
+        case is TransactionsLoadingSection:
             return 44.0
-        case is HistoryTransactionsHeaderSection:
+        case is TransactionsHeaderSection:
             return 92.0
-        case is HistoryTransactionsSection:
+        case is TransactionsSection:
             return 70.0
         default:
             return CGFloat.leastNonzeroMagnitude

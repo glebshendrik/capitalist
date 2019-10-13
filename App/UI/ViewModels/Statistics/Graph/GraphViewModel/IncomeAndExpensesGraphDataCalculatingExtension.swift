@@ -17,29 +17,29 @@ extension GraphViewModel {
         return lineChartData(for: transactions,
                              currency: currency,
                              periodScale: graphPeriodScale,
-                             keyForTransaction: { self.incomeAndExpensesDataSetKey(by: $0.transactionableType) },
+                             keyForTransaction: { self.incomeAndExpensesDataSetKey(by: $0.type) },
                              amountForTransactions: { self.amount(for: $0) },
-                             titleForTransaction: { self.title(by: $0.transactionableType) },
+                             titleForTransaction: { self.title(by: $0.type) },
                              accumulateValuesHistory: false,
                              accumulateValuesForDate: false,
                              fillDataSetAreas: false,
-                             colorForTransaction: { self.color(by: $0.transactionableType) })
+                             colorForTransaction: { self.color(by: $0.type) })
     }
     
-    func calculateIncomeAndExpensesFilters() -> [GraphHistoryTransactionFilter] {
+    func calculateIncomeAndExpensesFilters() -> [GraphTransactionFilter] {
         
         return calculateGraphFilters(for: transactions,
                                      currency: currency,
                                      periodScale: graphPeriodScale,
-                                     keyForTransaction: { self.incomeAndExpensesDataSetKey(by: $0.transactionableType) },
+                                     keyForTransaction: { self.incomeAndExpensesDataSetKey(by: $0.type) },
                                      amountForTransactions: { self.amount(for: $0) },
-                                     titleForTransaction: { self.title(by: $0.transactionableType) },
+                                     titleForTransaction: { self.title(by: $0.type) },
                                      accumulateValuesHistory: false,
                                      filterType: .incomeSource,
-                                     colorForTransaction: { self.color(by: $0.transactionableType) })
+                                     colorForTransaction: { self.color(by: $0.type) })
     }
     
-    func transactionableType(by incomeAndExpensesKey: Int) -> TransactionType {
+    func type(by incomeAndExpensesKey: Int) -> TransactionType {
         switch incomeAndExpensesKey {
         case 0:     return .expense
         case 1:     return .income
@@ -47,15 +47,15 @@ extension GraphViewModel {
         }
     }
     
-    func incomeAndExpensesDataSetKey(by transactionableType: TransactionType) -> Int {
-        switch transactionableType {
+    func incomeAndExpensesDataSetKey(by type: TransactionType) -> Int {
+        switch type {
         case .expense:      return 0
         case .income:       return 1
         case .fundsMove:    return 2
         }
     }
     
-    func transactionableTypeBy(incomeAndExpensesDataSetKey: Int) -> TransactionType? {
+    func typeBy(incomeAndExpensesDataSetKey: Int) -> TransactionType? {
         switch incomeAndExpensesDataSetKey {
         case 0:         return .expense
         case 1:         return .income
@@ -63,16 +63,16 @@ extension GraphViewModel {
         }
     }
     
-    private func title(by transactionableType: TransactionType) -> String {
-        switch transactionableType {
+    private func title(by type: TransactionType) -> String {
+        switch type {
         case .expense:      return "Расходы"
         case .income:       return "Доход"
         case .fundsMove:    return "Переводы"
         }
     }
     
-    private func color(by transactionableType: TransactionType) -> UIColor {
-        switch transactionableType {
+    private func color(by type: TransactionType) -> UIColor {
+        switch type {
         case .expense:      return .red
         case .income:       return Color.Material.green
         case .fundsMove:    return .blue

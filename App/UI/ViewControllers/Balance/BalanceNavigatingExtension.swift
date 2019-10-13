@@ -11,7 +11,7 @@ import UIKit
 extension BalanceViewController : BalanceExpenseSourcesTableSupportDelegate, BalanceExpenseCategoriesTableSupportDelegate {
     
     func didSelect(expenseSource: ExpenseSourceViewModel) {
-        showStatistics(with: expenseSource.asHistoryTransactionFilter())
+        showStatistics(with: expenseSource.asTransactionFilter())
     }
     
     func didSelect(expenseCategory: ExpenseCategoryViewModel) {
@@ -21,7 +21,7 @@ extension BalanceViewController : BalanceExpenseSourcesTableSupportDelegate, Bal
 
 extension BalanceViewController {
     
-    func showStatistics(with filterViewModel: SourceOrDestinationHistoryTransactionFilter) {
+    func showStatistics(with filterViewModel: SourceOrDestinationTransactionFilter) {
         if  let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController {
             
             statisticsViewController.set(sourceOrDestinationFilter: filterViewModel)

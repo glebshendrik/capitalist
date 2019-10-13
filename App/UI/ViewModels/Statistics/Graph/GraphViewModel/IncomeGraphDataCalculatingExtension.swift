@@ -43,7 +43,7 @@ extension GraphViewModel {
                                 amountForTransactions: { self.amount(for: $0) })
     }
     
-    func calculateIncomeFilters() -> [GraphHistoryTransactionFilter] {
+    func calculateIncomeFilters() -> [GraphTransactionFilter] {
         
         return calculateGraphFilters(for: transactions,
                                      currency: currency,
@@ -56,7 +56,7 @@ extension GraphViewModel {
                                      colorForTransaction: { self.color(for: $0) })
     }
     
-    private func color(for transaction: HistoryTransactionViewModel) -> UIColor? {
+    private func color(for transaction: TransactionViewModel) -> UIColor? {
         guard let idIndex = incomeSourceIds.firstIndex(of: transaction.sourceId) else { return nil }
         return colors.item(at: idIndex)
     }

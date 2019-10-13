@@ -10,19 +10,24 @@ import Foundation
 
 protocol Transactionable {
     var id: Int { get }
+    var type: TransactionableType { get }
     var name: String { get }
     var iconURL: URL? { get }
+    var iconCategory: IconCategory? { get }
     var currency: Currency { get }
     var amountRounded: String { get }
     var amount: String { get }
+    var isDeleted: Bool { get }
 }
 
-protocol TransactionStartable : Transactionable {
-    var canStartTransaction: Bool { get }
+protocol TransactionSource : Transactionable {
+    var isTransactionSource: Bool { get }
 }
 
-protocol TransactionCompletable : Transactionable {
-    func canComplete(startable: TransactionStartable) -> Bool
+protocol TransactionDestination : Transactionable {
+    func isTransactionDestinationFor(transactionSource: TransactionSource) -> Bool
 }
 
-
+enum TransactionPart {
+    case source, destination
+}

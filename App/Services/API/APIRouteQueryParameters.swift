@@ -39,9 +39,9 @@ struct APIRouteQueryParameters {
                 indexExpenseSourcesParams["account_type"] = accountType.rawValue
             }
             return indexExpenseSourcesParams
-        case .indexTransactions(_, let transactionType):
-            guard let transactionType = transactionType else { return params }
-            return [ "transaction_type" : transactionType.rawValue ]
+        case .indexTransactions(_, let type):
+            guard let type = type else { return params }
+            return [ "transaction_type" : type.rawValue ]
         case .indexProviderConnections(_, let providerId):
             return [ "provider_id" : providerId ]
         case .indexAccountConnections(_, let connectionId):

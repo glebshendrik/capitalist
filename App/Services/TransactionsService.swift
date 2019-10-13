@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 class TransactionsService : Service, TransactionsServiceProtocol {
-    func index(for userId: Int, transactionType: TransactionType?) -> Promise<[Transaction]> {
-        return requestCollection(APIRoute.indexTransactions(userId: userId, transactionType: transactionType))
+    func index(for userId: Int, type: TransactionType?) -> Promise<[Transaction]> {
+        return requestCollection(APIRoute.indexTransactions(userId: userId, type: type))
     }
     
     func create(with creationForm: TransactionCreationForm) -> Promise<Transaction> {

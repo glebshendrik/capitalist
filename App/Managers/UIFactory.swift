@@ -102,7 +102,7 @@ class UIFactory : UIFactoryProtocol {
     
     func expenseSourceSelectViewController(delegate: ExpenseSourceSelectViewControllerDelegate,
                                            skipExpenseSourceId: Int?,
-                                           selectionType: ExpenseSourceSelectionType,
+                                           selectionType: TransactionPart,
                                            noDebts: Bool,
                                            accountType: AccountType?,
                                            currency: String?) -> ExpenseSourceSelectViewController? {
@@ -126,14 +126,14 @@ class UIFactory : UIFactoryProtocol {
     }
     
     func fundsMoveEditViewController(delegate: FundsMoveEditViewControllerDelegate,
-                                     startable: ExpenseSourceViewModel?,
-                                     completable: ExpenseSourceViewModel?,
+                                     source: ExpenseSourceViewModel?,
+                                     destination: ExpenseSourceViewModel?,
                                      borrow: BorrowViewModel?) -> UINavigationController? {
         let fundsMoveEditNavigationController = router.viewController(.FundsMoveEditNavigationController) as? UINavigationController
         let fundsMoveEditViewController = fundsMoveEditNavigationController?.topViewController as? FundsMoveEditViewController
         
         fundsMoveEditViewController?.set(delegate: delegate)
-        fundsMoveEditViewController?.set(startable: startable, completable: completable, borrow: borrow)
+        fundsMoveEditViewController?.set(source: source, destination: destination, borrow: borrow)
         return fundsMoveEditNavigationController
     }
     

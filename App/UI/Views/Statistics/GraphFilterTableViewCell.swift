@@ -14,7 +14,7 @@ class GraphFilterTableViewCell : UITableViewCell {
     @IBOutlet weak var aggregatedValueLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
-    var viewModel: GraphHistoryTransactionFilter? = nil {
+    var viewModel: GraphTransactionFilter? = nil {
         didSet {
             updateUI()
         }

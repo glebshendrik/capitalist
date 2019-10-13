@@ -1,5 +1,5 @@
 //
-//  HistoryTransactionsLoadingTableViewCell.swift
+//  TransactionsLoadingTableViewCell.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 27/03/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryTransactionsLoadingTableViewCell : UITableViewCell {
+class TransactionsLoadingTableViewCell : UITableViewCell {
     @IBOutlet weak var loaderImageView: UIImageView!
     
     override func awakeFromNib() {

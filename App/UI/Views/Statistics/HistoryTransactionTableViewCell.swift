@@ -1,5 +1,5 @@
 //
-//  HistoryTransactionTableViewCell.swift
+//  TransactionTableViewCell.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 27/03/2019.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class HistoryTransactionTableViewCell : UITableViewCell {
+class TransactionTableViewCell : UITableViewCell {
     @IBOutlet weak var destinationIconImageView: UIImageView!
     @IBOutlet weak var sourceTitleLabel: UILabel!
     @IBOutlet weak var destinationTitleLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     
-    var viewModel: HistoryTransactionViewModel? {
+    var viewModel: TransactionViewModel? {
         didSet {
             updateUI()
         }

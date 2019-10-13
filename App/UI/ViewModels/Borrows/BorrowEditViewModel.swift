@@ -28,9 +28,9 @@ class BorrowEditViewModel {
         return !comment.isEmpty && !comment.isWhitespace
     }
     
-    var expenseSourceSelectionType: ExpenseSourceSelectionType {
-        guard let type = type else { return .startable }
-        return type == .debt ? .startable : .completable
+    var expenseSourceSelectionType: TransactionPart {
+        guard let type = type else { return .source }
+        return type == .debt ? .source : .destination
     }
     
     var borrowId: Int?

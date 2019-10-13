@@ -37,10 +37,10 @@ extension GraphViewModel {
         return pieChartsAmounts.item(at: indexPath.item)
     }
     
-    func pieChartsAmounts(for transactions: [HistoryTransactionViewModel],
+    func pieChartsAmounts(for transactions: [TransactionViewModel],
                           currency: Currency?,
                           periodScale: GraphPeriodScale?,
-                          amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber) -> [String] {
+                          amountForTransactions: @escaping ([TransactionViewModel]) -> NSDecimalNumber) -> [String] {
         
         guard   let currency = currency,
                 let periodScale = periodScale else { return [] }
@@ -64,13 +64,13 @@ extension GraphViewModel {
         }
     }
     
-    func pieChartDatas(for transactions: [HistoryTransactionViewModel],
+    func pieChartDatas(for transactions: [TransactionViewModel],
                        currency: Currency?,
                        periodScale: GraphPeriodScale?,
-                       keyForTransaction: @escaping (HistoryTransactionViewModel) -> Int,
-                       amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber,
-                       titleForTransaction: @escaping (HistoryTransactionViewModel) -> String,
-                       colorForTransaction: ((HistoryTransactionViewModel) -> UIColor?)? = nil) -> [PieChartData] {
+                       keyForTransaction: @escaping (TransactionViewModel) -> Int,
+                       amountForTransactions: @escaping ([TransactionViewModel]) -> NSDecimalNumber,
+                       titleForTransaction: @escaping (TransactionViewModel) -> String,
+                       colorForTransaction: ((TransactionViewModel) -> UIColor?)? = nil) -> [PieChartData] {
         
         guard let periodScale = periodScale else { return [] }
         
@@ -109,13 +109,13 @@ extension GraphViewModel {
     }
     
     private func pieChartData(for date: Date,
-                              transactions: [HistoryTransactionViewModel],
+                              transactions: [TransactionViewModel],
                               currency: Currency?,
                               periodScale: GraphPeriodScale,
-                              keyForTransaction: @escaping (HistoryTransactionViewModel) -> Int,
-                              amountForTransactions: @escaping ([HistoryTransactionViewModel]) -> NSDecimalNumber,
-                              titleForTransaction: @escaping (HistoryTransactionViewModel) -> String,
-                              colorForTransaction: ((HistoryTransactionViewModel) -> UIColor?)? = nil) -> PieChartData? {
+                              keyForTransaction: @escaping (TransactionViewModel) -> Int,
+                              amountForTransactions: @escaping ([TransactionViewModel]) -> NSDecimalNumber,
+                              titleForTransaction: @escaping (TransactionViewModel) -> String,
+                              colorForTransaction: ((TransactionViewModel) -> UIColor?)? = nil) -> PieChartData? {
         
         guard let currency = currency else { return nil }
         

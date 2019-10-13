@@ -17,6 +17,7 @@ struct IncomeSource : Decodable {
     let order: Int
     let deletedAt: Date?
     let isChild: Bool
+    let activeId: Int?
     let reminderStartDate: Date?
     let reminderRecurrenceRule: String?
     let reminderMessage: String?
@@ -30,6 +31,7 @@ struct IncomeSource : Decodable {
         case order = "row_order"
         case deletedAt = "deleted_at"
         case isChild = "is_child"
+        case activeId = "active_id"
         case reminderStartDate = "reminder_start_date"
         case reminderRecurrenceRule = "reminder_recurrence_rule"
         case reminderMessage = "reminder_message"

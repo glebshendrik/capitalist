@@ -14,8 +14,8 @@ class FiltersViewModel {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
     
-    public private(set) var sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter] = []
-    public private(set) var dateRangeFilter: DateRangeHistoryTransactionFilter? = nil
+    public private(set) var sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter] = []
+    public private(set) var dateRangeFilter: DateRangeTransactionFilter? = nil
     
     var dateRangeFilterTitle: String? {
         return dateRangeFilter?.title
@@ -30,7 +30,7 @@ class FiltersViewModel {
         return singleSourceOrDestinationFilter.editable
     }
     
-    var singleSourceOrDestinationFilter: SourceOrDestinationHistoryTransactionFilter? {
+    var singleSourceOrDestinationFilter: SourceOrDestinationTransactionFilter? {
         guard sourceOrDestinationFilters.count == 1 else { return nil }
         return sourceOrDestinationFilters.first
     }
@@ -69,15 +69,15 @@ class FiltersViewModel {
         }
     }
     
-    func set(sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter]) {
+    func set(sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter]) {
         self.sourceOrDestinationFilters = sourceOrDestinationFilters
     }
     
-    func set(dateRangeFilter: DateRangeHistoryTransactionFilter?) {
+    func set(dateRangeFilter: DateRangeTransactionFilter?) {
         self.dateRangeFilter = dateRangeFilter
     }
     
-    func sourceOrDestinationFilter(at indexPath: IndexPath) -> SourceOrDestinationHistoryTransactionFilter? {
+    func sourceOrDestinationFilter(at indexPath: IndexPath) -> SourceOrDestinationTransactionFilter? {
         return sourceOrDestinationFilters.item(at: indexPath.row)
     }
     
@@ -85,7 +85,7 @@ class FiltersViewModel {
         return  firstly {
                     incomeSourcesCoordinator.show(by: id)
                 }.get { incomeSource in
-                    let filter = IncomeSourceHistoryTransactionFilter(incomeSourceViewModel: IncomeSourceViewModel(incomeSource: incomeSource))
+                    let filter = IncomeSourceTransactionFilter(incomeSourceViewModel: IncomeSourceViewModel(incomeSource: incomeSource))
                     self.set(sourceOrDestinationFilters: [filter])
                 }.asVoid()
     }
@@ -94,7 +94,7 @@ class FiltersViewModel {
         return  firstly {
                     expenseSourcesCoordinator.show(by: id)
                 }.get { expenseSource in
-                    let filter = ExpenseSourceHistoryTransactionFilter(expenseSourceViewModel: ExpenseSourceViewModel(expenseSource: expenseSource))
+                    let filter = ExpenseSourceTransactionFilter(expenseSourceViewModel: ExpenseSourceViewModel(expenseSource: expenseSource))
                     self.set(sourceOrDestinationFilters: [filter])
                 }.asVoid()
     }
@@ -103,7 +103,7 @@ class FiltersViewModel {
         return  firstly {
                     expenseCategoriesCoordinator.show(by: id)
                 }.get { expenseCategory in
-                    let filter = ExpenseCategoryHistoryTransactionFilter(expenseCategoryViewModel: ExpenseCategoryViewModel(expenseCategory: expenseCategory))
+                    let filter = ExpenseCategoryTransactionFilter(expenseCategoryViewModel: ExpenseCategoryViewModel(expenseCategory: expenseCategory))
                     self.set(sourceOrDestinationFilters: [filter])
                 }.asVoid()
     }

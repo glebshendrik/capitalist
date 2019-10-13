@@ -8,9 +8,9 @@
 
 import Foundation
 
-class IncomeSourceViewModel : TransactionStartable {
+class IncomeSourceViewModel : TransactionSource {
     
-    var canStartTransaction: Bool {
+    var isTransactionSource: Bool {
         return true
     }
     
@@ -52,8 +52,8 @@ class IncomeSourceViewModel : TransactionStartable {
         self.incomeSource = incomeSource
     }
     
-    func asHistoryTransactionFilter() -> IncomeSourceHistoryTransactionFilter {
-        return IncomeSourceHistoryTransactionFilter(incomeSourceViewModel: self)
+    func asTransactionFilter() -> IncomeSourceTransactionFilter {
+        return IncomeSourceTransactionFilter(incomeSourceViewModel: self)
     }
     
     private func amount(shouldRound: Bool) -> String {

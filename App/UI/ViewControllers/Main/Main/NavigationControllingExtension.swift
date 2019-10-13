@@ -9,7 +9,7 @@
 import UIKit
 
 extension MainViewController {
-    func showStatistics(with filterViewModel: SourceOrDestinationHistoryTransactionFilter) {
+    func showStatistics(with filterViewModel: SourceOrDestinationTransactionFilter) {
         if  let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController {
             
             statisticsViewController.set(sourceOrDestinationFilter: filterViewModel)
@@ -101,62 +101,62 @@ extension MainViewController {
 }
 
 extension MainViewController {
-    func showTransactionEditScreen(transactionStartable: TransactionStartable, transactionCompletable: TransactionCompletable) {
+    func showTransactionEditScreen(transactionSource: TransactionSource, transactionDestination: TransactionDestination) {
         soundsManager.playTransactionStartedSound()
-        switch (transactionStartable, transactionCompletable) {
-        case (let startable as IncomeSourceViewModel, let completable as ExpenseSourceViewModel):
-            showIncomeEditScreen(incomeSourceStartable: startable, expenseSourceCompletable: completable)
-        case (let startable as ExpenseSourceViewModel, let completable as ExpenseSourceViewModel):
-            showFundsMoveEditScreen(expenseSourceStartable: startable, expenseSourceCompletable: completable)
-        case (let startable as ExpenseSourceViewModel, let completable as ExpenseCategoryViewModel):
-            showExpenseEditScreen(expenseSourceStartable: startable, expenseCategoryCompletable: completable)
+        switch (transactionSource, transactionDestination) {
+        case (let source as IncomeSourceViewModel, let destination as ExpenseSourceViewModel):
+            showIncomeEditScreen(incomeSourceSource: source, expenseSourceDestination: destination)
+        case (let source as ExpenseSourceViewModel, let destination as ExpenseSourceViewModel):
+            showFundsMoveEditScreen(expenseSourceSource: source, expenseSourceDestination: destination)
+        case (let source as ExpenseSourceViewModel, let destination as ExpenseCategoryViewModel):
+            showExpenseEditScreen(expenseSourceSource: source, expenseCategoryDestination: destination)
         default:
             return
         }
     }
     
-    private func showIncomeEditScreen(incomeSourceStartable: IncomeSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
+    private func showIncomeEditScreen(incomeSourceSource: IncomeSourceViewModel, expenseSourceDestination: ExpenseSourceViewModel) {
         if  let incomeEditNavigationController = router.viewController(.IncomeEditNavigationController) as? UINavigationController,
             let incomeEditViewController = incomeEditNavigationController.topViewController as? IncomeEditViewController {
             
             incomeEditViewController.set(delegate: self)
             
-            incomeEditViewController.set(startable: incomeSourceStartable, completable: expenseSourceCompletable)
+            incomeEditViewController.set(source: incomeSourceSource, destination: expenseSourceDestination)
             
             present(incomeEditNavigationController, animated: true, completion: nil)
         }
     }
     
-    private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
+    private func showFundsMoveEditScreen(expenseSourceSource: ExpenseSourceViewModel, expenseSourceDestination: ExpenseSourceViewModel) {
         
-        if expenseSourceStartable.hasWaitingDebts {
+        if expenseSourceSource.hasWaitingDebts {
             showBorrowsSheet(notReturnTitle: "Занять",
                            returnTitle: "Возвращение долга",
-                           waitingBorrows: expenseSourceStartable.waitingDebts,
-                           expenseSourceStartable: expenseSourceStartable,
-                           expenseSourceCompletable: expenseSourceCompletable,
+                           waitingBorrows: expenseSourceSource.waitingDebts,
+                           expenseSourceSource: expenseSourceSource,
+                           expenseSourceDestination: expenseSourceDestination,
                            borrowType: .debt)
-        } else if expenseSourceCompletable.hasWaitingLoans {
+        } else if expenseSourceDestination.hasWaitingLoans {
             showBorrowsSheet(notReturnTitle: "Одолжить",
                            returnTitle: "Возвращение займа",
-                           waitingBorrows: expenseSourceCompletable.waitingLoans,
-                           expenseSourceStartable: expenseSourceStartable,
-                           expenseSourceCompletable: expenseSourceCompletable,
+                           waitingBorrows: expenseSourceDestination.waitingLoans,
+                           expenseSourceSource: expenseSourceSource,
+                           expenseSourceDestination: expenseSourceDestination,
                            borrowType: .loan)
         } else {
-            showBorrowOrFundsMove(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable)
+            showBorrowOrFundsMove(expenseSourceSource: expenseSourceSource, expenseSourceDestination: expenseSourceDestination)
         }
     }
     
-    private func showBorrowOrFundsMove(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
-        if expenseSourceStartable.isDebt || expenseSourceCompletable.isDebt {
-            showBorrowEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable)
+    private func showBorrowOrFundsMove(expenseSourceSource: ExpenseSourceViewModel, expenseSourceDestination: ExpenseSourceViewModel) {
+        if expenseSourceSource.isDebt || expenseSourceDestination.isDebt {
+            showBorrowEditScreen(expenseSourceSource: expenseSourceSource, expenseSourceDestination: expenseSourceDestination)
         } else {
-            showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, borrow: nil)
+            showFundsMoveEditScreen(expenseSourceSource: expenseSourceSource, expenseSourceDestination: expenseSourceDestination, borrow: nil)
         }
     }
     
-    private func showBorrowsSheet(notReturnTitle: String, returnTitle: String, waitingBorrows: [BorrowViewModel], expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, borrowType: BorrowType) {
+    private func showBorrowsSheet(notReturnTitle: String, returnTitle: String, waitingBorrows: [BorrowViewModel], expenseSourceSource: ExpenseSourceViewModel, expenseSourceDestination: ExpenseSourceViewModel, borrowType: BorrowType) {
         let alertController = UIAlertController(title: nil,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
@@ -164,7 +164,7 @@ extension MainViewController {
         alertController.addAction(title: notReturnTitle,
                                   style: .default,
                                   isEnabled: true) { _ in
-                                    self.showBorrowOrFundsMove(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable)
+                                    self.showBorrowOrFundsMove(expenseSourceSource: expenseSourceSource, expenseSourceDestination: expenseSourceDestination)
         }
         
         alertController.addAction(title: returnTitle,
@@ -172,8 +172,8 @@ extension MainViewController {
                                   isEnabled: true) { _ in
                                     
                                     self.show(waitingBorrows: waitingBorrows,
-                                              expenseSourceStartable: expenseSourceStartable,
-                                              expenseSourceCompletable: expenseSourceCompletable,
+                                              expenseSourceSource: expenseSourceSource,
+                                              expenseSourceDestination: expenseSourceDestination,
                                               borrowType: borrowType)
         }
         
@@ -182,39 +182,39 @@ extension MainViewController {
         present(alertController, animated: true)
     }
     
-    private func show(waitingBorrows: [BorrowViewModel], expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, borrowType: BorrowType) {
+    private func show(waitingBorrows: [BorrowViewModel], expenseSourceSource: ExpenseSourceViewModel, expenseSourceDestination: ExpenseSourceViewModel, borrowType: BorrowType) {
         
         if let waitingBorrowsViewController = router.viewController(.WaitingBorrowsViewController) as? WaitingBorrowsViewController {
             
-            waitingBorrowsViewController.set(delegate: self, expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, waitingBorrows: waitingBorrows, borrowType: borrowType)
+            waitingBorrowsViewController.set(delegate: self, expenseSourceSource: expenseSourceSource, expenseSourceDestination: expenseSourceDestination, waitingBorrows: waitingBorrows, borrowType: borrowType)
             
             slideUp(viewController: waitingBorrowsViewController)
         }
     }
     
-    private func showFundsMoveEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel, borrow: BorrowViewModel?) {
+    private func showFundsMoveEditScreen(expenseSourceSource: ExpenseSourceViewModel, expenseSourceDestination: ExpenseSourceViewModel, borrow: BorrowViewModel?) {
         modal(factory.fundsMoveEditViewController(delegate: self,
-                                                  startable: expenseSourceStartable,
-                                                  completable: expenseSourceCompletable,
+                                                  source: expenseSourceSource,
+                                                  destination: expenseSourceDestination,
                                                   borrow: borrow))
     }
     
-    private func showBorrowEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
-        let type = expenseSourceStartable.isDebt ? BorrowType.loan : BorrowType.debt
+    private func showBorrowEditScreen(expenseSourceSource: ExpenseSourceViewModel, expenseSourceDestination: ExpenseSourceViewModel) {
+        let type = expenseSourceSource.isDebt ? BorrowType.loan : BorrowType.debt
         modal(factory.borrowEditViewController(delegate: self,
                                                type: type,
                                                borrowId: nil,
-                                               expenseSourceFrom: expenseSourceStartable,
-                                               expenseSourceTo: expenseSourceCompletable))
+                                               expenseSourceFrom: expenseSourceSource,
+                                               expenseSourceTo: expenseSourceDestination))
     }
     
-    private func showExpenseEditScreen(expenseSourceStartable: ExpenseSourceViewModel, expenseCategoryCompletable: ExpenseCategoryViewModel) {
+    private func showExpenseEditScreen(expenseSourceSource: ExpenseSourceViewModel, expenseCategoryDestination: ExpenseCategoryViewModel) {
         if  let expenseEditNavigationController = router.viewController(.ExpenseEditNavigationController) as? UINavigationController,
             let expenseEditViewController = expenseEditNavigationController.topViewController as? ExpenseEditViewController {
             
             expenseEditViewController.set(delegate: self)
             
-            expenseEditViewController.set(startable: expenseSourceStartable, completable: expenseCategoryCompletable)
+            expenseEditViewController.set(source: expenseSourceSource, destination: expenseCategoryDestination)
             
             present(expenseEditNavigationController, animated: true, completion: nil)
         }
@@ -222,7 +222,7 @@ extension MainViewController {
 }
 
 extension MainViewController : WaitingBorrowsViewControllerDelegate {
-    func didSelect(borrow: BorrowViewModel, expenseSourceStartable: ExpenseSourceViewModel, expenseSourceCompletable: ExpenseSourceViewModel) {
-        showFundsMoveEditScreen(expenseSourceStartable: expenseSourceStartable, expenseSourceCompletable: expenseSourceCompletable, borrow: borrow)
+    func didSelect(borrow: BorrowViewModel, expenseSourceSource: ExpenseSourceViewModel, expenseSourceDestination: ExpenseSourceViewModel) {
+        showFundsMoveEditScreen(expenseSourceSource: expenseSourceSource, expenseSourceDestination: expenseSourceDestination, borrow: borrow)
     }
 }

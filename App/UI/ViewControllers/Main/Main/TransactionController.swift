@@ -12,7 +12,7 @@ protocol TransactionControllerDelegate {
     var mainView: UIView { get }
     var isEditing: Bool { get }
     
-    func transactionStartable(collectionView: UICollectionView, indexPath: IndexPath) -> TransactionStartable?
+    func transactionSource(collectionView: UICollectionView, indexPath: IndexPath) -> TransactionSource?
     func animateTransactionFinished(cell: UICollectionViewCell?)
     func animateTransactionStarted(cell: UICollectionViewCell?)
     func animateTransactionDropCandidate(cell: UICollectionViewCell?)

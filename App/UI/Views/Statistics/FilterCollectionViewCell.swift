@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FilterCellDelegate: class {
-    func didTapDeleteButton(filter: SourceOrDestinationHistoryTransactionFilter)
+    func didTapDeleteButton(filter: SourceOrDestinationTransactionFilter)
 }
 
 class FilterCollectionViewCell : UICollectionViewCell {
@@ -17,7 +17,7 @@ class FilterCollectionViewCell : UICollectionViewCell {
     
     weak var delegate: FilterCellDelegate?
     
-    var viewModel: SourceOrDestinationHistoryTransactionFilter? {
+    var viewModel: SourceOrDestinationTransactionFilter? {
         didSet {
             updateUI()
         }

@@ -141,8 +141,8 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
     
     private func showReturnTransactionScreen() {
         modal(factory.fundsMoveEditViewController(delegate: self,
-                                                  startable: nil,
-                                                  completable: nil,
+                                                  source: nil,
+                                                  destination: nil,
                                                   borrow: viewModel.asReturningBorrow()))
     }
     
@@ -202,12 +202,12 @@ class PaydayDateSelectionDelegate : DatePickerViewControllerDelegate {
 }
 
 extension BorrowEditViewController : ExpenseSourceSelectViewControllerDelegate {
-    func didSelect(startableExpenseSourceViewModel: ExpenseSourceViewModel) {
-        update(expenseSource: startableExpenseSourceViewModel)
+    func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(expenseSource: sourceExpenseSourceViewModel)
     }
     
-    func didSelect(completableExpenseSourceViewModel: ExpenseSourceViewModel) {
-        update(expenseSource: completableExpenseSourceViewModel)
+    func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(expenseSource: destinationExpenseSourceViewModel)
     }
 }
 

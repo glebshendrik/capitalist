@@ -1,5 +1,5 @@
 //
-//  HistoryTransactionsSectionHeaderView.swift
+//  TransactionsSectionHeaderView.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 28/03/2019.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class HistoryTransactionsSectionHeaderView: UITableViewHeaderFooterView {
-    static let reuseIdentifier = "HistoryTransactionsSectionHeaderView"
+class TransactionsSectionHeaderView: UITableViewHeaderFooterView {
+    static let reuseIdentifier = "TransactionsSectionHeaderView"
     static let requiredHeight: CGFloat = 50.0
     
     @IBOutlet weak var dateLabel: UILabel!
     
-    var section: HistoryTransactionsSection? {
+    var section: TransactionsSection? {
         didSet {
             dateLabel.text = section?.title
         }

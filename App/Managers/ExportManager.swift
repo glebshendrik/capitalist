@@ -16,7 +16,7 @@ enum ExportError : Error {
 }
 
 class ExportManager : ExportManagerProtocol {
-    func export(transactions: [HistoryTransactionViewModel]) -> Promise<URL> {
+    func export(transactions: [TransactionViewModel]) -> Promise<URL> {
         
         guard   let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
                 case let filename = "export\(Int(Date().timeIntervalSince1970)).csv",
@@ -46,7 +46,7 @@ class ExportManager : ExportManagerProtocol {
                 let amount = transaction.amountCents.moneyDecimalString(with: transaction.currency) ?? "?"
                 let convertedAmount = transaction.convertedAmountCents.moneyDecimalString(with: transaction.convertedCurrency) ?? "?"
                 try csv.write(row: [transaction.gotAt.iso8601String,
-                                    transaction.transactionableType.rawValue,
+                                    transaction.type.rawValue,
                                     transaction.sourceTitle,
                                     transaction.destinationTitle,
                                     amount,

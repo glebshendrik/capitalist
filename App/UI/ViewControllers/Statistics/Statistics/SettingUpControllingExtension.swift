@@ -47,11 +47,11 @@ extension StatisticsViewController {
         }
     }
     
-    func removeTransaction(historyTransactionViewModel: HistoryTransactionViewModel) {
+    func removeTransaction(transactionViewModel: TransactionViewModel) {
         setLoading()
         
         firstly {
-            viewModel.removeTransaction(historyTransactionViewModel: historyTransactionViewModel)
+            viewModel.removeTransaction(transactionViewModel: transactionViewModel)
         }.done {
             self.loadData(financialDataInvalidated: true)
         }.catch { _ in
@@ -71,14 +71,14 @@ extension StatisticsViewController {
 }
 
 extension StatisticsViewController {
-    func set(sourceOrDestinationFilter: SourceOrDestinationHistoryTransactionFilter) {
+    func set(sourceOrDestinationFilter: SourceOrDestinationTransactionFilter) {
         viewModel.set(sourceOrDestinationFilter: sourceOrDestinationFilter)
     }
     
     func setupUI() {
         setupNavigationBar()
         setupFiltersUI()
-        setupHistoryTransactionsUI()
+        setupTransactionsUI()
         setupFooterOverlayUI()
     }
     
@@ -97,11 +97,11 @@ extension StatisticsViewController {
         filtersCollectionView.dataSource = self
     }
     
-    private func setupHistoryTransactionsUI() {
+    private func setupTransactionsUI() {
         viewModel.updatePresentationData()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "HistoryTransactionsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: HistoryTransactionsSectionHeaderView.reuseIdentifier)
+        tableView.register(UINib(nibName: "TransactionsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: TransactionsSectionHeaderView.reuseIdentifier)
     }
     
     private func setupFooterOverlayUI() {        
@@ -122,7 +122,7 @@ extension StatisticsViewController {
         updateNavigationBar()
         updateFiltersUI()
         updateGraphFiltersSection()
-        updateHistoryTransactionsUI()
+        updateTransactionsUI()
         updateBalanceUI()        
     }
     
@@ -161,7 +161,7 @@ extension StatisticsViewController {
         }
     }
     
-    private func updateHistoryTransactionsUI() {
+    private func updateTransactionsUI() {
         tableView.reloadData()
     }
     

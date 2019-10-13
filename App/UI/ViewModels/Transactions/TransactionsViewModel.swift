@@ -1,5 +1,5 @@
 //
-//  HistoryTransactionsViewModel.swift
+//  TransactionsViewModel.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 27/03/2019.
@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 import SwifterSwift
 
-class HistoryTransactionsViewModel {
-    private let historyTransactionsCoordinator: TransactionsCoordinatorProtocol
+class TransactionsViewModel {
+    private let transactionsCoordinator: TransactionsCoordinatorProtocol
     private let exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
     private let currencyConverter: CurrencyConverterProtocol
@@ -21,37 +21,37 @@ class HistoryTransactionsViewModel {
     var defaultPeriod: AccountingPeriod? = nil
     private var exchangeRates: [String : Float] = [String : Float]()
     
-    public private(set) var filteredHistoryTransactionViewModels: [HistoryTransactionViewModel] = []
+    public private(set) var filteredTransactionViewModels: [TransactionViewModel] = []
     
-    private var allHistoryTransactionViewModels: [HistoryTransactionViewModel] = [] {
+    private var allTransactionViewModels: [TransactionViewModel] = [] {
         didSet {
-            let currencies = allHistoryTransactionViewModels.map { $0.currency.code }.withoutDuplicates()
-            let convertedCurrencies = allHistoryTransactionViewModels.map { $0.convertedCurrency.code }.withoutDuplicates()
+            let currencies = allTransactionViewModels.map { $0.currency.code }.withoutDuplicates()
+            let convertedCurrencies = allTransactionViewModels.map { $0.convertedCurrency.code }.withoutDuplicates()
             allCurrencyCodes = (currencies + convertedCurrencies).withoutDuplicates()
         }
     }
     
     var hasIncomeTransactions: Bool {
-        return filteredHistoryTransactionViewModels.any { $0.sourceType == .incomeSource }
+        return filteredTransactionViewModels.any { $0.sourceType == .incomeSource }
     }
     
     var hasExpenseTransactions: Bool {
-        return filteredHistoryTransactionViewModels.any { $0.destinationType == .expenseCategory }
+        return filteredTransactionViewModels.any { $0.destinationType == .expenseCategory }
     }
     
     var filteredIncomesAmount: String? {
-        return historyTransactionsAmount(type: .incomeSource)
+        return transactionsAmount(type: .incomeSource)
     }
     
     var filteredExpensesAmount: String? {
-        return historyTransactionsAmount(type: .expenseCategory)
+        return transactionsAmount(type: .expenseCategory)
     }
     
-    init(historyTransactionsCoordinator: TransactionsCoordinatorProtocol,
+    init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          currencyConverter: CurrencyConverterProtocol) {
-        self.historyTransactionsCoordinator = historyTransactionsCoordinator
+        self.transactionsCoordinator = transactionsCoordinator
         self.exchangeRatesCoordinator = exchangeRatesCoordinator
         self.accountCoordinator = accountCoordinator
         self.currencyConverter = currencyConverter
@@ -59,29 +59,29 @@ class HistoryTransactionsViewModel {
     
     func loadData() -> Promise<Void> {
         return  firstly {
-                    when(fulfilled: loadDefaultCurrency(), loadHistoryTransactions())
+                    when(fulfilled: loadDefaultCurrency(), loadTransactions())
                 }.then {
                     self.loadExchangeRates()
                 }
     }
     
-    func filterHistoryTransactions(sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter],
-                                   dateRangeFilter: DateRangeHistoryTransactionFilter?) {
+    func filterTransactions(sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter],
+                                   dateRangeFilter: DateRangeTransactionFilter?) {
         
-        var historyTransactionViewModels = allHistoryTransactionViewModels
+        var transactionViewModels = allTransactionViewModels
         
         if sourceOrDestinationFilters.count > 0 {
             
-            var filtersHash = [TransactionSourceOrDestinationType : [Int : SourceOrDestinationHistoryTransactionFilter]]()
+            var filtersHash = [TransactionableType : [Int : SourceOrDestinationTransactionFilter]]()
             
             for filter in sourceOrDestinationFilters {
                 if filtersHash[filter.type] == nil {
-                    filtersHash[filter.type] = [Int : SourceOrDestinationHistoryTransactionFilter]()
+                    filtersHash[filter.type] = [Int : SourceOrDestinationTransactionFilter]()
                 }
                 filtersHash[filter.type]?[filter.id] = filter
             }
             
-            historyTransactionViewModels = historyTransactionViewModels.filter { transaction -> Bool in
+            transactionViewModels = transactionViewModels.filter { transaction -> Bool in
                 
                 guard let matchedFilter = (filtersHash[transaction.sourceType]?[transaction.sourceId] ??
                     filtersHash[transaction.destinationType]?[transaction.destinationId]) else { return false }
@@ -91,22 +91,22 @@ class HistoryTransactionsViewModel {
         }
         
         if let fromDate = dateRangeFilter?.fromDate {
-            historyTransactionViewModels = historyTransactionViewModels.filter {
+            transactionViewModels = transactionViewModels.filter {
                 $0.gotAt >= fromDate
             }
         }
         
         if let toDate = dateRangeFilter?.toDate {
-            historyTransactionViewModels = historyTransactionViewModels.filter {
+            transactionViewModels = transactionViewModels.filter {
                 $0.gotAt <= toDate
             }
         }
         
-        filteredHistoryTransactionViewModels = historyTransactionViewModels
+        filteredTransactionViewModels = transactionViewModels
     }
     
-    func removeTransaction(historyTransactionViewModel: HistoryTransactionViewModel) -> Promise<Void> {        
-        return historyTransactionsCoordinator.destroy(historyTransaction: historyTransactionViewModel.historyTransaction)
+    func removeTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {        
+        return transactionsCoordinator.destroy(transaction: transactionViewModel.transaction)
     }
     
     private func loadDefaultCurrency() -> Promise<Void> {
@@ -118,11 +118,11 @@ class HistoryTransactionsViewModel {
                 }.asVoid()
     }
     
-    private func loadHistoryTransactions() -> Promise<Void> {
+    private func loadTransactions() -> Promise<Void> {
         return  firstly {
-                    historyTransactionsCoordinator.index()
-                }.get { historyTransactions in
-                    self.allHistoryTransactionViewModels = historyTransactions.map { HistoryTransactionViewModel(historyTransaction: $0) }
+                    transactionsCoordinator.index()
+                }.get { transactions in
+                    self.allTransactionViewModels = transactions.map { TransactionViewModel(transaction: $0) }
                 }.asVoid()
     }
     
@@ -147,19 +147,19 @@ class HistoryTransactionsViewModel {
         return exchangeRatesCoordinator.show(from: fromCurrencyCode, to: toCurrencyCode)
     }
     
-    private func historyTransactionsAmount(type: TransactionSourceOrDestinationType) -> String? {
+    private func transactionsAmount(type: TransactionableType) -> String? {
         guard let currency = defaultCurrency else { return nil }
         
-        let transactions = filteredHistoryTransactionViewModels
+        let transactions = filteredTransactionViewModels
             .filter { $0.sourceType == type || $0.destinationType == type }
         
-        let amount = historyTransactionsAmount(transactions: transactions)
+        let amount = transactionsAmount(transactions: transactions)
         
         return amount.moneyCurrencyString(with: currency, shouldRound: false)
     }
     
-    func historyTransactionsAmount(transactions: [HistoryTransactionViewModel],
-                                   amountForTransaction: ((HistoryTransactionViewModel) -> (cents: Int, currency: Currency))? = nil) -> NSDecimalNumber {
+    func transactionsAmount(transactions: [TransactionViewModel],
+                                   amountForTransaction: ((TransactionViewModel) -> (cents: Int, currency: Currency))? = nil) -> NSDecimalNumber {
         guard let currency = defaultCurrency else { return 0.0 }
         
         return transactions

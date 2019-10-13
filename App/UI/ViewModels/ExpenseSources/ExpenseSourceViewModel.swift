@@ -96,8 +96,8 @@ class ExpenseSourceViewModel {
         waitingLoans = expenseSource.waitingLoans?.map { BorrowViewModel(borrow: $0) } ?? []
     }
     
-    func asHistoryTransactionFilter() -> ExpenseSourceHistoryTransactionFilter {
-        return ExpenseSourceHistoryTransactionFilter(expenseSourceViewModel: self)
+    func asTransactionFilter() -> ExpenseSourceTransactionFilter {
+        return ExpenseSourceTransactionFilter(expenseSourceViewModel: self)
     }
     
     private func amount(shouldRound: Bool) -> String {
@@ -105,17 +105,17 @@ class ExpenseSourceViewModel {
     }
 }
 
-extension ExpenseSourceViewModel : TransactionStartable, TransactionCompletable {
-    var canStartTransaction: Bool {
+extension ExpenseSourceViewModel : TransactionSource, TransactionDestination {
+    var isTransactionSource: Bool {
         return !isGoal || isGoalCompleted
     }
     
-    func canComplete(startable: TransactionStartable) -> Bool {
-        if let startableExpenseSourceViewModel = startable as? ExpenseSourceViewModel {
-            return  startableExpenseSourceViewModel.id != self.id &&
-                    !(startableExpenseSourceViewModel.isDebt && self.isDebt)
+    func isTransactionDestinationFor(transactionSource: TransactionSource) -> Bool {
+        if let sourceExpenseSourceViewModel = transactionSource as? ExpenseSourceViewModel {
+            return  sourceExpenseSourceViewModel.id != self.id &&
+                    !(sourceExpenseSourceViewModel.isDebt && self.isDebt)
         }
         
-        return (startable is IncomeSourceViewModel) && !self.isDebt
+        return (transactionSource is IncomeSourceViewModel) && !self.isDebt
     }
 }

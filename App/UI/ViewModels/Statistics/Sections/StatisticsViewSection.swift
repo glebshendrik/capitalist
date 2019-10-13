@@ -31,14 +31,14 @@ class SourceOrDestinationFilterEditSection : StatisticsViewSection {
     var type: StatisticsViewSectionType { return .filterEdit }
 }
 
-class HistoryTransactionsLoadingSection : StatisticsViewSection {
+class TransactionsLoadingSection : StatisticsViewSection {
     var isSectionHeaderVisible: Bool { return false }
     var numberOfRows: Int { return 1 }
     var title: String? { return nil }
     var type: StatisticsViewSectionType { return .transactionsLoader }
 }
 
-class HistoryTransactionsHeaderSection : StatisticsViewSection {
+class TransactionsHeaderSection : StatisticsViewSection {
     var isSectionHeaderVisible: Bool { return true }
     var numberOfRows: Int { return 1 }
     var title: String? { return nil }

@@ -55,7 +55,7 @@ extension GraphViewModel {
         return lineChartData
     }
     
-    func calculateNetWorthFilters() -> [GraphHistoryTransactionFilter] {
+    func calculateNetWorthFilters() -> [GraphTransactionFilter] {
         
         guard let currency = currency else { return [] }
         
@@ -66,8 +66,8 @@ extension GraphViewModel {
         guard   let profitDataSet = identifiedDataSets.first(where: { $0.key == self.profitKey }),
             let capitalDataSet = identifiedDataSets.first(where: { $0.key == capitalKey }) else { return [] }
         
-        let profitFilter = GraphHistoryTransactionFilter(id: profitKey, title: profitTitle, type: .expenseSource, color: profitColor, сurrency: currency)
-        let capitalFilter = GraphHistoryTransactionFilter(id: capitalKey, title: capitalTitle, type: .expenseSource, color: capitalColor, сurrency: currency)
+        let profitFilter = GraphTransactionFilter(id: profitKey, title: profitTitle, type: .expenseSource, color: profitColor, сurrency: currency)
+        let capitalFilter = GraphTransactionFilter(id: capitalKey, title: capitalTitle, type: .expenseSource, color: capitalColor, сurrency: currency)
         
         
         for i in 0 ..< numberOfDataPoints {
@@ -81,7 +81,7 @@ extension GraphViewModel {
         }
         
         
-        var filters = [Int : GraphHistoryTransactionFilter]()
+        var filters = [Int : GraphTransactionFilter]()
         
         filters[profitKey] = profitFilter
         filters[capitalKey] = capitalFilter

@@ -1,5 +1,5 @@
 //
-//  HistoryTransactionsHeaderTableViewCell.swift
+//  TransactionsHeaderTableViewCell.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 27/03/2019.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol HistoryTransactionsHeaderDelegate: class {
+protocol TransactionsHeaderDelegate: class {
     func didTapExportButton()
 }
 
-class HistoryTransactionsHeaderTableViewCell : UITableViewCell {
+class TransactionsHeaderTableViewCell : UITableViewCell {
     
-    weak var delegate: HistoryTransactionsHeaderDelegate?
+    weak var delegate: TransactionsHeaderDelegate?
     
     @IBAction func didTapExportButton(_ sender: Any) {
         delegate?.didTapExportButton()

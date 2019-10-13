@@ -23,14 +23,14 @@ class TransactionsCoordinator : TransactionsCoordinatorProtocol {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return transactionsService.index(for: currentUserId, transactionType: nil)
+        return transactionsService.index(for: currentUserId, type: nil)
     }
     
-    func index(by transactionType: TransactionType) -> Promise<[Transaction]> {
+    func index(by type: TransactionType) -> Promise<[Transaction]> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return transactionsService.index(for: currentUserId, transactionType: transactionType)
+        return transactionsService.index(for: currentUserId, type: type)
     }
     
     func create(with creationForm: TransactionCreationForm) -> Promise<Transaction> {

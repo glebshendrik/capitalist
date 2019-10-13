@@ -1,5 +1,5 @@
 //
-//  GraphHistoryTransactionFilter.swift
+//  GraphTransactionFilter.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 16/04/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GraphHistoryTransactionFilter : SourceOrDestinationHistoryTransactionFilter {
+class GraphTransactionFilter : SourceOrDestinationTransactionFilter {
     let color: UIColor
     let currency: Currency
     
@@ -38,7 +38,7 @@ class GraphHistoryTransactionFilter : SourceOrDestinationHistoryTransactionFilte
         return aggregatedValues[aggregationType]
     }
     
-    init(id: Int, title: String, type: TransactionSourceOrDestinationType, color: UIColor, сurrency: Currency) {
+    init(id: Int, title: String, type: TransactionableType, color: UIColor, сurrency: Currency) {
         self.color = color
         self.currency = сurrency
         super.init(id: id, title: title, type: type)

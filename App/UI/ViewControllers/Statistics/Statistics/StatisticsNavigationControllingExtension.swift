@@ -116,11 +116,11 @@ extension StatisticsViewController : StatisticsEditTableViewCellDelegate {
         guard let filter = viewModel.singleSourceOrDestinationFilter else { return }
         
         switch filter {
-        case let incomeSourceFilter as IncomeSourceHistoryTransactionFilter:
+        case let incomeSourceFilter as IncomeSourceTransactionFilter:
             showEditScreen(incomeSource: incomeSourceFilter.incomeSourceViewModel.incomeSource)
-        case let expenseSourceFilter as ExpenseSourceHistoryTransactionFilter:
+        case let expenseSourceFilter as ExpenseSourceTransactionFilter:
             showEditScreen(expenseSource: expenseSourceFilter.expenseSourceViewModel.expenseSource)
-        case let expenseCategoryFilter as ExpenseCategoryHistoryTransactionFilter:
+        case let expenseCategoryFilter as ExpenseCategoryTransactionFilter:
             showEditScreen(expenseCategory: expenseCategoryFilter.expenseCategoryViewModel.expenseCategory, basketType: expenseCategoryFilter.basketType)
         default:
             return
@@ -184,7 +184,7 @@ extension StatisticsViewController : FiltersSelectionViewControllerDelegate {
         
     }
     
-    func didSelectFilters(dateRangeFilter: DateRangeHistoryTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter]) {
+    func didSelectFilters(dateRangeFilter: DateRangeTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter]) {
         
         viewModel.set(dateRangeFilter: dateRangeFilter, sourceOrDestinationFilters: sourceOrDestinationFilters)
         updateUI()
@@ -192,20 +192,20 @@ extension StatisticsViewController : FiltersSelectionViewControllerDelegate {
 }
 
 extension StatisticsViewController {
-    func showEdit(historyTransaction: HistoryTransactionViewModel) {
-        switch historyTransaction.transactionableType {
+    func showEdit(transaction: TransactionViewModel) {
+        switch transaction.type {
         case .income:
-            showIncomeEditScreen(incomeId: historyTransaction.id)
+            showIncomeEditScreen(incomeId: transaction.id)
         case .fundsMove:
-            if let borrowId = historyTransaction.borrowId, let borrowType = historyTransaction.borrowType {
+            if let borrowId = transaction.borrowId, let borrowType = transaction.borrowType {
                 showBorrowEditScreen(borrowId: borrowId, borrowType: borrowType)
             }
             else {
-                showFundsMoveEditScreen(fundsMoveId: historyTransaction.id)
+                showFundsMoveEditScreen(fundsMoveId: transaction.id)
             }
             
         case .expense:
-            showExpenseEditScreen(expenseId: historyTransaction.id)
+            showExpenseEditScreen(expenseId: transaction.id)
         }
     }
     
@@ -251,7 +251,7 @@ extension StatisticsViewController {
 }
 
 extension StatisticsViewController : FilterCellDelegate {
-    func didTapDeleteButton(filter: SourceOrDestinationHistoryTransactionFilter) {
+    func didTapDeleteButton(filter: SourceOrDestinationTransactionFilter) {
         viewModel.remove(sourceOrDestinationFilter: filter)
         updateUI()
     }
@@ -339,7 +339,7 @@ extension StatisticsViewController : GraphFiltersToggleDelegate {
     
 }
 
-extension StatisticsViewController : HistoryTransactionsHeaderDelegate {
+extension StatisticsViewController : TransactionsHeaderDelegate {
     func didTapExportButton() {
         exportTransactions()
     }

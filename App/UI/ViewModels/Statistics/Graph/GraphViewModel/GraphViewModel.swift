@@ -12,7 +12,7 @@ import RandomColorSwift
 import SwifterSwift
 
 class GraphViewModel {
-    let historyTransactionsViewModel: HistoryTransactionsViewModel
+    let transactionsViewModel: TransactionsViewModel
     
     var graphType: GraphType = .incomeAndExpenses {
         didSet {
@@ -70,7 +70,7 @@ class GraphViewModel {
     public private(set) var pieChartDatas: [PieChartData] = []
     public private(set) var pieChartsAmounts: [String] = []
     
-    var graphFilters: [GraphHistoryTransactionFilter] = []
+    var graphFilters: [GraphTransactionFilter] = []
     var filtersAggregatedTotal: Double? = nil
     var filtersTotalByDate: [Date: Double] = [:]
     
@@ -83,8 +83,8 @@ class GraphViewModel {
         return formatter
     }()
     
-    init(historyTransactionsViewModel: HistoryTransactionsViewModel) {
-        self.historyTransactionsViewModel = historyTransactionsViewModel
+    init(transactionsViewModel: TransactionsViewModel) {
+        self.transactionsViewModel = transactionsViewModel
     }
     
     func updateChartsData(with defaultPeriod: AccountingPeriod?) {

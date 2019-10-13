@@ -14,14 +14,14 @@ class FiltersSelectionViewModel {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
     
-    public private(set) var sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter] = [] {
+    public private(set) var sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter] = [] {
         didSet {
             calculatePassedFiltersHash()
         }
     }
-    private var passedFiltersHash: [TransactionSourceOrDestinationType : [Int : SourceOrDestinationHistoryTransactionFilter]] = [:]
+    private var passedFiltersHash: [TransactionableType : [Int : SourceOrDestinationTransactionFilter]] = [:]
     
-    public private(set) var dateRangeFilter: DateRangeHistoryTransactionFilter? = nil {
+    public private(set) var dateRangeFilter: DateRangeTransactionFilter? = nil {
         didSet {
             fromDate = dateRangeFilter?.fromDate
             toDate = dateRangeFilter?.toDate
@@ -51,9 +51,9 @@ class FiltersSelectionViewModel {
     
     private var sections: [FiltersSelectionViewSection] = []
     
-    var selectedFilters: [SourceOrDestinationHistoryTransactionFilter] {
+    var selectedFilters: [SourceOrDestinationTransactionFilter] {
         
-        let filtersSections: [SourceOrDestinationHistoryTransactionFiltersSection?] =
+        let filtersSections: [SourceOrDestinationTransactionFiltersSection?] =
             [incomeSourceFiltersSection,
              expenseSourceFiltersSection,
              joyExpenseCategoryFiltersSection,
@@ -63,11 +63,11 @@ class FiltersSelectionViewModel {
         return filtersSections.compactMap { $0 }.flatMap { $0.selectedFilters }
     }
     
-    var selectedDateRangeFilter: DateRangeHistoryTransactionFilter? {
+    var selectedDateRangeFilter: DateRangeTransactionFilter? {
         if fromDate == nil && toDate == nil {
             return nil
         }
-        return DateRangeHistoryTransactionFilter(fromDate: fromDate, toDate: toDate)
+        return DateRangeTransactionFilter(fromDate: fromDate, toDate: toDate)
     }
     
     var numberOfSections: Int {
@@ -95,12 +95,12 @@ class FiltersSelectionViewModel {
         return section(at: index)?.title
     }
     
-    func filterViewModel(at indexPath: IndexPath) -> SelectableSourceOrDestinationHistoryTransactionFilter? {
-        guard let section = section(at: indexPath.section) as? SourceOrDestinationHistoryTransactionFiltersSection else { return nil }
+    func filterViewModel(at indexPath: IndexPath) -> SelectableSourceOrDestinationTransactionFilter? {
+        guard let section = section(at: indexPath.section) as? SourceOrDestinationTransactionFiltersSection else { return nil }
         return section.filterViewModel(at: indexPath.row)
     }
     
-    func set(dateRangeFilter: DateRangeHistoryTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationHistoryTransactionFilter]) {
+    func set(dateRangeFilter: DateRangeTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter]) {
         self.dateRangeFilter = dateRangeFilter
         self.sourceOrDestinationFilters = sourceOrDestinationFilters
     }
@@ -131,12 +131,12 @@ class FiltersSelectionViewModel {
         return  firstly {
                     incomeSourcesCoordinator.index()
                 }.get { incomeSources in
-                    let incomeSourceFilters: [IncomeSourceHistoryTransactionFilter] = incomeSources.map { incomeSource in
+                    let incomeSourceFilters: [IncomeSourceTransactionFilter] = incomeSources.map { incomeSource in
                         
                         let incomeSourceViewModel = IncomeSourceViewModel(incomeSource: incomeSource)
                         let isSelected = self.passedFiltersHash[.incomeSource]?[incomeSource.id] != nil
                         
-                        return IncomeSourceHistoryTransactionFilter(incomeSourceViewModel: incomeSourceViewModel,
+                        return IncomeSourceTransactionFilter(incomeSourceViewModel: incomeSourceViewModel,
                                                                     isSelected: isSelected)
                     }
                     self.incomeSourceFiltersSection = IncomeSourceFiltersSection(incomeSourceFilters: incomeSourceFilters)
@@ -147,12 +147,12 @@ class FiltersSelectionViewModel {
         return  firstly {
                     expenseSourcesCoordinator.index(noDebts: false, accountType: nil, currency: nil)
                 }.get { expenseSources in
-                    let expenseSourceFilters: [ExpenseSourceHistoryTransactionFilter] = expenseSources.map { expenseSource in
+                    let expenseSourceFilters: [ExpenseSourceTransactionFilter] = expenseSources.map { expenseSource in
                         
                         let expenseSourceViewModel = ExpenseSourceViewModel(expenseSource: expenseSource)
                         let isSelected = self.passedFiltersHash[.expenseSource]?[expenseSource.id] != nil
                         
-                        return ExpenseSourceHistoryTransactionFilter(expenseSourceViewModel: expenseSourceViewModel,
+                        return ExpenseSourceTransactionFilter(expenseSourceViewModel: expenseSourceViewModel,
                                                                     isSelected: isSelected)
                     }
                     self.expenseSourceFiltersSection = ExpenseSourceFiltersSection(expenseSourceFilters: expenseSourceFilters)
@@ -163,19 +163,19 @@ class FiltersSelectionViewModel {
         return  firstly {
                     expenseCategoriesCoordinator.index(for: basketType)
                 }.get { expenseCategories in
-                    let expenseCategoryFilters: [ExpenseCategoryHistoryTransactionFilter] = expenseCategories.map { expenseCategory in
+                    let expenseCategoryFilters: [ExpenseCategoryTransactionFilter] = expenseCategories.map { expenseCategory in
                         
                         let expenseCategoryViewModel = ExpenseCategoryViewModel(expenseCategory: expenseCategory)
                         let isSelected = self.passedFiltersHash[.expenseCategory]?[expenseCategory.id] != nil
                         
-                        return ExpenseCategoryHistoryTransactionFilter(expenseCategoryViewModel: expenseCategoryViewModel,
+                        return ExpenseCategoryTransactionFilter(expenseCategoryViewModel: expenseCategoryViewModel,
                                                                     isSelected: isSelected)
                     }
                     self.set(expenseCategoryFilters: expenseCategoryFilters, by: basketType)
                 }.asVoid()
     }
 
-    private func set(expenseCategoryFilters: [ExpenseCategoryHistoryTransactionFilter], by basketType: BasketType) {
+    private func set(expenseCategoryFilters: [ExpenseCategoryTransactionFilter], by basketType: BasketType) {
         switch basketType {
         case .joy:
             joyExpenseCategoryFiltersSection = JoyExpenseCategoryFiltersSection(joyExpenseCategoryFilters: expenseCategoryFilters)
@@ -187,11 +187,11 @@ class FiltersSelectionViewModel {
     }
     
     private func calculatePassedFiltersHash() {
-        passedFiltersHash = [TransactionSourceOrDestinationType : [Int : SourceOrDestinationHistoryTransactionFilter]]()
+        passedFiltersHash = [TransactionableType : [Int : SourceOrDestinationTransactionFilter]]()
         
         for filter in sourceOrDestinationFilters {
             if passedFiltersHash[filter.type] == nil {
-                passedFiltersHash[filter.type] = [Int : SourceOrDestinationHistoryTransactionFilter]()
+                passedFiltersHash[filter.type] = [Int : SourceOrDestinationTransactionFilter]()
             }
             passedFiltersHash[filter.type]?[filter.id] = filter
         }

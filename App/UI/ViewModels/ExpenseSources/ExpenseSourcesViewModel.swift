@@ -34,7 +34,7 @@ class ExpenseSourcesViewModel {
                 }.get { expenseSources in
                     self.expenseSourceViewModels = expenseSources
                         .map { ExpenseSourceViewModel(expenseSource: $0)}
-                        .filter { $0.canStartTransaction && $0.id != self.skipExpenseSourceId }
+                        .filter { $0.isTransactionSource && $0.id != self.skipExpenseSourceId }
                 }.asVoid()
     }
     

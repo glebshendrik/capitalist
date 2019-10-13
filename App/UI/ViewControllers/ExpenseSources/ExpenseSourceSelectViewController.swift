@@ -9,13 +9,9 @@
 import UIKit
 import PromiseKit
 
-enum ExpenseSourceSelectionType {
-    case startable, completable
-}
-
 protocol ExpenseSourceSelectViewControllerDelegate {
-    func didSelect(startableExpenseSourceViewModel: ExpenseSourceViewModel)
-    func didSelect(completableExpenseSourceViewModel: ExpenseSourceViewModel)
+    func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel)
+    func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel)
 }
 
 class ExpenseSourceSelectViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
@@ -24,7 +20,7 @@ class ExpenseSourceSelectViewController : UIViewController, UIMessagePresenterMa
     @IBOutlet weak var tableView: UITableView!
     
     private var delegate: ExpenseSourceSelectViewControllerDelegate? = nil
-    private var selectionType: ExpenseSourceSelectionType = .completable
+    private var selectionType: TransactionPart = .destination
     
     var viewModel: ExpenseSourcesViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -37,7 +33,7 @@ class ExpenseSourceSelectViewController : UIViewController, UIMessagePresenterMa
     
     func set(delegate: ExpenseSourceSelectViewControllerDelegate,
              skipExpenseSourceId: Int?,
-             selectionType: ExpenseSourceSelectionType,
+             selectionType: TransactionPart,
              noDebts: Bool,
              accountType: AccountType?,
              currency: String?) {
@@ -100,10 +96,10 @@ extension ExpenseSourceSelectViewController : UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) else { return }
         switch selectionType {
-        case .startable:
-            delegate?.didSelect(startableExpenseSourceViewModel: expenseSourceViewModel)
-        case .completable:
-            delegate?.didSelect(completableExpenseSourceViewModel: expenseSourceViewModel)
+        case .source:
+            delegate?.didSelect(sourceExpenseSourceViewModel: expenseSourceViewModel)
+        case .destination:
+            delegate?.didSelect(destinationExpenseSourceViewModel: expenseSourceViewModel)
         }
         close()
     }

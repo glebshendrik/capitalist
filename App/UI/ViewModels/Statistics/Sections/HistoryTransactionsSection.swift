@@ -1,5 +1,5 @@
 //
-//  HistoryTransactionsSection.swift
+//  TransactionsSection.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 16/04/2019.
@@ -8,22 +8,22 @@
 
 import Foundation
 
-class HistoryTransactionsSection : StatisticsViewSection {
+class TransactionsSection : StatisticsViewSection {
     var isSectionHeaderVisible: Bool { return true }
-    var numberOfRows: Int { return historyTransactionViewModels.count }
+    var numberOfRows: Int { return transactionViewModels.count }
     var title: String? { return date.dateString(ofStyle: .full) }
     var type: StatisticsViewSectionType { return .transactions }
     
     let date: Date
-    private let historyTransactionViewModels: [HistoryTransactionViewModel]
+    private let transactionViewModels: [TransactionViewModel]
     
     init(date: Date,
-         historyTransactionViewModels: [HistoryTransactionViewModel]) {
+         transactionViewModels: [TransactionViewModel]) {
         self.date = date
-        self.historyTransactionViewModels = historyTransactionViewModels
+        self.transactionViewModels = transactionViewModels
     }
     
-    func historyTransactionViewModel(at index: Int) -> HistoryTransactionViewModel? {
-        return historyTransactionViewModels.item(at: index)
+    func transactionViewModel(at index: Int) -> TransactionViewModel? {
+        return transactionViewModels.item(at: index)
     }
 }

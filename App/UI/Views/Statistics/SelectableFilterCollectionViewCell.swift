@@ -12,7 +12,7 @@ class SelectableFilterCollectionViewCell : UICollectionViewCell {
     @IBOutlet weak var filterTitleLabel: UILabel!
     @IBOutlet weak var filterContainer: UIView!
     
-    var viewModel: SelectableSourceOrDestinationHistoryTransactionFilter? {
+    var viewModel: SelectableSourceOrDestinationTransactionFilter? {
         didSet {
             updateUI()
         }

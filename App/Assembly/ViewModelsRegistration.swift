@@ -58,7 +58,7 @@ extension ApplicationAssembly {
         
         container.autoregister(StatisticsViewModel.self, initializer: StatisticsViewModel.init)
         
-        container.autoregister(HistoryTransactionsViewModel.self, initializer: HistoryTransactionsViewModel.init)
+        container.autoregister(TransactionsViewModel.self, initializer: TransactionsViewModel.init)
         
         container.autoregister(FiltersViewModel.self, initializer: FiltersViewModel.init)
         
