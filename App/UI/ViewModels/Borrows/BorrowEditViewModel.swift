@@ -16,7 +16,7 @@ enum BorrowError : Error {
 class BorrowEditViewModel {
     let borrowsCoordinator: BorrowsCoordinatorProtocol
     let accountCoordinator: AccountCoordinatorProtocol
-    let fundsMoveCoordinator: FundsMovesCoordinatorProtocol
+    let transactionsCoordinator: TransactionsCoordinatorProtocol
     let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     
     private var borrow: Borrow? = nil
@@ -40,8 +40,8 @@ class BorrowEditViewModel {
     var selectedCurrency: Currency? = nil {
         didSet {
             if selectedCurrency?.code != oldValue?.code {
-                selectedExpenseSourceFrom = nil
-                selectedExpenseSourceTo = nil
+                selectedSource = nil
+                selectedDestination = nil
             }
         }
     }
@@ -50,28 +50,28 @@ class BorrowEditViewModel {
     var payday: Date? = nil
     var comment: String? = nil
     var onBalance: Bool = false
-    var selectedExpenseSourceFrom: ExpenseSourceViewModel? = nil
-    var selectedExpenseSourceTo: ExpenseSourceViewModel? = nil
-    var selectedExpenseSource: ExpenseSourceViewModel? {
+    var selectedSource: ExpenseSourceViewModel? = nil
+    var selectedDestination: ExpenseSourceViewModel? = nil
+    var selectedTransactionable: ExpenseSourceViewModel? {
         get {
             guard let type = type else { return nil }
-            return type == .debt ? selectedExpenseSourceFrom : selectedExpenseSourceTo
+            return type == .debt ? selectedSource : selectedDestination
         }
         set {
             guard let type = type else { return }
             if type == .debt {
-                selectedExpenseSourceFrom = newValue
+                selectedSource = newValue
             }
             else {
-                selectedExpenseSourceTo = newValue
+                selectedDestination = newValue
             }
         }
     }
     var borrowingTransactionAttributes: BorrowingTransactionNestedAttributes? {
         guard isNew, !onBalance else { return nil }
-        return BorrowingTransactionNestedAttributes(sourceId: selectedExpenseSourceFrom?.id, destinationId: selectedExpenseSourceTo?.id)
+        return BorrowingTransactionNestedAttributes(sourceId: selectedSource?.id, destinationId: selectedDestination?.id)
     }
-    var borrowingTransaction: FundsMoveViewModel? = nil
+    var borrowingTransaction: TransactionViewModel? = nil
     
     var borrowedAtFormatted: String {
         return borrowedAt.dateString(ofStyle: .short)
@@ -125,11 +125,11 @@ class BorrowEditViewModel {
     }
     
     var iconDefaultImageName: String { return IconCategory.expenseSourceDebt.defaultIconName }
-    var expenseSourceIconURL: URL? { return selectedExpenseSource?.iconURL }
+    var expenseSourceIconURL: URL? { return selectedTransactionable?.iconURL }
     var expenseSourceIconDefaultImageName: String { return IconCategory.expenseSource.defaultIconName }
-    var expenseSourceName: String? { return selectedExpenseSource?.name }
-    var expenseSourceAmount: String? { return selectedExpenseSource?.amount }
-    var expenseSourceCurrency: Currency? { return selectedExpenseSource?.currency }
+    var expenseSourceName: String? { return selectedTransactionable?.name }
+    var expenseSourceAmount: String? { return selectedTransactionable?.amount }
+    var expenseSourceCurrency: Currency? { return selectedTransactionable?.currency }
     var expenseSourceCurrencyCode: String? { return expenseSourceCurrency?.code }
     
     // Visibility
@@ -153,23 +153,23 @@ class BorrowEditViewModel {
     
     init(borrowsCoordinator: BorrowsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
-         fundsMoveCoordinator: FundsMovesCoordinatorProtocol,
+         transactionsCoordinator: TransactionsCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol) {
         self.borrowsCoordinator = borrowsCoordinator
         self.accountCoordinator = accountCoordinator
-        self.fundsMoveCoordinator = fundsMoveCoordinator
+        self.transactionsCoordinator = transactionsCoordinator
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
     }
     
-    func set(type: BorrowType, expenseSourceFrom: ExpenseSourceViewModel?, expenseSourceTo: ExpenseSourceViewModel?) {
+    func set(type: BorrowType, source: ExpenseSourceViewModel?, destination: ExpenseSourceViewModel?) {
         self.type = type
         if type == .debt {
-            selectedCurrency = expenseSourceTo?.currency
+            selectedCurrency = destination?.currency
         } else {
-            selectedCurrency = expenseSourceFrom?.currency
+            selectedCurrency = source?.currency
         }
-        self.selectedExpenseSourceFrom = expenseSourceFrom
-        self.selectedExpenseSourceTo = expenseSourceTo        
+        self.selectedSource = source
+        self.selectedDestination = destination
     }
     
     func set(borrowId: Int, type: BorrowType) {
@@ -242,20 +242,20 @@ class BorrowEditViewModel {
             return Promise.value(())
         }
         return  firstly {
-                    fundsMoveCoordinator.show(by: id)
-                }.get { fundsMove in
-                    self.borrowingTransaction = FundsMoveViewModel(fundsMove: fundsMove)
+                    transactionsCoordinator.show(by: id)
+                }.get { transaction in
+                    self.borrowingTransaction = TransactionViewModel(transaction: transaction)
                 }.asVoid()
     }
     
     func loadDefaultExpenseSource() -> Promise<Void> {
-        guard let currency = selectedCurrency?.code, selectedExpenseSource == nil else {
+        guard let currency = selectedCurrency?.code, selectedTransactionable == nil else {
             return Promise.value(())
         }
         return  firstly {
                     expenseSourcesCoordinator.first(accountType: .usual, currency: currency)
                 }.get { expenseSource in
-                    self.selectedExpenseSource = ExpenseSourceViewModel(expenseSource: expenseSource)
+                    self.selectedTransactionable = ExpenseSourceViewModel(expenseSource: expenseSource)
                 }.asVoid()
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension StatisticsViewController : IncomeEditViewControllerDelegate, ExpenseEditViewControllerDelegate, FundsMoveEditViewControllerDelegate, BorrowEditViewControllerDelegate {
+extension StatisticsViewController : TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate {
     func didCreateDebt() {
         
     }
@@ -33,36 +33,14 @@ extension StatisticsViewController : IncomeEditViewControllerDelegate, ExpenseEd
         loadData()
     }
     
-    func didCreateIncome() {
+    func didCreateTransaction(id: Int, type: TransactionType) {
     }
     
-    func didUpdateIncome() {
+    func didUpdateTransaction(id: Int, type: TransactionType) {
         loadData()
     }
     
-    func didRemoveIncome() {
-        loadData()
-    }
-    
-    func didCreateExpense() {
-    }
-    
-    func didUpdateExpense() {
-        loadData()
-    }
-    
-    func didRemoveExpense() {
-        loadData()
-    }
-    
-    func didCreateFundsMove() {
-    }
-    
-    func didUpdateFundsMove() {
-        loadData()
-    }
-    
-    func didRemoveFundsMove() {
+    func didRemoveTransaction(id: Int, type: TransactionType) {
         loadData()
     }
 }
@@ -128,46 +106,15 @@ extension StatisticsViewController : StatisticsEditTableViewCellDelegate {
     }
     
     func showEditScreen(incomeSource: IncomeSource?) {
-        if  let incomeSourceEditNavigationController = router.viewController(.IncomeSourceEditNavigationController) as? UINavigationController,
-            let incomeSourceEditViewController = incomeSourceEditNavigationController.topViewController as? IncomeSourceEditViewController {
-            
-            incomeSourceEditViewController.set(delegate: self)
-            
-            if let incomeSource = incomeSource {
-                incomeSourceEditViewController.set(incomeSource: incomeSource)
-            }
-            
-            present(incomeSourceEditNavigationController, animated: true, completion: nil)
-        }
+        modal(factory.incomeSourceEditViewController(delegate: self, incomeSource: incomeSource))
     }
     
     func showEditScreen(expenseSource: ExpenseSource?) {
-        if  let expenseSourceEditNavigationController = router.viewController(.ExpenseSourceEditNavigationController) as? UINavigationController,            
-            let expenseSourceEditViewController = expenseSourceEditNavigationController.topViewController as? ExpenseSourceEditViewController {
-            
-            expenseSourceEditViewController.set(delegate: self)
-            
-            if let expenseSource = expenseSource {
-                expenseSourceEditViewController.set(expenseSource: expenseSource)
-            }
-            
-            present(expenseSourceEditNavigationController, animated: true, completion: nil)
-        }
+        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource))
     }
     
     func showEditScreen(expenseCategory: ExpenseCategory?, basketType: BasketType) {
-        if  let expenseCategoryEditNavigationController = router.viewController(.ExpenseCategoryEditNavigationController) as? UINavigationController,
-            let expenseCategoryEditViewController = expenseCategoryEditNavigationController.topViewController as? ExpenseCategoryEditViewController {
-            
-            expenseCategoryEditViewController.set(delegate: self)
-            expenseCategoryEditViewController.set(basketType: basketType)
-            
-            if let expenseCategory = expenseCategory {
-                expenseCategoryEditViewController.set(expenseCategory: expenseCategory)
-            }
-            
-            present(expenseCategoryEditNavigationController, animated: true, completion: nil)
-        }
+        modal(factory.expenseCategoryEditViewController(delegate: self, expenseCategory: expenseCategory, basketType: basketType))
     }
 }
 
@@ -193,61 +140,21 @@ extension StatisticsViewController : FiltersSelectionViewControllerDelegate {
 
 extension StatisticsViewController {
     func showEdit(transaction: TransactionViewModel) {
-        switch transaction.type {
-        case .income:
-            showIncomeEditScreen(incomeId: transaction.id)
-        case .fundsMove:
-            if let borrowId = transaction.borrowId, let borrowType = transaction.borrowType {
-                showBorrowEditScreen(borrowId: borrowId, borrowType: borrowType)
-            }
-            else {
-                showFundsMoveEditScreen(fundsMoveId: transaction.id)
-            }
-            
-        case .expense:
-            showExpenseEditScreen(expenseId: transaction.id)
+        if let borrowId = transaction.borrowId, let borrowType = transaction.borrowType {
+            showBorrowEditScreen(borrowId: borrowId, borrowType: borrowType)
+        }
+        else {
+            showTransactionEditScreen(transactionId: transaction.id)
         }
     }
     
-    private func showIncomeEditScreen(incomeId: Int) {
-        if  let incomeEditNavigationController = router.viewController(.IncomeEditNavigationController) as? UINavigationController,
-            let incomeEditViewController = incomeEditNavigationController.topViewController as? IncomeEditViewController {
-            
-            incomeEditViewController.set(delegate: self)
-            
-            incomeEditViewController.set(incomeId: incomeId)
-            
-            present(incomeEditNavigationController, animated: true, completion: nil)
-        }
+    private func showTransactionEditScreen(transactionId: Int) {
+        modal(factory.transactionEditViewController(delegate: self, transactionId: transactionId))
     }
-    
-    private func showFundsMoveEditScreen(fundsMoveId: Int) {
-        if  let fundsMoveEditNavigationController = router.viewController(.FundsMoveEditNavigationController) as? UINavigationController,
-            let fundsMoveEditViewController = fundsMoveEditNavigationController.topViewController as? FundsMoveEditViewController {
-            
-            fundsMoveEditViewController.set(delegate: self)
-            
-            fundsMoveEditViewController.set(fundsMoveId: fundsMoveId)
-            
-            present(fundsMoveEditNavigationController, animated: true, completion: nil)
-        }
-    }
-    
+        
     private func showBorrowEditScreen(borrowId: Int, borrowType: BorrowType) {
-        modal(factory.borrowEditViewController(delegate: self, type: borrowType, borrowId: borrowId, expenseSourceFrom: nil, expenseSourceTo: nil))
-    }
-    
-    private func showExpenseEditScreen(expenseId: Int) {
-        if  let expenseEditNavigationController = router.viewController(.ExpenseEditNavigationController) as? UINavigationController,
-            let expenseEditViewController = expenseEditNavigationController.topViewController as? ExpenseEditViewController {
-            
-            expenseEditViewController.set(delegate: self)
-            
-            expenseEditViewController.set(expenseId: expenseId)
-            
-            present(expenseEditNavigationController, animated: true, completion: nil)
-        }
-    }
+        modal(factory.borrowEditViewController(delegate: self, type: borrowType, borrowId: borrowId, source: nil, destination: nil))
+    }    
 }
 
 extension StatisticsViewController : FilterCellDelegate {

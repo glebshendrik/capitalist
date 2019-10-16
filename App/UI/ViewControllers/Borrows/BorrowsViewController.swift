@@ -209,11 +209,11 @@ extension BorrowsViewController : BorrowEditViewControllerDelegate {
     
     
     func showBorrow(_ borrow: BorrowViewModel) {
-        modal(factory.borrowEditViewController(delegate: self, type: borrow.type, borrowId: borrow.id, expenseSourceFrom: nil, expenseSourceTo: nil))
+        modal(factory.borrowEditViewController(delegate: self, type: borrow.type, borrowId: borrow.id, source: nil, destination: nil))
     }
     
     func showNewBorrow() {
-        modal(factory.borrowEditViewController(delegate: self, type: viewModel.selectedBorrowType, borrowId: nil, expenseSourceFrom: nil, expenseSourceTo: nil))
+        modal(factory.borrowEditViewController(delegate: self, type: viewModel.selectedBorrowType, borrowId: nil, source: nil, destination: nil))
     }
 }
 

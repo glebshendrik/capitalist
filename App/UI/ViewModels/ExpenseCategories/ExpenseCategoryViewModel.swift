@@ -115,6 +115,14 @@ class ExpenseCategoryViewModel {
 }
 
 extension ExpenseCategoryViewModel : TransactionDestination {
+    var type: TransactionableType {
+        return .expenseCategory
+    }
+    
+    var iconCategory: IconCategory? {
+        return basketType.iconCategory
+    }
+    
     var amountRounded: String {
         return spentRounded ?? ""
     }

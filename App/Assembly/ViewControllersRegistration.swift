@@ -113,19 +113,9 @@ extension ApplicationAssembly {
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         
-        // IncomeEditViewController
-        container.registerForSkrudzhStoryboard(IncomeEditViewController.self) { (r, c) in
-            c.incomeEditViewModel = r.resolve(IncomeEditViewModel.self)
-        }
-        
-        // ExpenseEditViewController
-        container.registerForSkrudzhStoryboard(ExpenseEditViewController.self) { (r, c) in
-            c.expenseEditViewModel = r.resolve(ExpenseEditViewModel.self)
-        }
-        
-        // FundsMoveEditViewController
-        container.registerForSkrudzhStoryboard(FundsMoveEditViewController.self) { (r, c) in
-            c.fundsMoveEditViewModel = r.resolve(FundsMoveEditViewModel.self)
+        // TransactionEditViewController
+        container.registerForSkrudzhStoryboard(TransactionEditViewController.self) { (r, c) in            
+            c.viewModel = r.resolve(TransactionEditViewModel.self)
         }
         
         // SlideUpContainerViewController

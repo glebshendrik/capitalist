@@ -81,12 +81,8 @@ struct Infrastructure {
         case ExpenseCategorySelectViewController
         
         // Transactions
-        case IncomeEditNavigationController
-        case IncomeEditViewController
-        case ExpenseEditNavigationController
-        case ExpenseEditViewController
-        case FundsMoveEditNavigationController
-        case FundsMoveEditViewController
+        case TransactionEditNavigationController
+        case TransactionEditViewController
         
         // Borrows
         case BorrowsViewController
@@ -165,12 +161,8 @@ struct Infrastructure {
                  .DependentIncomeSourceCreationMessageViewController,
                  .ExpenseCategorySelectViewController:
                 return .ExpenseCategories
-            case .IncomeEditNavigationController,
-                 .IncomeEditViewController,
-                 .ExpenseEditNavigationController,
-                 .ExpenseEditViewController,
-                 .FundsMoveEditNavigationController,
-                 .FundsMoveEditViewController:
+            case .TransactionEditNavigationController,
+                 .TransactionEditViewController:
                 return .Transactions
             case .IconsViewController,
                  .CurrenciesViewController,

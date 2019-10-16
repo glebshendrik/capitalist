@@ -59,6 +59,12 @@ class TransactionEditViewModel {
         self.transactionId = transactionId
     }
     
+    func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?) {
+        self.returningBorrow = returningBorrow
+        self.source = source
+        self.destination = destination
+    }
+        
     func set(transaction: Transaction, source: Transactionable, destination: Transactionable) {
         self.transaction = transaction
         self.comment = transaction.comment
@@ -72,12 +78,6 @@ class TransactionEditViewModel {
         self.convertedAmount = transaction.convertedAmountCents.moneyDecimalString(with: destinationCurrency)
     }
     
-    func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?) {
-        self.returningBorrow = returningBorrow
-        self.source = source
-        self.destination = destination
-    }
-        
     func loadData() -> Promise<Void> {
         return isNew ? loadDefaults() : loadTransactionData()
     }

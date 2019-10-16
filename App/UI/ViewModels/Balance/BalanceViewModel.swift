@@ -60,7 +60,7 @@ class BalanceViewModel {
     
     func loadExpenseCategories() -> Promise<Void> {
         return  firstly {
-                    expenseCategoriesCoordinator.index(includedInBalance: true)
+                    expenseCategoriesCoordinator.index()
                 }.get { expenseCategories in
                     self.expenseCategoryViewModels = expenseCategories
                         .map { ExpenseCategoryViewModel(expenseCategory: $0)}

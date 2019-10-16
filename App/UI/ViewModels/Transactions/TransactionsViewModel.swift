@@ -106,7 +106,7 @@ class TransactionsViewModel {
     }
     
     func removeTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {        
-        return transactionsCoordinator.destroy(transaction: transactionViewModel.transaction)
+        return transactionsCoordinator.destroy(by: transactionViewModel.id)
     }
     
     private func loadDefaultCurrency() -> Promise<Void> {

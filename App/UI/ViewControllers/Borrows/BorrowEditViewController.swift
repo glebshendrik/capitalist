@@ -92,8 +92,8 @@ extension BorrowEditViewController {
         viewModel.set(borrowId: borrowId, type: type)
     }
     
-    func set(type: BorrowType, expenseSourceFrom: ExpenseSourceViewModel?, expenseSourceTo: ExpenseSourceViewModel?) {
-        viewModel.set(type: type, expenseSourceFrom: expenseSourceFrom, expenseSourceTo: expenseSourceTo)
+    func set(type: BorrowType, source: ExpenseSourceViewModel?, destination: ExpenseSourceViewModel?) {        
+        viewModel.set(type: type, source: source, destination: destination)
     }
 }
 
@@ -140,10 +140,10 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
     }
     
     private func showReturnTransactionScreen() {
-        modal(factory.fundsMoveEditViewController(delegate: self,
-                                                  source: nil,
-                                                  destination: nil,
-                                                  borrow: viewModel.asReturningBorrow()))
+        modal(factory.transactionEditViewController(delegate: self,
+                                                    source: nil,
+                                                    destination: nil,
+                                                    returningBorrow: viewModel.asReturningBorrow()))
     }
     
     func didChange(name: String?) {
@@ -229,7 +229,7 @@ extension BorrowEditViewController {
     }
     
     func update(expenseSource: ExpenseSourceViewModel?) {
-        viewModel.selectedExpenseSource = expenseSource
+        viewModel.selectedTransactionable = expenseSource
         updateExpenseSourceUI(reload: true, animated: false)
     }
 }
@@ -300,8 +300,8 @@ extension BorrowEditViewController {
 
 }
 
-extension BorrowEditViewController: FundsMoveEditViewControllerDelegate {
-    func didCreateFundsMove() {
+extension BorrowEditViewController: TransactionEditViewControllerDelegate {
+    func didCreateTransaction(id: Int, type: TransactionType) {
         close {
             guard let type = self.viewModel.type else  { return }
             if type == .debt {
@@ -314,11 +314,11 @@ extension BorrowEditViewController: FundsMoveEditViewControllerDelegate {
         }
     }
 
-    func didUpdateFundsMove() {
+    func didUpdateTransaction(id: Int, type: TransactionType) {
 
     }
 
-    func didRemoveFundsMove() {
+    func didRemoveTransaction(id: Int, type: TransactionType) {
 
     }
 }

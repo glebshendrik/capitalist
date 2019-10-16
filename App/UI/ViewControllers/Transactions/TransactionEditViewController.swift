@@ -11,13 +11,13 @@ import PromiseKit
 import SwiftDate
 
 protocol TransactionEditViewControllerDelegate {
-    func didCreateTransaction()
-    func didUpdateTransaction()
-    func didRemoveTransaction()
+    func didCreateTransaction(id: Int, type: TransactionType)
+    func didUpdateTransaction(id: Int, type: TransactionType)
+    func didRemoveTransaction(id: Int, type: TransactionType)
 }
 
 class TransactionEditViewController : FormNavBarButtonsEditViewController {
-    var viewModel: TransactionEditViewModel! { return nil }
+    var viewModel: TransactionEditViewModel!
     var tableController: TransactionEditTableController!
     var delegate: TransactionEditViewControllerDelegate?
     
@@ -59,11 +59,15 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     
     override func didSave() {
         super.didSave()
-        if self.viewModel.isNew {
-            self.delegate?.didCreateTransaction()
+        
+        guard   let transactionType = viewModel.transactionType,
+                let transactionId = viewModel.transaction?.id else { return }
+        
+        if viewModel.isNew {
+            self.delegate?.didCreateTransaction(id: transactionId, type: transactionType)
         }
         else {
-            self.delegate?.didUpdateTransaction()
+            self.delegate?.didUpdateTransaction(id: transactionId, type: transactionType)
         }
     }
     
@@ -72,7 +76,9 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     }
     
     override func didRemove() {
-        self.delegate?.didRemoveTransaction()
+        guard   let transactionType = viewModel.transactionType,
+                let transactionId = viewModel.transactionId else { return }
+        self.delegate?.didRemoveTransaction(id: transactionId, type: transactionType)
     }
     
     func set(delegate: TransactionEditViewControllerDelegate?) {
@@ -83,7 +89,7 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         viewModel.set(transactionId: transactionId)
     }
     
-    func set(source: TransactionSource?, destination: TransactionDestination?, returningBorrow: BorrowViewModel?) {
+    func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?) {
         viewModel.set(source: source, destination: destination, returningBorrow: returningBorrow)
     }
     

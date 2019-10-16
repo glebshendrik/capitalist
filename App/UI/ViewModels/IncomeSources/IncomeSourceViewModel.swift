@@ -10,6 +10,14 @@ import Foundation
 
 class IncomeSourceViewModel : TransactionSource {
     
+    var type: TransactionableType {
+        return .incomeSource
+    }
+    
+    var iconCategory: IconCategory? {
+        return nil
+    }
+    
     var isTransactionSource: Bool {
         return true
     }
@@ -45,7 +53,7 @@ class IncomeSourceViewModel : TransactionSource {
     }
     
     var isChild: Bool {
-        return incomeSource.isChild ?? false
+        return incomeSource.isChild
     }
     
     init(incomeSource: IncomeSource) {

@@ -23,7 +23,7 @@ class ExpenseCategoriesService : Service, ExpenseCategoriesServiceProtocol {
     }
     
     func indexUserExpenseCategories(for userId: Int) -> Promise<[ExpenseCategory]> {
-        return requestCollection(APIRoute.indexUserExpenseCategories(userId: userId, includedInBalance: includedInBalance))
+        return requestCollection(APIRoute.indexUserExpenseCategories(userId: userId))
     }
     
     func update(with updatingForm: ExpenseCategoryUpdatingForm) -> Promise<Void> {

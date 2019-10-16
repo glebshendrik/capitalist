@@ -10,8 +10,8 @@ import UIKit
 
 protocol WaitingBorrowsViewControllerDelegate : class {
     func didSelect(borrow: BorrowViewModel,
-                   expenseSourceSource: ExpenseSourceViewModel,
-                   expenseSourceDestination: ExpenseSourceViewModel)
+                   source: ExpenseSourceViewModel,
+                   destination: ExpenseSourceViewModel)
 }
 
 class WaitingBorrowsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
@@ -24,8 +24,8 @@ class WaitingBorrowsViewController : UIViewController, UIMessagePresenterManager
     var viewModel: WaitingBorrowsViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
-    var expenseSourceSource: ExpenseSourceViewModel? = nil
-    var expenseSourceDestination: ExpenseSourceViewModel? = nil
+    var source: ExpenseSourceViewModel? = nil
+    var destination: ExpenseSourceViewModel? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +33,14 @@ class WaitingBorrowsViewController : UIViewController, UIMessagePresenterManager
     }
     
     func set(delegate: WaitingBorrowsViewControllerDelegate,
-             expenseSourceSource: ExpenseSourceViewModel,
-             expenseSourceDestination: ExpenseSourceViewModel,
+             source: ExpenseSourceViewModel,
+             destination: ExpenseSourceViewModel,
              waitingBorrows: [BorrowViewModel],
              borrowType: BorrowType) {
         self.delegate = delegate
         self.viewModel.set(borrowViewModels: waitingBorrows)
-        self.expenseSourceSource = expenseSourceSource
-        self.expenseSourceDestination = expenseSourceDestination
+        self.source = source
+        self.destination = destination
         self.borrowType = borrowType
     }
     
@@ -76,13 +76,13 @@ extension WaitingBorrowsViewController : UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let borrowViewModel = viewModel.borrowViewModel(at: indexPath) else { return }
         close()
-        guard let expenseSourceSource = expenseSourceSource,
-            let expenseSourceDestination = expenseSourceDestination else {
+        guard let source = source,
+            let destination = destination else {
                 return
         }
         delegate?.didSelect(borrow: borrowViewModel,
-                            expenseSourceSource: expenseSourceSource,
-                            expenseSourceDestination: expenseSourceDestination)
+                            source: source,
+                            destination: destination)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

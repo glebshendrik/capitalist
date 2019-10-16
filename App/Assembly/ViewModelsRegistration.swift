@@ -44,11 +44,7 @@ extension ApplicationAssembly {
         
         container.autoregister(CurrenciesViewModel.self, initializer: CurrenciesViewModel.init)
         
-        container.autoregister(IncomeEditViewModel.self, initializer: IncomeEditViewModel.init)
-        
-        container.autoregister(ExpenseEditViewModel.self, initializer: ExpenseEditViewModel.init)
-        
-        container.autoregister(FundsMoveEditViewModel.self, initializer: FundsMoveEditViewModel.init)
+        container.autoregister(TransactionEditViewModel.self, initializer: TransactionEditViewModel.init)
         
         container.autoregister(IncomeSourcesViewModel.self, initializer: IncomeSourcesViewModel.init)
         

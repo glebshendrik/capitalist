@@ -125,16 +125,55 @@ class UIFactory : UIFactoryProtocol {
         return expenseCategorySelectViewController
     }
     
-    func fundsMoveEditViewController(delegate: FundsMoveEditViewControllerDelegate,
-                                     source: ExpenseSourceViewModel?,
-                                     destination: ExpenseSourceViewModel?,
-                                     borrow: BorrowViewModel?) -> UINavigationController? {
-        let fundsMoveEditNavigationController = router.viewController(.FundsMoveEditNavigationController) as? UINavigationController
-        let fundsMoveEditViewController = fundsMoveEditNavigationController?.topViewController as? FundsMoveEditViewController
+    func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
+                                       transactionId: Int?,
+                                       source: Transactionable?,
+                                       destination: Transactionable?,
+                                       returningBorrow: BorrowViewModel?) -> UINavigationController? {
         
-        fundsMoveEditViewController?.set(delegate: delegate)
-        fundsMoveEditViewController?.set(source: source, destination: destination, borrow: borrow)
-        return fundsMoveEditNavigationController
+        let transactionEditNavigationController = router.viewController(.TransactionEditNavigationController) as? UINavigationController
+        let transactionEditViewController = transactionEditNavigationController?.topViewController as? TransactionEditViewController
+        
+        transactionEditViewController?.set(delegate: delegate)
+        
+        if let transactionId = transactionId {
+            transactionEditViewController?.set(transactionId: transactionId)
+        }
+        else {
+            transactionEditViewController?.set(source: source, destination: destination, returningBorrow: returningBorrow)
+        }
+        
+        return transactionEditNavigationController
+    }
+    
+    func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
+                                       source: Transactionable?,
+                                       destination: Transactionable?,
+                                       returningBorrow: BorrowViewModel?) -> UINavigationController? {
+        
+        return transactionEditViewController(delegate: delegate,
+                                             transactionId: nil,
+                                             source: source,
+                                             destination: destination,
+                                             returningBorrow: returningBorrow)
+    }
+    
+    func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
+                                       source: Transactionable?,
+                                       destination: Transactionable?) -> UINavigationController? {
+        return transactionEditViewController(delegate: delegate,
+                                             source: source,
+                                             destination: destination,
+                                             returningBorrow: nil)
+    }
+    
+    func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
+                                       transactionId: Int) -> UINavigationController? {
+        return transactionEditViewController(delegate: delegate,
+                                             transactionId: transactionId,
+                                             source: nil,
+                                             destination: nil,
+                                             returningBorrow: nil)
     }
     
     func recurrencePicker(delegate: RecurrencePickerDelegate,
@@ -165,8 +204,8 @@ class UIFactory : UIFactoryProtocol {
     func borrowEditViewController(delegate: BorrowEditViewControllerDelegate,
                                   type: BorrowType,
                                   borrowId: Int?,
-                                  expenseSourceFrom: ExpenseSourceViewModel?,
-                                  expenseSourceTo: ExpenseSourceViewModel?) -> UINavigationController? {
+                                  source: ExpenseSourceViewModel?,
+                                  destination: ExpenseSourceViewModel?) -> UINavigationController? {
         let borrowEditNavigationController = router.viewController(.BorrowEditNavigationController) as? UINavigationController
         let borrowEditViewController = borrowEditNavigationController?.topViewController as? BorrowEditViewController
         
@@ -175,7 +214,7 @@ class UIFactory : UIFactoryProtocol {
             borrowEditViewController?.set(borrowId: borrowId, type: type)
         }
         else {
-            borrowEditViewController?.set(type: type, expenseSourceFrom: expenseSourceFrom, expenseSourceTo: expenseSourceTo)
+            borrowEditViewController?.set(type: type, source: source, destination: destination)
         }
         return borrowEditNavigationController
     }
@@ -190,5 +229,70 @@ class UIFactory : UIFactoryProtocol {
             creditEditViewController?.set(creditId: creditId)
         }
         return creditEditNavigationController
+    }
+    
+    func waitingBorrowsViewController(delegate: WaitingBorrowsViewControllerDelegate,
+                                      source: ExpenseSourceViewModel,
+                                      destination: ExpenseSourceViewModel,
+                                      waitingBorrows: [BorrowViewModel],
+                                      borrowType: BorrowType) -> UIViewController? {
+        let waitingBorrowsViewController = router.viewController(.WaitingBorrowsViewController) as? WaitingBorrowsViewController
+            
+        waitingBorrowsViewController?.set(delegate: delegate, source: source, destination: destination, waitingBorrows: waitingBorrows, borrowType: borrowType)
+        
+        return waitingBorrowsViewController
+    }
+    
+    func statisticsViewController(filter: SourceOrDestinationTransactionFilter)  -> UIViewController? {
+        let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController
+        statisticsViewController?.set(sourceOrDestinationFilter: filter)
+        return statisticsViewController
+    }
+    
+    func balanceViewController() -> UIViewController? {
+        return router.viewController(.BalanceViewController)
+    }
+    
+    func incomeSourceEditViewController(delegate: IncomeSourceEditViewControllerDelegate,
+                                        incomeSource: IncomeSource?) -> UINavigationController? {
+        let incomeSourceEditNavigationController = router.viewController(.IncomeSourceEditNavigationController) as? UINavigationController
+        let incomeSourceEditViewController = incomeSourceEditNavigationController?.topViewController as? IncomeSourceEditViewController
+            
+        incomeSourceEditViewController?.set(delegate: delegate)
+            
+        if let incomeSource = incomeSource {
+            incomeSourceEditViewController?.set(incomeSource: incomeSource)
+        }
+                        
+        return incomeSourceEditNavigationController
+    }
+    
+    func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
+                                         expenseSource: ExpenseSource?) -> UINavigationController? {
+        let expenseSourceEditNavigationController = router.viewController(.ExpenseSourceEditNavigationController) as? UINavigationController
+        let expenseSourceEditViewController = expenseSourceEditNavigationController?.topViewController as? ExpenseSourceEditViewController
+            
+        expenseSourceEditViewController?.set(delegate: delegate)
+            
+        if let expenseSource = expenseSource {
+            expenseSourceEditViewController?.set(expenseSource: expenseSource)
+        }
+        
+        return expenseSourceEditNavigationController
+    }
+    
+    func expenseCategoryEditViewController(delegate: ExpenseCategoryEditViewControllerDelegate,
+                                           expenseCategory: ExpenseCategory?,
+                                           basketType: BasketType) -> UINavigationController? {
+        let expenseCategoryEditNavigationController = router.viewController(.ExpenseCategoryEditNavigationController) as? UINavigationController
+        let expenseCategoryEditViewController = expenseCategoryEditNavigationController?.topViewController as? ExpenseCategoryEditViewController
+            
+        expenseCategoryEditViewController?.set(delegate: delegate)
+        expenseCategoryEditViewController?.set(basketType: basketType)
+        
+        if let expenseCategory = expenseCategory {
+            expenseCategoryEditViewController?.set(expenseCategory: expenseCategory)
+        }        
+        return expenseCategoryEditNavigationController
     }
 }

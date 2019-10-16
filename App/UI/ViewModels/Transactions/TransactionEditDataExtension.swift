@@ -109,7 +109,11 @@ extension TransactionEditViewModel {
 // Creation
 extension TransactionEditViewModel {
     func create() -> Promise<Void> {
-        return transactionsCoordinator.create(with: creationForm()).asVoid()
+        return  firstly {
+                    transactionsCoordinator.create(with: creationForm())
+                }.get { [weak self] transaction in
+                    self?.transaction = transaction
+                }.asVoid()
     }
     
     func isCreationFormValid() -> Bool {

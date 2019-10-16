@@ -52,10 +52,17 @@ protocol UIFactoryProtocol {
     
     func expenseCategorySelectViewController(delegate: ExpenseCategorySelectViewControllerDelegate) -> ExpenseCategorySelectViewController?
     
-    func fundsMoveEditViewController(delegate: FundsMoveEditViewControllerDelegate,
-                                     source: ExpenseSourceViewModel?,
-                                     destination: ExpenseSourceViewModel?,
-                                     borrow: BorrowViewModel?) -> UINavigationController?
+    func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
+                                       source: Transactionable?,
+                                       destination: Transactionable?,
+                                       returningBorrow: BorrowViewModel?) -> UINavigationController?
+    
+    func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
+                                       source: Transactionable?,
+                                       destination: Transactionable?) -> UINavigationController?
+    
+    func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
+                                       transactionId: Int) -> UINavigationController?
     
     func recurrencePicker(delegate: RecurrencePickerDelegate,
                           recurrenceRule: RecurrenceRule?,
@@ -69,10 +76,29 @@ protocol UIFactoryProtocol {
     func borrowEditViewController(delegate: BorrowEditViewControllerDelegate,
                                   type: BorrowType,
                                   borrowId: Int?,
-                                  expenseSourceFrom: ExpenseSourceViewModel?,
-                                  expenseSourceTo: ExpenseSourceViewModel?) -> UINavigationController?
+                                  source: ExpenseSourceViewModel?,
+                                  destination: ExpenseSourceViewModel?) -> UINavigationController?
     
     func creditEditViewController(delegate: CreditEditViewControllerDelegate,
                                   creditId: Int?) -> UINavigationController?
     
+    func waitingBorrowsViewController(delegate: WaitingBorrowsViewControllerDelegate,
+                                      source: ExpenseSourceViewModel,
+                                      destination: ExpenseSourceViewModel,
+                                      waitingBorrows: [BorrowViewModel],
+                                      borrowType: BorrowType) -> UIViewController?
+    
+    func statisticsViewController(filter: SourceOrDestinationTransactionFilter) -> UIViewController?
+    
+    func balanceViewController() -> UIViewController?
+    
+    func incomeSourceEditViewController(delegate: IncomeSourceEditViewControllerDelegate,
+                                        incomeSource: IncomeSource?) -> UINavigationController?
+    
+    func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
+                                         expenseSource: ExpenseSource?) -> UINavigationController?
+    
+    func expenseCategoryEditViewController(delegate: ExpenseCategoryEditViewControllerDelegate,
+                                           expenseCategory: ExpenseCategory?,
+                                           basketType: BasketType) -> UINavigationController?
 }

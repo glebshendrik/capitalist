@@ -106,6 +106,14 @@ class ExpenseSourceViewModel {
 }
 
 extension ExpenseSourceViewModel : TransactionSource, TransactionDestination {
+    var type: TransactionableType {
+        return .expenseSource
+    }
+    
+    var iconCategory: IconCategory? {
+        return expenseSource.accountType.iconCategory
+    }
+    
     var isTransactionSource: Bool {
         return !isGoal || isGoalCompleted
     }
