@@ -51,6 +51,11 @@ extension TransactionEditViewController {
         tableController.set(cell: tableController.exchangeCell, hidden: viewModel.exchangeAmountsFieldHidden, animated: false, reload: false)
     }
         
+    func updateInBalanceUI() {
+        tableController.set(cell: tableController.inBalanceCell, hidden: viewModel.includedInBalanceFieldHidden)
+        tableController.inBalanceSwitchField.value = viewModel.includedInBalance
+    }
+    
     func updateCommentUI() {
         tableController.commentView.text = viewModel.comment
     }

@@ -31,6 +31,7 @@ class TransactionEditViewModel {
     var destination: Transactionable? = nil { didSet { didSetDestination(oldValue) } }
     var amount: String? = nil { didSet { didSetAmount() } }
     var convertedAmount: String? = nil { didSet { didSetConvertedAmount() } }
+    var includedInBalance: Bool = false
     var comment: String? = nil
     var gotAt: Date? = nil
     var amountConverted: String? = nil
@@ -69,6 +70,7 @@ class TransactionEditViewModel {
         self.transaction = transaction
         self.comment = transaction.comment
         self.gotAt = transaction.gotAt
+        self.includedInBalance = transaction.includedInBalance ?? false
         if let returningBorrow = transaction.returningBorrow {
             self.returningBorrow = BorrowViewModel(borrow: returningBorrow)
         }

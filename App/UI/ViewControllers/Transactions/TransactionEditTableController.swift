@@ -16,6 +16,7 @@ protocol TransactionEditTableControllerDelegate {
     func didTapDestination()
     func didChange(amount: String?)
     func didChange(convertedAmount: String?)
+    func didChange(includedInBalance: Bool)
     func didChange(comment: String?)
     func didTapRemoveButton()
 }
@@ -27,6 +28,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var destinationField: FormTapField!
     @IBOutlet weak var amountField: FormMoneyTextField!
     @IBOutlet weak var exchangeField: FormExchangeField!
+    @IBOutlet weak var inBalanceSwitchField: FormSwitchValueField!
     @IBOutlet weak var commentView: UITextView!
     
     // Cells
@@ -34,6 +36,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var destinationCell: UITableViewCell!
     @IBOutlet weak var amountCell: UITableViewCell!
     @IBOutlet weak var exchangeCell: UITableViewCell!
+    @IBOutlet weak var inBalanceCell: UITableViewCell!
     @IBOutlet weak var removeCell: UITableViewCell!
     
     // Buttons
@@ -89,6 +92,14 @@ class TransactionEditTableController : FormFieldsTableViewController {
         }
         exchangeField.didChangeConvertedAmount { [weak self] text in
             self?.delegate?.didChange(convertedAmount: text)
+        }
+    }
+    
+    private func setupInBalanceSwitchField() {
+        inBalanceSwitchField.placeholder = "Оставить на балансе"
+        inBalanceSwitchField.imageName = "included_in_balance_icon"
+        inBalanceSwitchField.didSwitch { [weak self] includedInBalance in
+            self?.delegate?.didChange(includedInBalance: includedInBalance)
         }
     }
     

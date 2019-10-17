@@ -111,6 +111,10 @@ extension TransactionEditViewModel {
         return !needCurrencyExchange
     }
     
+    var includedInBalanceFieldHidden: Bool {
+        return true
+    }
+    
     var removeButtonHidden: Bool {
         return isNew        
     }

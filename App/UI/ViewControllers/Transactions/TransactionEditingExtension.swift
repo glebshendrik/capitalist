@@ -107,6 +107,11 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
 
         slideUp(viewController: viewController)
     }
+    
+    func didChange(includedInBalance: Bool) {        
+        viewModel.includedInBalance = includedInBalance
+        updateInBalanceUI()
+    }
 }
 
 extension TransactionEditViewController : DatePickerViewControllerDelegate {
