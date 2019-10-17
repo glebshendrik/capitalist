@@ -22,11 +22,7 @@ class BudgetViewModel {
     var expenseSourcesBalance: String {
         return budget.expenseSourcesBalanceCents.moneyCurrencyString(with: budget.currency, shouldRound: false) ?? ""
     }
-    
-    var includedInBalanceExpenses: String {
-        return budget.includedInBalanceExpensesCents.moneyCurrencyString(with: budget.currency, shouldRound: false) ?? ""
-    }
-    
+        
     var spent: String {
         return budget.spentCentsAtPeriod.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
     }

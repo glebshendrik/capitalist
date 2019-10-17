@@ -57,6 +57,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
         setupSourceField()
         setupDestinationField()
         setupExchangeField()
+        setupInBalanceSwitchField()
         setupCommentView()
     }
     

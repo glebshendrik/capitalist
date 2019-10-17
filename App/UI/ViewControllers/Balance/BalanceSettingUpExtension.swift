@@ -56,7 +56,7 @@ extension BalanceViewController {
     
     func updateBalanceAmountsUI() {
         expenseSourcesAmountLabel.text = viewModel.budgetViewModel?.expenseSourcesBalance
-        expenseCategoriesAmountLabel.text = viewModel.budgetViewModel?.includedInBalanceExpenses
+        expenseCategoriesAmountLabel.text = ""
     }
     
     func updateExpenseSourcesUI() {

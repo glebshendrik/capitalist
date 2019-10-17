@@ -44,7 +44,8 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         updateDestinationUI()
         updateAmountUI()
         updateExchangeAmountsUI()
-        updateCommentUI()
+        updateInBalanceUI()
+        updateCommentUI()        
         updateRemoveButtonUI()
         tableController.reloadData(animated: false)
     }

@@ -65,7 +65,7 @@
         <!--Colorable Navigation Controller-->
         <scene sceneID="lBi-X0-PmN">
             <objects>
-                <navigationController storyboardIdentifier="IncomeEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="BuC-gY-gko" customClass="ColorableNavigationController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TransactionEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="BuC-gY-gko" customClass="ColorableNavigationController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="OUa-rj-g6b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

@@ -58,9 +58,9 @@ struct Transaction : Decodable {
         case sourceTitle = "source_title"
         case destinationTitle = "destination_title"
         case destinationIconURL = "destination_icon_url"
-        case currency = "currency_object"
+        case currency = "amount_currency"
         case amountCents = "amount_cents"
-        case convertedCurrency = "converted_currency_object"
+        case convertedCurrency = "converted_amount_currency"
         case convertedAmountCents = "converted_amount_cents"
         case gotAt = "got_at"
         case comment
