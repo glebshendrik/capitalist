@@ -18,9 +18,7 @@ struct IncomeSource : Decodable {
     let deletedAt: Date?
     let isChild: Bool
     let activeId: Int?
-    let reminderStartDate: Date?
-    let reminderRecurrenceRule: String?
-    let reminderMessage: String?
+    let reminder: Reminder?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -32,9 +30,7 @@ struct IncomeSource : Decodable {
         case deletedAt = "deleted_at"
         case isChild = "is_child"
         case activeId = "active_id"
-        case reminderStartDate = "reminder_start_date"
-        case reminderRecurrenceRule = "reminder_recurrence_rule"
-        case reminderMessage = "reminder_message"
+        case reminder
     }
 
 }
@@ -43,16 +39,12 @@ struct IncomeSourceCreationForm : Encodable, Validatable {
     let userId: Int?
     let name: String?
     let currency: String?
-    let reminderStartDate: Date?
-    let reminderRecurrenceRule: String?
-    let reminderMessage: String?
+    let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
         case currency
-        case reminderStartDate = "reminder_start_date"
-        case reminderRecurrenceRule = "reminder_recurrence_rule"
-        case reminderMessage = "reminder_message"
+        case reminderAttributes = "reminder_attributes"
     }
     
     func validate() -> [String : String]? {
@@ -77,23 +69,17 @@ struct IncomeSourceCreationForm : Encodable, Validatable {
 struct IncomeSourceUpdatingForm : Encodable, Validatable {
     let id: Int?
     let name: String?
-    let reminderStartDate: Date?
-    let reminderRecurrenceRule: String?
-    let reminderMessage: String?
+    let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
-        case reminderStartDate = "reminder_start_date"
-        case reminderRecurrenceRule = "reminder_recurrence_rule"
-        case reminderMessage = "reminder_message"
+        case reminderAttributes = "reminder_attributes"
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        try container.encode(reminderStartDate, forKey: .reminderStartDate)
-        try container.encode(reminderRecurrenceRule, forKey: .reminderRecurrenceRule)
-        try container.encode(reminderMessage, forKey: .reminderMessage)
+        try container.encode(reminderAttributes, forKey: .reminderAttributes)
     }
     
     func validate() -> [String : String]? {

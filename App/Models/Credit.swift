@@ -24,9 +24,7 @@ struct Credit : Decodable {
     let isPaid: Bool
     let deletedAt: Date?
     let expenseCategoryId: Int
-    let reminderStartDate: Date?
-    let reminderRecurrenceRule: String?
-    let reminderMessage: String?
+    let reminder: Reminder?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -44,43 +42,7 @@ struct Credit : Decodable {
         case isPaid = "is_paid"
         case deletedAt = "deleted_at"
         case expenseCategoryId = "expense_category_id"
-        case reminderStartDate = "reminder_start_date"
-        case reminderRecurrenceRule = "reminder_recurrence_rule"
-        case reminderMessage = "reminder_message"
-    }
-}
-
-struct ExpenseCategoryNestedAttributes : Encodable {
-    let id: Int?
-    let reminderStartDate: Date?
-    let reminderRecurrenceRule: String?
-    let reminderMessage: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case reminderStartDate = "reminder_start_date"
-        case reminderRecurrenceRule = "reminder_recurrence_rule"
-        case reminderMessage = "reminder_message"
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
-        if let id = id {
-            try container.encode(id, forKey: .id)
-        }
-        
-        if let reminderStartDate = reminderStartDate {
-            try container.encode(reminderStartDate, forKey: .reminderStartDate)
-        }
-        
-        if let reminderRecurrenceRule = reminderRecurrenceRule {
-            try container.encode(reminderRecurrenceRule, forKey: .reminderRecurrenceRule)
-        }
-        
-        if let reminderMessage = reminderMessage {
-            try container.encode(reminderMessage, forKey: .reminderMessage)
-        }
+        case reminder
     }
 }
 
@@ -95,7 +57,7 @@ struct CreditCreationForm : Encodable, Validatable {
     let monthlyPaymentCents: Int?
     let gotAt: Date
     let period: Int?
-    let expenseCategoryAttributes: ExpenseCategoryNestedAttributes
+    let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case creditTypeId = "credit_type_id"
@@ -107,7 +69,7 @@ struct CreditCreationForm : Encodable, Validatable {
         case monthlyPaymentCents = "monthly_payment_cents"
         case gotAt = "got_at"
         case period
-        case expenseCategoryAttributes = "expense_category_attributes"
+        case reminderAttributes = "reminder_attributes"
     }
     
     func validate() -> [String : String]? {
@@ -157,7 +119,7 @@ struct CreditUpdatingForm : Encodable, Validatable {
     let monthlyPaymentCents: Int?
     let gotAt: Date
     let period: Int?
-    let expenseCategoryAttributes: ExpenseCategoryNestedAttributes
+    let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -166,7 +128,7 @@ struct CreditUpdatingForm : Encodable, Validatable {
         case monthlyPaymentCents = "monthly_payment_cents"
         case gotAt = "got_at"
         case period
-        case expenseCategoryAttributes = "expense_category_attributes"
+        case reminderAttributes = "reminder_attributes"
     }
     
     func validate() -> [String : String]? {

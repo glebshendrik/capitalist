@@ -38,7 +38,13 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
     }()
     
     lazy var toolbarTitleLabel: UILabel = {
-        return UILabel()
+        let label = UILabel()
+        label.font = UIFont(name: "Rubik-Regular", size: 16)
+        label.autoresizingMask = .flexibleWidth
+        label.width = 0.0
+        label.textColor = UIColor.by(.textFFFFFF)
+        
+        return label
     }()
     
     lazy var datePickerToolbar: UIToolbar = {
@@ -54,8 +60,10 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
                                         barMetrics: .default)
         toolbar.setShadowImage(UIImage(), forToolbarPosition: .any)
         
+        
         let labelButton = UIBarButtonItem(customView: toolbarTitleLabel)
-        toolbarTitleLabel.textColor = UIColor.by(.textFFFFFF)
+        labelButton.width = 0.0
+        
         
         let closeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "dark-circle-close-icon").withRenderingMode(.alwaysOriginal), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.didTapCloseButton(_:)))
         
@@ -93,6 +101,7 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        updateDateLabel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -165,8 +174,10 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
     
     private func updateDateLabel() {
         toolbarTitleLabel.text = datePicker.datePickerMode == .dateAndTime ? datePicker.date.dateTimeString(ofStyle: .short) : datePicker.date.dateString(ofStyle: .short)
+        toolbarTitleLabel.sizeToFit()
         datePickerToolbar.updateConstraintsIfNeeded()
         datePickerToolbar.sizeToFit()
+        
     }
     
     private func close() {

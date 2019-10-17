@@ -24,11 +24,7 @@ struct ExpenseCategory : Decodable {
     let incomeSourceCurrency: String
     let order: Int
     let deletedAt: Date?
-    let includedInBalanceExpensesCents: Int?
-    let reminderStartDate: Date?
-    let reminderRecurrenceRule: String?
-    let reminderMessage: String?
-    let profitCents: Int?
+    let reminder: Reminder?
     let creditId: Int?
     
     enum CodingKeys: String, CodingKey {
@@ -47,11 +43,7 @@ struct ExpenseCategory : Decodable {
         case incomeSourceDependentCurrency = "income_source_dependent_currency"
         case incomeSourceCurrency = "income_source_currency"
         case deletedAt = "deleted_at"
-        case includedInBalanceExpensesCents = "included_in_balance_expenses_cents"
-        case reminderStartDate = "reminder_start_date"
-        case reminderRecurrenceRule = "reminder_recurrence_rule"
-        case reminderMessage = "reminder_message"
-        case profitCents = "profit_cents"
+        case reminder
         case creditId = "credit_id"
     }
     
@@ -64,9 +56,7 @@ struct ExpenseCategoryCreationForm : Encodable, Validatable {
     let monthlyPlannedCents: Int?
     let monthlyPlannedCurrency: String?
     let incomeSourceCurrency: String?
-    let reminderStartDate: Date?
-    let reminderRecurrenceRule: String?
-    let reminderMessage: String?
+    let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -75,9 +65,7 @@ struct ExpenseCategoryCreationForm : Encodable, Validatable {
         case monthlyPlannedCurrency = "monthly_planned_currency"
         case monthlyPlannedCents = "monthly_planned_cents"
         case incomeSourceCurrency = "income_source_currency"
-        case reminderStartDate = "reminder_start_date"
-        case reminderRecurrenceRule = "reminder_recurrence_rule"
-        case reminderMessage = "reminder_message"
+        case reminderAttributes = "reminder_attributes"
     }
     
     func validate() -> [String : String]? {
@@ -108,17 +96,13 @@ struct ExpenseCategoryUpdatingForm : Encodable, Validatable {
     let iconURL: URL?
     let name: String?    
     let monthlyPlannedCents: Int?
-    let reminderStartDate: Date?
-    let reminderRecurrenceRule: String?
-    let reminderMessage: String?
+    let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
         case iconURL = "icon_url"
         case monthlyPlannedCents = "monthly_planned_cents"
-        case reminderStartDate = "reminder_start_date"
-        case reminderRecurrenceRule = "reminder_recurrence_rule"
-        case reminderMessage = "reminder_message"
+        case reminderAttributes = "reminder_attributes"
     }
     
     func encode(to encoder: Encoder) throws {
@@ -126,9 +110,7 @@ struct ExpenseCategoryUpdatingForm : Encodable, Validatable {
         try container.encode(name, forKey: .name)
         try container.encode(iconURL, forKey: .iconURL)        
         try container.encode(monthlyPlannedCents, forKey: .monthlyPlannedCents)
-        try container.encode(reminderStartDate, forKey: .reminderStartDate)
-        try container.encode(reminderRecurrenceRule, forKey: .reminderRecurrenceRule)
-        try container.encode(reminderMessage, forKey: .reminderMessage)
+        try container.encode(reminderAttributes, forKey: .reminderAttributes)
     }
     
     func validate() -> [String : String]? {

@@ -479,7 +479,7 @@
                                         <rect key="frame" x="0.0" y="12" width="375" height="48"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="l6v-CB-nnI">
-                                                <rect key="frame" x="160" y="8.5" width="55" height="31"/>
+                                                <rect key="frame" x="132.5" y="-7" width="110" height="62"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.74935787671232879" colorSpace="custom" customColorSpace="sRGB"/>
@@ -542,20 +542,20 @@
                                                                     <rect key="frame" x="4" y="4" width="112" height="46"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="wallet-icon" translatesAutoresizingMaskIntoConstraints="NO" id="aV5-tx-feC">
-                                                                            <rect key="frame" x="12" y="12" width="30" height="22"/>
+                                                                            <rect key="frame" x="12" y="7.5" width="34" height="31"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="31" id="arT-Fd-fcj"/>
                                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="34" id="hPk-zn-7pK"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зарплата" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1sx-Bw-Jfj">
-                                                                            <rect key="frame" x="47" y="13" width="57" height="13"/>
+                                                                            <rect key="frame" x="51" y="13" width="53" height="13"/>
                                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="11"/>
                                                                             <color key="textColor" name="text FFFFFF"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="98 000 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EX0-AK-HGH">
-                                                                            <rect key="frame" x="47" y="17" width="57" height="17"/>
+                                                                            <rect key="frame" x="51" y="17" width="53" height="17"/>
                                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                                             <color key="textColor" name="text FFFFFF"/>
                                                                             <nil key="highlightedColor"/>
@@ -894,7 +894,7 @@
                                         <rect key="frame" x="0.0" y="12" width="375" height="56"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="E2K-f6-ag5">
-                                                <rect key="frame" x="160" y="12.5" width="55" height="31"/>
+                                                <rect key="frame" x="132.5" y="-3" width="110" height="62"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.74855522260273977" colorSpace="custom" customColorSpace="sRGB"/>
@@ -953,13 +953,13 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="114.5" height="52"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0,00 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTy-0N-MoN">
-                                                        <rect key="frame" x="33" y="10" width="48.5" height="19"/>
+                                                        <rect key="frame" x="35" y="10" width="44.5" height="19"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                         <color key="textColor" name="text FFFFFF"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Удовольствие" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8E3-p9-BAq">
-                                                        <rect key="frame" x="16.5" y="34" width="81" height="14"/>
+                                                        <rect key="frame" x="17" y="34" width="80" height="14"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                         <color key="textColor" name="text FFFFFF"/>
                                                         <nil key="highlightedColor"/>
@@ -987,7 +987,7 @@
                                                 <rect key="frame" x="114.5" y="0.0" width="114" height="52"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0,00 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhk-En-c2M">
-                                                        <rect key="frame" x="34.5" y="10" width="45.5" height="18"/>
+                                                        <rect key="frame" x="36" y="10" width="42" height="18"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                         <color key="textColor" name="text 9EAACC"/>
                                                         <nil key="highlightedColor"/>
@@ -1021,13 +1021,13 @@
                                                 <rect key="frame" x="228.5" y="0.0" width="114.5" height="52"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0,00 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeG-Ce-uxJ">
-                                                        <rect key="frame" x="34.5" y="10" width="45.5" height="18"/>
+                                                        <rect key="frame" x="36.5" y="10" width="42" height="18"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                         <color key="textColor" name="text 9EAACC"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Безопасность" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1C-57-t2f">
-                                                        <rect key="frame" x="17" y="33" width="81" height="14"/>
+                                                        <rect key="frame" x="17.5" y="33" width="79.5" height="14"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                         <color key="textColor" name="text 9EAACC"/>
                                                         <nil key="highlightedColor"/>
@@ -1148,7 +1148,7 @@
                                                                             <rect key="frame" x="10" y="4" width="48" height="48"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="zmx-ez-FXB">
-                                                                                    <rect key="frame" x="16" y="16" width="16" height="16"/>
+                                                                                    <rect key="frame" x="8" y="8" width="32" height="32"/>
                                                                                     <color key="tintColor" name="dark 333D5B"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
@@ -1209,7 +1209,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="348"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Fxg-qF-Lvh">
-                                                        <rect key="frame" x="160" y="158.5" width="55" height="31"/>
+                                                        <rect key="frame" x="132.5" y="143" width="110" height="62"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1298,7 +1298,7 @@
                                                                             <rect key="frame" x="10" y="4" width="48" height="48"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="Xjf-fp-Xjx">
-                                                                                    <rect key="frame" x="16" y="16" width="16" height="16"/>
+                                                                                    <rect key="frame" x="8" y="8" width="32" height="32"/>
                                                                                     <color key="tintColor" name="dark 333D5B"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
@@ -1359,7 +1359,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="348"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Nid-av-JHO">
-                                                        <rect key="frame" x="160" y="158.5" width="55" height="31"/>
+                                                        <rect key="frame" x="132.5" y="143" width="110" height="62"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1448,7 +1448,7 @@
                                                                             <rect key="frame" x="10" y="4" width="48" height="48"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="Ns2-HQ-naB">
-                                                                                    <rect key="frame" x="16" y="16" width="16" height="16"/>
+                                                                                    <rect key="frame" x="8" y="8" width="32" height="32"/>
                                                                                     <color key="tintColor" name="dark 333D5B"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
@@ -1509,7 +1509,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="348"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="EkC-7E-d6Q">
-                                                        <rect key="frame" x="160" y="158.5" width="55" height="31"/>
+                                                        <rect key="frame" x="132.5" y="143" width="110" height="62"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1567,7 +1567,7 @@
                                 <color key="backgroundColor" name="dark 333D5B"/>
                             </view>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioQ-2O-oOH">
-                                <rect key="frame" x="163.5" y="583" width="48" height="30"/>
+                                <rect key="frame" x="162.5" y="583" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="v7I-LI-owo"/>
                                 </constraints>
@@ -1583,7 +1583,7 @@
                                 <rect key="frame" x="157.5" y="281.5" width="60" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="money-icon" translatesAutoresizingMaskIntoConstraints="NO" id="dUt-AC-D2O">
-                                        <rect key="frame" x="3" y="5" width="54" height="50"/>
+                                        <rect key="frame" x="-24" y="-20" width="108" height="100"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

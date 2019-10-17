@@ -31,14 +31,6 @@ class ExpenseCategoryEditViewModel {
     var monthlyPlanned: String? = nil
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
-    
-    
-    
-//    var monthlyPlanned: String? {
-//        guard let currency = selectedCurrency else { return nil }
-//        return expenseCategory?.monthlyPlannedCents?.moneyDecimalString(with: currency)
-//    }
-    
     // Computed
     
     var defaultIconName: String {
@@ -116,7 +108,7 @@ class ExpenseCategoryEditViewModel {
         selectedCurrency = expenseCategory.currency
         selectedIncomeSourceCurrency = expenseCategory.incomeSourceDependentCurrency
         monthlyPlanned = expenseCategory.monthlyPlannedCents?.moneyDecimalString(with: selectedCurrency)
-        reminderViewModel = ReminderViewModel(expenseCategory: expenseCategory)
+        reminderViewModel = ReminderViewModel(reminder: expenseCategory.reminder)
     }
     
     func set(basketType: BasketType) {
@@ -175,9 +167,7 @@ extension ExpenseCategoryEditViewModel {
                                            monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
                                            monthlyPlannedCurrency: selectedCurrencyCode,
                                            incomeSourceCurrency: selectedIncomeSourceCurrencyCode,
-                                           reminderStartDate: reminderViewModel.reminderStartDate,
-                                           reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
-                                           reminderMessage: reminderViewModel.reminderMessage)
+                                           reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }
 
@@ -196,8 +186,6 @@ extension ExpenseCategoryEditViewModel {
                                            iconURL: selectedIconURL,
                                            name: name,
                                            monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
-                                           reminderStartDate: reminderViewModel.reminderStartDate,
-                                           reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
-                                           reminderMessage: reminderViewModel.reminderMessage)
+                                           reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }

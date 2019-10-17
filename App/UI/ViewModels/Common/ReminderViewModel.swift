@@ -11,9 +11,17 @@ import RecurrencePicker
 
 struct ReminderViewModel {
         
+    let id: Int?
     var reminderStartDate: Date? = nil
     var reminderRecurrenceRule: String? = nil
     var reminderMessage: String? = nil
+    
+    var reminderAttributes: ReminderNestedAttributes? {
+        return ReminderNestedAttributes(id: id,
+                                        startDate: reminderStartDate,
+                                        recurrenceRule: reminderRecurrenceRule,
+                                        message: reminderMessage)
+    }
     
     var startDate: String? {        
         return reminderStartDate?.dateTimeString(ofStyle: DateFormatter.Style.medium)
@@ -57,27 +65,16 @@ struct ReminderViewModel {
     }
     
     init() {
-        
+        id = nil
     }
      
-    init(reminderStartDate: Date?, reminderRecurrenceRule: String?, reminderMessage: String?) {
-        self.reminderStartDate = reminderStartDate
-        self.reminderRecurrenceRule = reminderRecurrenceRule
-        self.reminderMessage = reminderMessage
+    init(reminder: Reminder?) {
+        self.id = reminder?.id
+        self.reminderStartDate = reminder?.startDate
+        self.reminderRecurrenceRule = reminder?.recurrenceRule
+        self.reminderMessage = reminder?.message
     }
-    
-    init(incomeSource: IncomeSource) {
-        self.init(reminderStartDate: incomeSource.reminderStartDate,
-                  reminderRecurrenceRule: incomeSource.reminderRecurrenceRule,
-                  reminderMessage: incomeSource.reminderMessage)
-    }
-    
-    init(expenseCategory: ExpenseCategory) {
-        self.init(reminderStartDate: expenseCategory.reminderStartDate,
-                  reminderRecurrenceRule: expenseCategory.reminderRecurrenceRule,
-                  reminderMessage: expenseCategory.reminderMessage)
-    }
-    
+        
     mutating func prepareForSaving() {
         if  let reminderStartDate = reminderStartDate,
             var recurrenceRule = recurrenceRule {
@@ -87,8 +84,8 @@ struct ReminderViewModel {
     }
     
     mutating func clear() {
-        reminderMessage = nil
         reminderStartDate = nil
         reminderRecurrenceRule = nil
+        reminderMessage = nil
     }
 }

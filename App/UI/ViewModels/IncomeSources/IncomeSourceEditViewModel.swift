@@ -74,7 +74,7 @@ class IncomeSourceEditViewModel {
     func set(incomeSource: IncomeSource) {
         self.incomeSource = incomeSource
         
-        reminderViewModel = ReminderViewModel(incomeSource: incomeSource)
+        reminderViewModel = ReminderViewModel(reminder: incomeSource.reminder)
         selectedCurrency = incomeSource.currency
         name = incomeSource.name
     }
@@ -113,9 +113,7 @@ extension IncomeSourceEditViewModel {
         return IncomeSourceCreationForm( userId: accountCoordinator.currentSession?.userId,
                                          name: name,
                                          currency: selectedCurrencyCode,
-                                         reminderStartDate: reminderViewModel.reminderStartDate,
-                                         reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
-                                         reminderMessage: reminderViewModel.reminderMessage)
+                                         reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }
 
@@ -132,8 +130,6 @@ extension IncomeSourceEditViewModel {
     private func updatingForm() -> IncomeSourceUpdatingForm {
         return IncomeSourceUpdatingForm(id: incomeSource?.id,
                                         name: name,
-                                        reminderStartDate: reminderViewModel.reminderStartDate,
-                                        reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
-                                        reminderMessage: reminderViewModel.reminderMessage)
+                                        reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }

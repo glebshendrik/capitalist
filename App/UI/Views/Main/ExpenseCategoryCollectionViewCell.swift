@@ -329,14 +329,9 @@ extension ExpenseCategoryCollectionViewCell {
     
     func updateProfitLabel() {
         guard let viewModel = viewModel else { return }
-        profitLabel.isHidden = !viewModel.hasProfit
+        profitLabel.isHidden = true
         profitLabel.text = viewModel.profit
-        if viewModel.isProfitNegative {
-            profitLabel.textColor = UIColor.by(.redE77768)
-        }
-        else {
-            profitLabel.textColor = UIColor.by(.green68E79B)
-        }
+        profitLabel.textColor = UIColor.by(.text9EAACC)
     }
 }
 

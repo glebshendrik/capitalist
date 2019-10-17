@@ -39,32 +39,11 @@ class ExpenseCategoryViewModel {
     var spent: String? {
         return spent(shouldRound: false)
     }
-    
-    var includedInBalanceExpensesAmount: String? {
-        return expenseCategory.includedInBalanceExpensesCents?.moneyCurrencyString(with: currency, shouldRound: false)
-    }
-    
+        
     var profit: String? {
-        guard hasProfit, let profit = expenseCategory.profitCents?.moneyCurrencyString(with: currency, shouldRound: true) else { return nil }
-        var sign = ""
-        if isProfitPositive { sign = "+" }
-        return "\(sign)\(profit)"
+        return ""
     }
-    
-    var hasProfit: Bool {
-        return expenseCategory.profitCents != nil
-    }
-    
-    var isProfitPositive: Bool {
-        guard let profitCents = expenseCategory.profitCents else { return false }
-        return profitCents > 0
-    }
-    
-    var isProfitNegative: Bool {
-        guard let profitCents = expenseCategory.profitCents else { return false }
-        return profitCents < 0
-    }
-    
+        
     var areExpensesPlanned: Bool {
         guard let plannedCentsAtPeriod = expenseCategory.plannedCentsAtPeriod else { return false }
         return plannedCentsAtPeriod > 0

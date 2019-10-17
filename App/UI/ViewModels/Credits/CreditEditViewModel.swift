@@ -40,12 +40,6 @@ class CreditEditViewModel {
     var gotAt: Date = Date()
     var period: Int? = nil
     var expenseCategoryId: Int? = nil
-    var expenseCategoryAttributes: ExpenseCategoryNestedAttributes {
-        return ExpenseCategoryNestedAttributes(id: expenseCategoryId,
-                                               reminderStartDate: reminderViewModel.reminderStartDate,
-                                               reminderRecurrenceRule: reminderViewModel.reminderRecurrenceRule,
-                                               reminderMessage: reminderViewModel.reminderMessage)
-    }
     
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
@@ -119,9 +113,7 @@ class CreditEditViewModel {
         self.gotAt = credit.gotAt
         self.period = credit.period
         self.expenseCategoryId = credit.expenseCategoryId
-        self.reminderViewModel = ReminderViewModel(reminderStartDate: credit.reminderStartDate,
-                                                   reminderRecurrenceRule: credit.reminderRecurrenceRule,
-                                                   reminderMessage: credit.reminderMessage)
+        self.reminderViewModel = ReminderViewModel(reminder: credit.reminder)
     }
     
     func loadData() -> Promise<Void> {
@@ -189,7 +181,7 @@ extension CreditEditViewModel {
         return creationForm().validate() == nil
     }
     
-    private func creationForm() -> CreditCreationForm {
+    private func creationForm() -> CreditCreationForm {        
         return CreditCreationForm(userId: accountCoordinator.currentSession?.userId,
                                   creditTypeId: selectedCreditType?.id,
                                   name: name,
@@ -200,7 +192,7 @@ extension CreditEditViewModel {
                                   monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
                                   gotAt: gotAt,
                                   period: period,
-                                  expenseCategoryAttributes: expenseCategoryAttributes)
+                                  reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }
 
@@ -214,7 +206,7 @@ extension CreditEditViewModel {
         return updatingForm().validate() == nil
     }
     
-    private func updatingForm() -> CreditUpdatingForm {
+    private func updatingForm() -> CreditUpdatingForm {        
         return CreditUpdatingForm(id: credit?.id,
                                   name: name,
                                   iconURL: selectedIconURL,
@@ -222,6 +214,6 @@ extension CreditEditViewModel {
                                   monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
                                   gotAt: gotAt,
                                   period: period,
-                                  expenseCategoryAttributes: expenseCategoryAttributes)
+                                  reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }

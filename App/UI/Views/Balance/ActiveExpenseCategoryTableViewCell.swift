@@ -10,9 +10,5 @@ import UIKit
 
 class ActiveExpenseCategoryTableViewCell : ExpenseCategoryTableViewCell {
     
-    override func updateUI() {
-        super.updateUI()
-        guard let viewModel = viewModel else { return }
-        spentLabel.text = viewModel.includedInBalanceExpensesAmount
-    }
+    
 }
