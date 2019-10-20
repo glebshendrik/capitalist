@@ -1090,7 +1090,7 @@
                                     <constraint firstItem="Wut-WL-l5C" firstAttribute="top" secondItem="uP6-n3-Wut" secondAttribute="bottom" id="yO3-sd-Wfo"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DLF-Af-F6p" userLabel="expense categories container">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DLF-Af-F6p" userLabel="baskets entities container">
                                 <rect key="frame" x="0.0" y="235" width="375" height="348"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUj-IS-hQl" userLabel="joy categories">
@@ -1243,7 +1243,7 @@
                                             <constraint firstItem="2Pi-lo-2Mc" firstAttribute="centerX" secondItem="uUj-IS-hQl" secondAttribute="centerX" id="on5-B3-dcU"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Es8-MZ-PJD" userLabel="risk categories">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Es8-MZ-PJD" userLabel="risk actives">
                                         <rect key="frame" x="375" y="0.0" width="375" height="348"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wWY-WA-ket">
@@ -1393,7 +1393,7 @@
                                             <constraint firstItem="wWY-WA-ket" firstAttribute="top" secondItem="Es8-MZ-PJD" secondAttribute="top" id="fI0-hg-7te"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yh5-Gh-kqK" userLabel="safe categories">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yh5-Gh-kqK" userLabel="safe actives">
                                         <rect key="frame" x="750" y="0.0" width="375" height="348"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cbf-3I-MTe">
@@ -1643,6 +1643,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="editDoneButton" destination="ioQ-2O-oOH" id="s4S-Cb-MpS"/>
                         <outlet property="editDoneButtonHeightConstraint" destination="v7I-LI-owo" id="J2R-Ao-DPa"/>
@@ -1778,6 +1779,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fO5-Yn-0Az"/>
+        <segue reference="KwI-3J-1v6"/>
     </inferredMetricsTieBreakers>
 </document>

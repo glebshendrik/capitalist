@@ -47,11 +47,11 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     }
     
     var amountRounded: String {
-        return amount(shouldRound: true)
+        return cost(shouldRound: true)
     }
     
     var amount: String {
-        return amount(shouldRound: false)
+        return cost(shouldRound: false)
     }
     
     var costRounded: String {
@@ -62,6 +62,50 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return amount
     }
     
+    var investedRounded: String {
+        return invested(shouldRound: true)
+    }
+    
+    var invested: String {
+        return invested(shouldRound: true)
+    }
+    
+    var spentRounded: String {
+        return spent(shouldRound: true)
+    }
+    
+    var spent: String {
+        return spent(shouldRound: true)
+    }
+    
+    var boughtRounded: String {
+        return bought(shouldRound: true)
+    }
+    
+    var bought: String {
+        return bought(shouldRound: true)
+    }
+    
+    var planned: String {
+        return money(cents: active.monthlyPaymentCents, shouldRound: false)
+    }
+    
+    var areExpensesPlanned: Bool {
+        guard let monthlyPaymentCents = active.monthlyPaymentCents else { return false }
+        return monthlyPaymentCents > 0
+    }
+    
+    var isMonthlyPaymentPlanCompleted: Bool {
+        return spendingProgress == 1.0
+    }
+    
+    var spendingProgress: Double {
+        guard   areExpensesPlanned,
+                let monthlyPaymentCents = active.monthlyPaymentCents else { return 0 }
+        let progress = Double(active.investedCents) / Double(monthlyPaymentCents)
+        return progress > 1.0 ? 1.0 : progress
+    }
+        
     var isDeleted: Bool {
         return active.deletedAt != nil
     }
@@ -83,7 +127,23 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return false
     }
     
-    private func amount(shouldRound: Bool) -> String {
-        return active.costCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
+    private func cost(shouldRound: Bool) -> String {
+        return money(cents: active.costCents, shouldRound: shouldRound)
+    }
+    
+    private func invested(shouldRound: Bool) -> String {
+        return money(cents: active.investedCents, shouldRound: shouldRound)
+    }
+    
+    private func bought(shouldRound: Bool) -> String {
+        return money(cents: active.boughtCents, shouldRound: shouldRound)
+    }
+    
+    private func spent(shouldRound: Bool) -> String {
+        return money(cents: active.spentCents, shouldRound: shouldRound)
+    }
+    
+    private func money(cents: Int?, shouldRound: Bool) -> String {
+        return cents?.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }
 }

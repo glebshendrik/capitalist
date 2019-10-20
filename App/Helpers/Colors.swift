@@ -41,7 +41,9 @@ enum ColorAsset : String {
     
     case joy6EEC99 = "joy 6EEC99"
     case riskC765F0 = "risk C765F0"
+    case riskF2D6FE = "risk F2D6FE"
     case safe4828D1 = "safe 4828D1"
+    case safeC2C9E2 = "safe C2C9E2"
 }
 
 extension UIColor {
