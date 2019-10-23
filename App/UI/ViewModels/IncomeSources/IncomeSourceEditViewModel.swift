@@ -21,6 +21,7 @@ class IncomeSourceEditViewModel {
     
     var name: String? = nil
     var selectedCurrency: Currency? = nil
+    var monthlyPlanned: String?
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
     // Computed
@@ -51,6 +52,10 @@ class IncomeSourceEditViewModel {
         return isNew
     }
     
+    var canChangeMonthlyPlanned: Bool {
+        return isNew || incomeSource?.activeId == nil
+    }
+    
     // Visibility
     
     var removeButtonHidden: Bool {        
@@ -77,6 +82,7 @@ class IncomeSourceEditViewModel {
         reminderViewModel = ReminderViewModel(reminder: incomeSource.reminder)
         selectedCurrency = incomeSource.currency
         name = incomeSource.name
+        monthlyPlanned = incomeSource.monthlyPlannedCents?.moneyDecimalString(with: incomeSource.currency)
     }
     
     func isFormValid() -> Bool {
@@ -113,6 +119,7 @@ extension IncomeSourceEditViewModel {
         return IncomeSourceCreationForm( userId: accountCoordinator.currentSession?.userId,
                                          name: name,
                                          currency: selectedCurrencyCode,
+                                         monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
                                          reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }
@@ -130,6 +137,7 @@ extension IncomeSourceEditViewModel {
     private func updatingForm() -> IncomeSourceUpdatingForm {
         return IncomeSourceUpdatingForm(id: incomeSource?.id,
                                         name: name,
+                                        monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
                                         reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }

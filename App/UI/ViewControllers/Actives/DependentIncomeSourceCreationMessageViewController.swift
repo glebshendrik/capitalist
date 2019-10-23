@@ -42,14 +42,7 @@ class DependentIncomeSourceCreationMessageViewController : UIViewController {
     }
     
     private func title() -> String? {
-        switch basketType {
-        case .risk:
-            return "Категория трат «\(name)» относится к корзине «Риски», она может приносить прибыль"
-        case .safe:
-            return "Категория трат «\(name)» относится к корзине «Безопасность», она может приносить прибыль"
-        default:
-            return nil
-        }
+        return "Актив «\(name)» может приносить прибыль"
     }
     
     private func basketImage() -> UIImage? {

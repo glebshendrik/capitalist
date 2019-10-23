@@ -14,14 +14,15 @@ class MainViewModel {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let basketsCoordinator: BasketsCoordinatorProtocol
     private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
+    private let activesCoordinator: ActivesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
     
     private var incomeSourceViewModels: [IncomeSourceViewModel] = []
     private var expenseSourceViewModels: [ExpenseSourceViewModel] = []
     public private(set) var basketsViewModel: BasketsViewModel = BasketsViewModel(baskets: [], basketTypeToSelect: .joy)
     private var joyExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
-    private var riskExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
-    private var safeExpenseCategoryViewModels: [ExpenseCategoryViewModel] = []
+    private var riskActiveViewModels: [ActiveViewModel] = []
+    private var safeActiveViewModels: [ActiveViewModel] = []
     
     private var editing: Bool = false
     
@@ -39,20 +40,20 @@ class MainViewModel {
     
     var numberOfJoyExpenseCategories: Int {
         return editing
-            ? numberOfExpenseCategories(with: .joy)
-            : numberOfExpenseCategories(with: .joy) + 1
+            ? numberOfExpenseCategories()
+            : numberOfExpenseCategories() + 1
     }
     
-    var numberOfRiskExpenseCategories: Int {
+    var numberOfRiskActives: Int {
         return editing
-            ? numberOfExpenseCategories(with: .risk)
-            : numberOfExpenseCategories(with: .risk) + 1
+            ? numberOfActives(with: .risk)
+            : numberOfActives(with: .risk) + 1
     }
     
-    var numberOfSafeExpenseCategories: Int {
+    var numberOfSafeActives: Int {
         return editing
-            ? numberOfExpenseCategories(with: .safe)
-            : numberOfExpenseCategories(with: .safe) + 1
+            ? numberOfActives(with: .safe)
+            : numberOfActives(with: .safe) + 1
     }
     
     var balance: String = ""
@@ -63,11 +64,13 @@ class MainViewModel {
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          basketsCoordinator: BasketsCoordinatorProtocol,
          expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
+         activesCoordinator: ActivesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.basketsCoordinator = basketsCoordinator
         self.expenseCategoriesCoordinator = expenseCategoriesCoordinator
+        self.activesCoordinator = activesCoordinator
         self.accountCoordinator = accountCoordinator
     }
     
@@ -95,23 +98,29 @@ class MainViewModel {
                 }.asVoid()
     }
     
-    func loadExpenseCategories(by basketType: BasketType) -> Promise<Void> {
-        
+    func loadExpenseCategories() -> Promise<Void> {
         return  firstly {
-                    expenseCategoriesCoordinator.index(for: basketType)
+                    expenseCategoriesCoordinator.index(for: .joy)
                 }.get { expenseCategories in
+                    self.joyExpenseCategoryViewModels = expenseCategories.map { ExpenseCategoryViewModel(expenseCategory: $0) }
+                }.asVoid()
+    }
+    
+    func loadActives(by basketType: BasketType) -> Promise<Void> {
+        return  firstly {
+                    activesCoordinator.indexActives(for: basketType)
+                }.get { actives in
                     
-                    let expenseCategoryViewModels = expenseCategories.map { ExpenseCategoryViewModel(expenseCategory: $0)}
+                    let activeViewModels = actives.map { ActiveViewModel(active: $0)}
                     
                     switch basketType {
-                    case .joy:
-                        self.joyExpenseCategoryViewModels = expenseCategoryViewModels
                     case .risk:
-                        self.riskExpenseCategoryViewModels = expenseCategoryViewModels
+                        self.riskActiveViewModels = activeViewModels
                     case .safe:
-                        self.safeExpenseCategoryViewModels = expenseCategoryViewModels
+                        self.safeActiveViewModels = activeViewModels
+                    default:
+                        return
                     }
-
                 }.asVoid()
     }
     
@@ -142,12 +151,20 @@ class MainViewModel {
         return expenseSourceViewModels.item(at: indexPath.row)
     }
     
-    func expenseCategoryViewModel(at indexPath: IndexPath, basketType: BasketType) -> ExpenseCategoryViewModel? {
-        return expenseCategoryViewModels(by: basketType).item(at: indexPath.row)
+    func expenseCategoryViewModel(at indexPath: IndexPath) -> ExpenseCategoryViewModel? {
+        return expenseCategoryViewModels().item(at: indexPath.row)
     }
     
-    func isAddCategoryItem(indexPath: IndexPath, basketType: BasketType) -> Bool {
-        return indexPath.row == numberOfExpenseCategories(with: basketType)
+    func activeViewModel(at indexPath: IndexPath, basketType: BasketType) -> ActiveViewModel? {
+        return activeViewModels(by: basketType).item(at: indexPath.row)
+    }
+    
+    func isAddCategoryItem(indexPath: IndexPath) -> Bool {
+        return indexPath.row == numberOfExpenseCategories()
+    }
+    
+    func isAddActiveItem(indexPath: IndexPath, basketType: BasketType) -> Bool {
+        return indexPath.row == numberOfActives(with: basketType)
     }
     
     func set(editing: Bool) {
@@ -186,43 +203,56 @@ class MainViewModel {
         return move(expenseCategory: movingExpenseCategory.expenseCategory, to: destinationIndexPath.item)
     }
     
-    func moveRiskExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Promise<Void> {
-        
-        let movingExpenseCategory = riskExpenseCategoryViewModels.remove(at: sourceIndexPath.item)
-        riskExpenseCategoryViewModels.insert(movingExpenseCategory, at: destinationIndexPath.item)
-        
-        return move(expenseCategory: movingExpenseCategory.expenseCategory, to: destinationIndexPath.item)
-    }
-    
-    func moveSafeExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Promise<Void> {
-        
-        let movingExpenseCategory = safeExpenseCategoryViewModels.remove(at: sourceIndexPath.item)
-        safeExpenseCategoryViewModels.insert(movingExpenseCategory, at: destinationIndexPath.item)
-        
-        return move(expenseCategory: movingExpenseCategory.expenseCategory, to: destinationIndexPath.item)
-    }
-    
     func move(expenseCategory: ExpenseCategory, to position: Int) -> Promise<Void> {
         let updatePositionForm = ExpenseCategoryPositionUpdatingForm(id: expenseCategory.id,
                                                                      position: position)
         return  firstly {
                     expenseCategoriesCoordinator.updatePosition(with: updatePositionForm)
                 }.then {
-                    self.loadExpenseCategories(by: expenseCategory.basketType)
+                    self.loadExpenseCategories()
                 }
     }
     
-    func moveExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, basketType: BasketType) -> Promise<Void> {
+    
+    func moveActive(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, basketType: BasketType) -> Promise<Void> {
         
         switch basketType {
         case .joy:
-            return moveJoyExpenseCategory(from: sourceIndexPath, to: destinationIndexPath)
+            return Promise.value(())
         case .risk:
-            return moveRiskExpenseCategory(from: sourceIndexPath, to: destinationIndexPath)
+            return moveRiskActive(from: sourceIndexPath, to: destinationIndexPath)
         case .safe:
-            return moveSafeExpenseCategory(from: sourceIndexPath, to: destinationIndexPath)
+            return moveSafeActive(from: sourceIndexPath, to: destinationIndexPath)
         }
     }
+    
+    func moveRiskActive(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Promise<Void> {
+        
+        let movingActive = riskActiveViewModels.remove(at: sourceIndexPath.item)
+        riskActiveViewModels.insert(movingActive, at: destinationIndexPath.item)
+        
+        return move(active: movingActive.active, to: destinationIndexPath.item)
+    }
+    
+    func moveSafeActive(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Promise<Void> {
+        
+        let movingActive = safeActiveViewModels.remove(at: sourceIndexPath.item)
+        safeActiveViewModels.insert(movingActive, at: destinationIndexPath.item)
+        
+        return move(active: movingActive.active, to: destinationIndexPath.item)
+    }
+    
+    func move(active: Active, to position: Int) -> Promise<Void> {
+        let updatePositionForm = ActivePositionUpdatingForm(id: active.id,
+                                                                     position: position)
+        return  firstly {
+                    activesCoordinator.updatePosition(with: updatePositionForm)
+                }.then {
+                    self.loadActives(by: active.basketType)
+                }
+    }
+    
+    
     
     func removeIncomeSource(by id: Int, deleteTransactions: Bool) -> Promise<Void> {
         return incomeSourcesCoordinator.destroy(by: id, deleteTransactions: deleteTransactions)
@@ -232,23 +262,35 @@ class MainViewModel {
         return expenseSourcesCoordinator.destroy(by: id, deleteTransactions: deleteTransactions)
     }
     
-    func removeExpenseCategory(by id: Int, basketType: BasketType, deleteTransactions: Bool) -> Promise<Void> {
+    func removeExpenseCategory(by id: Int, deleteTransactions: Bool) -> Promise<Void> {
         return expenseCategoriesCoordinator.destroy(by: id, deleteTransactions: deleteTransactions)
     }
     
-    private func numberOfExpenseCategories(with basketType: BasketType) -> Int {
-        
-        return expenseCategoryViewModels(by: basketType).count
+    func removeActive(by id: Int, deleteTransactions: Bool) -> Promise<Void> {
+        return activesCoordinator.destroyActive(by: id, deleteTransactions: deleteTransactions)
     }
     
-    private func expenseCategoryViewModels(by basketType: BasketType) -> [ExpenseCategoryViewModel] {
+    private func numberOfExpenseCategories() -> Int {
+        return joyExpenseCategoryViewModels.count
+    }
+    
+    private func expenseCategoryViewModels() -> [ExpenseCategoryViewModel] {
+        return joyExpenseCategoryViewModels
+    }
+    
+    private func numberOfActives(with basketType: BasketType) -> Int {
+        
+        return activeViewModels(by: basketType).count
+    }
+    
+    private func activeViewModels(by basketType: BasketType) -> [ActiveViewModel] {
         switch basketType {
         case .joy:
-            return joyExpenseCategoryViewModels
+            return []
         case .risk:
-            return riskExpenseCategoryViewModels
+            return riskActiveViewModels
         case .safe:
-            return safeExpenseCategoryViewModels
+            return safeActiveViewModels
         }
     }
 }

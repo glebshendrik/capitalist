@@ -137,7 +137,7 @@ class BasketItemDescription : BasketItemView {
     func setupSubAmountConstraints() {
         subAmountLabel.snp.makeConstraints { make in
             make.top.equalTo(amountLabel.snp.bottom).offset(0)
-            make.bottom.greaterThanOrEqualToSuperview().offset(-7)
+            make.bottom.greaterThanOrEqualToSuperview().offset(0)
             make.left.right.equalToSuperview()
         }
         subAmountLabel.setContentHuggingPriority(.defaultLow, for: .vertical)

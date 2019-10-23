@@ -13,7 +13,7 @@ struct ActiveType : Decodable {
     let name: String
     let localizedKey: String
     let localizedName: String
-    let annualPercentRequired: Bool
+    let defaultPlannedIncomeType: ActiveIncomeType?
     let rowOrder: Int
     let deletedAt: Date?
     
@@ -22,7 +22,7 @@ struct ActiveType : Decodable {
         case name
         case localizedKey = "localized_key"
         case localizedName = "localized_name"
-        case annualPercentRequired = "annual_percent_required"
+        case defaultPlannedIncomeType = "default_planned_income_type"
         case rowOrder = "row_order"
         case deletedAt = "deleted_at"
     }

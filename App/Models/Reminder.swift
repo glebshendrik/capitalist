@@ -10,7 +10,7 @@ import Foundation
 
 struct Reminder : Decodable {
     let id: Int
-    let startDate: Date
+    let startDate: Date?
     let recurrenceRule: String?
     let message: String?
             

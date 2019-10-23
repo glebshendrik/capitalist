@@ -14,10 +14,11 @@ class BasketItemProgress : BasketItemView {
     lazy var progressView: UIView = { return UIView() }()
     lazy var limitLabel: UILabel = { return UILabel() }()
     
+    private var progressWidthConstraint: Constraint? = nil
+    
     var backgroundCornerRadius: CGFloat = 0.0 {
         didSet {
             backgroundImageView.cornerRadius = backgroundCornerRadius
-            progressView.cornerRadius = backgroundCornerRadius
             cornerRadius = backgroundCornerRadius
         }
     }
@@ -40,12 +41,9 @@ class BasketItemProgress : BasketItemView {
         }
     }
     
-    var progress: CGFloat = 0.0 {
+    var progressWidth: CGFloat = 0.0 {
         didSet {
-            progressView.snp.remakeConstraints { make in
-                make.left.top.bottom.equalToSuperview()
-                make.width.equalTo(self.frame.width * self.progress)
-            }
+            self.setNeedsUpdateConstraints()
         }
     }
     
@@ -87,6 +85,13 @@ class BasketItemProgress : BasketItemView {
         setupLimitLabelConstraints()
     }
     
+    override func updateConstraints() {
+        if didSetupConstraints {
+            updateProgressConstraints()
+        }
+        super.updateConstraints()
+    }
+    
     private func setupBackground() {
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.image = backgroundImage
@@ -119,7 +124,13 @@ class BasketItemProgress : BasketItemView {
     func setupProgressConstraints() {
         progressView.snp.makeConstraints { make in
             make.left.top.bottom.equalToSuperview()
-            make.width.equalTo(self.frame.width * self.progress)
+            make.width.equalTo(0)
+        }
+    }
+    
+    func updateProgressConstraints() {        
+        progressView.snp.updateConstraints { make in
+            make.width.equalTo(progressWidth)
         }
     }
     

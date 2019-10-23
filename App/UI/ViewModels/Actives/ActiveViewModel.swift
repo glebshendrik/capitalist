@@ -23,6 +23,18 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return .active
     }
     
+    var basketType: BasketType {
+        return active.basketType
+    }
+    
+    var activeType: ActiveType {
+        return active.activeType
+    }
+    
+    var activeTypeName: String {
+        return activeType.localizedName
+    }
+    
     var name: String {
         return active.name
     }
@@ -32,14 +44,19 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     }
     
     var iconCategory: IconCategory? {
-        switch active.basketType {
-        case .joy:
-            return IconCategory.expenseCategoryJoy
-        case .safe:
-            return IconCategory.expenseCategorySafe
-        case .risk:
-            return IconCategory.expenseCategoryRisk
-        }
+        return basketType.iconCategory
+    }
+    
+    var defaultIconName: String {
+        return basketType.iconCategory.defaultIconName
+    }
+    
+    var iconBackgroundImageName: String {
+        return basketType.defaultIconBackground
+    }
+    
+    var progressBackgroundImageName: String {
+        return basketType.defaultProgressBackground
     }
     
     var currency: Currency {

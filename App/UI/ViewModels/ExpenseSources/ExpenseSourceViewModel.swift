@@ -124,6 +124,7 @@ extension ExpenseSourceViewModel : TransactionSource, TransactionDestination {
                     !(sourceExpenseSourceViewModel.isDebt && self.isDebt)
         }
         
-        return (transactionSource is IncomeSourceViewModel) && !self.isDebt
+        guard !self.isDebt else { return false }
+        return (transactionSource is IncomeSourceViewModel) || (transactionSource is ActiveViewModel)
     }
 }

@@ -40,6 +40,7 @@ enum ColorAsset : String {
     case green68E79B = "green 68E79B"
     
     case joy6EEC99 = "joy 6EEC99"
+    case joyD7F6E6 = "joy D7F6E6"
     case riskC765F0 = "risk C765F0"
     case riskF2D6FE = "risk F2D6FE"
     case safe4828D1 = "safe 4828D1"

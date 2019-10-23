@@ -295,4 +295,19 @@ class UIFactory : UIFactoryProtocol {
         }        
         return expenseCategoryEditNavigationController
     }
+    
+    func activeEditViewController(delegate: ActiveEditViewControllerDelegate,
+                                  active: Active?,
+                                  basketType: BasketType) -> UINavigationController? {
+        let activeEditNavigationController = router.viewController(.ActiveEditNavigationController) as? UINavigationController
+        let activeEditViewController = activeEditNavigationController?.topViewController as? ActiveEditViewController
+            
+        activeEditViewController?.set(delegate: delegate)
+        activeEditViewController?.set(basketType: basketType)
+        
+        if let active = active {
+            activeEditViewController?.set(active: active)
+        }
+        return activeEditNavigationController
+    }
 }

@@ -229,7 +229,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="ExpenseCategoryEditTableController" id="30m-bg-INw" customClass="ExpenseCategoryEditTableController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="28" id="iJB-Wl-z8x">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="dark 2A314B"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -263,7 +263,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="xcP-7Q-N48">
-                                                    <rect key="frame" x="160" y="2.5" width="55" height="31"/>
+                                                    <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -732,6 +732,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1gI-L1-F6i"/>
+        <segue reference="hif-TF-5lN"/>
     </inferredMetricsTieBreakers>
 </document>

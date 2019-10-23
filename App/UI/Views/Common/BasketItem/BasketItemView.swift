@@ -9,7 +9,7 @@
 import UIKit
 
 class BasketItemView : UIView {
-    private var didSetupConstraints = false
+    var didSetupConstraints = false
     
     convenience init() {
         self.init(frame: CGRect.zero)

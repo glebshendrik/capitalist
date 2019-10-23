@@ -21,6 +21,10 @@ extension MainViewController {
             return viewModel.incomeSourceViewModel(at: indexPath)
         case expenseSourcesCollectionView:
             return viewModel.expenseSourceViewModel(at: indexPath)
+        case riskActivesCollectionView:
+            return viewModel.activeViewModel(at: indexPath, basketType: .risk)
+        case safeActivesCollectionView:
+            return viewModel.activeViewModel(at: indexPath, basketType: .safe)
         default:
             return nil
         }
@@ -31,11 +35,11 @@ extension MainViewController {
         case expenseSourcesCollectionView:
             return viewModel.expenseSourceViewModel(at: indexPath)
         case joyExpenseCategoriesCollectionView:
-            return viewModel.expenseCategoryViewModel(at: indexPath, basketType: .joy)
-        case riskExpenseCategoriesCollectionView:
-            return viewModel.expenseCategoryViewModel(at: indexPath, basketType: .risk)
-        case safeExpenseCategoriesCollectionView:
-            return viewModel.expenseCategoryViewModel(at: indexPath, basketType: .safe)
+            return viewModel.expenseCategoryViewModel(at: indexPath)
+        case riskActivesCollectionView:
+            return viewModel.activeViewModel(at: indexPath, basketType: .risk)
+        case safeActivesCollectionView:
+            return viewModel.activeViewModel(at: indexPath, basketType: .safe)
         default:
             return nil
         }
@@ -175,7 +179,9 @@ extension MainViewController : TransactionControllerDelegate {
         case .began:
             
             let collectionViews: [UICollectionView] = [incomeSourcesCollectionView,
-                                                       expenseSourcesCollectionView]
+                                                       expenseSourcesCollectionView,
+                                                       riskActivesCollectionView,
+                                                       safeActivesCollectionView]
             
             let intersections = detectCollectionViewIntersection(at: locationInView,
                                                                  in: self.view,
@@ -215,8 +221,8 @@ extension MainViewController : TransactionControllerDelegate {
             
             let collectionViews: [UICollectionView] = [expenseSourcesCollectionView,
                                                        joyExpenseCategoriesCollectionView,
-                                                       riskExpenseCategoriesCollectionView,
-                                                       safeExpenseCategoriesCollectionView]
+                                                       riskActivesCollectionView,
+                                                       safeActivesCollectionView]
             
             let intersections = detectCollectionViewIntersection(at: locationInView,
                                                                  in: self.view,
@@ -284,8 +290,8 @@ extension MainViewController : TransactionControllerDelegate {
         let allCollectionViews: [UICollectionView] = [incomeSourcesCollectionView,
                                                       expenseSourcesCollectionView,
                                                       joyExpenseCategoriesCollectionView,
-                                                      riskExpenseCategoriesCollectionView,
-                                                      safeExpenseCategoriesCollectionView]
+                                                      riskActivesCollectionView,
+                                                      safeActivesCollectionView]
         
         
         let pool = collectionView == nil ? allCollectionViews : [collectionView!]

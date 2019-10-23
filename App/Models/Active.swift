@@ -7,6 +7,20 @@
 //
 import Foundation
 
+enum ActiveIncomeType : String, Codable {
+    case annualPercents = "annual_percents"
+    case monthlyIncome = "monthly_income"
+    
+    var title: String {
+        switch self {
+        case .annualPercents:
+            return "Процент годовых"
+        case .monthlyIncome:
+            return "Доход в месяц"
+        }
+    }
+}
+
 struct Active : Decodable {
     let id: Int
     let basketId: Int
@@ -21,6 +35,9 @@ struct Active : Decodable {
     let boughtCents: Int
     let spentCents: Int
     let annualIncomePercent: Int?
+    let monthlyPlannedIncomeCents: Int?
+    let plannedIncomeType: ActiveIncomeType?
+    let isIncomePlanned: Bool
     let rowOrder: Int
     let deletedAt: Date?
     let reminder: Reminder?
@@ -39,6 +56,9 @@ struct Active : Decodable {
         case boughtCents = "bought_at_period_cents"
         case spentCents = "spent_at_period_cents"
         case annualIncomePercent = "annual_income_percent"
+        case monthlyPlannedIncomeCents = "monthly_planned_income_cents"
+        case plannedIncomeType = "planned_income_type"
+        case isIncomePlanned = "is_income_planned"
         case rowOrder = "row_order"
         case deletedAt = "deleted_at"
         case reminder
@@ -46,8 +66,7 @@ struct Active : Decodable {
 }
 
 struct ActiveCreationForm : Encodable, Validatable {
-    var userId: Int?
-    let activeType: ActiveType?
+    var basketId: Int?
     let activeTypeId: Int?
     let name: String?
     let iconURL: URL?
@@ -55,6 +74,9 @@ struct ActiveCreationForm : Encodable, Validatable {
     let costCents: Int?
     let monthlyPaymentCents: Int?
     let annualIncomePercent: Int?
+    let monthlyPlannedIncomeCents: Int?
+    let plannedIncomeType: ActiveIncomeType?
+    let isIncomePlanned: Bool
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -65,14 +87,17 @@ struct ActiveCreationForm : Encodable, Validatable {
         case costCents = "cost_cents"
         case monthlyPaymentCents = "monthly_payment_cents"
         case annualIncomePercent = "annual_income_percent"
+        case monthlyPlannedIncomeCents = "monthly_planned_income_cents"
+        case plannedIncomeType = "planned_income_type"
+        case isIncomePlanned = "is_income_planned"
         case reminderAttributes = "reminder_attributes"
     }
     
     func validate() -> [String : String]? {
         var errors = [String : String]()
         
-        if !Validator.isValid(present: userId) {
-            errors["user_id"] = "Ошибка сохранения"
+        if !Validator.isValid(present: basketId) {
+            errors["basket_id"] = "Ошибка сохранения"
         }
         
         if !Validator.isValid(present: activeTypeId) {
@@ -90,25 +115,21 @@ struct ActiveCreationForm : Encodable, Validatable {
         if !Validator.isValid(positiveMoney: costCents) {
             errors[CodingKeys.costCents.rawValue] = "Укажите стоимость"
         }
-                        
-        if let activeType = activeType, activeType.annualPercentRequired {
-            if !Validator.isValid(present: annualIncomePercent) {
-                errors[CodingKeys.annualIncomePercent.rawValue] = "Укажите процент годовых"
-            }
-        }
-        
+                                
         return errors
     }
 }
 
 struct ActiveUpdatingForm : Encodable, Validatable {
     var id: Int?
-    let activeType: ActiveType?
     let name: String?
     let iconURL: URL?
     let costCents: Int?
     let monthlyPaymentCents: Int?
     let annualIncomePercent: Int?
+    let monthlyPlannedIncomeCents: Int?
+    let plannedIncomeType: ActiveIncomeType?
+    let isIncomePlanned: Bool
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -117,6 +138,9 @@ struct ActiveUpdatingForm : Encodable, Validatable {
         case costCents = "cost_cents"
         case monthlyPaymentCents = "monthly_payment_cents"
         case annualIncomePercent = "annual_income_percent"
+        case monthlyPlannedIncomeCents = "monthly_planned_income_cents"
+        case plannedIncomeType = "planned_income_type"
+        case isIncomePlanned = "is_income_planned"
         case reminderAttributes = "reminder_attributes"
     }
     
@@ -134,13 +158,7 @@ struct ActiveUpdatingForm : Encodable, Validatable {
         if !Validator.isValid(balance: costCents) {
             errors[CodingKeys.costCents.rawValue] = "Укажите стоимость"
         }
-                        
-        if let activeType = activeType, activeType.annualPercentRequired {
-            if !Validator.isValid(present: annualIncomePercent) {
-                errors[CodingKeys.annualIncomePercent.rawValue] = "Укажите процент годовых"
-            }
-        }
-        
+                                
         return errors
     }
 }

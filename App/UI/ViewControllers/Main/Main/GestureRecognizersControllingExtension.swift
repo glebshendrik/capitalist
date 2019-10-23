@@ -25,8 +25,8 @@ extension MainViewController: UIGestureRecognizerDelegate {
         let collectionViews: [UICollectionView] = [incomeSourcesCollectionView,
                                                    expenseSourcesCollectionView,
                                                    joyExpenseCategoriesCollectionView,
-                                                   riskExpenseCategoriesCollectionView,
-                                                   safeExpenseCategoriesCollectionView]
+                                                   riskActivesCollectionView,
+                                                   safeActivesCollectionView]
         
         let intersections = detectCollectionViewIntersection(at: locationInView,
                                                              in: self.view,
@@ -43,11 +43,11 @@ extension MainViewController: UIGestureRecognizerDelegate {
         case expenseSourcesCollectionView:
             return !viewModel.isAddExpenseSourceItem(indexPath: indexPath)
         case joyExpenseCategoriesCollectionView:
-            return !viewModel.isAddCategoryItem(indexPath: indexPath, basketType: .joy)
-        case riskExpenseCategoriesCollectionView:
-            return !viewModel.isAddCategoryItem(indexPath: indexPath, basketType: .risk)
-        case safeExpenseCategoriesCollectionView:
-            return !viewModel.isAddCategoryItem(indexPath: indexPath, basketType: .safe)
+            return !viewModel.isAddCategoryItem(indexPath: indexPath)
+        case riskActivesCollectionView:
+            return !viewModel.isAddActiveItem(indexPath: indexPath, basketType: .risk)
+        case safeActivesCollectionView:
+            return !viewModel.isAddActiveItem(indexPath: indexPath, basketType: .safe)
         default:
             return true
         }

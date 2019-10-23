@@ -77,8 +77,8 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
         loadBudget()
         loadBaskets()
         loadExpenseSources()
-        loadExpenseCategories(by: .risk)
-        loadExpenseCategories(by: .safe)
+        loadActives(by: .risk)
+        loadActives(by: .safe)
     }
     
     private func updateFundsMoveDependentData() {
@@ -91,7 +91,7 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
         loadBaskets()
         loadExpenseSources()
         loadExpenseCategories(by: .joy)
-        loadExpenseCategories(by: .risk)
-        loadExpenseCategories(by: .safe)
+        loadActives(by: .risk)
+        loadActives(by: .safe)
     }
 }

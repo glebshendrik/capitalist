@@ -75,5 +75,9 @@ extension ApplicationAssembly {
         container.autoregister(CreditsViewModel.self, initializer: CreditsViewModel.init)
         
         container.autoregister(CreditEditViewModel.self, initializer: CreditEditViewModel.init)
+        
+        container.autoregister(ActiveEditViewModel.self, initializer: ActiveEditViewModel.init)
+        
+        container.autoregister(ActivesViewModel.self, initializer: ActivesViewModel.init)        
     }
 }

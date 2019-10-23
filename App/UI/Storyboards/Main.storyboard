@@ -958,8 +958,8 @@
                                                         <color key="textColor" name="text FFFFFF"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Удовольствие" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8E3-p9-BAq">
-                                                        <rect key="frame" x="17" y="34" width="80" height="14"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Расходы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8E3-p9-BAq">
+                                                        <rect key="frame" x="32" y="34" width="50" height="14"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                         <color key="textColor" name="text FFFFFF"/>
                                                         <nil key="highlightedColor"/>
@@ -992,8 +992,8 @@
                                                         <color key="textColor" name="text 9EAACC"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Риск" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbc-lU-LFm">
-                                                        <rect key="frame" x="43" y="33" width="28" height="14"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Инвестиции" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbc-lU-LFm">
+                                                        <rect key="frame" x="23" y="33" width="68" height="14"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                         <color key="textColor" name="text 9EAACC"/>
                                                         <nil key="highlightedColor"/>
@@ -1026,8 +1026,8 @@
                                                         <color key="textColor" name="text 9EAACC"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Безопасность" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1C-57-t2f">
-                                                        <rect key="frame" x="17.5" y="33" width="79.5" height="14"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сбережения" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1C-57-t2f">
+                                                        <rect key="frame" x="21.5" y="33" width="71.5" height="14"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                         <color key="textColor" name="text 9EAACC"/>
                                                         <nil key="highlightedColor"/>
@@ -1263,7 +1263,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </collectionViewLayout>
                                                 <cells>
-                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseCategoryCollectionViewCell" id="HIx-fB-aL6" customClass="ExpenseCategoryCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActiveCollectionViewCell" id="HIx-fB-aL6" customClass="ActiveCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1284,7 +1284,7 @@
                                                         </constraints>
                                                         <size key="customSize" width="68" height="105"/>
                                                     </collectionViewCell>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddExpenseCategoryCollectionViewCell" id="J9F-Q0-t7B">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddActiveCollectionViewCell" id="J9F-Q0-t7B">
                                                         <rect key="frame" x="102.5" y="0.0" width="68" height="105"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1328,7 +1328,7 @@
                                                                                     <real key="value" value="8"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                    <real key="value" value="24"/>
+                                                                                    <real key="value" value="4"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </view>
@@ -1413,7 +1413,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </collectionViewLayout>
                                                 <cells>
-                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseCategoryCollectionViewCell" id="lnQ-xQ-wgq" customClass="ExpenseCategoryCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActiveCollectionViewCell" id="lnQ-xQ-wgq" customClass="ActiveCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1434,7 +1434,7 @@
                                                         </constraints>
                                                         <size key="customSize" width="68" height="105"/>
                                                     </collectionViewCell>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddExpenseCategoryCollectionViewCell" id="QPb-hw-JpO">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddActiveCollectionViewCell" id="QPb-hw-JpO">
                                                         <rect key="frame" x="102.5" y="0.0" width="68" height="105"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1478,7 +1478,7 @@
                                                                                     <real key="value" value="8"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                    <real key="value" value="24"/>
+                                                                                    <real key="value" value="4"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </view>
@@ -1661,22 +1661,22 @@
                         <outlet property="joyExpenseCategoriesContainerLeftConstraint" destination="UCf-Kj-kN1" id="wmc-Qa-j0k"/>
                         <outlet property="joyExpenseCategoriesLoader" destination="Fxg-qF-Lvh" id="8dP-xw-hrZ"/>
                         <outlet property="joyExpenseCategoriesPageControl" destination="2Pi-lo-2Mc" id="VAv-O3-DS6"/>
+                        <outlet property="riskActivesActivityIndicator" destination="V19-Lc-7wm" id="drq-Ca-SBk"/>
+                        <outlet property="riskActivesCollectionView" destination="wWY-WA-ket" id="hFc-7v-sie"/>
+                        <outlet property="riskActivesContainerLeftConstraint" destination="nFe-Sp-Wcc" id="nAJ-Hh-a4A"/>
+                        <outlet property="riskActivesLoader" destination="Nid-av-JHO" id="HOW-y0-gVb"/>
+                        <outlet property="riskActivesPageControl" destination="Lia-A0-o7E" id="BuK-HA-22J"/>
                         <outlet property="riskBasketProgressConstraint" destination="jRR-te-vpH" id="4Vu-Js-zTu"/>
                         <outlet property="riskBasketSpentLabel" destination="Lhk-En-c2M" id="K16-Ll-tT6"/>
                         <outlet property="riskBasketTitleLabel" destination="cbc-lU-LFm" id="MPR-vx-g3C"/>
-                        <outlet property="riskExpenseCategoriesActivityIndicator" destination="V19-Lc-7wm" id="drq-Ca-SBk"/>
-                        <outlet property="riskExpenseCategoriesCollectionView" destination="wWY-WA-ket" id="hFc-7v-sie"/>
-                        <outlet property="riskExpenseCategoriesContainerLeftConstraint" destination="nFe-Sp-Wcc" id="nAJ-Hh-a4A"/>
-                        <outlet property="riskExpenseCategoriesLoader" destination="Nid-av-JHO" id="HOW-y0-gVb"/>
-                        <outlet property="riskExpenseCategoriesPageControl" destination="Lia-A0-o7E" id="BuK-HA-22J"/>
+                        <outlet property="safeActivesActivityIndicator" destination="u2Z-6i-dtI" id="e6l-ZK-H4Q"/>
+                        <outlet property="safeActivesCollectionView" destination="cbf-3I-MTe" id="Khi-mn-Xcz"/>
+                        <outlet property="safeActivesContainerLeftConstraint" destination="qod-DS-NdX" id="b23-G0-Wfb"/>
+                        <outlet property="safeActivesLoader" destination="EkC-7E-d6Q" id="JfT-bR-SZ0"/>
+                        <outlet property="safeActivesPageControl" destination="mfo-kH-MYa" id="Isk-Uo-LJw"/>
                         <outlet property="safeBasketProgressConstraint" destination="58c-GT-XYu" id="VCD-9Z-2C7"/>
                         <outlet property="safeBasketSpentLabel" destination="AeG-Ce-uxJ" id="coB-h5-Pnm"/>
                         <outlet property="safeBasketTitleLabel" destination="E1C-57-t2f" id="SvZ-XQ-6bT"/>
-                        <outlet property="safeExpenseCategoriesActivityIndicator" destination="u2Z-6i-dtI" id="e6l-ZK-H4Q"/>
-                        <outlet property="safeExpenseCategoriesCollectionView" destination="cbf-3I-MTe" id="Khi-mn-Xcz"/>
-                        <outlet property="safeExpenseCategoriesLeftConstraint" destination="qod-DS-NdX" id="b23-G0-Wfb"/>
-                        <outlet property="safeExpenseCategoriesLoader" destination="EkC-7E-d6Q" id="JfT-bR-SZ0"/>
-                        <outlet property="safeExpenseCategoriesPageControl" destination="mfo-kH-MYa" id="Isk-Uo-LJw"/>
                         <outlet property="transactionDraggingElement" destination="Gku-Sf-ydu" id="zXF-bV-pI7"/>
                     </connections>
                 </viewController>

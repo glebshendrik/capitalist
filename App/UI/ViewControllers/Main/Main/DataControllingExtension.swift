@@ -16,8 +16,8 @@ extension MainViewController {
         loadExpenseSources()
         loadBaskets()
         loadExpenseCategories(by: .joy)
-        loadExpenseCategories(by: .risk)
-        loadExpenseCategories(by: .safe)
+        loadActives(by: .risk)
+        loadActives(by: .safe)
     }
     
     private func show(errors: [String: String]) {
@@ -161,48 +161,95 @@ extension MainViewController {
 
 extension MainViewController {
     func loadExpenseCategories(by basketType: BasketType, scrollToEndWhenUpdated: Bool = false) {
-        set(expenseCategoriesActivityIndicator(by: basketType), hidden: false)
+        set(basketItemsActivityIndicator(by: basketType), hidden: false)
         firstly {
-            viewModel.loadExpenseCategories(by: basketType)
+            viewModel.loadExpenseCategories()
         }.done {
-            self.update(self.expenseCategoriesCollectionView(by: basketType),
+            self.update(self.joyExpenseCategoriesCollectionView,
                         scrollToEnd: scrollToEndWhenUpdated)
-            self.updateExpenseCategoriesPageControl(by: basketType)
+            self.updateBasketsItemsPageControl(by: basketType)
         }
         .catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки категорий трат", theme: .error)
         }.finally {
-            self.set(self.expenseCategoriesActivityIndicator(by: basketType), hidden: true)
+            self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
         }
     }
     
     func moveExpenseCategory(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, basketType: BasketType) {
         
-        set(expenseCategoriesActivityIndicator(by: basketType), hidden: false)
-        firstly {
-            viewModel.moveExpenseCategory(from: sourceIndexPath,
-                                          to: destinationIndexPath,
-                                          basketType: basketType)
+        set(basketItemsActivityIndicator(by: basketType), hidden: false)
+        firstly {            
+            viewModel.moveJoyExpenseCategory(from: sourceIndexPath,
+                                             to: destinationIndexPath)
         }.done {
-            self.update(self.expenseCategoriesCollectionView(by: basketType))
+            self.update(self.joyExpenseCategoriesCollectionView)
         }
         .catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка категорий трат", theme: .error)
         }.finally {
-            self.set(self.expenseCategoriesActivityIndicator(by: basketType), hidden: true)
+            self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
         }
     }
     
     func removeExpenseCategory(by id: Int, basketType: BasketType, deleteTransactions: Bool) {
-        set(expenseCategoriesActivityIndicator(by: basketType), hidden: false)
+        set(basketItemsActivityIndicator(by: basketType), hidden: false)
         firstly {
-            viewModel.removeExpenseCategory(by: id, basketType: basketType, deleteTransactions: deleteTransactions)
+            viewModel.removeExpenseCategory(by: id, deleteTransactions: deleteTransactions)
         }.done {
             self.didRemoveExpenseCategory(with: basketType)
         }
         .catch { _ in
-            self.set(self.expenseCategoriesActivityIndicator(by: basketType), hidden: true)
+            self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
             self.messagePresenterManager.show(navBarMessage: "Ошибка удаления категории трат", theme: .error)
+        }
+    }
+}
+
+extension MainViewController {
+    func loadActives(by basketType: BasketType, scrollToEndWhenUpdated: Bool = false) {
+        set(basketItemsActivityIndicator(by: basketType), hidden: false)
+        firstly {
+            viewModel.loadActives(by: basketType)
+        }.done {
+            self.update(self.basketItemsCollectionView(by: basketType),
+                        scrollToEnd: scrollToEndWhenUpdated)
+            self.updateBasketsItemsPageControl(by: basketType)
+        }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки активов", theme: .error)
+        }.finally {
+            self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
+        }
+    }
+    
+    func moveActive(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, basketType: BasketType) {
+        
+        set(basketItemsActivityIndicator(by: basketType), hidden: false)
+        firstly {
+            viewModel.moveActive(from: sourceIndexPath,
+                                 to: destinationIndexPath,
+                                 basketType: basketType)
+        }.done {
+            self.update(self.basketItemsCollectionView(by: basketType))
+        }
+        .catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка активов", theme: .error)
+        }.finally {
+            self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
+        }
+    }
+    
+    func removeActive(by id: Int, basketType: BasketType, deleteTransactions: Bool) {
+        set(basketItemsActivityIndicator(by: basketType), hidden: false)
+        firstly {
+            viewModel.removeActive(by: id, deleteTransactions: deleteTransactions)
+        }.done {
+            self.didRemoveExpenseCategory(with: basketType)
+        }
+        .catch { _ in
+            self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
+            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления актива", theme: .error)
         }
     }
 }

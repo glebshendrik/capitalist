@@ -30,6 +30,6 @@ class ExpenseCategoryTableViewCell : UITableViewCell {
                                placeholderName: viewModel.expenseCategory.basketType.iconCategory.defaultIconName,
                                renderingMode: .alwaysTemplate)
         iconImageView.tintColor = UIColor.by(.textFFFFFF)
-        backgroundImage.image = UIImage.init(named: viewModel.expenseCategory.basketType.defaultBackgroundImageName)
+        backgroundImage.image = UIImage.init(named: viewModel.expenseCategory.basketType.defaultIconBackground)
     }
 }

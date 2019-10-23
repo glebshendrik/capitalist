@@ -101,4 +101,8 @@ protocol UIFactoryProtocol {
     func expenseCategoryEditViewController(delegate: ExpenseCategoryEditViewControllerDelegate,
                                            expenseCategory: ExpenseCategory?,
                                            basketType: BasketType) -> UINavigationController?
+        
+    func activeEditViewController(delegate: ActiveEditViewControllerDelegate,
+                                  active: Active?,
+                                  basketType: BasketType) -> UINavigationController?
 }

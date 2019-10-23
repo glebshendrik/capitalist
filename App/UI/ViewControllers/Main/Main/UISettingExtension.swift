@@ -21,7 +21,7 @@ extension MainViewController {
     func setupUI() {
         setupIncomeSourcesCollectionView()
         setupExpenseSourcesCollectionView()
-        setupExpenseCategoriesCollectionView()
+        setupBasketsItemsCollectionView()
         setupNavigationBar()
         setupMainMenu()
         setupLoaders()
@@ -41,19 +41,19 @@ extension MainViewController {
         expenseSourcesCollectionView.dataSource = self
     }
     
-    private func setupExpenseCategoriesCollectionView() {
+    private func setupBasketsItemsCollectionView() {
         joyExpenseCategoriesCollectionView.delegate = self
         joyExpenseCategoriesCollectionView.dataSource = self
         
-        riskExpenseCategoriesCollectionView.delegate = self
-        riskExpenseCategoriesCollectionView.dataSource = self
+        riskActivesCollectionView.delegate = self
+        riskActivesCollectionView.dataSource = self
         
-        safeExpenseCategoriesCollectionView.delegate = self
-        safeExpenseCategoriesCollectionView.dataSource = self
+        safeActivesCollectionView.delegate = self
+        safeActivesCollectionView.dataSource = self
         
-        updateExpenseCategoriesPageControl(by: .joy)
-        updateExpenseCategoriesPageControl(by: .risk)
-        updateExpenseCategoriesPageControl(by: .safe)
+        updateBasketsItemsPageControl(by: .joy)
+        updateBasketsItemsPageControl(by: .risk)
+        updateBasketsItemsPageControl(by: .safe)
     }
     
     private func setupNavigationBar() {
@@ -77,21 +77,21 @@ extension MainViewController {
         incomeSourcesLoader.showLoader()
         expenseSourcesLoader.showLoader()
         joyExpenseCategoriesLoader.showLoader()
-        riskExpenseCategoriesLoader.showLoader()
-        safeExpenseCategoriesLoader.showLoader()
+        riskActivesLoader.showLoader()
+        safeActivesLoader.showLoader()
         set(incomeSourcesActivityIndicator, hidden: true, animated: false)
         set(expenseSourcesActivityIndicator, hidden: true, animated: false)
         set(joyExpenseCategoriesActivityIndicator, hidden: true, animated: false)
-        set(riskExpenseCategoriesActivityIndicator, hidden: true, animated: false)
-        set(safeExpenseCategoriesActivityIndicator, hidden: true, animated: false)
+        set(riskActivesActivityIndicator, hidden: true, animated: false)
+        set(safeActivesActivityIndicator, hidden: true, animated: false)
     }
     
     private func setupGestureRecognizers() {
         setupRearrangeGestureRecognizer(for: incomeSourcesCollectionView)
         setupRearrangeGestureRecognizer(for: expenseSourcesCollectionView)
         setupRearrangeGestureRecognizer(for: joyExpenseCategoriesCollectionView)
-        setupRearrangeGestureRecognizer(for: riskExpenseCategoriesCollectionView)
-        setupRearrangeGestureRecognizer(for: safeExpenseCategoriesCollectionView)
+        setupRearrangeGestureRecognizer(for: riskActivesCollectionView)
+        setupRearrangeGestureRecognizer(for: safeActivesCollectionView)
         setupTransactionGestureRecognizer()
     }
     
@@ -126,22 +126,22 @@ extension MainViewController {
 
 extension MainViewController {
     func layoutUI() {
-        layoutExpenseCategoriesCollectionView(by: .joy)
-        layoutExpenseCategoriesCollectionView(by: .risk)
-        layoutExpenseCategoriesCollectionView(by: .safe)
+        layoutBasketItems(collectionView: joyExpenseCategoriesCollectionView)
+        layoutBasketItems(collectionView: riskActivesCollectionView)
+        layoutBasketItems(collectionView: safeActivesCollectionView)
         layoutIncomeSourcesCollectionView()
         layoutExpenseSourcesCollectionView()
     }
     
-    private func layoutExpenseCategoriesCollectionView(by basketType: BasketType) {
-        let collectionView = expenseCategoriesCollectionView(by: basketType)
-        if let layout = collectionView.collectionViewLayout as? PagedCollectionViewLayout {
-            layout.itemSize = CGSize(width: 68, height: 100)
-            layout.columns = 4
-            layout.rows = Int(collectionView.bounds.size.height / layout.itemSize.height)
-            layout.edgeInsets = UIEdgeInsets(horizontal: 30, vertical: 5)
-        }
+    private func layoutBasketItems(collectionView: UICollectionView) {
+        columnsPagedLayout(collectionView: collectionView,
+                           columns: 4,
+                           itemWidth: 68,
+                           itemHeight: 100,
+                           horizontalInset: 30,
+                           verticalInset: 5)
     }
+    
     
     private func layoutIncomeSourcesCollectionView() {
         fillLayout(collectionView: incomeSourcesCollectionView,
@@ -159,6 +159,21 @@ extension MainViewController {
                    columns: 2)
     }
     
+    private func columnsPagedLayout(collectionView: UICollectionView,
+                                    columns: Int,
+                                    itemWidth: CGFloat,
+                                    itemHeight: CGFloat,
+                                    horizontalInset: CGFloat,
+                                    verticalInset: CGFloat) {
+        if let layout = collectionView.collectionViewLayout as? PagedCollectionViewLayout {
+            layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
+            layout.columns = columns
+            layout.rows = Int(collectionView.bounds.size.height / layout.itemSize.height)
+            layout.edgeInsets = UIEdgeInsets(horizontal: horizontalInset,
+                                             vertical: verticalInset)
+        }
+    }
+    
     private func fillLayout(collectionView: UICollectionView,
                             itemHeight: CGFloat,
                             innerSpace: CGFloat,
@@ -167,7 +182,7 @@ extension MainViewController {
         
         if let layout = collectionView.collectionViewLayout as? PagedCollectionViewLayout {
             
-            let containerWidth = incomeSourcesCollectionView.bounds.size.width
+            let containerWidth = collectionView.bounds.size.width
             
             layout.columns = columns
             layout.rows = 1

@@ -112,7 +112,7 @@ extension MainViewController {
 
 extension MainViewController {
     func setVisibleCells(editing: Bool) {
-        let cells = incomeSourcesCollectionView.visibleCells + expenseSourcesCollectionView.visibleCells + joyExpenseCategoriesCollectionView.visibleCells + riskExpenseCategoriesCollectionView.visibleCells + safeExpenseCategoriesCollectionView.visibleCells
+        let cells = incomeSourcesCollectionView.visibleCells + expenseSourcesCollectionView.visibleCells + joyExpenseCategoriesCollectionView.visibleCells + riskActivesCollectionView.visibleCells + safeActivesCollectionView.visibleCells
         
         for cell in cells {
             cell.set(editing: editing)

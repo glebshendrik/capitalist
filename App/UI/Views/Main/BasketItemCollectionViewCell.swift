@@ -1,34 +1,30 @@
 //
-//  RiskActiveCollectionViewCell.swift
+//  BasketItemCollectionViewCell.swift
 //  Three Baskets
 //
-//  Created by Alexander Petropavlovsky on 17/10/2019.
+//  Created by Alexander Petropavlovsky on 24/10/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
 //
 
 import UIKit
 import SnapKit
 
-class RiskActiveCollectionViewCell : UICollectionViewCell, EditableCellProtocol {
+class BasketItemCollectionViewCell : UICollectionViewCell, EditableCellProtocol {
     
-    private var didSetupConstraints = false
+    public private(set) var didSetupConstraints = false
 
     lazy var icon: BasketItemIcon = { return BasketItemIcon() }()
     lazy var progress: BasketItemProgress = { return BasketItemProgress() }()
     lazy var itemDescription: BasketItemDescription = { return BasketItemDescription() }()
     lazy var deleteButton: UIButton! = { return EditableCellDeleteButton() }()
-    lazy var editButton: UIButton! = { return UIButton() }()
-//    lazy var deleteButton: UIButton! = { return EditableCellDeleteButton() }()
-//    lazy var editButton: UIButton! = { return EditableCellEditButton() }()
-
+    lazy var editButton: UIButton! = { return EditableCellEditButton() }()
+    
+    var progressContainerWidth: CGFloat {
+        return 46.0
+    }
+    
     var delegate: EditableCellDelegate?
     
-    var viewModel: ActiveViewModel? {
-        didSet {
-            updateUI()
-        }
-    }
-        
     var canDelete: Bool {
         return true
     }
@@ -51,9 +47,7 @@ class RiskActiveCollectionViewCell : UICollectionViewCell, EditableCellProtocol 
         }
         super.updateConstraints()
     }
-}
-
-extension RiskActiveCollectionViewCell {
+    
     func setupUI() {
         setupIcon()
         setupProgress()
@@ -62,19 +56,16 @@ extension RiskActiveCollectionViewCell {
         setupEditButton()
     }
     
-    private func setupIcon() {
+    func setupIcon() {
+        icon.backgroundColor = UIColor.by(.dark1F263E)
         icon.backgroundCornerRadius = 4
         icon.iconTintColor = UIColor.by(.textFFFFFF)
-        icon.defaultIconName = IconCategory.expenseCategoryRisk.defaultIconName    
-        icon.backgroundImage = UIImage(named: "risk-background")
         contentView.addSubview(icon)
     }
     
     func setupProgress() {
         progress.backgroundCornerRadius = 4
         progress.backgroundColor = UIColor.by(.textFFFFFF)
-        progress.backgroundImage = UIImage(named: "risk-planned-background")
-        progress.progressColor = UIColor.by(.riskF2D6FE)
         contentView.addSubview(progress)
     }
     
@@ -86,66 +77,19 @@ extension RiskActiveCollectionViewCell {
     }
     
     func setupDeleteButton() {
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.setImage(UIImage(named: "small-cross-icon"), for: .normal)
-        deleteButton.backgroundColor = UIColor.by(.dark404B6F)
-        deleteButton.addTarget(self, action: #selector(didTapDeleteButton(_:)), for: .touchUpInside)
-        deleteButton.cornerRadius = 8
-        deleteButton.tintColor = UIColor.by(.textFFFFFF)
+        (deleteButton as? EditableCellButton)?.didTap {
+            self.delegate?.didTapDeleteButton(cell: self)
+        }
         contentView.addSubview(deleteButton)
     }
     
     func setupEditButton() {
-//        editButton.didTap
+        (editButton as? EditableCellButton)?.didTap {
+            self.delegate?.didTapEditButton(cell: self)
+        }
         contentView.addSubview(editButton)
     }
     
-    @objc func didTapDeleteButton(_ sender: UIButton) {
-        delegate?.didTapDeleteButton(cell: self)
-    }
-    
-    @objc func didTapEditButton(_ sender: UIButton) {
-        delegate?.didTapEditButton(cell: self)
-    }
-}
-
-extension RiskActiveCollectionViewCell {
-    func updateUI() {
-        updateIcon()
-        updateProgress()
-        updateDescription()
-        layer.shouldRasterize = true
-        layer.rasterizationScale = UIScreen.main.scale
-    }
-    
-    func updateIcon() {
-        guard let viewModel = viewModel else { return }
-        icon.iconURL = viewModel.iconURL
-        icon.isBackgroundHidden = viewModel.isMonthlyPaymentPlanCompleted
-    }
-    
-    func updateProgress() {
-        guard let viewModel = viewModel else { return }
-        progress.isHidden = !viewModel.areExpensesPlanned
-        progress.isBackgroundHidden = !viewModel.isMonthlyPaymentPlanCompleted
-        progress.isProgressHidden = viewModel.isMonthlyPaymentPlanCompleted
-        progress.progress = CGFloat(viewModel.spendingProgress)
-        progress.text = viewModel.planned
-        progress.labelColor = viewModel.isMonthlyPaymentPlanCompleted
-            ? UIColor.by(.textFFFFFF)
-            : UIColor.by(.dark2A314B)
-    }
-    
-    
-    func updateDescription() {
-        itemDescription.titleText = viewModel?.name
-        itemDescription.amountText = viewModel?.investedRounded
-        itemDescription.subAmountText = viewModel?.costRounded
-        itemDescription.isSubAmountHidden = false
-    }
-}
-
-extension RiskActiveCollectionViewCell {
     func setupConstraints() {
         setupDeleteButtonConstraints()
         setupIconConstraints()
@@ -172,7 +116,7 @@ extension RiskActiveCollectionViewCell {
     
     func setupProgressConstraints() {
         progress.snp.makeConstraints { make in
-            make.width.equalTo(46)
+            make.width.equalTo(progressContainerWidth)
             make.height.equalTo(16)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(icon.snp.bottom).offset(6)
@@ -181,7 +125,7 @@ extension RiskActiveCollectionViewCell {
     
     func setupDescriptionConstraints() {
         itemDescription.snp.makeConstraints { make in
-            make.top.equalTo(icon.snp.bottom).offset(11)
+            make.top.equalTo(icon.snp.bottom).offset(8)
             make.bottom.greaterThanOrEqualToSuperview().offset(-7)
             make.left.right.equalToSuperview()
         }
@@ -194,5 +138,33 @@ extension RiskActiveCollectionViewCell {
             make.width.height.equalTo(16)
         }
     }
+    
+    func updateUI() {
+        updateIcon()
+        updateProgress()
+        updateDescription()
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
+    }
+    
+    func updateIcon() {
+    }
+    
+    func updateProgress() {
+    }
+    
+    
+    func updateDescription() {
+    }
+    
+    func progressColor(basketType: BasketType) -> UIColor {
+        switch basketType {
+        case .joy:
+            return UIColor.by(.joyD7F6E6)
+        case .risk:
+            return UIColor.by(.riskF2D6FE)
+        case .safe:
+            return UIColor.by(.safeC2C9E2)
+        }
+    }
 }
-

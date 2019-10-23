@@ -46,24 +46,24 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var safeBasketTitleLabel: UILabel!
     
     @IBOutlet weak var joyExpenseCategoriesContainerLeftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var riskExpenseCategoriesContainerLeftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var safeExpenseCategoriesLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var riskActivesContainerLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var safeActivesContainerLeftConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var joyExpenseCategoriesCollectionView: UICollectionView!
-    @IBOutlet weak var riskExpenseCategoriesCollectionView: UICollectionView!
-    @IBOutlet weak var safeExpenseCategoriesCollectionView: UICollectionView!
+    @IBOutlet weak var riskActivesCollectionView: UICollectionView!
+    @IBOutlet weak var safeActivesCollectionView: UICollectionView!
     
     @IBOutlet weak var joyExpenseCategoriesActivityIndicator: UIView!
     @IBOutlet weak var joyExpenseCategoriesLoader: UIImageView!
     @IBOutlet weak var joyExpenseCategoriesPageControl: UIPageControl!
     
-    @IBOutlet weak var riskExpenseCategoriesActivityIndicator: UIView!
-    @IBOutlet weak var riskExpenseCategoriesLoader: UIImageView!
-    @IBOutlet weak var riskExpenseCategoriesPageControl: UIPageControl!
+    @IBOutlet weak var riskActivesActivityIndicator: UIView!
+    @IBOutlet weak var riskActivesLoader: UIImageView!
+    @IBOutlet weak var riskActivesPageControl: UIPageControl!
     
-    @IBOutlet weak var safeExpenseCategoriesActivityIndicator: UIView!
-    @IBOutlet weak var safeExpenseCategoriesLoader: UIImageView!
-    @IBOutlet weak var safeExpenseCategoriesPageControl: UIPageControl!
+    @IBOutlet weak var safeActivesActivityIndicator: UIView!
+    @IBOutlet weak var safeActivesLoader: UIImageView!
+    @IBOutlet weak var safeActivesPageControl: UIPageControl!
     
     @IBOutlet weak var transactionDraggingElement: UIView!
 

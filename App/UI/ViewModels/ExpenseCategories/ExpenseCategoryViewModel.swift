@@ -76,6 +76,18 @@ class ExpenseCategoryViewModel {
         return expenseCategory.creditId
     }
     
+    var defaultIconName: String {
+        return basketType.iconCategory.defaultIconName
+    }
+    
+    var iconBackgroundImageName: String {
+        return basketType.defaultIconBackground
+    }
+    
+    var progressBackgroundImageName: String {
+        return basketType.defaultProgressBackground
+    }
+    
     init(expenseCategory: ExpenseCategory) {
         self.expenseCategory = expenseCategory
     }

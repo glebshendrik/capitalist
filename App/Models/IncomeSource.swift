@@ -18,6 +18,7 @@ struct IncomeSource : Decodable {
     let deletedAt: Date?
     let isChild: Bool
     let activeId: Int?
+    let monthlyPlannedCents: Int?
     let reminder: Reminder?
     
     enum CodingKeys: String, CodingKey {
@@ -30,6 +31,7 @@ struct IncomeSource : Decodable {
         case deletedAt = "deleted_at"
         case isChild = "is_child"
         case activeId = "active_id"
+        case monthlyPlannedCents = "monthly_planned_cents"
         case reminder
     }
 
@@ -39,11 +41,13 @@ struct IncomeSourceCreationForm : Encodable, Validatable {
     let userId: Int?
     let name: String?
     let currency: String?
+    let monthlyPlannedCents: Int?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
         case currency
+        case monthlyPlannedCents = "monthly_planned_cents"
         case reminderAttributes = "reminder_attributes"
     }
     
@@ -69,10 +73,12 @@ struct IncomeSourceCreationForm : Encodable, Validatable {
 struct IncomeSourceUpdatingForm : Encodable, Validatable {
     let id: Int?
     let name: String?
+    let monthlyPlannedCents: Int?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
+        case monthlyPlannedCents = "monthly_planned_cents"
         case reminderAttributes = "reminder_attributes"
     }
     

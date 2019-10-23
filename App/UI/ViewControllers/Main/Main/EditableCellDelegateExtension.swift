@@ -45,6 +45,19 @@ extension MainViewController : EditableCellDelegate {
                                            deleteTransactions: true)
             }
         }
+        if let activeViewModel = (cell as? ActiveCollectionViewCell)?.viewModel {
+            alertTitle = "Удалить актив?"
+            removeAction = { _ in
+                self.removeActive(by: activeViewModel.id,
+                                  basketType: activeViewModel.basketType,
+                                  deleteTransactions: false)
+            }
+            removeWithTransactionsAction = { _ in
+                self.removeActive(by: activeViewModel.id,
+                                  basketType: activeViewModel.basketType,
+                                  deleteTransactions: true)
+            }
+        }
         
         let alertController = UIAlertController(title: alertTitle,
                                                 message: nil,
@@ -78,6 +91,11 @@ extension MainViewController : EditableCellDelegate {
         if let expenseCategoryViewModel = (cell as? ExpenseCategoryCollectionViewCell)?.viewModel {
             showEditScreen(expenseCategory: expenseCategoryViewModel.expenseCategory,
                            basketType: expenseCategoryViewModel.expenseCategory.basketType)
+        }
+        // TODO: add safe case
+        if let activeViewModel = (cell as? ActiveCollectionViewCell)?.viewModel {
+            showActiveEditScreen(active: activeViewModel.active,
+                                 basketType: activeViewModel.basketType)
         }
     }
 }

@@ -24,7 +24,18 @@ enum BasketType : String, Codable {
         }
     }
     
-    var defaultBackgroundImageName: String {
+    var defaultIconBackground: String {
+        switch self {
+        case .joy:
+            return "joy-background"
+        case .risk:
+            return "risk-background"
+        case .safe:
+            return "safe-background"
+        }
+    }
+    
+    var defaultIconEditBackground: String {
         switch self {
         case .joy:
             return "joy-category-background-pic"
@@ -32,6 +43,17 @@ enum BasketType : String, Codable {
             return "risk-category-background-pic"
         case .safe:
             return "safe-category-background-pic"
+        }
+    }
+    
+    var defaultProgressBackground: String {
+        switch self {
+        case .joy:
+            return "joy-planned-background"
+        case .risk:
+            return "risk-planned-background"
+        case .safe:
+            return "safe-planned-background"
         }
     }
 }

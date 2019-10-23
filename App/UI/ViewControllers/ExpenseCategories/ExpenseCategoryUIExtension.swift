@@ -11,6 +11,7 @@ import UIKit
 extension ExpenseCategoryEditViewController {    
     func updateIconUI() {
         tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)
+        tableController.iconBackgroundImageView.image = UIImage(named: viewModel.basketType.defaultIconEditBackground)
         tableController.iconView.tintColor = UIColor.by(.textFFFFFF)
     }
     

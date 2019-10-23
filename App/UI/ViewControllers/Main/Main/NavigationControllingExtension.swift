@@ -63,21 +63,37 @@ extension MainViewController {
 }
 
 extension MainViewController {
+    func showNewActiveScreen(basketType: BasketType) {
+        showActiveEditScreen(active: nil, basketType: basketType)
+    }
+    
+    func showActiveEditScreen(active: Active?, basketType: BasketType) {    
+        modal(factory.activeEditViewController(delegate: self, active: active, basketType: basketType))
+    }    
+}
+
+extension MainViewController {
     func showTransactionEditScreen(transactionSource: TransactionSource, transactionDestination: TransactionDestination) {
         soundsManager.playTransactionStartedSound()
         switch (transactionSource, transactionDestination) {
         case (let source as IncomeSourceViewModel, let destination as ExpenseSourceViewModel):
             showIncomeEditScreen(source: source, destination: destination)
+        case (let source as IncomeSourceViewModel, let destination as ActiveViewModel):
+            showIncomeEditScreen(source: source, destination: destination)
+        case (let source as ActiveViewModel, let destination as ExpenseSourceViewModel):
+            showIncomeEditScreen(source: source, destination: destination)
         case (let source as ExpenseSourceViewModel, let destination as ExpenseSourceViewModel):
             showFundsMoveEditScreen(source: source, destination: destination)
         case (let source as ExpenseSourceViewModel, let destination as ExpenseCategoryViewModel):
+            showExpenseEditScreen(source: source, destination: destination)
+        case (let source as ExpenseSourceViewModel, let destination as ActiveViewModel):
             showExpenseEditScreen(source: source, destination: destination)
         default:
             return
         }
     }
     
-    private func showIncomeEditScreen(source: IncomeSourceViewModel, destination: ExpenseSourceViewModel) {
+    private func showIncomeEditScreen(source: TransactionSource, destination: TransactionDestination) {
         modal(factory.transactionEditViewController(delegate: self, source: source, destination: destination))
     }
     
@@ -161,7 +177,7 @@ extension MainViewController {
                                                destination: destination))
     }
     
-    private func showExpenseEditScreen(source: ExpenseSourceViewModel, destination: ExpenseCategoryViewModel) {
+    private func showExpenseEditScreen(source: TransactionSource, destination: TransactionDestination) {
         modal(factory.transactionEditViewController(delegate: self,
                                                     source: source,
                                                     destination: destination,

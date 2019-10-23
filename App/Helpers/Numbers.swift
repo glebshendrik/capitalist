@@ -16,6 +16,8 @@ extension NumberFormatter {
 }
 
 struct Formatter {
+    static var percentSubunitToUnit: Int { return 100 }
+    
     static func decimal(with currency: Currency) -> NumberFormatter {
         let currencyFormatter = Formatter.currency(with: currency)
         let formatter = NumberFormatter(numberStyle: .decimal)
@@ -45,6 +47,25 @@ struct Formatter {
         
         return formatter
     }
+    
+    static func decimalPercent() -> NumberFormatter {
+        let formatter = NumberFormatter(numberStyle: .decimal)
+        formatter.locale = Locale.current
+        formatter.groupingSeparator = ""
+        formatter.generatesDecimalNumbers = true
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = Int(log10(Double(percentSubunitToUnit)))
+        return formatter
+    }
+    
+    static func percent() -> NumberFormatter {
+        let formatter = NumberFormatter(numberStyle: .percent)
+        formatter.locale = Locale.current
+        formatter.multiplier = 1
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = Int(log10(Double(percentSubunitToUnit)))
+        return formatter
+    }
 }
 
 extension String {
@@ -56,12 +77,33 @@ extension String {
         let multiplyFactor = NSDecimalNumber(value: currency.subunitToUnit)
         return decimal.multiplying(by: multiplyFactor).intValue
     }
+    
+    func intPercent() -> Int? {
+        guard let percent = Formatter.decimalPercent().number(from: self) as? NSDecimalNumber else {
+            return nil
+        }
+        let multiplyFactor = NSDecimalNumber(value: Formatter.percentSubunitToUnit)
+        return percent.multiplying(by: multiplyFactor).intValue
+    }
 }
 
 extension NSDecimalNumber {
     func moneyNumber(with currency: Currency) -> NSDecimalNumber {
         let divideFactor = NSDecimalNumber(value: currency.subunitToUnit)
         return self.dividing(by: divideFactor)
+    }
+    
+    func percentNumber() -> NSDecimalNumber {
+        let divideFactor = NSDecimalNumber(value: Formatter.percentSubunitToUnit)
+        return self.dividing(by: divideFactor)
+    }
+    
+    func percentDecimalString() -> String? {
+        return Formatter.decimalPercent().string(from: percentNumber())
+    }
+    
+    func percentString() -> String? {
+        return Formatter.percent().string(from: percentNumber())
     }
     
     func moneyDecimalString(with currency: Currency) -> String? {
@@ -140,6 +182,10 @@ extension Int {
         return NSDecimalNumber(integerLiteral: self).moneyNumber(with: currency)
     }
     
+    func percentNumber() -> NSDecimalNumber {
+        return NSDecimalNumber(integerLiteral: self).percentNumber()
+    }
+    
     func moneyDecimalString(with currency: Currency) -> String? {
         return NSDecimalNumber(integerLiteral: self).moneyDecimalString(with: currency)
     }
@@ -151,5 +197,13 @@ extension Int {
     
     func moneyCurrencyString(with currency: Currency, shouldRound: Bool) -> String? {
         return NSDecimalNumber(integerLiteral: self).moneyCurrencyString(with: currency, shouldRound: shouldRound)
+    }
+    
+    func percentDecimalString() -> String? {
+        return NSDecimalNumber(integerLiteral: self).percentDecimalString()
+    }
+    
+    func percentString() -> String? {
+        return percentNumber().percentString()
     }
 }

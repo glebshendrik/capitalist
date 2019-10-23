@@ -14,8 +14,8 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case incomeSourcesCollectionView:           return 1
         case expenseSourcesCollectionView:          return 1
         case joyExpenseCategoriesCollectionView:    return 1
-        case riskExpenseCategoriesCollectionView:   return 1
-        case safeExpenseCategoriesCollectionView:   return 1
+        case riskActivesCollectionView:             return 1
+        case safeActivesCollectionView:             return 1
         default:                                    return 0
         }
     }
@@ -25,8 +25,8 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case incomeSourcesCollectionView:           return viewModel.numberOfIncomeSources
         case expenseSourcesCollectionView:          return viewModel.numberOfExpenseSources
         case joyExpenseCategoriesCollectionView:    return viewModel.numberOfJoyExpenseCategories
-        case riskExpenseCategoriesCollectionView:   return viewModel.numberOfRiskExpenseCategories
-        case safeExpenseCategoriesCollectionView:   return viewModel.numberOfSafeExpenseCategories
+        case riskActivesCollectionView:             return viewModel.numberOfRiskActives
+        case safeActivesCollectionView:             return viewModel.numberOfSafeActives
         default:                                    return 0
         }
     }
@@ -39,10 +39,10 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
             case expenseSourcesCollectionView:          return expenseSourceCollectionViewCell(forItemAt: indexPath)
             case joyExpenseCategoriesCollectionView:    return expenseCategoryCollectionViewCell(forItemAt: indexPath,
                                                                                                  basketType: .joy)
-            case riskExpenseCategoriesCollectionView:   return expenseCategoryCollectionViewCell(forItemAt: indexPath,
-                                                                                                 basketType: .risk)
-            case safeExpenseCategoriesCollectionView:   return expenseCategoryCollectionViewCell(forItemAt: indexPath,
-                                                                                                 basketType: .safe)
+            case riskActivesCollectionView:             return activeCollectionViewCell(forItemAt: indexPath,
+                                                                                        basketType: .risk)
+            case safeActivesCollectionView:             return activeCollectionViewCell(forItemAt: indexPath,
+                                                                                        basketType: .safe)
             default:                                    return UICollectionViewCell()
             }
         }
@@ -114,12 +114,12 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case joyExpenseCategoriesCollectionView:    moveExpenseCategory(from: sourceIndexPath,
                                                                         to: destinationIndexPath,
                                                                         basketType: .joy)
-        case riskExpenseCategoriesCollectionView:   moveExpenseCategory(from: sourceIndexPath,
-                                                                        to: destinationIndexPath,
-                                                                        basketType: .risk)
-        case safeExpenseCategoriesCollectionView:   moveExpenseCategory(from: sourceIndexPath,
-                                                                        to: destinationIndexPath,
-                                                                        basketType: .safe)
+        case riskActivesCollectionView:             moveActive(from: sourceIndexPath,
+                                                               to: destinationIndexPath,
+                                                               basketType: .risk)
+        case safeActivesCollectionView:             moveActive(from: sourceIndexPath,
+                                                               to: destinationIndexPath,
+                                                               basketType: .safe)
         default: return
         }
     }
@@ -131,8 +131,8 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case incomeSourcesCollectionView:           didSelectIncomeSource(at: indexPath)
         case expenseSourcesCollectionView:          didSelectExpenseSource(at: indexPath)
         case joyExpenseCategoriesCollectionView:    didSelectExpenseCategory(at: indexPath, basketType: .joy)
-        case riskExpenseCategoriesCollectionView:   didSelectExpenseCategory(at: indexPath, basketType: .risk)
-        case safeExpenseCategoriesCollectionView:   didSelectExpenseCategory(at: indexPath, basketType: .safe)
+        case riskActivesCollectionView:             didSelectActive(at: indexPath, basketType: .risk)
+        case safeActivesCollectionView:             didSelectActive(at: indexPath, basketType: .safe)
         default: return
         }
     }
@@ -143,8 +143,8 @@ extension MainViewController {
         update(incomeSourcesCollectionView)
         update(expenseSourcesCollectionView)
         update(joyExpenseCategoriesCollectionView)
-        update(riskExpenseCategoriesCollectionView)
-        update(safeExpenseCategoriesCollectionView)
+        update(riskActivesCollectionView)
+        update(safeActivesCollectionView)
     }
 }
 
