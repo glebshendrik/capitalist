@@ -17,9 +17,9 @@ class ExpenseSourceCollectionViewCell : EditableCell {
     @IBOutlet weak var creditContainer: UIView?
     @IBOutlet weak var creditLabel: UILabel?
     
-    @IBOutlet weak var iconWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var iconHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var iconVerticalConstraint: NSLayoutConstraint!
+    @IBOutlet weak var iconWidthConstraint: NSLayoutConstraint?
+    @IBOutlet weak var iconHeightConstraint: NSLayoutConstraint?
+    @IBOutlet weak var iconVerticalConstraint: NSLayoutConstraint?
     let largeIconWidth: CGFloat = 24
     let smallIconWidth: CGFloat = 15
     let largeIconOffset: CGFloat = 0
@@ -48,9 +48,9 @@ class ExpenseSourceCollectionViewCell : EditableCell {
         iconImageView.setImage(with: viewModel.iconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)
         iconImageView.tintColor = UIColor.by(.textFFFFFF)
         
-        iconWidthConstraint.constant = viewModel.inCredit ? smallIconWidth : largeIconWidth
-        iconHeightConstraint.constant = viewModel.inCredit ? smallIconWidth : largeIconWidth
-        iconVerticalConstraint.constant = viewModel.inCredit ? smallIconOffset : largeIconOffset
+        iconWidthConstraint?.constant = viewModel.inCredit ? smallIconWidth : largeIconWidth
+        iconHeightConstraint?.constant = viewModel.inCredit ? smallIconWidth : largeIconWidth
+        iconVerticalConstraint?.constant = viewModel.inCredit ? smallIconOffset : largeIconOffset
         contentView.layoutIfNeeded()
     }
     
