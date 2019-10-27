@@ -79,7 +79,6 @@ struct Infrastructure {
         // Expense Categories
         case ExpenseCategoryEditNavigationController
         case ExpenseCategoryEditViewController
-        case DependentIncomeSourceCreationMessageViewController
         case ExpenseCategorySelectViewController
         
         // Transactions
@@ -101,6 +100,7 @@ struct Infrastructure {
         case ActiveEditNavigationController
         case ActiveEditViewController
         case ActiveSelectViewController
+        case DependentIncomeSourceCreationMessageViewController
         
         // Common
         case IconsViewController
@@ -165,7 +165,6 @@ struct Infrastructure {
                 return .ExpenseSources
             case .ExpenseCategoryEditNavigationController,
                  .ExpenseCategoryEditViewController,
-                 .DependentIncomeSourceCreationMessageViewController,
                  .ExpenseCategorySelectViewController:
                 return .ExpenseCategories
             case .TransactionEditNavigationController,
@@ -209,7 +208,8 @@ struct Infrastructure {
                 return .Credits
             case .ActiveEditNavigationController,
                  .ActiveEditViewController,
-                 .ActiveSelectViewController:
+                 .ActiveSelectViewController,
+                 .DependentIncomeSourceCreationMessageViewController:
                 return .Actives
             }
         }

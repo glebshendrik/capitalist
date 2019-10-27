@@ -21,7 +21,7 @@ class DependentIncomeSourceCreationMessageViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        updateUI()
+//        updateUI()
     }
     
     @IBAction func didTapGetItButton(_ sender: Any) {
