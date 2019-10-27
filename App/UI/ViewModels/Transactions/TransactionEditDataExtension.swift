@@ -132,8 +132,8 @@ extension TransactionEditViewModel {
                                        convertedAmountCurrency: convertedAmountCurrency,
                                        gotAt: gotAt ?? Date(),
                                        comment: comment,
-                                       includedInBalance: includedInBalance,
-                                       returningBorrowId: returningBorrowId)
+                                       returningBorrowId: returningBorrowId,
+                                       isBuyingAsset: isBuyingAsset)
     }
 }
 
@@ -158,8 +158,7 @@ extension TransactionEditViewModel {
                                        convertedAmountCents: convertedAmountCents,
                                        convertedAmountCurrency: convertedAmountCurrency,
                                        gotAt: gotAt,
-                                       comment: comment,
-                                       includedInBalance: includedInBalance)
+                                       comment: comment)
     }
 }
 

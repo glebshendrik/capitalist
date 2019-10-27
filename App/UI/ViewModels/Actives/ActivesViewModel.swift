@@ -18,7 +18,6 @@ class ActivesViewModel {
     }
     
     var skipActiveId: Int? = nil
-    var currency: String? = nil
     
     init(activesCoordinator: ActivesCoordinatorProtocol) {
         self.activesCoordinator = activesCoordinator

@@ -18,6 +18,7 @@ extension MainViewController {
         updateBasketsRatiosUI()
         updateBasketsTabsUI()
         updateBasketExpenseCategoriesContainer()
+        updateTotalUI()
     }
     
     private func updateBasketsRatiosUI() {

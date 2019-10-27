@@ -9,6 +9,45 @@
 import UIKit
 
 extension TransactionEditViewController {
+    func update(amount: String?) {
+        viewModel.amount = amount
+        updateAmountUI()
+        updateExchangeAmountsUI()
+    }
+    
+    func update(convertedAmount: String?) {
+        viewModel.convertedAmount = convertedAmount
+        updateExchangeAmountsUI()
+    }
+    
+    func update(comment: String?) {
+        viewModel.comment = comment
+    }
+    
+    func update(isBuyingAsset: Bool) {
+        viewModel.isBuyingAsset = isBuyingAsset
+        updateIsBuyingAssetUI()
+    }
+    
+    func update(gotAt: Date?) {
+        viewModel.gotAt = gotAt
+        updateToolbarUI()
+    }
+    
+    func update(source: Transactionable?) {
+        viewModel.source = source
+        updateUI()
+        loadExchangeRate()
+    }
+    
+    func update(destination: Transactionable?) {
+        viewModel.destination = destination
+        updateUI()
+        loadExchangeRate()
+    }
+}
+
+extension TransactionEditViewController {
     func updateToolbarUI() {
         UIView.transition(with: view, duration: 0.1, options: .transitionCrossDissolve, animations: {
             self.tableController.calendarButton.setTitle(self.viewModel.calendarTitle, for: .normal)
@@ -51,9 +90,9 @@ extension TransactionEditViewController {
         tableController.set(cell: tableController.exchangeCell, hidden: viewModel.exchangeAmountsFieldHidden, animated: false, reload: false)
     }
         
-    func updateInBalanceUI() {
-        tableController.inBalanceSwitchField.value = viewModel.includedInBalance
-        tableController.set(cell: tableController.inBalanceCell, hidden: viewModel.includedInBalanceFieldHidden, animated: false, reload: false)        
+    func updateIsBuyingAssetUI() {
+        tableController.isBuyingAssetSwitchField.value = viewModel.isBuyingAsset
+        tableController.set(cell: tableController.isBuyingAssetCell, hidden: viewModel.isBuyingAssetFieldHidden, animated: false, reload: false)        
     }
     
     func updateCommentUI() {

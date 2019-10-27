@@ -39,7 +39,7 @@ class ActiveCollectionViewCell : BasketItemCollectionViewCell {
         progress.isBackgroundHidden = !viewModel.isMonthlyPaymentPlanCompleted
         progress.isProgressHidden = viewModel.isMonthlyPaymentPlanCompleted
         progress.progressWidth = CGFloat(viewModel.spendingProgress) * progressContainerWidth
-        progress.text = viewModel.planned
+        progress.text = viewModel.plannedAtPeriod
         progress.labelColor = viewModel.isMonthlyPaymentPlanCompleted
             ? UIColor.by(.textFFFFFF)
             : UIColor.by(.dark2A314B)

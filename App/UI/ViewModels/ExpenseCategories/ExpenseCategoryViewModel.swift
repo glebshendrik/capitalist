@@ -28,7 +28,7 @@ class ExpenseCategoryViewModel {
         return expenseCategory.basketType
     }
     
-    var planned: String? {
+    var plannedAtPeriod: String? {
         return expenseCategory.plannedCentsAtPeriod?.moneyCurrencyString(with: currency, shouldRound: true)
     }
     
@@ -81,11 +81,11 @@ class ExpenseCategoryViewModel {
     }
     
     var iconBackgroundImageName: String {
-        return basketType.defaultIconBackground
+        return basketType.iconBackgroundName(size: .medium)
     }
     
     var progressBackgroundImageName: String {
-        return basketType.defaultProgressBackground
+        return basketType.progressBackgroundName
     }
     
     init(expenseCategory: ExpenseCategory) {

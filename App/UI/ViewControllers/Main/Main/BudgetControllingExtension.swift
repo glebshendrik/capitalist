@@ -8,8 +8,8 @@
 
 import UIKit
 
-extension MainViewController : BudgetViewDelegate {
-    func didTapBalance() {
+extension MainViewController : TitleViewDelegate {
+    func didTapTitle() {
         showBalance()
     }
     
@@ -19,9 +19,23 @@ extension MainViewController : BudgetViewDelegate {
                           options: .transitionCrossDissolve,
                           animations: {
                             
-                            self.budgetView.balanceLabel.text = self.viewModel.balance
-                            self.budgetView.spentLabel.text = self.viewModel.spent
-                            self.budgetView.plannedLabel.text = self.viewModel.planned
+            self.incomeSourcesAmountLabel.text = self.viewModel.incomesAmountRounded
+            self.expenseSourcesAmountLabel.text = self.viewModel.expenseSourcesAmountRounded
+            self.basketTotalTitleLabel.text = self.viewModel.basketTotalTitle
+            self.basketTotalLabel.text = self.viewModel.basketTotal
+        })
+    }
+    
+    func updateTotalUI() {
+        UIView.transition(with: view,
+                          duration: 0.1,
+                          options: .transitionCrossDissolve,
+                          animations: {
+                            
+            self.basketTotalTitleLabel.text = self.viewModel.basketTotalTitle
+            self.basketTotalLabel.text = self.viewModel.basketTotal
+            self.basketTotalTitleLabel.alpha = self.isEditing ? 0.0 : 1.0
+            self.basketTotalLabel.alpha = self.isEditing ? 0.0 : 1.0
         })
     }
 }

@@ -111,8 +111,12 @@ extension TransactionEditViewModel {
         return !needCurrencyExchange
     }
     
-    var includedInBalanceFieldHidden: Bool {
-        return true
+    var isBuyingAssetFieldHidden: Bool {
+        guard   isNew,
+                let transactionType = transactionType,
+                let destination = destination else { return true }
+        
+        return transactionType != .expense || destination.type != .active
     }
     
     var removeButtonHidden: Bool {
@@ -175,6 +179,15 @@ extension TransactionEditViewModel {
 }
 
 extension TransactionableType {
+    var removeQuestion: String {
+        switch (self) {
+        case .incomeSource:                 return "Удалить источник дохода?"
+        case .expenseSource:                return "Удалить кошелек?"
+        case .expenseCategory:              return "Удалить категорию трат?"
+        case .active:                       return "Удалить актив?"
+        }
+    }
+    
     func title(as part: TransactionPart) -> String {
         switch (self, part) {
         case (.incomeSource, _):                return "Источник дохода"

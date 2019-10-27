@@ -19,7 +19,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func didTapSaveAtYesterday() {
-        didSelect(date: Date() - 1.days)
+        update(gotAt: Date() - 1.days)
         save()
     }
     
@@ -31,41 +31,180 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
                                                  mode: .dateAndTime), animated: true)
     }
     
+    func didTapSource() {
+        didTap(transactionableType: viewModel.sourceType,
+               transactionPart: .source,
+               skipTransactionable: viewModel.destination,
+               options: viewModel.sourceFilter.options,
+               transactionableTypeCases: sourceTransactionableTypeCases())
+    }
+        
+    func didTapDestination() {
+        didTap(transactionableType: viewModel.destinationType,
+               transactionPart: .destination,
+               skipTransactionable: viewModel.source,
+               options: viewModel.destinationFilter.options,
+               transactionableTypeCases: destinationTransactionableTypeCases())
+    }
+    
     func didChange(amount: String?) {
-        viewModel.amount = amount
-        updateAmountUI()
-        updateExchangeAmountsUI()
+        update(amount: amount)
     }
     
     func didChange(convertedAmount: String?) {
-        viewModel.convertedAmount = convertedAmount
-        updateExchangeAmountsUI()
+        update(convertedAmount: convertedAmount)
+    }
+    
+    func didChange(isBuyingAsset: Bool) {
+        update(isBuyingAsset: isBuyingAsset)
     }
     
     func didChange(comment: String?) {
-        viewModel.comment = comment
+        update(comment: comment)
     }
     
     func didTapRemoveButton() {
-        let alertController = UIAlertController(title: viewModel.removeQuestion,
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
+        let actions: [UIAlertAction] = [UIAlertAction(title: "Удалить",
+                                                      style: .destructive,
+                                                      handler: { _ in
+                                                        self.remove()
+                                                      })]
         
-        alertController.addAction(title: "Удалить",
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: { _ in
-                                    self.remove()
-        })
-        
-        alertController.addAction(title: "Отмена",
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: nil)
-        
-        present(alertController, animated: true)
+        sheet(title: viewModel.removeQuestion, actions: actions)
     }
-          
+}
+
+extension TransactionEditViewController : DatePickerViewControllerDelegate {
+    func didSelect(date: Date?) {
+        update(gotAt: date)        
+    }
+}
+
+extension TransactionEditViewController : IncomeSourceSelectViewControllerDelegate {
+    func didSelect(incomeSourceViewModel: IncomeSourceViewModel) {
+        update(source: incomeSourceViewModel)
+    }
+}
+
+extension TransactionEditViewController : ExpenseSourceSelectViewControllerDelegate {
+    func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(source: sourceExpenseSourceViewModel)
+    }
+    
+    func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(destination: destinationExpenseSourceViewModel)
+    }
+}
+
+extension TransactionEditViewController : ExpenseCategorySelectViewControllerDelegate {
+    func didSelect(expenseCategoryViewModel: ExpenseCategoryViewModel) {
+        update(destination: expenseCategoryViewModel)
+    }
+}
+
+extension TransactionEditViewController : ActiveSelectViewControllerDelegate {
+    func didSelect(sourceActiveViewModel: ActiveViewModel) {
+        update(source: sourceActiveViewModel)
+    }
+    
+    func didSelect(destinationActiveViewModel: ActiveViewModel) {
+        update(destination: destinationActiveViewModel)
+    }
+}
+
+extension TransactionEditViewController {
+    func didTap(transactionableType: TransactionableType?,
+                transactionPart: TransactionPart,
+                skipTransactionable: Transactionable?,
+                options: ExpenseSourcesFilterOptions,
+                transactionableTypeCases: [TransactionableType]) {
+        
+        if viewModel.isNew {
+            showTransactionables(transactionableTypes: transactionableTypeCases,
+                                 transactionPart: transactionPart,
+                                 skipTransactionable: skipTransactionable,
+                                 options: options)
+        }
+        else if let transactionableType = transactionableType {
+            showTransactionables(transactionableType: transactionableType,
+                                 transactionPart: transactionPart,
+                                 skipTransactionable: skipTransactionable,
+                                 options: options)
+        }
+    }
+    
+    func showTransactionables(transactionableType: TransactionableType,
+                              transactionPart: TransactionPart,
+                              skipTransactionable: Transactionable?,
+                              options: ExpenseSourcesFilterOptions) {
+        let viewController = transactionableSelectControllerFor(transactionableType: transactionableType,
+                                                                transactionPart: transactionPart,
+                                                                skipTransactionable: skipTransactionable,
+                                                                options: options)
+
+        slideUp(viewController: viewController)
+    }
+    
+    func showTransactionables(transactionableTypes: [TransactionableType],
+                              transactionPart: TransactionPart,
+                              skipTransactionable: Transactionable?,
+                              options: ExpenseSourcesFilterOptions) {
+        
+        guard !transactionableTypes.isEmpty else { return }
+        
+        if transactionableTypes.count == 1, let singleTransactionableType = transactionableTypes.first {
+            showTransactionables(transactionableType: singleTransactionableType,
+                                 transactionPart: transactionPart,
+                                 skipTransactionable: skipTransactionable,
+                                 options: options)
+        }
+        else {
+            let actions = transactionableTypes.map { transactionableType in
+                return UIAlertAction(title: transactionableType.title(as: transactionPart),
+                                     style: .default,
+                                     handler: { _ in
+                                        self.showTransactionables(transactionableType: transactionableType,
+                                                                  transactionPart: transactionPart,
+                                                                  skipTransactionable: skipTransactionable,
+                                                                  options: options)
+                })
+            }
+            sheet(title: "Выбрать", actions: actions)
+        }
+    }
+    
+    func sourceTransactionableTypeCases() -> [TransactionableType] {
+        guard let destinationType = viewModel.destinationType else {
+            return [.incomeSource, .expenseSource, .active]
+        }
+        switch destinationType {
+        case .expenseCategory:
+            return [.expenseSource]
+        case .expenseSource:
+            return [.incomeSource, .expenseSource, .active]
+        case .active:
+            return [.incomeSource, .expenseSource]
+        default:
+            return []
+        }
+    }
+    
+    func destinationTransactionableTypeCases() -> [TransactionableType] {
+        guard let sourceType = viewModel.sourceType else {
+            return [.expenseSource, .expenseCategory, .active]
+        }
+        switch sourceType {
+        case .incomeSource:
+            return [.expenseSource, .active]
+        case .expenseSource:
+            return [.expenseSource, .expenseCategory, .active]
+        case .active:
+            return [.expenseSource]
+        default:
+            return []
+        }
+    }
+    
     func transactionableSelectControllerFor(transactionableType: TransactionableType,
                                             transactionPart: TransactionPart,
                                             skipTransactionable: Transactionable?,
@@ -82,71 +221,12 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
                                                             currency: options.currency)
         case .expenseCategory:
             return factory.expenseCategorySelectViewController(delegate: self)
-        default:
-            return nil
+        case .active:
+            return factory.activeSelectViewController(delegate: self,
+                                                      skipActiveId: skipTransactionable?.id,
+                                                      selectionType: transactionPart)
         }
     }
-    func didTapSource() {
-        guard let sourceType = viewModel.sourceType else { return }
-        
-        let viewController = transactionableSelectControllerFor(transactionableType: sourceType,
-                                                                transactionPart: .source,
-                                                                skipTransactionable: viewModel.destination,
-                                                                options: viewModel.sourceFilter.options)
-
-        slideUp(viewController: viewController)
-    }
-        
-    func didTapDestination() {
-        guard let destinationType = viewModel.destinationType else { return }
-        
-        let viewController = transactionableSelectControllerFor(transactionableType: destinationType,
-                                                                transactionPart: .destination,
-                                                                skipTransactionable: viewModel.source,
-                                                                options: viewModel.destinationFilter.options)
-
-        slideUp(viewController: viewController)
-    }
     
-    func didChange(includedInBalance: Bool) {        
-        viewModel.includedInBalance = includedInBalance
-        updateInBalanceUI()
-    }
-}
-
-extension TransactionEditViewController : DatePickerViewControllerDelegate {
-    func didSelect(date: Date?) {
-        viewModel.gotAt = date
-        updateToolbarUI()
-    }
-}
-
-extension TransactionEditViewController : IncomeSourceSelectViewControllerDelegate {
-    func didSelect(incomeSourceViewModel: IncomeSourceViewModel) {
-        viewModel.source = incomeSourceViewModel
-        updateUI()
-        loadExchangeRate()
-    }
-}
-
-extension TransactionEditViewController : ExpenseSourceSelectViewControllerDelegate {
-    func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
-        viewModel.source = sourceExpenseSourceViewModel
-        updateUI()
-        loadExchangeRate()
-    }
     
-    func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
-        viewModel.destination = destinationExpenseSourceViewModel
-        updateUI()
-        loadExchangeRate()
-    }
-}
-
-extension TransactionEditViewController : ExpenseCategorySelectViewControllerDelegate {
-    func didSelect(expenseCategoryViewModel: ExpenseCategoryViewModel) {
-        viewModel.destination = expenseCategoryViewModel
-        updateUI()
-        loadExchangeRate()
-    }
 }

@@ -11,26 +11,22 @@ import Foundation
 class BudgetViewModel {
     public private(set) var budget: Budget
     
-    var balanceRounded: String {
-        return budget.balanceCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
+    var incomesAmountRounded: String {
+        return budget.incomesAtPeriodCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
     }
     
-    var balance: String {
-        return budget.balanceCents.moneyCurrencyString(with: budget.currency, shouldRound: false) ?? ""
+    var expenseSourcesAmountRounded: String {
+        return budget.expenseSourcesAmountCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
     }
     
-    var expenseSourcesBalance: String {
-        return budget.expenseSourcesBalanceCents.moneyCurrencyString(with: budget.currency, shouldRound: false) ?? ""
+    var safeActivesAmountRounded: String {
+        return budget.safeActivesAmountCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
     }
         
-    var spent: String {
-        return budget.spentCentsAtPeriod.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
+    var riskActivesAmountRounded: String {
+        return budget.riskActivesAmountCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
     }
-    
-    var planned: String {
-        return budget.plannedCentsAtPeriod.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
-    }
-    
+        
     init(budget: Budget) {
         self.budget = budget
     }

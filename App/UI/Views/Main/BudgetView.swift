@@ -12,14 +12,14 @@ protocol BudgetViewDelegate : class {
     func didTapBalance()
 }
 
-class BudgetView : CustomView {
+class TitleView : CustomView {
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var spentLabel: UILabel!
     @IBOutlet weak var plannedLabel: UILabel!
     
     weak var delegate: BudgetViewDelegate? = nil
     
-    @IBAction func didTapBalance(_ sender: Any) {
+    @IBAction func didTap(_ sender: Any) {
         delegate?.didTapBalance()
     }
 }

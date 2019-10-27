@@ -568,4 +568,21 @@ extension UIViewController {
         guard let viewController = viewController else { return }
         navigationController?.pushViewController(viewController, animated: animated)
     }
+    
+    func sheet(title: String?, actions: [UIAlertAction]) {
+        let alertController = UIAlertController(title: title,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        
+        for action in actions {
+            alertController.addAction(action)
+        }
+        
+        alertController.addAction(title: "Отмена",
+                                  style: .cancel,
+                                  isEnabled: true,
+                                  handler: nil)
+        
+        modal(alertController, animated: true)
+    }
 }

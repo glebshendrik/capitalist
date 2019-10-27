@@ -30,7 +30,7 @@ extension ActiveEditViewController {
     func update(activeIncomeType: ActiveIncomeType) {
         viewModel.selectedActiveIncomeType = activeIncomeType
         updateActiveIncomeTypeUI()
-        updateTableUI()
+        updateTableUI(animated: false)
     }
         
     func update(reminder: ReminderViewModel) {
@@ -42,7 +42,7 @@ extension ActiveEditViewController {
 extension ActiveEditViewController {
     func updateIconUI() {
         tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.iconDefaultImageName, renderingMode: .alwaysTemplate)
-        tableController.iconBackgroundImageView.image = UIImage(named: viewModel.basketType.defaultIconEditBackground)
+        tableController.iconBackgroundImageView.image = UIImage(named: viewModel.basketType.iconBackgroundName(size: .large))
         tableController.iconView.tintColor = UIColor.by(.textFFFFFF)
     }
     

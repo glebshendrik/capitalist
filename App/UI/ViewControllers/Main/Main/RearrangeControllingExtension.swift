@@ -130,6 +130,8 @@ extension MainViewController {
         
         updateLongPressureRecognizers()
         
+        updateTotalUI()
+        
         setVisibleCells(editing: editing)
         UIView.animate(withDuration: 0.1, animations: {
             self.editDoneButton.alpha = editing ? 1.0 : 0.0

@@ -124,7 +124,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     func setupMonthlyPlannedIncomeField() {
         register(responder: monthlyPlannedIncomeField.textField)
         monthlyPlannedIncomeField.placeholder = "Планируемый доход в месяц"
-        monthlyPlannedIncomeField.imageName = "planned-amount-icon"
+        monthlyPlannedIncomeField.imageName = "amount-icon"
         monthlyPlannedIncomeField.didChange { [weak self] text in
             self?.delegate?.didChange(monthlyPlannedIncome: text)
         }
@@ -133,7 +133,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     func setupAnnualPercentField() {
         register(responder: annualPercentField.textField)
         annualPercentField.placeholder = "Ожидаемый годовой процент"
-        annualPercentField.imageName = "planned-amount-icon"
+        annualPercentField.imageName = "percent-icon"
         annualPercentField.didChange { [weak self] text in
             self?.delegate?.didChange(annualPercent: text)
         }

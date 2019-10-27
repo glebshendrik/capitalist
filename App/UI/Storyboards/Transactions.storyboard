@@ -386,8 +386,8 @@
                         <outlet property="destinationField" destination="hW1-iO-wTG" id="gyx-E9-JPg"/>
                         <outlet property="exchangeCell" destination="QR5-nu-WSp" id="tyF-Mk-Ckn"/>
                         <outlet property="exchangeField" destination="wLn-DJ-z94" id="J4x-KM-STS"/>
-                        <outlet property="inBalanceCell" destination="TdR-Ev-Prf" id="kAi-1n-5rn"/>
-                        <outlet property="inBalanceSwitchField" destination="zFN-6T-Axh" id="669-wt-SCL"/>
+                        <outlet property="isBuyingAssetCell" destination="TdR-Ev-Prf" id="hQP-wD-mTY"/>
+                        <outlet property="isBuyingAssetSwitchField" destination="zFN-6T-Axh" id="XiD-ud-dyy"/>
                         <outlet property="loaderImageView" destination="Pxs-wI-Crk" id="ZSI-9x-OK9"/>
                         <outlet property="removeButton" destination="Xew-SX-Imp" id="hYU-CF-Iao"/>
                         <outlet property="removeCell" destination="bgy-nL-77R" id="ROh-xI-geB"/>

@@ -310,4 +310,15 @@ class UIFactory : UIFactoryProtocol {
         }
         return activeEditNavigationController
     }
+    
+    func activeSelectViewController(delegate: ActiveSelectViewControllerDelegate,
+                                    skipActiveId: Int?,
+                                    selectionType: TransactionPart) -> ActiveSelectViewController? {
+        let activeSelectViewController = router.viewController(.ActiveSelectViewController) as? ActiveSelectViewController
+        
+        activeSelectViewController?.set(delegate: delegate,
+                                               skipActiveId: skipActiveId,
+                                               selectionType: selectionType)
+        return activeSelectViewController
+    }
 }

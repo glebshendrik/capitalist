@@ -56,9 +56,39 @@ class MainViewModel {
             : numberOfActives(with: .safe) + 1
     }
     
-    var balance: String = ""
-    var spent: String = ""
-    var planned: String = ""
+    public private(set) var budget: BudgetViewModel? = nil
+    
+    var incomesAmountRounded: String? {
+        return budget?.incomesAmountRounded
+    }
+    
+    var expenseSourcesAmountRounded: String? {
+        return budget?.expenseSourcesAmountRounded
+    }
+    
+    var basketTotalTitle: String? {
+        guard let basketType = basketsViewModel.selectedBasketType else { return nil }
+        switch basketType {
+        case .safe:
+            return "Сумма сбережений:"
+        case .risk:
+            return "Сумма активов:"
+        default:
+            return nil
+        }
+    }
+    
+    var basketTotal: String? {
+        guard let basketType = basketsViewModel.selectedBasketType else { return nil }
+        switch basketType {
+        case .safe:
+            return budget?.safeActivesAmountRounded
+        case .risk:
+            return budget?.riskActivesAmountRounded
+        default:
+            return nil
+        }
+    }
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
@@ -128,10 +158,7 @@ class MainViewModel {
         return  firstly {
                     accountCoordinator.loadCurrentUserBudget()
                 }.get { budget in
-                    let budgetViewModel = BudgetViewModel(budget: budget)
-                    self.balance = budgetViewModel.balanceRounded
-                    self.spent = budgetViewModel.spent
-                    self.planned = budgetViewModel.planned
+                    self.budget = BudgetViewModel(budget: budget)
                 }.asVoid()
     }
     

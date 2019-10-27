@@ -44,8 +44,32 @@ class IncomeSourceViewModel : TransactionSource {
         return incomeSource.currency
     }
     
+    var plannedAtPeriod: String? {
+        return incomeSource.plannedCentsAtPeriod?.moneyCurrencyString(with: currency, shouldRound: true)
+    }
+    
+    var areIncomesPlanned: Bool {
+        guard let plannedCentsAtPeriod = incomeSource.plannedCentsAtPeriod else { return false }
+        return plannedCentsAtPeriod > 0
+    }
+    
+    var incomeProgress: Double {
+        guard   areIncomesPlanned,
+                let plannedCentsAtPeriod = incomeSource.plannedCentsAtPeriod else { return 0 }
+        let progress = Double(incomeSource.gotCentsAtPeriod) / Double(plannedCentsAtPeriod)
+        return progress > 1.0 ? 1.0 : progress
+    }
+    
+    var isIncomeProgressCompleted: Bool {
+        return incomeProgress == 1.0
+    }
+    
     var iconURL: URL? {
-        return nil
+        return incomeSource.iconURL
+    }
+    
+    var defaultIconName: String {
+        return IconCategory.expenseCategoryRisk.defaultIconName
     }
     
     var isDeleted: Bool {

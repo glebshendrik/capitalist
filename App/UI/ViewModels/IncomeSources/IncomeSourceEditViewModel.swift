@@ -19,6 +19,7 @@ class IncomeSourceEditViewModel {
     
     private var incomeSource: IncomeSource? = nil
     
+    var selectedIconURL: URL? = nil
     var name: String? = nil
     var selectedCurrency: Currency? = nil
     var monthlyPlanned: String?
@@ -28,6 +29,10 @@ class IncomeSourceEditViewModel {
     
     var isNew: Bool {
         return incomeSource == nil
+    }
+    
+    var defaultIconName: String {
+        return IconCategory.expenseCategoryRisk.defaultIconName
     }
     
     var selectedCurrencyName: String? {
@@ -78,7 +83,7 @@ class IncomeSourceEditViewModel {
     
     func set(incomeSource: IncomeSource) {
         self.incomeSource = incomeSource
-        
+        selectedIconURL = incomeSource.iconURL
         reminderViewModel = ReminderViewModel(reminder: incomeSource.reminder)
         selectedCurrency = incomeSource.currency
         name = incomeSource.name
@@ -117,6 +122,7 @@ extension IncomeSourceEditViewModel {
     
     private func creationForm() -> IncomeSourceCreationForm {        
         return IncomeSourceCreationForm( userId: accountCoordinator.currentSession?.userId,
+                                         iconURL: selectedIconURL,
                                          name: name,
                                          currency: selectedCurrencyCode,
                                          monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
@@ -136,6 +142,7 @@ extension IncomeSourceEditViewModel {
     
     private func updatingForm() -> IncomeSourceUpdatingForm {
         return IncomeSourceUpdatingForm(id: incomeSource?.id,
+                                        iconURL: selectedIconURL,
                                         name: name,
                                         monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
                                         reminderAttributes: reminderViewModel.reminderAttributes)

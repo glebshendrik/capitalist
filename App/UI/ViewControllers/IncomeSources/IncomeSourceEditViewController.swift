@@ -27,11 +27,12 @@ class IncomeSourceEditViewController : FormTransactionsDependableEditViewControl
     }
     override var saveErrorMessage: String { return "Ошибка при сохранении источника доходов" }
     override var removeErrorMessage: String { return "Ошибка при удалении источника доходов" }
-    override var removeQuestionMessage: String { return "Удалить источник доходов?" }
+    override var removeQuestionMessage: String { return TransactionableType.incomeSource.removeQuestion }
     
     override func registerFormFields() -> [String : FormField] {
         return [IncomeSource.CodingKeys.name.rawValue : tableController.nameField,
-                IncomeSource.CodingKeys.currency.rawValue : tableController.currencyField]
+                IncomeSource.CodingKeys.currency.rawValue : tableController.currencyField,
+                IncomeSource.CodingKeys.monthlyPlannedCents.rawValue : tableController.monthlyPlannedField]
     }
     
     override func setup(tableController: FormFieldsTableViewController) {

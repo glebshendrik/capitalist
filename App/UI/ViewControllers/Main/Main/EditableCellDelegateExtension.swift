@@ -15,7 +15,7 @@ extension MainViewController : EditableCellDelegate {
         var removeWithTransactionsAction: ((UIAlertAction) -> Void)? = nil
         
         if let incomeSourceId = (cell as? IncomeSourceCollectionViewCell)?.viewModel?.id {
-            alertTitle = "Удалить источник доходов?"
+            alertTitle = TransactionableType.incomeSource.removeQuestion
             removeAction = { _ in
                 self.removeIncomeSource(by: incomeSourceId, deleteTransactions: false)
             }
@@ -24,7 +24,7 @@ extension MainViewController : EditableCellDelegate {
             }
         }
         if let expenseSourceId = (cell as? ExpenseSourceCollectionViewCell)?.viewModel?.id {
-            alertTitle = "Удалить кошелек?"
+            alertTitle = TransactionableType.expenseSource.removeQuestion
             removeAction = { _ in
                 self.removeExpenseSource(by: expenseSourceId, deleteTransactions: false)
             }
@@ -33,7 +33,7 @@ extension MainViewController : EditableCellDelegate {
             }
         }
         if let expenseCategoryViewModel = (cell as? ExpenseCategoryCollectionViewCell)?.viewModel {
-            alertTitle = "Удалить категорию трат?"
+            alertTitle = TransactionableType.expenseCategory.removeQuestion
             removeAction = { _ in
                 self.removeExpenseCategory(by: expenseCategoryViewModel.id,
                                            basketType: expenseCategoryViewModel.expenseCategory.basketType,
@@ -46,7 +46,7 @@ extension MainViewController : EditableCellDelegate {
             }
         }
         if let activeViewModel = (cell as? ActiveCollectionViewCell)?.viewModel {
-            alertTitle = "Удалить актив?"
+            alertTitle = TransactionableType.active.removeQuestion
             removeAction = { _ in
                 self.removeActive(by: activeViewModel.id,
                                   basketType: activeViewModel.basketType,
@@ -59,26 +59,13 @@ extension MainViewController : EditableCellDelegate {
             }
         }
         
-        let alertController = UIAlertController(title: alertTitle,
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        alertController.addAction(title: "Удалить",
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: removeAction)
-        
-        alertController.addAction(title: "Удалить вместе с транзакциями",
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: removeWithTransactionsAction)
-        
-        alertController.addAction(title: "Отмена",
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: nil)
-        
-        present(alertController, animated: true)
+        let actions: [UIAlertAction] = [UIAlertAction(title: "Удалить",
+                                                      style: .destructive,
+                                                      handler: removeAction),
+                                        UIAlertAction(title: "Удалить вместе с транзакциями",
+                                                      style: .destructive,
+                                                      handler: removeWithTransactionsAction)]
+        sheet(title: alertTitle, actions: actions)
     }
     
     func didTapEditButton(cell: EditableCellProtocol) {
@@ -91,8 +78,7 @@ extension MainViewController : EditableCellDelegate {
         if let expenseCategoryViewModel = (cell as? ExpenseCategoryCollectionViewCell)?.viewModel {
             showEditScreen(expenseCategory: expenseCategoryViewModel.expenseCategory,
                            basketType: expenseCategoryViewModel.expenseCategory.basketType)
-        }
-        // TODO: add safe case
+        }        
         if let activeViewModel = (cell as? ActiveCollectionViewCell)?.viewModel {
             showActiveEditScreen(active: activeViewModel.active,
                                  basketType: activeViewModel.basketType)

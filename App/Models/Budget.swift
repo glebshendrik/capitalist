@@ -10,16 +10,18 @@ import Foundation
 
 struct Budget : Decodable {
     let currency: Currency
-    let balanceCents: Int
-    let expenseSourcesBalanceCents: Int
-    var spentCentsAtPeriod: Int
-    let plannedCentsAtPeriod: Int
-    
+    let incomesAtPeriodCents: Int
+    let expenseSourcesAmountCents: Int
+    var safeActivesAmountCents: Int
+    let riskActivesAmountCents: Int
+    let activesAmountCents: Int
+        
     enum CodingKeys: String, CodingKey {
         case currency
-        case balanceCents = "balance_cents"
-        case spentCentsAtPeriod = "spent_cents_at_period"
-        case plannedCentsAtPeriod = "planned_cents_at_period"
-        case expenseSourcesBalanceCents = "expense_sources_balance_cents"
+        case incomesAtPeriodCents = "incomes_at_period_cents"
+        case expenseSourcesAmountCents = "expense_sources_amount_cents"
+        case safeActivesAmountCents = "safe_actives_amount_cents"
+        case riskActivesAmountCents = "risk_actives_amount_cents"
+        case activesAmountCents = "actives_amount_cents"
     }
 }

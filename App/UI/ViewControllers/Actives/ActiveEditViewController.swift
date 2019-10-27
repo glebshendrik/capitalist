@@ -25,7 +25,7 @@ class ActiveEditViewController : FormTransactionsDependableEditViewController {
     override var formTitle: String { return viewModel.title }
     override var saveErrorMessage: String { return "Ошибка при сохранении" }
     override var removeErrorMessage: String { return "Ошибка при удалении" }
-    override var removeQuestionMessage: String { return "Удалить актив?" }
+    override var removeQuestionMessage: String { return TransactionableType.active.removeQuestion }
     
     override func registerFormFields() -> [String : FormField] {
         return [Active.CodingKeys.name.rawValue : tableController.nameField,

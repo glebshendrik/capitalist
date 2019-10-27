@@ -22,7 +22,7 @@ class GoalExpenseSourceCollectionViewCell : ExpenseSourceCollectionViewCell {
             if viewModel.isGoalCompleted {
                 return UIColor.by(.blue6B93FB)
             }
-            return imageTintColor
+            return UIColor.by(.textFFFFFF)
         }
         
         func centerFillColor() -> UIColor {

@@ -52,11 +52,11 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     }
     
     var iconBackgroundImageName: String {
-        return basketType.defaultIconBackground
+        return basketType.iconBackgroundName(size: .medium)
     }
     
     var progressBackgroundImageName: String {
-        return basketType.defaultProgressBackground
+        return basketType.progressBackgroundName
     }
     
     var currency: Currency {
@@ -105,6 +105,10 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     
     var planned: String {
         return money(cents: active.monthlyPaymentCents, shouldRound: false)
+    }
+    
+    var plannedAtPeriod: String? {
+        return money(cents: active.paymentCentsAtPeriod, shouldRound: true)
     }
     
     var areExpensesPlanned: Bool {

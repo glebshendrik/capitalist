@@ -62,9 +62,9 @@ extension MainViewController {
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()        
-        self.budgetView = BudgetView(frame: CGRect.zero)
-        self.budgetView.delegate = self
-        navigationItem.titleView = self.budgetView
+        self.titleView = TitleView(frame: CGRect.zero)
+        self.titleView.delegate = self
+        navigationItem.titleView = self.titleView
     }
     
     private func setupMainMenu() {
@@ -145,18 +145,18 @@ extension MainViewController {
     
     private func layoutIncomeSourcesCollectionView() {
         fillLayout(collectionView: incomeSourcesCollectionView,
-                   itemHeight: 56.0,
+                   itemHeight: 54.0,
                    innerSpace: 2.0,
-                   outerSpace: 8.0,
+                   outerSpace: 1.0,
                    columns: 3)
     }
     
     private func layoutExpenseSourcesCollectionView() {
         fillLayout(collectionView: expenseSourcesCollectionView,
-                   itemHeight: 62.0,
+                   itemHeight: 54.0,
                    innerSpace: 2.0,
-                   outerSpace: 8.0,
-                   columns: 2)
+                   outerSpace: 1.0,
+                   columns: 3)
     }
     
     private func columnsPagedLayout(collectionView: UICollectionView,
@@ -178,7 +178,8 @@ extension MainViewController {
                             itemHeight: CGFloat,
                             innerSpace: CGFloat,
                             outerSpace: CGFloat,
-                            columns: Int) {
+                            columns: Int,
+                            leftInset: CGFloat = 10) {
         
         if let layout = collectionView.collectionViewLayout as? PagedCollectionViewLayout {
             
@@ -187,7 +188,7 @@ extension MainViewController {
             layout.columns = columns
             layout.rows = 1
             layout.edgeInsets = UIEdgeInsets(horizontal: outerSpace * 2, vertical: 0)
-            
+            layout.sectionEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: containerWidth * 0.333 - outerSpace)
             let width = CGFloat(containerWidth - layout.edgeInsets.horizontal - CGFloat(layout.columns - 1) * innerSpace) / CGFloat(layout.columns)
             
             layout.itemSize = CGSize(width: width, height: itemHeight)

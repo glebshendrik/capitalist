@@ -33,13 +33,9 @@ class ActiveSelectViewController : UIViewController, UIMessagePresenterManagerDe
     
     func set(delegate: ActiveSelectViewControllerDelegate,
              skipActiveId: Int?,
-             selectionType: TransactionPart,
-             noDebts: Bool,
-             accountType: AccountType?,
-             currency: String?) {
+             selectionType: TransactionPart) {
         self.delegate = delegate
         self.viewModel.skipActiveId = skipActiveId
-        self.viewModel.currency = currency
         self.selectionType = selectionType
     }
     

@@ -186,7 +186,7 @@ extension StatisticsViewController : GraphTableViewCellDelegate {
             })
         }
         
-        showActionSheet(with: actions)
+        sheet(title: nil, actions: actions)
     }
     
     func didTapGraphScaleButton() {
@@ -199,7 +199,7 @@ extension StatisticsViewController : GraphTableViewCellDelegate {
             })
         }
         
-        showActionSheet(with: actions)
+        sheet(title: nil, actions: actions)
     }
     
     func didTapAggregationTypeButton() {
@@ -212,26 +212,9 @@ extension StatisticsViewController : GraphTableViewCellDelegate {
             })
         }
         
-        showActionSheet(with: actions)
+        sheet(title: nil, actions: actions)
     }
-    
-    private func showActionSheet(with actions: [UIAlertAction]) {
-        let alertController = UIAlertController(title: nil,
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
         
-        for action in actions {
-            alertController.addAction(action)
-        }
-        
-        alertController.addAction(title: "Отмена",
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: nil)
-        
-        present(alertController, animated: true)
-    }
-    
     func didTapLinePieSwitchButton() {
         viewModel.switchLinePieChart()
         updateUI()

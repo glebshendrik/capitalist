@@ -46,6 +46,7 @@ struct Transaction : Decodable {
     let borrow: Borrow?
     let returningBorrow: Borrow?
     let borrowType: BorrowType?
+    let isBuyingAsset: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -71,6 +72,7 @@ struct Transaction : Decodable {
         case borrow = "borrow"
         case returningBorrow = "returning_borrow"
         case borrowType = "borrow_type"
+        case isBuyingAsset = "buying_asset"
     }
     
 }
@@ -87,8 +89,8 @@ struct TransactionCreationForm : Encodable, Validatable {
     let convertedAmountCurrency: String?
     let gotAt: Date?
     let comment: String?
-    let includedInBalance: Bool?
     let returningBorrowId: Int?
+    let isBuyingAsset: Bool
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
@@ -103,7 +105,7 @@ struct TransactionCreationForm : Encodable, Validatable {
         case gotAt = "got_at"
         case comment
         case returningBorrowId = "returning_borrow_id"
-        case includedInBalance = "included_in_balance"
+        case isBuyingAsset = "buying_asset"
     }
     
     func validate() -> [String : String]? {
@@ -157,7 +159,6 @@ struct TransactionUpdatingForm : Encodable, Validatable {
     let convertedAmountCurrency: String?
     let gotAt: Date?
     let comment: String?
-    let includedInBalance: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -171,7 +172,6 @@ struct TransactionUpdatingForm : Encodable, Validatable {
         case convertedAmountCurrency = "converted_amount_currency"
         case gotAt = "got_at"
         case comment
-        case includedInBalance = "included_in_balance"
     }
     
     func validate() -> [String : String]? {

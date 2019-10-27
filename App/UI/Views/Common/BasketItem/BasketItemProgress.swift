@@ -101,7 +101,6 @@ class BasketItemProgress : BasketItemView {
     
     private func setupProgress() {
         progressView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.backgroundColor = UIColor.by(.riskF2D6FE)
         progressView.isHidden = isProgressHidden
         addSubview(progressView)
     }

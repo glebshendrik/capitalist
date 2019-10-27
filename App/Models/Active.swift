@@ -31,6 +31,7 @@ struct Active : Decodable {
     let currency: Currency
     let costCents: Int
     let monthlyPaymentCents: Int?
+    let paymentCentsAtPeriod: Int?
     let investedCents: Int
     let boughtCents: Int
     let spentCents: Int
@@ -52,6 +53,7 @@ struct Active : Decodable {
         case currency
         case costCents = "cost_cents"
         case monthlyPaymentCents = "monthly_payment_cents"
+        case paymentCentsAtPeriod = "payment_cents_at_period"
         case investedCents = "invested_at_period_cents"
         case boughtCents = "bought_at_period_cents"
         case spentCents = "spent_at_period_cents"

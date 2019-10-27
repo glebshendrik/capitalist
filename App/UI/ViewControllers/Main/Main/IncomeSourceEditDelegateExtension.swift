@@ -14,7 +14,7 @@ extension MainViewController : IncomeSourceEditViewControllerDelegate {
     }
     
     func didUpdateIncomeSource() {
-        loadIncomeSources()
+        loadIncomeSources()        
     }
     
     func didRemoveIncomeSource() {

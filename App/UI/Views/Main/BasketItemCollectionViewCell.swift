@@ -20,7 +20,7 @@ class BasketItemCollectionViewCell : UICollectionViewCell, EditableCellProtocol 
     lazy var editButton: UIButton! = { return EditableCellEditButton() }()
     
     var progressContainerWidth: CGFloat {
-        return 46.0
+        return 48.0
     }
     
     var delegate: EditableCellDelegate?
@@ -117,7 +117,7 @@ class BasketItemCollectionViewCell : UICollectionViewCell, EditableCellProtocol 
     func setupProgressConstraints() {
         progress.snp.makeConstraints { make in
             make.width.equalTo(progressContainerWidth)
-            make.height.equalTo(16)
+            make.height.equalTo(14)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(icon.snp.bottom).offset(6)
         }
@@ -160,11 +160,11 @@ class BasketItemCollectionViewCell : UICollectionViewCell, EditableCellProtocol 
     func progressColor(basketType: BasketType) -> UIColor {
         switch basketType {
         case .joy:
-            return UIColor.by(.joyD7F6E6)
+            return UIColor.by(.joyC2C9E2)
         case .risk:
             return UIColor.by(.riskF2D6FE)
         case .safe:
-            return UIColor.by(.safeC2C9E2)
+            return UIColor.by(.safeD7F6E6)
         }
     }
 }

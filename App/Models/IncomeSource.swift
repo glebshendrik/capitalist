@@ -19,6 +19,7 @@ struct IncomeSource : Decodable {
     let isChild: Bool
     let activeId: Int?
     let monthlyPlannedCents: Int?
+    let plannedCentsAtPeriod: Int?
     let reminder: Reminder?
     
     enum CodingKeys: String, CodingKey {
@@ -32,6 +33,7 @@ struct IncomeSource : Decodable {
         case isChild = "is_child"
         case activeId = "active_id"
         case monthlyPlannedCents = "monthly_planned_cents"
+        case plannedCentsAtPeriod = "planned_cents_at_period"
         case reminder
     }
 
@@ -39,12 +41,14 @@ struct IncomeSource : Decodable {
 
 struct IncomeSourceCreationForm : Encodable, Validatable {
     let userId: Int?
+    let iconURL: URL?
     let name: String?
     let currency: String?
     let monthlyPlannedCents: Int?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
+        case iconURL = "icon_url"
         case name
         case currency
         case monthlyPlannedCents = "monthly_planned_cents"
@@ -72,11 +76,13 @@ struct IncomeSourceCreationForm : Encodable, Validatable {
 
 struct IncomeSourceUpdatingForm : Encodable, Validatable {
     let id: Int?
+    let iconURL: URL?
     let name: String?
     let monthlyPlannedCents: Int?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
+        case iconURL = "icon_url"
         case name
         case monthlyPlannedCents = "monthly_planned_cents"
         case reminderAttributes = "reminder_attributes"
@@ -84,7 +90,9 @@ struct IncomeSourceUpdatingForm : Encodable, Validatable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(iconURL, forKey: .iconURL)
         try container.encode(name, forKey: .name)
+        try container.encode(monthlyPlannedCents, forKey: .monthlyPlannedCents)
         try container.encode(reminderAttributes, forKey: .reminderAttributes)
     }
     

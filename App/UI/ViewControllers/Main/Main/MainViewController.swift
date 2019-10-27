@@ -27,14 +27,16 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var incomeSourcesCollectionView: UICollectionView!
     @IBOutlet weak var incomeSourcesActivityIndicator: UIView!
     @IBOutlet weak var incomeSourcesLoader: UIImageView!
+    @IBOutlet weak var incomeSourcesAmountLabel: UILabel!
     
     @IBOutlet weak var expenseSourcesCollectionView: UICollectionView!
     @IBOutlet weak var expenseSourcesActivityIndicator: UIView!
     @IBOutlet weak var expenseSourcesLoader: UIImageView!
+    @IBOutlet weak var expenseSourcesAmountLabel: UILabel!
     
     @IBOutlet weak var joyBasketProgressConstraint: NSLayoutConstraint!
-    @IBOutlet weak var riskBasketProgressConstraint: NSLayoutConstraint!
     @IBOutlet weak var safeBasketProgressConstraint: NSLayoutConstraint!
+    @IBOutlet weak var riskBasketProgressConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var joyBasketSpentLabel: UILabel!
     @IBOutlet weak var joyBasketTitleLabel: UILabel!
@@ -69,8 +71,10 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
 
     @IBOutlet weak var editDoneButton: UIButton!
     @IBOutlet weak var editDoneButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var basketTotalTitleLabel: UILabel!
+    @IBOutlet weak var basketTotalLabel: UILabel!
     
-    var budgetView: BudgetView!
+    var titleView: TitleView!
     var transactionController: TransactionController!
     var rearrangeController: RearrangeController!
     

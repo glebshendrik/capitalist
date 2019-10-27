@@ -27,7 +27,7 @@ class ExpenseCategoryEditViewController : FormTransactionsDependableEditViewCont
     }
     override var saveErrorMessage: String { return "Ошибка при сохранении категории трат" }
     override var removeErrorMessage: String { return "Ошибка при удалении категории трат" }
-    override var removeQuestionMessage: String { return "Удалить категорию трат?" }
+    override var removeQuestionMessage: String { return TransactionableType.expenseCategory.removeQuestion }
     
     override func registerFormFields() -> [String : FormField] {
         return [ExpenseCategory.CodingKeys.name.rawValue : tableController.nameField,

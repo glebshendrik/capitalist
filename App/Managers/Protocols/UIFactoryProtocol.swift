@@ -52,6 +52,10 @@ protocol UIFactoryProtocol {
     
     func expenseCategorySelectViewController(delegate: ExpenseCategorySelectViewControllerDelegate) -> ExpenseCategorySelectViewController?
     
+    func activeSelectViewController(delegate: ActiveSelectViewControllerDelegate,
+                                    skipActiveId: Int?,
+                                    selectionType: TransactionPart) -> ActiveSelectViewController?
+    
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
                                        source: Transactionable?,
                                        destination: Transactionable?,

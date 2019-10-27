@@ -274,10 +274,10 @@ extension MainViewController : TransactionControllerDelegate {
             } else {
                 animateTransactionCancelled(from: transactionStartedCell)
                 
-                selectIntersectedItem(at: locationInView,
-                                      in: self.view,
-                                      with: transactionStartedCollectionView,
-                                      indexPath: transactionStartedIndexPath)
+//                selectIntersectedItem(at: locationInView,
+//                                      in: self.view,
+//                                      with: transactionStartedCollectionView,
+//                                      indexPath: transactionStartedIndexPath)
             }
         }
     }

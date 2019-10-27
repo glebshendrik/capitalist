@@ -37,7 +37,7 @@ extension ActiveEditViewController : ActiveEditTableControllerDelegate {
     
     func didChange(isIncomePlanned: Bool) {
         viewModel.isIncomePlanned = isIncomePlanned
-        updateTableUI()
+        updateTableUI(animated: false)
     }
     
     func didTapActiveIncomeType() {
@@ -84,7 +84,7 @@ extension ActiveEditViewController {
                                     self.update(activeType: activeType)
             })
         }
-        showActionSheet(with: actions)
+        sheet(title: nil, actions: actions)
     }
     
     private func showActiveIncomeTypesSheet() {
@@ -95,23 +95,6 @@ extension ActiveEditViewController {
                                     self.update(activeIncomeType: activeIncomeType)
             })
         }        
-        showActionSheet(with: actions)
-    }
-    
-    private func showActionSheet(with actions: [UIAlertAction]) {
-        let alertController = UIAlertController(title: nil,
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
-        
-        for action in actions {
-            alertController.addAction(action)
-        }
-        
-        alertController.addAction(title: "Отмена",
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: nil)
-        
-        present(alertController, animated: true)
+        sheet(title: nil, actions: actions)
     }
 }

@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum ItemSize : String {
+    case tiny = "xs"
+    case small = "s"
+    case medium = "m"
+    case large = "l"
+}
+
 enum BasketType : String, Codable {
     case joy = "joy"
     case risk = "risk"
@@ -23,38 +30,13 @@ enum BasketType : String, Codable {
             return .expenseCategorySafe
         }
     }
-    
-    var defaultIconBackground: String {
-        switch self {
-        case .joy:
-            return "joy-background"
-        case .risk:
-            return "risk-background"
-        case .safe:
-            return "safe-background"
-        }
+        
+    var progressBackgroundName: String {
+        return "\(self.rawValue)-progress-background"
     }
     
-    var defaultIconEditBackground: String {
-        switch self {
-        case .joy:
-            return "joy-category-background-pic"
-        case .risk:
-            return "risk-category-background-pic"
-        case .safe:
-            return "safe-category-background-pic"
-        }
-    }
-    
-    var defaultProgressBackground: String {
-        switch self {
-        case .joy:
-            return "joy-planned-background"
-        case .risk:
-            return "risk-planned-background"
-        case .safe:
-            return "safe-planned-background"
-        }
+    func iconBackgroundName(size: ItemSize) -> String {
+        return "\(self.rawValue)-icon-bkg-\(size.rawValue)"
     }
 }
 

@@ -30,10 +30,10 @@ class TransactionEditViewModel {
     var source: Transactionable? = nil { didSet { didSetSource(oldValue) } }
     var destination: Transactionable? = nil { didSet { didSetDestination(oldValue) } }
     var amount: String? = nil { didSet { didSetAmount() } }
-    var convertedAmount: String? = nil { didSet { didSetConvertedAmount() } }
-    var includedInBalance: Bool = false
+    var convertedAmount: String? = nil { didSet { didSetConvertedAmount() } }    
     var comment: String? = nil
     var gotAt: Date? = nil
+    var isBuyingAsset: Bool = true
     var amountConverted: String? = nil
     var convertedAmountConverted: String? = nil
     var exchangeRate: Float = 1.0 { didSet { didSetExchangeRate() } }
@@ -70,7 +70,7 @@ class TransactionEditViewModel {
         self.transaction = transaction
         self.comment = transaction.comment
         self.gotAt = transaction.gotAt
-        self.includedInBalance = transaction.includedInBalance ?? false
+        self.isBuyingAsset = transaction.isBuyingAsset
         if let returningBorrow = transaction.returningBorrow {
             self.returningBorrow = BorrowViewModel(borrow: returningBorrow)
         }

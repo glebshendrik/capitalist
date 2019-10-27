@@ -22,6 +22,9 @@ open class PagedCollectionViewLayout : UICollectionViewLayout {
     @IBInspectable
     public var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     
+    @IBInspectable
+    public var sectionEdgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    
     private var attributes: [UICollectionViewLayoutAttributes] = []
     
     func set(columns: Int) {
@@ -66,8 +69,8 @@ open class PagedCollectionViewLayout : UICollectionViewLayout {
         guard let collectionView = self.collectionView else { return }
         
         let rect = collectionView.bounds.inset(by: edgeInsets)
-        var offsetX = edgeInsets.left
-        var offsetY = edgeInsets.top
+        var offsetX = edgeInsets.left + sectionEdgeInsets.left
+        var offsetY = edgeInsets.top + sectionEdgeInsets.top
         
         var marginX = 0.0
         
@@ -96,7 +99,6 @@ open class PagedCollectionViewLayout : UICollectionViewLayout {
             let row = (number % pageSize) / columns
             
             let attr = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: number, section: 0))
-            
             attr.frame = CGRect(x: offsetX + collectionView.bounds.width * CGFloat(page) + (CGFloat(marginX) + itemSize.width) * CGFloat(col),
                                 y: offsetY + (CGFloat(marginY) + itemSize.height) * CGFloat(row),
                                 width: itemSize.width,
@@ -126,7 +128,9 @@ open class PagedCollectionViewLayout : UICollectionViewLayout {
         
         let size = collectionView.bounds.size
         let collectionViewWidth = collectionView.frame.size.width
-        let newSize = CGSize(width: CGFloat(numberOfPages) * collectionViewWidth,
+        let numberOfItems = collectionView.numberOfItems(inSection: 0)
+        let rightInset = numberOfItems % columns == 0 ? sectionEdgeInsets.right : 0
+        let newSize = CGSize(width: CGFloat(numberOfPages) * collectionViewWidth + rightInset,
                              height: size.height)
         
         return newSize

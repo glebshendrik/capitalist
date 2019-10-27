@@ -21,6 +21,7 @@ enum ColorAsset : String {
     case dark374467 = "dark 374467"
     case dark2A314B = "dark 2A314B"
     case dark404B6F = "dark 404B6F"
+    case dark283455 = "dark 283455"
     
     case delimeter333D5B = "delimeter 333D5B"
     case delimeterAFC1FF = "delimeter AFC1FF"
@@ -35,16 +36,17 @@ enum ColorAsset : String {
     case textAFC1FF = "text AFC1FF"
     case textFFFFFF = "text FFFFFF"
     
-    case redE77768 = "red E77768"
+    case redE5487C = "red E5487C"
     case redFE3745 = "red FE3745"
     case green68E79B = "green 68E79B"
+    case green295C5B = "green 295C5B"
     
-    case joy6EEC99 = "joy 6EEC99"
-    case joyD7F6E6 = "joy D7F6E6"
+    case joy4828D1 = "safe 4828D1"
+    case joyC2C9E2 = "safe C2C9E2"
+    case safe6EEC99 = "joy 6EEC99"
+    case safeD7F6E6 = "joy D7F6E6"
     case riskC765F0 = "risk C765F0"
-    case riskF2D6FE = "risk F2D6FE"
-    case safe4828D1 = "safe 4828D1"
-    case safeC2C9E2 = "safe C2C9E2"
+    case riskF2D6FE = "risk F2D6FE"    
 }
 
 extension UIColor {

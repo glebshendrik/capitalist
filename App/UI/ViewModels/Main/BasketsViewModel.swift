@@ -31,19 +31,29 @@ class BasketsViewModel {
     }
     
     var joyBasketRatio: CGFloat {
-        return ratioViewModelBy(basketType: .joy)?.ratio ?? 0.333
+        guard isAnySelected else { return 0.333 }
+        return isJoyBasketSelected ? 0.7 : 0.15
+//        return ratioViewModelBy(basketType: .joy)?.ratio ?? 0.333
     }
     
     var riskBasketRatio: CGFloat {
-        return ratioViewModelBy(basketType: .risk)?.ratio ?? 0.333
+        guard isAnySelected else { return 0.333 }
+        return isRiskBasketSelected ? 0.7 : 0.15
+//        return ratioViewModelBy(basketType: .risk)?.ratio ?? 0.333
     }
     
     var safeBasketRatio: CGFloat {
-        return ratioViewModelBy(basketType: .safe)?.ratio ?? 0.334
+        guard isAnySelected else { return 0.334 }
+        return isSafeBasketSelected ? 0.7 : 0.15
+//        return ratioViewModelBy(basketType: .safe)?.ratio ?? 0.334
     }
     
     var selectedBasketId: Int? {
         return basketViewModels.first { $0.selected }?.id
+    }
+    
+    var isAnySelected: Bool {
+        return isJoyBasketSelected || isSafeBasketSelected || isRiskBasketSelected
     }
     
     var isJoyBasketSelected: Bool {
@@ -81,12 +91,12 @@ class BasketsViewModel {
     init(baskets: [Basket], basketTypeToSelect: BasketType?) {
         basketViewModels = baskets.map { BasketViewModel(basket: $0) }
         selectBasketBy(basketType: basketTypeToSelect ?? .joy)
-        updateRatios()
+//        updateRatios()
     }
     
     func append(cents: Int, basketType: BasketType) {
         basketViewModelBy(basketType: basketType)?.append(cents: cents)
-        updateRatios()
+//        updateRatios()
     }
     
     func selectBasketBy(basketType: BasketType) {
