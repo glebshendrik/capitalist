@@ -14,7 +14,7 @@ extension BalanceViewController {
     @objc func loadData() {
         loadBudget()
         loadExpenseSources()
-        loadExpenseCategories()
+        loadActives()
     }
     
     private func loadBudget() {
@@ -39,15 +39,15 @@ extension BalanceViewController {
         }
     }
     
-    private func loadExpenseCategories() {
-        set(expenseCategoriesActivityIndicator, hidden: false, animated: false)
+    private func loadActives() {
+        set(activesActivityIndicator, hidden: false, animated: false)
         firstly {
-            viewModel.loadExpenseCategories()
+            viewModel.loadActives()
         }.catch { e in
             self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки активов", theme: .error)
         }.finally {
-            self.set(self.expenseCategoriesActivityIndicator, hidden: true)
-            self.updateExpenseCategoriesUI()
+            self.set(self.activesActivityIndicator, hidden: true)
+            self.updateActivesUI()
         }
     }
 }

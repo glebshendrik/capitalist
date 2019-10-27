@@ -18,8 +18,7 @@ extension BalanceViewController {
     
     func setupUI() {
         setupTables()
-        setupLoaders()
-        
+        setupLoaders()        
         setupNotifications()
     }
     
@@ -29,21 +28,21 @@ extension BalanceViewController {
     
     private func setupTables() {
         expenseSourcesSupport = BalanceExpenseSourcesTableSupport(viewModel: viewModel, delegate: self)
-        expenseCategoriesSupport = BalanceExpenseCategoriesTableSupport(viewModel: viewModel, delegate: self)
+        activesSupport = BalanceActivesTableSupport(viewModel: viewModel, delegate: self)
         
         expenseSourcesTableView.dataSource = expenseSourcesSupport
         expenseSourcesTableView.delegate = expenseSourcesSupport
         
-        expenseCategoriesTableView.dataSource = expenseCategoriesSupport
-        expenseCategoriesTableView.delegate = expenseCategoriesSupport
+        activesTableView.dataSource = activesSupport
+        activesTableView.delegate = activesSupport
         
         expenseSourcesTableView.tableFooterView = UIView()
-        expenseCategoriesTableView.tableFooterView = UIView()
+        activesTableView.tableFooterView = UIView()
     }
     
     private func setupLoaders() {
         expenseSourcesLoader.showLoader()
-        expenseCategoriesLoader.showLoader()
+        activesLoader.showLoader()
     }
     
     func updateUI() {
@@ -51,25 +50,25 @@ extension BalanceViewController {
         updateBalanceCategoryUI()
         updateBalanceAmountsUI()
         updateExpenseSourcesUI()
-        updateExpenseCategoriesUI()
+        updateActivesUI()
     }
     
     func updateBalanceAmountsUI() {
         expenseSourcesAmountLabel.text = viewModel.budgetViewModel?.expenseSourcesAmountRounded
-        expenseCategoriesAmountLabel.text = ""
+        activesAmountLabel.text = viewModel.budgetViewModel?.activesAmountRounded
     }
     
     func updateExpenseSourcesUI() {
         expenseSourcesTableView.reloadData(with: .automatic)
     }
     
-    func updateExpenseCategoriesUI() {
-        expenseCategoriesTableView.reloadData(with: .automatic)
+    func updateActivesUI() {
+        activesTableView.reloadData(with: .automatic)
     }
     
     func updateTabsUI() {
                 
-        func tabsAppearances(for balanceCategory: BalanceCategory) -> (expenseSources: TabAppearance, expenseCategories: TabAppearance) {
+        func tabsAppearances(for balanceCategory: BalanceCategory) -> (expenseSources: TabAppearance, actives: TabAppearance) {
             
             let selectedColor = UIColor.by(.textFFFFFF)
             let unselectedColor = UIColor.by(.text9EAACC)
@@ -80,34 +79,34 @@ extension BalanceViewController {
             switch balanceCategory {
             case .expenseSources:
                 return (expenseSources: selectedTabAppearance,
-                        expenseCategories: unselectedTabAppearance)
-            case .expenseCategories:
+                        actives: unselectedTabAppearance)
+            case .actives:
                 return (expenseSources: unselectedTabAppearance,
-                        expenseCategories: selectedTabAppearance)
+                        actives: selectedTabAppearance)
             }
         }
         
         let tabsAppearance = tabsAppearances(for: viewModel.selectedBalanceCategory)
         
         expenseSourcesLabel.textColor = tabsAppearance.expenseSources.textColor
-        expenseCategoriesLabel.textColor = tabsAppearance.expenseCategories.textColor
+        activesLabel.textColor = tabsAppearance.actives.textColor
         
         expenseSourcesSelectionIndicator.isHidden = tabsAppearance.expenseSources.isHidden
-        expenseCategoriesSelectionIndicator.isHidden = tabsAppearance.expenseCategories.isHidden
+        activesSelectionIndicator.isHidden = tabsAppearance.actives.isHidden
     }
     
     func updateBalanceCategoryUI() {
         
-        func layoutPriorities(by balanceCategory: BalanceCategory) -> (expenseSourcesPriority: UILayoutPriority, expenseCategoriesPriority: UILayoutPriority) {
+        func layoutPriorities(by balanceCategory: BalanceCategory) -> (expenseSourcesPriority: UILayoutPriority, activesPriority: UILayoutPriority) {
             
             let low = UILayoutPriority(integerLiteral: 998)
             let high = UILayoutPriority(integerLiteral: 999)
             
             switch balanceCategory {
             case .expenseSources:
-                return (expenseSourcesPriority: high, expenseCategoriesPriority: low)
-            case .expenseCategories:
-                return (expenseSourcesPriority: low, expenseCategoriesPriority: high)
+                return (expenseSourcesPriority: high, activesPriority: low)
+            case .actives:
+                return (expenseSourcesPriority: low, activesPriority: high)
             }
         }
         
@@ -116,7 +115,7 @@ extension BalanceViewController {
         UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.5, initialSpringVelocity: 0.1, options: .curveEaseInOut, animations: {
             
             self.expenseSourcesContainerLeftConstraint.priority = priorities.expenseSourcesPriority
-            self.expenseCategoriesContainerLeftConstraint.priority = priorities.expenseCategoriesPriority
+            self.activesContainerLeftConstraint.priority = priorities.activesPriority
             
             self.view.layoutIfNeeded()
         }, completion: nil)

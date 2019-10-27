@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol BalanceExpenseCategoriesTableSupportDelegate : class {
-    func didSelect(expenseCategory: ExpenseCategoryViewModel)
+protocol BalanceActivesTableSupportDelegate : class {
+    func didSelect(active: ActiveViewModel)
 }
 
-class BalanceExpenseCategoriesTableSupport : NSObject, UITableViewDelegate, UITableViewDataSource {
+class BalanceActivesTableSupport : NSObject, UITableViewDelegate, UITableViewDataSource {
     private let viewModel: BalanceViewModel
-    private weak var delegate: BalanceExpenseCategoriesTableSupportDelegate?
+    private weak var delegate: BalanceActivesTableSupportDelegate?
     
-    init(viewModel: BalanceViewModel, delegate: BalanceExpenseCategoriesTableSupportDelegate) {
+    init(viewModel: BalanceViewModel, delegate: BalanceActivesTableSupportDelegate) {
         self.viewModel = viewModel
         self.delegate = delegate
     }
@@ -26,22 +26,22 @@ class BalanceExpenseCategoriesTableSupport : NSObject, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfExpenseCategories
+        return viewModel.numberOfActives
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActiveExpenseCategoryTableViewCell", for: indexPath) as? ActiveExpenseCategoryTableViewCell,
-            let expenseCategoryViewModel = viewModel.expenseCategoryViewModel(at: indexPath) else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActiveTableViewCell", for: indexPath) as? ActiveTableViewCell,
+            let activeViewModel = viewModel.activeViewModel(at: indexPath) else {
                 return UITableViewCell()
         }
-        cell.viewModel = expenseCategoryViewModel
+        cell.viewModel = activeViewModel
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let expenseCategoryViewModel = viewModel.expenseCategoryViewModel(at: indexPath) else { return }
-        delegate?.didSelect(expenseCategory: expenseCategoryViewModel)
+        guard let activeViewModel = viewModel.activeViewModel(at: indexPath) else { return }
+        delegate?.didSelect(active: activeViewModel)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

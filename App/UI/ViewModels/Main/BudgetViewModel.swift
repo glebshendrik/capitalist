@@ -26,6 +26,10 @@ class BudgetViewModel {
     var riskActivesAmountRounded: String {
         return budget.riskActivesAmountCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
     }
+    
+    var activesAmountRounded: String {
+        return budget.activesAmountCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
+    }
         
     init(budget: Budget) {
         self.budget = budget

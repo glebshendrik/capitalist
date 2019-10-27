@@ -8,14 +8,14 @@
 
 import UIKit
 
-extension BalanceViewController : BalanceExpenseSourcesTableSupportDelegate, BalanceExpenseCategoriesTableSupportDelegate {
+extension BalanceViewController : BalanceExpenseSourcesTableSupportDelegate, BalanceActivesTableSupportDelegate {
     
     func didSelect(expenseSource: ExpenseSourceViewModel) {
         showStatistics(with: expenseSource.asTransactionFilter())
     }
     
-    func didSelect(expenseCategory: ExpenseCategoryViewModel) {
-        showStatistics(with: expenseCategory.asIncludedInBalanceFilter())
+    func didSelect(active: ActiveViewModel) {
+//        showStatistics(with: expenseCategory.asIncludedInBalanceFilter())
     }
 }
 

@@ -11,34 +11,34 @@ import PromiseKit
 
 enum BalanceCategory {
     case expenseSources
-    case expenseCategories
+    case actives
 }
 
 class BalanceViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
-    private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
+    private let activesCoordinator: ActivesCoordinatorProtocol
     
     public private(set) var budgetViewModel: BudgetViewModel? = nil
     private var expenseSourceViewModels: [ExpenseSourceViewModel] = []
-    private var expenseCategoryViewModels: [ExpenseCategoryViewModel] = []
+    private var activeViewModels: [ActiveViewModel] = []
     
     var numberOfExpenseSources: Int {
         return expenseSourceViewModels.count
     }
     
-    var numberOfExpenseCategories: Int {
-        return expenseCategoryViewModels.count
+    var numberOfActives: Int {
+        return activeViewModels.count
     }
     
     var selectedBalanceCategory: BalanceCategory = .expenseSources
     
     init(accountCoordinator: AccountCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
-         expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol) {
+         activesCoordinator: ActivesCoordinatorProtocol) {
         self.accountCoordinator = accountCoordinator
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
-        self.expenseCategoriesCoordinator = expenseCategoriesCoordinator
+        self.activesCoordinator = activesCoordinator
     }
     
     func loadBudget() -> Promise<Void> {
@@ -58,12 +58,12 @@ class BalanceViewModel {
                 }.asVoid()
     }
     
-    func loadExpenseCategories() -> Promise<Void> {
+    func loadActives() -> Promise<Void> {
         return  firstly {
-                    expenseCategoriesCoordinator.index()
-                }.get { expenseCategories in
-                    self.expenseCategoryViewModels = expenseCategories
-                        .map { ExpenseCategoryViewModel(expenseCategory: $0)}
+                    activesCoordinator.indexUserActives()
+                }.get { actives in
+                    self.activeViewModels = actives
+                        .map { ActiveViewModel(active: $0)}
                 }.asVoid()
     }
     
@@ -71,7 +71,7 @@ class BalanceViewModel {
         return expenseSourceViewModels.item(at: indexPath.row)
     }
     
-    func expenseCategoryViewModel(at indexPath: IndexPath) -> ExpenseCategoryViewModel? {
-        return expenseCategoryViewModels.item(at: indexPath.row)
+    func activeViewModel(at indexPath: IndexPath) -> ActiveViewModel? {
+        return activeViewModels.item(at: indexPath.row)
     }
 }

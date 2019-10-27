@@ -17,28 +17,28 @@ class BalanceViewController : UIViewController, UIMessagePresenterManagerDependa
     var viewModel: BalanceViewModel!
     
     var expenseSourcesSupport: BalanceExpenseSourcesTableSupport?
-    var expenseCategoriesSupport: BalanceExpenseCategoriesTableSupport?
+    var activesSupport: BalanceActivesTableSupport?
     
     @IBOutlet weak var expenseSourcesLabel: UILabel!
-    @IBOutlet weak var expenseCategoriesLabel: UILabel!
+    @IBOutlet weak var activesLabel: UILabel!
     
     @IBOutlet weak var expenseSourcesSelectionIndicator: UIView!
-    @IBOutlet weak var expenseCategoriesSelectionIndicator: UIView!
+    @IBOutlet weak var activesSelectionIndicator: UIView!
     
     @IBOutlet weak var expenseSourcesActivityIndicator: UIView!
-    @IBOutlet weak var expenseCategoriesActivityIndicator: UIView!
+    @IBOutlet weak var activesActivityIndicator: UIView!
     
     @IBOutlet weak var expenseSourcesLoader: UIImageView!
-    @IBOutlet weak var expenseCategoriesLoader: UIImageView!
+    @IBOutlet weak var activesLoader: UIImageView!
     
     @IBOutlet weak var expenseSourcesContainerLeftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var expenseCategoriesContainerLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var activesContainerLeftConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var expenseSourcesTableView: UITableView!
-    @IBOutlet weak var expenseCategoriesTableView: UITableView!
+    @IBOutlet weak var activesTableView: UITableView!
     
     @IBOutlet weak var expenseSourcesAmountLabel: UILabel!
-    @IBOutlet weak var expenseCategoriesAmountLabel: UILabel!
+    @IBOutlet weak var activesAmountLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class BalanceViewController : UIViewController, UIMessagePresenterManagerDependa
         select(.expenseSources)
     }
     
-    @IBAction func didTapExpenseCategories(_ sender: Any) {
-        select(.expenseCategories)
+    @IBAction func didTapActives(_ sender: Any) {
+        select(.actives)
     }
 }

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Sz-W8-BdB">
-                                <rect key="frame" x="0.0" y="20" width="375" height="57"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohq-SX-YqO">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="57"/>
@@ -85,7 +83,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDQ-dg-vKX">
                                                 <rect key="frame" x="0.0" y="0.0" width="187.5" height="57"/>
                                                 <connections>
-                                                    <action selector="didTapExpenseCategories:" destination="7WN-MS-M01" eventType="touchUpInside" id="vTS-z8-27b"/>
+                                                    <action selector="didTapActives:" destination="7WN-MS-M01" eventType="touchUpInside" id="vTS-z8-27b"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -121,38 +119,38 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tW7-J3-aPu">
-                                <rect key="frame" x="0.0" y="77" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="57" width="375" height="1"/>
                                 <color key="backgroundColor" name="delimeter 333D5B"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="ASt-Xk-hru"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VTb-en-szb" userLabel="balance pieces container">
-                                <rect key="frame" x="0.0" y="78" width="375" height="589"/>
+                                <rect key="frame" x="0.0" y="58" width="375" height="609"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UbF-hC-YPy" userLabel="expense sources">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="589"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="609"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCa-ky-GWE">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="545"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="565"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpenseSourceTableViewCell" rowHeight="60" id="0VG-hU-p7N" customClass="ExpenseSourceTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="1" width="375" height="60"/>
+                                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0VG-hU-p7N" id="ATR-TS-nVJ">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Labelasdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUf-M2-ta0">
-                                                                    <rect key="frame" x="68" y="20.5" width="130" height="19"/>
+                                                                    <rect key="frame" x="68" y="20.5" width="132" height="19"/>
                                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                                     <color key="textColor" name="text FFFFFF"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEy-Tm-M4F">
-                                                                    <rect key="frame" x="214" y="21" width="145" height="18"/>
+                                                                    <rect key="frame" x="216" y="21" width="143" height="18"/>
                                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                                     <color key="textColor" name="text FFFFFF"/>
                                                                     <nil key="highlightedColor"/>
@@ -161,7 +159,7 @@
                                                                     <rect key="frame" x="16" y="12" width="36" height="36"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="expense-source-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Oki-Kn-NOm">
-                                                                            <rect key="frame" x="10" y="11.5" width="16" height="13"/>
+                                                                            <rect key="frame" x="10" y="10" width="16" height="16"/>
                                                                             <color key="tintColor" name="text FFFFFF"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="16" id="8No-Dm-aj8"/>
@@ -215,19 +213,19 @@
                                                 </prototypes>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zNm-yZ-mXM">
-                                                <rect key="frame" x="0.0" y="545" width="375" height="44"/>
+                                                <rect key="frame" x="0.0" y="565" width="375" height="44"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7lR-fV-onT">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Итого:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMw-Zv-qsm">
-                                                                <rect key="frame" x="159.5" y="13" width="46.5" height="18"/>
+                                                                <rect key="frame" x="162" y="13" width="46" height="18"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                                 <color key="textColor" name="text 9EAACC"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9Q-bf-UON">
-                                                                <rect key="frame" x="214" y="13" width="145" height="18"/>
+                                                                <rect key="frame" x="216" y="13" width="143" height="18"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                                 <color key="textColor" name="text FFFFFF"/>
                                                                 <nil key="highlightedColor"/>
@@ -252,10 +250,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6t-j9-tMq">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="589"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="609"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="oBN-ol-x06">
-                                                        <rect key="frame" x="160" y="279" width="55" height="31"/>
+                                                        <rect key="frame" x="132.5" y="273.5" width="110" height="62"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.29922945205479451" colorSpace="custom" customColorSpace="sRGB"/>
@@ -286,28 +284,28 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGd-mU-fOk" userLabel="expense categories">
-                                        <rect key="frame" x="375" y="0.0" width="375" height="589"/>
+                                        <rect key="frame" x="375" y="0.0" width="375" height="609"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="2iD-pz-Iwx">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="545"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="565"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActiveExpenseCategoryTableViewCell" rowHeight="60" id="trg-hw-24h" customClass="ActiveExpenseCategoryTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="1" width="375" height="60"/>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActiveTableViewCell" rowHeight="60" id="trg-hw-24h" customClass="ActiveTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="trg-hw-24h" id="KMB-D2-T3n">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Labelasdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39n-qT-4WC">
-                                                                    <rect key="frame" x="68" y="20.5" width="130" height="19"/>
+                                                                    <rect key="frame" x="68" y="20.5" width="132" height="19"/>
                                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                                     <color key="textColor" name="text FFFFFF"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLi-ya-gJa">
-                                                                    <rect key="frame" x="214" y="21" width="145" height="18"/>
+                                                                    <rect key="frame" x="216" y="21" width="143" height="18"/>
                                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                                     <color key="textColor" name="text FFFFFF"/>
                                                                     <nil key="highlightedColor"/>
@@ -371,27 +369,27 @@
                                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <connections>
                                                             <outlet property="backgroundImage" destination="BOy-X7-pg3" id="yOF-Je-bJH"/>
+                                                            <outlet property="costLabel" destination="QLi-ya-gJa" id="TVm-fW-IeX"/>
                                                             <outlet property="iconImageView" destination="jjo-xE-Ozb" id="zHU-fa-N1A"/>
                                                             <outlet property="nameLabel" destination="39n-qT-4WC" id="Hbp-Tk-iby"/>
-                                                            <outlet property="spentLabel" destination="QLi-ya-gJa" id="VCu-1J-att"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhW-uM-I17">
-                                                <rect key="frame" x="0.0" y="545" width="375" height="44"/>
+                                                <rect key="frame" x="0.0" y="565" width="375" height="44"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXa-p0-qAh">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Итого:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQ9-gP-dC0">
-                                                                <rect key="frame" x="159.5" y="13" width="46.5" height="18"/>
+                                                                <rect key="frame" x="162" y="13" width="46" height="18"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                                 <color key="textColor" name="text 9EAACC"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2UI-ZD-acs">
-                                                                <rect key="frame" x="214" y="13" width="145" height="18"/>
+                                                                <rect key="frame" x="216" y="13" width="143" height="18"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                                 <color key="textColor" name="text FFFFFF"/>
                                                                 <nil key="highlightedColor"/>
@@ -416,10 +414,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KW2-X3-LJR">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="589"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="609"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="o9a-UG-Xdj">
-                                                        <rect key="frame" x="160" y="279" width="55" height="31"/>
+                                                        <rect key="frame" x="132.5" y="273.5" width="110" height="62"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -483,13 +481,13 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="vef-Gg-VJL"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="expenseCategoriesActivityIndicator" destination="KW2-X3-LJR" id="fwa-xA-YVV"/>
-                        <outlet property="expenseCategoriesAmountLabel" destination="2UI-ZD-acs" id="QJo-eh-F96"/>
-                        <outlet property="expenseCategoriesContainerLeftConstraint" destination="NpB-G5-WSa" id="cRK-BA-9Rl"/>
-                        <outlet property="expenseCategoriesLabel" destination="C7k-eL-F3K" id="iWO-HE-FcC"/>
-                        <outlet property="expenseCategoriesLoader" destination="o9a-UG-Xdj" id="QOj-Q3-Wwy"/>
-                        <outlet property="expenseCategoriesSelectionIndicator" destination="3fL-eq-8gp" id="412-Yk-99C"/>
-                        <outlet property="expenseCategoriesTableView" destination="2iD-pz-Iwx" id="Nt2-0K-Gj5"/>
+                        <outlet property="activesActivityIndicator" destination="KW2-X3-LJR" id="fwa-xA-YVV"/>
+                        <outlet property="activesAmountLabel" destination="2UI-ZD-acs" id="QJo-eh-F96"/>
+                        <outlet property="activesContainerLeftConstraint" destination="NpB-G5-WSa" id="cRK-BA-9Rl"/>
+                        <outlet property="activesLabel" destination="C7k-eL-F3K" id="iWO-HE-FcC"/>
+                        <outlet property="activesLoader" destination="o9a-UG-Xdj" id="QOj-Q3-Wwy"/>
+                        <outlet property="activesSelectionIndicator" destination="3fL-eq-8gp" id="412-Yk-99C"/>
+                        <outlet property="activesTableView" destination="2iD-pz-Iwx" id="Nt2-0K-Gj5"/>
                         <outlet property="expenseSourcesActivityIndicator" destination="O6t-j9-tMq" id="tga-By-Kf3"/>
                         <outlet property="expenseSourcesAmountLabel" destination="U9Q-bf-UON" id="NaV-I0-1x5"/>
                         <outlet property="expenseSourcesContainerLeftConstraint" destination="wAn-Xm-Vjy" id="uFo-Si-9Wv"/>
