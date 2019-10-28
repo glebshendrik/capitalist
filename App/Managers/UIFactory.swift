@@ -321,4 +321,14 @@ class UIFactory : UIFactoryProtocol {
                                                selectionType: selectionType)
         return activeSelectViewController
     }
+    
+    func dependentIncomeSourceInfoViewController(activeName: String) -> UIViewController? {
+        
+        let dependentIncomeSourceInfoViewController = router.viewController(.DependentIncomeSourceCreationMessageViewController) as? DependentIncomeSourceInfoViewController
+                
+        dependentIncomeSourceInfoViewController?.activeName = activeName
+        dependentIncomeSourceInfoViewController?.modalPresentationStyle = .overCurrentContext
+        dependentIncomeSourceInfoViewController?.modalTransitionStyle = .crossDissolve
+        return dependentIncomeSourceInfoViewController    
+    }
 }

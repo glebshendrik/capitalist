@@ -237,7 +237,7 @@
 		FA835D662265F21F00A592F2 /* GraphSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D652265F21F00A592F2 /* GraphSection.swift */; };
 		FA835D682265F23F00A592F2 /* HistoryTransactionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D672265F23F00A592F2 /* HistoryTransactionsSection.swift */; };
 		FA835D6B2268260E00A592F2 /* GraphFiltersToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D6A2268260D00A592F2 /* GraphFiltersToggleTableViewCell.swift */; };
-		FA8382B621F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */; };
+		FA8382B621F89FE800307ECD /* DependentIncomeSourceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8382B521F89FE800307ECD /* DependentIncomeSourceInfoViewController.swift */; };
 		FA84E7E5225625E300C0A274 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7E4225625E300C0A274 /* GraphViewModel.swift */; };
 		FA84E7E722562E5B00C0A274 /* CurrencyConverterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7E622562E5B00C0A274 /* CurrencyConverterProtocol.swift */; };
 		FA84E7E922562ED700C0A274 /* CurrencyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7E822562ED700C0A274 /* CurrencyConverter.swift */; };
@@ -656,7 +656,7 @@
 		FA835D652265F21F00A592F2 /* GraphSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphSection.swift; sourceTree = "<group>"; };
 		FA835D672265F23F00A592F2 /* HistoryTransactionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionsSection.swift; sourceTree = "<group>"; };
 		FA835D6A2268260D00A592F2 /* GraphFiltersToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphFiltersToggleTableViewCell.swift; sourceTree = "<group>"; };
-		FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentIncomeSourceCreationMessageViewController.swift; sourceTree = "<group>"; };
+		FA8382B521F89FE800307ECD /* DependentIncomeSourceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentIncomeSourceInfoViewController.swift; sourceTree = "<group>"; };
 		FA84E7E4225625E300C0A274 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		FA84E7E622562E5B00C0A274 /* CurrencyConverterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterProtocol.swift; sourceTree = "<group>"; };
 		FA84E7E822562ED700C0A274 /* CurrencyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverter.swift; sourceTree = "<group>"; };
@@ -1289,7 +1289,7 @@
 				FA56AB94235EE81500E4D0E3 /* ActiveEditingExtension.swift */,
 				FA56AB96235EE82C00E4D0E3 /* ActiveUIExtension.swift */,
 				FA56AB92235EE7F400E4D0E3 /* ActiveEditTableController.swift */,
-				FA8382B521F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift */,
+				FA8382B521F89FE800307ECD /* DependentIncomeSourceInfoViewController.swift */,
 				FA56AB98235EE85900E4D0E3 /* ActiveSelectViewController.swift */,
 			);
 			path = Actives;
@@ -2131,7 +2131,7 @@
 				FA84E7E722562E5B00C0A274 /* CurrencyConverterProtocol.swift in Sources */,
 				FACC01EB224B5F800044A747 /* TransactionTableViewCell.swift in Sources */,
 				FA81748E222F800200EE6116 /* DatePickerViewController.swift in Sources */,
-				FA8382B621F89FE800307ECD /* DependentIncomeSourceCreationMessageViewController.swift in Sources */,
+				FA8382B621F89FE800307ECD /* DependentIncomeSourceInfoViewController.swift in Sources */,
 				FA0CAE1F21D6785E00805288 /* IconCollectionViewCell.swift in Sources */,
 				FA56AB99235EE85900E4D0E3 /* ActiveSelectViewController.swift in Sources */,
 				FA8AD0DC22C5F18C0084AD19 /* ProviderCell.swift in Sources */,

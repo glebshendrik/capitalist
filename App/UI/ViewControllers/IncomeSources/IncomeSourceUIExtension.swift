@@ -23,6 +23,7 @@ extension IncomeSourceEditViewController {
     func updateTextFieldsUI() {        
         tableController.nameField.text = viewModel.name
         tableController.monthlyPlannedField.text = viewModel.monthlyPlanned
+        tableController.monthlyPlannedField.isEnabled = viewModel.canChangeMonthlyPlanned
     }
     
     func updateReminderUI() {

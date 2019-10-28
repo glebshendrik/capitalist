@@ -100,7 +100,7 @@ struct Infrastructure {
         case ActiveEditNavigationController
         case ActiveEditViewController
         case ActiveSelectViewController
-        case DependentIncomeSourceCreationMessageViewController
+        case DependentIncomeSourceInfoViewController
         
         // Common
         case IconsViewController
@@ -209,7 +209,7 @@ struct Infrastructure {
             case .ActiveEditNavigationController,
                  .ActiveEditViewController,
                  .ActiveSelectViewController,
-                 .DependentIncomeSourceCreationMessageViewController:
+                 .DependentIncomeSourceInfoViewController:
                 return .Actives
             }
         }

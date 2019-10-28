@@ -109,4 +109,7 @@ protocol UIFactoryProtocol {
     func activeEditViewController(delegate: ActiveEditViewControllerDelegate,
                                   active: Active?,
                                   basketType: BasketType) -> UINavigationController?
+    
+    
+    func dependentIncomeSourceInfoViewController(activeName: String) -> UIViewController?
 }

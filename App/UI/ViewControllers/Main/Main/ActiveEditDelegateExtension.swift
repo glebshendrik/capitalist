@@ -13,16 +13,14 @@ extension MainViewController : ActiveEditViewControllerDelegate {
         loadActives(by: basketType)
         loadBaskets()
         loadBudget()
-        guard basketType != BasketType.joy else { return }
-        showDependentIncomeSourceMessage(basketType: basketType, name: name)
-        didCreateIncomeSource()
+        loadIncomeSources()
+        showDependentIncomeSourceMessage(activeName: name)
     }
     
     func didUpdateActive(with basketType: BasketType) {
         loadActives(by: basketType)
         loadBudget()
-        guard basketType != BasketType.joy else { return }
-        didUpdateIncomeSource()
+        loadIncomeSources()
     }
     
     func didRemoveActive(with basketType: BasketType) {
@@ -30,37 +28,14 @@ extension MainViewController : ActiveEditViewControllerDelegate {
         loadBaskets()
         loadBudget()
         loadExpenseSources()
-        guard basketType != BasketType.joy else { return }
-        didRemoveIncomeSource()
+        loadIncomeSources()
     }
 }
 
 extension MainViewController {
-    private func showDependentIncomeSourceMessage(basketType: BasketType, name: String) {
-        if let dependentIncomeSourceCreationMessageViewController = router.viewController(.DependentIncomeSourceCreationMessageViewController) as? DependentIncomeSourceCreationMessageViewController,
-            let point = uiPoint(of: basketType),
-            !UIFlowManager.reached(point: point) {
-            
-            dependentIncomeSourceCreationMessageViewController.basketType = basketType
-            dependentIncomeSourceCreationMessageViewController.name = name
-            
-            dependentIncomeSourceCreationMessageViewController.modalPresentationStyle = .overCurrentContext
-            dependentIncomeSourceCreationMessageViewController.modalTransitionStyle = .crossDissolve
-            present(dependentIncomeSourceCreationMessageViewController, animated: true, completion: nil)
-            
-        }
-        
-    }
-    
-    private func uiPoint(of basketType: BasketType) -> UIFlowPoint? {
-        switch basketType {
-        case .risk:
-            return .dependentRiskIncomeSourceMessage
-        case .safe:
-            return .dependentSafeIncomeSourceMessage
-        default:
-            return nil
-        }
+    private func showDependentIncomeSourceMessage(activeName: String) {
+        guard !UIFlowManager.reached(point: .dependentIncomeSourceMessage) else { return }
+        modal(factory.dependentIncomeSourceInfoViewController(activeName: activeName))
     }
 }
 
