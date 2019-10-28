@@ -9,10 +9,10 @@
 import UIKit
 import PromiseKit
 
-class BalanceViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, ApplicationRouterDependantProtocol, NavigationBarColorable {
-        
+class BalanceViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol, NavigationBarColorable {
+    
     var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
-    var router: ApplicationRouterProtocol!
+    var factory: UIFactoryProtocol!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: BalanceViewModel!
     

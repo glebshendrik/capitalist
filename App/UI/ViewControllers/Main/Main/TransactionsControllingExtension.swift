@@ -252,6 +252,7 @@ extension MainViewController : TransactionControllerDelegate {
         default:
             guard   let transactionStartedCollectionView = transactionController.transactionStartedCollectionView,
                 let transactionStartedIndexPath = transactionController.transactionStartedIndexPath else {
+                    
                     transactionDraggingElement.isHidden = true
                     
                     selectIntersectedItem(at: locationInView,
@@ -272,12 +273,15 @@ extension MainViewController : TransactionControllerDelegate {
                 })
                 
             } else {
-                animateTransactionCancelled(from: transactionStartedCell)
                 
-//                selectIntersectedItem(at: locationInView,
-//                                      in: self.view,
-//                                      with: transactionStartedCollectionView,
-//                                      indexPath: transactionStartedIndexPath)
+                animateTransactionCancelled(from: transactionStartedCell)
+                if transactionDraggingElement.isHidden {
+                    selectIntersectedItem(at: locationInView,
+                                          in: self.view,
+                                          with: transactionStartedCollectionView,
+                                          indexPath: transactionStartedIndexPath)
+
+                }
             }
         }
     }

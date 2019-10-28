@@ -44,7 +44,7 @@ extension MainViewController {
         if viewModel.isAddActiveItem(indexPath: indexPath, basketType: basketType) {
             showNewActiveScreen(basketType: basketType)
         } else if let activeViewModel = viewModel.activeViewModel(at: indexPath, basketType: basketType) {
-            
+            showActiveEditScreen(active: activeViewModel.active, basketType: activeViewModel.basketType)
 //            let filterViewModel = ExpenseCategoryTransactionFilter(expenseCategoryViewModel: expenseCategoryViewModel)
 //            showStatistics()
         }

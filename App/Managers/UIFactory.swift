@@ -324,7 +324,7 @@ class UIFactory : UIFactoryProtocol {
     
     func dependentIncomeSourceInfoViewController(activeName: String) -> UIViewController? {
         
-        let dependentIncomeSourceInfoViewController = router.viewController(.DependentIncomeSourceCreationMessageViewController) as? DependentIncomeSourceInfoViewController
+        let dependentIncomeSourceInfoViewController = router.viewController(.DependentIncomeSourceInfoViewController) as? DependentIncomeSourceInfoViewController
                 
         dependentIncomeSourceInfoViewController?.activeName = activeName
         dependentIncomeSourceInfoViewController?.modalPresentationStyle = .overCurrentContext

@@ -17,7 +17,7 @@ extension BalanceViewController {
         loadActives()
     }
     
-    private func loadBudget() {
+    func loadBudget() {
         firstly {
             viewModel.loadBudget()
         }.catch { _ in
@@ -27,7 +27,7 @@ extension BalanceViewController {
         }
     }
     
-    private func loadExpenseSources() {
+    func loadExpenseSources() {
         set(expenseSourcesActivityIndicator, hidden: false, animated: false)
         firstly {
             viewModel.loadExpenseSources()
@@ -39,7 +39,10 @@ extension BalanceViewController {
         }
     }
     
-    private func loadActives() {
+    func loadActives(finantialDataInvalidated: Bool = false) {
+        if finantialDataInvalidated {
+            postFinantialDataUpdated()
+        }
         set(activesActivityIndicator, hidden: false, animated: false)
         firstly {
             viewModel.loadActives()
@@ -49,5 +52,9 @@ extension BalanceViewController {
             self.set(self.activesActivityIndicator, hidden: true)
             self.updateActivesUI()
         }
+    }
+    
+    private func postFinantialDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
 }

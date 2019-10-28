@@ -8,25 +8,38 @@
 
 import UIKit
 
-extension BalanceViewController : BalanceExpenseSourcesTableSupportDelegate, BalanceActivesTableSupportDelegate {
+extension BalanceViewController : BalanceExpenseSourcesTableSupportDelegate, BalanceActivesTableSupportDelegate, ActiveEditViewControllerDelegate {
+    
+    
     
     func didSelect(expenseSource: ExpenseSourceViewModel) {
         showStatistics(with: expenseSource.asTransactionFilter())
     }
     
     func didSelect(active: ActiveViewModel) {
-//        showStatistics(with: expenseCategory.asIncludedInBalanceFilter())
+        modal(factory.activeEditViewController(delegate: self,
+                                               active: active.active,
+                                               basketType: active.basketType))
+    }
+    
+    func didCreateActive(with basketType: BasketType, name: String) {
+        
+    }
+    
+    func didUpdateActive(with basketType: BasketType) {
+        loadBudget()
+        loadActives(finantialDataInvalidated: true)
+    }
+    
+    func didRemoveActive(with basketType: BasketType) {        
+        loadBudget()
+        loadActives(finantialDataInvalidated: true)
     }
 }
 
 extension BalanceViewController {
     
     func showStatistics(with filterViewModel: SourceOrDestinationTransactionFilter) {
-        if  let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController {
-            
-            statisticsViewController.set(sourceOrDestinationFilter: filterViewModel)
-            
-            navigationController?.pushViewController(statisticsViewController)
-        }
+        push(factory.statisticsViewController(filter: filterViewModel))
     }
 }
