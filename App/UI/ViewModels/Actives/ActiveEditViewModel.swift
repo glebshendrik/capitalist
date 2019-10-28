@@ -184,7 +184,7 @@ extension ActiveEditViewModel {
                                   name: name,
                                   iconURL: selectedIconURL,
                                   currency: selectedCurrency?.code,
-                                  costCents: cost?.intMoney(with: selectedCurrency),
+                                  costCents: (cost ?? "0").intMoney(with: selectedCurrency),
                                   monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
                                   annualIncomePercent: annualPercent?.intPercent(),
                                   monthlyPlannedIncomeCents: monthlyPlannedIncome?.intMoney(with: selectedCurrency),

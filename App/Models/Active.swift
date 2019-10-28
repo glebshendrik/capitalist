@@ -114,7 +114,7 @@ struct ActiveCreationForm : Encodable, Validatable {
             errors[CodingKeys.currency.rawValue] = "Укажите валюту"
         }
         
-        if !Validator.isValid(positiveMoney: costCents) {
+        if !Validator.isValid(balance: costCents) {
             errors[CodingKeys.costCents.rawValue] = "Укажите стоимость"
         }
                                 
