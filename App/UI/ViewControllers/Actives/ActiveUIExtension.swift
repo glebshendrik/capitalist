@@ -19,6 +19,7 @@ extension ActiveEditViewController {
         updateActiveTypeUI()
         updateActiveIncomeTypeUI()
         updateTextFieldsUI()
+        updateIsIncomePlannedUI()
         updateTableUI()
     }
     

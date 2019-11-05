@@ -53,12 +53,14 @@ struct Borrow : Decodable {
 }
 
 struct BorrowingTransactionNestedAttributes : Encodable {
+    let id: Int?
     let sourceId: Int?
     let sourceType: TransactionableType?
     let destinationId: Int?
     let destinationType: TransactionableType?
     
     enum CodingKeys: String, CodingKey {
+        case id
         case sourceId = "source_id"
         case sourceType = "source_type"
         case destinationId = "destination_id"
@@ -67,6 +69,10 @@ struct BorrowingTransactionNestedAttributes : Encodable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        if let id = id {
+            try container.encode(id, forKey: .id)
+        }
         
         if let sourceId = sourceId {
             try container.encode(sourceId, forKey: .sourceId)
@@ -157,6 +163,7 @@ struct BorrowUpdatingForm : Encodable, Validatable {
     let borrowedAt: Date
     let payday: Date?
     let comment: String?
+    let borrowingTransactionAttributes: BorrowingTransactionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -165,6 +172,7 @@ struct BorrowUpdatingForm : Encodable, Validatable {
         case borrowedAt = "borrowed_at"
         case payday
         case comment
+        case borrowingTransactionAttributes = "borrowing_transaction_attributes"
     }
     
     func validate() -> [String : String]? {

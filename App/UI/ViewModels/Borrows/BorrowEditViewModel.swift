@@ -69,7 +69,8 @@ class BorrowEditViewModel {
     }
     var borrowingTransactionAttributes: BorrowingTransactionNestedAttributes? {
         guard isNew, !onBalance else { return nil }
-        return BorrowingTransactionNestedAttributes(sourceId: selectedSource?.id,
+        return BorrowingTransactionNestedAttributes(id: borrowingTransaction?.id,
+                                                    sourceId: selectedSource?.id,
                                                     sourceType: selectedSource?.type,
                                                     destinationId: selectedDestination?.id,
                                                     destinationType: selectedDestination?.type)
@@ -340,6 +341,7 @@ extension BorrowEditViewModel {
                                  amountCents: amount?.intMoney(with: selectedCurrency),
                                  borrowedAt: borrowedAt,
                                  payday: payday,
-                                 comment: comment)
+                                 comment: comment,
+                                 borrowingTransactionAttributes: borrowingTransactionAttributes)
     }
 }

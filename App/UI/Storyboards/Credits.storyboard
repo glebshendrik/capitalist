@@ -189,7 +189,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" name="dark 2A314B"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="uuF-yo-Myg">
-                            <rect key="frame" x="0.0" y="983" width="414" height="100"/>
+                            <rect key="frame" x="0.0" y="1208" width="414" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3K-G1-Evx">
@@ -398,8 +398,33 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="YZ5-nP-U5T">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="uZ4-mn-SkC">
                                         <rect key="frame" x="0.0" y="408" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uZ4-mn-SkC" id="UFZ-Dh-V6a">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIj-t3-tOP" customClass="FormSwitchValueField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="bIj-t3-tOP" secondAttribute="bottom" id="8Ug-ds-P7w"/>
+                                                <constraint firstAttribute="trailing" secondItem="bIj-t3-tOP" secondAttribute="trailing" id="SMv-ne-VeB"/>
+                                                <constraint firstItem="bIj-t3-tOP" firstAttribute="top" secondItem="UFZ-Dh-V6a" secondAttribute="top" id="fw5-7n-mtl"/>
+                                                <constraint firstItem="bIj-t3-tOP" firstAttribute="leading" secondItem="UFZ-Dh-V6a" secondAttribute="leading" id="u6j-97-6gn"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Оставить на балансе"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="included_in_balance_icon"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="YZ5-nP-U5T">
+                                        <rect key="frame" x="0.0" y="483" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YZ5-nP-U5T" id="xKb-sx-bvg">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -427,8 +452,66 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="RYY-pI-nXO">
+                                        <rect key="frame" x="0.0" y="558" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RYY-pI-nXO" id="g7c-df-Ldy">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFl-6t-Ojf" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="currency-icon"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="mFl-6t-Ojf" secondAttribute="bottom" id="3pZ-rn-Zj2"/>
+                                                <constraint firstAttribute="trailing" secondItem="mFl-6t-Ojf" secondAttribute="trailing" id="QcE-Nb-J4Y"/>
+                                                <constraint firstItem="mFl-6t-Ojf" firstAttribute="top" secondItem="g7c-df-Ldy" secondAttribute="top" id="RaY-9m-Mzd"/>
+                                                <constraint firstItem="mFl-6t-Ojf" firstAttribute="leading" secondItem="g7c-df-Ldy" secondAttribute="leading" id="rX1-8T-acr"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="currency-icon"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="Xa6-Pg-0eD">
+                                        <rect key="frame" x="0.0" y="633" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xa6-Pg-0eD" id="smt-pf-cIY">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EzB-jE-6lh" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="currency-icon"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="EzB-jE-6lh" secondAttribute="trailing" id="3AU-o1-uG3"/>
+                                                <constraint firstItem="EzB-jE-6lh" firstAttribute="leading" secondItem="smt-pf-cIY" secondAttribute="leading" id="521-Vr-EZ3"/>
+                                                <constraint firstItem="EzB-jE-6lh" firstAttribute="top" secondItem="smt-pf-cIY" secondAttribute="top" id="UFz-CE-zdM"/>
+                                                <constraint firstAttribute="bottom" secondItem="EzB-jE-6lh" secondAttribute="bottom" id="yu2-S1-Nvj"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="currency-icon"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="dZU-GO-JsV">
-                                        <rect key="frame" x="0.0" y="483" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="708" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dZU-GO-JsV" id="Ygg-Lu-kQi">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -457,7 +540,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="JB7-xQ-VPm">
-                                        <rect key="frame" x="0.0" y="558" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="783" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JB7-xQ-VPm" id="9uR-yL-aWX">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -486,7 +569,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="X90-FI-Xnh">
-                                        <rect key="frame" x="0.0" y="633" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="858" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X90-FI-Xnh" id="AMc-UN-g7U">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -511,7 +594,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="117" id="gzA-BI-LSJ">
-                                        <rect key="frame" x="0.0" y="708" width="414" height="117"/>
+                                        <rect key="frame" x="0.0" y="933" width="414" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gzA-BI-LSJ" id="fuN-wK-T7g">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="117"/>
@@ -536,7 +619,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="dHJ-ae-tsZ">
-                                        <rect key="frame" x="0.0" y="825" width="414" height="65"/>
+                                        <rect key="frame" x="0.0" y="1050" width="414" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dHJ-ae-tsZ" id="XCP-mI-pZb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
@@ -566,7 +649,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="7TC-8S-SGv">
-                                        <rect key="frame" x="0.0" y="890" width="414" height="65"/>
+                                        <rect key="frame" x="0.0" y="1115" width="414" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7TC-8S-SGv" id="Glb-kU-eZT">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
@@ -611,9 +694,12 @@
                     <connections>
                         <outlet property="activityIndicatorCell" destination="8Td-sa-IBx" id="omf-un-6Yj"/>
                         <outlet property="alreadyPaidField" destination="Dho-qg-eDU" id="hN9-PW-Vct"/>
+                        <outlet property="amountCell" destination="YZ5-nP-U5T" id="Gtd-3q-9fI"/>
                         <outlet property="amountField" destination="794-aQ-SL4" id="ube-1y-zzH"/>
                         <outlet property="creditTypeField" destination="WRz-8r-QJD" id="mRw-Mf-2fM"/>
                         <outlet property="currencyField" destination="ZhZ-kv-Fe6" id="VHQ-Hl-fTu"/>
+                        <outlet property="expenseSourceCell" destination="RYY-pI-nXO" id="Iwk-55-hGP"/>
+                        <outlet property="expenseSourceField" destination="mFl-6t-Ojf" id="xco-3y-9RM"/>
                         <outlet property="gotAtField" destination="tyz-eH-AAW" id="Ua5-DD-AXK"/>
                         <outlet property="iconBackgroundImageView" destination="R6o-Au-of0" id="gA9-z2-Gk0"/>
                         <outlet property="iconView" destination="cLz-TH-ioC" id="fks-eI-QXh"/>
@@ -621,12 +707,15 @@
                         <outlet property="monthlyPaymentCell" destination="JB7-xQ-VPm" id="XoE-Uo-NQO"/>
                         <outlet property="monthlyPaymentField" destination="mmz-4y-aGZ" id="3Wz-2f-ocB"/>
                         <outlet property="nameField" destination="KOp-Qc-OUX" id="FTf-Hi-aCX"/>
+                        <outlet property="onBalanceCell" destination="uZ4-mn-SkC" id="OQN-6u-D8E"/>
+                        <outlet property="onBalanceSwitchField" destination="bIj-t3-tOP" id="V9J-HT-7Qs"/>
                         <outlet property="periodCell" destination="gzA-BI-LSJ" id="prg-Ca-Tt1"/>
                         <outlet property="periodField" destination="5de-Ya-qXQ" id="DC5-sJ-x4H"/>
                         <outlet property="reminderButton" destination="dDt-Vt-xo4" id="sP5-1t-Yun"/>
                         <outlet property="reminderLabel" destination="S3K-G1-Evx" id="PuJ-3V-rnr"/>
                         <outlet property="removeButton" destination="Wim-mR-DbU" id="XVF-Dq-JjN"/>
                         <outlet property="removeCell" destination="7TC-8S-SGv" id="sSb-JL-CxX"/>
+                        <outlet property="returnAmountField" destination="EzB-jE-6lh" id="zfE-V9-dhk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CDb-cB-QjR" userLabel="First Responder" sceneMemberID="firstResponder"/>

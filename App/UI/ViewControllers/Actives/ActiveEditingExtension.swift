@@ -29,6 +29,7 @@ extension ActiveEditViewController : ActiveEditTableControllerDelegate {
     
     func didChange(cost: String?) {
         viewModel.cost = cost
+        updateTextFieldsUI()
     }
     
     func didChange(alreadyPaid: String?) {

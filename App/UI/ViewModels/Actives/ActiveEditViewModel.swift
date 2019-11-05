@@ -33,7 +33,11 @@ class ActiveEditViewModel {
     var selectedIconURL: URL? = nil
     var name: String? = nil
     var selectedCurrency: Currency? = nil
-    var cost: String? = nil
+    var cost: String? = nil {
+        didSet {
+            alreadyPaid = cost
+        }
+    }
     var goal: String? = nil
     var alreadyPaid: String? = nil
     var monthlyPayment: String? = nil
