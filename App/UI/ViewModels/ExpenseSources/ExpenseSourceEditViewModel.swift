@@ -20,13 +20,11 @@ class ExpenseSourceEditViewModel {
     
     private var expenseSource: ExpenseSource? = nil
     
-    var accountType: AccountType = .usual
     var selectedIconURL: URL? = nil
     var selectedCurrency: Currency? = nil
     var name: String? = nil
     var amount: String? = nil
     var creditLimit: String? = nil
-    var goalAmount: String? = nil
     var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
     
     // Computed
@@ -48,14 +46,7 @@ class ExpenseSourceEditViewModel {
     }
     
     var iconCategory: IconCategory {
-        switch accountType {
-        case .usual:
-            return .expenseSource
-        case .goal:
-            return .expenseSourceGoal
-        case .debt:
-            return .expenseSourceDebt
-        }
+        return .expenseSource
     }
     
     var accountConnected: Bool {
@@ -81,7 +72,7 @@ class ExpenseSourceEditViewModel {
     }
     
     var canChangeAmount: Bool {
-        return !accountConnected && (isNew || accountType != .debt)
+        return !accountConnected && isNew
     }
     
     var canChangeCreditLimit: Bool {
@@ -89,15 +80,7 @@ class ExpenseSourceEditViewModel {
     }
     
     // Visibility
-    
-    var typeSwitchHidden: Bool {
-        return !isNew
-    }
-    
-    var typeLabelHidden: Bool {
-        return isNew
-    }
-    
+        
     var iconPenHidden: Bool {
         return !canChangeIcon
     }
@@ -109,23 +92,7 @@ class ExpenseSourceEditViewModel {
     var bankIconHidden: Bool {
         return !accountConnected
     }
-    
-    var amountHidden: Bool {
-        return isNew && accountType == .debt
-    }
-    
-    var creditLimitHidden: Bool {
-        return accountType != .usual
-    }
-    
-    var goalAmountHidden: Bool {
-        return accountType != .goal
-    }
-    
-    var bankButtonHidden: Bool {
-        return accountType != .usual
-    }
-    
+                    
     var removeButtonHidden: Bool {
         return isNew
     }
@@ -149,13 +116,11 @@ class ExpenseSourceEditViewModel {
     func set(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         
-        accountType = expenseSource.accountType
         selectedIconURL = expenseSource.iconURL
         selectedCurrency = expenseSource.currency
         name = expenseSource.name
         amount = expenseSource.amountCents.moneyDecimalString(with: selectedCurrency)
         creditLimit = expenseSource.creditLimitCents?.moneyDecimalString(with: selectedCurrency)
-        goalAmount = expenseSource.goalAmountCents?.moneyDecimalString(with: selectedCurrency)
         
         if let accountConnection = expenseSource.accountConnection {
             accountConnectionAttributes =
@@ -208,13 +173,9 @@ extension ExpenseSourceEditViewModel {
         return ExpenseSourceCreationForm(userId: accountCoordinator.currentSession?.userId,
                                          name: name,
                                          iconURL: selectedIconURL,
-                                         amountCurrency: selectedCurrency?.code,
+                                         currency: selectedCurrency?.code,
                                          amountCents: (amount ?? "0").intMoney(with: selectedCurrency),
-                                         accountType: accountType,
-                                         goalAmountCents: goalAmount?.intMoney(with: selectedCurrency),
-                                         goalAmountCurrency: selectedCurrency?.code,
                                          creditLimitCents: (creditLimit ?? "0").intMoney(with: selectedCurrency),
-                                         creditLimitCurrency: selectedCurrency?.code,
                                          accountConnectionAttributes: accountConnectionAttributes)
     }
 }
@@ -231,11 +192,9 @@ extension ExpenseSourceEditViewModel {
     
     private func updatingForm() -> ExpenseSourceUpdatingForm {
         return ExpenseSourceUpdatingForm(id: expenseSource?.id,
-                                         accountType: accountType,
                                          name: name,
-                                         amountCents: amount?.intMoney(with: selectedCurrency),
                                          iconURL: selectedIconURL,
-                                         goalAmountCents: goalAmount?.intMoney(with: selectedCurrency),
+                                         amountCents: amount?.intMoney(with: selectedCurrency),          
                                          creditLimitCents: creditLimit?.intMoney(with: selectedCurrency),
                                          accountConnectionAttributes: accountConnectionAttributes)
     }

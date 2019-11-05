@@ -10,8 +10,8 @@ import UIKit
 
 protocol WaitingBorrowsViewControllerDelegate : class {
     func didSelect(borrow: BorrowViewModel,
-                   source: ExpenseSourceViewModel,
-                   destination: ExpenseSourceViewModel)
+                   source: TransactionSource,
+                   destination: TransactionDestination)
 }
 
 class WaitingBorrowsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
@@ -24,8 +24,8 @@ class WaitingBorrowsViewController : UIViewController, UIMessagePresenterManager
     var viewModel: WaitingBorrowsViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
-    var source: ExpenseSourceViewModel? = nil
-    var destination: ExpenseSourceViewModel? = nil
+    var source: TransactionSource? = nil
+    var destination: TransactionDestination? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +33,8 @@ class WaitingBorrowsViewController : UIViewController, UIMessagePresenterManager
     }
     
     func set(delegate: WaitingBorrowsViewControllerDelegate,
-             source: ExpenseSourceViewModel,
-             destination: ExpenseSourceViewModel,
+             source: TransactionSource,
+             destination: TransactionDestination,
              waitingBorrows: [BorrowViewModel],
              borrowType: BorrowType) {
         self.delegate = delegate

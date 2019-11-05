@@ -9,11 +9,13 @@
 import UIKit
 
 extension MainViewController : ActiveEditViewControllerDelegate {
-    func didCreateActive(with basketType: BasketType, name: String) {
+    func didCreateActive(with basketType: BasketType, name: String, isIncomePlanned: Bool) {
         loadActives(by: basketType)
         loadBaskets()
         loadBudget()
-        loadIncomeSources()
+        let infoNeededToShow = !UIFlowManager.reached(point: .dependentIncomeSourceMessage)
+        loadIncomeSources(scrollToEndWhenUpdated: isIncomePlanned && infoNeededToShow)
+        guard infoNeededToShow else { return }
         showDependentIncomeSourceMessage(activeName: name)
     }
     
@@ -34,8 +36,9 @@ extension MainViewController : ActiveEditViewControllerDelegate {
 
 extension MainViewController {
     private func showDependentIncomeSourceMessage(activeName: String) {
-        guard !UIFlowManager.reached(point: .dependentIncomeSourceMessage) else { return }
-        modal(factory.dependentIncomeSourceInfoViewController(activeName: activeName))
+        slideUp(factory.dependentIncomeSourceInfoViewController(activeName: activeName),
+                toBottomOf: incomeSourcesContainer,
+                shouldDim: false)
     }
 }
 
@@ -44,6 +47,7 @@ extension MainViewController {
         if viewModel.isAddActiveItem(indexPath: indexPath, basketType: basketType) {
             showNewActiveScreen(basketType: basketType)
         } else if let activeViewModel = viewModel.activeViewModel(at: indexPath, basketType: basketType) {
+//            showDependentIncomeSourceMessage(activeName: activeViewModel.name)
             showActiveEditScreen(active: activeViewModel.active, basketType: activeViewModel.basketType)
 //            let filterViewModel = ExpenseCategoryTransactionFilter(expenseCategoryViewModel: expenseCategoryViewModel)
 //            showStatistics()

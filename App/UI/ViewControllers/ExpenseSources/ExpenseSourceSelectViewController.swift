@@ -34,13 +34,9 @@ class ExpenseSourceSelectViewController : UIViewController, UIMessagePresenterMa
     func set(delegate: ExpenseSourceSelectViewControllerDelegate,
              skipExpenseSourceId: Int?,
              selectionType: TransactionPart,
-             noDebts: Bool,
-             accountType: AccountType?,
              currency: String?) {
         self.delegate = delegate
         self.viewModel.skipExpenseSourceId = skipExpenseSourceId
-        self.viewModel.noDebts = noDebts
-        self.viewModel.accountType = accountType
         self.viewModel.currency = currency
         self.selectionType = selectionType
     }

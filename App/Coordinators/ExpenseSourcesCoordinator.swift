@@ -28,18 +28,18 @@ class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
         return expenseSourcesService.show(by: id)
     }
     
-    func first(accountType: AccountType, currency: String) -> Promise<ExpenseSource> {
+    func first(currency: String, isVirtual: Bool) -> Promise<ExpenseSource> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return expenseSourcesService.first(for: currentUserId, accountType: accountType, currency: currency)
+        return expenseSourcesService.first(for: currentUserId, currency: currency, isVirtual: isVirtual)
     }
     
-    func index(noDebts: Bool, accountType: AccountType?, currency: String?) -> Promise<[ExpenseSource]> {
+    func index(currency: String?) -> Promise<[ExpenseSource]> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return expenseSourcesService.index(for: currentUserId, noDebts: noDebts, accountType: accountType, currency: currency)
+        return expenseSourcesService.index(for: currentUserId, currency: currency)
     }
     
     func update(with updatingForm: ExpenseSourceUpdatingForm) -> Promise<Void> {

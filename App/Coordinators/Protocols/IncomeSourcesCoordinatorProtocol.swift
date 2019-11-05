@@ -12,7 +12,8 @@ import PromiseKit
 protocol IncomeSourcesCoordinatorProtocol {
     func create(with creationForm: IncomeSourceCreationForm) -> Promise<IncomeSource>
     func show(by id: Int) -> Promise<IncomeSource>
-    func index() -> Promise<[IncomeSource]>
+    func firstBorrow(currency: String) -> Promise<IncomeSource>
+    func index(noBorrows: Bool) -> Promise<[IncomeSource]>    
     func update(with updatingForm: IncomeSourceUpdatingForm) -> Promise<Void>
     func updatePosition(with updatingForm: IncomeSourcePositionUpdatingForm) -> Promise<Void>
     func destroy(by id: Int, deleteTransactions: Bool) -> Promise<Void>

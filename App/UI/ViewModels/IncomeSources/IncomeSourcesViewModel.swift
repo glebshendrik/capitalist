@@ -23,7 +23,7 @@ class IncomeSourcesViewModel {
     
     func loadIncomeSources() -> Promise<Void> {
         return  firstly {
-            incomeSourcesCoordinator.index()
+            incomeSourcesCoordinator.index(noBorrows: true)
         }.get { incomeSources in
             self.incomeSourceViewModels = incomeSources.map { IncomeSourceViewModel(incomeSource: $0)}
         }.asVoid()

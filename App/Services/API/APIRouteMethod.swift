@@ -27,6 +27,7 @@ struct APIRouteMethod {
             return .post
         case .showUser,
              .showIncomeSource,
+             .firstBorrowIncomeSource,
              .indexIncomeSources,
              .showExpenseSource,
              .firstExpenseSource,
@@ -34,6 +35,7 @@ struct APIRouteMethod {
              .indexIcons,
              .indexBaskets,
              .showBasket,
+             .firstBorrowExpenseCategory,
              .indexExpenseCategories,
              .indexUserExpenseCategories,
              .showExpenseCategory,

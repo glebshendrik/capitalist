@@ -103,8 +103,6 @@ class UIFactory : UIFactoryProtocol {
     func expenseSourceSelectViewController(delegate: ExpenseSourceSelectViewControllerDelegate,
                                            skipExpenseSourceId: Int?,
                                            selectionType: TransactionPart,
-                                           noDebts: Bool,
-                                           accountType: AccountType?,
                                            currency: String?) -> ExpenseSourceSelectViewController? {
         
         let expenseSourceSelectViewController = router.viewController(.ExpenseSourceSelectViewController) as? ExpenseSourceSelectViewController
@@ -112,8 +110,6 @@ class UIFactory : UIFactoryProtocol {
         expenseSourceSelectViewController?.set(delegate: delegate,
                                                skipExpenseSourceId: skipExpenseSourceId,
                                                selectionType: selectionType,
-                                               noDebts: noDebts,
-                                               accountType: accountType,
                                                currency: currency)
         return expenseSourceSelectViewController
     }
@@ -204,8 +200,9 @@ class UIFactory : UIFactoryProtocol {
     func borrowEditViewController(delegate: BorrowEditViewControllerDelegate,
                                   type: BorrowType,
                                   borrowId: Int?,
-                                  source: ExpenseSourceViewModel?,
-                                  destination: ExpenseSourceViewModel?) -> UINavigationController? {
+                                  source: TransactionSource?,
+                                  destination: TransactionDestination?) -> UINavigationController? {
+        
         let borrowEditNavigationController = router.viewController(.BorrowEditNavigationController) as? UINavigationController
         let borrowEditViewController = borrowEditNavigationController?.topViewController as? BorrowEditViewController
         
@@ -213,14 +210,16 @@ class UIFactory : UIFactoryProtocol {
         if let borrowId = borrowId {
             borrowEditViewController?.set(borrowId: borrowId, type: type)
         }
-        else {
+        else {            
             borrowEditViewController?.set(type: type, source: source, destination: destination)
         }
         return borrowEditNavigationController
     }
     
     func creditEditViewController(delegate: CreditEditViewControllerDelegate,
-                                  creditId: Int?) -> UINavigationController? {
+                                  creditId: Int?,
+                                  destination: TransactionDestination?) -> UINavigationController? {
+        
         let creditEditNavigationController = router.viewController(.CreditEditNavigationController) as? UINavigationController
         let creditEditViewController = creditEditNavigationController?.topViewController as? CreditEditViewController
         
@@ -228,17 +227,24 @@ class UIFactory : UIFactoryProtocol {
         if let creditId = creditId {
             creditEditViewController?.set(creditId: creditId)
         }
+        else {
+            creditEditViewController?.set(destination: destination)
+        }
         return creditEditNavigationController
     }
     
     func waitingBorrowsViewController(delegate: WaitingBorrowsViewControllerDelegate,
-                                      source: ExpenseSourceViewModel,
-                                      destination: ExpenseSourceViewModel,
+                                      source: TransactionSource,
+                                      destination: TransactionDestination,
                                       waitingBorrows: [BorrowViewModel],
                                       borrowType: BorrowType) -> UIViewController? {
         let waitingBorrowsViewController = router.viewController(.WaitingBorrowsViewController) as? WaitingBorrowsViewController
             
-        waitingBorrowsViewController?.set(delegate: delegate, source: source, destination: destination, waitingBorrows: waitingBorrows, borrowType: borrowType)
+        waitingBorrowsViewController?.set(delegate: delegate,
+                                          source: source,
+                                          destination: destination,
+                                          waitingBorrows: waitingBorrows,
+                                          borrowType: borrowType)
         
         return waitingBorrowsViewController
     }
@@ -327,8 +333,8 @@ class UIFactory : UIFactoryProtocol {
         let dependentIncomeSourceInfoViewController = router.viewController(.DependentIncomeSourceInfoViewController) as? DependentIncomeSourceInfoViewController
                 
         dependentIncomeSourceInfoViewController?.activeName = activeName
-        dependentIncomeSourceInfoViewController?.modalPresentationStyle = .overCurrentContext
-        dependentIncomeSourceInfoViewController?.modalTransitionStyle = .crossDissolve
+//        dependentIncomeSourceInfoViewController?.modalPresentationStyle = .overCurrentContext
+//        dependentIncomeSourceInfoViewController?.modalTransitionStyle = .crossDissolve
         return dependentIncomeSourceInfoViewController    
     }
 }

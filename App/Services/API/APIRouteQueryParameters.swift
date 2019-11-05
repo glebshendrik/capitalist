@@ -28,17 +28,23 @@ struct APIRouteQueryParameters {
             return [ "delete_transactions" : deleteTransactions.string ]
         case .destroyCredit(_, let deleteTransactions):
             return [ "delete_transactions" : deleteTransactions.string ]
-        case .firstExpenseSource(_, let accountType, let currency):
-            return [ "account_type" : accountType.rawValue, "currency" : currency ]
-        case .indexExpenseSources(_, let noDebts, let accountType, let currency):
-            var indexExpenseSourcesParams = [ "no_debts" : noDebts.string ]
+        case .firstBorrowIncomeSource(_, let currency):
+            return [ "currency" : currency ]
+        case .indexIncomeSources(_, let noBorrows):
+            return [ "no_borrows" : noBorrows.string ]
+        case .firstExpenseSource(_, let currency, let isVirtual):
+            return [ "currency" : currency, "is_virtual" : isVirtual.string ]
+        case .indexExpenseSources(_, let currency):
             if let currency = currency {
-                indexExpenseSourcesParams["currency"] = currency
+                return [ "currency" : currency ]
             }
-            if let accountType = accountType {
-                indexExpenseSourcesParams["account_type"] = accountType.rawValue
-            }
-            return indexExpenseSourcesParams
+            return params
+        case .firstBorrowExpenseCategory(_, let currency):
+            return [ "currency" : currency ]
+        case .indexExpenseCategories(_, let noBorrows):
+            return [ "no_borrows" : noBorrows.string ]
+        case .indexUserExpenseCategories(_, let noBorrows):
+            return [ "no_borrows" : noBorrows.string ]
         case .indexTransactions(_, let type):
             guard let type = type else { return params }
             return [ "transaction_type" : type.rawValue ]

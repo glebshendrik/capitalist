@@ -92,7 +92,7 @@ extension BorrowEditViewController {
         viewModel.set(borrowId: borrowId, type: type)
     }
     
-    func set(type: BorrowType, source: ExpenseSourceViewModel?, destination: ExpenseSourceViewModel?) {        
+    func set(type: BorrowType, source: TransactionSource?, destination: TransactionDestination?) {        
         viewModel.set(type: type, source: source, destination: destination)
     }
 }
@@ -126,13 +126,10 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
     }
     
     func didTapExpenseSource() {
-        slideUp(viewController:
-            factory.expenseSourceSelectViewController(delegate: self,
-                                                      skipExpenseSourceId: nil,
-                                                      selectionType: viewModel.expenseSourceSelectionType,
-                                                      noDebts: true,
-                                                      accountType: nil,
-                                                      currency: viewModel.selectedCurrency?.code))
+        slideUp(factory.expenseSourceSelectViewController(delegate: self,
+                                                          skipExpenseSourceId: nil,
+                                                          selectionType: viewModel.expenseSourceSelectionType,
+                                                          currency: viewModel.selectedCurrency?.code))
     }
     
     func didTapReturn() {
@@ -228,8 +225,8 @@ extension BorrowEditViewController {
         updateDatesUI()
     }
     
-    func update(expenseSource: ExpenseSourceViewModel?) {
-        viewModel.selectedTransactionable = expenseSource
+    func update(expenseSource: ExpenseSourceViewModel?) {        
+        viewModel.selectedExpenseSource = expenseSource
         updateExpenseSourceUI(reload: true, animated: false)
     }
 }

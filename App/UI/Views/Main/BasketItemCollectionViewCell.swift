@@ -145,6 +145,7 @@ class BasketItemCollectionViewCell : UICollectionViewCell, EditableCellProtocol 
         updateDescription()
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
+        contentView.layoutIfNeeded()
     }
     
     func updateIcon() {

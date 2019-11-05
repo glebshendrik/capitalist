@@ -28,6 +28,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var incomeSourcesActivityIndicator: UIView!
     @IBOutlet weak var incomeSourcesLoader: UIImageView!
     @IBOutlet weak var incomeSourcesAmountLabel: UILabel!
+    @IBOutlet weak var incomeSourcesContainer: UIView!
     
     @IBOutlet weak var expenseSourcesCollectionView: UICollectionView!
     @IBOutlet weak var expenseSourcesActivityIndicator: UIView!

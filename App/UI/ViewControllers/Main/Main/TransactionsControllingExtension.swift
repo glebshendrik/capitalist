@@ -173,11 +173,12 @@ extension MainViewController : TransactionControllerDelegate {
         guard !isEditing else { return }
         
         let locationInView = gesture.location(in: self.view)
+        
         let verticalTranslationTransformation = CGAffineTransform(translationX: 0, y: -30)
         
         switch gesture.state {
         case .began:
-            
+            transactionController.startedLocation = locationInView
             let collectionViews: [UICollectionView] = [incomeSourcesCollectionView,
                                                        expenseSourcesCollectionView,
                                                        riskActivesCollectionView,
@@ -206,7 +207,7 @@ extension MainViewController : TransactionControllerDelegate {
             switchOffScrolling(for: transactionController.transactionStartedCollectionView)
             
         case .changed:
-            
+            transactionController.currentLocation = locationInView
             guard   let transactionStartedCollectionView = transactionController.transactionStartedCollectionView,
                 let transactionStartedIndexPath = transactionController.transactionStartedIndexPath else {
                     animateTransactionFinished(cell: self.transactionController.transactionStartedCell)
@@ -253,10 +254,11 @@ extension MainViewController : TransactionControllerDelegate {
             guard   let transactionStartedCollectionView = transactionController.transactionStartedCollectionView,
                 let transactionStartedIndexPath = transactionController.transactionStartedIndexPath else {
                     
-                    transactionDraggingElement.isHidden = true
-                    
                     selectIntersectedItem(at: locationInView,
                                           in: self.view)
+                    
+                    transactionDraggingElement.isHidden = true
+                    
                     return
             }
             
@@ -291,6 +293,8 @@ extension MainViewController : TransactionControllerDelegate {
                                        with collectionView: UICollectionView? = nil,
                                        indexPath: IndexPath? = nil) {
         
+        guard let startedLocation = transactionController.startedLocation,
+                !transactionController.wentFarFromStart else { return }
         let allCollectionViews: [UICollectionView] = [incomeSourcesCollectionView,
                                                       expenseSourcesCollectionView,
                                                       joyExpenseCategoriesCollectionView,
@@ -304,8 +308,14 @@ extension MainViewController : TransactionControllerDelegate {
                                                              in: view,
                                                              collectionViewsPool: pool)
         
+        let startedIntersection = detectCollectionViewIntersection(at: startedLocation,
+                                                                   in: view,
+                                                                   collectionViewsPool: pool)
+        
         if  let intersectedCollectionView = intersections?.collectionView,
-            let intersectedIndexPath = intersections?.indexPath {
+            let intersectedIndexPath = intersections?.indexPath,
+            intersectedCollectionView == startedIntersection?.collectionView,
+            intersectedIndexPath == startedIntersection?.indexPath {
             
             if (collectionView == nil || intersectedCollectionView == collectionView) && (indexPath == nil || intersectedIndexPath == indexPath) {
                 self.collectionView(intersectedCollectionView, didSelectItemAt: intersectedIndexPath)

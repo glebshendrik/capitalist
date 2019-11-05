@@ -12,7 +12,7 @@ import SDWebImageSVGCoder
 
 extension ExpenseSourceEditViewController {
     func updateIconUI() {
-        tableController.accountTypeLabel.isHidden = viewModel.typeLabelHidden
+        tableController.accountTypeLabel.isHidden = true
         tableController.iconPen.isHidden = viewModel.iconPenHidden
         tableController.iconView.isHidden = viewModel.customIconHidden
         tableController.bankIconView.isHidden = viewModel.bankIconHidden
@@ -27,16 +27,10 @@ extension ExpenseSourceEditViewController {
         tableController.currencyField.text = viewModel.selectedCurrencyName
         tableController.currencyField.isEnabled = viewModel.canChangeCurrency
         tableController.amountField.currency = viewModel.selectedCurrency
-        tableController.goalAmountField.currency = viewModel.selectedCurrency
         tableController.creditLimitField.currency = viewModel.selectedCurrency
     }
     
     func updateTableUI(animated: Bool = true) {
-        tableController.set(cell: tableController.typeSwitchCell, hidden: viewModel.typeSwitchHidden, animated: animated, reload: false)
-        tableController.set(cell: tableController.amountCell, hidden: viewModel.amountHidden, animated: animated, reload: false)
-        tableController.set(cell: tableController.goalAmountCell, hidden: viewModel.goalAmountHidden, animated: animated, reload: false)
-        tableController.set(cell: tableController.creditLimitCell, hidden: viewModel.creditLimitHidden, animated: animated, reload: false)
-        tableController.set(cell: tableController.bankCell, hidden: viewModel.bankButtonHidden, animated: animated, reload: false)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: animated, reload: false)
         tableController.reloadData(animated: animated)
     }
@@ -44,7 +38,6 @@ extension ExpenseSourceEditViewController {
     func updateTextFieldsUI() {
         tableController.nameField.text = viewModel.name
         tableController.amountField.text = viewModel.amount
-        tableController.goalAmountField.text = viewModel.goalAmount
         tableController.creditLimitField.text = viewModel.creditLimit        
         tableController.amountField.isEnabled = viewModel.canChangeAmount
     }

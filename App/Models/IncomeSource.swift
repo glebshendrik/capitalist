@@ -20,6 +20,8 @@ struct IncomeSource : Decodable {
     let activeId: Int?
     let monthlyPlannedCents: Int?
     let plannedCentsAtPeriod: Int?
+    let isBorrowOrReturn: Bool
+    let waitingDebts: [Borrow]
     let reminder: Reminder?
     
     enum CodingKeys: String, CodingKey {
@@ -34,6 +36,8 @@ struct IncomeSource : Decodable {
         case activeId = "active_id"
         case monthlyPlannedCents = "monthly_planned_cents"
         case plannedCentsAtPeriod = "planned_cents_at_period"
+        case isBorrowOrReturn = "is_borrow_or_return"
+        case waitingDebts = "waiting_debts"
         case reminder
     }
 

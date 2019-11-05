@@ -37,6 +37,17 @@ struct Session : Decodable {
         riskBasketId = user.riskBasketId
         safeBasketId = user.safeBasketId        
     }
+    
+    func basketId(basketType: BasketType) -> Int {
+        switch basketType {
+        case .joy:
+            return joyBasketId
+        case .risk:
+            return riskBasketId
+        case .safe:
+            return safeBasketId
+        }
+    }
 }
 
 struct SessionCreationForm : Encodable, Validatable {

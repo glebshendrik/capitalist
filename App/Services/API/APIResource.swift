@@ -29,6 +29,7 @@ struct APIResource {
              .destroySession:
             return APIResource(singular: "session", plural: "sessions")
         case .createIncomeSource,
+             .firstBorrowIncomeSource,
              .showIncomeSource,
              .indexIncomeSources,
              .updateIncomeSource,
@@ -44,6 +45,7 @@ struct APIResource {
              .destroyExpenseSource:
             return APIResource(singular: "expense_source", plural: "expense_sources")
         case .createExpenseCategory,
+             .firstBorrowExpenseCategory,
              .showExpenseCategory,
              .indexExpenseCategories,
              .indexUserExpenseCategories,

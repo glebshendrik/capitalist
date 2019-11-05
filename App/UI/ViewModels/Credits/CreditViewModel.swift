@@ -31,20 +31,20 @@ class CreditViewModel {
         return type.localizedName
     }
     
-    var amount: String {
-        return amount(shouldRound: true)
+    var returnAmount: String {
+        return returnAmount(shouldRound: true)
     }
     
     var paidAmount: String {
         return paidAmount(shouldRound: true)
     }
     
-    var amountFormatted: String {
-        return "Всего \(amount)"
+    var returnAmountFormatted: String {
+        return "Всего \(returnAmount)"
     }
     
     var paymentsProgress: Float {
-        let ratio = Float(credit.paidAmountCents) / Float(credit.amountCents)
+        let ratio = Float(credit.paidAmountCents) / Float(credit.returnAmountCents)
         return ratio > 1.0 ? 1.0 : ratio
     }
     
@@ -56,8 +56,8 @@ class CreditViewModel {
         self.credit = credit
     }
     
-    private func amount(shouldRound: Bool) -> String {
-        return credit.amountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
+    private func returnAmount(shouldRound: Bool) -> String {
+        return credit.returnAmountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }
     
     private func paidAmount(shouldRound: Bool) -> String {

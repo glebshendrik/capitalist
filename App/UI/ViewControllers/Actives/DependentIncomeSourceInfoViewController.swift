@@ -23,10 +23,14 @@ class DependentIncomeSourceInfoViewController : UIViewController {
         updateUI()
     }
     
-    @IBAction func didTapGetItButton(_ sender: Any) {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         if checkBox.on {
             _ = UIFlowManager.reach(point: .dependentIncomeSourceMessage)
         }
+    }
+    
+    @IBAction func didTapGetItButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -40,10 +44,10 @@ class DependentIncomeSourceInfoViewController : UIViewController {
     }
     
     private func title() -> String? {
-        return "Мы создали источник дохода для актива «\(activeName)»"
+        return "Актив «\(activeName)» может приносить прибыль"
     }
     
     private func message() -> String? {
-        return "С помощью него ты сможешь отразить доход по активу"
+        return "Поэтому мы создаем для вас новый источник дохода «\(activeName)»"
     }
 }

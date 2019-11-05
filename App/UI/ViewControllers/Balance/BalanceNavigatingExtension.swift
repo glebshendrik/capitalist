@@ -22,7 +22,7 @@ extension BalanceViewController : BalanceExpenseSourcesTableSupportDelegate, Bal
                                                basketType: active.basketType))
     }
     
-    func didCreateActive(with basketType: BasketType, name: String) {
+    func didCreateActive(with basketType: BasketType, name: String, isIncomePlanned: Bool) {
         
     }
     

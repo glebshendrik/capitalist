@@ -35,11 +35,27 @@ class CreditEditViewModel {
     var name: String? = nil
     var selectedCurrency: Currency? = nil
     var amount: String? = nil
+    var returnAmount: String? = nil
     var alreadyPaid: String? = nil
     var monthlyPayment: String? = nil
     var gotAt: Date = Date()
     var period: Int? = nil
     var expenseCategoryId: Int? = nil
+    
+    var onBalance: Bool = false
+    var selectedDestination: ExpenseSourceViewModel? = nil
+    var creditingTransactionAttributes: CreditingTransactionNestedAttributes? {
+        guard isNew, !onBalance else { return nil }
+        return CreditingTransactionNestedAttributes(destinationId: selectedDestination?.id)
+    }
+    var creditingTransaction: TransactionViewModel? = nil
+    
+    var expenseSourceIconURL: URL? { return selectedDestination?.iconURL }
+    var expenseSourceIconDefaultImageName: String { return IconCategory.expenseSource.defaultIconName }
+    var expenseSourceName: String? { return selectedDestination?.name }
+    var expenseSourceAmount: String? { return selectedDestination?.amount }
+    var expenseSourceCurrency: Currency? { return selectedDestination?.currency }
+    var expenseSourceCurrencyCode: String? { return expenseSourceCurrency?.code }
     
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
@@ -72,6 +88,14 @@ class CreditEditViewModel {
     }
     
     // Visibility
+    var onBalanceSwitchHidden: Bool {
+        return !isNew || selectedCurrency == nil
+    }
+    
+    var expenseSourceFieldHidden: Bool {
+        return !isNew || onBalance || selectedCurrency == nil
+    }
+    
     var monthlyPaymentFieldHidden: Bool {
         guard let creditType = selectedCreditType else { return true }
         return !creditType.hasMonthlyPayments
@@ -95,7 +119,12 @@ class CreditEditViewModel {
         self.creditsCoordinator = creditsCoordinator
         self.accountCoordinator = accountCoordinator
     }
-        
+    
+    func set(destination: ExpenseSourceViewModel?) {        
+        self.selectedDestination = destination
+        selectedCurrency = destination?.currency
+    }
+    
     func set(creditId: Int) {
         self.creditId = creditId
     }
@@ -107,7 +136,8 @@ class CreditEditViewModel {
         self.selectedIconURL = credit.iconURL
         self.name = credit.name
         self.selectedCurrency = credit.currency
-        self.amount = credit.amountCents.moneyDecimalString(with: credit.currency)
+        self.amount = credit.amountCents?.moneyDecimalString(with: credit.currency)
+        self.returnAmount = credit.returnAmountCents.moneyDecimalString(with: credit.currency)
         self.alreadyPaid = credit.paidAmountCents.moneyDecimalString(with: credit.currency)
         self.monthlyPayment = credit.monthlyPaymentCents?.moneyDecimalString(with: credit.currency)
         self.gotAt = credit.gotAt
@@ -188,11 +218,13 @@ extension CreditEditViewModel {
                                   iconURL: selectedIconURL,
                                   currency: selectedCurrency?.code,
                                   amountCents: amount?.intMoney(with: selectedCurrency),
+                                  returnAmountCents: returnAmount?.intMoney(with: selectedCurrency),
                                   alreadyPaidCents: alreadyPaid?.intMoney(with: selectedCurrency),
                                   monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
                                   gotAt: gotAt,
                                   period: period,
-                                  reminderAttributes: reminderViewModel.reminderAttributes)
+                                  reminderAttributes: reminderViewModel.reminderAttributes,
+                                  creditingTransactionAttributes: creditingTransactionAttributes)
     }
 }
 
@@ -210,7 +242,7 @@ extension CreditEditViewModel {
         return CreditUpdatingForm(id: credit?.id,
                                   name: name,
                                   iconURL: selectedIconURL,
-                                  amountCents: amount?.intMoney(with: selectedCurrency),
+                                  returnAmountCents: returnAmount?.intMoney(with: selectedCurrency),
                                   monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
                                   gotAt: gotAt,
                                   period: period,

@@ -12,11 +12,14 @@ protocol CreditEditTableControllerDelegate {
     func didTapIcon()
     func didChange(name: String?)
     func didChange(amount: String?)
+    func didChange(alreadyOnBalance: Bool)
+    func didChange(returnAmount: String?)
     func didChange(alreadyPaid: String?)
     func didChange(monthlyPayment: String?)
     func didChange(period: Int?)
     func didTapCreditType()
     func didTapCurrency()
+    func didTapExpenseSource()
     func didTapGotAt()
     func didTapSetReminder()
     func didTapRemoveButton()
@@ -30,6 +33,9 @@ class CreditEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var creditTypeField: FormTapField!
     @IBOutlet weak var currencyField: FormTapField!
     @IBOutlet weak var amountField: FormMoneyTextField!
+    @IBOutlet weak var onBalanceSwitchField: FormSwitchValueField!
+    @IBOutlet weak var expenseSourceField: FormTapField!
+    @IBOutlet weak var returnAmountField: FormMoneyTextField!
     @IBOutlet weak var alreadyPaidField: FormMoneyTextField!
     @IBOutlet weak var monthlyPaymentField: FormMoneyTextField!
     @IBOutlet weak var gotAtField: FormTapField!
@@ -40,6 +46,9 @@ class CreditEditTableController : FormFieldsTableViewController {
     
     @IBOutlet weak var removeButton: UIButton!
     
+    @IBOutlet weak var onBalanceCell: UITableViewCell!
+    @IBOutlet weak var expenseSourceCell: UITableViewCell!
+    @IBOutlet weak var amountCell: UITableViewCell!
     @IBOutlet weak var periodCell: UITableViewCell!
     @IBOutlet weak var monthlyPaymentCell: UITableViewCell!
     @IBOutlet weak var removeCell: UITableViewCell!
@@ -52,6 +61,9 @@ class CreditEditTableController : FormFieldsTableViewController {
         setupCreditTypeField()
         setupCurrencyField()
         setupAmountField()
+        setupOnBalanceSwitchField()
+        setupExpenseSourceField()
+        setupReturnAmountField()
         setupAlreadyPaidField()
         setupMonthlyPaymentField()
         setupGotAtField()
@@ -85,10 +97,35 @@ class CreditEditTableController : FormFieldsTableViewController {
     
     func setupAmountField() {
         register(responder: amountField.textField)
-        amountField.placeholder = "Полная сумма выплаты"
+        amountField.placeholder = "Cумма кредита"
         amountField.imageName = "amount-icon"
         amountField.didChange { [weak self] text in
             self?.delegate?.didChange(amount: text)
+        }
+    }
+    
+    func setupOnBalanceSwitchField() {
+        onBalanceSwitchField.placeholder = "Кредит уже на балансе"
+        onBalanceSwitchField.imageName = "included_in_balance_icon"
+        onBalanceSwitchField.didSwitch { [weak self] alreadyOnBalance in
+            self?.delegate?.didChange(alreadyOnBalance: alreadyOnBalance)
+        }
+    }
+    
+    func setupExpenseSourceField() {
+        expenseSourceField.placeholder = "Кошелек перевода кредита"
+        expenseSourceField.imageName = IconCategory.expenseSource.defaultIconName
+        expenseSourceField.didTap { [weak self] in
+            self?.delegate?.didTapExpenseSource()
+        }
+    }
+    
+    func setupReturnAmountField() {
+        register(responder: returnAmountField.textField)
+        returnAmountField.placeholder = "Полная сумма выплаты"
+        returnAmountField.imageName = "amount-icon"
+        returnAmountField.didChange { [weak self] text in
+            self?.delegate?.didChange(returnAmount: text)
         }
     }
     

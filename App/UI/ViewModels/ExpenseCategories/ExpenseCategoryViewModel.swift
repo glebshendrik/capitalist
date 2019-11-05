@@ -72,6 +72,10 @@ class ExpenseCategoryViewModel {
         return expenseCategory.creditId != nil
     }
     
+    var isBorrowOrReturn: Bool {
+        return expenseCategory.isBorrowOrReturn
+    }
+    
     var creditId: Int? {
         return expenseCategory.creditId
     }
@@ -88,8 +92,15 @@ class ExpenseCategoryViewModel {
         return basketType.progressBackgroundName
     }
     
+    public private(set) var waitingLoans: [BorrowViewModel] = []
+    
+    var hasWaitingLoans: Bool {
+        return waitingLoans.count > 0
+    }
+    
     init(expenseCategory: ExpenseCategory) {
         self.expenseCategory = expenseCategory
+        waitingLoans = expenseCategory.waitingLoans.map { BorrowViewModel(borrow: $0) }
     }
     
     func asTransactionFilter() -> ExpenseCategoryTransactionFilter {
@@ -124,6 +135,6 @@ extension ExpenseCategoryViewModel : TransactionDestination {
     
     func isTransactionDestinationFor(transactionSource: TransactionSource) -> Bool {
         guard let sourceExpenseSourceViewModel = transactionSource as? ExpenseSourceViewModel else { return false }
-        return !sourceExpenseSourceViewModel.isDebt
+        return true
     }
 }

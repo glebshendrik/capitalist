@@ -79,6 +79,14 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return amount
     }
     
+    var goalAmountRounded: String {
+        return goal(shouldRound: true)
+    }
+    
+    var goalAmount: String {
+        return goal(shouldRound: false)
+    }
+    
     var investedRounded: String {
         return invested(shouldRound: true)
     }
@@ -131,14 +139,28 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return active.deletedAt != nil
     }
     
+    var isGoal: Bool {
+        return activeType.isGoalAmountRequired
+    }
+    
+    var goalProgress: Double {
+        guard isGoal, let goalAmountCents = active.goalAmountCents else { return 0 }
+        let progress = Double(active.costCents) / Double(goalAmountCents)
+        return progress > 1.0 ? 1.0 : progress
+    }
+    
+    var isGoalCompleted: Bool {
+        return goalProgress == 1.0
+    }
+    
     init(active: Active) {
         self.active = active
     }
     
     func isTransactionDestinationFor(transactionSource: TransactionSource) -> Bool {
         
-        if let sourceExpenseSourceViewModel = transactionSource as? ExpenseSourceViewModel {
-            return !sourceExpenseSourceViewModel.isDebt
+        if transactionSource is ExpenseSourceViewModel {            
+            return true
         }
         
         if let sourceIncomeSourceViewModel = transactionSource as? IncomeSourceViewModel {
@@ -150,6 +172,10 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     
     private func cost(shouldRound: Bool) -> String {
         return money(cents: active.costCents, shouldRound: shouldRound)
+    }
+    
+    private func goal(shouldRound: Bool) -> String {
+        return money(cents: active.goalAmountCents, shouldRound: shouldRound)
     }
     
     private func invested(shouldRound: Bool) -> String {

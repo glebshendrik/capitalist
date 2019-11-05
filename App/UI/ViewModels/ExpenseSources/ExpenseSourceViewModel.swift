@@ -28,7 +28,7 @@ class ExpenseSourceViewModel {
     }
     
     var inCredit: Bool {
-        guard let creditLimitCents = expenseSource.creditLimitCents, isUsual else { return false }
+        guard let creditLimitCents = expenseSource.creditLimitCents else { return false }
         return expenseSource.amountCents < creditLimitCents
     }
     
@@ -49,51 +49,20 @@ class ExpenseSourceViewModel {
         return expenseSource.iconURL
     }
     
-    var isDebt: Bool {
-        return expenseSource.accountType == .debt
-    }
-    
-    var isGoal: Bool {
-        return expenseSource.accountType == .goal
-    }
-    
-    var isUsual: Bool {
-        return expenseSource.accountType == .usual
-    }
-    
-    var goalProgress: Double {
-        guard isGoal, let goalAmountCents = expenseSource.goalAmountCents else { return 0 }
-        let progress = Double(expenseSource.amountCents) / Double(goalAmountCents)
-        return progress > 1.0 ? 1.0 : progress
-    }
-    
-    var isGoalCompleted: Bool {
-        return goalProgress == 1.0
-    }
-    
     var isDeleted: Bool {
         return expenseSource.deletedAt != nil
     }
     
-    public private(set) var waitingDebts: [BorrowViewModel] = []
-    public private(set) var waitingLoans: [BorrowViewModel] = []
-    
-    var hasWaitingDebts: Bool {
-        return waitingDebts.count > 0
-    }
-    
-    var hasWaitingLoans: Bool {
-        return waitingLoans.count > 0
+    var isVirtual: Bool {
+        return expenseSource.isVirtual
     }
     
     var defaultIconName: String {
-        return expenseSource.accountType.iconCategory.defaultIconName
+        return IconCategory.expenseSource.defaultIconName
     }
     
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
-        waitingDebts = expenseSource.waitingDebts?.map { BorrowViewModel(borrow: $0) } ?? []
-        waitingLoans = expenseSource.waitingLoans?.map { BorrowViewModel(borrow: $0) } ?? []
     }
     
     func asTransactionFilter() -> ExpenseSourceTransactionFilter {
@@ -111,20 +80,18 @@ extension ExpenseSourceViewModel : TransactionSource, TransactionDestination {
     }
     
     var iconCategory: IconCategory? {
-        return expenseSource.accountType.iconCategory
+        return IconCategory.expenseSource
     }
     
     var isTransactionSource: Bool {
-        return !isGoal || isGoalCompleted
+        return true
     }
     
     func isTransactionDestinationFor(transactionSource: TransactionSource) -> Bool {
         if let sourceExpenseSourceViewModel = transactionSource as? ExpenseSourceViewModel {
-            return  sourceExpenseSourceViewModel.id != self.id &&
-                    !(sourceExpenseSourceViewModel.isDebt && self.isDebt)
+            return sourceExpenseSourceViewModel.id != self.id
         }
         
-        guard !self.isDebt else { return false }
         return (transactionSource is IncomeSourceViewModel) || (transactionSource is ActiveViewModel)
     }
 }

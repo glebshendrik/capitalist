@@ -22,6 +22,14 @@ class ActiveTypeViewModel {
     var defaultPlannedIncomeType: ActiveIncomeType? {
         return activeType.defaultPlannedIncomeType
     }
+    
+    var isGoalAmountRequired: Bool {
+        return activeType.isGoalAmountRequired
+    }
+    
+    var isIncomePlannedDefault: Bool {
+        return activeType.isIncomePlannedDefault
+    }
         
     var rowOrder: Int {
         return activeType.rowOrder

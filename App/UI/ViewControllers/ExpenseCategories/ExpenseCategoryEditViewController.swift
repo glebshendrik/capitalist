@@ -31,8 +31,7 @@ class ExpenseCategoryEditViewController : FormTransactionsDependableEditViewCont
     
     override func registerFormFields() -> [String : FormField] {
         return [ExpenseCategory.CodingKeys.name.rawValue : tableController.nameField,
-                ExpenseCategory.CodingKeys.monthlyPlannedCurrency.rawValue : tableController.currencyField,
-                ExpenseCategory.CodingKeys.incomeSourceCurrency.rawValue : tableController.incomeSourceCurrencyField,
+                ExpenseCategory.CodingKeys.currency.rawValue : tableController.currencyField,                
                 ExpenseCategory.CodingKeys.monthlyPlannedCents.rawValue : tableController.monthlyPlannedField]
     }
     
@@ -70,8 +69,7 @@ class ExpenseCategoryEditViewController : FormTransactionsDependableEditViewCont
     override func updateUI() {
         updateIconUI()
         updateTextFieldsUI()
-        updateCurrencyUI()
-        updateIncomeSourceCurrencyUI()
+        updateCurrencyUI()        
         updateReminderUI()
         updateRemoveButtonUI()
     }

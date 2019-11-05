@@ -18,8 +18,12 @@ class IncomeSourcesService : Service, IncomeSourcesServiceProtocol {
         return request(APIRoute.showIncomeSource(id: id))
     }
     
-    func index(for userId: Int) -> Promise<[IncomeSource]> {
-        return requestCollection(APIRoute.indexIncomeSources(userId: userId))
+    func firstBorrow(for userId: Int, currency: String) -> Promise<IncomeSource> {
+        return request(APIRoute.firstBorrowIncomeSource(userId: userId, currency: currency))
+    }
+    
+    func index(for userId: Int, noBorrows: Bool) -> Promise<[IncomeSource]> {
+        return requestCollection(APIRoute.indexIncomeSources(userId: userId, noBorrows: noBorrows))
     }
     
     func update(with updatingForm: IncomeSourceUpdatingForm) -> Promise<Void> {

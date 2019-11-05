@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 
 protocol ActiveEditViewControllerDelegate {
-    func didCreateActive(with basketType: BasketType, name: String)
+    func didCreateActive(with basketType: BasketType, name: String, isIncomePlanned: Bool)
     func didUpdateActive(with basketType: BasketType)
     func didRemoveActive(with basketType: BasketType)
 }
@@ -32,6 +32,8 @@ class ActiveEditViewController : FormTransactionsDependableEditViewController {
                 Active.CodingKeys.activeType.rawValue : tableController.activeIncomeTypeField,
                 Active.CodingKeys.currency.rawValue : tableController.currencyField,
                 Active.CodingKeys.costCents.rawValue : tableController.costField,
+                Active.CodingKeys.alreadyPaidCents.rawValue : tableController.alreadyPaidField,
+                Active.CodingKeys.goalAmountCents.rawValue : tableController.goalAmountField,
                 Active.CodingKeys.monthlyPaymentCents.rawValue : tableController.monthlyPaymentField,
                 Active.CodingKeys.plannedIncomeType.rawValue : tableController.activeIncomeTypeField,
                 Active.CodingKeys.annualIncomePercent.rawValue : tableController.annualPercentField,
@@ -58,7 +60,7 @@ class ActiveEditViewController : FormTransactionsDependableEditViewController {
     override func didSave() {
         super.didSave()
         if viewModel.isNew {
-            delegate?.didCreateActive(with: viewModel.basketType, name: viewModel.name!)
+            delegate?.didCreateActive(with: viewModel.basketType, name: viewModel.name!, isIncomePlanned: viewModel.isIncomePlanned)
         }
         else {
             delegate?.didUpdateActive(with: viewModel.basketType)

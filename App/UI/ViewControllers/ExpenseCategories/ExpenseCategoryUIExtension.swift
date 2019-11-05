@@ -25,13 +25,7 @@ extension ExpenseCategoryEditViewController {
         tableController.currencyField.isEnabled = viewModel.canChangeCurrency
         tableController.monthlyPlannedField.currency = viewModel.selectedCurrency
     }
-    
-    func updateIncomeSourceCurrencyUI() {
-        tableController.incomeSourceCurrencyField.text = viewModel.selectedIncomeSourceCurrencyName
-        tableController.incomeSourceCurrencyField.isEnabled = viewModel.canChangeIncomeSourceCurrency
-        tableController.set(cell: tableController.incomeSourceCurrencyCell, hidden: !viewModel.canChangeIncomeSourceCurrency)
-    }
-    
+        
     func updateReminderUI() {
         tableController.reminderButton.setTitle(viewModel.reminderTitle, for: .normal)
         tableController.reminderLabel.text = viewModel.reminder

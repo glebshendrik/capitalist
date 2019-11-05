@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cBt-oL-kFp">
-                                <rect key="frame" x="0.0" y="20" width="375" height="597"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewLayout key="collectionViewLayout" id="klB-9y-uR6" customClass="PagedCollectionViewLayout" customModule="Three_Baskets" customModuleProvider="target">
                                     <userDefinedRuntimeAttributes>
@@ -55,7 +53,7 @@
                                                             <rect key="frame" x="5" y="5" width="54" height="54"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-icon" translatesAutoresizingMaskIntoConstraints="NO" id="cUm-GL-AQZ">
-                                                                    <rect key="frame" x="19" y="19" width="16" height="16"/>
+                                                                    <rect key="frame" x="14.5" y="14.5" width="25" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="pH4-XB-aLJ"/>
                                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="25" id="xux-KJ-aS0"/>
@@ -118,10 +116,10 @@
                                 <color key="currentPageIndicatorTintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pageControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sk-Pn-uXc">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="gDk-1J-QyI">
-                                        <rect key="frame" x="179.5" y="315.5" width="16" height="16"/>
+                                        <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -171,7 +169,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="crN-eW-gA5">
-                                <rect key="frame" x="0.0" y="20" width="375" height="597"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewLayout key="collectionViewLayout" id="NT2-ec-JcJ" customClass="PagedCollectionViewLayout" customModule="Three_Baskets" customModuleProvider="target">
                                     <userDefinedRuntimeAttributes>
@@ -265,10 +263,10 @@
                                 <color key="currentPageIndicatorTintColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pageControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cRA-5m-AuT">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfZ-l3-ICh">
-                                        <rect key="frame" x="179.5" y="315.5" width="16" height="16"/>
+                                        <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -327,29 +325,39 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajY-28-T9K">
                                 <rect key="frame" x="0.0" y="233.5" width="375" height="433.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pull-down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Sin-Ne-0RR">
+                                        <rect key="frame" x="163.5" y="10" width="48" height="15"/>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" name="dark 333D5B"/>
+                                <constraints>
+                                    <constraint firstItem="Sin-Ne-0RR" firstAttribute="top" secondItem="ajY-28-T9K" secondAttribute="top" constant="10" id="K29-ja-HtS"/>
+                                    <constraint firstItem="Sin-Ne-0RR" firstAttribute="centerX" secondItem="ajY-28-T9K" secondAttribute="centerX" id="qLc-3k-NC2"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="CPD-Ey-EWQ" firstAttribute="height" secondItem="ZOs-WH-uhc" secondAttribute="height" multiplier="35:100" id="082-G2-qL9"/>
                             <constraint firstAttribute="bottom" secondItem="wiz-qS-9oP" secondAttribute="bottom" id="A1I-gP-k7m"/>
-                            <constraint firstItem="ajY-28-T9K" firstAttribute="width" secondItem="ZOs-WH-uhc" secondAttribute="width" id="Ctt-oo-CzK"/>
+                            <constraint firstItem="ajY-28-T9K" firstAttribute="trailing" secondItem="ldQ-S5-l4f" secondAttribute="trailing" id="B4H-wS-mGa"/>
+                            <constraint firstItem="ajY-28-T9K" firstAttribute="leading" secondItem="ldQ-S5-l4f" secondAttribute="leading" id="HMp-pm-ovN"/>
                             <constraint firstItem="ldQ-S5-l4f" firstAttribute="trailing" secondItem="wiz-qS-9oP" secondAttribute="trailing" id="ME0-Vr-9Yt"/>
                             <constraint firstItem="ajY-28-T9K" firstAttribute="top" secondItem="CPD-Ey-EWQ" secondAttribute="bottom" id="NhV-wg-j6M"/>
                             <constraint firstItem="CPD-Ey-EWQ" firstAttribute="width" secondItem="ZOs-WH-uhc" secondAttribute="width" id="S8p-TU-7e7"/>
                             <constraint firstItem="CPD-Ey-EWQ" firstAttribute="centerX" secondItem="ZOs-WH-uhc" secondAttribute="centerX" id="WLj-wC-dbO"/>
-                            <constraint firstItem="ajY-28-T9K" firstAttribute="centerX" secondItem="ZOs-WH-uhc" secondAttribute="centerX" id="ZRt-4z-ez7"/>
                             <constraint firstItem="wiz-qS-9oP" firstAttribute="leading" secondItem="ldQ-S5-l4f" secondAttribute="leading" id="efq-zO-hkn"/>
                             <constraint firstItem="wiz-qS-9oP" firstAttribute="top" secondItem="ZOs-WH-uhc" secondAttribute="top" id="emm-WR-eRf"/>
+                            <constraint firstItem="ajY-28-T9K" firstAttribute="bottom" secondItem="ldQ-S5-l4f" secondAttribute="bottom" id="h1B-Mw-PA3"/>
                             <constraint firstItem="CPD-Ey-EWQ" firstAttribute="top" secondItem="ZOs-WH-uhc" secondAttribute="top" id="xap-so-Pru"/>
-                            <constraint firstItem="ajY-28-T9K" firstAttribute="height" secondItem="ZOs-WH-uhc" secondAttribute="height" multiplier="65:100" id="xgM-Nb-wPR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ldQ-S5-l4f"/>
                     </view>
                     <connections>
                         <outlet property="backgroundView" destination="wiz-qS-9oP" id="sxh-EY-iR7"/>
                         <outlet property="contentView" destination="ajY-28-T9K" id="mr9-k9-EoJ"/>
+                        <outlet property="pullDownImage" destination="Sin-Ne-0RR" id="0RK-bx-E6a"/>
                         <outlet property="verticalOffsetConstraint" destination="082-G2-qL9" id="M2j-Wr-oaZ"/>
                     </connections>
                 </viewController>
@@ -362,7 +370,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="ReminderEditTableViewController" id="Z80-N1-n3H" customClass="ReminderEditTableViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8sh-0J-xUo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="dark 2A314B"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -371,7 +379,7 @@
                             <tableViewSection id="ai6-Cl-pha">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="Ze9-no-8lX">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ze9-no-8lX" id="02E-7B-yPp">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -396,7 +404,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="75" id="OcS-dx-6Hc">
-                                        <rect key="frame" x="0.0" y="75" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="103" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OcS-dx-6Hc" id="xgg-72-9Wf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -421,7 +429,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="IYA-DW-Zc3">
-                                        <rect key="frame" x="0.0" y="150" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="178" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IYA-DW-Zc3" id="y5R-US-JGz">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -446,7 +454,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="bzt-SK-cPQ">
-                                        <rect key="frame" x="0.0" y="225" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="253" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bzt-SK-cPQ" id="n9w-h6-Vby">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -500,11 +508,11 @@
             <objects>
                 <viewController storyboardIdentifier="ReminderEditViewController" id="DP6-sv-vnQ" customClass="ReminderEditViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oUh-CC-2Ol">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXe-Fu-XA4">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="Z80-N1-n3H" kind="embed" identifier="showEditTableView" id="08G-uJ-miF"/>
@@ -546,7 +554,7 @@
                 <navigationController storyboardIdentifier="ReminderEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="riK-aF-4xo" customClass="ColorableNavigationController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="vDU-uJ-kdS">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -562,6 +570,7 @@
     <resources>
         <image name="circle-close-icon" width="24" height="24"/>
         <image name="loader-1" width="55" height="31"/>
+        <image name="pull-down-arrow" width="24" height="7.5"/>
         <image name="remove-icon" width="17" height="20"/>
         <image name="save-circle-icon" width="24" height="24"/>
         <image name="wallet-icon" width="30" height="22"/>

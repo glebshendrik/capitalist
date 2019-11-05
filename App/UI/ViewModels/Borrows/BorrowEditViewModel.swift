@@ -50,12 +50,12 @@ class BorrowEditViewModel {
     var payday: Date? = nil
     var comment: String? = nil
     var onBalance: Bool = false
-    var selectedSource: ExpenseSourceViewModel? = nil
-    var selectedDestination: ExpenseSourceViewModel? = nil
-    var selectedTransactionable: ExpenseSourceViewModel? {
+    var selectedSource: TransactionSource? = nil
+    var selectedDestination: TransactionDestination? = nil
+    var selectedExpenseSource: ExpenseSourceViewModel? {
         get {
             guard let type = type else { return nil }
-            return type == .debt ? selectedSource : selectedDestination
+            return (type == .debt ? selectedSource : selectedDestination) as? ExpenseSourceViewModel
         }
         set {
             guard let type = type else { return }
@@ -69,7 +69,10 @@ class BorrowEditViewModel {
     }
     var borrowingTransactionAttributes: BorrowingTransactionNestedAttributes? {
         guard isNew, !onBalance else { return nil }
-        return BorrowingTransactionNestedAttributes(sourceId: selectedSource?.id, destinationId: selectedDestination?.id)
+        return BorrowingTransactionNestedAttributes(sourceId: selectedSource?.id,
+                                                    sourceType: selectedSource?.type,
+                                                    destinationId: selectedDestination?.id,
+                                                    destinationType: selectedDestination?.type)
     }
     var borrowingTransaction: TransactionViewModel? = nil
     
@@ -125,11 +128,11 @@ class BorrowEditViewModel {
     }
     
     var iconDefaultImageName: String { return IconCategory.expenseSourceDebt.defaultIconName }
-    var expenseSourceIconURL: URL? { return selectedTransactionable?.iconURL }
+    var expenseSourceIconURL: URL? { return selectedExpenseSource?.iconURL }
     var expenseSourceIconDefaultImageName: String { return IconCategory.expenseSource.defaultIconName }
-    var expenseSourceName: String? { return selectedTransactionable?.name }
-    var expenseSourceAmount: String? { return selectedTransactionable?.amount }
-    var expenseSourceCurrency: Currency? { return selectedTransactionable?.currency }
+    var expenseSourceName: String? { return selectedExpenseSource?.name }
+    var expenseSourceAmount: String? { return selectedExpenseSource?.amount }
+    var expenseSourceCurrency: Currency? { return selectedExpenseSource?.currency }
     var expenseSourceCurrencyCode: String? { return expenseSourceCurrency?.code }
     
     // Visibility
@@ -161,15 +164,11 @@ class BorrowEditViewModel {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
     }
     
-    func set(type: BorrowType, source: ExpenseSourceViewModel?, destination: ExpenseSourceViewModel?) {
+    func set(type: BorrowType, source: TransactionSource?, destination: TransactionDestination?) {
         self.type = type
-        if type == .debt {
-            selectedCurrency = destination?.currency
-        } else {
-            selectedCurrency = source?.currency
-        }
-        self.selectedSource = source
-        self.selectedDestination = destination
+        selectedCurrency = type == .debt ? source?.currency : destination?.currency
+        selectedSource = source
+        selectedDestination = destination
     }
     
     func set(borrowId: Int, type: BorrowType) {
@@ -219,11 +218,15 @@ class BorrowEditViewModel {
                 }
     }
     
-    private func loadBorrowBy(id: Int, type: BorrowType) -> Promise<Borrow> {
-        if type == .debt {
-            return borrowsCoordinator.showDebt(by: id)
+    func loadDefaultExpenseSource() -> Promise<Void> {
+        guard let currency = selectedCurrency?.code, selectedExpenseSource == nil else {
+            return Promise.value(())
         }
-        return borrowsCoordinator.showLoan(by: id)
+        return  firstly {
+                    expenseSourcesCoordinator.first(currency: currency, isVirtual: false)
+                }.get { expenseSource in
+                    self.selectedExpenseSource = ExpenseSourceViewModel(expenseSource: expenseSource)
+                }.asVoid()
     }
     
     private func loadBorrow() -> Promise<Borrow> {
@@ -237,6 +240,13 @@ class BorrowEditViewModel {
                 }
     }
     
+    private func loadBorrowBy(id: Int, type: BorrowType) -> Promise<Borrow> {
+        if type == .debt {
+            return borrowsCoordinator.showDebt(by: id)
+        }
+        return borrowsCoordinator.showLoan(by: id)
+    }
+
     private func loadBorrowingTransaction(id: Int?) -> Promise<Void> {
         guard let id = id else {
             return Promise.value(())
@@ -245,17 +255,6 @@ class BorrowEditViewModel {
                     transactionsCoordinator.show(by: id)
                 }.get { transaction in
                     self.borrowingTransaction = TransactionViewModel(transaction: transaction)
-                }.asVoid()
-    }
-    
-    func loadDefaultExpenseSource() -> Promise<Void> {
-        guard let currency = selectedCurrency?.code, selectedTransactionable == nil else {
-            return Promise.value(())
-        }
-        return  firstly {
-                    expenseSourcesCoordinator.first(accountType: .usual, currency: currency)
-                }.get { expenseSource in
-                    self.selectedTransactionable = ExpenseSourceViewModel(expenseSource: expenseSource)
                 }.asVoid()
     }
     

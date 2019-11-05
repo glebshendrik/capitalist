@@ -27,12 +27,15 @@ class ActiveEditViewModel {
     var selectedActiveType: ActiveTypeViewModel? = nil {
         didSet {
             selectedActiveIncomeType = selectedActiveType?.defaultPlannedIncomeType
+            isIncomePlanned = selectedActiveType?.isIncomePlannedDefault ?? isIncomePlanned
         }
     }
     var selectedIconURL: URL? = nil
     var name: String? = nil
     var selectedCurrency: Currency? = nil
     var cost: String? = nil
+    var goal: String? = nil
+    var alreadyPaid: String? = nil
     var monthlyPayment: String? = nil
     var isIncomePlanned: Bool = true
     var selectedActiveIncomeType: ActiveIncomeType? = nil {
@@ -61,6 +64,15 @@ class ActiveEditViewModel {
     var iconDefaultImageName: String { return basketType.iconCategory.defaultIconName }
         
     // Visibility
+    var goalAmountFieldHidden: Bool {
+        guard let selectedActiveType = selectedActiveType else { return true }
+        return !selectedActiveType.isGoalAmountRequired
+    }
+    
+    var alreadyPaidFieldHidden: Bool {
+        return !isNew
+    }
+    
     var activeIncomeTypeFieldHidden: Bool {
         return !isIncomePlanned
     }
@@ -105,6 +117,8 @@ class ActiveEditViewModel {
         self.name = active.name
         self.selectedCurrency = active.currency
         self.cost = active.costCents.moneyDecimalString(with: active.currency)
+        self.goal = active.goalAmountCents?.moneyDecimalString(with: active.currency)
+        self.alreadyPaid = active.alreadyPaidCents?.moneyDecimalString(with: active.currency)
         self.monthlyPayment = active.monthlyPaymentCents?.moneyDecimalString(with: active.currency)
         self.isIncomePlanned = active.isIncomePlanned
         self.selectedActiveIncomeType = active.plannedIncomeType
@@ -188,6 +202,8 @@ extension ActiveEditViewModel {
                                   monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
                                   annualIncomePercent: annualPercent?.intPercent(),
                                   monthlyPlannedIncomeCents: monthlyPlannedIncome?.intMoney(with: selectedCurrency),
+                                  goalAmountCents: goal?.intMoney(with: selectedCurrency),
+                                  alreadyPaidCents: alreadyPaid?.intMoney(with: selectedCurrency),
                                   plannedIncomeType: selectedActiveIncomeType,
                                   isIncomePlanned: isIncomePlanned,
                                   reminderAttributes: reminderViewModel.reminderAttributes)
@@ -225,6 +241,7 @@ extension ActiveEditViewModel {
                                   monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
                                   annualIncomePercent: annualPercent?.intPercent(),
                                   monthlyPlannedIncomeCents: monthlyPlannedIncome?.intMoney(with: selectedCurrency),
+                                  goalAmountCents: goal?.intMoney(with: selectedCurrency),
                                   plannedIncomeType: selectedActiveIncomeType,
                                   isIncomePlanned: isIncomePlanned,
                                   reminderAttributes: reminderViewModel.reminderAttributes)

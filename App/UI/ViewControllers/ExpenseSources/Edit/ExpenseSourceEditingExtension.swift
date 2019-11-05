@@ -27,12 +27,7 @@ extension ExpenseSourceEditViewController : CurrenciesViewControllerDelegate {
 }
 
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
-    func didTap(accountType: AccountType) {
-        viewModel.accountType = accountType
-        updateIconUI()
-        updateTableUI()
-    }
-    
+
     func didTapIcon() {
         guard viewModel.canChangeIcon else { return }
         push(factory.iconsViewController(delegate: self, iconCategory: viewModel.iconCategory))        
@@ -55,11 +50,7 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
         viewModel.creditLimit = creditLimit
         updateTextFieldsUI()
     }
-    
-    func didChange(goalAmount: String?) {
-        viewModel.goalAmount = goalAmount
-    }
-        
+            
     func didTapBankButton() {
         if viewModel.accountConnected {
             removeAccountConnection()

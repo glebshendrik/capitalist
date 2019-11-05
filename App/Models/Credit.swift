@@ -15,7 +15,8 @@ struct Credit : Decodable {
     let name: String
     let iconURL: URL?
     let currency: Currency
-    let amountCents: Int
+    let amountCents: Int?
+    let returnAmountCents: Int
     let paidAmountCents: Int
     let amountLeftCents: Int
     let monthlyPaymentCents: Int?
@@ -34,6 +35,7 @@ struct Credit : Decodable {
         case iconURL = "icon_url"
         case currency
         case amountCents = "amount_cents"
+        case returnAmountCents = "return_amount_cents"
         case paidAmountCents = "paid_amount_cents"
         case amountLeftCents = "amount_left_cents"
         case monthlyPaymentCents = "monthly_payment_cents"
@@ -53,11 +55,13 @@ struct CreditCreationForm : Encodable, Validatable {
     let iconURL: URL?
     let currency: String?
     let amountCents: Int?
+    let returnAmountCents: Int?
     let alreadyPaidCents: Int?
     let monthlyPaymentCents: Int?
     let gotAt: Date
     let period: Int?
     let reminderAttributes: ReminderNestedAttributes?
+    let creditingTransactionAttributes: CreditingTransactionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case creditTypeId = "credit_type_id"
@@ -65,11 +69,13 @@ struct CreditCreationForm : Encodable, Validatable {
         case iconURL = "icon_url"
         case currency
         case amountCents = "amount_cents"
+        case returnAmountCents = "return_amount_cents"
         case alreadyPaidCents = "already_paid_cents"
         case monthlyPaymentCents = "monthly_payment_cents"
         case gotAt = "got_at"
         case period
         case reminderAttributes = "reminder_attributes"
+        case creditingTransactionAttributes = "crediting_transaction_attributes"
     }
     
     func validate() -> [String : String]? {
@@ -91,8 +97,8 @@ struct CreditCreationForm : Encodable, Validatable {
             errors[CodingKeys.currency.rawValue] = "Укажите валюту"
         }
         
-        if !Validator.isValid(positiveMoney: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = "Укажите сумму"
+        if !Validator.isValid(positiveMoney: returnAmountCents) {
+            errors[CodingKeys.returnAmountCents.rawValue] = "Укажите сумму"
         }
         
         if !Validator.isValid(money: alreadyPaidCents) {
@@ -111,11 +117,30 @@ struct CreditCreationForm : Encodable, Validatable {
     }
 }
 
+struct CreditingTransactionNestedAttributes : Encodable {
+    let destinationId: Int?
+    let destinationType: TransactionableType = .expenseSource
+    
+    enum CodingKeys: String, CodingKey {
+        case destinationId = "destination_id"
+        case destinationType = "destination_type"
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+                
+        if let destinationId = destinationId {
+            try container.encode(destinationId, forKey: .destinationId)
+        }        
+        try container.encode(destinationType, forKey: .destinationType)
+    }
+}
+
 struct CreditUpdatingForm : Encodable, Validatable {
     var id: Int?
     let name: String?
     let iconURL: URL?
-    let amountCents: Int?
+    let returnAmountCents: Int?
     let monthlyPaymentCents: Int?
     let gotAt: Date
     let period: Int?
@@ -124,7 +149,7 @@ struct CreditUpdatingForm : Encodable, Validatable {
     enum CodingKeys: String, CodingKey {
         case name
         case iconURL = "icon_url"
-        case amountCents = "amount_cents"
+        case returnAmountCents = "return_amount_cents"
         case monthlyPaymentCents = "monthly_payment_cents"
         case gotAt = "got_at"
         case period
@@ -142,8 +167,8 @@ struct CreditUpdatingForm : Encodable, Validatable {
             errors[CodingKeys.name.rawValue] = "Укажите название"
         }
                 
-        if !Validator.isValid(positiveMoney: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = "Укажите сумму"
+        if !Validator.isValid(positiveMoney: returnAmountCents) {
+            errors[CodingKeys.returnAmountCents.rawValue] = "Укажите сумму"
         }
                 
         if !Validator.isValid(pastDate: gotAt) {

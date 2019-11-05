@@ -6,17 +6,24 @@
   Copyright © 2019 Real Tranzit. All rights reserved.
 */
 
-"DEBT_NOTIFICATION_MESSAGE_KEY" = "Вам должны вернуть долг
+"DEBT_NOTIFICATION_MESSAGE_KEY" = "Ask who owes you a debt to return
 %@ %@";
 
-"LOAN_NOTIFICATION_MESSAGE_KEY" = "Вы должны вернуть займ
+"LOAN_NOTIFICATION_MESSAGE_KEY" = "Pay off your debt
 %@ %@";
 
-"INCOME_REMINDER_NOTIFICATION_MESSAGE_KEY" = "Запланированный доход: %@
+"INCOME_REMINDER_NOTIFICATION_MESSAGE_KEY" = "Planned income: %@
 %@";
 
-"EXPENSE_REMINDER_NOTIFICATION_MESSAGE_KEY" = "Запланированная трата: %@
+"EXPENSE_REMINDER_NOTIFICATION_MESSAGE_KEY" = "Planned expense: %@
 %@";
+
+"CREDIT_NOTIFICATION_MESSAGE_KEY" = "Planned credit pay off: %@
+%@";
+
+"ACTIVE_NOTIFICATION_MESSAGE_KEY" = "Planned asset investment: %@
+%@";
+
 
 "KEEP_ALIVE_NOTIFICATION_1" = "Не забудь внести сегодняшние траты!";
 

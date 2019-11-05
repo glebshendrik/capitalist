@@ -23,7 +23,7 @@ class ExpenseCategoriesViewModel {
     
     func loadExpenseCategories() -> Promise<Void> {
         return  firstly {
-            expenseCategoriesCoordinator.index()
+            expenseCategoriesCoordinator.index(noBorrows: true)
         }.get { expenseCategories in            
             self.expenseCategoryViewModels = expenseCategories.map { ExpenseCategoryViewModel(expenseCategory: $0)}
         }.asVoid()

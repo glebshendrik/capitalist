@@ -27,7 +27,6 @@ class ExpenseCategoryEditViewModel {
     var selectedIconURL: URL? = nil
     var name: String? = nil
     var selectedCurrency: Currency? = nil
-    var selectedIncomeSourceCurrency: Currency? = nil
     var monthlyPlanned: String? = nil
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
@@ -44,15 +43,7 @@ class ExpenseCategoryEditViewModel {
     var selectedCurrencyCode: String? {
         return selectedCurrency?.code
     }
-    
-    var selectedIncomeSourceCurrencyName: String? {
-        return selectedIncomeSourceCurrency?.translatedName
-    }
-    
-    var selectedIncomeSourceCurrencyCode: String? {
-        return selectedIncomeSourceCurrency?.code
-    }
-    
+        
     var isNew: Bool {
         return expenseCategory == nil
     }
@@ -96,7 +87,6 @@ class ExpenseCategoryEditViewModel {
                     accountCoordinator.loadCurrentUser()
                 }.done { user in
                     self.selectedCurrency = user.currency
-                    self.selectedIncomeSourceCurrency = user.currency
                 }
     }
     
@@ -105,8 +95,7 @@ class ExpenseCategoryEditViewModel {
         basketType = expenseCategory.basketType
         name = expenseCategory.name
         selectedIconURL = expenseCategory.iconURL
-        selectedCurrency = expenseCategory.currency
-        selectedIncomeSourceCurrency = expenseCategory.incomeSourceDependentCurrency
+        selectedCurrency = expenseCategory.currency        
         monthlyPlanned = expenseCategory.monthlyPlannedCents?.moneyDecimalString(with: selectedCurrency)
         reminderViewModel = ReminderViewModel(reminder: expenseCategory.reminder)
     }
@@ -164,9 +153,8 @@ extension ExpenseCategoryEditViewModel {
         return ExpenseCategoryCreationForm(basketId: basketId(by: basketType),
                                            iconURL: selectedIconURL,
                                            name: name,
+                                           currency: selectedCurrencyCode,
                                            monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
-                                           monthlyPlannedCurrency: selectedCurrencyCode,
-                                           incomeSourceCurrency: selectedIncomeSourceCurrencyCode,
                                            reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }

@@ -80,8 +80,19 @@ class IncomeSourceViewModel : TransactionSource {
         return incomeSource.isChild
     }
     
+    var isBorrowOrReturn: Bool {
+        return incomeSource.isBorrowOrReturn
+    }
+    
+    public private(set) var waitingDebts: [BorrowViewModel] = []
+    
+    var hasWaitingDebts: Bool {
+        return waitingDebts.count > 0
+    }
+    
     init(incomeSource: IncomeSource) {
         self.incomeSource = incomeSource
+        waitingDebts = incomeSource.waitingDebts.map { BorrowViewModel(borrow: $0) }
     }
     
     func asTransactionFilter() -> IncomeSourceTransactionFilter {

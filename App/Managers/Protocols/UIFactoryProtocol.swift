@@ -46,8 +46,6 @@ protocol UIFactoryProtocol {
     func expenseSourceSelectViewController(delegate: ExpenseSourceSelectViewControllerDelegate,
                                            skipExpenseSourceId: Int?,
                                            selectionType: TransactionPart,
-                                           noDebts: Bool,
-                                           accountType: AccountType?,
                                            currency: String?) -> ExpenseSourceSelectViewController?
     
     func expenseCategorySelectViewController(delegate: ExpenseCategorySelectViewControllerDelegate) -> ExpenseCategorySelectViewController?
@@ -80,15 +78,16 @@ protocol UIFactoryProtocol {
     func borrowEditViewController(delegate: BorrowEditViewControllerDelegate,
                                   type: BorrowType,
                                   borrowId: Int?,
-                                  source: ExpenseSourceViewModel?,
-                                  destination: ExpenseSourceViewModel?) -> UINavigationController?
+                                  source: TransactionSource?,
+                                  destination: TransactionDestination?) -> UINavigationController?
     
     func creditEditViewController(delegate: CreditEditViewControllerDelegate,
-                                  creditId: Int?) -> UINavigationController?
+                                  creditId: Int?,
+                                  destination: TransactionDestination?) -> UINavigationController?
     
     func waitingBorrowsViewController(delegate: WaitingBorrowsViewControllerDelegate,
-                                      source: ExpenseSourceViewModel,
-                                      destination: ExpenseSourceViewModel,
+                                      source: TransactionSource,
+                                      destination: TransactionDestination,
                                       waitingBorrows: [BorrowViewModel],
                                       borrowType: BorrowType) -> UIViewController?
     

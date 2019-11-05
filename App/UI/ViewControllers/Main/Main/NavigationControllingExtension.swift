@@ -58,7 +58,7 @@ extension MainViewController {
     }
     
     func showCreditEditScreen(creditId: Int) {
-        modal(factory.creditEditViewController(delegate: self, creditId: creditId))
+        modal(factory.creditEditViewController(delegate: self, creditId: creditId, destination: nil))
     }
 }
 
@@ -79,97 +79,95 @@ extension MainViewController {
         case (let source as IncomeSourceViewModel, let destination as ExpenseSourceViewModel):
             showIncomeEditScreen(source: source, destination: destination)
         case (let source as IncomeSourceViewModel, let destination as ActiveViewModel):
-            showIncomeEditScreen(source: source, destination: destination)
+            showTransactionEditScreen(source: source, destination: destination)
         case (let source as ActiveViewModel, let destination as ExpenseSourceViewModel):
-            showIncomeEditScreen(source: source, destination: destination)
+            showTransactionEditScreen(source: source, destination: destination)
         case (let source as ExpenseSourceViewModel, let destination as ExpenseSourceViewModel):
-            showFundsMoveEditScreen(source: source, destination: destination)
+            showTransactionEditScreen(source: source, destination: destination)
         case (let source as ExpenseSourceViewModel, let destination as ExpenseCategoryViewModel):
             showExpenseEditScreen(source: source, destination: destination)
         case (let source as ExpenseSourceViewModel, let destination as ActiveViewModel):
-            showExpenseEditScreen(source: source, destination: destination)
+            showTransactionEditScreen(source: source, destination: destination)
         default:
             return
         }
     }
     
-    private func showIncomeEditScreen(source: TransactionSource, destination: TransactionDestination) {
+    private func showIncomeEditScreen(source: IncomeSourceViewModel, destination: ExpenseSourceViewModel) {
+        if source.isBorrowOrReturn {
+            showBorrowingIncomeSheet(source: source, destination: destination)
+        }
+        else {
+            showTransactionEditScreen(source: source, destination: destination)
+        }
+    }
+    
+    private func showTransactionEditScreen(source: Transactionable, destination: Transactionable) {
         modal(factory.transactionEditViewController(delegate: self, source: source, destination: destination))
     }
-    
-    private func showFundsMoveEditScreen(source: ExpenseSourceViewModel, destination: ExpenseSourceViewModel) {
-        
-        if source.hasWaitingDebts {
-            showBorrowsSheet(notReturnTitle: "Занять",
-                             returnTitle: "Возвращение долга",
-                             waitingBorrows: source.waitingDebts,
-                             source: source,
-                             destination: destination,
-                             borrowType: .debt)
-        } else if destination.hasWaitingLoans {
-            showBorrowsSheet(notReturnTitle: "Одолжить",
-                           returnTitle: "Возвращение займа",
-                           waitingBorrows: destination.waitingLoans,
-                           source: source,
-                           destination: destination,
-                           borrowType: .loan)
-        } else {
-            showBorrowOrFundsMove(source: source, destination: destination)
-        }
-    }
-    
-    private func showBorrowsSheet(notReturnTitle: String, returnTitle: String, waitingBorrows: [BorrowViewModel], source: ExpenseSourceViewModel, destination: ExpenseSourceViewModel, borrowType: BorrowType) {
-        let alertController = UIAlertController(title: nil,
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
-        
-        alertController.addAction(title: notReturnTitle,
-                                  style: .default,
-                                  isEnabled: true) { _ in
-                                    self.showBorrowOrFundsMove(source: source, destination: destination)
-        }
-        
-        alertController.addAction(title: returnTitle,
-                                  style: .default,
-                                  isEnabled: true) { _ in
-                                    
-                                    self.showWaitingBorrows(waitingBorrows,
-                                                            source: source,
-                                                            destination: destination,
-                                                            borrowType: borrowType)
-        }
-        
-        alertController.addAction(title: "Отмена", style: .cancel, isEnabled: true, handler: nil)
-        
-        present(alertController, animated: true)
-    }
-    
-    private func showBorrowOrFundsMove(source: ExpenseSourceViewModel, destination: ExpenseSourceViewModel) {
-        if source.isDebt || destination.isDebt {
-            showBorrowEditScreen(source: source, destination: destination)
-        } else {
-            showFundsMoveEditScreen(source: source, destination: destination, returningBorrow: nil)
-        }
-    }
-    
-    private func showWaitingBorrows(_ waitingBorrows: [BorrowViewModel], source: ExpenseSourceViewModel, destination: ExpenseSourceViewModel, borrowType: BorrowType) {
-                
-        slideUp(viewController: factory.waitingBorrowsViewController(delegate: self,
-                                                                     source: source,
-                                                                     destination: destination,
-                                                                     waitingBorrows: waitingBorrows,
-                                                                     borrowType: borrowType))
-    }
-    
-    private func showFundsMoveEditScreen(source: ExpenseSourceViewModel, destination: ExpenseSourceViewModel, returningBorrow: BorrowViewModel?) {
+       
+    private func showReturnTransactionEditScreen(source: Transactionable, destination: Transactionable, returningBorrow: BorrowViewModel?) {
         modal(factory.transactionEditViewController(delegate: self,
                                                     source: source,
                                                     destination: destination,
                                                     returningBorrow: returningBorrow))
     }
+        
+    private func showExpenseEditScreen(source: ExpenseSourceViewModel, destination: ExpenseCategoryViewModel) {
+        if destination.hasWaitingLoans {
+            showBorrowingExpenseSheet(source: source, destination: destination)
+        }
+        else if destination.isBorrowOrReturn {
+            showBorrowEditScreen(type: .debt, source: source, destination: destination)
+        }
+        else {
+            showTransactionEditScreen(source: source, destination: destination)
+        }
+    }
     
-    private func showBorrowEditScreen(source: ExpenseSourceViewModel, destination: ExpenseSourceViewModel) {
-        let type = source.isDebt ? BorrowType.loan : BorrowType.debt
+    private func showBorrowingIncomeSheet(source: IncomeSourceViewModel, destination: ExpenseSourceViewModel) {
+        let creditAction = UIAlertAction(title: "Взять в кредит", style: .default) { _ in
+            self.showCreditEditScreen(destination: destination)
+        }
+        
+        let loanAction = UIAlertAction(title: "Занять", style: .default) { _ in
+            self.showBorrowEditScreen(type: .loan, source: source, destination: destination)
+        }
+        
+        let returnAction = UIAlertAction(title: "Возвращение долга", style: .default) { _ in
+            self.showWaitingBorrows(source.waitingDebts,
+                                    source: source,
+                                    destination: destination,
+                                    borrowType: .debt)
+        }
+        
+        var actions: [UIAlertAction] = [creditAction, loanAction]
+        
+        if source.hasWaitingDebts {
+            actions.append(returnAction)
+        }
+        
+        sheet(title: nil, actions: actions)
+    }
+    
+    private func showBorrowingExpenseSheet(source: ExpenseSourceViewModel, destination: ExpenseCategoryViewModel) {
+        guard destination.hasWaitingLoans else { return }
+        
+        let debtAction = UIAlertAction(title: "Одолжить", style: .default) { _ in
+            self.showBorrowEditScreen(type: .debt, source: source, destination: destination)
+        }
+        
+        let returnAction = UIAlertAction(title: "Возвращение займа", style: .default) { _ in
+            self.showWaitingBorrows(destination.waitingLoans,
+                                    source: source,
+                                    destination: destination,
+                                    borrowType: .loan)
+        }
+        
+        sheet(title: nil, actions: [debtAction, returnAction])
+    }
+    
+    private func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
         modal(factory.borrowEditViewController(delegate: self,
                                                type: type,
                                                borrowId: nil,
@@ -177,16 +175,24 @@ extension MainViewController {
                                                destination: destination))
     }
     
-    private func showExpenseEditScreen(source: TransactionSource, destination: TransactionDestination) {
-        modal(factory.transactionEditViewController(delegate: self,
-                                                    source: source,
-                                                    destination: destination,
-                                                    returningBorrow: nil))
+    private func showCreditEditScreen(destination: TransactionDestination) {
+        modal(factory.creditEditViewController(delegate: self,
+                                               creditId: nil,
+                                               destination: destination))
+    }
+    
+    private func showWaitingBorrows(_ waitingBorrows: [BorrowViewModel], source: TransactionSource, destination: TransactionDestination, borrowType: BorrowType) {
+                
+        slideUp(factory.waitingBorrowsViewController(delegate: self,
+                                                     source: source,
+                                                     destination: destination,
+                                                     waitingBorrows: waitingBorrows,
+                                                     borrowType: borrowType))
     }
 }
 
 extension MainViewController : WaitingBorrowsViewControllerDelegate {
-    func didSelect(borrow: BorrowViewModel, source: ExpenseSourceViewModel, destination: ExpenseSourceViewModel) {
-        showFundsMoveEditScreen(source: source, destination: destination, returningBorrow: borrow)
+    func didSelect(borrow: BorrowViewModel, source: TransactionSource, destination: TransactionDestination) {
+        showReturnTransactionEditScreen(source: source, destination: destination, returningBorrow: borrow)
     }
 }

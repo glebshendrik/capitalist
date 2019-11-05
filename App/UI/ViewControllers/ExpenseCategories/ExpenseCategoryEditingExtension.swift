@@ -23,16 +23,9 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableController
     
     func didTapCurrency() {
         guard viewModel.canChangeCurrency else { return }
-        let delegate =  ExpenseCategoryCurrencyDelegate(delegate: self)
-        push(factory.currenciesViewController(delegate: delegate))
+        push(factory.currenciesViewController(delegate: self))
     }
-    
-    func didTapIncomeSourceCurrency() {
-        guard viewModel.canChangeIncomeSourceCurrency else { return }
-        let delegate =  IncomeSourceDependantCurrencyDelegate(delegate: self)
-        push(factory.currenciesViewController(delegate: delegate))
-    }
-    
+        
     func didTapSetReminder() {        
         modal(factory.reminderEditViewController(delegate: self, viewModel: viewModel.reminderViewModel))
     }
@@ -52,27 +45,9 @@ extension ExpenseCategoryEditViewController : ReminderEditViewControllerDelegate
     }
 }
 
-class IncomeSourceDependantCurrencyDelegate : CurrenciesViewControllerDelegate {
-    let delegate: ExpenseCategoryEditViewController?
-    
-    init(delegate: ExpenseCategoryEditViewController?) {
-        self.delegate = delegate
-    }
-    
+extension ExpenseCategoryEditViewController : CurrenciesViewControllerDelegate {
     func didSelectCurrency(currency: Currency) {
-        delegate?.update(incomeSourceCurrency: currency)
-    }
-}
-
-class ExpenseCategoryCurrencyDelegate : CurrenciesViewControllerDelegate {
-    let delegate: ExpenseCategoryEditViewController?
-    
-    init(delegate: ExpenseCategoryEditViewController?) {
-        self.delegate = delegate
-    }
-    
-    func didSelectCurrency(currency: Currency) {
-        delegate?.update(currency: currency)
+        update(currency: currency)
     }
 }
 
@@ -80,10 +55,5 @@ extension ExpenseCategoryEditViewController {
     func update(currency: Currency) {
         viewModel.selectedCurrency = currency        
         updateCurrencyUI()
-    }
-    
-    func update(incomeSourceCurrency: Currency) {
-        viewModel.selectedIncomeSourceCurrency = incomeSourceCurrency
-        updateIncomeSourceCurrencyUI()
     }
 }

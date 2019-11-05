@@ -11,6 +11,7 @@ import PromiseKit
 
 enum TransactionError : Error {
     case transactionIsNotSpecified
+    case canNotLoadExpenseSource
 }
 
 class TransactionEditViewModel {
@@ -33,7 +34,7 @@ class TransactionEditViewModel {
     var convertedAmount: String? = nil { didSet { didSetConvertedAmount() } }    
     var comment: String? = nil
     var gotAt: Date? = nil
-    var isBuyingAsset: Bool = true
+    var isBuyingAsset: Bool = false
     var amountConverted: String? = nil
     var convertedAmountConverted: String? = nil
     var exchangeRate: Float = 1.0 { didSet { didSetExchangeRate() } }

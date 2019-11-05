@@ -12,8 +12,11 @@ class SlideUpContainerViewController : UIViewController {
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var pullDownImage: UIImageView!
     @IBOutlet weak var verticalOffsetConstraint: NSLayoutConstraint!
-    weak var viewControllerToAdd: UIViewController? = nil
+    var viewControllerToAdd: UIViewController? = nil
+    var verticalOffsetRatio: CGFloat = 0.35
+    var shouldDim: Bool = true
     
     private var isPresenting = false
     private var originalPosition: CGPoint = CGPoint.zero
@@ -28,7 +31,25 @@ class SlideUpContainerViewController : UIViewController {
         contentView.roundTopCorners(radius: 8.0)
     }
     
-    private func addChild() {
+    private func setupUI() {
+        setupBackgroundUI()
+        setupContentViewUI()
+        setupChildUI()
+    }
+        
+    private func setupBackgroundUI() {
+        backgroundView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(didTapBackgroundView(_:))))
+        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapBackgroundView(_:))))
+        backgroundView.backgroundColor = shouldDim
+            ? UIColor.black.withAlphaComponent(0.5)
+            : UIColor.clear
+    }
+    
+    private func setupContentViewUI() {
+        contentView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(didPanContentView(_:))))
+    }
+    
+    private func setupChildUI() {
         guard let viewController = viewControllerToAdd else { return }
         addChild(viewController)
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -37,26 +58,11 @@ class SlideUpContainerViewController : UIViewController {
         NSLayoutConstraint.activate([
             viewController.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             viewController.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            viewController.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            viewController.view.topAnchor.constraint(equalTo: pullDownImage.bottomAnchor, constant: 3),
             viewController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)
             ])
         
         viewController.didMove(toParent: self)
-    }
-    
-    private func setupUI() {
-        configureBackground()
-        configureContentView()
-        addChild()
-    }
-    
-    private func configureBackground() {
-        backgroundView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(didTapBackgroundView(_:))))
-        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapBackgroundView(_:))))
-    }
-    
-    private func configureContentView() {
-        contentView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(didPanContentView(_:))))
     }
     
     @objc func didTapBackgroundView(_ sender: UITapGestureRecognizer) {
@@ -71,7 +77,7 @@ class SlideUpContainerViewController : UIViewController {
             originalPosition = locationInView
         case .changed:
             if locationInView.y > originalPosition.y {
-                verticalOffsetConstraint = verticalOffsetConstraint.setMultiplier(multiplier: (0.35 * view.frame.height + (locationInView.y - originalPosition.y)) / view.frame.height)
+                verticalOffsetConstraint = verticalOffsetConstraint.setMultiplier(multiplier: (verticalOffsetRatio * view.frame.height + (locationInView.y - originalPosition.y)) / view.frame.height)
                 view.layoutIfNeeded()
             }
         case .ended:
@@ -109,7 +115,7 @@ class SlideUpContainerViewController : UIViewController {
     private func animateSlideUp(completion: (() -> ())? = nil) {
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
             self.backgroundView.alpha = 1
-            self.verticalOffsetConstraint = self.verticalOffsetConstraint.setMultiplier(multiplier: 0.35)
+            self.verticalOffsetConstraint = self.verticalOffsetConstraint.setMultiplier(multiplier: self.verticalOffsetRatio)
             self.view.layoutIfNeeded()
         }, completion: { (isCompleted) in
             completion?()
@@ -138,7 +144,7 @@ extension SlideUpContainerViewController: UIViewControllerTransitioningDelegate,
         
         isPresenting = !isPresenting
         
-        if isPresenting == true {
+        if isPresenting {
             containerView.addSubview(toVC.view)
             
             backgroundView.alpha = 0
@@ -157,17 +163,30 @@ extension SlideUpContainerViewController: UIViewControllerTransitioningDelegate,
 }
 
 extension UIViewController {
-    func slideUp(viewController: UIViewController?) {
+    func slideUp(_ viewController: UIViewController?, toBottomOf anchorView: UIView, shouldDim: Bool = true) {
         
-        if let slideUpContainerViewController = UIStoryboard(name: Infrastructure.Storyboard.Common.name, bundle: Bundle.main).instantiateViewController(withIdentifier: Infrastructure.ViewController.SlideUpContainerViewController.identifier) as? SlideUpContainerViewController,
-            let viewController = viewController {
-            
-            slideUpContainerViewController.modalPresentationStyle = .custom
-            slideUpContainerViewController.transitioningDelegate = slideUpContainerViewController
-            slideUpContainerViewController.viewControllerToAdd = viewController
-            
-            present(slideUpContainerViewController, animated: true)
-            
+        slideUp(viewController,
+                verticalOffsetRatio: anchorView.bottomLineScreenSplitRatio,
+                shouldDim: shouldDim)
+    }
+    
+    func slideUp(_ viewController: UIViewController?, verticalOffsetRatio: CGFloat? = nil, shouldDim: Bool = true) {
+        
+        let storyboard = UIStoryboard(name: Infrastructure.Storyboard.Common.name,
+                                      bundle: Bundle.main)
+        let slideUpContainerId = Infrastructure.ViewController.SlideUpContainerViewController.identifier
+        
+        guard   let viewController = viewController,
+                let slideUpContainer = storyboard.instantiateViewController(withIdentifier: slideUpContainerId) as? SlideUpContainerViewController else { return }
+        
+        slideUpContainer.modalPresentationStyle = .custom
+        slideUpContainer.transitioningDelegate = slideUpContainer
+        
+        slideUpContainer.viewControllerToAdd = viewController
+        slideUpContainer.shouldDim = shouldDim
+        if let verticalOffsetRatio = verticalOffsetRatio {
+            slideUpContainer.verticalOffsetRatio = verticalOffsetRatio
         }
+        modal(slideUpContainer)
     }
 }

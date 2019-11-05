@@ -129,7 +129,7 @@ class FiltersSelectionViewModel {
     
     private func loadIncomeSourceFilters() -> Promise<Void> {
         return  firstly {
-                    incomeSourcesCoordinator.index()
+                    incomeSourcesCoordinator.index(noBorrows: false)
                 }.get { incomeSources in
                     let incomeSourceFilters: [IncomeSourceTransactionFilter] = incomeSources.map { incomeSource in
                         
@@ -145,7 +145,7 @@ class FiltersSelectionViewModel {
     
     private func loadExpenseSourceFilters() -> Promise<Void> {
         return  firstly {
-                    expenseSourcesCoordinator.index(noDebts: false, accountType: nil, currency: nil)
+                    expenseSourcesCoordinator.index(currency: nil)
                 }.get { expenseSources in
                     let expenseSourceFilters: [ExpenseSourceTransactionFilter] = expenseSources.map { expenseSource in
                         
@@ -161,7 +161,7 @@ class FiltersSelectionViewModel {
     
     private func loadExpenseCategoryFilters(basketType: BasketType) -> Promise<Void> {
         return  firstly {
-                    expenseCategoriesCoordinator.index(for: basketType)
+                    expenseCategoriesCoordinator.index(for: basketType, noBorrows: false)
                 }.get { expenseCategories in
                     let expenseCategoryFilters: [ExpenseCategoryTransactionFilter] = expenseCategories.map { expenseCategory in
                         

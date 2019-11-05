@@ -35,8 +35,9 @@ enum APIRoute: URLRequestConvertible {
     
     // IncomeSources
     case createIncomeSource(form: IncomeSourceCreationForm)
+    case firstBorrowIncomeSource(userId: Int, currency: String)
     case showIncomeSource(id: Int)
-    case indexIncomeSources(userId: Int)
+    case indexIncomeSources(userId: Int, noBorrows: Bool)
     case updateIncomeSource(form: IncomeSourceUpdatingForm)
     case updateIncomeSourcePosition(form: IncomeSourcePositionUpdatingForm)
     case destroyIncomeSource(id: Int, deleteTransactions: Bool)
@@ -44,8 +45,8 @@ enum APIRoute: URLRequestConvertible {
     // ExpenseSources
     case createExpenseSource(form: ExpenseSourceCreationForm)
     case showExpenseSource(id: Int)
-    case firstExpenseSource(userId: Int, accountType: AccountType, currency: String)
-    case indexExpenseSources(userId: Int, noDebts: Bool, accountType: AccountType?, currency: String?)
+    case firstExpenseSource(userId: Int, currency: String, isVirtual: Bool)
+    case indexExpenseSources(userId: Int, currency: String?)
     case updateExpenseSource(form: ExpenseSourceUpdatingForm)
     case updateExpenseSourcePosition(form: ExpenseSourcePositionUpdatingForm)
     case destroyExpenseSource(id: Int, deleteTransactions: Bool)
@@ -53,8 +54,9 @@ enum APIRoute: URLRequestConvertible {
     // ExpenseCategories
     case createExpenseCategory(form: ExpenseCategoryCreationForm)
     case showExpenseCategory(id: Int)
-    case indexExpenseCategories(basketId: Int)
-    case indexUserExpenseCategories(userId: Int)
+    case firstBorrowExpenseCategory(basketId: Int, currency: String)
+    case indexExpenseCategories(basketId: Int, noBorrows: Bool)
+    case indexUserExpenseCategories(userId: Int, noBorrows: Bool)
     case updateExpenseCategory(form: ExpenseCategoryUpdatingForm)
     case updateExpenseCategoryPosition(form: ExpenseCategoryPositionUpdatingForm)
     case destroyExpenseCategory(id: Int, deleteTransactions: Bool)

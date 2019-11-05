@@ -17,10 +17,8 @@ class ExpenseSourcesViewModel {
         return expenseSourceViewModels.count
     }
     
-    var noDebts: Bool = false
     var skipExpenseSourceId: Int? = nil
     var currency: String? = nil
-    var accountType: AccountType? = nil
     
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol) {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
@@ -28,9 +26,7 @@ class ExpenseSourcesViewModel {
     
     func loadExpenseSources() -> Promise<Void> {
         return  firstly {
-                    expenseSourcesCoordinator.index(noDebts: noDebts,
-                                                    accountType: accountType,
-                                                    currency: currency)
+                    expenseSourcesCoordinator.index(currency: currency)
                 }.get { expenseSources in
                     self.expenseSourceViewModels = expenseSources
                         .map { ExpenseSourceViewModel(expenseSource: $0)}

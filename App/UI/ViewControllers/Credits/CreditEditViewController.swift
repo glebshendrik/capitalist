@@ -31,6 +31,8 @@ class CreditEditViewController : FormTransactionsDependableEditViewController {
                 CreditCreationForm.CodingKeys.creditTypeId.rawValue : tableController.creditTypeField,
                 CreditCreationForm.CodingKeys.currency.rawValue : tableController.currencyField,
                 CreditCreationForm.CodingKeys.amountCents.rawValue : tableController.amountField,
+                CreditingTransactionNestedAttributes.CodingKeys.destinationId.rawValue : tableController.expenseSourceField,
+                CreditCreationForm.CodingKeys.returnAmountCents.rawValue : tableController.returnAmountField,
                 CreditCreationForm.CodingKeys.alreadyPaidCents.rawValue : tableController.alreadyPaidField,
                 CreditCreationForm.CodingKeys.monthlyPaymentCents.rawValue : tableController.monthlyPaymentField,
                 CreditCreationForm.CodingKeys.gotAt.rawValue : tableController.gotAtField,
@@ -67,6 +69,7 @@ class CreditEditViewController : FormTransactionsDependableEditViewController {
         updateIconUI()
         updateCreditTypeUI()
         updateTextFieldsUI()
+        updateExpenseSourceUI()
         updateCurrencyUI()
         updateGotAtUI()
         updatePeriodUI()
@@ -83,6 +86,10 @@ extension CreditEditViewController {
     
     func set(creditId: Int) {
         viewModel.set(creditId: creditId)
+    }
+    
+    func set(destination: TransactionDestination?) {
+        viewModel.set(destination: destination as? ExpenseSourceViewModel)
     }
 }
 
@@ -105,8 +112,24 @@ extension CreditEditViewController : CreditEditTableControllerDelegate {
         push(factory.currenciesViewController(delegate: self))
     }
     
+    func didTapExpenseSource() {
+        slideUp(factory.expenseSourceSelectViewController(delegate: self,
+                                                          skipExpenseSourceId: nil,
+                                                          selectionType: .destination,
+                                                          currency: viewModel.selectedCurrency?.code))
+    }
+    
     func didChange(amount: String?) {
         viewModel.amount = amount
+    }
+    
+    func didChange(alreadyOnBalance: Bool) {
+        viewModel.onBalance = alreadyOnBalance
+        updateExpenseSourceUI(reload: true, animated: true)
+    }
+    
+    func didChange(returnAmount: String?) {
+        viewModel.returnAmount = returnAmount
     }
     
     func didChange(alreadyPaid: String?) {
@@ -146,6 +169,16 @@ extension CreditEditViewController : CurrenciesViewControllerDelegate {
     }
 }
 
+extension CreditEditViewController : ExpenseSourceSelectViewControllerDelegate {
+    func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(expenseSource: sourceExpenseSourceViewModel)
+    }
+    
+    func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(expenseSource: destinationExpenseSourceViewModel)
+    }
+}
+
 extension CreditEditViewController : DatePickerViewControllerDelegate {
     func didSelect(date: Date?) {
         update(gotAt: date)
@@ -177,6 +210,11 @@ extension CreditEditViewController {
         updateCurrencyUI()
     }
     
+    func update(expenseSource: ExpenseSourceViewModel?) {
+        viewModel.selectedDestination = expenseSource
+        updateExpenseSourceUI(reload: true, animated: false)
+    }
+    
     func update(gotAt: Date?) {
         viewModel.gotAt = gotAt ?? Date()
         updateGotAtUI()
@@ -200,6 +238,9 @@ extension CreditEditViewController {
         tableController.amountField.text = viewModel.amount
         tableController.amountField.currency = viewModel.selectedCurrency
         
+        tableController.returnAmountField.text = viewModel.returnAmount
+        tableController.returnAmountField.currency = viewModel.selectedCurrency
+        
         tableController.alreadyPaidField.text = viewModel.alreadyPaid
         tableController.alreadyPaidField.isEnabled = viewModel.canChangeAlreadyPaid
         tableController.alreadyPaidField.currency = viewModel.selectedCurrency
@@ -222,8 +263,24 @@ extension CreditEditViewController {
         tableController.currencyField.isEnabled = viewModel.canChangeCurrency
         
         tableController.amountField.currency = viewModel.selectedCurrency
+        tableController.returnAmountField.currency = viewModel.selectedCurrency
         tableController.alreadyPaidField.currency = viewModel.selectedCurrency
         tableController.monthlyPaymentField.currency = viewModel.selectedCurrency
+    }
+    
+    func updateExpenseSourceUI(reload: Bool = false, animated: Bool = false) {
+        tableController.set(cell: tableController.onBalanceCell, hidden: viewModel.onBalanceSwitchHidden, animated: false, reload: false)
+        tableController.onBalanceSwitchField.value = viewModel.onBalance
+        
+        tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: false, reload: false)
+        tableController.expenseSourceField.placeholder = "Кошелек перевода кредита"
+        tableController.expenseSourceField.text = viewModel.expenseSourceName
+        tableController.expenseSourceField.subValue = viewModel.expenseSourceAmount
+        tableController.expenseSourceField.imageName = viewModel.expenseSourceIconDefaultImageName
+        tableController.expenseSourceField.imageURL = viewModel.expenseSourceIconURL
+        if reload {
+            tableController.reloadData(animated: animated)
+        }
     }
     
     func updatePeriodUI() {
@@ -246,6 +303,8 @@ extension CreditEditViewController {
     }
     
     func updateTableUI(animated: Bool = true) {
+        tableController.set(cell: tableController.onBalanceCell, hidden: viewModel.onBalanceSwitchHidden, animated: false, reload: false)
+        tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.monthlyPaymentCell, hidden: viewModel.monthlyPaymentFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.periodCell, hidden: viewModel.periodFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: false, reload: false)

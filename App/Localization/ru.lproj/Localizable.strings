@@ -18,6 +18,12 @@
 "EXPENSE_REMINDER_NOTIFICATION_MESSAGE_KEY" = "Запланированная трата: %@
 %@";
 
+"CREDIT_NOTIFICATION_MESSAGE_KEY" = "Запланированная выплата по кредиту: %@
+%@";
+
+"ACTIVE_NOTIFICATION_MESSAGE_KEY" = "Запланированная инвестиция по активу: %@
+%@";
+
 "KEEP_ALIVE_NOTIFICATION_1" = "Не забудь внести сегодняшние траты!";
 
 "KEEP_ALIVE_NOTIFICATION_2" = "Финансовый учёт — основа благополучия! Не пренебрегайте записью расходов!";

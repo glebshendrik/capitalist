@@ -28,11 +28,18 @@ class IncomeSourcesCoordinator : IncomeSourcesCoordinatorProtocol {
         return incomeSourcesService.show(by: id)
     }
     
-    func index() -> Promise<[IncomeSource]> {
+    func firstBorrow(currency: String) -> Promise<IncomeSource> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return incomeSourcesService.index(for: currentUserId)
+        return incomeSourcesService.firstBorrow(for: currentUserId, currency: currency)
+    }
+    
+    func index(noBorrows: Bool) -> Promise<[IncomeSource]> {
+        guard let currentUserId = userSessionManager.currentSession?.userId else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        return incomeSourcesService.index(for: currentUserId, noBorrows: noBorrows)
     }
     
     func update(with updatingForm: IncomeSourceUpdatingForm) -> Promise<Void> {

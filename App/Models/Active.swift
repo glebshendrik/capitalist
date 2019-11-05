@@ -30,6 +30,7 @@ struct Active : Decodable {
     let iconURL: URL?
     let currency: Currency
     let costCents: Int
+    let alreadyPaidCents: Int?
     let monthlyPaymentCents: Int?
     let paymentCentsAtPeriod: Int?
     let investedCents: Int
@@ -37,6 +38,7 @@ struct Active : Decodable {
     let spentCents: Int
     let annualIncomePercent: Int?
     let monthlyPlannedIncomeCents: Int?
+    let goalAmountCents: Int?
     let plannedIncomeType: ActiveIncomeType?
     let isIncomePlanned: Bool
     let rowOrder: Int
@@ -59,11 +61,13 @@ struct Active : Decodable {
         case spentCents = "spent_at_period_cents"
         case annualIncomePercent = "annual_income_percent"
         case monthlyPlannedIncomeCents = "monthly_planned_income_cents"
+        case goalAmountCents = "goal_amount_cents"
         case plannedIncomeType = "planned_income_type"
         case isIncomePlanned = "is_income_planned"
         case rowOrder = "row_order"
         case deletedAt = "deleted_at"
         case reminder
+        case alreadyPaidCents = "already_paid_cents"
     }
 }
 
@@ -77,6 +81,8 @@ struct ActiveCreationForm : Encodable, Validatable {
     let monthlyPaymentCents: Int?
     let annualIncomePercent: Int?
     let monthlyPlannedIncomeCents: Int?
+    let goalAmountCents: Int?
+    let alreadyPaidCents: Int?
     let plannedIncomeType: ActiveIncomeType?
     let isIncomePlanned: Bool
     let reminderAttributes: ReminderNestedAttributes?
@@ -90,6 +96,8 @@ struct ActiveCreationForm : Encodable, Validatable {
         case monthlyPaymentCents = "monthly_payment_cents"
         case annualIncomePercent = "annual_income_percent"
         case monthlyPlannedIncomeCents = "monthly_planned_income_cents"
+        case goalAmountCents = "goal_amount_cents"
+        case alreadyPaidCents = "already_paid_cents"
         case plannedIncomeType = "planned_income_type"
         case isIncomePlanned = "is_income_planned"
         case reminderAttributes = "reminder_attributes"
@@ -130,6 +138,7 @@ struct ActiveUpdatingForm : Encodable, Validatable {
     let monthlyPaymentCents: Int?
     let annualIncomePercent: Int?
     let monthlyPlannedIncomeCents: Int?
+    let goalAmountCents: Int?
     let plannedIncomeType: ActiveIncomeType?
     let isIncomePlanned: Bool
     let reminderAttributes: ReminderNestedAttributes?
@@ -141,6 +150,7 @@ struct ActiveUpdatingForm : Encodable, Validatable {
         case monthlyPaymentCents = "monthly_payment_cents"
         case annualIncomePercent = "annual_income_percent"
         case monthlyPlannedIncomeCents = "monthly_planned_income_cents"
+        case goalAmountCents = "goal_amount_cents"
         case plannedIncomeType = "planned_income_type"
         case isIncomePlanned = "is_income_planned"
         case reminderAttributes = "reminder_attributes"

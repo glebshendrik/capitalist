@@ -69,11 +69,11 @@ class TransactionViewModel {
     }
     
     var isDebt: Bool {
-        return !isReturn && transaction.borrowType == .debt
+        return !isReturn && transaction.borrow?.type == .debt
     }
     
     var isLoan: Bool {
-        return !isReturn && transaction.borrowType == .loan
+        return !isReturn && transaction.borrow?.type == .loan
     }
     
     var isReturn: Bool {
@@ -139,7 +139,7 @@ class TransactionViewModel {
     }
     
     var borrowType: BorrowType? {
-        return transaction.borrowType
+        return transaction.borrow?.type
     }
     
     init(transaction: Transaction) {

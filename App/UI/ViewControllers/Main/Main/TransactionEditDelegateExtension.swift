@@ -12,40 +12,40 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
         
     func didCreateDebt() {
         soundsManager.playTransactionCompletedSound()
-        updateFundsMoveDependentData()
+        updateDebtDependentData()
     }
                 
     func didCreateLoan() {
         soundsManager.playTransactionCompletedSound()
-        updateFundsMoveDependentData()
+        updateLoanDependentData()
     }
             
     func didUpdateDebt() {
-        updateFundsMoveDependentData()
+        updateDebtDependentData()
     }
         
     func didUpdateLoan() {
-        updateFundsMoveDependentData()
+        updateLoanDependentData()
     }
         
     func didRemoveDebt() {
-        updateFundsMoveDependentData()
+        updateDebtDependentData()
     }
         
     func didRemoveLoan() {
-        updateFundsMoveDependentData()
+        updateLoanDependentData()
     }
     
     func didCreateCredit() {
-        updateExpenseDependentData()
+        updateCreditDependentData()
     }
     
     func didUpdateCredit() {
-        updateExpenseDependentData()
+        updateCreditDependentData()
     }
     
     func didRemoveCredit() {
-        updateExpenseDependentData()
+        updateCreditDependentData()
     }
     
     func didCreateTransaction(id: Int, type: TransactionType) {
@@ -93,5 +93,29 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
         loadExpenseCategories(by: .joy)
         loadActives(by: .risk)
         loadActives(by: .safe)
+    }
+    
+    private func updateDebtDependentData() {
+        loadIncomeSources()
+        loadBudget()
+        loadBaskets()
+        loadExpenseSources()
+        loadExpenseCategories(by: .joy)
+    }
+    
+    private func updateLoanDependentData() {
+        loadIncomeSources()
+        loadBudget()
+        loadBaskets()
+        loadExpenseSources()
+        loadExpenseCategories(by: .joy)
+    }
+    
+    private func updateCreditDependentData() {
+        loadIncomeSources()
+        loadBudget()
+        loadBaskets()
+        loadExpenseSources()
+        loadExpenseCategories(by: .joy)
     }
 }

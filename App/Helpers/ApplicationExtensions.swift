@@ -586,3 +586,19 @@ extension UIViewController {
         modal(alertController, animated: true)
     }
 }
+
+extension UIView {
+    var absoluteFrame: CGRect? {
+        let rootView = UIApplication.shared.keyWindow?.rootViewController?.view
+        return self.superview?.convert(self.frame, to: rootView)
+    }
+    
+    var absoluteBottomY: CGFloat? {
+        return absoluteFrame?.maxY
+    }
+    
+    var bottomLineScreenSplitRatio: CGFloat? {
+        guard let y = absoluteFrame?.maxY, let screenHeight = UIApplication.shared.keyWindow?.rootViewController?.view.frame.height else { return nil }
+        return y / screenHeight
+    }
+}

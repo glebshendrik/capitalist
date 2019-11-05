@@ -106,7 +106,7 @@ class MainViewModel {
     
     func loadIncomeSources() -> Promise<Void> {
         return  firstly {
-                    incomeSourcesCoordinator.index()
+                    incomeSourcesCoordinator.index(noBorrows: false)
                 }.get { incomeSources in
                     self.incomeSourceViewModels = incomeSources.map { IncomeSourceViewModel(incomeSource: $0)}
                 }.asVoid()
@@ -114,7 +114,7 @@ class MainViewModel {
     
     func loadExpenseSources() -> Promise<Void> {
         return  firstly {
-                    expenseSourcesCoordinator.index(noDebts: false, accountType: nil, currency: nil)
+                    expenseSourcesCoordinator.index(currency: nil)
                 }.get { expenseSources in
                     self.expenseSourceViewModels = expenseSources.map { ExpenseSourceViewModel(expenseSource: $0)}
                 }.asVoid()
@@ -130,7 +130,7 @@ class MainViewModel {
     
     func loadExpenseCategories() -> Promise<Void> {
         return  firstly {
-                    expenseCategoriesCoordinator.index(for: .joy)
+                    expenseCategoriesCoordinator.index(for: .joy, noBorrows: false)
                 }.get { expenseCategories in
                     self.joyExpenseCategoryViewModels = expenseCategories.map { ExpenseCategoryViewModel(expenseCategory: $0) }
                 }.asVoid()

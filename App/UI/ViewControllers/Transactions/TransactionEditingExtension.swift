@@ -32,18 +32,22 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func didTapSource() {
+        guard viewModel.canChangeSource else { return }
+        let skipTransactionable = viewModel.sourceType == viewModel.destinationType ? viewModel.destination : nil
         didTap(transactionableType: viewModel.sourceType,
                transactionPart: .source,
-               skipTransactionable: viewModel.destination,
-               options: viewModel.sourceFilter.options,
+               skipTransactionable: skipTransactionable,
+               currency: viewModel.sourceFilterCurrency,
                transactionableTypeCases: sourceTransactionableTypeCases())
     }
         
-    func didTapDestination() {
+    func didTapDestination() {        
+        guard viewModel.canChangeDestination else { return }
+        let skipTransactionable = viewModel.sourceType == viewModel.destinationType ? viewModel.source : nil
         didTap(transactionableType: viewModel.destinationType,
                transactionPart: .destination,
-               skipTransactionable: viewModel.source,
-               options: viewModel.destinationFilter.options,
+               skipTransactionable: skipTransactionable,
+               currency: viewModel.destinationFilterCurrency,
                transactionableTypeCases: destinationTransactionableTypeCases())
     }
     
@@ -116,39 +120,39 @@ extension TransactionEditViewController {
     func didTap(transactionableType: TransactionableType?,
                 transactionPart: TransactionPart,
                 skipTransactionable: Transactionable?,
-                options: ExpenseSourcesFilterOptions,
+                currency: String?,
                 transactionableTypeCases: [TransactionableType]) {
         
         if viewModel.isNew {
             showTransactionables(transactionableTypes: transactionableTypeCases,
                                  transactionPart: transactionPart,
                                  skipTransactionable: skipTransactionable,
-                                 options: options)
+                                 currency: currency)
         }
         else if let transactionableType = transactionableType {
             showTransactionables(transactionableType: transactionableType,
                                  transactionPart: transactionPart,
                                  skipTransactionable: skipTransactionable,
-                                 options: options)
+                                 currency: currency)
         }
     }
     
     func showTransactionables(transactionableType: TransactionableType,
                               transactionPart: TransactionPart,
                               skipTransactionable: Transactionable?,
-                              options: ExpenseSourcesFilterOptions) {
+                              currency: String?) {
         let viewController = transactionableSelectControllerFor(transactionableType: transactionableType,
                                                                 transactionPart: transactionPart,
                                                                 skipTransactionable: skipTransactionable,
-                                                                options: options)
+                                                                currency: currency)
 
-        slideUp(viewController: viewController)
+        slideUp(viewController)
     }
     
     func showTransactionables(transactionableTypes: [TransactionableType],
                               transactionPart: TransactionPart,
                               skipTransactionable: Transactionable?,
-                              options: ExpenseSourcesFilterOptions) {
+                              currency: String?) {
         
         guard !transactionableTypes.isEmpty else { return }
         
@@ -156,7 +160,7 @@ extension TransactionEditViewController {
             showTransactionables(transactionableType: singleTransactionableType,
                                  transactionPart: transactionPart,
                                  skipTransactionable: skipTransactionable,
-                                 options: options)
+                                 currency: currency)
         }
         else {
             let actions = transactionableTypes.map { transactionableType in
@@ -166,7 +170,7 @@ extension TransactionEditViewController {
                                         self.showTransactionables(transactionableType: transactionableType,
                                                                   transactionPart: transactionPart,
                                                                   skipTransactionable: skipTransactionable,
-                                                                  options: options)
+                                                                  currency: currency)
                 })
             }
             sheet(title: "Выбрать", actions: actions)
@@ -208,7 +212,7 @@ extension TransactionEditViewController {
     func transactionableSelectControllerFor(transactionableType: TransactionableType,
                                             transactionPart: TransactionPart,
                                             skipTransactionable: Transactionable?,
-                                            options: ExpenseSourcesFilterOptions) -> UIViewController? {
+                                            currency: String?) -> UIViewController? {
         switch transactionableType {
         case .incomeSource:
             return factory.incomeSourceSelectViewController(delegate: self)
@@ -216,9 +220,7 @@ extension TransactionEditViewController {
             return factory.expenseSourceSelectViewController(delegate: self,
                                                             skipExpenseSourceId: skipTransactionable?.id,
                                                             selectionType: transactionPart,
-                                                            noDebts: options.noDebts,
-                                                            accountType: options.accountType,
-                                                            currency: options.currency)
+                                                            currency: currency)
         case .expenseCategory:
             return factory.expenseCategorySelectViewController(delegate: self)
         case .active:

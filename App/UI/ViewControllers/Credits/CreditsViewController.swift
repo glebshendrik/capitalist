@@ -123,12 +123,12 @@ extension CreditsViewController : CreditEditViewControllerDelegate {
         loadCredits(finantialDataInvalidated: true)
     }
 
-    func showCredit(_ credit: CreditViewModel) {
-        modal(factory.creditEditViewController(delegate: self, creditId: credit.id))
+    func showCredit(_ credit: CreditViewModel) {        
+        modal(factory.creditEditViewController(delegate: self, creditId: credit.id, destination: nil))
     }
 
     func showNewCredit() {
-        modal(factory.creditEditViewController(delegate: self, creditId: nil))
+        modal(factory.creditEditViewController(delegate: self, creditId: nil, destination: nil))
     }
 }
 

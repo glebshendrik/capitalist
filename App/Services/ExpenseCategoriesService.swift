@@ -18,12 +18,16 @@ class ExpenseCategoriesService : Service, ExpenseCategoriesServiceProtocol {
         return request(APIRoute.showExpenseCategory(id: id))
     }
     
-    func indexExpenseCategories(for basketId: Int) -> Promise<[ExpenseCategory]> {
-        return requestCollection(APIRoute.indexExpenseCategories(basketId: basketId))
+    func firstBorrow(for basketId: Int, currency: String) -> Promise<ExpenseCategory> {
+        return request(APIRoute.firstBorrowExpenseCategory(basketId: basketId, currency: currency))
     }
     
-    func indexUserExpenseCategories(for userId: Int) -> Promise<[ExpenseCategory]> {
-        return requestCollection(APIRoute.indexUserExpenseCategories(userId: userId))
+    func indexExpenseCategories(for basketId: Int, noBorrows: Bool) -> Promise<[ExpenseCategory]> {
+        return requestCollection(APIRoute.indexExpenseCategories(basketId: basketId, noBorrows: noBorrows))
+    }
+    
+    func indexUserExpenseCategories(for userId: Int, noBorrows: Bool) -> Promise<[ExpenseCategory]> {
+        return requestCollection(APIRoute.indexUserExpenseCategories(userId: userId, noBorrows: noBorrows))
     }
     
     func update(with updatingForm: ExpenseCategoryUpdatingForm) -> Promise<Void> {

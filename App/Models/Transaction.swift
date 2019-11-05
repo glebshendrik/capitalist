@@ -45,7 +45,7 @@ struct Transaction : Decodable {
     let isReturned: Bool?
     let borrow: Borrow?
     let returningBorrow: Borrow?
-    let borrowType: BorrowType?
+//    let borrowType: BorrowType?
     let isBuyingAsset: Bool
     
     enum CodingKeys: String, CodingKey {
@@ -71,7 +71,7 @@ struct Transaction : Decodable {
         case isReturned = "is_returned"
         case borrow = "borrow"
         case returningBorrow = "returning_borrow"
-        case borrowType = "borrow_type"
+//        case borrowType = "borrow_type"
         case isBuyingAsset = "buying_asset"
     }
     

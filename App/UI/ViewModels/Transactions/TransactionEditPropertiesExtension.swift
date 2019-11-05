@@ -122,6 +122,14 @@ extension TransactionEditViewModel {
     var removeButtonHidden: Bool {
         return isNew        
     }
+    
+    var canChangeSource: Bool {
+        return !isReturningDebt
+    }
+    
+    var canChangeDestination: Bool {
+        return !isReturningLoan
+    }
 }
 
 extension TransactionEditViewModel {

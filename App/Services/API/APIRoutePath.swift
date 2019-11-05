@@ -16,6 +16,8 @@ struct APIRoutePath {
         case .resetPassword:                                return "/users/new_password"
         case .findExchangeRate:                             return "/exchange_rates/find_by"
         case .firstExpenseSource(let userId, _, _):         return "\(collection(route, userId: userId))/first"
+        case .firstBorrowIncomeSource(let userId, _):       return "\(collection(route, userId: userId))/first_borrow"
+        case .firstBorrowExpenseCategory(let basketId, _):  return "\(collection(route, basketId: basketId))/first_borrow"
             
         // Create
         case .createUser:                                   return collection(route)
@@ -37,12 +39,12 @@ struct APIRoutePath {
              .indexCreditTypes,
              .indexActiveTypes:                             return collection(route)
             
-        case .indexExpenseCategories(let basketId):         return collection(route, basketId: basketId)
+        case .indexExpenseCategories(let basketId, _):      return collection(route, basketId: basketId)
         case .indexActives(let basketId):                   return collection(route, basketId: basketId)
             
-        case .indexIncomeSources(let userId),
-             .indexExpenseSources(let userId, _, _, _),
-             .indexUserExpenseCategories(let userId),
+        case .indexIncomeSources(let userId, _),
+             .indexExpenseSources(let userId, _),
+             .indexUserExpenseCategories(let userId, _),
              .indexBaskets(let userId),
              .indexTransactions(let userId, _),
              .indexProviderConnections(let userId, _),

@@ -26,38 +26,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="joT-bx-9gb">
-                                <rect key="frame" x="16" y="96" width="343" height="515"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мы создали источник дохода для актива &quot;Акции&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKd-rT-Xgu">
-                                        <rect key="frame" x="16" y="39" width="311" height="40"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="green-shine" translatesAutoresizingMaskIntoConstraints="NO" id="o4e-hS-uvU">
+                                        <rect key="frame" x="-187.5" y="-260.5" width="750" height="1188"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мы создали источник дохода для актива &quot;Акции&quot;" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKd-rT-Xgu">
+                                        <rect key="frame" x="16" y="5" width="343" height="40"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
                                         <color key="textColor" name="text FFFFFF"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="green-shine" translatesAutoresizingMaskIntoConstraints="NO" id="o4e-hS-uvU">
-                                        <rect key="frame" x="-203.5" y="-336.5" width="750" height="1188"/>
-                                    </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZcS-bV-7g9">
-                                        <rect key="frame" x="0.0" y="79" width="343" height="264"/>
+                                        <rect key="frame" x="0.0" y="45" width="375" height="450"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="income-source-message-image" translatesAutoresizingMaskIntoConstraints="NO" id="Hh2-DX-KJY">
-                                                <rect key="frame" x="44.5" y="-3" width="254" height="270"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="income-source-message-image" translatesAutoresizingMaskIntoConstraints="NO" id="Hh2-DX-KJY">
+                                                <rect key="frame" x="60.5" y="90" width="254" height="270"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Hh2-DX-KJY" firstAttribute="centerY" secondItem="ZcS-bV-7g9" secondAttribute="centerY" id="HB4-zX-khb"/>
+                                            <constraint firstItem="Hh2-DX-KJY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZcS-bV-7g9" secondAttribute="top" id="YdT-Tb-xtY"/>
                                             <constraint firstItem="Hh2-DX-KJY" firstAttribute="centerX" secondItem="ZcS-bV-7g9" secondAttribute="centerX" id="gSP-gW-Ttf"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Hh2-DX-KJY" secondAttribute="bottom" id="r6m-Mv-qHA"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="С помощью него ты сможешь отразить доход по активу " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgx-R7-9vT">
-                                        <rect key="frame" x="16" y="343" width="311" height="40"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="С помощью него ты сможешь отразить доход по активу " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgx-R7-9vT">
+                                        <rect key="frame" x="16" y="495" width="343" height="40"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
                                         <color key="textColor" name="text FFFFFF"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xF2-Mo-Qa5">
-                                        <rect key="frame" x="50" y="415" width="243" height="40"/>
+                                        <rect key="frame" x="50" y="567" width="275" height="40"/>
                                         <color key="backgroundColor" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="1eO-S6-cc1"/>
@@ -76,13 +78,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Больше не показывать" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRU-u8-5FB">
-                                        <rect key="frame" x="113" y="478" width="151" height="17"/>
+                                        <rect key="frame" x="129" y="630" width="151" height="17"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                         <color key="textColor" name="text 9EAACC"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MiO-9d-ZUu" customClass="BEMCheckBox">
-                                        <rect key="frame" x="89" y="477.5" width="16" height="16"/>
+                                        <rect key="frame" x="105" y="629.5" width="16" height="16"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="83i-qr-9UJ"/>
@@ -105,7 +107,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" name="dark 374467"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="pgx-R7-9vT" firstAttribute="top" secondItem="ZcS-bV-7g9" secondAttribute="bottom" id="7IV-8y-WQt"/>
                                     <constraint firstAttribute="trailing" secondItem="XKd-rT-Xgu" secondAttribute="trailing" constant="16" id="7xx-cf-AYX"/>
@@ -124,33 +126,22 @@
                                     <constraint firstAttribute="trailing" secondItem="xF2-Mo-Qa5" secondAttribute="trailing" constant="50" id="ilQ-fM-OpB"/>
                                     <constraint firstAttribute="trailing" secondItem="pgx-R7-9vT" secondAttribute="trailing" constant="16" id="mcM-8d-F86"/>
                                     <constraint firstAttribute="bottom" secondItem="tRU-u8-5FB" secondAttribute="bottom" constant="20" id="oV8-tF-FK1"/>
-                                    <constraint firstAttribute="bottom" secondItem="xF2-Mo-Qa5" secondAttribute="bottom" constant="60" id="y9d-dD-ftR"/>
-                                    <constraint firstItem="XKd-rT-Xgu" firstAttribute="top" secondItem="joT-bx-9gb" secondAttribute="top" constant="39" id="yvG-Kp-icl"/>
+                                    <constraint firstAttribute="bottom" secondItem="xF2-Mo-Qa5" secondAttribute="bottom" priority="999" constant="60" id="y9d-dD-ftR"/>
+                                    <constraint firstItem="XKd-rT-Xgu" firstAttribute="top" secondItem="joT-bx-9gb" secondAttribute="top" constant="5" id="yvG-Kp-icl"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="8"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJq-yW-QY0">
-                                <rect key="frame" x="8" y="22" width="54" height="54"/>
-                                <color key="tintColor" name="text FFFFFF"/>
-                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" image="big-close-button"/>
-                                <connections>
-                                    <action selector="didTapGetItButton:" destination="sLH-Qx-fei" eventType="touchUpInside" id="piA-CK-7bp"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.12156862745098039" green="0.14901960784313725" blue="0.24313725490196078" alpha="0.95999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="mJq-yW-QY0" firstAttribute="leading" secondItem="IOf-eb-SrE" secondAttribute="leading" constant="8" id="3cl-Om-5Xr"/>
-                            <constraint firstItem="IOf-eb-SrE" firstAttribute="trailing" secondItem="joT-bx-9gb" secondAttribute="trailing" constant="16" id="Rls-z9-u4k"/>
-                            <constraint firstItem="joT-bx-9gb" firstAttribute="top" secondItem="mJq-yW-QY0" secondAttribute="bottom" constant="20" id="Tmb-Fd-QWh"/>
-                            <constraint firstItem="joT-bx-9gb" firstAttribute="leading" secondItem="IOf-eb-SrE" secondAttribute="leading" constant="16" id="frP-Ip-Fa2"/>
-                            <constraint firstItem="mJq-yW-QY0" firstAttribute="top" secondItem="1n2-GU-xQE" secondAttribute="top" constant="22" id="jbT-9Y-66I"/>
-                            <constraint firstItem="IOf-eb-SrE" firstAttribute="bottom" secondItem="joT-bx-9gb" secondAttribute="bottom" constant="56" id="nEf-bG-Tpx"/>
+                            <constraint firstItem="joT-bx-9gb" firstAttribute="top" secondItem="IOf-eb-SrE" secondAttribute="top" id="P5H-Df-LE6"/>
+                            <constraint firstItem="IOf-eb-SrE" firstAttribute="trailing" secondItem="joT-bx-9gb" secondAttribute="trailing" id="Rls-z9-u4k"/>
+                            <constraint firstItem="joT-bx-9gb" firstAttribute="leading" secondItem="IOf-eb-SrE" secondAttribute="leading" id="frP-Ip-Fa2"/>
+                            <constraint firstItem="IOf-eb-SrE" firstAttribute="bottom" secondItem="joT-bx-9gb" secondAttribute="bottom" id="nEf-bG-Tpx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IOf-eb-SrE"/>
                     </view>
@@ -853,7 +844,6 @@
     </scenes>
     <resources>
         <image name="bell-icon" width="16" height="16"/>
-        <image name="big-close-button" width="17" height="17"/>
         <image name="circle-close-icon" width="24" height="24"/>
         <image name="green-shine" width="375" height="594"/>
         <image name="icon-edit-pencil" width="9" height="9"/>
@@ -868,9 +858,6 @@
         </namedColor>
         <namedColor name="dark 2A314B">
             <color red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="dark 374467">
-            <color red="0.21568627450980393" green="0.26666666666666666" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="delimeter 2F3854">
             <color red="0.18431372549019609" green="0.2196078431372549" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

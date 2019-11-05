@@ -26,100 +26,113 @@ extension TransactionEditViewModel {
         return isReturn && returningBorrow!.isLoan
     }
     
-    var sourceFilter: ExpenseSourcesFilter {
+    var sourceFilterCurrency: String? {
         return isReturningDebt
-            ? ExpenseSourcesFilter.debts(currency: returningBorrow?.currency.code)
-            : ExpenseSourcesFilter.noDebts
+            ? returningBorrow?.currency.code
+            : nil
     }
-    
-    var destinationFilter: ExpenseSourcesFilter {
+
+    var destinationFilterCurrency: String? {
         return isReturningLoan
-            ? ExpenseSourcesFilter.debts(currency: returningBorrow?.currency.code)
-            : ExpenseSourcesFilter.noDebts
+            ? returningBorrow?.currency.code
+            : nil
     }
     
     func loadReturningTransactionDefaults() -> Promise<Void> {
         return  firstly {
-                    loadExpenseSources()
+                    loadReturningTransactionablesIfNeeded()
+                }.get {
+                    self.setAmounts()
                 }.then {
                     self.loadExchangeRate()
                 }
     }
     
-    func loadExpenseSources() -> Promise<Void> {
+    func loadReturningTransactionablesIfNeeded() -> Promise<Void> {
         guard isReturn, isNew else { return Promise.value(()) }
         
         return  firstly {
-                    loadExpenseSourcesFromBorrowingTransaction()
-                }.then {
-                    self.loadDefaultDebtExpenseSourceIfNeeded()
-                }.get {
-                    func amountDebt(transactionable: Transactionable?) -> String? {
-                        guard   let returningBorrow = self.returningBorrow,
-                            transactionable?.currency.code == returningBorrow.currency.code else {
-                                return nil
-                        }
-                        return returningBorrow.amountLeftDecimal
+                    loadExpenseSourceFromBorrowingTransaction()
+                }.then { expenseSource in
+                    return when(fulfilled:  self.loadSourceIfNeeded(borrowingTransactionExpenseSource: expenseSource),
+                                            self.loadDestinationIfNeeded(borrowingTransactionExpenseSource: expenseSource))
+                }.get { source, destination in
+                    self.setTransactionablesFromBorrowingTransaction(source: source, destination: destination)
+                }.asVoid()
+    }
+    
+    func loadExpenseSourceFromBorrowingTransaction() -> Promise<ExpenseSourceViewModel?> {
+        guard   let returningBorrow = returningBorrow,
+            let borrowingTransactionId = returningBorrow.borrowingTransactionId else { return Promise.value(nil) }
+        return  firstly {
+                    loadTransaction(transactionId: borrowingTransactionId)
+                }.then { borrowingTransaction -> Promise<ExpenseSource> in
+                    if borrowingTransaction.sourceType == .expenseSource {
+                        return self.expenseSourcesCoordinator.show(by: borrowingTransaction.sourceId)
+                    } else {
+                        return self.expenseSourcesCoordinator.show(by: borrowingTransaction.destinationId)
                     }
-                    self.amount = amountDebt(transactionable: self.source)
-                    self.convertedAmount = amountDebt(transactionable: self.destination)
+                }.map { expenseSource in
+                    return ExpenseSourceViewModel(expenseSource: expenseSource)
+                }
+    }
+        
+    func loadSourceIfNeeded(borrowingTransactionExpenseSource: ExpenseSourceViewModel?) -> Promise<Transactionable?> {
+        guard source == nil else { return Promise.value(source) }
+        guard let returningBorrow = returningBorrow else { return Promise.value(nil) }
+        
+        if returningBorrow.isLoan {
+            return Promise.value(borrowingTransactionExpenseSource)
+        }
+        return loadBorrowIncomeSource(currency: returningBorrow.currency.code)
+        
+    }
+    
+    func loadDestinationIfNeeded(borrowingTransactionExpenseSource: ExpenseSourceViewModel?) -> Promise<Transactionable?> {
+        guard destination == nil else { return Promise.value(destination) }
+        guard let returningBorrow = returningBorrow else { return Promise.value(nil) }
+        
+        if returningBorrow.isDebt {
+            return Promise.value(borrowingTransactionExpenseSource)
+        }
+        return loadBorrowExpenseCategory(currency: returningBorrow.currency.code)
+        
+    }
+    
+    func loadBorrowIncomeSource(currency: String) -> Promise<Transactionable?> {
+        return  firstly {
+                    incomeSourcesCoordinator.firstBorrow(currency: currency)
+                }.map { incomeSource -> Transactionable? in
+                    return IncomeSourceViewModel(incomeSource: incomeSource)
+                }
+    }
+        
+    func loadBorrowExpenseCategory(currency: String) -> Promise<Transactionable?> {
+        return  firstly {
+                    expenseCategoriesCoordinator.firstBorrow(for: .joy, currency: currency)
+                }.map { expenseCategory -> Transactionable? in
+                    return ExpenseCategoryViewModel(expenseCategory: expenseCategory)
                 }
     }
     
-    func loadExpenseSourcesFromBorrowingTransaction() -> Promise<Void> {
-        guard   let returningBorrow = returningBorrow,
-                let borrowingTransactionId = returningBorrow.borrowingTransactionId else { return Promise.value(()) }
-        return  firstly {
-                    loadTransaction(transactionId: borrowingTransactionId)
-                }.then { borrowingTransaction in
-                    self.loadTransactionablesFor(transaction: borrowingTransaction)
-                }.get { _, source, destination in
-                    self.setExpenseSourcesFromBorrowingTransaction(source: destination, destination: source)
-                }.asVoid()
-    }
-        
-    func setExpenseSourcesFromBorrowingTransaction(source: Transactionable, destination: Transactionable) -> Void {
-        if !source.isDeleted {
+    func setTransactionablesFromBorrowingTransaction(source: Transactionable?, destination: Transactionable?) -> Void {
+        if let source = source, !source.isDeleted {
             self.source = source
         }
-        if !destination.isDeleted {
+        if let destination = destination, !destination.isDeleted {
             self.destination = destination
         }
     }
     
-    func loadDefaultDebtExpenseSourceIfNeeded() -> Promise<Void> {
-        guard let returningBorrow = returningBorrow else { return Promise.value(()) }
-        
-        let shouldLoadDefaultSource = returningBorrow.isDebt && source == nil
-        let shouldLoadDefaultDestination = returningBorrow.isLoan && destination == nil
-        guard shouldLoadDefaultSource || shouldLoadDefaultDestination else { return Promise.value(()) }
-        
-        return  firstly {
-                    expenseSourcesCoordinator.first(accountType: .debt, currency: returningBorrow.currency.code)
-                }.get { expenseSource in
-                    let debtExpenseSource = ExpenseSourceViewModel(expenseSource: expenseSource)
-                    if shouldLoadDefaultSource {
-                        self.source = debtExpenseSource
-                    }
-                    if shouldLoadDefaultDestination {
-                        self.destination = debtExpenseSource
-                    }
-                }.asVoid()
-    }
-}
-
-typealias ExpenseSourcesFilterOptions = (noDebts: Bool, accountType: AccountType?, currency: String?)
-
-enum ExpenseSourcesFilter {
-    case noDebts
-    case debts(currency: String?)
-    
-    var options: ExpenseSourcesFilterOptions {
-        switch self {
-        case .noDebts:
-            return (noDebts: true, accountType: nil, currency: nil)
-        case .debts(let currency):
-            return (noDebts: false, accountType: .debt, currency: currency)
+    func setAmounts() {
+        func amountDebt(transactionable: Transactionable?) -> String? {
+            guard   let returningBorrow = returningBorrow,
+                    transactionable?.currency.code == returningBorrow.currency.code else {
+                    return nil
+            }
+            return returningBorrow.amountLeftDecimal
         }
+        amount = amountDebt(transactionable: source)
+        convertedAmount = amountDebt(transactionable: destination)
     }
 }

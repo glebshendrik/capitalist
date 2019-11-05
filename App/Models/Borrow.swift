@@ -54,9 +54,9 @@ struct Borrow : Decodable {
 
 struct BorrowingTransactionNestedAttributes : Encodable {
     let sourceId: Int?
-    let sourceType: TransactionableType = .expenseSource
+    let sourceType: TransactionableType?
     let destinationId: Int?
-    let destinationType: TransactionableType = .expenseSource
+    let destinationType: TransactionableType?
     
     enum CodingKeys: String, CodingKey {
         case sourceId = "source_id"
@@ -76,8 +76,13 @@ struct BorrowingTransactionNestedAttributes : Encodable {
             try container.encode(destinationId, forKey: .destinationId)
         }
         
-        try container.encode(sourceType, forKey: .sourceType)
-        try container.encode(destinationType, forKey: .destinationType)
+        if let sourceType = sourceType {
+            try container.encode(sourceType, forKey: .sourceType)
+        }
+        
+        if let destinationType = destinationType {
+            try container.encode(destinationType, forKey: .destinationType)
+        }        
     }
 }
 

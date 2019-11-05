@@ -39,8 +39,8 @@ class CreditTableViewCell : UITableViewCell {
     func updateUI() {
         nameLabel.text = viewModel?.name
         typeLabel.text = viewModel?.typeName
-        paidAmountLabel.text = viewModel?.paidAmount
-        amountLabel.text = viewModel?.amountFormatted
+        paidAmountLabel.text = viewModel?.paidAmount        
+        amountLabel.text = viewModel?.returnAmountFormatted
         iconImageView.setImage(with: viewModel?.iconURL,
                                placeholderName: placeholderName,
                                renderingMode: .alwaysTemplate)

@@ -14,18 +14,16 @@ struct ExpenseCategory : Decodable {
     let iconURL: URL?
     let basketId: Int
     let basketType: BasketType
-    let monthlyPlannedCurrency: String?
     let monthlyPlannedCents: Int?
     let spentCentsAtPeriod: Int
-    let spentCurrency: String
     let plannedCentsAtPeriod: Int?
     let currency: Currency
-    let incomeSourceDependentCurrency: Currency
-    let incomeSourceCurrency: String
     let order: Int
     let deletedAt: Date?
     let reminder: Reminder?
     let creditId: Int?
+    let isBorrowOrReturn: Bool    
+    let waitingLoans: [Borrow]
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -33,18 +31,16 @@ struct ExpenseCategory : Decodable {
         case iconURL = "icon_url"
         case basketId = "basket_id"
         case basketType = "basket_type"
-        case monthlyPlannedCurrency = "monthly_planned_currency"
         case monthlyPlannedCents = "monthly_planned_cents"
         case spentCentsAtPeriod = "spent_cents_at_period"
-        case spentCurrency = "spent_currency"
         case plannedCentsAtPeriod = "planned_cents_at_period"
         case order = "row_order"
         case currency = "currency"
-        case incomeSourceDependentCurrency = "income_source_dependent_currency"
-        case incomeSourceCurrency = "income_source_currency"
         case deletedAt = "deleted_at"
         case reminder
         case creditId = "credit_id"
+        case isBorrowOrReturn = "is_borrow_or_return"        
+        case waitingLoans = "waiting_loans"
     }
     
 }
@@ -53,18 +49,16 @@ struct ExpenseCategoryCreationForm : Encodable, Validatable {
     let basketId: Int?
     let iconURL: URL?
     let name: String?
-    let monthlyPlannedCents: Int?
-    let monthlyPlannedCurrency: String?
-    let incomeSourceCurrency: String?
+    let currency: String?
+    let monthlyPlannedCents: Int?    
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
         case iconURL = "icon_url"
         case basketId = "basket_id"
-        case monthlyPlannedCurrency = "monthly_planned_currency"
+        case currency = "currency"
         case monthlyPlannedCents = "monthly_planned_cents"
-        case incomeSourceCurrency = "income_source_currency"
         case reminderAttributes = "reminder_attributes"
     }
     
@@ -79,14 +73,10 @@ struct ExpenseCategoryCreationForm : Encodable, Validatable {
             errors[CodingKeys.name.rawValue] = "Укажите название"
         }
         
-        if  !Validator.isValid(required: monthlyPlannedCurrency) {
-            errors[CodingKeys.monthlyPlannedCurrency.rawValue] = "Укажите валюту"
+        if  !Validator.isValid(required: currency) {
+            errors[CodingKeys.currency.rawValue] = "Укажите валюту"
         }
-        
-        if  !Validator.isValid(required: incomeSourceCurrency) {
-            errors[CodingKeys.incomeSourceCurrency.rawValue] = "Укажите валюту"
-        }
-        
+                
         return errors
     }
 }

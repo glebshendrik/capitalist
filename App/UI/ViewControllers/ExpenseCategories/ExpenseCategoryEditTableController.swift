@@ -13,7 +13,6 @@ protocol ExpenseCategoryEditTableControllerDelegate {
     func didChange(name: String?)
     func didChange(monthlyPlanned: String?)
     func didTapCurrency()
-    func didTapIncomeSourceCurrency()    
     func didTapSetReminder()
     func didTapRemoveButton()
 }
@@ -24,13 +23,11 @@ class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!
-    @IBOutlet weak var incomeSourceCurrencyField: FormTapField!
     @IBOutlet weak var monthlyPlannedField: FormMoneyTextField!
     
     @IBOutlet weak var reminderButton: UIButton!
     @IBOutlet weak var reminderLabel: UILabel!
     
-    @IBOutlet weak var incomeSourceCurrencyCell: UITableViewCell!
     @IBOutlet weak var removeCell: UITableViewCell!
     
     var delegate: ExpenseCategoryEditTableControllerDelegate?
@@ -39,7 +36,6 @@ class ExpenseCategoryEditTableController : FormFieldsTableViewController {
         super.setupUI()
         setupNameField()
         setupCurrencyField()
-        setupIncomeSourceCurrencyField()
         setupMonthlyPlannedField()
     }
     
@@ -59,15 +55,7 @@ class ExpenseCategoryEditTableController : FormFieldsTableViewController {
             self?.delegate?.didTapCurrency()
         }
     }
-    
-    func setupIncomeSourceCurrencyField() {
-        incomeSourceCurrencyField.placeholder = "Валюта дохода"
-        incomeSourceCurrencyField.imageName = "currency-icon"
-        incomeSourceCurrencyField.didTap { [weak self] in
-            self?.delegate?.didTapIncomeSourceCurrency()
-        }
-    }
-    
+        
     func setupMonthlyPlannedField() {
         register(responder: monthlyPlannedField.textField)
         monthlyPlannedField.placeholder = "Планирую тратить в месяц"

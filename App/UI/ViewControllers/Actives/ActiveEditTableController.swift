@@ -14,6 +14,8 @@ protocol ActiveEditTableControllerDelegate {
     func didChange(name: String?)
     func didTapCurrency()
     func didChange(cost: String?)
+    func didChange(alreadyPaid: String?)
+    func didChange(goalAmount: String?)
     func didChange(monthlyPayment: String?)
     func didChange(isIncomePlanned: Bool)
     func didTapActiveIncomeType()
@@ -31,6 +33,8 @@ class ActiveEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!
     @IBOutlet weak var costField: FormMoneyTextField!
+    @IBOutlet weak var alreadyPaidField: FormMoneyTextField!
+    @IBOutlet weak var goalAmountField: FormMoneyTextField!
     @IBOutlet weak var monthlyPaymentField: FormMoneyTextField!
     @IBOutlet weak var plannedIncomeSwitchField: FormSwitchValueField!
     @IBOutlet weak var activeIncomeTypeField: FormTapField!
@@ -43,18 +47,22 @@ class ActiveEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var removeButton: UIButton!
     
     @IBOutlet weak var activeIncomeTypeCell: UITableViewCell!
+    @IBOutlet weak var alreadyPaidCell: UITableViewCell!
+    @IBOutlet weak var goalAmountCell: UITableViewCell!
     @IBOutlet weak var monthlyPlannedIncomeCell: UITableViewCell!
     @IBOutlet weak var annualPercentCell: UITableViewCell!
     @IBOutlet weak var removeCell: UITableViewCell!
     
     var delegate: ActiveEditTableControllerDelegate?
-    
+        
     override func setupUI() {
         super.setupUI()
         setupActiveTypeField()
         setupNameField()
         setupCurrencyField()
         setupCostField()
+        setupAlreadyPaidField()
+        setupGoalAmountField()
         setupMonthlyPaymentField()
         setupPlannedIncomeSwitchField()
         setupActiveIncomeTypeField()
@@ -93,6 +101,24 @@ class ActiveEditTableController : FormFieldsTableViewController {
         costField.imageName = "amount-icon"
         costField.didChange { [weak self] text in
             self?.delegate?.didChange(cost: text)
+        }
+    }
+    
+    func setupAlreadyPaidField() {
+        register(responder: alreadyPaidField.textField)
+        alreadyPaidField.placeholder = "Уже потратил"
+        alreadyPaidField.imageName = "amount-icon"
+        alreadyPaidField.didChange { [weak self] text in
+            self?.delegate?.didChange(alreadyPaid: text)
+        }
+    }
+    
+    func setupGoalAmountField() {
+        register(responder: goalAmountField.textField)
+        goalAmountField.placeholder = "Хочу накопить"
+        goalAmountField.imageName = "planned-amount-icon"
+        goalAmountField.didChange { [weak self] text in
+            self?.delegate?.didChange(goalAmount: text)
         }
     }
     

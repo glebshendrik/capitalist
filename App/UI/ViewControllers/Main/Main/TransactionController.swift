@@ -27,7 +27,22 @@ class TransactionController {
     var isTransactionStarted: Bool {
         return transactionStartedCollectionView != nil
     }
-    
+    var startedLocation: CGPoint? = nil {
+        didSet {
+            currentLocation = nil
+            maxDistance = 0
+        }
+    }
+    var currentLocation: CGPoint? = nil {
+        didSet {
+            guard let currentLocation = currentLocation, let startedLocation = startedLocation else { return }
+            maxDistance = max(currentLocation.distance(from: startedLocation), maxDistance)
+        }
+    }
+    var maxDistance: CGFloat = 0
+    var wentFarFromStart: Bool {
+        return maxDistance > 3
+    }
     var transactionStartedLocation: CGPoint? = nil
     var transactionStartedCollectionView: UICollectionView? = nil {
         didSet {
@@ -114,10 +129,13 @@ class TransactionController {
                 
                 initializeWaitingAtTheEdge()
                 return
-                
         }
-        
-        let offsetDiff = edge == .right ? delegate.mainView.frame.size.width : -delegate.mainView.frame.size.width
+        var offsetDiff = dropCandidateCollectionView.frame.size.width
+        if offsetDiff > delegate.mainView.frame.size.width {
+           offsetDiff = offsetDiff * 2 / 3
+        }
+        offsetDiff = edge == .right ? offsetDiff : -offsetDiff
+
         var offset = dropCandidateCollectionView.contentOffset.x + offsetDiff
         if offset < 0 {
             offset = 0
@@ -126,6 +144,7 @@ class TransactionController {
             offset = dropCandidateCollectionView.contentSize.width - offsetDiff
         }
         dropCandidateCollectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+
         initializeWaitingAtTheEdge()
     }
     

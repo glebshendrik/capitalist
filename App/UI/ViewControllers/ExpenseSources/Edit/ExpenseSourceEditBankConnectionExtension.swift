@@ -22,7 +22,7 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     }
     
     func showProviders() {
-        slideUp(viewController: factory.providersViewController(delegate: self))
+        slideUp(factory.providersViewController(delegate: self))
     }
     
     func didSelect(providerViewModel: ProviderViewModel) {
@@ -48,7 +48,9 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     
     func showAccountsViewController(for providerConnection: ProviderConnection) {
         let currencyCode = viewModel.isNew ? nil : viewModel.selectedCurrencyCode
-        slideUp(viewController: factory.accountsViewController(delegate: self, providerConnection: providerConnection, currencyCode: currencyCode))
+        slideUp(factory.accountsViewController(delegate: self,
+                                               providerConnection: providerConnection,
+                                               currencyCode: currencyCode))
     }
     
     func createSaltEdgeConnectSession(for providerViewModel: ProviderViewModel) {

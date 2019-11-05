@@ -156,7 +156,6 @@
 		FA6F2E922244C8D9008C160F /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F2E912244C8D9008C160F /* StatisticsViewModel.swift */; };
 		FA6F2E942244D033008C160F /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F2E932244D033008C160F /* TransactionViewModel.swift */; };
 		FA6F2E96224515DE008C160F /* HistoryTransactionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F2E95224515DE008C160F /* HistoryTransactionFilter.swift */; };
-		FA715E5221FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */; };
 		FA7176FF22683275008ADF94 /* GraphFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7176FE22683275008ADF94 /* GraphFilterTableViewCell.swift */; };
 		FA71770122683299008ADF94 /* GraphTotalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71770022683299008ADF94 /* GraphTotalTableViewCell.swift */; };
 		FA7177032269DEC6008ADF94 /* GraphFiltersSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7177022269DEC6008ADF94 /* GraphFiltersSection.swift */; };
@@ -575,7 +574,6 @@
 		FA6F2E932244D033008C160F /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		FA6F2E95224515DE008C160F /* HistoryTransactionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionFilter.swift; sourceTree = "<group>"; };
 		FA6F2E97224A0840008C160F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Launch.strings; sourceTree = "<group>"; };
-		FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalExpenseSourceCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA7176FE22683275008ADF94 /* GraphFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphFilterTableViewCell.swift; sourceTree = "<group>"; };
 		FA71770022683299008ADF94 /* GraphTotalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTotalTableViewCell.swift; sourceTree = "<group>"; };
 		FA7177022269DEC6008ADF94 /* GraphFiltersSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphFiltersSection.swift; sourceTree = "<group>"; };
@@ -1421,7 +1419,6 @@
 				FAE05FB7235C82AF0014D034 /* EditableCell */,
 				FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */,
 				FA0CAE0821D39D3B00805288 /* ExpenseSourceCollectionViewCell.swift */,
-				FA715E5121FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift */,
 				FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */,
 				FAE05FA82358CA1F0014D034 /* ActiveCollectionViewCell.swift */,
 				FA56ABA62360CF6100E4D0E3 /* BasketItemCollectionViewCell.swift */,
@@ -1622,25 +1619,25 @@
 		FAD88F1B21AEB65800BE7BC1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FAD88F3821AEBAA600BE7BC1 /* Session.swift */,
-				FAD88F5C21AEC28300BE7BC1 /* User.swift */,
-				FAC3B9C421C0EB790015A12F /* IncomeSource.swift */,
-				FA0CADFC21D257F400805288 /* ExpenseSource.swift */,
-				FAED7DA121EC6BA300BF6FE1 /* ExpenseCategory.swift */,
-				FA0CAE1421D669C000805288 /* Icon.swift */,
+				FA7EDFF322CCC0990054EAD3 /* AccountConnection.swift */,
+				FAB5BE3E2351FE75000466AE /* ActiveType.swift */,
+				FAB5BE3C2351FE5B000466AE /* Active.swift */,
 				FAED7D9721EC4C0D00BF6FE1 /* Basket.swift */,
+				FA1E63302327DC5900081964 /* Borrow.swift */,
+				FAA426172236518200B64925 /* Budget.swift */,
+				FABE54F6233F854600DF2B70 /* CreditType.swift */,
+				FABE54D9233A757F00DF2B70 /* Credit.swift */,
 				FAA91270220B35F600F2C251 /* Currency.swift */,
 				FA66FB782226D37000708C71 /* ExchangeRate.swift */,
-				FAA426172236518200B64925 /* Budget.swift */,
-				FA6F2E8622434D59008C160F /* Transaction.swift */,
+				FAED7DA121EC6BA300BF6FE1 /* ExpenseCategory.swift */,
+				FA0CADFC21D257F400805288 /* ExpenseSource.swift */,
+				FA0CAE1421D669C000805288 /* Icon.swift */,
+				FAC3B9C421C0EB790015A12F /* IncomeSource.swift */,
 				FA7EDFF122CCC0890054EAD3 /* ProviderConnection.swift */,
-				FA7EDFF322CCC0990054EAD3 /* AccountConnection.swift */,
-				FA1E63302327DC5900081964 /* Borrow.swift */,
-				FABE54D9233A757F00DF2B70 /* Credit.swift */,
-				FABE54F6233F854600DF2B70 /* CreditType.swift */,
-				FAB5BE3C2351FE5B000466AE /* Active.swift */,
-				FAB5BE3E2351FE75000466AE /* ActiveType.swift */,
 				FAB5BE40235206F1000466AE /* Reminder.swift */,
+				FAD88F3821AEBAA600BE7BC1 /* Session.swift */,
+				FA6F2E8622434D59008C160F /* Transaction.swift */,
+				FAD88F5C21AEC28300BE7BC1 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2324,7 +2321,6 @@
 				FA7EDFFA22CCD6C90054EAD3 /* AccountConnectionsService.swift in Sources */,
 				FAD88F3921AEBAA600BE7BC1 /* Session.swift in Sources */,
 				FA0CAE2221D679D100805288 /* IconsViewController.swift in Sources */,
-				FA715E5221FB55C8000CDA0C /* GoalExpenseSourceCollectionViewCell.swift in Sources */,
 				FA0570EA232A350F002B4706 /* BorrowsService.swift in Sources */,
 				FAA91276220C79EA00F2C251 /* SettingsViewController.swift in Sources */,
 				FA0570FB232AAE9B002B4706 /* BorrowEditTableController.swift in Sources */,
@@ -2602,7 +2598,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2709,7 +2705,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

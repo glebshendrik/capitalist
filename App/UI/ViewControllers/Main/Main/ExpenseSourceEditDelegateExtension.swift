@@ -54,16 +54,7 @@ extension MainViewController {
                 return UICollectionViewCell()
         }
         
-        if expenseSourceViewModel.isGoal,
-            let cell = expenseSourcesCollectionView.dequeueReusableCell(withReuseIdentifier: "GoalExpenseSourceCollectionViewCell",
-                                                                        for: indexPath) as? GoalExpenseSourceCollectionViewCell {
-            
-            cell.viewModel = expenseSourceViewModel
-            return cell
-        }
-        
-        if !expenseSourceViewModel.isGoal,
-            let cell = expenseSourcesCollectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseSourceCollectionViewCell",
+        if let cell = expenseSourcesCollectionView.dequeueReusableCell(withReuseIdentifier: "ExpenseSourceCollectionViewCell",
                                                                         for: indexPath) as? ExpenseSourceCollectionViewCell {
             
             cell.viewModel = expenseSourceViewModel

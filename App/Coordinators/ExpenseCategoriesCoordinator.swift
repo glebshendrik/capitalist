@@ -27,31 +27,28 @@ class ExpenseCategoriesCoordinator : ExpenseCategoriesCoordinatorProtocol {
         return expenseCategoriesService.show(by: id)
     }
     
-    func index(for basketType: BasketType) -> Promise<[ExpenseCategory]> {
+    func firstBorrow(for basketType: BasketType, currency: String) -> Promise<ExpenseCategory> {
+        guard let currentSession = userSessionManager.currentSession else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        
+        return expenseCategoriesService.firstBorrow(for: currentSession.basketId(basketType: basketType), currency: currency)
+    }
+    
+    func index(for basketType: BasketType, noBorrows: Bool) -> Promise<[ExpenseCategory]> {
         
         guard let currentSession = userSessionManager.currentSession else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
         
-        func basketId() -> Int {
-            switch basketType {
-            case .joy:
-                return currentSession.joyBasketId
-            case .risk:
-                return currentSession.riskBasketId
-            case .safe:
-                return currentSession.safeBasketId
-            }
-        }
-        
-        return expenseCategoriesService.indexExpenseCategories(for: basketId())
+        return expenseCategoriesService.indexExpenseCategories(for: currentSession.basketId(basketType: basketType), noBorrows: noBorrows)
     }
     
-    func index() -> Promise<[ExpenseCategory]> {
+    func index(noBorrows: Bool) -> Promise<[ExpenseCategory]> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return expenseCategoriesService.indexUserExpenseCategories(for: currentUserId)
+        return expenseCategoriesService.indexUserExpenseCategories(for: currentUserId, noBorrows: noBorrows)
     }
     
     func update(with updatingForm: ExpenseCategoryUpdatingForm) -> Promise<Void> {

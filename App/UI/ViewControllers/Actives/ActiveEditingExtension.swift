@@ -31,6 +31,14 @@ extension ActiveEditViewController : ActiveEditTableControllerDelegate {
         viewModel.cost = cost
     }
     
+    func didChange(alreadyPaid: String?) {
+        viewModel.alreadyPaid = alreadyPaid
+    }
+    
+    func didChange(goalAmount: String?) {
+        viewModel.goal = goalAmount
+    }
+    
     func didChange(monthlyPayment: String?) {
         viewModel.monthlyPayment = monthlyPayment
     }
