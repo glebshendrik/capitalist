@@ -142,6 +142,10 @@ class TransactionViewModel {
         return transaction.borrow?.type
     }
     
+    var creditId: Int? {
+        return transaction.credit?.id
+    }
+    
     init(transaction: Transaction) {
         self.transaction = transaction
     }

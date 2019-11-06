@@ -178,6 +178,10 @@ func +(lhs: NSDecimalNumber, rhs: NSDecimalNumber) -> NSDecimalNumber {
 }
 
 extension Int {
+    var number: NSDecimalNumber {
+        return NSDecimalNumber(integerLiteral: self)
+    }
+    
     func moneyNumber(with currency: Currency) -> NSDecimalNumber {
         return NSDecimalNumber(integerLiteral: self).moneyNumber(with: currency)
     }

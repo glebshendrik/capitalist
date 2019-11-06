@@ -47,7 +47,7 @@ class ApplicationAssembly: Assembly {
 extension Container {
     
     func registerForSkrudzhStoryboard<C:Controller>(_ controllerType: C.Type, name: String? = nil, initCompleted: ((Resolver, C) -> ())? = nil) {
-        
+                
         self.storyboardInitCompleted(controllerType, name: name) { (r, c) in
             
             if var messageManagerDependant = c as? UIMessagePresenterManagerDependantProtocol {
@@ -64,6 +64,7 @@ extension Container {
             
             initCompleted?(r, c)
         }
+        
     }
     
 }

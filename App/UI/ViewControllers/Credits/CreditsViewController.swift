@@ -106,7 +106,7 @@ extension CreditsViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 94.0
+        return 106.0
     }
 }
 

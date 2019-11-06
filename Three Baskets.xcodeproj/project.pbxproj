@@ -403,6 +403,7 @@
 		FAE4497F229688C400E3DD27 /* Balance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAE44981229688C400E3DD27 /* Balance.storyboard */; };
 		FAEB0CCB22CF67AE00622994 /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0CCA22CF67AE00622994 /* HighlightButton.swift */; };
 		FAEB0CCD22CF755600622994 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB0CCC22CF755600622994 /* Colors.swift */; };
+		FAEC8C782372B585009B10E7 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC8C772372B585009B10E7 /* ProgressView.swift */; };
 		FAED7D9821EC4C0D00BF6FE1 /* Basket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9721EC4C0D00BF6FE1 /* Basket.swift */; };
 		FAED7D9A21EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9921EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift */; };
 		FAED7D9C21EC618000BF6FE1 /* BasketsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7D9B21EC618000BF6FE1 /* BasketsService.swift */; };
@@ -826,6 +827,7 @@
 		FAE44983229688D100E3DD27 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Balance.strings; sourceTree = "<group>"; };
 		FAEB0CCA22CF67AE00622994 /* HighlightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
 		FAEB0CCC22CF755600622994 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		FAEC8C772372B585009B10E7 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		FAED7D9721EC4C0D00BF6FE1 /* Basket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basket.swift; sourceTree = "<group>"; };
 		FAED7D9921EC5FEE00BF6FE1 /* BasketsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsServiceProtocol.swift; sourceTree = "<group>"; };
 		FAED7D9B21EC618000BF6FE1 /* BasketsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketsService.swift; sourceTree = "<group>"; };
@@ -892,6 +894,7 @@
 				FA84E7EA225DA9EF00C0A274 /* LineChartAreasRenderer.swift */,
 				FAEB0CCA22CF67AE00622994 /* HighlightButton.swift */,
 				FABE55082341132100DF2B70 /* Slider.swift */,
+				FAEC8C772372B585009B10E7 /* ProgressView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1795,22 +1798,22 @@
 		FAD88F7E21B027D500BE7BC1 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				FAD88F0221AEA87300BE7BC1 /* Launch.storyboard */,
-				FAD88F8121B0F95A00BE7BC1 /* Join.storyboard */,
-				FAD88F7F21B02A5000BE7BC1 /* Main.storyboard */,
-				FA630C1D22926C6E00242AB3 /* Transactions.storyboard */,
+				FA814F55235D86B70039471A /* Actives.storyboard */,
+				FAE44981229688C400E3DD27 /* Balance.storyboard */,
+				FA1E63282326A56900081964 /* Borrows.storyboard */,
+				FA630C152292698200242AB3 /* Common.storyboard */,
+				FABE54EE233D194900DF2B70 /* Credits.storyboard */,
 				FA630C1B22926BB400242AB3 /* ExpenseCategories.storyboard */,
 				FA630C1922926B0500242AB3 /* ExpenseSources.storyboard */,
 				FA630C17229269F300242AB3 /* IncomeSources.storyboard */,
-				FA630C152292698200242AB3 /* Common.storyboard */,
-				FA165CD921B652BE00EAA16B /* Profile.storyboard */,
+				FAD88F8121B0F95A00BE7BC1 /* Join.storyboard */,
+				FAD88F0221AEA87300BE7BC1 /* Launch.storyboard */,
+				FAD88F7F21B02A5000BE7BC1 /* Main.storyboard */,
 				FAC3B9BD21BE0D1F0015A12F /* Onboarding.storyboard */,
+				FA165CD921B652BE00EAA16B /* Profile.storyboard */,
 				FAA91272220C710300F2C251 /* Settings.storyboard */,
 				FACC01E5224B52B20044A747 /* Statistics.storyboard */,
-				FAE44981229688C400E3DD27 /* Balance.storyboard */,
-				FA1E63282326A56900081964 /* Borrows.storyboard */,
-				FABE54EE233D194900DF2B70 /* Credits.storyboard */,
-				FA814F55235D86B70039471A /* Actives.storyboard */,
+				FA630C1D22926C6E00242AB3 /* Transactions.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2340,6 +2343,7 @@
 				FA28480322F19EB6003F114A /* UIFactory.swift in Sources */,
 				FA56AB9F235EEBD800E4D0E3 /* ActivesViewModel.swift in Sources */,
 				FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */,
+				FAEC8C782372B585009B10E7 /* ProgressView.swift in Sources */,
 				FABE55052340916B00DF2B70 /* CreditEditTableController.swift in Sources */,
 				FA0CAE1321D52CB400805288 /* MoneyTextField.swift in Sources */,
 				FACC01EF224B81310044A747 /* FiltersViewModel.swift in Sources */,
@@ -2598,7 +2602,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2705,7 +2709,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

@@ -17,7 +17,7 @@ extension ApplicationAssembly {
             c.viewModel = r.resolve(MenuViewModel.self)
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
-        
+                
         // LandingViewController
         container.registerForSkrudzhStoryboard(LandingViewController.self) { (r, c) in
         }

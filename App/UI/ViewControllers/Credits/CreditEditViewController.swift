@@ -130,10 +130,12 @@ extension CreditEditViewController : CreditEditTableControllerDelegate {
     
     func didChange(returnAmount: String?) {
         viewModel.returnAmount = returnAmount
+        updateMonthlyPaymentTextFieldUI()
     }
     
     func didChange(alreadyPaid: String?) {
         viewModel.alreadyPaid = alreadyPaid
+        updateMonthlyPaymentTextFieldUI()
     }
     
     func didChange(monthlyPayment: String?) {
@@ -150,6 +152,7 @@ extension CreditEditViewController : CreditEditTableControllerDelegate {
     
     func didChange(period: Int?) {
         viewModel.period = period
+        updateMonthlyPaymentTextFieldUI()
     }
     
     func didTapSetReminder() {
@@ -208,6 +211,7 @@ extension CreditEditViewController {
     func update(currency: Currency) {
         viewModel.selectedCurrency = currency
         updateCurrencyUI()
+        updateMonthlyPaymentTextFieldUI()
     }
     
     func update(expenseSource: ExpenseSourceViewModel?) {
@@ -245,6 +249,10 @@ extension CreditEditViewController {
         tableController.alreadyPaidField.isEnabled = viewModel.canChangeAlreadyPaid
         tableController.alreadyPaidField.currency = viewModel.selectedCurrency
         
+        updateMonthlyPaymentTextFieldUI()
+    }
+    
+    func updateMonthlyPaymentTextFieldUI() {
         tableController.monthlyPaymentField.text = viewModel.monthlyPayment
         tableController.monthlyPaymentField.currency = viewModel.selectedCurrency
     }

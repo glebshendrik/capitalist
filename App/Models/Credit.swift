@@ -97,6 +97,10 @@ struct CreditCreationForm : Encodable, Validatable {
             errors[CodingKeys.currency.rawValue] = "Укажите валюту"
         }
         
+        if !Validator.isValid(positiveMoney: amountCents) {
+            errors[CodingKeys.amountCents.rawValue] = "Укажите сумму"
+        }
+        
         if !Validator.isValid(positiveMoney: returnAmountCents) {
             errors[CodingKeys.returnAmountCents.rawValue] = "Укажите сумму"
         }
@@ -118,17 +122,22 @@ struct CreditCreationForm : Encodable, Validatable {
 }
 
 struct CreditingTransactionNestedAttributes : Encodable {
+    let id: Int?
     let destinationId: Int?
     let destinationType: TransactionableType = .expenseSource
     
     enum CodingKeys: String, CodingKey {
+        case id
         case destinationId = "destination_id"
         case destinationType = "destination_type"
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-                
+        
+        if let id = id {
+            try container.encode(id, forKey: .id)
+        }
         if let destinationId = destinationId {
             try container.encode(destinationId, forKey: .destinationId)
         }        
@@ -140,20 +149,24 @@ struct CreditUpdatingForm : Encodable, Validatable {
     var id: Int?
     let name: String?
     let iconURL: URL?
+    let amountCents: Int?
     let returnAmountCents: Int?
     let monthlyPaymentCents: Int?
     let gotAt: Date
     let period: Int?
     let reminderAttributes: ReminderNestedAttributes?
+    let creditingTransactionAttributes: CreditingTransactionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
         case iconURL = "icon_url"
+        case amountCents = "amount_cents"
         case returnAmountCents = "return_amount_cents"
         case monthlyPaymentCents = "monthly_payment_cents"
         case gotAt = "got_at"
         case period
         case reminderAttributes = "reminder_attributes"
+        case creditingTransactionAttributes = "crediting_transaction_attributes"
     }
     
     func validate() -> [String : String]? {
@@ -166,7 +179,11 @@ struct CreditUpdatingForm : Encodable, Validatable {
         if !Validator.isValid(required: name) {
             errors[CodingKeys.name.rawValue] = "Укажите название"
         }
-                
+        
+        if !Validator.isValid(positiveMoney: amountCents) {
+            errors[CodingKeys.amountCents.rawValue] = "Укажите сумму"
+        }
+        
         if !Validator.isValid(positiveMoney: returnAmountCents) {
             errors[CodingKeys.returnAmountCents.rawValue] = "Укажите сумму"
         }

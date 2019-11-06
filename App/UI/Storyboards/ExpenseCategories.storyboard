@@ -94,7 +94,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" name="dark 2A314B"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Jvm-EB-afz">
-                            <rect key="frame" x="0.0" y="641" width="375" height="100"/>
+                            <rect key="frame" x="0.0" y="566" width="375" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC0-RV-Nk9">
@@ -280,36 +280,8 @@
                                             <segue destination="err-xC-T7I" kind="show" identifier="showCurrenciesScreen" id="hif-TF-5lN"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="ffJ-8P-OhN">
-                                        <rect key="frame" x="0.0" y="333" width="375" height="75"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ffJ-8P-OhN" id="3pa-rS-KR6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Z2-xL-Ye5" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="2Z2-xL-Ye5" firstAttribute="top" secondItem="3pa-rS-KR6" secondAttribute="top" id="1IJ-Ah-CRv"/>
-                                                <constraint firstAttribute="bottom" secondItem="2Z2-xL-Ye5" secondAttribute="bottom" id="Qpj-ee-Gly"/>
-                                                <constraint firstAttribute="trailing" secondItem="2Z2-xL-Ye5" secondAttribute="trailing" id="iJK-5t-2Xw"/>
-                                                <constraint firstItem="2Z2-xL-Ye5" firstAttribute="leading" secondItem="3pa-rS-KR6" secondAttribute="leading" id="zez-DJ-qCp"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта дохода"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="currency-icon"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <segue destination="err-xC-T7I" kind="show" identifier="showIncomeSourceCurrenciesScreen" id="1gI-L1-F6i"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="yR4-XV-WfA">
-                                        <rect key="frame" x="0.0" y="408" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="333" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yR4-XV-WfA" id="g80-CW-oWS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -334,7 +306,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="aNT-dM-JbJ">
-                                        <rect key="frame" x="0.0" y="483" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="408" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aNT-dM-JbJ" id="GpG-L7-dgb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -364,7 +336,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="2le-om-EGV">
-                                        <rect key="frame" x="0.0" y="548" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="473" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2le-om-EGV" id="a42-0y-ffD">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -411,8 +383,6 @@
                         <outlet property="currencyField" destination="YVW-jQ-2Cf" id="P6m-na-GP3"/>
                         <outlet property="iconBackgroundImageView" destination="olf-pk-SdI" id="R3n-H4-rXe"/>
                         <outlet property="iconView" destination="bif-u5-d1e" id="kSu-kB-LMN"/>
-                        <outlet property="incomeSourceCurrencyCell" destination="ffJ-8P-OhN" id="cYJ-QZ-BW4"/>
-                        <outlet property="incomeSourceCurrencyField" destination="2Z2-xL-Ye5" id="eJ6-Y2-XpZ"/>
                         <outlet property="loaderImageView" destination="xcP-7Q-N48" id="dTM-c7-rXT"/>
                         <outlet property="monthlyPlannedField" destination="1M1-7j-Lhp" id="a4e-V8-jzw"/>
                         <outlet property="nameField" destination="tKV-xe-ldw" id="jnu-Gz-TcL"/>
@@ -588,7 +558,4 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="hif-TF-5lN"/>
-    </inferredMetricsTieBreakers>
 </document>

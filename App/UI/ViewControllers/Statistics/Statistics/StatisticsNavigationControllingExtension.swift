@@ -8,13 +8,26 @@
 
 import UIKit
 
-extension StatisticsViewController : TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate {
+extension StatisticsViewController : TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate, CreditEditViewControllerDelegate {
+    
+    func didCreateCredit() {
+        
+    }
+    
     func didCreateDebt() {
         
     }
     
     func didCreateLoan() {
         
+    }
+    
+    func didUpdateCredit() {
+        loadData()
+    }
+    
+    func didRemoveCredit() {
+        loadData()
     }
     
     func didUpdateDebt() {
@@ -143,6 +156,9 @@ extension StatisticsViewController {
         if let borrowId = transaction.borrowId, let borrowType = transaction.borrowType {
             showBorrowEditScreen(borrowId: borrowId, borrowType: borrowType)
         }
+        else if let creditId = transaction.creditId {
+            showCreditEditScreen(creditId: creditId)
+        }
         else {
             showTransactionEditScreen(transactionId: transaction.id)
         }
@@ -154,7 +170,11 @@ extension StatisticsViewController {
         
     private func showBorrowEditScreen(borrowId: Int, borrowType: BorrowType) {
         modal(factory.borrowEditViewController(delegate: self, type: borrowType, borrowId: borrowId, source: nil, destination: nil))
-    }    
+    }
+    
+    private func showCreditEditScreen(creditId: Int) {
+        modal(factory.creditEditViewController(delegate: self, creditId: creditId, destination: nil))
+    }
 }
 
 extension StatisticsViewController : FilterCellDelegate {

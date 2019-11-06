@@ -36,6 +36,15 @@ struct ReminderViewModel {
         return recurrenceRule?.toText(occurrenceDate: reminderStartDate ?? Date())
     }
     
+    var nextOccurrence: String? {
+        guard let reminderStartDate = reminderStartDate else { return nil }
+        guard let recurrenceRule = recurrenceRule else {
+            return reminderStartDate.isInFuture ? startDate : nil
+        }
+        let nextOccurrence = recurrenceRule.occurrences(between: Date(), and: Date().adding(.year, value: 2)).first
+        return nextOccurrence?.dateTimeString(ofStyle: DateFormatter.Style.medium)        
+    }
+    
     var reminder: String? {
         guard let reminderStartDate = reminderStartDate else { return nil }
         guard let recurrenceRule = recurrenceRule else {

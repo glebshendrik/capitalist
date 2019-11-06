@@ -245,7 +245,7 @@ extension MainViewController {
         firstly {
             viewModel.removeActive(by: id, deleteTransactions: deleteTransactions)
         }.done {
-            self.didRemoveExpenseCategory(with: basketType)
+            self.didRemoveActive(with: basketType)
         }
         .catch { _ in
             self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)

@@ -200,6 +200,68 @@
                                             <segue destination="7c0-Ly-HVX" kind="show" id="xgR-WJ-I18"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="148" id="oXr-st-47Z">
+                                        <rect key="frame" x="0.0" y="336" width="375" height="148"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oXr-st-47Z" id="aCx-I0-klI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="148"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Доходы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9k4-zl-N3c">
+                                                    <rect key="frame" x="16" y="12" width="343" height="18"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
+                                                    <color key="textColor" name="text FFFFFF"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJM-vV-HjA" customClass="ProgressView" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="40" width="343" height="24"/>
+                                                    <color key="backgroundColor" name="dark 333D5B"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="kGx-va-bwj"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Расходы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dB1-hV-29K">
+                                                    <rect key="frame" x="16" y="80" width="343" height="18"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
+                                                    <color key="textColor" name="text FFFFFF"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALV-1f-aiF" customClass="ProgressView" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="108" width="343" height="24"/>
+                                                    <color key="backgroundColor" name="dark 333D5B"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="lQm-YI-Tas"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9k4-zl-N3c" firstAttribute="leading" secondItem="aCx-I0-klI" secondAttribute="leading" constant="16" id="0kb-WG-EWi"/>
+                                                <constraint firstAttribute="trailing" secondItem="XJM-vV-HjA" secondAttribute="trailing" constant="16" id="6Ub-pA-V6K"/>
+                                                <constraint firstAttribute="bottom" secondItem="ALV-1f-aiF" secondAttribute="bottom" constant="16" id="Ce8-O3-1EW"/>
+                                                <constraint firstItem="XJM-vV-HjA" firstAttribute="top" secondItem="9k4-zl-N3c" secondAttribute="bottom" constant="10" id="DAH-5c-kV8"/>
+                                                <constraint firstItem="dB1-hV-29K" firstAttribute="top" secondItem="XJM-vV-HjA" secondAttribute="bottom" constant="16" id="F3f-fo-NpB"/>
+                                                <constraint firstAttribute="trailing" secondItem="dB1-hV-29K" secondAttribute="trailing" constant="16" id="FMM-QF-ZpK"/>
+                                                <constraint firstAttribute="trailing" secondItem="ALV-1f-aiF" secondAttribute="trailing" constant="16" id="MIM-rj-Uw0"/>
+                                                <constraint firstItem="ALV-1f-aiF" firstAttribute="leading" secondItem="aCx-I0-klI" secondAttribute="leading" constant="16" id="ZYb-m2-UcO"/>
+                                                <constraint firstItem="ALV-1f-aiF" firstAttribute="top" secondItem="dB1-hV-29K" secondAttribute="bottom" constant="10" id="g17-9S-gGY"/>
+                                                <constraint firstItem="dB1-hV-29K" firstAttribute="leading" secondItem="aCx-I0-klI" secondAttribute="leading" constant="16" id="l2k-4L-0P1"/>
+                                                <constraint firstItem="XJM-vV-HjA" firstAttribute="leading" secondItem="aCx-I0-klI" secondAttribute="leading" constant="16" id="moa-fo-icz"/>
+                                                <constraint firstAttribute="trailing" secondItem="9k4-zl-N3c" secondAttribute="trailing" constant="16" id="tYh-4D-Bg5"/>
+                                                <constraint firstItem="9k4-zl-N3c" firstAttribute="top" secondItem="aCx-I0-klI" secondAttribute="top" constant="12" id="uiJ-7l-QTK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -213,6 +275,8 @@
                     </navigationItem>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="expensesProgress" destination="ALV-1f-aiF" id="LSW-wm-0Is"/>
+                        <outlet property="incomeProgress" destination="XJM-vV-HjA" id="sYV-6a-Giw"/>
                         <outlet property="joinCell" destination="Sm4-PD-tIW" id="umI-o1-s7o"/>
                         <outlet property="profileCell" destination="Ne8-78-Uq6" id="eGt-gh-BvD"/>
                     </connections>
@@ -224,7 +288,9 @@
         <!--BalanceViewController-->
         <scene sceneID="b3H-Ad-7uc">
             <objects>
-                <viewControllerPlaceholder storyboardName="Balance" referencedIdentifier="BalanceViewController" id="4Oz-bx-c1y" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Balance" referencedIdentifier="BalanceViewController" id="4Oz-bx-c1y" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="m1C-1n-bqe"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o8y-Yd-k3U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-229" y="307"/>
@@ -232,7 +298,9 @@
         <!--JoinViewController-->
         <scene sceneID="W5H-yc-UTh">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Join" storyboardName="Join" referencedIdentifier="JoinViewController" id="KmV-et-jjl" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="Join" storyboardName="Join" referencedIdentifier="JoinViewController" id="KmV-et-jjl" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="IY5-dn-jTL"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJl-ph-AEA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-247" y="-134"/>
@@ -240,7 +308,9 @@
         <!--ProfileViewController-->
         <scene sceneID="NLT-M8-Suv">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileViewController" id="ltB-EC-YKG" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileViewController" id="ltB-EC-YKG" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="fTq-cN-B1D"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ch-AP-r6m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-235" y="8"/>
@@ -248,7 +318,9 @@
         <!--BorrowsViewController-->
         <scene sceneID="8MS-IQ-44W">
             <objects>
-                <viewControllerPlaceholder storyboardName="Borrows" referencedIdentifier="BorrowsViewController" id="kLg-1M-MO7" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Borrows" referencedIdentifier="BorrowsViewController" id="kLg-1M-MO7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="XIQ-ke-SEc"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5t-Gp-Klg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-224" y="81"/>
@@ -256,7 +328,9 @@
         <!--SettingsViewController-->
         <scene sceneID="dpl-nL-Eaq">
             <objects>
-                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="SettingsViewController" id="7c0-Ly-HVX" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="SettingsViewController" id="7c0-Ly-HVX" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Ess-yv-QbY"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xUd-UP-aEZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-228" y="447"/>
@@ -264,7 +338,9 @@
         <!--StatisticsViewController-->
         <scene sceneID="w0Q-52-dal">
             <objects>
-                <viewControllerPlaceholder storyboardName="Statistics" referencedIdentifier="StatisticsViewController" id="pYA-eK-Fxt" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Statistics" referencedIdentifier="StatisticsViewController" id="pYA-eK-Fxt" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Hh3-CX-N7E"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzq-fX-swI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-221" y="160"/>
@@ -288,34 +364,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" verticalHuggingPriority="251" text="Источники дохода" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LG5-vr-cex">
-                                <rect key="frame" x="15" y="6" width="268" height="15.5"/>
+                                <rect key="frame" x="15" y="6" width="269" height="15.5"/>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                 <color key="textColor" name="text 9EAACC"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="98 000 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2X-F7-FuV">
-                                <rect key="frame" x="293" y="6" width="56" height="15.5"/>
+                                <rect key="frame" x="294" y="6" width="51" height="15.5"/>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                 <color key="textColor" name="text FFFFFF"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="text-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="ojb-4o-h0i">
-                                <rect key="frame" x="355" y="10.5" width="4" height="7"/>
+                                <rect key="frame" x="351" y="7" width="8" height="14"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" verticalHuggingPriority="251" text="Кошельки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jig-hk-zD0">
-                                <rect key="frame" x="15" y="91.5" width="179.5" height="15.5"/>
+                                <rect key="frame" x="15" y="91.5" width="180.5" height="15.5"/>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                 <color key="textColor" name="text 9EAACC"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="98 000 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLL-t9-8ZH">
-                                <rect key="frame" x="293" y="91.5" width="56" height="15.5"/>
+                                <rect key="frame" x="294" y="91.5" width="51" height="15.5"/>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                 <color key="textColor" name="text FFFFFF"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="text-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="LLr-6W-KXe">
-                                <rect key="frame" x="355" y="96" width="4" height="7"/>
+                                <rect key="frame" x="351" y="92.5" width="8" height="14"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2n-9h-iVJ" userLabel="income sources container">
                                 <rect key="frame" x="0.0" y="11.5" width="375" height="80"/>
@@ -355,7 +431,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="expense-source-icon" translatesAutoresizingMaskIntoConstraints="NO" id="g4P-PP-wYE">
-                                                                                    <rect key="frame" x="14.5" y="16.5" width="17" height="13"/>
+                                                                                    <rect key="frame" x="11" y="11" width="24" height="24"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="24" id="7Ge-Yc-ECU"/>
                                                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="24" id="Mfs-0d-dWx"/>
@@ -544,7 +620,7 @@
                                         <rect key="frame" x="0.0" y="12" width="375" height="56"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="l6v-CB-nnI">
-                                                <rect key="frame" x="160" y="12.5" width="55" height="31"/>
+                                                <rect key="frame" x="132.5" y="-3" width="110" height="62"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.74935787671232879" colorSpace="custom" customColorSpace="sRGB"/>
@@ -610,7 +686,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="expense-source-icon" translatesAutoresizingMaskIntoConstraints="NO" id="aV5-tx-feC">
-                                                                                    <rect key="frame" x="14.5" y="16.5" width="17" height="13"/>
+                                                                                    <rect key="frame" x="11" y="11" width="24" height="24"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="24" id="arT-Fd-fcj"/>
                                                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="24" id="hPk-zn-7pK"/>
@@ -979,7 +1055,7 @@
                                         <rect key="frame" x="0.0" y="12" width="375" height="56"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="E2K-f6-ag5">
-                                                <rect key="frame" x="160" y="12.5" width="55" height="31"/>
+                                                <rect key="frame" x="132.5" y="-3" width="110" height="62"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.74855522260273977" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1038,7 +1114,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="114.5" height="52"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0,00 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTy-0N-MoN">
-                                                        <rect key="frame" x="33" y="10" width="48.5" height="19"/>
+                                                        <rect key="frame" x="35" y="10" width="44.5" height="19"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                         <color key="textColor" name="text FFFFFF"/>
                                                         <nil key="highlightedColor"/>
@@ -1072,13 +1148,13 @@
                                                 <rect key="frame" x="114.5" y="0.0" width="114" height="52"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0,00 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeG-Ce-uxJ">
-                                                        <rect key="frame" x="34.5" y="10" width="45.5" height="18"/>
+                                                        <rect key="frame" x="36" y="10" width="42" height="18"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                         <color key="textColor" name="text 9EAACC"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сбережения" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1C-57-t2f">
-                                                        <rect key="frame" x="20.5" y="33" width="73" height="14"/>
+                                                        <rect key="frame" x="21.5" y="33" width="71.5" height="14"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                         <color key="textColor" name="text 9EAACC"/>
                                                         <nil key="highlightedColor"/>
@@ -1107,13 +1183,13 @@
                                                 <rect key="frame" x="228.5" y="0.0" width="114.5" height="52"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0,00 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhk-En-c2M">
-                                                        <rect key="frame" x="34.5" y="10" width="45.5" height="18"/>
+                                                        <rect key="frame" x="36.5" y="10" width="42" height="18"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                         <color key="textColor" name="text 9EAACC"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Инвестиции" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbc-lU-LFm">
-                                                        <rect key="frame" x="21.5" y="33" width="72" height="14"/>
+                                                        <rect key="frame" x="23.5" y="33" width="68" height="14"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                         <color key="textColor" name="text 9EAACC"/>
                                                         <nil key="highlightedColor"/>
@@ -1233,7 +1309,7 @@
                                                                             <rect key="frame" x="10" y="2" width="48" height="48"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="zmx-ez-FXB">
-                                                                                    <rect key="frame" x="16" y="16" width="16" height="16"/>
+                                                                                    <rect key="frame" x="8" y="8" width="32" height="32"/>
                                                                                     <color key="tintColor" name="dark 333D5B"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
@@ -1294,7 +1370,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="348"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Fxg-qF-Lvh">
-                                                        <rect key="frame" x="160" y="158.5" width="55" height="31"/>
+                                                        <rect key="frame" x="132.5" y="143" width="110" height="62"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1383,7 +1459,7 @@
                                                                             <rect key="frame" x="10" y="2" width="48" height="48"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="Ns2-HQ-naB">
-                                                                                    <rect key="frame" x="16" y="16" width="16" height="16"/>
+                                                                                    <rect key="frame" x="8" y="8" width="32" height="32"/>
                                                                                     <color key="tintColor" name="dark 333D5B"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
@@ -1444,7 +1520,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="EkC-7E-d6Q">
-                                                        <rect key="frame" x="160" y="159" width="55" height="31"/>
+                                                        <rect key="frame" x="132.5" y="143.5" width="110" height="62"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1533,7 +1609,7 @@
                                                                             <rect key="frame" x="10" y="2" width="48" height="48"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="Xjf-fp-Xjx">
-                                                                                    <rect key="frame" x="16" y="16" width="16" height="16"/>
+                                                                                    <rect key="frame" x="8" y="8" width="32" height="32"/>
                                                                                     <color key="tintColor" name="dark 333D5B"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
@@ -1594,7 +1670,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Nid-av-JHO">
-                                                        <rect key="frame" x="160" y="159" width="55" height="31"/>
+                                                        <rect key="frame" x="132.5" y="143.5" width="110" height="62"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1652,7 +1728,7 @@
                                 <color key="backgroundColor" name="dark 333D5B"/>
                             </view>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioQ-2O-oOH">
-                                <rect key="frame" x="163.5" y="583" width="48" height="30"/>
+                                <rect key="frame" x="162.5" y="583" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="v7I-LI-owo"/>
                                 </constraints>
@@ -1665,13 +1741,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Сумма сбережений:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHY-Yi-qKm">
-                                <rect key="frame" x="173.5" y="591.5" width="125.5" height="15.5"/>
+                                <rect key="frame" x="180.5" y="591.5" width="123.5" height="15.5"/>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                 <color key="textColor" name="text 9EAACC"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="98 000 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xou-4C-uul">
-                                <rect key="frame" x="303" y="591.5" width="56" height="15.5"/>
+                                <rect key="frame" x="308" y="591.5" width="51" height="15.5"/>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                 <color key="textColor" name="text FFFFFF"/>
                                 <nil key="highlightedColor"/>
@@ -1680,7 +1756,7 @@
                                 <rect key="frame" x="157.5" y="281.5" width="60" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="money-icon" translatesAutoresizingMaskIntoConstraints="NO" id="dUt-AC-D2O">
-                                        <rect key="frame" x="3" y="5" width="54" height="50"/>
+                                        <rect key="frame" x="-24" y="-20" width="108" height="100"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1823,6 +1899,7 @@
         <scene sceneID="qyg-2J-dD7">
             <objects>
                 <navigationController storyboardIdentifier="MenuNavigationController" modalPresentationStyle="overFullScreen" navigationBarHidden="YES" id="Tdq-ff-IYk" customClass="SideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="wWM-NR-eOZ"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fi3-pi-hLo">
                         <autoresizingMask key="autoresizingMask"/>
@@ -1903,6 +1980,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KwI-3J-1v6"/>
+        <segue reference="fO5-Yn-0Az"/>
     </inferredMetricsTieBreakers>
 </document>

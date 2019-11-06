@@ -14,7 +14,8 @@ class MenuViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     
     private var currentUser: User? = nil
-    
+    private var budgetViewModel: BudgetViewModel? = nil
+        
     var isCurrentUserLoaded: Bool {
         return currentUser != nil
     }
@@ -41,13 +42,40 @@ class MenuViewModel {
         return firstname ?? currentUser?.email
     }
     
+    var incomesAmount: String {
+        return budgetViewModel?.incomesAmountRounded ?? ""
+    }
+    
+    var incomesAmountPlanned: String {
+        return budgetViewModel?.incomesAmountPlannedRounded ?? ""
+    }
+    
+    var expensesAmount: String {
+        return budgetViewModel?.expensesAmountRounded ?? ""
+    }
+    
+    var expensesAmountPlanned: String {
+        return budgetViewModel?.expensesAmountPlannedRounded ?? ""
+    }
+      
+    var incomesProgress: CGFloat {
+        return budgetViewModel?.incomesProgress ?? 0.0
+    }
+    
+    var expensesProgress: CGFloat {
+        return budgetViewModel?.expensesProgress ?? 0.0
+    }
+    
     init(accountCoordinator: AccountCoordinatorProtocol) {
         self.accountCoordinator = accountCoordinator
     }
     
     func loadData() -> Promise<Void> {
-        return accountCoordinator.loadCurrentUser().done { user in
-            self.currentUser = user
-        }.asVoid()
+        return  firstly {
+                    when(fulfilled: accountCoordinator.loadCurrentUser(), accountCoordinator.loadCurrentUserBudget())
+                }.get { user, budget in
+                    self.currentUser = user
+                    self.budgetViewModel = BudgetViewModel(budget: budget)
+                }.asVoid()
     }
 }

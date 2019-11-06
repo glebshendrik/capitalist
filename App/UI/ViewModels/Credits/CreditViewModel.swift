@@ -10,6 +10,7 @@ import Foundation
 
 class CreditViewModel {
     public private(set) var credit: Credit
+    public private(set) var reminderViewModel: ReminderViewModel
     
     var id: Int {
         return credit.id
@@ -39,8 +40,12 @@ class CreditViewModel {
         return paidAmount(shouldRound: true)
     }
     
-    var returnAmountFormatted: String {
-        return "Всего \(returnAmount)"
+    var monthlyPayment: String {
+        return monthlyPayment(shouldRound: false)
+    }
+    
+    var nextPaymentDate: String? {
+        return reminderViewModel.nextOccurrence
     }
     
     var paymentsProgress: Float {
@@ -54,6 +59,11 @@ class CreditViewModel {
     
     init(credit: Credit) {
         self.credit = credit
+        self.reminderViewModel = ReminderViewModel(reminder: credit.reminder)
+    }
+    
+    private func monthlyPayment(shouldRound: Bool) -> String {
+        return credit.monthlyPaymentCents?.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }
     
     private func returnAmount(shouldRound: Bool) -> String {

@@ -15,6 +15,8 @@ class MenuViewController : StaticTableViewController, UIMessagePresenterManagerD
     
     @IBOutlet weak var joinCell: UITableViewCell!
     @IBOutlet weak var profileCell: UITableViewCell!
+    @IBOutlet weak var incomeProgress: ProgressView!
+    @IBOutlet weak var expensesProgress: ProgressView!
     
     private var loaderView: LoaderView!
     
@@ -32,9 +34,31 @@ class MenuViewController : StaticTableViewController, UIMessagePresenterManagerD
     }
     
     func updateUI(animated: Bool = false) {
+        updateIncomesProgressUI()
+        updateExpensesProgressUI()
+        updateProfileUI()
+        updateTableUI(animated: animated)
+    }
+    
+    func updateIncomesProgressUI() {
+        incomeProgress.progressText = viewModel.incomesAmount
+        incomeProgress.limitText = viewModel.incomesAmountPlanned
+        incomeProgress.progressWidth = incomeProgress.bounds.width * viewModel.incomesProgress
+    }
+    
+    func updateExpensesProgressUI() {
+        expensesProgress.progressText = viewModel.expensesAmount
+        expensesProgress.limitText = viewModel.expensesAmountPlanned
+        expensesProgress.progressWidth = expensesProgress.bounds.width * viewModel.expensesProgress
+    }
+    
+    func updateProfileUI () {
+        profileCell.textLabel?.text = viewModel.profileTitle
+    }
+    
+    func updateTableUI(animated: Bool = false) {
         set(cells: joinCell, hidden: !viewModel.isCurrentUserLoaded || !viewModel.isCurrentUserGuest)
         set(cells: profileCell, hidden: !viewModel.isCurrentUserLoaded || viewModel.isCurrentUserGuest)
-        profileCell.textLabel?.text = viewModel.profileTitle
         reloadData(animated: animated)
     }
     
@@ -68,16 +92,24 @@ class MenuViewController : StaticTableViewController, UIMessagePresenterManagerD
     }
     
     private func setupUI() {
+        setupMenu()
+        setupProgressUI()
         setupRefreshControl()
         insertAnimation = .top
         deleteAnimation = .bottom
-        setupMenu()
     }
     
     private func setupMenu() {
         if let menuLeftNavigationController = navigationController as? SideMenuNavigationController {
             menuLeftNavigationController.presentationStyle.backgroundColor = .clear
         }
+    }
+    
+    func setupProgressUI() {
+        incomeProgress.progressColor = UIColor.by(.blue6B93FB)
+        incomeProgress.labelsColor = UIColor.by(.textFFFFFF)
+        expensesProgress.progressColor = UIColor.by(.blue6B93FB)
+        expensesProgress.labelsColor = UIColor.by(.textFFFFFF)
     }
     
     private func setupRefreshControl() {

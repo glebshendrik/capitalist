@@ -113,6 +113,20 @@ class TransactionController {
         self.delegate = delegate
     }
     
+    func updateWaitingEdge(at location: CGPoint, in view: UIView) {
+        waitingEdge = getWaitingEdge(at: location, in: view)
+    }
+    
+    private func getWaitingEdge(at location: CGPoint, in view: UIView) -> UIRectEdge? {
+        if location.x < 50 {
+            return .left
+        }
+        if location.x > (view.frame.size.width - 50) {
+            return .right
+        }
+        return nil
+    }
+    
     private func initializeWaitingAtTheEdge() {
         waitingAtTheEdgeTimer?.invalidate()
         if dropCandidateCollectionView != nil && waitingEdge != nil && !delegate.isEditing {
@@ -147,21 +161,4 @@ class TransactionController {
 
         initializeWaitingAtTheEdge()
     }
-    
-    private func getWaitingEdge(at location: CGPoint, in view: UIView) -> UIRectEdge? {
-        if location.x < 50 {
-            return .left
-        }
-        if location.x > (view.frame.size.width - 50) {
-            return .right
-        }
-        return nil
-    }
-        
-    func updateWaitingEdge(at location: CGPoint, in view: UIView) {
-        waitingEdge = getWaitingEdge(at: location, in: view)
-    }
-    
 }
-
-

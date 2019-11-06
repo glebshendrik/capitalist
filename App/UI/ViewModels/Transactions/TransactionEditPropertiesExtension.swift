@@ -124,11 +124,25 @@ extension TransactionEditViewModel {
     }
     
     var canChangeSource: Bool {
-        return !isReturningDebt
+        return !isReturningDebt && !anyVirtualTransactionable
     }
     
     var canChangeDestination: Bool {
-        return !isReturningLoan
+        return !isReturningLoan && !anyVirtualTransactionable
+    }
+    
+    var anyVirtualTransactionable: Bool {
+        return isSourceVirtualExpenseSource || isDestinationVirtualExpenseSource
+    }
+    
+    var isSourceVirtualExpenseSource: Bool {
+        guard let expenseSourceSource = source as? ExpenseSourceViewModel else { return false }
+        return expenseSourceSource.isVirtual
+    }
+    
+    var isDestinationVirtualExpenseSource: Bool {
+        guard let expenseSourceSource = destination as? ExpenseSourceViewModel else { return false }
+        return expenseSourceSource.isVirtual
     }
 }
 
@@ -166,8 +180,8 @@ extension TransactionEditViewModel {
         }
         return (source?.iconCategory ?? IconCategory.expenseSource).defaultIconName
     }
-    var sourceName: String? { return source?.name }
-    var sourceAmount: String? { return source?.amount }
+    var sourceName: String? { return isSourceVirtualExpenseSource ? "Из ниоткуда" : source?.name }
+    var sourceAmount: String? { return isSourceVirtualExpenseSource ? nil : source?.amount }
     var sourceCurrency: Currency? { return source?.currency }
     var sourceCurrencyCode: String? { return sourceCurrency?.code }
     
@@ -180,8 +194,8 @@ extension TransactionEditViewModel {
     var destinationIconDefaultImageName: String {
         return (destination?.iconCategory ?? IconCategory.expenseSource).defaultIconName
     }
-    var destinationName: String? { return destination?.name }
-    var destinationAmount: String? { return destination?.amount }
+    var destinationName: String? { return isDestinationVirtualExpenseSource ? "В никуда" : destination?.name }
+    var destinationAmount: String? { return isDestinationVirtualExpenseSource ? nil : destination?.amount }
     var destinationCurrency: Currency? { return destination?.currency }
     var destinationCurrencyCode: String? { return destinationCurrency?.code }
 }

@@ -14,7 +14,8 @@ extension ApplicationAssembly {
             
     func registerViewModels(in container: Container) {
 
-        container.autoregister(MenuViewModel.self, initializer: MenuViewModel.init)
+        container.autoregister(MenuViewModel.self, initializer: MenuViewModel.init)        .inObjectScope(.container)
+
         
         container.autoregister(RegistrationViewModel.self, initializer: RegistrationViewModel.init)
         

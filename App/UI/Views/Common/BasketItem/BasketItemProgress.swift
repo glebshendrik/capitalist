@@ -13,9 +13,7 @@ class BasketItemProgress : BasketItemView {
     lazy var backgroundImageView: UIImageView = { return UIImageView() }()
     lazy var progressView: UIView = { return UIView() }()
     lazy var limitLabel: UILabel = { return UILabel() }()
-    
-    private var progressWidthConstraint: Constraint? = nil
-    
+        
     var backgroundCornerRadius: CGFloat = 0.0 {
         didSet {
             backgroundImageView.cornerRadius = backgroundCornerRadius
@@ -123,7 +121,7 @@ class BasketItemProgress : BasketItemView {
     func setupProgressConstraints() {
         progressView.snp.makeConstraints { make in
             make.left.top.bottom.equalToSuperview()
-            make.width.equalTo(0)
+            make.width.equalTo(progressWidth)
         }
     }
     

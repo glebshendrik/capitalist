@@ -13,9 +13,9 @@ class CreditTableViewCell : UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var paidAmountLabel: UILabel!
-    @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var progressFillWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var monthlyPaymentLabel: UILabel!
+    @IBOutlet weak var nextDateLabel: UILabel!
+    @IBOutlet weak var progressView: ProgressView!
     
     var placeholderName: String {
         return IconCategory.expenseSourceDebt.defaultIconName
@@ -39,13 +39,18 @@ class CreditTableViewCell : UITableViewCell {
     func updateUI() {
         nameLabel.text = viewModel?.name
         typeLabel.text = viewModel?.typeName
-        paidAmountLabel.text = viewModel?.paidAmount        
-        amountLabel.text = viewModel?.returnAmountFormatted
+        monthlyPaymentLabel.text = viewModel?.monthlyPayment
+        nextDateLabel.text = viewModel?.nextPaymentDate
         iconImageView.setImage(with: viewModel?.iconURL,
                                placeholderName: placeholderName,
                                renderingMode: .alwaysTemplate)
         iconImageView.tintColor = imageTintColor
-        progressFillWidthConstraint = progressFillWidthConstraint.setMultiplier(multiplier: paymentsProgress)
-        contentView.layoutIfNeeded()
+        
+        progressView.progressColor = UIColor.by(.blue6B93FB)
+        progressView.limitText = viewModel?.returnAmount
+        progressView.progressText = viewModel?.paidAmount
+        progressView.labelsColor = UIColor.by(.textFFFFFF)
+        progressView.progressWidth = progressView.bounds.width * paymentsProgress
+//        contentView.layoutIfNeeded()
     }
 }

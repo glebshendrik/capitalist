@@ -33,20 +33,20 @@ class CreditEditViewModel {
     }
     var selectedIconURL: URL? = nil
     var name: String? = nil
-    var selectedCurrency: Currency? = nil
+    var selectedCurrency: Currency? = nil { didSet { updateMonthlyPayment() } }
     var amount: String? = nil
-    var returnAmount: String? = nil
-    var alreadyPaid: String? = nil
+    var returnAmount: String? = nil { didSet { updateMonthlyPayment() } }
+    var alreadyPaid: String? = nil { didSet { updateMonthlyPayment() } }
     var monthlyPayment: String? = nil
     var gotAt: Date = Date()
-    var period: Int? = nil
+    var period: Int? = nil { didSet { updateMonthlyPayment() } }
     var expenseCategoryId: Int? = nil
     
     var onBalance: Bool = false
     var selectedDestination: ExpenseSourceViewModel? = nil
     var creditingTransactionAttributes: CreditingTransactionNestedAttributes? {
         guard isNew, !onBalance else { return nil }
-        return CreditingTransactionNestedAttributes(destinationId: selectedDestination?.id)
+        return CreditingTransactionNestedAttributes(id: creditingTransaction?.id, destinationId: selectedDestination?.id)
     }
     var creditingTransaction: TransactionViewModel? = nil
     
@@ -199,6 +199,34 @@ class CreditEditViewModel {
         }
         return creditsCoordinator.destroyCredit(by: creditId, deleteTransactions: deleteTransactions)
     }
+    
+    func updateMonthlyPayment() {
+        guard isNew else { return }
+        guard   let creditType = selectedCreditType,
+                let months = periodInMonths(period: period, unit: creditType.periodUnit),
+                let currency = selectedCurrency,
+                let returnAmountCents = returnAmount?.intMoney(with: selectedCurrency)?.number,
+                let alreadyPaidCents = (alreadyPaid ?? "0").intMoney(with: selectedCurrency)?.number else {
+                    
+                    monthlyPayment = nil
+                    return
+        }        
+        
+        let monthlyPaymentCents = returnAmountCents.subtracting(alreadyPaidCents).dividing(by: NSDecimalNumber(integerLiteral: months))
+        monthlyPayment = monthlyPaymentCents.moneyDecimalString(with: currency)
+    }
+    
+    func periodInMonths(period: Int?, unit: PeriodUnit) -> Int? {
+        guard let period = period else { return nil }
+        switch unit {
+        case .days:
+            return nil
+        case .months:
+            return period
+        case .years:
+            return period * 12
+        }
+    }
 }
 
 // Creation
@@ -242,10 +270,12 @@ extension CreditEditViewModel {
         return CreditUpdatingForm(id: credit?.id,
                                   name: name,
                                   iconURL: selectedIconURL,
+                                  amountCents: amount?.intMoney(with: selectedCurrency),
                                   returnAmountCents: returnAmount?.intMoney(with: selectedCurrency),
                                   monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
                                   gotAt: gotAt,
                                   period: period,
-                                  reminderAttributes: reminderViewModel.reminderAttributes)
+                                  reminderAttributes: reminderViewModel.reminderAttributes,
+                                  creditingTransactionAttributes: creditingTransactionAttributes)
     }
 }
