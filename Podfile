@@ -35,6 +35,7 @@ target 'Three Baskets' do
   pod 'SVGKit', '~> 2.1'
   pod 'SDWebImageSVGCoder', '~> 0.3'
   pod 'SnapKit', '~> 4.2.0'
+  pod 'AttributedTextView'
 end
 
 post_install do |installer|

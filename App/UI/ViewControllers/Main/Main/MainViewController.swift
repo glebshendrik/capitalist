@@ -58,21 +58,16 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBOutlet weak var joyExpenseCategoriesActivityIndicator: UIView!
     @IBOutlet weak var joyExpenseCategoriesLoader: UIImageView!
-    @IBOutlet weak var joyExpenseCategoriesPageControl: UIPageControl!
     
     @IBOutlet weak var riskActivesActivityIndicator: UIView!
     @IBOutlet weak var riskActivesLoader: UIImageView!
-    @IBOutlet weak var riskActivesPageControl: UIPageControl!
     
     @IBOutlet weak var safeActivesActivityIndicator: UIView!
     @IBOutlet weak var safeActivesLoader: UIImageView!
-    @IBOutlet weak var safeActivesPageControl: UIPageControl!
     
     @IBOutlet weak var transactionDraggingElement: UIView!
 
     @IBOutlet weak var editDoneButton: UIButton!
-    @IBOutlet weak var editDoneButtonHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var basketTotalTitleLabel: UILabel!
     @IBOutlet weak var basketTotalLabel: UILabel!
     
     var titleView: TitleView!

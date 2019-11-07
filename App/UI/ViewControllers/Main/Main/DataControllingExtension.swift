@@ -167,7 +167,6 @@ extension MainViewController {
         }.done {
             self.update(self.joyExpenseCategoriesCollectionView,
                         scrollToEnd: scrollToEndWhenUpdated)
-            self.updateBasketsItemsPageControl(by: basketType)
         }
         .catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки категорий трат", theme: .error)
@@ -214,7 +213,6 @@ extension MainViewController {
         }.done {
             self.update(self.basketItemsCollectionView(by: basketType),
                         scrollToEnd: scrollToEndWhenUpdated)
-            self.updateBasketsItemsPageControl(by: basketType)
         }
         .catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки активов", theme: .error)

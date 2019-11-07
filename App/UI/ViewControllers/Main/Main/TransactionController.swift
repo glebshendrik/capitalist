@@ -113,16 +113,25 @@ class TransactionController {
         self.delegate = delegate
     }
     
-    func updateWaitingEdge(at location: CGPoint, in view: UIView) {
-        waitingEdge = getWaitingEdge(at: location, in: view)
+    func updateWaitingEdge(at location: CGPoint, in view: UIView, locationInCollectionView: CGPoint, direction: UICollectionView.ScrollDirection?) {
+        waitingEdge = getWaitingEdge(at: location, in: view, locationInCollectionView: locationInCollectionView, direction: direction)
     }
     
-    private func getWaitingEdge(at location: CGPoint, in view: UIView) -> UIRectEdge? {
-        if location.x < 50 {
+    private func getWaitingEdge(at location: CGPoint, in view: UIView, locationInCollectionView: CGPoint, direction: UICollectionView.ScrollDirection?) -> UIRectEdge? {
+        guard let direction = direction else { return nil }
+        if direction == .horizontal && location.x < 50 {
             return .left
         }
-        if location.x > (view.frame.size.width - 50) {
+        if direction == .horizontal && location.x > (view.frame.size.width - 50) {
             return .right
+        }
+        if direction == .vertical && locationInCollectionView.y < 50 {
+            return .top
+        }
+        if let collectionView = dropCandidateCollectionView,
+            direction == .vertical,
+            locationInCollectionView.y > (collectionView.frame.height - 50) {
+            return .bottom
         }
         return nil
     }
@@ -144,21 +153,44 @@ class TransactionController {
                 initializeWaitingAtTheEdge()
                 return
         }
-        var offsetDiff = dropCandidateCollectionView.frame.size.width
+        
+        if edge == .right || edge == .left {
+            changeWaitingPageHorizontal(edge: edge, collectionView: dropCandidateCollectionView)
+        }
+        else {
+            changeWaitingPageVertical(edge: edge, collectionView: dropCandidateCollectionView)
+        }
+        initializeWaitingAtTheEdge()
+    }
+    
+    private func changeWaitingPageHorizontal(edge: UIRectEdge, collectionView: UICollectionView) {
+        var offsetDiff = collectionView.frame.size.width
         if offsetDiff > delegate.mainView.frame.size.width {
            offsetDiff = offsetDiff * 2 / 3
         }
         offsetDiff = edge == .right ? offsetDiff : -offsetDiff
 
-        var offset = dropCandidateCollectionView.contentOffset.x + offsetDiff
+        var offset = collectionView.contentOffset.x + offsetDiff
         if offset < 0 {
             offset = 0
         }
-        if offset > (dropCandidateCollectionView.contentSize.width - offsetDiff) {
-            offset = dropCandidateCollectionView.contentSize.width - offsetDiff
+        if offset > (collectionView.contentSize.width - offsetDiff) {
+            offset = collectionView.contentSize.width - offsetDiff
         }
-        dropCandidateCollectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+        collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+    }
+    
+    private func changeWaitingPageVertical(edge: UIRectEdge, collectionView: UICollectionView) {
+        var offsetDiff = collectionView.frame.size.width
+        offsetDiff = edge == .bottom ? offsetDiff : -offsetDiff
 
-        initializeWaitingAtTheEdge()
+        var offset = collectionView.contentOffset.y + offsetDiff
+        if offset < 0 {
+            offset = 0
+        }
+        if offset > (collectionView.contentSize.height - offsetDiff) {
+            offset = collectionView.contentSize.height - offsetDiff
+        }
+        collectionView.setContentOffset(CGPoint(x: 0, y: offset), animated: true)
     }
 }

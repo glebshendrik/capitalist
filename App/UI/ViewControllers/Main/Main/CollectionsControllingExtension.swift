@@ -150,16 +150,32 @@ extension MainViewController {
 
 extension MainViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        updatePageControl(for: scrollView)
+        
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        updatePageControl(for: scrollView)
+        
     }
     
     func switchOffScrolling(for collectionView: UICollectionView?) {
         guard let collectionView = collectionView else { return }
         collectionView.panGestureRecognizer.isEnabled = false
         collectionView.panGestureRecognizer.isEnabled = true
+    }
+    
+    func scrollDirection(of collectionView: UICollectionView?) -> UICollectionView.ScrollDirection? {
+        guard let collectionView = collectionView else { return nil }
+        
+        switch collectionView {
+        case incomeSourcesCollectionView,
+             expenseSourcesCollectionView:
+            return .horizontal
+        case joyExpenseCategoriesCollectionView,
+             safeActivesCollectionView,
+             riskActivesCollectionView:
+            return .vertical
+        default:
+            return .horizontal
+        }
     }
 }

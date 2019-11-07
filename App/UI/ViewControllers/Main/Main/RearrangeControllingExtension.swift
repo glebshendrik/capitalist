@@ -125,18 +125,13 @@ extension MainViewController {
         super.setEditing(editing, animated: animated)
         
         viewModel?.set(editing: editing)
-        
         updateCollectionViews()
-        
         updateLongPressureRecognizers()
-        
         updateTotalUI()
-        
         setVisibleCells(editing: editing)
+        
         UIView.animate(withDuration: 0.1, animations: {
             self.editDoneButton.alpha = editing ? 1.0 : 0.0
-            self.editDoneButtonHeightConstraint.constant = editing ? 30 : 30
-            self.view.layoutIfNeeded()
         }) { completed in
 //            self.didCreateExpense()
         }

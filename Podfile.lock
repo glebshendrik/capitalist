@@ -4,6 +4,7 @@ PODS:
     - Alamofire (~> 4.7)
   - AlignedCollectionViewFlowLayout (1.1.2)
   - ALTextInputBar (1.1.8)
+  - AttributedTextView (1.4.1)
   - BEMCheckBox (1.4.1)
   - Charts (3.2.1):
     - Charts/Core (= 3.2.1)
@@ -76,6 +77,7 @@ DEPENDENCIES:
   - AlamofireImage
   - AlignedCollectionViewFlowLayout
   - ALTextInputBar (from `https://github.com/bclymer/ALTextInputBar`, branch `master`)
+  - AttributedTextView
   - BEMCheckBox
   - Charts
   - CircleProgressView (~> 1.0)
@@ -131,6 +133,7 @@ SPEC REPOS:
     - SwinjectAutoregistration
     - TrustKit
   trunk:
+    - AttributedTextView
     - SideMenu
     - Swinject
     - SwinjectStoryboard
@@ -168,6 +171,7 @@ SPEC CHECKSUMS:
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   AlignedCollectionViewFlowLayout: ee2ef451e741ec08f8e0967d828001e2f051c20a
   ALTextInputBar: 6c160c51958903c5f7b9d158e19f9c4113ae351b
+  AttributedTextView: 9e01651d96c1af861a9c67c2cc3f94c30320d1c2
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
   CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
@@ -197,6 +201,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
 
-PODFILE CHECKSUM: f01f5d1b7313387035259c581d7327d408b25e33
+PODFILE CHECKSUM: f9cc741828df9f81b86caf235f4b88c8cda5d350
 
-COCOAPODS: 1.8.0
+COCOAPODS: 1.8.4

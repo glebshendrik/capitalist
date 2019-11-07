@@ -234,8 +234,12 @@ extension MainViewController : TransactionControllerDelegate {
             
             
             transactionController.dropCandidateCollectionView = intersections?.collectionView
-            
-            transactionController.updateWaitingEdge(at: locationInView, in: self.view)
+            let locationInCollectionView = gesture.location(in: intersections?.collectionView)
+            let direction = scrollDirection(of: transactionController.dropCandidateCollectionView)
+            transactionController.updateWaitingEdge(at: locationInView,
+                                                    in: self.view,
+                                                    locationInCollectionView: locationInCollectionView,
+                                                    direction: direction)
             
             if transactionController.dropCandidateCollectionView == transactionStartedCollectionView && intersections?.indexPath == transactionStartedIndexPath {
                 transactionController.dropCandidateIndexPath = nil

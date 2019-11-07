@@ -66,27 +66,27 @@ class MainViewModel {
         return budget?.expenseSourcesAmountRounded
     }
     
-    var basketTotalTitle: String? {
-        guard let basketType = basketsViewModel.selectedBasketType else { return nil }
+    var basketTotalTitle: String {
+        guard let basketType = basketsViewModel.selectedBasketType else { return "" }
         switch basketType {
         case .safe:
-            return "Сумма сбережений:"
+            return "Сумма сбережений: "
         case .risk:
-            return "Сумма активов:"
+            return "Сумма активов: "
         default:
-            return nil
+            return ""
         }
     }
     
-    var basketTotal: String? {
-        guard let basketType = basketsViewModel.selectedBasketType else { return nil }
+    var basketTotal: String {
+        guard let basketType = basketsViewModel.selectedBasketType else { return "" }
         switch basketType {
         case .safe:
-            return budget?.safeActivesAmountRounded
+            return budget?.safeActivesAmountRounded ?? ""
         case .risk:
-            return budget?.riskActivesAmountRounded
+            return budget?.riskActivesAmountRounded ?? ""
         default:
-            return nil
+            return ""
         }
     }
     
