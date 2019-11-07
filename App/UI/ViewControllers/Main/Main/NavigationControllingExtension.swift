@@ -102,7 +102,7 @@ extension MainViewController {
         }
     }
     
-    private func showTransactionEditScreen(source: Transactionable, destination: Transactionable) {
+    private func showTransactionEditScreen(source: Transactionable?, destination: Transactionable?) {
         modal(factory.transactionEditViewController(delegate: self, source: source, destination: destination))
     }
        
@@ -194,5 +194,16 @@ extension MainViewController {
 extension MainViewController : WaitingBorrowsViewControllerDelegate {
     func didSelect(borrow: BorrowViewModel, source: TransactionSource, destination: TransactionDestination) {
         showReturnTransactionEditScreen(source: source, destination: destination, returningBorrow: borrow)
+    }
+}
+
+extension MainViewController {
+    func tapMainButton() {
+        if isEditing {
+            setEditing(false, animated: true)
+        }
+        else {
+            showTransactionEditScreen(source: nil, destination: nil)
+        }        
     }
 }

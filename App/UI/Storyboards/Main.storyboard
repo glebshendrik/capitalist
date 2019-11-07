@@ -1255,19 +1255,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DLF-Af-F6p" userLabel="baskets entities container">
-                                <rect key="frame" x="0.0" y="232" width="375" height="351"/>
+                                <rect key="frame" x="0.0" y="232" width="375" height="352"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIL-Sd-kJg">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="351"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="352"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGa-BE-j3G">
-                                                <rect key="frame" x="0.0" y="0.0" width="1125" height="351"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="1125" height="352"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUj-IS-hQl" userLabel="joy categories">
-                                                        <rect key="frame" x="0.0" y="3" width="375" height="348"/>
+                                                        <rect key="frame" x="0.0" y="3" width="375" height="349"/>
                                                         <subviews>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BDY-K1-ch7">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="348"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vtr-Uo-Vmw">
                                                                     <size key="itemSize" width="50" height="50"/>
@@ -1369,10 +1369,10 @@
                                                                 </connections>
                                                             </collectionView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7X-zT-CXv">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="348"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Fxg-qF-Lvh">
-                                                                        <rect key="frame" x="160" y="158.5" width="55" height="31"/>
+                                                                        <rect key="frame" x="160" y="159" width="55" height="31"/>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1400,10 +1400,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yh5-Gh-kqK" userLabel="safe actives">
-                                                        <rect key="frame" x="375" y="2" width="375" height="349"/>
+                                                        <rect key="frame" x="375" y="2" width="375" height="350"/>
                                                         <subviews>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cbf-3I-MTe">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Z2i-r5-UzL">
                                                                     <size key="itemSize" width="50" height="50"/>
@@ -1505,10 +1505,10 @@
                                                                 </connections>
                                                             </collectionView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2Z-6i-dtI">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="EkC-7E-d6Q">
-                                                                        <rect key="frame" x="160" y="159" width="55" height="31"/>
+                                                                        <rect key="frame" x="160" y="159.5" width="55" height="31"/>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1536,10 +1536,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Es8-MZ-PJD" userLabel="risk actives">
-                                                        <rect key="frame" x="750" y="2" width="375" height="349"/>
+                                                        <rect key="frame" x="750" y="2" width="375" height="350"/>
                                                         <subviews>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wWY-WA-ket">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4mY-TZ-MgH">
                                                                     <size key="itemSize" width="50" height="50"/>
@@ -1641,10 +1641,10 @@
                                                                 </connections>
                                                             </collectionView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V19-Lc-7wm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Nid-av-JHO">
-                                                                        <rect key="frame" x="160" y="159" width="55" height="31"/>
+                                                                        <rect key="frame" x="160" y="159.5" width="55" height="31"/>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1711,25 +1711,12 @@
                                     <constraint firstItem="OIL-Sd-kJg" firstAttribute="leading" secondItem="DLF-Af-F6p" secondAttribute="leading" id="zrw-9J-dHT"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rjC-iC-M0Y">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rjC-iC-M0Y" userLabel="bottom bar">
                                 <rect key="frame" x="0.0" y="583" width="375" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YsC-qJ-N58">
                                         <rect key="frame" x="16" y="9" width="16" height="22"/>
                                         <state key="normal" image="info-icon"/>
-                                    </button>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioQ-2O-oOH">
-                                        <rect key="frame" x="163.5" y="5" width="48" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="v7I-LI-owo"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                        <state key="normal" title="Готово">
-                                            <color key="titleColor" red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didTapEditDoneButton:" destination="527-2C-xUs" eventType="touchUpInside" id="nrm-g9-JXe"/>
-                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xou-4C-uul">
                                         <rect key="frame" x="187.5" y="20" width="0.0" height="0.0"/>
@@ -1756,8 +1743,6 @@
                                     <constraint firstAttribute="trailing" secondItem="zRh-zQ-jH3" secondAttribute="trailing" constant="25" id="2wM-WJ-HzJ"/>
                                     <constraint firstItem="YsC-qJ-N58" firstAttribute="leading" secondItem="rjC-iC-M0Y" secondAttribute="leading" constant="16" id="8mZ-xS-CIW"/>
                                     <constraint firstAttribute="height" constant="40" id="HAR-vA-kJb"/>
-                                    <constraint firstItem="ioQ-2O-oOH" firstAttribute="centerX" secondItem="rjC-iC-M0Y" secondAttribute="centerX" id="K4F-O5-Lu0"/>
-                                    <constraint firstItem="ioQ-2O-oOH" firstAttribute="centerY" secondItem="rjC-iC-M0Y" secondAttribute="centerY" id="RhB-28-QVr"/>
                                     <constraint firstItem="xou-4C-uul" firstAttribute="centerX" secondItem="rjC-iC-M0Y" secondAttribute="centerX" id="YkL-4c-PsU"/>
                                     <constraint firstItem="zRh-zQ-jH3" firstAttribute="top" secondItem="rjC-iC-M0Y" secondAttribute="top" constant="-32" id="qel-67-ksu"/>
                                     <constraint firstItem="xou-4C-uul" firstAttribute="centerY" secondItem="rjC-iC-M0Y" secondAttribute="centerY" id="rBI-vC-0rm"/>
@@ -1769,6 +1754,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e02-bh-Lrg" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
+                                        <color key="backgroundColor" name="blue 6A92FA"/>
                                         <color key="tintColor" name="text FFFFFF"/>
                                         <state key="normal" image="main-plus"/>
                                         <userDefinedRuntimeAttributes>
@@ -1779,12 +1765,15 @@
                                                 <color key="value" name="delimeter AFC1FF"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="value" name="blue 6A92FA"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapMainButton:" destination="527-2C-xUs" eventType="touchUpInside" id="z4q-Un-qmW"/>
+                                        </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" name="blue 6A92FA"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="2s0-Jf-slC"/>
                                     <constraint firstItem="e02-bh-Lrg" firstAttribute="top" secondItem="u6k-3z-5c2" secondAttribute="top" id="4aF-4L-Xkx"/>
@@ -1829,7 +1818,7 @@
                             <constraint firstItem="Pqg-XA-9pr" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" id="Bvv-iY-Xac"/>
                             <constraint firstItem="DLF-Af-F6p" firstAttribute="top" secondItem="4tN-KR-M2Q" secondAttribute="bottom" id="DnL-HJ-4KZ"/>
                             <constraint firstItem="LG5-vr-cex" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" constant="15" id="FD5-V1-1MW"/>
-                            <constraint firstItem="rjC-iC-M0Y" firstAttribute="top" secondItem="DLF-Af-F6p" secondAttribute="bottom" id="FXc-hE-wRr"/>
+                            <constraint firstItem="rjC-iC-M0Y" firstAttribute="top" secondItem="DLF-Af-F6p" secondAttribute="bottom" constant="-1" id="FXc-hE-wRr"/>
                             <constraint firstItem="rjC-iC-M0Y" firstAttribute="trailing" secondItem="uZP-da-pZ0" secondAttribute="trailing" id="Fgo-BT-qbi"/>
                             <constraint firstItem="rjC-iC-M0Y" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" id="KUj-FY-c5G"/>
                             <constraint firstItem="YLL-t9-8ZH" firstAttribute="centerY" secondItem="Jig-hk-zD0" secondAttribute="centerY" id="Mck-1U-OOb"/>
@@ -1874,7 +1863,6 @@
                     <connections>
                         <outlet property="basketTotalLabel" destination="xou-4C-uul" id="pGm-7V-nGh"/>
                         <outlet property="basketsContentScrollView" destination="OIL-Sd-kJg" id="Vtu-Oe-T0s"/>
-                        <outlet property="editDoneButton" destination="ioQ-2O-oOH" id="s4S-Cb-MpS"/>
                         <outlet property="expenseSourcesActivityIndicator" destination="P2v-Xs-sMl" id="UvY-D9-YHG"/>
                         <outlet property="expenseSourcesAmountLabel" destination="YLL-t9-8ZH" id="bZg-ad-7kv"/>
                         <outlet property="expenseSourcesCollectionView" destination="kEZ-X3-1wh" id="vAV-xo-nR6"/>
@@ -1890,6 +1878,7 @@
                         <outlet property="joyExpenseCategoriesActivityIndicator" destination="I7X-zT-CXv" id="xfy-DI-oc3"/>
                         <outlet property="joyExpenseCategoriesCollectionView" destination="BDY-K1-ch7" id="6ra-cF-TiG"/>
                         <outlet property="joyExpenseCategoriesLoader" destination="Fxg-qF-Lvh" id="8dP-xw-hrZ"/>
+                        <outlet property="mainButton" destination="e02-bh-Lrg" id="HWH-tV-D4o"/>
                         <outlet property="riskActivesActivityIndicator" destination="V19-Lc-7wm" id="drq-Ca-SBk"/>
                         <outlet property="riskActivesCollectionView" destination="wWY-WA-ket" id="hFc-7v-sie"/>
                         <outlet property="riskActivesLoader" destination="Nid-av-JHO" id="HOW-y0-gVb"/>

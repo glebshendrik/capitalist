@@ -34,8 +34,7 @@ extension MainViewController : TitleViewDelegate {
     
     func updateTotalUI(animated: Bool) {
         func update() {
-            basketTotalLabel.attributedText = total
-            basketTotalLabel.alpha = isEditing ? 0.0 : 1.0
+            basketTotalLabel.attributedText = total            
         }
         if animated {
             UIView.transition(with: view,

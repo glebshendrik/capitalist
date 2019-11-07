@@ -62,10 +62,9 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var safeActivesActivityIndicator: UIView!
     @IBOutlet weak var safeActivesLoader: UIImageView!
     
-    @IBOutlet weak var transactionDraggingElement: UIView!
-
-    @IBOutlet weak var editDoneButton: UIButton!
+    @IBOutlet weak var transactionDraggingElement: UIView!    
     @IBOutlet weak var basketTotalLabel: UILabel!
+    @IBOutlet weak var mainButton: HighlightButton!
     
     var titleView: TitleView!
     var transactionController: TransactionController!
@@ -100,7 +99,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         didTapBasket(with: .safe)
     }
     
-    @IBAction func didTapEditDoneButton(_ sender: Any) {
-        setEditing(false, animated: true)
+    @IBAction func didTapMainButton(_ sender: Any) {
+        tapMainButton()
     }
 }

@@ -129,12 +129,16 @@ extension MainViewController {
         updateLongPressureRecognizers()
         updateTotalUI(animated: true)
         setVisibleCells(editing: editing)
-        
-        UIView.animate(withDuration: 0.1, animations: {
-            self.editDoneButton.alpha = editing ? 1.0 : 0.0
-        }) { completed in
-//            self.didCreateExpense()
-        }
+        updateMainButtonUI()
+    }
+    
+    func updateMainButtonUI() {
+        let transform = isEditing ? CGAffineTransform(rotationAngle: CGFloat(3 * Double.pi / 4)) : .identity
+        let color = isEditing ? UIColor.by(.dark2A314B) : UIColor.by(.blue6A92FA)
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
+                self.mainButton.transform = transform
+                self.mainButton.backgroundColor = color
+            })
     }
     
     private func updateLongPressureRecognizers() {

@@ -66,9 +66,11 @@ extension MainViewController {
     }
     
     private func setupMainMenu() {
-        //        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
-        //        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
-//        SideMenuManager.default.menuFadeStatusBar = false
+        SideMenuManager.default.addPanGestureToPresent(toView: self.navigationController!.navigationBar)
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.incomeSourcesCollectionView)
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.expenseSourcesCollectionView)
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.basketsContentScrollView)        
     }
     
     private func setupLoaders() {
@@ -167,23 +169,11 @@ extension MainViewController {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             let verticalSpace = collectionView.bounds.size.height - verticalInset
             let rows = Int(verticalSpace / itemHeight)
-            let fillItemHeight = verticalSpace / CGFloat(rows) + 1
+            let fillItemHeight = verticalSpace / CGFloat(rows)
             layout.itemSize = CGSize(width: itemWidth, height: fillItemHeight)
             layout.sectionInset = UIEdgeInsets(horizontal: horizontalInset, vertical: verticalInset)
-//            layout.minimumInteritemSpacing = horizontalInset
             layout.minimumLineSpacing = 0
-//            layout.columns = columns
-//            layout.rows = Int(collectionView.bounds.size.height / layout.itemSize.height)
-//            layout.edgeInsets = UIEdgeInsets(horizontal: horizontalInset,
-//                                             vertical: verticalInset)
         }
-//        if let layout = collectionView.collectionViewLayout as? PagedCollectionViewLayout {
-//            layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-//            layout.columns = columns
-//            layout.rows = Int(collectionView.bounds.size.height / layout.itemSize.height)
-//            layout.edgeInsets = UIEdgeInsets(horizontal: horizontalInset,
-//                                             vertical: verticalInset)
-//        }
     }
     
     private func fillLayout(collectionView: UICollectionView,

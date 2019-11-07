@@ -234,7 +234,7 @@ extension MainViewController : TransactionControllerDelegate {
             
             
             transactionController.dropCandidateCollectionView = intersections?.collectionView
-            let locationInCollectionView = gesture.location(in: intersections?.collectionView)
+            let locationInCollectionView = gesture.location(in: intersections?.collectionView.superview)
             let direction = scrollDirection(of: transactionController.dropCandidateCollectionView)
             transactionController.updateWaitingEdge(at: locationInView,
                                                     in: self.view,

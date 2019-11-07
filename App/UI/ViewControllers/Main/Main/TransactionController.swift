@@ -125,7 +125,7 @@ class TransactionController {
         if direction == .horizontal && location.x > (view.frame.size.width - 50) {
             return .right
         }
-        if direction == .vertical && locationInCollectionView.y < 50 {
+        if direction == .vertical && locationInCollectionView.y < 100 {
             return .top
         }
         if let collectionView = dropCandidateCollectionView,
@@ -181,7 +181,7 @@ class TransactionController {
     }
     
     private func changeWaitingPageVertical(edge: UIRectEdge, collectionView: UICollectionView) {
-        var offsetDiff = collectionView.frame.size.width
+        var offsetDiff = collectionView.frame.size.height
         offsetDiff = edge == .bottom ? offsetDiff : -offsetDiff
 
         var offset = collectionView.contentOffset.y + offsetDiff
