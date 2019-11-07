@@ -67,8 +67,7 @@ class MainViewModel {
     }
     
     var basketTotalTitle: String {
-        guard let basketType = basketsViewModel.selectedBasketType else { return "" }
-        switch basketType {
+        switch basketsViewModel.selectedBasketType {
         case .safe:
             return "Сумма сбережений: "
         case .risk:
@@ -78,9 +77,8 @@ class MainViewModel {
         }
     }
     
-    var basketTotal: String {
-        guard let basketType = basketsViewModel.selectedBasketType else { return "" }
-        switch basketType {
+    var basketTotal: String {        
+        switch basketsViewModel.selectedBasketType {
         case .safe:
             return budget?.safeActivesAmountRounded ?? ""
         case .risk:

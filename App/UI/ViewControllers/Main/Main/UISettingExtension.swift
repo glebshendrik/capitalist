@@ -50,6 +50,8 @@ extension MainViewController {
         
         safeActivesCollectionView.delegate = self
         safeActivesCollectionView.dataSource = self
+        
+        basketsContentScrollView.delegate = self
     }
     
     private func setupNavigationBar() {

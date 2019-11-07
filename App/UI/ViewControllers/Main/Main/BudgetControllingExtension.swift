@@ -21,7 +21,6 @@ extension MainViewController : TitleViewDelegate {
     }
     
     func updateBudgetUI() {
-        
         UIView.transition(with: view,
                           duration: 0.1,
                           options: .transitionCrossDissolve,
@@ -33,14 +32,22 @@ extension MainViewController : TitleViewDelegate {
         })
     }
     
-    func updateTotalUI() {
-        UIView.transition(with: view,
-                          duration: 0.1,
-                          options: .transitionCrossDissolve,
-                          animations: {
-                                        
-            self.basketTotalLabel.attributedText = self.total
-            self.basketTotalLabel.alpha = self.isEditing ? 0.0 : 1.0
-        })
+    func updateTotalUI(animated: Bool) {
+        func update() {
+            basketTotalLabel.attributedText = total
+            basketTotalLabel.alpha = isEditing ? 0.0 : 1.0
+        }
+        if animated {
+            UIView.transition(with: view,
+                              duration: 0.1,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                                            
+                                update()
+            })
+        }
+        else {
+            update()
+        }
     }
 }

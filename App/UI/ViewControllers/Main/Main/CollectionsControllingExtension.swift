@@ -149,6 +149,11 @@ extension MainViewController {
 }
 
 extension MainViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == basketsContentScrollView else { return }
+        updateBasketTransition()
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
     }
@@ -161,6 +166,8 @@ extension MainViewController {
         guard let collectionView = collectionView else { return }
         collectionView.panGestureRecognizer.isEnabled = false
         collectionView.panGestureRecognizer.isEnabled = true
+        basketsContentScrollView.panGestureRecognizer.isEnabled = false
+        basketsContentScrollView.panGestureRecognizer.isEnabled = true
     }
     
     func scrollDirection(of collectionView: UICollectionView?) -> UICollectionView.ScrollDirection? {

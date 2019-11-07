@@ -127,7 +127,7 @@ extension MainViewController {
         viewModel?.set(editing: editing)
         updateCollectionViews()
         updateLongPressureRecognizers()
-        updateTotalUI()
+        updateTotalUI(animated: true)
         setVisibleCells(editing: editing)
         
         UIView.animate(withDuration: 0.1, animations: {

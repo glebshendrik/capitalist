@@ -39,6 +39,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var safeBasketProgressConstraint: NSLayoutConstraint!
     @IBOutlet weak var riskBasketProgressConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var basketsContentScrollView: UIScrollView!
     @IBOutlet weak var joyBasketSpentLabel: UILabel!
     @IBOutlet weak var joyBasketTitleLabel: UILabel!
     
@@ -47,11 +48,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBOutlet weak var safeBasketSpentLabel: UILabel!
     @IBOutlet weak var safeBasketTitleLabel: UILabel!
-    
-    @IBOutlet weak var joyExpenseCategoriesContainerLeftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var riskActivesContainerLeftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var safeActivesContainerLeftConstraint: NSLayoutConstraint!
-    
+        
     @IBOutlet weak var joyExpenseCategoriesCollectionView: UICollectionView!
     @IBOutlet weak var riskActivesCollectionView: UICollectionView!
     @IBOutlet weak var safeActivesCollectionView: UICollectionView!

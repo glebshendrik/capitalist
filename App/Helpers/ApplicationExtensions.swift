@@ -433,6 +433,32 @@ extension UIImageView {
     }
 }
 
+extension CGFloat {
+    var abs: CGFloat {
+        return CGFloat(fabsf(Float(self)))
+    }
+}
+
+extension UIColor {
+    func toColor(_ color: UIColor, ratio: CGFloat) -> UIColor {
+        let ratio = max(min(ratio, 1.0), 0)
+        switch ratio {
+        case 0: return self
+        case 1: return color
+        default:
+            var (r1, g1, b1, a1): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+            var (r2, g2, b2, a2): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+            guard self.getRed(&r1, green: &g1, blue: &b1, alpha: &a1) else { return self }
+            guard color.getRed(&r2, green: &g2, blue: &b2, alpha: &a2) else { return self }
+
+            return UIColor(red: CGFloat(r1 + (r2 - r1) * ratio),
+                           green: CGFloat(g1 + (g2 - g1) * ratio),
+                           blue: CGFloat(b1 + (b2 - b1) * ratio),
+                           alpha: CGFloat(a1 + (a2 - a1) * ratio))
+        }
+    }
+}
+
 extension UIViewController {
     func set(_ activityIndicator: UIView, hidden: Bool, animated: Bool = true) {
         guard animated else {

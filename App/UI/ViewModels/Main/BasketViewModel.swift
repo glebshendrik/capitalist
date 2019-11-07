@@ -32,21 +32,7 @@ class BasketViewModel {
         return spentCents.moneyCurrencyString(with: currency, shouldRound: true)
     }
     
-    var selected: Bool = false
-    
     init(basket: Basket) {
         self.basket = basket
-    }
-    
-    func append(cents: Int) {        
-        basket.spentCentsAtPeriod += cents
-    }
-    
-    func select() {
-        selected = true
-    }
-    
-    func unselect() {
-        selected = false
-    }
+    }    
 }
