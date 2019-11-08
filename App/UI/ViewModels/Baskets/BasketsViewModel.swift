@@ -62,12 +62,29 @@ class BasketsViewModel {
     }
     
     func updateRatios(joyRatio: CGFloat, safeRatio: CGFloat, riskRatio: CGFloat) {
-        self.joyRatio = joyRatio
-        self.safeRatio = safeRatio
-        self.riskRatio = riskRatio
+        let ratios = normalize(ratios: (joyRatio: joyRatio, safeRatio: safeRatio, riskRatio: riskRatio))
+        self.joyRatio = ratios.joyRatio
+        self.safeRatio = ratios.safeRatio
+        self.riskRatio = ratios.riskRatio
         didUpdateRatios()
     }
-     
+    
+    typealias BasketRatios = (joyRatio: CGFloat, safeRatio: CGFloat, riskRatio: CGFloat)
+    
+    func normalize(ratios: BasketRatios) -> BasketRatios {
+        guard (ratios.joyRatio + ratios.safeRatio + ratios.riskRatio) < 1.0 else { return ratios }
+        switch ratios {
+        case (_, 0, 0):
+            return (joyRatio: 1.0, safeRatio: 0.0, riskRatio: 0.0)
+        case (0, _, 0):
+            return (joyRatio: 0.0, safeRatio: 1.0, riskRatio: 0.0)
+        case (0, 0, _):
+            return (joyRatio: 0.0, safeRatio: 0.0, riskRatio: 1.0)
+        default:
+            return ratios
+        }
+    }
+    
     private func didSelectBasketType() {
         switch selectedBasketType {
         case .joy:

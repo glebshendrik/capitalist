@@ -28,6 +28,14 @@ extension MainViewController {
         collectionView.setContentOffset(CGPoint.zero, animated: true)
     }
     
+    func scrollIncomeSourcesToBeginning() {
+        incomeSourcesCollectionView.setContentOffset(CGPoint.zero, animated: true)
+    }
+    
+    func scrollExpenseSourcesToBeginning() {
+        expenseSourcesCollectionView.setContentOffset(CGPoint.zero, animated: true)
+    }
+    
     func showBasketContent() {
         basketsContentScrollView.setContentOffset(basketContentOffset(by: viewModel.basketsViewModel.selectedBasketType), animated: true)
     }
@@ -41,7 +49,7 @@ extension MainViewController {
         updateBasketsRatiosUI(animated: false)
         updateBasketsTabsUI(animated: false)
         if basketType != viewModel.basketsViewModel.selectedBasketType {
-            updateTotalUI(animated: true)
+            updateTotalUI(animated: false)
         }        
     }
     

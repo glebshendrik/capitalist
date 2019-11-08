@@ -102,4 +102,11 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBAction func didTapMainButton(_ sender: Any) {
         tapMainButton()
     }
+    @IBAction func didTapIncomeSources(_ sender: Any) {
+        scrollIncomeSourcesToBeginning()
+    }
+    
+    @IBAction func didTapExpenseSources(_ sender: Any) {
+        scrollExpenseSourcesToBeginning()
+    }
 }
