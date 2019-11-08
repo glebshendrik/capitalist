@@ -121,17 +121,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обычный" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ta0-0x-WRk">
-                                                    <rect key="frame" x="154.5" y="5" width="66" height="18"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="PLn-72-Mdg"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                                    <color key="textColor" red="0.61960784313725492" green="0.66666666666666663" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oty-xQ-c7D">
-                                                    <rect key="frame" x="155.5" y="31" width="64" height="64"/>
+                                                    <rect key="frame" x="155.5" y="27.5" width="64" height="64"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="2jt-y6-Ut0">
                                                             <rect key="frame" x="18.5" y="18.5" width="27" height="27"/>
@@ -206,12 +197,10 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="oty-xQ-c7D" firstAttribute="top" secondItem="ta0-0x-WRk" secondAttribute="bottom" constant="8" id="7D2-L9-4Lo"/>
-                                                <constraint firstItem="ta0-0x-WRk" firstAttribute="top" secondItem="NuC-kw-XGp" secondAttribute="top" constant="5" id="7WX-Cy-rUi"/>
                                                 <constraint firstAttribute="trailing" secondItem="z3H-TM-A2p" secondAttribute="trailing" id="HRM-c9-fKT"/>
                                                 <constraint firstItem="oty-xQ-c7D" firstAttribute="centerX" secondItem="NuC-kw-XGp" secondAttribute="centerX" id="SHb-6M-pRl"/>
                                                 <constraint firstItem="z3H-TM-A2p" firstAttribute="top" secondItem="vUt-c6-OLW" secondAttribute="bottom" id="W35-Sb-hE6"/>
-                                                <constraint firstItem="ta0-0x-WRk" firstAttribute="centerX" secondItem="NuC-kw-XGp" secondAttribute="centerX" id="Ypx-Uo-yoP"/>
+                                                <constraint firstItem="oty-xQ-c7D" firstAttribute="centerY" secondItem="NuC-kw-XGp" secondAttribute="centerY" id="Wd4-w2-K3W"/>
                                                 <constraint firstAttribute="bottom" secondItem="z3H-TM-A2p" secondAttribute="bottom" id="dok-h5-0E8"/>
                                                 <constraint firstItem="z3H-TM-A2p" firstAttribute="leading" secondItem="NuC-kw-XGp" secondAttribute="leading" id="jjy-cq-neG"/>
                                                 <constraint firstItem="vUt-c6-OLW" firstAttribute="top" secondItem="NuC-kw-XGp" secondAttribute="top" id="lOP-BF-HYo"/>
@@ -404,7 +393,6 @@
                         <barButtonItem key="rightBarButtonItem" title="Сохр." id="Mo5-wn-wfi"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="accountTypeLabel" destination="ta0-0x-WRk" id="Lzm-J1-2tT"/>
                         <outlet property="activityIndicatorCell" destination="grg-Lv-Gox" id="WzZ-Y9-dQZ"/>
                         <outlet property="amountCell" destination="WOH-1k-92o" id="ZWs-uf-13c"/>
                         <outlet property="amountField" destination="giw-lh-GVR" id="5eL-ez-Vct"/>
