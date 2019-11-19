@@ -123,9 +123,9 @@ extension CreditEditViewController : CreditEditTableControllerDelegate {
         viewModel.amount = amount
     }
     
-    func didChange(alreadyOnBalance: Bool) {
-        viewModel.onBalance = alreadyOnBalance
-        updateExpenseSourceUI(reload: true, animated: true)
+    func didChange(shouldRecordOnBalance: Bool) {
+        viewModel.shouldRecordOnBalance = shouldRecordOnBalance
+        updateExpenseSourceUI(reload: true, animated: false)
     }
     
     func didChange(returnAmount: String?) {
@@ -139,7 +139,7 @@ extension CreditEditViewController : CreditEditTableControllerDelegate {
     }
     
     func didChange(monthlyPayment: String?) {
-        viewModel.monthlyPayment = monthlyPayment
+        viewModel.monthlyPayment = monthlyPayment        
     }
 
     func didTapGotAt() {
@@ -253,7 +253,7 @@ extension CreditEditViewController {
     }
     
     func updateMonthlyPaymentTextFieldUI() {
-        tableController.monthlyPaymentField.text = viewModel.monthlyPayment
+        tableController.monthlyPaymentField.text = viewModel.monthlyPaymentToSave
         tableController.monthlyPaymentField.currency = viewModel.selectedCurrency
     }
     
@@ -267,7 +267,7 @@ extension CreditEditViewController {
     }
     
     func updateCurrencyUI() {
-        tableController.currencyField.text = viewModel.selectedCurrency?.name
+        tableController.currencyField.text = viewModel.selectedCurrency?.translatedName
         tableController.currencyField.isEnabled = viewModel.canChangeCurrency
         
         tableController.amountField.currency = viewModel.selectedCurrency
@@ -278,7 +278,7 @@ extension CreditEditViewController {
     
     func updateExpenseSourceUI(reload: Bool = false, animated: Bool = false) {
         tableController.set(cell: tableController.onBalanceCell, hidden: viewModel.onBalanceSwitchHidden, animated: false, reload: false)
-        tableController.onBalanceSwitchField.value = viewModel.onBalance
+        tableController.onBalanceSwitchField.value = viewModel.shouldRecordOnBalance
         
         tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: false, reload: false)
         tableController.expenseSourceField.placeholder = "Кошелек перевода кредита"
@@ -312,11 +312,19 @@ extension CreditEditViewController {
     
     func updateTableUI(animated: Bool = true) {
         tableController.set(cell: tableController.onBalanceCell, hidden: viewModel.onBalanceSwitchHidden, animated: false, reload: false)
+        
         tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.monthlyPaymentCell, hidden: viewModel.monthlyPaymentFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.periodCell, hidden: viewModel.periodFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: false, reload: false)
+        
         tableController.reloadData(animated: animated)
+//        tableController.tableView.beginUpdates()
+        
+//        tableController.tableView.reloadData(with: .automatic)
+        
+//        tableController.tableView.endUpdates()
+        
     }
     
     private func showCreditTypesSheet() {

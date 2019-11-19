@@ -92,6 +92,7 @@ extension TransactionEditViewController {
         
     func updateIsBuyingAssetUI() {
         tableController.isBuyingAssetSwitchField.value = viewModel.isBuyingAsset
+        tableController.isBuyingAssetSwitchField.placeholder = viewModel.buyingAssetsTitle
         tableController.set(cell: tableController.isBuyingAssetCell, hidden: viewModel.isBuyingAssetFieldHidden, animated: false, reload: false)        
     }
     

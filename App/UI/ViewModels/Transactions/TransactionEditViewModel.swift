@@ -65,6 +65,9 @@ class TransactionEditViewModel {
         self.returningBorrow = returningBorrow
         self.source = source
         self.destination = destination
+        if let destination = destination as? ActiveViewModel {
+            self.isBuyingAsset = destination.activeType.buyingAssetsDefault
+        }
     }
         
     func set(transaction: Transaction, source: Transactionable, destination: Transactionable) {

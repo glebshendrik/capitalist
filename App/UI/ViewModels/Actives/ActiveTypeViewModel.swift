@@ -39,6 +39,18 @@ class ActiveTypeViewModel {
         return activeType.deletedAt
     }
     
+    var onlyBuyingAssets: Bool {
+        return activeType.onlyBuyingAssets
+    }
+    
+    var costTitle: String {
+        return activeType.costTitle
+    }
+    
+    var monthlyPaymentTitle: String {
+        return activeType.monthlyPaymentTitle
+    }
+    
     init(activeType: ActiveType) {
         self.activeType = activeType
     }

@@ -51,6 +51,7 @@ extension ActiveEditViewController {
         tableController.nameField.text = viewModel.name
         
         tableController.costField.text = viewModel.cost
+        tableController.costField.placeholder = viewModel.costTitle
         tableController.costField.currency = viewModel.selectedCurrency
         
         tableController.alreadyPaidField.text = viewModel.alreadyPaid
@@ -60,6 +61,7 @@ extension ActiveEditViewController {
         tableController.goalAmountField.currency = viewModel.selectedCurrency
         
         tableController.monthlyPaymentField.text = viewModel.monthlyPayment
+        tableController.monthlyPaymentField.placeholder = viewModel.monthlyPaymentTitle
         tableController.monthlyPaymentField.currency = viewModel.selectedCurrency
         
         tableController.annualPercentField.text = viewModel.annualPercent
@@ -74,7 +76,7 @@ extension ActiveEditViewController {
     }
     
     func updateCurrencyUI() {
-        tableController.currencyField.text = viewModel.selectedCurrency?.name
+        tableController.currencyField.text = viewModel.selectedCurrency?.translatedName
         tableController.currencyField.isEnabled = viewModel.canChangeCurrency
         
         tableController.costField.currency = viewModel.selectedCurrency

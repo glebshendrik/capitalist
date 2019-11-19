@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -393,33 +393,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="uZ4-mn-SkC">
-                                        <rect key="frame" x="0.0" y="408" width="414" height="75"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uZ4-mn-SkC" id="UFZ-Dh-V6a">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIj-t3-tOP" customClass="FormSwitchValueField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="bIj-t3-tOP" secondAttribute="bottom" id="8Ug-ds-P7w"/>
-                                                <constraint firstAttribute="trailing" secondItem="bIj-t3-tOP" secondAttribute="trailing" id="SMv-ne-VeB"/>
-                                                <constraint firstItem="bIj-t3-tOP" firstAttribute="top" secondItem="UFZ-Dh-V6a" secondAttribute="top" id="fw5-7n-mtl"/>
-                                                <constraint firstItem="bIj-t3-tOP" firstAttribute="leading" secondItem="UFZ-Dh-V6a" secondAttribute="leading" id="u6j-97-6gn"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Оставить на балансе"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="included_in_balance_icon"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="YZ5-nP-U5T">
-                                        <rect key="frame" x="0.0" y="483" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="408" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YZ5-nP-U5T" id="xKb-sx-bvg">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -443,6 +418,31 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта"/>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="currency-icon"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="uZ4-mn-SkC">
+                                        <rect key="frame" x="0.0" y="483" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uZ4-mn-SkC" id="UFZ-Dh-V6a">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIj-t3-tOP" customClass="FormSwitchValueField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="bIj-t3-tOP" secondAttribute="bottom" id="8Ug-ds-P7w"/>
+                                                <constraint firstAttribute="trailing" secondItem="bIj-t3-tOP" secondAttribute="trailing" id="SMv-ne-VeB"/>
+                                                <constraint firstItem="bIj-t3-tOP" firstAttribute="top" secondItem="UFZ-Dh-V6a" secondAttribute="top" id="fw5-7n-mtl"/>
+                                                <constraint firstItem="bIj-t3-tOP" firstAttribute="leading" secondItem="UFZ-Dh-V6a" secondAttribute="leading" id="u6j-97-6gn"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Оставить на балансе"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="included_in_balance_icon"/>
                                             </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -476,8 +476,58 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="Xa6-Pg-0eD">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="X90-FI-Xnh">
                                         <rect key="frame" x="0.0" y="633" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X90-FI-Xnh" id="AMc-UN-g7U">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyz-eH-AAW" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="tyz-eH-AAW" secondAttribute="bottom" id="8if-tn-obK"/>
+                                                <constraint firstItem="tyz-eH-AAW" firstAttribute="top" secondItem="AMc-UN-g7U" secondAttribute="top" id="Vwn-dg-hy8"/>
+                                                <constraint firstItem="tyz-eH-AAW" firstAttribute="leading" secondItem="AMc-UN-g7U" secondAttribute="leading" id="WLX-XT-ePC"/>
+                                                <constraint firstAttribute="trailing" secondItem="tyz-eH-AAW" secondAttribute="trailing" id="Whd-LD-DG7"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="planned-amount-icon"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Планирую тратить в месяц"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="117" id="gzA-BI-LSJ">
+                                        <rect key="frame" x="0.0" y="708" width="414" height="117"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gzA-BI-LSJ" id="fuN-wK-T7g">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="117"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5de-Ya-qXQ" customClass="FormSliderField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="117"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="5de-Ya-qXQ" secondAttribute="bottom" id="1Zn-yn-et3"/>
+                                                <constraint firstItem="5de-Ya-qXQ" firstAttribute="leading" secondItem="fuN-wK-T7g" secondAttribute="leading" id="RmA-Wf-Vfj"/>
+                                                <constraint firstItem="5de-Ya-qXQ" firstAttribute="top" secondItem="fuN-wK-T7g" secondAttribute="top" id="lte-Nr-gvu"/>
+                                                <constraint firstAttribute="trailing" secondItem="5de-Ya-qXQ" secondAttribute="trailing" id="moa-sV-9HM"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="planned-amount-icon"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Планирую тратить в месяц"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="Xa6-Pg-0eD">
+                                        <rect key="frame" x="0.0" y="825" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xa6-Pg-0eD" id="smt-pf-cIY">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -506,7 +556,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="dZU-GO-JsV">
-                                        <rect key="frame" x="0.0" y="708" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="900" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dZU-GO-JsV" id="Ygg-Lu-kQi">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -535,7 +585,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="JB7-xQ-VPm">
-                                        <rect key="frame" x="0.0" y="783" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="975" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JB7-xQ-VPm" id="9uR-yL-aWX">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -559,56 +609,6 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта"/>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="currency-icon"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="X90-FI-Xnh">
-                                        <rect key="frame" x="0.0" y="858" width="414" height="75"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X90-FI-Xnh" id="AMc-UN-g7U">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyz-eH-AAW" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="tyz-eH-AAW" secondAttribute="bottom" id="8if-tn-obK"/>
-                                                <constraint firstItem="tyz-eH-AAW" firstAttribute="top" secondItem="AMc-UN-g7U" secondAttribute="top" id="Vwn-dg-hy8"/>
-                                                <constraint firstItem="tyz-eH-AAW" firstAttribute="leading" secondItem="AMc-UN-g7U" secondAttribute="leading" id="WLX-XT-ePC"/>
-                                                <constraint firstAttribute="trailing" secondItem="tyz-eH-AAW" secondAttribute="trailing" id="Whd-LD-DG7"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="planned-amount-icon"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Планирую тратить в месяц"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="117" id="gzA-BI-LSJ">
-                                        <rect key="frame" x="0.0" y="933" width="414" height="117"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gzA-BI-LSJ" id="fuN-wK-T7g">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="117"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5de-Ya-qXQ" customClass="FormSliderField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="117"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="5de-Ya-qXQ" secondAttribute="bottom" id="1Zn-yn-et3"/>
-                                                <constraint firstItem="5de-Ya-qXQ" firstAttribute="leading" secondItem="fuN-wK-T7g" secondAttribute="leading" id="RmA-Wf-Vfj"/>
-                                                <constraint firstItem="5de-Ya-qXQ" firstAttribute="top" secondItem="fuN-wK-T7g" secondAttribute="top" id="lte-Nr-gvu"/>
-                                                <constraint firstAttribute="trailing" secondItem="5de-Ya-qXQ" secondAttribute="trailing" id="moa-sV-9HM"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="planned-amount-icon"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Планирую тратить в месяц"/>
                                             </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

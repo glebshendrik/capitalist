@@ -12,7 +12,7 @@ protocol CreditEditTableControllerDelegate {
     func didTapIcon()
     func didChange(name: String?)
     func didChange(amount: String?)
-    func didChange(alreadyOnBalance: Bool)
+    func didChange(shouldRecordOnBalance: Bool)
     func didChange(returnAmount: String?)
     func didChange(alreadyPaid: String?)
     func didChange(monthlyPayment: String?)
@@ -105,15 +105,15 @@ class CreditEditTableController : FormFieldsTableViewController {
     }
     
     func setupOnBalanceSwitchField() {
-        onBalanceSwitchField.placeholder = "Кредит уже на балансе"
+        onBalanceSwitchField.placeholder = "Зачислить сумму на кошелек"
         onBalanceSwitchField.imageName = "included_in_balance_icon"
-        onBalanceSwitchField.didSwitch { [weak self] alreadyOnBalance in
-            self?.delegate?.didChange(alreadyOnBalance: alreadyOnBalance)
+        onBalanceSwitchField.didSwitch { [weak self] shouldRecordOnBalance in
+            self?.delegate?.didChange(shouldRecordOnBalance: shouldRecordOnBalance)
         }
     }
     
     func setupExpenseSourceField() {
-        expenseSourceField.placeholder = "Кошелек перевода кредита"
+        expenseSourceField.placeholder = "Кошелек"
         expenseSourceField.imageName = IconCategory.expenseSource.defaultIconName
         expenseSourceField.didTap { [weak self] in
             self?.delegate?.didTapExpenseSource()

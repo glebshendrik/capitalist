@@ -138,11 +138,7 @@ struct BorrowCreationForm : Encodable, Validatable {
         if !Validator.isValid(pastDate: borrowedAt) {
             errors[CodingKeys.borrowedAt.rawValue] = "Укажите дату"
         }
-        
-        if !Validator.isValid(futureDate: payday) {
-            errors[CodingKeys.payday.rawValue] = "Укажите дату возврата"
-        }
-        
+                
         if !alreadyOnBalance, let type = type {            
             if type == .debt && !Validator.isValid(present: borrowingTransactionAttributes?.sourceId) {
                 errors[BorrowingTransactionNestedAttributes.CodingKeys.sourceId.rawValue] = "Укажите кошелек"
@@ -193,11 +189,7 @@ struct BorrowUpdatingForm : Encodable, Validatable {
         if !Validator.isValid(pastDate: borrowedAt) {
             errors[CodingKeys.borrowedAt.rawValue] = "Укажите дату"
         }
-        
-        if !Validator.isValid(futureDate: payday) {
-            errors[CodingKeys.payday.rawValue] = "Укажите дату возврата"
-        }
-        
+                
         return errors
     }
 }

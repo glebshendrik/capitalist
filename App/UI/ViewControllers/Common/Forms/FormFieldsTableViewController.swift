@@ -38,7 +38,8 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
     func setupUI() {
         loaderImageView?.showLoader()
         insertAnimation = .top
-        deleteAnimation = .top
+        deleteAnimation = .none
+        reloadAnimation = .none
         tableView.allowsSelection = false
         returnKeyHandler = IQKeyboardReturnKeyHandler(viewController: self)
         returnKeyHandler.delegate = self

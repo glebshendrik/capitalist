@@ -16,6 +16,11 @@ struct ActiveType : Decodable {
     let defaultPlannedIncomeType: ActiveIncomeType?
     let isGoalAmountRequired: Bool
     let isIncomePlannedDefault: Bool
+    let buyingAssetsDefault: Bool
+    let onlyBuyingAssets: Bool
+    let costTitle: String
+    let monthlyPaymentTitle: String
+    let buyingAssetsTitle: String
     let rowOrder: Int
     let deletedAt: Date?
     
@@ -29,5 +34,10 @@ struct ActiveType : Decodable {
         case isIncomePlannedDefault = "is_income_planned_default"
         case rowOrder = "row_order"
         case deletedAt = "deleted_at"
+        case onlyBuyingAssets = "only_buying_assets"
+        case costTitle = "cost_title"
+        case monthlyPaymentTitle = "monthly_payment_title"
+        case buyingAssetsDefault = "buying_assets_default"
+        case buyingAssetsTitle = "buying_assets_title"
     }
 }

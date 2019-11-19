@@ -12,7 +12,6 @@ import SDWebImageSVGCoder
 
 extension ExpenseSourceEditViewController {
     func updateIconUI() {
-        tableController.accountTypeLabel.isHidden = true
         tableController.iconPen.isHidden = viewModel.iconPenHidden
         tableController.iconView.isHidden = viewModel.customIconHidden
         tableController.bankIconView.isHidden = viewModel.bankIconHidden
@@ -32,6 +31,7 @@ extension ExpenseSourceEditViewController {
     
     func updateTableUI(animated: Bool = true) {
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: animated, reload: false)
+        tableController.set(cell: tableController.bankCell, hidden: true, animated: animated, reload: false)
         tableController.reloadData(animated: animated)
     }
     

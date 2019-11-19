@@ -27,6 +27,18 @@ class ExpenseSourceEditViewModel {
     var creditLimit: String? = nil
     var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
     
+    var amountToSave: String {
+        guard   let amount = amount,
+                !amount.isEmpty  else { return "0" }
+        return amount
+    }
+    
+    var creditLimitToSave: String {
+        guard   let creditLimit = creditLimit,
+                !creditLimit.isEmpty  else { return "0" }
+        return creditLimit
+    }
+    
     // Computed
     
     var isNew: Bool {
@@ -72,7 +84,7 @@ class ExpenseSourceEditViewModel {
     }
     
     var canChangeAmount: Bool {
-        return !accountConnected && isNew
+        return !accountConnected
     }
     
     var canChangeCreditLimit: Bool {
@@ -174,8 +186,8 @@ extension ExpenseSourceEditViewModel {
                                          name: name,
                                          iconURL: selectedIconURL,
                                          currency: selectedCurrency?.code,
-                                         amountCents: (amount ?? "0").intMoney(with: selectedCurrency),
-                                         creditLimitCents: (creditLimit ?? "0").intMoney(with: selectedCurrency),
+                                         amountCents: amountToSave.intMoney(with: selectedCurrency),
+                                         creditLimitCents: creditLimitToSave.intMoney(with: selectedCurrency),
                                          accountConnectionAttributes: accountConnectionAttributes)
     }
 }
@@ -194,8 +206,8 @@ extension ExpenseSourceEditViewModel {
         return ExpenseSourceUpdatingForm(id: expenseSource?.id,
                                          name: name,
                                          iconURL: selectedIconURL,
-                                         amountCents: amount?.intMoney(with: selectedCurrency),          
-                                         creditLimitCents: creditLimit?.intMoney(with: selectedCurrency),
+                                         amountCents: amountToSave.intMoney(with: selectedCurrency),          
+                                         creditLimitCents: creditLimitToSave.intMoney(with: selectedCurrency),
                                          accountConnectionAttributes: accountConnectionAttributes)
     }
 }

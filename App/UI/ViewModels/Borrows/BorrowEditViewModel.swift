@@ -49,7 +49,7 @@ class BorrowEditViewModel {
     var borrowedAt: Date = Date()
     var payday: Date? = nil
     var comment: String? = nil
-    var onBalance: Bool = false
+    var shouldRecordOnBalance: Bool = false
     var selectedSource: TransactionSource? = nil
     var selectedDestination: TransactionDestination? = nil
     var selectedExpenseSource: ExpenseSourceViewModel? {
@@ -68,12 +68,33 @@ class BorrowEditViewModel {
         }
     }
     var borrowingTransactionAttributes: BorrowingTransactionNestedAttributes? {
-        guard isNew, !onBalance else { return nil }
-        return BorrowingTransactionNestedAttributes(id: borrowingTransaction?.id,
-                                                    sourceId: selectedSource?.id,
-                                                    sourceType: selectedSource?.type,
-                                                    destinationId: selectedDestination?.id,
-                                                    destinationType: selectedDestination?.type)
+        guard isNew, let type = type else { return nil }
+        
+        if shouldRecordOnBalance {
+            return BorrowingTransactionNestedAttributes(id: borrowingTransaction?.id,
+                                                        sourceId: selectedSource?.id,
+                                                        sourceType: selectedSource?.type,
+                                                        destinationId: selectedDestination?.id,
+                                                        destinationType: selectedDestination?.type)
+        }
+        
+        if type == .loan && !shouldRecordOnBalance {
+            return BorrowingTransactionNestedAttributes(id: nil,
+                                                        sourceId: nil,
+                                                        sourceType: .incomeSource,
+                                                        destinationId: nil,
+                                                        destinationType: .expenseSource)
+        }
+        
+        if type == .debt && !shouldRecordOnBalance {
+            return BorrowingTransactionNestedAttributes(id: nil,
+                                                        sourceId: nil,
+                                                        sourceType: .expenseSource,
+                                                        destinationId: nil,
+                                                        destinationType: .expenseCategory)
+        }
+        
+        return nil
     }
     var borrowingTransaction: TransactionViewModel? = nil
     
@@ -101,7 +122,15 @@ class BorrowEditViewModel {
         return type == .debt ? "Кто вам должен" : "Кому вы должны"
     }
     
-    var amountTitle: String? { return "Сумма" }
+    var amountTitle: String? {
+        guard let type = type else { return nil }
+        return type == .debt ? "Сумма долга" : "Сумма займа"
+    }
+    
+    var shouldRecordOnBalanceTitle: String? {
+        guard let type = type else { return nil }
+        return type == .debt ? "Списать сумму с кошелька" : "Зачислить сумму на кошелек"
+    }
     
     var borrowedAtTitle: String? {
         guard let type = type else { return nil }
@@ -109,8 +138,7 @@ class BorrowEditViewModel {
     }
     
     var expenseSourceTitle: String? {
-        guard let type = type else { return nil }
-        return type == .debt ? "С какого кошелька" : "На какой кошелек"
+        return "Кошелек"
     }
     
     var returnTitle: String? {
@@ -149,7 +177,7 @@ class BorrowEditViewModel {
     }
     
     var expenseSourceFieldHidden: Bool {
-        return !isNew || onBalance || selectedCurrency == nil
+        return !isNew || !shouldRecordOnBalance || selectedCurrency == nil
     }
     
     // Permissions
@@ -188,7 +216,7 @@ class BorrowEditViewModel {
         self.borrowedAt = borrow.borrowedAt
         self.payday = borrow.payday
         self.comment = borrow.comment
-        self.onBalance = true
+        self.shouldRecordOnBalance = false
     }
     
     func loadData() -> Promise<Void> {
@@ -313,7 +341,7 @@ extension BorrowEditViewModel {
                                  borrowedAt: borrowedAt,
                                  payday: payday,
                                  comment: comment,
-                                 alreadyOnBalance: onBalance,
+                                 alreadyOnBalance: !shouldRecordOnBalance,
                                  borrowingTransactionAttributes: borrowingTransactionAttributes)
     }
 }

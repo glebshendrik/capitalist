@@ -59,6 +59,10 @@ extension TransactionEditViewModel {
         guard let gotAt = gotAt else { return "Выбрать дату" }
         return gotAt.dateTimeString(ofStyle: .short)
     }
+    
+    var buyingAssetsTitle: String? {
+        return (destination as? ActiveViewModel)?.activeType.buyingAssetsTitle
+    }
 }
 
 extension TransactionEditViewModel {
@@ -116,7 +120,12 @@ extension TransactionEditViewModel {
                 let transactionType = transactionType,
                 let destination = destination else { return true }
         
-        return transactionType != .expense || destination.type != .active
+        var onlyBuyingAssets = false
+        if let destination = destination as? ActiveViewModel {
+            onlyBuyingAssets = destination.activeType.onlyBuyingAssets
+        }
+        
+        return transactionType != .expense || destination.type != .active || onlyBuyingAssets
     }
     
     var removeButtonHidden: Bool {

@@ -37,6 +37,16 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FA8AB9C0237D9BC400DDD54C"
+               BuildableName = "Three Baskets UI Tests.xctest"
+               BlueprintName = "Three Baskets UI Tests"
+               ReferencedContainer = "container:Three Baskets.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

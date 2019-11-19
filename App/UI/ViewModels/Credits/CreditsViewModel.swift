@@ -27,7 +27,7 @@ class CreditsViewModel {
                     creditsCoordinator.indexCredits()
                 }.get { credits in
                     self.creditViewModels = credits.map { CreditViewModel(credit: $0)}
-                }.asVoid()
+                }.asVoid()                
     }
         
     func creditViewModel(at indexPath: IndexPath) -> CreditViewModel? {

@@ -38,6 +38,11 @@ class ActiveEditViewModel {
             alreadyPaid = cost
         }
     }
+    var costToSave: String {
+        guard   let cost = cost,
+                !cost.isEmpty  else { return "0" }
+        return cost
+    }
     var goal: String? = nil
     var alreadyPaid: String? = nil
     var monthlyPayment: String? = nil
@@ -64,6 +69,10 @@ class ActiveEditViewModel {
     }
             
     var title: String { return isNew ? "Новый актив" : "Актив" }
+    
+    var costTitle: String { return selectedActiveType?.costTitle ?? "Стоимость актива" }
+    
+    var monthlyPaymentTitle: String { return selectedActiveType?.monthlyPaymentTitle ?? "Планирую инвестировать в месяц" }
         
     var iconDefaultImageName: String { return basketType.iconCategory.defaultIconName }
         
@@ -74,7 +83,7 @@ class ActiveEditViewModel {
     }
     
     var alreadyPaidFieldHidden: Bool {
-        return !isNew
+        return !isNew || (selectedActiveType != nil && selectedActiveType!.onlyBuyingAssets)
     }
     
     var activeIncomeTypeFieldHidden: Bool {
@@ -202,7 +211,7 @@ extension ActiveEditViewModel {
                                   name: name,
                                   iconURL: selectedIconURL,
                                   currency: selectedCurrency?.code,
-                                  costCents: (cost ?? "0").intMoney(with: selectedCurrency),
+                                  costCents: costToSave.intMoney(with: selectedCurrency),
                                   monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
                                   annualIncomePercent: annualPercent?.intPercent(),
                                   monthlyPlannedIncomeCents: monthlyPlannedIncome?.intMoney(with: selectedCurrency),
@@ -241,7 +250,7 @@ extension ActiveEditViewModel {
         return ActiveUpdatingForm(id: active?.id,
                                   name: name,
                                   iconURL: selectedIconURL,
-                                  costCents: cost?.intMoney(with: selectedCurrency),
+                                  costCents: costToSave.intMoney(with: selectedCurrency),
                                   monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
                                   annualIncomePercent: annualPercent?.intPercent(),
                                   monthlyPlannedIncomeCents: monthlyPlannedIncome?.intMoney(with: selectedCurrency),

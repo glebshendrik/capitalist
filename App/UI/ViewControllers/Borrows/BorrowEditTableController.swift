@@ -12,7 +12,7 @@ protocol BorrowEditTableControllerDelegate {
     func didTapIcon()
     func didChange(name: String?)
     func didChange(amount: String?)
-    func didChange(alreadyOnBalance: Bool)
+    func didChange(shouldRecordOnBalance: Bool)
     func didChange(comment: String?)
     func didTapCurrency()
     func didTapBorrowedAt()
@@ -83,6 +83,22 @@ class BorrowEditTableController : FormFieldsTableViewController {
         }
     }
     
+    func setupOnBalanceSwitchField() {
+        onBalanceSwitchField.placeholder = "Списать сумму с кошелька"
+        onBalanceSwitchField.imageName = "included_in_balance_icon"
+        onBalanceSwitchField.didSwitch { [weak self] shouldRecordOnBalance in
+            self?.delegate?.didChange(shouldRecordOnBalance: shouldRecordOnBalance)
+        }
+    }
+    
+    func setupExpenseSourceField() {
+        expenseSourceField.placeholder = "Кошелек"
+        expenseSourceField.imageName = IconCategory.expenseSource.defaultIconName
+        expenseSourceField.didTap { [weak self] in
+            self?.delegate?.didTapExpenseSource()
+        }
+    }
+    
     func setupBorrowedAtField() {
         borrowedAtField.placeholder = "Дата займа"
         borrowedAtField.imageName = "calendar-icon"
@@ -96,22 +112,6 @@ class BorrowEditTableController : FormFieldsTableViewController {
         paydayField.imageName = "calendar-icon"
         paydayField.didTap { [weak self] in
             self?.delegate?.didTapPayday()
-        }
-    }
-    
-    func setupOnBalanceSwitchField() {
-        onBalanceSwitchField.placeholder = "Уже на балансе"
-        onBalanceSwitchField.imageName = "included_in_balance_icon"
-        onBalanceSwitchField.didSwitch { [weak self] alreadyOnBalance in
-            self?.delegate?.didChange(alreadyOnBalance: alreadyOnBalance)
-        }
-    }
-    
-    func setupExpenseSourceField() {
-        expenseSourceField.placeholder = "Кошелек"
-        expenseSourceField.imageName = IconCategory.expenseSource.defaultIconName
-        expenseSourceField.didTap { [weak self] in
-            self?.delegate?.didTapExpenseSource()
         }
     }
     

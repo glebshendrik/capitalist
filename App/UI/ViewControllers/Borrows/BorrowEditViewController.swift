@@ -77,6 +77,7 @@ class BorrowEditViewController : FormTransactionsDependableEditViewController {
         updateTextFieldsUI()
         updateCurrencyUI()
         updateDatesUI()
+        updateInBalanceUI()
         updateExpenseSourceUI()
         updateReturnButtonUI()
         updateRemoveButtonUI(reload: true, animated: true)
@@ -113,7 +114,7 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
                                                date: viewModel.borrowedAt,
                                                minDate: nil,
                                                maxDate: Date(),
-                                               mode: .dateAndTime), animated: true)
+                                               mode: .date), animated: true)
     }
     
     func didTapPayday() {
@@ -151,9 +152,9 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
         viewModel.amount = amount
     }
     
-    func didChange(alreadyOnBalance: Bool) {
-        viewModel.onBalance = alreadyOnBalance
-        updateExpenseSourceUI(reload: true, animated: true)
+    func didChange(shouldRecordOnBalance: Bool) {
+        viewModel.shouldRecordOnBalance = shouldRecordOnBalance
+        updateExpenseSourceUI(reload: true, animated: false)
     }
     
     func didChange(comment: String?) {
@@ -248,23 +249,20 @@ extension BorrowEditViewController {
         tableController.commentView.text = viewModel.comment ?? ""
     }
     
-    func updateDatesUI() {
-        tableController.borrowedAtField.text = viewModel.borrowedAtFormatted
-        tableController.borrowedAtField.placeholder = viewModel.borrowedAtTitle
-        
-        tableController.paydayField.text = viewModel.paydayFormatted
-        tableController.paydayField.placeholder = "Дата возврата"
-    }
-    
     func updateCurrencyUI() {
-        tableController.currencyField.text = viewModel.selectedCurrency?.name
+        tableController.currencyField.text = viewModel.selectedCurrency?.translatedName
         tableController.currencyField.isEnabled = viewModel.canChangeCurrency
         tableController.amountField.currency = viewModel.selectedCurrency
     }
     
+    func updateInBalanceUI() {
+        tableController.onBalanceSwitchField.placeholder = viewModel.shouldRecordOnBalanceTitle
+        tableController.onBalanceSwitchField.value = viewModel.shouldRecordOnBalance
+    }
+    
     func updateExpenseSourceUI(reload: Bool = false, animated: Bool = false) {
         tableController.set(cell: tableController.onBalanceCell, hidden: viewModel.onBalanceSwitchHidden, animated: false, reload: false)
-        tableController.onBalanceSwitchField.value = viewModel.onBalance
+        tableController.onBalanceSwitchField.value = viewModel.shouldRecordOnBalance
         
         tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: false, reload: false)
         tableController.expenseSourceField.placeholder = viewModel.expenseSourceTitle
@@ -275,6 +273,14 @@ extension BorrowEditViewController {
         if reload {
             tableController.reloadData(animated: animated)
         }
+    }
+    
+    func updateDatesUI() {
+        tableController.borrowedAtField.text = viewModel.borrowedAtFormatted
+        tableController.borrowedAtField.placeholder = viewModel.borrowedAtTitle
+        
+        tableController.paydayField.text = viewModel.paydayFormatted
+        tableController.paydayField.placeholder = "Дата возврата"
     }
     
     func updateReturnButtonUI(reload: Bool = false, animated: Bool = false) {

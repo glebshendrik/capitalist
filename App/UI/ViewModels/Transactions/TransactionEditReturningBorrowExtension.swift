@@ -72,6 +72,10 @@ extension TransactionEditViewModel {
                     } else {
                         return self.expenseSourcesCoordinator.show(by: borrowingTransaction.destinationId)
                     }
+                }.then { expenseSource in
+                    return expenseSource.isVirtual
+                        ? self.expenseSourcesCoordinator.first(currency: expenseSource.currency.code, isVirtual: false)
+                        : Promise.value(expenseSource)
                 }.map { expenseSource in
                     return ExpenseSourceViewModel(expenseSource: expenseSource)
                 }

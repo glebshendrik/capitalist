@@ -28,6 +28,7 @@ struct CreditType : Decodable {
     let unitsInSuperUnit: Int?
     let rowOrder: Int
     let deletedAt: Date?
+    let isDefault: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -43,5 +44,6 @@ struct CreditType : Decodable {
         case unitsInSuperUnit = "units_in_super_unit"
         case rowOrder = "row_order"
         case deletedAt = "deleted_at"
+        case isDefault = "is_default"
     }
 }

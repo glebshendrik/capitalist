@@ -33,8 +33,8 @@ class ActiveEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!
     @IBOutlet weak var costField: FormMoneyTextField!
-    @IBOutlet weak var alreadyPaidField: FormMoneyTextField!
     @IBOutlet weak var goalAmountField: FormMoneyTextField!
+    @IBOutlet weak var alreadyPaidField: FormMoneyTextField!    
     @IBOutlet weak var monthlyPaymentField: FormMoneyTextField!
     @IBOutlet weak var plannedIncomeSwitchField: FormSwitchValueField!
     @IBOutlet weak var activeIncomeTypeField: FormTapField!

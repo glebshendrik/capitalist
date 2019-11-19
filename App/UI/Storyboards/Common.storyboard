@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -53,7 +53,7 @@
                                                             <rect key="frame" x="5" y="5" width="54" height="54"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-icon" translatesAutoresizingMaskIntoConstraints="NO" id="cUm-GL-AQZ">
-                                                                    <rect key="frame" x="14.5" y="16" width="25" height="22"/>
+                                                                    <rect key="frame" x="14.5" y="14.5" width="25" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="pH4-XB-aLJ"/>
                                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="25" id="xux-KJ-aS0"/>
@@ -119,7 +119,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="gDk-1J-QyI">
-                                        <rect key="frame" x="160" y="318" width="55" height="31"/>
+                                        <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -266,7 +266,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfZ-l3-ICh">
-                                        <rect key="frame" x="160" y="318" width="55" height="31"/>
+                                        <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -327,7 +327,7 @@
                                 <rect key="frame" x="0.0" y="233.5" width="375" height="433.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pull-down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Sin-Ne-0RR">
-                                        <rect key="frame" x="175.5" y="10" width="24" height="7.5"/>
+                                        <rect key="frame" x="163.5" y="10" width="48" height="15"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="dark 333D5B"/>
@@ -365,10 +365,10 @@
             </objects>
             <point key="canvasLocation" x="-2724" y="2500"/>
         </scene>
-        <!--View Controller-->
+        <!--Entity Info View Controller-->
         <scene sceneID="TTd-bN-gi3">
             <objects>
-                <viewController id="NR8-6g-hiD" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EntityInfoViewController" id="NR8-6g-hiD" customClass="EntityInfoViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fdg-iD-l0x">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -378,7 +378,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Q9x-hN-sNf">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IconInfoTableViewCell" id="Q9x-hN-sNf" customClass="IconInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="96.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q9x-hN-sNf" id="Lqj-Cc-Y8h">
@@ -389,7 +389,7 @@
                                                     <rect key="frame" x="155.5" y="16" width="64" height="64.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="kuk-Er-atF">
-                                                            <rect key="frame" x="18.5" y="20.5" width="27" height="24"/>
+                                                            <rect key="frame" x="18.5" y="19" width="27" height="27"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="27" id="3Or-qy-TyK"/>
@@ -405,7 +405,7 @@
                                                             </constraints>
                                                         </view>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-edit-pencil" translatesAutoresizingMaskIntoConstraints="NO" id="2Ce-nC-XkR">
-                                                            <rect key="frame" x="27.5" y="49.5" width="9" height="9"/>
+                                                            <rect key="frame" x="23" y="40.5" width="18" height="18"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.35686274509999999" green="0.52549019610000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -447,6 +447,9 @@
                                                             <color key="value" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapIcon:" destination="Q9x-hN-sNf" eventType="touchUpInside" id="YeK-oB-ZhZ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -462,8 +465,14 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="iconBackgroundView" destination="SDN-mI-bYJ" id="Sa5-lj-yLi"/>
+                                            <outlet property="pencilImageView" destination="2Ce-nC-XkR" id="e4L-2E-J7c"/>
+                                            <outlet property="rasterImageView" destination="kuk-Er-atF" id="0nU-ve-7cP"/>
+                                            <outlet property="vectorImageView" destination="Lp2-Tr-YLd" id="T3k-53-azu"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="aXZ-1q-adp">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BasicInfoTableViewCell" id="aXZ-1q-adp" customClass="BasicInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="124.5" width="375" height="88.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aXZ-1q-adp" id="RGf-rA-cHF">
@@ -495,37 +504,44 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="gFk-aK-a1i" id="8cy-N1-rZJ"/>
+                                            <outlet property="valueLabel" destination="WpU-hs-j2T" id="hNv-vV-5ZS"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="V3x-hH-SrZ">
-                                        <rect key="frame" x="0.0" y="213" width="375" height="103"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReminderInfoTableViewCell" id="V3x-hH-SrZ" customClass="ReminderInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="213" width="375" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V3x-hH-SrZ" id="SRq-6n-jEb">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="103"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akB-TD-8N6">
-                                                    <rect key="frame" x="16" y="8" width="343" height="22.5"/>
+                                                    <rect key="frame" x="16" y="8" width="343" height="32.5"/>
                                                     <color key="tintColor" name="text FFFFFF"/>
                                                     <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="-8" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-5" maxY="0.0"/>
                                                     <state key="normal" title="Создать напоминание" image="bell-icon">
                                                         <color key="titleColor" name="text FFFFFF"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="didTapButton:" destination="V3x-hH-SrZ" eventType="touchUpInside" id="CMg-BP-2p8"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o1z-yw-33j">
-                                                    <rect key="frame" x="41" y="36.5" width="318" height="15.5"/>
+                                                    <rect key="frame" x="41" y="46.5" width="318" height="15.5"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                                     <color key="textColor" name="text 9EAACC"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGG-5Z-kCj">
-                                                    <rect key="frame" x="41" y="58" width="318" height="15.5"/>
+                                                    <rect key="frame" x="41" y="68" width="318" height="15.5"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                                     <color key="textColor" name="text 9EAACC"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIf-fx-0Pf">
-                                                    <rect key="frame" x="41" y="79.5" width="318" height="15.5"/>
+                                                    <rect key="frame" x="41" y="89.5" width="318" height="15.5"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                                     <color key="textColor" name="text 9EAACC"/>
                                                     <nil key="highlightedColor"/>
@@ -549,9 +565,15 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="button" destination="akB-TD-8N6" id="CNN-FO-lJY"/>
+                                            <outlet property="messageLabel" destination="GIf-fx-0Pf" id="o8x-Fx-RM3"/>
+                                            <outlet property="nextOccurenceLabel" destination="o1z-yw-33j" id="MTi-nC-PZ6"/>
+                                            <outlet property="recurrenceLabel" destination="uGG-5Z-kCj" id="RAZ-9Y-bwl"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="SBL-XI-Ml6">
-                                        <rect key="frame" x="0.0" y="316" width="375" height="50.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SwitchInfoTableViewCell" id="SBL-XI-Ml6" customClass="SwitchInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="326" width="375" height="50.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SBL-XI-Ml6" id="6bl-Cj-pYn">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
@@ -564,11 +586,17 @@
                                                     <state key="normal" title="Создать напоминание">
                                                         <color key="titleColor" name="text FFFFFF"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="didTapButton:" destination="SBL-XI-Ml6" eventType="touchUpInside" id="qxd-Xc-wZz"/>
+                                                    </connections>
                                                 </button>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E73-lS-xrq">
                                                     <rect key="frame" x="310" y="10" width="51" height="31"/>
                                                     <color key="onTintColor" name="blue 6B93FB"/>
                                                     <color key="thumbTintColor" name="text FFFFFF"/>
+                                                    <connections>
+                                                        <action selector="didSwitch:" destination="SBL-XI-Ml6" eventType="valueChanged" id="FgR-sb-9eR"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -583,8 +611,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fCK-07-K85">
-                                        <rect key="frame" x="0.0" y="366.5" width="375" height="56.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ButtonInfoTableViewCell" id="fCK-07-K85" customClass="ButtonInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="376.5" width="375" height="56.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fCK-07-K85" id="FUt-aR-mRf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="56.5"/>
@@ -609,6 +637,9 @@
                                                             <real key="value" value="20"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapButton:" destination="fCK-07-K85" eventType="touchUpInside" id="ldq-yb-5Sg"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -619,19 +650,22 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="button" destination="bab-u5-vL6" id="o7b-7z-1Ld"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionsHeaderTableViewCell" id="8EI-VI-NM3" customClass="TransactionsHeaderTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="423" width="375" height="78.5"/>
+                                        <rect key="frame" x="0.0" y="433" width="375" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8EI-VI-NM3" id="H3j-ki-f4c">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="78.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="78"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rbP-lh-Ck1">
-                                                    <rect key="frame" x="0.0" y="12" width="375" height="54.5"/>
+                                                    <rect key="frame" x="0.0" y="12" width="375" height="54"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ПОСЛЕДНИЕ ОПЕРАЦИИ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ugn-AM-ssu">
-                                                            <rect key="frame" x="16" y="18" width="343" height="18.5"/>
+                                                            <rect key="frame" x="16" y="18" width="343" height="18"/>
                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                             <color key="textColor" name="text 9EAACC"/>
                                                             <nil key="highlightedColor"/>
@@ -656,7 +690,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionTableViewCell" id="ctE-lo-fnT" customClass="TransactionTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="501.5" width="375" height="68.5"/>
+                                        <rect key="frame" x="0.0" y="511" width="375" height="68.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ctE-lo-fnT" id="grt-2O-rgV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="68.5"/>
@@ -666,7 +700,7 @@
                                                     <rect key="frame" x="16" y="12" width="44" height="44"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="8XK-Ee-ETk">
-                                                            <rect key="frame" x="9.5" y="10" width="25" height="24"/>
+                                                            <rect key="frame" x="9.5" y="9.5" width="25" height="25"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="25" id="k7T-d5-p0w"/>
@@ -785,6 +819,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="clC-1Y-Vb5"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="mKk-2A-hKx" id="UCf-Rx-MOX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y9x-Ea-lVv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

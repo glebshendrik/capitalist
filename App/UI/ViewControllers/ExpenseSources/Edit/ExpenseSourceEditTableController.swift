@@ -25,8 +25,6 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var amountField: FormMoneyTextField!
     @IBOutlet weak var creditLimitField: FormMoneyTextField!
 
-    @IBOutlet weak var accountTypeLabel: UILabel!
-
     @IBOutlet weak var iconContainer: UIView!
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var bankIconView: SVGKFastImageView!

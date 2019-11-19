@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -292,16 +292,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-5-overlay" translatesAutoresizingMaskIntoConstraints="NO" id="MZ7-Xc-UCU">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-7-overlay" translatesAutoresizingMaskIntoConstraints="NO" id="MZ7-Xc-UCU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-5" translatesAutoresizingMaskIntoConstraints="NO" id="n0L-T5-xpq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-7" translatesAutoresizingMaskIntoConstraints="NO" id="n0L-T5-xpq">
                                 <rect key="frame" x="0.0" y="95" width="375" height="522"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="L2y-eX-fRL">
                                 <rect key="frame" x="32" y="16" width="311" height="196"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Удовольствие">
+                                    <fragment content="Расходы">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <font key="NSFont" size="24" name="Rubik-Regular"/>
@@ -351,7 +351,7 @@
                                             <real key="NSStrokeWidth" value="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content=": еда, жильё, покупки, транспорт, развлечения и прочее. Саморазвитие, материальные цели и благотворительность — тоже здесь.">
+                                    <fragment content=": еда, жильё, покупки, транспорт, развлечения и прочее. Саморазвитие, кредиты и благотворительность — тоже здесь.">
                                         <attributes>
                                             <color key="NSColor" red="0.8901960784313725" green="0.91764705882352937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="16" name="Rubik-Regular"/>
@@ -386,10 +386,10 @@
             </objects>
             <point key="canvasLocation" x="468" y="752"/>
         </scene>
-        <!--Onboarding Page5 View Controller-->
+        <!--Onboarding Page6 View Controller-->
         <scene sceneID="5Tt-M2-TcD">
             <objects>
-                <viewController storyboardIdentifier="OnboardingPage5ViewController" id="awW-3c-ic8" customClass="OnboardingPage5ViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingPage6ViewController" id="awW-3c-ic8" customClass="OnboardingPage6ViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="czK-Xg-L7z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -403,7 +403,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jLW-ww-zhI">
                                 <rect key="frame" x="32" y="16" width="311" height="196"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Рост">
+                                    <fragment content="Инвестиции">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <font key="NSFont" size="24" name="Rubik-Regular"/>
@@ -469,24 +469,24 @@
             </objects>
             <point key="canvasLocation" x="1140" y="751"/>
         </scene>
-        <!--Onboarding Page6 View Controller-->
+        <!--Onboarding Page5 View Controller-->
         <scene sceneID="xaW-HL-LPu">
             <objects>
-                <viewController storyboardIdentifier="OnboardingPage6ViewController" id="yS6-D4-DeT" customClass="OnboardingPage6ViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingPage5ViewController" id="yS6-D4-DeT" customClass="OnboardingPage5ViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8gO-4R-hHR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-7-overlay" translatesAutoresizingMaskIntoConstraints="NO" id="gTc-9i-MhU">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-5-overlay" translatesAutoresizingMaskIntoConstraints="NO" id="gTc-9i-MhU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-7" translatesAutoresizingMaskIntoConstraints="NO" id="y4X-7a-iXg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="onboarding-5" translatesAutoresizingMaskIntoConstraints="NO" id="y4X-7a-iXg">
                                 <rect key="frame" x="0.0" y="95" width="375" height="522"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vny-dh-oUL">
                                 <rect key="frame" x="32" y="16" width="311" height="233"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Безопасность">
+                                    <fragment content="Сбережения">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <font key="NSFont" size="24" name="Rubik-Regular"/>
@@ -598,7 +598,7 @@
                                             <real key="NSStrokeWidth" value="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Удовольствие: 85% ">
+                                    <fragment content="Расходы: 85% ">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <font key="NSFont" size="16" name="Rubik-Regular"/>
@@ -618,7 +618,7 @@
                                             <real key="NSStrokeWidth" value="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content=" Рост: 10% ">
+                                    <fragment content=" Сбережения: 5% ">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <font key="NSFont" size="16" name="Rubik-Regular"/>
@@ -638,7 +638,7 @@
                                             <real key="NSStrokeWidth" value="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content=" Безопасность: 5%">
+                                    <fragment content=" Инвестиции: 10%">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <font key="NSFont" size="16" name="Rubik-Regular"/>

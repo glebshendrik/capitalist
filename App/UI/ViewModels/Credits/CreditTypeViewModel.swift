@@ -63,6 +63,10 @@ class CreditTypeViewModel {
         return creditType.deletedAt
     }
     
+    var isDefault: Bool {
+        return creditType.isDefault
+    }
+    
     init(creditType: CreditType) {
         self.creditType = creditType
     }

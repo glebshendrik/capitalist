@@ -16,6 +16,7 @@ enum CreditError : Error {
 class CreditEditViewModel {
     let creditsCoordinator: CreditsCoordinatorProtocol
     let accountCoordinator: AccountCoordinatorProtocol
+    let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     
     private var credit: Credit? = nil
     
@@ -38,17 +39,37 @@ class CreditEditViewModel {
     var returnAmount: String? = nil { didSet { updateMonthlyPayment() } }
     var alreadyPaid: String? = nil { didSet { updateMonthlyPayment() } }
     var monthlyPayment: String? = nil
+    var monthlyPaymentCalculated: String? = nil
     var gotAt: Date = Date()
     var period: Int? = nil { didSet { updateMonthlyPayment() } }
     var expenseCategoryId: Int? = nil
     
-    var onBalance: Bool = false
+    var shouldRecordOnBalance: Bool = false
     var selectedDestination: ExpenseSourceViewModel? = nil
     var creditingTransactionAttributes: CreditingTransactionNestedAttributes? {
-        guard isNew, !onBalance else { return nil }
-        return CreditingTransactionNestedAttributes(id: creditingTransaction?.id, destinationId: selectedDestination?.id)
+        guard isNew else { return nil }
+        if shouldRecordOnBalance {
+            return CreditingTransactionNestedAttributes(id: creditingTransaction?.id, destinationId: selectedDestination?.id)
+        }
+        else {
+            return CreditingTransactionNestedAttributes(id: nil, destinationId: nil)
+        }
+        
     }
     var creditingTransaction: TransactionViewModel? = nil
+    
+    var monthlyPaymentToSave: String? {
+        if let monthlyPayment = monthlyPayment, !monthlyPayment.isEmpty {
+            return monthlyPayment
+        }
+        return monthlyPaymentCalculated
+    }
+    
+    var alreadyPaidToSave: String {
+        guard   let alreadyPaid = alreadyPaid,
+                !alreadyPaid.isEmpty  else { return "0" }
+        return alreadyPaid
+    }
     
     var expenseSourceIconURL: URL? { return selectedDestination?.iconURL }
     var expenseSourceIconDefaultImageName: String { return IconCategory.expenseSource.defaultIconName }
@@ -72,7 +93,7 @@ class CreditEditViewModel {
     }
         
     var title: String { return isNew ? "Новый кредит" : "Кредит" }
-        
+    
     var iconDefaultImageName: String { return IconCategory.expenseSourceDebt.defaultIconName }
     
     var minValue: Float {
@@ -93,7 +114,7 @@ class CreditEditViewModel {
     }
     
     var expenseSourceFieldHidden: Bool {
-        return !isNew || onBalance || selectedCurrency == nil
+        return !isNew || !shouldRecordOnBalance || selectedCurrency == nil
     }
     
     var monthlyPaymentFieldHidden: Bool {
@@ -115,9 +136,11 @@ class CreditEditViewModel {
     var canChangeAlreadyPaid: Bool { return isNew }
     
     init(creditsCoordinator: CreditsCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol,
+         expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol) {
         self.creditsCoordinator = creditsCoordinator
         self.accountCoordinator = accountCoordinator
+        self.expenseSourcesCoordinator = expenseSourcesCoordinator
     }
     
     func set(destination: ExpenseSourceViewModel?) {        
@@ -151,7 +174,16 @@ class CreditEditViewModel {
     }
     
     func loadDefaults() -> Promise<Void> {
-        return when(fulfilled: loadDefaultCurrency(), loadCreditTypes()).asVoid()
+        return when(fulfilled: loadCurrencyDefaults(), loadCreditTypes()).asVoid()
+    }
+    
+    func loadCurrencyDefaults() -> Promise<Void> {
+        guard selectedCurrency == nil else { return Promise.value(()) }
+        return  firstly {
+                    loadDefaultCurrency()
+                }.then {
+                    self.loadDefaultExpenseSource()
+                }
     }
     
     func loadDefaultCurrency() -> Promise<Void> {
@@ -162,11 +194,23 @@ class CreditEditViewModel {
                 }
     }
     
+    func loadDefaultExpenseSource() -> Promise<Void> {
+        guard let currency = selectedCurrency?.code, selectedDestination == nil else {
+            return Promise.value(())
+        }
+        return  firstly {
+                    expenseSourcesCoordinator.first(currency: currency, isVirtual: false)
+                }.get { expenseSource in
+                    self.selectedDestination = ExpenseSourceViewModel(expenseSource: expenseSource)
+                }.asVoid()
+    }
+    
     private func loadCreditTypes() -> Promise<[CreditType]> {
         return  firstly {
                     creditsCoordinator.indexCreditTypes()
                 }.get { creditTypes in
                     self.creditTypes = creditTypes.map { CreditTypeViewModel(creditType: $0) }
+                    self.selectedCreditType = self.creditTypes.first { $0.isDefault }
                 }
     }
         
@@ -206,14 +250,14 @@ class CreditEditViewModel {
                 let months = periodInMonths(period: period, unit: creditType.periodUnit),
                 let currency = selectedCurrency,
                 let returnAmountCents = returnAmount?.intMoney(with: selectedCurrency)?.number,
-                let alreadyPaidCents = (alreadyPaid ?? "0").intMoney(with: selectedCurrency)?.number else {
+                let alreadyPaidCents = alreadyPaidToSave.intMoney(with: selectedCurrency)?.number else {
                     
-                    monthlyPayment = nil
+                    monthlyPaymentCalculated = nil
                     return
         }        
         
         let monthlyPaymentCents = returnAmountCents.subtracting(alreadyPaidCents).dividing(by: NSDecimalNumber(integerLiteral: months))
-        monthlyPayment = monthlyPaymentCents.moneyDecimalString(with: currency)
+        monthlyPaymentCalculated = monthlyPaymentCents.moneyDecimalString(with: currency)
     }
     
     func periodInMonths(period: Int?, unit: PeriodUnit) -> Int? {
@@ -247,8 +291,8 @@ extension CreditEditViewModel {
                                   currency: selectedCurrency?.code,
                                   amountCents: amount?.intMoney(with: selectedCurrency),
                                   returnAmountCents: returnAmount?.intMoney(with: selectedCurrency),
-                                  alreadyPaidCents: alreadyPaid?.intMoney(with: selectedCurrency),
-                                  monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
+                                  alreadyPaidCents: alreadyPaidToSave.intMoney(with: selectedCurrency),
+                                  monthlyPaymentCents: monthlyPaymentToSave?.intMoney(with: selectedCurrency),
                                   gotAt: gotAt,
                                   period: period,
                                   reminderAttributes: reminderViewModel.reminderAttributes,
@@ -272,7 +316,7 @@ extension CreditEditViewModel {
                                   iconURL: selectedIconURL,
                                   amountCents: amount?.intMoney(with: selectedCurrency),
                                   returnAmountCents: returnAmount?.intMoney(with: selectedCurrency),
-                                  monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
+                                  monthlyPaymentCents: monthlyPaymentToSave?.intMoney(with: selectedCurrency),
                                   gotAt: gotAt,
                                   period: period,
                                   reminderAttributes: reminderViewModel.reminderAttributes,
