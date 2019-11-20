@@ -22,6 +22,8 @@ struct APIRouteQueryParameters {
             return [ "delete_transactions" : deleteTransactions.string ]
         case .destroyExpenseCategory(_, let deleteTransactions):
             return [ "delete_transactions" : deleteTransactions.string ]
+        case .destroyActive(_, let deleteTransactions):
+            return [ "delete_transactions" : deleteTransactions.string ]
         case .destroyDebt(_, let deleteTransactions):
             return [ "delete_transactions" : deleteTransactions.string ]
         case .destroyLoan(_, let deleteTransactions):
