@@ -9,6 +9,10 @@
 import Foundation
 
 class EntityInfoTransactionsLoadingSection : EntityInfoSection {
+    var id: String {
+        return type.rawValue
+    }
+    
     var isSectionHeaderVisible: Bool { return false }
     var numberOfRows: Int { return 1 }
     var title: String? { return nil }
@@ -16,6 +20,9 @@ class EntityInfoTransactionsLoadingSection : EntityInfoSection {
 }
 
 class EntityInfoTransactionsHeaderSection : EntityInfoSection {
+    var id: String {
+        return type.rawValue
+    }
     var isSectionHeaderVisible: Bool { return true }
     var numberOfRows: Int { return 1 }
     var title: String? { return nil }
@@ -23,6 +30,9 @@ class EntityInfoTransactionsHeaderSection : EntityInfoSection {
 }
 
 class EntityInfoTransactionsSection : EntityInfoSection {
+    var id: String {
+        return type.rawValue + date.toISO()
+    }
     var isSectionHeaderVisible: Bool { return true }
     var numberOfRows: Int { return transactionViewModels.count }
     var title: String? { return date.dateString(ofStyle: .full) }
@@ -39,5 +49,9 @@ class EntityInfoTransactionsSection : EntityInfoSection {
     
     func transactionViewModel(at index: Int) -> TransactionViewModel? {
         return transactionViewModels.item(at: index)
+    }
+    
+    func index(of transactionViewModel: TransactionViewModel) -> Int? {
+        return transactionViewModels.lastIndex { $0.id == transactionViewModel.id }
     }
 }

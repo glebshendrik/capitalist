@@ -8,33 +8,33 @@
 
 import UIKit
 
-protocol ReminderInfoTableViewCellDelegate {
+protocol ReminderInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
     func didTapReminderButton(field: ReminderInfoField?)
 }
 
-class ReminderInfoTableViewCell : UITableViewCell {
+class ReminderInfoTableViewCell : EntityInfoTableViewCell {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var nextOccurenceLabel: UILabel!
     @IBOutlet weak var recurrenceLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     
-    var delegate: ReminderInfoTableViewCellDelegate?
-    
-    var field: ReminderInfoField? {
-        didSet {
-            updateUI()
-        }
+    var reminderDelegate: ReminderInfoTableViewCellDelegate? {
+        return delegate as? ReminderInfoTableViewCellDelegate
     }
-    
-    func updateUI() {        
-        nextOccurenceLabel.text = field?.nextOccurence
-        recurrenceLabel.text = field?.recurrence
-        messageLabel.text = field?.reminderMessage
-        button.setTitle(field?.reminderButtonText, for: .normal)
+
+    var reminderField: ReminderInfoField? {
+        return field as? ReminderInfoField
+    }
+        
+    override func updateUI() {
+        nextOccurenceLabel.text = reminderField?.nextOccurence
+        recurrenceLabel.text = reminderField?.recurrence
+        messageLabel.text = reminderField?.reminderMessage
+        button.setTitle(reminderField?.reminderButtonText, for: .normal)
     }
     
     @IBAction func didTapButton(_ sender: Any) {
-        delegate?.didTapReminderButton(field: field)
+        reminderDelegate?.didTapReminderButton(field: reminderField)
     }
 }
 

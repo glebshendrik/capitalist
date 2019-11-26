@@ -41,6 +41,10 @@ class ExpenseSourceViewModel {
         return creditCents?.moneyCurrencyString(with: currency, shouldRound: true)
     }
     
+    var creditLimit: String? {
+        return expenseSource.creditLimitCents?.moneyCurrencyString(with: currency, shouldRound: true)
+    }
+    
     var currency: Currency {
         return expenseSource.currency
     }

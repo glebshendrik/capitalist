@@ -28,6 +28,10 @@ extension MainViewController {
     func showEditScreen(incomeSource: IncomeSource?) {
         modal(factory.incomeSourceEditViewController(delegate: self, incomeSource: incomeSource))
     }
+    
+    func showIncomeSourceInfoScreen(incomeSource: IncomeSourceViewModel?) {
+        modal(factory.incomeSourceInfoViewController(incomeSource: incomeSource))
+    }
 }
 
 extension MainViewController {
@@ -37,6 +41,10 @@ extension MainViewController {
     
     func showEditScreen(expenseSource: ExpenseSource?) {
         modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource))
+    }
+    
+    func showExpenseSourceInfoScreen(expenseSource: ExpenseSourceViewModel?) {
+        modal(factory.expenseSourceInfoViewController(expenseSource: expenseSource))
     }
 }
 

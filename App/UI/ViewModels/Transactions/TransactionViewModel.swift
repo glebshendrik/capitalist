@@ -47,7 +47,10 @@ class TransactionViewModel {
         return transaction.destinationIconURL
     }
     
-    
+    var iconBackgroundImageName: String? {
+        return basketType?.iconBackgroundName(size: .small)
+    }
+        
 //    var amount: String {
 //        return amountCents.moneyCurrencyString(with: currency, shouldRound: false) ?? ""
 //    }

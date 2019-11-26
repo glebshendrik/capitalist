@@ -46,7 +46,7 @@ struct APIRoutePath {
              .indexExpenseSources(let userId, _),
              .indexUserExpenseCategories(let userId, _),
              .indexBaskets(let userId),
-             .indexTransactions(let userId, _),
+             .indexTransactions(let userId, _, _, _, _, _, _, _, _),
              .indexProviderConnections(let userId, _),
              .indexAccountConnections(let userId, _),
              .indexDebts(let userId),

@@ -10,7 +10,7 @@ import Foundation
 
 struct APIRouteQueryParameters {
     static func queryParameters(for route: APIRoute) -> [String : String] {
-        let params = [String : String]()
+        var params = [String : String]()
         switch route {
         case .indexIcons(let category):
             return [ "category" : category.rawValue ]
@@ -47,9 +47,32 @@ struct APIRouteQueryParameters {
             return [ "no_borrows" : noBorrows.string ]
         case .indexUserExpenseCategories(_, let noBorrows):
             return [ "no_borrows" : noBorrows.string ]
-        case .indexTransactions(_, let type):
-            guard let type = type else { return params }
-            return [ "transaction_type" : type.rawValue ]
+        case .indexTransactions(_, let type, let transactionableId, let transactionableType, let creditId, let borrowId, let borrowType, let count, let lastGotAt):
+            if let type = type {
+                params["transaction_type"] = type.rawValue
+            }
+            if let transactionableId = transactionableId {
+                params["transactionable_id"] = transactionableId.string
+            }
+            if let transactionableType = transactionableType {
+                params["transactionable_type"] = transactionableType.rawValue
+            }
+            if let creditId = creditId {
+                params["credit_id"] = creditId.string
+            }
+            if let borrowId = borrowId {
+                params["borrow_id"] = borrowId.string
+            }
+            if let borrowType = borrowType {
+                params["borrow_type"] = borrowType.rawValue
+            }
+            if let count = count {
+                params["count"] = count.string
+            }
+            if let lastGotAt = lastGotAt {
+                params["last_got_at"] = Formatter.iso8601.string(from: lastGotAt)
+            }
+            return params
         case .indexProviderConnections(_, let providerId):
             return [ "provider_id" : providerId ]
         case .indexAccountConnections(_, let connectionId):

@@ -71,7 +71,7 @@ extension StatisticsViewController {
 }
 
 extension StatisticsViewController {
-    func set(sourceOrDestinationFilter: SourceOrDestinationTransactionFilter) {
+    func set(sourceOrDestinationFilter: SourceOrDestinationTransactionFilter?) {
         viewModel.set(sourceOrDestinationFilter: sourceOrDestinationFilter)
     }
     

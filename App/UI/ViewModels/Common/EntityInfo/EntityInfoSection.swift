@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum EntityInfoSectionType {
+enum EntityInfoSectionType : String {
     case entityInfoFields
     case transactionsLoader
     case transactionsHeader
@@ -16,6 +16,7 @@ enum EntityInfoSectionType {
 }
 
 protocol EntityInfoSection {
+    var id: String { get }
     var isSectionHeaderVisible: Bool { get }
     var numberOfRows: Int { get }
     var title: String? { get }

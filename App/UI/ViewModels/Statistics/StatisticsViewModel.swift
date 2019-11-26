@@ -201,7 +201,8 @@ extension StatisticsViewModel {
         return filtersViewModel.singleSourceOrDestinationFilter
     }
     
-    func set(sourceOrDestinationFilter: SourceOrDestinationTransactionFilter) {
+    func set(sourceOrDestinationFilter: SourceOrDestinationTransactionFilter?) {
+        guard let sourceOrDestinationFilter = sourceOrDestinationFilter else { return }
         func graphType(by filterType: TransactionableType) -> GraphType {
             switch sourceOrDestinationFilter.type {
             case .incomeSource:

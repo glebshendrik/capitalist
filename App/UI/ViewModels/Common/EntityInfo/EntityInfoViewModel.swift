@@ -11,29 +11,56 @@ import PromiseKit
 import SwiftDate
 
 class EntityInfoViewModel {
-    private let transactionsViewModel: TransactionsViewModel
+    private let transactionsCoordinator: TransactionsCoordinatorProtocol
     
     public private(set) var isDataLoading: Bool = false
+            
+    var transactionable: Transactionable? { return nil }
+
+    var transactionViewModels: [TransactionViewModel] = []
+    var transactionsBatchSize: Int = 10
     
     private var sections: [EntityInfoSection] = []
     private var transactionsSections: [EntityInfoTransactionsSection] = []
+    
+    var hasMoreData: Bool = true
+    
+    var title: String? {
+        return transactionable?.name
+    }
     
     var numberOfSections: Int {
         return sections.count
     }
     
-    init(transactionsViewModel: TransactionsViewModel) {
-        self.transactionsViewModel = transactionsViewModel
+    var lastTransaction: TransactionViewModel? {
+        return transactionViewModels.last
+    }
+    
+    init(transactionsCoordinator: TransactionsCoordinatorProtocol) {
+        self.transactionsCoordinator = transactionsCoordinator
     }
     
     func section(at index: Int) -> EntityInfoSection? {
         return sections.item(at: index)
     }
     
+    func save() -> Promise<Void> {
+        return  firstly {
+                    saveEntity()
+                }.then {
+                    self.loadEntity()
+                }
+    }
+    
+    func saveEntity() -> Promise<Void> {
+        return Promise.value(())
+    }
+    
     func loadData() -> Promise<Void> {
         setDataLoading()
         return  firstly {
-                    when(fulfilled: loadEntityFields(), loadTransactions())
+                    when(fulfilled: loadEntity(), loadTransactions())
                 }.ensure {
                     self.isDataLoading = false
                     self.updatePresentationData()
@@ -46,44 +73,79 @@ class EntityInfoViewModel {
     }
     
     func updatePresentationData() {
-        updateEntityInfoFieldsSection()
         updateTransactionsSections()
         updateSections()
     }
     
     private func updateSections() {
-        sections = []
-                
-        if isDataLoading {
-            sections.append(EntityInfoTransactionsLoadingSection())
-        }
-        else if transactionsSections.count > 0 {
-            sections.append(EntityInfoTransactionsHeaderSection())
+        let fieldsSection = EntityInfoFieldsSection(infoFields: entityInfoFields())
+
+        sections = [fieldsSection, EntityInfoTransactionsHeaderSection()]
+        
+//        if isDataLoading {
+//            sections.append(EntityInfoTransactionsLoadingSection())
+//        }
+//        else
+            
+        if transactionsSections.count > 0 {
             sections.append(contentsOf: transactionsSections)
         }
     }
-}
-
-// Entity Fields
-extension EntityInfoViewModel {
-    func updateEntityInfoFieldsSection() {
-        
+    
+    func loadEntity() -> Promise<Void> {
+        return Promise.value(())
     }
     
-    func loadEntityFields() -> Promise<Void> {
-        return Promise.value(())
+    func entityInfoFields() -> [EntityInfoField] {
+        return []
+    }
+    
+    func loadTransactionsBatch(lastGotAt: Date?) -> Promise<[Transaction]> {
+        return transactionsCoordinator.index(transactionableId: transactionable?.id,
+                                             transactionableType: transactionable?.type,
+                                             creditId: nil,
+                                             borrowId: nil,
+                                             borrowType: nil,
+                                             count: transactionsBatchSize,
+                                             lastGotAt: lastGotAt)
+    }
+    
+    func asFilter() -> SourceOrDestinationTransactionFilter? {
+        guard let id = transactionable?.id, let title = transactionable?.name, let type = transactionable?.type else { return nil }
+        return SourceOrDestinationTransactionFilter(id: id, title: title, type: type)
     }
 }
 
 // Transactions
 extension EntityInfoViewModel {
     func loadTransactions() -> Promise<Void> {
-        return transactionsViewModel.loadData()
+        return  firstly {
+                    loadTransactionsBatch(lastGotAt: nil)
+                }.get { transactions in
+                    self.transactionViewModels = transactions.map { TransactionViewModel(transaction: $0) }
+                    self.hasMoreData = transactions.count > 0
+                    self.updateTransactionsSections()
+                }.asVoid()
+    }
+    
+    func loadMoreTransactions() -> Promise<Void> {
+        return  firstly {
+                    loadTransactionsBatch(lastGotAt: transactionViewModels.last?.gotAt)
+                }.get { transactions in
+                    let batch = transactions.map { TransactionViewModel(transaction: $0) }
+                    self.transactionViewModels.append(contentsOf: batch)
+                    self.hasMoreData = transactions.count > 0
+                    self.updatePresentationData()
+                }.asVoid()
     }
     
     func removeTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {
         setDataLoading()
-        return transactionsViewModel.removeTransaction(transactionViewModel: transactionViewModel)
+        return  firstly {
+                    transactionsCoordinator.destroy(by: transactionViewModel.id)
+                }.then {
+                    self.loadData()
+                }
     }
     
     func transactionViewModel(at indexPath: IndexPath) -> TransactionViewModel? {
@@ -91,14 +153,16 @@ extension EntityInfoViewModel {
         return section.transactionViewModel(at: indexPath.row)
     }
     
-    private func filterTransactions() {
-        transactionsViewModel
-            .filterTransactions(sourceOrDestinationFilters: [],
-                                       dateRangeFilter: nil)
+    func indexPath(for transactionViewModel: TransactionViewModel?) -> IndexPath? {
+        guard   let transactionViewModel = transactionViewModel,
+                let section = transactionsSections.last(where: {  $0.date.dateAtStartOf(.day) == transactionViewModel.gotAt.dateAtStartOf(.day) }),
+                let sectionIndex = sections.lastIndex(where: { $0.id == section.id }),
+                let rowIndex = section.index(of: transactionViewModel) else { return nil }
+        return IndexPath(row: rowIndex, section: sectionIndex)
     }
     
     private func updateTransactionsSections() {
-        let groups = transactionsViewModel.filteredTransactionViewModels.groupByKey { $0.gotAt.dateAtStartOf(.day) }
+        let groups = transactionViewModels.groupByKey { $0.gotAt.dateAtStartOf(.day) }
         transactionsSections = groups
             .map { EntityInfoTransactionsSection(date: $0.key, transactionViewModels: $0.value) }
             .sorted(by: { $0.date > $1.date })

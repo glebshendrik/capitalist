@@ -592,6 +592,7 @@ extension UIViewController {
     
     func push(_ viewController: UIViewController?, animated: Bool = true) {
         guard let viewController = viewController else { return }
+        let navigationController = self.navigationController ?? (self as? UINavigationController)
         navigationController?.pushViewController(viewController, animated: animated)
     }
     

@@ -91,15 +91,19 @@ protocol UIFactoryProtocol {
                                       waitingBorrows: [BorrowViewModel],
                                       borrowType: BorrowType) -> UIViewController?
     
-    func statisticsViewController(filter: SourceOrDestinationTransactionFilter) -> UIViewController?
+    func statisticsViewController(filter: SourceOrDestinationTransactionFilter?) -> UIViewController?
     
     func balanceViewController() -> UIViewController?
     
     func incomeSourceEditViewController(delegate: IncomeSourceEditViewControllerDelegate,
                                         incomeSource: IncomeSource?) -> UINavigationController?
     
+    func incomeSourceInfoViewController(incomeSource: IncomeSourceViewModel?) -> UIViewController?
+    
     func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
                                          expenseSource: ExpenseSource?) -> UINavigationController?
+    
+    func expenseSourceInfoViewController(expenseSource: ExpenseSourceViewModel?) -> UIViewController?
     
     func expenseCategoryEditViewController(delegate: ExpenseCategoryEditViewControllerDelegate,
                                            expenseCategory: ExpenseCategory?,

@@ -20,17 +20,49 @@ class TransactionsCoordinator : TransactionsCoordinatorProtocol {
     }
     
     func index() -> Promise<[Transaction]> {
+        return index(transactionableId: nil,
+                     transactionableType: nil,
+                     creditId: nil,
+                     borrowId: nil,
+                     borrowType: nil,
+                     count: nil,
+                     lastGotAt: nil)
+    }
+    
+    func index(transactionableId: Int?,
+               transactionableType: TransactionableType?,
+               creditId: Int?,
+               borrowId: Int?,
+               borrowType: BorrowType?,
+               count: Int?,
+               lastGotAt: Date?) -> Promise<[Transaction]> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return transactionsService.index(for: currentUserId, type: nil)
+        return transactionsService.index(for: currentUserId,
+                                         type: nil,
+                                         transactionableId: transactionableId,
+                                         transactionableType: transactionableType,
+                                         creditId: creditId,
+                                         borrowId: borrowId,
+                                         borrowType: borrowType,
+                                         count: count,
+                                         lastGotAt: lastGotAt)
     }
     
     func index(by type: TransactionType) -> Promise<[Transaction]> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return transactionsService.index(for: currentUserId, type: type)
+        return transactionsService.index(for: currentUserId,
+                                         type: type,
+                                         transactionableId: nil,
+                                         transactionableType: nil,
+                                         creditId: nil,
+                                         borrowId: nil,
+                                         borrowType: nil,
+                                         count: nil,
+                                         lastGotAt: nil)
     }
     
     func create(with creationForm: TransactionCreationForm) -> Promise<Transaction> {

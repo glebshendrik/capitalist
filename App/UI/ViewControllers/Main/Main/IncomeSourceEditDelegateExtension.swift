@@ -29,10 +29,8 @@ extension MainViewController {
     func didSelectIncomeSource(at indexPath: IndexPath) {
         if viewModel.isAddIncomeSourceItem(indexPath: indexPath) {
             showNewIncomeSourceScreen()
-        } else if let incomeSourceViewModel = viewModel.incomeSourceViewModel(at: indexPath) {
-            
-            let filterViewModel = IncomeSourceTransactionFilter(incomeSourceViewModel: incomeSourceViewModel)
-            showStatistics(with: filterViewModel)
+        } else if let incomeSourceViewModel = viewModel.incomeSourceViewModel(at: indexPath) {            
+            showIncomeSourceInfoScreen(incomeSource: incomeSourceViewModel)
         }
     }
     

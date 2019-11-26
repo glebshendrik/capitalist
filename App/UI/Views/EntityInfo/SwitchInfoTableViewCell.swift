@@ -8,36 +8,36 @@
 
 import UIKit
 
-protocol SwitchInfoTableViewCellDelegate {
+protocol SwitchInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
     func didSwitch(field: SwitchInfoField?)
 }
 
-class SwitchInfoTableViewCell : UITableViewCell {
+class SwitchInfoTableViewCell : EntityInfoTableViewCell {
     @IBOutlet weak var titleButton: UIButton!
     @IBOutlet weak var switchControl: UISwitch!
     
-    var delegate: SwitchInfoTableViewCellDelegate?
-    
-    var field: SwitchInfoField? {
-        didSet {
-            updateUI()
-        }
+    var switchDelegate: SwitchInfoTableViewCellDelegate? {
+        return delegate as? SwitchInfoTableViewCellDelegate
+    }
+
+    var switchField: SwitchInfoField? {
+        return field as? SwitchInfoField
     }
     
-    func updateUI() {
-        guard let field = field else { return }
+    override func updateUI() {
+        guard let field = switchField else { return }
         titleButton.setTitle(field.title, for: .normal)
         switchControl.setOn(field.value, animated: false)
     }
     
     @IBAction func didSwitch(_ sender: Any) {
-        field?.value = switchControl.isOn
-        delegate?.didSwitch(field: field)
+        switchField?.value = switchControl.isOn
+        switchDelegate?.didSwitch(field: switchField)
     }
     
     @IBAction func didTapButton(_ sender: Any) {
         switchControl.setOn(!switchControl.isOn, animated: true)
-        field?.value = switchControl.isOn
-        delegate?.didSwitch(field: field)
+        switchField?.value = switchControl.isOn
+        switchDelegate?.didSwitch(field: switchField)
     }
 }

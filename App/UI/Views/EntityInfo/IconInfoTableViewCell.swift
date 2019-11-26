@@ -11,26 +11,26 @@ import SVGKit
 import SDWebImageSVGCoder
 import AlamofireImage
 
-protocol IconInfoTableViewCellDelegate {
+protocol IconInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
     func didTapIcon(field: IconInfoField?)
 }
 
-class IconInfoTableViewCell : UITableViewCell {
+class IconInfoTableViewCell : EntityInfoTableViewCell {
     @IBOutlet weak var iconBackgroundView: UIView!
     @IBOutlet weak var rasterImageView: UIImageView!
     @IBOutlet weak var vectorImageView: SVGKFastImageView!
     @IBOutlet weak var pencilImageView: UIImageView!
     
-    var delegate: IconInfoTableViewCellDelegate?
-    
-    var field: IconInfoField? {
-        didSet {
-            updateUI()
-        }
+    var iconDelegate: IconInfoTableViewCellDelegate? {
+        return delegate as? IconInfoTableViewCellDelegate
     }
     
-    func updateUI() {
-        guard let field = field else { return }
+    var iconField: IconInfoField? {
+        return field as? IconInfoField
+    }
+    
+    override func updateUI() {
+        guard let field = iconField else { return }
         pencilImageView.isHidden = false
         rasterImageView.isHidden = field.iconType != .raster
         vectorImageView.isHidden = field.iconType != .vector
@@ -40,6 +40,6 @@ class IconInfoTableViewCell : UITableViewCell {
     }
     
     @IBAction func didTapIcon(_ sender: Any) {
-        delegate?.didTapIcon(field: field)
+        iconDelegate?.didTapIcon(field: iconField)
     }
 }

@@ -11,6 +11,13 @@ import PromiseKit
 
 protocol TransactionsCoordinatorProtocol {
     func index() -> Promise<[Transaction]>
+    func index(transactionableId: Int?,
+               transactionableType: TransactionableType?,
+               creditId: Int?,
+               borrowId: Int?,
+               borrowType: BorrowType?,
+               count: Int?,
+               lastGotAt: Date?) -> Promise<[Transaction]>
     func index(by type: TransactionType) -> Promise<[Transaction]>
     func create(with creationForm: TransactionCreationForm) -> Promise<Transaction>
     func show(by id: Int) -> Promise<Transaction>

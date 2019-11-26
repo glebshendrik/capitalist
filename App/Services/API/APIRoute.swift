@@ -72,7 +72,15 @@ enum APIRoute: URLRequestConvertible {
     case indexCurrencies
     
     // Transactions
-    case indexTransactions(userId: Int, type: TransactionType?)
+    case indexTransactions( userId: Int,
+                            type: TransactionType?,
+                            transactionableId: Int?,
+                            transactionableType: TransactionableType?,
+                            creditId: Int?,
+                            borrowId: Int?,
+                            borrowType: BorrowType?,
+                            count: Int?,
+                            lastGotAt: Date?)
     case createTransaction(form: TransactionCreationForm)
     case showTransaction(id: Int)
     case updateTransaction(form: TransactionUpdatingForm)

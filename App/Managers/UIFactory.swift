@@ -249,8 +249,8 @@ class UIFactory : UIFactoryProtocol {
         return waitingBorrowsViewController
     }
     
-    func statisticsViewController(filter: SourceOrDestinationTransactionFilter)  -> UIViewController? {
-        let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController
+    func statisticsViewController(filter: SourceOrDestinationTransactionFilter?)  -> UIViewController? {
+        let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController        
         statisticsViewController?.set(sourceOrDestinationFilter: filter)
         return statisticsViewController
     }
@@ -336,5 +336,21 @@ class UIFactory : UIFactoryProtocol {
 //        dependentIncomeSourceInfoViewController?.modalPresentationStyle = .overCurrentContext
 //        dependentIncomeSourceInfoViewController?.modalTransitionStyle = .crossDissolve
         return dependentIncomeSourceInfoViewController    
+    }
+    
+    func incomeSourceInfoViewController(incomeSource: IncomeSourceViewModel?) -> UIViewController? {
+        let incomeSourceInfoViewController = router.viewController(.IncomeSourceInfoViewController) as? IncomeSourceInfoViewController
+        
+        incomeSourceInfoViewController?.viewModel.set(incomeSource: incomeSource)
+        
+        return incomeSourceInfoViewController
+    }
+    
+    func expenseSourceInfoViewController(expenseSource: ExpenseSourceViewModel?) -> UIViewController? {
+        let expenseSourceInfoViewController = router.viewController(.ExpenseSourceInfoViewController) as? ExpenseSourceInfoViewController
+        
+        expenseSourceInfoViewController?.viewModel.set(expenseSource: expenseSource)
+        
+        return expenseSourceInfoViewController
     }
 }

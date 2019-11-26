@@ -15,7 +15,6 @@ extension ApplicationAssembly {
     func registerViewModels(in container: Container) {
 
         container.autoregister(MenuViewModel.self, initializer: MenuViewModel.init)        .inObjectScope(.container)
-
         
         container.autoregister(RegistrationViewModel.self, initializer: RegistrationViewModel.init)
         
@@ -79,6 +78,10 @@ extension ApplicationAssembly {
         
         container.autoregister(ActiveEditViewModel.self, initializer: ActiveEditViewModel.init)
         
-        container.autoregister(ActivesViewModel.self, initializer: ActivesViewModel.init)        
+        container.autoregister(ActivesViewModel.self, initializer: ActivesViewModel.init)
+        
+        container.autoregister(IncomeSourceInfoViewModel.self, initializer: IncomeSourceInfoViewModel.init)
+        
+        container.autoregister(ExpenseSourceInfoViewModel.self, initializer: ExpenseSourceInfoViewModel.init)
     }
 }

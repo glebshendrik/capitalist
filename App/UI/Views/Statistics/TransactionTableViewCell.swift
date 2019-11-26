@@ -73,10 +73,7 @@ class TransactionTableViewCell : UITableViewCell {
             }
         }
         
-        destinationIconImageView.setImage(with: viewModel.destinationIconURL,
-                                          placeholderName: defaultDestinationIconName(),
-                                          renderingMode: .alwaysTemplate)
-        destinationIconImageView.tintColor = destinationIconTintColor()
+        updateIconUI(url: viewModel.destinationIconURL, placeholder: defaultDestinationIconName(), tintColor: destinationIconTintColor())
         
         sourceTitleLabel.text = viewModel.sourceTitle
         destinationTitleLabel.text = viewModel.destinationTitle
@@ -84,6 +81,13 @@ class TransactionTableViewCell : UITableViewCell {
         
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
+    }
+    
+    func updateIconUI(url: URL?, placeholder: String?, tintColor: UIColor) {
+        destinationIconImageView.setImage(with: url,
+                                          placeholderName: placeholder,
+                                          renderingMode: .alwaysTemplate)
+        destinationIconImageView.tintColor = tintColor
     }
 }
 

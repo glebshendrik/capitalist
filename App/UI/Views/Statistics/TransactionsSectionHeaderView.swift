@@ -19,4 +19,11 @@ class TransactionsSectionHeaderView: UITableViewHeaderFooterView {
             dateLabel.text = section?.title
         }
     }
+    
+    var title: String? {
+        didSet {
+            dateLabel.font = UIFont(name: "Rubik-Regular", size: 15.0)
+            dateLabel.text = title
+        }
+    }
 }

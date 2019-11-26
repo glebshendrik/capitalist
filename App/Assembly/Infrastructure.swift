@@ -66,11 +66,13 @@ struct Infrastructure {
         case IncomeSourceEditViewController
         case IncomeSourceEditNavigationController
         case IncomeSourceSelectViewController
+        case IncomeSourceInfoViewController
         
         // Expense Sources
         case ExpenseSourceEditNavigationController
         case ExpenseSourceEditViewController
         case ExpenseSourceSelectViewController
+        case ExpenseSourceInfoViewController
         case BankConnectionViewController
         case ProvidersViewController
         case ProviderConnectionViewController
@@ -108,6 +110,7 @@ struct Infrastructure {
         case SlideUpContainerViewController
         case ReminderEditNavigationController
         case ReminderEditViewController
+        case EntityInfoViewController
         
         // Profile
         case ProfileViewController
@@ -153,11 +156,13 @@ struct Infrastructure {
                 return .Main
             case .IncomeSourceEditViewController,
                  .IncomeSourceEditNavigationController,
-                 .IncomeSourceSelectViewController:
+                 .IncomeSourceSelectViewController,
+                 .IncomeSourceInfoViewController:
                 return .IncomeSources
             case .ExpenseSourceEditNavigationController,
                  .ExpenseSourceEditViewController,
                  .ExpenseSourceSelectViewController,
+                 .ExpenseSourceInfoViewController,
                  .BankConnectionViewController,
                  .ProvidersViewController,
                  .ProviderConnectionViewController,
@@ -174,7 +179,8 @@ struct Infrastructure {
                  .CurrenciesViewController,
                  .SlideUpContainerViewController,
                  .ReminderEditNavigationController,
-                 .ReminderEditViewController:
+                 .ReminderEditViewController,
+                 .EntityInfoViewController:
                 return .Common
             case .ProfileViewController,
                  .ChangePasswordViewController:

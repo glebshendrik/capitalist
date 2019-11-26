@@ -10,8 +10,25 @@ import Foundation
 import PromiseKit
 
 class TransactionsService : Service, TransactionsServiceProtocol {
-    func index(for userId: Int, type: TransactionType?) -> Promise<[Transaction]> {
-        return requestCollection(APIRoute.indexTransactions(userId: userId, type: type))
+    func index(for userId: Int,
+               type: TransactionType?,
+               transactionableId: Int?,
+               transactionableType: TransactionableType?,
+               creditId: Int?,
+               borrowId: Int?,
+               borrowType: BorrowType?,
+               count: Int?,
+               lastGotAt: Date?) -> Promise<[Transaction]> {
+        
+        return requestCollection(APIRoute.indexTransactions(userId: userId,
+                                                            type: type,
+                                                            transactionableId: transactionableId,
+                                                            transactionableType: transactionableType,
+                                                            creditId: creditId,
+                                                            borrowId: borrowId,
+                                                            borrowType: borrowType,
+                                                            count: count,
+                                                            lastGotAt: lastGotAt))
     }
     
     func create(with creationForm: TransactionCreationForm) -> Promise<Transaction> {

@@ -11,6 +11,10 @@ import Foundation
 class EntityInfoFieldsSection : EntityInfoSection {
     private let infoFields: [EntityInfoField]
     
+    var id: String {
+        return type.rawValue
+    }
+    
     var isSectionHeaderVisible: Bool { return false }
     var numberOfRows: Int { return infoFields.count }
     var title: String? { return nil }

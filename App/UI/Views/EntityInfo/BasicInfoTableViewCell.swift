@@ -8,18 +8,16 @@
 
 import UIKit
 
-class BasicInfoTableViewCell : UITableViewCell {
+class BasicInfoTableViewCell : EntityInfoTableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
-    var field: BasicInfoField? {
-        didSet {
-            updateUI()
-        }
+    var basicField: BasicInfoField? {
+        return field as? BasicInfoField
     }
     
-    func updateUI() {        
-        titleLabel.text = field?.title
-        valueLabel.text = field?.value
+    override func updateUI() {
+        titleLabel.text = basicField?.title
+        valueLabel.text = basicField?.value
     }
 }

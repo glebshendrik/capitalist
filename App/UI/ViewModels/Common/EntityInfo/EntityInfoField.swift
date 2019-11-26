@@ -20,13 +20,13 @@ enum EntityInfoFieldType {
         case .icon:
             return "IconInfoTableViewCell"
         case .basic:
-            return "BasicFieldCell"
+            return "BasicInfoTableViewCell"
         case .bool:
-            return "SwitchFieldCell"
+            return "SwitchInfoTableViewCell"
         case .button:
-            return "ButtonFieldCell"
+            return "ButtonInfoTableViewCell"
         case .reminder:
-            return "ReminderFieldCell"
+            return "ReminderInfoTableViewCell"
         }
     }
 }

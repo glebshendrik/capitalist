@@ -8,23 +8,23 @@
 
 import UIKit
 
-protocol ButtonInfoTableViewCellDelegate {
+protocol ButtonInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
     func didTapInfoButton(field: ButtonInfoField?)
 }
 
-class ButtonInfoTableViewCell : UITableViewCell {
+class ButtonInfoTableViewCell : EntityInfoTableViewCell {
     @IBOutlet weak var button: UIButton!
     
-    var delegate: ButtonInfoTableViewCellDelegate?
-    
-    var field: ButtonInfoField? {
-        didSet {
-            updateUI()
-        }
+    var buttonDelegate: ButtonInfoTableViewCellDelegate? {
+        return delegate as? ButtonInfoTableViewCellDelegate
+    }
+
+    var butonField: ButtonInfoField? {
+        return field as? ButtonInfoField
     }
     
-    func updateUI() {
-        guard let field = field else { return }
+    override func updateUI() {
+        guard let field = butonField else { return }
         button.setTitle(field.title, for: .normal)
         if let iconName = field.iconName {
             button.setImage(UIImage(named: iconName), for: .normal)
@@ -33,6 +33,6 @@ class ButtonInfoTableViewCell : UITableViewCell {
     }
     
     @IBAction func didTapButton(_ sender: Any) {
-        delegate?.didTapInfoButton(field: field)
+        buttonDelegate?.didTapInfoButton(field: butonField)
     }
 }
