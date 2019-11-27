@@ -81,6 +81,7 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
 
 extension EntityInfoViewController {
     @objc func refreshData() {
+        guard !viewModel.isUpdatingData else { return }
         tableView.es.startPullToRefresh()
     }
     
@@ -88,7 +89,8 @@ extension EntityInfoViewController {
         setLoading()
         _ = firstly {
                 viewModel.updateData()
-            }.catch { _ in
+            }.catch { e in
+                print(e)
                 self.messagePresenterManager.show(navBarMessage: "Ошибка обновления данных", theme: .error)
             }.finally {
                 self.stopLoading()
@@ -119,12 +121,12 @@ extension EntityInfoViewController {
     
     func saveData() {
         viewModel.needToSaveData = true
-        postFinantialDataUpdated()
+        refreshData()
     }
     
     func removeTransaction(transactionViewModel: TransactionViewModel) {
         viewModel.transactionToDelete = transactionViewModel
-        postFinantialDataUpdated()
+        refreshData()
     }
     
     func postFinantialDataUpdated() {
@@ -299,57 +301,58 @@ extension EntityInfoViewController {
     }
     
     private func showCreditEditScreen(creditId: Int) {
+        
         modal(factory.creditEditViewController(delegate: self, creditId: creditId, destination: nil))
     }
 }
 
 extension EntityInfoViewController : TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate, CreditEditViewControllerDelegate {
-    
+
     func didCreateCredit() {
-        
+
     }
-    
+
     func didCreateDebt() {
-        
+
     }
-    
+
     func didCreateLoan() {
-        
+
     }
-    
-    func didUpdateCredit() {        
-        refreshData()
+
+    func didUpdateCredit() {
+        postFinantialDataUpdated()
     }
-    
+
     func didRemoveCredit() {
-        refreshData()
+        postFinantialDataUpdated()
     }
-    
+
     func didUpdateDebt() {
-        refreshData()
+        postFinantialDataUpdated()
     }
-    
+
     func didUpdateLoan() {
-        refreshData()
+        postFinantialDataUpdated()
     }
-    
+
     func didRemoveDebt() {
-        refreshData()
+        postFinantialDataUpdated()
     }
-    
+
     func didRemoveLoan() {
-        refreshData()
+        postFinantialDataUpdated()
     }
-    
+
     func didCreateTransaction(id: Int, type: TransactionType) {
-        refreshData()
+        postFinantialDataUpdated()
     }
-    
+
     func didUpdateTransaction(id: Int, type: TransactionType) {
-        refreshData()
+        postFinantialDataUpdated()
     }
-    
+
     func didRemoveTransaction(id: Int, type: TransactionType) {
-        refreshData()
+        postFinantialDataUpdated()
     }
 }

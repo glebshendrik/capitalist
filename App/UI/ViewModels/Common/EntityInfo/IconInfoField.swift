@@ -18,6 +18,7 @@ class IconInfoField : EntityInfoField {
     let iconType: IconType
     let iconURL: URL?
     let placeholder: String?
+    let backgroundImageName: String?
     
     var type: EntityInfoFieldType {
         return .icon
@@ -27,10 +28,11 @@ class IconInfoField : EntityInfoField {
         return fieldId
     }
     
-    init(fieldId: String, iconType: IconType, iconURL: URL?, placeholder: String?) {
+    init(fieldId: String, iconType: IconType, iconURL: URL?, placeholder: String?, backgroundImageName: String?) {
         self.fieldId = fieldId
         self.iconType = iconType
         self.iconURL = iconURL
         self.placeholder = placeholder
+        self.backgroundImageName = backgroundImageName
     }
 }

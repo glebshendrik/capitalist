@@ -17,6 +17,7 @@ protocol IconInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
 
 class IconInfoTableViewCell : EntityInfoTableViewCell {
     @IBOutlet weak var iconBackgroundView: UIView!
+    @IBOutlet weak var iconBackgroundImageView: UIImageView!
     @IBOutlet weak var rasterImageView: UIImageView!
     @IBOutlet weak var vectorImageView: SVGKFastImageView!
     @IBOutlet weak var pencilImageView: UIImageView!
@@ -37,6 +38,12 @@ class IconInfoTableViewCell : EntityInfoTableViewCell {
         rasterImageView.setImage(with: field.iconURL, placeholderName: field.placeholder, renderingMode: .alwaysTemplate)
         rasterImageView.tintColor = UIColor.by(.textFFFFFF)
         vectorImageView.sd_setImage(with: field.iconURL, completed: nil)
+        if let backgroundImageName = field.backgroundImageName {
+            iconBackgroundImageView.image = UIImage(named: backgroundImageName)
+        }
+        else {
+            iconBackgroundImageView.image = nil
+        }
     }
     
     @IBAction func didTapIcon(_ sender: Any) {

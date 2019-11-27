@@ -143,6 +143,10 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return activeType.isGoalAmountRequired
     }
     
+    var onlyBuyingAssets: Bool {
+        return activeType.onlyBuyingAssets
+    }
+    
     var goalProgress: Double {
         guard isGoal, let goalAmountCents = active.goalAmountCents else { return 0 }
         let progress = Double(active.costCents) / Double(goalAmountCents)
@@ -151,6 +155,15 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     
     var isGoalCompleted: Bool {
         return goalProgress == 1.0
+    }
+    
+    var annualPercent: String? {
+        guard let percent = active.annualIncomePercent?.percentDecimalString() else { return nil }
+        return "\(percent) %"
+    }
+    
+    var monthlyPlannedIncome: String? {
+        return active.monthlyPlannedIncomeCents?.moneyCurrencyString(with: currency, shouldRound: true)
     }
     
     init(active: Active) {

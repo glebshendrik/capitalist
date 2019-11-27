@@ -33,11 +33,7 @@ class ActiveEditViewModel {
     var selectedIconURL: URL? = nil
     var name: String? = nil
     var selectedCurrency: Currency? = nil
-    var cost: String? = nil {
-        didSet {
-            alreadyPaid = cost
-        }
-    }
+    var cost: String? = nil
     var costToSave: String {
         guard   let cost = cost,
                 !cost.isEmpty  else { return "0" }

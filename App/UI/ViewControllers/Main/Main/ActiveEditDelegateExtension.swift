@@ -46,11 +46,8 @@ extension MainViewController {
     func didSelectActive(at indexPath: IndexPath, basketType: BasketType) {
         if viewModel.isAddActiveItem(indexPath: indexPath, basketType: basketType) {
             showNewActiveScreen(basketType: basketType)
-        } else if let activeViewModel = viewModel.activeViewModel(at: indexPath, basketType: basketType) {
-//            showDependentIncomeSourceMessage(activeName: activeViewModel.name)
-            showActiveEditScreen(active: activeViewModel.active, basketType: activeViewModel.basketType)
-//            let filterViewModel = ExpenseCategoryTransactionFilter(expenseCategoryViewModel: expenseCategoryViewModel)
-//            showStatistics()
+        } else if let activeViewModel = viewModel.activeViewModel(at: indexPath, basketType: basketType) {            
+            showActiveInfo(active: activeViewModel)
         }
     }
     

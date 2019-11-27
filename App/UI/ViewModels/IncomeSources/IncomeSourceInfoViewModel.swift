@@ -43,9 +43,10 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
+         accountCoordinator: AccountCoordinatorProtocol,
          incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
-        super.init(transactionsCoordinator: transactionsCoordinator)
+        super.init(transactionsCoordinator: transactionsCoordinator, accountCoordinator: accountCoordinator)
     }
     
     func set(incomeSource: IncomeSourceViewModel?) {
@@ -67,7 +68,8 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: IncomeSourceInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,
-                                                       placeholder: IconCategory.expenseCategoryJoy.defaultIconName),
+                                                       placeholder: IconCategory.expenseCategoryJoy.defaultIconName,
+                                                       backgroundImageName: nil),
                                          BasicInfoField(fieldId: IncomeSourceInfoField.income.rawValue,
                                                         title: "Доход в этом месяце",
                                                         value: incomeSourceViewModel?.amountRounded)]

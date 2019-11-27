@@ -44,6 +44,7 @@ struct Active : Decodable {
     let rowOrder: Int
     let deletedAt: Date?
     let reminder: Reminder?
+    let incomeSource: IncomeSource?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -68,6 +69,7 @@ struct Active : Decodable {
         case deletedAt = "deleted_at"
         case reminder
         case alreadyPaidCents = "already_paid_cents"
+        case incomeSource = "income_source"
     }
 }
 
@@ -154,6 +156,21 @@ struct ActiveUpdatingForm : Encodable, Validatable {
         case plannedIncomeType = "planned_income_type"
         case isIncomePlanned = "is_income_planned"
         case reminderAttributes = "reminder_attributes"
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+                
+        try container.encode(name, forKey: .name)
+        try container.encode(iconURL, forKey: .iconURL)
+        try container.encode(costCents, forKey: .costCents)
+        try container.encode(monthlyPaymentCents, forKey: .monthlyPaymentCents)
+        try container.encode(annualIncomePercent, forKey: .annualIncomePercent)
+        try container.encode(monthlyPlannedIncomeCents, forKey: .monthlyPlannedIncomeCents)
+        try container.encode(goalAmountCents, forKey: .goalAmountCents)
+        try container.encode(plannedIncomeType, forKey: .plannedIncomeType)
+        try container.encode(isIncomePlanned, forKey: .isIncomePlanned)
+        try container.encode(reminderAttributes, forKey: .reminderAttributes)
     }
     
     func validate() -> [String : String]? {

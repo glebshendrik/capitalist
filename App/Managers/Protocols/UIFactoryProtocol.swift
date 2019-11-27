@@ -119,6 +119,7 @@ protocol UIFactoryProtocol {
                                   active: Active?,
                                   basketType: BasketType) -> UINavigationController?
     
+    func activeInfoViewController(active: ActiveViewModel?) -> UINavigationController?
     
     func dependentIncomeSourceInfoViewController(activeName: String) -> UIViewController?
 }

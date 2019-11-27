@@ -233,5 +233,10 @@ extension ApplicationAssembly {
         container.registerForSkrudzhStoryboard(ExpenseCategoryInfoViewController.self) { (r, c) in
             c.viewModel = r.resolve(ExpenseCategoryInfoViewModel.self)
         }
+        
+        // ActiveInfoViewController
+        container.registerForSkrudzhStoryboard(ActiveInfoViewController.self) { (r, c) in
+            c.viewModel = r.resolve(ActiveInfoViewModel.self)
+        }
     }
 }

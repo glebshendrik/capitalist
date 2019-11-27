@@ -12,10 +12,14 @@ import SwiftDate
 
 class EntityInfoViewModel {
     private let transactionsCoordinator: TransactionsCoordinatorProtocol
+    private let accountCoordinator: AccountCoordinatorProtocol
     
-    public var needToSaveData: Bool = false
-    public var transactionToDelete: TransactionViewModel? = nil
-            
+    var isUpdatingData: Bool = false
+    var hasMoreData: Bool = true
+    var needToSaveData: Bool = false
+    var transactionToDelete: TransactionViewModel? = nil
+    var defaultPeriod: AccountingPeriod = .month
+    
     var transactionable: Transactionable? { return nil }
 
     var transactionViewModels: [TransactionViewModel] = []
@@ -23,9 +27,7 @@ class EntityInfoViewModel {
     
     private var sections: [EntityInfoSection] = []
     private var transactionsSections: [EntityInfoTransactionsSection] = []
-    
-    var hasMoreData: Bool = true
-    
+        
     var title: String? {
         return transactionable?.name
     }
@@ -38,15 +40,19 @@ class EntityInfoViewModel {
         return transactionViewModels.last
     }
     
-    init(transactionsCoordinator: TransactionsCoordinatorProtocol) {
+    var defaultPeriodTitle: String {
+        return defaultPeriod.title.lowercased()
+    }
+    
+    init(transactionsCoordinator: TransactionsCoordinatorProtocol,
+         accountCoordinator: AccountCoordinatorProtocol) {
         self.transactionsCoordinator = transactionsCoordinator
+        self.accountCoordinator = accountCoordinator
     }
     
     func section(at index: Int) -> EntityInfoSection? {
         return sections.item(at: index)
     }
-    
-    
     
     func updatePresentationData() {
         updateTransactionsSections()
@@ -64,6 +70,7 @@ class EntityInfoViewModel {
     }
     
     func updateData() -> Promise<Void> {
+        isUpdatingData = true
         if needToSaveData {
             return saveAndLoadData()
         }
@@ -75,15 +82,26 @@ class EntityInfoViewModel {
     
     private func loadData() -> Promise<Void> {
         return  firstly {
-                    when(fulfilled: loadEntity(), loadTransactions())
+                    when(fulfilled: loadDefaultPeriod(), loadEntity(), loadTransactions())
                 }.ensure {
+                    self.isUpdatingData = false
                     self.updatePresentationData()
+                }
+    }
+    
+    func loadDefaultPeriod() -> Promise<Void> {
+        return  firstly {
+                    accountCoordinator.loadCurrentUser()
+                }.done { user in
+                    self.defaultPeriod = user.defaultPeriod
                 }
     }
     
     private func saveAndLoadData() -> Promise<Void> {
         return  firstly {
                     saveEntity()
+                }.get {
+                    self.postFinantialDataUpdated()
                 }.then {
                     self.loadData()
                 }.done {
@@ -117,6 +135,10 @@ class EntityInfoViewModel {
         guard let id = transactionable?.id, let title = transactionable?.name, let type = transactionable?.type else { return nil }
         return SourceOrDestinationTransactionFilter(id: id, title: title, type: type)
     }
+    
+    private func postFinantialDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+    }
 }
 
 // Transactions
@@ -145,6 +167,8 @@ extension EntityInfoViewModel {
     private func removeTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {
         return  firstly {
                     transactionsCoordinator.destroy(by: transactionViewModel.id)
+                }.get {
+                    self.postFinantialDataUpdated()
                 }.then {
                     self.loadData()
                 }.done {

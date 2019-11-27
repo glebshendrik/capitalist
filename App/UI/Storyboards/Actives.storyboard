@@ -233,7 +233,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" name="dark 2A314B"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="lRC-iT-3I6">
-                            <rect key="frame" x="0.0" y="1145" width="375" height="100"/>
+                            <rect key="frame" x="0.0" y="1166" width="375" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqV-qw-OqT">
@@ -874,6 +874,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LJw-6G-3Ld" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1006" y="2382"/>
+        </scene>
+        <!--Active Info View Controller-->
+        <scene sceneID="4Uz-fC-AOV">
+            <objects>
+                <navigationController storyboardIdentifier="ActiveInfoViewController" id="NNm-8a-XeZ" customClass="ActiveInfoViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wgE-GK-2jE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Ohv-el-sjU" kind="relationship" relationship="rootViewController" id="Xd3-9s-iou"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qat-VA-mCG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1863" y="2367"/>
+        </scene>
+        <!--EntityInfoViewController-->
+        <scene sceneID="pkT-MD-5JJ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="EntityInfoViewController" id="Ohv-el-sjU" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="xcr-6H-s07"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Q4-Vh-Qw5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2709" y="2334"/>
         </scene>
         <!--CurrenciesViewController-->
         <scene sceneID="uHT-bW-dHc">

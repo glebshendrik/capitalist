@@ -388,6 +388,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDN-mI-bYJ">
                                                     <rect key="frame" x="155.5" y="16" width="64" height="64"/>
                                                     <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xqP-hg-pQK">
+                                                            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="32"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="kuk-Er-atF">
                                                             <rect key="frame" x="18.5" y="18.5" width="27" height="27"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -412,11 +420,15 @@
                                                     <constraints>
                                                         <constraint firstItem="Lp2-Tr-YLd" firstAttribute="centerY" secondItem="SDN-mI-bYJ" secondAttribute="centerY" id="0vx-51-VQV"/>
                                                         <constraint firstItem="kuk-Er-atF" firstAttribute="centerY" secondItem="SDN-mI-bYJ" secondAttribute="centerY" id="Aaf-3r-G3M"/>
+                                                        <constraint firstItem="xqP-hg-pQK" firstAttribute="leading" secondItem="SDN-mI-bYJ" secondAttribute="leading" id="HKi-hS-lXZ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="xqP-hg-pQK" secondAttribute="trailing" id="Lhe-AH-SEW"/>
                                                         <constraint firstItem="kuk-Er-atF" firstAttribute="centerX" secondItem="SDN-mI-bYJ" secondAttribute="centerX" id="MOX-S3-I3c"/>
                                                         <constraint firstAttribute="width" constant="64" id="Wua-hF-Cej"/>
+                                                        <constraint firstAttribute="bottom" secondItem="xqP-hg-pQK" secondAttribute="bottom" id="Y3Q-br-Wgo"/>
                                                         <constraint firstAttribute="height" constant="64" id="ZUM-QT-FnW"/>
                                                         <constraint firstItem="2Ce-nC-XkR" firstAttribute="centerX" secondItem="SDN-mI-bYJ" secondAttribute="centerX" id="cQw-om-NUk"/>
                                                         <constraint firstItem="Lp2-Tr-YLd" firstAttribute="centerX" secondItem="SDN-mI-bYJ" secondAttribute="centerX" id="enu-bP-JWc"/>
+                                                        <constraint firstItem="xqP-hg-pQK" firstAttribute="top" secondItem="SDN-mI-bYJ" secondAttribute="top" id="k3a-vo-b2u"/>
                                                         <constraint firstAttribute="bottom" secondItem="2Ce-nC-XkR" secondAttribute="bottom" constant="6" id="ul3-Ad-MHt"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -466,6 +478,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="iconBackgroundImageView" destination="xqP-hg-pQK" id="8QM-7S-lzg"/>
                                             <outlet property="iconBackgroundView" destination="SDN-mI-bYJ" id="Sa5-lj-yLi"/>
                                             <outlet property="pencilImageView" destination="2Ce-nC-XkR" id="e4L-2E-J7c"/>
                                             <outlet property="rasterImageView" destination="kuk-Er-atF" id="0nU-ve-7cP"/>
@@ -610,6 +623,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="switchControl" destination="E73-lS-xrq" id="9GY-nk-cPW"/>
+                                            <outlet property="titleButton" destination="jPK-vM-T2c" id="xzz-16-Uyc"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ButtonInfoTableViewCell" id="fCK-07-K85" customClass="ButtonInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="374.5" width="375" height="56"/>

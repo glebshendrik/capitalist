@@ -106,7 +106,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     func setupAlreadyPaidField() {
         register(responder: alreadyPaidField.textField)
-        alreadyPaidField.placeholder = "Уже потратил"
+        alreadyPaidField.placeholder = "Прочие расходы"
         alreadyPaidField.imageName = "amount-icon"
         alreadyPaidField.didChange { [weak self] text in
             self?.delegate?.didChange(alreadyPaid: text)

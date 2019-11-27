@@ -43,9 +43,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
+         accountCoordinator: AccountCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol) {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
-        super.init(transactionsCoordinator: transactionsCoordinator)
+        super.init(transactionsCoordinator: transactionsCoordinator, accountCoordinator: accountCoordinator)
     }
     
     func set(expenseSource: ExpenseSourceViewModel?) {
@@ -66,7 +67,8 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,
-                                                       placeholder: IconCategory.expenseSource.defaultIconName),
+                                                       placeholder: IconCategory.expenseSource.defaultIconName,
+                                                       backgroundImageName: nil),
                                          BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
                                                         title: "Баланс",
                                                         value: expenseSourceViewModel?.amountRounded)]

@@ -47,9 +47,10 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
+         accountCoordinator: AccountCoordinatorProtocol,
          expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol) {
         self.expenseCategoriesCoordinator = expenseCategoriesCoordinator
-        super.init(transactionsCoordinator: transactionsCoordinator)
+        super.init(transactionsCoordinator: transactionsCoordinator, accountCoordinator: accountCoordinator)
     }
     
     func set(expenseCategory: ExpenseCategoryViewModel?) {
@@ -71,7 +72,8 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: ExpenseCategoryInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,
-                                                       placeholder: basketType.iconCategory.defaultIconName),
+                                                       placeholder: basketType.iconCategory.defaultIconName,
+                                                       backgroundImageName: basketType.iconBackgroundName(size: .large)),
                                          BasicInfoField(fieldId: ExpenseCategoryInfoField.expense.rawValue,
                                                         title: "Расход в этом месяце",
                                                         value: expenseCategoryViewModel?.amountRounded)]

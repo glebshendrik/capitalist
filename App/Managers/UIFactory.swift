@@ -378,4 +378,12 @@ class UIFactory : UIFactoryProtocol {
         
         return expenseCategoryInfoViewController
     }
+    
+    func activeInfoViewController(active: ActiveViewModel?) -> UINavigationController? {
+        let activeInfoViewController = router.viewController(.ActiveInfoViewController) as? ActiveInfoViewController
+        
+        activeInfoViewController?.viewModel.set(active: active)
+        
+        return activeInfoViewController
+    }
 }
