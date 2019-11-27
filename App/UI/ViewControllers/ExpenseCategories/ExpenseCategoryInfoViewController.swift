@@ -1,22 +1,22 @@
 //
-//  IncomeSourceInfoViewController.swift
+//  ExpenseCategoryInfoViewController.swift
 //  Three Baskets
 //
-//  Created by Alexander Petropavlovsky on 13.11.2019.
+//  Created by Alexander Petropavlovsky on 27.11.2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
 //
 
 import UIKit
 
-class IncomeSourceInfoViewController : EntityInfoNavigationController {
-    var viewModel: IncomeSourceInfoViewModel!
+class ExpenseCategoryInfoViewController : EntityInfoNavigationController {
+    var viewModel: ExpenseCategoryInfoViewModel!
     
     override var entityInfoViewModel: EntityInfoViewModel! {
         return viewModel
     }
         
     override func didTapIcon(field: IconInfoField?) {
-        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseCategoryRisk))
+        modal(factory.iconsViewController(delegate: self, iconCategory: viewModel.basketType.iconCategory))
     }
         
     override func didTapReminderButton(field: ReminderInfoField?) {
@@ -26,49 +26,49 @@ class IncomeSourceInfoViewController : EntityInfoNavigationController {
     override func didTapInfoButton(field: ButtonInfoField?) {
         guard let field = field else { return }
         switch field.identifier {
-        case IncomeSourceInfoField.statistics.identifier:
+        case ExpenseCategoryInfoField.statistics.identifier:
             modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
-        case IncomeSourceInfoField.transaction.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.incomeSourceViewModel, destination: nil))
+        case ExpenseCategoryInfoField.transaction.identifier:
+            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.expenseCategoryViewModel))
         default:
             return
         }
     }
     
     override func showEditScreen() {
-        modal(factory.incomeSourceEditViewController(delegate: self, incomeSource: viewModel.incomeSource))
+        modal(factory.expenseCategoryEditViewController(delegate: self, expenseCategory: viewModel.expenseCategory, basketType: viewModel.basketType))
     }
 }
 
-extension IncomeSourceInfoViewController : IconsViewControllerDelegate {
+extension ExpenseCategoryInfoViewController : IconsViewControllerDelegate {
     func didSelectIcon(icon: Icon) {
         viewModel.selectedIconURL = icon.url
         save()
     }
 }
 
-extension IncomeSourceInfoViewController : ReminderEditViewControllerDelegate {
+extension ExpenseCategoryInfoViewController : ReminderEditViewControllerDelegate {
     func didSave(reminderViewModel: ReminderViewModel) {
         viewModel.reminder = reminderViewModel
         save()
     }
 }
 
-extension IncomeSourceInfoViewController : IncomeSourceEditViewControllerDelegate {
-    func didCreateIncomeSource() {
+extension ExpenseCategoryInfoViewController : ExpenseCategoryEditViewControllerDelegate {
+    func didCreateExpenseCategory(with basketType: BasketType, name: String) {
         
     }
     
-    func didUpdateIncomeSource() {
+    func didUpdateExpenseCategory(with basketType: BasketType) {
         refreshData()
     }
     
-    func didRemoveIncomeSource() {
+    func didRemoveExpenseCategory(with basketType: BasketType) {
         closeButtonHandler()
     }
 }
 
-extension IncomeSourceInfoViewController : TransactionEditViewControllerDelegate {
+extension ExpenseCategoryInfoViewController : TransactionEditViewControllerDelegate {
     func didCreateTransaction(id: Int, type: TransactionType) {
         refreshData()
     }

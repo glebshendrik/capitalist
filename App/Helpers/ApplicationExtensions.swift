@@ -315,7 +315,39 @@ extension UIViewController {
     }
 }
 
+extension UIViewController {
+    var isModal: Bool {
 
+        let presentingIsModal = presentingViewController != nil
+        let presentingIsNavigation = navigationController?.presentingViewController?.presentedViewController == navigationController
+        let presentingIsTabBar = tabBarController?.presentingViewController is UITabBarController
+
+        return presentingIsModal || presentingIsNavigation || presentingIsTabBar
+    }
+    
+    func setupNavigationBarAppearance() {
+        
+        let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
+                          NSAttributedString.Key.foregroundColor : UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = attributes
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.tintColor = UIColor.by(.textFFFFFF)
+        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
+        
+        if isModal {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close-circle-icon"), style: .plain, target: self, action: #selector(didTapCloseButton(sender:)))
+        }
+    }
+        
+    @objc func didTapCloseButton(sender: Any) {
+        closeButtonHandler()
+    }
+            
+    func closeButtonHandler() {
+        (navigationController ?? self).dismiss(animated: true)
+    }
+}
 
 /// Navigation bar colors for `ColorableNavigationController`, called on `push` & `pop` actions
 public protocol NavigationBarColorable: class {

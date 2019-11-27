@@ -17,9 +17,15 @@ extension BalanceViewController {
     }
     
     func setupUI() {
+        setupNavigationBar()
         setupTables()
         setupLoaders()        
         setupNotifications()
+    }
+    
+    private func setupNavigationBar() {
+        setupNavigationBarAppearance()
+        navigationItem.title = "Баланс"
     }
     
     private func setupNotifications() {

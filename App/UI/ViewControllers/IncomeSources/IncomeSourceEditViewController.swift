@@ -67,9 +67,9 @@ class IncomeSourceEditViewController : FormTransactionsDependableEditViewControl
     }
     
     override func updateUI() {
+        updateIconUI()
         updateTextFieldsUI()
         updateCurrencyUI()
-        updateReminderUI()
         updateRemoveButtonUI()
     }  
 }

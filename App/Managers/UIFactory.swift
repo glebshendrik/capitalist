@@ -17,19 +17,19 @@ class UIFactory : UIFactoryProtocol {
     }
     
     func iconsViewController(delegate: IconsViewControllerDelegate,
-                             iconCategory: IconCategory) -> IconsViewController? {
+                             iconCategory: IconCategory) -> UINavigationController? {
         
-        let iconsViewController = router.viewController(.IconsViewController) as? IconsViewController
-        iconsViewController?.set(iconCategory: iconCategory)
-        iconsViewController?.set(delegate: delegate)
-        return iconsViewController
+        guard let iconsViewController = router.viewController(.IconsViewController) as? IconsViewController else { return nil }
+        iconsViewController.set(iconCategory: iconCategory)
+        iconsViewController.set(delegate: delegate)
+        return UINavigationController(rootViewController: iconsViewController)
     }
     
-    func currenciesViewController(delegate: CurrenciesViewControllerDelegate) -> CurrenciesViewController? {
+    func currenciesViewController(delegate: CurrenciesViewControllerDelegate) -> UINavigationController? {
         
-        let currenciesViewController = router.viewController(.CurrenciesViewController) as? CurrenciesViewController
-        currenciesViewController?.set(delegate: delegate)
-        return currenciesViewController
+        guard let currenciesViewController = router.viewController(.CurrenciesViewController) as? CurrenciesViewController else { return nil }
+        currenciesViewController.set(delegate: delegate)
+        return UINavigationController(rootViewController: currenciesViewController)
     }
     
     func reminderEditViewController(delegate: ReminderEditViewControllerDelegate,
@@ -250,13 +250,30 @@ class UIFactory : UIFactoryProtocol {
     }
     
     func statisticsViewController(filter: SourceOrDestinationTransactionFilter?)  -> UIViewController? {
-        let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController        
+        let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController
         statisticsViewController?.set(sourceOrDestinationFilter: filter)
         return statisticsViewController
     }
     
-    func balanceViewController() -> UIViewController? {
-        return router.viewController(.BalanceViewController)
+    func statisticsModalViewController(filter: SourceOrDestinationTransactionFilter?)  -> UINavigationController? {
+        guard let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController else { return nil }
+        statisticsViewController.set(sourceOrDestinationFilter: filter)
+        return UINavigationController(rootViewController: statisticsViewController)
+    }
+    
+    func statisticsFiltersViewController(delegate: FiltersSelectionViewControllerDelegate?, dateRangeFilter: DateRangeTransactionFilter?, transactionableFilters: [SourceOrDestinationTransactionFilter]) -> UINavigationController? {
+        
+        guard let filtersNavigationController = router.viewController(.FiltersSelectionNavigationViewController) as? UINavigationController,
+            let filtersViewController = filtersNavigationController.topViewController as? FiltersSelectionViewController else { return nil }
+                
+        filtersViewController.delegate = delegate
+        filtersViewController.set(dateRangeFilter: dateRangeFilter,
+                                  sourceOrDestinationFilters: transactionableFilters)
+        return filtersNavigationController
+    }
+    
+    func balanceViewController() -> UINavigationController? {        
+        return UINavigationController(rootViewController: router.viewController(.BalanceViewController))
     }
     
     func incomeSourceEditViewController(delegate: IncomeSourceEditViewControllerDelegate,
@@ -338,7 +355,7 @@ class UIFactory : UIFactoryProtocol {
         return dependentIncomeSourceInfoViewController    
     }
     
-    func incomeSourceInfoViewController(incomeSource: IncomeSourceViewModel?) -> UIViewController? {
+    func incomeSourceInfoViewController(incomeSource: IncomeSourceViewModel?) -> UINavigationController? {
         let incomeSourceInfoViewController = router.viewController(.IncomeSourceInfoViewController) as? IncomeSourceInfoViewController
         
         incomeSourceInfoViewController?.viewModel.set(incomeSource: incomeSource)
@@ -346,11 +363,19 @@ class UIFactory : UIFactoryProtocol {
         return incomeSourceInfoViewController
     }
     
-    func expenseSourceInfoViewController(expenseSource: ExpenseSourceViewModel?) -> UIViewController? {
+    func expenseSourceInfoViewController(expenseSource: ExpenseSourceViewModel?) -> UINavigationController? {
         let expenseSourceInfoViewController = router.viewController(.ExpenseSourceInfoViewController) as? ExpenseSourceInfoViewController
         
         expenseSourceInfoViewController?.viewModel.set(expenseSource: expenseSource)
         
         return expenseSourceInfoViewController
+    }
+    
+    func expenseCategoryInfoViewController(expenseCategory: ExpenseCategoryViewModel?) -> UINavigationController? {
+        let expenseCategoryInfoViewController = router.viewController(.ExpenseCategoryInfoViewController) as? ExpenseCategoryInfoViewController
+        
+        expenseCategoryInfoViewController?.viewModel.set(expenseCategory: expenseCategory)
+        
+        return expenseCategoryInfoViewController
     }
 }

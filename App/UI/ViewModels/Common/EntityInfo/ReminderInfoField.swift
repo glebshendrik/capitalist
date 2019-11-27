@@ -26,7 +26,10 @@ class ReminderInfoField : EntityInfoField {
     }
     
     var nextOccurence: String? {
-        return reminder?.nextOccurrence
+        if let nextOccurrence = reminder?.nextOccurrence {
+            return "Следующее: \(nextOccurrence)"
+        }
+        return reminder?.startDate
     }
     
     var recurrence: String? {

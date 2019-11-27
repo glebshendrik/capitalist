@@ -34,8 +34,7 @@ extension MainViewController {
             showNewExpenseCategoryScreen(basketType: basketType)
         } else if let expenseCategoryViewModel = viewModel.expenseCategoryViewModel(at: indexPath) {
             
-            let filterViewModel = ExpenseCategoryTransactionFilter(expenseCategoryViewModel: expenseCategoryViewModel)
-            showStatistics(with: filterViewModel)
+            showExpenseCategoryInfo(expenseCategory: expenseCategoryViewModel)
         }
     }
     

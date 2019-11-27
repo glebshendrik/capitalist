@@ -10,7 +10,7 @@ import UIKit
 
 extension ActiveEditViewController : ActiveEditTableControllerDelegate {
     func didTapIcon() {
-        push(factory.iconsViewController(delegate: self, iconCategory: viewModel.basketType.iconCategory))
+        modal(factory.iconsViewController(delegate: self, iconCategory: viewModel.basketType.iconCategory))
     }
     
     func didTapActiveType() {
@@ -24,7 +24,7 @@ extension ActiveEditViewController : ActiveEditTableControllerDelegate {
     
     func didTapCurrency() {
         guard viewModel.canChangeCurrency else { return }
-        push(factory.currenciesViewController(delegate: self))
+        modal(factory.currenciesViewController(delegate: self))
     }
     
     func didChange(cost: String?) {

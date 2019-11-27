@@ -30,7 +30,7 @@ class CurrenciesViewController : UIViewController, UIMessagePresenterManagerDepe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loader.showLoader()
+        setupUI()
         loadData()
     }
     
@@ -39,6 +39,20 @@ class CurrenciesViewController : UIViewController, UIMessagePresenterManagerDepe
         layoutUI()
     }
     
+    func setupUI() {
+        setupLoaderUI()
+        setupNavigationBarUI()
+    }
+    
+    func setupLoaderUI() {
+        loader.showLoader()
+    }
+    
+    func setupNavigationBarUI() {
+        setupNavigationBarAppearance()        
+        navigationItem.title = "Выберите иконку"
+    }
+        
     private func loadData() {
         set(activityIndicator, hidden: false)
         firstly {
@@ -119,7 +133,7 @@ extension CurrenciesViewController : UICollectionViewDelegate, UICollectionViewD
         if  let selectedCurrency = viewModel.currencyViewModel(at: indexPath)?.currency {
             
             delegate?.didSelectCurrency(currency: selectedCurrency)
-            navigationController?.popViewController(animated: true)
+            closeButtonHandler()
         }
     }
 }

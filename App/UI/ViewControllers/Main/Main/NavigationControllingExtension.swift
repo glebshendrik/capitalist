@@ -9,14 +9,14 @@
 import UIKit
 
 extension MainViewController {
-    func showStatistics(with filterViewModel: SourceOrDestinationTransactionFilter) {
-        push(factory.statisticsViewController(filter: filterViewModel))
+    func showStatistics(with filterViewModel: SourceOrDestinationTransactionFilter?) {
+        modal(factory.statisticsModalViewController(filter: filterViewModel))
     }
 }
 
 extension MainViewController {
     func showBalance() {
-        push(factory.balanceViewController())
+        modal(factory.balanceViewController())
     }
 }
 
@@ -51,6 +51,14 @@ extension MainViewController {
 extension MainViewController {
     func showNewExpenseCategoryScreen(basketType: BasketType) {
         showEditScreen(expenseCategory: nil, basketType: basketType)
+    }
+    
+    func showExpenseCategoryInfo(expenseCategory: ExpenseCategoryViewModel) {
+        if let creditId = expenseCategory.creditId {
+            showCreditEditScreen(creditId: creditId)
+        } else {
+            modal(factory.expenseCategoryInfoViewController(expenseCategory: expenseCategory))
+        }
     }
     
     func showEditScreen(expenseCategory: ExpenseCategory?, basketType: BasketType) {

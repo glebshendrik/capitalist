@@ -30,12 +30,12 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
 
     func didTapIcon() {
         guard viewModel.canChangeIcon else { return }
-        push(factory.iconsViewController(delegate: self, iconCategory: viewModel.iconCategory))        
+        modal(factory.iconsViewController(delegate: self, iconCategory: viewModel.iconCategory))
     }
     
     func didTapCurrency() {
         guard viewModel.canChangeCurrency else { return }
-        push(factory.currenciesViewController(delegate: self))
+        modal(factory.currenciesViewController(delegate: self))
     }
     
     func didChange(name: String?) {

@@ -42,7 +42,7 @@ struct ReminderViewModel {
             return reminderStartDate.isInFuture ? startDate : nil
         }
         let nextOccurrence = recurrenceRule.occurrences(between: Date(), and: Date().adding(.year, value: 2)).first
-        return nextOccurrence?.dateString(ofStyle: DateFormatter.Style.medium)         
+        return nextOccurrence?.dateTimeString(ofStyle: DateFormatter.Style.medium)         
     }
     
     var reminder: String? {

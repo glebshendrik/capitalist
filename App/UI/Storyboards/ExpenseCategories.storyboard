@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -521,6 +521,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6L-7F-Y27" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="17" y="2401"/>
+        </scene>
+        <!--Expense Category Info View Controller-->
+        <scene sceneID="qqy-3t-VMB">
+            <objects>
+                <navigationController storyboardIdentifier="ExpenseCategoryInfoViewController" id="i6S-1u-eup" customClass="ExpenseCategoryInfoViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xGZ-ZU-HRv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="mS4-wV-W6B" kind="relationship" relationship="rootViewController" id="NqJ-KB-bD9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OiV-aA-XWc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="798" y="2401"/>
+        </scene>
+        <!--EntityInfoViewController-->
+        <scene sceneID="m4T-JT-bYQ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="EntityInfoViewController" id="mS4-wV-W6B" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="thD-LB-BnH"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KsC-ge-B67" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1447" y="2378"/>
         </scene>
         <!--CurrenciesViewController-->
         <scene sceneID="AYM-1Z-fj9">

@@ -10,7 +10,7 @@ import UIKit
 
 extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelegate {
     func didTapIcon() {
-        push(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseCategoryRisk))
+        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseCategoryRisk))
     }
     
     func didChange(name: String?) {
@@ -19,16 +19,12 @@ extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelega
     
     func didTapCurrency() {
         guard viewModel.canChangeCurrency else { return }
-        push(factory.currenciesViewController(delegate: self))
+        modal(factory.currenciesViewController(delegate: self))
     }
     
     func didChange(monthlyPlanned: String?) {
         viewModel.monthlyPlanned = monthlyPlanned
-    }
-    
-    func didTapSetReminder() {
-        modal(factory.reminderEditViewController(delegate: self, viewModel: viewModel.reminderViewModel))
-    }
+    }    
 }
 
 extension IncomeSourceEditViewController : IconsViewControllerDelegate {
@@ -46,12 +42,5 @@ extension IncomeSourceEditViewController : CurrenciesViewControllerDelegate {
     func update(currency: Currency) {
         viewModel.selectedCurrency = currency
         updateCurrencyUI()
-    }
-}
-
-extension IncomeSourceEditViewController : ReminderEditViewControllerDelegate {
-    func didSave(reminderViewModel: ReminderViewModel) {
-        viewModel.reminderViewModel = reminderViewModel
-        updateReminderUI()
     }
 }

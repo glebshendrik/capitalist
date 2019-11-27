@@ -30,7 +30,7 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loader.showLoader()
+        setupUI()
         loadData()
     }
     
@@ -39,6 +39,20 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
         layoutUI()
     }
     
+    func setupUI() {
+        setupLoaderUI()
+        setupNavigationBarUI()
+    }
+    
+    func setupLoaderUI() {
+        loader.showLoader()
+    }
+    
+    func setupNavigationBarUI() {
+        setupNavigationBarAppearance()        
+        navigationItem.title = "Выберите иконку"
+    }
+        
     private func loadData() {
         set(activityIndicator, hidden: false)
         firstly {
@@ -123,7 +137,7 @@ extension IconsViewController : UICollectionViewDelegate, UICollectionViewDataSo
         if  let selectedIcon = viewModel.iconViewModel(at: indexPath)?.icon {
             
             delegate?.didSelectIcon(icon: selectedIcon)
-            navigationController?.popViewController(animated: true)
+            closeButtonHandler()
         }
     }
 }

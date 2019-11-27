@@ -24,20 +24,27 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
     override func viewDidLoad() {
         super.viewDidLoad()
         entityInfoViewController?.viewModel = entityInfoViewModel
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateNavBarUI()
+    }
+    
+    func updateNavBarUI() {
+        navigationBar.isTranslucent = false
+        navigationBar.barTintColor = UIColor.by(.dark333D5B)
     }
     
     func save() {
         entityInfoViewController?.saveData()
     }
     
-    func loadData() {
-        entityInfoViewController?.loadData()
+    func refreshData() {
+        entityInfoViewController?.postFinantialDataUpdated()
     }
-    
-    func close() {
-        dismiss(animated: true, completion: nil)
-    }
-    
+        
     func showEditScreen() {
         
     }

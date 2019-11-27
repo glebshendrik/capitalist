@@ -64,19 +64,29 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
     }
     
     override func entityInfoFields() -> [EntityInfoField] {
-        return [IconInfoField(fieldId: IncomeSourceInfoField.icon.rawValue,
-                              iconType: .raster,
-                              iconURL: selectedIconURL,
-                              placeholder: IconCategory.expenseCategoryJoy.defaultIconName),
-                BasicInfoField(fieldId: IncomeSourceInfoField.income.rawValue,
-                               title: "Доход в этом месяце",
-                               value: incomeSourceViewModel?.amountRounded),
-                BasicInfoField(fieldId: IncomeSourceInfoField.plannedIncome.rawValue,
-                               title: "Запланировано",
-                               value: incomeSourceViewModel?.plannedAtPeriod),
-                ReminderInfoField(fieldId: IncomeSourceInfoField.reminder.rawValue, reminder: reminder),
-                ButtonInfoField(fieldId: IncomeSourceInfoField.statistics.rawValue, title: "Статистика", iconName: nil, isEnabled: true),
-                ButtonInfoField(fieldId: IncomeSourceInfoField.transaction.rawValue, title: "Добавить доход", iconName: nil, isEnabled: true)]
+        var fields: [EntityInfoField] = [IconInfoField(fieldId: IncomeSourceInfoField.icon.rawValue,
+                                                       iconType: .raster,
+                                                       iconURL: selectedIconURL,
+                                                       placeholder: IconCategory.expenseCategoryJoy.defaultIconName),
+                                         BasicInfoField(fieldId: IncomeSourceInfoField.income.rawValue,
+                                                        title: "Доход в этом месяце",
+                                                        value: incomeSourceViewModel?.amountRounded)]
+        if let plannedAtPeriod = incomeSourceViewModel?.plannedAtPeriod {
+            fields.append(BasicInfoField(fieldId: IncomeSourceInfoField.plannedIncome.rawValue,
+                                         title: "Запланировано",
+                                         value: plannedAtPeriod))
+        }
+        fields.append(ReminderInfoField(fieldId: IncomeSourceInfoField.reminder.rawValue,
+                                        reminder: reminder))
+        fields.append(contentsOf: [ButtonInfoField(fieldId: IncomeSourceInfoField.statistics.rawValue,
+                                                   title: "Статистика",
+                                                   iconName: nil,
+                                                   isEnabled: true),
+                                   ButtonInfoField(fieldId: IncomeSourceInfoField.transaction.rawValue,
+                                                   title: "Добавить доход",
+                                                   iconName: nil,
+                                                   isEnabled: true)])
+        return fields
     }
     
     override func saveEntity() -> Promise<Void> {

@@ -25,12 +25,7 @@ extension IncomeSourceEditViewController {
         tableController.monthlyPlannedField.text = viewModel.monthlyPlanned
         tableController.monthlyPlannedField.isEnabled = viewModel.canChangeMonthlyPlanned
     }
-    
-    func updateReminderUI() {
-        tableController.reminderButton.setTitle(viewModel.reminderTitle, for: .normal)
-        tableController.reminderLabel.text = viewModel.reminder
-    }
-    
+        
     func updateRemoveButtonUI() {        
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden)
     }

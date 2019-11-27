@@ -281,6 +281,8 @@
 		FAA5D568238BB22700CC53AD /* EntityTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D567238BB22700CC53AD /* EntityTransactionTableViewCell.swift */; };
 		FAA5D56A238BEA1500CC53AD /* ExpenseSourceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D569238BEA1500CC53AD /* ExpenseSourceInfoViewController.swift */; };
 		FAA5D56C238BEAB400CC53AD /* ExpenseSourceInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D56B238BEAB400CC53AD /* ExpenseSourceInfoViewModel.swift */; };
+		FAA5D56E238E5A0700CC53AD /* ExpenseCategoryInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D56D238E5A0600CC53AD /* ExpenseCategoryInfoViewModel.swift */; };
+		FAA5D570238E5B7700CC53AD /* ExpenseCategoryInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D56F238E5B7700CC53AD /* ExpenseCategoryInfoViewController.swift */; };
 		FAA91271220B35F600F2C251 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA91270220B35F600F2C251 /* Currency.swift */; };
 		FAA91273220C710300F2C251 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA91272220C710300F2C251 /* Settings.storyboard */; };
 		FAA91276220C79EA00F2C251 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA91275220C79EA00F2C251 /* SettingsViewController.swift */; };
@@ -721,6 +723,8 @@
 		FAA5D567238BB22700CC53AD /* EntityTransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTransactionTableViewCell.swift; sourceTree = "<group>"; };
 		FAA5D569238BEA1500CC53AD /* ExpenseSourceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceInfoViewController.swift; sourceTree = "<group>"; };
 		FAA5D56B238BEAB400CC53AD /* ExpenseSourceInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceInfoViewModel.swift; sourceTree = "<group>"; };
+		FAA5D56D238E5A0600CC53AD /* ExpenseCategoryInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryInfoViewModel.swift; sourceTree = "<group>"; };
+		FAA5D56F238E5B7700CC53AD /* ExpenseCategoryInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryInfoViewController.swift; sourceTree = "<group>"; };
 		FAA91270220B35F600F2C251 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		FAA91272220C710300F2C251 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		FAA91275220C79EA00F2C251 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -1218,6 +1222,7 @@
 				FA2847F922F08079003F114A /* ExpenseCategoryUIExtension.swift */,
 				FA6918A321F0EF03003639F6 /* ExpenseCategoryEditTableController.swift */,
 				FA16FC78223AAC930053C273 /* ExpenseCategorySelectViewController.swift */,
+				FAA5D56F238E5B7700CC53AD /* ExpenseCategoryInfoViewController.swift */,
 			);
 			path = ExpenseCategories;
 			sourceTree = "<group>";
@@ -1266,6 +1271,7 @@
 				FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */,
 				FAED7DB521F0E35000BF6FE1 /* ExpenseCategoryEditViewModel.swift */,
 				FA16FC76223AAA650053C273 /* ExpenseCategoriesViewModel.swift */,
+				FAA5D56D238E5A0600CC53AD /* ExpenseCategoryInfoViewModel.swift */,
 			);
 			path = ExpenseCategories;
 			sourceTree = "<group>";
@@ -1876,12 +1882,12 @@
 			children = (
 				FA814F4E235D62300039471A /* Actives */,
 				FABE54E8233CFF8D00DF2B70 /* Credits */,
+				FA30B471228474DA0017470C /* Balance */,
 				FA1E632A2327D0C500081964 /* Borrows */,
 				FA66D8292293D1A800C21E8B /* Transactions */,
 				FA66D8282293D17F00C21E8B /* ExpenseCategories */,
 				FA66D8272293D16700C21E8B /* ExpenseSources */,
 				FA66D8262293D14400C21E8B /* IncomeSources */,
-				FA30B471228474DA0017470C /* Balance */,
 				FACC01E2224B52200044A747 /* Statistics */,
 				FA7DB72822102B4200559878 /* Currencies */,
 				FAA91274220C79CD00F2C251 /* Settings */,
@@ -2400,6 +2406,7 @@
 				FA5751BC237C15BD00912443 /* BasicInfoField.swift in Sources */,
 				FABE54EA233CFFA600DF2B70 /* CreditsViewController.swift in Sources */,
 				FA7EDFFC22CCD74D0054EAD3 /* ProviderConnectionsService.swift in Sources */,
+				FAA5D570238E5B7700CC53AD /* ExpenseCategoryInfoViewController.swift in Sources */,
 				FA6F2E8F224350E7008C160F /* TransactionsCoordinator.swift in Sources */,
 				FA814F52235D63180039471A /* ActiveEditDelegateExtension.swift in Sources */,
 				FABE54F3233F808000DF2B70 /* CreditEditViewModel.swift in Sources */,
@@ -2543,6 +2550,7 @@
 				FA835D4E22607A1100A592F2 /* IncomeAndExpensesGraphDataCalculatingExtension.swift in Sources */,
 				FAD88F4D21AEC1A500BE7BC1 /* AuthenticationService.swift in Sources */,
 				FA87A43322F9BC7800E0BFD0 /* TransactionEditingExtension.swift in Sources */,
+				FAA5D56E238E5A0700CC53AD /* ExpenseCategoryInfoViewModel.swift in Sources */,
 				FA7276A9225249B00086D4D1 /* TransactionController.swift in Sources */,
 				FA165CEE21B7846C00EAA16B /* ResetPasswordViewController.swift in Sources */,
 				FAD88F8821B1181600BE7BC1 /* MenuViewController.swift in Sources */,

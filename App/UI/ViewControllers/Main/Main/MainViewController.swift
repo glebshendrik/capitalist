@@ -109,4 +109,8 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBAction func didTapExpenseSources(_ sender: Any) {
         scrollExpenseSourcesToBeginning()
     }
+    
+    @IBAction func didTapStatistics(_ sender: Any) {
+        showStatistics(with: nil)
+    }
 }

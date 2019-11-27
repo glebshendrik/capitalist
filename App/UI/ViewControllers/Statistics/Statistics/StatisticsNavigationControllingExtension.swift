@@ -132,16 +132,8 @@ extension StatisticsViewController : StatisticsEditTableViewCellDelegate {
 }
 
 extension StatisticsViewController : FiltersSelectionViewControllerDelegate {
-    
-    func prepareSegue(_ segue: UIStoryboardSegue) {
-        guard   segue.identifier == "showFiltersSelectionScreen",
-                let destinationNavigationController = segue.destination as? UINavigationController,
-                let destination = destinationNavigationController.topViewController as? FiltersSelectionViewController else { return }
-        
-        destination.delegate = self
-        destination.set(dateRangeFilter: viewModel.dateRangeFilter,
-                        sourceOrDestinationFilters: viewModel.sourceOrDestinationFilters)
-        
+    func showFilters() {
+        modal(factory.statisticsFiltersViewController(delegate: self, dateRangeFilter: viewModel.dateRangeFilter, transactionableFilters: viewModel.sourceOrDestinationFilters))
     }
     
     func didSelectFilters(dateRangeFilter: DateRangeTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter]) {

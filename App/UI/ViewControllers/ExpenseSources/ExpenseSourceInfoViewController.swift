@@ -16,14 +16,14 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     }
         
     override func didTapIcon(field: IconInfoField?) {
-        push(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSource))
+        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSource))
     }
                 
     override func didTapInfoButton(field: ButtonInfoField?) {
         guard let field = field else { return }
         switch field.identifier {
         case ExpenseSourceInfoField.statistics.identifier:
-            push(factory.statisticsViewController(filter: viewModel.asFilter()))
+            modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
         case ExpenseSourceInfoField.transactionIncome.identifier:        
             modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.expenseSourceViewModel))
         case ExpenseSourceInfoField.transactionExpense.identifier:
@@ -51,24 +51,24 @@ extension ExpenseSourceInfoViewController : ExpenseSourceEditViewControllerDeleg
     }
     
     func didUpdateExpenseSource() {
-        loadData()
+        refreshData()
     }
     
     func didRemoveExpenseSource() {
-        close()
+        closeButtonHandler()
     }
 }
 
 extension ExpenseSourceInfoViewController : TransactionEditViewControllerDelegate {
     func didCreateTransaction(id: Int, type: TransactionType) {
-        loadData()
+        refreshData()
     }
     
     func didUpdateTransaction(id: Int, type: TransactionType) {
-        loadData()
+        refreshData()
     }
     
     func didRemoveTransaction(id: Int, type: TransactionType) {
-        loadData()
+        refreshData()
     }
 }

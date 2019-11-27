@@ -63,22 +63,36 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     }
     
     override func entityInfoFields() -> [EntityInfoField] {
-        return [IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
-                              iconType: .raster,
-                              iconURL: selectedIconURL,
-                              placeholder: IconCategory.expenseSource.defaultIconName),
-                BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
-                               title: "Баланс",
-                               value: expenseSourceViewModel?.amountRounded),
-                BasicInfoField(fieldId: ExpenseSourceInfoField.creditLimit.rawValue,
-                               title: "Кредитный лимит",
-                               value: expenseSourceViewModel?.creditLimit),
-                BasicInfoField(fieldId: ExpenseSourceInfoField.credit.rawValue,
-                               title: "Ваш кредитный долг",
-                               value: expenseSourceViewModel?.credit),
-                ButtonInfoField(fieldId: ExpenseSourceInfoField.statistics.rawValue, title: "Статистика", iconName: nil, isEnabled: true),
-                ButtonInfoField(fieldId: ExpenseSourceInfoField.transactionIncome.rawValue, title: "Добавить доход", iconName: nil, isEnabled: true),
-                ButtonInfoField(fieldId: ExpenseSourceInfoField.transactionExpense.rawValue, title: "Добавить расход", iconName: nil, isEnabled: true)]
+        var fields: [EntityInfoField] = [IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
+                                                       iconType: .raster,
+                                                       iconURL: selectedIconURL,
+                                                       placeholder: IconCategory.expenseSource.defaultIconName),
+                                         BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
+                                                        title: "Баланс",
+                                                        value: expenseSourceViewModel?.amountRounded)]
+        if let expenseSourceViewModel = expenseSourceViewModel, expenseSourceViewModel.hasCreditLimit {
+            fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.creditLimit.rawValue,
+                                         title: "Кредитный лимит",
+                                         value: expenseSourceViewModel.creditLimit))
+        }
+        if let expenseSourceViewModel = expenseSourceViewModel, expenseSourceViewModel.inCredit {
+            fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.credit.rawValue,
+                                         title: "Ваш кредитный долг",
+                                         value: expenseSourceViewModel.credit))
+        }
+        fields.append(contentsOf: [ButtonInfoField(fieldId: ExpenseSourceInfoField.statistics.rawValue,
+                                                   title: "Статистика",
+                                                   iconName: nil,
+                                                   isEnabled: true),
+                                   ButtonInfoField(fieldId: ExpenseSourceInfoField.transactionIncome.rawValue,
+                                                   title: "Добавить доход",
+                                                   iconName: nil,
+                                                   isEnabled: true),
+                                   ButtonInfoField(fieldId: ExpenseSourceInfoField.transactionExpense.rawValue,
+                                                   title: "Добавить расход",
+                                                   iconName: nil,
+                                                   isEnabled: true)])
+        return fields
     }
     
     override func saveEntity() -> Promise<Void> {

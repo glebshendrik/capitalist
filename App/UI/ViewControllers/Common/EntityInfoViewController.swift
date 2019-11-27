@@ -9,11 +9,9 @@
 import UIKit
 import PromiseKit
 import ESPullToRefresh
-class RefreshHeaderAnimator : ESRefreshHeaderAnimator {
-    
-}
+
 class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, UIMessagePresenterManagerDependantProtocol {
-    
+        
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var factory: UIFactoryProtocol!
     
@@ -28,25 +26,18 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        loadData(financialDataInvalidated: false)
+        refreshData()
     }
-        
+          
     func setupUI() {
         viewModel.updatePresentationData()
         setupNavigationBar()
         setupTableView()
+        setupNotifications()
     }
     
     func setupNavigationBar() {
-        let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
-                          NSAttributedString.Key.foregroundColor : UIColor.white]        
-        navigationController?.navigationBar.titleTextAttributes = attributes
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        
-        navigationController?.navigationBar.tintColor = UIColor.by(.textFFFFFF)
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close-circle-icon"), style: .plain, target: self, action: #selector(didTapCloseButton(sender:)))
+        setupNavigationBarAppearance()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "edit-info-icon"), style: .plain, target: self, action: #selector(didTapEditButton(sender:)))
         
         updateNavigationBarUI()
@@ -60,14 +51,18 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
         tableView.register(UINib(nibName: "TransactionsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: TransactionsSectionHeaderView.reuseIdentifier)
         tableView.es.addPullToRefresh {
             [weak self] in
-            self?.loadData()
+            self?.updateData()
         }
         tableView.es.addInfiniteScrolling {
             [weak self] in
-            self?.loadMore()
+            self?.loadMoreTransactions()
         }
         tableView.es.noticeNoMoreData()
-        tableView.es.stopLoadingMore()        
+        tableView.es.stopLoadingMore()
+    }
+    
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
     
     func updateUI() {
@@ -78,41 +73,37 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
     func updateNavigationBarUI() {
         navigationItem.title = viewModel.title
     }
-    
-    @objc func didTapCloseButton(sender: Any) {
-        entityInfoNavigationController?.close()
-    }
-    
+        
     @objc func didTapEditButton(sender: Any) {
         entityInfoNavigationController?.showEditScreen()
     }
 }
 
 extension EntityInfoViewController {
-    func loadData(financialDataInvalidated: Bool = true) {
-        if financialDataInvalidated {
-            postFinantialDataUpdated()
-        }
+    @objc func refreshData() {
+        tableView.es.startPullToRefresh()
+    }
+    
+    private func updateData() {
         setLoading()
         _ = firstly {
-                viewModel.loadData()
+                viewModel.updateData()
             }.catch { _ in
-                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
+                self.messagePresenterManager.show(navBarMessage: "Ошибка обновления данных", theme: .error)
             }.finally {
                 self.stopLoading()
                 self.updateUI()
-        }
+            }
     }
     
-    func loadMore() {
+    private func loadMoreTransactions() {
         let lastTransaction = viewModel.lastTransaction
         
         _ = firstly {
                 viewModel.loadMoreTransactions()
-            }.ensure {
-                if !self.viewModel.hasMoreData {
-                    self.tableView.es.noticeNoMoreData()
-                }
+            }.catch{ _ in
+                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
+            }.finally {
                 self.tableView.reloadData()
                 self.tableView.layoutIfNeeded()
                 
@@ -120,53 +111,34 @@ extension EntityInfoViewController {
                     self.tableView.scrollToRow(at: indexPath, at: .none, animated: false)
                 }
                 self.tableView.es.stopLoadingMore()
+                if !self.viewModel.hasMoreData {
+                    self.tableView.es.noticeNoMoreData()
+                }
             }
     }
     
-    func saveData(financialDataInvalidated: Bool = true) {
-        setLoading()
-        _ = firstly {
-                viewModel.save()
-            }.done {
-                if financialDataInvalidated {
-                    self.postFinantialDataUpdated()
-                }
-            }.catch { _ in
-                self.messagePresenterManager.show(navBarMessage: "Ошибка сохранения данных", theme: .error)
-            }.finally {
-                self.stopLoading()
-                self.updateUI()
-            }
+    func saveData() {
+        viewModel.needToSaveData = true
+        postFinantialDataUpdated()
     }
     
     func removeTransaction(transactionViewModel: TransactionViewModel) {
-        setLoading()
-        
-        firstly {
-            viewModel.removeTransaction(transactionViewModel: transactionViewModel)
-        }.done {
-            self.postFinantialDataUpdated()
-        }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления транзакции", theme: .error)
-        }.finally {
-            self.stopLoading()
-            self.updateUI()
-        }
+        viewModel.transactionToDelete = transactionViewModel
+        postFinantialDataUpdated()
     }
     
-    private func postFinantialDataUpdated() {
+    func postFinantialDataUpdated() {
         NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
     
     private func setLoading() {
-        viewModel.setDataLoading()
-        tableView.es.startPullToRefresh()
-        updateUI()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
     private func stopLoading() {
         tableView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
         tableView.es.resetNoMoreData()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
 
@@ -345,39 +317,39 @@ extension EntityInfoViewController : TransactionEditViewControllerDelegate, Borr
         
     }
     
-    func didUpdateCredit() {
-        loadData()
+    func didUpdateCredit() {        
+        refreshData()
     }
     
     func didRemoveCredit() {
-        loadData()
+        refreshData()
     }
     
     func didUpdateDebt() {
-        loadData()
+        refreshData()
     }
     
     func didUpdateLoan() {
-        loadData()
+        refreshData()
     }
     
     func didRemoveDebt() {
-        loadData()
+        refreshData()
     }
     
     func didRemoveLoan() {
-        loadData()
+        refreshData()
     }
     
     func didCreateTransaction(id: Int, type: TransactionType) {
-        loadData()
+        refreshData()
     }
     
     func didUpdateTransaction(id: Int, type: TransactionType) {
-        loadData()
+        refreshData()
     }
     
     func didRemoveTransaction(id: Int, type: TransactionType) {
-        loadData()
+        refreshData()
     }
 }

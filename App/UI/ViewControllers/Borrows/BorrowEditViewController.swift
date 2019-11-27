@@ -100,12 +100,12 @@ extension BorrowEditViewController {
 
 extension BorrowEditViewController : BorrowEditTableControllerDelegate {
     func didTapIcon() {
-        push(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSourceDebt))
+        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSourceDebt))
     }
     
     func didTapCurrency() {
         guard viewModel.canChangeCurrency else { return }
-        push(factory.currenciesViewController(delegate: self))
+        modal(factory.currenciesViewController(delegate: self))
     }
     
     func didTapBorrowedAt() {

@@ -90,8 +90,16 @@ extension StatisticsViewController {
         titleView = StatisticsTitleView(frame: CGRect.zero)
         titleView.delegate = self
         navigationItem.titleView = titleView
+        
+        setupNavigationBarAppearance()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "filters-icon"), style: .plain, target: self, action: #selector(didTapFiltersButton(_:)))
     }
     
+    @objc func didTapFiltersButton(_ sender: Any) {
+        showFilters()
+    }
+        
     private func setupFiltersUI() {
         filtersCollectionView.delegate = self
         filtersCollectionView.dataSource = self

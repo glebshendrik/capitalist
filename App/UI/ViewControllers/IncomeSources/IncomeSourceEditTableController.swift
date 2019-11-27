@@ -13,7 +13,6 @@ protocol IncomeSourceEditTableControllerDelegate {
     func didChange(name: String?)
     func didTapCurrency()
     func didChange(monthlyPlanned: String?)
-    func didTapSetReminder()
     func didTapRemoveButton()
 }
 
@@ -24,8 +23,6 @@ class IncomeSourceEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!
     @IBOutlet weak var monthlyPlannedField: FormMoneyTextField!
-    @IBOutlet weak var reminderButton: UIButton!
-    @IBOutlet weak var reminderLabel: UILabel!
     @IBOutlet weak var removeCell: UITableViewCell!
     
     var delegate: IncomeSourceEditTableControllerDelegate?
@@ -66,11 +63,7 @@ class IncomeSourceEditTableController : FormFieldsTableViewController {
     @IBAction func didTapIcon(_ sender: Any) {
         delegate?.didTapIcon()
     }
-    
-    @IBAction func didTapSetReminder(_ sender: UIButton) {
-        delegate?.didTapSetReminder()
-    }
-    
+        
     @IBAction func didTapRemoveButton(_ sender: UIButton) {
         delegate?.didTapRemoveButton()
     }

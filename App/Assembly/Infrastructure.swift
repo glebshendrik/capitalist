@@ -82,6 +82,7 @@ struct Infrastructure {
         case ExpenseCategoryEditNavigationController
         case ExpenseCategoryEditViewController
         case ExpenseCategorySelectViewController
+        case ExpenseCategoryInfoViewController
         
         // Transactions
         case TransactionEditNavigationController
@@ -134,6 +135,7 @@ struct Infrastructure {
         // Statistics
         case StatisticsViewController
         case FiltersSelectionViewController
+        case FiltersSelectionNavigationViewController
         
         // Balance
         case BalanceViewController
@@ -170,7 +172,8 @@ struct Infrastructure {
                 return .ExpenseSources
             case .ExpenseCategoryEditNavigationController,
                  .ExpenseCategoryEditViewController,
-                 .ExpenseCategorySelectViewController:
+                 .ExpenseCategorySelectViewController,
+                 .ExpenseCategoryInfoViewController:
                 return .ExpenseCategories
             case .TransactionEditNavigationController,
                  .TransactionEditViewController:
@@ -199,7 +202,8 @@ struct Infrastructure {
             case .SettingsViewController:
                 return .Settings
             case .StatisticsViewController,
-                 .FiltersSelectionViewController:
+                 .FiltersSelectionViewController,
+                 .FiltersSelectionNavigationViewController:
                 return .Statistics
             case .BalanceViewController:
                 return .Balance

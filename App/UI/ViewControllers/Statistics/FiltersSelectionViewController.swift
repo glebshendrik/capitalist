@@ -45,11 +45,7 @@ class FiltersSelectionViewController : UIViewController, UIMessagePresenterManag
     @IBAction func didTapSaveButton(_ sender: Any) {
         delegate?.didSelectFilters(dateRangeFilter: viewModel.selectedDateRangeFilter,
                                    sourceOrDestinationFilters: viewModel.selectedFilters)
-        close()
-    }
-    
-    @IBAction func didTapCloseButton(_ sender: Any) {
-        close()
+        closeButtonHandler()
     }
     
     func set(dateRangeFilter: DateRangeTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter]) {
@@ -114,11 +110,7 @@ extension FiltersSelectionViewController : DateRangeCollectionViewCellDelegate, 
         viewModel.toDate = date
         updateUI()
     }
-    
-    private func close() {
-        navigationController?.dismiss(animated: true)
-    }
-    
+        
     private func showDatePicker(date: Date?, minDate: Date?, maxDate: Date?, delegate: DatePickerViewControllerDelegate) {
         let datePickerController = DatePickerViewController()
         datePickerController.set(delegate: delegate)
@@ -131,8 +123,14 @@ extension FiltersSelectionViewController : DateRangeCollectionViewCellDelegate, 
 
 extension FiltersSelectionViewController {
     private func setupUI() {
+        setupNavigationBar()
         setupCollectionView()
         setupActivityIndicator()
+    }
+    
+    private func setupNavigationBar() {
+        setupNavigationBarAppearance()
+        navigationItem.title = "Фильтры"
     }
     
     private func setupCollectionView() {

@@ -83,5 +83,8 @@ extension ApplicationAssembly {
         container.autoregister(IncomeSourceInfoViewModel.self, initializer: IncomeSourceInfoViewModel.init)
         
         container.autoregister(ExpenseSourceInfoViewModel.self, initializer: ExpenseSourceInfoViewModel.init)
+        
+        container.autoregister(ExpenseCategoryInfoViewModel.self, initializer: ExpenseCategoryInfoViewModel.init)
+        
     }
 }

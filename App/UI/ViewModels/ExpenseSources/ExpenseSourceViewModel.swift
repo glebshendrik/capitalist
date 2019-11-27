@@ -32,6 +32,11 @@ class ExpenseSourceViewModel {
         return expenseSource.amountCents < creditLimitCents
     }
     
+    var hasCreditLimit: Bool {
+        guard let creditLimitCents = expenseSource.creditLimitCents else { return false }
+        return creditLimitCents > 0
+    }
+    
     var creditCents: Int? {
         guard let creditLimitCents = expenseSource.creditLimitCents else { return nil }
         return creditLimitCents - expenseSource.amountCents

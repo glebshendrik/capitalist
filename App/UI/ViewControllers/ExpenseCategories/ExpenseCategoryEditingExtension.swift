@@ -10,7 +10,7 @@ import UIKit
 
 extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableControllerDelegate {
     func didTapIcon() {
-        push(factory.iconsViewController(delegate: self, iconCategory: viewModel.basketType.iconCategory))
+        modal(factory.iconsViewController(delegate: self, iconCategory: viewModel.basketType.iconCategory))
     }
     
     func didChange(name: String?) {
@@ -23,7 +23,7 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableController
     
     func didTapCurrency() {
         guard viewModel.canChangeCurrency else { return }
-        push(factory.currenciesViewController(delegate: self))
+        modal(factory.currenciesViewController(delegate: self))
     }
         
     func didTapSetReminder() {        

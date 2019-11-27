@@ -13,7 +13,7 @@ extension BalanceViewController : BalanceExpenseSourcesTableSupportDelegate, Bal
     
     
     func didSelect(expenseSource: ExpenseSourceViewModel) {
-        showStatistics(with: expenseSource.asTransactionFilter())
+        modal(factory.expenseSourceInfoViewController(expenseSource: expenseSource))
     }
     
     func didSelect(active: ActiveViewModel) {
@@ -34,12 +34,5 @@ extension BalanceViewController : BalanceExpenseSourcesTableSupportDelegate, Bal
     func didRemoveActive(with basketType: BasketType) {        
         loadBudget()
         loadActives(finantialDataInvalidated: true)
-    }
-}
-
-extension BalanceViewController {
-    
-    func showStatistics(with filterViewModel: SourceOrDestinationTransactionFilter) {
-        push(factory.statisticsViewController(filter: filterViewModel))
     }
 }

@@ -15,9 +15,9 @@ protocol UIFactoryDependantProtocol {
 
 protocol UIFactoryProtocol {
     func iconsViewController(delegate: IconsViewControllerDelegate,
-                             iconCategory: IconCategory) -> IconsViewController?
+                             iconCategory: IconCategory) -> UINavigationController?
     
-    func currenciesViewController(delegate: CurrenciesViewControllerDelegate) -> CurrenciesViewController?
+    func currenciesViewController(delegate: CurrenciesViewControllerDelegate) -> UINavigationController?
     
     func reminderEditViewController(delegate: ReminderEditViewControllerDelegate,
                                     viewModel: ReminderViewModel) -> UINavigationController?
@@ -93,21 +93,27 @@ protocol UIFactoryProtocol {
     
     func statisticsViewController(filter: SourceOrDestinationTransactionFilter?) -> UIViewController?
     
-    func balanceViewController() -> UIViewController?
+    func statisticsModalViewController(filter: SourceOrDestinationTransactionFilter?) -> UINavigationController?
+    
+    func statisticsFiltersViewController(delegate: FiltersSelectionViewControllerDelegate?, dateRangeFilter: DateRangeTransactionFilter?, transactionableFilters: [SourceOrDestinationTransactionFilter]) -> UINavigationController? 
+    
+    func balanceViewController() -> UINavigationController?
     
     func incomeSourceEditViewController(delegate: IncomeSourceEditViewControllerDelegate,
                                         incomeSource: IncomeSource?) -> UINavigationController?
     
-    func incomeSourceInfoViewController(incomeSource: IncomeSourceViewModel?) -> UIViewController?
+    func incomeSourceInfoViewController(incomeSource: IncomeSourceViewModel?) -> UINavigationController?
     
     func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
                                          expenseSource: ExpenseSource?) -> UINavigationController?
     
-    func expenseSourceInfoViewController(expenseSource: ExpenseSourceViewModel?) -> UIViewController?
+    func expenseSourceInfoViewController(expenseSource: ExpenseSourceViewModel?) -> UINavigationController?
     
     func expenseCategoryEditViewController(delegate: ExpenseCategoryEditViewControllerDelegate,
                                            expenseCategory: ExpenseCategory?,
                                            basketType: BasketType) -> UINavigationController?
+    
+    func expenseCategoryInfoViewController(expenseCategory: ExpenseCategoryViewModel?) -> UINavigationController?
         
     func activeEditViewController(delegate: ActiveEditViewControllerDelegate,
                                   active: Active?,

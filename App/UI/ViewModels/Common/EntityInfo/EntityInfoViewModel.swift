@@ -13,7 +13,8 @@ import SwiftDate
 class EntityInfoViewModel {
     private let transactionsCoordinator: TransactionsCoordinatorProtocol
     
-    public private(set) var isDataLoading: Bool = false
+    public var needToSaveData: Bool = false
+    public var transactionToDelete: TransactionViewModel? = nil
             
     var transactionable: Transactionable? { return nil }
 
@@ -45,32 +46,7 @@ class EntityInfoViewModel {
         return sections.item(at: index)
     }
     
-    func save() -> Promise<Void> {
-        return  firstly {
-                    saveEntity()
-                }.then {
-                    self.loadEntity()
-                }
-    }
     
-    func saveEntity() -> Promise<Void> {
-        return Promise.value(())
-    }
-    
-    func loadData() -> Promise<Void> {
-        setDataLoading()
-        return  firstly {
-                    when(fulfilled: loadEntity(), loadTransactions())
-                }.ensure {
-                    self.isDataLoading = false
-                    self.updatePresentationData()
-                }
-    }
-    
-    func setDataLoading() {
-        isDataLoading = true
-        updateSections()
-    }
     
     func updatePresentationData() {
         updateTransactionsSections()
@@ -81,15 +57,42 @@ class EntityInfoViewModel {
         let fieldsSection = EntityInfoFieldsSection(infoFields: entityInfoFields())
 
         sections = [fieldsSection, EntityInfoTransactionsHeaderSection()]
-        
-//        if isDataLoading {
-//            sections.append(EntityInfoTransactionsLoadingSection())
-//        }
-//        else
-            
+                    
         if transactionsSections.count > 0 {
             sections.append(contentsOf: transactionsSections)
         }
+    }
+    
+    func updateData() -> Promise<Void> {
+        if needToSaveData {
+            return saveAndLoadData()
+        }
+        if let transactionToDelete = transactionToDelete {
+            return removeTransaction(transactionViewModel: transactionToDelete)
+        }
+        return loadData()
+    }
+    
+    private func loadData() -> Promise<Void> {
+        return  firstly {
+                    when(fulfilled: loadEntity(), loadTransactions())
+                }.ensure {
+                    self.updatePresentationData()
+                }
+    }
+    
+    private func saveAndLoadData() -> Promise<Void> {
+        return  firstly {
+                    saveEntity()
+                }.then {
+                    self.loadData()
+                }.done {
+                    self.needToSaveData = false
+                }
+    }
+    
+    func saveEntity() -> Promise<Void> {
+        return Promise.value(())
     }
     
     func loadEntity() -> Promise<Void> {
@@ -121,7 +124,7 @@ extension EntityInfoViewModel {
     func loadTransactions() -> Promise<Void> {
         return  firstly {
                     loadTransactionsBatch(lastGotAt: nil)
-                }.get { transactions in
+                }.done { transactions in
                     self.transactionViewModels = transactions.map { TransactionViewModel(transaction: $0) }
                     self.hasMoreData = transactions.count > 0
                     self.updateTransactionsSections()
@@ -131,7 +134,7 @@ extension EntityInfoViewModel {
     func loadMoreTransactions() -> Promise<Void> {
         return  firstly {
                     loadTransactionsBatch(lastGotAt: transactionViewModels.last?.gotAt)
-                }.get { transactions in
+                }.done { transactions in
                     let batch = transactions.map { TransactionViewModel(transaction: $0) }
                     self.transactionViewModels.append(contentsOf: batch)
                     self.hasMoreData = transactions.count > 0
@@ -139,12 +142,13 @@ extension EntityInfoViewModel {
                 }.asVoid()
     }
     
-    func removeTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {
-        setDataLoading()
+    private func removeTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {
         return  firstly {
                     transactionsCoordinator.destroy(by: transactionViewModel.id)
                 }.then {
                     self.loadData()
+                }.done {
+                    self.transactionToDelete = nil
                 }
     }
     

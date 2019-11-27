@@ -43,14 +43,6 @@ class IncomeSourceEditViewModel {
         return selectedCurrency?.code
     }
     
-    var reminderTitle: String {
-        return reminderViewModel.isReminderSet ? "Изменить напоминание" : "Установить напоминание"
-    }
-    
-    var reminder: String? {
-        return reminderViewModel.reminder
-    }
-    
     // Permissions
     
     var canChangeCurrency: Bool {

@@ -56,7 +56,7 @@ extension SettingsViewController : SettingsTableControllerDelegate {
     }
     
     func didTapCurrency() {
-        push(factory.currenciesViewController(delegate: self))
+        modal(factory.currenciesViewController(delegate: self))
     }
     
     func didTapPeriod() {
