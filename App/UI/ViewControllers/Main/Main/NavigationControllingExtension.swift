@@ -55,7 +55,7 @@ extension MainViewController {
     
     func showExpenseCategoryInfo(expenseCategory: ExpenseCategoryViewModel) {
         if let creditId = expenseCategory.creditId {
-            //showCreditEditScreen(creditId: creditId)
+            modal(factory.creditInfoViewController(creditId: creditId, credit: nil))            
         } else {
             modal(factory.expenseCategoryInfoViewController(expenseCategory: expenseCategory))
         }

@@ -238,5 +238,10 @@ extension ApplicationAssembly {
         container.registerForSkrudzhStoryboard(ActiveInfoViewController.self) { (r, c) in
             c.viewModel = r.resolve(ActiveInfoViewModel.self)
         }
+        
+        // CreditInfoViewController
+        container.registerForSkrudzhStoryboard(CreditInfoViewController.self) { (r, c) in
+            c.viewModel = r.resolve(CreditInfoViewModel.self)
+        }
     }
 }

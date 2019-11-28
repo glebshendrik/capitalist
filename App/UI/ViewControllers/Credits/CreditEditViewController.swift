@@ -281,7 +281,7 @@ extension CreditEditViewController {
         tableController.onBalanceSwitchField.value = viewModel.shouldRecordOnBalance
         
         tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: false, reload: false)
-        tableController.expenseSourceField.placeholder = "Кошелек перевода кредита"
+        tableController.expenseSourceField.placeholder = "Кошелек"
         tableController.expenseSourceField.text = viewModel.expenseSourceName
         tableController.expenseSourceField.subValue = viewModel.expenseSourceAmount
         tableController.expenseSourceField.imageName = viewModel.expenseSourceIconDefaultImageName
@@ -318,13 +318,7 @@ extension CreditEditViewController {
         tableController.set(cell: tableController.periodCell, hidden: viewModel.periodFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: false, reload: false)
         
-        tableController.reloadData(animated: animated)
-//        tableController.tableView.beginUpdates()
-        
-//        tableController.tableView.reloadData(with: .automatic)
-        
-//        tableController.tableView.endUpdates()
-        
+        tableController.reloadData(animated: animated)        
     }
     
     private func showCreditTypesSheet() {

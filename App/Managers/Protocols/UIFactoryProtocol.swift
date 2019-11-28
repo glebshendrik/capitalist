@@ -85,6 +85,8 @@ protocol UIFactoryProtocol {
                                   creditId: Int?,
                                   destination: TransactionDestination?) -> UINavigationController?
     
+    func creditInfoViewController(creditId: Int?, credit: CreditViewModel?) -> UINavigationController?
+        
     func waitingBorrowsViewController(delegate: WaitingBorrowsViewControllerDelegate,
                                       source: TransactionSource,
                                       destination: TransactionDestination,

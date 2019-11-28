@@ -98,6 +98,7 @@ struct Infrastructure {
         case CreditsViewController
         case CreditEditNavigationController
         case CreditEditViewController
+        case CreditInfoViewController
         
         // Actives
         case ActiveEditNavigationController
@@ -215,7 +216,8 @@ struct Infrastructure {
                 return .Borrows
             case .CreditsViewController,
                  .CreditEditNavigationController,
-                 .CreditEditViewController:
+                 .CreditEditViewController,
+                 .CreditInfoViewController:
                 return .Credits
             case .ActiveEditNavigationController,
                  .ActiveEditViewController,

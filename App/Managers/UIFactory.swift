@@ -386,4 +386,17 @@ class UIFactory : UIFactoryProtocol {
         
         return activeInfoViewController
     }
+    
+    func creditInfoViewController(creditId: Int?, credit: CreditViewModel?) -> UINavigationController? {
+        let creditInfoViewController = router.viewController(.CreditInfoViewController) as? CreditInfoViewController
+        
+        if let credit = credit {
+            creditInfoViewController?.viewModel.set(credit: credit)
+        }
+        else {
+            creditInfoViewController?.viewModel.creditId = creditId
+        }
+        
+        return creditInfoViewController
+    }
 }

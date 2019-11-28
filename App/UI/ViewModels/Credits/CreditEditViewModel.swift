@@ -48,15 +48,8 @@ class CreditEditViewModel {
     var selectedDestination: ExpenseSourceViewModel? = nil
     var creditingTransactionAttributes: CreditingTransactionNestedAttributes? {
         guard isNew else { return nil }
-        if shouldRecordOnBalance {
-            return CreditingTransactionNestedAttributes(id: creditingTransaction?.id, destinationId: selectedDestination?.id)
-        }
-        else {
-            return CreditingTransactionNestedAttributes(id: nil, destinationId: nil)
-        }
-        
+        return CreditingTransactionNestedAttributes(id: nil, destinationId: shouldRecordOnBalance ? selectedDestination?.id : nil)
     }
-    var creditingTransaction: TransactionViewModel? = nil
     
     var monthlyPaymentToSave: String? {
         if let monthlyPayment = monthlyPayment, !monthlyPayment.isEmpty {

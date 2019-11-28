@@ -26,6 +26,7 @@ struct Credit : Decodable {
     let deletedAt: Date?
     let expenseCategoryId: Int
     let reminder: Reminder?
+    let expenseCategory: ExpenseCategory?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -45,6 +46,7 @@ struct Credit : Decodable {
         case deletedAt = "deleted_at"
         case expenseCategoryId = "expense_category_id"
         case reminder
+        case expenseCategory = "expense_category"
     }
 }
 
@@ -152,7 +154,7 @@ struct CreditUpdatingForm : Encodable, Validatable {
     let amountCents: Int?
     let returnAmountCents: Int?
     let monthlyPaymentCents: Int?
-    let gotAt: Date
+    let gotAt: Date?
     let period: Int?
     let reminderAttributes: ReminderNestedAttributes?
     let creditingTransactionAttributes: CreditingTransactionNestedAttributes?
