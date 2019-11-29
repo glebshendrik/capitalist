@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol EntityInfoTableViewCellDelegate {
+protocol EntityInfoTableViewCellDelegate : class {
     
 }
 
 class EntityInfoTableViewCell : UITableViewCell {
-    var delegate: EntityInfoTableViewCellDelegate?
+    weak var delegate: EntityInfoTableViewCellDelegate?
     
     var field: EntityInfoField? {
         didSet {

@@ -88,6 +88,8 @@ extension ApplicationAssembly {
         
         container.autoregister(ActiveInfoViewModel.self, initializer: ActiveInfoViewModel.init)
         
-        container.autoregister(CreditInfoViewModel.self, initializer: CreditInfoViewModel.init)        
+        container.autoregister(CreditInfoViewModel.self, initializer: CreditInfoViewModel.init)
+        
+        container.autoregister(BorrowInfoViewModel.self, initializer: BorrowInfoViewModel.init)
     }
 }

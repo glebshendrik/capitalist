@@ -115,9 +115,10 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
         
         firstly {
             removePromise()
-        }.done {
-            self.didRemove()
-            self.close()
+        }.done {            
+            self.close() {
+                self.didRemove()
+            }
         }.catch { error in
             switch error {
             case APIRequestError.unprocessedEntity(let errors):

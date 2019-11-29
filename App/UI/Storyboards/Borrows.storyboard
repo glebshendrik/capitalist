@@ -990,6 +990,32 @@
             </objects>
             <point key="canvasLocation" x="105" y="733"/>
         </scene>
+        <!--Borrow Info View Controller-->
+        <scene sceneID="zCy-P0-Kil">
+            <objects>
+                <navigationController storyboardIdentifier="BorrowInfoViewController" id="lAv-K8-0MT" customClass="BorrowInfoViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mrv-1i-pdY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BIj-GW-K4x" kind="relationship" relationship="rootViewController" id="EvG-1E-99u"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dKw-lz-6Kk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1036" y="656"/>
+        </scene>
+        <!--EntityInfoViewController-->
+        <scene sceneID="uOk-ud-Xeb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="EntityInfoViewController" id="BIj-GW-K4x" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="eAI-Ua-eIN"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y3u-0O-7rQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1708" y="639"/>
+        </scene>
         <!--Waiting Borrows View Controller-->
         <scene sceneID="24b-LG-adn">
             <objects>

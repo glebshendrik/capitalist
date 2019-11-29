@@ -206,10 +206,9 @@ extension BorrowsViewController : BorrowEditViewControllerDelegate {
     func didRemoveLoan() {
         loadLoans(finantialDataInvalidated: true)
     }
-    
-    
+        
     func showBorrow(_ borrow: BorrowViewModel) {
-        modal(factory.borrowEditViewController(delegate: self, type: borrow.type, borrowId: borrow.id, source: nil, destination: nil))
+        modal(factory.borrowInfoViewController(borrowId: nil, borrowType: nil, borrow: borrow))
     }
     
     func showNewBorrow() {

@@ -15,6 +15,7 @@ class EntityInfoViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     
     var isUpdatingData: Bool = false
+    public private(set) var isDeleted: Bool = false
     var hasMoreData: Bool = true
     var needToSaveData: Bool = false
     var transactionToDelete: TransactionViewModel? = nil
@@ -70,6 +71,7 @@ class EntityInfoViewModel {
     }
     
     func updateData() -> Promise<Void> {
+        guard !isDeleted else { return Promise.value(()) }
         isUpdatingData = true
         if needToSaveData {
             return saveAndLoadData()
@@ -89,7 +91,7 @@ class EntityInfoViewModel {
                 }
     }
     
-    func loadDefaultPeriod() -> Promise<Void> {
+    private func loadDefaultPeriod() -> Promise<Void> {
         return  firstly {
                     accountCoordinator.loadCurrentUser()
                 }.done { user in
@@ -139,11 +141,20 @@ class EntityInfoViewModel {
     private func postFinantialDataUpdated() {
         NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
+    
+    func setAsDeleted() {
+        isDeleted = true
+        postFinantialDataUpdated()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 // Transactions
 extension EntityInfoViewModel {
-    func loadTransactions() -> Promise<Void> {
+    private func loadTransactions() -> Promise<Void> {
         return  firstly {
                     loadTransactionsBatch(lastGotAt: nil)
                 }.done { transactions in
@@ -154,6 +165,7 @@ extension EntityInfoViewModel {
     }
     
     func loadMoreTransactions() -> Promise<Void> {
+        guard !isDeleted else { return Promise.value(()) }
         return  firstly {
                     loadTransactionsBatch(lastGotAt: transactionViewModels.last?.gotAt)
                 }.done { transactions in

@@ -65,6 +65,12 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
     
+    func postFinantialDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+    }
+    
+    
+    
     func updateUI() {
         tableView.reloadData()
         updateNavigationBarUI()
@@ -76,6 +82,10 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
         
     @objc func didTapEditButton(sender: Any) {
         entityInfoNavigationController?.showEditScreen()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -105,7 +115,7 @@ extension EntityInfoViewController {
                 viewModel.loadMoreTransactions()
             }.catch{ _ in
                 self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
-            }.finally {
+            }.finally {                
                 self.tableView.reloadData()
                 self.tableView.layoutIfNeeded()
                 
@@ -127,10 +137,6 @@ extension EntityInfoViewController {
     func removeTransaction(transactionViewModel: TransactionViewModel) {
         viewModel.transactionToDelete = transactionViewModel
         refreshData()
-    }
-    
-    func postFinantialDataUpdated() {
-        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
     
     private func setLoading() {

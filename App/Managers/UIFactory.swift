@@ -399,4 +399,22 @@ class UIFactory : UIFactoryProtocol {
         
         return creditInfoViewController
     }
+    
+    func borrowInfoViewController(borrowId: Int?,
+                                  borrowType: BorrowType?,
+                                  borrow: BorrowViewModel?) -> UINavigationController? {
+        
+        let borrowInfoViewController = router.viewController(.BorrowInfoViewController) as? BorrowInfoViewController
+        
+        if let borrow = borrow {
+            borrowInfoViewController?.viewModel.set(borrow: borrow)
+        }
+        else {
+            borrowInfoViewController?.viewModel.borrowId = borrowId
+            borrowInfoViewController?.viewModel.borrowType = borrowType
+        }
+        
+        
+        return borrowInfoViewController
+    }
 }

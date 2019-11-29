@@ -55,6 +55,7 @@ extension ExpenseSourceInfoViewController : ExpenseSourceEditViewControllerDeleg
     }
     
     func didRemoveExpenseSource() {
+        viewModel.setAsDeleted()
         closeButtonHandler()
     }
 }

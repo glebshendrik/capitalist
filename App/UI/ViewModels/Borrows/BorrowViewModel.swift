@@ -43,6 +43,14 @@ class BorrowViewModel {
         return borrow.amountCentsLeft.moneyDecimalString(with: currency) ?? ""
     }
     
+    var amountReturnedRounded: String {
+        return amountReturned(shouldRound: true)
+    }
+    
+    var amountReturned: String {
+        return amountReturned(shouldRound: false)
+    }
+    
     var diplayAmount: String {
         return amountLeftRounded
     }
@@ -61,6 +69,10 @@ class BorrowViewModel {
     
     var isLoan: Bool {
         return type == .loan
+    }
+    
+    var isReturned: Bool {
+        return borrow.isReturned
     }
         
     var defaultIconName: String {
@@ -92,6 +104,13 @@ class BorrowViewModel {
         return borrow.borrowingTransactionId
     }
     
+    var title: String {
+        switch type {
+        case .debt: return "Долг (вам должны)"
+        case .loan: return "Займ (вы должны)"
+        }
+    }
+    
     init(borrow: Borrow) {
         self.borrow = borrow
     }
@@ -102,5 +121,9 @@ class BorrowViewModel {
     
     private func amountLeft(shouldRound: Bool) -> String {
         return borrow.amountCentsLeft.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
+    }
+    
+    private func amountReturned(shouldRound: Bool) -> String {
+        return borrow.returnedAmountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }
 }

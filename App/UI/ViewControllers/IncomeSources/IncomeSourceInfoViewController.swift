@@ -64,6 +64,7 @@ extension IncomeSourceInfoViewController : IncomeSourceEditViewControllerDelegat
     }
     
     func didRemoveIncomeSource() {
+        viewModel.setAsDeleted()
         closeButtonHandler()
     }
 }

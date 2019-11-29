@@ -287,6 +287,8 @@
 		FAA5D574238EC85C00CC53AD /* ActiveInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D573238EC85B00CC53AD /* ActiveInfoViewController.swift */; };
 		FAA5D576238F22F200CC53AD /* CreditInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D575238F22F200CC53AD /* CreditInfoViewModel.swift */; };
 		FAA5D578238F9FAA00CC53AD /* CreditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D577238F9FAA00CC53AD /* CreditInfoViewController.swift */; };
+		FAA5D57A238FA9CD00CC53AD /* BorrowInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D579238FA9CD00CC53AD /* BorrowInfoViewModel.swift */; };
+		FAA5D57C238FE55900CC53AD /* BorrowInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D57B238FE55900CC53AD /* BorrowInfoViewController.swift */; };
 		FAA91271220B35F600F2C251 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA91270220B35F600F2C251 /* Currency.swift */; };
 		FAA91273220C710300F2C251 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA91272220C710300F2C251 /* Settings.storyboard */; };
 		FAA91276220C79EA00F2C251 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA91275220C79EA00F2C251 /* SettingsViewController.swift */; };
@@ -733,6 +735,8 @@
 		FAA5D573238EC85B00CC53AD /* ActiveInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveInfoViewController.swift; sourceTree = "<group>"; };
 		FAA5D575238F22F200CC53AD /* CreditInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditInfoViewModel.swift; sourceTree = "<group>"; };
 		FAA5D577238F9FAA00CC53AD /* CreditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditInfoViewController.swift; sourceTree = "<group>"; };
+		FAA5D579238FA9CD00CC53AD /* BorrowInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowInfoViewModel.swift; sourceTree = "<group>"; };
+		FAA5D57B238FE55900CC53AD /* BorrowInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowInfoViewController.swift; sourceTree = "<group>"; };
 		FAA91270220B35F600F2C251 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		FAA91272220C710300F2C251 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		FAA91275220C79EA00F2C251 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -1028,6 +1032,7 @@
 				FA0570F6232A6EE4002B4706 /* LoansTableSupport.swift */,
 				FA0570F8232AAE7D002B4706 /* BorrowEditViewController.swift */,
 				FA0570FA232AAE9B002B4706 /* BorrowEditTableController.swift */,
+				FAA5D57B238FE55900CC53AD /* BorrowInfoViewController.swift */,
 			);
 			path = Borrows;
 			sourceTree = "<group>";
@@ -1039,6 +1044,7 @@
 				FA0570EF232A3B75002B4706 /* BorrowViewModel.swift */,
 				FA0570FC232AB714002B4706 /* BorrowEditViewModel.swift */,
 				FA7462FC2281AC5100E6D39B /* WaitingBorrowsViewModel.swift */,
+				FAA5D579238FA9CD00CC53AD /* BorrowInfoViewModel.swift */,
 			);
 			path = Borrows;
 			sourceTree = "<group>";
@@ -2234,6 +2240,7 @@
 				FA6F2E96224515DE008C160F /* HistoryTransactionFilter.swift in Sources */,
 				FA7276D822537BF30086D4D1 /* FiltersSelectionViewModel.swift in Sources */,
 				FA835D5A2265BC4500A592F2 /* GraphHistoryTransactionFilter.swift in Sources */,
+				FAA5D57A238FA9CD00CC53AD /* BorrowInfoViewModel.swift in Sources */,
 				FA7EE00022CDA1940054EAD3 /* AccountViewModel.swift in Sources */,
 				FA0CAE2821D67B7F00805288 /* IconsViewModel.swift in Sources */,
 				FA0CAE1521D669C000805288 /* Icon.swift in Sources */,
@@ -2415,6 +2422,7 @@
 				FA2847EC22EEEED7003F114A /* FormTextFieldAppearance.swift in Sources */,
 				FA16FC71223A82930053C273 /* ExpenseSourceTableViewCell.swift in Sources */,
 				FABE54DC233BE50D00DF2B70 /* CreditsServiceProtocol.swift in Sources */,
+				FAA5D57C238FE55900CC53AD /* BorrowInfoViewController.swift in Sources */,
 				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
 				FA5751BC237C15BD00912443 /* BasicInfoField.swift in Sources */,
 				FABE54EA233CFFA600DF2B70 /* CreditsViewController.swift in Sources */,

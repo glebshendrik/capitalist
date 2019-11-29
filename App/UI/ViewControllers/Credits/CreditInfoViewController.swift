@@ -64,6 +64,7 @@ extension CreditInfoViewController : CreditEditViewControllerDelegate {
     }
     
     func didRemoveCredit() {
+        viewModel.setAsDeleted()
         closeButtonHandler()
     }
 }

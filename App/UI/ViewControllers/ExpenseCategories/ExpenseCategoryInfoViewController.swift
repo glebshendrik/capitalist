@@ -64,6 +64,7 @@ extension ExpenseCategoryInfoViewController : ExpenseCategoryEditViewControllerD
     }
     
     func didRemoveExpenseCategory(with basketType: BasketType) {
+        viewModel.setAsDeleted()
         closeButtonHandler()
     }
 }

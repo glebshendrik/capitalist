@@ -24,7 +24,6 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
     override func viewDidLoad() {
         super.viewDidLoad()
         entityInfoViewController?.viewModel = entityInfoViewModel
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

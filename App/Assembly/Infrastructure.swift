@@ -93,6 +93,7 @@ struct Infrastructure {
         case BorrowEditNavigationController
         case BorrowEditViewController
         case WaitingBorrowsViewController
+        case BorrowInfoViewController
         
         // Credits
         case CreditsViewController
@@ -212,7 +213,8 @@ struct Infrastructure {
             case .BorrowsViewController,
                  .BorrowEditNavigationController,
                  .BorrowEditViewController,
-                 .WaitingBorrowsViewController:
+                 .WaitingBorrowsViewController,
+                 .BorrowInfoViewController:
                 return .Borrows
             case .CreditsViewController,
                  .CreditEditNavigationController,

@@ -34,6 +34,7 @@ struct Borrow : Decodable {
     let comment: String?
     let isReturned: Bool
     let amountCentsLeft: Int
+    let returnedAmountCents: Int
     let borrowingTransactionId: Int?
     
     enum CodingKeys: String, CodingKey {
@@ -48,6 +49,7 @@ struct Borrow : Decodable {
         case comment
         case isReturned = "is_returned"
         case amountCentsLeft = "amount_cents_left"
+        case returnedAmountCents = "returned_amount_cents"
         case borrowingTransactionId = "borrowing_transaction_id"
     }
 }
@@ -156,7 +158,7 @@ struct BorrowUpdatingForm : Encodable, Validatable {
     let name: String?
     let iconURL: URL?
     let amountCents: Int?
-    let borrowedAt: Date
+    let borrowedAt: Date?
     let payday: Date?
     let comment: String?
     let borrowingTransactionAttributes: BorrowingTransactionNestedAttributes?

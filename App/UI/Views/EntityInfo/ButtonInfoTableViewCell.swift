@@ -30,9 +30,11 @@ class ButtonInfoTableViewCell : EntityInfoTableViewCell {
             button.setImage(UIImage(named: iconName), for: .normal)
         }
         button.isEnabled = field.isEnabled
+        button.backgroundColor = UIColor.by(field.backgroundColor)
     }
     
     @IBAction func didTapButton(_ sender: Any) {
+        guard let field = butonField, field.isEnabled else { return }
         buttonDelegate?.didTapInfoButton(field: butonField)
     }
 }

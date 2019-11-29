@@ -74,6 +74,7 @@ extension ActiveInfoViewController : ActiveEditViewControllerDelegate {
     }
     
     func didRemoveActive(with basketType: BasketType) {
+        viewModel.setAsDeleted()
         closeButtonHandler()
     }
 }

@@ -51,6 +51,21 @@ class CreditInfoViewModel : EntityInfoViewModel {
         return creditViewModel?.name ?? "Кредит"
     }
     
+    var payTitle: String? {
+        guard let creditViewModel = creditViewModel else { return nil }
+        return creditViewModel.isPaid ? "Кредит выплачен" : "Оплатить"
+    }
+    
+    var payIconName: String? {
+        guard let creditViewModel = creditViewModel else { return nil }
+        return creditViewModel.isPaid ? nil : nil
+    }
+    
+    var payColor: ColorAsset {
+        guard let creditViewModel = creditViewModel else { return .blue5B86F7 }
+        return creditViewModel.isPaid ? .dark404B6F : .blue5B86F7
+    }
+    
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          creditsCoordinator: CreditsCoordinatorProtocol) {
@@ -144,9 +159,10 @@ class CreditInfoViewModel : EntityInfoViewModel {
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: CreditInfoField.transaction.rawValue,
-                                                   title: "Оплатить",
-                                                   iconName: nil,
-                                                   isEnabled: true)])
+                                                   title: payTitle,
+                                                   iconName: payIconName,
+                                                   isEnabled: !creditViewModel.isPaid,
+                                                   backgroundColor: payColor)])
         return fields
     }
     

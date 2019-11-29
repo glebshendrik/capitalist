@@ -79,6 +79,10 @@ class CreditViewModel {
         return creditTypeViewModel.formatted(value: Int(credit.period))
     }
     
+    var isPaid: Bool {
+        return credit.isPaid
+    }
+    
     init(credit: Credit) {
         self.credit = credit
         self.reminderViewModel = ReminderViewModel(reminder: credit.reminder)
