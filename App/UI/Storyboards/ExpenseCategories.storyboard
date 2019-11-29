@@ -387,6 +387,7 @@
                         <outlet property="monthlyPlannedField" destination="1M1-7j-Lhp" id="a4e-V8-jzw"/>
                         <outlet property="nameField" destination="tKV-xe-ldw" id="jnu-Gz-TcL"/>
                         <outlet property="reminderButton" destination="ljH-iW-Ndb" id="hTE-Td-jAZ"/>
+                        <outlet property="reminderCell" destination="aNT-dM-JbJ" id="oy8-BJ-Iki"/>
                         <outlet property="reminderLabel" destination="vC0-RV-Nk9" id="agc-sm-zGI"/>
                         <outlet property="removeCell" destination="2le-om-EGV" id="3cK-ut-xZj"/>
                     </connections>

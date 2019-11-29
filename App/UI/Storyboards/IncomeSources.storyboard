@@ -27,6 +27,24 @@
                         <color key="backgroundColor" name="dark 2A314B"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="Bhu-m5-4e8">
+                            <rect key="frame" x="0.0" y="576" width="375" height="100"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnY-wU-uh1">
+                                    <rect key="frame" x="32" y="0.0" width="311" height="0.0"/>
+                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                    <color key="textColor" red="0.47450980390000003" green="0.51764705879999995" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="XnY-wU-uh1" secondAttribute="trailing" constant="32" id="4c8-nJ-HFx"/>
+                                <constraint firstItem="XnY-wU-uh1" firstAttribute="leading" secondItem="Bhu-m5-4e8" secondAttribute="leading" constant="32" id="9Bn-p8-aRU"/>
+                                <constraint firstItem="XnY-wU-uh1" firstAttribute="top" secondItem="Bhu-m5-4e8" secondAttribute="top" id="9Dg-hp-PJR"/>
+                            </constraints>
+                        </view>
                         <sections>
                             <tableViewSection id="1EC-F1-rgi">
                                 <cells>
@@ -210,8 +228,40 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="75" id="imr-76-UhL">
+                                        <rect key="frame" x="0.0" y="408" width="375" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="imr-76-UhL" id="06z-8r-h8a">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2T-nZ-VWt">
+                                                    <rect key="frame" x="32" y="17.5" width="311" height="40"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="CQ2-yE-6pg"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
+                                                    <color key="tintColor" name="text FFFFFF"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
+                                                    <state key="normal" title="Установить напоминание" image="bell-icon">
+                                                        <color key="titleColor" name="text FFFFFF"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapSetReminder:" destination="Hsl-CQ-JmL" eventType="touchUpInside" id="Bqo-J4-R4L"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="e2T-nZ-VWt" firstAttribute="centerY" secondItem="06z-8r-h8a" secondAttribute="centerY" id="Is0-ir-14m"/>
+                                                <constraint firstItem="e2T-nZ-VWt" firstAttribute="leading" secondItem="06z-8r-h8a" secondAttribute="leading" constant="32" id="bv6-4v-8Cf"/>
+                                                <constraint firstAttribute="trailing" secondItem="e2T-nZ-VWt" secondAttribute="trailing" constant="32" id="gck-Mh-qZU"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="msp-ta-4vV">
-                                        <rect key="frame" x="0.0" y="408" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="483" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="msp-ta-4vV" id="g0g-kZ-bNG">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -261,6 +311,9 @@
                         <outlet property="loaderImageView" destination="NCc-XA-jkI" id="AVW-tE-Zy7"/>
                         <outlet property="monthlyPlannedField" destination="y1G-lm-2Pp" id="tSD-vv-SlT"/>
                         <outlet property="nameField" destination="E2Z-rT-5I8" id="Tw4-Fd-3al"/>
+                        <outlet property="reminderButton" destination="e2T-nZ-VWt" id="pxg-E7-31E"/>
+                        <outlet property="reminderCell" destination="imr-76-UhL" id="JJ5-zb-w5h"/>
+                        <outlet property="reminderLabel" destination="XnY-wU-uh1" id="cxC-5j-j44"/>
                         <outlet property="removeCell" destination="msp-ta-4vV" id="noU-9k-btb"/>
                     </connections>
                 </tableViewController>
@@ -462,6 +515,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bell-icon" width="16" height="16"/>
         <image name="circle-close-icon" width="24" height="24"/>
         <image name="icon-edit-pencil" width="9" height="9"/>
         <image name="loader-1" width="55" height="31"/>

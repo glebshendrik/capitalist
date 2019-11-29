@@ -707,6 +707,7 @@
                         <outlet property="periodCell" destination="gzA-BI-LSJ" id="prg-Ca-Tt1"/>
                         <outlet property="periodField" destination="5de-Ya-qXQ" id="DC5-sJ-x4H"/>
                         <outlet property="reminderButton" destination="dDt-Vt-xo4" id="sP5-1t-Yun"/>
+                        <outlet property="reminderCell" destination="dHJ-ae-tsZ" id="Gdj-yi-9Zy"/>
                         <outlet property="reminderLabel" destination="S3K-G1-Evx" id="PuJ-3V-rnr"/>
                         <outlet property="removeButton" destination="Wim-mR-DbU" id="XVF-Dq-JjN"/>
                         <outlet property="removeCell" destination="7TC-8S-SGv" id="sSb-JL-CxX"/>

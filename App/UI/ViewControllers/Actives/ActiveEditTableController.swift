@@ -45,6 +45,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var reminderLabel: UILabel!
     
     @IBOutlet weak var removeButton: UIButton!
+    @IBOutlet weak var reminderCell: UITableViewCell!
     
     @IBOutlet weak var activeIncomeTypeCell: UITableViewCell!
     @IBOutlet weak var alreadyPaidCell: UITableViewCell!

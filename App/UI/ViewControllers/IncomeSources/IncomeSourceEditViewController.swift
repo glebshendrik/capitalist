@@ -70,7 +70,9 @@ class IncomeSourceEditViewController : FormTransactionsDependableEditViewControl
         updateIconUI()
         updateTextFieldsUI()
         updateCurrencyUI()
+        updateReminderUI()
         updateRemoveButtonUI()
+        tableController.reloadData(animated: false)
     }  
 }
 

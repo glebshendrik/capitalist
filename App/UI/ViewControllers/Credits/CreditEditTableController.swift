@@ -45,6 +45,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var reminderLabel: UILabel!
     
     @IBOutlet weak var removeButton: UIButton!
+    @IBOutlet weak var reminderCell: UITableViewCell!
     
     @IBOutlet weak var onBalanceCell: UITableViewCell!
     @IBOutlet weak var expenseSourceCell: UITableViewCell!

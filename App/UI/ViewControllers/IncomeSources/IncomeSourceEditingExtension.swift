@@ -24,7 +24,11 @@ extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelega
     
     func didChange(monthlyPlanned: String?) {
         viewModel.monthlyPlanned = monthlyPlanned
-    }    
+    }
+    
+    func didTapSetReminder() {
+        modal(factory.reminderEditViewController(delegate: self, viewModel: viewModel.reminderViewModel))
+    }
 }
 
 extension IncomeSourceEditViewController : IconsViewControllerDelegate {
@@ -42,5 +46,12 @@ extension IncomeSourceEditViewController : CurrenciesViewControllerDelegate {
     func update(currency: Currency) {
         viewModel.selectedCurrency = currency
         updateCurrencyUI()
+    }
+}
+
+extension IncomeSourceEditViewController : ReminderEditViewControllerDelegate {
+    func didSave(reminderViewModel: ReminderViewModel) {
+        viewModel.reminderViewModel = reminderViewModel
+        updateReminderUI()
     }
 }

@@ -301,6 +301,8 @@ extension CreditEditViewController {
     }
     
     func updateReminderUI() {
+        tableController.set(cell: tableController.reminderCell, hidden: viewModel.reminderHidden, animated: false, reload: false)
+        tableController.reminderLabel.isHidden = viewModel.reminderHidden
         tableController.reminderButton.setTitle(viewModel.reminderTitle, for: .normal)
         tableController.reminderLabel.text = viewModel.reminder
     }
@@ -316,6 +318,7 @@ extension CreditEditViewController {
         tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.monthlyPaymentCell, hidden: viewModel.monthlyPaymentFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.periodCell, hidden: viewModel.periodFieldHidden, animated: false, reload: false)
+        tableController.set(cell: tableController.reminderCell, hidden: viewModel.reminderHidden, animated: false, reload: false)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: false, reload: false)
         
         tableController.reloadData(animated: animated)        

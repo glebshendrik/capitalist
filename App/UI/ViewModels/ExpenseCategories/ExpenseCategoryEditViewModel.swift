@@ -68,6 +68,10 @@ class ExpenseCategoryEditViewModel {
     
     // Visibility
     
+    var reminderHidden: Bool {
+        return !isNew
+    }
+    
     var removeButtonHidden: Bool {
         return isNew
     }

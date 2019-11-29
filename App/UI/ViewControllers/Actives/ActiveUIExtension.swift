@@ -95,6 +95,8 @@ extension ActiveEditViewController {
     }
     
     func updateReminderUI() {
+        tableController.set(cell: tableController.reminderCell, hidden: viewModel.reminderHidden, animated: false, reload: false)
+        tableController.reminderLabel.isHidden = viewModel.reminderHidden
         tableController.reminderButton.setTitle(viewModel.reminderTitle, for: .normal)
         tableController.reminderLabel.text = viewModel.reminder
     }
@@ -110,6 +112,7 @@ extension ActiveEditViewController {
         tableController.set(cell: tableController.goalAmountCell, hidden: viewModel.goalAmountFieldHidden, animated: animated, reload: false)
         tableController.set(cell: tableController.monthlyPlannedIncomeCell, hidden: viewModel.monthlyPlannedIncomeFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.annualPercentCell, hidden: viewModel.annualPercentFieldHidden, animated: false, reload: false)
+        tableController.set(cell: tableController.reminderCell, hidden: viewModel.reminderHidden, animated: false, reload: false)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: false, reload: false)
         tableController.reloadData(animated: animated)
     }

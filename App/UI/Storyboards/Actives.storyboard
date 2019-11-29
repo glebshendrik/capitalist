@@ -739,6 +739,7 @@
                         <outlet property="nameField" destination="wRj-mt-nEw" id="VrH-tH-vM0"/>
                         <outlet property="plannedIncomeSwitchField" destination="p1m-7a-qvp" id="Unh-kB-z4E"/>
                         <outlet property="reminderButton" destination="Fzu-yI-1TT" id="Z3S-3H-gG7"/>
+                        <outlet property="reminderCell" destination="Bet-6Z-EFy" id="0Rv-Mq-fPW"/>
                         <outlet property="reminderLabel" destination="fqV-qw-OqT" id="25T-WE-oJv"/>
                         <outlet property="removeButton" destination="bev-DR-STu" id="pAK-Em-lJG"/>
                         <outlet property="removeCell" destination="xUm-B0-SxV" id="dc6-SQ-yf0"/>

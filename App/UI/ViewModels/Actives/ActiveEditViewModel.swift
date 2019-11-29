@@ -96,6 +96,10 @@ class ActiveEditViewModel {
         return selectedActiveIncomeType != .annualPercents
     }
     
+    var reminderHidden: Bool {
+        return !isNew
+    }
+    
     var removeButtonHidden: Bool { return isNew }
         
     // Permissions

@@ -119,6 +119,10 @@ class CreditEditViewModel {
         return selectedCreditType == nil
     }
     
+    var reminderHidden: Bool {
+        return !isNew
+    }
+    
     var removeButtonHidden: Bool { return isNew }
         
     // Permissions
