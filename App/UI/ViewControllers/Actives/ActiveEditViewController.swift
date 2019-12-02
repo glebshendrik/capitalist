@@ -28,16 +28,16 @@ class ActiveEditViewController : FormTransactionsDependableEditViewController {
     override var removeQuestionMessage: String { return TransactionableType.active.removeQuestion }
     
     override func registerFormFields() -> [String : FormField] {
-        return [Active.CodingKeys.name.rawValue : tableController.nameField,
-                Active.CodingKeys.activeType.rawValue : tableController.activeIncomeTypeField,
-                Active.CodingKeys.currency.rawValue : tableController.currencyField,
-                Active.CodingKeys.costCents.rawValue : tableController.costField,
-                Active.CodingKeys.alreadyPaidCents.rawValue : tableController.alreadyPaidField,
-                Active.CodingKeys.goalAmountCents.rawValue : tableController.goalAmountField,
-                Active.CodingKeys.monthlyPaymentCents.rawValue : tableController.monthlyPaymentField,
-                Active.CodingKeys.plannedIncomeType.rawValue : tableController.activeIncomeTypeField,
-                Active.CodingKeys.annualIncomePercent.rawValue : tableController.annualPercentField,
-                Active.CodingKeys.monthlyPlannedIncomeCents.rawValue : tableController.monthlyPlannedIncomeField]
+        return [ActiveCreationForm.CodingKeys.name.rawValue : tableController.nameField,
+                ActiveCreationForm.CodingKeys.activeTypeId.rawValue : tableController.activeTypeField,
+                ActiveCreationForm.CodingKeys.currency.rawValue : tableController.currencyField,
+                ActiveCreationForm.CodingKeys.costCents.rawValue : tableController.costField,
+                ActiveCreationForm.CodingKeys.alreadyPaidCents.rawValue : tableController.alreadyPaidField,
+                ActiveCreationForm.CodingKeys.goalAmountCents.rawValue : tableController.goalAmountField,
+                ActiveCreationForm.CodingKeys.monthlyPaymentCents.rawValue : tableController.monthlyPaymentField,
+                ActiveCreationForm.CodingKeys.plannedIncomeType.rawValue : tableController.activeIncomeTypeField,
+                ActiveCreationForm.CodingKeys.annualIncomePercent.rawValue : tableController.annualPercentField,
+                ActiveCreationForm.CodingKeys.monthlyPlannedIncomeCents.rawValue : tableController.monthlyPlannedIncomeField]
     }
     
     override func setup(tableController: FormFieldsTableViewController) {

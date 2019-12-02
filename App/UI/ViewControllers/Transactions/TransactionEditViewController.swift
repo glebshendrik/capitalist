@@ -21,6 +21,7 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     var tableController: TransactionEditTableController!
     var delegate: TransactionEditViewControllerDelegate?
     
+    override var canSave: Bool { return viewModel.canSave }
     override var shouldLoadData: Bool { return true }
     override var formTitle: String { return viewModel.title }
     override var loadErrorMessage: String { return "Ошибка загрузки транзакции" }
@@ -48,6 +49,7 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         updateCommentUI()        
         updateRemoveButtonUI()
         tableController.reloadData(animated: false)
+        focusAmountField()
     }
     
     override func loadDataPromise() -> Promise<Void> {
@@ -101,6 +103,34 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
             viewModel.loadExchangeRate()
         }.catch { _ in
             self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке курса валют",
+                                              theme: .error)
+        }.finally {
+            self.operationFinished()
+            self.updateUI()
+        }
+    }
+    
+    func loadSource(id: Int, type: TransactionableType) {
+        operationStarted()
+        
+        firstly {
+            viewModel.loadSource(id: id, type: type)
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке источника",
+                                              theme: .error)
+        }.finally {
+            self.operationFinished()
+            self.updateUI()
+        }
+    }
+    
+    func loadDestination(id: Int, type: TransactionableType) {
+        operationStarted()
+        
+        firstly {
+            viewModel.loadDestination(id: id, type: type)
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке назначения",
                                               theme: .error)
         }.finally {
             self.operationFinished()

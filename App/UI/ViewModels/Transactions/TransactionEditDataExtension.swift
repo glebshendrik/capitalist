@@ -104,6 +104,22 @@ extension TransactionEditViewModel {
                     self.exchangeRate = exchangeRate.rate
                 }
     }
+    
+    func loadSource(id: Int, type: TransactionableType) -> Promise<Void> {
+        return  firstly {
+                    loadTransactionable(id: id, type: type)
+                }.get { transactionable in
+                    self.source = transactionable
+                }.asVoid()
+    }
+    
+    func loadDestination(id: Int, type: TransactionableType) -> Promise<Void> {
+        return  firstly {
+                    loadTransactionable(id: id, type: type)
+                }.get { transactionable in
+                    self.destination = transactionable
+                }.asVoid()
+    }
 }
 
 // Creation

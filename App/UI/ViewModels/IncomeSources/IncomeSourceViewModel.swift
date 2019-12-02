@@ -90,6 +90,10 @@ class IncomeSourceViewModel : TransactionSource {
         return waitingDebts.count > 0
     }
     
+    var activeId: Int? {
+        return incomeSource.activeId
+    }
+    
     init(incomeSource: IncomeSource) {
         self.incomeSource = incomeSource
         waitingDebts = incomeSource.waitingDebts.map { BorrowViewModel(borrow: $0) }

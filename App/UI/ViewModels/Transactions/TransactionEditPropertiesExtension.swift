@@ -103,16 +103,24 @@ extension TransactionEditViewModel {
         return gotAt != nil
     }
     
+    var canSave: Bool {
+        return hasBothTransactionables        
+    }
+    
+    var hasBothTransactionables: Bool {
+        return source != nil && destination != nil
+    }
+    
     var needCurrencyExchange: Bool {
         return sourceCurrencyCode != destinationCurrencyCode
     }
     
     var amountFieldHidden: Bool {
-        return needCurrencyExchange
+        return needCurrencyExchange || !hasBothTransactionables
     }
     
     var exchangeAmountsFieldHidden: Bool {
-        return !needCurrencyExchange
+        return !needCurrencyExchange || !hasBothTransactionables
     }
     
     var isBuyingAssetFieldHidden: Bool {
@@ -222,8 +230,8 @@ extension TransactionableType {
     func title(as part: TransactionPart) -> String {
         switch (self, part) {
         case (.incomeSource, _):                return "Источник дохода"
-        case (.expenseSource, .source):         return "Кошелек снятия"
-        case (.expenseSource, .destination):    return "Кошелек пополнения"
+        case (.expenseSource, .source):         return "Кошелек"
+        case (.expenseSource, .destination):    return "Кошелек"
         case (.expenseCategory, _):             return "Категория трат"
         case (.active, _):                      return "Актив"
         }

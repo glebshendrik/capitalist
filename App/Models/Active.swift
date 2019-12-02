@@ -127,6 +127,14 @@ struct ActiveCreationForm : Encodable, Validatable {
         if !Validator.isValid(balance: costCents) {
             errors[CodingKeys.costCents.rawValue] = "Укажите стоимость"
         }
+        
+        if !Validator.isValid(optionalPositiveNumber: monthlyPlannedIncomeCents) {
+            errors[CodingKeys.monthlyPlannedIncomeCents.rawValue] = "Укажите сумму больше 0"
+        }
+        
+        if !Validator.isValid(optionalPositiveNumber: annualIncomePercent) {
+            errors[CodingKeys.annualIncomePercent.rawValue] = "Укажите процент больше 0"
+        }
                                 
         return errors
     }
@@ -187,7 +195,15 @@ struct ActiveUpdatingForm : Encodable, Validatable {
         if !Validator.isValid(balance: costCents) {
             errors[CodingKeys.costCents.rawValue] = "Укажите стоимость"
         }
-                                
+          
+        if !Validator.isValid(optionalPositiveNumber: monthlyPlannedIncomeCents) {
+            errors[CodingKeys.monthlyPlannedIncomeCents.rawValue] = "Укажите сумму больше 0"
+        }
+        
+        if !Validator.isValid(optionalPositiveNumber: annualIncomePercent) {
+            errors[CodingKeys.annualIncomePercent.rawValue] = "Укажите процент больше 0"
+        }
+        
         return errors
     }
 }

@@ -11,16 +11,11 @@ import SwiftDate
 
 extension TransactionEditViewController : TransactionEditTableControllerDelegate {
     func didAppear() {
-        if viewModel.needCurrencyExchange {
-            tableController.exchangeField.amountField.becomeFirstResponder()
-        } else {
-            tableController.amountField.textField.becomeFirstResponder()
-        }
+        focusAmountField()        
     }
     
     func didTapSaveAtYesterday() {
         update(gotAt: Date() - 1.days)
-        save()
     }
     
     func didTapCalendar() {
@@ -29,26 +24,6 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
                                                  minDate: nil,
                                                  maxDate: Date(),
                                                  mode: .dateAndTime), animated: true)
-    }
-    
-    func didTapSource() {
-        guard viewModel.canChangeSource else { return }
-        let skipTransactionable = viewModel.sourceType == viewModel.destinationType ? viewModel.destination : nil
-        didTap(transactionableType: viewModel.sourceType,
-               transactionPart: .source,
-               skipTransactionable: skipTransactionable,
-               currency: viewModel.sourceFilterCurrency,
-               transactionableTypeCases: sourceTransactionableTypeCases())
-    }
-        
-    func didTapDestination() {        
-        guard viewModel.canChangeDestination else { return }
-        let skipTransactionable = viewModel.sourceType == viewModel.destinationType ? viewModel.source : nil
-        didTap(transactionableType: viewModel.destinationType,
-               transactionPart: .destination,
-               skipTransactionable: skipTransactionable,
-               currency: viewModel.destinationFilterCurrency,
-               transactionableTypeCases: destinationTransactionableTypeCases())
     }
     
     func didChange(amount: String?) {
@@ -76,43 +51,23 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         
         sheet(title: viewModel.removeQuestion, actions: actions)
     }
-}
-
-extension TransactionEditViewController : DatePickerViewControllerDelegate {
-    func didSelect(date: Date?) {
-        update(gotAt: date)        
-    }
-}
-
-extension TransactionEditViewController : IncomeSourceSelectViewControllerDelegate {
-    func didSelect(incomeSourceViewModel: IncomeSourceViewModel) {
-        update(source: incomeSourceViewModel)
-    }
-}
-
-extension TransactionEditViewController : ExpenseSourceSelectViewControllerDelegate {
-    func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
-        update(source: sourceExpenseSourceViewModel)
-    }
     
-    func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
-        update(destination: destinationExpenseSourceViewModel)
+    func didTapSource() {
+        guard viewModel.canChangeSource else { return }
+        didTap(transactionableType: viewModel.sourceType,
+               transactionPart: .source,
+               skipTransactionable: viewModel.destination,
+               currency: viewModel.sourceFilterCurrency,
+               transactionableTypeCases: sourceTransactionableTypeCases())
     }
-}
-
-extension TransactionEditViewController : ExpenseCategorySelectViewControllerDelegate {
-    func didSelect(expenseCategoryViewModel: ExpenseCategoryViewModel) {
-        update(destination: expenseCategoryViewModel)
-    }
-}
-
-extension TransactionEditViewController : ActiveSelectViewControllerDelegate {
-    func didSelect(sourceActiveViewModel: ActiveViewModel) {
-        update(source: sourceActiveViewModel)
-    }
-    
-    func didSelect(destinationActiveViewModel: ActiveViewModel) {
-        update(destination: destinationActiveViewModel)
+        
+    func didTapDestination() {
+        guard viewModel.canChangeDestination else { return }
+        didTap(transactionableType: viewModel.destinationType,
+               transactionPart: .destination,
+               skipTransactionable: viewModel.source,
+               currency: viewModel.destinationFilterCurrency,
+               transactionableTypeCases: destinationTransactionableTypeCases())
     }
 }
 
@@ -154,26 +109,78 @@ extension TransactionEditViewController {
                               skipTransactionable: Transactionable?,
                               currency: String?) {
         
-        guard !transactionableTypes.isEmpty else { return }
+        let types = transactionableTypes.compactMap { transactionableType -> TransactionableType? in
         
-        if transactionableTypes.count == 1, let singleTransactionableType = transactionableTypes.first {
+            if  transactionPart == .destination,
+                transactionableType == .active,
+                let incomeSourceSource = skipTransactionable as? IncomeSourceViewModel,
+                incomeSourceSource.activeId == nil {
+            
+                return nil
+            }
+            return transactionableType
+        }
+        
+        guard !types.isEmpty else { return }
+        
+        if types.count == 1, let singleTransactionableType = types.first {
             showTransactionables(transactionableType: singleTransactionableType,
                                  transactionPart: transactionPart,
                                  skipTransactionable: skipTransactionable,
                                  currency: currency)
         }
         else {
-            let actions = transactionableTypes.map { transactionableType in
+            let actions = types.map { transactionableType in
+                                
                 return UIAlertAction(title: transactionableType.title(as: transactionPart),
                                      style: .default,
                                      handler: { _ in
-                                        self.showTransactionables(transactionableType: transactionableType,
-                                                                  transactionPart: transactionPart,
-                                                                  skipTransactionable: skipTransactionable,
-                                                                  currency: currency)
+                                        
+                                        if  transactionPart == .source,
+                                            transactionableType == .incomeSource,
+                                            let activeDestination = skipTransactionable as? ActiveViewModel,
+                                            let incomeSourceId = activeDestination.incomeSourceId {
+                                                
+                                            self.loadSource(id: incomeSourceId, type: transactionableType)
+                                        }
+                                        else if transactionPart == .destination,
+                                                transactionableType == .active,
+                                                let incomeSourceSource = skipTransactionable as? IncomeSourceViewModel,
+                                                let activeId = incomeSourceSource.activeId {
+                                            
+                                            self.loadDestination(id: activeId, type: transactionableType)
+                                        }
+                                        else {
+                                            self.showTransactionables(transactionableType: transactionableType,
+                                                                      transactionPart: transactionPart,
+                                                                      skipTransactionable: skipTransactionable,
+                                                                      currency: currency)
+                                        }
+                                        
                 })
             }
             sheet(title: "Выбрать", actions: actions)
+        }
+    }
+    
+    func transactionableSelectControllerFor(transactionableType: TransactionableType,
+                                            transactionPart: TransactionPart,
+                                            skipTransactionable: Transactionable?,
+                                            currency: String?) -> UIViewController? {
+        switch transactionableType {
+        case .incomeSource:
+            return factory.incomeSourceSelectViewController(delegate: self)
+        case .expenseSource:
+            return factory.expenseSourceSelectViewController(delegate: self,
+                                                            skipExpenseSourceId: skipTransactionable?.id,
+                                                            selectionType: transactionPart,
+                                                            currency: currency)
+        case .expenseCategory:
+            return factory.expenseCategorySelectViewController(delegate: self)
+        case .active:
+            return factory.activeSelectViewController(delegate: self,
+                                                      skipActiveId: skipTransactionable?.id,
+                                                      selectionType: transactionPart)
         }
     }
     
@@ -208,27 +215,44 @@ extension TransactionEditViewController {
             return []
         }
     }
-    
-    func transactionableSelectControllerFor(transactionableType: TransactionableType,
-                                            transactionPart: TransactionPart,
-                                            skipTransactionable: Transactionable?,
-                                            currency: String?) -> UIViewController? {
-        switch transactionableType {
-        case .incomeSource:
-            return factory.incomeSourceSelectViewController(delegate: self)
-        case .expenseSource:
-            return factory.expenseSourceSelectViewController(delegate: self,
-                                                            skipExpenseSourceId: skipTransactionable?.id,
-                                                            selectionType: transactionPart,
-                                                            currency: currency)
-        case .expenseCategory:
-            return factory.expenseCategorySelectViewController(delegate: self)
-        case .active:
-            return factory.activeSelectViewController(delegate: self,
-                                                      skipActiveId: skipTransactionable?.id,
-                                                      selectionType: transactionPart)
-        }
+}
+
+extension TransactionEditViewController : DatePickerViewControllerDelegate {
+    func didSelect(date: Date?) {
+        update(gotAt: date)        
+    }
+}
+
+extension TransactionEditViewController : IncomeSourceSelectViewControllerDelegate {
+    func didSelect(incomeSourceViewModel: IncomeSourceViewModel) {
+        update(source: incomeSourceViewModel)
+    }
+}
+
+extension TransactionEditViewController : ExpenseSourceSelectViewControllerDelegate {
+    func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(source: sourceExpenseSourceViewModel)
     }
     
-    
+    func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(destination: destinationExpenseSourceViewModel)
+    }
 }
+
+extension TransactionEditViewController : ExpenseCategorySelectViewControllerDelegate {
+    func didSelect(expenseCategoryViewModel: ExpenseCategoryViewModel) {
+        update(destination: expenseCategoryViewModel)
+    }
+}
+
+extension TransactionEditViewController : ActiveSelectViewControllerDelegate {
+    func didSelect(sourceActiveViewModel: ActiveViewModel) {
+        update(source: sourceActiveViewModel)
+    }
+    
+    func didSelect(destinationActiveViewModel: ActiveViewModel) {
+        update(destination: destinationActiveViewModel)
+    }
+}
+
+

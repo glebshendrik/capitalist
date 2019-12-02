@@ -166,6 +166,10 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return active.monthlyPlannedIncomeCents?.moneyCurrencyString(with: currency, shouldRound: true)
     }
     
+    var incomeSourceId: Int? {
+        return active.incomeSource?.id
+    }
+    
     init(active: Active) {
         self.active = active
     }

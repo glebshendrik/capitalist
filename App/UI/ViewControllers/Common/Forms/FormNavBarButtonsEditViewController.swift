@@ -11,7 +11,10 @@ import UIKit
 class FormNavBarButtonsEditViewController : FormEditViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    var canSave: Bool { return true }
+    
     @IBAction func didTapSaveButton(_ sender: Any) {
+        guard canSave else { return }
         save()
     }
     

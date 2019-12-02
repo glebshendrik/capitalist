@@ -48,6 +48,15 @@ extension TransactionEditViewController {
 }
 
 extension TransactionEditViewController {
+    func focusAmountField() {
+        guard viewModel.hasBothTransactionables else { return }
+        if viewModel.needCurrencyExchange {
+            tableController.exchangeField.amountField.becomeFirstResponder()
+        } else {
+            tableController.amountField.textField.becomeFirstResponder()
+        }
+    }
+    
     func updateToolbarUI() {
         UIView.transition(with: view, duration: 0.1, options: .transitionCrossDissolve, animations: {
             self.tableController.calendarButton.setTitle(self.viewModel.calendarTitle, for: .normal)
@@ -102,6 +111,6 @@ extension TransactionEditViewController {
     
     func updateRemoveButtonUI() {
         tableController.removeButton.setTitle(viewModel.removeTitle, for: .normal)
-        tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden)
+        tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: false, reload: false)
     }
 }

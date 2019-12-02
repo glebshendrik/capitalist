@@ -240,6 +240,11 @@ class Validator {
         return balance != nil
     }
     
+    static func isValid(optionalPositiveNumber: Int?) -> Bool {
+        guard let optionalPositiveNumber = optionalPositiveNumber else { return true }
+        return optionalPositiveNumber > 0
+    }
+    
     static func isValid(pastDate: Date?) -> Bool {
         guard let pastDate = pastDate else {
             return false
