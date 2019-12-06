@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 import CircleProgressView
 
-class ExpenseSourceCollectionViewCell : EditableCell {
+class ExpenseSourceCollectionViewCell : TransactionableCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
@@ -30,11 +30,16 @@ class ExpenseSourceCollectionViewCell : EditableCell {
             updateUI()
         }
     }
+      
+    override var transactionable: Transactionable? {
+        return viewModel
+    }
     
-    func updateUI() {
+    override func updateUI() {
         updateLabels()
         updateIcon()
         updateCreditLimit()
+        super.updateUI()
     }
     
     func updateLabels() {

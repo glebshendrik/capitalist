@@ -47,7 +47,12 @@ extension MainViewController {
         if viewModel.isAddActiveItem(indexPath: indexPath, basketType: basketType) {
             showNewActiveScreen(basketType: basketType)
         } else if let activeViewModel = viewModel.activeViewModel(at: indexPath, basketType: basketType) {            
-            showActiveInfo(active: activeViewModel)
+            if isSelecting {
+                select(activeViewModel, collectionView: basketItemsCollectionView(by: basketType), indexPath: indexPath)
+            }
+            else {
+                showActiveInfo(active: activeViewModel)
+            }
         }
     }
     

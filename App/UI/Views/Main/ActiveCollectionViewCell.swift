@@ -16,6 +16,10 @@ class ActiveCollectionViewCell : BasketItemCollectionViewCell {
         }
     }
       
+    override var transactionable: Transactionable? {
+        return viewModel
+    }
+    
     override func setupIcon() {
         super.setupIcon()
         icon.backgroundCornerRadius = 4

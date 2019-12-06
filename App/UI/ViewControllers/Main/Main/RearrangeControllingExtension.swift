@@ -14,6 +14,9 @@ extension MainViewController {
     }
     
     @objc func didRecognizeRearrangeGesture(gesture: UILongPressGestureRecognizer) {
+        
+        guard !isSelecting else { return }
+        
         rearrangeController.movingCollectionView = gesture.view as? UICollectionView
         
         guard let movingCollectionView = rearrangeController.movingCollectionView else { return }
@@ -22,11 +25,9 @@ extension MainViewController {
         
         switch gesture.state {
         case .began:
-            if !isEditing {
-                setEditing(true, animated: true)
-                transactionDraggingElement.isHidden = true
-                transactionController.transactionStartedCollectionView = nil
-                transactionController.dropCandidateCollectionView = nil
+            if !isEditingItems {
+                setEditingItems(true, animated: true)
+                completeTransactionInteraction()
                 return
             }
             rearrangeController.movingIndexPath = movingCollectionView.indexPathForItem(at: location)
@@ -49,7 +50,7 @@ extension MainViewController {
             movingCollectionView.updateInteractiveMovementTargetPosition(location)
             
             cell?.set(editing: false)
-            animatePickingUp(cell: cell)
+            cell?.pickUp()
         case .changed:
             
             var location = gesture.location(in: movingCollectionView)
@@ -67,7 +68,7 @@ extension MainViewController {
             
             let cell = movingCollectionView.cellForItem(at: indexPath)
             
-            animatePuttingDown(cell: cell)
+            cell?.putDown(animated: true, editing: isEditingItems)
             rearrangeController.movingIndexPath = nil
         }
         
@@ -89,61 +90,5 @@ extension MainViewController {
         
         return offSetPoint
         
-    }
-    
-    private func animatePickingUp(cell: UICollectionViewCell?) {
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { () -> Void in
-            cell?.alpha = 0.99
-            cell?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        }, completion: { finished in
-            
-        })
-    }
-    
-    private func animatePuttingDown(cell: UICollectionViewCell?) {
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { () -> Void in
-            cell?.alpha = 1.0
-            cell?.transform = CGAffineTransform.identity
-        }, completion: { finished in
-            cell?.set(editing: true)
-        })
-    }
-}
-
-extension MainViewController {
-    func setVisibleCells(editing: Bool) {
-        let cells = incomeSourcesCollectionView.visibleCells + expenseSourcesCollectionView.visibleCells + joyExpenseCategoriesCollectionView.visibleCells + riskActivesCollectionView.visibleCells + safeActivesCollectionView.visibleCells
-        
-        for cell in cells {
-            cell.set(editing: editing)
-        }
-    }
-    
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        guard editing != isEditing else { return }
-        
-        super.setEditing(editing, animated: animated)
-        
-        viewModel?.set(editing: editing)
-        updateCollectionViews()
-        updateLongPressureRecognizers()
-        updateTotalUI(animated: true)
-        setVisibleCells(editing: editing)
-        updateMainButtonUI()
-    }
-    
-    func updateMainButtonUI() {
-        let transform = isEditing ? CGAffineTransform(rotationAngle: CGFloat(3 * Double.pi / 4)) : .identity
-        let color = isEditing ? UIColor.by(.dark2A314B) : UIColor.by(.blue6A92FA)
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
-                self.mainButton.transform = transform
-                self.mainButton.backgroundColor = color
-            })
-    }
-    
-    private func updateLongPressureRecognizers() {
-        longPressureRecognizers.forEach {
-            $0.minimumPressDuration = isEditing ? fastPressDuration : slowPressDuration
-        }
     }
 }

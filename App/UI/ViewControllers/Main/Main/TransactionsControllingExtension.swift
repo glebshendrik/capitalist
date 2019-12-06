@@ -45,46 +45,57 @@ extension MainViewController {
         }
     }
     
-    private func canStartTransaction(collectionView: UICollectionView?, indexPath: IndexPath?) -> Bool {
+    private func isTransactionSource(collectionView: UICollectionView?, indexPath: IndexPath?) -> Bool {
         guard   let collectionView = collectionView,
-            let indexPath = indexPath,
-            let transactionSource = transactionSource(collectionView: collectionView, indexPath: indexPath) else { return false }
+                let indexPath = indexPath,
+                let transactionSource = transactionSource(collectionView: collectionView, indexPath: indexPath) else { return false }
+        
         return transactionSource.isTransactionSource
     }
     
-    private func canCompleteTransaction(transactionStartedCollectionView: UICollectionView?,
-                                        transactionStartedIndexPath: IndexPath?,
-                                        completionCandidateCollectionView: UICollectionView?,
-                                        completionCandidateIndexPath: IndexPath?) -> Bool {
-        guard   let transactionStartedCollectionView = transactionStartedCollectionView,
-            let transactionStartedIndexPath = transactionStartedIndexPath,
-            let completionCandidateCollectionView = completionCandidateCollectionView,
-            let completionCandidateIndexPath = completionCandidateIndexPath else { return false }
-        
-        guard   let transactionSource = transactionSource(collectionView: transactionStartedCollectionView, indexPath: transactionStartedIndexPath),
-            let transactionDestination = transactionDestination(collectionView: completionCandidateCollectionView, indexPath: completionCandidateIndexPath) else { return false }
+    private func canCompleteTransaction(sourceCollectionView: UICollectionView?,
+                                        sourceIndexPath: IndexPath?,
+                                        destinationCollectionView: UICollectionView?,
+                                        destinationIndexPath: IndexPath?) -> Bool {
+        guard   let sourceCollectionView = sourceCollectionView,
+                let sourceIndexPath = sourceIndexPath,
+                let destinationCollectionView = destinationCollectionView,
+                let destinationIndexPath = destinationIndexPath,
+                let transactionSource = transactionSource(collectionView: sourceCollectionView,
+                                                          indexPath: sourceIndexPath),
+                let transactionDestination = transactionDestination(collectionView: destinationCollectionView,
+                                                                    indexPath: destinationIndexPath) else { return false }
         
         return transactionDestination.isTransactionDestinationFor(transactionSource: transactionSource)
     }
 }
 
 extension MainViewController {
-    func animateTransactionStarted(cell: UICollectionViewCell?) {
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { () -> Void in
-            cell?.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-        }, completion: nil)
+    func didSetSource(cell: UICollectionViewCell?, animated: Bool) {
+        if isSelecting {
+            cell?.set(selected: true, animated: animated)
+        }
+        else {
+            cell?.scaleDown(animated: animated)
+        }
     }
-    
-    func animateTransactionDropCandidate(cell: UICollectionViewCell?) {
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { () -> Void in
-            cell?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-        }, completion: nil)
+
+    func didSetDestination(cell: UICollectionViewCell?, animated: Bool) {
+        if isSelecting {
+            cell?.set(selected: true, animated: animated)
+        }
+        else {
+            cell?.scaleUp(animated: animated)
+        }
     }
-    
-    func animateTransactionFinished(cell: UICollectionViewCell?) {
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: { () -> Void in
-            cell?.transform = CGAffineTransform.identity
-        }, completion: nil)
+
+    func didSetNormal(cell: UICollectionViewCell?, animated: Bool) {
+        if isSelecting {
+            cell?.set(selected: false, animated: animated)
+        }
+        else {
+            cell?.unscale(animated: animated)
+        }
     }
     
     func animateTransactionCompleted(from fromCell: UICollectionViewCell?, to toCell: UICollectionViewCell, completed: (() -> Void)?) {
@@ -99,10 +110,7 @@ extension MainViewController {
                 toCell.transform = CGAffineTransform.identity
             })
         }, completion:{ _ in
-            self.transactionDraggingElement.isHidden = true
-            self.transactionDraggingElement.transform = CGAffineTransform.identity
-            self.transactionController.transactionStartedCollectionView = nil
-            self.transactionController.dropCandidateCollectionView = nil
+            self.completeTransactionInteraction()
             completed?()
         })
     }
@@ -119,11 +127,18 @@ extension MainViewController {
                 cell?.transform = CGAffineTransform.identity
             })
         }, completion:{ _ in
-            self.transactionDraggingElement.isHidden = true
-            self.transactionDraggingElement.transform = CGAffineTransform.identity
-            self.transactionController.transactionStartedCollectionView = nil
-            self.transactionController.dropCandidateCollectionView = nil
+            self.completeTransactionInteraction()
         })
+    }
+    
+    func completeTransactionInteraction() {
+        transactionDraggingElement.isHidden = true
+        transactionDraggingElement.transform = CGAffineTransform.identity
+        transactionController.sourceCollectionView = nil
+        transactionController.sourceCell = nil
+        transactionController.destinationCollectionView = nil
+        transactionController.destinationCell = nil
+        viewModel.resetTransactionables()
     }
 }
 
@@ -133,12 +148,12 @@ extension MainViewController {
                                           collectionViewsPool: [UICollectionView],
                                           transformation: CGAffineTransform = CGAffineTransform(translationX: 0, y: 0)) -> CollectionViewIntersection {
         
-        guard let intersectedCollectionView = collectionViewsPool.first(where: { collectionView in
+        let collectionViewFromPool = collectionViewsPool.first { collectionView in
             let pointInside = view.convert(location, to: collectionView)
             return collectionView.bounds.contains(pointInside)
-        }) else {
-            return nil
         }
+        
+        guard let intersectedCollectionView = collectionViewFromPool else { return nil }
         
         let locationInCollectionView = view.convert(location, to: intersectedCollectionView).applying(transformation)
         
@@ -147,19 +162,19 @@ extension MainViewController {
         }
         
         let cell = intersectedCollectionView.cellForItem(at: indexPath)
-        
+                
         return (collectionView: intersectedCollectionView, indexPath: indexPath, cell: cell)
     }
 }
 
 extension MainViewController {
     private func updateDraggingElement(location: CGPoint, transform: CGAffineTransform) {
-        guard let transactionStartedLocation = transactionController.transactionStartedLocation else {
+        guard let sourceLocation = transactionController.sourceLocation else {
             transactionDraggingElement.isHidden = true
             return
         }
         if transactionDraggingElement.isHidden {
-            transactionDraggingElement.isHidden = location.distance(from: transactionStartedLocation) < 3
+            transactionDraggingElement.isHidden = location.distance(from: sourceLocation) < 3
         }
         transactionDraggingElement.center = location.applying(transform)
     }
@@ -167,129 +182,188 @@ extension MainViewController {
 
 
 extension MainViewController : TransactionControllerDelegate {
+    var isSelecting: Bool {
+        return viewModel.selecting
+    }
+    
+    var isEditingItems: Bool {
+        return viewModel.editing
+    }
+    
+    func sourceCollectionViews() -> [UICollectionView] {
+        return [incomeSourcesCollectionView,
+                expenseSourcesCollectionView,
+                riskActivesCollectionView,
+                safeActivesCollectionView]
+    }
+    
+    func destinationCollectionViews() -> [UICollectionView] {
+        return [expenseSourcesCollectionView,
+                joyExpenseCategoriesCollectionView,
+                riskActivesCollectionView,
+                safeActivesCollectionView]
+    }
+    
+    func allCollectionViews() -> [UICollectionView] {
+        return [incomeSourcesCollectionView,
+                expenseSourcesCollectionView,
+                joyExpenseCategoriesCollectionView,
+                riskActivesCollectionView,
+                safeActivesCollectionView]
+    }
+    
+    func select(_ transactionable: Transactionable, collectionView: UICollectionView, indexPath: IndexPath) {
+        let wasSelected = transactionable.isSelected
+        viewModel.select(transactionable)
+        if wasSelected != transactionable.isSelected {            
+            updateTotalUI(animated: true)
+            let cell = (collectionView.cellForItem(at: indexPath) as? TransactionableCell)
+            
+            if viewModel.selectedSource == nil {
+                transactionController.sourceCell = nil
+            }
+            else if transactionable.id == viewModel.selectedSource?.id && transactionable.type == viewModel.selectedSource?.type  {
+                transactionController.sourceCell = cell
+            }
+            
+            if viewModel.selectedDestination == nil {
+                transactionController.destinationCell = nil
+            }
+            else if transactionable.id == viewModel.selectedDestination?.id && transactionable.type == viewModel.selectedDestination?.type  {
+                transactionController.destinationCell = cell
+            }
+            
+            if let source = viewModel.selectedSource as? TransactionSource,
+                let destination = viewModel.selectedDestination as? TransactionDestination {
+                showTransactionEditScreen(transactionSource: source, transactionDestination: destination)
+            }
+        }
+    }
+    
+    func didSetTransactionables(source: TransactionSource, destination: TransactionDestination) {
+        showTransactionEditScreen(transactionSource: source, transactionDestination: destination)
+        setSelecting(false, animated: true)
+        completeTransactionInteraction()
+    }
     
     @objc func didRecognizeTransactionGesture(gesture: UILongPressGestureRecognizer) {
         
-        guard !isEditing else { return }
+        guard !isEditingItems && !isSelecting else { return }
         
         let locationInView = gesture.location(in: self.view)
-        
+                    
         let verticalTranslationTransformation = CGAffineTransform(translationX: 0, y: -30)
         
         switch gesture.state {
         case .began:
             transactionController.startedLocation = locationInView
-            let collectionViews: [UICollectionView] = [incomeSourcesCollectionView,
-                                                       expenseSourcesCollectionView,
-                                                       riskActivesCollectionView,
-                                                       safeActivesCollectionView]
             
-            let intersections = detectCollectionViewIntersection(at: locationInView,
-                                                                 in: self.view,
-                                                                 collectionViewsPool: collectionViews)
+            let intersection = detectCollectionViewIntersection(at: locationInView,
+                                                                in: self.view,
+                                                                collectionViewsPool: sourceCollectionViews())
             
-            transactionController.transactionStartedCollectionView = intersections?.collectionView
-            transactionController.transactionStartedIndexPath = intersections?.indexPath
+            transactionController.sourceCollectionView = intersection?.collectionView
+            transactionController.sourceIndexPath = intersection?.indexPath
             
-            guard   let cell = intersections?.cell,
-                canStartTransaction(collectionView: transactionController.transactionStartedCollectionView,
-                                    indexPath: transactionController.transactionStartedIndexPath) else {
+            guard   let cell = intersection?.cell,
+                    isTransactionSource(collectionView: transactionController.sourceCollectionView,
+                                        indexPath: transactionController.sourceIndexPath) else {
                                         
-                                        
-                                        self.transactionController.transactionStartedCollectionView = nil
-                                        transactionDraggingElement.isHidden = true
-                                        return
+                completeTransactionInteraction()
+                return
             }
             
-            transactionController.transactionStartedLocation = locationInView
-            transactionController.transactionStartedCell = cell
+            transactionController.sourceLocation = locationInView
+            transactionController.sourceCell = cell
             updateDraggingElement(location: locationInView, transform: verticalTranslationTransformation)
-            switchOffScrolling(for: transactionController.transactionStartedCollectionView)
+            switchOffScrolling(for: transactionController.sourceCollectionView)
             
         case .changed:
             transactionController.currentLocation = locationInView
-            guard   let transactionStartedCollectionView = transactionController.transactionStartedCollectionView,
-                let transactionStartedIndexPath = transactionController.transactionStartedIndexPath else {
-                    animateTransactionFinished(cell: self.transactionController.transactionStartedCell)
-                    animateTransactionFinished(cell: transactionController.dropCandidateCell)
-                    return
+            guard   let sourceCollectionView = transactionController.sourceCollectionView,
+                    let sourceIndexPath = transactionController.sourceIndexPath else {
+                    
+                didSetNormal(cell: transactionController.sourceCell, animated: true)
+                didSetNormal(cell: transactionController.destinationCell, animated: true)
+                return
             }
             
-            switchOffScrolling(for: transactionStartedCollectionView)
-            
+            switchOffScrolling(for: sourceCollectionView)
             updateDraggingElement(location: locationInView, transform: verticalTranslationTransformation)
-            
-            
-            let collectionViews: [UICollectionView] = [expenseSourcesCollectionView,
-                                                       joyExpenseCategoriesCollectionView,
-                                                       riskActivesCollectionView,
-                                                       safeActivesCollectionView]
-            
-            let intersections = detectCollectionViewIntersection(at: locationInView,
+                        
+            let intersection = detectCollectionViewIntersection(at: locationInView,
                                                                  in: self.view,
-                                                                 collectionViewsPool: collectionViews,
+                                                                 collectionViewsPool: destinationCollectionViews(),
                                                                  transformation: verticalTranslationTransformation)
             
             
             
             
-            transactionController.dropCandidateCollectionView = intersections?.collectionView
-            let locationInCollectionView = gesture.location(in: intersections?.collectionView.superview)
-            let direction = scrollDirection(of: transactionController.dropCandidateCollectionView)
+            transactionController.destinationCollectionView = intersection?.collectionView
+            
+            let locationInCollectionView = gesture.location(in: intersection?.collectionView.superview)
+            let direction = scrollDirection(of: transactionController.destinationCollectionView)
+            
             transactionController.updateWaitingEdge(at: locationInView,
                                                     in: self.view,
                                                     locationInCollectionView: locationInCollectionView,
                                                     direction: direction)
             
-            if transactionController.dropCandidateCollectionView == transactionStartedCollectionView && intersections?.indexPath == transactionStartedIndexPath {
-                transactionController.dropCandidateIndexPath = nil
+            if transactionController.destinationCollectionView == sourceCollectionView && intersection?.indexPath == sourceIndexPath {
+                transactionController.destinationIndexPath = nil
                 return
             }
             
-            let canComplete = canCompleteTransaction(transactionStartedCollectionView: transactionStartedCollectionView,
-                                                     transactionStartedIndexPath: transactionStartedIndexPath,
-                                                     completionCandidateCollectionView: transactionController.dropCandidateCollectionView,
-                                                     completionCandidateIndexPath: intersections?.indexPath)
+            let canComplete = canCompleteTransaction(sourceCollectionView: sourceCollectionView,
+                                                     sourceIndexPath: sourceIndexPath,
+                                                     destinationCollectionView: transactionController.destinationCollectionView,
+                                                     destinationIndexPath: intersection?.indexPath)
             
-            transactionController.dropCandidateIndexPath = canComplete ? intersections?.indexPath : nil
-            transactionController.dropCandidateCell = canComplete ? intersections?.cell : nil
+            transactionController.destinationIndexPath = canComplete ? intersection?.indexPath : nil
+            transactionController.destinationCell = canComplete ? intersection?.cell : nil
             
         default:
-            guard   let transactionStartedCollectionView = transactionController.transactionStartedCollectionView,
-                let transactionStartedIndexPath = transactionController.transactionStartedIndexPath else {
+            guard   let sourceCollectionView = transactionController.sourceCollectionView,
+                    let sourceIndexPath = transactionController.sourceIndexPath else {
                     
-                    selectIntersectedItem(at: locationInView,
-                                          in: self.view)
-                    
-                    transactionDraggingElement.isHidden = true
-                    
+                    selectIntersectedItem(at: locationInView, in: self.view)
+                    completeTransactionInteraction()
                     return
             }
             
-            let transactionStartedCell = transactionStartedCollectionView.cellForItem(at: transactionStartedIndexPath)
+            let sourceCell = sourceCollectionView.cellForItem(at: sourceIndexPath)
             
-            if  let dropCandidateCollectionView = transactionController.dropCandidateCollectionView,
-                let dropCandidateIndexPath = transactionController.dropCandidateIndexPath,
-                let dropCandidateCell = dropCandidateCollectionView.cellForItem(at: dropCandidateIndexPath),
-                let transactionSource = transactionSource(collectionView: transactionStartedCollectionView, indexPath: transactionStartedIndexPath),
-                let transactionDestination = transactionDestination(collectionView: dropCandidateCollectionView, indexPath: dropCandidateIndexPath) {
+            if  let destinationCollectionView = transactionController.destinationCollectionView,
+                let destinationIndexPath = transactionController.destinationIndexPath,
+                let destinationCell = destinationCollectionView.cellForItem(at: destinationIndexPath),
+                let transactionSource = transactionSource(collectionView: sourceCollectionView,
+                                                          indexPath: sourceIndexPath),
+                let transactionDestination = transactionDestination(collectionView: destinationCollectionView,
+                                                                    indexPath: destinationIndexPath) {
                 
-                animateTransactionCompleted(from: transactionStartedCell, to: dropCandidateCell, completed: {
-                    self.showTransactionEditScreen(transactionSource: transactionSource, transactionDestination: transactionDestination)
+                animateTransactionCompleted(from: sourceCell, to: destinationCell, completed: {
+                    self.showTransactionEditScreen(transactionSource: transactionSource,
+                                                   transactionDestination: transactionDestination)
                 })
                 
-            } else {
+            }
+            else {
                 
-                animateTransactionCancelled(from: transactionStartedCell)
+                animateTransactionCancelled(from: sourceCell)
                 if transactionDraggingElement.isHidden {
                     selectIntersectedItem(at: locationInView,
                                           in: self.view,
-                                          with: transactionStartedCollectionView,
-                                          indexPath: transactionStartedIndexPath)
+                                          with: sourceCollectionView,
+                                          indexPath: sourceIndexPath)
 
                 }
             }
         }
+    }
+    
+    private func allCollectionViews(or collectionView: UICollectionView? = nil) -> [UICollectionView] {
+        guard let collectionView = collectionView else { return allCollectionViews() }
+        return [collectionView]
     }
     
     private func selectIntersectedItem(at location: CGPoint,
@@ -297,31 +371,22 @@ extension MainViewController : TransactionControllerDelegate {
                                        with collectionView: UICollectionView? = nil,
                                        indexPath: IndexPath? = nil) {
         
-        guard let startedLocation = transactionController.startedLocation,
+        guard   let startedLocation = transactionController.startedLocation,
                 !transactionController.wentFarFromStart else { return }
-        let allCollectionViews: [UICollectionView] = [incomeSourcesCollectionView,
-                                                      expenseSourcesCollectionView,
-                                                      joyExpenseCategoriesCollectionView,
-                                                      riskActivesCollectionView,
-                                                      safeActivesCollectionView]
         
-        
-        let pool = collectionView == nil ? allCollectionViews : [collectionView!]
-        
-        let intersections = detectCollectionViewIntersection(at: location,
-                                                             in: view,
-                                                             collectionViewsPool: pool)
-        
+        let pool = allCollectionViews(or: collectionView)
+        let intersection = detectCollectionViewIntersection(at: location,
+                                                            in: view,
+                                                            collectionViewsPool: pool)
         let startedIntersection = detectCollectionViewIntersection(at: startedLocation,
                                                                    in: view,
                                                                    collectionViewsPool: pool)
-        
-        if  let intersectedCollectionView = intersections?.collectionView,
-            let intersectedIndexPath = intersections?.indexPath,
+        if  let intersectedCollectionView = intersection?.collectionView,
+            let intersectedIndexPath = intersection?.indexPath,
             intersectedCollectionView == startedIntersection?.collectionView,
             intersectedIndexPath == startedIntersection?.indexPath {
             
-            if (collectionView == nil || intersectedCollectionView == collectionView) && (indexPath == nil || intersectedIndexPath == indexPath) {
+            if (collectionView == nil || intersectedCollectionView == collectionView) && (indexPath == nil || intersectedIndexPath == indexPath) {                
                 self.collectionView(intersectedCollectionView, didSelectItemAt: intersectedIndexPath)
             }
         }

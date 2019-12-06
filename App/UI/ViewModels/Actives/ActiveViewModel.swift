@@ -11,6 +11,8 @@ import Foundation
 class ActiveViewModel : TransactionSource, TransactionDestination {
     let active: Active
     
+    var isSelected: Bool = false
+    
     var isTransactionSource: Bool {
         return true
     }

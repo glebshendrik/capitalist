@@ -313,7 +313,11 @@ extension EntityInfoViewController {
 }
 
 extension EntityInfoViewController : TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate, CreditEditViewControllerDelegate {
-
+    
+    var isSelectingTransactionables: Bool {
+        return false
+    }
+    
     func didCreateCredit() {
 
     }

@@ -12,6 +12,8 @@ class ExpenseCategoryViewModel {
     
     public private(set) var expenseCategory: ExpenseCategory
     
+    var isSelected: Bool = false
+    
     var id: Int {
         return expenseCategory.id
     }

@@ -304,6 +304,10 @@ extension BorrowEditViewController {
 }
 
 extension BorrowEditViewController: TransactionEditViewControllerDelegate {
+    var isSelectingTransactionables: Bool {
+        return false
+    }
+    
     func didCreateTransaction(id: Int, type: TransactionType) {
         close {
             guard let type = self.viewModel.type else  { return }

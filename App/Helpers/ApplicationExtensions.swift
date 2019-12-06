@@ -505,7 +505,11 @@ extension UIViewController {
         })
     }
     
-    func update(_ collectionView: UICollectionView, scrollToEnd: Bool = false, section: Int = 0) {
+    func update(_ collectionView: UICollectionView, animated: Bool = true, scrollToEnd: Bool = false, section: Int = 0) {
+        guard animated else {
+            collectionView.reloadData()
+            return
+        }
         guard let collectionViewDataSource = self as? UICollectionViewDataSource else {
             return
         }

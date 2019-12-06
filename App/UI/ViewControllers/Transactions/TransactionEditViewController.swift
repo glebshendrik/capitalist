@@ -11,6 +11,7 @@ import PromiseKit
 import SwiftDate
 
 protocol TransactionEditViewControllerDelegate {
+    var isSelectingTransactionables: Bool { get }
     func didCreateTransaction(id: Int, type: TransactionType)
     func didUpdateTransaction(id: Int, type: TransactionType)
     func didRemoveTransaction(id: Int, type: TransactionType)

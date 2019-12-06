@@ -216,14 +216,3 @@ extension MainViewController : WaitingBorrowsViewControllerDelegate {
         showReturnTransactionEditScreen(source: source, destination: destination, returningBorrow: borrow)
     }
 }
-
-extension MainViewController {
-    func tapMainButton() {
-        if isEditing {
-            setEditing(false, animated: true)
-        }
-        else {
-            showTransactionEditScreen(source: nil, destination: nil)
-        }        
-    }
-}

@@ -33,8 +33,12 @@ extension MainViewController {
         if viewModel.isAddCategoryItem(indexPath: indexPath) {
             showNewExpenseCategoryScreen(basketType: basketType)
         } else if let expenseCategoryViewModel = viewModel.expenseCategoryViewModel(at: indexPath) {
-            
-            showExpenseCategoryInfo(expenseCategory: expenseCategoryViewModel)
+            if isSelecting {
+                select(expenseCategoryViewModel, collectionView: joyExpenseCategoriesCollectionView, indexPath: indexPath)
+            }
+            else {
+                showExpenseCategoryInfo(expenseCategory: expenseCategoryViewModel)
+            }
         }
     }
     

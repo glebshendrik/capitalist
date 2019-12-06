@@ -61,6 +61,10 @@ extension ExpenseSourceInfoViewController : ExpenseSourceEditViewControllerDeleg
 }
 
 extension ExpenseSourceInfoViewController : TransactionEditViewControllerDelegate {
+    var isSelectingTransactionables: Bool {
+        return false
+    }
+    
     func didCreateTransaction(id: Int, type: TransactionType) {
         refreshData()
     }

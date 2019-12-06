@@ -16,7 +16,7 @@ extension MainViewController: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         
-        if touch.view is UIButton {
+        if touch.view is UIButton || isSelecting {
             return false
         }
         
@@ -50,6 +50,12 @@ extension MainViewController: UIGestureRecognizerDelegate {
             return !viewModel.isAddActiveItem(indexPath: indexPath, basketType: .safe)
         default:
             return true
+        }
+    }
+    
+    func updateLongPressureRecognizers() {
+        longPressureRecognizers.forEach {
+            $0.minimumPressDuration = (isEditingItems || isSelecting) ? fastPressDuration : slowPressDuration
         }
     }
 }

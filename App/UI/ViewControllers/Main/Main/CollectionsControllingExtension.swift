@@ -49,57 +49,24 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         
         let cell = collectionViewCell()
         
-        guard var editableCell = cell as? EditableCellProtocol else { return cell }
-        
-        if isEditing {
-            if indexPath != rearrangeController.movingIndexPath || collectionView != rearrangeController.movingCollectionView {
-                cell.set(editing: true)
-            }
-        } else {            
-            cell.set(editing: false)
-        }
+        guard var editableCell = cell as? TransactionableCellProtocol else { return cell }
                 
         editableCell.delegate = self
         
-        if collectionView == rearrangeController.movingCollectionView {
-            if indexPath == rearrangeController.movingIndexPath {
-                cell.alpha = 0.99
-                cell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-            } else {
-                cell.alpha = 1.0
-                cell.transform = CGAffineTransform.identity
-            }
-        }
+        let isCellEditing = isEditingItems && !rearrangeController.isMoving(collectionView, indexPath: indexPath)
+        cell.set(editing: isCellEditing)
         
-        if collectionView == transactionController.transactionStartedCollectionView {
-            if indexPath == transactionController.transactionStartedIndexPath {
-                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            }
-            else {
-                cell.transform = CGAffineTransform.identity
-            }
-        }
+        rearrangeController.syncStateOf(collectionView,
+                                        cell: cell,
+                                        at: indexPath,
+                                        editing: isCellEditing,
+                                        animated: false)
         
-        if collectionView == transactionController.dropCandidateCollectionView {
-            if indexPath == transactionController.dropCandidateIndexPath {
-                cell.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-            }
-            else {
-                cell.transform = CGAffineTransform.identity
-            }
-        }
         
-        if collectionView == transactionController.transactionStartedCollectionView && collectionView == transactionController.dropCandidateCollectionView {
-            if indexPath == transactionController.transactionStartedIndexPath {
-                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            }
-            else if indexPath == transactionController.dropCandidateIndexPath {
-                cell.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-            }
-            else {
-                cell.transform = CGAffineTransform.identity
-            }
-        }
+        transactionController.syncStateOf(collectionView,
+                                          cell: cell,
+                                          at: indexPath,
+                                          animated: false)
         
         return cell
     }
@@ -125,7 +92,7 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard !isEditing else { return }
+        guard !isEditingItems else { return }
         
         switch collectionView {
         case incomeSourcesCollectionView:           didSelectIncomeSource(at: indexPath)
@@ -139,12 +106,12 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
 }
 
 extension MainViewController {
-    func updateCollectionViews() {
-        update(incomeSourcesCollectionView)
-        update(expenseSourcesCollectionView)
-        update(joyExpenseCategoriesCollectionView)
-        update(riskActivesCollectionView)
-        update(safeActivesCollectionView)
+    func updateCollectionViews(animated: Bool = true) {
+        update(incomeSourcesCollectionView, animated: animated)
+        update(expenseSourcesCollectionView, animated: animated)
+        update(joyExpenseCategoriesCollectionView, animated: animated)
+        update(riskActivesCollectionView, animated: animated)
+        update(safeActivesCollectionView, animated: animated)
     }
 }
 

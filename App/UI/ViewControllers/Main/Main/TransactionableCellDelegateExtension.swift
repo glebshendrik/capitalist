@@ -8,8 +8,16 @@
 
 import UIKit
 
-extension MainViewController : EditableCellDelegate {
-    func didTapDeleteButton(cell: EditableCellProtocol) {
+extension MainViewController : TransactionableCellDelegate {
+    func canDelete(cell: TransactionableCellProtocol) -> Bool {
+        return true
+    }
+    
+    func canSelect(cell: TransactionableCellProtocol) -> Bool {
+        return true
+    }
+    
+    func didTapDeleteButton(cell: TransactionableCellProtocol) {
         var alertTitle = ""
         var removeAction: ((UIAlertAction) -> Void)? = nil
         var removeWithTransactionsAction: ((UIAlertAction) -> Void)? = nil
@@ -68,7 +76,7 @@ extension MainViewController : EditableCellDelegate {
         sheet(title: alertTitle, actions: actions)
     }
     
-    func didTapEditButton(cell: EditableCellProtocol) {
+    func didTapEditButton(cell: TransactionableCellProtocol) {
         if let incomeSource = (cell as? IncomeSourceCollectionViewCell)?.viewModel?.incomeSource {
             showEditScreen(incomeSource: incomeSource)
         }
@@ -78,7 +86,7 @@ extension MainViewController : EditableCellDelegate {
         if let expenseCategoryViewModel = (cell as? ExpenseCategoryCollectionViewCell)?.viewModel {
             showEditScreen(expenseCategory: expenseCategoryViewModel.expenseCategory,
                            basketType: expenseCategoryViewModel.expenseCategory.basketType)
-        }        
+        }
         if let activeViewModel = (cell as? ActiveCollectionViewCell)?.viewModel {
             showActiveEditScreen(active: activeViewModel.active,
                                  basketType: activeViewModel.basketType)

@@ -128,4 +128,6 @@ protocol UIFactoryProtocol {
     func activeInfoViewController(active: ActiveViewModel?) -> UINavigationController?
     
     func dependentIncomeSourceInfoViewController(activeName: String) -> UIViewController?
+    
+    func transactionCreationInfoViewController() -> UIViewController?
 }

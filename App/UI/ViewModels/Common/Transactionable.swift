@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Transactionable {
+protocol Transactionable : class {
     var id: Int { get }
     var type: TransactionableType { get }
     var name: String { get }
@@ -18,6 +18,7 @@ protocol Transactionable {
     var amountRounded: String { get }
     var amount: String { get }
     var isDeleted: Bool { get }
+    var isSelected: Bool { get set }
 }
 
 protocol TransactionSource : Transactionable {

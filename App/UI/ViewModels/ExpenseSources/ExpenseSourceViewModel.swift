@@ -11,6 +11,8 @@ import Foundation
 class ExpenseSourceViewModel {
     public private(set) var expenseSource: ExpenseSource
     
+    var isSelected: Bool = false
+    
     var id: Int {
         return expenseSource.id
     }

@@ -53,6 +53,13 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func didTapSource() {
+        
+        guard   let delegate = delegate,
+                !delegate.isSelectingTransactionables else {
+            close()
+            return
+        }
+        
         guard viewModel.canChangeSource else { return }
         didTap(transactionableType: viewModel.sourceType,
                transactionPart: .source,
@@ -62,6 +69,12 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
         
     func didTapDestination() {
+        guard   let delegate = delegate,
+                !delegate.isSelectingTransactionables else {
+            close()
+            return
+        }
+        
         guard viewModel.canChangeDestination else { return }
         didTap(transactionableType: viewModel.destinationType,
                transactionPart: .destination,

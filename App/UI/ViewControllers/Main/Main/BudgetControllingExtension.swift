@@ -11,6 +11,12 @@ import AttributedTextView
 
 extension MainViewController : TitleViewDelegate {
     var total: NSAttributedString {
+        if isSelecting {
+            return (viewModel.selectedSourceName.color(UIColor.by(.text9EAACC))
+                    + " - ".color(UIColor.by(.text9EAACC))
+                    + viewModel.selectedDestinationName.color(UIColor.by(.text9EAACC)))
+                        .all.fontName("Rubik-Regular").size(13).attributedText
+        }
         return (self.viewModel.basketTotalTitle.color(UIColor.by(.text9EAACC))
                 + self.viewModel.basketTotal.color(UIColor.by(.textFFFFFF)))
                 .all.fontName("Rubik-Regular").size(13).attributedText

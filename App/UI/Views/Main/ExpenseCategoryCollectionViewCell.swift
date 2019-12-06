@@ -18,6 +18,10 @@ class ExpenseCategoryCollectionViewCell : BasketItemCollectionViewCell {
         }
     }
     
+    override var transactionable: Transactionable? {
+        return viewModel
+    }
+    
     override var canDelete: Bool {
         guard let viewModel = viewModel else { return true }
         return !viewModel.isCredit

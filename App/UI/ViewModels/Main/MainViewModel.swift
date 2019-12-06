@@ -24,34 +24,60 @@ class MainViewModel {
     private var riskActiveViewModels: [ActiveViewModel] = []
     private var safeActiveViewModels: [ActiveViewModel] = []
     
-    private var editing: Bool = false
+    public private(set) var selectedSource: Transactionable? = nil {
+        didSet {
+            oldValue?.isSelected = false
+            selectedSource?.isSelected = true
+        }
+    }
+    public private(set) var selectedDestination: Transactionable? = nil {
+        didSet {
+            oldValue?.isSelected = false
+            selectedDestination?.isSelected = true
+        }
+    }
+    
+    var selectedSourceName: String {
+        return selectedSource?.name ?? "Источник"
+    }
+    
+    var selectedDestinationName: String {
+        return selectedDestination?.name ?? "Назначение"
+    }
+    
+    var transactionablesSelected: Bool {
+        return selectedSource != nil && selectedDestination != nil
+    }
+    
+    public private(set) var editing: Bool = false
+    public private(set) var selecting: Bool = false
     
     var numberOfIncomeSources: Int {
-        return editing
+        return editing || selecting
             ? incomeSourceViewModels.count
             : incomeSourceViewModels.count + 1
     }
     
     var numberOfExpenseSources: Int {
-        return editing
+        return editing || selecting
             ? expenseSourceViewModels.count
             : expenseSourceViewModels.count + 1
     }
     
     var numberOfJoyExpenseCategories: Int {
-        return editing
+        return editing || selecting
             ? numberOfExpenseCategories()
             : numberOfExpenseCategories() + 1
     }
     
     var numberOfRiskActives: Int {
-        return editing
+        return editing || selecting
             ? numberOfActives(with: .risk)
             : numberOfActives(with: .risk) + 1
     }
     
     var numberOfSafeActives: Int {
-        return editing
+        return editing || selecting
             ? numberOfActives(with: .safe)
             : numberOfActives(with: .safe) + 1
     }
@@ -102,11 +128,115 @@ class MainViewModel {
         self.accountCoordinator = accountCoordinator
     }
     
+    func selectSource(_ source: Transactionable) {
+        guard canBeSource(source) else { return }
+        selectedSource = source
+    }
+    
+    func selectDestination(_ destination: Transactionable) {
+        guard canBeDestination(destination) else { return }
+        selectedDestination = destination
+    }
+    
+    func canBeSource(_ transactionable: Transactionable) -> Bool {
+        guard let source = transactionable as? TransactionSource else { return false }
+        
+        if  let destination = selectedDestination as? TransactionDestination {
+            return destination.isTransactionDestinationFor(transactionSource: source)
+        }
+        return source.isTransactionSource
+    }
+    
+    func canBeDestination(_ transactionable: Transactionable) -> Bool {
+        guard let destination = transactionable as? TransactionDestination else { return false }
+        
+        if  let source = selectedSource as? TransactionSource {
+            return destination.isTransactionDestinationFor(transactionSource: source)
+        }
+        return true
+    }
+    
+    func select(_ transactionable: Transactionable) {
+        if  selectedSource == nil {
+            
+            selectSource(transactionable)
+            return
+        }
+        else if let source = selectedSource as? TransactionSource,
+                    source.type == transactionable.type {
+            
+            if source.id == transactionable.id {
+                selectedSource = nil
+                return
+            }
+            else if !canBeDestination(transactionable) {
+                selectSource(transactionable)
+                return
+            }
+//            else if (selectedDestination == nil || selectedDestination!.type == transactionable.type) && canBeDestination(transactionable) {
+//                selectDestination(transactionable)
+//                return
+//            }
+//            else if let destination = selectedDestination as? TransactionDestination,
+//                        destination.type != transactionable.type {
+//                selectSource(transactionable)
+//                return
+//            }
+            
+            
+        }
+        
+        if  selectedDestination == nil {
+            
+            selectDestination(transactionable)
+            return
+        }
+        else if let destination = selectedDestination as? TransactionDestination,
+                    destination.type == transactionable.type {
+            
+            if destination.id == transactionable.id {
+                selectedDestination = nil
+            }
+            else {
+                selectDestination(transactionable)
+            }
+            return
+        }
+        
+        if canBeDestination(transactionable) {
+            selectDestination(transactionable)
+        }
+        else if canBeSource(transactionable) {
+            selectSource(transactionable)
+        }
+    }
+    
+    func resetTransactionables() {
+        selectedSource = nil
+        selectedDestination = nil
+        incomeSourceViewModels.forEach {
+            $0.isSelected = false
+        }
+        expenseSourceViewModels.forEach {
+            $0.isSelected = false
+        }
+        joyExpenseCategoryViewModels.forEach {
+            $0.isSelected = false
+        }
+        riskActiveViewModels.forEach {
+            $0.isSelected = false
+        }
+        safeActiveViewModels.forEach {
+            $0.isSelected = false
+        }
+    }
+    
     func loadIncomeSources() -> Promise<Void> {
         return  firstly {
                     incomeSourcesCoordinator.index(noBorrows: false)
                 }.get { incomeSources in
                     self.incomeSourceViewModels = incomeSources.map { IncomeSourceViewModel(incomeSource: $0)}
+                    self.resetTransactionables()
                 }.asVoid()
     }
     
@@ -115,6 +245,7 @@ class MainViewModel {
                     expenseSourcesCoordinator.index(currency: nil)
                 }.get { expenseSources in
                     self.expenseSourceViewModels = expenseSources.map { ExpenseSourceViewModel(expenseSource: $0)}
+                    self.resetTransactionables()
                 }.asVoid()
     }
     
@@ -131,6 +262,7 @@ class MainViewModel {
                     expenseCategoriesCoordinator.index(for: .joy, noBorrows: false)
                 }.get { expenseCategories in
                     self.joyExpenseCategoryViewModels = expenseCategories.map { ExpenseCategoryViewModel(expenseCategory: $0) }
+                    self.resetTransactionables()
                 }.asVoid()
     }
     
@@ -149,6 +281,7 @@ class MainViewModel {
                     default:
                         return
                     }
+                    self.resetTransactionables()
                 }.asVoid()
     }
     
@@ -194,6 +327,13 @@ class MainViewModel {
     
     func set(editing: Bool) {
         self.editing = editing
+    }
+    
+    func set(selecting: Bool) {
+        self.selecting = selecting
+        if !selecting {
+            resetTransactionables()
+        }
     }
     
     func moveIncomeSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) -> Promise<Void> {

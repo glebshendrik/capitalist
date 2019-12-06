@@ -355,6 +355,10 @@ class UIFactory : UIFactoryProtocol {
         return dependentIncomeSourceInfoViewController    
     }
     
+    func transactionCreationInfoViewController() -> UIViewController? {        
+        return router.viewController(.TransactionCreationInfoViewController) as? TransactionCreationInfoViewController
+    }
+    
     func incomeSourceInfoViewController(incomeSource: IncomeSourceViewModel?) -> UINavigationController? {
         let incomeSourceInfoViewController = router.viewController(.IncomeSourceInfoViewController) as? IncomeSourceInfoViewController
         

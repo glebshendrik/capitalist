@@ -61,6 +61,7 @@ struct Infrastructure {
         case MainViewController
         case MenuViewController
         case MenuNavigationController
+        case TransactionCreationInfoViewController
         
         // Income Sources
         case IncomeSourceEditViewController
@@ -157,7 +158,8 @@ struct Infrastructure {
                 return .Join
             case .MainViewController,
                  .MenuViewController,
-                 .MenuNavigationController:
+                 .MenuNavigationController,
+                 .TransactionCreationInfoViewController:
                 return .Main
             case .IncomeSourceEditViewController,
                  .IncomeSourceEditNavigationController,

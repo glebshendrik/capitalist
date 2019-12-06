@@ -64,7 +64,9 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBOutlet weak var transactionDraggingElement: UIView!    
     @IBOutlet weak var basketTotalLabel: UILabel!
-    @IBOutlet weak var mainButton: HighlightButton!
+    @IBOutlet weak var mainButton: UIButton!
+    @IBOutlet weak var mainButtonBackground: UIView!
+    @IBOutlet weak var mainButtonTopToBottomConstraint: NSLayoutConstraint!
     
     var titleView: TitleView!
     var transactionController: TransactionController!

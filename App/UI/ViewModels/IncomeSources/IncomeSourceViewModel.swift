@@ -10,6 +10,8 @@ import Foundation
 
 class IncomeSourceViewModel : TransactionSource {
     
+    var isSelected: Bool = false
+    
     var type: TransactionableType {
         return .incomeSource
     }

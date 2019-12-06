@@ -70,6 +70,10 @@ extension IncomeSourceInfoViewController : IncomeSourceEditViewControllerDelegat
 }
 
 extension IncomeSourceInfoViewController : TransactionEditViewControllerDelegate {
+    var isSelectingTransactionables: Bool {
+        return false
+    }
+    
     func didCreateTransaction(id: Int, type: TransactionType) {
         refreshData()
     }

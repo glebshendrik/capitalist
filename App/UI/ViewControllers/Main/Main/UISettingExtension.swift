@@ -29,6 +29,7 @@ extension MainViewController {
         setupNotifications()
         setupTransactionController()
         setupRearrangeController()
+        updateMainButtonUI()
     }
     
     private func setupIncomeSourcesCollectionView() {
@@ -145,7 +146,7 @@ extension MainViewController {
     
     private func layoutIncomeSourcesCollectionView() {
         fillLayout(collectionView: incomeSourcesCollectionView,
-                   itemHeight: 54.0,
+                   itemHeight: 50.0,
                    innerSpace: 2.0,
                    outerSpace: 1.0,
                    columns: 3)
@@ -203,7 +204,7 @@ extension MainViewController {
 
 extension MainViewController {
     @objc func appMovedToForeground() {
-        setVisibleCells(editing: isEditing)
+        setVisibleCells(editing: isEditingItems)
     }
 }
 

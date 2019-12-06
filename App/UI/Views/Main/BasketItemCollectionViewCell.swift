@@ -9,51 +9,20 @@
 import UIKit
 import SnapKit
 
-class BasketItemCollectionViewCell : UICollectionViewCell, EditableCellProtocol {
-    
-    public private(set) var didSetupConstraints = false
-
+class BasketItemCollectionViewCell : TransactionableCell {
     lazy var icon: BasketItemIcon = { return BasketItemIcon() }()
     lazy var progress: BasketItemProgress = { return BasketItemProgress() }()
     lazy var itemDescription: BasketItemDescription = { return BasketItemDescription() }()
-    lazy var deleteButton: UIButton! = { return EditableCellDeleteButton() }()
-    lazy var editButton: UIButton! = { return EditableCellEditButton() }()
     
     var progressContainerWidth: CGFloat {
         return 48.0
     }
     
-    var delegate: EditableCellDelegate?
-    
-    var canDelete: Bool {
-        return true
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setup()
-    }
-    
-    private func setup() {
-        setupUI()
-        setNeedsUpdateConstraints()
-        updateUI()
-    }
-    
-    override func updateConstraints() {
-        if !didSetupConstraints {
-            setupConstraints()
-            didSetupConstraints = true
-        }
-        super.updateConstraints()
-    }
-    
-    func setupUI() {
+    override func setupUI() {
         setupIcon()
         setupProgress()
         setupDescription()
-        setupDeleteButton()
-        setupEditButton()
+        super.setupUI()
     }
     
     func setupIcon() {
@@ -76,29 +45,16 @@ class BasketItemCollectionViewCell : UICollectionViewCell, EditableCellProtocol 
         contentView.addSubview(itemDescription)
     }
     
-    func setupDeleteButton() {
-        (deleteButton as? EditableCellButton)?.didTap {
-            self.delegate?.didTapDeleteButton(cell: self)
-        }
-        contentView.addSubview(deleteButton)
-    }
-    
-    func setupEditButton() {
-        (editButton as? EditableCellButton)?.didTap {
-            self.delegate?.didTapEditButton(cell: self)
-        }
-        contentView.addSubview(editButton)
-    }
-    
-    func setupConstraints() {
+    override func setupConstraints() {
         setupDeleteButtonConstraints()
         setupIconConstraints()
         setupProgressConstraints()
         setupDescriptionConstraints()
         setupEditButtonConstraints()
+        setupSelectionIndicatorConstraints()
     }
     
-    func setupDeleteButtonConstraints() {
+    override func setupDeleteButtonConstraints() {
         deleteButton.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.bottom.equalTo(icon.snp.top).offset(14)
@@ -131,7 +87,7 @@ class BasketItemCollectionViewCell : UICollectionViewCell, EditableCellProtocol 
         }
     }
     
-    func setupEditButtonConstraints() {
+    override func setupEditButtonConstraints() {
         editButton.snp.makeConstraints { make in
             make.top.equalTo(icon.snp.bottom).offset(-14)
             make.left.equalTo(icon.snp.right).offset(-14)
@@ -139,13 +95,18 @@ class BasketItemCollectionViewCell : UICollectionViewCell, EditableCellProtocol 
         }
     }
     
-    func updateUI() {
+    override func setupSelectionIndicatorConstraints() {
+        selectionIndicator.snp.makeConstraints { make in
+            make.bottom.equalTo(editButton.snp.bottom)
+            make.right.equalTo(editButton.snp.right)
+        }
+    }
+    
+    override func updateUI() {
         updateIcon()
         updateProgress()
         updateDescription()
-        layer.shouldRasterize = true
-        layer.rasterizationScale = UIScreen.main.scale
-        contentView.layoutIfNeeded()
+        super.updateUI()
     }
     
     func updateIcon() {
