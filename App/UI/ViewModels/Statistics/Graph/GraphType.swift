@@ -9,34 +9,22 @@
 import Foundation
 
 enum GraphType {
-    case income
-    case incomePie
+    case all
+    case incomes
     case expenses
-    case expensesPie
-    case incomeAndExpenses
-    case cashFlow
-    case netWorth
     
     static var switchList: [GraphType] {
-        return [.income, .expenses, .incomeAndExpenses, .cashFlow, .netWorth]
+        return [.all, .incomes, .expenses]
     }
     
     var title: String {
         switch self {
-        case .income:
-            return "Доход"
-        case .incomePie:
+        case .all:
+            return "Все"
+        case .incomes:
             return "Доход"
         case .expenses:
             return "Расходы"
-        case .expensesPie:
-            return "Расходы"
-        case .incomeAndExpenses:
-            return "Доход и Расходы"
-        case .cashFlow:
-            return "Кошельки"
-        case .netWorth:
-            return "Накопления"
         }
     }
 }

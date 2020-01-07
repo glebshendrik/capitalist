@@ -106,11 +106,13 @@ extension NSDecimalNumber {
         return Formatter.percent().string(from: percentNumber())
     }
     
-    func moneyDecimalString(with currency: Currency) -> String? {
+    func moneyDecimalString(with currency: Currency?) -> String? {
+        guard let currency = currency else { return nil }
         return Formatter.decimal(with: currency).string(from: moneyNumber(with: currency))
     }
     
-    func moneyCurrencyString(with currency: Currency, shouldRound: Bool) -> String? {
+    func moneyCurrencyString(with currency: Currency?, shouldRound: Bool) -> String? {
+        guard let currency = currency else { return nil }
         let formatter = Formatter.currency(with: currency)
         
         var number = moneyNumber(with: currency)

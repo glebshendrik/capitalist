@@ -9,7 +9,7 @@
 import UIKit
 
 extension MainViewController {
-    func showStatistics(with filterViewModel: SourceOrDestinationTransactionFilter?) {
+    func showStatistics(with filterViewModel: TransactionableFilter?) {
         modal(factory.statisticsModalViewController(filter: filterViewModel))
     }
 }

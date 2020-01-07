@@ -56,8 +56,8 @@ extension MainViewController {
     }
     
     private func setupNavigationBar() {
-        let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
-                          NSAttributedString.Key.foregroundColor : UIColor.by(.textFFFFFF)]
+        let attributes = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 18)!,
+                          NSAttributedString.Key.foregroundColor : UIColor.by(.white100)]
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()        

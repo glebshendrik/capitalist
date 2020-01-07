@@ -30,39 +30,39 @@ class FormField : UIView {
     
     // Appearance properties
     
-    @IBInspectable var focusedBackgroundColor: UIColor = UIColor.by(.blue6B93FB) {
+    @IBInspectable var focusedBackgroundColor: UIColor = UIColor.by(.blue1) {
         didSet { updateBackground() }
     }
     
-    @IBInspectable var unfocusedBackgroundColor: UIColor = UIColor.by(.dark2A314B) {
+    @IBInspectable var unfocusedBackgroundColor: UIColor = UIColor.by(.black2) {
         didSet { updateBackground() }
     }
     
-    @IBInspectable var focusedIconBackground: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var focusedIconBackground: UIColor = UIColor.clear {
         didSet { updateIcon() }
     }
     
-    @IBInspectable var unfocusedIconBackground: UIColor = UIColor.by(.gray7984A4) {
+    @IBInspectable var unfocusedIconBackground: UIColor = UIColor.clear {
         didSet { updateIcon() }
     }
     
-    @IBInspectable var invalidIconBackground: UIColor = UIColor.by(.redFE3745) {
+    @IBInspectable var invalidIconBackground: UIColor = UIColor.clear {
         didSet { updateIcon() }
     }
     
-    @IBInspectable var focusedIconTint: UIColor = UIColor.by(.blue6B93FB) {
+    @IBInspectable var focusedIconTint: UIColor = UIColor.by(.white100) {
         didSet { updateIcon() }
     }
     
-    @IBInspectable var unfocusedIconTint: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var unfocusedIconTint: UIColor = UIColor.by(.white100) {
         didSet { updateIcon() }
     }
     
-    @IBInspectable var errorLabelFont: UIFont = UIFont(name: "Rubik-Regular", size: 10)! {
+    @IBInspectable var errorLabelFont: UIFont = UIFont(name: "Roboto-Regular", size: 10)! {
         didSet { updateErrorLabel() }
     }
     
-    @IBInspectable var errorLabelColor: UIColor = UIColor.by(.redFE3745) {
+    @IBInspectable var errorLabelColor: UIColor = UIColor.by(.red1) {
         didSet { updateErrorLabel() }
     }
     
@@ -78,7 +78,7 @@ class FormField : UIView {
         didSet { updateIcon() }
     }
     
-    @IBInspectable var separatorColor: UIColor = UIColor.by(.delimeter2F3854) {
+    @IBInspectable var separatorColor: UIColor = UIColor.by(.white4) {
         didSet { updateSeparator() }
     }
     

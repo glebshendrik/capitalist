@@ -105,14 +105,10 @@ class ExpenseCategoryViewModel {
         waitingLoans = expenseCategory.waitingLoans.map { BorrowViewModel(borrow: $0) }
     }
     
-    func asTransactionFilter() -> ExpenseCategoryTransactionFilter {
-        return ExpenseCategoryTransactionFilter(expenseCategoryViewModel: self)
+    func asTransactionFilter() -> ExpenseCategoryFilter {
+        return ExpenseCategoryFilter(expenseCategoryViewModel: self)
     }
-    
-    func asIncludedInBalanceFilter() -> IncludedInBalanceTransactionFilter {
-        return IncludedInBalanceTransactionFilter(expenseCategoryViewModel: self)
-    }
-    
+        
     private func spent(shouldRound: Bool) -> String? {
         return expenseCategory.spentCentsAtPeriod.moneyCurrencyString(with: currency, shouldRound: shouldRound)
     }
@@ -136,7 +132,6 @@ extension ExpenseCategoryViewModel : TransactionDestination {
     }
     
     func isTransactionDestinationFor(transactionSource: TransactionSource) -> Bool {
-        guard let sourceExpenseSourceViewModel = transactionSource as? ExpenseSourceViewModel else { return false }
-        return true
+        return transactionSource is ExpenseSourceViewModel
     }
 }

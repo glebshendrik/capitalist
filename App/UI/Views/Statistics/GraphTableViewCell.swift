@@ -9,31 +9,23 @@
 import UIKit
 import Charts
 import MSPeekCollectionViewDelegateImplementation
+import BetterSegmentedControl
 
 protocol GraphTableViewCellDelegate {
     func didTapGraphTypeButton()
-    func didTapGraphScaleButton()
-    func didTapAggregationTypeButton()
-    func didTapLinePieSwitchButton()
-    func graphFiltersAndTotalUpdateNeeded()
+    func didChangeRange()
 }
 
 class GraphTableViewCell : UITableViewCell {
-    @IBOutlet weak var lineChartView: LineChartView!
-    @IBOutlet weak var pieChartsCollectionView: UICollectionView!
-    
-    @IBOutlet weak var lineChartViewContainer: UIView!
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!    
     @IBOutlet weak var pieChartsViewContainer: UIView!
-    
-    @IBOutlet weak var currentDateLabel: UILabel!
-    @IBOutlet weak var currentPositionMarker: UIView!
-    @IBOutlet weak var graphTypeSwitchButton: UIButton!
-    @IBOutlet weak var graphScaleSwitchButton: UIButton!
-    @IBOutlet weak var linePieSwitchButton: UIButton!
-    @IBOutlet weak var aggregationTypeSwitchButton: UIButton!
-    
+    @IBOutlet weak var pieChartsCollectionView: UICollectionView!
     @IBOutlet weak var pieChartsNoDataLabel: UILabel!
-    let pieChartsCollectionViewPeekDelegate = CollectionViewItemsPeekPresenter(cellSpacing: 10, cellPeekWidth: 50, maximumItemsToScroll: 1, numberOfItemsToShow: 1, scrollDirection: .horizontal)
+    @IBOutlet weak var tabs: BetterSegmentedControl!
+    private var tabsInitialized: Bool = false
+    
+    let pieChartsCollectionViewPeekDelegate = CollectionViewItemsPeekPresenter(cellSpacing: 30, cellPeekWidth: 30, maximumItemsToScroll: 1, numberOfItemsToShow: 1, scrollDirection: .horizontal)
     
     var delegate: GraphTableViewCellDelegate?
     
@@ -43,6 +35,7 @@ class GraphTableViewCell : UITableViewCell {
     
     var viewModel: GraphViewModel? = nil {
         didSet {
+            setupTabs()
             updateUI()
         }
     }
@@ -52,34 +45,27 @@ class GraphTableViewCell : UITableViewCell {
         setupUI()
         updateUI()
     }
-    
-    @IBAction func didTapGraphTypeButton(_ sender: Any) {
+                
+    @IBAction func didChangeGraphTab(_ sender: Any) {
+        viewModel?.setGraphType(by: tabs.index)
         delegate?.didTapGraphTypeButton()
     }
     
-    @IBAction func didTapGraphScaleButton(_ sender: Any) {
-        delegate?.didTapGraphScaleButton()
-    }
-    
-    @IBAction func didTapLinePieChartSwitchButton(_ sender: Any) {
-        lineChartView.clear()
-        delegate?.didTapLinePieSwitchButton()
-    }
-    
-    @IBAction func didTapAggregationTypeSwitchButton(_ sender: Any) {
-        delegate?.didTapAggregationTypeButton()
-    }
-    
     private func setupUI() {
-        setupLineChart()
         setupPieChartsCollectionView()
-        setupButtons()
     }
     
-    private func setupButtons() {
-        graphTypeSwitchButton.setImageToRight()
-        graphScaleSwitchButton.setImageToRight()
-        aggregationTypeSwitchButton.setImageToRight()
+    private func setupTabs() {
+        guard !tabsInitialized else { return }
+        tabs.segments = LabelSegment.segments(withTitles: ["ВСЕ", "ДОХОД", "РАСХОДЫ"],
+                                              normalBackgroundColor: UIColor.clear,
+                                              normalFont: UIFont(name: "Roboto-Regular", size: 12)!,
+                                              normalTextColor: UIColor.by(.white100),
+                                              selectedBackgroundColor: UIColor.by(.white12),
+                                              selectedFont: UIFont(name: "Roboto-Regular", size: 12)!,
+                                              selectedTextColor: UIColor.by(.white100))
+        tabs.addTarget(self, action: #selector(didChangeGraphTab(_:)), for: .valueChanged)
+        tabsInitialized = true
     }
     
     private func setupPieChartsCollectionView() {        
@@ -89,153 +75,51 @@ class GraphTableViewCell : UITableViewCell {
         pieChartsCollectionViewPeekDelegate.contentOffsetDelegate = self
     }
     
-    private func setupLineChart() {
-        lineChartView.delegate = self
-        
-        lineChartView.leftAxis.enabled = true
-        lineChartView.rightAxis.enabled = false
-        lineChartView.noDataText = "Недостаточно данных"
-        
-        lineChartView.noDataFont = UIFont(name: "Rubik-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)
-        lineChartView.leftAxis.labelFont = UIFont(name: "Rubik-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12)
-        lineChartView.xAxis.labelFont = UIFont(name: "Rubik-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12)
-        
-        lineChartView.scaleXEnabled = false
-        lineChartView.scaleYEnabled = true
-        lineChartView.pinchZoomEnabled = false
-        lineChartView.doubleTapToZoomEnabled = true
-        lineChartView.dragEnabled = true
-        
-        lineChartView.leftAxis.drawZeroLineEnabled = false
-
-        lineChartView.leftAxis.labelPosition = .insideChart
-        lineChartView.leftAxis.yOffset = -8.0
-        
-        lineChartView.dragDecelerationFrictionCoef = 0.95
-        
-        lineChartView.drawMarkers = false
-        lineChartView.setViewPortOffsets(left: 0, top: 30, right: 0, bottom: 30)
-        lineChartView.setDragOffsetX(lineChartView.frame.width / 2)
-        
-        lineChartView.xAxis.drawAxisLineEnabled = true
-        lineChartView.xAxis.drawGridLinesEnabled = false
-        
-        lineChartView.xAxis.forceLabelsEnabled = true
-        lineChartView.xAxis.labelPosition = .bottom
-        
-        lineChartView.drawBordersEnabled = false
-        lineChartView.drawGridBackgroundEnabled = false
-        
-        lineChartView.legend.enabled = false
-        
-        lineChartView.renderer = LineChartAreasRenderer(dataProvider: lineChartView, animator: lineChartView.chartAnimator, viewPortHandler: lineChartView.viewPortHandler)
-
-    }
-    
     private func updateUI() {
-        updateButtons()
-        updateCurrentPositionMarker()
-        updateDateFormatter()
-        updateLineChart()
+        updateTabs()
+        updateLabels()
         updatePieChartsCollectionView()
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
     }
     
-    private func updateButtons() {
-        graphTypeSwitchButton.setTitle(viewModel?.graphType.title, for: .normal)
-        graphScaleSwitchButton.setTitle(viewModel?.graphPeriodScale?.title, for: .normal)
-        aggregationTypeSwitchButton.setTitle(viewModel?.aggregationType.title, for: .normal)
-        
-        linePieSwitchButton.isHidden = viewModel?.linePieChartSwitchHidden ?? true
-        
-        if let imageName = viewModel?.linePieChartSwitchIconName {
-            linePieSwitchButton.setImage(UIImage(named: imageName), for: .normal)
-        }
+    private func updateTabs() {
+        tabs.setIndex(viewModel?.graphTypeIndex ?? 0, animated: true)
+    }
+    
+    private func updateLabels() {
+        UIView.transition(with: totalLabel,
+             duration: 0.25,
+              options: .transitionCrossDissolve,
+           animations: { [weak self] in
+               self?.totalLabel.text = self?.viewModel?.total
+               self?.subtitleLabel.text = self?.viewModel?.subtitle
+        }, completion: nil)
     }
     
     private func updatePieChartsCollectionView() {
-        pieChartsNoDataLabel.isHidden = (viewModel?.pieChartHidden ?? true) || (viewModel?.hasData ?? true)
-        pieChartsViewContainer.isHidden = viewModel?.pieChartHidden ?? true
+        pieChartsNoDataLabel.isHidden = viewModel?.hasData ?? true
         pieChartsCollectionView.reloadData()
         
-        if let offset = viewModel?.pieChartsCollectionContentOffset {
+        if let offset = viewModel?.collectionContentOffset {
             pieChartsCollectionView.setContentOffset(offset, animated: false)
         } else if let lastItemIndexPath = pieChartsCollectionView.indexPathForLastItem,
                   lastItemIndexPath.item > 0  {
-            pieChartsCollectionView.scrollToItem(at: lastItemIndexPath, at: .centeredHorizontally, animated: false)
+            pieChartsCollectionView.scrollToItem(at: lastItemIndexPath, at: .centeredHorizontally, animated: true)
         }
-    }
-    
-    private func updateCurrentPositionMarker() {
-        currentPositionMarker.isHidden = viewModel?.isLineChartCurrentPositionMarkerHidden ?? true
-    }
-    
-    private func updateDateFormatter() {
-        guard   let viewModel = viewModel else { return }
-        dateFormatter.dateFormat = viewModel.dateFormat
-    }
-    
-    private func updateLineChart() {
-        lineChartViewContainer.isHidden = viewModel?.lineChartHidden ?? false
-        
-        lineChartView.clear()
-        lineChartView.leftAxis.resetCustomAxisMin()
-        
-        guard   let viewModel = viewModel,
-                let currency = viewModel.currency,
-                viewModel.hasData else { return }
-        if let dateFormat = viewModel.dateFormat {
-            lineChartView.xAxis.valueFormatter = DateValueFormatter(dateFormat: dateFormat)
-        }        
-        lineChartView.leftAxis.valueFormatter = CurrencyValueFormatter(currency: currency)
-        
-        if viewModel.shouldLimitMinimumValueToZero {
-            lineChartView.leftAxis.axisMinimum = 0
-        }
-
-        lineChartView.xAxis.setLabelCount(viewModel.labelsCount, force: true)
-        lineChartView.xAxis.granularity = viewModel.granularity
-        
-        lineChartView.data = viewModel.lineChartData
-        
-        lineChartView.setVisibleXRangeMaximum(viewModel.visibleXRangeMaximum)
-        lineChartView.zoom(scaleX: 0.0, scaleY: 0.0, x: 0.0, y: 0.0)
-        lineChartView.moveViewToX(viewModel.lineChartCurrentPointWithOffset ?? lineChartView.chartXMax)
-        
-    }
-}
-
-extension GraphTableViewCell : ChartViewDelegate {
-    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
-        
-        switch chartView {
-        case lineChartView:
-            let point = lineChartView.getEntryByTouchPoint(point: CGPoint(x: lineChartView.frame.size.width / 2.0, y: 0.0))?.x
-            updateLineChart(currentPoint: point)
-        default:
-            return
-        }
-    }
-    
-    private func updateLineChart(currentPoint: Double?) {
-        if viewModel?.lineChartCurrentPoint != currentPoint {
-            viewModel?.lineChartCurrentPoint = currentPoint
-            updateLineChartCurrentPointUI()
-        }
-        
-    }
-    
-    private func updateLineChartCurrentPointUI() {
-        delegate?.graphFiltersAndTotalUpdateNeeded()
     }
 }
 
 extension GraphTableViewCell : UICollectionViewDataSource, CollectionViewContentOffsetDelegate {
     func didChangeContentOffset(_ contentOffset: CGPoint) {
-        viewModel?.pieChartsCollectionContentOffset = contentOffset
-        viewModel?.currentPieChartIndex = pieChartsCollectionViewPeekDelegate.scrollView(pieChartsCollectionView, indexForItemAtContentOffset: contentOffset)
-        delegate?.graphFiltersAndTotalUpdateNeeded()
+        guard let viewModel = viewModel else { return }
+        
+        viewModel.collectionContentOffset = contentOffset
+        let newIndex = pieChartsCollectionViewPeekDelegate.scrollView(pieChartsCollectionView, indexForItemAtContentOffset: contentOffset)
+        if viewModel.currentChartIndex != newIndex {
+            viewModel.set(chartIndex: newIndex)
+            delegate?.didChangeRange()
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -243,17 +127,23 @@ extension GraphTableViewCell : UICollectionViewDataSource, CollectionViewContent
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel?.numberOfPieCharts ?? 0
+        return viewModel?.numberOfGraphs ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PieChartCollectionViewCell", for: indexPath) as? PieChartCollectionViewCell,
-            let pieChartViewModel = viewModel?.pieChartViewModel(at: indexPath) else {
+            let viewModel = viewModel else {
                 return UICollectionViewCell()
         }
         
-        cell.viewModel = pieChartViewModel
+        if indexPath.item == viewModel.currentChartIndex {
+            cell.set(chartData: viewModel.pieChartData)
+            updateLabels()
+        }
+        else {
+            cell.set(chartData: viewModel.emptyChartData)
+        }
         
         return cell
     }

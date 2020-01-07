@@ -10,36 +10,25 @@ import Foundation
 import Charts
 
 extension GraphViewModel {
-    
     var transactions: [TransactionViewModel] {
         let transactions = transactionsViewModel.filteredTransactionViewModels
         
         switch graphType {
-        case .income, .incomePie:
-            return transactions.filter { $0.type == .income }
-        case .expenses, .expensesPie:
-            return transactions.filter { $0.type == .expense }
-        case .incomeAndExpenses, .netWorth:
+        case .all:
             return transactions.filter { $0.type != .fundsMove }
-        case .cashFlow:
-            return transactions
+        case .incomes:
+            return incomes
+        case .expenses:
+            return expenses
         }
     }
     
-    var currency: Currency? {
-        return transactionsViewModel.defaultCurrency
+    var incomes: [TransactionViewModel] {
+        return transactionsViewModel.filteredTransactionViewModels.filter { $0.type == .income }
     }
     
-    var numberOfDataPoints: Int {
-        return dataPoints.count
-    }
-    
-    var hasData: Bool {
-        return numberOfDataPoints > 0
-    }
-    
-    var dateFormat: String? {
-        return graphPeriodScale?.dateFormat
+    var expenses: [TransactionViewModel] {
+        return transactionsViewModel.filteredTransactionViewModels.filter { $0.type == .expense }
     }
     
     var colors: [UIColor] {
@@ -48,10 +37,48 @@ extension GraphViewModel {
             .map { UIColor(hexString: $0) }
             .compactMap  { $0 }
     }
-    
-    func formattedDataPoint(at indexPath: IndexPath) -> String? {
-        guard let dateFormat = dateFormat else { return nil }
-        return dataPoints.item(at: indexPath.item)?.string(withFormat: dateFormat)
+        
+    var incomeSourceIds: [Int] {
+        return transactions
+            .filter { $0.sourceType == TransactionableType.incomeSource }
+            .map { $0.sourceId }
+            .withoutDuplicates()
+            .sorted()
     }
     
+    var expenseSourceIds: [Int] {
+        let asSources = transactions
+            .filter { $0.sourceType == TransactionableType.expenseSource }
+            .map { $0.sourceId }
+        
+        let asDestinations = transactions
+            .filter { $0.destinationType == TransactionableType.expenseSource }
+            .map { $0.destinationId }
+        
+        return (asSources + asDestinations).withoutDuplicates().sorted()
+    }
+    
+    var expenseCategoryIds: [Int] {
+        return transactions
+            .filter { $0.destinationType == TransactionableType.expenseCategory }
+            .map { $0.destinationId }
+            .withoutDuplicates()
+            .sorted()
+    }
+    
+    var activeIds: [Int] {
+        let asSources = transactions
+            .filter { $0.sourceType == TransactionableType.active }
+            .map { $0.sourceId }
+        
+        let asDestinations = transactions
+            .filter { $0.destinationType == TransactionableType.active }
+            .map { $0.destinationId }
+        
+        return (asSources + asDestinations).withoutDuplicates().sorted()
+    }
+            
+    func amount(for transactions: [TransactionViewModel]) -> NSDecimalNumber {
+        return transactionsViewModel.transactionsAmount(transactions: transactions)
+    }
 }

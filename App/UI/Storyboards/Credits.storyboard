@@ -180,9 +180,9 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="28" id="zlb-7O-TLH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="dark 2A314B"/>
+                        <color key="backgroundColor" name="black 2"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <color key="sectionIndexBackgroundColor" name="dark 2A314B"/>
+                        <color key="sectionIndexBackgroundColor" name="black 2"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="uuF-yo-Myg">
                             <rect key="frame" x="0.0" y="1208" width="414" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -771,7 +771,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="0s3-jL-2mx">
                         <barButtonItem key="backBarButtonItem" title=" " id="gx6-sZ-aYA"/>
-                        <barButtonItem key="leftBarButtonItem" image="circle-close-icon" id="KQd-EZ-7SM">
+                        <barButtonItem key="leftBarButtonItem" image="close-icon" id="KQd-EZ-7SM">
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapCancelButton:" destination="NBu-QA-s8Y" id="m2x-3s-Z20"/>
@@ -813,7 +813,7 @@
     </scenes>
     <resources>
         <image name="bell-icon" width="16" height="16"/>
-        <image name="circle-close-icon" width="24" height="24"/>
+        <image name="close-icon" width="14.5" height="14.5"/>
         <image name="expense-source-icon" width="17" height="13"/>
         <image name="icon-edit-pencil" width="9" height="9"/>
         <image name="loader-1" width="55" height="31"/>
@@ -821,6 +821,9 @@
         <image name="remove-icon" width="17" height="20"/>
         <image name="save-circle-icon" width="24" height="24"/>
         <image name="wallet-default-icon" width="30" height="24"/>
+        <namedColor name="black 2">
+            <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="blue 6B93FB">
             <color red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

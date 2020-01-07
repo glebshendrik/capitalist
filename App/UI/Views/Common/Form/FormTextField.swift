@@ -22,31 +22,31 @@ class FormTextField : FormField {
     
     // Appearance properties
     
-    @IBInspectable var focusedTextColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var focusedTextColor: UIColor = UIColor.by(.white100) {
         didSet { updateTextField() }
     }
     
-    @IBInspectable var unfocusedTextColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var unfocusedTextColor: UIColor = UIColor.by(.white100) {
         didSet { updateTextField() }
     }
     
-    @IBInspectable var focusedPlaceholderNoTextColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var focusedPlaceholderNoTextColor: UIColor = UIColor.by(.white100) {
         didSet { updateTextField() }
     }
     
-    @IBInspectable var focusedPlaceholderWithTextColor: UIColor = UIColor.by(.text435585) {
+    @IBInspectable var focusedPlaceholderWithTextColor: UIColor = UIColor.by(.white40) {
         didSet { updateTextField() }
     }
     
-    @IBInspectable var unfocusedPlaceholderColor: UIColor = UIColor.by(.text9EAACC) {
+    @IBInspectable var unfocusedPlaceholderColor: UIColor = UIColor.by(.white40) {
         didSet { updateTextField() }
     }
     
-    @IBInspectable var bigPlaceholderFont: UIFont = UIFont(name: "Rubik-Regular", size: 15)! {
+    @IBInspectable var bigPlaceholderFont: UIFont = UIFont(name: "Roboto-Regular", size: 15)! {
         didSet { updateTextField() }
     }
     
-    @IBInspectable var smallPlaceholderFont: UIFont = UIFont(name: "Rubik-Regular", size: 10)! {
+    @IBInspectable var smallPlaceholderFont: UIFont = UIFont(name: "Roboto-Regular", size: 10)! {
         didSet { updateTextField() }
     }
     
@@ -54,7 +54,7 @@ class FormTextField : FormField {
         didSet { updateTextField() }
     }
     
-    @IBInspectable var selectedLineColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var selectedLineColor: UIColor = UIColor.by(.white100) {
         didSet { updateTextField() }
     }
     
@@ -70,11 +70,11 @@ class FormTextField : FormField {
         didSet { updateTextField() }
     }
     
-    @IBInspectable var subValueLabelColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var subValueLabelColor: UIColor = UIColor.by(.white100) {
         didSet { updateSubValueLabel() }
     }
     
-    @IBInspectable var subValueLabelFont: UIFont = UIFont(name: "Rubik-Regular", size: 15)! {
+    @IBInspectable var subValueLabelFont: UIFont = UIFont(name: "Roboto-Regular", size: 15)! {
         didSet { updateSubValueLabel() }
     }
     

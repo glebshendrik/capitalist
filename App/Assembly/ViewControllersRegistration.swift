@@ -146,14 +146,16 @@ extension ApplicationAssembly {
         // StatisticsViewController
         container.registerForSkrudzhStoryboard(StatisticsViewController.self) { (r, c) in
             c.viewModel = r.resolve(StatisticsViewModel.self)
-            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
-            c.router = r.resolve(ApplicationRouterProtocol.self)
         }
         
         // FiltersSelectionViewController
         container.registerForSkrudzhStoryboard(FiltersSelectionViewController.self) { (r, c) in
             c.viewModel = r.resolve(FiltersSelectionViewModel.self)
-            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
+        
+        // DatePeriodSelectionViewController
+        container.registerForSkrudzhStoryboard(DatePeriodSelectionViewController.self) { (r, c) in
+            c.viewModel = r.resolve(DatePeriodSelectionViewModel.self)
         }
         
         // WaitingBorrowsViewController

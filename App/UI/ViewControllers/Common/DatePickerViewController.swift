@@ -39,10 +39,10 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
     
     lazy var toolbarTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Rubik-Regular", size: 16)
+        label.font = UIFont(name: "Roboto-Regular", size: 16)
         label.autoresizingMask = .flexibleWidth
         label.width = 0.0
-        label.textColor = UIColor.by(.textFFFFFF)
+        label.textColor = UIColor.by(.white100)
         
         return label
     }()
@@ -52,8 +52,8 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
         toolbar.sizeToFit()
         toolbar.clipsToBounds = true
         toolbar.barStyle = UIBarStyle.blackOpaque
-        toolbar.barTintColor = UIColor.by(.dark333D5B)
-//        toolbar.tintColor = UIColor.by(.textFFFFFF)
+        toolbar.barTintColor = UIColor.by(.black2)
+        toolbar.tintColor = UIColor.by(.white100)
         
         toolbar.setBackgroundImage(UIImage(),
                                         forToolbarPosition: .any,
@@ -65,7 +65,7 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
         labelButton.width = 0.0
         
         
-        let closeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "dark-circle-close-icon").withRenderingMode(.alwaysOriginal), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.didTapCloseButton(_:)))
+        let closeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "big-close-button").withRenderingMode(.alwaysTemplate), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.didTapCloseButton(_:)))
         
         let saveButton = UIBarButtonItem(image: #imageLiteral(resourceName: "save-circle-big-icon").withRenderingMode(.alwaysOriginal), style: UIBarButtonItem.Style.done, target: self, action: #selector(self.didTapSaveButton(_:)))
         
@@ -81,7 +81,7 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
                                                      height: datePickerToolbar.frame.size.height + 12.0)))
         datePickerToolbar.frame = CGRect(origin: CGPoint(x: 0, y: 8.0),
                                          size: datePickerToolbar.frame.size)
-        view.backgroundColor = UIColor.by(.dark333D5B)
+        view.backgroundColor = UIColor.by(.black2)
         view.addSubview(datePickerToolbar)
         return view
     }()

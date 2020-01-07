@@ -8,15 +8,6 @@
 
 import UIKit
 
-protocol TransactionsHeaderDelegate: class {
-    func didTapExportButton()
-}
-
 class TransactionsHeaderTableViewCell : UITableViewCell {
     
-    weak var delegate: TransactionsHeaderDelegate?
-    
-    @IBAction func didTapExportButton(_ sender: Any) {
-        delegate?.didTapExportButton()
-    }
 }

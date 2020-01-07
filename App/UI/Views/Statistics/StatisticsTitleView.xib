@@ -17,8 +17,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StatisticsTitleView" customModule="Three_Baskets" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="G0C-Fz-Tc6" id="PWj-pr-Wmc"/>
-                <outlet property="dateRangeLabel" destination="gJQ-JK-MXA" id="1JS-Ba-AEf"/>
-                <outlet property="removeDateRangeButton" destination="wpz-qC-rcs" id="vcI-9L-b9d"/>
                 <outlet property="titleLabel" destination="E0L-E2-jBJ" id="Hen-OV-RkG"/>
             </connections>
         </placeholder>
@@ -28,43 +26,38 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Статистика" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0L-E2-jBJ">
-                    <rect key="frame" x="90" y="3" width="86.5" height="19"/>
+                    <rect key="frame" x="81" y="12.5" width="86.5" height="19"/>
                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                    <color key="textColor" name="text FFFFFF"/>
+                    <color key="textColor" name="white 1.0"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19.09.2018 – 20.01.2019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJQ-JK-MXA">
-                    <rect key="frame" x="77.5" y="26" width="111" height="12"/>
-                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="10"/>
-                    <color key="textColor" name="text FFFFFF"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-down-icon" translatesAutoresizingMaskIntoConstraints="NO" id="tY1-kf-Qwv">
+                    <rect key="frame" x="174.5" y="15" width="24" height="14"/>
+                    <color key="tintColor" name="white 1.0"/>
+                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpz-qC-rcs">
-                    <rect key="frame" x="192.5" y="27" width="10" height="10"/>
-                    <color key="backgroundColor" red="0.47450980392156861" green="0.51764705882352935" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="Dph-Iy-6DF"/>
-                        <constraint firstAttribute="width" constant="10" id="xec-KN-4Kb"/>
-                    </constraints>
-                    <state key="normal" image="small-remove-icon"/>
+                    <rect key="frame" x="0.0" y="0.0" width="266" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="5"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="didTapRemoveRangeButton:" destination="-1" eventType="touchUpInside" id="Wxj-XL-yJt"/>
+                        <action selector="didTapTitleButton:" destination="-1" eventType="touchUpInside" id="89H-DE-Xk1"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Tcn-0P-tQ0" firstAttribute="bottom" secondItem="gJQ-JK-MXA" secondAttribute="bottom" constant="6" id="H9g-fq-S1z"/>
-                <constraint firstItem="wpz-qC-rcs" firstAttribute="leading" secondItem="gJQ-JK-MXA" secondAttribute="trailing" constant="4" id="HVm-1H-kyL"/>
-                <constraint firstItem="wpz-qC-rcs" firstAttribute="centerY" secondItem="gJQ-JK-MXA" secondAttribute="centerY" id="UFK-WW-bii"/>
-                <constraint firstItem="E0L-E2-jBJ" firstAttribute="centerX" secondItem="G0C-Fz-Tc6" secondAttribute="centerX" id="Vou-Ip-QfI"/>
-                <constraint firstItem="gJQ-JK-MXA" firstAttribute="centerX" secondItem="G0C-Fz-Tc6" secondAttribute="centerX" id="ZL5-Bf-y0v"/>
-                <constraint firstItem="gJQ-JK-MXA" firstAttribute="top" secondItem="E0L-E2-jBJ" secondAttribute="bottom" constant="4" id="bbA-dL-0ls"/>
+                <constraint firstItem="E0L-E2-jBJ" firstAttribute="centerY" secondItem="G0C-Fz-Tc6" secondAttribute="centerY" id="6Yi-n9-NoI"/>
+                <constraint firstItem="tY1-kf-Qwv" firstAttribute="leading" secondItem="E0L-E2-jBJ" secondAttribute="trailing" constant="7" id="BJu-2y-DhN"/>
+                <constraint firstItem="tY1-kf-Qwv" firstAttribute="centerY" secondItem="G0C-Fz-Tc6" secondAttribute="centerY" id="RxF-gx-QaE"/>
+                <constraint firstItem="E0L-E2-jBJ" firstAttribute="centerX" secondItem="G0C-Fz-Tc6" secondAttribute="centerX" constant="-9" id="Vou-Ip-QfI"/>
+                <constraint firstItem="wpz-qC-rcs" firstAttribute="leading" secondItem="Tcn-0P-tQ0" secondAttribute="leading" id="Yml-rk-8Fe"/>
+                <constraint firstItem="Tcn-0P-tQ0" firstAttribute="trailing" secondItem="wpz-qC-rcs" secondAttribute="trailing" id="eKe-h8-jS6"/>
+                <constraint firstItem="wpz-qC-rcs" firstAttribute="top" secondItem="Tcn-0P-tQ0" secondAttribute="top" id="ipB-g8-U9b"/>
+                <constraint firstItem="Tcn-0P-tQ0" firstAttribute="bottom" secondItem="wpz-qC-rcs" secondAttribute="bottom" id="pxG-Mg-gLk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Tcn-0P-tQ0"/>
@@ -72,9 +65,9 @@
         </view>
     </objects>
     <resources>
-        <image name="small-remove-icon" width="4" height="4"/>
-        <namedColor name="text FFFFFF">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="arrow-down-icon" width="12" height="7"/>
+        <namedColor name="white 1.0">
+            <color red="0.91764705882352937" green="0.93333333333333335" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

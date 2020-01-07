@@ -16,14 +16,14 @@ class EntityTransactionTableViewCell : TransactionTableViewCell {
     @IBOutlet weak var rasterImageView: UIImageView!
     @IBOutlet weak var vectorImageView: SVGKFastImageView!
     
-    override func updateIconUI(url: URL?, placeholder: String?, tintColor: UIColor) {
+    override func updateIconUI(url: URL?, placeholder: String?) {
         guard let viewModel = viewModel else { return }
         
         let isVector = false
         rasterImageView.isHidden = isVector
         vectorImageView.isHidden = !isVector
         rasterImageView.setImage(with: url, placeholderName: placeholder, renderingMode: .alwaysTemplate)
-        rasterImageView.tintColor = UIColor.by(.textFFFFFF)
+        rasterImageView.tintColor = UIColor.by(.gray1)
         vectorImageView.sd_setImage(with: url, completed: nil)
         if let backgroundImageName = viewModel.iconBackgroundImageName {
             iconBackgroundImageView.image = UIImage(named: backgroundImageName)

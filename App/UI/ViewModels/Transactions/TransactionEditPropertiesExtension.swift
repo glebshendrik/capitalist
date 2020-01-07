@@ -236,6 +236,25 @@ extension TransactionableType {
         case (.active, _):                      return "Актив"
         }
     }
+    
+    var defaultIconName: String {
+        switch (self) {
+        case .incomeSource:                 return "joy-default-icon"
+        case .expenseSource:                return "wallet-default-icon"
+        case .expenseCategory:              return "joy-default-icon"
+        case .active:                       return ""
+        }
+    }
+    
+    func defaultIconName(basketType: BasketType?) -> String {
+        guard let basketType = basketType else { return defaultIconName }
+        switch (self, basketType) {
+        case (.active, .joy):               return "joy-default-icon"
+        case (.active, .safe):              return "safe-default-icon"
+        case (.active, .risk):              return "risk-default-icon"
+        default:                            return defaultIconName
+        }
+    }
 }
 
 extension TransactionType {

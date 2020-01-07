@@ -44,7 +44,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="6w2-PT-uRb">
                         <barButtonItem key="backBarButtonItem" title=" " id="Dnt-p9-05E"/>
-                        <barButtonItem key="leftBarButtonItem" image="circle-close-icon" id="JGP-Z8-XOg">
+                        <barButtonItem key="leftBarButtonItem" image="close-icon" id="JGP-Z8-XOg">
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapCancelButton:" destination="WoP-TF-ejQ" id="VMx-V4-cNb"/>
@@ -90,7 +90,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="28" id="iJB-Wl-z8x">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="dark 2A314B"/>
+                        <color key="backgroundColor" name="black 2"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" name="dark 2A314B"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Jvm-EB-afz">
@@ -190,7 +190,7 @@
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SIb-mk-tqw">
                                                     <rect key="frame" x="0.0" y="118" width="375" height="1"/>
-                                                    <color key="backgroundColor" name="delimeter 2F3854"/>
+                                                    <color key="backgroundColor" name="white 0.04"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="egs-f7-29m"/>
                                                     </constraints>
@@ -568,13 +568,16 @@
     </scenes>
     <resources>
         <image name="bell-icon" width="16" height="16"/>
-        <image name="circle-close-icon" width="24" height="24"/>
+        <image name="close-icon" width="14.5" height="14.5"/>
         <image name="icon-edit-pencil" width="9" height="9"/>
         <image name="joy-default-icon" width="18.5" height="18"/>
         <image name="loader-1" width="55" height="31"/>
         <image name="remove-icon" width="17" height="20"/>
         <image name="save-circle-icon" width="24" height="24"/>
         <image name="wallet-default-icon" width="30" height="24"/>
+        <namedColor name="black 2">
+            <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="dark 2A314B">
             <color red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -583,6 +586,9 @@
         </namedColor>
         <namedColor name="text FFFFFF">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white 0.04">
+            <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

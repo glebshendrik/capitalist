@@ -32,15 +32,15 @@ class FormSliderField : FormTextField {
         didSet { updateSlider() }
     }
     
-    @IBInspectable var minimumTrackTintColor: UIColor = UIColor.by(.blue5B86F7) {
+    @IBInspectable var minimumTrackTintColor: UIColor = UIColor.by(.blue1) {
         didSet { updateSlider() }
     }
     
-    @IBInspectable var maximumTrackTintColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var maximumTrackTintColor: UIColor = UIColor.by(.white100) {
         didSet { updateSlider() }
     }
     
-    @IBInspectable var thumbTintColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var thumbTintColor: UIColor = UIColor.by(.white100) {
         didSet { updateSlider() }
     }
     
@@ -78,11 +78,11 @@ class FormSliderField : FormTextField {
         }
     }
     
-    @IBInspectable var rangeLabelColor: UIColor = UIColor.by(.text9EAACC) {
+    @IBInspectable var rangeLabelColor: UIColor = UIColor.by(.white40) {
         didSet { updateRangeLabels() }
     }
     
-    @IBInspectable var rangeLabelFont: UIFont = UIFont(name: "Rubik-Regular", size: 12)! {
+    @IBInspectable var rangeLabelFont: UIFont = UIFont(name: "Roboto-Regular", size: 12)! {
         didSet { updateRangeLabels() }
     }
     

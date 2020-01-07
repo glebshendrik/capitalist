@@ -14,11 +14,11 @@ class FormSwitchValueField : FormTapField {
     
     lazy var switchView: UISwitch = { return UISwitch() }()
     
-    @IBInspectable var switchOnTintColor: UIColor = UIColor.by(.blue6B93FB) {
+    @IBInspectable var switchOnTintColor: UIColor = UIColor.by(.blue1) {
         didSet { updateSwitch() }
     }
     
-    @IBInspectable var switchThumbTintColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var switchThumbTintColor: UIColor = UIColor.by(.white100) {
         didSet { updateSwitch() }
     }
     

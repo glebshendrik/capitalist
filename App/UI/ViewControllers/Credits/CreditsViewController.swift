@@ -11,7 +11,7 @@ import PromiseKit
 
 class CreditsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
     
-    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
+    var navigationBarTintColor: UIColor? = UIColor.by(.black2)
     var factory: UIFactoryProtocol!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: CreditsViewModel!
@@ -28,7 +28,7 @@ class CreditsViewController : UIViewController, UIMessagePresenterManagerDependa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
+        navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
     }
     
     @IBAction func didTapAdd(_ sender: Any) {

@@ -41,35 +41,35 @@ class FormExchangeField : FormField {
     
     // Appearance properties
     
-    @IBInspectable var focusedTextColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var focusedTextColor: UIColor = UIColor.by(.white100) {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var unfocusedTextColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var unfocusedTextColor: UIColor = UIColor.by(.white100) {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var focusedPlaceholderNoTextColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var focusedPlaceholderNoTextColor: UIColor = UIColor.by(.white100) {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var focusedPlaceholderWithTextColor: UIColor = UIColor.by(.text435585) {
+    @IBInspectable var focusedPlaceholderWithTextColor: UIColor = UIColor.by(.white40) {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var unfocusedPlaceholderColor: UIColor = UIColor.by(.text9EAACC) {
+    @IBInspectable var unfocusedPlaceholderColor: UIColor = UIColor.by(.white40) {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var bigPlaceholderFont: UIFont = UIFont(name: "Rubik-Regular", size: 15)! {
+    @IBInspectable var bigPlaceholderFont: UIFont = UIFont(name: "Roboto-Regular", size: 15)! {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var smallPlaceholderFont: UIFont = UIFont(name: "Rubik-Regular", size: 10)! {
+    @IBInspectable var smallPlaceholderFont: UIFont = UIFont(name: "Roboto-Regular", size: 10)! {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var currencyLabelFont: UIFont = UIFont(name: "Rubik-Regular", size: 13)! {
+    @IBInspectable var currencyLabelFont: UIFont = UIFont(name: "Roboto-Regular", size: 13)! {
         didSet { updateCurrencyLabels() }
     }
     
@@ -77,7 +77,7 @@ class FormExchangeField : FormField {
         didSet { updateFocusLine() }
     }
     
-    @IBInspectable var selectedLineColor: UIColor = UIColor.by(.textFFFFFF) {
+    @IBInspectable var selectedLineColor: UIColor = UIColor.by(.white100) {
         didSet { updateFocusLine() }
     }
     
@@ -105,15 +105,15 @@ class FormExchangeField : FormField {
         didSet { updateConvertArrow() }
     }
     
-    @IBInspectable var convertImageTint: UIColor = UIColor.by(.dark404B6F) {
+    @IBInspectable var convertImageTint: UIColor = UIColor.by(.white40) {
         didSet { updateConvertArrow() }
     }
     
-    @IBInspectable var unfocusedCurrencyColor: UIColor = UIColor.by(.text606B8A) {
+    @IBInspectable var unfocusedCurrencyColor: UIColor = UIColor.by(.white40) {
         didSet { updateCurrencyLabels() }
     }
     
-    @IBInspectable var focusedCurrencyColor: UIColor = UIColor.by(.textAFC1FF) {
+    @IBInspectable var focusedCurrencyColor: UIColor = UIColor.by(.white40) {
         didSet { updateCurrencyLabels() }
     }
     
@@ -121,7 +121,7 @@ class FormExchangeField : FormField {
         didSet { updateTextFieldBackgrounds() }
     }
     
-    @IBInspectable var focusedFieldBackgroundColor: UIColor = UIColor.by(.blue5B7BD1) {
+    @IBInspectable var focusedFieldBackgroundColor: UIColor = UIColor.by(.blue1) {
         didSet { updateTextFieldBackgrounds() }
     }
     

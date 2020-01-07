@@ -1,155 +1,146 @@
 //
-//  GraphViewModel.swift
+//  GraphsViewModel.swift
 //  Three Baskets
 //
-//  Created by Alexander Petropavlovsky on 04/04/2019.
+//  Created by Alexander Petropavlovsky on 27.12.2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
 //
 
 import Foundation
+import UIKit
 import Charts
 import RandomColorSwift
 import SwifterSwift
 
 class GraphViewModel {
     let transactionsViewModel: TransactionsViewModel
+    let periodsViewModel: PeriodsViewModel
     
-    var graphType: GraphType = .incomeAndExpenses {
+    var currency: Currency? {
+        return transactionsViewModel.defaultCurrency
+    }
+    
+    var graphType: GraphType = .all {
         didSet {
             guard graphType != oldValue else { return }
-            updateChartsData()
-            updateAggregationType()
-            updateGraphFiltersVisibility()
+            updateCurrentGraph()
         }
     }
-    
-    var aggregationType: AggregationType = .total {
-        didSet {
-            guard aggregationType != oldValue else { return }
-            updateGraphFiltersAggregationType()
-            updateAggregatedTotal()
-        }
+                
+    var numberOfGraphs: Int {
+        return periodsViewModel.numberOfDateRanges
     }
-    
-    var graphPeriodScale: GraphPeriodScale? = nil {
-        didSet {
-            guard graphPeriodScale != oldValue else { return }
-            updateChartsData()            
-        }
-    }
-    
-    var areGraphFiltersShown: Bool = true
-    
-    public private(set) var dataPoints: [Date] = [] {
-        didSet {
-            lineChartCurrentPoint = maxDataPoint
-            pieChartsCollectionContentOffset = nil
-        }
-    }
-    
-    var lineChartCurrentPoint: Double? = nil {
-        didSet {
-            currentDate = lineChartCurrentPointDate
-        }
-    }
-    var pieChartsCollectionContentOffset: CGPoint? = nil
-    var currentPieChartIndex: Int? = nil {
-        didSet {
-            currentDate = pieChartCurrentPointDate
-        }
-    }
-    
-    var currentDate: Date? = nil {
-        didSet {
-            guard currentDate != oldValue else { return }
-            updateGraphFiltersCurrentDate()
-        }
-    }
-    
-    public private(set) var lineChartData: LineChartData? = nil
-    public private(set) var pieChartDatas: [PieChartData] = []
-    public private(set) var pieChartsAmounts: [String] = []
-    
-    var graphFilters: [GraphTransactionFilter] = []
-    var filtersAggregatedTotal: Double? = nil
-    var filtersTotalByDate: [Date: Double] = [:]
-    
-    lazy var percentsFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        formatter.maximumFractionDigits = 1
-        formatter.multiplier = 1
-        formatter.percentSymbol = "%"
-        return formatter
-    }()
-    
-    init(transactionsViewModel: TransactionsViewModel) {
-        self.transactionsViewModel = transactionsViewModel
-    }
-    
-    func updateChartsData(with defaultPeriod: AccountingPeriod?) {
-        func scalePeriod(by accountingPeriod: AccountingPeriod?) -> GraphPeriodScale? {
-            guard let accountingPeriod = accountingPeriod else { return nil }
-            switch accountingPeriod {
-            case .week:
-                return .weeks
-            case .month:
-                return .months
-            case .quarter:
-                return .quarters
-            case .year:
-                return .years
-            }
-        }
-        graphPeriodScale = scalePeriod(by: defaultPeriod)
-    }
-    
-    func updateChartsData() {
-        updateDataPoints()
-        
-        lineChartData = nil
-        pieChartDatas = []
-        pieChartsAmounts = []
-        
+                
+    var total: String? = nil
+    var subtitle: String? {
+        guard let period = periodsViewModel.currentDateRangeFilterTitle else { return nil }
         switch graphType {
-        case .income:
-            lineChartData = calculateIncomeChartData()
-        case .incomePie:
-            pieChartDatas = calculateIncomePieChartDatas()
-            pieChartsAmounts = calculateIncomePieChartsAmounts()
+        case .all:
+            return "Остаток на \(period)"
+        case .incomes:
+            return "Доход за \(period)"
         case .expenses:
-            lineChartData = calculateExpensesChartData()
-        case .expensesPie:            
-            pieChartDatas = calculateExpensesPieChartDatas()            
-            pieChartsAmounts = calculateExpensePieChartsAmounts()
-        case .incomeAndExpenses:
-            lineChartData = calculateIncomeAndExpensesChartData()
-        case .cashFlow:
-            lineChartData = calculateCashFlowChartData()
-        case .netWorth:
-            lineChartData = calculateNetWorthChartData()
+            return "Расходы за \(period)"
         }
         
-        updateGraphFilters()
     }
     
-    private func updateDataPoints() {
-        guard let graphPeriodScale = graphPeriodScale else {
-            dataPoints = []
-            return
+    var dateRange: DateRangeTransactionFilter? {
+        return periodsViewModel.currentDateRangeFilter
+    }
+    
+    var pieChartData: PieChartData? = nil
+    var emptyChartData: PieChartData? {
+        return emptyPieChartData(currency: currency)
+    }
+    var graphFilters: [GraphTransactionFilter] = []
+    
+    var collectionContentOffset: CGPoint? = nil
+    
+    var currentChartIndex: Int {
+        return periodsViewModel.currentDateRangeFilterIndex
+    }
+    
+    var numberOfFilters: Int {
+        return graphFilters.count
+    }
+    
+    var hasData: Bool {
+        guard let pieChartData = pieChartData else { return false }
+        return pieChartData.entryCount > 0
+    }
+    
+    var graphTypeIndex: Int {
+        switch graphType {
+        case .all:
+            return 0
+        case .incomes:
+            return 1
+        case .expenses:
+            return 2
+        }
+    }
+    
+    init(transactionsViewModel: TransactionsViewModel,
+         periodsViewModel: PeriodsViewModel) {
+        self.transactionsViewModel = transactionsViewModel
+        self.periodsViewModel = periodsViewModel
+    }
+    
+    func setGraphType(by index: Int) {
+        switch index {
+        case 1:
+            graphType = .incomes
+        case 2:
+            graphType = .expenses
+        default:
+            graphType = .all
+        }
+    }
+    
+    func set(chartIndex: Int) {
+        periodsViewModel.currentDateRangeFilterIndex = chartIndex
+    }
+    
+    func graphFilter(at index: Int) -> GraphTransactionFilter? {
+        return graphFilters.item(at: index)
+    }
+    
+    func updateCurrentGraph() {
+        pieChartData = calculateChartData()
+        graphFilters = calculateFilters()
+        total = calculateTotal()        
+    }
+    
+    func calculateChartData() -> PieChartData? {
+        switch graphType {
+        case .all:
+            return calculateIncomeAndExpensesPieChartData()
+        case .incomes:
+            return calculateIncomePieChartData()
+        case .expenses:
+            return calculateExpensesPieChartData()
+        }
+    }
+    
+    func calculateFilters() -> [GraphTransactionFilter] {
+        switch graphType {
+        case .all:
+            return calculateIncomeAndExpensesFilters()
+        case .incomes:
+            return calculateIncomeFilters()
+        case .expenses:
+            return calculateExpensesFilters()
+        }
+    }
+    
+    func calculateTotal() -> String? {
+        switch graphType {
+        case .all:
+            return amount(for: incomes).subtracting(amount(for: expenses)).moneyCurrencyString(with: currency, shouldRound: true)
+        default:
+            return amount(for: transactions).moneyCurrencyString(with: currency, shouldRound: true)
         }
         
-        var range = datesRange(graphPeriodScale: graphPeriodScale,
-                               from: transactions.last?.gotAt.dateAtStartOf(graphPeriodScale.asUnit),
-                               to: transactions.first?.gotAt.dateAtStartOf(graphPeriodScale.asUnit))
-        if  range.count == 1,
-            pieChartHidden,
-            let first = range.first,
-            let date = Calendar.current.date(byAdding: graphPeriodScale.addingUnit, value: -graphPeriodScale.addingValue, to: first) {
-
-            range.insert(date, at: 0)
-        }
-        
-        dataPoints = range
     }
 }

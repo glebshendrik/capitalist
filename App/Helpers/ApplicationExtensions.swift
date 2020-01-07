@@ -327,16 +327,16 @@ extension UIViewController {
     
     func setupNavigationBarAppearance() {
         
-        let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
+        let attributes = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 18)!,
                           NSAttributedString.Key.foregroundColor : UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.tintColor = UIColor.by(.textFFFFFF)
-        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
+        navigationController?.navigationBar.tintColor = UIColor.by(.white100)
+        navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
         
         if isModal {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close-circle-icon"), style: .plain, target: self, action: #selector(didTapCloseButton(sender:)))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close-icon"), style: .plain, target: self, action: #selector(didTapCloseButton(sender:)))
         }
     }
         
@@ -663,5 +663,42 @@ extension UIView {
     var bottomLineScreenSplitRatio: CGFloat? {
         guard let y = absoluteFrame?.maxY, let screenHeight = UIApplication.shared.keyWindow?.rootViewController?.view.frame.height else { return nil }
         return y / screenHeight
+    }
+}
+
+extension UISegmentedControl {
+    func setSelectedSegmentColor(with foregroundColor: UIColor, font: UIFont, and tintColor: UIColor) {
+        if #available(iOS 13.0, *) {
+            self.setTitleTextAttributes([.foregroundColor: foregroundColor, .font: font], for: .selected)
+            self.setTitleTextAttributes([.foregroundColor: foregroundColor, .font: font], for: .normal)
+            self.selectedSegmentTintColor = tintColor
+        }
+        else {
+            self.tintColor = tintColor
+        }
+    }
+    
+    func removeBorders() {
+        setBackgroundImage(imageWithColor(color: backgroundColor!), for: .normal, barMetrics: .default)
+        if #available(iOS 13.0, *) {
+            setBackgroundImage(imageWithColor(color: selectedSegmentTintColor!), for: .selected, barMetrics: .default)
+        }
+        else {
+            setBackgroundImage(imageWithColor(color: tintColor!), for: .selected, barMetrics: .default)
+        }
+        
+        setDividerImage(imageWithColor(color: UIColor.clear), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+    }
+
+    // create a 1x1 image with this color
+    private func imageWithColor(color: UIColor) -> UIImage? {
+        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 36.0)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor);
+        context?.fill(rect);
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        return image
     }
 }

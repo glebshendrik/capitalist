@@ -97,11 +97,16 @@ protocol UIFactoryProtocol {
                                       waitingBorrows: [BorrowViewModel],
                                       borrowType: BorrowType) -> UIViewController?
     
-    func statisticsViewController(filter: SourceOrDestinationTransactionFilter?) -> UIViewController?
+    func statisticsViewController(filter: TransactionableFilter?) -> UIViewController?
     
-    func statisticsModalViewController(filter: SourceOrDestinationTransactionFilter?) -> UINavigationController?
+    func statisticsModalViewController(filter: TransactionableFilter?) -> UINavigationController?
     
-    func statisticsFiltersViewController(delegate: FiltersSelectionViewControllerDelegate?, dateRangeFilter: DateRangeTransactionFilter?, transactionableFilters: [SourceOrDestinationTransactionFilter]) -> UINavigationController? 
+    func statisticsFiltersViewController(delegate: FiltersSelectionViewControllerDelegate?, dateRangeFilter: DateRangeTransactionFilter?, transactionableFilters: [TransactionableFilter]) -> UINavigationController? 
+    
+    func datePeriodSelectionViewController(delegate: DatePeriodSelectionViewControllerDelegate,
+                                           dateRangeFilter: DateRangeTransactionFilter?,
+                                           transactionsMinDate: Date?,
+                                           transactionsMaxDate: Date?) -> UINavigationController?
     
     func balanceViewController() -> UINavigationController?
     

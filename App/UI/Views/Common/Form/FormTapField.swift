@@ -20,7 +20,7 @@ class FormTapField : FormTextField {
         didSet { updateArrow() }
     }
     
-    @IBInspectable var arrowColor: UIColor = UIColor.by(.dark404B6F) {
+    @IBInspectable var arrowColor: UIColor = UIColor.by(.white40) {
         didSet { updateArrow() }
     }
     

@@ -121,7 +121,7 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
         if case Theme.error = theme {
             view.configureTheme(backgroundColor: UIColor(red: 254 / 255.0, green: 249 / 255.0, blue: 249 / 255.0, alpha: 1),
                                 foregroundColor: UIColor(red: 0.33, green: 0.29, blue: 0.29, alpha: 1))
-            view.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 14)
+            view.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 14)
             
             var edges: UIRectEdge = []
             if case SwiftMessages.PresentationStyle.bottom = presentationStyle {

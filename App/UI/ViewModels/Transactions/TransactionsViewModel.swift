@@ -31,6 +31,10 @@ class TransactionsViewModel {
         }
     }
     
+    var oldestTransactionDate: Date {
+        return allTransactionViewModels.last?.gotAt ?? Date().adding(.year, value: -3)
+    }
+    
     var hasIncomeTransactions: Bool {
         return filteredTransactionViewModels.any { $0.sourceType == .incomeSource }
     }
@@ -65,18 +69,19 @@ class TransactionsViewModel {
                 }
     }
     
-    func filterTransactions(sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter],
-                                   dateRangeFilter: DateRangeTransactionFilter?) {
+    func filterTransactions(filters: [TransactionableFilter],
+                            dateRangeFilter: DateRangeTransactionFilter?,
+                            graphType: GraphType) {
         
         var transactionViewModels = allTransactionViewModels
         
-        if sourceOrDestinationFilters.count > 0 {
+        if filters.count > 0 {
             
-            var filtersHash = [TransactionableType : [Int : SourceOrDestinationTransactionFilter]]()
+            var filtersHash = [TransactionableType : [Int : TransactionableFilter]]()
             
-            for filter in sourceOrDestinationFilters {
+            for filter in filters {
                 if filtersHash[filter.type] == nil {
-                    filtersHash[filter.type] = [Int : SourceOrDestinationTransactionFilter]()
+                    filtersHash[filter.type] = [Int : TransactionableFilter]()
                 }
                 filtersHash[filter.type]?[filter.id] = filter
             }
@@ -102,7 +107,18 @@ class TransactionsViewModel {
             }
         }
         
-        filteredTransactionViewModels = transactionViewModels
+        func filterBy(graphType: GraphType, transactions: [TransactionViewModel]) -> [TransactionViewModel] {
+            switch graphType {
+            case .all:
+                return transactions
+            case .incomes:
+                return transactions.filter { $0.type == .income }
+            case .expenses:
+                return transactions.filter { $0.type == .expense }
+            }
+        }
+        
+        filteredTransactionViewModels = filterBy(graphType: graphType, transactions: transactionViewModels)
     }
     
     func removeTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {        

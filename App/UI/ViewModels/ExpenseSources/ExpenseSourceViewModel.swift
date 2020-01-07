@@ -76,8 +76,8 @@ class ExpenseSourceViewModel {
         self.expenseSource = expenseSource
     }
     
-    func asTransactionFilter() -> ExpenseSourceTransactionFilter {
-        return ExpenseSourceTransactionFilter(expenseSourceViewModel: self)
+    func asTransactionFilter() -> ExpenseSourceFilter {
+        return ExpenseSourceFilter(expenseSourceViewModel: self)
     }
     
     private func amount(shouldRound: Bool) -> String {

@@ -22,94 +22,55 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let section = viewModel.section(at: indexPath.section) else {
-            return UITableViewCell()
-        }
-        
-        func dequeueCell(for identifier: String) -> UITableViewCell {
-            return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-        }
-        
-        switch section {
-        case is SourceOrDestinationFilterEditSection:
-            guard let cell = dequeueCell(for: "StatisticsEditTableViewCell") as? StatisticsEditTableViewCell else {
-                return UITableViewCell()
-                
-            }
-            
-            cell.editButtonTitleLabel.text = viewModel.editFilterTitle
-            cell.delegate = self
-            
-            return cell
+        switch viewModel.section(at: indexPath.section) {
         case is GraphSection:
-            guard let cell = dequeueCell(for: "GraphTableViewCell") as? GraphTableViewCell else {
-                return UITableViewCell()
-                
-            }
-            
-            cell.delegate = self
-            cell.viewModel = viewModel.graphViewModel
-            
-            return cell
+            return self.tableView(tableView, graphCellForRowAt: indexPath)
         case is GraphFiltersSection:
-            guard let graphFiltersSection = section as? GraphFiltersSection,
-                let cellType = graphFiltersSection.cellType(at: indexPath) else {
-                    return UITableViewCell()
-                    
-            }
-            
-            let cell = dequeueCell(for: cellType.identifier)
-            
-            if let graphFiltersToggleCell = cell as? GraphFiltersToggleTableViewCell {
-                graphFiltersToggleCell.delegate = self
-                graphFiltersToggleCell.viewModel = viewModel.graphViewModel
-                return graphFiltersToggleCell
-            }
-            
-            if let graphTotalCell = cell as? GraphTotalTableViewCell {
-                graphTotalCell.viewModel = viewModel.graphViewModel
-                return graphTotalCell
-            }
-            
-            if let graphFilterCell = cell as? GraphFilterTableViewCell,
-                let filterViewModel = viewModel.graphFilterViewModel(at: graphFiltersSection.filterIndex(fromSectionIndexPath: indexPath) )  {
-                graphFilterCell.viewModel = filterViewModel
-                return graphFilterCell
-            }
-            
-            return cell
+            return self.tableView(tableView, graphFiltersCellForRowAt: indexPath)
         case is TransactionsLoadingSection:
-            guard let cell = dequeueCell(for: "TransactionsLoadingTableViewCell") as? TransactionsLoadingTableViewCell else {
-                return UITableViewCell()
-                
-            }
-            
-            cell.loaderImageView.showLoader()
-            
-            return cell
-        case is TransactionsHeaderSection:            
-            guard let cell = dequeueCell(for: "TransactionsHeaderTableViewCell") as? TransactionsHeaderTableViewCell else {
-                return UITableViewCell()
-                
-            }
-            
-            cell.delegate = self
-            
-            return cell
-        case is TransactionsSection:
-            guard   let cell = dequeueCell(for: "TransactionTableViewCell") as? TransactionTableViewCell,
-                let transactionsSection = section as? TransactionsSection,
-                let transactionViewModel = transactionsSection.transactionViewModel(at: indexPath.row) else {
-                    return UITableViewCell()
-                    
-            }
-            
-            cell.viewModel = transactionViewModel
-            
-            return cell
+            return self.tableView(tableView, transactionsLoadingCellForRowAt: indexPath)
+        case is TransactionsHeaderSection:
+            return self.tableView(tableView, transactionsHeaderCellForRowAt: indexPath)
+        case let transactionsSection as TransactionsSection:
+            return self.tableView(tableView, section: transactionsSection, cellForRowAt: indexPath)
         default:
             return UITableViewCell()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, graphCellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "GraphTableViewCell") as? GraphTableViewCell else { return UITableViewCell() }
+        
+        cell.delegate = self
+        cell.viewModel = viewModel.graphViewModel
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, graphFiltersCellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard   let cell = tableView.dequeueReusableCell(withIdentifier: "GraphFilterTableViewCell") as? GraphFilterTableViewCell,
+                let filterViewModel = viewModel.graphFilterViewModel(at: indexPath.row) else { return UITableViewCell() }
+        
+        cell.viewModel = filterViewModel
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, transactionsLoadingCellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionsLoadingTableViewCell") as? TransactionsLoadingTableViewCell else { return UITableViewCell() }
+
+        cell.loaderImageView.showLoader()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, transactionsHeaderCellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: "TransactionsHeaderTableViewCell") ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, section: TransactionsSection, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell") as? TransactionTableViewCell,
+                let transactionViewModel = section.transactionViewModel(at: indexPath.row) else { return UITableViewCell() }
+                   
+        cell.viewModel = transactionViewModel
+        return cell
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -154,8 +115,8 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         guard   let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TransactionsSectionHeaderView.reuseIdentifier) as? TransactionsSectionHeaderView,
             let section = viewModel.section(at: section) as? TransactionsSection else { return nil }
         
-        headerView.section = section
-        headerView.contentView.backgroundColor = UIColor(red: 244.0 / 255.0, green: 247.0 / 255.0, blue: 254.0 / 255.0, alpha: 1.0)
+        headerView.title = section.title
+        headerView.contentView.backgroundColor = UIColor.by(.dark2A314B)
         return headerView
     }
     
@@ -177,21 +138,15 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         guard let section = viewModel.section(at: indexPath.section) else { return }
         
         switch section {
-        case let graphFiltersSection as GraphFiltersSection:
-            guard let cellType = graphFiltersSection.cellType(at: indexPath),
-                  cellType == .filter,
-                  let filterViewModel = viewModel.graphFilterViewModel(at: graphFiltersSection.filterIndex(fromSectionIndexPath: indexPath) ),
-                viewModel.areGraphFiltersInteractable else { return }
+        case is GraphFiltersSection:
+            guard let filterViewModel = viewModel.graphFilterViewModel(at: indexPath.row) else { return }
             
             if viewModel.canFilterTransactions(with: filterViewModel) {
-                if !viewModel.singleSourceOrDestinationFilterEqualsTo(filter: filterViewModel) {
-                    viewModel.set(sourceOrDestinationFilter: filterViewModel)
-                    reloadFilter()
-                }                
+                viewModel.set(filter: filterViewModel)
             } else {
                 viewModel.handleIncomeAndExpensesFilterTap(with: filterViewModel)
-                updateUI()
             }
+            updateUI()
             
             return
         case let transactionsSection as TransactionsSection:
@@ -204,28 +159,5 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let section = viewModel.section(at: indexPath.section) else { return 0 }
-        
-        switch section {
-        case is SourceOrDestinationFilterEditSection:
-            return 36.0
-        case is GraphSection:
-            return 370.0
-        case is GraphFiltersSection:
-            return 44.0
-        case is TransactionsLoadingSection:
-            return 44.0
-        case is TransactionsHeaderSection:
-            return 92.0
-        case is TransactionsSection:
-            return 70.0
-        default:
-            return CGFloat.leastNonzeroMagnitude
-        }
-    }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400.0
-    }
 }

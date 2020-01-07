@@ -7,48 +7,39 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class GraphFilterTableViewCell : UITableViewCell {
     
+    @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var aggregatedValueLabel: UILabel!
+    @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var progressView: UIView!
+    @IBOutlet weak var progressViewWidthConstraint: NSLayoutConstraint!
     
     var viewModel: GraphTransactionFilter? = nil {
         didSet {
             updateUI()
         }
     }
-    
-    lazy var percentsFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        formatter.maximumFractionDigits = 1
-        formatter.multiplier = 1
-        formatter.percentSymbol = "%"
-        return formatter
-    }()
-    
+        
     private func updateUI() {
-        guard let viewModel = viewModel,
-              let aggregationType = viewModel.aggregationType,
-              let aggregatedValue = viewModel.aggregated,
-              let value = viewModel.amount,
-              let percent = viewModel.percent else { return }
+        guard let viewModel = viewModel else { return }
         
-        let valueNumber = NSDecimalNumber(floatLiteral: value)
-        let percentNumber = NSDecimalNumber(floatLiteral: percent)
-        let aggregatedValueNumber = NSDecimalNumber(floatLiteral: aggregatedValue)
-        
-        titleLabel.textColor = viewModel.color        
+        iconImage.setImage(with: viewModel.iconURL, placeholderName: viewModel.iconPlaceholder, renderingMode: .alwaysTemplate)
+        iconImage.tintColor = viewModel.coloringType == .icon ? viewModel.color : UIColor.by(.white100)
+                
         titleLabel.text = viewModel.title
-        valueLabel.text = valueNumber.moneyCurrencyString(with: viewModel.currency, shouldRound: false)
+        valueLabel.text = viewModel.amountFormatted
+        percentLabel.text = viewModel.percentsFormatted
+        progressView.backgroundColor = viewModel.coloringType == .progress ? viewModel.color : UIColor.by(.white4)
         
-        if aggregationType == .percent {
-            aggregatedValueLabel.text = percentsFormatter.string(from: percentNumber)
-        } else {
-            aggregatedValueLabel.text = aggregatedValueNumber.moneyCurrencyString(with: viewModel.currency, shouldRound: false)
-        }
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
+            self.progressViewWidthConstraint = self.progressViewWidthConstraint.setMultiplier(multiplier: CGFloat(viewModel.percents.doubleValue / 100.0))
+            self.contentView.layoutIfNeeded()
+
+        }, completion: nil)
         
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale

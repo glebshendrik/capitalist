@@ -133,9 +133,9 @@ class EntityInfoViewModel {
                                              lastGotAt: lastGotAt)
     }
     
-    func asFilter() -> SourceOrDestinationTransactionFilter? {
+    func asFilter() -> TransactionableFilter? {
         guard let id = transactionable?.id, let title = transactionable?.name, let type = transactionable?.type else { return nil }
-        return SourceOrDestinationTransactionFilter(id: id, title: title, type: type)
+        return TransactionableFilter(id: id, title: title, type: type, iconURL: transactionable?.iconURL, iconPlaceholder: type.defaultIconName)
     }
     
     private func postFinantialDataUpdated() {

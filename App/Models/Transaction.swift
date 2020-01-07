@@ -30,6 +30,7 @@ struct Transaction : Decodable {
     let destinationId: Int
     let destinationType: TransactionableType
     let sourceTitle: String
+    let sourceIconURL: URL?
     let destinationTitle: String
     let destinationIconURL: URL?
     let currency: Currency
@@ -57,6 +58,7 @@ struct Transaction : Decodable {
         case destinationId = "destination_id"
         case destinationType = "destination_type"
         case sourceTitle = "source_title"
+        case sourceIconURL = "source_icon_url"
         case destinationTitle = "destination_title"
         case destinationIconURL = "destination_icon_url"
         case currency = "amount_currency"

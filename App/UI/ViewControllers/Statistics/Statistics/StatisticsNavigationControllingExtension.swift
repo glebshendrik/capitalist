@@ -62,87 +62,13 @@ extension StatisticsViewController : TransactionEditViewControllerDelegate, Borr
     }
 }
 
-extension StatisticsViewController : IncomeSourceEditViewControllerDelegate, ExpenseSourceEditViewControllerDelegate, ExpenseCategoryEditViewControllerDelegate {
-    func didCreateIncomeSource() {
-        
-    }
-    
-    func didUpdateIncomeSource() {
-        reloadFilterAndData()
-    }
-    
-    func didRemoveIncomeSource() {
-        didRemoveFilter()
-    }
-    
-    func didCreateExpenseSource() {
-        
-    }
-    
-    func didUpdateExpenseSource() {
-        reloadFilterAndData()
-    }
-    
-    func didRemoveExpenseSource() {
-        didRemoveFilter()
-    }
-    
-    func didCreateExpenseCategory(with basketType: BasketType, name: String) {
-        
-    }
-    
-    func didUpdateExpenseCategory(with basketType: BasketType) {
-        reloadFilterAndData()
-    }
-    
-    func didRemoveExpenseCategory(with basketType: BasketType) {
-        didRemoveFilter()
-    }
-    
-    private func didRemoveFilter() {
-        guard let filter = viewModel.singleSourceOrDestinationFilter else { return }
-        viewModel.remove(sourceOrDestinationFilter: filter)
-        loadData()
-    }
-}
-
-extension StatisticsViewController : StatisticsEditTableViewCellDelegate {
-    func didTapStatisticsEditButton() {
-        guard let filter = viewModel.singleSourceOrDestinationFilter else { return }
-        
-        switch filter {
-        case let incomeSourceFilter as IncomeSourceTransactionFilter:
-            showEditScreen(incomeSource: incomeSourceFilter.incomeSourceViewModel.incomeSource)
-        case let expenseSourceFilter as ExpenseSourceTransactionFilter:
-            showEditScreen(expenseSource: expenseSourceFilter.expenseSourceViewModel.expenseSource)
-        case let expenseCategoryFilter as ExpenseCategoryTransactionFilter:
-            showEditScreen(expenseCategory: expenseCategoryFilter.expenseCategoryViewModel.expenseCategory, basketType: expenseCategoryFilter.basketType)
-        default:
-            return
-        }
-    }
-    
-    func showEditScreen(incomeSource: IncomeSource?) {
-        modal(factory.incomeSourceEditViewController(delegate: self, incomeSource: incomeSource))
-    }
-    
-    func showEditScreen(expenseSource: ExpenseSource?) {
-        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource))
-    }
-    
-    func showEditScreen(expenseCategory: ExpenseCategory?, basketType: BasketType) {
-        modal(factory.expenseCategoryEditViewController(delegate: self, expenseCategory: expenseCategory, basketType: basketType))
-    }
-}
-
 extension StatisticsViewController : FiltersSelectionViewControllerDelegate {
     func showFilters() {
-        modal(factory.statisticsFiltersViewController(delegate: self, dateRangeFilter: viewModel.dateRangeFilter, transactionableFilters: viewModel.sourceOrDestinationFilters))
+        modal(factory.statisticsFiltersViewController(delegate: self, dateRangeFilter: viewModel.dateRangeFilter, transactionableFilters: viewModel.transactionableFilters))
     }
     
-    func didSelectFilters(dateRangeFilter: DateRangeTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter]) {
-        
-        viewModel.set(dateRangeFilter: dateRangeFilter, sourceOrDestinationFilters: sourceOrDestinationFilters)
+    func didSelect(filters: [TransactionableFilter]) {
+        viewModel.set(filters: filters)
         updateUI()
     }
 }
@@ -173,80 +99,33 @@ extension StatisticsViewController {
     }
 }
 
-extension StatisticsViewController : FilterCellDelegate {
-    func didTapDeleteButton(filter: SourceOrDestinationTransactionFilter) {
-        viewModel.remove(sourceOrDestinationFilter: filter)
-        updateUI()
+extension StatisticsViewController : StatisticsTitleViewDelegate {
+    func didTapTitle() {
+        modal(factory.datePeriodSelectionViewController(delegate: self,
+                                                        dateRangeFilter: viewModel.dateRangeFilter,
+                                                        transactionsMinDate: viewModel.oldestTransactionDate,
+                                                        transactionsMaxDate: viewModel.newestTransactionDate))
     }
 }
 
-extension StatisticsViewController : StatisticsTitleViewDelegate {
-    func didTapRemoveDateRangeButton() {
-        viewModel.removeDateRangeFilter()
+extension StatisticsViewController : DatePeriodSelectionViewControllerDelegate {
+    func didSelect(period: DateRangeTransactionFilter?) {
+        guard let period = period else { return }
+        viewModel.updatePeriods(dateRangeFilter: period)
+        viewModel.updatePresentationData()
         updateUI()
     }
+    
 }
 
 extension StatisticsViewController : GraphTableViewCellDelegate {
-    func graphFiltersAndTotalUpdateNeeded() {
-        updateGraphFilters()
-    }    
-        
+    func didChangeRange() {
+        viewModel.updatePresentationData()
+        updateUI()
+    }
+    
     func didTapGraphTypeButton() {
-        let actions = GraphType.switchList.map { graphType in
-            return UIAlertAction(title: graphType.title,
-                                 style: .default,
-                                 handler: { _ in
-                                    self.viewModel.set(graphType: graphType)
-                                    self.updateUI()
-            })
-        }
-        
-        sheet(title: nil, actions: actions)
-    }
-    
-    func didTapGraphScaleButton() {
-        let actions = GraphPeriodScale.switchList.map { graphScale in
-            return UIAlertAction(title: graphScale.title,
-                                 style: .default,
-                                 handler: { _ in
-                                    self.viewModel.set(graphScale: graphScale)
-                                    self.updateUI()
-            })
-        }
-        
-        sheet(title: nil, actions: actions)
-    }
-    
-    func didTapAggregationTypeButton() {
-        let actions = viewModel.aggregationTypes.map { aggregationType in
-            return UIAlertAction(title: aggregationType.title,
-                                 style: .default,
-                                 handler: { _ in
-                                    self.viewModel.set(aggregationType: aggregationType)                                    
-                                    self.updateGraphFilters(updateGraph: true)
-            })
-        }
-        
-        sheet(title: nil, actions: actions)
-    }
-        
-    func didTapLinePieSwitchButton() {
-        viewModel.switchLinePieChart()
+        viewModel.updatePresentationData()
         updateUI()
-    }
-}
-
-extension StatisticsViewController : GraphFiltersToggleDelegate {
-    func didTapFiltersToggleButton() {
-        viewModel.toggleGraphFilters()
-        updateUI()
-    }
-    
-}
-
-extension StatisticsViewController : TransactionsHeaderDelegate {
-    func didTapExportButton() {
-        exportTransactions()
     }
 }

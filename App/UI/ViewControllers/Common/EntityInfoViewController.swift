@@ -69,8 +69,6 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
         NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
     
-    
-    
     func updateUI() {
         tableView.reloadData()
         updateNavigationBarUI()

@@ -97,9 +97,9 @@ class CreditInfoViewModel : EntityInfoViewModel {
                                              lastGotAt: lastGotAt)
     }
     
-    override func asFilter() -> SourceOrDestinationTransactionFilter? {
+    override func asFilter() -> TransactionableFilter? {
         guard let id = expenseCategoryViewModel?.id, let title = expenseCategoryViewModel?.name, let type = expenseCategoryViewModel?.type else { return nil }
-        return SourceOrDestinationTransactionFilter(id: id, title: title, type: type)
+        return TransactionableFilter(id: id, title: title, type: type, iconURL: expenseCategoryViewModel?.iconURL, iconPlaceholder: type.defaultIconName(basketType: expenseCategoryViewModel?.basketType))
     }
     
     override func loadEntity() -> Promise<Void> {

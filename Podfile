@@ -37,6 +37,7 @@ target 'Three Baskets' do
   pod 'SnapKit', '~> 4.2.0'
   pod 'AttributedTextView'
   pod "ESPullToRefresh"
+  pod 'BetterSegmentedControl', '~> 1.3'
 end
 
 post_install do |installer|

@@ -31,6 +31,10 @@ class TransactionViewModel {
         return transaction.sourceTitle
     }
     
+    var sourceIconURL: URL? {
+        return transaction.sourceIconURL
+    }
+    
     var destinationId: Int {
         return transaction.destinationId
     }

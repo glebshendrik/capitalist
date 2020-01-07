@@ -8,6 +8,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -17,19 +22,19 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aYl-6v-qqs">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                    <color key="backgroundColor" name="dark 2A314B"/>
+                    <color key="backgroundColor" name="black 2"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZG-fQ-ZKQ">
-                    <rect key="frame" x="16" y="15.5" width="343" height="19"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                    <color key="textColor" name="text 9EAACC"/>
+                    <rect key="frame" x="16" y="29.5" width="343" height="16.5"/>
+                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                    <color key="textColor" name="white 0.4"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <constraints>
-                <constraint firstItem="GZG-fQ-ZKQ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="4UT-aG-XLO"/>
                 <constraint firstItem="aYl-6v-qqs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CaI-zN-e4b"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="GZG-fQ-ZKQ" secondAttribute="trailing" constant="16" id="Mfp-kS-y8R"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="GZG-fQ-ZKQ" secondAttribute="bottom" constant="4" id="MhW-Y5-8FX"/>
                 <constraint firstItem="GZG-fQ-ZKQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Tcs-p1-ZOF"/>
                 <constraint firstItem="aYl-6v-qqs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bl9-Gy-hqh"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aYl-6v-qqs" secondAttribute="trailing" id="gwE-XU-kwT"/>
@@ -44,11 +49,11 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="dark 2A314B">
-            <color red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="black 2">
+            <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="text 9EAACC">
-            <color red="0.61960784313725492" green="0.66666666666666663" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="white 0.4">
+            <color red="0.91764705882352937" green="0.93333333333333335" blue="0.95686274509803926" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

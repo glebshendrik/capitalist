@@ -10,8 +10,6 @@ import UIKit
 
 extension BalanceViewController : BalanceExpenseSourcesTableSupportDelegate, BalanceActivesTableSupportDelegate, ActiveEditViewControllerDelegate {
     
-    
-    
     func didSelect(expenseSource: ExpenseSourceViewModel) {
         modal(factory.expenseSourceInfoViewController(expenseSource: expenseSource))
     }

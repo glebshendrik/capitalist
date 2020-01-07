@@ -33,7 +33,7 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
     
     func updateNavBarUI() {
         navigationBar.isTranslucent = false
-        navigationBar.barTintColor = UIColor.by(.dark333D5B)
+        navigationBar.barTintColor = UIColor.by(.black2)
     }
     
     func save() {

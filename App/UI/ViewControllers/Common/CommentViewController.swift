@@ -107,7 +107,7 @@ class CommentViewController : UIViewController, CommentViewControllerInputProtoc
         textInputBar.textViewBorderPadding = UIEdgeInsets(horizontal: 20, vertical: 6)
         textInputBar.horizontalPadding = 16
         textInputBar.horizontalSpacing = 4
-        textInputBar.backgroundColor = UIColor.by(.dark333D5B)
+        textInputBar.backgroundColor = UIColor.by(.black2)
         textInputBar.roundTopCorners(radius: 8.0)
     }
     

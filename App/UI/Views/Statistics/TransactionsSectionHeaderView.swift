@@ -10,7 +10,7 @@ import UIKit
 
 class TransactionsSectionHeaderView: UITableViewHeaderFooterView {
     static let reuseIdentifier = "TransactionsSectionHeaderView"
-    static let requiredHeight: CGFloat = 50.0
+    static let requiredHeight: CGFloat = 40.0
     
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -22,7 +22,7 @@ class TransactionsSectionHeaderView: UITableViewHeaderFooterView {
     
     var title: String? {
         didSet {
-            dateLabel.font = UIFont(name: "Rubik-Regular", size: 15.0)
+            dateLabel.font = UIFont(name: "Roboto-Regular", size: 13.0)
             dateLabel.text = title
         }
     }

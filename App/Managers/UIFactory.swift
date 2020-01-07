@@ -233,6 +233,21 @@ class UIFactory : UIFactoryProtocol {
         return creditEditNavigationController
     }
     
+    func datePeriodSelectionViewController(delegate: DatePeriodSelectionViewControllerDelegate,
+                                           dateRangeFilter: DateRangeTransactionFilter?,
+                                           transactionsMinDate: Date?,
+                                           transactionsMaxDate: Date?) -> UINavigationController? {
+        
+        let datePeriodSelectionNavigationController = router.viewController(.DatePeriodSelectionNavigationController) as? UINavigationController
+        let datePeriodSelectionViewController = datePeriodSelectionNavigationController?.topViewController as? DatePeriodSelectionViewController
+        
+        datePeriodSelectionViewController?.set(delegate: delegate)
+        datePeriodSelectionViewController?.set(dateRangeFilter: dateRangeFilter,
+                                               transactionsMinDate: transactionsMinDate,
+                                               transactionsMaxDate: transactionsMaxDate)
+        return datePeriodSelectionNavigationController
+    }
+    
     func waitingBorrowsViewController(delegate: WaitingBorrowsViewControllerDelegate,
                                       source: TransactionSource,
                                       destination: TransactionDestination,
@@ -249,26 +264,25 @@ class UIFactory : UIFactoryProtocol {
         return waitingBorrowsViewController
     }
     
-    func statisticsViewController(filter: SourceOrDestinationTransactionFilter?)  -> UIViewController? {
+    func statisticsViewController(filter: TransactionableFilter?)  -> UIViewController? {
         let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController
-        statisticsViewController?.set(sourceOrDestinationFilter: filter)
+        statisticsViewController?.set(filter: filter)
         return statisticsViewController
     }
     
-    func statisticsModalViewController(filter: SourceOrDestinationTransactionFilter?)  -> UINavigationController? {
+    func statisticsModalViewController(filter: TransactionableFilter?)  -> UINavigationController? {
         guard let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController else { return nil }
-        statisticsViewController.set(sourceOrDestinationFilter: filter)
+        statisticsViewController.set(filter: filter)
         return UINavigationController(rootViewController: statisticsViewController)
     }
     
-    func statisticsFiltersViewController(delegate: FiltersSelectionViewControllerDelegate?, dateRangeFilter: DateRangeTransactionFilter?, transactionableFilters: [SourceOrDestinationTransactionFilter]) -> UINavigationController? {
+    func statisticsFiltersViewController(delegate: FiltersSelectionViewControllerDelegate?, dateRangeFilter: DateRangeTransactionFilter?, transactionableFilters: [TransactionableFilter]) -> UINavigationController? {
         
         guard let filtersNavigationController = router.viewController(.FiltersSelectionNavigationViewController) as? UINavigationController,
             let filtersViewController = filtersNavigationController.topViewController as? FiltersSelectionViewController else { return nil }
                 
         filtersViewController.delegate = delegate
-        filtersViewController.set(dateRangeFilter: dateRangeFilter,
-                                  sourceOrDestinationFilters: transactionableFilters)
+        filtersViewController.set(filters: transactionableFilters)
         return filtersNavigationController
     }
     

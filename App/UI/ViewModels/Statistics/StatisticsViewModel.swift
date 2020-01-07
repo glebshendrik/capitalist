@@ -16,10 +16,9 @@ enum StatisticsError : Error {
 
 class StatisticsViewModel {    
     private let transactionsViewModel: TransactionsViewModel
+    private let periodsViewModel: PeriodsViewModel
     private let filtersViewModel: FiltersViewModel
     let graphViewModel: GraphViewModel
-    
-    private let exportManager: ExportManagerProtocol
     
     public private(set) var isDataLoading: Bool = false
     
@@ -41,12 +40,21 @@ class StatisticsViewModel {
     
     init(transactionsViewModel: TransactionsViewModel,
          filtersViewModel: FiltersViewModel,
-         exportManager: ExportManagerProtocol) {
+         periodsViewModel: PeriodsViewModel) {
         self.transactionsViewModel = transactionsViewModel
-        self.filtersViewModel = filtersViewModel
-        self.exportManager = exportManager
-        graphViewModel = GraphViewModel(transactionsViewModel: self.transactionsViewModel)
+        self.periodsViewModel = periodsViewModel
+        self.filtersViewModel = filtersViewModel        
+        graphViewModel = GraphViewModel(transactionsViewModel: self.transactionsViewModel, periodsViewModel: self.periodsViewModel)
         graphFiltersSection = GraphFiltersSection(viewModel: graphViewModel)
+    }
+    
+    func section(at index: Int) -> StatisticsViewSection? {
+        return sections.item(at: index)
+    }
+    
+    func transactionViewModel(at indexPath: IndexPath) -> TransactionViewModel? {
+        guard let section = sections.item(at: indexPath.section) as? TransactionsSection else { return nil }
+        return section.transactionViewModel(at: indexPath.row)
     }
     
     func setDataLoading() {
@@ -61,32 +69,22 @@ class StatisticsViewModel {
         updateSections()
     }
     
-    func section(at index: Int) -> StatisticsViewSection? {
-        return sections.item(at: index)
-    }
-    
-    func transactionViewModel(at indexPath: IndexPath) -> TransactionViewModel? {
-        guard let section = sections.item(at: indexPath.section) as? TransactionsSection else { return nil }
-        return section.transactionViewModel(at: indexPath.row)
-    }
-    
-    func exportTransactions() -> Promise<URL> {
-        return exportManager.export(transactions: transactionsViewModel.filteredTransactionViewModels)
+    func updatePeriods(dateRangeFilter: DateRangeTransactionFilter) {
+        graphViewModel.collectionContentOffset = nil
+        periodsViewModel.set(dateRangeFilter: dateRangeFilter,
+                             beginning: oldestTransactionDate,
+                             ending: newestTransactionDate)
     }
     
     private func filterTransactions() {
         transactionsViewModel
-            .filterTransactions(sourceOrDestinationFilters: filtersViewModel.sourceOrDestinationFilters,
-                                       dateRangeFilter: filtersViewModel.dateRangeFilter)
+            .filterTransactions(filters: filtersViewModel.transactionableFilters,
+                                dateRangeFilter: periodsViewModel.currentDateRangeFilter,
+                                graphType: graphViewModel.graphType)
     }
     
     private func updateGraphData() {
-        if graphViewModel.graphPeriodScale == nil {
-            graphViewModel.updateChartsData(with: transactionsViewModel.defaultPeriod)
-        } else {
-            graphViewModel.updateChartsData()
-        }
-        
+        graphViewModel.updateCurrentGraph()
     }
     
     private func updateTransactionsSections() {
@@ -98,42 +96,48 @@ class StatisticsViewModel {
     
     private func updateSections() {
         sections = []
-        if filtersViewModel.isSingleSourceOrDestinationFilterSelectedAndEditable {
-            sections.append(SourceOrDestinationFilterEditSection())
-        }
         
         sections.append(GraphSection())
         
-        updateGraphFiltersSection()
+        if isDataLoading {
+            sections.append(TransactionsLoadingSection())
+        }
+        
         if graphViewModel.hasData {
             sections.append(graphFiltersSection)
         }
         
-        if isDataLoading {
-            sections.append(TransactionsLoadingSection())
-        } else if transactionsSections.count > 0 {
+        if !isDataLoading && transactionsSections.count > 0 {
             sections.append(TransactionsHeaderSection())
             sections.append(contentsOf: transactionsSections)
         }
     }
 }
 
-// History Transactions
+// Transactions
 extension StatisticsViewModel {
-    var hasIncomeTransactions: Bool {
-        return transactionsViewModel.hasIncomeTransactions
+//    var hasIncomeTransactions: Bool {
+//        return transactionsViewModel.hasIncomeTransactions
+//    }
+//    
+//    var hasExpenseTransactions: Bool {
+//        return transactionsViewModel.hasExpenseTransactions
+//    }
+//    
+//    var filteredIncomesAmount: String? {
+//        return transactionsViewModel.filteredIncomesAmount
+//    }
+//    
+//    var filteredExpensesAmount: String? {
+//        return transactionsViewModel.filteredExpensesAmount
+//    }
+    
+    var oldestTransactionDate: Date {
+        return transactionsViewModel.oldestTransactionDate
     }
     
-    var hasExpenseTransactions: Bool {
-        return transactionsViewModel.hasExpenseTransactions
-    }
-    
-    var filteredIncomesAmount: String? {
-        return transactionsViewModel.filteredIncomesAmount
-    }
-    
-    var filteredExpensesAmount: String? {
-        return transactionsViewModel.filteredExpensesAmount
+    var newestTransactionDate: Date {
+        return Date()
     }
     
     func loadData() -> Promise<Void> {
@@ -142,29 +146,11 @@ extension StatisticsViewModel {
                     transactionsViewModel.loadData()
                 }.ensure {
                     self.isDataLoading = false
+                    self.updatePeriods(dateRangeFilter: self.dateRangeFilter ?? DateRangeTransactionFilter(datePeriod: .month))
                     self.updatePresentationData()                    
                 }
     }
-    
-    func reloadFilterAndData() -> Promise<Void> {
-        setDataLoading()
-        return  firstly {
-                    when(fulfilled: filtersViewModel.reloadFilter(), transactionsViewModel.loadData())
-                }.ensure {
-                    self.isDataLoading = false
-                    self.updatePresentationData()
-                }
-    }
-    
-    func reloadFilter() -> Promise<Void> {
-        return  firstly {
-                    filtersViewModel.reloadFilter()
-                }.ensure {
-                    self.isDataLoading = false
-                    self.updatePresentationData()
-                }
-    }
-    
+            
     func removeTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {
         setDataLoading()
         return transactionsViewModel.removeTransaction(transactionViewModel: transactionViewModel)
@@ -174,119 +160,53 @@ extension StatisticsViewModel {
 // Filters
 extension StatisticsViewModel {
     var dateRangeFilter: DateRangeTransactionFilter? {
-        return filtersViewModel.dateRangeFilter
+        return periodsViewModel.currentDateRangeFilter
     }
     
-    var sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter] {
-        return filtersViewModel.sourceOrDestinationFilters
+    var transactionableFilters: [TransactionableFilter] {
+        return filtersViewModel.transactionableFilters
     }
     
-    var numberOfSourceOrDestinationFilters: Int {
-        return filtersViewModel.numberOfSourceOrDestinationFilters
+    var numberOfTransactionableFilters: Int {
+        return filtersViewModel.numberOfTransactionableFilters
+    }
+        
+    var hasTransactionableFilters: Bool {
+        return numberOfTransactionableFilters > 0
     }
     
-    var editFilterTitle: String? {
-        return filtersViewModel.editFilterTitle
+    func transactionableFilter(at indexPath: IndexPath) -> TransactionableFilter? {
+        return filtersViewModel.transactionableFilter(at: indexPath)
     }
     
-    var hasSourceOrDestinationFilters: Bool {
-        return numberOfSourceOrDestinationFilters > 0
-    }
-    
-    var isSingleSourceOrDestinationFilterSelectedAndEditable: Bool {
-        return filtersViewModel.isSingleSourceOrDestinationFilterSelectedAndEditable
-    }
-    
-    var singleSourceOrDestinationFilter: SourceOrDestinationTransactionFilter? {
-        return filtersViewModel.singleSourceOrDestinationFilter
-    }
-    
-    func set(sourceOrDestinationFilter: SourceOrDestinationTransactionFilter?) {
-        guard let sourceOrDestinationFilter = sourceOrDestinationFilter else { return }
+    func set(filter: TransactionableFilter?) {
+        guard let filter = filter else { return }
         func graphType(by filterType: TransactionableType) -> GraphType {
-            switch sourceOrDestinationFilter.type {
+            switch filter.type {
             case .incomeSource:
-                return .income
-            case .expenseSource:
-                return .cashFlow
+                return .incomes
             case .expenseCategory:
                 return .expenses
             default:
-                return .expenses
+                return .all
             }
         }        
-        set(graphType: graphType(by: sourceOrDestinationFilter.type))
-        set(sourceOrDestinationFilters: [sourceOrDestinationFilter])
+        set(graphType: graphType(by: filter.type))
+        set(filters: [filter])
     }
     
-    func set(sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter]) {
-        filtersViewModel.set(sourceOrDestinationFilters: sourceOrDestinationFilters)
+    func set(filters: [TransactionableFilter]) {
+        filtersViewModel.set(transactionableFilters: filters)
         updatePresentationData()
-    }
-    
-    func set(dateRangeFilter: DateRangeTransactionFilter?) {
-        filtersViewModel.set(dateRangeFilter: dateRangeFilter)
-        updatePresentationData()
-    }
-    
-    func set(dateRangeFilter: DateRangeTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter]) {
-        filtersViewModel.set(dateRangeFilter: dateRangeFilter)
-        filtersViewModel.set(sourceOrDestinationFilters: sourceOrDestinationFilters)
-        updatePresentationData()
-    }
-    
-    func removeDateRangeFilter() {
-        set(dateRangeFilter: nil)
-    }
-    
-    func remove(sourceOrDestinationFilter: SourceOrDestinationTransactionFilter) {
-        let filters = filtersViewModel.sourceOrDestinationFilters.filter { $0.id != sourceOrDestinationFilter.id }
-        set(sourceOrDestinationFilters: filters)
-    }
-    
-    func sourceOrDestinationFilter(at indexPath: IndexPath) -> SourceOrDestinationTransactionFilter? {
-        return filtersViewModel.sourceOrDestinationFilter(at: indexPath)
-    }
-    
-    func singleSourceOrDestinationFilterEqualsTo(filter: GraphTransactionFilter) -> Bool {
-        return singleSourceOrDestinationFilter?.id == filter.id && singleSourceOrDestinationFilter?.type == filter.type
     }
 }
 
 // Graph
 extension StatisticsViewModel {
-    var aggregationTypes: [AggregationType] {
-        return graphViewModel.aggregationTypes
-    }
-    
-    var areGraphFiltersInteractable: Bool {
-        return graphViewModel.areGraphFiltersInteractable
-    }
-    
     func set(graphType: GraphType) {
         graphViewModel.graphType = graphType
     }
-    
-    func set(graphScale: GraphPeriodScale) {
-        graphViewModel.graphPeriodScale = graphScale
-    }
-    
-    func set(aggregationType: AggregationType) {
-        graphViewModel.aggregationType = aggregationType
-    }
-    
-    func switchLinePieChart() {
-        graphViewModel.switchLinePieChart()
-    }
-    
-    func toggleGraphFilters() {
-        graphViewModel.toggleFilters()
-    }
-    
-    func updateGraphFiltersSection() {
-        graphFiltersSection.updateRows()
-    }
-    
+        
     func graphFilterViewModel(at index: Int) -> GraphTransactionFilter? {
         return graphViewModel.graphFilterViewModel(at: index)
     }

@@ -11,7 +11,7 @@ import PromiseKit
 
 class BorrowsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, ApplicationRouterDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
     
-    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
+    var navigationBarTintColor: UIColor? = UIColor.by(.black2)
     var router: ApplicationRouterProtocol!
     var factory: UIFactoryProtocol!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -47,7 +47,7 @@ class BorrowsViewController : UIViewController, UIMessagePresenterManagerDependa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
+        navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
     }
     
     @IBAction func didTapLoans(_ sender: Any) {

@@ -101,8 +101,8 @@ class IncomeSourceViewModel : TransactionSource {
         waitingDebts = incomeSource.waitingDebts.map { BorrowViewModel(borrow: $0) }
     }
     
-    func asTransactionFilter() -> IncomeSourceTransactionFilter {
-        return IncomeSourceTransactionFilter(incomeSourceViewModel: self)
+    func asTransactionFilter() -> IncomeSourceFilter {
+        return IncomeSourceFilter(incomeSourceViewModel: self)
     }
     
     private func amount(shouldRound: Bool) -> String {

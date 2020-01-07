@@ -13,6 +13,7 @@ class TransactionTableViewCell : UITableViewCell {
     @IBOutlet weak var sourceTitleLabel: UILabel!
     @IBOutlet weak var destinationTitleLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var delimeter: UIView?
     
     var viewModel: TransactionViewModel? {
         didSet {
@@ -23,57 +24,10 @@ class TransactionTableViewCell : UITableViewCell {
     private func  updateUI() {
         guard let viewModel = viewModel else { return }
         
-        func destinationIconTintColor() -> UIColor {
-            switch viewModel.destinationType {
-            case .incomeSource, .expenseSource:
-                return UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
-            case .expenseCategory:
-                guard let basketType = viewModel.basketType else {
-                    return UIColor(red: 105 / 255.0, green: 145 / 255.0, blue: 250 / 255.0, alpha: 1)
-                }
-                return basketColor(basketType: basketType)
-            default:
-                return .white
-            }
-        }
-        
-        func basketColor(basketType: BasketType) -> UIColor {
-            switch basketType {
-            case .joy:
-                return UIColor(red: 1, green: 0.85, blue: 0.27, alpha: 1)
-            case .risk:
-                return UIColor(red: 0.49, green: 0.52, blue: 1, alpha: 1)
-            case .safe:
-                return UIColor(red: 0.13, green: 0.86, blue: 0.27, alpha: 1)
-            }
-        }
-        
-        func expenseCategoryIconPlaceholderName(basketType: BasketType) -> String {
-            switch basketType {
-            case .joy:
-                return "joy-default-icon"
-            case .risk:
-                return "risk-default-icon"
-            case .safe:
-                return "safe-default-icon"
-            }
-        }
-        
-        func defaultDestinationIconName() -> String {            
-            switch viewModel.destinationType {
-            case .incomeSource, .expenseSource:
-                return "wallet-default-icon"
-            case .expenseCategory:
-                guard let basketType = viewModel.basketType else {
-                    return ""
-                }
-                return expenseCategoryIconPlaceholderName(basketType: basketType)
-            default:
-                return "wallet-default-icon"
-            }
-        }
-        
-        updateIconUI(url: viewModel.destinationIconURL, placeholder: defaultDestinationIconName(), tintColor: destinationIconTintColor())
+        delimeter?.alpha = 0.3
+                
+        updateIconUI(url: viewModel.destinationIconURL,
+                     placeholder: viewModel.destinationType.defaultIconName(basketType: viewModel.basketType))
         
         sourceTitleLabel.text = viewModel.sourceTitle
         destinationTitleLabel.text = viewModel.destinationTitle
@@ -83,11 +37,10 @@ class TransactionTableViewCell : UITableViewCell {
         layer.rasterizationScale = UIScreen.main.scale
     }
     
-    func updateIconUI(url: URL?, placeholder: String?, tintColor: UIColor) {
+    func updateIconUI(url: URL?, placeholder: String?) {
         destinationIconImageView.setImage(with: url,
                                           placeholderName: placeholder,
                                           renderingMode: .alwaysTemplate)
-        destinationIconImageView.tintColor = tintColor
     }
 }
 

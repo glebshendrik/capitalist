@@ -140,6 +140,8 @@ struct Infrastructure {
         case StatisticsViewController
         case FiltersSelectionViewController
         case FiltersSelectionNavigationViewController
+        case DatePeriodSelectionNavigationController
+        case DatePeriodSelectionViewController
         
         // Balance
         case BalanceViewController
@@ -208,7 +210,9 @@ struct Infrastructure {
                 return .Settings
             case .StatisticsViewController,
                  .FiltersSelectionViewController,
-                 .FiltersSelectionNavigationViewController:
+                 .FiltersSelectionNavigationViewController,
+                 .DatePeriodSelectionNavigationController,
+                 .DatePeriodSelectionViewController:
                 return .Statistics
             case .BalanceViewController:
                 return .Balance

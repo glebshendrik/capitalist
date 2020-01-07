@@ -11,12 +11,12 @@ import PromiseKit
 import AlignedCollectionViewFlowLayout
 
 protocol FiltersSelectionViewControllerDelegate {
-    func didSelectFilters(dateRangeFilter: DateRangeTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter])
+    func didSelect(filters: [TransactionableFilter])
 }
 
 class FiltersSelectionViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable {
     
-    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
+    var navigationBarTintColor: UIColor? = UIColor.by(.black2)
     
     var delegate: FiltersSelectionViewControllerDelegate? = nil
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -24,6 +24,7 @@ class FiltersSelectionViewController : UIViewController, UIMessagePresenterManag
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIImageView!
+    @IBOutlet weak var saveButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,92 +35,30 @@ class FiltersSelectionViewController : UIViewController, UIMessagePresenterManag
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)        
-        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
+        navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+//        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
-        delegate?.didSelectFilters(dateRangeFilter: viewModel.selectedDateRangeFilter,
-                                   sourceOrDestinationFilters: viewModel.selectedFilters)
+        delegate?.didSelect(filters: viewModel.selectedFilters)
         closeButtonHandler()
     }
     
-    func set(dateRangeFilter: DateRangeTransactionFilter?, sourceOrDestinationFilters: [SourceOrDestinationTransactionFilter]) {
-        viewModel.set(dateRangeFilter: dateRangeFilter, sourceOrDestinationFilters: sourceOrDestinationFilters)
-    }
-}
-
-protocol FromDateSelectionHandlerDelegate {
-    func didSelectFromDate(date: Date?)
-}
-
-protocol ToDateSelectionHandlerDelegate {
-    func didSelectToDate(date: Date?)
-}
-
-extension FiltersSelectionViewController : DateRangeCollectionViewCellDelegate, FromDateSelectionHandlerDelegate, ToDateSelectionHandlerDelegate {
-    
-    class FromDateSelectionHandler : DatePickerViewControllerDelegate {
-        let delegate: FromDateSelectionHandlerDelegate
-        
-        init(delegate: FromDateSelectionHandlerDelegate) {
-            self.delegate = delegate
-        }
-        
-        func didSelect(date: Date?) {
-            delegate.didSelectFromDate(date: date)
-        }
-    }
-    
-    class ToDateSelectionHandler : DatePickerViewControllerDelegate {
-        let delegate: ToDateSelectionHandlerDelegate
-        
-        init(delegate: ToDateSelectionHandlerDelegate) {
-            self.delegate = delegate
-        }
-        
-        func didSelect(date: Date?) {
-            delegate.didSelectToDate(date: date)
-        }
-    }
-    
-    func didTapFromDate() {
-        showDatePicker(date: viewModel.fromDate,
-                       minDate: nil,
-                       maxDate: viewModel.fromDateMaxDate,
-                       delegate: FromDateSelectionHandler(delegate: self))
-    }
-    
-    func didTapToDate() {
-        showDatePicker(date: viewModel.toDate,
-                       minDate: viewModel.toDateMinDate,
-                       maxDate: nil,
-                       delegate: ToDateSelectionHandler(delegate: self))
-    }
-    
-    func didSelectFromDate(date: Date?) {
-        viewModel.fromDate = date
+    @IBAction func didTapResetButton(_ sender: Any) {
+        viewModel.resetFilters()
         updateUI()
+        delegate?.didSelect(filters: viewModel.selectedFilters)
+        closeButtonHandler()
     }
     
-    func didSelectToDate(date: Date?) {
-        viewModel.toDate = date
-        updateUI()
-    }
-        
-    private func showDatePicker(date: Date?, minDate: Date?, maxDate: Date?, delegate: DatePickerViewControllerDelegate) {
-        let datePickerController = DatePickerViewController()
-        datePickerController.set(delegate: delegate)
-        datePickerController.set(date: date, minDate: minDate, maxDate: maxDate)
-        datePickerController.modalPresentationStyle = .custom
-        present(datePickerController, animated: true, completion: nil)
+    func set(filters: [TransactionableFilter]) {
+        viewModel.set(filters: filters)
     }
 }
-
 
 extension FiltersSelectionViewController {
     private func setupUI() {
@@ -147,6 +86,7 @@ extension FiltersSelectionViewController {
     
     private func updateUI() {
         collectionView.reloadData()
+        updateSaveButtonUI()
     }
     
     private func loadData() {
@@ -181,15 +121,9 @@ extension FiltersSelectionViewController : UICollectionViewDelegate, UICollectio
         }
         
         switch section {
-        case is DateRangeFilterSection:
-            guard let cell = dequeueCell(for: "DateRangeCollectionViewCell") as? DateRangeCollectionViewCell else { return UICollectionViewCell() }
-            
-            cell.configure(with: self, fromDate: viewModel.fromDate, toDate: viewModel.toDate)
-            
-            return cell
-        case is SourceOrDestinationTransactionFiltersSection:
+        case is TransactionableFiltersSection:
             guard   let cell = dequeueCell(for: "SelectableFilterCollectionViewCell") as? SelectableFilterCollectionViewCell,
-                let filtersSection = section as? SourceOrDestinationTransactionFiltersSection,
+                let filtersSection = section as? TransactionableFiltersSection,
                 let filterViewModel = filtersSection.filterViewModel(at: indexPath.row) else { return UICollectionViewCell() }
             
             cell.viewModel = filterViewModel
@@ -205,17 +139,8 @@ extension FiltersSelectionViewController : UICollectionViewDelegate, UICollectio
         guard let section = viewModel.section(at: indexPath.section) else { return CGSize.zero }
         
         switch section {
-        case is DateRangeFilterSection:
-            return CGSize(width: collectionView.frame.size.width - 32.0, height: 28.0)
-        case is SourceOrDestinationTransactionFiltersSection:
-            guard   let filtersSection = section as? SourceOrDestinationTransactionFiltersSection,
-                    let filter = filtersSection.filterViewModel(at: indexPath.row) else { return CGSize.zero }
-            
-            let titleSize = filter.title.size(withAttributes: [
-                NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 13.0) ?? UIFont.boldSystemFont(ofSize: 13)
-                ])
-            let edgeInsets = UIEdgeInsets(top: 5.0, left: 6.0, bottom: 3.0, right: 10.0)
-            return CGSize(width: titleSize.width + edgeInsets.horizontal, height: 24.0)
+        case is TransactionableFiltersSection:
+            return CGSize(width: collectionView.frame.size.width, height: 56.0)
         default:
             return CGSize.zero
         }
@@ -224,11 +149,16 @@ extension FiltersSelectionViewController : UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        guard   let filtersSection = viewModel.section(at: indexPath.section) as? SourceOrDestinationTransactionFiltersSection,
+        guard   let filtersSection = viewModel.section(at: indexPath.section) as? TransactionableFiltersSection,
                 let filter = filtersSection.filterViewModel(at: indexPath.row) else { return }
         
         filter.toggle()
         collectionView.reloadItems(at: [indexPath])
+        updateSaveButtonUI()
+    }
+    
+    func updateSaveButtonUI() {
+        saveButton.setTitle(viewModel.saveButtonTitle, for: .normal)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

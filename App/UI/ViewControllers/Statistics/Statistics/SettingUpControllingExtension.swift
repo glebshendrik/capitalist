@@ -24,29 +24,6 @@ extension StatisticsViewController {
         }
     }
     
-    func reloadFilterAndData() {
-        postFinantialDataUpdated()
-        setLoading()
-        _ = firstly {
-                viewModel.reloadFilterAndData()
-            }.catch { _ in
-                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
-            }.finally {
-                self.updateUI()
-        }
-    }
-    
-    func reloadFilter() {        
-        setLoading()
-        _ = firstly {
-                viewModel.reloadFilter()
-            }.catch { _ in
-                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
-            }.finally {
-                self.updateUI()
-        }
-    }
-    
     func removeTransaction(transactionViewModel: TransactionViewModel) {
         setLoading()
         
@@ -71,113 +48,93 @@ extension StatisticsViewController {
 }
 
 extension StatisticsViewController {
-    func set(sourceOrDestinationFilter: SourceOrDestinationTransactionFilter?) {
-        viewModel.set(sourceOrDestinationFilter: sourceOrDestinationFilter)
+    func set(filter: TransactionableFilter?) {
+        viewModel.set(filter: filter)
     }
     
     func setupUI() {
         setupNavigationBar()
-        setupFiltersUI()
-        setupTransactionsUI()
-        setupFooterOverlayUI()
+        setupTableUI()
     }
-    
-    func layoutSubviews() {
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: incomesContainer.frame.size.height, right: 0)
-    }
-    
+        
     private func setupNavigationBar() {
         titleView = StatisticsTitleView(frame: CGRect.zero)
         titleView.delegate = self
         navigationItem.titleView = titleView
         
         setupNavigationBarAppearance()
-        
+        // TODO
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "filters-icon"), style: .plain, target: self, action: #selector(didTapFiltersButton(_:)))
     }
     
     @objc func didTapFiltersButton(_ sender: Any) {
         showFilters()
     }
-        
-    private func setupFiltersUI() {
-        filtersCollectionView.delegate = self
-        filtersCollectionView.dataSource = self
-    }
-    
-    private func setupTransactionsUI() {
+            
+    private func setupTableUI() {
         viewModel.updatePresentationData()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "TransactionsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: TransactionsSectionHeaderView.reuseIdentifier)
-    }
-    
-    private func setupFooterOverlayUI() {        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = footerOverlayView.bounds
-        gradientLayer.colors = [
-            UIColor(red: 0.96, green: 0.97, blue: 1, alpha: 0.0).cgColor,
-            UIColor(red: 0.96, green: 0.97, blue: 1, alpha: 0.1).cgColor,
-            UIColor(red: 0.96, green: 0.97, blue: 1, alpha: 1).cgColor
-        ]
-        
-        footerOverlayView.layer.insertSublayer(gradientLayer, at: 0)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100        
     }
 }
 
 extension StatisticsViewController {
     func updateUI() {
         updateNavigationBar()
-        updateFiltersUI()
-        updateGraphFiltersSection()
-        updateTransactionsUI()
-        updateBalanceUI()        
-    }
-    
-    func updateGraphFiltersSection() {        
-        viewModel.updateGraphFiltersSection()
-    }
-    
-    func updateGraphFilters(updateGraph: Bool = false) {
-        updateGraphFiltersSection()
-        if let graphFiltersSectionIndex = viewModel.graphFiltersSectionIndex {
-            var indexSet = IndexSet(integer: graphFiltersSectionIndex)
-            
-            if  let graphSectionIndex = viewModel.graphSectionIndex,
-                updateGraph {
-                indexSet = IndexSet(arrayLiteral: graphSectionIndex, graphFiltersSectionIndex)
-            }
-            
-            UIView.performWithoutAnimation {
-                self.tableView.reloadSections(indexSet, with: .none)                
-            }
-        }
+        updateTableUI()
     }
     
     private func updateNavigationBar() {
         titleView.dateRangeFilter = viewModel.dateRangeFilter
+        navigationItem.rightBarButtonItem?.image = UIImage(named: viewModel.hasTransactionableFilters ? "filters-dot-icon" : "filters-icon")        
     }
     
-    private func updateFiltersUI() {
-        UIView.performWithoutAnimation {
-            filtersCollectionView.reloadData()
-            filtersCollectionView.performBatchUpdates(nil, completion: nil)
-        }
-        filtersHeightConstraint.constant = viewModel.hasSourceOrDestinationFilters ? 36.0 : 0.0
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    private func updateTransactionsUI() {
+    private func updateTableUI() {
         tableView.reloadData()
-    }
-    
-    private func updateBalanceUI() {
-        incomesContainer.isHidden = !viewModel.hasIncomeTransactions
-        expensesContainer.isHidden = !viewModel.hasExpenseTransactions
-        
-        incomesAmountLabel.text = viewModel.filteredIncomesAmount
-        expensesAmountLabel.text = viewModel.filteredExpensesAmount
-    }
+    }    
 }
+
+//        func reloadFilterAndData() {
+//            postFinantialDataUpdated()
+//            setLoading()
+//            _ = firstly {
+//                    viewModel.reloadFilterAndData()
+//                }.catch { _ in
+//                    self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
+//                }.finally {
+//                    self.updateUI()
+//            }
+//        }
+    
+//    func reloadFilter() {
+//        setLoading()
+//        _ = firstly {
+//                viewModel.reloadFilter()
+//            }.catch { _ in
+//                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
+//            }.finally {
+//                self.updateUI()
+//        }
+//    }
+//func updateGraphFiltersSection() {
+//    viewModel.updateGraphFiltersSection()
+//}
+//
+//func updateGraphFilters(updateGraph: Bool = false) {
+//    updateGraphFiltersSection()
+//    if let graphFiltersSectionIndex = viewModel.graphFiltersSectionIndex {
+//        var indexSet = IndexSet(integer: graphFiltersSectionIndex)
+//        
+//        if  let graphSectionIndex = viewModel.graphSectionIndex,
+//            updateGraph {
+//            indexSet = IndexSet(arrayLiteral: graphSectionIndex, graphFiltersSectionIndex)
+//        }
+//        
+//        UIView.performWithoutAnimation {
+//            self.tableView.reloadSections(indexSet, with: .none)
+//        }
+//    }
+//}

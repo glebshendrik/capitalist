@@ -16,7 +16,7 @@ protocol ProfileViewOutputProtocol {
 
 class ProfileViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol, NavigationBarColorable {
         
-    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
+    var navigationBarTintColor: UIColor? = UIColor.by(.black2)
 
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: ProfileViewModel!
@@ -133,8 +133,8 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
     }
     
     func setupNavigationBar() {
-        let attributes = [NSAttributedString.Key.font : UIFont(name: "Rubik-Regular", size: 16)!,
-                          NSAttributedString.Key.foregroundColor : UIColor.white]
+        let attributes = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 18)!,
+                          NSAttributedString.Key.foregroundColor : UIColor.by(.white100)]
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()

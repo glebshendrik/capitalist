@@ -13,62 +13,52 @@ protocol FiltersSelectionViewSection {
     var title: String? { get }
 }
 
-class DateRangeFilterSection : FiltersSelectionViewSection {
-    var numberOfRows: Int { return 1 }
-    var title: String? { return "Выбор периода" }
-}
-
-class SourceOrDestinationTransactionFiltersSection : FiltersSelectionViewSection {
+class TransactionableFiltersSection : FiltersSelectionViewSection {
     var numberOfRows: Int { return filters.count }
     var title: String?
     
-    private let filters: [SelectableSourceOrDestinationTransactionFilter]
+    private let filters: [SelectableTransactionableFilter]
     
-    var selectedFilters: [SourceOrDestinationTransactionFilter] {
+    var selectedFilters: [TransactionableFilter] {
         return filters.filter { $0.isSelected } 
     }
     
-    init(title: String, filters: [SelectableSourceOrDestinationTransactionFilter]) {
-        self.title = title
+    init(title: String, filters: [SelectableTransactionableFilter]) {
+        self.title = title.uppercased()
         self.filters = filters
     }
     
-    func filterViewModel(at index: Int) -> SelectableSourceOrDestinationTransactionFilter? {
+    func filterViewModel(at index: Int) -> SelectableTransactionableFilter? {
         return filters.item(at: index)
     }
 }
 
-class IncomeSourceFiltersSection : SourceOrDestinationTransactionFiltersSection {
-    
-    init(incomeSourceFilters: [IncomeSourceTransactionFilter]) {
+class IncomeSourceFiltersSection : TransactionableFiltersSection {
+    init(incomeSourceFilters: [IncomeSourceFilter]) {
         super.init(title: "Источники доходов", filters: incomeSourceFilters)
     }    
 }
 
-class ExpenseSourceFiltersSection : SourceOrDestinationTransactionFiltersSection {
-    
-    init(expenseSourceFilters: [ExpenseSourceTransactionFilter]) {
+class ExpenseSourceFiltersSection : TransactionableFiltersSection {
+    init(expenseSourceFilters: [ExpenseSourceFilter]) {
         super.init(title: "Кошельки", filters: expenseSourceFilters)
     }
 }
 
-class JoyExpenseCategoryFiltersSection : SourceOrDestinationTransactionFiltersSection {
-    
-    init(joyExpenseCategoryFilters: [ExpenseCategoryTransactionFilter]) {
-        super.init(title: "Категории трат: удовольствие", filters: joyExpenseCategoryFilters)
+class ExpenseCategoryFiltersSection : TransactionableFiltersSection {
+    init(expenseCategoryFilters: [ExpenseCategoryFilter]) {
+        super.init(title: "Расходы", filters: expenseCategoryFilters)
     }
 }
 
-class RiskExpenseCategoryFiltersSection : SourceOrDestinationTransactionFiltersSection {
-    
-    init(riskExpenseCategoryFilters: [ExpenseCategoryTransactionFilter]) {
-        super.init(title: "Категории трат: риск", filters: riskExpenseCategoryFilters)
+class SafeActiveFiltersSection : TransactionableFiltersSection {
+    init(safeActiveFilters: [ActiveFilter]) {
+        super.init(title: "Сбережения", filters: safeActiveFilters)
     }
 }
 
-class SafeExpenseCategoryFiltersSection : SourceOrDestinationTransactionFiltersSection {
-    
-    init(safeExpenseCategoryFilters: [ExpenseCategoryTransactionFilter]) {
-        super.init(title: "Категории трат: безопасность", filters: safeExpenseCategoryFilters)
+class RiskActiveFiltersSection : TransactionableFiltersSection {    
+    init(riskActiveFilters: [ActiveFilter]) {
+        super.init(title: "Инвестиции", filters: riskActiveFilters)
     }
 }

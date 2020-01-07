@@ -12,7 +12,7 @@ import PromiseKit
 class FormEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
         
     var navigationBarTintColor: UIColor? {
-        return UIColor.by(.dark333D5B)
+        return UIColor.by(.black2)
     }
     
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -157,7 +157,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     }
     
     func updateNavBarUI() {
-        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)        
+        navigationController?.navigationBar.barTintColor = UIColor.by(.black2)        
     }
     
     func setup(tableController: FormFieldsTableViewController) {

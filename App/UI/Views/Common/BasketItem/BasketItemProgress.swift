@@ -27,7 +27,7 @@ class BasketItemProgress : BasketItemView {
         }
     }
     
-    var labelFont: UIFont? = UIFont(name: "Rubik-Regular", size: 9) {
+    var labelFont: UIFont? = UIFont(name: "Roboto-Regular", size: 9) {
         didSet {
             limitLabel.font = labelFont
         }

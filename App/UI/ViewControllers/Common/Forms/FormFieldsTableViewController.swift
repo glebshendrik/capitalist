@@ -97,7 +97,7 @@ class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController
     
     func setupSaveButton() {
         saveButton.setTitle(saveButtonTitle, for: .normal)
-        saveButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 14)!
+        saveButton.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 14)!
         saveButton.titleLabel?.textColor = UIColor.by(.textFFFFFF)
         saveButton.backgroundColor = UIColor.by(.blue6A92FA)
         saveButton.backgroundColorForNormal = UIColor.by(.blue6A92FA)

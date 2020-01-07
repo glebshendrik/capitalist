@@ -91,5 +91,9 @@ extension ApplicationAssembly {
         container.autoregister(CreditInfoViewModel.self, initializer: CreditInfoViewModel.init)
         
         container.autoregister(BorrowInfoViewModel.self, initializer: BorrowInfoViewModel.init)
+        
+        container.autoregister(DatePeriodSelectionViewModel.self, initializer: DatePeriodSelectionViewModel.init)
+        
+        container.autoregister(PeriodsViewModel.self, initializer: PeriodsViewModel.init)
     }
 }
