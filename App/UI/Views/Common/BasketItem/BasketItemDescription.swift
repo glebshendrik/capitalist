@@ -14,19 +14,19 @@ class BasketItemDescription : BasketItemView {
     lazy var amountLabel: UILabel = { return UILabel() }()
     lazy var subAmountLabel: UILabel = { return UILabel() }()
     
-    var titleColor: UIColor = UIColor.by(.text9EAACC) {
+    var titleColor: UIColor = UIColor.by(.white64) {
         didSet {
             titleLabel.textColor = titleColor
         }
     }
     
-    var amountColor: UIColor = UIColor.by(.textFFFFFF) {
+    var amountColor: UIColor = UIColor.by(.white100) {
         didSet {
             amountLabel.textColor = amountColor
         }
     }
     
-    var subAmountColor: UIColor = UIColor.by(.text9EAACC) {
+    var subAmountColor: UIColor = UIColor.by(.white64) {
         didSet {
             subAmountLabel.textColor = subAmountColor
         }

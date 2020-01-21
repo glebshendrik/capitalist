@@ -14,7 +14,7 @@ class ProgressView : BasketItemView {
     lazy var limitLabel: UILabel = { return UILabel() }()
     lazy var progressLabel: UILabel = { return UILabel() }()
     
-    var labelsColor: UIColor = UIColor.by(.textFFFFFF) {
+    var labelsColor: UIColor = UIColor.by(.white100) {
         didSet {
             limitLabel.textColor = labelsColor
             progressLabel.textColor = labelsColor

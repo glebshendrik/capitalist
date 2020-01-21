@@ -45,8 +45,8 @@ class OnboardingPagesViewController : UIPageViewController, UIPageViewController
         super.viewDidLoad()
         self.dataSource = self
         self.delegate   = self
-        
-        self.view.backgroundColor = UIColor.by(.dark2A314B)
+                
+        self.view.backgroundColor = UIColor.by(.black2)
         if let firstPage = pages.first {
             show(viewController: firstPage)
         }

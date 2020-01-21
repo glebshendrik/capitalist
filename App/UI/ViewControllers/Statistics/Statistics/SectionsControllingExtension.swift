@@ -116,7 +116,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             let section = viewModel.section(at: section) as? TransactionsSection else { return nil }
         
         headerView.title = section.title
-        headerView.contentView.backgroundColor = UIColor.by(.dark2A314B)
+        headerView.contentView.backgroundColor = UIColor.clear
         return headerView
     }
     

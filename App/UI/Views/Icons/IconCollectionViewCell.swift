@@ -21,8 +21,8 @@ class IconCollectionViewCell : UICollectionViewCell {
     func updateUI() {
         guard let viewModel = viewModel else { return }
         
-        iconImageView.setImage(with: viewModel.url, placeholderName: viewModel.category.defaultIconName, renderingMode: .alwaysTemplate)
-        iconImageView.tintColor = UIColor.by(.textFFFFFF)
+        iconImageView.setImage(with: viewModel.url, placeholderName: viewModel.category.defaultIconName, renderingMode: .alwaysTemplate)        
+        iconImageView.tintColor = UIColor.by(.white100)
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale        
     }

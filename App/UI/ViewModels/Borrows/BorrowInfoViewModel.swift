@@ -82,8 +82,8 @@ class BorrowInfoViewModel : EntityInfoViewModel {
     }
     
     var returnColor: ColorAsset {
-        guard let borrowViewModel = borrowViewModel else { return .blue5B86F7 }
-        return borrowViewModel.isReturned ? .dark404B6F : .blue5B86F7
+        guard let borrowViewModel = borrowViewModel else { return .blue1 }
+        return borrowViewModel.isReturned ? .gray1 : .blue1
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,

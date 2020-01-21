@@ -10,8 +10,8 @@ import UIKit
 
 extension IncomeSourceEditViewController {
     func updateIconUI() {        
-        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)
-        tableController.iconView.tintColor = UIColor.by(.textFFFFFF)
+        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)        
+        tableController.iconView.tintColor = UIColor.by(.white100)
     }
     
     func updateCurrencyUI() {

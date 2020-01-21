@@ -27,7 +27,7 @@ class ExpenseCategoryTableViewCell : UITableViewCell {
         spentLabel.text = viewModel.spentRounded
         iconImageView.setImage(with: viewModel.iconURL,
                                placeholderName: viewModel.expenseCategory.basketType.iconCategory.defaultIconName,
-                               renderingMode: .alwaysTemplate)
-        iconImageView.tintColor = UIColor.by(.textFFFFFF)
+                               renderingMode: .alwaysTemplate)        
+        iconImageView.tintColor = UIColor.by(.white100)
     }
 }

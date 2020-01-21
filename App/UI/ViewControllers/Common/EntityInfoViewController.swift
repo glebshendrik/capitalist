@@ -245,7 +245,7 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
             let section = viewModel.section(at: section) as? EntityInfoTransactionsSection else { return nil }
         
         headerView.title = section.title
-        headerView.contentView.backgroundColor = UIColor.by(.dark2A314B)
+        headerView.contentView.backgroundColor = UIColor.by(.white40)
         return headerView
     }
     

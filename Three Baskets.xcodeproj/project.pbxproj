@@ -1485,6 +1485,13 @@
 			path = GraphViewModel;
 			sourceTree = "<group>";
 		};
+		FAA861A023D72E6A009DF88F /* Onbording */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Onbording;
+			sourceTree = "<group>";
+		};
 		FAA91274220C79CD00F2C251 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1939,6 +1946,7 @@
 				FA165CD421B4EF5500EAA16B /* Join */,
 				FAD88F8921B1226900BE7BC1 /* Main */,
 				FAD88F8A21B1227600BE7BC1 /* Menu */,
+				FAA861A023D72E6A009DF88F /* Onbording */,
 				FA165CDB21B652F600EAA16B /* Profile */,
 				FAA91279220C8B0F00F2C251 /* Settings */,
 				FA6F2E902244C8B4008C160F /* Statistics */,
@@ -1951,22 +1959,22 @@
 			isa = PBXGroup;
 			children = (
 				FA814F4E235D62300039471A /* Actives */,
-				FABE54E8233CFF8D00DF2B70 /* Credits */,
 				FA30B471228474DA0017470C /* Balance */,
 				FA1E632A2327D0C500081964 /* Borrows */,
-				FA66D8292293D1A800C21E8B /* Transactions */,
+				FA6270AB21CA9FD700CC0269 /* Common */,
+				FABE54E8233CFF8D00DF2B70 /* Credits */,
+				FA7DB72822102B4200559878 /* Currencies */,
 				FA66D8282293D17F00C21E8B /* ExpenseCategories */,
 				FA66D8272293D16700C21E8B /* ExpenseSources */,
-				FA66D8262293D14400C21E8B /* IncomeSources */,
-				FACC01E2224B52200044A747 /* Statistics */,
-				FA7DB72822102B4200559878 /* Currencies */,
-				FAA91274220C79CD00F2C251 /* Settings */,
 				FA0CAE2021D679C000805288 /* Icons */,
-				FA6270AB21CA9FD700CC0269 /* Common */,
-				FAC3B9BF21BE15CE0015A12F /* Onboarding */,
-				FA165CDE21B653F300EAA16B /* Profile */,
+				FA66D8262293D14400C21E8B /* IncomeSources */,
 				FAD88F8621B117CF00BE7BC1 /* Join */,
 				FAD88F8521B117BC00BE7BC1 /* Main */,
+				FAC3B9BF21BE15CE0015A12F /* Onboarding */,
+				FA165CDE21B653F300EAA16B /* Profile */,
+				FACC01E2224B52200044A747 /* Statistics */,
+				FAA91274220C79CD00F2C251 /* Settings */,
+				FA66D8292293D1A800C21E8B /* Transactions */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

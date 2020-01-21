@@ -28,8 +28,8 @@ class ActiveTableViewCell : UITableViewCell {
         costLabel.text = viewModel.costRounded
         iconImageView.setImage(with: viewModel.iconURL,
                                placeholderName: viewModel.defaultIconName,
-                               renderingMode: .alwaysTemplate)
-        iconImageView.tintColor = UIColor.by(.textFFFFFF)
+                               renderingMode: .alwaysTemplate)        
+        iconImageView.tintColor = UIColor.by(.white100)
         iconBackgroundView.backgroundColor = viewModel.basketType.iconBackgroundColor
     }
 }

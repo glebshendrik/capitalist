@@ -35,7 +35,7 @@ class IconInfoTableViewCell : EntityInfoTableViewCell {
         rasterImageView.isHidden = field.iconType != .raster
         vectorImageView.isHidden = field.iconType != .vector
         rasterImageView.setImage(with: field.iconURL, placeholderName: field.placeholder, renderingMode: .alwaysTemplate)
-        rasterImageView.tintColor = UIColor.by(.textFFFFFF)
+        rasterImageView.tintColor = UIColor.by(.white100)
         vectorImageView.sd_setImage(with: field.iconURL, completed: nil)
     }
     

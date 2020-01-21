@@ -22,7 +22,7 @@ class CreditTableViewCell : UITableViewCell {
     }
     
     var imageTintColor: UIColor {
-        return UIColor.by(.textFFFFFF)
+        return UIColor.by(.white100)
     }
     
     var viewModel: CreditViewModel? {
@@ -46,10 +46,10 @@ class CreditTableViewCell : UITableViewCell {
                                renderingMode: .alwaysTemplate)
         iconImageView.tintColor = imageTintColor
         
-        progressView.progressColor = UIColor.by(.blue6B93FB)
+        progressView.progressColor = UIColor.by(.blue1)
         progressView.limitText = viewModel?.returnAmount
         progressView.progressText = viewModel?.paidAmount
-        progressView.labelsColor = UIColor.by(.textFFFFFF)
+        progressView.labelsColor = UIColor.by(.white100)
         progressView.progressWidth = progressView.bounds.width * paymentsProgress
 //        contentView.layoutIfNeeded()
     }

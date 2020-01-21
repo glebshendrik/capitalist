@@ -232,8 +232,8 @@ extension CreditEditViewController {
 
 extension CreditEditViewController {
     func updateIconUI() {
-        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.iconDefaultImageName, renderingMode: .alwaysTemplate)
-        tableController.iconView.tintColor = UIColor.by(.textFFFFFF)
+        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.iconDefaultImageName, renderingMode: .alwaysTemplate)        
+        tableController.iconView.tintColor = UIColor.by(.white100)
     }
     
     func updateTextFieldsUI() {

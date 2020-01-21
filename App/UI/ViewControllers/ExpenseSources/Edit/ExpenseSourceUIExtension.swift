@@ -17,7 +17,7 @@ extension ExpenseSourceEditViewController {
         tableController.bankIconView.isHidden = viewModel.bankIconHidden
         
         tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)
-        tableController.iconView.tintColor = UIColor.by(.textFFFFFF)
+        tableController.iconView.tintColor = UIColor.by(.white100)
         
         tableController.bankIconView.sd_setImage(with: viewModel.selectedIconURL, completed: nil)
     }
@@ -44,8 +44,8 @@ extension ExpenseSourceEditViewController {
     
     func updateBankUI() {
         tableController.bankButton.backgroundColor = viewModel.accountConnected
-            ? UIColor.by(.gray7984A4)
-            : UIColor.by(.blue5B86F7)        
+            ? UIColor.by(.gray1)
+            : UIColor.by(.blue1)        
         tableController.bankButton.setTitle(viewModel.bankButtonTitle, for: .normal)
     }
     

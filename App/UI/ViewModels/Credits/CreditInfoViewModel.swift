@@ -61,9 +61,9 @@ class CreditInfoViewModel : EntityInfoViewModel {
         return creditViewModel.isPaid ? nil : nil
     }
     
-    var payColor: ColorAsset {
-        guard let creditViewModel = creditViewModel else { return .blue5B86F7 }
-        return creditViewModel.isPaid ? .dark404B6F : .blue5B86F7
+    var payColor: ColorAsset {        
+        guard let creditViewModel = creditViewModel else { return .blue1 }
+        return creditViewModel.isPaid ? .gray1 : .blue1
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,

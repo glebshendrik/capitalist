@@ -20,8 +20,8 @@ class BorrowTableViewCell : UITableViewCell {
         return "borrow-default-icon"
     }
     
-    var imageTintColor: UIColor {
-        return UIColor.by(.textFFFFFF)
+    var imageTintColor: UIColor {        
+        return UIColor.by(.white100)
     }
     
     var viewModel: BorrowViewModel? {

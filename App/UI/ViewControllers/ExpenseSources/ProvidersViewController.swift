@@ -44,7 +44,7 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
     
     private func setupSearchBar() {
         searchField.attributedPlaceholder = NSAttributedString(string: "Поиск",
-                                                               attributes: [NSAttributedString.Key.foregroundColor : UIColor.by(.text9EAACC)])
+                                                               attributes: [NSAttributedString.Key.foregroundColor : UIColor.by(.white64)])
     }
     
     private func updateUI() {

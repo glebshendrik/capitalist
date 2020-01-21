@@ -23,7 +23,7 @@ class ButtonInfoField : EntityInfoField {
         return fieldId
     }
     
-    init(fieldId: String, title: String?, iconName: String?, isEnabled: Bool, backgroundColor: ColorAsset = .blue5B86F7) {
+    init(fieldId: String, title: String?, iconName: String?, isEnabled: Bool, backgroundColor: ColorAsset = .blue1) {
         self.fieldId = fieldId
         self.title = title
         self.iconName = iconName

@@ -399,6 +399,77 @@
             </objects>
             <point key="canvasLocation" x="1702" y="750"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="uuY-qo-qTi">
+            <objects>
+                <viewController id="w9i-OZ-rHW" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DYu-K4-Sr8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="НАЧАЛО РАБОТЫ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ls0-67-8Dg">
+                                <rect key="frame" x="136" y="64" width="103.5" height="14"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                                <color key="textColor" name="white 0.4"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Выберите валюту и кошельки" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qsy-Mq-t8B">
+                                <rect key="frame" x="24" y="86" width="327" height="56"/>
+                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
+                                <color key="textColor" name="white 1.0"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Добавить свой вариант вы сможете на главном экране приложения" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WG2-R6-Ec7">
+                                <rect key="frame" x="24" y="150" width="327" height="37.5"/>
+                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
+                                <color key="textColor" name="white 0.64"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIF-zD-Vnb">
+                                <rect key="frame" x="16" y="227.5" width="343" height="56"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7g-QP-mPW">
+                                        <rect key="frame" x="150" y="17" width="44" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                        <color key="textColor" name="white 1.0"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49W-O2-dnC">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="56"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="49W-O2-dnC" secondAttribute="bottom" id="G3y-Kq-chm"/>
+                                    <constraint firstAttribute="trailing" secondItem="49W-O2-dnC" secondAttribute="trailing" id="H3c-FS-53Y"/>
+                                    <constraint firstAttribute="height" constant="56" id="b51-Lp-TqM"/>
+                                    <constraint firstItem="49W-O2-dnC" firstAttribute="leading" secondItem="AIF-zD-Vnb" secondAttribute="leading" id="jRm-h5-rOm"/>
+                                    <constraint firstItem="49W-O2-dnC" firstAttribute="top" secondItem="AIF-zD-Vnb" secondAttribute="top" id="lRb-iY-Eg6"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="black 2"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="qsy-Mq-t8B" secondAttribute="trailing" constant="24" id="A2r-Xz-1sN"/>
+                            <constraint firstItem="AIF-zD-Vnb" firstAttribute="top" secondItem="WG2-R6-Ec7" secondAttribute="bottom" constant="40" id="Bt6-ab-eP1"/>
+                            <constraint firstItem="Ls0-67-8Dg" firstAttribute="centerX" secondItem="DYu-K4-Sr8" secondAttribute="centerX" id="CeA-V3-7K1"/>
+                            <constraint firstItem="WG2-R6-Ec7" firstAttribute="top" secondItem="qsy-Mq-t8B" secondAttribute="bottom" constant="8" id="H77-qb-LT0"/>
+                            <constraint firstItem="qsy-Mq-t8B" firstAttribute="leading" secondItem="wBz-kV-bB8" secondAttribute="leading" constant="24" id="Xgd-vB-0zs"/>
+                            <constraint firstItem="AIF-zD-Vnb" firstAttribute="leading" secondItem="wBz-kV-bB8" secondAttribute="leading" constant="16" id="hxk-aa-yuE"/>
+                            <constraint firstItem="WG2-R6-Ec7" firstAttribute="leading" secondItem="wBz-kV-bB8" secondAttribute="leading" constant="24" id="lyB-wh-fVh"/>
+                            <constraint firstItem="wBz-kV-bB8" firstAttribute="trailing" secondItem="AIF-zD-Vnb" secondAttribute="trailing" constant="16" id="mo6-me-kTZ"/>
+                            <constraint firstItem="wBz-kV-bB8" firstAttribute="trailing" secondItem="WG2-R6-Ec7" secondAttribute="trailing" constant="24" id="pVj-mE-oAD"/>
+                            <constraint firstItem="qsy-Mq-t8B" firstAttribute="top" secondItem="Ls0-67-8Dg" secondAttribute="bottom" constant="8" id="rBE-3x-Tfh"/>
+                            <constraint firstItem="Ls0-67-8Dg" firstAttribute="top" secondItem="wBz-kV-bB8" secondAttribute="top" constant="64" id="xTr-Zv-hIu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wBz-kV-bB8"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TfM-yX-4Nm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1943" y="1518"/>
+        </scene>
     </scenes>
     <resources>
         <image name="adviser-pose1" width="196" height="248"/>

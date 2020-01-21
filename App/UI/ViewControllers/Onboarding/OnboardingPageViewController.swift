@@ -11,7 +11,7 @@ import UIKit
 class OnboardingPageGradientViewController : UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        parent?.view.backgroundColor = UIColor.by(.dark333D5B)
+        parent?.view.backgroundColor = UIColor.by(.black2)
     }    
 }
 
@@ -24,6 +24,6 @@ class OnboardingPage5ViewController : OnboardingPageGradientViewController {
 class OnboardingPage6ViewController : OnboardingPageGradientViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.parent?.view.backgroundColor = UIColor.by(.dark2A314B)
+        self.parent?.view.backgroundColor = UIColor.by(.black2)
     }
 }

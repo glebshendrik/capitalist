@@ -17,8 +17,8 @@ class ExpenseSourceTableViewCell : UITableViewCell {
         return "expense-source-default-icon"
     }
     
-    var imageTintColor: UIColor {
-        return UIColor.by(.textFFFFFF)
+    var imageTintColor: UIColor {        
+        return UIColor.by(.white100)
     }
     
     var viewModel: ExpenseSourceViewModel? {
