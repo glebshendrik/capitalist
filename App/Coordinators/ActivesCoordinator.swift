@@ -10,8 +10,6 @@ import Foundation
 import PromiseKit
 
 class ActivesCoordinator : ActivesCoordinatorProtocol {
-    
-    
     private let userSessionManager: UserSessionManagerProtocol
     private let activesService: ActivesServiceProtocol
     private let activeTypesService: ActiveTypesServiceProtocol

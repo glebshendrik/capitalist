@@ -49,5 +49,7 @@ class ServicesAssembly: Assembly {
         container.autoregister(ActiveTypesServiceProtocol.self, initializer: ActiveTypesService.init)
         
         container.autoregister(ActivesServiceProtocol.self, initializer: ActivesService.init)
+        
+        container.autoregister(TransactionableExamplesServiceProtocol.self, initializer: TransactionableExamplesService.init)
     }
 }

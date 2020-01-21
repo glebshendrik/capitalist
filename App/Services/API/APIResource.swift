@@ -106,6 +106,8 @@ struct APIResource {
             return APIResource(singular: "active", plural: "actives")
         case .indexActiveTypes:
             return APIResource(singular: "active_type", plural: "active_types")
+        case .indexTransactionableExamples:
+            return APIResource(singular: "transactionable_example", plural: "transactionable_examples")
         }
     }
 }

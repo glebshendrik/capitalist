@@ -41,5 +41,7 @@ class CoordinatorsAssembly: Assembly {
         container.autoregister(CreditsCoordinatorProtocol.self, initializer: CreditsCoordinator.init)
         
         container.autoregister(ActivesCoordinatorProtocol.self, initializer: ActivesCoordinator.init)
+        
+        container.autoregister(TransactionableExamplesCoordinatorProtocol.self, initializer: TransactionableExamplesCoordinator.init)
     }
 }

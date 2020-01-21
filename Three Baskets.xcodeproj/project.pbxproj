@@ -278,6 +278,11 @@
 		FAA6963F2398449B00C134D1 /* ActionsControllingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA6963E2398449B00C134D1 /* ActionsControllingExtension.swift */; };
 		FAA6964123990F6000C134D1 /* TransactionableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA6964023990F6000C134D1 /* TransactionableCell.swift */; };
 		FAA69643239A953000C134D1 /* TransactionCreationInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA69642239A952F00C134D1 /* TransactionCreationInfoViewController.swift */; };
+		FAA8619723D72A5A009DF88F /* TransactionableExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA8619623D72A5A009DF88F /* TransactionableExample.swift */; };
+		FAA8619923D72C24009DF88F /* TransactionableExamplesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA8619823D72C24009DF88F /* TransactionableExamplesServiceProtocol.swift */; };
+		FAA8619B23D72C90009DF88F /* TransactionableExamplesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA8619A23D72C90009DF88F /* TransactionableExamplesService.swift */; };
+		FAA8619D23D72CFF009DF88F /* TransactionableExamplesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA8619C23D72CFF009DF88F /* TransactionableExamplesCoordinatorProtocol.swift */; };
+		FAA8619F23D72D38009DF88F /* TransactionableExamplesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA8619E23D72D38009DF88F /* TransactionableExamplesCoordinator.swift */; };
 		FAA91271220B35F600F2C251 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA91270220B35F600F2C251 /* Currency.swift */; };
 		FAA91273220C710300F2C251 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA91272220C710300F2C251 /* Settings.storyboard */; };
 		FAA91276220C79EA00F2C251 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA91275220C79EA00F2C251 /* SettingsViewController.swift */; };
@@ -733,6 +738,11 @@
 		FAA6963E2398449B00C134D1 /* ActionsControllingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsControllingExtension.swift; sourceTree = "<group>"; };
 		FAA6964023990F6000C134D1 /* TransactionableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableCell.swift; sourceTree = "<group>"; };
 		FAA69642239A952F00C134D1 /* TransactionCreationInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCreationInfoViewController.swift; sourceTree = "<group>"; };
+		FAA8619623D72A5A009DF88F /* TransactionableExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExample.swift; sourceTree = "<group>"; };
+		FAA8619823D72C24009DF88F /* TransactionableExamplesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExamplesServiceProtocol.swift; sourceTree = "<group>"; };
+		FAA8619A23D72C90009DF88F /* TransactionableExamplesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExamplesService.swift; sourceTree = "<group>"; };
+		FAA8619C23D72CFF009DF88F /* TransactionableExamplesCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExamplesCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		FAA8619E23D72D38009DF88F /* TransactionableExamplesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExamplesCoordinator.swift; sourceTree = "<group>"; };
 		FAA91270220B35F600F2C251 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		FAA91272220C710300F2C251 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		FAA91275220C79EA00F2C251 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -1732,6 +1742,7 @@
 				FA0570ED232A362F002B4706 /* BorrowsCoordinator.swift */,
 				FABE54E1233BEFF100DF2B70 /* CreditsCoordinator.swift */,
 				FAB5BE4C2352193C000466AE /* ActivesCoordinator.swift */,
+				FAA8619E23D72D38009DF88F /* TransactionableExamplesCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1761,6 +1772,7 @@
 				FABE54FA233F865B00DF2B70 /* CreditTypesService.swift */,
 				FAB5BE44235213E2000466AE /* ActiveTypesService.swift */,
 				FAB5BE48235217ED000466AE /* ActivesService.swift */,
+				FAA8619A23D72C90009DF88F /* TransactionableExamplesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1798,6 +1810,7 @@
 				FAD88F3821AEBAA600BE7BC1 /* Session.swift */,
 				FA6F2E8622434D59008C160F /* Transaction.swift */,
 				FAD88F5C21AEC28300BE7BC1 /* User.swift */,
+				FAA8619623D72A5A009DF88F /* TransactionableExample.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1847,6 +1860,7 @@
 				FA0570EB232A35FC002B4706 /* BorrowsCoordinatorProtocol.swift */,
 				FABE54DF233BEFA200DF2B70 /* CreditsCoordinatorProtocol.swift */,
 				FAB5BE4A235218DD000466AE /* ActivesCoordinatorProtocol.swift */,
+				FAA8619C23D72CFF009DF88F /* TransactionableExamplesCoordinatorProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1873,6 +1887,7 @@
 				FABE54F8233F861800DF2B70 /* CreditTypesServiceProtocol.swift */,
 				FAB5BE42235213B5000466AE /* ActiveTypesServiceProtocol.swift */,
 				FAB5BE462352176B000466AE /* ActivesServiceProtocol.swift */,
+				FAA8619823D72C24009DF88F /* TransactionableExamplesServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2281,6 +2296,7 @@
 				FAEB0CCB22CF67AE00622994 /* HighlightButton.swift in Sources */,
 				FAC3B9C921C0F4610015A12F /* IncomeSourcesService.swift in Sources */,
 				FAB5BE5123533B42000466AE /* TransactionEditPropertiesExtension.swift in Sources */,
+				FAA8619723D72A5A009DF88F /* TransactionableExample.swift in Sources */,
 				FAA426182236518200B64925 /* Budget.swift in Sources */,
 				FAA426022230F5BA00B64925 /* TransactionsServiceProtocol.swift in Sources */,
 				FA7DB72D22102BF900559878 /* CurrenciesViewModel.swift in Sources */,
@@ -2434,6 +2450,7 @@
 				FA7276DE2254A0400086D4D1 /* SelectableFilterCollectionViewCell.swift in Sources */,
 				FAA5D578238F9FAA00CC53AD /* CreditInfoViewController.swift in Sources */,
 				FA6918A421F0EF03003639F6 /* ExpenseCategoryEditTableController.swift in Sources */,
+				FAA8619B23D72C90009DF88F /* TransactionableExamplesService.swift in Sources */,
 				FA852384238876B5008C09AB /* Transactionable.swift in Sources */,
 				FA0CADFD21D257F400805288 /* ExpenseSource.swift in Sources */,
 				FA0CAE1921D66CCD00805288 /* IconsService.swift in Sources */,
@@ -2483,6 +2500,7 @@
 				FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */,
 				FA81748C222E2B8700EE6116 /* CommentViewController.swift in Sources */,
 				FA0CADFF21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift in Sources */,
+				FAA8619923D72C24009DF88F /* TransactionableExamplesServiceProtocol.swift in Sources */,
 				FA2847F822F0802E003F114A /* ExpenseCategoryEditingExtension.swift in Sources */,
 				FA0CAE0721D266F100805288 /* ExpenseSourceViewModel.swift in Sources */,
 				FAC3B9D421C2796C0015A12F /* IncomeSourceCollectionViewCell.swift in Sources */,
@@ -2491,6 +2509,7 @@
 				FAE05FAC235A212D0014D034 /* BasketItemView.swift in Sources */,
 				FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */,
 				FA6F2E8722434D59008C160F /* Transaction.swift in Sources */,
+				FAA8619F23D72D38009DF88F /* TransactionableExamplesCoordinator.swift in Sources */,
 				FACEC15D2302AC8900611B2C /* ProfileEditTableController.swift in Sources */,
 				FA56ABA72360CF6300E4D0E3 /* BasketItemCollectionViewCell.swift in Sources */,
 				FAED7DA421EC7FB600BF6FE1 /* ExpenseCategoriesServiceProtocol.swift in Sources */,
@@ -2582,6 +2601,7 @@
 				FA28480722F338F2003F114A /* FormSwitchValueField.swift in Sources */,
 				FA7276E02254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift in Sources */,
 				FA6910A82300EF48001209FC /* FormSubmitViewController.swift in Sources */,
+				FAA8619D23D72CFF009DF88F /* TransactionableExamplesCoordinatorProtocol.swift in Sources */,
 				FA16FC69223A5A060053C273 /* IncomeSourcesViewModel.swift in Sources */,
 				FA7EE00422CDA1B30054EAD3 /* AccountCell.swift in Sources */,
 				FAA426062230F61E00B64925 /* TransactionsService.swift in Sources */,

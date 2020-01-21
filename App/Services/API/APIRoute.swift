@@ -136,6 +136,9 @@ enum APIRoute: URLRequestConvertible {
     case indexProviderConnections(userId: Int, providerId: String)
     case createProviderConnection(form: ProviderConnectionCreationForm)
     
+    // TransactionableExamples
+    case indexTransactionableExamples(transactionableType: TransactionableType, basketType: BasketType?)
+    
     var method: HTTPMethod {
         return APIRouteMethod.method(for: self)
     }

@@ -37,7 +37,8 @@ struct APIRoutePath {
         case .indexIcons,
              .indexCurrencies,
              .indexCreditTypes,
-             .indexActiveTypes:                             return collection(route)
+             .indexActiveTypes,
+             .indexTransactionableExamples:                 return collection(route)
             
         case .indexExpenseCategories(let basketId, _):      return collection(route, basketId: basketId)
         case .indexActives(let basketId):                   return collection(route, basketId: basketId)
