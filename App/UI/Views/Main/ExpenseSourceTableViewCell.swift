@@ -14,7 +14,7 @@ class ExpenseSourceTableViewCell : UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     
     var placeholderName: String {
-        return "wallet-default-icon"
+        return "expense-source-default-icon"
     }
     
     var imageTintColor: UIColor {

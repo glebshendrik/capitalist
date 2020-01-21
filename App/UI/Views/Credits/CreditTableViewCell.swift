@@ -18,7 +18,7 @@ class CreditTableViewCell : UITableViewCell {
     @IBOutlet weak var progressView: ProgressView!
     
     var placeholderName: String {
-        return IconCategory.expenseSourceDebt.defaultIconName
+        return "credit-default-icon"
     }
     
     var imageTintColor: UIColor {

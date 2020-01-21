@@ -71,7 +71,7 @@ class IncomeSourceViewModel : TransactionSource {
     }
     
     var defaultIconName: String {
-        return IconCategory.expenseCategoryRisk.defaultIconName
+        return TransactionableType.incomeSource.defaultIconName
     }
     
     var isDeleted: Bool {

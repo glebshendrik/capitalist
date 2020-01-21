@@ -42,9 +42,9 @@ class EditableCellButton : UIButton {
     func setup() {
         translatesAutoresizingMaskIntoConstraints = false
         
-        backgroundColor = UIColor.by(.dark404B6F)
+        backgroundColor = UIColor.by(.black1)
         cornerRadius = 8
-        tintColor = UIColor.by(.textFFFFFF)
+        tintColor = UIColor.by(.white100)
         addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
     }
     

@@ -15,7 +15,6 @@ class LandingViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        loaderImageView.showCoinLoader()
     }
     
     func update(loadingMessage: String) {

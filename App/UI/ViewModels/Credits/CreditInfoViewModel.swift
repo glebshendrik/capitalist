@@ -116,8 +116,7 @@ class CreditInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: CreditInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,
-                                                       placeholder: IconCategory.expenseSourceDebt.defaultIconName,
-                                                       backgroundImageName: nil),
+                                                       placeholder: "credit-default-icon"),
                                          BasicInfoField(fieldId: CreditInfoField.creditType.rawValue,
                                                         title: "Тип кредита",
                                                         value: creditViewModel.typeName)]

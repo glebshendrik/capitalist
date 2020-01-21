@@ -39,7 +39,7 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
     
     lazy var toolbarTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Roboto-Regular", size: 16)
+        label.font = UIFont(name: "Roboto-Medium", size: 18)
         label.autoresizingMask = .flexibleWidth
         label.width = 0.0
         label.textColor = UIColor.by(.white100)
@@ -65,9 +65,9 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
         labelButton.width = 0.0
         
         
-        let closeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "big-close-button").withRenderingMode(.alwaysTemplate), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.didTapCloseButton(_:)))
+        let closeButton = UIBarButtonItem(image: UIImage(named: "close-icon")?.withRenderingMode(.alwaysTemplate), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.didTapCloseButton(_:)))
         
-        let saveButton = UIBarButtonItem(image: #imageLiteral(resourceName: "save-circle-big-icon").withRenderingMode(.alwaysOriginal), style: UIBarButtonItem.Style.done, target: self, action: #selector(self.didTapSaveButton(_:)))
+        let saveButton = UIBarButtonItem(image: UIImage(named: "save-icon"), style: UIBarButtonItem.Style.done, target: self, action: #selector(self.didTapSaveButton(_:)))
         
         let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         

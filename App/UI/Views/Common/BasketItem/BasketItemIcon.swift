@@ -11,17 +11,17 @@ import AlamofireImage
 import SnapKit
 
 class BasketItemIcon : BasketItemView {
-    lazy var backgroundImageView: UIImageView = { return UIImageView() }()
+    lazy var backgroundView: UIView = { return UIImageView() }()
     lazy var iconImageView: UIImageView = { return UIImageView() }()
     
     var backgroundCornerRadius: CGFloat = 0.0 {
         didSet {
-            backgroundImageView.cornerRadius = backgroundCornerRadius
+            backgroundView.cornerRadius = backgroundCornerRadius
             cornerRadius = backgroundCornerRadius
         }
     }
     
-    var iconTintColor: UIColor = UIColor.by(.textFFFFFF) {
+    var iconTintColor: UIColor = UIColor.by(.white100) {
         didSet {
             iconImageView.tintColor = iconTintColor
         }
@@ -33,18 +33,12 @@ class BasketItemIcon : BasketItemView {
         }
     }
     
-    var backgroundImage: UIImage? = nil {
+    var backgroundViewColor: UIColor? = nil {
         didSet {
-            backgroundImageView.image = backgroundImage
+            backgroundView.backgroundColor = backgroundViewColor
         }
     }
-    
-    var isBackgroundHidden: Bool = false {
-        didSet {
-            backgroundImageView.isHidden = isBackgroundHidden
-        }
-    }
-    
+        
     var iconURL: URL? = nil {
         didSet {
             updateIcon()
@@ -54,7 +48,7 @@ class BasketItemIcon : BasketItemView {
     //
     override func setup() {
         super.setup()
-        setupBackgroundImageView()
+        setupBackgroundView()
         setupIcon()
     }
         
@@ -64,10 +58,10 @@ class BasketItemIcon : BasketItemView {
     }
     
     // Setup
-    private func setupBackgroundImageView() {
-        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundImageView.cornerRadius = backgroundCornerRadius
-        addSubview(backgroundImageView)
+    private func setupBackgroundView() {
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.cornerRadius = backgroundCornerRadius
+        addSubview(backgroundView)
     }
     
     private func setupIcon() {
@@ -84,14 +78,14 @@ class BasketItemIcon : BasketItemView {
     
     // Constraints
     func setupBackgroundConstraints() {
-        backgroundImageView.snp.makeConstraints { make in
+        backgroundView.snp.makeConstraints { make in
             make.left.top.right.bottom.equalToSuperview()
         }
     }
     
     func setupIconConstraints() {
         iconImageView.snp.makeConstraints { make in
-            make.width.height.lessThanOrEqualTo(20)
+            make.width.height.lessThanOrEqualTo(22)
             make.center.equalToSuperview()
         }
     }

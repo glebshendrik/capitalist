@@ -51,6 +51,10 @@ class BasketsViewModel {
         return basketViewModelBy(basketType: .safe)?.spent
     }
     
+    var selectedBasketSpent: String? {
+        return basketViewModelBy(basketType: selectedBasketType)?.spent
+    }
+    
     init(baskets: [Basket], basketTypeToSelect: BasketType) {
         basketViewModels = baskets.map { BasketViewModel(basket: $0) }
         selectBasketType(basketTypeToSelect)

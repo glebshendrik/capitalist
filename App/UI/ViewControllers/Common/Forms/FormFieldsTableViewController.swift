@@ -44,6 +44,7 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
         returnKeyHandler = IQKeyboardReturnKeyHandler(viewController: self)
         returnKeyHandler.delegate = self
         returnKeyHandler.lastTextFieldReturnKeyType = .done
+        
     }
     
     func updateTable(animated: Bool = true) {
@@ -89,6 +90,34 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
 class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController {
     var saveButton: KeyboardHighlightButton = KeyboardHighlightButton()
     var saveButtonTitle: String { return "Save" }
+    var saveButtonInForm: UIButton? { return nil }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
+    @objc func keyboardWillAppear() {
+        guard let saveButtonInForm = saveButtonInForm else { return }
+        saveButtonInForm.isEnabled = false
+        UIView.animate(withDuration: 0.3) {
+            saveButtonInForm.alpha = 0.0
+        }
+    }
+
+    @objc func keyboardWillDisappear() {
+        guard let saveButtonInForm = saveButtonInForm else { return }
+        saveButtonInForm.isEnabled = true
+        UIView.animate(withDuration: 0.3) {
+            saveButtonInForm.alpha = 1.0            
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func setupUI() {
         super.setupUI()
@@ -97,11 +126,11 @@ class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController
     
     func setupSaveButton() {
         saveButton.setTitle(saveButtonTitle, for: .normal)
-        saveButton.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 14)!
-        saveButton.titleLabel?.textColor = UIColor.by(.textFFFFFF)
+        saveButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)!
+        saveButton.titleLabel?.textColor = UIColor.by(.white100)
         saveButton.backgroundColor = UIColor.by(.blue6A92FA)
-        saveButton.backgroundColorForNormal = UIColor.by(.blue6A92FA)
-        saveButton.backgroundColorForHighlighted = UIColor.by(.blue5B86F7)        
+        saveButton.backgroundColorForNormal = UIColor.by(.blue1)
+        saveButton.backgroundColorForHighlighted = UIColor.by(.blue1)
         saveButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
     }
     
@@ -121,5 +150,5 @@ class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController
         field.textField.isSecureTextEntry = true
         field.textField.textContentType = UITextContentType.password
         field.textField.inputAccessoryView = saveButton
-    }    
+    }
 }

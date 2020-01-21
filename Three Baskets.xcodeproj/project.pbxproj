@@ -284,6 +284,7 @@
 		FAA9127B220C8B2500F2C251 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA9127A220C8B2500F2C251 /* SettingsViewModel.swift */; };
 		FAA9127D220D249100F2C251 /* SettingsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA9127C220D249100F2C251 /* SettingsCoordinatorProtocol.swift */; };
 		FAA9127F220D24AD00F2C251 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA9127E220D24AD00F2C251 /* SettingsCoordinator.swift */; };
+		FAA993DD23CF5265002456C2 /* AppUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA993DC23CF5265002456C2 /* AppUpdateViewController.swift */; };
 		FAAC99B123B31A59009ADB84 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAC99A423B31A59009ADB84 /* Roboto-Medium.ttf */; };
 		FAAC99B223B31A59009ADB84 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAC99A523B31A59009ADB84 /* Roboto-Light.ttf */; };
 		FAAC99B323B31A59009ADB84 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAC99A623B31A59009ADB84 /* Roboto-Regular.ttf */; };
@@ -351,7 +352,6 @@
 		FAC3B9CB21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CA21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift */; };
 		FAC3B9CD21C0F7670015A12F /* IncomeSourcesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */; };
 		FAC3B9CF21C11F850015A12F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9CE21C11F850015A12F /* MainViewModel.swift */; };
-		FAC3B9D121C131390015A12F /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9D021C131390015A12F /* JoinViewController.swift */; };
 		FAC3B9D421C2796C0015A12F /* IncomeSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */; };
 		FAC9BA6822AFD2E200310F6B /* ProviderConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC9BA6722AFD2E200310F6B /* ProviderConnectionViewController.swift */; };
 		FACC01E4224B52460044A747 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC01E3224B52460044A747 /* StatisticsViewController.swift */; };
@@ -739,6 +739,7 @@
 		FAA9127A220C8B2500F2C251 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		FAA9127C220D249100F2C251 /* SettingsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FAA9127E220D24AD00F2C251 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		FAA993DC23CF5265002456C2 /* AppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdateViewController.swift; sourceTree = "<group>"; };
 		FAAC99A423B31A59009ADB84 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		FAAC99A523B31A59009ADB84 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		FAAC99A623B31A59009ADB84 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -808,7 +809,6 @@
 		FAC3B9CA21C0F60C0015A12F /* IncomeSourcesCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourcesCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FAC3B9CC21C0F7670015A12F /* IncomeSourcesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourcesCoordinator.swift; sourceTree = "<group>"; };
 		FAC3B9CE21C11F850015A12F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		FAC3B9D021C131390015A12F /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		FAC3B9D321C2796B0015A12F /* IncomeSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAC9BA6722AFD2E200310F6B /* ProviderConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConnectionViewController.swift; sourceTree = "<group>"; };
 		FACC01E3224B52460044A747 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -1213,6 +1213,7 @@
 				FA16FC66223A30700053C273 /* SlideUpContainerViewController.swift */,
 				FA630C2522939F4500242AB3 /* ReminderEditViewController.swift */,
 				FA630C2722939FEA00242AB3 /* ReminderEditTableViewController.swift */,
+				FAA993DC23CF5265002456C2 /* AppUpdateViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1992,7 +1993,6 @@
 			isa = PBXGroup;
 			children = (
 				FAD88F8321B0FB7800BE7BC1 /* LandingViewController.swift */,
-				FAC3B9D021C131390015A12F /* JoinViewController.swift */,
 				FA165CD221B4EB6D00EAA16B /* RegistrationViewController.swift */,
 				FACEC156230133CC00611B2C /* RegistrationTableController.swift */,
 				FA165CE521B6669500EAA16B /* LoginViewController.swift */,
@@ -2457,6 +2457,7 @@
 				FACC01F5224BC4B40044A747 /* TransactionsLoadingTableViewCell.swift in Sources */,
 				FAA5D56A238BEA1500CC53AD /* ExpenseSourceInfoViewController.swift in Sources */,
 				FA2847FA22F0807A003F114A /* ExpenseCategoryUIExtension.swift in Sources */,
+				FAA993DD23CF5265002456C2 /* AppUpdateViewController.swift in Sources */,
 				FA165CE421B65F2F00EAA16B /* ValidationResult.swift in Sources */,
 				FA0570E6232A338F002B4706 /* BorrowsServiceProtocol.swift in Sources */,
 				FAD88F4F21AEC1A500BE7BC1 /* UsersService.swift in Sources */,
@@ -2558,7 +2559,6 @@
 				FAC3B9C721C0F2B00015A12F /* IncomeSourcesServiceProtocol.swift in Sources */,
 				FAA6963F2398449B00C134D1 /* ActionsControllingExtension.swift in Sources */,
 				FA9F962C21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift in Sources */,
-				FAC3B9D121C131390015A12F /* JoinViewController.swift in Sources */,
 				FA689F392285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift in Sources */,
 				FA2847F422F0560D003F114A /* IncomeSourceEditingExtension.swift in Sources */,
 				FAC3B9C321BE74CE0015A12F /* OnboardingPageViewController.swift in Sources */,
@@ -2796,7 +2796,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2903,7 +2903,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

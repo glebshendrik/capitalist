@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import BetterSegmentedControl
 
 extension BalanceViewController {
     
     func select(_ balanceCategory: BalanceCategory) {
         viewModel.selectedBalanceCategory = balanceCategory
-        updateTabsUI()
         updateBalanceCategoryUI()
     }
     
     func setupUI() {
         setupNavigationBar()
+        setupBalanceTabs()
         setupTables()
         setupLoaders()        
         setupNotifications()
@@ -26,6 +27,30 @@ extension BalanceViewController {
     private func setupNavigationBar() {
         setupNavigationBarAppearance()
         navigationItem.title = "Баланс"
+    }
+    
+    func setupBalanceTabs() {
+        guard !tabsInitialized else { return }
+        tabs.segments = LabelSegment.segments(withTitles: ["КОШЕЛЬКИ", "АКТИВЫ"],
+                                              normalBackgroundColor: UIColor.clear,
+                                              normalFont: UIFont(name: "Roboto-Regular", size: 12)!,
+                                              normalTextColor: UIColor.by(.white100),
+                                              selectedBackgroundColor: UIColor.by(.white12),
+                                              selectedFont: UIFont(name: "Roboto-Regular", size: 12)!,
+                                              selectedTextColor: UIColor.by(.white100))
+        tabs.addTarget(self, action: #selector(didChangeBalanceTab(_:)), for: .valueChanged)
+        tabsInitialized = true
+    }
+    
+    @objc func didChangeBalanceTab(_ sender: Any) {
+        switch tabs.index {
+        case 0:
+            select(.expenseSources)
+        case 1:
+            select(.actives)
+        default:
+            return
+        }
     }
     
     private func setupNotifications() {
@@ -52,7 +77,6 @@ extension BalanceViewController {
     }
     
     func updateUI() {
-        updateTabsUI()
         updateBalanceCategoryUI()
         updateBalanceAmountsUI()
         updateExpenseSourcesUI()
@@ -70,35 +94,6 @@ extension BalanceViewController {
     
     func updateActivesUI() {
         activesTableView.reloadData(with: .automatic)
-    }
-    
-    func updateTabsUI() {
-                
-        func tabsAppearances(for balanceCategory: BalanceCategory) -> (expenseSources: TabAppearance, actives: TabAppearance) {
-            
-            let selectedColor = UIColor.by(.textFFFFFF)
-            let unselectedColor = UIColor.by(.text9EAACC)
-            
-            let selectedTabAppearance: TabAppearance = (textColor: selectedColor, isHidden: false)
-            let unselectedTabAppearance: TabAppearance = (textColor: unselectedColor, isHidden: true)
-            
-            switch balanceCategory {
-            case .expenseSources:
-                return (expenseSources: selectedTabAppearance,
-                        actives: unselectedTabAppearance)
-            case .actives:
-                return (expenseSources: unselectedTabAppearance,
-                        actives: selectedTabAppearance)
-            }
-        }
-        
-        let tabsAppearance = tabsAppearances(for: viewModel.selectedBalanceCategory)
-        
-        expenseSourcesLabel.textColor = tabsAppearance.expenseSources.textColor
-        activesLabel.textColor = tabsAppearance.actives.textColor
-        
-        expenseSourcesSelectionIndicator.isHidden = tabsAppearance.expenseSources.isHidden
-        activesSelectionIndicator.isHidden = tabsAppearance.actives.isHidden
     }
     
     func updateBalanceCategoryUI() {

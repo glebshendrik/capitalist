@@ -11,17 +11,18 @@ import SideMenu
 
 extension MainViewController {
     var fastPressDuration: TimeInterval {
-        return 0.0525
+        return 0.2525
     }
     
     var slowPressDuration: TimeInterval {
-        return 0.5
+        return 0.7
     }
     
     func setupUI() {
         setupIncomeSourcesCollectionView()
         setupExpenseSourcesCollectionView()
         setupBasketsItemsCollectionView()
+        setupBasketsTabs()
         setupNavigationBar()
         setupMainMenu()
         setupLoaders()
@@ -137,8 +138,7 @@ extension MainViewController {
     private func layoutBasketItems(collectionView: UICollectionView) {
         columnsPagedLayout(collectionView: collectionView,
                            columns: 4,
-                           itemWidth: 68,
-                           itemHeight: 100,
+                           itemHeight: 120,
                            horizontalInset: 30,
                            verticalInset: 6)
     }
@@ -146,7 +146,7 @@ extension MainViewController {
     
     private func layoutIncomeSourcesCollectionView() {
         fillLayout(collectionView: incomeSourcesCollectionView,
-                   itemHeight: 50.0,
+                   itemHeight: 48.0,
                    innerSpace: 2.0,
                    outerSpace: 1.0,
                    columns: 3)
@@ -154,7 +154,7 @@ extension MainViewController {
     
     private func layoutExpenseSourcesCollectionView() {
         fillLayout(collectionView: expenseSourcesCollectionView,
-                   itemHeight: 54.0,
+                   itemHeight: 68.0,
                    innerSpace: 2.0,
                    outerSpace: 1.0,
                    columns: 3)
@@ -162,7 +162,6 @@ extension MainViewController {
     
     private func columnsPagedLayout(collectionView: UICollectionView,
                                     columns: Int,
-                                    itemWidth: CGFloat,
                                     itemHeight: CGFloat,
                                     horizontalInset: CGFloat,
                                     verticalInset: CGFloat) {
@@ -199,17 +198,5 @@ extension MainViewController {
             
             layout.itemSize = CGSize(width: width, height: itemHeight)
         }
-    }
-}
-
-extension MainViewController {
-    @objc func appMovedToForeground() {
-        setVisibleCells(editing: isEditingItems)
-    }
-}
-
-extension MainViewController {
-    @objc func finantialDataInvalidated() {
-        loadData()
     }
 }

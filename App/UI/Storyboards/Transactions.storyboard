@@ -12,9 +12,6 @@
         <array key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
         </array>
-        <array key="Rubik-Regular.ttf">
-            <string>Rubik-Regular</string>
-        </array>
     </customFonts>
     <scenes>
         <!--Transaction Edit View Controller-->
@@ -50,7 +47,7 @@
                                 <action selector="didTapCancelButton:" destination="SQP-HC-aPq" id="JAJ-De-w26"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="save-circle-icon" id="zyK-Ch-lTf">
+                        <barButtonItem key="rightBarButtonItem" image="save-icon" id="zyK-Ch-lTf">
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapSaveButton:" destination="SQP-HC-aPq" id="Ri5-7A-6nu"/>
@@ -126,9 +123,9 @@
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cAf-Jf-ROT">
                                                             <rect key="frame" x="0.0" y="0.0" width="187.5" height="45"/>
-                                                            <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                             <state key="normal" title="Вчера">
-                                                                <color key="titleColor" name="text FFFFFF"/>
+                                                                <color key="titleColor" name="white 1.0"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="didTapYesterdayButton:" destination="7dy-Ys-YgL" eventType="touchUpInside" id="FKb-mm-qZ4"/>
@@ -136,11 +133,11 @@
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="elw-9a-obx">
                                                             <rect key="frame" x="187.5" y="0.0" width="187.5" height="45"/>
-                                                            <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                             <color key="tintColor" name="text FFFFFF"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                                             <state key="normal" title="Выбрать дату" image="calendar-icon">
-                                                                <color key="titleColor" name="text FFFFFF"/>
+                                                                <color key="titleColor" name="white 1.0"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="didTapCalendarButton:" destination="7dy-Ys-YgL" eventType="touchUpInside" id="2aJ-mX-Tz8"/>
@@ -296,8 +293,8 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Комментарий" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIv-Br-BcV">
                                                     <rect key="frame" x="16" y="10" width="109.5" height="20"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
-                                                    <color key="textColor" name="text FFFFFF"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                                    <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFC-2i-b21">
@@ -346,11 +343,11 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xew-SX-Imp">
                                                     <rect key="frame" x="32" y="0.0" width="311" height="65"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <color key="tintColor" name="text FFFFFF"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                    <color key="tintColor" name="red 1"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                                     <state key="normal" title="Удалить" image="remove-icon">
-                                                        <color key="titleColor" name="text FFFFFF"/>
+                                                        <color key="titleColor" name="red 1"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="didTapRemoveButton:" destination="7dy-Ys-YgL" eventType="touchUpInside" id="xHK-ce-x3X"/>
@@ -409,15 +406,18 @@
         <image name="close-icon" width="14.5" height="14.5"/>
         <image name="loader-1" width="55" height="31"/>
         <image name="remove-icon" width="17" height="20"/>
-        <image name="save-circle-icon" width="24" height="24"/>
+        <image name="save-icon" width="16" height="14"/>
         <namedColor name="black 2">
             <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="dark 2A314B">
-            <color red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="red 1">
+            <color red="1" green="0.40000000000000002" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="text FFFFFF">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.91764705882352937" green="0.93333333333333335" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white 0.04">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>

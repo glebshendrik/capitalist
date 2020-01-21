@@ -14,6 +14,8 @@ protocol TitleViewDelegate : class {
 
 class TitleView : CustomView {
     weak var delegate: TitleViewDelegate? = nil
+    @IBOutlet weak var adviser: UIImageView!
+    @IBOutlet weak var tipAnchor: UIView!
     
     @IBAction func didTap(_ sender: Any) {
         delegate?.didTapTitle()

@@ -106,10 +106,12 @@ class MenuViewController : StaticTableViewController, UIMessagePresenterManagerD
     }
     
     func setupProgressUI() {
-        incomeProgress.progressColor = UIColor.by(.blue6B93FB)
-        incomeProgress.labelsColor = UIColor.by(.textFFFFFF)
-        expensesProgress.progressColor = UIColor.by(.blue6B93FB)
-        expensesProgress.labelsColor = UIColor.by(.textFFFFFF)
+        incomeProgress.progressColor = UIColor.by(.blue1)
+        incomeProgress.labelsColor = UIColor.by(.white100)
+        incomeProgress.labelsFont = UIFont(name: "Roboto-Regular", size: 14)!
+        expensesProgress.progressColor = UIColor.by(.brandExpense)
+        expensesProgress.labelsColor = UIColor.by(.white100)
+        expensesProgress.labelsFont = UIFont(name: "Roboto-Regular", size: 14)!
     }
     
     private func setupRefreshControl() {

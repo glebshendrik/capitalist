@@ -67,8 +67,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,
-                                                       placeholder: IconCategory.expenseSource.defaultIconName,
-                                                       backgroundImageName: nil),
+                                                       placeholder: IconCategory.expenseSource.defaultIconName),
                                          BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
                                                         title: "Баланс",
                                                         value: expenseSourceViewModel?.amountRounded)]

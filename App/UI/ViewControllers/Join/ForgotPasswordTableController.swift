@@ -15,10 +15,15 @@ protocol ForgotPasswordTableControllerDelegate {
 
 class ForgotPasswordTableController : SaveAccessoryFormFieldsTableViewController {
     @IBOutlet weak var emailField: FormTextField!
+    @IBOutlet weak var sendCodeCell: UITableViewCell!
+    @IBOutlet weak var sendCodeButton: HighlightButton!
     
     var delegate: ForgotPasswordTableControllerDelegate?
     
     override var saveButtonTitle: String { return "Отправить код" }
+    override var saveButtonInForm: UIButton? {
+        return sendCodeButton
+    }
     
     override func setupUI() {
         super.setupUI()
@@ -36,6 +41,10 @@ class ForgotPasswordTableController : SaveAccessoryFormFieldsTableViewController
     }
     
     override func didTapSave() {
+        delegate?.didTapSave()
+    }
+    
+    @IBAction func didTapSendCodeButton(_ sender: Any) {
         delegate?.didTapSave()
     }
 }

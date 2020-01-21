@@ -52,7 +52,7 @@ class TransactionViewModel {
     }
     
     var iconBackgroundImageName: String? {
-        return basketType?.iconBackgroundName(size: .small)
+        return nil
     }
         
 //    var amount: String {

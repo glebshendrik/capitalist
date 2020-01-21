@@ -6,7 +6,7 @@
 //  Copyright © 2019 Real Tranzit. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum ItemSize : String {
     case tiny = "xs"
@@ -21,22 +21,18 @@ enum BasketType : String, Codable {
     case safe = "safe"
     
     var iconCategory: IconCategory {
-        switch self {
-        case .joy:
-            return .expenseCategoryJoy
-        case .risk:
-            return .expenseCategoryRisk
-        case .safe:
-            return .expenseCategorySafe
-        }
-    }
-        
-    var progressBackgroundName: String {
-        return "\(self.rawValue)-progress-background"
+        return .common
     }
     
-    func iconBackgroundName(size: ItemSize) -> String {
-        return "\(self.rawValue)-icon-bkg-\(size.rawValue)"
+    var iconBackgroundColor: UIColor {
+        switch self {
+        case .joy:
+            return UIColor.by(.brandExpense)
+        case .safe:
+            return UIColor.by(.brandSafe)
+        case .risk:
+            return UIColor.by(.brandRisk)
+        }
     }
 }
 

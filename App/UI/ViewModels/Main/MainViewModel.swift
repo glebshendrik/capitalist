@@ -37,12 +37,47 @@ class MainViewModel {
         }
     }
     
+    var adviserTip: String? {
+        guard selecting else { return nil }
+        
+        guard let selectedSource = selectedSource else {
+            guard let selectedDestination = selectedDestination else { return "Выберите источник дохода, кошелек или актив" }
+            switch selectedDestination.type {
+            case .expenseSource:
+                return "Выберите источник дохода, кошелек или актив"
+            case .expenseCategory:
+                return "Выберите кошелек"
+            case .active:
+                return "Выберите источник дохода или кошелек"
+            default:
+                return nil
+            }
+        }
+        
+        guard selectedDestination == nil else { return nil }
+        
+        switch selectedSource.type {
+        case .incomeSource:
+            if let incomeSource = selectedSource as? IncomeSourceViewModel,
+                incomeSource.isChild {
+                return "Выберите кошелек или актив"
+            }
+            return "Выберите кошелек"
+        case .expenseSource:
+            return "Выберите кошелек, категорию трат или актив"
+        case .active:
+            return "Выберите кошелек"
+        default:
+            return nil
+        }
+    }
+    
     var selectedSourceName: String {
-        return selectedSource?.name ?? "Источник"
+        return selectedSource?.name ?? "..."
     }
     
     var selectedDestinationName: String {
-        return selectedDestination?.name ?? "Назначение"
+        return selectedDestination?.name ?? "..."
     }
     
     var transactionablesSelected: Bool {
@@ -92,12 +127,20 @@ class MainViewModel {
         return budget?.expenseSourcesAmountRounded
     }
     
+    var basketTotalExpensesTitle: String {
+        return "Расходы: "
+    }
+    
+    var basketTotalExpenses: String {
+        return basketsViewModel.selectedBasketSpent ?? ""
+    }
+    
     var basketTotalTitle: String {
         switch basketsViewModel.selectedBasketType {
         case .safe:
-            return "Сумма сбережений: "
+            return ". Сбережения: "
         case .risk:
-            return "Сумма активов: "
+            return ". Инвестиции: "
         default:
             return ""
         }
@@ -113,6 +156,10 @@ class MainViewModel {
             return ""
         }
     }
+    
+    
+    
+    
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,

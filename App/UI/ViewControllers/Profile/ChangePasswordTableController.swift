@@ -19,10 +19,14 @@ class ChangePasswordTableController : SaveAccessoryFormFieldsTableViewController
     @IBOutlet weak var oldPasswordField: FormTextField!
     @IBOutlet weak var newPasswordField: FormTextField!
     @IBOutlet weak var confirmationField: FormTextField!
+    @IBOutlet weak var changePasswordButton: HighlightButton!
     
     var delegate: ChangePasswordTableControllerDelegate?
     
     override var saveButtonTitle: String { return "Сменить пароль" }
+    override var saveButtonInForm: UIButton? {
+        return changePasswordButton
+    }
     
     override func setupUI() {
         super.setupUI()
@@ -62,6 +66,10 @@ class ChangePasswordTableController : SaveAccessoryFormFieldsTableViewController
     }
     
     override func didTapSave() {
+        delegate?.didTapSave()
+    }
+    
+    @IBAction func didTapChangePasswordButton(_ sender: Any) {
         delegate?.didTapSave()
     }
 }

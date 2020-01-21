@@ -135,8 +135,7 @@ class BorrowInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: BorrowInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,
-                                                       placeholder: IconCategory.expenseSourceDebt.defaultIconName,
-                                                       backgroundImageName: nil),
+                                                       placeholder: "borrow-default-icon"),
                                          BasicInfoField(fieldId: BorrowInfoField.whom.rawValue,
                                                         title: nameTitle,
                                                         value: borrowViewModel.name)]

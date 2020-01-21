@@ -52,15 +52,7 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     var defaultIconName: String {
         return basketType.iconCategory.defaultIconName
     }
-    
-    var iconBackgroundImageName: String {
-        return basketType.iconBackgroundName(size: .medium)
-    }
-    
-    var progressBackgroundImageName: String {
-        return basketType.progressBackgroundName
-    }
-    
+        
     var currency: Currency {
         return active.currency
     }

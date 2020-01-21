@@ -119,19 +119,9 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
         
         
         if case Theme.error = theme {
-            view.configureTheme(backgroundColor: UIColor(red: 254 / 255.0, green: 249 / 255.0, blue: 249 / 255.0, alpha: 1),
-                                foregroundColor: UIColor(red: 0.33, green: 0.29, blue: 0.29, alpha: 1))
-            view.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 14)
-            
-            var edges: UIRectEdge = []
-            if case SwiftMessages.PresentationStyle.bottom = presentationStyle {
-                edges = [.top]
-            } else if case SwiftMessages.PresentationStyle.top = presentationStyle {
-                edges = [.bottom]
-            }
-            view.addBorders(edges: edges,
-                            color: UIColor(red: 1, green: 0.22, blue: 0.27, alpha: 1),
-                            thickness: 2)
+            view.configureTheme(backgroundColor: UIColor.by(.black2),
+                                foregroundColor: UIColor.by(.white100))
+            view.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 16)
         }
         else {
             view.configureTheme(theme)
@@ -139,7 +129,7 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
         
         view.button?.backgroundColor = UIColor.clear
         view.button?.tintColor = view.titleLabel?.textColor
-        view.button?.setImage(UIImage(named: "message-close-icon"), for: .normal)
+        view.button?.setImage(UIImage(named: "close-icon"), for: .normal)
         
         view.buttonTapHandler = { _ in
             SwiftMessages.hide()

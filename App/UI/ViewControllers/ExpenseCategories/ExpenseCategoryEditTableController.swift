@@ -19,7 +19,7 @@ protocol ExpenseCategoryEditTableControllerDelegate {
 
 class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var iconBackgroundImageView: UIImageView!
+    @IBOutlet weak var iconBackgroundView: UIView!
     
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!

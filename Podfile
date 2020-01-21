@@ -25,7 +25,7 @@ target 'Three Baskets' do
   pod 'CircleProgressView', '~> 1.0'
   pod 'BEMCheckBox'
   pod 'AlignedCollectionViewFlowLayout'
-  pod 'ALTextInputBar', git: 'https://github.com/bclymer/ALTextInputBar', branch: 'master'
+  pod 'ALTextInputBar' #, git: 'https://github.com/bclymer/ALTextInputBar', branch: 'master'
   pod 'Charts'
   pod 'RandomColorSwift', git: 'https://github.com/onevcat/RandomColorSwift', branch: 'master'
   pod 'MSPeekCollectionViewDelegateImplementation', '~> 2.0'
@@ -38,6 +38,7 @@ target 'Three Baskets' do
   pod 'AttributedTextView'
   pod "ESPullToRefresh"
   pod 'BetterSegmentedControl', '~> 1.3'
+  pod 'EasyTipView', '~> 2.0.4'
 end
 
 post_install do |installer|

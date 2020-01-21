@@ -27,7 +27,8 @@ protocol ActiveEditTableControllerDelegate {
 
 class ActiveEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var iconBackgroundImageView: UIImageView!
+    
+    @IBOutlet weak var iconBackgroundView: UIView!
     
     @IBOutlet weak var activeTypeField: FormTapField!
     @IBOutlet weak var nameField: FormTextField!

@@ -32,7 +32,7 @@ class IncomeSourceEditViewModel {
     }
     
     var defaultIconName: String {
-        return IconCategory.expenseCategoryRisk.defaultIconName
+        return TransactionableType.incomeSource.defaultIconName
     }
     
     var selectedCurrencyName: String? {

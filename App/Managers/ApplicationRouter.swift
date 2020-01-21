@@ -12,6 +12,7 @@ import SideMenu
 import PromiseKit
 import IQKeyboardManager
 import RecurrencePicker
+import SwifterSwift
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
@@ -24,6 +25,8 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private var saltEdgeCoordinator: BankConnectionsCoordinatorProtocol!
     
     private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+    private var minVersion: String?
+    private var minBuild: String?
     
     init(with storyboards: [Infrastructure.Storyboard: UIStoryboard],
          window: UIWindow,
@@ -67,15 +70,42 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             return
         }
         
+        guard !checkIfAppUpdateNeeded() else {
+            showAppUpdateScreen()
+            return
+        }
+        
         showLandingScreen()
         
         beginAuthorizedUserFlow()
+    }
+    
+    func setMinimumAllowed(version: String?, build: String?) {
+        minVersion = version
+        minBuild = build
+        if checkIfAppUpdateNeeded() {
+            route()
+        }
+    }
+    
+    private func checkIfAppUpdateNeeded() -> Bool {
+        guard   let minBuild = minBuild,
+                let appBuild = SwifterSwift.appBuild,
+                let minBuildNumber = Int(minBuild),
+                let appBuildNumber = Int(appBuild) else {
+            return false
+        }
+        return appBuildNumber < minBuildNumber
     }
     
     private func beginAuthorizedUserFlow() {
         firstly {
             accountCoordinator.loadCurrentUser()
         }.done { _ in
+            guard !self.checkIfAppUpdateNeeded() else {
+                self.showAppUpdateScreen()
+                return
+            }
             if UIFlowManager.wasShownOnboarding {
                 self.showMainViewController()
             }
@@ -99,6 +129,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         default:
             return false
         }
+    }
+    
+    private func showAppUpdateScreen() {
+        _ = show(.AppUpdateViewController)
     }
     
     private func showLandingScreen() {

@@ -18,10 +18,15 @@ protocol LoginTableControllerDelegate {
 class LoginTableController : SaveAccessoryFormFieldsTableViewController {
     @IBOutlet weak var loginField: FormTextField!
     @IBOutlet weak var passwordField: FormTextField!
+    @IBOutlet weak var signInCell: UITableViewCell!
+    @IBOutlet weak var signInButton: HighlightButton!
     
     var delegate: LoginTableControllerDelegate?
     
     override var saveButtonTitle: String { return "Войти" }
+    override var saveButtonInForm: UIButton? {
+        return signInButton
+    }
     
     override func setupUI() {
         super.setupUI()
@@ -54,6 +59,10 @@ class LoginTableController : SaveAccessoryFormFieldsTableViewController {
     }
     
     override func didTapSave() {
+        delegate?.didTapSave()
+    }
+    
+    @IBAction func didTapSignInButton(_ sender: Any) {
         delegate?.didTapSave()
     }
 }

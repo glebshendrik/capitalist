@@ -16,6 +16,7 @@ PODS:
   - CocoaLumberjack/Core (3.5.3)
   - CSV.swift (2.3.1)
   - CWStatusBarNotification (2.3.5)
+  - EasyTipView (2.0.4)
   - ESPullToRefresh (2.9)
   - IQKeyboardManager (6.2.0)
   - Locksmith (4.0.0)
@@ -78,7 +79,7 @@ PODS:
 DEPENDENCIES:
   - AlamofireImage
   - AlignedCollectionViewFlowLayout
-  - ALTextInputBar (from `https://github.com/bclymer/ALTextInputBar`, branch `master`)
+  - ALTextInputBar
   - AttributedTextView
   - BEMCheckBox
   - BetterSegmentedControl (~> 1.3)
@@ -86,6 +87,7 @@ DEPENDENCIES:
   - CircleProgressView (~> 1.0)
   - CSV.swift
   - CWStatusBarNotification (~> 2.3)
+  - EasyTipView (~> 2.0.4)
   - ESPullToRefresh
   - IQKeyboardManager
   - Locksmith (~> 4.0)
@@ -137,17 +139,16 @@ SPEC REPOS:
     - SwinjectAutoregistration
     - TrustKit
   trunk:
+    - ALTextInputBar
     - AttributedTextView
     - BetterSegmentedControl
+    - EasyTipView
     - ESPullToRefresh
     - SideMenu
     - Swinject
     - SwinjectStoryboard
 
 EXTERNAL SOURCES:
-  ALTextInputBar:
-    :branch: master
-    :git: https://github.com/bclymer/ALTextInputBar
   RandomColorSwift:
     :branch: master
     :git: https://github.com/onevcat/RandomColorSwift
@@ -159,9 +160,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/petalvlad/saltedge-ios-swift
 
 CHECKOUT OPTIONS:
-  ALTextInputBar:
-    :commit: 3b82e4cdb81fa42705ef84066f4fe82f29c1bbc8
-    :git: https://github.com/bclymer/ALTextInputBar
   RandomColorSwift:
     :commit: 902050e3cabb596eaeb9ed725dbf22b17a3f3e4c
     :git: https://github.com/onevcat/RandomColorSwift
@@ -185,6 +183,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   CSV.swift: d16f671b3090a2c0525d5f2165b18319074aae2b
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
+  EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
   ESPullToRefresh: ce058a36454a5032519cc9d8b45da217728cf104
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
@@ -209,6 +208,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
 
-PODFILE CHECKSUM: 82acca2db7cc00dbc1782aee74734b96505ed8bc
+PODFILE CHECKSUM: 7ab0c61fe3e8d1c004d55b30d31887c4517aa2cc
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.8.0

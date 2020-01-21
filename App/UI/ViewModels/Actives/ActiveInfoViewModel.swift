@@ -91,9 +91,8 @@ class ActiveInfoViewModel : EntityInfoViewModel {
         guard let activeViewModel = activeViewModel else { return [] }
         var fields: [EntityInfoField] = [IconInfoField(fieldId: ActiveInfoField.icon.rawValue,
                                                        iconType: .raster,
-                                                       iconURL: selectedIconURL,
-                                                       placeholder: basketType.iconCategory.defaultIconName,
-                                                       backgroundImageName: basketType.iconBackgroundName(size: .large)),
+                                                       iconURL: selectedIconURL,           
+                                                       placeholder: basketType.iconCategory.defaultIconName),
                                          BasicInfoField(fieldId: ActiveInfoField.activeType.rawValue,
                                                         title: "Тип актива",
                                                         value: activeViewModel.activeTypeName)]

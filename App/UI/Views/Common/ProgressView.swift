@@ -21,7 +21,7 @@ class ProgressView : BasketItemView {
         }
     }
     
-    var labelsFont: UIFont? = UIFont(name: "Rubik-Regular", size: 12) {
+    var labelsFont: UIFont? = UIFont(name: "Roboto-Light", size: 13) {
         didSet {
             limitLabel.font = labelsFont
             progressLabel.font = labelsFont

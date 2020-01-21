@@ -101,7 +101,7 @@ class FormExchangeField : FormField {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var convertImage: UIImage? = UIImage(named: "right-arrow-icon") {
+    @IBInspectable var convertImage: UIImage? = UIImage(named: "arrow-right-small-icon") {
         didSet { updateConvertArrow() }
     }
     

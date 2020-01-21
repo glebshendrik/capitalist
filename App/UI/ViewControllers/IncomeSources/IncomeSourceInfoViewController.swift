@@ -16,7 +16,7 @@ class IncomeSourceInfoViewController : EntityInfoNavigationController {
     }
         
     override func didTapIcon(field: IconInfoField?) {
-        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseCategoryRisk))
+        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.common))
     }
         
     override func didTapReminderButton(field: ReminderInfoField?) {

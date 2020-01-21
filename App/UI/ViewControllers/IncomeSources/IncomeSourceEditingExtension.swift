@@ -9,8 +9,8 @@
 import UIKit
 
 extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelegate {
-    func didTapIcon() {
-        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseCategoryRisk))
+    func didTapIcon() {        
+        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.common))
     }
     
     func didChange(name: String?) {

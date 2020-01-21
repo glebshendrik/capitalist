@@ -99,8 +99,8 @@ extension BorrowEditViewController {
 }
 
 extension BorrowEditViewController : BorrowEditTableControllerDelegate {
-    func didTapIcon() {
-        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSourceDebt))
+    func didTapIcon() {        
+        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.common))
     }
     
     func didTapCurrency() {

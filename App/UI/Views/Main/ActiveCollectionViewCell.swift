@@ -21,32 +21,26 @@ class ActiveCollectionViewCell : BasketItemCollectionViewCell {
     }
     
     override func setupIcon() {
-        super.setupIcon()
-        icon.backgroundCornerRadius = 4
+        super.setupIcon()        
+        icon.backgroundCornerRadius = 8
     }
-    
+        
     override func updateIcon() {
         super.updateIcon()
         guard let viewModel = viewModel else { return }
+        icon.backgroundViewColor = iconBackgroundColor(basketType: viewModel.basketType)
         icon.defaultIconName = viewModel.defaultIconName
-        icon.backgroundImage = UIImage(named: viewModel.iconBackgroundImageName)
         icon.iconURL = viewModel.iconURL
-        icon.isBackgroundHidden = viewModel.isMonthlyPaymentPlanCompleted
     }
     
     override func updateProgress() {
         super.updateProgress()
         guard let viewModel = viewModel else { return }
-        progress.backgroundImage = UIImage(named: viewModel.progressBackgroundImageName)
-        progress.progressColor = progressColor(basketType: viewModel.basketType)
+        progress.backgroundColor = progressBackgroundColor(basketType: viewModel.basketType)
+        progress.progressColor = progressColor(basketType: viewModel.basketType, completed: viewModel.isMonthlyPaymentPlanCompleted)
         progress.isHidden = !viewModel.areExpensesPlanned
-        progress.isBackgroundHidden = !viewModel.isMonthlyPaymentPlanCompleted
-        progress.isProgressHidden = viewModel.isMonthlyPaymentPlanCompleted
         progress.progressWidth = CGFloat(viewModel.spendingProgress) * progressContainerWidth
-        progress.text = viewModel.plannedAtPeriod
-        progress.labelColor = viewModel.isMonthlyPaymentPlanCompleted
-            ? UIColor.by(.textFFFFFF)
-            : UIColor.by(.dark2A314B)
+        progress.text = viewModel.plannedAtPeriod        
     }
     
     

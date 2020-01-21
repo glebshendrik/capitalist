@@ -87,7 +87,7 @@
                                                                 </collectionViewCell>
                                                             </cells>
                                                         </collectionView>
-                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Недостаточно данных для показа статистики" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="C78-Gv-YZU">
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Загружаем актуальные данные" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="C78-Gv-YZU">
                                                             <rect key="frame" x="32" y="137.5" width="350" height="17.5"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                             <color key="textColor" name="white 0.64"/>
@@ -204,7 +204,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joy-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="2Em-1R-wvy">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="income-source-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="2Em-1R-wvy">
                                                             <rect key="frame" x="16" y="19.5" width="25" height="25"/>
                                                             <color key="tintColor" name="white 1.0"/>
                                                             <constraints>
@@ -314,7 +314,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="0Gx-cP-eDZ">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="income-source-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="0Gx-cP-eDZ">
                                                             <rect key="frame" x="-0.5" y="-0.5" width="25" height="25"/>
                                                             <color key="tintColor" name="gray 1"/>
                                                             <constraints>
@@ -881,10 +881,9 @@
     </scenes>
     <resources>
         <image name="close-icon" width="14.5" height="14.5"/>
-        <image name="joy-default-icon" width="18.5" height="18"/>
+        <image name="income-source-default-icon" width="24" height="24"/>
         <image name="loader-1" width="55" height="31"/>
         <image name="selected-sign-icon" width="16" height="14"/>
-        <image name="wallet-default-icon" width="30" height="24"/>
         <namedColor name="black 1">
             <color red="0.090196078431372548" green="0.094117647058823528" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

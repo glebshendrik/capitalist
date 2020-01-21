@@ -56,4 +56,8 @@ extension MainViewController {
         cell.viewModel = incomeSourceViewModel
         return cell
     }
+    
+    func scrollIncomeSourcesToBeginning() {
+        incomeSourcesCollectionView.setContentOffset(CGPoint.zero, animated: true)
+    }
 }

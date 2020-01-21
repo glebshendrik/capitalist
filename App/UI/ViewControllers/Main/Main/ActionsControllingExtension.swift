@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EasyTipView
 
 extension MainViewController {
     func tapMainButton() {
@@ -35,11 +36,11 @@ extension MainViewController {
         viewModel.set(selecting: selecting)
         updateMainButtonUI()
         updateTotalUI(animated: true)
-        if !isSelecting {
-            completeTransactionInteraction()
+        if isSelecting {
+            updateAdviserTip()
         }
-        else if isSelecting && !UIFlowManager.reached(point: .transactionCreationInfoMessage) {
-            showTransactionCreationInfoViewController()
+        else {
+            completeTransactionInteraction()            
         }
         updateCollectionViews()
     }
@@ -48,7 +49,7 @@ extension MainViewController {
         let isCancelState = isEditingItems || isSelecting
         
         let transform = isCancelState ? CGAffineTransform(rotationAngle: CGFloat(3 * Double.pi / 4)) : .identity
-        let color = isCancelState ? UIColor.by(ColorAsset.redE5487C) : UIColor.by(.blue6A92FA)
+        let color = isCancelState ? UIColor.by(ColorAsset.red1) : UIColor.by(.blue1)
         
         UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 5, options: .curveEaseInOut, animations: {
                 self.mainButton.transform = transform
@@ -57,12 +58,50 @@ extension MainViewController {
     }
 }
 
-extension MainViewController {
+extension MainViewController : EasyTipViewDelegate {
     private func showTransactionCreationInfoViewController() {
         slideUp(factory.transactionCreationInfoViewController(),
                 toBottomOf: incomeSourcesContainer,
                 shouldDim: true)
     }
+    
+    func show(tipMessage: String) {
+        adviserTip = tip(text: tipMessage, position: .left)
+        adviserTip?.show(animated: true, forView: titleView.tipAnchor, withinSuperview: titleView)
+    }
+    
+    func updateAdviserTip() {
+        func showAdviserTip() {
+            guard let tipMessage = self.viewModel.adviserTip else { return }            
+            show(tipMessage: tipMessage)
+        }
+        
+        guard let tip = adviserTip else {
+            showAdviserTip()
+            return
+        }
+        tip.dismiss(withCompletion: {
+            showAdviserTip()
+        })
+    }
+    
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {
+        
+    }
+    
+    func tip(text: String, position: EasyTipView.ArrowPosition) -> EasyTipView {
+        var preferences = EasyTipView.Preferences()
+        preferences.drawing.font = UIFont(name: "Roboto-Light", size: 14)!
+        preferences.drawing.foregroundColor = UIColor.by(.white100)
+        preferences.drawing.backgroundColor = UIColor.by(.blue1)
+        preferences.drawing.arrowPosition = position
+        preferences.drawing.cornerRadius = 8
+        preferences.positioning.contentVInset = 2
+        preferences.animating.showDuration = 0.3
+        preferences.animating.dismissDuration = 0.2
+        
+        return EasyTipView(text: text, preferences: preferences, delegate: self)
+    }    
 }
 
 extension MainViewController {
@@ -72,5 +111,17 @@ extension MainViewController {
         for cell in cells {
             cell.set(editing: editing)
         }
+    }
+}
+
+extension MainViewController {
+    @objc func appMovedToForeground() {
+        setVisibleCells(editing: isEditingItems)
+    }
+}
+
+extension MainViewController {
+    @objc func finantialDataInvalidated() {
+        loadData()
     }
 }

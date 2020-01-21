@@ -75,8 +75,8 @@ class BorrowViewModel {
         return borrow.isReturned
     }
         
-    var defaultIconName: String {
-        return IconCategory.expenseSourceDebt.defaultIconName
+    var defaultIconName: String {        
+        return "borrow-default-icon"
     }
     
     var borrowedAt: Date {

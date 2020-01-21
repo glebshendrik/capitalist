@@ -32,19 +32,19 @@ class BasketItemDescription : BasketItemView {
         }
     }
     
-    var titleFont: UIFont? = UIFont(name: "Rubik-Regular", size: 11) {
+    var titleFont: UIFont? = UIFont(name: "Roboto-Light", size: 12) {
         didSet {
             titleLabel.font = titleFont
         }
     }
     
-    var amountFont: UIFont? = UIFont(name: "Rubik-Regular", size: 13) {
+    var amountFont: UIFont? = UIFont(name: "Roboto-Regular", size: 16) {
         didSet {
             amountLabel.font = amountFont
         }
     }
     
-    var subAmountFont: UIFont? = UIFont(name: "Rubik-Regular", size: 11) {
+    var subAmountFont: UIFont? = UIFont(name: "Roboto-Light", size: 12) {
         didSet {
             subAmountLabel.font = subAmountFont
         }
@@ -137,7 +137,7 @@ class BasketItemDescription : BasketItemView {
     func setupSubAmountConstraints() {
         subAmountLabel.snp.makeConstraints { make in
             make.top.equalTo(amountLabel.snp.bottom).offset(0)
-            make.bottom.greaterThanOrEqualToSuperview().offset(0)
+//            make.bottom.greaterThanOrEqualToSuperview().offset(0)
             make.left.right.equalToSuperview()
         }
         subAmountLabel.setContentHuggingPriority(.defaultLow, for: .vertical)

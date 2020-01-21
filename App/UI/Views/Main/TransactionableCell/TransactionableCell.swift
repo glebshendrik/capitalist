@@ -16,8 +16,9 @@ protocol EditableCellProtocol {
     func setDeleteButton(enabled: Bool, animated: Bool)
     func setEditButton(enabled: Bool, animated: Bool)
 }
+
 protocol SelectableCellProtocol {
-    var selectionIndicator: UIImageView! { get }
+    var selectionIndicator: UIView! { get }
     var canSelect: Bool { get }
 
     func setSelectionIndicator(hidden: Bool, animated: Bool)
@@ -39,7 +40,7 @@ protocol TransactionableCellProtocol : EditableCellProtocol, SelectableCellProto
 class TransactionableCell : UICollectionViewCell, TransactionableCellProtocol {
     lazy var deleteButton: UIButton! = { return EditableCellDeleteButton() }()
     lazy var editButton: UIButton! = { return EditableCellEditButton() }()
-    lazy var selectionIndicator: UIImageView! = { return UIImageView() }()
+    lazy var selectionIndicator: UIView! = { return UIView() }()
     weak var delegate: TransactionableCellDelegate?
         
     public private(set) var didSetupConstraints = false
@@ -108,7 +109,7 @@ class TransactionableCell : UICollectionViewCell, TransactionableCellProtocol {
     
     func setupSelectionIndicatorConstraints() {
         selectionIndicator.snp.makeConstraints { make in
-            make.bottom.right.equalToSuperview()
+            make.left.top.bottom.right.equalToSuperview()
         }
     }
     
@@ -127,7 +128,6 @@ class TransactionableCell : UICollectionViewCell, TransactionableCellProtocol {
     }
     
     func setupSelectionIndicator() {
-        selectionIndicator.image = UIImage(named: "save-circle-icon")
         selectionIndicator.isHidden = true
         contentView.addSubview(selectionIndicator)
     }

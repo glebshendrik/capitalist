@@ -18,7 +18,8 @@ class RegistrationViewController : FormSubmitViewController {
     override var saveErrorMessage: String { return "Ошибка при регистрации" }
         
     override func registerFormFields() -> [String : FormField] {
-        return [UserCreationForm.CodingKeys.email.rawValue : tableController.emailField,
+        return [UserCreationForm.CodingKeys.firstname.rawValue : tableController.nameField,
+                UserCreationForm.CodingKeys.email.rawValue : tableController.emailField,
                 UserCreationForm.CodingKeys.password.rawValue : tableController.passwordField,
                 UserCreationForm.CodingKeys.passwordConfirmation.rawValue : tableController.confirmationField]
     }
@@ -52,5 +53,9 @@ extension RegistrationViewController : RegistrationTableControllerDelegate {
     
     func didTapSave() {
         save()
+    }
+    
+    func didTapSignIn() {
+        push(factory.loginViewController())
     }
 }

@@ -85,15 +85,7 @@ class ExpenseCategoryViewModel {
     var defaultIconName: String {
         return basketType.iconCategory.defaultIconName
     }
-    
-    var iconBackgroundImageName: String {
-        return basketType.iconBackgroundName(size: .medium)
-    }
-    
-    var progressBackgroundImageName: String {
-        return basketType.progressBackgroundName
-    }
-    
+        
     public private(set) var waitingLoans: [BorrowViewModel] = []
     
     var hasWaitingLoans: Bool {

@@ -9,11 +9,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Rubik-Medium.ttf">
-            <string>Rubik-Medium</string>
+        <array key="Roboto-Light.ttf">
+            <string>Roboto-Light</string>
         </array>
-        <array key="Rubik-Regular.ttf">
-            <string>Rubik-Regular</string>
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
         </array>
     </customFonts>
     <scenes>
@@ -50,7 +53,7 @@
                                 <action selector="didTapCancelButton:" destination="WoP-TF-ejQ" id="VMx-V4-cNb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="save-circle-icon" id="SR6-OZ-yNj">
+                        <barButtonItem key="rightBarButtonItem" image="save-icon" id="SR6-OZ-yNj">
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapSaveButton:" destination="WoP-TF-ejQ" id="7WM-Kn-VsS"/>
@@ -99,8 +102,8 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC0-RV-Nk9">
                                     <rect key="frame" x="32" y="0.0" width="311" height="0.0"/>
-                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                    <color key="textColor" red="0.47450980390000003" green="0.51764705879999995" blue="0.64313725489999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="14"/>
+                                    <color key="textColor" name="white 0.64"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -142,10 +145,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Are-Hp-VeC">
                                                     <rect key="frame" x="155.5" y="27.5" width="64" height="64"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="olf-pk-SdI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
-                                                        </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="bif-u5-d1e">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="expense-category-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="bif-u5-d1e">
                                                             <rect key="frame" x="18.5" y="18.5" width="27" height="27"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
@@ -160,14 +160,10 @@
                                                     <color key="backgroundColor" red="0.35686274509999999" green="0.52549019610000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="bif-u5-d1e" firstAttribute="centerY" secondItem="Are-Hp-VeC" secondAttribute="centerY" id="5cz-8H-WJW"/>
-                                                        <constraint firstItem="olf-pk-SdI" firstAttribute="leading" secondItem="Are-Hp-VeC" secondAttribute="leading" id="8ey-nh-1N4"/>
                                                         <constraint firstItem="bif-u5-d1e" firstAttribute="centerX" secondItem="Are-Hp-VeC" secondAttribute="centerX" id="AYK-mY-DaO"/>
-                                                        <constraint firstAttribute="trailing" secondItem="olf-pk-SdI" secondAttribute="trailing" id="JHy-db-ePg"/>
-                                                        <constraint firstAttribute="bottom" secondItem="olf-pk-SdI" secondAttribute="bottom" id="Jl3-X6-EPP"/>
                                                         <constraint firstAttribute="height" constant="64" id="Pek-9L-jAI"/>
                                                         <constraint firstAttribute="bottom" secondItem="OcS-8T-Djg" secondAttribute="bottom" constant="6" id="RGB-zF-UKU"/>
                                                         <constraint firstAttribute="width" constant="64" id="ZaJ-24-UrL"/>
-                                                        <constraint firstItem="olf-pk-SdI" firstAttribute="top" secondItem="Are-Hp-VeC" secondAttribute="top" id="agl-hG-2Lk"/>
                                                         <constraint firstItem="OcS-8T-Djg" firstAttribute="centerX" secondItem="Are-Hp-VeC" secondAttribute="centerX" id="nNQ-yL-zB4"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -315,11 +311,11 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljH-iW-Ndb">
                                                     <rect key="frame" x="32" y="0.0" width="311" height="65"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <color key="tintColor" name="text FFFFFF"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                    <color key="tintColor" name="white 1.0"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                                     <state key="normal" title="Установить напоминание" image="bell-icon">
-                                                        <color key="titleColor" name="text FFFFFF"/>
+                                                        <color key="titleColor" name="white 1.0"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="didTapSetReminder:" destination="30m-bg-INw" eventType="touchUpInside" id="xIJ-zn-uos"/>
@@ -345,11 +341,11 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhg-Ig-o6z">
                                                     <rect key="frame" x="32" y="0.0" width="311" height="65"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <color key="tintColor" name="text FFFFFF"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                    <color key="tintColor" name="red 1"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                                     <state key="normal" title="Удалить категорию трат" image="remove-icon">
-                                                        <color key="titleColor" name="text FFFFFF"/>
+                                                        <color key="titleColor" name="red 1"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="didTapRemoveButton:" destination="30m-bg-INw" eventType="touchUpInside" id="IX5-PP-XqE"/>
@@ -381,7 +377,7 @@
                     <connections>
                         <outlet property="activityIndicatorCell" destination="jhx-N1-Cck" id="ZxP-le-CKs"/>
                         <outlet property="currencyField" destination="YVW-jQ-2Cf" id="P6m-na-GP3"/>
-                        <outlet property="iconBackgroundImageView" destination="olf-pk-SdI" id="R3n-H4-rXe"/>
+                        <outlet property="iconBackgroundView" destination="Are-Hp-VeC" id="Xiy-AP-gzk"/>
                         <outlet property="iconView" destination="bif-u5-d1e" id="kSu-kB-LMN"/>
                         <outlet property="loaderImageView" destination="xcP-7Q-N48" id="dTM-c7-rXT"/>
                         <outlet property="monthlyPlannedField" destination="1M1-7j-Lhp" id="a4e-V8-jzw"/>
@@ -405,16 +401,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Категории трат" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlC-Fz-Jqv">
-                                <rect key="frame" x="16" y="8" width="343" height="19"/>
-                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
-                                <color key="textColor" name="text FFFFFF"/>
+                                <rect key="frame" x="16" y="8" width="343" height="21"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="L3Q-4O-bBl">
                                 <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LhT-w7-rsY">
-                                <rect key="frame" x="0.0" y="31" width="375" height="636"/>
+                                <rect key="frame" x="0.0" y="33" width="375" height="634"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpenseCategoryTableViewCell" rowHeight="60" id="I7B-xF-Xrv" customClass="ExpenseCategoryTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
@@ -425,15 +421,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Labelasdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ve-z4-yj6">
-                                                    <rect key="frame" x="68" y="20.5" width="132" height="19"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                                    <color key="textColor" name="text FFFFFF"/>
+                                                    <rect key="frame" x="68" y="19.5" width="103.5" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                    <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4r-Mf-3fN">
-                                                    <rect key="frame" x="216" y="21" width="143" height="18"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                                    <color key="textColor" name="text FFFFFF"/>
+                                                    <rect key="frame" x="187.5" y="19.5" width="171.5" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                    <color key="textColor" name="white 0.64"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRF-ZH-WuS">
@@ -442,7 +438,7 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w6M-aW-UKT">
                                                             <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joy-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="wtc-xH-riH">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="expense-category-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="wtc-xH-riH">
                                                             <rect key="frame" x="10" y="10" width="16" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="16" id="Ve9-jv-MRA"/>
@@ -569,26 +565,31 @@
     <resources>
         <image name="bell-icon" width="16" height="16"/>
         <image name="close-icon" width="14.5" height="14.5"/>
+        <image name="expense-category-default-icon" width="24" height="24"/>
         <image name="icon-edit-pencil" width="9" height="9"/>
-        <image name="joy-default-icon" width="18.5" height="18"/>
         <image name="loader-1" width="55" height="31"/>
         <image name="remove-icon" width="17" height="20"/>
-        <image name="save-circle-icon" width="24" height="24"/>
-        <image name="wallet-default-icon" width="30" height="24"/>
+        <image name="save-icon" width="16" height="14"/>
         <namedColor name="black 2">
             <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="dark 2A314B">
-            <color red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="delimeter 2F3854">
             <color red="0.18431372549019609" green="0.2196078431372549" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="text FFFFFF">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="red 1">
+            <color red="1" green="0.40000000000000002" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white 0.04">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white 0.64">
+            <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.63999998569488525" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white 1.0">
+            <color red="0.91764705882352937" green="0.93333333333333335" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

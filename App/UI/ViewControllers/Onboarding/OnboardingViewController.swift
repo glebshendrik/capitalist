@@ -9,11 +9,13 @@
 import UIKit
 
 class OnboardingViewController : UIViewController, OnboardingPagesViewControllerDelegate {
-    @IBOutlet var button: HighlightButton!
+    @IBOutlet var button: UIButton!
     var pagesController: OnboardingPagesViewController!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         updateUI()
     }
     
@@ -25,8 +27,14 @@ class OnboardingViewController : UIViewController, OnboardingPagesViewController
         }
     }
     
+    func setupUI() {
+        pageControl.numberOfPages = pagesController.numberOfPages
+    }
+    
     func updateUI() {
-        button.setTitle(pagesController.isLastPageShown ? "Начать" : "Продолжить", for: .normal)
+        button.setTitle(pagesController.isLastPageShown ? "Отлично, начать!" : "Далее", for: .normal)
+        button.backgroundColor = pagesController.isLastPageShown ? UIColor.by(.blue1) : UIColor.clear
+        pageControl.currentPage = pagesController.currentPageIndex
     }
     
     func didPresentPage() {
@@ -35,5 +43,9 @@ class OnboardingViewController : UIViewController, OnboardingPagesViewController
     
     @IBAction func didTapNextButton(_ sender: Any) {
         pagesController.showNextPage()
+    }
+    
+    @IBAction func didTapSkipButton(_ sender: Any) {
+        pagesController.finishOnboarding()
     }
 }

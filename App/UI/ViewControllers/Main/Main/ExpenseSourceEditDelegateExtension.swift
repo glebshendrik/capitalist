@@ -66,4 +66,8 @@ extension MainViewController {
         
         return UICollectionViewCell()
     }
+    
+    func scrollExpenseSourcesToBeginning() {
+        expenseSourcesCollectionView.setContentOffset(CGPoint.zero, animated: true)
+    }
 }

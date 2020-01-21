@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import BetterSegmentedControl
 
 class BorrowsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, ApplicationRouterDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
     
@@ -20,11 +21,7 @@ class BorrowsViewController : UIViewController, UIMessagePresenterManagerDependa
     var debtsSupport: DebtsTableSupport?
     var loansSupport: LoansTableSupport?
     
-    @IBOutlet weak var loansLabel: UILabel!
-    @IBOutlet weak var debtsLabel: UILabel!
-    
-    @IBOutlet weak var loansSelectionIndicator: UIView!
-    @IBOutlet weak var debtsSelectionIndicator: UIView!
+    @IBOutlet weak var tabs: BetterSegmentedControl!
     
     @IBOutlet weak var loansActivityIndicator: UIView!
     @IBOutlet weak var debtsActivityIndicator: UIView!
@@ -38,6 +35,8 @@ class BorrowsViewController : UIViewController, UIMessagePresenterManagerDependa
     @IBOutlet weak var loansTableView: UITableView!
     @IBOutlet weak var debtsTableView: UITableView!
     
+    private var tabsInitialized: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -50,14 +49,6 @@ class BorrowsViewController : UIViewController, UIMessagePresenterManagerDependa
         navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
     }
     
-    @IBAction func didTapLoans(_ sender: Any) {
-        select(.loan)
-    }
-    
-    @IBAction func didTapDebts(_ sender: Any) {
-        select(.debt)
-    }
-    
     @IBAction func didTapAdd(_ sender: Any) {
         showNewBorrow()
     }
@@ -67,18 +58,42 @@ extension BorrowsViewController {
         
     func select(_ borrowType: BorrowType) {
         viewModel.selectedBorrowType = borrowType
-        updateTabsUI()
         updateTabContentUI()
     }
     
     func setupUI() {
         setupTables()
+        setupTabs()
         setupLoaders()        
         setupNotifications()
     }
     
     private func setupNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(loadData), name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+    }
+    
+    private func setupTabs() {
+        guard !tabsInitialized else { return }
+        tabs.segments = LabelSegment.segments(withTitles: ["Я ДОЛЖЕН", "МНЕ ДОЛЖНЫ"],
+                                              normalBackgroundColor: UIColor.clear,
+                                              normalFont: UIFont(name: "Roboto-Regular", size: 12)!,
+                                              normalTextColor: UIColor.by(.white100),
+                                              selectedBackgroundColor: UIColor.by(.white12),
+                                              selectedFont: UIFont(name: "Roboto-Regular", size: 12)!,
+                                              selectedTextColor: UIColor.by(.white100))
+        tabs.addTarget(self, action: #selector(didChangeTab), for: .valueChanged)
+        tabsInitialized = true
+    }
+    
+    @objc private func didChangeTab(_ sender: Any) {
+        switch tabs.index {
+        case 0:
+            select(.loan)
+        case 1:
+            select(.debt)
+        default:
+            return
+        }
     }
     
     private func setupTables() {
@@ -101,7 +116,6 @@ extension BorrowsViewController {
     }
     
     func updateUI() {
-        updateTabsUI()
         updateTabContentUI()
         updateLoansUI()
         updateDebtsUI()
@@ -113,35 +127,6 @@ extension BorrowsViewController {
     
     func updateDebtsUI() {
         debtsTableView.reloadData(with: .automatic)
-    }
-    
-    func updateTabsUI() {
-        
-        func tabsAppearances(for borrowType: BorrowType) -> (loans: TabAppearance, debts: TabAppearance) {
-            
-            let selectedColor = UIColor.by(.textFFFFFF)
-            let unselectedColor = UIColor.by(.text9EAACC)
-            
-            let selectedTabAppearance: TabAppearance = (textColor: selectedColor, isHidden: false)
-            let unselectedTabAppearance: TabAppearance = (textColor: unselectedColor, isHidden: true)
-            
-            switch borrowType {
-            case .loan:
-                return (loans: selectedTabAppearance,
-                        debts: unselectedTabAppearance)
-            case .debt:
-                return (loans: unselectedTabAppearance,
-                        debts: selectedTabAppearance)
-            }
-        }
-        
-        let tabsAppearance = tabsAppearances(for: viewModel.selectedBorrowType)
-        
-        loansLabel.textColor = tabsAppearance.loans.textColor
-        debtsLabel.textColor = tabsAppearance.debts.textColor
-        
-        loansSelectionIndicator.isHidden = tabsAppearance.loans.isHidden
-        debtsSelectionIndicator.isHidden = tabsAppearance.debts.isHidden
     }
     
     func updateTabContentUI() {

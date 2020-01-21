@@ -95,7 +95,7 @@ extension CreditEditViewController {
 
 extension CreditEditViewController : CreditEditTableControllerDelegate {
     func didTapIcon() {
-        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSourceDebt))
+        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.common))
     }
     
     func didChange(name: String?) {

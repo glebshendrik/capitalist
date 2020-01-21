@@ -41,6 +41,8 @@ struct User : Decodable {
     let currency: Currency
     let defaultPeriod: AccountingPeriod
     let saltEdgeCustomerSecret: String?
+    let minVersion: String?
+    let minBuild: String?
     
     var fullname: String? {
         if let firstname = firstname, !firstname.isEmpty, let lastname = lastname, !lastname.isEmpty {
@@ -67,6 +69,8 @@ struct User : Decodable {
         case currency = "default_currency"
         case defaultPeriod = "default_period"
         case saltEdgeCustomerSecret = "salt_edge_customer_secret"
+        case minVersion = "ios_min_version"
+        case minBuild = "ios_min_build"
     }
 }
 

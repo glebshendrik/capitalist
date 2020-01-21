@@ -15,7 +15,7 @@ enum APIRoute: URLRequestConvertible {
         #if DEBUG
             return "https://skrudzh-staging.herokuapp.com"
         #else
-            return "https://skrudzh-production.herokuapp.com"
+            return "https://api.threebaskets.net"
         #endif
     }
     

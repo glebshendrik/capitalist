@@ -33,7 +33,7 @@ extension GraphViewModel {
     
     var colors: [UIColor] {
         
-        return ["e6194B", "3cb44b", "ffe119", "4363d8", "f58231", "911eb4", "42d4f4", "f032e6", "bfef45", "fabebe", "469990", "e6beff", "9A6324", "fffac8", "800000", "aaffc3", "808000", "ffd8b1", "000075", "a9a9a9"]
+        return ["ECB056", "EB6242", "E9544D", "E8476E", "C84C85", "B761C5", "8E5EE3", "3F5ABC", "2771AE", "3683EE", "1CC6DB", "1CB5A7", "30D38D", "5DBF5A", "6EBBB7", "738F9C", "FAC28A", "FF8164", "FC6D66", "F17391", "DD597D", "C469D2", "906FCB", "3F6FCC", "4E93CF", "5EB2F6", "49D5E7", "3CC0BC", "7FD89A", "7DC581", "94BCBA", "8CA1AB"]
             .map { UIColor(hexString: $0) }
             .compactMap  { $0 }
     }

@@ -72,8 +72,7 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: ExpenseCategoryInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,
-                                                       placeholder: basketType.iconCategory.defaultIconName,
-                                                       backgroundImageName: basketType.iconBackgroundName(size: .large)),
+                                                       placeholder: basketType.iconCategory.defaultIconName),
                                          BasicInfoField(fieldId: ExpenseCategoryInfoField.expense.rawValue,
                                                         title: "Расход в этом месяце",
                                                         value: expenseCategoryViewModel?.amountRounded)]

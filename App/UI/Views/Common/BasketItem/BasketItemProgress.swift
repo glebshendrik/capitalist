@@ -10,24 +10,22 @@ import UIKit
 import SnapKit
 
 class BasketItemProgress : BasketItemView {
-    lazy var backgroundImageView: UIImageView = { return UIImageView() }()
     lazy var progressView: UIView = { return UIView() }()
     lazy var limitLabel: UILabel = { return UILabel() }()
         
     var backgroundCornerRadius: CGFloat = 0.0 {
         didSet {
-            backgroundImageView.cornerRadius = backgroundCornerRadius
             cornerRadius = backgroundCornerRadius
         }
     }
     
-    var labelColor: UIColor = UIColor.by(.textFFFFFF) {
+    var labelColor: UIColor = UIColor.by(.white100) {
         didSet {
             limitLabel.textColor = labelColor
         }
     }
     
-    var labelFont: UIFont? = UIFont(name: "Roboto-Regular", size: 9) {
+    var labelFont: UIFont? = UIFont(name: "Roboto-Regular", size: 12) {
         didSet {
             limitLabel.font = labelFont
         }
@@ -44,25 +42,7 @@ class BasketItemProgress : BasketItemView {
             self.setNeedsUpdateConstraints()
         }
     }
-    
-    var backgroundImage: UIImage? = nil {
-        didSet {
-            backgroundImageView.image = backgroundImage
-        }
-    }
-    
-    var isBackgroundHidden: Bool = false {
-        didSet {
-            backgroundImageView.isHidden = isBackgroundHidden
-        }
-    }
-    
-    var isProgressHidden: Bool = false {
-        didSet {
-            progressView.isHidden = isProgressHidden
-        }
-    }
-    
+                
     var text: String? = nil {
         didSet {
             limitLabel.text = text
@@ -71,14 +51,12 @@ class BasketItemProgress : BasketItemView {
     
     override func setup() {
         super.setup()
-        backgroundColor = UIColor.by(.textFFFFFF)
-        setupBackground()
+        backgroundColor = UIColor.clear
         setupProgress()
         setupLabel()
     }
         
     override func setupConstraints() {
-        setupBackgroundImageViewConstraints()
         setupProgressConstraints()
         setupLimitLabelConstraints()
     }
@@ -89,17 +67,9 @@ class BasketItemProgress : BasketItemView {
         }
         super.updateConstraints()
     }
-    
-    private func setupBackground() {
-        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundImageView.image = backgroundImage
-        backgroundImageView.isHidden = isBackgroundHidden
-        addSubview(backgroundImageView)
-    }
-    
+        
     private func setupProgress() {
         progressView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.isHidden = isProgressHidden
         addSubview(progressView)
     }
     
@@ -111,13 +81,7 @@ class BasketItemProgress : BasketItemView {
         limitLabel.text = text
         addSubview(limitLabel)
     }
-    
-    func setupBackgroundImageViewConstraints() {
-        backgroundImageView.snp.makeConstraints { make in
-            make.left.top.right.bottom.equalToSuperview()
-        }
-    }
-    
+        
     func setupProgressConstraints() {
         progressView.snp.makeConstraints { make in
             make.left.top.bottom.equalToSuperview()

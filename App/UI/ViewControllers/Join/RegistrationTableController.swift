@@ -14,6 +14,7 @@ protocol RegistrationTableControllerDelegate {
     func didChange(password: String?)
     func didChange(passwordConfirmation: String?)
     func didTapSave()
+    func didTapSignIn()
 }
 
 class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
@@ -21,10 +22,15 @@ class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
     @IBOutlet weak var emailField: FormTextField!
     @IBOutlet weak var passwordField: FormTextField!
     @IBOutlet weak var confirmationField: FormTextField!
+    @IBOutlet weak var registerCell: UITableViewCell!
+    @IBOutlet weak var registerButton: HighlightButton!
     
     var delegate: RegistrationTableControllerDelegate?
     
     override var saveButtonTitle: String { return "Зарегистрироваться" }    
+    override var saveButtonInForm: UIButton? {
+        return registerButton
+    }
     
     override func setupUI() {
         super.setupUI()
@@ -76,5 +82,13 @@ class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
     
     override func didTapSave() {
         delegate?.didTapSave()
+    }
+    
+    @IBAction func didTapRegisterButton(_ sender: Any) {
+        delegate?.didTapSave()
+    }
+    
+    @IBAction func didTapSignInButton(_ sender: Any) {
+        delegate?.didTapSignIn()
     }
 }

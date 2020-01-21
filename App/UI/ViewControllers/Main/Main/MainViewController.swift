@@ -10,10 +10,12 @@ import UIKit
 import SideMenu
 import PromiseKit
 import SwifterSwift
+import BetterSegmentedControl
+import EasyTipView
 
 class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
     
-    var navigationBarTintColor: UIColor? = UIColor.by(.dark2A314B)
+    var navigationBarTintColor: UIColor? = UIColor.by(.black2)
     
     var viewModel: MainViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -35,20 +37,10 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var expenseSourcesLoader: UIImageView!
     @IBOutlet weak var expenseSourcesAmountLabel: UILabel!
     
-    @IBOutlet weak var joyBasketProgressConstraint: NSLayoutConstraint!
-    @IBOutlet weak var safeBasketProgressConstraint: NSLayoutConstraint!
-    @IBOutlet weak var riskBasketProgressConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var basketsContentScrollView: UIScrollView!
-    @IBOutlet weak var joyBasketSpentLabel: UILabel!
-    @IBOutlet weak var joyBasketTitleLabel: UILabel!
+    @IBOutlet weak var basketsTabs: BetterSegmentedControl!
+    var tabsInitialized: Bool = false
     
-    @IBOutlet weak var riskBasketSpentLabel: UILabel!
-    @IBOutlet weak var riskBasketTitleLabel: UILabel!
-    
-    @IBOutlet weak var safeBasketSpentLabel: UILabel!
-    @IBOutlet weak var safeBasketTitleLabel: UILabel!
-        
     @IBOutlet weak var joyExpenseCategoriesCollectionView: UICollectionView!
     @IBOutlet weak var riskActivesCollectionView: UICollectionView!
     @IBOutlet weak var safeActivesCollectionView: UICollectionView!
@@ -71,11 +63,15 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     var titleView: TitleView!
     var transactionController: TransactionController!
     var rearrangeController: RearrangeController!
+    var adviserTip: EasyTipView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        loadData()        
+        loadData()
+        after(seconds: 3).done {
+            self.show(tipMessage: "Скоро здесь будет финансовый советник")
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -85,20 +81,8 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)        
-        navigationController?.navigationBar.barTintColor = UIColor.by(.dark2A314B)
+        navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
         appMovedToForeground()
-    }
-    
-    @IBAction func didTapJoyBasket(_ sender: Any) {
-        didTapBasket(with: .joy)
-    }
-    
-    @IBAction func didTapRiskBasket(_ sender: Any) {
-        didTapBasket(with: .risk)
-    }
-    
-    @IBAction func didTapSafeBasket(_ sender: Any) {
-        didTapBasket(with: .safe)
     }
     
     @IBAction func didTapMainButton(_ sender: Any) {

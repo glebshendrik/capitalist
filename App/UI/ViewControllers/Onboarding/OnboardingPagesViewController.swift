@@ -22,6 +22,14 @@ class OnboardingPagesViewController : UIPageViewController, UIPageViewController
         return presentationIndex(of: page) == (pages.count - 1)
     }
     
+    var numberOfPages: Int {
+        return pages.count
+    }
+    
+    var currentPageIndex: Int {
+        return presentationIndex(of: viewControllers?.first)
+    }
+    
     private lazy var pages: [UIViewController] = {
         return [
             router.viewController(.OnboardingPage1ViewController),
@@ -30,8 +38,6 @@ class OnboardingPagesViewController : UIPageViewController, UIPageViewController
             router.viewController(.OnboardingPage4ViewController),
             router.viewController(.OnboardingPage5ViewController),
             router.viewController(.OnboardingPage6ViewController),
-            router.viewController(.OnboardingPage7ViewController),
-            router.viewController(.OnboardingPage8ViewController)
         ]
     }()
     
@@ -44,8 +50,6 @@ class OnboardingPagesViewController : UIPageViewController, UIPageViewController
         if let firstPage = pages.first {
             show(viewController: firstPage)
         }
-        
-        setupUI()
     }
     
     func showNextPage() {
@@ -69,7 +73,7 @@ class OnboardingPagesViewController : UIPageViewController, UIPageViewController
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        guard let viewControllerIndex = pages.index(of: viewController) else { return nil }
+        guard let viewControllerIndex = pages.firstIndex(of: viewController) else { return nil }
         
         let previousIndex = viewControllerIndex - 1
         
@@ -82,7 +86,7 @@ class OnboardingPagesViewController : UIPageViewController, UIPageViewController
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
     {
-        guard let viewControllerIndex = pages.index(of: viewController) else { return nil }
+        guard let viewControllerIndex = pages.firstIndex(of: viewController) else { return nil }
         
         let nextIndex = viewControllerIndex + 1
         
@@ -93,13 +97,13 @@ class OnboardingPagesViewController : UIPageViewController, UIPageViewController
         return pages[nextIndex]
     }
     
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return pages.count
-    }
-    
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return presentationIndex(of: viewControllers?.first)
-    }
+//    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+//        return pages.count
+//    }
+//    
+//    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+//        return presentationIndex(of: viewControllers?.first)
+//    }
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {        
     }
@@ -115,17 +119,10 @@ class OnboardingPagesViewController : UIPageViewController, UIPageViewController
     
     private func presentationIndex(of viewController: UIViewController?) -> Int {
         guard   let viewController = viewController,
-            let firstViewControllerIndex = pages.index(of: viewController) else {
+            let firstViewControllerIndex = pages.firstIndex(of: viewController) else {
                 
                 return 0
         }
         return firstViewControllerIndex
-    }
-    
-    private func setupUI() {
-        let pageControl = UIPageControl.appearance(whenContainedInInstancesOf: [type(of: self)])
-        pageControl.currentPageIndicatorTintColor = UIColor(red: 0.42, green: 0.58, blue: 0.98, alpha: 1)
-        pageControl.pageIndicatorTintColor = UIColor(red: 0.89, green: 0.91, blue: 0.97, alpha: 1)
-        pageControl.backgroundColor = UIColor.clear
     }
 }

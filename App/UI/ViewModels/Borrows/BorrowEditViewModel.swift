@@ -155,8 +155,8 @@ class BorrowEditViewModel {
         guard let type = type else { return "Удалить?" }
         return type == .debt ? "Удалить долг?" : "Удалить займ?"
     }
-    
-    var iconDefaultImageName: String { return IconCategory.expenseSourceDebt.defaultIconName }
+        
+    var iconDefaultImageName: String { return "borrow-default-icon" }
     var expenseSourceIconURL: URL? { return selectedExpenseSource?.iconURL }
     var expenseSourceIconDefaultImageName: String { return IconCategory.expenseSource.defaultIconName }
     var expenseSourceName: String? { return selectedExpenseSource?.name }

@@ -87,7 +87,7 @@ class CreditEditViewModel {
         
     var title: String { return isNew ? "Новый кредит" : "Кредит" }
     
-    var iconDefaultImageName: String { return IconCategory.expenseSourceDebt.defaultIconName }
+    var iconDefaultImageName: String { return "credit-default-icon" }
     
     var minValue: Float {
         return Float(selectedCreditType?.minValue ?? 0)

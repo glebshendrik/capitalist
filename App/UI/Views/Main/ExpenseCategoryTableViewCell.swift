@@ -10,7 +10,6 @@ import UIKit
 
 class ExpenseCategoryTableViewCell : UITableViewCell {
     
-    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var spentLabel: UILabel!
@@ -30,6 +29,5 @@ class ExpenseCategoryTableViewCell : UITableViewCell {
                                placeholderName: viewModel.expenseCategory.basketType.iconCategory.defaultIconName,
                                renderingMode: .alwaysTemplate)
         iconImageView.tintColor = UIColor.by(.textFFFFFF)
-        backgroundImage.image = UIImage.init(named: viewModel.expenseCategory.basketType.iconBackgroundName(size: .tiny))
     }
 }

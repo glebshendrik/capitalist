@@ -29,33 +29,26 @@ class ExpenseCategoryCollectionViewCell : BasketItemCollectionViewCell {
         
     override func setupIcon() {
         super.setupIcon()
-        icon.backgroundCornerRadius = 24
+        icon.backgroundCornerRadius = 32
+        icon.backgroundViewColor = iconBackgroundColor(basketType: .joy)
     }
-    
+        
     override func updateIcon() {
         super.updateIcon()
         guard let viewModel = viewModel else { return }
         icon.defaultIconName = viewModel.defaultIconName
-        icon.backgroundImage = UIImage(named: viewModel.iconBackgroundImageName)
         icon.iconURL = viewModel.iconURL
-        icon.isBackgroundHidden = viewModel.isSpendingProgressCompleted
     }
-        
+            
     override func updateProgress() {
         super.updateProgress()
-        guard let viewModel = viewModel else { return }        
-        progress.backgroundImage = UIImage(named: viewModel.progressBackgroundImageName)
-        progress.progressColor = progressColor(basketType: viewModel.basketType)
+        guard let viewModel = viewModel else { return }
+        progress.backgroundColor = progressBackgroundColor(basketType: viewModel.basketType)
+        progress.progressColor = progressColor(basketType: viewModel.basketType, completed: viewModel.isSpendingProgressCompleted)
         progress.isHidden = !viewModel.areExpensesPlanned
-        progress.isBackgroundHidden = !viewModel.isSpendingProgressCompleted
-        progress.isProgressHidden = viewModel.isSpendingProgressCompleted
         progress.progressWidth = CGFloat(viewModel.spendingProgress) * progressContainerWidth
         progress.text = viewModel.plannedAtPeriod
-        progress.labelColor = viewModel.isSpendingProgressCompleted
-            ? UIColor.by(.textFFFFFF)
-            : UIColor.by(.dark2A314B)
-    }
-    
+    }    
     
     override func updateDescription() {
         super.updateDescription()

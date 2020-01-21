@@ -10,7 +10,7 @@ import UIKit
 
 class ActiveTableViewCell : UITableViewCell {
     
-    @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var iconBackgroundView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
@@ -30,6 +30,6 @@ class ActiveTableViewCell : UITableViewCell {
                                placeholderName: viewModel.defaultIconName,
                                renderingMode: .alwaysTemplate)
         iconImageView.tintColor = UIColor.by(.textFFFFFF)
-        backgroundImage.image = UIImage.init(named: viewModel.iconBackgroundImageName)
+        iconBackgroundView.backgroundColor = viewModel.basketType.iconBackgroundColor
     }
 }

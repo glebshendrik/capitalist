@@ -15,8 +15,8 @@ class BorrowInfoViewController : EntityInfoNavigationController {
         return viewModel
     }
         
-    override func didTapIcon(field: IconInfoField?) {
-        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSourceDebt))
+    override func didTapIcon(field: IconInfoField?) {        
+        modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.common))
     }
                    
     override func didTapInfoButton(field: ButtonInfoField?) {

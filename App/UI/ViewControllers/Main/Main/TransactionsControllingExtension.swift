@@ -71,21 +71,26 @@ extension MainViewController {
 }
 
 extension MainViewController {
+    
     func didSetSource(cell: UICollectionViewCell?, animated: Bool) {
         if isSelecting {
             cell?.set(selected: true, animated: animated)
+            updateAdviserTip()
         }
         else {
-            cell?.scaleDown(animated: animated)
+            cell?.set(selected: true, animated: animated)
+//            cell?.scaleDown(animated: animated)
         }
     }
 
     func didSetDestination(cell: UICollectionViewCell?, animated: Bool) {
         if isSelecting {
             cell?.set(selected: true, animated: animated)
+            updateAdviserTip()
         }
         else {
-            cell?.scaleUp(animated: animated)
+            cell?.set(selected: true, animated: animated)
+//            cell?.scaleUp(animated: animated)
         }
     }
 
@@ -94,7 +99,8 @@ extension MainViewController {
             cell?.set(selected: false, animated: animated)
         }
         else {
-            cell?.unscale(animated: animated)
+            cell?.set(selected: false, animated: animated)
+//            cell?.unscale(animated: animated)
         }
     }
     
@@ -138,6 +144,7 @@ extension MainViewController {
         transactionController.sourceCell = nil
         transactionController.destinationCollectionView = nil
         transactionController.destinationCell = nil
+        adviserTip?.dismiss()
         viewModel.resetTransactionables()
     }
 }

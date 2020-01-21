@@ -116,6 +116,7 @@ struct Infrastructure {
         case ReminderEditNavigationController
         case ReminderEditViewController
         case EntityInfoViewController
+        case AppUpdateViewController
         
         // Profile
         case ProfileViewController
@@ -190,7 +191,8 @@ struct Infrastructure {
                  .SlideUpContainerViewController,
                  .ReminderEditNavigationController,
                  .ReminderEditViewController,
-                 .EntityInfoViewController:
+                 .EntityInfoViewController,
+                 .AppUpdateViewController:
                 return .Common
             case .ProfileViewController,
                  .ChangePasswordViewController:

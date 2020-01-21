@@ -92,15 +92,15 @@ class CommentViewController : UIViewController, CommentViewControllerInputProtoc
     private func configureInputBar() {
         let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         rightButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
-        rightButton.setImage(#imageLiteral(resourceName: "save-circle-big-icon"), for: .normal)
+        rightButton.setImage(UIImage(named: "save-icon"), for: .normal)
         
         textInputBar.showTextViewBorder = true
         textInputBar.rightView = rightButton
         textInputBar.textViewCornerRadius = 16
         textInputBar.textViewBackgroundColor = UIColor(red: 0.95, green: 0.96, blue: 1, alpha: 1)
         textInputBar.textViewBorderWidth = 0
-        textInputBar.textView.font = UIFont(name: "Rubik-Regular", size: 14)
-        textInputBar.textView.textColor = UIColor.by(.text9EAACC)
+        textInputBar.textView.font = UIFont(name: "Roboto-Medium", size: 18)
+        textInputBar.textView.textColor = UIColor.by(.white100)
         
         textInputBar.alwaysShowRightButton = true
         textInputBar.defaultHeight = 64

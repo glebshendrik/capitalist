@@ -15,7 +15,7 @@ class BasketItemCollectionViewCell : TransactionableCell {
     lazy var itemDescription: BasketItemDescription = { return BasketItemDescription() }()
     
     var progressContainerWidth: CGFloat {
-        return 48.0
+        return 64.0
     }
     
     override func setupUI() {
@@ -26,23 +26,28 @@ class BasketItemCollectionViewCell : TransactionableCell {
     }
     
     func setupIcon() {
-        icon.backgroundColor = UIColor.by(.dark1F263E)
+        icon.backgroundViewColor = UIColor.by(.black2)
         icon.backgroundCornerRadius = 4
-        icon.iconTintColor = UIColor.by(.textFFFFFF)
+        icon.iconTintColor = UIColor.by(.white100)
         contentView.addSubview(icon)
     }
     
     func setupProgress() {
-        progress.backgroundCornerRadius = 4
-        progress.backgroundColor = UIColor.by(.textFFFFFF)
+        progress.backgroundCornerRadius = 4        
         contentView.addSubview(progress)
     }
     
     func setupDescription() {
-        itemDescription.titleColor = UIColor.by(.text9EAACC)
-        itemDescription.amountColor = UIColor.by(.textFFFFFF)
-        itemDescription.subAmountColor = UIColor.by(.text9EAACC)
+        itemDescription.titleColor = UIColor.by(.white64)
+        itemDescription.amountColor = UIColor.by(.white100)
+        itemDescription.subAmountColor = UIColor.by(.white64)
         contentView.addSubview(itemDescription)
+    }
+    
+    override func setupSelectionIndicator() {
+        selectionIndicator.isHidden = true
+        selectionIndicator.backgroundColor = UIColor.by(.blue1)
+        icon.backgroundView.insertSubview(selectionIndicator, at: 0)
     }
     
     override func setupConstraints() {
@@ -56,7 +61,7 @@ class BasketItemCollectionViewCell : TransactionableCell {
     
     override func setupDeleteButtonConstraints() {
         deleteButton.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(2)
             make.bottom.equalTo(icon.snp.top).offset(14)
             make.left.equalTo(icon.snp.right).offset(-14)
             make.width.height.equalTo(16)
@@ -65,7 +70,7 @@ class BasketItemCollectionViewCell : TransactionableCell {
     
     func setupIconConstraints() {
         icon.snp.makeConstraints { make in
-            make.width.height.equalTo(48)
+            make.width.height.equalTo(64)
             make.centerX.equalToSuperview()
         }
     }
@@ -75,13 +80,13 @@ class BasketItemCollectionViewCell : TransactionableCell {
             make.width.equalTo(progressContainerWidth)
             make.height.equalTo(14)
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(icon.snp.bottom).offset(6)
+            make.bottom.equalTo(icon.snp.bottom).offset(0)
         }
     }
     
     func setupDescriptionConstraints() {
         itemDescription.snp.makeConstraints { make in
-            make.top.equalTo(icon.snp.bottom).offset(8)
+            make.top.equalTo(icon.snp.bottom).offset(6)
             make.bottom.greaterThanOrEqualToSuperview().offset(-7)
             make.left.right.equalToSuperview()
         }
@@ -92,13 +97,6 @@ class BasketItemCollectionViewCell : TransactionableCell {
             make.top.equalTo(icon.snp.bottom).offset(-14)
             make.left.equalTo(icon.snp.right).offset(-14)
             make.width.height.equalTo(16)
-        }
-    }
-    
-    override func setupSelectionIndicatorConstraints() {
-        selectionIndicator.snp.makeConstraints { make in
-            make.bottom.equalTo(editButton.snp.bottom)
-            make.right.equalTo(editButton.snp.right)
         }
     }
     
@@ -119,14 +117,38 @@ class BasketItemCollectionViewCell : TransactionableCell {
     func updateDescription() {
     }
     
-    func progressColor(basketType: BasketType) -> UIColor {
+    func iconBackgroundColor(basketType: BasketType) -> UIColor {
         switch basketType {
         case .joy:
-            return UIColor.by(.joyC2C9E2)
-        case .risk:
-            return UIColor.by(.riskF2D6FE)
+            return UIColor.by(.brandExpense)
         case .safe:
-            return UIColor.by(.safeD7F6E6)
+            return UIColor.by(.brandSafe)
+        case .risk:
+            return UIColor.by(.brandRisk)
+        }
+    }
+    
+    func progressColor(basketType: BasketType, completed: Bool) -> UIColor {
+        switch (basketType, completed) {
+        case (.joy, false):
+            return UIColor.by(.white40)
+        case (.joy, true):
+            return UIColor.by(.red1)
+        case (.safe, _):
+            return UIColor.by(.green24)
+        case (.risk, _):
+            return UIColor.by(.purple24)
+        }
+    }
+    
+    func progressBackgroundColor(basketType: BasketType) -> UIColor {
+        switch basketType {
+        case .joy:
+            return UIColor.by(.gray2)
+        case .safe:
+            return UIColor.by(.green64)
+        case .risk:
+            return UIColor.by(.purple64)
         }
     }
 }

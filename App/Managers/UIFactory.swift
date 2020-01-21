@@ -187,6 +187,10 @@ class UIFactory : UIFactoryProtocol {
         return recurrencePicker
     }
     
+    func loginViewController() -> LoginViewController? {
+        return router.viewController(.LoginViewController) as? LoginViewController
+    }
+    
     func forgotPasswordViewController() -> ForgotPasswordViewController? {
         return router.viewController(.ForgotPasswordViewController) as? ForgotPasswordViewController
     }

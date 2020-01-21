@@ -16,7 +16,7 @@ class FormTapField : FormTextField {
     
     lazy var arrow: UIImageView = { return UIImageView() }()
     
-    @IBInspectable var arrowImage: UIImage? = UIImage(named: "right-arrow-icon") {
+    @IBInspectable var arrowImage: UIImage? = UIImage(named: "arrow-right-small-icon") {
         didSet { updateArrow() }
     }
     

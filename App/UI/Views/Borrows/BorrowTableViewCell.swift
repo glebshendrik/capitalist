@@ -16,8 +16,8 @@ class BorrowTableViewCell : UITableViewCell {
     @IBOutlet weak var borrowedAtLabel: UILabel!
     @IBOutlet weak var paydayLabel: UILabel!
     
-    var placeholderName: String {
-        return IconCategory.expenseSourceDebt.defaultIconName
+    var placeholderName: String {        
+        return "borrow-default-icon"
     }
     
     var imageTintColor: UIColor {

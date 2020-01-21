@@ -12,14 +12,17 @@ import AttributedTextView
 extension MainViewController : TitleViewDelegate {
     var total: NSAttributedString {
         if isSelecting {
-            return (viewModel.selectedSourceName.color(UIColor.by(.text9EAACC))
-                    + " - ".color(UIColor.by(.text9EAACC))
-                    + viewModel.selectedDestinationName.color(UIColor.by(.text9EAACC)))
-                        .all.fontName("Rubik-Regular").size(13).attributedText
+            return ("Из ".color(UIColor.by(.white40))
+                    + viewModel.selectedSourceName.color(UIColor.by(.white100))
+                    + " в ".color(UIColor.by(.white40))
+                    + viewModel.selectedDestinationName.color(UIColor.by(.white100)))
+                        .all.fontName("Roboto-Light").size(12).attributedText
         }
-        return (self.viewModel.basketTotalTitle.color(UIColor.by(.text9EAACC))
-                + self.viewModel.basketTotal.color(UIColor.by(.textFFFFFF)))
-                .all.fontName("Rubik-Regular").size(13).attributedText
+        return (self.viewModel.basketTotalExpensesTitle.color(UIColor.by(.white40))
+                + self.viewModel.basketTotalExpenses.color(UIColor.by(.white100))
+                + self.viewModel.basketTotalTitle.color(UIColor.by(.white40))
+                + self.viewModel.basketTotal.color(UIColor.by(.white100)))
+                .all.fontName("Roboto-Light").size(12).attributedText
     }
     
     func didTapTitle() {

@@ -8,10 +8,11 @@
 
 import UIKit
 import PromiseKit
+import BetterSegmentedControl
 
 class BalanceViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol, NavigationBarColorable {
     
-    var navigationBarTintColor: UIColor? = UIColor.by(.dark333D5B)
+    var navigationBarTintColor: UIColor? = UIColor.by(.black2)
     var factory: UIFactoryProtocol!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: BalanceViewModel!
@@ -19,11 +20,8 @@ class BalanceViewController : UIViewController, UIMessagePresenterManagerDependa
     var expenseSourcesSupport: BalanceExpenseSourcesTableSupport?
     var activesSupport: BalanceActivesTableSupport?
     
-    @IBOutlet weak var expenseSourcesLabel: UILabel!
-    @IBOutlet weak var activesLabel: UILabel!
     
-    @IBOutlet weak var expenseSourcesSelectionIndicator: UIView!
-    @IBOutlet weak var activesSelectionIndicator: UIView!
+    @IBOutlet weak var tabs: BetterSegmentedControl!
     
     @IBOutlet weak var expenseSourcesActivityIndicator: UIView!
     @IBOutlet weak var activesActivityIndicator: UIView!
@@ -40,6 +38,8 @@ class BalanceViewController : UIViewController, UIMessagePresenterManagerDependa
     @IBOutlet weak var expenseSourcesAmountLabel: UILabel!
     @IBOutlet weak var activesAmountLabel: UILabel!
     
+    var tabsInitialized: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -49,14 +49,6 @@ class BalanceViewController : UIViewController, UIMessagePresenterManagerDependa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)        
-        navigationController?.navigationBar.barTintColor = UIColor.by(.dark333D5B)
-    }
-    
-    @IBAction func didTapExpenseSources(_ sender: Any) {
-        select(.expenseSources)
-    }
-    
-    @IBAction func didTapActives(_ sender: Any) {
-        select(.actives)
+        navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
     }
 }

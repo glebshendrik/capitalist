@@ -239,9 +239,9 @@ extension TransactionableType {
     
     var defaultIconName: String {
         switch (self) {
-        case .incomeSource:                 return "joy-default-icon"
-        case .expenseSource:                return "wallet-default-icon"
-        case .expenseCategory:              return "joy-default-icon"
+        case .incomeSource:                 return "income-source-default-icon"
+        case .expenseSource:                return "expense-source-default-icon"
+        case .expenseCategory:              return "expense-category-default-icon"
         case .active:                       return ""
         }
     }
@@ -249,9 +249,9 @@ extension TransactionableType {
     func defaultIconName(basketType: BasketType?) -> String {
         guard let basketType = basketType else { return defaultIconName }
         switch (self, basketType) {
-        case (.active, .joy):               return "joy-default-icon"
-        case (.active, .safe):              return "safe-default-icon"
-        case (.active, .risk):              return "risk-default-icon"
+        case (.active, .joy):               return "expense-category-default-icon"
+        case (.active, .safe):              return "asset-safe-default-icon"
+        case (.active, .risk):              return "asset-risk-default-icon"
         default:                            return defaultIconName
         }
     }

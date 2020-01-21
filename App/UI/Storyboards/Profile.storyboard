@@ -9,8 +9,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Rubik-Regular.ttf">
-            <string>Rubik-Regular</string>
+        <array key="Roboto-Light.ttf">
+            <string>Roboto-Light</string>
+        </array>
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
         </array>
     </customFonts>
     <scenes>
@@ -42,14 +48,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Основные" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CyD-fZ-IH4">
-                                                    <rect key="frame" x="16" y="14" width="72" height="18"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                                    <color key="textColor" name="text 9EAACC"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ОСНОВНЫЕ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CyD-fZ-IH4">
+                                                    <rect key="frame" x="16" y="16" width="70.5" height="14"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
+                                                    <color key="textColor" name="white 0.64"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="dark 333D5B"/>
+                                            <color key="backgroundColor" name="white 0.04"/>
                                             <constraints>
                                                 <constraint firstItem="CyD-fZ-IH4" firstAttribute="centerY" secondItem="yeE-dO-4Yz" secondAttribute="centerY" constant="2" id="KAe-BL-nlr"/>
                                                 <constraint firstItem="CyD-fZ-IH4" firstAttribute="leading" secondItem="yeE-dO-4Yz" secondAttribute="leading" constant="16" id="RQR-48-ZOA"/>
@@ -65,15 +71,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Имя" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQi-p7-mJ8">
-                                                    <rect key="frame" x="16" y="26" width="24" height="14"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
-                                                    <color key="textColor" name="text 9EAACC"/>
+                                                    <rect key="frame" x="16" y="20" width="28" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="14"/>
+                                                    <color key="textColor" name="white 0.4"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Александр" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tol-nr-lf0">
-                                                    <rect key="frame" x="16" y="42" width="343" height="18"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                                    <color key="textColor" name="text FFFFFF"/>
+                                                    <rect key="frame" x="16" y="39" width="343" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                    <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -95,15 +101,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSc-JV-EVL">
-                                                    <rect key="frame" x="16" y="14" width="29.5" height="14"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
-                                                    <color key="textColor" name="text 9EAACC"/>
+                                                    <rect key="frame" x="16" y="8" width="35" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="14"/>
+                                                    <color key="textColor" name="white 0.4"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="petalvlad@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsB-3L-vXj">
-                                                    <rect key="frame" x="16" y="30" width="343" height="18"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                                    <color key="textColor" name="text FFFFFF"/>
+                                                    <rect key="frame" x="16" y="27" width="343" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                    <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -124,14 +130,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Конфиденциальность" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OY4-zs-8xk">
-                                                    <rect key="frame" x="16" y="14.5" width="144" height="17"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                                    <color key="textColor" name="text 9EAACC"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="БЕЗОПАСНОСТЬ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OY4-zs-8xk">
+                                                    <rect key="frame" x="16" y="16" width="99" height="14"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
+                                                    <color key="textColor" name="white 0.4"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="dark 333D5B"/>
+                                            <color key="backgroundColor" name="white 0.04"/>
                                             <constraints>
                                                 <constraint firstItem="OY4-zs-8xk" firstAttribute="centerY" secondItem="gGo-ru-fit" secondAttribute="centerY" constant="2" id="03N-Oa-Lcx"/>
                                                 <constraint firstItem="OY4-zs-8xk" firstAttribute="leading" secondItem="gGo-ru-fit" secondAttribute="leading" constant="16" id="ebs-A4-RTU"/>
@@ -147,14 +153,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Сменить пароль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gR4-V9-NEd">
-                                                    <rect key="frame" x="16" y="24" width="299" height="18"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                                    <color key="textColor" name="text FFFFFF"/>
+                                                    <rect key="frame" x="16" y="22.5" width="313" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                    <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-right-icon" translatesAutoresizingMaskIntoConstraints="NO" id="6cJ-BO-o96">
-                                                    <rect key="frame" x="331" y="7" width="28" height="52"/>
-                                                    <color key="tintColor" name="dark 404B6F"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-right-small-icon" translatesAutoresizingMaskIntoConstraints="NO" id="6cJ-BO-o96">
+                                                    <rect key="frame" x="345" y="21" width="14" height="24"/>
+                                                    <color key="tintColor" name="white 0.12"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -170,23 +176,22 @@
                                             <segue destination="uhF-6W-j7W" kind="show" id="m0p-wm-Ndu"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="88" id="EO4-K0-jQA">
-                                        <rect key="frame" x="0.0" y="358" width="375" height="88"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="40" id="EO4-K0-jQA">
+                                        <rect key="frame" x="0.0" y="358" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EO4-K0-jQA" id="SgR-rR-nu0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuF-dS-LK2">
-                                                    <rect key="frame" x="92.5" y="42" width="190" height="40"/>
-                                                    <color key="backgroundColor" red="0.44705882349999998" green="0.50196078430000002" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuF-dS-LK2">
+                                                    <rect key="frame" x="16" y="-6" width="343" height="40"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="XKU-nH-9Ar"/>
-                                                        <constraint firstAttribute="width" constant="190" id="dhp-DU-46B"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
                                                     <state key="normal" title="Выйти">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="titleColor" name="red 1"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -200,13 +205,15 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="HuF-dS-LK2" secondAttribute="bottom" constant="6" id="FEb-Dz-X1D"/>
+                                                <constraint firstItem="HuF-dS-LK2" firstAttribute="leading" secondItem="SgR-rR-nu0" secondAttribute="leading" constant="16" id="YNV-DR-jCc"/>
+                                                <constraint firstAttribute="trailing" secondItem="HuF-dS-LK2" secondAttribute="trailing" constant="16" id="aNe-NQ-XzT"/>
                                                 <constraint firstItem="HuF-dS-LK2" firstAttribute="centerX" secondItem="SgR-rR-nu0" secondAttribute="centerX" id="zgz-ku-xAL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="38" id="gqr-6h-NkF">
-                                        <rect key="frame" x="0.0" y="446" width="375" height="38"/>
+                                        <rect key="frame" x="0.0" y="398" width="375" height="38"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gqr-6h-NkF" id="p7F-TD-7AK">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
@@ -364,7 +371,7 @@
                                 <action selector="didTapCancelButton:" destination="A7X-Rr-QMF" id="EHZ-Yw-I1E"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="save-circle-icon" id="mHV-nu-Gwl">
+                        <barButtonItem key="rightBarButtonItem" image="save-icon" id="mHV-nu-Gwl">
                             <connections>
                                 <action selector="didTapSaveButton:" destination="A7X-Rr-QMF" id="hFy-ml-3IM"/>
                             </connections>
@@ -401,7 +408,7 @@
             <objects>
                 <tableViewController title="Восстановление пароля" id="ZQ6-5G-PLb" customClass="ChangePasswordTableController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dso-mQ-AUG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="dark 2A314B"/>
                         <sections>
@@ -425,45 +432,40 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="280" id="2dV-aa-mBB">
-                                        <rect key="frame" x="0.0" y="64" width="375" height="280"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="132" id="xc6-BV-ev1">
+                                        <rect key="frame" x="0.0" y="64" width="375" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2dV-aa-mBB" id="DmH-Fp-NOW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xc6-BV-ev1" id="SfL-LO-CNI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LOF-ph-52R">
-                                                    <rect key="frame" x="41" y="364" width="293" height="0.0"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                                    <color key="textColor" name="text FFFFFF"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите старый пароль, и укажите новый пароль" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tp9-KI-hXo">
+                                                    <rect key="frame" x="41" y="61.5" width="293" height="37.5"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
+                                                    <color key="textColor" name="white 0.64"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reset-password-image" translatesAutoresizingMaskIntoConstraints="NO" id="mIG-df-icW">
-                                                    <rect key="frame" x="59.5" y="70" width="256" height="270"/>
-                                                </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="omB-bc-HXX">
-                                                    <rect key="frame" x="0.0" y="279" width="375" height="1"/>
-                                                    <color key="backgroundColor" name="delimeter 2F3854"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZrV-VG-aBf">
+                                                    <rect key="frame" x="0.0" y="131" width="375" height="1"/>
+                                                    <color key="backgroundColor" name="white 0.04"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="isD-Ig-djQ"/>
+                                                        <constraint firstAttribute="height" constant="1" id="CWy-yB-mIp"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="LOF-ph-52R" secondAttribute="trailing" constant="41" id="2RD-IZ-0Nk"/>
-                                                <constraint firstAttribute="trailing" secondItem="omB-bc-HXX" secondAttribute="trailing" id="5u1-vv-qfO"/>
-                                                <constraint firstItem="mIG-df-icW" firstAttribute="centerX" secondItem="DmH-Fp-NOW" secondAttribute="centerX" id="7On-eN-XFo"/>
-                                                <constraint firstItem="omB-bc-HXX" firstAttribute="leading" secondItem="DmH-Fp-NOW" secondAttribute="leading" id="H3F-aA-Emk"/>
-                                                <constraint firstAttribute="bottom" secondItem="omB-bc-HXX" secondAttribute="bottom" id="qaq-bj-Pec"/>
-                                                <constraint firstItem="LOF-ph-52R" firstAttribute="top" secondItem="mIG-df-icW" secondAttribute="bottom" constant="24" id="qgi-cG-bIK"/>
-                                                <constraint firstItem="mIG-df-icW" firstAttribute="top" secondItem="DmH-Fp-NOW" secondAttribute="top" constant="70" id="xyO-4n-UHd"/>
-                                                <constraint firstItem="LOF-ph-52R" firstAttribute="leading" secondItem="DmH-Fp-NOW" secondAttribute="leading" constant="41" id="yJI-o8-BzI"/>
+                                                <constraint firstItem="ZrV-VG-aBf" firstAttribute="top" secondItem="Tp9-KI-hXo" secondAttribute="bottom" constant="32" id="6i1-WI-OW6"/>
+                                                <constraint firstItem="ZrV-VG-aBf" firstAttribute="leading" secondItem="SfL-LO-CNI" secondAttribute="leading" id="B7U-Qr-2DP"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZrV-VG-aBf" secondAttribute="trailing" id="Yyo-Hs-oZW"/>
+                                                <constraint firstAttribute="trailing" secondItem="Tp9-KI-hXo" secondAttribute="trailing" constant="41" id="hzh-vJ-v4o"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZrV-VG-aBf" secondAttribute="bottom" id="jzu-12-76n"/>
+                                                <constraint firstItem="Tp9-KI-hXo" firstAttribute="leading" secondItem="SfL-LO-CNI" secondAttribute="leading" constant="41" id="qGx-sq-wcy"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="GQP-RB-DiT">
-                                        <rect key="frame" x="0.0" y="344" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="196" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GQP-RB-DiT" id="glA-dE-PH6">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -489,7 +491,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="izT-PC-K8e">
-                                        <rect key="frame" x="0.0" y="419" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="271" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="izT-PC-K8e" id="oOO-tj-yz3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -515,7 +517,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="wfq-OY-E1G">
-                                        <rect key="frame" x="0.0" y="494" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="346" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wfq-OY-E1G" id="IQS-Ad-6xx">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -540,6 +542,47 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="70" id="gtJ-WX-EPn">
+                                        <rect key="frame" x="0.0" y="421" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gtJ-WX-EPn" id="0Bg-DF-030">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKD-mK-UXI" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="11" width="327" height="48"/>
+                                                    <color key="backgroundColor" name="blue 6A92FA"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="48" id="I74-Xe-QDc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                                    <state key="normal" title="Сменить пароль">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                                            <color key="value" name="blue 6A92FA"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                                            <color key="value" name="delimeter AFC1FF"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapChangePasswordButton:" destination="ZQ6-5G-PLb" eventType="touchUpInside" id="NjL-eG-gyL"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UKD-mK-UXI" firstAttribute="leading" secondItem="0Bg-DF-030" secondAttribute="leading" constant="24" id="4u1-Xl-ulo"/>
+                                                <constraint firstAttribute="trailing" secondItem="UKD-mK-UXI" secondAttribute="trailing" constant="24" id="Gmk-K0-xTp"/>
+                                                <constraint firstItem="UKD-mK-UXI" firstAttribute="centerY" secondItem="0Bg-DF-030" secondAttribute="centerY" id="wHV-ey-ekf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -550,6 +593,7 @@
                     </tableView>
                     <connections>
                         <outlet property="activityIndicatorCell" destination="sP4-DB-Wcq" id="zQP-CV-ivl"/>
+                        <outlet property="changePasswordButton" destination="UKD-mK-UXI" id="Aon-M4-5qg"/>
                         <outlet property="confirmationField" destination="biT-wj-dlP" id="lkZ-jw-9my"/>
                         <outlet property="loaderImageView" destination="Yt8-wf-8gt" id="JY2-qE-s12"/>
                         <outlet property="newPasswordField" destination="IdX-Ra-v4D" id="3Bb-gR-PUp"/>
@@ -569,55 +613,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FjE-Kq-Uex">
-                                <rect key="frame" x="0.0" y="44" width="375" height="567"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="ZQ6-5G-PLb" kind="embed" identifier="showEditTableView" id="pJf-ED-rL3"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F70-gt-pod" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="611" width="375" height="56"/>
-                                <color key="backgroundColor" name="blue 6A92FA"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="Dsj-gG-qT0"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
-                                <state key="normal" title="Сменить пароль">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                        <color key="value" name="blue 6A92FA"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                        <color key="value" name="delimeter AFC1FF"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didTapSaveButton:" destination="uhF-6W-j7W" eventType="touchUpInside" id="dQE-A0-4Eo"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" name="dark 2A314B"/>
+                        <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstItem="FjE-Kq-Uex" firstAttribute="top" secondItem="1Yl-nn-zeg" secondAttribute="top" id="1eq-Bq-ZvI"/>
-                            <constraint firstItem="1Yl-nn-zeg" firstAttribute="bottom" secondItem="F70-gt-pod" secondAttribute="bottom" id="3b0-Ja-cyj"/>
-                            <constraint firstItem="F70-gt-pod" firstAttribute="top" secondItem="FjE-Kq-Uex" secondAttribute="bottom" id="BDl-Ta-6CG"/>
                             <constraint firstItem="1Yl-nn-zeg" firstAttribute="trailing" secondItem="FjE-Kq-Uex" secondAttribute="trailing" id="Eeq-8v-Hgo"/>
-                            <constraint firstItem="F70-gt-pod" firstAttribute="leading" secondItem="1Yl-nn-zeg" secondAttribute="leading" id="P16-bM-IIC"/>
+                            <constraint firstItem="1Yl-nn-zeg" firstAttribute="bottom" secondItem="FjE-Kq-Uex" secondAttribute="bottom" id="ODz-Nf-dA4"/>
                             <constraint firstItem="FjE-Kq-Uex" firstAttribute="leading" secondItem="1Yl-nn-zeg" secondAttribute="leading" id="waL-yC-BLZ"/>
-                            <constraint firstItem="1Yl-nn-zeg" firstAttribute="trailing" secondItem="F70-gt-pod" secondAttribute="trailing" id="xsg-7B-TbL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Yl-nn-zeg"/>
                     </view>
                     <navigationItem key="navigationItem" title="Вход" id="Xfv-3D-gAV">
                         <barButtonItem key="backBarButtonItem" title=" " id="LuP-M0-L5M"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="saveButton" destination="F70-gt-pod" id="MTA-bj-Obh"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kDQ-1z-aMI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -625,38 +639,43 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow-right-icon" width="14" height="26"/>
+        <image name="arrow-right-small-icon" width="7" height="12"/>
         <image name="close-icon" width="14.5" height="14.5"/>
         <image name="loader-1" width="55" height="31"/>
         <image name="pen-edit-icon" width="14" height="14"/>
-        <image name="reset-password-image" width="128" height="135"/>
-        <image name="save-circle-icon" width="24" height="24"/>
+        <image name="save-icon" width="16" height="14"/>
+        <namedColor name="black 2">
+            <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="blue 6A92FA">
-            <color red="0.41568627450980394" green="0.5725490196078431" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.45882352941176469" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="blue 6B93FB">
-            <color red="0.41960784313725491" green="0.57647058823529407" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.45882352941176469" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="dark 2A314B">
-            <color red="0.16470588235294117" green="0.19215686274509805" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="dark 333D5B">
-            <color red="0.20000000000000001" green="0.23921568627450981" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="dark 404B6F">
-            <color red="0.25098039215686274" green="0.29411764705882354" blue="0.43529411764705883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="delimeter 2F3854">
-            <color red="0.18431372549019609" green="0.2196078431372549" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="delimeter AFC1FF">
             <color red="0.68627450980392157" green="0.75686274509803919" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="text 9EAACC">
-            <color red="0.61960784313725492" green="0.66666666666666663" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="red 1">
+            <color red="1" green="0.40000000000000002" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="text FFFFFF">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="white 0.04">
+            <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white 0.12">
+            <color red="0.91764705882352937" green="0.93333333333333335" blue="0.95686274509803926" alpha="0.11999999731779099" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white 0.4">
+            <color red="0.91764705882352937" green="0.93333333333333335" blue="0.95686274509803926" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white 0.64">
+            <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.63999998569488525" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white 1.0">
+            <color red="0.91764705882352937" green="0.93333333333333335" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -68,8 +68,7 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: IncomeSourceInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,
-                                                       placeholder: IconCategory.expenseCategoryJoy.defaultIconName,
-                                                       backgroundImageName: nil),
+                                                       placeholder: TransactionableType.incomeSource.defaultIconName),
                                          BasicInfoField(fieldId: IncomeSourceInfoField.income.rawValue,
                                                         title: "Доход в этом месяце",
                                                         value: incomeSourceViewModel?.amountRounded)]

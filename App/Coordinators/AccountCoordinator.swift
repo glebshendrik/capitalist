@@ -94,7 +94,11 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return usersService.loadUser(with: currentUserId)
+        return  firstly {
+                    usersService.loadUser(with: currentUserId)
+                }.get { user in
+                    self.router.setMinimumAllowed(version: user.minVersion, build: user.minBuild)
+                }
     }
     
     func loadCurrentUserBudget() -> Promise<Budget> {

@@ -9,7 +9,7 @@
 import UIKit
 
 class FormSubmitViewController : FormEditViewController {
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton?
     
     @IBAction func didTapSaveButton(_ sender: Any) {
         save()
@@ -21,12 +21,12 @@ class FormSubmitViewController : FormEditViewController {
     
     override func operationStarted() {
         super.operationStarted()
-        saveButton.isEnabled = false
+        saveButton?.isEnabled = false
     }
     
     override func operationFinished() {
         super.operationFinished()
-        self.saveButton.isEnabled = true
+        self.saveButton?.isEnabled = true
     }
     
     override func close(completion: (() -> Void)? = nil) {
