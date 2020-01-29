@@ -9,6 +9,7 @@
 import UIKit
 
 protocol ExpenseCategoryEditTableControllerDelegate {
+    func didAppear()
     func didTapIcon()
     func didChange(name: String?)
     func didChange(monthlyPlanned: String?)
@@ -33,6 +34,11 @@ class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     
     var delegate: ExpenseCategoryEditTableControllerDelegate?
         
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        delegate?.didAppear()
+    }
+    
     override func setupUI() {
         super.setupUI()
         setupNameField()

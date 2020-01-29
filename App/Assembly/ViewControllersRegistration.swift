@@ -250,5 +250,10 @@ extension ApplicationAssembly {
         container.registerForSkrudzhStoryboard(BorrowInfoViewController.self) { (r, c) in
             c.viewModel = r.resolve(BorrowInfoViewModel.self)
         }
+        
+        // TransactionablesCreationViewController
+        container.registerForSkrudzhStoryboard(TransactionablesCreationViewController.self) { (r, c) in
+            c.viewModel = r.resolve(TransactionablesCreationViewModel.self)
+        }
     }
 }

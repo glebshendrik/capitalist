@@ -68,6 +68,7 @@ class OnboardingPagesViewController : UIPageViewController, UIPageViewController
     }
     
     func finishOnboarding() {
+        _ = UIFlowManager.reach(point: .onboarding)
         router.route()
     }
     
@@ -96,14 +97,6 @@ class OnboardingPagesViewController : UIPageViewController, UIPageViewController
         
         return pages[nextIndex]
     }
-    
-//    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-//        return pages.count
-//    }
-//    
-//    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-//        return presentationIndex(of: viewControllers?.first)
-//    }
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {        
     }

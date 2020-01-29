@@ -67,10 +67,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,
-                                                       placeholder: IconCategory.expenseSource.defaultIconName),
+                                                       placeholder: TransactionableType.expenseSource.defaultIconName),
                                          BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
                                                         title: "Баланс",
-                                                        value: expenseSourceViewModel?.amountRounded)]
+                                                        value: expenseSourceViewModel?.amount)]
         if let expenseSourceViewModel = expenseSourceViewModel, expenseSourceViewModel.hasCreditLimit {
             fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.creditLimit.rawValue,
                                          title: "Кредитный лимит",

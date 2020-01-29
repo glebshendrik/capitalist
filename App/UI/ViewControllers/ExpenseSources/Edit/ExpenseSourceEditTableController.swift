@@ -10,6 +10,7 @@ import UIKit
 import SDWebImageSVGCoder
 
 protocol ExpenseSourceEditTableControllerDelegate {
+    func didAppear()
     func didTapIcon()
     func didTapCurrency()
     func didChange(name: String?)
@@ -49,6 +50,11 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
         }
         
         return nameField.textField
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        delegate?.didAppear()
     }
     
     override func setupUI() {

@@ -95,5 +95,7 @@ extension ApplicationAssembly {
         container.autoregister(DatePeriodSelectionViewModel.self, initializer: DatePeriodSelectionViewModel.init)
         
         container.autoregister(PeriodsViewModel.self, initializer: PeriodsViewModel.init)
+                
+        container.autoregister(TransactionablesCreationViewModel.self, initializer: TransactionablesCreationViewModel.init)
     }
 }

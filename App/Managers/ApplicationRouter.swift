@@ -51,7 +51,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             userSessionManager.forgetSession()            
         }
         if !UIFlowManager.reach(point: .soundsManagerInitialization) {
-            soundsManager.setSounds(enabled: true)
+            soundsManager.setSounds(enabled: false)
         }
         saltEdgeCoordinator.setup()
         self.launchOptions = launchOptions
@@ -106,13 +106,17 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
                 self.showAppUpdateScreen()
                 return
             }
-            if UIFlowManager.wasShownOnboarding {
-                self.showMainViewController()
-            }
-            else {
+            if !UIFlowManager.reached(point: .onboarding) {
                 self.showOnboardingViewController()
             }
-            
+            else if !UIFlowManager.reached(point: .dataSetup) {
+                self.notificationsCoordinator.enableNotifications()
+                self.showDataSetupViewController()
+            }
+            else {
+                self.notificationsCoordinator.enableNotifications()
+                self.showMainViewController()
+            }            
         }.catch { error in
             if self.errorIsNotFoundOrNotAuthorized(error: error) {
                 self.userSessionManager.forgetSession()
@@ -150,11 +154,14 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         if let menuLeftNavigationController = viewController(.MenuNavigationController) as? SideMenuNavigationController {
             SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
         }
-        notificationsCoordinator.enableNotifications()
     }
     
     func showOnboardingViewController() {
         _ = show(.OnboardingViewController)
+    }
+    
+    func showDataSetupViewController() {
+        _ = show(.TransactionablesCreationViewController)
     }
         
     func show(_ viewController: Infrastructure.ViewController) -> UIViewController? {
@@ -178,7 +185,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
                           NSAttributedString.Key.foregroundColor : UIColor.by(.white100)]
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: UIControl.State.highlighted)
+        
         UINavigationBar.appearance().barTintColor = UIColor.by(.black2)
+        
+        UITextField.appearance().tintColor = UIColor.by(.white64)
     }
     
     private func setupKeyboardManager() {

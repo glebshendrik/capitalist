@@ -8,7 +8,13 @@
 
 import UIKit
 
-extension ExpenseCategoryEditViewController {    
+extension ExpenseCategoryEditViewController {
+    func focusFirstEmptyField() {
+        if viewModel.name == nil {
+            tableController.nameField.textField.becomeFirstResponder()
+        }
+    }
+    
     func updateIconUI() {
         tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)        
         tableController.iconBackgroundView.backgroundColor = viewModel.basketType.iconBackgroundColor        

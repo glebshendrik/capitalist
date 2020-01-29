@@ -65,7 +65,7 @@ class CreditEditViewModel {
     }
     
     var expenseSourceIconURL: URL? { return selectedDestination?.iconURL }
-    var expenseSourceIconDefaultImageName: String { return IconCategory.expenseSource.defaultIconName }
+    var expenseSourceIconDefaultImageName: String { return TransactionableType.expenseSource.defaultIconName }
     var expenseSourceName: String? { return selectedDestination?.name }
     var expenseSourceAmount: String? { return selectedDestination?.amount }
     var expenseSourceCurrency: Currency? { return selectedDestination?.currency }
@@ -143,6 +143,7 @@ class CreditEditViewModel {
     func set(destination: ExpenseSourceViewModel?) {        
         self.selectedDestination = destination
         selectedCurrency = destination?.currency
+        shouldRecordOnBalance = destination != nil
     }
     
     func set(creditId: Int) {

@@ -10,7 +10,7 @@ import UIKit
 
 class AppUpdateViewController : UIViewController {    
     @IBAction func didTapUpdateButton(_ sender: Any) {
-        gotoApp(appID: "123")
+        gotoApp(appID: "1457533341")
     }
     
     private func gotoApp(appID: String, completion: ((_ success: Bool)->())? = nil) {

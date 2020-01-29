@@ -94,6 +94,11 @@ class IncomeSourceEditViewModel {
         monthlyPlanned = incomeSource.monthlyPlannedCents?.moneyDecimalString(with: incomeSource.currency)
     }
     
+    func set(example: TransactionableExampleViewModel) {
+        selectedIconURL = example.iconURL
+        name = example.name
+    }
+    
     func isFormValid() -> Bool {
         return isNew
             ? isCreationFormValid()

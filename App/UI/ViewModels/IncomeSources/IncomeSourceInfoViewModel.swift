@@ -38,6 +38,14 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
         return incomeSourceViewModel?.incomeSource
     }
     
+    var isBorrow: Bool {
+        return incomeSourceViewModel?.isBorrowOrReturn ?? false
+    }
+    
+    var transactionTitle: String {
+        return isBorrow ? "Добавить займ" : "Добавить доход"
+    }
+    
     override var transactionable: Transactionable? {
         return incomeSourceViewModel
     }
@@ -71,7 +79,7 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
                                                        placeholder: TransactionableType.incomeSource.defaultIconName),
                                          BasicInfoField(fieldId: IncomeSourceInfoField.income.rawValue,
                                                         title: "Доход в этом месяце",
-                                                        value: incomeSourceViewModel?.amountRounded)]
+                                                        value: incomeSourceViewModel?.amount)]
         if let plannedAtPeriod = incomeSourceViewModel?.plannedAtPeriod {
             fields.append(BasicInfoField(fieldId: IncomeSourceInfoField.plannedIncome.rawValue,
                                          title: "Запланировано",
@@ -84,7 +92,7 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: IncomeSourceInfoField.transaction.rawValue,
-                                                   title: "Добавить доход",
+                                                   title: transactionTitle,
                                                    iconName: nil,
                                                    isEnabled: true)])
         return fields

@@ -9,7 +9,13 @@
 import UIKit
 
 extension IncomeSourceEditViewController {
-    func updateIconUI() {        
+    func focusFirstEmptyField() {
+        if viewModel.name == nil {
+            tableController.nameField.textField.becomeFirstResponder()            
+        }
+    }
+    
+    func updateIconUI() {
         tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)        
         tableController.iconView.tintColor = UIColor.by(.white100)
     }

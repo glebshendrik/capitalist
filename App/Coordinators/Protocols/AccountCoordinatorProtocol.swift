@@ -21,5 +21,6 @@ protocol AccountCoordinatorProtocol {
     func loadCurrentUser() -> Promise<User>
     func logout() -> Promise<Void>
     func loadCurrentUserBudget() -> Promise<Budget>
+    func onboardCurrentUser() -> Promise<Void>
 }
 

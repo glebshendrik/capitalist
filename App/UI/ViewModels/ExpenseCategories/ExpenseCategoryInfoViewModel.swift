@@ -42,6 +42,14 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
         return expenseCategoryViewModel?.expenseCategory
     }
     
+    var isBorrow: Bool {
+        return expenseCategoryViewModel?.isBorrowOrReturn ?? false
+    }
+    
+    var transactionTitle: String {
+        return isBorrow ? "Добавить долг" : "Добавить расход"
+    }
+    
     override var transactionable: Transactionable? {
         return expenseCategoryViewModel
     }
@@ -72,10 +80,10 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: ExpenseCategoryInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,
-                                                       placeholder: basketType.iconCategory.defaultIconName),
+                                                       placeholder: TransactionableType.expenseCategory.defaultIconName(basketType: basketType)),
                                          BasicInfoField(fieldId: ExpenseCategoryInfoField.expense.rawValue,
                                                         title: "Расход в этом месяце",
-                                                        value: expenseCategoryViewModel?.amountRounded)]
+                                                        value: expenseCategoryViewModel?.amount)]
         if let plannedAtPeriod = expenseCategoryViewModel?.plannedAtPeriod {
             fields.append(BasicInfoField(fieldId: ExpenseCategoryInfoField.plannedExpense.rawValue,
                                          title: "Запланировано",
@@ -88,7 +96,7 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: ExpenseCategoryInfoField.transaction.rawValue,
-                                                   title: "Добавить расход",
+                                                   title: transactionTitle,
                                                    iconName: nil,
                                                    isEnabled: true)])
         return fields

@@ -73,6 +73,7 @@ class IncomeSourceEditViewController : FormTransactionsDependableEditViewControl
         updateReminderUI()
         updateRemoveButtonUI()
         tableController.reloadData(animated: false)
+        focusFirstEmptyField()
     }  
 }
 

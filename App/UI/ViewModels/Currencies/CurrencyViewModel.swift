@@ -15,6 +15,14 @@ class CurrencyViewModel {
         return currency.code
     }
     
+    var name: String {
+        return currency.translatedName
+    }
+    
+    var symbol: String {
+        return currency.symbol
+    }
+    
     init(currency: Currency) {
         self.currency = currency
     }

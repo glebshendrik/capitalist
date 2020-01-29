@@ -9,7 +9,11 @@
 import UIKit
 
 extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelegate {
-    func didTapIcon() {        
+    func didAppear() {        
+        focusFirstEmptyField()
+    }
+    
+    func didTapIcon() {
         modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.common))
     }
     

@@ -25,7 +25,7 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
     
     func showActivityIndicator() {
         guard let activityIndicatorCell = activityIndicatorCell else { return }
-        set(cell: activityIndicatorCell, hidden: false, animated: false)
+        set(cell: activityIndicatorCell, hidden: false, animated: false, reload: true)
         tableView.isUserInteractionEnabled = false    
     }
     

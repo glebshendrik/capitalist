@@ -81,6 +81,7 @@ class BorrowEditViewController : FormTransactionsDependableEditViewController {
         updateExpenseSourceUI()
         updateReturnButtonUI()
         updateRemoveButtonUI(reload: true, animated: true)
+        focusFirstEmptyField()
     }
 }
 
@@ -99,7 +100,11 @@ extension BorrowEditViewController {
 }
 
 extension BorrowEditViewController : BorrowEditTableControllerDelegate {
-    func didTapIcon() {        
+    func didAppear() {
+        focusFirstEmptyField()
+    }
+    
+    func didTapIcon() {
         modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.common))
     }
     
@@ -233,6 +238,12 @@ extension BorrowEditViewController {
 }
 
 extension BorrowEditViewController {
+    func focusFirstEmptyField() {
+        if viewModel.name == nil {
+            tableController.nameField.textField.becomeFirstResponder()
+        }
+    }
+    
     func updateIconUI() {
         tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.iconDefaultImageName, renderingMode: .alwaysTemplate)        
         tableController.iconView.tintColor = UIColor.by(.white100)

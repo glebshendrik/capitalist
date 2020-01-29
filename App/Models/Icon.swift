@@ -17,7 +17,7 @@ enum IconCategory : String, Codable {
         case .expenseSource:
             return "expense-source-default-icon"
         case .common:
-            return "default-icon"
+            return "income-source-default-icon"
         }
     }
 }

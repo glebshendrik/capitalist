@@ -29,10 +29,20 @@ class ExpenseCategoryInfoViewController : EntityInfoNavigationController {
         case ExpenseCategoryInfoField.statistics.identifier:
             modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
         case ExpenseCategoryInfoField.transaction.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.expenseCategoryViewModel))
+            didTapTransactionButton()
         default:
             return
         }
+    }
+    
+    private func didTapTransactionButton() {
+        if viewModel.isBorrow {
+            modal(factory.borrowEditViewController(delegate: self, type: .debt, borrowId: nil, source: nil, destination: viewModel.expenseCategoryViewModel))
+        }
+        else {
+            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel.expenseCategoryViewModel))
+        }
+        
     }
     
     override func showEditScreen() {
@@ -51,6 +61,32 @@ extension ExpenseCategoryInfoViewController : ReminderEditViewControllerDelegate
     func didSave(reminderViewModel: ReminderViewModel) {
         viewModel.reminder = reminderViewModel
         save()
+    }
+}
+
+extension ExpenseCategoryInfoViewController : BorrowEditViewControllerDelegate {
+    func didCreateDebt() {
+        refreshData()
+    }
+    
+    func didCreateLoan() {
+        refreshData()
+    }
+    
+    func didUpdateDebt() {
+        refreshData()
+    }
+    
+    func didUpdateLoan() {
+        refreshData()
+    }
+    
+    func didRemoveDebt() {
+        refreshData()
+    }
+    
+    func didRemoveLoan() {
+        refreshData()
     }
 }
 

@@ -192,13 +192,10 @@ extension TransactionEditViewModel {
     var sourceAmountTitle: String? { return "Сумма" }
     var sourceIconURL: URL? { return source?.iconURL }
     var sourceIconDefaultImageName: String {
-        if let sourceType = sourceType, sourceType == .incomeSource {
-            return "lamp-icon"
-        }
-        return (source?.iconCategory ?? IconCategory.expenseSource).defaultIconName
+        return source?.defaultIconName ?? sourceType?.defaultIconName ?? "lamp-icon"
     }
     var sourceName: String? { return isSourceVirtualExpenseSource ? "Из ниоткуда" : source?.name }
-    var sourceAmount: String? { return isSourceVirtualExpenseSource ? nil : source?.amount }
+    var sourceAmount: String? { return isSourceVirtualExpenseSource ? nil : source?.amountRounded }
     var sourceCurrency: Currency? { return source?.currency }
     var sourceCurrencyCode: String? { return sourceCurrency?.code }
     
@@ -209,10 +206,10 @@ extension TransactionEditViewModel {
     var destinationAmountTitle: String? { return "Сумма" }
     var destinationIconURL: URL? { return destination?.iconURL }
     var destinationIconDefaultImageName: String {
-        return (destination?.iconCategory ?? IconCategory.expenseSource).defaultIconName
+        return destination?.defaultIconName ?? destinationType?.defaultIconName ?? "lamp-icon"        
     }
     var destinationName: String? { return isDestinationVirtualExpenseSource ? "В никуда" : destination?.name }
-    var destinationAmount: String? { return isDestinationVirtualExpenseSource ? nil : destination?.amount }
+    var destinationAmount: String? { return isDestinationVirtualExpenseSource ? nil : destination?.amountRounded }
     var destinationCurrency: Currency? { return destination?.currency }
     var destinationCurrencyCode: String? { return destinationCurrency?.code }
 }
@@ -234,25 +231,6 @@ extension TransactionableType {
         case (.expenseSource, .destination):    return "Кошелек"
         case (.expenseCategory, _):             return "Категория трат"
         case (.active, _):                      return "Актив"
-        }
-    }
-    
-    var defaultIconName: String {
-        switch (self) {
-        case .incomeSource:                 return "income-source-default-icon"
-        case .expenseSource:                return "expense-source-default-icon"
-        case .expenseCategory:              return "expense-category-default-icon"
-        case .active:                       return ""
-        }
-    }
-    
-    func defaultIconName(basketType: BasketType?) -> String {
-        guard let basketType = basketType else { return defaultIconName }
-        switch (self, basketType) {
-        case (.active, .joy):               return "expense-category-default-icon"
-        case (.active, .safe):              return "asset-safe-default-icon"
-        case (.active, .risk):              return "asset-risk-default-icon"
-        default:                            return defaultIconName
         }
     }
 }

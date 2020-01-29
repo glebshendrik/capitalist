@@ -9,6 +9,7 @@
 import UIKit
 
 protocol ActiveEditTableControllerDelegate {
+    func didAppear()
     func didTapIcon()
     func didTapActiveType()
     func didChange(name: String?)
@@ -57,6 +58,11 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     var delegate: ActiveEditTableControllerDelegate?
         
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        delegate?.didAppear()
+    }
+    
     override func setupUI() {
         super.setupUI()
         setupActiveTypeField()
@@ -108,7 +114,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     func setupAlreadyPaidField() {
         register(responder: alreadyPaidField.textField)
-        alreadyPaidField.placeholder = "Прочие расходы"
+        alreadyPaidField.placeholder = "Потратил ранее"
         alreadyPaidField.imageName = "amount-icon"
         alreadyPaidField.didChange { [weak self] text in
             self?.delegate?.didChange(alreadyPaid: text)

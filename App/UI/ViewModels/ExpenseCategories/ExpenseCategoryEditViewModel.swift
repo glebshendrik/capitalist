@@ -33,7 +33,7 @@ class ExpenseCategoryEditViewModel {
     // Computed
     
     var defaultIconName: String {
-        return basketType.iconCategory.defaultIconName
+        return TransactionableType.expenseCategory.defaultIconName(basketType: basketType)
     }
     
     var selectedCurrencyName: String? {
@@ -102,6 +102,11 @@ class ExpenseCategoryEditViewModel {
         selectedCurrency = expenseCategory.currency        
         monthlyPlanned = expenseCategory.monthlyPlannedCents?.moneyDecimalString(with: selectedCurrency)
         reminderViewModel = ReminderViewModel(reminder: expenseCategory.reminder)
+    }
+    
+    func set(example: TransactionableExampleViewModel) {
+        selectedIconURL = example.iconURL
+        name = example.name
     }
     
     func set(basketType: BasketType) {

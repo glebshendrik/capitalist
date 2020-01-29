@@ -70,10 +70,6 @@ class IncomeSourceViewModel : TransactionSource {
         return incomeSource.iconURL
     }
     
-    var defaultIconName: String {
-        return TransactionableType.incomeSource.defaultIconName
-    }
-    
     var isDeleted: Bool {
         return incomeSource.deletedAt != nil
     }

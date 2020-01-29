@@ -142,15 +142,15 @@ class BorrowInfoViewModel : EntityInfoViewModel {
         
         fields.append(BasicInfoField(fieldId: BorrowInfoField.amount.rawValue,
                                      title: amountTitle,
-                                     value: borrowViewModel.amountRounded))
+                                     value: borrowViewModel.amount))
         
         fields.append(BasicInfoField(fieldId: BorrowInfoField.amountReturned.rawValue,
                                      title: amountReturnedTitle,
-                                     value: borrowViewModel.amountReturnedRounded))
+                                     value: borrowViewModel.amountReturned))
         
         fields.append(BasicInfoField(fieldId: BorrowInfoField.amountLeft.rawValue,
                                      title: "Осталось вернуть",
-                                     value: borrowViewModel.amountLeftRounded))
+                                     value: borrowViewModel.amountLeft))
         
         fields.append(BasicInfoField(fieldId: BorrowInfoField.borrowedAt.rawValue,
                                      title: borrowedAtTitle,

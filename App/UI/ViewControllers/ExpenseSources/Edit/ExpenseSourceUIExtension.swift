@@ -11,6 +11,15 @@ import SVGKit
 import SDWebImageSVGCoder
 
 extension ExpenseSourceEditViewController {
+    func focusFirstEmptyField() {
+        if viewModel.name == nil {
+            tableController.nameField.textField.becomeFirstResponder()
+        }
+        else if viewModel.amount == nil {
+            tableController.amountField.textField.becomeFirstResponder()
+        }
+    }
+    
     func updateIconUI() {
         tableController.iconPen.isHidden = viewModel.iconPenHidden
         tableController.iconView.isHidden = viewModel.customIconHidden

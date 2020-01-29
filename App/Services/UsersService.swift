@@ -42,4 +42,8 @@ class UsersService : Service, UsersServiceProtocol {
     func loadUserBudget(with userId: Int) -> Promise<Budget> {
         return request(APIRoute.showBudget(userId: userId))
     }
+    
+    func onboardUser(with id: Int) -> Promise<Void> {
+        return request(APIRoute.onboardUser(id: id))
+    }
 }

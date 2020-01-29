@@ -19,6 +19,13 @@ protocol Transactionable : class {
     var amount: String { get }
     var isDeleted: Bool { get }
     var isSelected: Bool { get set }
+    var defaultIconName: String { get }
+}
+
+extension Transactionable {
+    var defaultIconName: String {
+        return type.defaultIconName
+    }
 }
 
 protocol TransactionSource : Transactionable {

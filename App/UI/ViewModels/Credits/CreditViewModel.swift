@@ -34,18 +34,34 @@ class CreditViewModel {
     }
     
     var amount: String {
+        return amount(shouldRound: false)
+    }
+    
+    var amountRounded: String {
         return amount(shouldRound: true)
     }
     
     var returnAmount: String {
+        return returnAmount(shouldRound: false)
+    }
+    
+    var returnAmountRounded: String {
         return returnAmount(shouldRound: true)
     }
     
     var paidAmount: String {
+        return paidAmount(shouldRound: false)
+    }
+    
+    var paidAmountRounded: String {
         return paidAmount(shouldRound: true)
     }
     
     var amountLeft: String {
+        return amountLeft(shouldRound: false)
+    }
+    
+    var amountLeftRounded: String {
         return amountLeft(shouldRound: true)
     }
     

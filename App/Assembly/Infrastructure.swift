@@ -61,7 +61,6 @@ struct Infrastructure {
         case MainViewController
         case MenuViewController
         case MenuNavigationController
-        case TransactionCreationInfoViewController
         
         // Income Sources
         case IncomeSourceEditViewController
@@ -136,6 +135,8 @@ struct Infrastructure {
         case OnboardingPage6ViewController
         case OnboardingPage7ViewController
         case OnboardingPage8ViewController
+        case TransactionablesCreationViewController
+        case TransactionCreationInfoViewController
         
         // Statistics
         case StatisticsViewController
@@ -151,7 +152,7 @@ struct Infrastructure {
             return self.rawValue
         }
         
-        var storyboard: Storyboard {
+        var storyboard: Storyboard {            
             switch self {
             case .LandingViewController,
                  .RegistrationViewController,
@@ -161,8 +162,7 @@ struct Infrastructure {
                 return .Join
             case .MainViewController,
                  .MenuViewController,
-                 .MenuNavigationController,
-                 .TransactionCreationInfoViewController:
+                 .MenuNavigationController:
                 return .Main
             case .IncomeSourceEditViewController,
                  .IncomeSourceEditNavigationController,
@@ -206,7 +206,9 @@ struct Infrastructure {
                  .OnboardingPage5ViewController,
                  .OnboardingPage6ViewController,
                  .OnboardingPage7ViewController,
-                 .OnboardingPage8ViewController:
+                 .OnboardingPage8ViewController,
+                 .TransactionablesCreationViewController,
+                 .TransactionCreationInfoViewController:
                 return .Onboarding
             case .SettingsViewController:
                 return .Settings

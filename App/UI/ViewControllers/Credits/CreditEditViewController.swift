@@ -76,6 +76,7 @@ class CreditEditViewController : FormTransactionsDependableEditViewController {
         updateReminderUI()
         updateRemoveButtonUI()
         updateTableUI(animated: false)
+        focusFirstEmptyField()
     }
 }
 
@@ -94,6 +95,10 @@ extension CreditEditViewController {
 }
 
 extension CreditEditViewController : CreditEditTableControllerDelegate {
+    func didAppear() {
+        focusFirstEmptyField()
+    }
+    
     func didTapIcon() {
         modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.common))
     }
@@ -231,6 +236,12 @@ extension CreditEditViewController {
 }
 
 extension CreditEditViewController {
+    func focusFirstEmptyField() {
+        if viewModel.name == nil {
+            tableController.nameField.textField.becomeFirstResponder()
+        }
+    }
+    
     func updateIconUI() {
         tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.iconDefaultImageName, renderingMode: .alwaysTemplate)        
         tableController.iconView.tintColor = UIColor.by(.white100)

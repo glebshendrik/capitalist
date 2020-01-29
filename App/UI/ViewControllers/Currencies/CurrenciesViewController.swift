@@ -17,11 +17,6 @@ class CurrenciesViewController : UIViewController, UIMessagePresenterManagerDepe
     @IBOutlet weak var currenciesCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIView!
     @IBOutlet weak var loader: UIImageView!
-    @IBOutlet weak var pageControl: UIPageControl!
-    private var pagedCollectionViewLayout: PagedCollectionViewLayout? {
-        return currenciesCollectionView.collectionViewLayout as? PagedCollectionViewLayout
-    }
-    
     
     var viewModel: CurrenciesViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -50,7 +45,7 @@ class CurrenciesViewController : UIViewController, UIMessagePresenterManagerDepe
     
     func setupNavigationBarUI() {
         setupNavigationBarAppearance()        
-        navigationItem.title = "Выберите иконку"
+        navigationItem.title = "Выберите валюту"
     }
         
     private func loadData() {
@@ -68,27 +63,11 @@ class CurrenciesViewController : UIViewController, UIMessagePresenterManagerDepe
     }
     
     private func updateUI() {
-        updatePageControl()
         update(currenciesCollectionView)
     }
-    
-    func updatePageControl() {
-        guard let pagedCollectionViewLayout = pagedCollectionViewLayout else {
-            pageControl.isHidden = true
-            return
-        }
-        let pagesCount = pagedCollectionViewLayout.numberOfPages
-        pageControl.numberOfPages = pagesCount
-        pageControl.isHidden = pagesCount <= 1
-    }
-    
+        
     private func layoutUI() {
-        if let layout = currenciesCollectionView.collectionViewLayout as? PagedCollectionViewLayout {
-            layout.itemSize = CGSize(width: 64, height: 85)
-            layout.columns = 4
-            layout.rows = Int(currenciesCollectionView.bounds.size.height / layout.itemSize.height)
-            layout.edgeInsets = UIEdgeInsets(horizontal: 30, vertical: 5)
-        }
+        currenciesCollectionView.fillLayout(columns: 1, itemHeight: 56, horizontalInset: 0, verticalInset: 0, fillVertically: false)
     }
 }
 
@@ -106,15 +85,7 @@ extension CurrenciesViewController : UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfCurrencies
     }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
-    }
-    
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
-    }
-    
+        
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = currenciesCollectionView.dequeueReusableCell(withReuseIdentifier: "CurrencyCollectionViewCell",

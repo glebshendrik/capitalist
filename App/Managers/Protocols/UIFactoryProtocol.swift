@@ -73,6 +73,8 @@ protocol UIFactoryProtocol {
     
     func loginViewController() -> LoginViewController?
     
+    func loginNavigationController() -> UINavigationController?
+    
     func forgotPasswordViewController() -> ForgotPasswordViewController?
     
     func resetPasswordViewController(email: String?) -> ResetPasswordViewController?
@@ -115,15 +117,25 @@ protocol UIFactoryProtocol {
     func incomeSourceEditViewController(delegate: IncomeSourceEditViewControllerDelegate,
                                         incomeSource: IncomeSource?) -> UINavigationController?
     
+    func incomeSourceEditViewController(delegate: IncomeSourceEditViewControllerDelegate,
+                                        example: TransactionableExampleViewModel) -> UINavigationController?
+    
     func incomeSourceInfoViewController(incomeSource: IncomeSourceViewModel?) -> UINavigationController?
     
     func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
                                          expenseSource: ExpenseSource?) -> UINavigationController?
     
+    func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
+                                         example: TransactionableExampleViewModel) -> UINavigationController?
+    
     func expenseSourceInfoViewController(expenseSource: ExpenseSourceViewModel?) -> UINavigationController?
     
     func expenseCategoryEditViewController(delegate: ExpenseCategoryEditViewControllerDelegate,
                                            expenseCategory: ExpenseCategory?,
+                                           basketType: BasketType) -> UINavigationController?
+    
+    func expenseCategoryEditViewController(delegate: ExpenseCategoryEditViewControllerDelegate,
+                                           example: TransactionableExampleViewModel,
                                            basketType: BasketType) -> UINavigationController?
     
     func expenseCategoryInfoViewController(expenseCategory: ExpenseCategoryViewModel?) -> UINavigationController?
@@ -136,5 +148,5 @@ protocol UIFactoryProtocol {
     
     func dependentIncomeSourceInfoViewController(activeName: String) -> UIViewController?
     
-    func transactionCreationInfoViewController() -> UIViewController?
+    func transactionCreationInfoViewController() -> UINavigationController?
 }

@@ -38,7 +38,7 @@ extension MainViewController {
     private func showDependentIncomeSourceMessage(activeName: String) {
         slideUp(factory.dependentIncomeSourceInfoViewController(activeName: activeName),
                 toBottomOf: incomeSourcesContainer,
-                shouldDim: false)
+                shouldDim: true)
     }
 }
 

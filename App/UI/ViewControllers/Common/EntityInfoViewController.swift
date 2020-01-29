@@ -39,7 +39,7 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
     func setupNavigationBar() {
         setupNavigationBarAppearance()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "edit-info-icon"), style: .plain, target: self, action: #selector(didTapEditButton(sender:)))
-        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.by(.blue1)
         updateNavigationBarUI()
     }
     
@@ -286,10 +286,10 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
 extension EntityInfoViewController {
     func showEdit(transaction: TransactionViewModel) {
         if let borrowId = transaction.borrowId, let borrowType = transaction.borrowType {
-            showBorrowEditScreen(borrowId: borrowId, borrowType: borrowType)
+            showBorrowInfoScreen(borrowId: borrowId, borrowType: borrowType)
         }
         else if let creditId = transaction.creditId {
-            showCreditEditScreen(creditId: creditId)
+            showCreditInfoScreen(creditId: creditId)
         }
         else {
             showTransactionEditScreen(transactionId: transaction.id)
@@ -300,13 +300,12 @@ extension EntityInfoViewController {
         modal(factory.transactionEditViewController(delegate: self, transactionId: transactionId))
     }
         
-    private func showBorrowEditScreen(borrowId: Int, borrowType: BorrowType) {
-        modal(factory.borrowEditViewController(delegate: self, type: borrowType, borrowId: borrowId, source: nil, destination: nil))
+    func showBorrowInfoScreen(borrowId: Int, borrowType: BorrowType) {
+        modal(factory.borrowInfoViewController(borrowId: borrowId, borrowType: borrowType, borrow: nil))
     }
-    
-    private func showCreditEditScreen(creditId: Int) {
         
-        modal(factory.creditEditViewController(delegate: self, creditId: creditId, destination: nil))
+    private func showCreditInfoScreen(creditId: Int) {
+        modal(factory.creditInfoViewController(creditId: creditId, credit: nil))
     }
 }
 

@@ -41,6 +41,13 @@ class LoginViewController : FormSubmitViewController {
             super.handleSave(error)
         }
     }
+    
+    override func didSave() {
+        _ = UIFlowManager.reach(point: .onboarding)
+        _ = UIFlowManager.reach(point: .dataSetup)
+        _ = UIFlowManager.reach(point: .transactionCreationInfoMessage)
+        super.didSave()
+    }
 }
 
 extension LoginViewController : LoginTableControllerDelegate {

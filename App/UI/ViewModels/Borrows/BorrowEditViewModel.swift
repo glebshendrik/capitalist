@@ -158,7 +158,7 @@ class BorrowEditViewModel {
         
     var iconDefaultImageName: String { return "borrow-default-icon" }
     var expenseSourceIconURL: URL? { return selectedExpenseSource?.iconURL }
-    var expenseSourceIconDefaultImageName: String { return IconCategory.expenseSource.defaultIconName }
+    var expenseSourceIconDefaultImageName: String { return TransactionableType.expenseSource.defaultIconName }
     var expenseSourceName: String? { return selectedExpenseSource?.name }
     var expenseSourceAmount: String? { return selectedExpenseSource?.amount }
     var expenseSourceCurrency: Currency? { return selectedExpenseSource?.currency }
@@ -198,6 +198,7 @@ class BorrowEditViewModel {
         selectedCurrency = type == .debt ? source?.currency : destination?.currency
         selectedSource = source
         selectedDestination = destination
+        shouldRecordOnBalance = source != nil && destination != nil
     }
     
     func set(borrowId: Int, type: BorrowType) {

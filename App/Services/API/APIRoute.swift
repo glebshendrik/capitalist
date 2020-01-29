@@ -28,6 +28,7 @@ enum APIRoute: URLRequestConvertible {
     case resetPassword(form: ResetPasswordForm)
     case createPasswordResetCode(form: PasswordResetCodeForm)
     case updateDeviceToken(form: UserDeviceTokenUpdatingForm)
+    case onboardUser(id: Int)
     
     // Sessions
     case createSession(form: SessionCreationForm)

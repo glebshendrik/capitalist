@@ -48,9 +48,9 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     var iconCategory: IconCategory? {
         return basketType.iconCategory
     }
-    
+        
     var defaultIconName: String {
-        return basketType.iconCategory.defaultIconName
+        return type.defaultIconName(basketType: basketType)
     }
         
     var currency: Currency {
@@ -110,7 +110,7 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     }
     
     var plannedAtPeriod: String? {
-        return money(cents: active.paymentCentsAtPeriod, shouldRound: true)
+        return money(cents: active.paymentCentsAtPeriod, shouldRound: false)
     }
     
     var areExpensesPlanned: Bool {

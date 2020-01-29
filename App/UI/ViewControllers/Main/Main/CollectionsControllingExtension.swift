@@ -56,17 +56,19 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         let isCellEditing = isEditingItems && !rearrangeController.isMoving(collectionView, indexPath: indexPath)
         cell.set(editing: isCellEditing)
         
-        rearrangeController.syncStateOf(collectionView,
-                                        cell: cell,
-                                        at: indexPath,
-                                        editing: isCellEditing,
-                                        animated: false)
+        
         
         
         transactionController.syncStateOf(collectionView,
                                           cell: cell,
                                           at: indexPath,
                                           animated: false)
+        
+        rearrangeController.syncStateOf(collectionView,
+                                        cell: cell,
+                                        at: indexPath,
+                                        editing: isCellEditing,
+                                        animated: false)
         
         return cell
     }

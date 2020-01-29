@@ -9,7 +9,8 @@
 import UIKit
 
 class CurrencyCollectionViewCell : UICollectionViewCell {
-    @IBOutlet weak var codeLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var symbolLabel: UILabel!
     
     var viewModel: CurrencyViewModel? {
         didSet {
@@ -18,9 +19,7 @@ class CurrencyCollectionViewCell : UICollectionViewCell {
     }
     
     func updateUI() {
-        codeLabel.text = viewModel?.code
-        
-        layer.shouldRasterize = true
-        layer.rasterizationScale = UIScreen.main.scale
+        nameLabel.text = viewModel?.name
+        symbolLabel.text = viewModel?.symbol
     }
 }

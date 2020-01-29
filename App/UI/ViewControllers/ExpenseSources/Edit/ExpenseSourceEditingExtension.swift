@@ -27,7 +27,10 @@ extension ExpenseSourceEditViewController : CurrenciesViewControllerDelegate {
 }
 
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
-
+    func didAppear() {
+        focusFirstEmptyField()
+    }
+    
     func didTapIcon() {
         guard viewModel.canChangeIcon else { return }
         modal(factory.iconsViewController(delegate: self, iconCategory: viewModel.iconCategory))

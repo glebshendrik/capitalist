@@ -457,6 +457,12 @@ extension UIImageView {
         self.animationDuration = 1.5
         self.startAnimating()
     }
+    
+    func showTutorial() {
+        self.animationImages = [Int](1...99).compactMap { UIImage(named: "drag-tutorial-\($0)") }
+        self.animationDuration = 4.5
+        self.startAnimating()
+    }
 }
 
 extension CGFloat {
@@ -694,5 +700,28 @@ extension UISegmentedControl {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext();
         return image
+    }
+}
+
+extension UICollectionView {
+    func fillLayout(columns: Int,
+                    itemHeight: CGFloat,
+                    horizontalInset: CGFloat,
+                    verticalInset: CGFloat,
+                    fillVertically: Bool) {
+        
+        guard let layout = self.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        
+        let verticalSpace = self.bounds.size.height - verticalInset
+        let rows = Int(verticalSpace / itemHeight)
+        let fillItemHeight = verticalSpace / CGFloat(rows)
+        
+        let horizontalSpace = self.bounds.width - horizontalInset * 2
+        let fillItemWidth = horizontalSpace / CGFloat(columns)
+        
+        layout.itemSize = CGSize(width: fillItemWidth, height: fillVertically ? fillItemHeight : itemHeight)
+        layout.sectionInset = UIEdgeInsets(horizontal: horizontalInset, vertical: verticalInset)
+        layout.minimumLineSpacing = 0
+        
     }
 }

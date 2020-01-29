@@ -9,6 +9,10 @@
 import UIKit
 
 extension ActiveEditViewController : ActiveEditTableControllerDelegate {
+    func didAppear() {
+        focusFirstEmptyField()
+    }
+    
     func didTapIcon() {
         modal(factory.iconsViewController(delegate: self, iconCategory: viewModel.basketType.iconCategory))
     }

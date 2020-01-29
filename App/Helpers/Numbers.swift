@@ -116,24 +116,27 @@ extension NSDecimalNumber {
         let formatter = Formatter.currency(with: currency)
         
         var number = moneyNumber(with: currency)
+        var suffix = ""
         
-        struct Abbreviation {
-            var threshold: Double
-            var divisor: NSDecimalNumber
-            var suffix: String
-        }
-        
-        let abbreviations = [Abbreviation(      threshold: 1000000.0, divisor: 1000.0, suffix: "k "),
-                             Abbreviation(   threshold: 1000000000.0, divisor: 1000000.0, suffix: "M "),
-                             Abbreviation(threshold: 1000000000000.0, divisor: 10000000000.0, suffix: "M+ "),]
-        
-        let startValue = number.doubleValue.abs
-        
-        let abbreviation = abbreviations.last(where: { startValue >= $0.threshold })
-        let suffix = abbreviation?.suffix ?? ""
-        
-        if let abbreviation = abbreviation {
-            number = number.dividing(by: abbreviation.divisor)
+        if shouldRound {
+            struct Abbreviation {
+                var threshold: Double
+                var divisor: NSDecimalNumber
+                var suffix: String
+            }
+            
+            let abbreviations = [Abbreviation(      threshold: 1000000.0, divisor: 1000.0, suffix: "k "),
+                                 Abbreviation(   threshold: 1000000000.0, divisor: 1000000.0, suffix: "M "),
+                                 Abbreviation(threshold: 1000000000000.0, divisor: 10000000000.0, suffix: "M+ "),]
+            
+            let startValue = number.doubleValue.abs
+            
+            let abbreviation = abbreviations.last(where: { startValue >= $0.threshold })
+            suffix = abbreviation?.suffix ?? ""
+            
+            if let abbreviation = abbreviation {
+                number = number.dividing(by: abbreviation.divisor)
+            }
         }
         
         if shouldRound {

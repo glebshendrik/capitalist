@@ -19,6 +19,25 @@ enum TransactionableType : String, Codable {
     case expenseSource = "ExpenseSource"
     case expenseCategory = "ExpenseCategory"
     case active = "Active"
+    
+    var defaultIconName: String {
+        switch (self) {
+        case .incomeSource:                 return "income-source-default-icon"
+        case .expenseSource:                return "expense-source-default-icon"
+        case .expenseCategory:              return "expense-category-default-icon"
+        case .active:                       return "asset-safe-default-icon"
+        }
+    }
+    
+    func defaultIconName(basketType: BasketType?) -> String {
+        guard let basketType = basketType else { return defaultIconName }
+        switch (self, basketType) {
+        case (.active, .joy):               return "expense-category-default-icon"
+        case (.active, .safe):              return "asset-safe-default-icon"
+        case (.active, .risk):              return "asset-risk-default-icon"
+        default:                            return defaultIconName
+        }
+    }
 }
 
 struct Transaction : Decodable {

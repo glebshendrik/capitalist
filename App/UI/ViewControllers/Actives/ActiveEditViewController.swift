@@ -81,6 +81,7 @@ class ActiveEditViewController : FormTransactionsDependableEditViewController {
         updateReminderUI()
         updateRemoveButtonUI()
         updateTableUI(animated: false)
+        focusFirstEmptyField()
     }
 }
 

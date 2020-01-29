@@ -191,6 +191,11 @@ class UIFactory : UIFactoryProtocol {
         return router.viewController(.LoginViewController) as? LoginViewController
     }
     
+    func loginNavigationController() -> UINavigationController? {
+        guard let loginViewController =  router.viewController(.LoginViewController) as? LoginViewController else { return nil }
+        return UINavigationController(rootViewController: loginViewController)
+    }
+    
     func forgotPasswordViewController() -> ForgotPasswordViewController? {
         return router.viewController(.ForgotPasswordViewController) as? ForgotPasswordViewController
     }
@@ -308,6 +313,17 @@ class UIFactory : UIFactoryProtocol {
         return incomeSourceEditNavigationController
     }
     
+    func incomeSourceEditViewController(delegate: IncomeSourceEditViewControllerDelegate, example: TransactionableExampleViewModel) -> UINavigationController? {
+        let incomeSourceEditNavigationController = router.viewController(.IncomeSourceEditNavigationController) as? UINavigationController
+        let incomeSourceEditViewController = incomeSourceEditNavigationController?.topViewController as? IncomeSourceEditViewController
+            
+        incomeSourceEditViewController?.set(delegate: delegate)
+            
+        incomeSourceEditViewController?.viewModel.set(example: example)
+                        
+        return incomeSourceEditNavigationController
+    }
+    
     func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
                                          expenseSource: ExpenseSource?) -> UINavigationController? {
         let expenseSourceEditNavigationController = router.viewController(.ExpenseSourceEditNavigationController) as? UINavigationController
@@ -318,6 +334,16 @@ class UIFactory : UIFactoryProtocol {
         if let expenseSource = expenseSource {
             expenseSourceEditViewController?.set(expenseSource: expenseSource)
         }
+        
+        return expenseSourceEditNavigationController
+    }
+    
+    func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate, example: TransactionableExampleViewModel) -> UINavigationController? {
+        let expenseSourceEditNavigationController = router.viewController(.ExpenseSourceEditNavigationController) as? UINavigationController
+        let expenseSourceEditViewController = expenseSourceEditNavigationController?.topViewController as? ExpenseSourceEditViewController
+            
+        expenseSourceEditViewController?.set(delegate: delegate)
+        expenseSourceEditViewController?.viewModel.set(example: example)
         
         return expenseSourceEditNavigationController
     }
@@ -334,6 +360,17 @@ class UIFactory : UIFactoryProtocol {
         if let expenseCategory = expenseCategory {
             expenseCategoryEditViewController?.set(expenseCategory: expenseCategory)
         }        
+        return expenseCategoryEditNavigationController
+    }
+    
+    func expenseCategoryEditViewController(delegate: ExpenseCategoryEditViewControllerDelegate, example: TransactionableExampleViewModel, basketType: BasketType) -> UINavigationController? {
+        let expenseCategoryEditNavigationController = router.viewController(.ExpenseCategoryEditNavigationController) as? UINavigationController
+        let expenseCategoryEditViewController = expenseCategoryEditNavigationController?.topViewController as? ExpenseCategoryEditViewController
+            
+        expenseCategoryEditViewController?.set(delegate: delegate)
+        expenseCategoryEditViewController?.set(basketType: basketType)
+        expenseCategoryEditViewController?.viewModel.set(example: example)
+
         return expenseCategoryEditNavigationController
     }
     
@@ -373,8 +410,9 @@ class UIFactory : UIFactoryProtocol {
         return dependentIncomeSourceInfoViewController    
     }
     
-    func transactionCreationInfoViewController() -> UIViewController? {        
-        return router.viewController(.TransactionCreationInfoViewController) as? TransactionCreationInfoViewController
+    func transactionCreationInfoViewController() -> UINavigationController? {
+        guard let transactionCreationInfoViewController = router.viewController(.TransactionCreationInfoViewController) as? TransactionCreationInfoViewController else { return nil }
+        return UINavigationController(rootViewController: transactionCreationInfoViewController)
     }
     
     func incomeSourceInfoViewController(incomeSource: IncomeSourceViewModel?) -> UINavigationController? {

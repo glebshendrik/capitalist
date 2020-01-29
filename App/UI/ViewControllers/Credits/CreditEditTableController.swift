@@ -9,6 +9,7 @@
 import UIKit
 
 protocol CreditEditTableControllerDelegate {
+    func didAppear()
     func didTapIcon()
     func didChange(name: String?)
     func didChange(amount: String?)
@@ -55,6 +56,11 @@ class CreditEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var removeCell: UITableViewCell!
     
     var delegate: CreditEditTableControllerDelegate?
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        delegate?.didAppear()
+    }
     
     override func setupUI() {
         super.setupUI()
@@ -115,7 +121,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     
     func setupExpenseSourceField() {
         expenseSourceField.placeholder = "Кошелек"
-        expenseSourceField.imageName = IconCategory.expenseSource.defaultIconName
+        expenseSourceField.imageName = TransactionableType.expenseSource.defaultIconName
         expenseSourceField.didTap { [weak self] in
             self?.delegate?.didTapExpenseSource()
         }

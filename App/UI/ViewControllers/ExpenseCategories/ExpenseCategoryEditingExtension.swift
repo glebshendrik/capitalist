@@ -9,6 +9,10 @@
 import UIKit
 
 extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableControllerDelegate {
+    func didAppear() {
+        focusFirstEmptyField()
+    }
+    
     func didTapIcon() {
         modal(factory.iconsViewController(delegate: self, iconCategory: viewModel.basketType.iconCategory))
     }

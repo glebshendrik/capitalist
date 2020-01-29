@@ -74,6 +74,7 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
         updateBankUI()
         updateRemoveButtonUI()
         updateTableUI(animated: false)
+        focusFirstEmptyField()
     }
 }
 

@@ -29,10 +29,20 @@ class IncomeSourceInfoViewController : EntityInfoNavigationController {
         case IncomeSourceInfoField.statistics.identifier:
             modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
         case IncomeSourceInfoField.transaction.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.incomeSourceViewModel, destination: nil))
+            didTapTransactionButton()
         default:
             return
         }
+    }
+    
+    private func didTapTransactionButton() {
+        if viewModel.isBorrow {
+            modal(factory.borrowEditViewController(delegate: self, type: .loan, borrowId: nil, source: viewModel.incomeSourceViewModel, destination: nil))
+        }
+        else {
+            modal(factory.transactionEditViewController(delegate: self, source: viewModel.incomeSourceViewModel, destination: nil))
+        }
+        
     }
     
     override func showEditScreen() {
@@ -51,6 +61,32 @@ extension IncomeSourceInfoViewController : ReminderEditViewControllerDelegate {
     func didSave(reminderViewModel: ReminderViewModel) {
         viewModel.reminder = reminderViewModel
         save()
+    }
+}
+
+extension IncomeSourceInfoViewController : BorrowEditViewControllerDelegate {
+    func didCreateDebt() {
+        refreshData()
+    }
+    
+    func didCreateLoan() {
+        refreshData()
+    }
+    
+    func didUpdateDebt() {
+        refreshData()
+    }
+    
+    func didUpdateLoan() {
+        refreshData()
+    }
+    
+    func didRemoveDebt() {
+        refreshData()
+    }
+    
+    func didRemoveLoan() {
+        refreshData()
     }
 }
 

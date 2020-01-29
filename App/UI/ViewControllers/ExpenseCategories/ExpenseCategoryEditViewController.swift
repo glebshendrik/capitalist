@@ -72,7 +72,8 @@ class ExpenseCategoryEditViewController : FormTransactionsDependableEditViewCont
         updateCurrencyUI()        
         updateReminderUI()
         updateRemoveButtonUI()
-        tableController.reloadData(animated: false) 
+        tableController.reloadData(animated: false)
+        focusFirstEmptyField()
     }
 }
 

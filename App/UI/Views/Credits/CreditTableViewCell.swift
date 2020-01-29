@@ -47,8 +47,8 @@ class CreditTableViewCell : UITableViewCell {
         iconImageView.tintColor = imageTintColor
         
         progressView.progressColor = UIColor.by(.blue1)
-        progressView.limitText = viewModel?.returnAmount
-        progressView.progressText = viewModel?.paidAmount
+        progressView.limitText = viewModel?.returnAmountRounded        
+        progressView.progressText = viewModel?.paidAmountRounded
         progressView.labelsColor = UIColor.by(.white100)
         progressView.progressWidth = progressView.bounds.width * paymentsProgress
 //        contentView.layoutIfNeeded()

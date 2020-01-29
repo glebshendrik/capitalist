@@ -13,6 +13,7 @@ struct APIRoutePath {
         switch route {
         // Custom        
         case .changePassword(let form):                     return "/users/\(form.userId!)/password"
+        case .onboardUser(let id):                          return "/users/\(id)/onboard"
         case .resetPassword:                                return "/users/new_password"
         case .findExchangeRate:                             return "/exchange_rates/find_by"
         case .firstExpenseSource(let userId, _, _):         return "\(collection(route, userId: userId))/first"
@@ -56,7 +57,7 @@ struct APIRoutePath {
              .indexUserActives(let userId):                 return collection(route, userId: userId)
         
         // Update
-        case .updateUser(let form):                         return member(route, id: form.userId)        
+        case .updateUser(let form):                         return member(route, id: form.userId)
         case .updateUserSettings(let form):                 return member(route, id: form.userId)
         case .updateDeviceToken(let form):                  return member(route, id: form.userId)
         case .updateIncomeSource(let form):                 return member(route, id: form.id)

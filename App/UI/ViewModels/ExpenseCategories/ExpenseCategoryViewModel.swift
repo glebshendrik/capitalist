@@ -83,7 +83,7 @@ class ExpenseCategoryViewModel {
     }
     
     var defaultIconName: String {
-        return basketType.iconCategory.defaultIconName
+        return type.defaultIconName(basketType: basketType)
     }
         
     public private(set) var waitingLoans: [BorrowViewModel] = []

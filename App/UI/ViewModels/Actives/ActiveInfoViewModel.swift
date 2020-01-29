@@ -92,19 +92,19 @@ class ActiveInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: ActiveInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,           
-                                                       placeholder: basketType.iconCategory.defaultIconName),
+                                                       placeholder: activeViewModel.defaultIconName),
                                          BasicInfoField(fieldId: ActiveInfoField.activeType.rawValue,
                                                         title: "Тип актива",
                                                         value: activeViewModel.activeTypeName)]
         if activeViewModel.isGoal {
             fields.append(BasicInfoField(fieldId: ActiveInfoField.goal.rawValue,
                                          title: "Хочу накопить",
-                                         value: activeViewModel.goalAmountRounded))
+                                         value: activeViewModel.goalAmount))
         }
         
         fields.append(BasicInfoField(fieldId: ActiveInfoField.cost.rawValue,
                                      title: activeViewModel.activeType.costTitle,
-                                     value: activeViewModel.costRounded))
+                                     value: activeViewModel.cost))
         
         if activeViewModel.areExpensesPlanned {
             fields.append(BasicInfoField(fieldId: ActiveInfoField.plannedAtPeriod.rawValue,
@@ -114,15 +114,15 @@ class ActiveInfoViewModel : EntityInfoViewModel {
         
         fields.append(BasicInfoField(fieldId: ActiveInfoField.invested.rawValue,
                                      title: "Все инвестиции за \(defaultPeriodTitle)",
-                                     value: activeViewModel.investedRounded))
+                                     value: activeViewModel.invested))
         
         if !activeViewModel.onlyBuyingAssets {
             fields.append(contentsOf: [BasicInfoField(fieldId: ActiveInfoField.spent.rawValue,
                                                       title: "Расходы за \(defaultPeriodTitle)",
-                                                      value: activeViewModel.spentRounded),
+                                                      value: activeViewModel.spent),
                                        BasicInfoField(fieldId: ActiveInfoField.bought.rawValue,
                                                       title: "\(activeViewModel.activeType.buyingAssetsTitle) за \(defaultPeriodTitle)",
-                                                      value: activeViewModel.boughtRounded)])
+                                                      value: activeViewModel.bought)])
         }
         
         

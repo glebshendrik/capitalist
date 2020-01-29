@@ -69,6 +69,9 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         super.viewDidLoad()
         setupUI()
         loadData()
+        if !UIFlowManager.reached(point: .transactionCreationInfoMessage) {
+            modal(factory.transactionCreationInfoViewController())
+        }
         after(seconds: 3).done {
             self.show(tipMessage: "Скоро здесь будет финансовый советник")
         }

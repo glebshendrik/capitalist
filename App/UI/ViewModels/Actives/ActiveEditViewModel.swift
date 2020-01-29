@@ -70,7 +70,7 @@ class ActiveEditViewModel {
     
     var monthlyPaymentTitle: String { return selectedActiveType?.monthlyPaymentTitle ?? "Планирую инвестировать в месяц" }
         
-    var iconDefaultImageName: String { return basketType.iconCategory.defaultIconName }
+    var iconDefaultImageName: String { return TransactionableType.active.defaultIconName(basketType: basketType) }
         
     // Visibility
     var goalAmountFieldHidden: Bool {

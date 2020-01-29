@@ -8,7 +8,8 @@
 
 import UIKit
 
-class OnboardingViewController : UIViewController, OnboardingPagesViewControllerDelegate {
+class OnboardingViewController : UIViewController, OnboardingPagesViewControllerDelegate, UIFactoryDependantProtocol {
+    var factory: UIFactoryProtocol!
     @IBOutlet var button: UIButton!
     var pagesController: OnboardingPagesViewController!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -47,5 +48,9 @@ class OnboardingViewController : UIViewController, OnboardingPagesViewController
     
     @IBAction func didTapSkipButton(_ sender: Any) {
         pagesController.finishOnboarding()
+    }
+    
+    @IBAction func didTapJoinButton(_ sender: Any) {
+        modal(factory.loginNavigationController())
     }
 }

@@ -137,9 +137,9 @@ class GraphViewModel {
     func calculateTotal() -> String? {
         switch graphType {
         case .all:
-            return amount(for: incomes).subtracting(amount(for: expenses)).moneyCurrencyString(with: currency, shouldRound: true)
+            return amount(for: incomes).subtracting(amount(for: expenses)).moneyCurrencyString(with: currency, shouldRound: false)
         default:
-            return amount(for: transactions).moneyCurrencyString(with: currency, shouldRound: true)
+            return amount(for: transactions).moneyCurrencyString(with: currency, shouldRound: false)
         }
         
     }

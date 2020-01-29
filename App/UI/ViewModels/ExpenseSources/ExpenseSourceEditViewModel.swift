@@ -46,7 +46,7 @@ class ExpenseSourceEditViewModel {
     }
     
     var defaultIconName: String {
-        return iconCategory.defaultIconName
+        return TransactionableType.expenseSource.defaultIconName
     }
 
     var selectedCurrencyName: String? {
@@ -147,6 +147,11 @@ class ExpenseSourceEditViewModel {
                                                   shouldDestroy: nil)
         }
         
+    }
+    
+    func set(example: TransactionableExampleViewModel) {
+        selectedIconURL = example.iconURL
+        name = example.name
     }
     
     func isFormValid() -> Bool {

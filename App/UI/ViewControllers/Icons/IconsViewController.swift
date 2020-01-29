@@ -17,10 +17,6 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
     @IBOutlet weak var iconsCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIView!
     @IBOutlet weak var loader: UIImageView!
-    @IBOutlet weak var pageControl: UIPageControl!
-    private var pagedCollectionViewLayout: PagedCollectionViewLayout? {
-        return iconsCollectionView.collectionViewLayout as? PagedCollectionViewLayout
-    }
     
     
     var viewModel: IconsViewModel!
@@ -68,27 +64,11 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
     }
     
     private func updateUI() {
-        updatePageControl()
         update(iconsCollectionView)
     }
-    
-    func updatePageControl() {
-        guard let pagedCollectionViewLayout = pagedCollectionViewLayout else {
-            pageControl.isHidden = true
-            return
-        }
-        let pagesCount = pagedCollectionViewLayout.numberOfPages
-        pageControl.numberOfPages = pagesCount
-        pageControl.isHidden = pagesCount <= 1
-    }
-    
+        
     private func layoutUI() {
-        if let layout = iconsCollectionView.collectionViewLayout as? PagedCollectionViewLayout {
-            layout.itemSize = CGSize(width: 64, height: 85)
-            layout.columns = 4
-            layout.rows = Int(iconsCollectionView.bounds.size.height / layout.itemSize.height)
-            layout.edgeInsets = UIEdgeInsets(horizontal: 30, vertical: 5)
-        }
+        iconsCollectionView.fillLayout(columns: 4, itemHeight: 85, horizontalInset: 30, verticalInset: 5, fillVertically: false)
     }
 }
 
@@ -109,14 +89,6 @@ extension IconsViewController : UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfIcons
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
-    }
-    
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

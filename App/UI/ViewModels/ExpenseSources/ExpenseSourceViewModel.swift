@@ -67,11 +67,7 @@ class ExpenseSourceViewModel {
     var isVirtual: Bool {
         return expenseSource.isVirtual
     }
-    
-    var defaultIconName: String {
-        return IconCategory.expenseSource.defaultIconName
-    }
-    
+        
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
     }
