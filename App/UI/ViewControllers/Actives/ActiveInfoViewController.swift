@@ -29,11 +29,23 @@ class ActiveInfoViewController : EntityInfoNavigationController {
         save()
     }
     
+    override func didTapInfoField(field: BasicInfoField?) {
+        guard let field = field else { return }
+        switch field.identifier {
+        case ActiveInfoField.cost.identifier:
+            showEditScreen()
+        default:
+            return
+        }
+    }
+    
     override func didTapInfoButton(field: ButtonInfoField?) {
         guard let field = field else { return }
         switch field.identifier {
         case ActiveInfoField.statistics.identifier:
             modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
+        case ActiveInfoField.costChange.identifier:
+            showEditScreen()
         case ActiveInfoField.transactionDevidents.identifier:
             modal(factory.transactionEditViewController(delegate: self, source: viewModel?.incomeSourceViewModel, destination: viewModel?.activeViewModel))
         case ActiveInfoField.transactionInvest.identifier:

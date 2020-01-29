@@ -60,6 +60,10 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
         
     }
     
+    func didTapInfoField(field: BasicInfoField?) {
+        
+    }
+    
     func didTapReminderButton(field: ReminderInfoField?) {
         
     }

@@ -52,7 +52,8 @@ extension TransactionEditViewController {
         guard viewModel.hasBothTransactionables else { return }
         if viewModel.needCurrencyExchange {
             tableController.exchangeField.amountField.becomeFirstResponder()
-        } else {
+        }
+        else {
             tableController.amountField.textField.becomeFirstResponder()
         }
     }

@@ -23,6 +23,7 @@ enum ActiveInfoField : String {
     case monthlyPlannedIncome
     case reminder
     case statistics
+    case costChange
     case transactionDevidents
     case transactionInvest
     case transactionSell
@@ -150,6 +151,10 @@ class ActiveInfoViewModel : EntityInfoViewModel {
                                         reminder: reminder))
         fields.append(contentsOf: [ButtonInfoField(fieldId: ActiveInfoField.statistics.rawValue,
                                                    title: "Статистика",
+                                                   iconName: nil,
+                                                   isEnabled: true),
+                                   ButtonInfoField(fieldId: ActiveInfoField.costChange.rawValue,
+                                                   title: "Переоценить актив",
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: ActiveInfoField.transactionDevidents.rawValue,

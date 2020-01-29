@@ -268,9 +268,12 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
         
         switch section {
         case let entityFieldsSection as EntityInfoFieldsSection:
-            guard let reminderField = entityFieldsSection.infoField(at: indexPath.row) as? ReminderInfoField else { return }
-            
-            entityInfoNavigationController?.didTapReminderButton(field: reminderField)
+            if let reminderField = entityFieldsSection.infoField(at: indexPath.row) as? ReminderInfoField {
+                entityInfoNavigationController?.didTapReminderButton(field: reminderField)
+            }
+            else if let basicField = entityFieldsSection.infoField(at: indexPath.row) as? BasicInfoField {
+                entityInfoNavigationController?.didTapInfoField(field: basicField)
+            }
             return
         case let transactionsSection as EntityInfoTransactionsSection:
             guard let transactionViewModel = transactionsSection.transactionViewModel(at: indexPath.row) else { return }

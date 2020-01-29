@@ -45,6 +45,9 @@ extension ActiveEditViewController {
         if viewModel.name == nil {
             tableController.nameField.textField.becomeFirstResponder()
         }
+        else {
+            tableController.costField.textField.becomeFirstResponder()
+        }
     }
     
     func updateIconUI() {

@@ -187,7 +187,7 @@ extension TransactionEditViewModel {
     }
     
     var sourceTitle: String? {
-        return sourceType?.title(as: .source) ?? "Источник"
+        return sourceType?.title(as: .source) ?? "Выберите источник"
     }
     var sourceAmountTitle: String? { return "Сумма" }
     var sourceIconURL: URL? { return source?.iconURL }
@@ -200,7 +200,7 @@ extension TransactionEditViewModel {
     var sourceCurrencyCode: String? { return sourceCurrency?.code }
     
     var destinationTitle: String? {
-        return destinationType?.title(as: .destination) ?? "Назначение"
+        return destinationType?.title(as: .destination) ?? "Выберите назначение"
         
     }
     var destinationAmountTitle: String? { return "Сумма" }
