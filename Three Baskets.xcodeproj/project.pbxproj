@@ -243,6 +243,7 @@
 		FA835D662265F21F00A592F2 /* GraphSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D652265F21F00A592F2 /* GraphSection.swift */; };
 		FA835D682265F23F00A592F2 /* TransactionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D672265F23F00A592F2 /* TransactionsSection.swift */; };
 		FA8382B621F89FE800307ECD /* DependentIncomeSourceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8382B521F89FE800307ECD /* DependentIncomeSourceInfoViewController.swift */; };
+		FA846D4923E1F50400DA5738 /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA846D4823E1F50400DA5738 /* PasscodeViewController.swift */; };
 		FA84E7E722562E5B00C0A274 /* CurrencyConverterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7E622562E5B00C0A274 /* CurrencyConverterProtocol.swift */; };
 		FA84E7E922562ED700C0A274 /* CurrencyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7E822562ED700C0A274 /* CurrencyConverter.swift */; };
 		FA84E7EB225DA9EF00C0A274 /* LineChartAreasRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84E7EA225DA9EF00C0A274 /* LineChartAreasRenderer.swift */; };
@@ -707,6 +708,7 @@
 		FA835D652265F21F00A592F2 /* GraphSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphSection.swift; sourceTree = "<group>"; };
 		FA835D672265F23F00A592F2 /* TransactionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsSection.swift; sourceTree = "<group>"; };
 		FA8382B521F89FE800307ECD /* DependentIncomeSourceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentIncomeSourceInfoViewController.swift; sourceTree = "<group>"; };
+		FA846D4823E1F50400DA5738 /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		FA84E7E622562E5B00C0A274 /* CurrencyConverterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterProtocol.swift; sourceTree = "<group>"; };
 		FA84E7E822562ED700C0A274 /* CurrencyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverter.swift; sourceTree = "<group>"; };
 		FA84E7EA225DA9EF00C0A274 /* LineChartAreasRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartAreasRenderer.swift; sourceTree = "<group>"; };
@@ -1238,6 +1240,7 @@
 				FA630C2522939F4500242AB3 /* ReminderEditViewController.swift */,
 				FA630C2722939FEA00242AB3 /* ReminderEditTableViewController.swift */,
 				FAA993DC23CF5265002456C2 /* AppUpdateViewController.swift */,
+				FA846D4823E1F50400DA5738 /* PasscodeViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2594,6 +2597,7 @@
 				FAB5BE41235206F1000466AE /* Reminder.swift in Sources */,
 				FAB5BE4F23530865000466AE /* TransactionEditReturningBorrowExtension.swift in Sources */,
 				FACC01E4224B52460044A747 /* StatisticsViewController.swift in Sources */,
+				FA846D4923E1F50400DA5738 /* PasscodeViewController.swift in Sources */,
 				FAE05FB4235C7EC40014D034 /* EditableCellDeleteButton.swift in Sources */,
 				FA56ABA123603B8900E4D0E3 /* PercentTextField.swift in Sources */,
 				FA165CD321B4EB6D00EAA16B /* RegistrationViewController.swift in Sources */,

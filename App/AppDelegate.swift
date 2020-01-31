@@ -9,6 +9,7 @@
 import UIKit
 import SwinjectStoryboard
 import Swinject
+import BiometricAuthentication
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -63,10 +64,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         notificationsCoordinator.rescheduleKeepAliveNotifications()
+        router.setWindow(blurred: true)
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         notificationsCoordinator.updateBadges()
+        router.modal(.PasscodeViewController)
+        router.setWindow(blurred: false)
     }
 }
-

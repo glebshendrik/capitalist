@@ -151,6 +151,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     func showMainViewController() {
         _ = show(.MainViewController)
+        modal(.PasscodeViewController)
         if let menuLeftNavigationController = viewController(.MenuNavigationController) as? SideMenuNavigationController {
             SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
         }
@@ -167,6 +168,15 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     func show(_ viewController: Infrastructure.ViewController) -> UIViewController? {
         window.rootViewController = self.viewController(viewController)
         return window.rootViewController
+    }
+    
+    func modal(_ viewController: Infrastructure.ViewController) {        
+        window.rootViewController?.topmostPresentedViewController.modal(self.viewController(viewController))
+    }
+    
+    func setWindow(blurred: Bool) {
+        let blurViewTagId = 999
+        blurred ? window.addBlur(with: blurViewTagId) : window.removeBlur(with: blurViewTagId)
     }
     
     func viewController(_ viewController: Infrastructure.ViewController) -> UIViewController {

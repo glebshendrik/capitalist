@@ -65,7 +65,7 @@ class SettingsTableController : FormFieldsTableViewController {
     }
     
     private func setupSoundsSwitchField() {
-        soundsSwitchField.placeholder = "Звуки"
+        soundsSwitchField.placeholder = "Звуки создания транзакций"
         soundsSwitchField.imageName = "sounds-icon"
         soundsSwitchField.didSwitch { [weak self] soundsOn in
             self?.delegate?.didChange(soundsOn: soundsOn)

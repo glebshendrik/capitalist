@@ -7,6 +7,7 @@ PODS:
   - AttributedTextView (1.4.1)
   - BEMCheckBox (1.4.1)
   - BetterSegmentedControl (1.3.0)
+  - BiometricAuthentication (3.1.2)
   - Charts (3.2.1):
     - Charts/Core (= 3.2.1)
   - Charts/Core (3.2.1)
@@ -83,6 +84,7 @@ DEPENDENCIES:
   - AttributedTextView
   - BEMCheckBox
   - BetterSegmentedControl (~> 1.3)
+  - BiometricAuthentication
   - Charts
   - CircleProgressView (~> 1.0)
   - CSV.swift
@@ -142,6 +144,7 @@ SPEC REPOS:
     - ALTextInputBar
     - AttributedTextView
     - BetterSegmentedControl
+    - BiometricAuthentication
     - EasyTipView
     - ESPullToRefresh
     - SideMenu
@@ -178,6 +181,7 @@ SPEC CHECKSUMS:
   AttributedTextView: 9e01651d96c1af861a9c67c2cc3f94c30320d1c2
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   BetterSegmentedControl: 85d1b0343a09603b098884d527f550dfc8e6cdd9
+  BiometricAuthentication: 36445f3ab77699489f91995bed887be89890afac
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
   CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
@@ -208,6 +212,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
 
-PODFILE CHECKSUM: 7ab0c61fe3e8d1c004d55b30d31887c4517aa2cc
+PODFILE CHECKSUM: a682e518fc66d99c7808dfa824b2f8e3c7f825f5
 
 COCOAPODS: 1.8.0

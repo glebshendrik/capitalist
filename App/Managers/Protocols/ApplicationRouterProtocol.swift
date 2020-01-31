@@ -21,4 +21,6 @@ protocol ApplicationRouterProtocol {
     func viewController(_ type: Infrastructure.ViewController) -> UIViewController
     func initDependencies(with resolver: Resolver)
     func setMinimumAllowed(version: String?, build: String?)
+    func modal(_ viewController: Infrastructure.ViewController)
+    func setWindow(blurred: Bool)
 }

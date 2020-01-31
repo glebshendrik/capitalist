@@ -39,6 +39,7 @@ target 'Three Baskets' do
   pod "ESPullToRefresh"
   pod 'BetterSegmentedControl', '~> 1.3'
   pod 'EasyTipView', '~> 2.0.4'
+  pod 'BiometricAuthentication'
 end
 
 post_install do |installer|

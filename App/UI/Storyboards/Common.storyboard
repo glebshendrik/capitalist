@@ -1114,6 +1114,47 @@
             </objects>
             <point key="canvasLocation" x="-2724" y="1796"/>
         </scene>
+        <!--Passcode View Controller-->
+        <scene sceneID="LH1-mV-lRs">
+            <objects>
+                <viewController storyboardIdentifier="PasscodeViewController" modalPresentationStyle="fullScreen" id="NlY-QT-GXg" customClass="PasscodeViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f8I-wb-hEn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYX-57-dQm">
+                                <rect key="frame" x="87.5" y="313.5" width="200" height="40"/>
+                                <color key="backgroundColor" name="blue 1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="aaa-zc-HWP"/>
+                                    <constraint firstAttribute="width" constant="200" id="gKw-Ia-SZ1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                <state key="normal" title="Войти">
+                                    <color key="titleColor" name="white 1.0"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didTapJoinButton:" destination="NlY-QT-GXg" eventType="touchUpInside" id="p1k-sB-V46"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" name="black 2"/>
+                        <constraints>
+                            <constraint firstItem="iYX-57-dQm" firstAttribute="centerX" secondItem="f8I-wb-hEn" secondAttribute="centerX" id="FOz-Yq-6dy"/>
+                            <constraint firstItem="iYX-57-dQm" firstAttribute="centerY" secondItem="f8I-wb-hEn" secondAttribute="centerY" id="NIy-fe-8Fm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pqs-Ib-jHi"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zcE-46-3vB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1201" y="3414"/>
+        </scene>
     </scenes>
     <resources>
         <image name="app-store-icon" width="120.5" height="120"/>
