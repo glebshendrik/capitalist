@@ -220,8 +220,8 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         keyboardManager.isEnableAutoToolbar = false
     }
     
-    private func setupLocale() {
-        InternationalControl.shared.language = .russian
+    private func setupLocale() {        
+//        InternationalControl.shared.language = RecurrencePickerLanguage.preferred
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

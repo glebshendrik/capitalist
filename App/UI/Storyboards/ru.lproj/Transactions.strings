@@ -1,0 +1,24 @@
+
+/* Class = "UIBarButtonItem"; title = "Отмена"; ObjectID = "3Ij-Wz-ocF"; */
+"3Ij-Wz-ocF.title" = "Отмена";
+
+/* Class = "UILabel"; text = "Комментарий"; ObjectID = "NIv-Br-BcV"; */
+"NIv-Br-BcV.text" = "Комментарий";
+
+/* Class = "UIButton"; normalTitle = "Удалить"; ObjectID = "Xew-SX-Imp"; */
+"Xew-SX-Imp.normalTitle" = "Удалить";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "ZEx-Wb-0OS"; */
+"ZEx-Wb-0OS.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "Вчера"; ObjectID = "cAf-Jf-ROT"; */
+"cAf-Jf-ROT.normalTitle" = "Вчера";
+
+/* Class = "UIButton"; normalTitle = "Выбрать дату"; ObjectID = "elw-9a-obx"; */
+"elw-9a-obx.normalTitle" = "Выбрать дату";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "lOQ-UV-aOh"; */
+"lOQ-UV-aOh.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = "Сохр."; ObjectID = "p7C-97-aZp"; */
+"p7C-97-aZp.title" = "Сохр.";

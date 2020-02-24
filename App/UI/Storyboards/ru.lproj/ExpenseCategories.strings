@@ -1,0 +1,30 @@
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "2ve-z4-yj6"; */
+"2ve-z4-yj6.text" = "Labelasdasd";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "Dnt-p9-05E"; */
+"Dnt-p9-05E.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "IdS-By-tYb"; */
+"IdS-By-tYb.title" = " ";
+
+/* Class = "UILabel"; text = "Категории трат"; ObjectID = "RlC-Fz-Jqv"; */
+"RlC-Fz-Jqv.text" = "Категории трат";
+
+/* Class = "UIBarButtonItem"; title = "Сохр."; ObjectID = "fer-Uo-IbO"; */
+"fer-Uo-IbO.title" = "Сохр.";
+
+/* Class = "UIButton"; normalTitle = "Удалить категорию трат"; ObjectID = "jhg-Ig-o6z"; */
+"jhg-Ig-o6z.normalTitle" = "Удалить категорию трат";
+
+/* Class = "UIButton"; normalTitle = "Установить напоминание"; ObjectID = "ljH-iW-Ndb"; */
+"ljH-iW-Ndb.normalTitle" = "Установить напоминание";
+
+/* Class = "UINavigationItem"; title = "Категория трат"; ObjectID = "nan-Dn-I5U"; */
+"nan-Dn-I5U.title" = "Категория трат";
+
+/* Class = "UIBarButtonItem"; title = "Отмена"; ObjectID = "sci-w7-Z7f"; */
+"sci-w7-Z7f.title" = "Отмена";
+
+/* Class = "UILabel"; text = "Labelasdasdadsasda"; ObjectID = "z4r-Mf-3fN"; */
+"z4r-Mf-3fN.text" = "Labelasdasdadsasda";

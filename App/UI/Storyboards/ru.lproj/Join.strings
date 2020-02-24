@@ -1,0 +1,96 @@
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "1Ol-Rd-esq"; */
+"1Ol-Rd-esq.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "4GT-GC-vwv"; */
+"4GT-GC-vwv.title" = " ";
+
+/* Class = "UINavigationItem"; title = "Регистрация"; ObjectID = "4zp-3W-NJv"; */
+"4zp-3W-NJv.title" = "Регистрация";
+
+/* Class = "UINavigationItem"; title = "Вход"; ObjectID = "7lA-pk-06U"; */
+"7lA-pk-06U.title" = "Вход";
+
+/* Class = "UINavigationItem"; title = "Вход"; ObjectID = "9m4-H4-XC8"; */
+"9m4-H4-XC8.title" = "Вход";
+
+/* Class = "UITableViewController"; title = "Вход"; ObjectID = "Afc-hf-J34"; */
+"Afc-hf-J34.title" = "Вход";
+
+/* Class = "UILabel"; text = "Зарегистрируйтесь, чтобы воспользоваться полным функционалом"; ObjectID = "DG6-LB-aVe"; */
+"DG6-LB-aVe.text" = "Зарегистрируйтесь, чтобы воспользоваться полным функционалом";
+
+/* Class = "UIButton"; normalTitle = "Подписаться"; ObjectID = "HZm-SX-yXK"; */
+"HZm-SX-yXK.normalTitle" = "Подписаться";
+
+/* Class = "UIButton"; normalTitle = "Забыли пароль?"; ObjectID = "KTR-no-az2"; */
+"KTR-no-az2.normalTitle" = "Забыли пароль?";
+
+/* Class = "UILabel"; text = "user123"; ObjectID = "KbV-3H-qps"; */
+"KbV-3H-qps.text" = "user123";
+
+/* Class = "UITableViewController"; title = "Регистрация"; ObjectID = "LYO-dq-1YR"; */
+"LYO-dq-1YR.title" = "Регистрация";
+
+/* Class = "UINavigationItem"; title = "Восстановление пароля"; ObjectID = "MI4-mw-1Av"; */
+"MI4-mw-1Av.title" = "Восстановление пароля";
+
+/* Class = "UITableViewController"; title = "Восстановление пароля"; ObjectID = "MT3-Zt-RXL"; */
+"MT3-Zt-RXL.title" = "Восстановление пароля";
+
+/* Class = "UILabel"; text = "Войдите, чтобы воспользоваться полным функционалом"; ObjectID = "NMf-tF-4qh"; */
+"NMf-tF-4qh.text" = "Войдите, чтобы воспользоваться полным функционалом";
+
+/* Class = "UILabel"; text = "990 ₽"; ObjectID = "SaJ-hw-ZPh"; */
+"SaJ-hw-ZPh.text" = "990 ₽";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "UHg-nc-z1f"; */
+"UHg-nc-z1f.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "Yye-OE-ikQ"; */
+"Yye-OE-ikQ.title" = " ";
+
+/* Class = "UILabel"; text = "12 месяцев"; ObjectID = "ZEs-00-b67"; */
+"ZEs-00-b67.text" = "12 месяцев";
+
+/* Class = "UIButton"; normalTitle = "Отправить код"; ObjectID = "b2A-rJ-PqO"; */
+"b2A-rJ-PqO.normalTitle" = "Отправить код";
+
+/* Class = "UIButton"; normalTitle = "Сменить пароль"; ObjectID = "edn-hp-fwm"; */
+"edn-hp-fwm.normalTitle" = "Сменить пароль";
+
+/* Class = "UILabel"; text = "Укажите email адрес, на который мы отправим код для восстановления пароля"; ObjectID = "f7H-gT-27s"; */
+"f7H-gT-27s.text" = "Укажите email адрес, на который мы отправим код для восстановления пароля";
+
+/* Class = "UIButton"; normalTitle = "Войти"; ObjectID = "fHf-gg-FPi"; */
+"fHf-gg-FPi.normalTitle" = "Войти";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "ga1-Je-YGh"; */
+"ga1-Je-YGh.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "gfz-6P-wzn"; */
+"gfz-6P-wzn.title" = " ";
+
+/* Class = "UINavigationItem"; title = "Вход"; ObjectID = "hVO-oq-j9V"; */
+"hVO-oq-j9V.title" = "Вход";
+
+/* Class = "UILabel"; text = "Введите отправленный вам код подтверждения, и укажите новый пароль"; ObjectID = "it7-BI-spA"; */
+"it7-BI-spA.text" = "Введите отправленный вам код подтверждения, и укажите новый пароль";
+
+/* Class = "UIButton"; normalTitle = "Зарегистрироваться"; ObjectID = "ljq-Dh-AaT"; */
+"ljq-Dh-AaT.normalTitle" = "Зарегистрироваться";
+
+/* Class = "UITableViewController"; title = "Восстановление пароля"; ObjectID = "oFs-5E-1H9"; */
+"oFs-5E-1H9.title" = "Восстановление пароля";
+
+/* Class = "UINavigationItem"; title = "Вход"; ObjectID = "ryP-GL-LpE"; */
+"ryP-GL-LpE.title" = "Вход";
+
+/* Class = "UILabel"; text = "Оформите подписку"; ObjectID = "unC-2n-dQN"; */
+"unC-2n-dQN.text" = "Оформите подписку";
+
+/* Class = "UILabel"; text = "Лучшее приложение в сфере финансов! Обожаю его и то, как оно помогает мне контролировать мои расходы."; ObjectID = "vXd-Rs-wnc"; */
+"vXd-Rs-wnc.text" = "Лучшее приложение в сфере финансов! Обожаю его и то, как оно помогает мне контролировать мои расходы.";
+
+/* Class = "UIButton"; normalTitle = "Войти в свой аккаунт"; ObjectID = "vzQ-4G-1Tw"; */
+"vzQ-4G-1Tw.normalTitle" = "Войти в свой аккаунт";

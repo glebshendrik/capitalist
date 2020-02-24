@@ -1,0 +1,69 @@
+
+/* Class = "UILabel"; text = "ОСНОВНЫЕ"; ObjectID = "CyD-fZ-IH4"; */
+"CyD-fZ-IH4.text" = "ОСНОВНЫЕ";
+
+/* Class = "UITableViewController"; title = "Профиль"; ObjectID = "HG6-mu-16B"; */
+"HG6-mu-16B.title" = "Профиль";
+
+/* Class = "UITableViewController"; title = "Редактирование профиля"; ObjectID = "Hgf-UE-tuK"; */
+"Hgf-UE-tuK.title" = "Редактирование профиля";
+
+/* Class = "UIButton"; normalTitle = "Выйти"; ObjectID = "HuF-dS-LK2"; */
+"HuF-dS-LK2.normalTitle" = "Выйти";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "Iwk-Rd-uLw"; */
+"Iwk-Rd-uLw.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "LuP-M0-L5M"; */
+"LuP-M0-L5M.title" = " ";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "MSc-JV-EVL"; */
+"MSc-JV-EVL.text" = "Email";
+
+/* Class = "UILabel"; text = "БЕЗОПАСНОСТЬ"; ObjectID = "OY4-zs-8xk"; */
+"OY4-zs-8xk.text" = "БЕЗОПАСНОСТЬ";
+
+/* Class = "UIBarButtonItem"; title = "Изм."; ObjectID = "RIb-UX-y0w"; */
+"RIb-UX-y0w.title" = "Изм.";
+
+/* Class = "UINavigationItem"; title = "Профиль"; ObjectID = "SWu-J2-TUw"; */
+"SWu-J2-TUw.title" = "Профиль";
+
+/* Class = "UILabel"; text = "Александр"; ObjectID = "Tol-nr-lf0"; */
+"Tol-nr-lf0.text" = "Александр";
+
+/* Class = "UILabel"; text = "Введите старый пароль, и укажите новый пароль"; ObjectID = "Tp9-KI-hXo"; */
+"Tp9-KI-hXo.text" = "Введите старый пароль, и укажите новый пароль";
+
+/* Class = "UIButton"; normalTitle = "Сменить пароль"; ObjectID = "UKD-mK-UXI"; */
+"UKD-mK-UXI.normalTitle" = "Сменить пароль";
+
+/* Class = "UINavigationItem"; title = "Вход"; ObjectID = "Xfv-3D-gAV"; */
+"Xfv-3D-gAV.title" = "Вход";
+
+/* Class = "UITableViewController"; title = "Восстановление пароля"; ObjectID = "ZQ6-5G-PLb"; */
+"ZQ6-5G-PLb.title" = "Восстановление пароля";
+
+/* Class = "UIBarButtonItem"; title = "Сохр."; ObjectID = "cZz-m4-Ddz"; */
+"cZz-m4-Ddz.title" = "Сохр.";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "dcS-av-sEd"; */
+"dcS-av-sEd.title" = " ";
+
+/* Class = "UINavigationItem"; title = "Редактирование профиля"; ObjectID = "efJ-yy-COC"; */
+"efJ-yy-COC.title" = "Редактирование профиля";
+
+/* Class = "UILabel"; text = "Сменить пароль"; ObjectID = "gR4-V9-NEd"; */
+"gR4-V9-NEd.text" = "Сменить пароль";
+
+/* Class = "UILabel"; text = "Имя"; ObjectID = "kQi-p7-mJ8"; */
+"kQi-p7-mJ8.text" = "Имя";
+
+/* Class = "UIBarButtonItem"; title = "Отмена"; ObjectID = "pLu-U6-3h0"; */
+"pLu-U6-3h0.title" = "Отмена";
+
+/* Class = "UILabel"; text = "petalvlad@gmail.com"; ObjectID = "qsB-3L-vXj"; */
+"qsB-3L-vXj.text" = "petalvlad@gmail.com";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "sej-V8-3o1"; */
+"sej-V8-3o1.title" = " ";

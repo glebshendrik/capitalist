@@ -1,0 +1,69 @@
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "2fj-Qp-0kG"; */
+"2fj-Qp-0kG.text" = "Labelasdasd";
+
+/* Class = "UIButton"; normalTitle = "Установить напоминание"; ObjectID = "4Hq-Ce-TmF"; */
+"4Hq-Ce-TmF.normalTitle" = "Установить напоминание";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "6HW-Tt-2zL"; */
+"6HW-Tt-2zL.text" = "Labelasdasd";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "9pS-j9-Xgk"; */
+"9pS-j9-Xgk.text" = "Labelasdasd";
+
+/* Class = "UILabel"; text = "Labelasdasdadsasda"; ObjectID = "Ai7-BA-gVB"; */
+"Ai7-BA-gVB.text" = "Labelasdasdadsasda";
+
+/* Class = "UIButton"; normalTitle = "Удалить категорию трат"; ObjectID = "DAz-mT-mqL"; */
+"DAz-mT-mqL.normalTitle" = "Удалить категорию трат";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "DoN-py-7fC"; */
+"DoN-py-7fC.text" = "Labelasdasd";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "GUL-iM-sPo"; */
+"GUL-iM-sPo.text" = "Labelasdasd";
+
+/* Class = "UINavigationItem"; title = "Категория трат"; ObjectID = "JOl-xi-rTp"; */
+"JOl-xi-rTp.title" = "Категория трат";
+
+/* Class = "UILabel"; text = "Labelasdasdadsasda"; ObjectID = "N6n-cv-eic"; */
+"N6n-cv-eic.text" = "Labelasdasdadsasda";
+
+/* Class = "UILabel"; text = "Комментарий"; ObjectID = "NdO-eC-bHM"; */
+"NdO-eC-bHM.text" = "Комментарий";
+
+/* Class = "UIBarButtonItem"; title = "Отмена"; ObjectID = "OQi-91-YhN"; */
+"OQi-91-YhN.title" = "Отмена";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "PXA-C9-C3b"; */
+"PXA-C9-C3b.text" = "Labelasdasd";
+
+/* Class = "UINavigationItem"; title = "Дневник долгов"; ObjectID = "Qtt-fS-YMX"; */
+"Qtt-fS-YMX.title" = "Дневник долгов";
+
+/* Class = "UILabel"; text = "Labelasdasdadsasda"; ObjectID = "Y2x-BP-b7v"; */
+"Y2x-BP-b7v.text" = "Labelasdasdadsasda";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "aEu-uo-iMg"; */
+"aEu-uo-iMg.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = "Сохр."; ObjectID = "fiz-DP-Egb"; */
+"fiz-DP-Egb.title" = "Сохр.";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "go3-X0-1Fk"; */
+"go3-X0-1Fk.text" = "Labelasdasd";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "haY-UJ-C35"; */
+"haY-UJ-C35.title" = " ";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "j9Q-mq-vgV"; */
+"j9Q-mq-vgV.text" = "Labelasdasd";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "lvL-N8-pHE"; */
+"lvL-N8-pHE.title" = " ";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "niF-X3-tHM"; */
+"niF-X3-tHM.text" = "Labelasdasd";
+
+/* Class = "UILabel"; text = "Источники дохода"; ObjectID = "tIV-Vi-95i"; */
+"tIV-Vi-95i.text" = "Источники дохода";

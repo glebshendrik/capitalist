@@ -124,12 +124,28 @@ extension TransactionEditViewModel {
 
 // Creation
 extension TransactionEditViewModel {
+    func deleteAsset() -> Promise<Void> {
+        guard   let assetId = self.sourceId,
+                let sourceType = sourceType,
+                let destinationType = destinationType,
+                sourceType == .active,
+                destinationType == .expenseSource else { return Promise.value(()) }
+        return activesCoordinator.destroyActive(by: assetId, deleteTransactions: false)
+    }
+}
+
+// Creation
+extension TransactionEditViewModel {
     func create() -> Promise<Void> {
         return  firstly {
                     transactionsCoordinator.create(with: creationForm())
-                }.get { [weak self] transaction in
+                }.then { [weak self] transaction -> Promise<Void> in
                     self?.transaction = transaction
-                }.asVoid()
+                    guard let weakSelf = self,
+                          weakSelf.isSellingAsset else { return Promise.value(()) }
+                    
+                    return weakSelf.deleteAsset()
+                }
     }
     
     func isCreationFormValid() -> Bool {

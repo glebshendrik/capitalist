@@ -136,6 +136,15 @@ extension TransactionEditViewModel {
         return transactionType != .expense || destination.type != .active || onlyBuyingAssets
     }
     
+    var isSellingAssetFieldHidden: Bool {
+        guard   isNew,
+                let transactionType = transactionType,
+                let destination = destination,
+                let source = source else { return true }
+        
+        return transactionType != .income || destination.type != .expenseSource || source.type != .active
+    }
+    
     var removeButtonHidden: Bool {
         return isNew        
     }

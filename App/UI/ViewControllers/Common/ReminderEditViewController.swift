@@ -81,8 +81,7 @@ extension ReminderEditViewController : ReminderEditTableViewControllerDelegate {
     func didTapRecurrence() {
         push(factory.recurrencePicker(delegate: self,
                                       recurrenceRule: viewModel.recurrenceRule,
-                                      ocurrenceDate: viewModel.reminderStartDate,
-                                      language: .russian))
+                                      ocurrenceDate: viewModel.reminderStartDate))
     }
     
     func didTapRemoveButton() {

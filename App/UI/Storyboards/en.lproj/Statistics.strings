@@ -1,0 +1,75 @@
+
+/* Class = "UILabel"; text = "Транспортая компания"; ObjectID = "2BF-hv-VYW"; */
+"2BF-hv-VYW.text" = "Long company name";
+
+/* Class = "UILabel"; text = "Rent"; ObjectID = "2Sn-hu-Qz8"; */
+"2Sn-hu-Qz8.text" = "Rent";
+
+/* Class = "UILabel"; text = "ИСТОРИЯ"; ObjectID = "6Dx-JW-lXN"; */
+"6Dx-JW-lXN.text" = "HISTORY";
+
+/* Class = "UIButton"; normalTitle = "Готово"; ObjectID = "BYz-Fh-44s"; */
+"BYz-Fh-44s.normalTitle" = "Done";
+
+/* Class = "UILabel"; text = "Загружаем актуальные данные"; ObjectID = "C78-Gv-YZU"; */
+"C78-Gv-YZU.text" = "Loading data";
+
+/* Class = "UINavigationItem"; title = "Выбор периода"; ObjectID = "C8c-b4-I7E"; */
+"C8c-b4-I7E.title" = "Choosing period";
+
+/* Class = "UINavigationItem"; title = "Кредит"; ObjectID = "Chw-QN-NBT"; */
+"Chw-QN-NBT.title" = "Credit";
+
+/* Class = "UILabel"; text = "949,520.00 ₽"; ObjectID = "Jxt-YA-oAg"; */
+"Jxt-YA-oAg.text" = "949,520.00 ₽";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "LVC-Sa-khA"; */
+"LVC-Sa-khA.title" = " ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "LXF-Qi-ZPD"; */
+"LXF-Qi-ZPD.text" = "Label";
+
+/* Class = "UILabel"; text = "304,000.00 ₽"; ObjectID = "OeH-VB-oP2"; */
+"OeH-VB-oP2.text" = "304,000.00 ₽";
+
+/* Class = "UILabel"; text = "949,520.00 ₽"; ObjectID = "RZ7-qI-myN"; */
+"RZ7-qI-myN.text" = "949,520.00 ₽";
+
+/* Class = "UILabel"; text = "45%"; ObjectID = "Vkz-Uh-kxY"; */
+"Vkz-Uh-kxY.text" = "45%";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "X2x-R0-cNF"; */
+"X2x-R0-cNF.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = "Сброс"; ObjectID = "XZb-X8-HF4"; */
+"XZb-X8-HF4.title" = "Reset";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "Yls-4i-5TY"; */
+"Yls-4i-5TY.title" = " ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "aTc-4B-VGA"; */
+"aTc-4B-VGA.text" = "Label";
+
+/* Class = "UILabel"; text = "350 000 000 ₽"; ObjectID = "cff-0W-2Q9"; */
+"cff-0W-2Q9.text" = "350 000 000 ₽";
+
+/* Class = "UIBarButtonItem"; title = "Сброс"; ObjectID = "jUn-bn-8EB"; */
+"jUn-bn-8EB.title" = "Reset";
+
+/* Class = "UIButton"; normalTitle = "Выбрать (3)"; ObjectID = "nB6-RD-jK0"; */
+"nB6-RD-jK0.normalTitle" = "Choose (3)";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "qlY-mL-sLs"; */
+"qlY-mL-sLs.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = "Сброс"; ObjectID = "rkx-HQ-kKb"; */
+"rkx-HQ-kKb.title" = "Reset";
+
+/* Class = "UITableViewController"; title = "Выбор периода"; ObjectID = "ulQ-Nr-Xc5"; */
+"ulQ-Nr-Xc5.title" = "Choose period";
+
+/* Class = "UILabel"; text = "Кошелек"; ObjectID = "wJF-UY-J7B"; */
+"wJF-UY-J7B.text" = "Wallet";
+
+/* Class = "UINavigationItem"; title = "Фильтр"; ObjectID = "y2X-Ra-aqJ"; */
+"y2X-Ra-aqJ.title" = "Filter";

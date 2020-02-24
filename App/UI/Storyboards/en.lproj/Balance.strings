@@ -9,19 +9,19 @@
 "JUf-M2-ta0.text" = "Labelasdasd";
 
 /* Class = "UINavigationItem"; title = "Баланс"; ObjectID = "Lf6-Xn-hOY"; */
-"Lf6-Xn-hOY.title" = "Баланс";
+"Lf6-Xn-hOY.title" = "Balance";
 
 /* Class = "UILabel"; text = "Labelasdasdadsasda"; ObjectID = "QLi-ya-gJa"; */
 "QLi-ya-gJa.text" = "Labelasdasdadsasda";
 
 /* Class = "UILabel"; text = "Итого:"; ObjectID = "RMw-Zv-qsm"; */
-"RMw-Zv-qsm.text" = "Итого:";
+"RMw-Zv-qsm.text" = "Total:";
 
 /* Class = "UILabel"; text = "Labelasdasdadsasda"; ObjectID = "U9Q-bf-UON"; */
 "U9Q-bf-UON.text" = "Labelasdasdadsasda";
 
 /* Class = "UILabel"; text = "Итого:"; ObjectID = "UQ9-gP-dC0"; */
-"UQ9-gP-dC0.text" = "Итого:";
+"UQ9-gP-dC0.text" = "Total:";
 
 /* Class = "UILabel"; text = "Labelasdasdadsasda"; ObjectID = "eEy-Tm-M4F"; */
 "eEy-Tm-M4F.text" = "Labelasdasdadsasda";

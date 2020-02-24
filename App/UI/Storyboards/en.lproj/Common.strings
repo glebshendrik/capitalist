@@ -1,0 +1,84 @@
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "2Wk-hn-mPz"; */
+"2Wk-hn-mPz.title" = " ";
+
+/* Class = "UIViewController"; title = "Выберите валюту"; ObjectID = "ByI-OE-pnV"; */
+"ByI-OE-pnV.title" = "Choose a currency";
+
+/* Class = "UIViewController"; title = "Выберите иконку"; ObjectID = "EOg-T1-SCz"; */
+"EOg-T1-SCz.title" = "Choose an icon";
+
+/* Class = "UILabel"; text = "ВАЖНОЕ ОБНОВЛЕНИЕ"; ObjectID = "EPK-QY-jlF"; */
+"EPK-QY-jlF.text" = "IMPORTANT UPDATE";
+
+/* Class = "UILabel"; text = "Российский рубль"; ObjectID = "Ec1-DQ-NnO"; */
+"Ec1-DQ-NnO.text" = "Russian Ruble";
+
+/* Class = "UIBarButtonItem"; title = "Отмена"; ObjectID = "Frf-SE-abf"; */
+"Frf-SE-abf.title" = "Cancel";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "GIf-fx-0Pf"; */
+"GIf-fx-0Pf.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "K0a-tv-pyK"; */
+"K0a-tv-pyK.title" = " ";
+
+/* Class = "UILabel"; text = "ПОСЛЕДНИЕ ОПЕРАЦИИ"; ObjectID = "Ugn-AM-ssu"; */
+"Ugn-AM-ssu.text" = "RECENT TRANSACTIONS";
+
+/* Class = "UILabel"; text = "Транспортая компания"; ObjectID = "Wcv-0F-l2u"; */
+"Wcv-0F-l2u.text" = "Company";
+
+/* Class = "UILabel"; text = "Label Label Label Label Label Label Label Label"; ObjectID = "WpU-hs-j2T"; */
+"WpU-hs-j2T.text" = "Label Label Label Label Label Label Label Label";
+
+/* Class = "UIBarButtonItem"; title = "Сохр."; ObjectID = "YUq-oZ-jSe"; */
+"YUq-oZ-jSe.title" = "Save";
+
+/* Class = "UIButton"; normalTitle = "Создать напоминание"; ObjectID = "akB-TD-8N6"; */
+"akB-TD-8N6.normalTitle" = "Set a reminder";
+
+/* Class = "UIButton"; normalTitle = "Подключить банк"; ObjectID = "bab-u5-vL6"; */
+"bab-u5-vL6.normalTitle" = "Connect to a bank";
+
+/* Class = "UILabel"; text = "Обновите приложение до актуальной версии"; ObjectID = "cfr-MH-ivs"; */
+"cfr-MH-ivs.text" = "Update the app to actual version";
+
+/* Class = "UIButton"; normalTitle = "Удалить напоминание"; ObjectID = "e4w-Af-gnL"; */
+"e4w-Af-gnL.normalTitle" = "Remove the reminder";
+
+/* Class = "UILabel"; text = "Ваша версия приложения устарела"; ObjectID = "feJ-95-vVb"; */
+"feJ-95-vVb.text" = "You version of the app is outdated";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "fjD-b7-432"; */
+"fjD-b7-432.title" = " ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gFk-aK-a1i"; */
+"gFk-aK-a1i.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Войти"; ObjectID = "iYX-57-dQm"; */
+"iYX-57-dQm.normalTitle" = "Join";
+
+/* Class = "UIButton"; normalTitle = "Создать напоминание"; ObjectID = "jPK-vM-T2c"; */
+"jPK-vM-T2c.normalTitle" = "Set a reminder";
+
+/* Class = "UINavigationItem"; title = "Напоминание"; ObjectID = "ln2-Ap-shi"; */
+"ln2-Ap-shi.title" = "Reminder";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "o1z-yw-33j"; */
+"o1z-yw-33j.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "uGG-5Z-kCj"; */
+"uGG-5Z-kCj.text" = "Label";
+
+/* Class = "UILabel"; text = "Кошелек"; ObjectID = "ubT-9k-CXB"; */
+"ubT-9k-CXB.text" = "Wallet";
+
+/* Class = "UILabel"; text = "₽"; ObjectID = "vlo-XQ-bvg"; */
+"vlo-XQ-bvg.text" = "₽";
+
+/* Class = "UILabel"; text = "350 ₽"; ObjectID = "xLs-jB-UiQ"; */
+"xLs-jB-UiQ.text" = "350 ₽";
+
+/* Class = "UIButton"; normalTitle = "Обновить"; ObjectID = "yNZ-v7-cvU"; */
+"yNZ-v7-cvU.normalTitle" = "Update";

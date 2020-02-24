@@ -38,6 +38,10 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         update(isBuyingAsset: isBuyingAsset)
     }
     
+    func didChange(isSellingAsset: Bool) {
+        update(isSellingAsset: isSellingAsset)
+    }
+    
     func didChange(comment: String?) {
         update(comment: comment)
     }

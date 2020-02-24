@@ -1,0 +1,30 @@
+
+/* Class = "UIBarButtonItem"; title = "Сохр."; ObjectID = "2n1-U8-KpW"; */
+"2n1-U8-KpW.title" = "Сохр.";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "CE8-T8-AnT"; */
+"CE8-T8-AnT.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "M8K-di-QwT"; */
+"M8K-di-QwT.title" = " ";
+
+/* Class = "UINavigationItem"; title = "Источник доходов"; ObjectID = "O45-Qi-TsM"; */
+"O45-Qi-TsM.title" = "Источник доходов";
+
+/* Class = "UIButton"; normalTitle = "Удалить источник доходов"; ObjectID = "PIo-Li-wHC"; */
+"PIo-Li-wHC.normalTitle" = "Удалить источник доходов";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "Pfw-ck-Yd0"; */
+"Pfw-ck-Yd0.text" = "Labelasdasd";
+
+/* Class = "UIBarButtonItem"; title = "Отмена"; ObjectID = "dhG-ni-5tQ"; */
+"dhG-ni-5tQ.title" = "Отмена";
+
+/* Class = "UIButton"; normalTitle = "Установить напоминание"; ObjectID = "e2T-nZ-VWt"; */
+"e2T-nZ-VWt.normalTitle" = "Установить напоминание";
+
+/* Class = "UILabel"; text = "Источники дохода"; ObjectID = "eTL-e8-6qX"; */
+"eTL-e8-6qX.text" = "Источники дохода";
+
+/* Class = "UILabel"; text = "Labelasdasdadsasda"; ObjectID = "vPG-g9-K7K"; */
+"vPG-g9-K7K.text" = "Labelasdasdadsasda";

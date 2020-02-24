@@ -29,6 +29,11 @@ extension TransactionEditViewController {
         updateIsBuyingAssetUI()
     }
     
+    func update(isSellingAsset: Bool) {
+        viewModel.isSellingAsset = isSellingAsset
+        updateIsSellingAssetUI()
+    }
+    
     func update(gotAt: Date?) {
         viewModel.gotAt = gotAt
         updateToolbarUI()
@@ -104,6 +109,11 @@ extension TransactionEditViewController {
         tableController.isBuyingAssetSwitchField.value = viewModel.isBuyingAsset
         tableController.isBuyingAssetSwitchField.placeholder = viewModel.buyingAssetsTitle
         tableController.set(cell: tableController.isBuyingAssetCell, hidden: viewModel.isBuyingAssetFieldHidden, animated: false, reload: false)        
+    }
+    
+    func updateIsSellingAssetUI() {
+        tableController.isSellingAssetSwitchField.value = viewModel.isSellingAsset
+        tableController.set(cell: tableController.isSellingAssetCell, hidden: viewModel.isSellingAssetFieldHidden, animated: false, reload: false)
     }
     
     func updateCommentUI() {

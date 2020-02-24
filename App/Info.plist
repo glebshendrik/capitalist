@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>ru</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>Three Baskets</string>
 	<key>CFBundleExecutable</key>
@@ -53,8 +53,8 @@
 	<string>Launch</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-    <key>NSFaceIDUsageDescription</key>
-    <string>This app requires Face ID permission to authenticate using Face recognition.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>This app requires Face ID permission to authenticate using Face recognition.</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

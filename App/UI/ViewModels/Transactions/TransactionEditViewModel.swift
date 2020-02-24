@@ -35,6 +35,7 @@ class TransactionEditViewModel {
     var comment: String? = nil
     var gotAt: Date? = nil
     var isBuyingAsset: Bool = false
+    var isSellingAsset: Bool = false
     var amountConverted: String? = nil
     var convertedAmountConverted: String? = nil
     var exchangeRate: Float = 1.0 { didSet { didSetExchangeRate() } }

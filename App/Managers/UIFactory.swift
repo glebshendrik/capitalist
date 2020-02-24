@@ -174,11 +174,9 @@ class UIFactory : UIFactoryProtocol {
     
     func recurrencePicker(delegate: RecurrencePickerDelegate,
                           recurrenceRule: RecurrenceRule?,
-                          ocurrenceDate: Date?,
-                          language: RecurrencePickerLanguage) -> RecurrencePicker? {
+                          ocurrenceDate: Date?) -> RecurrencePicker? {
         
         let recurrencePicker = RecurrencePicker(recurrenceRule: recurrenceRule)
-        recurrencePicker.language = language
         recurrencePicker.calendar = Calendar.current
         recurrencePicker.tintColor = UIColor(hexString: "6B93FB") ?? .black
         

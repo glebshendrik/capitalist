@@ -1,0 +1,12 @@
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "PWa-oT-K1T"; */
+"PWa-oT-K1T.title" = " ";
+
+/* Class = "UINavigationItem"; title = "Настройки"; ObjectID = "eEW-iL-Qvc"; */
+"eEW-iL-Qvc.title" = "Настройки";
+
+/* Class = "UILabel"; text = "ОСНОВНЫЕ"; ObjectID = "fCF-dh-fKO"; */
+"fCF-dh-fKO.text" = "ОСНОВНЫЕ";
+
+/* Class = "UITableViewController"; title = "Настройки"; ObjectID = "sd1-uM-Iqb"; */
+"sd1-uM-Iqb.title" = "Настройки";

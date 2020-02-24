@@ -1,0 +1,42 @@
+
+/* Class = "UIBarButtonItem"; title = "Сохр."; ObjectID = "EyB-ZP-sFv"; */
+"EyB-ZP-sFv.title" = "Сохр.";
+
+/* Class = "UILabel"; text = "Labelasdasdadsasda"; ObjectID = "Mus-Eb-YF7"; */
+"Mus-Eb-YF7.text" = "Labelasdasdadsasda";
+
+/* Class = "UIBarButtonItem"; title = "Отмена"; ObjectID = "Oyd-qw-UL9"; */
+"Oyd-qw-UL9.title" = "Отмена";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "Td7-2p-E8r"; */
+"Td7-2p-E8r.text" = "Labelasdasd";
+
+/* Class = "UITableViewController"; title = "Кредит"; ObjectID = "UeL-DS-4uM"; */
+"UeL-DS-4uM.title" = "Кредит";
+
+/* Class = "UIButton"; normalTitle = "Удалить категорию трат"; ObjectID = "Wim-mR-DbU"; */
+"Wim-mR-DbU.normalTitle" = "Удалить категорию трат";
+
+/* Class = "UIButton"; normalTitle = "Установить напоминание"; ObjectID = "dDt-Vt-xo4"; */
+"dDt-Vt-xo4.normalTitle" = "Установить напоминание";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "eoR-h4-STX"; */
+"eoR-h4-STX.text" = "Labelasdasd";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "g23-Gf-Vkw"; */
+"g23-Gf-Vkw.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "gx6-sZ-aYA"; */
+"gx6-sZ-aYA.title" = " ";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "pLY-o9-iIB"; */
+"pLY-o9-iIB.text" = "Labelasdasd";
+
+/* Class = "UINavigationItem"; title = "Кредиты"; ObjectID = "q0H-Dw-CrN"; */
+"q0H-Dw-CrN.title" = "Кредиты";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "uEi-fo-uHr"; */
+"uEi-fo-uHr.title" = " ";
+
+/* Class = "UINavigationItem"; title = "Кредит"; ObjectID = "uyH-s9-KcT"; */
+"uyH-s9-KcT.title" = "Кредит";

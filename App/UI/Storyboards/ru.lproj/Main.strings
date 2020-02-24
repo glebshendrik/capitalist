@@ -1,0 +1,57 @@
+
+/* Class = "UILabel"; text = "Зарплата"; ObjectID = "1sx-Bw-Jfj"; */
+"1sx-Bw-Jfj.text" = "Зарплата";
+
+/* Class = "UILabel"; text = "ДОХОДЫ"; ObjectID = "9k4-zl-N3c"; */
+"9k4-zl-N3c.text" = "ДОХОДЫ";
+
+/* Class = "UILabel"; text = "Зарплата"; ObjectID = "B5k-yr-pdi"; */
+"B5k-yr-pdi.text" = "Зарплата";
+
+/* Class = "UILabel"; text = "Баланс"; ObjectID = "BE2-VS-Nrb"; */
+"BE2-VS-Nrb.text" = "Баланс";
+
+/* Class = "UILabel"; text = "Долги"; ObjectID = "Bc7-cd-bkH"; */
+"Bc7-cd-bkH.text" = "Долги";
+
+/* Class = "UILabel"; text = "Кредиты"; ObjectID = "BjV-if-9WJ"; */
+"BjV-if-9WJ.text" = "Кредиты";
+
+/* Class = "UILabel"; text = "98 000 ₽"; ObjectID = "EX0-AK-HGH"; */
+"EX0-AK-HGH.text" = "98 000 ₽";
+
+/* Class = "UILabel"; text = "Войти"; ObjectID = "HBL-RA-8gd"; */
+"HBL-RA-8gd.text" = "Войти";
+
+/* Class = "UILabel"; text = "КОШЕЛЬКИ"; ObjectID = "Jig-hk-zD0"; */
+"Jig-hk-zD0.text" = "КОШЕЛЬКИ";
+
+/* Class = "UILabel"; text = "ИСТОЧНИКИ ДОХОДА"; ObjectID = "LG5-vr-cex"; */
+"LG5-vr-cex.text" = "ИСТОЧНИКИ ДОХОДА";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "SWv-gv-ZGk"; */
+"SWv-gv-ZGk.title" = " ";
+
+/* Class = "UILabel"; text = "Настройки"; ObjectID = "TtX-LK-h4F"; */
+"TtX-LK-h4F.text" = "Настройки";
+
+/* Class = "UILabel"; text = "98 000 ₽"; ObjectID = "YLL-t9-8ZH"; */
+"YLL-t9-8ZH.text" = "98 000 ₽";
+
+/* Class = "UILabel"; text = "РАСХОДЫ"; ObjectID = "dB1-hV-29K"; */
+"dB1-hV-29K.text" = "РАСХОДЫ";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "dvu-UH-vXw"; */
+"dvu-UH-vXw.text" = "0";
+
+/* Class = "UILabel"; text = "98 000 ₽"; ObjectID = "k2X-F7-FuV"; */
+"k2X-F7-FuV.text" = "98 000 ₽";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "kao-ST-0QI"; */
+"kao-ST-0QI.title" = " ";
+
+/* Class = "UILabel"; text = "Профиль"; ObjectID = "rVx-Cw-8Od"; */
+"rVx-Cw-8Od.text" = "Профиль";
+
+/* Class = "UILabel"; text = "Статистика"; ObjectID = "u21-Jw-Xay"; */
+"u21-Jw-Xay.text" = "Статистика";

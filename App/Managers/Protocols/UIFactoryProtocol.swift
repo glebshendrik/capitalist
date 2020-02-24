@@ -68,8 +68,7 @@ protocol UIFactoryProtocol {
     
     func recurrencePicker(delegate: RecurrencePickerDelegate,
                           recurrenceRule: RecurrenceRule?,
-                          ocurrenceDate: Date?,
-                          language: RecurrencePickerLanguage) -> RecurrencePicker?
+                          ocurrenceDate: Date?) -> RecurrencePicker?
     
     func loginViewController() -> LoginViewController?
     

@@ -17,6 +17,7 @@ protocol TransactionEditTableControllerDelegate {
     func didChange(amount: String?)
     func didChange(convertedAmount: String?)
     func didChange(isBuyingAsset: Bool)
+    func didChange(isSellingAsset: Bool)
     func didChange(comment: String?)
     func didTapRemoveButton()
 }
@@ -29,6 +30,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var amountField: FormMoneyTextField!
     @IBOutlet weak var exchangeField: FormExchangeField!
     @IBOutlet weak var isBuyingAssetSwitchField: FormSwitchValueField!
+    @IBOutlet weak var isSellingAssetSwitchField: FormSwitchValueField!
     @IBOutlet weak var commentView: UITextView!
     
     // Cells
@@ -37,6 +39,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var amountCell: UITableViewCell!
     @IBOutlet weak var exchangeCell: UITableViewCell!
     @IBOutlet weak var isBuyingAssetCell: UITableViewCell!
+    @IBOutlet weak var isSellingAssetCell: UITableViewCell!
     @IBOutlet weak var removeCell: UITableViewCell!
     
     // Buttons
@@ -58,6 +61,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
         setupDestinationField()
         setupExchangeField()
         setupIsBuyingAssetSwitchField()
+        setupIsSellingAssetSwitchField()
         setupCommentView()
     }
     
@@ -101,6 +105,14 @@ class TransactionEditTableController : FormFieldsTableViewController {
         isBuyingAssetSwitchField.imageName = "included_in_balance_icon"
         isBuyingAssetSwitchField.didSwitch { [weak self] isBuyingAsset in
             self?.delegate?.didChange(isBuyingAsset: isBuyingAsset)
+        }
+    }
+    
+    private func setupIsSellingAssetSwitchField() {
+        isSellingAssetSwitchField.placeholder = NSLocalizedString("Продажа актива", comment: "Продажа актива")
+        isSellingAssetSwitchField.imageName = "included_in_balance_icon"
+        isSellingAssetSwitchField.didSwitch { [weak self] isSellingAsset in
+            self?.delegate?.didChange(isSellingAsset: isSellingAsset)
         }
     }
     

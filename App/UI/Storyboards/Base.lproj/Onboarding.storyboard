@@ -159,13 +159,13 @@
                                 <rect key="frame" x="-8.5" y="85.5" width="392" height="496"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ЗНАКОМСТВО" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9cb-pA-t1S">
-                                <rect key="frame" x="145" y="65" width="85" height="14"/>
+                                <rect key="frame" x="145" y="65" width="85" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="white 0.4"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Привет, я Ник! Вместе достигнем финансовой и творческой свободы" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NmV-yT-M3P">
-                                <rect key="frame" x="24" y="87" width="327" height="84.5"/>
+                                <rect key="frame" x="24" y="73" width="327" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
                                 <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>
@@ -201,13 +201,13 @@
                                 <rect key="frame" x="-88.5" y="107" width="552" height="453"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ПРАВИЛА" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GW9-xU-u9U">
-                                <rect key="frame" x="159" y="65" width="57.5" height="14"/>
+                                <rect key="frame" x="159" y="65" width="57.5" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="white 0.4"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Трать меньше чем зарабатываешь и инвестируй разницу" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BJg-yh-ntV">
-                                <rect key="frame" x="24" y="87" width="327" height="84.5"/>
+                                <rect key="frame" x="24" y="73" width="327" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
                                 <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>
@@ -243,13 +243,13 @@
                                 <rect key="frame" x="-135.5" y="93.5" width="646" height="480"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ПРАВИЛА" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hC-NJ-qVM">
-                                <rect key="frame" x="159" y="65" width="57.5" height="14"/>
+                                <rect key="frame" x="159" y="65" width="57.5" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="white 0.4"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Придерживайся техники «трех корзин» так же как миллиардеры" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nVp-bi-iL1">
-                                <rect key="frame" x="24" y="87" width="327" height="84.5"/>
+                                <rect key="frame" x="24" y="73" width="327" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
                                 <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>

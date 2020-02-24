@@ -17,13 +17,13 @@ enum AccountingPeriod : String, Codable {
     var title: String {
         switch self {
         case .week:
-            return "Неделя"
+            return NSLocalizedString("Неделя", comment: "Неделя")
         case .month:
-            return "Месяц"
+            return NSLocalizedString("Месяц", comment: "Месяц")
         case .quarter:
-            return "Квартал"
+            return NSLocalizedString("Квартал", comment: "Квартал")
         case .year:
-            return "Год"
+            return NSLocalizedString("Год", comment: "Год")
         }
     }
 }

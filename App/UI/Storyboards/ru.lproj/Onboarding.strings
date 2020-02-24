@@ -1,0 +1,87 @@
+
+/* Class = "UILabel"; text = "ПЕРВАЯ КОРЗИНА – РАСХОДЫ"; ObjectID = "0Y7-AH-mOn"; */
+"0Y7-AH-mOn.text" = "ПЕРВАЯ КОРЗИНА – РАСХОДЫ";
+
+/* Class = "UILabel"; text = "Еда, жилье, покупки и др."; ObjectID = "20f-hA-7OF"; */
+"20f-hA-7OF.text" = "Еда, жилье, покупки и др.";
+
+/* Class = "UILabel"; text = "Сохраняет капитал и создает медленный рост капитала"; ObjectID = "6cb-lY-m78"; */
+"6cb-lY-m78.text" = "Сохраняет капитал и создает медленный рост капитала";
+
+/* Class = "UILabel"; text = "ЗНАКОМСТВО"; ObjectID = "9cb-pA-t1S"; */
+"9cb-pA-t1S.text" = "ЗНАКОМСТВО";
+
+/* Class = "UILabel"; text = "ПРАВИЛА"; ObjectID = "9hC-NJ-qVM"; */
+"9hC-NJ-qVM.text" = "ПРАВИЛА";
+
+/* Class = "UILabel"; text = "Трать меньше чем зарабатываешь и инвестируй разницу"; ObjectID = "BJg-yh-ntV"; */
+"BJg-yh-ntV.text" = "Трать меньше чем зарабатываешь и инвестируй разницу";
+
+/* Class = "UILabel"; text = "ТРЕТЬЯ КОРЗИНА – ИНВЕСТИЦИИ"; ObjectID = "BoL-Qx-GkN"; */
+"BoL-Qx-GkN.text" = "ТРЕТЬЯ КОРЗИНА – ИНВЕСТИЦИИ";
+
+/* Class = "UIButton"; normalTitle = "Назад"; ObjectID = "DMf-kA-n3k"; */
+"DMf-kA-n3k.normalTitle" = "Назад";
+
+/* Class = "UILabel"; text = "Для отображения доходов и расходов используйте перетаскивание"; ObjectID = "Eap-zo-jtG"; */
+"Eap-zo-jtG.text" = "Для отображения доходов и расходов используйте перетаскивание";
+
+/* Class = "UILabel"; text = "ПРАВИЛА"; ObjectID = "GW9-xU-u9U"; */
+"GW9-xU-u9U.text" = "ПРАВИЛА";
+
+/* Class = "UILabel"; text = "Российский рубль"; ObjectID = "H7g-QP-mPW"; */
+"H7g-QP-mPW.text" = "Российский рубль";
+
+/* Class = "UILabel"; text = "Например, зажмите источник дохода и перетащите на кошелек"; ObjectID = "IKb-3T-Efp"; */
+"IKb-3T-Efp.text" = "Например, зажмите источник дохода и перетащите на кошелек";
+
+/* Class = "UILabel"; text = "НАЧАЛО РАБОТЫ"; ObjectID = "Ls0-67-8Dg"; */
+"Ls0-67-8Dg.text" = "НАЧАЛО РАБОТЫ";
+
+/* Class = "UILabel"; text = "Обеспечивает жизнь и воплощает мечты"; ObjectID = "MEm-He-QC0"; */
+"MEm-He-QC0.text" = "Обеспечивает жизнь и воплощает мечты";
+
+/* Class = "UILabel"; text = "Депозит, недвижимость и др."; ObjectID = "MLm-dB-jgC"; */
+"MLm-dB-jgC.text" = "Депозит, недвижимость и др.";
+
+/* Class = "UILabel"; text = "Продолжить"; ObjectID = "MRO-YA-t0J"; */
+"MRO-YA-t0J.text" = "Продолжить";
+
+/* Class = "UILabel"; text = "Привет, я Ник! Вместе достигнем финансовой и творческой свободы"; ObjectID = "NmV-yT-M3P"; */
+"NmV-yT-M3P.text" = "Привет, я Ник! Вместе достигнем финансовой и творческой свободы";
+
+/* Class = "UILabel"; text = "Добавить свой вариант вы сможете на главном экране приложения"; ObjectID = "WG2-R6-Ec7"; */
+"WG2-R6-Ec7.text" = "Добавить свой вариант вы сможете на главном экране приложения";
+
+/* Class = "UILabel"; text = "Приумножает капитал рисковыми инвестициями"; ObjectID = "YSJ-t1-mDN"; */
+"YSJ-t1-mDN.text" = "Приумножает капитал рисковыми инвестициями";
+
+/* Class = "UILabel"; text = "Бизнес, акции и др."; ObjectID = "aPO-Ak-0YT"; */
+"aPO-Ak-0YT.text" = "Бизнес, акции и др.";
+
+/* Class = "UIButton"; normalTitle = "Войти"; ObjectID = "baH-Mv-NxZ"; */
+"baH-Mv-NxZ.normalTitle" = "Войти";
+
+/* Class = "UILabel"; text = "Label label a a"; ObjectID = "byN-iX-RJx"; */
+"byN-iX-RJx.text" = "Label label a a";
+
+/* Class = "UILabel"; text = "ВТОРАЯ КОРЗИНА – СБЕРЕЖЕНИЯ"; ObjectID = "dJi-nC-IF5"; */
+"dJi-nC-IF5.text" = "ВТОРАЯ КОРЗИНА – СБЕРЕЖЕНИЯ";
+
+/* Class = "UIButton"; normalTitle = "Отлично, поехали!"; ObjectID = "ddH-co-jCI"; */
+"ddH-co-jCI.normalTitle" = "Отлично, поехали!";
+
+/* Class = "UILabel"; text = "₽"; ObjectID = "egS-ZU-UCB"; */
+"egS-ZU-UCB.text" = "₽";
+
+/* Class = "UIButton"; normalTitle = "Пропустить"; ObjectID = "lab-0l-vpp"; */
+"lab-0l-vpp.normalTitle" = "Пропустить";
+
+/* Class = "UIButton"; normalTitle = "Продолжить"; ObjectID = "lnY-KY-H2n"; */
+"lnY-KY-H2n.normalTitle" = "Продолжить";
+
+/* Class = "UILabel"; text = "Придерживайся техники «трех корзин» так же как миллиардеры"; ObjectID = "nVp-bi-iL1"; */
+"nVp-bi-iL1.text" = "Придерживайся техники «трех корзин» так же как миллиардеры";
+
+/* Class = "UILabel"; text = "Выберите валюту и кошельки"; ObjectID = "qsy-Mq-t8B"; */
+"qsy-Mq-t8B.text" = "Выберите валюту и кошельки";

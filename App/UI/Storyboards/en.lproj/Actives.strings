@@ -1,0 +1,42 @@
+
+/* Class = "UINavigationItem"; title = "Категория трат"; ObjectID = "59I-ER-ru5"; */
+"59I-ER-ru5.title" = "Expense category";
+
+/* Class = "UIButton"; normalTitle = "Установить напоминание"; ObjectID = "Fzu-yI-1TT"; */
+"Fzu-yI-1TT.normalTitle" = "Set a reminder";
+
+/* Class = "UILabel"; text = "Labelasdasdadsasda"; ObjectID = "HHq-kP-Oha"; */
+"HHq-kP-Oha.text" = "Labelasdasdadsasda";
+
+/* Class = "UIBarButtonItem"; title = "Сохр."; ObjectID = "QfS-aI-Xr0"; */
+"QfS-aI-Xr0.title" = "Save";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "Tqu-qa-HVx"; */
+"Tqu-qa-HVx.title" = " ";
+
+/* Class = "UILabel"; text = "Мы создали источник дохода для актива \"Акции\""; ObjectID = "XKd-rT-Xgu"; */
+"XKd-rT-Xgu.text" = "We've created the income source for your asset \"Акции\"";
+
+/* Class = "UIButton"; normalTitle = "Удалить актив"; ObjectID = "bev-DR-STu"; */
+"bev-DR-STu.normalTitle" = "Remove";
+
+/* Class = "UILabel"; text = "Активы"; ObjectID = "iwA-0o-hxW"; */
+"iwA-0o-hxW.text" = "Assets";
+
+/* Class = "UIBarButtonItem"; title = "Отмена"; ObjectID = "jbM-nu-AWy"; */
+"jbM-nu-AWy.title" = "Cancel";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "nzD-a2-6YE"; */
+"nzD-a2-6YE.text" = "Labelasdasd";
+
+/* Class = "UILabel"; text = "С помощью него ты сможешь отразить доход по активу "; ObjectID = "pgx-R7-9vT"; */
+"pgx-R7-9vT.text" = "Using it you can declare an income of this asset";
+
+/* Class = "UILabel"; text = "Больше не показывать"; ObjectID = "tRU-u8-5FB"; */
+"tRU-u8-5FB.text" = "Don't show again";
+
+/* Class = "UIButton"; normalTitle = "Отлично, спасибо!"; ObjectID = "xF2-Mo-Qa5"; */
+"xF2-Mo-Qa5.normalTitle" = "Great, thanks!";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "zCB-Nb-leb"; */
+"zCB-Nb-leb.title" = " ";

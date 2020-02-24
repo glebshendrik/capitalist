@@ -1,0 +1,51 @@
+
+/* Class = "UITextField"; placeholder = "Поиск"; ObjectID = "7ju-Cp-wAz"; */
+"7ju-Cp-wAz.placeholder" = "Search";
+
+/* Class = "UIButton"; normalTitle = "Подключить банк"; ObjectID = "9CF-wN-0Yc"; */
+"9CF-wN-0Yc.normalTitle" = "Connect a bank";
+
+/* Class = "UILabel"; text = "Labelasdasd"; ObjectID = "Blu-op-yb6"; */
+"Blu-op-yb6.text" = "Labelasdasd";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Ggn-8d-2G2"; */
+"Ggn-8d-2G2.text" = "Label";
+
+/* Class = "UILabel"; text = "Labelasdasdadsasda"; ObjectID = "HYS-FF-ARN"; */
+"HYS-FF-ARN.text" = "Labelasdasdadsasda";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "KCk-g3-Kix"; */
+"KCk-g3-Kix.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = "Сохр."; ObjectID = "Mo5-wn-wfi"; */
+"Mo5-wn-wfi.title" = "Save";
+
+/* Class = "UIBarButtonItem"; title = "Отмена"; ObjectID = "NQp-St-k9J"; */
+"NQp-St-k9J.title" = "Cancel";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "Np5-2E-0f9"; */
+"Np5-2E-0f9.title" = " ";
+
+/* Class = "UILabel"; text = "Выберите банк"; ObjectID = "P60-w0-g6o"; */
+"P60-w0-g6o.text" = "Choose a bank";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "QBv-9q-YSJ"; */
+"QBv-9q-YSJ.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Удалить кошелек"; ObjectID = "bi9-fH-lkW"; */
+"bi9-fH-lkW.normalTitle" = "Remove";
+
+/* Class = "UILabel"; text = "Выберите счет"; ObjectID = "fQa-4A-c72"; */
+"fQa-4A-c72.text" = "Choose an account";
+
+/* Class = "UILabel"; text = "asd"; ObjectID = "hit-5o-QYW"; */
+"hit-5o-QYW.text" = "asd";
+
+/* Class = "UILabel"; text = "Кошельки"; ObjectID = "ih9-OI-Tz7"; */
+"ih9-OI-Tz7.text" = "Wallets";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "lh3-V4-5Cz"; */
+"lh3-V4-5Cz.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Источник трат"; ObjectID = "qug-Oi-Z5f"; */
+"qug-Oi-Z5f.title" = "Wallet";
