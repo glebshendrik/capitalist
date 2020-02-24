@@ -103,6 +103,8 @@
 		FA30B4762285298B0017470C /* BalanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B4752285298B0017470C /* BalanceViewModel.swift */; };
 		FA30B47822852F410017470C /* BalanceExpenseSourcesTableSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B47722852F410017470C /* BalanceExpenseSourcesTableSupport.swift */; };
 		FA30B47A22852F720017470C /* BalanceActivesTableSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B47922852F720017470C /* BalanceActivesTableSupport.swift */; };
+		FA36E98923F182CA00B340AA /* AnalyticsManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA36E98823F182CA00B340AA /* AnalyticsManagerProtocol.swift */; };
+		FA36E98B23F1832800B340AA /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA36E98A23F1832800B340AA /* AnalyticsManager.swift */; };
 		FA503DBA23754488005AEFE7 /* EntityInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA503DB923754488005AEFE7 /* EntityInfoViewController.swift */; };
 		FA503DBC23759DE3005AEFE7 /* EntityInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA503DBB23759DE2005AEFE7 /* EntityInfoViewModel.swift */; };
 		FA503DBF2375D1B4005AEFE7 /* EntityInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA503DBE2375D1B3005AEFE7 /* EntityInfoSection.swift */; };
@@ -224,7 +226,6 @@
 		FA814F50235D625A0039471A /* ActiveEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA814F4F235D625A0039471A /* ActiveEditViewController.swift */; };
 		FA814F52235D63180039471A /* ActiveEditDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA814F51235D63180039471A /* ActiveEditDelegateExtension.swift */; };
 		FA814F54235D64440039471A /* BasketItemsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA814F53235D64440039471A /* BasketItemsExtension.swift */; };
-		FA814F56235D86B70039471A /* Actives.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA814F55235D86B70039471A /* Actives.storyboard */; };
 		FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */; };
 		FA817488222821DC00EE6116 /* ExchangeRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817487222821DC00EE6116 /* ExchangeRatesService.swift */; };
 		FA81748A222822FB00EE6116 /* ExchangeRatesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */; };
@@ -465,6 +466,7 @@
 		FAED7DB021EFA0CE00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */; };
 		FAED7DB221EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */; };
 		FAED7DB621F0E35100BF6FE1 /* ExpenseCategoryEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DB521F0E35000BF6FE1 /* ExpenseCategoryEditViewModel.swift */; };
+		FAF31CAC24036F7D00D4CFB3 /* Actives.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF31CAB24036F7D00D4CFB3 /* Actives.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -566,6 +568,8 @@
 		FA30B4752285298B0017470C /* BalanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewModel.swift; sourceTree = "<group>"; };
 		FA30B47722852F410017470C /* BalanceExpenseSourcesTableSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceExpenseSourcesTableSupport.swift; sourceTree = "<group>"; };
 		FA30B47922852F720017470C /* BalanceActivesTableSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceActivesTableSupport.swift; sourceTree = "<group>"; };
+		FA36E98823F182CA00B340AA /* AnalyticsManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManagerProtocol.swift; sourceTree = "<group>"; };
+		FA36E98A23F1832800B340AA /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		FA503DB923754488005AEFE7 /* EntityInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityInfoViewController.swift; sourceTree = "<group>"; };
 		FA503DBB23759DE2005AEFE7 /* EntityInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityInfoViewModel.swift; sourceTree = "<group>"; };
 		FA503DBE2375D1B3005AEFE7 /* EntityInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityInfoSection.swift; sourceTree = "<group>"; };
@@ -689,7 +693,6 @@
 		FA814F4F235D625A0039471A /* ActiveEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEditViewController.swift; sourceTree = "<group>"; };
 		FA814F51235D63180039471A /* ActiveEditDelegateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEditDelegateExtension.swift; sourceTree = "<group>"; };
 		FA814F53235D64440039471A /* BasketItemsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketItemsExtension.swift; sourceTree = "<group>"; };
-		FA814F55235D86B70039471A /* Actives.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Actives.storyboard; sourceTree = "<group>"; };
 		FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesServiceProtocol.swift; sourceTree = "<group>"; };
 		FA817487222821DC00EE6116 /* ExchangeRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesService.swift; sourceTree = "<group>"; };
 		FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesCoordinator.swift; sourceTree = "<group>"; };
@@ -794,6 +797,9 @@
 		FAB5BE5423533D87000466AE /* TransactionEditDataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditDataExtension.swift; sourceTree = "<group>"; };
 		FAB5BE5723537CEF000466AE /* ActiveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveViewModel.swift; sourceTree = "<group>"; };
 		FABA979622E1E36D00E03380 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
+		FABC034E23F45CAC00C0CB61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FABC034F23F45CB300C0CB61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		FABC035123F45CD900C0CB61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Balance.strings; sourceTree = "<group>"; };
 		FABE54D9233A757F00DF2B70 /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
 		FABE54DB233BE50C00DF2B70 /* CreditsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsServiceProtocol.swift; sourceTree = "<group>"; };
 		FABE54DD233BE6C600DF2B70 /* CreditsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsService.swift; sourceTree = "<group>"; };
@@ -933,6 +939,7 @@
 		FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryViewModel.swift; sourceTree = "<group>"; };
 		FAED7DB521F0E35000BF6FE1 /* ExpenseCategoryEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditViewModel.swift; sourceTree = "<group>"; };
+		FAF31CAB24036F7D00D4CFB3 /* Actives.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Actives.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1731,6 +1738,7 @@
 				FA717706226EF8CF008ADF94 /* ExportManager.swift */,
 				FA8AD0D922BE1AB40084AD19 /* SaltEdgeManager.swift */,
 				FA28480222F19EB6003F114A /* UIFactory.swift */,
+				FA36E98A23F1832800B340AA /* AnalyticsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1747,6 +1755,7 @@
 				FA717704226EF69A008ADF94 /* ExportManagerProtocol.swift */,
 				FA8AD0D722BB503C0084AD19 /* SaltEdgeManagerProtocol.swift */,
 				FA28480022F19DDA003F114A /* UIFactoryProtocol.swift */,
+				FA36E98823F182CA00B340AA /* AnalyticsManagerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2004,7 +2013,7 @@
 		FAD88F7E21B027D500BE7BC1 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				FA814F55235D86B70039471A /* Actives.storyboard */,
+				FAF31CAB24036F7D00D4CFB3 /* Actives.storyboard */,
 				FAE44981229688C400E3DD27 /* Balance.storyboard */,
 				FA1E63282326A56900081964 /* Borrows.storyboard */,
 				FA630C152292698200242AB3 /* Common.storyboard */,
@@ -2182,6 +2191,7 @@
 				FAAC99BD23B31A59009ADB84 /* Roboto-Black.ttf in Resources */,
 				FAAC99B823B31A59009ADB84 /* Roboto-Italic.ttf in Resources */,
 				FA16FC82223BBE0E0053C273 /* coin-roll-drop.wav in Resources */,
+				FAF31CAC24036F7D00D4CFB3 /* Actives.storyboard in Resources */,
 				FAAC99B223B31A59009ADB84 /* Roboto-Light.ttf in Resources */,
 				FA1E63292326A56A00081964 /* Borrows.storyboard in Resources */,
 				FAAC99B623B31A59009ADB84 /* Roboto-BoldItalic.ttf in Resources */,
@@ -2210,7 +2220,6 @@
 				FA26814221B178D300FADED1 /* Rubik-Black.ttf in Resources */,
 				FACC01FB224CBF150044A747 /* TransactionsSectionHeaderView.xib in Resources */,
 				FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */,
-				FA814F56235D86B70039471A /* Actives.storyboard in Resources */,
 				FA26814121B178D300FADED1 /* Rubik-Medium.ttf in Resources */,
 				FAAC99B423B31A59009ADB84 /* Roboto-MediumItalic.ttf in Resources */,
 				FAAC99B323B31A59009ADB84 /* Roboto-Regular.ttf in Resources */,
@@ -2334,6 +2343,7 @@
 				FA6F2E96224515DE008C160F /* TransactionFilters.swift in Sources */,
 				FA7276D822537BF30086D4D1 /* FiltersSelectionViewModel.swift in Sources */,
 				FA835D5A2265BC4500A592F2 /* GraphTransactionFilter.swift in Sources */,
+				FA36E98923F182CA00B340AA /* AnalyticsManagerProtocol.swift in Sources */,
 				FAA5D57A238FA9CD00CC53AD /* BorrowInfoViewModel.swift in Sources */,
 				FA7EE00022CDA1940054EAD3 /* AccountViewModel.swift in Sources */,
 				FA0CAE2821D67B7F00805288 /* IconsViewModel.swift in Sources */,
@@ -2580,6 +2590,7 @@
 				FA56AB9F235EEBD800E4D0E3 /* ActivesViewModel.swift in Sources */,
 				FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */,
 				FAEC8C782372B585009B10E7 /* ProgressView.swift in Sources */,
+				FA36E98B23F1832800B340AA /* AnalyticsManager.swift in Sources */,
 				FABE55052340916B00DF2B70 /* CreditEditTableController.swift in Sources */,
 				FA0CAE1321D52CB400805288 /* MoneyTextField.swift in Sources */,
 				FACC01EF224B81310044A747 /* FiltersViewModel.swift in Sources */,
@@ -2687,6 +2698,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				FA6973EE2296D6DD004E6327 /* ru */,
+				FABC034E23F45CAC00C0CB61 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2695,6 +2707,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				FABE5503233FBAA600DF2B70 /* ru */,
+				FABC034F23F45CB300C0CB61 /* en */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -2713,6 +2726,7 @@
 			children = (
 				FAE44980229688C400E3DD27 /* Base */,
 				FAE44983229688D100E3DD27 /* ru */,
+				FABC035123F45CD900C0CB61 /* en */,
 			);
 			name = Balance.storyboard;
 			sourceTree = "<group>";
@@ -2851,7 +2865,7 @@
 				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2958,7 +2972,7 @@
 				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

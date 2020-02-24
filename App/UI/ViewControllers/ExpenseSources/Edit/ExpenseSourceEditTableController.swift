@@ -67,7 +67,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     
     private func setupNameField() {
         register(responder: nameField.textField)
-        nameField.placeholder = "Название"
+        nameField.placeholder = NSLocalizedString("Название", comment: "Название")
         nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
@@ -75,7 +75,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     }
     
     private func setupCurrencyField() {
-        currencyField.placeholder = "Валюта"
+        currencyField.placeholder = NSLocalizedString("Валюта", comment: "Валюта")
         currencyField.imageName = "currency-icon"
         currencyField.didTap { [weak self] in
             self?.delegate?.didTapCurrency()
@@ -84,7 +84,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     
     private func setupAmountField() {
         register(responder: amountField.textField)
-        amountField.placeholder = "Баланс"
+        amountField.placeholder = NSLocalizedString("Баланс", comment: "Баланс")
         amountField.imageName = "amount-icon"
         amountField.didChange { [weak self] text in
             self?.delegate?.didChange(amount: text)
@@ -93,7 +93,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     
     private func setupCreditLimitField() {
         register(responder: creditLimitField.textField)
-        creditLimitField.placeholder = "Кредитный лимит"
+        creditLimitField.placeholder = NSLocalizedString("Кредитный лимит", comment: "Кредитный лимит")
         creditLimitField.imageName = "credit-limit-icon"
         creditLimitField.didChange { [weak self] text in
             self?.delegate?.didChange(creditLimit: text)

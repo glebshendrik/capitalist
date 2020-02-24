@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '11.0'
+platform :ios, '11.2'
 
 target 'Three Baskets' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -40,6 +40,10 @@ target 'Three Baskets' do
   pod 'BetterSegmentedControl', '~> 1.3'
   pod 'EasyTipView', '~> 2.0.4'
   pod 'BiometricAuthentication'
+  pod 'ApphudSDK'
+  pod 'Mixpanel-swift'
+  pod 'InfiniteLayout'
+  pod 'LayoutHelper'  
 end
 
 post_install do |installer|

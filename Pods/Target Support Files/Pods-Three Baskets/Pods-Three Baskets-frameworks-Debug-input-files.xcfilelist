@@ -3,6 +3,7 @@ ${BUILT_PRODUCTS_DIR}/ALTextInputBar/ALTextInputBar.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework
 ${BUILT_PRODUCTS_DIR}/AlignedCollectionViewFlowLayout/AlignedCollectionViewFlowLayout.framework
+${BUILT_PRODUCTS_DIR}/ApphudSDK/ApphudSDK.framework
 ${BUILT_PRODUCTS_DIR}/AttributedTextView/AttributedTextView.framework
 ${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework
 ${BUILT_PRODUCTS_DIR}/BetterSegmentedControl/BetterSegmentedControl.framework
@@ -15,8 +16,11 @@ ${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework
 ${BUILT_PRODUCTS_DIR}/ESPullToRefresh/ESPullToRefresh.framework
 ${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework
 ${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework
+${BUILT_PRODUCTS_DIR}/InfiniteLayout/InfiniteLayout.framework
+${BUILT_PRODUCTS_DIR}/LayoutHelper/LayoutHelper.framework
 ${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework
 ${BUILT_PRODUCTS_DIR}/MSPeekCollectionViewDelegateImplementation/MSPeekCollectionViewDelegateImplementation.framework
+${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework
 ${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework
 ${BUILT_PRODUCTS_DIR}/RandomColorSwift/RandomColorSwift.framework
 ${BUILT_PRODUCTS_DIR}/RecurrencePicker/RecurrencePicker.framework

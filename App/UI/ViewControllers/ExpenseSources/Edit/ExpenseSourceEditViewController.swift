@@ -23,10 +23,18 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
     
     override var shouldLoadData: Bool { return viewModel.isNew }
     override var formTitle: String {
-        return viewModel.isNew ? "Новый кошелек" : "Кошелек"
+        return viewModel.isNew
+            ? NSLocalizedString("Новый кошелек", comment: "Новый кошелек")
+            : NSLocalizedString("Кошелек", comment: "Кошелек")
     }
-    override var saveErrorMessage: String { return "Ошибка при сохранении кошелька" }
-    override var removeErrorMessage: String { return "Ошибка при удалении кошелька" }
+    override var saveErrorMessage: String {
+        return NSLocalizedString("Ошибка при сохранении кошелька", comment: "Ошибка при сохранении кошелька")
+    }
+    
+    override var removeErrorMessage: String {
+        return NSLocalizedString("Ошибка при удалении кошелька", comment: "Ошибка при удалении кошелька")
+    }
+    
     override var removeQuestionMessage: String { return TransactionableType.expenseSource.removeQuestion }
     
     override func registerFormFields() -> [String : FormField] {

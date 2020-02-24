@@ -66,15 +66,15 @@ struct ExpenseCategoryCreationForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: basketId) {
-            errors["basket_id"] = "Ошибка сохранения"
+            errors["basket_id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(required: name) {
-            errors[CodingKeys.name.rawValue] = "Укажите название"
+            errors[CodingKeys.name.rawValue] = NSLocalizedString("Укажите название", comment: "Укажите название")
         }
         
         if  !Validator.isValid(required: currency) {
-            errors[CodingKeys.currency.rawValue] = "Укажите валюту"
+            errors[CodingKeys.currency.rawValue] = NSLocalizedString("Укажите валюту", comment: "Укажите валюту")
         }
                 
         return errors
@@ -107,11 +107,11 @@ struct ExpenseCategoryUpdatingForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: id) {
-            errors["id"] = "Ошибка сохранения"
+            errors["id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(required: name) {
-            errors[CodingKeys.name.rawValue] = "Укажите название"
+            errors[CodingKeys.name.rawValue] = NSLocalizedString("Укажите название", comment: "Укажите название")
         }
                         
         return errors

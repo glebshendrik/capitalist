@@ -20,7 +20,7 @@ class ForgotPasswordTableController : SaveAccessoryFormFieldsTableViewController
     
     var delegate: ForgotPasswordTableControllerDelegate?
     
-    override var saveButtonTitle: String { return "Отправить код" }
+    override var saveButtonTitle: String { return NSLocalizedString("Отправить код", comment: "Отправить код") }
     override var saveButtonInForm: UIButton? {
         return sendCodeButton
     }
@@ -33,7 +33,7 @@ class ForgotPasswordTableController : SaveAccessoryFormFieldsTableViewController
     private func setupEmailField() {
         register(responder: emailField.textField)
         setupAsEmail(emailField)
-        emailField.placeholder = "Email"
+        emailField.placeholder = NSLocalizedString("Email", comment: "Email")
         emailField.imageName = "email-icon"
         emailField.didChange { [weak self] text in
             self?.delegate?.didChange(email: text)

@@ -69,7 +69,7 @@ extension FiltersSelectionViewController {
     
     private func setupNavigationBar() {
         setupNavigationBarAppearance()
-        navigationItem.title = "Фильтры"
+        navigationItem.title = NSLocalizedString("Фильтры", comment: "Фильтры")
     }
     
     private func setupCollectionView() {
@@ -94,7 +94,7 @@ extension FiltersSelectionViewController {
         firstly {
             viewModel.loadFilters()
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки фильтров", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки фильтров", comment: "Ошибка загрузки фильтров"), theme: .error)
         }.finally {
             self.set(self.activityIndicator, hidden: true)
             self.updateUI()

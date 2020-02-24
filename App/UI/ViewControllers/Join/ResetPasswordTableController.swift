@@ -24,7 +24,7 @@ class ResetPasswordTableController : SaveAccessoryFormFieldsTableViewController 
     
     var delegate: ResetPasswordTableControllerDelegate?
     
-    override var saveButtonTitle: String { return "Сменить пароль" }
+    override var saveButtonTitle: String { return NSLocalizedString("Сменить пароль", comment: "Сменить пароль") }
     override var saveButtonInForm: UIButton? {
         return resetPasswordButton
     }
@@ -39,7 +39,7 @@ class ResetPasswordTableController : SaveAccessoryFormFieldsTableViewController 
     private func setupCodeField() {
         register(responder: codeField.textField)
         codeField.textField.inputAccessoryView = saveButton
-        codeField.placeholder = "Код подтверждения"
+        codeField.placeholder = NSLocalizedString("Код подтверждения", comment: "Код подтверждения")
         codeField.imageName = "password-icon"
         codeField.didChange { [weak self] text in
             self?.delegate?.didChange(code: text)
@@ -49,7 +49,7 @@ class ResetPasswordTableController : SaveAccessoryFormFieldsTableViewController 
     private func setupPasswordField() {
         register(responder: passwordField.textField)
         setupAsSecure(passwordField)
-        passwordField.placeholder = "Новый пароль"
+        passwordField.placeholder = NSLocalizedString("Новый пароль", comment: "Новый пароль")
         passwordField.imageName = "password-icon"
         passwordField.didChange { [weak self] text in
             self?.delegate?.didChange(password: text)
@@ -59,7 +59,7 @@ class ResetPasswordTableController : SaveAccessoryFormFieldsTableViewController 
     private func setupPasswordConfirmationField() {
         register(responder: confirmationField.textField)
         setupAsSecure(confirmationField)
-        confirmationField.placeholder = "Новый пароль еще раз"
+        confirmationField.placeholder = NSLocalizedString("Новый пароль еще раз", comment: "Новый пароль еще раз")
         confirmationField.imageName = "password-icon"
         confirmationField.didChange { [weak self] text in
             self?.delegate?.didChange(passwordConfirmation: text)

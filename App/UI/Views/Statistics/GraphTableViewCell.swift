@@ -57,7 +57,9 @@ class GraphTableViewCell : UITableViewCell {
     
     private func setupTabs() {
         guard !tabsInitialized else { return }
-        tabs.segments = LabelSegment.segments(withTitles: ["ВСЕ", "ДОХОД", "РАСХОДЫ"],
+        tabs.segments = LabelSegment.segments(withTitles: [NSLocalizedString("ВСЕ", comment: "ВСЕ"),
+                                                           NSLocalizedString("ДОХОД", comment: "ДОХОД"),
+                                                           NSLocalizedString("РАСХОДЫ", comment: "РАСХОДЫ")],
                                               normalBackgroundColor: UIColor.clear,
                                               normalFont: UIFont(name: "Roboto-Regular", size: 12)!,
                                               normalTextColor: UIColor.by(.white100),

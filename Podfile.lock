@@ -4,6 +4,7 @@ PODS:
     - Alamofire (~> 4.7)
   - AlignedCollectionViewFlowLayout (1.1.2)
   - ALTextInputBar (1.1.8)
+  - ApphudSDK (0.8)
   - AttributedTextView (1.4.1)
   - BEMCheckBox (1.4.1)
   - BetterSegmentedControl (1.3.0)
@@ -19,8 +20,17 @@ PODS:
   - CWStatusBarNotification (2.3.5)
   - EasyTipView (2.0.4)
   - ESPullToRefresh (2.9)
+  - InfiniteLayout (0.4.2):
+    - InfiniteLayout/Core (= 0.4.2)
+  - InfiniteLayout/CocoaProxy (0.4.2)
+  - InfiniteLayout/Core (0.4.2):
+    - InfiniteLayout/CocoaProxy
   - IQKeyboardManager (6.2.0)
+  - LayoutHelper (0.1.3)
   - Locksmith (4.0.0)
+  - Mixpanel-swift (2.6.11):
+    - Mixpanel-swift/Complete (= 2.6.11)
+  - Mixpanel-swift/Complete (2.6.11)
   - MSPeekCollectionViewDelegateImplementation (2.0.0)
   - PromiseKit (6.5.2):
     - PromiseKit/CorePromise (= 6.5.2)
@@ -81,6 +91,7 @@ DEPENDENCIES:
   - AlamofireImage
   - AlignedCollectionViewFlowLayout
   - ALTextInputBar
+  - ApphudSDK
   - AttributedTextView
   - BEMCheckBox
   - BetterSegmentedControl (~> 1.3)
@@ -91,8 +102,11 @@ DEPENDENCIES:
   - CWStatusBarNotification (~> 2.3)
   - EasyTipView (~> 2.0.4)
   - ESPullToRefresh
+  - InfiniteLayout
   - IQKeyboardManager
+  - LayoutHelper
   - Locksmith (~> 4.0)
+  - Mixpanel-swift
   - MSPeekCollectionViewDelegateImplementation (~> 2.0)
   - PromiseKit (~> 6.5)
   - PromiseKit/Alamofire (~> 6.5)
@@ -142,11 +156,15 @@ SPEC REPOS:
     - TrustKit
   trunk:
     - ALTextInputBar
+    - ApphudSDK
     - AttributedTextView
     - BetterSegmentedControl
     - BiometricAuthentication
     - EasyTipView
     - ESPullToRefresh
+    - InfiniteLayout
+    - LayoutHelper
+    - Mixpanel-swift
     - SideMenu
     - Swinject
     - SwinjectStoryboard
@@ -178,6 +196,7 @@ SPEC CHECKSUMS:
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   AlignedCollectionViewFlowLayout: ee2ef451e741ec08f8e0967d828001e2f051c20a
   ALTextInputBar: 6c160c51958903c5f7b9d158e19f9c4113ae351b
+  ApphudSDK: 4d3d9ffd6bc0b8a5813ec0031dc1569e6762e079
   AttributedTextView: 9e01651d96c1af861a9c67c2cc3f94c30320d1c2
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   BetterSegmentedControl: 85d1b0343a09603b098884d527f550dfc8e6cdd9
@@ -189,8 +208,11 @@ SPEC CHECKSUMS:
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
   ESPullToRefresh: ce058a36454a5032519cc9d8b45da217728cf104
+  InfiniteLayout: de51cfad9ed480a3e3a0af7d28242d3257c606d9
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
+  LayoutHelper: 89385ca8de2464665b777265da86c84c1a28a128
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
+  Mixpanel-swift: b42560376413286f51af2cfb9d0d4edc61c1a105
   MSPeekCollectionViewDelegateImplementation: 3091e9512b3cd03facdea3c02e57673a4a06246a
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   RandomColorSwift: 9f6b61247b17eafe0fd75e4a0977f2af1abd68d1
@@ -212,6 +234,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
 
-PODFILE CHECKSUM: a682e518fc66d99c7808dfa824b2f8e3c7f825f5
+PODFILE CHECKSUM: b1cf7bbd9b5728883ba9257d2b196e009bc89a08
 
 COCOAPODS: 1.8.0

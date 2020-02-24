@@ -147,7 +147,7 @@ extension CreditsViewController {
             viewModel.loadCredits()
         }.catch { e in
             print(e)
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки кредитов", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки кредитов", comment: "Ошибка загрузки кредитов"), theme: .error)
         }.finally {
             self.hideActivityIndicator()
             self.updateUI()

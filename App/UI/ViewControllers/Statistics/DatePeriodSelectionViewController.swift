@@ -21,7 +21,7 @@ class DatePeriodSelectionViewController : FormEditViewController {
     var delegate: DatePeriodSelectionViewControllerDelegate?
     
     override var shouldLoadData: Bool { return false }
-    override var formTitle: String { return "Выбор периода" }
+    override var formTitle: String { return NSLocalizedString("Выбор периода", comment: "Выбор периода") }
     
 //    override func registerFormFields() -> [String : FormField] {
 //        return [CreditCreationForm.CodingKeys.name.rawValue : tableController.nameField,

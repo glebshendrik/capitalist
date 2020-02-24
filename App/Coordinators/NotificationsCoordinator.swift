@@ -8,6 +8,7 @@
 
 import Foundation
 import PromiseKit
+import ApphudSDK
 
 class NotificationsCoordinator : NotificationsCoordinatorProtocol {
     private let userSessionManager: UserSessionManagerProtocol
@@ -29,6 +30,7 @@ class NotificationsCoordinator : NotificationsCoordinatorProtocol {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
+        Apphud.submitPushNotificationsToken(token: deviceToken, callback: nil)
         return devicesService.register(deviceToken: deviceToken, userId: currentUserId)
     }
 }

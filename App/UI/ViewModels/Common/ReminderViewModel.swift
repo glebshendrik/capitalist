@@ -50,17 +50,19 @@ struct ReminderViewModel {
         guard let recurrenceRule = recurrenceRule else {
             if reminderStartDate.isInFuture,
                 let startDate = startDate {
-                return "Следующее напоминание: \(startDate)."
+                                
+                return String(format: NSLocalizedString("Следующее напоминание: %@.", comment: "Следующее напоминание: %@."), startDate)
             }
             return nil
         }
         var reminderString = ""
         if let nextOccurrence = recurrenceRule.occurrences(between: Date(), and: Date().adding(.year, value: 2)).first {
             let nextOccurrenceString = nextOccurrence.dateTimeString(ofStyle: DateFormatter.Style.medium)
-            reminderString.append("Следующее напоминание: \(nextOccurrenceString). ")
+            
+            reminderString.append(String(format: NSLocalizedString("Следующее напоминание: %@. ", comment: "Следующее напоминание: %@. "), nextOccurrenceString))
         }
-        if let recurrenceRuleText = recurrenceRuleText {
-            reminderString.append("Повторение: \(recurrenceRuleText.lowercased())")
+        if let recurrenceRuleText = recurrenceRuleText {            
+            reminderString.append(String(format: NSLocalizedString("Повторение: %@", comment: "Повторение: %@"), recurrenceRuleText.lowercased()))
         }
         return reminderString
     }

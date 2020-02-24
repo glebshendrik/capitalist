@@ -41,7 +41,7 @@ class IncomeSourceSelectViewController : UIViewController, UIMessagePresenterMan
             self.updateUI()
         }
         .catch { e in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки источников доходов", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки источников доходов", comment: "Ошибка загрузки источников доходов"), theme: .error)
             self.close()
         }.finally {
             self.set(self.loader, hidden: true)

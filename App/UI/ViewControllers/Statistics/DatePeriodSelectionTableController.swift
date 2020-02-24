@@ -32,7 +32,7 @@ class DatePeriodSelectionTableController : FormFieldsTableViewController {
     }
         
     private func setupPeriodField() {
-        periodField.placeholder = "Период"
+        periodField.placeholder = NSLocalizedString("Период", comment: "Период")
         periodField.imageName = "calendar-icon"
         periodField.didTap { [weak self] in
             self?.delegate?.didTapPeriod()
@@ -40,7 +40,7 @@ class DatePeriodSelectionTableController : FormFieldsTableViewController {
     }
     
     func setupUseCustomPeriodField() {
-        useCustomPeriodField.placeholder = "Выбрать между датами"
+        useCustomPeriodField.placeholder = NSLocalizedString("Выбрать между датами", comment: "Выбрать между датами")
         useCustomPeriodField.imageName = "edit-info-icon"
         useCustomPeriodField.didSwitch { [weak self] useCustomPeriod in
             self?.delegate?.didChange(useCustomPeriod: useCustomPeriod)
@@ -48,7 +48,7 @@ class DatePeriodSelectionTableController : FormFieldsTableViewController {
     }
     
     private func setupFromField() {
-        fromField.placeholder = "Начало периода"
+        fromField.placeholder = NSLocalizedString("Начало периода", comment: "Начало периода")
         fromField.imageName = "calendar-icon"
         fromField.didTap { [weak self] in
             self?.delegate?.didTapFrom()
@@ -56,7 +56,7 @@ class DatePeriodSelectionTableController : FormFieldsTableViewController {
     }
     
     private func setupToField() {
-        toField.placeholder = "Конец периода"
+        toField.placeholder = NSLocalizedString("Конец периода", comment: "Конец периода")
         toField.imageName = "calendar-icon"
         toField.didTap { [weak self] in
             self?.delegate?.didTapTo()

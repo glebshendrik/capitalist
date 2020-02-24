@@ -35,30 +35,30 @@ class TransactionableFiltersSection : FiltersSelectionViewSection {
 
 class IncomeSourceFiltersSection : TransactionableFiltersSection {
     init(incomeSourceFilters: [IncomeSourceFilter]) {
-        super.init(title: "Источники доходов", filters: incomeSourceFilters)
+        super.init(title: NSLocalizedString("Источники доходов", comment: "Источники доходов"), filters: incomeSourceFilters)
     }    
 }
 
 class ExpenseSourceFiltersSection : TransactionableFiltersSection {
     init(expenseSourceFilters: [ExpenseSourceFilter]) {
-        super.init(title: "Кошельки", filters: expenseSourceFilters)
+        super.init(title: NSLocalizedString("Кошельки", comment: "Кошельки"), filters: expenseSourceFilters)
     }
 }
 
 class ExpenseCategoryFiltersSection : TransactionableFiltersSection {
     init(expenseCategoryFilters: [ExpenseCategoryFilter]) {
-        super.init(title: "Расходы", filters: expenseCategoryFilters)
+        super.init(title: NSLocalizedString("Расходы", comment: "Расходы"), filters: expenseCategoryFilters)
     }
 }
 
 class SafeActiveFiltersSection : TransactionableFiltersSection {
     init(safeActiveFilters: [ActiveFilter]) {
-        super.init(title: "Сбережения", filters: safeActiveFilters)
+        super.init(title: NSLocalizedString("Сбережения", comment: "Сбережения"), filters: safeActiveFilters)
     }
 }
 
 class RiskActiveFiltersSection : TransactionableFiltersSection {    
     init(riskActiveFilters: [ActiveFilter]) {
-        super.init(title: "Инвестиции", filters: riskActiveFilters)
+        super.init(title: NSLocalizedString("Инвестиции", comment: "Инвестиции"), filters: riskActiveFilters)
     }
 }

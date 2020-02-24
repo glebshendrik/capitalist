@@ -36,7 +36,7 @@ extension MainViewController {
         }
         .catch { e in
             print(e)
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки баланса", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки баланса", comment: "Ошибка загрузки баланса"), theme: .error)
         }.finally {
                 
         }
@@ -52,7 +52,7 @@ extension MainViewController {
         }
         .catch { e in
             print(e)
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки корзин", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки корзин", comment: "Ошибка загрузки корзин"), theme: .error)
         }.finally {
         }
     }
@@ -69,7 +69,7 @@ extension MainViewController {
         }
         .catch { e in
             print(e)
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки источников доходов", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки источников доходов", comment: "Ошибка загрузки источников доходов"), theme: .error)
         }.finally {
             self.set(self.incomeSourcesActivityIndicator, hidden: true)
         }
@@ -84,7 +84,7 @@ extension MainViewController {
             self.update(self.incomeSourcesCollectionView)
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка источников доходов", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка обновления порядка источников доходов", comment: "Ошибка обновления порядка источников доходов"), theme: .error)
         }.finally {
             self.set(self.incomeSourcesActivityIndicator, hidden: true)
         }
@@ -103,7 +103,7 @@ extension MainViewController {
             case APIRequestError.unprocessedEntity(let errors):
                 self.show(errors: errors)
             default:
-                self.messagePresenterManager.show(navBarMessage: "Ошибка удаления источника дохода", theme: .error)
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка удаления источника дохода", comment: "Ошибка удаления источника дохода"), theme: .error)
             }
         }
     }
@@ -119,7 +119,7 @@ extension MainViewController {
                         scrollToEnd: scrollToEndWhenUpdated)
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки источников трат", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки источников трат", comment: "Ошибка загрузки источников трат"), theme: .error)
         }.finally {
             self.set(self.expenseSourcesActivityIndicator, hidden: true)
         }
@@ -134,7 +134,7 @@ extension MainViewController {
             self.update(self.expenseSourcesCollectionView)
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка кошельков", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка обновления порядка кошельков", comment: "Ошибка обновления порядка кошельков"), theme: .error)
         }.finally {
             self.set(self.expenseSourcesActivityIndicator, hidden: true)
         }
@@ -153,7 +153,7 @@ extension MainViewController {
             case APIRequestError.unprocessedEntity(let errors):
                 self.show(errors: errors)
             default:
-                self.messagePresenterManager.show(navBarMessage: "Ошибка удаления кошелька", theme: .error)
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка удаления кошелька", comment: "Ошибка удаления кошелька"), theme: .error)
             }
         }
     }
@@ -169,7 +169,7 @@ extension MainViewController {
                         scrollToEnd: scrollToEndWhenUpdated)
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки категорий трат", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки категорий трат", comment: "Ошибка загрузки категорий трат"), theme: .error)
         }.finally {
             self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
         }
@@ -185,7 +185,7 @@ extension MainViewController {
             self.update(self.joyExpenseCategoriesCollectionView)
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка категорий трат", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка обновления порядка категорий трат", comment: "Ошибка обновления порядка категорий трат"), theme: .error)
         }.finally {
             self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
         }
@@ -200,7 +200,7 @@ extension MainViewController {
         }
         .catch { _ in
             self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
-            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления категории трат", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка удаления категории трат", comment: "Ошибка удаления категории трат"), theme: .error)
         }
     }
 }
@@ -215,7 +215,7 @@ extension MainViewController {
                         scrollToEnd: scrollToEndWhenUpdated)
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки активов", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки активов", comment: "Ошибка загрузки активов"), theme: .error)
         }.finally {
             self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
         }
@@ -232,7 +232,7 @@ extension MainViewController {
             self.update(self.basketItemsCollectionView(by: basketType))
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка обновления порядка активов", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка обновления порядка активов", comment: "Ошибка обновления порядка активов"), theme: .error)
         }.finally {
             self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
         }
@@ -247,7 +247,7 @@ extension MainViewController {
         }
         .catch { _ in
             self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
-            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления актива", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка удаления актива", comment: "Ошибка удаления актива"), theme: .error)
         }
     }
 }

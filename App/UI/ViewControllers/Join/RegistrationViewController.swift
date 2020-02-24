@@ -14,8 +14,13 @@ class RegistrationViewController : FormSubmitViewController {
     var viewModel: RegistrationViewModel!
     var tableController: RegistrationTableController!
     
-    override var formTitle: String { return "Регистрация" }
-    override var saveErrorMessage: String { return "Ошибка при регистрации" }
+    override var formTitle: String {
+        return NSLocalizedString("Регистрация", comment: "Регистрация")
+    }
+    
+    override var saveErrorMessage: String {
+        return NSLocalizedString("Ошибка при регистрации", comment: "Ошибка при регистрации")        
+    }
         
     override func registerFormFields() -> [String : FormField] {
         return [UserCreationForm.CodingKeys.firstname.rawValue : tableController.nameField,

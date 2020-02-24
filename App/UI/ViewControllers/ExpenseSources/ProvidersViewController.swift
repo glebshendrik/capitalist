@@ -43,7 +43,7 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
     }
     
     private func setupSearchBar() {
-        searchField.attributedPlaceholder = NSAttributedString(string: "Поиск",
+        searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Поиск", comment: "Поиск"),
                                                                attributes: [NSAttributedString.Key.foregroundColor : UIColor.by(.white64)])
     }
     
@@ -61,7 +61,7 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
         firstly {
             viewModel.loadProviders()
         }.catch { e in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке банков", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка при загрузке банков", comment: "Ошибка при загрузке банков"), theme: .error)
             self.close()
         }.finally {
             self.loader.isHidden = true

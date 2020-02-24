@@ -25,7 +25,7 @@ class ProfileEditTableController : FormFieldsTableViewController {
     
     private func setupNameField() {
         register(responder: nameField.textField)
-        nameField.placeholder = "Имя"
+        nameField.placeholder = NSLocalizedString("Имя", comment: "Имя")
         nameField.imageName = "name-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)

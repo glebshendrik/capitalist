@@ -14,8 +14,8 @@ class ChangePasswordViewController : FormSubmitViewController {
     var viewModel: ChangePasswordViewModel!
     var tableController: ChangePasswordTableController!
     
-    override var formTitle: String { return "Смена пароля" }
-    override var saveErrorMessage: String { return "Ошибка при изменении пароля" }
+    override var formTitle: String { return NSLocalizedString("Смена пароля", comment: "Смена пароля") }
+    override var saveErrorMessage: String { return NSLocalizedString("Ошибка при изменении пароля", comment: "Ошибка при изменении пароля") }
     
     override func registerFormFields() -> [String : FormField] {
         return [ChangePasswordForm.CodingKeys.oldPassword.rawValue : tableController.oldPasswordField,
@@ -35,14 +35,14 @@ class ChangePasswordViewController : FormSubmitViewController {
     override func handleSave(_ error: Error) {
         switch error {
         case APIRequestError.forbidden:
-            tableController.oldPasswordField.addError(message: "Старый пароль неверен")            
+            tableController.oldPasswordField.addError(message: NSLocalizedString("Старый пароль неверен", comment: "Старый пароль неверен"))
         default:
             super.handleSave(error)
         }
     }
     
     override func didSave() {
-        messagePresenterManager.show(navBarMessage: "Пароль успешно изменен", theme: .success)
+        messagePresenterManager.show(navBarMessage: NSLocalizedString("Пароль успешно изменен", comment: "Пароль успешно изменен"), theme: .success)
         navigationController?.popViewController(animated: true)
     }
 }

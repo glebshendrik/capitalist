@@ -75,7 +75,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
         
     private func setupAmountField() {
         register(responder: amountField.textField)
-        amountField.placeholder = "Сумма"
+        amountField.placeholder = NSLocalizedString("Сумма", comment: "Сумма")
         amountField.imageName = "amount-icon"
         amountField.didChange { [weak self] text in
             self?.delegate?.didChange(amount: text)
@@ -85,8 +85,8 @@ class TransactionEditTableController : FormFieldsTableViewController {
     private func setupExchangeField() {
         register(responder: exchangeField.amountField)
         register(responder: exchangeField.convertedAmountField)
-        exchangeField.amountPlaceholder = "Сумма"
-        exchangeField.convertedAmountPlaceholder = "Сумма"
+        exchangeField.amountPlaceholder = NSLocalizedString("Сумма", comment: "Сумма")
+        exchangeField.convertedAmountPlaceholder = NSLocalizedString("Сумма", comment: "Сумма")
         exchangeField.imageName = "amount-icon"
         exchangeField.didChangeAmount { [weak self] text in
             self?.delegate?.didChange(amount: text)
@@ -97,7 +97,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
     }
     
     private func setupIsBuyingAssetSwitchField() {
-        isBuyingAssetSwitchField.placeholder = "Покупка актива"
+        isBuyingAssetSwitchField.placeholder = NSLocalizedString("Покупка актива", comment: "Покупка актива")
         isBuyingAssetSwitchField.imageName = "included_in_balance_icon"
         isBuyingAssetSwitchField.didSwitch { [weak self] isBuyingAsset in
             self?.delegate?.didChange(isBuyingAsset: isBuyingAsset)

@@ -1,0 +1,6 @@
+framework module InfiniteLayout {
+  umbrella header "InfiniteLayout-umbrella.h"
+
+  export *
+  module * { export * }
+}

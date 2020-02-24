@@ -32,7 +32,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="С помощью него ты сможешь отразить доход по активу " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgx-R7-9vT">
-                                        <rect key="frame" x="16" y="416" width="343" height="37.5"/>
+                                        <rect key="frame" x="16" y="276.5" width="343" height="37.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
                                         <color key="textColor" name="white 0.64"/>
                                         <nil key="highlightedColor"/>
@@ -57,13 +57,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Больше не показывать" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRU-u8-5FB">
-                                        <rect key="frame" x="129" y="630.5" width="151" height="16.5"/>
+                                        <rect key="frame" x="129.5" y="630.5" width="150" height="16.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="14"/>
                                         <color key="textColor" name="white 0.64"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MiO-9d-ZUu" customClass="BEMCheckBox">
-                                        <rect key="frame" x="105" y="630" width="16" height="16"/>
+                                        <rect key="frame" x="105.5" y="630" width="16" height="16"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="83i-qr-9UJ"/>
@@ -86,13 +86,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мы создали источник дохода для актива &quot;Акции&quot;" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKd-rT-Xgu">
-                                        <rect key="frame" x="24" y="336" width="327" height="56"/>
+                                        <rect key="frame" x="24" y="196" width="327" height="56.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
                                         <color key="textColor" name="white 1.0"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adviser-message" translatesAutoresizingMaskIntoConstraints="NO" id="Hh2-DX-KJY">
-                                        <rect key="frame" x="47.5" y="32" width="280" height="280"/>
+                                        <rect key="frame" x="117.5" y="32" width="140" height="140"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -267,7 +267,7 @@
                                                     <rect key="frame" x="155.5" y="27.5" width="64" height="64"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="asset-risk-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="kIk-HP-2J3">
-                                                            <rect key="frame" x="18.5" y="18.5" width="27" height="27"/>
+                                                            <rect key="frame" x="20" y="20" width="24" height="24"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="27" id="6Wq-TD-PMn"/>
@@ -275,7 +275,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-edit-pencil" translatesAutoresizingMaskIntoConstraints="NO" id="BDO-et-bw1">
-                                                            <rect key="frame" x="23" y="40" width="18" height="18"/>
+                                                            <rect key="frame" x="27.5" y="49" width="9" height="9"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" name="gray 1"/>
@@ -742,7 +742,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="R1w-pu-4rS">
-                                <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
+                                <rect key="frame" x="160" y="318" width="55" height="31"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="q5k-di-wMq">
                                 <rect key="frame" x="0.0" y="33" width="375" height="634"/>
@@ -756,13 +756,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Labelasdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzD-a2-6YE">
-                                                    <rect key="frame" x="68" y="19.5" width="103.5" height="21"/>
+                                                    <rect key="frame" x="68" y="19.5" width="104.5" height="21"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                     <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHq-kP-Oha">
-                                                    <rect key="frame" x="187.5" y="19.5" width="171.5" height="21"/>
+                                                    <rect key="frame" x="188.5" y="19.5" width="170.5" height="21"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                     <color key="textColor" name="white 0.4"/>
                                                     <nil key="highlightedColor"/>

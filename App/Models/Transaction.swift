@@ -133,35 +133,35 @@ struct TransactionCreationForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: userId) {
-            errors["user_id"] = "Ошибка сохранения"
+            errors["user_id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(present: sourceId) {
-            errors["source_id"] = "Укажите источник"
+            errors["source_id"] = NSLocalizedString("Укажите источник", comment: "Укажите источник")
         }
         
         if !Validator.isValid(present: destinationId) {
-            errors["destination_id"] = "Укажите назначение"
+            errors["destination_id"] = NSLocalizedString("Укажите назначение", comment: "Укажите назначение")
         }
         
         if !Validator.isValid(present: amountCurrency) {
-            errors["amount_currency"] = "Укажите валюту"
+            errors["amount_currency"] = NSLocalizedString("Укажите валюту", comment: "Укажите валюту")
         }
         
         if !Validator.isValid(present: convertedAmountCurrency) {
-            errors["converted_amount_currency"] = "Укажите валюту конвертации"
+            errors["converted_amount_currency"] = NSLocalizedString("Укажите валюту конвертации", comment: "Укажите валюту конвертации")
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors["amount_cents"] = "Укажите сумму списания"
+            errors["amount_cents"] = NSLocalizedString("Укажите сумму списания", comment: "Укажите сумму списания")
         }
         
         if !Validator.isValid(positiveMoney: convertedAmountCents) {
-            errors["converted_amount_cents"] = "Укажите сумму зачисления"
+            errors["converted_amount_cents"] = NSLocalizedString("Укажите сумму зачисления", comment: "Укажите сумму зачисления")
         }
         
         if !Validator.isValid(pastDate: gotAt) {
-            errors["got_at"] = "Укажите дату транзакции"
+            errors["got_at"] = NSLocalizedString("Укажите дату транзакции", comment: "Укажите дату транзакции")
         }
         
         return errors
@@ -199,35 +199,35 @@ struct TransactionUpdatingForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: id) {
-            errors["id"] = "Ошибка сохранения"
+            errors["id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(present: sourceId) {
-            errors["source_id"] = "Укажите источник"
+            errors["source_id"] = NSLocalizedString("Укажите источник", comment: "Укажите источник")
         }
         
         if !Validator.isValid(present: destinationId) {
-            errors["destination_id"] = "Укажите назначение"
+            errors["destination_id"] = NSLocalizedString("Укажите назначение", comment: "Укажите назначение")
         }
         
         if !Validator.isValid(present: amountCurrency) {
-            errors["amount_currency"] = "Укажите валюту"
+            errors["amount_currency"] = NSLocalizedString("Укажите валюту", comment: "Укажите валюту")
         }
         
         if !Validator.isValid(present: convertedAmountCurrency) {
-            errors["converted_amount_currency"] = "Укажите валюту конвертации"
+            errors["converted_amount_currency"] = NSLocalizedString("Укажите валюту конвертации", comment: "Укажите валюту конвертации")
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors["amount_cents"] = "Укажите сумму списания"
+            errors["amount_cents"] = NSLocalizedString("Укажите сумму списания", comment: "Укажите сумму списания")
         }
         
         if !Validator.isValid(positiveMoney: convertedAmountCents) {
-            errors["converted_amount_cents"] = "Укажите сумму зачисления"
+            errors["converted_amount_cents"] = NSLocalizedString("Укажите сумму зачисления", comment: "Укажите сумму зачисления")
         }
         
         if !Validator.isValid(pastDate: gotAt) {
-            errors["got_at"] = "Укажите дату транзакции"
+            errors["got_at"] = NSLocalizedString("Укажите дату транзакции", comment: "Укажите дату транзакции")
         }
         
         return errors

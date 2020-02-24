@@ -146,15 +146,15 @@ extension MainViewController {
     }
     
     private func showBorrowingIncomeSheet(source: IncomeSourceViewModel, destination: ExpenseSourceViewModel) {
-        let creditAction = UIAlertAction(title: "Взять в кредит", style: .default) { _ in
+        let creditAction = UIAlertAction(title: NSLocalizedString("Взять в кредит", comment: "Взять в кредит"), style: .default) { _ in
             self.showCreditEditScreen(destination: destination)
         }
         
-        let loanAction = UIAlertAction(title: "Занять", style: .default) { _ in
+        let loanAction = UIAlertAction(title: NSLocalizedString("Занять", comment: "Занять"), style: .default) { _ in
             self.showBorrowEditScreen(type: .loan, source: source, destination: destination)
         }
         
-        let returnAction = UIAlertAction(title: "Возвращение долга", style: .default) { _ in
+        let returnAction = UIAlertAction(title: NSLocalizedString("Возвращение долга", comment: "Возвращение долга"), style: .default) { _ in
             self.showWaitingBorrows(source.waitingDebts,
                                     source: source,
                                     destination: destination,
@@ -173,11 +173,11 @@ extension MainViewController {
     private func showBorrowingExpenseSheet(source: ExpenseSourceViewModel, destination: ExpenseCategoryViewModel) {
         guard destination.hasWaitingLoans else { return }
         
-        let debtAction = UIAlertAction(title: "Одолжить", style: .default) { _ in
+        let debtAction = UIAlertAction(title: NSLocalizedString("Одолжить", comment: "Одолжить"), style: .default) { _ in
             self.showBorrowEditScreen(type: .debt, source: source, destination: destination)
         }
         
-        let returnAction = UIAlertAction(title: "Возвращение займа", style: .default) { _ in
+        let returnAction = UIAlertAction(title: NSLocalizedString("Возвращение займа", comment: "Возвращение займа"), style: .default) { _ in
             self.showWaitingBorrows(destination.waitingLoans,
                                     source: source,
                                     destination: destination,

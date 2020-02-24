@@ -84,39 +84,39 @@ struct CreditCreationForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: userId) {
-            errors["user_id"] = "Ошибка сохранения"
+            errors["user_id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(present: creditTypeId) {
-            errors[CodingKeys.creditTypeId.rawValue] = "Укажите тип кредита"
+            errors[CodingKeys.creditTypeId.rawValue] = NSLocalizedString("Укажите тип кредита", comment: "Укажите тип кредита")
         }
         
         if !Validator.isValid(required: name) {
-            errors[CodingKeys.name.rawValue] = "Укажите название"
+            errors[CodingKeys.name.rawValue] = NSLocalizedString("Укажите название", comment: "Укажите название")
         }
         
         if  !Validator.isValid(required: currency) {
-            errors[CodingKeys.currency.rawValue] = "Укажите валюту"
+            errors[CodingKeys.currency.rawValue] = NSLocalizedString("Укажите валюту", comment: "Укажите валюту")
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = "Укажите сумму"
+            errors[CodingKeys.amountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
         
         if !Validator.isValid(positiveMoney: returnAmountCents) {
-            errors[CodingKeys.returnAmountCents.rawValue] = "Укажите сумму"
+            errors[CodingKeys.returnAmountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
         
         if !Validator.isValid(money: alreadyPaidCents) {
-            errors[CodingKeys.alreadyPaidCents.rawValue] = "Укажите сумму"
+            errors[CodingKeys.alreadyPaidCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
         
         if !Validator.isValid(pastDate: gotAt) {
-            errors[CodingKeys.gotAt.rawValue] = "Укажите дату"
+            errors[CodingKeys.gotAt.rawValue] = NSLocalizedString("Укажите дату", comment: "Укажите дату")
         }
         
         if !Validator.isValid(present: period) {
-            errors[CodingKeys.period.rawValue] = "Укажите период"
+            errors[CodingKeys.period.rawValue] = NSLocalizedString("Укажите период", comment: "Укажите период")
         }
         
         return errors
@@ -175,27 +175,27 @@ struct CreditUpdatingForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: id) {
-            errors["id"] = "Ошибка сохранения"
+            errors["id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
                 
         if !Validator.isValid(required: name) {
-            errors[CodingKeys.name.rawValue] = "Укажите название"
+            errors[CodingKeys.name.rawValue] = NSLocalizedString("Укажите название", comment: "Укажите название")
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = "Укажите сумму"
+            errors[CodingKeys.amountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
         
         if !Validator.isValid(positiveMoney: returnAmountCents) {
-            errors[CodingKeys.returnAmountCents.rawValue] = "Укажите сумму"
+            errors[CodingKeys.returnAmountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
                 
         if !Validator.isValid(pastDate: gotAt) {
-            errors[CodingKeys.gotAt.rawValue] = "Укажите дату"
+            errors[CodingKeys.gotAt.rawValue] = NSLocalizedString("Укажите дату", comment: "Укажите дату")
         }
         
         if !Validator.isValid(present: period) {
-            errors[CodingKeys.period.rawValue] = "Укажите период"
+            errors[CodingKeys.period.rawValue] = NSLocalizedString("Укажите период", comment: "Укажите период")
         }
         
         return errors

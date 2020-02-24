@@ -47,7 +47,7 @@ class ActiveSelectViewController : UIViewController, UIMessagePresenterManagerDe
             self.updateUI()
         }
         .catch { e in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки активов", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки активов", comment: "Ошибка загрузки активов"), theme: .error)
             self.close()
         }.finally {
             self.set(self.loader, hidden: true)

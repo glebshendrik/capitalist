@@ -12,7 +12,9 @@ import BetterSegmentedControl
 extension MainViewController {
     func setupBasketsTabs() {
         guard !tabsInitialized else { return }
-        basketsTabs.segments = LabelSegment.segments(withTitles: ["РАСХОДЫ", "СБЕРЕЖЕНИЯ", "ИНВЕСТИЦИИ"],
+        basketsTabs.segments = LabelSegment.segments(withTitles: [NSLocalizedString("РАСХОДЫ", comment: "РАСХОДЫ"),
+                                                                  NSLocalizedString("СБЕРЕЖЕНИЯ", comment: "СБЕРЕЖЕНИЯ"),
+                                                                  NSLocalizedString("ИНВЕСТИЦИИ", comment: "ИНВЕСТИЦИИ")],
                                               normalBackgroundColor: UIColor.clear,
                                               normalFont: UIFont(name: "Roboto-Regular", size: 12)!,
                                               normalTextColor: UIColor.by(.white100),

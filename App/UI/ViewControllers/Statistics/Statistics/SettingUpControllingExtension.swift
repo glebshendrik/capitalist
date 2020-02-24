@@ -18,7 +18,7 @@ extension StatisticsViewController {
         _ = firstly {
                 viewModel.loadData()
             }.catch { _ in
-                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
             }.finally {
                 self.updateUI()
         }
@@ -32,7 +32,7 @@ extension StatisticsViewController {
         }.done {
             self.loadData(financialDataInvalidated: true)
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка удаления транзакции", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка удаления транзакции", comment: "Ошибка удаления транзакции"), theme: .error)
             self.updateUI()
         }
     }

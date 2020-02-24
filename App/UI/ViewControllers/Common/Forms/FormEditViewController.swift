@@ -22,8 +22,8 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     var shouldLoadData: Bool { return false }
     var formTitle: String { return "" }
     var loadErrorMessage: String? { return nil }
-    var saveErrorMessage: String { return "Ошибка сохранения" }
-    var removeErrorMessage: String { return "Ошибка удаления" }
+    var saveErrorMessage: String { return NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения") }
+    var removeErrorMessage: String { return NSLocalizedString("Ошибка удаления", comment: "Ошибка удаления") }
     
     lazy var formFields: [String : FormField] = {
         return registerFormFields()

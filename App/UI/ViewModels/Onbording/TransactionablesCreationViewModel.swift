@@ -42,11 +42,11 @@ class TransactionablesCreationViewModel {
     var stepTitle: String {
         switch transactionableType {
         case .expenseSource:
-            return "НАЧАЛО РАБОТЫ"
+            return NSLocalizedString("НАЧАЛО РАБОТЫ", comment: "НАЧАЛО РАБОТЫ")
         case .incomeSource:
-            return "ЕЩЕ НЕМНОГО"
+            return NSLocalizedString("ЕЩЕ НЕМНОГО", comment: "ЕЩЕ НЕМНОГО")
         case .expenseCategory:
-            return "ПОЧТИ ВСЕ"
+            return NSLocalizedString("ПОЧТИ ВСЕ", comment: "ПОЧТИ ВСЕ")
         default:
             return ""
         }
@@ -55,18 +55,18 @@ class TransactionablesCreationViewModel {
     var title: String {
         switch transactionableType {
         case .expenseSource:
-            return "Выберите валюту и кошельки"
+            return NSLocalizedString("Выберите валюту и кошельки", comment: "Выберите валюту и кошельки")
         case .incomeSource:
-            return "Выберите ваши источники дохода"
+            return NSLocalizedString("Выберите ваши источники дохода", comment: "Выберите ваши источники дохода")
         case .expenseCategory:
-            return "Выберите ваши категории расходов"
+            return NSLocalizedString("Выберите ваши категории расходов", comment: "Выберите ваши категории расходов")
         default:
             return ""
         }
     }
     
     var subtitle: String {
-        return "Добавить свой вариант вы сможете на главном экране приложения, нажав на + в конце списка"
+        return NSLocalizedString("Добавить свой вариант вы сможете на главном экране приложения, нажав на + в конце списка", comment: "Добавить свой вариант вы сможете на главном экране приложения, нажав на + в конце списка")
     }
     
     var currencySelectorHidden: Bool {

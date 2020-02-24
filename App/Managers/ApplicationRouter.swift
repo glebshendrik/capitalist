@@ -13,9 +13,9 @@ import PromiseKit
 import IQKeyboardManager
 import RecurrencePicker
 import SwifterSwift
+import ApphudSDK
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
-    
     private let storyboards: [Infrastructure.Storyboard: UIStoryboard]
     private let window: UIWindow
     private let userSessionManager: UserSessionManagerProtocol
@@ -23,6 +23,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private var accountCoordinator: AccountCoordinatorProtocol!
     private let soundsManager: SoundsManagerProtocol
     private var saltEdgeCoordinator: BankConnectionsCoordinatorProtocol!
+    private var analyticsManager: AnalyticsManagerProtocol!
     
     private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     private var minVersion: String?
@@ -32,13 +33,15 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
          window: UIWindow,
          userSessionManager: UserSessionManagerProtocol,
          notificationsCoordinator: NotificationsCoordinatorProtocol,
-         soundsManager: SoundsManagerProtocol) {
+         soundsManager: SoundsManagerProtocol,
+         analyticsManager: AnalyticsManagerProtocol) {
         
         self.storyboards = storyboards
         self.window = window
         self.userSessionManager = userSessionManager
         self.notificationsCoordinator = notificationsCoordinator
         self.soundsManager = soundsManager
+        self.analyticsManager = analyticsManager
     }
     
     func initDependencies(with resolver: Swinject.Resolver) {
@@ -53,6 +56,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         if !UIFlowManager.reach(point: .soundsManagerInitialization) {
             soundsManager.setSounds(enabled: false)
         }
+        Apphud.start(apiKey: "app_mHJ17n3JPJiohGj5JgwNkkermyShF1")
         saltEdgeCoordinator.setup()
         self.launchOptions = launchOptions
         setupKeyboardManager()
@@ -101,7 +105,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private func beginAuthorizedUserFlow() {
         firstly {
             accountCoordinator.loadCurrentUser()
-        }.done { _ in
+        }.done { user in
+            self.analyticsManager.set(userId: user.id.string)
+            Apphud.updateUserID(user.id.string)
+            
             guard !self.checkIfAppUpdateNeeded() else {
                 self.showAppUpdateScreen()
                 return
@@ -112,6 +119,9 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             else if !UIFlowManager.reached(point: .dataSetup) {
                 self.notificationsCoordinator.enableNotifications()
                 self.showDataSetupViewController()
+            }
+            else if !Apphud.hasActiveSubscription() {
+                self.showMainViewController()
             }
             else {
                 self.notificationsCoordinator.enableNotifications()
@@ -145,7 +155,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     private func showJoiningAsGuestScreen() {
         if let landingViewController = show(.LandingViewController) as? LandingViewController {
-            landingViewController.update(loadingMessage: "Создание учетной записи гостя...")
+            landingViewController.update(loadingMessage: NSLocalizedString("Creating guest account", comment: "Создание учетной записи гостя..."))
         }
     }
     
@@ -181,7 +191,6 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     func viewController(_ viewController: Infrastructure.ViewController) -> UIViewController {
         let storyboard = self.storyboards[viewController.storyboard]
-        assert(storyboard != nil, "Storyboard should be registered before first use.")
         return storyboard!.instantiateViewController(withIdentifier: viewController.identifier)
     }
     

@@ -11,14 +11,14 @@ import UIKit
 class FormTransactionsDependableEditViewController : FormNavBarButtonsEditViewController {
     var deleteTransactions: Bool = false
     
-    var removeQuestionMessage: String { return "Remove?" }
+    var removeQuestionMessage: String { return NSLocalizedString("Remove?", comment: "Remove?") }
     
     func didTapRemoveButton() {
         let alertController = UIAlertController(title: removeQuestionMessage,
                                                 message: nil,
                                                 preferredStyle: .alert)
         
-        alertController.addAction(title: "Удалить",
+        alertController.addAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
                                   style: .destructive,
                                   isEnabled: true,
                                   handler: { _ in
@@ -26,7 +26,7 @@ class FormTransactionsDependableEditViewController : FormNavBarButtonsEditViewCo
                                     self.remove()
         })
         
-        alertController.addAction(title: "Удалить вместе с транзакциями",
+        alertController.addAction(title: NSLocalizedString("Удалить вместе с транзакциями", comment: "Удалить вместе с транзакциями"),
                                   style: .destructive,
                                   isEnabled: true,
                                   handler: { _ in
@@ -34,7 +34,7 @@ class FormTransactionsDependableEditViewController : FormNavBarButtonsEditViewCo
                                     self.remove()
         })
         
-        alertController.addAction(title: "Отмена",
+        alertController.addAction(title: NSLocalizedString("Отмена", comment: "Отмена"),
                                   style: .cancel,
                                   isEnabled: true,
                                   handler: nil)

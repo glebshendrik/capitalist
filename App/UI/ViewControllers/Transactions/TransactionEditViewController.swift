@@ -25,7 +25,7 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     override var canSave: Bool { return viewModel.canSave }
     override var shouldLoadData: Bool { return true }
     override var formTitle: String { return viewModel.title }
-    override var loadErrorMessage: String { return "Ошибка загрузки транзакции" }
+    override var loadErrorMessage: String { return NSLocalizedString("Ошибка загрузки транзакции", comment: "Ошибка загрузки транзакции") }
     
     override func registerFormFields() -> [String : FormField] {
         return [Transaction.CodingKeys.sourceId.rawValue : tableController.sourceField,
@@ -103,7 +103,7 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         firstly {
             viewModel.loadExchangeRate()
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке курса валют",
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка при загрузке курса валют", comment: "Ошибка при загрузке курса валют"),
                                               theme: .error)
         }.finally {
             self.operationFinished()
@@ -117,7 +117,7 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         firstly {
             viewModel.loadSource(id: id, type: type)
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке источника",
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка при загрузке источника", comment: "Ошибка при загрузке источника"),
                                               theme: .error)
         }.finally {
             self.operationFinished()
@@ -131,7 +131,7 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         firstly {
             viewModel.loadDestination(id: id, type: type)
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке назначения",
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка при загрузке назначения", comment: "Ошибка при загрузке назначения"),
                                               theme: .error)
         }.finally {
             self.operationFinished()

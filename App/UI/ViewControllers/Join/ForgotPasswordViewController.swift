@@ -14,8 +14,13 @@ class ForgotPasswordViewController : FormSubmitViewController {
     var viewModel: ForgotPasswordViewModel!
     var tableController: ForgotPasswordTableController!
     
-    override var formTitle: String { return "Восстановление пароля" }
-    override var saveErrorMessage: String { return "Ошибка при создании кода восстановления пароля" }
+    override var formTitle: String {
+        return NSLocalizedString("Восстановление пароля", comment: "Восстановление пароля")
+    }
+    
+    override var saveErrorMessage: String {
+        return NSLocalizedString("Ошибка при создании кода восстановления пароля", comment: "Ошибка при создании кода восстановления пароля")
+    }
     
     override func registerFormFields() -> [String : FormField] {
         return [PasswordResetCodeForm.CodingKeys.email.rawValue : tableController.emailField]
@@ -33,7 +38,7 @@ class ForgotPasswordViewController : FormSubmitViewController {
     override func handleSave(_ error: Error) {
         switch error {
         case APIRequestError.notFound:
-            self.messagePresenterManager.show(validationMessage: "Пользователь с таким адресом не найден")
+            self.messagePresenterManager.show(validationMessage: NSLocalizedString("Пользователь с таким адресом не найден", comment: "Пользователь с таким адресом не найден"))
         default:
             super.handleSave(error)
         }
@@ -44,7 +49,7 @@ class ForgotPasswordViewController : FormSubmitViewController {
     }
     
     func showResetPasswordScreen() {
-        messagePresenterManager.show(navBarMessage: "Мы отправили код для смены пароля на ваш Email", theme: .success)
+        messagePresenterManager.show(navBarMessage: NSLocalizedString("Мы отправили код для смены пароля на ваш Email", comment: "Мы отправили код для смены пароля на ваш Email"), theme: .success)
         push(factory.resetPasswordViewController(email: viewModel.email))
     }    
 }

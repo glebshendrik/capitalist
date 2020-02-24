@@ -23,10 +23,18 @@ class IncomeSourceEditViewController : FormTransactionsDependableEditViewControl
         
     override var shouldLoadData: Bool { return viewModel.isNew }
     override var formTitle: String {
-        return viewModel.isNew ? "Новый источник доходов" : "Источник доходов"
+        return viewModel.isNew
+            ? NSLocalizedString("Новый источник доходов", comment: "Новый источник доходов")
+            : NSLocalizedString("Источник доходов", comment: "Источник доходов")
     }
-    override var saveErrorMessage: String { return "Ошибка при сохранении источника доходов" }
-    override var removeErrorMessage: String { return "Ошибка при удалении источника доходов" }
+    override var saveErrorMessage: String {
+        return NSLocalizedString("Ошибка при сохранении источника доходов", comment: "Ошибка при сохранении источника доходов")
+    }
+    
+    override var removeErrorMessage: String {
+        return NSLocalizedString("Ошибка при удалении источника доходов", comment: "Ошибка при удалении источника доходов")
+    }
+    
     override var removeQuestionMessage: String { return TransactionableType.incomeSource.removeQuestion }
     
     override func registerFormFields() -> [String : FormField] {

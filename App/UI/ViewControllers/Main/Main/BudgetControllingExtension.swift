@@ -12,9 +12,9 @@ import AttributedTextView
 extension MainViewController : TitleViewDelegate {
     var total: NSAttributedString {
         if isSelecting {
-            return ("Из ".color(UIColor.by(.white40))
+            return (NSLocalizedString("Из ", comment: "Из ").color(UIColor.by(.white40))
                     + viewModel.selectedSourceName.color(UIColor.by(.white100))
-                    + " в ".color(UIColor.by(.white40))
+                    + NSLocalizedString(" в ", comment: " в ").color(UIColor.by(.white40))
                     + viewModel.selectedDestinationName.color(UIColor.by(.white100)))
                         .all.fontName("Roboto-Light").size(12).attributedText
         }

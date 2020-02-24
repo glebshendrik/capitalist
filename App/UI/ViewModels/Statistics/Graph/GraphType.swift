@@ -20,11 +20,11 @@ enum GraphType {
     var title: String {
         switch self {
         case .all:
-            return "Все"
+            return NSLocalizedString("Все", comment: "Все")
         case .incomes:
-            return "Доход"
+            return NSLocalizedString("Доход", comment: "Доход")
         case .expenses:
-            return "Расходы"
+            return NSLocalizedString("Расходы", comment: "Расходы")
         }
     }
 }

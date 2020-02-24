@@ -79,7 +79,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     
     func setupNameField() {
         register(responder: nameField.textField)
-        nameField.placeholder = "Название"
+        nameField.placeholder = NSLocalizedString("Название", comment: "Название")
         nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
@@ -87,7 +87,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     }
     
     func setupCreditTypeField() {
-        creditTypeField.placeholder = "Тип кредита"
+        creditTypeField.placeholder = NSLocalizedString("Тип кредита", comment: "Тип кредита")
         creditTypeField.imageName = "credit-type-icon"
         creditTypeField.didTap { [weak self] in
             self?.delegate?.didTapCreditType()
@@ -95,7 +95,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     }
     
     func setupCurrencyField() {
-        currencyField.placeholder = "Валюта"
+        currencyField.placeholder = NSLocalizedString("Валюта", comment: "Валюта")
         currencyField.imageName = "currency-icon"
         currencyField.didTap { [weak self] in
             self?.delegate?.didTapCurrency()
@@ -104,7 +104,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     
     func setupAmountField() {
         register(responder: amountField.textField)
-        amountField.placeholder = "Cумма кредита"
+        amountField.placeholder = NSLocalizedString("Cумма кредита", comment: "Cумма кредита")
         amountField.imageName = "amount-icon"
         amountField.didChange { [weak self] text in
             self?.delegate?.didChange(amount: text)
@@ -112,7 +112,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     }
     
     func setupOnBalanceSwitchField() {
-        onBalanceSwitchField.placeholder = "Зачислить сумму на кошелек"
+        onBalanceSwitchField.placeholder = NSLocalizedString("Зачислить сумму на кошелек", comment: "Зачислить сумму на кошелек")
         onBalanceSwitchField.imageName = "included_in_balance_icon"
         onBalanceSwitchField.didSwitch { [weak self] shouldRecordOnBalance in
             self?.delegate?.didChange(shouldRecordOnBalance: shouldRecordOnBalance)
@@ -120,7 +120,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     }
     
     func setupExpenseSourceField() {
-        expenseSourceField.placeholder = "Кошелек"
+        expenseSourceField.placeholder = NSLocalizedString("Кошелек", comment: "Кошелек")
         expenseSourceField.imageName = TransactionableType.expenseSource.defaultIconName
         expenseSourceField.didTap { [weak self] in
             self?.delegate?.didTapExpenseSource()
@@ -129,7 +129,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     
     func setupReturnAmountField() {
         register(responder: returnAmountField.textField)
-        returnAmountField.placeholder = "Полная сумма выплаты"
+        returnAmountField.placeholder = NSLocalizedString("Полная сумма выплаты", comment: "Полная сумма выплаты")
         returnAmountField.imageName = "amount-icon"
         returnAmountField.didChange { [weak self] text in
             self?.delegate?.didChange(returnAmount: text)
@@ -138,7 +138,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     
     func setupAlreadyPaidField() {
         register(responder: alreadyPaidField.textField)
-        alreadyPaidField.placeholder = "Сколько уже оплатил"
+        alreadyPaidField.placeholder = NSLocalizedString("Сколько уже оплатил", comment: "Сколько уже оплатил")
         alreadyPaidField.imageName = "credit-limit-icon"
         alreadyPaidField.didChange { [weak self] text in
             self?.delegate?.didChange(alreadyPaid: text)
@@ -147,7 +147,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     
     func setupMonthlyPaymentField() {
         register(responder: monthlyPaymentField.textField)
-        monthlyPaymentField.placeholder = "Ежемесячная выплата"
+        monthlyPaymentField.placeholder = NSLocalizedString("Ежемесячная выплата", comment: "Ежемесячная выплата")
         monthlyPaymentField.imageName = "period-icon"
         monthlyPaymentField.didChange { [weak self] text in
             self?.delegate?.didChange(monthlyPayment: text)
@@ -155,7 +155,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     }
     
     func setupGotAtField() {
-        gotAtField.placeholder = "Дата получения кредита"
+        gotAtField.placeholder = NSLocalizedString("Дата получения кредита", comment: "Дата получения кредита")
         gotAtField.imageName = "calendar-icon"
         gotAtField.didTap { [weak self] in
             self?.delegate?.didTapGotAt()
@@ -163,7 +163,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     }
     
     func setupPeriodField() {
-        periodField.placeholder = "Срок"
+        periodField.placeholder = NSLocalizedString("Срок", comment: "Срок")
         periodField.imageName = "calendar-icon"
         periodField.didChange { [weak self] value in
             self?.delegate?.didChange(period: Int(value))

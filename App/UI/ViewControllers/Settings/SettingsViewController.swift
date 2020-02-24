@@ -14,8 +14,8 @@ class SettingsViewController : FormEditViewController {
     var tableController: SettingsTableController!
     
     override var shouldLoadData: Bool { return true }
-    override var formTitle: String { return "Настройки" }
-    override var loadErrorMessage: String? { return "Возникла проблема при загрузке настроек" }
+    override var formTitle: String { return NSLocalizedString("Настройки", comment: "Настройки") }
+    override var loadErrorMessage: String? { return NSLocalizedString("Возникла проблема при загрузке настроек", comment: "Возникла проблема при загрузке настроек") }
     
     override func setup(tableController: FormFieldsTableViewController) {
         self.tableController = tableController as? SettingsTableController
@@ -80,7 +80,7 @@ extension SettingsViewController : CurrenciesViewControllerDelegate {
         firstly {
             viewModel.update(currency: currency)
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Возникла проблема при обновлении валюты", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Возникла проблема при обновлении валюты", comment: "Возникла проблема при обновлении валюты"), theme: .error)
             
         }.finally {
             self.operationFinished()
@@ -101,7 +101,7 @@ extension SettingsViewController {
         firstly {
             viewModel.update(period: period)
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Возникла проблема при обновлении периода", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Возникла проблема при обновлении периода", comment: "Возникла проблема при обновлении периода"), theme: .error)
             
         }.finally {
             self.operationFinished()

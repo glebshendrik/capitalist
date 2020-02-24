@@ -11,6 +11,7 @@ import UserNotifications
 import SwiftDate
 import PromiseKit
 import SwifterSwift
+import ApphudSDK
 
 enum NotificationsManagerError: Error {
     case notificationsAreNotAllowed
@@ -168,13 +169,14 @@ extension NotificationsManager: UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // When received notification in Foreground
         // Just show default alert
+        Apphud.handlePushNotification(apsInfo: notification.request.content.userInfo)
         completionHandler([[.alert, .badge]])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
-        
+        Apphud.handlePushNotification(apsInfo: response.notification.request.content.userInfo)
         handleNotification(actionId: response.actionIdentifier,
                            content: response.notification.request.content,
                            applicationStateWhenReceivedNotification: UIApplication.shared.applicationState)

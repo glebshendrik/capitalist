@@ -85,19 +85,19 @@ class FormExchangeField : FormField {
         didSet { updateFocusLine() }
     }
     
-    @IBInspectable var amountPlaceholder: String? = "Сумма" {
+    @IBInspectable var amountPlaceholder: String? = NSLocalizedString("Сумма", comment: "Сумма") {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var convertedAmountPlaceholder: String? = "Сумма" {
+    @IBInspectable var convertedAmountPlaceholder: String? = NSLocalizedString("Сумма", comment: "Сумма") {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var amountSelectedTitle: String? = "Сумма" {
+    @IBInspectable var amountSelectedTitle: String? = NSLocalizedString("Сумма", comment: "Сумма") {
         didSet { updateTextFields() }
     }
     
-    @IBInspectable var convertedAmountSelectedTitle: String? = "Сумма" {
+    @IBInspectable var convertedAmountSelectedTitle: String? = NSLocalizedString("Сумма", comment: "Сумма") {
         didSet { updateTextFields() }
     }
     

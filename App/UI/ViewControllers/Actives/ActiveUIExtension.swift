@@ -111,7 +111,7 @@ extension ActiveEditViewController {
     }
         
     func updateRemoveButtonUI(reload: Bool = false, animated: Bool = false) {
-        tableController.removeButton.setTitle("Удалить актив", for: .normal)
+        tableController.removeButton.setTitle(NSLocalizedString("Удалить актив", comment: "Удалить актив"), for: .normal)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: animated, reload: reload)
     }
     

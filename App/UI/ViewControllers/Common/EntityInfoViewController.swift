@@ -99,7 +99,7 @@ extension EntityInfoViewController {
                 viewModel.updateData()
             }.catch { e in
                 print(e)
-                self.messagePresenterManager.show(navBarMessage: "Ошибка обновления данных", theme: .error)
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка обновления данных", comment: "Ошибка обновления данных"), theme: .error)
             }.finally {
                 self.stopLoading()
                 self.updateUI()
@@ -112,7 +112,7 @@ extension EntityInfoViewController {
         _ = firstly {
                 viewModel.loadMoreTransactions()
             }.catch{ _ in
-                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
             }.finally {                
                 self.tableView.reloadData()
                 self.tableView.layoutIfNeeded()
@@ -220,11 +220,11 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func askToDelete(transactionViewModel: TransactionViewModel) {
-        let alertController = UIAlertController(title: "Удалить транзакцию?",
+        let alertController = UIAlertController(title: NSLocalizedString("Удалить транзакцию?", comment: "Удалить транзакцию?"),
                                                 message: nil,
                                                 preferredStyle: .alert)
         
-        alertController.addAction(title: "Удалить",
+        alertController.addAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
                                   style: .destructive,
                                   isEnabled: true,
                                   handler: { [weak self] _ in
@@ -232,7 +232,7 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
                                 })
         
         
-        alertController.addAction(title: "Отмена",
+        alertController.addAction(title: NSLocalizedString("Отмена", comment: "Отмена"),
                                   style: .cancel,
                                   isEnabled: true,
                                   handler: nil)

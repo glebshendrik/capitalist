@@ -77,7 +77,7 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
         firstly {
             viewModel.loadData()
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Возникла проблема при загрузке данных профиля", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Возникла проблема при загрузке данных профиля", comment: "Возникла проблема при загрузке данных профиля"), theme: .error)
             
         }.finally {            
             self.hideActivityIndicator()

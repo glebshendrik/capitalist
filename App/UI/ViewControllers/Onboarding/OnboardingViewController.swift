@@ -33,7 +33,10 @@ class OnboardingViewController : UIViewController, OnboardingPagesViewController
     }
     
     func updateUI() {
-        button.setTitle(pagesController.isLastPageShown ? "Отлично, начать!" : "Далее", for: .normal)
+        button.setTitle(pagesController.isLastPageShown
+            ? NSLocalizedString("Отлично, начать!", comment: "Отлично, начать!")
+            : NSLocalizedString("Далее", comment: "Далее"),
+                        for: .normal)
         button.backgroundColor = pagesController.isLastPageShown ? UIColor.by(.blue1) : UIColor.clear
         pageControl.currentPage = pagesController.currentPageIndex
     }

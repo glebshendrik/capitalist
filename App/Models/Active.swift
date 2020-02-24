@@ -14,9 +14,9 @@ enum ActiveIncomeType : String, Codable {
     var title: String {
         switch self {
         case .annualPercents:
-            return "Процент годовых"
+            return NSLocalizedString("Процент годовых", comment: "Процент годовых")
         case .monthlyIncome:
-            return "Доход в месяц"
+            return NSLocalizedString("Доход в месяц", comment: "Доход в месяц")
         }
     }
 }
@@ -185,23 +185,23 @@ struct ActiveUpdatingForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: id) {
-            errors["id"] = "Ошибка сохранения"
+            errors["id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
                                 
         if !Validator.isValid(required: name) {
-            errors[CodingKeys.name.rawValue] = "Укажите название"
+            errors[CodingKeys.name.rawValue] = NSLocalizedString("Укажите название", comment: "Укажите название")
         }
                 
         if !Validator.isValid(balance: costCents) {
-            errors[CodingKeys.costCents.rawValue] = "Укажите стоимость"
+            errors[CodingKeys.costCents.rawValue] = NSLocalizedString("Укажите стоимость", comment: "Укажите стоимость")
         }
           
         if !Validator.isValid(optionalPositiveNumber: monthlyPlannedIncomeCents) {
-            errors[CodingKeys.monthlyPlannedIncomeCents.rawValue] = "Укажите сумму больше 0"
+            errors[CodingKeys.monthlyPlannedIncomeCents.rawValue] = NSLocalizedString("Укажите сумму больше 0", comment: "Укажите сумму больше 0")
         }
         
         if !Validator.isValid(optionalPositiveNumber: annualIncomePercent) {
-            errors[CodingKeys.annualIncomePercent.rawValue] = "Укажите процент больше 0"
+            errors[CodingKeys.annualIncomePercent.rawValue] = NSLocalizedString("Укажите процент больше 0", comment: "Укажите процент больше 0")
         }
         
         return errors

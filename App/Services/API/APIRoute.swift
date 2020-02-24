@@ -13,7 +13,8 @@ import SwiftDate
 enum APIRoute: URLRequestConvertible {
     static var baseURLString: String {
         #if DEBUG
-            return "https://skrudzh-staging.herokuapp.com"
+            return "https://api.threebaskets.net"
+//            return "https://skrudzh-staging.herokuapp.com"
         #else
             return "https://api.threebaskets.net"
         #endif

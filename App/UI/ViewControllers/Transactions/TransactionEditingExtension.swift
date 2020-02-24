@@ -43,7 +43,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func didTapRemoveButton() {
-        let actions: [UIAlertAction] = [UIAlertAction(title: "Удалить",
+        let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
                                                       style: .destructive,
                                                       handler: { _ in
                                                         self.remove()
@@ -172,7 +172,7 @@ extension TransactionEditViewController {
                                         
                 })
             }
-            sheet(title: "Выбрать", actions: actions)
+            sheet(title: NSLocalizedString("Выбрать", comment: "Выбрать"), actions: actions)
         }
     }
     

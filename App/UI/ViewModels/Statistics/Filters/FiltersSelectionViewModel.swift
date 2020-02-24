@@ -43,7 +43,7 @@ class FiltersSelectionViewModel {
     }
     
     var saveButtonTitle: String {
-        return "Выбрать (\(selectedFilters.count))"
+        return String(format: NSLocalizedString("Выбрать %@", comment: "Выбрать %@"), selectedFilters.count)
     }
     
     var numberOfSections: Int {

@@ -65,7 +65,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     
     func setupNameField() {
         register(responder: nameField.textField)
-        nameField.placeholder = "Название"
+        nameField.placeholder = NSLocalizedString("Название", comment: "Название")
         nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
@@ -73,7 +73,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     }
     
     func setupCurrencyField() {
-        currencyField.placeholder = "Валюта"
+        currencyField.placeholder = NSLocalizedString("Валюта", comment: "Валюта")
         currencyField.imageName = "currency-icon"
         currencyField.didTap { [weak self] in
             self?.delegate?.didTapCurrency()
@@ -82,7 +82,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     
     func setupAmountField() {
         register(responder: amountField.textField)
-        amountField.placeholder = "Сумма"
+        amountField.placeholder = NSLocalizedString("Сумма", comment: "Сумма")
         amountField.imageName = "amount-icon"
         amountField.didChange { [weak self] text in
             self?.delegate?.didChange(amount: text)
@@ -90,7 +90,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     }
     
     func setupOnBalanceSwitchField() {
-        onBalanceSwitchField.placeholder = "Списать сумму с кошелька"
+        onBalanceSwitchField.placeholder = NSLocalizedString("Списать сумму с кошелька", comment: "Списать сумму с кошелька")
         onBalanceSwitchField.imageName = "included_in_balance_icon"
         onBalanceSwitchField.didSwitch { [weak self] shouldRecordOnBalance in
             self?.delegate?.didChange(shouldRecordOnBalance: shouldRecordOnBalance)
@@ -98,7 +98,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     }
     
     func setupExpenseSourceField() {
-        expenseSourceField.placeholder = "Кошелек"
+        expenseSourceField.placeholder = NSLocalizedString("Кошелек", comment: "Кошелек")
         expenseSourceField.imageName = TransactionableType.expenseSource.defaultIconName
         expenseSourceField.didTap { [weak self] in
             self?.delegate?.didTapExpenseSource()
@@ -106,7 +106,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     }
     
     func setupBorrowedAtField() {
-        borrowedAtField.placeholder = "Дата займа"
+        borrowedAtField.placeholder = NSLocalizedString("Дата займа", comment: "Дата займа")
         borrowedAtField.imageName = "calendar-icon"
         borrowedAtField.didTap { [weak self] in
             self?.delegate?.didTapBorrowedAt()
@@ -114,7 +114,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     }
     
     func setupPaydayField() {
-        paydayField.placeholder = "Дата возврата"
+        paydayField.placeholder = NSLocalizedString("Дата возврата", comment: "Дата возврата")
         paydayField.imageName = "calendar-icon"
         paydayField.didTap { [weak self] in
             self?.delegate?.didTapPayday()

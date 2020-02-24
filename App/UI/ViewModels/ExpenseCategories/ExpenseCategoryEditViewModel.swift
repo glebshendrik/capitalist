@@ -49,7 +49,9 @@ class ExpenseCategoryEditViewModel {
     }
     
     var reminderTitle: String {
-        return reminderViewModel.isReminderSet ? "Изменить напоминание" : "Установить напоминание"
+        return reminderViewModel.isReminderSet
+            ? NSLocalizedString("Изменить напоминание", comment: "Изменить напоминание")
+            : NSLocalizedString("Установить напоминание", comment: "Установить напоминание")
     }
     
     var reminder: String? {

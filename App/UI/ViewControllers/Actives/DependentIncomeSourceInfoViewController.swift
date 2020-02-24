@@ -44,10 +44,10 @@ class DependentIncomeSourceInfoViewController : UIViewController {
     }
     
     private func title() -> String? {
-        return "Актив «\(activeName)» может приносить прибыль"
+        return String(format: NSLocalizedString("Актив «%@» может приносить прибыль", comment: "Актив «%@» может приносить прибыль"), activeName)
     }
     
     private func message() -> String? {
-        return "Поэтому мы создаем для вас новый источник дохода «\(activeName)»"
+        return String(format: NSLocalizedString("Поэтому мы создаем для вас новый источник дохода «%@»", comment: "Поэтому мы создаем для вас новый источник дохода «%@»"), activeName)
     }
 }

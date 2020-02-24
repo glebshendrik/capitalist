@@ -95,11 +95,11 @@ class ActiveInfoViewModel : EntityInfoViewModel {
                                                        iconURL: selectedIconURL,           
                                                        placeholder: activeViewModel.defaultIconName),
                                          BasicInfoField(fieldId: ActiveInfoField.activeType.rawValue,
-                                                        title: "Тип актива",
+                                                        title: NSLocalizedString("Тип актива", comment: "Тип актива"),
                                                         value: activeViewModel.activeTypeName)]
         if activeViewModel.isGoal {
             fields.append(BasicInfoField(fieldId: ActiveInfoField.goal.rawValue,
-                                         title: "Хочу накопить",
+                                         title: NSLocalizedString("Хочу накопить", comment: "Хочу накопить"),
                                          value: activeViewModel.goalAmount))
         }
         
@@ -114,28 +114,28 @@ class ActiveInfoViewModel : EntityInfoViewModel {
         }
         
         fields.append(BasicInfoField(fieldId: ActiveInfoField.invested.rawValue,
-                                     title: "Все инвестиции за \(defaultPeriodTitle)",
+                                     title: String(format: NSLocalizedString("Все инвестиции за %@", comment: "Все инвестиции за %@"), defaultPeriodTitle),
                                      value: activeViewModel.invested))
         
         if !activeViewModel.onlyBuyingAssets {
             fields.append(contentsOf: [BasicInfoField(fieldId: ActiveInfoField.spent.rawValue,
-                                                      title: "Расходы за \(defaultPeriodTitle)",
+                                                      title: String(format: NSLocalizedString("Расходы за %@", comment: "Расходы за %@"), defaultPeriodTitle),
                                                       value: activeViewModel.spent),
                                        BasicInfoField(fieldId: ActiveInfoField.bought.rawValue,
-                                                      title: "\(activeViewModel.activeType.buyingAssetsTitle) за \(defaultPeriodTitle)",
+                                                      title: String(format: NSLocalizedString("%@ за %@", comment: "%@ за %@"), activeViewModel.activeType.buyingAssetsTitle, defaultPeriodTitle),
                                                       value: activeViewModel.bought)])
         }
         
         
         fields.append(SwitchInfoField(fieldId: ActiveInfoField.hasIncomeSwitch.rawValue,
-                                      title: "Отображать источник дохода",
+                                      title: NSLocalizedString("Отображать источник дохода", comment: "Отображать источник дохода"),
                                       value: isIncomePlanned))
         
         if let annualPercent = activeViewModel.annualPercent,
             activeViewModel.active.plannedIncomeType == .annualPercents {
             
             fields.append(BasicInfoField(fieldId: ActiveInfoField.annualIncome.rawValue,
-                                         title: "Доходность",
+                                         title: NSLocalizedString("Доходность", comment: "Доходность"),
                                          value: annualPercent))
         }
         
@@ -143,30 +143,30 @@ class ActiveInfoViewModel : EntityInfoViewModel {
             activeViewModel.active.plannedIncomeType == .monthlyIncome {
             
             fields.append(BasicInfoField(fieldId: ActiveInfoField.monthlyPlannedIncome.rawValue,
-                                         title: "Доход в месяц",
+                                         title: NSLocalizedString("Доход в месяц", comment: "Доход в месяц"),
                                          value: monthlyPlannedIncome))
         }
         
         fields.append(ReminderInfoField(fieldId: ActiveInfoField.reminder.rawValue,
                                         reminder: reminder))
         fields.append(contentsOf: [ButtonInfoField(fieldId: ActiveInfoField.statistics.rawValue,
-                                                   title: "Статистика",
+                                                   title: NSLocalizedString("Статистика", comment: "Статистика"),
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: ActiveInfoField.costChange.rawValue,
-                                                   title: "Переоценить актив",
+                                                   title: NSLocalizedString("Переоценить актив", comment: "Переоценить актив"),
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: ActiveInfoField.transactionDevidents.rawValue,
-                                                   title: "Дивиденды",
+                                                   title: NSLocalizedString("Дивиденды", comment: "Дивиденды"),
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: ActiveInfoField.transactionInvest.rawValue,
-                                                   title: "Инвестировать",
+                                                   title: NSLocalizedString("Инвестировать", comment: "Инвестировать"),
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: ActiveInfoField.transactionSell.rawValue,
-                                                   title: "Продать",
+                                                   title: NSLocalizedString("Продать", comment: "Продать"),
                                                    iconName: nil,
                                                    isEnabled: true)])
         return fields

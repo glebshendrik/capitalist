@@ -109,7 +109,7 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
             viewModel.loadData()
         }.catch { e in
             print(e)
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
         }.finally {
             self.updateUI()
             self.set(self.examplesActivityIndicator, hidden: true)
@@ -122,7 +122,7 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
             viewModel.loadCollectionsData()
         }.catch { e in
             print(e)
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
         }.finally {
             self.updateCollectionUI()
             self.updateBackButtonUI()
@@ -163,7 +163,7 @@ extension TransactionablesCreationViewController : CurrenciesViewControllerDeleg
         firstly {
             viewModel.update(currency: currency)
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Возникла проблема при обновлении валюты", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Возникла проблема при обновлении валюты", comment: "Возникла проблема при обновлении валюты"), theme: .error)
         }.finally {
             self.set(self.examplesActivityIndicator, hidden: true)
             self.updateCurrencySelectorUI()

@@ -62,6 +62,10 @@ extension Container {
                 factoryDependant.factory = r.resolve(UIFactoryProtocol.self)
             }
             
+            if var analyticsManagerDependant = c as? AnalyticsManagerDependantProtocol {
+                analyticsManagerDependant.analyticsManager = r.resolve(AnalyticsManagerProtocol.self)
+            }
+            
             initCompleted?(r, c)
         }
         

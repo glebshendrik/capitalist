@@ -25,8 +25,8 @@ class BorrowEditViewController : FormTransactionsDependableEditViewController {
     
     override var shouldLoadData: Bool { return true }
     override var formTitle: String { return viewModel.title }
-    override var saveErrorMessage: String { return "Ошибка при сохранении" }
-    override var removeErrorMessage: String { return "Ошибка при удалении" }
+    override var saveErrorMessage: String { return NSLocalizedString("Ошибка при сохранении", comment: "Ошибка при сохранении") }
+    override var removeErrorMessage: String { return NSLocalizedString("Ошибка при удалении", comment: "Ошибка при удалении") }
     override var removeQuestionMessage: String { return viewModel.removeQuestion }
     
     override func registerFormFields() -> [String : FormField] {
@@ -291,7 +291,7 @@ extension BorrowEditViewController {
         tableController.borrowedAtField.placeholder = viewModel.borrowedAtTitle
         
         tableController.paydayField.text = viewModel.paydayFormatted
-        tableController.paydayField.placeholder = "Дата возврата"
+        tableController.paydayField.placeholder = NSLocalizedString("Дата возврата", comment: "Дата возврата")
     }
     
     func updateReturnButtonUI(reload: Bool = false, animated: Bool = false) {

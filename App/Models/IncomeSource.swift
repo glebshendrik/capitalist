@@ -63,15 +63,15 @@ struct IncomeSourceCreationForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: userId) {
-            errors["user_id"] = "Ошибка сохранения"
+            errors["user_id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(required: name) {
-            errors[CodingKeys.name.rawValue] = "Укажите название"
+            errors[CodingKeys.name.rawValue] = NSLocalizedString("Укажите название", comment: "Укажите название")
         }
         
         if  !Validator.isValid(required: currency) {
-            errors[CodingKeys.currency.rawValue] = "Укажите валюту"
+            errors[CodingKeys.currency.rawValue] = NSLocalizedString("Укажите валюту", comment: "Укажите валюту")
         }
         
         return errors
@@ -104,11 +104,11 @@ struct IncomeSourceUpdatingForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: id) {
-            errors["id"] = "Ошибка сохранения"
+            errors["id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(required: name) {
-            errors[CodingKeys.name.rawValue] = "Укажите название"
+            errors[CodingKeys.name.rawValue] = NSLocalizedString("Укажите название", comment: "Укажите название")
         }
 
         return errors

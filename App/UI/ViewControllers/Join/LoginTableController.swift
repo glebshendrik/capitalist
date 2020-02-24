@@ -23,7 +23,7 @@ class LoginTableController : SaveAccessoryFormFieldsTableViewController {
     
     var delegate: LoginTableControllerDelegate?
     
-    override var saveButtonTitle: String { return "Войти" }
+    override var saveButtonTitle: String { return NSLocalizedString("Войти", comment: "Войти") }
     override var saveButtonInForm: UIButton? {
         return signInButton
     }
@@ -37,7 +37,7 @@ class LoginTableController : SaveAccessoryFormFieldsTableViewController {
     private func setupLoginField() {
         register(responder: loginField.textField)
         setupAsEmail(loginField)
-        loginField.placeholder = "Email"
+        loginField.placeholder = NSLocalizedString("Email", comment: "Email")
         loginField.imageName = "email-icon"
         loginField.didChange { [weak self] text in
             self?.delegate?.didChange(login: text)
@@ -47,7 +47,7 @@ class LoginTableController : SaveAccessoryFormFieldsTableViewController {
     private func setupPasswordField() {
         register(responder: passwordField.textField)
         setupAsSecure(passwordField)
-        passwordField.placeholder = "Пароль"
+        passwordField.placeholder = NSLocalizedString("Пароль", comment: "Пароль")
         passwordField.imageName = "password-icon"
         passwordField.didChange { [weak self] text in
             self?.delegate?.didChange(password: text)

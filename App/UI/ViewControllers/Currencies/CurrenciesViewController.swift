@@ -45,7 +45,7 @@ class CurrenciesViewController : UIViewController, UIMessagePresenterManagerDepe
     
     func setupNavigationBarUI() {
         setupNavigationBarAppearance()        
-        navigationItem.title = "Выберите валюту"
+        navigationItem.title = NSLocalizedString("Выберите валюту", comment: "Выберите валюту")
     }
         
     private func loadData() {
@@ -56,7 +56,7 @@ class CurrenciesViewController : UIViewController, UIMessagePresenterManagerDepe
             self.updateUI()
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки валют", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки валют", comment: "Ошибка загрузки валют"), theme: .error)
         }.finally {
             self.set(self.activityIndicator, hidden: true)
         }

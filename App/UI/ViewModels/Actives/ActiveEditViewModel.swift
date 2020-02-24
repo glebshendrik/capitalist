@@ -57,18 +57,28 @@ class ActiveEditViewModel {
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
     var reminderTitle: String {
-        return reminderViewModel.isReminderSet ? "Изменить напоминание" : "Установить напоминание"
+        return reminderViewModel.isReminderSet
+            ? NSLocalizedString("Изменить напоминание", comment: "Изменить напоминание")
+            : NSLocalizedString("Установить напоминание", comment: "Установить напоминание")
     }
     
     var reminder: String? {
         return reminderViewModel.reminder
     }
             
-    var title: String { return isNew ? "Новый актив" : "Актив" }
+    var title: String {
+        return isNew
+            ? NSLocalizedString("Новый актив", comment: "Новый актив")
+            : NSLocalizedString("Актив", comment: "Актив")
+    }
     
-    var costTitle: String { return selectedActiveType?.costTitle ?? "Стоимость актива" }
+    var costTitle: String {
+        return selectedActiveType?.costTitle ?? NSLocalizedString("Стоимость актива", comment: "Стоимость актива")
+    }
     
-    var monthlyPaymentTitle: String { return selectedActiveType?.monthlyPaymentTitle ?? "Планирую инвестировать в месяц" }
+    var monthlyPaymentTitle: String {
+        return selectedActiveType?.monthlyPaymentTitle ?? NSLocalizedString("Планирую инвестировать в месяц", comment: "Планирую инвестировать в месяц")        
+    }
         
     var iconDefaultImageName: String { return TransactionableType.active.defaultIconName(basketType: basketType) }
         

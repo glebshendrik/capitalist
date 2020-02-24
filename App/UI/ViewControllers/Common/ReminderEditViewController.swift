@@ -19,7 +19,7 @@ class ReminderEditViewController : FormNavBarButtonsEditViewController {
     private var delegate: ReminderEditViewControllerDelegate?
     private var tableController: ReminderEditTableViewController!
     
-    override var formTitle: String { return "Напоминание" }
+    override var formTitle: String { return NSLocalizedString("Напоминание", comment: "Напоминание") }
     
     func set(reminderViewModel: ReminderViewModel, delegate: ReminderEditViewControllerDelegate?) {
         self.viewModel = reminderViewModel

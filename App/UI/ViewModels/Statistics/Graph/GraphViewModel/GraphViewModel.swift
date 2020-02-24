@@ -36,13 +36,12 @@ class GraphViewModel {
         guard let period = periodsViewModel.currentDateRangeFilterTitle else { return nil }
         switch graphType {
         case .all:
-            return "Остаток на \(period)"
+            return String(format: NSLocalizedString("Остаток на %@", comment: "Остаток на %@"), period)
         case .incomes:
-            return "Доход за \(period)"
+            return String(format: NSLocalizedString("Доход за %@", comment: "Доход за %@"), period)
         case .expenses:
-            return "Расходы за \(period)"
+            return String(format: NSLocalizedString("Расходы за %@", comment: "Расходы за %@"), period)
         }
-        
     }
     
     var dateRange: DateRangeTransactionFilter? {

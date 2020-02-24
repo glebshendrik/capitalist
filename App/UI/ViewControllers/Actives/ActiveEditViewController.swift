@@ -23,8 +23,8 @@ class ActiveEditViewController : FormTransactionsDependableEditViewController {
     
     override var shouldLoadData: Bool { return true }
     override var formTitle: String { return viewModel.title }
-    override var saveErrorMessage: String { return "Ошибка при сохранении" }
-    override var removeErrorMessage: String { return "Ошибка при удалении" }
+    override var saveErrorMessage: String { return NSLocalizedString("Ошибка при сохранении", comment: "Ошибка при сохранении") }
+    override var removeErrorMessage: String { return NSLocalizedString("Ошибка при удалении", comment: "Ошибка при удалении") }
     override var removeQuestionMessage: String { return TransactionableType.active.removeQuestion }
     
     override func registerFormFields() -> [String : FormField] {

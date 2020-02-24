@@ -67,10 +67,10 @@ extension MainViewController : TransactionableCellDelegate {
             }
         }
         
-        let actions: [UIAlertAction] = [UIAlertAction(title: "Удалить",
+        let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
                                                       style: .destructive,
                                                       handler: removeAction),
-                                        UIAlertAction(title: "Удалить вместе с транзакциями",
+                                        UIAlertAction(title: NSLocalizedString("Удалить вместе с транзакциями", comment: "Удалить вместе с транзакциями"),
                                                       style: .destructive,
                                                       handler: removeWithTransactionsAction)]
         sheet(title: alertTitle, actions: actions)

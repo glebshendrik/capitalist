@@ -48,31 +48,43 @@ class BorrowInfoViewModel : EntityInfoViewModel {
         
     var nameTitle: String? {
         guard let type = borrowType else { return nil }
-        return type == .debt ? "Кто вам должен" : "Кому вы должны"
+        return type == .debt
+            ? NSLocalizedString("Кто вам должен", comment: "Кто вам должен")
+            : NSLocalizedString("Кому вы должны", comment: "Кому вы должны")
     }
     
     var amountTitle: String? {
         guard let type = borrowType else { return nil }
-        return type == .debt ? "Сумма долга" : "Сумма займа"
+        return type == .debt
+            ? NSLocalizedString("Сумма долга", comment: "Сумма долга")
+            : NSLocalizedString("Сумма займа", comment: "Сумма займа")
     }
     
     var amountReturnedTitle: String? {
         guard let type = borrowType else { return nil }
-        return type == .debt ? "Вам вернули" : "Вы вернули"
+        return type == .debt
+            ? NSLocalizedString("Вам вернули", comment: "Вам вернули")
+            : NSLocalizedString("Вы вернули", comment: "Вы вернули")
     }
         
     var borrowedAtTitle: String? {
         guard let type = borrowType else { return nil }
-        return type == .debt ? "Когда дали в долг" : "Когда взяли взаймы"
+        return type == .debt
+            ? NSLocalizedString("Когда дали в долг", comment: "Когда дали в долг")
+            : NSLocalizedString("Когда взяли взаймы", comment: "Когда взяли взаймы")
     }
         
     var returnTitle: String? {
         guard let type = borrowType, let borrowViewModel = borrowViewModel else { return nil }
         if borrowViewModel.isReturned {
-            return type == .debt ? "Долг возвращен" : "Займ возвращен"
+            return type == .debt
+                ? NSLocalizedString("Долг возвращен", comment: "Долг возвращен")
+                : NSLocalizedString("Займ возвращен", comment: "Займ возвращен")
         }
         else {
-            return type == .debt ? "Возврат долга" : "Вернуть займ"
+            return type == .debt
+                ? NSLocalizedString("Возврат долга", comment: "Возврат долга")
+                : NSLocalizedString("Вернуть займ", comment: "Вернуть займ")
         }
     }
     
@@ -149,7 +161,7 @@ class BorrowInfoViewModel : EntityInfoViewModel {
                                      value: borrowViewModel.amountReturned))
         
         fields.append(BasicInfoField(fieldId: BorrowInfoField.amountLeft.rawValue,
-                                     title: "Осталось вернуть",
+                                     title: NSLocalizedString("Осталось вернуть", comment: "Осталось вернуть"),
                                      value: borrowViewModel.amountLeft))
         
         fields.append(BasicInfoField(fieldId: BorrowInfoField.borrowedAt.rawValue,
@@ -158,13 +170,13 @@ class BorrowInfoViewModel : EntityInfoViewModel {
         
         if let payday = borrowViewModel.paydayFormatted {
             fields.append(BasicInfoField(fieldId: BorrowInfoField.payday.rawValue,
-                                         title: "Дата возврата",
+                                         title: NSLocalizedString("Дата возврата", comment: "Дата возврата"),
                                          value: payday))
         }
         
         if let comment = borrowViewModel.comment {
             fields.append(BasicInfoField(fieldId: BorrowInfoField.comment.rawValue,
-                                         title: "Комментарий",
+                                         title: NSLocalizedString("Комментарий", comment: "Комментарий"),
                                          value: comment))
         }
         

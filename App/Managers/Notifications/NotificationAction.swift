@@ -25,11 +25,11 @@ enum NotificationAction: String {
     // The localized title of the action button.
     var title: String {
         switch self {
-        case .show: return "Открыть"
-        case .cancel: return "Отмена"
-        case .snoozeHour: return "Напомнить через час"
-        case .snoozeDay: return "Напомнить через день"
-        case .snoozeWeek: return "Напомнить через неделю"
+        case .show:         return NSLocalizedString("Открыть", comment: "Открыть")
+        case .cancel:       return NSLocalizedString("Отмена", comment: "Отмена")
+        case .snoozeHour:   return NSLocalizedString("Напомнить через час", comment: "Напомнить через час")
+        case .snoozeDay:    return NSLocalizedString("Напомнить через день", comment: "Напомнить через день")
+        case .snoozeWeek:   return NSLocalizedString("Напомнить через неделю", comment: "Напомнить через неделю")
         }
     }
     

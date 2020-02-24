@@ -47,7 +47,9 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
     }
     
     var transactionTitle: String {
-        return isBorrow ? "Добавить долг" : "Добавить расход"
+        return isBorrow
+            ? NSLocalizedString("Добавить долг", comment: "Добавить долг")
+            : NSLocalizedString("Добавить расход", comment: "Добавить расход")
     }
     
     override var transactionable: Transactionable? {
@@ -82,17 +84,17 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
                                                        iconURL: selectedIconURL,
                                                        placeholder: TransactionableType.expenseCategory.defaultIconName(basketType: basketType)),
                                          BasicInfoField(fieldId: ExpenseCategoryInfoField.expense.rawValue,
-                                                        title: "Расход в этом месяце",
+                                                        title: NSLocalizedString("Расход в этом месяце", comment: "Расход в этом месяце"),
                                                         value: expenseCategoryViewModel?.amount)]
         if let plannedAtPeriod = expenseCategoryViewModel?.plannedAtPeriod {
             fields.append(BasicInfoField(fieldId: ExpenseCategoryInfoField.plannedExpense.rawValue,
-                                         title: "Запланировано",
+                                         title: NSLocalizedString("Запланировано", comment: "Запланировано"),
                                          value: plannedAtPeriod))
         }
         fields.append(ReminderInfoField(fieldId: ExpenseCategoryInfoField.reminder.rawValue,
                                         reminder: reminder))
         fields.append(contentsOf: [ButtonInfoField(fieldId: ExpenseCategoryInfoField.statistics.rawValue,
-                                                   title: "Статистика",
+                                                   title: NSLocalizedString("Статистика", comment: "Статистика"),
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: ExpenseCategoryInfoField.transaction.rawValue,

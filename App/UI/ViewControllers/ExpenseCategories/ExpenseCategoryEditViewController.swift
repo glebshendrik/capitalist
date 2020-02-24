@@ -23,10 +23,18 @@ class ExpenseCategoryEditViewController : FormTransactionsDependableEditViewCont
     
     override var shouldLoadData: Bool { return viewModel.isNew }
     override var formTitle: String {
-        return viewModel.isNew ? "Новая категория трат" : "Категория трат"
+        return viewModel.isNew
+            ? NSLocalizedString("Новая категория трат", comment: "Новая категория трат")
+            : NSLocalizedString("Категория трат", comment: "Категория трат")
     }
-    override var saveErrorMessage: String { return "Ошибка при сохранении категории трат" }
-    override var removeErrorMessage: String { return "Ошибка при удалении категории трат" }
+    override var saveErrorMessage: String {
+        return NSLocalizedString("Ошибка при сохранении категории трат", comment: "Ошибка при сохранении категории трат")
+    }
+    
+    override var removeErrorMessage: String {
+        return NSLocalizedString("Ошибка при удалении категории трат", comment: "Ошибка при удалении категории трат")
+    }
+    
     override var removeQuestionMessage: String { return TransactionableType.expenseCategory.removeQuestion }
     
     override func registerFormFields() -> [String : FormField] {

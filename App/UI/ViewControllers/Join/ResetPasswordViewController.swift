@@ -14,8 +14,8 @@ class ResetPasswordViewController : FormSubmitViewController {
     var viewModel: ResetPasswordViewModel!
     var tableController: ResetPasswordTableController!
     
-    override var formTitle: String { return "Смена пароля" }
-    override var saveErrorMessage: String { return "Ошибка при изменении пароля" }
+    override var formTitle: String { return NSLocalizedString("Смена пароля", comment: "Смена пароля") }
+    override var saveErrorMessage: String { return NSLocalizedString("Ошибка при изменении пароля", comment: "Ошибка при изменении пароля") }
     
     func set(email: String?) {
         self.viewModel.email = email
@@ -39,9 +39,9 @@ class ResetPasswordViewController : FormSubmitViewController {
     override func handleSave(_ error: Error) {
         switch error {
         case APIRequestError.forbidden:
-            self.messagePresenterManager.show(validationMessage: "Код восстановления неверный или больше не действует")
+            self.messagePresenterManager.show(validationMessage: NSLocalizedString("Код восстановления неверный или больше не действует", comment: "Код восстановления неверный или больше не действует"))
         case APIRequestError.notFound:
-            self.messagePresenterManager.show(validationMessage: "Пользователь с таким адресом не найден")
+            self.messagePresenterManager.show(validationMessage: NSLocalizedString("Пользователь с таким адресом не найден", comment: "Пользователь с таким адресом не найден"))
         default:
             super.handleSave(error)
         }

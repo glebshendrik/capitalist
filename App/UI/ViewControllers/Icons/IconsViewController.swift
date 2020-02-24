@@ -46,7 +46,7 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
     
     func setupNavigationBarUI() {
         setupNavigationBarAppearance()        
-        navigationItem.title = "Выберите иконку"
+        navigationItem.title = NSLocalizedString("Выберите иконку", comment: "Выберите иконку")
     }
         
     private func loadData() {
@@ -57,7 +57,7 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
             self.updateUI()
         }
         .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки иконок", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки иконок", comment: "Ошибка загрузки иконок"), theme: .error)
         }.finally {
             self.set(self.activityIndicator, hidden: true)
         }

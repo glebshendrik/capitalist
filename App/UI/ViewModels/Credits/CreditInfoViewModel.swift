@@ -48,12 +48,14 @@ class CreditInfoViewModel : EntityInfoViewModel {
     }
         
     override var title: String? {
-        return creditViewModel?.name ?? "Кредит"
+        return creditViewModel?.name ?? NSLocalizedString("Кредит", comment: "Кредит")
     }
     
     var payTitle: String? {
         guard let creditViewModel = creditViewModel else { return nil }
-        return creditViewModel.isPaid ? "Кредит выплачен" : "Оплатить"
+        return creditViewModel.isPaid
+            ? NSLocalizedString("Кредит выплачен", comment: "Кредит выплачен")
+            : NSLocalizedString("Оплатить", comment: "Оплатить")
     }
     
     var payIconName: String? {
@@ -118,43 +120,43 @@ class CreditInfoViewModel : EntityInfoViewModel {
                                                        iconURL: selectedIconURL,
                                                        placeholder: "credit-default-icon"),
                                          BasicInfoField(fieldId: CreditInfoField.creditType.rawValue,
-                                                        title: "Тип кредита",
+                                                        title: NSLocalizedString("Тип кредита", comment: "Тип кредита"),
                                                         value: creditViewModel.typeName)]
         
         fields.append(BasicInfoField(fieldId: CreditInfoField.amount.rawValue,
-                                     title: "Cумма кредита",
+                                     title: NSLocalizedString("Cумма кредита", comment: "Cумма кредита"),
                                      value: creditViewModel.amount))
         
         fields.append(BasicInfoField(fieldId: CreditInfoField.gotAt.rawValue,
-                                     title: "Дата выдачи",
+                                     title: NSLocalizedString("Дата выдачи", comment: "Дата выдачи"),
                                      value: creditViewModel.gotAtFormatted))
         
         fields.append(BasicInfoField(fieldId: CreditInfoField.period.rawValue,
-                                     title: "Срок",
+                                     title: NSLocalizedString("Срок", comment: "Срок"),
                                      value: creditViewModel.periodFormatted))
         
         fields.append(BasicInfoField(fieldId: CreditInfoField.returnAmount.rawValue,
-                                     title: "Полная сумма выплаты",
+                                     title: NSLocalizedString("Полная сумма выплаты", comment: "Полная сумма выплаты"),
                                      value: creditViewModel.returnAmount))
         
         fields.append(BasicInfoField(fieldId: CreditInfoField.paidAmount.rawValue,
-                                     title: "Уже оплатил",
+                                     title: NSLocalizedString("Уже оплатил", comment: "Уже оплатил"),
                                      value: creditViewModel.paidAmount))
         
         fields.append(BasicInfoField(fieldId: CreditInfoField.amountLeft.rawValue,
-                                     title: "Осталось оплатить",
+                                     title: NSLocalizedString("Осталось оплатить", comment: "Осталось оплатить"),
                                      value: creditViewModel.amountLeft))
         
         if creditViewModel.areExpensesPlanned {
             fields.append(BasicInfoField(fieldId: CreditInfoField.planned.rawValue,
-                                         title: "Ежемесячная выплата",
+                                         title: NSLocalizedString("Ежемесячная выплата", comment: "Ежемесячная выплата"),
                                          value: creditViewModel.monthlyPayment))
         }
         
         fields.append(ReminderInfoField(fieldId: CreditInfoField.reminder.rawValue,
                                         reminder: reminder))
         fields.append(contentsOf: [ButtonInfoField(fieldId: CreditInfoField.statistics.rawValue,
-                                                   title: "Статистика",
+                                                   title: NSLocalizedString("Статистика", comment: "Статистика"),
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: CreditInfoField.transaction.rawValue,

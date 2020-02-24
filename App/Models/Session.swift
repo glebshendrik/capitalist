@@ -80,11 +80,11 @@ struct SessionCreationForm : Encodable, Validatable {
         }
         
         if !Validator.isValid(email: email) {
-            errors["email"] = "Введите корректный email"
+            errors["email"] = NSLocalizedString("Введите корректный email", comment: "Введите корректный email")
         }
         
         if !Validator.isValid(password: password) {
-            errors["password"] = "Введите корректный пароль"
+            errors["password"] = NSLocalizedString("Введите корректный пароль", comment: "Введите корректный пароль")
         }
         
         return errors

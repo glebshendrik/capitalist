@@ -69,28 +69,28 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                                        iconURL: selectedIconURL,
                                                        placeholder: TransactionableType.expenseSource.defaultIconName),
                                          BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
-                                                        title: "Баланс",
+                                                        title: NSLocalizedString("Баланс", comment: "Баланс"),
                                                         value: expenseSourceViewModel?.amount)]
         if let expenseSourceViewModel = expenseSourceViewModel, expenseSourceViewModel.hasCreditLimit {
             fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.creditLimit.rawValue,
-                                         title: "Кредитный лимит",
+                                         title: NSLocalizedString("Кредитный лимит", comment: "Кредитный лимит"),
                                          value: expenseSourceViewModel.creditLimit))
         }
         if let expenseSourceViewModel = expenseSourceViewModel, expenseSourceViewModel.inCredit {
             fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.credit.rawValue,
-                                         title: "Ваш кредитный долг",
+                                         title: NSLocalizedString("Ваш кредитный долг", comment: "Ваш кредитный долг"),
                                          value: expenseSourceViewModel.credit))
         }
         fields.append(contentsOf: [ButtonInfoField(fieldId: ExpenseSourceInfoField.statistics.rawValue,
-                                                   title: "Статистика",
+                                                   title: NSLocalizedString("Статистика", comment: "Статистика"),
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: ExpenseSourceInfoField.transactionIncome.rawValue,
-                                                   title: "Добавить доход",
+                                                   title: NSLocalizedString("Добавить доход", comment: "Добавить доход"),
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: ExpenseSourceInfoField.transactionExpense.rawValue,
-                                                   title: "Добавить расход",
+                                                   title: NSLocalizedString("Добавить расход", comment: "Добавить расход"),
                                                    iconName: nil,
                                                    isEnabled: true)])
         return fields

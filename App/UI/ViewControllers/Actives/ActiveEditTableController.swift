@@ -79,7 +79,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     }
     
     func setupActiveTypeField() {
-        activeTypeField.placeholder = "Тип актива"
+        activeTypeField.placeholder = NSLocalizedString("Тип актива", comment: "Тип актива")
         activeTypeField.imageName = "active-type-icon"
         activeTypeField.didTap { [weak self] in
             self?.delegate?.didTapActiveType()
@@ -88,7 +88,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     func setupNameField() {
         register(responder: nameField.textField)
-        nameField.placeholder = "Название"
+        nameField.placeholder = NSLocalizedString("Название", comment: "Название")
         nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
@@ -96,7 +96,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     }
     
     func setupCurrencyField() {
-        currencyField.placeholder = "Валюта"
+        currencyField.placeholder = NSLocalizedString("Валюта", comment: "Валюта")
         currencyField.imageName = "currency-icon"
         currencyField.didTap { [weak self] in
             self?.delegate?.didTapCurrency()
@@ -105,7 +105,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     func setupCostField() {
         register(responder: costField.textField)
-        costField.placeholder = "Стоимость актива"
+        costField.placeholder = NSLocalizedString("Стоимость актива", comment: "Стоимость актива")
         costField.imageName = "amount-icon"
         costField.didChange { [weak self] text in
             self?.delegate?.didChange(cost: text)
@@ -114,7 +114,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     func setupAlreadyPaidField() {
         register(responder: alreadyPaidField.textField)
-        alreadyPaidField.placeholder = "Потратил ранее"
+        alreadyPaidField.placeholder = NSLocalizedString("Потратил ранее", comment: "Потратил ранее")
         alreadyPaidField.imageName = "amount-icon"
         alreadyPaidField.didChange { [weak self] text in
             self?.delegate?.didChange(alreadyPaid: text)
@@ -123,7 +123,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     func setupGoalAmountField() {
         register(responder: goalAmountField.textField)
-        goalAmountField.placeholder = "Хочу накопить"
+        goalAmountField.placeholder = NSLocalizedString("Хочу накопить", comment: "Хочу накопить")
         goalAmountField.imageName = "planned-amount-icon"
         goalAmountField.didChange { [weak self] text in
             self?.delegate?.didChange(goalAmount: text)
@@ -132,7 +132,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     func setupMonthlyPaymentField() {
         register(responder: monthlyPaymentField.textField)
-        monthlyPaymentField.placeholder = "Планирую инвестировать в месяц"
+        monthlyPaymentField.placeholder = NSLocalizedString("Планирую инвестировать в месяц", comment: "Планирую инвестировать в месяц")
         monthlyPaymentField.imageName = "planned-amount-icon"
         monthlyPaymentField.didChange { [weak self] text in
             self?.delegate?.didChange(monthlyPayment: text)
@@ -140,7 +140,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     }
     
     func setupPlannedIncomeSwitchField() {
-        plannedIncomeSwitchField.placeholder = "Актив приносит доход"
+        plannedIncomeSwitchField.placeholder = NSLocalizedString("Актив приносит доход", comment: "Актив приносит доход")
         plannedIncomeSwitchField.imageName = "included_in_balance_icon"
         plannedIncomeSwitchField.didSwitch { [weak self] isIncomePlanned in
             self?.delegate?.didChange(isIncomePlanned: isIncomePlanned)
@@ -148,7 +148,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     }
     
     func setupActiveIncomeTypeField() {
-        activeIncomeTypeField.placeholder = "Способ расчета дохода"
+        activeIncomeTypeField.placeholder = NSLocalizedString("Способ расчета дохода", comment: "Способ расчета дохода")
         activeIncomeTypeField.imageName = "active-type-icon"
         activeIncomeTypeField.didTap { [weak self] in
             self?.delegate?.didTapActiveIncomeType()
@@ -157,7 +157,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     func setupMonthlyPlannedIncomeField() {
         register(responder: monthlyPlannedIncomeField.textField)
-        monthlyPlannedIncomeField.placeholder = "Планируемый доход в месяц"
+        monthlyPlannedIncomeField.placeholder = NSLocalizedString("Планируемый доход в месяц", comment: "Планируемый доход в месяц")
         monthlyPlannedIncomeField.imageName = "amount-icon"
         monthlyPlannedIncomeField.didChange { [weak self] text in
             self?.delegate?.didChange(monthlyPlannedIncome: text)
@@ -166,7 +166,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     func setupAnnualPercentField() {
         register(responder: annualPercentField.textField)
-        annualPercentField.placeholder = "Ожидаемый годовой процент"
+        annualPercentField.placeholder = NSLocalizedString("Ожидаемый годовой процент", comment: "Ожидаемый годовой процент")
         annualPercentField.imageName = "percent-icon"
         annualPercentField.didChange { [weak self] text in
             self?.delegate?.didChange(annualPercent: text)

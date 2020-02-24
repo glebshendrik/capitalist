@@ -74,7 +74,9 @@ class CreditEditViewModel {
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
     var reminderTitle: String {
-        return reminderViewModel.isReminderSet ? "Изменить напоминание" : "Установить напоминание"
+        return reminderViewModel.isReminderSet
+            ? NSLocalizedString("Изменить напоминание", comment: "Изменить напоминание")
+            : NSLocalizedString("Установить напоминание", comment: "Установить напоминание")
     }
     
     var reminder: String? {
@@ -85,7 +87,11 @@ class CreditEditViewModel {
         return gotAt.dateString(ofStyle: .short)
     }
         
-    var title: String { return isNew ? "Новый кредит" : "Кредит" }
+    var title: String {
+        return isNew
+            ? NSLocalizedString("Новый кредит", comment: "Новый кредит")
+            : NSLocalizedString("Кредит", comment: "Кредит")        
+    }
     
     var iconDefaultImageName: String { return "credit-default-icon" }
     

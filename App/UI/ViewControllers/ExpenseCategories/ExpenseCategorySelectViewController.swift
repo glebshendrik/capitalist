@@ -41,7 +41,7 @@ class ExpenseCategorySelectViewController : UIViewController, UIMessagePresenter
             self.updateUI()
         }
         .catch { e in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки категорий трат", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки категорий трат", comment: "Ошибка загрузки категорий трат"), theme: .error)
             self.close()
         }.finally {
             self.set(self.loader, hidden: true)

@@ -70,7 +70,9 @@ class ExpenseSourceEditViewModel {
     }
     
     var bankButtonTitle: String {
-        return accountConnected ? "Отключить банк" : "Подключить банк"
+        return accountConnected
+            ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
+            : NSLocalizedString("Подключить банк", comment: "Подключить банк")
     }
     
     // Permissions

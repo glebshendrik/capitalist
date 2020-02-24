@@ -74,7 +74,8 @@ extension BorrowsViewController {
     
     private func setupTabs() {
         guard !tabsInitialized else { return }
-        tabs.segments = LabelSegment.segments(withTitles: ["Я ДОЛЖЕН", "МНЕ ДОЛЖНЫ"],
+        tabs.segments = LabelSegment.segments(withTitles: [NSLocalizedString("Я ДОЛЖЕН", comment: "Я ДОЛЖЕН"),
+                                                           NSLocalizedString("МНЕ ДОЛЖНЫ", comment: "МНЕ ДОЛЖНЫ")],
                                               normalBackgroundColor: UIColor.clear,
                                               normalFont: UIFont(name: "Roboto-Regular", size: 12)!,
                                               normalTextColor: UIColor.by(.white100),
@@ -216,7 +217,7 @@ extension BorrowsViewController {
         firstly {
             viewModel.loadLoans()
         }.catch { e in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки займов", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки займов", comment: "Ошибка загрузки займов"), theme: .error)
         }.finally {
             self.set(self.loansActivityIndicator, hidden: true)
             self.updateLoansUI()
@@ -231,7 +232,7 @@ extension BorrowsViewController {
         firstly {
             viewModel.loadDebts()
         }.catch { e in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки долгов", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки долгов", comment: "Ошибка загрузки долгов"), theme: .error)
         }.finally {
             self.set(self.debtsActivityIndicator, hidden: true)
             self.updateDebtsUI()

@@ -30,7 +30,7 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     }
     
     func setupProviderConnection(for providerViewModel: ProviderViewModel) {
-        messagePresenterManager.showHUD(with: "Загрузка подключения к банку...")
+        messagePresenterManager.showHUD(with: NSLocalizedString("Загрузка подключения к банку...", comment: "Загрузка подключения к банку..."))
         firstly {
             viewModel.loadProviderConnection(for: providerViewModel.id)
             }.ensure {
@@ -41,7 +41,7 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
                 if case BankConnectionError.providerConnectionNotFound = error {
                     self.createSaltEdgeConnectSession(for: providerViewModel)
                 } else {
-                    self.messagePresenterManager.show(navBarMessage: "Не удалось загрузить подключение к банку", theme: .error)
+                    self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось загрузить подключение к банку", comment: "Не удалось загрузить подключение к банку"), theme: .error)
                 }
         }
     }
@@ -54,7 +54,7 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     }
     
     func createSaltEdgeConnectSession(for providerViewModel: ProviderViewModel) {
-        messagePresenterManager.showHUD(with: "Подготовка подключения к банку...")
+        messagePresenterManager.showHUD(with: NSLocalizedString("Подготовка подключения к банку...", comment: "Подготовка подключения к банку..."))
         firstly {
             viewModel.createBankConnectionSession(for: providerViewModel)
             }.ensure {
@@ -62,7 +62,7 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
             }.get { providerViewModel in
                 self.showProviderConnectionViewController(for: providerViewModel)
             }.catch { _ in
-                self.messagePresenterManager.show(navBarMessage: "Не удалось создать подключение к банку", theme: .error)
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
         }
     }
     
@@ -72,7 +72,7 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
     }
     
     func didConnect(connectionId: String, connectionSecret: String, providerViewModel: ProviderViewModel) {
-        messagePresenterManager.showHUD(with: "Создание подключения к банку...")
+        messagePresenterManager.showHUD(with: NSLocalizedString("Создание подключения к банку...", comment: "Создание подключения к банку..."))
         firstly {
             viewModel.createProviderConnection(connectionId: connectionId, connectionSecret: connectionSecret, providerViewModel: providerViewModel)
             }.ensure {
@@ -80,15 +80,15 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Pro
             }.get { providerConnection in
                 self.showAccountsViewController(for: providerConnection)
             }.catch { error in
-                self.messagePresenterManager.show(navBarMessage: "Не удалось создать подключение к банку", theme: .error)
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
         }
     }
     
     func didNotConnect() {
-        self.messagePresenterManager.show(navBarMessage: "Не удалось подключиться к банку", theme: .error)
+        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
     }
     
     func didNotConnect(with: Error) {
-        self.messagePresenterManager.show(navBarMessage: "Не удалось подключиться к банку", theme: .error)
+        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
     }
 }

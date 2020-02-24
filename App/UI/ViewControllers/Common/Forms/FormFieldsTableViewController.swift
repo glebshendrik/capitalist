@@ -89,7 +89,7 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
 
 class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController {
     var saveButton: KeyboardHighlightButton = KeyboardHighlightButton()
-    var saveButtonTitle: String { return "Save" }
+    var saveButtonTitle: String { return NSLocalizedString("Save", comment: "Save") }
     var saveButtonInForm: UIButton? { return nil }
     
     override func viewWillAppear(_ animated: Bool) {

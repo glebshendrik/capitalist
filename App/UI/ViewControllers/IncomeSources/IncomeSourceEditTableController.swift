@@ -46,7 +46,7 @@ class IncomeSourceEditTableController : FormFieldsTableViewController {
     
     private func setupNameField() {
         register(responder: nameField.textField)
-        nameField.placeholder = "Название"
+        nameField.placeholder = NSLocalizedString("Название", comment: "Название")
         nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
@@ -54,7 +54,7 @@ class IncomeSourceEditTableController : FormFieldsTableViewController {
     }
     
     private func setupCurrencyField() {
-        currencyField.placeholder = "Валюта"
+        currencyField.placeholder = NSLocalizedString("Валюта", comment: "Валюта")
         currencyField.imageName = "currency-icon"
         currencyField.didTap { [weak self] in
             self?.delegate?.didTapCurrency()
@@ -63,7 +63,7 @@ class IncomeSourceEditTableController : FormFieldsTableViewController {
     
     func setupMonthlyPlannedField() {
         register(responder: monthlyPlannedField.textField)
-        monthlyPlannedField.placeholder = "Планируемый доход в месяц"
+        monthlyPlannedField.placeholder = NSLocalizedString("Планируемый доход в месяц", comment: "Планируемый доход в месяц")
         monthlyPlannedField.imageName = "planned-amount-icon"
         monthlyPlannedField.didChange { [weak self] text in
             self?.delegate?.didChange(monthlyPlanned: text)

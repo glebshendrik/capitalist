@@ -49,7 +49,7 @@ class ExpenseSourceSelectViewController : UIViewController, UIMessagePresenterMa
             self.updateUI()
         }
         .catch { e in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки кошельков", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки кошельков", comment: "Ошибка загрузки кошельков"), theme: .error)
             self.close()
         }.finally {
             self.set(self.loader, hidden: true)

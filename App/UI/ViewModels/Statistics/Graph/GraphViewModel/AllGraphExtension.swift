@@ -56,9 +56,9 @@ extension GraphViewModel {
     
     private func title(by type: TransactionType) -> String {
         switch type {
-        case .income:       return "Доход"
-        case .expense:      return "Расходы"
-        case .fundsMove:    return "Переводы"
+        case .income:       return NSLocalizedString("Доход", comment: "Доход")
+        case .expense:      return NSLocalizedString("Расходы", comment: "Расходы")
+        case .fundsMove:    return NSLocalizedString("Переводы", comment: "Переводы")
         }
     }
     

@@ -62,23 +62,23 @@ struct ExpenseSourceCreationForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: userId) {
-            errors["user_id"] = "Ошибка сохранения"
+            errors["user_id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(required: name) {
-            errors[CodingKeys.name.rawValue] = "Укажите название"
+            errors[CodingKeys.name.rawValue] = NSLocalizedString("Укажите название", comment: "Укажите название")
         }
         
         if  !Validator.isValid(required: currency) {
-            errors[CodingKeys.currency.rawValue] = "Укажите валюту"
+            errors[CodingKeys.currency.rawValue] = NSLocalizedString("Укажите валюту", comment: "Укажите валюту")
         }
         
         if !Validator.isValid(balance: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = "Укажите текущий баланс"
+            errors[CodingKeys.amountCents.rawValue] = NSLocalizedString("Укажите текущий баланс", comment: "Укажите текущий баланс")
         }
                 
         if !Validator.isValid(money: creditLimitCents) {
-            errors[CodingKeys.creditLimitCents.rawValue] = "Укажите кредитный лимит (0 по умолчанию)"
+            errors[CodingKeys.creditLimitCents.rawValue] = NSLocalizedString("Укажите кредитный лимит (0 по умолчанию)", comment: "Укажите кредитный лимит (0 по умолчанию)")
         }
         
         return errors
@@ -105,19 +105,19 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: id) {
-            errors["id"] = "Ошибка сохранения"
+            errors["id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(required: name) {
-            errors[CodingKeys.name.rawValue] = "Укажите название"
+            errors[CodingKeys.name.rawValue] = NSLocalizedString("Укажите название", comment: "Укажите название")
         }
         
         if !Validator.isValid(balance: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = "Укажите текущий баланс"
+            errors[CodingKeys.amountCents.rawValue] = NSLocalizedString("Укажите текущий баланс", comment: "Укажите текущий баланс")
         }
                 
         if !Validator.isValid(money: creditLimitCents) {
-            errors[CodingKeys.creditLimitCents.rawValue] = "Укажите кредитный лимит (0 по умолчанию)"
+            errors[CodingKeys.creditLimitCents.rawValue] = NSLocalizedString("Укажите кредитный лимит (0 по умолчанию)", comment: "Укажите кредитный лимит (0 по умолчанию)")
         }
         
         return errors

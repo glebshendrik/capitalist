@@ -109,51 +109,65 @@ class BorrowEditViewModel {
     var title: String {
         guard let type = type else { return "" }
         switch (isNew, type == .debt, type == .loan) {
-        case   (true,  true,   false):      return "Новый долг (вам должны)"
-        case   (true,  false,  true):       return "Новый займ (вы должны)"
-        case   (false,  true,   false):     return "Долг (вам должны)"
-        case   (false,  false,  true):      return "Займ (вы должны)"
+        case   (true,  true,   false):      return NSLocalizedString("Новый долг (вам должны)", comment: "Новый долг (вам должны)")
+        case   (true,  false,  true):       return NSLocalizedString("Новый займ (вы должны)", comment: "Новый займ (вы должны)")
+        case   (false,  true,   false):     return NSLocalizedString("Долг (вам должны)", comment: "Долг (вам должны)")
+        case   (false,  false,  true):      return NSLocalizedString("Займ (вы должны)", comment: "Займ (вы должны)")
         default: return ""
         }
     }
     
     var nameTitle: String? {
         guard let type = type else { return nil }
-        return type == .debt ? "Кто вам должен" : "Кому вы должны"
+        return type == .debt
+            ? NSLocalizedString("Кто вам должен", comment: "Кто вам должен")
+            : NSLocalizedString("Кому вы должны", comment: "Кому вы должны")
     }
     
     var amountTitle: String? {
         guard let type = type else { return nil }
-        return type == .debt ? "Сумма долга" : "Сумма займа"
+        return type == .debt
+            ? NSLocalizedString("Сумма долга", comment: "Сумма долга")
+            : NSLocalizedString("Сумма займа", comment: "Сумма займа")
     }
     
     var shouldRecordOnBalanceTitle: String? {
         guard let type = type else { return nil }
-        return type == .debt ? "Списать сумму с кошелька" : "Зачислить сумму на кошелек"
+        return type == .debt
+            ? NSLocalizedString("Списать сумму с кошелька", comment: "Списать сумму с кошелька")
+            : NSLocalizedString("Зачислить сумму на кошелек", comment: "Зачислить сумму на кошелек")
     }
     
     var borrowedAtTitle: String? {
         guard let type = type else { return nil }
-        return type == .debt ? "Когда дали в долг" : "Когда взяли взаймы"
+        return type == .debt
+            ? NSLocalizedString("Когда дали в долг", comment: "Когда дали в долг")
+            : NSLocalizedString("Когда взяли взаймы", comment: "Когда взяли взаймы")
     }
     
     var expenseSourceTitle: String? {
-        return "Кошелек"
+        return NSLocalizedString("Кошелек", comment: "Кошелек")
     }
     
     var returnTitle: String? {
         guard let type = type else { return nil }
-        return type == .debt ? "Долг вернули" : "Вернуть займ"
+        return type == .debt
+            ? NSLocalizedString("Долг вернули", comment: "Долг вернули")
+            : NSLocalizedString("Вернуть займ", comment: "Вернуть займ")
     }
     
     var removeTitle: String? {
         guard let type = type else { return nil }
-        return type == .debt ? "Удалить долг" : "Удалить займ"
+        return type == .debt
+            ? NSLocalizedString("Удалить долг", comment: "Удалить долг")
+            : NSLocalizedString("Удалить займ", comment: "Удалить займ")
     }
     
     var removeQuestion: String {
-        guard let type = type else { return "Удалить?" }
-        return type == .debt ? "Удалить долг?" : "Удалить займ?"
+        guard let type = type else { return NSLocalizedString("Удалить?", comment: "Удалить?") }
+        return type == .debt
+            ? NSLocalizedString("Удалить долг?", comment: "Удалить долг?")
+            : NSLocalizedString("Удалить займ?", comment: "Удалить займ?")
     }
         
     var iconDefaultImageName: String { return "borrow-default-icon" }

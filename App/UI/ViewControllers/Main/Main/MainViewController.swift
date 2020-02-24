@@ -73,7 +73,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
             modal(factory.transactionCreationInfoViewController())
         }
         after(seconds: 3).done {
-            self.show(tipMessage: "Скоро здесь будет финансовый советник")
+            self.show(tipMessage: NSLocalizedString("Скоро здесь будет финансовый советник", comment: "Скоро здесь будет финансовый советник"))
         }
     }
     

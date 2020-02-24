@@ -16,8 +16,13 @@ class LoginViewController : FormSubmitViewController {
     var viewModel: LoginViewModel!    
     var tableController: LoginTableController!
     
-    override var formTitle: String { return "Вход" }
-    override var saveErrorMessage: String { return "Ошибка при входе" }
+    override var formTitle: String {
+        return NSLocalizedString("Вход", comment: "Вход")
+    }
+    
+    override var saveErrorMessage: String {
+        return NSLocalizedString("Ошибка при входе", comment: "Ошибка при входе")
+    }
     
     override func registerFormFields() -> [String : FormField] {
         return [SessionCreationForm.CodingKeys.email.rawValue : tableController.loginField,
@@ -36,7 +41,7 @@ class LoginViewController : FormSubmitViewController {
     override func handleSave(_ error: Error) {
         switch error {
         case APIRequestError.notAuthorized:
-            self.messagePresenterManager.show(validationMessage: "Неверный email или пароль")
+            self.messagePresenterManager.show(validationMessage: NSLocalizedString("Неверный email или пароль", comment: "Неверный email или пароль"))
         default:
             super.handleSave(error)
         }

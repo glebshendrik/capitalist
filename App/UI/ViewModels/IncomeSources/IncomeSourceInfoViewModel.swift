@@ -43,7 +43,9 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
     }
     
     var transactionTitle: String {
-        return isBorrow ? "Добавить займ" : "Добавить доход"
+        return isBorrow
+            ? NSLocalizedString("Добавить займ", comment: "Добавить займ")
+            : NSLocalizedString("Добавить доход", comment: "Добавить доход")
     }
     
     override var transactionable: Transactionable? {
@@ -78,17 +80,17 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
                                                        iconURL: selectedIconURL,
                                                        placeholder: TransactionableType.incomeSource.defaultIconName),
                                          BasicInfoField(fieldId: IncomeSourceInfoField.income.rawValue,
-                                                        title: "Доход в этом месяце",
+                                                        title: NSLocalizedString("Доход в этом месяце", comment: "Доход в этом месяце"),
                                                         value: incomeSourceViewModel?.amount)]
         if let plannedAtPeriod = incomeSourceViewModel?.plannedAtPeriod {
             fields.append(BasicInfoField(fieldId: IncomeSourceInfoField.plannedIncome.rawValue,
-                                         title: "Запланировано",
+                                         title: NSLocalizedString("Запланировано", comment: "Запланировано"),
                                          value: plannedAtPeriod))
         }
         fields.append(ReminderInfoField(fieldId: IncomeSourceInfoField.reminder.rawValue,
                                         reminder: reminder))
         fields.append(contentsOf: [ButtonInfoField(fieldId: IncomeSourceInfoField.statistics.rawValue,
-                                                   title: "Статистика",
+                                                   title: NSLocalizedString("Статистика", comment: "Статистика"),
                                                    iconName: nil,
                                                    isEnabled: true),
                                    ButtonInfoField(fieldId: IncomeSourceInfoField.transaction.rawValue,

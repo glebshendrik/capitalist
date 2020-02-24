@@ -106,8 +106,8 @@ class BorrowViewModel {
     
     var title: String {
         switch type {
-        case .debt: return "Долг (вам должны)"
-        case .loan: return "Займ (вы должны)"
+        case .debt: return NSLocalizedString("Долг (вам должны)", comment: "Долг (вам должны)")
+        case .loan: return NSLocalizedString("Займ (вы должны)", comment: "Займ (вы должны)")
         }
     }
     

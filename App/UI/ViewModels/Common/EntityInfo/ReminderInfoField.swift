@@ -21,13 +21,13 @@ class ReminderInfoField : EntityInfoField {
     }
     
     var reminderButtonText: String? {
-        guard let reminder = reminder, reminder.isReminderSet else { return "Установить напоминание" }
-        return "Изменить напоминание"
+        guard let reminder = reminder, reminder.isReminderSet else { return NSLocalizedString("Установить напоминание", comment: "Установить напоминание") }
+        return NSLocalizedString("Изменить напоминание", comment: "Изменить напоминание")
     }
     
     var nextOccurence: String? {
-        if let nextOccurrence = reminder?.nextOccurrence {
-            return "Следующее: \(nextOccurrence)"
+        if let nextOccurrence = reminder?.nextOccurrence {            
+            return String(format: NSLocalizedString("Следующее: %@", comment: "Следующее: %@"), nextOccurrence)
         }
         return reminder?.startDate
     }

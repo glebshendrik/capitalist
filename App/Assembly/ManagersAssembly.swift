@@ -27,7 +27,8 @@ class ManagersAssembly: Assembly {
                 window: r.resolve(UIWindow.self)!,
                 userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
                 notificationsCoordinator: r.resolve(NotificationsCoordinatorProtocol.self)!,
-                soundsManager: r.resolve(SoundsManagerProtocol.self)!)
+                soundsManager: r.resolve(SoundsManagerProtocol.self)!,
+                analyticsManager: r.resolve(AnalyticsManagerProtocol.self)!)
             }
             .inObjectScope(.container)
             .initCompleted { resolver, router in
@@ -53,6 +54,8 @@ class ManagersAssembly: Assembly {
         container.autoregister(SaltEdgeManagerProtocol.self, initializer: SaltEdgeManager.init).inObjectScope(.container)
         
         container.autoregister(UIFactoryProtocol.self, initializer: UIFactory.init).inObjectScope(.container)
+        
+        container.autoregister(AnalyticsManagerProtocol.self, initializer: AnalyticsManager.init).inObjectScope(.container)        
     }
     
 }

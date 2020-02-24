@@ -41,14 +41,16 @@ class MainViewModel {
         guard selecting else { return nil }
         
         guard let selectedSource = selectedSource else {
-            guard let selectedDestination = selectedDestination else { return "Выберите источник дохода, кошелек или актив" }
+            guard let selectedDestination = selectedDestination else {
+                return NSLocalizedString("Выберите источник дохода, кошелек или актив", comment: "Выберите источник дохода, кошелек или актив")
+            }
             switch selectedDestination.type {
             case .expenseSource:
-                return "Выберите источник дохода, кошелек или актив"
+                return NSLocalizedString("Выберите источник дохода, кошелек или актив", comment: "Выберите источник дохода, кошелек или актив")
             case .expenseCategory:
-                return "Выберите кошелек"
+                return NSLocalizedString("Выберите кошелек", comment: "Выберите кошелек")
             case .active:
-                return "Выберите источник дохода или кошелек"
+                return NSLocalizedString("Выберите источник дохода или кошелек", comment: "Выберите источник дохода или кошелек")
             default:
                 return nil
             }
@@ -60,13 +62,13 @@ class MainViewModel {
         case .incomeSource:
             if let incomeSource = selectedSource as? IncomeSourceViewModel,
                 incomeSource.isChild {
-                return "Выберите кошелек или актив"
+                return NSLocalizedString("Выберите кошелек или актив", comment: "Выберите кошелек или актив")
             }
-            return "Выберите кошелек"
+            return NSLocalizedString("Выберите кошелек", comment: "Выберите кошелек")
         case .expenseSource:
-            return "Выберите кошелек, категорию трат или актив"
+            return NSLocalizedString("Выберите кошелек, категорию трат или актив", comment: "Выберите кошелек, категорию трат или актив")
         case .active:
-            return "Выберите кошелек"
+            return NSLocalizedString("Выберите кошелек", comment: "Выберите кошелек")
         default:
             return nil
         }
@@ -128,7 +130,7 @@ class MainViewModel {
     }
     
     var basketTotalExpensesTitle: String {
-        return "Расходы: "
+        return NSLocalizedString("Расходы: ", comment: "Расходы: ")
     }
     
     var basketTotalExpenses: String {
@@ -138,9 +140,9 @@ class MainViewModel {
     var basketTotalTitle: String {
         switch basketsViewModel.selectedBasketType {
         case .safe:
-            return ". Сбережения: "
+            return NSLocalizedString(". Сбережения: ", comment: ". Сбережения: ")
         case .risk:
-            return ". Инвестиции: "
+            return NSLocalizedString(". Инвестиции: ", comment: ". Инвестиции: ")
         default:
             return ""
         }

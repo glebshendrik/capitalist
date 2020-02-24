@@ -91,11 +91,11 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func askToDelete(transactionViewModel: TransactionViewModel) {
-        let alertController = UIAlertController(title: "Удалить транзакцию?",
+        let alertController = UIAlertController(title: NSLocalizedString("Удалить транзакцию?", comment: "Удалить транзакцию?"),
                                                 message: nil,
                                                 preferredStyle: .alert)
         
-        alertController.addAction(title: "Удалить",
+        alertController.addAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
                                   style: .destructive,
                                   isEnabled: true,
                                   handler: { [weak self] _ in
@@ -103,7 +103,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
                                 })
         
         
-        alertController.addAction(title: "Отмена",
+        alertController.addAction(title: NSLocalizedString("Отмена", comment: "Отмена"),
                                   style: .cancel,
                                   isEnabled: true,
                                   handler: nil)

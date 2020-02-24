@@ -49,7 +49,7 @@ class SettingsTableController : FormFieldsTableViewController {
     }
     
     private func setupCurrencyField() {
-        currencyField.placeholder = "Валюта"
+        currencyField.placeholder = NSLocalizedString("Валюта", comment: "Валюта")
         currencyField.imageName = "currency-icon"
         currencyField.didTap { [weak self] in
             self?.delegate?.didTapCurrency()
@@ -57,7 +57,7 @@ class SettingsTableController : FormFieldsTableViewController {
     }
     
     private func setupPeriodField() {
-        periodField.placeholder = "Период"
+        periodField.placeholder = NSLocalizedString("Период", comment: "Период")
         periodField.imageName = "period-icon"
         periodField.didTap { [weak self] in
             self?.delegate?.didTapPeriod()
@@ -65,7 +65,7 @@ class SettingsTableController : FormFieldsTableViewController {
     }
     
     private func setupSoundsSwitchField() {
-        soundsSwitchField.placeholder = "Звуки создания транзакций"
+        soundsSwitchField.placeholder = NSLocalizedString("Звуки создания транзакций", comment: "Звуки создания транзакций")
         soundsSwitchField.imageName = "sounds-icon"
         soundsSwitchField.didSwitch { [weak self] soundsOn in
             self?.delegate?.didChange(soundsOn: soundsOn)

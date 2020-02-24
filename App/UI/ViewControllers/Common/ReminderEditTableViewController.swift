@@ -32,7 +32,7 @@ class ReminderEditTableViewController : FormFieldsTableViewController {
     }
     
     func setupReminderMessageField() {
-        reminderMessageField.placeholder = "Сообщение"
+        reminderMessageField.placeholder = NSLocalizedString("Сообщение", comment: "Сообщение")
         reminderMessageField.imageName = "type-icon"
         reminderMessageField.didChange { [weak self] text in
             self?.delegate?.didChange(message: text)
@@ -40,7 +40,7 @@ class ReminderEditTableViewController : FormFieldsTableViewController {
     }
     
     func setupReminderDateField() {
-        reminderDateField.placeholder = "Дата"
+        reminderDateField.placeholder = NSLocalizedString("Дата", comment: "Дата")
         reminderDateField.imageName = "reminder-date-icon"
         reminderDateField.didTap { [weak self] in
             self?.delegate?.didTapStartDate()
@@ -48,7 +48,7 @@ class ReminderEditTableViewController : FormFieldsTableViewController {
     }
     
     func setupRecurrenceRuleField() {
-        recurrenceRuleField.placeholder = "Повторяемость"
+        recurrenceRuleField.placeholder = NSLocalizedString("Повторяемость", comment: "Повторяемость")
         recurrenceRuleField.imageName = "reminder-recurrence-icon"
         recurrenceRuleField.didTap { [weak self] in
             self?.delegate?.didTapRecurrence()

@@ -21,7 +21,7 @@ extension BalanceViewController {
         firstly {
             viewModel.loadBudget()
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки баланса", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки баланса", comment: "Ошибка загрузки баланса"), theme: .error)
         }.finally {
             self.updateBalanceAmountsUI()
         }
@@ -32,7 +32,7 @@ extension BalanceViewController {
         firstly {
             viewModel.loadExpenseSources()
         }.catch { e in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки кошельков", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки кошельков", comment: "Ошибка загрузки кошельков"), theme: .error)
         }.finally {
             self.set(self.expenseSourcesActivityIndicator, hidden: true)
             self.updateExpenseSourcesUI()
@@ -47,7 +47,7 @@ extension BalanceViewController {
         firstly {
             viewModel.loadActives()
         }.catch { e in
-            self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки активов", theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки активов", comment: "Ошибка загрузки активов"), theme: .error)
         }.finally {
             self.set(self.activesActivityIndicator, hidden: true)
             self.updateActivesUI()

@@ -27,7 +27,10 @@ class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
     
     var delegate: RegistrationTableControllerDelegate?
     
-    override var saveButtonTitle: String { return "Зарегистрироваться" }    
+    override var saveButtonTitle: String {
+        return NSLocalizedString("Зарегистрироваться", comment: "Зарегистрироваться")
+    }
+    
     override var saveButtonInForm: UIButton? {
         return registerButton
     }
@@ -43,7 +46,7 @@ class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
     private func setupNameField() {
         register(responder: nameField.textField)
         nameField.textField.inputAccessoryView = saveButton
-        nameField.placeholder = "Имя"
+        nameField.placeholder = NSLocalizedString("Имя", comment: "Имя")
         nameField.imageName = "name-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
@@ -53,7 +56,7 @@ class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
     private func setupEmailField() {
         register(responder: emailField.textField)
         setupAsEmail(emailField)
-        emailField.placeholder = "Email"
+        emailField.placeholder = NSLocalizedString("Email", comment: "Email")
         emailField.imageName = "email-icon"
         emailField.didChange { [weak self] text in
             self?.delegate?.didChange(email: text)
@@ -63,7 +66,7 @@ class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
     private func setupPasswordField() {
         register(responder: passwordField.textField)
         setupAsSecure(passwordField)
-        passwordField.placeholder = "Пароль"
+        passwordField.placeholder = NSLocalizedString("Пароль", comment: "Пароль")
         passwordField.imageName = "password-icon"
         passwordField.didChange { [weak self] text in
             self?.delegate?.didChange(password: text)
@@ -73,7 +76,7 @@ class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
     private func setupPasswordConfirmationField() {
         register(responder: confirmationField.textField)
         setupAsSecure(confirmationField)
-        confirmationField.placeholder = "Пароль еще раз"
+        confirmationField.placeholder = NSLocalizedString("Пароль еще раз", comment: "Пароль еще раз")
         confirmationField.imageName = "password-icon"
         confirmationField.didChange { [weak self] text in
             self?.delegate?.didChange(passwordConfirmation: text)

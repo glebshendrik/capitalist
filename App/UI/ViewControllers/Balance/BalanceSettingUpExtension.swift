@@ -26,12 +26,13 @@ extension BalanceViewController {
     
     private func setupNavigationBar() {
         setupNavigationBarAppearance()
-        navigationItem.title = "Баланс"
+        navigationItem.title = NSLocalizedString("Баланс", comment: "Баланс")
     }
     
     func setupBalanceTabs() {
         guard !tabsInitialized else { return }
-        tabs.segments = LabelSegment.segments(withTitles: ["КОШЕЛЬКИ", "АКТИВЫ"],
+        tabs.segments = LabelSegment.segments(withTitles: [NSLocalizedString("КОШЕЛЬКИ", comment: "КОШЕЛЬКИ"),
+                                                           NSLocalizedString("АКТИВЫ", comment: "АКТИВЫ")],
                                               normalBackgroundColor: UIColor.clear,
                                               normalFont: UIFont(name: "Roboto-Regular", size: 12)!,
                                               normalTextColor: UIColor.by(.white100),

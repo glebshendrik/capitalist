@@ -23,7 +23,7 @@ class ChangePasswordTableController : SaveAccessoryFormFieldsTableViewController
     
     var delegate: ChangePasswordTableControllerDelegate?
     
-    override var saveButtonTitle: String { return "Сменить пароль" }
+    override var saveButtonTitle: String { return NSLocalizedString("Сменить пароль", comment: "Сменить пароль") }
     override var saveButtonInForm: UIButton? {
         return changePasswordButton
     }
@@ -38,7 +38,7 @@ class ChangePasswordTableController : SaveAccessoryFormFieldsTableViewController
     private func setupOldPasswordField() {
         register(responder: oldPasswordField.textField)
         setupAsSecure(oldPasswordField)
-        oldPasswordField.placeholder = "Старый пароль"
+        oldPasswordField.placeholder = NSLocalizedString("Старый пароль", comment: "Старый пароль")
         oldPasswordField.imageName = "password-icon"
         oldPasswordField.didChange { [weak self] text in
             self?.delegate?.didChange(oldPassword: text)
@@ -48,7 +48,7 @@ class ChangePasswordTableController : SaveAccessoryFormFieldsTableViewController
     private func setupNewPasswordField() {
         register(responder: newPasswordField.textField)
         setupAsSecure(newPasswordField)
-        newPasswordField.placeholder = "Новый пароль"
+        newPasswordField.placeholder = NSLocalizedString("Новый пароль", comment: "Новый пароль")
         newPasswordField.imageName = "password-icon"
         newPasswordField.didChange { [weak self] text in
             self?.delegate?.didChange(newPassword: text)
@@ -58,7 +58,7 @@ class ChangePasswordTableController : SaveAccessoryFormFieldsTableViewController
     private func setupNewPasswordConfirmationField() {
         register(responder: confirmationField.textField)
         setupAsSecure(confirmationField)
-        confirmationField.placeholder = "Новый пароль еще раз"
+        confirmationField.placeholder = NSLocalizedString("Новый пароль еще раз", comment: "Новый пароль еще раз")
         confirmationField.imageName = "password-icon"
         confirmationField.didChange { [weak self] text in
             self?.delegate?.didChange(newPasswordConfirmation: text)

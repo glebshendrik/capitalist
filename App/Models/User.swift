@@ -175,16 +175,16 @@ struct UserCreationForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(email: email) {
-            errors[CodingKeys.email.rawValue] = "Введите корректный email"
+            errors[CodingKeys.email.rawValue] = NSLocalizedString("Введите корректный email", comment: "Введите корректный email")
         }
         
         if !Validator.isValid(password: password) {
-            errors[CodingKeys.password.rawValue] = "Введите корректный пароль"
+            errors[CodingKeys.password.rawValue] = NSLocalizedString("Введите корректный пароль", comment: "Введите корректный пароль")
         }
         
         if !Validator.isValid(passwordConfirmation: passwordConfirmation,
                               password: password) {
-            errors[CodingKeys.passwordConfirmation.rawValue] = "Пароли не совпадают"
+            errors[CodingKeys.passwordConfirmation.rawValue] = NSLocalizedString("Пароли не совпадают", comment: "Пароли не совпадают")
         }
         
         return errors
@@ -207,20 +207,20 @@ struct ChangePasswordForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: userId) {
-            errors["user_id"] = "Ошибка сохранения"
+            errors["user_id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(password: oldPassword) {
-            errors[CodingKeys.oldPassword.rawValue] = "Введите старый пароль"
+            errors[CodingKeys.oldPassword.rawValue] = NSLocalizedString("Введите старый пароль", comment: "Введите старый пароль")
         }
         
         if !Validator.isValid(password: newPassword) {
-            errors[CodingKeys.newPassword.rawValue] = "Введите новый пароль"
+            errors[CodingKeys.newPassword.rawValue] = NSLocalizedString("Введите новый пароль", comment: "Введите новый пароль")
         }
         
         if !Validator.isValid(passwordConfirmation: newPasswordConfirmation,
                               password: newPassword) {
-            errors[CodingKeys.newPasswordConfirmation.rawValue] = "Пароли не совпадают"
+            errors[CodingKeys.newPasswordConfirmation.rawValue] = NSLocalizedString("Пароли не совпадают", comment: "Пароли не совпадают")
         }
         
         return errors
@@ -244,20 +244,20 @@ struct ResetPasswordForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(email: email) {
-            errors[CodingKeys.email.rawValue] = "Укажите email"
+            errors[CodingKeys.email.rawValue] = NSLocalizedString("Укажите email", comment: "Укажите email")
         }
         
         if !Validator.isValid(required: passwordResetCode) {
-            errors[CodingKeys.passwordResetCode.rawValue] = "Введите код подтверждения"
+            errors[CodingKeys.passwordResetCode.rawValue] = NSLocalizedString("Введите код подтверждения", comment: "Введите код подтверждения")
         }
         
         if !Validator.isValid(password: password) {
-            errors[CodingKeys.password.rawValue] = "Введите новый пароль"
+            errors[CodingKeys.password.rawValue] = NSLocalizedString("Введите новый пароль", comment: "Введите новый пароль")
         }
         
         if !Validator.isValid(passwordConfirmation: passwordConfirmation,
                               password: password) {
-            errors[CodingKeys.passwordConfirmation.rawValue] = "Пароли не совпадают"
+            errors[CodingKeys.passwordConfirmation.rawValue] = NSLocalizedString("Пароли не совпадают", comment: "Пароли не совпадают")
         }
         
         return errors
@@ -275,7 +275,7 @@ struct PasswordResetCodeForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(email: email) {
-            errors[CodingKeys.email.rawValue] = "Введите корректный email"
+            errors[CodingKeys.email.rawValue] = NSLocalizedString("Введите корректный email", comment: "Введите корректный email")
         }
                 
         return errors

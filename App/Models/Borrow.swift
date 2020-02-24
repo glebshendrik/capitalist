@@ -15,9 +15,9 @@ enum BorrowType : String, Codable {
     var title: String {
         switch self {
         case .debt:
-            return "Мне должны"
+            return NSLocalizedString("Мне должны", comment: "Мне должны")
         case .loan:
-            return "Я должен"
+            return NSLocalizedString("Я должен", comment: "Я должен")
         }
     }
 }
@@ -122,31 +122,31 @@ struct BorrowCreationForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: userId) {
-            errors["user_id"] = "Ошибка сохранения"
+            errors["user_id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(required: name) {
-            errors[CodingKeys.name.rawValue] = "Укажите название"
+            errors[CodingKeys.name.rawValue] = NSLocalizedString("Укажите название", comment: "Укажите название")
         }
         
         if  !Validator.isValid(required: amountCurrency) {
-            errors[CodingKeys.amountCurrency.rawValue] = "Укажите валюту"
+            errors[CodingKeys.amountCurrency.rawValue] = NSLocalizedString("Укажите валюту", comment: "Укажите валюту")
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = "Укажите сумму"
+            errors[CodingKeys.amountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
         
         if !Validator.isValid(pastDate: borrowedAt) {
-            errors[CodingKeys.borrowedAt.rawValue] = "Укажите дату"
+            errors[CodingKeys.borrowedAt.rawValue] = NSLocalizedString("Укажите дату", comment: "Укажите дату")
         }
                 
         if !alreadyOnBalance, let type = type {            
             if type == .debt && !Validator.isValid(present: borrowingTransactionAttributes?.sourceId) {
-                errors[BorrowingTransactionNestedAttributes.CodingKeys.sourceId.rawValue] = "Укажите кошелек"
+                errors[BorrowingTransactionNestedAttributes.CodingKeys.sourceId.rawValue] = NSLocalizedString("Укажите кошелек", comment: "Укажите кошелек")
             }
             if type == .loan && !Validator.isValid(present: borrowingTransactionAttributes?.destinationId) {
-                errors[BorrowingTransactionNestedAttributes.CodingKeys.destinationId.rawValue] = "Укажите кошелек"
+                errors[BorrowingTransactionNestedAttributes.CodingKeys.destinationId.rawValue] = NSLocalizedString("Укажите кошелек", comment: "Укажите кошелек")
             }
         }
         return errors
@@ -177,19 +177,19 @@ struct BorrowUpdatingForm : Encodable, Validatable {
         var errors = [String : String]()
         
         if !Validator.isValid(present: id) {
-            errors["id"] = "Ошибка сохранения"
+            errors["id"] = NSLocalizedString("Ошибка сохранения", comment: "Ошибка сохранения")
         }
         
         if !Validator.isValid(required: name) {
-            errors[CodingKeys.name.rawValue] = "Укажите название"
+            errors[CodingKeys.name.rawValue] = NSLocalizedString("Укажите название", comment: "Укажите название")
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = "Укажите сумму"
+            errors[CodingKeys.amountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
         
         if !Validator.isValid(pastDate: borrowedAt) {
-            errors[CodingKeys.borrowedAt.rawValue] = "Укажите дату"
+            errors[CodingKeys.borrowedAt.rawValue] = NSLocalizedString("Укажите дату", comment: "Укажите дату")
         }
                 
         return errors

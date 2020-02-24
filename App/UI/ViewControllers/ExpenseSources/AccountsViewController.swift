@@ -39,9 +39,9 @@ class AccountsViewController : UIViewController, UIMessagePresenterManagerDepend
             viewModel.loadAccounts()
         }.catch { e in
             if case BankConnectionError.allBankAccountsAlreadyUsed = e {
-                self.messagePresenterManager.show(navBarMessage: "Все доступные счета банка уже подключены", theme: .error)
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Все доступные счета банка уже подключены", comment: "Все доступные счета банка уже подключены"), theme: .error)
             } else {
-                self.messagePresenterManager.show(navBarMessage: "Ошибка при загрузке счетов банка", theme: .error)
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка при загрузке счетов банка", comment: "Ошибка при загрузке счетов банка"), theme: .error)
             }
             
             self.close()

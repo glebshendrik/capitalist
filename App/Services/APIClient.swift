@@ -161,7 +161,7 @@ class APIClient : APIClientProtocol {
                         errorMessages = errorsMessage
 
                     } else {
-                        errorMessages["error"] = "Ошибка сервера"
+                        errorMessages["error"] = NSLocalizedString("Common server error", comment: "Common server error message")
                     }
                     return .failure(APIRequestError.unprocessedEntity(errors: errorMessages))
                 } catch {

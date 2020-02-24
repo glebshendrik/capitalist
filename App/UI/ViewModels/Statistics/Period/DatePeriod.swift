@@ -22,15 +22,15 @@ enum DatePeriod {
     var title: String {
         switch self {
         case .entire:
-            return "Весь период"
+            return NSLocalizedString("Весь период", comment: "Весь период")
         case .year:
-            return "Год"
+            return NSLocalizedString("Год", comment: "Год")
         case .month:
-            return "Месяц"
+            return NSLocalizedString("Месяц", comment: "Месяц")
         case .week:
-            return "Неделя"
+            return NSLocalizedString("Неделя", comment: "Неделя")
         case .custom:
-            return "Свой период"
+            return NSLocalizedString("Свой период", comment: "Свой период")
         }
     }
     

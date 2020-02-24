@@ -13,8 +13,8 @@ class ProfileEditViewController : FormNavBarButtonsEditViewController {
     var viewModel: ProfileEditViewModel!
     var tableController: ProfileEditTableController!
     
-    override var formTitle: String { return "Редактирование профиля" }
-    override var saveErrorMessage: String { return "Невозможно изменить данные профиля" }
+    override var formTitle: String { return NSLocalizedString("Редактирование профиля", comment: "Редактирование профиля") }
+    override var saveErrorMessage: String { return NSLocalizedString("Невозможно изменить данные профиля", comment: "Невозможно изменить данные профиля") }
         
     override func registerFormFields() -> [String : FormField] {
         return [UserUpdatingForm.CodingKeys.firstname.rawValue : tableController.nameField]
@@ -31,7 +31,7 @@ class ProfileEditViewController : FormNavBarButtonsEditViewController {
     
     override func didSave() {
         super.didSave()
-        messagePresenterManager.show(navBarMessage: "Данные профиля успешно сохранены", theme: .success)
+        messagePresenterManager.show(navBarMessage: NSLocalizedString("Данные профиля успешно сохранены", comment: "Данные профиля успешно сохранены"), theme: .success)
     }
     
     override func updateUI() {

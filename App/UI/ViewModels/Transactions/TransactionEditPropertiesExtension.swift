@@ -56,7 +56,7 @@ extension TransactionEditViewModel {
     }
     
     var calendarTitle: String {
-        guard let gotAt = gotAt else { return "Выбрать дату" }
+        guard let gotAt = gotAt else { return NSLocalizedString("Выбрать дату", comment: "Выбрать дату") }
         return gotAt.dateTimeString(ofStyle: .short)
     }
     
@@ -169,46 +169,46 @@ extension TransactionEditViewModel {
             return transactionType.title(isNew: isNew, isReturn: isReturn)
         }
         switch (isNew, isReturn) {
-        case   (true,  false):  return "Новый перевод"
-        case   (true,  true):   return "Новый возврат"
-        case   (false, false):  return "Изменить перевод"
-        case   (false,  true):   return "Изменить возврат"
+        case   (true,  false):  return NSLocalizedString("Новый перевод", comment: "Новый перевод")
+        case   (true,  true):   return NSLocalizedString("Новый возврат", comment: "Новый возврат")
+        case   (false, false):  return NSLocalizedString("Изменить перевод", comment: "Изменить перевод")
+        case   (false,  true):   return NSLocalizedString("Изменить возврат", comment: "Изменить возврат")
         }
     }
         
     var removeTitle: String? {
         guard !isNew else { return nil }
-        return transactionType?.removeTitle(isReturn: isReturn) ?? "Удалить"
+        return transactionType?.removeTitle(isReturn: isReturn) ?? NSLocalizedString("Удалить", comment: "Удалить")
     }
     
     var removeQuestion: String? {
         guard !isNew else { return nil }
-        return transactionType?.removeQuestion(isReturn: isReturn) ?? "Удалить?"
+        return transactionType?.removeQuestion(isReturn: isReturn) ?? NSLocalizedString("Удалить?", comment: "Удалить?")
     }
     
     var sourceTitle: String? {
-        return sourceType?.title(as: .source) ?? "Выберите источник"
+        return sourceType?.title(as: .source) ?? NSLocalizedString("Выберите источник", comment: "Выберите источник")
     }
-    var sourceAmountTitle: String? { return "Сумма" }
+    var sourceAmountTitle: String? { return NSLocalizedString("Сумма", comment: "Сумма") }
     var sourceIconURL: URL? { return source?.iconURL }
     var sourceIconDefaultImageName: String {
         return source?.defaultIconName ?? sourceType?.defaultIconName ?? "lamp-icon"
     }
-    var sourceName: String? { return isSourceVirtualExpenseSource ? "Из ниоткуда" : source?.name }
+    var sourceName: String? { return isSourceVirtualExpenseSource ? NSLocalizedString("Из ниоткуда", comment: "Из ниоткуда") : source?.name }
     var sourceAmount: String? { return isSourceVirtualExpenseSource ? nil : source?.amountRounded }
     var sourceCurrency: Currency? { return source?.currency }
     var sourceCurrencyCode: String? { return sourceCurrency?.code }
     
     var destinationTitle: String? {
-        return destinationType?.title(as: .destination) ?? "Выберите назначение"
+        return destinationType?.title(as: .destination) ?? NSLocalizedString("Выберите назначение", comment: "Выберите назначение")
         
     }
-    var destinationAmountTitle: String? { return "Сумма" }
+    var destinationAmountTitle: String? { return NSLocalizedString("Сумма", comment: "Сумма") }
     var destinationIconURL: URL? { return destination?.iconURL }
     var destinationIconDefaultImageName: String {
         return destination?.defaultIconName ?? destinationType?.defaultIconName ?? "lamp-icon"        
     }
-    var destinationName: String? { return isDestinationVirtualExpenseSource ? "В никуда" : destination?.name }
+    var destinationName: String? { return isDestinationVirtualExpenseSource ? NSLocalizedString("В никуда", comment: "В никуда") : destination?.name }
     var destinationAmount: String? { return isDestinationVirtualExpenseSource ? nil : destination?.amountRounded }
     var destinationCurrency: Currency? { return destination?.currency }
     var destinationCurrencyCode: String? { return destinationCurrency?.code }
@@ -217,20 +217,20 @@ extension TransactionEditViewModel {
 extension TransactionableType {
     var removeQuestion: String {
         switch (self) {
-        case .incomeSource:                 return "Удалить источник дохода?"
-        case .expenseSource:                return "Удалить кошелек?"
-        case .expenseCategory:              return "Удалить категорию трат?"
-        case .active:                       return "Удалить актив?"
+        case .incomeSource:                 return NSLocalizedString("Удалить источник дохода?", comment: "Удалить источник дохода?")
+        case .expenseSource:                return NSLocalizedString("Удалить кошелек?", comment: "Удалить кошелек?")
+        case .expenseCategory:              return NSLocalizedString("Удалить категорию трат?", comment: "Удалить категорию трат?")
+        case .active:                       return NSLocalizedString("Удалить актив?", comment: "Удалить актив?")
         }
     }
     
     func title(as part: TransactionPart) -> String {
         switch (self, part) {
-        case (.incomeSource, _):                return "Источник дохода"
-        case (.expenseSource, .source):         return "Кошелек"
-        case (.expenseSource, .destination):    return "Кошелек"
-        case (.expenseCategory, _):             return "Категория трат"
-        case (.active, _):                      return "Актив"
+        case (.incomeSource, _):                return NSLocalizedString("Источник дохода", comment: "Источник дохода")
+        case (.expenseSource, .source):         return NSLocalizedString("Кошелек", comment: "Кошелек")
+        case (.expenseSource, .destination):    return NSLocalizedString("Кошелек", comment: "Кошелек")
+        case (.expenseCategory, _):             return NSLocalizedString("Категория трат", comment: "Категория трат")
+        case (.active, _):                      return NSLocalizedString("Актив", comment: "Актив")
         }
     }
 }
@@ -253,23 +253,23 @@ extension TransactionType {
     
     func title(isNew: Bool, isReturn: Bool) -> String {
         switch (isNew, isReturn, self) {
-        case   (true,  true, _):                return "Новый возврат"
-        case   (false,  true, _):               return "Изменить возврат"
-        case   (true,  false, .income):         return "Новый доход"
-        case   (true,  false, .fundsMove):      return "Новый перевод"
-        case   (true,  false, .expense):        return "Новый расход"
-        case   (false, false, .income):         return "Изменить доход"
-        case   (false, false, .fundsMove):      return "Изменить перевод"
-        case   (false, false, .expense):        return "Изменить расход"
+        case   (true,  true, _):                return NSLocalizedString("Новый возврат", comment: "Новый возврат")
+        case   (false,  true, _):               return NSLocalizedString("Изменить возврат", comment: "Изменить возврат")
+        case   (true,  false, .income):         return NSLocalizedString("Новый доход", comment: "Новый доход")
+        case   (true,  false, .fundsMove):      return NSLocalizedString("Новый перевод", comment: "Новый перевод")
+        case   (true,  false, .expense):        return NSLocalizedString("Новый расход", comment: "Новый расход")
+        case   (false, false, .income):         return NSLocalizedString("Изменить доход", comment: "Изменить доход")
+        case   (false, false, .fundsMove):      return NSLocalizedString("Изменить перевод", comment: "Изменить перевод")
+        case   (false, false, .expense):        return NSLocalizedString("Изменить расход", comment: "Изменить расход")
         }
     }
     
     func removeTitle(isReturn: Bool) -> String {
         switch (isReturn, self) {
-        case   (true, _):               return "Удалить возврат"
-        case   (false, .income):        return "Удалить доход"
-        case   (false, .fundsMove):     return "Удалить перевод"
-        case   (false, .expense):       return "Удалить расход"
+        case   (true, _):               return NSLocalizedString("Удалить возврат", comment: "Удалить возврат")
+        case   (false, .income):        return NSLocalizedString("Удалить доход", comment: "Удалить доход")
+        case   (false, .fundsMove):     return NSLocalizedString("Удалить перевод", comment: "Удалить перевод")
+        case   (false, .expense):       return NSLocalizedString("Удалить расход", comment: "Удалить расход")
         }
     }
     
