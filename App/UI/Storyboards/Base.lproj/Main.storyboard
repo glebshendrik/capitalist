@@ -543,6 +543,7 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="l6v-CB-nnI">
                                                 <rect key="frame" x="132.5" y="-7" width="110" height="62"/>
+                                                <color key="tintColor" name="blue 1"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="0.74555864726027399" colorSpace="custom" customColorSpace="sRGB"/>
@@ -751,6 +752,7 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="E2K-f6-ag5">
                                                 <rect key="frame" x="132.5" y="7" width="110" height="62"/>
+                                                <color key="tintColor" name="blue 1"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.12549019610000001" green="0.1333333333" blue="0.14901960780000001" alpha="0.74555864729999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -931,6 +933,7 @@
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Fxg-qF-Lvh">
                                                                         <rect key="frame" x="132.5" y="130.5" width="110" height="62"/>
+                                                                        <color key="tintColor" name="blue 1"/>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" red="0.12549019610000001" green="0.1333333333" blue="0.14901960780000001" alpha="0.74555864729999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1073,6 +1076,7 @@
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="EkC-7E-d6Q">
                                                                         <rect key="frame" x="132.5" y="131" width="110" height="62"/>
+                                                                        <color key="tintColor" name="blue 1"/>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" red="0.12549019610000001" green="0.1333333333" blue="0.14901960780000001" alpha="0.74555864729999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1215,6 +1219,7 @@
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Nid-av-JHO">
                                                                         <rect key="frame" x="132.5" y="131" width="110" height="62"/>
+                                                                        <color key="tintColor" name="blue 1"/>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" red="0.12549019610000001" green="0.1333333333" blue="0.14901960780000001" alpha="0.74555864729999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1360,7 +1365,7 @@
                                 <rect key="frame" x="157.5" y="281.5" width="60" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="money-icon" translatesAutoresizingMaskIntoConstraints="NO" id="dUt-AC-D2O">
-                                        <rect key="frame" x="-24" y="-20" width="108" height="100"/>
+                                        <rect key="frame" x="-30" y="-30" width="120" height="120"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1541,7 +1546,7 @@
         <image name="loader-1" width="55" height="31"/>
         <image name="main-plus" width="23" height="23"/>
         <image name="menu-button-icon" width="20" height="12"/>
-        <image name="money-icon" width="54" height="50"/>
+        <image name="money-icon" width="60" height="60"/>
         <image name="plus-icon" width="17.5" height="18.5"/>
         <image name="profile-menu-item-icon" width="23" height="23"/>
         <image name="settings-menu-item-icon" width="22" height="22"/>

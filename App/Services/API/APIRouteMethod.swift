@@ -76,6 +76,7 @@ struct APIRouteMethod {
              .updateExpenseSourcePosition,
              .updateExpenseCategoryPosition,
              .updateUserSettings,
+             .updateUserSubscription,
              .updateDeviceToken,
              .updateActivePosition:
             return .patch

@@ -29,6 +29,7 @@ enum ColorAsset : String {
     case brandSafe = "brand safe"
     case purple24 = "purple 0.24"
     case purple64 = "purple 0.64"
+    case yellow1 = "yellow 1"
 }
 
 extension UIColor {

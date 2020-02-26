@@ -23,6 +23,10 @@ class UsersService : Service, UsersServiceProtocol {
         return request(APIRoute.updateUserSettings(form: settingsForm))
     }
     
+    func updateUserSubscription(with subscriptionForm: UserSubscriptionUpdatingForm) -> Promise<Void> {
+        return request(APIRoute.updateUserSubscription(form: subscriptionForm))
+    }
+    
     func changePassword(with changePasswordForm: ChangePasswordForm) -> Promise<Void> {
         return request(APIRoute.changePassword(form: changePasswordForm))
     }

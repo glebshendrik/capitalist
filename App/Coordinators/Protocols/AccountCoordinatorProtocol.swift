@@ -8,9 +8,14 @@
 
 import Foundation
 import PromiseKit
+import StoreKit
+import ApphudSDK
 
 protocol AccountCoordinatorProtocol {
     var currentSession: Session? { get }
+    var currentUserHasActiveSubscription: Bool { get }
+    var subscriptionProducts: [SKProduct] { get }
+    
     func joinAsGuest() -> Promise<Session>
     func authenticate(with form: SessionCreationForm) -> Promise<Session>
     func createAndAuthenticateUser(with userForm: UserCreationForm) -> Promise<Session>
@@ -22,5 +27,10 @@ protocol AccountCoordinatorProtocol {
     func logout() -> Promise<Void>
     func loadCurrentUserBudget() -> Promise<Budget>
     func onboardCurrentUser() -> Promise<Void>
+    
+    func updateUserSubscription() -> Promise<Void>
+    func checkIntroductoryEligibility() -> Promise<[String : Bool]>
+    func purchase(product: SKProduct) -> Promise<ApphudSubscription?>
+    func restoreSubscriptions() -> Promise<[ApphudSubscription]?>
 }
 

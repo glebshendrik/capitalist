@@ -19,6 +19,7 @@ struct APIResource {
              .showUser,
              .updateUser,
              .updateUserSettings,
+             .updateUserSubscription,
              .changePassword,
              .resetPassword,
              .updateDeviceToken,

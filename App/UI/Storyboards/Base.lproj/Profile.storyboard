@@ -220,7 +220,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="IWC-Zt-ePJ">
-                                                    <rect key="frame" x="245" y="-12" width="110" height="62"/>
+                                                    <rect key="frame" x="132.5" y="-12" width="110" height="62"/>
+                                                    <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -282,6 +283,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Zqm-cv-qTZ">
                                                     <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
+                                                    <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -423,6 +425,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Yt8-wf-8gt">
                                                     <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
+                                                    <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -646,6 +649,9 @@
         <image name="save-icon" width="16" height="14"/>
         <namedColor name="black 2">
             <color red="0.125" green="0.13300000131130219" blue="0.14900000393390656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="blue 1">
+            <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="blue 6A92FA">
             <color red="0.0" green="0.45882352941176469" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -57,6 +57,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             soundsManager.setSounds(enabled: false)
         }
         Apphud.start(apiKey: "app_mHJ17n3JPJiohGj5JgwNkkermyShF1")
+        Apphud.setDelegate(self)
         saltEdgeCoordinator.setup()
         self.launchOptions = launchOptions
         setupKeyboardManager()
@@ -106,27 +107,25 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         firstly {
             accountCoordinator.loadCurrentUser()
         }.done { user in
-            self.analyticsManager.set(userId: user.id.string)
-            Apphud.updateUserID(user.id.string)
             
             guard !self.checkIfAppUpdateNeeded() else {
                 self.showAppUpdateScreen()
                 return
             }
-            if !UIFlowManager.reached(point: .onboarding) {
+            
+            guard UIFlowManager.reached(point: .onboarding) else {
                 self.showOnboardingViewController()
+                return
             }
-            else if !UIFlowManager.reached(point: .dataSetup) {
-                self.notificationsCoordinator.enableNotifications()
+            
+            self.notificationsCoordinator.enableNotifications()
+            
+            guard UIFlowManager.reached(point: .dataSetup) else {
                 self.showDataSetupViewController()
+                return
             }
-            else if !Apphud.hasActiveSubscription() {
-                self.showMainViewController()
-            }
-            else {
-                self.notificationsCoordinator.enableNotifications()
-                self.showMainViewController()
-            }            
+            
+            self.showMainViewController()
         }.catch { error in
             if self.errorIsNotFoundOrNotAuthorized(error: error) {
                 self.userSessionManager.forgetSession()
@@ -231,4 +230,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     func application(_ app: UIApplication, open url: URL, sourceApplication: String?) -> Bool {
         return true
     }    
+}
+
+extension ApplicationRouter : ApphudDelegate {
+    func apphudSubscriptionsUpdated(_ subscriptions: [ApphudSubscription]) {
+        _ = accountCoordinator.updateUserSubscription()
+    }
 }

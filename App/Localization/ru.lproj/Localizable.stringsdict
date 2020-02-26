@@ -26,6 +26,30 @@
 			<string>%d дня</string>
 		</dict>
 	</dict>
+	<key>period unit weeks</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@period_unit_weeks@</string>
+		<key>period_unit_weeks</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d недель</string>
+			<key>one</key>
+			<string>%d неделя</string>
+			<key>two</key>
+			<string>%d недели</string>
+			<key>few</key>
+			<string>%d недели</string>
+			<key>many</key>
+			<string>%d недель</string>
+			<key>other</key>
+			<string>%d недели</string>
+		</dict>
+	</dict>
 	<key>period unit months</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

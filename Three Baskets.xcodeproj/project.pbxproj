@@ -467,6 +467,8 @@
 		FAF31CFC240371B800D4CFB3 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF31CFE240371B800D4CFB3 /* Settings.storyboard */; };
 		FAF31D03240371D200D4CFB3 /* Statistics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF31D05240371D200D4CFB3 /* Statistics.storyboard */; };
 		FAF31D0A240371E700D4CFB3 /* Transactions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF31D0C240371E700D4CFB3 /* Transactions.storyboard */; };
+		FAF31D122406544700D4CFB3 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */; };
+		FAF31D142406764D00D4CFB3 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -969,6 +971,8 @@
 		FAF31D0B240371E700D4CFB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Transactions.storyboard; sourceTree = "<group>"; };
 		FAF31D0E240371EF00D4CFB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Transactions.strings; sourceTree = "<group>"; };
 		FAF31D10240371F100D4CFB3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Transactions.strings; sourceTree = "<group>"; };
+		FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
+		FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1057,6 +1061,7 @@
 				FA165CE121B65F0300EAA16B /* LoginViewModel.swift */,
 				FA165CE721B7654100EAA16B /* ForgotPasswordViewModel.swift */,
 				FA165CEB21B7766900EAA16B /* ResetPasswordViewModel.swift */,
+				FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -2083,6 +2088,7 @@
 				FACEC1582301495A00611B2C /* ForgotPasswordTableController.swift */,
 				FA165CED21B7846C00EAA16B /* ResetPasswordViewController.swift */,
 				FACEC15A2301505F00611B2C /* ResetPasswordTableController.swift */,
+				FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -2310,6 +2316,7 @@
 				FABE54DA233A757F00DF2B70 /* Credit.swift in Sources */,
 				FA6DDE8522D60401008D14FF /* FormEditViewController.swift in Sources */,
 				FA56AB97235EE82C00E4D0E3 /* ActiveUIExtension.swift in Sources */,
+				FAF31D122406544700D4CFB3 /* SubscriptionViewController.swift in Sources */,
 				FA835D5C2265BDD100A592F2 /* GraphPresentingExtension.swift in Sources */,
 				FAE3BBCF2236668300FF1397 /* TitleView.swift in Sources */,
 				FAB5BE45235213E2000466AE /* ActiveTypesService.swift in Sources */,
@@ -2525,6 +2532,7 @@
 				FA0CAE1921D66CCD00805288 /* IconsService.swift in Sources */,
 				FA7177032269DEC6008ADF94 /* GraphFiltersSection.swift in Sources */,
 				FAED7DAE21EDDD3800BF6FE1 /* BasketsViewModel.swift in Sources */,
+				FAF31D142406764D00D4CFB3 /* SubscriptionViewModel.swift in Sources */,
 				FAD88F1F21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift in Sources */,
 				FAB5BE3F2351FE75000466AE /* ActiveType.swift in Sources */,
 				FA16FC73223A82FA0053C273 /* ExpenseSourceSelectViewController.swift in Sources */,
@@ -3032,7 +3040,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -3040,6 +3048,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"xml2\"",
@@ -3139,7 +3148,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -3147,6 +3156,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"xml2\"",

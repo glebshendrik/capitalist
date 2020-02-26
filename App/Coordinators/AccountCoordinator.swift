@@ -8,6 +8,8 @@
 
 import Foundation
 import PromiseKit
+import StoreKit
+import ApphudSDK
 
 enum AuthProviderError : Error {
     case emailHasAlreadyUsed
@@ -23,22 +25,33 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     private let usersService: UsersServiceProtocol
     private let router: ApplicationRouterProtocol
     private let notificationsCoordinator: NotificationsCoordinatorProtocol
+    private let analyticsManager: AnalyticsManagerProtocol
     
     var currentSession: Session? {
         return userSessionManager.currentSession
+    }
+    
+    var currentUserHasActiveSubscription: Bool {
+        return Apphud.hasActiveSubscription()
+    }
+    
+    var subscriptionProducts: [SKProduct] {
+        return Apphud.products() ?? []
     }
     
     init(userSessionManager: UserSessionManagerProtocol,
          authenticationService: AuthenticationServiceProtocol,
          usersService: UsersServiceProtocol,
          router: ApplicationRouterProtocol,
-         notificationsCoordinator: NotificationsCoordinatorProtocol) {
+         notificationsCoordinator: NotificationsCoordinatorProtocol,
+         analyticsManager: AnalyticsManagerProtocol) {
         
         self.userSessionManager = userSessionManager
         self.authenticationService = authenticationService
         self.usersService = usersService
         self.router = router
         self.notificationsCoordinator = notificationsCoordinator
+        self.analyticsManager = analyticsManager
     }
         
     func joinAsGuest() -> Promise<Session> {
@@ -51,6 +64,8 @@ class AccountCoordinator : AccountCoordinatorProtocol {
                 }.get { session in
                     self.userSessionManager.save(session: session)
                     self.router.route()
+                }.then { session in
+                    self.updateUserSubscription().map { session }
                 }
     }
     
@@ -98,6 +113,8 @@ class AccountCoordinator : AccountCoordinatorProtocol {
                     usersService.loadUser(with: currentUserId)
                 }.get { user in
                     self.router.setMinimumAllowed(version: user.minVersion, build: user.minBuild)
+                    self.analyticsManager.set(userId: user.id.string)
+                    Apphud.updateUserID(user.id.string)
                 }
     }
     
@@ -124,5 +141,25 @@ class AccountCoordinator : AccountCoordinatorProtocol {
             return .value(())
         }
         return self.authenticationService.destroy(session: session)
+    }
+    
+    func updateUserSubscription() -> Promise<Void> {
+        guard let currentUserId = userSessionManager.currentSession?.userId else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        let form = UserSubscriptionUpdatingForm(userId: currentUserId, hasActiveSubscription: currentUserHasActiveSubscription)
+        return usersService.updateUserSubscription(with: form)
+    }
+    
+    func purchase(product: SKProduct) -> Promise<ApphudSubscription?> {
+        return Promise { Apphud.purchase(product, callback: $0.resolve) }
+    }
+    
+    func restoreSubscriptions() -> Promise<[ApphudSubscription]?> {
+        return Promise { Apphud.restoreSubscriptions(callback: $0.fulfill) }
+    }
+    
+    func checkIntroductoryEligibility() -> Promise<[String : Bool]> {
+        return Promise { Apphud.checkEligibilitiesForIntroductoryOffers(products: self.subscriptionProducts, callback: $0.fulfill) }
     }
 }

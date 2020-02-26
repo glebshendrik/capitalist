@@ -57,7 +57,7 @@
 "gFk-aK-a1i.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Войти"; ObjectID = "iYX-57-dQm"; */
-"iYX-57-dQm.normalTitle" = "Войти";
+"iYX-57-dQm.normalTitle" = "Активировать";
 
 /* Class = "UIButton"; normalTitle = "Создать напоминание"; ObjectID = "jPK-vM-T2c"; */
 "jPK-vM-T2c.normalTitle" = "Создать напоминание";

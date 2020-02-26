@@ -139,6 +139,7 @@
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="FZr-eY-eje">
                                                         <rect key="frame" x="132.5" y="251.5" width="110" height="62"/>
+                                                        <color key="tintColor" name="blue 1"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -273,6 +274,7 @@
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Xd9-5D-dMI">
                                                         <rect key="frame" x="132.5" y="251.5" width="110" height="62"/>
+                                                        <color key="tintColor" name="blue 1"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -473,7 +475,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="mDg-iX-9J5">
-                                                    <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
+                                                    <rect key="frame" x="245" y="-13" width="110" height="62"/>
+                                                    <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>

@@ -13,10 +13,12 @@ import SwiftDate
 enum APIRoute: URLRequestConvertible {
     static var baseURLString: String {
         #if DEBUG
+//            return "https://skrudz.tempio.app"
 //            return "https://api.threebaskets.net"
             return "https://skrudzh-staging.herokuapp.com"
         #else
-            return "https://api.threebaskets.net"
+            return "https://skrudz.tempio.app"
+//            return "https://api.threebaskets.net"
         #endif
     }
     
@@ -25,6 +27,7 @@ enum APIRoute: URLRequestConvertible {
     case showUser(id: Int)
     case updateUser(form: UserUpdatingForm)
     case updateUserSettings(form: UserSettingsUpdatingForm)
+    case updateUserSubscription(form: UserSubscriptionUpdatingForm)
     case changePassword(form: ChangePasswordForm)
     case resetPassword(form: ResetPasswordForm)
     case createPasswordResetCode(form: PasswordResetCodeForm)

@@ -172,6 +172,7 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="UDw-yg-bym">
                                                     <rect key="frame" x="152" y="8" width="110" height="62"/>
+                                                    <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>

@@ -108,6 +108,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="JgI-tt-6th">
                                                     <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
+                                                    <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -435,6 +436,7 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-OC-7EH">
                                 <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
+                                <color key="tintColor" name="blue 1"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="33c-r7-gKe">
                                 <rect key="frame" x="0.0" y="33" width="375" height="634"/>
@@ -733,6 +735,7 @@
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="8uA-dp-fyb">
                                 <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
+                                <color key="tintColor" name="blue 1"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -874,6 +877,7 @@
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="BJT-bE-2ys">
                                 <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
+                                <color key="tintColor" name="blue 1"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

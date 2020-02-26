@@ -147,6 +147,22 @@ struct UserSettingsUpdatingForm : Encodable {
     }
 }
 
+struct UserSubscriptionUpdatingForm : Encodable {
+    let userId: Int?
+    let hasActiveSubscription: Bool?
+    
+    enum CodingKeys: String, CodingKey {
+        case hasActiveSubscription = "has_active_subscription"
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        if let hasActiveSubscription = hasActiveSubscription {
+            try container.encode(hasActiveSubscription, forKey: .hasActiveSubscription)
+        }
+    }
+}
+
 struct UserDeviceTokenUpdatingForm : Encodable {
     let userId: Int
     let token: String

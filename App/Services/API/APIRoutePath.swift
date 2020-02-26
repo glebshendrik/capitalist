@@ -59,6 +59,7 @@ struct APIRoutePath {
         // Update
         case .updateUser(let form):                         return member(route, id: form.userId)
         case .updateUserSettings(let form):                 return member(route, id: form.userId)
+        case .updateUserSubscription(let form):             return member(route, id: form.userId)
         case .updateDeviceToken(let form):                  return member(route, id: form.userId)
         case .updateIncomeSource(let form):                 return member(route, id: form.id)
         case .updateIncomeSourcePosition(let form):         return member(route, id: form.id)

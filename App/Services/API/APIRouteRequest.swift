@@ -37,6 +37,7 @@ struct APIRouteRequest {
         case .createUser(let form):                         return try encode(form)
         case .updateUser(let form):                         return try encode(form)
         case .updateUserSettings(let form):                 return try encode(form)
+        case .updateUserSubscription(let form):             return try encode(form)
         case .changePassword(let form):                     return try encode(form)
         case .resetPassword(let form):                      return try encode(form)
         case .createPasswordResetCode(let form):            return try encode(form)

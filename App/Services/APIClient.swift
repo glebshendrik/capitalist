@@ -15,6 +15,7 @@ enum APIRequestError: Error {
     case sendingFailed
     case mappingFailed
     case notAuthorized
+    case paymentRequired
     case forbidden
     case notFound
     case methodNotAllowed
@@ -134,6 +135,8 @@ class APIClient : APIClientProtocol {
         switch response.statusCode {
         case 401:
             return .failure(APIRequestError.notAuthorized)
+        case 402:
+            return .failure(APIRequestError.paymentRequired)
         case 403:
             return .failure(APIRequestError.forbidden)
         case 404:

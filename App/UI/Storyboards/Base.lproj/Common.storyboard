@@ -116,6 +116,7 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="gDk-1J-QyI">
                                         <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
+                                        <color key="tintColor" name="blue 1"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -250,6 +251,7 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfZ-l3-ICh">
                                         <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
+                                        <color key="tintColor" name="blue 1"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.12549019610000001" green="0.1333333333" blue="0.14901960780000001" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -857,13 +859,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNZ-v7-cvU">
-                                <rect key="frame" x="87.5" y="563" width="200" height="40"/>
+                                <rect key="frame" x="24" y="559" width="327" height="48"/>
                                 <color key="backgroundColor" name="blue 1"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="mVT-2F-4VF"/>
-                                    <constraint firstAttribute="width" constant="200" id="xGh-7F-q5O"/>
+                                    <constraint firstAttribute="height" constant="48" id="mVT-2F-4VF"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
                                 <state key="normal" title="Обновить">
                                     <color key="titleColor" name="white 1.0"/>
                                 </state>
@@ -893,14 +894,16 @@
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstItem="cfr-MH-ivs" firstAttribute="leading" secondItem="iHh-Xf-nJV" secondAttribute="leading" constant="24" id="1dh-Eg-LEv"/>
+                            <constraint firstItem="yNZ-v7-cvU" firstAttribute="leading" secondItem="iHh-Xf-nJV" secondAttribute="leading" constant="24" id="2Lc-iI-BoY"/>
                             <constraint firstItem="cfr-MH-ivs" firstAttribute="top" secondItem="feJ-95-vVb" secondAttribute="bottom" constant="16" id="3px-wB-0ad"/>
+                            <constraint firstItem="iHh-Xf-nJV" firstAttribute="trailing" secondItem="yNZ-v7-cvU" secondAttribute="trailing" constant="24" id="GDc-tF-Fzj"/>
                             <constraint firstItem="feJ-95-vVb" firstAttribute="top" secondItem="EPK-QY-jlF" secondAttribute="bottom" constant="8" id="JlS-iu-q8K"/>
                             <constraint firstItem="iHh-Xf-nJV" firstAttribute="trailing" secondItem="cfr-MH-ivs" secondAttribute="trailing" constant="24" id="Lqp-wd-uLK"/>
                             <constraint firstItem="EPK-QY-jlF" firstAttribute="top" secondItem="0n6-5a-9Ow" secondAttribute="bottom" constant="40" id="NxE-tn-Ymn"/>
                             <constraint firstItem="0n6-5a-9Ow" firstAttribute="top" secondItem="iHh-Xf-nJV" secondAttribute="top" constant="64" id="WVg-5I-fDd"/>
                             <constraint firstItem="0n6-5a-9Ow" firstAttribute="leading" secondItem="iHh-Xf-nJV" secondAttribute="leading" constant="24" id="nNz-cQ-pm5"/>
                             <constraint firstItem="EPK-QY-jlF" firstAttribute="leading" secondItem="iHh-Xf-nJV" secondAttribute="leading" constant="24" id="tgk-fW-Uza"/>
-                            <constraint firstItem="iHh-Xf-nJV" firstAttribute="bottom" secondItem="yNZ-v7-cvU" secondAttribute="bottom" constant="64" id="toA-5b-7Nb"/>
+                            <constraint firstItem="iHh-Xf-nJV" firstAttribute="bottom" secondItem="yNZ-v7-cvU" secondAttribute="bottom" constant="60" id="toA-5b-7Nb"/>
                             <constraint firstAttribute="trailing" secondItem="feJ-95-vVb" secondAttribute="trailing" constant="24" id="vfp-Mr-efc"/>
                             <constraint firstItem="yNZ-v7-cvU" firstAttribute="centerX" secondItem="1Sg-LL-lwJ" secondAttribute="centerX" id="xV7-RP-6EM"/>
                             <constraint firstItem="feJ-95-vVb" firstAttribute="leading" secondItem="iHh-Xf-nJV" secondAttribute="leading" constant="24" id="y4q-Qy-vl6"/>
@@ -1123,14 +1126,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYX-57-dQm">
-                                <rect key="frame" x="87.5" y="313.5" width="200" height="40"/>
+                                <rect key="frame" x="24" y="559" width="327" height="48"/>
                                 <color key="backgroundColor" name="blue 1"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="aaa-zc-HWP"/>
-                                    <constraint firstAttribute="width" constant="200" id="gKw-Ia-SZ1"/>
+                                    <constraint firstAttribute="height" constant="48" id="aaa-zc-HWP"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                <state key="normal" title="Войти">
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                <state key="normal" title="Активировать">
                                     <color key="titleColor" name="white 1.0"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1146,7 +1148,9 @@
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstItem="iYX-57-dQm" firstAttribute="centerX" secondItem="f8I-wb-hEn" secondAttribute="centerX" id="FOz-Yq-6dy"/>
-                            <constraint firstItem="iYX-57-dQm" firstAttribute="centerY" secondItem="f8I-wb-hEn" secondAttribute="centerY" id="NIy-fe-8Fm"/>
+                            <constraint firstItem="pqs-Ib-jHi" firstAttribute="bottom" secondItem="iYX-57-dQm" secondAttribute="bottom" constant="60" id="Oad-Pf-YQx"/>
+                            <constraint firstItem="iYX-57-dQm" firstAttribute="leading" secondItem="pqs-Ib-jHi" secondAttribute="leading" constant="24" id="iYR-9f-eHx"/>
+                            <constraint firstItem="pqs-Ib-jHi" firstAttribute="trailing" secondItem="iYX-57-dQm" secondAttribute="trailing" constant="24" id="pEz-FN-RGl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pqs-Ib-jHi"/>
                     </view>
