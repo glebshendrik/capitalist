@@ -94,3 +94,24 @@
 
 /* Class = "UIButton"; normalTitle = "Войти в свой аккаунт"; ObjectID = "vzQ-4G-1Tw"; */
 "vzQ-4G-1Tw.normalTitle" = "Join into your account";
+
+/* Class = "UILabel"; text = "Премиум"; ObjectID = "gZa-IS-iCO"; */
+"gZa-IS-iCO.text" = "Premium";
+
+/* Class = "UILabel"; text = "Неограниченный доступ"; ObjectID = "01n-23-8b8"; */
+"01n-23-8b8.text" = "Unlimited access";
+
+/* Class = "UIButton"; normalTitle = "Продолжить"; ObjectID = "fUb-DN-8du"; */
+"fUb-DN-8du.normalTitle" = "Continue";
+
+/* Class = "UILabel"; text = "Отменить подписку можно в любое время"; ObjectID = "lKB-Pm-0Zz"; */
+"lKB-Pm-0Zz.text" = "You can cancel subscription at any time";
+
+/* Class = "UIButton"; normalTitle = "Восстановить покупки"; ObjectID = "o5k-QV-lIF"; */
+"o5k-QV-lIF.normalTitle" = "Restore purchases";
+
+/* Class = "UIButton"; normalTitle = "Правила пользования"; ObjectID = "5EK-M0-ETE"; */
+"5EK-M0-ETE.normalTitle" = "Terms of use";
+
+/* Class = "UIButton"; normalTitle = "Политика конфиденциальности"; ObjectID = "XKN-lI-EuO"; */
+"XKN-lI-EuO.normalTitle" = "Privacy policy";

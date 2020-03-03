@@ -307,6 +307,7 @@
 		FAAC99C623B7BAF8009ADB84 /* DatePeriodSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAC99C523B7BAF8009ADB84 /* DatePeriodSelectionViewModel.swift */; };
 		FAAC99C823B8DF79009ADB84 /* DatePeriodSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAC99C723B8DF79009ADB84 /* DatePeriodSelectionViewController.swift */; };
 		FAAC99CA23B8DFF6009ADB84 /* DatePeriodSelectionTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAC99C923B8DFF6009ADB84 /* DatePeriodSelectionTableController.swift */; };
+		FAADA026240806520040DBC0 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAADA025240806520040DBC0 /* ProductViewModel.swift */; };
 		FAB5BE3D2351FE5B000466AE /* Active.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE3C2351FE5B000466AE /* Active.swift */; };
 		FAB5BE3F2351FE75000466AE /* ActiveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE3E2351FE75000466AE /* ActiveType.swift */; };
 		FAB5BE41235206F1000466AE /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE40235206F1000466AE /* Reminder.swift */; };
@@ -775,6 +776,7 @@
 		FAAC99C523B7BAF8009ADB84 /* DatePeriodSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePeriodSelectionViewModel.swift; sourceTree = "<group>"; };
 		FAAC99C723B8DF79009ADB84 /* DatePeriodSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePeriodSelectionViewController.swift; sourceTree = "<group>"; };
 		FAAC99C923B8DFF6009ADB84 /* DatePeriodSelectionTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePeriodSelectionTableController.swift; sourceTree = "<group>"; };
+		FAADA025240806520040DBC0 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
 		FAB29A2922AC3B32009946DC /* Three Baskets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Three Baskets.entitlements"; sourceTree = "<group>"; };
 		FAB5BE3C2351FE5B000466AE /* Active.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Active.swift; sourceTree = "<group>"; };
 		FAB5BE3E2351FE75000466AE /* ActiveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveType.swift; sourceTree = "<group>"; };
@@ -1061,7 +1063,6 @@
 				FA165CE121B65F0300EAA16B /* LoginViewModel.swift */,
 				FA165CE721B7654100EAA16B /* ForgotPasswordViewModel.swift */,
 				FA165CEB21B7766900EAA16B /* ResetPasswordViewModel.swift */,
-				FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -1600,6 +1601,23 @@
 			path = Period;
 			sourceTree = "<group>";
 		};
+		FAADA024240806390040DBC0 /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				FAADA025240806520040DBC0 /* ProductViewModel.swift */,
+				FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
+		FAADA027240807360040DBC0 /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
 		FAB5BE5623537CDE000466AE /* Actives */ = {
 			isa = PBXGroup;
 			children = (
@@ -2009,6 +2027,7 @@
 				FA66D82A2293D1E900C21E8B /* IncomeSources */,
 				FA0CAE2421D67A6000805288 /* Icons */,
 				FA165CD421B4EF5500EAA16B /* Join */,
+				FAADA024240806390040DBC0 /* Subscription */,
 				FAD88F8921B1226900BE7BC1 /* Main */,
 				FAD88F8A21B1227600BE7BC1 /* Menu */,
 				FAA861A023D72E6A009DF88F /* Onbording */,
@@ -2034,6 +2053,7 @@
 				FA0CAE2021D679C000805288 /* Icons */,
 				FA66D8262293D14400C21E8B /* IncomeSources */,
 				FAD88F8621B117CF00BE7BC1 /* Join */,
+				FAADA027240807360040DBC0 /* Subscription */,
 				FAD88F8521B117BC00BE7BC1 /* Main */,
 				FAC3B9BF21BE15CE0015A12F /* Onboarding */,
 				FA165CDE21B653F300EAA16B /* Profile */,
@@ -2088,7 +2108,6 @@
 				FACEC1582301495A00611B2C /* ForgotPasswordTableController.swift */,
 				FA165CED21B7846C00EAA16B /* ResetPasswordViewController.swift */,
 				FACEC15A2301505F00611B2C /* ResetPasswordTableController.swift */,
-				FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -2635,6 +2654,7 @@
 				FABE54E7233C99B500DF2B70 /* CreditViewModel.swift in Sources */,
 				FAAC99C823B8DF79009ADB84 /* DatePeriodSelectionViewController.swift in Sources */,
 				FACC01F1224B86B10044A747 /* TransactionsViewModel.swift in Sources */,
+				FAADA026240806520040DBC0 /* ProductViewModel.swift in Sources */,
 				FA0570F9232AAE7D002B4706 /* BorrowEditViewController.swift in Sources */,
 				FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */,
 				FA0CAE1D21D66FC200805288 /* IconsCoordinator.swift in Sources */,

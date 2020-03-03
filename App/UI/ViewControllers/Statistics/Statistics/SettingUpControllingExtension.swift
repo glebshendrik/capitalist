@@ -68,9 +68,14 @@ extension StatisticsViewController {
     }
     
     @objc func didTapFiltersButton(_ sender: Any) {
-        showFilters()
+        if viewModel.canShowFilters {
+            showFilters()
+        }
+        else {            
+            showSubscription()
+        }
     }
-            
+    
     private func setupTableUI() {
         viewModel.updatePresentationData()
         tableView.delegate = self

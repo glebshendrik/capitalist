@@ -113,8 +113,8 @@ class AccountCoordinator : AccountCoordinatorProtocol {
                     usersService.loadUser(with: currentUserId)
                 }.get { user in
                     self.router.setMinimumAllowed(version: user.minVersion, build: user.minBuild)
-                    self.analyticsManager.set(userId: user.id.string)
-                    Apphud.updateUserID(user.id.string)
+                    self.analyticsManager.set(userId: String(user.id))
+                    Apphud.updateUserID(String(user.id))
                 }
     }
     

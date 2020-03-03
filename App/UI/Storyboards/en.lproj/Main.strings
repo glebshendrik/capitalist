@@ -55,3 +55,7 @@
 
 /* Class = "UILabel"; text = "Статистика"; ObjectID = "u21-Jw-Xay"; */
 "u21-Jw-Xay.text" = "Statistics";
+
+/* Class = "UILabel"; text = "Премиум"; ObjectID = "9la-8h-GSz"; */
+"9la-8h-GSz.text" = "Premium";
+

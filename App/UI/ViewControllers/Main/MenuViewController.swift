@@ -11,12 +11,17 @@ import SideMenu
 import StaticTableViewController
 import PromiseKit
 
-class MenuViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol {
+class MenuViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol {
+    
+    var factory: UIFactoryProtocol!
     
     @IBOutlet weak var joinCell: UITableViewCell!
     @IBOutlet weak var profileCell: UITableViewCell!
+    @IBOutlet weak var premiumCell: UITableViewCell!
     @IBOutlet weak var incomeProgress: ProgressView!
     @IBOutlet weak var expensesProgress: ProgressView!
+    @IBOutlet weak var creditsCell: UITableViewCell!
+    @IBOutlet weak var borrowsCell: UITableViewCell!
     
     private var loaderView: LoaderView!
     
@@ -31,6 +36,14 @@ class MenuViewController : StaticTableViewController, UIMessagePresenterManagerD
     override func viewWillAppear(_ animated: Bool) {
         updateUI()
         refreshData()
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {        
+        if !viewModel.hasActiveSubscription && (identifier == "showBorrows" || identifier == "showCredits") {
+            modal(factory.subscriptionViewController())
+            return false
+        }
+        return true
     }
     
     func updateUI(animated: Bool = false) {
@@ -59,6 +72,7 @@ class MenuViewController : StaticTableViewController, UIMessagePresenterManagerD
     func updateTableUI(animated: Bool = false) {
         set(cells: joinCell, hidden: !viewModel.isCurrentUserLoaded || !viewModel.isCurrentUserGuest)
         set(cells: profileCell, hidden: !viewModel.isCurrentUserLoaded || viewModel.isCurrentUserGuest)
+        set(cells: premiumCell, hidden: viewModel.premiumItemHidden)
         reloadData(animated: animated)
     }
     

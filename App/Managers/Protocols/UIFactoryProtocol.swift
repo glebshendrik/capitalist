@@ -148,4 +148,6 @@ protocol UIFactoryProtocol {
     func dependentIncomeSourceInfoViewController(activeName: String) -> UIViewController?
     
     func transactionCreationInfoViewController() -> UINavigationController?
+    
+    func subscriptionViewController() -> UINavigationController?
 }

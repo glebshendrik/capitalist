@@ -142,6 +142,10 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             guard let filterViewModel = viewModel.graphFilterViewModel(at: indexPath.row) else { return }
             
             if viewModel.canFilterTransactions(with: filterViewModel) {
+                guard viewModel.canShowFilters else {
+                    showSubscription()
+                    return
+                }
                 viewModel.set(filter: filterViewModel)
             } else {
                 viewModel.handleIncomeAndExpensesFilterTap(with: filterViewModel)

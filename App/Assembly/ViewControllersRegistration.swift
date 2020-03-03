@@ -255,5 +255,10 @@ extension ApplicationAssembly {
         container.registerForSkrudzhStoryboard(TransactionablesCreationViewController.self) { (r, c) in
             c.viewModel = r.resolve(TransactionablesCreationViewModel.self)
         }
+        
+        // SubscriptionViewController
+        container.registerForSkrudzhStoryboard(SubscriptionViewController.self) { (r, c) in
+            c.viewModel = r.resolve(SubscriptionViewModel.self)
+        }        
     }
 }

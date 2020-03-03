@@ -63,13 +63,17 @@ extension StatisticsViewController : TransactionEditViewControllerDelegate, Borr
 }
 
 extension StatisticsViewController : FiltersSelectionViewControllerDelegate {
-    func showFilters() {
+    func showFilters() {        
         modal(factory.statisticsFiltersViewController(delegate: self, dateRangeFilter: viewModel.dateRangeFilter, transactionableFilters: viewModel.transactionableFilters))
     }
     
     func didSelect(filters: [TransactionableFilter]) {
         viewModel.set(filters: filters)
         updateUI()
+    }
+    
+    func showSubscription() {
+        modal(factory.subscriptionViewController())
     }
 }
 

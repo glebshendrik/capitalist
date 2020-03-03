@@ -18,6 +18,8 @@ class StatisticsViewModel {
     private let transactionsViewModel: TransactionsViewModel
     private let periodsViewModel: PeriodsViewModel
     private let filtersViewModel: FiltersViewModel
+    private let accountCoordinator: AccountCoordinatorProtocol
+    
     let graphViewModel: GraphViewModel
     
     public private(set) var isDataLoading: Bool = false
@@ -38,12 +40,18 @@ class StatisticsViewModel {
         return sections.firstIndex { $0.type == .graph }
     }
     
+    var canShowFilters: Bool {
+        return accountCoordinator.currentUserHasActiveSubscription
+    }
+    
     init(transactionsViewModel: TransactionsViewModel,
          filtersViewModel: FiltersViewModel,
-         periodsViewModel: PeriodsViewModel) {
+         periodsViewModel: PeriodsViewModel,
+         accountCoordinator: AccountCoordinatorProtocol) {
         self.transactionsViewModel = transactionsViewModel
         self.periodsViewModel = periodsViewModel
-        self.filtersViewModel = filtersViewModel        
+        self.filtersViewModel = filtersViewModel
+        self.accountCoordinator = accountCoordinator
         graphViewModel = GraphViewModel(transactionsViewModel: self.transactionsViewModel, periodsViewModel: self.periodsViewModel)
         graphFiltersSection = GraphFiltersSection(viewModel: graphViewModel)
     }

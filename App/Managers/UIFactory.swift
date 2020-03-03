@@ -475,4 +475,9 @@ class UIFactory : UIFactoryProtocol {
         
         return borrowInfoViewController
     }
+    
+    func subscriptionViewController() -> UINavigationController? {
+        guard let subscriptionViewController = router.viewController(.SubscriptionViewController) as? SubscriptionViewController else { return nil }
+        return UINavigationController(rootViewController: subscriptionViewController)
+    }
 }

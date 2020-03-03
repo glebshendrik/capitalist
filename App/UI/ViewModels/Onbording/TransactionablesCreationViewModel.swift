@@ -118,6 +118,12 @@ class TransactionablesCreationViewModel {
         self.transactionableType = transactionableType
     }
     
+    func updateDefaultCurrency() -> Promise<Void> {
+        return settingsCoordinator.updateUserSettings(with: UserSettingsUpdatingForm(userId: accountCoordinator.currentSession?.userId,
+                                                                                     currency: Locale.current.currencyCode,
+                                                                                     defaultPeriod: nil))
+    }
+    
     func loadData() -> Promise<Void> {
         return  firstly {
                     onboardUser()

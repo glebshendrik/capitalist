@@ -27,6 +27,14 @@ class MenuViewModel {
         return user.guest
     }    
     
+    var premiumItemHidden: Bool {
+        return hasActiveSubscription
+    }
+    
+    var hasActiveSubscription: Bool {
+        return accountCoordinator.currentUserHasActiveSubscription
+    }
+        
     var shouldNotifyAboutRegistrationConfirmation: Bool {
         guard let user = currentUser, !user.guest else {
             return false

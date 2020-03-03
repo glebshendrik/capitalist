@@ -453,7 +453,7 @@ extension UIView {
 
 extension UIImageView {
     func showLoader() {
-        self.animationImages = [Int](1...20).compactMap { UIImage(named: "loader-\($0)") }
+        self.animationImages = [Int](1...20).compactMap { UIImage(named: "loader-\($0)")?.withRenderingMode(.alwaysTemplate) }
         self.animationDuration = 1.5
         self.startAnimating()
     }

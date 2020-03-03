@@ -34,7 +34,7 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
         super.viewDidLoad()
         setupUI()
         updateUI()
-        loadData()
+        updateDefaultCurrency()
     }
     
     @IBAction func didTapCurrencyButton(_ sender: Any) {
@@ -113,6 +113,20 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
         }.finally {
             self.updateUI()
             self.set(self.examplesActivityIndicator, hidden: true)
+        }
+    }
+    
+    func updateDefaultCurrency() {
+        set(examplesActivityIndicator, hidden: false)
+        firstly {
+            viewModel.updateDefaultCurrency()
+        }.catch { e in
+            print(e)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
+        }.finally {
+            self.updateUI()
+            self.set(self.examplesActivityIndicator, hidden: true)
+            self.loadData()
         }
     }
     

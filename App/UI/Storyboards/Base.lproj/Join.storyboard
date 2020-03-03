@@ -1012,10 +1012,10 @@
             </objects>
             <point key="canvasLocation" x="2305" y="1294"/>
         </scene>
-        <!--Премиум-->
+        <!-- -->
         <scene sceneID="3AX-GP-P68">
             <objects>
-                <tableViewController title="Премиум" id="gdD-Ku-kVH" customClass="SubscriptionViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SubscriptionViewController" title=" " id="gdD-Ku-kVH" customClass="SubscriptionViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6JP-qO-y2i">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1076,22 +1076,22 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PMF-9I-cR0" customClass="InfiniteCollectionView" customModule="InfiniteLayout">
                                                     <rect key="frame" x="0.0" y="88" width="414" height="85"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cBj-Bm-5C5">
-                                                        <size key="itemSize" width="375" height="84"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Os5-xs-jIV">
+                                                        <size key="itemSize" width="50" height="50"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeatureDescriptionCollectionViewCell" id="kzt-J0-tdi" customClass="FeatureDescriptionCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.5" width="375" height="84"/>
+                                                            <rect key="frame" x="0.0" y="17.5" width="50" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dEC-Om-xk2">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Лучшее приложение в сфере финансов! " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45P-gC-bmG">
-                                                                        <rect key="frame" x="16" y="0.0" width="343" height="84"/>
+                                                                        <rect key="frame" x="16" y="0.0" width="18" height="50"/>
                                                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="18"/>
                                                                         <color key="textColor" name="white 1.0"/>
                                                                         <nil key="highlightedColor"/>
@@ -1361,7 +1361,6 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didTapContinueButton:" destination="gdD-Ku-kVH" eventType="touchUpInside" id="ySI-G7-Wnx"/>
-                                                        <action selector="didTapRegisterButton:" destination="gdD-Ku-kVH" eventType="touchUpInside" id="cLQ-4T-Q2W"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Отменить подписку можно в любое время" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKB-Pm-0Zz">
@@ -1398,7 +1397,6 @@
                                                     <connections>
                                                         <action selector="didTapForgotPassword:" destination="Afc-hf-J34" eventType="touchUpInside" id="Zyl-x0-XSt"/>
                                                         <action selector="didTapRestoreButton:" destination="gdD-Ku-kVH" eventType="touchUpInside" id="KXF-Al-AML"/>
-                                                        <action selector="didTapSignInButton:" destination="gdD-Ku-kVH" eventType="touchUpInside" id="SsP-FW-Ts5"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1426,7 +1424,6 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="didTapForgotPassword:" destination="Afc-hf-J34" eventType="touchUpInside" id="sgy-Z0-Jg2"/>
-                                                        <action selector="didTapSignInButton:" destination="gdD-Ku-kVH" eventType="touchUpInside" id="0fD-HK-ZED"/>
                                                         <action selector="didTapTermsButton:" destination="gdD-Ku-kVH" eventType="touchUpInside" id="Ldx-Z1-yJN"/>
                                                     </connections>
                                                 </button>
@@ -1456,7 +1453,6 @@
                                                     <connections>
                                                         <action selector="didTapForgotPassword:" destination="Afc-hf-J34" eventType="touchUpInside" id="5uC-Gs-RWk"/>
                                                         <action selector="didTapPrivacyButton:" destination="gdD-Ku-kVH" eventType="touchUpInside" id="cYL-b9-9lc"/>
-                                                        <action selector="didTapSignInButton:" destination="gdD-Ku-kVH" eventType="touchUpInside" id="Eup-dj-5L7"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1487,8 +1483,6 @@
                         <outlet property="firstProductSubtitleLabel" destination="8Je-EN-7WT" id="WLS-7K-Nqh"/>
                         <outlet property="firstProductTitleLabel" destination="LTA-8Q-MKL" id="1Yh-bB-6wO"/>
                         <outlet property="loaderImageView" destination="FX4-UV-Vh7" id="jeP-8Q-rBS"/>
-                        <outlet property="registerButton" destination="fUb-DN-8du" id="zOo-Va-d7u"/>
-                        <outlet property="registerCell" destination="ECJ-N4-o88" id="HRk-ma-4ZX"/>
                         <outlet property="secondProductBackground" destination="3eh-HD-Bbw" id="bNd-cm-O6I"/>
                         <outlet property="secondProductCell" destination="9Ea-Dq-MRM" id="hMA-Fj-irf"/>
                         <outlet property="secondProductSelectedSign" destination="plY-D2-E2H" id="Z53-gs-2Xh"/>
