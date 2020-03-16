@@ -34,12 +34,7 @@ class ProductViewModel {
             return String.localizedStringWithFormat(NSLocalizedString("%@ бесплатно", comment: "%@ бесплатно"), trialPeriod.localizedPeriod)
         }
         
-        if let savingPercent = savingPercent {
-            return String.localizedStringWithFormat(NSLocalizedString("Скидка %@", comment: "Скидка %@"), formattedPercent(savingPercent))
-        }
-        else {
-            return NSLocalizedString("Без скидки", comment: "Без скидки")
-        }
+        return product.localizedPricePerPeriod
     }
     
     var subtitle: String {
@@ -47,7 +42,12 @@ class ProductViewModel {
             return String.localizedStringWithFormat(NSLocalizedString("Через %@ %@", comment: "Через %@ %@"), trialPeriod.localizedPeriod, product.localizedPricePerPeriod)
         }
         
-        return product.localizedPricePerPeriod
+        if let savingPercent = savingPercent {
+            return String.localizedStringWithFormat(NSLocalizedString("Скидка %@", comment: "Скидка %@"), formattedPercent(savingPercent))
+        }
+        else {
+            return NSLocalizedString("Без скидки", comment: "Без скидки")
+        }
     }
     
     init(product: SKProduct) {

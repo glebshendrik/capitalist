@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import SwiftyGif
 
 class TransactionCreationInfoViewController : UIViewController {    
     @IBOutlet weak var tutorialImageView: UIImageView!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        tutorialImageView.showTutorial()
+        super.viewDidLoad()        
+        showTutorial()
         setupNavigationBarAppearance()
     }
     
@@ -24,5 +25,11 @@ class TransactionCreationInfoViewController : UIViewController {
     
     @IBAction func didTapGetItButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    private func showTutorial() {
+        if let gif = try? UIImage(gifName: NSLocalizedString("drag-tutorial", comment: "drag-tutorial")) {
+            tutorialImageView.setGifImage(gif, manager: SwiftyGifManager.defaultManager, loopCount: -1)
+        }
     }
 }

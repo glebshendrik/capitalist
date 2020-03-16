@@ -3,7 +3,7 @@
 "3Ij-Wz-ocF.title" = "Cancel";
 
 /* Class = "UILabel"; text = "Комментарий"; ObjectID = "NIv-Br-BcV"; */
-"NIv-Br-BcV.text" = "Commect";
+"NIv-Br-BcV.text" = "Comment";
 
 /* Class = "UIButton"; normalTitle = "Удалить"; ObjectID = "Xew-SX-Imp"; */
 "Xew-SX-Imp.normalTitle" = "Remove";

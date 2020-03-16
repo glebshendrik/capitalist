@@ -47,10 +47,7 @@ class LoginViewController : FormSubmitViewController {
         }
     }
     
-    override func didSave() {
-        _ = UIFlowManager.reach(point: .onboarding)
-        _ = UIFlowManager.reach(point: .dataSetup)
-        _ = UIFlowManager.reach(point: .transactionCreationInfoMessage)
+    override func didSave() {        
         super.didSave()
     }
 }

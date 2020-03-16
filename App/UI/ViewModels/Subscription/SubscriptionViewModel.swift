@@ -47,6 +47,14 @@ class SubscriptionViewModel {
         return featureDescriptions.count
     }
     
+    var privacyURLString: String {
+        return NSLocalizedString("privacy policy url", comment: "privacy policy url")
+    }
+    
+    var termsURLString: String {
+        return NSLocalizedString("terms of service url", comment: "terms of service url")
+    }
+    
     init(accountCoordinator: AccountCoordinatorProtocol) {
         self.accountCoordinator = accountCoordinator
     }

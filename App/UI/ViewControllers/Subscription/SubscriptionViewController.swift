@@ -49,6 +49,11 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
     
     private var productContainers: [SubscriptionProductId : ProductViewContainer] = [:]
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        _ = UIFlowManager.reach(point: .subscription)
+    }
+    
     override func setupUI() {
         super.setupUI()
         setupNavigationBarAppearance()
@@ -82,11 +87,11 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
     }
     
     @IBAction func didTapTermsButton(_ sender: Any) {
-        show("http://threebaskets.net/policy.html")
+        show(url: viewModel.termsURLString)
     }
     
     @IBAction func didTapPrivacyButton(_ sender: Any) {
-        show("http://threebaskets.net/policy.html")
+        show(url: viewModel.privacyURLString)
     }
     
     @objc private func loadData() {
@@ -106,7 +111,7 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
         _ = firstly {
                 viewModel.purchase()
             }.done {
-                if self.isModal {
+                if self.isModal || self.isRoot {
                     self.closeButtonHandler()
                 }
                 else {
@@ -125,7 +130,7 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
         _ = firstly {
                 viewModel.restore()
             }.done {
-                if self.isModal {
+                if self.isModal || self.isRoot {
                     self.closeButtonHandler()
                 }
                 else {
@@ -216,8 +221,8 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
         productContainers[id]?.subtitle.text = subtitle
     }
     
-    private func show(_ urlString: String) {
-        guard let url = URL(string: urlString) else { return }
+    private func show(url: String) {
+        guard let url = URL(string: url) else { return }
         let browser = SFSafariViewController(url: url)
         browser.modalPresentationStyle = .popover
         modal(browser)

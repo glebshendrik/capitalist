@@ -29,7 +29,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var iconContainer: UIView!
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var bankIconView: SVGKFastImageView!
-    @IBOutlet weak var iconPen: UIImageView!
+    @IBOutlet weak var iconPen: UIView!
     
     @IBOutlet weak var bankButton: UIButton!
     

@@ -592,7 +592,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label label a a" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byN-iX-RJx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abu Dhabi Commercial Bank" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byN-iX-RJx">
                                                     <rect key="frame" x="0.0" y="72" width="80" height="28"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
                                                     <color key="textColor" name="white 0.64"/>
@@ -723,8 +723,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aXu-tF-CDN">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" ambiguous="YES" text="Например, зажмите источник дохода и перетащите на кошелек" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKb-3T-Efp">
-                                        <rect key="frame" x="16" y="140.5" width="343" height="37.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Например, зажмите источник дохода и перетащите на кошелек" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKb-3T-Efp">
+                                        <rect key="frame" x="16" y="140" width="343" height="37.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
                                         <color key="textColor" name="white 0.64"/>
                                         <nil key="highlightedColor"/>
@@ -748,22 +748,24 @@
                                             <action selector="didTapGetItButton:" destination="uMh-vx-ooM" eventType="touchUpInside" id="rBk-kW-qz6"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Для отображения доходов и расходов используйте перетаскивание" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eap-zo-jtG">
-                                        <rect key="frame" x="24" y="32" width="327" height="84.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Для отображения доходов и расходов используйте перетаскивание" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eap-zo-jtG">
+                                        <rect key="frame" x="24" y="32" width="327" height="84"/>
                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
                                         <color key="textColor" name="white 1.0"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="drag-tutorial-1" translatesAutoresizingMaskIntoConstraints="NO" id="PyY-xq-zcv">
-                                        <rect key="frame" x="-112.5" y="210" width="600" height="283.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PyY-xq-zcv">
+                                        <rect key="frame" x="32" y="210" width="311" height="283.5"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="PyY-xq-zcv" firstAttribute="top" secondItem="IKb-3T-Efp" secondAttribute="bottom" constant="32" id="3G1-LS-fCG"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PyY-xq-zcv" secondAttribute="trailing" constant="32" id="70f-JW-8zb"/>
                                     <constraint firstItem="IKb-3T-Efp" firstAttribute="top" secondItem="Eap-zo-jtG" secondAttribute="bottom" constant="24" id="DRF-aI-t2Z"/>
                                     <constraint firstItem="ddH-co-jCI" firstAttribute="leading" secondItem="aXu-tF-CDN" secondAttribute="leading" constant="24" id="EWX-7Z-rz2"/>
                                     <constraint firstItem="PyY-xq-zcv" firstAttribute="centerX" secondItem="aXu-tF-CDN" secondAttribute="centerX" id="ITm-lY-O5B"/>
+                                    <constraint firstItem="PyY-xq-zcv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aXu-tF-CDN" secondAttribute="leading" constant="32" id="KPz-ta-JlH"/>
                                     <constraint firstAttribute="bottom" secondItem="ddH-co-jCI" secondAttribute="bottom" priority="999" constant="60" id="M1t-iU-sPo"/>
                                     <constraint firstItem="Eap-zo-jtG" firstAttribute="leading" secondItem="aXu-tF-CDN" secondAttribute="leading" constant="24" id="RC3-lV-94P"/>
                                     <constraint firstAttribute="trailing" secondItem="ddH-co-jCI" secondAttribute="trailing" constant="24" id="XJc-OW-H2I"/>
@@ -806,7 +808,6 @@
         <image name="basket-expenses" width="213" height="173"/>
         <image name="basket-risk" width="213" height="231.5"/>
         <image name="basket-safe" width="213" height="231.5"/>
-        <image name="drag-tutorial-1" width="300" height="283.5"/>
         <image name="income-source-default-icon" width="24" height="24"/>
         <image name="loader-1" width="55" height="31"/>
         <namedColor name="black 2">

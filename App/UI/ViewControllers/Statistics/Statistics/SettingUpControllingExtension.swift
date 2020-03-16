@@ -52,6 +52,10 @@ extension StatisticsViewController {
         viewModel.set(filter: filter)
     }
     
+    func set(graphType: GraphType) {
+        viewModel.set(graphType: graphType)
+    }
+    
     func setupUI() {
         setupNavigationBar()
         setupTableUI()

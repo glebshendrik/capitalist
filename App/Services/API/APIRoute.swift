@@ -17,8 +17,8 @@ enum APIRoute: URLRequestConvertible {
 //            return "https://api.threebaskets.net"
             return "https://skrudzh-staging.herokuapp.com"
         #else
-            return "https://skrudz.tempio.app"
-//            return "https://api.threebaskets.net"
+//            return "https://skrudz.tempio.app"
+            return "https://api.threebaskets.net"
         #endif
     }
     

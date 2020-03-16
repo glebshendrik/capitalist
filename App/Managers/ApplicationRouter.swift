@@ -13,7 +13,12 @@ import PromiseKit
 import IQKeyboardManager
 import RecurrencePicker
 import SwifterSwift
+import SwiftyGif
 import ApphudSDK
+import Firebase
+import FirebaseCoreDiagnostics
+import BiometricAuthentication
+import FBSDKCoreKit
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private let storyboards: [Infrastructure.Storyboard: UIStoryboard]
@@ -43,27 +48,41 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         self.soundsManager = soundsManager
         self.analyticsManager = analyticsManager
     }
-    
+        
     func initDependencies(with resolver: Swinject.Resolver) {
         accountCoordinator = resolver.resolve(AccountCoordinatorProtocol.self)!
         saltEdgeCoordinator = resolver.resolve(BankConnectionsCoordinatorProtocol.self)!
     }
     
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let handled = ApplicationDelegate.shared.application(app, open: url, options: options)
+        
+        return handled
+    }
+    
+    func application(_ app: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return ApplicationDelegate.shared.application(app, open: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
     func start(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
-        if UIFlowManager.isFirstAppLaunch {
-            userSessionManager.forgetSession()            
-        }
-        if !UIFlowManager.reach(point: .soundsManagerInitialization) {
-            soundsManager.setSounds(enabled: false)
-        }
-        Apphud.start(apiKey: "app_mHJ17n3JPJiohGj5JgwNkkermyShF1")
-        Apphud.setDelegate(self)
-        saltEdgeCoordinator.setup()
         self.launchOptions = launchOptions
-        setupKeyboardManager()
-        setupAppearance()
-        setupLocale()
-        route()
+        handleFirstAppLaunch()
+        setupServices()
+        setupFacebook(launchOptions)
+        launch()
+    }
+    
+    func launch() {
+        guard let startAnimationViewController = show(.StartAnimationViewController) as? StartAnimationViewController else {
+            route()
+            return
+        }
+        do {
+            try startAnimationViewController.startAnimationWith(delegate: self)
+        }
+        catch {
+            route()
+        }
     }
     
     func route() {
@@ -82,28 +101,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         
         showLandingScreen()
         
-        beginAuthorizedUserFlow()
+        authorizedRoute()
     }
     
-    func setMinimumAllowed(version: String?, build: String?) {
-        minVersion = version
-        minBuild = build
-        if checkIfAppUpdateNeeded() {
-            route()
-        }
-    }
-    
-    private func checkIfAppUpdateNeeded() -> Bool {
-        guard   let minBuild = minBuild,
-                let appBuild = SwifterSwift.appBuild,
-                let minBuildNumber = Int(minBuild),
-                let appBuildNumber = Int(appBuild) else {
-            return false
-        }
-        return appBuildNumber < minBuildNumber
-    }
-    
-    private func beginAuthorizedUserFlow() {
+    private func authorizedRoute() {
         firstly {
             accountCoordinator.loadCurrentUser()
         }.done { user in
@@ -125,6 +126,11 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
                 return
             }
             
+            guard UIFlowManager.reached(point: .subscription) || self.accountCoordinator.currentUserHasActiveSubscription else {
+                self.showSubscriptionScreen()
+                return
+            }
+            
             self.showMainViewController()
         }.catch { error in
             if self.errorIsNotFoundOrNotAuthorized(error: error) {
@@ -143,54 +149,17 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             return false
         }
     }
-    
-    private func showAppUpdateScreen() {
-        _ = show(.AppUpdateViewController)
-    }
-    
-    private func showLandingScreen() {
-        _ = show(.LandingViewController)
-    }
-    
-    private func showJoiningAsGuestScreen() {
-        if let landingViewController = show(.LandingViewController) as? LandingViewController {
-            landingViewController.update(loadingMessage: NSLocalizedString("Creating guest account", comment: "Создание учетной записи гостя..."))
-        }
-    }
-    
-    func showMainViewController() {
-        _ = show(.MainViewController)
-        modal(.PasscodeViewController)
-        if let menuLeftNavigationController = viewController(.MenuNavigationController) as? SideMenuNavigationController {
-            SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
-        }
-    }
-    
-    func showOnboardingViewController() {
-        _ = show(.OnboardingViewController)
-    }
-    
-    func showDataSetupViewController() {
-        _ = show(.TransactionablesCreationViewController)
-    }
-        
-    func show(_ viewController: Infrastructure.ViewController) -> UIViewController? {
-        window.rootViewController = self.viewController(viewController)
-        return window.rootViewController
-    }
-    
-    func modal(_ viewController: Infrastructure.ViewController) {        
-        window.rootViewController?.topmostPresentedViewController.modal(self.viewController(viewController))
-    }
-    
-    func setWindow(blurred: Bool) {
-        let blurViewTagId = 999
-        blurred ? window.addBlur(with: blurViewTagId) : window.removeBlur(with: blurViewTagId)
-    }
-    
-    func viewController(_ viewController: Infrastructure.ViewController) -> UIViewController {
-        let storyboard = self.storyboards[viewController.storyboard]
-        return storyboard!.instantiateViewController(withIdentifier: viewController.identifier)
+}
+
+extension ApplicationRouter {
+    private func setupServices() {
+        setupSoundsManager()
+        setupKeyboardManager()
+        setupAppearance()
+        setupBiometric()
+        setupSaltEdge()
+        setupApphud()
+        setupAnalytics()
     }
     
     func setupAppearance() {
@@ -219,21 +188,159 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         keyboardManager.isEnableAutoToolbar = false
     }
     
-    private func setupLocale() {        
-//        InternationalControl.shared.language = RecurrencePickerLanguage.preferred
+    private func setupApphud() {
+        Apphud.start(apiKey: "app_mHJ17n3JPJiohGj5JgwNkkermyShF1")
+        Apphud.setDelegate(self)
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return true
+    private func setupSaltEdge() {
+        saltEdgeCoordinator.setup()
     }
     
-    func application(_ app: UIApplication, open url: URL, sourceApplication: String?) -> Bool {
-        return true
-    }    
+    private func setupAnalytics() {
+        analyticsManager.setup()        
+    }
+    
+    private func setupSoundsManager() {
+        if !UIFlowManager.reach(point: .soundsManagerInitialization) {
+            soundsManager.setSounds(enabled: false)
+        }
+    }
+    
+    private func setupBiometric() {
+        BioMetricAuthenticator.shared.allowableReuseDuration = 180
+    }
+    
+    private func handleFirstAppLaunch() {
+        if UIFlowManager.isFirstAppLaunch {
+            userSessionManager.forgetSession()
+        }
+    }
+    
+    private func setupFacebook(_ launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
+        Settings.isAutoInitEnabled = true
+        ApplicationDelegate.initializeSDK(nil)
+        ApplicationDelegate.shared.application(UIApplication.shared, didFinishLaunchingWithOptions: launchOptions)
+        AppLinkUtility.fetchDeferredAppLink { (url, error) in
+            if let error = error {
+                print("Received error while fetching deferred app link %@", error)
+            }
+            if let url = url {
+                if #available(iOS 10, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }
+        }
+    }
+}
+
+extension ApplicationRouter {
+    private func showAppUpdateScreen() {
+        _ = show(.AppUpdateViewController)
+    }
+    
+    private func showLandingScreen() {
+        _ = show(.LandingViewController)
+    }
+    
+    private func showSubscriptionScreen() {
+        window.rootViewController = UINavigationController(rootViewController: self.viewController(.SubscriptionViewController))
+    }
+    
+    private func showJoiningAsGuestScreen() {
+        if let landingViewController = show(.LandingViewController) as? LandingViewController {
+            landingViewController.update(loadingMessage: NSLocalizedString("Creating guest account", comment: "Создание учетной записи гостя..."))
+        }
+    }
+    
+    func showMainViewController() {
+        _ = show(.MainViewController)
+        showPasscodeScreen()
+        if let menuLeftNavigationController = viewController(.MenuNavigationController) as? SideMenuNavigationController {
+            SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
+        }
+    }
+    
+    func showPasscodeScreen() {
+        if BioMetricAuthenticator.canAuthenticate() {
+            modal(.PasscodeViewController)
+        }
+    }
+    
+    func showOnboardingViewController() {
+        _ = show(.OnboardingViewController)
+    }
+    
+    func showDataSetupViewController() {
+        _ = show(.TransactionablesCreationViewController)
+    }
+        
+    func show(_ viewController: Infrastructure.ViewController) -> UIViewController? {
+        window.rootViewController = self.viewController(viewController)
+        return window.rootViewController
+    }
+    
+    func modal(_ viewController: Infrastructure.ViewController) {
+        window.rootViewController?.topmostPresentedViewController.modal(self.viewController(viewController))
+    }
+    
+    func setWindow(blurred: Bool) {
+        let blurViewTagId = 999
+        blurred ? window.addBlur(with: blurViewTagId) : window.removeBlur(with: blurViewTagId)
+    }
+    
+    func viewController(_ viewController: Infrastructure.ViewController) -> UIViewController {
+        let storyboard = self.storyboards[viewController.storyboard]
+        return storyboard!.instantiateViewController(withIdentifier: viewController.identifier)
+    }
+}
+
+extension ApplicationRouter {
+    func setMinimumAllowed(version: String?, build: String?) {
+        minVersion = version
+        minBuild = build
+        if checkIfAppUpdateNeeded() {
+            route()
+        }
+    }
+    
+    private func checkIfAppUpdateNeeded() -> Bool {
+        guard   let minBuild = minBuild,
+                let appBuild = SwifterSwift.appBuild,
+                let minBuildNumber = Int(minBuild),
+                let appBuildNumber = Int(appBuild) else {
+            return false
+        }
+        return appBuildNumber < minBuildNumber
+    }
 }
 
 extension ApplicationRouter : ApphudDelegate {
     func apphudSubscriptionsUpdated(_ subscriptions: [ApphudSubscription]) {
         _ = accountCoordinator.updateUserSubscription()
+    }
+}
+
+extension ApplicationRouter : SwiftyGifDelegate {
+    func gifURLDidFinish(sender: UIImageView) {
+        print("gifURLDidFinish")
+    }
+
+    func gifURLDidFail(sender: UIImageView) {
+        print("gifURLDidFail")
+    }
+
+    func gifDidStart(sender: UIImageView) {
+        print("gifDidStart")
+    }
+    
+    func gifDidLoop(sender: UIImageView) {
+        print("gifDidLoop")
+    }
+    
+    func gifDidStop(sender: UIImageView) {
+        route()
     }
 }

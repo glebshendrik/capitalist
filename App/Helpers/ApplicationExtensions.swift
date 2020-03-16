@@ -316,8 +316,13 @@ extension UIViewController {
 }
 
 extension UIViewController {
-    var isModal: Bool {
-
+    var isRoot: Bool {
+        let isRoot = self == UIApplication.shared.keyWindow?.rootViewController
+        let isNavigationRoot = navigationController == UIApplication.shared.keyWindow?.rootViewController && navigationController?.viewControllers.count == 1
+        return isRoot || isNavigationRoot
+    }
+    
+    var isModal: Bool {        
         let presentingIsModal = presentingViewController != nil
         let presentingIsNavigation = navigationController?.presentingViewController?.presentedViewController == navigationController
         let presentingIsTabBar = tabBarController?.presentingViewController is UITabBarController
@@ -335,7 +340,7 @@ extension UIViewController {
         navigationController?.navigationBar.tintColor = UIColor.by(.white100)
         navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
         
-        if isModal {
+        if isModal || isRoot {
             navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close-icon"), style: .plain, target: self, action: #selector(didTapCloseButton(sender:)))
         }
     }
@@ -345,7 +350,12 @@ extension UIViewController {
     }
             
     func closeButtonHandler() {
-        (navigationController ?? self).dismiss(animated: true)
+        if isRoot {
+            (self as? ApplicationRouterDependantProtocol)?.router.route()
+        }
+        else {
+            (navigationController ?? self).dismiss(animated: true)
+        }
     }
 }
 
@@ -456,11 +466,20 @@ extension UIImageView {
         self.animationImages = [Int](1...20).compactMap { UIImage(named: "loader-\($0)")?.withRenderingMode(.alwaysTemplate) }
         self.animationDuration = 1.5
         self.startAnimating()
+        
     }
     
     func showTutorial() {
-        self.animationImages = [Int](1...99).compactMap { UIImage(named: "drag-tutorial-\($0)") }
-        self.animationDuration = 4.5
+        let localizedDragTutorialName = NSLocalizedString("drag-tutorial", comment: "drag-tutorial")
+        self.animationImages = [Int](1...86).compactMap { UIImage(named: "\(localizedDragTutorialName)-\($0)") }
+        self.animationDuration = 4
+        self.startAnimating()
+    }
+    
+    func showStartAnimationWith(duration: TimeInterval) {
+        self.animationImages = [Int](1...115).compactMap { UIImage(named: "launch-animation-\($0)") }
+        self.animationDuration = duration
+        self.animationRepeatCount = 1
         self.startAnimating()
     }
 }

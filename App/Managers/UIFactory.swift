@@ -277,6 +277,12 @@ class UIFactory : UIFactoryProtocol {
         return statisticsViewController
     }
     
+    func statisticsModalViewController(graphType: GraphType) -> UINavigationController? {
+        guard let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController else { return nil }
+        statisticsViewController.set(graphType: graphType)
+        return UINavigationController(rootViewController: statisticsViewController)
+    }
+    
     func statisticsModalViewController(filter: TransactionableFilter?)  -> UINavigationController? {
         guard let statisticsViewController = router.viewController(.StatisticsViewController) as? StatisticsViewController else { return nil }
         statisticsViewController.set(filter: filter)

@@ -9,6 +9,7 @@
 import Foundation
 import PromiseKit
 import ApphudSDK
+import FBSDKCoreKit
 
 class NotificationsCoordinator : NotificationsCoordinatorProtocol {
     private let userSessionManager: UserSessionManagerProtocol
@@ -31,6 +32,7 @@ class NotificationsCoordinator : NotificationsCoordinatorProtocol {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
         Apphud.submitPushNotificationsToken(token: deviceToken, callback: nil)
+        AppEvents.setPushNotificationsDeviceToken(deviceToken)
         return devicesService.register(deviceToken: deviceToken, userId: currentUserId)
     }
 }

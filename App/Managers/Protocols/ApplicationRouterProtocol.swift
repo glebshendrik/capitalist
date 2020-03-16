@@ -16,11 +16,11 @@ protocol ApplicationRouterDependantProtocol {
 protocol ApplicationRouterProtocol {
     func start(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool
-    func application(_ app: UIApplication, open url: URL, sourceApplication: String?) -> Bool
+    func application(_ app: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool
     func route()
     func viewController(_ type: Infrastructure.ViewController) -> UIViewController
     func initDependencies(with resolver: Resolver)
     func setMinimumAllowed(version: String?, build: String?)
-    func modal(_ viewController: Infrastructure.ViewController)
     func setWindow(blurred: Bool)
+    func showPasscodeScreen()
 }

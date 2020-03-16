@@ -104,6 +104,8 @@ protocol UIFactoryProtocol {
     
     func statisticsModalViewController(filter: TransactionableFilter?) -> UINavigationController?
     
+    func statisticsModalViewController(graphType: GraphType) -> UINavigationController?
+    
     func statisticsFiltersViewController(delegate: FiltersSelectionViewControllerDelegate?, dateRangeFilter: DateRangeTransactionFilter?, transactionableFilters: [TransactionableFilter]) -> UINavigationController? 
     
     func datePeriodSelectionViewController(delegate: DatePeriodSelectionViewControllerDelegate,

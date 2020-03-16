@@ -10,6 +10,8 @@ import UIKit
 import BiometricAuthentication
 
 class PasscodeViewController : UIViewController {
+    @IBOutlet weak var activateButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNotifications()
@@ -30,6 +32,7 @@ class PasscodeViewController : UIViewController {
     
     @IBAction func didTapJoinButton(_ sender: Any) {
         showBioMetricsAuthentication()
+        activateButton.isHidden = true
     }
     
     @objc func close() {
@@ -53,6 +56,7 @@ class PasscodeViewController : UIViewController {
             case .success(_):
                 self?.close()
             case .failure(let error):
+                self?.activateButton.isHidden = false
                 print(error.message())
             }
         }

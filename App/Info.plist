@@ -70,5 +70,20 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb211430253267227</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>211430253267227</string>
+	<key>FacebookDisplayName</key>
+	<string>Three Baskets App</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<true/>
 </dict>
 </plist>

@@ -135,6 +135,9 @@
 		FA5751CB237C2C8A00912443 /* ButtonInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5751CA237C2C8A00912443 /* ButtonInfoTableViewCell.swift */; };
 		FA5751CD237C2D3400912443 /* ReminderInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5751CC237C2D3400912443 /* ReminderInfoTableViewCell.swift */; };
 		FA5751CF237C3C3300912443 /* IncomeSourceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5751CE237C3C3300912443 /* IncomeSourceInfoViewController.swift */; };
+		FA6017BF241A97EF00B15496 /* drag-tutorial-ru.gif in Resources */ = {isa = PBXBuildFile; fileRef = FA6017BD241A97EE00B15496 /* drag-tutorial-ru.gif */; };
+		FA6017C0241A97EF00B15496 /* drag-tutorial-en.gif in Resources */ = {isa = PBXBuildFile; fileRef = FA6017BE241A97EF00B15496 /* drag-tutorial-en.gif */; };
+		FA6017C2241B373100B15496 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA6017C1241B373100B15496 /* GoogleService-Info.plist */; };
 		FA6270A321C7A87300CC0269 /* IncomeSourceEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */; };
 		FA630C202292AC5D00242AB3 /* Infrastructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA630C1F2292AC5D00242AB3 /* Infrastructure.swift */; };
 		FA630C222292AD9D00242AB3 /* ViewControllersRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA630C212292AD9D00242AB3 /* ViewControllersRegistration.swift */; };
@@ -322,6 +325,7 @@
 		FAB5BE5323533D2A000466AE /* TransactionEditUpdatingExtenson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE5223533D2A000466AE /* TransactionEditUpdatingExtenson.swift */; };
 		FAB5BE5523533D87000466AE /* TransactionEditDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE5423533D87000466AE /* TransactionEditDataExtension.swift */; };
 		FAB5BE5823537CEF000466AE /* ActiveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE5723537CEF000466AE /* ActiveViewModel.swift */; };
+		FAB73795240E8D980094AB7F /* StartAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB73794240E8D980094AB7F /* StartAnimationViewController.swift */; };
 		FABA979722E1E36E00E03380 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA979622E1E36D00E03380 /* FormTextField.swift */; };
 		FABE54DA233A757F00DF2B70 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54D9233A757F00DF2B70 /* Credit.swift */; };
 		FABE54DC233BE50D00DF2B70 /* CreditsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54DB233BE50C00DF2B70 /* CreditsServiceProtocol.swift */; };
@@ -424,6 +428,7 @@
 		FAD88F8421B0FB7800BE7BC1 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F8321B0FB7800BE7BC1 /* LandingViewController.swift */; };
 		FAD88F8821B1181600BE7BC1 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F8721B1181600BE7BC1 /* MenuViewController.swift */; };
 		FAD88F8C21B1228F00BE7BC1 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F8B21B1228E00BE7BC1 /* MenuViewModel.swift */; };
+		FADD04C5241F91E400FB542D /* BiometricVerificationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD04C4241F91E400FB542D /* BiometricVerificationManagerProtocol.swift */; };
 		FAE05FA72356EA870014D034 /* TransactionEditDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE05FA62356EA860014D034 /* TransactionEditDelegateExtension.swift */; };
 		FAE05FA92358CA1F0014D034 /* ActiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE05FA82358CA1F0014D034 /* ActiveCollectionViewCell.swift */; };
 		FAE05FAC235A212D0014D034 /* BasketItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE05FAB235A212D0014D034 /* BasketItemView.swift */; };
@@ -470,6 +475,7 @@
 		FAF31D0A240371E700D4CFB3 /* Transactions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF31D0C240371E700D4CFB3 /* Transactions.storyboard */; };
 		FAF31D122406544700D4CFB3 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */; };
 		FAF31D142406764D00D4CFB3 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */; };
+		FAF3BC84241A4BCD007F46FE /* launch-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAF3BC83241A4BCD007F46FE /* launch-animation.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -603,6 +609,9 @@
 		FA5751CA237C2C8A00912443 /* ButtonInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FA5751CC237C2D3400912443 /* ReminderInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FA5751CE237C3C3300912443 /* IncomeSourceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceInfoViewController.swift; sourceTree = "<group>"; };
+		FA6017BD241A97EE00B15496 /* drag-tutorial-ru.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "drag-tutorial-ru.gif"; sourceTree = "<group>"; };
+		FA6017BE241A97EF00B15496 /* drag-tutorial-en.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "drag-tutorial-en.gif"; sourceTree = "<group>"; };
+		FA6017C1241B373100B15496 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditTableController.swift; sourceTree = "<group>"; };
 		FA630C1F2292AC5D00242AB3 /* Infrastructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Infrastructure.swift; sourceTree = "<group>"; };
 		FA630C212292AD9D00242AB3 /* ViewControllersRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllersRegistration.swift; sourceTree = "<group>"; };
@@ -792,6 +801,7 @@
 		FAB5BE5223533D2A000466AE /* TransactionEditUpdatingExtenson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditUpdatingExtenson.swift; sourceTree = "<group>"; };
 		FAB5BE5423533D87000466AE /* TransactionEditDataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditDataExtension.swift; sourceTree = "<group>"; };
 		FAB5BE5723537CEF000466AE /* ActiveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveViewModel.swift; sourceTree = "<group>"; };
+		FAB73794240E8D980094AB7F /* StartAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartAnimationViewController.swift; sourceTree = "<group>"; };
 		FABA979622E1E36D00E03380 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		FABC034E23F45CAC00C0CB61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FABC034F23F45CB300C0CB61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -899,6 +909,7 @@
 		FAD88F8321B0FB7800BE7BC1 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		FAD88F8721B1181600BE7BC1 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		FAD88F8B21B1228E00BE7BC1 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		FADD04C4241F91E400FB542D /* BiometricVerificationManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricVerificationManagerProtocol.swift; sourceTree = "<group>"; };
 		FAE05FA62356EA860014D034 /* TransactionEditDelegateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditDelegateExtension.swift; sourceTree = "<group>"; };
 		FAE05FA82358CA1F0014D034 /* ActiveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAE05FAB235A212D0014D034 /* BasketItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketItemView.swift; sourceTree = "<group>"; };
@@ -975,6 +986,7 @@
 		FAF31D10240371F100D4CFB3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Transactions.strings; sourceTree = "<group>"; };
 		FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
+		FAF3BC83241A4BCD007F46FE /* launch-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "launch-animation.gif"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1126,6 +1138,7 @@
 		FA26813121B178A100FADED1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FAF3BC80241A1CBA007F46FE /* Images */,
 				FAAC99A323B31A59009ADB84 /* Roboto */,
 				FA16FC7E223BBDF40053C273 /* Sounds */,
 				FA26813221B178D200FADED1 /* Rubik */,
@@ -1758,6 +1771,7 @@
 				FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */,
 				FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */,
 				FAD88F0521AEA87300BE7BC1 /* Info.plist */,
+				FA6017C1241B373100B15496 /* GoogleService-Info.plist */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1808,6 +1822,7 @@
 				FA8AD0D722BB503C0084AD19 /* SaltEdgeManagerProtocol.swift */,
 				FA28480022F19DDA003F114A /* UIFactoryProtocol.swift */,
 				FA36E98823F182CA00B340AA /* AnalyticsManagerProtocol.swift */,
+				FADD04C4241F91E400FB542D /* BiometricVerificationManagerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2108,6 +2123,7 @@
 				FACEC1582301495A00611B2C /* ForgotPasswordTableController.swift */,
 				FA165CED21B7846C00EAA16B /* ResetPasswordViewController.swift */,
 				FACEC15A2301505F00611B2C /* ResetPasswordTableController.swift */,
+				FAB73794240E8D980094AB7F /* StartAnimationViewController.swift */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -2159,6 +2175,16 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
+		FAF3BC80241A1CBA007F46FE /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				FA6017BE241A97EF00B15496 /* drag-tutorial-en.gif */,
+				FA6017BD241A97EE00B15496 /* drag-tutorial-ru.gif */,
+				FAF3BC83241A4BCD007F46FE /* launch-animation.gif */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2171,6 +2197,7 @@
 				FAD88EF321AEA86E00BE7BC1 /* Frameworks */,
 				FAD88EF421AEA86E00BE7BC1 /* Resources */,
 				388A8E3E3B22EBA765471A96 /* [CP] Embed Pods Frameworks */,
+				FA6017C3241B3F8800B15496 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2236,14 +2263,18 @@
 				FAF31CFC240371B800D4CFB3 /* Settings.storyboard in Resources */,
 				FAAC99B923B31A59009ADB84 /* LICENSE.txt in Resources */,
 				FAAC99BB23B31A59009ADB84 /* Roboto-Bold.ttf in Resources */,
+				FA6017BF241A97EF00B15496 /* drag-tutorial-ru.gif in Resources */,
 				FA0CADF921CBE58F00805288 /* LoaderView.xib in Resources */,
 				FA26814721B178D300FADED1 /* Rubik-Regular.ttf in Resources */,
 				FAF31D03240371D200D4CFB3 /* Statistics.storyboard in Resources */,
+				FAF3BC84241A4BCD007F46FE /* launch-animation.gif in Resources */,
 				FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */,
+				FA6017C2241B373100B15496 /* GoogleService-Info.plist in Resources */,
 				FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */,
 				FAF31CBB2403705C00D4CFB3 /* Common.storyboard in Resources */,
 				FAAC99BD23B31A59009ADB84 /* Roboto-Black.ttf in Resources */,
 				FAAC99B823B31A59009ADB84 /* Roboto-Italic.ttf in Resources */,
+				FA6017C0241A97EF00B15496 /* drag-tutorial-en.gif in Resources */,
 				FA16FC82223BBE0E0053C273 /* coin-roll-drop.wav in Resources */,
 				FAF31CAD2403700300D4CFB3 /* Actives.storyboard in Resources */,
 				FAAC99B223B31A59009ADB84 /* Roboto-Light.ttf in Resources */,
@@ -2324,6 +2355,25 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Three Baskets/Pods-Three Baskets-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		FA6017C3241B3F8800B15496 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2553,6 +2603,7 @@
 				FAED7DAE21EDDD3800BF6FE1 /* BasketsViewModel.swift in Sources */,
 				FAF31D142406764D00D4CFB3 /* SubscriptionViewModel.swift in Sources */,
 				FAD88F1F21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift in Sources */,
+				FADD04C5241F91E400FB542D /* BiometricVerificationManagerProtocol.swift in Sources */,
 				FAB5BE3F2351FE75000466AE /* ActiveType.swift in Sources */,
 				FA16FC73223A82FA0053C273 /* ExpenseSourceSelectViewController.swift in Sources */,
 				FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */,
@@ -2722,6 +2773,7 @@
 				FA5751BE237C15D200912443 /* SwitchInfoField.swift in Sources */,
 				FA630C202292AC5D00242AB3 /* Infrastructure.swift in Sources */,
 				FAE05FB9235C82CA0014D034 /* EditableCellButton.swift in Sources */,
+				FAB73795240E8D980094AB7F /* StartAnimationViewController.swift in Sources */,
 				FA0570F2232A6CF2002B4706 /* DebtsTableSupport.swift in Sources */,
 				FA8AD0E422C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift in Sources */,
 				FABE55072340918000DF2B70 /* CreditEditViewController.swift in Sources */,
@@ -3060,7 +3112,8 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 41;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -3168,7 +3221,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;

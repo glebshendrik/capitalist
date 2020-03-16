@@ -57,6 +57,7 @@ struct Infrastructure {
         case ForgotPasswordViewController
         case ResetPasswordViewController
         case SubscriptionViewController
+        case StartAnimationViewController
         
         // Main
         case MainViewController
@@ -161,7 +162,8 @@ struct Infrastructure {
                  .LoginViewController,
                  .ForgotPasswordViewController,
                  .ResetPasswordViewController,
-                 .SubscriptionViewController:
+                 .SubscriptionViewController,
+                 .StartAnimationViewController:
                 return .Join
             case .MainViewController,
                  .MenuViewController,

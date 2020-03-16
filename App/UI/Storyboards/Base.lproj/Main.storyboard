@@ -1414,20 +1414,14 @@
                                     <constraint firstAttribute="height" constant="60" id="hLk-WV-whF"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZl-sE-HJ7">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="41"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="DdI-Pd-Jad"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZl-sE-HJ7" userLabel="incomesources_button">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
                                 <connections>
                                     <action selector="didTapIncomeSources:" destination="527-2C-xUs" eventType="touchUpInside" id="ztm-W1-tr9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76l-id-B6I">
-                                <rect key="frame" x="0.0" y="75" width="200" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="ffW-KV-jJ7"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="75" width="375" height="37"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <connections>
                                     <action selector="didTapExpenseSources:" destination="527-2C-xUs" eventType="touchUpInside" id="cin-bn-OTw"/>
@@ -1438,6 +1432,8 @@
                         <constraints>
                             <constraint firstItem="Gku-Sf-ydu" firstAttribute="centerX" secondItem="D5A-mu-huD" secondAttribute="centerX" id="0Wo-Sf-0pc"/>
                             <constraint firstAttribute="bottom" secondItem="foz-3R-fXQ" secondAttribute="bottom" id="19I-Wk-2Mr"/>
+                            <constraint firstItem="uZP-da-pZ0" firstAttribute="trailing" secondItem="76l-id-B6I" secondAttribute="trailing" id="23F-by-hbg"/>
+                            <constraint firstItem="uZP-da-pZ0" firstAttribute="trailing" secondItem="kZl-sE-HJ7" secondAttribute="trailing" id="2ab-mV-clw"/>
                             <constraint firstItem="u6k-3z-5c2" firstAttribute="top" secondItem="rjC-iC-M0Y" secondAttribute="top" constant="-29" id="2nA-pZ-awb"/>
                             <constraint firstItem="rjC-iC-M0Y" firstAttribute="bottom" secondItem="uZP-da-pZ0" secondAttribute="bottom" id="2xh-Kb-cSu"/>
                             <constraint firstItem="Pqg-XA-9pr" firstAttribute="trailing" secondItem="uZP-da-pZ0" secondAttribute="trailing" id="5gA-0d-loG"/>

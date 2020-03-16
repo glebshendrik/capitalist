@@ -52,6 +52,9 @@ struct APIRouteQueryParameters {
             if let basketType = basketType {
                 params["basket_type"] = basketType.rawValue
             }
+            if let country = Locale.current.regionCode {
+                params["country"] = country
+            }
             return params
         case .indexTransactions(_, let type, let transactionableId, let transactionableType, let creditId, let borrowId, let borrowType, let count, let lastGotAt):
             if let type = type {

@@ -9,7 +9,6 @@
 import UIKit
 import SwinjectStoryboard
 import Swinject
-import BiometricAuthentication
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -49,8 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         open url: URL,
         sourceApplication: String?,
         annotation: Any
-        ) -> Bool {
-        return router.application(application, open: url, sourceApplication: sourceApplication)
+        ) -> Bool {        
+        return router.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -69,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         notificationsCoordinator.updateBadges()
-        router.modal(.PasscodeViewController)
+        router.showPasscodeScreen()
         router.setWindow(blurred: false)
     }
 }

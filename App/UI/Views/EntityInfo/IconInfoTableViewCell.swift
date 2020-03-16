@@ -18,8 +18,7 @@ protocol IconInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
 class IconInfoTableViewCell : EntityInfoTableViewCell {
     @IBOutlet weak var iconBackgroundView: UIView!
     @IBOutlet weak var rasterImageView: UIImageView!
-    @IBOutlet weak var vectorImageView: SVGKFastImageView!
-    @IBOutlet weak var pencilImageView: UIImageView!
+    @IBOutlet weak var vectorImageView: SVGKFastImageView!    
     
     var iconDelegate: IconInfoTableViewCellDelegate? {
         return delegate as? IconInfoTableViewCellDelegate
@@ -31,7 +30,6 @@ class IconInfoTableViewCell : EntityInfoTableViewCell {
     
     override func updateUI() {
         guard let field = iconField else { return }
-        pencilImageView.isHidden = false
         rasterImageView.isHidden = field.iconType != .raster
         vectorImageView.isHidden = field.iconType != .vector
         rasterImageView.setImage(with: field.iconURL, placeholderName: field.placeholder, renderingMode: .alwaysTemplate)

@@ -150,7 +150,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zNB-zK-tmk">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="7dG-tz-VWF" kind="embed" identifier="showEditTableView" id="5qH-cC-rfF"/>
@@ -275,18 +275,13 @@
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="27" id="uLh-Np-7on"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-edit-pencil" translatesAutoresizingMaskIntoConstraints="NO" id="BDO-et-bw1">
-                                                            <rect key="frame" x="23" y="40" width="18" height="18"/>
-                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" name="gray 1"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="BDO-et-bw1" secondAttribute="bottom" constant="6" id="0D5-LD-DME"/>
                                                         <constraint firstAttribute="width" constant="64" id="4eH-4H-EMK"/>
                                                         <constraint firstAttribute="height" constant="64" id="C6D-4k-03d"/>
                                                         <constraint firstItem="kIk-HP-2J3" firstAttribute="centerX" secondItem="5fK-jf-xtp" secondAttribute="centerX" id="OEJ-0d-bXU"/>
                                                         <constraint firstItem="kIk-HP-2J3" firstAttribute="centerY" secondItem="5fK-jf-xtp" secondAttribute="centerY" id="hZP-dg-nNI"/>
-                                                        <constraint firstItem="BDO-et-bw1" firstAttribute="centerX" secondItem="5fK-jf-xtp" secondAttribute="centerX" id="jRc-ty-uRd"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -306,6 +301,44 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n5Z-Tw-pdk">
+                                                    <rect key="frame" x="193.5" y="65.5" width="38" height="38"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3y3-DN-yrT">
+                                                            <rect key="frame" x="3" y="3" width="32" height="32"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pen2-icon" translatesAutoresizingMaskIntoConstraints="NO" id="SEy-4d-HEu">
+                                                                    <rect key="frame" x="-1" y="-1.5" width="34" height="35"/>
+                                                                    <color key="tintColor" name="white 1.0"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" name="blue 1"/>
+                                                            <constraints>
+                                                                <constraint firstItem="SEy-4d-HEu" firstAttribute="centerY" secondItem="3y3-DN-yrT" secondAttribute="centerY" id="5gp-eT-2vp"/>
+                                                                <constraint firstItem="SEy-4d-HEu" firstAttribute="centerX" secondItem="3y3-DN-yrT" secondAttribute="centerX" id="udB-aH-KcK"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="16"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="black 2"/>
+                                                    <constraints>
+                                                        <constraint firstItem="3y3-DN-yrT" firstAttribute="leading" secondItem="n5Z-Tw-pdk" secondAttribute="leading" constant="3" id="0cf-QR-7r7"/>
+                                                        <constraint firstAttribute="trailing" secondItem="3y3-DN-yrT" secondAttribute="trailing" constant="3" id="Mpv-iK-yt0"/>
+                                                        <constraint firstAttribute="height" constant="38" id="SEf-kn-ICn"/>
+                                                        <constraint firstAttribute="bottom" secondItem="3y3-DN-yrT" secondAttribute="bottom" constant="3" id="eQg-gX-NKz"/>
+                                                        <constraint firstItem="3y3-DN-yrT" firstAttribute="top" secondItem="n5Z-Tw-pdk" secondAttribute="top" constant="3" id="ggp-AF-6rq"/>
+                                                        <constraint firstAttribute="width" constant="38" id="v4B-Hp-cnZ"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="19"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DSI-iu-Mqk">
                                                     <rect key="frame" x="0.0" y="118" width="375" height="1"/>
                                                     <color key="backgroundColor" name="white 0.04"/>
@@ -321,6 +354,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="n5Z-Tw-pdk" firstAttribute="trailing" secondItem="5fK-jf-xtp" secondAttribute="trailing" constant="12" id="0Wp-oj-Qwc"/>
                                                 <constraint firstAttribute="trailing" secondItem="DSI-iu-Mqk" secondAttribute="trailing" id="Hlk-dm-cDl"/>
                                                 <constraint firstAttribute="bottom" secondItem="DSI-iu-Mqk" secondAttribute="bottom" id="KGP-h5-XIl"/>
                                                 <constraint firstItem="5fK-jf-xtp" firstAttribute="centerX" secondItem="cET-zv-SYm" secondAttribute="centerX" id="NDh-wb-s37"/>
@@ -328,6 +362,7 @@
                                                 <constraint firstItem="A96-vi-guA" firstAttribute="leading" secondItem="cET-zv-SYm" secondAttribute="leading" id="cLP-rs-mJJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="A96-vi-guA" secondAttribute="bottom" id="efB-Xy-uz5"/>
                                                 <constraint firstAttribute="trailing" secondItem="A96-vi-guA" secondAttribute="trailing" id="fqD-JJ-p4X"/>
+                                                <constraint firstItem="n5Z-Tw-pdk" firstAttribute="bottom" secondItem="5fK-jf-xtp" secondAttribute="bottom" constant="12" id="m4W-pv-TnU"/>
                                                 <constraint firstItem="5fK-jf-xtp" firstAttribute="centerY" secondItem="cET-zv-SYm" secondAttribute="centerY" id="oA8-69-g7v"/>
                                                 <constraint firstItem="A96-vi-guA" firstAttribute="top" secondItem="cET-zv-SYm" secondAttribute="top" id="uyp-Cu-7FJ"/>
                                             </constraints>
@@ -345,7 +380,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wRj-mt-nEw" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Название"/>
@@ -374,7 +409,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fe7-eZ-knv" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -399,7 +434,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bbu-h0-zRK" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта"/>
@@ -431,7 +466,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pue-Cj-rV9" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -456,7 +491,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nN-Oe-yC2" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -481,7 +516,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uMb-02-8z0" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -506,7 +541,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7q-6m-bSY" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -531,7 +566,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1m-7a-qvp" customClass="FormSwitchValueField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -556,7 +591,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1c5-eQ-EvA" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -581,7 +616,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tid-VY-3jJ" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -908,8 +943,8 @@
         <image name="asset-risk-default-icon" width="24" height="24"/>
         <image name="bell-icon" width="16" height="16"/>
         <image name="close-icon" width="14.5" height="14.5"/>
-        <image name="icon-edit-pencil" width="9" height="9"/>
         <image name="loader-1" width="55" height="31"/>
+        <image name="pen2-icon" width="17" height="17.5"/>
         <image name="remove-icon" width="17" height="20"/>
         <image name="save-icon" width="16" height="14"/>
         <namedColor name="black 2">

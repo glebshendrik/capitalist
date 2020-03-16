@@ -69,9 +69,6 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         super.viewDidLoad()
         setupUI()
         loadData()
-        if !UIFlowManager.reached(point: .transactionCreationInfoMessage) {
-            modal(factory.transactionCreationInfoViewController())
-        }
         after(seconds: 3).done {
             self.show(tipMessage: NSLocalizedString("Скоро здесь будет финансовый советник", comment: "Скоро здесь будет финансовый советник"))
         }
@@ -88,15 +85,22 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         appMovedToForeground()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !UIFlowManager.reached(point: .transactionCreationInfoMessage) {
+            modal(factory.transactionCreationInfoViewController())
+        }
+    }
+    
     @IBAction func didTapMainButton(_ sender: Any) {
         tapMainButton()
     }
     @IBAction func didTapIncomeSources(_ sender: Any) {
-        scrollIncomeSourcesToBeginning()
+        showIncomeStatistics()
     }
     
     @IBAction func didTapExpenseSources(_ sender: Any) {
-        scrollExpenseSourcesToBeginning()
+        showBalance()
     }
     
     @IBAction func didTapStatistics(_ sender: Any) {

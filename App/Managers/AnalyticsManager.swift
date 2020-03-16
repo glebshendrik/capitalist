@@ -7,18 +7,22 @@
 //
 
 import Foundation
-import Mixpanel
+import Firebase
+import FBSDKCoreKit
 
-class AnalyticsManager : AnalyticsManagerProtocol {
-    init() {
-        Mixpanel.initialize(token: "token")
+class AnalyticsManager : AnalyticsManagerProtocol {    
+    func setup() {
+        FirebaseApp.configure()
+        FirebaseConfiguration.shared.setLoggerLevel(.max)        
     }
-    
+        
     func set(userId: String) {
-        Mixpanel.mainInstance().identify(distinctId: userId)
+        Crashlytics.crashlytics().setUserID(userId)
+        Analytics.setUserID(userId)
+        AppEvents.userID = userId
     }
     
-    func track(event: String) {
-        Mixpanel.mainInstance().track(event: event)
+    func track(event: String, parameters: [String : Any]?) {
+        Analytics.logEvent(event, parameters: parameters)
     }
 }

@@ -12,6 +12,10 @@ extension MainViewController {
     func showStatistics(with filterViewModel: TransactionableFilter?) {
         modal(factory.statisticsModalViewController(filter: filterViewModel))
     }
+    
+    func showIncomeStatistics() {
+        modal(factory.statisticsModalViewController(graphType: .incomes))
+    }
 }
 
 extension MainViewController {

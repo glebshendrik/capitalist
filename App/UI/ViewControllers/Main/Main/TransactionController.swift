@@ -185,10 +185,10 @@ class TransactionController {
     
     private func getWaitingEdge(at location: CGPoint, in view: UIView, locationInCollectionView: CGPoint, direction: UICollectionView.ScrollDirection?) -> UIRectEdge? {
         guard let direction = direction else { return nil }
-        if direction == .horizontal && location.x < 50 {
+        if direction == .horizontal && location.x < 100 {
             return .left
         }
-        if direction == .horizontal && location.x > (view.frame.size.width - 50) {
+        if direction == .horizontal && location.x > (view.frame.size.width - 100) {
             return .right
         }
         if direction == .vertical && locationInCollectionView.y < 100 {
@@ -196,7 +196,7 @@ class TransactionController {
         }
         if let collectionView = destinationCollectionView,
             direction == .vertical,
-            locationInCollectionView.y > (collectionView.frame.height - 50) {
+            locationInCollectionView.y > (collectionView.frame.height - 100) {
             return .bottom
         }
         return nil
@@ -205,7 +205,7 @@ class TransactionController {
     private func initializeWaitingAtTheEdge() {
         waitingAtTheEdgeTimer?.invalidate()
         if destinationCollectionView != nil && waitingEdge != nil && !delegate.isEditingItems {
-            waitingAtTheEdgeTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(changeWaitingPage), userInfo: nil, repeats: false)
+            waitingAtTheEdgeTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(changeWaitingPage), userInfo: nil, repeats: false)
         } else {
             waitingAtTheEdgeTimer = nil
         }

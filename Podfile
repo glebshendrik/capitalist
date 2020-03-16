@@ -41,9 +41,11 @@ target 'Three Baskets' do
   pod 'EasyTipView', '~> 2.0.4'
   pod 'BiometricAuthentication'
   pod 'ApphudSDK'
-  pod 'Mixpanel-swift'
   pod 'InfiniteLayout'
-  pod 'LayoutHelper'  
+  pod 'SwiftyGif'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
+  pod 'FBSDKCoreKit/Swift'
 end
 
 post_install do |installer|
