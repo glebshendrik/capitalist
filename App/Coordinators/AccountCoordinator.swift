@@ -35,6 +35,10 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return Apphud.hasActiveSubscription()
     }
     
+    var subscription: ApphudSubscription? {
+        return Apphud.subscription()
+    }
+    
     var subscriptionProducts: [SKProduct] {
         return Apphud.products() ?? []
     }

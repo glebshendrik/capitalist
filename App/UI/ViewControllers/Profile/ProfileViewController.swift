@@ -14,18 +14,25 @@ protocol ProfileViewOutputProtocol {
     var user: User? { get }
 }
 
-class ProfileViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol, NavigationBarColorable {
-        
+class ProfileViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol {
+    
     var navigationBarTintColor: UIColor? = UIColor.by(.black2)
 
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: ProfileViewModel!
+    var router: ApplicationRouterProtocol!
     
     @IBOutlet weak var firstnameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var activityIndicatorCell: UITableViewCell!
     @IBOutlet weak var loaderImageView: UIImageView!
+    @IBOutlet weak var subscriptionCell: UITableViewCell!
+    @IBOutlet weak var subscriptionStatusCell: UITableViewCell!
+    @IBOutlet weak var subscriptionManageCell: UITableViewCell!
+    @IBOutlet weak var getSubscriptionCell: UITableViewCell!
+    @IBOutlet weak var subscriptionStatusLabel: UILabel!
+    @IBOutlet weak var subscriptionLabel: UILabel!
     
     private var loaderView: LoaderView!
     
@@ -60,12 +67,23 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
         }
     }
     
+    @IBAction func didTapManageSubscriptionButton(_ sender: Any) {
+        guard   let url = URL(string: "itms-apps://apps.apple.com/account/subscriptions"),
+                UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url, options: [:])
+    }
+    
+    @IBAction func didTapGetSubscriptionButton(_ sender: Any) {
+        push(router.viewController(.SubscriptionViewController))
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == "ShowProfileEditScreen",
             let destinationNavigationController = segue.destination as? UINavigationController,
             let destination = destinationNavigationController.topViewController as? ProfileEditViewController {
             
                 destination.set(user: viewModel.user)
+                destination.delegate = self
         }
     }
     
@@ -87,10 +105,22 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
     }
     
     private func updateUI(animated: Bool = false) {
-        firstnameLabel.text = viewModel.currentUserFirstname
-        emailLabel.text = viewModel.currentUserEmail
+        updateCommonInfoUI()
+        updateSubscriptionUI()
         // Reloads data in the table view
         reloadData(animated: animated)
+    }
+    
+    private func updateCommonInfoUI() {
+        firstnameLabel.text = viewModel.currentUserFirstname
+        emailLabel.text = viewModel.currentUserEmail
+    }
+    
+    private func updateSubscriptionUI() {
+        subscriptionLabel.text = viewModel.subscriptionTitle
+        subscriptionStatusLabel.text = viewModel.subscriptionStatus
+        set(cells: [subscriptionCell, subscriptionStatusCell, subscriptionManageCell], hidden: !viewModel.hasActiveSubscription)
+        set(cells: getSubscriptionCell, hidden: viewModel.hasActiveSubscription)
     }
     
     private func showActivityIndicator(animated: Bool = true) {
@@ -142,3 +172,8 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
     }
 }
 
+extension ProfileViewController : ProfileEditViewControllerDelegate {
+    func didUpdateProfile() {
+        refreshData()
+    }
+}

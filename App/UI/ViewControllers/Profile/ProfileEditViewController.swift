@@ -9,13 +9,22 @@
 import UIKit
 import PromiseKit
 
+protocol ProfileEditViewControllerDelegate {
+    func didUpdateProfile()
+}
+
 class ProfileEditViewController : FormNavBarButtonsEditViewController {    
     var viewModel: ProfileEditViewModel!
     var tableController: ProfileEditTableController!
+    var delegate: ProfileEditViewControllerDelegate?
     
     override var formTitle: String { return NSLocalizedString("Редактирование профиля", comment: "Редактирование профиля") }
     override var saveErrorMessage: String { return NSLocalizedString("Невозможно изменить данные профиля", comment: "Невозможно изменить данные профиля") }
         
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        focusNameField()
+    }
     override func registerFormFields() -> [String : FormField] {
         return [UserUpdatingForm.CodingKeys.firstname.rawValue : tableController.nameField]
     }
@@ -31,6 +40,7 @@ class ProfileEditViewController : FormNavBarButtonsEditViewController {
     
     override func didSave() {
         super.didSave()
+        delegate?.didUpdateProfile()
         messagePresenterManager.show(navBarMessage: NSLocalizedString("Данные профиля успешно сохранены", comment: "Данные профиля успешно сохранены"), theme: .success)
     }
     
@@ -40,6 +50,10 @@ class ProfileEditViewController : FormNavBarButtonsEditViewController {
     
     func set(user: User?) {
         viewModel.set(user: user)
+    }
+    
+    func focusNameField() {
+        tableController.nameField.textField.becomeFirstResponder()
     }
 }
 

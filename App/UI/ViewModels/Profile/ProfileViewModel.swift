@@ -8,6 +8,8 @@
 
 import Foundation
 import PromiseKit
+import ApphudSDK
+import StoreKit
 
 class ProfileViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
@@ -35,6 +37,33 @@ class ProfileViewModel {
     
     var currentUserEmail: String? {
         return currentUser?.email
+    }
+    
+    var hasActiveSubscription: Bool {
+        return accountCoordinator.currentUserHasActiveSubscription
+    }
+    
+    var subscriptionTitle: String? {
+        guard let subscriptionProduct = subscriptionProduct else {
+            return NSLocalizedString("Устаревшая версия подписки", comment: "Устаревшая версия подписки")
+        }
+        return "\(subscriptionProduct.localizedTitle): \(subscriptionProduct.localizedPricePerPeriod)"
+    }
+    
+    var subscriptionStatus: String? {
+        guard let subscription = accountCoordinator.subscription else { return nil }
+        if let cancelledAt = subscription.canceledAt {
+            return String.localizedStringWithFormat(NSLocalizedString("Отменена с %@", comment: "Отменена с %@"), cancelledAt.dateString(ofStyle: .medium))
+        }
+        if subscription.isInRetryBilling {
+            return NSLocalizedString("Проблемы с оплатой", comment: "Проблемы с оплатой")
+        }
+        return String.localizedStringWithFormat(NSLocalizedString("Активна до %@", comment: "Активна до %@"), subscription.expiresDate.dateString(ofStyle: .medium))
+    }
+    
+    var subscriptionProduct: SKProduct? {
+        guard let productId = accountCoordinator.subscription?.productId else { return nil }
+        return accountCoordinator.subscriptionProducts.first { $0.productIdentifier == productId }
     }
     
     init(accountCoordinator: AccountCoordinatorProtocol) {

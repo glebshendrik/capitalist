@@ -14,6 +14,7 @@ import ApphudSDK
 protocol AccountCoordinatorProtocol {
     var currentSession: Session? { get }
     var currentUserHasActiveSubscription: Bool { get }
+    var subscription: ApphudSubscription? { get }
     var subscriptionProducts: [SKProduct] { get }
     
     func joinAsGuest() -> Promise<Session>

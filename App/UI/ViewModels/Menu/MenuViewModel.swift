@@ -42,6 +42,14 @@ class MenuViewModel {
         return !user.registrationConfirmed
     }
     
+    var profileItemHidden: Bool {
+        return !isCurrentUserLoaded || isCurrentUserGuest
+    }
+    
+    var joinItemHidden: Bool {
+        return !isCurrentUserLoaded || !isCurrentUserGuest
+    }
+    
     var profileTitle: String? {
         var firstname = currentUser?.firstname
         if firstname != nil && firstname!.trimmed.isEmpty {

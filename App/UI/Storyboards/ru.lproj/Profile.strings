@@ -67,3 +67,18 @@
 
 /* Class = "UIBarButtonItem"; title = " "; ObjectID = "sej-V8-3o1"; */
 "sej-V8-3o1.title" = " ";
+
+/* Class = "UILabel"; text = "ПРЕМИУМ"; ObjectID = "wq8-g0-VNZ"; */
+"wq8-g0-VNZ.text" = "ПРЕМИУМ";
+
+/* Class = "UILabel"; text = "Подписка"; ObjectID = "GP2-yv-jeM"; */
+"GP2-yv-jeM.text" = "Подписка";
+
+/* Class = "UILabel"; text = "Статус"; ObjectID = "scW-nD-4D3"; */
+"scW-nD-4D3.text" = "Статус";
+
+/* Class = "UILabel"; text = "Управлять подпиской"; ObjectID = "oVA-cD-nsK"; */
+"oVA-cD-nsK.text" = "Управлять подпиской";
+
+/* Class = "UIButton"; normalTitle = "Оформить подписку"; ObjectID = "Fja-52-Tra"; */
+"Fja-52-Tra.normalTitle" = "Оформить подписку";

@@ -67,11 +67,13 @@ class MenuViewController : StaticTableViewController, UIMessagePresenterManagerD
     
     func updateProfileUI () {
         profileCell.textLabel?.text = viewModel.profileTitle
+        profileCell.textLabel?.textColor = UIColor.by(viewModel.hasActiveSubscription ? .yellow1 : .white100)
+        profileCell.imageView?.image = UIImage(named: viewModel.hasActiveSubscription ? "premium-icon" : "profile-menu-item-icon")
     }
     
     func updateTableUI(animated: Bool = false) {
-        set(cells: joinCell, hidden: !viewModel.isCurrentUserLoaded || !viewModel.isCurrentUserGuest)
-        set(cells: profileCell, hidden: !viewModel.isCurrentUserLoaded || viewModel.isCurrentUserGuest)
+        set(cells: joinCell, hidden: viewModel.joinItemHidden)
+        set(cells: profileCell, hidden: viewModel.profileItemHidden)
         set(cells: premiumCell, hidden: viewModel.premiumItemHidden)
         reloadData(animated: animated)
     }

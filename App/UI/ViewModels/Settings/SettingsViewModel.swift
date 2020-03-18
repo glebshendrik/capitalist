@@ -14,7 +14,7 @@ class SettingsViewModel : ProfileViewModel {
     private let settingsCoordinator: SettingsCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
     private let soundsManager: SoundsManagerProtocol
-    private let verificationManager: BiometricVerificationManagerProtocol
+    private var verificationManager: BiometricVerificationManagerProtocol
     
     var currency: String? {
         return user?.currency.translatedName
@@ -29,7 +29,8 @@ class SettingsViewModel : ProfileViewModel {
     }
         
     var language: String? {
-        return Locale.current.localizedString(forIdentifier: Locale.current.identifier)?.capitalized(with: Locale.current)
+        let languageCode = Bundle.main.preferredLocalizations.first ?? Locale.current.identifier
+        return Locale.current.localizedString(forIdentifier: languageCode)?.capitalized(with: Locale.current)
     }
     
     var verificationEnabled: Bool {
@@ -56,10 +57,14 @@ class SettingsViewModel : ProfileViewModel {
     }
     
     func setVerification(enabled: Bool) -> Promise<Void> {
+        let allowableReuseDuration = verificationManager.allowableReuseDuration
+        verificationManager.allowableReuseDuration = nil
         return  firstly {
                     verificationManager.authenticateWithBioMetrics()
                 }.done {
                     self.verificationManager.setInAppBiometricVerification(enabled: enabled)
+                }.ensure {
+                    self.verificationManager.allowableReuseDuration = allowableReuseDuration
                 }
     }
     

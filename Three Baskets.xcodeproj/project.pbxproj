@@ -1440,33 +1440,6 @@
 			path = Statistics;
 			sourceTree = "<group>";
 		};
-		FA7276A7225249910086D4D1 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				FA26814921B1833E00FADED1 /* MainViewController.swift */,
-				FA7276B8225250040086D4D1 /* UISettingExtension.swift */,
-				FA7276C6225256EE0086D4D1 /* DataControllingExtension.swift */,
-				FAA6963E2398449B00C134D1 /* ActionsControllingExtension.swift */,
-				FA7276C822525B890086D4D1 /* NavigationControllingExtension.swift */,
-				FA7276AA22524A9C0086D4D1 /* BasketsControllingExtension.swift */,
-				FA7276AC22524AEC0086D4D1 /* BudgetControllingExtension.swift */,
-				FA7276AE22524B190086D4D1 /* IncomeSourceEditDelegateExtension.swift */,
-				FA7276B022524B910086D4D1 /* ExpenseSourceEditDelegateExtension.swift */,
-				FA7276B222524C990086D4D1 /* ExpenseCategoryEditDelegateExtension.swift */,
-				FA814F51235D63180039471A /* ActiveEditDelegateExtension.swift */,
-				FA814F53235D64440039471A /* BasketItemsExtension.swift */,
-				FA7276B422524F060086D4D1 /* CollectionsControllingExtension.swift */,
-				FA7276B622524FBF0086D4D1 /* TransactionableCellDelegateExtension.swift */,
-				FA7276C2225252390086D4D1 /* GestureRecognizersControllingExtension.swift */,
-				FA7276CA22525FFD0086D4D1 /* RearrangeController.swift */,
-				FA7276BA225250380086D4D1 /* RearrangeControllingExtension.swift */,
-				FA7276A8225249B00086D4D1 /* TransactionController.swift */,
-				FA7276C4225255030086D4D1 /* TransactionsControllingExtension.swift */,
-				FAE05FA62356EA860014D034 /* TransactionEditDelegateExtension.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
 		FA7276D622537B880086D4D1 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
@@ -2049,13 +2022,13 @@
 				FA66D82A2293D1E900C21E8B /* IncomeSources */,
 				FA0CAE2421D67A6000805288 /* Icons */,
 				FA165CD421B4EF5500EAA16B /* Join */,
-				FAADA024240806390040DBC0 /* Subscription */,
 				FAD88F8921B1226900BE7BC1 /* Main */,
 				FAD88F8A21B1227600BE7BC1 /* Menu */,
 				FAA861A023D72E6A009DF88F /* Onbording */,
 				FA165CDB21B652F600EAA16B /* Profile */,
 				FAA91279220C8B0F00F2C251 /* Settings */,
 				FA6F2E902244C8B4008C160F /* Statistics */,
+				FAADA024240806390040DBC0 /* Subscription */,
 				FA66D82D2293D26100C21E8B /* Transactions */,
 			);
 			path = ViewModels;
@@ -2077,6 +2050,7 @@
 				FAD88F8621B117CF00BE7BC1 /* Join */,
 				FAADA027240807360040DBC0 /* Subscription */,
 				FAD88F8521B117BC00BE7BC1 /* Main */,
+				FADD04CA2422236C00FB542D /* Menu */,
 				FAC3B9BF21BE15CE0015A12F /* Onboarding */,
 				FA165CDE21B653F300EAA16B /* Profile */,
 				FACC01E2224B52200044A747 /* Statistics */,
@@ -2112,8 +2086,26 @@
 		FAD88F8521B117BC00BE7BC1 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				FA7276A7225249910086D4D1 /* Main */,
-				FAD88F8721B1181600BE7BC1 /* MenuViewController.swift */,
+				FA26814921B1833E00FADED1 /* MainViewController.swift */,
+				FA7276B8225250040086D4D1 /* UISettingExtension.swift */,
+				FA7276C6225256EE0086D4D1 /* DataControllingExtension.swift */,
+				FAA6963E2398449B00C134D1 /* ActionsControllingExtension.swift */,
+				FA7276C822525B890086D4D1 /* NavigationControllingExtension.swift */,
+				FA7276AA22524A9C0086D4D1 /* BasketsControllingExtension.swift */,
+				FA7276AC22524AEC0086D4D1 /* BudgetControllingExtension.swift */,
+				FA7276AE22524B190086D4D1 /* IncomeSourceEditDelegateExtension.swift */,
+				FA7276B022524B910086D4D1 /* ExpenseSourceEditDelegateExtension.swift */,
+				FA7276B222524C990086D4D1 /* ExpenseCategoryEditDelegateExtension.swift */,
+				FA814F51235D63180039471A /* ActiveEditDelegateExtension.swift */,
+				FA814F53235D64440039471A /* BasketItemsExtension.swift */,
+				FA7276B422524F060086D4D1 /* CollectionsControllingExtension.swift */,
+				FA7276B622524FBF0086D4D1 /* TransactionableCellDelegateExtension.swift */,
+				FA7276C2225252390086D4D1 /* GestureRecognizersControllingExtension.swift */,
+				FA7276CA22525FFD0086D4D1 /* RearrangeController.swift */,
+				FA7276BA225250380086D4D1 /* RearrangeControllingExtension.swift */,
+				FA7276A8225249B00086D4D1 /* TransactionController.swift */,
+				FA7276C4225255030086D4D1 /* TransactionsControllingExtension.swift */,
+				FAE05FA62356EA860014D034 /* TransactionEditDelegateExtension.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -2147,6 +2139,14 @@
 			isa = PBXGroup;
 			children = (
 				FAD88F8B21B1228E00BE7BC1 /* MenuViewModel.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		FADD04CA2422236C00FB542D /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				FAD88F8721B1181600BE7BC1 /* MenuViewController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
