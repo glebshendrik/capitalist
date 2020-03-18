@@ -57,10 +57,12 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
+         creditsCoordinator: CreditsCoordinatorProtocol,
+         borrowsCoordinator: BorrowsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol) {
         self.expenseCategoriesCoordinator = expenseCategoriesCoordinator
-        super.init(transactionsCoordinator: transactionsCoordinator, accountCoordinator: accountCoordinator)
+        super.init(transactionsCoordinator: transactionsCoordinator, creditsCoordinator: creditsCoordinator, borrowsCoordinator: borrowsCoordinator, accountCoordinator: accountCoordinator)
     }
     
     func set(expenseCategory: ExpenseCategoryViewModel?) {

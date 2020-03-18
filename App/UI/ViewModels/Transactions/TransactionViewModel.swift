@@ -75,6 +75,14 @@ class TransactionViewModel {
         return transaction.comment
     }
     
+    var isBorrowing: Bool {
+        return isDebt || isLoan
+    }
+    
+    var isCrediting: Bool {
+        return creditId != nil
+    }
+    
     var isDebt: Bool {
         return !isReturn && transaction.borrow?.type == .debt
     }
@@ -151,6 +159,19 @@ class TransactionViewModel {
     
     var creditId: Int? {
         return transaction.credit?.id
+    }
+    
+    var removeTitle: String {
+        if isCrediting {
+            return NSLocalizedString("Удалить кредит со всеми транзакциями?", comment: "Удалить кредит со всеми транзакциями?")
+        }
+        if isDebt {
+            return NSLocalizedString("Удалить долг со всеми транзакциями?", comment: "Удалить долг со всеми транзакциями?")
+        }
+        if isLoan {
+            return NSLocalizedString("Удалить займ со всеми транзакциями?", comment: "Удалить займ со всеми транзакциями?")
+        }
+        return NSLocalizedString("Удалить транзакцию?", comment: "Удалить транзакцию?")
     }
     
     init(transaction: Transaction) {

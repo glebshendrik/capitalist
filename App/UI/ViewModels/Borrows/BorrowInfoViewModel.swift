@@ -98,12 +98,13 @@ class BorrowInfoViewModel : EntityInfoViewModel {
         return borrowViewModel.isReturned ? .gray1 : .blue1
     }
     
-    init(transactionsCoordinator: TransactionsCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol,
-         borrowsCoordinator: BorrowsCoordinatorProtocol) {
+    override init(transactionsCoordinator: TransactionsCoordinatorProtocol,
+         creditsCoordinator: CreditsCoordinatorProtocol,
+         borrowsCoordinator: BorrowsCoordinatorProtocol,
+         accountCoordinator: AccountCoordinatorProtocol) {
         self.borrowsCoordinator = borrowsCoordinator
         self.transactionsCoordinator = transactionsCoordinator
-        super.init(transactionsCoordinator: transactionsCoordinator, accountCoordinator: accountCoordinator)
+        super.init(transactionsCoordinator: transactionsCoordinator, creditsCoordinator: creditsCoordinator, borrowsCoordinator: borrowsCoordinator, accountCoordinator: accountCoordinator)
     }
     
     func set(borrow: BorrowViewModel?) {

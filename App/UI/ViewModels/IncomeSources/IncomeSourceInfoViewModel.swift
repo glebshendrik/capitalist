@@ -53,10 +53,12 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
+         creditsCoordinator: CreditsCoordinatorProtocol,
+         borrowsCoordinator: BorrowsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
-        super.init(transactionsCoordinator: transactionsCoordinator, accountCoordinator: accountCoordinator)
+        super.init(transactionsCoordinator: transactionsCoordinator, creditsCoordinator: creditsCoordinator, borrowsCoordinator: borrowsCoordinator, accountCoordinator: accountCoordinator)
     }
     
     func set(incomeSource: IncomeSourceViewModel?) {

@@ -99,7 +99,12 @@ extension EntityInfoViewController {
                 viewModel.updateData()
             }.catch { e in
                 print(e)
-                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка обновления данных", comment: "Ошибка обновления данных"), theme: .error)
+                if case APIRequestError.notFound = e {                    
+                    self.closeButtonHandler()
+                }
+                else {
+                    self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка обновления данных", comment: "Ошибка обновления данных"), theme: .error)
+                }
             }.finally {
                 self.stopLoading()
                 self.updateUI()
@@ -220,7 +225,7 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func askToDelete(transactionViewModel: TransactionViewModel) {
-        let alertController = UIAlertController(title: NSLocalizedString("Удалить транзакцию?", comment: "Удалить транзакцию?"),
+        let alertController = UIAlertController(title: transactionViewModel.removeTitle,
                                                 message: nil,
                                                 preferredStyle: .alert)
         

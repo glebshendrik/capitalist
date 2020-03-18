@@ -60,10 +60,12 @@ class ActiveInfoViewModel : EntityInfoViewModel {
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
+         creditsCoordinator: CreditsCoordinatorProtocol,
+         borrowsCoordinator: BorrowsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          activesCoordinator: ActivesCoordinatorProtocol) {
         self.activesCoordinator = activesCoordinator
-        super.init(transactionsCoordinator: transactionsCoordinator, accountCoordinator: accountCoordinator)
+        super.init(transactionsCoordinator: transactionsCoordinator, creditsCoordinator: creditsCoordinator, borrowsCoordinator: borrowsCoordinator, accountCoordinator: accountCoordinator)
     }
     
     func set(active: ActiveViewModel?) {

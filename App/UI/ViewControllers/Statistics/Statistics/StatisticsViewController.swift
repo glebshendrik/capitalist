@@ -29,4 +29,8 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }

@@ -67,13 +67,14 @@ class CreditInfoViewModel : EntityInfoViewModel {
         guard let creditViewModel = creditViewModel else { return .blue1 }
         return creditViewModel.isPaid ? .gray1 : .blue1
     }
-    
-    init(transactionsCoordinator: TransactionsCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol,
-         creditsCoordinator: CreditsCoordinatorProtocol) {
+        
+    override init(transactionsCoordinator: TransactionsCoordinatorProtocol,
+         creditsCoordinator: CreditsCoordinatorProtocol,
+         borrowsCoordinator: BorrowsCoordinatorProtocol,
+         accountCoordinator: AccountCoordinatorProtocol) {
         self.creditsCoordinator = creditsCoordinator
         self.transactionsCoordinator = transactionsCoordinator
-        super.init(transactionsCoordinator: transactionsCoordinator, accountCoordinator: accountCoordinator)
+        super.init(transactionsCoordinator: transactionsCoordinator, creditsCoordinator: creditsCoordinator, borrowsCoordinator: borrowsCoordinator, accountCoordinator: accountCoordinator)
     }
     
     func set(credit: CreditViewModel?) {

@@ -14,6 +14,10 @@ extension StatisticsViewController {
         if financialDataInvalidated {
             postFinantialDataUpdated()
         }
+        refreshData()
+    }
+    
+    @objc func refreshData() {
         setLoading()
         _ = firstly {
                 viewModel.loadData()
@@ -21,7 +25,7 @@ extension StatisticsViewController {
                 self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
             }.finally {
                 self.updateUI()
-        }
+            }
     }
     
     func removeTransaction(transactionViewModel: TransactionViewModel) {
@@ -59,8 +63,13 @@ extension StatisticsViewController {
     func setupUI() {
         setupNavigationBar()
         setupTableUI()
+        setupNotifications()
     }
         
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+    }
+    
     private func setupNavigationBar() {
         titleView = StatisticsTitleView(frame: CGRect.zero)
         titleView.delegate = self

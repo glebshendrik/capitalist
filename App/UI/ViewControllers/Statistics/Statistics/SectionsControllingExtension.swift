@@ -91,7 +91,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func askToDelete(transactionViewModel: TransactionViewModel) {
-        let alertController = UIAlertController(title: NSLocalizedString("Удалить транзакцию?", comment: "Удалить транзакцию?"),
+        let alertController = UIAlertController(title: transactionViewModel.removeTitle,
                                                 message: nil,
                                                 preferredStyle: .alert)
         

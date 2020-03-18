@@ -12,6 +12,8 @@ import SwiftDate
 
 class EntityInfoViewModel {
     private let transactionsCoordinator: TransactionsCoordinatorProtocol
+    private let creditsCoordinator: CreditsCoordinatorProtocol
+    private let borrowsCoordinator: BorrowsCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
     
     var isUpdatingData: Bool = false
@@ -46,8 +48,12 @@ class EntityInfoViewModel {
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
+         creditsCoordinator: CreditsCoordinatorProtocol,
+         borrowsCoordinator: BorrowsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {
         self.transactionsCoordinator = transactionsCoordinator
+        self.creditsCoordinator = creditsCoordinator
+        self.borrowsCoordinator = borrowsCoordinator
         self.accountCoordinator = accountCoordinator
     }
     
@@ -177,8 +183,19 @@ extension EntityInfoViewModel {
     }
     
     private func removeTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {
+        func destroy() -> Promise<Void> {
+            if let creditId = transactionViewModel.creditId {
+                return creditsCoordinator.destroyCredit(by: creditId, deleteTransactions: true)
+            }
+            if let borrowId = transactionViewModel.borrowId, transactionViewModel.isBorrowing {
+                return transactionViewModel.isDebt
+                    ? borrowsCoordinator.destroyDebt(by: borrowId, deleteTransactions: true)
+                    : borrowsCoordinator.destroyLoan(by: borrowId, deleteTransactions: true)
+            }
+            return transactionsCoordinator.destroy(by: transactionViewModel.id)
+        }
         return  firstly {
-                    transactionsCoordinator.destroy(by: transactionViewModel.id)
+                    destroy()
                 }.get {
                     self.postFinantialDataUpdated()
                 }.then {

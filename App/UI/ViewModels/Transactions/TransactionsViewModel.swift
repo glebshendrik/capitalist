@@ -12,6 +12,8 @@ import SwifterSwift
 
 class TransactionsViewModel {
     private let transactionsCoordinator: TransactionsCoordinatorProtocol
+    private let creditsCoordinator: CreditsCoordinatorProtocol
+    private let borrowsCoordinator: BorrowsCoordinatorProtocol
     private let exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
     private let currencyConverter: CurrencyConverterProtocol
@@ -52,10 +54,14 @@ class TransactionsViewModel {
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
+         creditsCoordinator: CreditsCoordinatorProtocol,
+         borrowsCoordinator: BorrowsCoordinatorProtocol,
          exchangeRatesCoordinator: ExchangeRatesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          currencyConverter: CurrencyConverterProtocol) {
         self.transactionsCoordinator = transactionsCoordinator
+        self.creditsCoordinator = creditsCoordinator
+        self.borrowsCoordinator = borrowsCoordinator
         self.exchangeRatesCoordinator = exchangeRatesCoordinator
         self.accountCoordinator = accountCoordinator
         self.currencyConverter = currencyConverter
@@ -122,6 +128,14 @@ class TransactionsViewModel {
     }
     
     func removeTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {        
+        if let creditId = transactionViewModel.creditId {
+            return creditsCoordinator.destroyCredit(by: creditId, deleteTransactions: true)
+        }
+        if let borrowId = transactionViewModel.borrowId, transactionViewModel.isBorrowing {
+            return transactionViewModel.isDebt
+                ? borrowsCoordinator.destroyDebt(by: borrowId, deleteTransactions: true)
+                : borrowsCoordinator.destroyLoan(by: borrowId, deleteTransactions: true)
+        }
         return transactionsCoordinator.destroy(by: transactionViewModel.id)
     }
     
