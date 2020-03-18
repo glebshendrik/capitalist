@@ -21,6 +21,10 @@ enum NotificationsManagerError: Error {
 
 @available(iOS 10.0, *)
 class NotificationsManager: NSObject, NotificationsManagerProtocol {
+    enum Keys : String {
+        case lastNotificationsEnabled
+    }
+    
     private static let maxNumberOfKeepAliveNotifications: Int = 5
     private static let numberOfDaysBetweenKeepAliveNotifications: Int = 3
     private static let numberOfKeepAliveNotificationMessages: Int = 11
@@ -36,8 +40,24 @@ class NotificationsManager: NSObject, NotificationsManagerProtocol {
         return Promise { notificationCenter.getNotificationSettings(completionHandler: $0.fulfill) }
     }
     
+    var lastSystemNotificationsEnabled: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Keys.lastNotificationsEnabled.rawValue)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.lastNotificationsEnabled.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
     var systemNotificationsEnabled: Promise<Bool> {
-        return notificationsSettings.map { $0.authorizationStatus == .authorized }
+        return  firstly {
+                    notificationsSettings
+                }.map {
+                    $0.authorizationStatus == .authorized
+                }.get { enabled in
+                    self.lastSystemNotificationsEnabled = enabled
+                }
     }
     
     init(notificationsHandler: NotificationsHandlerProtocol) {

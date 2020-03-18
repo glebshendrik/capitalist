@@ -28,7 +28,8 @@ class ManagersAssembly: Assembly {
                 userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
                 notificationsCoordinator: r.resolve(NotificationsCoordinatorProtocol.self)!,
                 soundsManager: r.resolve(SoundsManagerProtocol.self)!,
-                analyticsManager: r.resolve(AnalyticsManagerProtocol.self)!)
+                analyticsManager: r.resolve(AnalyticsManagerProtocol.self)!,
+                biometricVerificationManager: r.resolve(BiometricVerificationManagerProtocol.self)!)
             }
             .inObjectScope(.container)
             .initCompleted { resolver, router in
@@ -55,7 +56,9 @@ class ManagersAssembly: Assembly {
         
         container.autoregister(UIFactoryProtocol.self, initializer: UIFactory.init).inObjectScope(.container)
         
-        container.autoregister(AnalyticsManagerProtocol.self, initializer: AnalyticsManager.init).inObjectScope(.container)        
+        container.autoregister(AnalyticsManagerProtocol.self, initializer: AnalyticsManager.init).inObjectScope(.container)
+        
+        container.autoregister(BiometricVerificationManagerProtocol.self, initializer: BiometricVerificationManager.init).inObjectScope(.container)        
     }
     
 }

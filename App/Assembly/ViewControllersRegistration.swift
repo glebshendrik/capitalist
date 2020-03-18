@@ -259,6 +259,11 @@ extension ApplicationAssembly {
         // SubscriptionViewController
         container.registerForSkrudzhStoryboard(SubscriptionViewController.self) { (r, c) in
             c.viewModel = r.resolve(SubscriptionViewModel.self)
-        }        
+        }
+        
+        // PasscodeViewController
+        container.registerForSkrudzhStoryboard(PasscodeViewController.self) { (r, c) in
+            c.biometricVerificationManager = r.resolve(BiometricVerificationManagerProtocol.self)
+        }
     }
 }

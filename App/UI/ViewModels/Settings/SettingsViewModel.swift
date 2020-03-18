@@ -8,11 +8,13 @@
 
 import Foundation
 import PromiseKit
+import SwifterSwift
 
 class SettingsViewModel : ProfileViewModel {
     private let settingsCoordinator: SettingsCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
     private let soundsManager: SoundsManagerProtocol
+    private let verificationManager: BiometricVerificationManagerProtocol
     
     var currency: String? {
         return user?.currency.translatedName
@@ -25,18 +27,40 @@ class SettingsViewModel : ProfileViewModel {
     var soundsEnabled: Bool {
         return soundsManager.soundsEnabled
     }
+        
+    var language: String? {
+        return Locale.current.localizedString(forIdentifier: Locale.current.identifier)?.capitalized(with: Locale.current)
+    }
+    
+    var verificationEnabled: Bool {
+        return verificationManager.inAppBiometricVerificationEnabled
+    }
+    
+    var verificationHidden: Bool {
+        return !verificationManager.systemBiometricVerificationEnabled
+    }
     
     init(accountCoordinator: AccountCoordinatorProtocol,
          settingsCoordinator: SettingsCoordinatorProtocol,
-         soundsManager: SoundsManagerProtocol) {
+         soundsManager: SoundsManagerProtocol,
+         verificationManager: BiometricVerificationManagerProtocol) {
         self.accountCoordinator = accountCoordinator
         self.settingsCoordinator = settingsCoordinator
         self.soundsManager = soundsManager
+        self.verificationManager = verificationManager
         super.init(accountCoordinator: accountCoordinator)
     }
     
     func setSounds(enabled: Bool) {
         soundsManager.setSounds(enabled: enabled)
+    }
+    
+    func setVerification(enabled: Bool) -> Promise<Void> {
+        return  firstly {
+                    verificationManager.authenticateWithBioMetrics()
+                }.done {
+                    self.verificationManager.setInAppBiometricVerification(enabled: enabled)
+                }
     }
     
     func update(currency: Currency) -> Promise<Void> {

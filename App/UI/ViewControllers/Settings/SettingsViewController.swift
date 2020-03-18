@@ -31,6 +31,8 @@ class SettingsViewController : FormEditViewController {
         updateCurrencyUI()
         updatePeriodUI()
         updateSoundsUI()
+        updateLanguageUI()
+        updateVerificationUI()
     }
     
     func updateCurrencyUI() {
@@ -44,9 +46,34 @@ class SettingsViewController : FormEditViewController {
     func updateSoundsUI() {
         tableController.soundsSwitchField.value = viewModel.soundsEnabled
     }
+    
+    func updateLanguageUI() {
+        tableController.languageField.text = viewModel.language
+    }
+    
+    func updateVerificationUI() {
+        tableController.verificationSwitchField.value = viewModel.verificationEnabled
+        tableController.set(cell: tableController.verificationSwitchCell, hidden: viewModel.verificationHidden, animated: false, reload: true)
+    }
 }
 
 extension SettingsViewController : SettingsTableControllerDelegate {
+    func didTapLanguage() {
+        guard   let settingsUrl = URL(string: UIApplication.openSettingsURLString),
+                UIApplication.shared.canOpenURL(settingsUrl) else {
+            return
+        }
+        UIApplication.shared.open(settingsUrl, completionHandler: nil)
+    }
+    
+    func didChange(verificationEnabled: Bool) {
+        _ = firstly {
+                viewModel.setVerification(enabled: verificationEnabled)
+            }.ensure {
+                self.updateVerificationUI()
+            }
+    }
+    
     func didChange(soundsOn: Bool) {
         viewModel.setSounds(enabled: soundsOn)
     }

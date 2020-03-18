@@ -9,17 +9,19 @@
 import Foundation
 import Alamofire
 import SwiftDate
+import SwifterSwift
 
 enum APIRoute: URLRequestConvertible {
     static var baseURLString: String {
-        #if DEBUG
-//            return "https://skrudz.tempio.app"
-//            return "https://api.threebaskets.net"
+//      return "https://skrudz.tempio.app"
+
+        if SwifterSwift.isInDebuggingMode {
             return "https://skrudzh-staging.herokuapp.com"
-        #else
-//            return "https://skrudz.tempio.app"
-            return "https://api.threebaskets.net"
-        #endif
+        }
+        else if SwifterSwift.isInTestFlight {
+            return "https://skrudzh-staging.herokuapp.com"
+        }
+        return "https://api.threebaskets.net"
     }
     
     // Users

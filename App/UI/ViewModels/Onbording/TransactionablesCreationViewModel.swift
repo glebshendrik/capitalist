@@ -77,6 +77,10 @@ class TransactionablesCreationViewModel {
         return transactionableType == .expenseSource
     }
     
+    var nextButtonEnabled: Bool {
+        return transactionableType != .expenseSource || numberOfTransactionables > 0
+    }
+    
     var user: User? {
         return currentUser
     }

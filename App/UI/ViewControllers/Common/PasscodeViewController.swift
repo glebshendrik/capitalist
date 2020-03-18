@@ -7,9 +7,11 @@
 //
 
 import UIKit
-import BiometricAuthentication
+import PromiseKit
 
 class PasscodeViewController : UIViewController {
+    var biometricVerificationManager: BiometricVerificationManagerProtocol!
+    
     @IBOutlet weak var activateButton: UIButton!
     
     override func viewDidLoad() {
@@ -40,25 +42,12 @@ class PasscodeViewController : UIViewController {
     }
     
     @objc func showBioMetricsAuthentication() {
-        BioMetricAuthenticator.authenticateWithBioMetrics(reason: "") { [weak self] (result) in
-            switch result {
-            case .success(_):
-                self?.close()
-            case .failure(let error):
-                self?.showPasscodeAuthentication(message: error.message())
-            }
-        }
-    }
-        
-    func showPasscodeAuthentication(message: String) {
-        BioMetricAuthenticator.authenticateWithPasscode(reason: message) { [weak self] (result) in
-            switch result {
-            case .success(_):
-                self?.close()
-            case .failure(let error):
-                self?.activateButton.isHidden = false
-                print(error.message())
-            }
+        firstly {
+            biometricVerificationManager.authenticateWithBioMetrics()
+        }.done {
+            self.close()
+        }.catch { _ in
+            self.activateButton.isHidden = false
         }
     }
 }

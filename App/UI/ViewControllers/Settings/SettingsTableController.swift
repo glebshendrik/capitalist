@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import BiometricAuthentication
 
 protocol SettingsTableControllerDelegate {
     func didAppear()
     func didTapCurrency()
     func didTapPeriod()
     func didChange(soundsOn: Bool)
+    func didChange(verificationEnabled: Bool)
+    func didTapLanguage()
     func didRefresh()
 }
 
@@ -21,6 +24,10 @@ class SettingsTableController : FormFieldsTableViewController {
     @IBOutlet weak var currencyField: FormTapField!
     @IBOutlet weak var periodField: FormTapField!
     @IBOutlet weak var soundsSwitchField: FormSwitchValueField!
+    @IBOutlet weak var verificationSwitchField: FormSwitchValueField!
+    @IBOutlet weak var languageField: FormTapField!
+    @IBOutlet weak var verificationSwitchCell: UITableViewCell!
+    
     private var loaderView: LoaderView!
     
     var delegate: SettingsTableControllerDelegate?
@@ -35,6 +42,8 @@ class SettingsTableController : FormFieldsTableViewController {
         setupCurrencyField()
         setupPeriodField()
         setupSoundsSwitchField()
+        setupLanguageField()
+        setupVerificationSwitchField()
         setupRefreshControl()
     }
     
@@ -72,6 +81,22 @@ class SettingsTableController : FormFieldsTableViewController {
         }
     }
     
+    private func setupLanguageField() {
+        languageField.placeholder = NSLocalizedString("Язык", comment: "Язык")
+        languageField.imageName = "currency-icon"
+        languageField.didTap { [weak self] in
+            self?.delegate?.didTapLanguage()
+        }
+    }
+    
+    private func setupVerificationSwitchField() {
+        verificationSwitchField.placeholder = String.localizedStringWithFormat(NSLocalizedString("Вход по %@", comment: "Вход по %@"), BioMetricAuthenticator.shared.isFaceIdDevice() ? "Face ID" : "Touch ID")
+        verificationSwitchField.imageName = "password-icon"
+        verificationSwitchField.didSwitch { [weak self] verificationEnabled in
+            self?.delegate?.didChange(verificationEnabled: verificationEnabled)
+        }
+    }
+        
     private func setupRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl?.backgroundColor = .clear

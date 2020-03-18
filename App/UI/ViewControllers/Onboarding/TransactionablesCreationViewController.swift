@@ -59,6 +59,7 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
     }
     
     func goNext() {
+        guard viewModel.nextButtonEnabled else { return }
         guard let nextTransactionableType = viewModel.nextStepTransactionableType() else {
             _ = UIFlowManager.reach(point: .dataSetup)
             router.route()
@@ -93,10 +94,16 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
         updateCurrencySelectorUI()
         updateCollectionUI()
         updateBackButtonUI()
+        updateNextButtonUI()
     }
     
     func updateBackButtonUI() {
         backButton.isHidden = viewModel.backButtonHidden
+    }
+    
+    func updateNextButtonUI() {
+        saveButton.isEnabled = viewModel.nextButtonEnabled
+        saveButton.backgroundColor = viewModel.nextButtonEnabled ? UIColor.by(.blue1) : UIColor.by(.gray1)
     }
     
     func updateCollectionUI() {
@@ -140,6 +147,7 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
         }.finally {
             self.updateCollectionUI()
             self.updateBackButtonUI()
+            self.updateNextButtonUI()
             self.set(self.examplesActivityIndicator, hidden: true)
         }
     }

@@ -429,6 +429,8 @@
 		FAD88F8821B1181600BE7BC1 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F8721B1181600BE7BC1 /* MenuViewController.swift */; };
 		FAD88F8C21B1228F00BE7BC1 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD88F8B21B1228E00BE7BC1 /* MenuViewModel.swift */; };
 		FADD04C5241F91E400FB542D /* BiometricVerificationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD04C4241F91E400FB542D /* BiometricVerificationManagerProtocol.swift */; };
+		FADD04C72420101300FB542D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADD04C62420101300FB542D /* StoreKit.framework */; };
+		FADD04C92420FE4F00FB542D /* BiometricVerificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD04C82420FE4F00FB542D /* BiometricVerificationManager.swift */; };
 		FAE05FA72356EA870014D034 /* TransactionEditDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE05FA62356EA860014D034 /* TransactionEditDelegateExtension.swift */; };
 		FAE05FA92358CA1F0014D034 /* ActiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE05FA82358CA1F0014D034 /* ActiveCollectionViewCell.swift */; };
 		FAE05FAC235A212D0014D034 /* BasketItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE05FAB235A212D0014D034 /* BasketItemView.swift */; };
@@ -910,6 +912,8 @@
 		FAD88F8721B1181600BE7BC1 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		FAD88F8B21B1228E00BE7BC1 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		FADD04C4241F91E400FB542D /* BiometricVerificationManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricVerificationManagerProtocol.swift; sourceTree = "<group>"; };
+		FADD04C62420101300FB542D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		FADD04C82420FE4F00FB542D /* BiometricVerificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricVerificationManager.swift; sourceTree = "<group>"; };
 		FAE05FA62356EA860014D034 /* TransactionEditDelegateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditDelegateExtension.swift; sourceTree = "<group>"; };
 		FAE05FA82358CA1F0014D034 /* ActiveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAE05FAB235A212D0014D034 /* BasketItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketItemView.swift; sourceTree = "<group>"; };
@@ -995,6 +999,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ED9109D3257740117279317 /* Pods_Three_Baskets.framework in Frameworks */,
+				FADD04C72420101300FB542D /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1013,6 +1018,7 @@
 		95151D80691A2B25D6AF9C34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FADD04C62420101300FB542D /* StoreKit.framework */,
 				5C593460A3D6B5A0FB3FE006 /* Pods_Three_Baskets.framework */,
 			);
 			name = Frameworks;
@@ -1805,6 +1811,7 @@
 				FA8AD0D922BE1AB40084AD19 /* SaltEdgeManager.swift */,
 				FA28480222F19EB6003F114A /* UIFactory.swift */,
 				FA36E98A23F1832800B340AA /* AnalyticsManager.swift */,
+				FADD04C82420FE4F00FB542D /* BiometricVerificationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2603,6 +2610,7 @@
 				FAED7DAE21EDDD3800BF6FE1 /* BasketsViewModel.swift in Sources */,
 				FAF31D142406764D00D4CFB3 /* SubscriptionViewModel.swift in Sources */,
 				FAD88F1F21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift in Sources */,
+				FADD04C92420FE4F00FB542D /* BiometricVerificationManager.swift in Sources */,
 				FADD04C5241F91E400FB542D /* BiometricVerificationManagerProtocol.swift in Sources */,
 				FAB5BE3F2351FE75000466AE /* ActiveType.swift in Sources */,
 				FA16FC73223A82FA0053C273 /* ExpenseSourceSelectViewController.swift in Sources */,
@@ -3112,7 +3120,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 42;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
@@ -3121,7 +3129,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"xml2\"",
@@ -3221,7 +3229,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -3229,7 +3237,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"xml2\"",

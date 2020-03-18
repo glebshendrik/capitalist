@@ -17,7 +17,6 @@ import SwiftyGif
 import ApphudSDK
 import Firebase
 import FirebaseCoreDiagnostics
-import BiometricAuthentication
 import FBSDKCoreKit
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
@@ -28,7 +27,8 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private var accountCoordinator: AccountCoordinatorProtocol!
     private let soundsManager: SoundsManagerProtocol
     private var saltEdgeCoordinator: BankConnectionsCoordinatorProtocol!
-    private var analyticsManager: AnalyticsManagerProtocol!
+    private let analyticsManager: AnalyticsManagerProtocol
+    private var biometricVerificationManager: BiometricVerificationManagerProtocol
     
     private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     private var minVersion: String?
@@ -39,7 +39,8 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
          userSessionManager: UserSessionManagerProtocol,
          notificationsCoordinator: NotificationsCoordinatorProtocol,
          soundsManager: SoundsManagerProtocol,
-         analyticsManager: AnalyticsManagerProtocol) {
+         analyticsManager: AnalyticsManagerProtocol,
+         biometricVerificationManager: BiometricVerificationManagerProtocol) {
         
         self.storyboards = storyboards
         self.window = window
@@ -47,6 +48,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         self.notificationsCoordinator = notificationsCoordinator
         self.soundsManager = soundsManager
         self.analyticsManager = analyticsManager
+        self.biometricVerificationManager = biometricVerificationManager
     }
         
     func initDependencies(with resolver: Swinject.Resolver) {
@@ -208,7 +210,8 @@ extension ApplicationRouter {
     }
     
     private func setupBiometric() {
-        BioMetricAuthenticator.shared.allowableReuseDuration = 180
+        biometricVerificationManager.allowableReuseDuration = 180
+        biometricVerificationManager.setInAppBiometricVerification(enabled: true)
     }
     
     private func handleFirstAppLaunch() {
@@ -264,7 +267,7 @@ extension ApplicationRouter {
     }
     
     func showPasscodeScreen() {
-        if BioMetricAuthenticator.canAuthenticate() {
+        if biometricVerificationManager.shouldVerify {
             modal(.PasscodeViewController)
         }
     }
@@ -282,8 +285,7 @@ extension ApplicationRouter {
         return window.rootViewController
     }
     
-    func modal(_ viewController: Infrastructure.ViewController) {
-        window.rootViewController?.topmostPresentedViewController.modal(self.viewController(viewController))
+    func modal(_ viewController: Infrastructure.ViewController) {    window.rootViewController?.topmostPresentedViewController.modal(self.viewController(viewController))
     }
     
     func setWindow(blurred: Bool) {
