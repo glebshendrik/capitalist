@@ -210,8 +210,8 @@ extension ApplicationRouter {
     }
     
     private func setupBiometric() {
-        if !UIFlowManager.reach(point: .verificationManagerInitialization) {
-            biometricVerificationManager.allowableReuseDuration = 180
+        biometricVerificationManager.allowableReuseDuration = 180
+        if !UIFlowManager.reach(point: .verificationManagerInitialization) {            
             biometricVerificationManager.setInAppBiometricVerification(enabled: true)
         }        
     }
