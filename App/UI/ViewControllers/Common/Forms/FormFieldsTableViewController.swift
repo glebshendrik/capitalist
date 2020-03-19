@@ -139,16 +139,34 @@ class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController
     }
     
     func setupAsEmail(_ field: FormTextField) {
-        field.textField.textContentType = UITextContentType.emailAddress
+        field.textField.textContentType = UITextContentType.username
         field.textField.keyboardType = UIKeyboardType.emailAddress
         field.textField.autocapitalizationType = UITextAutocapitalizationType.none
         field.textField.autocorrectionType = UITextAutocorrectionType.no
         field.textField.inputAccessoryView = saveButton
     }
     
-    func setupAsSecure(_ field: FormTextField) {
+    func setupAsPassword(_ field: FormTextField) {
         field.textField.isSecureTextEntry = true
         field.textField.textContentType = UITextContentType.password
+        field.textField.inputAccessoryView = saveButton
+    }
+    
+    func setupAsSecure(_ field: FormTextField) {
+        field.textField.isSecureTextEntry = true
+        field.textField.inputAccessoryView = saveButton
+    }
+    
+    func setupAsNewPassword(_ field: FormTextField) {
+        field.textField.isSecureTextEntry = true
+        if #available(iOS 12.0, *) {
+            let passwordRuleDescription = "minlength: 6; maxlength: 20;"
+            let passwordRules = UITextInputPasswordRules(descriptor: passwordRuleDescription)
+            field.textField.passwordRules = passwordRules
+            field.textField.textContentType = UITextContentType.newPassword
+        } else {
+            // Fallback on earlier versions
+        }
         field.textField.inputAccessoryView = saveButton
     }
 }

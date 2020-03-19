@@ -96,7 +96,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             return
         }
         
-        guard !checkIfAppUpdateNeeded() else {
+        guard !isAppUpdateNeeded() else {
             showAppUpdateScreen()
             return
         }
@@ -111,19 +111,19 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             accountCoordinator.loadCurrentUser()
         }.done { user in
             
-            guard !self.checkIfAppUpdateNeeded() else {
+            guard !self.isAppUpdateNeeded() else {
                 self.showAppUpdateScreen()
                 return
             }
             
-            guard UIFlowManager.reached(point: .onboarding) else {
+            guard UIFlowManager.reached(point: .onboarding) || user.onboarded else {
                 self.showOnboardingViewController()
                 return
             }
             
             self.notificationsCoordinator.enableNotifications()
             
-            guard UIFlowManager.reached(point: .dataSetup) else {
+            guard UIFlowManager.reached(point: .dataSetup) || user.onboarded else {
                 self.showDataSetupViewController()
                 return
             }
@@ -305,12 +305,12 @@ extension ApplicationRouter {
     func setMinimumAllowed(version: String?, build: String?) {
         minVersion = version
         minBuild = build
-        if checkIfAppUpdateNeeded() {
+        if isAppUpdateNeeded() {
             route()
         }
     }
     
-    private func checkIfAppUpdateNeeded() -> Bool {
+    private func isAppUpdateNeeded() -> Bool {
         guard   let minBuild = minBuild,
                 let appBuild = SwifterSwift.appBuild,
                 let minBuildNumber = Int(minBuild),

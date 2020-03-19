@@ -47,7 +47,7 @@ class ChangePasswordTableController : SaveAccessoryFormFieldsTableViewController
     
     private func setupNewPasswordField() {
         register(responder: newPasswordField.textField)
-        setupAsSecure(newPasswordField)
+        setupAsNewPassword(newPasswordField)
         newPasswordField.placeholder = NSLocalizedString("Новый пароль", comment: "Новый пароль")
         newPasswordField.imageName = "password-icon"
         newPasswordField.didChange { [weak self] text in
@@ -57,7 +57,7 @@ class ChangePasswordTableController : SaveAccessoryFormFieldsTableViewController
     
     private func setupNewPasswordConfirmationField() {
         register(responder: confirmationField.textField)
-        setupAsSecure(confirmationField)
+        setupAsNewPassword(confirmationField)
         confirmationField.placeholder = NSLocalizedString("Новый пароль еще раз", comment: "Новый пароль еще раз")
         confirmationField.imageName = "password-icon"
         confirmationField.didChange { [weak self] text in

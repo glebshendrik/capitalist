@@ -46,7 +46,7 @@ class LoginTableController : SaveAccessoryFormFieldsTableViewController {
     
     private func setupPasswordField() {
         register(responder: passwordField.textField)
-        setupAsSecure(passwordField)
+        setupAsPassword(passwordField)
         passwordField.placeholder = NSLocalizedString("Пароль", comment: "Пароль")
         passwordField.imageName = "password-icon"
         passwordField.didChange { [weak self] text in

@@ -22,10 +22,6 @@ class LoginViewModel {
     func authenticate() -> Promise<Void> {
         return  firstly {
                     accountCoordinator.authenticate(with: creationForm()).asVoid()
-                }.done {
-                    _ = UIFlowManager.reach(point: .onboarding)
-                    _ = UIFlowManager.reach(point: .dataSetup)
-                    _ = UIFlowManager.reach(point: .transactionCreationInfoMessage)
                 }.then {
                     self.restoreSubscription()
                 }

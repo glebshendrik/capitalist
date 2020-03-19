@@ -185,18 +185,19 @@ class TransactionController {
     
     private func getWaitingEdge(at location: CGPoint, in view: UIView, locationInCollectionView: CGPoint, direction: UICollectionView.ScrollDirection?) -> UIRectEdge? {
         guard let direction = direction else { return nil }
-        if direction == .horizontal && location.x < 100 {
+        let horizontalEdgeRatio: CGFloat = 0.15
+        let verticalEdgeRatio: CGFloat = 0.2
+        if direction == .horizontal && location.x < (view.frame.size.width * horizontalEdgeRatio) {
             return .left
         }
-        if direction == .horizontal && location.x > (view.frame.size.width - 100) {
+        if direction == .horizontal && location.x > (view.frame.size.width * (1 - horizontalEdgeRatio)) {
             return .right
         }
-        if direction == .vertical && locationInCollectionView.y < 100 {
+        guard let collectionView = destinationCollectionView else { return nil }
+        if direction == .vertical && locationInCollectionView.y < (collectionView.frame.height * verticalEdgeRatio) {
             return .top
         }
-        if let collectionView = destinationCollectionView,
-            direction == .vertical,
-            locationInCollectionView.y > (collectionView.frame.height - 100) {
+        if direction == .vertical && locationInCollectionView.y > (collectionView.frame.height * (1 - verticalEdgeRatio)) {
             return .bottom
         }
         return nil

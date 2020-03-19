@@ -43,6 +43,7 @@ struct User : Decodable {
     let saltEdgeCustomerSecret: String?
     let minVersion: String?
     let minBuild: String?
+    let onboarded: Bool
     
     var fullname: String? {
         if let firstname = firstname, !firstname.isEmpty, let lastname = lastname, !lastname.isEmpty {
@@ -71,6 +72,7 @@ struct User : Decodable {
         case saltEdgeCustomerSecret = "salt_edge_customer_secret"
         case minVersion = "ios_min_version"
         case minBuild = "ios_min_build"
+        case onboarded
     }
 }
 

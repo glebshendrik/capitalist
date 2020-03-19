@@ -67,9 +67,10 @@ class AccountCoordinator : AccountCoordinatorProtocol {
                     authenticationService.authenticate(form: form)
                 }.get { session in
                     self.userSessionManager.save(session: session)
-                    self.router.route()
                 }.then { session in
                     self.updateUserSubscription().map { session }
+                }.get { session in
+                    self.router.route()
                 }
     }
     
