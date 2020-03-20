@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BorrowEditTableControllerDelegate {
+protocol BorrowEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didAppear()
     func didTapIcon()
     func didChange(name: String?)
@@ -45,6 +45,10 @@ class BorrowEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var removeCell: UITableViewCell!
     
     var delegate: BorrowEditTableControllerDelegate?
+    
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

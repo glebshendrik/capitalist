@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CreditEditTableControllerDelegate {
+protocol CreditEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didAppear()
     func didTapIcon()
     func didChange(name: String?)
@@ -56,6 +56,10 @@ class CreditEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var removeCell: UITableViewCell!
     
     var delegate: CreditEditTableControllerDelegate?
+    
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

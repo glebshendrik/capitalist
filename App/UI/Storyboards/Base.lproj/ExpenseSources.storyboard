@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,13 +35,41 @@
                                     <segue destination="YzM-aR-OkL" kind="embed" identifier="showEditTableView" id="uK6-Mk-gq2"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxN-YS-mzZ" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                                <rect key="frame" x="24" y="551" width="327" height="48"/>
+                                <color key="backgroundColor" name="blue 1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="EBf-WO-UvS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                <state key="normal" title="Войти">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                        <color key="value" name="blue 1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                        <color key="value" name="white 0.4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didTapSaveButton:" destination="8fD-85-d78" eventType="touchUpInside" id="ToI-ep-cGn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
+                            <constraint firstItem="bxN-YS-mzZ" firstAttribute="leading" secondItem="5dF-w9-bRB" secondAttribute="leading" constant="24" id="1IH-tT-An4"/>
+                            <constraint firstItem="5dF-w9-bRB" firstAttribute="bottom" secondItem="bxN-YS-mzZ" secondAttribute="bottom" constant="24" id="9Ij-yg-GAK"/>
                             <constraint firstItem="Vde-Ty-o4B" firstAttribute="bottom" secondItem="5dF-w9-bRB" secondAttribute="bottom" id="9fW-uK-ZRX"/>
                             <constraint firstItem="Vde-Ty-o4B" firstAttribute="top" secondItem="5dF-w9-bRB" secondAttribute="top" id="Y32-ot-InA"/>
                             <constraint firstItem="Vde-Ty-o4B" firstAttribute="leading" secondItem="5dF-w9-bRB" secondAttribute="leading" id="YTu-Xw-HcV"/>
                             <constraint firstItem="5dF-w9-bRB" firstAttribute="trailing" secondItem="Vde-Ty-o4B" secondAttribute="trailing" id="oxe-ov-LRx"/>
+                            <constraint firstItem="5dF-w9-bRB" firstAttribute="trailing" secondItem="bxN-YS-mzZ" secondAttribute="trailing" constant="24" id="wTY-ey-vge"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5dF-w9-bRB"/>
                     </view>
@@ -61,7 +89,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="saveButton" destination="RFM-aT-1oi" id="obf-Aq-dGF"/>
+                        <outlet property="saveBarButton" destination="RFM-aT-1oi" id="fgR-oj-og5"/>
+                        <outlet property="saveButton" destination="bxN-YS-mzZ" id="IS0-ly-mmQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kip-bi-H9Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -257,7 +286,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HM-0c-HRV" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -282,7 +311,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qgx-8l-JdV" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -307,7 +336,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giw-lh-GVR" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -332,7 +361,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KCf-I6-YYT" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -973,6 +1002,9 @@
         </namedColor>
         <namedColor name="white 0.04">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white 0.4">
+            <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white 0.64">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.63999998569488525" colorSpace="custom" customColorSpace="sRGB"/>

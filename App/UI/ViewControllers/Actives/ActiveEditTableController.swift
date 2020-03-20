@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ActiveEditTableControllerDelegate {
+protocol ActiveEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didAppear()
     func didTapIcon()
     func didTapActiveType()
@@ -58,6 +58,10 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     var delegate: ActiveEditTableControllerDelegate?
         
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delegate?.didAppear()

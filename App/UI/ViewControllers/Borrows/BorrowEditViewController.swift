@@ -165,6 +165,10 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
     func didChange(comment: String?) {
         viewModel.comment = comment
     }
+    
+    func didTapSave() {
+        save()
+    }
 }
 
 extension BorrowEditViewController : IconsViewControllerDelegate {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol TransactionEditTableControllerDelegate {
+protocol TransactionEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didAppear()
     func didTapSaveAtYesterday()
     func didTapCalendar()
@@ -48,7 +48,11 @@ class TransactionEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var removeButton: UIButton!
     
     var delegate: TransactionEditTableControllerDelegate?
-        
+    
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delegate?.didAppear()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ExpenseCategoryEditTableControllerDelegate {
+protocol ExpenseCategoryEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didAppear()
     func didTapIcon()
     func didChange(name: String?)
@@ -33,7 +33,11 @@ class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var reminderCell: UITableViewCell!
     
     var delegate: ExpenseCategoryEditTableControllerDelegate?
-        
+    
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delegate?.didAppear()

@@ -8,15 +8,18 @@
 
 import UIKit
 
-protocol ProfileEditTableControllerDelegate {
+protocol ProfileEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didChange(name: String?)
-    func didTapSave()
 }
 
 class ProfileEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var nameField: FormTextField!
     
     var delegate: ProfileEditTableControllerDelegate?
+    
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
     
     override func setupUI() {
         super.setupUI()
@@ -30,9 +33,5 @@ class ProfileEditTableController : FormFieldsTableViewController {
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
         }
-    }
-    
-    override func didTapSave() {
-        delegate?.didTapSave()
     }
 }

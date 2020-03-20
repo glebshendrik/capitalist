@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImageSVGCoder
 
-protocol ExpenseSourceEditTableControllerDelegate {
+protocol ExpenseSourceEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didAppear()
     func didTapIcon()
     func didTapCurrency()
@@ -39,6 +39,10 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var bankCell: UITableViewCell!
     
     var delegate: ExpenseSourceEditTableControllerDelegate?
+    
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
     
     override var lastResponder: UIView? {
         if !isHidden(cell: creditLimitCell) {

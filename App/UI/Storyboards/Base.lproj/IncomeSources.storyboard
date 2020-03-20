@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -375,13 +375,41 @@
                                     <segue destination="Hsl-CQ-JmL" kind="embed" identifier="showEditTableView" id="RbB-Rn-KfO"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOl-py-ZGb" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                                <rect key="frame" x="24" y="551" width="327" height="48"/>
+                                <color key="backgroundColor" name="blue 1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="pTR-j0-egZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                <state key="normal" title="Войти">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                        <color key="value" name="blue 1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                        <color key="value" name="white 0.4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didTapSaveButton:" destination="XSV-72-Slk" eventType="touchUpInside" id="0DU-Rb-TMs"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" name="dark 2A314B"/>
+                        <color key="backgroundColor" name="black 2"/>
                         <constraints>
+                            <constraint firstItem="bOl-py-ZGb" firstAttribute="leading" secondItem="fZZ-E3-wFU" secondAttribute="leading" constant="24" id="61Z-Uu-iiN"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="bottom" secondItem="fZZ-E3-wFU" secondAttribute="bottom" id="UlC-vo-Vfb"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="top" secondItem="fZZ-E3-wFU" secondAttribute="top" id="XtM-Io-gVG"/>
                             <constraint firstItem="fZZ-E3-wFU" firstAttribute="trailing" secondItem="fSE-gp-P7u" secondAttribute="trailing" id="gX2-Ac-UY7"/>
                             <constraint firstItem="fSE-gp-P7u" firstAttribute="leading" secondItem="fZZ-E3-wFU" secondAttribute="leading" id="p1T-1p-4Uv"/>
+                            <constraint firstItem="fZZ-E3-wFU" firstAttribute="bottom" secondItem="bOl-py-ZGb" secondAttribute="bottom" constant="24" id="sl1-Pi-hjW"/>
+                            <constraint firstItem="fZZ-E3-wFU" firstAttribute="trailing" secondItem="bOl-py-ZGb" secondAttribute="trailing" constant="24" id="xxV-Pf-EHj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fZZ-E3-wFU"/>
                     </view>
@@ -401,7 +429,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="saveButton" destination="37n-py-Kw0" id="CbP-GG-fMn"/>
+                        <outlet property="saveBarButton" destination="37n-py-Kw0" id="u1g-cC-PzD"/>
+                        <outlet property="saveButton" destination="bOl-py-ZGb" id="iXA-OX-iOT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUd-Nx-Yos" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -568,9 +597,6 @@
         <namedColor name="blue 1">
             <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="dark 2A314B">
-            <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="gray 1">
             <color red="0.34099999070167542" green="0.34900000691413879" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -579,6 +605,9 @@
         </namedColor>
         <namedColor name="white 0.04">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white 0.4">
+            <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white 0.64">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.63999998569488525" colorSpace="custom" customColorSpace="sRGB"/>

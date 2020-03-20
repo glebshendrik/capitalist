@@ -61,4 +61,8 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
             showProviders()
         }
     }
+    
+    func didTapSave() {
+        save()
+    }
 }

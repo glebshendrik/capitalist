@@ -33,6 +33,10 @@ extension IncomeSourceEditViewController : IncomeSourceEditTableControllerDelega
     func didTapSetReminder() {
         modal(factory.reminderEditViewController(delegate: self, viewModel: viewModel.reminderViewModel))
     }
+    
+    func didTapSave() {
+        save()
+    }
 }
 
 extension IncomeSourceEditViewController : IconsViewControllerDelegate {

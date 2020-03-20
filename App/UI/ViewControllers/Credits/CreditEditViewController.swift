@@ -163,6 +163,10 @@ extension CreditEditViewController : CreditEditTableControllerDelegate {
     func didTapSetReminder() {
         modal(factory.reminderEditViewController(delegate: self, viewModel: viewModel.reminderViewModel))
     }
+    
+    func didTapSave() {
+        save()
+    }
 }
 
 extension CreditEditViewController : IconsViewControllerDelegate {

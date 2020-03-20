@@ -184,7 +184,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-gg-FPi" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="11" width="366" height="48"/>
-                                                    <color key="backgroundColor" name="blue 6A92FA"/>
+                                                    <color key="backgroundColor" name="blue 1"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="He9-vw-sPw"/>
                                                     </constraints>
@@ -197,10 +197,10 @@
                                                             <real key="value" value="8"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                                            <color key="value" name="blue 6A92FA"/>
+                                                            <color key="value" name="blue 1"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                                            <color key="value" name="delimeter AFC1FF"/>
+                                                            <color key="value" name="white 0.4"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
@@ -1560,6 +1560,9 @@
         </namedColor>
         <namedColor name="white 0.12">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.11999999731779099" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white 0.4">
+            <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white 0.64">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.63999998569488525" colorSpace="custom" customColorSpace="sRGB"/>

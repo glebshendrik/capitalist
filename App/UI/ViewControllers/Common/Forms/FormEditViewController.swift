@@ -136,7 +136,12 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     }
     
     func close(completion: (() -> Void)? = nil) {
-        navigationController?.dismiss(animated: true, completion: completion)
+        if isModal {
+            navigationController?.dismiss(animated: true, completion: completion)
+        }
+        else {
+            navigationController?.popViewController(animated: true, completion)
+        }        
     }
     
     func setupUI() {

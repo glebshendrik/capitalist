@@ -86,6 +86,10 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
                currency: viewModel.destinationFilterCurrency,
                transactionableTypeCases: destinationTransactionableTypeCases())
     }
+    
+    func didTapSave() {
+        save()
+    }
 }
 
 extension TransactionEditViewController {

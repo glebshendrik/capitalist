@@ -8,12 +8,11 @@
 
 import UIKit
 
-protocol RegistrationTableControllerDelegate {
+protocol RegistrationTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didChange(name: String?)
     func didChange(email: String?)
     func didChange(password: String?)
     func didChange(passwordConfirmation: String?)
-    func didTapSave()
     func didTapSignIn()
 }
 
@@ -27,11 +26,15 @@ class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
     
     var delegate: RegistrationTableControllerDelegate?
     
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
+    
     override var saveButtonTitle: String {
         return NSLocalizedString("Зарегистрироваться", comment: "Зарегистрироваться")
     }
     
-    override var saveButtonInForm: UIButton? {
+    override var saveButtonInForm: HighlightButton? {
         return registerButton
     }
     
@@ -82,11 +85,7 @@ class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
             self?.delegate?.didChange(passwordConfirmation: text)
         }
     }
-    
-    override func didTapSave() {
-        delegate?.didTapSave()
-    }
-    
+        
     @IBAction func didTapRegisterButton(_ sender: Any) {
         delegate?.didTapSave()
     }

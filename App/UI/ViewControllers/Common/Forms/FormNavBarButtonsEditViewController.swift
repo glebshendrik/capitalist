@@ -8,27 +8,16 @@
 
 import UIKit
 
-class FormNavBarButtonsEditViewController : FormEditViewController {
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    
-    var canSave: Bool { return true }
-    
-    @IBAction func didTapSaveButton(_ sender: Any) {
-        guard canSave else { return }
-        save()
-    }
-    
-    @IBAction func didTapCancelButton(_ sender: Any) {
-        close()
-    }
+class FormNavBarButtonsEditViewController : FormSubmitViewController {
+    @IBOutlet weak var saveBarButton: UIBarButtonItem!
     
     override func operationStarted() {
         super.operationStarted()
-        saveButton.isEnabled = false
+        saveBarButton.isEnabled = false
     }
     
     override func operationFinished() {
         super.operationFinished()
-        self.saveButton.isEnabled = true
+        self.saveBarButton.isEnabled = true
     }
 }

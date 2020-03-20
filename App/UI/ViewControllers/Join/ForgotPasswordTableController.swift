@@ -8,9 +8,8 @@
 
 import UIKit
 
-protocol ForgotPasswordTableControllerDelegate {
+protocol ForgotPasswordTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didChange(email: String?)
-    func didTapSave()
 }
 
 class ForgotPasswordTableController : SaveAccessoryFormFieldsTableViewController {
@@ -20,8 +19,12 @@ class ForgotPasswordTableController : SaveAccessoryFormFieldsTableViewController
     
     var delegate: ForgotPasswordTableControllerDelegate?
     
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
+    
     override var saveButtonTitle: String { return NSLocalizedString("Отправить код", comment: "Отправить код") }
-    override var saveButtonInForm: UIButton? {
+    override var saveButtonInForm: HighlightButton? {
         return sendCodeButton
     }
     
@@ -39,11 +42,7 @@ class ForgotPasswordTableController : SaveAccessoryFormFieldsTableViewController
             self?.delegate?.didChange(email: text)
         }
     }
-    
-    override func didTapSave() {
-        delegate?.didTapSave()
-    }
-    
+        
     @IBAction func didTapSendCodeButton(_ sender: Any) {
         delegate?.didTapSave()
     }

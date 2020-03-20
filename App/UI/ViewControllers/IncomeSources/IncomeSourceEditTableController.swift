@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol IncomeSourceEditTableControllerDelegate {
+protocol IncomeSourceEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didAppear()
     func didTapIcon()
     func didChange(name: String?)
@@ -31,6 +31,10 @@ class IncomeSourceEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var reminderCell: UITableViewCell!
     
     var delegate: IncomeSourceEditTableControllerDelegate?
+    
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

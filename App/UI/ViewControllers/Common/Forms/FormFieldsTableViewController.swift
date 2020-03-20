@@ -9,6 +9,11 @@
 import UIKit
 import StaticTableViewController
 import IQKeyboardManager
+import SnapKit
+
+protocol FormFieldsTableViewControllerDelegate {
+    func didTapSave()
+}
 
 class FormFieldsTableViewController : StaticTableViewController, UITextFieldDelegate, UITextViewDelegate {
     @IBOutlet weak var activityIndicatorCell: UITableViewCell?
@@ -17,6 +22,26 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
     
     var lastResponder: UIView? { return responders.last }
     var responders: [UIView] = []
+    
+    var saveButton: KeyboardHighlightButton = KeyboardHighlightButton()
+    var saveButtonTitle: String { return NSLocalizedString("Save", comment: "Save") }
+    
+    lazy var saveButtonView: UIView = {
+        let buttonView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 64))
+        buttonView.backgroundColor = UIColor.by(.black2)
+        buttonView.addSubview(saveButton)
+        saveButton.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(48)
+            make.center.equalTo(buttonView)
+            make.left.equalTo(buttonView).offset(24)
+            make.right.equalTo(buttonView).offset(-24)
+        }
+        return buttonView
+    }()
+    
+    var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +69,23 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
         returnKeyHandler = IQKeyboardReturnKeyHandler(viewController: self)
         returnKeyHandler.delegate = self
         returnKeyHandler.lastTextFieldReturnKeyType = .done
+        setupSaveButton()
+    }
+    
+    func setupSaveButton() {
+        saveButton.setTitle(saveButtonTitle, for: .normal)
+        saveButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)!
+        saveButton.titleLabel?.textColor = UIColor.by(.white100)
+        saveButton.backgroundColor = UIColor.by(.blue1)
+        saveButton.backgroundColorForNormal = UIColor.by(.blue1)
+        saveButton.backgroundColorForHighlighted = UIColor.by(.white40)
+        saveButton.cornerRadius = 8
         
+        saveButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc private func didTapSaveButton(_ sender: UIButton) {
+        didTapSave()
     }
     
     func updateTable(animated: Bool = true) {
@@ -62,6 +103,7 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
         guard let responder = responder else { return }
         returnKeyHandler.addTextFieldView(responder)
         responders.append(responder)
+        assignSaveButtonTo(responder)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -82,19 +124,21 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
     }
     
     func didTapSave() {
-        
+        formFieldsTableViewControllerDelegate?.didTapSave()
     }
     
+    private func assignSaveButtonTo(_ responder: UIResponder) {
+        (responder as? UITextField)?.inputAccessoryView = saveButtonView
+        (responder as? UITextView)?.inputAccessoryView = saveButtonView
+    }
 }
 
 class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController {
-    var saveButton: KeyboardHighlightButton = KeyboardHighlightButton()
-    var saveButtonTitle: String { return NSLocalizedString("Save", comment: "Save") }
-    var saveButtonInForm: UIButton? { return nil }
+    var saveButtonInForm: HighlightButton? { return nil }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardDidHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
@@ -119,46 +163,24 @@ class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func setupUI() {
-        super.setupUI()
-        setupSaveButton()
-    }
-    
-    func setupSaveButton() {
-        saveButton.setTitle(saveButtonTitle, for: .normal)
-        saveButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)!
-        saveButton.titleLabel?.textColor = UIColor.by(.white100)        
-        saveButton.backgroundColor = UIColor.by(.blue1)
-        saveButton.backgroundColorForNormal = UIColor.by(.blue1)
-        saveButton.backgroundColorForHighlighted = UIColor.by(.blue1)
-        saveButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
-    }
-    
-    @objc private func didTapSaveButton(_ sender: UIButton) {
-        didTapSave()
-    }
-    
     func setupAsEmail(_ field: FormTextField) {
         field.textField.textContentType = UITextContentType.username
         field.textField.keyboardType = UIKeyboardType.emailAddress
         field.textField.autocapitalizationType = UITextAutocapitalizationType.none
         field.textField.autocorrectionType = UITextAutocorrectionType.no
-        field.textField.inputAccessoryView = saveButton
-    }
-    
-    func setupAsPassword(_ field: FormTextField) {
-        field.textField.isSecureTextEntry = true
-        field.textField.textContentType = UITextContentType.password
-        field.textField.inputAccessoryView = saveButton
     }
     
     func setupAsSecure(_ field: FormTextField) {
         field.textField.isSecureTextEntry = true
-        field.textField.inputAccessoryView = saveButton
+    }
+    
+    func setupAsPassword(_ field: FormTextField) {
+        setupAsSecure(field)
+        field.textField.textContentType = UITextContentType.password
     }
     
     func setupAsNewPassword(_ field: FormTextField) {
-        field.textField.isSecureTextEntry = true
+        setupAsSecure(field)
         if #available(iOS 12.0, *) {
             let passwordRuleDescription = "minlength: 6; maxlength: 20;"
             let passwordRules = UITextInputPasswordRules(descriptor: passwordRuleDescription)
@@ -167,6 +189,5 @@ class SaveAccessoryFormFieldsTableViewController : FormFieldsTableViewController
         } else {
             // Fallback on earlier versions
         }
-        field.textField.inputAccessoryView = saveButton
     }
 }

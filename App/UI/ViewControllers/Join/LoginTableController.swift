@@ -8,11 +8,10 @@
 
 import UIKit
 
-protocol LoginTableControllerDelegate {
+protocol LoginTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didChange(login: String?)
     func didChange(password: String?)
-    func didTapForgotPassword()
-    func didTapSave()
+    func didTapForgotPassword()    
 }
 
 class LoginTableController : SaveAccessoryFormFieldsTableViewController {
@@ -23,8 +22,12 @@ class LoginTableController : SaveAccessoryFormFieldsTableViewController {
     
     var delegate: LoginTableControllerDelegate?
     
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
+    
     override var saveButtonTitle: String { return NSLocalizedString("Войти", comment: "Войти") }
-    override var saveButtonInForm: UIButton? {
+    override var saveButtonInForm: HighlightButton? {
         return signInButton
     }
     
@@ -56,10 +59,6 @@ class LoginTableController : SaveAccessoryFormFieldsTableViewController {
     
     @IBAction func didTapForgotPassword(_ sender: UIButton) {
         delegate?.didTapForgotPassword()
-    }
-    
-    override func didTapSave() {
-        delegate?.didTapSave()
     }
     
     @IBAction func didTapSignInButton(_ sender: Any) {

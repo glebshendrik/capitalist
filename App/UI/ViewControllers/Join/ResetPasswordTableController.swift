@@ -8,11 +8,10 @@
 
 import UIKit
 
-protocol ResetPasswordTableControllerDelegate {
+protocol ResetPasswordTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didChange(code: String?)
     func didChange(password: String?)
     func didChange(passwordConfirmation: String?)
-    func didTapSave()
 }
 
 class ResetPasswordTableController : SaveAccessoryFormFieldsTableViewController {
@@ -24,8 +23,12 @@ class ResetPasswordTableController : SaveAccessoryFormFieldsTableViewController 
     
     var delegate: ResetPasswordTableControllerDelegate?
     
+    override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
+        return delegate
+    }
+    
     override var saveButtonTitle: String { return NSLocalizedString("Сменить пароль", comment: "Сменить пароль") }
-    override var saveButtonInForm: UIButton? {
+    override var saveButtonInForm: HighlightButton? {
         return resetPasswordButton
     }
     
@@ -65,11 +68,7 @@ class ResetPasswordTableController : SaveAccessoryFormFieldsTableViewController 
             self?.delegate?.didChange(passwordConfirmation: text)
         }
     }
-    
-    override func didTapSave() {
-        delegate?.didTapSave()
-    }
-    
+        
     @IBAction func didTapResetPasswordButton(_ sender: Any) {
         delegate?.didTapSave()
     }

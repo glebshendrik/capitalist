@@ -33,6 +33,10 @@ extension ExpenseCategoryEditViewController : ExpenseCategoryEditTableController
     func didTapSetReminder() {        
         modal(factory.reminderEditViewController(delegate: self, viewModel: viewModel.reminderViewModel))
     }
+    
+    func didTapSave() {
+        save()
+    }
 }
 
 extension ExpenseCategoryEditViewController : IconsViewControllerDelegate {

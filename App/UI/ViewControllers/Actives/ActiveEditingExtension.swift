@@ -68,6 +68,10 @@ extension ActiveEditViewController : ActiveEditTableControllerDelegate {
     func didTapSetReminder() {
         modal(factory.reminderEditViewController(delegate: self, viewModel: viewModel.reminderViewModel))
     }
+    
+    func didTapSave() {
+        save()
+    }
 }
 
 extension ActiveEditViewController : IconsViewControllerDelegate {
