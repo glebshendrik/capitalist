@@ -24,6 +24,11 @@ class LoginViewController : FormSubmitViewController {
         return NSLocalizedString("Ошибка при входе", comment: "Ошибка при входе")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableController.loginField.textField.becomeFirstResponder()
+    }
+    
     override func registerFormFields() -> [String : FormField] {
         return [SessionCreationForm.CodingKeys.email.rawValue : tableController.loginField,
                 SessionCreationForm.CodingKeys.password.rawValue : tableController.passwordField]
