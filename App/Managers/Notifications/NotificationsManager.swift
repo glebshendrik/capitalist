@@ -30,7 +30,16 @@ class NotificationsManager: NSObject, NotificationsManagerProtocol {
     private static let numberOfKeepAliveNotificationMessages: Int = 11
     private let notificationsHandler: NotificationsHandlerProtocol
     private let userDefaults = UserDefaults.standard
-    let defaultOtherNotificationsFireTime: Date = Date().dateAt(.startOfDay) + 12.hours
+    let defaultOtherNotificationsFireTime: Date = Date(calendar: Calendar.autoupdatingCurrent,
+                                                       timeZone: TimeZone.autoupdatingCurrent,
+                                                       era: Date().era,
+                                                       year: Date().year,
+                                                       month: Date().month,
+                                                       day: Date().day,
+                                                       hour: 20,
+                                                       minute: 4,
+                                                       second: 0,
+                                                       nanosecond: 0) ?? Date()
     
     private var notificationCenter: UNUserNotificationCenter {
         return UNUserNotificationCenter.current()
@@ -155,7 +164,8 @@ class NotificationsManager: NSObject, NotificationsManagerProtocol {
     }
         
     private func createNotificationRequest(identifier: String, date: Date, content: UNNotificationContent) -> UNNotificationRequest {
-        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        var components = Calendar.autoupdatingCurrent.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        components.timeZone = TimeZone.autoupdatingCurrent
         let trigger = UNCalendarNotificationTrigger(dateMatching: components,
                                                     repeats: false)
         return UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)

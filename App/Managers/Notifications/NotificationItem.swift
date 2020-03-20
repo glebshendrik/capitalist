@@ -29,7 +29,7 @@ class NotificationItem: Hashable {
      Optionally provide the timezone.
      Only needed if the time is assigned to a specific timezone, not the time of the day.
      */
-    var timeZone: TimeZone? = nil
+    var timeZone: TimeZone? = TimeZone.autoupdatingCurrent
     
     var alertTitle: String
     var alertBody: String
