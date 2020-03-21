@@ -96,7 +96,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             return
         }
         
-        guard !isAppUpdateNeeded() else {
+        if isAppUpdateNeeded() {
             showAppUpdateScreen()
             return
         }
@@ -111,7 +111,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             accountCoordinator.loadCurrentUser()
         }.done { user in
             
-            guard !self.isAppUpdateNeeded() else {
+            if self.isAppUpdateNeeded() {
                 self.showAppUpdateScreen()
                 return
             }

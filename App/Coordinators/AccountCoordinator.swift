@@ -116,6 +116,11 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         }
         return  firstly {
                     usersService.loadUser(with: currentUserId)
+                }.then { user -> Promise<User> in
+                    if user.hasActiveSubscription != self.currentUserHasActiveSubscription {
+                        return self.updateUserSubscription().map { user }
+                    }
+                    return Promise.value(user)
                 }.get { user in
                     self.router.setMinimumAllowed(version: user.minVersion, build: user.minBuild)
                     self.analyticsManager.set(userId: String(user.id))

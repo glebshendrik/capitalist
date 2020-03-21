@@ -44,6 +44,7 @@ struct User : Decodable {
     let minVersion: String?
     let minBuild: String?
     let onboarded: Bool
+    let hasActiveSubscription: Bool
     
     var fullname: String? {
         if let firstname = firstname, !firstname.isEmpty, let lastname = lastname, !lastname.isEmpty {
@@ -73,6 +74,7 @@ struct User : Decodable {
         case minVersion = "ios_min_version"
         case minBuild = "ios_min_build"
         case onboarded
+        case hasActiveSubscription = "has_active_subscription"
     }
 }
 

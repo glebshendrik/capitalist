@@ -19,7 +19,7 @@ enum APIRoute: URLRequestConvertible {
             return "https://skrudzh-staging.herokuapp.com"
         }
         else if SwifterSwift.isInTestFlight {
-            return "https://skrudzh-staging.herokuapp.com"
+            return "https://api.threebaskets.net"
         }
         return "https://api.threebaskets.net"
     }
