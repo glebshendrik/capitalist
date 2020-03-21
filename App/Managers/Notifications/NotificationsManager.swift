@@ -30,16 +30,7 @@ class NotificationsManager: NSObject, NotificationsManagerProtocol {
     private static let numberOfKeepAliveNotificationMessages: Int = 11
     private let notificationsHandler: NotificationsHandlerProtocol
     private let userDefaults = UserDefaults.standard
-    let defaultOtherNotificationsFireTime: Date = Date(calendar: Calendar.autoupdatingCurrent,
-                                                       timeZone: TimeZone.autoupdatingCurrent,
-                                                       era: Date().era,
-                                                       year: Date().year,
-                                                       month: Date().month,
-                                                       day: Date().day,
-                                                       hour: 20,
-                                                       minute: 4,
-                                                       second: 0,
-                                                       nanosecond: 0) ?? Date()
+    let defaultOtherNotificationsFireTime: Date = Date().replacing(hour: 12, minute: 0) ?? Date()
     
     private var notificationCenter: UNUserNotificationCenter {
         return UNUserNotificationCenter.current()

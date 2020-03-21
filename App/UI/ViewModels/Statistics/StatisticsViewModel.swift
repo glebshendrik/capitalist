@@ -96,7 +96,7 @@ class StatisticsViewModel {
     }
     
     private func updateTransactionsSections() {
-        let groups = transactionsViewModel.filteredTransactionViewModels.groupByKey { $0.gotAt.dateAtStartOf(.day) }
+        let groups = transactionsViewModel.filteredTransactionViewModels.groupByKey { $0.gotAtStartOfDay }
         transactionsSections = groups
             .map { TransactionsSection(date: $0.key, transactionViewModels: $0.value) }
             .sorted(by: { $0.date > $1.date })

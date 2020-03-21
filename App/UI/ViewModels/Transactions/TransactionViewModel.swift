@@ -67,6 +67,10 @@ class TransactionViewModel {
         return transaction.gotAt
     }
     
+    var gotAtStartOfDay: Date {        
+        return gotAt.replacing(hour: 0, minute: 0) ?? gotAt.dateAtStartOf(.day)
+    }
+    
     var gotAtFormatted: String {
         return gotAt.dateString(ofStyle: .short)
     }
@@ -93,6 +97,16 @@ class TransactionViewModel {
     
     var isReturn: Bool {
         return transaction.returningBorrow != nil
+    }
+    
+    var isReturningDebt: Bool {
+        guard let returningBorrow = transaction.returningBorrow else { return false }
+        return returningBorrow.type == .debt
+    }
+    
+    var isReturningLoan: Bool {
+        guard let returningBorrow = transaction.returningBorrow else { return false }
+        return returningBorrow.type == .loan
     }
     
     var currency: Currency {
@@ -172,6 +186,22 @@ class TransactionViewModel {
             return NSLocalizedString("Удалить займ со всеми транзакциями?", comment: "Удалить займ со всеми транзакциями?")
         }
         return NSLocalizedString("Удалить транзакцию?", comment: "Удалить транзакцию?")
+    }
+    
+    var typeDescription: String? {
+        if isDebt {
+            return NSLocalizedString("Вы дали в долг", comment: "")
+        }
+        if isLoan {
+            return NSLocalizedString("Вы взяли займ", comment: "")
+        }
+        if isReturningDebt {
+            return NSLocalizedString("Вам вернули", comment: "")
+        }
+        if isReturningLoan {
+            return NSLocalizedString("Вы вернули", comment: "")
+        }
+        return comment?.isEmpty ?? true ? nil : " "
     }
     
     init(transaction: Transaction) {

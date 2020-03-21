@@ -212,14 +212,14 @@ extension EntityInfoViewModel {
     
     func indexPath(for transactionViewModel: TransactionViewModel?) -> IndexPath? {
         guard   let transactionViewModel = transactionViewModel,
-                let section = transactionsSections.last(where: {  $0.date.dateAtStartOf(.day) == transactionViewModel.gotAt.dateAtStartOf(.day) }),
+                let section = transactionsSections.last(where: {  $0.date == transactionViewModel.gotAtStartOfDay }),
                 let sectionIndex = sections.lastIndex(where: { $0.id == section.id }),
                 let rowIndex = section.index(of: transactionViewModel) else { return nil }
         return IndexPath(row: rowIndex, section: sectionIndex)
     }
     
     private func updateTransactionsSections() {
-        let groups = transactionViewModels.groupByKey { $0.gotAt.dateAtStartOf(.day) }
+        let groups = transactionViewModels.groupByKey { $0.gotAtStartOfDay }
         transactionsSections = groups
             .map { EntityInfoTransactionsSection(date: $0.key, transactionViewModels: $0.value) }
             .sorted(by: { $0.date > $1.date })

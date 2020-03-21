@@ -764,3 +764,18 @@ extension UIWindow {
         }
     }
 }
+
+extension Date {
+    func replacing(hour: Int, minute: Int) -> Date? {
+        return Date(calendar: Calendar.autoupdatingCurrent,
+                    timeZone: TimeZone.autoupdatingCurrent,
+                    era: self.era,
+                    year: self.year,
+                    month: self.month,
+                    day: self.day,
+                    hour: hour,
+                    minute: minute,
+                    second: 0,
+                    nanosecond: 0)
+    }
+}
