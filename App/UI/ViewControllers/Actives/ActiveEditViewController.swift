@@ -29,7 +29,7 @@ class ActiveEditViewController : FormTransactionsDependableEditViewController {
     
     override func registerFormFields() -> [String : FormField] {
         return [ActiveCreationForm.CodingKeys.name.rawValue : tableController.nameField,
-                ActiveCreationForm.CodingKeys.activeTypeId.rawValue : tableController.activeTypeField,
+                "active_type" : tableController.activeTypeField,
                 ActiveCreationForm.CodingKeys.currency.rawValue : tableController.currencyField,
                 ActiveCreationForm.CodingKeys.costCents.rawValue : tableController.costField,
                 ActiveCreationForm.CodingKeys.alreadyPaidCents.rawValue : tableController.alreadyPaidField,

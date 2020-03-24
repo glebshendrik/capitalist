@@ -15,6 +15,7 @@ class ProductViewModel {
     var isSelected: Bool = false
     var isTrialAvailable: Bool = false
     var savingPercent: NSDecimalNumber? = nil
+    var baseProduct: SKProduct? = nil
     
     var trialDiscount: SKProductDiscount? {
         if #available(iOS 12.2, *) {
@@ -30,24 +31,41 @@ class ProductViewModel {
     }
     
     var title: String {
+        return product.localizedPricePerPeriod
+    }
+    
+    var subtitle: String? {
         if let trialPeriod = trialDiscount?.subscriptionPeriod, isTrialAvailable {
             return String.localizedStringWithFormat(NSLocalizedString("%@ бесплатно", comment: "%@ бесплатно"), trialPeriod.localizedPeriod)
         }
         
-        return product.localizedPricePerPeriod
-    }
-    
-    var subtitle: String {
-        if let trialPeriod = trialDiscount?.subscriptionPeriod, isTrialAvailable {
-            return String.localizedStringWithFormat(NSLocalizedString("Через %@ %@", comment: "Через %@ %@"), trialPeriod.localizedPeriod, product.localizedPricePerPeriod)
-        }
-        
-        if let savingPercent = savingPercent {
-            return String.localizedStringWithFormat(NSLocalizedString("Скидка %@", comment: "Скидка %@"), formattedPercent(savingPercent))
+        if  let savingPercent = savingPercent,
+            let period = product.subscriptionPeriod,
+            let basePeriod = baseProduct?.subscriptionPeriod {
+            
+            let baseUnitsInProductUnit = basePeriod.unit.timesIn(period.unit)
+            let periodBaseUnits = NSDecimalNumber(integerLiteral: baseUnitsInProductUnit *  period.numberOfUnits)
+            let discountedPricePerBaseUnit = product.localizedPriceFrom(price: product.price.dividing(by: periodBaseUnits.dividing(by: NSDecimalNumber(integerLiteral: basePeriod.numberOfUnits))))
+            let oneBaseUnitPeriod = String.localizedStringWithFormat(basePeriod.unit.localizedFormat, 1)
+            return String.localizedStringWithFormat(NSLocalizedString("(%@ по %@ / %@. Скидка %@)", comment: "(%@ по %@ / %@. Скидка %@)"), period.localizedPeriod, discountedPricePerBaseUnit, oneBaseUnitPeriod, formattedPercent(savingPercent))
         }
         else {
-            return NSLocalizedString("Без скидки", comment: "Без скидки")
+            return nil
         }
+    }
+    
+    var purchaseTitle: String {
+        if let trialPeriod = trialDiscount?.subscriptionPeriod, isTrialAvailable {
+            return String.localizedStringWithFormat(NSLocalizedString("%@ бесплатно, затем %@", comment: "%@ бесплатно, затем %@"), trialPeriod.localizedPeriod, product.localizedPricePerPeriod)
+        }
+        return title
+    }
+    
+    var localizedPeriod: String {
+        guard let period = product.subscriptionPeriod else {
+            return ""
+        }
+        return period.localizedPeriod
     }
     
     init(product: SKProduct) {
@@ -99,7 +117,7 @@ extension SKProduct {
                                                                                   raiseOnDivideByZero: false))
     }
         
-    private func localizedPriceFrom(price: NSDecimalNumber) -> String {
+    func localizedPriceFrom(price: NSDecimalNumber) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
         numberFormatter.locale = priceLocale

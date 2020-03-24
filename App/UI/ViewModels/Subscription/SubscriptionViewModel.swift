@@ -43,6 +43,10 @@ class SubscriptionViewModel {
         }
     }
     
+    var selectedProduct: ProductViewModel? {
+        return productViewModels[selectedProductId.id]
+    }
+    
     var numberOfFeatureDescriptions: Int {
         return featureDescriptions.count
     }
@@ -118,7 +122,10 @@ class SubscriptionViewModel {
     
     private func updateDiscountPercents() {
         guard let basicProduct = productViewModels[SubscriptionProductId.first.id] else { return }
-        productViewModels.values.forEach { $0.savingPercent = $0.product.savingPercentAgainst(basicProduct.product) }
+        productViewModels.values.forEach {
+            $0.savingPercent = $0.product.savingPercentAgainst(basicProduct.product)
+            $0.baseProduct = basicProduct.product
+        }
     }
 }
 

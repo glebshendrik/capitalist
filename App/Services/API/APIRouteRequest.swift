@@ -72,12 +72,12 @@ struct APIRouteRequest {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601withFractionalSeconds
         
-        if  let validatable = encodable as? Validatable,
-            let errors = validatable.validate(),
-            !errors.isEmpty {
-            
-            throw ValidationError.invalid(errors: errors)
-        }
+//        if  let validatable = encodable as? Validatable,
+//            let errors = validatable.validate(),
+//            !errors.isEmpty {
+//            
+//            throw ValidationError.invalid(errors: errors)
+//        }
         
         return try encoder.encodeJSONObject(encodable)
     }

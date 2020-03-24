@@ -101,8 +101,8 @@
 /* Class = "UILabel"; text = "Неограниченный доступ"; ObjectID = "01n-23-8b8"; */
 "01n-23-8b8.text" = "Неограниченный доступ";
 
-/* Class = "UIButton"; normalTitle = "Продолжить"; ObjectID = "fUb-DN-8du"; */
-"fUb-DN-8du.normalTitle" = "Продолжить";
+/* Class = "UILabel"; text = "Продолжить"; ObjectID = "QZX-Fu-vl0"; */
+"QZX-Fu-vl0.text" = "Продолжить";
 
 /* Class = "UILabel"; text = "Отменить подписку можно в любое время"; ObjectID = "lKB-Pm-0Zz"; */
 "lKB-Pm-0Zz.text" = "Отменить подписку можно в любое время";

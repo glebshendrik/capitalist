@@ -47,6 +47,8 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
     @IBOutlet weak var secondProductCell: UITableViewCell!
     @IBOutlet weak var thirdProductCell: UITableViewCell!
     
+    @IBOutlet weak var purchaseSubtitleLabel: UILabel!
+    
     private var productContainers: [SubscriptionProductId : ProductViewContainer] = [:]
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -192,12 +194,17 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
     }
     
     private func updateUI(reload: Bool = true) {
+        updatePurchaseUI()
         updateProductUI(by: .first)
         updateProductUI(by: .second)
         updateProductUI(by: .third)
         if reload {
             updateTable()
         }
+    }
+    
+    private func updatePurchaseUI() {
+        purchaseSubtitleLabel.text = viewModel.selectedProduct?.purchaseTitle
     }
     
     private func updateProductUI(by id: SubscriptionProductId) {
@@ -216,9 +223,10 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
         productContainers[id]?.sign.isHidden = !selected
     }
     
-    private func updateProductBy(_ id: SubscriptionProductId, title: String, subtitle: String) {
+    private func updateProductBy(_ id: SubscriptionProductId, title: String, subtitle: String?) {
         productContainers[id]?.title.text = title
         productContainers[id]?.subtitle.text = subtitle
+        productContainers[id]?.subtitle.isHidden = subtitle == nil
     }
     
     private func show(url: String) {

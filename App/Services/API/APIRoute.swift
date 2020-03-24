@@ -13,13 +13,14 @@ import SwifterSwift
 
 enum APIRoute: URLRequestConvertible {
     static var baseURLString: String {
-//      return "https://skrudz.tempio.app"
-
         if SwifterSwift.isInDebuggingMode {
-            return "https://skrudzh-staging.herokuapp.com"
+//            return "https://api.threebaskets.net"
+//            return "https://skrudzh-staging.herokuapp.com"
+            return "https://test.threebaskets.net"
         }
         else if SwifterSwift.isInTestFlight {
-            return "https://api.threebaskets.net"
+//            return "https://api.threebaskets.net"
+            return "test.threebaskets.net"
         }
         return "https://api.threebaskets.net"
     }

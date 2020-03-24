@@ -123,8 +123,9 @@ class TransactionablesCreationViewModel {
     }
     
     func updateDefaultCurrency() -> Promise<Void> {
+        guard let defaultCurrency = Locale.current.currencyCode else { return Promise.value(()) }
         return settingsCoordinator.updateUserSettings(with: UserSettingsUpdatingForm(userId: accountCoordinator.currentSession?.userId,
-                                                                                     currency: Locale.current.currencyCode,
+                                                                                     currency: defaultCurrency,
                                                                                      defaultPeriod: nil))
     }
     

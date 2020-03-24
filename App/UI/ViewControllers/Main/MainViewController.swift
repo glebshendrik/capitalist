@@ -60,6 +60,8 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var mainButtonBackground: UIView!
     @IBOutlet weak var mainButtonTopToBottomConstraint: NSLayoutConstraint!
     
+    
+    
     var titleView: TitleView!
     var transactionController: TransactionController!
     var rearrangeController: RearrangeController!

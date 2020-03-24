@@ -193,12 +193,16 @@ extension UICollectionViewCell {
     
     func set(selected: Bool, animated: Bool = true) {
         guard let editableCell = self as? TransactionableCellProtocol else { return }
+        let feedbackGenerator = UISelectionFeedbackGenerator()
+        feedbackGenerator.prepare()
+        
         selected
             ? scaleDown(animated: animated)
             : unscale(animated: animated)
         
         editableCell.setSelectionIndicator(hidden: !selected, animated: animated)
         if selected {
+            feedbackGenerator.selectionChanged()
             editableCell.setDeleteButton(enabled: false, animated: animated)
             editableCell.setEditButton(enabled: false, animated: animated)
         }
