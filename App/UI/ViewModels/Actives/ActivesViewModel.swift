@@ -33,7 +33,7 @@ class ActivesViewModel {
                 }.asVoid()
     }
     
-    func activeViewModel(at indexPath: IndexPath) -> ActiveViewModel? {
-        return activeViewModels.item(at: indexPath.row)
+    func activeViewModel(at indexPath: IndexPath) -> ActiveViewModel? {        
+        return activeViewModels[safe: indexPath.row]
     }
 }

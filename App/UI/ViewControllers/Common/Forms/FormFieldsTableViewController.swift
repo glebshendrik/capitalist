@@ -22,21 +22,11 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
     
     var lastResponder: UIView? { return responders.last }
     var responders: [UIView] = []
-    
-    var saveButton: KeyboardHighlightButton = KeyboardHighlightButton()
+        
     var saveButtonTitle: String { return NSLocalizedString("Save", comment: "Save") }
     
-    lazy var saveButtonView: UIView = {
-        let buttonView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 64))
-        buttonView.backgroundColor = UIColor.by(.black2)
-        buttonView.addSubview(saveButton)
-        saveButton.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(48)
-            make.center.equalTo(buttonView)
-            make.left.equalTo(buttonView).offset(24)
-            make.right.equalTo(buttonView).offset(-24)
-        }
-        return buttonView
+    lazy var keyboardInputAccessoryView: UIView = {
+        return createKeyboardInputAccessoryView()
     }()
     
     var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
@@ -69,10 +59,10 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
         returnKeyHandler = IQKeyboardReturnKeyHandler(viewController: self)
         returnKeyHandler.delegate = self
         returnKeyHandler.lastTextFieldReturnKeyType = .done
-        setupSaveButton()
     }
     
-    func setupSaveButton() {
+    func createSaveButton() -> KeyboardHighlightButton {
+        let saveButton = KeyboardHighlightButton()
         saveButton.setTitle(saveButtonTitle, for: .normal)
         saveButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)!
         saveButton.titleLabel?.textColor = UIColor.by(.white100)
@@ -80,8 +70,21 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
         saveButton.backgroundColorForNormal = UIColor.by(.blue1)
         saveButton.backgroundColorForHighlighted = UIColor.by(.white40)
         saveButton.cornerRadius = 8
-        
         saveButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
+        return saveButton
+    }
+    
+    func createKeyboardInputAccessoryView() -> UIView {
+        let containerView = UIInputView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 64), inputViewStyle: .keyboard)
+        let saveButton = createSaveButton()
+        containerView.addSubview(saveButton)
+        saveButton.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(48)
+            make.center.equalTo(containerView)
+            make.left.equalTo(containerView).offset(24)
+            make.right.equalTo(containerView).offset(-24)
+        }
+        return containerView
     }
     
     @objc private func didTapSaveButton(_ sender: UIButton) {
@@ -103,7 +106,7 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
         guard let responder = responder else { return }
         returnKeyHandler.addTextFieldView(responder)
         responders.append(responder)
-        assignSaveButtonTo(responder)
+        assignInputAccessoryView(responder)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -127,9 +130,22 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
         formFieldsTableViewControllerDelegate?.didTapSave()
     }
     
-    private func assignSaveButtonTo(_ responder: UIResponder) {
-        (responder as? UITextField)?.inputAccessoryView = saveButtonView
-        (responder as? UITextView)?.inputAccessoryView = saveButtonView
+    func keyboardInputAccessoryViewFor(_ responder: UIResponder) -> UIView {
+        return keyboardInputAccessoryView
+    }
+    
+    private func assignInputAccessoryView(_ responder: UIResponder) {
+        let accessory = keyboardInputAccessoryViewFor(responder)
+        (responder as? UITextField)?.inputAccessoryView = accessory
+        (responder as? UITextView)?.inputAccessoryView = accessory
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let moneyField = textField as? MoneyTextField, moneyField.rewriteModeEnabled {
+            moneyField.text = nil
+            moneyField.rewriteModeEnabled = false
+        }
+        return true
     }
 }
 

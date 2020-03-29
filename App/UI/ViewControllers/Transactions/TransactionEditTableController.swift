@@ -20,6 +20,7 @@ protocol TransactionEditTableControllerDelegate : FormFieldsTableViewControllerD
     func didChange(isSellingAsset: Bool)
     func didChange(comment: String?)
     func didTapRemoveButton()
+    func didTapPadButton(type: OperationType)
 }
 
 class TransactionEditTableController : FormFieldsTableViewController {
@@ -49,6 +50,22 @@ class TransactionEditTableController : FormFieldsTableViewController {
     
     var delegate: TransactionEditTableControllerDelegate?
     
+    lazy var amountKeyboardInputAccessoryView: UIView = {
+        return createAmountKeyboardInputAccessoryView()
+    }()
+    
+    lazy var plusPadButtton: UIButton = {
+        return createPadButton(type: .plus)
+    }()
+    
+    lazy var minusPadButtton: UIButton = {
+        return createPadButton(type: .minus)
+    }()
+    
+    lazy var equalPadButtton: UIButton = {
+        return createPadButton(type: .equal)
+    }()
+    
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate
     }
@@ -57,7 +74,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
         super.viewDidAppear(animated)
         delegate?.didAppear()
     }
-    
+        
     override func setupUI() {
         super.setupUI()
         setupAmountField()
@@ -67,6 +84,15 @@ class TransactionEditTableController : FormFieldsTableViewController {
         setupIsBuyingAssetSwitchField()
         setupIsSellingAssetSwitchField()
         setupCommentView()
+    }
+    
+    override func keyboardInputAccessoryViewFor(_ responder: UIResponder) -> UIView {
+        switch responder {
+        case amountField.textField, exchangeField.amountField, exchangeField.convertedAmountField:
+            return amountKeyboardInputAccessoryView
+        default:
+            return super.keyboardInputAccessoryViewFor(responder)
+        }
     }
     
     private func setupSourceField() {
@@ -139,5 +165,64 @@ class TransactionEditTableController : FormFieldsTableViewController {
     
     func textViewDidChange(_ textView: UITextView) {
         delegate?.didChange(comment: textView.text?.trimmed)
+    }
+    
+    func createAmountKeyboardInputAccessoryView() -> UIView {
+        let containerView = UIInputView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 115), inputViewStyle: .keyboard)
+        let padsStackView = UIStackView(arrangedSubviews: [plusPadButtton, minusPadButtton, equalPadButtton], axis: .horizontal, spacing: 6, alignment: .fill, distribution: .fillEqually)
+        let saveButton = createSaveButton()
+        containerView.addSubview(saveButton)
+        containerView.addSubview(padsStackView)
+        saveButton.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(48)
+            make.top.equalTo(containerView).offset(10)
+            make.left.equalTo(containerView).offset(24)
+            make.right.equalTo(containerView).offset(-24)
+            make.bottom.equalTo(padsStackView.snp_top).offset(-10)
+        }
+        padsStackView.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(46)
+            make.left.equalTo(containerView).offset(6)
+            make.right.equalTo(containerView).offset(-6)
+            make.bottom.equalTo(containerView).offset(-1)
+        }
+        return containerView
+    }
+    
+    private func createPadButton(type: OperationType) -> KeyboardHighlightButton {
+        let button = KeyboardHighlightButton()
+        button.backgroundColorForHighlighted = UIColor(hexString: "#444444")
+        button.backgroundColorForNormal = UIColor(red: 100 / 255.0, green: 104 / 255.0, blue: 105 / 255.0, alpha: 1.0)
+        button.backgroundColor = UIColor(red: 100 / 255.0, green: 104 / 255.0, blue: 105 / 255.0, alpha: 1.0)
+        button.cornerRadius = 5
+        button.setImage(UIImage(named: type.padIconName), for: .normal)
+        button.addTarget(self, action: #selector(didTapPadButton(_:)), for: .touchUpInside)
+        return button
+    }
+    
+    @objc private func didTapPadButton(_ sender: UIButton) {
+        guard let padType = padTypeBy(sender) else { return }        
+        delegate?.didTapPadButton(type: padType)
+    }
+    
+    private func padTypeBy(_ button: UIButton) -> OperationType? {
+        switch button {
+        case plusPadButtton:
+            return .plus
+        case minusPadButtton:
+            return .minus
+        case equalPadButtton:
+            return .equal
+        default:
+            return nil
+        }
+    }
+}
+
+enum OperationType : String {
+    case plus, minus, equal
+    
+    var padIconName: String {
+        return "\(self.rawValue)-key-icon"
     }
 }

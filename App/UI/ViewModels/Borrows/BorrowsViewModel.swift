@@ -46,11 +46,11 @@ class BorrowsViewModel {
     }
     
     func debtViewModel(at indexPath: IndexPath) -> BorrowViewModel? {
-        return debtViewModels.item(at: indexPath.row)
+        return debtViewModels[safe: indexPath.row]
     }
     
-    func loanViewModel(at indexPath: IndexPath) -> BorrowViewModel? {
-        return loanViewModels.item(at: indexPath.row)
+    func loanViewModel(at indexPath: IndexPath) -> BorrowViewModel? {        
+        return loanViewModels[safe: indexPath.row]
     }
 }
 

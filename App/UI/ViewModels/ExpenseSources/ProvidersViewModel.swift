@@ -54,7 +54,7 @@ class ProvidersViewModel {
                 }.asVoid()
     }
     
-    func providerViewModel(at indexPath: IndexPath) -> ProviderViewModel? {
-        return filteredProviderViewModels.item(at: indexPath.row)
+    func providerViewModel(at indexPath: IndexPath) -> ProviderViewModel? {        
+        return filteredProviderViewModels[safe: indexPath.row]
     }
 }

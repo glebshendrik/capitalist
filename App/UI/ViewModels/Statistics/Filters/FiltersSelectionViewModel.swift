@@ -68,8 +68,8 @@ class FiltersSelectionViewModel {
         selectedFilters.compactMap { $0 as? SelectableTransactionableFilter }.forEach { $0.deselect() }
     }
     
-    func section(at index: Int) -> FiltersSelectionViewSection? {
-        return sections.item(at: index)
+    func section(at index: Int) -> FiltersSelectionViewSection? {        
+        return sections[safe: index]
     }
     
     func numberOfRowsInSection(index: Int) -> Int {

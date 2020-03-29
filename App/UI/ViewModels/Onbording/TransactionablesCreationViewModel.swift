@@ -159,8 +159,8 @@ class TransactionablesCreationViewModel {
         return update(settings: form)
     }
     
-    func exampleViewModel(by indexPath: IndexPath) -> TransactionableExampleViewModel? {
-        return examples.item(at: indexPath.row)
+    func exampleViewModel(by indexPath: IndexPath) -> TransactionableExampleViewModel? {        
+        return examples[safe: indexPath.row]
     }
     
     func transactionable(by name: String) -> Transactionable? {

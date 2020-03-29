@@ -20,10 +20,10 @@ PODS:
   - CWStatusBarNotification (2.3.5)
   - EasyTipView (2.0.4)
   - ESPullToRefresh (2.9)
-  - FBSDKCoreKit/Basics (5.8.0)
-  - FBSDKCoreKit/Core (5.8.0):
+  - FBSDKCoreKit/Basics (6.3.0)
+  - FBSDKCoreKit/Core (6.3.0):
     - FBSDKCoreKit/Basics
-  - FBSDKCoreKit/Swift (5.8.0):
+  - FBSDKCoreKit/Swift (6.3.0):
     - FBSDKCoreKit/Core
   - Firebase/Analytics (6.19.0):
     - Firebase/Core
@@ -128,7 +128,7 @@ PODS:
   - SDWebImageSVGCoder (0.3.0):
     - SDWebImage/Core (~> 5.0)
     - SVGKit (>= 2.1)
-  - SideMenu (6.3.1)
+  - SideMenu (6.4.8)
   - SkyFloatingLabelTextField (3.6.0)
   - SnapKit (4.2.0)
   - StaticTableViewController (1.2.0)
@@ -136,23 +136,27 @@ PODS:
     - CocoaLumberjack (~> 3.0)
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.1.0)
-  - SwifterSwift (4.6.0):
-    - SwifterSwift/AppKit (= 4.6.0)
-    - SwifterSwift/CoreGraphics (= 4.6.0)
-    - SwifterSwift/CoreLocation (= 4.6.0)
-    - SwifterSwift/Foundation (= 4.6.0)
-    - SwifterSwift/MapKit (= 4.6.0)
-    - SwifterSwift/SpriteKit (= 4.6.0)
-    - SwifterSwift/SwiftStdlib (= 4.6.0)
-    - SwifterSwift/UIKit (= 4.6.0)
-  - SwifterSwift/AppKit (4.6.0)
-  - SwifterSwift/CoreGraphics (4.6.0)
-  - SwifterSwift/CoreLocation (4.6.0)
-  - SwifterSwift/Foundation (4.6.0)
-  - SwifterSwift/MapKit (4.6.0)
-  - SwifterSwift/SpriteKit (4.6.0)
-  - SwifterSwift/SwiftStdlib (4.6.0)
-  - SwifterSwift/UIKit (4.6.0)
+  - SwifterSwift (5.1.0):
+    - SwifterSwift/AppKit (= 5.1.0)
+    - SwifterSwift/CoreGraphics (= 5.1.0)
+    - SwifterSwift/CoreLocation (= 5.1.0)
+    - SwifterSwift/Dispatch (= 5.1.0)
+    - SwifterSwift/Foundation (= 5.1.0)
+    - SwifterSwift/MapKit (= 5.1.0)
+    - SwifterSwift/SceneKit (= 5.1.0)
+    - SwifterSwift/SpriteKit (= 5.1.0)
+    - SwifterSwift/SwiftStdlib (= 5.1.0)
+    - SwifterSwift/UIKit (= 5.1.0)
+  - SwifterSwift/AppKit (5.1.0)
+  - SwifterSwift/CoreGraphics (5.1.0)
+  - SwifterSwift/CoreLocation (5.1.0)
+  - SwifterSwift/Dispatch (5.1.0)
+  - SwifterSwift/Foundation (5.1.0)
+  - SwifterSwift/MapKit (5.1.0)
+  - SwifterSwift/SceneKit (5.1.0)
+  - SwifterSwift/SpriteKit (5.1.0)
+  - SwifterSwift/SwiftStdlib (5.1.0)
+  - SwifterSwift/UIKit (5.1.0)
   - SwiftMessages (6.0.0):
     - SwiftMessages/App (= 6.0.0)
   - SwiftMessages/App (6.0.0)
@@ -192,14 +196,14 @@ DEPENDENCIES:
   - RecurrencePicker (from `https://github.com/petalvlad/RecurrencePicker`, branch `master`)
   - SaltEdge-iOS-Swift (from `https://github.com/petalvlad/saltedge-ios-swift`, branch `master`)
   - SDWebImageSVGCoder (~> 0.3)
-  - SideMenu (= 6.3.1)
+  - SideMenu (from `https://github.com/jonkykong/SideMenu`, branch `master`)
   - SkyFloatingLabelTextField
   - SnapKit (~> 4.2.0)
   - StaticTableViewController
   - SVGKit (~> 2.1)
   - SVProgressHUD (~> 2.2)
   - SwiftDate (~> 6.1)
-  - SwifterSwift (~> 4.6)
+  - SwifterSwift (~> 5.1)
   - SwiftMessages
   - SwiftyGif
   - Swinject (= 2.6.2)
@@ -229,7 +233,6 @@ SPEC REPOS:
     - SVGKit
     - SVProgressHUD
     - SwiftDate
-    - SwifterSwift
     - SwiftMessages
     - SwinjectAutoregistration
     - TrustKit
@@ -257,7 +260,7 @@ SPEC REPOS:
     - InfiniteLayout
     - nanopb
     - PromisesObjC
-    - SideMenu
+    - SwifterSwift
     - SwiftyGif
     - Swinject
     - SwinjectStoryboard
@@ -272,6 +275,9 @@ EXTERNAL SOURCES:
   SaltEdge-iOS-Swift:
     :branch: master
     :git: https://github.com/petalvlad/saltedge-ios-swift
+  SideMenu:
+    :branch: master
+    :git: https://github.com/jonkykong/SideMenu
 
 CHECKOUT OPTIONS:
   RandomColorSwift:
@@ -283,6 +289,9 @@ CHECKOUT OPTIONS:
   SaltEdge-iOS-Swift:
     :commit: e42977ea4a498dc777b7f8c2fb1d762cb15e98e8
     :git: https://github.com/petalvlad/saltedge-ios-swift
+  SideMenu:
+    :commit: 138103093176154f84ae9a2a63e58b9ae78bc6d7
+    :git: https://github.com/jonkykong/SideMenu
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -301,7 +310,7 @@ SPEC CHECKSUMS:
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
   ESPullToRefresh: ce058a36454a5032519cc9d8b45da217728cf104
-  FBSDKCoreKit: e7dcac0aabcfb09d0166998edd95fe3b05a0ce5d
+  FBSDKCoreKit: 5d55c8f3007c9c49b793617b9102e46355fc7e17
   Firebase: d55ddb0e0bb3207166cddc028647833d8a1b5b6f
   FirebaseAnalytics: 572e467f3d977825266e8ccd52674aa3e6f47eac
   FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
@@ -326,14 +335,14 @@ SPEC CHECKSUMS:
   SaltEdge-iOS-Swift: cdd2402129a7353f10cd82b615a90e8a18f58f80
   SDWebImage: d4f87d7d36c8a4d9f9459dc282e0caa057fdf935
   SDWebImageSVGCoder: 4b354bcdc7d74ce14d9fdb3c9ed9ab2c667f3b57
-  SideMenu: 8c67753662a891321bb646b03fca9f132ae5433a
+  SideMenu: 4a891be552d30bb6fa87ad404d62e485f8450c34
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   StaticTableViewController: cbf8a57221ffa6bad8f3dc9d7863863ee28deee0
   SVGKit: 652cdf7bef8bec8564d04a8511d3ab50c7595fac
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
-  SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
+  SwifterSwift: a9e8e144832638c2850b43da5feaf9598c6ad65b
   SwiftMessages: da7c981256a65b3e58022d9027a36584cf4eccf5
   SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   Swinject: cf7458774b1b00323080a9c67e47a1ee7f9d2af1
@@ -341,6 +350,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
 
-PODFILE CHECKSUM: 99b3f69809b9d5882e849efc6acbfa91cf98735d
+PODFILE CHECKSUM: ec13f14d35ccea8f220b9be9ad840ae22d5082b4
 
 COCOAPODS: 1.8.0

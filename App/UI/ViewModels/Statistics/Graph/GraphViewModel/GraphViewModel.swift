@@ -101,8 +101,8 @@ class GraphViewModel {
         periodsViewModel.currentDateRangeFilterIndex = chartIndex
     }
     
-    func graphFilter(at index: Int) -> GraphTransactionFilter? {
-        return graphFilters.item(at: index)
+    func graphFilter(at index: Int) -> GraphTransactionFilter? {        
+        return graphFilters[safe: index]
     }
     
     func updateCurrentGraph() {

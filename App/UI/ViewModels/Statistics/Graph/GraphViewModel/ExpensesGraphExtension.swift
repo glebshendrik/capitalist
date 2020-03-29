@@ -39,11 +39,11 @@ extension GraphViewModel {
     private func expenseColor(for transaction: TransactionViewModel) -> UIColor? {
         if transaction.destinationType == .expenseCategory {
             guard let idIndex = expenseCategoryIds.firstIndex(of: transaction.destinationId) else { return nil }
-            return colors.item(at: idIndex)
+            return colors[safe: idIndex]
         }
         if transaction.destinationType == .active {
-            guard let idIndex = activeIds.firstIndex(of: transaction.destinationId) else { return nil }
-            return colors.item(at: idIndex + expenseCategoryIds.count)
+            guard let idIndex = activeIds.firstIndex(of: transaction.destinationId) else { return nil }            
+            return colors[safe: idIndex + expenseCategoryIds.count]
         }
         return nil
     }

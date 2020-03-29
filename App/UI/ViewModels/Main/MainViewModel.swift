@@ -347,7 +347,7 @@ class MainViewModel {
     }
     
     func incomeSourceViewModel(at indexPath: IndexPath) -> IncomeSourceViewModel? {
-        return incomeSourceViewModels.item(at: indexPath.row)
+        return incomeSourceViewModels[safe: indexPath.row]
     }
     
     func isAddExpenseSourceItem(indexPath: IndexPath) -> Bool {
@@ -355,15 +355,15 @@ class MainViewModel {
     }
     
     func expenseSourceViewModel(at indexPath: IndexPath) -> ExpenseSourceViewModel? {
-        return expenseSourceViewModels.item(at: indexPath.row)
+        return expenseSourceViewModels[safe: indexPath.row]
     }
     
     func expenseCategoryViewModel(at indexPath: IndexPath) -> ExpenseCategoryViewModel? {
-        return expenseCategoryViewModels().item(at: indexPath.row)
+        return expenseCategoryViewModels()[safe: indexPath.row]
     }
     
     func activeViewModel(at indexPath: IndexPath, basketType: BasketType) -> ActiveViewModel? {
-        return activeViewModels(by: basketType).item(at: indexPath.row)
+        return activeViewModels(by: basketType)[safe: indexPath.row]
     }
     
     func isAddCategoryItem(indexPath: IndexPath) -> Bool {

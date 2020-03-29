@@ -68,10 +68,10 @@ class BalanceViewModel {
     }
     
     func expenseSourceViewModel(at indexPath: IndexPath) -> ExpenseSourceViewModel? {
-        return expenseSourceViewModels.item(at: indexPath.row)
+        return expenseSourceViewModels[safe: indexPath.row]
     }
     
-    func activeViewModel(at indexPath: IndexPath) -> ActiveViewModel? {
-        return activeViewModels.item(at: indexPath.row)
+    func activeViewModel(at indexPath: IndexPath) -> ActiveViewModel? {        
+        return activeViewModels[safe: indexPath.row]
     }
 }

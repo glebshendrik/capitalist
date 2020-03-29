@@ -20,7 +20,7 @@ class FiltersViewModel {
         self.transactionableFilters = transactionableFilters
     }
     
-    func transactionableFilter(at indexPath: IndexPath) -> TransactionableFilter? {
-        return transactionableFilters.item(at: indexPath.row)
+    func transactionableFilter(at indexPath: IndexPath) -> TransactionableFilter? {        
+        return transactionableFilters[safe: indexPath.row]
     }
 }

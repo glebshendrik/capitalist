@@ -63,8 +63,8 @@ class SubscriptionViewModel {
         self.accountCoordinator = accountCoordinator
     }
     
-    func featureDescription(by indexPath: IndexPath) -> String? {
-        return featureDescriptions.item(at: indexPath.row)
+    func featureDescription(by indexPath: IndexPath) -> String? {        
+        return featureDescriptions[safe: indexPath.row]
     }
     
     func productViewModel(by productId: SubscriptionProductId) -> ProductViewModel? {

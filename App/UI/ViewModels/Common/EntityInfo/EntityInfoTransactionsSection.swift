@@ -47,8 +47,8 @@ class EntityInfoTransactionsSection : EntityInfoSection {
         self.transactionViewModels = transactionViewModels
     }
     
-    func transactionViewModel(at index: Int) -> TransactionViewModel? {
-        return transactionViewModels.item(at: index)
+    func transactionViewModel(at index: Int) -> TransactionViewModel? {        
+        return transactionViewModels[safe: index]
     }
     
     func index(of transactionViewModel: TransactionViewModel) -> Int? {

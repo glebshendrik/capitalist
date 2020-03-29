@@ -29,7 +29,7 @@ class IncomeSourcesViewModel {
         }.asVoid()
     }
     
-    func incomeSourceViewModel(at indexPath: IndexPath) -> IncomeSourceViewModel? {
-        return incomeSourceViewModels.item(at: indexPath.row)
+    func incomeSourceViewModel(at indexPath: IndexPath) -> IncomeSourceViewModel? {        
+        return incomeSourceViewModels[safe: indexPath.row]
     }
 }

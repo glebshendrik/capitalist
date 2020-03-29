@@ -32,7 +32,7 @@ class BorrowEditViewController : FormTransactionsDependableEditViewController {
     override func registerFormFields() -> [String : FormField] {
         return [BorrowCreationForm.CodingKeys.name.rawValue : tableController.nameField,
                 BorrowCreationForm.CodingKeys.amountCurrency.rawValue : tableController.currencyField,
-                BorrowCreationForm.CodingKeys.amountCents.rawValue : tableController.amountField,
+                "amount" : tableController.amountField,
                 BorrowCreationForm.CodingKeys.borrowedAt.rawValue : tableController.borrowedAtField,
                 BorrowCreationForm.CodingKeys.payday.rawValue : tableController.paydayField,
                 BorrowingTransactionNestedAttributes.CodingKeys.destinationId.rawValue : tableController.expenseSourceField,

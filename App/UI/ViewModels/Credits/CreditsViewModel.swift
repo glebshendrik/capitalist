@@ -30,7 +30,7 @@ class CreditsViewModel {
                 }.asVoid()                
     }
         
-    func creditViewModel(at indexPath: IndexPath) -> CreditViewModel? {
-        return creditViewModels.item(at: indexPath.row)
+    func creditViewModel(at indexPath: IndexPath) -> CreditViewModel? {        
+        return creditViewModels[safe: indexPath.row]
     }
 }

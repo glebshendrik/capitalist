@@ -9,6 +9,7 @@
 import Foundation
 import PromiseKit
 import SwiftDate
+import SwifterSwift
 
 enum StatisticsError : Error {
     case exchangeRateUnknown
@@ -57,11 +58,11 @@ class StatisticsViewModel {
     }
     
     func section(at index: Int) -> StatisticsViewSection? {
-        return sections.item(at: index)
+        return sections[safe: index]
     }
     
-    func transactionViewModel(at indexPath: IndexPath) -> TransactionViewModel? {
-        guard let section = sections.item(at: indexPath.section) as? TransactionsSection else { return nil }
+    func transactionViewModel(at indexPath: IndexPath) -> TransactionViewModel? {        
+        guard let section = sections[safe: indexPath.section] as? TransactionsSection else { return nil }
         return section.transactionViewModel(at: indexPath.row)
     }
     

@@ -113,7 +113,7 @@ struct ActiveCreationForm : Encodable, Validatable {
         }
         
         if !Validator.isValid(present: activeTypeId) {
-            errors[CodingKeys.activeTypeId.rawValue] = "Укажите тип актива"
+            errors["active_type"] = "Укажите тип актива"
         }
         
         if !Validator.isValid(required: name) {

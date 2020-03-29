@@ -312,7 +312,7 @@ extension ApplicationRouter {
     
     private func isAppUpdateNeeded() -> Bool {
         guard   let minBuild = minBuild,
-                let appBuild = SwifterSwift.appBuild,
+                let appBuild = UIApplication.shared.buildNumber,
                 let minBuildNumber = Int(minBuild),
                 let appBuildNumber = Int(appBuild) else {
             return false

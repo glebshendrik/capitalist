@@ -28,8 +28,8 @@ class TransactionableFiltersSection : FiltersSelectionViewSection {
         self.filters = filters
     }
     
-    func filterViewModel(at index: Int) -> SelectableTransactionableFilter? {
-        return filters.item(at: index)
+    func filterViewModel(at index: Int) -> SelectableTransactionableFilter? {        
+        return filters[safe: index]
     }
 }
 

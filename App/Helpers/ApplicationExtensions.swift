@@ -779,3 +779,14 @@ extension Date {
                     nanosecond: 0)
     }
 }
+
+extension Array {
+    func groupByKey<K: Hashable>(keyForValue: (_ element: Element) throws -> K) rethrows -> [K: [Element]] {
+        var group = [K: [Element]]()
+        for value in self {
+            let key = try keyForValue(value)
+            group[key] = (group[key] ?? []) + [value]
+        }
+        return group
+    }
+}

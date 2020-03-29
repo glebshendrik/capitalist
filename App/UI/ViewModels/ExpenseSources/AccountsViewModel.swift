@@ -62,6 +62,6 @@ class AccountsViewModel {
     }
     
     func accountViewModel(at indexPath: IndexPath) -> AccountViewModel? {
-        return accountViewModels.item(at: indexPath.row)
+        return accountViewModels[safe: indexPath.row]
     }
 }

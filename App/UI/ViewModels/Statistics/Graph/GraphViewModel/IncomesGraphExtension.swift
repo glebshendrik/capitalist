@@ -42,11 +42,11 @@ extension GraphViewModel {
     private func incomeColor(for transaction: TransactionViewModel) -> UIColor? {
         if transaction.sourceType == .incomeSource {
             guard let idIndex = incomeSourceIds.firstIndex(of: transaction.sourceId) else { return nil }
-            return colors.item(at: idIndex)
+            return colors[safe: idIndex]
         }
         if transaction.sourceType == .active {
             guard let idIndex = activeIds.firstIndex(of: transaction.sourceId) else { return nil }
-            return colors.item(at: idIndex + incomeSourceIds.count)
+            return colors[safe: idIndex + incomeSourceIds.count]
         }
         return nil
     }

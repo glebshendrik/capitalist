@@ -58,7 +58,7 @@ class EntityInfoViewModel {
     }
     
     func section(at index: Int) -> EntityInfoSection? {
-        return sections.item(at: index)
+        return sections[safe: index]
     }
     
     func updatePresentationData() {
@@ -205,8 +205,8 @@ extension EntityInfoViewModel {
                 }
     }
     
-    func transactionViewModel(at indexPath: IndexPath) -> TransactionViewModel? {
-        guard let section = sections.item(at: indexPath.section) as? EntityInfoTransactionsSection else { return nil }
+    func transactionViewModel(at indexPath: IndexPath) -> TransactionViewModel? {        
+        guard let section = sections[safe: indexPath.section] as? EntityInfoTransactionsSection else { return nil }
         return section.transactionViewModel(at: indexPath.row)
     }
     

@@ -20,7 +20,7 @@ class PeriodsViewModel {
     
     var currentDateRangeFilter: DateRangeTransactionFilter? {
         guard dateRangeFilters.count > 0 else { return nil }
-        return dateRangeFilters.item(at: currentDateRangeFilterIndex)
+        return dateRangeFilters[safe: currentDateRangeFilterIndex]
     }
     
     var currentDateRangeFilterTitle: String? {
@@ -65,6 +65,6 @@ class PeriodsViewModel {
     }
     
     func rangeTitle(at indexPath: IndexPath) -> String? {
-        return dateRangeFilters.item(at: indexPath.item)?.title
+        return dateRangeFilters[safe: indexPath.item]?.title
     }
 }

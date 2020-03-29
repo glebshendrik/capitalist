@@ -34,7 +34,7 @@ class ExpenseSourcesViewModel {
                 }.asVoid()
     }
     
-    func expenseSourceViewModel(at indexPath: IndexPath) -> ExpenseSourceViewModel? {
-        return expenseSourceViewModels.item(at: indexPath.row)
+    func expenseSourceViewModel(at indexPath: IndexPath) -> ExpenseSourceViewModel? {        
+        return expenseSourceViewModels[safe: indexPath.row]
     }
 }

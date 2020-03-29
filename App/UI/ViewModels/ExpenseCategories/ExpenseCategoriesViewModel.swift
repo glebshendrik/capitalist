@@ -29,7 +29,7 @@ class ExpenseCategoriesViewModel {
         }.asVoid()
     }
     
-    func expenseCategoryViewModel(at indexPath: IndexPath) -> ExpenseCategoryViewModel? {
-        return expenseCategoryViewModels.item(at: indexPath.row)
+    func expenseCategoryViewModel(at indexPath: IndexPath) -> ExpenseCategoryViewModel? {        
+        return expenseCategoryViewModels[safe: indexPath.row]
     }
 }

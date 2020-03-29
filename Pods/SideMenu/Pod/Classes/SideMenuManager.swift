@@ -151,7 +151,6 @@ private extension SideMenuManager {
             let width = activeMenu.menuWidth
             let distance = gesture.xTranslation / width
             switch (gesture.state) {
-            case .began: break
             case .changed:
                 if gesture.canSwitch {
                     switching = (distance > 0 && !activeMenu.leftSide) || (distance < 0 && activeMenu.leftSide)
@@ -171,12 +170,11 @@ private extension SideMenuManager {
             } else {
                 // not sure which way the user is swiping yet, so do nothing
                 if gesture.xTranslation == 0 { return }
-
                 leftSide = gesture.xTranslation > 0
             }
 
             guard let menu = menu(forLeftSide: leftSide) else { return }
-            menu.presentFrom(activeViewController, interactively: true)
+            menu.present(from: topMostViewController, interactively: true)
         }
 
         activeMenu?.handleMenuPan(gesture, true)
@@ -216,8 +214,8 @@ private extension SideMenuManager {
         return SideMenuPanGestureRecognizer(addTo: view, target: self, action: #selector(handlePresentMenuPan(_:)))
     }
 
-    var activeViewController: UIViewController? {
-        return UIApplication.shared.keyWindow?.rootViewController?.activeViewController
+    var topMostViewController: UIViewController? {
+        return UIApplication.shared.keyWindow?.rootViewController?.topMostViewController
     }
 }
 
@@ -226,6 +224,6 @@ extension SideMenuManager: SideMenuNavigationControllerTransitionDelegate {
     internal func sideMenuTransitionDidDismiss(menu: Menu) {
         defer { switching = false }
         guard switching, let switchToMenu = self.menu(forLeftSide: !menu.leftSide) else { return }
-        switchToMenu.presentFrom(activeViewController, interactively: true)
+        switchToMenu.present(from: topMostViewController, interactively: true)
     }
 }

@@ -20,7 +20,7 @@ class GraphFiltersSection : StatisticsViewSection {
         self.viewModel = viewModel
     }
     
-    func filterViewModel(at index: Int) -> GraphTransactionFilter? {
-        return viewModel.graphFilters.item(at: index)
+    func filterViewModel(at index: Int) -> GraphTransactionFilter? {        
+        return viewModel.graphFilters[safe: index]
     }
 }

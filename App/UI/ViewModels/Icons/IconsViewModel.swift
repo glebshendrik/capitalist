@@ -39,7 +39,7 @@ class IconsViewModel {
                 }
     }
     
-    func iconViewModel(at indexPath: IndexPath) -> IconViewModel? {
-        return iconViewModels.item(at: indexPath.row)
+    func iconViewModel(at indexPath: IndexPath) -> IconViewModel? {        
+        return iconViewModels[safe: indexPath.row]
     }
 }

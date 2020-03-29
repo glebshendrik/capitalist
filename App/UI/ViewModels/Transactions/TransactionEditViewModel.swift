@@ -39,6 +39,8 @@ class TransactionEditViewModel {
     var amountConverted: String? = nil
     var convertedAmountConverted: String? = nil
     var exchangeRate: Float = 1.0 { didSet { didSetExchangeRate() } }
+    var accumulator: Int? = nil
+    var previousOperation: OperationType? = nil
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
@@ -95,5 +97,47 @@ class TransactionEditViewModel {
     
     func remove() -> Promise<Void> {
         return removeTransaction()
+    }
+    
+    func handleAmount(operation: OperationType) {
+        guard let amountCents = amountCents else { return }
+        let newAmountCents = operate(previousOperation, base: accumulator, operand: amountCents)
+        amount = newAmountCents?.moneyDecimalString(with: sourceCurrency)
+        updateCalculator(operation: operation, value: newAmountCents)
+    }
+    
+    func handleConvertedAmount(operation: OperationType) {
+        guard let convertedAmountCents = convertedAmountCents else { return }
+        let newConvertedAmountCents = operate(previousOperation, base: accumulator, operand: convertedAmountCents)
+        convertedAmount = newConvertedAmountCents?.moneyDecimalString(with: destinationCurrency)
+        updateCalculator(operation: operation, value: newConvertedAmountCents)
+    }
+    
+    private func operate(_ operation: OperationType?, base: Int?, operand: Int) -> Int? {
+        guard let base = base, let operation = operation else {
+            return operand
+        }
+        switch operation {
+        case .plus:
+            return base + operand
+        case .minus:
+            return base - operand
+        case .equal:
+            return base
+        }
+    }
+    
+    private func updateCalculator(operation: OperationType, value: Int?) {
+        accumulator = value
+        previousOperation = operation
+        
+        if operation == .equal {
+            resetCalculator()
+        }
+    }
+    
+    func resetCalculator() {
+        accumulator = nil
+        previousOperation = nil
     }
 }

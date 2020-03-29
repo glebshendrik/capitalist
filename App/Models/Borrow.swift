@@ -134,7 +134,7 @@ struct BorrowCreationForm : Encodable, Validatable {
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
+            errors["amount"] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
         
         if !Validator.isValid(pastDate: borrowedAt) {
@@ -185,7 +185,7 @@ struct BorrowUpdatingForm : Encodable, Validatable {
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
+            errors["amount"] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
         
         if !Validator.isValid(pastDate: borrowedAt) {

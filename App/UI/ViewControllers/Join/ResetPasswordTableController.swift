@@ -41,7 +41,7 @@ class ResetPasswordTableController : SaveAccessoryFormFieldsTableViewController 
     
     private func setupCodeField() {
         register(responder: codeField.textField)
-        codeField.textField.inputAccessoryView = saveButton
+        codeField.textField.inputAccessoryView = keyboardInputAccessoryView
         codeField.placeholder = NSLocalizedString("Код подтверждения", comment: "Код подтверждения")
         codeField.imageName = "password-icon"
         codeField.didChange { [weak self] text in

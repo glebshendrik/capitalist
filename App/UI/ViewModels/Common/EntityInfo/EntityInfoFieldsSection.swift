@@ -24,7 +24,7 @@ class EntityInfoFieldsSection : EntityInfoSection {
         self.infoFields = infoFields
     }
     
-    func infoField(at index: Int) -> EntityInfoField? {
-        return infoFields.item(at: index)
+    func infoField(at index: Int) -> EntityInfoField? {        
+        return infoFields[safe: index]
     }
 }

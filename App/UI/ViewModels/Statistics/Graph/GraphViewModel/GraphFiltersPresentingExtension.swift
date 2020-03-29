@@ -70,7 +70,7 @@ extension GraphViewModel {
     }
     
     func graphFilterViewModel(at index: Int) -> GraphTransactionFilter? {
-        return graphFilters.item(at: index)
+        return graphFilters[safe: index]
     }
     
     func canFilterTransactions(with filter: GraphTransactionFilter) -> Bool {

@@ -48,7 +48,7 @@ class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
     
     private func setupNameField() {
         register(responder: nameField.textField)
-        nameField.textField.inputAccessoryView = saveButton
+        nameField.textField.inputAccessoryView = keyboardInputAccessoryView
         nameField.placeholder = NSLocalizedString("Имя", comment: "Имя")
         nameField.imageName = "name-icon"
         nameField.didChange { [weak self] text in

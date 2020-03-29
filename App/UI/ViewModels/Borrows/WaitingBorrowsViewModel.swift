@@ -19,7 +19,7 @@ class WaitingBorrowsViewModel {
         self.borrowViewModels = borrowViewModels
     }
     
-    func borrowViewModel(at indexPath: IndexPath) -> BorrowViewModel? {
-        return borrowViewModels.item(at: indexPath.row)
+    func borrowViewModel(at indexPath: IndexPath) -> BorrowViewModel? {        
+        return borrowViewModels[safe: indexPath.row]
     }
 }

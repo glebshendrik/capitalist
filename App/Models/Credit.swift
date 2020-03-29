@@ -100,11 +100,11 @@ struct CreditCreationForm : Encodable, Validatable {
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
+            errors["amount"] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
         
         if !Validator.isValid(positiveMoney: returnAmountCents) {
-            errors[CodingKeys.returnAmountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
+            errors["return_amount"] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
         
         if !Validator.isValid(money: alreadyPaidCents) {
@@ -183,11 +183,11 @@ struct CreditUpdatingForm : Encodable, Validatable {
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors[CodingKeys.amountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
+            errors["amount"] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
         
         if !Validator.isValid(positiveMoney: returnAmountCents) {
-            errors[CodingKeys.returnAmountCents.rawValue] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
+            errors["return_amount"] = NSLocalizedString("Укажите сумму", comment: "Укажите сумму")
         }
                 
         if !Validator.isValid(pastDate: gotAt) {

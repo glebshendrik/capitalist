@@ -27,11 +27,17 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     override var formTitle: String { return viewModel.title }
     override var loadErrorMessage: String { return NSLocalizedString("Ошибка загрузки транзакции", comment: "Ошибка загрузки транзакции") }
     
+    @objc override func keyboardWillAppear() {
+        super.keyboardWillAppear()
+        viewModel.resetCalculator()
+    }
+
+    
     override func registerFormFields() -> [String : FormField] {
         return [Transaction.CodingKeys.sourceId.rawValue : tableController.sourceField,
                 Transaction.CodingKeys.destinationId.rawValue : tableController.destinationField,
-                Transaction.CodingKeys.amountCents.rawValue: tableController.amountField,
-                Transaction.CodingKeys.convertedAmountCents.rawValue: tableController.exchangeField]
+                "amount": tableController.amountField,
+                "converted_amount": tableController.exchangeField]
     }
     
     override func setup(tableController: FormFieldsTableViewController) {

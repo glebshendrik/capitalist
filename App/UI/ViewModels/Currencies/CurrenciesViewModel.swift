@@ -30,7 +30,7 @@ class CurrenciesViewModel {
                 }
     }
     
-    func currencyViewModel(at indexPath: IndexPath) -> CurrencyViewModel? {
-        return currencyViewModels.item(at: indexPath.row)
+    func currencyViewModel(at indexPath: IndexPath) -> CurrencyViewModel? {        
+        return currencyViewModels[safe: indexPath.row]
     }
 }

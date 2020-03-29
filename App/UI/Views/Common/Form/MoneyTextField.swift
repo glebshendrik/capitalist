@@ -24,6 +24,8 @@ class MoneyTextField: FloatingTextField {
         return currencyFormatter?.number(from: textValue)
     }
     
+    var rewriteModeEnabled: Bool = false
+    
     private func updateCurrencyFormatter() {
         guard let currency = currency else {
             currencyFormatter = nil

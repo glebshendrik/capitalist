@@ -153,11 +153,11 @@ struct TransactionCreationForm : Encodable, Validatable {
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors["amount_cents"] = NSLocalizedString("Укажите сумму списания", comment: "Укажите сумму списания")
+            errors["amount"] = NSLocalizedString("Укажите сумму списания", comment: "Укажите сумму списания")
         }
         
         if !Validator.isValid(positiveMoney: convertedAmountCents) {
-            errors["converted_amount_cents"] = NSLocalizedString("Укажите сумму зачисления", comment: "Укажите сумму зачисления")
+            errors["converted_amount"] = NSLocalizedString("Укажите сумму зачисления", comment: "Укажите сумму зачисления")
         }
         
         if !Validator.isValid(pastDate: gotAt) {
@@ -219,11 +219,11 @@ struct TransactionUpdatingForm : Encodable, Validatable {
         }
         
         if !Validator.isValid(positiveMoney: amountCents) {
-            errors["amount_cents"] = NSLocalizedString("Укажите сумму списания", comment: "Укажите сумму списания")
+            errors["amount"] = NSLocalizedString("Укажите сумму списания", comment: "Укажите сумму списания")
         }
         
         if !Validator.isValid(positiveMoney: convertedAmountCents) {
-            errors["converted_amount_cents"] = NSLocalizedString("Укажите сумму зачисления", comment: "Укажите сумму зачисления")
+            errors["converted_amount"] = NSLocalizedString("Укажите сумму зачисления", comment: "Укажите сумму зачисления")
         }
         
         if !Validator.isValid(pastDate: gotAt) {

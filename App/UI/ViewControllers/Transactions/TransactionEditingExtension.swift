@@ -90,6 +90,23 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     func didTapSave() {
         save()
     }
+    
+    func didTapPadButton(type: OperationType) {
+        guard let firstResponder = view.firstResponder() as? MoneyTextField else { return }
+        
+        firstResponder.rewriteModeEnabled = type != .equal
+        
+        switch firstResponder {
+        case tableController.amountField.textField, tableController.exchangeField.amountField:
+            viewModel.handleAmount(operation: type)
+            update(amount: viewModel.amount)
+        case tableController.exchangeField.convertedAmountField:
+            viewModel.handleConvertedAmount(operation: type)
+            update(convertedAmount: viewModel.convertedAmount)
+        default:
+            return
+        }
+    }
 }
 
 extension TransactionEditViewController {

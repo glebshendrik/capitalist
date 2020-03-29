@@ -37,7 +37,7 @@ extension MainViewController {
     }
     
     func basketType(by index: Int) -> BasketType? {
-        return [BasketType.joy, BasketType.safe, BasketType.risk].item(at: index)
+        return [BasketType.joy, BasketType.safe, BasketType.risk][safe: index]
     }
     
     func indexOfSelectedBasketType() -> Int? {

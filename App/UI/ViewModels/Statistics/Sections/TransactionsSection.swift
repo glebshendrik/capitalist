@@ -24,7 +24,7 @@ class TransactionsSection : StatisticsViewSection {
     }
     
     func transactionViewModel(at index: Int) -> TransactionViewModel? {
-        return transactionViewModels.item(at: index)
+        return transactionViewModels[safe: index]
     }
 }
 
