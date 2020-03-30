@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -153,7 +153,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="609"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="oBN-ol-x06">
-                                                        <rect key="frame" x="132.5" y="273.5" width="110" height="62"/>
+                                                        <rect key="frame" x="160" y="289" width="55" height="31"/>
                                                         <color key="tintColor" name="blue 1"/>
                                                     </imageView>
                                                 </subviews>
@@ -318,7 +318,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="609"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="o9a-UG-Xdj">
-                                                        <rect key="frame" x="132.5" y="273.5" width="110" height="62"/>
+                                                        <rect key="frame" x="160" y="289" width="55" height="31"/>
                                                         <color key="tintColor" name="blue 1"/>
                                                     </imageView>
                                                 </subviews>

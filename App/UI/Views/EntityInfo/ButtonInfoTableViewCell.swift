@@ -13,7 +13,7 @@ protocol ButtonInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
 }
 
 class ButtonInfoTableViewCell : EntityInfoTableViewCell {
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var button: HighlightButton!
     
     var buttonDelegate: ButtonInfoTableViewCellDelegate? {
         return delegate as? ButtonInfoTableViewCellDelegate
@@ -31,6 +31,7 @@ class ButtonInfoTableViewCell : EntityInfoTableViewCell {
         }
         button.isEnabled = field.isEnabled
         button.backgroundColor = UIColor.by(field.backgroundColor)
+        button.backgroundColorForNormal = UIColor.by(field.backgroundColor)
     }
     
     @IBAction func didTapButton(_ sender: Any) {

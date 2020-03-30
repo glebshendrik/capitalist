@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -89,14 +89,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Премиум" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9la-8h-GSz">
-                                                    <rect key="frame" x="55" y="0.0" width="304" height="56"/>
+                                                    <rect key="frame" x="54.5" y="0.0" width="304.5" height="56"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                     <color key="textColor" name="yellow 1"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="premium-icon" id="wuj-Qj-A2W">
-                                                    <rect key="frame" x="16" y="18" width="24" height="20"/>
+                                                    <rect key="frame" x="16" y="18" width="23.5" height="20"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -408,35 +408,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" verticalHuggingPriority="251" text="ИСТОЧНИКИ ДОХОДА" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LG5-vr-cex">
-                                <rect key="frame" x="15" y="12" width="267" height="14"/>
+                                <rect key="frame" x="15" y="12" width="274" height="14"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="white 0.4"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="98 000 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2X-F7-FuV">
-                                <rect key="frame" x="292" y="12" width="47" height="14"/>
+                                <rect key="frame" x="299" y="12" width="47" height="14"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="text-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="ojb-4o-h0i">
-                                <rect key="frame" x="345" y="6" width="14" height="24"/>
+                                <rect key="frame" x="352" y="12" width="7" height="12"/>
                                 <color key="tintColor" name="white 0.4"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" verticalHuggingPriority="251" text="КОШЕЛЬКИ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jig-hk-zD0">
-                                <rect key="frame" x="15" y="98" width="178.5" height="14"/>
+                                <rect key="frame" x="15" y="98" width="185.5" height="14"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="white 0.4"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="98 000 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLL-t9-8ZH">
-                                <rect key="frame" x="292" y="98" width="47" height="14"/>
+                                <rect key="frame" x="299" y="98" width="47" height="14"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="text-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="LLr-6W-KXe">
-                                <rect key="frame" x="345" y="92" width="14" height="24"/>
+                                <rect key="frame" x="352" y="98" width="7" height="12"/>
                                 <color key="tintColor" name="white 0.4"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2n-9h-iVJ" userLabel="income sources container">
@@ -580,7 +580,7 @@
                                         <rect key="frame" x="0.0" y="6" width="375" height="48"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="l6v-CB-nnI">
-                                                <rect key="frame" x="132.5" y="-7" width="110" height="62"/>
+                                                <rect key="frame" x="160" y="8.5" width="55" height="31"/>
                                                 <color key="tintColor" name="blue 1"/>
                                             </imageView>
                                         </subviews>
@@ -789,7 +789,7 @@
                                         <rect key="frame" x="0.0" y="5" width="375" height="76"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="E2K-f6-ag5">
-                                                <rect key="frame" x="132.5" y="7" width="110" height="62"/>
+                                                <rect key="frame" x="160" y="22.5" width="55" height="31"/>
                                                 <color key="tintColor" name="blue 1"/>
                                             </imageView>
                                         </subviews>
@@ -904,7 +904,7 @@
                                                                                             <rect key="frame" x="2" y="2" width="64" height="64"/>
                                                                                             <subviews>
                                                                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7C-Xq-1QM">
-                                                                                                    <rect key="frame" x="13.5" y="13.5" width="37" height="37"/>
+                                                                                                    <rect key="frame" x="21" y="21" width="22" height="22"/>
                                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" secondItem="L7C-Xq-1QM" secondAttribute="height" multiplier="1:1" id="3iN-o5-Gxq"/>
@@ -970,7 +970,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="323"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Fxg-qF-Lvh">
-                                                                        <rect key="frame" x="132.5" y="130.5" width="110" height="62"/>
+                                                                        <rect key="frame" x="160" y="146" width="55" height="31"/>
                                                                         <color key="tintColor" name="blue 1"/>
                                                                     </imageView>
                                                                 </subviews>
@@ -1046,7 +1046,7 @@
                                                                                             <rect key="frame" x="2" y="2" width="64" height="64"/>
                                                                                             <subviews>
                                                                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="921-b1-IzB">
-                                                                                                    <rect key="frame" x="13.5" y="13.5" width="37" height="37"/>
+                                                                                                    <rect key="frame" x="21" y="21" width="22" height="22"/>
                                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" secondItem="921-b1-IzB" secondAttribute="height" multiplier="1:1" id="Zwh-PQ-OUy"/>
@@ -1113,7 +1113,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="324"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="EkC-7E-d6Q">
-                                                                        <rect key="frame" x="132.5" y="131" width="110" height="62"/>
+                                                                        <rect key="frame" x="160" y="146.5" width="55" height="31"/>
                                                                         <color key="tintColor" name="blue 1"/>
                                                                     </imageView>
                                                                 </subviews>
@@ -1189,7 +1189,7 @@
                                                                                             <rect key="frame" x="2" y="2" width="64" height="64"/>
                                                                                             <subviews>
                                                                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GCC-E5-Cds">
-                                                                                                    <rect key="frame" x="13.5" y="13.5" width="37" height="37"/>
+                                                                                                    <rect key="frame" x="21" y="21" width="22" height="22"/>
                                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" secondItem="GCC-E5-Cds" secondAttribute="height" multiplier="1:1" id="DbU-8O-e13"/>
@@ -1256,7 +1256,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="324"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Nid-av-JHO">
-                                                                        <rect key="frame" x="132.5" y="131" width="110" height="62"/>
+                                                                        <rect key="frame" x="160" y="146.5" width="55" height="31"/>
                                                                         <color key="tintColor" name="blue 1"/>
                                                                     </imageView>
                                                                 </subviews>
@@ -1372,12 +1372,6 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="29"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                                <color key="value" name="delimeter AFC1FF"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                                <color key="value" name="blue 6A92FA"/>
-                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="didTapMainButton:" destination="527-2C-xUs" eventType="touchUpInside" id="z4q-Un-qmW"/>
@@ -1403,7 +1397,7 @@
                                 <rect key="frame" x="157.5" y="281.5" width="60" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="money-icon" translatesAutoresizingMaskIntoConstraints="NO" id="dUt-AC-D2O">
-                                        <rect key="frame" x="-30" y="-30" width="120" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1595,12 +1589,6 @@
         </namedColor>
         <namedColor name="blue 1">
             <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="blue 6A92FA">
-            <color red="0.0" green="0.45882352941176469" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="delimeter AFC1FF">
-            <color red="0.68627450980392157" green="0.75686274509803919" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="red 1">
             <color red="1" green="0.40000000596046448" blue="0.21199999749660492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

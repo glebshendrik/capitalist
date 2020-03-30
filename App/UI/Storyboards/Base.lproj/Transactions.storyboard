@@ -259,10 +259,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="zFN-6T-Axh" secondAttribute="bottom" id="iWa-75-xKp"/>
                                                 <constraint firstItem="zFN-6T-Axh" firstAttribute="top" secondItem="del-Ir-GVZ" secondAttribute="top" id="utY-eB-nlv"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Оставить на балансе"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="included_in_balance_icon"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -284,10 +280,6 @@
                                                 <constraint firstItem="cms-ZA-vSI" firstAttribute="top" secondItem="hww-4p-C4e" secondAttribute="top" id="XPL-Ua-pov"/>
                                                 <constraint firstItem="cms-ZA-vSI" firstAttribute="leading" secondItem="hww-4p-C4e" secondAttribute="leading" id="boa-T9-gQB"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Оставить на балансе"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="included_in_balance_icon"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -309,10 +301,6 @@
                                                 <constraint firstItem="nCQ-Gj-Ec8" firstAttribute="leading" secondItem="i14-gh-9gu" secondAttribute="leading" id="a8W-fn-KWe"/>
                                                 <constraint firstAttribute="trailing" secondItem="nCQ-Gj-Ec8" secondAttribute="trailing" id="qVx-Ip-5fR"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Сумма"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="amount-icon"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -334,11 +322,6 @@
                                                 <constraint firstItem="wLn-DJ-z94" firstAttribute="top" secondItem="YBx-go-eQt" secondAttribute="top" id="W83-aZ-Syc"/>
                                                 <constraint firstAttribute="bottom" secondItem="wLn-DJ-z94" secondAttribute="bottom" id="cc1-DH-gaP"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="amountPlaceholder" value="Сумма"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="convertedAmountPlaceholder" value="Сумма"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="amount-icon"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>

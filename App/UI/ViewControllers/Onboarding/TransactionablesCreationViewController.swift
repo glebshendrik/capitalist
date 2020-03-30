@@ -23,7 +23,7 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
     @IBOutlet weak var currencyNameLabel: UILabel!
     @IBOutlet weak var currencySymbolLabel: UILabel!
     @IBOutlet weak var examplesCollectionView: UICollectionView!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var saveButton: HighlightButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var examplesActivityIndicator: UIView!
     @IBOutlet weak var loader: UIImageView!
@@ -104,6 +104,7 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
     func updateNextButtonUI() {
         saveButton.isEnabled = viewModel.nextButtonEnabled
         saveButton.backgroundColor = viewModel.nextButtonEnabled ? UIColor.by(.blue1) : UIColor.by(.gray1)
+        saveButton.backgroundColorForNormal = viewModel.nextButtonEnabled ? UIColor.by(.blue1) : UIColor.by(.gray1)
     }
     
     func updateCollectionUI() {

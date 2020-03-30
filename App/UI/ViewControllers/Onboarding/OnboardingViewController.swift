@@ -10,7 +10,7 @@ import UIKit
 
 class OnboardingViewController : UIViewController, OnboardingPagesViewControllerDelegate, UIFactoryDependantProtocol {
     var factory: UIFactoryProtocol!
-    @IBOutlet var button: UIButton!
+    @IBOutlet var button: HighlightButton!
     var pagesController: OnboardingPagesViewController!
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -38,6 +38,8 @@ class OnboardingViewController : UIViewController, OnboardingPagesViewController
             : NSLocalizedString("Далее", comment: "Далее"),
                         for: .normal)
         button.backgroundColor = pagesController.isLastPageShown ? UIColor.by(.blue1) : UIColor.clear
+        button.backgroundColorForNormal = pagesController.isLastPageShown ? UIColor.by(.blue1) : UIColor.clear
+        button.backgroundColorForHighlighted = pagesController.isLastPageShown ? UIColor.by(.white40) : UIColor.clear
         pageControl.currentPage = pagesController.currentPageIndex
     }
     

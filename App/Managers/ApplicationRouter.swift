@@ -178,6 +178,7 @@ extension ApplicationRouter {
         UINavigationBar.appearance().barTintColor = UIColor.by(.black2)
         
         UITextField.appearance().tintColor = UIColor.by(.white64)
+        
     }
     
     private func setupKeyboardManager() {
@@ -186,6 +187,8 @@ extension ApplicationRouter {
         keyboardManager.shouldResignOnTouchOutside = true
         keyboardManager.shouldShowToolbarPlaceholder = false
         keyboardManager.toolbarDoneBarButtonItemText = ""
+        keyboardManager.keyboardAppearance = .alert
+        keyboardManager.overrideKeyboardAppearance = true
         keyboardManager.toolbarDoneBarButtonItemImage = UIImage(named: "close-icon")?.withRenderingMode(.alwaysTemplate)
         keyboardManager.isEnableAutoToolbar = false
     }
@@ -238,7 +241,7 @@ extension ApplicationRouter {
                 }
             }
         }
-    }
+    }    
 }
 
 extension ApplicationRouter {

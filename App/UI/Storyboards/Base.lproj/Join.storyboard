@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -80,7 +80,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="pDP-mQ-OWT">
-                                                    <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
+                                                    <rect key="frame" x="160" y="2.5" width="55" height="31"/>
                                                     <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
@@ -131,7 +131,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8MG-IK-LNa" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -157,7 +157,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6o5-T9-BKn" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -320,7 +320,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="jNt-lf-4BP">
-                                                    <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
+                                                    <rect key="frame" x="160" y="2.5" width="55" height="31"/>
                                                     <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
@@ -371,7 +371,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ur0-Wb-b2F" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -397,8 +397,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2A-rJ-PqO" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="11" width="366" height="48"/>
-                                                    <color key="backgroundColor" name="blue 6A92FA"/>
+                                                    <rect key="frame" x="24" y="11" width="327" height="48"/>
+                                                    <color key="backgroundColor" name="blue 1"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="izi-ni-O4I"/>
                                                     </constraints>
@@ -411,10 +411,10 @@
                                                             <real key="value" value="8"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                                            <color key="value" name="blue 6A92FA"/>
+                                                            <color key="value" name="blue 1"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                                            <color key="value" name="delimeter AFC1FF"/>
+                                                            <color key="value" name="white 0.4"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
@@ -473,7 +473,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="2i7-Xs-XBz">
-                                                    <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
+                                                    <rect key="frame" x="160" y="2.5" width="55" height="31"/>
                                                     <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
@@ -524,7 +524,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qTp-Bz-dbd" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -550,7 +550,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrn-3o-ZS0" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -576,7 +576,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e59-vw-3Q2" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -602,7 +602,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eIc-Xn-2GU" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -628,8 +628,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljq-Dh-AaT" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="11" width="366" height="48"/>
-                                                    <color key="backgroundColor" name="blue 6A92FA"/>
+                                                    <rect key="frame" x="24" y="11" width="327" height="48"/>
+                                                    <color key="backgroundColor" name="blue 1"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="kcF-y1-u45"/>
                                                     </constraints>
@@ -642,10 +642,10 @@
                                                             <real key="value" value="8"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                                            <color key="value" name="blue 6A92FA"/>
+                                                            <color key="value" name="blue 1"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                                            <color key="value" name="delimeter AFC1FF"/>
+                                                            <color key="value" name="white 0.4"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
@@ -732,7 +732,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="iUS-II-VEs">
-                                                    <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
+                                                    <rect key="frame" x="160" y="2.5" width="55" height="31"/>
                                                     <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
@@ -783,7 +783,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ilz-SG-GxV" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -809,7 +809,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PKX-QL-UzQ" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -835,7 +835,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SrA-do-hzO" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -861,8 +861,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edn-hp-fwm" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="11" width="366" height="48"/>
-                                                    <color key="backgroundColor" name="blue 6A92FA"/>
+                                                    <rect key="frame" x="24" y="11" width="327" height="48"/>
+                                                    <color key="backgroundColor" name="blue 1"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="o5Z-3K-dWf"/>
                                                     </constraints>
@@ -875,10 +875,10 @@
                                                             <real key="value" value="8"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                                            <color key="value" name="blue 6A92FA"/>
+                                                            <color key="value" name="blue 1"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                                            <color key="value" name="delimeter AFC1FF"/>
+                                                            <color key="value" name="white 0.4"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
@@ -1035,7 +1035,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="FX4-UV-Vh7">
-                                                    <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
+                                                    <rect key="frame" x="160" y="2.5" width="55" height="31"/>
                                                     <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
@@ -1148,7 +1148,7 @@
                                                     <rect key="frame" x="24" y="0.0" width="327" height="52"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected-sign-icon" translatesAutoresizingMaskIntoConstraints="NO" id="SAa-qL-u9Z">
-                                                            <rect key="frame" x="21" y="12" width="32" height="28"/>
+                                                            <rect key="frame" x="21" y="19" width="16" height="14"/>
                                                             <color key="tintColor" name="white 1.0"/>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cci-HB-Ctx">
@@ -1214,7 +1214,7 @@
                                                     <rect key="frame" x="24" y="15" width="327" height="52"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected-sign-icon" translatesAutoresizingMaskIntoConstraints="NO" id="plY-D2-E2H">
-                                                            <rect key="frame" x="21" y="12" width="32" height="28"/>
+                                                            <rect key="frame" x="21" y="19" width="16" height="14"/>
                                                             <color key="tintColor" name="white 1.0"/>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="B4T-eI-8SL">
@@ -1283,7 +1283,7 @@
                                                     <rect key="frame" x="24" y="15" width="327" height="52"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected-sign-icon" translatesAutoresizingMaskIntoConstraints="NO" id="ari-mO-r08">
-                                                            <rect key="frame" x="21" y="12" width="32" height="28"/>
+                                                            <rect key="frame" x="21" y="19" width="16" height="14"/>
                                                             <color key="tintColor" name="white 1.0"/>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ipO-eh-uwZ">
@@ -1389,7 +1389,7 @@
                                                                     <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                                                    <color key="value" name="gray 1"/>
+                                                                    <color key="value" name="white 0.04"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
@@ -1600,17 +1600,8 @@
         <namedColor name="blue 1">
             <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="blue 6A92FA">
-            <color red="0.0" green="0.45882352941176469" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="dark 2A314B">
             <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="delimeter AFC1FF">
-            <color red="0.68627450980392157" green="0.75686274509803919" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="gray 1">
-            <color red="0.34099999070167542" green="0.34900000691413879" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white 0.04">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>

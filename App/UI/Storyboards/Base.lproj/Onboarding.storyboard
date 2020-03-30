@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -36,7 +36,7 @@
                                     <segue destination="o4w-mN-y2w" kind="embed" identifier="showEmbedded" id="dku-3y-mcn"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnY-KY-H2n">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnY-KY-H2n" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
                                 <rect key="frame" x="24" y="499" width="327" height="48"/>
                                 <color key="backgroundColor" name="blue 1"/>
                                 <constraints>
@@ -54,7 +54,7 @@
                                         <color key="value" name="blue 1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                        <color key="value" name="delimeter AFC1FF"/>
+                                        <color key="value" name="white 0.4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -77,12 +77,6 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                        <color key="value" name="blue 1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                        <color key="value" name="delimeter AFC1FF"/>
-                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didTapJoinButton:" destination="sXH-lO-oOm" eventType="touchUpInside" id="u6o-0i-0xi"/>
@@ -98,12 +92,6 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                        <color key="value" name="blue 1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                        <color key="value" name="delimeter AFC1FF"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -156,16 +144,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adviser-pose1" translatesAutoresizingMaskIntoConstraints="NO" id="4bP-Sb-VDY">
-                                <rect key="frame" x="-8.5" y="85.5" width="392" height="496"/>
+                                <rect key="frame" x="89.5" y="209.5" width="196" height="248"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ЗНАКОМСТВО" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9cb-pA-t1S">
-                                <rect key="frame" x="145" y="65" width="85" height="14.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ЗНАКОМСТВО" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9cb-pA-t1S">
+                                <rect key="frame" x="145" y="65" width="85" height="14"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="white 0.4"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Привет, я Ник! Вместе достигнем финансовой и творческой свободы" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NmV-yT-M3P">
-                                <rect key="frame" x="24" y="87.5" width="327" height="84.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Привет, я Ник! Вместе достигнем финансовой и творческой свободы" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NmV-yT-M3P">
+                                <rect key="frame" x="24" y="87" width="327" height="84"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
                                 <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>
@@ -198,16 +186,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adviser-pose2" translatesAutoresizingMaskIntoConstraints="NO" id="B4H-i0-war">
-                                <rect key="frame" x="-88.5" y="107" width="552" height="453"/>
+                                <rect key="frame" x="49.5" y="220.5" width="276" height="226.5"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ПРАВИЛА" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GW9-xU-u9U">
-                                <rect key="frame" x="159" y="65" width="57.5" height="14.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ПРАВИЛА" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GW9-xU-u9U">
+                                <rect key="frame" x="159" y="65" width="57.5" height="14"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="white 0.4"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Трать меньше чем зарабатываешь и инвестируй разницу" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BJg-yh-ntV">
-                                <rect key="frame" x="24" y="87.5" width="327" height="84.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Трать меньше чем зарабатываешь и инвестируй разницу" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BJg-yh-ntV">
+                                <rect key="frame" x="24" y="87" width="327" height="84"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
                                 <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>
@@ -240,16 +228,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adviser-pose3" translatesAutoresizingMaskIntoConstraints="NO" id="tCr-0t-aEY">
-                                <rect key="frame" x="-135.5" y="93.5" width="646" height="480"/>
+                                <rect key="frame" x="26" y="213.5" width="323" height="240"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ПРАВИЛА" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hC-NJ-qVM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ПРАВИЛА" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hC-NJ-qVM">
                                 <rect key="frame" x="159" y="65" width="57.5" height="14"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="white 0.4"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Придерживайся техники «трех корзин» так же как миллиардеры" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nVp-bi-iL1">
-                                <rect key="frame" x="24" y="87" width="327" height="84.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Придерживайся техники «трех корзин» так же как миллиардеры" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nVp-bi-iL1">
+                                <rect key="frame" x="24" y="87" width="327" height="84"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
                                 <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>
@@ -282,7 +270,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="basket-expenses" translatesAutoresizingMaskIntoConstraints="NO" id="gF8-if-r6c">
-                                <rect key="frame" x="-25.5" y="-63.5" width="426" height="346"/>
+                                <rect key="frame" x="81" y="109.5" width="213" height="173"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ПЕРВАЯ КОРЗИНА – РАСХОДЫ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Y7-AH-mOn">
                                 <rect key="frame" x="96.5" y="346.5" width="182" height="14"/>
@@ -332,7 +320,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="basket-safe" translatesAutoresizingMaskIntoConstraints="NO" id="uEf-R2-3xA">
-                                <rect key="frame" x="-25.5" y="-180.5" width="426" height="463"/>
+                                <rect key="frame" x="81" y="51" width="213" height="231.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ВТОРАЯ КОРЗИНА – СБЕРЕЖЕНИЯ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJi-nC-IF5">
                                 <rect key="frame" x="84.5" y="346.5" width="206" height="14"/>
@@ -382,7 +370,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="basket-risk" translatesAutoresizingMaskIntoConstraints="NO" id="Wb5-0p-5Gn">
-                                <rect key="frame" x="-25.5" y="-180.5" width="426" height="463"/>
+                                <rect key="frame" x="81" y="51" width="213" height="231.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ТРЕТЬЯ КОРЗИНА – ИНВЕСТИЦИИ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoL-Qx-GkN">
                                 <rect key="frame" x="86.5" y="346.5" width="202.5" height="14"/>
@@ -442,12 +430,6 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                        <color key="value" name="blue 1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                        <color key="value" name="delimeter AFC1FF"/>
-                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didTapBackButton:" destination="w9i-OZ-rHW" eventType="touchUpInside" id="LZM-I7-yK0"/>
@@ -480,19 +462,19 @@
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="56"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Российский рубль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7g-QP-mPW">
-                                                <rect key="frame" x="0.0" y="17.5" width="278.5" height="21"/>
+                                                <rect key="frame" x="0.0" y="17.5" width="285.5" height="21"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                 <color key="textColor" name="white 1.0"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egS-ZU-UCB">
-                                                <rect key="frame" x="294.5" y="17.5" width="10.5" height="21"/>
+                                                <rect key="frame" x="301.5" y="17.5" width="10.5" height="21"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                 <color key="textColor" name="white 0.4"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-right-small-icon" translatesAutoresizingMaskIntoConstraints="NO" id="6Dn-nJ-OaX">
-                                                <rect key="frame" x="321" y="16" width="14" height="24"/>
+                                                <rect key="frame" x="328" y="22" width="7" height="12"/>
                                                 <color key="tintColor" name="white 0.4"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OoA-KB-F8H">
@@ -620,7 +602,7 @@
                                 <rect key="frame" x="0.0" y="315.5" width="375" height="303.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="bmr-Cy-mex">
-                                        <rect key="frame" x="132.5" y="121" width="110" height="62"/>
+                                        <rect key="frame" x="160" y="136.5" width="55" height="31"/>
                                         <color key="tintColor" name="blue 1"/>
                                     </imageView>
                                 </subviews>
@@ -642,9 +624,17 @@
                                     <constraint firstAttribute="height" constant="48" id="TpH-Cu-has"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoF-tf-WXT">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoF-tf-WXT" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="619" width="375" height="48"/>
                                 <color key="backgroundColor" name="gray 1"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                        <color key="value" name="white 0.4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                        <color key="value" name="gray 1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didTapSaveButton:" destination="w9i-OZ-rHW" eventType="touchUpInside" id="Til-2P-v4l"/>
                                 </connections>
@@ -729,7 +719,7 @@
                                         <color key="textColor" name="white 0.64"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddH-co-jCI">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddH-co-jCI" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
                                         <rect key="frame" x="24" y="559" width="327" height="48"/>
                                         <color key="backgroundColor" name="blue 1"/>
                                         <constraints>
@@ -742,6 +732,12 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                                <color key="value" name="blue 1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                                <color key="value" name="white 0.4"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -815,9 +811,6 @@
         </namedColor>
         <namedColor name="blue 1">
             <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="delimeter AFC1FF">
-            <color red="0.68627450980392157" green="0.75686274509803919" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gray 1">
             <color red="0.34099999070167542" green="0.34900000691413879" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

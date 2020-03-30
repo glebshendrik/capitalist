@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
         notificationsCoordinator.cancelKeepAliveNotifications()
+        
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {

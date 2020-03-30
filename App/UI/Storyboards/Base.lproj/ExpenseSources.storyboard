@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -136,7 +136,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="JgI-tt-6th">
-                                                    <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
+                                                    <rect key="frame" x="160" y="2.5" width="55" height="31"/>
                                                     <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
@@ -158,7 +158,7 @@
                                                     <rect key="frame" x="155.5" y="27.5" width="64" height="64"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="expense-source-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="2jt-y6-Ut0">
-                                                            <rect key="frame" x="18.5" y="18.5" width="27" height="27"/>
+                                                            <rect key="frame" x="20" y="20" width="24" height="24"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="27" id="Fu9-K2-A5W"/>
@@ -208,7 +208,7 @@
                                                             <rect key="frame" x="3" y="3" width="32" height="32"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pen2-icon" translatesAutoresizingMaskIntoConstraints="NO" id="XSc-kE-wZM">
-                                                                    <rect key="frame" x="-1" y="-1.5" width="34" height="35"/>
+                                                                    <rect key="frame" x="7.5" y="7.5" width="17" height="17.5"/>
                                                                     <color key="tintColor" name="white 1.0"/>
                                                                 </imageView>
                                                             </subviews>
@@ -246,16 +246,8 @@
                                                         <constraint firstAttribute="height" constant="1" id="pgl-YI-q7T"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUt-c6-OLW" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUt-c6-OLW">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="118"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                                            <color key="value" red="0.41960784309999999" green="0.57647058819999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="didTapIcon:" destination="YzM-aR-OkL" eventType="touchUpInside" id="7S0-fQ-JX7"/>
                                                     </connections>
@@ -296,10 +288,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="2HM-0c-HRV" secondAttribute="bottom" id="Qx7-vH-Tqv"/>
                                                 <constraint firstItem="2HM-0c-HRV" firstAttribute="leading" secondItem="oig-5s-V1c" secondAttribute="leading" id="ysR-HG-AcC"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="type-icon"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Название"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -321,10 +309,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="Qgx-8l-JdV" secondAttribute="trailing" id="ZbS-LK-zvJ"/>
                                                 <constraint firstItem="Qgx-8l-JdV" firstAttribute="leading" secondItem="jAd-sW-ZI3" secondAttribute="leading" id="gLt-mM-aP8"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="currency-icon"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -346,10 +330,6 @@
                                                 <constraint firstItem="giw-lh-GVR" firstAttribute="leading" secondItem="E0T-2P-ra1" secondAttribute="leading" id="R3l-8L-aK2"/>
                                                 <constraint firstAttribute="bottom" secondItem="giw-lh-GVR" secondAttribute="bottom" id="XbG-7I-mqe"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Текущий баланс"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="amount-icon"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -371,10 +351,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="KCf-I6-YYT" secondAttribute="trailing" id="iGY-uE-lzE"/>
                                                 <constraint firstItem="KCf-I6-YYT" firstAttribute="leading" secondItem="fdC-GW-p5e" secondAttribute="leading" id="mCx-GQ-RQi"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="credit-limit-icon"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Кредитный лимит"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -385,7 +361,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CF-wN-0Yc">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CF-wN-0Yc" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="4" width="327" height="48"/>
                                                     <color key="backgroundColor" name="blue 1"/>
                                                     <constraints>
@@ -401,6 +377,12 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                                            <color key="value" name="blue 1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                                            <color key="value" name="white 0.4"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
@@ -499,7 +481,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-OC-7EH">
-                                <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
+                                <rect key="frame" x="160" y="318" width="55" height="31"/>
                                 <color key="tintColor" name="blue 1"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="33c-r7-gKe">
@@ -798,7 +780,7 @@
                                 </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="8uA-dp-fyb">
-                                <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
+                                <rect key="frame" x="160" y="318" width="55" height="31"/>
                                 <color key="tintColor" name="blue 1"/>
                             </imageView>
                         </subviews>
@@ -940,7 +922,7 @@
                                 </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="BJT-bE-2ys">
-                                <rect key="frame" x="132.5" y="302.5" width="110" height="62"/>
+                                <rect key="frame" x="160" y="318" width="55" height="31"/>
                                 <color key="tintColor" name="blue 1"/>
                             </imageView>
                         </subviews>

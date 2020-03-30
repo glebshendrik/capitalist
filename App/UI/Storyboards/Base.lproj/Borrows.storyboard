@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -138,7 +138,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="565"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="FZr-eY-eje">
-                                                        <rect key="frame" x="132.5" y="251.5" width="110" height="62"/>
+                                                        <rect key="frame" x="160" y="267" width="55" height="31"/>
                                                         <color key="tintColor" name="blue 1"/>
                                                     </imageView>
                                                 </subviews>
@@ -273,7 +273,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="565"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="Xd9-5D-dMI">
-                                                        <rect key="frame" x="132.5" y="251.5" width="110" height="62"/>
+                                                        <rect key="frame" x="160" y="267" width="55" height="31"/>
                                                         <color key="tintColor" name="blue 1"/>
                                                     </imageView>
                                                 </subviews>
@@ -504,7 +504,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="mDg-iX-9J5">
-                                                    <rect key="frame" x="132.5" y="-13" width="110" height="62"/>
+                                                    <rect key="frame" x="160" y="2.5" width="55" height="31"/>
                                                     <color key="tintColor" name="blue 1"/>
                                                 </imageView>
                                             </subviews>
@@ -529,7 +529,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="borrow-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="rhI-kS-s3r">
-                                                            <rect key="frame" x="18.5" y="18.5" width="27" height="27"/>
+                                                            <rect key="frame" x="20" y="20" width="24" height="24"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="27" id="Jop-M5-4Xk"/>
@@ -573,7 +573,7 @@
                                                             <rect key="frame" x="3" y="3" width="32" height="32"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pen2-icon" translatesAutoresizingMaskIntoConstraints="NO" id="pbr-RU-dXx">
-                                                                    <rect key="frame" x="-1" y="-1.5" width="34" height="35"/>
+                                                                    <rect key="frame" x="7.5" y="7.5" width="17" height="17.5"/>
                                                                     <color key="tintColor" name="white 1.0"/>
                                                                 </imageView>
                                                             </subviews>
@@ -656,10 +656,6 @@
                                                 <constraint firstItem="wC8-9R-wda" firstAttribute="leading" secondItem="zBG-6i-SjB" secondAttribute="leading" id="RZv-uP-WfF"/>
                                                 <constraint firstItem="wC8-9R-wda" firstAttribute="top" secondItem="zBG-6i-SjB" secondAttribute="top" id="WSg-L2-I5M"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Название"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="type-icon"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -685,10 +681,6 @@
                                                 <constraint firstItem="qUd-fm-f0Z" firstAttribute="leading" secondItem="nEW-Lj-ulQ" secondAttribute="leading" id="cMi-vy-IhY"/>
                                                 <constraint firstItem="qUd-fm-f0Z" firstAttribute="top" secondItem="nEW-Lj-ulQ" secondAttribute="top" id="xZ2-tx-hgB"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="currency-icon"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -714,10 +706,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="i9r-Ut-ai5" secondAttribute="bottom" id="l8t-H7-cAL"/>
                                                 <constraint firstItem="i9r-Ut-ai5" firstAttribute="top" secondItem="ebW-uq-Pky" secondAttribute="top" id="pgm-OP-0qT"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Валюта"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="currency-icon"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -739,10 +727,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="u6O-Q3-OgT" secondAttribute="bottom" id="MYc-rq-rwN"/>
                                                 <constraint firstAttribute="trailing" secondItem="u6O-Q3-OgT" secondAttribute="trailing" id="vHX-Q5-hiu"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="planned-amount-icon"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Планирую тратить в месяц"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -764,10 +748,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="0bh-rc-mY2" secondAttribute="bottom" id="eHm-gP-6sD"/>
                                                 <constraint firstAttribute="trailing" secondItem="0bh-rc-mY2" secondAttribute="trailing" id="jcM-0U-Cmz"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="planned-amount-icon"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Планирую тратить в месяц"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -789,10 +769,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="O0S-is-DVj" secondAttribute="trailing" id="KOf-vw-UOz"/>
                                                 <constraint firstAttribute="bottom" secondItem="O0S-is-DVj" secondAttribute="bottom" id="Tua-TU-404"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="planned-amount-icon"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Планирую тратить в месяц"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -814,10 +790,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="A8L-0X-Pxg" secondAttribute="bottom" id="gr0-fv-EXs"/>
                                                 <constraint firstAttribute="trailing" secondItem="A8L-0X-Pxg" secondAttribute="trailing" id="r85-9c-bEZ"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="imageName" value="planned-amount-icon"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Планирую тратить в месяц"/>
-                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
@@ -893,7 +865,7 @@
                                                             <real key="value" value="8"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                                            <color key="value" name="blue 1"/>
+                                                            <color key="value" name="white 0.4"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
                                                             <color key="value" name="blue 1"/>
