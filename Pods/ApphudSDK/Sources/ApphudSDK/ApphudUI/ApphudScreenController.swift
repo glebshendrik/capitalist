@@ -105,7 +105,6 @@ class ApphudScreenController: UIViewController{
     //MARK:- Private
     
     deinit {
-//        apphudLog("Deinit ApphudScreenController(\(screenID))")
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(failedByTimeOut), object: nil)
         NotificationCenter.default.removeObserver(self)
     }
@@ -243,7 +242,7 @@ class ApphudScreenController: UIViewController{
                 if let discount = product.discounts.first(where: {$0.identifier == offerID!}) {
                     return product.localizedDiscountPrice(discount: discount)
                 } else {
-                    apphudLog("Couldn't find promo offer with id: \(offerID!) in product: \(product.productIdentifier)", forceDisplay: true)
+                    apphudLog("Couldn't find promo offer with id: \(offerID!) in product: \(product.productIdentifier), available promo offer ids: \(product.promoIdentifiers())", forceDisplay: true)
                     return ""
                 }
             } else {
@@ -347,8 +346,6 @@ class ApphudScreenController: UIViewController{
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(failedByTimeOut), object: nil)
         
         webView.alpha = 1
-        let date = Date().timeIntervalSince(start)
-        apphudLog("screen final load time: \(date)")
         
         if didAppear {
             handleDidAppearAndDidLoadScreen()
@@ -365,35 +362,36 @@ class ApphudScreenController: UIViewController{
             apphudLog("Aborting purchase because couldn't find product with id: \(productID ?? "")", forceDisplay: true)
             return
         }
-                   
+
         if offerID != nil {
-            
-            if #available(iOS 12.2, *), product.discounts.first(where: {$0.identifier == offerID!}) != nil {
-                
-                if isPurchasing {return}
-                isPurchasing = true
-                self.startLoading()
-                
-                ApphudInternal.shared.uiDelegate?.apphudWillPurchase?(product: product, offerID: offerID!, screenName: self.screen?.name ?? "unknown")
-                
-                ApphudInternal.shared.purchasePromo(product: product, discountID: offerID!) { (subscription, transaction, error) in
-                    self.handlePurchaseResult(product: product, offerID: offerID!, subscription: subscription, transaction: transaction, error: error)                    
+            if #available(iOS 12.2, *) {
+                if product.discounts.first(where: {$0.identifier == offerID!}) != nil {
+                    
+                    if isPurchasing {return}
+                    isPurchasing = true
+                    self.startLoading()
+                    
+                    ApphudInternal.shared.uiDelegate?.apphudWillPurchase?(product: product, offerID: offerID!, screenName: self.rule.screen_name)
+                    
+                    ApphudInternal.shared.purchasePromo(product: product, discountID: offerID!) { (result) in
+                        self.handlePurchaseResult(product: product, offerID: offerID!, result: result)                    
+                    }
+                } else {
+                    apphudLog("Aborting purchase because couldn't find promo offer with id: \(offerID!) in product: \(product.productIdentifier), available promo offer ids: \(product.promoIdentifiers())", forceDisplay: true)
                 }
             } else {
-                apphudLog("Aborting purchase because couldn't find promo offer with id: \(offerID!) in product: \(product.productIdentifier)", forceDisplay: true)
-                return
+                apphudLog("Aborting purchase because promotional offers are available only on iOS 12.2 and above", forceDisplay: true)
             }
-            
         } else {
             
             if isPurchasing {return}
             isPurchasing = true
             self.startLoading()
             
-            ApphudInternal.shared.uiDelegate?.apphudWillPurchase?(product: product, offerID: nil, screenName: self.screen?.name ?? "unknown")
+            ApphudInternal.shared.uiDelegate?.apphudWillPurchase?(product: product, offerID: nil, screenName: self.rule.screen_name)
             
-            ApphudInternal.shared.purchase(product: product) { (subscription, transaction, error) in
-                self.handlePurchaseResult(product: product, subscription: subscription, transaction: transaction, error: error)
+            ApphudInternal.shared.purchase(product: product) { (result) in
+                self.handlePurchaseResult(product: product, result: result)
             }
         }
     }
@@ -425,7 +423,7 @@ class ApphudScreenController: UIViewController{
     
     private func restoreTapped(){
         self.startLoading()
-        Apphud.restoreSubscriptions { subscriptions in
+        Apphud.restorePurchases { subscriptions, purchases, error in
             self.stopLoading()
             if subscriptions?.first?.isActive() ?? false {
                 self.dismiss()
@@ -604,16 +602,16 @@ extension ApphudScreenController {
         }
     }
     
-    private func handlePurchaseResult(product: SKProduct, offerID: String? = nil, subscription: ApphudSubscription?, transaction: SKPaymentTransaction?, error: Error?) {
+    private func handlePurchaseResult(product: SKProduct, offerID: String? = nil, result: ApphudPurchaseResult) {
             
         var errorCode : SKError.Code = .unknown
         
-        if let skError = error as? SKError {
+        if let skError = result.transaction?.error as? SKError {
             errorCode = skError.code
         }
         
-        let isActive = subscription?.isActive() ?? false
-        let productIDChanged = subscription?.productId != product.productIdentifier
+        let isActive = result.subscription?.isActive() ?? false
+        let productIDChanged = result.subscription?.productId != product.productIdentifier
         
         let shouldSubmitPurchaseEvent = error == nil || (isActive && !(errorCode == .paymentCancelled) && (offerID != nil || productIDChanged))
         
@@ -630,11 +628,11 @@ extension ApphudScreenController {
                 apphudLog("Product purchased with id: \(product.productIdentifier)", forceDisplay: true)
             }
             
-            if let trx = transaction, trx.transactionState == .purchased, let transaction_id = trx.transactionIdentifier {
+            if let trx = result.transaction, trx.transactionState == .purchased, let transaction_id = trx.transactionIdentifier {
                 properties["transaction_id"] = transaction_id
             }
             
-            if let id = subscription?.id, id.count > 0 {
+            if let id = result.subscription?.id, id.count > 0 {
                 properties["subscription_id"] = id
             }
             
@@ -642,7 +640,7 @@ extension ApphudScreenController {
             
             ApphudInternal.shared.trackEvent(params: params) {}
             
-            ApphudInternal.shared.uiDelegate?.apphudDidPurchase?(product: product, offerID: offerID, screenName: self.screen?.name ?? "unknown")
+            ApphudInternal.shared.uiDelegate?.apphudDidPurchase?(product: product, offerID: offerID, screenName: self.rule.screen_name)
             
             dismiss() // dismiss only when purchase is successful
             
@@ -653,10 +651,10 @@ extension ApphudScreenController {
             // if error occurred, restore subscriptions
             if !(errorCode == .paymentCancelled) {
                 // maybe remove?
-                Apphud.restoreSubscriptions { subscriptions in }
+                Apphud.restorePurchases { subscriptions, purchases, error  in }
             }
             
-            ApphudInternal.shared.uiDelegate?.apphudDidFailPurchase?(product: product, offerID: offerID, errorCode: errorCode, screenName: self.screen?.name ?? "unknown")
+            ApphudInternal.shared.uiDelegate?.apphudDidFailPurchase?(product: product, offerID: offerID, errorCode: errorCode, screenName: self.rule.screen_name)
         }
     }
     

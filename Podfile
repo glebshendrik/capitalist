@@ -45,6 +45,7 @@ target 'Three Baskets' do
   pod 'SwiftyGif'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
+  pod 'Firebase/DynamicLinks'
   pod 'FBSDKCoreKit/Swift'
 end
 

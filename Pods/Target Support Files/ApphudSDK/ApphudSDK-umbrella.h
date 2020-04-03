@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "ApphudObjcExtensions.h"
 
 FOUNDATION_EXPORT double ApphudSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char ApphudSDKVersionString[];

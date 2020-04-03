@@ -162,11 +162,19 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     }
     
     func purchase(product: SKProduct) -> Promise<ApphudSubscription?> {
-        return Promise { Apphud.purchase(product, callback: $0.resolve) }
+        return Promise { seal in
+            Apphud.purchase(product) { result in
+                seal.resolve(result.subscription, result.error)
+            }
+        }
     }
     
     func restoreSubscriptions() -> Promise<[ApphudSubscription]?> {
-        return Promise { Apphud.restoreSubscriptions(callback: $0.fulfill) }
+        return Promise { seal in
+            Apphud.restorePurchases { subscriptions, nonRenewingPurchases, error in
+                seal.resolve(subscriptions, error)
+            }
+        }
     }
     
     func checkIntroductoryEligibility() -> Promise<[String : Bool]> {

@@ -9,6 +9,7 @@
 import UIKit
 import SwinjectStoryboard
 import Swinject
+import FirebaseDynamicLinks
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -56,10 +57,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = notificationsCoordinator.register(deviceToken: deviceToken)
     }
     
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        return router.application(application, continue: userActivity, restorationHandler: restorationHandler)
+    }
+        
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
-        notificationsCoordinator.cancelKeepAliveNotifications()
-        
+        notificationsCoordinator.cancelKeepAliveNotifications()        
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {

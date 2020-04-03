@@ -17,6 +17,7 @@ protocol ApplicationRouterProtocol {
     func start(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool
     func application(_ app: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
     func route()
     func viewController(_ type: Infrastructure.ViewController) -> UIViewController
     func initDependencies(with resolver: Resolver)

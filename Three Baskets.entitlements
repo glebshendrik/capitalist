@@ -8,6 +8,7 @@
 	<array>
 		<string>webcredentials:api.threebaskets.net</string>
 		<string>webcredentials:test.threebaskets.net</string>
+		<string>applinks:threebasketsapp.page.link</string>
 	</array>
 </dict>
 </plist>

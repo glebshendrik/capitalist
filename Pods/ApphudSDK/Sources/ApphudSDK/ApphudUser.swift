@@ -19,6 +19,7 @@ internal struct ApphudUser {
      An array of subscriptions that user has ever purchased.
      */
     var subscriptions : [ApphudSubscription]
+    var purchases : [ApphudNonRenewingPurchase]
     
     var currencyCode: String?
     var countryCode: String?
@@ -35,18 +36,19 @@ internal struct ApphudUser {
         }
         
         var subs = [ApphudSubscription]()
+        var inapps = [ApphudNonRenewingPurchase]()
+        
         if let subscriptionsDictsArray = dictionary["subscriptions"] as? [[String : Any]]{
             for subdict in subscriptionsDictsArray {
                 if let subscription = ApphudSubscription(dictionary: subdict) {
                     subs.append(subscription)
+                } else if let purchase = ApphudNonRenewingPurchase(dictionary: subdict) {
+                    inapps.append(purchase)
                 }
             }
         }
-        if subs.count > 0 {
-            self.subscriptions = subs.sorted{ return $0.expiresDate > $1.expiresDate }
-        } else {
-            self.subscriptions = []
-        }
+        self.subscriptions = subs.sorted{ return $0.expiresDate > $1.expiresDate }
+        self.purchases = inapps.sorted{ return $0.purchasedAt > $1.purchasedAt }
     }
     
     func subscriptionsStates() -> [[String : AnyHashable]] {
@@ -62,20 +64,34 @@ internal struct ApphudUser {
         return array
     }
     
+    func purchasesStates() -> [[String : AnyHashable]] {
+        var array = [[String : AnyHashable]]()
+        for purchase in self.purchases {
+            var dict = [String : AnyHashable]()
+            dict["cancelled_at"] = purchase.canceledAt
+            dict["started_at"] = purchase.purchasedAt
+            dict["product_id"] = purchase.productId
+            array.append(dict)
+        }
+        return array
+    }
+    
     static func toCache(_ dictionary : [String : Any]) {
+        
+        let data = try? NSKeyedArchiver.archivedData(withRootObject: dictionary, requiringSecureCoding: false)
+        let folderURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        let fileURL = folderURL.appendingPathComponent("ApphudUser.data")            
         do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: dictionary, requiringSecureCoding: false)
-            let documentsURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-            let fileURL = documentsURL.appendingPathComponent("ApphudUser.data")            
-            try data.write(to: fileURL)
+            try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true, attributes: nil)
+            try data?.write(to: fileURL)
         } catch {
-            apphudLog("failed to write to cache apphud user json, error: \(error.localizedDescription)")
+            apphudLog("failed to write to cache apphud user json, error: \(error.localizedDescription)", forceDisplay: true)
         }
     }
     
-    static func fromCache() -> ApphudUser?{
+    static func fromCache(directory: FileManager.SearchPathDirectory) -> ApphudUser? {
         do {
-            if let documentsURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
+            if let documentsURL = FileManager.default.urls(for: directory, in: .userDomainMask).first {
                 let fileURL = documentsURL.appendingPathComponent("ApphudUser.data")
                 
                 if !FileManager.default.fileExists(atPath: fileURL.path) {
@@ -89,8 +105,16 @@ internal struct ApphudUser {
                 }
             }
         } catch {
-            apphudLog("failed to read from cache apphud user json, error: \(error.localizedDescription)")
+            apphudLog("failed to read from cache apphud user json, error: \(error.localizedDescription)", forceDisplay: true)
         }
         return nil
+    }
+    
+    static func fromCache() -> ApphudUser?{
+        if let user = fromCache(directory: .applicationSupportDirectory) {
+            return user
+        } else {
+            return fromCache(directory: .cachesDirectory)
+        }
     }
 }

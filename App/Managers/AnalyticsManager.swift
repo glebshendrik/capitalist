@@ -24,5 +24,6 @@ class AnalyticsManager : AnalyticsManagerProtocol {
     
     func track(event: String, parameters: [String : Any]?) {
         Analytics.logEvent(event, parameters: parameters)
+        AppEvents.logEvent(AppEvents.Name(event), parameters: parameters ?? [:])
     }
 }

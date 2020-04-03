@@ -18,6 +18,7 @@ import ApphudSDK
 import Firebase
 import FirebaseCoreDiagnostics
 import FBSDKCoreKit
+import FirebaseDynamicLinks
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private let storyboards: [Infrastructure.Storyboard: UIStoryboard]
@@ -57,9 +58,25 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        let handled = ApplicationDelegate.shared.application(app, open: url, options: options)
+        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+            handleIncomingDynamicLink(dynamicLink)
+            return true
+        }
+        return ApplicationDelegate.shared.application(app, open: url, options: options)
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        guard let url = userActivity.webpageURL else { return false }
         
-        return handled
+        return DynamicLinks.dynamicLinks().handleUniversalLink(url) { (dynamicLink, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            if let dynamicLink = dynamicLink {
+                self.handleIncomingDynamicLink(dynamicLink)
+            }
+        }
     }
     
     func application(_ app: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -241,7 +258,20 @@ extension ApplicationRouter {
                 }
             }
         }
-    }    
+    }
+    
+    private func handleIncomingDynamicLink(_ dynamicLink: DynamicLink) {
+        guard let url = dynamicLink.url else { return }
+        analyticsManager.track(event: "dynamic_link", parameters: ["url": url.absoluteString])
+        guard   let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+                let queryItems = components.queryItems else { return }
+        for queryItem in queryItems {
+            analyticsManager.track(event: queryItem.name, parameters: nil)
+            if let value = queryItem.value {
+                analyticsManager.track(event: "\(queryItem.name)_\(value)", parameters: nil)
+            }
+        }
+    }
 }
 
 extension ApplicationRouter {

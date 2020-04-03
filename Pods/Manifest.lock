@@ -4,7 +4,7 @@ PODS:
     - Alamofire (~> 4.7)
   - AlignedCollectionViewFlowLayout (1.1.2)
   - ALTextInputBar (1.1.8)
-  - ApphudSDK (0.8)
+  - ApphudSDK (0.9.2)
   - AttributedTextView (1.4.1)
   - BEMCheckBox (1.4.1)
   - BetterSegmentedControl (1.3.0)
@@ -35,6 +35,9 @@ PODS:
   - Firebase/Crashlytics (6.19.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 4.0.0-beta.5)
+  - Firebase/DynamicLinks (6.19.0):
+    - Firebase/CoreOnly
+    - FirebaseDynamicLinks (~> 4.0.7)
   - FirebaseAnalytics (6.3.1):
     - FirebaseCore (~> 6.6)
     - FirebaseInstallations (~> 1.1)
@@ -62,6 +65,9 @@ PODS:
     - FirebaseCore (~> 6.6)
     - FirebaseInstallations (~> 1.1)
     - PromisesObjC (~> 1.2)
+  - FirebaseDynamicLinks (4.0.8):
+    - FirebaseAnalyticsInterop (~> 1.3)
+    - FirebaseCore (~> 6.2)
   - FirebaseInstallations (1.1.0):
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.5)
@@ -186,6 +192,7 @@ DEPENDENCIES:
   - FBSDKCoreKit/Swift
   - Firebase/Analytics
   - Firebase/Crashlytics
+  - Firebase/DynamicLinks
   - InfiniteLayout
   - IQKeyboardManager
   - Locksmith (~> 4.0)
@@ -252,6 +259,7 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
     - FirebaseCrashlytics
+    - FirebaseDynamicLinks
     - FirebaseInstallations
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -298,7 +306,7 @@ SPEC CHECKSUMS:
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   AlignedCollectionViewFlowLayout: ee2ef451e741ec08f8e0967d828001e2f051c20a
   ALTextInputBar: 6c160c51958903c5f7b9d158e19f9c4113ae351b
-  ApphudSDK: 4d3d9ffd6bc0b8a5813ec0031dc1569e6762e079
+  ApphudSDK: 3e62399c10cca6a75795b1e8235743e4afe0059f
   AttributedTextView: 9e01651d96c1af861a9c67c2cc3f94c30320d1c2
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   BetterSegmentedControl: 85d1b0343a09603b098884d527f550dfc8e6cdd9
@@ -318,6 +326,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: e9b4cd8ba60dee0f2d13347332e4b7898cca5b61
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
   FirebaseCrashlytics: 7c95218730d1debf493e987233c7b41dd7ba1329
+  FirebaseDynamicLinks: 417dc6dbb6013233c77558290d73296f429656a6
   FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
   GoogleAppMeasurement: c29d405ff76e18551b5d158eaba6753fda8c7542
   GoogleDataTransport: a857c6a002d201b524dd4bc2ed7e7355ed07e785
@@ -350,6 +359,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
 
-PODFILE CHECKSUM: ec13f14d35ccea8f220b9be9ad840ae22d5082b4
+PODFILE CHECKSUM: cc2d35a72a9aae5df1b96b0f1389d30410edde9f
 
 COCOAPODS: 1.8.0
