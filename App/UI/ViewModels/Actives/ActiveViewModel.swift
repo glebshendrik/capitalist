@@ -41,6 +41,10 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return active.name
     }
     
+    var prototypeKey: String? {
+        return active.prototypeKey
+    }
+    
     var iconURL: URL? {
         return active.iconURL
     }

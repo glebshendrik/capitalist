@@ -10,14 +10,21 @@ import UIKit
 
 class LandingViewController : UIViewController {
     
-    @IBOutlet weak var loadingMessageLabel: UILabel!
+    @IBOutlet weak var loadingMessageLabel: UILabel?
     @IBOutlet weak var loaderImageView: UIImageView!
+    
+    var loadingMessage: String? = nil {
+        didSet {
+            updateUI()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateUI()
     }
     
-    func update(loadingMessage: String) {
-        loadingMessageLabel.text = loadingMessage
+    private func updateUI() {
+        loadingMessageLabel?.text = loadingMessage
     }
 }

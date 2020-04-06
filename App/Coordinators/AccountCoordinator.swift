@@ -177,6 +177,14 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         }
     }
     
+    func silentRestoreSubscriptions() -> Promise<Void> {
+        return Promise { seal in
+            Apphud.restorePurchases { subscriptions, nonRenewingPurchases, error in
+                seal.fulfill(())
+            }
+        }
+    }
+    
     func checkIntroductoryEligibility() -> Promise<[String : Bool]> {
         return Promise { Apphud.checkEligibilitiesForIntroductoryOffers(products: self.subscriptionProducts, callback: $0.fulfill) }
     }

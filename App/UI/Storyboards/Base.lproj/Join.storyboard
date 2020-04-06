@@ -36,8 +36,11 @@
                                     <constraint firstAttribute="width" constant="337" id="kB9-bV-Epp"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="oew-eS-wp4">
+                                <rect key="frame" x="169" y="559.5" width="37" height="37"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLJ-49-Mhu">
-                                <rect key="frame" x="187.5" y="663.5" width="0.0" height="0.0"/>
+                                <rect key="frame" x="187.5" y="606.5" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                 <color key="textColor" name="white 0.64"/>
                                 <nil key="highlightedColor"/>
@@ -46,9 +49,11 @@
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstItem="sJx-n0-CPA" firstAttribute="centerY" secondItem="onM-go-z3r" secondAttribute="centerY" id="0gi-20-N6f"/>
+                            <constraint firstAttribute="bottom" secondItem="zLJ-49-Mhu" secondAttribute="bottom" constant="60.5" id="ICx-qZ-gTM"/>
                             <constraint firstItem="zLJ-49-Mhu" firstAttribute="centerX" secondItem="onM-go-z3r" secondAttribute="centerX" id="Kwf-f6-TCu"/>
+                            <constraint firstItem="zLJ-49-Mhu" firstAttribute="top" secondItem="oew-eS-wp4" secondAttribute="bottom" constant="10" id="QhX-Zf-K44"/>
+                            <constraint firstItem="oew-eS-wp4" firstAttribute="centerX" secondItem="onM-go-z3r" secondAttribute="centerX" id="a9W-JU-O83"/>
                             <constraint firstItem="sJx-n0-CPA" firstAttribute="centerX" secondItem="onM-go-z3r" secondAttribute="centerX" id="kDG-on-0uq"/>
-                            <constraint firstItem="zLJ-49-Mhu" firstAttribute="top" secondItem="sJx-n0-CPA" secondAttribute="bottom" constant="30" id="xlx-cZ-eeN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7G0-UB-QWj"/>
                     </view>

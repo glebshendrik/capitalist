@@ -34,6 +34,10 @@ class IncomeSourceViewModel : TransactionSource {
         return incomeSource.name
     }
     
+    var prototypeKey: String? {
+        return incomeSource.prototypeKey
+    }
+    
     var amountRounded: String {
         return amount(shouldRound: true)
     }

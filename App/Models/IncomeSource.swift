@@ -23,6 +23,7 @@ struct IncomeSource : Decodable {
     let isBorrowOrReturn: Bool
     let waitingDebts: [Borrow]
     let reminder: Reminder?
+    let prototypeKey: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -39,6 +40,7 @@ struct IncomeSource : Decodable {
         case isBorrowOrReturn = "is_borrow_or_return"
         case waitingDebts = "waiting_debts"
         case reminder
+        case prototypeKey = "prototype_key"
     }
 
 }
@@ -50,7 +52,7 @@ struct IncomeSourceCreationForm : Encodable, Validatable {
     let currency: String?
     let monthlyPlannedCents: Int?
     let reminderAttributes: ReminderNestedAttributes?
-    
+
     enum CodingKeys: String, CodingKey {
         case iconURL = "icon_url"
         case name

@@ -24,6 +24,7 @@ struct ExpenseSource : Decodable {
     let deletedAt: Date?
     let isVirtual: Bool
     let accountConnection: AccountConnection?
+    let prototypeKey: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -37,6 +38,7 @@ struct ExpenseSource : Decodable {
         case deletedAt = "deleted_at"
         case isVirtual = "is_virtual"
         case accountConnection = "account_connection"
+        case prototypeKey = "prototype_key"
     }
 }
 

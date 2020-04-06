@@ -718,14 +718,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionsHeaderTableViewCell" id="8EI-VI-NM3" customClass="TransactionsHeaderTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="470.5" width="375" height="76.5"/>
+                                        <rect key="frame" x="0.0" y="470.5" width="375" height="64.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8EI-VI-NM3" id="H3j-ki-f4c">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rbP-lh-Ck1">
-                                                    <rect key="frame" x="0.0" y="12" width="375" height="52.5"/>
+                                                    <rect key="frame" x="0.0" y="12" width="375" height="40.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ПОСЛЕДНИЕ ОПЕРАЦИИ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ugn-AM-ssu">
                                                             <rect key="frame" x="24" y="18" width="327" height="16.5"/>
@@ -737,7 +737,7 @@
                                                     <color key="backgroundColor" name="black 2"/>
                                                     <constraints>
                                                         <constraint firstItem="Ugn-AM-ssu" firstAttribute="top" secondItem="rbP-lh-Ck1" secondAttribute="top" constant="18" id="5UI-60-wdk"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Ugn-AM-ssu" secondAttribute="bottom" constant="18" id="Gc0-4A-bB2"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Ugn-AM-ssu" secondAttribute="bottom" constant="6" id="Gc0-4A-bB2"/>
                                                         <constraint firstItem="Ugn-AM-ssu" firstAttribute="leading" secondItem="rbP-lh-Ck1" secondAttribute="leading" constant="24" id="ZdT-vE-hY2"/>
                                                         <constraint firstAttribute="trailing" secondItem="Ugn-AM-ssu" secondAttribute="trailing" constant="24" id="n3y-2u-W6w"/>
                                                     </constraints>
@@ -753,7 +753,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionTableViewCell" id="ctE-lo-fnT" customClass="EntityTransactionTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="547" width="375" height="68"/>
+                                        <rect key="frame" x="0.0" y="535" width="375" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ctE-lo-fnT" id="grt-2O-rgV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
@@ -1201,7 +1201,7 @@
         <!--Passcode View Controller-->
         <scene sceneID="LH1-mV-lRs">
             <objects>
-                <viewController storyboardIdentifier="PasscodeViewController" modalPresentationStyle="fullScreen" id="NlY-QT-GXg" customClass="PasscodeViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PasscodeViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="NlY-QT-GXg" customClass="PasscodeViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f8I-wb-hEn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

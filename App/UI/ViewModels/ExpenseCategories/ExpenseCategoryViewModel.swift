@@ -22,6 +22,10 @@ class ExpenseCategoryViewModel {
         return expenseCategory.name
     }
     
+    var prototypeKey: String? {
+        return expenseCategory.prototypeKey
+    }
+    
     var currency: Currency {
         return expenseCategory.currency
     }

@@ -9,23 +9,22 @@
 import Foundation
 
 class TransactionableExampleViewModel {
-    private let example: TransactionableExample
+    public private(set) var name: String
+    public private(set)var iconURL: URL?
+    public private(set)var defaultIconName: String
     
     var selected: Bool = false
     
-    var name: String {
-        return example.localizedName
-    }
-    
-    var iconURL: URL? {
-        return example.iconURL
-    }
-    
-    var defaultIconName: String {
-        return example.transactionableType.defaultIconName(basketType: example.basketType)
-    }
-    
     init(example: TransactionableExample) {
-        self.example = example
+        name = example.localizedName
+        iconURL = example.iconURL
+        defaultIconName = example.transactionableType.defaultIconName(basketType: example.basketType)
+    }
+    
+    init(transactionable: Transactionable) {
+        name = transactionable.name
+        iconURL = transactionable.iconURL
+        defaultIconName = transactionable.type.defaultIconName(basketType: (transactionable as? ExpenseCategoryViewModel)?.basketType)
+        selected = true
     }
 }

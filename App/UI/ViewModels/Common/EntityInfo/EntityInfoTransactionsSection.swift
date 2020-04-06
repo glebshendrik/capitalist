@@ -34,8 +34,8 @@ class EntityInfoTransactionsSection : EntityInfoSection {
         return type.rawValue + date.toISO()
     }
     var isSectionHeaderVisible: Bool { return true }
-    var numberOfRows: Int { return transactionViewModels.count }
-    var title: String? { return date.dateString(ofStyle: .full) }
+    var numberOfRows: Int { return transactionViewModels.count }    
+    var title: String? { return date.string(withFormat: "dd.MM.yyyy") }
     var type: EntityInfoSectionType { return .transactions }
     
     let date: Date

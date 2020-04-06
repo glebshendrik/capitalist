@@ -45,6 +45,7 @@ struct Active : Decodable {
     let deletedAt: Date?
     let reminder: Reminder?
     let incomeSource: IncomeSource?
+    let prototypeKey: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -70,6 +71,7 @@ struct Active : Decodable {
         case reminder
         case alreadyPaidCents = "already_paid_cents"
         case incomeSource = "income_source"
+        case prototypeKey = "prototype_key"
     }
 }
 

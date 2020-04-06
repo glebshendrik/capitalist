@@ -20,6 +20,7 @@ protocol Transactionable : class {
     var isDeleted: Bool { get }
     var isSelected: Bool { get set }
     var defaultIconName: String { get }
+    var prototypeKey: String? { get }
 }
 
 extension Transactionable {

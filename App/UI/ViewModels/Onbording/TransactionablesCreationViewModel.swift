@@ -195,7 +195,14 @@ class TransactionablesCreationViewModel {
         }
         
         for transactionable in transactionables {
-            examplesHash[transactionable.name]?.selected = true
+            if let _ = examplesHash[transactionable.name] {
+                examplesHash[transactionable.name]?.selected = true
+            }
+            else {
+                let example = TransactionableExampleViewModel(transactionable: transactionable)
+                examples.append(example)
+                examplesHash[transactionable.name] = example
+            }            
         }
     }
     

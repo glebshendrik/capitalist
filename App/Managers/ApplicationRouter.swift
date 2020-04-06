@@ -34,6 +34,9 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     private var minVersion: String?
     private var minBuild: String?
+    private var isAnimating: Bool = false
+    private var pendingScreen: UIViewController? = nil
+    private var pendingModalScreen: UIViewController? = nil
     
     init(with storyboards: [Infrastructure.Storyboard: UIStoryboard],
          window: UIWindow,
@@ -92,16 +95,19 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     func launch() {
-        guard let startAnimationViewController = show(.StartAnimationViewController) as? StartAnimationViewController else {
+        guard let startAnimationViewController = viewController(.StartAnimationViewController) as? StartAnimationViewController else {
             route()
             return
         }
+        show(startAnimationViewController)
         do {
+            isAnimating = true
             try startAnimationViewController.startAnimationWith(delegate: self)
         }
         catch {
-            route()
+            isAnimating = false
         }
+        route()
     }
     
     func route() {
@@ -276,28 +282,29 @@ extension ApplicationRouter {
 
 extension ApplicationRouter {
     private func showAppUpdateScreen() {
-        _ = show(.AppUpdateViewController)
+        show(.AppUpdateViewController)
     }
     
     private func showLandingScreen() {
-        _ = show(.LandingViewController)
+        show(.LandingViewController)
     }
     
     private func showSubscriptionScreen() {
-        window.rootViewController = UINavigationController(rootViewController: self.viewController(.SubscriptionViewController))
+        show(UINavigationController(rootViewController: viewController(.SubscriptionViewController)))
     }
     
     private func showJoiningAsGuestScreen() {
-        if let landingViewController = show(.LandingViewController) as? LandingViewController {
-            landingViewController.update(loadingMessage: NSLocalizedString("Creating guest account", comment: "Создание учетной записи гостя..."))
-        }
+        guard let landingViewController = viewController(.LandingViewController) as? LandingViewController else { return }
+        landingViewController.loadingMessage = NSLocalizedString("Creating guest account", comment: "Создание учетной записи гостя...")
+        show(landingViewController)
     }
     
     func showMainViewController() {
-        _ = show(.MainViewController)
-        showPasscodeScreen()
-        if let menuLeftNavigationController = viewController(.MenuNavigationController) as? SideMenuNavigationController {
-            SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
+        show(.MainViewController) {
+            self.showPasscodeScreen()
+            if let menuLeftNavigationController = self.viewController(.MenuNavigationController) as? SideMenuNavigationController {
+                SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
+            }
         }
     }
     
@@ -307,20 +314,51 @@ extension ApplicationRouter {
         }
     }
     
-    func showOnboardingViewController() {
-        _ = show(.OnboardingViewController)
+    private func showOnboardingViewController() {
+        show(.OnboardingViewController)
     }
     
-    func showDataSetupViewController() {
-        _ = show(.TransactionablesCreationViewController)
+    private func showDataSetupViewController() {
+        show(.TransactionablesCreationViewController)
     }
         
-    func show(_ viewController: Infrastructure.ViewController) -> UIViewController? {
-        window.rootViewController = self.viewController(viewController)
-        return window.rootViewController
+    private func show(_ viewController: Infrastructure.ViewController, animated: Bool = true, _ completion: (() -> Void)? = nil) {
+        show(self.viewController(viewController), animated: animated, completion)
     }
     
-    func modal(_ viewController: Infrastructure.ViewController) {    window.rootViewController?.topmostPresentedViewController.modal(self.viewController(viewController))
+    private func show(_ viewController: UIViewController, animated: Bool = true, _ completion: (() -> Void)? = nil) {
+        if isAnimating {
+            pendingScreen = viewController
+        }
+        else {
+            switchRoot(to: viewController, animated: animated, completion)
+        }
+    }
+    
+    private func modal(_ viewController: Infrastructure.ViewController) {
+        let screen = self.viewController(viewController)
+        if isAnimating {
+            pendingModalScreen = screen
+        }
+        else {
+            window.rootViewController?.topmostPresentedViewController.modal(screen, animated: true)
+        }
+    }
+    
+    private func showPendings() {
+        isAnimating = false
+        let pendingScreen = self.pendingScreen
+        let modal = pendingModalScreen
+        self.pendingScreen = nil
+        pendingModalScreen = nil
+        guard let screen = pendingScreen else { return }
+        switchRoot(to: screen, animated: true) {
+            self.window.rootViewController?.topmostPresentedViewController.modal(modal, animated: true)
+        }
+    }
+    
+    private func switchRoot(to viewController: UIViewController, animated: Bool = true, _ completion: (() -> Void)? = nil) {
+        window.switchRootViewController(to: viewController, animated: animated, duration: 0.2, options: .transitionCrossDissolve, completion)
     }
     
     func setWindow(blurred: Bool) {
@@ -367,6 +405,7 @@ extension ApplicationRouter : SwiftyGifDelegate {
 
     func gifURLDidFail(sender: UIImageView) {
         print("gifURLDidFail")
+//        showPendings()
     }
 
     func gifDidStart(sender: UIImageView) {
@@ -378,6 +417,6 @@ extension ApplicationRouter : SwiftyGifDelegate {
     }
     
     func gifDidStop(sender: UIImageView) {
-        route()
+        showPendings()
     }
 }

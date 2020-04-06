@@ -21,6 +21,10 @@ class ExpenseSourceViewModel {
         return expenseSource.name
     }
     
+    var prototypeKey: String? {
+        return expenseSource.prototypeKey
+    }
+    
     var amountRounded: String {
         return amount(shouldRound: true)
     }

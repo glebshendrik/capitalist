@@ -33,5 +33,6 @@ protocol AccountCoordinatorProtocol {
     func checkIntroductoryEligibility() -> Promise<[String : Bool]>
     func purchase(product: SKProduct) -> Promise<ApphudSubscription?>
     func restoreSubscriptions() -> Promise<[ApphudSubscription]?>
+    func silentRestoreSubscriptions() -> Promise<Void>
 }
 
