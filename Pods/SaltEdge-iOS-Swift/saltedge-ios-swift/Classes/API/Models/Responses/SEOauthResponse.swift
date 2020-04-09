@@ -1,5 +1,5 @@
 //
-//  AccountRouter.swift
+//  SEOauthResponse.swift
 //
 //  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
@@ -23,26 +23,16 @@
 
 import Foundation
 
-enum AccountRouter: Routable {
-    case list(ConnectionSecret, SEAccountParams?)
-    
-    var method: HTTPMethod {
-        return .get
-    }
-    
-    var query: String {
-        return "accounts"
-    }
-    
-    var headers: Headers {
-        switch self {
-        case .list(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
-        }
-    }
-    
-    var parameters: ParametersEncodable? {
-        switch self {
-        case .list(_, let params): return params
-        }
+public struct SEOAuthResponse: Decodable {
+    public let token: String
+    public let expiresAt: Date
+    public let redirectUrl: String
+    public let connectionSecret: String
+
+    enum CodingKeys: String, CodingKey {
+        case token
+        case expiresAt = "expires_at"
+        case redirectUrl = "redirect_url"
+        case connectionSecret = "connection_secret"
     }
 }

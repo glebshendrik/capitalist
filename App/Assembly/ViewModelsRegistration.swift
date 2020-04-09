@@ -98,6 +98,8 @@ extension ApplicationAssembly {
                 
         container.autoregister(TransactionablesCreationViewModel.self, initializer: TransactionablesCreationViewModel.init)
         
-        container.autoregister(SubscriptionViewModel.self, initializer: SubscriptionViewModel.init)        
+        container.autoregister(SubscriptionViewModel.self, initializer: SubscriptionViewModel.init)
+        
+        container.autoregister(ProviderConnectionViewModel.self, initializer: ProviderConnectionViewModel.init)        
     }
 }

@@ -59,17 +59,19 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         }
     }
     
-    func createConnectSession(providerCode: String, languageCode: String) -> Promise<URL> {
-        let connectSessionsParams = SECreateSessionsParams(
-            attempt: SEAttempt(locale: languageCode, returnTo: "http://httpbin.org"),
-            providerCode: providerCode,
-            javascriptCallbackType: "iframe",
-            consent: SEConsent(scopes: ["account_details", "transactions_details"])
-        )
+    func createConnectSession(provider: SEProvider, languageCode: String) -> Promise<URL> {
+        
+        let connectSessionsParams = SEConnectSessionsParams(allowedCountries: [provider.countryCode],        
+                                                            attempt: SEAttempt(locale: languageCode, returnTo: "http://tempio.app"),
+                                                            providerCode: provider.code,
+                                                            javascriptCallbackType: "iframe",
+                                                            consent: SEConsent(scopes: ["account_details", "transactions_details"]))
+        
         return Promise { seal in
             SERequestManager.shared.createConnectSession(params: connectSessionsParams) { response in
                 switch response {
                 case .success(let value):
+                    
                     guard let url = URL(string: value.data.connectUrl) else {
                         seal.reject(SaltEdgeError.cannotCreateConnectSession)
                         return

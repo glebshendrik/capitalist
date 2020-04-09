@@ -644,41 +644,43 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EJK-sj-bcd">
-                                <rect key="frame" x="16" y="37" width="343" height="31"/>
+                                <rect key="frame" x="16" y="37" width="343" height="36"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vk1-sx-1cr">
-                                        <rect key="frame" x="0.0" y="0.0" width="33" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="33" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="33" id="3rX-Eu-BOs"/>
                                         </constraints>
+                                        <color key="tintColor" name="white 0.4"/>
                                         <state key="normal" image="loupe-icon"/>
                                         <connections>
                                             <action selector="didTapLoupe:" destination="MAz-ij-c2z" eventType="touchUpInside" id="nj1-kk-usc"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Поиск" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ju-Cp-wAz">
-                                        <rect key="frame" x="33" y="0.0" width="284" height="31"/>
-                                        <color key="textColor" name="text FFFFFF"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <rect key="frame" x="33" y="0.0" width="284" height="36"/>
+                                        <color key="textColor" name="white 0.4"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="didChangeSearchQuery:" destination="MAz-ij-c2z" eventType="editingChanged" id="C3t-S8-1Um"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6B-cx-4BU">
-                                        <rect key="frame" x="317" y="0.0" width="26" height="31"/>
+                                        <rect key="frame" x="317" y="0.0" width="26" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="26" id="bf6-1v-qkK"/>
                                         </constraints>
+                                        <color key="tintColor" name="white 0.4"/>
                                         <state key="normal" image="search-clear-icon"/>
                                         <connections>
                                             <action selector="didTapClearSearch:" destination="MAz-ij-c2z" eventType="touchUpInside" id="IZd-T8-MBd"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" name="dark 2A314B"/>
+                                <color key="backgroundColor" name="white 0.04"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="161-AC-7dz"/>
+                                    <constraint firstAttribute="height" constant="36" id="161-AC-7dz"/>
                                     <constraint firstItem="u6B-cx-4BU" firstAttribute="top" secondItem="EJK-sj-bcd" secondAttribute="top" id="6Zn-qN-GcS"/>
                                     <constraint firstAttribute="bottom" secondItem="7ju-Cp-wAz" secondAttribute="bottom" id="6s5-7b-VSo"/>
                                     <constraint firstAttribute="bottom" secondItem="vk1-sx-1cr" secondAttribute="bottom" id="D53-iw-nJ1"/>
@@ -692,36 +694,39 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
+                                        <real key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lNt-Lj-Umt">
-                                <rect key="frame" x="0.0" y="76" width="375" height="1"/>
-                                <color key="backgroundColor" name="delimeter 2F3854"/>
+                                <rect key="frame" x="0.0" y="81" width="375" height="1"/>
+                                <color key="backgroundColor" name="white 0.04"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Xnt-ra-JuC"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yXx-WL-jte">
-                                <rect key="frame" x="0.0" y="81" width="375" height="586"/>
+                                <rect key="frame" x="0.0" y="86" width="375" height="581"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProviderCell" rowHeight="60" id="0xd-CH-K0S" customClass="ProviderCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProviderCell" id="0xd-CH-K0S" customClass="ProviderCell" customModule="Three_Baskets" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0xd-CH-K0S" id="u9i-gL-cVA">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBv-9q-YSJ">
-                                                    <rect key="frame" x="68" y="0.0" width="291" height="60"/>
+                                                    <rect key="frame" x="68" y="0.0" width="291" height="64"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="64" id="py3-Kp-rgT"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                     <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZs-Hc-bjO">
-                                                    <rect key="frame" x="16" y="12" width="36" height="36"/>
+                                                    <rect key="frame" x="16" y="14" width="36" height="36"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmk-01-RDa" customClass="SVGKFastImageView">
                                                             <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
@@ -747,7 +752,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYi-tA-x9H">
-                                                    <rect key="frame" x="0.0" y="59" width="375" height="1"/>
+                                                    <rect key="frame" x="0.0" y="63" width="375" height="1"/>
                                                     <color key="backgroundColor" name="white 0.04"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="zhO-Sv-5rE"/>
@@ -970,17 +975,11 @@
         <namedColor name="dark 2A314B">
             <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="delimeter 2F3854">
-            <color red="0.18431372549019609" green="0.2196078431372549" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="gray 1">
             <color red="0.34099999070167542" green="0.34900000691413879" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="red 1">
             <color red="1" green="0.40000000596046448" blue="0.21199999749660492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="text FFFFFF">
-            <color red="0.91764705882352937" green="0.93333333333333335" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white 0.04">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>

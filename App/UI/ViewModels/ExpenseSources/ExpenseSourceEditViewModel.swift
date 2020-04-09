@@ -259,23 +259,4 @@ extension ExpenseSourceEditViewModel {
         accountConnectionAttributes?.shouldDestroy = true
         selectedIconURL = nil
     }
-    
-    func loadProviderConnection(for providerId: String) -> Promise<ProviderConnection> {
-        return bankConnectionsCoordinator.loadProviderConnection(for: providerId)
-    }
-    
-    func createBankConnectionSession(for providerViewModel: ProviderViewModel) -> Promise<ProviderViewModel> {
-        let languageCode = String(Locale.preferredLanguages[0].prefix(2)).lowercased()
-        return  firstly {
-            bankConnectionsCoordinator.createSaltEdgeConnectSession(providerCode: providerViewModel.code,
-                                                                    languageCode: languageCode)
-            }.then { connectURL -> Promise<ProviderViewModel> in
-                providerViewModel.connectURL = connectURL
-                return Promise.value(providerViewModel)
-        }
-    }
-    
-    func createProviderConnection(connectionId: String, connectionSecret: String, providerViewModel: ProviderViewModel) -> Promise<ProviderConnection> {
-        return bankConnectionsCoordinator.createProviderConnection(connectionId: connectionId, connectionSecret: connectionSecret, provider: providerViewModel.provider)
-    }
 }

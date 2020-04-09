@@ -22,6 +22,8 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     override func didTapInfoButton(field: ButtonInfoField?) {
         guard let field = field else { return }
         switch field.identifier {
+        case ExpenseSourceInfoField.bank.identifier:
+            didTapBankButton()
         case ExpenseSourceInfoField.statistics.identifier:
             modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
         case ExpenseSourceInfoField.transactionIncome.identifier:        
@@ -35,6 +37,45 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     
     override func showEditScreen() {
         modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: viewModel.expenseSource))
+    }
+    
+    func didTapBankButton() {
+        if viewModel.accountConnected {
+            removeAccountConnection()
+        } else {
+            showProviders()
+        }
+    }
+}
+
+extension ExpenseSourceInfoViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
+    func showProviders() {
+        slideUp(factory.providersViewController(delegate: self))
+    }
+    
+    func didConnectTo(_ providerViewModel: ProviderViewModel, providerConnection: ProviderConnection) {
+        showAccountsViewController(for: providerConnection)
+    }
+    
+    func showAccountsViewController(for providerConnection: ProviderConnection) {
+        let currencyCode = viewModel.expenseSourceViewModel?.currency.code
+        slideUp(factory.accountsViewController(delegate: self,
+                                               providerConnection: providerConnection,
+                                               currencyCode: currencyCode))
+    }
+    
+    func didSelect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
+        connect(accountViewModel, providerConnection)
+    }
+    
+    func connect(_ accountViewModel: AccountViewModel, _ providerConnection: ProviderConnection) {
+        viewModel.connect(accountViewModel: accountViewModel, providerConnection: providerConnection)
+        save()
+    }
+    
+    func removeAccountConnection() {
+        viewModel.removeAccountConnection()
+        save()
     }
 }
 

@@ -236,7 +236,7 @@ extension ApplicationRouter {
     }
     
     private func setupBiometric() {
-        biometricVerificationManager.allowableReuseDuration = 180
+        biometricVerificationManager.allowableReuseDuration = 60
         if !UIFlowManager.reach(point: .verificationManagerInitialization) {            
             biometricVerificationManager.setInAppBiometricVerification(enabled: true)
         }        
@@ -329,6 +329,7 @@ extension ApplicationRouter {
     private func show(_ viewController: UIViewController, animated: Bool = true, _ completion: (() -> Void)? = nil) {
         if isAnimating {
             pendingScreen = viewController
+            completion?()
         }
         else {
             switchRoot(to: viewController, animated: animated, completion)
@@ -348,12 +349,20 @@ extension ApplicationRouter {
     private func showPendings() {
         isAnimating = false
         let pendingScreen = self.pendingScreen
-        let modal = pendingModalScreen
         self.pendingScreen = nil
-        pendingModalScreen = nil
-        guard let screen = pendingScreen else { return }
-        switchRoot(to: screen, animated: true) {
+                
+        func showModal() {
+            let modal = self.pendingModalScreen
+            self.pendingModalScreen = nil
             self.window.rootViewController?.topmostPresentedViewController.modal(modal, animated: true)
+        }
+        
+        guard let screen = pendingScreen else {
+            showModal()
+            return
+        }
+        switchRoot(to: screen, animated: true) {
+            showModal()
         }
     }
     

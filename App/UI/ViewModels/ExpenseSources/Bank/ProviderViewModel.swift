@@ -24,8 +24,12 @@ class ProviderViewModel {
         return provider.name
     }
     
-    var logoURL: URL {
-        return provider.logoURL
+    var logoURL: URL? {
+        return URL(string: provider.logoURL)
+    }
+    
+    var isOAuth: Bool {
+        return provider.isOAuth
     }
     
     var connectURL: URL? = nil

@@ -33,8 +33,8 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
     }
     
     func setup() {
-        saltEdgeManager.set(appId: "4O0ZDB8aX9HNYtk9y7JcOKJ2bSu_HkqECfm2qE4VQgM",
-                            appSecret: "RHMNBKrmwYPJ9o_T0R40aEBKJ6W-9OKtQSrfw0K3z6o")
+        saltEdgeManager.set(appId: "k_ZACkXsT4SeBeKKa34VE8Vd51cV7EXKPMQ3cehUKTU",
+                            appSecret: "qwAHuXb94vnQXZIzQ1Mw-vQrvcQZNawtq3Oy2706bDY")
     }
     
     func loadSaltEdgeProviders(topCountry: String?) -> Promise<[SEProvider]> {
@@ -59,8 +59,8 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
                 }
     }
     
-    func createSaltEdgeConnectSession(providerCode: String, languageCode: String) -> Promise<URL> {
-        return saltEdgeManager.createConnectSession(providerCode: providerCode, languageCode: languageCode)
+    func createSaltEdgeConnectSession(provider: SEProvider, languageCode: String) -> Promise<URL> {
+        return saltEdgeManager.createConnectSession(provider: provider, languageCode: languageCode)
     }
     
     func createProviderConnection(connectionId: String, connectionSecret: String, provider: SEProvider) -> Promise<ProviderConnection> {
@@ -74,7 +74,7 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
                                                   providerId: provider.id,
                                                   providerCode: provider.code,
                                                   providerName: provider.name,
-                                                  logoURL: provider.logoURL,
+                                                  logoURL: URL(string: provider.logoURL),
                                                   status: .active)
         return providerConnectionsService.create(with: form)
     }

@@ -35,13 +35,13 @@ public struct SEProvider: Decodable {
     public let instruction: String
     public let homeURL: String
     public let loginURL: String
+    public let logoURL: String
     public let countryCode: String
     public let refreshTimeout: Int
     public let holderInfo: [String]
     public let createdAt: String
     public let updatedAt: String
     public let requiredFields: [SEProviderField]?
-    public let logoURL: URL
     
     public var isOAuth: Bool {
         return mode == "oauth"
@@ -59,13 +59,13 @@ public struct SEProvider: Decodable {
         case instruction = "instruction"
         case homeURL = "home_url"
         case loginURL = "login_url"
+        case logoURL = "logo_url"
         case countryCode = "country_code"
         case refreshTimeout = "refresh_timeout"
         case holderInfo = "holder_info"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case requiredFields = "required_fields"
-        case logoURL = "logo_url"
     }
 }
 

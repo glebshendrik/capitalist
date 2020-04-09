@@ -14,6 +14,7 @@ enum ExpenseSourceInfoField : String {
     case balance
     case creditLimit
     case credit
+    case bank
     case statistics
     case transactionIncome
     case transactionExpense
@@ -29,10 +30,13 @@ enum ExpenseSourceInfoError : Error {
 
 class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
+    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
     
     var expenseSourceViewModel: ExpenseSourceViewModel?
+    var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
     
     var selectedIconURL: URL? = nil
+    var selectedAccountViewModel: AccountViewModel? = nil
     
     var expenseSource: ExpenseSource? {
         return expenseSourceViewModel?.expenseSource
@@ -42,18 +46,47 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         return expenseSourceViewModel
     }
     
+    var accountConnected: Bool {
+        guard let accountConnectionAttributes = accountConnectionAttributes else {
+            return false
+        }
+        
+        return accountConnectionAttributes.shouldDestroy == nil
+    }
+    
+    var bankButtonTitle: String {
+        return accountConnected
+            ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
+            : NSLocalizedString("Подключить банк", comment: "Подключить банк")
+    }
+    
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          creditsCoordinator: CreditsCoordinatorProtocol,
          borrowsCoordinator: BorrowsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
-         expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol) {
+         expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
+         bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
+        self.bankConnectionsCoordinator = bankConnectionsCoordinator
         super.init(transactionsCoordinator: transactionsCoordinator, creditsCoordinator: creditsCoordinator, borrowsCoordinator: borrowsCoordinator, accountCoordinator: accountCoordinator)
     }
     
     func set(expenseSource: ExpenseSourceViewModel?) {
         self.expenseSourceViewModel = expenseSource
         self.selectedIconURL = expenseSource?.iconURL
+        self.selectedAccountViewModel = nil
+        if let accountConnection = expenseSource?.expenseSource.accountConnection {
+            accountConnectionAttributes =
+                AccountConnectionNestedAttributes(id: accountConnection.id,
+                                                  providerConnectionId: accountConnection.providerConnection.id,
+                                                  accountId: accountConnection.accountId,
+                                                  accountName: accountConnection.accountName,
+                                                  nature: accountConnection.nature,
+                                                  currencyCode: accountConnection.currencyCode,
+                                                  balance: accountConnection.balance,
+                                                  connectionId: accountConnection.connectionId,
+                                                  shouldDestroy: nil)
+        }
     }
     
     override func loadEntity() -> Promise<Void> {
@@ -83,6 +116,13 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                          title: NSLocalizedString("Ваш кредитный долг", comment: "Ваш кредитный долг"),
                                          value: expenseSourceViewModel.credit))
         }
+        
+        fields.append(ButtonInfoField(fieldId: ExpenseSourceInfoField.bank.rawValue,
+                                      title: bankButtonTitle,
+                                      iconName: nil,
+                                      isEnabled: true))
+        
+        
         fields.append(contentsOf: [ButtonInfoField(fieldId: ExpenseSourceInfoField.statistics.rawValue,
                                                    title: NSLocalizedString("Статистика", comment: "Статистика"),
                                                    iconName: nil,
@@ -103,11 +143,46 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     }
          
     private func updateForm() -> ExpenseSourceUpdatingForm {
+        let amountCents = selectedAccountViewModel?.amountCents ?? expenseSourceViewModel?.expenseSource.amountCents   
+        let creditLimitCents = selectedAccountViewModel?.creditLimitCents ?? expenseSourceViewModel?.expenseSource.creditLimitCents
+
         return ExpenseSourceUpdatingForm(id: expenseSourceViewModel?.id,
-                                        name: expenseSourceViewModel?.name,
-                                        iconURL: selectedIconURL,
-                                        amountCents: expenseSourceViewModel?.expenseSource.amountCents,
-                                        creditLimitCents: expenseSourceViewModel?.expenseSource.creditLimitCents,
-                                        accountConnectionAttributes:  nil)
+                                         name: expenseSourceViewModel?.name,
+                                         iconURL: selectedIconURL,
+                                         amountCents: amountCents,
+                                         creditLimitCents: creditLimitCents,
+                                         accountConnectionAttributes: accountConnectionAttributes)
+    }
+}
+
+// Bank Connection
+extension ExpenseSourceInfoViewModel {
+    func connect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
+        selectedIconURL = providerConnection.logoURL
+        selectedAccountViewModel = accountViewModel
+        
+        var accountConnectionId: Int? = nil
+        if  let accountConnectionAttributes = accountConnectionAttributes,
+            accountConnectionAttributes.accountId == accountViewModel.id {
+            
+            accountConnectionId = accountConnectionAttributes.id
+        }
+        
+        accountConnectionAttributes =
+            AccountConnectionNestedAttributes(id: accountConnectionId,
+                                              providerConnectionId: providerConnection.id,
+                                              accountId: accountViewModel.id,
+                                              accountName: accountViewModel.name,
+                                              nature: accountViewModel.nature,
+                                              currencyCode: accountViewModel.currencyCode,
+                                              balance: accountViewModel.amountCents ?? 0,
+                                              connectionId: providerConnection.connectionId,
+                                              shouldDestroy: nil)
+    }
+    
+    func removeAccountConnection() {
+        accountConnectionAttributes?.id = expenseSource?.accountConnection?.id
+        accountConnectionAttributes?.shouldDestroy = true
+        selectedIconURL = nil
     }
 }

@@ -11,13 +11,14 @@ import PromiseKit
 import SnapKit
 
 protocol ProvidersViewControllerDelegate {
-    func didSelect(providerViewModel: ProviderViewModel)
+    func didConnectTo(_ providerViewModel: ProviderViewModel, providerConnection: ProviderConnection)
 }
 
-class ProvidersViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
+class ProvidersViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol {
     
     var viewModel: ProvidersViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var factory: UIFactoryProtocol!
     var delegate: ProvidersViewControllerDelegate?
     
     @IBOutlet weak var tableView: UITableView!
@@ -110,10 +111,6 @@ extension ProvidersViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
 }
 
 extension ProvidersViewController: UITableViewDelegate {
@@ -122,7 +119,58 @@ extension ProvidersViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let providerViewModel = viewModel.providerViewModel(at: indexPath) else { return }
-        close()
-        delegate?.didSelect(providerViewModel: providerViewModel)
+                
+        setupProviderConnection(for: providerViewModel)
+    }
+}
+
+extension ProvidersViewController : ProviderConnectionViewControllerDelegate {
+    func setupProviderConnection(for providerViewModel: ProviderViewModel) {
+        messagePresenterManager.showHUD(with: NSLocalizedString("Загрузка подключения к банку...", comment: "Загрузка подключения к банку..."))
+        firstly {
+            viewModel.loadProviderConnection(for: providerViewModel.id)
+        }.ensure {
+            self.messagePresenterManager.dismissHUD()
+        }.get { providerConnection in
+            self.close()
+            self.delegate?.didConnectTo(providerViewModel, providerConnection: providerConnection)            
+        }.catch { error in
+            self.createSaltEdgeConnectSession(for: providerViewModel)
+//            if case BankConnectionError.providerConnectionNotFound = error {
+//                
+//            } else {
+//                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось загрузить подключение к банку", comment: "Не удалось загрузить подключение к банку"), theme: .error)
+//            }
+        }
+    }
+    
+    func createSaltEdgeConnectSession(for providerViewModel: ProviderViewModel) {
+        messagePresenterManager.showHUD(with: NSLocalizedString("Подготовка подключения к банку...", comment: "Подготовка подключения к банку..."))
+        firstly {
+            viewModel.createBankConnectionSession(for: providerViewModel)
+        }.ensure {
+            self.messagePresenterManager.dismissHUD()
+        }.get { providerViewModel in
+            self.showProviderConnectionViewController(for: providerViewModel)
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
+        }
+    }
+    
+    func showProviderConnectionViewController(for providerViewModel: ProviderViewModel) {
+        // navigationController?.
+        modal(factory.providerConnectionViewController(delegate: self, providerViewModel: providerViewModel))
+    }
+    
+    func didConnectTo(_ providerViewModel: ProviderViewModel, providerConnection: ProviderConnection) {
+        delegate?.didConnectTo(providerViewModel, providerConnection: providerConnection)
+    }
+        
+    func didNotConnect() {
+        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
+    }
+    
+    func didNotConnect(with: Error) {
+        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
     }
 }

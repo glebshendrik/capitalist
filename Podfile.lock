@@ -128,7 +128,7 @@ PODS:
   - PromisesObjC (1.2.8)
   - RandomColorSwift (1.0.0)
   - RecurrencePicker (0.3.0)
-  - SaltEdge-iOS-Swift (2.1.0):
+  - SaltEdge-iOS-Swift (3.3.1):
     - TrustKit
   - SDWebImage/Core (5.0.3)
   - SDWebImageSVGCoder (0.3.0):
@@ -172,7 +172,7 @@ PODS:
     - Swinject (~> 2.6)
   - SwinjectStoryboard (2.2.0):
     - Swinject (~> 2.6)
-  - TrustKit (1.6.1)
+  - TrustKit (1.6.5)
 
 DEPENDENCIES:
   - AlamofireImage
@@ -201,7 +201,7 @@ DEPENDENCIES:
   - PromiseKit/Alamofire (~> 6.5)
   - RandomColorSwift (from `https://github.com/onevcat/RandomColorSwift`, branch `master`)
   - RecurrencePicker (from `https://github.com/petalvlad/RecurrencePicker`, branch `master`)
-  - SaltEdge-iOS-Swift (from `https://github.com/petalvlad/saltedge-ios-swift`, branch `master`)
+  - SaltEdge-iOS-Swift (~> 3.3.1)
   - SDWebImageSVGCoder (~> 0.3)
   - SideMenu (from `https://github.com/jonkykong/SideMenu`, branch `master`)
   - SkyFloatingLabelTextField
@@ -242,7 +242,6 @@ SPEC REPOS:
     - SwiftDate
     - SwiftMessages
     - SwinjectAutoregistration
-    - TrustKit
   trunk:
     - ALTextInputBar
     - ApphudSDK
@@ -268,10 +267,12 @@ SPEC REPOS:
     - InfiniteLayout
     - nanopb
     - PromisesObjC
+    - SaltEdge-iOS-Swift
     - SwifterSwift
     - SwiftyGif
     - Swinject
     - SwinjectStoryboard
+    - TrustKit
 
 EXTERNAL SOURCES:
   RandomColorSwift:
@@ -280,9 +281,6 @@ EXTERNAL SOURCES:
   RecurrencePicker:
     :branch: master
     :git: https://github.com/petalvlad/RecurrencePicker
-  SaltEdge-iOS-Swift:
-    :branch: master
-    :git: https://github.com/petalvlad/saltedge-ios-swift
   SideMenu:
     :branch: master
     :git: https://github.com/jonkykong/SideMenu
@@ -294,9 +292,6 @@ CHECKOUT OPTIONS:
   RecurrencePicker:
     :commit: aae70cc22ce643ba2311be0d7ac5a6d6cc6cc8ac
     :git: https://github.com/petalvlad/RecurrencePicker
-  SaltEdge-iOS-Swift:
-    :commit: e42977ea4a498dc777b7f8c2fb1d762cb15e98e8
-    :git: https://github.com/petalvlad/saltedge-ios-swift
   SideMenu:
     :commit: 138103093176154f84ae9a2a63e58b9ae78bc6d7
     :git: https://github.com/jonkykong/SideMenu
@@ -341,7 +336,7 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   RandomColorSwift: 9f6b61247b17eafe0fd75e4a0977f2af1abd68d1
   RecurrencePicker: 72c4ad5bbf0e75c73b7ed9eddd60f307e3b1eba6
-  SaltEdge-iOS-Swift: cdd2402129a7353f10cd82b615a90e8a18f58f80
+  SaltEdge-iOS-Swift: f6f2e2815345c96b2865be2500ac2848f5de2ab4
   SDWebImage: d4f87d7d36c8a4d9f9459dc282e0caa057fdf935
   SDWebImageSVGCoder: 4b354bcdc7d74ce14d9fdb3c9ed9ab2c667f3b57
   SideMenu: 4a891be552d30bb6fa87ad404d62e485f8450c34
@@ -357,8 +352,8 @@ SPEC CHECKSUMS:
   Swinject: cf7458774b1b00323080a9c67e47a1ee7f9d2af1
   SwinjectAutoregistration: 93a908f7543c401b0c315305ac0ae501efdbce89
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
-  TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
+  TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
 
-PODFILE CHECKSUM: cc2d35a72a9aae5df1b96b0f1389d30410edde9f
+PODFILE CHECKSUM: 54b577a08df557908966973f291b4f5da542d713
 
 COCOAPODS: 1.8.0

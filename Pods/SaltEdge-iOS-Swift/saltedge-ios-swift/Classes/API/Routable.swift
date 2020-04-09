@@ -37,14 +37,14 @@ enum HTTPMethod: String {
 
 protocol Routable {
     var method: HTTPMethod { get }
-    var url: URL { get }
+    var query: String { get }
     var headers: Headers { get }
     var parameters: ParametersEncodable? { get }
 }
 
 extension Routable {
     func asURLRequest() -> URLRequest {
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: url.appendingPathComponent(query))
         request.httpMethod = method.rawValue
 
         if let params = parameters {
@@ -68,6 +68,8 @@ extension Routable {
         
         return request
     }
+
+    var url: URL {
+        return APIEndpoints.baseURL
+    }
 }
-
-

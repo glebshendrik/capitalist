@@ -1,5 +1,5 @@
 //
-//  SEConnectSessionsParams.swift
+//  SESessionsParams.swift.swift
 //
 //  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
@@ -23,12 +23,12 @@
 
 import Foundation
 
-public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
+open class SEBaseSessionsParams: Encodable, ParametersEncodable {
     public let customFields: String?
     public let dailyRefresh: Bool?
+    public let disableProviderSearch: Bool?
     public let fromDate: Date?
     public let toDate: Date?
-    public let locale: String?
     public let returnConnectionId: Bool?
     public let providerModes: [String]?
     public let categorize: Bool?
@@ -41,9 +41,9 @@ public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
     init(attempt: SEAttempt? = nil,
          customFields: String? = nil,
          dailyRefresh: Bool? = nil,
+         disableProviderSearch: Bool? = nil,
          fromDate: Date? = nil,
          toDate: Date? = nil,
-         locale: String? = nil,
          returnConnectionId: Bool? = nil,
          providerModes: [String]? = nil,
          categorize: Bool? = nil,
@@ -54,9 +54,9 @@ public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
         self.attempt = attempt
         self.customFields = customFields
         self.dailyRefresh = dailyRefresh
+        self.disableProviderSearch = disableProviderSearch
         self.fromDate = fromDate
         self.toDate = toDate
-        self.locale = locale
         self.returnConnectionId = returnConnectionId
         self.providerModes = providerModes
         self.categorize = categorize
@@ -70,9 +70,9 @@ public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
         case attempt = "attempt"
         case customFields = "custom_fields"
         case dailyRefresh = "daily_refresh"
+        case disableProviderSearch = "disable_provider_search"
         case fromDate = "from_date"
         case toDate = "to_date"
-        case locale = "locale"
         case returnConnectionId = "return_connection_id"
         case providerModes = "provider_modes"
         case categorize = "categorize"
@@ -83,20 +83,20 @@ public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
     }
 }
 
-public class SECreateSessionsParams: SEBaseConnectSessionsParams {
-    public let allowedCountries: [String]?
+open class SEConnectSessionsParams: SEBaseSessionsParams {
     public let consent: SEConsent
+    public let allowedCountries: [String]?
     public let credentialsStrategy: String?
     public let providerCode: String?
 
     public init(allowedCountries: [String]? = nil,
                 attempt: SEAttempt? = nil,
                 providerCode: String? = nil,
+                disableProviderSearch: Bool? = nil,
                 customFields: String? = nil,
                 dailyRefresh: Bool? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
-                locale: String? = nil,
                 returnConnectionId: Bool? = nil,
                 providerModes: [String]? = nil,
                 categorize: Bool? = nil,
@@ -116,7 +116,6 @@ public class SECreateSessionsParams: SEBaseConnectSessionsParams {
                    dailyRefresh: dailyRefresh,
                    fromDate: fromDate,
                    toDate: toDate,
-                   locale: locale,
                    returnConnectionId: returnConnectionId,
                    providerModes: providerModes,
                    categorize: categorize,
@@ -144,7 +143,7 @@ public class SECreateSessionsParams: SEBaseConnectSessionsParams {
     }
 }
 
-public class SERefreshSessionsParams: SEBaseConnectSessionsParams {
+public class SERefreshSessionsParams: SEBaseSessionsParams {
     public let excludeAccounts: [Int]?
     
     public init(excludeAccounts: [Int]? = nil,
@@ -153,7 +152,6 @@ public class SERefreshSessionsParams: SEBaseConnectSessionsParams {
                 dailyRefresh: Bool? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
-                locale: String? = nil,
                 returnConnectionId: Bool? = nil,
                 providerModes: [String]? = nil,
                 categorize: Bool? = nil,
@@ -168,7 +166,6 @@ public class SERefreshSessionsParams: SEBaseConnectSessionsParams {
                    dailyRefresh: dailyRefresh,
                    fromDate: fromDate,
                    toDate: toDate,
-                   locale: locale,
                    returnConnectionId: returnConnectionId,
                    providerModes: providerModes,
                    categorize: categorize,
@@ -191,7 +188,7 @@ public class SERefreshSessionsParams: SEBaseConnectSessionsParams {
 
 }
 
-public class SEReconnectSessionsParams: SEBaseConnectSessionsParams {
+public class SEReconnectSessionsParams: SEBaseSessionsParams {
     public let excludeAccounts: [Int]?
     public let credentialsStrategy: String?
     public let consent: SEConsent
@@ -202,7 +199,6 @@ public class SEReconnectSessionsParams: SEBaseConnectSessionsParams {
                 dailyRefresh: Bool? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
-                locale: String? = nil,
                 returnConnectionId: Bool? = nil,
                 providerModes: [String]? = nil,
                 categorize: Bool? = nil,
@@ -221,7 +217,6 @@ public class SEReconnectSessionsParams: SEBaseConnectSessionsParams {
                    dailyRefresh: dailyRefresh,
                    fromDate: fromDate,
                    toDate: toDate,
-                   locale: locale,
                    returnConnectionId: returnConnectionId,
                    providerModes: providerModes,
                    categorize: categorize,

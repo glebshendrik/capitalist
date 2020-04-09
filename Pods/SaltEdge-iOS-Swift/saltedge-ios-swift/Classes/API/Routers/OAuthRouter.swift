@@ -25,32 +25,36 @@ import Foundation
 
 enum OAuthRouter: Routable {
     case create(SECreateOAuthParams)
+    case authorize(ConnectionSecret, SEAuthorizeOAuthParams)
     case reconnect(ConnectionSecret, SEReconnectOAuthParams)
-    case refresh(ConnectionSecret, SEReconnectOAuthParams)
     
     var method: HTTPMethod {
-        return .post
+        switch self {
+        case .authorize: return .put
+        default: return .post
+        }
     }
     
-    var url: URL {
+    var query: String {
         switch self {
-        case .create: return APIEndpoints.baseURL.appendingPathComponent("oauth_providers/create")
-        case .reconnect: return APIEndpoints.baseURL.appendingPathComponent("oauth_providers/reconnect")
-        case .refresh: return APIEndpoints.baseURL.appendingPathComponent("connections/refresh")
+        case .create: return "oauth_providers/create"
+        case .authorize: return "oauth_providers/authorize"
+        case .reconnect: return "oauth_providers/reconnect"
         }
     }
     
     var headers: Headers {
         switch self {
         case .create: return SEHeaders.cached.sessionHeaders
-        case .reconnect(let secret, _), .refresh(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
+        case .authorize(let secret, _), .reconnect(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
         }
     }
     
     var parameters: ParametersEncodable? {
         switch self {
         case .create(let params): return params
-        case .reconnect(_, let params), .refresh(_, let params): return params
+        case .authorize(_, let params): return params
+        case .reconnect(_, let params): return params
         }
     }
 }

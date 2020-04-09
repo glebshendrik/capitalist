@@ -325,6 +325,7 @@
 		FAB5BE5323533D2A000466AE /* TransactionEditUpdatingExtenson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE5223533D2A000466AE /* TransactionEditUpdatingExtenson.swift */; };
 		FAB5BE5523533D87000466AE /* TransactionEditDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE5423533D87000466AE /* TransactionEditDataExtension.swift */; };
 		FAB5BE5823537CEF000466AE /* ActiveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB5BE5723537CEF000466AE /* ActiveViewModel.swift */; };
+		FAB71FDD243DC541006D432C /* ProviderConnectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB71FDC243DC541006D432C /* ProviderConnectionViewModel.swift */; };
 		FAB73795240E8D980094AB7F /* StartAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB73794240E8D980094AB7F /* StartAnimationViewController.swift */; };
 		FABA979722E1E36E00E03380 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA979622E1E36D00E03380 /* FormTextField.swift */; };
 		FABE54DA233A757F00DF2B70 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE54D9233A757F00DF2B70 /* Credit.swift */; };
@@ -803,6 +804,7 @@
 		FAB5BE5223533D2A000466AE /* TransactionEditUpdatingExtenson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditUpdatingExtenson.swift; sourceTree = "<group>"; };
 		FAB5BE5423533D87000466AE /* TransactionEditDataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditDataExtension.swift; sourceTree = "<group>"; };
 		FAB5BE5723537CEF000466AE /* ActiveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveViewModel.swift; sourceTree = "<group>"; };
+		FAB71FDC243DC541006D432C /* ProviderConnectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConnectionViewModel.swift; sourceTree = "<group>"; };
 		FAB73794240E8D980094AB7F /* StartAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartAnimationViewController.swift; sourceTree = "<group>"; };
 		FABA979622E1E36D00E03380 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		FABC034E23F45CAC00C0CB61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1322,11 +1324,13 @@
 		FA66D8272293D16700C21E8B /* ExpenseSources */ = {
 			isa = PBXGroup;
 			children = (
-				FA6DDE8322D4D0FE008D14FF /* Edit */,
+				FA0CAE0A21D3C1D900805288 /* ExpenseSourceEditViewController.swift */,
+				FA6DDE7D22D4D0B1008D14FF /* ExpenseSourceEditingExtension.swift */,
+				FA6DDE8122D4D0E6008D14FF /* ExpenseSourceUIExtension.swift */,
+				FA6DDE7B22D4CFFC008D14FF /* ExpenseSourceEditBankConnectionExtension.swift */,
+				FA0CAE0C21D3C1F100805288 /* ExpenseSourceEditTableController.swift */,
+				FA6DDE8322D4D0FE008D14FF /* Bank */,
 				FA16FC72223A82FA0053C273 /* ExpenseSourceSelectViewController.swift */,
-				FAC9BA6722AFD2E200310F6B /* ProviderConnectionViewController.swift */,
-				FA8AD0DF22C5F4040084AD19 /* ProvidersViewController.swift */,
-				FA7EDFFD22CDA0BD0054EAD3 /* AccountsViewController.swift */,
 				FAA5D569238BEA1500CC53AD /* ExpenseSourceInfoViewController.swift */,
 			);
 			path = ExpenseSources;
@@ -1374,10 +1378,7 @@
 				FA0CAE0621D266F100805288 /* ExpenseSourceViewModel.swift */,
 				FA0CAE1021D3C23000805288 /* ExpenseSourceEditViewModel.swift */,
 				FA16FC6E223A81F70053C273 /* ExpenseSourcesViewModel.swift */,
-				FA8AD0DD22C5F1C50084AD19 /* ProviderViewModel.swift */,
-				FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */,
-				FA7EDFFF22CDA1940054EAD3 /* AccountViewModel.swift */,
-				FA7EE00122CDA1A10054EAD3 /* AccountsViewModel.swift */,
+				FAB71FDE243DC78E006D432C /* Bank */,
 				FAA5D56B238BEAB400CC53AD /* ExpenseSourceInfoViewModel.swift */,
 			);
 			path = ExpenseSources;
@@ -1416,16 +1417,14 @@
 			path = Balance;
 			sourceTree = "<group>";
 		};
-		FA6DDE8322D4D0FE008D14FF /* Edit */ = {
+		FA6DDE8322D4D0FE008D14FF /* Bank */ = {
 			isa = PBXGroup;
 			children = (
-				FA0CAE0A21D3C1D900805288 /* ExpenseSourceEditViewController.swift */,
-				FA6DDE7D22D4D0B1008D14FF /* ExpenseSourceEditingExtension.swift */,
-				FA6DDE8122D4D0E6008D14FF /* ExpenseSourceUIExtension.swift */,
-				FA6DDE7B22D4CFFC008D14FF /* ExpenseSourceEditBankConnectionExtension.swift */,
-				FA0CAE0C21D3C1F100805288 /* ExpenseSourceEditTableController.swift */,
+				FAC9BA6722AFD2E200310F6B /* ProviderConnectionViewController.swift */,
+				FA8AD0DF22C5F4040084AD19 /* ProvidersViewController.swift */,
+				FA7EDFFD22CDA0BD0054EAD3 /* AccountsViewController.swift */,
 			);
-			path = Edit;
+			path = Bank;
 			sourceTree = "<group>";
 		};
 		FA6F2E902244C8B4008C160F /* Statistics */ = {
@@ -1622,6 +1621,18 @@
 			path = Actives;
 			sourceTree = "<group>";
 		};
+		FAB71FDE243DC78E006D432C /* Bank */ = {
+			isa = PBXGroup;
+			children = (
+				FA8AD0DD22C5F1C50084AD19 /* ProviderViewModel.swift */,
+				FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */,
+				FAB71FDC243DC541006D432C /* ProviderConnectionViewModel.swift */,
+				FA7EDFFF22CDA1940054EAD3 /* AccountViewModel.swift */,
+				FA7EE00122CDA1A10054EAD3 /* AccountsViewModel.swift */,
+			);
+			path = Bank;
+			sourceTree = "<group>";
+		};
 		FABE54E3233BF6D800DF2B70 /* Credits */ = {
 			isa = PBXGroup;
 			children = (
@@ -1738,8 +1749,8 @@
 		FAD88EF821AEA86E00BE7BC1 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				FA26813121B178A100FADED1 /* Resources */,
 				FAD88F0B21AEB22600BE7BC1 /* Assembly */,
+				FA26813121B178A100FADED1 /* Resources */,
 				FAD88F3321AEB89000BE7BC1 /* Helpers */,
 				FAD88F1821AEB62D00BE7BC1 /* Coordinators */,
 				FAD88F1921AEB63500BE7BC1 /* Services */,
@@ -2566,6 +2577,7 @@
 				FA0570F5232A6DA5002B4706 /* BorrowTableViewCell.swift in Sources */,
 				FAE05FA72356EA870014D034 /* TransactionEditDelegateExtension.swift in Sources */,
 				FA16FC7B223BA88F0053C273 /* SoundsManagerProtocol.swift in Sources */,
+				FAB71FDD243DC541006D432C /* ProviderConnectionViewModel.swift in Sources */,
 				FA30B4762285298B0017470C /* BalanceViewModel.swift in Sources */,
 				FA7176FF22683275008ADF94 /* GraphFilterTableViewCell.swift in Sources */,
 				FA8AD0E022C5F4040084AD19 /* ProvidersViewController.swift in Sources */,
@@ -3120,7 +3132,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 56;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
@@ -3129,7 +3141,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"xml2\"",
@@ -3229,7 +3241,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -3237,7 +3249,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"xml2\"",

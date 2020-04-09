@@ -38,7 +38,7 @@ let seCallbackHost: String = "connect"
  
  [See for more infromation](https://docs.saltedge.com/guides/connect/)
  */
-public class SEWebView: WKWebView {
+open class SEWebView: WKWebView {
     /**
      The state delegate of the connection that is currently processed. This object will be notified about events such as the state of the connection **(fetching, success, error)** and about any errors that will occur in the processing.
      
@@ -48,28 +48,63 @@ public class SEWebView: WKWebView {
     
     public init(frame: CGRect) {
         super.init(frame: frame, configuration: WKWebViewConfiguration())
-        self.navigationDelegate = self
+        navigationDelegate = self
+        uiDelegate = self
+        #if os(iOS)
+            tintColor = .black
+        #endif
+        allowsBackForwardNavigationGestures = true
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.navigationDelegate = self
+        navigationDelegate = self
+        uiDelegate = self
+        #if os(iOS)
+            tintColor = .black
+        #endif
+        allowsBackForwardNavigationGestures = true
+    }
+
+    private func handleBackForwardWebView(navigationAction: WKNavigationAction, urlRequest: URLRequest) {
+        if navigationAction.navigationType == .backForward {
+            load(urlRequest)
+        }
     }
 }
 
 extension SEWebView: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url, url.isCallback {
+        guard let url = navigationAction.request.url else { decisionHandler(.allow); return }
+
+        handleBackForwardWebView(navigationAction: navigationAction, urlRequest: navigationAction.request)
+
+        if url.isCallback {
             let (response, error) = url.callbackParameters
             if let data = response, error == nil {
                 self.stateDelegate?.webView(self, didReceiveCallbackWithResponse: data)
             } else if let error = error {
                 self.stateDelegate?.webView(self, didReceiveCallbackWithError: error)
             }
-            
+
             decisionHandler(.cancel)
         } else {
+            self.stateDelegate?.webView(self, didHandleRequestUrl: url)
             decisionHandler(.allow)
         }
+    }
+}
+
+extension SEWebView: WKUIDelegate {
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        guard let targetFrame = navigationAction.targetFrame else {
+            webView.load(navigationAction.request)
+            return nil
+        }
+
+        if !targetFrame.isMainFrame {
+            webView.load(navigationAction.request)
+        }
+        return self
     }
 }
