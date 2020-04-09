@@ -108,6 +108,7 @@ PODS:
   - IQKeyboardManager (6.2.0)
   - Locksmith (4.0.0)
   - MSPeekCollectionViewDelegateImplementation (2.0.0)
+  - myTrackerSDK (2.0.4)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -197,6 +198,7 @@ DEPENDENCIES:
   - IQKeyboardManager
   - Locksmith (~> 4.0)
   - MSPeekCollectionViewDelegateImplementation (~> 2.0)
+  - myTrackerSDK
   - PromiseKit (~> 6.5)
   - PromiseKit/Alamofire (~> 6.5)
   - RandomColorSwift (from `https://github.com/onevcat/RandomColorSwift`, branch `master`)
@@ -265,6 +267,7 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - InfiniteLayout
+    - myTrackerSDK
     - nanopb
     - PromisesObjC
     - SaltEdge-iOS-Swift
@@ -331,6 +334,7 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   MSPeekCollectionViewDelegateImplementation: 3091e9512b3cd03facdea3c02e57673a4a06246a
+  myTrackerSDK: cd0a1693064ae67b6069d9a3f81111083f6d9bf6
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
@@ -354,6 +358,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
 
-PODFILE CHECKSUM: 54b577a08df557908966973f291b4f5da542d713
+PODFILE CHECKSUM: f1d81d5d6d8d4b6f8fe9724f1b609a9907c5d617
 
 COCOAPODS: 1.8.0

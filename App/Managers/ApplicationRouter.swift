@@ -19,6 +19,7 @@ import Firebase
 import FirebaseCoreDiagnostics
 import FBSDKCoreKit
 import FirebaseDynamicLinks
+import MyTrackerSDK
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private let storyboards: [Infrastructure.Storyboard: UIStoryboard]
@@ -65,10 +66,29 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             handleIncomingDynamicLink(dynamicLink)
             return true
         }
-        return ApplicationDelegate.shared.application(app, open: url, options: options)
+        let myTrackerResult = MRMyTracker.handleOpen(url, options: options)
+        let fbResult = ApplicationDelegate.shared.application(app, open: url, options: options)
+        return myTrackerResult || fbResult
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        
+        let myTrackerResult = continueMyTrackerUserActivity(userActivity, restorationHandler: restorationHandler)
+        
+        let firebaseResult = continueFirebaseUserActivity(userActivity, restorationHandler: restorationHandler)
+        
+        return myTrackerResult || firebaseResult
+    }
+    
+    private func continueMyTrackerUserActivity(_ userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        
+        return MRMyTracker.continue(userActivity) { params -> Void in
+            guard let restorationHandlerParams = params as? [UIUserActivityRestoring]? else { return }
+            restorationHandler(restorationHandlerParams)
+        }
+    }
+    
+    private func continueFirebaseUserActivity(_ userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         guard let url = userActivity.webpageURL else { return false }
         
         return DynamicLinks.dynamicLinks().handleUniversalLink(url) { (dynamicLink, error) in
@@ -83,7 +103,9 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     func application(_ app: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return ApplicationDelegate.shared.application(app, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        let myTrackerResult = MRMyTracker.handleOpen(url, sourceApplication: sourceApplication, annotation: annotation)
+        let fbResult = ApplicationDelegate.shared.application(app, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        return myTrackerResult || fbResult
     }
     
     func start(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
@@ -184,6 +206,7 @@ extension ApplicationRouter {
         setupBiometric()
         setupSaltEdge()
         setupApphud()
+        setupMyTracker()
         setupAnalytics()
     }
     
@@ -266,9 +289,17 @@ extension ApplicationRouter {
         }
     }
     
+    private func setupMyTracker() {
+        MRMyTracker.setAttributionDelegate(self)
+    }
+    
     private func handleIncomingDynamicLink(_ dynamicLink: DynamicLink) {
-        guard let url = dynamicLink.url else { return }
-        analyticsManager.track(event: "dynamic_link", parameters: ["url": url.absoluteString])
+        handleIncomingDeeplinkURL(dynamicLink.url)
+    }
+    
+    private func handleIncomingDeeplinkURL(_ url: URL?) {
+        guard let url = url else { return }
+        analyticsManager.track(event: "deeplink_link", parameters: ["url": url.absoluteString])
         guard   let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
                 let queryItems = components.queryItems else { return }
         for queryItem in queryItems {
@@ -398,6 +429,13 @@ extension ApplicationRouter {
             return false
         }
         return appBuildNumber < minBuildNumber
+    }
+}
+
+extension ApplicationRouter : MRMyTrackerAttributionDelegate {
+    func didReceive(_ attribution: MRMyTrackerAttribution) {
+        guard let deeplink = attribution.deeplink, let url = URL(string: deeplink) else { return }
+        handleIncomingDeeplinkURL(url)
     }
 }
 

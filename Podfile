@@ -48,6 +48,7 @@ target 'Three Baskets' do
   pod 'Firebase/Analytics'
   pod 'Firebase/DynamicLinks'
   pod 'FBSDKCoreKit/Swift'
+  pod 'myTrackerSDK'
 end
 
 post_install do |installer|
