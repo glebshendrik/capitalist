@@ -11,11 +11,11 @@ import SideMenu
 
 extension MainViewController {
     var fastPressDuration: TimeInterval {
-        return 0.0525
+        return 0.3
     }
     
     var slowPressDuration: TimeInterval {
-        return 0.6
+        return 1.3
     }
     
     func setupUI() {

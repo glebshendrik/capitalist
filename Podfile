@@ -49,6 +49,7 @@ target 'Three Baskets' do
   pod 'Firebase/DynamicLinks'
   pod 'FBSDKCoreKit/Swift'
   pod 'myTrackerSDK'
+  pod "Haptica"
 end
 
 post_install do |installer|

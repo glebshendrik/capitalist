@@ -11,6 +11,7 @@ import UIKit
 import SwifterSwift
 import SwiftDate
 import AlamofireImage
+import Haptica
 
 extension UITableView {
     func reloadData(with animation: UITableView.RowAnimation) {        
@@ -788,5 +789,15 @@ extension Array {
             group[key] = (group[key] ?? []) + [value]
         }
         return group
+    }
+}
+
+extension UIView {
+    func haptic() {
+        if #available(iOS 13.0, *) {
+            Haptic.impact(.rigid).generate()
+        } else {
+            Haptic.impact(.heavy).generate()
+        }
     }
 }

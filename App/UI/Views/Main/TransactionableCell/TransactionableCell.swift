@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Haptica
 
 protocol EditableCellProtocol {
     var deleteButton: UIButton! { get }
@@ -183,7 +184,6 @@ extension UICollectionViewCell {
         editing
             ? startWiggling()
             : stopWiggling()
-        
         editableCell.setDeleteButton(enabled: editing && editableCell.canDelete, animated: animated)
         editableCell.setEditButton(enabled: editing, animated: animated)
         if editing {
@@ -193,8 +193,6 @@ extension UICollectionViewCell {
     
     func set(selected: Bool, animated: Bool = true) {
         guard let editableCell = self as? TransactionableCellProtocol else { return }
-        let feedbackGenerator = UISelectionFeedbackGenerator()
-        feedbackGenerator.prepare()
         
         selected
             ? scaleDown(animated: animated)
@@ -202,7 +200,7 @@ extension UICollectionViewCell {
         
         editableCell.setSelectionIndicator(hidden: !selected, animated: animated)
         if selected {
-            feedbackGenerator.selectionChanged()
+            haptic()
             editableCell.setDeleteButton(enabled: false, animated: animated)
             editableCell.setEditButton(enabled: false, animated: animated)
         }

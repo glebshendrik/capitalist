@@ -28,6 +28,7 @@ extension MainViewController {
         updateLongPressureRecognizers()
         updateTotalUI(animated: true)        
         updateMainButtonUI()
+        view.haptic()
     }
     
     func setSelecting(_ selecting: Bool, animated: Bool) {
@@ -43,6 +44,7 @@ extension MainViewController {
             completeTransactionInteraction()            
         }
         updateCollectionViews()
+        view.haptic()
     }
     
     func updateMainButtonUI() {

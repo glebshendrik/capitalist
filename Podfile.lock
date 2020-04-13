@@ -100,6 +100,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.5.1):
     - GoogleUtilities/Logger
+  - Haptica (3.0.2)
   - InfiniteLayout (0.4.2):
     - InfiniteLayout/Core (= 0.4.2)
   - InfiniteLayout/CocoaProxy (0.4.2)
@@ -194,6 +195,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
   - Firebase/DynamicLinks
+  - Haptica
   - InfiniteLayout
   - IQKeyboardManager
   - Locksmith (~> 4.0)
@@ -266,6 +268,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
+    - Haptica
     - InfiniteLayout
     - myTrackerSDK
     - nanopb
@@ -330,6 +333,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: a857c6a002d201b524dd4bc2ed7e7355ed07e785
   GoogleDataTransportCCTSupport: 32f75fbe904c82772fcbb6b6bd4525bfb6f2a862
   GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
+  Haptica: dc206651beeca25ab4744c633fbf0ae4d1e86baf
   InfiniteLayout: de51cfad9ed480a3e3a0af7d28242d3257c606d9
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
@@ -358,6 +362,6 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
 
-PODFILE CHECKSUM: f1d81d5d6d8d4b6f8fe9724f1b609a9907c5d617
+PODFILE CHECKSUM: a0220399513b0228f76a1201fb0cb2df9f1ecaee
 
 COCOAPODS: 1.8.0

@@ -8,6 +8,7 @@
 
 import Foundation
 import PromiseKit
+import Haptica
 
 class MainViewModel {
     private let incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol
@@ -379,7 +380,7 @@ class MainViewModel {
     }
     
     func set(selecting: Bool) {
-        self.selecting = selecting
+        self.selecting = selecting        
         if !selecting {
             resetTransactionables()
         }
