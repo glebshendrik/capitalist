@@ -46,6 +46,7 @@ struct Active : Decodable {
     let reminder: Reminder?
     let incomeSource: IncomeSource?
     let prototypeKey: String?
+    let accountConnection: AccountConnection? = nil
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -72,6 +73,7 @@ struct Active : Decodable {
         case alreadyPaidCents = "already_paid_cents"
         case incomeSource = "income_source"
         case prototypeKey = "prototype_key"
+//        case accountConnection = "account_connection"
     }
 }
 
@@ -90,6 +92,7 @@ struct ActiveCreationForm : Encodable, Validatable {
     let plannedIncomeType: ActiveIncomeType?
     let isIncomePlanned: Bool
     let reminderAttributes: ReminderNestedAttributes?
+    let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case activeTypeId = "active_type_id"
@@ -105,6 +108,7 @@ struct ActiveCreationForm : Encodable, Validatable {
         case plannedIncomeType = "planned_income_type"
         case isIncomePlanned = "is_income_planned"
         case reminderAttributes = "reminder_attributes"
+//        case accountConnectionAttributes = "account_connection_attributes"
     }
     
     func validate() -> [String : String]? {
@@ -154,6 +158,7 @@ struct ActiveUpdatingForm : Encodable, Validatable {
     let plannedIncomeType: ActiveIncomeType?
     let isIncomePlanned: Bool
     let reminderAttributes: ReminderNestedAttributes?
+    let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -166,6 +171,7 @@ struct ActiveUpdatingForm : Encodable, Validatable {
         case plannedIncomeType = "planned_income_type"
         case isIncomePlanned = "is_income_planned"
         case reminderAttributes = "reminder_attributes"
+//        case accountConnectionAttributes = "account_connection_attributes"
     }
     
     func encode(to encoder: Encoder) throws {

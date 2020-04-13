@@ -82,3 +82,6 @@
 
 /* Class = "UIButton"; normalTitle = "Обновить"; ObjectID = "yNZ-v7-cvU"; */
 "yNZ-v7-cvU.normalTitle" = "Update";
+
+/* Class = "UILabel"; text = "Выберите страну"; ObjectID = "EEG-eH-USG"; */
+"EEG-eH-USG.text" = "Выберите страну";

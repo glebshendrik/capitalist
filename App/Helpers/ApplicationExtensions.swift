@@ -333,7 +333,7 @@ extension UIViewController {
     func setupNavigationBarAppearance() {
         
         let attributes = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 18)!,
-                          NSAttributedString.Key.foregroundColor : UIColor.white]
+                          NSAttributedString.Key.foregroundColor : UIColor.by(.white100)]
         navigationController?.navigationBar.titleTextAttributes = attributes
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = false

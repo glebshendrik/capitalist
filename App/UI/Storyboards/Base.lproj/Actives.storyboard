@@ -253,7 +253,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" name="dark 2A314B"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="lRC-iT-3I6">
-                            <rect key="frame" x="0.0" y="1166" width="375" height="100"/>
+                            <rect key="frame" x="0.0" y="1218" width="375" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqV-qw-OqT">
@@ -310,12 +310,22 @@
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="27" id="uLh-Np-7on"/>
                                                             </constraints>
                                                         </imageView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogD-To-NgU" customClass="SVGKFastImageView">
+                                                            <rect key="frame" x="17" y="17" width="30" height="30"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="ogD-To-NgU" secondAttribute="height" multiplier="1:1" id="QFY-q6-sov"/>
+                                                                <constraint firstAttribute="width" constant="30" id="fuO-Hi-MNw"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" name="gray 1"/>
                                                     <constraints>
+                                                        <constraint firstItem="ogD-To-NgU" firstAttribute="centerY" secondItem="5fK-jf-xtp" secondAttribute="centerY" id="3yr-mg-Ycg"/>
                                                         <constraint firstAttribute="width" constant="64" id="4eH-4H-EMK"/>
                                                         <constraint firstAttribute="height" constant="64" id="C6D-4k-03d"/>
                                                         <constraint firstItem="kIk-HP-2J3" firstAttribute="centerX" secondItem="5fK-jf-xtp" secondAttribute="centerX" id="OEJ-0d-bXU"/>
+                                                        <constraint firstItem="ogD-To-NgU" firstAttribute="centerX" secondItem="5fK-jf-xtp" secondAttribute="centerX" id="ZE5-O2-CRF"/>
                                                         <constraint firstItem="kIk-HP-2J3" firstAttribute="centerY" secondItem="5fK-jf-xtp" secondAttribute="centerY" id="hZP-dg-nNI"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -649,8 +659,53 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="52" id="uhW-er-Hn1">
+                                        <rect key="frame" x="0.0" y="1008" width="375" height="52"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uhW-er-Hn1" id="thn-Ki-bPk">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0R-X6-5jR" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="4" width="327" height="48"/>
+                                                    <color key="backgroundColor" name="blue 1"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="48" id="c3R-8W-gfe"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                                    <color key="tintColor" name="white 1.0"/>
+                                                    <inset key="contentEdgeInsets" minX="31" minY="0.0" maxX="23" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="-16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <state key="normal" title="Подключить банк" image="bank-icon">
+                                                        <color key="titleColor" name="white 1.0"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                                            <color key="value" name="blue 1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                                            <color key="value" name="white 0.4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapBankButton:" destination="7dG-tz-VWF" eventType="touchUpInside" id="OUs-jH-OVe"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="D0R-X6-5jR" firstAttribute="centerX" secondItem="thn-Ki-bPk" secondAttribute="centerX" id="4dF-ti-aMJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="D0R-X6-5jR" secondAttribute="trailing" constant="24" id="ADi-jh-Soc"/>
+                                                <constraint firstAttribute="bottom" secondItem="D0R-X6-5jR" secondAttribute="bottom" id="WLO-df-DtG"/>
+                                                <constraint firstItem="D0R-X6-5jR" firstAttribute="leading" secondItem="thn-Ki-bPk" secondAttribute="leading" constant="24" id="yio-D6-374"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="Bet-6Z-EFy">
-                                        <rect key="frame" x="0.0" y="1008" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="1060" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bet-6Z-EFy" id="32G-6T-Fbx">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -680,7 +735,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="xUm-B0-SxV">
-                                        <rect key="frame" x="0.0" y="1073" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="1125" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xUm-B0-SxV" id="3UM-Jf-ca3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -731,11 +786,15 @@
                         <outlet property="alreadyPaidField" destination="uMb-02-8z0" id="hFk-2P-ROM"/>
                         <outlet property="annualPercentCell" destination="w3w-75-XAG" id="bW7-qs-V9x"/>
                         <outlet property="annualPercentField" destination="Umi-RM-YIn" id="vJE-70-foQ"/>
+                        <outlet property="bankButton" destination="D0R-X6-5jR" id="Z9V-L9-Nuq"/>
+                        <outlet property="bankCell" destination="uhW-er-Hn1" id="WOg-uj-ELN"/>
+                        <outlet property="bankIconView" destination="ogD-To-NgU" id="i4l-gf-ODh"/>
                         <outlet property="costField" destination="9nN-Oe-yC2" id="seh-vQ-wdp"/>
                         <outlet property="currencyField" destination="Bbu-h0-zRK" id="c3O-pL-GeU"/>
                         <outlet property="goalAmountCell" destination="tHL-TW-dSl" id="1iJ-US-Zo5"/>
                         <outlet property="goalAmountField" destination="Pue-Cj-rV9" id="RJe-Iw-Maw"/>
                         <outlet property="iconBackgroundView" destination="5fK-jf-xtp" id="8Pr-kQ-RxG"/>
+                        <outlet property="iconPen" destination="n5Z-Tw-pdk" id="m6w-QK-tXT"/>
                         <outlet property="iconView" destination="kIk-HP-2J3" id="G0z-Nt-yiu"/>
                         <outlet property="loaderImageView" destination="VyE-Ab-cMl" id="FMQ-u7-po5"/>
                         <outlet property="monthlyPaymentField" destination="P7q-6m-bSY" id="mrq-V3-3pP"/>
@@ -932,6 +991,7 @@
     <resources>
         <image name="adviser-message" width="140" height="140"/>
         <image name="asset-risk-default-icon" width="24" height="24"/>
+        <image name="bank-icon" width="17" height="17"/>
         <image name="bell-icon" width="16" height="16"/>
         <image name="close-icon" width="14.5" height="14.5"/>
         <image name="loader-1" width="55" height="31"/>

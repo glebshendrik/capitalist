@@ -16,8 +16,8 @@ enum APIRoute: URLRequestConvertible {
         switch UIApplication.shared.inferredEnvironment {
         case .debug:
 //            return "https://api.threebaskets.net"
-//            return "https://skrudzh-staging.herokuapp.com"
-            return "https://test.threebaskets.net"
+            return "https://skrudzh-staging.herokuapp.com"
+//            return "https://test.threebaskets.net"
         case .testFlight:
 //            return "https://api.threebaskets.net"
             return "https://test.threebaskets.net"
@@ -144,6 +144,7 @@ enum APIRoute: URLRequestConvertible {
     // ProviderConnections
     case indexProviderConnections(userId: Int, providerId: String)
     case createProviderConnection(form: ProviderConnectionCreationForm)
+//    case createSaltEdgeSession(userId: Int)
     
     // TransactionableExamples
     case indexTransactionableExamples(transactionableType: TransactionableType, basketType: BasketType?)

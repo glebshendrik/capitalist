@@ -19,6 +19,8 @@ protocol UIFactoryProtocol {
     
     func currenciesViewController(delegate: CurrenciesViewControllerDelegate) -> UINavigationController?
     
+    func countriesViewController(delegate: CountriesViewControllerDelegate) -> CountriesViewController?
+    
     func reminderEditViewController(delegate: ReminderEditViewControllerDelegate,
                                     viewModel: ReminderViewModel) -> UINavigationController?
     

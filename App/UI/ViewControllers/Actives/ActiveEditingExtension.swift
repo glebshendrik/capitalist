@@ -72,6 +72,14 @@ extension ActiveEditViewController : ActiveEditTableControllerDelegate {
     func didTapSave() {
         save()
     }
+    
+    func didTapBankButton() {
+        if viewModel.accountConnected {
+            removeAccountConnection()
+        } else {
+            showProviders()
+        }
+    }
 }
 
 extension ActiveEditViewController : IconsViewControllerDelegate {
@@ -113,5 +121,36 @@ extension ActiveEditViewController {
             })
         }        
         sheet(title: nil, actions: actions)
+    }
+}
+
+extension ActiveEditViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
+    func showProviders() {
+        slideUp(factory.providersViewController(delegate: self))
+    }
+    
+    func didConnectTo(_ providerViewModel: ProviderViewModel, providerConnection: ProviderConnection) {
+        showAccountsViewController(for: providerConnection)
+    }
+    
+    func showAccountsViewController(for providerConnection: ProviderConnection) {
+        let currencyCode = viewModel.isNew ? nil : viewModel.selectedCurrency?.code
+        slideUp(factory.accountsViewController(delegate: self,
+                                               providerConnection: providerConnection,
+                                               currencyCode: currencyCode))
+    }
+    
+    func didSelect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
+        connect(accountViewModel, providerConnection)
+    }
+    
+    func connect(_ accountViewModel: AccountViewModel, _ providerConnection: ProviderConnection) {
+        viewModel.connect(accountViewModel: accountViewModel, providerConnection: providerConnection)
+        updateUI()
+    }
+    
+    func removeAccountConnection() {
+        viewModel.removeAccountConnection()
+        updateUI()
     }
 }

@@ -32,6 +32,12 @@ class UIFactory : UIFactoryProtocol {
         return UINavigationController(rootViewController: currenciesViewController)
     }
     
+    func countriesViewController(delegate: CountriesViewControllerDelegate) -> CountriesViewController? {
+        let countriesViewController = router.viewController(.CountriesViewController) as? CountriesViewController
+        countriesViewController?.delegate = delegate
+        return countriesViewController
+    }
+    
     func reminderEditViewController(delegate: ReminderEditViewControllerDelegate,
                                     viewModel: ReminderViewModel) -> UINavigationController? {
         

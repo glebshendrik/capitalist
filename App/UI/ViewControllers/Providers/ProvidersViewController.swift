@@ -24,23 +24,30 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loader: UIImageView!
     @IBOutlet weak var searchField: UITextField!
-    @IBOutlet weak var searchClearButton: UIButton!
+    @IBOutlet weak var searchClearButton: UIButton!    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        updateUI()
         fetchProviders()
     }
     
     private func setupUI() {
         setupLoader()
         setupSearchBar()
+        setupNavigationBarUI()
     }
     
     private func setupLoader() {
         loader.showLoader()
         loader.isHidden = true
+    }
+    
+    func setupNavigationBarUI() {
+        setupNavigationBarAppearance()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "currency-icon") , style: .plain, target: self, action: #selector(didTapCountry(_:)))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.by(.blue1)
+        updateTitleUI()
     }
     
     private func setupSearchBar() {
@@ -50,15 +57,48 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
     
     private func updateUI() {
         tableView.reloadData()
+        updateTitleUI()
         updateSearchBar()
+    }
+    
+    private func updateTitleUI() {
+        let topText = NSLocalizedString("Выберите банк", comment: "Выберите банк")
+        let bottomText = viewModel.selectedCountryViewModel?.name ?? ""
+
+        let titleParameters = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 18)!,
+                               NSAttributedString.Key.foregroundColor : UIColor.by(.white100)]
+        let subtitleParameters = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 13)!,
+                                  NSAttributedString.Key.foregroundColor : UIColor.by(.white64)]
+
+        let title = NSMutableAttributedString(string: topText, attributes: titleParameters)
+        let subtitle = NSAttributedString(string: bottomText, attributes: subtitleParameters)
+
+        title.append(NSAttributedString(string: "\n"))
+        title.append(subtitle)
+
+        let size = title.size()
+
+        let width = size.width
+        guard let height = navigationController?.navigationBar.frame.size.height else {return}
+
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        titleLabel.attributedText = title
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+
+        navigationItem.titleView = titleLabel
     }
     
     private func updateSearchBar() {
         searchClearButton.isHidden = !viewModel.hasSearchQuery
+        searchField.isEnabled = !viewModel.loading
     }
     
     private func fetchProviders() {
         loader.isHidden = false
+        messagePresenterManager.showHUD(with: NSLocalizedString("Загружаем список банков...", comment: "Загружаем список банков..."))
+        viewModel.set(loading: true)
+        updateUI()
         firstly {
             viewModel.loadProviders()
         }.catch { e in
@@ -66,11 +106,14 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
             self.close()
         }.finally {
             self.loader.isHidden = true
+            self.messagePresenterManager.dismissHUD()
+            self.viewModel.set(loading: false)
             self.updateUI()
         }
     }
     
     @IBAction func didTapClearSearch(_ sender: Any) {
+        guard !viewModel.loading else { return }
         searchField.clear()
         searchField.resignFirstResponder()
         viewModel.searchQuery = nil
@@ -78,7 +121,13 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
     }
     
     @IBAction func didTapLoupe(_ sender: Any) {
+        guard !viewModel.loading else { return }
         searchField.becomeFirstResponder()
+    }
+    
+    @IBAction func didTapCountry(_ sender: Any) {
+        guard let countriesViewController = factory.countriesViewController(delegate: self) else { return }
+        modal(UINavigationController(rootViewController: countriesViewController))
     }
     
     @IBAction func didChangeSearchQuery(_ sender: Any) {
@@ -88,6 +137,16 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
     
     private func close() {
         presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ProvidersViewController: CountriesViewControllerDelegate {
+    func didSelectCountry(_ countryViewModel: CountryViewModel) {        
+        searchField.clear()
+        viewModel.clear()
+        viewModel.selectedCountryViewModel = countryViewModel
+        updateTitleUI()
+        fetchProviders()
     }
 }
 
@@ -115,6 +174,7 @@ extension ProvidersViewController: UITableViewDataSource {
 
 extension ProvidersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard !viewModel.loading else { return }
         
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -159,7 +219,8 @@ extension ProvidersViewController : ProviderConnectionViewControllerDelegate {
     
     func showProviderConnectionViewController(for providerViewModel: ProviderViewModel) {
         // navigationController?.
-        modal(factory.providerConnectionViewController(delegate: self, providerViewModel: providerViewModel))
+        guard let providerConnectionViewController = factory.providerConnectionViewController(delegate: self, providerViewModel: providerViewModel) else { return }
+        modal(UINavigationController(rootViewController: providerConnectionViewController))
     }
     
     func didConnectTo(_ providerViewModel: ProviderViewModel, providerConnection: ProviderConnection) {

@@ -266,5 +266,10 @@ extension ApplicationAssembly {
         container.registerForSkrudzhStoryboard(PasscodeViewController.self) { (r, c) in
             c.biometricVerificationManager = r.resolve(BiometricVerificationManagerProtocol.self)
         }
+        
+        // CountriesViewController
+        container.registerForSkrudzhStoryboard(CountriesViewController.self) { (r, c) in
+            c.viewModel = r.resolve(CountriesViewModel.self)
+        }
     }
 }

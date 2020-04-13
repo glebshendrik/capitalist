@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImageSVGCoder
 
 protocol ActiveEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didAppear()
@@ -24,11 +25,13 @@ protocol ActiveEditTableControllerDelegate : FormFieldsTableViewControllerDelega
     func didChange(annualPercent: String?)
     func didTapSetReminder()
     func didTapRemoveButton()
+    func didTapBankButton()
 }
 
 class ActiveEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var iconView: UIImageView!
-    
+    @IBOutlet weak var bankIconView: SVGKFastImageView!
+    @IBOutlet weak var iconPen: UIView!
     @IBOutlet weak var iconBackgroundView: UIView!
     
     @IBOutlet weak var activeTypeField: FormTapField!
@@ -46,6 +49,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var reminderButton: UIButton!
     @IBOutlet weak var reminderLabel: UILabel!
     
+    @IBOutlet weak var bankButton: HighlightButton!
     @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var reminderCell: UITableViewCell!
     
@@ -55,6 +59,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var monthlyPlannedIncomeCell: UITableViewCell!
     @IBOutlet weak var annualPercentCell: UITableViewCell!
     @IBOutlet weak var removeCell: UITableViewCell!
+    @IBOutlet weak var bankCell: UITableViewCell!
     
     var delegate: ActiveEditTableControllerDelegate?
         
@@ -187,5 +192,9 @@ class ActiveEditTableController : FormFieldsTableViewController {
     
     @IBAction func didTapRemoveButton(_ sender: UIButton) {
         delegate?.didTapRemoveButton()
+    }
+    
+    @IBAction func didTapBankButton(_ sender: Any) {
+        delegate?.didTapBankButton()
     }
 }

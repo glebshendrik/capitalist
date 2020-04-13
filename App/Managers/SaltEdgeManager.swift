@@ -13,6 +13,8 @@ import SaltEdge
 class SaltEdgeManager : SaltEdgeManagerProtocol {
     static let applicationURLString: String = "saltedge-api-three-baskets://home.local"
         
+    var providersCache: [String: [SEProvider]] = [:]
+    
     func set(appId: String, appSecret: String) {
         SERequestManager.shared.set(appId: appId, appSecret: appSecret)
     }
@@ -37,21 +39,36 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         
     }
     
-    func loadProviders(topCountry: String?) -> Promise<[SEProvider]> {
+    func loadProviders(country: String?) -> Promise<[SEProvider]> {
+        return  firstly {
+                    when(fulfilled: loadSaltEdgeProviders(country), loadSaltEdgeProviders("XO"))
+                }.map { countryProviders, electronicProviders in
+                    let providers = country == nil ? countryProviders : (countryProviders + electronicProviders)
+                    return self.sortProvidersByCountry(providers,
+                                                startingWith: country)
+                }
+    }
+    
+    private func loadSaltEdgeProviders(_ country: String?) -> Promise<[SEProvider]> {
+        if let country = country, let providers = providersCache[country] {
+            return Promise.value(providers)
+        }
         return Promise { seal in
-                        
-            SERequestManager.shared.getAllProviders { [weak self] response in
+            let params = SEProviderParams(countryCode: country,
+                                          mode: "web",
+                                          includeFakeProviders: false)
+            SERequestManager.shared.getAllProviders(with: params) { [weak self] response in
                 switch response {
                 case .success(let value):
                     guard let self = self else {
                         seal.reject(SaltEdgeError.cannotLoadProviders)
                         return
                     }
+                    if let country = country {
+                        self.providersCache[country] = value.data
+                    }
                     
-                    let providers = self.sortProvidersByCountry(value.data,
-                                                                startingWith: topCountry)
-                    
-                    seal.fulfill(providers)
+                    seal.fulfill(value.data)
                 case .failure(let error):
                     seal.reject(error)
                 }

@@ -80,6 +80,7 @@ class ActiveEditViewController : FormTransactionsDependableEditViewController {
         updateActiveIncomeTypeUI()
         updateReminderUI()
         updateRemoveButtonUI()
+        updateBankUI()
         updateTableUI(animated: false)
         focusFirstEmptyField()
     }

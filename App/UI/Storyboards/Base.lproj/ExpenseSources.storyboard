@@ -61,7 +61,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" name="dark 2A314B"/>
+                        <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstItem="bxN-YS-mzZ" firstAttribute="leading" secondItem="5dF-w9-bRB" secondAttribute="leading" constant="24" id="1IH-tT-An4"/>
                             <constraint firstItem="5dF-w9-bRB" firstAttribute="bottom" secondItem="bxN-YS-mzZ" secondAttribute="bottom" constant="24" id="9Ij-yg-GAK"/>
@@ -637,14 +637,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите банк" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P60-w0-g6o">
-                                <rect key="frame" x="16" y="8" width="343" height="21"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
-                                <color key="textColor" name="white 1.0"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EJK-sj-bcd">
-                                <rect key="frame" x="16" y="37" width="343" height="36"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="36"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vk1-sx-1cr">
                                         <rect key="frame" x="0.0" y="0.0" width="33" height="36"/>
@@ -699,14 +693,14 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lNt-Lj-Umt">
-                                <rect key="frame" x="0.0" y="81" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="46" width="375" height="1"/>
                                 <color key="backgroundColor" name="white 0.04"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Xnt-ra-JuC"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yXx-WL-jte">
-                                <rect key="frame" x="0.0" y="86" width="375" height="581"/>
+                                <rect key="frame" x="0.0" y="47" width="375" height="620"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProviderCell" id="0xd-CH-K0S" customClass="ProviderCell" customModule="Three_Baskets" customModuleProvider="target">
@@ -730,13 +724,13 @@
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmk-01-RDa" customClass="SVGKFastImageView">
                                                             <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="fmk-01-RDa" secondAttribute="height" multiplier="1:1" id="Reu-Py-RCf"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="36" id="Abm-7P-aQa"/>
                                                         <constraint firstAttribute="trailing" secondItem="fmk-01-RDa" secondAttribute="trailing" id="Md6-KO-TXn"/>
@@ -789,23 +783,20 @@
                                 <color key="tintColor" name="blue 1"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="black 2"/>
                         <constraints>
-                            <constraint firstItem="lNt-Lj-Umt" firstAttribute="top" secondItem="EJK-sj-bcd" secondAttribute="bottom" constant="8" id="4DT-zi-CMm"/>
-                            <constraint firstItem="P60-w0-g6o" firstAttribute="top" secondItem="VMu-su-b7l" secondAttribute="top" constant="8" id="4IS-f5-zhK"/>
+                            <constraint firstItem="lNt-Lj-Umt" firstAttribute="top" secondItem="EJK-sj-bcd" secondAttribute="bottom" constant="10" id="4d3-4I-gbH"/>
                             <constraint firstItem="ZCo-V0-GFh" firstAttribute="bottom" secondItem="yXx-WL-jte" secondAttribute="bottom" id="5pk-aZ-Lf6"/>
-                            <constraint firstItem="EJK-sj-bcd" firstAttribute="top" secondItem="P60-w0-g6o" secondAttribute="bottom" constant="8" id="Fpe-cB-oyW"/>
                             <constraint firstItem="ZCo-V0-GFh" firstAttribute="trailing" secondItem="EJK-sj-bcd" secondAttribute="trailing" constant="16" id="Ib6-x2-RGy"/>
                             <constraint firstItem="ZCo-V0-GFh" firstAttribute="trailing" secondItem="yXx-WL-jte" secondAttribute="trailing" id="Jkg-ra-uBE"/>
                             <constraint firstItem="8uA-dp-fyb" firstAttribute="centerY" secondItem="VMu-su-b7l" secondAttribute="centerY" id="Mta-O9-A9u"/>
                             <constraint firstItem="EJK-sj-bcd" firstAttribute="leading" secondItem="ZCo-V0-GFh" secondAttribute="leading" constant="16" id="R75-oD-Mpa"/>
-                            <constraint firstItem="P60-w0-g6o" firstAttribute="leading" secondItem="VMu-su-b7l" secondAttribute="leading" constant="16" id="Siz-AG-HK4"/>
                             <constraint firstItem="yXx-WL-jte" firstAttribute="leading" secondItem="ZCo-V0-GFh" secondAttribute="leading" id="VGW-kj-Zjx"/>
                             <constraint firstItem="8uA-dp-fyb" firstAttribute="centerX" secondItem="VMu-su-b7l" secondAttribute="centerX" id="aXz-jJ-G4u"/>
-                            <constraint firstAttribute="trailing" secondItem="P60-w0-g6o" secondAttribute="trailing" constant="16" id="caJ-se-Oxv"/>
                             <constraint firstItem="lNt-Lj-Umt" firstAttribute="leading" secondItem="VMu-su-b7l" secondAttribute="leading" id="d9m-5F-4YO"/>
                             <constraint firstAttribute="trailing" secondItem="lNt-Lj-Umt" secondAttribute="trailing" id="f8c-O6-za9"/>
-                            <constraint firstItem="yXx-WL-jte" firstAttribute="top" secondItem="lNt-Lj-Umt" secondAttribute="bottom" constant="4" id="ttU-e2-ekk"/>
+                            <constraint firstItem="EJK-sj-bcd" firstAttribute="top" secondItem="ZCo-V0-GFh" secondAttribute="top" id="q1g-4A-0Gm"/>
+                            <constraint firstItem="yXx-WL-jte" firstAttribute="top" secondItem="lNt-Lj-Umt" secondAttribute="bottom" id="ttU-e2-ekk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZCo-V0-GFh"/>
                     </view>
@@ -971,9 +962,6 @@
         </namedColor>
         <namedColor name="blue 1">
             <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="dark 2A314B">
-            <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gray 1">
             <color red="0.34099999070167542" green="0.34900000691413879" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

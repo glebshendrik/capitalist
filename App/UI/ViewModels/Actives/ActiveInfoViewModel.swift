@@ -22,6 +22,7 @@ enum ActiveInfoField : String {
     case annualIncome
     case monthlyPlannedIncome
     case reminder
+    case bank
     case statistics
     case costChange
     case transactionDevidents
@@ -39,6 +40,7 @@ enum ActiveInfoError : Error {
 
 class ActiveInfoViewModel : EntityInfoViewModel {
     private let activesCoordinator: ActivesCoordinatorProtocol
+    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
     
     var activeViewModel: ActiveViewModel?
     
@@ -46,6 +48,9 @@ class ActiveInfoViewModel : EntityInfoViewModel {
     var selectedIconURL: URL? = nil
     var isIncomePlanned: Bool = false
     var incomeSourceViewModel: IncomeSourceViewModel?
+    var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
+    
+    var selectedAccountViewModel: AccountViewModel? = nil
     
     var basketType: BasketType {
         return activeViewModel?.basketType ?? .joy
@@ -59,12 +64,28 @@ class ActiveInfoViewModel : EntityInfoViewModel {
         return activeViewModel
     }
     
+    var accountConnected: Bool {
+        guard let accountConnectionAttributes = accountConnectionAttributes else {
+            return false
+        }
+        
+        return accountConnectionAttributes.shouldDestroy == nil
+    }
+    
+    var bankButtonTitle: String {
+        return accountConnected
+            ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
+            : NSLocalizedString("Подключить банк", comment: "Подключить банк")
+    }
+    
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          creditsCoordinator: CreditsCoordinatorProtocol,
          borrowsCoordinator: BorrowsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
-         activesCoordinator: ActivesCoordinatorProtocol) {
+         activesCoordinator: ActivesCoordinatorProtocol,
+         bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.activesCoordinator = activesCoordinator
+        self.bankConnectionsCoordinator = bankConnectionsCoordinator
         super.init(transactionsCoordinator: transactionsCoordinator, creditsCoordinator: creditsCoordinator, borrowsCoordinator: borrowsCoordinator, accountCoordinator: accountCoordinator)
     }
     
@@ -78,6 +99,19 @@ class ActiveInfoViewModel : EntityInfoViewModel {
         }
         else {
             self.incomeSourceViewModel = nil
+        }
+        self.selectedAccountViewModel = nil
+        if let accountConnection = active?.active.accountConnection {
+            accountConnectionAttributes =
+                AccountConnectionNestedAttributes(id: accountConnection.id,
+                                                  providerConnectionId: accountConnection.providerConnection.id,
+                                                  accountId: accountConnection.accountId,
+                                                  accountName: accountConnection.accountName,
+                                                  nature: accountConnection.nature,
+                                                  currencyCode: accountConnection.currencyCode,
+                                                  balance: accountConnection.balance,
+                                                  connectionId: accountConnection.connectionId,
+                                                  shouldDestroy: nil)
         }
     }
     
@@ -151,6 +185,12 @@ class ActiveInfoViewModel : EntityInfoViewModel {
         
         fields.append(ReminderInfoField(fieldId: ActiveInfoField.reminder.rawValue,
                                         reminder: reminder))
+        
+//        fields.append(ButtonInfoField(fieldId: ExpenseSourceInfoField.bank.rawValue,
+//                                      title: bankButtonTitle,
+//                                      iconName: nil,
+//                                      isEnabled: true))
+        
         fields.append(contentsOf: [ButtonInfoField(fieldId: ActiveInfoField.statistics.rawValue,
                                                    title: NSLocalizedString("Статистика", comment: "Статистика"),
                                                    iconName: nil,
@@ -179,16 +219,51 @@ class ActiveInfoViewModel : EntityInfoViewModel {
     }
          
     private func updateForm() -> ActiveUpdatingForm {
+        let costCents = selectedAccountViewModel?.amountCents ?? activeViewModel?.active.costCents
+        
         return ActiveUpdatingForm(id: activeViewModel?.id,
                                   name: activeViewModel?.name,
                                   iconURL: selectedIconURL,
-                                  costCents: activeViewModel?.active.costCents,
+                                  costCents: costCents,
                                   monthlyPaymentCents: activeViewModel?.active.monthlyPaymentCents,
                                   annualIncomePercent: activeViewModel?.active.annualIncomePercent,
                                   monthlyPlannedIncomeCents: activeViewModel?.active.monthlyPlannedIncomeCents,
                                   goalAmountCents: activeViewModel?.active.goalAmountCents,
                                   plannedIncomeType: activeViewModel?.active.plannedIncomeType,
                                   isIncomePlanned: isIncomePlanned,
-                                  reminderAttributes: reminder.reminderAttributes)
+                                  reminderAttributes: reminder.reminderAttributes,
+                                  accountConnectionAttributes: accountConnectionAttributes)
+    }
+}
+
+// Bank Connection
+extension ActiveInfoViewModel {
+    func connect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
+        selectedIconURL = providerConnection.logoURL
+        selectedAccountViewModel = accountViewModel
+        
+        var accountConnectionId: Int? = nil
+        if  let accountConnectionAttributes = accountConnectionAttributes,
+            accountConnectionAttributes.accountId == accountViewModel.id {
+            
+            accountConnectionId = accountConnectionAttributes.id
+        }
+        
+        accountConnectionAttributes =
+            AccountConnectionNestedAttributes(id: accountConnectionId,
+                                              providerConnectionId: providerConnection.id,
+                                              accountId: accountViewModel.id,
+                                              accountName: accountViewModel.name,
+                                              nature: accountViewModel.nature,
+                                              currencyCode: accountViewModel.currencyCode,
+                                              balance: accountViewModel.amountCents ?? 0,
+                                              connectionId: providerConnection.connectionId,
+                                              shouldDestroy: nil)
+    }
+    
+    func removeAccountConnection() {
+        accountConnectionAttributes?.id = active?.accountConnection?.id
+        accountConnectionAttributes?.shouldDestroy = true
+        selectedIconURL = nil
     }
 }

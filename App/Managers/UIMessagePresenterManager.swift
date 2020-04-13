@@ -19,6 +19,7 @@ class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
     }
     
     func showHUD(with message: String) {
+        SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.setDefaultMaskType(.black)
         SVProgressHUD.show(withStatus: message)
     }

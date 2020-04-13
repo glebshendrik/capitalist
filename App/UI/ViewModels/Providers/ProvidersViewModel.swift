@@ -8,6 +8,7 @@
 
 import Foundation
 import PromiseKit
+import SaltEdge
 
 class ProvidersViewModel {
     private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
@@ -18,6 +19,8 @@ class ProvidersViewModel {
             filteredProviderViewModels = providerViewModels
         }
     }
+    
+    public private(set) var loading: Bool = false
     
     var numberOfProviders: Int {
         return filteredProviderViewModels.count
@@ -42,16 +45,50 @@ class ProvidersViewModel {
         }
     }
     
+    var selectedCountryViewModel: CountryViewModel? = nil
+    
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
+        setupCountry()
+    }
+    
+    func clear() {
+        providerViewModels = []
+        searchQuery = nil
+    }
+    
+    func set(loading: Bool) {
+        self.loading = loading
+    }
+    
+    private func setupCountry() {
+        guard let country = Locale.current.regionCode else { return }
+        selectedCountryViewModel = CountryViewModel(countryCode: country)
     }
     
     func loadProviders() -> Promise<Void> {
         return  firstly {
-                    bankConnectionsCoordinator.loadSaltEdgeProviders(topCountry: Locale.preferredLanguageCode.uppercased())
+                    bankConnectionsCoordinator.loadProviders(country: selectedCountryViewModel?.countryCode)
                 }.get { providers in
+//                    self.creatCSV(providers)
                     self.providerViewModels = providers.map { ProviderViewModel(provider: $0) }
                 }.asVoid()
+    }
+    
+    func creatCSV(_ providers: [SEProvider]) -> Void {
+        let fileName = "providers.csv"
+        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+        var csvText = ""
+        
+        providers.forEach { csvText.append("\($0.code)|\($0.name)|\($0.mode)|\($0.status)|\($0.customerNotifiedOnSignIn)|\($0.logoURL)\n") }
+        
+        do {
+            try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
+        } catch {
+            print("Failed to create file")
+            print("\(error)")
+        }
+        print(csvText)
     }
     
     func providerViewModel(at indexPath: IndexPath) -> ProviderViewModel? {        

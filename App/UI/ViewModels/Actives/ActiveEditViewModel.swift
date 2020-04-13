@@ -16,6 +16,7 @@ enum ActiveError : Error {
 class ActiveEditViewModel {
     let activesCoordinator: ActivesCoordinatorProtocol
     let accountCoordinator: AccountCoordinatorProtocol
+    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
     
     private var active: Active? = nil
     public private(set) var basketType: BasketType = .safe
@@ -54,6 +55,8 @@ class ActiveEditViewModel {
     var annualPercent: String? = nil
     var monthlyPlannedIncome: String? = nil
     
+    var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
+    
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
     var reminderTitle: String {
@@ -81,7 +84,21 @@ class ActiveEditViewModel {
     }
         
     var iconDefaultImageName: String { return TransactionableType.active.defaultIconName(basketType: basketType) }
+    
+    var accountConnected: Bool {
+        guard let accountConnectionAttributes = accountConnectionAttributes else {
+            return false
+        }
         
+        return accountConnectionAttributes.shouldDestroy == nil
+    }
+    
+    var bankButtonTitle: String {
+        return accountConnected
+            ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
+            : NSLocalizedString("Подключить банк", comment: "Подключить банк")
+    }
+    
     // Visibility
     var goalAmountFieldHidden: Bool {
         guard let selectedActiveType = selectedActiveType else { return true }
@@ -110,17 +127,42 @@ class ActiveEditViewModel {
         return !isNew
     }
     
+    var iconPenHidden: Bool {
+        return !canChangeIcon
+    }
+    
+    var customIconHidden: Bool {
+        return accountConnected
+    }
+    
+    var bankIconHidden: Bool {
+        return !accountConnected
+    }
+    
     var removeButtonHidden: Bool { return isNew }
         
     // Permissions
-    var canChangeCurrency: Bool { return isNew }
+    
+    var canChangeIcon: Bool {
+        return !accountConnected
+    }
+    
+    var canChangeCurrency: Bool {
+        return !accountConnected && isNew
+    }
+    
+    var canChangeAmount: Bool {
+        return !accountConnected
+    }
     
     var canChangeActiveType: Bool { return isNew }
         
     init(activesCoordinator: ActivesCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol,
+         bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.activesCoordinator = activesCoordinator
         self.accountCoordinator = accountCoordinator
+        self.bankConnectionsCoordinator = bankConnectionsCoordinator
     }
       
     func set(basketType: BasketType) {
@@ -148,6 +190,19 @@ class ActiveEditViewModel {
         self.annualPercent = active.annualIncomePercent?.percentDecimalString()
         self.monthlyPlannedIncome = active.monthlyPlannedIncomeCents?.moneyDecimalString(with: active.currency)
         self.reminderViewModel = ReminderViewModel(reminder: active.reminder)
+                
+        if let accountConnection = active.accountConnection {
+            accountConnectionAttributes =
+                AccountConnectionNestedAttributes(id: accountConnection.id,
+                                                  providerConnectionId: accountConnection.providerConnection.id,
+                                                  accountId: accountConnection.accountId,
+                                                  accountName: accountConnection.accountName,
+                                                  nature: accountConnection.nature,
+                                                  currencyCode: accountConnection.currencyCode,
+                                                  balance: accountConnection.balance,
+                                                  connectionId: accountConnection.connectionId,
+                                                  shouldDestroy: nil)
+        }
     }
     
     func loadData() -> Promise<Void> {
@@ -229,7 +284,8 @@ extension ActiveEditViewModel {
                                   alreadyPaidCents: alreadyPaid?.intMoney(with: selectedCurrency),
                                   plannedIncomeType: selectedActiveIncomeType,
                                   isIncomePlanned: isIncomePlanned,
-                                  reminderAttributes: reminderViewModel.reminderAttributes)
+                                  reminderAttributes: reminderViewModel.reminderAttributes,
+                                  accountConnectionAttributes: accountConnectionAttributes)
     }
     
     private func basketId(by basketType: BasketType) -> Int? {
@@ -267,6 +323,45 @@ extension ActiveEditViewModel {
                                   goalAmountCents: goal?.intMoney(with: selectedCurrency),
                                   plannedIncomeType: selectedActiveIncomeType,
                                   isIncomePlanned: isIncomePlanned,
-                                  reminderAttributes: reminderViewModel.reminderAttributes)
+                                  reminderAttributes: reminderViewModel.reminderAttributes,
+                                  accountConnectionAttributes: accountConnectionAttributes)
+    }
+}
+
+// Bank Connection
+extension ActiveEditViewModel {
+    func connect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
+        selectedCurrency = accountViewModel.currency
+        selectedIconURL = providerConnection.logoURL
+        
+        if name == nil {
+            name = accountViewModel.name
+        }
+        
+        cost = accountViewModel.amount
+                
+        var accountConnectionId: Int? = nil
+        if  let accountConnectionAttributes = accountConnectionAttributes,
+            accountConnectionAttributes.accountId == accountViewModel.id {
+            
+            accountConnectionId = accountConnectionAttributes.id
+        }
+        
+        accountConnectionAttributes =
+            AccountConnectionNestedAttributes(id: accountConnectionId,
+                                              providerConnectionId: providerConnection.id,
+                                              accountId: accountViewModel.id,
+                                              accountName: accountViewModel.name,
+                                              nature: accountViewModel.nature,
+                                              currencyCode: accountViewModel.currencyCode,
+                                              balance: accountViewModel.amountCents ?? 0,
+                                              connectionId: providerConnection.connectionId,
+                                              shouldDestroy: nil)
+    }
+    
+    func removeAccountConnection() {
+        accountConnectionAttributes?.id = active?.accountConnection?.id
+        accountConnectionAttributes?.shouldDestroy = true
+        selectedIconURL = nil
     }
 }

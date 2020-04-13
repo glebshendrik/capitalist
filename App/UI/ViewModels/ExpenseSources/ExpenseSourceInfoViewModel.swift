@@ -117,10 +117,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                          value: expenseSourceViewModel.credit))
         }
         
-        fields.append(ButtonInfoField(fieldId: ExpenseSourceInfoField.bank.rawValue,
-                                      title: bankButtonTitle,
-                                      iconName: nil,
-                                      isEnabled: true))
+//        fields.append(ButtonInfoField(fieldId: ExpenseSourceInfoField.bank.rawValue,
+//                                      title: bankButtonTitle,
+//                                      iconName: nil,
+//                                      isEnabled: true))
         
         
         fields.append(contentsOf: [ButtonInfoField(fieldId: ExpenseSourceInfoField.statistics.rawValue,

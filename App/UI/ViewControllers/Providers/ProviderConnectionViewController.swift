@@ -33,6 +33,12 @@ class ProviderConnectionViewController : UIViewController, UIMessagePresenterMan
     
     private func setupUI() {
         webView.stateDelegate = self
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar() {
+        setupNavigationBarAppearance()
+        navigationItem.title = NSLocalizedString("Подключение к банку", comment: "Подключение к банку")
     }
     
     private func connect() {

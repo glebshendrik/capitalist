@@ -20,7 +20,7 @@ protocol SaltEdgeManagerProtocol {
     func set(appId: String, appSecret: String)
     func set(customerSecret: String)
     func createCustomer(identifier: String) -> Promise<String>
-    func loadProviders(topCountry: String?) -> Promise<[SEProvider]>
+    func loadProviders(country: String?) -> Promise<[SEProvider]>
     func createConnectSession(provider: SEProvider, languageCode: String) -> Promise<URL>
     func getConnection(secret: String) -> Promise<SEConnection>
     func removeConnection(secret: String) -> Promise<Void>

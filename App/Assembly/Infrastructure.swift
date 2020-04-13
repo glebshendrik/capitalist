@@ -119,6 +119,7 @@ struct Infrastructure {
         case EntityInfoViewController
         case AppUpdateViewController
         case PasscodeViewController
+        case CountriesViewController
         
         // Profile
         case ProfileViewController
@@ -198,7 +199,8 @@ struct Infrastructure {
                  .ReminderEditViewController,
                  .EntityInfoViewController,
                  .AppUpdateViewController,
-                 .PasscodeViewController:
+                 .PasscodeViewController,
+                 .CountriesViewController:
                 return .Common
             case .ProfileViewController,
                  .ChangePasswordViewController:

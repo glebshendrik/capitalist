@@ -37,11 +37,11 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
                             appSecret: "qwAHuXb94vnQXZIzQ1Mw-vQrvcQZNawtq3Oy2706bDY")
     }
     
-    func loadSaltEdgeProviders(topCountry: String?) -> Promise<[SEProvider]> {
+    func loadProviders(country: String?) -> Promise<[SEProvider]> {
         return  firstly {
                     updateCustomerSecret()
-                }.then { secret in
-                    self.saltEdgeManager.loadProviders(topCountry: topCountry)
+                }.then { secret in                    
+                    self.saltEdgeManager.loadProviders(country: country)
                 }
     }
     

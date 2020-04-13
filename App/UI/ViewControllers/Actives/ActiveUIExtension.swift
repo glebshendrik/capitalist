@@ -51,9 +51,15 @@ extension ActiveEditViewController {
     }
     
     func updateIconUI() {
-        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.iconDefaultImageName, renderingMode: .alwaysTemplate)        
-        tableController.iconBackgroundView.backgroundColor = viewModel.basketType.iconBackgroundColor        
+        tableController.iconPen.isHidden = viewModel.iconPenHidden
+        tableController.iconView.isHidden = viewModel.customIconHidden
+        tableController.bankIconView.isHidden = viewModel.bankIconHidden
+        
+        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.iconDefaultImageName, renderingMode: .alwaysTemplate)
+        tableController.iconBackgroundView.backgroundColor = viewModel.basketType.iconBackgroundColor
         tableController.iconView.tintColor = UIColor.by(.white100)
+        
+        tableController.bankIconView.sd_setImage(with: viewModel.selectedIconURL, completed: nil)        
     }
     
     func updateTextFieldsUI() {
@@ -123,6 +129,14 @@ extension ActiveEditViewController {
         tableController.set(cell: tableController.annualPercentCell, hidden: viewModel.annualPercentFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.reminderCell, hidden: viewModel.reminderHidden, animated: false, reload: false)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: false, reload: false)
+//        tableController.set(cell: tableController.bankCell, hidden: true, animated: animated, reload: false)
         tableController.reloadData(animated: animated)
+    }
+    
+    func updateBankUI() {
+        tableController.bankButton.backgroundColor = viewModel.accountConnected
+            ? UIColor.by(.gray1)
+            : UIColor.by(.blue1)        
+        tableController.bankButton.setTitle(viewModel.bankButtonTitle, for: .normal)
     }
 }

@@ -50,7 +50,8 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
 
 extension ExpenseSourceInfoViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
     func showProviders() {
-        slideUp(factory.providersViewController(delegate: self))
+        guard let providersViewController = factory.providersViewController(delegate: self) else { return }
+        modal(UINavigationController(rootViewController: providersViewController))
     }
     
     func didConnectTo(_ providerViewModel: ProviderViewModel, providerConnection: ProviderConnection) {
