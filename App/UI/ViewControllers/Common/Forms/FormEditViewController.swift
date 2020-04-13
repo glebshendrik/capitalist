@@ -11,6 +11,8 @@ import PromiseKit
 
 class FormEditViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
         
+    var isSaving: Bool = false
+    
     var navigationBarTintColor: UIColor? {
         return UIColor.by(.black2)
     }
@@ -69,6 +71,8 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     }
     
     func save() {
+        guard !isSaving else { return }
+        isSaving = true
         view.endEditing(true)
         operationStarted()
         
@@ -88,6 +92,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
                 self.handleSave(error)
             }
         }.finally {
+            self.isSaving = false
             self.operationFinished()
         }
     }

@@ -129,7 +129,7 @@ extension ActiveEditViewController {
         tableController.set(cell: tableController.annualPercentCell, hidden: viewModel.annualPercentFieldHidden, animated: false, reload: false)
         tableController.set(cell: tableController.reminderCell, hidden: viewModel.reminderHidden, animated: false, reload: false)
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: false, reload: false)
-//        tableController.set(cell: tableController.bankCell, hidden: true, animated: animated, reload: false)
+        tableController.set(cell: tableController.bankCell, hidden: true, animated: animated, reload: false)
         tableController.reloadData(animated: animated)
     }
     
