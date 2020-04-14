@@ -14,9 +14,22 @@ import SafariServices
 
 class FeatureDescriptionCollectionViewCell : UICollectionViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionImageView: UIImageView!
+    
+    var viewModel: FeatureDescriptionViewModel? {
+        didSet {
+            updateUI()
+        }
+    }
+    
+    func updateUI() {
+        descriptionLabel.text = viewModel?.description
+        guard let viewModel = viewModel else { return }
+        descriptionImageView.image = UIImage(named: viewModel.imageName)
+    }
 }
 
-typealias ProductViewContainer = (background: UIView, sign: UIImageView, title: UILabel, subtitle: UILabel, cell: UITableViewCell)
+typealias ProductViewContainer = (background: UIView, title: UILabel, subtitle: UILabel, titleContainer: UIView, subtitleContainer: UIView, delimiter: UIView, discountButton: UIButton)
 
 class SubscriptionViewController : FormFieldsTableViewController, ApplicationRouterDependantProtocol, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol {
     
@@ -29,25 +42,25 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
     @IBOutlet weak var featuresPageControl: UIPageControl!
     
     @IBOutlet weak var firstProductBackground: UIView!
-    @IBOutlet weak var firstProductSelectedSign: UIImageView!
+    @IBOutlet weak var firstProductDiscountButton: UIButton!
     @IBOutlet weak var firstProductTitleLabel: UILabel!
     @IBOutlet weak var firstProductSubtitleLabel: UILabel!
+    @IBOutlet weak var firstProductDelimeter: UIView!
+    @IBOutlet weak var firstProductSubtitleContainer: UIView!
+    @IBOutlet weak var firstProductTitleContainer: UIView!
     
     @IBOutlet weak var secondProductBackground: UIView!
-    @IBOutlet weak var secondProductSelectedSign: UIImageView!
+    @IBOutlet weak var secondProductDiscountButton: UIButton!
     @IBOutlet weak var secondProductTitleLabel: UILabel!
     @IBOutlet weak var secondProductSubtitleLabel: UILabel!
+    @IBOutlet weak var secondProductDelimeter: UIView!
+    @IBOutlet weak var secondProductSubtitleContainer: UIView!
+    @IBOutlet weak var secondProductTitleContainer: UIView!
     
-    @IBOutlet weak var thirdProductBackground: UIView!
-    @IBOutlet weak var thirdProductSelectedSign: UIImageView!
-    @IBOutlet weak var thirdProductTitleLabel: UILabel!
-    @IBOutlet weak var thirdProductSubtitleLabel: UILabel!
-    
-    @IBOutlet weak var firstProductCell: UITableViewCell!
-    @IBOutlet weak var secondProductCell: UITableViewCell!
-    @IBOutlet weak var thirdProductCell: UITableViewCell!
+    @IBOutlet weak var productsCell: UITableViewCell!
     
     @IBOutlet weak var purchaseSubtitleLabel: UILabel!
+    @IBOutlet weak var discountDescriptionLabel: UILabel!
     
     private var productContainers: [SubscriptionProductId : ProductViewContainer] = [:]
     
@@ -66,20 +79,15 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
     }
     
     @IBAction func didTapFirstProduct(_ sender: Any) {
-        viewModel.selectedProductId = .first
+        viewModel.selectedProductId = .monthly
         updateUI()
     }
     
     @IBAction func didTapSecondProduct(_ sender: Any) {
-        viewModel.selectedProductId = .second
+        viewModel.selectedProductId = .yearly
         updateUI()
     }
-    
-    @IBAction func didTapThirdProduct(_ sender: Any) {
-        viewModel.selectedProductId = .third
-        updateUI()
-    }
-    
+        
     @IBAction func didTapContinueButton(_ sender: Any) {
         purchase()
     }
@@ -176,30 +184,29 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
     }
     
     private func setupProductsUI() {
-        productContainers = [.first : (background: firstProductBackground,
-                                       sign: firstProductSelectedSign,
-                                       title: firstProductTitleLabel,
-                                       subtitle: firstProductSubtitleLabel,
-                                       cell: firstProductCell),
-                             .second : (background: secondProductBackground,
-                                        sign: secondProductSelectedSign,
+        productContainers = [.monthly : (background: firstProductBackground,
+                                         title: firstProductTitleLabel,
+                                         subtitle: firstProductSubtitleLabel,
+                                         titleContainer: firstProductTitleContainer,
+                                         subtitleContainer: firstProductSubtitleContainer,
+                                         delimiter: firstProductDelimeter,
+                                         discountButton: firstProductDiscountButton),
+                             .yearly : (background: secondProductBackground,
                                         title: secondProductTitleLabel,
                                         subtitle: secondProductSubtitleLabel,
-                                        cell: secondProductCell),
-                             .third : (background: thirdProductBackground,
-                                       sign: thirdProductSelectedSign,
-                                       title: thirdProductTitleLabel,
-                                       subtitle: thirdProductSubtitleLabel,
-                                       cell: thirdProductCell)]
+                                        titleContainer: secondProductTitleContainer,
+                                        subtitleContainer: secondProductSubtitleContainer,
+                                        delimiter: secondProductDelimeter,
+                                        discountButton: secondProductDiscountButton)]
     }
     
     private func updateUI(reload: Bool = true) {
         updatePurchaseUI()
-        updateProductUI(by: .first)
-        updateProductUI(by: .second)
-        updateProductUI(by: .third)
+        updateDiscountDescriptionUI()
+        updateProductUI(by: .monthly)
+        updateProductUI(by: .yearly)
         if reload {
-            updateTable()
+            updateTable(animated: false)
         }
     }
     
@@ -207,28 +214,24 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
         purchaseSubtitleLabel.text = viewModel.selectedProduct?.purchaseTitle
     }
     
+    private func updateDiscountDescriptionUI() {
+        discountDescriptionLabel.text = viewModel.selectedProduct?.discountDescription
+    }
+    
     private func updateProductUI(by id: SubscriptionProductId) {
-        guard let productContainer = productContainers[id] else { return }
         guard let productViewModel = viewModel.productViewModel(by: id) else {
-            set(cell: productContainer.cell, hidden: true, animated: false, reload: false)
             return
         }
-        set(cell: productContainer.cell, hidden: false, animated: false, reload: false)
-        setProductBy(id, selected: productViewModel.isSelected)
-        updateProductBy(id, title: productViewModel.title, subtitle: productViewModel.subtitle)
+        productContainers[id]?.background.borderColor = UIColor.by(.blue1)
+        productContainers[id]?.background.borderWidth = productViewModel.isSelected ? 3.0 : 0.0
+        productContainers[id]?.title.text = productViewModel.pricePerPeriod
+        productContainers[id]?.subtitle.text = productViewModel.trialTitle
+        productContainers[id]?.subtitleContainer.isHidden = !productViewModel.hasTrial
+        productContainers[id]?.delimiter.isHidden = !productViewModel.hasTrial
+        productContainers[id]?.discountButton.isHidden = !productViewModel.hasDiscount
+        productContainers[id]?.discountButton.setTitle(productViewModel.discountTitle, for: .normal)
     }
-    
-    private func setProductBy(_ id: SubscriptionProductId, selected: Bool) {
-        productContainers[id]?.background.backgroundColor = selected ? UIColor.by(.blue1) : UIColor.by(.white12)
-        productContainers[id]?.sign.isHidden = !selected
-    }
-    
-    private func updateProductBy(_ id: SubscriptionProductId, title: String, subtitle: String?) {
-        productContainers[id]?.title.text = title
-        productContainers[id]?.subtitle.text = subtitle
-        productContainers[id]?.subtitle.isHidden = subtitle == nil
-    }
-    
+        
     private func show(url: String) {
         guard let url = URL(string: url) else { return }
         let browser = SFSafariViewController(url: url)
@@ -248,9 +251,9 @@ extension SubscriptionViewController : UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard   let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeatureDescriptionCollectionViewCell", for: featuresCollectionView.indexPath(from: indexPath)) as? FeatureDescriptionCollectionViewCell,
-                let featureDescription = viewModel.featureDescription(by: featuresCollectionView.indexPath(from: indexPath)) else { return UICollectionViewCell() }
+                let featureDescriptionViewModel = viewModel.featureDescriptionViewModel(by: featuresCollectionView.indexPath(from: indexPath)) else { return UICollectionViewCell() }
         
-        cell.descriptionLabel.text = featureDescription
+        cell.viewModel = featureDescriptionViewModel
         
         return cell
     }
