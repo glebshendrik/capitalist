@@ -17,8 +17,6 @@ extension MainViewController {
     
     func transactionSource(collectionView: UICollectionView, indexPath: IndexPath) -> TransactionSource? {
         switch collectionView {
-        case incomeSourcesCollectionView:
-            return viewModel.incomeSourceViewModel(at: indexPath)
         case expenseSourcesCollectionView:
             return viewModel.expenseSourceViewModel(at: indexPath)
         case riskActivesCollectionView:
@@ -198,8 +196,7 @@ extension MainViewController : TransactionControllerDelegate {
     }
     
     func sourceCollectionViews() -> [UICollectionView] {
-        return [incomeSourcesCollectionView,
-                expenseSourcesCollectionView,
+        return [expenseSourcesCollectionView,
                 riskActivesCollectionView,
                 safeActivesCollectionView]
     }
@@ -212,8 +209,7 @@ extension MainViewController : TransactionControllerDelegate {
     }
     
     func allCollectionViews() -> [UICollectionView] {
-        return [incomeSourcesCollectionView,
-                expenseSourcesCollectionView,
+        return [expenseSourcesCollectionView,
                 joyExpenseCategoriesCollectionView,
                 riskActivesCollectionView,
                 safeActivesCollectionView]

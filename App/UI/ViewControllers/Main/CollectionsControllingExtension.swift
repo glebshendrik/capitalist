@@ -11,7 +11,6 @@ import UIKit
 extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         switch collectionView {
-        case incomeSourcesCollectionView:           return 1
         case expenseSourcesCollectionView:          return 1
         case joyExpenseCategoriesCollectionView:    return 1
         case riskActivesCollectionView:             return 1
@@ -22,7 +21,6 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
-        case incomeSourcesCollectionView:           return viewModel.numberOfIncomeSources
         case expenseSourcesCollectionView:          return viewModel.numberOfExpenseSources
         case joyExpenseCategoriesCollectionView:    return viewModel.numberOfJoyExpenseCategories
         case riskActivesCollectionView:             return viewModel.numberOfRiskActives
@@ -35,7 +33,6 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         
         func collectionViewCell() -> UICollectionViewCell {
             switch collectionView {
-            case incomeSourcesCollectionView:           return incomeSourceCollectionViewCell(forItemAt: indexPath)
             case expenseSourcesCollectionView:          return expenseSourceCollectionViewCell(forItemAt: indexPath)
             case joyExpenseCategoriesCollectionView:    return expenseCategoryCollectionViewCell(forItemAt: indexPath,
                                                                                                  basketType: .joy)
@@ -76,8 +73,6 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
         switch collectionView {
-        case incomeSourcesCollectionView:           moveIncomeSource(from: sourceIndexPath,
-                                                                     to: destinationIndexPath)
         case expenseSourcesCollectionView:          moveExpenseSource(from: sourceIndexPath,
                                                                       to: destinationIndexPath)
         case joyExpenseCategoriesCollectionView:    moveExpenseCategory(from: sourceIndexPath,
@@ -97,7 +92,6 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
         guard !isEditingItems else { return }
         
         switch collectionView {
-        case incomeSourcesCollectionView:           didSelectIncomeSource(at: indexPath)
         case expenseSourcesCollectionView:          didSelectExpenseSource(at: indexPath)
         case joyExpenseCategoriesCollectionView:    didSelectExpenseCategory(at: indexPath, basketType: .joy)
         case riskActivesCollectionView:             didSelectActive(at: indexPath, basketType: .risk)
@@ -109,7 +103,6 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
 
 extension MainViewController {
     func updateCollectionViews(animated: Bool = true) {
-        update(incomeSourcesCollectionView, animated: animated)
         update(expenseSourcesCollectionView, animated: animated)
         update(joyExpenseCategoriesCollectionView, animated: animated)
         update(riskActivesCollectionView, animated: animated)
@@ -142,9 +135,8 @@ extension MainViewController {
     func scrollDirection(of collectionView: UICollectionView?) -> UICollectionView.ScrollDirection? {
         guard let collectionView = collectionView else { return nil }
         
-        switch collectionView {
-        case incomeSourcesCollectionView,
-             expenseSourcesCollectionView:
+        switch collectionView {        
+        case expenseSourcesCollectionView:
             return .horizontal
         case joyExpenseCategoriesCollectionView,
              safeActivesCollectionView,

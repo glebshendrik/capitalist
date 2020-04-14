@@ -19,7 +19,6 @@ extension MainViewController {
     }
     
     func setupUI() {
-        setupIncomeSourcesCollectionView()
         setupExpenseSourcesCollectionView()
         setupBasketsItemsCollectionView()
         setupBasketsTabs()
@@ -32,12 +31,7 @@ extension MainViewController {
         setupRearrangeController()
         updateMainButtonUI()
     }
-    
-    private func setupIncomeSourcesCollectionView() {
-        incomeSourcesCollectionView.delegate = self
-        incomeSourcesCollectionView.dataSource = self
-    }
-    
+        
     private func setupExpenseSourcesCollectionView() {
         expenseSourcesCollectionView.delegate = self
         expenseSourcesCollectionView.dataSource = self
@@ -70,18 +64,15 @@ extension MainViewController {
     private func setupMainMenu() {
         SideMenuManager.default.addPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
-        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.incomeSourcesCollectionView)
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.expenseSourcesCollectionView)
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.basketsContentScrollView)        
     }
     
     private func setupLoaders() {
-        incomeSourcesLoader.showLoader()
         expenseSourcesLoader.showLoader()
         joyExpenseCategoriesLoader.showLoader()
         riskActivesLoader.showLoader()
         safeActivesLoader.showLoader()
-        set(incomeSourcesActivityIndicator, hidden: true, animated: false)
         set(expenseSourcesActivityIndicator, hidden: true, animated: false)
         set(joyExpenseCategoriesActivityIndicator, hidden: true, animated: false)
         set(riskActivesActivityIndicator, hidden: true, animated: false)
@@ -89,7 +80,6 @@ extension MainViewController {
     }
     
     private func setupGestureRecognizers() {
-        setupRearrangeGestureRecognizer(for: incomeSourcesCollectionView)
         setupRearrangeGestureRecognizer(for: expenseSourcesCollectionView)
         setupRearrangeGestureRecognizer(for: joyExpenseCategoriesCollectionView)
         setupRearrangeGestureRecognizer(for: riskActivesCollectionView)
@@ -132,7 +122,6 @@ extension MainViewController {
         layoutBasketItems(collectionView: joyExpenseCategoriesCollectionView)
         layoutBasketItems(collectionView: riskActivesCollectionView)
         layoutBasketItems(collectionView: safeActivesCollectionView)
-        layoutIncomeSourcesCollectionView()
         layoutExpenseSourcesCollectionView()
     }
     
@@ -144,18 +133,9 @@ extension MainViewController {
                            verticalInset: 6)
     }
     
-    
-    private func layoutIncomeSourcesCollectionView() {
-        fillLayout(collectionView: incomeSourcesCollectionView,
-                   itemHeight: 48.0,
-                   innerSpace: 2.0,
-                   outerSpace: 1.0,
-                   columns: 3)
-    }
-    
     private func layoutExpenseSourcesCollectionView() {
         fillLayout(collectionView: expenseSourcesCollectionView,
-                   itemHeight: 68.0,
+                   itemHeight: 96.0,
                    innerSpace: 2.0,
                    outerSpace: 1.0,
                    columns: 3)
@@ -198,8 +178,8 @@ extension MainViewController {
             layout.rows = 1
             layout.edgeInsets = UIEdgeInsets(horizontal: outerSpace * 2, vertical: 0)
             layout.sectionEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: containerWidth * 0.333 - outerSpace)
-            let width = CGFloat(containerWidth - layout.edgeInsets.horizontal - CGFloat(layout.columns - 1) * innerSpace) / CGFloat(layout.columns)
-            
+//            let width = CGFloat(containerWidth - layout.edgeInsets.horizontal - CGFloat(layout.columns - 1) * innerSpace) / CGFloat(layout.columns)
+            let width: CGFloat = 161.0
             layout.itemSize = CGSize(width: width, height: itemHeight)
         }
     }

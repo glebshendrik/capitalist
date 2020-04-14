@@ -21,9 +21,8 @@ extension MainViewController: UIGestureRecognizerDelegate {
         }
         
         let locationInView = touch.location(in: self.view)
-        
-        let collectionViews: [UICollectionView] = [incomeSourcesCollectionView,
-                                                   expenseSourcesCollectionView,
+            
+        let collectionViews: [UICollectionView] = [expenseSourcesCollectionView,
                                                    joyExpenseCategoriesCollectionView,
                                                    riskActivesCollectionView,
                                                    safeActivesCollectionView]
@@ -37,9 +36,7 @@ extension MainViewController: UIGestureRecognizerDelegate {
                 return true
         }
         
-        switch collectionView {
-        case incomeSourcesCollectionView:
-            return !viewModel.isAddIncomeSourceItem(indexPath: indexPath)
+        switch collectionView {        
         case expenseSourcesCollectionView:
             return !viewModel.isAddExpenseSourceItem(indexPath: indexPath)
         case joyExpenseCategoriesCollectionView:

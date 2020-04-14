@@ -63,7 +63,7 @@ extension MainViewController {
 extension MainViewController : EasyTipViewDelegate {
     private func showTransactionCreationInfoViewController() {
         slideUp(factory.transactionCreationInfoViewController(),
-                toBottomOf: incomeSourcesContainer,
+                toBottomOf: expenseSourcesCollectionView,
                 shouldDim: true)
     }
     
@@ -108,7 +108,7 @@ extension MainViewController : EasyTipViewDelegate {
 
 extension MainViewController {
     func setVisibleCells(editing: Bool) {
-        let cells = incomeSourcesCollectionView.visibleCells + expenseSourcesCollectionView.visibleCells + joyExpenseCategoriesCollectionView.visibleCells + riskActivesCollectionView.visibleCells + safeActivesCollectionView.visibleCells
+        let cells = expenseSourcesCollectionView.visibleCells + joyExpenseCategoriesCollectionView.visibleCells + riskActivesCollectionView.visibleCells + safeActivesCollectionView.visibleCells
         
         for cell in cells {
             cell.set(editing: editing)

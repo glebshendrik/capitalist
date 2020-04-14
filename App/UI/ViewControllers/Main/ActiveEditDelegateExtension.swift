@@ -37,7 +37,7 @@ extension MainViewController : ActiveEditViewControllerDelegate {
 extension MainViewController {
     private func showDependentIncomeSourceMessage(activeName: String) {
         slideUp(factory.dependentIncomeSourceInfoViewController(activeName: activeName),
-                toBottomOf: incomeSourcesContainer,
+                toBottomOf: expenseSourcesCollectionView,
                 shouldDim: true)
     }
 }

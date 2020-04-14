@@ -27,12 +27,6 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     static var finantialDataInvalidatedNotification = NSNotification.Name("finantialDataInvalidatedNotification")
     
-    @IBOutlet weak var incomeSourcesCollectionView: UICollectionView!
-    @IBOutlet weak var incomeSourcesActivityIndicator: UIView!
-    @IBOutlet weak var incomeSourcesLoader: UIImageView!
-    @IBOutlet weak var incomeSourcesAmountLabel: UILabel!
-    @IBOutlet weak var incomeSourcesContainer: UIView!
-    
     @IBOutlet weak var expenseSourcesCollectionView: UICollectionView!
     @IBOutlet weak var expenseSourcesActivityIndicator: UIView!
     @IBOutlet weak var expenseSourcesLoader: UIImageView!
@@ -60,8 +54,6 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var mainButton: UIButton!
     @IBOutlet weak var mainButtonBackground: UIView!
     @IBOutlet weak var mainButtonTopToBottomConstraint: NSLayoutConstraint!
-    
-    
     
     var titleView: TitleView!
     var transactionController: TransactionController!
