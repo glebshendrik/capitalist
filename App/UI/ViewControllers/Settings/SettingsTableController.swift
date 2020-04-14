@@ -15,6 +15,7 @@ protocol SettingsTableControllerDelegate {
     func didTapPeriod()
     func didChange(soundsOn: Bool)
     func didChange(verificationEnabled: Bool)
+    func didChange(fastGesturePressDurationMilliseconds: Int)
     func didTapLanguage()
     func didRefresh()
 }
@@ -27,6 +28,7 @@ class SettingsTableController : FormFieldsTableViewController {
     @IBOutlet weak var verificationSwitchField: FormSwitchValueField!
     @IBOutlet weak var languageField: FormTapField!
     @IBOutlet weak var verificationSwitchCell: UITableViewCell!
+    @IBOutlet weak var transactionDragSpeedField: FormSliderField!
     
     private var loaderView: LoaderView!
     
@@ -45,6 +47,7 @@ class SettingsTableController : FormFieldsTableViewController {
         setupLanguageField()
         setupVerificationSwitchField()
         setupRefreshControl()
+        setupDragSpeedField()
     }
     
     override func showActivityIndicator() {
@@ -97,6 +100,14 @@ class SettingsTableController : FormFieldsTableViewController {
         }
     }
         
+    private func setupDragSpeedField() {
+        transactionDragSpeedField.placeholder = NSLocalizedString("Срабатывание перетягивания", comment: "Срабатывание перетягивания")
+        transactionDragSpeedField.imageName = "period-icon"
+        transactionDragSpeedField.didChange { [weak self] value in
+            self?.delegate?.didChange(fastGesturePressDurationMilliseconds: Int(value))
+        }
+    }
+    
     private func setupRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl?.backgroundColor = .clear

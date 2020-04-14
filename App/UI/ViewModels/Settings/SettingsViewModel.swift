@@ -15,6 +15,7 @@ class SettingsViewModel : ProfileViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     private let soundsManager: SoundsManagerProtocol
     private var verificationManager: BiometricVerificationManagerProtocol
+    private var userPreferencesManager: UserPreferencesManagerProtocol
     
     var currency: String? {
         return user?.currency.translatedName
@@ -41,14 +42,20 @@ class SettingsViewModel : ProfileViewModel {
         return !verificationManager.systemBiometricVerificationEnabled
     }
     
+    var fastGesturePressDurationMilliseconds: Int {
+        return userPreferencesManager.fastGesturePressDurationMilliseconds
+    }
+    
     init(accountCoordinator: AccountCoordinatorProtocol,
          settingsCoordinator: SettingsCoordinatorProtocol,
          soundsManager: SoundsManagerProtocol,
-         verificationManager: BiometricVerificationManagerProtocol) {
+         verificationManager: BiometricVerificationManagerProtocol,
+         userPreferencesManager: UserPreferencesManagerProtocol) {
         self.accountCoordinator = accountCoordinator
         self.settingsCoordinator = settingsCoordinator
         self.soundsManager = soundsManager
         self.verificationManager = verificationManager
+        self.userPreferencesManager = userPreferencesManager
         super.init(accountCoordinator: accountCoordinator)
     }
     
@@ -66,6 +73,10 @@ class SettingsViewModel : ProfileViewModel {
                 }.ensure {
                     self.verificationManager.allowableReuseDuration = allowableReuseDuration
                 }
+    }
+    
+    func set(fastGesturePressDurationMilliseconds: Int) {
+        userPreferencesManager.fastGesturePressDurationMilliseconds = fastGesturePressDurationMilliseconds
     }
     
     func update(currency: Currency) -> Promise<Void> {

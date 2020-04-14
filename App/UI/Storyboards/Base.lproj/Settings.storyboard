@@ -220,6 +220,32 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="117" id="Ofe-Ss-ys8">
+                                        <rect key="frame" x="0.0" y="481" width="375" height="117"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ofe-Ss-ys8" id="9cz-IY-nsG">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vUH-yK-mEf" customClass="FormSliderField" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vUH-yK-mEf" firstAttribute="leading" secondItem="9cz-IY-nsG" secondAttribute="leading" id="0Fx-PV-AK1"/>
+                                                <constraint firstAttribute="bottom" secondItem="vUH-yK-mEf" secondAttribute="bottom" id="4gI-30-qIz"/>
+                                                <constraint firstAttribute="trailing" secondItem="vUH-yK-mEf" secondAttribute="trailing" id="8Mo-xI-EoA"/>
+                                                <constraint firstItem="vUH-yK-mEf" firstAttribute="top" secondItem="9cz-IY-nsG" secondAttribute="top" id="JLd-Zr-XY9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -234,6 +260,7 @@
                         <outlet property="languageField" destination="360-bs-fHj" id="bZa-eB-xmN"/>
                         <outlet property="periodField" destination="M1a-xp-UD3" id="Ubu-3G-t8x"/>
                         <outlet property="soundsSwitchField" destination="xDs-3X-Oah" id="I0E-WA-pgD"/>
+                        <outlet property="transactionDragSpeedField" destination="vUH-yK-mEf" id="w7K-t4-gq5"/>
                         <outlet property="verificationSwitchCell" destination="GTF-aE-OSX" id="ny6-kD-2ZM"/>
                         <outlet property="verificationSwitchField" destination="jgD-pS-IJe" id="HFc-29-xxq"/>
                     </connections>

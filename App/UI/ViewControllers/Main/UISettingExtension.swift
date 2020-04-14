@@ -11,11 +11,11 @@ import SideMenu
 
 extension MainViewController {
     var fastPressDuration: TimeInterval {
-        return 0.3
+        return viewModel.fastGesturePressDuration
     }
     
     var slowPressDuration: TimeInterval {
-        return 1.3
+        return fastPressDuration + 1.0
     }
     
     func setupUI() {
@@ -110,6 +110,7 @@ extension MainViewController {
         self.view.addGestureRecognizer(gestureRecognizer)
         gestureRecognizer.minimumPressDuration = fastPressDuration
         gestureRecognizer.delegate = self
+        transactionRecognizer = gestureRecognizer
     }
     
     private func setupNotifications() {

@@ -17,6 +17,7 @@ class MainViewModel {
     private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
     private let activesCoordinator: ActivesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
+    private let userPreferencesManager: UserPreferencesManagerProtocol
     
     private var incomeSourceViewModels: [IncomeSourceViewModel] = []
     private var expenseSourceViewModels: [ExpenseSourceViewModel] = []
@@ -160,22 +161,24 @@ class MainViewModel {
         }
     }
     
-    
-    
-    
+    var fastGesturePressDuration: TimeInterval {
+        return Double(userPreferencesManager.fastGesturePressDurationMilliseconds) / 1000.0
+    }
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          basketsCoordinator: BasketsCoordinatorProtocol,
          expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
          activesCoordinator: ActivesCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol,
+         userPreferencesManager: UserPreferencesManagerProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.basketsCoordinator = basketsCoordinator
         self.expenseCategoriesCoordinator = expenseCategoriesCoordinator
         self.activesCoordinator = activesCoordinator
         self.accountCoordinator = accountCoordinator
+        self.userPreferencesManager = userPreferencesManager
     }
     
     func selectSource(_ source: Transactionable) {

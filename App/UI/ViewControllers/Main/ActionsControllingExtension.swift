@@ -118,7 +118,7 @@ extension MainViewController {
 
 extension MainViewController {
     @objc func appMovedToForeground() {
-        setVisibleCells(editing: isEditingItems)
+        setVisibleCells(editing: isEditingItems)        
     }
 }
 

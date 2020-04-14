@@ -57,5 +57,6 @@ extension MainViewController: UIGestureRecognizerDelegate {
         longPressureRecognizers.forEach {
             $0.minimumPressDuration = (isEditingItems || isSelecting) ? fastPressDuration : slowPressDuration
         }
+        transactionRecognizer?.minimumPressDuration = fastPressDuration
     }
 }

@@ -33,6 +33,7 @@ class SettingsViewController : FormEditViewController {
         updateSoundsUI()
         updateLanguageUI()
         updateVerificationUI()
+        updateDragSpeedUI()
     }
     
     func updateCurrencyUI() {
@@ -55,9 +56,24 @@ class SettingsViewController : FormEditViewController {
         tableController.verificationSwitchField.value = viewModel.verificationEnabled
         tableController.set(cell: tableController.verificationSwitchCell, hidden: viewModel.verificationHidden, animated: false, reload: true)
     }
+    
+    func updateDragSpeedUI() {
+        tableController.transactionDragSpeedField.minimumValue = 50
+        tableController.transactionDragSpeedField.maximumValue = 500
+        tableController.transactionDragSpeedField.step = 25
+        tableController.transactionDragSpeedField.value = Float(viewModel.fastGesturePressDurationMilliseconds)
+        tableController.transactionDragSpeedField.valueFormatter = { value in
+            return "\(Int(value)) \(NSLocalizedString("мс", comment: "мс"))"
+        }
+    }
 }
 
 extension SettingsViewController : SettingsTableControllerDelegate {
+    func didChange(fastGesturePressDurationMilliseconds: Int) {
+        viewModel.set(fastGesturePressDurationMilliseconds: fastGesturePressDurationMilliseconds)
+        updateDragSpeedUI()
+    }
+    
     func didTapLanguage() {
         guard   let settingsUrl = URL(string: UIApplication.openSettingsURLString),
                 UIApplication.shared.canOpenURL(settingsUrl) else {

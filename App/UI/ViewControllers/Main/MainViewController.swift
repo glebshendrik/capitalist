@@ -23,6 +23,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     var factory: UIFactoryProtocol!
     var soundsManager: SoundsManagerProtocol!
     var longPressureRecognizers: [UILongPressGestureRecognizer] = []
+    var transactionRecognizer: UILongPressGestureRecognizer? = nil
     
     static var finantialDataInvalidatedNotification = NSNotification.Name("finantialDataInvalidatedNotification")
     
@@ -85,6 +86,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         super.viewWillAppear(animated)        
         navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
         appMovedToForeground()
+        updateLongPressureRecognizers()
     }
     
     override func viewDidAppear(_ animated: Bool) {

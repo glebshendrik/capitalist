@@ -248,6 +248,8 @@
 		FA85238323858BC6008C09AB /* EntityInfoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85238223858BC6008C09AB /* EntityInfoNavigationController.swift */; };
 		FA852384238876B5008C09AB /* Transactionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66FB6C22204B3100708C71 /* Transactionable.swift */; };
 		FA85238623889857008C09AB /* IncomeSourceInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85238523889857008C09AB /* IncomeSourceInfoViewModel.swift */; };
+		FA8722722444BE0A00B093AA /* UserPreferencesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8722712444BE0A00B093AA /* UserPreferencesManagerProtocol.swift */; };
+		FA8722742444BEEF00B093AA /* UserPreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8722732444BEEF00B093AA /* UserPreferencesManager.swift */; };
 		FA87A43122F9816900E0BFD0 /* FormExchangeFieldAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A43022F9816900E0BFD0 /* FormExchangeFieldAppearance.swift */; };
 		FA87A43322F9BC7800E0BFD0 /* TransactionEditingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A43222F9BC7800E0BFD0 /* TransactionEditingExtension.swift */; };
 		FA87A43522F9BC9300E0BFD0 /* TransactionUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A43422F9BC9300E0BFD0 /* TransactionUIExtension.swift */; };
@@ -730,6 +732,8 @@
 		FA85238023855E29008C09AB /* EntityInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FA85238223858BC6008C09AB /* EntityInfoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityInfoNavigationController.swift; sourceTree = "<group>"; };
 		FA85238523889857008C09AB /* IncomeSourceInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceInfoViewModel.swift; sourceTree = "<group>"; };
+		FA8722712444BE0A00B093AA /* UserPreferencesManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesManagerProtocol.swift; sourceTree = "<group>"; };
+		FA8722732444BEEF00B093AA /* UserPreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesManager.swift; sourceTree = "<group>"; };
 		FA87A43022F9816900E0BFD0 /* FormExchangeFieldAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormExchangeFieldAppearance.swift; sourceTree = "<group>"; };
 		FA87A43222F9BC7800E0BFD0 /* TransactionEditingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditingExtension.swift; sourceTree = "<group>"; };
 		FA87A43422F9BC9300E0BFD0 /* TransactionUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionUIExtension.swift; sourceTree = "<group>"; };
@@ -1806,6 +1810,7 @@
 				FA28480222F19EB6003F114A /* UIFactory.swift */,
 				FA36E98A23F1832800B340AA /* AnalyticsManager.swift */,
 				FADD04C82420FE4F00FB542D /* BiometricVerificationManager.swift */,
+				FA8722732444BEEF00B093AA /* UserPreferencesManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1824,6 +1829,7 @@
 				FA28480022F19DDA003F114A /* UIFactoryProtocol.swift */,
 				FA36E98823F182CA00B340AA /* AnalyticsManagerProtocol.swift */,
 				FADD04C4241F91E400FB542D /* BiometricVerificationManagerProtocol.swift */,
+				FA8722712444BE0A00B093AA /* UserPreferencesManagerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2641,6 +2647,7 @@
 				FADD04C5241F91E400FB542D /* BiometricVerificationManagerProtocol.swift in Sources */,
 				FAB5BE3F2351FE75000466AE /* ActiveType.swift in Sources */,
 				FA16FC73223A82FA0053C273 /* ExpenseSourceSelectViewController.swift in Sources */,
+				FA8722722444BE0A00B093AA /* UserPreferencesManagerProtocol.swift in Sources */,
 				FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */,
 				FABE54DE233BE6C600DF2B70 /* CreditsService.swift in Sources */,
 				FAD88F0F21AEB45A00BE7BC1 /* ManagersAssembly.swift in Sources */,
@@ -2659,6 +2666,7 @@
 				FAA993DD23CF5265002456C2 /* AppUpdateViewController.swift in Sources */,
 				FA165CE421B65F2F00EAA16B /* ValidationResult.swift in Sources */,
 				FA0570E6232A338F002B4706 /* BorrowsServiceProtocol.swift in Sources */,
+				FA8722742444BEEF00B093AA /* UserPreferencesManager.swift in Sources */,
 				FAD88F4F21AEC1A500BE7BC1 /* UsersService.swift in Sources */,
 				FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */,
 				FA30B473228474EE0017470C /* BalanceViewController.swift in Sources */,

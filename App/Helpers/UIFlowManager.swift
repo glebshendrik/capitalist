@@ -17,6 +17,7 @@ enum UIFlowPoint : String {
     case transactionCreationInfoMessage
     case soundsManagerInitialization
     case verificationManagerInitialization
+    case userPreferencesManagerInitialization
 }
 
 class UIFlowManager {

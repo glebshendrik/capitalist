@@ -91,7 +91,8 @@ class FormSliderField : FormTextField {
     }
     
     func convert(value: Float) -> Float {
-        return Float(Int(value + step / 2))
+        
+        return Float(Int((value + step / 2) / step) * Int(step))
     }
     
     func updateSliderValue(_ newValue: Float) {
@@ -191,6 +192,7 @@ class FormSliderField : FormTextField {
 //        slider.thumbTintColor = thumbTintColor
         slider.minimumValue = minimumValue
         slider.maximumValue = maximumValue
+        
     }
     
     func updateMinValueLabel() {

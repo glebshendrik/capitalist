@@ -31,6 +31,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private var saltEdgeCoordinator: BankConnectionsCoordinatorProtocol!
     private let analyticsManager: AnalyticsManagerProtocol
     private var biometricVerificationManager: BiometricVerificationManagerProtocol
+    private var userPreferencesManager: UserPreferencesManagerProtocol
     
     private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     private var minVersion: String?
@@ -45,7 +46,8 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
          notificationsCoordinator: NotificationsCoordinatorProtocol,
          soundsManager: SoundsManagerProtocol,
          analyticsManager: AnalyticsManagerProtocol,
-         biometricVerificationManager: BiometricVerificationManagerProtocol) {
+         biometricVerificationManager: BiometricVerificationManagerProtocol,
+         userPreferencesManager: UserPreferencesManagerProtocol) {
         
         self.storyboards = storyboards
         self.window = window
@@ -54,6 +56,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         self.soundsManager = soundsManager
         self.analyticsManager = analyticsManager
         self.biometricVerificationManager = biometricVerificationManager
+        self.userPreferencesManager = userPreferencesManager
     }
         
     func initDependencies(with resolver: Swinject.Resolver) {
@@ -200,6 +203,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
 
 extension ApplicationRouter {
     private func setupServices() {
+        setupUserPreferences()
         setupSoundsManager()
         setupKeyboardManager()
         setupAppearance()
@@ -250,6 +254,12 @@ extension ApplicationRouter {
     
     private func setupAnalytics() {
         analyticsManager.setup()        
+    }
+    
+    func setupUserPreferences() {
+        if !UIFlowManager.reach(point: .userPreferencesManagerInitialization) {
+            userPreferencesManager.fastGesturePressDurationMilliseconds = 250
+        }
     }
     
     private func setupSoundsManager() {
