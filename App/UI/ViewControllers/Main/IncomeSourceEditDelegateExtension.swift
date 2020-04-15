@@ -8,18 +8,18 @@
 
 import UIKit
 
-extension MainViewController : IncomeSourceEditViewControllerDelegate {
-    func didCreateIncomeSource() {
-        loadIncomeSources()
-    }
-    
-    func didUpdateIncomeSource() {
-        loadIncomeSources()        
-    }
-    
-    func didRemoveIncomeSource() {
-        loadIncomeSources()
-        loadBudget()
-        loadExpenseSources()
-    }
-}
+//extension MainViewController : IncomeSourceEditViewControllerDelegate {
+//    func didCreateIncomeSource() {
+//        loadIncomeSources()
+//    }
+//    
+//    func didUpdateIncomeSource() {
+//        loadIncomeSources()        
+//    }
+//    
+//    func didRemoveIncomeSource() {
+//        loadIncomeSources()
+//        loadBudget()
+//        loadExpenseSources()
+//    }
+//}

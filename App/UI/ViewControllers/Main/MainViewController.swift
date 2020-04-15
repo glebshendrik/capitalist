@@ -91,9 +91,6 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBAction func didTapMainButton(_ sender: Any) {
         tapMainButton()
     }
-    @IBAction func didTapIncomeSources(_ sender: Any) {
-        showIncomeStatistics()
-    }
     
     @IBAction func didTapExpenseSources(_ sender: Any) {
         showBalance()
@@ -101,5 +98,10 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBAction func didTapStatistics(_ sender: Any) {
         showStatistics(with: nil)
+    }
+    
+    
+    @IBAction func didTapInfoButton(_ sender: Any) {
+        modal(factory.transactionCreationInfoViewController())
     }
 }

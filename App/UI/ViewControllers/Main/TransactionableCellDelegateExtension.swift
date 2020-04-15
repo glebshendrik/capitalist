@@ -22,15 +22,6 @@ extension MainViewController : TransactionableCellDelegate {
         var removeAction: ((UIAlertAction) -> Void)? = nil
         var removeWithTransactionsAction: ((UIAlertAction) -> Void)? = nil
         
-        if let incomeSourceId = (cell as? IncomeSourceCollectionViewCell)?.viewModel?.id {
-            alertTitle = TransactionableType.incomeSource.removeQuestion
-            removeAction = { _ in
-                self.removeIncomeSource(by: incomeSourceId, deleteTransactions: false)
-            }
-            removeWithTransactionsAction = { _ in
-                self.removeIncomeSource(by: incomeSourceId, deleteTransactions: true)
-            }
-        }
         if let expenseSourceId = (cell as? ExpenseSourceCollectionViewCell)?.viewModel?.id {
             alertTitle = TransactionableType.expenseSource.removeQuestion
             removeAction = { _ in
@@ -76,10 +67,7 @@ extension MainViewController : TransactionableCellDelegate {
         sheet(title: alertTitle, actions: actions)
     }
     
-    func didTapEditButton(cell: TransactionableCellProtocol) {
-        if let incomeSource = (cell as? IncomeSourceCollectionViewCell)?.viewModel?.incomeSource {
-            showEditScreen(incomeSource: incomeSource)
-        }
+    func didTapEditButton(cell: TransactionableCellProtocol) {        
         if let expenseSource = (cell as? ExpenseSourceCollectionViewCell)?.viewModel?.expenseSource {
             showEditScreen(expenseSource: expenseSource)
         }

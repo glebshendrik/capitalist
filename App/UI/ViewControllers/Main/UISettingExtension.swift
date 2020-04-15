@@ -155,7 +155,7 @@ extension MainViewController {
             let horizontalSpace = collectionView.bounds.width - horizontalInset * 2
             let fillItemWidth = horizontalSpace / CGFloat(columns)
             
-            let height = rows == 1 ? itemHeight : fillItemHeight
+            let height = rows == 2 ? itemHeight : fillItemHeight
             
             layout.itemSize = CGSize(width: fillItemWidth, height: height)
             layout.sectionInset = UIEdgeInsets(horizontal: horizontalInset, vertical: verticalInset)

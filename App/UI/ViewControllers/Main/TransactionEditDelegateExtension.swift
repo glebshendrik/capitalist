@@ -78,7 +78,6 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     
     private func updateIncomeDependentData() {
         setSelecting(false, animated: true)
-        loadIncomeSources()
         loadBudget()
         loadBaskets()
         loadExpenseSources()
@@ -104,7 +103,6 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     
     private func updateDebtDependentData() {
         setSelecting(false, animated: true)
-        loadIncomeSources()
         loadBudget()
         loadBaskets()
         loadExpenseSources()
@@ -113,7 +111,6 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     
     private func updateLoanDependentData() {
         setSelecting(false, animated: true)
-        loadIncomeSources()
         loadBudget()
         loadBaskets()
         loadExpenseSources()
@@ -122,7 +119,6 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     
     private func updateCreditDependentData() {
         setSelecting(false, animated: true)
-        loadIncomeSources()
         loadBudget()
         loadBaskets()
         loadExpenseSources()

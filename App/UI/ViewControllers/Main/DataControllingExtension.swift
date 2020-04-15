@@ -11,8 +11,7 @@ import PromiseKit
 
 extension MainViewController {
     func loadData() {
-        loadBudget()
-        loadIncomeSources()
+        loadBudget()        
         loadExpenseSources()
         loadBaskets()
         loadExpenseCategories(by: .joy)
