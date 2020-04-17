@@ -38,7 +38,7 @@ class FormTransactionsDependableEditViewController : FormNavBarButtonsEditViewCo
                                   style: .cancel,
                                   isEnabled: true,
                                   handler: nil)
-        
+
         present(alertController, animated: true)
     }
 }

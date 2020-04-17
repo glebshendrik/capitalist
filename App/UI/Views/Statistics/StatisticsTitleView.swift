@@ -12,7 +12,7 @@ protocol StatisticsTitleViewDelegate {
     func didTapTitle()
 }
 
-class StatisticsTitleView : CustomView {
+class StatisticsTitleView : CustomXibView {
     @IBOutlet weak var titleLabel: UILabel!
     
     var delegate: StatisticsTitleViewDelegate?

@@ -665,8 +665,13 @@ extension UIViewController {
                                   style: .cancel,
                                   isEnabled: true,
                                   handler: nil)
-        
         modal(alertController, animated: true)
+    }
+    
+    func dismissIfAlert() {
+        if self.isMember(of: UIAlertController.self) {
+            dismiss(animated: false, completion: nil)
+        }
     }
 }
 

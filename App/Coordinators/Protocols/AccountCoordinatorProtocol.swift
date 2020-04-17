@@ -19,6 +19,7 @@ protocol AccountCoordinatorProtocol {
     
     func joinAsGuest() -> Promise<Session>
     func authenticate(with form: SessionCreationForm) -> Promise<Session>
+    func authenticate(with json: String) -> Promise<Session>
     func createAndAuthenticateUser(with userForm: UserCreationForm) -> Promise<Session>
     func updateUser(with userForm: UserUpdatingForm) -> Promise<Void>
     func changePassword(with changePasswordForm: ChangePasswordForm) -> Promise<Void>

@@ -68,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         notificationsCoordinator.rescheduleKeepAliveNotifications()
+        router.dismissPresentedAlerts()
         router.setWindow(blurred: true)
     }
     

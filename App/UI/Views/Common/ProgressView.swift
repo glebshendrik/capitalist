@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class ProgressView : BasketItemView {
+class ProgressView : CustomView {
     lazy var progressView: UIView = { return UIView() }()
     lazy var limitLabel: UILabel = { return UILabel() }()
     lazy var progressLabel: UILabel = { return UILabel() }()

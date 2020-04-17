@@ -9,10 +9,7 @@
 import Foundation
 
 class IconInfoField : EntityInfoField {
-    enum IconType {
-        case raster
-        case vector
-    }
+    
     
     private let fieldId: String
     let iconType: IconType

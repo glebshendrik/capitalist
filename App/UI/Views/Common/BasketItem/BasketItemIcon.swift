@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 import SnapKit
 
-class BasketItemIcon : BasketItemView {
+class BasketItemIcon : CustomView {
     lazy var backgroundView: UIView = { return UIImageView() }()
     lazy var iconImageView: UIImageView = { return UIImageView() }()
     
