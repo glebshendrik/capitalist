@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftDate
 
 class PeriodsViewModel {
     
@@ -54,9 +55,7 @@ class PeriodsViewModel {
         var array = [DateRangeTransactionFilter]()
 
         while tempDate < ending.dateAtEndOf(unit) {
-            guard let nextDate = Calendar.current.date(byAdding: unit, value: dateRangeFilter.datePeriod.addingValue, to: tempDate) else {
-                return []
-            }
+            let nextDate = tempDate + 1.months
             array.append(DateRangeTransactionFilter(fromDate: tempDate, toDate: tempDate.dateAtEndOf(unit), datePeriod: dateRangeFilter.datePeriod))
             tempDate = nextDate
         }
