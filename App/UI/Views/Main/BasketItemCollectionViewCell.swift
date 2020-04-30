@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class BasketItemCollectionViewCell : TransactionableCell {
-    lazy var icon: BasketItemIcon = { return BasketItemIcon() }()
+    lazy var icon: IconView = { return IconView() }()
     lazy var progress: BasketItemProgress = { return BasketItemProgress() }()
     lazy var itemDescription: BasketItemDescription = { return BasketItemDescription() }()
     

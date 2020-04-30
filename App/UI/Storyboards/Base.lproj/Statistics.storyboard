@@ -91,7 +91,7 @@
                                                             </cells>
                                                         </collectionView>
                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Загружаем актуальные данные" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="C78-Gv-YZU">
-                                                            <rect key="frame" x="32" y="137.5" width="350" height="17.5"/>
+                                                            <rect key="frame" x="32" y="137" width="350" height="18"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                             <color key="textColor" name="white 0.64"/>
                                                             <nil key="highlightedColor"/>
@@ -223,7 +223,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Vkz-Uh-kxY">
-                                                            <rect key="frame" x="58" y="37" width="25.5" height="14"/>
+                                                            <rect key="frame" x="58" y="37" width="22.5" height="14"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                                             <color key="textColor" name="white 0.64"/>
                                                             <nil key="highlightedColor"/>
@@ -305,10 +305,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionTableViewCell" id="kBR-pa-Ide" customClass="EntityTransactionTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="640" width="414" height="68"/>
+                                        <rect key="frame" x="0.0" y="640" width="414" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kBR-pa-Ide" id="oEe-qq-rCJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vUQ-vY-nme">
@@ -364,13 +364,13 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Кошелек" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJF-UY-J7B">
-                                                    <rect key="frame" x="60" y="15" width="210" height="21"/>
+                                                    <rect key="frame" x="60" y="15" width="210" height="21.5"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                     <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Транспортая компания" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BF-hv-VYW">
-                                                    <rect key="frame" x="60" y="36" width="210" height="15.5"/>
+                                                    <rect key="frame" x="60" y="36.5" width="210" height="15.5"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="13"/>
                                                     <color key="textColor" name="white 0.4"/>
                                                     <nil key="highlightedColor"/>
@@ -384,20 +384,20 @@
                                                     <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbM-Yx-ynn" userLabel="debt">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbM-Yx-ynn" userLabel="debt">
                                                     <rect key="frame" x="280" y="47" width="110" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
                                                     <color key="textColor" name="white 0.4"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNp-LG-Z7S" userLabel="whom">
-                                                    <rect key="frame" x="60" y="48" width="330" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNp-LG-Z7S" userLabel="whom">
+                                                    <rect key="frame" x="60" y="62" width="330" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
                                                     <color key="textColor" name="white 0.4"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dp-HX-Soh">
-                                                    <rect key="frame" x="60" y="67" width="354" height="1"/>
+                                                    <rect key="frame" x="60" y="73" width="354" height="1"/>
                                                     <color key="backgroundColor" name="white 0.12"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="yu4-Bh-6Q2"/>
@@ -409,9 +409,9 @@
                                                 <constraint firstItem="cff-0W-2Q9" firstAttribute="leading" secondItem="2BF-hv-VYW" secondAttribute="trailing" constant="10" id="BGL-Yw-E3R"/>
                                                 <constraint firstAttribute="bottom" secondItem="4dp-HX-Soh" secondAttribute="bottom" id="C59-Jo-6ZT"/>
                                                 <constraint firstAttribute="trailing" secondItem="cff-0W-2Q9" secondAttribute="trailing" constant="24" id="EXO-Xc-G0o"/>
-                                                <constraint firstItem="hNp-LG-Z7S" firstAttribute="top" secondItem="KbM-Yx-ynn" secondAttribute="bottom" constant="1" id="EpB-Xh-KoC"/>
                                                 <constraint firstAttribute="trailing" secondItem="KbM-Yx-ynn" secondAttribute="trailing" constant="24" id="ImW-7m-ogI"/>
                                                 <constraint firstItem="2BF-hv-VYW" firstAttribute="top" secondItem="wJF-UY-J7B" secondAttribute="bottom" id="J0R-BD-j8w"/>
+                                                <constraint firstItem="hNp-LG-Z7S" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KbM-Yx-ynn" secondAttribute="bottom" constant="1" id="KHJ-Df-zSj"/>
                                                 <constraint firstItem="cff-0W-2Q9" firstAttribute="leading" secondItem="wJF-UY-J7B" secondAttribute="trailing" constant="10" id="QLZ-WG-dRB"/>
                                                 <constraint firstItem="vUQ-vY-nme" firstAttribute="top" secondItem="oEe-qq-rCJ" secondAttribute="top" constant="22" id="V5H-pU-UxT"/>
                                                 <constraint firstItem="vUQ-vY-nme" firstAttribute="leading" secondItem="oEe-qq-rCJ" secondAttribute="leading" constant="24" id="Vgk-tK-wp7"/>
@@ -425,6 +425,7 @@
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vUQ-vY-nme" secondAttribute="bottom" constant="22" id="kjS-SV-xvf"/>
                                                 <constraint firstItem="4dp-HX-Soh" firstAttribute="leading" secondItem="wJF-UY-J7B" secondAttribute="leading" id="lCY-6r-LGJ"/>
                                                 <constraint firstItem="2BF-hv-VYW" firstAttribute="leading" secondItem="vUQ-vY-nme" secondAttribute="trailing" constant="12" id="mnE-ak-fvy"/>
+                                                <constraint firstItem="hNp-LG-Z7S" firstAttribute="top" relation="greaterThanOrEqual" secondItem="2BF-hv-VYW" secondAttribute="bottom" constant="10" id="tiZ-fp-OcQ"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2BF-hv-VYW" secondAttribute="bottom" constant="12" id="wOJ-L0-RsN"/>
                                                 <constraint firstItem="2BF-hv-VYW" firstAttribute="top" secondItem="wJF-UY-J7B" secondAttribute="bottom" id="xd7-lJ-A6F"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hNp-LG-Z7S" secondAttribute="bottom" constant="12" id="z9B-Jo-4i3"/>
@@ -436,11 +437,11 @@
                                             <outlet property="commentLabel" destination="hNp-LG-Z7S" id="FQs-vs-ael"/>
                                             <outlet property="delimeter" destination="4dp-HX-Soh" id="o3q-xV-4Om"/>
                                             <outlet property="destinationIconImageView" destination="0Gx-cP-eDZ" id="yc3-kX-H8n"/>
-                                            <outlet property="destinationTitleLabel" destination="wJF-UY-J7B" id="Ike-NF-8Q8"/>
+                                            <outlet property="destinationTitleLabel" destination="2BF-hv-VYW" id="X4W-8t-0yO"/>
                                             <outlet property="iconBackgroundImageView" destination="82c-T8-dzd" id="sE1-xs-v5z"/>
                                             <outlet property="iconBackgroundView" destination="vUQ-vY-nme" id="0d4-eW-NxC"/>
                                             <outlet property="rasterImageView" destination="0Gx-cP-eDZ" id="JaE-Nf-Pdi"/>
-                                            <outlet property="sourceTitleLabel" destination="2BF-hv-VYW" id="Xlr-IA-rRI"/>
+                                            <outlet property="sourceTitleLabel" destination="wJF-UY-J7B" id="8Wp-rL-Oq4"/>
                                             <outlet property="typeLabel" destination="KbM-Yx-ynn" id="GRh-SG-Vsd"/>
                                             <outlet property="vectorImageView" destination="Pwg-73-kTo" id="5P8-YX-AjY"/>
                                         </connections>

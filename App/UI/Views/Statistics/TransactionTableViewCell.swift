@@ -28,11 +28,11 @@ class TransactionTableViewCell : UITableViewCell {
         
         delimeter?.alpha = 0.3
                 
-        updateIconUI(url: viewModel.destinationIconURL,
-                     placeholder: viewModel.destinationType.defaultIconName(basketType: viewModel.basketType))
+        updateIconUI(url: viewModel.iconURL,
+                     placeholder: viewModel.iconPlaceholder)
         
-        sourceTitleLabel.text = viewModel.sourceTitle
-        destinationTitleLabel.text = viewModel.destinationTitle
+        sourceTitleLabel.text = viewModel.title
+        destinationTitleLabel.text = viewModel.subtitle
         amountLabel.text = viewModel.amount
         
         typeLabel.text = viewModel.typeDescription

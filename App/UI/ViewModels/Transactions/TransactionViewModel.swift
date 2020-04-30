@@ -204,6 +204,42 @@ class TransactionViewModel {
         return comment?.isEmpty ?? true ? nil : " "
     }
     
+    var title: String {
+        switch type {
+        case .income:
+            return sourceTitle
+        case .expense, .fundsMove:
+            return destinationTitle
+        }
+    }
+    
+    var subtitle: String {
+        switch type {
+        case .income:
+            return destinationTitle
+        case .expense, .fundsMove:
+            return sourceTitle
+        }
+    }
+    
+    var iconURL: URL? {
+        switch type {
+        case .income:
+            return sourceIconURL
+        case .expense, .fundsMove:
+            return destinationIconURL
+        }
+    }
+    
+    var iconPlaceholder: String {
+        switch type {
+        case .income:
+            return sourceType.defaultIconName(basketType: basketType)
+        case .expense, .fundsMove:
+            return destinationType.defaultIconName(basketType: basketType)
+        }
+    }
+    
     init(transaction: Transaction) {
         self.transaction = transaction
     }

@@ -25,9 +25,9 @@ enum VectorIconMode {
 class IconView : CustomView {
     lazy var backgroundView: UIView = { return UIImageView() }()
     lazy var rasterImageView: UIImageView = { return UIImageView() }()
+    lazy var vectorBackgroundView: UIView = { return UIView() }()
     lazy var vectorImageView: SVGKFastImageView = { return SVGKFastImageView() }()
-    lazy var vectorBackgroundView: UIView = { return UIImageView() }()
-    
+        
     var iconType: IconType = .raster {
         didSet {
             updateIcons()
@@ -52,20 +52,35 @@ class IconView : CustomView {
         }
     }
     
+    var backgroundCornerRadius: CGFloat? = nil {
+        didSet {
+            updateSizeDependentProperties()
+        }
+    }
+        
     var backgroundViewColor: UIColor? = nil {
         didSet {
             updateBackgroundColor()
         }
     }
     
+    var vectorBackgroundViewColor: UIColor = UIColor.by(.white100) {
+        didSet {
+            updateVectorBackgroundColor()
+        }
+    }
     
-    
-    
+    var vectorIconMode: VectorIconMode = .fullsize {
+        didSet {
+            updateIcons()
+        }
+    }
     
     override func setup() {
         super.setup()
         setupBackgroundView()
         setupRasterIcon()
+        setupVectorBackgroundView()
         setupVectorIcon()
         updateSizeDependentProperties()
     }
@@ -74,6 +89,7 @@ class IconView : CustomView {
         setupBackgroundConstraints()
         setupRasterIconConstraints()
         setupVectorIconConstraints()
+        setupVectorBackgroundConstraints()
     }
     
     // Setup
@@ -88,16 +104,19 @@ class IconView : CustomView {
         addSubview(rasterImageView)
     }
     
+    private func setupVectorBackgroundView() {
+        vectorBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(vectorBackgroundView)
+    }
+    
     private func setupVectorIcon() {
         vectorImageView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(vectorImageView)
+        vectorBackgroundView.addSubview(vectorImageView)
     }
      
     private func updateIcons() {
         updateRasterIconImage()
         updateVectorIconImage()
-        
-        
     }
     
     private func updateRasterIconImage() {
@@ -113,16 +132,12 @@ class IconView : CustomView {
         vectorImageView.sd_setImage(with: iconURL, completed: nil)
     }
     
-    
-    
     // Constraints
     func setupBackgroundConstraints() {
         backgroundView.snp.makeConstraints { make in
             make.left.top.right.bottom.equalToSuperview()
         }
     }
-    
-    
     
     func setupRasterIconConstraints() {
         rasterImageView.snp.makeConstraints { make in
@@ -133,14 +148,33 @@ class IconView : CustomView {
     
     func setupVectorIconConstraints() {
         vectorImageView.snp.makeConstraints { make in
-            make.width.height.lessThanOrEqualTo(22)
+            if vectorIconMode == .fullsize {
+                make.width.height.lessThanOrEqualTo(28)
+            }
+            else {
+                make.width.height.lessThanOrEqualTo(14)
+            }
             make.center.equalToSuperview()
         }
     }
     
+    func setupVectorBackgroundConstraints() {
+        vectorBackgroundView.snp.makeConstraints { make in
+            if vectorIconMode == .fullsize {
+                make.left.top.right.bottom.equalToSuperview()
+            }
+            else {
+                make.width.height.lessThanOrEqualTo(24)
+                make.center.equalToSuperview()
+            }
+            
+        }
+    }
+    
     private func updateSizeDependentProperties() {
-        backgroundView.cornerRadius = backgroundView.bounds.size.width / 2.0
-        cornerRadius = bounds.size.width / 2.0
+        backgroundView.cornerRadius = backgroundCornerRadius ?? backgroundView.bounds.size.width / 2.0
+        vectorBackgroundView.cornerRadius = vectorBackgroundView.bounds.size.width / 2.0
+        cornerRadius = backgroundCornerRadius ?? bounds.size.width / 2.0
     }
     
     private func updateIconTint() {
@@ -149,5 +183,9 @@ class IconView : CustomView {
     
     private func updateBackgroundColor() {
         backgroundView.backgroundColor = backgroundViewColor
+    }
+    
+    private func updateVectorBackgroundColor() {
+        vectorBackgroundView.backgroundColor = vectorBackgroundViewColor
     }
 }
