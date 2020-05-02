@@ -27,8 +27,8 @@ protocol CreditEditTableControllerDelegate : FormFieldsTableViewControllerDelega
 }
 
 class CreditEditTableController : FormFieldsTableViewController {
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var iconBackgroundImageView: UIImageView!
+    
+    @IBOutlet weak var iconView: IconView!
     
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var creditTypeField: FormTapField!

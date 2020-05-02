@@ -23,10 +23,10 @@ enum VectorIconMode {
 }
 
 class IconView : CustomView {
-    lazy var backgroundView: UIView = { return UIImageView() }()
+    lazy var backgroundView: UIView = { return UIView() }()
     lazy var rasterImageView: UIImageView = { return UIImageView() }()
     lazy var vectorBackgroundView: UIView = { return UIView() }()
-    lazy var vectorImageView: SVGKFastImageView = { return SVGKFastImageView() }()
+    lazy var vectorImageView: SVGKFastImageView = { return SVGKFastImageView(frame: CGRect.zero) }()
         
     var iconType: IconType = .raster {
         didSet {
@@ -58,7 +58,7 @@ class IconView : CustomView {
         }
     }
         
-    var backgroundViewColor: UIColor? = nil {
+    var backgroundViewColor: UIColor = .clear {
         didSet {
             updateBackgroundColor()
         }
@@ -73,8 +73,12 @@ class IconView : CustomView {
     var vectorIconMode: VectorIconMode = .fullsize {
         didSet {
             updateIcons()
+            updateVectorConstraints()
         }
     }
+    
+    private var vectorFullsizeConstraints: [Constraint] = []
+    private var vectorCompactConstraints: [Constraint] = []
     
     override func setup() {
         super.setup()
@@ -82,6 +86,9 @@ class IconView : CustomView {
         setupRasterIcon()
         setupVectorBackgroundView()
         setupVectorIcon()
+        updateBackgroundColor()
+        updateVectorBackgroundColor()
+        updateVectorConstraints()
         updateSizeDependentProperties()
     }
         
@@ -90,6 +97,11 @@ class IconView : CustomView {
         setupRasterIconConstraints()
         setupVectorIconConstraints()
         setupVectorBackgroundConstraints()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateSizeDependentProperties()
     }
     
     // Setup
@@ -128,6 +140,7 @@ class IconView : CustomView {
     }
     
     private func updateVectorIconImage() {
+        vectorBackgroundView.isHidden = iconType != .vector
         vectorImageView.isHidden = iconType != .vector
         vectorImageView.sd_setImage(with: iconURL, completed: nil)
     }
@@ -148,27 +161,26 @@ class IconView : CustomView {
     
     func setupVectorIconConstraints() {
         vectorImageView.snp.makeConstraints { make in
-            if vectorIconMode == .fullsize {
-                make.width.height.lessThanOrEqualTo(28)
-            }
-            else {
-                make.width.height.lessThanOrEqualTo(14)
-            }
+            vectorFullsizeConstraints.append(make.width.height.lessThanOrEqualTo(28).constraint)
+            vectorCompactConstraints.append(make.width.height.lessThanOrEqualTo(14).constraint)
             make.center.equalToSuperview()
         }
     }
     
     func setupVectorBackgroundConstraints() {
         vectorBackgroundView.snp.makeConstraints { make in
-            if vectorIconMode == .fullsize {
-                make.left.top.right.bottom.equalToSuperview()
-            }
-            else {
-                make.width.height.lessThanOrEqualTo(24)
-                make.center.equalToSuperview()
-            }
-            
+            vectorFullsizeConstraints.append(make.left.top.right.bottom.equalToSuperview().constraint)
+            vectorCompactConstraints.append(make.width.height.equalTo(24).constraint)
+            vectorCompactConstraints.append(make.center.equalToSuperview().constraint)
         }
+    }
+    
+    private func setVectorFullsizeConstraints(active: Bool) {
+        vectorFullsizeConstraints.forEach { $0.isActive = active }
+    }
+    
+    private func setVectorCompactConstraints(active: Bool) {
+        vectorCompactConstraints.forEach { $0.isActive = active }
     }
     
     private func updateSizeDependentProperties() {
@@ -187,5 +199,10 @@ class IconView : CustomView {
     
     private func updateVectorBackgroundColor() {
         vectorBackgroundView.backgroundColor = vectorBackgroundViewColor
+    }
+    
+    private func updateVectorConstraints() {
+        setVectorFullsizeConstraints(active: vectorIconMode == .fullsize)
+        setVectorCompactConstraints(active: vectorIconMode == .compact)
     }
 }

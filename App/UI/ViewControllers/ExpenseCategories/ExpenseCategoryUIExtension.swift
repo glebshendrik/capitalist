@@ -16,9 +16,11 @@ extension ExpenseCategoryEditViewController {
     }
     
     func updateIconUI() {
-        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)        
-        tableController.iconBackgroundView.backgroundColor = viewModel.basketType.iconBackgroundColor        
-        tableController.iconView.tintColor = UIColor.by(.white100)
+        tableController.icon.iconURL = viewModel.selectedIconURL
+        tableController.icon.defaultIconName = viewModel.defaultIconName
+        tableController.icon.backgroundViewColor = viewModel.basketType.iconBackgroundColor
+        tableController.icon.iconType = .raster
+        tableController.icon.vectorIconMode = .fullsize
     }
     
     func updateTextFieldsUI() {

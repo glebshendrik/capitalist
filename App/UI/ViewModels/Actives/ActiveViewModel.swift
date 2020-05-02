@@ -168,6 +168,10 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return active.incomeSource?.id
     }
     
+    var iconType: IconType {
+        return .raster
+    }
+    
     init(active: Active) {
         self.active = active
     }

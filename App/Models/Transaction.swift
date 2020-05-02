@@ -67,6 +67,11 @@ struct Transaction : Decodable {
     let returningBorrow: Borrow?
     let credit: Credit?
     let isBuyingAsset: Bool
+    let isVirtualSource: Bool
+    let isVirtualDestination: Bool
+    let isBorrowOrReturnSource: Bool
+    let isBorrowOrReturnDestination: Bool
+    let isAssetSource: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -94,6 +99,11 @@ struct Transaction : Decodable {
         case returningBorrow = "returning_borrow"
         case credit
         case isBuyingAsset = "buying_asset"
+        case isVirtualSource = "is_virtual_source"
+        case isVirtualDestination = "is_virtual_destination"
+        case isBorrowOrReturnSource = "is_borrow_or_return_source"
+        case isBorrowOrReturnDestination = "is_borrow_or_return_destination"
+        case isAssetSource = "is_asset_source"        
     }
     
 }

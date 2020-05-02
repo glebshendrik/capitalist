@@ -199,9 +199,14 @@ extension StatisticsViewModel {
             default:
                 return .all
             }
-        }        
-        set(graphType: graphType(by: filter.type))
-        set(filters: [filter])
+        }
+        if let compoundGraphTransactionFilter = filter as? CompoundGraphTransactionFilter {
+            set(filters: compoundGraphTransactionFilter.filters)
+        }
+        else {
+//            set(graphType: graphType(by: filter.type))
+            set(filters: [filter])
+        }
     }
     
     func set(filters: [TransactionableFilter]) {

@@ -18,6 +18,8 @@ extension GraphViewModel {
                                keyForTransaction: @escaping (TransactionViewModel) -> String,
                                transactionableIdForTransaction: @escaping (TransactionViewModel) -> Int,
                                transactionableTypeForTransaction: @escaping (TransactionViewModel) -> TransactionableType,
+                               isVirtualTransactionable: @escaping (TransactionViewModel) -> Bool,
+                               isBorrowOrReturnTransactionable: @escaping (TransactionViewModel) -> Bool,
                                amountForTransactions: @escaping ([TransactionViewModel]) -> NSDecimalNumber,
                                titleForTransaction: @escaping (TransactionViewModel) -> String,
                                iconURLForTransaction: @escaping (TransactionViewModel) -> URL?,
@@ -36,6 +38,8 @@ extension GraphViewModel {
                         
             let id = transactionableIdForTransaction(transaction)
             let type = transactionableTypeForTransaction(transaction)
+            let isVirtualTransactionable = isVirtualTransactionable(transaction)
+            let isBorrowOrReturnTransactionable = isBorrowOrReturnTransactionable(transaction)
             let title = titleForTransaction(transaction)
             let iconURL = iconURLForTransaction(transaction)
             let iconPlaceholder = iconPlaceholderForTransaction(transaction)
@@ -45,6 +49,8 @@ extension GraphViewModel {
             
             return GraphTransactionFilter(id: id,
                                           type: type,
+                                          isVirtualTransactionable: isVirtualTransactionable,
+                                          isBorrowOrReturnTransactionable: isBorrowOrReturnTransactionable,
                                           title: title,
                                           iconURL: iconURL,
                                           iconPlaceholder: iconPlaceholder,
@@ -52,13 +58,59 @@ extension GraphViewModel {
                                           amount: amount,
                                           percents: percents,
                                           color: color,
-                                          coloringType: coloringType)
-            
-            }
+                                          coloringType: coloringType)            
+        }
         
-        let filters = transactions
+        var filters = transactions
                         .groupByKey { keyForTransaction($0) }
                         .compactMap { graphTransactionFilter(transactions: $0.value) }
+        
+        let borrowOrReturnFilters = filters.filter { $0.isBorrowOrReturnTransactionable }
+        let virtualFilters = filters.filter { $0.isVirtualTransactionable }
+        filters.removeAll { $0.isBorrowOrReturnTransactionable || $0.isVirtualTransactionable }
+        
+        if let borrowOrReturnFilter = borrowOrReturnFilters.sorted(by: { $0.percents.doubleValue >= $1.percents.doubleValue }).first {
+            
+            let amount = borrowOrReturnFilters.map { $0.amount }.reduce(NSDecimalNumber(integerLiteral: 0), { $0.adding($1) })
+            let percents = borrowOrReturnFilters.map { $0.percents }.reduce(NSDecimalNumber(integerLiteral: 0), { $0.adding($1) })
+            
+            let compoundBorrowFilter = CompoundGraphTransactionFilter(id: borrowOrReturnFilter.id,
+                                                                      type: borrowOrReturnFilter.type,
+                                                                      isVirtualTransactionable: borrowOrReturnFilter.isVirtualTransactionable,
+                                                                      isBorrowOrReturnTransactionable: borrowOrReturnFilter.isBorrowOrReturnTransactionable,
+                                                                      title: borrowOrReturnFilter.title,
+                                                                      iconURL: borrowOrReturnFilter.iconURL,
+                                                                      iconPlaceholder: borrowOrReturnFilter.iconPlaceholder,
+                                                                      сurrency: borrowOrReturnFilter.currency,
+                                                                      amount: amount,
+                                                                      percents: percents,
+                                                                      color: borrowOrReturnFilter.color,
+                                                                      coloringType: borrowOrReturnFilter.coloringType,
+                                                                      filters: borrowOrReturnFilters)
+            filters.append(compoundBorrowFilter)
+        }
+        
+        if let virtualFilter = virtualFilters.sorted(by: { $0.percents.doubleValue >= $1.percents.doubleValue }).first {
+            
+            let amount = virtualFilters.map { $0.amount }.reduce(NSDecimalNumber(integerLiteral: 0), { $0.adding($1) })
+            let percents = virtualFilters.map { $0.percents }.reduce(NSDecimalNumber(integerLiteral: 0), { $0.adding($1) })
+            
+            let compoundVirtualFilter = CompoundGraphTransactionFilter(id: virtualFilter.id,
+                                                                      type: virtualFilter.type,
+                                                                      isVirtualTransactionable: virtualFilter.isVirtualTransactionable,
+                                                                      isBorrowOrReturnTransactionable: virtualFilter.isBorrowOrReturnTransactionable,
+                                                                      title: NSLocalizedString("Баланс кошельков", comment: ""),
+                                                                      iconURL: virtualFilter.iconURL,
+                                                                      iconPlaceholder: virtualFilter.iconPlaceholder,
+                                                                      сurrency: virtualFilter.currency,
+                                                                      amount: amount,
+                                                                      percents: percents,
+                                                                      color: virtualFilter.color,
+                                                                      coloringType: virtualFilter.coloringType,
+                                                                      filters: virtualFilters)
+            filters.append(compoundVirtualFilter)
+        }
+        
         
         switch sortingType {
         case .id:

@@ -106,22 +106,13 @@ class GraphViewModel {
     }
     
     func updateCurrentGraph() {
-        pieChartData = calculateChartData()
         graphFilters = calculateFilters()
+        pieChartData = calculatePieChartData(for: graphFilters,
+                                             currency: currency)
+        
         total = calculateTotal()        
     }
-    
-    func calculateChartData() -> PieChartData? {
-        switch graphType {
-        case .all:
-            return calculateIncomeAndExpensesPieChartData()
-        case .incomes:
-            return calculateIncomePieChartData()
-        case .expenses:
-            return calculateExpensesPieChartData()
-        }
-    }
-    
+        
     func calculateFilters() -> [GraphTransactionFilter] {
         switch graphType {
         case .all:

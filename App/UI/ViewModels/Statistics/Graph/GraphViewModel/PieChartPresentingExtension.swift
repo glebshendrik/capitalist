@@ -13,48 +13,18 @@ import SwifterSwift
 
 extension GraphViewModel {
     
-    
-//    func pieChartAmount(for transactions: [TransactionViewModel],
-//                        currency: Currency?,
-//                        amountForTransactions: @escaping ([TransactionViewModel]) -> NSDecimalNumber) -> String? {
-//
-//        return amountForTransactions(transactions).moneyCurrencyString(with: currency, shouldRound: true)
-//    }
-    
-    func calculatePieChartData(for transactions: [TransactionViewModel],
-                               currency: Currency?,
-                               keyForTransaction: @escaping (TransactionViewModel) -> String,
-                               amountForTransactions: @escaping ([TransactionViewModel]) -> NSDecimalNumber,
-                               titleForTransaction: @escaping (TransactionViewModel) -> String,
-                               colorForTransaction: ((TransactionViewModel) -> UIColor?)? = nil) -> PieChartData? {
-        
+    func calculatePieChartData(for filters: [GraphTransactionFilter], currency: Currency?) -> PieChartData? {
         guard let currency = currency else { return nil }
         
+        guard filters.count > 0 else { return emptyPieChartData(currency: currency) }
+                        
         let dataSet = createPieDataSet()
-//        let amount = amountForTransactions(transactions)
         
-        let transactionsByKeyGroups = transactions.groupByKey { keyForTransaction($0) }
-        
-        guard transactionsByKeyGroups.count > 0 else { return emptyPieChartData(currency: currency) }
-        
-        for transactionsByKeyGroup in transactionsByKeyGroups {
-            
-            let key = transactionsByKeyGroup.key
-            let transactionsByKey = transactionsByKeyGroup.value
-            
-            let value = amountForTransactions(transactionsByKey)
-//            let percents = value.multiplying(byPowerOf10: 2).dividing(by: amount)
-            
-            if let transaction = transactionsByKey.first {
-                
-                let color = colorForTransaction?(transaction) ?? randomColor(hue: .random, luminosity: dataSet.values.count.isEven ? .dark : .light)
-                dataSet.addColor(color)
-                _ = dataSet.addEntryOrdered(PieChartDataEntry(value: value.doubleValue, label: nil, data: key as AnyObject))
-                
-            }
-            
+        for filter in filters {
+            dataSet.addColor(filter.color)
+            _ = dataSet.addEntryOrdered(PieChartDataEntry(value: filter.amount.doubleValue, label: nil, data: filter.key as AnyObject))
         }
-        
+                
         return createPieChartData(with: dataSet, currency: currency)
     }
     

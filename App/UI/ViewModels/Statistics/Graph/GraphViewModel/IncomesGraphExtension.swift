@@ -11,42 +11,73 @@ import Charts
 import RandomColorSwift
 
 extension GraphViewModel {
-    func calculateIncomePieChartData() -> PieChartData? {
-        return calculatePieChartData(for: transactions,
-                                     currency: currency,
-                                     keyForTransaction: { self.incomeKey(for: $0) },
-                                     amountForTransactions: { self.amount(for: $0) },
-                                     titleForTransaction: { $0.sourceTitle },
-                                     colorForTransaction: { self.incomeColor(for: $0) })
-        
-    }
-        
     func calculateIncomeFilters() -> [GraphTransactionFilter] {
         return calculateGraphFilters(for: transactions,
                                      currency: currency,
                                      keyForTransaction: { self.incomeKey(for: $0) },
-                                     transactionableIdForTransaction: { $0.sourceId },
-                                     transactionableTypeForTransaction: { $0.sourceType },
+                                     transactionableIdForTransaction: { self.transactionableId(for: $0) },
+                                     transactionableTypeForTransaction: { self.transactionableType(for: $0) },
+                                     isVirtualTransactionable: { self.isVirtualTransactionable(for: $0) },
+                                     isBorrowOrReturnTransactionable: { self.isBorrowOrReturnTransactionable(for: $0) },
                                      amountForTransactions: { self.amount(for: $0) },
-                                     titleForTransaction: { $0.sourceTitle },
-                                     iconURLForTransaction: { $0.sourceIconURL },
-                                     iconPlaceholderForTransaction: { $0.sourceType.defaultIconName(basketType: $0.basketType) },
+                                     titleForTransaction: { self.title(for: $0) },
+                                     iconURLForTransaction: { self.iconURL(for: $0) },
+                                     iconPlaceholderForTransaction: { self.iconPlaceholder(for: $0) },
                                      colorForTransaction: { self.incomeColor(for: $0) })
     }
     
     private func incomeKey(for transaction: TransactionViewModel) -> String {
-        return "\(transaction.sourceType)_\(transaction.sourceId)"
+        return "\(transactionableType(for: transaction))_\(transactionableId(for: transaction))"
     }
     
+    private func title(for transaction: TransactionViewModel) -> String {
+        if transaction.destinationType == .active {
+            return transaction.destinationTitle
+        }
+        return transaction.sourceTitle
+    }
+    
+    private func isVirtualTransactionable(for transaction: TransactionViewModel) -> Bool {
+        return transaction.destinationType == .active ? transaction.isVirtualDestination : transaction.isVirtualSource
+    }
+
+    private func isBorrowOrReturnTransactionable(for transaction: TransactionViewModel) -> Bool {
+        return transaction.destinationType == .active ? transaction.isBorrowOrReturnDestination : transaction.isBorrowOrReturnSource
+    }
+    
+    private func iconURL(for transaction: TransactionViewModel) -> URL? {
+        if transaction.destinationType == .active {
+            return transaction.destinationIconURL
+        }
+        return transaction.sourceIconURL
+    }
+    
+    private func iconPlaceholder(for transaction: TransactionViewModel) -> String {
+        return transactionableType(for: transaction).defaultIconName(basketType: transaction.basketType)
+    }
+    
+    private func transactionableId(for transaction: TransactionViewModel) -> Int {
+        if transaction.destinationType == .active {
+            return transaction.destinationId
+        }
+        return transaction.sourceId
+    }
+    
+    private func transactionableType(for transaction: TransactionViewModel) -> TransactionableType {
+        if transaction.destinationType == .active {
+            return transaction.destinationType
+        }
+        return transaction.sourceType
+    }
     
     private func incomeColor(for transaction: TransactionViewModel) -> UIColor? {
-        if transaction.sourceType == .incomeSource {
+        if transaction.destinationType == .active {
+            guard let idIndex = activeIds.firstIndex(of: transaction.destinationId) else { return nil }
+            return colors[safe: idIndex + incomeSourceIds.count]
+        }
+        if transaction.destinationType == .expenseSource {
             guard let idIndex = incomeSourceIds.firstIndex(of: transaction.sourceId) else { return nil }
             return colors[safe: idIndex]
-        }
-        if transaction.sourceType == .active {
-            guard let idIndex = activeIds.firstIndex(of: transaction.sourceId) else { return nil }
-            return colors[safe: idIndex + incomeSourceIds.count]
         }
         return nil
     }

@@ -13,7 +13,7 @@ import SDWebImageSVGCoder
 
 class ProviderCell : UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var logoImageView: SVGKFastImageView!
+    @IBOutlet weak var iconView: IconView!
     
     var viewModel: ProviderViewModel? = nil {
         didSet {
@@ -22,8 +22,13 @@ class ProviderCell : UITableViewCell {
     }
     
     private func updateUI() {
-        titleLabel.text = viewModel?.name
-        logoImageView.sd_setImage(with: viewModel?.logoURL, completed: nil)
+        guard let viewModel = viewModel else { return }
+        
+        titleLabel.text = viewModel.name
+        
+        iconView.iconType = .vector
+        iconView.vectorIconMode = .fullsize
+        iconView.iconURL = viewModel.logoURL        
     }
 }
 

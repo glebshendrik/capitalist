@@ -452,13 +452,14 @@
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pfa-b1-5kr">
                                                                             <rect key="frame" x="4" y="4" width="153" height="88"/>
                                                                             <subviews>
-                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="expense-source-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="aV5-tx-feC">
-                                                                                    <rect key="frame" x="19" y="18" width="18" height="18"/>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TK1-KI-f5z" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                                                    <rect key="frame" x="4" y="3" width="48" height="48"/>
+                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <constraints>
-                                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="18" id="arT-Fd-fcj"/>
-                                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="18" id="hPk-zn-7pK"/>
+                                                                                        <constraint firstAttribute="height" constant="48" id="nZc-Zk-g0b"/>
+                                                                                        <constraint firstAttribute="width" constant="48" id="yNn-Ru-IFR"/>
                                                                                     </constraints>
-                                                                                </imageView>
+                                                                                </view>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зарплата" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1sx-Bw-Jfj">
                                                                                     <rect key="frame" x="56" y="12" width="89" height="14"/>
                                                                                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
@@ -474,13 +475,13 @@
                                                                             </subviews>
                                                                             <color key="backgroundColor" name="white 0.04"/>
                                                                             <constraints>
-                                                                                <constraint firstItem="aV5-tx-feC" firstAttribute="leading" secondItem="pfa-b1-5kr" secondAttribute="leading" constant="19" id="3qE-he-40I"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="EX0-AK-HGH" secondAttribute="trailing" constant="8" id="73Y-fO-bVs"/>
-                                                                                <constraint firstItem="aV5-tx-feC" firstAttribute="top" secondItem="pfa-b1-5kr" secondAttribute="top" constant="18" id="Cha-Ks-g1x"/>
+                                                                                <constraint firstItem="TK1-KI-f5z" firstAttribute="top" secondItem="pfa-b1-5kr" secondAttribute="top" constant="3" id="L2t-Zz-2fh"/>
+                                                                                <constraint firstItem="TK1-KI-f5z" firstAttribute="leading" secondItem="pfa-b1-5kr" secondAttribute="leading" constant="4" id="TBG-qA-mKw"/>
                                                                                 <constraint firstItem="EX0-AK-HGH" firstAttribute="top" secondItem="1sx-Bw-Jfj" secondAttribute="bottom" constant="4" id="ULD-0Q-mGH"/>
                                                                                 <constraint firstItem="1sx-Bw-Jfj" firstAttribute="top" secondItem="pfa-b1-5kr" secondAttribute="top" constant="12" id="bs0-Bp-pGa"/>
-                                                                                <constraint firstItem="1sx-Bw-Jfj" firstAttribute="leading" secondItem="aV5-tx-feC" secondAttribute="trailing" constant="19" id="d86-Aw-FGg"/>
                                                                                 <constraint firstItem="EX0-AK-HGH" firstAttribute="leading" secondItem="1sx-Bw-Jfj" secondAttribute="leading" id="iwc-WL-lUb"/>
+                                                                                <constraint firstItem="1sx-Bw-Jfj" firstAttribute="leading" secondItem="TK1-KI-f5z" secondAttribute="trailing" constant="4" id="jsG-cY-lXT"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="1sx-Bw-Jfj" secondAttribute="trailing" constant="8" id="qT2-oo-7ix"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
@@ -510,9 +511,7 @@
                                                         <connections>
                                                             <outlet property="amountLabel" destination="EX0-AK-HGH" id="BWc-Qb-nFT"/>
                                                             <outlet property="background" destination="pfa-b1-5kr" id="e6V-mB-0Ir"/>
-                                                            <outlet property="iconHeightConstraint" destination="arT-Fd-fcj" id="aFy-9L-TuM"/>
-                                                            <outlet property="iconImageView" destination="aV5-tx-feC" id="1Zx-fo-YKX"/>
-                                                            <outlet property="iconWidthConstraint" destination="hPk-zn-7pK" id="I28-Xs-50c"/>
+                                                            <outlet property="iconView" destination="TK1-KI-f5z" id="Quo-fw-Iyr"/>
                                                             <outlet property="nameLabel" destination="1sx-Bw-Jfj" id="h3y-e5-NCT"/>
                                                         </connections>
                                                     </collectionViewCell>
@@ -1343,7 +1342,6 @@
         <image name="balance-menu-item-icon" width="22" height="22"/>
         <image name="credits-menu-item-icon" width="24" height="24"/>
         <image name="debts-menu-item-icon" width="22" height="20"/>
-        <image name="expense-source-default-icon" width="24" height="24"/>
         <image name="join-menu-item-icon" width="22" height="22"/>
         <image name="loader-1" width="55" height="31"/>
         <image name="main-plus" width="23" height="23"/>

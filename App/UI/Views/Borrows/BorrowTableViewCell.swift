@@ -12,18 +12,14 @@ import AlamofireImage
 class BorrowTableViewCell : UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var borrowedAtLabel: UILabel!
     @IBOutlet weak var paydayLabel: UILabel!
     
     var placeholderName: String {        
         return "borrow-default-icon"
     }
-    
-    var imageTintColor: UIColor {        
-        return UIColor.by(.white100)
-    }
-    
+        
     var viewModel: BorrowViewModel? {
         didSet {
             updateUI()
@@ -31,13 +27,18 @@ class BorrowTableViewCell : UITableViewCell {
     }
     
     func updateUI() {
-        nameLabel.text = viewModel?.name
-        amountLabel.text = viewModel?.diplayAmount
-        iconImageView.setImage(with: viewModel?.iconURL,
-                               placeholderName: placeholderName,
-                               renderingMode: .alwaysTemplate)
-        iconImageView.tintColor = imageTintColor
-        borrowedAtLabel.text = viewModel?.borrowedAtFormatted
-        paydayLabel.text = viewModel?.paydayText
+        guard let viewModel = viewModel else { return }
+        
+        nameLabel.text = viewModel.name
+        amountLabel.text = viewModel.diplayAmount
+        
+        borrowedAtLabel.text = viewModel.borrowedAtFormatted
+        paydayLabel.text = viewModel.paydayText
+        
+        iconView.iconType = .raster
+        iconView.vectorIconMode = .fullsize
+        iconView.iconURL = viewModel.iconURL
+        iconView.defaultIconName = placeholderName
+        iconView.iconTintColor = UIColor.by(.white100)
     }
 }

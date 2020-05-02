@@ -24,9 +24,8 @@ protocol BorrowEditTableControllerDelegate : FormFieldsTableViewControllerDelega
 }
 
 class BorrowEditTableController : FormFieldsTableViewController {
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var iconBackgroundImageView: UIImageView!
     
+    @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!
     @IBOutlet weak var amountField: FormMoneyTextField!

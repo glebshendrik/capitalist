@@ -86,8 +86,4 @@ extension ExpenseCategorySelectViewController : UITableViewDelegate, UITableView
         delegate?.didSelect(expenseCategoryViewModel: expenseCategoryViewModel)
         close()
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
-    }
 }

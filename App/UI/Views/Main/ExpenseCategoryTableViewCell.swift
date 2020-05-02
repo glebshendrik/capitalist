@@ -10,8 +10,7 @@ import UIKit
 
 class ExpenseCategoryTableViewCell : UITableViewCell {
     
-    @IBOutlet weak var iconBackgroundView: UIView!
-    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var spentLabel: UILabel!
     
@@ -26,10 +25,12 @@ class ExpenseCategoryTableViewCell : UITableViewCell {
                 
         nameLabel.text = viewModel.name
         spentLabel.text = viewModel.spentRounded
-        iconImageView.setImage(with: viewModel.iconURL,
-                               placeholderName: viewModel.defaultIconName,
-                               renderingMode: .alwaysTemplate)        
-        iconImageView.tintColor = UIColor.by(.white100)
-        iconBackgroundView.backgroundColor = viewModel.basketType.iconBackgroundColor
+        
+        iconView.iconType = .raster
+        iconView.vectorIconMode = .fullsize
+        iconView.iconURL = viewModel.iconURL
+        iconView.defaultIconName = viewModel.defaultIconName
+        iconView.backgroundViewColor = viewModel.basketType.iconBackgroundColor
+        iconView.iconTintColor = UIColor.by(.white100)
     }
 }

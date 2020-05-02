@@ -16,8 +16,11 @@ extension IncomeSourceEditViewController {
     }
     
     func updateIconUI() {
-        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)        
-        tableController.iconView.tintColor = UIColor.by(.white100)
+        tableController.icon.iconURL = viewModel.selectedIconURL
+        tableController.icon.defaultIconName = viewModel.defaultIconName
+        tableController.icon.iconType = .raster
+        tableController.icon.vectorIconMode = .fullsize
+        tableController.icon.iconTintColor = UIColor.by(.white100)
     }
     
     func updateCurrencyUI() {

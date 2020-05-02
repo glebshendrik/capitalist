@@ -200,7 +200,7 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, section: EntityInfoTransactionsSection, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell") as? EntityTransactionTableViewCell,
+         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell") as? TransactionTableViewCell,
                 let transactionViewModel = section.transactionViewModel(at: indexPath.row) else { return UITableViewCell() }
                    
         cell.viewModel = transactionViewModel

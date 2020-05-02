@@ -155,7 +155,6 @@
 		FA689F302285639600FA75C9 /* BalanceSettingUpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F2F2285639600FA75C9 /* BalanceSettingUpExtension.swift */; };
 		FA689F32228567C000FA75C9 /* BalanceNavigatingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F31228567C000FA75C9 /* BalanceNavigatingExtension.swift */; };
 		FA689F342285681200FA75C9 /* BalanceLoadingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F332285681200FA75C9 /* BalanceLoadingExtension.swift */; };
-		FA689F392285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA689F382285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift */; };
 		FA6910A82300EF48001209FC /* FormSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6910A72300EF48001209FC /* FormSubmitViewController.swift */; };
 		FA6910AA2300F0B6001209FC /* LoginTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6910A92300F0B6001209FC /* LoginTableController.swift */; };
 		FA6918A221F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */; };
@@ -272,7 +271,6 @@
 		FAA426062230F61E00B64925 /* TransactionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA426052230F61E00B64925 /* TransactionsService.swift */; };
 		FAA426182236518200B64925 /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA426172236518200B64925 /* Budget.swift */; };
 		FAA4261A22365DEE00B64925 /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAA4261922365DEE00B64925 /* TitleView.xib */; };
-		FAA5D568238BB22700CC53AD /* EntityTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D567238BB22700CC53AD /* EntityTransactionTableViewCell.swift */; };
 		FAA5D56A238BEA1500CC53AD /* ExpenseSourceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D569238BEA1500CC53AD /* ExpenseSourceInfoViewController.swift */; };
 		FAA5D56C238BEAB400CC53AD /* ExpenseSourceInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D56B238BEAB400CC53AD /* ExpenseSourceInfoViewModel.swift */; };
 		FAA5D56E238E5A0700CC53AD /* ExpenseCategoryInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5D56D238E5A0600CC53AD /* ExpenseCategoryInfoViewModel.swift */; };
@@ -642,7 +640,6 @@
 		FA689F2F2285639600FA75C9 /* BalanceSettingUpExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSettingUpExtension.swift; sourceTree = "<group>"; };
 		FA689F31228567C000FA75C9 /* BalanceNavigatingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceNavigatingExtension.swift; sourceTree = "<group>"; };
 		FA689F332285681200FA75C9 /* BalanceLoadingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceLoadingExtension.swift; sourceTree = "<group>"; };
-		FA689F382285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveExpenseCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		FA6910A72300EF48001209FC /* FormSubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSubmitViewController.swift; sourceTree = "<group>"; };
 		FA6910A92300F0B6001209FC /* LoginTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTableController.swift; sourceTree = "<group>"; };
 		FA6918A121F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditViewController.swift; sourceTree = "<group>"; };
@@ -759,7 +756,6 @@
 		FAA426052230F61E00B64925 /* TransactionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsService.swift; sourceTree = "<group>"; };
 		FAA426172236518200B64925 /* Budget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
 		FAA4261922365DEE00B64925 /* TitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
-		FAA5D567238BB22700CC53AD /* EntityTransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTransactionTableViewCell.swift; sourceTree = "<group>"; };
 		FAA5D569238BEA1500CC53AD /* ExpenseSourceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceInfoViewController.swift; sourceTree = "<group>"; };
 		FAA5D56B238BEAB400CC53AD /* ExpenseSourceInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourceInfoViewModel.swift; sourceTree = "<group>"; };
 		FAA5D56D238E5A0600CC53AD /* ExpenseCategoryInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryInfoViewModel.swift; sourceTree = "<group>"; };
@@ -1297,7 +1293,6 @@
 				FA5751C8237C2C0C00912443 /* SwitchInfoTableViewCell.swift */,
 				FA5751CA237C2C8A00912443 /* ButtonInfoTableViewCell.swift */,
 				FA5751CC237C2D3400912443 /* ReminderInfoTableViewCell.swift */,
-				FAA5D567238BB22700CC53AD /* EntityTransactionTableViewCell.swift */,
 			);
 			path = EntityInfo;
 			sourceTree = "<group>";
@@ -1430,14 +1425,6 @@
 				FAB5BE4E23530865000466AE /* TransactionEditReturningBorrowExtension.swift */,
 			);
 			path = Transactions;
-			sourceTree = "<group>";
-		};
-		FA689F372285A47E00FA75C9 /* Balance */ = {
-			isa = PBXGroup;
-			children = (
-				FA689F382285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift */,
-			);
-			path = Balance;
 			sourceTree = "<group>";
 		};
 		FA6DDE8322D4D0FE008D14FF /* Providers */ = {
@@ -2028,7 +2015,6 @@
 		FAD88F7B21B027B500BE7BC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FA689F372285A47E00FA75C9 /* Balance */,
 				FA0570F3232A6D8B002B4706 /* Borrows */,
 				FA0CADF321CBE41F00805288 /* Common */,
 				FABE54EB233D113900DF2B70 /* Credits */,
@@ -2763,7 +2749,6 @@
 				FA0570F9232AAE7D002B4706 /* BorrowEditViewController.swift in Sources */,
 				FAD88F2E21AEB79F00BE7BC1 /* NotificationsHandler.swift in Sources */,
 				FA0CAE1D21D66FC200805288 /* IconsCoordinator.swift in Sources */,
-				FAA5D568238BB22700CC53AD /* EntityTransactionTableViewCell.swift in Sources */,
 				FA87227A2446DFA600B093AA /* IconView.swift in Sources */,
 				FA7276B722524FBF0086D4D1 /* TransactionableCellDelegateExtension.swift in Sources */,
 				FA814F54235D64440039471A /* BasketItemsExtension.swift in Sources */,
@@ -2784,7 +2769,6 @@
 				FAC3B9C721C0F2B00015A12F /* IncomeSourcesServiceProtocol.swift in Sources */,
 				FAA6963F2398449B00C134D1 /* ActionsControllingExtension.swift in Sources */,
 				FA9F962C21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift in Sources */,
-				FA689F392285A49E00FA75C9 /* ActiveExpenseCategoryTableViewCell.swift in Sources */,
 				FA2847F422F0560D003F114A /* IncomeSourceEditingExtension.swift in Sources */,
 				FAC3B9C321BE74CE0015A12F /* OnboardingPageViewController.swift in Sources */,
 				FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */,

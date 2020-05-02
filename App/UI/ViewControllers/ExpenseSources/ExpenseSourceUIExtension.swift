@@ -22,13 +22,12 @@ extension ExpenseSourceEditViewController {
     
     func updateIconUI() {
         tableController.iconPen.isHidden = viewModel.iconPenHidden
-        tableController.iconView.isHidden = viewModel.customIconHidden
-        tableController.bankIconView.isHidden = viewModel.bankIconHidden
         
-        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)
-        tableController.iconView.tintColor = UIColor.by(.white100)
-        
-        tableController.bankIconView.sd_setImage(with: viewModel.selectedIconURL, completed: nil)
+        tableController.icon.iconURL = viewModel.selectedIconURL
+        tableController.icon.defaultIconName = viewModel.defaultIconName
+        tableController.icon.iconType = viewModel.iconType
+        tableController.icon.vectorIconMode = .fullsize
+        tableController.icon.iconTintColor = UIColor.by(.white100)        
     }
     
     func updateCurrencyUI() {

@@ -11,7 +11,7 @@ import AlamofireImage
 
 class GraphFilterTableViewCell : UITableViewCell {
     
-    @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
@@ -27,9 +27,13 @@ class GraphFilterTableViewCell : UITableViewCell {
     private func updateUI() {
         guard let viewModel = viewModel else { return }
         
-        iconImage.setImage(with: viewModel.iconURL, placeholderName: viewModel.iconPlaceholder, renderingMode: .alwaysTemplate)
-        iconImage.tintColor = viewModel.coloringType == .icon ? viewModel.color : UIColor.by(.white100)
-                
+        iconView.iconURL = viewModel.iconURL
+        iconView.defaultIconName = viewModel.iconPlaceholder
+        iconView.iconTintColor = viewModel.coloringType == .icon ? viewModel.color : UIColor.by(.white100)
+        iconView.vectorBackgroundViewColor = viewModel.coloringType == .icon ? viewModel.color : UIColor.by(.white100)
+        iconView.vectorIconMode = .compact
+        iconView.iconType = viewModel.iconType
+        
         titleLabel.text = viewModel.title
         valueLabel.text = viewModel.amountFormatted
         percentLabel.text = viewModel.percentsFormatted

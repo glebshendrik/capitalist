@@ -11,21 +11,14 @@ import Charts
 import SwifterSwift
 
 extension GraphViewModel {
-    func calculateIncomeAndExpensesPieChartData() -> PieChartData? {
-        return calculatePieChartData(for: transactions,
-                                     currency: currency,
-                                     keyForTransaction: { self.incomeAndExpensesDataSetKey(by: $0.type) },
-                                     amountForTransactions: { self.amount(for: $0) },
-                                     titleForTransaction: { self.title(by: $0.type) },
-                                     colorForTransaction: { self.incomeAndExpensesColor(by: $0.type) })
-    }
-    
     func calculateIncomeAndExpensesFilters() -> [GraphTransactionFilter] {
         return calculateGraphFilters(for: transactions,
                                      currency: currency,
                                      keyForTransaction: { self.incomeAndExpensesDataSetKey(by: $0.type) },
                                      transactionableIdForTransaction: { self.id(by: $0.type) },
                                      transactionableTypeForTransaction: { _ in .incomeSource },
+                                     isVirtualTransactionable: { _ in false },
+                                     isBorrowOrReturnTransactionable: { _ in false },
                                      amountForTransactions: { self.amount(for: $0) },
                                      titleForTransaction: { self.title(by: $0.type) },
                                      iconURLForTransaction: { _ in nil },

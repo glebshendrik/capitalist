@@ -52,14 +52,11 @@ extension ActiveEditViewController {
     
     func updateIconUI() {
         tableController.iconPen.isHidden = viewModel.iconPenHidden
-        tableController.iconView.isHidden = viewModel.customIconHidden
-        tableController.bankIconView.isHidden = viewModel.bankIconHidden
-        
-        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.iconDefaultImageName, renderingMode: .alwaysTemplate)
-        tableController.iconBackgroundView.backgroundColor = viewModel.basketType.iconBackgroundColor
-        tableController.iconView.tintColor = UIColor.by(.white100)
-        
-        tableController.bankIconView.sd_setImage(with: viewModel.selectedIconURL, completed: nil)        
+        tableController.icon.iconURL = viewModel.selectedIconURL
+        tableController.icon.defaultIconName = viewModel.iconDefaultImageName
+        tableController.icon.backgroundColor = viewModel.basketType.iconBackgroundColor
+        tableController.icon.iconType = viewModel.iconType
+        tableController.icon.vectorIconMode = .fullsize
     }
     
     func updateTextFieldsUI() {

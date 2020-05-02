@@ -86,6 +86,6 @@ extension WaitingBorrowsViewController : UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 52.0
+        return 66.0
     }
 }

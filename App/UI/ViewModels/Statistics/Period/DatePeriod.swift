@@ -62,6 +62,19 @@ enum DatePeriod {
         return asUnit
     }
     
+    var addingComponents: DateComponents? {
+        switch self {
+        case .week:
+            return addingValue.weeks
+        case .month:
+            return addingValue.months
+        case .year:
+            return addingValue.years
+        default:
+            return nil
+        }
+    }
+    
     var addingValue: Int {
         return 1
     }

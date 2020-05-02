@@ -72,6 +72,10 @@ class ExpenseSourceViewModel {
         return expenseSource.isVirtual
     }
         
+    var iconType: IconType {
+        return expenseSource.accountConnection != nil ? .vector : .raster
+    }
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
     }

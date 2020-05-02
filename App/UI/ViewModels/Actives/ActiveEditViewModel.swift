@@ -157,6 +157,10 @@ class ActiveEditViewModel {
     
     var canChangeActiveType: Bool { return isNew }
         
+    var iconType: IconType {
+        return .raster
+    }
+    
     init(activesCoordinator: ActivesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {

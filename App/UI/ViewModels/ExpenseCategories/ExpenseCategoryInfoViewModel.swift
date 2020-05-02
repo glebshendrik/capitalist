@@ -84,7 +84,8 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: ExpenseCategoryInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,
-                                                       placeholder: TransactionableType.expenseCategory.defaultIconName(basketType: basketType)),
+                                                       placeholder: TransactionableType.expenseCategory.defaultIconName(basketType: basketType),
+                                                       backgroundColor: basketType.iconBackgroundColor),
                                          BasicInfoField(fieldId: ExpenseCategoryInfoField.expense.rawValue,
                                                         title: NSLocalizedString("Расход в этом месяце", comment: "Расход в этом месяце"),
                                                         value: expenseCategoryViewModel?.amount)]

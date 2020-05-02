@@ -111,6 +111,10 @@ class ExpenseSourceEditViewModel {
         return isNew
     }
     
+    var iconType: IconType {
+        return expenseSource?.accountConnection != nil ? .vector : .raster
+    }
+    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {

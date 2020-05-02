@@ -548,22 +548,22 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="income-source-default-icon" translatesAutoresizingMaskIntoConstraints="NO" id="kHL-9r-LWB">
-                                                            <rect key="frame" x="22" y="22" width="20" height="20"/>
-                                                            <color key="tintColor" name="white 1.0"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p36-2l-4Hl" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="20" id="8tZ-Tk-mxJ"/>
-                                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="20" id="xW0-Tp-fKL"/>
+                                                                <constraint firstAttribute="height" constant="48" id="CQa-xD-mBr"/>
+                                                                <constraint firstAttribute="width" constant="48" id="POh-iI-uIe"/>
                                                             </constraints>
-                                                        </imageView>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" name="white 0.04"/>
                                                     <constraints>
-                                                        <constraint firstItem="kHL-9r-LWB" firstAttribute="centerX" secondItem="pXb-py-7ZP" secondAttribute="centerX" id="1A0-UH-ty1"/>
-                                                        <constraint firstItem="kHL-9r-LWB" firstAttribute="centerY" secondItem="pXb-py-7ZP" secondAttribute="centerY" id="9hM-tZ-Mml"/>
                                                         <constraint firstAttribute="trailing" secondItem="twS-rh-dJs" secondAttribute="trailing" id="Ah9-Il-4jN"/>
                                                         <constraint firstAttribute="bottom" secondItem="twS-rh-dJs" secondAttribute="bottom" id="JBT-fF-9yf"/>
+                                                        <constraint firstItem="p36-2l-4Hl" firstAttribute="centerY" secondItem="pXb-py-7ZP" secondAttribute="centerY" id="Mhx-s2-Cet"/>
                                                         <constraint firstItem="twS-rh-dJs" firstAttribute="leading" secondItem="pXb-py-7ZP" secondAttribute="leading" id="Ohl-9o-uHF"/>
+                                                        <constraint firstItem="p36-2l-4Hl" firstAttribute="centerX" secondItem="pXb-py-7ZP" secondAttribute="centerX" id="ZPQ-qz-Gaf"/>
                                                         <constraint firstAttribute="height" constant="64" id="aWa-QW-d7h"/>
                                                         <constraint firstItem="twS-rh-dJs" firstAttribute="top" secondItem="pXb-py-7ZP" secondAttribute="top" id="bgn-FB-zlp"/>
                                                         <constraint firstAttribute="width" constant="64" id="q2O-v1-Mn2"/>
@@ -591,7 +591,7 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
-                                            <outlet property="iconImageView" destination="kHL-9r-LWB" id="TmM-sK-jnm"/>
+                                            <outlet property="iconView" destination="p36-2l-4Hl" id="osr-tu-dBg"/>
                                             <outlet property="nameLabel" destination="byN-iX-RJx" id="kyP-29-K2b"/>
                                             <outlet property="selectionIndicator" destination="twS-rh-dJs" id="MyM-M9-6WA"/>
                                         </connections>
@@ -804,7 +804,6 @@
         <image name="basket-expenses" width="213" height="173"/>
         <image name="basket-risk" width="213" height="231.5"/>
         <image name="basket-safe" width="213" height="231.5"/>
-        <image name="income-source-default-icon" width="24" height="24"/>
         <image name="loader-1" width="55" height="31"/>
         <namedColor name="black 2">
             <color red="0.125" green="0.13300000131130219" blue="0.14900000393390656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

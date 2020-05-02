@@ -43,8 +43,4 @@ class BalanceExpenseSourcesTableSupport : NSObject, UITableViewDelegate, UITable
         guard let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) else { return }
         delegate?.didSelect(expenseSource: expenseSourceViewModel)
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
-    }
 }

@@ -99,8 +99,4 @@ extension ExpenseSourceSelectViewController : UITableViewDelegate, UITableViewDa
         }
         close()
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
-    }
 }

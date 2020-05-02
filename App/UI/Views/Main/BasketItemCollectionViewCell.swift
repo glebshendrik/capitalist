@@ -29,6 +29,8 @@ class BasketItemCollectionViewCell : TransactionableCell {
         icon.backgroundViewColor = UIColor.by(.black2)
         icon.backgroundCornerRadius = 4
         icon.iconTintColor = UIColor.by(.white100)
+        icon.iconType = .raster
+        icon.vectorIconMode = .compact
         contentView.addSubview(icon)
     }
     
@@ -108,6 +110,7 @@ class BasketItemCollectionViewCell : TransactionableCell {
     }
     
     func updateIcon() {
+        icon.vectorIconMode = .compact
     }
     
     func updateProgress() {

@@ -19,8 +19,7 @@ protocol IncomeSourceEditTableControllerDelegate : FormFieldsTableViewController
 }
 
 class IncomeSourceEditTableController : FormFieldsTableViewController {
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var iconBackgroundImageView: UIImageView!
+    @IBOutlet weak var icon: IconView!
     
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!

@@ -11,6 +11,7 @@ import UIKit
 class IncomeSourceTableViewCell : UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var incomeAmountLabel: UILabel!
+    @IBOutlet weak var iconView: IconView!
     
     var viewModel: IncomeSourceViewModel? {
         didSet {
@@ -19,7 +20,16 @@ class IncomeSourceTableViewCell : UITableViewCell {
     }
     
     func updateUI() {
-        nameLabel.text = viewModel?.name
-        incomeAmountLabel.text = viewModel?.amountRounded
+        guard let viewModel = viewModel else { return }
+        
+        nameLabel.text = viewModel.name
+        incomeAmountLabel.text = viewModel.amountRounded
+        
+        iconView.iconType = .raster
+        iconView.vectorIconMode = .fullsize
+        iconView.iconURL = viewModel.iconURL
+        iconView.defaultIconName = viewModel.defaultIconName
+        iconView.backgroundViewColor = UIColor.by(.gray1)
+        iconView.iconTintColor = UIColor.by(.white100)
     }
 }

@@ -29,10 +29,10 @@ protocol ActiveEditTableControllerDelegate : FormFieldsTableViewControllerDelega
 }
 
 class ActiveEditTableController : FormFieldsTableViewController {
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var bankIconView: SVGKFastImageView!
+    
+    @IBOutlet weak var icon: IconView!
     @IBOutlet weak var iconPen: UIView!
-    @IBOutlet weak var iconBackgroundView: UIView!
+    
     
     @IBOutlet weak var activeTypeField: FormTapField!
     @IBOutlet weak var nameField: FormTextField!

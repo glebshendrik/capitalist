@@ -61,6 +61,10 @@ class IncomeSourceSelectViewController : UIViewController, UIMessagePresenterMan
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    @IBAction func didTapAddIncomeSource(_ sender: Any) {
+    }
+    
 }
 
 extension IncomeSourceSelectViewController : UITableViewDelegate, UITableViewDataSource {
@@ -85,9 +89,5 @@ extension IncomeSourceSelectViewController : UITableViewDelegate, UITableViewDat
         guard let incomeSourceViewModel = viewModel.incomeSourceViewModel(at: indexPath) else { return }
         delegate?.didSelect(incomeSourceViewModel: incomeSourceViewModel)
         close()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
     }
 }

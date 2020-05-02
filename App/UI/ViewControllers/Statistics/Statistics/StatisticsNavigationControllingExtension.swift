@@ -129,6 +129,7 @@ extension StatisticsViewController : GraphTableViewCellDelegate {
     }
     
     func didTapGraphTypeButton() {
+        viewModel.set(filters: [])
         viewModel.updatePresentationData()
         updateUI()
     }

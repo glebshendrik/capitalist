@@ -19,6 +19,10 @@ class TransactionableFilter : TransactionFilter {
     var iconURL: URL?
     var iconPlaceholder: String
     
+    var iconType: IconType {
+        return iconURL?.absoluteString.components(separatedBy: ".").last == "svg" ? .vector : .raster
+    }
+    
     init(id: Int, title: String, type: TransactionableType, iconURL: URL?, iconPlaceholder: String) {
         self.id = id
         self.title = title

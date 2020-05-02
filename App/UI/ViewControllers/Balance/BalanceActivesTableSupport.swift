@@ -43,8 +43,4 @@ class BalanceActivesTableSupport : NSObject, UITableViewDelegate, UITableViewDat
         guard let activeViewModel = viewModel.activeViewModel(at: indexPath) else { return }
         delegate?.didSelect(active: activeViewModel)
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
-    }
 }

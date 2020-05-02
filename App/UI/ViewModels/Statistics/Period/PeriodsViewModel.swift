@@ -49,13 +49,14 @@ class PeriodsViewModel {
             return [dateRangeFilter]
         }
         
-        guard let unit = dateRangeFilter.datePeriod.addingUnit else { return []}
+        guard   let unit = dateRangeFilter.datePeriod.addingUnit,
+                let addingComponents = dateRangeFilter.datePeriod.addingComponents else { return []}
         
         var tempDate = beginning.dateAtStartOf(unit)
         var array = [DateRangeTransactionFilter]()
 
         while tempDate < ending.dateAtEndOf(unit) {
-            let nextDate = tempDate + 1.months
+            let nextDate = tempDate + addingComponents
             array.append(DateRangeTransactionFilter(fromDate: tempDate, toDate: tempDate.dateAtEndOf(unit), datePeriod: dateRangeFilter.datePeriod))
             tempDate = nextDate
         }
