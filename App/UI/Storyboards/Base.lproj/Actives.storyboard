@@ -794,8 +794,60 @@
                                 <rect key="frame" x="0.0" y="33" width="375" height="634"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddingItemTableViewCell" rowHeight="64" id="9wK-zV-u4U" customClass="AddingItemTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9wK-zV-u4U" id="CP9-O1-Kr2">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jwm-RW-fAv" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="8" width="48" height="48"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="48" id="Utg-fX-aeB"/>
+                                                        <constraint firstAttribute="width" constant="48" id="Vfg-9F-80a"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Labelasdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3X-GN-0Np">
+                                                    <rect key="frame" x="72" y="0.0" width="287" height="64"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="64" id="zrq-8W-3Jm"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                    <color key="textColor" name="white 1.0"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nab-tW-X9a">
+                                                    <rect key="frame" x="0.0" y="63" width="375" height="1"/>
+                                                    <color key="backgroundColor" name="white 0.04"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="lcj-fO-CRn"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="nab-tW-X9a" secondAttribute="trailing" id="FKY-XT-DXD"/>
+                                                <constraint firstItem="jwm-RW-fAv" firstAttribute="centerY" secondItem="CP9-O1-Kr2" secondAttribute="centerY" id="JEy-xX-8GP"/>
+                                                <constraint firstItem="Z3X-GN-0Np" firstAttribute="centerY" secondItem="CP9-O1-Kr2" secondAttribute="centerY" id="aTy-5k-6Ob"/>
+                                                <constraint firstAttribute="bottom" secondItem="nab-tW-X9a" secondAttribute="bottom" id="fn3-hf-7Tf"/>
+                                                <constraint firstItem="jwm-RW-fAv" firstAttribute="leading" secondItem="CP9-O1-Kr2" secondAttribute="leading" constant="16" id="gx9-MU-idw"/>
+                                                <constraint firstAttribute="trailing" secondItem="Z3X-GN-0Np" secondAttribute="trailing" constant="16" id="kYm-rD-w62"/>
+                                                <constraint firstItem="Z3X-GN-0Np" firstAttribute="top" secondItem="CP9-O1-Kr2" secondAttribute="top" id="rCR-fI-wqr"/>
+                                                <constraint firstItem="Z3X-GN-0Np" firstAttribute="leading" secondItem="jwm-RW-fAv" secondAttribute="trailing" constant="8" id="wJS-Mw-6oC"/>
+                                                <constraint firstAttribute="bottom" secondItem="Z3X-GN-0Np" secondAttribute="bottom" id="x5A-4u-wjb"/>
+                                                <constraint firstItem="nab-tW-X9a" firstAttribute="leading" secondItem="CP9-O1-Kr2" secondAttribute="leading" id="zIX-hA-Pxc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="addingTitleLabel" destination="Z3X-GN-0Np" id="KF1-Rg-QUI"/>
+                                            <outlet property="iconView" destination="jwm-RW-fAv" id="4sv-tq-0Bc"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActiveTableViewCell" id="k8z-nz-DOY" customClass="ActiveTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="92" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k8z-nz-DOY" id="tjL-aA-xYA">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
