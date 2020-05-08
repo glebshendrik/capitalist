@@ -194,7 +194,7 @@ extension ExpenseCategorySelectViewController : SwipeTableViewCellDelegate {
         var removeWithTransactionsAction: ((UIAlertAction) -> Void)? = nil
         
         if let expenseCategoryId = expenseCategoryViewModel?.id {
-            alertTitle = TransactionableType.expenseSource.removeQuestion
+            alertTitle = TransactionableType.expenseCategory.removeQuestion
             removeAction = { _ in
                 self.removeExpenseCategory(by: expenseCategoryId, deleteTransactions: false)
             }
