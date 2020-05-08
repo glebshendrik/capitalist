@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-enum IncomeSourcesSection {
+enum ItemsSection {
     case adding
     case items
 }
@@ -42,7 +42,7 @@ class IncomeSourcesViewModel {
         return String(format: NSLocalizedString("Доход за %@", comment: "Доход за %@"), periodTitle)
     }
     
-    private var sections: [IncomeSourcesSection] {
+    private var sections: [ItemsSection] {
         return isAddingAllowed ? [.adding, .items] : [.items]
     }
     
@@ -116,7 +116,7 @@ class IncomeSourcesViewModel {
         return incomeSourceViewModels[safe: indexPath.row]
     }
     
-    func section(at index: Int) -> IncomeSourcesSection? {
+    func section(at index: Int) -> ItemsSection? {
         return sections[safe: index]
     }
     

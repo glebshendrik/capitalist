@@ -33,6 +33,10 @@ class ExpenseSourceViewModel {
         return amount(shouldRound: false)
     }
     
+    var amountCents: Int {
+        return expenseSource.amountCents
+    }
+    
     var inCredit: Bool {
         guard let creditLimitCents = expenseSource.creditLimitCents else { return false }
         return expenseSource.amountCents < creditLimitCents
@@ -85,7 +89,7 @@ class ExpenseSourceViewModel {
     }
     
     private func amount(shouldRound: Bool) -> String {
-        return expenseSource.amountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
+        return amountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }
 }
 
