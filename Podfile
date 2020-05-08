@@ -50,6 +50,7 @@ target 'Three Baskets' do
   pod 'FBSDKCoreKit/Swift'
   pod 'myTrackerSDK'
   pod "Haptica"
+  pod 'SwipeCellKit'
 end
 
 post_install do |installer|

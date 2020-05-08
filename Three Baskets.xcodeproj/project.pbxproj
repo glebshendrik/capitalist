@@ -264,6 +264,7 @@
 		FA8AD0E222C5F48B0084AD19 /* ProvidersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */; };
 		FA8AD0E422C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */; };
 		FA8AD0E622C5F5E60084AD19 /* BankConnectionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */; };
+		FA9485CD245FD1C0005EB7B9 /* AddingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9485CC245FD1C0005EB7B9 /* AddingItemTableViewCell.swift */; };
 		FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */; };
 		FA9F962A21C2A86B00FD64C1 /* IncomeSourceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */; };
 		FA9F962C21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */; };
@@ -749,6 +750,7 @@
 		FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewModel.swift; sourceTree = "<group>"; };
 		FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionsCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionsCoordinator.swift; sourceTree = "<group>"; };
+		FA9485CC245FD1C0005EB7B9 /* AddingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingItemTableViewCell.swift; sourceTree = "<group>"; };
 		FA9F962721C2818E00FD64C1 /* IncomeSourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceViewModel.swift; sourceTree = "<group>"; };
 		FA9F962921C2A86B00FD64C1 /* IncomeSourceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewController.swift; sourceTree = "<group>"; };
 		FA9F962B21C2B1B600FD64C1 /* IncomeSourceEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditViewModel.swift; sourceTree = "<group>"; };
@@ -1064,6 +1066,7 @@
 				FAF7529224408DC900A0B5B7 /* CountryCell.swift */,
 				FA8722792446DFA600B093AA /* IconView.swift */,
 				FA87227B2446E2D000B093AA /* CustomView.swift */,
+				FA9485CC245FD1C0005EB7B9 /* AddingItemTableViewCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2735,6 +2738,7 @@
 				FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */,
 				FA28480322F19EB6003F114A /* UIFactory.swift in Sources */,
 				FA56AB9F235EEBD800E4D0E3 /* ActivesViewModel.swift in Sources */,
+				FA9485CD245FD1C0005EB7B9 /* AddingItemTableViewCell.swift in Sources */,
 				FAD88F3521AEB8BD00BE7BC1 /* ApplicationExtensions.swift in Sources */,
 				FAEC8C782372B585009B10E7 /* ProgressView.swift in Sources */,
 				FA36E98B23F1832800B340AA /* AnalyticsManager.swift in Sources */,

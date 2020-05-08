@@ -46,6 +46,10 @@ class IncomeSourceViewModel : TransactionSource {
         return amount(shouldRound: false)
     }
     
+    var amountCents: Int {
+        return incomeSource.gotCentsAtPeriod
+    }
+    
     var currency: Currency {
         return incomeSource.currency
     }
@@ -106,6 +110,6 @@ class IncomeSourceViewModel : TransactionSource {
     }
     
     private func amount(shouldRound: Bool) -> String {
-        return incomeSource.gotCentsAtPeriod.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
+        return amountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }
 }

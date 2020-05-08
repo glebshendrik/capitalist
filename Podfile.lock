@@ -174,6 +174,7 @@ PODS:
     - Swinject (~> 2.6)
   - SwinjectStoryboard (2.2.0):
     - Swinject (~> 2.6)
+  - SwipeCellKit (2.7.1)
   - TrustKit (1.6.5)
 
 DEPENDENCIES:
@@ -220,6 +221,7 @@ DEPENDENCIES:
   - Swinject (= 2.6.2)
   - SwinjectAutoregistration (= 2.6.0)
   - SwinjectStoryboard (= 2.2)
+  - SwipeCellKit
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -278,6 +280,7 @@ SPEC REPOS:
     - SwiftyGif
     - Swinject
     - SwinjectStoryboard
+    - SwipeCellKit
     - TrustKit
 
 EXTERNAL SOURCES:
@@ -360,8 +363,9 @@ SPEC CHECKSUMS:
   Swinject: cf7458774b1b00323080a9c67e47a1ee7f9d2af1
   SwinjectAutoregistration: 93a908f7543c401b0c315305ac0ae501efdbce89
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
 
-PODFILE CHECKSUM: a0220399513b0228f76a1201fb0cb2df9f1ecaee
+PODFILE CHECKSUM: ff2ddb6721b159db2fb01e516b0308c679b91e90
 
 COCOAPODS: 1.8.0

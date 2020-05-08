@@ -131,8 +131,33 @@
                                             <segue destination="pYA-eK-Fxt" kind="show" id="fO5-Yn-0Az"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="BE2-VS-Nrb" imageView="TGA-nL-Nni" rowHeight="56" style="IBUITableViewCellStyleDefault" id="bl8-wo-IKw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="dzT-rW-dhj" imageView="gxx-bk-9KB" rowHeight="56" style="IBUITableViewCellStyleDefault" id="CPQ-xI-cMD">
                                         <rect key="frame" x="0.0" y="252" width="375" height="56"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CPQ-xI-cMD" id="zdK-wM-3Nw">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Источники дохода" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dzT-rW-dhj">
+                                                    <rect key="frame" x="54.5" y="0.0" width="304.5" height="56"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                    <color key="textColor" name="white 1.0"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="income-sources-menu-item-icon" id="gxx-bk-9KB">
+                                                    <rect key="frame" x="16" y="18" width="23.5" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <segue destination="Yb8-Cf-h3U" kind="show" id="vXg-sK-VWo"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="BE2-VS-Nrb" imageView="TGA-nL-Nni" rowHeight="56" style="IBUITableViewCellStyleDefault" id="bl8-wo-IKw">
+                                        <rect key="frame" x="0.0" y="308" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bl8-wo-IKw" id="Iy9-lW-qvZ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
@@ -157,7 +182,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Bc7-cd-bkH" imageView="CTH-9X-EYu" rowHeight="56" style="IBUITableViewCellStyleDefault" id="TZT-M5-433">
-                                        <rect key="frame" x="0.0" y="308" width="375" height="56"/>
+                                        <rect key="frame" x="0.0" y="364" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TZT-M5-433" id="gQr-Bh-Cfi">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
@@ -182,7 +207,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="BjV-if-9WJ" imageView="wP6-6p-BBg" rowHeight="56" style="IBUITableViewCellStyleDefault" id="GCR-iE-jhG">
-                                        <rect key="frame" x="0.0" y="364" width="375" height="56"/>
+                                        <rect key="frame" x="0.0" y="420" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GCR-iE-jhG" id="BcR-4b-kEI">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
@@ -207,7 +232,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="TtX-LK-h4F" imageView="4QQ-Nu-2iP" rowHeight="56" style="IBUITableViewCellStyleDefault" id="xx5-JN-se6">
-                                        <rect key="frame" x="0.0" y="420" width="375" height="56"/>
+                                        <rect key="frame" x="0.0" y="476" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xx5-JN-se6" id="W2m-U7-MPR">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
@@ -232,7 +257,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="148" id="oXr-st-47Z">
-                                        <rect key="frame" x="0.0" y="476" width="375" height="148"/>
+                                        <rect key="frame" x="0.0" y="532" width="375" height="148"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oXr-st-47Z" id="aCx-I0-klI">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="148"/>
@@ -1337,11 +1362,22 @@
             </objects>
             <point key="canvasLocation" x="-1884" y="157"/>
         </scene>
+        <!--IncomeSourcesViewController-->
+        <scene sceneID="4wc-RY-SdS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="IncomeSources" referencedIdentifier="IncomeSourcesViewController" id="Yb8-Cf-h3U" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="yfG-V8-iRd"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DKG-1i-dSA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-644" y="505"/>
+        </scene>
     </scenes>
     <resources>
         <image name="balance-menu-item-icon" width="22" height="22"/>
         <image name="credits-menu-item-icon" width="24" height="24"/>
         <image name="debts-menu-item-icon" width="22" height="20"/>
+        <image name="income-sources-menu-item-icon" width="23.5" height="19.5"/>
         <image name="join-menu-item-icon" width="22" height="22"/>
         <image name="loader-1" width="55" height="31"/>
         <image name="main-plus" width="23" height="23"/>
