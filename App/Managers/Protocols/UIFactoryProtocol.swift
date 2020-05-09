@@ -52,7 +52,7 @@ protocol UIFactoryProtocol {
     
     func expenseCategorySelectViewController(delegate: ExpenseCategorySelectViewControllerDelegate) -> ExpenseCategorySelectViewController?
     
-    func activeSelectViewController(delegate: ActiveSelectViewControllerDelegate,
+    func activeSelectViewController(delegate: ActivesViewControllerDelegate,
                                     skipActiveId: Int?,
                                     selectionType: TransactionPart) -> ActiveSelectViewController?
     

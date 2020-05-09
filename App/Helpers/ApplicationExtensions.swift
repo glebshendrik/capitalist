@@ -12,6 +12,7 @@ import SwifterSwift
 import SwiftDate
 import AlamofireImage
 import Haptica
+import ESPullToRefresh
 
 extension UITableView {
     func reloadData(with animation: UITableView.RowAnimation) {        
@@ -806,5 +807,63 @@ extension UIView {
         } else {
             Haptic.impact(.heavy).generate()
         }
+    }
+}
+
+extension UIScrollView {
+    var refreshControlHeaderTitleLabel: UILabel? {
+        return (header?.animator as? ESRefreshHeaderAnimator)?.titleLabel
+    }
+    
+    var refreshControlHeaderImageView: UIImageView? {
+        return (header?.animator as? ESRefreshHeaderAnimator)?.imageView
+    }
+    
+    var refreshControlHeaderIndicatorView: UIActivityIndicatorView? {
+        return (header?.animator as? ESRefreshHeaderAnimator)?.indicatorView
+    }
+    
+    var refreshControlFooterTitleLabel: UILabel? {
+        return (footer?.animator as? ESRefreshFooterAnimator)?.titleLabel
+    }
+        
+    var refreshControlFooterIndicatorView: UIActivityIndicatorView? {
+        return (footer?.animator as? ESRefreshFooterAnimator)?.indicatorView
+    }
+    
+    func setupPullToRefreshAppearance() {
+        refreshControlHeaderTitleLabel?.textColor = UIColor.by(.white64)
+        refreshControlHeaderIndicatorView?.color = UIColor.by(.white64)
+        refreshControlHeaderImageView?.tintColor = UIColor.by(.white64)
+        refreshControlHeaderTitleLabel?.font = UIFont(name: "Roboto-Light", size: 13)
+        refreshControlFooterTitleLabel?.textColor = UIColor.by(.white64)
+        refreshControlFooterIndicatorView?.color = UIColor.by(.white64)
+        refreshControlFooterTitleLabel?.font = UIFont(name: "Roboto-Light", size: 13)
+        refreshControl = UIRefreshControl(frame: .zero)
+        refreshControl?.tintColor = .clear
+    }
+}
+
+extension ESRefreshHeaderAnimator {
+    var titleLabel: UILabel? {
+        return self.view.subviews.first { $0 is UILabel } as? UILabel
+    }
+    
+    var imageView: UIImageView? {
+        return self.view.subviews.first { $0 is UIImageView } as? UIImageView
+    }
+    
+    var indicatorView: UIActivityIndicatorView? {
+        return self.view.subviews.first { $0 is UIActivityIndicatorView } as? UIActivityIndicatorView
+    }
+}
+
+extension ESRefreshFooterAnimator {
+    var titleLabel: UILabel? {
+        return self.view.subviews.first { $0 is UILabel } as? UILabel
+    }
+        
+    var indicatorView: UIActivityIndicatorView? {
+        return self.view.subviews.first { $0 is UIActivityIndicatorView } as? UIActivityIndicatorView
     }
 }

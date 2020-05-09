@@ -488,7 +488,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nGE-SU-3YL">
-                                <rect key="frame" x="0.0" y="32" width="375" height="635"/>
+                                <rect key="frame" x="0.0" y="24" width="375" height="643"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddingItemTableViewCell" rowHeight="64" id="dEd-Zs-tbM" customClass="AddingItemTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
@@ -620,7 +620,7 @@
                             <constraint firstItem="jXw-P3-6Tc" firstAttribute="trailing" secondItem="nGE-SU-3YL" secondAttribute="trailing" id="euR-8g-wAU"/>
                             <constraint firstItem="jXw-P3-6Tc" firstAttribute="bottom" secondItem="nGE-SU-3YL" secondAttribute="bottom" id="hX7-P9-hZR"/>
                             <constraint firstAttribute="trailing" secondItem="LXB-vK-lge" secondAttribute="trailing" constant="16" id="in4-TN-evi"/>
-                            <constraint firstItem="nGE-SU-3YL" firstAttribute="top" secondItem="1q9-Ig-mT6" secondAttribute="bottom" constant="16" id="ukc-7O-bqc"/>
+                            <constraint firstItem="nGE-SU-3YL" firstAttribute="top" secondItem="1q9-Ig-mT6" secondAttribute="bottom" constant="8" id="ukc-7O-bqc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jXw-P3-6Tc"/>
                     </view>

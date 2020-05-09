@@ -60,14 +60,15 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
     
     func goNext() {
         guard viewModel.nextButtonEnabled else { return }
-        guard let nextTransactionableType = viewModel.nextStepTransactionableType() else {
-            _ = UIFlowManager.reach(point: .dataSetup)
-            router.route()
-            return
-        }
-        viewModel.set(transactionableType: nextTransactionableType)
-        updateBackButtonUI()
-        loadData()
+        onboardUser()
+//        guard let nextTransactionableType = viewModel.nextStepTransactionableType() else {
+//            _ = UIFlowManager.reach(point: .dataSetup)
+//            router.route()
+//            return
+//        }
+//        viewModel.set(transactionableType: nextTransactionableType)
+//        updateBackButtonUI()
+//        loadData()
     }
     
     func setupUI() {
@@ -121,6 +122,22 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
         }.finally {
             self.updateUI()
             self.set(self.examplesActivityIndicator, hidden: true)
+        }
+    }
+    
+    func onboardUser() {
+        set(examplesActivityIndicator, hidden: false)
+        firstly {
+            viewModel.onboardUser()
+        }
+        .catch { e in
+            print(e)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
+        }.finally {            
+            self.updateUI()
+            self.set(self.examplesActivityIndicator, hidden: true)
+            _ = UIFlowManager.reach(point: .dataSetup)
+            self.router.route()
         }
     }
     

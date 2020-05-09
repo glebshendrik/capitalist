@@ -399,7 +399,7 @@ class UIFactory : UIFactoryProtocol {
         return activeEditNavigationController
     }
     
-    func activeSelectViewController(delegate: ActiveSelectViewControllerDelegate,
+    func activeSelectViewController(delegate: ActivesViewControllerDelegate,
                                     skipActiveId: Int?,
                                     selectionType: TransactionPart) -> ActiveSelectViewController? {
         let activeSelectViewController = router.viewController(.ActiveSelectViewController) as? ActiveSelectViewController

@@ -227,8 +227,14 @@ extension ApplicationAssembly {
         
         // ActiveSelectViewController
         container.registerForSkrudzhStoryboard(ActiveSelectViewController.self) { (r, c) in
+//            c.viewModel = r.resolve(ActivesViewModel.self)
+        }
+        
+        // ActivesViewController
+        container.registerForSkrudzhStoryboard(ActivesViewController.self) { (r, c) in
             c.viewModel = r.resolve(ActivesViewModel.self)
         }
+        
         
         // EntityInfoViewController
         container.registerForSkrudzhStoryboard(EntityInfoViewController.self) { (r, c) in

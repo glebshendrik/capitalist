@@ -130,15 +130,16 @@ class TransactionablesCreationViewModel {
     }
     
     func loadData() -> Promise<Void> {
-        return  firstly {
-                    onboardUser()
-                }.then {
-                    when(fulfilled: self.loadUser(), self.loadCollectionsData())
-                }        
+        return when(fulfilled: self.loadUser(), self.loadCollectionsData())
+//        return  firstly {
+//                    onboardUser()
+//                }.then {
+//                    when(fulfilled: self.loadUser(), self.loadCollectionsData())
+//                }
     }
     
     func onboardUser() -> Promise<Void> {
-        guard transactionableType == .incomeSource else { return Promise.value(()) }
+//        guard transactionableType == .incomeSource else { return Promise.value(()) }
         return accountCoordinator.onboardCurrentUser()
     }
         
@@ -170,7 +171,7 @@ class TransactionablesCreationViewModel {
     func nextStepTransactionableType() -> TransactionableType? {
         switch transactionableType {
         case .expenseSource:
-            return .incomeSource
+            return nil
         case .incomeSource:
             return .expenseCategory
         default:

@@ -56,7 +56,7 @@ class IncomeSourcesViewController : IncomeSourceSelectViewController {
             [weak self] in
             self?.loadIncomeSources()
         }
-        tableView.setupPullToRefreshAppearance()
+        tableView.setupPullToRefreshAppearance()        
     }
     
     private func setupNavigationBar() {

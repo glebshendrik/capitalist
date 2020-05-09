@@ -283,7 +283,7 @@ extension TransactionEditViewController : ExpenseCategorySelectViewControllerDel
     }
 }
 
-extension TransactionEditViewController : ActiveSelectViewControllerDelegate {
+extension TransactionEditViewController : ActivesViewControllerDelegate {
     func didSelect(sourceActiveViewModel: ActiveViewModel) {
         update(source: sourceActiveViewModel)
     }

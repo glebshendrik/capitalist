@@ -1,5 +1,5 @@
 //
-//  ExpenseSourcesViewController.swift
+//  ActivesViewController.swift
 //  Three Baskets
 //
 //  Created by Alexander Petropavlovsky on 09.05.2020.
@@ -9,24 +9,23 @@
 import UIKit
 import PromiseKit
 import SwipeCellKit
-import ESPullToRefresh
 
-protocol ExpenseSourcesViewControllerDelegate {
-    func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel)
-    func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel)
+protocol ActivesViewControllerDelegate {
+    func didSelect(sourceActiveViewModel: ActiveViewModel)
+    func didSelect(destinationActiveViewModel: ActiveViewModel)
 }
 
-class ExpenseSourcesViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol {
+class ActivesViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol {
     
     @IBOutlet weak var loader: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var totalSubtitleLabel: UILabel!
     
-    private var delegate: ExpenseSourcesViewControllerDelegate? = nil
+    private var delegate: ActivesViewControllerDelegate? = nil
     private var selectionType: TransactionPart = .destination
-    
-    var viewModel: ExpenseSourcesViewModel!
+        
+    var viewModel: ActivesViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var factory: UIFactoryProtocol!
     
@@ -40,13 +39,11 @@ class ExpenseSourcesViewController : UIViewController, UIMessagePresenterManager
         refreshData()
     }
     
-    func set(delegate: ExpenseSourcesViewControllerDelegate,
-             skipExpenseSourceId: Int?,
-             selectionType: TransactionPart,
-             currency: String?) {
+    func set(delegate: ActivesViewControllerDelegate,
+             skipActiveId: Int?,
+             selectionType: TransactionPart) {
         self.delegate = delegate
-        self.viewModel.skipExpenseSourceId = skipExpenseSourceId
-        self.viewModel.currencyFilter = currency
+        self.viewModel.skipActiveId = skipActiveId
         self.selectionType = selectionType
     }
     
@@ -54,7 +51,7 @@ class ExpenseSourcesViewController : UIViewController, UIMessagePresenterManager
         loadData()
     }
     
-    func setActivityIndicator(hidden: Bool) {
+    func setActivityIndicator(hidden: Bool) {        
         self.viewModel.isUpdatingData = !hidden
         set(loader, hidden: hidden, animated: true)
         if hidden {
@@ -71,7 +68,7 @@ class ExpenseSourcesViewController : UIViewController, UIMessagePresenterManager
             self.updateUI()
         }
         .catch { e in
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки кошельков", comment: "Ошибка загрузки кошельков"), theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки активов", comment: "Ошибка загрузки активов"), theme: .error)
             if self.delegate != nil {
                 self.close()
             }
@@ -80,16 +77,16 @@ class ExpenseSourcesViewController : UIViewController, UIMessagePresenterManager
         }
     }
     
-    private func removeExpenseSource(by id: Int, deleteTransactions: Bool) {
+    private func removeActive(by id: Int, deleteTransactions: Bool) {
         setActivityIndicator(hidden: false)
         firstly {
-            viewModel.removeExpenseSource(by: id, deleteTransactions: deleteTransactions)
+            viewModel.removeActive(by: id, deleteTransactions: deleteTransactions)
         }.done {
-            self.didRemoveExpenseSource()
+            self.refreshData()
         }
         .catch { error in
             self.setActivityIndicator(hidden: true)
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка удаления кошелька", comment: "Ошибка удаления кошелька"), theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка удаления актива", comment: "Ошибка удаления актива"), theme: .error)
         }
     }
     
@@ -123,7 +120,7 @@ class ExpenseSourcesViewController : UIViewController, UIMessagePresenterManager
             [weak self] in
             self?.loadData()
         }
-        tableView.setupPullToRefreshAppearance()        
+        tableView.setupPullToRefreshAppearance()
     }
             
     private func setupTotalUI() {
@@ -134,7 +131,7 @@ class ExpenseSourcesViewController : UIViewController, UIMessagePresenterManager
         tableView.reloadData(with: .automatic)
         if viewModel.shouldCalculateTotal {
             updateTotalUI()
-        }        
+        }
     }
     
     private func updateTotalUI() {
@@ -144,24 +141,44 @@ class ExpenseSourcesViewController : UIViewController, UIMessagePresenterManager
                           animations: {
                             
             self.totalLabel.text = self.viewModel.total
-            self.totalSubtitleLabel.text = NSLocalizedString("Общий баланс кошельков", comment: "")
+            self.totalSubtitleLabel.text = NSLocalizedString("Стоимость активов", comment: "")
         })
     }
     
-    func showNewExpenseSourceScreen() {
-        showEditScreen(expenseSource: nil)
+    func showNewActiveScreen() {
+        let alertTitle = NSLocalizedString("Выберите тип актива", comment: "")
+        
+        let chooseSavingAction: ((UIAlertAction) -> Void)? = { _ in
+            self.showNewActiveScreen(basketType: .safe)
+        }
+        let chooseInvestmentAction: ((UIAlertAction) -> Void)? = { _ in
+            self.showNewActiveScreen(basketType: .risk)
+        }
+        
+        let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Сбережение", comment: ""),
+                                                      style: .default,
+                                                      handler: chooseSavingAction),
+                                        UIAlertAction(title: NSLocalizedString("Инвестиция", comment: ""),
+                                                      style: .default,
+                                                      handler: chooseInvestmentAction)]
+        sheet(title: alertTitle, actions: actions)
     }
     
-    func showEditScreen(expenseSource: ExpenseSource?) {
-        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource))
+    func showNewActiveScreen(basketType: BasketType) {
+        showActiveEditScreen(active: nil, basketType: basketType)
     }
     
-    func showExpenseSourceInfoScreen(expenseSource: ExpenseSourceViewModel?) {
-        modal(factory.expenseSourceInfoViewController(expenseSource: expenseSource))
+    func showActiveEditScreen(active: Active?, basketType: BasketType?) {
+        guard let basketType = basketType else { return }
+        modal(factory.activeEditViewController(delegate: self, active: active, basketType: basketType))
+    }
+    
+    func showActiveInfo(active: ActiveViewModel) {
+        modal(factory.activeInfoViewController(active: active))
     }
 }
 
-extension ExpenseSourcesViewController : UITableViewDelegate, UITableViewDataSource {
+extension ActivesViewController : UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections
     }
@@ -185,16 +202,16 @@ extension ExpenseSourcesViewController : UITableViewDelegate, UITableViewDataSou
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddingItemTableViewCell", for: indexPath) as? AddingItemTableViewCell else {
                 return UITableViewCell()
         }
-        cell.addingTitleLabel.text = NSLocalizedString("Добавить кошелек", comment: "")
+        cell.addingTitleLabel.text = NSLocalizedString("Добавить актив", comment: "")
         return cell
     }
     
     func tableView(_ tableView: UITableView, expenseSourceCellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseSourceTableViewCell", for: indexPath) as? ExpenseSourceTableViewCell,
-            let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ActiveTableViewCell", for: indexPath) as? ActiveTableViewCell,
+            let activeViewModel = viewModel.activeViewModel(at: indexPath) else {
                 return UITableViewCell()
         }
-        cell.viewModel = expenseSourceViewModel
+        cell.viewModel = activeViewModel
         cell.delegate = self
         return cell
     }
@@ -205,30 +222,30 @@ extension ExpenseSourcesViewController : UITableViewDelegate, UITableViewDataSou
         
         switch section {
         case .adding:
-            showNewExpenseSourceScreen()
+            showNewActiveScreen()
         case .items:
-            guard let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) else { return }
+            guard let activeViewModel = viewModel.activeViewModel(at: indexPath) else { return }
             if delegate != nil {
-                didSelect(expenseSourceViewModel)
+                didSelect(activeViewModel)
             }
             else {
-                showExpenseSourceInfoScreen(expenseSource: expenseSourceViewModel)
+                showActiveInfo(active: activeViewModel)
             }
         }
     }
     
-    func didSelect(_ expenseSourceViewModel: ExpenseSourceViewModel) {
+    func didSelect(_ activeViewModel: ActiveViewModel) {
         switch selectionType {
         case .source:
-            delegate?.didSelect(sourceExpenseSourceViewModel: expenseSourceViewModel)
+            delegate?.didSelect(sourceActiveViewModel: activeViewModel)
         case .destination:
-            delegate?.didSelect(destinationExpenseSourceViewModel: expenseSourceViewModel)
+            delegate?.didSelect(destinationActiveViewModel: activeViewModel)
         }
         close()
     }
 }
 
-extension ExpenseSourcesViewController : SwipeTableViewCellDelegate {
+extension ActivesViewController : SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
        
         guard   orientation == .right else {
@@ -236,16 +253,16 @@ extension ExpenseSourcesViewController : SwipeTableViewCellDelegate {
         }
         
         let deleteAction = SwipeAction(style: .destructive, title: NSLocalizedString("Удалить", comment: "Удалить")) { action, indexPath in
-            let expenseSourceViewModel = self.viewModel.expenseSourceViewModel(at: indexPath)
-            self.didTapDeleteButton(expenseSourceViewModel: expenseSourceViewModel)
+            let activeViewModel = self.viewModel.activeViewModel(at: indexPath)
+            self.didTapDeleteButton(activeViewModel: activeViewModel)
         }
         // customize the action appearance
         deleteAction.image = UIImage(named: "remove-icon")
         deleteAction.hidesWhenSelected = true
         
         let editAction = SwipeAction(style: .default, title: NSLocalizedString("Редактировать", comment: "")) { action, indexPath in
-            let expenseSourceViewModel = self.viewModel.expenseSourceViewModel(at: indexPath)
-            self.showEditScreen(expenseSource: expenseSourceViewModel?.expenseSource)
+            let activeViewModel = self.viewModel.activeViewModel(at: indexPath)
+            self.showActiveEditScreen(active: activeViewModel?.active, basketType: activeViewModel?.basketType)
         }
         editAction.image = UIImage(named: "edit-info-icon")
         editAction.hidesWhenSelected = true
@@ -253,18 +270,18 @@ extension ExpenseSourcesViewController : SwipeTableViewCellDelegate {
         return [deleteAction, editAction]
     }
     
-    func didTapDeleteButton(expenseSourceViewModel: ExpenseSourceViewModel?) {
+    func didTapDeleteButton(activeViewModel: ActiveViewModel?) {
         var alertTitle = ""
         var removeAction: ((UIAlertAction) -> Void)? = nil
         var removeWithTransactionsAction: ((UIAlertAction) -> Void)? = nil
         
-        if let expenseSourceId = expenseSourceViewModel?.id {
-            alertTitle = TransactionableType.expenseSource.removeQuestion
+        if let activeId = activeViewModel?.id {
+            alertTitle = TransactionableType.active.removeQuestion
             removeAction = { _ in
-                self.removeExpenseSource(by: expenseSourceId, deleteTransactions: false)
+                self.removeActive(by: activeId, deleteTransactions: false)
             }
             removeWithTransactionsAction = { _ in
-                self.removeExpenseSource(by: expenseSourceId, deleteTransactions: true)
+                self.removeActive(by: activeId, deleteTransactions: true)
             }
         }
         
@@ -278,16 +295,16 @@ extension ExpenseSourcesViewController : SwipeTableViewCellDelegate {
     }
 }
 
-extension ExpenseSourcesViewController : ExpenseSourceEditViewControllerDelegate {
-    func didCreateExpenseSource() {
+extension ActivesViewController : ActiveEditViewControllerDelegate {
+    func didCreateActive(with basketType: BasketType, name: String, isIncomePlanned: Bool) {
         refreshData()
     }
     
-    func didUpdateExpenseSource() {
+    func didUpdateActive(with basketType: BasketType) {
         refreshData()
     }
     
-    func didRemoveExpenseSource() {
+    func didRemoveActive(with basketType: BasketType) {
         refreshData()
     }
 }
