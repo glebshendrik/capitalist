@@ -37,6 +37,7 @@ extension TransactionEditViewController {
     func update(gotAt: Date?) {
         viewModel.gotAt = gotAt
         updateToolbarUI()
+        focusAmountField()
     }
     
     func update(source: Transactionable?) {
@@ -53,7 +54,7 @@ extension TransactionEditViewController {
 }
 
 extension TransactionEditViewController {
-    func focusAmountField() {
+    func focusAmountField() {        
         guard viewModel.hasBothTransactionables else { return }
         if viewModel.needCurrencyExchange {
             tableController.exchangeField.amountField.becomeFirstResponder()

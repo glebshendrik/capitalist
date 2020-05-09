@@ -6,7 +6,9 @@
 //  Copyright © 2019 Real Tranzit. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import SwifterSwift
 
 protocol TransactionEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
     func didAppear()
@@ -65,14 +67,18 @@ class TransactionEditTableController : FormFieldsTableViewController {
     lazy var equalPadButtton: UIButton = {
         return createPadButton(type: .equal)
     }()
-    
+        
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate
     }
+        
+    let didAppearOnce = Once()
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        delegate?.didAppear()
+        didAppearOnce.run {
+            delegate?.didAppear()
+        }
     }
         
     override func setupUI() {

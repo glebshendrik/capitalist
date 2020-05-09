@@ -867,3 +867,14 @@ extension ESRefreshFooterAnimator {
         return self.view.subviews.first { $0 is UIActivityIndicatorView } as? UIActivityIndicatorView
     }
 }
+
+class Once {
+  var already: Bool = false
+
+  func run(block: () -> Void) {
+    guard !already else { return }
+
+    block()
+    already = true
+  }
+}

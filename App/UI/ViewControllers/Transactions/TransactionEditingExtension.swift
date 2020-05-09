@@ -19,6 +19,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func didTapCalendar() {
+        view.endEditing(true)
         modal(factory.datePickerViewController(delegate: self,
                                                  date: viewModel.gotAt,
                                                  minDate: nil,
