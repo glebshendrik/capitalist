@@ -45,7 +45,7 @@ protocol UIFactoryProtocol {
     
     func incomeSourceSelectViewController(delegate: IncomeSourceSelectViewControllerDelegate) -> IncomeSourceSelectViewController?
     
-    func expenseSourceSelectViewController(delegate: ExpenseSourceSelectViewControllerDelegate,
+    func expenseSourceSelectViewController(delegate: ExpenseSourcesViewControllerDelegate,
                                            skipExpenseSourceId: Int?,
                                            selectionType: TransactionPart,
                                            currency: String?) -> ExpenseSourceSelectViewController?

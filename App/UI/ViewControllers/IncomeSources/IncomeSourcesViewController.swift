@@ -43,6 +43,7 @@ class IncomeSourcesViewController : IncomeSourceSelectViewController {
         super.setActivityIndicator(hidden: hidden)
         if hidden {
             tableView.es.stopPullToRefresh()
+            tableView.refreshControl?.endRefreshing()
         }
     }
     
@@ -55,6 +56,7 @@ class IncomeSourcesViewController : IncomeSourceSelectViewController {
             [weak self] in
             self?.loadIncomeSources()
         }
+        tableView.setupPullToRefreshAppearance()
     }
     
     private func setupNavigationBar() {

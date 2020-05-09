@@ -181,7 +181,7 @@ extension CreditEditViewController : CurrenciesViewControllerDelegate {
     }
 }
 
-extension CreditEditViewController : ExpenseSourceSelectViewControllerDelegate {
+extension CreditEditViewController : ExpenseSourcesViewControllerDelegate {
     func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
         update(expenseSource: sourceExpenseSourceViewModel)
     }

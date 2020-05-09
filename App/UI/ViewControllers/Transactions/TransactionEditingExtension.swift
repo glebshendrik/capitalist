@@ -267,7 +267,7 @@ extension TransactionEditViewController : IncomeSourceSelectViewControllerDelega
     }
 }
 
-extension TransactionEditViewController : ExpenseSourceSelectViewControllerDelegate {
+extension TransactionEditViewController : ExpenseSourcesViewControllerDelegate {
     func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
         update(source: sourceExpenseSourceViewModel)
     }

@@ -139,8 +139,14 @@ extension ApplicationAssembly {
         
         // ExpenseSourceSelectViewController
         container.registerForSkrudzhStoryboard(ExpenseSourceSelectViewController.self) { (r, c) in
+//            c.viewModel = r.resolve(ExpenseSourcesViewModel.self)
+//            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
+        
+        // ExpenseSourcesViewController
+        container.registerForSkrudzhStoryboard(ExpenseSourcesViewController.self) { (r, c) in
             c.viewModel = r.resolve(ExpenseSourcesViewModel.self)
-            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+//            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         
         // ExpenseCategorySelectViewController

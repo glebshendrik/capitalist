@@ -106,7 +106,7 @@ class UIFactory : UIFactoryProtocol {
         return incomeSourceSelectViewController
     }
     
-    func expenseSourceSelectViewController(delegate: ExpenseSourceSelectViewControllerDelegate,
+    func expenseSourceSelectViewController(delegate: ExpenseSourcesViewControllerDelegate,
                                            skipExpenseSourceId: Int?,
                                            selectionType: TransactionPart,
                                            currency: String?) -> ExpenseSourceSelectViewController? {

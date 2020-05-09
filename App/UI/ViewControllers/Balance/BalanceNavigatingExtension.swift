@@ -8,12 +8,8 @@
 
 import UIKit
 
-extension BalanceViewController : BalanceExpenseSourcesTableSupportDelegate, BalanceActivesTableSupportDelegate, ActiveEditViewControllerDelegate {
-    
-    func didSelect(expenseSource: ExpenseSourceViewModel) {
-        modal(factory.expenseSourceInfoViewController(expenseSource: expenseSource))
-    }
-    
+extension BalanceViewController : BalanceActivesTableSupportDelegate, ActiveEditViewControllerDelegate {
+        
     func didSelect(active: ActiveViewModel) {
         modal(factory.activeEditViewController(delegate: self,
                                                active: active.active,

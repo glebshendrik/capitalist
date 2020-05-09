@@ -208,7 +208,7 @@ class PaydayDateSelectionDelegate : DatePickerViewControllerDelegate {
     }
 }
 
-extension BorrowEditViewController : ExpenseSourceSelectViewControllerDelegate {
+extension BorrowEditViewController : ExpenseSourcesViewControllerDelegate {
     func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
         update(expenseSource: sourceExpenseSourceViewModel)
     }

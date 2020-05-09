@@ -13,7 +13,6 @@ extension BalanceViewController {
     
     @objc func loadData() {
         loadBudget()
-        loadExpenseSources()
         loadActives()
     }
     
@@ -24,18 +23,6 @@ extension BalanceViewController {
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки баланса", comment: "Ошибка загрузки баланса"), theme: .error)
         }.finally {
             self.updateBalanceAmountsUI()
-        }
-    }
-    
-    func loadExpenseSources() {
-        set(expenseSourcesActivityIndicator, hidden: false, animated: false)
-        firstly {
-            viewModel.loadExpenseSources()
-        }.catch { e in
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки кошельков", comment: "Ошибка загрузки кошельков"), theme: .error)
-        }.finally {
-            self.set(self.expenseSourcesActivityIndicator, hidden: true)
-            self.updateExpenseSourcesUI()
         }
     }
     

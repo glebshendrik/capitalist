@@ -27,6 +27,17 @@ extension BalanceViewController {
     private func setupNavigationBar() {
         setupNavigationBarAppearance()
         navigationItem.title = NSLocalizedString("Баланс", comment: "Баланс")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus-icon"), style: .plain, target: self, action: #selector(didTapAddButton(sender:)))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.by(.blue1)
+    }
+    
+    @objc func didTapAddButton(sender: Any) {
+        switch viewModel.selectedBalanceCategory {
+        case .expenseSources:
+            expenseSourcesViewController.showNewExpenseSourceScreen()
+        default:
+            return
+        }
     }
     
     func setupBalanceTabs() {
@@ -59,40 +70,28 @@ extension BalanceViewController {
     }
     
     private func setupTables() {
-        expenseSourcesSupport = BalanceExpenseSourcesTableSupport(viewModel: viewModel, delegate: self)
         activesSupport = BalanceActivesTableSupport(viewModel: viewModel, delegate: self)
-        
-        expenseSourcesTableView.dataSource = expenseSourcesSupport
-        expenseSourcesTableView.delegate = expenseSourcesSupport
-        
+                
         activesTableView.dataSource = activesSupport
         activesTableView.delegate = activesSupport
         
-        expenseSourcesTableView.tableFooterView = UIView()
         activesTableView.tableFooterView = UIView()
     }
     
     private func setupLoaders() {
-        expenseSourcesLoader.showLoader()
         activesLoader.showLoader()
     }
     
     func updateUI() {
         updateBalanceCategoryUI()
         updateBalanceAmountsUI()
-        updateExpenseSourcesUI()
         updateActivesUI()
     }
     
     func updateBalanceAmountsUI() {
-        expenseSourcesAmountLabel.text = viewModel.budgetViewModel?.expenseSourcesAmountRounded
         activesAmountLabel.text = viewModel.budgetViewModel?.activesAmountRounded
     }
-    
-    func updateExpenseSourcesUI() {
-        expenseSourcesTableView.reloadData(with: .automatic)
-    }
-    
+        
     func updateActivesUI() {
         activesTableView.reloadData(with: .automatic)
     }

@@ -10,38 +10,40 @@ import UIKit
 import PromiseKit
 import BetterSegmentedControl
 
-class BalanceViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol, NavigationBarColorable {
+class BalanceViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol {
     
     var navigationBarTintColor: UIColor? = UIColor.by(.black2)
     var factory: UIFactoryProtocol!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
+    var router: ApplicationRouterProtocol!
     var viewModel: BalanceViewModel!
     
-    var expenseSourcesSupport: BalanceExpenseSourcesTableSupport?
+    lazy var expenseSourcesViewController: ExpenseSourcesViewController! = {
+        return router.viewController(.ExpenseSourcesViewController) as! ExpenseSourcesViewController
+    }()
+    
     var activesSupport: BalanceActivesTableSupport?
     
-    
     @IBOutlet weak var tabs: BetterSegmentedControl!
+
+    @IBOutlet weak var expenseSourcesContainer: UIView!
     
-    @IBOutlet weak var expenseSourcesActivityIndicator: UIView!
     @IBOutlet weak var activesActivityIndicator: UIView!
-    
-    @IBOutlet weak var expenseSourcesLoader: UIImageView!
     @IBOutlet weak var activesLoader: UIImageView!
     
     @IBOutlet weak var expenseSourcesContainerLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var activesContainerLeftConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var expenseSourcesTableView: UITableView!
     @IBOutlet weak var activesTableView: UITableView!
     
-    @IBOutlet weak var expenseSourcesAmountLabel: UILabel!
     @IBOutlet weak var activesAmountLabel: UILabel!
     
     var tabsInitialized: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        embedChildren()
+        setupExpenseSourcesUI()
         setupUI()
         updateUI()
         loadData()
@@ -50,5 +52,23 @@ class BalanceViewController : UIViewController, UIMessagePresenterManagerDependa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)        
         navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
+    }
+    
+    private func embedChildren() {
+        embedExpenseSources()
+    }
+    
+    private func embedExpenseSources() {
+        addChild(expenseSourcesViewController)
+        expenseSourcesContainer.addSubview(expenseSourcesViewController.view)
+        expenseSourcesViewController.view.snp.makeConstraints { make in
+            make.left.top.right.bottom.equalToSuperview()
+        }
+        expenseSourcesViewController.didMove(toParent: self)
+    }
+    
+    private func setupExpenseSourcesUI() {
+        expenseSourcesViewController.viewModel.shouldCalculateTotal = true
+        expenseSourcesViewController.viewModel.isAddingAllowed = true
     }
 }

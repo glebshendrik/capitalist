@@ -59,6 +59,7 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
         }
         tableView.es.noticeNoMoreData()
         tableView.es.stopLoadingMore()
+        tableView.setupPullToRefreshAppearance()
     }
     
     private func setupNotifications() {
@@ -149,6 +150,7 @@ extension EntityInfoViewController {
     private func stopLoading() {
         tableView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
         tableView.es.resetNoMoreData()
+        tableView.refreshControl?.endRefreshing()
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
