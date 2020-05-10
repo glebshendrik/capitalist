@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import BadgeHub
 
 class StatisticsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
     
@@ -18,6 +19,7 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
     var titleView: StatisticsTitleView!
     
     @IBOutlet weak var tableView: UITableView!
+    var filtersBadge: BadgeHub? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()

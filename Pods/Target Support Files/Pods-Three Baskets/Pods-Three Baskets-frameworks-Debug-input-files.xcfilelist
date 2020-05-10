@@ -6,6 +6,7 @@ ${BUILT_PRODUCTS_DIR}/AlignedCollectionViewFlowLayout/AlignedCollectionViewFlowL
 ${BUILT_PRODUCTS_DIR}/ApphudSDK/ApphudSDK.framework
 ${BUILT_PRODUCTS_DIR}/AttributedTextView/AttributedTextView.framework
 ${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework
+${BUILT_PRODUCTS_DIR}/BadgeHub/BadgeHub.framework
 ${BUILT_PRODUCTS_DIR}/BetterSegmentedControl/BetterSegmentedControl.framework
 ${BUILT_PRODUCTS_DIR}/BiometricAuthentication/BiometricAuthentication.framework
 ${BUILT_PRODUCTS_DIR}/CSV.swift/CSV.framework

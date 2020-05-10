@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import BadgeHub
 
 extension StatisticsViewController {
     func loadData(financialDataInvalidated: Bool = true) {
@@ -77,7 +78,20 @@ extension StatisticsViewController {
         
         setupNavigationBarAppearance()
         // TODO
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "filters-icon"), style: .plain, target: self, action: #selector(didTapFiltersButton(_:)))
+        let filtersButton = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 26)))
+        filtersButton.setImage(UIImage(named: "filters-icon"), for: .normal)
+        filtersButton.addTarget(self, action: #selector(didTapFiltersButton(_:)), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: filtersButton)
+        setupFiltersBadgeUI()
+    }
+    
+    private func setupFiltersBadgeUI() {
+        if let badgeable = navigationItem.rightBarButtonItem?.customView {
+            filtersBadge = BadgeHub(view: badgeable)
+            filtersBadge?.setCircleColor(UIColor.by(.blue1), label: UIColor.by(.white100))
+            filtersBadge?.scaleCircleSize(by: 0.6)
+            filtersBadge?.setCountLabel(UIFont(name: "Roboto-Light", size: 12)!)
+        }
     }
     
     @objc func didTapFiltersButton(_ sender: Any) {
@@ -107,7 +121,18 @@ extension StatisticsViewController {
     
     private func updateNavigationBar() {
         titleView.dateRangeFilter = viewModel.dateRangeFilter
-        navigationItem.rightBarButtonItem?.image = UIImage(named: viewModel.hasTransactionableFilters ? "filters-dot-icon" : "filters-icon")        
+        filtersBadge?.setCount(viewModel.numberOfTransactionableFilters)
+        if viewModel.hasTransactionableFilters {
+            filtersBadge?.pop()
+        }
+//        if viewModel.numberOfTransactionableFilters {
+//
+//        }
+//        else {
+//            filtersBadge?.setCount(0)
+//        }
+        
+//        navigationItem.rightBarButtonItem?.image = UIImage(named: viewModel.hasTransactionableFilters ? "filters-dot-icon" : "filters-icon")
     }
     
     private func updateTableUI() {

@@ -51,6 +51,7 @@ target 'Three Baskets' do
   pod 'myTrackerSDK'
   pod "Haptica"
   pod 'SwipeCellKit'
+  pod 'BadgeHub'
 end
 
 post_install do |installer|

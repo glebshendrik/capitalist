@@ -92,7 +92,7 @@
                                                         </collectionView>
                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Загружаем актуальные данные" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="C78-Gv-YZU">
                                                             <rect key="frame" x="32" y="137.5" width="350" height="17.5"/>
-                                                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="15"/>
                                                             <color key="textColor" name="white 0.64"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
