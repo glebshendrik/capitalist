@@ -125,14 +125,6 @@ extension StatisticsViewController {
         if viewModel.hasTransactionableFilters {
             filtersBadge?.pop()
         }
-//        if viewModel.numberOfTransactionableFilters {
-//
-//        }
-//        else {
-//            filtersBadge?.setCount(0)
-//        }
-        
-//        navigationItem.rightBarButtonItem?.image = UIImage(named: viewModel.hasTransactionableFilters ? "filters-dot-icon" : "filters-icon")
     }
     
     private func updateTableUI() {
