@@ -113,19 +113,7 @@ class TransactionsViewModel {
                 return true
             }
         }
-        
-//        if let fromDate = dateRangeFilter?.fromDate {
-//            transactionViewModels = transactionViewModels.filter {
-//                $0.gotAt >= fromDate
-//            }
-//        }
-//
-//        if let toDate = dateRangeFilter?.toDate {
-//            transactionViewModels = transactionViewModels.filter {
-//                $0.gotAt <= toDate
-//            }
-//        }
-        
+                
         func filterBy(graphType: GraphType, transactions: [TransactionViewModel]) -> [TransactionViewModel] {
             switch graphType {
             case .all:
@@ -163,14 +151,8 @@ class TransactionsViewModel {
     }
     
     private func loadExchangeRates() -> Promise<Void> {
-//        guard let defaultCurrencyCode = defaultCurrency?.code else {
-//            return Promise(error: StatisticsError.exchangeRateUnknown)
-//        }
-//        let fromCurrencyCodes = allCurrencyCodes.filter { $0 != defaultCurrencyCode }
         return  firstly {
                     exchangeRatesCoordinator.index()
-//                    when(fulfilled: fromCurrencyCodes.map { loadExchangeRate(fromCurrencyCode: $0,
-//                                                                     toCurrencyCode: defaultCurrencyCode)} )
                 }.get { rates in
                     self.exchangeRates = [String : Float]()
                     
@@ -179,11 +161,7 @@ class TransactionsViewModel {
                     }
                 }.asVoid()
     }
-    
-    private func loadExchangeRate(fromCurrencyCode: String, toCurrencyCode: String) -> Promise<ExchangeRate> {
-        return exchangeRatesCoordinator.show(from: fromCurrencyCode, to: toCurrencyCode)
-    }
-    
+        
     private func transactionsAmount(type: TransactionableType) -> String? {
         guard let currency = defaultCurrency else { return nil }
         

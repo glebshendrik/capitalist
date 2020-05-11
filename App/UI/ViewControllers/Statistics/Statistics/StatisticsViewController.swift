@@ -24,7 +24,7 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        viewModel.updatePeriods(dateRangeFilter: DateRangeTransactionFilter(datePeriod: .month))
+        viewModel.updatePeriods()
         loadData(financialDataInvalidated: false)
     }
     

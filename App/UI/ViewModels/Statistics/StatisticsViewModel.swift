@@ -78,9 +78,10 @@ class StatisticsViewModel {
         updateSections()
     }
     
-    func updatePeriods(dateRangeFilter: DateRangeTransactionFilter) {
+    func updatePeriods(dateRangeFilter: DateRangeTransactionFilter? = nil) {
+        let filter = dateRangeFilter ?? DateRangeTransactionFilter(datePeriod: .month)
         graphViewModel.collectionContentOffset = nil
-        periodsViewModel.set(dateRangeFilter: dateRangeFilter,
+        periodsViewModel.set(dateRangeFilter: filter,
                              beginning: oldestTransactionDate,
                              ending: newestTransactionDate)
     }
@@ -124,22 +125,6 @@ class StatisticsViewModel {
 
 // Transactions
 extension StatisticsViewModel {
-//    var hasIncomeTransactions: Bool {
-//        return transactionsViewModel.hasIncomeTransactions
-//    }
-//    
-//    var hasExpenseTransactions: Bool {
-//        return transactionsViewModel.hasExpenseTransactions
-//    }
-//    
-//    var filteredIncomesAmount: String? {
-//        return transactionsViewModel.filteredIncomesAmount
-//    }
-//    
-//    var filteredExpensesAmount: String? {
-//        return transactionsViewModel.filteredExpensesAmount
-//    }
-    
     var oldestTransactionDate: Date {
         return transactionsViewModel.oldestTransactionDate
     }
@@ -151,10 +136,14 @@ extension StatisticsViewModel {
     func loadData() -> Promise<Void> {
         clearTransactions()
         setDataLoading()
+        let previousOldestTransactionDate = oldestTransactionDate
         return  firstly {
                     transactionsViewModel.loadData(dateRangeFilter: periodsViewModel.currentDateRangeFilter)
                 }.ensure {
                     self.isDataLoading = false
+                    if self.oldestTransactionDate != previousOldestTransactionDate {
+                        self.updatePeriods(dateRangeFilter: self.periodsViewModel.currentDateRangeFilter)
+                    }
                     self.updatePresentationData()
                 }
     }
