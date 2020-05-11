@@ -18,7 +18,9 @@ class TransactionsService : Service, TransactionsServiceProtocol {
                borrowId: Int?,
                borrowType: BorrowType?,
                count: Int?,
-               lastGotAt: Date?) -> Promise<[Transaction]> {
+               lastGotAt: Date?,
+               fromGotAt: Date?,
+               toGotAt: Date?) -> Promise<[Transaction]> {
         
         return requestCollection(APIRoute.indexTransactions(userId: userId,
                                                             type: type,
@@ -28,7 +30,9 @@ class TransactionsService : Service, TransactionsServiceProtocol {
                                                             borrowId: borrowId,
                                                             borrowType: borrowType,
                                                             count: count,
-                                                            lastGotAt: lastGotAt))
+                                                            lastGotAt: lastGotAt,
+                                                            fromGotAt: fromGotAt,
+                                                            toGotAt: toGotAt))
     }
     
     func create(with creationForm: TransactionCreationForm) -> Promise<Transaction> {

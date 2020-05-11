@@ -10,5 +10,6 @@ import Foundation
 import PromiseKit
 
 protocol ExchangeRatesServiceProtocol {
+    func index(for userId: Int) -> Promise<[ExchangeRate]>
     func show(from fromCurrency: String, to toCurrency: String) -> Promise<ExchangeRate>
 }

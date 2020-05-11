@@ -48,13 +48,14 @@ struct APIRoutePath {
              .indexExpenseSources(let userId, _),
              .indexUserExpenseCategories(let userId, _),
              .indexBaskets(let userId),
-             .indexTransactions(let userId, _, _, _, _, _, _, _, _),
+             .indexTransactions(let userId, _, _, _, _, _, _, _, _, _, _),
              .indexProviderConnections(let userId, _),
              .indexAccountConnections(let userId, _),
              .indexDebts(let userId),
              .indexLoans(let userId),
              .indexCredits(let userId),
-             .indexUserActives(let userId):                 return collection(route, userId: userId)
+             .indexUserActives(let userId),
+             .indexExchangeRates(let userId):               return collection(route, userId: userId)
         
         // Update
         case .updateUser(let form):                         return member(route, id: form.userId)

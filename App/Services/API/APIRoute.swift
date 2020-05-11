@@ -89,7 +89,9 @@ enum APIRoute: URLRequestConvertible {
                             borrowId: Int?,
                             borrowType: BorrowType?,
                             count: Int?,
-                            lastGotAt: Date?)
+                            lastGotAt: Date?,
+                            fromGotAt: Date?,
+                            toGotAt: Date?)
     case createTransaction(form: TransactionCreationForm)
     case showTransaction(id: Int)
     case updateTransaction(form: TransactionUpdatingForm)
@@ -133,6 +135,7 @@ enum APIRoute: URLRequestConvertible {
     
     // ExchangeRates
     case findExchangeRate(from: String, to: String)
+    case indexExchangeRates(userId: Int)
     
     // Budget
     case showBudget(userId: Int)

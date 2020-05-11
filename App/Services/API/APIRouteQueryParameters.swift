@@ -56,7 +56,7 @@ struct APIRouteQueryParameters {
                 params["country"] = country
             }
             return params
-        case .indexTransactions(_, let type, let transactionableId, let transactionableType, let creditId, let borrowId, let borrowType, let count, let lastGotAt):
+        case .indexTransactions(_, let type, let transactionableId, let transactionableType, let creditId, let borrowId, let borrowType, let count, let lastGotAt, let fromGotAt, let toGotAt):
             if let type = type {
                 params["transaction_type"] = type.rawValue
             }
@@ -80,6 +80,12 @@ struct APIRouteQueryParameters {
             }
             if let lastGotAt = lastGotAt {
                 params["last_got_at"] = Formatter.iso8601.string(from: lastGotAt)
+            }
+            if let fromGotAt = fromGotAt {
+                params["from_got_at"] = Formatter.iso8601.string(from: fromGotAt)
+            }
+            if let toGotAt = toGotAt {
+                params["to_got_at"] = Formatter.iso8601.string(from: toGotAt)
             }
             return params
         case .indexProviderConnections(_, let providerId):

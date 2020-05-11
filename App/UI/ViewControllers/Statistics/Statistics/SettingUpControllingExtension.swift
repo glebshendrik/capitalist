@@ -18,6 +18,27 @@ extension StatisticsViewController {
         refreshData()
     }
     
+    func clearTransactions() {
+        viewModel.clearTransactions()
+        updateUI()
+    }
+    
+    func loadTransactions(shouldClear: Bool = true) {
+        if shouldClear {
+            clearTransactions()
+        }
+        setLoading()
+        _ = firstly {
+                viewModel.loadTransactions()
+            }.catch { _ in
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
+            }.finally {
+                self.updateUI()
+                self.stopPullToRefresh()
+            }
+    }
+    
+    
     @objc func refreshData() {
         setLoading()
         _ = firstly {
@@ -50,6 +71,11 @@ extension StatisticsViewController {
         viewModel.setDataLoading()
         updateUI()
     }
+    
+    private func stopPullToRefresh() {
+        tableView.es.stopPullToRefresh()
+        tableView.refreshControl?.endRefreshing()
+    }
 }
 
 extension StatisticsViewController {
@@ -64,6 +90,7 @@ extension StatisticsViewController {
     func setupUI() {
         setupNavigationBar()
         setupTableUI()
+        setupPullToRefresh()
         setupNotifications()
     }
         
@@ -111,6 +138,14 @@ extension StatisticsViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100        
     }
+    
+    private func setupPullToRefresh() {
+        tableView.es.addPullToRefresh {
+            [weak self] in
+            self?.loadTransactions(shouldClear: false)
+        }
+        tableView.setupPullToRefreshAppearance()
+    }
 }
 
 extension StatisticsViewController {
@@ -131,45 +166,3 @@ extension StatisticsViewController {
         tableView.reloadData()
     }    
 }
-
-//        func reloadFilterAndData() {
-//            postFinantialDataUpdated()
-//            setLoading()
-//            _ = firstly {
-//                    viewModel.reloadFilterAndData()
-//                }.catch { _ in
-//                    self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
-//                }.finally {
-//                    self.updateUI()
-//            }
-//        }
-    
-//    func reloadFilter() {
-//        setLoading()
-//        _ = firstly {
-//                viewModel.reloadFilter()
-//            }.catch { _ in
-//                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
-//            }.finally {
-//                self.updateUI()
-//        }
-//    }
-//func updateGraphFiltersSection() {
-//    viewModel.updateGraphFiltersSection()
-//}
-//
-//func updateGraphFilters(updateGraph: Bool = false) {
-//    updateGraphFiltersSection()
-//    if let graphFiltersSectionIndex = viewModel.graphFiltersSectionIndex {
-//        var indexSet = IndexSet(integer: graphFiltersSectionIndex)
-//        
-//        if  let graphSectionIndex = viewModel.graphSectionIndex,
-//            updateGraph {
-//            indexSet = IndexSet(arrayLiteral: graphSectionIndex, graphFiltersSectionIndex)
-//        }
-//        
-//        UIView.performWithoutAnimation {
-//            self.tableView.reloadSections(indexSet, with: .none)
-//        }
-//    }
-//}

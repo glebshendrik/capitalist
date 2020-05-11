@@ -116,20 +116,23 @@ extension StatisticsViewController : DatePeriodSelectionViewControllerDelegate {
     func didSelect(period: DateRangeTransactionFilter?) {
         guard let period = period else { return }
         viewModel.updatePeriods(dateRangeFilter: period)
-        viewModel.updatePresentationData()
-        updateUI()
+        clearTransactions()
+        loadData()
+//        viewModel.updatePresentationData()
+//        updateUI()
     }
     
 }
 
 extension StatisticsViewController : GraphTableViewCellDelegate {
     func didChangeRange() {
-        viewModel.updatePresentationData()
-        updateUI()
+        loadTransactions()
+//        viewModel.updatePresentationData()
+//        updateUI()
     }
     
     func didTapGraphTypeButton() {
-        viewModel.set(filters: [])
+//        viewModel.set(filters: [])
         viewModel.updatePresentationData()
         updateUI()
     }

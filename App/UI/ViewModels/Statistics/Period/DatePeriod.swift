@@ -74,7 +74,7 @@ enum DatePeriod {
         case .month:
             return addingValue.months
         case .quarter:
-            return addingValue.quarters
+            return addingValue.months
         case .year:
             return addingValue.years
         default:
@@ -83,7 +83,12 @@ enum DatePeriod {
     }
     
     var addingValue: Int {
-        return 1
+        switch self {
+        case .quarter:
+            return 3
+        default:
+            return 1
+        }
     }
     
     func formatPeriod(from: Date?, to: Date?) -> String {

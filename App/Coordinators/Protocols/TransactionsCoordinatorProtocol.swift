@@ -10,7 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol TransactionsCoordinatorProtocol {
-    func index() -> Promise<[Transaction]>
+    func index(fromGotAt: Date?,
+               toGotAt: Date?) -> Promise<[Transaction]>
     func index(transactionableId: Int?,
                transactionableType: TransactionableType?,
                creditId: Int?,

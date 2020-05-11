@@ -88,7 +88,6 @@ class StatisticsViewModel {
     private func filterTransactions() {
         transactionsViewModel
             .filterTransactions(filters: filtersViewModel.transactionableFilters,
-                                dateRangeFilter: periodsViewModel.currentDateRangeFilter,
                                 graphType: graphViewModel.graphType)
     }
     
@@ -150,15 +149,30 @@ extension StatisticsViewModel {
     }
     
     func loadData() -> Promise<Void> {
+        clearTransactions()
         setDataLoading()
         return  firstly {
-                    transactionsViewModel.loadData()
+                    transactionsViewModel.loadData(dateRangeFilter: periodsViewModel.currentDateRangeFilter)
                 }.ensure {
                     self.isDataLoading = false
-                    self.updatePeriods(dateRangeFilter: self.dateRangeFilter ?? DateRangeTransactionFilter(datePeriod: .month))
-                    self.updatePresentationData()                    
+                    self.updatePresentationData()
                 }
     }
+    
+    func clearTransactions() {
+        transactionsViewModel.clearTransactions()
+        updatePresentationData()
+    }
+    
+    func loadTransactions() -> Promise<Void> {
+            setDataLoading()
+            return  firstly {
+                        transactionsViewModel.loadTransactions(dateRangeFilter: periodsViewModel.currentDateRangeFilter)
+                    }.ensure {
+                        self.isDataLoading = false
+                        self.updatePresentationData()
+                    }
+        }
             
     func removeTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {
         setDataLoading()

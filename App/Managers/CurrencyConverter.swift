@@ -24,10 +24,10 @@ class CurrencyConverter : CurrencyConverterProtocol {
     
     func summUp(amounts: [Amount], currency: Currency) -> Promise<NSDecimalNumber> {
 
-        let currencyCodes = amounts.map { $0.currency.code }.withoutDuplicates().filter { $0 != currency.code }
+//        let currencyCodes = amounts.map { $0.currency.code }.withoutDuplicates().filter { $0 != currency.code }
         
         return  firstly {
-                    exchangeRatesHash(from: currencyCodes, to: currency.code)
+                    exchangeRatesHash()
                 }.map { ratesHash in
                     amounts
                         .map { amount in
@@ -45,10 +45,11 @@ class CurrencyConverter : CurrencyConverterProtocol {
                 }
     }
     
-    private func exchangeRatesHash(from currencyCodes: [String], to currencyCode: String) -> Promise<[String : Float]> {
+    private func exchangeRatesHash() -> Promise<[String : Float]> {
         return  firstly {
-                    when(fulfilled: currencyCodes.map { loadExchangeRate(from: $0,
-                                                                         to: currencyCode)} )
+                    exchangeRatesCoordinator.index()
+//                    when(fulfilled: currencyCodes.map { loadExchangeRate(from: $0,
+//                                                                         to: currencyCode)} )
                 }.map { rates in
                     return rates.reduce(into: [String : Float]()) { (hash, rate) in hash[rate.from] = rate.rate }
                 }

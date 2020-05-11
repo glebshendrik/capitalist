@@ -18,7 +18,9 @@ protocol TransactionsServiceProtocol {
                borrowId: Int?,
                borrowType: BorrowType?,
                count: Int?,
-               lastGotAt: Date?) -> Promise<[Transaction]>
+               lastGotAt: Date?,
+               fromGotAt: Date?,
+               toGotAt: Date?) -> Promise<[Transaction]>
     func create(with creationForm: TransactionCreationForm) -> Promise<Transaction>
     func show(by id: Int) -> Promise<Transaction>
     func update(with updatingForm: TransactionUpdatingForm) -> Promise<Void>
