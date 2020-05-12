@@ -30,6 +30,10 @@ extension ExpenseSourceEditViewController {
         tableController.icon.iconTintColor = UIColor.by(.white100)        
     }
     
+    func updateCardTypeUI() {
+        tableController.cardTypeField.valueImageName = viewModel.selectedCardTypeImageName
+    }
+    
     func updateCurrencyUI() {
         tableController.currencyField.text = viewModel.selectedCurrencyName
         tableController.currencyField.isEnabled = viewModel.canChangeCurrency

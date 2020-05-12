@@ -133,6 +133,8 @@ protocol UIFactoryProtocol {
     
     func expenseSourceInfoViewController(expenseSource: ExpenseSourceViewModel?) -> UINavigationController?
     
+    func cardTypesViewController(delegate: CardTypesViewControllerDelegate) -> UINavigationController?
+    
     func expenseCategoryEditViewController(delegate: ExpenseCategoryEditViewControllerDelegate,
                                            expenseCategory: ExpenseCategory?,
                                            basketType: BasketType) -> UINavigationController?

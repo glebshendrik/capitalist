@@ -149,6 +149,11 @@ extension ApplicationAssembly {
 //            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         
+        // CardTypesViewController
+        container.registerForSkrudzhStoryboard(CardTypesViewController.self) { (r, c) in
+            c.viewModel = r.resolve(CardTypesViewModel.self)
+        }
+        
         // ExpenseCategorySelectViewController
         container.registerForSkrudzhStoryboard(ExpenseCategorySelectViewController.self) { (r, c) in
             c.viewModel = r.resolve(ExpenseCategoriesViewModel.self)

@@ -155,6 +155,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                          iconURL: selectedIconURL,
                                          amountCents: amountCents,
                                          creditLimitCents: creditLimitCents,
+                                         cardType: expenseSourceViewModel?.expenseSource.cardType,
                                          accountConnectionAttributes: accountConnectionAttributes)
     }
 }

@@ -12,6 +12,46 @@ protocol Validatable {
     func validate() -> [String : String]?
 }
 
+enum CardType : String, Codable {
+    case visa = "visa"
+    case masterCard = "master_card"
+    case maestro = "maestro"
+    case americanExpress = "american_express"
+    case mir = "mir"
+    case chinaUnionpay = "china_unionpay"
+    case dinersClub = "diners_club"
+    case jcb = "jcb"
+    case uatp = "uatp"
+    
+    static var all: [CardType] {
+        return [.visa, .masterCard, .maestro, .americanExpress, .mir, .chinaUnionpay, .dinersClub, .jcb, .uatp]
+    }
+    
+    var imageName: String {
+        switch self {
+        case .visa:
+            return "visa_icon"
+        case .masterCard:
+            return "master_card_icon"
+        case .maestro:
+            return "maestro_icon"
+        case .americanExpress:
+            return "american_express_icon"
+        case .mir:
+            return "mir_icon"
+        case .chinaUnionpay:
+            return "union_pay_icon"
+        case .dinersClub:
+            return "diners_club_icon"
+        case .jcb:
+            return "jcb_icon"
+        case .uatp:
+            return "uatp_icon"
+        }
+    }
+}
+
+
 struct ExpenseSource : Decodable {
     let id: Int
     let iconURL: URL?
@@ -25,6 +65,7 @@ struct ExpenseSource : Decodable {
     let isVirtual: Bool
     let accountConnection: AccountConnection?
     let prototypeKey: String?
+    let cardType: CardType?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -39,6 +80,7 @@ struct ExpenseSource : Decodable {
         case isVirtual = "is_virtual"
         case accountConnection = "account_connection"
         case prototypeKey = "prototype_key"
+        case cardType = "card_type"
     }
 }
 
@@ -49,6 +91,7 @@ struct ExpenseSourceCreationForm : Encodable, Validatable {
     let currency: String?
     let amountCents: Int?
     let creditLimitCents: Int?
+    let cardType: CardType?
     let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -57,7 +100,24 @@ struct ExpenseSourceCreationForm : Encodable, Validatable {
         case currency
         case amountCents = "amount_cents"
         case creditLimitCents = "credit_limit_cents"
+        case cardType = "card_type"
         case accountConnectionAttributes = "account_connection_attributes"
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+//        if let id = id {
+//            try container.encode(id, forKey: .id)
+//        }
+        
+        try container.encode(name, forKey: .name)
+        try container.encode(iconURL, forKey: .iconURL)
+        try container.encode(currency, forKey: .currency)
+        try container.encode(amountCents, forKey: .amountCents)
+        try container.encode(creditLimitCents, forKey: .creditLimitCents)
+        try container.encode(cardType, forKey: .cardType)
+        try container.encode(accountConnectionAttributes, forKey: .accountConnectionAttributes)
     }
     
     func validate() -> [String : String]? {
@@ -93,6 +153,7 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
     let iconURL: URL?
     let amountCents: Int?
     let creditLimitCents: Int?
+    let cardType: CardType?
     let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -100,7 +161,23 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
         case iconURL = "icon_url"
         case amountCents = "amount_cents"
         case creditLimitCents = "credit_limit_cents"
+        case cardType = "card_type"
         case accountConnectionAttributes = "account_connection_attributes"
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+//        if let id = id {
+//            try container.encode(id, forKey: .id)
+//        }
+        
+        try container.encode(name, forKey: .name)
+        try container.encode(iconURL, forKey: .iconURL)
+        try container.encode(amountCents, forKey: .amountCents)
+        try container.encode(creditLimitCents, forKey: .creditLimitCents)
+        try container.encode(cardType, forKey: .cardType)
+        try container.encode(accountConnectionAttributes, forKey: .accountConnectionAttributes)
     }
     
     func validate() -> [String : String]? {

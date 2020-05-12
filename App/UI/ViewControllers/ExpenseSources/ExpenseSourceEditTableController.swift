@@ -13,6 +13,7 @@ protocol ExpenseSourceEditTableControllerDelegate : FormFieldsTableViewControlle
     func didAppear()
     func didTapIcon()
     func didTapCurrency()
+    func didTapCardType()
     func didChange(name: String?)
     func didChange(amount: String?)
     func didChange(creditLimit: String?)
@@ -25,6 +26,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var currencyField: FormTapField!
     @IBOutlet weak var amountField: FormMoneyTextField!
     @IBOutlet weak var creditLimitField: FormMoneyTextField!
+    @IBOutlet weak var cardTypeField: FormImageValueField!
     
     @IBOutlet weak var icon: IconView!
     @IBOutlet weak var iconPen: UIView!
@@ -62,6 +64,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     override func setupUI() {
         super.setupUI()
         setupNameField()
+        setupCardTypeField()
         setupCurrencyField()
         setupAmountField()
         setupCreditLimitField()
@@ -73,6 +76,14 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
         nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
+        }
+    }
+    
+    private func setupCardTypeField() {
+        cardTypeField.placeholder = NSLocalizedString("Тип карты", comment: "")
+        cardTypeField.imageName = "credit-type-icon"
+        cardTypeField.didTap { [weak self] in
+            self?.delegate?.didTapCardType()
         }
     }
     

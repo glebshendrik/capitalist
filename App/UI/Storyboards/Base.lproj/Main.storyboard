@@ -497,10 +497,18 @@
                                                                                     <color key="textColor" name="white 1.0"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
+                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visa_icon" translatesAutoresizingMaskIntoConstraints="NO" id="5y5-Oo-g0k">
+                                                                                    <rect key="frame" x="100" y="68" width="37" height="12"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="kMj-9A-AKV"/>
+                                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="75" id="rdP-6l-QlK"/>
+                                                                                    </constraints>
+                                                                                </imageView>
                                                                             </subviews>
                                                                             <color key="backgroundColor" name="white 0.04"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="trailing" secondItem="EX0-AK-HGH" secondAttribute="trailing" constant="8" id="73Y-fO-bVs"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="5y5-Oo-g0k" secondAttribute="bottom" constant="8" id="EmV-cj-lCb"/>
                                                                                 <constraint firstItem="TK1-KI-f5z" firstAttribute="top" secondItem="pfa-b1-5kr" secondAttribute="top" constant="3" id="L2t-Zz-2fh"/>
                                                                                 <constraint firstItem="TK1-KI-f5z" firstAttribute="leading" secondItem="pfa-b1-5kr" secondAttribute="leading" constant="4" id="TBG-qA-mKw"/>
                                                                                 <constraint firstItem="EX0-AK-HGH" firstAttribute="top" secondItem="1sx-Bw-Jfj" secondAttribute="bottom" constant="4" id="ULD-0Q-mGH"/>
@@ -508,6 +516,7 @@
                                                                                 <constraint firstItem="EX0-AK-HGH" firstAttribute="leading" secondItem="1sx-Bw-Jfj" secondAttribute="leading" id="iwc-WL-lUb"/>
                                                                                 <constraint firstItem="1sx-Bw-Jfj" firstAttribute="leading" secondItem="TK1-KI-f5z" secondAttribute="trailing" constant="4" id="jsG-cY-lXT"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="1sx-Bw-Jfj" secondAttribute="trailing" constant="8" id="qT2-oo-7ix"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="5y5-Oo-g0k" secondAttribute="trailing" constant="16" id="wzO-AM-QlK"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -536,6 +545,7 @@
                                                         <connections>
                                                             <outlet property="amountLabel" destination="EX0-AK-HGH" id="BWc-Qb-nFT"/>
                                                             <outlet property="background" destination="pfa-b1-5kr" id="e6V-mB-0Ir"/>
+                                                            <outlet property="cardTypeImageView" destination="5y5-Oo-g0k" id="3fi-jy-sBR"/>
                                                             <outlet property="iconView" destination="TK1-KI-f5z" id="Quo-fw-Iyr"/>
                                                             <outlet property="nameLabel" destination="1sx-Bw-Jfj" id="h3y-e5-NCT"/>
                                                         </connections>
@@ -1389,6 +1399,7 @@
         <image name="settings-menu-item-icon" width="22" height="22"/>
         <image name="statistics-menu-item-icon" width="22" height="22"/>
         <image name="text-arrow" width="7" height="12"/>
+        <image name="visa_icon" width="37" height="12"/>
         <namedColor name="black 1">
             <color red="0.090000003576278687" green="0.093999996781349182" blue="0.11400000005960464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

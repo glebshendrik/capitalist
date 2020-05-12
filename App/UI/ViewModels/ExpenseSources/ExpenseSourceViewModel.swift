@@ -80,6 +80,10 @@ class ExpenseSourceViewModel {
         return expenseSource.accountConnection != nil ? .vector : .raster
     }
     
+    var cardTypeImageName: String? {
+        return expenseSource.cardType?.imageName
+    }
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
     }

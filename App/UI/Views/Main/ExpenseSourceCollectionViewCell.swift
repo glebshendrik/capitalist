@@ -15,6 +15,7 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var background: UIView!
     @IBOutlet weak var iconView: IconView!
+    @IBOutlet weak var cardTypeImageView: UIImageView!
     
     var viewModel: ExpenseSourceViewModel? {
         didSet {
@@ -29,6 +30,7 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
     override func updateUI() {
         updateLabels()
         updateIcon()
+        updateCardTypeUI()
         super.updateUI()
     }
     
@@ -45,6 +47,14 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
         iconView.iconType = viewModel.iconType
         iconView.vectorIconMode = .compact        
         contentView.layoutIfNeeded()
+    }
+    
+    func updateCardTypeUI() {
+        guard let cardTypeImageName = viewModel?.cardTypeImageName else {
+            cardTypeImageView.image = nil
+            return
+        }
+        cardTypeImageView.image = UIImage(named: cardTypeImageName)
     }
         
     override func setupSelectionIndicator() {

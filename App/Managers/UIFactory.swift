@@ -120,6 +120,12 @@ class UIFactory : UIFactoryProtocol {
         return expenseSourceSelectViewController
     }
     
+    func cardTypesViewController(delegate: CardTypesViewControllerDelegate) -> UINavigationController? {
+        guard let cardTypesViewController = router.viewController(.CardTypesViewController) as? CardTypesViewController else { return nil }
+        cardTypesViewController.set(delegate: delegate)
+        return UINavigationController(rootViewController: cardTypesViewController)
+    }
+    
     func expenseCategorySelectViewController(delegate: ExpenseCategorySelectViewControllerDelegate) -> ExpenseCategorySelectViewController? {
         
         let expenseCategorySelectViewController = router.viewController(.ExpenseCategorySelectViewController) as? ExpenseCategorySelectViewController
