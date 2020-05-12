@@ -107,10 +107,18 @@ class TransactionsViewModel {
             
             transactionViewModels = transactionViewModels.filter { transaction -> Bool in
                 
-                guard let matchedFilter = (filtersHash[transaction.sourceType]?[transaction.sourceId] ??
-                    filtersHash[transaction.destinationType]?[transaction.destinationId]) else { return false }
+                if filtersHash[transaction.sourceType]?[transaction.sourceId] != nil {
+                    return true
+                }
+                if filtersHash[transaction.destinationType]?[transaction.destinationId] != nil {
+                    return true
+                }
+                if let sourceActiveId = transaction.sourceActiveId,
+                    filtersHash[.active]?[sourceActiveId] != nil {
+                    return true
+                }
                 
-                return true
+                return false
             }
         }
                 

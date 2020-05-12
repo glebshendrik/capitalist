@@ -73,6 +73,8 @@ struct Transaction : Decodable {
     let isBorrowOrReturnDestination: Bool
     let isAssetSource: Bool
     let sourceActiveId: Int?
+    let sourceActiveTitle: String?
+    let sourceActiveIconURL: URL?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -106,6 +108,8 @@ struct Transaction : Decodable {
         case isBorrowOrReturnDestination = "is_borrow_or_return_destination"
         case isAssetSource = "is_asset_source"
         case sourceActiveId = "source_active_id"
+        case sourceActiveTitle = "source_active_title"
+        case sourceActiveIconURL = "source_active_icon_url"
     }
     
 }

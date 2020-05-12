@@ -227,6 +227,22 @@ class TransactionViewModel {
         return transaction.isBorrowOrReturnDestination
     }
     
+    var isAssetSource: Bool {
+        return transaction.isAssetSource
+    }
+    
+    var sourceActiveId: Int? {
+        return transaction.sourceActiveId
+    }
+    
+    var sourceActiveTitle: String? {
+        return transaction.sourceActiveTitle
+    }
+    
+    var sourceActiveIconURL: URL? {
+        return transaction.sourceActiveIconURL
+    }
+    
     var titleTransactionPart: TransactionPart {
         switch type {
         case .income:

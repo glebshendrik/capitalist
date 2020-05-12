@@ -31,6 +31,9 @@ extension GraphViewModel {
     }
     
     private func title(for transaction: TransactionViewModel) -> String {
+        if let sourceActiveTitle = transaction.sourceActiveTitle {
+            return sourceActiveTitle
+        }
         if transaction.destinationType == .active {
             return transaction.destinationTitle
         }
@@ -46,6 +49,9 @@ extension GraphViewModel {
     }
     
     private func iconURL(for transaction: TransactionViewModel) -> URL? {
+        if let sourceActiveIconURL = transaction.sourceActiveIconURL {
+            return sourceActiveIconURL
+        }
         if transaction.destinationType == .active {
             return transaction.destinationIconURL
         }
@@ -57,6 +63,9 @@ extension GraphViewModel {
     }
     
     private func transactionableId(for transaction: TransactionViewModel) -> Int {
+        if let activeId = transaction.sourceActiveId {
+            return activeId
+        }
         if transaction.destinationType == .active {
             return transaction.destinationId
         }
@@ -64,6 +73,9 @@ extension GraphViewModel {
     }
     
     private func transactionableType(for transaction: TransactionViewModel) -> TransactionableType {
+        if transaction.isAssetSource {
+            return .active
+        }
         if transaction.destinationType == .active {
             return transaction.destinationType
         }
