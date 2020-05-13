@@ -13,6 +13,7 @@ extension MainViewController : ActiveEditViewControllerDelegate {
         loadActives(by: basketType)
         loadBaskets()
         loadBudget()
+        loadExpenseSources()
         let infoNeededToShow = isIncomePlanned && !UIFlowManager.reached(point: .dependentIncomeSourceMessage)
         guard infoNeededToShow else { return }
         showDependentIncomeSourceMessage(activeName: name)
@@ -21,6 +22,7 @@ extension MainViewController : ActiveEditViewControllerDelegate {
     func didUpdateActive(with basketType: BasketType) {
         loadActives(by: basketType)
         loadBudget()
+        loadExpenseSources()
     }
     
     func didRemoveActive(with basketType: BasketType) {

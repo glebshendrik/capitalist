@@ -53,6 +53,18 @@ extension ActiveEditViewController : ActiveEditTableControllerDelegate {
         updateTableUI(animated: false)
     }
     
+    func didTapExpenseSource() {
+        slideUp(factory.expenseSourceSelectViewController(delegate: self,
+                                                          skipExpenseSourceId: nil,
+                                                          selectionType: .destination,
+                                                          currency: viewModel.selectedCurrency?.code))
+    }
+        
+    func didChange(isMovingFundsFromWallet: Bool) {
+        viewModel.isMovingFundsFromWallet = isMovingFundsFromWallet
+        updateExpenseSourceUI(reload: true, animated: false)
+    }
+    
     func didTapActiveIncomeType() {
         showActiveIncomeTypesSheet()
     }
@@ -99,6 +111,17 @@ extension ActiveEditViewController : ReminderEditViewControllerDelegate {
         update(reminder: reminderViewModel)
     }
 }
+
+extension ActiveEditViewController : ExpenseSourcesViewControllerDelegate {
+    func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(expenseSource: sourceExpenseSourceViewModel)
+    }
+    
+    func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
+        update(expenseSource: destinationExpenseSourceViewModel)
+    }
+}
+
 
 extension ActiveEditViewController {
     private func showActiveTypesSheet() {

@@ -105,6 +105,10 @@ class TransactionViewModel {
         return returningBorrow.type == .loan
     }
     
+    var isActiveCreation: Bool {
+        return transaction.active != nil
+    }
+    
     var currency: Currency {
         return transaction.currency
     }
@@ -275,6 +279,7 @@ class TransactionViewModel {
         let creditWord = NSLocalizedString("Кредит", comment: "Кредит")
         let loanWord = NSLocalizedString("Займ", comment: "Займ")
         let debtWord = NSLocalizedString("Долг", comment: "Долг")
+        let activeWord = NSLocalizedString("Покупка актива", comment: "Покупка актива")
 
         if isCrediting {
             return isVirtual ? creditWord : "\(creditWord) · \(subtitle)"
@@ -285,9 +290,13 @@ class TransactionViewModel {
         if isDebt {
             return isVirtual ? debtWord : "\(debtWord) · \(subtitle)"
         }
+        if isActiveCreation {
+            return isVirtual ? activeWord : "\(activeWord) · \(subtitle)"
+        }
         if isVirtual {
             return sourceType == .active || destinationType == .active ? NSLocalizedString("Переоценка актива", comment: "Переоценка актива") : NSLocalizedString("Изменено Вами", comment: "Изменено Вами")
         }
+        
         return subtitle
     }
     

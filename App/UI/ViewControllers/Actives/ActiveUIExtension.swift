@@ -38,6 +38,11 @@ extension ActiveEditViewController {
         viewModel.reminderViewModel = reminder
         updateReminderUI()
     }
+    
+    func update(expenseSource: ExpenseSourceViewModel?) {
+        viewModel.selectedSource = expenseSource
+        updateExpenseSourceUI(reload: true, animated: false)
+    }
 }
 
 extension ActiveEditViewController {
@@ -96,6 +101,21 @@ extension ActiveEditViewController {
         tableController.goalAmountField.currency = viewModel.selectedCurrency
         tableController.monthlyPaymentField.currency = viewModel.selectedCurrency
         tableController.monthlyPlannedIncomeField.currency = viewModel.selectedCurrency
+    }
+    
+    func updateExpenseSourceUI(reload: Bool = false, animated: Bool = false) {
+        tableController.set(cell: tableController.isMovingFundsFromWalletCell, hidden: viewModel.movingFundsFromWalletSelectionHidden, animated: false, reload: false)
+        tableController.isMovingFundsFromWalletSwitchField.value = viewModel.isMovingFundsFromWallet
+                
+        tableController.set(cell: tableController.expenseSourceCell, hidden: viewModel.expenseSourceFieldHidden, animated: false, reload: false)
+        tableController.expenseSourceField.placeholder = "Кошелек"
+        tableController.expenseSourceField.text = viewModel.expenseSourceName
+        tableController.expenseSourceField.subValue = viewModel.expenseSourceAmount
+        tableController.expenseSourceField.imageName = viewModel.expenseSourceIconDefaultImageName
+        tableController.expenseSourceField.imageURL = viewModel.expenseSourceIconURL
+        if reload {
+            tableController.reloadData(animated: animated)
+        }
     }
     
     func updateIsIncomePlannedUI() {
