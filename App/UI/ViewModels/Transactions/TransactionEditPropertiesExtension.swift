@@ -106,6 +106,10 @@ extension TransactionEditViewModel {
     var canSave: Bool {
         return hasBothTransactionables        
     }
+        
+    var shouldAskForReestimateAsset: Bool {
+        return canSave && isSellingAsset && source!.amountCents != amountCents
+    }
     
     var hasBothTransactionables: Bool {
         return source != nil && destination != nil
@@ -207,6 +211,7 @@ extension TransactionEditViewModel {
     var sourceAmount: String? { return isSourceVirtualExpenseSource ? nil : source?.amountRounded }
     var sourceCurrency: Currency? { return source?.currency }
     var sourceCurrencyCode: String? { return sourceCurrency?.code }
+    var sourceBasketType: BasketType? { return (source as? ActiveViewModel)?.basketType }
     
     var destinationTitle: String? {
         return destinationType?.title(as: .destination) ?? NSLocalizedString("Выберите назначение", comment: "Выберите назначение")

@@ -60,7 +60,7 @@ class ActiveInfoViewController : EntityInfoNavigationController {
     }
     
     override func showEditScreen() {
-        modal(factory.activeEditViewController(delegate: self, active: viewModel.active, basketType: viewModel.basketType))
+        modal(factory.activeEditViewController(delegate: self, active: viewModel.active, basketType: viewModel.basketType, costCents: nil))
     }
     
     func didTapBankButton() {

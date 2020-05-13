@@ -45,7 +45,11 @@ class ExpenseCategoryViewModel {
     var spent: String? {
         return spent(shouldRound: false)
     }
-        
+       
+    var amountCents: Int {
+        return expenseCategory.spentCentsAtPeriod
+    }
+    
     var profit: String? {
         return ""
     }

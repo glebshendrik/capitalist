@@ -44,6 +44,7 @@ class ActiveEditViewModel {
     var costCentsToSave: Int {
         return costToSave.intMoney(with: selectedCurrency) ?? 0
     }
+    var passedCostCents: Int?
     
     var goal: String? = nil
     var alreadyPaid: String? = nil
@@ -214,7 +215,7 @@ class ActiveEditViewModel {
         self.selectedIconURL = active.iconURL
         self.name = active.name
         self.selectedCurrency = active.currency
-        self.cost = active.costCents.moneyDecimalString(with: active.currency)
+        self.cost = (passedCostCents ?? active.costCents).moneyDecimalString(with: active.currency)
         self.goal = active.goalAmountCents?.moneyDecimalString(with: active.currency)
         self.alreadyPaid = active.alreadyPaidCents?.moneyDecimalString(with: active.currency)
         self.monthlyPayment = active.monthlyPaymentCents?.moneyDecimalString(with: active.currency)
@@ -236,6 +237,10 @@ class ActiveEditViewModel {
                                                   connectionId: accountConnection.connectionId,
                                                   shouldDestroy: nil)
         }
+    }
+    
+    func set(costCents: Int?) {
+        self.passedCostCents = costCents
     }
     
     func loadData() -> Promise<Void> {

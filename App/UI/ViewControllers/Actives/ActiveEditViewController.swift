@@ -104,4 +104,8 @@ extension ActiveEditViewController {
     func set(active: Active) {        
         viewModel.set(active: active)
     }
+    
+    func set(costCents: Int?) {
+        viewModel.set(costCents: costCents)
+    }
 }

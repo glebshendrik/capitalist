@@ -73,6 +73,10 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return active.costCents
     }
     
+    var amountCents: Int {
+        return costCents
+    }
+    
     var costRounded: String {
         return amountRounded
     }

@@ -653,16 +653,16 @@ extension UIViewController {
         navigationController?.pushViewController(viewController, animated: animated)
     }
     
-    func sheet(title: String?, actions: [UIAlertAction]) {
+    func sheet(title: String?, actions: [UIAlertAction], message: String? = nil, preferredStyle: UIAlertController.Style = .actionSheet) {
         let alertController = UIAlertController(title: title,
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
+                                                message: message,
+                                                preferredStyle: preferredStyle)
         
         for action in actions {
             alertController.addAction(action)
         }
         
-        alertController.addAction(title: "Отмена",
+        alertController.addAction(title: NSLocalizedString("Отмена", comment: "Отмена"),
                                   style: .cancel,
                                   isEnabled: true,
                                   handler: nil)

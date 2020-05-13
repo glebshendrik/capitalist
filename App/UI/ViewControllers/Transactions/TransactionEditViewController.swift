@@ -64,6 +64,15 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         return viewModel.loadData()
     }
     
+    override func save() {
+        if viewModel.shouldAskForReestimateAsset {
+            askForReestimateAsset()
+        }
+        else {
+            super.save()
+        }
+    }
+    
     override func savePromise() -> Promise<Void> {
         return viewModel.save()
     }
@@ -118,17 +127,20 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         }
     }
     
-    func loadSource(id: Int, type: TransactionableType) {
+    func loadSource(id: Int, type: TransactionableType, completion: (() -> Void)? = nil) {
         operationStarted()
         
         firstly {
             viewModel.loadSource(id: id, type: type)
-        }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка при загрузке источника", comment: "Ошибка при загрузке источника"),
-                                              theme: .error)
-        }.finally {
+        }.done {
             self.operationFinished()
             self.updateUI()
+            completion?()
+        }.catch { _ in
+            self.operationFinished()
+            self.updateUI()
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка при загрузке источника", comment: "Ошибка при загрузке источника"),
+                                              theme: .error)
         }
     }
     

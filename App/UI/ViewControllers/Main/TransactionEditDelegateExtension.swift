@@ -89,6 +89,8 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
         setSelecting(false, animated: true)
         loadBudget()
         loadExpenseSources()
+        loadActives(by: .risk)
+        loadActives(by: .safe)
     }
     
     private func updateExpenseDependentData() {

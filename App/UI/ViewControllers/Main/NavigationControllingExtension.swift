@@ -88,7 +88,7 @@ extension MainViewController {
     }
     
     func showActiveEditScreen(active: Active?, basketType: BasketType) {    
-        modal(factory.activeEditViewController(delegate: self, active: active, basketType: basketType))
+        modal(factory.activeEditViewController(delegate: self, active: active, basketType: basketType, costCents: nil))
     }
     
     func showActiveInfo(active: ActiveViewModel) {

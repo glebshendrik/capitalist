@@ -147,7 +147,8 @@ protocol UIFactoryProtocol {
         
     func activeEditViewController(delegate: ActiveEditViewControllerDelegate,
                                   active: Active?,
-                                  basketType: BasketType) -> UINavigationController?
+                                  basketType: BasketType,
+                                  costCents: Int?) -> UINavigationController?
     
     func activeInfoViewController(active: ActiveViewModel?) -> UINavigationController?
     

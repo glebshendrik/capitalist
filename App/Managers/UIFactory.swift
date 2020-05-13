@@ -392,13 +392,14 @@ class UIFactory : UIFactoryProtocol {
     
     func activeEditViewController(delegate: ActiveEditViewControllerDelegate,
                                   active: Active?,
-                                  basketType: BasketType) -> UINavigationController? {
+                                  basketType: BasketType,
+                                  costCents: Int?) -> UINavigationController? {
         let activeEditNavigationController = router.viewController(.ActiveEditNavigationController) as? UINavigationController
         let activeEditViewController = activeEditNavigationController?.topViewController as? ActiveEditViewController
             
         activeEditViewController?.set(delegate: delegate)
         activeEditViewController?.set(basketType: basketType)
-        
+        activeEditViewController?.set(costCents: costCents)
         if let active = active {
             activeEditViewController?.set(active: active)
         }

@@ -254,6 +254,46 @@ extension TransactionEditViewController {
             return []
         }
     }
+    
+    func askForReestimateAsset() {
+        let reestimateAssetAction = UIAlertAction(title: NSLocalizedString("Переоценить", comment: "Переоценить"),
+                                                  style: .default,
+                                                  handler: { _ in
+                                                    self.showActiveEditScreen(activeViewModel: self.viewModel.source as? ActiveViewModel)
+                                                })
+        
+        sheet(title: NSLocalizedString("Переоценить актив?", comment: "Переоценить актив?"),
+              actions: [reestimateAssetAction],
+              message: NSLocalizedString("Вы собираетесь полностью продать актив, но сумма указанная в транзакции отличается от стоимости актива. Сначала нужно переоценить актив.", comment: ""),
+              preferredStyle: .alert)
+    }
+    
+    func showActiveEditScreen(activeViewModel: ActiveViewModel?) {
+        guard let active = activeViewModel?.active else { return }
+        modal(factory.activeEditViewController(delegate: self,
+                                               active: active,
+                                               basketType: active.basketType,
+                                               costCents: viewModel.amountCents))
+    }
+}
+
+extension TransactionEditViewController : ActiveEditViewControllerDelegate {
+    func didCreateActive(with basketType: BasketType, name: String, isIncomePlanned: Bool) {
+        
+    }
+    
+    func didUpdateActive(with basketType: BasketType) {
+        guard viewModel.isSellingAsset, let sourceId = viewModel.source?.id, let sourceType = viewModel.sourceType else { return }
+        loadSource(id: sourceId, type: sourceType) {
+            self.save()
+        }
+    }
+    
+    func didRemoveActive(with basketType: BasketType) {
+        
+    }
+    
+    
 }
 
 extension TransactionEditViewController : DatePickerViewControllerDelegate {
