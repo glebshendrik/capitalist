@@ -15,6 +15,8 @@ protocol TransactionEditViewControllerDelegate {
     func didCreateTransaction(id: Int, type: TransactionType)
     func didUpdateTransaction(id: Int, type: TransactionType)
     func didRemoveTransaction(id: Int, type: TransactionType)
+    func shouldShowCreditEditScreen(destination: TransactionDestination)
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination)
 }
 
 class TransactionEditViewController : FormNavBarButtonsEditViewController {
@@ -58,6 +60,13 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         updateRemoveButtonUI()
         tableController.reloadData(animated: false)
         focusAmountField()
+    }
+    
+    let didAppearOnce = Once()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     override func loadDataPromise() -> Promise<Void> {

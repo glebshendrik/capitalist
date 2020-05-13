@@ -60,6 +60,28 @@ extension StatisticsViewController : TransactionEditViewControllerDelegate, Borr
     func didRemoveTransaction(id: Int, type: TransactionType) {
         loadData()
     }
+    
+    func shouldShowCreditEditScreen(destination: TransactionDestination) {
+        showCreditEditScreen(destination: destination)
+    }
+
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+        showBorrowEditScreen(type: type, source: source, destination: destination)
+    }
+    
+    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+        modal(factory.borrowEditViewController(delegate: self,
+                                               type: type,
+                                               borrowId: nil,
+                                               source: source,
+                                               destination: destination))
+    }
+    
+    func showCreditEditScreen(destination: TransactionDestination) {
+        modal(factory.creditEditViewController(delegate: self,
+                                               creditId: nil,
+                                               destination: destination))
+    }
 }
 
 extension StatisticsViewController : FiltersSelectionViewControllerDelegate {

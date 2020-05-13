@@ -151,9 +151,10 @@ extension IncomeSourceSelectViewController : UITableViewDelegate, UITableViewDat
             showNewIncomeSourceScreen()
         case .items:
             guard let incomeSourceViewModel = viewModel.incomeSourceViewModel(at: indexPath) else { return }
-            if let delegate = delegate {
-                delegate.didSelect(incomeSourceViewModel: incomeSourceViewModel)
-                close()
+            if let delegate = delegate {                
+                closeButtonHandler() {
+                    delegate.didSelect(incomeSourceViewModel: incomeSourceViewModel)
+                }
             }
             else {
                 showIncomeSourceInfoScreen(incomeSource: incomeSourceViewModel)

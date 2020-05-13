@@ -96,12 +96,18 @@ extension TransactionEditViewModel {
         guard   needCurrencyExchange,
             let sourceCurrencyCode = sourceCurrencyCode,
             let destinationCurrencyCode = destinationCurrencyCode else {
+                if self.returningBorrow != nil {
+                    self.setAmounts()
+                }
                 return Promise.value(())
         }
         return  firstly {
                     exchangeRatesCoordinator.show(from: sourceCurrencyCode, to: destinationCurrencyCode)
                 }.done { exchangeRate in
                     self.exchangeRate = exchangeRate.rate
+                    if self.returningBorrow != nil {
+                        self.setAmounts()
+                    }                    
                 }
     }
     

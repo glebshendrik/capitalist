@@ -38,6 +38,35 @@ class CreditInfoViewController : EntityInfoNavigationController {
     override func showEditScreen() {
         modal(factory.creditEditViewController(delegate: self, creditId: viewModel.creditId, destination: nil))
     }
+    
+    override func didCreateCredit() {
+        
+    }
+    
+    override func didUpdateCredit() {
+        refreshData()
+    }
+    
+    override func didRemoveCredit() {
+        viewModel.setAsDeleted()
+        closeButtonHandler()
+    }
+    
+    override var isSelectingTransactionables: Bool {
+        return false
+    }
+    
+    override func didCreateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+        
+    override func didUpdateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+        
+    override func didRemoveTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
 }
 
 extension CreditInfoViewController : IconsViewControllerDelegate {
@@ -51,38 +80,5 @@ extension CreditInfoViewController : ReminderEditViewControllerDelegate {
     func didSave(reminderViewModel: ReminderViewModel) {
         viewModel.reminder = reminderViewModel
         save()
-    }
-}
-
-extension CreditInfoViewController : CreditEditViewControllerDelegate {
-    func didCreateCredit() {
-        
-    }
-    
-    func didUpdateCredit() {
-        refreshData()
-    }
-    
-    func didRemoveCredit() {
-        viewModel.setAsDeleted()
-        closeButtonHandler()
-    }
-}
-
-extension CreditInfoViewController : TransactionEditViewControllerDelegate {
-    var isSelectingTransactionables: Bool {
-        return false
-    }
-    
-    func didCreateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-        
-    func didUpdateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-        
-    func didRemoveTransaction(id: Int, type: TransactionType) {
-        refreshData()
     }
 }

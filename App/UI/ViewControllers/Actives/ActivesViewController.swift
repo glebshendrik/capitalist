@@ -226,7 +226,9 @@ extension ActivesViewController : UITableViewDelegate, UITableViewDataSource {
         case .items:
             guard let activeViewModel = viewModel.activeViewModel(at: indexPath) else { return }
             if delegate != nil {
-                didSelect(activeViewModel)
+                closeButtonHandler() {
+                    self.didSelect(activeViewModel)
+                }
             }
             else {
                 showActiveInfo(active: activeViewModel)
@@ -241,7 +243,6 @@ extension ActivesViewController : UITableViewDelegate, UITableViewDataSource {
         case .destination:
             delegate?.didSelect(destinationActiveViewModel: activeViewModel)
         }
-        close()
     }
 }
 

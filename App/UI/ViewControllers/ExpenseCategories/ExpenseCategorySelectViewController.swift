@@ -152,8 +152,9 @@ extension ExpenseCategorySelectViewController : UITableViewDelegate, UITableView
         case .items:
             guard let expenseCategoryViewModel = viewModel.expenseCategoryViewModel(at: indexPath) else { return }
             if let delegate = delegate {
-                delegate.didSelect(expenseCategoryViewModel: expenseCategoryViewModel)
-                close()
+                closeButtonHandler() {
+                    delegate.didSelect(expenseCategoryViewModel: expenseCategoryViewModel)
+                }
             }
             else {
                 showExpenseCategoryInfoScreen(expenseCategory: expenseCategoryViewModel)

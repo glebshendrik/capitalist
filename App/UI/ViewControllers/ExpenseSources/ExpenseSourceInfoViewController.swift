@@ -46,6 +46,22 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
             showProviders()
         }
     }
+    
+    override var isSelectingTransactionables: Bool {
+        return false
+    }
+    
+    override func didCreateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+    
+    override func didUpdateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+    
+    override func didRemoveTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
 }
 
 extension ExpenseSourceInfoViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
@@ -99,23 +115,5 @@ extension ExpenseSourceInfoViewController : ExpenseSourceEditViewControllerDeleg
     func didRemoveExpenseSource() {
         viewModel.setAsDeleted()
         closeButtonHandler()
-    }
-}
-
-extension ExpenseSourceInfoViewController : TransactionEditViewControllerDelegate {
-    var isSelectingTransactionables: Bool {
-        return false
-    }
-    
-    func didCreateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-    
-    func didUpdateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-    
-    func didRemoveTransaction(id: Int, type: TransactionType) {
-        refreshData()
     }
 }

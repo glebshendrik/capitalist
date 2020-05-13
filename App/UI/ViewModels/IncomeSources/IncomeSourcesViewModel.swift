@@ -47,7 +47,7 @@ class IncomeSourcesViewModel {
     }
     
     var isAddingAllowed: Bool = true
-    var noBorrows: Bool = true
+    var noBorrows: Bool = false
     var isUpdatingData: Bool = false
     var shouldCalculateTotal: Bool = false
     

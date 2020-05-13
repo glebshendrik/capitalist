@@ -33,57 +33,53 @@ class BorrowInfoViewController : EntityInfoNavigationController {
         guard let borrowType = viewModel.borrowType else { return }
         modal(factory.borrowEditViewController(delegate: self, type: borrowType, borrowId: viewModel.borrowViewModel?.id, source: nil, destination: nil))
     }
+    
+    override func didCreateDebt() {
+        
+    }
+    
+    override func didCreateLoan() {
+        
+    }
+    
+    override func didUpdateDebt() {
+        refreshData()
+    }
+    
+    override func didUpdateLoan() {
+        refreshData()
+    }
+    
+    override func didRemoveDebt() {
+        viewModel.setAsDeleted()
+        closeButtonHandler()
+    }
+    
+    override func didRemoveLoan() {
+        viewModel.setAsDeleted()
+        closeButtonHandler()
+    }
+    
+    override var isSelectingTransactionables: Bool {
+        return false
+    }
+    
+    override func didCreateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+        
+    override func didUpdateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+        
+    override func didRemoveTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
 }
 
 extension BorrowInfoViewController : IconsViewControllerDelegate {
     func didSelectIcon(icon: Icon) {
         viewModel.selectedIconURL = icon.url
         save()
-    }
-}
-
-extension BorrowInfoViewController : BorrowEditViewControllerDelegate {
-    func didCreateDebt() {
-        
-    }
-    
-    func didCreateLoan() {
-        
-    }
-    
-    func didUpdateDebt() {
-        refreshData()
-    }
-    
-    func didUpdateLoan() {
-        refreshData()
-    }
-    
-    func didRemoveDebt() {
-        viewModel.setAsDeleted()
-        closeButtonHandler()
-    }
-    
-    func didRemoveLoan() {
-        viewModel.setAsDeleted()
-        closeButtonHandler()
-    }
-}
-
-extension BorrowInfoViewController : TransactionEditViewControllerDelegate {
-    var isSelectingTransactionables: Bool {
-        return false
-    }
-    
-    func didCreateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-        
-    func didUpdateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-        
-    func didRemoveTransaction(id: Int, type: TransactionType) {
-        refreshData()
     }
 }

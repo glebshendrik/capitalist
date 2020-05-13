@@ -51,11 +51,19 @@ extension TransactionEditViewController {
         updateUI()
         loadExchangeRate()
     }
+    
+    func update(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel? = nil) {
+        viewModel.source = source
+        viewModel.destination = destination
+        viewModel.returningBorrow = returningBorrow
+        updateUI()
+        loadExchangeRate()
+    }
 }
 
 extension TransactionEditViewController {
     func focusAmountField() {        
-        guard viewModel.hasBothTransactionables else { return }
+        guard viewModel.hasBothTransactionables, !topmostPresentedViewController.isAlert else { return }
         if viewModel.needCurrencyExchange {
             tableController.exchangeField.amountField.becomeFirstResponder()
         }

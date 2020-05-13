@@ -209,7 +209,9 @@ extension ExpenseSourcesViewController : UITableViewDelegate, UITableViewDataSou
         case .items:
             guard let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) else { return }
             if delegate != nil {
-                didSelect(expenseSourceViewModel)
+                closeButtonHandler() {
+                    self.didSelect(expenseSourceViewModel)
+                }
             }
             else {
                 showExpenseSourceInfoScreen(expenseSource: expenseSourceViewModel)
@@ -224,7 +226,6 @@ extension ExpenseSourcesViewController : UITableViewDelegate, UITableViewDataSou
         case .destination:
             delegate?.didSelect(destinationExpenseSourceViewModel: expenseSourceViewModel)
         }
-        close()
     }
 }
 

@@ -154,11 +154,11 @@ extension TransactionEditViewModel {
     }
     
     var canChangeSource: Bool {
-        return !isReturningDebt && !anyVirtualTransactionable
+        return !anyVirtualTransactionable
     }
     
     var canChangeDestination: Bool {
-        return !isReturningLoan && !anyVirtualTransactionable
+        return !anyVirtualTransactionable
     }
     
     var anyVirtualTransactionable: Bool {

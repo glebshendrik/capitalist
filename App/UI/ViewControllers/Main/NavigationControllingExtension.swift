@@ -191,7 +191,7 @@ extension MainViewController {
         sheet(title: nil, actions: [debtAction, returnAction])
     }
     
-    private func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
         modal(factory.borrowEditViewController(delegate: self,
                                                type: type,
                                                borrowId: nil,
@@ -199,7 +199,7 @@ extension MainViewController {
                                                destination: destination))
     }
     
-    private func showCreditEditScreen(destination: TransactionDestination) {
+    func showCreditEditScreen(destination: TransactionDestination) {
         modal(factory.creditEditViewController(delegate: self,
                                                creditId: nil,
                                                destination: destination))

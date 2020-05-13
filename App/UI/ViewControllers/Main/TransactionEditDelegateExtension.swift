@@ -65,6 +65,14 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
         updateDataWith(transactionId: id, transactionType: type)
     }
     
+    func shouldShowCreditEditScreen(destination: TransactionDestination) {
+        showCreditEditScreen(destination: destination)
+    }
+
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+        showBorrowEditScreen(type: type, source: source, destination: destination)
+    }
+        
     private func updateDataWith(transactionId: Int, transactionType: TransactionType) {
         switch transactionType {
         case .income:

@@ -351,12 +351,12 @@ extension UIViewController {
         closeButtonHandler()
     }
             
-    func closeButtonHandler() {
+    func closeButtonHandler(completion: (() -> Void)? = nil) {
         if isRoot {
             (self as? ApplicationRouterDependantProtocol)?.router.route()
         }
         else {
-            (navigationController ?? self).dismiss(animated: true)
+            (navigationController ?? self).dismiss(animated: true, completion: completion)
         }
     }
 }
@@ -669,8 +669,12 @@ extension UIViewController {
         modal(alertController, animated: true)
     }
     
+    var isAlert: Bool {
+        return self.isMember(of: UIAlertController.self)
+    }
+    
     func dismissIfAlert() {
-        if self.isMember(of: UIAlertController.self) {
+        if isAlert {
             dismiss(animated: false, completion: nil)
         }
     }
