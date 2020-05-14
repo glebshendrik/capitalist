@@ -40,7 +40,7 @@ class ExpenseCategoryInfoViewController : EntityInfoNavigationController {
             modal(factory.borrowEditViewController(delegate: self, type: .debt, borrowId: nil, source: nil, destination: viewModel.expenseCategoryViewModel))
         }
         else {
-            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel.expenseCategoryViewModel))
+            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel.expenseCategoryViewModel, transactionType: .expense))
         }
         
     }

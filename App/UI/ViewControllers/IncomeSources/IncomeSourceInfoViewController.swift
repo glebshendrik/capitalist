@@ -40,7 +40,7 @@ class IncomeSourceInfoViewController : EntityInfoNavigationController {
             modal(factory.borrowEditViewController(delegate: self, type: .loan, borrowId: nil, source: viewModel.incomeSourceViewModel, destination: nil))
         }
         else {
-            modal(factory.transactionEditViewController(delegate: self, source: viewModel.incomeSourceViewModel, destination: nil))
+            modal(factory.transactionEditViewController(delegate: self, source: viewModel.incomeSourceViewModel, destination: nil, transactionType: .income))
         }
         
     }

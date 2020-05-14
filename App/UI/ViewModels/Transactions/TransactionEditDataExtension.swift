@@ -36,7 +36,7 @@ extension TransactionEditViewModel {
             if destination  == nil { promises.append(loadDestination(type: .expenseCategory)) }
         case .fundsMove:
             if source       == nil { promises.append(loadSource(type: .expenseSource)) }
-            if destination  == nil { promises.append(loadDestination(type: .active, basketType: .safe)) }
+            if destination  == nil { promises.append(loadDestination(type: .expenseSource)) }
         }
         return when(fulfilled: promises)
     }
@@ -129,7 +129,7 @@ extension TransactionEditViewModel {
     
     func loadFirstIncomeSource() -> Promise<Transactionable?> {
         return  firstly {
-                    incomeSourcesCoordinator.first()
+                    incomeSourcesCoordinator.first(noBorrows: true)
                 }.map { incomeSource in
                     guard let incomeSource = incomeSource else { return nil }
                     return IncomeSourceViewModel(incomeSource: incomeSource)
@@ -147,7 +147,7 @@ extension TransactionEditViewModel {
     
     func loadFirstExpenseCategory(basketType: BasketType) -> Promise<Transactionable?> {
         return  firstly {
-                    expenseCategoriesCoordinator.first(for: basketType)
+                    expenseCategoriesCoordinator.first(for: basketType, noBorrows: true)
                 }.map { expenseCategory in
                     guard let expenseCategory = expenseCategory else { return nil }
                     return ExpenseCategoryViewModel(expenseCategory: expenseCategory)

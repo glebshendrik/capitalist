@@ -146,7 +146,8 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
         modal(factory.transactionEditViewController(delegate: self,
                                                     source: nil,
                                                     destination: nil,
-                                                    returningBorrow: viewModel.asReturningBorrow()))
+                                                    returningBorrow: viewModel.asReturningBorrow(),
+                                                    transactionType: nil))
     }
     
     func didChange(name: String?) {

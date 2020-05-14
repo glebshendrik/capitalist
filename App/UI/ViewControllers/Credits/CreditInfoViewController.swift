@@ -29,7 +29,7 @@ class CreditInfoViewController : EntityInfoNavigationController {
         case CreditInfoField.statistics.identifier:
             modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
         case CreditInfoField.transaction.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.expenseCategoryViewModel))
+            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.expenseCategoryViewModel, transactionType: .expense))
         default:
             return
         }

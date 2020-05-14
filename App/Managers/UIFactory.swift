@@ -137,7 +137,8 @@ class UIFactory : UIFactoryProtocol {
                                        transactionId: Int?,
                                        source: Transactionable?,
                                        destination: Transactionable?,
-                                       returningBorrow: BorrowViewModel?) -> UINavigationController? {
+                                       returningBorrow: BorrowViewModel?,
+                                       transactionType: TransactionType?) -> UINavigationController? {
         
         let transactionEditNavigationController = router.viewController(.TransactionEditNavigationController) as? UINavigationController
         let transactionEditViewController = transactionEditNavigationController?.topViewController as? TransactionEditViewController
@@ -148,7 +149,7 @@ class UIFactory : UIFactoryProtocol {
             transactionEditViewController?.set(transactionId: transactionId)
         }
         else {
-            transactionEditViewController?.set(source: source, destination: destination, returningBorrow: returningBorrow)
+            transactionEditViewController?.set(source: source, destination: destination, returningBorrow: returningBorrow, transactionType: transactionType)
         }
         
         return transactionEditNavigationController
@@ -157,22 +158,26 @@ class UIFactory : UIFactoryProtocol {
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
                                        source: Transactionable?,
                                        destination: Transactionable?,
-                                       returningBorrow: BorrowViewModel?) -> UINavigationController? {
+                                       returningBorrow: BorrowViewModel?,
+                                       transactionType: TransactionType?) -> UINavigationController? {
         
         return transactionEditViewController(delegate: delegate,
                                              transactionId: nil,
                                              source: source,
                                              destination: destination,
-                                             returningBorrow: returningBorrow)
+                                             returningBorrow: returningBorrow,
+                                             transactionType: transactionType)
     }
     
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
                                        source: Transactionable?,
-                                       destination: Transactionable?) -> UINavigationController? {
+                                       destination: Transactionable?,
+                                       transactionType: TransactionType?) -> UINavigationController? {
         return transactionEditViewController(delegate: delegate,
                                              source: source,
                                              destination: destination,
-                                             returningBorrow: nil)
+                                             returningBorrow: nil,
+                                             transactionType: transactionType)
     }
     
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
@@ -181,7 +186,8 @@ class UIFactory : UIFactoryProtocol {
                                              transactionId: transactionId,
                                              source: nil,
                                              destination: nil,
-                                             returningBorrow: nil)
+                                             returningBorrow: nil,
+                                             transactionType: nil)
     }
     
     func recurrencePicker(delegate: RecurrencePickerDelegate,

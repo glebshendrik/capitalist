@@ -28,9 +28,9 @@ class IncomeSourcesCoordinator : IncomeSourcesCoordinatorProtocol {
         return incomeSourcesService.show(by: id)
     }
     
-    func first() -> Promise<IncomeSource?> {
+    func first(noBorrows: Bool) -> Promise<IncomeSource?> {
         return  firstly {
-                    index(noBorrows: false)
+                    index(noBorrows: noBorrows)
                 }.map { incomeSources in
                     incomeSources.first
                 }

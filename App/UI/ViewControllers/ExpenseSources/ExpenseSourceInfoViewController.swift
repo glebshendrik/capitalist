@@ -27,9 +27,9 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
         case ExpenseSourceInfoField.statistics.identifier:
             modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
         case ExpenseSourceInfoField.transactionIncome.identifier:        
-            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.expenseSourceViewModel))
+            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.expenseSourceViewModel, transactionType: .income))
         case ExpenseSourceInfoField.transactionExpense.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.expenseSourceViewModel, destination: nil))
+            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.expenseSourceViewModel, destination: nil, transactionType: .expense))
         default:
             return
         }

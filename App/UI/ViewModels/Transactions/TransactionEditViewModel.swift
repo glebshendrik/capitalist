@@ -65,13 +65,14 @@ class TransactionEditViewModel {
         self.transactionId = transactionId
     }
     
-    func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?) {
+    func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?, transactionType: TransactionType?) {
         self.returningBorrow = returningBorrow
         self.source = source
         self.destination = destination
         if let destination = destination as? ActiveViewModel {
             self.isBuyingAsset = destination.activeType.buyingAssetsDefault
         }
+        self.requiredTransactionType = transactionType
     }
         
     func set(transaction: Transaction, source: Transactionable, destination: Transactionable) {

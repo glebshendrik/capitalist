@@ -30,7 +30,7 @@ extension TransactionEditViewModel {
     }
     
     var transactionType: TransactionType? {
-        return TransactionType.typeFor(sourceType: sourceType, destinationType: destinationType)
+        return TransactionType.typeFor(sourceType: sourceType, destinationType: destinationType, byingAsset: isBuyingAsset)
     }
     
     var amountToSave: String? {
@@ -137,7 +137,7 @@ extension TransactionEditViewModel {
             onlyBuyingAssets = destination.activeType.onlyBuyingAssets
         }
         
-        return transactionType != .expense || destination.type != .active || onlyBuyingAssets
+        return transactionType == .income || destination.type != .active || onlyBuyingAssets
     }
     
     var isSellingAssetFieldHidden: Bool {
@@ -250,18 +250,19 @@ extension TransactionableType {
 }
 
 extension TransactionType {
-    static func typeFor(sourceType: TransactionableType?, destinationType: TransactionableType?) -> TransactionType? {
+    static func typeFor(sourceType: TransactionableType?, destinationType: TransactionableType?, byingAsset: Bool) -> TransactionType? {
         
         guard let sourceType = sourceType, let destinationType = destinationType else { return nil }
         
-        switch (sourceType, destinationType) {
-        case (.incomeSource, .expenseSource),
-             (.incomeSource, .active),
-             (.active, .expenseSource):             return .income
-        case (.expenseSource, .expenseSource):      return .fundsMove
-        case (.expenseSource, .expenseCategory),
-             (.expenseSource, .active):             return .expense
-        default:                                    return nil
+        switch (sourceType, destinationType, byingAsset) {
+        case (.incomeSource, .expenseSource, _),
+             (.incomeSource, .active, _):               return .income
+        case (.expenseSource, .expenseSource, _),
+             (.active, .expenseSource, _),
+             (.expenseSource, .active, true):           return .fundsMove
+        case (.expenseSource, .expenseCategory, _),
+             (.expenseSource, .active, false):          return .expense
+        default:                                        return nil
         }
     }
     

@@ -49,11 +49,11 @@ class ActiveInfoViewController : EntityInfoNavigationController {
         case ActiveInfoField.costChange.identifier:
             showEditScreen()
         case ActiveInfoField.transactionDevidents.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.incomeSourceViewModel, destination: nil))
+            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.incomeSourceViewModel, destination: nil, transactionType: .income))
         case ActiveInfoField.transactionInvest.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.activeViewModel))
+            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.activeViewModel, transactionType: .fundsMove))
         case ActiveInfoField.transactionSell.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.activeViewModel, destination: nil))
+            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.activeViewModel, destination: nil, transactionType: .fundsMove))
         default:
             return
         }

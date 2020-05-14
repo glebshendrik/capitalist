@@ -27,9 +27,9 @@ class ExpenseCategoriesCoordinator : ExpenseCategoriesCoordinatorProtocol {
         return expenseCategoriesService.show(by: id)
     }
     
-    func first(for basketType: BasketType) -> Promise<ExpenseCategory?> {
+    func first(for basketType: BasketType, noBorrows: Bool) -> Promise<ExpenseCategory?> {
         return  firstly {
-                    index(for: basketType, noBorrows: false)
+                    index(for: basketType, noBorrows: noBorrows)
                 }.map { expenseCategories in
                     expenseCategories.first
                 }

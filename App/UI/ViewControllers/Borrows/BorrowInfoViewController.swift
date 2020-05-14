@@ -23,7 +23,7 @@ class BorrowInfoViewController : EntityInfoNavigationController {
         guard let field = field else { return }
         switch field.identifier {
         case BorrowInfoField.transaction.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: nil, returningBorrow: viewModel.borrowViewModel))
+            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: nil, returningBorrow: viewModel.borrowViewModel, transactionType: nil))
         default:
             return
         }

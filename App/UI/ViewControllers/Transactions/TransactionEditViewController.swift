@@ -110,8 +110,8 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         viewModel.set(transactionId: transactionId)
     }
     
-    func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?) {
-        viewModel.set(source: source, destination: destination, returningBorrow: returningBorrow)
+    func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?, transactionType: TransactionType?) {
+        viewModel.set(source: source, destination: destination, returningBorrow: returningBorrow, transactionType: transactionType)
     }
     
     func loadExchangeRate() {

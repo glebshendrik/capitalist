@@ -26,6 +26,7 @@ extension TransactionEditViewController {
     
     func update(isBuyingAsset: Bool) {
         viewModel.isBuyingAsset = isBuyingAsset
+        updateNavigationItemUI()
         updateIsBuyingAssetUI()
     }
     

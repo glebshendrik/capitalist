@@ -126,15 +126,16 @@ extension MainViewController {
         }
     }
     
-    private func showTransactionEditScreen(source: Transactionable?, destination: Transactionable?) {
-        modal(factory.transactionEditViewController(delegate: self, source: source, destination: destination))
+    private func showTransactionEditScreen(source: Transactionable?, destination: Transactionable?, transactionType: TransactionType? = nil) {
+        modal(factory.transactionEditViewController(delegate: self, source: source, destination: destination, transactionType: transactionType))
     }
        
     private func showReturnTransactionEditScreen(source: Transactionable, destination: Transactionable, returningBorrow: BorrowViewModel?) {
         modal(factory.transactionEditViewController(delegate: self,
                                                     source: source,
                                                     destination: destination,
-                                                    returningBorrow: returningBorrow))
+                                                    returningBorrow: returningBorrow,
+                                                    transactionType: nil))
     }
         
     private func showExpenseEditScreen(source: ExpenseSourceViewModel, destination: ExpenseCategoryViewModel) {

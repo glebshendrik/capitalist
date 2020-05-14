@@ -59,11 +59,13 @@ protocol UIFactoryProtocol {
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
                                        source: Transactionable?,
                                        destination: Transactionable?,
-                                       returningBorrow: BorrowViewModel?) -> UINavigationController?
+                                       returningBorrow: BorrowViewModel?,
+                                       transactionType: TransactionType?) -> UINavigationController?
     
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
                                        source: Transactionable?,
-                                       destination: Transactionable?) -> UINavigationController?
+                                       destination: Transactionable?,
+                                       transactionType: TransactionType?) -> UINavigationController?
     
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
                                        transactionId: Int) -> UINavigationController?

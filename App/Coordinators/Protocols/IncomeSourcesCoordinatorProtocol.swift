@@ -12,7 +12,7 @@ import PromiseKit
 protocol IncomeSourcesCoordinatorProtocol {
     func create(with creationForm: IncomeSourceCreationForm) -> Promise<IncomeSource>
     func show(by id: Int) -> Promise<IncomeSource>
-    func first() -> Promise<IncomeSource?>
+    func first(noBorrows: Bool) -> Promise<IncomeSource?>
     func firstBorrow(currency: String) -> Promise<IncomeSource>
     func index(noBorrows: Bool) -> Promise<[IncomeSource]>    
     func update(with updatingForm: IncomeSourceUpdatingForm) -> Promise<Void>
