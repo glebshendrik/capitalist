@@ -36,8 +36,8 @@ extension TransactionEditViewModel {
             if destination  == nil { promises.append(loadDestination(type: .expenseCategory)) }
         case .fundsMove:
             if source == nil && destination == nil {
-                promises.append(loadSource(type: .expenseSource))
-                promises.append(loadDestination(type: .active, basketType: .safe))
+                promises.append(loadSource(type: .expenseSource, index: 0))
+                promises.append(loadDestination(type: .expenseSource, index: 1))
             }
             else {
                 if source       == nil { promises.append(loadSource(type: .expenseSource)) }
@@ -124,47 +124,47 @@ extension TransactionEditViewModel {
                 }
     }
     
-    func loadFirstTransactionable(type: TransactionableType, basketType: BasketType = .joy) -> Promise<Transactionable?> {
+    func loadTransactionable(type: TransactionableType, basketType: BasketType = .joy, index: Int = 0) -> Promise<Transactionable?> {
         switch type {
-        case .incomeSource:         return loadFirstIncomeSource()
-        case .expenseSource:        return loadFirstExpenseSource()
-        case .expenseCategory:      return loadFirstExpenseCategory(basketType: basketType)
-        case .active:               return loadFirstActive(basketType: basketType)
+        case .incomeSource:         return loadIncomeSource(index: index)
+        case .expenseSource:        return loadExpenseSource(index: index)
+        case .expenseCategory:      return loadExpenseCategory(basketType: basketType, index: index)
+        case .active:               return loadActive(basketType: basketType, index: index)
         }
     }
     
-    func loadFirstIncomeSource() -> Promise<Transactionable?> {
+    func loadIncomeSource(index: Int = 0) -> Promise<Transactionable?> {
         return  firstly {
-                    incomeSourcesCoordinator.first(noBorrows: true)
-                }.map { incomeSource in
-                    guard let incomeSource = incomeSource else { return nil }
+                    incomeSourcesCoordinator.index(noBorrows: true)
+                }.map { incomeSources in
+                    guard let incomeSource = incomeSources[safe: index] else { return nil }
                     return IncomeSourceViewModel(incomeSource: incomeSource)
                 }
     }
     
-    func loadFirstExpenseSource() -> Promise<Transactionable?> {
+    func loadExpenseSource(index: Int = 0) -> Promise<Transactionable?> {
         return  firstly {
-                    expenseSourcesCoordinator.first()
-                }.map { expenseSource in
-                    guard let expenseSource = expenseSource else { return nil }
+                    expenseSourcesCoordinator.index(currency: nil)
+                }.map { expenseSources in
+                    guard let expenseSource = expenseSources[safe: index] else { return nil }
                     return ExpenseSourceViewModel(expenseSource: expenseSource)
                 }
     }
     
-    func loadFirstExpenseCategory(basketType: BasketType) -> Promise<Transactionable?> {
+    func loadExpenseCategory(basketType: BasketType, index: Int = 0) -> Promise<Transactionable?> {
         return  firstly {
-                    expenseCategoriesCoordinator.first(for: basketType, noBorrows: true)
-                }.map { expenseCategory in
-                    guard let expenseCategory = expenseCategory else { return nil }
+                    expenseCategoriesCoordinator.index(for: basketType, noBorrows: true)
+                }.map { expenseCategories in
+                    guard let expenseCategory = expenseCategories[safe: index] else { return nil }
                     return ExpenseCategoryViewModel(expenseCategory: expenseCategory)
                 }
     }
     
-    func loadFirstActive(basketType: BasketType) -> Promise<Transactionable?> {
+    func loadActive(basketType: BasketType, index: Int = 0) -> Promise<Transactionable?> {
         return  firstly {
-                    activesCoordinator.first(for: basketType)
-                }.map { active in
-                    guard let active = active else { return nil }
+                    activesCoordinator.indexActives(for: basketType)
+                }.map { actives in
+                    guard let active = actives[safe: index] else { return nil }
                     return ActiveViewModel(active: active)
                 }
     }
@@ -204,30 +204,19 @@ extension TransactionEditViewModel {
                 }.asVoid()
     }
     
-    func loadSource(type: TransactionableType, basketType: BasketType = .joy) -> Promise<Void> {
+    func loadSource(type: TransactionableType, basketType: BasketType = .joy, index: Int = 0) -> Promise<Void> {
         return  firstly {
-                    loadFirstTransactionable(type: type, basketType: basketType)
+                    loadTransactionable(type: type, basketType: basketType, index: index)
                 }.get { transactionable in
                     self.source = transactionable
                 }.asVoid()
     }
     
-    func loadDestination(type: TransactionableType, basketType: BasketType = .joy) -> Promise<Void> {
+    func loadDestination(type: TransactionableType, basketType: BasketType = .joy, index: Int = 0) -> Promise<Void> {
         return  firstly {
-                    loadFirstTransactionable(type: type, basketType: basketType)
+                    loadTransactionable(type: type, basketType: basketType, index: index)
                 }.get { transactionable in
                     self.destination = transactionable
-                }.asVoid()
-    }
-    
-    func load(sourceType: TransactionableType, destinationType: TransactionableType, sourceBasketType: BasketType = .safe, destinationBasketType: BasketType = .joy) -> Promise<Void> {
-        return  firstly {
-                    when(fulfilled: loadFirstTransactionable(type: sourceType, basketType: sourceBasketType),
-                                    loadFirstTransactionable(type: destinationType, basketType: destinationBasketType))
-            
-                }.get { source, destination in
-                    self.source = source
-                    self.destination = destination
                 }.asVoid()
     }
 }

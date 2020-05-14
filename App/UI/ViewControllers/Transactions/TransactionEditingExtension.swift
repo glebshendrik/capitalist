@@ -68,7 +68,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         guard viewModel.canChangeSource else { return }
         didTap(transactionableType: viewModel.sourceType,
                transactionPart: .source,
-               skipTransactionable: viewModel.destination,
+               skipTransactionable: nil,
                currency: viewModel.sourceFilterCurrency,
                transactionableTypeCases: sourceTransactionableTypeCases())
     }
@@ -83,7 +83,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         guard viewModel.canChangeDestination else { return }
         didTap(transactionableType: viewModel.destinationType,
                transactionPart: .destination,
-               skipTransactionable: viewModel.source,
+               skipTransactionable: nil,
                currency: viewModel.destinationFilterCurrency,
                transactionableTypeCases: destinationTransactionableTypeCases())
     }
@@ -308,11 +308,36 @@ extension TransactionEditViewController : IncomeSourceSelectViewControllerDelega
 
 extension TransactionEditViewController : ExpenseSourcesViewControllerDelegate {
     func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
-        update(transactionSource: sourceExpenseSourceViewModel, transactionDestination: viewModel?.destination)
+        if let destination = viewModel?.destination,
+            sourceExpenseSourceViewModel.id == destination.id,
+            sourceExpenseSourceViewModel.type == destination.type {
+            
+            if let source = viewModel?.source, source.type == .expenseSource || source.type == .active {
+                update(transactionSource: sourceExpenseSourceViewModel, transactionDestination: viewModel?.source)
+            }
+            else {
+                update(transactionSource: sourceExpenseSourceViewModel, transactionDestination: nil)
+            }
+        }
+        else {
+            update(transactionSource: sourceExpenseSourceViewModel, transactionDestination: viewModel?.destination)
+        }
     }
     
     func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
-        update(transactionSource: viewModel?.source, transactionDestination: destinationExpenseSourceViewModel)
+        if let source = viewModel?.source,
+            destinationExpenseSourceViewModel.id == source.id,
+            destinationExpenseSourceViewModel.type == source.type {
+            if let destination = viewModel?.destination, destination.type == .expenseSource || destination.type == .active {
+                update(transactionSource: viewModel?.destination, transactionDestination: destinationExpenseSourceViewModel)
+            }
+            else {
+                update(transactionSource: nil, transactionDestination: destinationExpenseSourceViewModel)
+            }
+        }
+        else {
+            update(transactionSource: viewModel?.source, transactionDestination: destinationExpenseSourceViewModel)
+        }
     }
 }
 
