@@ -248,13 +248,25 @@ class TransactionViewModel {
     }
     
     var titleTransactionPart: TransactionPart {
-        switch type {
-        case .income:
-            return sourceType == .incomeSource && !isVirtualSource ? .source : .destination
-        case .expense:
-            return destinationType == .expenseSource || (sourceType == .expenseSource && destinationType == .expenseCategory && isVirtualDestination) ? .source : .destination
-        case .fundsMove:
+        switch (type, sourceType, destinationType) {
+        case (.income, .incomeSource, _):
+            return isVirtualSource ? .destination : .source
+        case (.expense, .expenseSource, _):
+            return isVirtualDestination ? .source : .destination
+        case (.fundsMove, .expenseSource, .expenseSource):
+            if isVirtualDestination {
+                return .source
+            }
+            if isVirtualSource {
+                return .destination
+            }
+            return .source
+        case (.fundsMove, .expenseSource, .active):
             return .destination
+        case (.fundsMove, .active, .expenseSource):
+            return .source
+        default:
+            return .source
         }
     }
     
@@ -279,7 +291,9 @@ class TransactionViewModel {
         let creditWord = NSLocalizedString("Кредит", comment: "Кредит")
         let loanWord = NSLocalizedString("Займ", comment: "Займ")
         let debtWord = NSLocalizedString("Долг", comment: "Долг")
-        let activeWord = NSLocalizedString("Покупка актива", comment: "Покупка актива")
+        let assetPurchaseWord = NSLocalizedString("Покупка актива", comment: "Покупка актива")
+        let assetExpenseWord = NSLocalizedString("Расход по активу", comment: "")
+        let assetSaleWord = NSLocalizedString("Продажа актива", comment: "")
 
         if isCrediting {
             return isVirtual ? creditWord : "\(creditWord) · \(subtitle)"
@@ -291,10 +305,19 @@ class TransactionViewModel {
             return isVirtual ? debtWord : "\(debtWord) · \(subtitle)"
         }
         if isActiveCreation {
-            return isVirtual ? activeWord : "\(activeWord) · \(subtitle)"
+            return isVirtual ? assetPurchaseWord : "\(assetPurchaseWord) · \(subtitle)"
         }
         if isVirtual {
             return sourceType == .active || destinationType == .active ? NSLocalizedString("Переоценка актива", comment: "Переоценка актива") : NSLocalizedString("Изменено Вами", comment: "Изменено Вами")
+        }
+        if type == .expense && destinationType == .active {
+            return "\(assetExpenseWord) · \(subtitle)"
+        }
+        if type == .fundsMove && destinationType == .active {
+            return "\(assetPurchaseWord) · \(subtitle)"
+        }
+        if type == .fundsMove && sourceType == .active {
+            return "\(assetSaleWord) · \(subtitle)"
         }
         
         return subtitle

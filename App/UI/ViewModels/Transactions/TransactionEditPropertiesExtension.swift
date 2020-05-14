@@ -146,7 +146,7 @@ extension TransactionEditViewModel {
                 let destination = destination,
                 let source = source else { return true }
         
-        return transactionType != .income || destination.type != .expenseSource || source.type != .active
+        return transactionType != .fundsMove || destination.type != .expenseSource || source.type != .active
     }
     
     var removeButtonHidden: Bool {
