@@ -1215,7 +1215,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6k-3z-5c2">
                                 <rect key="frame" x="289" y="554" width="58" height="58"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e02-bh-Lrg">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e02-bh-Lrg">
                                         <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
                                         <color key="backgroundColor" name="blue 1"/>
                                         <color key="tintColor" name="text FFFFFF"/>
@@ -1245,6 +1245,19 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-xG-79w" customClass="FanMenu" customModule="FanMenu">
+                                <rect key="frame" x="198" y="463" width="240" height="240"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="QC0-nV-4pH"/>
+                                    <constraint firstAttribute="height" constant="240" id="Z3W-Gv-JkY"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="120"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gku-Sf-ydu">
                                 <rect key="frame" x="157.5" y="281.5" width="60" height="60"/>
                                 <subviews>
@@ -1265,6 +1278,7 @@
                         <constraints>
                             <constraint firstItem="Gku-Sf-ydu" firstAttribute="centerX" secondItem="D5A-mu-huD" secondAttribute="centerX" id="0Wo-Sf-0pc"/>
                             <constraint firstAttribute="bottom" secondItem="foz-3R-fXQ" secondAttribute="bottom" id="19I-Wk-2Mr"/>
+                            <constraint firstItem="a5I-xG-79w" firstAttribute="centerY" secondItem="u6k-3z-5c2" secondAttribute="centerY" id="1OI-6Y-KQD"/>
                             <constraint firstItem="u6k-3z-5c2" firstAttribute="top" secondItem="rjC-iC-M0Y" secondAttribute="top" constant="-29" id="2nA-pZ-awb"/>
                             <constraint firstItem="rjC-iC-M0Y" firstAttribute="bottom" secondItem="uZP-da-pZ0" secondAttribute="bottom" id="2xh-Kb-cSu"/>
                             <constraint firstAttribute="trailing" secondItem="u6k-3z-5c2" secondAttribute="trailing" constant="28" id="95s-dH-jVt"/>
@@ -1277,6 +1291,7 @@
                             <constraint firstItem="uZP-da-pZ0" firstAttribute="trailing" secondItem="DLF-Af-F6p" secondAttribute="trailing" id="QMs-Fx-xCt"/>
                             <constraint firstItem="0ux-Ej-c8V" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" id="T2T-A4-Ygy"/>
                             <constraint firstItem="0ux-Ej-c8V" firstAttribute="trailing" secondItem="uZP-da-pZ0" secondAttribute="trailing" id="b9I-7D-Acj"/>
+                            <constraint firstItem="a5I-xG-79w" firstAttribute="centerX" secondItem="u6k-3z-5c2" secondAttribute="centerX" id="bVr-tB-WCt"/>
                             <constraint firstItem="Gku-Sf-ydu" firstAttribute="centerY" secondItem="D5A-mu-huD" secondAttribute="centerY" id="eAs-Dl-7GS"/>
                             <constraint firstItem="DLF-Af-F6p" firstAttribute="top" secondItem="bCO-eg-Aiy" secondAttribute="bottom" constant="12" id="i1Z-cY-NEd"/>
                             <constraint firstItem="DLF-Af-F6p" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" id="jiv-a7-LRH"/>
@@ -1318,6 +1333,7 @@
                         <outlet property="mainButton" destination="e02-bh-Lrg" id="HWH-tV-D4o"/>
                         <outlet property="mainButtonBackground" destination="zRh-zQ-jH3" id="NxD-kb-Kvb"/>
                         <outlet property="mainButtonTopToBottomConstraint" destination="2nA-pZ-awb" id="7AQ-SE-Zn7"/>
+                        <outlet property="plusMenu" destination="a5I-xG-79w" id="swA-wp-jSB"/>
                         <outlet property="riskActivesActivityIndicator" destination="V19-Lc-7wm" id="drq-Ca-SBk"/>
                         <outlet property="riskActivesCollectionView" destination="wWY-WA-ket" id="hFc-7v-sie"/>
                         <outlet property="riskActivesLoader" destination="Nid-av-JHO" id="HOW-y0-gVb"/>

@@ -12,6 +12,7 @@ import PromiseKit
 import SwifterSwift
 import BetterSegmentedControl
 import EasyTipView
+import FanMenu
 
 class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
     
@@ -54,6 +55,8 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var mainButton: UIButton!
     @IBOutlet weak var mainButtonBackground: UIView!
     @IBOutlet weak var mainButtonTopToBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var plusMenu: FanMenu!
     
     var titleView: TitleView!
     var transactionController: TransactionController!

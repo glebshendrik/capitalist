@@ -21,6 +21,8 @@ PODS:
   - CWStatusBarNotification (2.3.5)
   - EasyTipView (2.0.4)
   - ESPullToRefresh (2.9)
+  - FanMenu (0.7.4):
+    - Macaw
   - FBSDKCoreKit/Basics (6.3.0)
   - FBSDKCoreKit/Core (6.3.0):
     - FBSDKCoreKit/Basics
@@ -109,6 +111,8 @@ PODS:
     - InfiniteLayout/CocoaProxy
   - IQKeyboardManager (6.2.0)
   - Locksmith (4.0.0)
+  - Macaw (0.9.6):
+    - SWXMLHash
   - MSPeekCollectionViewDelegateImplementation (2.0.0)
   - myTrackerSDK (2.0.4)
   - nanopb (0.3.9011):
@@ -176,6 +180,7 @@ PODS:
   - SwinjectStoryboard (2.2.0):
     - Swinject (~> 2.6)
   - SwipeCellKit (2.7.1)
+  - SWXMLHash (5.0.1)
   - TrustKit (1.6.5)
 
 DEPENDENCIES:
@@ -194,6 +199,7 @@ DEPENDENCIES:
   - CWStatusBarNotification (~> 2.3)
   - EasyTipView (~> 2.0.4)
   - ESPullToRefresh
+  - FanMenu
   - FBSDKCoreKit/Swift
   - Firebase/Analytics
   - Firebase/Crashlytics
@@ -259,6 +265,7 @@ SPEC REPOS:
     - BiometricAuthentication
     - EasyTipView
     - ESPullToRefresh
+    - FanMenu
     - FBSDKCoreKit
     - Firebase
     - FirebaseAnalytics
@@ -275,6 +282,7 @@ SPEC REPOS:
     - GoogleUtilities
     - Haptica
     - InfiniteLayout
+    - Macaw
     - myTrackerSDK
     - nanopb
     - PromisesObjC
@@ -284,6 +292,7 @@ SPEC REPOS:
     - Swinject
     - SwinjectStoryboard
     - SwipeCellKit
+    - SWXMLHash
     - TrustKit
 
 EXTERNAL SOURCES:
@@ -326,6 +335,7 @@ SPEC CHECKSUMS:
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
   ESPullToRefresh: ce058a36454a5032519cc9d8b45da217728cf104
+  FanMenu: 773836538a63cddcbf0c5bf320727bb47669f7fd
   FBSDKCoreKit: 5d55c8f3007c9c49b793617b9102e46355fc7e17
   Firebase: d55ddb0e0bb3207166cddc028647833d8a1b5b6f
   FirebaseAnalytics: 572e467f3d977825266e8ccd52674aa3e6f47eac
@@ -344,6 +354,7 @@ SPEC CHECKSUMS:
   InfiniteLayout: de51cfad9ed480a3e3a0af7d28242d3257c606d9
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
+  Macaw: 8306d775625ba003beee4186b9533fd7cf284024
   MSPeekCollectionViewDelegateImplementation: 3091e9512b3cd03facdea3c02e57673a4a06246a
   myTrackerSDK: cd0a1693064ae67b6069d9a3f81111083f6d9bf6
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
@@ -368,8 +379,9 @@ SPEC CHECKSUMS:
   SwinjectAutoregistration: 93a908f7543c401b0c315305ac0ae501efdbce89
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
+  SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
 
-PODFILE CHECKSUM: b85d5b42cf0ec7a5d5d58669ade502ed72b0a9f5
+PODFILE CHECKSUM: 8c5068cae3b64758002c9aee920f57715a50fdf0
 
 COCOAPODS: 1.8.0

@@ -8,6 +8,8 @@
 
 import UIKit
 import SideMenu
+import FanMenu
+import Macaw
 
 extension MainViewController {
     var fastPressDuration: TimeInterval {
@@ -30,8 +32,63 @@ extension MainViewController {
         setupTransactionController()
         setupRearrangeController()
         updateMainButtonUI()
+        setupPlusMenu()
     }
         
+    private func setupPlusMenu() {
+        let main = UIColor.by(.blue1).rgbComponents
+        plusMenu.button = FanMenuButton(
+            id: "main",
+            image: "main-plus",
+            color: Color.rgb(r: main.red, g: main.green, b: main.blue)
+        )
+        
+        let title = UIColor.by(.white100).rgbComponents
+        plusMenu.items = [
+            FanMenuButton(
+                id: "income",
+                image: "income-menu-item-icon",
+                color: Color.rgb(r: 36, g: 38, b: 42),
+                title: "Доход",
+                titleColor: Color.rgb(r: title.red, g: title.green, b: title.blue)
+            ),
+            FanMenuButton(
+                id: "funds_move",
+                image: "funds-move-menu-item-icon",
+                color: Color.rgb(r: 36, g: 38, b: 42),
+                title: "Перевод",
+                titleColor: Color.rgb(r: title.red, g: title.green, b: title.blue)
+            ),
+            FanMenuButton(
+                id: "expense",
+                image: "expense-menu-item-icon",
+                color: Color.rgb(r: 36, g: 38, b: 42),
+                title: "Расход",
+                titleColor: Color.rgb(r: title.red, g: title.green, b: title.blue)
+            )
+        ]
+        
+        // distance between button and items
+        plusMenu.menuRadius = 120.0
+        
+        plusMenu.radius = 29.0
+
+        // animation duration
+        plusMenu.duration = 0.2
+
+        // menu opening delay
+        plusMenu.delay = 0
+
+        // interval for buttons in radians
+        plusMenu.interval = (Double.pi, Double.pi + Double.pi / 2)
+        
+//        let brand = UIColor.by(.brandExpense).rgbComponents
+        // menu background color
+//        plusMenu.menuBackground = Color.rgb(r: brand.red, g: brand.green, b: brand.blue).with(a: 0.88)
+        plusMenu.menuBackground = Color.clear
+        plusMenu.backgroundColor = .clear
+    }
+    
     private func setupExpenseSourcesCollectionView() {
         expenseSourcesCollectionView.delegate = self
         expenseSourcesCollectionView.dataSource = self
