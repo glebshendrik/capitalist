@@ -35,8 +35,14 @@ extension TransactionEditViewModel {
             if source       == nil { promises.append(loadSource(type: .expenseSource)) }
             if destination  == nil { promises.append(loadDestination(type: .expenseCategory)) }
         case .fundsMove:
-            if source       == nil { promises.append(loadSource(type: .expenseSource)) }
-            if destination  == nil { promises.append(loadDestination(type: .expenseSource)) }
+            if source == nil && destination == nil {
+                promises.append(loadSource(type: .expenseSource))
+                promises.append(loadDestination(type: .active, basketType: .safe))
+            }
+            else {
+                if source       == nil { promises.append(loadSource(type: .expenseSource)) }
+                if destination  == nil { promises.append(loadDestination(type: .expenseSource)) }
+            }
         }
         return when(fulfilled: promises)
     }
