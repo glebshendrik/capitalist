@@ -33,7 +33,6 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         super.keyboardWillAppear()
         viewModel.resetCalculator()
     }
-
     
     override func registerFormFields() -> [String : FormField] {
         return [Transaction.CodingKeys.sourceId.rawValue : tableController.sourceField,
@@ -60,13 +59,6 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         updateRemoveButtonUI()
         tableController.reloadData(animated: false)
         focusAmountField()
-    }
-    
-    let didAppearOnce = Once()
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
     }
     
     override func loadDataPromise() -> Promise<Void> {

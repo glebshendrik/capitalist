@@ -41,6 +41,7 @@ class TransactionEditViewModel {
     var exchangeRate: Float = 1.0 { didSet { didSetExchangeRate() } }
     var accumulator: Int? = nil
     var previousOperation: OperationType? = nil
+    var requiredTransactionType: TransactionType? = nil
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,

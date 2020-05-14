@@ -50,7 +50,15 @@ class ActivesCoordinator : ActivesCoordinatorProtocol {
         }
         return activesService.indexUserActives(for: currentUserId)
     }
-        
+       
+    func first(for basketType: BasketType) -> Promise<Active?> {
+        return  firstly {
+                    indexActives(for: basketType)
+                }.map { actives in
+                    actives.first
+                }
+    }
+    
     func createActive(with creationForm: ActiveCreationForm) -> Promise<Active> {
         return activesService.createActive(with: creationForm)
     }

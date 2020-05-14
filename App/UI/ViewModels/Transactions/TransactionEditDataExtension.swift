@@ -12,7 +12,33 @@ import PromiseKit
 // Loading
 extension TransactionEditViewModel {    
     func loadDefaults() -> Promise<Void> {
-        return isReturn ? loadReturningTransactionDefaults() : loadExchangeRate()
+        if isReturn {
+            return loadReturningTransactionDefaults()
+        }
+        if let requiredTransactionType = requiredTransactionType {
+            return  firstly {
+                        loadTransactionables(requiredTransactionType: requiredTransactionType)
+                    }.then {
+                        self.loadExchangeRate()
+                    }
+        }
+        return loadExchangeRate()
+    }
+    
+    func loadTransactionables(requiredTransactionType: TransactionType) -> Promise<Void> {
+        var promises: [Promise<Void>] = []
+        switch requiredTransactionType {
+        case .income:
+            if source       == nil { promises.append(loadSource(type: .incomeSource)) }
+            if destination  == nil { promises.append(loadDestination(type: .expenseSource)) }
+        case .expense:
+            if source       == nil { promises.append(loadSource(type: .expenseSource)) }
+            if destination  == nil { promises.append(loadDestination(type: .expenseCategory)) }
+        case .fundsMove:
+            if source       == nil { promises.append(loadSource(type: .expenseSource)) }
+            if destination  == nil { promises.append(loadDestination(type: .active, basketType: .safe)) }
+        }
+        return when(fulfilled: promises)
     }
     
     func loadTransactionData() -> Promise<Void> {
@@ -92,6 +118,51 @@ extension TransactionEditViewModel {
                 }
     }
     
+    func loadFirstTransactionable(type: TransactionableType, basketType: BasketType = .joy) -> Promise<Transactionable?> {
+        switch type {
+        case .incomeSource:         return loadFirstIncomeSource()
+        case .expenseSource:        return loadFirstExpenseSource()
+        case .expenseCategory:      return loadFirstExpenseCategory(basketType: basketType)
+        case .active:               return loadFirstActive(basketType: basketType)
+        }
+    }
+    
+    func loadFirstIncomeSource() -> Promise<Transactionable?> {
+        return  firstly {
+                    incomeSourcesCoordinator.first()
+                }.map { incomeSource in
+                    guard let incomeSource = incomeSource else { return nil }
+                    return IncomeSourceViewModel(incomeSource: incomeSource)
+                }
+    }
+    
+    func loadFirstExpenseSource() -> Promise<Transactionable?> {
+        return  firstly {
+                    expenseSourcesCoordinator.first()
+                }.map { expenseSource in
+                    guard let expenseSource = expenseSource else { return nil }
+                    return ExpenseSourceViewModel(expenseSource: expenseSource)
+                }
+    }
+    
+    func loadFirstExpenseCategory(basketType: BasketType) -> Promise<Transactionable?> {
+        return  firstly {
+                    expenseCategoriesCoordinator.first(for: basketType)
+                }.map { expenseCategory in
+                    guard let expenseCategory = expenseCategory else { return nil }
+                    return ExpenseCategoryViewModel(expenseCategory: expenseCategory)
+                }
+    }
+    
+    func loadFirstActive(basketType: BasketType) -> Promise<Transactionable?> {
+        return  firstly {
+                    activesCoordinator.first(for: basketType)
+                }.map { active in
+                    guard let active = active else { return nil }
+                    return ActiveViewModel(active: active)
+                }
+    }
+    
     func loadExchangeRate() -> Promise<Void> {
         guard   needCurrencyExchange,
             let sourceCurrencyCode = sourceCurrencyCode,
@@ -124,6 +195,33 @@ extension TransactionEditViewModel {
                     loadTransactionable(id: id, type: type)
                 }.get { transactionable in
                     self.destination = transactionable
+                }.asVoid()
+    }
+    
+    func loadSource(type: TransactionableType, basketType: BasketType = .joy) -> Promise<Void> {
+        return  firstly {
+                    loadFirstTransactionable(type: type, basketType: basketType)
+                }.get { transactionable in
+                    self.source = transactionable
+                }.asVoid()
+    }
+    
+    func loadDestination(type: TransactionableType, basketType: BasketType = .joy) -> Promise<Void> {
+        return  firstly {
+                    loadFirstTransactionable(type: type, basketType: basketType)
+                }.get { transactionable in
+                    self.destination = transactionable
+                }.asVoid()
+    }
+    
+    func load(sourceType: TransactionableType, destinationType: TransactionableType, sourceBasketType: BasketType = .safe, destinationBasketType: BasketType = .joy) -> Promise<Void> {
+        return  firstly {
+                    when(fulfilled: loadFirstTransactionable(type: sourceType, basketType: sourceBasketType),
+                                    loadFirstTransactionable(type: destinationType, basketType: destinationBasketType))
+            
+                }.get { source, destination in
+                    self.source = source
+                    self.destination = destination
                 }.asVoid()
     }
 }
