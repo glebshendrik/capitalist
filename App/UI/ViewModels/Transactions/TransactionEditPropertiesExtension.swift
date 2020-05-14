@@ -188,6 +188,10 @@ extension TransactionEditViewModel {
         case   (false,  true):   return NSLocalizedString("Изменить возврат", comment: "Изменить возврат")
         }
     }
+    
+    var highlightColor: ColorAsset {
+        return transactionType?.highlightColor ?? .blue1
+    }
         
     var removeTitle: String? {
         guard !isNew else { return nil }
@@ -290,5 +294,16 @@ extension TransactionType {
     
     func removeQuestion(isReturn: Bool) -> String {
         return "\(removeTitle(isReturn: isReturn))?"
+    }
+    
+    var highlightColor: ColorAsset {
+        switch self {
+        case .income:
+            return .green2
+        case .fundsMove:
+            return .blue1
+        case .expense:
+            return .red2
+        }
     }
 }

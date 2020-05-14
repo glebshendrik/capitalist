@@ -29,6 +29,10 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
         return createKeyboardInputAccessoryView()
     }()
     
+    lazy var saveButton: KeyboardHighlightButton = {
+        return createSaveButton()
+    }()
+        
     var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return nil
     }
@@ -76,7 +80,6 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
     
     func createKeyboardInputAccessoryView() -> UIView {
         let containerView = UIInputView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 64), inputViewStyle: .keyboard)
-        let saveButton = createSaveButton()
         containerView.addSubview(saveButton)
         saveButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(48)

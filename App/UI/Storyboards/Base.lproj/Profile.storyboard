@@ -580,6 +580,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="save-icon" id="mHV-nu-Gwl">
+                            <color key="tintColor" name="blue 1"/>
                             <connections>
                                 <action selector="didTapSaveButton:" destination="A7X-Rr-QMF" id="hFy-ml-3IM"/>
                             </connections>

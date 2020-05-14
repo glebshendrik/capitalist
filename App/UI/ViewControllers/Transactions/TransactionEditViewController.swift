@@ -24,6 +24,8 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     var tableController: TransactionEditTableController!
     var delegate: TransactionEditViewControllerDelegate?
     
+    var titleView: TransactionEditTitleView!
+    
     override var canSave: Bool { return viewModel.canSave }
     override var shouldLoadData: Bool { return true }
     override var formTitle: String { return viewModel.title }
@@ -44,6 +46,33 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     override func setup(tableController: FormFieldsTableViewController) {
         self.tableController = tableController as? TransactionEditTableController
         self.tableController.delegate = self
+    }
+    
+    override func setupNavigationBar() {
+        self.titleView = TransactionEditTitleView(frame: CGRect.zero)
+        navigationItem.titleView = titleView
+        super.setupNavigationBar()
+    }
+    
+    override func updateNavigationItemUI() {
+        titleView.set(title: viewModel.title)
+        
+        let highlightColor = UIColor.by(viewModel.highlightColor)
+        titleView.set(highlightColor: highlightColor)
+        
+        navigationItem.rightBarButtonItem?.tintColor = highlightColor
+        saveBarButton.tintColor = highlightColor
+        
+        saveButton?.backgroundColor = highlightColor
+        saveButton?.backgroundColorForNormal = highlightColor
+        
+        tableController.saveButton.backgroundColor = highlightColor
+        tableController.saveButton.backgroundColorForNormal = highlightColor
+        
+        tableController.amountSaveButton.backgroundColor = highlightColor
+        tableController.amountSaveButton.backgroundColorForNormal = highlightColor        
+        
+        registerFormFields().values.forEach { $0.focusedBackgroundColor = highlightColor }
     }
     
     override func updateUI() {

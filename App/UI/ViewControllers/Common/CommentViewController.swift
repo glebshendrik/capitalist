@@ -93,6 +93,7 @@ class CommentViewController : UIViewController, CommentViewControllerInputProtoc
         let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         rightButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
         rightButton.setImage(UIImage(named: "save-icon"), for: .normal)
+        rightButton.tintColor = UIColor.by(.blue1)
         
         textInputBar.showTextViewBorder = true
         textInputBar.rightView = rightButton

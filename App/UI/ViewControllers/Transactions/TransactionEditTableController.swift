@@ -56,6 +56,10 @@ class TransactionEditTableController : FormFieldsTableViewController {
         return createAmountKeyboardInputAccessoryView()
     }()
     
+    lazy var amountSaveButton: KeyboardHighlightButton = {
+        return createSaveButton()
+    }()
+    
     lazy var plusPadButtton: UIButton = {
         return createPadButton(type: .plus)
     }()
@@ -176,10 +180,10 @@ class TransactionEditTableController : FormFieldsTableViewController {
     func createAmountKeyboardInputAccessoryView() -> UIView {
         let containerView = UIInputView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 115), inputViewStyle: .keyboard)
         let padsStackView = UIStackView(arrangedSubviews: [plusPadButtton, minusPadButtton, equalPadButtton], axis: .horizontal, spacing: 6, alignment: .fill, distribution: .fillEqually)
-        let saveButton = createSaveButton()
-        containerView.addSubview(saveButton)
+//        let saveButton = createSaveButton()
+        containerView.addSubview(amountSaveButton)
         containerView.addSubview(padsStackView)
-        saveButton.snp.makeConstraints { (make) -> Void in
+        amountSaveButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(48)
             make.top.equalTo(containerView).offset(10)
             make.left.equalTo(containerView).offset(24)

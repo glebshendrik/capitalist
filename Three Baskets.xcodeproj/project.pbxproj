@@ -22,6 +22,8 @@
 		FA0A4E80246A752400886277 /* CardTypesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E7F246A752400886277 /* CardTypesViewModel.swift */; };
 		FA0A4E82246A774B00886277 /* CardTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E81246A774B00886277 /* CardTypeCollectionViewCell.swift */; };
 		FA0A4E84246A7DB300886277 /* FormImageValueField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E83246A7DB300886277 /* FormImageValueField.swift */; };
+		FA0A4E87246D4BF700886277 /* TransactionEditTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0A4E86246D4BF700886277 /* TransactionEditTitleView.xib */; };
+		FA0A4E89246D4D4800886277 /* TransactionEditTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E88246D4D4800886277 /* TransactionEditTitleView.swift */; };
 		FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADF621CBE56100805288 /* LoaderView.swift */; };
 		FA0CADF921CBE58F00805288 /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0CADF821CBE58F00805288 /* LoaderView.xib */; };
 		FA0CADFD21D257F400805288 /* ExpenseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADFC21D257F400805288 /* ExpenseSource.swift */; };
@@ -508,6 +510,8 @@
 		FA0A4E7F246A752400886277 /* CardTypesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypesViewModel.swift; sourceTree = "<group>"; };
 		FA0A4E81246A774B00886277 /* CardTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA0A4E83246A7DB300886277 /* FormImageValueField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormImageValueField.swift; sourceTree = "<group>"; };
+		FA0A4E86246D4BF700886277 /* TransactionEditTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionEditTitleView.xib; sourceTree = "<group>"; };
+		FA0A4E88246D4D4800886277 /* TransactionEditTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditTitleView.swift; sourceTree = "<group>"; };
 		FA0CADF621CBE56100805288 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		FA0CADF821CBE58F00805288 /* LoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
 		FA0CADFC21D257F400805288 /* ExpenseSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSource.swift; sourceTree = "<group>"; };
@@ -1050,6 +1054,15 @@
 				FA0570F4232A6DA5002B4706 /* BorrowTableViewCell.swift */,
 			);
 			path = Borrows;
+			sourceTree = "<group>";
+		};
+		FA0A4E85246D4BC100886277 /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				FA0A4E86246D4BF700886277 /* TransactionEditTitleView.xib */,
+				FA0A4E88246D4D4800886277 /* TransactionEditTitleView.swift */,
+			);
+			path = Transactions;
 			sourceTree = "<group>";
 		};
 		FA0CADF321CBE41F00805288 /* Common */ = {
@@ -2030,6 +2043,7 @@
 				FAC3B9D221C279450015A12F /* Main */,
 				FA53B11823D74449008B9A1F /* Onboarding */,
 				FACC01E7224B5E540044A747 /* Statistics */,
+				FA0A4E85246D4BC100886277 /* Transactions */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2347,6 +2361,7 @@
 				FAAC99B323B31A59009ADB84 /* Roboto-Regular.ttf in Resources */,
 				FAF31CC92403709000D4CFB3 /* ExpenseCategories.storyboard in Resources */,
 				FAAC99B723B31A59009ADB84 /* Roboto-LightItalic.ttf in Resources */,
+				FA0A4E87246D4BF700886277 /* TransactionEditTitleView.xib in Resources */,
 				FAF31CC22403707500D4CFB3 /* Credits.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2622,6 +2637,7 @@
 				FAD88F4621AEBE7400BE7BC1 /* NotificationsCoordinator.swift in Sources */,
 				FA835D682265F23F00A592F2 /* TransactionsSection.swift in Sources */,
 				FA0CAE0D21D3C1F100805288 /* ExpenseSourceEditTableController.swift in Sources */,
+				FA0A4E89246D4D4800886277 /* TransactionEditTitleView.swift in Sources */,
 				FA165CEA21B769B500EAA16B /* ForgotPasswordViewController.swift in Sources */,
 				FA7EDFFE22CDA0BD0054EAD3 /* AccountsViewController.swift in Sources */,
 				FACC01F9224CBE400044A747 /* TransactionsSectionHeaderView.swift in Sources */,
