@@ -13,12 +13,14 @@ import SnapKit
 
 protocol FormFieldsTableViewControllerDelegate {
     func didTapSave()
+    func didAppear()
 }
 
 class FormFieldsTableViewController : StaticTableViewController, UITextFieldDelegate, UITextViewDelegate {
     @IBOutlet weak var activityIndicatorCell: UITableViewCell?
     @IBOutlet weak var loaderImageView: UIImageView?
     private var returnKeyHandler: IQKeyboardReturnKeyHandler!
+    let didAppearOnce = Once()
     
     var lastResponder: UIView? { return responders.last }
     var responders: [UIView] = []
@@ -40,6 +42,13 @@ class FormFieldsTableViewController : StaticTableViewController, UITextFieldDele
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        didAppearOnce.run {
+            formFieldsTableViewControllerDelegate?.didAppear()
+        }
     }
     
     func showActivityIndicator() {

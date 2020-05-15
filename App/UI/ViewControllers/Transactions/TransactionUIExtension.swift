@@ -85,6 +85,7 @@ extension TransactionEditViewController {
         tableController.sourceField.subValue = viewModel.sourceAmount
         tableController.sourceField.imageName = viewModel.sourceIconDefaultImageName
         tableController.sourceField.imageURL = viewModel.sourceIconURL
+        tableController.set(cell: tableController.sourceCell, hidden: viewModel.sourceFieldHidden, animated: false, reload: false)
     }
     
     func updateDestinationUI() {
@@ -93,6 +94,7 @@ extension TransactionEditViewController {
         tableController.destinationField.subValue = viewModel.destinationAmount
         tableController.destinationField.imageName = viewModel.destinationIconDefaultImageName
         tableController.destinationField.imageURL = viewModel.destinationIconURL
+        tableController.set(cell: tableController.destinationCell, hidden: viewModel.destinationFieldHidden, animated: false, reload: false)
     }
     
     func updateAmountUI() {

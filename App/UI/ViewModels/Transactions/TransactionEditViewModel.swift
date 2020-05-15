@@ -61,8 +61,9 @@ class TransactionEditViewModel {
         self.currencyConverter = currencyConverter
     }
     
-    func set(transactionId: Int) {
+    func set(transactionId: Int, transactionType: TransactionType?) {
         self.transactionId = transactionId
+        self.requiredTransactionType = transactionType
     }
     
     func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?, transactionType: TransactionType?) {

@@ -64,4 +64,8 @@ extension ResetPasswordViewController : ResetPasswordTableControllerDelegate {
     func didTapSave() {
         save()
     }
+    
+    func didAppear() {
+         
+    }
 }

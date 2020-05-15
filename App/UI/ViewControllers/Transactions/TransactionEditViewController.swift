@@ -135,8 +135,8 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         self.delegate = delegate
     }
     
-    func set(transactionId: Int) {
-        viewModel.set(transactionId: transactionId)
+    func set(transactionId: Int, transactionType: TransactionType?) {
+        viewModel.set(transactionId: transactionId, transactionType: transactionType)
     }
     
     func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?, transactionType: TransactionType?) {

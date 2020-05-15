@@ -108,12 +108,12 @@ extension StatisticsViewController {
             showCreditInfoScreen(creditId: creditId)
         }
         else {
-            showTransactionEditScreen(transactionId: transaction.id)
+            showTransactionEditScreen(transactionId: transaction.id, transactionType: transaction.type)
         }
     }
     
-    private func showTransactionEditScreen(transactionId: Int) {
-        modal(factory.transactionEditViewController(delegate: self, transactionId: transactionId))
+    private func showTransactionEditScreen(transactionId: Int, transactionType: TransactionType?) {
+        modal(factory.transactionEditViewController(delegate: self, transactionId: transactionId, transactionType: transactionType))
     }
         
     func showBorrowInfoScreen(borrowId: Int, borrowType: BorrowType) {

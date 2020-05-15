@@ -68,7 +68,8 @@ protocol UIFactoryProtocol {
                                        transactionType: TransactionType?) -> UINavigationController?
     
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
-                                       transactionId: Int) -> UINavigationController?
+                                       transactionId: Int,
+                                       transactionType: TransactionType?) -> UINavigationController?
     
     func recurrencePicker(delegate: RecurrencePickerDelegate,
                           recurrenceRule: RecurrenceRule?,

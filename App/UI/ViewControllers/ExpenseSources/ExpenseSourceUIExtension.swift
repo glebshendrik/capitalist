@@ -15,7 +15,7 @@ extension ExpenseSourceEditViewController {
         if viewModel.name == nil {
             tableController.nameField.textField.becomeFirstResponder()
         }
-        else if viewModel.amount == nil {
+        else {
             tableController.amountField.textField.becomeFirstResponder()
         }
     }

@@ -10,7 +10,6 @@ import UIKit
 import SDWebImageSVGCoder
 
 protocol ActiveEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
-    func didAppear()
     func didTapIcon()
     func didTapActiveType()
     func didChange(name: String?)
@@ -71,12 +70,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        delegate?.didAppear()
-    }
-    
+        
     override func setupUI() {
         super.setupUI()
         setupActiveTypeField()

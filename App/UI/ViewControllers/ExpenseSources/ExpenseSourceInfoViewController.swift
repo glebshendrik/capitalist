@@ -18,7 +18,17 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     override func didTapIcon(field: IconInfoField?) {
         modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSource))
     }
-                
+         
+    override func didTapInfoField(field: BasicInfoField?) {
+        guard let field = field else { return }
+        switch field.identifier {
+        case ExpenseSourceInfoField.balance.identifier:
+            showEditScreen()
+        default:
+            return
+        }
+    }
+    
     override func didTapInfoButton(field: ButtonInfoField?) {
         guard let field = field else { return }
         switch field.identifier {

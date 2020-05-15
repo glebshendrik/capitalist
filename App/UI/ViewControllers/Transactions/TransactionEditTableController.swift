@@ -11,7 +11,6 @@ import UIKit
 import SwifterSwift
 
 protocol TransactionEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
-    func didAppear()
     func didTapSaveAtYesterday()
     func didTapCalendar()
     func didTapSource()
@@ -75,16 +74,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate
     }
-        
-    let didAppearOnce = Once()
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        didAppearOnce.run {
-            delegate?.didAppear()
-        }
-    }
-        
+                
     override func setupUI() {
         super.setupUI()
         setupAmountField()

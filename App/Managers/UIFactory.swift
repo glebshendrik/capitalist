@@ -146,7 +146,7 @@ class UIFactory : UIFactoryProtocol {
         transactionEditViewController?.set(delegate: delegate)
         
         if let transactionId = transactionId {
-            transactionEditViewController?.set(transactionId: transactionId)
+            transactionEditViewController?.set(transactionId: transactionId, transactionType: transactionType)
         }
         else {
             transactionEditViewController?.set(source: source, destination: destination, returningBorrow: returningBorrow, transactionType: transactionType)
@@ -181,13 +181,14 @@ class UIFactory : UIFactoryProtocol {
     }
     
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
-                                       transactionId: Int) -> UINavigationController? {
+                                       transactionId: Int,
+                                       transactionType: TransactionType?) -> UINavigationController? {
         return transactionEditViewController(delegate: delegate,
                                              transactionId: transactionId,
                                              source: nil,
                                              destination: nil,
                                              returningBorrow: nil,
-                                             transactionType: nil)
+                                             transactionType: transactionType)
     }
     
     func recurrencePicker(delegate: RecurrencePickerDelegate,

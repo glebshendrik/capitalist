@@ -153,6 +153,14 @@ extension TransactionEditViewModel {
         return isNew        
     }
     
+    var sourceFieldHidden: Bool {
+        return isVirtualSource
+    }
+    
+    var destinationFieldHidden: Bool {
+        return isVirtualDestination
+    }
+    
     var canChangeSource: Bool {
         return !anyVirtualTransactionable
     }
@@ -162,18 +170,26 @@ extension TransactionEditViewModel {
     }
     
     var anyVirtualTransactionable: Bool {
-        return isSourceVirtualExpenseSource || isDestinationVirtualExpenseSource
+        return isVirtualSource || isVirtualDestination
     }
     
-    var isSourceVirtualExpenseSource: Bool {
-        guard let expenseSourceSource = source as? ExpenseSourceViewModel else { return false }
-        return expenseSourceSource.isVirtual
+    var isVirtualSource: Bool {
+        return transaction?.isVirtualSource ?? false
     }
     
-    var isDestinationVirtualExpenseSource: Bool {
-        guard let expenseSourceSource = destination as? ExpenseSourceViewModel else { return false }
-        return expenseSourceSource.isVirtual
+    var isVirtualDestination: Bool {
+        return transaction?.isVirtualDestination ?? false
     }
+    
+//    var isSourceVirtualExpenseSource: Bool {
+//        guard let expenseSourceSource = source as? ExpenseSourceViewModel else { return false }
+//        return expenseSourceSource.isVirtual
+//    }
+//
+//    var isDestinationVirtualExpenseSource: Bool {
+//        guard let expenseSourceSource = destination as? ExpenseSourceViewModel else { return false }
+//        return expenseSourceSource.isVirtual
+//    }
 }
 
 extension TransactionEditViewModel {
@@ -211,8 +227,8 @@ extension TransactionEditViewModel {
     var sourceIconDefaultImageName: String {
         return source?.defaultIconName ?? sourceType?.defaultIconName ?? "lamp-icon"
     }
-    var sourceName: String? { return isSourceVirtualExpenseSource ? NSLocalizedString("Из ниоткуда", comment: "Из ниоткуда") : source?.name }
-    var sourceAmount: String? { return isSourceVirtualExpenseSource ? nil : source?.amountRounded }
+    var sourceName: String? { return isVirtualSource ? NSLocalizedString("Из ниоткуда", comment: "Из ниоткуда") : source?.name }
+    var sourceAmount: String? { return isVirtualSource ? nil : source?.amountRounded }
     var sourceCurrency: Currency? { return source?.currency }
     var sourceCurrencyCode: String? { return sourceCurrency?.code }
     var sourceBasketType: BasketType? { return (source as? ActiveViewModel)?.basketType }
@@ -226,8 +242,8 @@ extension TransactionEditViewModel {
     var destinationIconDefaultImageName: String {
         return destination?.defaultIconName ?? destinationType?.defaultIconName ?? "lamp-icon"        
     }
-    var destinationName: String? { return isDestinationVirtualExpenseSource ? NSLocalizedString("В никуда", comment: "В никуда") : destination?.name }
-    var destinationAmount: String? { return isDestinationVirtualExpenseSource ? nil : destination?.amountRounded }
+    var destinationName: String? { return isVirtualDestination ? NSLocalizedString("В никуда", comment: "В никуда") : destination?.name }
+    var destinationAmount: String? { return isVirtualDestination ? nil : destination?.amountRounded }
     var destinationCurrency: Currency? { return destination?.currency }
     var destinationCurrencyCode: String? { return destinationCurrency?.code }
 }
