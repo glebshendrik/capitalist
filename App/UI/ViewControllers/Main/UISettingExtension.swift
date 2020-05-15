@@ -8,7 +8,6 @@
 
 import UIKit
 import SideMenu
-import FanMenu
 import Macaw
 
 extension MainViewController {
@@ -43,50 +42,71 @@ extension MainViewController {
             color: Color.rgb(r: main.red, g: main.green, b: main.blue)
         )
         
+        let color = Color.rgba(r: 234, g: 238, b: 244, a: 0.06)
         let title = UIColor.by(.white100).rgbComponents
+        let titleColor = Color.rgb(r: title.red, g: title.green, b: title.blue)
+        
         plusMenu.items = [
             FanMenuButton(
                 id: "income",
                 image: "income-menu-item-icon",
-                color: Color.rgb(r: 36, g: 38, b: 42),
-                title: "Доход",
-                titleColor: Color.rgb(r: title.red, g: title.green, b: title.blue)
+                color: color,
+                title: NSLocalizedString("Доход", comment: "Доход"),
+                titleColor: titleColor
             ),
             FanMenuButton(
                 id: "funds_move",
                 image: "funds-move-menu-item-icon",
-                color: Color.rgb(r: 36, g: 38, b: 42),
-                title: "Перевод",
-                titleColor: Color.rgb(r: title.red, g: title.green, b: title.blue)
+                color: color,
+                title: NSLocalizedString("Перевод", comment: "Перевод"),
+                titleColor: titleColor
             ),
             FanMenuButton(
                 id: "expense",
                 image: "expense-menu-item-icon",
-                color: Color.rgb(r: 36, g: 38, b: 42),
-                title: "Расход",
-                titleColor: Color.rgb(r: title.red, g: title.green, b: title.blue)
+                color: color,
+                title: NSLocalizedString("Расход", comment: "Расход"),
+                titleColor: titleColor
             )
         ]
         
-        // distance between button and items
-        plusMenu.menuRadius = 120.0
-        
+        plusMenu.menuRadius = 150.0
         plusMenu.radius = 29.0
-
-        // animation duration
         plusMenu.duration = 0.2
-
-        // menu opening delay
         plusMenu.delay = 0
+        plusMenu.interval = (.pi - .pi / 50, .pi + .pi / 2 + .pi / 24)
+        plusMenu.buttonsTitleIndent = 12
 
-        // interval for buttons in radians
-        plusMenu.interval = (Double.pi, Double.pi + Double.pi / 2)
-        
-//        let brand = UIColor.by(.brandExpense).rgbComponents
-        // menu background color
-//        plusMenu.menuBackground = Color.rgb(r: brand.red, g: brand.green, b: brand.blue).with(a: 0.88)
-        plusMenu.menuBackground = Color.clear
+        let brand = UIColor.by(.brandExpense).rgbComponents
+        plusMenu.menuBackground = Color.rgb(r: brand.red, g: brand.green, b: brand.blue).with(a: 0.98)
         plusMenu.backgroundColor = .clear
+        plusMenu.onItemWillClick = { button in
+            self.didTapPlusMenu(buttonId: button.id)
+            self.setMenuOverlay(hidden: self.plusMenu.isOpen)
+        }
+    }
+    
+    func didTapPlusMenu(buttonId: String) {
+        switch buttonId {
+        case "income":
+            showTransactionEditScreen(transactionType: .income)
+        case "funds_move":
+            showTransactionEditScreen(transactionType: .fundsMove)
+        case "expense":
+            showTransactionEditScreen(transactionType: .expense)
+        default:
+            return
+        }
+    }
+    
+    func setMenuOverlay(hidden: Bool) {
+        self.navigationController?.navigationBar.layer.zPosition = hidden ? 0 : -1
+        self.navigationController?.navigationBar.isUserInteractionEnabled = hidden
+        let newValue: CGFloat = hidden ? 0.0 : 0.5
+        UIView.animate(withDuration: 0.2, animations: {
+            self.plusOverlay.alpha = newValue
+        })
+        view.haptic()
     }
     
     private func setupExpenseSourcesCollectionView() {

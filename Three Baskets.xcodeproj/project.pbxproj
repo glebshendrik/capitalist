@@ -24,6 +24,7 @@
 		FA0A4E84246A7DB300886277 /* FormImageValueField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E83246A7DB300886277 /* FormImageValueField.swift */; };
 		FA0A4E87246D4BF700886277 /* TransactionEditTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0A4E86246D4BF700886277 /* TransactionEditTitleView.xib */; };
 		FA0A4E89246D4D4800886277 /* TransactionEditTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E88246D4D4800886277 /* TransactionEditTitleView.swift */; };
+		FA0A4E8B246DB81E00886277 /* FanMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E8A246DB81E00886277 /* FanMenu.swift */; };
 		FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADF621CBE56100805288 /* LoaderView.swift */; };
 		FA0CADF921CBE58F00805288 /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0CADF821CBE58F00805288 /* LoaderView.xib */; };
 		FA0CADFD21D257F400805288 /* ExpenseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADFC21D257F400805288 /* ExpenseSource.swift */; };
@@ -512,6 +513,7 @@
 		FA0A4E83246A7DB300886277 /* FormImageValueField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormImageValueField.swift; sourceTree = "<group>"; };
 		FA0A4E86246D4BF700886277 /* TransactionEditTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionEditTitleView.xib; sourceTree = "<group>"; };
 		FA0A4E88246D4D4800886277 /* TransactionEditTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditTitleView.swift; sourceTree = "<group>"; };
+		FA0A4E8A246DB81E00886277 /* FanMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanMenu.swift; sourceTree = "<group>"; };
 		FA0CADF621CBE56100805288 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		FA0CADF821CBE58F00805288 /* LoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
 		FA0CADFC21D257F400805288 /* ExpenseSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSource.swift; sourceTree = "<group>"; };
@@ -1964,6 +1966,7 @@
 				FA165CE321B65F2F00EAA16B /* ValidationResult.swift */,
 				FAEB0CCC22CF755600622994 /* Colors.swift */,
 				FA2847EF22EFFF10003F114A /* Numbers.swift */,
+				FA0A4E8A246DB81E00886277 /* FanMenu.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2500,6 +2503,7 @@
 				FA6F2E96224515DE008C160F /* TransactionFilters.swift in Sources */,
 				FA7276D822537BF30086D4D1 /* FiltersSelectionViewModel.swift in Sources */,
 				FA835D5A2265BC4500A592F2 /* GraphTransactionFilter.swift in Sources */,
+				FA0A4E8B246DB81E00886277 /* FanMenu.swift in Sources */,
 				FA36E98923F182CA00B340AA /* AnalyticsManagerProtocol.swift in Sources */,
 				FAA5D57A238FA9CD00CC53AD /* BorrowInfoViewModel.swift in Sources */,
 				FA7EE00022CDA1940054EAD3 /* AccountViewModel.swift in Sources */,

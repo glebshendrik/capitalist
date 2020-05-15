@@ -21,8 +21,6 @@ PODS:
   - CWStatusBarNotification (2.3.5)
   - EasyTipView (2.0.4)
   - ESPullToRefresh (2.9)
-  - FanMenu (0.7.4):
-    - Macaw
   - FBSDKCoreKit/Basics (6.3.0)
   - FBSDKCoreKit/Core (6.3.0):
     - FBSDKCoreKit/Basics
@@ -199,7 +197,6 @@ DEPENDENCIES:
   - CWStatusBarNotification (~> 2.3)
   - EasyTipView (~> 2.0.4)
   - ESPullToRefresh
-  - FanMenu
   - FBSDKCoreKit/Swift
   - Firebase/Analytics
   - Firebase/Crashlytics
@@ -208,6 +205,7 @@ DEPENDENCIES:
   - InfiniteLayout
   - IQKeyboardManager
   - Locksmith (~> 4.0)
+  - Macaw
   - MSPeekCollectionViewDelegateImplementation (~> 2.0)
   - myTrackerSDK
   - PromiseKit (~> 6.5)
@@ -265,7 +263,6 @@ SPEC REPOS:
     - BiometricAuthentication
     - EasyTipView
     - ESPullToRefresh
-    - FanMenu
     - FBSDKCoreKit
     - Firebase
     - FirebaseAnalytics
@@ -335,7 +332,6 @@ SPEC CHECKSUMS:
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
   ESPullToRefresh: ce058a36454a5032519cc9d8b45da217728cf104
-  FanMenu: 773836538a63cddcbf0c5bf320727bb47669f7fd
   FBSDKCoreKit: 5d55c8f3007c9c49b793617b9102e46355fc7e17
   Firebase: d55ddb0e0bb3207166cddc028647833d8a1b5b6f
   FirebaseAnalytics: 572e467f3d977825266e8ccd52674aa3e6f47eac
@@ -382,6 +378,6 @@ SPEC CHECKSUMS:
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
 
-PODFILE CHECKSUM: 8c5068cae3b64758002c9aee920f57715a50fdf0
+PODFILE CHECKSUM: 1279c20783bdad8167b4211315af9b3dd6406762
 
 COCOAPODS: 1.8.0

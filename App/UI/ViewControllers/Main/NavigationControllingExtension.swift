@@ -126,7 +126,7 @@ extension MainViewController {
         }
     }
     
-    private func showTransactionEditScreen(source: Transactionable?, destination: Transactionable?, transactionType: TransactionType? = nil) {
+    func showTransactionEditScreen(source: Transactionable? = nil, destination: Transactionable? = nil, transactionType: TransactionType? = nil) {
         modal(factory.transactionEditViewController(delegate: self, source: source, destination: destination, transactionType: transactionType))
     }
        

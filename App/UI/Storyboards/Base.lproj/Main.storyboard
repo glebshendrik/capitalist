@@ -1215,10 +1215,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6k-3z-5c2">
                                 <rect key="frame" x="289" y="554" width="58" height="58"/>
                                 <subviews>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e02-bh-Lrg">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e02-bh-Lrg">
                                         <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
                                         <color key="backgroundColor" name="blue 1"/>
-                                        <color key="tintColor" name="text FFFFFF"/>
+                                        <color key="tintColor" name="white 1.0"/>
                                         <state key="normal" image="main-plus"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1245,18 +1245,36 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-xG-79w" customClass="FanMenu" customModule="FanMenu">
-                                <rect key="frame" x="198" y="463" width="240" height="240"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zya-14-hoF">
+                                <rect key="frame" x="0.0" y="-100" width="375" height="723"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDa-Tl-UPu">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="723"/>
+                                        <connections>
+                                            <action selector="didTapPlusMenuOverlay:" destination="527-2C-xUs" eventType="touchUpInside" id="ZeL-44-eoD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="black 1"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="QC0-nV-4pH"/>
-                                    <constraint firstAttribute="height" constant="240" id="Z3W-Gv-JkY"/>
+                                    <constraint firstAttribute="trailing" secondItem="vDa-Tl-UPu" secondAttribute="trailing" id="Lqc-U0-grX"/>
+                                    <constraint firstItem="vDa-Tl-UPu" firstAttribute="top" secondItem="Zya-14-hoF" secondAttribute="top" id="ag6-4S-k4d"/>
+                                    <constraint firstItem="vDa-Tl-UPu" firstAttribute="leading" secondItem="Zya-14-hoF" secondAttribute="leading" id="fUn-QM-fPm"/>
+                                    <constraint firstAttribute="bottom" secondItem="vDa-Tl-UPu" secondAttribute="bottom" id="oOG-yK-XX8"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="120"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                            </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-xG-79w" customClass="FanMenu" customModule="Three_Baskets" customModuleProvider="target">
+                                <rect key="frame" x="168" y="433" width="300" height="300"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="QC0-nV-4pH"/>
+                                    <constraint firstAttribute="height" constant="300" id="Z3W-Gv-JkY"/>
+                                </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gku-Sf-ydu">
                                 <rect key="frame" x="157.5" y="281.5" width="60" height="60"/>
@@ -1282,6 +1300,8 @@
                             <constraint firstItem="u6k-3z-5c2" firstAttribute="top" secondItem="rjC-iC-M0Y" secondAttribute="top" constant="-29" id="2nA-pZ-awb"/>
                             <constraint firstItem="rjC-iC-M0Y" firstAttribute="bottom" secondItem="uZP-da-pZ0" secondAttribute="bottom" id="2xh-Kb-cSu"/>
                             <constraint firstAttribute="trailing" secondItem="u6k-3z-5c2" secondAttribute="trailing" constant="28" id="95s-dH-jVt"/>
+                            <constraint firstAttribute="bottom" secondItem="Zya-14-hoF" secondAttribute="bottom" id="9QM-Uj-7pl"/>
+                            <constraint firstItem="Zya-14-hoF" firstAttribute="top" secondItem="D5A-mu-huD" secondAttribute="top" constant="-100" id="D1C-pd-kpW"/>
                             <constraint firstItem="foz-3R-fXQ" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" id="Djt-II-Z97"/>
                             <constraint firstItem="rjC-iC-M0Y" firstAttribute="top" secondItem="DLF-Af-F6p" secondAttribute="bottom" constant="-1" id="FXc-hE-wRr"/>
                             <constraint firstItem="rjC-iC-M0Y" firstAttribute="trailing" secondItem="uZP-da-pZ0" secondAttribute="trailing" id="Fgo-BT-qbi"/>
@@ -1289,7 +1309,9 @@
                             <constraint firstItem="rjC-iC-M0Y" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" id="KUj-FY-c5G"/>
                             <constraint firstAttribute="trailing" secondItem="bCO-eg-Aiy" secondAttribute="trailing" constant="16" id="Oi6-4q-2qm"/>
                             <constraint firstItem="uZP-da-pZ0" firstAttribute="trailing" secondItem="DLF-Af-F6p" secondAttribute="trailing" id="QMs-Fx-xCt"/>
+                            <constraint firstItem="Zya-14-hoF" firstAttribute="leading" secondItem="D5A-mu-huD" secondAttribute="leading" id="QdD-ay-L7r"/>
                             <constraint firstItem="0ux-Ej-c8V" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" id="T2T-A4-Ygy"/>
+                            <constraint firstAttribute="trailing" secondItem="Zya-14-hoF" secondAttribute="trailing" id="Yls-6M-l0p"/>
                             <constraint firstItem="0ux-Ej-c8V" firstAttribute="trailing" secondItem="uZP-da-pZ0" secondAttribute="trailing" id="b9I-7D-Acj"/>
                             <constraint firstItem="a5I-xG-79w" firstAttribute="centerX" secondItem="u6k-3z-5c2" secondAttribute="centerX" id="bVr-tB-WCt"/>
                             <constraint firstItem="Gku-Sf-ydu" firstAttribute="centerY" secondItem="D5A-mu-huD" secondAttribute="centerY" id="eAs-Dl-7GS"/>
@@ -1334,6 +1356,7 @@
                         <outlet property="mainButtonBackground" destination="zRh-zQ-jH3" id="NxD-kb-Kvb"/>
                         <outlet property="mainButtonTopToBottomConstraint" destination="2nA-pZ-awb" id="7AQ-SE-Zn7"/>
                         <outlet property="plusMenu" destination="a5I-xG-79w" id="swA-wp-jSB"/>
+                        <outlet property="plusOverlay" destination="Zya-14-hoF" id="Y1w-5O-gpp"/>
                         <outlet property="riskActivesActivityIndicator" destination="V19-Lc-7wm" id="drq-Ca-SBk"/>
                         <outlet property="riskActivesCollectionView" destination="wWY-WA-ket" id="hFc-7v-sie"/>
                         <outlet property="riskActivesLoader" destination="Nid-av-JHO" id="HOW-y0-gVb"/>
@@ -1424,9 +1447,6 @@
         </namedColor>
         <namedColor name="blue 1">
             <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="text FFFFFF">
-            <color red="0.91764705882352937" green="0.93333333333333335" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white 0.04">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>

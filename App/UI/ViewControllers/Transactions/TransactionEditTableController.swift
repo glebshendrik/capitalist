@@ -149,7 +149,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
     }
     
     private func setupIsSellingAssetSwitchField() {
-        isSellingAssetSwitchField.placeholder = NSLocalizedString("Продажа актива", comment: "Продажа актива")
+        isSellingAssetSwitchField.placeholder = NSLocalizedString("Полная продажа актива", comment: "")
         isSellingAssetSwitchField.imageName = "included_in_balance_icon"
         isSellingAssetSwitchField.didSwitch { [weak self] isSellingAsset in
             self?.delegate?.didChange(isSellingAsset: isSellingAsset)

@@ -49,7 +49,8 @@ extension MainViewController {
     
     func updateMainButtonUI() {
         let isCancelState = isEditingItems || isSelecting
-        
+        plusMenu.isHidden = isCancelState
+        plusMenu.isUserInteractionEnabled = !isCancelState
         let transform = isCancelState ? CGAffineTransform(rotationAngle: CGFloat(3 * Double.pi / 4)) : .identity
         let color = isCancelState ? UIColor.by(ColorAsset.red1) : UIColor.by(.blue1)
         

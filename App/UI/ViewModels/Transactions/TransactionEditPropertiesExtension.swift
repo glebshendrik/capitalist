@@ -30,7 +30,7 @@ extension TransactionEditViewModel {
     }
     
     var transactionType: TransactionType? {
-        return TransactionType.typeFor(sourceType: sourceType, destinationType: destinationType, byingAsset: isBuyingAsset)
+        return TransactionType.typeFor(sourceType: sourceType, destinationType: destinationType, byingAsset: isBuyingAsset) ?? requiredTransactionType
     }
     
     var amountToSave: String? {

@@ -52,7 +52,7 @@ target 'Three Baskets' do
   pod "Haptica"
   pod 'SwipeCellKit'
   pod 'BadgeHub'
-  pod 'FanMenu'
+  pod 'Macaw'
 end
 
 post_install do |installer|

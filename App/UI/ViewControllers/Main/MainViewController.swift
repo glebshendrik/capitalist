@@ -12,7 +12,6 @@ import PromiseKit
 import SwifterSwift
 import BetterSegmentedControl
 import EasyTipView
-import FanMenu
 
 class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
     
@@ -57,6 +56,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     @IBOutlet weak var mainButtonTopToBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var plusMenu: FanMenu!
+    @IBOutlet weak var plusOverlay: UIView!
     
     var titleView: TitleView!
     var transactionController: TransactionController!
@@ -106,5 +106,10 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBAction func didTapInfoButton(_ sender: Any) {
         modal(factory.transactionCreationInfoViewController())
+    }
+    
+    @IBAction func didTapPlusMenuOverlay(_ sender: Any) {
+        plusMenu.close()
+        setMenuOverlay(hidden: true)
     }
 }

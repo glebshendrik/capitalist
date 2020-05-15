@@ -1,4 +1,12 @@
-import Foundation
+//
+//  FanMenu.swift
+//  Three Baskets
+//
+//  Created by Alexander Petropavlovsky on 15.05.2020.
+//  Copyright © 2020 Real Tranzit. All rights reserved.
+//
+
+import UIKit
 import Macaw
 
 public enum FanMenuButtonTitlePosition {
@@ -185,10 +193,11 @@ class FanMenuScene {
         } else {
             menuIcon = .none
         }
+        let menuCircleAnimation = menuCircle.fillVar.animation(to: Color.gray.with(a: 0.5), during: 0.2)
         
         buttonsNode = fanMenu.items.map {
             return FanMenuScene.createFanButtonNode(button: $0, fanMenu: fanMenu)
-            }.group()
+        }.group()
         
         
         backgroundCircle = Shape(
@@ -210,6 +219,7 @@ class FanMenuScene {
                 }
             }
             self.updateMenu(open: !self.isOpen)
+//            menuCircleAnimation.autoreversed().play()
         }
     }
     
@@ -234,10 +244,11 @@ class FanMenuScene {
         isOpen = open
         
         if isOpen && fanMenu.sizeIsTooSmall {
-            print("WARNING: FanMenu doesn't fit into view bounds. It should be at least \((fanMenu.menuRadius + fanMenu.radius) * 2.0) wide and in high")
+            print("WARNING: FanMenu doesn't fit into view bounds. It should have both width and height set to at least \((fanMenu.menuRadius + fanMenu.radius) * 2.0)")
         }
         
         let scale = isOpen ? fanMenu.menuRadius / fanMenu.radius : fanMenu.radius / fanMenu.menuRadius
+//        let scale = isOpen ? 5.0 : 1.0 / 5.0
         let backgroundAnimation = self.backgroundCircle.placeVar.animation(
             to: Transform.scale(sx: scale, sy: scale),
             during: fanMenu.duration
@@ -265,10 +276,14 @@ class FanMenuScene {
             }.combine()
         
         // stub
-        let buttonAnimation = self.buttonNode.opacityVar.animation(
-            to: 1.0,
+        let buttonAnimation = self.buttonNode.placeVar.animation(
+            to: isOpen ? Transform.rotate(angle: 3.0 * .pi / 4.0) : Transform.identity,
             during: fanMenu.duration + fanMenu.delay * Double(buttonsNode.contents.count - 1)
         )
+//        let buttonAnimation = self.buttonNode.opacityVar.animation(
+//            to: 1.0,
+//            during: fanMenu.duration + fanMenu.delay * Double(buttonsNode.contents.count - 1)
+//        )
         
         animation = [backgroundAnimation, expandAnimation, buttonAnimation].combine()
         animation?.onComplete {
@@ -279,12 +294,12 @@ class FanMenuScene {
 
     
     class func createFanButtonNode(button: FanMenuButton, fanMenu: FanMenu) -> Group {
-        var contents: [Node] = [
-            Shape(
-                form: Circle(r: fanMenu.radius),
-                fill: button.color
-            )
-        ]
+        let circle = Shape(
+            form: Circle(r: fanMenu.radius),
+            fill: button.color
+        )
+        var contents: [Node] = [circle]
+        
         if let uiImage = button.image {
             let image = Image(
                 image: uiImage,
@@ -298,7 +313,7 @@ class FanMenuScene {
 
                 let place: Transform
 
-                let text = Text(text: button.title)
+                let text = Text(text: button.title, font: Font(name: "Roboto-Light", size: 12, weight: "Light"), align: .mid)
 
                 switch button.titlePosition {
                 case .right:
@@ -313,7 +328,7 @@ class FanMenuScene {
                     )
                 case .bottom:
                     place = Transform.move(
-                        dx: -Double(uiImage.size.width) / 2,
+                        dx: 0,
                         dy: Double(uiImage.size.height) + fanMenu.buttonsTitleIndent
                     )
                 case .top:
@@ -345,6 +360,15 @@ class FanMenuScene {
                 fanMenu.onItemDidClick?(button)
             }
         }
+        
+        circle.onTouchPressed { event in
+            circle.fill = Color.gray.with(a: 0.5)
+        }
+        
+        circle.onTouchReleased { event in
+            circle.fill = button.color
+        }
+        
         return node
     }
     
@@ -364,8 +388,8 @@ class FanMenuScene {
         
         let alpha = startValue + step * Double(index)
         return Transform.move(
-            dx: cos(alpha) * fanMenu.menuRadius,
-            dy: sin(alpha) * fanMenu.menuRadius
+            dx: cos(alpha) * (fanMenu.menuRadius - 1.75 * fanMenu.radius),
+            dy: sin(alpha) * (fanMenu.menuRadius - 1.75 * fanMenu.radius)
         )
     }
 }
