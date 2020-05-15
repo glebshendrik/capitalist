@@ -308,7 +308,13 @@ class TransactionViewModel {
             return isVirtual ? assetPurchaseWord : "\(assetPurchaseWord) · \(subtitle)"
         }
         if isVirtual {
-            return sourceType == .active || destinationType == .active ? NSLocalizedString("Переоценка актива", comment: "Переоценка актива") : NSLocalizedString("Изменено Вами", comment: "Изменено Вами")
+            if sourceType == .active || destinationType == .active {
+                return NSLocalizedString("Переоценка актива", comment: "Переоценка актива")
+            }
+            if sourceType == .expenseSource && destinationType == .expenseSource {
+                return NSLocalizedString("Создание кошелька", comment: "Создание кошелька")
+            }
+            return NSLocalizedString("Изменено Вами", comment: "Изменено Вами")
         }
         if type == .expense && destinationType == .active {
             return "\(assetExpenseWord) · \(subtitle)"

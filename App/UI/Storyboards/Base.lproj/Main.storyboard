@@ -281,7 +281,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="РАСХОДЫ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dB1-hV-29K">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="РАСХОДЫ И ИНВЕСТИЦИИ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dB1-hV-29K">
                                                     <rect key="frame" x="16" y="80" width="343" height="18"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
                                                     <color key="textColor" name="white 0.4"/>
@@ -1269,11 +1269,11 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-xG-79w" customClass="FanMenu" customModule="Three_Baskets" customModuleProvider="target">
-                                <rect key="frame" x="168" y="433" width="300" height="300"/>
+                                <rect key="frame" x="118" y="383" width="400" height="400"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="QC0-nV-4pH"/>
-                                    <constraint firstAttribute="height" constant="300" id="Z3W-Gv-JkY"/>
+                                    <constraint firstAttribute="width" constant="400" id="QC0-nV-4pH"/>
+                                    <constraint firstAttribute="height" constant="400" id="Z3W-Gv-JkY"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gku-Sf-ydu">

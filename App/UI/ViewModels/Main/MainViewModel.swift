@@ -132,7 +132,12 @@ class MainViewModel {
     }
     
     var basketTotalExpensesTitle: String {
-        return NSLocalizedString("Расходы: ", comment: "Расходы: ")
+        switch basketsViewModel.selectedBasketType {
+        case .joy:
+            return NSLocalizedString("Расходы: ", comment: "Расходы: ")
+        default:
+            return NSLocalizedString("Инвестировано: ", comment: "Инвестировано: ")
+        }
     }
     
     var basketTotalExpenses: String {
@@ -141,8 +146,8 @@ class MainViewModel {
     
     var basketTotalTitle: String {
         switch basketsViewModel.selectedBasketType {
-        case .safe:
-            return NSLocalizedString(". Сбережения: ", comment: ". Сбережения: ")
+        case .safe, .risk:
+            return NSLocalizedString(". Стоимость: ", comment: ". Стоимость: ")
         case .risk:
             return NSLocalizedString(". Инвестиции: ", comment: ". Инвестиции: ")
         default:

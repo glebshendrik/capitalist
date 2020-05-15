@@ -70,11 +70,11 @@ extension MainViewController {
             )
         ]
         
-        plusMenu.menuRadius = 150.0
+        plusMenu.menuRadius = 200.0
         plusMenu.radius = 29.0
         plusMenu.duration = 0.2
         plusMenu.delay = 0
-        plusMenu.interval = (.pi - .pi / 50, .pi + .pi / 2 + .pi / 24)
+        plusMenu.interval = (.pi, .pi + .pi / 2)
         plusMenu.buttonsTitleIndent = 12
 
         let brand = UIColor.by(.brandExpense).rgbComponents
