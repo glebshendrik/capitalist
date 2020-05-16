@@ -96,6 +96,7 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     private func updateFundsMoveDependentData() {
         setSelecting(false, animated: true)
         loadBudget()
+        loadBaskets()
         loadExpenseSources()
         loadActives(by: .risk)
         loadActives(by: .safe)

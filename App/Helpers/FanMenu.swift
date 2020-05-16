@@ -388,8 +388,8 @@ class FanMenuScene {
         
         let alpha = startValue + step * Double(index)
         return Transform.move(
-            dx: cos(alpha) * (fanMenu.menuRadius - 2.25 * fanMenu.radius),
-            dy: sin(alpha) * (fanMenu.menuRadius - 2.25 * fanMenu.radius)
+            dx: cos(alpha) * (fanMenu.menuRadius - 2.5 * fanMenu.radius),
+            dy: sin(alpha) * (fanMenu.menuRadius - 2.5 * fanMenu.radius)
         )
     }
 }

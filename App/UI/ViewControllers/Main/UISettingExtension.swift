@@ -74,7 +74,8 @@ extension MainViewController {
         plusMenu.radius = 29.0
         plusMenu.duration = 0.2
         plusMenu.delay = 0
-        plusMenu.interval = (.pi, .pi + .pi / 2)
+        let startInterval: Double = UIDevice.current.hasNotch ? .pi : (.pi + .pi / 20)
+        plusMenu.interval = (startInterval, .pi + .pi / 2)
         plusMenu.buttonsTitleIndent = 12
 
         let brand = UIColor.by(.brandExpense).rgbComponents
