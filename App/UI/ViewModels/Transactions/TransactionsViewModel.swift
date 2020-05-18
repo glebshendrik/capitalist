@@ -70,11 +70,7 @@ class TransactionsViewModel {
     }
     
     func loadData(dateRangeFilter: DateRangeTransactionFilter?) -> Promise<Void> {
-        return  firstly {
-                    when(fulfilled: loadDefaultCurrency(), loadTransactions(dateRangeFilter: dateRangeFilter))
-                }.then {
-                    self.loadExchangeRates()
-                }
+        return when(fulfilled: loadDefaultCurrency(), loadTransactions(dateRangeFilter: dateRangeFilter), loadExchangeRates())
     }
     
     func clearTransactions() {
