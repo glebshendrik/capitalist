@@ -15,12 +15,13 @@ enum APIRoute: URLRequestConvertible {
     static var baseURLString: String {
         switch UIApplication.shared.inferredEnvironment {
         case .debug:
-            return "https://api.threebaskets.net"
+//            return "https://api.threebaskets.net"
 //            return "https://skrudzh-staging.herokuapp.com"
 //            return "https://test.threebaskets.net"
-//            return "https://skrudz.tempio.app"
+            return "https://skrudz.tempio.app"
         case .testFlight:
-            return "https://api.threebaskets.net"
+//            return "https://api.threebaskets.net"
+            return "https://skrudz.tempio.app"
 //            return "https://test.threebaskets.net"
         case .appStore:
             return "https://api.threebaskets.net"

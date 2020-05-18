@@ -134,7 +134,7 @@ struct ActiveCreationForm : Encodable, Validatable {
         case plannedIncomeType = "planned_income_type"
         case isIncomePlanned = "is_income_planned"
         case reminderAttributes = "reminder_attributes"
-        case activeCreationTransactionAttributes = "active_creation_transaction_attributes"
+        case activeCreationTransactionAttributes = "active_transaction_attributes"
 //        case accountConnectionAttributes = "account_connection_attributes"
     }
     
