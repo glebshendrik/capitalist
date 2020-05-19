@@ -147,18 +147,62 @@ class TransactionViewModel {
         }
     }
         
-    var amount: String {        
-        guard let transactionAmount = calculatingAmountCents.moneyCurrencyString(with: calculatingCurrency, shouldRound: false) else { return "" }
-        switch type {
-        case .income:
-            return "+\(transactionAmount)"
-        case .fundsMove:
-            return transactionAmount
-        case .expense:
-            return "-\(transactionAmount)"
+    var amountSign: String {
+        if type == .income || isAssetCostIncrement {
+            return "+"
         }
+        if type == .expense || isAssetCostDecrement {
+            return "-"
+        }
+        return ""
     }
-        
+    
+    var amount: String {
+        guard let transactionAmount = calculatingAmountCents.moneyCurrencyString(with: calculatingCurrency, shouldRound: false) else { return "" }
+        return "\(amountSign)\(transactionAmount)"
+    }
+    
+    var isAssetCostIncrement: Bool {
+        return type == .fundsMove && sourceType == .expenseSource && destinationType == .active && isVirtualSource
+    }
+    
+    var isAssetCostDecrement: Bool {
+        return type == .fundsMove && sourceType == .active && destinationType == .expenseSource && isVirtualDestination
+    }
+    
+    var profitCents: Int? {
+        return transaction.profitCents
+    }
+    
+    var profitSign: String {
+        if hasPositiveProfit {
+            return "+"
+        }
+        if hasNegativeProfit {
+            return "-"
+        }
+        return ""
+    }
+    
+    var hasPositiveProfit: Bool {
+        guard let profitCents = profitCents else { return false }
+        return profitCents > 0
+    }
+    
+    var hasNegativeProfit: Bool {
+        guard let profitCents = profitCents else { return false }
+        return profitCents < 0
+    }
+    
+    var profit: String? {
+        guard let profit = profitCents?.moneyCurrencyString(with: calculatingCurrency, shouldRound: false) else { return nil }
+        return "\(profitSign)\(profit)"
+    }
+    
+    var hasProfit: Bool {
+        return profitCents != nil
+    }
+    
     var basketType: BasketType? {        
         return transaction.basketType
     }
@@ -207,8 +251,21 @@ class TransactionViewModel {
         if transaction.isAssetSource {
             return NSLocalizedString("Дивиденды", comment: "Дивиденды")
         }
+        if hasNegativeProfit || hasPositiveProfit {
+            return profit
+        }
         
         return comment?.isEmpty ?? true ? nil : " "
+    }
+    
+    var typeDescriptionColorAsset: ColorAsset {
+        if hasNegativeProfit {
+            return .red1
+        }
+        if hasPositiveProfit {
+            return .brandSafe
+        }
+        return .white64
     }
     
     var isVirtualSource: Bool {

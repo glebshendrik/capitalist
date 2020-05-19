@@ -76,6 +76,7 @@ struct Transaction : Decodable {
     let sourceActiveTitle: String?
     let sourceActiveIconURL: URL?
     let active: Active?
+    let profitCents: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -112,6 +113,7 @@ struct Transaction : Decodable {
         case sourceActiveTitle = "source_active_title"
         case sourceActiveIconURL = "source_active_icon_url"
         case active = "active"
+        case profitCents = "profit"
     }
     
 }

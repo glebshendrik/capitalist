@@ -42,6 +42,7 @@ class TransactionTableViewCell : UITableViewCell {
         
         typeLabel.text = viewModel.typeDescription
         commentLabel.text = viewModel.comment
+        typeLabel.textColor = UIColor.by(viewModel.typeDescriptionColorAsset)
         
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
