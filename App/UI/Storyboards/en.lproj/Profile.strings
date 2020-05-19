@@ -82,3 +82,6 @@
 
 /* Class = "UIButton"; normalTitle = "Оформить подписку"; ObjectID = "Fja-52-Tra"; */
 "Fja-52-Tra.normalTitle" = "Get subscription";
+
+/* Class = "UIButton"; normalTitle = "Удалить данные о финансах"; ObjectID = "Qub-pM-zSq"; */
+"Qub-pM-zSq.normalTitle" = "Remove financial data";

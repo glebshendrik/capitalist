@@ -67,12 +67,18 @@ class APIClient : APIClientProtocol {
         return performRequest(resource).map { (json, _) in
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
-            if  let jsonDictionary = json as? [String : Any],
-                let objectDictionary = jsonDictionary[resource.resource.singular] as? [String : Any],
-                let object = try? decoder.decode(T.self, withJSONObject: objectDictionary) {
-                return object
+            
+            do {
+                if  let jsonDictionary = json as? [String : Any],
+                    let objectDictionary = jsonDictionary[resource.resource.singular] as? [String : Any],
+                    let object = try? decoder.decode(T.self, withJSONObject: objectDictionary) {
+                    return object
+                }
+                throw APIRequestError.mappingFailed
             }
-            throw APIRequestError.mappingFailed
+            catch {
+                throw error
+            }
         }
     }
     
@@ -88,14 +94,19 @@ class APIClient : APIClientProtocol {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
             
-            if  let jsonDictionary = json as? [String : Any],
-                let arrayOfDictionaries = jsonDictionary[resource.resource.plural] as? [[String : Any]],
-                let objects = try? decoder.decode([T].self, withJSONObject: arrayOfDictionaries) {
-                
-                let totalCount = (response.response?.allHeaderFields["Items_total_count"] as? String)?.int
-                return (objects, totalCount)
+            do {
+                if  let jsonDictionary = json as? [String : Any],
+                    let arrayOfDictionaries = jsonDictionary[resource.resource.plural] as? [[String : Any]],
+                    let objects = try? decoder.decode([T].self, withJSONObject: arrayOfDictionaries) {
+                    
+                    let totalCount = (response.response?.allHeaderFields["Items_total_count"] as? String)?.int
+                    return (objects, totalCount)
+                }
+                throw APIRequestError.mappingFailed
             }
-            throw APIRequestError.mappingFailed
+            catch {
+                throw error
+            }
         }
     }
     

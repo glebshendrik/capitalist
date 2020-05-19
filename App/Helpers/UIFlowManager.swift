@@ -38,9 +38,18 @@ class UIFlowManager {
         if UserDefaults.standard.bool(forKey: key) {
             return true
         }
-        UserDefaults.standard.set(true, forKey: key)
-        UserDefaults.standard.synchronize()
+        set(key, reached: true)
         return false
+    }
+    
+    static func set(point: UIFlowPoint, reached: Bool) {
+        let key = point.rawValue
+        set(key, reached: reached)
+    }
+    
+    static func set(_ key: String, reached: Bool) {
+        UserDefaults.standard.set(reached, forKey: key)
+        UserDefaults.standard.synchronize()
     }
     
     static func reached(point: UIFlowPoint) -> Bool {

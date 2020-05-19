@@ -159,10 +159,24 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return usersService.onboardUser(with: currentUserId)
     }
     
+    func destroyCurrentUserData() -> Promise<Void> {
+        guard let currentUserId = userSessionManager.currentSession?.userId else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        return  firstly {
+                    usersService.destroyUserData(by: currentUserId)
+                }.done {
+                    UIFlowManager.set(point: .dataSetup, reached: false)
+                    self.router.route()
+                }
+    }
+    
     func logout() -> Promise<Void> {
         let previousSession = userSessionManager.currentSession
         userSessionManager.forgetSession()
         notificationsCoordinator.cancelAllSceduledNotifications()
+        UIFlowManager.set(point: .onboarding, reached: false)
+        UIFlowManager.set(point: .dataSetup, reached: false)
         router.route()
         guard let session = previousSession else {
             return .value(())

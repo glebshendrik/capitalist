@@ -29,6 +29,7 @@ protocol AccountCoordinatorProtocol {
     func logout() -> Promise<Void>
     func loadCurrentUserBudget() -> Promise<Budget>
     func onboardCurrentUser() -> Promise<Void>
+    func destroyCurrentUserData() -> Promise<Void>
     
     func updateUserSubscription() -> Promise<Void>
     func checkIntroductoryEligibility() -> Promise<[String : Bool]>
