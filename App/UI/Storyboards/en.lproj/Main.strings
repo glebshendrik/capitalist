@@ -59,3 +59,8 @@
 /* Class = "UILabel"; text = "Премиум"; ObjectID = "9la-8h-GSz"; */
 "9la-8h-GSz.text" = "Premium";
 
+/* Class = "UILabel"; text = "О приложении"; ObjectID = "y3h-YB-Y4o"; */
+"y3h-YB-Y4o.text" = "About the app";
+
+/* Class = "UILabel"; text = "Источники дохода"; ObjectID = "dzT-rW-dhj"; */
+"dzT-rW-dhj.text" = "Income sources";

@@ -10,7 +10,6 @@ import UIKit
 import InfiniteLayout
 import ApphudSDK
 import PromiseKit
-import SafariServices
 
 class FeatureDescriptionCollectionViewCell : UICollectionViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -232,12 +231,7 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
         productContainers[id]?.discountButton.setTitle(productViewModel.discountTitle, for: .normal)
     }
         
-    private func show(url: String) {
-        guard let url = URL(string: url) else { return }
-        let browser = SFSafariViewController(url: url)
-        browser.modalPresentationStyle = .popover
-        modal(browser)
-    }
+    
 }
 
 extension SubscriptionViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

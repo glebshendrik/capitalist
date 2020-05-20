@@ -25,6 +25,7 @@
 		FA0A4E87246D4BF700886277 /* TransactionEditTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0A4E86246D4BF700886277 /* TransactionEditTitleView.xib */; };
 		FA0A4E89246D4D4800886277 /* TransactionEditTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E88246D4D4800886277 /* TransactionEditTitleView.swift */; };
 		FA0A4E8B246DB81E00886277 /* FanMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E8A246DB81E00886277 /* FanMenu.swift */; };
+		FA0A4E8D2475095D00886277 /* AppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E8C2475095B00886277 /* AppInfoViewController.swift */; };
 		FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADF621CBE56100805288 /* LoaderView.swift */; };
 		FA0CADF921CBE58F00805288 /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0CADF821CBE58F00805288 /* LoaderView.xib */; };
 		FA0CADFD21D257F400805288 /* ExpenseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADFC21D257F400805288 /* ExpenseSource.swift */; };
@@ -514,6 +515,7 @@
 		FA0A4E86246D4BF700886277 /* TransactionEditTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionEditTitleView.xib; sourceTree = "<group>"; };
 		FA0A4E88246D4D4800886277 /* TransactionEditTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditTitleView.swift; sourceTree = "<group>"; };
 		FA0A4E8A246DB81E00886277 /* FanMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanMenu.swift; sourceTree = "<group>"; };
+		FA0A4E8C2475095B00886277 /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
 		FA0CADF621CBE56100805288 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		FA0CADF821CBE58F00805288 /* LoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
 		FA0CADFC21D257F400805288 /* ExpenseSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSource.swift; sourceTree = "<group>"; };
@@ -1339,6 +1341,7 @@
 				FAA993DC23CF5265002456C2 /* AppUpdateViewController.swift */,
 				FA846D4823E1F50400DA5738 /* PasscodeViewController.swift */,
 				FAF7528C24408A4000A0B5B7 /* CountriesViewController.swift */,
+				FA0A4E8C2475095B00886277 /* AppInfoViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2531,6 +2534,7 @@
 				FA2847E922EED208003F114A /* FormTapField.swift in Sources */,
 				FA56ABA5236088F800E4D0E3 /* ActiveTableViewCell.swift in Sources */,
 				FA7276C3225252390086D4D1 /* GestureRecognizersControllingExtension.swift in Sources */,
+				FA0A4E8D2475095D00886277 /* AppInfoViewController.swift in Sources */,
 				FAD88F2621AEB72800BE7BC1 /* NotificationsManager.swift in Sources */,
 				FA7C10C8230D615300CC0FD1 /* OnboardingPagesViewController.swift in Sources */,
 				FA0CAE0321D2612500805288 /* ExpenseSourcesCoordinatorProtocol.swift in Sources */,

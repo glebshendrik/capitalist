@@ -256,8 +256,33 @@
                                             <segue destination="7c0-Ly-HVX" kind="show" id="xgR-WJ-I18"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="y3h-YB-Y4o" imageView="m8V-yy-QYq" rowHeight="56" style="IBUITableViewCellStyleDefault" id="j3O-3q-Gmj">
+                                        <rect key="frame" x="0.0" y="532" width="375" height="56"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j3O-3q-Gmj" id="p6H-p5-4lc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="О приложении" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y3h-YB-Y4o">
+                                                    <rect key="frame" x="55" y="0.0" width="304" height="56"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                    <color key="textColor" name="white 1.0"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="app-info-menu-item-icon" id="m8V-yy-QYq">
+                                                    <rect key="frame" x="16" y="16" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <segue destination="7IN-8h-mpf" kind="show" id="bot-tT-OPd"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="148" id="oXr-st-47Z">
-                                        <rect key="frame" x="0.0" y="532" width="375" height="148"/>
+                                        <rect key="frame" x="0.0" y="588" width="375" height="148"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oXr-st-47Z" id="aCx-I0-klI">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="148"/>
@@ -1421,8 +1446,19 @@
             </objects>
             <point key="canvasLocation" x="-644" y="505"/>
         </scene>
+        <!--AppInfoViewController-->
+        <scene sceneID="hIH-mx-UfI">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="AppInfoViewController" id="7IN-8h-mpf" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="cJP-DM-ybL"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OxI-8m-qHj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-586" y="586"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="app-info-menu-item-icon" width="24" height="24"/>
         <image name="balance-menu-item-icon" width="22" height="22"/>
         <image name="credits-menu-item-icon" width="24" height="24"/>
         <image name="debts-menu-item-icon" width="22" height="20"/>

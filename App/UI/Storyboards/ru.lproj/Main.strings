@@ -58,3 +58,10 @@
 
 /* Class = "UILabel"; text = "Премиум"; ObjectID = "9la-8h-GSz"; */
 "9la-8h-GSz.text" = "Премиум";
+
+/* Class = "UILabel"; text = "О приложении"; ObjectID = "y3h-YB-Y4o"; */
+"y3h-YB-Y4o.text" = "О приложении";
+
+/* Class = "UILabel"; text = "Источники дохода"; ObjectID = "dzT-rW-dhj"; */
+"dzT-rW-dhj.text" = "Источники дохода";
+

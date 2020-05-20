@@ -13,6 +13,7 @@ import SwiftDate
 import AlamofireImage
 import Haptica
 import ESPullToRefresh
+import SafariServices
 
 extension UITableView {
     func reloadData(with animation: UITableView.RowAnimation) {        
@@ -677,6 +678,21 @@ extension UIViewController {
         if isAlert {
             dismiss(animated: false, completion: nil)
         }
+    }
+    
+    func show(url: String) {
+        guard let url = URL(string: url) else { return }
+        let browser = SFSafariViewController(url: url)
+        browser.modalPresentationStyle = .popover
+        modal(browser)
+    }
+    
+    func open(url: String) {
+        guard   let urlString = url.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed),
+                let url = URL(string: urlString),
+                UIApplication.shared.canOpenURL(url) else { return }
+        
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
 

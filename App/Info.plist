@@ -93,5 +93,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+       <string>whatsapp</string>
+       <string>tg</string>
+       <string>instagram</string>       
+    </array>
 </dict>
 </plist>

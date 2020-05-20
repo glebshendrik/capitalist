@@ -294,5 +294,10 @@ extension ApplicationAssembly {
         container.registerForSkrudzhStoryboard(CountriesViewController.self) { (r, c) in
             c.viewModel = r.resolve(CountriesViewModel.self)
         }
+        
+        // AppInfoViewController
+        container.registerForSkrudzhStoryboard(AppInfoViewController.self) { (r, c) in
+            c.accountCoordinator = r.resolve(AccountCoordinatorProtocol.self)
+        }
     }
 }
