@@ -11,11 +11,9 @@ import Charts
 
 extension GraphViewModel {
     var transactions: [TransactionViewModel] {
-        let transactions = transactionsViewModel.filteredTransactionViewModels
-        
         switch graphType {
         case .all:
-            return transactions.filter { $0.type != .fundsMove }
+            return all
         case .incomes:
             return incomes
         case .expenses:
@@ -23,12 +21,16 @@ extension GraphViewModel {
         }
     }
     
+    var all: [TransactionViewModel] {
+        return transactionsViewModel.filteredTransactionViewModels.filter { $0.type != .fundsMove || $0.hasNegativeProfit || $0.hasPositiveProfit }
+    }
+    
     var incomes: [TransactionViewModel] {
-        return transactionsViewModel.filteredTransactionViewModels.filter { $0.type == .income }
+        return transactionsViewModel.filteredTransactionViewModels.filter { $0.type == .income || $0.hasPositiveProfit }
     }
     
     var expenses: [TransactionViewModel] {
-        return transactionsViewModel.filteredTransactionViewModels.filter { $0.type == .expense }
+        return transactionsViewModel.filteredTransactionViewModels.filter { $0.type == .expense || $0.hasNegativeProfit }
     }
     
     var colors: [UIColor] {

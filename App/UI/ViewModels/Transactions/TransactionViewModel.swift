@@ -130,6 +130,9 @@ class TransactionViewModel {
         case .income:
             return convertedCurrency
         case .fundsMove:
+            if hasNegativeProfit || hasPositiveProfit {
+                return currency
+            }
             return convertedCurrency
         case .expense:
             return currency
@@ -141,12 +144,37 @@ class TransactionViewModel {
         case .income:
             return convertedAmountCents
         case .fundsMove:
+            if let profitCents = profitCents, profitCents != 0 {
+                return abs(profitCents)
+            }
+            return 0
+        case .expense:
+            return amountCents
+        }
+    }
+    
+    var displayingAmountCents: Int {
+        switch type {
+        case .income:
+            return convertedAmountCents
+        case .fundsMove:
             return convertedAmountCents
         case .expense:
             return amountCents
         }
     }
-        
+       
+    var displayingCurrency: Currency {
+        switch type {
+        case .income:
+            return convertedCurrency
+        case .fundsMove:
+            return convertedCurrency
+        case .expense:
+            return currency
+        }
+    }
+    
     var amountSign: String {
         if type == .income || isAssetCostIncrement {
             return "+"
@@ -158,7 +186,7 @@ class TransactionViewModel {
     }
     
     var amount: String {
-        guard let transactionAmount = calculatingAmountCents.moneyCurrencyString(with: calculatingCurrency, shouldRound: false) else { return "" }
+        guard let transactionAmount = displayingAmountCents.moneyCurrencyString(with: displayingCurrency, shouldRound: false) else { return "" }
         return "\(amountSign)\(transactionAmount)"
     }
     
@@ -179,7 +207,7 @@ class TransactionViewModel {
             return "+"
         }
         if hasNegativeProfit {
-            return "-"
+            return ""
         }
         return ""
     }
@@ -192,6 +220,10 @@ class TransactionViewModel {
     var hasNegativeProfit: Bool {
         guard let profitCents = profitCents else { return false }
         return profitCents < 0
+    }
+    
+    var hasNonZeroProfit: Bool {
+        return hasPositiveProfit || hasNegativeProfit
     }
     
     var profit: String? {
@@ -308,6 +340,8 @@ class TransactionViewModel {
         switch (type, sourceType, destinationType) {
         case (.income, .incomeSource, _):
             return isVirtualSource ? .destination : .source
+        case (.fundsMove, .incomeSource, .active):
+            return .destination
         case (.expense, .expenseSource, _):
             return isVirtualDestination ? .source : .destination
         case (.fundsMove, .expenseSource, .expenseSource):
@@ -425,5 +459,18 @@ class TransactionViewModel {
     
     init(transaction: Transaction) {
         self.transaction = transaction
+    }
+    
+    func amount(matching matchingCurrency: Currency) -> NSDecimalNumber? {
+        if currency.code == matchingCurrency.code {
+            if let profitCents = profitCents, profitCents != 0 {
+                return NSDecimalNumber(integerLiteral: abs(profitCents))
+            }
+            return NSDecimalNumber(integerLiteral: amountCents)
+        }
+        if convertedCurrency.code == matchingCurrency.code {
+            return NSDecimalNumber(integerLiteral: convertedAmountCents)
+        }
+        return nil
     }
 }

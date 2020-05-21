@@ -19,42 +19,18 @@ class TransactionsViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     private let currencyConverter: CurrencyConverterProtocol
     
-    private var allCurrencyCodes: [String] = []
     var defaultCurrency: Currency? = nil
     var defaultPeriod: AccountingPeriod? = nil
     var oldestTransactionGotAt: Date? = nil
     private var exchangeRates: [String : Float] = [String : Float]()
     
+    private var allTransactionViewModels: [TransactionViewModel] = []
     public private(set) var filteredTransactionViewModels: [TransactionViewModel] = []
-    
-    private var allTransactionViewModels: [TransactionViewModel] = [] {
-        didSet {
-            let currencies = allTransactionViewModels.map { $0.currency.code }.withoutDuplicates()
-            let convertedCurrencies = allTransactionViewModels.map { $0.convertedCurrency.code }.withoutDuplicates()
-            allCurrencyCodes = (currencies + convertedCurrencies).withoutDuplicates()
-        }
-    }
     
     var oldestTransactionDate: Date {
         return oldestTransactionGotAt ?? (Date().beginning(of: .month) ?? Date()) - 5.years
     }
-    
-    var hasIncomeTransactions: Bool {
-        return filteredTransactionViewModels.any { $0.sourceType == .incomeSource }
-    }
-    
-    var hasExpenseTransactions: Bool {
-        return filteredTransactionViewModels.any { $0.destinationType == .expenseCategory }
-    }
-    
-    var filteredIncomesAmount: String? {
-        return transactionsAmount(type: .incomeSource)
-    }
-    
-    var filteredExpensesAmount: String? {
-        return transactionsAmount(type: .expenseCategory)
-    }
-    
+        
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          creditsCoordinator: CreditsCoordinatorProtocol,
          borrowsCoordinator: BorrowsCoordinatorProtocol,
@@ -69,12 +45,12 @@ class TransactionsViewModel {
         self.currencyConverter = currencyConverter
     }
     
-    func loadData(dateRangeFilter: DateRangeTransactionFilter?) -> Promise<Void> {
-        return when(fulfilled: loadDefaultCurrency(), loadTransactions(dateRangeFilter: dateRangeFilter), loadExchangeRates())
-    }
-    
     func clearTransactions() {
         allTransactionViewModels = []
+    }
+    
+    func loadData(dateRangeFilter: DateRangeTransactionFilter?) -> Promise<Void> {
+        return when(fulfilled: loadDefaultCurrency(), loadTransactions(dateRangeFilter: dateRangeFilter), loadExchangeRates())
     }
     
     func loadTransactions(dateRangeFilter: DateRangeTransactionFilter?) -> Promise<Void> {
@@ -123,9 +99,9 @@ class TransactionsViewModel {
             case .all:
                 return transactions
             case .incomes:
-                return transactions.filter { $0.type == .income }
+                return transactions.filter { $0.type == .income || $0.hasPositiveProfit }
             case .expenses:
-                return transactions.filter { $0.type == .expense }
+                return transactions.filter { $0.type == .expense || $0.hasNegativeProfit }
             }
         }
         
@@ -165,57 +141,26 @@ class TransactionsViewModel {
                     }
                 }.asVoid()
     }
-        
-    private func transactionsAmount(type: TransactionableType) -> String? {
-        guard let currency = defaultCurrency else { return nil }
-        
-        let transactions = filteredTransactionViewModels
-            .filter { $0.sourceType == type || $0.destinationType == type }
-        
-        let amount = transactionsAmount(transactions: transactions)
-        
-        return amount.moneyCurrencyString(with: currency, shouldRound: false)
-    }
-    
-    func transactionsAmount(transactions: [TransactionViewModel],
-                                   amountForTransaction: ((TransactionViewModel) -> (cents: Int, currency: Currency))? = nil) -> NSDecimalNumber {
+            
+    func transactionsAmount(transactions: [TransactionViewModel]) -> NSDecimalNumber {
         guard let currency = defaultCurrency else { return 0.0 }
         
         return transactions
             .map { transaction -> NSDecimalNumber in
-                
-                if let amountForTransaction = amountForTransaction {
-                    let amount = amountForTransaction(transaction)
-                    let amountCents = amount.cents
-                    let amountCurrency = amount.currency
-                    
-                    return amountCurrency.code == currency.code || amountCents == 0
-                        ? NSDecimalNumber(integerLiteral: amountCents)
-                        : convert(cents: amountCents, fromCurrency: amountCurrency, toCurrency: currency)
-                } else {
-                    
-                    if transaction.currency.code == currency.code {
-                        return NSDecimalNumber(integerLiteral: transaction.amountCents)
-                    }
-                    if transaction.convertedCurrency.code == currency.code {
-                        return NSDecimalNumber(integerLiteral: transaction.convertedAmountCents)
-                    }
-                    
-                    return convert(cents: transaction.calculatingAmountCents,
-                                   fromCurrency: transaction.calculatingCurrency,
-                                   toCurrency: currency)
-                }                
+                return transaction.amount(matching: currency) ?? convert(cents: transaction.calculatingAmountCents,
+                                                                         from: transaction.calculatingCurrency,
+                                                                         to: currency)
             }
             .reduce(0, +)
     }
     
-    private func convert(cents: Int, fromCurrency: Currency, toCurrency: Currency) -> NSDecimalNumber {
+    private func convert(cents: Int, from: Currency, to: Currency) -> NSDecimalNumber {
         
-        guard let exchangeRate = exchangeRates[fromCurrency.code] else { return 0 }
+        guard let exchangeRate = exchangeRates[from.code] else { return 0 }
         
         return currencyConverter.convert(cents: cents,
-                                         fromCurrency: fromCurrency,
-                                         toCurrency: toCurrency,
+                                         fromCurrency: from,
+                                         toCurrency: to,
                                          exchangeRate: Double(exchangeRate),
                                          forward: true)
     }    
