@@ -198,7 +198,7 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     
     var fullSaleProfitColorAsset: ColorAsset {
         if hasPositiveProfit {
-            return .green2
+            return .green1
         }
         if hasNegativeProfit {
             return .red1

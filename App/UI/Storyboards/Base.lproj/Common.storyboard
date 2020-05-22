@@ -421,14 +421,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CombinedInfoTableViewCell" id="CYk-tU-4OH" customClass="CombinedInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="124" width="375" height="202"/>
+                                        <rect key="frame" x="0.0" y="124" width="375" height="198"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CYk-tU-4OH" id="1c6-QP-dHT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="202"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="h0h-4C-z7c">
-                                                    <rect key="frame" x="24" y="16" width="327" height="170"/>
+                                                    <rect key="frame" x="18" y="16" width="333" height="166"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6U-rV-q3c">
                                                             <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
@@ -500,26 +500,26 @@
                                                                 <constraint firstItem="vdH-wH-fYN" firstAttribute="centerY" secondItem="a6U-rV-q3c" secondAttribute="centerY" id="vmP-ea-m0o"/>
                                                             </constraints>
                                                         </view>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="b7Y-pM-zSn">
-                                                            <rect key="frame" x="84" y="0.0" width="243" height="170"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="b7Y-pM-zSn">
+                                                            <rect key="frame" x="84" y="0.0" width="249" height="166"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfw-Fi-Mh9">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="243" height="79"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="249" height="79"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999 999k" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juf-MV-CAP">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="243" height="33"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="249" height="33"/>
                                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="28"/>
                                                                             <color key="textColor" name="white 1.0"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance of entity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDd-Es-sXd">
-                                                                            <rect key="frame" x="76.5" y="33" width="90" height="46"/>
+                                                                            <rect key="frame" x="79.5" y="33" width="90" height="46"/>
                                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                                                             <color key="textColor" name="white 0.4"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXK-u3-IT4">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="243" height="79"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="249" height="79"/>
                                                                             <connections>
                                                                                 <action selector="didTapMainField:" destination="CYk-tU-4OH" eventType="touchUpInside" id="jb0-KI-lMA"/>
                                                                             </connections>
@@ -540,25 +540,25 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nQe-87-Fx7">
-                                                                    <rect key="frame" x="0.0" y="95" width="243" height="75"/>
+                                                                    <rect key="frame" x="0.0" y="91" width="249" height="75"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bYH-23-MTL">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="75.5" height="75"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="77.5" height="75"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999 999k" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vV-S8-ZuB">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="75.5" height="21"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="77.5" height="21"/>
                                                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                                                     <color key="textColor" name="white 1.0"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance of entity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAD-0D-pO2">
-                                                                                    <rect key="frame" x="-7" y="21" width="90" height="54"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance of entity" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAD-0D-pO2">
+                                                                                    <rect key="frame" x="-6" y="21" width="90" height="54"/>
                                                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                                                                     <color key="textColor" name="white 0.4"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIZ-jf-rQV">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="75.5" height="75"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="77.5" height="75"/>
                                                                                     <connections>
                                                                                         <action selector="didTapFirstField:" destination="CYk-tU-4OH" eventType="touchUpInside" id="PSj-j3-9tF"/>
                                                                                     </connections>
@@ -579,22 +579,22 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWe-xP-rlE">
-                                                                            <rect key="frame" x="83.5" y="0.0" width="76" height="75"/>
+                                                                            <rect key="frame" x="85.5" y="0.0" width="78" height="75"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999 999k" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNN-nk-BWW">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="76" height="21"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="78" height="21"/>
                                                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                                                     <color key="textColor" name="white 1.0"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance of entity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IfD-k4-3dn">
-                                                                                    <rect key="frame" x="-7" y="21" width="90" height="54"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance of entity" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IfD-k4-3dn">
+                                                                                    <rect key="frame" x="-6" y="21" width="90" height="54"/>
                                                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                                                                     <color key="textColor" name="white 0.4"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HMv-5M-QQk">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="76" height="75"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="78" height="75"/>
                                                                                     <connections>
                                                                                         <action selector="didTapSecondField:" destination="CYk-tU-4OH" eventType="touchUpInside" id="aR4-v4-2ic"/>
                                                                                     </connections>
@@ -615,22 +615,22 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRe-lY-lai">
-                                                                            <rect key="frame" x="167.5" y="0.0" width="75.5" height="75"/>
+                                                                            <rect key="frame" x="171.5" y="0.0" width="77.5" height="75"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999 999k" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zu6-Fb-a7R">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="75.5" height="21"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="77.5" height="21"/>
                                                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                                                     <color key="textColor" name="white 1.0"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance of entity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hk-3S-Bsy">
-                                                                                    <rect key="frame" x="-7.5" y="21" width="90" height="54"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance of entity" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hk-3S-Bsy">
+                                                                                    <rect key="frame" x="-6.5" y="21" width="90" height="54"/>
                                                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                                                                     <color key="textColor" name="white 0.4"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Oq-4E-vVY">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="75.5" height="75"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="77.5" height="75"/>
                                                                                     <connections>
                                                                                         <action selector="didTapThirdField:" destination="CYk-tU-4OH" eventType="touchUpInside" id="kpq-D7-1Ym"/>
                                                                                     </connections>
@@ -663,7 +663,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="h0h-4C-z7c" secondAttribute="trailing" constant="24" id="AM3-Fy-1UR"/>
                                                 <constraint firstAttribute="bottom" secondItem="h0h-4C-z7c" secondAttribute="bottom" constant="16" id="R1m-hV-P3F"/>
-                                                <constraint firstItem="h0h-4C-z7c" firstAttribute="leading" secondItem="1c6-QP-dHT" secondAttribute="leading" constant="24" id="jc3-mL-qZH"/>
+                                                <constraint firstItem="h0h-4C-z7c" firstAttribute="leading" secondItem="1c6-QP-dHT" secondAttribute="leading" constant="18" id="jc3-mL-qZH"/>
                                                 <constraint firstItem="h0h-4C-z7c" firstAttribute="top" secondItem="1c6-QP-dHT" secondAttribute="top" constant="16" id="uZg-8w-24L"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -688,7 +688,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BasicInfoTableViewCell" id="aXZ-1q-adp" customClass="BasicInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="326" width="375" height="88"/>
+                                        <rect key="frame" x="0.0" y="322" width="375" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aXZ-1q-adp" id="RGf-rA-cHF">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
@@ -735,7 +735,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReminderInfoTableViewCell" id="V3x-hH-SrZ" customClass="ReminderInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="414" width="375" height="135.5"/>
+                                        <rect key="frame" x="0.0" y="410" width="375" height="135.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V3x-hH-SrZ" id="SRq-6n-jEb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="135.5"/>
@@ -809,7 +809,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SwitchInfoTableViewCell" id="SBL-XI-Ml6" customClass="SwitchInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="549.5" width="375" height="59"/>
+                                        <rect key="frame" x="0.0" y="545.5" width="375" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SBL-XI-Ml6" id="6bl-Cj-pYn">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
@@ -863,7 +863,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ButtonInfoTableViewCell" id="fCK-07-K85" customClass="ButtonInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="608.5" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="604.5" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fCK-07-K85" id="FUt-aR-mRf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -912,7 +912,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionsHeaderTableViewCell" id="8EI-VI-NM3" customClass="TransactionsHeaderTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="672.5" width="375" height="64.5"/>
+                                        <rect key="frame" x="0.0" y="668.5" width="375" height="64.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8EI-VI-NM3" id="H3j-ki-f4c">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
@@ -947,7 +947,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionTableViewCell" id="ctE-lo-fnT" customClass="TransactionTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="737" width="375" height="76.5"/>
+                                        <rect key="frame" x="0.0" y="733" width="375" height="76.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ctE-lo-fnT" id="grt-2O-rgV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
