@@ -283,11 +283,15 @@ class TransactionViewModel {
         if transaction.isAssetSource {
             return NSLocalizedString("Дивиденды", comment: "Дивиденды")
         }
-        if hasNegativeProfit || hasPositiveProfit {
-            return profit
+        if hasNegativeProfit {
+            return "\(NSLocalizedString("Убыток", comment: "")):\n\(profit!)"
+            
+        }
+        if hasPositiveProfit {
+            return "\(NSLocalizedString("Прибыль", comment: "")):\n\(profit!)"
         }
         
-        return comment?.isEmpty ?? true ? nil : " "
+        return nil
     }
     
     var typeDescriptionColorAsset: ColorAsset {
