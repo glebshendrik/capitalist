@@ -180,6 +180,41 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return .raster
     }
     
+    var fullSaleProfitCents: Int {
+        return active.fullSaleProfitCents ?? 0
+    }
+    
+    var fullSaleProfit: String {
+        return money(cents: fullSaleProfitCents, shouldRound: true)
+    }
+    
+    var hasPositiveProfit: Bool {
+        return fullSaleProfitCents > 0
+    }
+    
+    var hasNegativeProfit: Bool {
+        return fullSaleProfitCents < 0
+    }
+    
+    var fullSaleProfitColorAsset: ColorAsset {
+        if hasPositiveProfit {
+            return .green2
+        }
+        if hasNegativeProfit {
+            return .red1
+        }
+        return .white100
+    }
+    
+    var investmentsInCostCents: Int {
+        let investmentsInCostCents = costCents - fullSaleProfitCents
+        return investmentsInCostCents < 0 ? 0 : investmentsInCostCents
+    }
+    
+    var investmentsInCost: String {
+        return money(cents: investmentsInCostCents, shouldRound: true)
+    }
+    
     init(active: Active) {
         self.active = active
     }

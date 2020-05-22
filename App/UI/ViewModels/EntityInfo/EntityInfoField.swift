@@ -9,6 +9,7 @@
 import Foundation
 
 enum EntityInfoFieldType {
+    case combined
     case icon
     case basic
     case bool
@@ -17,6 +18,8 @@ enum EntityInfoFieldType {
     
     var identifier: String {
         switch self {
+        case .combined:
+            return "CombinedInfoTableViewCell"
         case .icon:
             return "IconInfoTableViewCell"
         case .basic:

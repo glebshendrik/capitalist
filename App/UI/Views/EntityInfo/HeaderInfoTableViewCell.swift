@@ -1,21 +1,18 @@
 //
-//  IconInfoTableViewCell.swift
+//  HeaderInfoTableViewCell.swift
 //  Three Baskets
 //
-//  Created by Alexander Petropavlovsky on 13.11.2019.
-//  Copyright © 2019 Real Tranzit. All rights reserved.
+//  Created by Alexander Petropavlovsky on 22.05.2020.
+//  Copyright © 2020 Real Tranzit. All rights reserved.
 //
 
 import UIKit
-import SVGKit
-import SDWebImageSVGCoder
-import AlamofireImage
 
-protocol IconInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
+protocol HeaderInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
     func didTapIcon(field: IconInfoField?)
 }
 
-class IconInfoTableViewCell : EntityInfoTableViewCell {
+class CombinedInfoTableViewCell : EntityInfoTableViewCell {
     @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var headerLabelsStackView: UIStackView!
     @IBOutlet weak var mainValueLabel: UILabel!
@@ -51,3 +48,4 @@ class IconInfoTableViewCell : EntityInfoTableViewCell {
         iconDelegate?.didTapIcon(field: iconField)
     }
 }
+

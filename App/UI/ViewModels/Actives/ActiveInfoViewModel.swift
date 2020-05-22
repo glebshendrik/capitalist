@@ -14,6 +14,8 @@ enum ActiveInfoField : String {
     case activeType
     case goal
     case cost
+    case investmentsInCost
+    case fullSaleProfit
     case plannedAtPeriod
     case invested
     case spent
@@ -28,6 +30,10 @@ enum ActiveInfoField : String {
     case transactionDevidents
     case transactionInvest
     case transactionSell
+    case goalHeader
+    case profitHeader
+    case planned
+    case investments
     
     var identifier: String {
         return rawValue
@@ -82,6 +88,188 @@ class ActiveInfoViewModel : EntityInfoViewModel {
         return .raster
     }
     
+    var iconField: IconInfoField {
+        return IconInfoField(fieldId: ActiveInfoField.icon.rawValue,
+                             iconType: .raster,
+                             iconURL: selectedIconURL,
+                             placeholder: activeViewModel?.defaultIconName,
+                             backgroundColor: basketType.iconBackgroundColor)
+    }
+    
+    var activeTypeField: BasicInfoField {
+        return BasicInfoField(fieldId: ActiveInfoField.activeType.rawValue,
+                              title: NSLocalizedString("Тип актива", comment: "Тип актива"),
+                              value: activeViewModel?.activeTypeName)
+    }
+    
+    var goalField: BasicInfoField? {
+        guard let activeViewModel = activeViewModel, activeViewModel.isGoal else { return nil }
+        return BasicInfoField(fieldId: ActiveInfoField.goal.rawValue,
+                              title: NSLocalizedString("Хочу накопить", comment: "Хочу накопить"),
+                              value: activeViewModel.goalAmount)
+    }
+    
+    var costField: BasicInfoField {
+        return BasicInfoField(fieldId: ActiveInfoField.cost.rawValue,
+                              title: activeViewModel?.activeType.costTitle,
+                              value: activeViewModel?.cost)
+    }
+    
+    var investmentsInCostField: BasicInfoField {
+        return BasicInfoField(fieldId: ActiveInfoField.investmentsInCost.rawValue,
+                              title: NSLocalizedString("Инвестиций в активе", comment: "Инвестиций в активе"),
+                              value: activeViewModel?.investmentsInCost)
+    }
+    
+    var fullSaleProfitField: BasicInfoField {
+        return BasicInfoField(fieldId: ActiveInfoField.fullSaleProfit.rawValue,
+                              title: NSLocalizedString("Доходность", comment: "Доходность"),
+                              value: activeViewModel?.fullSaleProfit,
+                              valueColorAsset: activeViewModel?.fullSaleProfitColorAsset ?? .white100)
+    }
+    
+    var monthlyPlannedPaymentField: BasicInfoField? {
+        guard let activeViewModel = activeViewModel, activeViewModel.areExpensesPlanned else { return nil }
+        return BasicInfoField(fieldId: ActiveInfoField.plannedAtPeriod.rawValue,
+                              title: activeViewModel.activeType.monthlyPaymentTitle,
+                              value: activeViewModel.plannedAtPeriod)
+    }
+    
+    var investedField: BasicInfoField {
+        return BasicInfoField(fieldId: ActiveInfoField.invested.rawValue,
+                              title: String(format: NSLocalizedString("Все инвестиции за %@", comment: "Все инвестиции за %@"), defaultPeriodTitle),
+                              value: activeViewModel?.invested)
+    }
+    
+    var expensesField: BasicInfoField? {
+        guard let activeViewModel = activeViewModel, !activeViewModel.onlyBuyingAssets else { return nil }
+        return BasicInfoField(fieldId: ActiveInfoField.spent.rawValue,
+                              title: String(format: NSLocalizedString("Расходы за %@", comment: "Расходы за %@"), defaultPeriodTitle),
+                              value: activeViewModel.spent)
+    }
+    
+    var purchasesField: BasicInfoField? {
+        guard let activeViewModel = activeViewModel, !activeViewModel.onlyBuyingAssets else { return nil }
+        return BasicInfoField(fieldId: ActiveInfoField.bought.rawValue,
+                              title: String(format: NSLocalizedString("%@ за %@", comment: "%@ за %@"), activeViewModel.activeType.buyingAssetsTitle, defaultPeriodTitle),
+                              value: activeViewModel.bought)
+    }
+    
+    var incomeSourceSwitchField: SwitchInfoField {
+        return SwitchInfoField(fieldId: ActiveInfoField.hasIncomeSwitch.rawValue,
+                               title: NSLocalizedString("Отображать источник дохода", comment: "Отображать источник дохода"),
+                               value: isIncomePlanned)
+    }
+    
+    var annualPercentsField: BasicInfoField? {
+        guard   let activeViewModel = activeViewModel,
+                let annualPercent = activeViewModel.annualPercent,
+                activeViewModel.active.plannedIncomeType == .annualPercents else { return nil }
+        return BasicInfoField(fieldId: ActiveInfoField.annualIncome.rawValue,
+                              title: NSLocalizedString("Ожидаемый годовой процент", comment: "Ожидаемый годовой процент"),
+                              value: annualPercent)
+    }
+    
+    var monthlyIncomeField: BasicInfoField? {
+        guard   let activeViewModel = activeViewModel,
+                let monthlyPlannedIncome = activeViewModel.monthlyPlannedIncome,
+                activeViewModel.active.plannedIncomeType == .monthlyIncome else { return nil }
+        return BasicInfoField(fieldId: ActiveInfoField.monthlyPlannedIncome.rawValue,
+                              title: NSLocalizedString("Планируемый доход в месяц", comment: "Планируемый доход в месяц"),
+                              value: monthlyPlannedIncome)
+    }
+    
+    var reminderField: ReminderInfoField {
+        return ReminderInfoField(fieldId: ActiveInfoField.reminder.rawValue,
+                                 reminder: reminder)
+    }
+    
+    var bankField: ButtonInfoField {
+        return ButtonInfoField(fieldId: ExpenseSourceInfoField.bank.rawValue,
+                               title: bankButtonTitle,
+                               iconName: nil,
+                               isEnabled: true)
+    }
+    
+    var statisticsField: ButtonInfoField {
+        return ButtonInfoField(fieldId: ActiveInfoField.statistics.rawValue,
+                               title: NSLocalizedString("Статистика", comment: "Статистика"),
+                               iconName: nil,
+                               isEnabled: true)
+    }
+    
+    var costChangeField: ButtonInfoField {
+        return ButtonInfoField(fieldId: ActiveInfoField.costChange.rawValue,
+                               title: NSLocalizedString("Переоценить актив", comment: "Переоценить актив"),
+                               iconName: nil,
+                               isEnabled: true)
+    }
+    
+    var transactionDevidentsField: ButtonInfoField {
+        return ButtonInfoField(fieldId: ActiveInfoField.transactionDevidents.rawValue,
+                               title: NSLocalizedString("Дивиденды", comment: "Дивиденды"),
+                               iconName: nil,
+                               isEnabled: true)
+    }
+    
+    var transactionBuyField: ButtonInfoField {
+        return ButtonInfoField(fieldId: ActiveInfoField.transactionInvest.rawValue,
+                               title: NSLocalizedString("Инвестировать", comment: "Инвестировать"),
+                               iconName: nil,
+                               isEnabled: true)
+    }
+    
+    var transactionSellField: ButtonInfoField {
+        return ButtonInfoField(fieldId: ActiveInfoField.transactionSell.rawValue,
+                               title: NSLocalizedString("Продать", comment: "Продать"),
+                               iconName: nil,
+                               isEnabled: true)
+    }
+    
+    var headerField: CombinedInfoField? {
+        guard let activeViewModel = activeViewModel else { return nil }
+        if activeViewModel.activeType.isGoalAmountRequired {
+            return goalHeaderField
+        }
+        return profitHeaderField
+    }
+    
+    var goalHeaderField: CombinedInfoField {
+        return CombinedInfoField(fieldId: ActiveInfoField.goalHeader.rawValue,
+                                 icon: iconField,
+                                 main: costField,
+                                 first: goalField,
+                                 second: nil,
+                                 third: nil)
+    }
+    
+    var profitHeaderField: CombinedInfoField {
+        return CombinedInfoField(fieldId: ActiveInfoField.profitHeader.rawValue,
+                                 icon: iconField,
+                                 main: costField,
+                                 first: investmentsInCostField,
+                                 second: fullSaleProfitField,
+                                 third: nil)
+    }
+    
+    var plannedField: CombinedInfoField {
+        return CombinedInfoField(fieldId: ActiveInfoField.planned.rawValue,
+                                 icon: nil,
+                                 main: activeTypeField,
+                                 first: monthlyPlannedPaymentField,
+                                 second: annualPercentsField ?? monthlyIncomeField,
+                                 third: nil)
+    }
+    
+    var investmentsField: CombinedInfoField {
+        return CombinedInfoField(fieldId: ActiveInfoField.investments.rawValue,
+                                 icon: nil,
+                                 main: investedField,
+                                 first: expensesField,
+                                 second: purchasesField,
+                                 third: nil)
+    }
+    
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          creditsCoordinator: CreditsCoordinatorProtocol,
          borrowsCoordinator: BorrowsCoordinatorProtocol,
@@ -129,93 +317,46 @@ class ActiveInfoViewModel : EntityInfoViewModel {
     }
     
     override func entityInfoFields() -> [EntityInfoField] {
-        guard let activeViewModel = activeViewModel else { return [] }
-        var fields: [EntityInfoField] = [IconInfoField(fieldId: ActiveInfoField.icon.rawValue,
-                                                       iconType: .raster,
-                                                       iconURL: selectedIconURL,           
-                                                       placeholder: activeViewModel.defaultIconName,
-                                                       backgroundColor: basketType.iconBackgroundColor),
-                                         BasicInfoField(fieldId: ActiveInfoField.activeType.rawValue,
-                                                        title: NSLocalizedString("Тип актива", comment: "Тип актива"),
-                                                        value: activeViewModel.activeTypeName)]
-        if activeViewModel.isGoal {
-            fields.append(BasicInfoField(fieldId: ActiveInfoField.goal.rawValue,
-                                         title: NSLocalizedString("Хочу накопить", comment: "Хочу накопить"),
-                                         value: activeViewModel.goalAmount))
+        var fields = [EntityInfoField]()
+        
+        if let headerField = headerField {
+            fields.append(headerField)
         }
         
-        fields.append(BasicInfoField(fieldId: ActiveInfoField.cost.rawValue,
-                                     title: activeViewModel.activeType.costTitle,
-                                     value: activeViewModel.cost))
-        
-        if activeViewModel.areExpensesPlanned {
-            fields.append(BasicInfoField(fieldId: ActiveInfoField.plannedAtPeriod.rawValue,
-                                         title: activeViewModel.activeType.monthlyPaymentTitle,
-                                         value: activeViewModel.plannedAtPeriod))
+        fields.append(activeTypeField)
+                        
+        if let monthlyPlannedPaymentField = monthlyPlannedPaymentField {
+            fields.append(monthlyPlannedPaymentField)
         }
         
-        fields.append(BasicInfoField(fieldId: ActiveInfoField.invested.rawValue,
-                                     title: String(format: NSLocalizedString("Все инвестиции за %@", comment: "Все инвестиции за %@"), defaultPeriodTitle),
-                                     value: activeViewModel.invested))
+        fields.append(investedField)
         
-        if !activeViewModel.onlyBuyingAssets {
-            fields.append(contentsOf: [BasicInfoField(fieldId: ActiveInfoField.spent.rawValue,
-                                                      title: String(format: NSLocalizedString("Расходы за %@", comment: "Расходы за %@"), defaultPeriodTitle),
-                                                      value: activeViewModel.spent),
-                                       BasicInfoField(fieldId: ActiveInfoField.bought.rawValue,
-                                                      title: String(format: NSLocalizedString("%@ за %@", comment: "%@ за %@"), activeViewModel.activeType.buyingAssetsTitle, defaultPeriodTitle),
-                                                      value: activeViewModel.bought)])
+        if let expensesField = expensesField {
+            fields.append(expensesField)
         }
         
-        
-        fields.append(SwitchInfoField(fieldId: ActiveInfoField.hasIncomeSwitch.rawValue,
-                                      title: NSLocalizedString("Отображать источник дохода", comment: "Отображать источник дохода"),
-                                      value: isIncomePlanned))
-        
-        if let annualPercent = activeViewModel.annualPercent,
-            activeViewModel.active.plannedIncomeType == .annualPercents {
-            
-            fields.append(BasicInfoField(fieldId: ActiveInfoField.annualIncome.rawValue,
-                                         title: NSLocalizedString("Доходность", comment: "Доходность"),
-                                         value: annualPercent))
+        if let purchasesField = purchasesField {
+            fields.append(purchasesField)
+        }
+                
+        if let annualPercentsField = annualPercentsField {
+            fields.append(annualPercentsField)
         }
         
-        if let monthlyPlannedIncome = activeViewModel.monthlyPlannedIncome,
-            activeViewModel.active.plannedIncomeType == .monthlyIncome {
-            
-            fields.append(BasicInfoField(fieldId: ActiveInfoField.monthlyPlannedIncome.rawValue,
-                                         title: NSLocalizedString("Доход в месяц", comment: "Доход в месяц"),
-                                         value: monthlyPlannedIncome))
+        if let monthlyIncomeField = monthlyIncomeField {
+            fields.append(monthlyIncomeField)
         }
         
-        fields.append(ReminderInfoField(fieldId: ActiveInfoField.reminder.rawValue,
-                                        reminder: reminder))
+        fields.append(incomeSourceSwitchField)
+        fields.append(reminderField)
         
-//        fields.append(ButtonInfoField(fieldId: ExpenseSourceInfoField.bank.rawValue,
-//                                      title: bankButtonTitle,
-//                                      iconName: nil,
-//                                      isEnabled: true))
+//        fields.append(bankField)
+        fields.append(statisticsField)
+        fields.append(costChangeField)
+        fields.append(transactionDevidentsField)
+        fields.append(transactionBuyField)
+        fields.append(transactionSellField)
         
-        fields.append(contentsOf: [ButtonInfoField(fieldId: ActiveInfoField.statistics.rawValue,
-                                                   title: NSLocalizedString("Статистика", comment: "Статистика"),
-                                                   iconName: nil,
-                                                   isEnabled: true),
-                                   ButtonInfoField(fieldId: ActiveInfoField.costChange.rawValue,
-                                                   title: NSLocalizedString("Переоценить актив", comment: "Переоценить актив"),
-                                                   iconName: nil,
-                                                   isEnabled: true),
-                                   ButtonInfoField(fieldId: ActiveInfoField.transactionDevidents.rawValue,
-                                                   title: NSLocalizedString("Дивиденды", comment: "Дивиденды"),
-                                                   iconName: nil,
-                                                   isEnabled: true),
-                                   ButtonInfoField(fieldId: ActiveInfoField.transactionInvest.rawValue,
-                                                   title: NSLocalizedString("Инвестировать", comment: "Инвестировать"),
-                                                   iconName: nil,
-                                                   isEnabled: true),
-                                   ButtonInfoField(fieldId: ActiveInfoField.transactionSell.rawValue,
-                                                   title: NSLocalizedString("Продать", comment: "Продать"),
-                                                   iconName: nil,
-                                                   isEnabled: true)])
         return fields
     }
     

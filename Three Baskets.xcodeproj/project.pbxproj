@@ -26,6 +26,8 @@
 		FA0A4E89246D4D4800886277 /* TransactionEditTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E88246D4D4800886277 /* TransactionEditTitleView.swift */; };
 		FA0A4E8B246DB81E00886277 /* FanMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E8A246DB81E00886277 /* FanMenu.swift */; };
 		FA0A4E8D2475095D00886277 /* AppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E8C2475095B00886277 /* AppInfoViewController.swift */; };
+		FA0A4E8F2477D58200886277 /* CombinedInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E8E2477D58100886277 /* CombinedInfoTableViewCell.swift */; };
+		FA0A4E912477E14600886277 /* CombinedInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A4E902477E14600886277 /* CombinedInfoField.swift */; };
 		FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADF621CBE56100805288 /* LoaderView.swift */; };
 		FA0CADF921CBE58F00805288 /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0CADF821CBE58F00805288 /* LoaderView.xib */; };
 		FA0CADFD21D257F400805288 /* ExpenseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CADFC21D257F400805288 /* ExpenseSource.swift */; };
@@ -516,6 +518,8 @@
 		FA0A4E88246D4D4800886277 /* TransactionEditTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditTitleView.swift; sourceTree = "<group>"; };
 		FA0A4E8A246DB81E00886277 /* FanMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanMenu.swift; sourceTree = "<group>"; };
 		FA0A4E8C2475095B00886277 /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
+		FA0A4E8E2477D58100886277 /* CombinedInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedInfoTableViewCell.swift; sourceTree = "<group>"; };
+		FA0A4E902477E14600886277 /* CombinedInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedInfoField.swift; sourceTree = "<group>"; };
 		FA0CADF621CBE56100805288 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		FA0CADF821CBE58F00805288 /* LoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
 		FA0CADFC21D257F400805288 /* ExpenseSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSource.swift; sourceTree = "<group>"; };
@@ -1285,6 +1289,7 @@
 				FA503DC22375D29B005AEFE7 /* EntityInfoTransactionsSection.swift */,
 				FA503DC02375D27C005AEFE7 /* EntityInfoFieldsSection.swift */,
 				FA5751B7237C158800912443 /* EntityInfoField.swift */,
+				FA0A4E902477E14600886277 /* CombinedInfoField.swift */,
 				FA5751B9237C15A900912443 /* IconInfoField.swift */,
 				FA5751BB237C15BD00912443 /* BasicInfoField.swift */,
 				FA5751BD237C15D200912443 /* SwitchInfoField.swift */,
@@ -1311,6 +1316,7 @@
 				FA5751C8237C2C0C00912443 /* SwitchInfoTableViewCell.swift */,
 				FA5751CA237C2C8A00912443 /* ButtonInfoTableViewCell.swift */,
 				FA5751CC237C2D3400912443 /* ReminderInfoTableViewCell.swift */,
+				FA0A4E8E2477D58100886277 /* CombinedInfoTableViewCell.swift */,
 			);
 			path = EntityInfo;
 			sourceTree = "<group>";
@@ -1320,7 +1326,6 @@
 			children = (
 				FA630C2D2293CAA700242AB3 /* ReminderViewModel.swift */,
 				FA66FB6C22204B3100708C71 /* Transactionable.swift */,
-				FA503DBD2375D15C005AEFE7 /* EntityInfo */,
 				FAF7528E24408AC900A0B5B7 /* CountriesViewModel.swift */,
 				FAF7529024408B0100A0B5B7 /* CountryViewModel.swift */,
 			);
@@ -2065,6 +2070,7 @@
 				FABE54E3233BF6D800DF2B70 /* Credits */,
 				FA6270A421CA3EB900CC0269 /* Common */,
 				FA7DB72922102B5100559878 /* Currencies */,
+				FA503DBD2375D15C005AEFE7 /* EntityInfo */,
 				FA66D82C2293D23D00C21E8B /* ExpenseCategories */,
 				FA66D82B2293D21400C21E8B /* ExpenseSources */,
 				FA66D82A2293D1E900C21E8B /* IncomeSources */,
@@ -2510,6 +2516,7 @@
 				FA36E98923F182CA00B340AA /* AnalyticsManagerProtocol.swift in Sources */,
 				FAA5D57A238FA9CD00CC53AD /* BorrowInfoViewModel.swift in Sources */,
 				FA7EE00022CDA1940054EAD3 /* AccountViewModel.swift in Sources */,
+				FA0A4E8F2477D58200886277 /* CombinedInfoTableViewCell.swift in Sources */,
 				FA0CAE2821D67B7F00805288 /* IconsViewModel.swift in Sources */,
 				FAF7528F24408AC900A0B5B7 /* CountriesViewModel.swift in Sources */,
 				FA0CAE1521D669C000805288 /* Icon.swift in Sources */,
@@ -2676,6 +2683,7 @@
 				FADD04C92420FE4F00FB542D /* BiometricVerificationManager.swift in Sources */,
 				FADD04C5241F91E400FB542D /* BiometricVerificationManagerProtocol.swift in Sources */,
 				FAB5BE3F2351FE75000466AE /* ActiveType.swift in Sources */,
+				FA0A4E912477E14600886277 /* CombinedInfoField.swift in Sources */,
 				FA16FC73223A82FA0053C273 /* ExpenseSourceSelectViewController.swift in Sources */,
 				FA8722722444BE0A00B093AA /* UserPreferencesManagerProtocol.swift in Sources */,
 				FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */,
