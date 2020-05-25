@@ -185,9 +185,20 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     }
     
     var fullSaleProfit: String {
-        return money(cents: fullSaleProfitCents, shouldRound: true)
+        let profit = money(cents: fullSaleProfitCents, shouldRound: true)
+        return "\(profitSign)\(profit)"
     }
     
+    var profitSign: String {
+        if hasPositiveProfit {
+            return "+"
+        }
+        if hasNegativeProfit {
+            return ""
+        }
+        return ""
+    }
+            
     var hasPositiveProfit: Bool {
         return fullSaleProfitCents > 0
     }
@@ -198,7 +209,7 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     
     var fullSaleProfitColorAsset: ColorAsset {
         if hasPositiveProfit {
-            return .green1
+            return .brandSafe
         }
         if hasNegativeProfit {
             return .red1
