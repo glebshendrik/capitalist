@@ -457,6 +457,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uiw-3k-ryZ">
+                                <rect key="frame" x="32" y="0.0" width="1" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="B5E-CG-TuW"/>
+                                    <constraint firstAttribute="width" constant="1" id="Xwk-GI-D3m"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ux-Ej-c8V">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
                                 <subviews>
@@ -1316,18 +1324,45 @@
                                     <constraint firstAttribute="height" constant="60" id="hLk-WV-whF"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oyb-sB-AfK">
+                                <rect key="frame" x="0.0" y="-100" width="375" height="723"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPN-o3-NkU">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="723"/>
+                                        <connections>
+                                            <action selector="didTapMainOverlay:" destination="527-2C-xUs" eventType="touchUpInside" id="8Xh-Xh-t8n"/>
+                                            <action selector="didTapPlusMenuOverlay:" destination="527-2C-xUs" eventType="touchUpInside" id="ZZk-Qy-rbi"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="black 1"/>
+                                <constraints>
+                                    <constraint firstItem="pPN-o3-NkU" firstAttribute="top" secondItem="Oyb-sB-AfK" secondAttribute="top" id="7UT-P0-BV7"/>
+                                    <constraint firstItem="pPN-o3-NkU" firstAttribute="leading" secondItem="Oyb-sB-AfK" secondAttribute="leading" id="8yw-7W-eyn"/>
+                                    <constraint firstAttribute="bottom" secondItem="pPN-o3-NkU" secondAttribute="bottom" id="KfU-eT-qnf"/>
+                                    <constraint firstAttribute="trailing" secondItem="pPN-o3-NkU" secondAttribute="trailing" id="W29-uv-wzH"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Oyb-sB-AfK" secondAttribute="bottom" id="0Lz-ZB-Tig"/>
                             <constraint firstItem="Gku-Sf-ydu" firstAttribute="centerX" secondItem="D5A-mu-huD" secondAttribute="centerX" id="0Wo-Sf-0pc"/>
                             <constraint firstAttribute="bottom" secondItem="foz-3R-fXQ" secondAttribute="bottom" id="19I-Wk-2Mr"/>
                             <constraint firstItem="a5I-xG-79w" firstAttribute="centerY" secondItem="u6k-3z-5c2" secondAttribute="centerY" id="1OI-6Y-KQD"/>
+                            <constraint firstItem="Uiw-3k-ryZ" firstAttribute="top" secondItem="D5A-mu-huD" secondAttribute="top" id="1xo-lJ-9Ju"/>
                             <constraint firstItem="u6k-3z-5c2" firstAttribute="top" secondItem="rjC-iC-M0Y" secondAttribute="top" constant="-29" id="2nA-pZ-awb"/>
                             <constraint firstItem="rjC-iC-M0Y" firstAttribute="bottom" secondItem="uZP-da-pZ0" secondAttribute="bottom" id="2xh-Kb-cSu"/>
                             <constraint firstAttribute="trailing" secondItem="u6k-3z-5c2" secondAttribute="trailing" constant="28" id="95s-dH-jVt"/>
                             <constraint firstAttribute="bottom" secondItem="Zya-14-hoF" secondAttribute="bottom" id="9QM-Uj-7pl"/>
                             <constraint firstItem="Zya-14-hoF" firstAttribute="top" secondItem="D5A-mu-huD" secondAttribute="top" constant="-100" id="D1C-pd-kpW"/>
                             <constraint firstItem="foz-3R-fXQ" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" id="Djt-II-Z97"/>
+                            <constraint firstItem="Uiw-3k-ryZ" firstAttribute="leading" secondItem="D5A-mu-huD" secondAttribute="leading" constant="32" id="FMk-FI-dcg"/>
                             <constraint firstItem="rjC-iC-M0Y" firstAttribute="top" secondItem="DLF-Af-F6p" secondAttribute="bottom" constant="-1" id="FXc-hE-wRr"/>
                             <constraint firstItem="rjC-iC-M0Y" firstAttribute="trailing" secondItem="uZP-da-pZ0" secondAttribute="trailing" id="Fgo-BT-qbi"/>
                             <constraint firstItem="foz-3R-fXQ" firstAttribute="top" secondItem="rjC-iC-M0Y" secondAttribute="bottom" id="JX8-Vs-v9B"/>
@@ -1339,7 +1374,10 @@
                             <constraint firstAttribute="trailing" secondItem="Zya-14-hoF" secondAttribute="trailing" id="Yls-6M-l0p"/>
                             <constraint firstItem="0ux-Ej-c8V" firstAttribute="trailing" secondItem="uZP-da-pZ0" secondAttribute="trailing" id="b9I-7D-Acj"/>
                             <constraint firstItem="a5I-xG-79w" firstAttribute="centerX" secondItem="u6k-3z-5c2" secondAttribute="centerX" id="bVr-tB-WCt"/>
+                            <constraint firstItem="Oyb-sB-AfK" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" id="c8Y-Zy-dt2"/>
                             <constraint firstItem="Gku-Sf-ydu" firstAttribute="centerY" secondItem="D5A-mu-huD" secondAttribute="centerY" id="eAs-Dl-7GS"/>
+                            <constraint firstItem="Oyb-sB-AfK" firstAttribute="trailing" secondItem="uZP-da-pZ0" secondAttribute="trailing" id="fyV-iQ-f2A"/>
+                            <constraint firstItem="Oyb-sB-AfK" firstAttribute="top" secondItem="D5A-mu-huD" secondAttribute="top" constant="-100" id="h10-3y-bxK"/>
                             <constraint firstItem="DLF-Af-F6p" firstAttribute="top" secondItem="bCO-eg-Aiy" secondAttribute="bottom" constant="12" id="i1Z-cY-NEd"/>
                             <constraint firstItem="DLF-Af-F6p" firstAttribute="leading" secondItem="uZP-da-pZ0" secondAttribute="leading" id="jiv-a7-LRH"/>
                             <constraint firstItem="0ux-Ej-c8V" firstAttribute="top" secondItem="uZP-da-pZ0" secondAttribute="top" id="m0I-3P-rIS"/>
@@ -1380,6 +1418,8 @@
                         <outlet property="mainButton" destination="e02-bh-Lrg" id="HWH-tV-D4o"/>
                         <outlet property="mainButtonBackground" destination="zRh-zQ-jH3" id="NxD-kb-Kvb"/>
                         <outlet property="mainButtonTopToBottomConstraint" destination="2nA-pZ-awb" id="7AQ-SE-Zn7"/>
+                        <outlet property="mainOverlay" destination="Oyb-sB-AfK" id="tly-Je-c6M"/>
+                        <outlet property="menuTutorialAnchor" destination="Uiw-3k-ryZ" id="y2F-XW-Fso"/>
                         <outlet property="plusMenu" destination="a5I-xG-79w" id="swA-wp-jSB"/>
                         <outlet property="plusOverlay" destination="Zya-14-hoF" id="Y1w-5O-gpp"/>
                         <outlet property="riskActivesActivityIndicator" destination="V19-Lc-7wm" id="drq-Ca-SBk"/>

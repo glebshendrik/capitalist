@@ -87,7 +87,7 @@
 "qsy-Mq-t8B.text" = "Choose currency and wallets";
 
 /* Class = "UILabel"; text = "Перетаскивание монетки"; ObjectID = "foS-d8-GRA"; */
-"foS-d8-GRA.text" = "Dragging a coin";
+"foS-d8-GRA.text" = "Drag a coin or open additional menu";
 
 /* Class = "UILabel"; text = "Через дополнительное меню"; ObjectID = "mfe-ou-bZJ"; */
 "mfe-ou-bZJ.text" = "Through additional menu";

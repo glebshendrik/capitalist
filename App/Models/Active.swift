@@ -47,7 +47,7 @@ struct Active : Decodable {
     let incomeSource: IncomeSource?
     let prototypeKey: String?
     let accountConnection: AccountConnection? = nil
-    let fullSaleProfitCents: Int? = 0
+    let fullSaleProfitCents: Int?
     
     enum CodingKeys: String, CodingKey {
         case id

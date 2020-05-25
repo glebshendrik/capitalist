@@ -57,19 +57,24 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     @IBOutlet weak var plusMenu: FanMenu!
     @IBOutlet weak var plusOverlay: UIView!
+    @IBOutlet weak var mainOverlay: UIView!
     
     var titleView: TitleView!
     var transactionController: TransactionController!
     var rearrangeController: RearrangeController!
     var adviserTip: EasyTipView?
     
+    var tutorialTip: EasyTipView?
+    @IBOutlet weak var menuTutorialAnchor: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         loadData()
-        after(seconds: 3).done {
-            self.show(tipMessage: NSLocalizedString("Скоро здесь будет финансовый советник", comment: "Скоро здесь будет финансовый советник"))
-        }
+//        UIFlowManager.set(point: .incomeSourcesTutorial, reached: false)
+//        UIFlowManager.set(point: .debtsAndCreditsTutorial, reached: false)
+//        UIFlowManager.set(point: .settingsTutorial, reached: false)
+        show(tutorials)
     }
     
     override func viewDidLayoutSubviews() {
@@ -88,7 +93,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         super.viewDidAppear(animated)
         if !UIFlowManager.reached(point: .transactionCreationInfoMessage) {
             modal(factory.transactionCreationInfoViewController())
-        }
+        }        
     }
     
     @IBAction func didTapMainButton(_ sender: Any) {
@@ -108,8 +113,13 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         modal(factory.transactionCreationInfoViewController())
     }
     
-    @IBAction func didTapPlusMenuOverlay(_ sender: Any) {
+    @IBAction func didTapPlusMenuOverlay(_ sender: Any) {        
         plusMenu.close()
         setMenuOverlay(hidden: true)
+    }
+    
+    @IBAction func didTapMainOverlay(_ sender: Any) {
+        tutorialTip?.dismiss()
+        setMainOverlay(hidden: true)
     }
 }

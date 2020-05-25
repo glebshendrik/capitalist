@@ -8,6 +8,7 @@
 
 import UIKit
 import EasyTipView
+typealias TutorialPayload = (point: UIFlowPoint, message: String, anchor: UIAppearance,  position: EasyTipView.ArrowPosition, offset: CGPoint?, inset: CGPoint?)
 
 extension MainViewController {
     func tapMainButton() {
@@ -38,7 +39,7 @@ extension MainViewController {
         updateMainButtonUI()
         updateTotalUI(animated: true)
         if isSelecting {
-            updateAdviserTip()
+//            updateAdviserTip()
         }
         else {
             completeTransactionInteraction()            
@@ -62,6 +63,44 @@ extension MainViewController {
 }
 
 extension MainViewController : EasyTipViewDelegate {
+    var tutorials: [TutorialPayload] {
+        return [TutorialPayload(point: .incomeSourcesTutorial,
+                                message: NSLocalizedString("Добавляй источник дохода через меню или при создании транзакции дохода", comment: ""),
+                                anchor: menuTutorialAnchor,
+                                position: .top,
+                                offset: CGPoint(x: 15, y: 0),
+                                inset: nil),
+                TutorialPayload(point: .debtsAndCreditsTutorial,
+                                message: NSLocalizedString("Удобное управление долгами, займами и кредитами через меню", comment: ""),
+                                anchor: menuTutorialAnchor,
+                                position: .top,
+                                offset: CGPoint(x: 15, y: 0),
+                                inset: nil),
+                TutorialPayload(point: .settingsTutorial,
+                                message: NSLocalizedString("Регулируй скорость перетягивания монетки в настройках", comment: ""),
+                                anchor: menuTutorialAnchor,
+                                position: .top,
+                                offset: CGPoint(x: 15, y: 0),
+                                inset: nil)]
+    }
+    
+    func show(_ tutorials: [TutorialPayload]) {
+        guard let tutorial = tutorials.first(where: { !UIFlowManager.reached(point: $0.point) }) else {
+            show(tipMessage: NSLocalizedString("Скоро здесь будет финансовый советник", comment: "Скоро здесь будет финансовый советник"))
+            return
+        }
+        
+        setMainOverlay(hidden: false)
+        tutorialTip = tip(tutorial.message,
+                          position: tutorial.position,
+                          offset: tutorial.offset,
+                          inset: tutorial.inset,
+                          for: tutorial.anchor,
+                          within: view,
+                          delegate: self)
+        UIFlowManager.set(point: tutorial.point, reached: true)
+    }
+    
     private func showTransactionCreationInfoViewController() {
         slideUp(factory.transactionCreationInfoViewController(),
                 toBottomOf: expenseSourcesCollectionView,
@@ -69,42 +108,21 @@ extension MainViewController : EasyTipViewDelegate {
     }
     
     func show(tipMessage: String) {
-        adviserTip = tip(text: tipMessage, position: .left)
-        adviserTip?.show(animated: true, forView: titleView.tipAnchor, withinSuperview: titleView)
+        adviserTip = tip(tipMessage,
+                         position: .left,
+                         offset: nil,
+                         inset: CGPoint(x: 15, y: 2),
+                         for: titleView.tipAnchor,
+                         within: titleView,
+                         delegate: self)
     }
-    
-    func updateAdviserTip() {
-        func showAdviserTip() {
-            guard let tipMessage = self.viewModel.adviserTip else { return }            
-            show(tipMessage: tipMessage)
-        }
         
-        guard let tip = adviserTip else {
-            showAdviserTip()
-            return
-        }
-        tip.dismiss(withCompletion: {
-            showAdviserTip()
-        })
-    }
-    
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
-        
+        if tipView == tutorialTip {
+            setMainOverlay(hidden: true)
+            show(tutorials)
+        }
     }
-    
-    func tip(text: String, position: EasyTipView.ArrowPosition) -> EasyTipView {
-        var preferences = EasyTipView.Preferences()
-        preferences.drawing.font = UIFont(name: "Roboto-Light", size: 14)!
-        preferences.drawing.foregroundColor = UIColor.by(.white100)
-        preferences.drawing.backgroundColor = UIColor.by(.blue1)
-        preferences.drawing.arrowPosition = position
-        preferences.drawing.cornerRadius = 8
-        preferences.positioning.contentVInset = 2
-        preferences.animating.showDuration = 0.3
-        preferences.animating.dismissDuration = 0.2
-        
-        return EasyTipView(text: text, preferences: preferences, delegate: self)
-    }    
 }
 
 extension MainViewController {

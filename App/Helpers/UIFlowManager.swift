@@ -18,6 +18,11 @@ enum UIFlowPoint : String {
     case soundsManagerInitialization
     case verificationManagerInitialization
     case userPreferencesManagerInitialization
+    case incomeSourcesTutorial
+    case debtsAndCreditsTutorial
+    case settingsTutorial
+    case statisticsFiltersTutorial
+    case statisticsPeriodTutorial
 }
 
 class UIFlowManager {

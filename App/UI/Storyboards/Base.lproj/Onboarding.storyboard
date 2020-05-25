@@ -744,47 +744,34 @@
                                         <color key="textColor" name="white 1.0"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JdW-th-qj6">
-                                        <rect key="frame" x="32" y="72" width="311" height="214.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Перетаскивание монетки" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foS-d8-GRA">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="19"/>
-                                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
-                                                <color key="textColor" name="white 0.64"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="PyY-xq-zcv">
-                                                <rect key="frame" x="0.0" y="35" width="311" height="64.5"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Через дополнительное меню" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfe-ou-bZJ">
-                                                <rect key="frame" x="0.0" y="115.5" width="311" height="19"/>
-                                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
-                                                <color key="textColor" name="white 0.64"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="e5r-ac-70O">
-                                                <rect key="frame" x="0.0" y="150.5" width="311" height="64"/>
-                                            </imageView>
-                                        </subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Перетаскивание монетки" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foS-d8-GRA">
+                                        <rect key="frame" x="32" y="72" width="311" height="19"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
+                                        <color key="textColor" name="white 0.64"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="PyY-xq-zcv">
+                                        <rect key="frame" x="32" y="107" width="311" height="233.5"/>
                                         <constraints>
-                                            <constraint firstItem="PyY-xq-zcv" firstAttribute="height" secondItem="e5r-ac-70O" secondAttribute="height" id="Ygu-aK-2If"/>
-                                            <constraint firstItem="PyY-xq-zcv" firstAttribute="width" secondItem="e5r-ac-70O" secondAttribute="width" id="jeG-Ks-h99"/>
+                                            <constraint firstAttribute="width" secondItem="PyY-xq-zcv" secondAttribute="height" multiplier="4:3" id="Esh-Et-MKo"/>
                                         </constraints>
-                                    </stackView>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="JdW-th-qj6" firstAttribute="centerX" secondItem="aXu-tF-CDN" secondAttribute="centerX" id="4Mm-WF-iUx"/>
+                                    <constraint firstItem="foS-d8-GRA" firstAttribute="leading" secondItem="aXu-tF-CDN" secondAttribute="leading" constant="32" id="2CM-fN-azi"/>
+                                    <constraint firstItem="PyY-xq-zcv" firstAttribute="top" secondItem="foS-d8-GRA" secondAttribute="bottom" constant="16" id="4jd-rf-9lT"/>
+                                    <constraint firstAttribute="trailing" secondItem="PyY-xq-zcv" secondAttribute="trailing" constant="32" id="BeR-kV-UTY"/>
                                     <constraint firstItem="ddH-co-jCI" firstAttribute="leading" secondItem="aXu-tF-CDN" secondAttribute="leading" constant="24" id="EWX-7Z-rz2"/>
+                                    <constraint firstItem="PyY-xq-zcv" firstAttribute="leading" secondItem="aXu-tF-CDN" secondAttribute="leading" constant="32" id="L8M-Na-WZ5"/>
                                     <constraint firstAttribute="bottom" secondItem="ddH-co-jCI" secondAttribute="bottom" constant="24" id="M1t-iU-sPo"/>
                                     <constraint firstItem="Eap-zo-jtG" firstAttribute="leading" secondItem="aXu-tF-CDN" secondAttribute="leading" constant="24" id="RC3-lV-94P"/>
-                                    <constraint firstItem="JdW-th-qj6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aXu-tF-CDN" secondAttribute="leading" constant="32" id="RFB-En-MJn"/>
                                     <constraint firstAttribute="trailing" secondItem="ddH-co-jCI" secondAttribute="trailing" constant="24" id="XJc-OW-H2I"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JdW-th-qj6" secondAttribute="trailing" constant="32" id="cby-1D-bWX"/>
-                                    <constraint firstItem="JdW-th-qj6" firstAttribute="top" secondItem="Eap-zo-jtG" secondAttribute="bottom" constant="16" id="n4H-aT-naL"/>
+                                    <constraint firstItem="ddH-co-jCI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PyY-xq-zcv" secondAttribute="bottom" constant="16" id="fMU-8z-KOI"/>
                                     <constraint firstItem="Eap-zo-jtG" firstAttribute="top" secondItem="aXu-tF-CDN" secondAttribute="top" id="nGZ-bN-7IT"/>
-                                    <constraint firstItem="ddH-co-jCI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JdW-th-qj6" secondAttribute="bottom" constant="24" id="nn9-Cj-wiA"/>
+                                    <constraint firstItem="foS-d8-GRA" firstAttribute="top" secondItem="Eap-zo-jtG" secondAttribute="bottom" constant="16" id="s3E-ar-Uxf"/>
                                     <constraint firstAttribute="trailing" secondItem="Eap-zo-jtG" secondAttribute="trailing" constant="24" id="w5D-nn-KzF"/>
+                                    <constraint firstAttribute="trailing" secondItem="foS-d8-GRA" secondAttribute="trailing" constant="32" id="z1r-Ug-bUG"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -803,7 +790,6 @@
                         <viewLayoutGuide key="safeArea" id="66E-il-B7T"/>
                     </view>
                     <connections>
-                        <outlet property="plusMenuTutorialImageView" destination="e5r-ac-70O" id="pDo-Qx-rx5"/>
                         <outlet property="tutorialImageView" destination="PyY-xq-zcv" id="cI9-6v-opH"/>
                     </connections>
                 </viewController>

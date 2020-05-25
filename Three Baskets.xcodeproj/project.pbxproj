@@ -357,10 +357,8 @@
 		FABE55052340916B00DF2B70 /* CreditEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE55042340916B00DF2B70 /* CreditEditTableController.swift */; };
 		FABE55072340918000DF2B70 /* CreditEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE55062340918000DF2B70 /* CreditEditViewController.swift */; };
 		FABE55092341132200DF2B70 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE55082341132100DF2B70 /* Slider.swift */; };
-		FABFB512247A97A4004776C2 /* plus-menu-tutorial-ru.gif in Resources */ = {isa = PBXBuildFile; fileRef = FABFB50E247A97A3004776C2 /* plus-menu-tutorial-ru.gif */; };
-		FABFB513247A97A4004776C2 /* drag-tutorial-ru.gif in Resources */ = {isa = PBXBuildFile; fileRef = FABFB50F247A97A3004776C2 /* drag-tutorial-ru.gif */; };
-		FABFB514247A97A4004776C2 /* drag-tutorial-en.gif in Resources */ = {isa = PBXBuildFile; fileRef = FABFB510247A97A3004776C2 /* drag-tutorial-en.gif */; };
-		FABFB515247A97A4004776C2 /* plus-menu-tutorial-en.gif in Resources */ = {isa = PBXBuildFile; fileRef = FABFB511247A97A3004776C2 /* plus-menu-tutorial-en.gif */; };
+		FABFB518247BA34F004776C2 /* drag-tutorial-en.gif in Resources */ = {isa = PBXBuildFile; fileRef = FABFB516247BA34E004776C2 /* drag-tutorial-en.gif */; };
+		FABFB519247BA34F004776C2 /* drag-tutorial-ru.gif in Resources */ = {isa = PBXBuildFile; fileRef = FABFB517247BA34F004776C2 /* drag-tutorial-ru.gif */; };
 		FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */; };
 		FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */; };
 		FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */; };
@@ -856,10 +854,8 @@
 		FABE55042340916B00DF2B70 /* CreditEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditEditTableController.swift; sourceTree = "<group>"; };
 		FABE55062340918000DF2B70 /* CreditEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditEditViewController.swift; sourceTree = "<group>"; };
 		FABE55082341132100DF2B70 /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
-		FABFB50E247A97A3004776C2 /* plus-menu-tutorial-ru.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "plus-menu-tutorial-ru.gif"; sourceTree = "<group>"; };
-		FABFB50F247A97A3004776C2 /* drag-tutorial-ru.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "drag-tutorial-ru.gif"; sourceTree = "<group>"; };
-		FABFB510247A97A3004776C2 /* drag-tutorial-en.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "drag-tutorial-en.gif"; sourceTree = "<group>"; };
-		FABFB511247A97A3004776C2 /* plus-menu-tutorial-en.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "plus-menu-tutorial-en.gif"; sourceTree = "<group>"; };
+		FABFB516247BA34E004776C2 /* drag-tutorial-en.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "drag-tutorial-en.gif"; sourceTree = "<group>"; };
+		FABFB517247BA34F004776C2 /* drag-tutorial-ru.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "drag-tutorial-ru.gif"; sourceTree = "<group>"; };
 		FAC3B9B521B936CD0015A12F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		FAC3B9B721B952950015A12F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		FAC3B9B921B9FF5F0015A12F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
@@ -2245,10 +2241,8 @@
 		FAF3BC80241A1CBA007F46FE /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				FABFB510247A97A3004776C2 /* drag-tutorial-en.gif */,
-				FABFB50F247A97A3004776C2 /* drag-tutorial-ru.gif */,
-				FABFB511247A97A3004776C2 /* plus-menu-tutorial-en.gif */,
-				FABFB50E247A97A3004776C2 /* plus-menu-tutorial-ru.gif */,
+				FABFB516247BA34E004776C2 /* drag-tutorial-en.gif */,
+				FABFB517247BA34F004776C2 /* drag-tutorial-ru.gif */,
 				FAF3BC83241A4BCD007F46FE /* launch-animation.gif */,
 			);
 			path = Images;
@@ -2327,6 +2321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FABFB518247BA34F004776C2 /* drag-tutorial-en.gif in Resources */,
 				FAF31CE72403712E00D4CFB3 /* Main.storyboard in Resources */,
 				FAA4261A22365DEE00B64925 /* TitleView.xib in Resources */,
 				FAF31CFC240371B800D4CFB3 /* Settings.storyboard in Resources */,
@@ -2341,7 +2336,6 @@
 				FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */,
 				FAF31CBB2403705C00D4CFB3 /* Common.storyboard in Resources */,
 				FAAC99BD23B31A59009ADB84 /* Roboto-Black.ttf in Resources */,
-				FABFB512247A97A4004776C2 /* plus-menu-tutorial-ru.gif in Resources */,
 				FAAC99B823B31A59009ADB84 /* Roboto-Italic.ttf in Resources */,
 				FA16FC82223BBE0E0053C273 /* coin-roll-drop.wav in Resources */,
 				FAF31CAD2403700300D4CFB3 /* Actives.storyboard in Resources */,
@@ -2368,17 +2362,15 @@
 				FAE4497F229688C400E3DD27 /* Balance.storyboard in Resources */,
 				FA26814621B178D300FADED1 /* Rubik-BlackItalic.ttf in Resources */,
 				FAAC99BA23B31A59009ADB84 /* Roboto-BlackItalic.ttf in Resources */,
-				FABFB513247A97A4004776C2 /* drag-tutorial-ru.gif in Resources */,
+				FABFB519247BA34F004776C2 /* drag-tutorial-ru.gif in Resources */,
 				FAAC99B523B31A59009ADB84 /* Roboto-ThinItalic.ttf in Resources */,
 				FACC0201224CCDEE0044A747 /* StatisticsTitleView.xib in Resources */,
-				FABFB515247A97A4004776C2 /* plus-menu-tutorial-en.gif in Resources */,
 				FA26814221B178D300FADED1 /* Rubik-Black.ttf in Resources */,
 				FACC01FB224CBF150044A747 /* TransactionsSectionHeaderView.xib in Resources */,
 				FAD88F0121AEA87300BE7BC1 /* Assets.xcassets in Resources */,
 				FA26814121B178D300FADED1 /* Rubik-Medium.ttf in Resources */,
 				FAAC99B423B31A59009ADB84 /* Roboto-MediumItalic.ttf in Resources */,
 				FAAC99B323B31A59009ADB84 /* Roboto-Regular.ttf in Resources */,
-				FABFB514247A97A4004776C2 /* drag-tutorial-en.gif in Resources */,
 				FAF31CC92403709000D4CFB3 /* ExpenseCategories.storyboard in Resources */,
 				FAAC99B723B31A59009ADB84 /* Roboto-LightItalic.ttf in Resources */,
 				FA0A4E87246D4BF700886277 /* TransactionEditTitleView.xib in Resources */,
@@ -3200,7 +3192,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 58;
+				CURRENT_PROJECT_VERSION = 59;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
@@ -3309,7 +3301,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 58;
+				CURRENT_PROJECT_VERSION = 59;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
