@@ -11,6 +11,7 @@ import SwiftyGif
 
 class TransactionCreationInfoViewController : UIViewController {    
     @IBOutlet weak var tutorialImageView: UIImageView!
+    @IBOutlet weak var plusMenuTutorialImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()        
@@ -30,6 +31,10 @@ class TransactionCreationInfoViewController : UIViewController {
     private func showTutorial() {
         if let gif = try? UIImage(gifName: NSLocalizedString("drag-tutorial", comment: "drag-tutorial")) {
             tutorialImageView.setGifImage(gif, manager: SwiftyGifManager.defaultManager, loopCount: -1)
+        }
+        
+        if let gif = try? UIImage(gifName: NSLocalizedString("plus-menu-tutorial", comment: "plus-menu-tutorial")) {
+            plusMenuTutorialImageView.setGifImage(gif, manager: SwiftyGifManager.defaultManager, loopCount: -1)
         }
     }
 }

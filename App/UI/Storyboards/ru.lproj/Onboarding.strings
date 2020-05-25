@@ -24,7 +24,7 @@
 "DMf-kA-n3k.normalTitle" = "Назад";
 
 /* Class = "UILabel"; text = "Для отображения доходов и расходов используйте перетаскивание"; ObjectID = "Eap-zo-jtG"; */
-"Eap-zo-jtG.text" = "Для отображения доходов и расходов используйте перетаскивание";
+"Eap-zo-jtG.text" = "Способы создания транзакций";
 
 /* Class = "UILabel"; text = "ПРАВИЛА"; ObjectID = "GW9-xU-u9U"; */
 "GW9-xU-u9U.text" = "ПРАВИЛА";
@@ -85,3 +85,9 @@
 
 /* Class = "UILabel"; text = "Выберите валюту и кошельки"; ObjectID = "qsy-Mq-t8B"; */
 "qsy-Mq-t8B.text" = "Выберите валюту и кошельки";
+
+/* Class = "UILabel"; text = "Перетаскивание монетки"; ObjectID = "foS-d8-GRA"; */
+"foS-d8-GRA.text" = "Перетаскивание монетки";
+
+/* Class = "UILabel"; text = "Через дополнительное меню"; ObjectID = "mfe-ou-bZJ"; */
+"mfe-ou-bZJ.text" = "Через дополнительное меню";

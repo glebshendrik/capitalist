@@ -24,7 +24,7 @@
 "DMf-kA-n3k.normalTitle" = "Back";
 
 /* Class = "UILabel"; text = "Для отображения доходов и расходов используйте перетаскивание"; ObjectID = "Eap-zo-jtG"; */
-"Eap-zo-jtG.text" = "Use drag and drop to display revenue and expenses";
+"Eap-zo-jtG.text" = "Ways to create transactions";
 
 /* Class = "UILabel"; text = "ПРАВИЛА"; ObjectID = "GW9-xU-u9U"; */
 "GW9-xU-u9U.text" = "RULES";
@@ -85,3 +85,12 @@
 
 /* Class = "UILabel"; text = "Выберите валюту и кошельки"; ObjectID = "qsy-Mq-t8B"; */
 "qsy-Mq-t8B.text" = "Choose currency and wallets";
+
+/* Class = "UILabel"; text = "Перетаскивание монетки"; ObjectID = "foS-d8-GRA"; */
+"foS-d8-GRA.text" = "Dragging a coin";
+
+/* Class = "UILabel"; text = "Через дополнительное меню"; ObjectID = "mfe-ou-bZJ"; */
+"mfe-ou-bZJ.text" = "Through additional menu";
+
+
+

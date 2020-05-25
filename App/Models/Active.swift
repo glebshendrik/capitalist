@@ -74,7 +74,7 @@ struct Active : Decodable {
         case alreadyPaidCents = "already_paid_cents"
         case incomeSource = "income_source"
         case prototypeKey = "prototype_key"
-//        case fullSaleProfitCents = "full_sale_profit_cents"
+        case fullSaleProfitCents = "full_sale_profit"
 //        case accountConnection = "account_connection"
     }
 }
