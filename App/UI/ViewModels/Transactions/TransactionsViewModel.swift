@@ -89,6 +89,14 @@ class TransactionsViewModel {
                     filtersHash[.active]?[sourceActiveId] != nil {
                     return true
                 }
+                if let sourceIncomeSourceId = transaction.sourceIncomeSourceId,
+                    transaction.hasPositiveProfit,
+                    transaction.type == .fundsMove,
+                    transaction.destinationType == .expenseSource,
+                    transaction.sourceType == .active,
+                    filtersHash[.incomeSource]?[sourceIncomeSourceId] != nil {
+                    return true
+                }
                 
                 return false
             }

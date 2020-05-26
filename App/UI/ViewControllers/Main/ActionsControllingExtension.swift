@@ -86,7 +86,7 @@ extension MainViewController : EasyTipViewDelegate {
     
     func show(_ tutorials: [TutorialPayload]) {
         guard let tutorial = tutorials.first(where: { !UIFlowManager.reached(point: $0.point) }) else {
-            show(tipMessage: NSLocalizedString("Скоро здесь будет финансовый советник", comment: "Скоро здесь будет финансовый советник"))
+            showAdviserTip()
             return
         }
         
@@ -107,14 +107,14 @@ extension MainViewController : EasyTipViewDelegate {
                 shouldDim: true)
     }
     
-    func show(tipMessage: String) {
-        adviserTip = tip(tipMessage,
+    func showAdviserTip() {
+        adviserTip = tip(NSLocalizedString("Скоро здесь будет финансовый советник", comment: "Скоро здесь будет финансовый советник"),
                          position: .left,
                          offset: nil,
                          inset: CGPoint(x: 15, y: 2),
                          for: titleView.tipAnchor,
                          within: titleView,
-                         delegate: self)
+                         delegate: self)        
     }
         
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {

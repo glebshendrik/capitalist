@@ -340,6 +340,10 @@ class TransactionViewModel {
         return transaction.sourceActiveIconURL
     }
     
+    var sourceIncomeSourceId: Int? {
+        return transaction.sourceIncomeSourceId
+    }
+    
     var titleTransactionPart: TransactionPart {
         switch (type, sourceType, destinationType) {
         case (.income, .incomeSource, _):

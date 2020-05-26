@@ -93,7 +93,13 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         super.viewDidAppear(animated)
         if !UIFlowManager.reached(point: .transactionCreationInfoMessage) {
             modal(factory.transactionCreationInfoViewController())
-        }        
+        }
+        adviserTip?.show(animated: true, forView: titleView.tipAnchor, withinSuperview: titleView)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        adviserTip?.dismiss()
     }
     
     @IBAction func didTapMainButton(_ sender: Any) {
