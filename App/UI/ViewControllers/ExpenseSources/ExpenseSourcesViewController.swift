@@ -277,18 +277,25 @@ extension ExpenseSourcesViewController : SwipeTableViewCellDelegate {
                                                       handler: removeWithTransactionsAction)]
         sheet(title: alertTitle, actions: actions)
     }
+    
+    func postFinantialDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+    }
 }
 
 extension ExpenseSourcesViewController : ExpenseSourceEditViewControllerDelegate {
     func didCreateExpenseSource() {
         refreshData()
+        postFinantialDataUpdated()
     }
     
     func didUpdateExpenseSource() {
         refreshData()
+        postFinantialDataUpdated()
     }
     
     func didRemoveExpenseSource() {
         refreshData()
+        postFinantialDataUpdated()
     }
 }

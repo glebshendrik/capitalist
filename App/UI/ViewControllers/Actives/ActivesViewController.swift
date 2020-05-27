@@ -294,18 +294,25 @@ extension ActivesViewController : SwipeTableViewCellDelegate {
                                                       handler: removeWithTransactionsAction)]
         sheet(title: alertTitle, actions: actions)
     }
+    
+    func postFinantialDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+    }
 }
 
 extension ActivesViewController : ActiveEditViewControllerDelegate {
     func didCreateActive(with basketType: BasketType, name: String, isIncomePlanned: Bool) {
         refreshData()
+        postFinantialDataUpdated()
     }
     
     func didUpdateActive(with basketType: BasketType) {
         refreshData()
+        postFinantialDataUpdated()
     }
     
     func didRemoveActive(with basketType: BasketType) {
         refreshData()
+        postFinantialDataUpdated()
     }
 }
