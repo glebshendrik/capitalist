@@ -77,7 +77,7 @@ struct Transaction : Decodable {
     let sourceActiveIconURL: URL?
     let active: Active?
     let profitCents: Int?
-    let sourceIncomeSourceId: Int? = nil
+    let sourceIncomeSourceId: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -115,9 +115,8 @@ struct Transaction : Decodable {
         case sourceActiveIconURL = "source_active_icon_url"
         case active = "active"
         case profitCents = "profit"
-//        case sourceIncomeSourceId = "source_income_source_id"
-    }
-    
+        case sourceIncomeSourceId = "source_income_source_id"
+    }    
 }
 
 struct TransactionCreationForm : Encodable, Validatable {
