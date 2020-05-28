@@ -94,7 +94,9 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     func createAndAuthenticateUser(with userForm: UserCreationForm) -> Promise<Session> {
         return  firstly {
                     usersService.createUser(with: userForm)
-                }.then { user in
+                }.get { user in
+                    self.analyticsManager.trackSignUp(user: user)
+                }.then { user in                    
                     self.authenticate(with: SessionCreationForm(email: userForm.email, password: userForm.password))
                 }
     }

@@ -16,4 +16,5 @@ protocol AnalyticsManagerProtocol {
     func setup()
     func set(userId: String)
     func track(event: String, parameters: [String : Any]?)
+    func trackSignUp(user: User)
 }

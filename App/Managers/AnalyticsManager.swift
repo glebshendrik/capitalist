@@ -30,4 +30,14 @@ class AnalyticsManager : AnalyticsManagerProtocol {
         AppEvents.logEvent(AppEvents.Name(event), parameters: parameters ?? [:])
         MRMyTracker.trackEvent(withName: event, eventParams: parameters?.compactMapValues { "\($0)" })
     }
+    
+    func trackSignUp(user: User) {
+        Analytics.logEvent(AnalyticsEventSignUp, parameters: [AnalyticsParameterSignUpMethod: "email"])
+        
+        AppEvents.logEvent(.completedRegistration)
+        AppEvents.setUser(email: user.email, firstName: user.firstname, lastName: user.lastname, phone: nil, dateOfBirth: nil, gender: nil, city: nil, state: nil, zip: nil, country: nil)
+        
+        MRMyTracker.trackRegistrationEvent()
+        MRMyTracker.trackerParams().email = user.email
+    }
 }
