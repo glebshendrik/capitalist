@@ -212,7 +212,8 @@ extension ProvidersViewController : ProviderConnectionViewControllerDelegate {
             self.messagePresenterManager.dismissHUD()
         }.get { providerViewModel in
             self.showProviderConnectionViewController(for: providerViewModel)
-        }.catch { _ in
+        }.catch { e in
+            print(e)
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
         }
     }

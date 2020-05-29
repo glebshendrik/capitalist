@@ -33,8 +33,8 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
     }
     
     func setup() {
-        saltEdgeManager.set(appId: "k_ZACkXsT4SeBeKKa34VE8Vd51cV7EXKPMQ3cehUKTU",
-                            appSecret: "qwAHuXb94vnQXZIzQ1Mw-vQrvcQZNawtq3Oy2706bDY")
+        saltEdgeManager.set(appId: "eKNImuTofAJB4l6dGvcTr95ghTTh3zDa0HwNkVv8AL8",
+                            appSecret: "z3_Hs33KX1DDa-kj2bwLlSIjWzFzif3ScebPRqzHzOA")
     }
     
     func loadProviders(country: String?) -> Promise<[SEProvider]> {
