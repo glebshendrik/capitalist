@@ -10,6 +10,7 @@ import Foundation
 import PromiseKit
 import StoreKit
 import ApphudSDK
+import SwiftyBeaver
 
 enum AuthProviderError : Error {
     case emailHasAlreadyUsed
@@ -143,6 +144,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
                 }.get { user in
                     self.router.setMinimumAllowed(version: user.minVersion, build: user.minBuild)
                     self.analyticsManager.set(userId: String(user.id))
+                    SwiftyBeaver.cloud?.analyticsUserName = "user_id:\(user.id)"
                     Apphud.updateUserID(String(user.id))
                 }
     }

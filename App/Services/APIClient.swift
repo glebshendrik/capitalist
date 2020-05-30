@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import PromiseKit
 import SwifterSwift
+import SwiftyBeaver
 
 enum APIRequestError: Error {
     case sendingFailed
@@ -42,8 +43,10 @@ extension JSONDecoder.DateDecodingStrategy {
         let container = try $0.singleValueContainer()
         let string = try container.decode(String.self)
         guard let date = Formatter.iso8601.date(from: string) else {
-            throw DecodingError.dataCorruptedError(in: container,
-                                                   debugDescription: "Invalid date: " + string)
+            let error = DecodingError.dataCorruptedError(in: container,
+                                                         debugDescription: "Invalid date: " + string)
+            SwiftyBeaver.error(error)
+            throw error
         }
         return date
     }
@@ -64,7 +67,7 @@ class APIClient : APIClientProtocol {
     }
     
     func request<T>(_ resource: APIRoute) -> Promise<T> where T : Decodable {
-        return performRequest(resource).map { (json, _) in
+        return performRequest(resource).map { (json, response) in
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
             
@@ -74,9 +77,14 @@ class APIClient : APIClientProtocol {
                     let object = try? decoder.decode(T.self, withJSONObject: objectDictionary) {
                     return object
                 }
+                SwiftyBeaver.error(response)
+                if let jsonDictionary = json as? [String : Any] {
+                    SwiftyBeaver.error(jsonDictionary)
+                }
                 throw APIRequestError.mappingFailed
             }
-            catch {
+            catch {                
+                SwiftyBeaver.error(error)
                 throw error
             }
         }
@@ -102,9 +110,14 @@ class APIClient : APIClientProtocol {
                     let totalCount = (response.response?.allHeaderFields["Items_total_count"] as? String)?.int
                     return (objects, totalCount)
                 }
+                SwiftyBeaver.error(response)
+                if let jsonDictionary = json as? [String : Any] {
+                    SwiftyBeaver.error(jsonDictionary)
+                }
                 throw APIRequestError.mappingFailed
             }
             catch {
+                SwiftyBeaver.error(error)
                 throw error
             }
         }
@@ -137,6 +150,7 @@ class APIClient : APIClientProtocol {
                 .validate(requestValidator)
                 .responseJSON()
         } catch {
+            SwiftyBeaver.error(error)
             return Promise(error: error)
         }
     }
@@ -151,6 +165,7 @@ class APIClient : APIClientProtocol {
         case 403:
             return .failure(APIRequestError.forbidden)
         case 404:
+            SwiftyBeaver.error(response)
             return .failure(APIRequestError.notFound)
         case 405:
             return .failure(APIRequestError.methodNotAllowed)
@@ -179,16 +194,19 @@ class APIClient : APIClientProtocol {
                     }
                     return .failure(APIRequestError.unprocessedEntity(errors: errorMessages))
                 } catch {
+                    SwiftyBeaver.error(response)
+                    SwiftyBeaver.error(error)
                     return .failure(
                         AFError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)))
                 }
             }
             return .failure(APIRequestError.unprocessedEntity(errors: [:]))
         case 423:
+            SwiftyBeaver.error(response)
             return .failure(APIRequestError.locked)
         case 426:
+            SwiftyBeaver.error(response)
             return .failure(APIRequestError.upgradeRequired)
-            
         default: return .success
         }
     }

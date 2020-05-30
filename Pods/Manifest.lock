@@ -189,6 +189,7 @@ PODS:
   - SwiftMessages (6.0.0):
     - SwiftMessages/App (= 6.0.0)
   - SwiftMessages/App (6.0.0)
+  - SwiftyBeaver (1.9.1)
   - SwiftyGif (5.2.0)
   - Swinject (2.6.2)
   - SwinjectAutoregistration (2.6.0):
@@ -242,6 +243,7 @@ DEPENDENCIES:
   - SwiftDate (~> 6.1)
   - SwifterSwift (~> 5.1)
   - SwiftMessages
+  - SwiftyBeaver
   - SwiftyGif
   - Swinject (= 2.6.2)
   - SwinjectAutoregistration (= 2.6.0)
@@ -307,6 +309,7 @@ SPEC REPOS:
     - Protobuf
     - SaltEdge-iOS-Swift
     - SwifterSwift
+    - SwiftyBeaver
     - SwiftyGif
     - Swinject
     - SwinjectStoryboard
@@ -395,6 +398,7 @@ SPEC CHECKSUMS:
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
   SwifterSwift: a9e8e144832638c2850b43da5feaf9598c6ad65b
   SwiftMessages: da7c981256a65b3e58022d9027a36584cf4eccf5
+  SwiftyBeaver: a1f5691458561414bcfab51874b2b7445451602b
   SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   Swinject: cf7458774b1b00323080a9c67e47a1ee7f9d2af1
   SwinjectAutoregistration: 93a908f7543c401b0c315305ac0ae501efdbce89
@@ -403,6 +407,6 @@ SPEC CHECKSUMS:
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
 
-PODFILE CHECKSUM: 3fdb2c7a3a1e485003a6e4545196aad27f17556a
+PODFILE CHECKSUM: fa45d0663f004c226c997e1a2d3d74ec4d272138
 
 COCOAPODS: 1.8.0

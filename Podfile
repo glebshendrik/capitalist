@@ -54,6 +54,7 @@ target 'Three Baskets' do
   pod 'SwipeCellKit'
   pod 'BadgeHub'
   pod 'Macaw'
+  pod 'SwiftyBeaver'
 end
 
 post_install do |installer|

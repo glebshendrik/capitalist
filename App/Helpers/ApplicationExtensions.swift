@@ -15,6 +15,13 @@ import Haptica
 import ESPullToRefresh
 import SafariServices
 import EasyTipView
+import SwiftyBeaver
+
+extension SwiftyBeaver {
+    static var cloud: SBPlatformDestination? {
+        return SwiftyBeaver.destinations.first(where: { $0 is SBPlatformDestination } ) as? SBPlatformDestination
+    }
+}
 
 extension UITableView {
     func reloadData(with animation: UITableView.RowAnimation) {        
