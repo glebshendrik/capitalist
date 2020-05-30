@@ -20,6 +20,7 @@ enum APIRoute: URLRequestConvertible {
 //            return "https://test.threebaskets.net"
 //            return "https://skrudz.tempio.app"
 //            return "https://staging.threebaskets.net"
+//            return "https://prod.threebaskets.net"
         case .testFlight:
             return "https://api.threebaskets.net"
 //            return "https://skrudz.tempio.app"

@@ -26,6 +26,7 @@ ${BUILT_PRODUCTS_DIR}/MSPeekCollectionViewDelegateImplementation/MSPeekCollectio
 ${BUILT_PRODUCTS_DIR}/Macaw/Macaw.framework
 ${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework
 ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
+${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework
 ${BUILT_PRODUCTS_DIR}/RandomColorSwift/RandomColorSwift.framework
 ${BUILT_PRODUCTS_DIR}/RecurrencePicker/RecurrencePicker.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
