@@ -25,4 +25,5 @@ protocol ApplicationRouterProtocol {
     func setWindow(blurred: Bool)
     func showPasscodeScreen()
     func dismissPresentedAlerts()
+    func postDataUpdated()
 }

@@ -199,6 +199,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             return false
         }
     }
+    
+    func postDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+    }
 }
 
 extension ApplicationRouter {
