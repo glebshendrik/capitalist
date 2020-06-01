@@ -145,6 +145,7 @@ class APIClient : APIClientProtocol {
                 request.addValue("Token token=\(authToken)",
                     forHTTPHeaderField: "Authorization")
             }
+            request.addValue(TimeZone.autoupdatingCurrent.identifier, forHTTPHeaderField: "X-Timezone")
             return Alamofire
                 .request(request)
                 .validate(requestValidator)
@@ -156,7 +157,9 @@ class APIClient : APIClientProtocol {
     }
     
     private func requestValidator(request: URLRequest?, response: HTTPURLResponse, data: Data?) -> Request.ValidationResult {
-        
+        if response.statusCode >= 500 {
+            SwiftyBeaver.error(response)
+        }
         switch response.statusCode {
         case 401:
             return .failure(APIRequestError.notAuthorized)

@@ -167,7 +167,8 @@ extension MainViewController {
             self.update(self.joyExpenseCategoriesCollectionView,
                         scrollToEnd: scrollToEndWhenUpdated)
         }
-        .catch { _ in
+        .catch { e in
+            print(e)
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки категорий трат", comment: "Ошибка загрузки категорий трат"), theme: .error)
         }.finally {
             self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)
@@ -213,7 +214,8 @@ extension MainViewController {
             self.update(self.basketItemsCollectionView(by: basketType),
                         scrollToEnd: scrollToEndWhenUpdated)
         }
-        .catch { _ in
+        .catch { e in
+            print(e)
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки активов", comment: "Ошибка загрузки активов"), theme: .error)
         }.finally {
             self.set(self.basketItemsActivityIndicator(by: basketType), hidden: true)

@@ -15,10 +15,8 @@ import FirebaseMessaging
 class AnalyticsManager : AnalyticsManagerProtocol {    
     func setup() {
         FirebaseApp.configure()
-        FirebaseConfiguration.shared.setLoggerLevel(.max)
+        FirebaseConfiguration.shared.setLoggerLevel(.error)
         MRMyTracker.setupTracker("86955137780758326245")
-//        Messaging.messaging().isAutoInitEnabled
-//        Messaging.messaging().delegate = self
     }
         
     func set(userId: String) {
