@@ -15,12 +15,15 @@ class TransactionsSection : StatisticsViewSection {
     var type: StatisticsViewSectionType { return .transactions }
     
     let date: Date
+    let amount: String?
     private let transactionViewModels: [TransactionViewModel]
     
     init(date: Date,
-         transactionViewModels: [TransactionViewModel]) {
+         transactionViewModels: [TransactionViewModel],
+         amount: String?) {
         self.date = date
         self.transactionViewModels = transactionViewModels
+        self.amount = amount
     }
     
     func transactionViewModel(at index: Int) -> TransactionViewModel? {
