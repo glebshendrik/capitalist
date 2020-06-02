@@ -98,9 +98,46 @@ class StatisticsViewModel {
     
     private func updateTransactionsSections() {
         let groups = transactionsViewModel.filteredTransactionViewModels.groupByKey { $0.gotAtStartOfDay }
+        
         transactionsSections = groups
-            .map { TransactionsSection(date: $0.key, transactionViewModels: $0.value) }
+            .map { TransactionsSection(date: $0.key, transactionViewModels: $0.value, amount: amountForSection(transactions: $0.value)) }
             .sorted(by: { $0.date > $1.date })
+    }
+    
+    private func amountForSection(transactions: [TransactionViewModel]) -> String? {
+        
+        var incomes = transactions.filter { $0.type == .income || $0.hasPositiveProfit }
+        
+        var expenses = transactions.filter { $0.type == .expense || $0.hasNegativeProfit }
+        
+        func amountCents() -> NSDecimalNumber {
+            switch graphViewModel.graphType {
+            case .all:
+                return transactionsViewModel.transactionsAmount(transactions: incomes).subtracting(transactionsViewModel.transactionsAmount(transactions: expenses))
+            case .incomes:
+                return transactionsViewModel.transactionsAmount(transactions: incomes)
+            case .expenses:
+                return transactionsViewModel.transactionsAmount(transactions: expenses)
+            }
+        }
+        
+        let cents = amountCents()
+        
+        guard !cents.isEqual(0) else { return nil }
+        
+        guard let amount = cents.moneyCurrencyString(with: transactionsViewModel.defaultCurrency, shouldRound: false) else { return nil }
+        
+        switch graphViewModel.graphType {
+        case .all:
+            if cents.intValue > 0 {
+                return "+\(amount)"
+            }
+            return amount
+        case .incomes:
+            return "+\(amount)"
+        case .expenses:
+            return "–\(amount)"
+        }
     }
     
     private func updateSections() {

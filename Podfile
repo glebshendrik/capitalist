@@ -47,12 +47,14 @@ target 'Three Baskets' do
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
   pod 'Firebase/DynamicLinks'
+  pod 'Firebase/Messaging'
   pod 'FBSDKCoreKit/Swift'
   pod 'myTrackerSDK'
   pod "Haptica"
   pod 'SwipeCellKit'
   pod 'BadgeHub'
   pod 'Macaw'
+  pod 'SwiftyBeaver'
 end
 
 post_install do |installer|

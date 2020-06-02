@@ -180,7 +180,7 @@ class TransactionViewModel {
             return "+"
         }
         if type == .expense || isAssetCostDecrement {
-            return "-"
+            return "–"
         }
         return ""
     }

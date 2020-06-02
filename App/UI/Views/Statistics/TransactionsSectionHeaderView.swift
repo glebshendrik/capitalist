@@ -13,10 +13,13 @@ class TransactionsSectionHeaderView: UITableViewHeaderFooterView {
     static let requiredHeight: CGFloat = 40.0
     
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var amountButton: UIButton!
     
     var section: TransactionsSection? {
         didSet {
-            dateLabel.text = section?.title
+            title = section?.title
+            amountButton.setTitle(section?.amount, for: .normal)
+            amountButton.isHidden = section?.amount == nil
         }
     }
     

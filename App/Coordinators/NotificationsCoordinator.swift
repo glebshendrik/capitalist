@@ -10,6 +10,7 @@ import Foundation
 import PromiseKit
 import ApphudSDK
 import FBSDKCoreKit
+import FirebaseMessaging
 
 class NotificationsCoordinator : NotificationsCoordinatorProtocol {
     private let userSessionManager: UserSessionManagerProtocol
@@ -33,6 +34,7 @@ class NotificationsCoordinator : NotificationsCoordinatorProtocol {
         }
         Apphud.submitPushNotificationsToken(token: deviceToken, callback: nil)
         AppEvents.setPushNotificationsDeviceToken(deviceToken)
+        Messaging.messaging().setAPNSToken(deviceToken, type: .unknown)
         return devicesService.register(deviceToken: deviceToken, userId: currentUserId)
     }
 }
