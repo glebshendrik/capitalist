@@ -1,0 +1,15 @@
+//
+//  ProviderConnectionsServiceProtocol.swift
+//  Three Baskets
+//
+//  Created by Alexander Petropavlovsky on 03/07/2019.
+//  Copyright © 2019 Real Tranzit. All rights reserved.
+//
+
+import Foundation
+import PromiseKit
+
+protocol ConnectionsServiceProtocol {
+    func index(for userId: Int, providerId: String) -> Promise<[Connection]>
+    func create(with creationForm: ConnectionCreationForm) -> Promise<Connection>
+}

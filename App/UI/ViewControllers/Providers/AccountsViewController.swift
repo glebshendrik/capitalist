@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 
 protocol AccountsViewControllerDelegate {
-    func didSelect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection)
+    func didSelect(accountViewModel: AccountViewModel, connection: Connection)
 }
 
 class AccountsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
@@ -88,9 +88,9 @@ extension AccountsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard   let accountViewModel = viewModel.accountViewModel(at: indexPath),
-                let providerConnection = viewModel.providerConnection else { return }
+                let connection = viewModel.connection else { return }
         
         close()
-        delegate?.didSelect(accountViewModel: accountViewModel, providerConnection: providerConnection)
+        delegate?.didSelect(accountViewModel: accountViewModel, connection: connection)
     }
 }

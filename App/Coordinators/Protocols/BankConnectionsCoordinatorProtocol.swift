@@ -13,10 +13,12 @@ import SaltEdge
 protocol BankConnectionsCoordinatorProtocol {
     func setup()
     func loadProviders(country: String?) -> Promise<[SEProvider]>
-    func loadProviderConnection(for providerId: String) -> Promise<ProviderConnection>
+    func loadConnection(for providerId: String) -> Promise<Connection>
     func createSaltEdgeConnectSession(provider: SEProvider, languageCode: String) -> Promise<URL>
-    func createProviderConnection(connectionId: String, connectionSecret: String, provider: SEProvider) -> Promise<ProviderConnection>
-    func loadAvailableSaltEdgeAccounts(for providerConnection: ProviderConnection, currencyCode: String?) -> Promise<[SEAccount]>
+    func createConnection(connectionId: String, connectionSecret: String, provider: SEProvider) -> Promise<Connection>
+    func saveConnection(connection: Connection, provider: SEProvider) -> Promise<Connection>
+    func loadAccounts(currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool) -> Promise<[Account]>
+    
     
 //    func getSaltEdgeConnection(secret: String) -> Promise<SEConnection>
 //    func removeSaltEdgeConnection(secret: String) -> Promise<Void>

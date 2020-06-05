@@ -30,7 +30,7 @@ struct APIRoutePath {
         case .createExpenseSource(let form):                return collection(route, userId: form.userId)
         case .createExpenseCategory(let form):              return collection(route, basketId: form.basketId)
         case .createTransaction(let form):                  return collection(route, userId: form.userId)
-        case .createProviderConnection(let form):           return collection(route, userId: form.userId)
+        case .createConnection(let form):                   return collection(route, userId: form.userId)
         case .createDebt(let form):                         return collection(route, userId: form.userId)
         case .createLoan(let form):                         return collection(route, userId: form.userId)
         case .createCredit(let form):                       return collection(route, userId: form.userId)
@@ -51,8 +51,8 @@ struct APIRoutePath {
              .indexUserExpenseCategories(let userId, _),
              .indexBaskets(let userId),
              .indexTransactions(let userId, _, _, _, _, _, _, _, _, _, _),
-             .indexProviderConnections(let userId, _),
-             .indexAccountConnections(let userId, _),
+             .indexConnections(let userId, _),
+             .indexAccounts(let userId, _, _, _, _),
              .indexDebts(let userId),
              .indexLoans(let userId),
              .indexCredits(let userId),
@@ -96,7 +96,6 @@ struct APIRoutePath {
              .destroyExpenseSource(let id, _),
              .destroyExpenseCategory(let id, _),
              .destroyTransaction(let id),
-             .destroyAccountConnection(let id),
              .destroyDebt(let id, _),
              .destroyLoan(let id, _),
              .destroyCredit(let id, _),

@@ -18,9 +18,9 @@ enum APIRoute: URLRequestConvertible {
 //            return "https://api.threebaskets.net"
 //            return "https://skrudzh-staging.herokuapp.com"
 //            return "https://test.threebaskets.net"
-//            return "https://skrudz.tempio.app"
+            return "https://skrudz.tempio.app"
 //            return "https://staging.threebaskets.net"
-            return "https://api.threebaskets.net"
+//            return "https://api.threebaskets.net"
         case .testFlight:
             return "https://api.threebaskets.net"
 //            return "https://skrudz.tempio.app"
@@ -145,14 +145,12 @@ enum APIRoute: URLRequestConvertible {
     // Budget
     case showBudget(userId: Int)
         
-    // AccountConnections
-    case indexAccountConnections(userId: Int, connectionId: String)
-    case destroyAccountConnection(id: Int)
+    // Accounts
+    case indexAccounts(userId: Int, currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool)
     
-    // ProviderConnections
-    case indexProviderConnections(userId: Int, providerId: String)
-    case createProviderConnection(form: ProviderConnectionCreationForm)
-//    case createSaltEdgeSession(userId: Int)
+    // Connections
+    case indexConnections(userId: Int, providerId: String)
+    case createConnection(form: ConnectionCreationForm)
     
     // TransactionableExamples
     case indexTransactionableExamples(transactionableType: TransactionableType, basketType: BasketType?)

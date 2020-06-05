@@ -74,12 +74,11 @@ struct APIResource {
             return APIResource(singular: "exchange_rate", plural: "exchange_rates")
         case .showBudget:
             return APIResource(singular: "budget", plural: "budgets")
-        case .indexAccountConnections,
-             .destroyAccountConnection:
-            return APIResource(singular: "account_connection", plural: "account_connections")
-        case .indexProviderConnections,
-             .createProviderConnection:
-            return APIResource(singular: "provider_connection", plural: "provider_connections")
+        case .indexAccounts:
+            return APIResource(singular: "account", plural: "accounts")
+        case .indexConnections,
+             .createConnection:
+            return APIResource(singular: "connection", plural: "connections")
         case .createDebt,
              .showDebt,
              .indexDebts,

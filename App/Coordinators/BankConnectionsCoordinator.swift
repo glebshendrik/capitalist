@@ -12,24 +12,24 @@ import SaltEdge
 import SwifterSwift
 
 enum BankConnectionError : Error {
-    case providerConnectionNotFound
+    case connectionNotFound
     case allBankAccountsAlreadyUsed
 }
 
 class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
     private let saltEdgeManager: SaltEdgeManagerProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
-    private let accountConnectionsService: AccountConnectionsServiceProtocol
-    private let providerConnectionsService: ProviderConnectionsServiceProtocol
+    private let accountsService: AccountsServiceProtocol
+    private let connectionsService: ConnectionsServiceProtocol
     
     init(saltEdgeManager: SaltEdgeManagerProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
-         accountConnectionsService: AccountConnectionsServiceProtocol,
-         providerConnectionsService: ProviderConnectionsServiceProtocol) {
+         accountsService: AccountsServiceProtocol,
+         connectionsService: ConnectionsServiceProtocol) {
         self.saltEdgeManager = saltEdgeManager
         self.accountCoordinator = accountCoordinator
-        self.accountConnectionsService = accountConnectionsService
-        self.providerConnectionsService = providerConnectionsService
+        self.accountsService = accountsService
+        self.connectionsService = connectionsService
     }
     
     func setup() {
@@ -45,17 +45,17 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
                 }
     }
     
-    func loadProviderConnection(for providerId: String) -> Promise<ProviderConnection> {
+    func loadConnection(for providerId: String) -> Promise<Connection> {
         guard let currentUserId = accountCoordinator.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
         return  firstly {
-                    providerConnectionsService.index(for: currentUserId, providerId: providerId)
-                }.then { providerConnections -> Promise<ProviderConnection> in
-                    guard let providerConnection = providerConnections.first else {
-                        return Promise(error: BankConnectionError.providerConnectionNotFound)
+                    connectionsService.index(for: currentUserId, providerId: providerId)
+                }.then { connections -> Promise<Connection> in
+                    guard let connection = connections.first else {
+                        return Promise(error: BankConnectionError.connectionNotFound)
                     }
-                    return Promise.value(providerConnection)
+                    return Promise.value(connection)
                 }
     }
     
@@ -63,55 +63,32 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
         return saltEdgeManager.createConnectSession(provider: provider, languageCode: languageCode)
     }
     
-    func createProviderConnection(connectionId: String, connectionSecret: String, provider: SEProvider) -> Promise<ProviderConnection> {
+    func createConnection(connectionId: String, connectionSecret: String, provider: SEProvider) -> Promise<Connection> {
         guard let currentUserId = accountCoordinator.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        
-        let form = ProviderConnectionCreationForm(userId: currentUserId,
-                                                  connectionId: connectionId,
-                                                  connectionSecret: connectionSecret,
-                                                  providerId: provider.id,
-                                                  providerCode: provider.code,
-                                                  providerName: provider.name,
-                                                  logoURL: URL(string: provider.logoURL),
-                                                  status: .active)
-        return providerConnectionsService.create(with: form)
-    }
-    
-    func loadAvailableSaltEdgeAccounts(for providerConnection: ProviderConnection, currencyCode: String?) -> Promise<[SEAccount]> {
-        return  firstly {
-                    when(fulfilled: loadSaltEdgeAccounts(for: providerConnection.connectionSecret),
-                                    loadUsedAccountConnections(for: providerConnection.connectionId))
-                }.then { accounts, accountConnections -> Promise<[SEAccount]> in
-                    
-                    let usedAccountsHash = accountConnections.reduce(into: [String : AccountConnection]()) { (hash, item) in
-                        hash[item.accountId] = item
-                    }
-                    
-                    let availableAccounts = accounts.filter { account in
-                        if let currencyCode = currencyCode, account.currencyCode != currencyCode {
-                            return false
-                        }
-                        return usedAccountsHash[account.id] == nil
-                    }
-                    
-                    return Promise.value(availableAccounts)
-                }
-    }
-    
-}
 
-extension BankConnectionsCoordinator {
-    private func loadSaltEdgeAccounts(for connectionSecret: String) -> Promise<[SEAccount]> {
-        return saltEdgeManager.loadAccounts(for: connectionSecret)
+        let form = ConnectionCreationForm(userId: currentUserId,
+                                          saltedgeId: connectionId,
+                                          secret: connectionSecret,
+                                          providerId: provider.id,
+                                          providerCode: provider.code,
+                                          providerName: provider.name,
+                                          countryCode: provider.countryCode,
+                                          providerLogoURL: URL(string: provider.logoURL),
+                                          status: .active)
+        return connectionsService.create(with: form)
     }
     
-    private func loadUsedAccountConnections(for connectionId: String) -> Promise<[AccountConnection]> {
+    func saveConnection(connection: Connection, provider: SEProvider) -> Promise<Connection> {
+        return createConnection(connectionId: connection.saltedgeId, connectionSecret: connection.secret, provider: provider)
+    }
+    
+    func loadAccounts(currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool) -> Promise<[Account]> {
         guard let currentUserId = accountCoordinator.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return accountConnectionsService.index(for: currentUserId, connectionId: connectionId)
+        return accountsService.index(for: currentUserId, currencyCode: currencyCode, connectionId: connectionId, providerId: providerId, notUsed: notUsed)
     }
 }
 

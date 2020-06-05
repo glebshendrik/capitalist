@@ -36,9 +36,9 @@ class ServicesAssembly: Assembly {
                 
         container.autoregister(TransactionsServiceProtocol.self, initializer: TransactionsService.init)
                 
-        container.autoregister(AccountConnectionsServiceProtocol.self, initializer: AccountConnectionsService.init)
+        container.autoregister(AccountsServiceProtocol.self, initializer: AccountsService.init)
         
-        container.autoregister(ProviderConnectionsServiceProtocol.self, initializer: ProviderConnectionsService.init)
+        container.autoregister(ConnectionsServiceProtocol.self, initializer: ConnectionsService.init)
         
         container.autoregister(BorrowsServiceProtocol.self, initializer: BorrowsService.init)
         

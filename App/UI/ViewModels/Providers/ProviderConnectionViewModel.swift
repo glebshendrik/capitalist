@@ -16,7 +16,7 @@ class ProviderConnectionViewModel {
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
     }
     
-    func createProviderConnection(connectionId: String, connectionSecret: String, providerViewModel: ProviderViewModel) -> Promise<ProviderConnection> {
-        return bankConnectionsCoordinator.createProviderConnection(connectionId: connectionId, connectionSecret: connectionSecret, provider: providerViewModel.provider)
+    func createConnection(connectionId: String, connectionSecret: String, providerViewModel: ProviderViewModel) -> Promise<Connection> {
+        return bankConnectionsCoordinator.createConnection(connectionId: connectionId, connectionSecret: connectionSecret, provider: providerViewModel.provider)
     }
 }

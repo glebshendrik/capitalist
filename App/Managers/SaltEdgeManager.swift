@@ -133,7 +133,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     
     func refreshConnection(secret: String, provider: SEProvider, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void> {
         let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: "AppDelegate.applicationURLString"))
-        
+
         return Promise { seal in
             SERequestManager.shared.refreshConnection(
                 with: secret,

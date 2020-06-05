@@ -23,7 +23,7 @@ class AccountsViewModel {
         return accountViewModels.count
     }
     
-    var providerConnection: ProviderConnection? = nil
+    var connection: Connection? = nil
     var currencyCode: String? = nil
     
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol,
@@ -33,18 +33,22 @@ class AccountsViewModel {
     }
     
     func loadAccounts() -> Promise<Void> {
-        guard let providerConnection = providerConnection else {
+        guard   let connection = connection,
+                let providerId = connection.providerId else {
             return Promise(error: AccountsLoadingError.canNotLoadAccounts)
         }
         
         return  firstly {
-                    when(fulfilled: bankConnectionsCoordinator.loadAvailableSaltEdgeAccounts(for: providerConnection, currencyCode: currencyCode),
-                         currenciesCoordinator.hash())            
+                    when(fulfilled: bankConnectionsCoordinator.loadAccounts(currencyCode: currencyCode,
+                                                                            connectionId: connection.saltedgeId,
+                                                                            providerId: providerId,
+                                                                            notUsed: true),
+                                    currenciesCoordinator.hash())
                 }.then { accounts, currencies -> Promise<[AccountViewModel]> in
                     
                     let accountViewModels: [AccountViewModel] = accounts.compactMap { account in
                         
-                        guard let currency = currencies[account.currencyCode] else { return nil }
+                        guard let currency = currencies[account.currency.code] else { return nil }
                         
                         return AccountViewModel(account: account,                                         
                                                 currency: currency)

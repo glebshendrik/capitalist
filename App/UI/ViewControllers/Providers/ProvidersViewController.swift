@@ -11,7 +11,7 @@ import PromiseKit
 import SnapKit
 
 protocol ProvidersViewControllerDelegate {
-    func didConnectTo(_ providerViewModel: ProviderViewModel, providerConnection: ProviderConnection)
+    func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection)
 }
 
 class ProvidersViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol {
@@ -188,12 +188,12 @@ extension ProvidersViewController : ProviderConnectionViewControllerDelegate {
     func setupProviderConnection(for providerViewModel: ProviderViewModel) {
         messagePresenterManager.showHUD(with: NSLocalizedString("Загрузка подключения к банку...", comment: "Загрузка подключения к банку..."))
         firstly {
-            viewModel.loadProviderConnection(for: providerViewModel.id)
+            viewModel.loadConnection(for: providerViewModel)
         }.ensure {
             self.messagePresenterManager.dismissHUD()
-        }.get { providerConnection in
+        }.get { connection in
             self.close()
-            self.delegate?.didConnectTo(providerViewModel, providerConnection: providerConnection)            
+            self.delegate?.didConnectTo(providerViewModel, connection: connection)
         }.catch { error in
             self.createSaltEdgeConnectSession(for: providerViewModel)
 //            if case BankConnectionError.providerConnectionNotFound = error {
@@ -219,13 +219,13 @@ extension ProvidersViewController : ProviderConnectionViewControllerDelegate {
     }
     
     func showProviderConnectionViewController(for providerViewModel: ProviderViewModel) {
-        // navigationController?.
-        guard let providerConnectionViewController = factory.providerConnectionViewController(delegate: self, providerViewModel: providerViewModel) else { return }
+        // navigationController?.        
+        guard let providerConnectionViewController = factory.connectionViewController(delegate: self, providerViewModel: providerViewModel) else { return }
         modal(UINavigationController(rootViewController: providerConnectionViewController))
     }
-    
-    func didConnectTo(_ providerViewModel: ProviderViewModel, providerConnection: ProviderConnection) {
-        delegate?.didConnectTo(providerViewModel, providerConnection: providerConnection)
+        
+    func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection) {
+        delegate?.didConnectTo(providerViewModel, connection: connection)
     }
         
     func didNotConnect() {

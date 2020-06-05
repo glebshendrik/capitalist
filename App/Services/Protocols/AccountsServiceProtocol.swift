@@ -9,7 +9,6 @@
 import Foundation
 import PromiseKit
 
-protocol AccountConnectionsServiceProtocol {
-    func index(for userId: Int, connectionId: String) -> Promise<[AccountConnection]>
-    func destroy(by accountConnectionId: Int) -> Promise<Void>
+protocol AccountsServiceProtocol {
+    func index(for userId: Int, currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool) -> Promise<[Account]>
 }

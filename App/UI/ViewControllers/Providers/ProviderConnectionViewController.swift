@@ -11,7 +11,7 @@ import SaltEdge
 import PromiseKit
 
 protocol ProviderConnectionViewControllerDelegate {
-    func didConnectTo(_ providerViewModel: ProviderViewModel, providerConnection: ProviderConnection)
+    func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection)
     func didNotConnect()
     func didNotConnect(with: Error)
 }
@@ -91,12 +91,12 @@ extension ProviderConnectionViewController {
         }
         messagePresenterManager.showHUD(with: NSLocalizedString("Создание подключения к банку...", comment: "Создание подключения к банку..."))
         firstly {
-            self.viewModel.createProviderConnection(connectionId: connectionId, connectionSecret: connectionSecret, providerViewModel: providerViewModel)
+            self.viewModel.createConnection(connectionId: connectionId, connectionSecret: connectionSecret, providerViewModel: providerViewModel)
         }.ensure {
             self.messagePresenterManager.dismissHUD()
-        }.get { providerConnection in
+        }.get { connection in
             self.close()
-            delegate.didConnectTo(providerViewModel, providerConnection: providerConnection)
+            delegate.didConnectTo(providerViewModel, connection: connection)
         }.catch { error in
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
         }

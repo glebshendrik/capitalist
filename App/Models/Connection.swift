@@ -1,9 +1,9 @@
 //
-//  ProviderConnection.swift
+//  Connection.swift
 //  Three Baskets
 //
-//  Created by Alexander Petropavlovsky on 03/07/2019.
-//  Copyright © 2019 Real Tranzit. All rights reserved.
+//  Created by Alexander Petropavlovsky on 05.06.2020.
+//  Copyright © 2020 Real Tranzit. All rights reserved.
 //
 
 import Foundation
@@ -14,47 +14,52 @@ enum ConnectionStatus : String, Codable {
     case disabled
 }
 
-struct ProviderConnection : Decodable {
-    let id: Int
-    let connectionId: String
-    let connectionSecret: String
-    let providerId: String
+struct Connection : Decodable {
+    let id: Int?
+    let saltedgeId: String
+    let secret: String
+    let providerId: String?
     let providerCode: String
     let providerName: String
-    let logoURL: URL?
+    let countryCode: String
+    let providerLogoURL: URL?
     let status: ConnectionStatus
     let createdAt: Date?
-    
+    let updatedAt: Date?
+        
     enum CodingKeys: String, CodingKey {
         case id
-        case connectionId = "connection_id"
-        case connectionSecret = "connection_secret"
+        case saltedgeId = "saltedge_connection_id"
+        case secret = "secret"
         case providerId = "provider_id"
         case providerCode = "provider_code"
         case providerName = "provider_name"
-        case logoURL = "logo_url"
+        case providerLogoURL = "logo_url"
+        case countryCode = "country_code"
         case status
         case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }
 
-struct ProviderConnectionCreationForm : Encodable {
+struct ConnectionCreationForm : Encodable {
     let userId: Int
-    let connectionId: String
-    let connectionSecret: String
+    let saltedgeId: String
+    let secret: String
     let providerId: String
     let providerCode: String
     let providerName: String
-    let logoURL: URL?
+    let countryCode: String
+    let providerLogoURL: URL?
     let status: ConnectionStatus
     
     enum CodingKeys: String, CodingKey {
-        case connectionId = "connection_id"
-        case connectionSecret = "connection_secret"
+        case saltedgeId = "saltedge_connection_id"
+        case secret = "secret"
         case providerId = "provider_id"
         case providerCode = "provider_code"
         case providerName = "provider_name"
-        case logoURL = "logo_url"
+        case providerLogoURL = "logo_url"
         case status
     }
 }

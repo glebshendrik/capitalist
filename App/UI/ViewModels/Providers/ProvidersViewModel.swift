@@ -94,9 +94,16 @@ class ProvidersViewModel {
     func providerViewModel(at indexPath: IndexPath) -> ProviderViewModel? {        
         return filteredProviderViewModels[safe: indexPath.row]
     }
-    
-    func loadProviderConnection(for providerId: String) -> Promise<ProviderConnection> {
-        return bankConnectionsCoordinator.loadProviderConnection(for: providerId)
+        
+    func loadConnection(for provider: ProviderViewModel) -> Promise<Connection> {
+        return  firstly {
+                    bankConnectionsCoordinator.loadConnection(for: provider.id)
+                }.then { connection -> Promise<Connection> in
+                    if connection.id == nil {
+                        return self.bankConnectionsCoordinator.saveConnection(connection: connection, provider: provider.provider)
+                    }
+                    return Promise.value(connection)
+                }
     }
     
     func createBankConnectionSession(for providerViewModel: ProviderViewModel) -> Promise<ProviderViewModel> {
