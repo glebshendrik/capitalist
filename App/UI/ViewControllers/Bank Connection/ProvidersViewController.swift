@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import SnapKit
+import SwiftyBeaver
 
 protocol ProvidersViewControllerDelegate {
     func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection)
@@ -184,7 +185,7 @@ extension ProvidersViewController: UITableViewDelegate {
     }
 }
 
-extension ProvidersViewController : ProviderConnectionViewControllerDelegate {
+extension ProvidersViewController : ConnectionViewControllerDelegate {
     func setupProviderConnection(for providerViewModel: ProviderViewModel) {
         messagePresenterManager.showHUD(with: NSLocalizedString("Загрузка подключения к банку...", comment: "Загрузка подключения к банку..."))
         firstly {
@@ -195,12 +196,11 @@ extension ProvidersViewController : ProviderConnectionViewControllerDelegate {
             self.close()
             self.delegate?.didConnectTo(providerViewModel, connection: connection)
         }.catch { error in
-            self.createSaltEdgeConnectSession(for: providerViewModel)
-//            if case BankConnectionError.providerConnectionNotFound = error {
-//                
-//            } else {
-//                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось загрузить подключение к банку", comment: "Не удалось загрузить подключение к банку"), theme: .error)
-//            }
+            if case BankConnectionError.connectionNotFound = error {
+                self.createSaltEdgeConnectSession(for: providerViewModel)
+            } else {
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось загрузить подключение к банку", comment: "Не удалось загрузить подключение к банку"), theme: .error)
+            }
         }
     }
     
@@ -211,20 +211,21 @@ extension ProvidersViewController : ProviderConnectionViewControllerDelegate {
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { providerViewModel in
-            self.showProviderConnectionViewController(for: providerViewModel)
+            self.showConnectionViewController(for: providerViewModel)
         }.catch { e in
             print(e)
+            SwiftyBeaver.error(e)
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
         }
     }
     
-    func showProviderConnectionViewController(for providerViewModel: ProviderViewModel) {
-        // navigationController?.        
-        guard let providerConnectionViewController = factory.connectionViewController(delegate: self, providerViewModel: providerViewModel) else { return }
-        modal(UINavigationController(rootViewController: providerConnectionViewController))
+    func showConnectionViewController(for providerViewModel: ProviderViewModel) {
+        guard let connectionViewController = factory.connectionViewController(delegate: self, providerViewModel: providerViewModel) else { return }
+        modal(UINavigationController(rootViewController: connectionViewController))
     }
         
     func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection) {
+        self.close()
         delegate?.didConnectTo(providerViewModel, connection: connection)
     }
         
@@ -232,7 +233,7 @@ extension ProvidersViewController : ProviderConnectionViewControllerDelegate {
         self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
     }
     
-    func didNotConnect(with: Error) {
+    func didNotConnect(error: Error) {        
         self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
     }
 }

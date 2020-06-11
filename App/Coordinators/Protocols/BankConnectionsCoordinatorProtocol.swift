@@ -17,8 +17,9 @@ protocol BankConnectionsCoordinatorProtocol {
     func createSaltEdgeConnectSession(provider: SEProvider, languageCode: String) -> Promise<URL>
     func createConnection(connectionId: String, connectionSecret: String, provider: SEProvider) -> Promise<Connection>
     func saveConnection(connection: Connection, provider: SEProvider) -> Promise<Connection>
-    func loadAccounts(currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool) -> Promise<[Account]>
-    
+    func loadAccounts(currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool, nature: AccountNatureType) -> Promise<[Account]>
+    func refreshSaltEdgeConnection(secret: String, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void>
+
     
 //    func getSaltEdgeConnection(secret: String) -> Promise<SEConnection>
 //    func removeSaltEdgeConnection(secret: String) -> Promise<Void>

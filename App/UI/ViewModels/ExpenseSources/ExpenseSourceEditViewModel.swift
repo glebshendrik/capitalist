@@ -231,7 +231,7 @@ extension ExpenseSourceEditViewModel {
         selectedCurrency = accountViewModel.currency
         selectedIconURL = connection.providerLogoURL
         
-        if name == nil {
+        if name == nil || isNew {
             name = accountViewModel.name
         }
         

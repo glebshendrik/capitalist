@@ -39,10 +39,11 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
     
     func loadProviders(country: String?) -> Promise<[SEProvider]> {
         return  firstly {
-                    updateCustomerSecret()
-                }.then { secret in                    
-                    self.saltEdgeManager.loadProviders(country: country)
-                }
+            updateCustomerSecret()
+        }.then { secret in
+            self.saltEdgeManager.loadProviders(country: country)
+        }
+//        return saltEdgeManager.loadProviders(country: country)
     }
     
     func loadConnection(for providerId: String) -> Promise<Connection> {
@@ -84,11 +85,15 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
         return createConnection(connectionId: connection.saltedgeId, connectionSecret: connection.secret, provider: provider)
     }
     
-    func loadAccounts(currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool) -> Promise<[Account]> {
+    func loadAccounts(currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool, nature: AccountNatureType) -> Promise<[Account]> {
         guard let currentUserId = accountCoordinator.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        return accountsService.index(for: currentUserId, currencyCode: currencyCode, connectionId: connectionId, providerId: providerId, notUsed: notUsed)
+        return accountsService.index(for: currentUserId, currencyCode: currencyCode, connectionId: connectionId, providerId: providerId, notUsed: notUsed, nature: nature)
+    }
+    
+    func refreshSaltEdgeConnection(secret: String, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void> {
+        return saltEdgeManager.refreshConnection(secret: secret, fetchingDelegate: fetchingDelegate)
     }
 }
 
@@ -136,10 +141,6 @@ extension BankConnectionsCoordinator {
     
     private func removeSaltEdgeConnection(secret: String) -> Promise<Void> {
         return saltEdgeManager.removeConnection(secret: secret)
-    }
-    
-    private func refreshSaltEdgeConnection(secret: String, provider: SEProvider, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void> {
-        return saltEdgeManager.refreshConnection(secret: secret, provider: provider, fetchingDelegate: fetchingDelegate)
     }
     
     private func getSaltEdgeProvider(code: String) -> Promise<SEProvider> {

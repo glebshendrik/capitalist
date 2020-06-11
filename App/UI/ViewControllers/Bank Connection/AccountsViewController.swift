@@ -75,11 +75,7 @@ extension AccountsViewController: UITableViewDataSource {
         }
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
-    }
+    }    
 }
 
 extension AccountsViewController: UITableViewDelegate {

@@ -11,6 +11,7 @@ import PromiseKit
 import StoreKit
 import ApphudSDK
 import SwiftyBeaver
+import SaltEdge
 
 enum AuthProviderError : Error {
     case emailHasAlreadyUsed
@@ -27,6 +28,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     private let router: ApplicationRouterProtocol
     private let notificationsCoordinator: NotificationsCoordinatorProtocol
     private let analyticsManager: AnalyticsManagerProtocol
+    private let saltEdgeManager: SaltEdgeManagerProtocol
     
     var currentSession: Session? {
         return userSessionManager.currentSession
@@ -49,7 +51,8 @@ class AccountCoordinator : AccountCoordinatorProtocol {
          usersService: UsersServiceProtocol,
          router: ApplicationRouterProtocol,
          notificationsCoordinator: NotificationsCoordinatorProtocol,
-         analyticsManager: AnalyticsManagerProtocol) {
+         analyticsManager: AnalyticsManagerProtocol,
+         saltEdgeManager: SaltEdgeManagerProtocol) {
         
         self.userSessionManager = userSessionManager
         self.authenticationService = authenticationService
@@ -57,6 +60,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         self.router = router
         self.notificationsCoordinator = notificationsCoordinator
         self.analyticsManager = analyticsManager
+        self.saltEdgeManager = saltEdgeManager
     }
         
     func joinAsGuest() -> Promise<Session> {
@@ -146,6 +150,9 @@ class AccountCoordinator : AccountCoordinatorProtocol {
                     self.analyticsManager.set(userId: String(user.id))
                     SwiftyBeaver.cloud?.analyticsUserName = "user_id:\(user.id)"
                     Apphud.updateUserID(String(user.id))
+                    if let customerSecret = user.saltEdgeCustomerSecret {
+                        self.saltEdgeManager.set(customerSecret: customerSecret)
+                    }
                 }
     }
     

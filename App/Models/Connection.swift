@@ -34,7 +34,7 @@ struct Connection : Decodable {
         case providerId = "provider_id"
         case providerCode = "provider_code"
         case providerName = "provider_name"
-        case providerLogoURL = "logo_url"
+        case providerLogoURL = "provider_logo_url"
         case countryCode = "country_code"
         case status
         case createdAt = "created_at"
@@ -54,7 +54,7 @@ struct ConnectionCreationForm : Encodable {
     let status: ConnectionStatus
     
     enum CodingKeys: String, CodingKey {
-        case saltedgeId = "saltedge_connection_id"
+        case saltedgeId = "salt_edge_connection_id"
         case secret = "secret"
         case providerId = "provider_id"
         case providerCode = "provider_code"

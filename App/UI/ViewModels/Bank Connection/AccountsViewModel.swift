@@ -15,7 +15,6 @@ enum AccountsLoadingError : Error {
 
 class AccountsViewModel {
     private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
-    private let currenciesCoordinator: CurrenciesCoordinatorProtocol
     
     private var accountViewModels: [AccountViewModel] = []
     
@@ -25,11 +24,10 @@ class AccountsViewModel {
     
     var connection: Connection? = nil
     var currencyCode: String? = nil
+    var nature: AccountNatureType = .account
     
-    init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol,
-         currenciesCoordinator: CurrenciesCoordinatorProtocol) {
+    init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
-        self.currenciesCoordinator = currenciesCoordinator
     }
     
     func loadAccounts() -> Promise<Void> {
@@ -39,30 +37,21 @@ class AccountsViewModel {
         }
         
         return  firstly {
-                    when(fulfilled: bankConnectionsCoordinator.loadAccounts(currencyCode: currencyCode,
-                                                                            connectionId: connection.saltedgeId,
-                                                                            providerId: providerId,
-                                                                            notUsed: true),
-                                    currenciesCoordinator.hash())
-                }.then { accounts, currencies -> Promise<[AccountViewModel]> in
+                    bankConnectionsCoordinator.loadAccounts(currencyCode: currencyCode,
+                                                            connectionId: connection.saltedgeId,
+                                                            providerId: providerId,
+                                                            notUsed: true,
+                                                            nature: nature)
+                }.then { accounts -> Promise<[AccountViewModel]> in
                     
-                    let accountViewModels: [AccountViewModel] = accounts.compactMap { account in
-                        
-                        guard let currency = currencies[account.currency.code] else { return nil }
-                        
-                        return AccountViewModel(account: account,                                         
-                                                currency: currency)
-                    }
-                    
-                    if accountViewModels.count == 0 {
+                    guard accounts.count > 0 else {
                         return Promise(error: BankConnectionError.allBankAccountsAlreadyUsed)
                     }
+                    let accountViewModels = accounts.map { AccountViewModel(account: $0) }
                     return Promise.value(accountViewModels)
-                    
                 }.get { accountViewModels in
                     self.accountViewModels = accountViewModels
-                }
-                .asVoid()
+                }.asVoid()
     }
     
     func accountViewModel(at indexPath: IndexPath) -> AccountViewModel? {

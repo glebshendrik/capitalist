@@ -90,7 +90,8 @@ class ActiveInfoViewController : EntityInfoNavigationController {
 
 extension ActiveInfoViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
     func showProviders() {
-        slideUp(factory.providersViewController(delegate: self))
+        guard let providersViewController = factory.providersViewController(delegate: self) else { return }
+        modal(UINavigationController(rootViewController: providersViewController))
     }
     
     func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection) {
@@ -101,7 +102,8 @@ extension ActiveInfoViewController : ProvidersViewControllerDelegate, AccountsVi
         let currencyCode = viewModel.activeViewModel?.currency.code        
         slideUp(factory.accountsViewController(delegate: self,
                                                connection: connection,
-                                               currencyCode: currencyCode))
+                                               currencyCode: currencyCode,
+                                               nature: .investment))
     }
     
     func didSelect(accountViewModel: AccountViewModel, connection: Connection) {

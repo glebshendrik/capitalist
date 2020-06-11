@@ -10,11 +10,12 @@ import Foundation
 import PromiseKit
 
 class AccountsService : Service, AccountsServiceProtocol {
-    func index(for userId: Int, currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool) -> Promise<[Account]> {
+    func index(for userId: Int, currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool, nature: AccountNatureType) -> Promise<[Account]> {
         return requestCollection(APIRoute.indexAccounts(userId: userId,
                                                         currencyCode: currencyCode,
                                                         connectionId: connectionId,
                                                         providerId: providerId,
-                                                        notUsed: notUsed))
+                                                        notUsed: notUsed,
+                                                        nature: nature))
     }
 }

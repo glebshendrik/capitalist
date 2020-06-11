@@ -196,7 +196,7 @@ extension ApplicationAssembly {
         }
         
         // ProviderConnectionViewController
-        container.registerForSkrudzhStoryboard(ProviderConnectionViewController.self) { (r, c) in
+        container.registerForSkrudzhStoryboard(ConnectionViewController.self) { (r, c) in
             c.viewModel = r.resolve(ProviderConnectionViewModel.self)
         }
         

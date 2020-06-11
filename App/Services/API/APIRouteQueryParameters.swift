@@ -90,13 +90,14 @@ struct APIRouteQueryParameters {
             return params
         case .indexConnections(_, let providerId):
             return [ "provider_id" : providerId ]
-        case .indexAccounts(_, let currencyCode, let connectionId, let providerId, let notUsed):
+        case .indexAccounts(_, let currencyCode, let connectionId, let providerId, let notUsed, let nature):
             if let currencyCode = currencyCode {
                 params["currency"] = currencyCode
             }
             params["connection_id"] = connectionId
             params["provider_id"] = providerId
             params["not_attached"] = notUsed.string
+            params["nature_type"] = nature.rawValue
             return params
         default:
             break

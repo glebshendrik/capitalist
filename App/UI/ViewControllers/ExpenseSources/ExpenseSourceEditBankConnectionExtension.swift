@@ -11,7 +11,8 @@ import PromiseKit
 
 extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
     func showProviders() {
-        slideUp(factory.providersViewController(delegate: self))
+        guard let providersViewController = factory.providersViewController(delegate: self) else { return }
+        modal(UINavigationController(rootViewController: providersViewController))
     }
     
     func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection) {
@@ -22,7 +23,8 @@ extension ExpenseSourceEditViewController : ProvidersViewControllerDelegate, Acc
         let currencyCode = viewModel.isNew ? nil : viewModel.selectedCurrencyCode
         slideUp(factory.accountsViewController(delegate: self,
                                                connection: connection,
-                                               currencyCode: currencyCode))
+                                               currencyCode: currencyCode,
+                                               nature: .account))
     }
     
     func didSelect(accountViewModel: AccountViewModel, connection: Connection) {

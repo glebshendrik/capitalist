@@ -11,7 +11,6 @@ import SaltEdge
 
 class AccountViewModel {
     let account: Account
-    let currency: Currency
     
     var id: Int {
         return account.id
@@ -23,6 +22,10 @@ class AccountViewModel {
     
     var name: String {
         return account.accountName
+    }
+    
+    var currency: Currency {
+        return account.currency
     }
     
     var currencyCode: String {
@@ -61,11 +64,22 @@ class AccountViewModel {
     }
     
     var cards: String? {
-        return account.cardNumbers.joined(separator: ", ")
+        return account.cardNumbers?.joined(separator: ", ")
     }
     
-    init(account: Account, currency: Currency) {
+    var providerLogoURL: URL? {
+        return account.connection.providerLogoURL
+    }
+    
+    var cardLastNumbers: String? {
+        return account.cardNumbers?.first
+    }
+    
+    var cardType: CardType? {
+        return account.cardType
+    }
+    
+    init(account: Account) {
         self.account = account
-        self.currency = currency
     }
 }

@@ -88,7 +88,8 @@ extension ExpenseSourceInfoViewController : ProvidersViewControllerDelegate, Acc
         let currencyCode = viewModel.expenseSourceViewModel?.currency.code
         slideUp(factory.accountsViewController(delegate: self,
                                                connection: connection,
-                                               currencyCode: currencyCode))
+                                               currencyCode: currencyCode,
+                                               nature: .account))
     }
     
     func didSelect(accountViewModel: AccountViewModel, connection: Connection) {

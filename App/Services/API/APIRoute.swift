@@ -146,7 +146,7 @@ enum APIRoute: URLRequestConvertible {
     case showBudget(userId: Int)
         
     // Accounts
-    case indexAccounts(userId: Int, currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool)
+    case indexAccounts(userId: Int, currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool, nature: AccountNatureType)
     
     // Connections
     case indexConnections(userId: Int, providerId: String)

@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum AccountNatureType : String, Codable {
+    case account
+    case investment
+    case undefined
+}
+
 enum AccountNature : String, Codable {
     case account
     case bonus
@@ -28,11 +34,11 @@ struct Account : Decodable {
     let id: Int
     let accountId: String
     let accountName: String
-    let accountFullName: String
+    let accountFullName: String?
     let assetClass: Int?
     let balance: Int
     let cardType: CardType?
-    let cardNumbers: [String]
+    let cardNumbers: [String]?
     let connection: Connection
     let currency: Currency
     let nature: AccountNature

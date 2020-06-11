@@ -11,10 +11,14 @@ import Foundation
 struct AccountConnection : Decodable {
     let id: Int
     let account: Account
+    let sourceId: Int
+    let sourceType: TransactionableType
     
     enum CodingKeys: String, CodingKey {
         case id
         case account
+        case sourceId = "source_id"
+        case sourceType  = "source_type"
     }
 }
 

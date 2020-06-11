@@ -77,12 +77,19 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     }
     
     func createConnectSession(provider: SEProvider, languageCode: String) -> Promise<URL> {
-        
+//        SERefreshSessionsParams
+//        SERequestManager.shared.re
         let connectSessionsParams = SEConnectSessionsParams(allowedCountries: [provider.countryCode],        
-                                                            attempt: SEAttempt(locale: languageCode, returnTo: "http://tempio.app"),
+                                                            attempt: SEAttempt(automaticFetch: true,
+                                                                               dailyRefresh: true,
+                                                                               locale: languageCode,
+                                                                               returnTo: "http://tempio.app"),
                                                             providerCode: provider.code,
+                                                            dailyRefresh: true,
+                                                            fromDate: Date(),
                                                             javascriptCallbackType: "iframe",
-                                                            consent: SEConsent(scopes: ["account_details", "transactions_details"]))
+                                                            consent: SEConsent(scopes: ["account_details", "transactions_details"],
+                                                                               fromDate: Date()))
         
         return Promise { seal in
             SERequestManager.shared.createConnectSession(params: connectSessionsParams) { response in
@@ -131,13 +138,13 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         }
     }
     
-    func refreshConnection(secret: String, provider: SEProvider, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void> {
+    func refreshConnection(secret: String, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void> {
         let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: "AppDelegate.applicationURLString"))
-
+        
         return Promise { seal in
             SERequestManager.shared.refreshConnection(
                 with: secret,
-                params: provider.isOAuth ? params : nil,
+                params: params,
                 fetchingDelegate: fetchingDelegate
             ) { response in
                 switch response {

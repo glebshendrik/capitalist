@@ -9,19 +9,20 @@
 import UIKit
 import SaltEdge
 import PromiseKit
+import SwiftyBeaver
 
-protocol ProviderConnectionViewControllerDelegate {
+protocol ConnectionViewControllerDelegate {
     func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection)
     func didNotConnect()
-    func didNotConnect(with: Error)
+    func didNotConnect(error: Error)
 }
 
-class ProviderConnectionViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
+class ConnectionViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
     
     @IBOutlet weak var webView: SEWebView!
     
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
-    var delegate: ProviderConnectionViewControllerDelegate?
+    var delegate: ConnectionViewControllerDelegate?
     var viewModel: ProviderConnectionViewModel!
     var providerViewModel: ProviderViewModel!
     
@@ -48,32 +49,35 @@ class ProviderConnectionViewController : UIViewController, UIMessagePresenterMan
         }
     }
     
-    private func close() {
-        presentingViewController?.dismiss(animated: true, completion: nil)
+    private func close(completion: (() -> Void)? = nil) {
+        presentingViewController?.dismiss(animated: true, completion: completion)
     }
 }
 
-extension ProviderConnectionViewController: SEWebViewDelegate {
+extension ConnectionViewController: SEWebViewDelegate {
     func webView(_ webView: SEWebView, didReceiveCallbackWithResponse response: SEConnectResponse) {
         switch response.stage {
         case .success:
             guard let connectionSecret = response.secret,
                   let connectionId = response.connectionId else {
+                SwiftyBeaver.error(response)
                 delegate?.didNotConnect()
+                close()
                 return
             }
-            didConnect(connectionId: connectionId, connectionSecret: connectionSecret, providerViewModel: providerViewModel)
-            close()
+            createConnection(id: connectionId, secret: connectionSecret, provider: providerViewModel)
         case .fetching:
             print("fetching connection")
         case .error:
-            delegate?.didNotConnect()
-            close()
+            SwiftyBeaver.error(response)
+//            delegate?.didNotConnect()
+//            close()
         }
     }
     
     func webView(_ webView: SEWebView, didReceiveCallbackWithError error: Error) {
-        delegate?.didNotConnect(with: error)
+        SwiftyBeaver.error(error)
+        delegate?.didNotConnect(error: error)
         close()
     }
     
@@ -82,8 +86,8 @@ extension ProviderConnectionViewController: SEWebViewDelegate {
     }
 }
 
-extension ProviderConnectionViewController {    
-    func didConnect(connectionId: String, connectionSecret: String, providerViewModel: ProviderViewModel) {
+extension ConnectionViewController {    
+    func createConnection(id: String, secret: String, provider: ProviderViewModel) {
         guard let delegate = delegate else {
             messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
             close()
@@ -91,13 +95,15 @@ extension ProviderConnectionViewController {
         }
         messagePresenterManager.showHUD(with: NSLocalizedString("Создание подключения к банку...", comment: "Создание подключения к банку..."))
         firstly {
-            self.viewModel.createConnection(connectionId: connectionId, connectionSecret: connectionSecret, providerViewModel: providerViewModel)
+            self.viewModel.createConnection(connectionId: id, connectionSecret: secret, providerViewModel: provider)
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { connection in
-            self.close()
-            delegate.didConnectTo(providerViewModel, connection: connection)
+            self.close() {
+                delegate.didConnectTo(provider, connection: connection)
+            }
         }.catch { error in
+            self.close()
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
         }
     }

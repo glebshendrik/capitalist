@@ -10,5 +10,5 @@ import Foundation
 import PromiseKit
 
 protocol AccountsServiceProtocol {
-    func index(for userId: Int, currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool) -> Promise<[Account]>
+    func index(for userId: Int, currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool, nature: AccountNatureType) -> Promise<[Account]>
 }

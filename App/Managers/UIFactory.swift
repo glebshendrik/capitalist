@@ -56,19 +56,21 @@ class UIFactory : UIFactoryProtocol {
         
     func accountsViewController(delegate: AccountsViewControllerDelegate,
                                 connection: Connection,
-                                currencyCode: String?) -> AccountsViewController? {
+                                currencyCode: String?,
+                                nature: AccountNatureType) -> AccountsViewController? {
         
         let accountsViewController = router.viewController(Infrastructure.ViewController.AccountsViewController) as? AccountsViewController
         accountsViewController?.delegate = delegate
         accountsViewController?.viewModel.connection = connection
         accountsViewController?.viewModel.currencyCode = currencyCode
+        accountsViewController?.viewModel.nature = nature
         return accountsViewController
     }
     
-    func connectionViewController(delegate: ProviderConnectionViewControllerDelegate,
-                                  providerViewModel: ProviderViewModel) -> ProviderConnectionViewController? {
+    func connectionViewController(delegate: ConnectionViewControllerDelegate,
+                                  providerViewModel: ProviderViewModel) -> ConnectionViewController? {
         
-        let providerConnectionViewController = router.viewController(Infrastructure.ViewController.ProviderConnectionViewController) as? ProviderConnectionViewController
+        let providerConnectionViewController = router.viewController(Infrastructure.ViewController.ConnectionViewController) as? ConnectionViewController
         providerConnectionViewController?.delegate = delegate
         providerConnectionViewController?.providerViewModel = providerViewModel
         return providerConnectionViewController        

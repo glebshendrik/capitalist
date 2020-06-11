@@ -28,10 +28,11 @@ protocol UIFactoryProtocol {
     
     func accountsViewController(delegate: AccountsViewControllerDelegate,
                                 connection: Connection,
-                                currencyCode: String?) -> AccountsViewController?
+                                currencyCode: String?,
+                                nature: AccountNatureType) -> AccountsViewController?
     
-    func connectionViewController(delegate: ProviderConnectionViewControllerDelegate,
-                                  providerViewModel: ProviderViewModel) -> ProviderConnectionViewController?
+    func connectionViewController(delegate: ConnectionViewControllerDelegate,
+                                  providerViewModel: ProviderViewModel) -> ConnectionViewController?
     
     func commentViewController(delegate: CommentViewControllerDelegate,
                                text: String?,

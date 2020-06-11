@@ -75,22 +75,6 @@ class ProvidersViewModel {
                 }.asVoid()
     }
     
-    func creatCSV(_ providers: [SEProvider]) -> Void {
-        let fileName = "providers.csv"
-        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
-        var csvText = ""
-        
-        providers.forEach { csvText.append("\($0.code)|\($0.name)|\($0.mode)|\($0.status)|\($0.customerNotifiedOnSignIn)|\($0.logoURL)\n") }
-        
-        do {
-            try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
-        } catch {
-            print("Failed to create file")
-            print("\(error)")
-        }
-        print(csvText)
-    }
-    
     func providerViewModel(at indexPath: IndexPath) -> ProviderViewModel? {        
         return filteredProviderViewModels[safe: indexPath.row]
     }
@@ -115,5 +99,21 @@ class ProvidersViewModel {
                     providerViewModel.connectURL = connectURL
                     return Promise.value(providerViewModel)
                 }
+    }
+    
+    func creatCSV(_ providers: [SEProvider]) -> Void {
+        let fileName = "providers.csv"
+        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+        var csvText = ""
+        
+        providers.forEach { csvText.append("\($0.code)|\($0.name)|\($0.mode)|\($0.status)|\($0.customerNotifiedOnSignIn)|\($0.logoURL)\n") }
+        
+        do {
+            try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
+        } catch {
+            print("Failed to create file")
+            print("\(error)")
+        }
+        print(csvText)
     }
 }

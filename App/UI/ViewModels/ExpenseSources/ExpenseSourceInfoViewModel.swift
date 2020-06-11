@@ -8,6 +8,8 @@
 
 import Foundation
 import PromiseKit
+import SaltEdge
+import SwiftyBeaver
 
 enum ExpenseSourceInfoField : String {
     case icon
@@ -91,9 +93,14 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         guard let entityId = expenseSourceViewModel?.id else { return Promise(error: ExpenseSourceInfoError.expenseSourceIsNotSpecified)}
         return  firstly {
                     expenseSourcesCoordinator.show(by: entityId)
-                }.get { expenseSource in
+                }.then { expenseSource -> Promise<Void> in
                     self.set(expenseSource: ExpenseSourceViewModel(expenseSource: expenseSource))
-                }.asVoid()
+                    if let connectionSecret = expenseSource.accountConnection?.account.connection.secret {
+                        return self.bankConnectionsCoordinator.refreshSaltEdgeConnection(secret: connectionSecret,
+                                                                                         fetchingDelegate: self)
+                    }
+                    return Promise.value(())
+                }
     }
     
     override func entityInfoFields() -> [EntityInfoField] {
@@ -155,6 +162,22 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
 }
 
 // Bank Connection
+
+extension ExpenseSourceInfoViewModel : SEConnectionFetchingDelegate {
+    func failedToFetch(connection: SEConnection?, message: String) {
+        SwiftyBeaver.error(message)
+    }
+    
+    func interactiveInputRequested(for connection: SEConnection) {
+        SwiftyBeaver.info("interactiveInputRequested: \(connection)")
+    }
+    
+    func successfullyFinishedFetching(connection: SEConnection) {
+        SwiftyBeaver.info("successfullyFinishedFetching: \(connection)")
+    }
+    
+}
+
 extension ExpenseSourceInfoViewModel {
     func connect(accountViewModel: AccountViewModel, connection: Connection) {
         selectedIconURL = connection.providerLogoURL

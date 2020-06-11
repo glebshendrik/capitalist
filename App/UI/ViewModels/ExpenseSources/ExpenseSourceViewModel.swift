@@ -10,6 +10,7 @@ import Foundation
 
 class ExpenseSourceViewModel {
     public private(set) var expenseSource: ExpenseSource
+    public private(set) var accountViewModel: AccountViewModel? = nil
     
     var isSelected: Bool = false
     
@@ -34,22 +35,26 @@ class ExpenseSourceViewModel {
     }
     
     var amountCents: Int {
-        return expenseSource.amountCents
+        return accountViewModel?.amountCents ?? expenseSource.amountCents
+    }
+    
+    var creditLimitCents: Int? {
+        return accountViewModel?.creditLimitCents ?? expenseSource.creditLimitCents
     }
     
     var inCredit: Bool {
-        guard let creditLimitCents = expenseSource.creditLimitCents else { return false }
-        return expenseSource.amountCents < creditLimitCents
+        guard let creditLimitCents = creditLimitCents else { return false }
+        return amountCents < creditLimitCents
     }
     
     var hasCreditLimit: Bool {
-        guard let creditLimitCents = expenseSource.creditLimitCents else { return false }
+        guard let creditLimitCents = creditLimitCents else { return false }
         return creditLimitCents > 0
     }
     
     var creditCents: Int? {
-        guard let creditLimitCents = expenseSource.creditLimitCents else { return nil }
-        return creditLimitCents - expenseSource.amountCents
+        guard let creditLimitCents = creditLimitCents else { return nil }
+        return creditLimitCents - amountCents
     }
     
     var credit: String? {
@@ -57,7 +62,7 @@ class ExpenseSourceViewModel {
     }
     
     var creditLimit: String? {
-        return expenseSource.creditLimitCents?.moneyCurrencyString(with: currency, shouldRound: true)
+        return creditLimitCents?.moneyCurrencyString(with: currency, shouldRound: true)
     }
     
     var currency: Currency {
@@ -65,7 +70,7 @@ class ExpenseSourceViewModel {
     }
     
     var iconURL: URL? {
-        return expenseSource.iconURL
+        return accountViewModel?.providerLogoURL ?? expenseSource.iconURL
     }
     
     var isDeleted: Bool {
@@ -80,12 +85,23 @@ class ExpenseSourceViewModel {
         return expenseSource.accountConnection != nil ? .vector : .raster
     }
     
+    var cardType: CardType? {
+        return accountViewModel?.cardType ?? expenseSource.cardType
+    }
+    
     var cardTypeImageName: String? {
-        return expenseSource.cardType?.imageName
+        return cardType?.imageName
+    }
+    
+    var cardLastNumbers: String? {
+        return accountViewModel?.cardLastNumbers
     }
     
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
+        if let account = expenseSource.accountConnection?.account {
+            self.accountViewModel = AccountViewModel(account: account)
+        }
     }
     
     func asTransactionFilter() -> ExpenseSourceFilter {
