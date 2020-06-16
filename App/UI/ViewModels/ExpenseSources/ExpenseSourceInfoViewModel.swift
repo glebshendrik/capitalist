@@ -93,13 +93,8 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         guard let entityId = expenseSourceViewModel?.id else { return Promise(error: ExpenseSourceInfoError.expenseSourceIsNotSpecified)}
         return  firstly {
                     expenseSourcesCoordinator.show(by: entityId)
-                }.then { expenseSource -> Promise<Void> in
+                }.done { expenseSource in
                     self.set(expenseSource: ExpenseSourceViewModel(expenseSource: expenseSource))
-                    if let connectionSecret = expenseSource.accountConnection?.account.connection.secret {
-                        return self.bankConnectionsCoordinator.refreshSaltEdgeConnection(secret: connectionSecret,
-                                                                                         fetchingDelegate: self)
-                    }
-                    return Promise.value(())
                 }
     }
     

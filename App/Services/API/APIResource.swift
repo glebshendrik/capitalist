@@ -77,7 +77,9 @@ struct APIResource {
         case .indexAccounts:
             return APIResource(singular: "account", plural: "accounts")
         case .indexConnections,
-             .createConnection:
+             .createConnection,
+             .showConnection,
+             .updateConnection:
             return APIResource(singular: "connection", plural: "connections")
         case .createDebt,
              .showDebt,

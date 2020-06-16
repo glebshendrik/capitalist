@@ -10,6 +10,7 @@ import UIKit
 import PromiseKit
 import SnapKit
 import SwiftyBeaver
+import SwiftDate
 
 protocol ProvidersViewControllerDelegate {
     func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection)
@@ -193,25 +194,58 @@ extension ProvidersViewController : ConnectionViewControllerDelegate {
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { connection in
-            self.close()
-            self.delegate?.didConnectTo(providerViewModel, connection: connection)
+            switch connection.status {
+            case .active:
+                guard   let nextRefreshPossibleAt = connection.nextRefreshPossibleAt,
+                        let interactive = connection.interactive else {
+                        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
+                        return
+                }
+                if nextRefreshPossibleAt.isInPast,
+                   interactive {                    
+                    self.showConnectionSession(for: providerViewModel, connectionType: .refresh, connection: connection)
+                }
+                else {
+                    self.close()
+                    self.delegate?.didConnectTo(providerViewModel, connection: connection)
+                }
+            case .inactive:
+                self.showConnectionSession(for: providerViewModel, connectionType: .reconnect, connection: connection)
+            case .deleted:
+                self.showConnectionSession(for: providerViewModel, connectionType: .create, connection: connection)
+            }
         }.catch { error in
             if case BankConnectionError.connectionNotFound = error {
-                self.createSaltEdgeConnectSession(for: providerViewModel)
+                self.showConnectionSession(for: providerViewModel, connectionType: .create)
             } else {
                 self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось загрузить подключение к банку", comment: "Не удалось загрузить подключение к банку"), theme: .error)
             }
         }
     }
     
-    func createSaltEdgeConnectSession(for providerViewModel: ProviderViewModel) {
+    func showConnectionSession(for providerViewModel: ProviderViewModel, connectionType: ProviderConnectionType, connection: Connection? = nil) {
         messagePresenterManager.showHUD(with: NSLocalizedString("Подготовка подключения к банку...", comment: "Подготовка подключения к банку..."))
+        
+        func sessionURL() -> Promise<URL> {
+            switch connectionType {
+            case .create:
+                return viewModel.createConnectionSession(for: providerViewModel)
+            case .refresh:
+                return viewModel.createRefreshConnectionSession(for: providerViewModel, connection: connection)
+            case .reconnect:
+                return viewModel.createReconnectSession(for: providerViewModel, connection: connection)
+            }
+        }
+        
         firstly {
-            viewModel.createBankConnectionSession(for: providerViewModel)
+            sessionURL()
         }.ensure {
             self.messagePresenterManager.dismissHUD()
-        }.get { providerViewModel in
-            self.showConnectionViewController(for: providerViewModel)
+        }.get { connectionURL in
+            self.showConnectionViewController(for: providerViewModel,
+                                              connectionURL: connectionURL,
+                                              connectionType: connectionType,
+                                              connection: connection)
         }.catch { e in
             print(e)
             SwiftyBeaver.error(e)
@@ -219,8 +253,13 @@ extension ProvidersViewController : ConnectionViewControllerDelegate {
         }
     }
     
-    func showConnectionViewController(for providerViewModel: ProviderViewModel) {
-        guard let connectionViewController = factory.connectionViewController(delegate: self, providerViewModel: providerViewModel) else { return }
+    func showConnectionViewController(for providerViewModel: ProviderViewModel, connectionURL: URL, connectionType: ProviderConnectionType = .create, connection: Connection? = nil) {
+        
+        guard let connectionViewController = factory.connectionViewController(delegate: self,
+                                                                              providerViewModel: providerViewModel,
+                                                                              connectionType: connectionType,
+                                                                              connectionURL: connectionURL,
+                                                                              connection: connection) else { return }
         modal(UINavigationController(rootViewController: connectionViewController))
     }
         

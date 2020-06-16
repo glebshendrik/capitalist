@@ -70,7 +70,6 @@ class ProvidersViewModel {
         return  firstly {
                     bankConnectionsCoordinator.loadProviders(country: selectedCountryViewModel?.countryCode)
                 }.get { providers in
-//                    self.creatCSV(providers)
                     self.providerViewModels = providers.map { ProviderViewModel(provider: $0) }
                 }.asVoid()
     }
@@ -80,40 +79,24 @@ class ProvidersViewModel {
     }
         
     func loadConnection(for provider: ProviderViewModel) -> Promise<Connection> {
-        return  firstly {
-                    bankConnectionsCoordinator.loadConnection(for: provider.id)
-                }.then { connection -> Promise<Connection> in
-                    if connection.id == nil {
-                        return self.bankConnectionsCoordinator.saveConnection(connection: connection, provider: provider.provider)
-                    }
-                    return Promise.value(connection)
-                }
+        return bankConnectionsCoordinator.loadConnection(for: provider.provider)
     }
     
-    func createBankConnectionSession(for providerViewModel: ProviderViewModel) -> Promise<ProviderViewModel> {
-        let languageCode = String(Locale.preferredLanguages[0].prefix(2)).lowercased()
-        return  firstly {
-                    bankConnectionsCoordinator.createSaltEdgeConnectSession(provider: providerViewModel.provider,
-                                                                            languageCode: languageCode)
-                }.then { connectURL -> Promise<ProviderViewModel> in
-                    providerViewModel.connectURL = connectURL
-                    return Promise.value(providerViewModel)
-                }
+    func createConnectionSession(for providerViewModel: ProviderViewModel) -> Promise<URL> {
+        return bankConnectionsCoordinator.createConnectSession(provider: providerViewModel.provider)
     }
     
-    func creatCSV(_ providers: [SEProvider]) -> Void {
-        let fileName = "providers.csv"
-        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
-        var csvText = ""
-        
-        providers.forEach { csvText.append("\($0.code)|\($0.name)|\($0.mode)|\($0.status)|\($0.customerNotifiedOnSignIn)|\($0.logoURL)\n") }
-        
-        do {
-            try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
-        } catch {
-            print("Failed to create file")
-            print("\(error)")
+    func createReconnectSession(for providerViewModel: ProviderViewModel, connection: Connection?) -> Promise<URL> {
+        guard let connection = connection else {
+            return Promise(error: BankConnectionError.canNotCreateConnection)
         }
-        print(csvText)
+        return bankConnectionsCoordinator.createReconnectSession(provider: providerViewModel.provider, connection: connection)
+    }
+    
+    func createRefreshConnectionSession(for providerViewModel: ProviderViewModel, connection: Connection?) -> Promise<URL> {
+        guard let connection = connection else {
+            return Promise(error: BankConnectionError.canNotCreateConnection)
+        }
+        return bankConnectionsCoordinator.createRefreshConnectionSession(provider: providerViewModel.provider, connection: connection)
     }
 }

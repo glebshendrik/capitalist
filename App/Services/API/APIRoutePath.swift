@@ -76,6 +76,7 @@ struct APIRoutePath {
         case .updateCredit(let form):                       return member(route, id: form.id)
         case .updateActive(let form):                       return member(route, id: form.id)
         case .updateActivePosition(let form):               return member(route, id: form.id)
+        case .updateConnection(let form):                   return member(route, id: form.id)
             
         // Show
         case .showUser(let id),
@@ -87,6 +88,7 @@ struct APIRoutePath {
              .showDebt(let id),
              .showLoan(let id),
              .showCredit(let id),
+             .showConnection(let id),
              .showActive(let id):                           return member(route, id: id)
             
         case .showBudget(let userId):                       return member(route, userId: userId)

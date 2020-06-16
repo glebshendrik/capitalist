@@ -22,6 +22,8 @@ protocol SaltEdgeManagerProtocol {
     func createCustomer(identifier: String) -> Promise<String>
     func loadProviders(country: String?) -> Promise<[SEProvider]>
     func createConnectSession(provider: SEProvider, languageCode: String) -> Promise<URL>
+    func createRefreshConnectionSession(connectionSecret: String, provider: SEProvider, languageCode: String) -> Promise<URL>
+    func createReconnectSession(connectionSecret: String, provider: SEProvider, languageCode: String) -> Promise<URL>
     func getConnection(secret: String) -> Promise<SEConnection>
     func removeConnection(secret: String) -> Promise<Void>
     func refreshConnection(secret: String,

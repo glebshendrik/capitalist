@@ -67,13 +67,19 @@ class UIFactory : UIFactoryProtocol {
         return accountsViewController
     }
     
-    func connectionViewController(delegate: ConnectionViewControllerDelegate,
-                                  providerViewModel: ProviderViewModel) -> ConnectionViewController? {
+        func connectionViewController(delegate: ConnectionViewControllerDelegate,
+                                  providerViewModel: ProviderViewModel,
+                                  connectionType: ProviderConnectionType,
+                                  connectionURL: URL,
+                                  connection: Connection?) -> ConnectionViewController? {
         
-        let providerConnectionViewController = router.viewController(Infrastructure.ViewController.ConnectionViewController) as? ConnectionViewController
-        providerConnectionViewController?.delegate = delegate
-        providerConnectionViewController?.providerViewModel = providerViewModel
-        return providerConnectionViewController        
+        let connectionViewController = router.viewController(Infrastructure.ViewController.ConnectionViewController) as? ConnectionViewController
+        connectionViewController?.delegate = delegate
+        connectionViewController?.viewModel.providerViewModel = providerViewModel
+        connectionViewController?.viewModel.connectionType = connectionType
+        connectionViewController?.viewModel.connectionURL = connectionURL
+        connectionViewController?.viewModel.connection = connection
+        return connectionViewController
     }
     
     func commentViewController(delegate: CommentViewControllerDelegate,

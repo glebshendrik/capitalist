@@ -17,4 +17,12 @@ class ConnectionsService : Service, ConnectionsServiceProtocol {
     func create(with creationForm: ConnectionCreationForm) -> Promise<Connection> {
         return request(APIRoute.createConnection(form: creationForm))
     }
+    
+    func show(by id: Int) -> Promise<Connection> {
+        return request(APIRoute.showConnection(id: id))
+    }
+    
+    func update(with updatingForm: ConnectionUpdatingForm) -> Promise<Void> {
+        return request(APIRoute.updateConnection(form: updatingForm))
+    }
 }

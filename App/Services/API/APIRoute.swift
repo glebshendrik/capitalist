@@ -150,7 +150,9 @@ enum APIRoute: URLRequestConvertible {
     
     // Connections
     case indexConnections(userId: Int, providerId: String)
+    case showConnection(id: Int)
     case createConnection(form: ConnectionCreationForm)
+    case updateConnection(form: ConnectionUpdatingForm)
     
     // TransactionableExamples
     case indexTransactionableExamples(transactionableType: TransactionableType, basketType: BasketType?)

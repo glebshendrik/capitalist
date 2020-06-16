@@ -55,6 +55,7 @@ struct APIRouteRequest {
         case .createTransaction(let form):                  return try encode(form)
         case .updateTransaction(let form):                  return try encode(form)        
         case .createConnection(let form):                   return try encode(form)
+        case .updateConnection(let form):                   return try encode(form)
         case .createDebt(let form):                         return try encode(form)
         case .updateDebt(let form):                         return try encode(form)
         case .createLoan(let form):                         return try encode(form)

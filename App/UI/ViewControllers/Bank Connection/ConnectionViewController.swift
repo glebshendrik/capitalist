@@ -24,7 +24,6 @@ class ConnectionViewController : UIViewController, UIMessagePresenterManagerDepe
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var delegate: ConnectionViewControllerDelegate?
     var viewModel: ProviderConnectionViewModel!
-    var providerViewModel: ProviderViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +42,7 @@ class ConnectionViewController : UIViewController, UIMessagePresenterManagerDepe
     }
     
     private func connect() {
-        if let url = providerViewModel.connectURL {
+        if let url = viewModel.connectionURL {
             let request = URLRequest(url: url)
             webView.load(request)
         }
@@ -65,7 +64,7 @@ extension ConnectionViewController: SEWebViewDelegate {
                 close()
                 return
             }
-            createConnection(id: connectionId, secret: connectionSecret, provider: providerViewModel)
+            setupConnection(id: connectionId, secret: connectionSecret)
         case .fetching:
             print("fetching connection")
         case .error:
@@ -77,8 +76,8 @@ extension ConnectionViewController: SEWebViewDelegate {
     
     func webView(_ webView: SEWebView, didReceiveCallbackWithError error: Error) {
         SwiftyBeaver.error(error)
-        delegate?.didNotConnect(error: error)
-        close()
+//        delegate?.didNotConnect(error: error)
+//        close()
     }
     
     func webView(_ webView: SEWebView, didHandleRequestUrl url: URL) {
@@ -86,16 +85,16 @@ extension ConnectionViewController: SEWebViewDelegate {
     }
 }
 
-extension ConnectionViewController {    
-    func createConnection(id: String, secret: String, provider: ProviderViewModel) {
-        guard let delegate = delegate else {
+extension ConnectionViewController {
+    func setupConnection(id: String, secret: String) {
+        guard let delegate = delegate, let provider = viewModel.providerViewModel else {
             messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
             close()
             return
         }
         messagePresenterManager.showHUD(with: NSLocalizedString("Создание подключения к банку...", comment: "Создание подключения к банку..."))
         firstly {
-            self.viewModel.createConnection(connectionId: id, connectionSecret: secret, providerViewModel: provider)
+            viewModel.setupConnection(id: id, secret: secret)
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { connection in

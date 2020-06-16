@@ -45,7 +45,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                 }.map { countryProviders, electronicProviders in
                     let providers = country == nil ? countryProviders : (countryProviders + electronicProviders)
                     return self.sortProvidersByCountry(providers,
-                                                startingWith: country)
+                                                       startingWith: country)
                 }
     }
     
@@ -77,9 +77,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     }
     
     func createConnectSession(provider: SEProvider, languageCode: String) -> Promise<URL> {
-//        SERefreshSessionsParams
-//        SERequestManager.shared.re
-        let connectSessionsParams = SEConnectSessionsParams(allowedCountries: [provider.countryCode],        
+        let connectSessionsParams = SEConnectSessionsParams(allowedCountries: [provider.countryCode],
                                                             attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
                                                                                locale: languageCode,
@@ -88,6 +86,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                             dailyRefresh: true,
                                                             fromDate: Date(),
                                                             javascriptCallbackType: "iframe",
+                                                            includeFakeProviders: true,
                                                             consent: SEConsent(scopes: ["account_details", "transactions_details"],
                                                                                fromDate: Date()))
         
@@ -96,6 +95,57 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                 switch response {
                 case .success(let value):
                     
+                    guard let url = URL(string: value.data.connectUrl) else {
+                        seal.reject(SaltEdgeError.cannotCreateConnectSession)
+                        return
+                    }
+                    seal.fulfill(url)
+                case .failure(let error):
+                    seal.reject(error)
+                }
+            }
+        }
+    }
+    
+    func createRefreshConnectionSession(connectionSecret: String, provider: SEProvider, languageCode: String) -> Promise<URL> {
+        let refreshSessionsParams = SERefreshSessionsParams(attempt: SEAttempt(automaticFetch: true,
+                                                                               dailyRefresh: true,
+                                                                               locale: languageCode,
+                                                                               returnTo: "http://tempio.app"),
+                                                            dailyRefresh: true,
+                                                            javascriptCallbackType: "iframe")
+        
+        return Promise { seal in
+            SERequestManager.shared.refreshSession(with: connectionSecret, params: refreshSessionsParams) { response in
+                switch response {
+                case .success(let value):
+                    guard let url = URL(string: value.data.connectUrl) else {
+                        seal.reject(SaltEdgeError.cannotCreateConnectSession)
+                        return
+                    }
+                    seal.fulfill(url)
+                case .failure(let error):
+                    seal.reject(error)
+                }
+            }
+        }
+    }
+    
+    func createReconnectSession(connectionSecret: String, provider: SEProvider, languageCode: String) -> Promise<URL> {
+        let reconnectSessionsParams = SEReconnectSessionsParams(attempt: SEAttempt(automaticFetch: true,
+                                                                                   dailyRefresh: true,
+                                                                                   locale: languageCode,
+//                                                                                   storeCredentials: false,
+                                                                                   returnTo: "http://tempio.app"),
+                                                                dailyRefresh: true,
+                                                                javascriptCallbackType: "iframe",
+                                                                consent: SEConsent(scopes: ["account_details", "transactions_details"],
+                                                                                   fromDate: Date()))
+        
+        return Promise { seal in
+            SERequestManager.shared.reconnectSession(with: connectionSecret, params: reconnectSessionsParams) { response in
+                switch response {
+                case .success(let value):
                     guard let url = URL(string: value.data.connectUrl) else {
                         seal.reject(SaltEdgeError.cannotCreateConnectSession)
                         return

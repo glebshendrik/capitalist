@@ -46,6 +46,7 @@ struct APIRouteMethod {
              .showTransaction,
              .indexAccounts,
              .indexConnections,
+             .showConnection,
              .indexDebts,
              .showDebt,
              .indexLoans,
@@ -79,7 +80,8 @@ struct APIRouteMethod {
              .updateUserSettings,
              .updateUserSubscription,
              .updateDeviceToken,
-             .updateActivePosition:
+             .updateActivePosition,
+             .updateConnection:
             return .patch
         case .destroySession,
              .destroyIncomeSource,
