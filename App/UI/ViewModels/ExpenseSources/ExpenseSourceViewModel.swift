@@ -97,6 +97,18 @@ class ExpenseSourceViewModel {
         return accountViewModel?.cardLastNumbers
     }
     
+    var accountConnected: Bool {
+        return accountViewModel != nil
+    }
+    
+    var reconnectNeeded: Bool {
+        return accountViewModel?.reconnectNeeded ?? false
+    }
+    
+    var reconnectType: ProviderConnectionType {
+        return accountViewModel?.reconnectType ?? .refresh
+    }
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         if let account = expenseSource.accountConnection?.account {

@@ -17,6 +17,7 @@ enum ExpenseSourceInfoField : String {
     case creditLimit
     case credit
     case bank
+    case bankWarning
     case statistics
     case transactionIncome
     case transactionExpense
@@ -99,13 +100,24 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     }
     
     override func entityInfoFields() -> [EntityInfoField] {
-        var fields: [EntityInfoField] = [IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
-                                                       iconType: .raster,
-                                                       iconURL: selectedIconURL,
-                                                       placeholder: TransactionableType.expenseSource.defaultIconName),
-                                         BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
-                                                        title: NSLocalizedString("Баланс", comment: "Баланс"),
-                                                        value: expenseSourceViewModel?.amount)]
+        var fields = [EntityInfoField]()
+        
+        if expenseSourceViewModel?.reconnectNeeded ?? false {
+            fields.append(BankWarningInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
+                                               title: NSLocalizedString("Нет подключения к банку", comment: ""),
+                                               message: NSLocalizedString("Провайдер подключения к банку не может установить соединение. Для обновления данных требуется подключиться к банку", comment: ""),
+                                               buttonText: NSLocalizedString("Подключиться", comment: "")))
+        }
+        
+        fields.append(IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
+                                    iconType: .raster,
+                                    iconURL: selectedIconURL,
+                                    placeholder: TransactionableType.expenseSource.defaultIconName))
+        
+        fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
+                                     title: NSLocalizedString("Баланс", comment: "Баланс"),
+                                     value: expenseSourceViewModel?.amount))
+        
         if let expenseSourceViewModel = expenseSourceViewModel, expenseSourceViewModel.hasCreditLimit {
             fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.creditLimit.rawValue,
                                          title: NSLocalizedString("Кредитный лимит", comment: "Кредитный лимит"),
@@ -171,6 +183,53 @@ extension ExpenseSourceInfoViewModel : SEConnectionFetchingDelegate {
         SwiftyBeaver.info("successfullyFinishedFetching: \(connection)")
     }
     
+    var connection: Connection? {
+        return expenseSourceViewModel?.accountViewModel?.connection
+    }
+    
+    func createConnectionSession() -> Promise<URL> {
+        guard let providerCode = connection?.providerCode, let countryCode = connection?.countryCode else {
+            return Promise(error: BankConnectionError.canNotCreateConnection)
+        }        
+        return bankConnectionsCoordinator.createConnectSession(providerCode: providerCode, countryCode: countryCode)
+    }
+    
+    func createReconnectSession() -> Promise<URL> {
+        guard let connection = connection else {
+            return Promise(error: BankConnectionError.canNotCreateConnection)
+        }
+        return bankConnectionsCoordinator.createReconnectSession(connection: connection)
+    }
+    
+    func createRefreshConnectionSession() -> Promise<URL> {
+        guard let connection = connection else {
+            return Promise(error: BankConnectionError.canNotCreateConnection)
+        }
+        return bankConnectionsCoordinator.createRefreshConnectionSession(connection: connection)
+    }
+    
+    func reconnectSessionURL() -> Promise<URL> {
+        guard let reconnectType = expenseSourceViewModel?.reconnectType else {
+            return Promise(error: BankConnectionError.canNotCreateConnection)
+        }
+        
+        switch reconnectType {
+        case .create:
+            return createConnectionSession()
+        case .refresh:
+            return createRefreshConnectionSession()
+        case .reconnect:
+            return createReconnectSession()
+        }
+    }
+    
+    var reconnectType: ProviderConnectionType {
+        return expenseSourceViewModel?.reconnectType ?? .create
+    }
+    
+    var reconnectNeeded: Bool {
+        return expenseSourceViewModel?.reconnectNeeded ?? false
+    }
 }
 
 extension ExpenseSourceInfoViewModel {

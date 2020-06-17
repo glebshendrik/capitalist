@@ -341,8 +341,104 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BankWarningInfoTableViewCell" rowHeight="153" id="iPv-Mv-zJc" customClass="BankWarningInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="153"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iPv-Mv-zJc" id="KTw-Ve-SWo">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I0r-Qo-a6Z">
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="153"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Провайдер подключения к банку не может установить соединение. Для обновления данных требуется подключиться к банку" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjM-nO-Osd">
+                                                            <rect key="frame" x="16" y="48.5" width="311" height="43.5"/>
+                                                            <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
+                                                            <color key="textColor" name="white 1.0"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Нет подключения к банку" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qve-6y-qrQ">
+                                                            <rect key="frame" x="53" y="17" width="274" height="19"/>
+                                                            <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
+                                                            <color key="textColor" name="white 1.0"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-K2-zbG">
+                                                            <rect key="frame" x="16" y="104" width="311" height="1"/>
+                                                            <color key="backgroundColor" name="white 0.12"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="RhJ-hP-jbA"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USD-rj-nRE" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="105" width="327" height="48"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="48" id="DFF-RW-lOX"/>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="Nt5-6o-hMi"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                                            <color key="tintColor" name="blue 1"/>
+                                                            <inset key="contentEdgeInsets" minX="31" minY="0.0" maxX="23" maxY="0.0"/>
+                                                            <state key="normal" title="Подключиться">
+                                                                <color key="titleColor" name="blue 1"/>
+                                                            </state>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="8"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="didTapButton:" destination="iPv-Mv-zJc" eventType="touchUpInside" id="z4n-Hl-Rwb"/>
+                                                            </connections>
+                                                        </button>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning-icon" translatesAutoresizingMaskIntoConstraints="NO" id="c7L-3b-zC5">
+                                                            <rect key="frame" x="16" y="16" width="21" height="20.5"/>
+                                                            <color key="tintColor" name="yellow 1"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="black 3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="sjM-nO-Osd" secondAttribute="trailing" constant="16" id="3sP-1J-f9g"/>
+                                                        <constraint firstItem="5V0-K2-zbG" firstAttribute="top" secondItem="sjM-nO-Osd" secondAttribute="bottom" constant="12" id="DAK-dU-alu"/>
+                                                        <constraint firstItem="5V0-K2-zbG" firstAttribute="leading" secondItem="I0r-Qo-a6Z" secondAttribute="leading" constant="16" id="KN3-7n-5W2"/>
+                                                        <constraint firstItem="sjM-nO-Osd" firstAttribute="top" secondItem="c7L-3b-zC5" secondAttribute="bottom" constant="12" id="Rkr-uU-KKb"/>
+                                                        <constraint firstItem="sjM-nO-Osd" firstAttribute="leading" secondItem="I0r-Qo-a6Z" secondAttribute="leading" constant="16" id="Rtx-er-N28"/>
+                                                        <constraint firstItem="c7L-3b-zC5" firstAttribute="leading" secondItem="I0r-Qo-a6Z" secondAttribute="leading" constant="16" id="UQW-Y1-HFp"/>
+                                                        <constraint firstItem="USD-rj-nRE" firstAttribute="leading" secondItem="I0r-Qo-a6Z" secondAttribute="leading" constant="8" id="Xgi-J4-yK0"/>
+                                                        <constraint firstAttribute="bottom" secondItem="USD-rj-nRE" secondAttribute="bottom" id="eNV-ee-XEV"/>
+                                                        <constraint firstItem="qve-6y-qrQ" firstAttribute="leading" secondItem="c7L-3b-zC5" secondAttribute="trailing" constant="16" id="gdB-7T-Umx"/>
+                                                        <constraint firstAttribute="trailing" secondItem="USD-rj-nRE" secondAttribute="trailing" constant="8" id="k15-N9-npw"/>
+                                                        <constraint firstItem="qve-6y-qrQ" firstAttribute="centerY" secondItem="c7L-3b-zC5" secondAttribute="centerY" id="mfM-l0-Z1S"/>
+                                                        <constraint firstAttribute="height" constant="153" id="oE6-ju-yRM"/>
+                                                        <constraint firstAttribute="trailing" secondItem="qve-6y-qrQ" secondAttribute="trailing" constant="16" id="oja-XZ-OUf"/>
+                                                        <constraint firstItem="c7L-3b-zC5" firstAttribute="top" secondItem="I0r-Qo-a6Z" secondAttribute="top" constant="16" id="v8R-9y-d9s"/>
+                                                        <constraint firstItem="USD-rj-nRE" firstAttribute="top" secondItem="5V0-K2-zbG" secondAttribute="bottom" id="va0-Fe-rMq"/>
+                                                        <constraint firstAttribute="trailing" secondItem="5V0-K2-zbG" secondAttribute="trailing" constant="16" id="ytq-sq-PxZ"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="I0r-Qo-a6Z" firstAttribute="leading" secondItem="KTw-Ve-SWo" secondAttribute="leading" constant="16" id="T7d-2F-ppn"/>
+                                                <constraint firstItem="I0r-Qo-a6Z" firstAttribute="centerY" secondItem="KTw-Ve-SWo" secondAttribute="centerY" id="VsS-ig-0hX"/>
+                                                <constraint firstAttribute="trailing" secondItem="I0r-Qo-a6Z" secondAttribute="trailing" constant="16" id="Xv6-DA-ij0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="connectButton" destination="USD-rj-nRE" id="QZu-d1-iov"/>
+                                            <outlet property="messageLabel" destination="sjM-nO-Osd" id="XBc-bt-6MU"/>
+                                            <outlet property="titleLabel" destination="qve-6y-qrQ" id="3JY-4E-owX"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IconInfoTableViewCell" id="Q9x-hN-sNf" customClass="IconInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="96"/>
+                                        <rect key="frame" x="0.0" y="181" width="375" height="96"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q9x-hN-sNf" id="Lqj-Cc-Y8h">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
@@ -421,7 +517,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CombinedInfoTableViewCell" id="CYk-tU-4OH" customClass="CombinedInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="124" width="375" height="198"/>
+                                        <rect key="frame" x="0.0" y="277" width="375" height="198"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CYk-tU-4OH" id="1c6-QP-dHT">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
@@ -688,7 +784,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BasicInfoTableViewCell" id="aXZ-1q-adp" customClass="BasicInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="322" width="375" height="88"/>
+                                        <rect key="frame" x="0.0" y="475" width="375" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aXZ-1q-adp" id="RGf-rA-cHF">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
@@ -735,7 +831,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReminderInfoTableViewCell" id="V3x-hH-SrZ" customClass="ReminderInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="410" width="375" height="135.5"/>
+                                        <rect key="frame" x="0.0" y="563" width="375" height="135.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V3x-hH-SrZ" id="SRq-6n-jEb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="135.5"/>
@@ -809,7 +905,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SwitchInfoTableViewCell" id="SBL-XI-Ml6" customClass="SwitchInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="545.5" width="375" height="59"/>
+                                        <rect key="frame" x="0.0" y="698.5" width="375" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SBL-XI-Ml6" id="6bl-Cj-pYn">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
@@ -863,7 +959,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ButtonInfoTableViewCell" id="fCK-07-K85" customClass="ButtonInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="604.5" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="757.5" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fCK-07-K85" id="FUt-aR-mRf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -912,7 +1008,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionsHeaderTableViewCell" id="8EI-VI-NM3" customClass="TransactionsHeaderTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="668.5" width="375" height="64.5"/>
+                                        <rect key="frame" x="0.0" y="821.5" width="375" height="64.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8EI-VI-NM3" id="H3j-ki-f4c">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
@@ -947,7 +1043,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionTableViewCell" id="ctE-lo-fnT" customClass="TransactionTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="733" width="375" height="76.5"/>
+                                        <rect key="frame" x="0.0" y="886" width="375" height="76.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ctE-lo-fnT" id="grt-2O-rgV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
@@ -1926,12 +2022,16 @@
         <image name="save-icon" width="16" height="14"/>
         <image name="search-clear-icon" width="10" height="10"/>
         <image name="telegram-contact-icon" width="40" height="40"/>
+        <image name="warning-icon" width="21" height="20.5"/>
         <image name="whatsapp-contact-icon" width="40" height="40"/>
         <namedColor name="black 1">
             <color red="0.090000003576278687" green="0.093999996781349182" blue="0.11400000005960464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="black 2">
             <color red="0.125" green="0.13300000131130219" blue="0.14900000393390656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="black 3">
+            <color red="0.15686274509803921" green="0.16470588235294117" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="blue 1">
             <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1959,6 +2059,9 @@
         </namedColor>
         <namedColor name="white 1.0">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="yellow 1">
+            <color red="1" green="0.83921568627450982" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

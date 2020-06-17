@@ -263,7 +263,7 @@ extension ProvidersViewController : ConnectionViewControllerDelegate {
         modal(UINavigationController(rootViewController: connectionViewController))
     }
         
-    func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection) {
+    func didConnectToConnection(_ providerViewModel: ProviderViewModel, connection: Connection) {
         self.close()
         delegate?.didConnectTo(providerViewModel, connection: connection)
     }

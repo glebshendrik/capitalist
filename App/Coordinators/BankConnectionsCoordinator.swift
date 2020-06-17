@@ -46,16 +46,16 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
         return saltEdgeManager.loadProviders(country: country)
     }
     
-    func createConnectSession(provider: SEProvider) -> Promise<URL> {
-        return saltEdgeManager.createConnectSession(provider: provider, languageCode: languageCode)
+    func createConnectSession(providerCode: String, countryCode: String) -> Promise<URL> {
+        return saltEdgeManager.createConnectSession(providerCode: providerCode, countryCode: countryCode, languageCode: languageCode)
     }
     
-    func createReconnectSession(provider: SEProvider, connection: Connection) -> Promise<URL> {
-        return saltEdgeManager.createReconnectSession(connectionSecret: connection.secret, provider: provider, languageCode: languageCode)
+    func createReconnectSession(connection: Connection) -> Promise<URL> {
+        return saltEdgeManager.createReconnectSession(connectionSecret: connection.secret, languageCode: languageCode)
     }
     
-    func createRefreshConnectionSession(provider: SEProvider, connection: Connection) -> Promise<URL> {
-        return saltEdgeManager.createRefreshConnectionSession(connectionSecret: connection.secret, provider: provider, languageCode: languageCode)
+    func createRefreshConnectionSession(connection: Connection) -> Promise<URL> {
+        return saltEdgeManager.createRefreshConnectionSession(connectionSecret: connection.secret, languageCode: languageCode)
     }
     
     func loadConnection(for provider: SEProvider) -> Promise<Connection> {
@@ -71,7 +71,7 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
                     guard let connectionId = connection.id else {
                         return self.saveConnection(connection: connection, provider: provider)
                     }
-                    return self.updateConnection(id: connectionId, saltedgeId: connection.saltedgeId)
+                    return self.updatedConnection(id: connectionId, saltedgeId: connection.saltedgeId)
                 }
     }
     
@@ -108,14 +108,18 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
         return  firstly {
                     connectionsService.create(with: form)
                 }.then { connection in
-                    self.updateConnection(id: connection.id!, saltedgeId: connection.saltedgeId)
+                    self.updatedConnection(id: connection.id!, saltedgeId: connection.saltedgeId)
                 }
     }
     
-    func updateConnection(id: Int, saltedgeId: String?) -> Promise<Connection> {
+    func updateConnection(id: Int, saltedgeId: String?) -> Promise<Void> {
         let form = ConnectionUpdatingForm(id: id, saltedgeId: saltedgeId)
+        return connectionsService.update(with: form)
+    }
+    
+    func updatedConnection(id: Int, saltedgeId: String?) -> Promise<Connection> {
         return  firstly {
-                    connectionsService.update(with: form)
+                    updateConnection(id: id, saltedgeId: saltedgeId)
                 }.then {
                     self.show(by: id)
                 }

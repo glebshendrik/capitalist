@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyBeaver
 
 protocol ConnectionViewControllerDelegate {
-    func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection)
+    func didConnectToConnection(_ providerViewModel: ProviderViewModel, connection: Connection)
     func didNotConnect()
     func didNotConnect(error: Error)
 }
@@ -98,8 +98,8 @@ extension ConnectionViewController {
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { connection in
-            self.close() {
-                delegate.didConnectTo(provider, connection: connection)
+            self.close() {                
+                delegate.didConnectToConnection(provider, connection: connection)
             }
         }.catch { error in
             self.close()

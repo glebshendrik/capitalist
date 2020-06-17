@@ -32,7 +32,7 @@ protocol UIFactoryProtocol {
                                 nature: AccountNatureType) -> AccountsViewController?
     
     func connectionViewController(delegate: ConnectionViewControllerDelegate,
-                                  providerViewModel: ProviderViewModel,
+                                  providerViewModel: ProviderViewModel?,
                                   connectionType: ProviderConnectionType,
                                   connectionURL: URL,
                                   connection: Connection?) -> ConnectionViewController?

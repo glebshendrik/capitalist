@@ -76,13 +76,13 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         }
     }
     
-    func createConnectSession(provider: SEProvider, languageCode: String) -> Promise<URL> {
-        let connectSessionsParams = SEConnectSessionsParams(allowedCountries: [provider.countryCode],
+    func createConnectSession(providerCode: String, countryCode: String, languageCode: String) -> Promise<URL> {
+        let connectSessionsParams = SEConnectSessionsParams(allowedCountries: [countryCode],
                                                             attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
                                                                                locale: languageCode,
                                                                                returnTo: "http://tempio.app"),
-                                                            providerCode: provider.code,
+                                                            providerCode: providerCode,
                                                             dailyRefresh: true,
                                                             fromDate: Date(),
                                                             javascriptCallbackType: "iframe",
@@ -107,7 +107,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         }
     }
     
-    func createRefreshConnectionSession(connectionSecret: String, provider: SEProvider, languageCode: String) -> Promise<URL> {
+    func createRefreshConnectionSession(connectionSecret: String, languageCode: String) -> Promise<URL> {
         let refreshSessionsParams = SERefreshSessionsParams(attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
                                                                                locale: languageCode,
@@ -131,7 +131,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         }
     }
     
-    func createReconnectSession(connectionSecret: String, provider: SEProvider, languageCode: String) -> Promise<URL> {
+    func createReconnectSession(connectionSecret: String, languageCode: String) -> Promise<URL> {
         let reconnectSessionsParams = SEReconnectSessionsParams(attempt: SEAttempt(automaticFetch: true,
                                                                                    dailyRefresh: true,
                                                                                    locale: languageCode,

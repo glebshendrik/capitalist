@@ -83,20 +83,20 @@ class ProvidersViewModel {
     }
     
     func createConnectionSession(for providerViewModel: ProviderViewModel) -> Promise<URL> {
-        return bankConnectionsCoordinator.createConnectSession(provider: providerViewModel.provider)
+        return bankConnectionsCoordinator.createConnectSession(providerCode: providerViewModel.provider.code, countryCode: providerViewModel.provider.countryCode)
     }
     
     func createReconnectSession(for providerViewModel: ProviderViewModel, connection: Connection?) -> Promise<URL> {
         guard let connection = connection else {
             return Promise(error: BankConnectionError.canNotCreateConnection)
         }
-        return bankConnectionsCoordinator.createReconnectSession(provider: providerViewModel.provider, connection: connection)
+        return bankConnectionsCoordinator.createReconnectSession(connection: connection)
     }
     
     func createRefreshConnectionSession(for providerViewModel: ProviderViewModel, connection: Connection?) -> Promise<URL> {
         guard let connection = connection else {
             return Promise(error: BankConnectionError.canNotCreateConnection)
         }
-        return bankConnectionsCoordinator.createRefreshConnectionSession(provider: providerViewModel.provider, connection: connection)
+        return bankConnectionsCoordinator.createRefreshConnectionSession(connection: connection)
     }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import SaltEdge
+import SwiftDate
 
 class AccountViewModel {
     let account: Account
@@ -50,7 +51,7 @@ class AccountViewModel {
     }
     
     var connectionId: String {
-        return account.connection.saltedgeId
+        return connection.saltedgeId
     }
     
     var creditLimitCents: Int? {
@@ -68,7 +69,7 @@ class AccountViewModel {
     }
     
     var providerLogoURL: URL? {
-        return account.connection.providerLogoURL
+        return connection.providerLogoURL
     }
     
     var cardLastNumbers: String? {
@@ -77,6 +78,31 @@ class AccountViewModel {
     
     var cardType: CardType? {
         return account.cardType
+    }
+    
+    var connection: Connection {
+        return account.connection
+    }
+    
+    var reconnectNeeded: Bool {
+        guard   connection.status == .active,
+                let interactive = connection.interactive,
+                let nextRefreshPossibleAt = connection.nextRefreshPossibleAt else {
+                    
+            return true
+        }
+        return interactive && nextRefreshPossibleAt.isInPast
+    }
+    
+    var reconnectType: ProviderConnectionType {
+        switch connection.status {
+        case .active:
+            return .refresh
+        case .inactive:
+            return .reconnect
+        case .deleted:
+            return .create
+        }
     }
     
     init(account: Account) {

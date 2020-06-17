@@ -43,6 +43,6 @@ class ProviderConnectionViewModel {
         }
         
         let saltedgeId = id == connection?.saltedgeId ? nil : id
-        return bankConnectionsCoordinator.updateConnection(id: connectionId, saltedgeId: saltedgeId)
+        return bankConnectionsCoordinator.updatedConnection(id: connectionId, saltedgeId: saltedgeId)
     }
 }

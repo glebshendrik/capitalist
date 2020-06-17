@@ -67,8 +67,8 @@ class UIFactory : UIFactoryProtocol {
         return accountsViewController
     }
     
-        func connectionViewController(delegate: ConnectionViewControllerDelegate,
-                                  providerViewModel: ProviderViewModel,
+    func connectionViewController(delegate: ConnectionViewControllerDelegate,
+                                  providerViewModel: ProviderViewModel?,
                                   connectionType: ProviderConnectionType,
                                   connectionURL: URL,
                                   connection: Connection?) -> ConnectionViewController? {
