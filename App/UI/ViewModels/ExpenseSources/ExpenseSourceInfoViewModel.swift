@@ -67,6 +67,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         return expenseSourceViewModel?.iconType ?? .raster
     }
     
+    var canEditIcon: Bool {
+        return !(expenseSourceViewModel?.accountConnected ?? false)
+    }
+    
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          creditsCoordinator: CreditsCoordinatorProtocol,
          borrowsCoordinator: BorrowsCoordinatorProtocol,
@@ -110,9 +114,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         }
         
         fields.append(IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
-                                    iconType: .raster,
+                                    iconType: iconType,
                                     iconURL: selectedIconURL,
-                                    placeholder: TransactionableType.expenseSource.defaultIconName))
+                                    placeholder: TransactionableType.expenseSource.defaultIconName,
+                                    canEditIcon: canEditIcon))
         
         fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
                                      title: NSLocalizedString("Баланс", comment: "Баланс"),

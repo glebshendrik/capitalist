@@ -161,8 +161,8 @@ class IconView : CustomView {
     
     func setupVectorIconConstraints() {
         vectorImageView.snp.makeConstraints { make in
-            vectorFullsizeConstraints.append(make.width.height.lessThanOrEqualTo(28).constraint)
-            vectorCompactConstraints.append(make.width.height.lessThanOrEqualTo(14).constraint)
+            vectorFullsizeConstraints.append(make.width.height.equalTo(32).constraint)
+            vectorCompactConstraints.append(make.width.height.equalTo(18).constraint)
             make.center.equalToSuperview()
         }
     }
@@ -204,5 +204,7 @@ class IconView : CustomView {
     private func updateVectorConstraints() {
         setVectorFullsizeConstraints(active: vectorIconMode == .fullsize)
         setVectorCompactConstraints(active: vectorIconMode == .compact)
+        self.updateConstraints()
+        self.layoutIfNeeded()
     }
 }

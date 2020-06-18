@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyBeaver
 
 protocol ConnectionViewControllerDelegate {
-    func didConnectToConnection(_ providerViewModel: ProviderViewModel, connection: Connection)
+    func didConnectToConnection(_ providerViewModel: ProviderViewModel?, connection: Connection)
     func didNotConnect()
     func didNotConnect(error: Error)
 }
@@ -87,7 +87,7 @@ extension ConnectionViewController: SEWebViewDelegate {
 
 extension ConnectionViewController {
     func setupConnection(id: String, secret: String) {
-        guard let delegate = delegate, let provider = viewModel.providerViewModel else {
+        guard let delegate = delegate else {
             messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
             close()
             return
@@ -99,7 +99,7 @@ extension ConnectionViewController {
             self.messagePresenterManager.dismissHUD()
         }.get { connection in
             self.close() {                
-                delegate.didConnectToConnection(provider, connection: connection)
+                delegate.didConnectToConnection(self.viewModel.providerViewModel, connection: connection)
             }
         }.catch { error in
             self.close()

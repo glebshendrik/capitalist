@@ -12,6 +12,8 @@ import PromiseKit
 protocol ExpenseSourcesCoordinatorProtocol {
     func create(with creationForm: ExpenseSourceCreationForm) -> Promise<ExpenseSource>
     func show(by id: Int) -> Promise<ExpenseSource>
+    func syncedWithConnection(expenseSource: ExpenseSource) -> Promise<ExpenseSource>
+    func refreshConnection(expenseSource: ExpenseSource) -> Promise<Void>
     func first() -> Promise<ExpenseSource?>
     func first(currency: String, isVirtual: Bool) -> Promise<ExpenseSource>
     func index(currency: String?) -> Promise<[ExpenseSource]>

@@ -35,7 +35,7 @@ class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
                 }
     }
     
-    private func syncedWithConnection(expenseSource: ExpenseSource) -> Promise<ExpenseSource> {
+    func syncedWithConnection(expenseSource: ExpenseSource) -> Promise<ExpenseSource> {
         guard   let accountConnection = expenseSource.accountConnection,
                 let connectionId = accountConnection.account.connection.id else {
             return Promise.value(expenseSource)
@@ -46,6 +46,15 @@ class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
                 }.then {
                     self.expenseSourcesService.show(by: expenseSource.id)
                 }
+    }
+    
+    func refreshConnection(expenseSource: ExpenseSource) -> Promise<Void> {
+        guard   let accountConnection = expenseSource.accountConnection,
+                let connectionId = accountConnection.account.connection.id else {
+            return Promise.value(())
+        }
+        return bankConnectionsCoordinator.updateConnection(id: connectionId,
+                                                           saltedgeId: accountConnection.account.connection.saltedgeId)
     }
     
     func first() -> Promise<ExpenseSource?> {

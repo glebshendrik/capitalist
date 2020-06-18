@@ -17,6 +17,7 @@ protocol IconInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
 
 class IconInfoTableViewCell : EntityInfoTableViewCell {
     @IBOutlet weak var iconView: IconView!
+    @IBOutlet weak var iconPenView: UIView!
     @IBOutlet weak var headerLabelsStackView: UIStackView!
     @IBOutlet weak var mainValueLabel: UILabel!
     @IBOutlet weak var mainValueTitleLabel: UILabel!
@@ -45,9 +46,11 @@ class IconInfoTableViewCell : EntityInfoTableViewCell {
         iconView.defaultIconName = field.placeholder
         iconView.iconTintColor = UIColor.by(.white100)
         iconView.backgroundViewColor = field.backgroundColor
+        iconPenView.isHidden = !field.canEditIcon
     }
     
     @IBAction func didTapIcon(_ sender: Any) {
+        guard let field = iconField, field.canEditIcon else { return }
         iconDelegate?.didTapIcon(field: iconField)
     }
 }

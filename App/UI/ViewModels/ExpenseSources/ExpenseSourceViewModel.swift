@@ -13,6 +13,7 @@ class ExpenseSourceViewModel {
     public private(set) var accountViewModel: AccountViewModel? = nil
     
     var isSelected: Bool = false
+    var isConnectionLoading: Bool = false
     
     var id: Int {
         return expenseSource.id
@@ -82,7 +83,7 @@ class ExpenseSourceViewModel {
     }
         
     var iconType: IconType {
-        return expenseSource.accountConnection != nil ? .vector : .raster
+        return iconURL?.iconType ?? .raster
     }
     
     var cardType: CardType? {
@@ -93,7 +94,7 @@ class ExpenseSourceViewModel {
         return cardType?.imageName
     }
     
-    var cardLastNumbers: String? {
+    var cardLastNumbers: String? {        
         return accountViewModel?.cardLastNumbers
     }
     
@@ -107,6 +108,18 @@ class ExpenseSourceViewModel {
     
     var reconnectType: ProviderConnectionType {
         return accountViewModel?.reconnectType ?? .refresh
+    }
+    
+    var iconHidden: Bool {
+        return isConnectionLoading || reconnectNeeded
+    }
+    
+    var reconnectWarningHidden: Bool {
+        return !reconnectNeeded || isConnectionLoading
+    }
+    
+    var connectionIndicatorHidden: Bool {
+        return !isConnectionLoading
     }
     
     init(expenseSource: ExpenseSource) {

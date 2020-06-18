@@ -98,6 +98,10 @@ class ExpenseSourceEditViewModel {
         return !accountConnected
     }
     
+    var canCardType: Bool {
+        return !accountConnected
+    }
+    
     // Visibility
         
     var iconPenHidden: Bool {
@@ -117,7 +121,7 @@ class ExpenseSourceEditViewModel {
     }
     
     var iconType: IconType {
-        return expenseSource?.accountConnection != nil ? .vector : .raster
+        return selectedIconURL?.iconType ?? .raster
     }
     
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
@@ -230,12 +234,13 @@ extension ExpenseSourceEditViewModel {
     func connect(accountViewModel: AccountViewModel, connection: Connection) {
         selectedCurrency = accountViewModel.currency
         selectedIconURL = connection.providerLogoURL
+        selectedCardType = accountViewModel.cardType
         
         if name == nil || isNew {
             name = accountViewModel.name
         }
         
-        amount = accountViewModel.amount
+        amount = accountViewModel.amountDecimal
         
         if let creditLimit = accountViewModel.creditLimit {
             self.creditLimit = creditLimit

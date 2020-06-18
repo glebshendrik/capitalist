@@ -22,7 +22,7 @@ class AccountViewModel {
     }
     
     var name: String {
-        return account.accountName
+        return account.accountFullName ?? account.accountName
     }
     
     var currency: Currency {
@@ -40,6 +40,10 @@ class AccountViewModel {
     
     var amount: String? {
         return amountCents?.moneyCurrencyString(with: currency, shouldRound: false)
+    }
+    
+    var amountDecimal: String? {
+        return amountCents?.moneyDecimalString(with: currency)
     }
     
     var balance: String {
@@ -73,7 +77,8 @@ class AccountViewModel {
     }
     
     var cardLastNumbers: String? {
-        return account.cardNumbers?.first
+        guard let numbers = account.cardNumbers?.first?.components(separatedBy: "*").last else { return nil }
+        return "•••• \(numbers)"
     }
     
     var cardType: CardType? {

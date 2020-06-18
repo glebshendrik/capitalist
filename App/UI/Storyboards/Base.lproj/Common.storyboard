@@ -341,7 +341,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BankWarningInfoTableViewCell" rowHeight="153" id="iPv-Mv-zJc" customClass="BankWarningInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BankWarningInfoTableViewCell" id="iPv-Mv-zJc" customClass="BankWarningInfoTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="153"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iPv-Mv-zJc" id="KTw-Ve-SWo">
@@ -428,6 +428,8 @@
                                                 <constraint firstItem="I0r-Qo-a6Z" firstAttribute="leading" secondItem="KTw-Ve-SWo" secondAttribute="leading" constant="16" id="T7d-2F-ppn"/>
                                                 <constraint firstItem="I0r-Qo-a6Z" firstAttribute="centerY" secondItem="KTw-Ve-SWo" secondAttribute="centerY" id="VsS-ig-0hX"/>
                                                 <constraint firstAttribute="trailing" secondItem="I0r-Qo-a6Z" secondAttribute="trailing" constant="16" id="Xv6-DA-ij0"/>
+                                                <constraint firstItem="I0r-Qo-a6Z" firstAttribute="top" secondItem="KTw-Ve-SWo" secondAttribute="top" id="clw-g4-F9l"/>
+                                                <constraint firstAttribute="bottom" secondItem="I0r-Qo-a6Z" secondAttribute="bottom" id="eXh-0z-Dyl"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -513,6 +515,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="iconPenView" destination="59e-qX-JzW" id="GuZ-2T-zbT"/>
                                             <outlet property="iconView" destination="hqL-WS-9On" id="99X-fe-5zs"/>
                                         </connections>
                                     </tableViewCell>

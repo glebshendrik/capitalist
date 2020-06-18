@@ -18,6 +18,7 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     }
         
     override func didTapIcon(field: IconInfoField?) {
+        guard viewModel.canEditIcon else { return }
         modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSource))
     }
          
@@ -108,7 +109,8 @@ extension ExpenseSourceInfoViewController : ConnectionViewControllerDelegate {
         modal(UINavigationController(rootViewController: connectionViewController))
     }
         
-    func didConnectToConnection(_ providerViewModel: ProviderViewModel, connection: Connection) {
+    func didConnectToConnection(_ providerViewModel: ProviderViewModel?, connection: Connection) {
+        
         refreshData()
     }
         
@@ -127,7 +129,7 @@ extension ExpenseSourceInfoViewController : ProvidersViewControllerDelegate, Acc
         modal(UINavigationController(rootViewController: providersViewController))
     }
     
-    func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection) {
+    func didConnectTo(_ providerViewModel: ProviderViewModel?, connection: Connection) {
         showAccountsViewController(for: connection)
     }
     

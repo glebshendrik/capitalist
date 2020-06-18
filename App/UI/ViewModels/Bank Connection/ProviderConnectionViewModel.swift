@@ -28,21 +28,21 @@ class ProviderConnectionViewModel {
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
     }
     
-    func createConnection(_ connection: SEConnection, providerViewModel: ProviderViewModel) -> Promise<Connection> {
-        return bankConnectionsCoordinator.createConnection(connection, provider: providerViewModel.provider)
-    }
+//    func createConnection(_ connection: SEConnection, providerViewModel: ProviderViewModel) -> Promise<Connection> {
+//        return bankConnectionsCoordinator.createConnection(connection, provider: providerViewModel.provider)
+//    }
     
     func setupConnection(id: String, secret: String) -> Promise<Connection> {
-        guard let provider = providerViewModel?.provider else { return Promise(error: BankConnectionError.canNotCreateConnection) }
-        
-        guard let connectionId = connection?.id else {
-            if connectionType == .create {
-                return bankConnectionsCoordinator.createConnection(connectionSecret: secret, provider: provider)
-            }
-            return Promise(error: BankConnectionError.canNotCreateConnection)
+        if let connectionId = connection?.id {
+            let saltedgeId = id == connection?.saltedgeId ? nil : id
+
+            return bankConnectionsCoordinator.updatedConnection(id: connectionId, saltedgeId: saltedgeId)
         }
-        
-        let saltedgeId = id == connection?.saltedgeId ? nil : id
-        return bankConnectionsCoordinator.updatedConnection(id: connectionId, saltedgeId: saltedgeId)
+        if  connectionType == .create,
+            let provider = providerViewModel?.provider {
+            
+            return bankConnectionsCoordinator.createConnection(connectionSecret: secret, provider: provider)
+        }
+        return Promise(error: BankConnectionError.canNotCreateConnection)
     }
 }

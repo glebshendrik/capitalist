@@ -94,7 +94,7 @@ extension ActiveInfoViewController : ProvidersViewControllerDelegate, AccountsVi
         modal(UINavigationController(rootViewController: providersViewController))
     }
     
-    func didConnectTo(_ providerViewModel: ProviderViewModel, connection: Connection) {
+    func didConnectTo(_ providerViewModel: ProviderViewModel?, connection: Connection) {
         showAccountsViewController(for: connection)
     }
     

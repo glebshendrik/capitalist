@@ -18,6 +18,7 @@ class MainViewModel {
     private let activesCoordinator: ActivesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
     private let userPreferencesManager: UserPreferencesManagerProtocol
+    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
     
     private var incomeSourceViewModels: [IncomeSourceViewModel] = []
     private var expenseSourceViewModels: [ExpenseSourceViewModel] = []
@@ -148,8 +149,6 @@ class MainViewModel {
         switch basketsViewModel.selectedBasketType {
         case .safe, .risk:
             return NSLocalizedString(". Стоимость: ", comment: ". Стоимость: ")
-        case .risk:
-            return NSLocalizedString(". Инвестиции: ", comment: ". Инвестиции: ")
         default:
             return ""
         }
@@ -176,7 +175,8 @@ class MainViewModel {
          expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
          activesCoordinator: ActivesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
-         userPreferencesManager: UserPreferencesManagerProtocol) {
+         userPreferencesManager: UserPreferencesManagerProtocol,
+         bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.basketsCoordinator = basketsCoordinator
@@ -184,6 +184,7 @@ class MainViewModel {
         self.activesCoordinator = activesCoordinator
         self.accountCoordinator = accountCoordinator
         self.userPreferencesManager = userPreferencesManager
+        self.bankConnectionsCoordinator = bankConnectionsCoordinator
     }
     
     func selectSource(_ source: Transactionable) {
@@ -305,6 +306,27 @@ class MainViewModel {
                     self.expenseSourceViewModels = expenseSources.map { ExpenseSourceViewModel(expenseSource: $0)}
                     self.resetTransactionables()
                 }.asVoid()
+    }
+    
+    func refreshExpenseSourcesConnections() -> Promise<Void> {
+        let promises = expenseSourceViewModels
+            .filter { $0.reconnectNeeded }
+            .map { refreshConnection(expenseSourceViewModel: $0) }
+        guard promises.count > 0 else { return Promise.value(()) }
+        return  firstly {
+                    when(fulfilled: promises)
+                }.then {
+                    self.loadExpenseSources()
+                }
+    }
+    
+    func refreshConnection(expenseSourceViewModel: ExpenseSourceViewModel) -> Promise<Void> {
+        expenseSourceViewModel.isConnectionLoading = true
+        return  firstly {
+                    expenseSourcesCoordinator.refreshConnection(expenseSource: expenseSourceViewModel.expenseSource)
+                }.ensure {
+                    expenseSourceViewModel.isConnectionLoading = false
+                }
     }
     
     func loadBaskets() -> Promise<Void> {
