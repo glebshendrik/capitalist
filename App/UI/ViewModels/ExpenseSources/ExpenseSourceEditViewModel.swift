@@ -79,6 +79,10 @@ class ExpenseSourceEditViewModel {
             ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
             : NSLocalizedString("Подключить банк", comment: "Подключить банк")
     }
+        
+    var iconType: IconType {
+        return selectedIconURL?.iconType ?? .raster
+    }
     
     // Permissions
     
@@ -120,10 +124,6 @@ class ExpenseSourceEditViewModel {
         return isNew
     }
     
-    var iconType: IconType {
-        return selectedIconURL?.iconType ?? .raster
-    }
-    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
@@ -143,7 +143,7 @@ class ExpenseSourceEditViewModel {
     func set(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         
-        selectedIconURL = expenseSource.iconURL
+        selectedIconURL = expenseSource.accountConnection?.account.connection.providerLogoURL ?? expenseSource.iconURL
         selectedCurrency = expenseSource.currency
         selectedCardType = expenseSource.cardType
         name = expenseSource.name

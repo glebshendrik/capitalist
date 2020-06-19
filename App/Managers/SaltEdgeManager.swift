@@ -87,6 +87,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                             fromDate: Date(),
                                                             javascriptCallbackType: "iframe",
                                                             includeFakeProviders: true,
+                                                            theme: "dark",
                                                             consent: SEConsent(scopes: ["account_details", "transactions_details"],
                                                                                fromDate: Date()))
         
@@ -113,7 +114,8 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                                                locale: languageCode,
                                                                                returnTo: "http://tempio.app"),
                                                             dailyRefresh: true,
-                                                            javascriptCallbackType: "iframe")
+                                                            javascriptCallbackType: "iframe",
+                                                            theme: "dark")
         
         return Promise { seal in
             SERequestManager.shared.refreshSession(with: connectionSecret, params: refreshSessionsParams) { response in
@@ -139,6 +141,8 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                                                    returnTo: "http://tempio.app"),
                                                                 dailyRefresh: true,
                                                                 javascriptCallbackType: "iframe",
+                                                                theme: "dark",
+                                                                overrideCredentialsStrategy: "override",
                                                                 consent: SEConsent(scopes: ["account_details", "transactions_details"],
                                                                                    fromDate: Date()))
         
@@ -255,3 +259,59 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         })
     }
 }
+
+//class ReconnectSessionsParams: SEReconnectSessionsParams {
+//
+//    public let overrideCredentialsStrategy: String?
+//    public let theme: String?
+//
+//    public init(excludeAccounts: [Int]? = nil,
+//                attempt: SEAttempt? = nil,
+//                customFields: String? = nil,
+//                dailyRefresh: Bool? = nil,
+//                fromDate: Date? = nil,
+//                toDate: Date? = nil,
+//                returnConnectionId: Bool? = nil,
+//                providerModes: [String]? = nil,
+//                categorize: Bool? = nil,
+//                javascriptCallbackType: String? = nil,
+//                includeFakeProviders: Bool? = nil,
+//                lostConnectionNotify: Bool? = nil,
+//                showConsentConfirmation: Bool? = nil,
+//                credentialsStrategy: String? = nil,
+//                overrideCredentialsStrategy: String? = "override",
+//                theme: String? = "dark",
+//                consent: SEConsent) {
+//        self.overrideCredentialsStrategy = overrideCredentialsStrategy
+//        self.theme = theme
+//
+//        super.init(excludeAccounts: excludeAccounts,
+//                   attempt: attempt,
+//                   customFields: customFields,
+//                   dailyRefresh: dailyRefresh,
+//                   fromDate: fromDate,
+//                   toDate: toDate,
+//                   returnConnectionId: returnConnectionId,
+//                   providerModes: providerModes,
+//                   categorize: categorize,
+//                   javascriptCallbackType: javascriptCallbackType,
+//                   includeFakeProviders: includeFakeProviders,
+//                   lostConnectionNotify: lostConnectionNotify,
+//                   showConsentConfirmation: showConsentConfirmation,
+//                   credentialsStrategy: credentialsStrategy,
+//                   consent: consent)
+//    }
+//
+//    private enum CodingKeys: String, CodingKey {
+//        case overrideCredentialsStrategy = "override_credentials_strategy"
+//        case theme = "theme"
+//    }
+//
+//    public override func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encodeIfPresent(overrideCredentialsStrategy, forKey: .overrideCredentialsStrategy)
+//        try container.encodeIfPresent(theme, forKey: .theme)
+//
+//        try super.encode(to: encoder)
+//    }
+//}

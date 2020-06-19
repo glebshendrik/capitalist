@@ -1,7 +1,7 @@
 //
-//  SELeadSessionResponse.swift
+//  SEAttemptParams.swift
 //
-//  Copyright (c) 2019 Salt Edge. https://saltedge.com
+//  Copyright (c) 2020 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,12 +23,17 @@
 
 import Foundation
 
-public struct SELeadSessionResponse: Decodable {
-    public let expiresAt: Date
-    public let redirectUrl: String
-    
+public struct SEAttemptParams: URLEncodable, ParametersEncodable {
+    let perPage: String
+    let fromId: Int?
+
+    public init(perPage: String = "1000", fromId: Int?) {
+        self.perPage = perPage
+        self.fromId = fromId
+    }
+
     enum CodingKeys: String, CodingKey {
-        case expiresAt = "expires_at"
-        case redirectUrl = "redirect_url"
+        case perPage = "per_page"
+        case fromId = "from_id"
     }
 }

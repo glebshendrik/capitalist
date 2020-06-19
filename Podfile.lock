@@ -151,7 +151,7 @@ PODS:
   - Protobuf (3.12.0)
   - RandomColorSwift (1.0.0)
   - RecurrencePicker (0.3.0)
-  - SaltEdge-iOS-Swift (3.3.1):
+  - SaltEdge-iOS-Swift (3.3.3):
     - TrustKit
   - SDWebImage/Core (5.0.3)
   - SDWebImageSVGCoder (0.3.0):
@@ -232,7 +232,7 @@ DEPENDENCIES:
   - PromiseKit/Alamofire (~> 6.5)
   - RandomColorSwift (from `https://github.com/onevcat/RandomColorSwift`, branch `master`)
   - RecurrencePicker (from `https://github.com/petalvlad/RecurrencePicker`, branch `master`)
-  - SaltEdge-iOS-Swift (~> 3.3.1)
+  - SaltEdge-iOS-Swift (from `https://github.com/petalvlad/saltedge-ios-swift`, branch `master`)
   - SDWebImageSVGCoder (~> 0.3)
   - SideMenu (from `https://github.com/jonkykong/SideMenu`, branch `master`)
   - SkyFloatingLabelTextField
@@ -307,7 +307,6 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
-    - SaltEdge-iOS-Swift
     - SwifterSwift
     - SwiftyBeaver
     - SwiftyGif
@@ -324,6 +323,9 @@ EXTERNAL SOURCES:
   RecurrencePicker:
     :branch: master
     :git: https://github.com/petalvlad/RecurrencePicker
+  SaltEdge-iOS-Swift:
+    :branch: master
+    :git: https://github.com/petalvlad/saltedge-ios-swift
   SideMenu:
     :branch: master
     :git: https://github.com/jonkykong/SideMenu
@@ -335,6 +337,9 @@ CHECKOUT OPTIONS:
   RecurrencePicker:
     :commit: aae70cc22ce643ba2311be0d7ac5a6d6cc6cc8ac
     :git: https://github.com/petalvlad/RecurrencePicker
+  SaltEdge-iOS-Swift:
+    :commit: d6daeddc9af625304e25fd62422d1bdcf84e7c63
+    :git: https://github.com/petalvlad/saltedge-ios-swift
   SideMenu:
     :commit: 138103093176154f84ae9a2a63e58b9ae78bc6d7
     :git: https://github.com/jonkykong/SideMenu
@@ -386,7 +391,7 @@ SPEC CHECKSUMS:
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   RandomColorSwift: 9f6b61247b17eafe0fd75e4a0977f2af1abd68d1
   RecurrencePicker: 72c4ad5bbf0e75c73b7ed9eddd60f307e3b1eba6
-  SaltEdge-iOS-Swift: f6f2e2815345c96b2865be2500ac2848f5de2ab4
+  SaltEdge-iOS-Swift: a6a40b86fd14d2eeee188dd48cc291cacd4411e5
   SDWebImage: d4f87d7d36c8a4d9f9459dc282e0caa057fdf935
   SDWebImageSVGCoder: 4b354bcdc7d74ce14d9fdb3c9ed9ab2c667f3b57
   SideMenu: 4a891be552d30bb6fa87ad404d62e485f8450c34
@@ -407,6 +412,6 @@ SPEC CHECKSUMS:
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
 
-PODFILE CHECKSUM: fa45d0663f004c226c997e1a2d3d74ec4d272138
+PODFILE CHECKSUM: 99b5495915ee423c8e49bb166dcfd119e50b4661
 
 COCOAPODS: 1.8.0

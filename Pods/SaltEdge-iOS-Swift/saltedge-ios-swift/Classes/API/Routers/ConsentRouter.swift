@@ -26,7 +26,7 @@ import Foundation
 typealias ConsentId = String
 
 enum ConsentRouter: Routable {
-    case list(SEConsentsListParams)
+    case list(SEConsentsListParams?)
     case show(ConsentId, SEBaseConsentsParams)
     case revoke(ConsentId, SEBaseConsentsParams)
 

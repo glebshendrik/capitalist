@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import ESPullToRefresh
+import SwiftyBeaver
 
 class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, UIMessagePresenterManagerDependantProtocol {
         
@@ -98,8 +99,8 @@ extension EntityInfoViewController {
         setLoading()
         _ = firstly {
                 viewModel.updateData()
-            }.catch { e in
-                print(e)
+            }.catch { e in                
+                SwiftyBeaver.error(e)
                 if case APIRequestError.notFound = e {                    
                     self.closeButtonHandler()
                 }

@@ -1,3 +1,12 @@
+![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SaltEdge-iOS-Swift.svg?style=flat)
+[![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40saltedge)](http://twitter.com/saltedge)
+
+<p align="center">
+  <a href="https://www.saltedge.com/products/spectre">
+    <img src="https://raw.githubusercontent.com/saltedge/sca-identity-service-example/master/docs/images/saltedge_logo.png" alt="Salt Egde Logo" width="96" height="96">
+  </a>
+</p>
+
 # Salt Edge iOS / macOS Swift SDK and iOS Example application
 
 A handful of classes to help you interact with the Salt Edge API from your iOS / macOS app.
@@ -5,17 +14,17 @@ Last SDK version (3+) supports Salt Edge API v5.
 
 ## Requirements
 
-- iOS 10.0+ / macOS 10.12+
-- Swift 4+
+- iOS 12.0+ / macOS 10.13+
+- Swift 5+
 
-## Installation with CocoaPods
+## Installation via CocoaPods
 
 #### Add the pod to your `Podfile`  
 
 for Salt Edge API v5 use
 
 ```ruby
-pod 'SaltEdge-iOS-Swift', '~> 3.3.1'
+pod 'SaltEdge-iOS-Swift', '~> 3.3.3'
 ```
 
 for Salt Edge API v4 (***Deprecated***) use 
@@ -205,7 +214,7 @@ Set up the `appId`,  `appSecret` and `customerId` constants to your App ID and c
 
 ## Versioning
 
-The current version of the SDK is [3.3.1](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.3.1), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
+The current version of the SDK is [3.3.3](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.3.3), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
 
 ## Security
 
@@ -232,4 +241,4 @@ See the [LICENSE](LICENSE) file.
 
 For more information, feel free to [contact us](https://www.saltedge.com/pages/contact)
 ---
-Copyright © 2014 - 2019 Salt Edge Inc. https://www.saltedge.com
+Copyright © 2014 - 2020 Salt Edge Inc. https://www.saltedge.com
