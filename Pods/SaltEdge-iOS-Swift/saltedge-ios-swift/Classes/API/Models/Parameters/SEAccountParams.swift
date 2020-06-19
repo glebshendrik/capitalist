@@ -24,16 +24,13 @@
 import Foundation
 
 public struct SEAccountParams: URLEncodable, ParametersEncodable {
-    let perPage: String
     let fromId: Int?
     
-    public init(perPage: String = "1000", fromId: Int?) {
-        self.perPage = perPage
+    public init(fromId: Int?) {
         self.fromId = fromId
     }
 
     enum CodingKeys: String, CodingKey {
-        case perPage = "per_page"
         case fromId = "from_id"
     }
 }

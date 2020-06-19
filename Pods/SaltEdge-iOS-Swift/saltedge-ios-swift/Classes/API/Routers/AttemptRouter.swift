@@ -24,7 +24,7 @@
 import Foundation
 
 enum AttemptRouter: Routable {
-    case list(ConnectionSecret, SEAttemptParams?)
+    case list(ConnectionSecret)
     case show(ConnectionSecret, String)
     
     var method: HTTPMethod {
@@ -40,14 +40,11 @@ enum AttemptRouter: Routable {
     
     var headers: Headers {
         switch self {
-        case .list(let secret, _), .show(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
+        case .list(let secret), .show(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
         }
     }
     
     var parameters: ParametersEncodable? {
-        switch self {
-        case .list(_, let params): return params
-        case .show: return nil
-        }
+        return nil
     }
 }

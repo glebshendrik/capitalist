@@ -1,5 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-Three Baskets/Pods-Three Baskets-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/ALTextInputBar/ALTextInputBar.framework
+${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework
 ${BUILT_PRODUCTS_DIR}/AlignedCollectionViewFlowLayout/AlignedCollectionViewFlowLayout.framework

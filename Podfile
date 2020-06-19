@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '12.0'
+platform :ios, '11.2'
 
 target 'Three Baskets' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -31,7 +31,7 @@ target 'Three Baskets' do
   pod 'MSPeekCollectionViewDelegateImplementation', '~> 2.0'
   pod 'CSV.swift'
   pod 'RecurrencePicker', git: 'https://github.com/petalvlad/RecurrencePicker', branch: 'master' 
-  pod 'SaltEdge-iOS-Swift', git: 'https://github.com/petalvlad/saltedge-ios-swift', branch: 'master'
+  pod 'SaltEdge-iOS-Swift', git: 'https://github.com/petalvlad/saltedge-ios-swift', branch: 'v3.3.1'
 #  pod 'SaltEdge-iOS-Swift', '~> 3.3.1'
   pod 'SVGKit', '~> 2.1'
   pod 'SDWebImageSVGCoder', '~> 0.3'
@@ -55,6 +55,7 @@ target 'Three Baskets' do
   pod 'BadgeHub'
   pod 'Macaw'
   pod 'SwiftyBeaver'
+  pod 'Adjust', '~> 4.22.1'
 end
 
 post_install do |installer|

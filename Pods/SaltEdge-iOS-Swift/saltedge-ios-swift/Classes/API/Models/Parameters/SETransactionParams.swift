@@ -24,12 +24,10 @@
 import Foundation
 
 public struct SETransactionParams: URLEncodable, ParametersEncodable {
-    public let perPage: String
     public let accountId: String?
     public let fromId: String?
 
-    public init(perPage: String = "1000", accountId: String? = nil, fromId: String? = nil) {
-        self.perPage = perPage
+    public init(accountId: String? = nil, fromId: String? = nil) {
         self.accountId = accountId
         self.fromId = fromId
     }
