@@ -21,6 +21,7 @@ import FBSDKCoreKit
 import FirebaseDynamicLinks
 import MyTrackerSDK
 import SwiftyBeaver
+import Adjust
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private let storyboards: [Infrastructure.Storyboard: UIStoryboard]
@@ -77,11 +78,20 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         
+        let adjustResult = continueAdjustUserActivity(userActivity, restorationHandler: restorationHandler)
         let myTrackerResult = continueMyTrackerUserActivity(userActivity, restorationHandler: restorationHandler)
-        
         let firebaseResult = continueFirebaseUserActivity(userActivity, restorationHandler: restorationHandler)
+        return adjustResult || myTrackerResult || firebaseResult
+    }
+    
+    private func continueAdjustUserActivity(_ userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         
-        return myTrackerResult || firebaseResult
+        guard   userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+                let url = userActivity.webpageURL else { return false }
+        
+        Adjust.appWillOpen(url)
+        
+        return true
     }
     
     private func continueMyTrackerUserActivity(_ userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
@@ -108,6 +118,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     func application(_ app: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         let myTrackerResult = MRMyTracker.handleOpen(url, sourceApplication: sourceApplication, annotation: annotation)
         let fbResult = ApplicationDelegate.shared.application(app, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        Adjust.appWillOpen(url)
         return myTrackerResult || fbResult
     }
     
@@ -217,6 +228,7 @@ extension ApplicationRouter {
         setupMyTracker()
         setupAnalytics()
         setupLogger()
+        setupAdjust()
     }
     
     func setupAppearance() {
@@ -251,6 +263,12 @@ extension ApplicationRouter {
     private func setupApphud() {
         Apphud.start(apiKey: "app_mHJ17n3JPJiohGj5JgwNkkermyShF1")
         Apphud.setDelegate(self)
+    }
+    
+    private func setupAdjust() {
+        let config = ADJConfig(appToken: "uu6gmcz0juo0", environment: ADJEnvironmentProduction)
+        config?.delegate = self
+        Adjust.appDidLaunch(config)
     }
     
     private func setupSaltEdge() {
@@ -468,6 +486,20 @@ extension ApplicationRouter : MRMyTrackerAttributionDelegate {
 extension ApplicationRouter : ApphudDelegate {
     func apphudSubscriptionsUpdated(_ subscriptions: [ApphudSubscription]) {
         _ = accountCoordinator.updateUserSubscription()
+    }
+}
+
+extension ApplicationRouter : AdjustDelegate {
+    func adjustAttributionChanged(_ attribution: ADJAttribution?) {
+        if let data = attribution?.dictionary() {
+            Apphud.addAttribution(data: data, from: .adjust) { (result) in }
+        } else if let adid = Adjust.adid() {
+            Apphud.addAttribution(data: ["adid" : adid], from: .adjust) { (result) in }
+        }
+    }
+    
+    func adjustDeeplinkResponse(_ deeplink: URL?) -> Bool {
+        return true
     }
 }
 

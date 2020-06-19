@@ -11,6 +11,7 @@ import PromiseKit
 import ApphudSDK
 import FBSDKCoreKit
 import FirebaseMessaging
+import Adjust
 
 class NotificationsCoordinator : NotificationsCoordinatorProtocol {
     private let userSessionManager: UserSessionManagerProtocol
@@ -35,6 +36,7 @@ class NotificationsCoordinator : NotificationsCoordinatorProtocol {
         Apphud.submitPushNotificationsToken(token: deviceToken, callback: nil)
         AppEvents.setPushNotificationsDeviceToken(deviceToken)
         Messaging.messaging().setAPNSToken(deviceToken, type: .unknown)
+        Adjust.setDeviceToken(deviceToken)
         return devicesService.register(deviceToken: deviceToken, userId: currentUserId)
     }
 }

@@ -11,12 +11,13 @@ import Firebase
 import FBSDKCoreKit
 import MyTrackerSDK
 import FirebaseMessaging
+import Adjust
 
 class AnalyticsManager : AnalyticsManagerProtocol {    
     func setup() {
         FirebaseApp.configure()
         FirebaseConfiguration.shared.setLoggerLevel(.error)
-        MRMyTracker.setupTracker("86955137780758326245")
+        MRMyTracker.setupTracker("86955137780758326245")        
     }
         
     func set(userId: String) {
@@ -24,12 +25,14 @@ class AnalyticsManager : AnalyticsManagerProtocol {
         Analytics.setUserID(userId)
         AppEvents.userID = userId
         MRMyTracker.trackerParams().customUserId = userId
+        
     }
     
     func track(event: String, parameters: [String : Any]?) {
         Analytics.logEvent(event, parameters: parameters)
         AppEvents.logEvent(AppEvents.Name(event), parameters: parameters ?? [:])
         MRMyTracker.trackEvent(withName: event, eventParams: parameters?.compactMapValues { "\($0)" })
+//        Adjust.trackEvent(ADJEvent(eventToken: event))
     }
     
     func trackSignUp(user: User) {
@@ -40,5 +43,7 @@ class AnalyticsManager : AnalyticsManagerProtocol {
         
         MRMyTracker.trackRegistrationEvent()
         MRMyTracker.trackerParams().email = user.email
+        
+        Adjust.trackEvent(ADJEvent(eventToken: "1n18nv"))
     }
 }

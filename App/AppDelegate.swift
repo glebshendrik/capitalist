@@ -10,6 +10,7 @@ import UIKit
 import SwinjectStoryboard
 import Swinject
 import FirebaseDynamicLinks
+import Adjust
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
