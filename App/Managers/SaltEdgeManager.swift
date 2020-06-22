@@ -19,6 +19,10 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     var reconnectConnectSessionCache: [String: SEConnectSessionResponse] = [:]
     private var customerSecret: String? = nil
     
+    var includeFakeProviders: Bool {
+        return UIApplication.shared.inferredEnvironment == .debug
+    }
+    
     func set(appId: String, appSecret: String) {
         SERequestManager.shared.set(appId: appId, appSecret: appSecret)
     }
@@ -46,9 +50,15 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     
     func loadProviders(country: String?) -> Promise<[SEProvider]> {
         return  firstly {
-                    when(fulfilled: loadSaltEdgeProviders(country), loadSaltEdgeProviders("XO"))
-                }.map { countryProviders, electronicProviders in
-                    let providers = country == nil ? countryProviders : (countryProviders + electronicProviders)
+                    when(fulfilled: loadSaltEdgeProviders(country),
+                                    loadSaltEdgeProviders("XO"),
+                                    loadSaltEdgeProviders("XF"))
+                }.map { countryProviders, electronicProviders, fakeProviders in
+                                                            
+                    var providers = country == nil ? countryProviders : (countryProviders + electronicProviders)
+                    if self.includeFakeProviders {
+                        providers = providers + fakeProviders
+                    }
                     return self.sortProvidersByCountry(providers,
                                                        startingWith: country)
                 }
@@ -58,21 +68,26 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         if let country = country, let providers = providersCache[country] {
             return Promise.value(providers)
         }
+        return  firstly {
+                    when(fulfilled: loadSaltEdgeProviders(country, mode: "web"),
+                                    loadSaltEdgeProviders(country, mode: "oauth"))
+                }.map { web, oauth in
+                    let providers = web + oauth
+                    if let country = country {
+                        self.providersCache[country] = providers
+                    }
+                    return providers
+                }
+    }
+    
+    private func loadSaltEdgeProviders(_ country: String?, mode: String) -> Promise<[SEProvider]> {
         return Promise { seal in
             let params = SEProviderParams(countryCode: country,
-                                          mode: "web",
-                                          includeFakeProviders: false)
-            SERequestManager.shared.getAllProviders(with: params) { [weak self] response in
+                                          mode: mode,
+                                          includeFakeProviders: includeFakeProviders)
+            SERequestManager.shared.getAllProviders(with: params) { response in
                 switch response {
                 case .success(let value):
-                    guard let self = self else {
-                        seal.reject(SaltEdgeError.cannotLoadProviders)
-                        return
-                    }
-                    if let country = country {
-                        self.providersCache[country] = value.data
-                    }
-                    
                     seal.fulfill(value.data)
                 case .failure(let error):
                     seal.reject(error)
@@ -98,7 +113,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                             dailyRefresh: true,
                                                             fromDate: Date(),
                                                             javascriptCallbackType: "iframe",
-                                                            includeFakeProviders: true,
+                                                            includeFakeProviders: includeFakeProviders,
                                                             theme: "dark",
                                                             consent: SEConsent(scopes: ["account_details", "transactions_details"],
                                                                                fromDate: Date()))
@@ -140,6 +155,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                                                returnTo: "http://tempio.app"),
                                                             dailyRefresh: true,
                                                             javascriptCallbackType: "iframe",
+                                                            includeFakeProviders: includeFakeProviders,
                                                             theme: "dark")
         
         return Promise { seal in
@@ -173,6 +189,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                                                    returnTo: "http://tempio.app"),
                                                                 dailyRefresh: true,
                                                                 javascriptCallbackType: "iframe",
+                                                                includeFakeProviders: includeFakeProviders,
                                                                 theme: "dark",
                                                                 overrideCredentialsStrategy: "override",
                                                                 consent: SEConsent(scopes: ["account_details", "transactions_details"],
@@ -292,59 +309,3 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         })
     }
 }
-
-//class ReconnectSessionsParams: SEReconnectSessionsParams {
-//
-//    public let overrideCredentialsStrategy: String?
-//    public let theme: String?
-//
-//    public init(excludeAccounts: [Int]? = nil,
-//                attempt: SEAttempt? = nil,
-//                customFields: String? = nil,
-//                dailyRefresh: Bool? = nil,
-//                fromDate: Date? = nil,
-//                toDate: Date? = nil,
-//                returnConnectionId: Bool? = nil,
-//                providerModes: [String]? = nil,
-//                categorize: Bool? = nil,
-//                javascriptCallbackType: String? = nil,
-//                includeFakeProviders: Bool? = nil,
-//                lostConnectionNotify: Bool? = nil,
-//                showConsentConfirmation: Bool? = nil,
-//                credentialsStrategy: String? = nil,
-//                overrideCredentialsStrategy: String? = "override",
-//                theme: String? = "dark",
-//                consent: SEConsent) {
-//        self.overrideCredentialsStrategy = overrideCredentialsStrategy
-//        self.theme = theme
-//
-//        super.init(excludeAccounts: excludeAccounts,
-//                   attempt: attempt,
-//                   customFields: customFields,
-//                   dailyRefresh: dailyRefresh,
-//                   fromDate: fromDate,
-//                   toDate: toDate,
-//                   returnConnectionId: returnConnectionId,
-//                   providerModes: providerModes,
-//                   categorize: categorize,
-//                   javascriptCallbackType: javascriptCallbackType,
-//                   includeFakeProviders: includeFakeProviders,
-//                   lostConnectionNotify: lostConnectionNotify,
-//                   showConsentConfirmation: showConsentConfirmation,
-//                   credentialsStrategy: credentialsStrategy,
-//                   consent: consent)
-//    }
-//
-//    private enum CodingKeys: String, CodingKey {
-//        case overrideCredentialsStrategy = "override_credentials_strategy"
-//        case theme = "theme"
-//    }
-//
-//    public override func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encodeIfPresent(overrideCredentialsStrategy, forKey: .overrideCredentialsStrategy)
-//        try container.encodeIfPresent(theme, forKey: .theme)
-//
-//        try super.encode(to: encoder)
-//    }
-//}
