@@ -15,7 +15,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         
     var providersCache: [String: [SEProvider]] = [:]
     var createConnectSessionCache: [String: [String: SEConnectSessionResponse]] = [:]
-    var refreshConnectSessionCache: [String: SEConnectSessionResponse] = [:]
+//    var refreshConnectSessionCache: [String: SEConnectSessionResponse] = [:]
     var reconnectConnectSessionCache: [String: SEConnectSessionResponse] = [:]
     private var customerSecret: String? = nil
     
@@ -97,13 +97,13 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     }
     
     func createConnectSession(providerCode: String, countryCode: String, languageCode: String) -> Promise<URL> {
-        if  let customerSecret = self.customerSecret,
-            let cachedSessionResponse = createConnectSessionCache[customerSecret]?[providerCode],
-            let url = URL(string: cachedSessionResponse.connectUrl),
-            cachedSessionResponse.expiresAt.isInFuture {
-            
-            return Promise.value(url)
-        }
+//        if  let customerSecret = self.customerSecret,
+//            let cachedSessionResponse = createConnectSessionCache[customerSecret]?[providerCode],
+//            let url = URL(string: cachedSessionResponse.connectUrl),
+//            cachedSessionResponse.expiresAt.isInFuture {
+//
+//            return Promise.value(url)
+//        }
         let connectSessionsParams = SEConnectSessionsParams(allowedCountries: [countryCode],
                                                             attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
@@ -126,12 +126,12 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                         seal.reject(SaltEdgeError.cannotCreateConnectSession)
                         return
                     }
-                    if let customerSecret = self.customerSecret {
-                        if self.createConnectSessionCache[customerSecret] == nil {
-                            self.createConnectSessionCache[customerSecret] = [:]
-                        }
-                        self.createConnectSessionCache[customerSecret]?[providerCode] = value.data
-                    }
+//                    if let customerSecret = self.customerSecret {
+//                        if self.createConnectSessionCache[customerSecret] == nil {
+//                            self.createConnectSessionCache[customerSecret] = [:]
+//                        }
+//                        self.createConnectSessionCache[customerSecret]?[providerCode] = value.data
+//                    }
                     
                     seal.fulfill(url)
                 case .failure(let error):
@@ -142,12 +142,12 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     }
     
     func createRefreshConnectionSession(connectionSecret: String, languageCode: String) -> Promise<URL> {
-        if  let cachedSessionResponse = refreshConnectSessionCache[connectionSecret],
-            let url = URL(string: cachedSessionResponse.connectUrl),
-            cachedSessionResponse.expiresAt.isInFuture {
-            
-            return Promise.value(url)
-        }
+//        if  let cachedSessionResponse = refreshConnectSessionCache[connectionSecret],
+//            let url = URL(string: cachedSessionResponse.connectUrl),
+//            cachedSessionResponse.expiresAt.isInFuture {
+//
+//            return Promise.value(url)
+//        }
         
         let refreshSessionsParams = SERefreshSessionsParams(attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
@@ -166,7 +166,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                         seal.reject(SaltEdgeError.cannotCreateConnectSession)
                         return
                     }
-                    self.refreshConnectSessionCache[connectionSecret] = value.data
+//                    self.refreshConnectSessionCache[connectionSecret] = value.data
                     seal.fulfill(url)
                 case .failure(let error):
                     seal.reject(error)
@@ -176,12 +176,12 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     }
     
     func createReconnectSession(connectionSecret: String, languageCode: String) -> Promise<URL> {
-        if  let cachedSessionResponse = reconnectConnectSessionCache[connectionSecret],
-            let url = URL(string: cachedSessionResponse.connectUrl),
-            cachedSessionResponse.expiresAt.isInFuture {
-            
-            return Promise.value(url)
-        }
+//        if  let cachedSessionResponse = reconnectConnectSessionCache[connectionSecret],
+//            let url = URL(string: cachedSessionResponse.connectUrl),
+//            cachedSessionResponse.expiresAt.isInFuture {
+//
+//            return Promise.value(url)
+//        }
         
         let reconnectSessionsParams = SEReconnectSessionsParams(attempt: SEAttempt(automaticFetch: true,
                                                                                    dailyRefresh: true,
@@ -203,7 +203,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                         seal.reject(SaltEdgeError.cannotCreateConnectSession)
                         return
                     }
-                    self.reconnectConnectSessionCache[connectionSecret] = value.data
+//                    self.reconnectConnectSessionCache[connectionSecret] = value.data
                     seal.fulfill(url)
                 case .failure(let error):
                     seal.reject(error)
