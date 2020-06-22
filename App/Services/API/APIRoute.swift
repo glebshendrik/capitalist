@@ -22,7 +22,7 @@ enum APIRoute: URLRequestConvertible {
 //            return "https://staging.threebaskets.net"
 //            return "https://api.threebaskets.net"
         case .testFlight:
-            return "https://api.threebaskets.net"
+            return "http://localhost:8090"
 //            return "https://skrudz.tempio.app"
 //            return "https://test.threebaskets.net"
         case .appStore:
