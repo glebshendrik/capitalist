@@ -49,7 +49,12 @@ class ConnectionViewController : UIViewController, UIMessagePresenterManagerDepe
     }
     
     private func close(completion: (() -> Void)? = nil) {
+        postFinantialDataUpdated()
         presentingViewController?.dismiss(animated: true, completion: completion)
+    }
+    
+    private func postFinantialDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
 }
 

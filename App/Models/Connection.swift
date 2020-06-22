@@ -25,6 +25,18 @@ enum ConnectionStatus : String, Codable {
     }
 }
 
+enum ConnectionStage : String, Codable {
+    case start
+    case connect
+    case interactive
+    case fetchHolderInfo = "fetch_holder_info"
+    case fetchAccounts = "fetch_accounts"
+    case fetchRecent = "fetch_recent"
+    case fetchFull = "fetch_full"
+    case disconnect
+    case finish
+}
+
 struct Connection : Decodable {
     let id: Int?
     let saltedgeId: String
@@ -37,6 +49,7 @@ struct Connection : Decodable {
     let status: ConnectionStatus
     let interactive: Bool?
     let nextRefreshPossibleAt: Date?
+    let lastStage: ConnectionStage = .finish
     let createdAt: Date?
     let updatedAt: Date?
         
@@ -52,6 +65,7 @@ struct Connection : Decodable {
         case status
         case interactive
         case nextRefreshPossibleAt = "next_refresh_possible_at"
+        case lastStage = "last_stage"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }

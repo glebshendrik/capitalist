@@ -14,12 +14,17 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     static let applicationURLString: String = "saltedge-api-three-baskets://home.local"
         
     var providersCache: [String: [SEProvider]] = [:]
+    var createConnectSessionCache: [String: [String: SEConnectSessionResponse]] = [:]
+    var refreshConnectSessionCache: [String: SEConnectSessionResponse] = [:]
+    var reconnectConnectSessionCache: [String: SEConnectSessionResponse] = [:]
+    private var customerSecret: String? = nil
     
     func set(appId: String, appSecret: String) {
         SERequestManager.shared.set(appId: appId, appSecret: appSecret)
     }
     
     func set(customerSecret: String) {
+        self.customerSecret = customerSecret
         SERequestManager.shared.set(customerSecret: customerSecret)
     }
     
@@ -77,6 +82,13 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     }
     
     func createConnectSession(providerCode: String, countryCode: String, languageCode: String) -> Promise<URL> {
+        if  let customerSecret = self.customerSecret,
+            let cachedSessionResponse = createConnectSessionCache[customerSecret]?[providerCode],
+            let url = URL(string: cachedSessionResponse.connectUrl),
+            cachedSessionResponse.expiresAt.isInFuture {
+            
+            return Promise.value(url)
+        }
         let connectSessionsParams = SEConnectSessionsParams(allowedCountries: [countryCode],
                                                             attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
@@ -95,11 +107,17 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
             SERequestManager.shared.createConnectSession(params: connectSessionsParams) { response in
                 switch response {
                 case .success(let value):
-                    
                     guard let url = URL(string: value.data.connectUrl) else {
                         seal.reject(SaltEdgeError.cannotCreateConnectSession)
                         return
                     }
+                    if let customerSecret = self.customerSecret {
+                        if self.createConnectSessionCache[customerSecret] == nil {
+                            self.createConnectSessionCache[customerSecret] = [:]
+                        }
+                        self.createConnectSessionCache[customerSecret]?[providerCode] = value.data
+                    }
+                    
                     seal.fulfill(url)
                 case .failure(let error):
                     seal.reject(error)
@@ -109,6 +127,13 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     }
     
     func createRefreshConnectionSession(connectionSecret: String, languageCode: String) -> Promise<URL> {
+        if  let cachedSessionResponse = refreshConnectSessionCache[connectionSecret],
+            let url = URL(string: cachedSessionResponse.connectUrl),
+            cachedSessionResponse.expiresAt.isInFuture {
+            
+            return Promise.value(url)
+        }
+        
         let refreshSessionsParams = SERefreshSessionsParams(attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
                                                                                locale: languageCode,
@@ -125,6 +150,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                         seal.reject(SaltEdgeError.cannotCreateConnectSession)
                         return
                     }
+                    self.refreshConnectSessionCache[connectionSecret] = value.data
                     seal.fulfill(url)
                 case .failure(let error):
                     seal.reject(error)
@@ -134,10 +160,16 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     }
     
     func createReconnectSession(connectionSecret: String, languageCode: String) -> Promise<URL> {
+        if  let cachedSessionResponse = reconnectConnectSessionCache[connectionSecret],
+            let url = URL(string: cachedSessionResponse.connectUrl),
+            cachedSessionResponse.expiresAt.isInFuture {
+            
+            return Promise.value(url)
+        }
+        
         let reconnectSessionsParams = SEReconnectSessionsParams(attempt: SEAttempt(automaticFetch: true,
                                                                                    dailyRefresh: true,
                                                                                    locale: languageCode,
-//                                                                                   storeCredentials: false,
                                                                                    returnTo: "http://tempio.app"),
                                                                 dailyRefresh: true,
                                                                 javascriptCallbackType: "iframe",
@@ -154,6 +186,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                         seal.reject(SaltEdgeError.cannotCreateConnectSession)
                         return
                     }
+                    self.reconnectConnectSessionCache[connectionSecret] = value.data
                     seal.fulfill(url)
                 case .failure(let error):
                     seal.reject(error)

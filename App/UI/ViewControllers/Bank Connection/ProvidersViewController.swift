@@ -194,6 +194,10 @@ extension ProvidersViewController : ConnectionViewControllerDelegate {
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { connection in
+            guard connection.lastStage == .finish else {
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
+                return
+            }
             switch connection.status {
             case .active:
                 guard   let nextRefreshPossibleAt = connection.nextRefreshPossibleAt,
@@ -255,12 +259,12 @@ extension ProvidersViewController : ConnectionViewControllerDelegate {
     
     func showConnectionViewController(for providerViewModel: ProviderViewModel, connectionURL: URL, connectionType: ProviderConnectionType = .create, connection: Connection? = nil) {
         
-        guard let connectionViewController = factory.connectionViewController(delegate: self,
+        let connectionViewController = factory.connectionViewController(delegate: self,
                                                                               providerViewModel: providerViewModel,
                                                                               connectionType: connectionType,
                                                                               connectionURL: connectionURL,
-                                                                              connection: connection) else { return }
-        modal(UINavigationController(rootViewController: connectionViewController))
+                                                                              connection: connection)
+        modal(connectionViewController)
     }
         
     func didConnectToConnection(_ providerViewModel: ProviderViewModel?, connection: Connection) {

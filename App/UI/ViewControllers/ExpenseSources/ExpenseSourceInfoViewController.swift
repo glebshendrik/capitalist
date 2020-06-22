@@ -101,12 +101,12 @@ extension ExpenseSourceInfoViewController : ConnectionViewControllerDelegate {
     
     func showConnectionViewController(connectionURL: URL) {
         
-        guard let connectionViewController = factory.connectionViewController(delegate: self,
+        let connectionViewController = factory.connectionViewController(delegate: self,
                                                                               providerViewModel: nil,
                                                                               connectionType: viewModel.reconnectType,
                                                                               connectionURL: connectionURL,
-                                                                              connection: viewModel.connection) else { return }
-        modal(UINavigationController(rootViewController: connectionViewController))
+                                                                              connection: viewModel.connection)
+        modal(connectionViewController)
     }
         
     func didConnectToConnection(_ providerViewModel: ProviderViewModel?, connection: Connection) {

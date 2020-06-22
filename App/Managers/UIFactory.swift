@@ -71,15 +71,17 @@ class UIFactory : UIFactoryProtocol {
                                   providerViewModel: ProviderViewModel?,
                                   connectionType: ProviderConnectionType,
                                   connectionURL: URL,
-                                  connection: Connection?) -> ConnectionViewController? {
+                                  connection: Connection?) -> UINavigationController? {
         
-        let connectionViewController = router.viewController(Infrastructure.ViewController.ConnectionViewController) as? ConnectionViewController
-        connectionViewController?.delegate = delegate
-        connectionViewController?.viewModel.providerViewModel = providerViewModel
-        connectionViewController?.viewModel.connectionType = connectionType
-        connectionViewController?.viewModel.connectionURL = connectionURL
-        connectionViewController?.viewModel.connection = connection
-        return connectionViewController
+        guard let connectionViewController = router.viewController(Infrastructure.ViewController.ConnectionViewController) as? ConnectionViewController else { return nil }
+        connectionViewController.delegate = delegate
+        connectionViewController.viewModel.providerViewModel = providerViewModel
+        connectionViewController.viewModel.connectionType = connectionType
+        connectionViewController.viewModel.connectionURL = connectionURL
+        connectionViewController.viewModel.connection = connection
+        let navigationController = UINavigationController(rootViewController: connectionViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        return navigationController
     }
     
     func commentViewController(delegate: CommentViewControllerDelegate,

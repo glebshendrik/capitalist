@@ -35,7 +35,7 @@ protocol UIFactoryProtocol {
                                   providerViewModel: ProviderViewModel?,
                                   connectionType: ProviderConnectionType,
                                   connectionURL: URL,
-                                  connection: Connection?) -> ConnectionViewController?
+                                  connection: Connection?) -> UINavigationController?
     
     func commentViewController(delegate: CommentViewControllerDelegate,
                                text: String?,
