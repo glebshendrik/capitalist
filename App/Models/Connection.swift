@@ -49,7 +49,7 @@ struct Connection : Decodable {
     let status: ConnectionStatus
     let interactive: Bool?
     let nextRefreshPossibleAt: Date?
-    let lastStage: ConnectionStage = .finish
+    let lastStage: ConnectionStage?
     let createdAt: Date?
     let updatedAt: Date?
         

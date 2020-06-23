@@ -325,7 +325,14 @@ extension TransactionEditViewController : ExpenseSourcesViewControllerDelegate {
     }
     
     func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
-        if let source = viewModel?.source,
+//        if 
+        if destinationExpenseSourceViewModel.accountConnected {
+            if !viewModel.isRemoteTransaction && viewModel.isSourceConnected {
+                
+            }
+        }
+        
+        if let source = viewModel.source,
             destinationExpenseSourceViewModel.id == source.id,
             destinationExpenseSourceViewModel.type == source.type {
             if let destination = viewModel?.destination, destination.type == .expenseSource || destination.type == .active {
@@ -377,6 +384,9 @@ extension TransactionEditViewController {
     }
     
     private func showIncomeEditScreen(source: IncomeSourceViewModel, destination: ExpenseSourceViewModel) {
+        if destination.accountConnected && viewModel.isNew {
+            return
+        }
         if source.isBorrowOrReturn {
             showBorrowingIncomeSheet(source: source, destination: destination)
         }
@@ -386,6 +396,9 @@ extension TransactionEditViewController {
     }
     
     private func showExpenseEditScreen(source: ExpenseSourceViewModel, destination: ExpenseCategoryViewModel) {
+        if source.accountConnected && viewModel.isNew {
+            return
+        }
         if destination.hasWaitingLoans {
             showBorrowingExpenseSheet(source: source, destination: destination)
         }

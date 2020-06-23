@@ -148,10 +148,13 @@ extension ExpenseSourceViewModel : TransactionSource, TransactionDestination {
     }
     
     var isTransactionSource: Bool {
-        return true
+        return !accountConnected
     }
     
     func isTransactionDestinationFor(transactionSource: TransactionSource) -> Bool {
+        if accountConnected {
+            return false
+        }
         if let sourceExpenseSourceViewModel = transactionSource as? ExpenseSourceViewModel {
             return sourceExpenseSourceViewModel.id != self.id
         }

@@ -19,6 +19,10 @@ class TransactionViewModel {
         return transaction.type
     }
     
+    var isRemote: Bool {
+        return transaction.saltedgeTransactionId != nil
+    }
+    
     var sourceId: Int {
         return transaction.sourceId
     }

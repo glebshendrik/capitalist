@@ -146,8 +146,9 @@ extension TransactionEditViewModel {
         return  firstly {
                     expenseSourcesCoordinator.index(currency: nil)
                 }.map { expenseSources in
-                    guard let expenseSource = expenseSources[safe: index] else { return nil }
-                    return ExpenseSourceViewModel(expenseSource: expenseSource)
+                    let expenseSourceViewModels = expenseSources.map { ExpenseSourceViewModel(expenseSource: $0) }
+                                                                .filter { !$0.accountConnected }
+                    return expenseSourceViewModels[safe: index]
                 }
     }
     
@@ -173,8 +174,8 @@ extension TransactionEditViewModel {
         guard   needCurrencyExchange,
             let sourceCurrencyCode = sourceCurrencyCode,
             let destinationCurrencyCode = destinationCurrencyCode else {
-                if self.returningBorrow != nil {
-                    self.setAmounts()
+                if self.returningBorrow != nil && isNew {
+                    self.setBorrowLeftAmounts()
                 }
                 return Promise.value(())
         }
@@ -182,8 +183,8 @@ extension TransactionEditViewModel {
                     exchangeRatesCoordinator.show(from: sourceCurrencyCode, to: destinationCurrencyCode)
                 }.done { exchangeRate in
                     self.exchangeRate = exchangeRate.rate
-                    if self.returningBorrow != nil {
-                        self.setAmounts()
+                    if self.returningBorrow != nil && self.isNew {
+                        self.setBorrowLeftAmounts()
                     }                    
                 }
     }

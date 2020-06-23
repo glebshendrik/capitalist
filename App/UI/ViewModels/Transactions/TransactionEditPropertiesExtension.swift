@@ -13,6 +13,10 @@ extension TransactionEditViewModel {
         return transactionId == nil
     }
     
+    var isRemoteTransaction: Bool {
+        return transaction?.saltedgeTransactionId != nil
+    }
+    
     var sourceId: Int? {
         return source?.id
     }

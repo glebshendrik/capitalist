@@ -42,6 +42,8 @@ class TransactionEditViewModel {
     var accumulator: Int? = nil
     var previousOperation: OperationType? = nil
     var requiredTransactionType: TransactionType? = nil
+    var isSourceConnected: Bool = true
+    var isDestinationConnected: Bool = true
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,

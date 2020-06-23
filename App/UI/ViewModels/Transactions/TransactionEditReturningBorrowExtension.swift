@@ -42,7 +42,7 @@ extension TransactionEditViewModel {
         return  firstly {
                     loadReturningTransactionablesIfNeeded()
                 }.get {
-                    self.setAmounts()
+                    self.setBorrowLeftAmounts()
                 }.then {
                     self.loadExchangeRate()
                 }
@@ -128,7 +128,7 @@ extension TransactionEditViewModel {
         }
     }
     
-    func setAmounts() {
+    func setBorrowLeftAmounts() {
         func amountDebt(transactionable: Transactionable?) -> String? {
             guard   let returningBorrow = returningBorrow,
                     transactionable?.currency.code == returningBorrow.currency.code else {

@@ -78,6 +78,7 @@ struct Transaction : Decodable {
     let active: Active?
     let profitCents: Int?
     let sourceIncomeSourceId: Int?
+    let saltedgeTransactionId: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -116,6 +117,7 @@ struct Transaction : Decodable {
         case active = "active"
         case profitCents = "profit"
         case sourceIncomeSourceId = "source_income_source_id"
+        case saltedgeTransactionId = "salt_edge_transaction_id"
     }    
 }
 
