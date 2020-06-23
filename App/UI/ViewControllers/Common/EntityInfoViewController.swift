@@ -43,7 +43,7 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
         navigationItem.rightBarButtonItem?.tintColor = UIColor.by(.blue1)
         updateNavigationBarUI()
     }
-    
+        
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self

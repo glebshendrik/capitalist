@@ -47,12 +47,12 @@ class ConnectionViewController : UIViewController, UIMessagePresenterManagerDepe
             webView.load(request)
         }
     }
-    
-    private func close(completion: (() -> Void)? = nil) {
+        
+    override func closeButtonHandler(completion: (() -> Void)? = nil) {
         postFinantialDataUpdated()
-        presentingViewController?.dismiss(animated: true, completion: completion)
+        super.closeButtonHandler(completion: completion)
     }
-    
+        
     private func postFinantialDataUpdated() {
         NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
@@ -66,7 +66,7 @@ extension ConnectionViewController: SEWebViewDelegate {
                   let connectionId = response.connectionId else {
                 SwiftyBeaver.error(response)
                 delegate?.didNotConnect()
-                close()
+                closeButtonHandler()
                 return
             }
             setupConnection(id: connectionId, secret: connectionSecret)
@@ -94,7 +94,7 @@ extension ConnectionViewController {
     func setupConnection(id: String, secret: String) {
         guard let delegate = delegate else {
             messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
-            close()
+            closeButtonHandler()
             return
         }
         messagePresenterManager.showHUD(with: NSLocalizedString("Создание подключения к банку...", comment: "Создание подключения к банку..."))
@@ -103,11 +103,11 @@ extension ConnectionViewController {
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { connection in
-            self.close() {                
+            self.closeButtonHandler() {
                 delegate.didConnectToConnection(self.viewModel.providerViewModel, connection: connection)
             }
         }.catch { error in
-            self.close()
+            self.closeButtonHandler()
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
         }
     }

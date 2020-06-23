@@ -16,7 +16,13 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     override var entityInfoViewModel: EntityInfoViewModel! {
         return viewModel
     }
-        
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if viewModel.accountConnected {
+            refreshData()
+        }        
+    }
+    
     override func didTapIcon(field: IconInfoField?) {
         guard viewModel.canEditIcon else { return }
         modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSource))

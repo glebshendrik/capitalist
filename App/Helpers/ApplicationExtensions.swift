@@ -360,7 +360,7 @@ extension UIViewController {
         closeButtonHandler()
     }
             
-    func closeButtonHandler(completion: (() -> Void)? = nil) {
+    @objc func closeButtonHandler(completion: (() -> Void)? = nil) {
         if isRoot {
             (self as? ApplicationRouterDependantProtocol)?.router.route()
         }
