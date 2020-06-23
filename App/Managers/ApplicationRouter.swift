@@ -147,6 +147,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     func route() {
+        guard UIApplication.shared.inferredEnvironment == .appStore || APIRoute.storedBaseURLString != nil else {
+            showServerPathAlert()
+            return
+        }
         guard userSessionManager.isUserAuthenticated else {
             showJoiningAsGuestScreen()
             _ = accountCoordinator.joinAsGuest().catch { _ in
@@ -352,6 +356,24 @@ extension ApplicationRouter {
 }
 
 extension ApplicationRouter {
+    private func showServerPathAlert() {
+        let alert = UIAlertController(title: "Set server address", message: nil, preferredStyle: .alert)
+
+        alert.addTextField { (textField) in
+            textField.placeholder = "Address"
+            textField.text = APIRoute.baseURLString
+        }
+
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0]
+            UserDefaults.standard.set(textField?.text, forKey: APIRoute.baseURLKey)            
+            UserDefaults.standard.synchronize()
+            self.route()
+        }))
+        
+        window.rootViewController?.topmostPresentedViewController.modal(alert)
+    }
+    
     private func showAppUpdateScreen() {
         show(.AppUpdateViewController)
     }
