@@ -60,7 +60,7 @@ class FormImageValueField : FormTapField {
             make.top.equalTo(10)
             make.right.equalTo(imageView.snp.left).offset(8)
             make.bottom.equalTo(-16)
-            make.left.equalTo(iconContainer.snp.right).offset(20)
+            make.left.equalTo(icon.snp.right).offset(20)
         }
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)

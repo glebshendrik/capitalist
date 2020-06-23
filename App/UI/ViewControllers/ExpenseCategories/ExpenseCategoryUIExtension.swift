@@ -19,7 +19,6 @@ extension ExpenseCategoryEditViewController {
         tableController.icon.iconURL = viewModel.selectedIconURL
         tableController.icon.defaultIconName = viewModel.defaultIconName
         tableController.icon.backgroundViewColor = viewModel.basketType.iconBackgroundColor
-        tableController.icon.iconType = .raster
         tableController.icon.vectorIconMode = .fullsize
     }
     

@@ -251,7 +251,6 @@ extension CreditEditViewController {
         tableController.iconView.iconURL = viewModel.selectedIconURL
         tableController.iconView.defaultIconName = viewModel.iconDefaultImageName
         tableController.iconView.iconTintColor = UIColor.by(.white100)
-        tableController.iconView.iconType = .raster
         tableController.iconView.vectorIconMode = .fullsize
     }
     

@@ -29,8 +29,7 @@ class TransactionTableViewCell : UITableViewCell {
         
         delimeter?.alpha = 0.3
                                 
-        iconView.iconType = viewModel.iconType
-        iconView.vectorIconMode = .compact
+        iconView.vectorIconMode = .medium
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = viewModel.iconPlaceholder
         iconView.backgroundViewColor = .clear

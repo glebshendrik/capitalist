@@ -60,7 +60,6 @@ extension ActiveEditViewController {
         tableController.icon.iconURL = viewModel.selectedIconURL
         tableController.icon.defaultIconName = viewModel.iconDefaultImageName
         tableController.icon.backgroundColor = viewModel.basketType.iconBackgroundColor
-        tableController.icon.iconType = viewModel.iconType
         tableController.icon.vectorIconMode = .fullsize
     }
     

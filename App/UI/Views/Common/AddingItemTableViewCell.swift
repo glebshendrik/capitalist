@@ -15,7 +15,6 @@ class AddingItemTableViewCell : UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         iconView.backgroundViewColor = .clear
-        iconView.iconType = .raster
         iconView.defaultIconName = "plus-icon"
     }
 }

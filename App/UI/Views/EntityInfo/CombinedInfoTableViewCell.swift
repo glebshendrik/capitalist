@@ -72,7 +72,6 @@ class CombinedInfoTableViewCell : EntityInfoTableViewCell {
     func updateIconFieldUI() {
         guard   let field = combinedField,
                 let iconField = field.iconInfoField else { return }
-        iconView.iconType = iconField.iconType
         iconView.vectorIconMode = .fullsize
         iconView.iconURL = iconField.iconURL
         iconView.defaultIconName = iconField.placeholder

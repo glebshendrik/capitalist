@@ -134,8 +134,8 @@ class FormSliderField : FormTextField {
     // Setup
     override func setupIcon() {
         super.setupIcon()
-        iconContainer.removeFromSuperview()
-        baseContainer.addSubview(iconContainer)
+        icon.removeFromSuperview()
+        baseContainer.addSubview(icon)
     }
     
     override func setupTextField() {

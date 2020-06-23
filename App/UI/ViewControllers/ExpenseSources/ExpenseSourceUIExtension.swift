@@ -25,7 +25,6 @@ extension ExpenseSourceEditViewController {
         
         tableController.icon.iconURL = viewModel.selectedIconURL
         tableController.icon.defaultIconName = viewModel.defaultIconName
-        tableController.icon.iconType = viewModel.iconType
         tableController.icon.vectorIconMode = .fullsize
         tableController.icon.iconTintColor = UIColor.by(.white100)        
     }

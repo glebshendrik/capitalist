@@ -316,8 +316,9 @@ class FormExchangeField : FormField {
         
         let appearanceOptions = self.appearanceOptions()
         
-        iconContainer.backgroundColor = isVector ? UIColor.by(.white100) : appearanceOptions.fieldAppearance.iconBackgroundColor
-        icon.tintColor = appearanceOptions.fieldAppearance.iconTint
+        icon.backgroundColor = appearanceOptions.fieldAppearance.iconBackgroundColor
+        icon.backgroundViewColor = appearanceOptions.fieldAppearance.iconBackgroundColor
+        icon.iconTintColor = appearanceOptions.fieldAppearance.iconTint
     }
     
     override func updateErrorLabel() {
@@ -424,7 +425,7 @@ class FormExchangeField : FormField {
             make.top.equalTo(10)
             make.right.equalTo(-16)
             make.bottom.equalTo(-16)
-            make.left.equalTo(iconContainer.snp.right).offset(20)
+            make.left.equalTo(icon.snp.right).offset(20)
         }
     }
     

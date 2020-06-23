@@ -25,7 +25,6 @@ class TransactionableExampleCollectionViewCell : UICollectionViewCell {
         nameLabel.text = viewModel.name
         iconView.defaultIconName = viewModel.defaultIconName
         iconView.iconURL = viewModel.iconURL
-        iconView.iconType = .raster
         selectionIndicator.alpha = viewModel.selected ? 1.0 : 0.0
     }
 }
