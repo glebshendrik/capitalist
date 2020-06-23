@@ -18,7 +18,7 @@ enum APIRoute: URLRequestConvertible {
 //            return "https://api.threebaskets.net"
 //            return "https://skrudzh-staging.herokuapp.com"
 //            return "https://test.threebaskets.net"
-            return "https://skrudz.tempio.app"
+            return "http://localhost:8090"
 //            return "https://staging.threebaskets.net"
 //            return "https://api.threebaskets.net"
         case .testFlight:
