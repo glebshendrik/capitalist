@@ -58,7 +58,6 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func didTapSource() {
-        
         guard   let delegate = delegate,
                 !delegate.isSelectingTransactionables else {
             close()
@@ -116,22 +115,11 @@ extension TransactionEditViewController {
                 skipTransactionable: Transactionable?,
                 currency: String?,
                 transactionableTypeCases: [TransactionableType]) {
+        
         showTransactionables(transactionableTypes: transactionableTypeCases,
                              transactionPart: transactionPart,
                              skipTransactionable: skipTransactionable,
                              currency: currency)
-//        if viewModel.isNew {
-//            showTransactionables(transactionableTypes: transactionableTypeCases,
-//                                 transactionPart: transactionPart,
-//                                 skipTransactionable: skipTransactionable,
-//                                 currency: currency)
-//        }
-//        else if let transactionableType = transactionableType {
-//            showTransactionables(transactionableType: transactionableType,
-//                                 transactionPart: transactionPart,
-//                                 skipTransactionable: skipTransactionable,
-//                                 currency: currency)
-//        }
     }
     
     func showTransactionables(transactionableType: TransactionableType,
@@ -321,13 +309,20 @@ extension TransactionEditViewController : IncomeSourceSelectViewControllerDelega
 
 extension TransactionEditViewController : ExpenseSourcesViewControllerDelegate {
     func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
-        if sourceExpenseSourceViewModel.accountConnected && viewModel.isNew {
+        if sourceExpenseSourceViewModel.accountConnected && (viewModel.isNew || !viewModel.isDestinationInitiallyConnected) {
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Нельзя выбрать привязанный к банку кошелек", comment: ""),
+                                              theme: .error)
             return
         }
         if let destination = viewModel?.destination,
             sourceExpenseSourceViewModel.id == destination.id,
             sourceExpenseSourceViewModel.type == destination.type {
             
+            guard !viewModel.isRemoteTransaction else {
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Нельзя выбрать привязанный к банку кошелек", comment: ""),
+                theme: .error)
+                return
+            }
             if let source = viewModel?.source, source.type == .expenseSource || source.type == .active {
                 update(transactionSource: sourceExpenseSourceViewModel, transactionDestination: viewModel?.source)
             }
@@ -341,18 +336,20 @@ extension TransactionEditViewController : ExpenseSourcesViewControllerDelegate {
     }
     
     func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
-//        if 
-//        if destinationExpenseSourceViewModel.accountConnected {
-//            if !viewModel.isRemoteTransaction && viewModel.isSourceConnected {
-//
-//            }
-//        }
-        if destinationExpenseSourceViewModel.accountConnected && viewModel.isNew {
+        if destinationExpenseSourceViewModel.accountConnected && (viewModel.isNew || !viewModel.isSourceInitiallyConnected) {
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Нельзя выбрать привязанный к банку кошелек", comment: ""),
+                                              theme: .error)
             return
         }
         if let source = viewModel.source,
             destinationExpenseSourceViewModel.id == source.id,
             destinationExpenseSourceViewModel.type == source.type {
+            
+            guard !viewModel.isRemoteTransaction else {
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Нельзя выбрать привязанный к банку кошелек", comment: ""),
+                theme: .error)
+                return
+            }
             if let destination = viewModel?.destination, destination.type == .expenseSource || destination.type == .active {
                 update(transactionSource: viewModel?.destination, transactionDestination: destinationExpenseSourceViewModel)
             }
