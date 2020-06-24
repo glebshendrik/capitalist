@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-protocol ExpenseSourceEditViewControllerDelegate {
+protocol ExpenseSourceEditViewControllerDelegate : class {
     func didCreateExpenseSource()
     func didUpdateExpenseSource()
     func didRemoveExpenseSource()
@@ -18,7 +18,7 @@ protocol ExpenseSourceEditViewControllerDelegate {
 class ExpenseSourceEditViewController : FormTransactionsDependableEditViewController {
 
     var viewModel: ExpenseSourceEditViewModel!
-    var delegate: ExpenseSourceEditViewControllerDelegate?
+    weak var delegate: ExpenseSourceEditViewControllerDelegate?
     var tableController: ExpenseSourceEditTableController!
     
     override var shouldLoadData: Bool { return viewModel.isNew }

@@ -49,7 +49,7 @@ class TransactionEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var calendarButton: UIButton!
     @IBOutlet weak var removeButton: UIButton!
     
-    var delegate: TransactionEditTableControllerDelegate?
+    weak var delegate: TransactionEditTableControllerDelegate?
     
     lazy var amountKeyboardInputAccessoryView: UIView = {
         return createAmountKeyboardInputAccessoryView()

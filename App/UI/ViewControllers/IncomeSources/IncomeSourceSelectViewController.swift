@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 import SwipeCellKit
 
-protocol IncomeSourceSelectViewControllerDelegate {
+protocol IncomeSourceSelectViewControllerDelegate : class {
     func didSelect(incomeSourceViewModel: IncomeSourceViewModel)
 }
 
@@ -19,7 +19,7 @@ class IncomeSourceSelectViewController : UIViewController, UIMessagePresenterMan
     @IBOutlet weak var loader: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    private var delegate: IncomeSourceSelectViewControllerDelegate? = nil
+    private weak var delegate: IncomeSourceSelectViewControllerDelegate? = nil
     
     var viewModel: IncomeSourcesViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!

@@ -9,7 +9,7 @@
 import UIKit
 
 class CustomXibView : UIView {
-    @IBOutlet var contentView: UIView!
+    @IBOutlet weak var contentView: UIView!
     
     var nibName: String {
         return String(describing: type(of: self))

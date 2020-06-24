@@ -17,7 +17,7 @@ class ForgotPasswordTableController : SaveAccessoryFormFieldsTableViewController
     @IBOutlet weak var sendCodeCell: UITableViewCell!
     @IBOutlet weak var sendCodeButton: HighlightButton!
     
-    var delegate: ForgotPasswordTableControllerDelegate?
+    weak var delegate: ForgotPasswordTableControllerDelegate?
     
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate

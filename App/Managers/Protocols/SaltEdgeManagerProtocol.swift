@@ -26,8 +26,6 @@ protocol SaltEdgeManagerProtocol {
     func createReconnectSession(connectionSecret: String, languageCode: String) -> Promise<URL>
     func getConnection(secret: String) -> Promise<SEConnection>
     func removeConnection(secret: String) -> Promise<Void>
-    func refreshConnection(secret: String,
-                           fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void>
     func getProvider(code: String) -> Promise<SEProvider>
     func loadAccounts(for connectionSecret: String) -> Promise<[SEAccount]>
 }

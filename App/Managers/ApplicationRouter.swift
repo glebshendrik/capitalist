@@ -104,13 +104,13 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private func continueFirebaseUserActivity(_ userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         guard let url = userActivity.webpageURL else { return false }
         
-        return DynamicLinks.dynamicLinks().handleUniversalLink(url) { (dynamicLink, error) in
+        return DynamicLinks.dynamicLinks().handleUniversalLink(url) { [weak self] (dynamicLink, error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
             if let dynamicLink = dynamicLink {
-                self.handleIncomingDynamicLink(dynamicLink)
+                self?.handleIncomingDynamicLink(dynamicLink)
             }
         }
     }
@@ -364,9 +364,9 @@ extension ApplicationRouter {
             textField.text = APIRoute.baseURLString
         }
 
-        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields![0]
-            UserDefaults.standard.set(textField?.text, forKey: APIRoute.baseURLKey)            
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+            let textField = alert.textFields![0]
+            UserDefaults.standard.set(textField.text, forKey: APIRoute.baseURLKey)
             UserDefaults.standard.synchronize()
             self.route()
         }))
@@ -393,7 +393,8 @@ extension ApplicationRouter {
     }
     
     func showMainViewController() {
-        show(.MainViewController) {
+        show(.MainViewController) { [weak self] in
+            guard let self = self else { return }
             self.showPasscodeScreen()
             if let menuLeftNavigationController = self.viewController(.MenuNavigationController) as? SideMenuNavigationController {
                 SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController

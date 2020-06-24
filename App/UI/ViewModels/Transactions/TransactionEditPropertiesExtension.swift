@@ -13,10 +13,6 @@ extension TransactionEditViewModel {
         return transactionId == nil
     }
     
-    var isRemoteTransaction: Bool {
-        return transaction?.saltedgeTransactionId != nil
-    }
-    
     var sourceId: Int? {
         return source?.id
     }
@@ -66,6 +62,22 @@ extension TransactionEditViewModel {
     
     var buyingAssetsTitle: String? {
         return (destination as? ActiveViewModel)?.activeType.buyingAssetsTitle
+    }
+    
+    var isRemoteTransaction: Bool {
+        return transaction?.saltedgeTransactionId != nil
+    }
+    
+    var anyVirtualTransactionable: Bool {
+        return isVirtualSource || isVirtualDestination
+    }
+    
+    var isVirtualSource: Bool {
+        return transaction?.isVirtualSource ?? false
+    }
+    
+    var isVirtualDestination: Bool {
+        return transaction?.isVirtualDestination ?? false
     }
 }
 
@@ -123,6 +135,8 @@ extension TransactionEditViewModel {
         return sourceCurrencyCode != destinationCurrencyCode
     }
     
+    // Visibility
+    
     var amountFieldHidden: Bool {
         return needCurrencyExchange || !hasBothTransactionables
     }
@@ -132,7 +146,7 @@ extension TransactionEditViewModel {
     }
     
     var isBuyingAssetFieldHidden: Bool {
-        guard   isNew,
+        guard   isNew || isRemoteTransaction,
                 let destination = destination,
                 let source = source else { return true }
         
@@ -145,7 +159,7 @@ extension TransactionEditViewModel {
     }
     
     var isSellingAssetFieldHidden: Bool {
-        guard   isNew,
+        guard   isNew || isRemoteTransaction,
                 let transactionType = transactionType,
                 let destination = destination,
                 let source = source else { return true }
@@ -154,35 +168,33 @@ extension TransactionEditViewModel {
     }
     
     var removeButtonHidden: Bool {
-        return isNew        
+        return isNew || isRemoteTransaction
     }
     
     var sourceFieldHidden: Bool {
-        return isVirtualSource
+        return isVirtualSource && !isRemoteTransaction
     }
     
     var destinationFieldHidden: Bool {
-        return isVirtualDestination
+        return isVirtualDestination && !isRemoteTransaction
     }
     
+    // Permissions
+    
     var canChangeSource: Bool {
-        return !anyVirtualTransactionable
+        return !anyVirtualTransactionable || isDestinationInitiallyConnected
     }
     
     var canChangeDestination: Bool {
-        return !anyVirtualTransactionable
+        return !anyVirtualTransactionable || isSourceInitiallyConnected
     }
     
-    var anyVirtualTransactionable: Bool {
-        return isVirtualSource || isVirtualDestination
+    var canChangeAmount: Bool {
+        return !isRemoteTransaction || isDestinationInitiallyConnected
     }
     
-    var isVirtualSource: Bool {
-        return transaction?.isVirtualSource ?? false
-    }
-    
-    var isVirtualDestination: Bool {
-        return transaction?.isVirtualDestination ?? false
+    var canChangeConvertedAmount: Bool {
+        return !isRemoteTransaction || isSourceInitiallyConnected
     }
     
 //    var isSourceVirtualExpenseSource: Bool {

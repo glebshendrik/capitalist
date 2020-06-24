@@ -11,7 +11,7 @@ import SaltEdge
 import PromiseKit
 import SwiftyBeaver
 
-protocol ConnectionViewControllerDelegate {
+protocol ConnectionViewControllerDelegate : class {
     func didConnectToConnection(_ providerViewModel: ProviderViewModel?, connection: Connection)
     func didNotConnect()
     func didNotConnect(error: Error)
@@ -22,7 +22,7 @@ class ConnectionViewController : UIViewController, UIMessagePresenterManagerDepe
     @IBOutlet weak var webView: SEWebView!
     
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
-    var delegate: ConnectionViewControllerDelegate?
+    weak var delegate: ConnectionViewControllerDelegate?
     var viewModel: ProviderConnectionViewModel!
     
     override func viewDidLoad() {

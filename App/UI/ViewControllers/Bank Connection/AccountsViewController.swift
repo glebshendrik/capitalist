@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-protocol AccountsViewControllerDelegate {
+protocol AccountsViewControllerDelegate : class {
     func didSelect(accountViewModel: AccountViewModel, connection: Connection)
 }
 
@@ -17,7 +17,7 @@ class AccountsViewController : UIViewController, UIMessagePresenterManagerDepend
     
     var viewModel: AccountsViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
-    var delegate: AccountsViewControllerDelegate?
+    weak var delegate: AccountsViewControllerDelegate?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loader: UIImageView!

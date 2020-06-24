@@ -241,27 +241,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
             }
         }
     }
-    
-    func refreshConnection(secret: String, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void> {
-        let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: "AppDelegate.applicationURLString"))
         
-        return Promise { seal in
-            SERequestManager.shared.refreshConnection(
-                with: secret,
-                params: params,
-                fetchingDelegate: fetchingDelegate
-            ) { response in
-                switch response {
-                case .success:
-                    seal.fulfill(())
-                case .failure(let error):
-                    seal.reject(error)
-                }
-            }
-        }
-        
-    }
-    
     func getProvider(code: String) -> Promise<SEProvider> {
         return Promise { seal in
             SERequestManager.shared.getProvider(code: code) { response in

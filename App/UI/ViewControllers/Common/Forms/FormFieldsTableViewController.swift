@@ -11,7 +11,7 @@ import StaticTableViewController
 import IQKeyboardManager
 import SnapKit
 
-protocol FormFieldsTableViewControllerDelegate {
+protocol FormFieldsTableViewControllerDelegate : class {
     func didTapSave()
     func didAppear()
 }

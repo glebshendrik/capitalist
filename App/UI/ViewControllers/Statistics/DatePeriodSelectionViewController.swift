@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DatePeriodSelectionViewControllerDelegate {
+protocol DatePeriodSelectionViewControllerDelegate : class {
     func didSelect(period: DateRangeTransactionFilter?)
 }
 
@@ -18,7 +18,7 @@ class DatePeriodSelectionViewController : FormEditViewController {
     
     var viewModel: DatePeriodSelectionViewModel!
     var tableController: DatePeriodSelectionTableController!
-    var delegate: DatePeriodSelectionViewControllerDelegate?
+    weak var delegate: DatePeriodSelectionViewControllerDelegate?
     
     override var shouldLoadData: Bool { return false }
     override var formTitle: String { return NSLocalizedString("Выбор периода", comment: "Выбор периода") }
@@ -164,37 +164,37 @@ extension DatePeriodSelectionViewController {
     }
 }
 
-protocol FromDateSelectionHandlerDelegate {
+protocol FromDateSelectionHandlerDelegate : class {
     func didSelectFromDate(date: Date?)
 }
 
-protocol ToDateSelectionHandlerDelegate {
+protocol ToDateSelectionHandlerDelegate : class {
     func didSelectToDate(date: Date?)
 }
 
 extension DatePeriodSelectionViewController : FromDateSelectionHandlerDelegate, ToDateSelectionHandlerDelegate {
     
     class FromDateSelectionHandler : DatePickerViewControllerDelegate {
-        let delegate: FromDateSelectionHandlerDelegate
+        weak var delegate: FromDateSelectionHandlerDelegate? = nil
         
         init(delegate: FromDateSelectionHandlerDelegate) {
             self.delegate = delegate
         }
         
         func didSelect(date: Date?) {
-            delegate.didSelectFromDate(date: date)
+            delegate?.didSelectFromDate(date: date)
         }
     }
     
     class ToDateSelectionHandler : DatePickerViewControllerDelegate {
-        let delegate: ToDateSelectionHandlerDelegate
+        weak var delegate: ToDateSelectionHandlerDelegate? = nil
         
         init(delegate: ToDateSelectionHandlerDelegate) {
             self.delegate = delegate
         }
         
         func didSelect(date: Date?) {
-            delegate.didSelectToDate(date: date)
+            delegate?.didSelectToDate(date: date)
         }
     }
     

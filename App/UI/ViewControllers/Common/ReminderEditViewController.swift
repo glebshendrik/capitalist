@@ -9,14 +9,14 @@
 import UIKit
 import RecurrencePicker
 
-protocol ReminderEditViewControllerDelegate {
+protocol ReminderEditViewControllerDelegate : class {
     func didSave(reminderViewModel: ReminderViewModel)
 }
 
 class ReminderEditViewController : FormNavBarButtonsEditViewController {
     
     var viewModel: ReminderViewModel!
-    private var delegate: ReminderEditViewControllerDelegate?
+    private weak var delegate: ReminderEditViewControllerDelegate?
     private var tableController: ReminderEditTableViewController!
     
     override var formTitle: String { return NSLocalizedString("Напоминание", comment: "Напоминание") }

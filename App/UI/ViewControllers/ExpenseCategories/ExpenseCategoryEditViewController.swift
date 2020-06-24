@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-protocol ExpenseCategoryEditViewControllerDelegate {
+protocol ExpenseCategoryEditViewControllerDelegate : class {
     func didCreateExpenseCategory(with basketType: BasketType, name: String)
     func didUpdateExpenseCategory(with basketType: BasketType)
     func didRemoveExpenseCategory(with basketType: BasketType)
@@ -19,7 +19,7 @@ class ExpenseCategoryEditViewController : FormTransactionsDependableEditViewCont
     
     var viewModel: ExpenseCategoryEditViewModel!
     var tableController: ExpenseCategoryEditTableController!
-    var delegate: ExpenseCategoryEditViewControllerDelegate?    
+    weak var delegate: ExpenseCategoryEditViewControllerDelegate?
     
     override var shouldLoadData: Bool { return viewModel.isNew }
     override var formTitle: String {

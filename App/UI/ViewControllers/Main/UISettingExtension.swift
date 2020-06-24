@@ -81,7 +81,8 @@ extension MainViewController {
         let brand = UIColor.by(.brandExpense).rgbComponents
         plusMenu.menuBackground = Color.rgb(r: brand.red, g: brand.green, b: brand.blue).with(a: 0.98)
         plusMenu.backgroundColor = .clear
-        plusMenu.onItemWillClick = { button in
+        plusMenu.onItemWillClick = { [weak self] button in
+            guard let self = self else { return }
             self.didTapPlusMenu(buttonId: button.id)
             self.setMenuOverlay(hidden: self.plusMenu.isOpen)
         }

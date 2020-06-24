@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 import SnapKit
 
-protocol CountriesViewControllerDelegate {
+protocol CountriesViewControllerDelegate : class {
     func didSelectCountry(_ countryViewModel: CountryViewModel)
 }
 
@@ -18,7 +18,7 @@ class CountriesViewController : UIViewController, UIMessagePresenterManagerDepen
     
     var viewModel: CountriesViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
-    var delegate: CountriesViewControllerDelegate?
+    weak var delegate: CountriesViewControllerDelegate?
     var factory: UIFactoryProtocol!
     
     @IBOutlet weak var tableView: UITableView!

@@ -11,7 +11,7 @@ import Charts
 import MSPeekCollectionViewDelegateImplementation
 import BetterSegmentedControl
 
-protocol GraphTableViewCellDelegate {
+protocol GraphTableViewCellDelegate : class {
     func didTapGraphTypeButton()
     func didChangeRange()
 }
@@ -27,7 +27,7 @@ class GraphTableViewCell : UITableViewCell {
     
     let pieChartsCollectionViewPeekDelegate = CollectionViewItemsPeekPresenter(cellSpacing: 30, cellPeekWidth: 30, maximumItemsToScroll: 1, numberOfItemsToShow: 1, scrollDirection: .horizontal)
     
-    var delegate: GraphTableViewCellDelegate?
+    weak var delegate: GraphTableViewCellDelegate?
     
     private lazy var dateFormatter: DateFormatter = {
         return DateFormatter()
@@ -192,13 +192,13 @@ class CurrencyValueFormatter: NSObject, IValueFormatter, IAxisValueFormatter {
     }
 }
 
-protocol CollectionViewContentOffsetDelegate {
+protocol CollectionViewContentOffsetDelegate : class {
     func didChangeContentOffset(_ contentOffset: CGPoint)
 }
 
 class CollectionViewItemsPeekPresenter : MSPeekCollectionViewDelegateImplementation {
     
-    var contentOffsetDelegate: CollectionViewContentOffsetDelegate? = nil
+    weak var contentOffsetDelegate: CollectionViewContentOffsetDelegate? = nil
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         contentOffsetDelegate?.didChangeContentOffset(scrollView.contentOffset)

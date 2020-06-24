@@ -65,7 +65,7 @@ class ActiveEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var removeCell: UITableViewCell!
     @IBOutlet weak var bankCell: UITableViewCell!
     
-    var delegate: ActiveEditTableControllerDelegate?
+    weak var delegate: ActiveEditTableControllerDelegate?
         
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate

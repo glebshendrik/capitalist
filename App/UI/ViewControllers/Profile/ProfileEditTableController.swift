@@ -15,7 +15,7 @@ protocol ProfileEditTableControllerDelegate : FormFieldsTableViewControllerDeleg
 class ProfileEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var nameField: FormTextField!
     
-    var delegate: ProfileEditTableControllerDelegate?
+    weak var delegate: ProfileEditTableControllerDelegate?
     
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate

@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-protocol CurrenciesViewControllerDelegate {
+protocol CurrenciesViewControllerDelegate : class {
     func didSelectCurrency(currency: Currency)
 }
 
@@ -21,7 +21,7 @@ class CurrenciesViewController : UIViewController, UIMessagePresenterManagerDepe
     var viewModel: CurrenciesViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
-    var delegate: CurrenciesViewControllerDelegate?
+    weak var delegate: CurrenciesViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

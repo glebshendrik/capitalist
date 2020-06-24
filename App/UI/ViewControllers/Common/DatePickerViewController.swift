@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DatePickerViewControllerDelegate {
+protocol DatePickerViewControllerDelegate : class {
     func didSelect(date: Date?)
 }
 
@@ -19,7 +19,7 @@ protocol DatePickerViewControllerInputProtocol {
 
 class DatePickerViewController : UIViewController, DatePickerViewControllerInputProtocol {
     
-    private var delegate: DatePickerViewControllerDelegate? = nil
+    private weak var delegate: DatePickerViewControllerDelegate? = nil
     
     let invisibleTextField: UITextField = UITextField(frame: CGRect.zero)
     

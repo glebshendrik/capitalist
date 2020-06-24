@@ -54,7 +54,7 @@ class CreditEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var monthlyPaymentCell: UITableViewCell!
     @IBOutlet weak var removeCell: UITableViewCell!
     
-    var delegate: CreditEditTableControllerDelegate?
+    weak var delegate: CreditEditTableControllerDelegate?
     
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate

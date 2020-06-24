@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ReminderEditTableViewControllerDelegate {
+protocol ReminderEditTableViewControllerDelegate : class {
     func didTapStartDate()
     func didTapRecurrence()
     func didChange(message: String?)
@@ -22,7 +22,7 @@ class ReminderEditTableViewController : FormFieldsTableViewController {
     
     @IBOutlet weak var removeCell: UITableViewCell!
     
-    var delegate: ReminderEditTableViewControllerDelegate?
+    weak var delegate: ReminderEditTableViewControllerDelegate?
     
     override func setupUI() {
         super.setupUI()

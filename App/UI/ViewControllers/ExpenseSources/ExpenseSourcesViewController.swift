@@ -11,7 +11,7 @@ import PromiseKit
 import SwipeCellKit
 import ESPullToRefresh
 
-protocol ExpenseSourcesViewControllerDelegate {
+protocol ExpenseSourcesViewControllerDelegate : class {
     func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel)
     func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel)
 }
@@ -23,7 +23,7 @@ class ExpenseSourcesViewController : UIViewController, UIMessagePresenterManager
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var totalSubtitleLabel: UILabel!
     
-    private var delegate: ExpenseSourcesViewControllerDelegate? = nil
+    private weak var delegate: ExpenseSourcesViewControllerDelegate? = nil
     private var selectionType: TransactionPart = .destination
     
     var viewModel: ExpenseSourcesViewModel!

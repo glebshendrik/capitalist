@@ -326,11 +326,11 @@ extension TransactionEditViewController : ExpenseSourcesViewControllerDelegate {
     
     func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel) {
 //        if 
-        if destinationExpenseSourceViewModel.accountConnected {
-            if !viewModel.isRemoteTransaction && viewModel.isSourceConnected {
-                
-            }
-        }
+//        if destinationExpenseSourceViewModel.accountConnected {
+//            if !viewModel.isRemoteTransaction && viewModel.isSourceConnected {
+//
+//            }
+//        }
         
         if let source = viewModel.source,
             destinationExpenseSourceViewModel.id == source.id,

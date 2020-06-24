@@ -12,7 +12,7 @@ import SnapKit
 import SwiftyBeaver
 import SwiftDate
 
-protocol ProvidersViewControllerDelegate {
+protocol ProvidersViewControllerDelegate : class {
     func didConnectTo(_ providerViewModel: ProviderViewModel?, connection: Connection)
 }
 
@@ -21,7 +21,7 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
     var viewModel: ProvidersViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var factory: UIFactoryProtocol!
-    var delegate: ProvidersViewControllerDelegate?
+    weak var delegate: ProvidersViewControllerDelegate?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loader: UIImageView!

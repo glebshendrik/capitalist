@@ -28,7 +28,7 @@ class IncomeSourceEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var removeCell: UITableViewCell!
     @IBOutlet weak var reminderCell: UITableViewCell!
     
-    var delegate: IncomeSourceEditTableControllerDelegate?
+    weak var delegate: IncomeSourceEditTableControllerDelegate?
     
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate

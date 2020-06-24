@@ -9,7 +9,7 @@
 import UIKit
 import ALTextInputBar
 
-protocol CommentViewControllerDelegate {
+protocol CommentViewControllerDelegate : class {
     func didSave(comment: String?)
 }
 
@@ -22,7 +22,7 @@ class CommentViewController : UIViewController, CommentViewControllerInputProtoc
     
     let textInputBar = ALTextInputBar()
     
-    private var delegate: CommentViewControllerDelegate? = nil
+    private weak var delegate: CommentViewControllerDelegate? = nil
     
     override var inputAccessoryView: UIView? {
         get {

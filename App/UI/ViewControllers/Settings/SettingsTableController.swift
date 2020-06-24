@@ -9,7 +9,7 @@
 import UIKit
 import BiometricAuthentication
 
-protocol SettingsTableControllerDelegate {
+protocol SettingsTableControllerDelegate : class {
     func didAppear()
     func didTapCurrency()
     func didTapPeriod()
@@ -32,7 +32,7 @@ class SettingsTableController : FormFieldsTableViewController {
     
     private var loaderView: LoaderView!
     
-    var delegate: SettingsTableControllerDelegate?
+    weak var delegate: SettingsTableControllerDelegate?
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

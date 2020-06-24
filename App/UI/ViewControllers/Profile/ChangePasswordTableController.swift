@@ -20,7 +20,7 @@ class ChangePasswordTableController : SaveAccessoryFormFieldsTableViewController
     @IBOutlet weak var confirmationField: FormTextField!
     @IBOutlet weak var changePasswordButton: HighlightButton!
     
-    var delegate: ChangePasswordTableControllerDelegate?
+    weak var delegate: ChangePasswordTableControllerDelegate?
     
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate

@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 import SwipeCellKit
 
-protocol ExpenseCategorySelectViewControllerDelegate {
+protocol ExpenseCategorySelectViewControllerDelegate : class {
     func didSelect(expenseCategoryViewModel: ExpenseCategoryViewModel)
 }
 
@@ -19,7 +19,7 @@ class ExpenseCategorySelectViewController : UIViewController, UIMessagePresenter
     @IBOutlet weak var loader: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    private var delegate: ExpenseCategorySelectViewControllerDelegate? = nil
+    private weak var delegate: ExpenseCategorySelectViewControllerDelegate? = nil
     
     var viewModel: ExpenseCategoriesViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!

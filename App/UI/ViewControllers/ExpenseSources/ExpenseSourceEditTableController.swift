@@ -37,7 +37,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var removeCell: UITableViewCell!
     @IBOutlet weak var bankCell: UITableViewCell!
     
-    var delegate: ExpenseSourceEditTableControllerDelegate?
+    weak var delegate: ExpenseSourceEditTableControllerDelegate?
     
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate

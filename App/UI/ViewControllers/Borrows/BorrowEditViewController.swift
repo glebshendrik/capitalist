@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-protocol BorrowEditViewControllerDelegate {
+protocol BorrowEditViewControllerDelegate : class {
     func didCreateDebt()
     func didCreateLoan()
     func didUpdateDebt()
@@ -21,7 +21,7 @@ protocol BorrowEditViewControllerDelegate {
 class BorrowEditViewController : FormTransactionsDependableEditViewController {
     var viewModel: BorrowEditViewModel!
     var tableController: BorrowEditTableController!
-    var delegate: BorrowEditViewControllerDelegate?
+    weak var delegate: BorrowEditViewControllerDelegate?
     
     override var shouldLoadData: Bool { return true }
     override var formTitle: String { return viewModel.title }
@@ -186,7 +186,7 @@ extension BorrowEditViewController : CurrenciesViewControllerDelegate {
 }
 
 class BorrowedAtDateSelectionDelegate : DatePickerViewControllerDelegate {
-    let delegate: BorrowEditViewController?
+    weak var delegate: BorrowEditViewController? = nil
     
     init(delegate: BorrowEditViewController?) {
         self.delegate = delegate
@@ -198,7 +198,7 @@ class BorrowedAtDateSelectionDelegate : DatePickerViewControllerDelegate {
 }
 
 class PaydayDateSelectionDelegate : DatePickerViewControllerDelegate {
-    let delegate: BorrowEditViewController?
+    weak var delegate: BorrowEditViewController? = nil
     
     init(delegate: BorrowEditViewController?) {
         self.delegate = delegate

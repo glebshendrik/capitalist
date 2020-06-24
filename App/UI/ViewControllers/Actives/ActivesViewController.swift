@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 import SwipeCellKit
 
-protocol ActivesViewControllerDelegate {
+protocol ActivesViewControllerDelegate : class {
     func didSelect(sourceActiveViewModel: ActiveViewModel)
     func didSelect(destinationActiveViewModel: ActiveViewModel)
 }
@@ -22,7 +22,7 @@ class ActivesViewController : UIViewController, UIMessagePresenterManagerDependa
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var totalSubtitleLabel: UILabel!
     
-    private var delegate: ActivesViewControllerDelegate? = nil
+    private weak var delegate: ActivesViewControllerDelegate? = nil
     private var selectionType: TransactionPart = .destination
         
     var viewModel: ActivesViewModel!

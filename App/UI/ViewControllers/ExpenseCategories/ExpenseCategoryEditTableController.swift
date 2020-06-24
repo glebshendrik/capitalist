@@ -30,7 +30,7 @@ class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var removeCell: UITableViewCell!
     @IBOutlet weak var reminderCell: UITableViewCell!
     
-    var delegate: ExpenseCategoryEditTableControllerDelegate?
+    weak var delegate: ExpenseCategoryEditTableControllerDelegate?
     
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate

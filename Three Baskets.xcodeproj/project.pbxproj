@@ -223,6 +223,7 @@
 		FA7EE00422CDA1B30054EAD3 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EE00322CDA1B30054EAD3 /* AccountCell.swift */; };
 		FA7FC37F2499176000C1ACCD /* BankWarningInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FC37E2499176000C1ACCD /* BankWarningInfoTableViewCell.swift */; };
 		FA7FC38124991B6900C1ACCD /* BankWarningInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FC38024991B6900C1ACCD /* BankWarningInfoField.swift */; };
+		FA7FC38324A3062400C1ACCD /* TransactionEditCalculatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FC38224A3062400C1ACCD /* TransactionEditCalculatorExtension.swift */; };
 		FA814F50235D625A0039471A /* ActiveEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA814F4F235D625A0039471A /* ActiveEditViewController.swift */; };
 		FA814F52235D63180039471A /* ActiveEditDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA814F51235D63180039471A /* ActiveEditDelegateExtension.swift */; };
 		FA814F54235D64440039471A /* BasketItemsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA814F53235D64440039471A /* BasketItemsExtension.swift */; };
@@ -720,6 +721,7 @@
 		FA7EE00322CDA1B30054EAD3 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		FA7FC37E2499176000C1ACCD /* BankWarningInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWarningInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FA7FC38024991B6900C1ACCD /* BankWarningInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWarningInfoField.swift; sourceTree = "<group>"; };
+		FA7FC38224A3062400C1ACCD /* TransactionEditCalculatorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditCalculatorExtension.swift; sourceTree = "<group>"; };
 		FA814F4F235D625A0039471A /* ActiveEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEditViewController.swift; sourceTree = "<group>"; };
 		FA814F51235D63180039471A /* ActiveEditDelegateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEditDelegateExtension.swift; sourceTree = "<group>"; };
 		FA814F53235D64440039471A /* BasketItemsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketItemsExtension.swift; sourceTree = "<group>"; };
@@ -1457,6 +1459,7 @@
 				FAB5BE5023533B41000466AE /* TransactionEditPropertiesExtension.swift */,
 				FAB5BE5423533D87000466AE /* TransactionEditDataExtension.swift */,
 				FAB5BE5223533D2A000466AE /* TransactionEditUpdatingExtenson.swift */,
+				FA7FC38224A3062400C1ACCD /* TransactionEditCalculatorExtension.swift */,
 				FAB5BE4E23530865000466AE /* TransactionEditReturningBorrowExtension.swift */,
 			);
 			path = Transactions;
@@ -2826,6 +2829,7 @@
 				FAC3B9C321BE74CE0015A12F /* OnboardingPageViewController.swift in Sources */,
 				FA26814A21B1833E00FADED1 /* MainViewController.swift in Sources */,
 				FAB5BE4B235218DD000466AE /* ActivesCoordinatorProtocol.swift in Sources */,
+				FA7FC38324A3062400C1ACCD /* TransactionEditCalculatorExtension.swift in Sources */,
 				FA835D422260742400A592F2 /* GraphType.swift in Sources */,
 				FA9F962A21C2A86B00FD64C1 /* IncomeSourceEditViewController.swift in Sources */,
 				FAD88F1321AEB48800BE7BC1 /* ApplicationRouterProtocol.swift in Sources */,

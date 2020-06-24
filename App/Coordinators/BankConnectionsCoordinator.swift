@@ -134,11 +134,7 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
         return accountsService.index(for: currentUserId, currencyCode: currencyCode, connectionId: connectionId, providerId: providerId, notUsed: notUsed, nature: nature)
-    }
-    
-    func refreshSaltEdgeConnection(secret: String, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void> {
-        return saltEdgeManager.refreshConnection(secret: secret, fetchingDelegate: fetchingDelegate)
-    }
+    }    
 }
 
 extension BankConnectionsCoordinator {

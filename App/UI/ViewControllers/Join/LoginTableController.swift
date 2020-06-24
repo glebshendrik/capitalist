@@ -20,7 +20,7 @@ class LoginTableController : SaveAccessoryFormFieldsTableViewController {
     @IBOutlet weak var signInCell: UITableViewCell!
     @IBOutlet weak var signInButton: HighlightButton!
     
-    var delegate: LoginTableControllerDelegate?
+    weak var delegate: LoginTableControllerDelegate?
     
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate
