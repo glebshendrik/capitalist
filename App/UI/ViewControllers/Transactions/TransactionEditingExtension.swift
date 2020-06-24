@@ -116,19 +116,22 @@ extension TransactionEditViewController {
                 skipTransactionable: Transactionable?,
                 currency: String?,
                 transactionableTypeCases: [TransactionableType]) {
-        
-        if viewModel.isNew {
-            showTransactionables(transactionableTypes: transactionableTypeCases,
-                                 transactionPart: transactionPart,
-                                 skipTransactionable: skipTransactionable,
-                                 currency: currency)
-        }
-        else if let transactionableType = transactionableType {
-            showTransactionables(transactionableType: transactionableType,
-                                 transactionPart: transactionPart,
-                                 skipTransactionable: skipTransactionable,
-                                 currency: currency)
-        }
+        showTransactionables(transactionableTypes: transactionableTypeCases,
+                             transactionPart: transactionPart,
+                             skipTransactionable: skipTransactionable,
+                             currency: currency)
+//        if viewModel.isNew {
+//            showTransactionables(transactionableTypes: transactionableTypeCases,
+//                                 transactionPart: transactionPart,
+//                                 skipTransactionable: skipTransactionable,
+//                                 currency: currency)
+//        }
+//        else if let transactionableType = transactionableType {
+//            showTransactionables(transactionableType: transactionableType,
+//                                 transactionPart: transactionPart,
+//                                 skipTransactionable: skipTransactionable,
+//                                 currency: currency)
+//        }
     }
     
     func showTransactionables(transactionableType: TransactionableType,
@@ -224,8 +227,13 @@ extension TransactionEditViewController {
     }
     
     func sourceTransactionableTypeCases() -> [TransactionableType] {
-        guard let destinationType = viewModel.destinationType else {
+        guard   let destinationType = viewModel.destinationType,
+                !viewModel.isRemoteTransaction
+        else {
             return [.incomeSource, .expenseSource, .active]
+        }
+        if !viewModel.isNew, let sourceType = viewModel.sourceType {
+            return [sourceType]
         }
         switch destinationType {
         case .expenseCategory:
@@ -240,8 +248,13 @@ extension TransactionEditViewController {
     }
     
     func destinationTransactionableTypeCases() -> [TransactionableType] {
-        guard let sourceType = viewModel.sourceType else {
+        guard   let sourceType = viewModel.sourceType,
+                !viewModel.isRemoteTransaction
+        else {
             return [.expenseSource, .expenseCategory, .active]
+        }
+        if !viewModel.isNew, let destinationType = viewModel.destinationType {
+            return [destinationType]
         }
         switch sourceType {
         case .incomeSource:
@@ -308,6 +321,9 @@ extension TransactionEditViewController : IncomeSourceSelectViewControllerDelega
 
 extension TransactionEditViewController : ExpenseSourcesViewControllerDelegate {
     func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
+        if sourceExpenseSourceViewModel.accountConnected && viewModel.isNew {
+            return
+        }
         if let destination = viewModel?.destination,
             sourceExpenseSourceViewModel.id == destination.id,
             sourceExpenseSourceViewModel.type == destination.type {
@@ -331,7 +347,9 @@ extension TransactionEditViewController : ExpenseSourcesViewControllerDelegate {
 //
 //            }
 //        }
-        
+        if destinationExpenseSourceViewModel.accountConnected && viewModel.isNew {
+            return
+        }
         if let source = viewModel.source,
             destinationExpenseSourceViewModel.id == source.id,
             destinationExpenseSourceViewModel.type == source.type {

@@ -73,11 +73,13 @@ extension TransactionEditViewModel {
     }
     
     var isVirtualSource: Bool {
-        return transaction?.isVirtualSource ?? false
+        return source?.isVirtual ?? false 
+//        return transaction?.isVirtualSource ?? false
     }
     
     var isVirtualDestination: Bool {
-        return transaction?.isVirtualDestination ?? false
+        return destination?.isVirtual ?? false
+//        return transaction?.isVirtualDestination ?? false
     }
 }
 
@@ -182,11 +184,11 @@ extension TransactionEditViewModel {
     // Permissions
     
     var canChangeSource: Bool {
-        return !anyVirtualTransactionable || isDestinationInitiallyConnected
+        return (!anyVirtualTransactionable || isDestinationInitiallyConnected) && !isSourceInitiallyConnected
     }
     
     var canChangeDestination: Bool {
-        return !anyVirtualTransactionable || isSourceInitiallyConnected
+        return (!anyVirtualTransactionable || isSourceInitiallyConnected) && !isDestinationInitiallyConnected
     }
     
     var canChangeAmount: Bool {

@@ -24,6 +24,10 @@ class IncomeSourceViewModel : TransactionSource {
         return true
     }
     
+    var isVirtual: Bool {
+        return incomeSource.isVirtual
+    }
+    
     public private(set) var incomeSource: IncomeSource
     
     var id: Int {

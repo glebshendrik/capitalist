@@ -88,8 +88,8 @@ class TransactionEditViewModel {
         }
         self.source = source
         self.destination = destination
-        self.isSourceInitiallyConnected = isRemoteTransaction && (source as? ExpenseSourceViewModel)?.expenseSource.accountConnection?.id == transaction.accountConnectionId
-        self.isDestinationInitiallyConnected = isRemoteTransaction && (destination as? ExpenseSourceViewModel)?.expenseSource.accountConnection?.id == transaction.accountConnectionId
+        self.isSourceInitiallyConnected = isRemoteTransaction && (source as? ExpenseSourceViewModel)?.accountViewModel?.account.id == transaction.accountId
+        self.isDestinationInitiallyConnected = isRemoteTransaction && (destination as? ExpenseSourceViewModel)?.accountViewModel?.account.id == transaction.accountId
         self.amount = transaction.amountCents.moneyDecimalString(with: sourceCurrency)
         self.convertedAmount = transaction.convertedAmountCents.moneyDecimalString(with: destinationCurrency)
     }
