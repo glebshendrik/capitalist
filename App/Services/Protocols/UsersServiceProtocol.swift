@@ -25,4 +25,5 @@ protocol UsersServiceProtocol {
     func loadUserBudget(with userId: Int) -> Promise<Budget>
     func onboardUser(with id: Int) -> Promise<Void>
     func destroyUserData(by id: Int) -> Promise<Void>
+    func sendConfirmationEmail(by id: Int) -> Promise<Void>
 }

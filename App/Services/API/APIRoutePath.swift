@@ -14,6 +14,7 @@ struct APIRoutePath {
         // Custom        
         case .changePassword(let form):                     return "/users/\(form.userId!)/password"
         case .onboardUser(let id):                          return "/users/\(id)/onboard"
+        case .confirmUser(let id):                          return "/users/\(id)/confirm"
         case .destroyUserData(let id):                      return "/users/\(id)/destroy_data"
         case .resetPassword:                                return "/users/new_password"
         case .findExchangeRate:                             return "/exchange_rates/find_by"

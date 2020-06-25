@@ -50,6 +50,7 @@ enum APIRoute: URLRequestConvertible {
     case updateDeviceToken(form: UserDeviceTokenUpdatingForm)
     case onboardUser(id: Int)
     case destroyUserData(id: Int)
+    case confirmUser(id: Int)
     
     // Sessions
     case createSession(form: SessionCreationForm)

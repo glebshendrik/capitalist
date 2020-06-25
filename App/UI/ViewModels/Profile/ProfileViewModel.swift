@@ -66,6 +66,10 @@ class ProfileViewModel {
         return accountCoordinator.subscriptionProducts.first { $0.productIdentifier == productId }
     }
     
+    var confirmButtonHidden: Bool {
+        return currentUser?.registrationConfirmed ?? true
+    }
+    
     init(accountCoordinator: AccountCoordinatorProtocol) {
         self.accountCoordinator = accountCoordinator
     }
@@ -82,5 +86,9 @@ class ProfileViewModel {
     
     func destroyUserData() -> Promise<Void> {
         return accountCoordinator.destroyCurrentUserData()
+    }
+    
+    func sendConfirmation() -> Promise<Void> {
+        return accountCoordinator.sendConfirmationEmailToCurrentUser()
     }
 }
