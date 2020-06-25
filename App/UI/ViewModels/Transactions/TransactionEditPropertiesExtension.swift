@@ -68,6 +68,10 @@ extension TransactionEditViewModel {
         return transaction?.saltedgeTransactionId != nil
     }
     
+    var isPendingTransaction: Bool {
+        return transaction?.saltedgeTransactionStatus == TransactionRemoteStatus.pending
+    }
+    
     var anyVirtualTransactionable: Bool {
         return isVirtualSource || isVirtualDestination
     }
@@ -161,7 +165,7 @@ extension TransactionEditViewModel {
     }
     
     var isSellingAssetFieldHidden: Bool {
-        guard   isNew || isRemoteTransaction,
+        guard   isNew,
                 let transactionType = transactionType,
                 let destination = destination,
                 let source = source else { return true }
@@ -184,19 +188,23 @@ extension TransactionEditViewModel {
     // Permissions
     
     var canChangeSource: Bool {
-        return (!anyVirtualTransactionable || isDestinationInitiallyConnected) && !isSourceInitiallyConnected
+        guard isRemoteTransaction else { return !anyVirtualTransactionable }
+        return !isPendingTransaction && isDestinationInitiallyConnected && !isSourceInitiallyConnected
     }
     
     var canChangeDestination: Bool {
-        return (!anyVirtualTransactionable || isSourceInitiallyConnected) && !isDestinationInitiallyConnected
+        guard isRemoteTransaction else { return !anyVirtualTransactionable }
+        return !isPendingTransaction && isSourceInitiallyConnected && !isDestinationInitiallyConnected
     }
     
     var canChangeAmount: Bool {
-        return !isRemoteTransaction || isDestinationInitiallyConnected
+        guard isRemoteTransaction else { return true }
+        return needCurrencyExchange && isDestinationInitiallyConnected
     }
     
     var canChangeConvertedAmount: Bool {
-        return !isRemoteTransaction || isSourceInitiallyConnected
+        guard isRemoteTransaction else { return true }
+        return needCurrencyExchange && isSourceInitiallyConnected
     }
     
 //    var isSourceVirtualExpenseSource: Bool {

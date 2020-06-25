@@ -162,13 +162,14 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     private func updateForm() -> ExpenseSourceUpdatingForm {
         let amountCents = selectedAccountViewModel?.amountCents ?? expenseSourceViewModel?.expenseSource.amountCents   
         let creditLimitCents = selectedAccountViewModel?.creditLimitCents ?? expenseSourceViewModel?.expenseSource.creditLimitCents
-
+        let cardType = selectedAccountViewModel?.cardType ?? expenseSourceViewModel?.expenseSource.cardType
+        
         return ExpenseSourceUpdatingForm(id: expenseSourceViewModel?.id,
                                          name: expenseSourceViewModel?.name,
                                          iconURL: selectedIconURL,
                                          amountCents: amountCents,
                                          creditLimitCents: creditLimitCents,
-                                         cardType: expenseSourceViewModel?.expenseSource.cardType,
+                                         cardType: cardType,
                                          accountConnectionAttributes: accountConnectionAttributes)
     }
 }

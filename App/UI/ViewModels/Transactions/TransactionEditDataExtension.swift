@@ -251,7 +251,8 @@ extension TransactionEditViewModel {
                                        convertedAmountCents: convertedAmountCents,
                                        convertedAmountCurrency: convertedAmountCurrency,
                                        gotAt: gotAt,
-                                       comment: comment)
+                                       comment: comment,
+                                       isBuyingAsset: isBuyingAsset)
     }
 }
 
