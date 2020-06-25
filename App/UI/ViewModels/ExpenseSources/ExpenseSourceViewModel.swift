@@ -87,7 +87,7 @@ class ExpenseSourceViewModel {
     }
     
     var cardType: CardType? {
-        return accountViewModel?.cardType ?? expenseSource.cardType
+        return expenseSource.cardType
     }
     
     var cardTypeImageName: String? {
@@ -120,6 +120,10 @@ class ExpenseSourceViewModel {
     
     var connectionIndicatorHidden: Bool {
         return !isConnectionLoading
+    }
+    
+    var accountConnectionCreatedAt: Date? {
+        return expenseSource.accountConnection?.createdAt
     }
     
     init(expenseSource: ExpenseSource) {

@@ -13,12 +13,14 @@ struct AccountConnection : Decodable {
     let account: Account
     let sourceId: Int
     let sourceType: TransactionableType
+    let createdAt: Date? = nil
     
     enum CodingKeys: String, CodingKey {
         case id
         case account
         case sourceId = "source_id"
         case sourceType  = "source_type"
+        case createdAt  = "created_at"
     }
 }
 

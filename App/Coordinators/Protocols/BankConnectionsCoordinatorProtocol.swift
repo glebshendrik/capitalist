@@ -13,8 +13,8 @@ import SaltEdge
 protocol BankConnectionsCoordinatorProtocol {
     func setup()
     func loadProviders(country: String?) -> Promise<[SEProvider]>
-    func createConnectSession(providerCode: String, countryCode: String) -> Promise<URL>
-    func createReconnectSession(connection: Connection) -> Promise<URL>
+    func createConnectSession(providerCode: String, countryCode: String, fromDate: Date?) -> Promise<URL>
+    func createReconnectSession(connection: Connection, fromDate: Date?) -> Promise<URL>
     func createRefreshConnectionSession(connection: Connection) -> Promise<URL>
     func loadConnection(for provider: SEProvider) -> Promise<Connection>
     func createConnection(_ saltedgeConnection: SEConnection, provider: SEProvider) -> Promise<Connection>

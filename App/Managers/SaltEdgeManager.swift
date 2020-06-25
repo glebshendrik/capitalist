@@ -96,7 +96,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         }
     }
     
-    func createConnectSession(providerCode: String, countryCode: String, languageCode: String) -> Promise<URL> {
+    func createConnectSession(providerCode: String, countryCode: String, fromDate: Date, languageCode: String) -> Promise<URL> {
         if  let customerSecret = self.customerSecret,
             let cachedSessionResponse = createConnectSessionCache[customerSecret]?[providerCode],
             let url = URL(string: cachedSessionResponse.connectUrl),
@@ -108,7 +108,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                             attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
                                                                                locale: languageCode,
-                                                                               returnTo: "http://tempio.app"),
+                                                                               returnTo: "https://threebaskets.net"),
                                                             providerCode: providerCode,
                                                             dailyRefresh: true,
                                                             fromDate: Date(),
@@ -116,7 +116,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                             includeFakeProviders: includeFakeProviders,
                                                             theme: "dark",
                                                             consent: SEConsent(scopes: ["account_details", "transactions_details"],
-                                                                               fromDate: Date()))
+                                                                               fromDate: fromDate))
         
         return Promise { seal in
             SERequestManager.shared.createConnectSession(params: connectSessionsParams) { response in
@@ -152,7 +152,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         let refreshSessionsParams = SERefreshSessionsParams(attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
                                                                                locale: languageCode,
-                                                                               returnTo: "http://tempio.app"),
+                                                                               returnTo: "https://threebaskets.net"),
                                                             dailyRefresh: true,
                                                             javascriptCallbackType: "iframe",
                                                             includeFakeProviders: includeFakeProviders,
@@ -175,7 +175,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         }
     }
     
-    func createReconnectSession(connectionSecret: String, languageCode: String) -> Promise<URL> {
+    func createReconnectSession(connectionSecret: String, fromDate: Date, languageCode: String) -> Promise<URL> {
         if  let cachedSessionResponse = reconnectConnectSessionCache[connectionSecret],
             let url = URL(string: cachedSessionResponse.connectUrl),
             cachedSessionResponse.expiresAt.isInFuture {
@@ -186,14 +186,14 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         let reconnectSessionsParams = SEReconnectSessionsParams(attempt: SEAttempt(automaticFetch: true,
                                                                                    dailyRefresh: true,
                                                                                    locale: languageCode,
-                                                                                   returnTo: "http://tempio.app"),
+                                                                                   returnTo: "https://threebaskets.net"),
                                                                 dailyRefresh: true,
                                                                 javascriptCallbackType: "iframe",
                                                                 includeFakeProviders: includeFakeProviders,
                                                                 theme: "dark",
                                                                 overrideCredentialsStrategy: "override",
                                                                 consent: SEConsent(scopes: ["account_details", "transactions_details"],
-                                                                                   fromDate: Date()))
+                                                                                   fromDate: fromDate))
         
         return Promise { seal in
             SERequestManager.shared.reconnectSession(with: connectionSecret, params: reconnectSessionsParams) { response in

@@ -30,7 +30,7 @@ class ConnectionViewController : UIViewController, UIMessagePresenterManagerDepe
         setupUI()
         connect()
     }
-    
+        
     private func setupUI() {
         webView.stateDelegate = self
         setupNavigationBar()
@@ -49,10 +49,31 @@ class ConnectionViewController : UIViewController, UIMessagePresenterManagerDepe
     }
         
     override func closeButtonHandler(completion: (() -> Void)? = nil) {
+        guard viewModel.shouldAskClose else {
+            close(completion: completion)
+            return
+        }
+        askClose(completion: completion)
+    }
+        
+    func askClose(completion: (() -> Void)? = nil) {
+        let closeAction = UIAlertAction(title: NSLocalizedString("Закрыть", comment: ""),
+                                              style: .destructive,
+                                              handler: { _ in
+                                                    self.close(completion: completion)
+                                                })
+        
+        sheet(title: NSLocalizedString("Необходимо дождаться шага ввода кода подтверждения", comment: ""),
+              actions: [closeAction],
+              message: nil,
+              preferredStyle: .alert)
+    }
+    
+    func close(completion: (() -> Void)? = nil) {
         postFinantialDataUpdated()
         super.closeButtonHandler(completion: completion)
     }
-        
+    
     private func postFinantialDataUpdated() {
         NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }

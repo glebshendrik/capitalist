@@ -197,14 +197,17 @@ extension ExpenseSourceInfoViewModel : SEConnectionFetchingDelegate {
         guard let providerCode = connection?.providerCode, let countryCode = connection?.countryCode else {
             return Promise(error: BankConnectionError.canNotCreateConnection)
         }        
-        return bankConnectionsCoordinator.createConnectSession(providerCode: providerCode, countryCode: countryCode)
+        return bankConnectionsCoordinator.createConnectSession(providerCode: providerCode,
+                                                               countryCode: countryCode,
+                                                               fromDate: expenseSourceViewModel?.accountConnectionCreatedAt)
     }
     
     func createReconnectSession() -> Promise<URL> {
         guard let connection = connection else {
             return Promise(error: BankConnectionError.canNotCreateConnection)
         }
-        return bankConnectionsCoordinator.createReconnectSession(connection: connection)
+        return bankConnectionsCoordinator.createReconnectSession(connection: connection,
+                                                                 fromDate: expenseSourceViewModel?.accountConnectionCreatedAt)
     }
     
     func createRefreshConnectionSession() -> Promise<URL> {
