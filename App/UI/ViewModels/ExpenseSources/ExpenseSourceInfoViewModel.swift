@@ -34,6 +34,7 @@ enum ExpenseSourceInfoError : Error {
 class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
+//    private let accountCoordinator: AccountCoordinatorProtocol
     
     var expenseSourceViewModel: ExpenseSourceViewModel?
     var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
@@ -69,6 +70,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     
     var canEditIcon: Bool {
         return !(expenseSourceViewModel?.accountConnected ?? false)
+    }
+    
+    var hasActiveSubscription: Bool {        
+        return accountCoordinator.currentUserHasActiveSubscription
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,

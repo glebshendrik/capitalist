@@ -14,7 +14,7 @@ class EntityInfoViewModel {
     private let transactionsCoordinator: TransactionsCoordinatorProtocol
     private let creditsCoordinator: CreditsCoordinatorProtocol
     private let borrowsCoordinator: BorrowsCoordinatorProtocol
-    private let accountCoordinator: AccountCoordinatorProtocol
+    let accountCoordinator: AccountCoordinatorProtocol
     
     var isUpdatingData: Bool = false
     public private(set) var isDeleted: Bool = false

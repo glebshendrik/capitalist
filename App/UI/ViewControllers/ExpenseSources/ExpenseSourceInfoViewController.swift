@@ -64,6 +64,10 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     }
     
     func didTapBankButton() {
+        guard viewModel.hasActiveSubscription else {
+            modal(factory.subscriptionViewController())
+            return
+        }
         if viewModel.accountConnected {
             removeAccountConnection()
         } else {

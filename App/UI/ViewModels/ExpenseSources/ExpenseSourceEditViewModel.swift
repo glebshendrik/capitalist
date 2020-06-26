@@ -124,6 +124,10 @@ class ExpenseSourceEditViewModel {
         return isNew
     }
     
+    var hasActiveSubscription: Bool {
+        return accountCoordinator.currentUserHasActiveSubscription
+    }
+    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
