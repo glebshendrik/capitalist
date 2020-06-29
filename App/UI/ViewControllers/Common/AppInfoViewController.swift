@@ -111,13 +111,15 @@ class AppInfoViewController : UITableViewController, MFMailComposeViewController
     }
     
     @IBAction func didTapEmailButton(_ sender: Any) {
+        guard MFMailComposeViewController.canSendMail() else {
+            
+            return
+        }
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
-
         composeVC.setToRecipients([contactEmail])
         composeVC.setSubject("Three Baskets Feedback")
         composeVC.setMessageBody(defaultMessage, isHTML: false)
-
         modal(composeVC)
     }
     

@@ -1648,7 +1648,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O6c-z1-ylA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="dxX-S1-48L"/>
             </objects>
             <point key="canvasLocation" x="-1740" y="1089"/>
         </scene>
