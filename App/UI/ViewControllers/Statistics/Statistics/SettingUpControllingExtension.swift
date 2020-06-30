@@ -64,6 +64,20 @@ extension StatisticsViewController {
         }
     }
     
+    func duplicateTransaction(transactionViewModel: TransactionViewModel) {
+        setLoading()
+        
+        firstly {
+            viewModel.duplicateTransaction(transactionViewModel: transactionViewModel)
+        }.done {
+            self.loadData(financialDataInvalidated: true)
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
+            self.updateUI()
+        }
+    }
+    
+    
     private func postFinantialDataUpdated() {
         NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }

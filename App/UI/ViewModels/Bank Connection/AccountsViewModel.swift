@@ -31,14 +31,14 @@ class AccountsViewModel {
     }
     
     func loadAccounts() -> Promise<Void> {
-        guard   let connection = connection,
-                let providerId = connection.providerId else {
+        guard   let connectionId = connection?.saltedgeId,
+                let providerId = connection?.providerId else {
             return Promise(error: AccountsLoadingError.canNotLoadAccounts)
         }
         
         return  firstly {
                     bankConnectionsCoordinator.loadAccounts(currencyCode: currencyCode,
-                                                            connectionId: connection.saltedgeId,
+                                                            connectionId: connectionId,
                                                             providerId: providerId,
                                                             notUsed: true,
                                                             nature: nature)

@@ -25,4 +25,5 @@ protocol TransactionsServiceProtocol {
     func show(by id: Int) -> Promise<Transaction>
     func update(with updatingForm: TransactionUpdatingForm) -> Promise<Void>
     func destroy(by id: Int) -> Promise<Void>
+    func duplicate(by id: Int) -> Promise<Void>
 }

@@ -469,6 +469,14 @@ class TransactionViewModel {
         return iconURL?.iconType ?? .raster
     }
     
+    var canDelete: Bool {
+        return transaction.saltedgeTransactionId == nil
+    }
+    
+    var canDuplicate: Bool {
+        return transaction.saltedgeTransactionId != nil
+    }
+    
     init(transaction: Transaction) {
         self.transaction = transaction
     }

@@ -82,7 +82,8 @@ struct APIRouteMethod {
              .updateUserSubscription,
              .updateDeviceToken,
              .updateActivePosition,
-             .updateConnection:
+             .updateConnection,
+             .duplicateTransaction:
             return .patch
         case .destroySession,
              .destroyIncomeSource,

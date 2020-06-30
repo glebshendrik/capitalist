@@ -92,4 +92,8 @@ class TransactionsCoordinator : TransactionsCoordinatorProtocol {
     func destroy(by id: Int) -> Promise<Void> {
         return transactionsService.destroy(by: id)
     }
+    
+    func duplicate(by id: Int) -> Promise<Void> {
+        return transactionsService.duplicate(by: id)
+    }
 }

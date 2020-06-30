@@ -110,6 +110,7 @@ enum APIRoute: URLRequestConvertible {
     case showTransaction(id: Int)
     case updateTransaction(form: TransactionUpdatingForm)
     case destroyTransaction(id: Int)
+    case duplicateTransaction(id: Int)
         
     // Debts
     case createDebt(form: BorrowCreationForm)

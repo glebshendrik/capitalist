@@ -68,7 +68,8 @@ struct APIResource {
              .createTransaction,
              .showTransaction,
              .updateTransaction,
-             .destroyTransaction:
+             .destroyTransaction,
+             .duplicateTransaction:
             return APIResource(singular: "transaction", plural: "transactions")
         case .findExchangeRate,
              .indexExchangeRates:

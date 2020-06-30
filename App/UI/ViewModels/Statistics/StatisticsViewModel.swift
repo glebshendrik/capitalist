@@ -204,6 +204,11 @@ extension StatisticsViewModel {
         setDataLoading()
         return transactionsViewModel.removeTransaction(transactionViewModel: transactionViewModel)
     }
+    
+    func duplicateTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {
+        setDataLoading()
+        return transactionsViewModel.duplicateTransaction(transactionViewModel: transactionViewModel)
+    }
 }
 
 // Filters

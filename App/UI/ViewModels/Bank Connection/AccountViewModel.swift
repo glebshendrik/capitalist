@@ -54,7 +54,7 @@ class AccountViewModel {
         return account.nature
     }
     
-    var connectionId: String {
+    var connectionId: String? {
         return connection.saltedgeId
     }
     

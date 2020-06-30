@@ -128,6 +128,10 @@ class TransactionsViewModel {
         return transactionsCoordinator.destroy(by: transactionViewModel.id)
     }
     
+    func duplicateTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {
+        return transactionsCoordinator.duplicate(by: transactionViewModel.id)
+    }
+    
     private func loadDefaultCurrency() -> Promise<Void> {
         return  firstly {
                     accountCoordinator.loadCurrentUser()
