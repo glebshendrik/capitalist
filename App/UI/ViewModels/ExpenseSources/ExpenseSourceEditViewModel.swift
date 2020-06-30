@@ -246,7 +246,7 @@ extension ExpenseSourceEditViewModel {
         
         amount = accountViewModel.amountDecimal
         
-        if let creditLimit = accountViewModel.creditLimit {
+        if let creditLimit = accountViewModel.creditLimitDecimal {
             self.creditLimit = creditLimit
         }
         

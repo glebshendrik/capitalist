@@ -68,6 +68,10 @@ class AccountViewModel {
         return creditLimitCents?.moneyCurrencyString(with: currency, shouldRound: false)
     }
     
+    var creditLimitDecimal: String? {
+        return creditLimitCents?.moneyDecimalString(with: currency)
+    }
+    
     var cards: String? {
         return account.cardNumbers?.joined(separator: ", ")
     }

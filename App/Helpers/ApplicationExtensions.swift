@@ -699,7 +699,6 @@ extension UIViewController {
         guard   let urlString = url.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed),
                 let url = URL(string: urlString),
                 UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.canOpenURL(<#T##url: URL##URL#>)
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
