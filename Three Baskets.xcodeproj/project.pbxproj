@@ -224,6 +224,9 @@
 		FA7FC37F2499176000C1ACCD /* BankWarningInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FC37E2499176000C1ACCD /* BankWarningInfoTableViewCell.swift */; };
 		FA7FC38124991B6900C1ACCD /* BankWarningInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FC38024991B6900C1ACCD /* BankWarningInfoField.swift */; };
 		FA7FC38324A3062400C1ACCD /* TransactionEditCalculatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FC38224A3062400C1ACCD /* TransactionEditCalculatorExtension.swift */; };
+		FA7FC38524AB410D00C1ACCD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7FC38424AB410C00C1ACCD /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FA7FC38724AB411700C1ACCD /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7FC38624AB411600C1ACCD /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FA7FC38924AB413B00C1ACCD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7FC38824AB413B00C1ACCD /* CoreTelephony.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FA814F50235D625A0039471A /* ActiveEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA814F4F235D625A0039471A /* ActiveEditViewController.swift */; };
 		FA814F52235D63180039471A /* ActiveEditDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA814F51235D63180039471A /* ActiveEditDelegateExtension.swift */; };
 		FA814F54235D64440039471A /* BasketItemsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA814F53235D64440039471A /* BasketItemsExtension.swift */; };
@@ -722,6 +725,9 @@
 		FA7FC37E2499176000C1ACCD /* BankWarningInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWarningInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FA7FC38024991B6900C1ACCD /* BankWarningInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWarningInfoField.swift; sourceTree = "<group>"; };
 		FA7FC38224A3062400C1ACCD /* TransactionEditCalculatorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditCalculatorExtension.swift; sourceTree = "<group>"; };
+		FA7FC38424AB410C00C1ACCD /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		FA7FC38624AB411600C1ACCD /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		FA7FC38824AB413B00C1ACCD /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		FA814F4F235D625A0039471A /* ActiveEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEditViewController.swift; sourceTree = "<group>"; };
 		FA814F51235D63180039471A /* ActiveEditDelegateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEditDelegateExtension.swift; sourceTree = "<group>"; };
 		FA814F53235D64440039471A /* BasketItemsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketItemsExtension.swift; sourceTree = "<group>"; };
@@ -1038,6 +1044,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA7FC38924AB413B00C1ACCD /* CoreTelephony.framework in Frameworks */,
+				FA7FC38724AB411700C1ACCD /* iAd.framework in Frameworks */,
+				FA7FC38524AB410D00C1ACCD /* AdSupport.framework in Frameworks */,
 				5ED9109D3257740117279317 /* Pods_Three_Baskets.framework in Frameworks */,
 				FADD04C72420101300FB542D /* StoreKit.framework in Frameworks */,
 			);
@@ -1058,6 +1067,9 @@
 		95151D80691A2B25D6AF9C34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA7FC38824AB413B00C1ACCD /* CoreTelephony.framework */,
+				FA7FC38624AB411600C1ACCD /* iAd.framework */,
+				FA7FC38424AB410C00C1ACCD /* AdSupport.framework */,
 				FADD04C62420101300FB542D /* StoreKit.framework */,
 				5C593460A3D6B5A0FB3FE006 /* Pods_Three_Baskets.framework */,
 			);
