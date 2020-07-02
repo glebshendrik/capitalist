@@ -87,7 +87,7 @@ extension ConnectionViewController: SEWebViewDelegate {
                   let connectionId = response.connectionId else {
                 SwiftyBeaver.error(response)
                 delegate?.didNotConnect()
-                closeButtonHandler()
+                close()
                 return
             }
             setupConnection(id: connectionId, secret: connectionSecret)
