@@ -191,10 +191,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
                 return
             }
             
-            guard UIFlowManager.reached(point: .subscription) || self.accountCoordinator.currentUserHasActiveSubscription else {
-                self.showSubscriptionScreen()
-                return
-            }
+//            guard UIFlowManager.reached(point: .subscription) || self.accountCoordinator.currentUserHasActiveSubscription else {
+//                self.showSubscriptionScreen()
+//                return
+//            }
             
             self.showMainViewController()
         }.catch { error in

@@ -477,6 +477,30 @@ class TransactionViewModel {
         return transaction.saltedgeTransactionId != nil
     }
     
+    var remoteIndicatorHidden: Bool {
+        return !isRemote
+    }
+    
+    var remoteIndicatorName: String? {
+        guard isRemote, let status = transaction.saltedgeTransactionStatus else { return nil }
+        switch status {
+        case .pending:
+            return "check-circle-icon"
+        case .posted:
+            return "bank-transaction-icon"
+        }
+    }
+    
+    var remoteIndicatorColor: ColorAsset? {
+        guard isRemote, let status = transaction.saltedgeTransactionStatus else { return nil }
+        switch status {
+        case .pending:
+            return .white100
+        case .posted:
+            return .brandSafe
+        }
+    }
+    
     init(transaction: Transaction) {
         self.transaction = transaction
     }

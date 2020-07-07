@@ -115,7 +115,7 @@ extension ConnectionViewController {
     func setupConnection(id: String, secret: String) {
         guard let delegate = delegate else {
             messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
-            closeButtonHandler()
+            close()
             return
         }
         messagePresenterManager.showHUD(with: NSLocalizedString("Создание подключения к банку...", comment: "Создание подключения к банку..."))
@@ -124,11 +124,11 @@ extension ConnectionViewController {
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { connection in
-            self.closeButtonHandler() {
+            self.close() {
                 delegate.didConnectToConnection(self.viewModel.providerViewModel, connection: connection)
             }
         }.catch { error in
-            self.closeButtonHandler()
+            self.close()
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
         }
     }

@@ -18,6 +18,8 @@ class TransactionTableViewCell : SwipeTableViewCell {
     @IBOutlet weak var delimeter: UIView?
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var bankTransactionIndicatorContainer: UIView!
+    @IBOutlet weak var bankTransactionIndicator: UIImageView!
     
     var viewModel: TransactionViewModel? {
         didSet {
@@ -43,6 +45,17 @@ class TransactionTableViewCell : SwipeTableViewCell {
         typeLabel.text = viewModel.typeDescription
         commentLabel.text = viewModel.comment
         typeLabel.textColor = UIColor.by(viewModel.typeDescriptionColorAsset)
+        
+        bankTransactionIndicatorContainer.isHidden = viewModel.remoteIndicatorHidden
+        if  let bankTransactionIndicatorName = viewModel.remoteIndicatorName,
+            let bankTransactionIndicatorColor = viewModel.remoteIndicatorColor {
+            
+            bankTransactionIndicator.image = UIImage(named: bankTransactionIndicatorName)
+            bankTransactionIndicator.tintColor = UIColor.by(bankTransactionIndicatorColor)
+        }
+        else {
+            bankTransactionIndicator.image = nil
+        }
         
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale

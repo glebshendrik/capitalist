@@ -335,6 +335,27 @@
                                                         <constraint firstAttribute="width" constant="48" id="uhu-YI-FWN"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUR-I4-obH">
+                                                    <rect key="frame" x="38" y="12" width="22" height="22"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check-circle-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Dz4-VB-Hv0">
+                                                            <rect key="frame" x="4.5" y="4.5" width="13" height="13"/>
+                                                            <color key="tintColor" name="white 1.0"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="black 2"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="22" id="8Ak-2J-0jv"/>
+                                                        <constraint firstItem="Dz4-VB-Hv0" firstAttribute="centerY" secondItem="gUR-I4-obH" secondAttribute="centerY" id="ewP-xO-c2g"/>
+                                                        <constraint firstAttribute="height" constant="22" id="mCr-kh-YQ4"/>
+                                                        <constraint firstItem="Dz4-VB-Hv0" firstAttribute="centerX" secondItem="gUR-I4-obH" secondAttribute="centerX" id="sIQ-ge-rtQ"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="11"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Кошелек" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJF-UY-J7B">
                                                     <rect key="frame" x="68" y="18" width="202" height="21"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
@@ -377,6 +398,7 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="gUR-I4-obH" firstAttribute="top" secondItem="COJ-Ha-MM8" secondAttribute="top" id="0Sl-ve-P8X"/>
                                                 <constraint firstItem="hNp-LG-Z7S" firstAttribute="leading" secondItem="2BF-hv-VYW" secondAttribute="leading" id="9Te-dm-cgk"/>
                                                 <constraint firstItem="2BF-hv-VYW" firstAttribute="leading" secondItem="COJ-Ha-MM8" secondAttribute="trailing" constant="8" id="9aQ-V2-KUp"/>
                                                 <constraint firstItem="cff-0W-2Q9" firstAttribute="leading" secondItem="2BF-hv-VYW" secondAttribute="trailing" constant="10" id="BGL-Yw-E3R"/>
@@ -391,6 +413,7 @@
                                                 <constraint firstItem="wJF-UY-J7B" firstAttribute="top" secondItem="oEe-qq-rCJ" secondAttribute="top" constant="18" id="YVQ-KG-9ZZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="hNp-LG-Z7S" secondAttribute="trailing" constant="24" id="aXp-jy-gcX"/>
                                                 <constraint firstItem="KbM-Yx-ynn" firstAttribute="width" secondItem="cff-0W-2Q9" secondAttribute="width" id="aoX-rB-tbb"/>
+                                                <constraint firstItem="gUR-I4-obH" firstAttribute="trailing" secondItem="COJ-Ha-MM8" secondAttribute="trailing" id="ar1-Gy-xJp"/>
                                                 <constraint firstItem="cff-0W-2Q9" firstAttribute="centerY" secondItem="COJ-Ha-MM8" secondAttribute="centerY" id="c1v-4M-Yct"/>
                                                 <constraint firstItem="KbM-Yx-ynn" firstAttribute="top" secondItem="cff-0W-2Q9" secondAttribute="bottom" constant="2.5" id="cae-e4-oX9"/>
                                                 <constraint firstAttribute="trailing" secondItem="4dp-HX-Soh" secondAttribute="trailing" id="e51-aj-Qtk"/>
@@ -406,6 +429,8 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="amountLabel" destination="cff-0W-2Q9" id="gSX-7e-Ccx"/>
+                                            <outlet property="bankTransactionIndicator" destination="Dz4-VB-Hv0" id="H5m-ch-3Bm"/>
+                                            <outlet property="bankTransactionIndicatorContainer" destination="gUR-I4-obH" id="932-td-usD"/>
                                             <outlet property="commentLabel" destination="hNp-LG-Z7S" id="FQs-vs-ael"/>
                                             <outlet property="delimeter" destination="4dp-HX-Soh" id="o3q-xV-4Om"/>
                                             <outlet property="destinationTitleLabel" destination="2BF-hv-VYW" id="X4W-8t-0yO"/>
@@ -889,14 +914,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="check-circle-icon" width="13" height="13"/>
         <image name="close-icon" width="14.5" height="14.5"/>
         <image name="loader-1" width="55" height="31"/>
         <image name="selected-sign-icon" width="16" height="14"/>
         <namedColor name="black 1">
-            <color red="0.090000003576278687" green="0.093999996781349182" blue="0.11400000005960464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.086274509803921567" green="0.090196078431372548" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="black 2">
-            <color red="0.125" green="0.13300000131130219" blue="0.14900000393390656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="blue 1">
             <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
