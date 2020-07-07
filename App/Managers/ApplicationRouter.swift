@@ -190,12 +190,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
                 self.showDataSetupViewController()
                 return
             }
-            
-//            guard UIFlowManager.reached(point: .subscription) || self.accountCoordinator.currentUserHasActiveSubscription else {
-//                self.showSubscriptionScreen()
-//                return
-//            }
-            
+                        
             self.showMainViewController()
         }.catch { error in
             if self.errorIsNotFoundOrNotAuthorized(error: error) {
@@ -381,11 +376,7 @@ extension ApplicationRouter {
     private func showLandingScreen() {
         show(.LandingViewController)
     }
-    
-    private func showSubscriptionScreen() {
-        show(UINavigationController(rootViewController: viewController(.SubscriptionViewController)))
-    }
-    
+        
     private func showJoiningAsGuestScreen() {
         guard let landingViewController = viewController(.LandingViewController) as? LandingViewController else { return }
         landingViewController.loadingMessage = NSLocalizedString("Creating guest account", comment: "Создание учетной записи гостя...")

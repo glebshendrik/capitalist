@@ -40,6 +40,10 @@ class MainViewModel {
         }
     }
     
+    var currentUserHasActiveSubscription: Bool {
+        return accountCoordinator.currentUserHasActiveSubscription()
+    }
+    
     var adviserTip: String? {
         guard selecting else { return nil }
         
