@@ -20,6 +20,14 @@ class DatePeriodSelectionViewController : FormEditViewController {
     var tableController: DatePeriodSelectionTableController!
     weak var delegate: DatePeriodSelectionViewControllerDelegate?
     
+    lazy var fromDateSelectionHandler = {
+        return FromDateSelectionHandler(delegate: self)
+    }()
+    
+    lazy var toDateSelectionHandler = {
+        return ToDateSelectionHandler(delegate: self)
+    }()
+    
     override var shouldLoadData: Bool { return false }
     override var formTitle: String { return NSLocalizedString("Выбор периода", comment: "Выбор периода") }
     
@@ -91,14 +99,14 @@ extension DatePeriodSelectionViewController : DatePeriodSelectionTableController
         showDatePicker(date: viewModel.fromDate,
                        minDate: nil,
                        maxDate: viewModel.fromDateMaxDate,
-                       delegate: FromDateSelectionHandler(delegate: self))
+                       delegate: fromDateSelectionHandler)
     }
     
     func didTapTo() {
         showDatePicker(date: viewModel.toDate,
                        minDate: viewModel.toDateMinDate,
                        maxDate: nil,
-                       delegate: ToDateSelectionHandler(delegate: self))
+                       delegate: toDateSelectionHandler)
     }
 }
 

@@ -41,7 +41,7 @@ class MainViewModel {
     }
     
     var currentUserHasActiveSubscription: Bool {
-        return accountCoordinator.currentUserHasActiveSubscription()
+        return accountCoordinator.currentUserHasActiveSubscription
     }
     
     var adviserTip: String? {
