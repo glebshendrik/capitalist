@@ -81,7 +81,7 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         }.done { [weak self] _ in
             guard let self = self else { return }
             if !UIFlowManager.reached(point: .subscription) && !self.viewModel.currentUserHasActiveSubscription {
-                self.modal(self.factory.subscriptionViewController())
+                self.topmostPresentedViewController.modal(self.factory.subscriptionViewController())
             }
         }
     }
