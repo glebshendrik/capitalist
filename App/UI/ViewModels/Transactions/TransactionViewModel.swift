@@ -469,8 +469,12 @@ class TransactionViewModel {
         return iconURL?.iconType ?? .raster
     }
     
+    var isChangeable: Bool {
+        return transaction.isChangeable ?? true
+    }
+    
     var canDelete: Bool {
-        return transaction.saltedgeTransactionId == nil
+        return transaction.saltedgeTransactionId == nil && isChangeable
     }
     
     var canDuplicate: Bool {

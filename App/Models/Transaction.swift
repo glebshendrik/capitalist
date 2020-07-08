@@ -87,6 +87,7 @@ struct Transaction : Decodable {
     let saltedgeTransactionId: String?
     let saltedgeTransactionStatus: TransactionRemoteStatus?
     let isAutoCategorized: Bool = false
+    let isChangeable: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -129,6 +130,7 @@ struct Transaction : Decodable {
         case accountId = "account_id"
         case saltedgeTransactionStatus = "salt_edge_transaction_status"
         case isAutoCategorized = "is_auto_categorized"
+        case isChangeable = "is_changeable"
     }    
 }
 
