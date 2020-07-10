@@ -204,7 +204,7 @@ extension ExpenseSourceInfoViewModel : SEConnectionFetchingDelegate {
         }        
         return bankConnectionsCoordinator.createConnectSession(providerCode: providerCode,
                                                                countryCode: countryCode,
-                                                               fromDate: expenseSourceViewModel?.accountConnectionCreatedAt)
+                                                               fromDate: Date())
     }
     
     func createReconnectSession() -> Promise<URL> {

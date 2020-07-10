@@ -20,7 +20,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     private var customerSecret: String? = nil
     
     var includeFakeProviders: Bool {
-        return UIApplication.shared.inferredEnvironment == .debug
+        return UIApplication.shared.inferredEnvironment != .appStore
     }
     
     func set(appId: String, appSecret: String) {

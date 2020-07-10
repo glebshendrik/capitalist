@@ -94,13 +94,13 @@ class AccountViewModel {
     }
     
     var reconnectNeeded: Bool {
-        guard connection.lastStage == .finish else { return connection.lastStage == nil }
+        guard connection.lastStage == .finish else { return false }
+        guard connection.status == .active else { return true }
         
-        guard   connection.status == .active,
-                let interactive = connection.interactive,
-                let nextRefreshPossibleAt = connection.nextRefreshPossibleAt else {
-                    
-            return true
+        guard   let interactive = connection.interactive,
+                let nextRefreshPossibleAt = connection.nextRefreshPossibleAt
+        else {
+            return false
         }
         return interactive && nextRefreshPossibleAt.isInPast
     }
