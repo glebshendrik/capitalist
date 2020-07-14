@@ -257,24 +257,17 @@ extension ExpenseSourcesViewController : SwipeTableViewCellDelegate {
     func didTapDeleteButton(expenseSourceViewModel: ExpenseSourceViewModel?) {
         var alertTitle = ""
         var removeAction: ((UIAlertAction) -> Void)? = nil
-        var removeWithTransactionsAction: ((UIAlertAction) -> Void)? = nil
         
         if let expenseSourceId = expenseSourceViewModel?.id {
             alertTitle = TransactionableType.expenseSource.removeQuestion
             removeAction = { _ in
                 self.removeExpenseSource(by: expenseSourceId, deleteTransactions: false)
             }
-            removeWithTransactionsAction = { _ in
-                self.removeExpenseSource(by: expenseSourceId, deleteTransactions: true)
-            }
         }
         
         let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
                                                       style: .destructive,
-                                                      handler: removeAction),
-                                        UIAlertAction(title: NSLocalizedString("Удалить вместе с транзакциями", comment: "Удалить вместе с транзакциями"),
-                                                      style: .destructive,
-                                                      handler: removeWithTransactionsAction)]
+                                                      handler: removeAction)]
         sheet(title: alertTitle, actions: actions)
     }
     

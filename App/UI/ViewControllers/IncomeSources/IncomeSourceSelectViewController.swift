@@ -192,24 +192,17 @@ extension IncomeSourceSelectViewController : SwipeTableViewCellDelegate {
     func didTapDeleteButton(incomeSourceViewModel: IncomeSourceViewModel?) {
         var alertTitle = ""
         var removeAction: ((UIAlertAction) -> Void)? = nil
-        var removeWithTransactionsAction: ((UIAlertAction) -> Void)? = nil
         
         if let incomeSourceId = incomeSourceViewModel?.id {
             alertTitle = TransactionableType.incomeSource.removeQuestion
             removeAction = { _ in
                 self.removeIncomeSource(by: incomeSourceId, deleteTransactions: false)
             }
-            removeWithTransactionsAction = { _ in
-                self.removeIncomeSource(by: incomeSourceId, deleteTransactions: true)
-            }
         }
         
         let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
                                                       style: .destructive,
-                                                      handler: removeAction),
-                                        UIAlertAction(title: NSLocalizedString("Удалить вместе с транзакциями", comment: "Удалить вместе с транзакциями"),
-                                                      style: .destructive,
-                                                      handler: removeWithTransactionsAction)]
+                                                      handler: removeAction)]
         sheet(title: alertTitle, actions: actions)
     }
     
