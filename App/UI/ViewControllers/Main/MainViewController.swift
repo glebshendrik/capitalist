@@ -75,15 +75,6 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
 //        UIFlowManager.set(point: .debtsAndCreditsTutorial, reached: false)
 //        UIFlowManager.set(point: .settingsTutorial, reached: false)
         show(tutorials)
-        
-        firstly {
-            after(seconds: 60)
-        }.done { [weak self] _ in
-            guard let self = self else { return }
-            if !UIFlowManager.reached(point: .subscription) && !self.viewModel.currentUserHasActiveSubscription {
-                self.topmostPresentedViewController.modal(self.factory.subscriptionViewController())
-            }
-        }
     }
     
     override func viewDidLayoutSubviews() {
