@@ -111,7 +111,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                                                returnTo: "https://threebaskets.net"),
                                                             providerCode: providerCode,
                                                             dailyRefresh: true,
-                                                            fromDate: Date(),
+                                                            fromDate: fromDate,
                                                             javascriptCallbackType: "iframe",
                                                             includeFakeProviders: includeFakeProviders,
                                                             theme: "dark",
