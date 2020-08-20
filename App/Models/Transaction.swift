@@ -216,6 +216,7 @@ struct TransactionUpdatingForm : Encodable, Validatable {
     let convertedAmountCurrency: String?
     let gotAt: Date?
     let comment: String?
+    let returningBorrowId: Int?
     let isBuyingAsset: Bool
     
     enum CodingKeys: String, CodingKey {
@@ -230,6 +231,7 @@ struct TransactionUpdatingForm : Encodable, Validatable {
         case convertedAmountCurrency = "converted_amount_currency"
         case gotAt = "got_at"
         case comment
+        case returningBorrowId = "returning_borrow_id"
         case isBuyingAsset = "buying_asset"
     }
     

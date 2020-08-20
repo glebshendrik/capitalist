@@ -252,6 +252,7 @@ extension TransactionEditViewModel {
                                        convertedAmountCurrency: convertedAmountCurrency,
                                        gotAt: gotAt,
                                        comment: comment,
+                                       returningBorrowId: returningBorrowId,
                                        isBuyingAsset: isBuyingAsset)
     }
 }
