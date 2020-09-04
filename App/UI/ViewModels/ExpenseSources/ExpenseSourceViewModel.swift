@@ -122,8 +122,12 @@ class ExpenseSourceViewModel {
         return !isConnectionLoading
     }
     
-    var accountConnectionCreatedAt: Date? {
-        return expenseSource.accountConnection?.createdAt
+//    var accountConnectionCreatedAt: Date? {
+//        return expenseSource.accountConnection?.createdAt
+//    }
+    
+    var accountConnectionFetchDataFrom: Date? {
+        return expenseSource.fetchDataFrom
     }
     
     init(expenseSource: ExpenseSource) {
