@@ -496,6 +496,8 @@
 		FAF31D0A240371E700D4CFB3 /* Transactions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF31D0C240371E700D4CFB3 /* Transactions.storyboard */; };
 		FAF31D122406544700D4CFB3 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */; };
 		FAF31D142406764D00D4CFB3 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */; };
+		FAF34BCA24FF523300430585 /* SubscriptionPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF34BC924FF523300430585 /* SubscriptionPlanViewModel.swift */; };
+		FAF34BCC24FF8F8B00430585 /* SubscriptionPlanItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF34BCB24FF8F8B00430585 /* SubscriptionPlanItemViewModel.swift */; };
 		FAF3BC84241A4BCD007F46FE /* launch-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAF3BC83241A4BCD007F46FE /* launch-animation.gif */; };
 		FAF7528D24408A4000A0B5B7 /* CountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7528C24408A4000A0B5B7 /* CountriesViewController.swift */; };
 		FAF7528F24408AC900A0B5B7 /* CountriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7528E24408AC900A0B5B7 /* CountriesViewModel.swift */; };
@@ -1032,6 +1034,8 @@
 		FAF31D10240371F100D4CFB3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Transactions.strings; sourceTree = "<group>"; };
 		FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
+		FAF34BC924FF523300430585 /* SubscriptionPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanViewModel.swift; sourceTree = "<group>"; };
+		FAF34BCB24FF8F8B00430585 /* SubscriptionPlanItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemViewModel.swift; sourceTree = "<group>"; };
 		FAF3BC83241A4BCD007F46FE /* launch-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "launch-animation.gif"; sourceTree = "<group>"; };
 		FAF7528C24408A4000A0B5B7 /* CountriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewController.swift; sourceTree = "<group>"; };
 		FAF7528E24408AC900A0B5B7 /* CountriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewModel.swift; sourceTree = "<group>"; };
@@ -1656,8 +1660,10 @@
 		FAADA024240806390040DBC0 /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
+				FAF34BC924FF523300430585 /* SubscriptionPlanViewModel.swift */,
 				FAADA025240806520040DBC0 /* ProductViewModel.swift */,
 				FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */,
+				FAF34BCB24FF8F8B00430585 /* SubscriptionPlanItemViewModel.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -2597,6 +2603,7 @@
 				FABE54ED233D115100DF2B70 /* CreditTableViewCell.swift in Sources */,
 				FA16FC77223AAA650053C273 /* ExpenseCategoriesViewModel.swift in Sources */,
 				FABA979722E1E36E00E03380 /* FormTextField.swift in Sources */,
+				FAF34BCC24FF8F8B00430585 /* SubscriptionPlanItemViewModel.swift in Sources */,
 				FA8AD0DE22C5F1C50084AD19 /* ProviderViewModel.swift in Sources */,
 				FA7276B322524C990086D4D1 /* ExpenseCategoryEditDelegateExtension.swift in Sources */,
 				FA6F2E942244D033008C160F /* TransactionViewModel.swift in Sources */,
@@ -2648,6 +2655,7 @@
 				FA85238323858BC6008C09AB /* EntityInfoNavigationController.swift in Sources */,
 				FACEC157230133CC00611B2C /* RegistrationTableController.swift in Sources */,
 				FAC3B9B621B936CD0015A12F /* ChangePasswordViewModel.swift in Sources */,
+				FAF34BCA24FF523300430585 /* SubscriptionPlanViewModel.swift in Sources */,
 				FA7276DA22539F510086D4D1 /* FiltersSelectionViewSection.swift in Sources */,
 				FA0A4E84246A7DB300886277 /* FormImageValueField.swift in Sources */,
 				FA5751C9237C2C0C00912443 /* SwitchInfoTableViewCell.swift in Sources */,

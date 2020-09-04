@@ -30,7 +30,7 @@ class FeatureDescriptionCollectionViewCell : UICollectionViewCell {
 
 typealias ProductViewContainer = (background: UIView, title: UILabel, subtitle: UILabel, titleContainer: UIView, subtitleContainer: UIView, delimiter: UIView, discountButton: UIButton)
 
-class SubscriptionViewController : FormFieldsTableViewController, ApplicationRouterDependantProtocol, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol {
+class SubscriptionViewController : UIViewController, ApplicationRouterDependantProtocol, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol {
     
     var router: ApplicationRouterProtocol!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!

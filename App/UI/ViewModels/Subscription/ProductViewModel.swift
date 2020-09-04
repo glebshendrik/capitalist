@@ -17,6 +17,10 @@ class ProductViewModel {
     var savingPercent: NSDecimalNumber? = nil
     var baseProduct: SKProduct? = nil
     
+    var identifier: String {
+        return product.productIdentifier
+    }
+    
     var trialDiscount: SKProductDiscount? {
         if #available(iOS 12.2, *) {
             guard let discount = product.introductoryPrice, discount.paymentMode == .freeTrial else { return nil }

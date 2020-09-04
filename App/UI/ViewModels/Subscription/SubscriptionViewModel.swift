@@ -17,78 +17,98 @@ enum SubscriptionError : Error {
     case restoreFailed
 }
 
-enum SubscriptionProductId : String {
-    case monthly = "com.realtransitapps.threebaskets.subscriptions.main.monthly"
-    case halfofyear = "com.realtransitapps.threebaskets.subscriptions.main.halfofyear"
-    case yearly = "com.realtransitapps.threebaskets.subscriptions.main.yearly"
+enum SubscriptionProduct : CaseIterable {
+    static var allCases: [SubscriptionProduct] {
+        return Array(RenewalInterval.allCases.map{ [SubscriptionProduct.basic($0),
+                                                    SubscriptionProduct.standard($0),
+                                                    SubscriptionProduct.premium($0)] }.joined())
+    }
+    
+    case basic(RenewalInterval)
+    case standard(RenewalInterval)
+    case premium(RenewalInterval)
+    
+    enum RenewalInterval : String, CaseIterable {
+        case month = "monthly"
+        case sixMonths = "halfofyear"
+        case year = "yearly"
+        
+        var id: String {
+            return rawValue
+        }
+    }
     
     var id: String {
-        return rawValue
+        switch self {
+        case .basic(let interval):
+            return "com.realtransitapps.threebaskets.subscriptions.main.\(interval.id)"
+        case .standard(let interval):
+            return "com.realtransitapps.threebaskets.subscriptions.standard.\(interval.id)"
+        case .premium(let interval):
+            return "com.realtransitapps.threebaskets.subscriptions.premium.\(interval.id)"
+        }
     }
-}
-
-struct FeatureDescriptionViewModel {
-    var description: String
-    var imageName: String
 }
 
 class SubscriptionViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     
-    private var productViewModels: [String : ProductViewModel] = [:]
-    private var featureDescriptionViewModels: [FeatureDescriptionViewModel] =
-        [FeatureDescriptionViewModel(description: NSLocalizedString("Неограниченное количество транзакций в день", comment: "Неограниченное количество транзакций в день"),
-                                     imageName: "subscription-transactions"),
-         FeatureDescriptionViewModel(description:  NSLocalizedString("Неограниченное количество сбережений и инвестиций", comment: "Неограниченное количество сбережений и инвестиций"),
-                                     imageName: "subscription-assets"),
-         FeatureDescriptionViewModel(description: NSLocalizedString("Статистика за все время с возможностью фильтрации операций", comment: "Статистика за все время с возможностью фильтрации операций"),
-                                     imageName: "subscription-statistics"),
-         FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять кредитами", comment: "Возможность управлять кредитами"),
-                                     imageName: "subscription-credits"),
-         FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять долгами и займами", comment: "Возможность управлять долгами и займами"),
-                                     imageName: "subscription-debts")]
-    
-    var selectedProductId: SubscriptionProductId = .yearly {
-        didSet {
-            updateSelectedProduct()
-        }
-    }
-    
-    var selectedProduct: ProductViewModel? {
-        return productViewModels[selectedProductId.id]
-    }
-    
-    var numberOfFeatureDescriptions: Int {
-        return featureDescriptionViewModels.count
-    }
-    
-    var privacyURLString: String {
-        return NSLocalizedString("privacy policy url", comment: "privacy policy url")
-    }
-    
-    var termsURLString: String {
-        return NSLocalizedString("terms of service url", comment: "terms of service url")
-    }
+    private var subscriptionPlanViewModels: [SubscriptionPlanViewModel] = []
     
     init(accountCoordinator: AccountCoordinatorProtocol) {
         self.accountCoordinator = accountCoordinator
     }
     
-    func featureDescriptionViewModel(by indexPath: IndexPath) -> FeatureDescriptionViewModel? {
-        return featureDescriptionViewModels[safe: indexPath.row]
-    }
-    
-    func productViewModel(by productId: SubscriptionProductId) -> ProductViewModel? {
-        return productViewModels[productId.id]
-    }
-    
     func updateProducts() {
         let products = accountCoordinator.subscriptionProducts
-        productViewModels = [String : ProductViewModel]()
+        var productViewModels = [String : ProductViewModel]()
         for product in products {
             productViewModels[product.productIdentifier] = ProductViewModel(product: product)
         }
-        productViewModels[selectedProductId.id]?.isSelected = true
+        let basicProducts = [productViewModels[SubscriptionProduct.basic(.month).id],
+                             productViewModels[SubscriptionProduct.basic(.year).id]].compactMap { $0 }
+        let standardProducts = [productViewModels[SubscriptionProduct.standard(.month).id],
+                                productViewModels[SubscriptionProduct.standard(.year).id]].compactMap { $0 }
+        let premiumProducts = [productViewModels[SubscriptionProduct.premium(.month).id],
+                               productViewModels[SubscriptionProduct.premium(.year).id]].compactMap { $0 }
+        
+        
+        let freeFeatures = [FeatureDescriptionViewModel(description: NSLocalizedString("Неограниченное количество транзакций в день", comment: "Неограниченное количество транзакций в день"),
+                                    imageName: "subscription-transactions"),
+                            FeatureDescriptionViewModel(description:  NSLocalizedString("Неограниченное количество сбережений и инвестиций", comment: "Неограниченное количество сбережений и инвестиций"),
+                                    imageName: "subscription-assets"),
+                            FeatureDescriptionViewModel(description: NSLocalizedString("Статистика за все время с возможностью фильтрации операций", comment: "Статистика за все время с возможностью фильтрации операций"),
+                                    imageName: "subscription-statistics"),
+                            FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять кредитами", comment: "Возможность управлять кредитами"),
+                                    imageName: "subscription-credits"),
+                            FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять долгами и займами", comment: "Возможность управлять долгами и займами"),
+                                    imageName: "subscription-debts")]
+        
+        let basicFeatures = [FeatureDescriptionViewModel(description: NSLocalizedString("Неограниченное количество транзакций в день", comment: "Неограниченное количество транзакций в день"),
+                                    imageName: "subscription-transactions"),
+                             FeatureDescriptionViewModel(description:  NSLocalizedString("Неограниченное количество сбережений и инвестиций", comment: "Неограниченное количество сбережений и инвестиций"),
+                                    imageName: "subscription-assets"),
+                             FeatureDescriptionViewModel(description: NSLocalizedString("Статистика за все время с возможностью фильтрации операций", comment: "Статистика за все время с возможностью фильтрации операций"),
+                                    imageName: "subscription-statistics"),
+                             FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять кредитами", comment: "Возможность управлять кредитами"),
+                                    imageName: "subscription-credits"),
+                             FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять долгами и займами", comment: "Возможность управлять долгами и займами"),
+                                    imageName: "subscription-debts")]
+        
+        let standardFeatures = [FeatureDescriptionViewModel(description: NSLocalizedString("Неограниченное количество транзакций в день", comment: "Неограниченное количество транзакций в день"),
+               imageName: "subscription-transactions"),
+        FeatureDescriptionViewModel(description:  NSLocalizedString("Неограниченное количество сбережений и инвестиций", comment: "Неограниченное количество сбережений и инвестиций"),
+               imageName: "subscription-assets"),
+        FeatureDescriptionViewModel(description: NSLocalizedString("Статистика за все время с возможностью фильтрации операций", comment: "Статистика за все время с возможностью фильтрации операций"),
+               imageName: "subscription-statistics"),
+        FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять кредитами", comment: "Возможность управлять кредитами"),
+               imageName: "subscription-credits"),
+        FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять долгами и займами", comment: "Возможность управлять долгами и займами"),
+               imageName: "subscription-debts")]
+        
+        subscriptionPlanViewModels = [
+        
+//        productViewModels[selectedProductId.id]?.isSelected = true
         updateDiscountPercents()
     }
     
@@ -124,19 +144,6 @@ class SubscriptionViewModel {
                 }.then { _ in
                     return self.accountCoordinator.updateUserSubscription()
                 }
-    }
-    
-    private func updateSelectedProduct() {
-        productViewModels.values.forEach { $0.isSelected = false }
-        productViewModels[selectedProductId.id]?.isSelected = true
-    }
-    
-    private func updateDiscountPercents() {
-        guard let basicProduct = productViewModels[SubscriptionProductId.monthly.id] else { return }
-        productViewModels.values.forEach {
-            $0.savingPercent = $0.product.savingPercentAgainst(basicProduct.product)
-            $0.baseProduct = basicProduct.product
-        }
     }
 }
 
