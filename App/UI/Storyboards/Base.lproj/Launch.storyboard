@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RkU-Rn-Xy2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RkU-Rn-Xy2">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,14 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="hp0-jk-F54">
-                                <rect key="frame" x="133" y="253.5" width="109.5" height="160"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_title" translatesAutoresizingMaskIntoConstraints="NO" id="hp0-jk-F54">
+                                <rect key="frame" x="48" y="248" width="279" height="171"/>
+                                <color key="tintColor" name="white 1.0"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="hp0-jk-F54" firstAttribute="centerX" secondItem="RTl-vV-Y2u" secondAttribute="centerX" id="UB0-vL-xsl"/>
                             <constraint firstItem="hp0-jk-F54" firstAttribute="centerY" secondItem="RTl-vV-Y2u" secondAttribute="centerY" id="nOZ-6Z-otQ"/>
+                            <constraint firstItem="hp0-jk-F54" firstAttribute="leading" secondItem="RTl-vV-Y2u" secondAttribute="leading" constant="48" id="oQz-n7-fzj"/>
+                            <constraint firstAttribute="trailing" secondItem="hp0-jk-F54" secondAttribute="trailing" constant="48" id="oUc-pW-3hG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hM3-BM-xrb"/>
                     </view>
@@ -34,6 +37,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="109.5" height="160"/>
+        <image name="logo_title" width="743" height="171"/>
+        <namedColor name="white 1.0">
+            <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

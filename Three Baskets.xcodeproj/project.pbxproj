@@ -496,6 +496,7 @@
 		FAF31D0A240371E700D4CFB3 /* Transactions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF31D0C240371E700D4CFB3 /* Transactions.storyboard */; };
 		FAF31D122406544700D4CFB3 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */; };
 		FAF31D142406764D00D4CFB3 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */; };
+		FAF34BCE2510BA7100430585 /* start-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = FAF34BCD2510BA7100430585 /* start-animation.json */; };
 		FAF3BC84241A4BCD007F46FE /* launch-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAF3BC83241A4BCD007F46FE /* launch-animation.gif */; };
 		FAF7528D24408A4000A0B5B7 /* CountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7528C24408A4000A0B5B7 /* CountriesViewController.swift */; };
 		FAF7528F24408AC900A0B5B7 /* CountriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7528E24408AC900A0B5B7 /* CountriesViewModel.swift */; };
@@ -903,7 +904,7 @@
 		FACEC15C2302AC8900611B2C /* ProfileEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTableController.swift; sourceTree = "<group>"; };
 		FACEC15E2302CEBB00611B2C /* ChangePasswordTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordTableController.swift; sourceTree = "<group>"; };
 		FACEC1602302D9CD00611B2C /* SettingsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableController.swift; sourceTree = "<group>"; };
-		FAD88EF621AEA86E00BE7BC1 /* Three Baskets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Three Baskets.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAD88EF621AEA86E00BE7BC1 /* Capitalist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capitalist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAD88F0321AEA87300BE7BC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Launch.storyboard; sourceTree = "<group>"; };
@@ -1032,6 +1033,7 @@
 		FAF31D10240371F100D4CFB3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Transactions.strings; sourceTree = "<group>"; };
 		FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
+		FAF34BCD2510BA7100430585 /* start-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "start-animation.json"; sourceTree = "<group>"; };
 		FAF3BC83241A4BCD007F46FE /* launch-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "launch-animation.gif"; sourceTree = "<group>"; };
 		FAF7528C24408A4000A0B5B7 /* CountriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewController.swift; sourceTree = "<group>"; };
 		FAF7528E24408AC900A0B5B7 /* CountriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewModel.swift; sourceTree = "<group>"; };
@@ -1803,7 +1805,7 @@
 		FAD88EF721AEA86E00BE7BC1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FAD88EF621AEA86E00BE7BC1 /* Three Baskets.app */,
+				FAD88EF621AEA86E00BE7BC1 /* Capitalist.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2265,6 +2267,7 @@
 		FAF3BC80241A1CBA007F46FE /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FAF34BCD2510BA7100430585 /* start-animation.json */,
 				FABFB516247BA34E004776C2 /* drag-tutorial-en.gif */,
 				FABFB517247BA34F004776C2 /* drag-tutorial-ru.gif */,
 				FAF3BC83241A4BCD007F46FE /* launch-animation.gif */,
@@ -2292,7 +2295,7 @@
 			);
 			name = "Three Baskets";
 			productName = skrudzh;
-			productReference = FAD88EF621AEA86E00BE7BC1 /* Three Baskets.app */;
+			productReference = FAD88EF621AEA86E00BE7BC1 /* Capitalist.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2357,6 +2360,7 @@
 				FAF3BC84241A4BCD007F46FE /* launch-animation.gif in Resources */,
 				FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */,
 				FA6017C2241B373100B15496 /* GoogleService-Info.plist in Resources */,
+				FAF34BCE2510BA7100430585 /* start-animation.json in Resources */,
 				FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */,
 				FAF31CBB2403705C00D4CFB3 /* Common.storyboard in Resources */,
 				FAAC99BD23B31A59009ADB84 /* Roboto-Black.ttf in Resources */,
@@ -3314,7 +3318,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.realtransitapps.threebaskets;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Capitalist;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3422,7 +3426,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.realtransitapps.threebaskets;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Capitalist;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

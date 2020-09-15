@@ -8,14 +8,25 @@
 
 import UIKit
 import SwiftyGif
+import Lottie
+
+protocol StartAnimationViewControllerDelegate : class {
+    func animationDidStop()
+}
 
 class StartAnimationViewController : UIViewController {
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var animationView: AnimationView!
+    weak var delegate: StartAnimationViewControllerDelegate? = nil
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        let starAnimation = Animation.named("start-animation")
+        animationView.animation = starAnimation
         
-    func startAnimationWith(delegate: SwiftyGifDelegate) throws {
-        let gif = try UIImage(gifName: "launch-animation.gif")
-        imageView.setGifImage(gif, manager: SwiftyGifManager.defaultManager, loopCount: 1)
-        imageView.delegate = delegate
+        animationView.play { (finished) in
+            self.delegate?.animationDidStop()
+        }
     }
 }

@@ -56,6 +56,7 @@ target 'Three Baskets' do
   pod 'Macaw'
   pod 'SwiftyBeaver'
   pod 'Adjust', '~> 4.22.1'
+  pod 'lottie-ios'
 end
 
 post_install do |installer|
