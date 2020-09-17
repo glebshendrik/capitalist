@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FAD88EF521AEA86E00BE7BC1"
-               BuildableName = "Three Baskets.app"
-               BlueprintName = "Three Baskets"
-               ReferencedContainer = "container:Three Baskets.xcodeproj">
+               BuildableName = "Capitalist.app"
+               BlueprintName = "Capitalist"
+               ReferencedContainer = "container:Capitalist.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,9 +31,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FAD88EF521AEA86E00BE7BC1"
-            BuildableName = "Three Baskets.app"
-            BlueprintName = "Three Baskets"
-            ReferencedContainer = "container:Three Baskets.xcodeproj">
+            BuildableName = "Capitalist.app"
+            BlueprintName = "Capitalist"
+            ReferencedContainer = "container:Capitalist.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -44,7 +44,7 @@
                BlueprintIdentifier = "FA8AB9C0237D9BC400DDD54C"
                BuildableName = "Three Baskets UI Tests.xctest"
                BlueprintName = "Three Baskets UI Tests"
-               ReferencedContainer = "container:Three Baskets.xcodeproj">
+               ReferencedContainer = "container:Capitalist.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FAD88EF521AEA86E00BE7BC1"
-            BuildableName = "Three Baskets.app"
-            BlueprintName = "Three Baskets"
-            ReferencedContainer = "container:Three Baskets.xcodeproj">
+            BuildableName = "Capitalist.app"
+            BlueprintName = "Capitalist"
+            ReferencedContainer = "container:Capitalist.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -81,9 +81,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FAD88EF521AEA86E00BE7BC1"
-            BuildableName = "Three Baskets.app"
-            BlueprintName = "Three Baskets"
-            ReferencedContainer = "container:Three Baskets.xcodeproj">
+            BuildableName = "Capitalist.app"
+            BlueprintName = "Capitalist"
+            ReferencedContainer = "container:Capitalist.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

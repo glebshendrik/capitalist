@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5ED9109D3257740117279317 /* Pods_Three_Baskets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C593460A3D6B5A0FB3FE006 /* Pods_Three_Baskets.framework */; };
+		2423FAF0896CFFBDA6AB4B97 /* Pods_Capitalist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C061A82B7EC78EA6C2DBBAB /* Pods_Capitalist.framework */; };
 		FA02F4DC248A141700C536E3 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02F4DB248A141700C536E3 /* Connection.swift */; };
 		FA02F4DE248A53C000C536E3 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02F4DD248A53C000C536E3 /* Account.swift */; };
 		FA0570E6232A338F002B4706 /* BorrowsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0570E5232A338F002B4706 /* BorrowsServiceProtocol.swift */; };
@@ -496,7 +496,7 @@
 		FAF31D0A240371E700D4CFB3 /* Transactions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF31D0C240371E700D4CFB3 /* Transactions.storyboard */; };
 		FAF31D122406544700D4CFB3 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */; };
 		FAF31D142406764D00D4CFB3 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */; };
-		FAF34BCE2510BA7100430585 /* start-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = FAF34BCD2510BA7100430585 /* start-animation.json */; };
+		FAF34BD02512E2D400430585 /* start-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = FAF34BCF2512E2D300430585 /* start-animation.json */; };
 		FAF3BC84241A4BCD007F46FE /* launch-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAF3BC83241A4BCD007F46FE /* launch-animation.gif */; };
 		FAF7528D24408A4000A0B5B7 /* CountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7528C24408A4000A0B5B7 /* CountriesViewController.swift */; };
 		FAF7528F24408AC900A0B5B7 /* CountriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7528E24408AC900A0B5B7 /* CountriesViewModel.swift */; };
@@ -505,9 +505,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35EA7E187AC95F814A33A4AD /* Pods-Capitalist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Capitalist/Pods-Capitalist.debug.xcconfig"; sourceTree = "<group>"; };
+		3C061A82B7EC78EA6C2DBBAB /* Pods_Capitalist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Capitalist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50A7DE279EF82128CF6E52B6 /* Pods-Three Baskets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Three Baskets.release.xcconfig"; path = "Pods/Target Support Files/Pods-Three Baskets/Pods-Three Baskets.release.xcconfig"; sourceTree = "<group>"; };
 		583CC4A144317ABB49D40E1E /* Pods-Three Baskets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Three Baskets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Three Baskets/Pods-Three Baskets.debug.xcconfig"; sourceTree = "<group>"; };
-		5C593460A3D6B5A0FB3FE006 /* Pods_Three_Baskets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Three_Baskets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2B24BE37DCE7B3FD2EC4EEB /* Pods-Capitalist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.release.xcconfig"; path = "Pods/Target Support Files/Pods-Capitalist/Pods-Capitalist.release.xcconfig"; sourceTree = "<group>"; };
 		FA02F4DB248A141700C536E3 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		FA02F4DD248A53C000C536E3 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		FA0570E5232A338F002B4706 /* BorrowsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -829,7 +831,7 @@
 		FAAC99C723B8DF79009ADB84 /* DatePeriodSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePeriodSelectionViewController.swift; sourceTree = "<group>"; };
 		FAAC99C923B8DFF6009ADB84 /* DatePeriodSelectionTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePeriodSelectionTableController.swift; sourceTree = "<group>"; };
 		FAADA025240806520040DBC0 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
-		FAB29A2922AC3B32009946DC /* Three Baskets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Three Baskets.entitlements"; sourceTree = "<group>"; };
+		FAB29A2922AC3B32009946DC /* Capitalist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Capitalist.entitlements; sourceTree = "<group>"; };
 		FAB5BE3C2351FE5B000466AE /* Active.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Active.swift; sourceTree = "<group>"; };
 		FAB5BE3E2351FE75000466AE /* ActiveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveType.swift; sourceTree = "<group>"; };
 		FAB5BE40235206F1000466AE /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
@@ -1033,7 +1035,7 @@
 		FAF31D10240371F100D4CFB3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Transactions.strings; sourceTree = "<group>"; };
 		FAF31D112406544600D4CFB3 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
-		FAF34BCD2510BA7100430585 /* start-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "start-animation.json"; sourceTree = "<group>"; };
+		FAF34BCF2512E2D300430585 /* start-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "start-animation.json"; sourceTree = "<group>"; };
 		FAF3BC83241A4BCD007F46FE /* launch-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "launch-animation.gif"; sourceTree = "<group>"; };
 		FAF7528C24408A4000A0B5B7 /* CountriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewController.swift; sourceTree = "<group>"; };
 		FAF7528E24408AC900A0B5B7 /* CountriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewModel.swift; sourceTree = "<group>"; };
@@ -1049,8 +1051,8 @@
 				FA7FC38924AB413B00C1ACCD /* CoreTelephony.framework in Frameworks */,
 				FA7FC38724AB411700C1ACCD /* iAd.framework in Frameworks */,
 				FA7FC38524AB410D00C1ACCD /* AdSupport.framework in Frameworks */,
-				5ED9109D3257740117279317 /* Pods_Three_Baskets.framework in Frameworks */,
 				FADD04C72420101300FB542D /* StoreKit.framework in Frameworks */,
+				2423FAF0896CFFBDA6AB4B97 /* Pods_Capitalist.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1062,6 +1064,8 @@
 			children = (
 				583CC4A144317ABB49D40E1E /* Pods-Three Baskets.debug.xcconfig */,
 				50A7DE279EF82128CF6E52B6 /* Pods-Three Baskets.release.xcconfig */,
+				35EA7E187AC95F814A33A4AD /* Pods-Capitalist.debug.xcconfig */,
+				B2B24BE37DCE7B3FD2EC4EEB /* Pods-Capitalist.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1073,7 +1077,7 @@
 				FA7FC38624AB411600C1ACCD /* iAd.framework */,
 				FA7FC38424AB410C00C1ACCD /* AdSupport.framework */,
 				FADD04C62420101300FB542D /* StoreKit.framework */,
-				5C593460A3D6B5A0FB3FE006 /* Pods_Three_Baskets.framework */,
+				3C061A82B7EC78EA6C2DBBAB /* Pods_Capitalist.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1794,7 +1798,7 @@
 		FAD88EED21AEA86E00BE7BC1 = {
 			isa = PBXGroup;
 			children = (
-				FAB29A2922AC3B32009946DC /* Three Baskets.entitlements */,
+				FAB29A2922AC3B32009946DC /* Capitalist.entitlements */,
 				FAD88EF821AEA86E00BE7BC1 /* App */,
 				FAD88EF721AEA86E00BE7BC1 /* Products */,
 				29001D9CE2C1E7A36AE9C4E2 /* Pods */,
@@ -2267,7 +2271,7 @@
 		FAF3BC80241A1CBA007F46FE /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				FAF34BCD2510BA7100430585 /* start-animation.json */,
+				FAF34BCF2512E2D300430585 /* start-animation.json */,
 				FABFB516247BA34E004776C2 /* drag-tutorial-en.gif */,
 				FABFB517247BA34F004776C2 /* drag-tutorial-ru.gif */,
 				FAF3BC83241A4BCD007F46FE /* launch-animation.gif */,
@@ -2278,9 +2282,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FAD88EF521AEA86E00BE7BC1 /* Three Baskets */ = {
+		FAD88EF521AEA86E00BE7BC1 /* Capitalist */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FAD88F0821AEA87300BE7BC1 /* Build configuration list for PBXNativeTarget "Three Baskets" */;
+			buildConfigurationList = FAD88F0821AEA87300BE7BC1 /* Build configuration list for PBXNativeTarget "Capitalist" */;
 			buildPhases = (
 				168E3B56739FB6E5999FF4C7 /* [CP] Check Pods Manifest.lock */,
 				FAD88EF221AEA86E00BE7BC1 /* Sources */,
@@ -2293,7 +2297,7 @@
 			);
 			dependencies = (
 			);
-			name = "Three Baskets";
+			name = Capitalist;
 			productName = skrudzh;
 			productReference = FAD88EF621AEA86E00BE7BC1 /* Capitalist.app */;
 			productType = "com.apple.product-type.application";
@@ -2324,7 +2328,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FAD88EF121AEA86E00BE7BC1 /* Build configuration list for PBXProject "Three Baskets" */;
+			buildConfigurationList = FAD88EF121AEA86E00BE7BC1 /* Build configuration list for PBXProject "Capitalist" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -2338,7 +2342,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FAD88EF521AEA86E00BE7BC1 /* Three Baskets */,
+				FAD88EF521AEA86E00BE7BC1 /* Capitalist */,
 			);
 		};
 /* End PBXProject section */
@@ -2360,7 +2364,7 @@
 				FAF3BC84241A4BCD007F46FE /* launch-animation.gif in Resources */,
 				FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */,
 				FA6017C2241B373100B15496 /* GoogleService-Info.plist in Resources */,
-				FAF34BCE2510BA7100430585 /* start-animation.json in Resources */,
+				FAF34BD02512E2D400430585 /* start-animation.json in Resources */,
 				FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */,
 				FAF31CBB2403705C00D4CFB3 /* Common.storyboard in Resources */,
 				FAAC99BD23B31A59009ADB84 /* Roboto-Black.ttf in Resources */,
@@ -2424,7 +2428,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Three Baskets-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Capitalist-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2437,15 +2441,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Three Baskets/Pods-Three Baskets-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Capitalist/Pods-Capitalist-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Three Baskets/Pods-Three Baskets-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Capitalist/Pods-Capitalist-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Three Baskets/Pods-Three Baskets-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Capitalist/Pods-Capitalist-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA6017C3241B3F8800B15496 /* ShellScript */ = {
@@ -3218,13 +3222,13 @@
 		};
 		FAD88F0921AEA87300BE7BC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 583CC4A144317ABB49D40E1E /* Pods-Three Baskets.debug.xcconfig */;
+			baseConfigurationReference = 35EA7E187AC95F814A33A4AD /* Pods-Capitalist.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Capitalist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 73;
+				CURRENT_PROJECT_VERSION = 74;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
@@ -3233,7 +3237,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MARKETING_VERSION = 1.12;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"xml2\"",
@@ -3327,13 +3331,13 @@
 		};
 		FAD88F0A21AEA87300BE7BC1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50A7DE279EF82128CF6E52B6 /* Pods-Three Baskets.release.xcconfig */;
+			baseConfigurationReference = B2B24BE37DCE7B3FD2EC4EEB /* Pods-Capitalist.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Three Baskets.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Capitalist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 73;
+				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -3341,7 +3345,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MARKETING_VERSION = 1.12;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"xml2\"",
@@ -3436,7 +3440,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FAD88EF121AEA86E00BE7BC1 /* Build configuration list for PBXProject "Three Baskets" */ = {
+		FAD88EF121AEA86E00BE7BC1 /* Build configuration list for PBXProject "Capitalist" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAD88F0621AEA87300BE7BC1 /* Debug */,
@@ -3445,7 +3449,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FAD88F0821AEA87300BE7BC1 /* Build configuration list for PBXNativeTarget "Three Baskets" */ = {
+		FAD88F0821AEA87300BE7BC1 /* Build configuration list for PBXNativeTarget "Capitalist" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FAD88F0921AEA87300BE7BC1 /* Debug */,

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyGif
 import Lottie
 
 protocol StartAnimationViewControllerDelegate : class {
@@ -24,6 +23,7 @@ class StartAnimationViewController : UIViewController {
 
         let starAnimation = Animation.named("start-animation")
         animationView.animation = starAnimation
+        animationView.animationSpeed = 3
         
         animationView.play { (finished) in
             self.delegate?.animationDidStop()

@@ -41,15 +41,15 @@ class AppInfoViewController : UITableViewController, MFMailComposeViewController
     }
     
     var telegramUsername: String {
-        return "threebaskets"
+        return "capitalistapp"
     }
     
     var contactEmail: String {
-        return "help@threebaskets.net"
+        return "contact@capitalistapp.net"
     }
     
     var instagramUsername: String {
-        return "threebasketsapp"
+        return "capitalistapp"
     }
     
     var defaultMessage: String {

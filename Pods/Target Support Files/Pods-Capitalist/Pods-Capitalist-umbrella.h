@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_Three_BasketsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_Three_BasketsVersionString[];
+FOUNDATION_EXPORT double Pods_CapitalistVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_CapitalistVersionString[];
 
