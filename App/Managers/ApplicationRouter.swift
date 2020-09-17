@@ -135,14 +135,9 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             route()
             return
         }
+        startAnimationViewController.delegate = self        
         show(startAnimationViewController)
-        do {
-            isAnimating = true
-            try startAnimationViewController.startAnimationWith(delegate: self)
-        }
-        catch {
-            isAnimating = false
-        }
+        isAnimating = true
         route()
     }
     
@@ -517,25 +512,8 @@ extension ApplicationRouter : AdjustDelegate {
     }
 }
 
-extension ApplicationRouter : SwiftyGifDelegate {
-    func gifURLDidFinish(sender: UIImageView) {
-        print("gifURLDidFinish")
-    }
-
-    func gifURLDidFail(sender: UIImageView) {
-        print("gifURLDidFail")
-//        showPendings()
-    }
-
-    func gifDidStart(sender: UIImageView) {
-        print("gifDidStart")
-    }
-    
-    func gifDidLoop(sender: UIImageView) {
-        print("gifDidLoop")
-    }
-    
-    func gifDidStop(sender: UIImageView) {
+extension ApplicationRouter : StartAnimationViewControllerDelegate {
+    func animationDidStop() {
         showPendings()
     }
 }

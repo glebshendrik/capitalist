@@ -135,7 +135,7 @@ extension ExpenseSourceInfoViewController : ConnectionViewControllerDelegate {
 
 extension ExpenseSourceInfoViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
     func showProviders() {
-        guard let providersViewController = factory.providersViewController(delegate: self) else { return }
+        guard let providersViewController = factory.providersViewController(delegate: self, fetchDataFrom: viewModel.fetchDataFrom) else { return }
         modal(UINavigationController(rootViewController: providersViewController))
     }
     

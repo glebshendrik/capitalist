@@ -149,7 +149,7 @@ extension ActiveEditViewController {
 
 extension ActiveEditViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
     func showProviders() {
-        guard let providersViewController = factory.providersViewController(delegate: self) else { return }
+        guard let providersViewController = factory.providersViewController(delegate: self, fetchDataFrom: Date()) else { return }
         modal(UINavigationController(rootViewController: providersViewController))
     }
     

@@ -58,6 +58,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         return accountConnectionAttributes.shouldDestroy == nil
     }
     
+    var fetchDataFrom: Date? {
+        return expenseSourceViewModel?.accountConnectionFetchDataFrom
+    }
+    
     var bankButtonTitle: String {
         return accountConnected
             ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
@@ -204,7 +208,7 @@ extension ExpenseSourceInfoViewModel : SEConnectionFetchingDelegate {
         }        
         return bankConnectionsCoordinator.createConnectSession(providerCode: providerCode,
                                                                countryCode: countryCode,
-                                                               fromDate: Date())
+                                                               fromDate: fetchDataFrom)
     }
     
     func createReconnectSession() -> Promise<URL> {
@@ -212,7 +216,7 @@ extension ExpenseSourceInfoViewModel : SEConnectionFetchingDelegate {
             return Promise(error: BankConnectionError.canNotCreateConnection)
         }
         return bankConnectionsCoordinator.createReconnectSession(connection: connection,
-                                                                 fromDate: expenseSourceViewModel?.accountConnectionCreatedAt)
+                                                                 fromDate: fetchDataFrom)
     }
     
     func createRefreshConnectionSession() -> Promise<URL> {

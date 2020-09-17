@@ -24,7 +24,7 @@ protocol UIFactoryProtocol {
     func reminderEditViewController(delegate: ReminderEditViewControllerDelegate,
                                     viewModel: ReminderViewModel) -> UINavigationController?
     
-    func providersViewController(delegate: ProvidersViewControllerDelegate) -> ProvidersViewController?
+    func providersViewController(delegate: ProvidersViewControllerDelegate, fetchDataFrom: Date?) -> ProvidersViewController?
     
     func accountsViewController(delegate: AccountsViewControllerDelegate,
                                 connection: Connection,

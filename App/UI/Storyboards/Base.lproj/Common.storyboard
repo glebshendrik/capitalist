@@ -1064,7 +1064,7 @@
                                                     <rect key="frame" x="38" y="12" width="22" height="22"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check-circle-icon" translatesAutoresizingMaskIntoConstraints="NO" id="PGK-LC-bej">
-                                                            <rect key="frame" x="4.5" y="4.5" width="13" height="13"/>
+                                                            <rect key="frame" x="1" y="1" width="20" height="20"/>
                                                             <color key="tintColor" name="white 1.0"/>
                                                         </imageView>
                                                     </subviews>
@@ -1478,12 +1478,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-animation-115" translatesAutoresizingMaskIntoConstraints="NO" id="sDn-XP-J48">
-                                <rect key="frame" x="19" y="33.5" width="337" height="600"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="sDn-XP-J48">
+                                <rect key="frame" x="72" y="218" width="231" height="231"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="600" id="RH1-kc-Dfm"/>
-                                    <constraint firstAttribute="width" constant="337" id="odo-ol-VVR"/>
+                                    <constraint firstAttribute="width" secondItem="sDn-XP-J48" secondAttribute="height" multiplier="1:1" id="nfp-Um-lqz"/>
                                 </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_title" translatesAutoresizingMaskIntoConstraints="NO" id="D28-lM-pVu">
+                                <rect key="frame" x="48" y="428" width="279" height="171"/>
+                                <color key="tintColor" name="white 1.0"/>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYX-57-dQm" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
                                 <rect key="frame" x="24" y="559" width="327" height="48"/>
@@ -1513,11 +1516,15 @@
                         </subviews>
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
-                            <constraint firstItem="sDn-XP-J48" firstAttribute="centerY" secondItem="f8I-wb-hEn" secondAttribute="centerY" id="66g-oY-t76"/>
+                            <constraint firstItem="sDn-XP-J48" firstAttribute="leading" secondItem="pqs-Ib-jHi" secondAttribute="leading" constant="72" id="7iY-Vm-tMV"/>
+                            <constraint firstItem="sDn-XP-J48" firstAttribute="centerY" secondItem="f8I-wb-hEn" secondAttribute="centerY" id="ASP-uv-Ja0"/>
+                            <constraint firstItem="D28-lM-pVu" firstAttribute="bottom" secondItem="sDn-XP-J48" secondAttribute="bottom" constant="150" id="AZd-Au-KFR"/>
+                            <constraint firstItem="D28-lM-pVu" firstAttribute="leading" secondItem="pqs-Ib-jHi" secondAttribute="leading" constant="48" id="BBd-uw-wGV"/>
                             <constraint firstItem="iYX-57-dQm" firstAttribute="centerX" secondItem="f8I-wb-hEn" secondAttribute="centerX" id="FOz-Yq-6dy"/>
-                            <constraint firstItem="sDn-XP-J48" firstAttribute="centerX" secondItem="f8I-wb-hEn" secondAttribute="centerX" id="Ivz-dI-JHn"/>
                             <constraint firstItem="pqs-Ib-jHi" firstAttribute="bottom" secondItem="iYX-57-dQm" secondAttribute="bottom" constant="60" id="Oad-Pf-YQx"/>
+                            <constraint firstItem="pqs-Ib-jHi" firstAttribute="trailing" secondItem="sDn-XP-J48" secondAttribute="trailing" constant="72" id="aYf-vb-prv"/>
                             <constraint firstItem="iYX-57-dQm" firstAttribute="leading" secondItem="pqs-Ib-jHi" secondAttribute="leading" constant="24" id="iYR-9f-eHx"/>
+                            <constraint firstItem="pqs-Ib-jHi" firstAttribute="trailing" secondItem="D28-lM-pVu" secondAttribute="trailing" constant="48" id="mS2-gP-Qpc"/>
                             <constraint firstItem="pqs-Ib-jHi" firstAttribute="trailing" secondItem="iYX-57-dQm" secondAttribute="trailing" constant="24" id="pEz-FN-RGl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pqs-Ib-jHi"/>
@@ -1701,7 +1708,7 @@
                                                         <constraint firstAttribute="height" constant="80" id="MWO-hX-pcJ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Three Baskets" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eP7-Um-do3">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Capitalist" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eP7-Um-do3">
                                                     <rect key="frame" x="120" y="30" width="231" height="28"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
                                                     <color key="textColor" name="white 1.0"/>
@@ -1736,7 +1743,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="166.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Three Baskets — управляй личными деньгами как банкир! " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3F-jp-cgQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capitalist — управляй личными деньгами как банкир! " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3F-jp-cgQ">
                                                     <rect key="frame" x="24" y="0.0" width="327" height="28"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
                                                     <color key="textColor" name="white 0.64"/>
@@ -2033,16 +2040,17 @@
         </scene>
     </scenes>
     <resources>
-        <image name="about-app-icon" width="80" height="80"/>
+        <image name="about-app-icon" width="102" height="102"/>
         <image name="app-store-icon" width="120.5" height="120"/>
         <image name="arrow-right-small-icon" width="7" height="12"/>
         <image name="bell-icon" width="16" height="16"/>
-        <image name="check-circle-icon" width="13" height="13"/>
+        <image name="check-circle-icon" width="20" height="20"/>
         <image name="close-icon" width="14.5" height="14.5"/>
         <image name="email-contact-icon" width="40" height="40"/>
         <image name="instagram-contact-icon" width="40" height="40"/>
-        <image name="launch-animation-115" width="375" height="667"/>
         <image name="loader-1" width="55" height="31"/>
+        <image name="logo" width="209" height="229"/>
+        <image name="logo_title" width="743" height="171"/>
         <image name="loupe-icon" width="16" height="16"/>
         <image name="pen2-icon" width="17" height="17.5"/>
         <image name="pull-down-arrow" width="36" height="4"/>

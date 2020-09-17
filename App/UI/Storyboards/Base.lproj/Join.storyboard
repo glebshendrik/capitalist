@@ -29,12 +29,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-animation-115" translatesAutoresizingMaskIntoConstraints="NO" id="sJx-n0-CPA">
-                                <rect key="frame" x="19" y="33.5" width="337" height="600"/>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="qN7-uJ-fVz" customClass="AnimationView" customModule="Lottie">
+                                <rect key="frame" x="72" y="218" width="231" height="231"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="600" id="4H4-0r-zsj"/>
-                                    <constraint firstAttribute="width" constant="337" id="kB9-bV-Epp"/>
+                                    <constraint firstAttribute="width" secondItem="qN7-uJ-fVz" secondAttribute="height" multiplier="1:1" id="1sZ-O6-lFf"/>
                                 </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_title" translatesAutoresizingMaskIntoConstraints="NO" id="TEg-vg-FPO">
+                                <rect key="frame" x="48" y="428" width="279" height="171"/>
+                                <color key="tintColor" name="white 1.0"/>
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="oew-eS-wp4">
                                 <rect key="frame" x="169" y="559.5" width="37" height="37"/>
@@ -48,23 +52,27 @@
                         </subviews>
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
-                            <constraint firstItem="sJx-n0-CPA" firstAttribute="centerY" secondItem="onM-go-z3r" secondAttribute="centerY" id="0gi-20-N6f"/>
+                            <constraint firstItem="TEg-vg-FPO" firstAttribute="leading" secondItem="7G0-UB-QWj" secondAttribute="leading" constant="48" id="8cQ-Tc-uBM"/>
+                            <constraint firstAttribute="trailing" secondItem="qN7-uJ-fVz" secondAttribute="trailing" constant="72" id="GCo-MY-Dj3"/>
                             <constraint firstAttribute="bottom" secondItem="zLJ-49-Mhu" secondAttribute="bottom" constant="60.5" id="ICx-qZ-gTM"/>
                             <constraint firstItem="zLJ-49-Mhu" firstAttribute="centerX" secondItem="onM-go-z3r" secondAttribute="centerX" id="Kwf-f6-TCu"/>
+                            <constraint firstItem="qN7-uJ-fVz" firstAttribute="leading" secondItem="onM-go-z3r" secondAttribute="leading" constant="72" id="Mke-0H-kUk"/>
                             <constraint firstItem="zLJ-49-Mhu" firstAttribute="top" secondItem="oew-eS-wp4" secondAttribute="bottom" constant="10" id="QhX-Zf-K44"/>
                             <constraint firstItem="oew-eS-wp4" firstAttribute="centerX" secondItem="onM-go-z3r" secondAttribute="centerX" id="a9W-JU-O83"/>
-                            <constraint firstItem="sJx-n0-CPA" firstAttribute="centerX" secondItem="onM-go-z3r" secondAttribute="centerX" id="kDG-on-0uq"/>
+                            <constraint firstItem="qN7-uJ-fVz" firstAttribute="centerY" secondItem="onM-go-z3r" secondAttribute="centerY" id="c14-hY-5g1"/>
+                            <constraint firstItem="7G0-UB-QWj" firstAttribute="trailing" secondItem="TEg-vg-FPO" secondAttribute="trailing" constant="48" id="hNs-AQ-j0Q"/>
+                            <constraint firstItem="TEg-vg-FPO" firstAttribute="bottom" secondItem="qN7-uJ-fVz" secondAttribute="bottom" constant="150" id="tbG-pa-0rq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7G0-UB-QWj"/>
                     </view>
                     <connections>
-                        <outlet property="loaderImageView" destination="sJx-n0-CPA" id="Au9-Yc-XY0"/>
+                        <outlet property="animationView" destination="qN7-uJ-fVz" id="C0c-X1-SbE"/>
                         <outlet property="loadingMessageLabel" destination="zLJ-49-Mhu" id="mHA-H5-ogr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vax-kW-hOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="671" y="134"/>
+            <point key="canvasLocation" x="670" y="875"/>
         </scene>
         <!--Вход-->
         <scene sceneID="Wua-yR-sMC">
@@ -1059,17 +1067,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="dBd-VM-ahj">
-                                                    <rect key="frame" x="131" y="0.0" width="113.5" height="21"/>
+                                                    <rect key="frame" x="131" y="0.0" width="113.5" height="20"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="premium-icon" translatesAutoresizingMaskIntoConstraints="NO" id="hff-PU-eZ4">
-                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="21"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="24" id="3Xr-1r-yw7"/>
                                                                 <constraint firstAttribute="height" constant="20" id="ar1-RY-hdm"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Премиум" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZa-IS-iCO">
-                                                            <rect key="frame" x="36" y="0.0" width="77.5" height="21"/>
+                                                            <rect key="frame" x="36" y="0.0" width="77.5" height="20"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                             <color key="textColor" name="yellow 1"/>
                                                             <nil key="highlightedColor"/>
@@ -1130,7 +1138,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </collectionView>
                                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="uZX-zn-gBK">
-                                                    <rect key="frame" x="168" y="234" width="39" height="37"/>
+                                                    <rect key="frame" x="168" y="233" width="39" height="37"/>
                                                 </pageControl>
                                             </subviews>
                                             <constraints>
@@ -1603,23 +1611,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="voc-u1-NJU">
-                                <rect key="frame" x="19" y="33.5" width="337" height="600"/>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="r1h-gl-xgb" customClass="AnimationView" customModule="Lottie">
+                                <rect key="frame" x="72" y="218" width="231" height="231"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="337" id="lUx-DA-dkK"/>
-                                    <constraint firstAttribute="height" constant="600" id="qJ8-Ts-dZE"/>
+                                    <constraint firstAttribute="width" secondItem="r1h-gl-xgb" secondAttribute="height" multiplier="1:1" id="SI0-tn-VRu"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
-                            <constraint firstItem="voc-u1-NJU" firstAttribute="centerY" secondItem="xTk-hg-coa" secondAttribute="centerY" id="9NW-tG-itm"/>
-                            <constraint firstItem="voc-u1-NJU" firstAttribute="centerX" secondItem="xTk-hg-coa" secondAttribute="centerX" id="tR8-7F-2gu"/>
+                            <constraint firstItem="r1h-gl-xgb" firstAttribute="leading" secondItem="xTk-hg-coa" secondAttribute="leading" constant="72" id="F9N-l6-RZt"/>
+                            <constraint firstItem="r1h-gl-xgb" firstAttribute="centerY" secondItem="xTk-hg-coa" secondAttribute="centerY" id="fRu-1O-Fz4"/>
+                            <constraint firstAttribute="trailing" secondItem="r1h-gl-xgb" secondAttribute="trailing" constant="72" id="tMX-Ri-iwX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2fg-te-BYk"/>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="voc-u1-NJU" id="NXh-zM-FW1"/>
+                        <outlet property="animationView" destination="r1h-gl-xgb" id="bgQ-MF-e0n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3AF-HH-ZVK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1628,8 +1637,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch-animation-115" width="375" height="667"/>
         <image name="loader-1" width="55" height="31"/>
+        <image name="logo_title" width="743" height="171"/>
         <image name="premium-icon" width="23.5" height="20"/>
         <image name="subscription-transactions" width="162" height="156"/>
         <namedColor name="black 2">

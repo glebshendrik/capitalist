@@ -129,6 +129,7 @@ PODS:
     - InfiniteLayout/CocoaProxy
   - IQKeyboardManager (6.2.0)
   - Locksmith (4.0.0)
+  - lottie-ios (3.1.8)
   - Macaw (0.9.6):
     - SWXMLHash
   - MSPeekCollectionViewDelegateImplementation (2.0.0)
@@ -229,6 +230,7 @@ DEPENDENCIES:
   - InfiniteLayout
   - IQKeyboardManager
   - Locksmith (~> 4.0)
+  - lottie-ios
   - Macaw
   - MSPeekCollectionViewDelegateImplementation (~> 2.0)
   - myTrackerSDK
@@ -307,6 +309,7 @@ SPEC REPOS:
     - GoogleUtilities
     - Haptica
     - InfiniteLayout
+    - lottie-ios
     - Macaw
     - myTrackerSDK
     - nanopb
@@ -388,6 +391,7 @@ SPEC CHECKSUMS:
   InfiniteLayout: de51cfad9ed480a3e3a0af7d28242d3257c606d9
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
+  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   Macaw: 8306d775625ba003beee4186b9533fd7cf284024
   MSPeekCollectionViewDelegateImplementation: 3091e9512b3cd03facdea3c02e57673a4a06246a
   myTrackerSDK: cd0a1693064ae67b6069d9a3f81111083f6d9bf6
@@ -418,6 +422,6 @@ SPEC CHECKSUMS:
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
 
-PODFILE CHECKSUM: c9cfb4f83b70211003b6a03304f57f590e5c70b7
+PODFILE CHECKSUM: 6e84a17bd03c9e1b35b76c40de93a17b976fe597
 
 COCOAPODS: 1.8.0
