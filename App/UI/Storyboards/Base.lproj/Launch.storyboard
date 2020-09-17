@@ -17,16 +17,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_title" translatesAutoresizingMaskIntoConstraints="NO" id="hp0-jk-F54">
-                                <rect key="frame" x="48" y="248" width="279" height="171"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-background" translatesAutoresizingMaskIntoConstraints="NO" id="hp0-jk-F54">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="tintColor" name="white 1.0"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="i5y-ul-KBX">
+                                <rect key="frame" x="125.5" y="269" width="118" height="129"/>
+                                <color key="tintColor" name="white 1.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="i5y-ul-KBX" secondAttribute="height" multiplier="210:230" id="ZAZ-lh-XQf"/>
+                                    <constraint firstAttribute="width" constant="118" id="g7G-Wu-HFn"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hp0-jk-F54" secondAttribute="trailing" id="0oo-zf-qfB"/>
+                            <constraint firstItem="i5y-ul-KBX" firstAttribute="centerY" secondItem="RTl-vV-Y2u" secondAttribute="centerY" id="81h-y6-WvY"/>
+                            <constraint firstItem="hp0-jk-F54" firstAttribute="leading" secondItem="RTl-vV-Y2u" secondAttribute="leading" id="PoN-iV-zKa"/>
+                            <constraint firstItem="i5y-ul-KBX" firstAttribute="centerX" secondItem="RTl-vV-Y2u" secondAttribute="centerX" constant="-3" id="aTS-ja-qwr"/>
+                            <constraint firstAttribute="bottom" secondItem="hp0-jk-F54" secondAttribute="bottom" id="cXL-8p-12r"/>
                             <constraint firstItem="hp0-jk-F54" firstAttribute="centerY" secondItem="RTl-vV-Y2u" secondAttribute="centerY" id="nOZ-6Z-otQ"/>
-                            <constraint firstItem="hp0-jk-F54" firstAttribute="leading" secondItem="RTl-vV-Y2u" secondAttribute="leading" constant="48" id="oQz-n7-fzj"/>
-                            <constraint firstAttribute="trailing" secondItem="hp0-jk-F54" secondAttribute="trailing" constant="48" id="oUc-pW-3hG"/>
+                            <constraint firstItem="hp0-jk-F54" firstAttribute="top" secondItem="RTl-vV-Y2u" secondAttribute="top" id="pnw-nq-vb0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hM3-BM-xrb"/>
                     </view>
@@ -37,7 +49,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo_title" width="743" height="171"/>
+        <image name="logo" width="209" height="229"/>
+        <image name="logo-background" width="375" height="812"/>
         <namedColor name="white 1.0">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
