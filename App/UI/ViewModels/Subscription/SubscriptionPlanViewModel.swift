@@ -8,83 +8,52 @@
 
 import Foundation
 
-struct FeatureDescriptionViewModel {
-    var description: String
-    var imageName: String
-}
-
 class SubscriptionPlanViewModel {
-    let title: String
-    let description: String
-    let isFree: Bool = false
-    let productViewModels: [String : ProductViewModel] = [:]
-    let featureDescriptionViewModels: [FeatureDescriptionViewModel]
+    var isFree: Bool = false
     
-    var selectedProductId: SubscriptionProduct {
-        didSet {
-            updateSelectedProduct()
-        }
+    private var planItems: [SubscriptionPlanItemViewModel]
+    
+    var numberOfPlanItems: Int {
+        return planItems.count
     }
     
-    var selectedProduct: ProductViewModel? {
-        return productViewModels[selectedProductId.id]
+    func planItemViewModel(by indexPath: IndexPath) -> SubscriptionPlanItemViewModel? {
+        return planItems[safe: indexPath.row]
     }
     
-    var numberOfFeatureDescriptions: Int {
-        return featureDescriptionViewModels.count
+    func planItemViewModel(by itemType: SubscriptionPlanItemType) -> SubscriptionPlanItemViewModel? {
+        return planItems.first { $0.itemType == itemType }
     }
     
-    var privacyURLString: String {
-        return NSLocalizedString("privacy policy url", comment: "privacy policy url")
-    }
-    
-    var termsURLString: String {
-        return NSLocalizedString("terms of service url", comment: "terms of service url")
-    }
-    
-    func featureDescriptionViewModel(by indexPath: IndexPath) -> FeatureDescriptionViewModel? {
-        return featureDescriptionViewModels[safe: indexPath.row]
-    }
-    
-    func productViewModel(by productId: SubscriptionProductId) -> ProductViewModel? {
-        return productViewModels[productId.id]
-    }
-    
-    init(title: String, description: String, features: [FeatureDescriptionViewModel], products: [ProductViewModel] = [], isFree: Bool = false, selectedProduct: SubscriptionProduct? = nil) {
+    init(title: String, description: String, features: [PlanFeatureItemViewModel], firstProduct: SubscriptionProduct? = nil, secondProduct: SubscriptionProduct? = nil, products: [ProductViewModel] = [], basicProduct: SubscriptionProduct? = nil, isFree: Bool = false, selectedProduct: SubscriptionProduct? = nil) {
         
-        self.title = title
-        self.description = description
-        self.featureDescriptionViewModels = features
-        
-        for product in products {
-            self.productViewModels[product.identifier] = product
-        }
         self.isFree = isFree
-        if let selectedProductId = selectedProductId {
-            self.selectedProductId = selectedProductId
+        planItems = []
+        
+        planItems.append(PlanSpaceItemViewModel())
+        planItems.append(PlanTopItemViewModel())
+        planItems.append(PlanTitleItemViewModel(title: title))
+        planItems.append(PlanDescriptionItemViewModel(description: description))
+        if isFree {
+            planItems.append(PlanFreeItemViewModel())
         }
+        else if let firstProduct = firstProduct,
+                let secondProduct = secondProduct {
+            planItems.append(PlanPurchaseItemViewModel(firstProduct: firstProduct,
+                                                       secondProduct: secondProduct,
+                                                       products: products,
+                                                       basicProduct: basicProduct,
+                                                       selectedProduct: selectedProduct))
+        }
+        planItems.append(contentsOf: features)
+        planItems.append(PlanBottomItemViewModel())
+        planItems.append(PlanSpaceItemViewModel())
+        planItems.append(PlanSpaceItemViewModel())
+        planItems.append(PlanInfoItemViewModel())
     }
     
-    func updateProducts() {
-        let products = accountCoordinator.subscriptionProducts
-        productViewModels = [String : ProductViewModel]()
-        for product in products {
-            productViewModels[product.productIdentifier] = ProductViewModel(product: product)
-        }
-        productViewModels[selectedProductId.id]?.isSelected = true
-        updateDiscountPercents()
-    }
-    
-    private func updateSelectedProduct() {
-        productViewModels.values.forEach { $0.isSelected = false }
-        productViewModels[selectedProductId.id]?.isSelected = true
-    }
-    
-    private func updateDiscountPercents() {
-        guard let basicProduct = productViewModels[SubscriptionProductId.monthly.id] else { return }
-        productViewModels.values.forEach {
-            $0.savingPercent = $0.product.savingPercentAgainst(basicProduct.product)
-            $0.baseProduct = basicProduct.product
-        }
+    func updateEligibility(productId: String, isTrialAvailable: Bool) {
+        guard let planPurchaseItem = planItemViewModel(by: .purchase) as? PlanPurchaseItemViewModel else { return }
+        planPurchaseItem.updateEligibility(productId: productId, isTrialAvailable: isTrialAvailable)
     }
 }

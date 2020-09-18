@@ -121,6 +121,14 @@
 		FA53B11C23D7471C008B9A1F /* TransactionablesCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53B11B23D7471C008B9A1F /* TransactionablesCreationViewController.swift */; };
 		FA53B11E23D74D05008B9A1F /* TransactionablesCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53B11D23D74D05008B9A1F /* TransactionablesCreationViewModel.swift */; };
 		FA53B12023D823FD008B9A1F /* TransactionableExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53B11F23D823FD008B9A1F /* TransactionableExampleViewModel.swift */; };
+		FA557FFD2514AA43004D5252 /* SubscriptionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA557FFC2514AA43004D5252 /* SubscriptionProduct.swift */; };
+		FA5580002514CD3E004D5252 /* SubscriptionPlanItemTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA557FFF2514CD3E004D5252 /* SubscriptionPlanItemTitleCell.swift */; };
+		FA5580022514CE43004D5252 /* SubscriptionPlanItemDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5580012514CE43004D5252 /* SubscriptionPlanItemDescriptionCell.swift */; };
+		FA5580042514CE6E004D5252 /* SubscriptionPlanItemPurchaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5580032514CE6E004D5252 /* SubscriptionPlanItemPurchaseCell.swift */; };
+		FA5580062514CF9C004D5252 /* SubscriptionPlanItemFreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5580052514CF9C004D5252 /* SubscriptionPlanItemFreeCell.swift */; };
+		FA5580082514D025004D5252 /* SubscriptionPlanItemFeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5580072514D025004D5252 /* SubscriptionPlanItemFeatureCell.swift */; };
+		FA55800A2514D0E1004D5252 /* SubscriptionPlanItemInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5580092514D0E1004D5252 /* SubscriptionPlanItemInfoCell.swift */; };
+		FA55800C2514D6A4004D5252 /* SubscriptionPlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55800B2514D6A4004D5252 /* SubscriptionPlanCollectionViewCell.swift */; };
 		FA56AB93235EE7F400E4D0E3 /* ActiveEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56AB92235EE7F400E4D0E3 /* ActiveEditTableController.swift */; };
 		FA56AB95235EE81500E4D0E3 /* ActiveEditingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56AB94235EE81500E4D0E3 /* ActiveEditingExtension.swift */; };
 		FA56AB97235EE82C00E4D0E3 /* ActiveUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56AB96235EE82C00E4D0E3 /* ActiveUIExtension.swift */; };
@@ -625,6 +633,14 @@
 		FA53B11B23D7471C008B9A1F /* TransactionablesCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionablesCreationViewController.swift; sourceTree = "<group>"; };
 		FA53B11D23D74D05008B9A1F /* TransactionablesCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionablesCreationViewModel.swift; sourceTree = "<group>"; };
 		FA53B11F23D823FD008B9A1F /* TransactionableExampleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExampleViewModel.swift; sourceTree = "<group>"; };
+		FA557FFC2514AA43004D5252 /* SubscriptionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProduct.swift; sourceTree = "<group>"; };
+		FA557FFF2514CD3E004D5252 /* SubscriptionPlanItemTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemTitleCell.swift; sourceTree = "<group>"; };
+		FA5580012514CE43004D5252 /* SubscriptionPlanItemDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemDescriptionCell.swift; sourceTree = "<group>"; };
+		FA5580032514CE6E004D5252 /* SubscriptionPlanItemPurchaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemPurchaseCell.swift; sourceTree = "<group>"; };
+		FA5580052514CF9C004D5252 /* SubscriptionPlanItemFreeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemFreeCell.swift; sourceTree = "<group>"; };
+		FA5580072514D025004D5252 /* SubscriptionPlanItemFeatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemFeatureCell.swift; sourceTree = "<group>"; };
+		FA5580092514D0E1004D5252 /* SubscriptionPlanItemInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemInfoCell.swift; sourceTree = "<group>"; };
+		FA55800B2514D6A4004D5252 /* SubscriptionPlanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA56AB92235EE7F400E4D0E3 /* ActiveEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEditTableController.swift; sourceTree = "<group>"; };
 		FA56AB94235EE81500E4D0E3 /* ActiveEditingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEditingExtension.swift; sourceTree = "<group>"; };
 		FA56AB96235EE82C00E4D0E3 /* ActiveUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUIExtension.swift; sourceTree = "<group>"; };
@@ -1338,6 +1354,20 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		FA557FFE2514CCDF004D5252 /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				FA557FFF2514CD3E004D5252 /* SubscriptionPlanItemTitleCell.swift */,
+				FA5580012514CE43004D5252 /* SubscriptionPlanItemDescriptionCell.swift */,
+				FA5580032514CE6E004D5252 /* SubscriptionPlanItemPurchaseCell.swift */,
+				FA5580052514CF9C004D5252 /* SubscriptionPlanItemFreeCell.swift */,
+				FA5580072514D025004D5252 /* SubscriptionPlanItemFeatureCell.swift */,
+				FA5580092514D0E1004D5252 /* SubscriptionPlanItemInfoCell.swift */,
+				FA55800B2514D6A4004D5252 /* SubscriptionPlanCollectionViewCell.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
 		FA5751C3237C213C00912443 /* EntityInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1666,10 +1696,11 @@
 		FAADA024240806390040DBC0 /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
-				FAF34BC924FF523300430585 /* SubscriptionPlanViewModel.swift */,
+				FA557FFC2514AA43004D5252 /* SubscriptionProduct.swift */,
 				FAADA025240806520040DBC0 /* ProductViewModel.swift */,
-				FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */,
+				FAF34BC924FF523300430585 /* SubscriptionPlanViewModel.swift */,
 				FAF34BCB24FF8F8B00430585 /* SubscriptionPlanItemViewModel.swift */,
+				FAF31D132406764D00D4CFB3 /* SubscriptionViewModel.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -2090,6 +2121,7 @@
 				FAC3B9D221C279450015A12F /* Main */,
 				FA53B11823D74449008B9A1F /* Onboarding */,
 				FACC01E7224B5E540044A747 /* Statistics */,
+				FA557FFE2514CCDF004D5252 /* Subscription */,
 				FA0A4E85246D4BC100886277 /* Transactions */,
 			);
 			path = Views;
@@ -2139,14 +2171,14 @@
 				FA0CAE2021D679C000805288 /* Icons */,
 				FA66D8262293D14400C21E8B /* IncomeSources */,
 				FAD88F8621B117CF00BE7BC1 /* Join */,
-				FAADA027240807360040DBC0 /* Subscription */,
 				FAD88F8521B117BC00BE7BC1 /* Main */,
 				FADD04CA2422236C00FB542D /* Menu */,
 				FAC3B9BF21BE15CE0015A12F /* Onboarding */,
 				FA165CDE21B653F300EAA16B /* Profile */,
 				FA6DDE8322D4D0FE008D14FF /* Bank Connection */,
-				FACC01E2224B52200044A747 /* Statistics */,
 				FAA91274220C79CD00F2C251 /* Settings */,
+				FACC01E2224B52200044A747 /* Statistics */,
+				FAADA027240807360040DBC0 /* Subscription */,
 				FA66D8292293D1A800C21E8B /* Transactions */,
 			);
 			path = ViewControllers;
@@ -2499,6 +2531,7 @@
 				FAE3BBD122367D0400FF1397 /* BudgetViewModel.swift in Sources */,
 				FAD88F2C21AEB78A00BE7BC1 /* NotificationsHandlerProtocol.swift in Sources */,
 				FAB5BE3D2351FE5B000466AE /* Active.swift in Sources */,
+				FA5580002514CD3E004D5252 /* SubscriptionPlanItemTitleCell.swift in Sources */,
 				FAAC99C423B5C89C009ADB84 /* GraphViewModel.swift in Sources */,
 				FAC3B9BC21BA002E0015A12F /* ProfileEditViewModel.swift in Sources */,
 				FAD88F5F21AEC5C600BE7BC1 /* AccountCoordinatorProtocol.swift in Sources */,
@@ -2600,6 +2633,7 @@
 				FA16FC6D223A61B80053C273 /* IncomeSourceTableViewCell.swift in Sources */,
 				FA7DB73322102F8200559878 /* CurrenciesCoordinatorProtocol.swift in Sources */,
 				FAD88F7521AFD64000BE7BC1 /* APIRouteQueryParameters.swift in Sources */,
+				FA55800C2514D6A4004D5252 /* SubscriptionPlanCollectionViewCell.swift in Sources */,
 				FAD88F7A21AFD64000BE7BC1 /* APIResource.swift in Sources */,
 				FA0CAE0121D25F5300805288 /* ExpenseSourcesService.swift in Sources */,
 				FA66FB792226D37000708C71 /* ExchangeRate.swift in Sources */,
@@ -2674,6 +2708,7 @@
 				FA0570F5232A6DA5002B4706 /* BorrowTableViewCell.swift in Sources */,
 				FAE05FA72356EA870014D034 /* TransactionEditDelegateExtension.swift in Sources */,
 				FA16FC7B223BA88F0053C273 /* SoundsManagerProtocol.swift in Sources */,
+				FA5580022514CE43004D5252 /* SubscriptionPlanItemDescriptionCell.swift in Sources */,
 				FAB71FDD243DC541006D432C /* ProviderConnectionViewModel.swift in Sources */,
 				FA30B4762285298B0017470C /* BalanceViewModel.swift in Sources */,
 				FA7176FF22683275008ADF94 /* GraphFilterTableViewCell.swift in Sources */,
@@ -2776,6 +2811,7 @@
 				FAA8619923D72C24009DF88F /* TransactionableExamplesServiceProtocol.swift in Sources */,
 				FA2847F822F0802E003F114A /* ExpenseCategoryEditingExtension.swift in Sources */,
 				FA0CAE0721D266F100805288 /* ExpenseSourceViewModel.swift in Sources */,
+				FA5580082514D025004D5252 /* SubscriptionPlanItemFeatureCell.swift in Sources */,
 				FAC3B9D421C2796C0015A12F /* IncomeSourceCollectionViewCell.swift in Sources */,
 				FA7276C7225256EE0086D4D1 /* DataControllingExtension.swift in Sources */,
 				FA8AD0D822BB503C0084AD19 /* SaltEdgeManagerProtocol.swift in Sources */,
@@ -2848,6 +2884,7 @@
 				FA0CAE1721D66C8700805288 /* IconsServiceProtocol.swift in Sources */,
 				FA7EDFF622CCD5BC0054EAD3 /* AccountsServiceProtocol.swift in Sources */,
 				FAA5D572238E98AB00CC53AD /* ActiveInfoViewModel.swift in Sources */,
+				FA5580042514CE6E004D5252 /* SubscriptionPlanItemPurchaseCell.swift in Sources */,
 				FA630C2A2293A8FC00242AB3 /* FloatingTextField.swift in Sources */,
 				FABE54FB233F865B00DF2B70 /* CreditTypesService.swift in Sources */,
 				FAC3B9C721C0F2B00015A12F /* IncomeSourcesServiceProtocol.swift in Sources */,
@@ -2883,9 +2920,11 @@
 				FAA426062230F61E00B64925 /* TransactionsService.swift in Sources */,
 				FA814F50235D625A0039471A /* ActiveEditViewController.swift in Sources */,
 				FAD88F5B21AEC1F800BE7BC1 /* DevicesServiceProtocol.swift in Sources */,
+				FA5580062514CF9C004D5252 /* SubscriptionPlanItemFreeCell.swift in Sources */,
 				FA165CD621B4EF6800EAA16B /* RegistrationViewModel.swift in Sources */,
 				FAA5D574238EC85C00CC53AD /* ActiveInfoViewController.swift in Sources */,
 				FA7EDFF422CCC0990054EAD3 /* AccountConnection.swift in Sources */,
+				FA557FFD2514AA43004D5252 /* SubscriptionProduct.swift in Sources */,
 				FA28480B22F47BDD003F114A /* FormField.swift in Sources */,
 				FA56AB9B235EE93900E4D0E3 /* ActiveEditViewModel.swift in Sources */,
 				FA717705226EF69A008ADF94 /* ExportManagerProtocol.swift in Sources */,
@@ -2910,6 +2949,7 @@
 				FA53B11A23D74486008B9A1F /* TransactionableExampleCollectionViewCell.swift in Sources */,
 				FA0CAE0B21D3C1D900805288 /* ExpenseSourceEditViewController.swift in Sources */,
 				FA0570EE232A362F002B4706 /* BorrowsCoordinator.swift in Sources */,
+				FA55800A2514D0E1004D5252 /* SubscriptionPlanItemInfoCell.swift in Sources */,
 				FAED7DAA21EC8B6C00BF6FE1 /* ExpenseCategoriesCoordinator.swift in Sources */,
 				FAE05FA92358CA1F0014D034 /* ActiveCollectionViewCell.swift in Sources */,
 				FAD88F8421B0FB7800BE7BC1 /* LandingViewController.swift in Sources */,
