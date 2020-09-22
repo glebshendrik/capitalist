@@ -114,6 +114,7 @@ class PlanPurchaseItemViewModel : SubscriptionPlanItemViewModel {
         }
         if let selectedProduct = selectedProduct {
             self.selectedProduct = selectedProduct
+            updateSelectedProduct()
         }
         if let basicProduct = basicProduct {
             updateDiscountPercents(basicProduct: basicProduct)
@@ -190,26 +191,18 @@ class PlanInfoItemViewModel : SubscriptionPlanItemViewModel {
     }
     
     var infoMessage: String {
-        return NSLocalizedString("Информация об отмене подписки", comment: "")
+        return NSLocalizedString("Отменить подписку можно в любое время в настройках телефона", comment: "")
     }
     
     var restorePurchaseTitle: String {
-        return NSLocalizedString("Продолжить бесплатно", comment: "")
+        return NSLocalizedString("Восстановить подписку", comment: "")
     }
     
     var privacyButtonTitle: String {
-        return NSLocalizedString("Продолжить бесплатно", comment: "")
+        return NSLocalizedString("Политика конфиденциальности", comment: "")
     }
     
     var termsButtonTitle: String {
-        return NSLocalizedString("Продолжить бесплатно", comment: "")
-    }
-    
-    var privacyURLString: String {
-        return NSLocalizedString("privacy policy url", comment: "privacy policy url")
-    }
-    
-    var termsURLString: String {
-        return NSLocalizedString("terms of service url", comment: "terms of service url")
+        return NSLocalizedString("Правила пользования", comment: "")
     }
 }

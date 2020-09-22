@@ -12,6 +12,7 @@ typealias ProductViewContainer = (background: UIView, title: UILabel, subtitle: 
 
 protocol SubscriptionPlanItemPurchaseCellDelegate : class {
     func didTapPurchaseButton(product: ProductViewModel)
+    func didChangeContent()
 }
 
 class SubscriptionPlanItemPurchaseCell : UITableViewCell {
@@ -48,13 +49,15 @@ class SubscriptionPlanItemPurchaseCell : UITableViewCell {
     }
     
     @IBAction func didTapFirstProduct(_ sender: Any) {
-        viewModel.selectedProductId = .monthly
+        viewModel?.selectedProduct = viewModel?.firstProduct
         updateUI()
+        delegate?.didChangeContent()
     }
     
     @IBAction func didTapSecondProduct(_ sender: Any) {
-        viewModel.selectedProductId = .yearly
+        viewModel?.selectedProduct = viewModel?.secondProduct
         updateUI()
+        delegate?.didChangeContent()
     }
         
     @IBAction func didTapContinueButton(_ sender: Any) {
@@ -65,48 +68,50 @@ class SubscriptionPlanItemPurchaseCell : UITableViewCell {
     func updateUI() {        
         updatePurchaseUI()
         updateDiscountDescriptionUI()
-        setupProductsUI()
-        updateProductUI(by: .monthly)
-        updateProductUI(by: .yearly)
+        updateProductsUI()
     }
     
     private func updatePurchaseUI() {
-        purchaseSubtitleLabel.text = viewModel.selectedProduct?.purchaseTitle
+        purchaseSubtitleLabel.text = viewModel?.selectedProductViewModel?.purchaseTitle
     }
     
     private func updateDiscountDescriptionUI() {
-        discountDescriptionLabel.text = viewModel.selectedProduct?.discountDescription
+        discountDescriptionLabel.text = viewModel?.selectedProductViewModel?.discountDescription
     }
     
-    private func setupProductsUI() {
-        productContainers = [.monthly : (background: firstProductBackground,
-                                         title: firstProductTitleLabel,
-                                         subtitle: firstProductSubtitleLabel,
-                                         titleContainer: firstProductTitleContainer,
-                                         subtitleContainer: firstProductSubtitleContainer,
-                                         delimiter: firstProductDelimeter,
-                                         discountButton: firstProductDiscountButton),
-                             .yearly : (background: secondProductBackground,
-                                        title: secondProductTitleLabel,
-                                        subtitle: secondProductSubtitleLabel,
-                                        titleContainer: secondProductTitleContainer,
-                                        subtitleContainer: secondProductSubtitleContainer,
-                                        delimiter: secondProductDelimeter,
-                                        discountButton: secondProductDiscountButton)]
+    private func updateProductsUI() {
+        guard   let firstProduct = viewModel?.firstProduct,
+                let secondProduct = viewModel?.secondProduct else { return }
+        productContainers = [firstProduct : (background: firstProductBackground,
+                                             title: firstProductTitleLabel,
+                                             subtitle: firstProductSubtitleLabel,
+                                             titleContainer: firstProductTitleContainer,
+                                             subtitleContainer: firstProductSubtitleContainer,
+                                             delimiter: firstProductDelimeter,
+                                             discountButton: firstProductDiscountButton),
+                             secondProduct : (background: secondProductBackground,
+                                              title: secondProductTitleLabel,
+                                              subtitle: secondProductSubtitleLabel,
+                                              titleContainer: secondProductTitleContainer,
+                                              subtitleContainer: secondProductSubtitleContainer,
+                                              delimiter: secondProductDelimeter,
+                                              discountButton: secondProductDiscountButton)]
+        updateUI(product: firstProduct)
+        updateUI(product: secondProduct)
     }
     
-    private func updateProductUI(by id: SubscriptionProduct) {
-        guard let productViewModel = viewModel.productViewModel(by: id) else {
+    private func updateUI(product: SubscriptionProduct) {
+        guard let productViewModel = viewModel?.productViewModel(by: product) else {
             return
         }
-        productContainers[id]?.background.borderColor = UIColor.by(.blue1)
-        productContainers[id]?.background.borderWidth = productViewModel.isSelected ? 3.0 : 0.0
-        productContainers[id]?.title.text = productViewModel.pricePerPeriod
-        productContainers[id]?.subtitle.text = productViewModel.trialTitle
-        productContainers[id]?.subtitleContainer.isHidden = !productViewModel.hasTrial
-        productContainers[id]?.delimiter.isHidden = !productViewModel.hasTrial
-        productContainers[id]?.discountButton.isHidden = !productViewModel.hasDiscount
-        productContainers[id]?.discountButton.setTitle(productViewModel.discountTitle, for: .normal)
+        productContainers[product]?.background.borderColor = UIColor.by(.blue1)
+        productContainers[product]?.background.borderWidth = productViewModel.isSelected ? 3.0 : 0.0
+        productContainers[product]?.title.text = productViewModel.pricePerPeriod
+        productContainers[product]?.subtitle.text = productViewModel.trialTitle
+        productContainers[product]?.subtitleContainer.isHidden = !productViewModel.hasTrial
+        productContainers[product]?.delimiter.isHidden = !productViewModel.hasTrial
+        productContainers[product]?.discountButton.isHidden = !productViewModel.hasDiscount
+        productContainers[product]?.discountButton.setTitle(productViewModel.discountTitle, for: .normal)
     }
     
 }

@@ -57,6 +57,7 @@ target 'Capitalist' do
   pod 'SwiftyBeaver'
   pod 'Adjust', '~> 4.22.1'
   pod 'lottie-ios'
+  pod 'UPCarouselFlowLayout'
 end
 
 post_install do |installer|

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SubscriptionProduct : CaseIterable {
+enum SubscriptionProduct : CaseIterable, Hashable {
     static var allCases: [SubscriptionProduct] {
         return Array(RenewalInterval.allCases.map{ [SubscriptionProduct.premium($0),
                                                     SubscriptionProduct.platinum($0)] }.joined())

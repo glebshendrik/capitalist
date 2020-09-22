@@ -203,6 +203,7 @@ PODS:
   - SwipeCellKit (2.7.1)
   - SWXMLHash (5.0.1)
   - TrustKit (1.6.5)
+  - UPCarouselFlowLayout (1.1.2)
 
 DEPENDENCIES:
   - Adjust (~> 4.22.1)
@@ -255,6 +256,7 @@ DEPENDENCIES:
   - SwinjectAutoregistration (= 2.6.0)
   - SwinjectStoryboard (= 2.2)
   - SwipeCellKit
+  - UPCarouselFlowLayout
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -323,6 +325,7 @@ SPEC REPOS:
     - SwipeCellKit
     - SWXMLHash
     - TrustKit
+    - UPCarouselFlowLayout
 
 EXTERNAL SOURCES:
   RandomColorSwift:
@@ -421,7 +424,8 @@ SPEC CHECKSUMS:
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
+  UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
 
-PODFILE CHECKSUM: 6e84a17bd03c9e1b35b76c40de93a17b976fe597
+PODFILE CHECKSUM: 69af59311830b1d48f69c2103d92111ab8d18307
 
 COCOAPODS: 1.8.0

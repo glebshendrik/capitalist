@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol SubscriptionPlanCollectionViewCellDelegate : SubscriptionPlanItemPurchaseCellDelegate, SubscriptionPlanItemFreeCellDelegate, SubscriptionPlanItemInfoCellDelegate {
+}
+
 class SubscriptionPlanCollectionViewCell : UICollectionViewCell {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    weak var delegate: SubscriptionPlanCollectionViewCellDelegate?
     
     var viewModel: SubscriptionPlanViewModel? = nil {
         didSet {
@@ -21,7 +26,8 @@ class SubscriptionPlanCollectionViewCell : UICollectionViewCell {
     func updateUI() {
         tableView.delegate = self
         tableView.dataSource = self
-    }
+        tableView.reloadData()
+    }    
 }
 
 extension SubscriptionPlanCollectionViewCell : UITableViewDelegate, UITableViewDataSource {
@@ -38,7 +44,7 @@ extension SubscriptionPlanCollectionViewCell : UITableViewDelegate, UITableViewD
         
         let cell = tableView.dequeueReusableCell(withIdentifier: itemViewModel.cellIdentifier, for: indexPath)
         
-        switch itemViewModel {
+        switch cell {
         case let titleCell as SubscriptionPlanItemTitleCell:
             configure(titleCell, withViewModel: itemViewModel as? PlanTitleItemViewModel)
         case let descriptionCell as SubscriptionPlanItemDescriptionCell:
@@ -49,6 +55,8 @@ extension SubscriptionPlanCollectionViewCell : UITableViewDelegate, UITableViewD
             configure(freeCell, withViewModel: itemViewModel as? PlanFreeItemViewModel)
         case let featureCell as SubscriptionPlanItemFeatureCell:
             configure(featureCell, withViewModel: itemViewModel as? PlanFeatureItemViewModel)
+        case let infoCell as SubscriptionPlanItemInfoCell:
+            configure(infoCell, withViewModel: itemViewModel as? PlanInfoItemViewModel)
         default:
             return cell
         }
@@ -69,13 +77,13 @@ extension SubscriptionPlanCollectionViewCell : UITableViewDelegate, UITableViewD
     func configure(_ cell: SubscriptionPlanItemPurchaseCell, withViewModel viewModel: PlanPurchaseItemViewModel?) {
         guard let viewModel = viewModel else { return }
         cell.viewModel = viewModel
-        cell.delegate = self
+        cell.delegate = delegate
     }
     
     func configure(_ cell: SubscriptionPlanItemFreeCell, withViewModel viewModel: PlanFreeItemViewModel?) {
         guard let viewModel = viewModel else { return }
         cell.viewModel = viewModel
-        cell.delegate = self
+        cell.delegate = delegate
     }
     
     func configure(_ cell: SubscriptionPlanItemFeatureCell, withViewModel viewModel: PlanFeatureItemViewModel?) {
@@ -86,6 +94,6 @@ extension SubscriptionPlanCollectionViewCell : UITableViewDelegate, UITableViewD
     func configure(_ cell: SubscriptionPlanItemInfoCell, withViewModel viewModel: PlanInfoItemViewModel?) {
         guard let viewModel = viewModel else { return }
         cell.viewModel = viewModel
-        cell.delegate = self
+        cell.delegate = delegate
     }
 }

@@ -25,12 +25,12 @@ class SubscriptionViewModel {
         return subscriptionPlanViewModels.count
     }
     
-    func subscriptionPlanViewModel(by indexPath: IndexPath) -> SubscriptionPlanViewModel? {
-        return subscriptionPlanViewModels[safe: indexPath.item]
-    }
-    
     init(accountCoordinator: AccountCoordinatorProtocol) {
         self.accountCoordinator = accountCoordinator        
+    }
+    
+    func subscriptionPlanViewModel(by indexPath: IndexPath) -> SubscriptionPlanViewModel? {
+        return subscriptionPlanViewModels[safe: indexPath.item]
     }
     
     func updateProducts() {
@@ -46,67 +46,57 @@ class SubscriptionViewModel {
                                 productViewModels[SubscriptionProduct.platinum(.year).id]].compactMap { $0 }
         
         
-        let freeFeatures = [PlanFeatureItemViewModel(description: NSLocalizedString("Неограниченное количество транзакций в день",
-                                                                                       comment: "Неограниченное количество транзакций в день"),
-                                                        imageName: "subscription-transactions"),
-                            PlanFeatureItemViewModel(description:  NSLocalizedString("Неограниченное количество сбережений и инвестиций",
-                                                                                        comment: "Неограниченное количество сбережений и инвестиций"),
-                                                        imageName: "subscription-assets"),
-                            PlanFeatureItemViewModel(description: NSLocalizedString("Статистика за все время с возможностью фильтрации операций",
-                                                                                       comment: "Статистика за все время с возможностью фильтрации операций"),
-                                                        imageName: "subscription-statistics"),
-                            PlanFeatureItemViewModel(description: NSLocalizedString("Возможность управлять кредитами",
-                                                                                       comment: "Возможность управлять кредитами"),
-                                                        imageName: "subscription-credits"),
-                            PlanFeatureItemViewModel(description: NSLocalizedString("Возможность управлять долгами и займами",
-                                                                                       comment: "Возможность управлять долгами и займами"),
-                                                        imageName: "subscription-debts")]
+        let freeFeatures = [PlanFeatureItemViewModel(description: NSLocalizedString("Создание кошельков", comment: ""),
+                                                     imageName: "feature-wallet"),
+                            PlanFeatureItemViewModel(description:  NSLocalizedString("Создание источников доходов и категорий трат", comment: ""),
+                                                     imageName: "feature-calculator"),
+                            PlanFeatureItemViewModel(description: NSLocalizedString("До 30 транзакций в день", comment: ""),
+                                                     imageName: "feature-transfer"),
+                            PlanFeatureItemViewModel(description: NSLocalizedString("Просмотр статистики за текущий и прошлый месяц", comment: ""),
+                                                     imageName: "feature-statistics"),
+                            PlanFeatureItemViewModel(description: NSLocalizedString("Создание одного актива сбережения и одного актива инвестиции", comment: ""),
+                                                     imageName: "feature-assets")]
         
-        let premiumFeatures = [PlanFeatureItemViewModel(description: NSLocalizedString("Неограниченное количество транзакций в день",
-                                                                                        comment: "Неограниченное количество транзакций в день"),
-                                    imageName: "subscription-transactions"),
-                             PlanFeatureItemViewModel(description:  NSLocalizedString("Неограниченное количество сбережений и инвестиций", comment: "Неограниченное количество сбережений и инвестиций"),
-                                    imageName: "subscription-assets"),
-                             PlanFeatureItemViewModel(description: NSLocalizedString("Статистика за все время с возможностью фильтрации операций", comment: "Статистика за все время с возможностью фильтрации операций"),
-                                    imageName: "subscription-statistics"),
-                             PlanFeatureItemViewModel(description: NSLocalizedString("Возможность управлять кредитами", comment: "Возможность управлять кредитами"),
-                                    imageName: "subscription-credits"),
-                             PlanFeatureItemViewModel(description: NSLocalizedString("Возможность управлять долгами и займами", comment: "Возможность управлять долгами и займами"),
-                                    imageName: "subscription-debts")]
+        let premiumFeatures = [PlanFeatureItemViewModel(description: NSLocalizedString("Неограниченное количество транзакций в день", comment: ""),
+                                                        imageName: "feature-transfer"),
+                               PlanFeatureItemViewModel(description:  NSLocalizedString("Просмотр статистики за все время с возможностью фильтрации", comment: ""),
+                                                        imageName: "feature-statistics"),
+                               PlanFeatureItemViewModel(description: NSLocalizedString("Неограниченное количество сбережений и инвестиций", comment: ""),
+                                                        imageName: "feature-assets"),
+                               PlanFeatureItemViewModel(description: NSLocalizedString("Управление кредитами, долгами и займами", comment: ""),
+                                                        imageName: "feature-credits")]
         
-        let platinumFeatures = [PlanFeatureItemViewModel(description: NSLocalizedString("Неограниченное количество транзакций в день",
-                                                                   comment: "Неограниченное количество транзакций в день"),
-               imageName: "subscription-transactions"),
-        PlanFeatureItemViewModel(description:  NSLocalizedString("Неограниченное количество сбережений и инвестиций", comment: "Неограниченное количество сбережений и инвестиций"),
-               imageName: "subscription-assets"),
-        PlanFeatureItemViewModel(description: NSLocalizedString("Статистика за все время с возможностью фильтрации операций", comment: "Статистика за все время с возможностью фильтрации операций"),
-               imageName: "subscription-statistics"),
-        PlanFeatureItemViewModel(description: NSLocalizedString("Возможность управлять кредитами", comment: "Возможность управлять кредитами"),
-               imageName: "subscription-credits"),
-        PlanFeatureItemViewModel(description: NSLocalizedString("Возможность управлять долгами и займами", comment: "Возможность управлять долгами и займами"),
-               imageName: "subscription-debts")]
+        let platinumFeatures = [PlanFeatureItemViewModel(description: NSLocalizedString("Интеграция с банками", comment: ""),
+                                                         imageName: "feature-bank"),
+                                PlanFeatureItemViewModel(description:  NSLocalizedString("Анализ банковской деятельности за прошлый год", comment: ""),
+                                                         imageName: "feature-analysis")]
         
         
         subscriptionPlanViewModels = [SubscriptionPlanViewModel(title: NSLocalizedString("Бесплатная", comment: ""),
                                                                 description: NSLocalizedString("Бесплатная", comment: ""),
                                                                 features: freeFeatures,
-                                                                isFree: true),
-                                      SubscriptionPlanViewModel(title: NSLocalizedString("Premium", comment: ""),
-                                                                description: NSLocalizedString("Premium", comment: ""),
-                                                                features: premiumFeatures,
-                                                                firstProduct: .premium(.month),
-                                                                secondProduct: .premium(.year),
-                                                                products: premiumProducts,
-                                                                basicProduct: .premium(.month),
-                                                                selectedProduct: .premium(.year)),
-                                      SubscriptionPlanViewModel(title: NSLocalizedString("Platinum", comment: ""),
-                                                                description: NSLocalizedString("Platinum", comment: ""),
-                                                                features: platinumFeatures,
-                                                                firstProduct: .platinum(.month),
-                                                                secondProduct: .platinum(.year),
-                                                                products: platinumProducts,
-                                                                basicProduct: .platinum(.month),
-                                                                selectedProduct: .platinum(.year))]
+                                                                isFree: true)]
+        if !premiumProducts.isEmpty {
+            subscriptionPlanViewModels.append(SubscriptionPlanViewModel(title: NSLocalizedString("Premium", comment: ""),
+                                                                        description: NSLocalizedString("Включает в себя все функции предыдущего плана", comment: ""),
+                                                                        features: premiumFeatures,
+                                                                        firstProduct: .premium(.month),
+                                                                        secondProduct: .premium(.year),
+                                                                        products: premiumProducts,
+                                                                        basicProduct: .premium(.month),
+                                                                        selectedProduct: .premium(.year)))
+        }
+        
+        if !platinumProducts.isEmpty {
+            subscriptionPlanViewModels.append(SubscriptionPlanViewModel(title: NSLocalizedString("Platinum", comment: ""),
+                                                                        description: NSLocalizedString("Включает в себя все функции предыдущего плана", comment: ""),
+                                                                        features: platinumFeatures,
+                                                                        firstProduct: .platinum(.month),
+                                                                        secondProduct: .platinum(.year),
+                                                                        products: platinumProducts,
+                                                                        basicProduct: .platinum(.month),
+                                                                        selectedProduct: .platinum(.year)))
+        }
     }
     
     

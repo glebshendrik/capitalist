@@ -17,39 +17,42 @@ class SubscriptionPlanViewModel {
         return planItems.count
     }
     
-    func planItemViewModel(by indexPath: IndexPath) -> SubscriptionPlanItemViewModel? {
-        return planItems[safe: indexPath.row]
-    }
-    
-    func planItemViewModel(by itemType: SubscriptionPlanItemType) -> SubscriptionPlanItemViewModel? {
-        return planItems.first { $0.itemType == itemType }
-    }
-    
     init(title: String, description: String, features: [PlanFeatureItemViewModel], firstProduct: SubscriptionProduct? = nil, secondProduct: SubscriptionProduct? = nil, products: [ProductViewModel] = [], basicProduct: SubscriptionProduct? = nil, isFree: Bool = false, selectedProduct: SubscriptionProduct? = nil) {
         
         self.isFree = isFree
         planItems = []
         
-        planItems.append(PlanSpaceItemViewModel())
         planItems.append(PlanTopItemViewModel())
         planItems.append(PlanTitleItemViewModel(title: title))
-        planItems.append(PlanDescriptionItemViewModel(description: description))
         if isFree {
+            planItems.append(contentsOf: features)
             planItems.append(PlanFreeItemViewModel())
         }
         else if let firstProduct = firstProduct,
                 let secondProduct = secondProduct {
+            planItems.append(PlanDescriptionItemViewModel(description: description))
+            planItems.append(contentsOf: features)
             planItems.append(PlanPurchaseItemViewModel(firstProduct: firstProduct,
                                                        secondProduct: secondProduct,
                                                        products: products,
                                                        basicProduct: basicProduct,
                                                        selectedProduct: selectedProduct))
         }
-        planItems.append(contentsOf: features)
+        
         planItems.append(PlanBottomItemViewModel())
         planItems.append(PlanSpaceItemViewModel())
-        planItems.append(PlanSpaceItemViewModel())
-        planItems.append(PlanInfoItemViewModel())
+        if !isFree {
+            planItems.append(PlanInfoItemViewModel())
+        }
+        
+    }
+    
+    func planItemViewModel(by indexPath: IndexPath) -> SubscriptionPlanItemViewModel? {
+        return planItems[safe: indexPath.row]
+    }
+    
+    func planItemViewModel(by itemType: SubscriptionPlanItemType) -> SubscriptionPlanItemViewModel? {
+        return planItems.first { $0.itemType == itemType }
     }
     
     func updateEligibility(productId: String, isTrialAvailable: Bool) {
