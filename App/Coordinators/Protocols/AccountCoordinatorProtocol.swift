@@ -13,6 +13,8 @@ import ApphudSDK
 
 protocol AccountCoordinatorProtocol {
     var currentSession: Session? { get }
+    
+    // Subscription
     var currentUserHasActiveSubscription: Bool { get }
     var subscription: ApphudSubscription? { get }
     var subscriptionProducts: [SKProduct] { get }
@@ -32,6 +34,7 @@ protocol AccountCoordinatorProtocol {
     func destroyCurrentUserData() -> Promise<Void>
     func sendConfirmationEmailToCurrentUser() -> Promise<Void>
     
+    // Subscription
     func updateUserSubscription() -> Promise<Void>
     func checkIntroductoryEligibility() -> Promise<[String : Bool]>
     func purchase(product: SKProduct) -> Promise<ApphudSubscription?>
