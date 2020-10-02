@@ -130,6 +130,7 @@
 		FA55800A2514D0E1004D5252 /* SubscriptionPlanItemInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5580092514D0E1004D5252 /* SubscriptionPlanItemInfoCell.swift */; };
 		FA55800C2514D6A4004D5252 /* SubscriptionPlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55800B2514D6A4004D5252 /* SubscriptionPlanCollectionViewCell.swift */; };
 		FA55800E2525E386004D5252 /* SubscriptionPlanItemUnlimitedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55800D2525E385004D5252 /* SubscriptionPlanItemUnlimitedCell.swift */; };
+		FA55801025275794004D5252 /* ExperimentalBankFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55800F25275794004D5252 /* ExperimentalBankFeatureViewController.swift */; };
 		FA56AB93235EE7F400E4D0E3 /* ActiveEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56AB92235EE7F400E4D0E3 /* ActiveEditTableController.swift */; };
 		FA56AB95235EE81500E4D0E3 /* ActiveEditingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56AB94235EE81500E4D0E3 /* ActiveEditingExtension.swift */; };
 		FA56AB97235EE82C00E4D0E3 /* ActiveUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56AB96235EE82C00E4D0E3 /* ActiveUIExtension.swift */; };
@@ -643,6 +644,7 @@
 		FA5580092514D0E1004D5252 /* SubscriptionPlanItemInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemInfoCell.swift; sourceTree = "<group>"; };
 		FA55800B2514D6A4004D5252 /* SubscriptionPlanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA55800D2525E385004D5252 /* SubscriptionPlanItemUnlimitedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemUnlimitedCell.swift; sourceTree = "<group>"; };
+		FA55800F25275794004D5252 /* ExperimentalBankFeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentalBankFeatureViewController.swift; sourceTree = "<group>"; };
 		FA56AB92235EE7F400E4D0E3 /* ActiveEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEditTableController.swift; sourceTree = "<group>"; };
 		FA56AB94235EE81500E4D0E3 /* ActiveEditingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEditingExtension.swift; sourceTree = "<group>"; };
 		FA56AB96235EE82C00E4D0E3 /* ActiveUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUIExtension.swift; sourceTree = "<group>"; };
@@ -1442,6 +1444,7 @@
 				FAA5D569238BEA1500CC53AD /* ExpenseSourceInfoViewController.swift */,
 				FA9485CE24669F19005EB7B9 /* ExpenseSourcesViewController.swift */,
 				FA9485D2246A64FF005EB7B9 /* CardTypesViewController.swift */,
+				FA55800F25275794004D5252 /* ExperimentalBankFeatureViewController.swift */,
 			);
 			path = ExpenseSources;
 			sourceTree = "<group>";
@@ -2963,6 +2966,7 @@
 				FAA5D56E238E5A0700CC53AD /* ExpenseCategoryInfoViewModel.swift in Sources */,
 				FA7276A9225249B00086D4D1 /* TransactionController.swift in Sources */,
 				FA165CEE21B7846C00EAA16B /* ResetPasswordViewController.swift in Sources */,
+				FA55801025275794004D5252 /* ExperimentalBankFeatureViewController.swift in Sources */,
 				FAD88F8821B1181600BE7BC1 /* MenuViewController.swift in Sources */,
 				FA16FC6B223A5B110053C273 /* IncomeSourceSelectViewController.swift in Sources */,
 			);

@@ -24,7 +24,7 @@
         <!--Onboarding View Controller-->
         <scene sceneID="fjH-5D-lsN">
             <objects>
-                <viewController storyboardIdentifier="OnboardingViewController" id="sXH-lO-oOm" customClass="OnboardingViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingViewController" id="sXH-lO-oOm" customClass="OnboardingViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oHA-US-mbb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,7 +36,7 @@
                                     <segue destination="o4w-mN-y2w" kind="embed" identifier="showEmbedded" id="dku-3y-mcn"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnY-KY-H2n" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnY-KY-H2n" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
                                 <rect key="frame" x="24" y="499" width="327" height="48"/>
                                 <color key="backgroundColor" name="blue 1"/>
                                 <constraints>
@@ -130,7 +130,7 @@
         <!--Onboarding Pages View Controller-->
         <scene sceneID="72Z-zp-mcW">
             <objects>
-                <pageViewController storyboardIdentifier="OnboardingPagesViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="mid" doubleSided="YES" id="o4w-mN-y2w" customClass="OnboardingPagesViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="OnboardingPagesViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="mid" doubleSided="YES" id="o4w-mN-y2w" customClass="OnboardingPagesViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Gn-Gs-9Ny" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="74" y="65"/>
@@ -414,7 +414,7 @@
         <!--Transactionables Creation View Controller-->
         <scene sceneID="uuY-qo-qTi">
             <objects>
-                <viewController storyboardIdentifier="TransactionablesCreationViewController" id="w9i-OZ-rHW" customClass="TransactionablesCreationViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransactionablesCreationViewController" id="w9i-OZ-rHW" customClass="TransactionablesCreationViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DYu-K4-Sr8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -529,7 +529,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TransactionableExampleCollectionViewCell" id="psF-IU-3rA" customClass="TransactionableExampleCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TransactionableExampleCollectionViewCell" id="psF-IU-3rA" customClass="TransactionableExampleCollectionViewCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="t0v-nj-0Cd">
@@ -548,7 +548,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p36-2l-4Hl" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p36-2l-4Hl" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="48" height="48"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
@@ -624,7 +624,7 @@
                                     <constraint firstAttribute="height" constant="48" id="TpH-Cu-has"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoF-tf-WXT" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoF-tf-WXT" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="619" width="375" height="48"/>
                                 <color key="backgroundColor" name="gray 1"/>
                                 <userDefinedRuntimeAttributes>
@@ -705,7 +705,7 @@
         <!--Transaction Creation Info View Controller-->
         <scene sceneID="Yq8-th-ZMC">
             <objects>
-                <viewController storyboardIdentifier="TransactionCreationInfoViewController" id="uMh-vx-ooM" customClass="TransactionCreationInfoViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransactionCreationInfoViewController" id="uMh-vx-ooM" customClass="TransactionCreationInfoViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0QD-GV-CZ5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -713,7 +713,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aXu-tF-CDN">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddH-co-jCI" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddH-co-jCI" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="24" y="595" width="327" height="48"/>
                                         <color key="backgroundColor" name="blue 1"/>
                                         <constraints>

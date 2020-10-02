@@ -180,10 +180,23 @@ extension ProvidersViewController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let providerViewModel = viewModel.providerViewModel(at: indexPath) else { return }
+        viewModel.selectedProviderViewModel = viewModel.providerViewModel(at: indexPath)
                 
+        modal(factory.experimentalBankFeatureViewController(delegate: self))
+    }
+}
+
+extension ProvidersViewController: ExperimentalBankFeatureViewControllerDelegate {
+    func didChooseUseFeature() {
+        guard let providerViewModel = viewModel.selectedProviderViewModel else { return }
         setupProviderConnection(for: providerViewModel)
     }
+    
+    func didChooseDontUseFeature() {
+        guard let providerViewModel = viewModel.selectedProviderViewModel else { return }
+        setupProviderConnection(for: providerViewModel)
+    }
+    
 }
 
 extension ProvidersViewController : ConnectionViewControllerDelegate {

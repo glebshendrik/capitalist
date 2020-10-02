@@ -299,5 +299,10 @@ extension ApplicationAssembly {
         container.registerForSkrudzhStoryboard(AppInfoViewController.self) { (r, c) in
             c.accountCoordinator = r.resolve(AccountCoordinatorProtocol.self)
         }
+        
+        // ExperimentalBankFeatureViewController
+        container.registerForSkrudzhStoryboard(ExperimentalBankFeatureViewController.self) { (r, c) in
+            
+        }
     }
 }

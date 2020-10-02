@@ -81,7 +81,8 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
 //    }
     
     var canConnectBank: Bool {
-        return accountCoordinator.hasPlatinumSubscription
+        return true
+//        return accountCoordinator.hasPlatinumSubscription
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,

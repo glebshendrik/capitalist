@@ -49,6 +49,8 @@ class ProvidersViewModel {
     
     var fetchDataFrom: Date? = nil
     
+    var selectedProviderViewModel: ProviderViewModel? = nil
+    
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
         setupCountry()

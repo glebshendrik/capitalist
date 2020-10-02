@@ -524,4 +524,10 @@ class UIFactory : UIFactoryProtocol {
         subscriptionViewController.viewModel.requiredPlans = requiredPlans
         return subscriptionViewController
     }
+    
+    func experimentalBankFeatureViewController(delegate: ExperimentalBankFeatureViewControllerDelegate) -> UINavigationController? {
+        guard let experimentalBankFeatureViewController = router.viewController(.ExperimentalBankFeatureViewController) as? ExperimentalBankFeatureViewController else { return nil }
+        experimentalBankFeatureViewController.delegate = delegate
+        return UINavigationController(rootViewController: experimentalBankFeatureViewController)
+    }
 }

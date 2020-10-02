@@ -166,4 +166,6 @@ protocol UIFactoryProtocol {
     func subscriptionNavigationViewController(requiredPlans: [SubscriptionPlan]) -> UINavigationController?
     
     func subscriptionViewController(requiredPlans: [SubscriptionPlan]) -> SubscriptionViewController?
+    
+    func experimentalBankFeatureViewController(delegate: ExperimentalBankFeatureViewControllerDelegate) -> UINavigationController?
 }

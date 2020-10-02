@@ -23,7 +23,7 @@
         <!--Expense Source Edit View Controller-->
         <scene sceneID="cUY-H9-yKs">
             <objects>
-                <viewController storyboardIdentifier="ExpenseSourceEditViewController" id="8fD-85-d78" customClass="ExpenseSourceEditViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExpenseSourceEditViewController" id="8fD-85-d78" customClass="ExpenseSourceEditViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xYC-tQ-Qch">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,7 +35,7 @@
                                     <segue destination="YzM-aR-OkL" kind="embed" identifier="showEditTableView" id="uK6-Mk-gq2"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxN-YS-mzZ" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxN-YS-mzZ" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
                                 <rect key="frame" x="24" y="551" width="327" height="48"/>
                                 <color key="backgroundColor" name="blue 1"/>
                                 <constraints>
@@ -100,7 +100,7 @@
         <!--Colorable Navigation Controller-->
         <scene sceneID="pmg-KE-152">
             <objects>
-                <navigationController storyboardIdentifier="ExpenseSourceEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="o81-b5-tvU" customClass="ColorableNavigationController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ExpenseSourceEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="o81-b5-tvU" customClass="ColorableNavigationController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="WYC-IN-XDB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -118,7 +118,7 @@
         <!--Источник трат-->
         <scene sceneID="kY1-TP-8I9">
             <objects>
-                <tableViewController storyboardIdentifier="ExpenseSourceEditTableController" id="YzM-aR-OkL" customClass="ExpenseSourceEditTableController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ExpenseSourceEditTableController" id="YzM-aR-OkL" customClass="ExpenseSourceEditTableController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RDx-NI-izQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -154,7 +154,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTD-zZ-I9i" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTD-zZ-I9i" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="155.5" y="27.5" width="64" height="64"/>
                                                     <color key="backgroundColor" name="gray 1"/>
                                                     <constraints>
@@ -238,7 +238,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HM-0c-HRV" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HM-0c-HRV" customClass="FormTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -259,7 +259,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5GL-P0-4OS" customClass="FormImageValueField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5GL-P0-4OS" customClass="FormImageValueField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -280,7 +280,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qgx-8l-JdV" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qgx-8l-JdV" customClass="FormTapField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -301,7 +301,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giw-lh-GVR" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giw-lh-GVR" customClass="FormMoneyTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -322,7 +322,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KCf-I6-YYT" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KCf-I6-YYT" customClass="FormMoneyTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -343,7 +343,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CF-wN-0Yc" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CF-wN-0Yc" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="4" width="327" height="48"/>
                                                     <color key="backgroundColor" name="blue 1"/>
                                                     <constraints>
@@ -459,7 +459,7 @@
         <!--Expense Source Select View Controller-->
         <scene sceneID="gaB-gC-mKi">
             <objects>
-                <viewController storyboardIdentifier="ExpenseSourceSelectViewController" id="N0U-sc-Tfc" customClass="ExpenseSourceSelectViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExpenseSourceSelectViewController" id="N0U-sc-Tfc" customClass="ExpenseSourceSelectViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H6R-R2-KDn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -497,7 +497,7 @@
         <!--Expense Sources View Controller-->
         <scene sceneID="zCa-IO-Y86">
             <objects>
-                <viewController storyboardIdentifier="ExpenseSourcesViewController" id="yrX-vs-Pdj" customClass="ExpenseSourcesViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExpenseSourcesViewController" id="yrX-vs-Pdj" customClass="ExpenseSourcesViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wS0-Or-UkE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -522,14 +522,14 @@
                                 <rect key="frame" x="0.0" y="24" width="375" height="643"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddingItemTableViewCell" rowHeight="64" id="dEd-Zs-tbM" customClass="AddingItemTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddingItemTableViewCell" rowHeight="64" id="dEd-Zs-tbM" customClass="AddingItemTableViewCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dEd-Zs-tbM" id="Jwg-Z2-Mfm">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fX-3N-zEw" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fX-3N-zEw" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="8" width="48" height="48"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -574,7 +574,7 @@
                                             <outlet property="iconView" destination="6fX-3N-zEw" id="8gF-hZ-x1B"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpenseSourceTableViewCell" id="a6F-E5-zwa" customClass="ExpenseSourceTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpenseSourceTableViewCell" id="a6F-E5-zwa" customClass="ExpenseSourceTableViewCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a6F-E5-zwa" id="D1A-DA-qCu">
@@ -582,7 +582,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Labelasdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OxT-Bd-2g3">
-                                                    <rect key="frame" x="72" y="0.0" width="99.5" height="64"/>
+                                                    <rect key="frame" x="72" y="0.0" width="100.5" height="64"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="64" id="6C6-fL-eB8"/>
                                                     </constraints>
@@ -591,12 +591,12 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdasdadsasda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CG1-fO-wbF">
-                                                    <rect key="frame" x="187.5" y="21.5" width="171.5" height="21"/>
+                                                    <rect key="frame" x="188.5" y="21.5" width="170.5" height="21"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                     <color key="textColor" name="white 0.64"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3u-P9-uUL" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3u-P9-uUL" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="8" width="48" height="48"/>
                                                     <color key="backgroundColor" name="gray 1"/>
                                                     <constraints>
@@ -677,7 +677,7 @@
         <!--Expense Source Info View Controller-->
         <scene sceneID="T5Q-5g-JVc">
             <objects>
-                <navigationController storyboardIdentifier="ExpenseSourceInfoViewController" id="pev-ZP-zKc" customClass="ExpenseSourceInfoViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ExpenseSourceInfoViewController" id="pev-ZP-zKc" customClass="ExpenseSourceInfoViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JzT-Ez-XMh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -711,7 +711,7 @@
         <!--Providers View Controller-->
         <scene sceneID="J90-rJ-r32">
             <objects>
-                <viewController storyboardIdentifier="ProvidersViewController" id="MAz-ij-c2z" customClass="ProvidersViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProvidersViewController" id="MAz-ij-c2z" customClass="ProvidersViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VMu-su-b7l">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -782,7 +782,7 @@
                                 <rect key="frame" x="0.0" y="47" width="375" height="620"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProviderCell" id="0xd-CH-K0S" customClass="ProviderCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProviderCell" id="0xd-CH-K0S" customClass="ProviderCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0xd-CH-K0S" id="u9i-gL-cVA">
@@ -798,7 +798,7 @@
                                                     <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMn-qZ-Hza" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMn-qZ-Hza" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="8" width="48" height="48"/>
                                                     <color key="backgroundColor" name="gray 1"/>
                                                     <constraints>
@@ -875,7 +875,7 @@
         <!--Connection View Controller-->
         <scene sceneID="38p-cA-yXf">
             <objects>
-                <viewController storyboardIdentifier="ConnectionViewController" modalPresentationStyle="fullScreen" id="6g8-qx-tlt" customClass="ConnectionViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConnectionViewController" modalPresentationStyle="fullScreen" id="6g8-qx-tlt" customClass="ConnectionViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xlo-wb-Ien">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -909,7 +909,7 @@
         <!--Accounts View Controller-->
         <scene sceneID="Vqn-LD-RRX">
             <objects>
-                <viewController storyboardIdentifier="AccountsViewController" id="Qns-8G-BuV" customClass="AccountsViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountsViewController" id="Qns-8G-BuV" customClass="AccountsViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xzF-lz-hQr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -924,7 +924,7 @@
                                 <rect key="frame" x="0.0" y="33" width="375" height="634"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AccountCell" rowHeight="64" id="0lK-Hg-9kQ" customClass="AccountCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AccountCell" rowHeight="64" id="0lK-Hg-9kQ" customClass="AccountCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0lK-Hg-9kQ" id="ZiU-tM-MaH">
@@ -932,13 +932,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lh3-V4-5Cz">
-                                                    <rect key="frame" x="16" y="8" width="44.5" height="32.5"/>
+                                                    <rect key="frame" x="16" y="8" width="43.5" height="32.5"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                     <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggn-8d-2G2">
-                                                    <rect key="frame" x="314.5" y="21.5" width="44.5" height="21"/>
+                                                    <rect key="frame" x="315.5" y="21.5" width="43.5" height="21"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                     <color key="textColor" name="white 0.64"/>
                                                     <nil key="highlightedColor"/>
@@ -1016,7 +1016,7 @@
         <!--Выберите иконку-->
         <scene sceneID="PY1-Lc-l2u">
             <objects>
-                <viewController storyboardIdentifier="CardTypesViewController" title="Выберите иконку" id="vQa-MI-wQp" customClass="CardTypesViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardTypesViewController" title="Выберите иконку" id="vQa-MI-wQp" customClass="CardTypesViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BHJ-6w-NP0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1031,7 +1031,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CardTypeCollectionViewCell" id="cOQ-K6-h4P" customClass="CardTypeCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CardTypeCollectionViewCell" id="cOQ-K6-h4P" customClass="CardTypeCollectionViewCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1134,10 +1134,148 @@
             </objects>
             <point key="canvasLocation" x="-2724" y="825.33733133433293"/>
         </scene>
+        <!--Experimental Bank Feature View Controller-->
+        <scene sceneID="hla-Rh-CNc">
+            <objects>
+                <viewController storyboardIdentifier="ExperimentalBankFeatureViewController" id="Ytm-d2-Ida" customClass="ExperimentalBankFeatureViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LtP-Dq-98F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgA-sp-aA3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A5V-sA-qTk" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="539" width="327" height="48"/>
+                                        <color key="backgroundColor" name="blue 1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="b0k-kS-dVI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                        <state key="normal" title="Да">
+                                            <color key="titleColor" name="white 1.0"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                                <color key="value" name="blue 1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                                <color key="value" name="white 0.4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapUseFeature:" destination="Ytm-d2-Ida" eventType="touchUpInside" id="QAV-ZR-nKy"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Peh-Y5-bfo" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="595" width="327" height="48"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="znZ-rZ-dNz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                        <state key="normal" title="Нет">
+                                            <color key="titleColor" name="white 1.0"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                                <color key="value" name="blue 1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                                <color key="value" name="white 0.4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapDontUseFeature:" destination="Ytm-d2-Ida" eventType="touchUpInside" id="2Ky-2d-fO9"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Экспериментальная функция" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdY-Rh-bXM">
+                                        <rect key="frame" x="32" y="0.0" width="311" height="56.5"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
+                                        <color key="textColor" name="white 1.0"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Категоризация исторических  транзакций из банка" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-5o-vZF">
+                                        <rect key="frame" x="32" y="72.5" width="311" height="37.5"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
+                                        <color key="textColor" name="white 0.64"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="experimental-image" translatesAutoresizingMaskIntoConstraints="NO" id="qNp-HK-2Qf">
+                                        <rect key="frame" x="32" y="126" width="311" height="120"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="246" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="747" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwb-d6-BIG">
+                                        <rect key="frame" x="32" y="258" width="311" height="169"/>
+                                        <string key="text">По желанию, используй функцию загрузки исторических данных по банковским транзакциям. Категории транзакций расходов и доходов будут определены автоматически. Мы гарантируем корректность транзакций в 60%, над точностью работаем. Вы можете исправить категории любых транзакций вручную.</string>
+                                        <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
+                                        <color key="textColor" name="white 0.64"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" horizontalCompressionResistancePriority="752" text="Воспользоваться экспериментальной функцией?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Op3-Un-25i">
+                                        <rect key="frame" x="32" y="484.5" width="311" height="42.5"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                        <color key="textColor" name="white 1.0"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="A5V-sA-qTk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="qNp-HK-2Qf" secondAttribute="bottom" constant="16" id="4dx-y4-e8O"/>
+                                    <constraint firstItem="bdY-Rh-bXM" firstAttribute="top" secondItem="lgA-sp-aA3" secondAttribute="top" id="8gX-ec-mor"/>
+                                    <constraint firstAttribute="trailing" secondItem="jwb-d6-BIG" secondAttribute="trailing" constant="32" id="AOO-5N-3Gt"/>
+                                    <constraint firstItem="A5V-sA-qTk" firstAttribute="top" secondItem="Op3-Un-25i" secondAttribute="bottom" constant="12" id="Cb9-00-2DO"/>
+                                    <constraint firstItem="Peh-Y5-bfo" firstAttribute="leading" secondItem="lgA-sp-aA3" secondAttribute="leading" constant="24" id="FbB-nl-A9n"/>
+                                    <constraint firstAttribute="trailing" secondItem="bdY-Rh-bXM" secondAttribute="trailing" constant="32" id="K8M-LB-nvn"/>
+                                    <constraint firstItem="Op3-Un-25i" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jwb-d6-BIG" secondAttribute="bottom" constant="12" id="M9V-34-ZMq"/>
+                                    <constraint firstAttribute="bottom" secondItem="Peh-Y5-bfo" secondAttribute="bottom" constant="24" id="O3L-eo-YQz"/>
+                                    <constraint firstItem="bdY-Rh-bXM" firstAttribute="leading" secondItem="lgA-sp-aA3" secondAttribute="leading" constant="32" id="OAC-er-v5E"/>
+                                    <constraint firstItem="qNp-HK-2Qf" firstAttribute="top" secondItem="WQr-5o-vZF" secondAttribute="bottom" constant="16" id="WfH-dd-Eob"/>
+                                    <constraint firstAttribute="trailing" secondItem="A5V-sA-qTk" secondAttribute="trailing" constant="24" id="XIG-nt-NIS"/>
+                                    <constraint firstAttribute="trailing" secondItem="Op3-Un-25i" secondAttribute="trailing" constant="32" id="Y8t-HH-CQX"/>
+                                    <constraint firstItem="WQr-5o-vZF" firstAttribute="leading" secondItem="lgA-sp-aA3" secondAttribute="leading" constant="32" id="YmO-c8-BjT"/>
+                                    <constraint firstItem="jwb-d6-BIG" firstAttribute="leading" secondItem="lgA-sp-aA3" secondAttribute="leading" constant="32" id="Zwf-pS-vPt"/>
+                                    <constraint firstItem="Peh-Y5-bfo" firstAttribute="top" secondItem="A5V-sA-qTk" secondAttribute="bottom" constant="8" id="bLj-qg-9A3"/>
+                                    <constraint firstItem="A5V-sA-qTk" firstAttribute="leading" secondItem="lgA-sp-aA3" secondAttribute="leading" constant="24" id="h1f-3K-n6O"/>
+                                    <constraint firstAttribute="trailing" secondItem="qNp-HK-2Qf" secondAttribute="trailing" constant="32" id="khN-ze-TDx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Peh-Y5-bfo" secondAttribute="trailing" constant="24" id="n0z-Fy-DIh"/>
+                                    <constraint firstItem="WQr-5o-vZF" firstAttribute="top" secondItem="bdY-Rh-bXM" secondAttribute="bottom" constant="16" id="pt1-Pc-oTQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="WQr-5o-vZF" secondAttribute="trailing" constant="32" id="pux-xp-9BI"/>
+                                    <constraint firstItem="jwb-d6-BIG" firstAttribute="top" secondItem="qNp-HK-2Qf" secondAttribute="bottom" constant="12" id="usH-aL-Yii"/>
+                                    <constraint firstItem="Op3-Un-25i" firstAttribute="leading" secondItem="lgA-sp-aA3" secondAttribute="leading" constant="32" id="uwT-ql-WOQ"/>
+                                    <constraint firstItem="qNp-HK-2Qf" firstAttribute="leading" secondItem="lgA-sp-aA3" secondAttribute="leading" constant="32" id="yxD-vc-7J3"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="black 2"/>
+                        <constraints>
+                            <constraint firstItem="lgA-sp-aA3" firstAttribute="leading" secondItem="BQ4-vt-L3o" secondAttribute="leading" id="5D4-S8-DC1"/>
+                            <constraint firstItem="lgA-sp-aA3" firstAttribute="top" secondItem="BQ4-vt-L3o" secondAttribute="top" id="81G-bl-gMq"/>
+                            <constraint firstItem="BQ4-vt-L3o" firstAttribute="bottom" secondItem="lgA-sp-aA3" secondAttribute="bottom" id="AhM-oR-gA3"/>
+                            <constraint firstItem="BQ4-vt-L3o" firstAttribute="trailing" secondItem="lgA-sp-aA3" secondAttribute="trailing" id="CyF-Io-18F"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BQ4-vt-L3o"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H6D-Nz-9an" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2626.4000000000001" y="2977.9610194902552"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bank-icon" width="17" height="17"/>
         <image name="close-icon" width="14.5" height="14.5"/>
+        <image name="experimental-image" width="120" height="120"/>
         <image name="loader-1" width="55" height="31"/>
         <image name="loupe-icon" width="16" height="16"/>
         <image name="master_card_icon" width="26" height="16"/>
