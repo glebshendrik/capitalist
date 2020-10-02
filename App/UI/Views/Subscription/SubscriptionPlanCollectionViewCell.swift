@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SubscriptionPlanCollectionViewCellDelegate : SubscriptionPlanItemPurchaseCellDelegate, SubscriptionPlanItemFreeCellDelegate, SubscriptionPlanItemInfoCellDelegate {
+protocol SubscriptionPlanCollectionViewCellDelegate : SubscriptionPlanItemPurchaseCellDelegate, SubscriptionPlanItemFreeCellDelegate, SubscriptionPlanItemInfoCellDelegate, SubscriptionPlanItemUnlimitedCellDelegate {
 }
 
 class SubscriptionPlanCollectionViewCell : UICollectionViewCell {
@@ -51,6 +51,8 @@ extension SubscriptionPlanCollectionViewCell : UITableViewDelegate, UITableViewD
             configure(descriptionCell, withViewModel: itemViewModel as? PlanDescriptionItemViewModel)
         case let purchaseCell as SubscriptionPlanItemPurchaseCell:
             configure(purchaseCell, withViewModel: itemViewModel as? PlanPurchaseItemViewModel)
+        case let unlimitedCell as SubscriptionPlanItemUnlimitedCell:
+            configure(unlimitedCell, withViewModel: itemViewModel as? PlanUnlimitedItemViewModel)
         case let freeCell as SubscriptionPlanItemFreeCell:
             configure(freeCell, withViewModel: itemViewModel as? PlanFreeItemViewModel)
         case let featureCell as SubscriptionPlanItemFeatureCell:
@@ -75,6 +77,12 @@ extension SubscriptionPlanCollectionViewCell : UITableViewDelegate, UITableViewD
     }
     
     func configure(_ cell: SubscriptionPlanItemPurchaseCell, withViewModel viewModel: PlanPurchaseItemViewModel?) {
+        guard let viewModel = viewModel else { return }
+        cell.viewModel = viewModel
+        cell.delegate = delegate
+    }
+    
+    func configure(_ cell: SubscriptionPlanItemUnlimitedCell, withViewModel viewModel: PlanUnlimitedItemViewModel?) {
         guard let viewModel = viewModel else { return }
         cell.viewModel = viewModel
         cell.delegate = delegate

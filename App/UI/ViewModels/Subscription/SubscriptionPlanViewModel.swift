@@ -17,7 +17,7 @@ class SubscriptionPlanViewModel {
         return planItems.count
     }
     
-    init(title: String, description: String, features: [PlanFeatureItemViewModel], firstProduct: SubscriptionProduct? = nil, secondProduct: SubscriptionProduct? = nil, products: [ProductViewModel] = [], basicProduct: SubscriptionProduct? = nil, isFree: Bool = false, selectedProduct: SubscriptionProduct? = nil) {
+    init(title: String, description: String, features: [PlanFeatureItemViewModel], firstProduct: SubscriptionProduct? = nil, secondProduct: SubscriptionProduct? = nil, products: [ProductViewModel] = [], basicProduct: SubscriptionProduct? = nil, isFree: Bool = false, selectedProduct: SubscriptionProduct? = nil, unlimitedProduct: ProductViewModel? = nil) {
         
         self.isFree = isFree
         planItems = []
@@ -37,6 +37,9 @@ class SubscriptionPlanViewModel {
                                                        products: products,
                                                        basicProduct: basicProduct,
                                                        selectedProduct: selectedProduct))
+            if let unlimitedProduct = unlimitedProduct {
+                planItems.append(PlanUnlimitedItemViewModel(product: unlimitedProduct))
+            }
         }
         
         planItems.append(PlanBottomItemViewModel())

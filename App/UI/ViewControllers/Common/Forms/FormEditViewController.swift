@@ -85,7 +85,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
             case ValidationError.invalid(let errors):
                 self.add(errors: errors)
             case APIRequestError.paymentRequired:
-                self.modal(self.factory.subscriptionViewController())
+                self.modal(self.factory.subscriptionNavigationViewController(requiredPlans: [.premium, .platinum]))
             case APIRequestError.unprocessedEntity(let errors):
                 self.add(errors: errors)
             default:

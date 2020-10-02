@@ -27,14 +27,29 @@ class MenuViewModel {
         return user.guest
     }    
     
-    var premiumItemHidden: Bool {
-        return hasActiveSubscription
+    var subscriptionItemHidden: Bool {
+        return platinumFeaturesAvailable
     }
     
-    var hasActiveSubscription: Bool {
-        return accountCoordinator.currentUserHasActiveSubscription
+    var premiumFeaturesAvailable: Bool {
+        return accountCoordinator.premiumFeaturesAvailable
     }
-        
+    
+    var platinumFeaturesAvailable: Bool {
+        return accountCoordinator.platinumFeaturesAvailable
+    }
+    
+    var requiredPlans: [SubscriptionPlan] {
+        var plans: [SubscriptionPlan] = []
+        if !premiumFeaturesAvailable {
+            plans.append(.premium)
+        }
+        if !platinumFeaturesAvailable {
+            plans.append(.platinum)
+        }
+        return plans
+    }
+            
     var shouldNotifyAboutRegistrationConfirmation: Bool {
         guard let user = currentUser, !user.guest else {
             return false
@@ -56,6 +71,16 @@ class MenuViewModel {
             firstname = nil
         }
         return firstname ?? currentUser?.email
+    }
+    
+    var subscriptionItemTitle: String? {
+        if !premiumFeaturesAvailable {
+            return NSLocalizedString("Premium", comment: "")
+        }
+        if !platinumFeaturesAvailable {
+            return NSLocalizedString("Platinum", comment: "")
+        }
+        return nil
     }
     
     var incomesAmount: String {
@@ -88,7 +113,8 @@ class MenuViewModel {
     
     func loadData() -> Promise<Void> {
         return  firstly {
-                    when(fulfilled: accountCoordinator.loadCurrentUser(), accountCoordinator.loadCurrentUserBudget())
+                    when(fulfilled: accountCoordinator.loadCurrentUser(),
+                                    accountCoordinator.loadCurrentUserBudget())
                 }.get { user, budget in
                     self.currentUser = user
                     self.budgetViewModel = BudgetViewModel(budget: budget)

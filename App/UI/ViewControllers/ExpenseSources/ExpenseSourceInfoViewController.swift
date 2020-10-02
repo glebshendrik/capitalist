@@ -55,6 +55,10 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     }
     
     override func didTapBankWarningInfoButton(field: BankWarningInfoField?) {
+        guard viewModel.canConnectBank else {
+            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
+            return
+        }
         guard viewModel.reconnectNeeded else { return }
         showConnectionSession()
     }
@@ -64,8 +68,8 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     }
     
     func didTapBankButton() {
-        guard viewModel.hasActiveSubscription else {
-            modal(factory.subscriptionViewController())
+        guard viewModel.canConnectBank else {           
+            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
             return
         }
         if viewModel.accountConnected {

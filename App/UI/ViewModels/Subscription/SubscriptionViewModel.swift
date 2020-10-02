@@ -25,6 +25,26 @@ class SubscriptionViewModel {
         return subscriptionPlanViewModels.count
     }
     
+    var requiredPlans: [SubscriptionPlan] = []
+    
+    private var userHasRegionDiscount: Bool {
+        return ["AZ", "AM", "BY", "KZ", "RU", "TJ", "TM", "UA", "UZ"]
+                .map { $0.lowercased() }
+                .contains(Locale.autoupdatingCurrent.regionCode?.lowercased())
+    }
+    
+    private var unlimitedPremiumSubscriptionProduct: SubscriptionProduct {
+        return userHasRegionDiscount ? .premiumUnlimited(.cis) : .premiumUnlimited(.nonCis)
+    }
+    
+    private var firstPlatinumSubscriptionProduct: SubscriptionProduct {
+        return accountCoordinator.hasPremiumUnlimitedSubscription ? .platinumPure(.month) : .platinum(.month)
+    }
+    
+    private var secondPlatinumSubscriptionProduct: SubscriptionProduct {
+        return accountCoordinator.hasPremiumUnlimitedSubscription ? .platinumPure(.year) : .platinum(.year)
+    }
+    
     init(accountCoordinator: AccountCoordinatorProtocol) {
         self.accountCoordinator = accountCoordinator        
     }
@@ -34,6 +54,10 @@ class SubscriptionViewModel {
     }
     
     func updateProducts() {
+        if requiredPlans.isEmpty {
+            requiredPlans = [.free, .premium, .platinum]
+        }
+        subscriptionPlanViewModels = []
         let products = accountCoordinator.subscriptionProducts
         var productViewModels = [String : ProductViewModel]()
         for product in products {
@@ -42,6 +66,7 @@ class SubscriptionViewModel {
         
         let premiumProducts = [productViewModels[SubscriptionProduct.premium(.month).id],
                                productViewModels[SubscriptionProduct.premium(.year).id]].compactMap { $0 }
+        let premiumUnlimitedProduct = productViewModels[unlimitedPremiumSubscriptionProduct.id]
         let platinumProducts = [productViewModels[SubscriptionProduct.platinum(.month).id],
                                 productViewModels[SubscriptionProduct.platinum(.year).id]].compactMap { $0 }
         
@@ -67,16 +92,19 @@ class SubscriptionViewModel {
                                                         imageName: "feature-credits")]
         
         let platinumFeatures = [PlanFeatureItemViewModel(description: NSLocalizedString("Интеграция с банками", comment: ""),
-                                                         imageName: "feature-bank"),
-                                PlanFeatureItemViewModel(description:  NSLocalizedString("Анализ банковской деятельности за прошлый год", comment: ""),
-                                                         imageName: "feature-analysis")]
+                                                         imageName: "feature-bank")]
+//        ,
+//                                PlanFeatureItemViewModel(description:  NSLocalizedString("Анализ банковской деятельности за прошлый год", comment: ""),
+//                                                         imageName: "feature-analysis")]
         
+        if requiredPlans.contains(.free) {
+            subscriptionPlanViewModels = [SubscriptionPlanViewModel(title: NSLocalizedString("Бесплатная", comment: ""),
+                                                                    description: NSLocalizedString("Бесплатная", comment: ""),
+                                                                    features: freeFeatures,
+                                                                    isFree: true)]
+        }
         
-        subscriptionPlanViewModels = [SubscriptionPlanViewModel(title: NSLocalizedString("Бесплатная", comment: ""),
-                                                                description: NSLocalizedString("Бесплатная", comment: ""),
-                                                                features: freeFeatures,
-                                                                isFree: true)]
-        if !premiumProducts.isEmpty {
+        if !premiumProducts.isEmpty && requiredPlans.contains(.premium) {
             subscriptionPlanViewModels.append(SubscriptionPlanViewModel(title: NSLocalizedString("Premium", comment: ""),
                                                                         description: NSLocalizedString("Включает в себя все функции предыдущего плана", comment: ""),
                                                                         features: premiumFeatures,
@@ -84,18 +112,19 @@ class SubscriptionViewModel {
                                                                         secondProduct: .premium(.year),
                                                                         products: premiumProducts,
                                                                         basicProduct: .premium(.month),
-                                                                        selectedProduct: .premium(.year)))
+                                                                        selectedProduct: .premium(.year),
+                                                                        unlimitedProduct: premiumUnlimitedProduct))
         }
         
-        if !platinumProducts.isEmpty {
+        if !platinumProducts.isEmpty && requiredPlans.contains(.platinum) {
             subscriptionPlanViewModels.append(SubscriptionPlanViewModel(title: NSLocalizedString("Platinum", comment: ""),
                                                                         description: NSLocalizedString("Включает в себя все функции предыдущего плана", comment: ""),
                                                                         features: platinumFeatures,
-                                                                        firstProduct: .platinum(.month),
-                                                                        secondProduct: .platinum(.year),
+                                                                        firstProduct: firstPlatinumSubscriptionProduct,
+                                                                        secondProduct: secondPlatinumSubscriptionProduct,
                                                                         products: platinumProducts,
-                                                                        basicProduct: .platinum(.month),
-                                                                        selectedProduct: .platinum(.year)))
+                                                                        basicProduct: firstPlatinumSubscriptionProduct,
+                                                                        selectedProduct: secondPlatinumSubscriptionProduct))
         }
     }
     

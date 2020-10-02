@@ -56,4 +56,23 @@ enum SubscriptionProduct : CaseIterable, Hashable {
             return "com.realtransitapps.threebaskets.subscriptions.pureplatinum.\(interval.id)"
         }
     }
+    
+    var plan: SubscriptionPlan {
+        switch self {
+        case .premium, .premiumUnlimited:
+            return .premium
+        case .platinum, .platinumPure:
+            return .platinum
+        }
+    }
+}
+
+enum SubscriptionPlan : String {
+    case free
+    case premium
+    case platinum
+    
+    var id: String {
+        return self.rawValue
+    }
 }

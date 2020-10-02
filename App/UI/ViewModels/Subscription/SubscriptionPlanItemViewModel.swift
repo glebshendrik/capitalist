@@ -13,6 +13,7 @@ enum SubscriptionPlanItemType {
     case title
     case description
     case purchase
+    case unlimited
     case free
     case feature
     case bottom
@@ -29,6 +30,8 @@ enum SubscriptionPlanItemType {
             return "SubscriptionPlanItemDescriptionCell"
         case .purchase:
             return "SubscriptionPlanItemPurchaseCell"
+        case .unlimited:
+            return "SubscriptionPlanItemUnlimitedCell"
         case .free:
             return "SubscriptionPlanItemFreeCell"
         case .feature:
@@ -146,6 +149,27 @@ class PlanPurchaseItemViewModel : SubscriptionPlanItemViewModel {
         if let selectedProduct = selectedProduct {
             productViewModels[selectedProduct.id]?.isSelected = true
         }
+    }
+}
+
+class PlanUnlimitedItemViewModel : SubscriptionPlanItemViewModel {
+    var itemType: SubscriptionPlanItemType {
+        return .unlimited
+    }
+    
+    let product: ProductViewModel
+    
+    var purchaseTitle: String {
+        return String(format: NSLocalizedString("Пожизненная за %@", comment: ""), product.product.localizedPrice)
+    }
+    
+    var unlimitedDescriptionMessage: String {
+        return NSLocalizedString("Либо вы можете приобрести пожизненную версию", comment: "")
+    }
+    
+    init(product: ProductViewModel) {
+        
+        self.product = product
     }
 }
 

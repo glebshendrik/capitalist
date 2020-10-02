@@ -72,6 +72,7 @@ class SubscriptionPlanItemPurchaseCell : UITableViewCell {
     }
     
     private func updatePurchaseUI() {
+        purchaseTitleLabel.text = NSLocalizedString("Продолжить", comment: "")
         purchaseSubtitleLabel.text = viewModel?.selectedProductViewModel?.purchaseTitle
     }
     

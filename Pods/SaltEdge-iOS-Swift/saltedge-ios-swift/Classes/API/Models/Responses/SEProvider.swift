@@ -38,6 +38,7 @@ public struct SEProvider: Decodable {
     public let logoURL: String
     public let countryCode: String
     public let refreshTimeout: Int
+    public let maxFetchInterval: Int
     public let holderInfo: [String]
     public let createdAt: String
     public let updatedAt: String
@@ -62,6 +63,7 @@ public struct SEProvider: Decodable {
         case logoURL = "logo_url"
         case countryCode = "country_code"
         case refreshTimeout = "refresh_timeout"
+        case maxFetchInterval = "max_fetch_interval"
         case holderInfo = "holder_info"
         case createdAt = "created_at"
         case updatedAt = "updated_at"

@@ -42,7 +42,7 @@ extension ExpenseSourceEditViewController {
     
     func updateTableUI(animated: Bool = true) {
         tableController.set(cell: tableController.removeCell, hidden: viewModel.removeButtonHidden, animated: animated, reload: false)
-//        tableController.set(cell: tableController.bankCell, hidden: true, animated: animated, reload: false)
+        tableController.set(cell: tableController.bankCell, hidden: viewModel.bankButtonHidden, animated: animated, reload: false)
         tableController.reloadData(animated: animated)
     }
     

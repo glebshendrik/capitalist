@@ -40,7 +40,7 @@ class ProfileViewModel {
     }
     
     var hasActiveSubscription: Bool {
-        return accountCoordinator.currentUserHasActiveSubscription
+        return accountCoordinator.hasActiveSubscription
     }
     
     var subscriptionTitle: String? {

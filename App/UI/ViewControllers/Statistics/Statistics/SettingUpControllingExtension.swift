@@ -137,13 +137,13 @@ extension StatisticsViewController {
     }
     
     @objc func didTapFiltersButton(_ sender: Any) {
-        showSubscription()
-//        if viewModel.canShowFilters {
-//            showFilters()
-//        }
-//        else {            
-//            showSubscription()
-//        }
+//        showSubscription()
+        if viewModel.canShowFilters {
+            showFilters()
+        }
+        else {            
+            showSubscription()
+        }
     }
     
     private func setupTableUI() {

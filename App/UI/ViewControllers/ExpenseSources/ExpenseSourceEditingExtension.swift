@@ -66,8 +66,8 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
     }
             
     func didTapBankButton() {        
-        guard viewModel.hasActiveSubscription else {
-            modal(factory.subscriptionViewController())
+        guard viewModel.canConnectBank else {
+            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
             return
         }
         if viewModel.accountConnected {

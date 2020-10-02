@@ -95,7 +95,7 @@ extension StatisticsViewController : FiltersSelectionViewControllerDelegate {
     }
     
     func showSubscription() {
-        modal(factory.subscriptionViewController())
+        modal(factory.subscriptionNavigationViewController(requiredPlans: [.premium, .platinum]))
     }
 }
 

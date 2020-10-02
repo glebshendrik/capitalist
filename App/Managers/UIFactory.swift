@@ -513,8 +513,15 @@ class UIFactory : UIFactoryProtocol {
         return borrowInfoViewController
     }
     
-    func subscriptionViewController() -> UINavigationController? {
+    func subscriptionNavigationViewController(requiredPlans: [SubscriptionPlan]) -> UINavigationController? {
         guard let subscriptionViewController = router.viewController(.SubscriptionViewController) as? SubscriptionViewController else { return nil }
+        subscriptionViewController.viewModel.requiredPlans = requiredPlans
         return UINavigationController(rootViewController: subscriptionViewController)
+    }
+    
+    func subscriptionViewController(requiredPlans: [SubscriptionPlan]) -> SubscriptionViewController? {
+        guard let subscriptionViewController = router.viewController(.SubscriptionViewController) as? SubscriptionViewController else { return nil }
+        subscriptionViewController.viewModel.requiredPlans = requiredPlans
+        return subscriptionViewController
     }
 }

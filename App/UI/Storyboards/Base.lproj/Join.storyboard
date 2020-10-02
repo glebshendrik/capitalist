@@ -1059,14 +1059,14 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <prototypes>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubscriptionPlanItemTopCell" id="oP7-ad-h8e">
-                                                            <rect key="frame" x="0.0" y="28" width="373" height="24"/>
+                                                            <rect key="frame" x="0.0" y="28" width="373" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oP7-ad-h8e" id="H1q-Um-zSw">
-                                                                <rect key="frame" x="0.0" y="0.0" width="373" height="24"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="373" height="44"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g1b-Wu-dhU">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="373" height="24"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="373" height="44"/>
                                                                         <color key="backgroundColor" name="black 3"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="24" id="ljR-go-CTg"/>
@@ -1078,7 +1078,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9x-CS-qxB">
-                                                                        <rect key="frame" x="0.0" y="18" width="373" height="6"/>
+                                                                        <rect key="frame" x="0.0" y="38" width="373" height="6"/>
                                                                         <color key="backgroundColor" name="black 3"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="6" id="hYL-ZK-ELu"/>
@@ -1104,7 +1104,7 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </tableViewCell>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubscriptionPlanItemTitleCell" id="FYV-wW-BM5" customClass="SubscriptionPlanItemTitleCell" customModule="Capitalist" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="52" width="373" height="45"/>
+                                                            <rect key="frame" x="0.0" y="72" width="373" height="45"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FYV-wW-BM5" id="HBN-gn-PL9">
                                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="45"/>
@@ -1142,7 +1142,7 @@
                                                             </connections>
                                                         </tableViewCell>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubscriptionPlanItemDescriptionCell" id="lhW-uG-8Te" customClass="SubscriptionPlanItemDescriptionCell" customModule="Capitalist" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="97" width="373" height="38"/>
+                                                            <rect key="frame" x="0.0" y="117" width="373" height="38"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lhW-uG-8Te" id="K07-aE-Z6U">
                                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="38"/>
@@ -1180,7 +1180,7 @@
                                                             </connections>
                                                         </tableViewCell>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubscriptionPlanItemPurchaseCell" id="3TL-f6-0ew" customClass="SubscriptionPlanItemPurchaseCell" customModule="Capitalist" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="135" width="373" height="283.5"/>
+                                                            <rect key="frame" x="0.0" y="155" width="373" height="283.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3TL-f6-0ew" id="OlD-5E-GXR">
                                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="283.5"/>
@@ -1443,17 +1443,17 @@
                                                                         <rect key="frame" x="16" y="215.5" width="341" height="56"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="gyS-Ow-jNl">
-                                                                                <rect key="frame" x="24" y="10" width="293" height="38"/>
+                                                                                <rect key="frame" x="8" y="10" width="325" height="38"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Продолжить" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qor-Es-scd">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="293" height="18.5"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="18.5"/>
                                                                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
                                                                                         <color key="textColor" name="white 1.0"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4k6-Lh-wPP">
-                                                                                        <rect key="frame" x="0.0" y="19.5" width="293" height="18.5"/>
-                                                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
+                                                                                        <rect key="frame" x="0.0" y="19.5" width="325" height="18.5"/>
+                                                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                                                                         <color key="textColor" name="white 0.64"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
@@ -1484,7 +1484,7 @@
                                                                         </subviews>
                                                                         <color key="backgroundColor" name="blue 1"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="trailing" secondItem="gyS-Ow-jNl" secondAttribute="trailing" constant="24" id="2gT-0F-ZEi"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="gyS-Ow-jNl" secondAttribute="trailing" constant="8" id="2gT-0F-ZEi"/>
                                                                             <constraint firstItem="gyS-Ow-jNl" firstAttribute="top" secondItem="ffV-UF-vb2" secondAttribute="top" constant="10" id="8ZQ-yS-v5W"/>
                                                                             <constraint firstItem="C4k-6f-OGq" firstAttribute="leading" secondItem="ffV-UF-vb2" secondAttribute="leading" id="E8b-hR-jbg"/>
                                                                             <constraint firstItem="gyS-Ow-jNl" firstAttribute="centerX" secondItem="ffV-UF-vb2" secondAttribute="centerX" id="Gob-RZ-a1P"/>
@@ -1494,7 +1494,7 @@
                                                                             <constraint firstAttribute="bottom" secondItem="C4k-6f-OGq" secondAttribute="bottom" id="hlV-Ij-P9y"/>
                                                                             <constraint firstAttribute="trailing" secondItem="C4k-6f-OGq" secondAttribute="trailing" id="jFR-Ku-n6U"/>
                                                                             <constraint firstItem="gyS-Ow-jNl" firstAttribute="centerY" secondItem="ffV-UF-vb2" secondAttribute="centerY" constant="1" id="nBe-pz-GlA"/>
-                                                                            <constraint firstItem="gyS-Ow-jNl" firstAttribute="leading" secondItem="ffV-UF-vb2" secondAttribute="leading" constant="24" id="xnO-CJ-GHZ"/>
+                                                                            <constraint firstItem="gyS-Ow-jNl" firstAttribute="leading" secondItem="ffV-UF-vb2" secondAttribute="leading" constant="8" id="xnO-CJ-GHZ"/>
                                                                         </constraints>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1541,7 +1541,7 @@
                                                             </connections>
                                                         </tableViewCell>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubscriptionPlanItemFreeCell" id="P2X-ER-n56" customClass="SubscriptionPlanItemFreeCell" customModule="Capitalist" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="418.5" width="373" height="80"/>
+                                                            <rect key="frame" x="0.0" y="438.5" width="373" height="80"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P2X-ER-n56" id="KGR-C6-Zap">
                                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="80"/>
@@ -1612,8 +1612,90 @@
                                                                 <outlet property="continueButton" destination="xUJ-av-BmH" id="J8U-gv-y8r"/>
                                                             </connections>
                                                         </tableViewCell>
+                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubscriptionPlanItemUnlimitedCell" id="Kr5-Dp-jFQ" customClass="SubscriptionPlanItemUnlimitedCell" customModule="Capitalist" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="518.5" width="373" height="141"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kr5-Dp-jFQ" id="wEz-Ze-RIW">
+                                                                <rect key="frame" x="0.0" y="0.0" width="373" height="141"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X0o-gd-zz5">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="373" height="141"/>
+                                                                        <color key="backgroundColor" name="black 3"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <real key="value" value="0.0"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="При оплате 999 ₽ за 1 год вы получаете скидку 50%, что снижает стоимость подписки до 83,25 ₽ за 1 месяц." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqq-dT-bCi">
+                                                                        <rect key="frame" x="16" y="12" width="341" height="49"/>
+                                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                                                        <color key="textColor" name="white 1.0"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w6F-NY-Kik">
+                                                                        <rect key="frame" x="16" y="73" width="341" height="56"/>
+                                                                        <subviews>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MU0-hA-tjH" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="341" height="56"/>
+                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                                                                <state key="normal" title="Продолжить">
+                                                                                    <color key="titleColor" name="white 1.0"/>
+                                                                                </state>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                        <real key="value" value="8"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                                                                        <color key="value" name="white 0.04"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <action selector="didTapContinueButton:" destination="Kr5-Dp-jFQ" eventType="touchUpInside" id="ohk-55-ern"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" name="blue 1"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="MU0-hA-tjH" secondAttribute="bottom" id="IeT-vp-jDi"/>
+                                                                            <constraint firstAttribute="height" constant="56" id="XCh-em-ik7"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="MU0-hA-tjH" secondAttribute="trailing" id="nFm-LI-tbk"/>
+                                                                            <constraint firstItem="MU0-hA-tjH" firstAttribute="top" secondItem="w6F-NY-Kik" secondAttribute="top" id="qpy-yt-h0E"/>
+                                                                            <constraint firstItem="MU0-hA-tjH" firstAttribute="leading" secondItem="w6F-NY-Kik" secondAttribute="leading" id="vHb-oW-Ts0"/>
+                                                                        </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <real key="value" value="8"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="X0o-gd-zz5" firstAttribute="top" secondItem="wEz-Ze-RIW" secondAttribute="top" id="63e-0G-Hb6"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="X0o-gd-zz5" secondAttribute="trailing" id="9JN-wD-AeZ"/>
+                                                                    <constraint firstItem="fqq-dT-bCi" firstAttribute="top" secondItem="wEz-Ze-RIW" secondAttribute="top" constant="12" id="AUJ-w0-eb2"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="w6F-NY-Kik" secondAttribute="trailing" constant="16" id="DLJ-9n-jSj"/>
+                                                                    <constraint firstItem="w6F-NY-Kik" firstAttribute="top" secondItem="fqq-dT-bCi" secondAttribute="bottom" constant="12" id="PDv-6R-7oV"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="w6F-NY-Kik" secondAttribute="bottom" constant="12" id="SPg-6b-AOK"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="fqq-dT-bCi" secondAttribute="trailing" constant="16" id="cFA-1d-MhH"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="X0o-gd-zz5" secondAttribute="bottom" id="fuT-ih-Iez"/>
+                                                                    <constraint firstItem="w6F-NY-Kik" firstAttribute="leading" secondItem="wEz-Ze-RIW" secondAttribute="leading" constant="16" id="isi-gd-73r"/>
+                                                                    <constraint firstItem="X0o-gd-zz5" firstAttribute="leading" secondItem="wEz-Ze-RIW" secondAttribute="leading" id="qHh-Zl-QA0"/>
+                                                                    <constraint firstItem="fqq-dT-bCi" firstAttribute="leading" secondItem="wEz-Ze-RIW" secondAttribute="leading" constant="16" id="qN7-ul-j1T"/>
+                                                                </constraints>
+                                                            </tableViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="continueButton" destination="MU0-hA-tjH" id="c01-qx-jC5"/>
+                                                                <outlet property="descriptionLabel" destination="fqq-dT-bCi" id="O2s-DP-h9M"/>
+                                                            </connections>
+                                                        </tableViewCell>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubscriptionPlanItemFeatureCell" id="AdR-5d-NV5" customClass="SubscriptionPlanItemFeatureCell" customModule="Capitalist" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="498.5" width="373" height="57"/>
+                                                            <rect key="frame" x="0.0" y="659.5" width="373" height="57"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AdR-5d-NV5" id="gfT-rb-PIT">
                                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="57"/>
@@ -1657,7 +1739,7 @@
                                                             </connections>
                                                         </tableViewCell>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubscriptionPlanItemBottomCell" id="rS4-V6-xc0">
-                                                            <rect key="frame" x="0.0" y="555.5" width="373" height="24"/>
+                                                            <rect key="frame" x="0.0" y="716.5" width="373" height="24"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rS4-V6-xc0" id="GrQ-xQ-Tlw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="24"/>
@@ -1702,7 +1784,7 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </tableViewCell>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubscriptionPlanItemSpaceCell" id="rXb-jt-0hU">
-                                                            <rect key="frame" x="0.0" y="579.5" width="373" height="12"/>
+                                                            <rect key="frame" x="0.0" y="740.5" width="373" height="12"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rXb-jt-0hU" id="Yy2-fi-HSS">
                                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="12"/>
@@ -1731,7 +1813,7 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </tableViewCell>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubscriptionPlanItemInfoCell" id="b1d-Nb-Ha8" customClass="SubscriptionPlanItemInfoCell" customModule="Capitalist" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="591.5" width="373" height="200.5"/>
+                                                            <rect key="frame" x="0.0" y="752.5" width="373" height="200.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b1d-Nb-Ha8" id="OBd-K0-wgT">
                                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="200.5"/>
@@ -1806,6 +1888,11 @@
                                                             </connections>
                                                         </tableViewCell>
                                                     </prototypes>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </tableView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -165,6 +165,10 @@ extension SubscriptionViewController : UICollectionViewDelegate, UICollectionVie
 }
 
 extension SubscriptionViewController : SubscriptionPlanCollectionViewCellDelegate {
+    func didTapUnlimitedContinueButton(product: ProductViewModel) {
+        purchase(product: product.product)
+    }
+    
     func didTapPurchaseButton(product: ProductViewModel) {
         purchase(product: product.product)
     }

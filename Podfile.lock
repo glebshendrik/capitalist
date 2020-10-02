@@ -202,7 +202,7 @@ PODS:
     - Swinject (~> 2.6)
   - SwipeCellKit (2.7.1)
   - SWXMLHash (5.0.1)
-  - TrustKit (1.6.5)
+  - TrustKit (1.7.0)
   - UPCarouselFlowLayout (1.1.2)
 
 DEPENDENCIES:
@@ -349,7 +349,7 @@ CHECKOUT OPTIONS:
     :commit: aae70cc22ce643ba2311be0d7ac5a6d6cc6cc8ac
     :git: https://github.com/petalvlad/RecurrencePicker
   SaltEdge-iOS-Swift:
-    :commit: c7fda540153ae984198e6b140df0bda74c47d09b
+    :commit: 394ab808e2a150ef3e3303598d988b5208752c84
     :git: https://github.com/petalvlad/saltedge-ios-swift
   SideMenu:
     :commit: 138103093176154f84ae9a2a63e58b9ae78bc6d7
@@ -423,7 +423,7 @@ SPEC CHECKSUMS:
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
-  TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
+  TrustKit: dac38bb37e49bdfeca41b1a19d020da38017b51c
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
 
 PODFILE CHECKSUM: 69af59311830b1d48f69c2103d92111ab8d18307

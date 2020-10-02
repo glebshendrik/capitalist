@@ -15,7 +15,12 @@ protocol AccountCoordinatorProtocol {
     var currentSession: Session? { get }
     
     // Subscription
-    var currentUserHasActiveSubscription: Bool { get }
+    var hasPremiumSubscription: Bool { get }
+    var hasPremiumUnlimitedSubscription: Bool { get }
+    var hasPlatinumSubscription: Bool { get }
+    var premiumFeaturesAvailable: Bool { get }
+    var platinumFeaturesAvailable: Bool { get }
+    var hasActiveSubscription: Bool { get }
     var subscription: ApphudSubscription? { get }
     var subscriptionProducts: [SKProduct] { get }
     
