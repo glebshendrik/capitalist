@@ -149,6 +149,10 @@ class APIClient : APIClientProtocol {
             if let country = Locale.autoupdatingCurrent.regionCode {
                 request.addValue(country, forHTTPHeaderField: "X-REGION")
             }
+            if let build = UIApplication.shared.buildNumber {
+                request.addValue(build, forHTTPHeaderField: "X-iOS-Build")
+            }
+            
             return Alamofire
                 .request(request)
                 .validate(requestValidator)
