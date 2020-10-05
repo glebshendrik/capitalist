@@ -94,6 +94,7 @@ struct ExpenseSourceCreationForm : Encodable, Validatable {
     let amountCents: Int?
     let creditLimitCents: Int?
     let cardType: CardType?
+    let maxFetchInterval: Int?
     let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -103,6 +104,7 @@ struct ExpenseSourceCreationForm : Encodable, Validatable {
         case amountCents = "amount_cents"
         case creditLimitCents = "credit_limit_cents"
         case cardType = "card_type"
+        case maxFetchInterval = "max_fetch_interval"
         case accountConnectionAttributes = "account_connection_attributes"
     }
     
@@ -119,6 +121,7 @@ struct ExpenseSourceCreationForm : Encodable, Validatable {
         try container.encode(amountCents, forKey: .amountCents)
         try container.encode(creditLimitCents, forKey: .creditLimitCents)
         try container.encode(cardType, forKey: .cardType)
+        try container.encode(maxFetchInterval, forKey: .maxFetchInterval)
         try container.encode(accountConnectionAttributes, forKey: .accountConnectionAttributes)
     }
     
@@ -156,6 +159,7 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
     let amountCents: Int?
     let creditLimitCents: Int?
     let cardType: CardType?
+    let maxFetchInterval: Int?
     let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -164,6 +168,7 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
         case amountCents = "amount_cents"
         case creditLimitCents = "credit_limit_cents"
         case cardType = "card_type"
+        case maxFetchInterval = "max_fetch_interval"
         case accountConnectionAttributes = "account_connection_attributes"
     }
     
@@ -179,6 +184,7 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
         try container.encode(amountCents, forKey: .amountCents)
         try container.encode(creditLimitCents, forKey: .creditLimitCents)
         try container.encode(cardType, forKey: .cardType)
+        try container.encode(maxFetchInterval, forKey: .maxFetchInterval)
         try container.encode(accountConnectionAttributes, forKey: .accountConnectionAttributes)
     }
     
