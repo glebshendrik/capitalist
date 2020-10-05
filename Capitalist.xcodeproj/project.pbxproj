@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2423FAF0896CFFBDA6AB4B97 /* Pods_Capitalist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C061A82B7EC78EA6C2DBBAB /* Pods_Capitalist.framework */; };
+		5EDFB791E5D420B93BE3A777 /* Pods_Capitalist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01DA18D9E71FE9AC610E5EB0 /* Pods_Capitalist.framework */; };
 		FA02F4DC248A141700C536E3 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02F4DB248A141700C536E3 /* Connection.swift */; };
 		FA02F4DE248A53C000C536E3 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02F4DD248A53C000C536E3 /* Account.swift */; };
 		FA0570E6232A338F002B4706 /* BorrowsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0570E5232A338F002B4706 /* BorrowsServiceProtocol.swift */; };
@@ -243,7 +243,6 @@
 		FA8174862228218E00EE6116 /* ExchangeRatesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */; };
 		FA817488222821DC00EE6116 /* ExchangeRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817487222821DC00EE6116 /* ExchangeRatesService.swift */; };
 		FA81748A222822FB00EE6116 /* ExchangeRatesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */; };
-		FA81748C222E2B8700EE6116 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81748B222E2B8700EE6116 /* CommentViewController.swift */; };
 		FA81748E222F800200EE6116 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81748D222F800200EE6116 /* DatePickerViewController.swift */; };
 		FA835D422260742400A592F2 /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D412260742400A592F2 /* GraphType.swift */; };
 		FA835D442260744500A592F2 /* DatePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA835D432260744500A592F2 /* DatePeriod.swift */; };
@@ -517,11 +516,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		35EA7E187AC95F814A33A4AD /* Pods-Capitalist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Capitalist/Pods-Capitalist.debug.xcconfig"; sourceTree = "<group>"; };
-		3C061A82B7EC78EA6C2DBBAB /* Pods_Capitalist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Capitalist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		50A7DE279EF82128CF6E52B6 /* Pods-Three Baskets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Three Baskets.release.xcconfig"; path = "Pods/Target Support Files/Pods-Three Baskets/Pods-Three Baskets.release.xcconfig"; sourceTree = "<group>"; };
-		583CC4A144317ABB49D40E1E /* Pods-Three Baskets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Three Baskets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Three Baskets/Pods-Three Baskets.debug.xcconfig"; sourceTree = "<group>"; };
-		B2B24BE37DCE7B3FD2EC4EEB /* Pods-Capitalist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.release.xcconfig"; path = "Pods/Target Support Files/Pods-Capitalist/Pods-Capitalist.release.xcconfig"; sourceTree = "<group>"; };
+		01DA18D9E71FE9AC610E5EB0 /* Pods_Capitalist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Capitalist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		144AB8B9A407BE6DC4FD2A2D /* Pods-Capitalist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.release.xcconfig"; path = "Target Support Files/Pods-Capitalist/Pods-Capitalist.release.xcconfig"; sourceTree = "<group>"; };
+		26F6EDE3F64F130E7AD18761 /* Pods-Capitalist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.debug.xcconfig"; path = "Target Support Files/Pods-Capitalist/Pods-Capitalist.debug.xcconfig"; sourceTree = "<group>"; };
 		FA02F4DB248A141700C536E3 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		FA02F4DD248A53C000C536E3 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		FA0570E5232A338F002B4706 /* BorrowsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -759,7 +756,6 @@
 		FA8174852228218E00EE6116 /* ExchangeRatesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesServiceProtocol.swift; sourceTree = "<group>"; };
 		FA817487222821DC00EE6116 /* ExchangeRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesService.swift; sourceTree = "<group>"; };
 		FA817489222822FB00EE6116 /* ExchangeRatesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesCoordinator.swift; sourceTree = "<group>"; };
-		FA81748B222E2B8700EE6116 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		FA81748D222F800200EE6116 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		FA835D412260742400A592F2 /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
 		FA835D432260744500A592F2 /* DatePeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePeriod.swift; sourceTree = "<group>"; };
@@ -1076,22 +1072,20 @@
 				FA7FC38724AB411700C1ACCD /* iAd.framework in Frameworks */,
 				FA7FC38524AB410D00C1ACCD /* AdSupport.framework in Frameworks */,
 				FADD04C72420101300FB542D /* StoreKit.framework in Frameworks */,
-				2423FAF0896CFFBDA6AB4B97 /* Pods_Capitalist.framework in Frameworks */,
+				5EDFB791E5D420B93BE3A777 /* Pods_Capitalist.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		29001D9CE2C1E7A36AE9C4E2 /* Pods */ = {
+		639EDC04EBE55DD5563A3C29 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				583CC4A144317ABB49D40E1E /* Pods-Three Baskets.debug.xcconfig */,
-				50A7DE279EF82128CF6E52B6 /* Pods-Three Baskets.release.xcconfig */,
-				35EA7E187AC95F814A33A4AD /* Pods-Capitalist.debug.xcconfig */,
-				B2B24BE37DCE7B3FD2EC4EEB /* Pods-Capitalist.release.xcconfig */,
+				26F6EDE3F64F130E7AD18761 /* Pods-Capitalist.debug.xcconfig */,
+				144AB8B9A407BE6DC4FD2A2D /* Pods-Capitalist.release.xcconfig */,
 			);
-			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		95151D80691A2B25D6AF9C34 /* Frameworks */ = {
@@ -1101,7 +1095,7 @@
 				FA7FC38624AB411600C1ACCD /* iAd.framework */,
 				FA7FC38424AB410C00C1ACCD /* AdSupport.framework */,
 				FADD04C62420101300FB542D /* StoreKit.framework */,
-				3C061A82B7EC78EA6C2DBBAB /* Pods_Capitalist.framework */,
+				01DA18D9E71FE9AC610E5EB0 /* Pods_Capitalist.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1403,7 +1397,6 @@
 			isa = PBXGroup;
 			children = (
 				FA2847FD22F1948A003F114A /* Forms */,
-				FA81748B222E2B8700EE6116 /* CommentViewController.swift */,
 				FA81748D222F800200EE6116 /* DatePickerViewController.swift */,
 				FA85238223858BC6008C09AB /* EntityInfoNavigationController.swift */,
 				FA503DB923754488005AEFE7 /* EntityInfoViewController.swift */,
@@ -1844,8 +1837,8 @@
 				FAB29A2922AC3B32009946DC /* Capitalist.entitlements */,
 				FAD88EF821AEA86E00BE7BC1 /* App */,
 				FAD88EF721AEA86E00BE7BC1 /* Products */,
-				29001D9CE2C1E7A36AE9C4E2 /* Pods */,
 				95151D80691A2B25D6AF9C34 /* Frameworks */,
+				639EDC04EBE55DD5563A3C29 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2330,12 +2323,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAD88F0821AEA87300BE7BC1 /* Build configuration list for PBXNativeTarget "Capitalist" */;
 			buildPhases = (
-				168E3B56739FB6E5999FF4C7 /* [CP] Check Pods Manifest.lock */,
+				E077565F57BA03B508F0742C /* [CP] Check Pods Manifest.lock */,
 				FAD88EF221AEA86E00BE7BC1 /* Sources */,
 				FAD88EF321AEA86E00BE7BC1 /* Frameworks */,
 				FAD88EF421AEA86E00BE7BC1 /* Resources */,
-				388A8E3E3B22EBA765471A96 /* [CP] Embed Pods Frameworks */,
 				FA6017C3241B3F8800B15496 /* ShellScript */,
+				C7B496BC03815387A2AD6820 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2457,7 +2450,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		168E3B56739FB6E5999FF4C7 /* [CP] Check Pods Manifest.lock */ = {
+		C7B496BC03815387A2AD6820 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Capitalist/Pods-Capitalist-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Capitalist/Pods-Capitalist-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Capitalist/Pods-Capitalist-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E077565F57BA03B508F0742C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2477,23 +2487,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		388A8E3E3B22EBA765471A96 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Capitalist/Pods-Capitalist-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Capitalist/Pods-Capitalist-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Capitalist/Pods-Capitalist-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA6017C3241B3F8800B15496 /* ShellScript */ = {
@@ -2812,7 +2805,6 @@
 				FAA69643239A953000C134D1 /* TransactionCreationInfoViewController.swift in Sources */,
 				FAD88F3B21AEBABD00BE7BC1 /* ApplicationRouter.swift in Sources */,
 				FA165CDD21B6530C00EAA16B /* ProfileViewModel.swift in Sources */,
-				FA81748C222E2B8700EE6116 /* CommentViewController.swift in Sources */,
 				FA0CADFF21D25ED900805288 /* ExpenseSourcesServiceProtocol.swift in Sources */,
 				FAA8619923D72C24009DF88F /* TransactionableExamplesServiceProtocol.swift in Sources */,
 				FA2847F822F0802E003F114A /* ExpenseCategoryEditingExtension.swift in Sources */,
@@ -3214,6 +3206,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -3270,6 +3263,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
@@ -3278,7 +3272,7 @@
 		};
 		FAD88F0921AEA87300BE7BC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35EA7E187AC95F814A33A4AD /* Pods-Capitalist.debug.xcconfig */;
+			baseConfigurationReference = 26F6EDE3F64F130E7AD18761 /* Pods-Capitalist.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Capitalist.entitlements;
@@ -3297,8 +3291,6 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"xml2\"",
-					"-framework",
-					"\"ALTextInputBar\"",
 					"-framework",
 					"\"Alamofire\"",
 					"-framework",
@@ -3387,7 +3379,7 @@
 		};
 		FAD88F0A21AEA87300BE7BC1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2B24BE37DCE7B3FD2EC4EEB /* Pods-Capitalist.release.xcconfig */;
+			baseConfigurationReference = 144AB8B9A407BE6DC4FD2A2D /* Pods-Capitalist.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Capitalist.entitlements;
@@ -3405,8 +3397,6 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"xml2\"",
-					"-framework",
-					"\"ALTextInputBar\"",
 					"-framework",
 					"\"Alamofire\"",
 					"-framework",

@@ -85,17 +85,6 @@ class UIFactory : UIFactoryProtocol {
         return navigationController
     }
     
-    func commentViewController(delegate: CommentViewControllerDelegate,
-                               text: String?,
-                               placeholder: String) -> CommentViewController? {
-        
-        let commentController = CommentViewController()
-        commentController.set(delegate: delegate)        
-        commentController.set(comment: text, placeholder: placeholder)
-        commentController.modalPresentationStyle = .custom
-        return commentController
-    }
-    
     func datePickerViewController(delegate: DatePickerViewControllerDelegate,
                                   date: Date?,
                                   minDate: Date?,

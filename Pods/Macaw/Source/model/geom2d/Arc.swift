@@ -1,4 +1,4 @@
-import Darwin
+import Foundation
 
 open class Arc: Locus {
 
@@ -44,5 +44,14 @@ open class Arc: Locus {
         let sweepFlag = delta > 0.0 ? true : false
 
         return PathBuilder(segment: PathSegment(type: .M, data: [x1, y1])).A(rx, ry, 0.0, largeArcFlag, sweepFlag, x2, y2).build()
+    }
+
+    override func equals<T>(other: T) -> Bool where T: Locus {
+        guard let other = other as? Arc else {
+            return false
+        }
+        return ellipse == other.ellipse
+            && shift == other.shift
+            && extent == other.extent
     }
 }

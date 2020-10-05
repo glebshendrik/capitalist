@@ -36,11 +36,7 @@ protocol UIFactoryProtocol {
                                   connectionType: ProviderConnectionType,
                                   connectionURL: URL,
                                   connection: Connection?) -> UINavigationController?
-    
-    func commentViewController(delegate: CommentViewControllerDelegate,
-                               text: String?,
-                               placeholder: String) -> CommentViewController?
-    
+        
     func datePickerViewController(delegate: DatePickerViewControllerDelegate,
                                   date: Date?,
                                   minDate: Date?,

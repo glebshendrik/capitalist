@@ -1,4 +1,20 @@
-# Macaw
+<img src="https://github.com/exyte/Macaw/blob/master/header.png">
+<img align="right" src="https://raw.githubusercontent.com/exyte/Macaw/master/demo.gif" width="480" />
+
+<p><h1 align="left">Macaw</h1></p>
+
+<p><h4>Powerful and easy-to-use vector graphics Swift library with SVG support</h4></p>
+
+___
+
+<p> We are a development agency building
+  <a href="https://clutch.co/profile/exyte#review-731233">phenomenal</a> apps.</p>
+
+</br>
+
+<a href="https://exyte.com/contacts"><img src="https://i.imgur.com/vGjsQPt.png" width="134" height="34"></a> <a href="https://twitter.com/exyteHQ"><img src="https://i.imgur.com/DngwSn1.png" width="165" height="34"></a>
+
+</br></br>
 
 [![CI Status](https://travis-ci.org/exyte/Macaw.svg?style=flat)](https://travis-ci.org/exyte/Macaw)
 [![Version](https://img.shields.io/cocoapods/v/Macaw.svg?style=flat)](http://cocoapods.org/pods/Macaw)
@@ -6,9 +22,10 @@
 [![License](https://img.shields.io/cocoapods/l/Macaw.svg?style=flat)](http://cocoapods.org/pods/Macaw)
 [![Platform](https://img.shields.io/cocoapods/p/Macaw.svg?style=flat)](http://cocoapods.org/pods/Macaw)
 
-<img src="https://raw.githubusercontent.com/exyte/Macaw/master/logo.png" width="400">
 
 ## What is Macaw?
+
+<img src="https://raw.githubusercontent.com/exyte/Macaw/master/logo.png" width="300">
 
 Macaw is a powerful and easy-to-use vector graphics library written in Swift.
 
@@ -70,7 +87,7 @@ We're working hard to provide full documentation. Currently you can take a look 
 
 ## Requirements
 
-* iOS 8.0+
+* iOS 9.0+
 * Mac OS X 10.11+
 * Xcode 7.3+
 
@@ -80,13 +97,13 @@ We're working hard to provide full documentation. Currently you can take a look 
 
 To install it, simply add the following line to your Podfile:
 ```ruby
-pod "Macaw", "0.9.6"
+pod "Macaw", "0.9.7"
 ```
 
 ## [Carthage](http://github.com/Carthage/Carthage)
 
 ```ogdl
-github "Exyte/Macaw" ~> 0.9.6
+github "Exyte/Macaw" ~> 0.9.7
 ```
 
 ## Building from sources
@@ -97,21 +114,9 @@ To build Macaw from sources:
 * run `pod install` to install all dependencies
 * run `open Example.xcworkspace/` to open project in the Xcode
 
-## Who is using Macaw?
-Over one thousand users already utilize Macaw in their applications. We would like to prepare the list of top use cases.
-Please share your story with us at info@exyte.com and we will thank you with Macaw stickers!
-
-Follow Macaw on [twitter](https://twitter.com/MacawFramework) and [Instagram](https://www.instagram.com/macaw_framework/)
-
-<img src="https://i.imgur.com/m0pBChS.jpg" height="200">
-
 ## Change Log
 
 You can find list of all changes by version in the [Change Log](https://github.com/exyte/Macaw/wiki/Change-Log)
-
-## Author
-
-This project is maintained by [exyte](http://www.exyte.com). We design and build mobile and VR/AR applications.
 
 ## License
 

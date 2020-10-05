@@ -25,7 +25,7 @@ target 'Capitalist' do
   pod 'CircleProgressView', '~> 1.0'
   pod 'BEMCheckBox'
   pod 'AlignedCollectionViewFlowLayout'
-  pod 'ALTextInputBar' #, git: 'https://github.com/bclymer/ALTextInputBar', branch: 'master'
+#  pod 'ALTextInputBar' #, git: 'https://github.com/bclymer/ALTextInputBar', branch: 'master'
   pod 'Charts'
   pod 'RandomColorSwift', git: 'https://github.com/onevcat/RandomColorSwift', branch: 'master'
   pod 'MSPeekCollectionViewDelegateImplementation', '~> 2.0'
@@ -53,7 +53,7 @@ target 'Capitalist' do
   pod "Haptica"
   pod 'SwipeCellKit'
   pod 'BadgeHub'
-  pod 'Macaw'
+  pod 'Macaw', git: 'https://github.com/petalvlad/Macaw', branch: 'master'
   pod 'SwiftyBeaver'
   pod 'Adjust', '~> 4.22.1'
   pod 'lottie-ios'
