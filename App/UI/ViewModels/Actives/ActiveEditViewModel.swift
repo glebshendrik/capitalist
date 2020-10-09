@@ -225,12 +225,12 @@ class ActiveEditViewModel {
         self.monthlyPlannedIncome = active.monthlyPlannedIncomeCents?.moneyDecimalString(with: active.currency)
         self.reminderViewModel = ReminderViewModel(reminder: active.reminder)
                 
-        if let accountConnection = active.accountConnection {
-            accountConnectionAttributes =
-                AccountConnectionNestedAttributes(id: accountConnection.id,
-                                                  accountId: accountConnection.account.id,
-                                                  shouldDestroy: nil)
-        }
+//        if let accountConnection = active.accountConnection {
+//            accountConnectionAttributes =
+//                AccountConnectionNestedAttributes(id: accountConnection.id,
+//                                                  accountId: accountConnection.account.id,
+//                                                  shouldDestroy: nil)
+//        }
     }
     
     func set(costCents: Int?) {
@@ -373,34 +373,34 @@ extension ActiveEditViewModel {
     }
 }
 
-// Bank Connection
-extension ActiveEditViewModel {
-    func connect(accountViewModel: AccountViewModel, connection: Connection) {
-        selectedCurrency = accountViewModel.currency
-        selectedIconURL = connection.providerLogoURL
-        
-        if name == nil {
-            name = accountViewModel.name
-        }
-        
-        cost = accountViewModel.amount
-                
-        var accountConnectionId: Int? = nil
-        if  let accountConnectionAttributes = accountConnectionAttributes,
-            accountConnectionAttributes.accountId == accountViewModel.id {
-            
-            accountConnectionId = accountConnectionAttributes.id
-        }
-        
-        accountConnectionAttributes =
-            AccountConnectionNestedAttributes(id: accountConnectionId,
-                                              accountId: accountViewModel.id,
-                                              shouldDestroy: nil)
-    }
-    
-    func removeAccountConnection() {
-        accountConnectionAttributes?.id = active?.accountConnection?.id
-        accountConnectionAttributes?.shouldDestroy = true
-        selectedIconURL = nil
-    }
-}
+//// Bank Connection
+//extension ActiveEditViewModel {
+//    func connect(accountViewModel: AccountViewModel, connection: Connection) {
+//        selectedCurrency = accountViewModel.currency
+//        selectedIconURL = connection.providerLogoURL
+//
+//        if name == nil {
+//            name = accountViewModel.name
+//        }
+//
+//        cost = accountViewModel.amount
+//
+//        var accountConnectionId: Int? = nil
+//        if  let accountConnectionAttributes = accountConnectionAttributes,
+//            accountConnectionAttributes.accountId == accountViewModel.id {
+//
+//            accountConnectionId = accountConnectionAttributes.id
+//        }
+//
+//        accountConnectionAttributes =
+//            AccountConnectionNestedAttributes(id: accountConnectionId,
+//                                              accountId: accountViewModel.id,
+//                                              shouldDestroy: nil)
+//    }
+//
+//    func removeAccountConnection() {
+//        accountConnectionAttributes?.id = active?.accountConnection?.id
+//        accountConnectionAttributes?.shouldDestroy = true
+//        selectedIconURL = nil
+//    }
+//}

@@ -64,19 +64,7 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
         viewModel.creditLimit = creditLimit
         updateTextFieldsUI()
     }
-            
-    func didTapBankButton() {        
-        guard viewModel.canConnectBank else {
-            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
-            return
-        }
-        if viewModel.accountConnected {
-            removeAccountConnection()
-        } else {
-            showProviders()
-        }
-    }
-    
+                
     func didTapSave() {
         save()
     }

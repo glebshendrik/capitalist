@@ -24,19 +24,16 @@ protocol UIFactoryProtocol {
     func reminderEditViewController(delegate: ReminderEditViewControllerDelegate,
                                     viewModel: ReminderViewModel) -> UINavigationController?
     
-    func providersViewController(delegate: ProvidersViewControllerDelegate, fetchDataFrom: Date?) -> ProvidersViewController?
-    
-    func accountsViewController(delegate: AccountsViewControllerDelegate,
-                                connection: Connection,
-                                currencyCode: String?,
-                                nature: AccountNatureType) -> AccountsViewController?
+    func providersViewController(delegate: ProvidersViewControllerDelegate) -> UINavigationController?
     
     func connectionViewController(delegate: ConnectionViewControllerDelegate,
                                   providerViewModel: ProviderViewModel?,
-                                  connectionType: ProviderConnectionType,
-                                  connectionURL: URL,
-                                  connection: Connection?) -> UINavigationController?
-        
+                                  connection: Connection?,
+                                  connectionSession: ConnectionSession) -> UINavigationController?
+    
+    func accountsViewController(delegate: AccountsViewControllerDelegate,
+                                expenseSource: ExpenseSource) -> AccountsViewController?
+    
     func datePickerViewController(delegate: DatePickerViewControllerDelegate,
                                   date: Date?,
                                   minDate: Date?,

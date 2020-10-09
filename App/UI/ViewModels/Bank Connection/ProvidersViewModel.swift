@@ -47,9 +47,14 @@ class ProvidersViewModel {
     
     var selectedCountryViewModel: CountryViewModel? = nil
     
-    var fetchDataFrom: Date? = nil
+//    var fetchDataFrom: Date? = nil
     
-    var selectedProviderViewModel: ProviderViewModel? = nil
+//    var selectedProviderViewModel: ProviderViewModel? = nil
+    
+//    var targetExpenseSource: ExpenseSource? = nil
+//    var targetConnection: Connection? {
+//        return targetExpenseSource?.accountConnection?.connection
+//    }
     
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
@@ -82,28 +87,29 @@ class ProvidersViewModel {
         return filteredProviderViewModels[safe: indexPath.row]
     }
         
-    func loadConnection(for provider: ProviderViewModel) -> Promise<Connection> {
-        return bankConnectionsCoordinator.loadConnection(for: provider.provider)
-    }
-    
-    func createConnectionSession(for providerViewModel: ProviderViewModel) -> Promise<URL> {
-        return bankConnectionsCoordinator.createConnectSession(providerCode: providerViewModel.provider.code,
-                                                               countryCode: providerViewModel.provider.countryCode,
-                                                               fromDate: fetchDataFrom)
-    }
-    
-    func createReconnectSession(for providerViewModel: ProviderViewModel, connection: Connection?) -> Promise<URL> {
-        guard let connection = connection else {
-            return Promise(error: BankConnectionError.canNotCreateConnection)
-        }
-        return bankConnectionsCoordinator.createReconnectSession(connection: connection,
-                                                                 fromDate: fetchDataFrom)
-    }
-    
-    func createRefreshConnectionSession(for providerViewModel: ProviderViewModel, connection: Connection?) -> Promise<URL> {
-        guard let connection = connection else {
-            return Promise(error: BankConnectionError.canNotCreateConnection)
-        }
-        return bankConnectionsCoordinator.createRefreshConnectionSession(connection: connection)
-    }
+//    func loadConnection(for provider: ProviderViewModel) -> Promise<Connection> {
+//        return bankConnectionsCoordinator.loadConnection(for: provider.provider)
+//    }
+//    
+//    func createConnectionSession(for providerViewModel: ProviderViewModel) -> Promise<URL> {
+//        return bankConnectionsCoordinator.createConnectSession(providerCode: providerViewModel.provider.code,
+//                                                               countryCode: providerViewModel.provider.countryCode,
+//                                                               fromDate: fetchDataFrom)
+//    }
+//    
+//    func createReconnectSession(for providerViewModel: ProviderViewModel, connection: Connection?) -> Promise<URL> {
+//        guard let connection = connection else {
+//            return Promise(error: BankConnectionError.canNotCreateConnection)
+//        }
+//        return bankConnectionsCoordinator.createReconnectSession(connection: connection,
+//                                                                 fromDate: fetchDataFrom)
+//    }
+//    
+//    func createRefreshConnectionSession(for providerViewModel: ProviderViewModel, connection: Connection?) -> Promise<URL> {
+//        guard let connection = connection else {
+//            return Promise(error: BankConnectionError.canNotCreateConnection)
+//        }
+//        return bankConnectionsCoordinator.createRefreshConnectionSession(connection: connection,
+//                                                                         fromDate: fetchDataFrom)
+//    }
 }

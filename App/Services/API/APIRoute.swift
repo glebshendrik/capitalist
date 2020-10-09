@@ -72,6 +72,7 @@ enum APIRoute: URLRequestConvertible {
     case indexExpenseSources(userId: Int, currency: String?)
     case updateExpenseSource(form: ExpenseSourceUpdatingForm)
     case updateExpenseSourcePosition(form: ExpenseSourcePositionUpdatingForm)
+    case updateExpenseSourceMaxFetchInterval(form: ExpenseSourceMaxFetchIntervalUpdatingForm)
     case destroyExpenseSource(id: Int, deleteTransactions: Bool)
     
     // ExpenseCategories

@@ -46,6 +46,7 @@ struct APIResource {
              .indexExpenseSources,
              .updateExpenseSource,
              .updateExpenseSourcePosition,
+             .updateExpenseSourceMaxFetchInterval,
              .destroyExpenseSource:
             return APIResource(singular: "expense_source", plural: "expense_sources")
         case .createExpenseCategory,

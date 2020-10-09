@@ -58,26 +58,27 @@ struct APIRoutePath {
              .indexLoans(let userId),
              .indexCredits(let userId),
              .indexUserActives(let userId),
-             .indexExchangeRates(let userId):               return collection(route, userId: userId)
+             .indexExchangeRates(let userId):                   return collection(route, userId: userId)
         
         // Update
-        case .updateUser(let form):                         return member(route, id: form.userId)
-        case .updateUserSettings(let form):                 return member(route, id: form.userId)
-        case .updateUserSubscription(let form):             return member(route, id: form.userId)
-        case .updateDeviceToken(let form):                  return member(route, id: form.userId)
-        case .updateIncomeSource(let form):                 return member(route, id: form.id)
-        case .updateIncomeSourcePosition(let form):         return member(route, id: form.id)
-        case .updateExpenseSource(let form):                return member(route, id: form.id)
-        case .updateExpenseSourcePosition(let form):        return member(route, id: form.id)
-        case .updateExpenseCategory(let form):              return member(route, id: form.id)
-        case .updateExpenseCategoryPosition(let form):      return member(route, id: form.id)
-        case .updateTransaction(let form):                  return member(route, id: form.id)
-        case .updateDebt(let form):                         return member(route, id: form.id)
-        case .updateLoan(let form):                         return member(route, id: form.id)
-        case .updateCredit(let form):                       return member(route, id: form.id)
-        case .updateActive(let form):                       return member(route, id: form.id)
-        case .updateActivePosition(let form):               return member(route, id: form.id)
-        case .updateConnection(let form):                   return member(route, id: form.id)
+        case .updateUser(let form):                             return member(route, id: form.userId)
+        case .updateUserSettings(let form):                     return member(route, id: form.userId)
+        case .updateUserSubscription(let form):                 return member(route, id: form.userId)
+        case .updateDeviceToken(let form):                      return member(route, id: form.userId)
+        case .updateIncomeSource(let form):                     return member(route, id: form.id)
+        case .updateIncomeSourcePosition(let form):         	return member(route, id: form.id)
+        case .updateExpenseSource(let form):                    return member(route, id: form.id)
+        case .updateExpenseSourcePosition(let form):            return member(route, id: form.id)
+        case .updateExpenseSourceMaxFetchInterval(let form):    return member(route, id: form.id)
+        case .updateExpenseCategory(let form):                  return member(route, id: form.id)
+        case .updateExpenseCategoryPosition(let form):          return member(route, id: form.id)
+        case .updateTransaction(let form):                      return member(route, id: form.id)
+        case .updateDebt(let form):                             return member(route, id: form.id)
+        case .updateLoan(let form):                             return member(route, id: form.id)
+        case .updateCredit(let form):                           return member(route, id: form.id)
+        case .updateActive(let form):                           return member(route, id: form.id)
+        case .updateActivePosition(let form):                   return member(route, id: form.id)
+        case .updateConnection(let form):                       return member(route, id: form.id)
             
         // Show
         case .showUser(let id),

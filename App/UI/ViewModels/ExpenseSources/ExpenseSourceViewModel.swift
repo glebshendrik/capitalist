@@ -35,14 +35,6 @@ class ExpenseSourceViewModel {
         return amount(shouldRound: false)
     }
     
-    var amountCents: Int {
-        return accountViewModel?.amountCents ?? expenseSource.amountCents
-    }
-    
-    var creditLimitCents: Int? {
-        return accountViewModel?.creditLimitCents ?? expenseSource.creditLimitCents
-    }
-    
     var inCredit: Bool {
         guard let creditLimitCents = creditLimitCents else { return false }
         return amountCents < creditLimitCents
@@ -70,10 +62,6 @@ class ExpenseSourceViewModel {
         return expenseSource.currency
     }
     
-    var iconURL: URL? {
-        return accountViewModel?.providerLogoURL ?? expenseSource.iconURL
-    }
-    
     var isDeleted: Bool {
         return expenseSource.deletedAt != nil
     }
@@ -93,8 +81,50 @@ class ExpenseSourceViewModel {
     var cardTypeImageName: String? {
         return cardType?.imageName
     }
+        
+    var fetchDataFrom: Date? {
+        return expenseSource.fetchDataFrom
+    }
     
-    var cardLastNumbers: String? {        
+    init(expenseSource: ExpenseSource) {
+        self.expenseSource = expenseSource
+        if let account = accountConnection?.account {
+            self.accountViewModel = AccountViewModel(account: account)
+        }
+    }
+    
+    func asTransactionFilter() -> ExpenseSourceFilter {
+        return ExpenseSourceFilter(expenseSourceViewModel: self)
+    }
+    
+    private func amount(shouldRound: Bool) -> String {
+        return amountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
+    }
+}
+
+// Connection dependant properties
+extension ExpenseSourceViewModel {
+    var accountConnection: AccountConnection? {
+        return expenseSource.accountConnection
+    }
+    
+    var connection: Connection? {
+        return accountConnection?.connection
+    }
+    
+    var amountCents: Int {
+        return accountViewModel?.amountCents ?? expenseSource.amountCents
+    }
+    
+    var creditLimitCents: Int? {
+        return accountViewModel?.creditLimitCents ?? expenseSource.creditLimitCents
+    }
+    
+    var iconURL: URL? {
+        return providerLogoURL ?? expenseSource.iconURL
+    }
+    
+    var cardLastNumbers: String? {
         return accountViewModel?.cardLastNumbers
     }
     
@@ -102,12 +132,51 @@ class ExpenseSourceViewModel {
         return accountViewModel != nil
     }
     
-    var reconnectNeeded: Bool {
-        return accountViewModel?.reconnectNeeded ?? false
+    var connectionId: String? {
+        return connection?.saltedgeId
     }
     
-    var reconnectType: ProviderConnectionType {
-        return accountViewModel?.reconnectType ?? .refresh
+    var providerLogoURL: URL? {
+        return connection?.providerLogoURL
+    }
+        
+    var reconnectNeeded: Bool {
+        guard
+            let connection = connection,
+            connection.lastStage == .finish
+        else {
+            return false
+        }
+                
+        guard
+            connection.status == .active
+        else {
+            return true
+        }
+        
+        guard
+            let interactive = connection.interactive,
+            let nextRefreshPossibleAt = connection.nextRefreshPossibleAt
+        else {
+            return false
+        }
+        return interactive && nextRefreshPossibleAt.isInPast
+    }
+    
+    var reconnectType: ConnectionSessionType {
+        guard
+            let connection = connection
+        else {
+            return .creating
+        }
+        switch connection.status {
+            case .active:
+                return .refreshing
+            case .inactive:
+                return .reconnecting
+            case .deleted:
+                return .creating
+        }
     }
     
     var iconHidden: Bool {
@@ -120,29 +189,6 @@ class ExpenseSourceViewModel {
     
     var connectionIndicatorHidden: Bool {
         return !isConnectionLoading
-    }
-    
-//    var accountConnectionCreatedAt: Date? {
-//        return expenseSource.accountConnection?.createdAt
-//    }
-    
-    var accountConnectionFetchDataFrom: Date? {
-        return expenseSource.fetchDataFrom
-    }
-    
-    init(expenseSource: ExpenseSource) {
-        self.expenseSource = expenseSource
-        if let account = expenseSource.accountConnection?.account {
-            self.accountViewModel = AccountViewModel(account: account)
-        }
-    }
-    
-    func asTransactionFilter() -> ExpenseSourceFilter {
-        return ExpenseSourceFilter(expenseSourceViewModel: self)
-    }
-    
-    private func amount(shouldRound: Bool) -> String {
-        return amountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }
 }
 

@@ -77,6 +77,7 @@ struct APIRouteMethod {
             return .put
         case .updateIncomeSourcePosition,
              .updateExpenseSourcePosition,
+             .updateExpenseSourceMaxFetchInterval,
              .updateExpenseCategoryPosition,
              .updateUserSettings,
              .updateUserSubscription,

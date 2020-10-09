@@ -26,7 +26,6 @@ protocol ActiveEditTableControllerDelegate : FormFieldsTableViewControllerDelega
     func didChange(annualPercent: String?)
     func didTapSetReminder()
     func didTapRemoveButton()
-    func didTapBankButton()
 }
 
 class ActiveEditTableController : FormFieldsTableViewController {
@@ -212,6 +211,6 @@ class ActiveEditTableController : FormFieldsTableViewController {
     }
     
     @IBAction func didTapBankButton(_ sender: Any) {
-        delegate?.didTapBankButton()
+        
     }
 }

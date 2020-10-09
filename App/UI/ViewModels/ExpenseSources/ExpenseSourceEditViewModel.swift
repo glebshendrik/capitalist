@@ -16,7 +16,6 @@ enum ExpenseSourceUpdatingError : Error {
 class ExpenseSourceEditViewModel {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
-    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
     
     private var expenseSource: ExpenseSource? = nil
     
@@ -71,19 +70,9 @@ class ExpenseSourceEditViewModel {
             return false
         }
         
-        return accountConnectionAttributes.shouldDestroy == nil
+        return accountConnectionAttributes.shouldDestroy == nil && accountConnectionAttributes.accountId != nil
     }
-    
-    var bankButtonTitle: String {
-        return accountConnected
-            ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
-            : NSLocalizedString("Подключить банк", comment: "Подключить банк")
-    }
-       
-    var fetchDataFrom: Date? {
-        return isNew ? Date()?.adding(.year, value: -1).adding(.day, value: 1).adding(.minute, value: 5) : expenseSource?.fetchDataFrom
-    }
-    
+        
     var iconType: IconType {
         return selectedIconURL?.iconType ?? .raster
     }
@@ -109,11 +98,7 @@ class ExpenseSourceEditViewModel {
     var canCardType: Bool {
         return !accountConnected
     }
-    
-    var canConnectBank: Bool {
-        return accountCoordinator.hasPlatinumSubscription
-    }
-    
+        
     // Visibility
         
     var iconPenHidden: Bool {
@@ -131,22 +116,13 @@ class ExpenseSourceEditViewModel {
     var removeButtonHidden: Bool {
         return isNew
     }
-    
-    var bankButtonHidden: Bool {
-        guard let currentUser = currentUser else {
-            return true
-        }
-        return !currentUser.onboarded
-    }
-    
+        
     var currentUser: User? = nil
     
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol,
-         bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol) {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.accountCoordinator = accountCoordinator
-        self.bankConnectionsCoordinator = bankConnectionsCoordinator
     }
     
     func loadDefaultCurrency() -> Promise<Void> {
@@ -161,7 +137,7 @@ class ExpenseSourceEditViewModel {
     func set(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         
-        selectedIconURL = expenseSource.accountConnection?.account.connection.providerLogoURL ?? expenseSource.iconURL
+        selectedIconURL = expenseSource.accountConnection?.connection.providerLogoURL ?? expenseSource.iconURL
         selectedCurrency = expenseSource.currency
         selectedCardType = expenseSource.cardType
         name = expenseSource.name
@@ -171,7 +147,8 @@ class ExpenseSourceEditViewModel {
         if let accountConnection = expenseSource.accountConnection {
             accountConnectionAttributes =
                 AccountConnectionNestedAttributes(id: accountConnection.id,
-                                                  accountId: accountConnection.account.id,                                                  
+                                                  connectionId: accountConnection.connection.id,
+                                                  accountId: accountConnection.account?.id,
                                                   shouldDestroy: nil)
         }
         
@@ -200,8 +177,6 @@ class ExpenseSourceEditViewModel {
         }
         return expenseSourcesCoordinator.destroy(by: expenseSourceId, deleteTransactions: deleteTransactions)
     }
-    
-    
 }
 
 // Creation
@@ -244,42 +219,5 @@ extension ExpenseSourceEditViewModel {
                                          creditLimitCents: creditLimitToSave.intMoney(with: selectedCurrency),
                                          cardType: selectedCardType,
                                          accountConnectionAttributes: accountConnectionAttributes)
-    }
-}
-
-// Bank Connection
-extension ExpenseSourceEditViewModel {
-    func connect(accountViewModel: AccountViewModel, connection: Connection) {
-        selectedCurrency = accountViewModel.currency
-        selectedIconURL = connection.providerLogoURL
-        selectedCardType = accountViewModel.cardType
-        
-        if name == nil || isNew {
-            name = accountViewModel.name
-        }
-        
-        amount = accountViewModel.amountDecimal
-        
-        if let creditLimit = accountViewModel.creditLimitDecimal {
-            self.creditLimit = creditLimit
-        }
-        
-        var accountConnectionId: Int? = nil
-        if  let accountConnectionAttributes = accountConnectionAttributes,
-            accountConnectionAttributes.accountId == accountViewModel.id {
-            
-            accountConnectionId = accountConnectionAttributes.id
-        }
-        
-        accountConnectionAttributes =
-            AccountConnectionNestedAttributes(id: accountConnectionId,
-                                              accountId: accountViewModel.id,
-                                              shouldDestroy: nil)
-    }
-    
-    func removeAccountConnection() {
-        accountConnectionAttributes?.id = expenseSource?.accountConnection?.id
-        accountConnectionAttributes?.shouldDestroy = true
-        selectedIconURL = nil
     }
 }

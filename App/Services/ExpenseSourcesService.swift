@@ -34,6 +34,10 @@ class ExpenseSourcesService : Service, ExpenseSourcesServiceProtocol {
         return request(APIRoute.updateExpenseSourcePosition(form: updatingForm))
     }
     
+    func updateMaxFetchInterval(with updatingForm: ExpenseSourceMaxFetchIntervalUpdatingForm) -> Promise<Void> {
+        return request(APIRoute.updateExpenseSourceMaxFetchInterval(form: updatingForm))
+    }
+    
     func destroy(by id: Int, deleteTransactions: Bool) -> Promise<Void> {
         return request(APIRoute.destroyExpenseSource(id: id, deleteTransactions: deleteTransactions))
     }

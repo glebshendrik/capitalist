@@ -37,12 +37,13 @@ class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
     
     func syncedWithConnection(expenseSource: ExpenseSource) -> Promise<ExpenseSource> {
         guard   let accountConnection = expenseSource.accountConnection,
-                let connectionId = accountConnection.account.connection.id else {
+                let connectionId = accountConnection.connection.id else {
             return Promise.value(expenseSource)
         }
         return  firstly {
                     bankConnectionsCoordinator.updateConnection(id: connectionId,
-                                                                saltedgeId: accountConnection.account.connection.saltedgeId)
+                                                                saltedgeId: accountConnection.connection.saltedgeId,
+                                                                session: accountConnection.connection.session)
                 }.then {
                     self.expenseSourcesService.show(by: expenseSource.id)
                 }
@@ -50,11 +51,12 @@ class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
     
     func refreshConnection(expenseSource: ExpenseSource) -> Promise<Void> {
         guard   let accountConnection = expenseSource.accountConnection,
-                let connectionId = accountConnection.account.connection.id else {
+                let connectionId = accountConnection.connection.id else {
             return Promise.value(())
         }
         return bankConnectionsCoordinator.updateConnection(id: connectionId,
-                                                           saltedgeId: accountConnection.account.connection.saltedgeId)
+                                                           saltedgeId: accountConnection.connection.saltedgeId,
+                                                           session: accountConnection.connection.session)
     }
     
     func first() -> Promise<ExpenseSource?> {
@@ -85,6 +87,10 @@ class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
     
     func updatePosition(with updatingForm: ExpenseSourcePositionUpdatingForm) -> Promise<Void> {
         return expenseSourcesService.updatePosition(with: updatingForm)
+    }
+    
+    func updateMaxFetchInterval(with updatingForm: ExpenseSourceMaxFetchIntervalUpdatingForm) -> Promise<Void> {
+        return expenseSourcesService.updateMaxFetchInterval(with: updatingForm)
     }
     
     func destroy(by id: Int, deleteTransactions: Bool) -> Promise<Void> {

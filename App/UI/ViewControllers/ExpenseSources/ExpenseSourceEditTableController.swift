@@ -16,7 +16,6 @@ protocol ExpenseSourceEditTableControllerDelegate : FormFieldsTableViewControlle
     func didChange(name: String?)
     func didChange(amount: String?)
     func didChange(creditLimit: String?)
-    func didTapBankButton()
     func didTapRemoveButton()
 }
 
@@ -112,7 +111,7 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     }
     
     @IBAction func didTapBankButton(_ sender: Any) {
-        delegate?.didTapBankButton()
+        
     }
     
     @IBAction func didTapRemoveButton(_ sender: UIButton) {

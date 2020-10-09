@@ -47,42 +47,39 @@ class UIFactory : UIFactoryProtocol {
         return reminderEditNavigationController
     }
     
-    func providersViewController(delegate: ProvidersViewControllerDelegate, fetchDataFrom: Date?) -> ProvidersViewController? {
-        
-        let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController
-        providersViewController?.delegate = delegate
-        providersViewController?.viewModel.fetchDataFrom = fetchDataFrom
-        return providersViewController
-    }
-        
-    func accountsViewController(delegate: AccountsViewControllerDelegate,
-                                connection: Connection,
-                                currencyCode: String?,
-                                nature: AccountNatureType) -> AccountsViewController? {
-        
-        let accountsViewController = router.viewController(Infrastructure.ViewController.AccountsViewController) as? AccountsViewController
-        accountsViewController?.delegate = delegate
-        accountsViewController?.viewModel.connection = connection
-        accountsViewController?.viewModel.currencyCode = currencyCode
-        accountsViewController?.viewModel.nature = nature
-        return accountsViewController
+    func providersViewController(delegate: ProvidersViewControllerDelegate) -> UINavigationController? {
+        guard let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController else { return nil }
+        providersViewController.delegate = delegate
+        let navigationController = UINavigationController(rootViewController: providersViewController)
+//        navigationController.modalPresentationStyle = .fullScreen
+        return navigationController
     }
     
     func connectionViewController(delegate: ConnectionViewControllerDelegate,
                                   providerViewModel: ProviderViewModel?,
-                                  connectionType: ProviderConnectionType,
-                                  connectionURL: URL,
-                                  connection: Connection?) -> UINavigationController? {
-        
-        guard let connectionViewController = router.viewController(Infrastructure.ViewController.ConnectionViewController) as? ConnectionViewController else { return nil }
+                                  connection: Connection?,
+                                  connectionSession: ConnectionSession) -> UINavigationController? {
+        guard
+            let connectionViewController = router.viewController(Infrastructure.ViewController.ConnectionViewController) as? ConnectionViewController
+        else {
+            return nil
+        }
         connectionViewController.delegate = delegate
         connectionViewController.viewModel.providerViewModel = providerViewModel
-        connectionViewController.viewModel.connectionType = connectionType
-        connectionViewController.viewModel.connectionURL = connectionURL
         connectionViewController.viewModel.connection = connection
+        connectionViewController.viewModel.connectionSession = connectionSession
+        
         let navigationController = UINavigationController(rootViewController: connectionViewController)
         navigationController.modalPresentationStyle = .fullScreen
         return navigationController
+    }
+    
+    func accountsViewController(delegate: AccountsViewControllerDelegate,
+                                expenseSource: ExpenseSource) -> AccountsViewController? {
+        let accountsViewController = router.viewController(Infrastructure.ViewController.AccountsViewController) as? AccountsViewController
+        accountsViewController?.delegate = delegate
+        accountsViewController?.viewModel.expenseSource = expenseSource
+        return accountsViewController
     }
     
     func datePickerViewController(delegate: DatePickerViewControllerDelegate,

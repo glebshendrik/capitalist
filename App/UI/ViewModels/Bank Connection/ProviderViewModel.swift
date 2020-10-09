@@ -32,6 +32,10 @@ class ProviderViewModel {
         return provider.isOAuth
     }
     
+    var maxFetchInterval: Int {
+        return provider.maxFetchInterval
+    }
+    
     var connectURL: URL? = nil
     
     init(provider: SEProvider) {

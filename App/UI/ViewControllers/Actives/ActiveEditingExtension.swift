@@ -84,14 +84,6 @@ extension ActiveEditViewController : ActiveEditTableControllerDelegate {
     func didTapSave() {
         save()
     }
-    
-    func didTapBankButton() {
-        if viewModel.accountConnected {
-            removeAccountConnection()
-        } else {
-            showProviders()
-        }
-    }
 }
 
 extension ActiveEditViewController : IconsViewControllerDelegate {
@@ -144,38 +136,5 @@ extension ActiveEditViewController {
             })
         }        
         sheet(title: nil, actions: actions)
-    }
-}
-
-extension ActiveEditViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
-    func showProviders() {
-        guard let providersViewController = factory.providersViewController(delegate: self, fetchDataFrom: Date()) else { return }
-        modal(UINavigationController(rootViewController: providersViewController))
-    }
-    
-    func didConnectTo(_ providerViewModel: ProviderViewModel?, connection: Connection) {
-        showAccountsViewController(for: connection)
-    }
-    
-    func showAccountsViewController(for connection: Connection) {
-        let currencyCode = viewModel.isNew ? nil : viewModel.selectedCurrency?.code
-        slideUp(factory.accountsViewController(delegate: self,
-                                               connection: connection,
-                                               currencyCode: currencyCode,
-                                               nature: .investment))
-    }
-    
-    func didSelect(accountViewModel: AccountViewModel, connection: Connection) {
-        connect(accountViewModel, connection)
-    }
-    
-    func connect(_ accountViewModel: AccountViewModel, _ connection: Connection) {
-        viewModel.connect(accountViewModel: accountViewModel, connection: connection)
-        updateUI()
-    }
-    
-    func removeAccountConnection() {
-        viewModel.removeAccountConnection()
-        updateUI()
     }
 }

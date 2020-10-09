@@ -47,4 +47,3 @@ extension ParametersEncodable where Self: Encodable {
         return try encoder.encode(params)
     }
 }
-

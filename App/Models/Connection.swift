@@ -37,6 +37,18 @@ enum ConnectionStage : String, Codable {
     case finish
 }
 
+enum ConnectionSessionType : String, Codable {
+    case creating
+    case refreshing
+    case reconnecting
+}
+
+struct ConnectionSession : Codable {
+    let url: URL
+    let type: ConnectionSessionType
+    let expiresAt: Date
+}
+
 struct Connection : Decodable {
     let id: Int?
     let saltedgeId: String?
@@ -50,6 +62,7 @@ struct Connection : Decodable {
     let interactive: Bool?
     let nextRefreshPossibleAt: Date?
     let lastStage: ConnectionStage?
+    let session: ConnectionSession?
     let createdAt: Date?
     let updatedAt: Date?
         
@@ -66,6 +79,7 @@ struct Connection : Decodable {
         case interactive
         case nextRefreshPossibleAt = "next_refresh_possible_at"
         case lastStage = "last_stage"
+        case session = "saltedge_connection_session"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }
@@ -80,6 +94,7 @@ struct ConnectionCreationForm : Encodable {
     let providerName: String
     let countryCode: String
     let providerLogoURL: URL?
+    let session: ConnectionSession?
     let status: ConnectionStatus
     
     enum CodingKeys: String, CodingKey {
@@ -89,6 +104,7 @@ struct ConnectionCreationForm : Encodable {
         case providerCode = "provider_code"
         case providerName = "provider_name"
         case providerLogoURL = "logo_url"
+        case session = "saltedge_connection_session"
         case status
     }
 }
@@ -96,16 +112,17 @@ struct ConnectionCreationForm : Encodable {
 struct ConnectionUpdatingForm : Encodable {
     let id: Int?
     let saltedgeId: String?
+    let session: ConnectionSession?
     
     enum CodingKeys: String, CodingKey {
         case saltedgeId = "salt_edge_connection_id"
+        case session = "saltedge_connection_session"
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-        if let saltedgeId = saltedgeId {
-            try container.encode(saltedgeId, forKey: .saltedgeId)
-        }
+        try container.encodeIfPresent(saltedgeId, forKey: .saltedgeId)
+        try container.encodeIfPresent(session, forKey: .session)
     }
 }
