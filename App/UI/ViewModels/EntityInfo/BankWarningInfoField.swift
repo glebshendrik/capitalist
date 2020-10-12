@@ -13,6 +13,8 @@ class BankWarningInfoField : EntityInfoField {
     let title: String?
     let message: String?
     let buttonText: String?
+    let isSyncing: Bool
+    let stage: ConnectionStage
     
     var type: EntityInfoFieldType {
         return .bankWarning
@@ -22,10 +24,34 @@ class BankWarningInfoField : EntityInfoField {
         return fieldId
     }
     
-    init(fieldId: String, title: String?, message: String?, buttonText: String?) {
+    var isWarningIconHidden: Bool {
+        return isSyncing
+    }
+    
+    var isSyncingIndicatorHidden: Bool {
+        return !isSyncing
+    }
+    
+    var isButtonEnabled: Bool {
+        return !isSyncing
+    }
+    
+    init(fieldId: String, isSyncing: Bool, stage: ConnectionStage) {
         self.fieldId = fieldId
-        self.title = title
-        self.message = message
-        self.buttonText = buttonText
+        self.isSyncing = isSyncing
+        self.stage = stage
+        
+        title = isSyncing
+            ? NSLocalizedString("Обновление подключения к банку", comment: "")
+            : NSLocalizedString("Нет подключения к банку", comment: "")
+        
+        message = isSyncing
+            ? stage.message
+            : NSLocalizedString("Провайдер подключения к банку не может установить соединение. Для обновления данных требуется подключиться к банку",
+                                comment: "")
+        
+        buttonText = isSyncing
+            ? NSLocalizedString("Синхронизация...", comment: "")
+            : NSLocalizedString("Подключиться", comment: "")        
     }
 }

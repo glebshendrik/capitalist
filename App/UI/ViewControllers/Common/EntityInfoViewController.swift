@@ -98,7 +98,7 @@ extension EntityInfoViewController {
     
     private func updateData() {
         setLoading()
-        _ = firstly {
+        firstly {
                 viewModel.updateData()
             }.catch { e in                
                 SwiftyBeaver.error(e)
@@ -111,13 +111,18 @@ extension EntityInfoViewController {
             }.finally {
                 self.stopLoading()
                 self.updateUI()
+                self.didUpdateData()
             }
+    }
+    
+    func didUpdateData() {
+        entityInfoNavigationController?.didUpdateData()
     }
     
     private func loadMoreTransactions() {
         let lastTransaction = viewModel.lastTransaction
         
-        _ = firstly {
+        firstly {
                 viewModel.loadMoreTransactions()
             }.catch{ _ in
                 self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)

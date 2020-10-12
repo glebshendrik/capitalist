@@ -34,6 +34,16 @@ class BankConnectionViewModel {
     var shouldUseExperimentalFeature: Bool = false
     var shouldDestroyConnection: Bool = false
     
+    var connectionConnected: Bool {
+        return accountConnection != nil
+        //        guard
+        //            let accountConnectionAttributes = accountConnectionAttributes
+        //        else {
+        //            return false
+        //        }
+        //        return accountConnectionAttributes.shouldDestroy == nil && accountConnectionAttributes.accountId != nil
+    }
+    
     var accountConnected: Bool {
         return accountConnection?.account != nil
 //        guard
@@ -57,6 +67,14 @@ class BankConnectionViewModel {
         return expenseSourceViewModel?.reconnectNeeded ?? false
     }
     
+    var isSyncingWithBank: Bool {
+        return expenseSourceViewModel?.isSyncingWithBank ?? false
+    }
+    
+    var syncingWithBankStage: ConnectionStage {
+        return expenseSourceViewModel?.syncingWithBankStage ?? .finish
+    }
+    
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {
@@ -68,7 +86,7 @@ class BankConnectionViewModel {
     func set(expenseSource: ExpenseSourceViewModel?) {
         self.expenseSourceViewModel = expenseSource
         // ???
-        self.accountViewModel = nil
+//        self.accountViewModel = nil
         if let accountConnection = expenseSourceViewModel?.accountConnection {
             accountConnectionAttributes =
                 AccountConnectionNestedAttributes(id: accountConnection.id,

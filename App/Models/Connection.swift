@@ -35,6 +35,29 @@ enum ConnectionStage : String, Codable {
     case fetchFull = "fetch_full"
     case disconnect
     case finish
+    
+    var message: String {
+        switch self {
+            case .start:
+                return NSLocalizedString("Начало подключения к банку", comment: "")
+            case .connect:
+                return NSLocalizedString("Подключение к банку", comment: "")
+            case .interactive:
+                return NSLocalizedString("Аутентификация", comment: "")
+            case .fetchHolderInfo:
+                return NSLocalizedString("Загрузка данных держателя счетов", comment: "")
+            case .fetchAccounts:
+                return NSLocalizedString("Загрузка данных счетов", comment: "")
+            case .fetchFull:
+                return NSLocalizedString("Загрузка данных транзакций", comment: "")
+            case .fetchRecent:
+                return NSLocalizedString("Загрузка данных транзакций", comment: "")
+            case .disconnect:
+                return NSLocalizedString("Отключение от банка", comment: "")
+            case .finish:
+                return NSLocalizedString("Подключение к банку завершено", comment: "")
+        }
+    }
 }
 
 enum ConnectionSessionType : String, Codable {

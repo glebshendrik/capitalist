@@ -16,6 +16,8 @@ class BankWarningInfoTableViewCell : EntityInfoTableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var connectButton: HighlightButton!
+    @IBOutlet weak var warningIconImageView: UIImageView!
+    @IBOutlet weak var syncActivityIndicator: UIActivityIndicatorView!
     
     var bankWarningDelegate: BankWarningInfoTableViewCellDelegate? {
         return delegate as? BankWarningInfoTableViewCellDelegate
@@ -29,9 +31,20 @@ class BankWarningInfoTableViewCell : EntityInfoTableViewCell {
         titleLabel.text = bankWarningField?.title
         messageLabel.text = bankWarningField?.message
         connectButton.setTitle(bankWarningField?.buttonText, for: .normal)
+        
+        warningIconImageView.isHidden = bankWarningField?.isWarningIconHidden ?? true
+        syncActivityIndicator.isHidden = bankWarningField?.isSyncingIndicatorHidden ?? true
+        connectButton.isEnabled = bankWarningField?.isButtonEnabled ?? false
+        connectButton.isUserInteractionEnabled = bankWarningField?.isButtonEnabled ?? false
     }
     
     @IBAction func didTapButton(_ sender: Any) {
+        guard
+            let bankWarningField = bankWarningField,
+            bankWarningField.isButtonEnabled
+        else {
+            return
+        }
         bankWarningDelegate?.didTapBankWarningInfoButton(field: bankWarningField)
     }
 }

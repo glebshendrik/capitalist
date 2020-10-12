@@ -72,12 +72,17 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
         modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: viewModel.expenseSource))
     }
     
+    override func didUpdateData() {
+        super.didUpdateData()
+        showAccounts()
+    }
+    
     func didTapBankButton() {
         guard bankConnectionViewModel.canConnectBank else {
             modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
             return
         }
-        if bankConnectionViewModel.accountConnected {
+        if bankConnectionViewModel.connectionConnected {
             disconnectAccount()
         } else {
             showProviders()

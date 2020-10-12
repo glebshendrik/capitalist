@@ -163,6 +163,19 @@ extension ExpenseSourceViewModel {
         return interactive && nextRefreshPossibleAt.isInPast
     }
     
+    var isSyncingWithBank: Bool {
+        guard
+            let connection = connection
+        else {
+            return false
+        }
+        return connection.lastStage != .finish
+    }
+    
+    var syncingWithBankStage: ConnectionStage? {
+        return connection?.lastStage
+    }
+    
     var reconnectType: ConnectionSessionType {
         guard
             let connection = connection

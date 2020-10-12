@@ -53,11 +53,11 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     }
     
     var canEditIcon: Bool {
-        return !bankConnectionViewModel.accountConnected
+        return !bankConnectionViewModel.connectionConnected
     }
     
     var bankButtonTitle: String {
-        return bankConnectionViewModel.accountConnected
+        return bankConnectionViewModel.connectionConnected
             ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
             : NSLocalizedString("Подключить банк", comment: "Подключить банк")
     }
@@ -102,18 +102,19 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     override func entityInfoFields() -> [EntityInfoField] {
         var fields = [EntityInfoField]()
         
+        if bankConnectionViewModel.reconnectNeeded || bankConnectionViewModel.isSyncingWithBank {
+            fields.append(BankWarningInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
+                                               isSyncing: bankConnectionViewModel.isSyncingWithBank,
+                                               stage: bankConnectionViewModel.syncingWithBankStage))
+        }
+        
         fields.append(IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
                                     iconType: iconType,
                                     iconURL: selectedIconURL,
                                     placeholder: TransactionableType.expenseSource.defaultIconName,
                                     canEditIcon: canEditIcon))
         
-        if bankConnectionViewModel.reconnectNeeded {
-            fields.append(BankWarningInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
-                                               title: NSLocalizedString("Нет подключения к банку", comment: ""),
-                                               message: NSLocalizedString("Провайдер подключения к банку не может установить соединение. Для обновления данных требуется подключиться к банку", comment: ""),
-                                               buttonText: NSLocalizedString("Подключиться", comment: "")))
-        }
+        
         
         fields.append(ButtonInfoField(fieldId: ExpenseSourceInfoField.bank.rawValue,
                                       title: bankButtonTitle,

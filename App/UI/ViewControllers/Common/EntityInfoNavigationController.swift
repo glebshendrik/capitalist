@@ -48,6 +48,10 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
         
     }
     
+    func didUpdateData() {
+        
+    }
+    
     func didTapIcon(field: IconInfoField?) {
         
     }
