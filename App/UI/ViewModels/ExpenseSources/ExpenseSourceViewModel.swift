@@ -193,15 +193,15 @@ extension ExpenseSourceViewModel {
     }
     
     var iconHidden: Bool {
-        return isConnectionLoading || reconnectNeeded
+        return isConnectionLoading || isSyncingWithBank || reconnectNeeded
     }
     
     var reconnectWarningHidden: Bool {
-        return !reconnectNeeded || isConnectionLoading
+        return isConnectionLoading || isSyncingWithBank || !reconnectNeeded 
     }
     
     var connectionIndicatorHidden: Bool {
-        return !isConnectionLoading
+        return !isConnectionLoading && !isSyncingWithBank
     }
 }
 
