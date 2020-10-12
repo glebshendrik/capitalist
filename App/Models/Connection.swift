@@ -70,6 +70,12 @@ struct ConnectionSession : Codable {
     let url: URL
     let type: ConnectionSessionType
     let expiresAt: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case url
+        case type
+        case expiresAt = "expires_at"
+    }
 }
 
 struct Connection : Decodable {
