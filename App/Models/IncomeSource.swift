@@ -25,6 +25,7 @@ struct IncomeSource : Decodable {
     let reminder: Reminder?
     let prototypeKey: String?
     let isVirtual: Bool
+    let description: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -43,6 +44,7 @@ struct IncomeSource : Decodable {
         case reminder
         case prototypeKey = "prototype_key"
         case isVirtual = "is_virtual"
+        case description
     }
 
 }
@@ -53,6 +55,7 @@ struct IncomeSourceCreationForm : Encodable, Validatable {
     let name: String?
     let currency: String?
     let monthlyPlannedCents: Int?
+    let description: String?
     let reminderAttributes: ReminderNestedAttributes?
 
     enum CodingKeys: String, CodingKey {
@@ -60,6 +63,7 @@ struct IncomeSourceCreationForm : Encodable, Validatable {
         case name
         case currency
         case monthlyPlannedCents = "monthly_planned_cents"
+        case description
         case reminderAttributes = "reminder_attributes"
     }
     
@@ -87,12 +91,14 @@ struct IncomeSourceUpdatingForm : Encodable, Validatable {
     let iconURL: URL?
     let name: String?
     let monthlyPlannedCents: Int?
+    let description: String?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case iconURL = "icon_url"
         case name
         case monthlyPlannedCents = "monthly_planned_cents"
+        case description
         case reminderAttributes = "reminder_attributes"
     }
     
@@ -101,6 +107,7 @@ struct IncomeSourceUpdatingForm : Encodable, Validatable {
         try container.encode(iconURL, forKey: .iconURL)
         try container.encode(name, forKey: .name)
         try container.encode(monthlyPlannedCents, forKey: .monthlyPlannedCents)
+        try container.encode(description, forKey: .description)
         try container.encode(reminderAttributes, forKey: .reminderAttributes)
     }
     

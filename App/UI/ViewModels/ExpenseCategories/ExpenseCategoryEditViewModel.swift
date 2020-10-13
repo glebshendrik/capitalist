@@ -28,6 +28,7 @@ class ExpenseCategoryEditViewModel {
     var name: String? = nil
     var selectedCurrency: Currency? = nil
     var monthlyPlanned: String? = nil
+    var description: String? = nil
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
     // Computed
@@ -103,12 +104,14 @@ class ExpenseCategoryEditViewModel {
         selectedIconURL = expenseCategory.iconURL
         selectedCurrency = expenseCategory.currency        
         monthlyPlanned = expenseCategory.monthlyPlannedCents?.moneyDecimalString(with: selectedCurrency)
+        description = expenseCategory.description
         reminderViewModel = ReminderViewModel(reminder: expenseCategory.reminder)
     }
     
     func set(example: TransactionableExampleViewModel) {
         selectedIconURL = example.iconURL
         name = example.name
+        description = example.description
     }
     
     func set(basketType: BasketType) {
@@ -166,6 +169,7 @@ extension ExpenseCategoryEditViewModel {
                                            name: name,
                                            currency: selectedCurrencyCode,
                                            monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
+                                           description: description,
                                            reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }
@@ -185,6 +189,7 @@ extension ExpenseCategoryEditViewModel {
                                            iconURL: selectedIconURL,
                                            name: name,
                                            monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
+                                           description: description,
                                            reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }

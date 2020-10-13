@@ -16,6 +16,7 @@ enum IncomeSourceInfoField : String {
     case plannedIncome
     case statistics
     case transaction
+    case description
     
     var identifier: String {
         return rawValue
@@ -77,13 +78,22 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
     }
     
     override func entityInfoFields() -> [EntityInfoField] {
-        var fields: [EntityInfoField] = [IconInfoField(fieldId: IncomeSourceInfoField.icon.rawValue,
-                                                       iconType: .raster,
-                                                       iconURL: selectedIconURL,
-                                                       placeholder: TransactionableType.incomeSource.defaultIconName),
-                                         BasicInfoField(fieldId: IncomeSourceInfoField.income.rawValue,
-                                                        title: NSLocalizedString("Доход в этом месяце", comment: "Доход в этом месяце"),
-                                                        value: incomeSourceViewModel?.amount)]
+        var fields = [EntityInfoField]()
+        
+        fields.append(IconInfoField(fieldId: IncomeSourceInfoField.icon.rawValue,
+                                    iconType: .raster,
+                                    iconURL: selectedIconURL,
+                                    placeholder: TransactionableType.incomeSource.defaultIconName))
+        
+        if let description = incomeSourceViewModel?.description {
+            fields.append(DescriptionInfoField(fieldId: IncomeSourceInfoField.description.rawValue,
+                                               description: description))
+        }
+        
+        fields.append(BasicInfoField(fieldId: IncomeSourceInfoField.income.rawValue,
+                                     title: NSLocalizedString("Доход в этом месяце", comment: "Доход в этом месяце"),
+                                     value: incomeSourceViewModel?.amount))
+
         if let plannedAtPeriod = incomeSourceViewModel?.plannedAtPeriod {
             fields.append(BasicInfoField(fieldId: IncomeSourceInfoField.plannedIncome.rawValue,
                                          title: NSLocalizedString("Запланировано", comment: "Запланировано"),
@@ -111,6 +121,7 @@ class IncomeSourceInfoViewModel : EntityInfoViewModel {
                                         iconURL: selectedIconURL,
                                         name: incomeSourceViewModel?.name,
                                         monthlyPlannedCents: incomeSourceViewModel?.incomeSource.plannedCentsAtPeriod,
+                                        description: incomeSourceViewModel?.description,
                                         reminderAttributes: reminder.reminderAttributes)
     }
 }

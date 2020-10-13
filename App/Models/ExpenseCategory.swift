@@ -26,6 +26,7 @@ struct ExpenseCategory : Decodable {
     let waitingLoans: [Borrow]
     let prototypeKey: String?
     let isVirtual: Bool
+    let description: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -45,6 +46,7 @@ struct ExpenseCategory : Decodable {
         case waitingLoans = "waiting_loans"
         case prototypeKey = "prototype_key"
         case isVirtual = "is_virtual"
+        case description
     }
     
 }
@@ -54,7 +56,8 @@ struct ExpenseCategoryCreationForm : Encodable, Validatable {
     let iconURL: URL?
     let name: String?
     let currency: String?
-    let monthlyPlannedCents: Int?    
+    let monthlyPlannedCents: Int?
+    let description: String?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -63,6 +66,7 @@ struct ExpenseCategoryCreationForm : Encodable, Validatable {
         case basketId = "basket_id"
         case currency = "currency"
         case monthlyPlannedCents = "monthly_planned_cents"
+        case description
         case reminderAttributes = "reminder_attributes"
     }
     
@@ -90,12 +94,14 @@ struct ExpenseCategoryUpdatingForm : Encodable, Validatable {
     let iconURL: URL?
     let name: String?    
     let monthlyPlannedCents: Int?
+    let description: String?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
         case iconURL = "icon_url"
         case monthlyPlannedCents = "monthly_planned_cents"
+        case description
         case reminderAttributes = "reminder_attributes"
     }
     

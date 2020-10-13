@@ -104,6 +104,10 @@ class ExpenseCategoryViewModel {
         return waitingLoans.count > 0
     }
     
+    var description: String? {
+        return expenseCategory.description
+    }
+    
     init(expenseCategory: ExpenseCategory) {
         self.expenseCategory = expenseCategory
         waitingLoans = expenseCategory.waitingLoans.map { BorrowViewModel(borrow: $0) }

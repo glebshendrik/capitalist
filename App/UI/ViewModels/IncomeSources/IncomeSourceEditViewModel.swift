@@ -23,6 +23,7 @@ class IncomeSourceEditViewModel {
     var name: String? = nil
     var selectedCurrency: Currency? = nil
     var monthlyPlanned: String?
+    var description: String?
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
     // Computed
@@ -93,12 +94,14 @@ class IncomeSourceEditViewModel {
         reminderViewModel = ReminderViewModel(reminder: incomeSource.reminder)
         selectedCurrency = incomeSource.currency
         name = incomeSource.name
+        description = incomeSource.description
         monthlyPlanned = incomeSource.monthlyPlannedCents?.moneyDecimalString(with: incomeSource.currency)
     }
     
     func set(example: TransactionableExampleViewModel) {
         selectedIconURL = example.iconURL
         name = example.name
+        description = example.description
     }
     
     func isFormValid() -> Bool {
@@ -137,6 +140,7 @@ extension IncomeSourceEditViewModel {
                                          name: name,
                                          currency: selectedCurrencyCode,
                                          monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
+                                         description: description,
                                          reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }
@@ -156,6 +160,7 @@ extension IncomeSourceEditViewModel {
                                         iconURL: selectedIconURL,
                                         name: name,
                                         monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
+                                        description: description,
                                         reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }

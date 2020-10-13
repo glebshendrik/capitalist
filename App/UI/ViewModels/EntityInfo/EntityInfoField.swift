@@ -16,23 +16,26 @@ enum EntityInfoFieldType {
     case button
     case reminder
     case bankWarning
+    case description
     
     var identifier: String {
         switch self {
-        case .combined:
-            return "CombinedInfoTableViewCell"
-        case .icon:
-            return "IconInfoTableViewCell"
-        case .basic:
-            return "BasicInfoTableViewCell"
-        case .bool:
-            return "SwitchInfoTableViewCell"
-        case .button:
-            return "ButtonInfoTableViewCell"
-        case .reminder:
-            return "ReminderInfoTableViewCell"
-        case .bankWarning:
-            return "BankWarningInfoTableViewCell"
+            case .combined:
+                return "CombinedInfoTableViewCell"
+            case .icon:
+                return "IconInfoTableViewCell"
+            case .basic:
+                return "BasicInfoTableViewCell"
+            case .bool:
+                return "SwitchInfoTableViewCell"
+            case .button:
+                return "ButtonInfoTableViewCell"
+            case .reminder:
+                return "ReminderInfoTableViewCell"
+            case .bankWarning:
+                return "BankWarningInfoTableViewCell"
+            case .description:
+                return "DescriptionInfoTableViewCell"
         }
     }
 }

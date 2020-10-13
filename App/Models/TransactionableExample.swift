@@ -13,6 +13,7 @@ struct TransactionableExample : Decodable {
     let name: String
     let localizedKey: String
     let localizedName: String
+    let localizedDescription: String?
     let iconURL: URL?
     let transactionableType: TransactionableType
     let basketType: BasketType?
@@ -22,6 +23,7 @@ struct TransactionableExample : Decodable {
         case name
         case localizedKey = "localized_key"
         case localizedName = "localized_name"
+        case localizedDescription = "localized_description"
         case iconURL = "icon_url"
         case transactionableType = "transactionable_type"
         case basketType = "basket_type"

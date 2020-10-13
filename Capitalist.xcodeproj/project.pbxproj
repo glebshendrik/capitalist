@@ -283,6 +283,8 @@
 		FA8AD0E222C5F48B0084AD19 /* ProvidersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */; };
 		FA8AD0E422C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */; };
 		FA8AD0E622C5F5E60084AD19 /* BankConnectionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */; };
+		FA940DB32535BE5700C72F8A /* DescriptionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */; };
+		FA940DB62535BEA000C72F8A /* DescriptionInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940DB52535BEA000C72F8A /* DescriptionInfoField.swift */; };
 		FA9485CD245FD1C0005EB7B9 /* AddingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9485CC245FD1C0005EB7B9 /* AddingItemTableViewCell.swift */; };
 		FA9485CF24669F1A005EB7B9 /* ExpenseSourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9485CE24669F19005EB7B9 /* ExpenseSourcesViewController.swift */; };
 		FA9485D12466E185005EB7B9 /* ActivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9485D02466E185005EB7B9 /* ActivesViewController.swift */; };
@@ -796,6 +798,8 @@
 		FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewModel.swift; sourceTree = "<group>"; };
 		FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionsCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionsCoordinator.swift; sourceTree = "<group>"; };
+		FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionInfoTableViewCell.swift; sourceTree = "<group>"; };
+		FA940DB52535BEA000C72F8A /* DescriptionInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionInfoField.swift; sourceTree = "<group>"; };
 		FA9485CC245FD1C0005EB7B9 /* AddingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingItemTableViewCell.swift; sourceTree = "<group>"; };
 		FA9485CE24669F19005EB7B9 /* ExpenseSourcesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesViewController.swift; sourceTree = "<group>"; };
 		FA9485D02466E185005EB7B9 /* ActivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivesViewController.swift; sourceTree = "<group>"; };
@@ -1342,6 +1346,7 @@
 				FA5751BF237C15EA00912443 /* ButtonInfoField.swift */,
 				FA5751C1237C160400912443 /* ReminderInfoField.swift */,
 				FA7FC38024991B6900C1ACCD /* BankWarningInfoField.swift */,
+				FA940DB52535BEA000C72F8A /* DescriptionInfoField.swift */,
 			);
 			path = EntityInfo;
 			sourceTree = "<group>";
@@ -1380,6 +1385,7 @@
 				FA5751CC237C2D3400912443 /* ReminderInfoTableViewCell.swift */,
 				FA0A4E8E2477D58100886277 /* CombinedInfoTableViewCell.swift */,
 				FA7FC37E2499176000C1ACCD /* BankWarningInfoTableViewCell.swift */,
+				FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */,
 			);
 			path = EntityInfo;
 			sourceTree = "<group>";
@@ -2590,6 +2596,7 @@
 				FA7FC37F2499176000C1ACCD /* BankWarningInfoTableViewCell.swift in Sources */,
 				FAA5D57A238FA9CD00CC53AD /* BorrowInfoViewModel.swift in Sources */,
 				FA7EE00022CDA1940054EAD3 /* AccountViewModel.swift in Sources */,
+				FA940DB62535BEA000C72F8A /* DescriptionInfoField.swift in Sources */,
 				FA0A4E8F2477D58200886277 /* CombinedInfoTableViewCell.swift in Sources */,
 				FA0CAE2821D67B7F00805288 /* IconsViewModel.swift in Sources */,
 				FAF7528F24408AC900A0B5B7 /* CountriesViewModel.swift in Sources */,
@@ -2854,6 +2861,7 @@
 				FAD88F3721AEB8F200BE7BC1 /* UIFlowManager.swift in Sources */,
 				FA7276B9225250040086D4D1 /* UISettingExtension.swift in Sources */,
 				FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */,
+				FA940DB32535BE5700C72F8A /* DescriptionInfoTableViewCell.swift in Sources */,
 				FA28480322F19EB6003F114A /* UIFactory.swift in Sources */,
 				FA56AB9F235EEBD800E4D0E3 /* ActivesViewModel.swift in Sources */,
 				FA9485CD245FD1C0005EB7B9 /* AddingItemTableViewCell.swift in Sources */,
