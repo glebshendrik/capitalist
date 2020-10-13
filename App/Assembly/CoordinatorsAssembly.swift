@@ -20,6 +20,15 @@ class CoordinatorsAssembly: Assembly {
         
         container.autoregister(ExpenseSourcesCoordinatorProtocol.self, initializer: ExpenseSourcesCoordinator.init)
         
+        container.register(ExpenseSourcesCoordinatorProtocol.self) { r in
+            
+            return ExpenseSourcesCoordinator(userSessionManager: r.resolve(UserSessionManagerProtocol.self)!,
+                                             expenseSourcesService: r.resolve(ExpenseSourcesServiceProtocol.self)!)
+        }
+        .initCompleted { resolver, coordinator in
+            coordinator.initDependencies(with: resolver)
+        }
+        
         container.autoregister(ExpenseCategoriesCoordinatorProtocol.self, initializer: ExpenseCategoriesCoordinator.init)
         
         container.autoregister(IconsCoordinatorProtocol.self, initializer: IconsCoordinator.init)
@@ -29,9 +38,9 @@ class CoordinatorsAssembly: Assembly {
         container.autoregister(SettingsCoordinatorProtocol.self, initializer: SettingsCoordinator.init)
         
         container.autoregister(CurrenciesCoordinatorProtocol.self, initializer: CurrenciesCoordinator.init)
-                
+        
         container.autoregister(ExchangeRatesCoordinatorProtocol.self, initializer: ExchangeRatesCoordinator.init)
-                
+        
         container.autoregister(TransactionsCoordinatorProtocol.self, initializer: TransactionsCoordinator.init)
         
         container.autoregister(BankConnectionsCoordinatorProtocol.self, initializer: BankConnectionsCoordinator.init)

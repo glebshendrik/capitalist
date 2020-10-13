@@ -25,8 +25,9 @@ class NotificationsHandler: NotificationsHandlerProtocol {
         let applicationWasActive = state == UIApplication.State.active
         
         if  applicationWasActive,
-            let viewController = category?.destinationViewController(with: action),
-            navigator.isDestinationViewControllerVisible(viewController) {
+            let category = category,
+            let viewController = category.destinationViewController(with: action),
+            navigator.isDestinationViewControllerVisible(viewController, with: category) {
             
             navigator.triggerDestinationUpdate()
         }
@@ -36,7 +37,12 @@ class NotificationsHandler: NotificationsHandlerProtocol {
     }
     
     private func navigateToDestination(of category: NotificationCategory?, with action: NotificationAction?) {
-        guard let viewController = category?.destinationViewController(with: action) else { return }
-        navigator.navigate(to: viewController)
+        guard
+            let category = category,
+            let viewController = category.destinationViewController(with: action)
+        else {
+            return
+        }
+        navigator.navigate(to: viewController, with: category)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 extension MainViewController {
     func showStatistics(with filterViewModel: TransactionableFilter?) {
@@ -49,6 +50,22 @@ extension MainViewController {
     
     func showExpenseSourceInfoScreen(expenseSource: ExpenseSourceViewModel?) {
         modal(factory.expenseSourceInfoViewController(expenseSource: expenseSource))
+    }
+    
+    func showExpenseSourceInfoScreen(expenseSourceId: Int?) {
+        guard
+            let expenseSourceId = expenseSourceId
+        else {
+            return
+        }
+        messagePresenterManager.showHUD()
+        _ = firstly {
+                viewModel.loadExpenseSource(id: expenseSourceId)
+            }.ensure {
+                self.messagePresenterManager.dismissHUD()
+            }.done {
+                self.modal(self.factory.expenseSourceInfoViewController(expenseSource: $0))
+            }
     }
 }
 
@@ -219,5 +236,29 @@ extension MainViewController {
 extension MainViewController : WaitingBorrowsViewControllerDelegate {
     func didSelect(borrow: BorrowViewModel, source: TransactionSource, destination: TransactionDestination) {
         showReturnTransactionEditScreen(source: source, destination: destination, returningBorrow: borrow)
+    }
+}
+
+extension MainViewController : Navigatable {
+    var viewController: Infrastructure.ViewController {
+        return Infrastructure.ViewController.MainViewController
+    }
+    
+    var presentingCategories: [NotificationCategory] {
+        return []
+    }
+    
+    func navigate(to viewController: Infrastructure.ViewController, with category: NotificationCategory) {
+        switch category {
+            case .saltedgeNotification(let expenseSourceId):
+                guard
+                    viewController == .ExpenseSourceInfoViewController
+                else {
+                    return
+                }
+                showExpenseSourceInfoScreen(expenseSourceId: expenseSourceId)
+            default:
+                return
+        }
     }
 }

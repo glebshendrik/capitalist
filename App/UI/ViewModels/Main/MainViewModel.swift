@@ -312,9 +312,25 @@ class MainViewModel {
                 }.asVoid()
     }
     
+    func loadExpenseSource(id: Int) -> Promise<ExpenseSourceViewModel> {
+        if let expenseSource = expenseSource(by: id) {
+            return Promise.value(expenseSource)
+        }
+        return
+            firstly {
+                expenseSourcesCoordinator.show(by: id)
+            }.map {
+                ExpenseSourceViewModel(expenseSource: $0)
+            }
+    }
+    
+    func expenseSource(by id: Int) -> ExpenseSourceViewModel? {
+        return expenseSourceViewModels.first { $0.expenseSource.id == id }
+    }
+    
     func refreshExpenseSourcesConnections() -> Promise<Void> {
         let promises = expenseSourceViewModels
-            .filter { $0.accountConnected }
+            .filter { $0.connectionConnected }
             .map { refreshConnection(expenseSourceViewModel: $0) }
         guard promises.count > 0 else { return Promise.value(()) }
         return  firstly {

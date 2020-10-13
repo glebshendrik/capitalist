@@ -8,19 +8,22 @@
 
 import Foundation
 import PromiseKit
+import Swinject
 
 class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
     private let userSessionManager: UserSessionManagerProtocol
     private let expenseSourcesService: ExpenseSourcesServiceProtocol
-    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
+    var bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol!
     
     init(userSessionManager: UserSessionManagerProtocol,
-         expenseSourcesService: ExpenseSourcesServiceProtocol,
-         bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
+         expenseSourcesService: ExpenseSourcesServiceProtocol) {
         
         self.userSessionManager = userSessionManager
         self.expenseSourcesService = expenseSourcesService
-        self.bankConnectionsCoordinator = bankConnectionsCoordinator
+    }
+    
+    func initDependencies(with resolver: Swinject.Resolver) {
+        bankConnectionsCoordinator = resolver.resolve(BankConnectionsCoordinatorProtocol.self)!
     }
     
     func create(with creationForm: ExpenseSourceCreationForm) -> Promise<ExpenseSource> {

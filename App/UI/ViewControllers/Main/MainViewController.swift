@@ -13,7 +13,10 @@ import SwifterSwift
 import BetterSegmentedControl
 import EasyTipView
 
-class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
+class MainViewController : UIViewController,
+                           UIMessagePresenterManagerDependantProtocol,
+                           NavigationBarColorable,
+                           UIFactoryDependantProtocol {
     
     var navigationBarTintColor: UIColor? = UIColor.by(.black2)
     

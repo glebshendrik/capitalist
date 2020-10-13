@@ -106,6 +106,24 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
     }
 }
 
+extension ExpenseSourceInfoViewController : Navigatable, Updatable {
+    var viewController: Infrastructure.ViewController {
+        return Infrastructure.ViewController.ExpenseSourceInfoViewController
+    }
+    
+    var presentingCategories: [NotificationCategory] {
+        return [NotificationCategory.saltedgeNotification(expenseSourceId: viewModel.expenseSource?.id)]
+    }
+    
+    func navigate(to viewController: Infrastructure.ViewController, with category: NotificationCategory) {
+        
+    }
+    
+    func update() {
+        refreshData()
+    }
+}
+
 extension ExpenseSourceInfoViewController : IconsViewControllerDelegate {
     func didSelectIcon(icon: Icon) {
         viewModel.selectedIconURL = icon.url

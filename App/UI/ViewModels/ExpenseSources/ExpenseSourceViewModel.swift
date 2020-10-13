@@ -128,8 +128,12 @@ extension ExpenseSourceViewModel {
         return accountViewModel?.cardLastNumbers
     }
     
+    var connectionConnected: Bool {
+        return connection != nil
+    }
+    
     var accountConnected: Bool {
-        return accountViewModel != nil
+        return accountConnection?.account != nil
     }
     
     var connectionId: String? {
