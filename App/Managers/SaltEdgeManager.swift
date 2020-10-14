@@ -9,6 +9,7 @@
 import Foundation
 import PromiseKit
 import SaltEdge
+import SwiftyBeaver
 
 class SaltEdgeManager : SaltEdgeManagerProtocol {
     static let applicationURLString: String = "saltedge-api-three-baskets://home.local"
@@ -41,6 +42,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                     seal.fulfill(value.data.secret)
 //                    SERequestManager.shared.set(customerSecret: value.data.secret)
                 case .failure(let error):
+                    SwiftyBeaver.error(error)
                     seal.reject(error)
                 }
             }
@@ -92,6 +94,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                 case .success(let value):
                     seal.fulfill(value.data)
                 case .failure(let error):
+                    SwiftyBeaver.error(error)
                     seal.reject(error)
                 }
             }
@@ -148,6 +151,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                            type: .creating,
                                                            expiresAt: value.data.expiresAt))
                         case .failure(let error):
+                            SwiftyBeaver.error(error)
                             seal.reject(error)
                     }
                 }
@@ -189,6 +193,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                            type: .refreshing,
                                                            expiresAt: value.data.expiresAt))
                         case .failure(let error):
+                            SwiftyBeaver.error(error)
                             seal.reject(error)
                     }
                 }
@@ -234,6 +239,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                            type: .reconnecting,
                                                            expiresAt: value.data.expiresAt))
                         case .failure(let error):
+                            SwiftyBeaver.error(error)
                             seal.reject(error)
                     }
                 }
@@ -248,6 +254,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                         case .success(let value):
                             seal.fulfill(value.data)
                         case .failure(let error):
+                            SwiftyBeaver.error(error)
                             seal.reject(error)
                     }
                 }
@@ -266,6 +273,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                             }
                             seal.fulfill(())
                         case .failure(let error):
+                            SwiftyBeaver.error(error)
                             seal.reject(error)
                     }
                 }
@@ -280,6 +288,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                         case .success(let value):
                             seal.fulfill(value.data)
                         case .failure(let error):
+                            SwiftyBeaver.error(error)
                             seal.reject(error)
                     }
                 }
@@ -293,6 +302,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                 case .success(let value):
                     seal.fulfill(value.data)
                 case .failure(let error):
+                    SwiftyBeaver.error(error)
                     seal.reject(error)
                 }
             }
