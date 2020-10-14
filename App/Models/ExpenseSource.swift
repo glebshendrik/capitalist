@@ -67,6 +67,7 @@ struct ExpenseSource : Decodable {
     let prototypeKey: String?
     let cardType: CardType?
     let fetchDataFrom: Date?
+    let maxFetchInterval: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -82,7 +83,8 @@ struct ExpenseSource : Decodable {
         case accountConnection = "salt_edge_account_connection"
         case prototypeKey = "prototype_key"
         case cardType = "card_type"
-        case fetchDataFrom = "fetch_data_from"
+        case fetchDataFrom = "fetch_from_date"
+        case maxFetchInterval = "max_fetch_interval"
     }
 }
 
