@@ -386,8 +386,6 @@ extension ApplicationRouter {
     }
     
     func showMainViewController() {
-        SwiftyBeaver.error(APIRequestError.methodNotAllowed)
-        SwiftyBeaver.info("Test info message")
         show(.MainViewController) { [weak self] in
             guard let self = self else { return }
             self.showPasscodeScreen()
