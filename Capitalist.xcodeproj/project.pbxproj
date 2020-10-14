@@ -154,7 +154,6 @@
 		FA5751CB237C2C8A00912443 /* ButtonInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5751CA237C2C8A00912443 /* ButtonInfoTableViewCell.swift */; };
 		FA5751CD237C2D3400912443 /* ReminderInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5751CC237C2D3400912443 /* ReminderInfoTableViewCell.swift */; };
 		FA5751CF237C3C3300912443 /* IncomeSourceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5751CE237C3C3300912443 /* IncomeSourceInfoViewController.swift */; };
-		FA6017C2241B373100B15496 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA6017C1241B373100B15496 /* GoogleService-Info.plist */; };
 		FA6270A321C7A87300CC0269 /* IncomeSourceEditTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */; };
 		FA630C202292AC5D00242AB3 /* Infrastructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA630C1F2292AC5D00242AB3 /* Infrastructure.swift */; };
 		FA630C222292AD9D00242AB3 /* ViewControllersRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA630C212292AD9D00242AB3 /* ViewControllersRegistration.swift */; };
@@ -285,6 +284,7 @@
 		FA8AD0E622C5F5E60084AD19 /* BankConnectionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */; };
 		FA940DB32535BE5700C72F8A /* DescriptionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */; };
 		FA940DB62535BEA000C72F8A /* DescriptionInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940DB52535BEA000C72F8A /* DescriptionInfoField.swift */; };
+		FA940DBA2536D39C00C72F8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA940DB92536D39C00C72F8A /* GoogleService-Info.plist */; };
 		FA9485CD245FD1C0005EB7B9 /* AddingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9485CC245FD1C0005EB7B9 /* AddingItemTableViewCell.swift */; };
 		FA9485CF24669F1A005EB7B9 /* ExpenseSourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9485CE24669F19005EB7B9 /* ExpenseSourcesViewController.swift */; };
 		FA9485D12466E185005EB7B9 /* ActivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9485D02466E185005EB7B9 /* ActivesViewController.swift */; };
@@ -668,7 +668,6 @@
 		FA5751CA237C2C8A00912443 /* ButtonInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FA5751CC237C2D3400912443 /* ReminderInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FA5751CE237C3C3300912443 /* IncomeSourceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceInfoViewController.swift; sourceTree = "<group>"; };
-		FA6017C1241B373100B15496 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA6270A221C7A87300CC0269 /* IncomeSourceEditTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSourceEditTableController.swift; sourceTree = "<group>"; };
 		FA630C1F2292AC5D00242AB3 /* Infrastructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Infrastructure.swift; sourceTree = "<group>"; };
 		FA630C212292AD9D00242AB3 /* ViewControllersRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllersRegistration.swift; sourceTree = "<group>"; };
@@ -800,6 +799,7 @@
 		FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionsCoordinator.swift; sourceTree = "<group>"; };
 		FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FA940DB52535BEA000C72F8A /* DescriptionInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionInfoField.swift; sourceTree = "<group>"; };
+		FA940DB92536D39C00C72F8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA9485CC245FD1C0005EB7B9 /* AddingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingItemTableViewCell.swift; sourceTree = "<group>"; };
 		FA9485CE24669F19005EB7B9 /* ExpenseSourcesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesViewController.swift; sourceTree = "<group>"; };
 		FA9485D02466E185005EB7B9 /* ActivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivesViewController.swift; sourceTree = "<group>"; };
@@ -1873,8 +1873,8 @@
 				FAE4497E229687C300E3DD27 /* Localization */,
 				FAD88EF921AEA86E00BE7BC1 /* AppDelegate.swift */,
 				FAD88F0021AEA87300BE7BC1 /* Assets.xcassets */,
+				FA940DB92536D39C00C72F8A /* GoogleService-Info.plist */,
 				FAD88F0521AEA87300BE7BC1 /* Info.plist */,
-				FA6017C1241B373100B15496 /* GoogleService-Info.plist */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -2409,7 +2409,6 @@
 				FAF31D03240371D200D4CFB3 /* Statistics.storyboard in Resources */,
 				FAF3BC84241A4BCD007F46FE /* launch-animation.gif in Resources */,
 				FA26813F21B178D300FADED1 /* Rubik-Bold.ttf in Resources */,
-				FA6017C2241B373100B15496 /* GoogleService-Info.plist in Resources */,
 				FAF34BD02512E2D400430585 /* start-animation.json in Resources */,
 				FAD88F0421AEA87300BE7BC1 /* Launch.storyboard in Resources */,
 				FAF31CBB2403705C00D4CFB3 /* Common.storyboard in Resources */,
@@ -2451,6 +2450,7 @@
 				FAAC99B323B31A59009ADB84 /* Roboto-Regular.ttf in Resources */,
 				FAF31CC92403709000D4CFB3 /* ExpenseCategories.storyboard in Resources */,
 				FAAC99B723B31A59009ADB84 /* Roboto-LightItalic.ttf in Resources */,
+				FA940DBA2536D39C00C72F8A /* GoogleService-Info.plist in Resources */,
 				FA0A4E87246D4BF700886277 /* TransactionEditTitleView.xib in Resources */,
 				FAF31CC22403707500D4CFB3 /* Credits.storyboard in Resources */,
 			);

@@ -24,8 +24,7 @@ class AnalyticsManager : AnalyticsManagerProtocol {
         Crashlytics.crashlytics().setUserID(userId)
         Analytics.setUserID(userId)
         AppEvents.userID = userId
-        MRMyTracker.trackerParams().customUserId = userId
-        
+        MRMyTracker.trackerParams().customUserId = userId        
     }
     
     func track(event: String, parameters: [String : Any]?) {

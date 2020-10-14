@@ -386,6 +386,7 @@ extension ApplicationRouter {
     }
     
     func showMainViewController() {
+        Crashlytics.crashlytics().log("showMainViewController")
         show(.MainViewController) { [weak self] in
             guard let self = self else { return }
             self.showPasscodeScreen()

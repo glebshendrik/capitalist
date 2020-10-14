@@ -14,8 +14,9 @@
 
 #import <Foundation/Foundation.h>
 
-#include "FIRCLSProfiling.h"
-#include "FIRCrashlytics.h"
+#include "Crashlytics/Crashlytics/Helpers/FIRCLSProfiling.h"
+#include "Crashlytics/Crashlytics/Public/FirebaseCrashlytics/FIRCrashlytics.h"
+#include "Crashlytics/Crashlytics/Settings/Models/FIRCLSApplicationIdentifierModel.h"
 
 @class FBLPromise<T>;
 
@@ -25,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class FIRCLSFileManager;
 @class FIRCLSInternalReport;
 @class FIRCLSSettings;
+@class GDTCORTransport;
 @class FIRInstallations;
 @protocol FIRAnalyticsInterop;
 
@@ -35,7 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
                           analytics:(nullable id<FIRAnalyticsInterop>)analytics
                         googleAppID:(NSString *)googleAppID
                         dataArbiter:(FIRCLSDataCollectionArbiter *)dataArbiter
-    NS_DESIGNATED_INITIALIZER;
+                    googleTransport:(GDTCORTransport *)googleTransport
+                         appIDModel:(FIRCLSApplicationIdentifierModel *)appIDModel
+                           settings:(FIRCLSSettings *)settings NS_DESIGNATED_INITIALIZER;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
