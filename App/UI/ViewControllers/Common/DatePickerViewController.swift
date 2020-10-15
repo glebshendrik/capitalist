@@ -133,6 +133,9 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
     }
     
     private func setupUI() {
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
         configureBackground()
         configureInputTextField()
     }

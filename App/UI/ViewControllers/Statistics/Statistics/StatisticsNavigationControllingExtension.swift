@@ -139,6 +139,7 @@ extension StatisticsViewController : DatePeriodSelectionViewControllerDelegate {
         guard let period = period else { return }
         viewModel.updatePeriods(dateRangeFilter: period)
         clearTransactions()
+        shouldScrollTop = true
         loadData()
 //        viewModel.updatePresentationData()
 //        updateUI()

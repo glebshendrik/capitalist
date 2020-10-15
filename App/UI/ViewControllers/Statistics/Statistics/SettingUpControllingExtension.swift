@@ -29,26 +29,29 @@ extension StatisticsViewController {
             clearTransactions()
         }
         setLoading()
-        _ = firstly {
-                viewModel.loadTransactions()
-            }.catch { _ in
-                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
-            }.finally {
-                self.updateUI()
-                self.stopPullToRefresh()
-            }
+        firstly {
+            viewModel.loadTransactions()
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
+        }.finally {
+            self.updateUI()
+            self.stopPullToRefresh()
+        }
     }
     
     
     @objc func refreshData() {
+        let offset = shouldScrollTop ? .zero : tableView.contentOffset
         setLoading()
-        _ = firstly {
-                viewModel.loadData()
-            }.catch { _ in
-                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
-            }.finally {
-                self.updateUI()
-            }
+        firstly {
+            viewModel.loadData()
+        }.catch { _ in
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
+        }.finally {
+            self.updateUI()
+            self.tableView.setContentOffset(offset, animated: false)
+            self.shouldScrollTop = false
+        }
     }
     
     func removeTransaction(transactionViewModel: TransactionViewModel) {
@@ -108,7 +111,7 @@ extension StatisticsViewController {
         setupPullToRefresh()
         setupNotifications()
     }
-        
+    
     private func setupNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: MainViewController.finantialDataInvalidatedNotification, object: nil)
     }
@@ -137,7 +140,7 @@ extension StatisticsViewController {
     }
     
     @objc func didTapFiltersButton(_ sender: Any) {
-//        showSubscription()
+        //        showSubscription()
         if viewModel.canShowFilters {
             showFilters()
         }
@@ -222,7 +225,7 @@ extension StatisticsViewController : EasyTipViewDelegate {
                           delegate: self)
         UIFlowManager.set(point: tutorial.point, reached: true)
     }
-            
+    
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {        
         if tipView == tutorialTip {
             setMainOverlay(hidden: true)

@@ -27,6 +27,8 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
     @IBOutlet weak var filtersTutorialAnchor: UIView!
     weak var tutorialTip: EasyTipView?
     
+    var shouldScrollTop: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

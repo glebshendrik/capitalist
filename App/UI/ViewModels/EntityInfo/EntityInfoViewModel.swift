@@ -27,7 +27,7 @@ class EntityInfoViewModel {
     var transactionable: Transactionable? { return nil }
 
     var transactionViewModels: [TransactionViewModel] = []
-    var transactionsBatchSize: Int = 10
+    var transactionsBatchSize: Int = 100
     
     private var sections: [EntityInfoSection] = []
     private var transactionsSections: [EntityInfoTransactionsSection] = []

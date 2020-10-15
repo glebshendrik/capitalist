@@ -13,11 +13,12 @@ import SwiftyBeaver
 import SwipeCellKit
 
 class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, UIMessagePresenterManagerDependantProtocol {
-        
+    
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var factory: UIFactoryProtocol!
     
     @IBOutlet weak var tableView: UITableView!
+    var tableOffset: CGPoint = CGPoint.zero
     
     var viewModel: EntityInfoViewModel!
     
@@ -30,7 +31,7 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
         setupUI()
         refreshData()
     }
-          
+    
     func setupUI() {
         viewModel.updatePresentationData()
         setupNavigationBar()
@@ -44,7 +45,7 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
         navigationItem.rightBarButtonItem?.tintColor = UIColor.by(.blue1)
         updateNavigationBarUI()
     }
-        
+    
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -74,13 +75,14 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
     
     func updateUI() {
         tableView.reloadData()
+        tableView.setContentOffset(tableOffset, animated: false)
         updateNavigationBarUI()
     }
     
     func updateNavigationBarUI() {
         navigationItem.title = viewModel.title
     }
-        
+    
     @objc func didTapEditButton(sender: Any) {
         entityInfoNavigationController?.showEditScreen()
     }
@@ -93,26 +95,29 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
 extension EntityInfoViewController {
     @objc func refreshData() {
         guard !viewModel.isUpdatingData else { return }
+        tableOffset = tableView.contentOffset
         tableView.es.startPullToRefresh()
     }
     
     private func updateData() {
         setLoading()
         firstly {
-                viewModel.updateData()
-            }.catch { e in                
-                SwiftyBeaver.error(e)
-                if case APIRequestError.notFound = e {                    
-                    self.closeButtonHandler()
-                }
-                else {
-                    self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка обновления данных", comment: "Ошибка обновления данных"), theme: .error)
-                }
-            }.finally {
-                self.stopLoading()
-                self.updateUI()
-                self.didUpdateData()
+            viewModel.updateData()
+        }.catch { e in
+            SwiftyBeaver.error(e)
+            if case APIRequestError.notFound = e {
+                self.closeButtonHandler()
             }
+            else {
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка обновления данных",
+                                                                                   comment: "Ошибка обновления данных"),
+                                                  theme: .error)
+            }
+        }.finally {
+            self.stopLoading()
+            self.updateUI()
+            self.didUpdateData()
+        }
     }
     
     func didUpdateData() {
@@ -123,21 +128,21 @@ extension EntityInfoViewController {
         let lastTransaction = viewModel.lastTransaction
         
         firstly {
-                viewModel.loadMoreTransactions()
-            }.catch{ _ in
-                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
-            }.finally {                
-                self.tableView.reloadData()
-                self.tableView.layoutIfNeeded()
-                
-                if let indexPath = self.viewModel.indexPath(for: lastTransaction) {
-                    self.tableView.scrollToRow(at: indexPath, at: .none, animated: false)
-                }
-                self.tableView.es.stopLoadingMore()
-                if !self.viewModel.hasMoreData {
-                    self.tableView.es.noticeNoMoreData()
-                }
+            viewModel.loadMoreTransactions()
+        }.catch{ _ in
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
+        }.finally {
+            self.tableView.reloadData()
+            self.tableView.layoutIfNeeded()
+            
+            if let indexPath = self.viewModel.indexPath(for: lastTransaction) {
+                self.tableView.scrollToRow(at: indexPath, at: .none, animated: false)
             }
+            self.tableView.es.stopLoadingMore()
+            if !self.viewModel.hasMoreData {
+                self.tableView.es.noticeNoMoreData()
+            }
+        }
     }
     
     func saveData() {
@@ -180,16 +185,16 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch viewModel.section(at: indexPath.section) {
-        case let entityInfoSection as EntityInfoFieldsSection:
-            return self.tableView(tableView, section: entityInfoSection, cellForRowAt: indexPath)
-        case is EntityInfoTransactionsLoadingSection:
-            return self.tableView(tableView, transactionsLoadingCellForRowAt: indexPath)
-        case is EntityInfoTransactionsHeaderSection:
-            return self.tableView(tableView, transactionsHeaderCellForRowAt: indexPath)
-        case let transactionsSection as EntityInfoTransactionsSection:            
-            return self.tableView(tableView, section: transactionsSection, cellForRowAt: indexPath)
-        default:
-            return UITableViewCell()
+            case let entityInfoSection as EntityInfoFieldsSection:
+                return self.tableView(tableView, section: entityInfoSection, cellForRowAt: indexPath)
+            case is EntityInfoTransactionsLoadingSection:
+                return self.tableView(tableView, transactionsLoadingCellForRowAt: indexPath)
+            case is EntityInfoTransactionsHeaderSection:
+                return self.tableView(tableView, transactionsHeaderCellForRowAt: indexPath)
+            case let transactionsSection as EntityInfoTransactionsSection:
+                return self.tableView(tableView, section: transactionsSection, cellForRowAt: indexPath)
+            default:
+                return UITableViewCell()
         }
     }
     
@@ -204,7 +209,7 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, transactionsLoadingCellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionsLoadingTableViewCell") as? TransactionsLoadingTableViewCell else { return UITableViewCell() }
-
+        
         cell.loaderImageView.showLoader()
         return cell
     }
@@ -214,9 +219,9 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, section: EntityInfoTransactionsSection, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell") as? TransactionTableViewCell,
-                let transactionViewModel = section.transactionViewModel(at: indexPath.row) else { return UITableViewCell() }
-                   
+        guard  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell") as? TransactionTableViewCell,
+               let transactionViewModel = section.transactionViewModel(at: indexPath.row) else { return UITableViewCell() }
+        
         cell.viewModel = transactionViewModel
         cell.delegate = self
         return cell
@@ -224,7 +229,7 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard   let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TransactionsSectionHeaderView.reuseIdentifier) as? TransactionsSectionHeaderView,
-            let section = viewModel.section(at: section) as? EntityInfoTransactionsSection else { return nil }
+                let section = viewModel.section(at: section) as? EntityInfoTransactionsSection else { return nil }
         
         headerView.title = section.title
         headerView.contentView.backgroundColor = UIColor.by(.white40)
@@ -237,8 +242,8 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard   let section = viewModel.section(at: section),
-            section.isSectionHeaderVisible,
-            section is EntityInfoTransactionsSection else { return CGFloat.leastNonzeroMagnitude }
+                section.isSectionHeaderVisible,
+                section is EntityInfoTransactionsSection else { return CGFloat.leastNonzeroMagnitude }
         
         return TransactionsSectionHeaderView.requiredHeight
     }
@@ -249,28 +254,28 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
         guard let section = viewModel.section(at: indexPath.section) else { return }
         
         switch section {
-        case let entityFieldsSection as EntityInfoFieldsSection:
-            if let reminderField = entityFieldsSection.infoField(at: indexPath.row) as? ReminderInfoField {
-                entityInfoNavigationController?.didTapReminderButton(field: reminderField)
-            }
-            else if let basicField = entityFieldsSection.infoField(at: indexPath.row) as? BasicInfoField {
-                entityInfoNavigationController?.didTapInfoField(field: basicField)
-            }
-            return
-        case let transactionsSection as EntityInfoTransactionsSection:
-            guard let transactionViewModel = transactionsSection.transactionViewModel(at: indexPath.row) else { return }
-            
-            showEdit(transaction: transactionViewModel)
-            return
-        default:
-            return
+            case let entityFieldsSection as EntityInfoFieldsSection:
+                if let reminderField = entityFieldsSection.infoField(at: indexPath.row) as? ReminderInfoField {
+                    entityInfoNavigationController?.didTapReminderButton(field: reminderField)
+                }
+                else if let basicField = entityFieldsSection.infoField(at: indexPath.row) as? BasicInfoField {
+                    entityInfoNavigationController?.didTapInfoField(field: basicField)
+                }
+                return
+            case let transactionsSection as EntityInfoTransactionsSection:
+                guard let transactionViewModel = transactionsSection.transactionViewModel(at: indexPath.row) else { return }
+                
+                showEdit(transaction: transactionViewModel)
+                return
+            default:
+                return
         }
     }
 }
 
 extension EntityInfoViewController : SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-       
+        
         guard   orientation == .right,
                 let section = viewModel.section(at: indexPath.section) as? EntityInfoTransactionsSection,
                 let transactionViewModel = section.transactionViewModel(at: indexPath.row)
@@ -290,7 +295,7 @@ extension EntityInfoViewController : SwipeTableViewCellDelegate {
             deleteAction.hidesWhenSelected = true
             actions.append(deleteAction)
         }
-                
+        
         if transactionViewModel.canDuplicate {
             let duplicateAction = SwipeAction(style: .default, title: NSLocalizedString("Дубликат", comment: "")) { action, indexPath in
                 let transactionViewModel = section.transactionViewModel(at: indexPath.row)
@@ -308,24 +313,24 @@ extension EntityInfoViewController : SwipeTableViewCellDelegate {
     func didTapDeleteButton(transactionViewModel: TransactionViewModel?) {
         guard   let transactionViewModel = transactionViewModel,
                 transactionViewModel.canDelete else { return }
-                        
+        
         let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
                                                       style: .destructive,
                                                       handler: { _ in
                                                         self.removeTransaction(transactionViewModel: transactionViewModel)
-                                        })]
+                                                      })]
         sheet(title: transactionViewModel.removeTitle, actions: actions)
     }
     
     func didTapDuplicateButton(transactionViewModel: TransactionViewModel?) {
         guard   let transactionViewModel = transactionViewModel,
                 transactionViewModel.canDuplicate else { return }
-                        
+        
         let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Дубликат", comment: ""),
                                                       style: .destructive,
                                                       handler: { _ in
                                                         self.duplicateTransaction(transactionViewModel: transactionViewModel)
-                                        })]
+                                                      })]
         sheet(title: NSLocalizedString("Пометить транзакцию как дубликат", comment: ""), actions: actions)
     }
 }
@@ -346,11 +351,11 @@ extension EntityInfoViewController {
     private func showTransactionEditScreen(transactionId: Int, transactionType: TransactionType?) {
         modal(factory.transactionEditViewController(delegate: self, transactionId: transactionId, transactionType: transactionType))
     }
-        
+    
     func showBorrowInfoScreen(borrowId: Int, borrowType: BorrowType) {
         modal(factory.borrowInfoViewController(borrowId: borrowId, borrowType: borrowType, borrow: nil))
     }
-        
+    
     private func showCreditInfoScreen(creditId: Int) {
         modal(factory.creditInfoViewController(creditId: creditId, credit: nil))
     }
@@ -363,49 +368,49 @@ extension EntityInfoViewController : TransactionEditViewControllerDelegate, Borr
     }
     
     func didCreateCredit() {
-
+        
     }
-
+    
     func didCreateDebt() {
-
+        
     }
-
+    
     func didCreateLoan() {
-
+        
     }
-
+    
     func didUpdateCredit() {
         postFinantialDataUpdated()
     }
-
+    
     func didRemoveCredit() {
         postFinantialDataUpdated()
     }
-
+    
     func didUpdateDebt() {
         postFinantialDataUpdated()
     }
-
+    
     func didUpdateLoan() {
         postFinantialDataUpdated()
     }
-
+    
     func didRemoveDebt() {
         postFinantialDataUpdated()
     }
-
+    
     func didRemoveLoan() {
         postFinantialDataUpdated()
     }
-
+    
     func didCreateTransaction(id: Int, type: TransactionType) {
         postFinantialDataUpdated()
     }
-
+    
     func didUpdateTransaction(id: Int, type: TransactionType) {
         postFinantialDataUpdated()
     }
-
+    
     func didRemoveTransaction(id: Int, type: TransactionType) {
         postFinantialDataUpdated()
     }
@@ -413,7 +418,7 @@ extension EntityInfoViewController : TransactionEditViewControllerDelegate, Borr
     func shouldShowCreditEditScreen(destination: TransactionDestination) {
         showCreditEditScreen(destination: destination)
     }
-
+    
     func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
         showBorrowEditScreen(type: type, source: source, destination: destination)
     }
