@@ -65,3 +65,11 @@ extension ExpenseCategoryEditViewController {
         updateCurrencyUI()
     }
 }
+
+extension ExpenseCategoryEditViewController : TransactionableExamplesViewControllerDelegate {
+    func didSelect(exampleViewModel: TransactionableExampleViewModel) {
+        viewModel.set(example: exampleViewModel)
+        updateUI()
+    }
+    
+}

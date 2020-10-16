@@ -57,17 +57,20 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     func loadData() {
         operationStarted()
         
-        _ = firstly {
+        firstly {
                 loadDataPromise()
-            }.catch { _ in
-                if let loadErrorMessage = self.loadErrorMessage {
-                    self.messagePresenterManager.show(navBarMessage: loadErrorMessage, theme: .error)
-                }
+        }.done {
+            self.didLoadData()
+        }
+        .catch { _ in
+            if let loadErrorMessage = self.loadErrorMessage {
+                self.messagePresenterManager.show(navBarMessage: loadErrorMessage, theme: .error)
             }
-            .finally {
-                self.updateUI()
-                self.operationFinished()
-            }
+        }
+        .finally {
+            self.updateUI()
+            self.operationFinished()
+        }
     }
     
     func save() {
@@ -201,6 +204,10 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     
     func removePromise() -> Promise<Void> {
         return Promise.value(())
+    }
+    
+    func didLoadData() {
+        
     }
     
     func didSave() {

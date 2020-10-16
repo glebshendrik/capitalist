@@ -47,7 +47,7 @@ struct APIRouteQueryParameters {
             return [ "no_borrows" : noBorrows.string ]
         case .indexUserExpenseCategories(_, let noBorrows):
             return [ "no_borrows" : noBorrows.string ]
-        case .indexTransactionableExamples(let transactionableType, let basketType):
+        case .indexTransactionableExamples(let transactionableType, let basketType, let isUsed):
             params["transactionable_type"] = transactionableType.rawValue
             if let basketType = basketType {
                 params["basket_type"] = basketType.rawValue
@@ -55,6 +55,7 @@ struct APIRouteQueryParameters {
             if let country = Locale.current.regionCode {
                 params["country"] = country
             }
+            params["is_used"] = isUsed.string
             return params
         case .indexTransactions(_, let type, let transactionableId, let transactionableType, let creditId, let borrowId, let borrowType, let count, let lastGotAt, let fromGotAt, let toGotAt):
             if let type = type {

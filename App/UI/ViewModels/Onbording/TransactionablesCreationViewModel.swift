@@ -255,7 +255,7 @@ class TransactionablesCreationViewModel {
             
     private func loadExamples() -> Promise<[TransactionableExampleViewModel]> {
         return  firstly {
-                    transactionableExamplesCoordinator.indexBy(transactionableType, basketType: basketType)
+                    transactionableExamplesCoordinator.indexBy(transactionableType, basketType: basketType, isUsed: false)
                 }.map { examples in
                     examples.map { TransactionableExampleViewModel(example: $0) }
                 }

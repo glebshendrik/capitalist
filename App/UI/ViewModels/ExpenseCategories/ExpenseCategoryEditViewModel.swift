@@ -20,6 +20,7 @@ enum ExpenseCategoryUpdatingError : Error {
 class ExpenseCategoryEditViewModel {
     private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
+    private let transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol
     
     public private(set) var expenseCategory: ExpenseCategory? = nil
     public private(set) var basketType: BasketType = .joy
@@ -83,10 +84,22 @@ class ExpenseCategoryEditViewModel {
         return basketType == .joy
     }
     
+    private var numberOfUnusedExamples: Int = 0
+    
+    var needToShowExamples: Bool {
+        return isNew && numberOfUnusedExamples > 0
+    }
+    
     init(expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol,
+         transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {
         self.expenseCategoriesCoordinator = expenseCategoriesCoordinator
         self.accountCoordinator = accountCoordinator
+        self.transactionableExamplesCoordinator = transactionableExamplesCoordinator
+    }
+    
+    func loadData() -> Promise<Void> {
+        return when(fulfilled: loadDefaultCurrency(), loadExamples())
     }
     
     func loadDefaultCurrency() -> Promise<Void> {
@@ -95,6 +108,15 @@ class ExpenseCategoryEditViewModel {
                 }.done { user in
                     self.selectedCurrency = user.currency
                 }
+    }
+    
+    func loadExamples() -> Promise<Void> {
+        return
+            firstly {
+                transactionableExamplesCoordinator.indexBy(.expenseCategory, basketType: basketType, isUsed: false)
+            }.get { examples in
+                self.numberOfUnusedExamples = examples.count
+            }.asVoid()
     }
     
     func set(expenseCategory: ExpenseCategory) {

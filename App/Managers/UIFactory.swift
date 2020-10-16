@@ -516,4 +516,18 @@ class UIFactory : UIFactoryProtocol {
         experimentalBankFeatureViewController.delegate = delegate
         return UINavigationController(rootViewController: experimentalBankFeatureViewController)
     }
+    
+    func transactionableExamplesViewController(delegate: TransactionableExamplesViewControllerDelegate,
+                                               transactionableType: TransactionableType,
+                                               isUsed: Bool) -> TransactionableExamplesViewController? {
+        guard
+            let transactionableExamplesViewController = router.viewController(.TransactionableExamplesViewController) as? TransactionableExamplesViewController
+        else {
+            return nil
+        }
+        transactionableExamplesViewController.delegate = delegate
+        transactionableExamplesViewController.viewModel.transactionableType = transactionableType
+        transactionableExamplesViewController.viewModel.isUsed = isUsed
+        return transactionableExamplesViewController
+    }
 }

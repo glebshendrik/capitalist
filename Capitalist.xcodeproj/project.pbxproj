@@ -285,6 +285,8 @@
 		FA940DB32535BE5700C72F8A /* DescriptionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */; };
 		FA940DB62535BEA000C72F8A /* DescriptionInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940DB52535BEA000C72F8A /* DescriptionInfoField.swift */; };
 		FA940DBA2536D39C00C72F8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA940DB92536D39C00C72F8A /* GoogleService-Info.plist */; };
+		FA940E492538594100C72F8A /* TransactionableExamplesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940E482538594100C72F8A /* TransactionableExamplesViewModel.swift */; };
+		FA940E4C25385F9200C72F8A /* TransactionableExamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940E4B25385F9200C72F8A /* TransactionableExamplesViewController.swift */; };
 		FA9485CD245FD1C0005EB7B9 /* AddingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9485CC245FD1C0005EB7B9 /* AddingItemTableViewCell.swift */; };
 		FA9485CF24669F1A005EB7B9 /* ExpenseSourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9485CE24669F19005EB7B9 /* ExpenseSourcesViewController.swift */; };
 		FA9485D12466E185005EB7B9 /* ActivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9485D02466E185005EB7B9 /* ActivesViewController.swift */; };
@@ -800,6 +802,8 @@
 		FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FA940DB52535BEA000C72F8A /* DescriptionInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionInfoField.swift; sourceTree = "<group>"; };
 		FA940DB92536D39C00C72F8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FA940E482538594100C72F8A /* TransactionableExamplesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExamplesViewModel.swift; sourceTree = "<group>"; };
+		FA940E4B25385F9200C72F8A /* TransactionableExamplesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExamplesViewController.swift; sourceTree = "<group>"; };
 		FA9485CC245FD1C0005EB7B9 /* AddingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingItemTableViewCell.swift; sourceTree = "<group>"; };
 		FA9485CE24669F19005EB7B9 /* ExpenseSourcesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSourcesViewController.swift; sourceTree = "<group>"; };
 		FA9485D02466E185005EB7B9 /* ActivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivesViewController.swift; sourceTree = "<group>"; };
@@ -1397,6 +1401,7 @@
 				FA66FB6C22204B3100708C71 /* Transactionable.swift */,
 				FAF7528E24408AC900A0B5B7 /* CountriesViewModel.swift */,
 				FAF7529024408B0100A0B5B7 /* CountryViewModel.swift */,
+				FA940E482538594100C72F8A /* TransactionableExamplesViewModel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1415,6 +1420,7 @@
 				FA846D4823E1F50400DA5738 /* PasscodeViewController.swift */,
 				FAF7528C24408A4000A0B5B7 /* CountriesViewController.swift */,
 				FA0A4E8C2475095B00886277 /* AppInfoViewController.swift */,
+				FA940E4B25385F9200C72F8A /* TransactionableExamplesViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2806,6 +2812,7 @@
 				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
 				FA5751BC237C15BD00912443 /* BasicInfoField.swift in Sources */,
 				FABE54EA233CFFA600DF2B70 /* CreditsViewController.swift in Sources */,
+				FA940E4C25385F9200C72F8A /* TransactionableExamplesViewController.swift in Sources */,
 				FA7EDFFC22CCD74D0054EAD3 /* ConnectionsService.swift in Sources */,
 				FAA5D570238E5B7700CC53AD /* ExpenseCategoryInfoViewController.swift in Sources */,
 				FA9485D3246A6500005EB7B9 /* CardTypesViewController.swift in Sources */,
@@ -2852,6 +2859,7 @@
 				FA0570FB232AAE9B002B4706 /* BorrowEditTableController.swift in Sources */,
 				FA2847FF22F19591003F114A /* FormTransactionsDependableEditViewController.swift in Sources */,
 				FAC3B9CD21C0F7670015A12F /* IncomeSourcesCoordinator.swift in Sources */,
+				FA940E492538594100C72F8A /* TransactionableExamplesViewModel.swift in Sources */,
 				FA717707226EF8CF008ADF94 /* ExportManager.swift in Sources */,
 				FAA9127D220D249100F2C251 /* SettingsCoordinatorProtocol.swift in Sources */,
 				FA7276AF22524B190086D4D1 /* IncomeSourceEditDelegateExtension.swift in Sources */,

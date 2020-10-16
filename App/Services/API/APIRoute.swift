@@ -166,7 +166,9 @@ enum APIRoute: URLRequestConvertible {
     case updateConnection(form: ConnectionUpdatingForm)
     
     // TransactionableExamples
-    case indexTransactionableExamples(transactionableType: TransactionableType, basketType: BasketType?)
+    case indexTransactionableExamples(transactionableType: TransactionableType,
+                                      basketType: BasketType?,
+                                      isUsed: Bool)
     
     var method: HTTPMethod {
         return APIRouteMethod.method(for: self)

@@ -161,4 +161,8 @@ protocol UIFactoryProtocol {
     func subscriptionViewController(requiredPlans: [SubscriptionPlan]) -> SubscriptionViewController?
     
     func experimentalBankFeatureViewController(delegate: ExperimentalBankFeatureViewControllerDelegate) -> UINavigationController?
+    
+    func transactionableExamplesViewController(delegate: TransactionableExamplesViewControllerDelegate,
+                                               transactionableType: TransactionableType,
+                                               isUsed: Bool) -> TransactionableExamplesViewController?
 }

@@ -16,8 +16,8 @@ class TransactionableExamplesCoordinator : TransactionableExamplesCoordinatorPro
         self.transactionableExamplesService = transactionableExamplesService
     }
     
-    func indexBy(_ transactioableType: TransactionableType, basketType: BasketType?) -> Promise<[TransactionableExample]> {
-        return transactionableExamplesService.indexBy(transactioableType, basketType: basketType)
+    func indexBy(_ transactioableType: TransactionableType, basketType: BasketType?, isUsed: Bool) -> Promise<[TransactionableExample]> {
+        return transactionableExamplesService.indexBy(transactioableType, basketType: basketType, isUsed: isUsed)
     }
 }
 

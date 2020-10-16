@@ -304,5 +304,10 @@ extension ApplicationAssembly {
         container.registerForSkrudzhStoryboard(ExperimentalBankFeatureViewController.self) { (r, c) in
             
         }
+        
+        // TransactionableExamplesViewController
+        container.registerForSkrudzhStoryboard(TransactionableExamplesViewController.self) { (r, c) in
+            c.viewModel = r.resolve(TransactionableExamplesViewModel.self)
+        }
     }
 }
