@@ -77,6 +77,7 @@ class IncomeSourceEditViewModel : TransactionableExamplesDependantProtocol {
     
     var numberOfUnusedExamples: Int = 0
     var basketType: BasketType = .joy
+    var example: TransactionableExampleViewModel? = nil
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
@@ -109,6 +110,7 @@ class IncomeSourceEditViewModel : TransactionableExamplesDependantProtocol {
     }
     
     func set(example: TransactionableExampleViewModel) {
+        self.example = example
         selectedIconURL = example.iconURL
         name = example.name
         description = example.description

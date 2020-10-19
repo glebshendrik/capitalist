@@ -63,13 +63,14 @@ protocol TransactionableExamplesDependantProtocol : class {
     var needToShowExamples: Bool { get }
     var basketType: BasketType { get }
     var transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol { get }
+    var example: TransactionableExampleViewModel? { get set }
     
     func loadExamples() -> Promise<Void>
 }
 
 extension TransactionableExamplesDependantProtocol {
     var needToShowExamples: Bool {
-        return isNew && numberOfUnusedExamples > 0
+        return isNew && numberOfUnusedExamples > 0 && example == nil
     }
     
     func loadExamples() -> Promise<Void> {

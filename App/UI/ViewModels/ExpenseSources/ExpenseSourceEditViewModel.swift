@@ -124,6 +124,8 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     
     var basketType: BasketType = .joy
     
+    var example: TransactionableExampleViewModel? = nil
+    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {
@@ -166,6 +168,7 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     }
     
     func set(example: TransactionableExampleViewModel) {
+        self.example = example
         selectedIconURL = example.iconURL
         name = example.name
     }

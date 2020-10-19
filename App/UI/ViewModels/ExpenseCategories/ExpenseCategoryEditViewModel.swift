@@ -86,6 +86,8 @@ class ExpenseCategoryEditViewModel : TransactionableExamplesDependantProtocol {
     
     var numberOfUnusedExamples: Int = 0
         
+    var example: TransactionableExampleViewModel? = nil
+    
     init(expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {
@@ -118,6 +120,7 @@ class ExpenseCategoryEditViewModel : TransactionableExamplesDependantProtocol {
     }
     
     func set(example: TransactionableExampleViewModel) {
+        self.example = example
         selectedIconURL = example.iconURL
         name = example.name
         description = example.description
