@@ -63,3 +63,10 @@ extension IncomeSourceEditViewController : ReminderEditViewControllerDelegate {
         updateReminderUI()
     }
 }
+
+extension IncomeSourceEditViewController : TransactionableExamplesViewControllerDelegate {
+    func didSelect(exampleViewModel: TransactionableExampleViewModel) {
+        viewModel.set(example: exampleViewModel)
+        updateUI()
+    }    
+}

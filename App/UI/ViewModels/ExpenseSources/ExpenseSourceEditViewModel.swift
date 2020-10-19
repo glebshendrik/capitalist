@@ -13,9 +13,10 @@ enum ExpenseSourceUpdatingError : Error {
     case updatingExpenseSourceIsNotSpecified
 }
 
-class ExpenseSourceEditViewModel {
+class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
+    var transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol
     
     private var expenseSource: ExpenseSource? = nil
     
@@ -119,10 +120,20 @@ class ExpenseSourceEditViewModel {
         
     var currentUser: User? = nil
     
+    var numberOfUnusedExamples: Int = 0
+    
+    var basketType: BasketType = .joy
+    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol,
+         transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.accountCoordinator = accountCoordinator
+        self.transactionableExamplesCoordinator = transactionableExamplesCoordinator
+    }
+    
+    func loadData() -> Promise<Void> {
+        return when(fulfilled: loadDefaultCurrency(), loadExamples())
     }
     
     func loadDefaultCurrency() -> Promise<Void> {

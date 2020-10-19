@@ -12,6 +12,7 @@ import StoreKit
 import ApphudSDK
 import SwiftyBeaver
 import SaltEdge
+import SwifterSwift
 
 enum AuthProviderError : Error {
     case emailHasAlreadyUsed
@@ -35,6 +36,9 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     }
     
     var hasPremiumSubscription: Bool {
+        #if targetEnvironment(simulator)
+        return true
+        #else
         return !([activePremiumMonthly,
                   activePremiumYearly,
                   activePremiumSixMonths,
@@ -42,16 +46,24 @@ class AccountCoordinator : AccountCoordinatorProtocol {
                   activePremiumUnlimitedNonCIS]
                     .compactMap { $0 }
                     .isEmpty)
+        #endif
     }
     
     var hasPremiumUnlimitedSubscription: Bool {
+        #if targetEnvironment(simulator)
+        return true
+        #else
         return !([activePremiumUnlimitedCIS,
                   activePremiumUnlimitedNonCIS]
                     .compactMap { $0 }
                     .isEmpty)
+        #endif
     }
     
     var hasPlatinumSubscription: Bool {
+        #if targetEnvironment(simulator)
+        return true
+        #else
         let hasPlatinum = !([activePlatinumMonthly,
                              activePlatinumYearly]
                                 .compactMap { $0 }
@@ -65,22 +77,40 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         
         
         return hasPlatinum || (hasPremiumUnlimitedSubscription && hasPlatinumPure)
+        #endif
     }
     
     var currentUserHasActiveSubscription: Bool {
+        #if targetEnvironment(simulator)
+        return true
+        #else
         return Apphud.hasActiveSubscription()
+        #endif
     }
     
     var subscription: ApphudSubscription? {
+        #if targetEnvironment(simulator)
+        return nil
+        #else
         if hasPlatinumSubscription {
-            return activePlatinumMonthly ?? activePlatinumYearly ?? activePlatinumPureMonthly ?? activePlatinumPureYearly
+            return
+                activePlatinumMonthly ??
+                activePlatinumYearly ??
+                activePlatinumPureMonthly ??
+                activePlatinumPureYearly
         }
         
         if hasPremiumUnlimitedSubscription {
-            return activePremiumUnlimitedCIS ?? activePremiumUnlimitedNonCIS
+            return
+                activePremiumUnlimitedCIS ??
+                activePremiumUnlimitedNonCIS
         }
         
-        return activePremiumMonthly ?? activePremiumSixMonths ?? activePremiumYearly
+        return
+            activePremiumMonthly ??
+            activePremiumSixMonths ??
+            activePremiumYearly
+        #endif
     }
     
     var subscriptionProducts: [SKProduct] {
@@ -96,7 +126,11 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     }
     
     var hasActiveSubscription: Bool {
+        #if targetEnvironment(simulator)
+        return true
+        #else
         return subscription != nil
+        #endif
     }
     
     init(userSessionManager: UserSessionManagerProtocol,
@@ -115,7 +149,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         self.analyticsManager = analyticsManager
         self.saltEdgeManager = saltEdgeManager
     }
-        
+    
     private func getActiveSubscription(_ subscription: SubscriptionProduct) -> ApphudSubscription? {
         return Apphud.subscriptions()?.first(where: { $0.isActive() && $0.productId == subscription.id })
     }
@@ -126,41 +160,41 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     
     func authenticate(with form: SessionCreationForm) -> Promise<Session> {
         return  firstly {
-                    authenticationService.authenticate(form: form)
-                }.get { session in
-                    self.userSessionManager.save(session: session)
-                }.then { session in
-                    self.updateUserSubscription().map { session }
-                }.get { session in
-                    self.router.route()
-                }
+            authenticationService.authenticate(form: form)
+        }.get { session in
+            self.userSessionManager.save(session: session)
+        }.then { session in
+            self.updateUserSubscription().map { session }
+        }.get { session in
+            self.router.route()
+        }
     }
     
     func authenticate(with json: String) -> Promise<Session> {        
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
         guard  let data = json.data(using: .utf8),
-            let objectDictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-            let object = try? decoder.decode(Session.self, withJSONObject: objectDictionary) else {
+               let objectDictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+               let object = try? decoder.decode(Session.self, withJSONObject: objectDictionary) else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
         return  firstly {
-                    Promise.value(object)
-                }.get { session in
-                    self.userSessionManager.save(session: session)
-                }.get { session in
-                    self.router.route()
-                }
+            Promise.value(object)
+        }.get { session in
+            self.userSessionManager.save(session: session)
+        }.get { session in
+            self.router.route()
+        }
     }
     
     func createAndAuthenticateUser(with userForm: UserCreationForm) -> Promise<Session> {
         return  firstly {
-                    usersService.createUser(with: userForm)
-                }.get { user in
-                    self.analyticsManager.trackSignUp(user: user)
-                }.then { user in                    
-                    self.authenticate(with: SessionCreationForm(email: userForm.email, password: userForm.password))
-                }
+            usersService.createUser(with: userForm)
+        }.get { user in
+            self.analyticsManager.trackSignUp(user: user)
+        }.then { user in
+            self.authenticate(with: SessionCreationForm(email: userForm.email, password: userForm.password))
+        }
     }
     
     func updateUser(with userForm: UserUpdatingForm) -> Promise<Void> {
@@ -180,11 +214,11 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     
     func resetPassword(with resetPasswordForm: ResetPasswordForm) -> Promise<Void> {
         return  firstly {
-                    usersService.resetPassword(with: resetPasswordForm)
-                }.then { _ in
-                    self.authenticate(with: SessionCreationForm(email: resetPasswordForm.email,
-                                                                password: resetPasswordForm.password))
-                }.asVoid()
+            usersService.resetPassword(with: resetPasswordForm)
+        }.then { _ in
+            self.authenticate(with: SessionCreationForm(email: resetPasswordForm.email,
+                                                        password: resetPasswordForm.password))
+        }.asVoid()
     }
     
     func createPasswordResetCode(with passwordResetCodeForm: PasswordResetCodeForm) -> Promise<Void> {
@@ -196,21 +230,21 @@ class AccountCoordinator : AccountCoordinatorProtocol {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
         return  firstly {
-                    usersService.loadUser(with: currentUserId)
-                }.then { user -> Promise<User> in
-                    if user.hasActiveSubscription != self.currentUserHasActiveSubscription {
-                        return self.updateUserSubscription().map { user }
-                    }
-                    return Promise.value(user)
-                }.get { user in
-                    self.router.setMinimumAllowed(version: user.minVersion, build: user.minBuild)
-                    self.analyticsManager.set(userId: String(user.id))
-                    SwiftyBeaver.cloud?.analyticsUserName = "user_id:\(user.id)"
-                    Apphud.updateUserID(String(user.id))
-                    if let customerSecret = user.saltEdgeCustomerSecret {
-                        self.saltEdgeManager.set(customerSecret: customerSecret)
-                    }
-                }
+            usersService.loadUser(with: currentUserId)
+        }.then { user -> Promise<User> in
+            if user.hasActiveSubscription != self.currentUserHasActiveSubscription {
+                return self.updateUserSubscription().map { user }
+            }
+            return Promise.value(user)
+        }.get { user in
+            self.router.setMinimumAllowed(version: user.minVersion, build: user.minBuild)
+            self.analyticsManager.set(userId: String(user.id))
+            SwiftyBeaver.cloud?.analyticsUserName = "user_id:\(user.id)"
+            Apphud.updateUserID(String(user.id))
+            if let customerSecret = user.saltEdgeCustomerSecret {
+                self.saltEdgeManager.set(customerSecret: customerSecret)
+            }
+        }
     }
     
     func loadCurrentUserBudget() -> Promise<Budget> {
@@ -239,11 +273,11 @@ class AccountCoordinator : AccountCoordinatorProtocol {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
         return  firstly {
-                    usersService.destroyUserData(by: currentUserId)
-                }.done {
-                    UIFlowManager.set(point: .dataSetup, reached: false)
-                    self.router.route()
-                }
+            usersService.destroyUserData(by: currentUserId)
+        }.done {
+            UIFlowManager.set(point: .dataSetup, reached: false)
+            self.router.route()
+        }
     }
     
     func logout() -> Promise<Void> {

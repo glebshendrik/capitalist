@@ -115,6 +115,10 @@ extension UIViewController {
             return self
         }
     }
+    
+    var isCurrentTopmostPresentedViewController: Bool {
+        return topmostPresentedViewController == self
+    }
 }
 
 extension UIViewController {

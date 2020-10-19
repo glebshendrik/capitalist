@@ -21,7 +21,7 @@ class TransactionableExamplesViewModel {
     private var basketType: BasketType? {
         return transactionableType == .expenseCategory ? .joy : nil
     }
-        
+    
     var title: String {
         switch transactionableType {
             case .expenseSource:
@@ -34,7 +34,7 @@ class TransactionableExamplesViewModel {
                 return ""
         }
     }
-        
+    
     var numberOfExamples: Int {
         return examples.count
     }
@@ -42,7 +42,7 @@ class TransactionableExamplesViewModel {
     init(transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {
         self.transactionableExamplesCoordinator = transactionableExamplesCoordinator
     }
-            
+    
     func loadData() -> Promise<Void> {
         return
             firstly {
@@ -54,5 +54,30 @@ class TransactionableExamplesViewModel {
     
     func exampleViewModel(by indexPath: IndexPath) -> TransactionableExampleViewModel? {
         return examples[safe: indexPath.row]
+    }
+}
+
+protocol TransactionableExamplesDependantProtocol : class {
+    var isNew: Bool { get }
+    var numberOfUnusedExamples: Int { get set }
+    var needToShowExamples: Bool { get }
+    var basketType: BasketType { get }
+    var transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol { get }
+    
+    func loadExamples() -> Promise<Void>
+}
+
+extension TransactionableExamplesDependantProtocol {
+    var needToShowExamples: Bool {
+        return isNew && numberOfUnusedExamples > 0
+    }
+    
+    func loadExamples() -> Promise<Void> {
+        return
+            firstly {
+                transactionableExamplesCoordinator.indexBy(.expenseCategory, basketType: basketType, isUsed: false)
+            }.get { examples in
+                self.numberOfUnusedExamples = examples.count
+            }.asVoid()
     }
 }

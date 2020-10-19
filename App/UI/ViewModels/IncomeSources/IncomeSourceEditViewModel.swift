@@ -13,9 +13,10 @@ enum IncomeSourceUpdatingError : Error {
     case updatingIncomeSourceIsNotSpecified
 }
 
-class IncomeSourceEditViewModel {
+class IncomeSourceEditViewModel : TransactionableExamplesDependantProtocol {
     private let incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
+    var transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol
     
     private var incomeSource: IncomeSource? = nil
     
@@ -74,10 +75,19 @@ class IncomeSourceEditViewModel {
         return isNew || incomeSource!.isChild
     }
     
+    var numberOfUnusedExamples: Int = 0
+    var basketType: BasketType = .joy
+    
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol,
+         transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
         self.accountCoordinator = accountCoordinator
+        self.transactionableExamplesCoordinator = transactionableExamplesCoordinator
+    }
+    
+    func loadData() -> Promise<Void> {
+        return when(fulfilled: loadDefaultCurrency(), loadExamples())
     }
     
     func loadDefaultCurrency() -> Promise<Void> {

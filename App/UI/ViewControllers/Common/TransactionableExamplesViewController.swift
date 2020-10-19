@@ -35,11 +35,16 @@ class TransactionableExamplesViewController : UIViewController, UIMessagePresent
     
     func setupUI() {
         setupActivityIndicator()
-        setupExamplesCollectionView()
+        setupTitleUI()
+        setupExamplesCollectionView()        
     }
     
     func setupActivityIndicator() {
         loader.showLoader()
+    }
+    
+    func setupTitleUI() {
+        titleLabel.text = viewModel.title
     }
     
     func setupExamplesCollectionView() {

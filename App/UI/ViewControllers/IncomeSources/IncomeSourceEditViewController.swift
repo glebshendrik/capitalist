@@ -49,7 +49,7 @@ class IncomeSourceEditViewController : FormTransactionsDependableEditViewControl
     }
     
     override func loadDataPromise() -> Promise<Void> {
-        return viewModel.loadDefaultCurrency()
+        return viewModel.loadData()
     }
     
     override func savePromise() -> Promise<Void> {
@@ -58,6 +58,16 @@ class IncomeSourceEditViewController : FormTransactionsDependableEditViewControl
     
     override func removePromise() -> Promise<Void> {
         return viewModel.removeIncomeSource(deleteTransactions: deleteTransactions)
+    }
+    
+    override func didLoadData() {
+        super.didLoadData()
+        if viewModel.needToShowExamples {
+            view.endEditing(true)
+            slideUp(factory.transactionableExamplesViewController(delegate: self,
+                                                                  transactionableType: .incomeSource,
+                                                                  isUsed: false))
+        }
     }
     
     override func didSave() {

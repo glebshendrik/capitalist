@@ -17,13 +17,13 @@ enum ExpenseCategoryUpdatingError : Error {
     case updatingExpenseCategoryIsNotSpecified
 }
 
-class ExpenseCategoryEditViewModel {
+class ExpenseCategoryEditViewModel : TransactionableExamplesDependantProtocol {
     private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
-    private let transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol
+    var transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol
     
     public private(set) var expenseCategory: ExpenseCategory? = nil
-    public private(set) var basketType: BasketType = .joy
+    var basketType: BasketType = .joy
     
     var selectedIconURL: URL? = nil
     var name: String? = nil
@@ -84,12 +84,8 @@ class ExpenseCategoryEditViewModel {
         return basketType == .joy
     }
     
-    private var numberOfUnusedExamples: Int = 0
-    
-    var needToShowExamples: Bool {
-        return isNew && numberOfUnusedExamples > 0
-    }
-    
+    var numberOfUnusedExamples: Int = 0
+        
     init(expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {
@@ -109,16 +105,7 @@ class ExpenseCategoryEditViewModel {
                     self.selectedCurrency = user.currency
                 }
     }
-    
-    func loadExamples() -> Promise<Void> {
-        return
-            firstly {
-                transactionableExamplesCoordinator.indexBy(.expenseCategory, basketType: basketType, isUsed: false)
-            }.get { examples in
-                self.numberOfUnusedExamples = examples.count
-            }.asVoid()
-    }
-    
+        
     func set(expenseCategory: ExpenseCategory) {
         self.expenseCategory = expenseCategory
         basketType = expenseCategory.basketType
@@ -159,8 +146,13 @@ class ExpenseCategoryEditViewModel {
         return expenseCategoriesCoordinator.destroy(by: expenseCategoryId, deleteTransactions: deleteTransactions)
     }
     
-    func basketId(by basketType: BasketType) -> Int? {
-        guard let session = accountCoordinator.currentSession else { return nil }
+    func basketId(by basketType: BasketType?) -> Int? {
+        guard
+            let session = accountCoordinator.currentSession,
+            let basketType = basketType
+        else {
+            return nil
+        }
         
         switch basketType {
         case .joy:

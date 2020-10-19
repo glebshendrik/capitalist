@@ -241,7 +241,7 @@ extension CreditEditViewController {
 
 extension CreditEditViewController {
     func focusFirstEmptyField() {
-        if viewModel.name == nil {
+        if viewModel.name == nil && isCurrentTopmostPresentedViewController {
             tableController.nameField.textField.becomeFirstResponder()
         }
     }

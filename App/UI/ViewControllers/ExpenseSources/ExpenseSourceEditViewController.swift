@@ -51,9 +51,9 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
     }
     
     override func loadDataPromise() -> Promise<Void> {
-        return viewModel.loadDefaultCurrency()
+        return viewModel.loadData()
     }
-    
+        
     override func savePromise() -> Promise<Void> {
         return viewModel.save()
     }
@@ -62,6 +62,16 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
         return viewModel.removeExpenseSource(deleteTransactions: deleteTransactions)
     }
     
+    override func didLoadData() {
+        super.didLoadData()
+        if viewModel.needToShowExamples {
+            view.endEditing(true)
+            slideUp(factory.transactionableExamplesViewController(delegate: self,
+                                                                  transactionableType: .expenseSource,
+                                                                  isUsed: false))
+        }
+    }
+
     override func didSave() {
         super.didSave()
         if viewModel.isNew {

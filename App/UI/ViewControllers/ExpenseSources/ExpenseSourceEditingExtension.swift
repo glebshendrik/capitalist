@@ -69,3 +69,10 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
         save()
     }
 }
+
+extension ExpenseSourceEditViewController : TransactionableExamplesViewControllerDelegate {
+    func didSelect(exampleViewModel: TransactionableExampleViewModel) {
+        viewModel.set(example: exampleViewModel)
+        updateUI()
+    }    
+}

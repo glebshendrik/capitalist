@@ -71,5 +71,4 @@ extension ExpenseCategoryEditViewController : TransactionableExamplesViewControl
         viewModel.set(example: exampleViewModel)
         updateUI()
     }
-    
 }

@@ -2085,14 +2085,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите счет" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2G-aP-w0Q">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите счет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2G-aP-w0Q">
                                 <rect key="frame" x="16" y="8" width="343" height="21"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
                                 <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aNl-MN-rDA">
-                                <rect key="frame" x="0.0" y="33" width="375" height="634"/>
+                                <rect key="frame" x="0.0" y="45" width="375" height="622"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BhY-7I-l2j">
                                     <size key="itemSize" width="80" height="110"/>
@@ -2171,10 +2171,10 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIL-oQ-Drx">
-                                <rect key="frame" x="0.0" y="33" width="375" height="634"/>
+                                <rect key="frame" x="0.0" y="45" width="375" height="622"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader-1" translatesAutoresizingMaskIntoConstraints="NO" id="aLo-wQ-x6h">
-                                        <rect key="frame" x="160" y="301.5" width="55" height="31"/>
+                                        <rect key="frame" x="160" y="295.5" width="55" height="31"/>
                                         <color key="tintColor" name="blue 1"/>
                                     </imageView>
                                 </subviews>
@@ -2205,7 +2205,7 @@
                             <constraint firstItem="Fge-GA-Nsu" firstAttribute="trailing" secondItem="aNl-MN-rDA" secondAttribute="trailing" id="cN3-nH-DY5"/>
                             <constraint firstAttribute="bottom" secondItem="aNl-MN-rDA" secondAttribute="bottom" id="edt-5x-HmT"/>
                             <constraint firstItem="Fge-GA-Nsu" firstAttribute="trailing" secondItem="N2G-aP-w0Q" secondAttribute="trailing" constant="16" id="fAR-1Q-lw0"/>
-                            <constraint firstItem="aNl-MN-rDA" firstAttribute="top" secondItem="N2G-aP-w0Q" secondAttribute="bottom" constant="4" id="tF3-nj-Csy"/>
+                            <constraint firstItem="aNl-MN-rDA" firstAttribute="top" secondItem="N2G-aP-w0Q" secondAttribute="bottom" constant="16" id="tF3-nj-Csy"/>
                         </constraints>
                     </view>
                     <connections>
