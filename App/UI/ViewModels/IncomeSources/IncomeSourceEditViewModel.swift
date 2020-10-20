@@ -78,6 +78,9 @@ class IncomeSourceEditViewModel : TransactionableExamplesDependantProtocol {
     var numberOfUnusedExamples: Int = 0
     var basketType: BasketType = .joy
     var example: TransactionableExampleViewModel? = nil
+    var transactionableType: TransactionableType {
+        return .incomeSource
+    }
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,

@@ -88,6 +88,10 @@ class ExpenseCategoryEditViewModel : TransactionableExamplesDependantProtocol {
         
     var example: TransactionableExampleViewModel? = nil
     
+    var transactionableType: TransactionableType {
+        return .expenseCategory
+    }
+    
     init(expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {

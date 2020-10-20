@@ -64,6 +64,7 @@ protocol TransactionableExamplesDependantProtocol : class {
     var basketType: BasketType { get }
     var transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol { get }
     var example: TransactionableExampleViewModel? { get set }
+    var transactionableType: TransactionableType { get }
     
     func loadExamples() -> Promise<Void>
 }
@@ -74,9 +75,10 @@ extension TransactionableExamplesDependantProtocol {
     }
     
     func loadExamples() -> Promise<Void> {
+        let basket = transactionableType == .expenseCategory ? basketType : nil
         return
             firstly {
-                transactionableExamplesCoordinator.indexBy(.expenseCategory, basketType: basketType, isUsed: false)
+                transactionableExamplesCoordinator.indexBy(transactionableType, basketType: basket, isUsed: false)
             }.get { examples in
                 self.numberOfUnusedExamples = examples.count
             }.asVoid()

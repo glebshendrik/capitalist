@@ -126,6 +126,10 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     
     var example: TransactionableExampleViewModel? = nil
     
+    var transactionableType: TransactionableType {
+        return .expenseSource
+    }
+    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {
