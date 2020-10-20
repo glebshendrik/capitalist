@@ -153,6 +153,7 @@ extension IncomeSourceEditViewModel {
                                          currency: selectedCurrencyCode,
                                          monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
                                          description: description,
+                                         prototypeKey: example?.prototypeKey,
                                          reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }

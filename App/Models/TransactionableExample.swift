@@ -17,6 +17,7 @@ struct TransactionableExample : Decodable {
     let iconURL: URL?
     let transactionableType: TransactionableType
     let basketType: BasketType?
+    let prototypeKey: String
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -27,5 +28,6 @@ struct TransactionableExample : Decodable {
         case iconURL = "icon_url"
         case transactionableType = "transactionable_type"
         case basketType = "basket_type"
+        case prototypeKey = "prototype_key"
     }
 }

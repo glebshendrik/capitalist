@@ -13,6 +13,7 @@ class TransactionableExampleViewModel {
     public private(set)var iconURL: URL?
     public private(set)var defaultIconName: String
     public private(set)var description: String?
+    public private(set)var prototypeKey: String?
     
     var selected: Bool = false
     
@@ -21,6 +22,7 @@ class TransactionableExampleViewModel {
         description = example.localizedDescription
         iconURL = example.iconURL
         defaultIconName = example.transactionableType.defaultIconName(basketType: example.basketType)
+        prototypeKey = example.prototypeKey
     }
     
     init(transactionable: Transactionable) {
@@ -29,5 +31,6 @@ class TransactionableExampleViewModel {
         iconURL = transactionable.iconURL
         defaultIconName = transactionable.type.defaultIconName(basketType: (transactionable as? ExpenseCategoryViewModel)?.basketType)
         selected = true
+        prototypeKey = transactionable.prototypeKey
     }
 }

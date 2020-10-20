@@ -118,15 +118,17 @@ extension ConnectionViewController {
             close()
             return
         }
-        viewModel.fetchingStarted = true
+        
         messagePresenterManager.showHUD(with: NSLocalizedString("Создание подключения к банку...", comment: "Создание подключения к банку..."))
         firstly {
             viewModel.setupConnection(id: id, secret: secret)
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { connection in
-            self.close() {
-                delegate.didSetupConnection(connection)
+            if self.viewModel.fetchingStarted {                
+                self.close() {
+                    delegate.didSetupConnection(connection)
+                }
             }
         }.catch { error in
             SwiftyBeaver.error(error)

@@ -14,14 +14,20 @@ class ProviderConnectionViewModel {
     private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol    
     
     var providerViewModel: ProviderViewModel? = nil
-    var connection: Connection? = nil
+    var connection: Connection? = nil {
+        didSet {
+            if (connection?.lastStage?.isFetching ?? false) {
+                fetchingStarted = true
+            }
+        }
+    }
     var connectionSession: ConnectionSession!
     
     var shouldAskClose: Bool {
         return connectionSession.type == .refreshing && !fetchingStarted
     }
     
-    var fetchingStarted: Bool = false
+    public private(set) var fetchingStarted: Bool = false
     
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
@@ -29,21 +35,39 @@ class ProviderConnectionViewModel {
     
     func setupConnection(id: String, secret: String) -> Promise<Connection> {
         if let connectionId = connection?.id {
-            
-            let saltedgeId = (id == connection?.saltedgeId)
-                ? nil
-                : id
-            return bankConnectionsCoordinator.updatedConnection(id: connectionId,
-                                                                saltedgeId: saltedgeId,
-                                                                session: connectionSession)
+            return updatedConnection(connectionId, id: id, secret: secret)
         }
         if  connectionSession.type == .creating,
             let provider = providerViewModel?.provider {
             
-            return bankConnectionsCoordinator.createConnection(connectionSecret: secret,
-                                                               provider: provider,                                                               
-                                                               session: connectionSession)
+            return createConnection(secret: secret,
+                                    provider: provider)
         }
         return Promise(error: BankConnectionError.canNotCreateConnection)
+    }
+    
+    private func updatedConnection(_ connectionId: Int, id: String, secret: String) -> Promise<Connection> {
+        let saltedgeId = (id == connection?.saltedgeId)
+            ? nil
+            : id
+        return
+            firstly {
+                bankConnectionsCoordinator.updatedConnection(id: connectionId,
+                                                             saltedgeId: saltedgeId,
+                                                             session: connectionSession)
+            }.get { connection in
+                self.connection = connection
+            }
+    }
+    
+    private func createConnection(secret: String, provider: SEProvider) -> Promise<Connection> {
+        return
+            firstly {
+                bankConnectionsCoordinator.createConnection(connectionSecret: secret,
+                                                            provider: provider,
+                                                            session: connectionSession)
+            }.get { connection in
+                self.connection = connection
+            }
     }
 }

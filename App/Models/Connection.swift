@@ -58,6 +58,15 @@ enum ConnectionStage : String, Codable {
                 return NSLocalizedString("Подключение к банку завершено", comment: "")
         }
     }
+    
+    var isFetching: Bool {
+        switch self {
+            case .fetchAccounts, .fetchFull, .fetchRecent, .fetchHolderInfo:
+                return true
+            default:
+                return false
+        }
+    }
 }
 
 enum ConnectionSessionType : String, Codable {

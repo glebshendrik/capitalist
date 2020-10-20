@@ -211,6 +211,7 @@ extension ExpenseSourceEditViewModel {
                                          amountCents: amountToSave.intMoney(with: selectedCurrency),
                                          creditLimitCents: creditLimitToSave.intMoney(with: selectedCurrency),
                                          cardType: selectedCardType,
+                                         prototypeKey: example?.prototypeKey,
                                          accountConnectionAttributes: accountConnectionAttributes)
     }
 }

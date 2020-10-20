@@ -96,6 +96,7 @@ struct ExpenseSourceCreationForm : Encodable, Validatable {
     let amountCents: Int?
     let creditLimitCents: Int?
     let cardType: CardType?
+    let prototypeKey: String?
     let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -105,22 +106,20 @@ struct ExpenseSourceCreationForm : Encodable, Validatable {
         case amountCents = "amount_cents"
         case creditLimitCents = "credit_limit_cents"
         case cardType = "card_type"
+        case prototypeKey = "prototype_key"
         case accountConnectionAttributes = "account_connection_attributes"
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
-//        if let id = id {
-//            try container.encode(id, forKey: .id)
-//        }
-        
+                
         try container.encode(name, forKey: .name)
         try container.encode(iconURL, forKey: .iconURL)
         try container.encode(currency, forKey: .currency)
         try container.encode(amountCents, forKey: .amountCents)
         try container.encode(creditLimitCents, forKey: .creditLimitCents)
         try container.encode(cardType, forKey: .cardType)
+        try container.encode(prototypeKey, forKey: .prototypeKey)
         try container.encode(accountConnectionAttributes, forKey: .accountConnectionAttributes)
     }
     
