@@ -1,6 +1,6 @@
 //
 //  DebtsTableSupport.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 12/09/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.

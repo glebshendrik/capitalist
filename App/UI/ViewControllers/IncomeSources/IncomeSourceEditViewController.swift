@@ -1,6 +1,6 @@
 //
 //  IncomeSourceEditViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 13/12/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.

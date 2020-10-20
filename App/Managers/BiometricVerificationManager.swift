@@ -1,6 +1,6 @@
 //
 //  BiometricVerificationManager.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 17.03.2020.
 //  Copyright © 2020 Real Tranzit. All rights reserved.

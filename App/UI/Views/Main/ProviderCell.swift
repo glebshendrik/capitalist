@@ -1,6 +1,6 @@
 //
 //  ProviderCell.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/06/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.

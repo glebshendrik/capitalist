@@ -1,6 +1,6 @@
 //
 //  BalanceViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 09/05/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
