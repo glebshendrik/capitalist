@@ -17,6 +17,7 @@ class EntityInfoViewModel {
     let accountCoordinator: AccountCoordinatorProtocol
     
     var isUpdatingData: Bool = false
+    var isUpdateQueued: Bool = false
     public private(set) var isDeleted: Bool = false
     var hasMoreData: Bool = true
     var needToSaveData: Bool = false
@@ -79,7 +80,7 @@ class EntityInfoViewModel {
     
     func updateData() -> Promise<Void> {
         guard !isDeleted else { return Promise.value(()) }
-        isUpdatingData = true
+        isUpdatingData = true        
         if needToSaveData {
             return saveAndLoadData()
         }

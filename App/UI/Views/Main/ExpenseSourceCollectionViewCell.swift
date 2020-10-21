@@ -38,6 +38,11 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
         super.updateUI()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        connectionActivityIndicator.startAnimating()
+    }
+    
     func updateLabels() {
         guard let viewModel = viewModel else { return }
         nameLabel.text = viewModel.name

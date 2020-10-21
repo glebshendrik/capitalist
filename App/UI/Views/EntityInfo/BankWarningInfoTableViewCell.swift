@@ -27,6 +27,11 @@ class BankWarningInfoTableViewCell : EntityInfoTableViewCell {
         return field as? BankWarningInfoField
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        syncActivityIndicator.startAnimating()
+    }
+    
     override func updateUI() {
         titleLabel.text = bankWarningField?.title
         messageLabel.text = bankWarningField?.message

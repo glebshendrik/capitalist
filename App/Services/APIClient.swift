@@ -164,6 +164,7 @@ class APIClient : APIClientProtocol {
     
     private func requestValidator(request: URLRequest?, response: HTTPURLResponse, data: Data?) -> Request.ValidationResult {
         if response.statusCode >= 500 {
+            SwiftyBeaver.error(request?.httpMethod)
             SwiftyBeaver.error(response)
         }
         switch response.statusCode {
@@ -204,6 +205,7 @@ class APIClient : APIClientProtocol {
                     }
                     return .failure(APIRequestError.unprocessedEntity(errors: errorMessages))
                 } catch {
+                    SwiftyBeaver.error(request?.httpMethod)
                     SwiftyBeaver.error(response)
                     SwiftyBeaver.error(error)
                     return .failure(
@@ -212,9 +214,11 @@ class APIClient : APIClientProtocol {
             }
             return .failure(APIRequestError.unprocessedEntity(errors: [:]))
         case 423:
+            SwiftyBeaver.error(request?.httpMethod)
             SwiftyBeaver.error(response)
             return .failure(APIRequestError.locked)
         case 426:
+            SwiftyBeaver.error(request?.httpMethod)
             SwiftyBeaver.error(response)
             return .failure(APIRequestError.upgradeRequired)
         default: return .success

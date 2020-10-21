@@ -239,7 +239,11 @@ extension MainViewController : WaitingBorrowsViewControllerDelegate {
     }
 }
 
-extension MainViewController : Navigatable {
+extension MainViewController : Navigatable, Updatable {
+    func update() {
+        loadData()
+    }
+    
     var viewController: Infrastructure.ViewController {
         return Infrastructure.ViewController.MainViewController
     }

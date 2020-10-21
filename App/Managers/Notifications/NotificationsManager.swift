@@ -189,37 +189,47 @@ extension NotificationsManager: UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // When received notification in Foreground
-        // Just show default alert
         Apphud.handlePushNotification(apsInfo: notification.request.content.userInfo)
-        completionHandler([[.alert, .badge]])
+        let handle = handleNotification(actionId: nil,
+                                        content: notification.request.content,
+                                        applicationStateWhenReceivedNotification: UIApplication.shared.applicationState)
+        if case .navigate = handle {
+            // Just show default alert
+            completionHandler([[.alert, .badge]])
+        }
+        
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         Apphud.handlePushNotification(apsInfo: response.notification.request.content.userInfo)
-        handleNotification(actionId: response.actionIdentifier,
-                           content: response.notification.request.content,
-                           applicationStateWhenReceivedNotification: UIApplication.shared.applicationState)
+        let handle = handleNotification(actionId: response.actionIdentifier,
+                                        content: response.notification.request.content,
+                                        applicationStateWhenReceivedNotification: UIApplication.shared.applicationState)
+        if case .navigate(let category, let action) = handle {
+            notificationsHandler.navigateToDestination(of: category, with: action)
+        }
         completionHandler()
     }
 }
 
 extension NotificationsManager {
     
-    private func handleNotification(actionId: String,
+    private func handleNotification(actionId: String?,
                                     content: UNNotificationContent,
-                                    applicationStateWhenReceivedNotification state: UIApplication.State) {
+                                    applicationStateWhenReceivedNotification state: UIApplication.State) -> NotificationHandleDecision {
         
         let category = NotificationCategory.category(by: content.categoryIdentifier,
                                                      with: content.userInfo)
-        let action = NotificationAction(rawValue: actionId)
+        let action = actionId != nil ? NotificationAction(rawValue: actionId!) : nil
         
         handleSnooze(category: category, action: action, content: content)
         
-        notificationsHandler.handleNotification(category: category,
-                                                action: action,
-                                                applicationStateWhenReceivedNotification: state)
+        return
+            notificationsHandler.handleNotification(category: category,
+                                                    action: action,
+                                                    applicationStateWhenReceivedNotification: state)
     }
     
     private func handleSnooze(category: NotificationCategory?,

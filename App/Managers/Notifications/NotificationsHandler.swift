@@ -18,9 +18,10 @@ class NotificationsHandler: NotificationsHandlerProtocol {
     
     func handleNotification(category: NotificationCategory?,
                             action: NotificationAction?,
-                            applicationStateWhenReceivedNotification state: UIApplication.State) {
+                            applicationStateWhenReceivedNotification state: UIApplication.State) -> NotificationHandleDecision {
         
         navigator.updateBadges()
+        navigator.triggerDestinationUpdate()
         
         let applicationWasActive = state == UIApplication.State.active
         
@@ -28,15 +29,16 @@ class NotificationsHandler: NotificationsHandlerProtocol {
             let category = category,
             let viewController = category.destinationViewController(with: action),
             navigator.isDestinationViewControllerVisible(viewController, with: category) {
-            
-            navigator.triggerDestinationUpdate()
+                        
+            return .update
         }
         else {
-            navigateToDestination(of: category, with: action)
+//            navigateToDestination(of: category, with: action)
+            return .navigate(category: category, action: action)
         }
     }
     
-    private func navigateToDestination(of category: NotificationCategory?, with action: NotificationAction?) {
+    func navigateToDestination(of category: NotificationCategory?, with action: NotificationAction?) {
         guard
             let category = category,
             let viewController = category.destinationViewController(with: action)

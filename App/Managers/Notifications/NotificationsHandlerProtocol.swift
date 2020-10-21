@@ -8,10 +8,17 @@
 
 import UIKit
 
+enum NotificationHandleDecision {
+    case update
+    case navigate(category: NotificationCategory?, action: NotificationAction?)
+}
+
 protocol NotificationsHandlerProtocol {
     
     func handleNotification(category: NotificationCategory?,
                             action: NotificationAction?,
-                            applicationStateWhenReceivedNotification state: UIApplication.State)
+                            applicationStateWhenReceivedNotification state: UIApplication.State) -> NotificationHandleDecision
+    
+    func navigateToDestination(of category: NotificationCategory?, with action: NotificationAction?)
     
 }

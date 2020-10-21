@@ -94,7 +94,12 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
 
 extension EntityInfoViewController {
     @objc func refreshData() {
-        guard !viewModel.isUpdatingData else { return }
+        guard
+            !viewModel.isUpdatingData
+        else {
+            viewModel.isUpdateQueued = true
+            return
+        }
         tableOffset = tableView.contentOffset
         tableView.es.startPullToRefresh()
     }
@@ -117,6 +122,10 @@ extension EntityInfoViewController {
             self.stopLoading()
             self.updateUI()
             self.didUpdateData()
+            if self.viewModel.isUpdateQueued {
+                self.viewModel.isUpdateQueued = false
+                self.updateData()
+            }
         }
     }
     

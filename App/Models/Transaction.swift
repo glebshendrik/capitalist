@@ -218,6 +218,7 @@ struct TransactionUpdatingForm : Encodable, Validatable {
     let comment: String?
     let returningBorrowId: Int?
     let isBuyingAsset: Bool
+    let updateSimilarTransactions: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -233,6 +234,7 @@ struct TransactionUpdatingForm : Encodable, Validatable {
         case comment
         case returningBorrowId = "returning_borrow_id"
         case isBuyingAsset = "buying_asset"
+        case updateSimilarTransactions = "update_similar_transactions"
     }
     
     func validate() -> [String : String]? {

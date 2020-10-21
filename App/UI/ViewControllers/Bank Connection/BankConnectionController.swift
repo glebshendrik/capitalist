@@ -105,6 +105,9 @@ extension BankConnectionControllerProtocol {
                                                           theme: .error)
                     }
                 }
+                else if !bankConnectionViewModel.connectionConnected {
+                    connectConnection(connection)
+                }
                 else {
                     showAccounts()
                 }
@@ -198,7 +201,7 @@ extension BankConnectionControllerProtocol {
     func showAccounts() {
         guard
             let expenseSource = bankConnectionViewModel.expenseSource,
-            let connection = expenseSource.accountConnection?.connection,
+            let connection = bankConnectionViewModel.connection,
             connection.status == .active,
             connection.lastStage == .finish,
             !bankConnectionViewModel.accountConnected
