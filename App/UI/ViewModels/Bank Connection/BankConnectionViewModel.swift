@@ -36,22 +36,10 @@ class BankConnectionViewModel {
     
     var connectionConnected: Bool {
         return accountConnection != nil
-        //        guard
-        //            let accountConnectionAttributes = accountConnectionAttributes
-        //        else {
-        //            return false
-        //        }
-        //        return accountConnectionAttributes.shouldDestroy == nil && accountConnectionAttributes.accountId != nil
     }
     
     var accountConnected: Bool {
         return accountConnection?.account != nil
-//        guard
-//            let accountConnectionAttributes = accountConnectionAttributes
-//        else {
-//            return false
-//        }
-//        return accountConnectionAttributes.shouldDestroy == nil && accountConnectionAttributes.accountId != nil
     }
     
     var fetchDataFrom: Date? {
@@ -73,6 +61,22 @@ class BankConnectionViewModel {
     
     var syncingWithBankStage: ConnectionStage {
         return expenseSourceViewModel?.syncingWithBankStage ?? .finish
+    }
+    
+    var nextUpdatePossibleAt: String? {
+        guard
+            let connection = connection,
+            let nextRefreshPossibleAt = connection.nextRefreshPossibleAt,
+            let interactive = connection.interactive,
+            connection.lastStage == .finish,
+            interactive,
+            nextRefreshPossibleAt.isInFuture
+        else {
+            return nil
+        }
+        let nextSyncTitle = NSLocalizedString("Следующая синхронизация с банком:",
+                                              comment: "")
+        return "\(nextSyncTitle)\n\(nextRefreshPossibleAt.dateTimeString(ofStyle: .short))"
     }
     
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol,

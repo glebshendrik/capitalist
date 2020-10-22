@@ -96,6 +96,11 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     }
     
     override func save() {
+        if viewModel.isNewTransactionWithConnectedExpenseSource {
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Нельзя выбрать привязанный к банку кошелек", comment: ""),
+                                              theme: .error)
+            return
+        }
         if viewModel.shouldAskForReestimateAsset {
             askForReestimateAsset()
         }

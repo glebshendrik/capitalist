@@ -71,21 +71,20 @@ class APIClient : APIClientProtocol {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
             
-            do {
-                if  let jsonDictionary = json as? [String : Any],
-                    let objectDictionary = jsonDictionary[resource.resource.singular] as? [String : Any],
-                    let object = try? decoder.decode(T.self, withJSONObject: objectDictionary) {
-                    return object
-                }
-                SwiftyBeaver.error(response)
-                if let jsonDictionary = json as? [String : Any] {
-                    SwiftyBeaver.error(jsonDictionary)
-                }
+            guard
+                let jsonDictionary = json as? [String : Any],
+                let objectDictionary = jsonDictionary[resource.resource.singular] as? [String : Any]
+            else {
+                self.log(response: response, json: json, errors: [APIRequestError.mappingFailed])
                 throw APIRequestError.mappingFailed
             }
-            catch {                
-                SwiftyBeaver.error(error)
-                throw error
+            
+            do {
+                return try decoder.decode(T.self, withJSONObject: objectDictionary)
+            }
+            catch {
+                self.log(response: response, json: json, errors: [APIRequestError.mappingFailed, error])
+                throw APIRequestError.mappingFailed
             }
         }
     }
@@ -102,23 +101,22 @@ class APIClient : APIClientProtocol {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
             
-            do {
-                if  let jsonDictionary = json as? [String : Any],
-                    let arrayOfDictionaries = jsonDictionary[resource.resource.plural] as? [[String : Any]],
-                    let objects = try? decoder.decode([T].self, withJSONObject: arrayOfDictionaries) {
-                    
-                    let totalCount = (response.response?.allHeaderFields["Items_total_count"] as? String)?.int
-                    return (objects, totalCount)
-                }
-                SwiftyBeaver.error(response)
-                if let jsonDictionary = json as? [String : Any] {
-                    SwiftyBeaver.error(jsonDictionary)
-                }
+            guard
+                let jsonDictionary = json as? [String : Any],
+                let arrayOfDictionaries = jsonDictionary[resource.resource.plural] as? [[String : Any]]
+            else {
+                self.log(response: response, json: json, errors: [APIRequestError.mappingFailed])
                 throw APIRequestError.mappingFailed
             }
+            
+            do {
+                let objects = try decoder.decode([T].self, withJSONObject: arrayOfDictionaries)
+                let totalCount = (response.response?.allHeaderFields["Items_total_count"] as? String)?.int
+                return (objects, totalCount)
+            }
             catch {
-                SwiftyBeaver.error(error)
-                throw error
+                self.log(response: response, json: json, errors: [APIRequestError.mappingFailed, error])
+                throw APIRequestError.mappingFailed
             }
         }
     }
@@ -157,15 +155,15 @@ class APIClient : APIClientProtocol {
                 .request(request)
                 .validate(requestValidator)
                 .responseJSON()
-        } catch {            
+        } catch {
+            log(route: resource, errors: [APIRequestError.mappingFailed, error])
             return Promise(error: error)
         }
     }
     
     private func requestValidator(request: URLRequest?, response: HTTPURLResponse, data: Data?) -> Request.ValidationResult {
         if response.statusCode >= 500 {
-            SwiftyBeaver.error(request?.httpMethod)
-            SwiftyBeaver.error(response)
+            log(request: request, response: response, errors: [])
         }
         switch response.statusCode {
         case 401:
@@ -173,10 +171,10 @@ class APIClient : APIClientProtocol {
         case 402:
             return .failure(APIRequestError.paymentRequired)
         case 403:
-            SwiftyBeaver.error(response)
+            log(request: request, response: response, errors: [APIRequestError.forbidden])
             return .failure(APIRequestError.forbidden)
         case 404:
-            SwiftyBeaver.error(response)
+            log(request: request, response: response, errors: [APIRequestError.notFound])
             return .failure(APIRequestError.notFound)
         case 405:
             return .failure(APIRequestError.methodNotAllowed)
@@ -205,24 +203,62 @@ class APIClient : APIClientProtocol {
                     }
                     return .failure(APIRequestError.unprocessedEntity(errors: errorMessages))
                 } catch {
-                    SwiftyBeaver.error(request?.httpMethod)
-                    SwiftyBeaver.error(response)
-                    SwiftyBeaver.error(error)
+                    log(request: request, response: response, errors: [error])
                     return .failure(
                         AFError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)))
                 }
             }
             return .failure(APIRequestError.unprocessedEntity(errors: [:]))
         case 423:
-            SwiftyBeaver.error(request?.httpMethod)
-            SwiftyBeaver.error(response)
+            log(request: request, response: response, errors: [APIRequestError.locked])
             return .failure(APIRequestError.locked)
         case 426:
-            SwiftyBeaver.error(request?.httpMethod)
-            SwiftyBeaver.error(response)
+            log(request: request, response: response, errors: [APIRequestError.upgradeRequired])
             return .failure(APIRequestError.upgradeRequired)
         default: return .success
         }
     }
     
+    private func log(response: PMKAlamofireDataResponse, json: Any, errors: [Error]) {
+        log(method: response.request?.httpMethod,
+            url: response.request?.url?.debugDescription,
+            statusCode: response.response?.statusCode,
+            data: (json as? [String : Any])?.debugDescription,
+            errors: errors)
+    }
+    
+    private func log(request: URLRequest?, response: HTTPURLResponse, errors: [Error]) {
+        log(method: request?.httpMethod,
+            url: request?.url.debugDescription,
+            statusCode: response.statusCode,
+            data: response.debugDescription,
+            errors: errors)
+    }
+    
+    private func log(route: APIRoute, errors: [Error]) {
+        log(method: "\(route.method)",
+            url: "\(route.path) \(route.urlStringQueryParameters)",
+            statusCode: nil,
+            data: "\(route)",
+            errors: errors)
+    }
+    
+    private func log(method: String?, url: String?, statusCode: Int?, data: String?, errors: [Error]) {
+        var errorMessage = ""
+        if let statusCode = statusCode {
+            errorMessage.append("\(statusCode) ")
+        }
+        if let method = method,
+           let url = url {
+            errorMessage.append("\(method) \(url)\n")
+        }
+        errors.forEach {
+            errorMessage.append("Error: \($0)\n")
+        }
+        SwiftyBeaver.error(errorMessage)
+        if let data = data {
+            errorMessage.append("Data: \(data)\n")
+            SwiftyBeaver.verbose(errorMessage)
+        }
+    }
 }

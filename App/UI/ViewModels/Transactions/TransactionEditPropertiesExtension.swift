@@ -211,6 +211,20 @@ extension TransactionEditViewModel {
         return needCurrencyExchange && isSourceInitiallyConnected
     }
     
+    var isNewTransactionWithConnectedExpenseSource: Bool {
+        guard isNew else { return false }
+        if let sourceExpenseSourceViewModel = source as? ExpenseSourceViewModel,
+           sourceExpenseSourceViewModel.connectionConnected {
+            return true
+        }
+        if let destinationExpenseSourceViewModel = destination as? ExpenseSourceViewModel,
+           destinationExpenseSourceViewModel.connectionConnected {
+            
+            return true
+        }
+        return false
+    }
+    
 //    var isSourceVirtualExpenseSource: Bool {
 //        guard let expenseSourceSource = source as? ExpenseSourceViewModel else { return false }
 //        return expenseSourceSource.isVirtual

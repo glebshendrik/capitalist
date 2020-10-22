@@ -302,6 +302,7 @@ extension ApplicationRouter {
         let cloud = SBPlatformDestination(appID: "9GzNgj",
                                           appSecret: "fbu0pHuwbvvaLjDllk14njfkwuflluta",
                                           encryptionKey: "ancdIrinQlbaycys7xzmofxwuubo2fg9")
+        
         SwiftyBeaver.addDestination(console)
         SwiftyBeaver.addDestination(cloud)
     }

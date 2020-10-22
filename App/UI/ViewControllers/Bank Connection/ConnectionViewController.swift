@@ -130,8 +130,7 @@ extension ConnectionViewController {
                     delegate.didSetupConnection(connection)
                 }
             }
-        }.catch { error in
-            SwiftyBeaver.error(error)
+        }.catch { error in            
             self.close()
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
         }

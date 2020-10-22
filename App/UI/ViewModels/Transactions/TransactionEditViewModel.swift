@@ -12,6 +12,7 @@ import PromiseKit
 enum TransactionError : Error {
     case transactionIsNotSpecified
     case canNotLoadExpenseSource
+    case canNotUseConnectedExpenseSource
 }
 
 class TransactionEditViewModel {

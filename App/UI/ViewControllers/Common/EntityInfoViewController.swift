@@ -108,8 +108,7 @@ extension EntityInfoViewController {
         setLoading()
         firstly {
             viewModel.updateData()
-        }.catch { e in
-            SwiftyBeaver.error(e)
+        }.catch { e in            
             if case APIRequestError.notFound = e {
                 self.closeButtonHandler()
             }

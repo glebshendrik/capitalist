@@ -349,29 +349,29 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I0r-Qo-a6Z">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="153"/>
+                                                    <rect key="frame" x="24" y="0.0" width="327" height="153"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Провайдер подключения к банку не может установить соединение. Для обновления данных требуется подключиться к банку" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjM-nO-Osd">
-                                                            <rect key="frame" x="16" y="48.5" width="311" height="43.5"/>
+                                                            <rect key="frame" x="16" y="48.5" width="295" height="43.5"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
                                                             <color key="textColor" name="white 1.0"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Нет подключения к банку" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qve-6y-qrQ">
-                                                            <rect key="frame" x="53" y="17" width="274" height="19"/>
+                                                            <rect key="frame" x="53" y="17" width="258" height="19"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
                                                             <color key="textColor" name="white 1.0"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-K2-zbG">
-                                                            <rect key="frame" x="16" y="104" width="311" height="1"/>
+                                                            <rect key="frame" x="16" y="104" width="295" height="1"/>
                                                             <color key="backgroundColor" name="white 0.12"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="RhJ-hP-jbA"/>
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USD-rj-nRE" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
-                                                            <rect key="frame" x="8" y="105" width="327" height="48"/>
+                                                            <rect key="frame" x="8" y="105" width="311" height="48"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="48" id="DFF-RW-lOX"/>
@@ -434,9 +434,9 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="I0r-Qo-a6Z" firstAttribute="leading" secondItem="KTw-Ve-SWo" secondAttribute="leading" constant="16" id="T7d-2F-ppn"/>
+                                                <constraint firstItem="I0r-Qo-a6Z" firstAttribute="leading" secondItem="KTw-Ve-SWo" secondAttribute="leading" constant="24" id="T7d-2F-ppn"/>
                                                 <constraint firstItem="I0r-Qo-a6Z" firstAttribute="centerY" secondItem="KTw-Ve-SWo" secondAttribute="centerY" id="VsS-ig-0hX"/>
-                                                <constraint firstAttribute="trailing" secondItem="I0r-Qo-a6Z" secondAttribute="trailing" constant="16" id="Xv6-DA-ij0"/>
+                                                <constraint firstAttribute="trailing" secondItem="I0r-Qo-a6Z" secondAttribute="trailing" constant="24" id="Xv6-DA-ij0"/>
                                                 <constraint firstItem="I0r-Qo-a6Z" firstAttribute="top" secondItem="KTw-Ve-SWo" secondAttribute="top" id="clw-g4-F9l"/>
                                                 <constraint firstAttribute="bottom" secondItem="I0r-Qo-a6Z" secondAttribute="bottom" id="eXh-0z-Dyl"/>
                                             </constraints>

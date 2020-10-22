@@ -102,19 +102,22 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     override func entityInfoFields() -> [EntityInfoField] {
         var fields = [EntityInfoField]()
         
-        if bankConnectionViewModel.reconnectNeeded || bankConnectionViewModel.isSyncingWithBank {
-            fields.append(BankWarningInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
-                                               isSyncing: bankConnectionViewModel.isSyncingWithBank,
-                                               stage: bankConnectionViewModel.syncingWithBankStage))
-        }
-        
         fields.append(IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
                                     iconType: iconType,
                                     iconURL: selectedIconURL,
                                     placeholder: TransactionableType.expenseSource.defaultIconName,
                                     canEditIcon: canEditIcon))
         
+        if bankConnectionViewModel.reconnectNeeded || bankConnectionViewModel.isSyncingWithBank {
+            fields.append(BankWarningInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
+                                               isSyncing: bankConnectionViewModel.isSyncingWithBank,
+                                               stage: bankConnectionViewModel.syncingWithBankStage))
+        }
         
+        if let nextUpdatePossibleAt = bankConnectionViewModel.nextUpdatePossibleAt {
+            fields.append(DescriptionInfoField(fieldId: ExpenseCategoryInfoField.description.rawValue,
+                                               description: nextUpdatePossibleAt))
+        }
         
         fields.append(ButtonInfoField(fieldId: ExpenseSourceInfoField.bank.rawValue,
                                       title: bankButtonTitle,
@@ -136,18 +139,22 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                          value: expenseSourceViewModel.credit))
         }
         
-        fields.append(contentsOf: [ButtonInfoField(fieldId: ExpenseSourceInfoField.statistics.rawValue,
-                                                   title: NSLocalizedString("Статистика", comment: "Статистика"),
-                                                   iconName: nil,
-                                                   isEnabled: true),
-                                   ButtonInfoField(fieldId: ExpenseSourceInfoField.transactionIncome.rawValue,
-                                                   title: NSLocalizedString("Добавить доход", comment: "Добавить доход"),
-                                                   iconName: nil,
-                                                   isEnabled: true),
-                                   ButtonInfoField(fieldId: ExpenseSourceInfoField.transactionExpense.rawValue,
-                                                   title: NSLocalizedString("Добавить расход", comment: "Добавить расход"),
-                                                   iconName: nil,
-                                                   isEnabled: true)])
+        fields.append(ButtonInfoField(fieldId: ExpenseSourceInfoField.statistics.rawValue,
+                                      title: NSLocalizedString("Статистика", comment: "Статистика"),
+                                      iconName: nil,
+                                      isEnabled: true))
+        
+        if !bankConnectionViewModel.connectionConnected {
+            fields.append(contentsOf: [ButtonInfoField(fieldId: ExpenseSourceInfoField.transactionIncome.rawValue,
+                                                       title: NSLocalizedString("Добавить доход", comment: "Добавить доход"),
+                                                       iconName: nil,
+                                                       isEnabled: true),
+                                       ButtonInfoField(fieldId: ExpenseSourceInfoField.transactionExpense.rawValue,
+                                                       title: NSLocalizedString("Добавить расход", comment: "Добавить расход"),
+                                                       iconName: nil,
+                                                       isEnabled: true)])
+        }
+        
         return fields
     }
     

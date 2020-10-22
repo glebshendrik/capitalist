@@ -158,8 +158,6 @@ extension BankConnectionControllerProtocol {
         }.get { session in
             self.showConnectionViewController(session: session)
         }.catch { e in
-            print(e)
-            SwiftyBeaver.error(e)
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку",
                                                                                comment: "Не удалось создать подключение к банку"),
                                               theme: .error)

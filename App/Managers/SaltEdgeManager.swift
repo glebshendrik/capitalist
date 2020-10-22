@@ -272,7 +272,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                 return
                             }
                             seal.fulfill(())
-                        case .failure(let error):
+                        case .failure(let error):                            
                             SwiftyBeaver.error(error)
                             seal.reject(error)
                     }
