@@ -9,6 +9,7 @@
 import UIKit
 import SideMenu
 import Macaw
+import ESPullToRefresh
 
 extension MainViewController {
     var fastPressDuration: TimeInterval {
@@ -129,14 +130,25 @@ extension MainViewController {
     private func setupBasketsItemsCollectionView() {
         joyExpenseCategoriesCollectionView.delegate = self
         joyExpenseCategoriesCollectionView.dataSource = self
+        setupPullToRefresh(joyExpenseCategoriesCollectionView)
         
         riskActivesCollectionView.delegate = self
         riskActivesCollectionView.dataSource = self
+        setupPullToRefresh(riskActivesCollectionView)
         
         safeActivesCollectionView.delegate = self
         safeActivesCollectionView.dataSource = self
+        setupPullToRefresh(safeActivesCollectionView)
         
         basketsContentScrollView.delegate = self
+    }
+    
+    private func setupPullToRefresh(_ collectionView: UICollectionView) {
+        collectionView.es.addPullToRefresh {
+            [weak self] in
+            self?.loadData()
+        }
+        collectionView.setupPullToRefreshAppearance()
     }
     
     private func setupNavigationBar() {

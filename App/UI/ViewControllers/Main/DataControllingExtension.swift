@@ -17,8 +17,11 @@ extension MainViewController {
         loadExpenseCategories(by: .joy)
         loadActives(by: .risk)
         loadActives(by: .safe)
+        joyExpenseCategoriesCollectionView.es.stopPullToRefresh()
+        safeActivesCollectionView.es.stopPullToRefresh()
+        riskActivesCollectionView.es.stopPullToRefresh()
     }
-    
+        
     private func show(errors: [String: String]) {
         for (_, validationMessage) in errors {
             messagePresenterManager.show(validationMessage: validationMessage)
@@ -37,7 +40,7 @@ extension MainViewController {
             print(e)
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки баланса", comment: "Ошибка загрузки баланса"), theme: .error)
         }.finally {
-                
+            
         }
     }
 }
@@ -127,10 +130,10 @@ extension MainViewController {
     
     func refreshExpenseSourcesConnections() {
         _ = firstly {
-                startRefreshExpenseSourcesConnections()
-            }.ensure {
-                self.update(self.expenseSourcesCollectionView)
-            }
+            startRefreshExpenseSourcesConnections()
+        }.ensure {
+            self.update(self.expenseSourcesCollectionView)
+        }
     }
     
     func startRefreshExpenseSourcesConnections() -> Promise<Void> {
@@ -164,10 +167,10 @@ extension MainViewController {
         .catch { error in
             self.set(self.expenseSourcesActivityIndicator, hidden: true)
             switch error {
-            case APIRequestError.unprocessedEntity(let errors):
-                self.show(errors: errors)
-            default:
-                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка удаления кошелька", comment: "Ошибка удаления кошелька"), theme: .error)
+                case APIRequestError.unprocessedEntity(let errors):
+                    self.show(errors: errors)
+                default:
+                    self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка удаления кошелька", comment: "Ошибка удаления кошелька"), theme: .error)
             }
         }
     }
