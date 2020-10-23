@@ -254,7 +254,7 @@ extension TransactionEditViewModel {
                                        comment: comment,
                                        returningBorrowId: returningBorrowId,
                                        isBuyingAsset: isBuyingAsset,
-                                       updateSimilarTransactions: false)
+                                       updateSimilarTransactions: updateSimilarTransactions)
     }
 }
 

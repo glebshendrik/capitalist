@@ -104,6 +104,9 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         if viewModel.shouldAskForReestimateAsset {
             askForReestimateAsset()
         }
+        else if viewModel.shouldAskForBatchUpdateSimilars {
+            askForUpdateSimilars()
+        }
         else {
             super.save()
         }

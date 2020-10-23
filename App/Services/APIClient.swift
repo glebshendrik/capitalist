@@ -163,20 +163,23 @@ class APIClient : APIClientProtocol {
     
     private func requestValidator(request: URLRequest?, response: HTTPURLResponse, data: Data?) -> Request.ValidationResult {
         if response.statusCode >= 500 {
-            log(request: request, response: response, errors: [])
+            log(request: request, response: response)
         }
         switch response.statusCode {
         case 401:
+            log(request: request, response: response, errors: [APIRequestError.notAuthorized], level: .warning)
             return .failure(APIRequestError.notAuthorized)
         case 402:
+            log(request: request, response: response, errors: [APIRequestError.paymentRequired], level: .warning)
             return .failure(APIRequestError.paymentRequired)
         case 403:
-            log(request: request, response: response, errors: [APIRequestError.forbidden])
+            log(request: request, response: response, errors: [APIRequestError.forbidden], level: .warning)
             return .failure(APIRequestError.forbidden)
         case 404:
-            log(request: request, response: response, errors: [APIRequestError.notFound])
+            log(request: request, response: response, errors: [APIRequestError.notFound], level: .warning)
             return .failure(APIRequestError.notFound)
         case 405:
+            log(request: request, response: response, errors: [APIRequestError.methodNotAllowed], level: .warning)
             return .failure(APIRequestError.methodNotAllowed)
         case 422:
             if let validData = data {
@@ -201,6 +204,7 @@ class APIClient : APIClientProtocol {
                     } else {
                         errorMessages["error"] = NSLocalizedString("Common server error", comment: "Common server error message")
                     }
+                    log(request: request, response: response, data: errorMessages.description, level: .warning)
                     return .failure(APIRequestError.unprocessedEntity(errors: errorMessages))
                 } catch {
                     log(request: request, response: response, errors: [error])
@@ -208,57 +212,69 @@ class APIClient : APIClientProtocol {
                         AFError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)))
                 }
             }
+            log(request: request, response: response, level: .warning)
             return .failure(APIRequestError.unprocessedEntity(errors: [:]))
         case 423:
-            log(request: request, response: response, errors: [APIRequestError.locked])
+            log(request: request, response: response, errors: [APIRequestError.locked], level: .warning)
             return .failure(APIRequestError.locked)
         case 426:
-            log(request: request, response: response, errors: [APIRequestError.upgradeRequired])
+            log(request: request, response: response, errors: [APIRequestError.upgradeRequired], level: .warning)
             return .failure(APIRequestError.upgradeRequired)
-        default: return .success
+        default:
+            log(request: request, response: response, level: .info)
+            return .success
         }
     }
     
-    private func log(response: PMKAlamofireDataResponse, json: Any, errors: [Error]) {
+    private func log(response: PMKAlamofireDataResponse, json: Any, errors: [Error] = [], level: SwiftyBeaver.Level = .error) {
         log(method: response.request?.httpMethod,
-            url: response.request?.url?.debugDescription,
+            url: response.request?.url?.absoluteString,
             statusCode: response.response?.statusCode,
             data: (json as? [String : Any])?.debugDescription,
-            errors: errors)
+            errors: errors,
+            level: level)
     }
     
-    private func log(request: URLRequest?, response: HTTPURLResponse, errors: [Error]) {
+    private func log(request: URLRequest?, response: HTTPURLResponse, errors: [Error] = [], data: String? = nil, level: SwiftyBeaver.Level = .error) {
         log(method: request?.httpMethod,
-            url: request?.url.debugDescription,
+            url: request?.url?.absoluteString,
             statusCode: response.statusCode,
-            data: response.debugDescription,
-            errors: errors)
+            data: data,
+            errors: errors,
+            level: level)
     }
     
-    private func log(route: APIRoute, errors: [Error]) {
+    private func log(route: APIRoute, errors: [Error] = [], level: SwiftyBeaver.Level = .error) {
         log(method: "\(route.method)",
             url: "\(route.path) \(route.urlStringQueryParameters)",
             statusCode: nil,
             data: "\(route)",
-            errors: errors)
+            errors: errors,
+            level: level)
     }
     
-    private func log(method: String?, url: String?, statusCode: Int?, data: String?, errors: [Error]) {
-        var errorMessage = ""
+    private func log(method: String?, url: String?, statusCode: Int?, data: String?, errors: [Error], level: SwiftyBeaver.Level) {
+        var message = ""
         if let statusCode = statusCode {
-            errorMessage.append("\(statusCode) ")
+            message.append("\(statusCode) ")
         }
         if let method = method,
            let url = url {
-            errorMessage.append("\(method) \(url)\n")
+            message.append("\(method) \(url)\n")
         }
         errors.forEach {
-            errorMessage.append("Error: \($0)\n")
+            message.append("Error: \($0)\n")
         }
-        SwiftyBeaver.error(errorMessage)
+                
         if let data = data {
-            errorMessage.append("Data: \(data)\n")
-            SwiftyBeaver.verbose(errorMessage)
+            if level == .error {
+                SwiftyBeaver.error(message)
+            }
+            message.append("Data: \(data)\n")
+            SwiftyBeaver.custom(level: level == .error ? .warning : level, message: message)
+        }
+        else {
+            SwiftyBeaver.custom(level: level, message: message)
         }
     }
 }

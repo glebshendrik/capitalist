@@ -145,6 +145,15 @@ extension TransactionEditViewModel {
         return sourceCurrencyCode != destinationCurrencyCode
     }
     
+    var shouldAskForBatchUpdateSimilars: Bool {
+        return
+            !isNew &&
+            isRemoteTransaction &&
+            hasComment &&
+            (source?.compareId != initialSource?.compareId ||
+                destination?.compareId != initialDestination?.compareId)
+    }
+    
     // Visibility
     
     var amountFieldHidden: Bool {

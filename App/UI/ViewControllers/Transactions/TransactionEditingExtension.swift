@@ -276,6 +276,25 @@ extension TransactionEditViewController {
                                                basketType: active.basketType,
                                                costCents: viewModel.amountCents))
     }
+    
+    func askForUpdateSimilars() {
+        let updateSimilarsAction = UIAlertAction(title: NSLocalizedString("Обновить", comment: ""),
+                                                  style: .default,
+                                                  handler: { _ in
+                                                    self.viewModel.updateSimilarTransactions = true
+                                                    super.save()
+                                                  })
+        
+        var message = NSLocalizedString("Похожие транзакции с комментарием:", comment: "")
+        message = "\(message)\n\(viewModel.comment ?? "")"
+        
+        sheet(title: NSLocalizedString("Обновить похожие транзакции?", comment: ""),
+              actions: [updateSimilarsAction],
+              message: message,
+              preferredStyle: .alert) { cancel in
+            super.save()
+        }
+    }
 }
 
 extension TransactionEditViewController : ActiveEditViewControllerDelegate {

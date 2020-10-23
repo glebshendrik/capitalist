@@ -45,6 +45,9 @@ class TransactionEditViewModel {
     var requiredTransactionType: TransactionType? = nil
     var isSourceInitiallyConnected: Bool = false
     var isDestinationInitiallyConnected: Bool = false
+    var initialSource: Transactionable? = nil
+    var initialDestination: Transactionable? = nil
+    var updateSimilarTransactions: Bool = false
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
@@ -91,6 +94,8 @@ class TransactionEditViewModel {
         self.destination = destination
         self.isSourceInitiallyConnected = isRemoteTransaction && (source as? ExpenseSourceViewModel)?.accountViewModel?.account.id == transaction.accountId
         self.isDestinationInitiallyConnected = isRemoteTransaction && (destination as? ExpenseSourceViewModel)?.accountViewModel?.account.id == transaction.accountId
+        self.initialSource = source
+        self.initialDestination = destination
         self.amount = transaction.amountCents.moneyDecimalString(with: sourceCurrency)
         self.convertedAmount = transaction.convertedAmountCents.moneyDecimalString(with: destinationCurrency)
     }

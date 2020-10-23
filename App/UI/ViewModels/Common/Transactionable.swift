@@ -29,6 +29,10 @@ extension Transactionable {
     var defaultIconName: String {
         return type.defaultIconName
     }
+    
+    var compareId: String {
+        return "\(type.rawValue)_\(id)"
+    }
 }
 
 protocol TransactionSource : Transactionable {
