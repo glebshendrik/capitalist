@@ -19,6 +19,7 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
     
     @IBOutlet weak var tableView: UITableView!
     var tableOffset: CGPoint = CGPoint.zero
+    var pulledManually: Bool = false
     
     var viewModel: EntityInfoViewModel!
     
@@ -54,6 +55,9 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
         tableView.register(UINib(nibName: "TransactionsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: TransactionsSectionHeaderView.reuseIdentifier)
         tableView.es.addPullToRefresh {
             [weak self] in
+            if !(self?.pulledManually ?? true) {
+                self?.tableOffset = .zero
+            }
             self?.updateData()
         }
         tableView.es.addInfiniteScrolling {
@@ -76,6 +80,7 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
     func updateUI() {
         tableView.reloadData()
         tableView.setContentOffset(tableOffset, animated: false)
+        pulledManually = false
         updateNavigationBarUI()
     }
     
@@ -92,7 +97,23 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
     }
 }
 
-extension EntityInfoViewController {
+extension EntityInfoViewController : Updatable, Navigatable {
+    var viewController: Infrastructure.ViewController {
+        return entityInfoNavigationController?.viewController ?? .EntityInfoViewController
+    }
+    
+    var presentingCategories: [NotificationCategory] {
+        return entityInfoNavigationController?.presentingCategories ?? []
+    }
+    
+    func navigate(to viewController: Infrastructure.ViewController, with category: NotificationCategory) {
+        entityInfoNavigationController?.navigate(to: viewController, with: category)
+    }
+    
+    func update() {
+        entityInfoNavigationController?.update()
+    }
+    
     @objc func refreshData() {
         guard
             !viewModel.isUpdatingData
@@ -101,6 +122,7 @@ extension EntityInfoViewController {
             return
         }
         tableOffset = tableView.contentOffset
+        pulledManually = true
         tableView.es.startPullToRefresh()
     }
     
