@@ -511,6 +511,7 @@ extension TransactionEditViewController {
 extension TransactionEditViewController : WaitingBorrowsViewControllerDelegate {
     func didSelect(borrow: BorrowViewModel, source: TransactionSource, destination: TransactionDestination) {
         update(source: source, destination: destination, returningBorrow: borrow)
+        save()
     }
 }
 

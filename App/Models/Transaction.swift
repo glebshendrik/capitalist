@@ -232,7 +232,7 @@ struct TransactionUpdatingForm : Encodable, Validatable {
         case convertedAmountCurrency = "converted_amount_currency"
         case gotAt = "got_at"
         case comment
-        case returningBorrowId = "returning_borrow_id"
+        case returningBorrowId = "borrow_id"
         case isBuyingAsset = "buying_asset"
         case updateSimilarTransactions = "update_similar_transactions"
     }
