@@ -245,7 +245,9 @@ class UIFactory : UIFactoryProtocol {
     
     func creditEditViewController(delegate: CreditEditViewControllerDelegate,
                                   creditId: Int?,
-                                  destination: TransactionDestination?) -> UINavigationController? {
+                                  source: IncomeSourceViewModel?,
+                                  destination: TransactionDestination?,
+                                  creditingTransaction: Transaction?) -> UINavigationController? {
         
         let creditEditNavigationController = router.viewController(.CreditEditNavigationController) as? UINavigationController
         let creditEditViewController = creditEditNavigationController?.topViewController as? CreditEditViewController
@@ -255,7 +257,9 @@ class UIFactory : UIFactoryProtocol {
             creditEditViewController?.set(creditId: creditId)
         }
         else {
-            creditEditViewController?.set(destination: destination)
+            creditEditViewController?.set(source: source,
+                                          destination: destination,
+                                          creditingTransaction: creditingTransaction)
         }
         return creditEditNavigationController
     }

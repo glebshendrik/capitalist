@@ -89,8 +89,10 @@ extension CreditEditViewController {
         viewModel.set(creditId: creditId)
     }
     
-    func set(destination: TransactionDestination?) {
-        viewModel.set(destination: destination as? ExpenseSourceViewModel)
+    func set(source: IncomeSourceViewModel?, destination: TransactionDestination?, creditingTransaction: Transaction?) {
+        viewModel.set(source: source,
+                      destination: destination as? ExpenseSourceViewModel,
+                      creditingTransaction: creditingTransaction)
     }
 }
 
@@ -118,6 +120,7 @@ extension CreditEditViewController : CreditEditTableControllerDelegate {
     }
     
     func didTapExpenseSource() {
+        guard viewModel.canChangeExpenseSource else { return }
         slideUp(factory.expenseSourceSelectViewController(delegate: self,
                                                           skipExpenseSourceId: nil,
                                                           selectionType: .destination,
@@ -148,6 +151,7 @@ extension CreditEditViewController : CreditEditTableControllerDelegate {
     }
 
     func didTapGotAt() {
+        guard viewModel.canChangeGotAt else { return }
         modal(factory.datePickerViewController(delegate: self,
                                                date: viewModel.gotAt,
                                                minDate: nil,
@@ -259,6 +263,7 @@ extension CreditEditViewController {
         
         tableController.amountField.text = viewModel.amount
         tableController.amountField.currency = viewModel.selectedCurrency
+        tableController.amountField.isEnabled = viewModel.canChangeAmount
         
         tableController.returnAmountField.text = viewModel.returnAmount
         tableController.returnAmountField.currency = viewModel.selectedCurrency
@@ -277,6 +282,7 @@ extension CreditEditViewController {
     
     func updateGotAtUI() {
         tableController.gotAtField.text = viewModel.gotAtFormatted
+        tableController.gotAtField.isEnabled = viewModel.canChangeGotAt
     }
     
     func updateCreditTypeUI() {
@@ -304,6 +310,7 @@ extension CreditEditViewController {
         tableController.expenseSourceField.subValue = viewModel.expenseSourceAmount
         tableController.expenseSourceField.imageName = viewModel.expenseSourceIconDefaultImageName
         tableController.expenseSourceField.imageURL = viewModel.expenseSourceIconURL
+        tableController.expenseSourceField.isEnabled = viewModel.canChangeExpenseSource
         if reload {
             tableController.reloadData(animated: animated)
         }

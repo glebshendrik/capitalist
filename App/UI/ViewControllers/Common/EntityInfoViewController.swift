@@ -445,8 +445,10 @@ extension EntityInfoViewController : TransactionEditViewControllerDelegate, Borr
         postFinantialDataUpdated()
     }
     
-    func shouldShowCreditEditScreen(destination: TransactionDestination) {
-        showCreditEditScreen(destination: destination)
+    func shouldShowCreditEditScreen(source: IncomeSourceViewModel?,
+                                    destination: TransactionDestination,
+                                    creditingTransaction: Transaction?) {
+        showCreditEditScreen(source: source, destination: destination, creditingTransaction: creditingTransaction)
     }
     
     func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination, borrowingTransaction: Transaction?) {
@@ -462,9 +464,13 @@ extension EntityInfoViewController : TransactionEditViewControllerDelegate, Borr
                                                borrowingTransaction: borrowingTransaction))
     }
     
-    func showCreditEditScreen(destination: TransactionDestination) {
+    func showCreditEditScreen(source: IncomeSourceViewModel?,
+                              destination: TransactionDestination,
+                              creditingTransaction: Transaction?) {
         modal(factory.creditEditViewController(delegate: self,
                                                creditId: nil,
-                                               destination: destination))
+                                               source: source,
+                                               destination: destination,
+                                               creditingTransaction: creditingTransaction))
     }
 }

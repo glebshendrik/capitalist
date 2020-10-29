@@ -27,6 +27,7 @@ struct Credit : Decodable {
     let expenseCategoryId: Int
     let reminder: Reminder?
     let expenseCategory: ExpenseCategory?
+    let creditingTransactionId: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -47,6 +48,7 @@ struct Credit : Decodable {
         case expenseCategoryId = "expense_category_id"
         case reminder
         case expenseCategory = "expense_category"
+        case creditingTransactionId = "crediting_transaction_id"
     }
 }
 

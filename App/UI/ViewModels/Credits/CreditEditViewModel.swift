@@ -17,6 +17,7 @@ class CreditEditViewModel {
     let creditsCoordinator: CreditsCoordinatorProtocol
     let accountCoordinator: AccountCoordinatorProtocol
     let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
+    let transactionsCoordinator: TransactionsCoordinatorProtocol
     
     private var credit: Credit? = nil
     
@@ -47,9 +48,16 @@ class CreditEditViewModel {
     var shouldRecordOnBalance: Bool = false
     var selectedDestination: ExpenseSourceViewModel? = nil
     var creditingTransactionAttributes: CreditingTransactionNestedAttributes? {
-        guard isNew else { return nil }
-        return CreditingTransactionNestedAttributes(id: nil, destinationId: shouldRecordOnBalance ? selectedDestination?.id : nil)
+        guard
+            isNew, shouldRecordOnBalance
+        else {
+            return nil            
+        }
+        return CreditingTransactionNestedAttributes(id: creditingTransaction?.id,
+                                                    destinationId: shouldRecordOnBalance ? selectedDestination?.id : nil)
     }
+    
+    var creditingTransaction: TransactionViewModel? = nil
     
     var monthlyPaymentToSave: String? {
         if let monthlyPayment = monthlyPayment, !monthlyPayment.isEmpty {
@@ -109,7 +117,7 @@ class CreditEditViewModel {
     
     // Visibility
     var onBalanceSwitchHidden: Bool {
-        return !isNew || selectedCurrency == nil
+        return !isNew || selectedCurrency == nil || creditingTransaction != nil
     }
     
     var expenseSourceFieldHidden: Bool {
@@ -129,26 +137,52 @@ class CreditEditViewModel {
         return !isNew
     }
     
-    var removeButtonHidden: Bool { return isNew }
+    var removeButtonHidden: Bool { return isNew || isCreditingTransactionRemote }
         
     // Permissions
-    var canChangeCurrency: Bool { return isNew }
-    
     var canChangeCreditType: Bool { return isNew }
     
     var canChangeAlreadyPaid: Bool { return isNew }
     
+    var canChangeCurrency: Bool { return isNew && creditingTransaction == nil }
+    
+    var canChangeAmount: Bool { return (isNew && creditingTransaction == nil) || (!isNew && !isCreditingTransactionRemote) }
+    
+    var canChangeExpenseSource: Bool { return isNew && creditingTransaction == nil }
+    
+    var canChangeGotAt: Bool { return !isNew || (isNew && creditingTransaction == nil) }
+    
+    var shouldSaveCreditingTransaction: Bool {
+        return isNew && creditingTransaction != nil
+    }
+    
+    var isCreditingTransactionRemote: Bool {
+        return creditingTransaction?.isRemote ?? false
+    }
+    
+    var source: IncomeSourceViewModel? = nil
+    
     init(creditsCoordinator: CreditsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
-         expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol) {
+         expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
+         transactionsCoordinator: TransactionsCoordinatorProtocol) {
         self.creditsCoordinator = creditsCoordinator
         self.accountCoordinator = accountCoordinator
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
+        self.transactionsCoordinator = transactionsCoordinator
     }
     
-    func set(destination: ExpenseSourceViewModel?) {        
+    func set(source: IncomeSourceViewModel?,
+             destination: ExpenseSourceViewModel?,
+             creditingTransaction: Transaction?) {
+        self.source = source
         self.selectedDestination = destination
         selectedCurrency = destination?.currency
+        if let creditingTransaction = creditingTransaction {
+            self.creditingTransaction = TransactionViewModel(transaction: creditingTransaction)
+        }
+        amount = creditingTransaction?.convertedAmountCents.moneyDecimalString(with: selectedCurrency)
+        self.gotAt = creditingTransaction?.gotAt ?? Date()
         shouldRecordOnBalance = destination != nil
     }
     
@@ -174,7 +208,15 @@ class CreditEditViewModel {
     }
     
     func loadData() -> Promise<Void> {
-        return isNew ? loadDefaults() : loadCredit()
+        if isNew {
+            return loadDefaults()
+        }
+        return
+            firstly {
+                loadCredit()
+            }.then { credit in
+                self.loadCreditingTransaction(id: credit.creditingTransactionId)
+            }
     }
     
     func loadDefaults() -> Promise<Void> {
@@ -209,6 +251,18 @@ class CreditEditViewModel {
                 }.asVoid()
     }
     
+    private func loadCreditingTransaction(id: Int?) -> Promise<Void> {
+        guard let id = id else {
+            return Promise.value(())
+        }
+        return
+            firstly {
+                transactionsCoordinator.show(by: id)
+            }.get { transaction in
+                self.creditingTransaction = TransactionViewModel(transaction: transaction)
+            }.asVoid()
+    }
+    
     private func loadCreditTypes() -> Promise<[CreditType]> {
         return  firstly {
                     creditsCoordinator.indexCreditTypes()
@@ -218,7 +272,7 @@ class CreditEditViewModel {
                 }
     }
         
-    private func loadCredit() -> Promise<Void> {
+    private func loadCredit() -> Promise<Credit> {
         guard let creditId = creditId else {
             return Promise(error: CreditError.creditIsNotSpecified)
         }
@@ -226,7 +280,7 @@ class CreditEditViewModel {
                     creditsCoordinator.showCredit(by: creditId)
                 }.get { credit in
                     self.set(credit: credit)
-                }.asVoid()
+                }
     }
     
     func isFormValid() -> Bool {
@@ -280,7 +334,35 @@ class CreditEditViewModel {
 // Creation
 extension CreditEditViewModel {
     func create() -> Promise<Void> {
-        return creditsCoordinator.createCredit(with: creationForm()).asVoid()
+        return
+            firstly {
+                saveCreditingTransaction()
+            }.then { () -> Promise<Void> in
+                return self.creditsCoordinator.createCredit(with: self.creationForm()).asVoid()
+            }.asVoid()
+    }
+    
+    func saveCreditingTransaction() -> Promise<Void> {
+        guard
+            shouldSaveCreditingTransaction,
+            let creditingTransaction = creditingTransaction
+        else {
+            return Promise.value(())
+        }
+        return transactionsCoordinator.update(with: TransactionUpdatingForm(id: creditingTransaction.id,
+                                                                            sourceId: source?.id,
+                                                                            sourceType: source?.type,
+                                                                            destinationId: selectedDestination?.id,
+                                                                            destinationType: selectedDestination?.type,
+                                                                            amountCents: creditingTransaction.amountCents,
+                                                                            amountCurrency: creditingTransaction.currency.code,
+                                                                            convertedAmountCents: creditingTransaction.convertedAmountCents,
+                                                                            convertedAmountCurrency: creditingTransaction.convertedCurrency.code,
+                                                                            gotAt: creditingTransaction.gotAt,
+                                                                            comment: creditingTransaction.comment,
+                                                                            returningBorrowId: creditingTransaction.transaction.returningBorrow?.id,
+                                                                            isBuyingAsset: creditingTransaction.transaction.isBuyingAsset,
+                                                                            updateSimilarTransactions: false))
     }
     
     func isCreationFormValid() -> Bool {

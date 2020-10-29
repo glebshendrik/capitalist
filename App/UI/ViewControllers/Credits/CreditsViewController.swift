@@ -128,7 +128,11 @@ extension CreditsViewController : CreditEditViewControllerDelegate {
     }
 
     func showNewCredit() {
-        modal(factory.creditEditViewController(delegate: self, creditId: nil, destination: nil))
+        modal(factory.creditEditViewController(delegate: self,
+                                               creditId: nil,
+                                               source: nil,
+                                               destination: nil,
+                                               creditingTransaction: nil))
     }
 }
 

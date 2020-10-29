@@ -9,7 +9,7 @@
 import UIKit
 
 class EntityInfoNavigationController : UINavigationController, UIFactoryDependantProtocol, UIMessagePresenterManagerDependantProtocol, CombinedInfoTableViewCellDelegate, IconInfoTableViewCellDelegate, SwitchInfoTableViewCellDelegate, ButtonInfoTableViewCellDelegate, ReminderInfoTableViewCellDelegate, BankWarningInfoTableViewCellDelegate, TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate, CreditEditViewControllerDelegate, Updatable, Navigatable {
-    
+
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var factory: UIFactoryProtocol!
     
@@ -128,8 +128,10 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
         
     }
     
-    func shouldShowCreditEditScreen(destination: TransactionDestination) {
-        showCreditEditScreen(destination: destination)
+    func shouldShowCreditEditScreen(source: IncomeSourceViewModel?,
+                                    destination: TransactionDestination,
+                                    creditingTransaction: Transaction?) {
+        showCreditEditScreen(source: source, destination: destination, creditingTransaction: creditingTransaction)
     }
 
     func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination, borrowingTransaction: Transaction?) {
@@ -145,10 +147,14 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
                                                borrowingTransaction: borrowingTransaction))
     }
     
-    func showCreditEditScreen(destination: TransactionDestination) {
+    func showCreditEditScreen(source: IncomeSourceViewModel?,
+                              destination: TransactionDestination,
+                              creditingTransaction: Transaction?) {
         modal(factory.creditEditViewController(delegate: self,
                                                creditId: nil,
-                                               destination: destination))
+                                               source: source,
+                                               destination: destination,
+                                               creditingTransaction: creditingTransaction))
     }
     
     var viewController: Infrastructure.ViewController {

@@ -15,7 +15,9 @@ protocol TransactionEditViewControllerDelegate : class {
     func didCreateTransaction(id: Int, type: TransactionType)
     func didUpdateTransaction(id: Int, type: TransactionType)
     func didRemoveTransaction(id: Int, type: TransactionType)
-    func shouldShowCreditEditScreen(destination: TransactionDestination)
+    func shouldShowCreditEditScreen(source: IncomeSourceViewModel?,
+                                    destination: TransactionDestination,
+                                    creditingTransaction: Transaction?)
     func shouldShowBorrowEditScreen(type: BorrowType,
                                     source: TransactionSource,
                                     destination: TransactionDestination,

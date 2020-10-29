@@ -95,7 +95,11 @@ extension MainViewController {
     }
     
     func showCreditEditScreen(creditId: Int) {
-        modal(factory.creditEditViewController(delegate: self, creditId: creditId, destination: nil))
+        modal(factory.creditEditViewController(delegate: self,
+                                               creditId: creditId,
+                                               source: nil,
+                                               destination: nil,
+                                               creditingTransaction: nil))
     }
 }
 
@@ -169,7 +173,7 @@ extension MainViewController {
     
     private func showBorrowingIncomeSheet(source: IncomeSourceViewModel, destination: ExpenseSourceViewModel) {
         let creditAction = UIAlertAction(title: NSLocalizedString("Взять в кредит", comment: "Взять в кредит"), style: .default) { _ in
-            self.showCreditEditScreen(destination: destination)
+            self.showCreditEditScreen(source: source, destination: destination, creditingTransaction: nil)
         }
         
         let loanAction = UIAlertAction(title: NSLocalizedString("Занять", comment: "Занять"), style: .default) { _ in
@@ -218,10 +222,14 @@ extension MainViewController {
                                                borrowingTransaction: borrowingTransaction))
     }
     
-    func showCreditEditScreen(destination: TransactionDestination) {
+    func showCreditEditScreen(source: IncomeSourceViewModel?,
+                              destination: TransactionDestination,
+                              creditingTransaction: Transaction?) {
         modal(factory.creditEditViewController(delegate: self,
                                                creditId: nil,
-                                               destination: destination))
+                                               source: source,
+                                               destination: destination,
+                                               creditingTransaction: creditingTransaction))
     }
     
     private func showWaitingBorrows(_ waitingBorrows: [BorrowViewModel], source: TransactionSource, destination: TransactionDestination, borrowType: BorrowType) {

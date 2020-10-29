@@ -93,7 +93,9 @@ protocol UIFactoryProtocol {
     
     func creditEditViewController(delegate: CreditEditViewControllerDelegate,
                                   creditId: Int?,
-                                  destination: TransactionDestination?) -> UINavigationController?
+                                  source: IncomeSourceViewModel?,
+                                  destination: TransactionDestination?,
+                                  creditingTransaction: Transaction?) -> UINavigationController?
     
     func creditInfoViewController(creditId: Int?, credit: CreditViewModel?) -> UINavigationController?
         

@@ -451,7 +451,7 @@ extension TransactionEditViewController {
     
     private func showBorrowingIncomeSheet(source: IncomeSourceViewModel, destination: ExpenseSourceViewModel) {
         let creditAction = UIAlertAction(title: NSLocalizedString("Взять в кредит", comment: "Взять в кредит"), style: .default) { _ in
-            self.showCreditEditScreen(destination: destination)
+            self.showCreditEditScreen(source: source, destination: destination)
         }
         
         let loanAction = UIAlertAction(title: NSLocalizedString("Занять", comment: "Занять"), style: .default) { _ in
@@ -509,9 +509,11 @@ extension TransactionEditViewController {
         }
     }
     
-    private func showCreditEditScreen(destination: TransactionDestination) {
+    private func showCreditEditScreen(source: IncomeSourceViewModel, destination: TransactionDestination) {
         closeButtonHandler() {
-            self.delegate?.shouldShowCreditEditScreen(destination: destination)
+            self.delegate?.shouldShowCreditEditScreen(source: source,
+                                                      destination: destination,
+                                                      creditingTransaction: self.viewModel.transaction)
         }
     }
 }

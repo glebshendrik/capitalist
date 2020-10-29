@@ -36,7 +36,11 @@ class CreditInfoViewController : EntityInfoNavigationController {
     }
     
     override func showEditScreen() {
-        modal(factory.creditEditViewController(delegate: self, creditId: viewModel.creditId, destination: nil))
+        modal(factory.creditEditViewController(delegate: self,
+                                               creditId: viewModel.creditId,
+                                               source: nil,
+                                               destination: nil,
+                                               creditingTransaction: nil))
     }
     
     override func didCreateCredit() {

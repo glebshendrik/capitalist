@@ -363,7 +363,9 @@ extension BorrowEditViewController: TransactionEditViewControllerDelegate {
 
     }
     
-    func shouldShowCreditEditScreen(destination: TransactionDestination) {
+    func shouldShowCreditEditScreen(source: IncomeSourceViewModel?,
+                                    destination: TransactionDestination,
+                                    creditingTransaction: Transaction?) {
         
     }
 
