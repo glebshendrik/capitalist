@@ -15,15 +15,15 @@ extension StatisticsViewController : TransactionEditViewControllerDelegate, Borr
     }
     
     func didCreateCredit() {
-        
+        loadData()
     }
     
     func didCreateDebt() {
-        
+        loadData()
     }
     
     func didCreateLoan() {
-        
+        loadData()
     }
     
     func didUpdateCredit() {
@@ -65,16 +65,17 @@ extension StatisticsViewController : TransactionEditViewControllerDelegate, Borr
         showCreditEditScreen(destination: destination)
     }
 
-    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
-        showBorrowEditScreen(type: type, source: source, destination: destination)
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination, borrowingTransaction: Transaction?) {
+        showBorrowEditScreen(type: type, source: source, destination: destination, borrowingTransaction: borrowingTransaction)
     }
     
-    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination, borrowingTransaction: Transaction?) {
         modal(factory.borrowEditViewController(delegate: self,
                                                type: type,
                                                borrowId: nil,
                                                source: source,
-                                               destination: destination))
+                                               destination: destination,
+                                               borrowingTransaction: borrowingTransaction))
     }
     
     func showCreditEditScreen(destination: TransactionDestination) {

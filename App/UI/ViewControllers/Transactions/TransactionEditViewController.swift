@@ -16,7 +16,10 @@ protocol TransactionEditViewControllerDelegate : class {
     func didUpdateTransaction(id: Int, type: TransactionType)
     func didRemoveTransaction(id: Int, type: TransactionType)
     func shouldShowCreditEditScreen(destination: TransactionDestination)
-    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination)
+    func shouldShowBorrowEditScreen(type: BorrowType,
+                                    source: TransactionSource,
+                                    destination: TransactionDestination,
+                                    borrowingTransaction: Transaction?)
 }
 
 class TransactionEditViewController : FormNavBarButtonsEditViewController {

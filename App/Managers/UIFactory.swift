@@ -224,7 +224,8 @@ class UIFactory : UIFactoryProtocol {
                                   type: BorrowType,
                                   borrowId: Int?,
                                   source: TransactionSource?,
-                                  destination: TransactionDestination?) -> UINavigationController? {
+                                  destination: TransactionDestination?,
+                                  borrowingTransaction: Transaction?) -> UINavigationController? {
         
         let borrowEditNavigationController = router.viewController(.BorrowEditNavigationController) as? UINavigationController
         let borrowEditViewController = borrowEditNavigationController?.topViewController as? BorrowEditViewController
@@ -234,7 +235,10 @@ class UIFactory : UIFactoryProtocol {
             borrowEditViewController?.set(borrowId: borrowId, type: type)
         }
         else {            
-            borrowEditViewController?.set(type: type, source: source, destination: destination)
+            borrowEditViewController?.set(type: type,
+                                          source: source,
+                                          destination: destination,
+                                          borrowingTransaction: borrowingTransaction)
         }
         return borrowEditNavigationController
     }

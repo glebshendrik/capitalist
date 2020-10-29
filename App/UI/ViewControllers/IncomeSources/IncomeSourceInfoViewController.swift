@@ -37,7 +37,12 @@ class IncomeSourceInfoViewController : EntityInfoNavigationController {
     
     private func didTapTransactionButton() {
         if viewModel.isBorrow {
-            modal(factory.borrowEditViewController(delegate: self, type: .loan, borrowId: nil, source: viewModel.incomeSourceViewModel, destination: nil))
+            modal(factory.borrowEditViewController(delegate: self,
+                                                   type: .loan,
+                                                   borrowId: nil,
+                                                   source: viewModel.incomeSourceViewModel,
+                                                   destination: nil,
+                                                   borrowingTransaction: nil))
         }
         else {
             modal(factory.transactionEditViewController(delegate: self, source: viewModel.incomeSourceViewModel, destination: nil, transactionType: .income))

@@ -501,8 +501,11 @@ extension TransactionEditViewController {
     }
     
     private func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
-        closeButtonHandler() {
-            self.delegate?.shouldShowBorrowEditScreen(type: type, source: source, destination: destination)
+        closeButtonHandler() {            
+            self.delegate?.shouldShowBorrowEditScreen(type: type,
+                                                      source: source,
+                                                      destination: destination,
+                                                      borrowingTransaction: self.viewModel.transaction)
         }
     }
     

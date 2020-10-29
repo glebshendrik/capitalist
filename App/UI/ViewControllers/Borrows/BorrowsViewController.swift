@@ -198,7 +198,12 @@ extension BorrowsViewController : BorrowEditViewControllerDelegate {
     }
     
     func showNewBorrow() {
-        modal(factory.borrowEditViewController(delegate: self, type: viewModel.selectedBorrowType, borrowId: nil, source: nil, destination: nil))
+        modal(factory.borrowEditViewController(delegate: self,
+                                               type: viewModel.selectedBorrowType,
+                                               borrowId: nil,
+                                               source: nil,
+                                               destination: nil,
+                                               borrowingTransaction: nil))
     }
 }
 

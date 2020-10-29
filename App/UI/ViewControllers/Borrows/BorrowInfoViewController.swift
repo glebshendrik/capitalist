@@ -31,7 +31,12 @@ class BorrowInfoViewController : EntityInfoNavigationController {
     
     override func showEditScreen() {
         guard let borrowType = viewModel.borrowType else { return }
-        modal(factory.borrowEditViewController(delegate: self, type: borrowType, borrowId: viewModel.borrowViewModel?.id, source: nil, destination: nil))
+        modal(factory.borrowEditViewController(delegate: self,
+                                               type: borrowType,
+                                               borrowId: viewModel.borrowViewModel?.id,
+                                               source: nil,
+                                               destination: nil,
+                                               borrowingTransaction: nil))
     }
     
     override func didCreateDebt() {

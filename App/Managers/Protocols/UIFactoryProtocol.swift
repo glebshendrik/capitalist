@@ -84,7 +84,8 @@ protocol UIFactoryProtocol {
                                   type: BorrowType,
                                   borrowId: Int?,
                                   source: TransactionSource?,
-                                  destination: TransactionDestination?) -> UINavigationController?
+                                  destination: TransactionDestination?,
+                                  borrowingTransaction: Transaction?) -> UINavigationController?
     
     func borrowInfoViewController(borrowId: Int?,
                                   borrowType: BorrowType?,

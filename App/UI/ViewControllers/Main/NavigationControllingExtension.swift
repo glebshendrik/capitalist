@@ -160,7 +160,7 @@ extension MainViewController {
             showBorrowingExpenseSheet(source: source, destination: destination)
         }
         else if destination.isBorrowOrReturn {
-            showBorrowEditScreen(type: .debt, source: source, destination: destination)
+            showBorrowEditScreen(type: .debt, source: source, destination: destination, borrowingTransaction: nil)
         }
         else {
             showTransactionEditScreen(source: source, destination: destination)
@@ -173,7 +173,7 @@ extension MainViewController {
         }
         
         let loanAction = UIAlertAction(title: NSLocalizedString("Занять", comment: "Занять"), style: .default) { _ in
-            self.showBorrowEditScreen(type: .loan, source: source, destination: destination)
+            self.showBorrowEditScreen(type: .loan, source: source, destination: destination, borrowingTransaction: nil)
         }
         
         let returnAction = UIAlertAction(title: NSLocalizedString("Возвращение долга", comment: "Возвращение долга"), style: .default) { _ in
@@ -196,7 +196,7 @@ extension MainViewController {
         guard destination.hasWaitingLoans else { return }
         
         let debtAction = UIAlertAction(title: NSLocalizedString("Одолжить", comment: "Одолжить"), style: .default) { _ in
-            self.showBorrowEditScreen(type: .debt, source: source, destination: destination)
+            self.showBorrowEditScreen(type: .debt, source: source, destination: destination, borrowingTransaction: nil)
         }
         
         let returnAction = UIAlertAction(title: NSLocalizedString("Возвращение займа", comment: "Возвращение займа"), style: .default) { _ in
@@ -209,12 +209,13 @@ extension MainViewController {
         sheet(title: nil, actions: [debtAction, returnAction])
     }
     
-    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination, borrowingTransaction: Transaction?) {
         modal(factory.borrowEditViewController(delegate: self,
                                                type: type,
                                                borrowId: nil,
                                                source: source,
-                                               destination: destination))
+                                               destination: destination,
+                                               borrowingTransaction: borrowingTransaction))
     }
     
     func showCreditEditScreen(destination: TransactionDestination) {
