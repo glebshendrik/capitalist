@@ -284,16 +284,21 @@ extension TransactionEditViewController {
                                                     self.viewModel.updateSimilarTransactions = true
                                                     super.save()
                                                   })
+        let keepSimilarsAction = UIAlertAction(title: NSLocalizedString("Не обновлять", comment: ""),
+                                                 style: .default,
+                                                 handler: { _ in
+                                                    self.viewModel.updateSimilarTransactions = false
+                                                    super.save()
+                                                 })
         
         var message = NSLocalizedString("Похожие транзакции с комментарием:", comment: "")
         message = "\(message)\n\(viewModel.comment ?? "")"
         
         sheet(title: NSLocalizedString("Обновить похожие транзакции?", comment: ""),
-              actions: [updateSimilarsAction],
+              actions: [updateSimilarsAction, keepSimilarsAction],
               message: message,
-              preferredStyle: .alert) { cancel in
-            super.save()
-        }
+              preferredStyle: .alert,
+              addCancel: false)
     }
 }
 

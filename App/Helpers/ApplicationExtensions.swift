@@ -666,7 +666,7 @@ extension UIViewController {
         navigationController?.pushViewController(viewController, animated: animated)
     }
     
-    func sheet(title: String?, actions: [UIAlertAction], message: String? = nil, preferredStyle: UIAlertController.Style = .actionSheet, cancel: ((UIAlertAction) -> Void)? = nil) {
+    func sheet(title: String?, actions: [UIAlertAction], message: String? = nil, preferredStyle: UIAlertController.Style = .actionSheet, addCancel: Bool = true, cancel: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title,
                                                 message: message,
                                                 preferredStyle: preferredStyle)
@@ -675,10 +675,13 @@ extension UIViewController {
             alertController.addAction(action)
         }
         
-        alertController.addAction(title: NSLocalizedString("Отмена", comment: "Отмена"),
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: cancel)
+        if addCancel {
+            alertController.addAction(title: NSLocalizedString("Отмена", comment: "Отмена"),
+                                      style: .cancel,
+                                      isEnabled: true,
+                                      handler: cancel)
+        }
+        
         modal(alertController, animated: true)
     }
     
