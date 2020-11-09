@@ -34,5 +34,6 @@ protocol SaltEdgeManagerProtocol {
     func getConnection(secret: String) -> Promise<SEConnection>
     func removeConnection(secret: String) -> Promise<Void>
     func getProvider(code: String) -> Promise<SEProvider>
+    func confirm(connectionSecret: String, with code: String, delegate: SEConnectionFetchingDelegate) -> Promise<SEConnection>
 //    func loadAccounts(for connectionSecret: String) -> Promise<[SEAccount]>
 }

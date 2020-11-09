@@ -57,10 +57,11 @@ extension BankConnectionControllerProtocol {
 extension BankConnectionControllerProtocol {
     func setupConnection() {        
         messagePresenterManager.showHUD(with: NSLocalizedString("Загрузка подключения к банку...",
-                                                                comment: "Загрузка подключения к банку..."))
+                                                                comment: "Загрузка подключения к банку..."))        
         firstly {
             bankConnectionViewModel.loadConnection()
         }.ensure {
+            self.bankConnectionViewModel.hasActionIntent = false
             self.messagePresenterManager.dismissHUD()
         }.get { _ in
             self.updateConnection()
@@ -86,23 +87,21 @@ extension BankConnectionControllerProtocol {
         }
         switch connection.status {
             case .active:
-                guard
-                    let nextRefreshPossibleAt = connection.nextRefreshPossibleAt,
-                    let interactive = connection.interactive
-                else {
-                    self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку",
-                                                                                       comment: "Не удалось подключиться к банку"),
-                                                      theme: .error)
-                    return
-                }
-                if nextRefreshPossibleAt.isInPast && interactive {
-                    if connection.lastStage == .finish {
-                        self.showConnectionSession(type: .refreshing)
+                if connection.reconnectNeeded {
+                    guard
+                        let stage = connection.lastStage,
+                        !stage.isInteractive
+                    else {
+                        self.refreshData()
+                        return
+                    }
+                    
+                    if let session = connection.session,
+                       session.expiresAt.isInFuture {                        
+                        showConnectionViewController(session: session)
                     }
                     else {
-                        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку",
-                                                                                           comment: "Не удалось подключиться к банку"),
-                                                          theme: .error)
+                        showConnectionSession(type: .refreshing)
                     }
                 }
                 else if !bankConnectionViewModel.connectionConnected {
@@ -111,6 +110,44 @@ extension BankConnectionControllerProtocol {
                 else {
                     showAccounts()
                 }
+                
+                
+                
+//                guard
+//                    let interactive = connection.interactive
+//                else {
+//                    self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку",
+//                                                                                       comment: "Не удалось подключиться к банку"),
+//                                                      theme: .error)
+//                    return
+//                }
+//                guard
+//                    let nextRefreshPossibleAt = connection.nextRefreshPossibleAt
+//                else {
+//                    if let stage = connection.lastStage,
+//                       !stage.isInteractive {
+//                        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку",
+//                                                                                           comment: "Не удалось подключиться к банку"),
+//                                                          theme: .error)                        
+//                    }
+//                    return
+//                }
+//                if nextRefreshPossibleAt.isInPast && interactive {
+//                    if connection.lastStage == .finish {
+//                        self.showConnectionSession(type: .refreshing)
+//                    }
+//                    else {
+//                        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку",
+//                                                                                           comment: "Не удалось подключиться к банку"),
+//                                                          theme: .error)
+//                    }
+//                }
+//                else if !bankConnectionViewModel.connectionConnected {
+//                    connectConnection(connection)
+//                }
+//                else {
+//                    showAccounts()
+//                }
             case .inactive:
                 self.showConnectionSession(type: .reconnecting)
             case .deleted:

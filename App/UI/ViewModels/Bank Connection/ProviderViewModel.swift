@@ -38,6 +38,21 @@ class ProviderViewModel {
     
     var connectURL: URL? = nil
     
+    var interactiveCredentials: [ConnectionInteractiveCredentials] {
+        guard
+            let interactiveFields = provider.interactiveFields
+        else {
+            return []
+        }
+        return interactiveFields.map {
+            ConnectionInteractiveCredentials(name: $0.name,
+                                             value: nil,
+                                             displayName: $0.localizedName,
+                                             nature: ConnectionInteractiveFieldNature(rawValue: $0.nature),
+                                             options: $0.fieldOptions,
+                                             position: $0.position) }
+    }
+    
     init(provider: SEProvider) {
         self.provider = provider
     }

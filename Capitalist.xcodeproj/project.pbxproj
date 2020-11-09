@@ -112,6 +112,7 @@
 		FA30B4762285298B0017470C /* BalanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B4752285298B0017470C /* BalanceViewModel.swift */; };
 		FA36E98923F182CA00B340AA /* AnalyticsManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA36E98823F182CA00B340AA /* AnalyticsManagerProtocol.swift */; };
 		FA36E98B23F1832800B340AA /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA36E98A23F1832800B340AA /* AnalyticsManager.swift */; };
+		FA3FD0432552A61000D2D5BC /* InteractiveFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3FD0422552A61000D2D5BC /* InteractiveFieldView.swift */; };
 		FA503DBA23754488005AEFE7 /* EntityInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA503DB923754488005AEFE7 /* EntityInfoViewController.swift */; };
 		FA503DBC23759DE3005AEFE7 /* EntityInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA503DBB23759DE2005AEFE7 /* EntityInfoViewModel.swift */; };
 		FA503DBF2375D1B4005AEFE7 /* EntityInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA503DBE2375D1B3005AEFE7 /* EntityInfoSection.swift */; };
@@ -628,6 +629,7 @@
 		FA30B4752285298B0017470C /* BalanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewModel.swift; sourceTree = "<group>"; };
 		FA36E98823F182CA00B340AA /* AnalyticsManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManagerProtocol.swift; sourceTree = "<group>"; };
 		FA36E98A23F1832800B340AA /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		FA3FD0422552A61000D2D5BC /* InteractiveFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveFieldView.swift; sourceTree = "<group>"; };
 		FA503DB923754488005AEFE7 /* EntityInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityInfoViewController.swift; sourceTree = "<group>"; };
 		FA503DBB23759DE2005AEFE7 /* EntityInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityInfoViewModel.swift; sourceTree = "<group>"; };
 		FA503DBE2375D1B3005AEFE7 /* EntityInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityInfoSection.swift; sourceTree = "<group>"; };
@@ -1390,6 +1392,7 @@
 				FA0A4E8E2477D58100886277 /* CombinedInfoTableViewCell.swift */,
 				FA7FC37E2499176000C1ACCD /* BankWarningInfoTableViewCell.swift */,
 				FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */,
+				FA3FD0422552A61000D2D5BC /* InteractiveFieldView.swift */,
 			);
 			path = EntityInfo;
 			sourceTree = "<group>";
@@ -2756,6 +2759,7 @@
 				FAB5BE43235213B5000466AE /* ActiveTypesServiceProtocol.swift in Sources */,
 				FAED7DB021EFA0CE00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift in Sources */,
 				FA56AB95235EE81500E4D0E3 /* ActiveEditingExtension.swift in Sources */,
+				FA3FD0432552A61000D2D5BC /* InteractiveFieldView.swift in Sources */,
 				FAC3B9B821B952950015A12F /* ChangePasswordViewController.swift in Sources */,
 				FA0CAE1B21D66F9A00805288 /* IconsCoordinatorProtocol.swift in Sources */,
 				FA835D4A2260789B00A592F2 /* IncomesGraphExtension.swift in Sources */,

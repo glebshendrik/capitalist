@@ -149,7 +149,7 @@ PODS:
   - Protobuf (3.13.0)
   - RandomColorSwift (1.0.0)
   - RecurrencePicker (0.3.0)
-  - SaltEdge-iOS-Swift (3.3.8):
+  - SaltEdge-iOS-Swift (3.3.9):
     - TrustKit
   - SDWebImage/Core (5.0.3)
   - SDWebImageSVGCoder (0.3.0):
@@ -232,7 +232,7 @@ DEPENDENCIES:
   - PromiseKit/Alamofire (~> 6.5)
   - RandomColorSwift (from `https://github.com/onevcat/RandomColorSwift`, branch `master`)
   - RecurrencePicker (from `https://github.com/petalvlad/RecurrencePicker`, branch `master`)
-  - SaltEdge-iOS-Swift (= 3.3.8)
+  - SaltEdge-iOS-Swift (= 3.3.9)
   - SDWebImageSVGCoder (~> 0.3)
   - SideMenu (from `https://github.com/jonkykong/SideMenu`, branch `master`)
   - SkyFloatingLabelTextField
@@ -389,7 +389,7 @@ SPEC CHECKSUMS:
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   RandomColorSwift: 9f6b61247b17eafe0fd75e4a0977f2af1abd68d1
   RecurrencePicker: 72c4ad5bbf0e75c73b7ed9eddd60f307e3b1eba6
-  SaltEdge-iOS-Swift: 903862be01f04aee7f0d03a031d8795efe133f6e
+  SaltEdge-iOS-Swift: 60d155e14e4c6de2cbf27348d7b4ace9b1d6e6d5
   SDWebImage: d4f87d7d36c8a4d9f9459dc282e0caa057fdf935
   SDWebImageSVGCoder: 4b354bcdc7d74ce14d9fdb3c9ed9ab2c667f3b57
   SideMenu: 4a891be552d30bb6fa87ad404d62e485f8450c34
@@ -411,6 +411,6 @@ SPEC CHECKSUMS:
   TrustKit: dac38bb37e49bdfeca41b1a19d020da38017b51c
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
 
-PODFILE CHECKSUM: d18505550a8a02eefab92a9f628f991886ca3856
+PODFILE CHECKSUM: ebcca8912836546d9623ebf0bf7accdbdd80b3d0
 
 COCOAPODS: 1.8.0

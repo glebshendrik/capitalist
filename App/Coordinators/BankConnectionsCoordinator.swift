@@ -10,6 +10,7 @@ import Foundation
 import PromiseKit
 import SaltEdge
 import SwifterSwift
+import SwiftyBeaver
 
 enum BankConnectionError : Error {
     case connectionNotFound
@@ -148,7 +149,7 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
                 guard let connectionId = connection.id else {
                     return self.saveConnection(connection: connection, provider: provider, session: nil)
                 }
-                return self.updatedConnection(id: connectionId, saltedgeId: connection.saltedgeId, session: nil)
+                return self.updatedConnection(id: connectionId, saltedgeId: connection.saltedgeId, session: nil, interactiveCredentials: [])
             }
     }
     
@@ -192,19 +193,19 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
                 connectionsService.create(with: form)
             }.then { connection in
                 // Need to call server side logic of syncing with saltedge
-                self.updatedConnection(id: connection.id!, saltedgeId: connection.saltedgeId, session: session)
+                self.updatedConnection(id: connection.id!, saltedgeId: connection.saltedgeId, session: session, interactiveCredentials: [])
             }
     }
     
-    func updateConnection(id: Int, saltedgeId: String?, session: ConnectionSession?) -> Promise<Void> {
-        let form = ConnectionUpdatingForm(id: id, saltedgeId: saltedgeId, session: session)
+    func updateConnection(id: Int, saltedgeId: String?, session: ConnectionSession?, interactiveCredentials: [ConnectionInteractiveCredentials]) -> Promise<Void> {
+        let form = ConnectionUpdatingForm(id: id, saltedgeId: saltedgeId, session: session, interactiveCredentials: interactiveCredentials)
         return connectionsService.update(with: form)
     }
     
-    func updatedConnection(id: Int, saltedgeId: String?, session: ConnectionSession?) -> Promise<Connection> {
+    func updatedConnection(id: Int, saltedgeId: String?, session: ConnectionSession?, interactiveCredentials: [ConnectionInteractiveCredentials]) -> Promise<Connection> {
         return
             firstly {
-                updateConnection(id: id, saltedgeId: saltedgeId, session: session)
+                updateConnection(id: id, saltedgeId: saltedgeId, session: session, interactiveCredentials: interactiveCredentials)
             }.then {
                 self.show(by: id)
             }
@@ -282,7 +283,7 @@ extension BankConnectionsCoordinator {
         return saltEdgeManager.removeConnection(secret: secret)
     }
     
-    private func getSaltEdgeProvider(code: String) -> Promise<SEProvider> {
+    func loadProvider(code: String) -> Promise<SEProvider> {
         return saltEdgeManager.getProvider(code: code)
     }
 }

@@ -54,7 +54,8 @@ class ProviderConnectionViewModel {
             firstly {
                 bankConnectionsCoordinator.updatedConnection(id: connectionId,
                                                              saltedgeId: saltedgeId,
-                                                             session: connectionSession)
+                                                             session: connectionSession,
+                                                             interactiveCredentials: [])
             }.get { connection in
                 self.connection = connection
             }

@@ -34,9 +34,9 @@ protocol BankConnectionsCoordinatorProtocol {
     func createConnection(connectionSecret: String, provider: SEProvider, session: ConnectionSession?) -> Promise<Connection>
     func saveConnection(connection: Connection, provider: SEProvider, session: ConnectionSession?) -> Promise<Connection>
     func show(by id: Int) -> Promise<Connection>
-    func updatedConnection(id: Int, saltedgeId: String?, session: ConnectionSession?) -> Promise<Connection>
-    func updateConnection(id: Int, saltedgeId: String?, session: ConnectionSession?) -> Promise<Void>
-
+    func updatedConnection(id: Int, saltedgeId: String?, session: ConnectionSession?, interactiveCredentials: [ConnectionInteractiveCredentials]) -> Promise<Connection>
+    func updateConnection(id: Int, saltedgeId: String?, session: ConnectionSession?, interactiveCredentials: [ConnectionInteractiveCredentials]) -> Promise<Void>    
+    
     // Accounts
     func loadAccounts(currencyCode: String?,
                       connectionId: String,
@@ -46,5 +46,5 @@ protocol BankConnectionsCoordinatorProtocol {
     
 //    func getSaltEdgeConnection(secret: String) -> Promise<SEConnection>
 //    func removeSaltEdgeConnection(secret: String) -> Promise<Void>
-//    func getSaltEdgeProvider(code: String) -> Promise<SEProvider>
+    func loadProvider(code: String) -> Promise<SEProvider>
 }

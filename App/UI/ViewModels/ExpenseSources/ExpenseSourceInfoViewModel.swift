@@ -94,8 +94,24 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         return
             firstly {
                 expenseSourcesCoordinator.show(by: entityId)
+            }.then { expenseSource -> Promise<ExpenseSource> in
+                return self.loadProvider(expenseSource: expenseSource)
             }.done { expenseSource in
                 self.set(expenseSource: ExpenseSourceViewModel(expenseSource: expenseSource))
+            }
+    }
+    
+    func loadProvider(expenseSource: ExpenseSource) -> Promise<ExpenseSource> {
+        guard
+            let connection = expenseSource.accountConnection?.connection
+        else {
+            return Promise.value(expenseSource)
+        }
+        return
+            firstly {
+                bankConnectionViewModel.connectionWithProvider(connection)
+            }.then { connection -> Promise<ExpenseSource> in
+                return Promise.value(expenseSource)
             }
     }
     
@@ -111,7 +127,8 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         if bankConnectionViewModel.reconnectNeeded || bankConnectionViewModel.isSyncingWithBank {
             fields.append(BankWarningInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
                                                isSyncing: bankConnectionViewModel.isSyncingWithBank,
-                                               stage: bankConnectionViewModel.syncingWithBankStage))
+                                               stage: bankConnectionViewModel.syncingWithBankStage,
+                                               interactiveCredentials: bankConnectionViewModel.interactiveCredentials))
         }
         
         if let nextUpdatePossibleAt = bankConnectionViewModel.nextUpdatePossibleAt {

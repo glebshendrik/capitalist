@@ -34,6 +34,26 @@ class BankConnectionViewModel {
     var shouldUseExperimentalFeature: Bool = false
     var shouldDestroyConnection: Bool = false
     
+    var interactiveCredentials: [ConnectionInteractiveCredentials] = []
+    var hasInteractiveCredentials: Bool {
+        guard
+            !interactiveCredentials.isEmpty
+        else {
+            return false
+        }
+        return interactiveCredentials.all { credentials in
+            guard
+                let nature = credentials.nature,
+                let value = credentials.value
+            else {
+                return false
+            }
+            return nature.isPresentable && !value.isEmpty && !value.isWhitespace
+        }
+    }
+    
+    var hasActionIntent: Bool = false
+    
     var connectionConnected: Bool {
         return accountConnection != nil
     }
@@ -52,11 +72,11 @@ class BankConnectionViewModel {
     }
     
     var reconnectNeeded: Bool {
-        return expenseSourceViewModel?.reconnectNeeded ?? false
+        return expenseSourceViewModel?.reconnectNeeded ?? connection?.reconnectNeeded ?? false
     }
     
     var isSyncingWithBank: Bool {
-        return expenseSourceViewModel?.isSyncingWithBank ?? false
+        return expenseSourceViewModel?.isSyncingWithBank ?? connection?.isSyncing ?? false
     }
     
     var syncingWithBankStage: ConnectionStage {
@@ -101,10 +121,44 @@ class BankConnectionViewModel {
         
     }
     
-    func loadConnection() -> Promise<Connection> {
-        if let connection = connection {
+    func connectionWithProvider(_ connection: Connection) -> Promise<Connection> {
+        guard
+            let stage = connection.lastStage,
+            (stage == .interactive || stage == .interactiveCredentialsResendRequired)
+        else {
             return Promise.value(connection)
         }
+        return
+            firstly {
+                bankConnectionsCoordinator.loadProvider(code: connection.providerCode)
+            }.then { provider -> Promise<Connection> in
+                let providerViewModel = ProviderViewModel(provider: provider)
+                self.providerViewModel = providerViewModel
+                self.interactiveCredentials = providerViewModel.interactiveCredentials.filter { $0.nature != nil && $0.nature!.isPresentable }
+                return Promise.value(connection)
+            }
+    }
+    
+    func loadConnection() -> Promise<Connection> {
+        if let connection = connection,
+           let connectionId = connection.id {
+            guard
+                hasActionIntent,
+                hasInteractiveCredentials
+            else {
+                return connectionWithProvider(connection)
+            }
+            return
+                firstly {
+                    bankConnectionsCoordinator.updatedConnection(id: connectionId,
+                                                                 saltedgeId: nil,
+                                                                 session: nil,
+                                                                 interactiveCredentials: interactiveCredentials)
+                }.then { connection in
+                    self.connectionWithProvider(connection)
+                }
+        }
+        
         guard
             let provider = providerViewModel?.provider
         else {

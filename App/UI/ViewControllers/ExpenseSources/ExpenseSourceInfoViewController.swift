@@ -64,7 +64,14 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
             modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
             return
         }
-        guard bankConnectionViewModel.reconnectNeeded else { return }
+        guard
+            let field = field,
+            bankConnectionViewModel.reconnectNeeded
+        else {
+            return
+        }
+        bankConnectionViewModel.interactiveCredentials = field.interactiveCredentials
+        bankConnectionViewModel.hasActionIntent = true
         setupConnection()
     }
         

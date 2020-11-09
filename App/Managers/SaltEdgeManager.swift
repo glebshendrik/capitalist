@@ -261,6 +261,23 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
             }
     }
     
+    func confirm(connectionSecret: String, with code: String, delegate: SEConnectionFetchingDelegate) -> Promise<SEConnection> {
+        return
+            Promise { seal in
+                SERequestManager.shared.confirmConnection(with: connectionSecret,
+                                                          params: SEConnectionInteractiveParams(credentials: ["sms" : code]),
+                                                          fetchingDelegate: delegate) { response in
+                    switch response {
+                        case .success(let value):
+                            seal.fulfill(value.data)
+                        case .failure(let error):
+                            SwiftyBeaver.error(error)
+                            seal.reject(error)
+                    }
+                }
+            }
+    }
+    
     func removeConnection(secret: String) -> Promise<Void> {
         return
             Promise { seal in

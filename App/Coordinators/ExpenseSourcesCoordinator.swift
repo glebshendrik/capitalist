@@ -46,7 +46,8 @@ class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
         return  firstly {
                     bankConnectionsCoordinator.updateConnection(id: connectionId,
                                                                 saltedgeId: accountConnection.connection.saltedgeId,
-                                                                session: accountConnection.connection.session)
+                                                                session: accountConnection.connection.session,
+                                                                interactiveCredentials: [])
                 }.then {
                     self.expenseSourcesService.show(by: expenseSource.id)
                 }
@@ -59,7 +60,8 @@ class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
         }
         return bankConnectionsCoordinator.updateConnection(id: connectionId,
                                                            saltedgeId: accountConnection.connection.saltedgeId,
-                                                           session: accountConnection.connection.session)
+                                                           session: accountConnection.connection.session,
+                                                           interactiveCredentials: [])
     }
     
     func first() -> Promise<ExpenseSource?> {

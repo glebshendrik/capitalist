@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SaltEdge
 
 enum ConnectionStatus : String, Codable {
     case active
@@ -29,6 +30,8 @@ enum ConnectionStage : String, Codable {
     case start
     case connect
     case interactive
+    case interactiveCredentialsAccepted = "interactive_credentials_accepted"
+    case interactiveCredentialsResendRequired = "interactive_credentials_resend_required"
     case fetchHolderInfo = "fetch_holder_info"
     case fetchAccounts = "fetch_accounts"
     case fetchRecent = "fetch_recent"
@@ -43,6 +46,10 @@ enum ConnectionStage : String, Codable {
             case .connect:
                 return NSLocalizedString("Подключение к банку", comment: "")
             case .interactive:
+                return NSLocalizedString("Аутентификация", comment: "")
+            case .interactiveCredentialsAccepted:
+                return NSLocalizedString("Аутентификация", comment: "")
+            case .interactiveCredentialsResendRequired:
                 return NSLocalizedString("Аутентификация", comment: "")
             case .fetchHolderInfo:
                 return NSLocalizedString("Загрузка данных держателя счетов", comment: "")
@@ -66,6 +73,13 @@ enum ConnectionStage : String, Codable {
             default:
                 return false
         }
+    }
+    
+    var isInteractive: Bool {
+        return
+            self == .interactive ||
+            self == .interactiveCredentialsAccepted ||
+            self == .interactiveCredentialsResendRequired
     }
 }
 
@@ -103,6 +117,7 @@ struct Connection : Decodable {
     let session: ConnectionSession?
     let createdAt: Date?
     let updatedAt: Date?
+    var provider: SEProvider? = nil
         
     enum CodingKeys: String, CodingKey {
         case id
@@ -120,6 +135,43 @@ struct Connection : Decodable {
         case session = "saltedge_connection_session"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+    }
+    
+    var reconnectNeeded: Bool {
+        guard
+            let stage = lastStage,
+            (stage == .finish || stage.isInteractive)
+        else {
+            return false
+        }
+        
+        guard
+            status == .active
+        else {
+            return true
+        }
+        
+        guard
+            let interactive = interactive
+        else {
+            return false
+        }
+        
+        guard
+            let nextRefreshPossibleAt = nextRefreshPossibleAt
+        else {
+            return stage.isInteractive
+        }
+        return interactive && nextRefreshPossibleAt.isInPast
+    }
+    
+    var isSyncing: Bool {
+        guard
+            let stage = lastStage
+        else {
+            return false
+        }
+        return stage != .finish
     }
 }
 
@@ -151,10 +203,12 @@ struct ConnectionUpdatingForm : Encodable {
     let id: Int?
     let saltedgeId: String?
     let session: ConnectionSession?
+    let interactiveCredentials: [ConnectionInteractiveCredentials]
     
     enum CodingKeys: String, CodingKey {
         case saltedgeId = "salt_edge_connection_id"
         case session = "saltedge_connection_session"
+        case interactiveCredentials = "interactive_credentials"
     }
     
     func encode(to encoder: Encoder) throws {
@@ -162,5 +216,44 @@ struct ConnectionUpdatingForm : Encodable {
         
         try container.encodeIfPresent(saltedgeId, forKey: .saltedgeId)
         try container.encodeIfPresent(session, forKey: .session)
+        if !interactiveCredentials.isEmpty {
+            try container.encodeIfPresent(interactiveCredentials, forKey: .interactiveCredentials)
+        }
+    }
+}
+
+struct ConnectionInteractiveCredentials : Encodable {
+    let name: String
+    var value: String?
+    let displayName: String
+    let nature: ConnectionInteractiveFieldNature?
+    let options: [SEProviderFieldOption]?
+    let position: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case value
+    }
+}
+
+enum ConnectionInteractiveFieldNature : String, Codable {
+    case text
+    case password
+    case select
+    case dynamicSelect = "dynamic_select"
+    case file
+    case number
+    
+    var isPresentable: Bool {
+        return self != .dynamicSelect && self != .file
+    }
+    
+    static func nature(rawValue: String?) -> ConnectionInteractiveFieldNature? {
+        guard
+            let rawValue = rawValue
+        else {
+            return nil
+        }
+        return self.init(rawValue: rawValue)
     }
 }

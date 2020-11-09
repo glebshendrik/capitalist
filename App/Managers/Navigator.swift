@@ -32,12 +32,19 @@ class Navigator: NavigatorProtocol {
                 visibleViewController.presentingCategories.any(matching: { $0.notificationIdentifier == category.notificationIdentifier })
     }
     
+    var rootNavigatable: Navigatable? {
+        return
+            (window.rootViewController as? Navigatable) ??
+            ((window.rootViewController as? UINavigationController)?.topViewController as? Navigatable) ??
+            ((window.rootViewController as? UITabBarController)?.selectedViewController as? Navigatable)
+    }
+    
     func navigate(to viewController: Infrastructure.ViewController, with category: NotificationCategory) {
         if isDestinationViewControllerVisible(viewController, with: category) {
             triggerDestinationUpdate()
         }
-        else {
-            if let rootViewController = (window.rootViewController as? Navigatable) {
+        else {            
+            if let rootViewController = rootNavigatable {
                 rootViewController.navigate(to: viewController, with: category)
             }
         }
