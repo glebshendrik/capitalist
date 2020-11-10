@@ -48,7 +48,7 @@ class BankWarningInfoTableViewCell : EntityInfoTableViewCell, InteractiveFieldVi
         interactiveFieldViews.forEach { $0.removeFromSuperview() }
         if !bankWarningField.areCredentialsFieldsHidden {
             interactiveFieldViews = bankWarningField.interactiveCredentials
-                .sorted(by: { $0.position > $1.position })
+                .sorted(by: { $0.position < $1.position })
                 .compactMap {
                     let fieldView = InteractiveFieldView()
                     fieldView.interactiveCredentials = $0

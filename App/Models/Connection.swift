@@ -30,8 +30,6 @@ enum ConnectionStage : String, Codable {
     case start
     case connect
     case interactive
-    case interactiveCredentialsAccepted = "interactive_credentials_accepted"
-    case interactiveCredentialsResendRequired = "interactive_credentials_resend_required"
     case fetchHolderInfo = "fetch_holder_info"
     case fetchAccounts = "fetch_accounts"
     case fetchRecent = "fetch_recent"
@@ -46,10 +44,6 @@ enum ConnectionStage : String, Codable {
             case .connect:
                 return NSLocalizedString("Подключение к банку", comment: "")
             case .interactive:
-                return NSLocalizedString("Аутентификация", comment: "")
-            case .interactiveCredentialsAccepted:
-                return NSLocalizedString("Аутентификация", comment: "")
-            case .interactiveCredentialsResendRequired:
                 return NSLocalizedString("Аутентификация", comment: "")
             case .fetchHolderInfo:
                 return NSLocalizedString("Загрузка данных держателя счетов", comment: "")
@@ -76,10 +70,7 @@ enum ConnectionStage : String, Codable {
     }
     
     var isInteractive: Bool {
-        return
-            self == .interactive ||
-            self == .interactiveCredentialsAccepted ||
-            self == .interactiveCredentialsResendRequired
+        return self == .interactive
     }
 }
 
@@ -118,6 +109,7 @@ struct Connection : Decodable {
     let createdAt: Date?
     let updatedAt: Date?
     var provider: SEProvider? = nil
+    let requiredInteractiveFieldsNames: [String]
         
     enum CodingKeys: String, CodingKey {
         case id
@@ -135,6 +127,7 @@ struct Connection : Decodable {
         case session = "saltedge_connection_session"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case requiredInteractiveFieldsNames = "required_interactive_fields_names"
     }
     
     var reconnectNeeded: Bool {
@@ -229,6 +222,7 @@ struct ConnectionInteractiveCredentials : Encodable {
     let nature: ConnectionInteractiveFieldNature?
     let options: [SEProviderFieldOption]?
     let position: Int
+    let optional: Bool
     
     enum CodingKeys: String, CodingKey {
         case name

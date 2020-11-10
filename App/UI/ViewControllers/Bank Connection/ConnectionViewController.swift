@@ -117,8 +117,8 @@ extension ConnectionViewController {
             messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
             close()
             return
-        }
-        
+        }        
+        viewModel.fetchingStarted = true
         messagePresenterManager.showHUD(with: NSLocalizedString("Создание подключения к банку...", comment: "Создание подключения к банку..."))
         firstly {
             viewModel.setupConnection(id: id, secret: secret)

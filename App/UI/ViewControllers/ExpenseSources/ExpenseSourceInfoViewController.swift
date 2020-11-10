@@ -60,7 +60,9 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
     }
     
     override func didTapBankWarningInfoButton(field: BankWarningInfoField?) {
-        guard bankConnectionViewModel.canConnectBank else {
+        guard
+            bankConnectionViewModel.canConnectBank
+        else {
             modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
             return
         }
@@ -85,8 +87,10 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
     }
     
     func didTapBankButton() {
-        guard bankConnectionViewModel.canConnectBank else {
-            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
+        guard
+            bankConnectionViewModel.canConnectBank
+        else {
+            modal(factory.subscriptionNavigationViewController(requiredPlans: [.premium, .platinum]))
             return
         }
         if bankConnectionViewModel.connectionConnected {

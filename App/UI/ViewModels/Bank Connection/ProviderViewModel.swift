@@ -50,7 +50,8 @@ class ProviderViewModel {
                                              displayName: $0.localizedName,
                                              nature: ConnectionInteractiveFieldNature(rawValue: $0.nature),
                                              options: $0.fieldOptions,
-                                             position: $0.position) }
+                                             position: $0.position,
+                                             optional: $0.purpleOptional) }
     }
     
     init(provider: SEProvider) {

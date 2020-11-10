@@ -36,8 +36,11 @@ class BankConnectionViewModel {
     
     var interactiveCredentials: [ConnectionInteractiveCredentials] = []
     var hasInteractiveCredentials: Bool {
+        return !interactiveCredentials.isEmpty
+    }
+    var hasInteractiveCredentialsValues: Bool {
         guard
-            !interactiveCredentials.isEmpty
+            hasInteractiveCredentials
         else {
             return false
         }
@@ -68,7 +71,7 @@ class BankConnectionViewModel {
     
     var canConnectBank: Bool {
         return true
-        //        return accountCoordinator.hasPlatinumSubscription
+//        return accountCoordinator.hasPlatinumSubscription
     }
     
     var reconnectNeeded: Bool {
@@ -123,8 +126,8 @@ class BankConnectionViewModel {
     
     func connectionWithProvider(_ connection: Connection) -> Promise<Connection> {
         guard
-            let stage = connection.lastStage,
-            (stage == .interactive || stage == .interactiveCredentialsResendRequired)
+            let stage = connection.lastStage,            
+            stage.isInteractive
         else {
             return Promise.value(connection)
         }
@@ -134,7 +137,14 @@ class BankConnectionViewModel {
             }.then { provider -> Promise<Connection> in
                 let providerViewModel = ProviderViewModel(provider: provider)
                 self.providerViewModel = providerViewModel
-                self.interactiveCredentials = providerViewModel.interactiveCredentials.filter { $0.nature != nil && $0.nature!.isPresentable }
+                self.interactiveCredentials = providerViewModel.interactiveCredentials
+                    .filter { credentials in
+                        return
+                            connection.requiredInteractiveFieldsNames.contains(credentials.name) &&
+                            credentials.nature != nil &&
+                            credentials.nature!.isPresentable &&
+                            !credentials.optional
+                    }
                 return Promise.value(connection)
             }
     }
@@ -144,7 +154,7 @@ class BankConnectionViewModel {
            let connectionId = connection.id {
             guard
                 hasActionIntent,
-                hasInteractiveCredentials
+                hasInteractiveCredentialsValues
             else {
                 return connectionWithProvider(connection)
             }

@@ -87,7 +87,10 @@ extension BankConnectionControllerProtocol {
         }
         switch connection.status {
             case .active:
-                if connection.reconnectNeeded {
+                if !bankConnectionViewModel.connectionConnected {
+                    connectConnection(connection)
+                }
+                else if connection.reconnectNeeded {
                     guard
                         let stage = connection.lastStage,
                         !stage.isInteractive
@@ -103,10 +106,7 @@ extension BankConnectionControllerProtocol {
                     else {
                         showConnectionSession(type: .refreshing)
                     }
-                }
-                else if !bankConnectionViewModel.connectionConnected {
-                    connectConnection(connection)
-                }
+                }                
                 else {
                     showAccounts()
                 }

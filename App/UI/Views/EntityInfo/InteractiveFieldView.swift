@@ -134,6 +134,7 @@ class InteractiveFieldView : CustomView {
                 return
         }
         fieldTextField.text = interactiveCredentials.value
+        fieldTextField.placeholder = interactiveCredentials.displayName
     }
     
     @objc private func didChangeFieldValue(_ sender: Any) {        

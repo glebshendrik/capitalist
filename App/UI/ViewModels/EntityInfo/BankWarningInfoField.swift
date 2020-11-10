@@ -10,16 +10,16 @@ import Foundation
 
 class BankWarningInfoField : EntityInfoField {
     private let fieldId: String
-    let title: String?
-    let message: String?
-    let buttonText: String?
     let isSyncing: Bool
     let stage: ConnectionStage
     
     var interactiveCredentials: [ConnectionInteractiveCredentials] = []
     var hasInteractiveCredentials: Bool {
+        return !interactiveCredentials.isEmpty
+    }
+    var hasInteractiveCredentialsValues: Bool {
         guard
-            !interactiveCredentials.isEmpty
+            hasInteractiveCredentials
         else {
             return false
         }
@@ -51,14 +51,35 @@ class BankWarningInfoField : EntityInfoField {
     }
     
     var areCredentialsFieldsHidden: Bool {
-        return !(isSyncing && (stage == .interactive || stage == .interactiveCredentialsResendRequired))
+        return !(isSyncing && stage.isInteractive && hasInteractiveCredentials)
     }
     
     var isButtonEnabled: Bool {
         return
             !isSyncing ||
-            (hasInteractiveCredentials &&
-                (stage == .interactive || stage == .interactiveCredentialsResendRequired))
+            (hasInteractiveCredentialsValues && stage.isInteractive)
+    }
+    
+    var title: String? {
+        return isSyncing
+            ? NSLocalizedString("Обновление подключения к банку", comment: "")
+            : NSLocalizedString("Нет подключения к банку", comment: "")
+    }
+    
+    var message: String? {
+        return isSyncing
+            ? stage.message
+            : NSLocalizedString("Провайдер подключения к банку не может установить соединение. Для обновления данных требуется подключиться к банку",
+                                comment: "")
+    }
+    
+    var buttonText: String? {
+        let syncingButtonText = stage.isInteractive && hasInteractiveCredentials
+            ? NSLocalizedString("Отправить", comment: "")
+            : NSLocalizedString("Синхронизация...", comment: "")
+        return isSyncing
+            ? syncingButtonText
+            : NSLocalizedString("Подключиться", comment: "")
     }
     
     init(fieldId: String, isSyncing: Bool, stage: ConnectionStage, interactiveCredentials: [ConnectionInteractiveCredentials] = []) {
@@ -66,21 +87,5 @@ class BankWarningInfoField : EntityInfoField {
         self.isSyncing = isSyncing
         self.stage = stage
         self.interactiveCredentials = interactiveCredentials
-        
-        title = isSyncing
-            ? NSLocalizedString("Обновление подключения к банку", comment: "")
-            : NSLocalizedString("Нет подключения к банку", comment: "")
-        
-        message = isSyncing
-            ? stage.message
-            : NSLocalizedString("Провайдер подключения к банку не может установить соединение. Для обновления данных требуется подключиться к банку",
-                                comment: "")
-        
-        let syncingButtonText = (stage == .interactive || stage == .interactiveCredentialsResendRequired)
-            ? NSLocalizedString("Отправить", comment: "")
-            : NSLocalizedString("Синхронизация...", comment: "")
-        buttonText = isSyncing
-            ? syncingButtonText
-            : NSLocalizedString("Подключиться", comment: "")        
     }
 }

@@ -16,7 +16,7 @@ class ProviderConnectionViewModel {
     var providerViewModel: ProviderViewModel? = nil
     var connection: Connection? = nil {
         didSet {
-            if (connection?.lastStage?.isFetching ?? false) {
+            if connection != nil {
                 fetchingStarted = true
             }
         }
@@ -27,7 +27,7 @@ class ProviderConnectionViewModel {
         return connectionSession.type == .refreshing && !fetchingStarted
     }
     
-    public private(set) var fetchingStarted: Bool = false
+    var fetchingStarted: Bool = false
     
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
