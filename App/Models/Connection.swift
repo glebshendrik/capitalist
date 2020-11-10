@@ -105,6 +105,7 @@ struct Connection : Decodable {
     let interactive: Bool?
     let nextRefreshPossibleAt: Date?
     let lastStage: ConnectionStage?
+    let lastSuccessAt: Date?
     let session: ConnectionSession?
     let createdAt: Date?
     let updatedAt: Date?
@@ -128,6 +129,7 @@ struct Connection : Decodable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case requiredInteractiveFieldsNames = "required_interactive_fields_names"
+        case lastSuccessAt = "last_success_at"
     }
     
     var reconnectNeeded: Bool {
@@ -143,7 +145,7 @@ struct Connection : Decodable {
         else {
             return true
         }
-        
+                
         guard
             let interactive = interactive
         else {
@@ -153,9 +155,9 @@ struct Connection : Decodable {
         guard
             let nextRefreshPossibleAt = nextRefreshPossibleAt
         else {
-            return stage.isInteractive
+            return stage.isInteractive || lastSuccessAt == nil
         }
-        return interactive && nextRefreshPossibleAt.isInPast
+        return interactive && nextRefreshPossibleAt.isInPast || lastSuccessAt == nil
     }
     
     var isSyncing: Bool {

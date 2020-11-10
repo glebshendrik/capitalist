@@ -88,11 +88,14 @@ extension ConnectionViewController: SEWebViewDelegate {
                     self.delegate?.didFinishConnectionProcess()
                 }
             case .fetching:
-                if let connectionSecret = response.secret,
-                   let connectionId = response.connectionId,
-                   !viewModel.fetchingStarted {
-                    setupConnection(id: connectionId, secret: connectionSecret)
+                guard
+                    let connectionSecret = response.secret,
+                    let connectionId = response.connectionId,
+                    !viewModel.fetchingStarted
+                else {
+                    return
                 }
+                setupConnection(id: connectionId, secret: connectionSecret)
             case .error:
                 SwiftyBeaver.error(response)
             //            delegate?.didNotConnect()
@@ -118,7 +121,7 @@ extension ConnectionViewController {
             close()
             return
         }        
-        viewModel.fetchingStarted = true
+        
         messagePresenterManager.showHUD(with: NSLocalizedString("Создание подключения к банку...", comment: "Создание подключения к банку..."))
         firstly {
             viewModel.setupConnection(id: id, secret: secret)
@@ -129,6 +132,9 @@ extension ConnectionViewController {
                 self.close() {
                     delegate.didSetupConnection(connection)
                 }
+            }
+            else {
+                delegate.didSetupConnection(connection)
             }
         }.catch { error in            
             self.close()

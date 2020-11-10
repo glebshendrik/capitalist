@@ -61,11 +61,12 @@ extension BankConnectionControllerProtocol {
         firstly {
             bankConnectionViewModel.loadConnection()
         }.ensure {
-            self.bankConnectionViewModel.hasActionIntent = false
             self.messagePresenterManager.dismissHUD()
         }.get { _ in
             self.updateConnection()
+            self.bankConnectionViewModel.hasActionIntent = false
         }.catch { error in
+            self.bankConnectionViewModel.hasActionIntent = false
             if case BankConnectionError.connectionNotFound = error {
                 self.showConnectionSession(type: .creating)
             } else {
@@ -95,16 +96,21 @@ extension BankConnectionControllerProtocol {
                         let stage = connection.lastStage,
                         !stage.isInteractive
                     else {
-                        self.refreshData()
+                        refreshData()
                         return
                     }
-                    
+                    guard
+                        !bankConnectionViewModel.hasActionIntent
+                    else {
+                        refreshData()
+                        return
+                    }
                     if let session = connection.session,
                        session.expiresAt.isInFuture {                        
                         showConnectionViewController(session: session)
                     }
                     else {
-                        showConnectionSession(type: .refreshing)
+                        showConnectionSession(type: connection.lastSuccessAt == nil ? .reconnecting : .refreshing)
                     }
                 }                
                 else {
@@ -156,6 +162,12 @@ extension BankConnectionControllerProtocol {
     }
     
     func connectConnection(_ connection: Connection) {
+        guard
+            !bankConnectionViewModel.connectionConnected
+        else {
+            refreshData()
+            return
+        }
         bankConnectionViewModel.connectConnection(connection)
         save()
     }

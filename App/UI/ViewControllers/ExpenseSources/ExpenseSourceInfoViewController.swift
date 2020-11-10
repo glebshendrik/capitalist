@@ -73,7 +73,7 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
             return
         }
         bankConnectionViewModel.interactiveCredentials = field.interactiveCredentials
-        bankConnectionViewModel.hasActionIntent = true
+        bankConnectionViewModel.hasActionIntent = field.hasInteractiveCredentialsValues
         setupConnection()
     }
         
