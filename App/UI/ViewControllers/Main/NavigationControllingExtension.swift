@@ -26,17 +26,9 @@ extension MainViewController {
 }
 
 extension MainViewController {
-//    func showNewIncomeSourceScreen() {
-//        showEditScreen(incomeSource: nil)
-//    }
-    
-//    func showEditScreen(incomeSource: IncomeSource?) {
-//        modal(factory.incomeSourceEditViewController(delegate: self, incomeSource: incomeSource))
-//    }
-    
-//    func showIncomeSourceInfoScreen(incomeSource: IncomeSourceViewModel?) {
-//        modal(factory.incomeSourceInfoViewController(incomeSource: incomeSource))
-//    }
+    func showAppUpdateScreen() {
+        modal(factory.appUpdateViewController())
+    }
 }
 
 extension MainViewController {

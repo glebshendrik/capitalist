@@ -236,8 +236,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
                 return self.updateUserSubscription().map { user }
             }
             return Promise.value(user)
-        }.get { user in
-            self.router.setMinimumAllowed(version: user.minVersion, build: user.minBuild)
+        }.get { user in            
             self.analyticsManager.set(userId: String(user.id))
             SwiftyBeaver.cloud?.analyticsUserName = "user_id:\(user.id)"
             Apphud.updateUserID(String(user.id))

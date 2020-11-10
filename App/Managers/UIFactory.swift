@@ -16,6 +16,11 @@ class UIFactory : UIFactoryProtocol {
         self.router = router
     }
     
+    func appUpdateViewController() -> UINavigationController? {
+        guard let appUpdateViewController = router.viewController(.AppUpdateViewController) as? AppUpdateViewController else { return nil }
+        return UINavigationController(rootViewController: appUpdateViewController)
+    }
+    
     func iconsViewController(delegate: IconsViewControllerDelegate,
                              iconCategory: IconCategory) -> UINavigationController? {
         

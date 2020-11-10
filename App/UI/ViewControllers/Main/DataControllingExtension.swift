@@ -30,6 +30,18 @@ extension MainViewController {
 }
 
 extension MainViewController {
+    func checkAppUpdateNeeded() {
+        firstly {
+            viewModel.checkMinVersion()
+        }.done {
+            if self.viewModel.isAppUpdateNeeded {
+                self.showAppUpdateScreen()
+            }
+        }
+    }
+}
+
+extension MainViewController {
     func loadBudget() {
         firstly {
             viewModel.loadBudget()

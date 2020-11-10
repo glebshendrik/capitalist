@@ -14,6 +14,7 @@ protocol UIFactoryDependantProtocol {
 }
 
 protocol UIFactoryProtocol {
+    func appUpdateViewController() -> UINavigationController?
     func iconsViewController(delegate: IconsViewControllerDelegate,
                              iconCategory: IconCategory) -> UINavigationController?
     

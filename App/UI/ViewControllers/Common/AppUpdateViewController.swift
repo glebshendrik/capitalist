@@ -8,7 +8,13 @@
 
 import UIKit
 
-class AppUpdateViewController : UIViewController {    
+class AppUpdateViewController : UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigationBarAppearance()
+    }
+    
     @IBAction func didTapUpdateButton(_ sender: Any) {
         gotoApp(appID: "1457533341")
     }

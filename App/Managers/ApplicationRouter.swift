@@ -35,9 +35,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private var biometricVerificationManager: BiometricVerificationManagerProtocol
     private var userPreferencesManager: UserPreferencesManagerProtocol
     
-    private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
-    private var minVersion: String?
-    private var minBuild: String?
+    private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil    
     private var isAnimating: Bool = false
     private var pendingScreen: UIViewController? = nil
     private var pendingModalScreen: UIViewController? = nil
@@ -154,10 +152,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             return
         }
         
-        if isAppUpdateNeeded() {
-            showAppUpdateScreen()
-            return
-        }
+//        if isAppUpdateNeeded() {
+//            showAppUpdateScreen()
+//            return
+//        }
         
         showLandingScreen()
         
@@ -168,11 +166,6 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         firstly {
             accountCoordinator.loadCurrentUser()
         }.done { user in
-            
-            if self.isAppUpdateNeeded() {
-                self.showAppUpdateScreen()
-                return
-            }
             
             guard UIFlowManager.reached(point: .onboarding) || user.onboarded else {
                 self.showOnboardingViewController()
@@ -371,11 +364,7 @@ extension ApplicationRouter {
         
         window.rootViewController?.topmostPresentedViewController.modal(alert)
     }
-    
-    private func showAppUpdateScreen() {
-        show(.AppUpdateViewController)
-    }
-    
+        
     private func showLandingScreen() {
         show(.LandingViewController)
     }
@@ -390,7 +379,7 @@ extension ApplicationRouter {
 //        Crashlytics.crashlytics().log("showMainViewController")
         show(.MainViewController) { [weak self] in
             guard let self = self else { return }
-            self.showPasscodeScreen()
+            self.showPasscodeScreen()            
             if let menuLeftNavigationController = self.viewController(.MenuNavigationController) as? SideMenuNavigationController {
                 SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
             }
@@ -430,7 +419,7 @@ extension ApplicationRouter {
     }
     
     private func modal(_ viewController: Infrastructure.ViewController) {
-        let screen = self.viewController(viewController)
+        var screen = self.viewController(viewController)
         if isAnimating {
             pendingModalScreen = screen
         }
@@ -475,26 +464,6 @@ extension ApplicationRouter {
     func viewController(_ viewController: Infrastructure.ViewController) -> UIViewController {
         let storyboard = self.storyboards[viewController.storyboard]
         return storyboard!.instantiateViewController(withIdentifier: viewController.identifier)
-    }
-}
-
-extension ApplicationRouter {
-    func setMinimumAllowed(version: String?, build: String?) {
-        minVersion = version
-        minBuild = build
-        if isAppUpdateNeeded() {
-            route()
-        }
-    }
-    
-    private func isAppUpdateNeeded() -> Bool {
-        guard   let minBuild = minBuild,
-                let appBuild = UIApplication.shared.buildNumber,
-                let minBuildNumber = Int(minBuild),
-                let appBuildNumber = Int(appBuild) else {
-            return false
-        }
-        return appBuildNumber < minBuildNumber
     }
 }
 

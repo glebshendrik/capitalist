@@ -98,6 +98,7 @@ class MainViewController : UIViewController,
             modal(factory.transactionCreationInfoViewController())
         }
         adviserTip?.show(animated: true, forView: titleView.tipAnchor, withinSuperview: titleView)
+        checkAppUpdateNeeded()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -173,6 +173,20 @@ class MainViewModel {
         return Double(userPreferencesManager.fastGesturePressDurationMilliseconds) / 1000.0
     }
     
+    private var minVersion: String?
+    private var minBuild: String?
+    
+    var isAppUpdateNeeded: Bool {
+//        return true
+        guard   let minBuild = minBuild,
+                let appBuild = UIApplication.shared.buildNumber,
+                let minBuildNumber = Int(minBuild),
+                let appBuildNumber = Int(appBuild) else {
+            return false
+        }
+        return appBuildNumber < minBuildNumber
+    }
+    
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          basketsCoordinator: BasketsCoordinatorProtocol,
@@ -391,6 +405,19 @@ class MainViewModel {
                 }.get { budget in
                     self.budget = BudgetViewModel(budget: budget)
                 }.asVoid()
+    }
+    
+    func checkMinVersion() -> Promise<Void> {
+        return  firstly {
+            accountCoordinator.loadCurrentUser()
+        }.get { user in
+            self.setMinimumAllowed(version: user.minVersion, build: user.minBuild)
+        }.asVoid()
+    }
+    
+    private func setMinimumAllowed(version: String?, build: String?) {
+        minVersion = version
+        minBuild = build
     }
     
     func isAddIncomeSourceItem(indexPath: IndexPath) -> Bool {
