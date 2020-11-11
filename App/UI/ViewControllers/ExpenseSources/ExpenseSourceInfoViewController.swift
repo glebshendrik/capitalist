@@ -90,7 +90,7 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
         guard
             bankConnectionViewModel.canConnectBank
         else {
-            modal(factory.subscriptionNavigationViewController(requiredPlans: [.premium, .platinum]))
+            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
             return
         }
         if bankConnectionViewModel.connectionConnected {
