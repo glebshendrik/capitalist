@@ -39,13 +39,13 @@ class InteractiveFieldView : CustomView {
         }
     }
     
-    var labelFont: UIFont? = UIFont(name: "Roboto-Regular", size: 12) {
+    var labelFont: UIFont? = UIFont(name: "Roboto-Light", size: 12) {
         didSet {
             titleLabel.font = labelFont
         }
     }
     
-    var fieldBackgroundColor: UIColor = UIColor.by(.black1) {
+    var fieldBackgroundColor: UIColor = UIColor.by(.white12) {
         didSet {
             fieldContainer.backgroundColor = fieldBackgroundColor
             fieldTextField.backgroundColor = fieldBackgroundColor
@@ -58,7 +58,7 @@ class InteractiveFieldView : CustomView {
         }
     }
     
-    var fieldFont: UIFont? = UIFont(name: "Roboto-Regular", size: 12) {
+    var fieldFont: UIFont? = UIFont(name: "Roboto-Light", size: 16) {
         didSet {
             fieldTextField.font = fieldFont
         }
@@ -111,10 +111,10 @@ class InteractiveFieldView : CustomView {
     
     private func updateFieldUI() {
         fieldTextField.font = fieldFont
-        fieldTextField.textAlignment = .center
+        fieldTextField.textAlignment = .left
         fieldTextField.textColor = fieldTextColor
         fieldContainer.backgroundColor = fieldBackgroundColor
-        fieldTextField.backgroundColor = fieldBackgroundColor
+        fieldTextField.backgroundColor = .clear
         fieldContainer.cornerRadius = fieldCornerRadius
         guard
             let interactiveCredentials = interactiveCredentials
@@ -150,7 +150,9 @@ class InteractiveFieldView : CustomView {
     private func updateFieldPasswordUI() {
         fieldTextField.keyboardType = .default
         fieldTextField.isSecureTextEntry = true
-        fieldTextField.textContentType = .password
+        if #available(iOS 12.0, *) {
+            fieldTextField.textContentType = .oneTimeCode
+        }
     }
     
     private func updateFieldNumberUI() {
@@ -189,7 +191,7 @@ class InteractiveFieldView : CustomView {
             make.right.equalToSuperview().offset(-8)
             make.top.equalToSuperview().offset(4)
             make.bottom.equalToSuperview().offset(-4)
-            make.height.equalTo(44)
+            make.height.equalTo(34)
         }
     }
 }
