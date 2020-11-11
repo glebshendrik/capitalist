@@ -110,7 +110,9 @@ extension BankConnectionControllerProtocol {
                         showConnectionViewController(session: session)
                     }
                     else {
-                        showConnectionSession(type: connection.lastSuccessAt == nil ? .reconnecting : .refreshing)
+                        showConnectionSession(type: connection.isConnectedSuccessfully
+                                                ? .refreshing
+                                                : .reconnecting)
                     }
                 }                
                 else {

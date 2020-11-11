@@ -132,6 +132,10 @@ struct Connection : Decodable {
         case lastSuccessAt = "last_success_at"
     }
     
+    var isConnectedSuccessfully: Bool {
+        return lastSuccessAt != nil
+    }
+    
     var reconnectNeeded: Bool {
         guard
             let stage = lastStage,
@@ -155,9 +159,9 @@ struct Connection : Decodable {
         guard
             let nextRefreshPossibleAt = nextRefreshPossibleAt
         else {
-            return stage.isInteractive || lastSuccessAt == nil
+            return stage.isInteractive || !isConnectedSuccessfully
         }
-        return interactive && nextRefreshPossibleAt.isInPast || lastSuccessAt == nil
+        return interactive && nextRefreshPossibleAt.isInPast || !isConnectedSuccessfully
     }
     
     var isSyncing: Bool {
