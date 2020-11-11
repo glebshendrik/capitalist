@@ -99,7 +99,7 @@ extension GraphViewModel {
                                                                       type: virtualFilter.type,
                                                                       isVirtualTransactionable: virtualFilter.isVirtualTransactionable,
                                                                       isBorrowOrReturnTransactionable: virtualFilter.isBorrowOrReturnTransactionable,
-                                                                      title: NSLocalizedString("Баланс кошельков", comment: ""),
+                                                                      title: NSLocalizedString("Не распределено", comment: ""),
                                                                       iconURL: virtualFilter.iconURL,
                                                                       iconPlaceholder: virtualFilter.iconPlaceholder,
                                                                       сurrency: virtualFilter.currency,
