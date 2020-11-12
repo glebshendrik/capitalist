@@ -35,7 +35,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
     
-    let bankConnectionViewModel: BankConnectionViewModel
+    let bankConnectableViewModel: BankConnectableViewModel
     var expenseSourceViewModel: ExpenseSourceViewModel?
     
     var expenseSource: ExpenseSource? {
@@ -53,11 +53,11 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     }
     
     var canEditIcon: Bool {
-        return !bankConnectionViewModel.connectionConnected
+        return !bankConnectableViewModel.connectionConnected
     }
     
     var bankButtonTitle: String {
-        return bankConnectionViewModel.connectionConnected
+        return bankConnectableViewModel.connectionConnected
             ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
             : NSLocalizedString("Подключить банк", comment: "Подключить банк")
     }
@@ -70,7 +70,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
          bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
-        self.bankConnectionViewModel = BankConnectionViewModel(bankConnectionsCoordinator: bankConnectionsCoordinator,
+        self.bankConnectableViewModel = BankConnectableViewModel(bankConnectionsCoordinator: bankConnectionsCoordinator,
                                                                expenseSourcesCoordinator: expenseSourcesCoordinator,
                                                                accountCoordinator: accountCoordinator)
         super.init(transactionsCoordinator: transactionsCoordinator,
@@ -82,7 +82,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     func set(expenseSource: ExpenseSourceViewModel?) {
         self.expenseSourceViewModel = expenseSource
         self.selectedIconURL = expenseSource?.iconURL
-        self.bankConnectionViewModel.set(expenseSource: expenseSource)
+        self.bankConnectableViewModel.set(expenseSource: expenseSource)
     }
     
     override func loadEntity() -> Promise<Void> {
@@ -109,7 +109,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         }
         return
             firstly {
-                bankConnectionViewModel.connectionWithProvider(connection)
+                bankConnectableViewModel.connectionWithProvider(connection)
             }.then { connection -> Promise<ExpenseSource> in
                 return Promise.value(expenseSource)
             }
@@ -124,14 +124,14 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                     placeholder: TransactionableType.expenseSource.defaultIconName,
                                     canEditIcon: canEditIcon))
         
-        if bankConnectionViewModel.reconnectNeeded || bankConnectionViewModel.isSyncingWithBank {
+        if bankConnectableViewModel.reconnectNeeded || bankConnectableViewModel.isSyncingWithBank {
             fields.append(BankWarningInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
-                                               isSyncing: bankConnectionViewModel.isSyncingWithBank,
-                                               stage: bankConnectionViewModel.syncingWithBankStage,
-                                               interactiveCredentials: bankConnectionViewModel.interactiveCredentials))
+                                               isSyncing: bankConnectableViewModel.isSyncingWithBank,
+                                               stage: bankConnectableViewModel.syncingWithBankStage,
+                                               interactiveCredentials: bankConnectableViewModel.interactiveCredentials))
         }
         
-        if let nextUpdatePossibleAt = bankConnectionViewModel.nextUpdatePossibleAt {
+        if let nextUpdatePossibleAt = bankConnectableViewModel.nextUpdatePossibleAt {
             fields.append(DescriptionInfoField(fieldId: ExpenseCategoryInfoField.description.rawValue,
                                                description: nextUpdatePossibleAt))
         }
@@ -161,7 +161,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                       iconName: nil,
                                       isEnabled: true))
         
-        if !bankConnectionViewModel.connectionConnected {
+        if !bankConnectableViewModel.connectionConnected {
             fields.append(contentsOf: [ButtonInfoField(fieldId: ExpenseSourceInfoField.transactionIncome.rawValue,
                                                        title: NSLocalizedString("Добавить доход", comment: "Добавить доход"),
                                                        iconName: nil,
@@ -180,10 +180,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     }
          
     private func updateForm() -> ExpenseSourceUpdatingForm {
-        let amountCents = bankConnectionViewModel.accountViewModel?.amountCents ?? expenseSourceViewModel?.expenseSource.amountCents
-        let creditLimitCents = bankConnectionViewModel.accountViewModel?.creditLimitCents ?? expenseSourceViewModel?.expenseSource.creditLimitCents
-        let cardType = bankConnectionViewModel.accountViewModel?.cardType ?? expenseSourceViewModel?.expenseSource.cardType
-        selectedIconURL = bankConnectionViewModel.connection?.providerLogoURL ?? expenseSourceViewModel?.expenseSource.iconURL
+        let amountCents = bankConnectableViewModel.accountViewModel?.amountCents ?? expenseSourceViewModel?.expenseSource.amountCents
+        let creditLimitCents = bankConnectableViewModel.accountViewModel?.creditLimitCents ?? expenseSourceViewModel?.expenseSource.creditLimitCents
+        let cardType = bankConnectableViewModel.accountViewModel?.cardType ?? expenseSourceViewModel?.expenseSource.cardType
+        selectedIconURL = bankConnectableViewModel.connection?.providerLogoURL ?? expenseSourceViewModel?.expenseSource.iconURL
         
         return ExpenseSourceUpdatingForm(id: expenseSourceViewModel?.id,
                                          name: expenseSourceViewModel?.name,
@@ -191,7 +191,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                          amountCents: amountCents,
                                          creditLimitCents: creditLimitCents,
                                          cardType: cardType,
-                                         accountConnectionAttributes: bankConnectionViewModel.accountConnectionAttributes)
+                                         accountConnectionAttributes: bankConnectableViewModel.accountConnectionAttributes)
     }
 }
 

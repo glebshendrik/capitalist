@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-class BankConnectionViewModel {
+class BankConnectableViewModel {
     private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol

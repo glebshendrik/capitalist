@@ -212,8 +212,8 @@
 		FA7276E22254A6890086D4D1 /* FiltersSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7276E12254A6890086D4D1 /* FiltersSelectionViewController.swift */; };
 		FA7462FD2281AC5100E6D39B /* WaitingBorrowsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7462FC2281AC5100E6D39B /* WaitingBorrowsViewModel.swift */; };
 		FA7462FF2281AD2900E6D39B /* WaitingBorrowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7462FE2281AD2900E6D39B /* WaitingBorrowsViewController.swift */; };
-		FA780E8D252DA546007D394B /* BankConnectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA780E8C252DA546007D394B /* BankConnectionController.swift */; };
-		FA780ED92530754C007D394B /* BankConnectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA780ED82530754C007D394B /* BankConnectionViewModel.swift */; };
+		FA780E8D252DA546007D394B /* BankConnectableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA780E8C252DA546007D394B /* BankConnectableProtocol.swift */; };
+		FA780ED92530754C007D394B /* BankConnectableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA780ED82530754C007D394B /* BankConnectableViewModel.swift */; };
 		FA7C10C8230D615300CC0FD1 /* OnboardingPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7C10C7230D615200CC0FD1 /* OnboardingPagesViewController.swift */; };
 		FA7DB72B22102B6D00559878 /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DB72A22102B6D00559878 /* CurrencyViewModel.swift */; };
 		FA7DB72D22102BF900559878 /* CurrenciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DB72C22102BF900559878 /* CurrenciesViewModel.swift */; };
@@ -731,8 +731,8 @@
 		FA7276E12254A6890086D4D1 /* FiltersSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersSelectionViewController.swift; sourceTree = "<group>"; };
 		FA7462FC2281AC5100E6D39B /* WaitingBorrowsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingBorrowsViewModel.swift; sourceTree = "<group>"; };
 		FA7462FE2281AD2900E6D39B /* WaitingBorrowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingBorrowsViewController.swift; sourceTree = "<group>"; };
-		FA780E8C252DA546007D394B /* BankConnectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionController.swift; sourceTree = "<group>"; };
-		FA780ED82530754C007D394B /* BankConnectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionViewModel.swift; sourceTree = "<group>"; };
+		FA780E8C252DA546007D394B /* BankConnectableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectableProtocol.swift; sourceTree = "<group>"; };
+		FA780ED82530754C007D394B /* BankConnectableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectableViewModel.swift; sourceTree = "<group>"; };
 		FA7C10C7230D615200CC0FD1 /* OnboardingPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPagesViewController.swift; sourceTree = "<group>"; };
 		FA7DB72A22102B6D00559878 /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
 		FA7DB72C22102BF900559878 /* CurrenciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesViewModel.swift; sourceTree = "<group>"; };
@@ -1535,10 +1535,10 @@
 		FA6DDE8322D4D0FE008D14FF /* Bank Connection */ = {
 			isa = PBXGroup;
 			children = (
+				FA780E8C252DA546007D394B /* BankConnectableProtocol.swift */,
 				FA8AD0DF22C5F4040084AD19 /* ProvidersViewController.swift */,
 				FAC9BA6722AFD2E200310F6B /* ConnectionViewController.swift */,
 				FA7EDFFD22CDA0BD0054EAD3 /* AccountsViewController.swift */,
-				FA780E8C252DA546007D394B /* BankConnectionController.swift */,
 			);
 			path = "Bank Connection";
 			sourceTree = "<group>";
@@ -1749,7 +1749,7 @@
 				FAB71FDC243DC541006D432C /* ProviderConnectionViewModel.swift */,
 				FA7EDFFF22CDA1940054EAD3 /* AccountViewModel.swift */,
 				FA7EE00122CDA1A10054EAD3 /* AccountsViewModel.swift */,
-				FA780ED82530754C007D394B /* BankConnectionViewModel.swift */,
+				FA780ED82530754C007D394B /* BankConnectableViewModel.swift */,
 			);
 			path = "Bank Connection";
 			sourceTree = "<group>";
@@ -2616,7 +2616,7 @@
 				FAD88F4121AEBDF900BE7BC1 /* Navigator.swift in Sources */,
 				FAC3B9BA21B9FF5F0015A12F /* ProfileEditViewController.swift in Sources */,
 				FA835D662265F21F00A592F2 /* GraphSection.swift in Sources */,
-				FA780E8D252DA546007D394B /* BankConnectionController.swift in Sources */,
+				FA780E8D252DA546007D394B /* BankConnectableProtocol.swift in Sources */,
 				FAE05FB6235C7ED70014D034 /* EditableCellEditButton.swift in Sources */,
 				FA7276B122524B910086D4D1 /* ExpenseSourceEditDelegateExtension.swift in Sources */,
 				FA503DBF2375D1B4005AEFE7 /* EntityInfoSection.swift in Sources */,
@@ -2678,7 +2678,7 @@
 				FA7DB72B22102B6D00559878 /* CurrencyViewModel.swift in Sources */,
 				FAB5BE472352176B000466AE /* ActivesServiceProtocol.swift in Sources */,
 				FAE05FAE235C4D850014D034 /* BasketItemIcon.swift in Sources */,
-				FA780ED92530754C007D394B /* BankConnectionViewModel.swift in Sources */,
+				FA780ED92530754C007D394B /* BankConnectableViewModel.swift in Sources */,
 				FA6918A221F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift in Sources */,
 				FA0CAE2621D67A7100805288 /* IconViewModel.swift in Sources */,
 				FAAC99C023B4C9F4009ADB84 /* PeriodsViewModel.swift in Sources */,

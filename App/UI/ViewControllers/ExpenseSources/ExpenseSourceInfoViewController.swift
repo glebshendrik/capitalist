@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 import SwiftyBeaver
 
-class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConnectionControllerProtocol {
+class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConnectableProtocol {
     
     var viewModel: ExpenseSourceInfoViewModel!
     
@@ -18,12 +18,12 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
         return viewModel
     }
     
-    var bankConnectionViewModel: BankConnectionViewModel! {
-        return viewModel.bankConnectionViewModel
+    var bankConnectableViewModel: BankConnectableViewModel! {
+        return viewModel.bankConnectableViewModel
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if bankConnectionViewModel.accountConnected {
+        if bankConnectableViewModel.accountConnected {
             refreshData()
         }        
     }
@@ -61,19 +61,19 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
     
     override func didTapBankWarningInfoButton(field: BankWarningInfoField?) {
         guard
-            bankConnectionViewModel.canConnectBank
+            bankConnectableViewModel.canConnectBank
         else {
             modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
             return
         }
         guard
             let field = field,
-            bankConnectionViewModel.reconnectNeeded
+            bankConnectableViewModel.reconnectNeeded
         else {
             return
         }
-        bankConnectionViewModel.interactiveCredentials = field.interactiveCredentials
-        bankConnectionViewModel.hasActionIntent = field.hasInteractiveCredentialsValues
+        bankConnectableViewModel.interactiveCredentials = field.interactiveCredentials
+        bankConnectableViewModel.hasActionIntent = field.hasInteractiveCredentialsValues
         setupConnection()
     }
         
@@ -88,12 +88,12 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
     
     func didTapBankButton() {
         guard
-            bankConnectionViewModel.canConnectBank
+            bankConnectableViewModel.canConnectBank
         else {
             modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
             return
         }
-        if bankConnectionViewModel.connectionConnected {
+        if bankConnectableViewModel.connectionConnected {
             disconnectAccount()
         } else {
             showProviders()

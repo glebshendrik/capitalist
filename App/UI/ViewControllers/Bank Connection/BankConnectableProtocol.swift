@@ -1,5 +1,5 @@
 //
-//  BankConnectionController.swift
+//  BankConnectableProtocol.swift
 //  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 07.10.2020.
@@ -10,14 +10,14 @@ import UIKit
 import PromiseKit
 import SwiftyBeaver
 
-protocol BankConnectionControllerProtocol : UIFactoryDependantProtocol,
+protocol BankConnectableProtocol : UIFactoryDependantProtocol,
                                             UIMessagePresenterManagerDependantProtocol,
                                             ProvidersViewControllerDelegate,
                                             ConnectionViewControllerDelegate,
                                             AccountsViewControllerDelegate,
                                             ExperimentalBankFeatureViewControllerDelegate {
     
-    var bankConnectionViewModel: BankConnectionViewModel! { get }
+    var bankConnectableViewModel: BankConnectableViewModel! { get }
     
     func showProviders()
     func setupConnection()
@@ -27,46 +27,46 @@ protocol BankConnectionControllerProtocol : UIFactoryDependantProtocol,
     func save()
 }
 
-extension BankConnectionControllerProtocol {
+extension BankConnectableProtocol {
     func showProviders() {
         modal(factory.providersViewController(delegate: self))
     }
     
     func didSelectProvider(_ providerViewModel: ProviderViewModel) {
-        bankConnectionViewModel.providerViewModel = providerViewModel
+        bankConnectableViewModel.providerViewModel = providerViewModel
         showExperimentalFeature()
     }
 }
 
-extension BankConnectionControllerProtocol {
+extension BankConnectableProtocol {
     func showExperimentalFeature() {
         modal(factory.experimentalBankFeatureViewController(delegate: self))        
     }
     
     func didChooseUseFeature() {
-        bankConnectionViewModel.shouldUseExperimentalFeature = true
+        bankConnectableViewModel.shouldUseExperimentalFeature = true
         setupConnection()
     }
     
     func didChooseDontUseFeature() {
-        bankConnectionViewModel.shouldUseExperimentalFeature = false
+        bankConnectableViewModel.shouldUseExperimentalFeature = false
         setupConnection()
     }
 }
 
-extension BankConnectionControllerProtocol {
+extension BankConnectableProtocol {
     func setupConnection() {        
         messagePresenterManager.showHUD(with: NSLocalizedString("Загрузка подключения к банку...",
                                                                 comment: "Загрузка подключения к банку..."))        
         firstly {
-            bankConnectionViewModel.loadConnection()
+            bankConnectableViewModel.loadConnection()
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { _ in
             self.updateConnection()
-            self.bankConnectionViewModel.hasActionIntent = false
+            self.bankConnectableViewModel.hasActionIntent = false
         }.catch { error in
-            self.bankConnectionViewModel.hasActionIntent = false
+            self.bankConnectableViewModel.hasActionIntent = false
             if case BankConnectionError.connectionNotFound = error {
                 self.showConnectionSession(type: .creating)
             } else {
@@ -79,7 +79,7 @@ extension BankConnectionControllerProtocol {
     
     func updateConnection() {
         guard
-            let connection = bankConnectionViewModel.connection
+            let connection = bankConnectableViewModel.connection
         else {
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку",
                                                                                comment: "Не удалось подключиться к банку"),
@@ -88,7 +88,7 @@ extension BankConnectionControllerProtocol {
         }
         switch connection.status {
             case .active:
-                if !bankConnectionViewModel.connectionConnected {
+                if !bankConnectableViewModel.connectionConnected {
                     connectConnection(connection)
                 }
                 else if connection.reconnectNeeded {
@@ -100,7 +100,7 @@ extension BankConnectionControllerProtocol {
                         return
                     }
                     guard
-                        !bankConnectionViewModel.hasActionIntent
+                        !bankConnectableViewModel.hasActionIntent
                     else {
                         refreshData()
                         return
@@ -150,7 +150,7 @@ extension BankConnectionControllerProtocol {
 //                                                          theme: .error)
 //                    }
 //                }
-//                else if !bankConnectionViewModel.connectionConnected {
+//                else if !bankConnectableViewModel.connectionConnected {
 //                    connectConnection(connection)
 //                }
 //                else {
@@ -165,28 +165,28 @@ extension BankConnectionControllerProtocol {
     
     func connectConnection(_ connection: Connection) {
         guard
-            !bankConnectionViewModel.connectionConnected
+            !bankConnectableViewModel.connectionConnected
         else {
             refreshData()
             return
         }
-        bankConnectionViewModel.connectConnection(connection)
+        bankConnectableViewModel.connectConnection(connection)
         save()
     }
     
     func connectAccount(_ account: AccountViewModel) {
-        bankConnectionViewModel.connectAccount(account)
+        bankConnectableViewModel.connectAccount(account)
         save()
     }
     
     func disconnectAccount() {
-        bankConnectionViewModel.disconnectAccount()
+        bankConnectableViewModel.disconnectAccount()
         save()
     }
     
 }
 
-extension BankConnectionControllerProtocol {
+extension BankConnectableProtocol {
     func showConnectionSession(type: ConnectionSessionType) {
         messagePresenterManager.showHUD(with: NSLocalizedString("Подготовка подключения к банку...",
                                                                 comment: "Подготовка подключения к банку..."))
@@ -194,11 +194,11 @@ extension BankConnectionControllerProtocol {
         func connectionSession() -> Promise<ConnectionSession> {
             switch type {
                 case .creating:
-                    return bankConnectionViewModel.creatingConnectionSession()
+                    return bankConnectableViewModel.creatingConnectionSession()
                 case .refreshing:
-                    return bankConnectionViewModel.refreshingConnectionSession()
+                    return bankConnectableViewModel.refreshingConnectionSession()
                 case .reconnecting:
-                    return bankConnectionViewModel.reconnectingConnectionSession()
+                    return bankConnectableViewModel.reconnectingConnectionSession()
             }
         }
         
@@ -217,8 +217,8 @@ extension BankConnectionControllerProtocol {
     
     private func showConnectionViewController(session: ConnectionSession) {
         let connectionViewController = factory.connectionViewController(delegate: self,
-                                                                        providerViewModel: bankConnectionViewModel.providerViewModel,
-                                                                        connection: bankConnectionViewModel.connection,
+                                                                        providerViewModel: bankConnectableViewModel.providerViewModel,
+                                                                        connection: bankConnectableViewModel.connection,
                                                                         connectionSession: session)
         modal(connectionViewController)
     }
@@ -246,14 +246,14 @@ extension BankConnectionControllerProtocol {
     }
 }
 
-extension BankConnectionControllerProtocol {
+extension BankConnectableProtocol {
     func showAccounts() {
         guard
-            let expenseSource = bankConnectionViewModel.expenseSource,
-            let connection = bankConnectionViewModel.connection,
+            let expenseSource = bankConnectableViewModel.expenseSource,
+            let connection = bankConnectableViewModel.connection,
             connection.status == .active,
             connection.lastStage == .finish,
-            !bankConnectionViewModel.accountConnected
+            !bankConnectableViewModel.accountConnected
         else {
             return
         }
@@ -266,7 +266,7 @@ extension BankConnectionControllerProtocol {
     }
 }
 
-extension BankConnectionControllerProtocol {
+extension BankConnectableProtocol {
     private func modal(_ viewController: UIViewController?) {
         guard let selfController = self as? UIViewController else { return }
         selfController.modal(viewController)
