@@ -21,6 +21,7 @@ PODS:
   - CocoaLumberjack/Core (3.5.3)
   - CSV.swift (2.3.1)
   - CWStatusBarNotification (2.3.5)
+  - DynamicBlurView (4.1.0)
   - EasyTipView (2.0.4)
   - ESPullToRefresh (2.9)
   - FBSDKCoreKit/Basics (6.3.0)
@@ -133,6 +134,8 @@ PODS:
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
+  - PopupDialog (1.1.1):
+    - DynamicBlurView (~> 4.0)
   - PromiseKit (6.5.2):
     - PromiseKit/CorePromise (= 6.5.2)
     - PromiseKit/Foundation (= 6.5.2)
@@ -228,6 +231,7 @@ DEPENDENCIES:
   - Macaw (from `https://github.com/petalvlad/Macaw`, branch `master`)
   - MSPeekCollectionViewDelegateImplementation (~> 2.0)
   - myTrackerSDK
+  - PopupDialog (~> 1.1)
   - PromiseKit (~> 6.5)
   - PromiseKit/Alamofire (~> 6.5)
   - RandomColorSwift (from `https://github.com/onevcat/RandomColorSwift`, branch `master`)
@@ -283,6 +287,7 @@ SPEC REPOS:
     - BadgeHub
     - BetterSegmentedControl
     - BiometricAuthentication
+    - DynamicBlurView
     - EasyTipView
     - ESPullToRefresh
     - FBSDKCoreKit
@@ -303,6 +308,7 @@ SPEC REPOS:
     - lottie-ios
     - myTrackerSDK
     - nanopb
+    - PopupDialog
     - PromisesObjC
     - Protobuf
     - SaltEdge-iOS-Swift
@@ -360,6 +366,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   CSV.swift: d16f671b3090a2c0525d5f2165b18319074aae2b
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
+  DynamicBlurView: 58e18fae80bb614e34681a4486870e7d257b62e8
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
   ESPullToRefresh: ce058a36454a5032519cc9d8b45da217728cf104
   FBSDKCoreKit: 5d55c8f3007c9c49b793617b9102e46355fc7e17
@@ -384,6 +391,7 @@ SPEC CHECKSUMS:
   MSPeekCollectionViewDelegateImplementation: 3091e9512b3cd03facdea3c02e57673a4a06246a
   myTrackerSDK: cd0a1693064ae67b6069d9a3f81111083f6d9bf6
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
@@ -411,6 +419,6 @@ SPEC CHECKSUMS:
   TrustKit: dac38bb37e49bdfeca41b1a19d020da38017b51c
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
 
-PODFILE CHECKSUM: 0e4555c042ac6c7c0ea619e53c4b3f04f1322f1b
+PODFILE CHECKSUM: 69e4ee5450579fad9a29b120aef4111b0d9229d1
 
 COCOAPODS: 1.8.0

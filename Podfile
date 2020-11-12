@@ -58,6 +58,7 @@ target 'Capitalist' do
   pod 'Adjust', '~> 4.22.1'
   pod 'lottie-ios'
   pod 'UPCarouselFlowLayout'
+  pod 'PopupDialog', '~> 1.1'
 end
 
 post_install do |installer|
