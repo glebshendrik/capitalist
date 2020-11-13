@@ -66,7 +66,12 @@ class BankConnectableViewModel {
     }
     
     var fetchDataFrom: Date? {
-        return expenseSourceViewModel?.fetchDataFrom
+        return expenseSourceViewModel?.fetchDataFrom ?? fetchDataFromProvider
+    }
+    
+    var fetchDataFromProvider: Date {
+        guard shouldUseExperimentalFeature else { return Date() }
+        return providerViewModel?.fetchDataFrom ?? Date()
     }
     
     var canConnectBank: Bool {
@@ -122,6 +127,15 @@ class BankConnectableViewModel {
                                                   shouldDestroy: nil)
         }
         
+    }
+    
+    func loadProvider(code: String) -> Promise<ProviderViewModel> {
+        return
+            firstly {
+                bankConnectionsCoordinator.loadProvider(code: code)
+            }.map {
+                ProviderViewModel(provider: $0)
+            }
     }
     
     func connectionWithProvider(_ connection: Connection) -> Promise<Connection> {
@@ -190,11 +204,18 @@ class BankConnectableViewModel {
             
             return Promise.value(session)
         }
-        if let provider = providerViewModel?.provider,
-           let expenseSource = expenseSource {
-            return bankConnectionsCoordinator.createCreatingConnectionSession(provider: provider,
-                                                                              expenseSource: expenseSource,
-                                                                              useMaxFetchInterval: shouldUseExperimentalFeature)
+        if let provider = providerViewModel?.provider {
+            if let expenseSource = expenseSource {
+                return bankConnectionsCoordinator.createCreatingConnectionSession(provider: provider,
+                                                                                  expenseSource: expenseSource,
+                                                                                  useMaxFetchInterval: shouldUseExperimentalFeature)
+                
+            }
+            else {
+                return bankConnectionsCoordinator.createCreatingConnectionSession(providerCode: provider.code,
+                                                                                  countryCode: provider.countryCode,
+                                                                                  fromDate: fetchDataFrom)
+            }
         }
         if let connection = connection {
             return bankConnectionsCoordinator.createCreatingConnectionSession(providerCode: connection.providerCode,

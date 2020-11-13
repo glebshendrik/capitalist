@@ -200,15 +200,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3H-TM-A2p">
-                                                    <rect key="frame" x="0.0" y="118" width="375" height="1"/>
-                                                    <color key="backgroundColor" name="white 0.04"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="pgl-YI-q7T"/>
-                                                    </constraints>
-                                                </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUt-c6-OLW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="118"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                                                     <connections>
                                                         <action selector="didTapIcon:" destination="YzM-aR-OkL" eventType="touchUpInside" id="7S0-fQ-JX7"/>
                                                     </connections>
@@ -216,11 +209,8 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="z3H-TM-A2p" secondAttribute="trailing" id="HRM-c9-fKT"/>
-                                                <constraint firstItem="z3H-TM-A2p" firstAttribute="top" secondItem="vUt-c6-OLW" secondAttribute="bottom" id="W35-Sb-hE6"/>
+                                                <constraint firstAttribute="bottom" secondItem="vUt-c6-OLW" secondAttribute="bottom" id="JhO-xM-LHv"/>
                                                 <constraint firstItem="cHh-YN-0Do" firstAttribute="trailing" secondItem="iTD-zZ-I9i" secondAttribute="trailing" constant="12" id="Xro-nC-BNd"/>
-                                                <constraint firstAttribute="bottom" secondItem="z3H-TM-A2p" secondAttribute="bottom" id="dok-h5-0E8"/>
-                                                <constraint firstItem="z3H-TM-A2p" firstAttribute="leading" secondItem="NuC-kw-XGp" secondAttribute="leading" id="jjy-cq-neG"/>
                                                 <constraint firstItem="iTD-zZ-I9i" firstAttribute="centerX" secondItem="NuC-kw-XGp" secondAttribute="centerX" id="lCD-4z-TOr"/>
                                                 <constraint firstItem="vUt-c6-OLW" firstAttribute="top" secondItem="NuC-kw-XGp" secondAttribute="top" id="lOP-BF-HYo"/>
                                                 <constraint firstItem="cHh-YN-0Do" firstAttribute="bottom" secondItem="iTD-zZ-I9i" secondAttribute="bottom" constant="12" id="uMb-Ee-1i9"/>
@@ -231,29 +221,84 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="60" id="ycy-Lx-WEB">
+                                        <rect key="frame" x="0.0" y="183" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ycy-Lx-WEB" id="mth-Tk-LET">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CF-wN-0Yc" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="0.0" width="327" height="48"/>
+                                                    <color key="backgroundColor" name="blue 1"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="48" id="qaf-Dm-pdu"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                                    <color key="tintColor" name="white 1.0"/>
+                                                    <inset key="contentEdgeInsets" minX="31" minY="0.0" maxX="23" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="-16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <state key="normal" title="Подключить банк">
+                                                        <color key="titleColor" name="white 1.0"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
+                                                            <color key="value" name="blue 1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
+                                                            <color key="value" name="white 0.4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapBankButton:" destination="YzM-aR-OkL" eventType="touchUpInside" id="mbt-8S-HBu"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="9CF-wN-0Yc" secondAttribute="bottom" constant="12" id="Fky-YC-WHH"/>
+                                                <constraint firstItem="9CF-wN-0Yc" firstAttribute="centerX" secondItem="mth-Tk-LET" secondAttribute="centerX" id="I8z-hS-bpp"/>
+                                                <constraint firstAttribute="trailing" secondItem="9CF-wN-0Yc" secondAttribute="trailing" constant="24" id="cfi-oG-G3c"/>
+                                                <constraint firstItem="9CF-wN-0Yc" firstAttribute="leading" secondItem="mth-Tk-LET" secondAttribute="leading" constant="24" id="nuF-6H-yBU"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="I7q-L7-ySL">
-                                        <rect key="frame" x="0.0" y="183" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="243" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I7q-L7-ySL" id="oig-5s-V1c">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3H-TM-A2p">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                    <color key="backgroundColor" name="white 0.04"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="pgl-YI-q7T"/>
+                                                    </constraints>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HM-0c-HRV" customClass="FormTextField" customModule="Capitalist" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                                    <rect key="frame" x="0.0" y="1" width="375" height="74"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="2HM-0c-HRV" secondAttribute="trailing" id="2x4-Aa-rHy"/>
-                                                <constraint firstItem="2HM-0c-HRV" firstAttribute="top" secondItem="oig-5s-V1c" secondAttribute="top" id="6It-cg-vjl"/>
+                                                <constraint firstAttribute="trailing" secondItem="z3H-TM-A2p" secondAttribute="trailing" id="8XE-P3-AcA"/>
+                                                <constraint firstItem="2HM-0c-HRV" firstAttribute="top" secondItem="z3H-TM-A2p" secondAttribute="bottom" id="J0O-qe-abw"/>
                                                 <constraint firstAttribute="bottom" secondItem="2HM-0c-HRV" secondAttribute="bottom" id="Qx7-vH-Tqv"/>
+                                                <constraint firstItem="z3H-TM-A2p" firstAttribute="top" secondItem="oig-5s-V1c" secondAttribute="top" id="c9a-57-WiH"/>
+                                                <constraint firstItem="z3H-TM-A2p" firstAttribute="leading" secondItem="oig-5s-V1c" secondAttribute="leading" id="dw0-EF-WJn"/>
                                                 <constraint firstItem="2HM-0c-HRV" firstAttribute="leading" secondItem="oig-5s-V1c" secondAttribute="leading" id="ysR-HG-AcC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="dTN-w2-71G">
-                                        <rect key="frame" x="0.0" y="258" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="318" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dTN-w2-71G" id="UFJ-Gc-93P">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -274,7 +319,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="TuD-Ts-1S2">
-                                        <rect key="frame" x="0.0" y="333" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="393" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TuD-Ts-1S2" id="jAd-sW-ZI3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -295,7 +340,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="WOH-1k-92o">
-                                        <rect key="frame" x="0.0" y="408" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="468" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WOH-1k-92o" id="E0T-2P-ra1">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -316,7 +361,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="75" id="T4O-YH-nE7">
-                                        <rect key="frame" x="0.0" y="483" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="543" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T4O-YH-nE7" id="fdC-GW-p5e">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -336,53 +381,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="52" id="ycy-Lx-WEB">
-                                        <rect key="frame" x="0.0" y="558" width="375" height="52"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ycy-Lx-WEB" id="mth-Tk-LET">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CF-wN-0Yc" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="4" width="327" height="48"/>
-                                                    <color key="backgroundColor" name="blue 1"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="48" id="qaf-Dm-pdu"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
-                                                    <color key="tintColor" name="white 1.0"/>
-                                                    <inset key="contentEdgeInsets" minX="31" minY="0.0" maxX="23" maxY="0.0"/>
-                                                    <inset key="imageEdgeInsets" minX="-16" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="Подключить банк" image="bank-icon">
-                                                        <color key="titleColor" name="white 1.0"/>
-                                                    </state>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="8"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForNormal">
-                                                            <color key="value" name="blue 1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColorForHighlighted">
-                                                            <color key="value" name="white 0.4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="didTapBankButton:" destination="YzM-aR-OkL" eventType="touchUpInside" id="mbt-8S-HBu"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="9CF-wN-0Yc" secondAttribute="bottom" id="Fky-YC-WHH"/>
-                                                <constraint firstItem="9CF-wN-0Yc" firstAttribute="centerX" secondItem="mth-Tk-LET" secondAttribute="centerX" id="I8z-hS-bpp"/>
-                                                <constraint firstAttribute="trailing" secondItem="9CF-wN-0Yc" secondAttribute="trailing" constant="24" id="cfi-oG-G3c"/>
-                                                <constraint firstItem="9CF-wN-0Yc" firstAttribute="leading" secondItem="mth-Tk-LET" secondAttribute="leading" constant="24" id="nuF-6H-yBU"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="64" id="4R1-vU-TYo">
-                                        <rect key="frame" x="0.0" y="610" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="618" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4R1-vU-TYo" id="6j7-1Q-BFU">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -414,7 +414,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="tbc-p8-W47">
-                                        <rect key="frame" x="0.0" y="674" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="682" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tbc-p8-W47" id="mrg-dS-jM9">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -1273,7 +1273,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bank-icon" width="17" height="17"/>
         <image name="close-icon" width="14.5" height="14.5"/>
         <image name="experimental-image" width="120" height="120"/>
         <image name="loader-1" width="55" height="31"/>

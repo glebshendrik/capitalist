@@ -16,9 +16,12 @@ enum ExpenseSourceUpdatingError : Error {
 class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
+    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol    
     var transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol
     
     private var expenseSource: ExpenseSource? = nil
+    
+    let bankConnectableViewModel: BankConnectableViewModel
     
     var selectedIconURL: URL? = nil
     var selectedCurrency: Currency? = nil
@@ -26,7 +29,6 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     var name: String? = nil
     var amount: String? = nil
     var creditLimit: String? = nil
-    var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
     
     var amountToSave: String {
         guard   let amount = amount,
@@ -66,12 +68,8 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
         return .expenseSource
     }
     
-    var accountConnected: Bool {
-        guard let accountConnectionAttributes = accountConnectionAttributes else {
-            return false
-        }
-        
-        return accountConnectionAttributes.shouldDestroy == nil && accountConnectionAttributes.accountId != nil
+    var connectionConnected: Bool {
+        return bankConnectableViewModel.connectionConnected
     }
         
     var iconType: IconType {
@@ -81,23 +79,23 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     // Permissions
     
     var canChangeIcon: Bool {
-        return !accountConnected
+        return !connectionConnected
     }
     
     var canChangeCurrency: Bool {
-        return !accountConnected && isNew
+        return !(expenseSource?.hasTransactions ?? false) && !bankConnectableViewModel.accountConnected
     }
     
     var canChangeAmount: Bool {
-        return !accountConnected
+        return !connectionConnected
     }
     
     var canChangeCreditLimit: Bool {
-        return !accountConnected
+        return !connectionConnected
     }
     
-    var canCardType: Bool {
-        return !accountConnected
+    var canChangeCardType: Bool {
+        return !connectionConnected
     }
         
     // Visibility
@@ -105,13 +103,9 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     var iconPenHidden: Bool {
         return !canChangeIcon
     }
-    
-    var customIconHidden: Bool {
-        return accountConnected
-    }
-    
-    var bankIconHidden: Bool {
-        return !accountConnected
+        
+    var bankButtonHidden: Bool {
+        return connectionConnected || !connectable
     }
                     
     var removeButtonHidden: Bool {
@@ -130,12 +124,45 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
         return .expenseSource
     }
     
+    var providerCodes: [String]? {
+        return expenseSource?.providerCodes ?? example?.providerCodes
+    }
+    
+    var prototypeKey: String? {
+        return expenseSource?.prototypeKey ?? example?.prototypeKey
+    }
+    
+    var connectable: Bool {
+        return isNew && !(prototypeKey != nil && providerCodes == nil)
+    }
+    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
-         transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {
+         transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol,
+         bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.accountCoordinator = accountCoordinator
         self.transactionableExamplesCoordinator = transactionableExamplesCoordinator
+        self.bankConnectionsCoordinator = bankConnectionsCoordinator
+        self.bankConnectableViewModel = BankConnectableViewModel(bankConnectionsCoordinator: bankConnectionsCoordinator,
+                                                                 expenseSourcesCoordinator: expenseSourcesCoordinator,
+                                                                 accountCoordinator: accountCoordinator)
+    }
+    
+    func loadProvider() -> Promise<ProviderViewModel?> {
+        guard
+            let providerCodes = providerCodes,
+            providerCodes.count == 1,
+            let code = providerCodes.first
+        else {
+            return Promise.value(nil)
+        }
+        return
+            firstly {
+                bankConnectionsCoordinator.loadProvider(code: code)
+            }.then { provider -> Promise<ProviderViewModel?> in
+                return Promise.value(ProviderViewModel(provider: provider))
+            }
     }
     
     func loadData() -> Promise<Void> {
@@ -160,15 +187,7 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
         name = expenseSource.name
         amount = expenseSource.amountCents.moneyDecimalString(with: selectedCurrency)
         creditLimit = expenseSource.creditLimitCents?.moneyDecimalString(with: selectedCurrency)
-        
-        if let accountConnection = expenseSource.accountConnection {
-            accountConnectionAttributes =
-                AccountConnectionNestedAttributes(id: accountConnection.id,
-                                                  connectionId: accountConnection.connection.id,
-                                                  accountId: accountConnection.account?.id,
-                                                  shouldDestroy: nil)
-        }
-        
+        bankConnectableViewModel.set(expenseSource: ExpenseSourceViewModel(expenseSource: expenseSource))
     }
     
     func set(example: TransactionableExampleViewModel) {
@@ -208,15 +227,21 @@ extension ExpenseSourceEditViewModel {
     }
     
     private func creationForm() -> ExpenseSourceCreationForm {
+        let amountCents = bankConnectableViewModel.accountViewModel?.amountCents ?? amountToSave.intMoney(with: selectedCurrency)
+        let creditLimitCents = bankConnectableViewModel.accountViewModel?.creditLimitCents ?? creditLimitToSave.intMoney(with: selectedCurrency)
+        let cardType = bankConnectableViewModel.accountViewModel?.cardType ?? selectedCardType
+        selectedIconURL = bankConnectableViewModel.connection?.providerLogoURL ?? selectedIconURL
+        name = bankConnectableViewModel.accountViewModel?.name ?? bankConnectableViewModel.connection?.providerName ?? name
         return ExpenseSourceCreationForm(userId: accountCoordinator.currentSession?.userId,
                                          name: name,
                                          iconURL: selectedIconURL,
                                          currency: selectedCurrency?.code,
-                                         amountCents: amountToSave.intMoney(with: selectedCurrency),
-                                         creditLimitCents: creditLimitToSave.intMoney(with: selectedCurrency),
-                                         cardType: selectedCardType,
+                                         amountCents: amountCents,
+                                         creditLimitCents: creditLimitCents,
+                                         cardType: cardType,
                                          prototypeKey: example?.prototypeKey,
-                                         accountConnectionAttributes: accountConnectionAttributes)
+                                         maxFetchInterval: bankConnectableViewModel.providerViewModel?.maxFetchInterval,
+                                         accountConnectionAttributes: bankConnectableViewModel.accountConnectionAttributes)
     }
 }
 
@@ -231,12 +256,18 @@ extension ExpenseSourceEditViewModel {
     }
     
     private func updatingForm() -> ExpenseSourceUpdatingForm {
+        var currencyCode = selectedCurrency?.code
+        if bankConnectableViewModel.accountConnected &&
+            expenseSource?.currency.code != bankConnectableViewModel.accountViewModel?.currencyCode {
+            currencyCode = bankConnectableViewModel.accountViewModel?.currencyCode
+        }
         return ExpenseSourceUpdatingForm(id: expenseSource?.id,
                                          name: name,
                                          iconURL: selectedIconURL,
+                                         currency: currencyCode,
                                          amountCents: amountToSave.intMoney(with: selectedCurrency),          
                                          creditLimitCents: creditLimitToSave.intMoney(with: selectedCurrency),
                                          cardType: selectedCardType,
-                                         accountConnectionAttributes: accountConnectionAttributes)
+                                         accountConnectionAttributes: bankConnectableViewModel.accountConnectionAttributes)
     }
 }

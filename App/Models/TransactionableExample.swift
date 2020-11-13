@@ -18,6 +18,7 @@ struct TransactionableExample : Decodable {
     let transactionableType: TransactionableType
     let basketType: BasketType?
     let prototypeKey: String
+    let providerCodes: [String]?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -29,5 +30,6 @@ struct TransactionableExample : Decodable {
         case transactionableType = "transactionable_type"
         case basketType = "basket_type"
         case prototypeKey = "prototype_key"
+        case providerCodes = "provider_codes"
     }
 }

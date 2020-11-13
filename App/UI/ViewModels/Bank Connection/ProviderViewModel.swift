@@ -36,6 +36,14 @@ class ProviderViewModel {
         return provider.maxFetchInterval
     }
     
+    var fetchDataFrom: Date {        
+        var interval = maxFetchInterval - 1
+        if interval < 0 {
+            interval = 0
+        }
+        return Date().adding(.day, value: interval)
+    }
+    
     var connectURL: URL? = nil
     
     var interactiveCredentials: [ConnectionInteractiveCredentials] {

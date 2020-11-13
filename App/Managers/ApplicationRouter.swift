@@ -167,19 +167,25 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             accountCoordinator.loadCurrentUser()
         }.done { user in
             
-            guard UIFlowManager.reached(point: .onboarding) || user.onboarded else {
+            guard
+                UIFlowManager.reached(point: .onboarding) || user.onboarded
+            else {
                 self.showOnboardingViewController()
                 return
             }
             
             self.notificationsCoordinator.enableNotifications()
             
-            guard UIFlowManager.reached(point: .dataSetup) || user.onboarded else {
+            guard
+                UIFlowManager.reached(point: .dataSetup) || user.onboarded
+            else {
                 self.showDataSetupViewController()
                 return
             }
                
-            guard UIFlowManager.reached(point: .subscription) || self.accountCoordinator.hasActiveSubscription else {
+            guard
+                UIFlowManager.reached(point: .subscription) || self.accountCoordinator.hasActiveSubscription
+            else {
                 self.showSubscriptionScreen()
                 return
             }
@@ -419,7 +425,7 @@ extension ApplicationRouter {
     }
     
     private func modal(_ viewController: Infrastructure.ViewController) {
-        var screen = self.viewController(viewController)
+        let screen = self.viewController(viewController)
         if isAnimating {
             pendingModalScreen = screen
         }

@@ -87,17 +87,7 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
     }
     
     func didTapBankButton() {
-        guard
-            bankConnectableViewModel.canConnectBank
-        else {
-            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
-            return
-        }
-        if bankConnectableViewModel.connectionConnected {
-            disconnectAccount()
-        } else {
-            showProviders()
-        }
+        toggleConnectionFlow(providerCodes: viewModel.expenseSourceViewModel?.providerCodes)        
     }
     
     override var isSelectingTransactionables: Bool {

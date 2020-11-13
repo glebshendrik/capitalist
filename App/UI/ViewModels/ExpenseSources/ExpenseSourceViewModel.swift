@@ -86,6 +86,10 @@ class ExpenseSourceViewModel {
         return expenseSource.fetchDataFrom
     }
     
+    var providerCodes: [String]? {
+        return expenseSource.providerCodes
+    }
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         if let account = accountConnection?.account {

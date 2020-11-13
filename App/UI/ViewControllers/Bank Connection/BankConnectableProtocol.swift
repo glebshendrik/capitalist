@@ -19,7 +19,8 @@ protocol BankConnectableProtocol : UIFactoryDependantProtocol,
     
     var bankConnectableViewModel: BankConnectableViewModel! { get }
     
-    func showProviders()
+    func toggleConnectionFlow(providerCodes: [String]?)
+//    func showProviders(codes: [String])
     func setupConnection()
     func showAccounts()
     
@@ -28,8 +29,45 @@ protocol BankConnectableProtocol : UIFactoryDependantProtocol,
 }
 
 extension BankConnectableProtocol {
-    func showProviders() {
-        modal(factory.providersViewController(delegate: self))
+    func toggleConnectionFlow(providerCodes: [String]?) {
+        guard
+            !bankConnectableViewModel.connectionConnected
+        else {
+            disconnectAccount()
+            return
+        }
+        
+        guard
+            bankConnectableViewModel.canConnectBank
+        else {
+            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
+            return
+        }
+        
+        showProviders(codes: providerCodes ?? [])
+    }
+}
+
+extension BankConnectableProtocol {
+    private func showProviders(codes: [String]) {
+        if codes.count == 1,
+           let code = codes.first {
+            
+            messagePresenterManager.showHUD(with: NSLocalizedString("Загрузка подключения к банку...",
+                                                                    comment: "Загрузка подключения к банку..."))
+            firstly {
+                bankConnectableViewModel.loadProvider(code: code)
+            }.ensure {
+                self.messagePresenterManager.dismissHUD()
+            }.get { provider in
+                self.didSelectProvider(provider)
+            }.catch { error in
+                self.modal(self.factory.providersViewController(delegate: self, codes: []))
+            }
+        }
+        else {
+            modal(factory.providersViewController(delegate: self, codes: codes))
+        }        
     }
     
     func didSelectProvider(_ providerViewModel: ProviderViewModel) {

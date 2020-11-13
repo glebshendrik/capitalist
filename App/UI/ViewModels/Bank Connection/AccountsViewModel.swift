@@ -36,8 +36,13 @@ class AccountsViewModel {
             return Promise(error: AccountsLoadingError.canNotLoadAccounts)
         }
         
+        var currencyCode: String? = nil
+        if let expenseSource = expenseSource,
+           expenseSource.hasTransactions {
+            currencyCode = expenseSource.currency.code
+        }
         return  firstly {
-                    bankConnectionsCoordinator.loadAccounts(currencyCode: expenseSource?.currency.code,
+                    bankConnectionsCoordinator.loadAccounts(currencyCode: currencyCode,
                                                             connectionId: connectionId,
                                                             providerId: providerId,
                                                             notUsed: true,

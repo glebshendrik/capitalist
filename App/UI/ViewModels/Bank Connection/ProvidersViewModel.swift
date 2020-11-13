@@ -17,6 +17,11 @@ class ProvidersViewModel {
     private var providerViewModels: [ProviderViewModel] = [] {
         didSet {
             filteredProviderViewModels = providerViewModels
+            if !codes.isEmpty {
+                filteredProviderViewModels = filteredProviderViewModels.filter { provider in
+                    return codes.contains(provider.code)
+                }
+            }
         }
     }
     
@@ -44,6 +49,8 @@ class ProvidersViewModel {
             }
         }
     }
+    
+    var codes: [String] = []
     
     var selectedCountryViewModel: CountryViewModel? = nil
     

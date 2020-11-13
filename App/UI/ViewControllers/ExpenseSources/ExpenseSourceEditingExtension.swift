@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PopupDialog
 
 extension ExpenseSourceEditViewController : IconsViewControllerDelegate {
     func didSelectIcon(icon: Icon) {
@@ -68,11 +69,41 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
     func didTapSave() {
         save()
     }
+    
+    func didTapBankButton() {
+        toggleConnectionFlow(providerCodes: viewModel.providerCodes)
+    }
 }
 
 extension ExpenseSourceEditViewController : TransactionableExamplesViewControllerDelegate {
     func didSelect(exampleViewModel: TransactionableExampleViewModel) {
         viewModel.set(example: exampleViewModel)
         updateUI()
-    }    
+        suggestBankConnection()
+    }
+    
+    func suggestBankConnection() {
+        guard
+            viewModel.connectable
+        else {
+            return
+        }
+        
+        let title = "THIS IS THE DIALOG TITLE"
+        let message = "This is the message section of the popup dialog default view"
+        
+        let popup = PopupDialog(title: title, message: message)
+        
+        let buttonOne = CancelButton(title: "Подключиться к банку") {
+            self.toggleConnectionFlow(providerCodes: self.viewModel.providerCodes)
+        }
+        
+        let buttonTwo = DefaultButton(title: "Ввести вручную") {
+            
+        }
+        
+        popup.addButtons([buttonOne, buttonTwo])
+        
+        present(popup, animated: true, completion: nil)
+    }
 }

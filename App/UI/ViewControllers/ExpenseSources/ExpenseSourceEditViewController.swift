@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import PopupDialog
 
 protocol ExpenseSourceEditViewControllerDelegate : class {
     func didCreateExpenseSource()
@@ -15,9 +16,13 @@ protocol ExpenseSourceEditViewControllerDelegate : class {
     func didRemoveExpenseSource()
 }
 
-class ExpenseSourceEditViewController : FormTransactionsDependableEditViewController {
-
+class ExpenseSourceEditViewController : FormTransactionsDependableEditViewController, BankConnectableProtocol {
+    
     var viewModel: ExpenseSourceEditViewModel!
+    var bankConnectableViewModel: BankConnectableViewModel! {
+        return viewModel.bankConnectableViewModel
+    }
+    
     weak var delegate: ExpenseSourceEditViewControllerDelegate?
     var tableController: ExpenseSourceEditTableController!
     
@@ -70,8 +75,11 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
                                                                   transactionableType: .expenseSource,
                                                                   isUsed: false))
         }
+        else {
+            suggestBankConnection()
+        }
     }
-
+    
     override func didSave() {
         super.didSave()
         if viewModel.isNew {
@@ -95,6 +103,10 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
         updateRemoveButtonUI()
         updateTableUI(animated: false)
         focusFirstEmptyField()
+    }
+    
+    func refreshData() {
+        closeButtonHandler()
     }
 }
 

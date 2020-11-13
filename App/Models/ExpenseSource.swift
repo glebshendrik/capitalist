@@ -68,6 +68,8 @@ struct ExpenseSource : Decodable {
     let cardType: CardType?
     let fetchDataFrom: Date?
     let maxFetchInterval: Int?
+    let providerCodes: [String]?
+    let hasTransactions: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -85,6 +87,8 @@ struct ExpenseSource : Decodable {
         case cardType = "card_type"
         case fetchDataFrom = "fetch_from_date"
         case maxFetchInterval = "max_fetch_interval"
+        case providerCodes = "provider_codes"
+        case hasTransactions = "has_transactions"
     }
 }
 
@@ -97,6 +101,7 @@ struct ExpenseSourceCreationForm : Encodable, Validatable {
     let creditLimitCents: Int?
     let cardType: CardType?
     let prototypeKey: String?
+    let maxFetchInterval: Int?
     let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -107,6 +112,7 @@ struct ExpenseSourceCreationForm : Encodable, Validatable {
         case creditLimitCents = "credit_limit_cents"
         case cardType = "card_type"
         case prototypeKey = "prototype_key"
+        case maxFetchInterval = "max_fetch_interval"
         case accountConnectionAttributes = "account_connection_attributes"
     }
     
@@ -120,6 +126,7 @@ struct ExpenseSourceCreationForm : Encodable, Validatable {
         try container.encode(creditLimitCents, forKey: .creditLimitCents)
         try container.encode(cardType, forKey: .cardType)
         try container.encode(prototypeKey, forKey: .prototypeKey)
+        try container.encodeIfPresent(maxFetchInterval, forKey: .maxFetchInterval)
         try container.encode(accountConnectionAttributes, forKey: .accountConnectionAttributes)
     }
     
@@ -154,6 +161,7 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
     let id: Int?
     let name: String?
     let iconURL: URL?
+    let currency: String?
     let amountCents: Int?
     let creditLimitCents: Int?
     let cardType: CardType?
@@ -162,6 +170,7 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
     enum CodingKeys: String, CodingKey {
         case name
         case iconURL = "icon_url"
+        case currency
         case amountCents = "amount_cents"
         case creditLimitCents = "credit_limit_cents"
         case cardType = "card_type"
@@ -177,6 +186,7 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
         
         try container.encode(name, forKey: .name)
         try container.encode(iconURL, forKey: .iconURL)
+        try container.encode(currency, forKey: .currency)
         try container.encode(amountCents, forKey: .amountCents)
         try container.encode(creditLimitCents, forKey: .creditLimitCents)
         try container.encode(cardType, forKey: .cardType)

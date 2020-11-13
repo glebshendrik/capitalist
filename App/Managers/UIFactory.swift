@@ -52,9 +52,11 @@ class UIFactory : UIFactoryProtocol {
         return reminderEditNavigationController
     }
     
-    func providersViewController(delegate: ProvidersViewControllerDelegate) -> UINavigationController? {
+    func providersViewController(delegate: ProvidersViewControllerDelegate,
+                                 codes: [String]) -> UINavigationController? {
         guard let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController else { return nil }
         providersViewController.delegate = delegate
+        providersViewController.viewModel.codes = codes
         let navigationController = UINavigationController(rootViewController: providersViewController)
 //        navigationController.modalPresentationStyle = .fullScreen
         return navigationController
