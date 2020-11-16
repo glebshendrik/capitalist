@@ -174,14 +174,14 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
                 return
             }
             
-            self.notificationsCoordinator.enableNotifications()
-            
             guard
                 UIFlowManager.reached(point: .currencySetup) || user.onboarded
             else {
                 self.showOnboardCurrencyViewController()
                 return
             }
+            
+            self.notificationsCoordinator.enableNotifications()
             
             guard
                 UIFlowManager.reached(point: .dataSetup)
