@@ -107,6 +107,8 @@ class BankConnectableViewModel {
         return "\(nextSyncTitle)\n\(nextRefreshPossibleAt.dateTimeString(ofStyle: .short))"
     }
     
+    var fetchingStarted: Bool = false
+    
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol) {

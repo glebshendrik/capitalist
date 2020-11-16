@@ -63,7 +63,11 @@ final public class PopupDialog: UIViewController {
 
     /// Keyboard height
     internal var keyboardHeight: CGFloat?
-
+    
+    public override var disablesAutomaticKeyboardDismissal: Bool {
+        return false
+    }
+    
     // MARK: Public
 
     /// The content view of the popup dialog

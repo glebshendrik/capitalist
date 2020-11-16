@@ -219,7 +219,12 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
 // Creation
 extension ExpenseSourceEditViewModel {
     private func create() -> Promise<Void> {
-        return expenseSourcesCoordinator.create(with: creationForm()).asVoid()
+        return
+            firstly {
+                expenseSourcesCoordinator.create(with: creationForm())
+            }.get {
+                self.set(expenseSource: $0)
+            }.asVoid()
     }
     
     private func isCreationFormValid() -> Bool {

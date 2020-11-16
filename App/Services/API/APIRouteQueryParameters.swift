@@ -55,7 +55,9 @@ struct APIRouteQueryParameters {
             if let country = Locale.current.regionCode {
                 params["country"] = country
             }
-            params["is_used"] = isUsed.string
+            if let isUsed = isUsed {
+                params["is_used"] = isUsed.string
+            }            
             return params
         case .indexTransactions(_, let type, let transactionableId, let transactionableType, let creditId, let borrowId, let borrowType, let count, let lastGotAt, let fromGotAt, let toGotAt):
             if let type = type {

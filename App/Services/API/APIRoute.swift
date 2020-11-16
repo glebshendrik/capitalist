@@ -169,7 +169,7 @@ enum APIRoute: URLRequestConvertible {
     // TransactionableExamples
     case indexTransactionableExamples(transactionableType: TransactionableType,
                                       basketType: BasketType?,
-                                      isUsed: Bool)
+                                      isUsed: Bool?)
     
     var method: HTTPMethod {
         return APIRouteMethod.method(for: self)

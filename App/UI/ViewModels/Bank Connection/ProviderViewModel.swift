@@ -41,7 +41,7 @@ class ProviderViewModel {
         if interval < 0 {
             interval = 0
         }
-        return Date().adding(.day, value: interval)
+        return Date().adding(.day, value: -interval)
     }
     
     var connectURL: URL? = nil

@@ -63,7 +63,7 @@ class IconView : CustomView {
         }
     }
     
-    var vectorBackgroundViewColor: UIColor = UIColor.by(.white100) {
+    var vectorBackgroundViewColor: UIColor = .clear {
         didSet {
             updateVectorBackgroundColor()
         }

@@ -184,11 +184,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         let creditLimitCents = bankConnectableViewModel.accountViewModel?.creditLimitCents ?? expenseSourceViewModel?.expenseSource.creditLimitCents
         let cardType = bankConnectableViewModel.accountViewModel?.cardType ?? expenseSourceViewModel?.expenseSource.cardType
         selectedIconURL = bankConnectableViewModel.connection?.providerLogoURL ?? expenseSourceViewModel?.expenseSource.iconURL
-        var currencyCode = expenseSourceViewModel?.currency.code
-        if bankConnectableViewModel.accountConnected &&
-            currencyCode != bankConnectableViewModel.accountViewModel?.currencyCode {
-            currencyCode = bankConnectableViewModel.accountViewModel?.currencyCode
-        }
+        let currencyCode = bankConnectableViewModel.accountViewModel?.currencyCode ?? expenseSourceViewModel?.currency.code
         return ExpenseSourceUpdatingForm(id: expenseSourceViewModel?.id,
                                          name: expenseSourceViewModel?.name,
                                          iconURL: selectedIconURL,

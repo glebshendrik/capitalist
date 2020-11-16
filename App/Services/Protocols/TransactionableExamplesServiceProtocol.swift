@@ -10,6 +10,6 @@ import Foundation
 import PromiseKit
 
 protocol TransactionableExamplesServiceProtocol {
-    func indexBy(_ transactioableType: TransactionableType, basketType: BasketType?, isUsed: Bool) -> Promise<[TransactionableExample]>
+    func indexBy(_ transactioableType: TransactionableType, basketType: BasketType?, isUsed: Bool?) -> Promise<[TransactionableExample]>
 }
 

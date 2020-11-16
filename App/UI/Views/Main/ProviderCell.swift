@@ -27,6 +27,7 @@ class ProviderCell : UITableViewCell {
         titleLabel.text = viewModel.name
         
         iconView.vectorIconMode = .fullsize
+        iconView.vectorBackgroundViewColor = UIColor.by(.white100)
         iconView.iconURL = viewModel.logoURL        
     }
 }

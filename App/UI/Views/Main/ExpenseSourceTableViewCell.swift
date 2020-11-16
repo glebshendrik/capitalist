@@ -34,6 +34,7 @@ class ExpenseSourceTableViewCell : SwipeTableViewCell {
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = viewModel.defaultIconName
         iconView.backgroundViewColor = UIColor.by(.gray1)
+        iconView.vectorBackgroundViewColor = UIColor.by(.white100)
         iconView.iconTintColor = UIColor.by(.white100)
     }
 }

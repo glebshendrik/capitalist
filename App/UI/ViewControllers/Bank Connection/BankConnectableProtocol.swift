@@ -20,7 +20,6 @@ protocol BankConnectableProtocol : UIFactoryDependantProtocol,
     var bankConnectableViewModel: BankConnectableViewModel! { get }
     
     func toggleConnectionFlow(providerCodes: [String]?)
-//    func showProviders(codes: [String])
     func setupConnection()
     func showAccounts()
     
@@ -157,43 +156,7 @@ extension BankConnectableProtocol {
                     showAccounts()
                 }
                 
-                
-                
-//                guard
-//                    let interactive = connection.interactive
-//                else {
-//                    self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку",
-//                                                                                       comment: "Не удалось подключиться к банку"),
-//                                                      theme: .error)
-//                    return
-//                }
-//                guard
-//                    let nextRefreshPossibleAt = connection.nextRefreshPossibleAt
-//                else {
-//                    if let stage = connection.lastStage,
-//                       !stage.isInteractive {
-//                        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку",
-//                                                                                           comment: "Не удалось подключиться к банку"),
-//                                                          theme: .error)                        
-//                    }
-//                    return
-//                }
-//                if nextRefreshPossibleAt.isInPast && interactive {
-//                    if connection.lastStage == .finish {
-//                        self.showConnectionSession(type: .refreshing)
-//                    }
-//                    else {
-//                        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку",
-//                                                                                           comment: "Не удалось подключиться к банку"),
-//                                                          theme: .error)
-//                    }
-//                }
-//                else if !bankConnectableViewModel.connectionConnected {
-//                    connectConnection(connection)
-//                }
-//                else {
-//                    showAccounts()
-//                }
+               
             case .inactive:
                 self.showConnectionSession(type: .reconnecting)
             case .deleted:
@@ -261,7 +224,8 @@ extension BankConnectableProtocol {
         modal(connectionViewController)
     }
     
-    func didSetupConnection(_ connection: Connection) {
+    func didSetupConnection(_ connection: Connection, fetchingStarted: Bool) {
+        bankConnectableViewModel.fetchingStarted = fetchingStarted
         connectConnection(connection)
     }
     

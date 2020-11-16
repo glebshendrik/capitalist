@@ -54,7 +54,7 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
         guard let viewModel = viewModel else { return }
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = viewModel.defaultIconName
-        iconView.vectorIconMode = .compact
+        iconView.vectorIconMode = .medium        
         contentView.layoutIfNeeded()
     }
     

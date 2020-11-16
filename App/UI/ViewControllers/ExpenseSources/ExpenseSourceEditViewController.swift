@@ -81,7 +81,10 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
     }
     
     override func didSave() {
-        super.didSave()
+        if !viewModel.isNew || bankConnectableViewModel.fetchingStarted {
+            super.didSave()
+        }
+        updateUI()
         if viewModel.isNew {
             delegate?.didCreateExpenseSource()
         }
@@ -104,9 +107,9 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
         updateTableUI(animated: false)
         focusFirstEmptyField()
     }
-    
+        
     func refreshData() {
-        closeButtonHandler()
+//        closeButtonHandler()
     }
 }
 

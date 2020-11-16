@@ -290,13 +290,25 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pull-down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Sin-Ne-0RR">
                                         <rect key="frame" x="169.5" y="10" width="36" height="4"/>
-                                        <color key="tintColor" name="white 0.4"/>
+                                        <color key="tintColor" name="white 1.0"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68S-Hb-B32">
+                                        <rect key="frame" x="320.5" y="0.0" width="54.5" height="58"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="white 0.64"/>
+                                        <inset key="contentEdgeInsets" minX="16" minY="24" maxX="24" maxY="12"/>
+                                        <state key="normal" image="close-icon"/>
+                                        <connections>
+                                            <action selector="didTapCloseButon:" destination="Lyy-eQ-Wuu" eventType="touchUpInside" id="TQK-qE-GNq"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="black 2"/>
                                 <constraints>
+                                    <constraint firstItem="68S-Hb-B32" firstAttribute="top" secondItem="ajY-28-T9K" secondAttribute="top" id="JMg-Sa-LzA"/>
                                     <constraint firstItem="Sin-Ne-0RR" firstAttribute="top" secondItem="ajY-28-T9K" secondAttribute="top" constant="10" id="K29-ja-HtS"/>
                                     <constraint firstItem="Sin-Ne-0RR" firstAttribute="centerX" secondItem="ajY-28-T9K" secondAttribute="centerX" id="qLc-3k-NC2"/>
+                                    <constraint firstAttribute="trailing" secondItem="68S-Hb-B32" secondAttribute="trailing" id="sif-cN-rPJ"/>
                                 </constraints>
                             </view>
                         </subviews>

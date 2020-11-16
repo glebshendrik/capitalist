@@ -25,6 +25,8 @@ class TransactionableExampleCollectionViewCell : UICollectionViewCell {
         nameLabel.text = viewModel.name
         iconView.defaultIconName = viewModel.defaultIconName
         iconView.iconURL = viewModel.iconURL
+        iconView.vectorIconMode = .fullsize
+        iconView.vectorBackgroundViewColor = .clear
         selectionIndicator.alpha = viewModel.selected ? 1.0 : 0.0
     }
 }

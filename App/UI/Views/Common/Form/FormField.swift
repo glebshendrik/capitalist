@@ -217,7 +217,7 @@ class FormField : UIView {
     func updateIcon(forceImageUpdate: Bool = true) {
 //        icon.backgroundColor = unfocusedBackgroundColor
         icon.backgroundViewColor = unfocusedBackgroundColor
-        icon.vectorBackgroundViewColor = UIColor.by(.white100)
+//        icon.vectorBackgroundViewColor = UIColor.by(.white100)
         icon.iconTintColor = unfocusedIconTint
 //        iconContainer.backgroundColor = isVector ? UIColor.by(.white100) : unfocusedBackgroundColor
 //        icon.tintColor = unfocusedIconTint

@@ -549,16 +549,13 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p36-2l-4Hl" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
-                                                            <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                                            <rect key="frame" x="2" y="2" width="60" height="60"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="48" id="CQa-xD-mBr"/>
-                                                                <constraint firstAttribute="width" constant="48" id="POh-iI-uIe"/>
-                                                            </constraints>
                                                         </view>
                                                     </subviews>
                                                     <color key="backgroundColor" name="white 0.04"/>
                                                     <constraints>
+                                                        <constraint firstItem="p36-2l-4Hl" firstAttribute="width" secondItem="twS-rh-dJs" secondAttribute="width" constant="-4" id="0c8-Zc-1sp"/>
                                                         <constraint firstAttribute="trailing" secondItem="twS-rh-dJs" secondAttribute="trailing" id="Ah9-Il-4jN"/>
                                                         <constraint firstAttribute="bottom" secondItem="twS-rh-dJs" secondAttribute="bottom" id="JBT-fF-9yf"/>
                                                         <constraint firstItem="p36-2l-4Hl" firstAttribute="centerY" secondItem="pXb-py-7ZP" secondAttribute="centerY" id="Mhx-s2-Cet"/>
@@ -566,6 +563,7 @@
                                                         <constraint firstItem="p36-2l-4Hl" firstAttribute="centerX" secondItem="pXb-py-7ZP" secondAttribute="centerX" id="ZPQ-qz-Gaf"/>
                                                         <constraint firstAttribute="height" constant="64" id="aWa-QW-d7h"/>
                                                         <constraint firstItem="twS-rh-dJs" firstAttribute="top" secondItem="pXb-py-7ZP" secondAttribute="top" id="bgn-FB-zlp"/>
+                                                        <constraint firstItem="p36-2l-4Hl" firstAttribute="height" secondItem="twS-rh-dJs" secondAttribute="height" constant="-4" id="hSL-2x-Dko"/>
                                                         <constraint firstAttribute="width" constant="64" id="q2O-v1-Mn2"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>

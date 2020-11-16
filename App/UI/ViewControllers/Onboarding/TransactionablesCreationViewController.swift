@@ -237,7 +237,7 @@ extension TransactionablesCreationViewController : UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let exampleViewModel = viewModel.exampleViewModel(by: indexPath) else { return }
         
-        guard let transactionable = viewModel.transactionable(by: exampleViewModel.name) else {
+        guard let transactionable = viewModel.transactionable(by: exampleViewModel.prototypeKey) else {
             showNewTransactionable(with: exampleViewModel)
             return
         }

@@ -21,14 +21,18 @@ class TransactionablesCreationViewModel {
     private var currentUser: User? = nil
     private var examples: [TransactionableExampleViewModel] = [] {
         didSet {
-            examplesHash = examples.reduce(into: [String: TransactionableExampleViewModel]()) { $0[$1.name] = $1 }
+            examplesHash = examples.reduce(into: [String: TransactionableExampleViewModel]()) { $0[$1.prototypeKey] = $1 }
         }
     }
     private var examplesHash: [String: TransactionableExampleViewModel] = [:]
     
     private var transactionables: [Transactionable] = [] {
         didSet {
-            transactionablesHash = transactionables.reduce(into: [String: Transactionable]()) { $0[$1.name] = $1 }
+            transactionablesHash = transactionables.reduce(into: [String: Transactionable]()) {
+                if let prototypeKey = $1.prototypeKey {
+                    $0[prototypeKey] = $1
+                }
+            }
         }
     }
     private var transactionablesHash: [String: Transactionable] = [:]
@@ -164,8 +168,8 @@ class TransactionablesCreationViewModel {
         return examples[safe: indexPath.row]
     }
     
-    func transactionable(by name: String) -> Transactionable? {
-        return transactionablesHash[name]
+    func transactionable(by prototypeKey: String) -> Transactionable? {
+        return transactionablesHash[prototypeKey]
     }
     
     func nextStepTransactionableType() -> TransactionableType? {
@@ -194,17 +198,23 @@ class TransactionablesCreationViewModel {
         for example in examples {
             example.selected = false
         }
-        
+        var examplesToAdd = [TransactionableExampleViewModel]()
         for transactionable in transactionables {
-            if let _ = examplesHash[transactionable.name] {
-                examplesHash[transactionable.name]?.selected = true
+            guard
+                let prototypeKey = transactionable.prototypeKey
+            else {
+                continue
+            }
+            if let _ = examplesHash[prototypeKey] {
+                examplesHash[prototypeKey]?.selected = true
             }
             else {
                 let example = TransactionableExampleViewModel(transactionable: transactionable)
-                examples.append(example)
-                examplesHash[transactionable.name] = example
+                examplesToAdd.append(example)
+                examplesHash[prototypeKey] = example
             }            
         }
+        examples.insert(contentsOf: examplesToAdd, at: 0)
     }
     
     private func loadTransactionables() -> Promise<[Transactionable]> {
@@ -255,7 +265,7 @@ class TransactionablesCreationViewModel {
             
     private func loadExamples() -> Promise<[TransactionableExampleViewModel]> {
         return  firstly {
-                    transactionableExamplesCoordinator.indexBy(transactionableType, basketType: basketType, isUsed: false)
+                    transactionableExamplesCoordinator.indexBy(transactionableType, basketType: basketType, isUsed: nil)
                 }.map { examples in
                     examples.map { TransactionableExampleViewModel(example: $0) }
                 }

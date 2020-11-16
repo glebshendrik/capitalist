@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyBeaver
 
 protocol ConnectionViewControllerDelegate : class {
-    func didSetupConnection(_ connection: Connection)
+    func didSetupConnection(_ connection: Connection, fetchingStarted: Bool)
     func didFinishConnectionProcess()
     func didNotConnect()
     func didNotConnect(error: Error)
@@ -130,11 +130,11 @@ extension ConnectionViewController {
         }.get { connection in
             if self.viewModel.fetchingStarted {                
                 self.close() {
-                    delegate.didSetupConnection(connection)
+                    delegate.didSetupConnection(connection, fetchingStarted: true)
                 }
             }
             else {
-                delegate.didSetupConnection(connection)
+                delegate.didSetupConnection(connection, fetchingStarted: false)
             }
         }.catch { error in            
             self.close()

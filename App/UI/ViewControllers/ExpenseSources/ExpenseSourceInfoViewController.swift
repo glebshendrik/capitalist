@@ -27,7 +27,7 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
             refreshData()
         }        
     }
-    
+        
     override func didTapIcon(field: IconInfoField?) {
         guard viewModel.canEditIcon else { return }
         modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSource))

@@ -105,7 +105,8 @@ extension TransactionableExamplesViewController : UICollectionViewDelegate, UICo
         else {
             return
         }
-        delegate?.didSelect(exampleViewModel: exampleViewModel)
-        dismiss(animated: true, completion: nil)
+        closeButtonHandler() {
+            self.delegate?.didSelect(exampleViewModel: exampleViewModel)
+        }
     }
 }

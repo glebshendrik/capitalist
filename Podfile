@@ -58,7 +58,7 @@ target 'Capitalist' do
   pod 'Adjust', '~> 4.22.1'
   pod 'lottie-ios'
   pod 'UPCarouselFlowLayout'
-  pod 'PopupDialog', '~> 1.1'
+  pod 'PopupDialog', git: 'https://github.com/petalvlad/PopupDialog', branch: 'master'
 end
 
 post_install do |installer|

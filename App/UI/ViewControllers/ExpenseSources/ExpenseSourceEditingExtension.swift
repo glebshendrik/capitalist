@@ -78,7 +78,6 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
 extension ExpenseSourceEditViewController : TransactionableExamplesViewControllerDelegate {
     func didSelect(exampleViewModel: TransactionableExampleViewModel) {
         viewModel.set(example: exampleViewModel)
-        updateUI()
         suggestBankConnection()
     }
     
@@ -86,24 +85,26 @@ extension ExpenseSourceEditViewController : TransactionableExamplesViewControlle
         guard
             viewModel.connectable
         else {
+            updateUI()
             return
         }
         
-        let title = "THIS IS THE DIALOG TITLE"
-        let message = "This is the message section of the popup dialog default view"
+        let alertTitle = NSLocalizedString("Вы можете воспользоваться функцией интеграции с банками", comment: "")
         
-        let popup = PopupDialog(title: title, message: message)
-        
-        let buttonOne = CancelButton(title: "Подключиться к банку") {
-            self.toggleConnectionFlow(providerCodes: self.viewModel.providerCodes)
-        }
-        
-        let buttonTwo = DefaultButton(title: "Ввести вручную") {
-            
-        }
-        
-        popup.addButtons([buttonOne, buttonTwo])
-        
-        present(popup, animated: true, completion: nil)
+        let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Подключиться к банку", comment: ""),
+                                                      style: .default,
+                                                      handler: { _ in
+                                                        self.updateUI()
+                                                        self.toggleConnectionFlow(providerCodes: self.viewModel.providerCodes)
+                                                      }),
+                                        UIAlertAction(title: NSLocalizedString("Ввести данные вручную", comment: ""),
+                                                      style: .default,
+                                                      handler: { _ in
+                                                        self.updateUI()
+                                                      })]
+        sheet(title: alertTitle,
+              actions: actions,
+              preferredStyle: .alert,
+              addCancel: false)
     }
 }

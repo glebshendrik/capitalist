@@ -231,7 +231,7 @@ DEPENDENCIES:
   - Macaw (from `https://github.com/petalvlad/Macaw`, branch `master`)
   - MSPeekCollectionViewDelegateImplementation (~> 2.0)
   - myTrackerSDK
-  - PopupDialog (~> 1.1)
+  - PopupDialog (from `https://github.com/petalvlad/PopupDialog`, branch `master`)
   - PromiseKit (~> 6.5)
   - PromiseKit/Alamofire (~> 6.5)
   - RandomColorSwift (from `https://github.com/onevcat/RandomColorSwift`, branch `master`)
@@ -308,7 +308,6 @@ SPEC REPOS:
     - lottie-ios
     - myTrackerSDK
     - nanopb
-    - PopupDialog
     - PromisesObjC
     - Protobuf
     - SaltEdge-iOS-Swift
@@ -326,6 +325,9 @@ EXTERNAL SOURCES:
   Macaw:
     :branch: master
     :git: https://github.com/petalvlad/Macaw
+  PopupDialog:
+    :branch: master
+    :git: https://github.com/petalvlad/PopupDialog
   RandomColorSwift:
     :branch: master
     :git: https://github.com/onevcat/RandomColorSwift
@@ -340,6 +342,9 @@ CHECKOUT OPTIONS:
   Macaw:
     :commit: 1a6ea9a263f2c1d8a842ff936c250320a322bbd1
     :git: https://github.com/petalvlad/Macaw
+  PopupDialog:
+    :commit: 5b581167e8856ec1ff133cc9b27eea9fa4b1d900
+    :git: https://github.com/petalvlad/PopupDialog
   RandomColorSwift:
     :commit: 902050e3cabb596eaeb9ed725dbf22b17a3f3e4c
     :git: https://github.com/onevcat/RandomColorSwift
@@ -419,6 +424,6 @@ SPEC CHECKSUMS:
   TrustKit: dac38bb37e49bdfeca41b1a19d020da38017b51c
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
 
-PODFILE CHECKSUM: 69e4ee5450579fad9a29b120aef4111b0d9229d1
+PODFILE CHECKSUM: 5aea34e79ec71a0aa3035fd9a1fea867e6a5a3ac
 
 COCOAPODS: 1.8.0

@@ -144,19 +144,19 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             showServerPathAlert()
             return
         }
-        guard userSessionManager.isUserAuthenticated else {
+        guard
+            userSessionManager.isUserAuthenticated
+        else {
             showJoiningAsGuestScreen()
             _ = accountCoordinator.joinAsGuest().catch { _ in
                 self.route()
             }
             return
         }
-        
-//        if isAppUpdateNeeded() {
-//            showAppUpdateScreen()
-//            return
-//        }
-        
+        if let session = userSessionManager.currentSession {
+            SwiftyBeaver.info("ROUTE /users/\(session.userId) Token token=\(session.token)")
+        }
+                
         showLandingScreen()
         
         authorizedRoute()
