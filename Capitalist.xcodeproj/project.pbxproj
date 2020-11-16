@@ -122,6 +122,8 @@
 		FA53B11C23D7471C008B9A1F /* TransactionablesCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53B11B23D7471C008B9A1F /* TransactionablesCreationViewController.swift */; };
 		FA53B11E23D74D05008B9A1F /* TransactionablesCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53B11D23D74D05008B9A1F /* TransactionablesCreationViewModel.swift */; };
 		FA53B12023D823FD008B9A1F /* TransactionableExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53B11F23D823FD008B9A1F /* TransactionableExampleViewModel.swift */; };
+		FA54891825627FCE002AC516 /* OnboardCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA54891725627FCE002AC516 /* OnboardCurrencyViewController.swift */; };
+		FA54891C25628227002AC516 /* OnboardCurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA54891B25628227002AC516 /* OnboardCurrencyViewModel.swift */; };
 		FA557FFD2514AA43004D5252 /* SubscriptionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA557FFC2514AA43004D5252 /* SubscriptionProduct.swift */; };
 		FA5580002514CD3E004D5252 /* SubscriptionPlanItemTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA557FFF2514CD3E004D5252 /* SubscriptionPlanItemTitleCell.swift */; };
 		FA5580022514CE43004D5252 /* SubscriptionPlanItemDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5580012514CE43004D5252 /* SubscriptionPlanItemDescriptionCell.swift */; };
@@ -639,6 +641,8 @@
 		FA53B11B23D7471C008B9A1F /* TransactionablesCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionablesCreationViewController.swift; sourceTree = "<group>"; };
 		FA53B11D23D74D05008B9A1F /* TransactionablesCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionablesCreationViewModel.swift; sourceTree = "<group>"; };
 		FA53B11F23D823FD008B9A1F /* TransactionableExampleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExampleViewModel.swift; sourceTree = "<group>"; };
+		FA54891725627FCE002AC516 /* OnboardCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardCurrencyViewController.swift; sourceTree = "<group>"; };
+		FA54891B25628227002AC516 /* OnboardCurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardCurrencyViewModel.swift; sourceTree = "<group>"; };
 		FA557FFC2514AA43004D5252 /* SubscriptionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProduct.swift; sourceTree = "<group>"; };
 		FA557FFF2514CD3E004D5252 /* SubscriptionPlanItemTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemTitleCell.swift; sourceTree = "<group>"; };
 		FA5580012514CE43004D5252 /* SubscriptionPlanItemDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemDescriptionCell.swift; sourceTree = "<group>"; };
@@ -1655,6 +1659,7 @@
 		FAA861A023D72E6A009DF88F /* Onbording */ = {
 			isa = PBXGroup;
 			children = (
+				FA54891B25628227002AC516 /* OnboardCurrencyViewModel.swift */,
 				FA53B11D23D74D05008B9A1F /* TransactionablesCreationViewModel.swift */,
 				FA53B11F23D823FD008B9A1F /* TransactionableExampleViewModel.swift */,
 			);
@@ -1791,8 +1796,9 @@
 				FAC3B9C021BE15EC0015A12F /* OnboardingViewController.swift */,
 				FA7C10C7230D615200CC0FD1 /* OnboardingPagesViewController.swift */,
 				FAC3B9C221BE74CE0015A12F /* OnboardingPageViewController.swift */,
-				FA53B11B23D7471C008B9A1F /* TransactionablesCreationViewController.swift */,
 				FAA69642239A952F00C134D1 /* TransactionCreationInfoViewController.swift */,
+				FA54891725627FCE002AC516 /* OnboardCurrencyViewController.swift */,
+				FA53B11B23D7471C008B9A1F /* TransactionablesCreationViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -2748,6 +2754,7 @@
 				FABE54E2233BEFF100DF2B70 /* CreditsCoordinator.swift in Sources */,
 				FAD88F4621AEBE7400BE7BC1 /* NotificationsCoordinator.swift in Sources */,
 				FA835D682265F23F00A592F2 /* TransactionsSection.swift in Sources */,
+				FA54891C25628227002AC516 /* OnboardCurrencyViewModel.swift in Sources */,
 				FA0CAE0D21D3C1F100805288 /* ExpenseSourceEditTableController.swift in Sources */,
 				FA0A4E89246D4D4800886277 /* TransactionEditTitleView.swift in Sources */,
 				FA165CEA21B769B500EAA16B /* ForgotPasswordViewController.swift in Sources */,
@@ -2846,6 +2853,7 @@
 				FA1E632F2327DC1800081964 /* BorrowsViewModel.swift in Sources */,
 				FA630C2C2293C07F00242AB3 /* FormFieldsTableViewController.swift in Sources */,
 				FAED7DA621EC801E00BF6FE1 /* ExpenseCategoriesService.swift in Sources */,
+				FA54891825627FCE002AC516 /* OnboardCurrencyViewController.swift in Sources */,
 				FA1E63312327DC5900081964 /* Borrow.swift in Sources */,
 				FA81748A222822FB00EE6116 /* ExchangeRatesCoordinator.swift in Sources */,
 				FAD88F1D21AEB6A000BE7BC1 /* UserSessionManagerProtocol.swift in Sources */,

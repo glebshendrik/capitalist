@@ -177,7 +177,14 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             self.notificationsCoordinator.enableNotifications()
             
             guard
-                UIFlowManager.reached(point: .dataSetup) || user.onboarded
+                UIFlowManager.reached(point: .currencySetup) || user.onboarded
+            else {
+                self.showOnboardCurrencyViewController()
+                return
+            }
+            
+            guard
+                UIFlowManager.reached(point: .dataSetup)
             else {
                 self.showDataSetupViewController()
                 return
@@ -400,6 +407,10 @@ extension ApplicationRouter {
     
     private func showOnboardingViewController() {
         show(.OnboardingViewController)
+    }
+    
+    private func showOnboardCurrencyViewController() {
+        show(.OnboardCurrencyViewController)
     }
     
     private func showDataSetupViewController() {

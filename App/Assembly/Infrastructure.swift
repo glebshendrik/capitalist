@@ -146,6 +146,7 @@ struct Infrastructure {
         case OnboardingPage6ViewController
         case OnboardingPage7ViewController
         case OnboardingPage8ViewController
+        case OnboardCurrencyViewController
         case TransactionablesCreationViewController
         case TransactionCreationInfoViewController
         
@@ -228,6 +229,7 @@ struct Infrastructure {
                  .OnboardingPage6ViewController,
                  .OnboardingPage7ViewController,
                  .OnboardingPage8ViewController,
+                 .OnboardCurrencyViewController,
                  .TransactionablesCreationViewController,
                  .TransactionCreationInfoViewController:
                 return .Onboarding

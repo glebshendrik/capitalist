@@ -12,6 +12,7 @@ enum UIFlowPoint : String {
     case appLaunch = "com.rubiconapp.skrudzh.first-launch-key"
     case onboarding = "com.rubiconapp.skrudzh.onboarding"
     case subscription
+    case currencySetup
     case dataSetup
     case dependentIncomeSourceMessage
     case transactionCreationInfoMessage

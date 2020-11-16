@@ -274,6 +274,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return  firstly {
             usersService.destroyUserData(by: currentUserId)
         }.done {
+            UIFlowManager.set(point: .currencySetup, reached: false)
             UIFlowManager.set(point: .dataSetup, reached: false)
             self.router.route()
         }
@@ -284,6 +285,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         userSessionManager.forgetSession()
         notificationsCoordinator.cancelAllSceduledNotifications()
         UIFlowManager.set(point: .onboarding, reached: false)
+        UIFlowManager.set(point: .currencySetup, reached: false)
         UIFlowManager.set(point: .dataSetup, reached: false)
         router.route()
         guard let session = previousSession else {

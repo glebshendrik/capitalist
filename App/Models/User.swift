@@ -143,13 +143,8 @@ struct UserSettingsUpdatingForm : Encodable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        if let currency = currency {
-            try container.encode(currency, forKey: .currency)
-        }
-        if let defaultPeriod = defaultPeriod {
-            try container.encode(defaultPeriod, forKey: .defaultPeriod)
-        }
-        
+        try container.encodeIfPresent(currency, forKey: .currency)
+        try container.encodeIfPresent(defaultPeriod, forKey: .defaultPeriod)
     }
 }
 

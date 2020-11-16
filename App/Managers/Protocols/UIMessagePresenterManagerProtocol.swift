@@ -44,3 +44,13 @@ protocol UIMessagePresenterManagerProtocol {
         actions: [MessageDialogAction],
         from viewController: UIViewController) -> Promise<MessageDialogAction>
 }
+
+extension UIMessagePresenterManagerDependantProtocol {
+    func showHUD() {
+        messagePresenterManager.showHUD()
+    }
+    
+    func dismissHUD() {
+        messagePresenterManager.dismissHUD()
+    }
+}
