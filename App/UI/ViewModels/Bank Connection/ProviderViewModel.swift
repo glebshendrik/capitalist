@@ -37,7 +37,7 @@ class ProviderViewModel {
     }
     
     var fetchDataFrom: Date {        
-        var interval = maxFetchInterval - 1
+        var interval = maxFetchInterval
         if interval < 0 {
             interval = 0
         }

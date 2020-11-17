@@ -124,6 +124,8 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
         return .expenseSource
     }
     
+    var shouldSkipExamplesPrompt: Bool = false
+    
     var providerCodes: [String]? {
         return expenseSource?.providerCodes ?? example?.providerCodes
     }
@@ -253,7 +255,20 @@ extension ExpenseSourceEditViewModel {
 // Updating
 extension ExpenseSourceEditViewModel {
     private func update() -> Promise<Void> {
-        return expenseSourcesCoordinator.update(with: updatingForm())
+        guard
+            let expenseSourceId = expenseSource?.id
+        else {
+            return Promise(error: ExpenseSourceUpdatingError.updatingExpenseSourceIsNotSpecified)
+        }
+        return
+            firstly {
+                expenseSourcesCoordinator.update(with: updatingForm())
+            }.then {
+                self.expenseSourcesCoordinator.show(by: expenseSourceId)
+            }.get {
+                self.set(expenseSource: $0)
+            }.asVoid()
+            
     }
     
     private func isUpdatingFormValid() -> Bool {

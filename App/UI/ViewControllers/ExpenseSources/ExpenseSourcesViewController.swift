@@ -153,7 +153,7 @@ class ExpenseSourcesViewController : UIViewController, UIMessagePresenterManager
     }
     
     func showEditScreen(expenseSource: ExpenseSource?) {
-        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource))
+        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource, shouldSkipExamplesPrompt: false))
     }
     
     func showExpenseSourceInfoScreen(expenseSource: ExpenseSourceViewModel?) {

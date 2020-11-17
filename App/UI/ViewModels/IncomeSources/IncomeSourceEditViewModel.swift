@@ -81,6 +81,7 @@ class IncomeSourceEditViewModel : TransactionableExamplesDependantProtocol {
     var transactionableType: TransactionableType {
         return .incomeSource
     }
+    var shouldSkipExamplesPrompt: Bool = false
     
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,

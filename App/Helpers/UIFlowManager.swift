@@ -24,6 +24,7 @@ enum UIFlowPoint : String {
     case settingsTutorial
     case statisticsFiltersTutorial
     case statisticsPeriodTutorial
+    case bankExperimentalFeature
 }
 
 class UIFlowManager {

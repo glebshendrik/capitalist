@@ -131,7 +131,8 @@ protocol UIFactoryProtocol {
     func incomeSourceInfoViewController(incomeSource: IncomeSourceViewModel?) -> UINavigationController?
     
     func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
-                                         expenseSource: ExpenseSource?) -> UINavigationController?
+                                         expenseSource: ExpenseSource?,
+                                         shouldSkipExamplesPrompt: Bool) -> UINavigationController?
     
     func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
                                          example: TransactionableExampleViewModel) -> UINavigationController?

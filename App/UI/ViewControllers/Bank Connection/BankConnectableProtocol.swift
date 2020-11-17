@@ -57,7 +57,7 @@ extension BankConnectableProtocol {
             firstly {
                 bankConnectableViewModel.loadProvider(code: code)
             }.ensure {
-                self.messagePresenterManager.dismissHUD()
+                self.dismissHUD()
             }.get { provider in
                 self.didSelectProvider(provider)
             }.catch { error in
@@ -71,7 +71,12 @@ extension BankConnectableProtocol {
     
     func didSelectProvider(_ providerViewModel: ProviderViewModel) {
         bankConnectableViewModel.providerViewModel = providerViewModel
-        showExperimentalFeature()
+        if !UIFlowManager.reach(point: .bankExperimentalFeature) {
+            showExperimentalFeature()
+        }
+        else {
+            setupConnection()
+        }        
     }
 }
 
@@ -81,13 +86,13 @@ extension BankConnectableProtocol {
     }
     
     func didChooseUseFeature() {
-        bankConnectableViewModel.shouldUseExperimentalFeature = true
+//        bankConnectableViewModel.shouldUseExperimentalFeature = true
         setupConnection()
     }
     
     func didChooseDontUseFeature() {
-        bankConnectableViewModel.shouldUseExperimentalFeature = false
-        setupConnection()
+//        bankConnectableViewModel.shouldUseExperimentalFeature = false
+//        setupConnection()
     }
 }
 
@@ -172,19 +177,23 @@ extension BankConnectableProtocol {
             return
         }
         bankConnectableViewModel.connectConnection(connection)
-        save()
+        programmaticallySave()
     }
     
     func connectAccount(_ account: AccountViewModel) {
         bankConnectableViewModel.connectAccount(account)
-        save()
+        programmaticallySave()
     }
     
     func disconnectAccount() {
         bankConnectableViewModel.disconnectAccount()
-        save()
+        programmaticallySave()
     }
     
+    private func programmaticallySave() {
+        bankConnectableViewModel.intentToSave = true
+        save()
+    }
 }
 
 extension BankConnectableProtocol {

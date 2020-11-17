@@ -31,7 +31,7 @@ class BankConnectableViewModel {
     var accountViewModel: AccountViewModel? = nil
     var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
     
-    var shouldUseExperimentalFeature: Bool = false
+//    var shouldUseExperimentalFeature: Bool = false
     var shouldDestroyConnection: Bool = false
     
     var interactiveCredentials: [ConnectionInteractiveCredentials] = []
@@ -57,6 +57,10 @@ class BankConnectableViewModel {
     
     var hasActionIntent: Bool = false
     
+    var isGoingToConnect: Bool {
+        return !connectionConnected && connection != nil
+    }
+    
     var connectionConnected: Bool {
         return accountConnection != nil
     }
@@ -70,7 +74,7 @@ class BankConnectableViewModel {
     }
     
     var fetchDataFromProvider: Date {
-        guard shouldUseExperimentalFeature else { return Date() }
+//        guard shouldUseExperimentalFeature else { return Date() }
         return providerViewModel?.fetchDataFrom ?? Date()
     }
     
@@ -108,6 +112,7 @@ class BankConnectableViewModel {
     }
     
     var fetchingStarted: Bool = false
+    var intentToSave: Bool = false
     
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol,
          expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
@@ -210,7 +215,7 @@ class BankConnectableViewModel {
             if let expenseSource = expenseSource {
                 return bankConnectionsCoordinator.createCreatingConnectionSession(provider: provider,
                                                                                   expenseSource: expenseSource,
-                                                                                  useMaxFetchInterval: shouldUseExperimentalFeature)
+                                                                                  useMaxFetchInterval: true)
                 
             }
             else {

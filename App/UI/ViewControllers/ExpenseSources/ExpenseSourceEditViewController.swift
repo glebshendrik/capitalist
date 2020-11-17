@@ -81,9 +81,6 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
     }
     
     override func didSave() {
-        if !viewModel.isNew || bankConnectableViewModel.fetchingStarted {
-            super.didSave()
-        }
         updateUI()
         if viewModel.isNew {
             delegate?.didCreateExpenseSource()
@@ -91,6 +88,13 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
         else {
             delegate?.didUpdateExpenseSource()
         }
+        if !bankConnectableViewModel.intentToSave || !isCurrentTopmostPresentedViewController && bankConnectableViewModel.fetchingStarted {
+            // formally will close the form
+            super.didSave()
+        } else if bankConnectableViewModel.reconnectNeeded {
+            setupConnection()
+        }
+        bankConnectableViewModel.intentToSave = false        
     }
     
     override func didRemove() {

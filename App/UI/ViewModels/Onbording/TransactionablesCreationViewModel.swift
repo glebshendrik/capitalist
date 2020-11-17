@@ -15,7 +15,9 @@ class TransactionablesCreationViewModel {
     
     private var examples: [TransactionableExampleViewModel] = [] {
         didSet {
-            examplesHash = examples.reduce(into: [String: TransactionableExampleViewModel]()) { $0[$1.prototypeKey] = $1 }
+            examplesHash = examples
+                .filter { $0.prototypeKey != nil }
+                .reduce(into: [String: TransactionableExampleViewModel]()) { $0[$1.prototypeKey!] = $1 }
         }
     }
     private var examplesHash: [String: TransactionableExampleViewModel] = [:]
@@ -65,7 +67,12 @@ class TransactionablesCreationViewModel {
         return examples[safe: indexPath.row]
     }
     
-    func transactionable(by prototypeKey: String) -> Transactionable? {
+    func transactionable(by example: TransactionableExampleViewModel) -> Transactionable? {
+        guard
+            let prototypeKey = example.prototypeKey
+        else {
+            return example.transactionable
+        }
         return transactionablesHash[prototypeKey]
     }
     
@@ -109,6 +116,7 @@ class TransactionablesCreationViewModel {
             guard
                 let prototypeKey = transactionable.prototypeKey
             else {
+                examplesToAdd.append(TransactionableExampleViewModel(transactionable: transactionable))
                 continue
             }
             if let _ = examplesHash[prototypeKey] {

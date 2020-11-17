@@ -78,7 +78,7 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
     }
         
     override func showEditScreen() {
-        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: viewModel.expenseSource))
+        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: viewModel.expenseSource, shouldSkipExamplesPrompt: false))
     }
     
     override func didUpdateData() {

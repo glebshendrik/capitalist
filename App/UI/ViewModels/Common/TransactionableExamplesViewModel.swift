@@ -61,6 +61,7 @@ protocol TransactionableExamplesDependantProtocol : class {
     var isNew: Bool { get }
     var numberOfUnusedExamples: Int { get set }
     var needToShowExamples: Bool { get }
+    var shouldSkipExamplesPrompt: Bool { get set }
     var basketType: BasketType { get }
     var transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol { get }
     var example: TransactionableExampleViewModel? { get set }
@@ -71,7 +72,7 @@ protocol TransactionableExamplesDependantProtocol : class {
 
 extension TransactionableExamplesDependantProtocol {
     var needToShowExamples: Bool {
-        return isNew && numberOfUnusedExamples > 0 && example == nil
+        return !shouldSkipExamplesPrompt && isNew && numberOfUnusedExamples > 0 && example == nil
     }
     
     func loadExamples() -> Promise<Void> {

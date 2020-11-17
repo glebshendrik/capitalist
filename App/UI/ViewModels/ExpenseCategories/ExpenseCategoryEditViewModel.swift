@@ -92,6 +92,8 @@ class ExpenseCategoryEditViewModel : TransactionableExamplesDependantProtocol {
         return .expenseCategory
     }
     
+    var shouldSkipExamplesPrompt: Bool = false
+    
     init(expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {

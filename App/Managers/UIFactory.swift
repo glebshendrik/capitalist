@@ -360,7 +360,8 @@ class UIFactory : UIFactoryProtocol {
     }
     
     func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
-                                         expenseSource: ExpenseSource?) -> UINavigationController? {
+                                         expenseSource: ExpenseSource?,
+                                         shouldSkipExamplesPrompt: Bool) -> UINavigationController? {
         let expenseSourceEditNavigationController = router.viewController(.ExpenseSourceEditNavigationController) as? UINavigationController
         let expenseSourceEditViewController = expenseSourceEditNavigationController?.topViewController as? ExpenseSourceEditViewController
             
@@ -369,6 +370,8 @@ class UIFactory : UIFactoryProtocol {
         if let expenseSource = expenseSource {
             expenseSourceEditViewController?.set(expenseSource: expenseSource)
         }
+        
+        expenseSourceEditViewController?.viewModel.shouldSkipExamplesPrompt = shouldSkipExamplesPrompt
         
         return expenseSourceEditNavigationController
     }

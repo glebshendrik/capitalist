@@ -23,6 +23,8 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
     @IBOutlet weak var examplesActivityIndicator: UIView!
     @IBOutlet weak var loader: UIImageView!
     @IBOutlet weak var saveButtonTitleLabel: UILabel!
+    @IBOutlet weak var addIconView: IconView!
+    @IBOutlet weak var addTitleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +32,11 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
         updateUI()
         loadData()
     }
-        
+    
+    @IBAction func didTapAddButton(_ sender: Any) {
+        showNewExpenseSource()
+    }
+    
     @IBAction func didTapSaveButton(_ sender: Any) {
         guard
             viewModel.canGoNext
@@ -71,6 +77,9 @@ extension TransactionablesCreationViewController {
     }
     
     func setupExamplesCollectionView() {
+        addIconView.backgroundViewColor = .clear
+        addIconView.defaultIconName = "plus-icon"
+        addTitleLabel.text = NSLocalizedString("Добавить свой кошелек", comment: "")
         examplesCollectionView.delegate = self
         examplesCollectionView.dataSource = self
         examplesCollectionView.fillLayout(columns: 4,
@@ -130,7 +139,7 @@ extension TransactionablesCreationViewController : UICollectionViewDelegate, UIC
             return
         }
         guard
-            let expenseSource = viewModel.transactionable(by: example.prototypeKey) as? ExpenseSourceViewModel
+            let expenseSource = viewModel.transactionable(by: example) as? ExpenseSourceViewModel
         else {
             showNewExpenseSource(with: example)
             return
@@ -140,13 +149,19 @@ extension TransactionablesCreationViewController : UICollectionViewDelegate, UIC
 }
 
 extension TransactionablesCreationViewController {
+    func showNewExpenseSource() {
+        modal(factory.expenseSourceEditViewController(delegate: self,
+                                                      expenseSource: nil,
+                                                      shouldSkipExamplesPrompt: true))
+    }
+    
     func showNewExpenseSource(with example: TransactionableExampleViewModel) {
         modal(factory.expenseSourceEditViewController(delegate: self,
                                                       example: example))
     }
     
     func edit(_ expenseSource: ExpenseSourceViewModel) {
-        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource.expenseSource))
+        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource.expenseSource, shouldSkipExamplesPrompt: false))
     }
 }
 
