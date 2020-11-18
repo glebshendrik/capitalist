@@ -8,6 +8,8 @@
 
 import UIKit
 import PromiseKit
+import BEMCheckBox
+import AttributedTextView
 
 class OnboardCurrencyViewController : UIViewController, UIFactoryDependantProtocol, UIMessagePresenterManagerDependantProtocol, ApplicationRouterDependantProtocol {
     
@@ -22,11 +24,14 @@ class OnboardCurrencyViewController : UIViewController, UIFactoryDependantProtoc
     @IBOutlet weak var currencyNameLabel: UILabel!
     @IBOutlet weak var currencySymbolLabel: UILabel!
     @IBOutlet weak var saveButton: HighlightButton!
+    @IBOutlet weak var acceptRulesCheckBox: BEMCheckBox!
+    @IBOutlet weak var rulesTextView: AttributedTextView!
     
     @IBOutlet weak var currencySelectorHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         updateUI()
         loadData()
     }
@@ -37,6 +42,49 @@ class OnboardCurrencyViewController : UIViewController, UIFactoryDependantProtoc
     
     @IBAction func didTapSaveButton(_ sender: Any) {
         onboardUser()
+    }
+    
+    @IBAction func didCheckRules(_ sender: Any) {
+        update(areRulesChecked: acceptRulesCheckBox.on)
+    }
+    
+    @IBAction func didTapCheckRulesButton(_ sender: Any) {
+        acceptRulesCheckBox.setOn(!acceptRulesCheckBox.on, animated: true)
+        update(areRulesChecked: acceptRulesCheckBox.on)
+    }
+    
+    private func update(areRulesChecked: Bool) {
+        viewModel.areRulesChecked = areRulesChecked
+        updateUI()
+    }
+}
+
+extension OnboardCurrencyViewController {
+    func setupUI() {
+        acceptRulesCheckBox.setOn(viewModel.areRulesChecked, animated: false)
+        acceptRulesCheckBox.animationDuration = 0.2
+        
+        let agreeText = NSLocalizedString("Я согласен с ", comment: "")
+        let termsOfUseText = NSLocalizedString("Пользовательским соглашением", comment: "")
+        let andText = NSLocalizedString(" и ", comment: "")
+        let policyText = NSLocalizedString("Политикой конфиденциальности", comment: "")
+                
+        rulesTextView.attributer =
+            agreeText
+            .append(string: termsOfUseText).makeInteract { _ in
+                self.show(url: NSLocalizedString("terms of service url", comment: "terms of service url"))
+            }
+            .underline
+            .append(andText)
+            .append(policyText).makeInteract { _ in
+                self.show(url: NSLocalizedString("privacy policy url", comment: "privacy policy url"))
+            }
+            .underline
+            .all
+            .font(UIFont(name: "Roboto-Light", size: 14))
+            .color(UIColor.by(.white100))
+            .setLinkColor(UIColor.by(.white64))
+        
     }
 }
 
@@ -67,7 +115,7 @@ extension OnboardCurrencyViewController {
     }
     
     func updateSaveButtonUI() {
-        saveButton.setTitle(NSLocalizedString("Сохранить", comment: ""), for: .normal)
+        saveButton.setTitle(NSLocalizedString("Продолжить", comment: ""), for: .normal)
         saveButton.isEnabled = viewModel.saveButtonEnabled
         saveButton.backgroundColor = viewModel.saveButtonEnabled ? UIColor.by(.blue1) : UIColor.by(.gray1)
         saveButton.backgroundColorForNormal = viewModel.saveButtonEnabled ? UIColor.by(.blue1) : UIColor.by(.gray1)
@@ -98,7 +146,8 @@ extension OnboardCurrencyViewController {
         }.finally {
             self.updateUI()
             self.dismissHUD()
-            _ = UIFlowManager.reach(point: .currencySetup)
+            _ = UIFlowManager.reach(point: .dataSetup)
+            _ = UIFlowManager.reach(point: .agreedRules)
             self.router.route()
         }
     }

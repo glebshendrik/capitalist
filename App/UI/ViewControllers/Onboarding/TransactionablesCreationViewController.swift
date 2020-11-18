@@ -47,7 +47,7 @@ class TransactionablesCreationViewController : UIViewController, UIFactoryDepend
     }
         
     func goNext() {
-        _ = UIFlowManager.reach(point: .dataSetup)
+        _ = UIFlowManager.reach(point: .walletsSetup)
         router.route()
     }
     

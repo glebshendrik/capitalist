@@ -25,7 +25,7 @@ class OnboardCurrencyViewModel {
     }
           
     var canOnboardUser: Bool {
-        return !isCurrencyUpdating && selectedCurrency != nil
+        return !isCurrencyUpdating && selectedCurrency != nil && areRulesChecked
     }
     
     var saveButtonEnabled: Bool {
@@ -45,11 +45,13 @@ class OnboardCurrencyViewModel {
     }
     
     var isCurrencyUpdating: Bool = true
+    var areRulesChecked: Bool
     
     init(accountCoordinator: AccountCoordinatorProtocol,
          settingsCoordinator: SettingsCoordinatorProtocol) {
         self.accountCoordinator = accountCoordinator
         self.settingsCoordinator = settingsCoordinator
+        areRulesChecked = UIFlowManager.reached(point: .agreedRules)
     }
       
     func loadData() -> Promise<Void> {

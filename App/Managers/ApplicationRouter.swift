@@ -175,7 +175,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             }
             
             guard
-                UIFlowManager.reached(point: .currencySetup) || user.onboarded
+                UIFlowManager.reached(point: .dataSetup) || user.onboarded
             else {
                 self.showOnboardCurrencyViewController()
                 return
@@ -184,7 +184,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             self.notificationsCoordinator.enableNotifications()
             
             guard
-                UIFlowManager.reached(point: .dataSetup)
+                UIFlowManager.reached(point: .walletsSetup)
             else {
                 self.showDataSetupViewController()
                 return

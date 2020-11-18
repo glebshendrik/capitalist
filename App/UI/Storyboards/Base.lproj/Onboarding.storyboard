@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -449,7 +450,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUL-Yl-HLf">
-                                <rect key="frame" x="16" y="205.5" width="343" height="88"/>
+                                <rect key="frame" x="16" y="205.5" width="343" height="68"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIF-zD-Vnb">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="56"/>
@@ -506,14 +507,14 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="88" id="2z6-1e-fBO"/>
+                                    <constraint firstAttribute="height" constant="68" id="2z6-1e-fBO"/>
                                     <constraint firstItem="AIF-zD-Vnb" firstAttribute="top" secondItem="XUL-Yl-HLf" secondAttribute="top" id="dkC-8x-OI3"/>
                                     <constraint firstItem="AIF-zD-Vnb" firstAttribute="leading" secondItem="XUL-Yl-HLf" secondAttribute="leading" id="lfM-KA-jYn"/>
                                     <constraint firstAttribute="trailing" secondItem="AIF-zD-Vnb" secondAttribute="trailing" id="yEb-Ot-Jpn"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dc-fh-jJ9" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
-                                <rect key="frame" x="24" y="293.5" width="327" height="48"/>
+                                <rect key="frame" x="24" y="587" width="327" height="48"/>
                                 <color key="backgroundColor" name="blue 1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Arj-5i-gL8"/>
@@ -538,31 +539,81 @@
                                     <action selector="didTapSaveButton:" destination="w9i-OZ-rHW" eventType="touchUpInside" id="wLD-hV-3mm"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbu-x9-6wA">
+                                <rect key="frame" x="8" y="521.5" width="359" height="50.5"/>
+                                <connections>
+                                    <action selector="didTapCheckRulesButton:" destination="w9i-OZ-rHW" eventType="touchUpInside" id="IT7-vU-yaV"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" editable="NO" text="Я согласен с правилами пользования и политикой безопасности" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="M3v-EH-JRb" customClass="AttributedTextView" customModule="AttributedTextView">
+                                <rect key="frame" x="48" y="521.5" width="311" height="49.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qu3-0f-WmJ" customClass="BEMCheckBox">
+                                <rect key="frame" x="24" y="528.5" width="20" height="20"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Fch-pE-Nhe"/>
+                                    <constraint firstAttribute="width" constant="20" id="Wcd-Fc-raS"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                                        <color key="value" name="white 0.64"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="onCheckColor">
+                                        <color key="value" name="blue 1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                        <color key="value" name="white 0.64"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didCheckRules:" destination="w9i-OZ-rHW" eventType="valueChanged" id="qPZ-QD-BjS"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wBz-kV-bB8"/>
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
+                            <constraint firstItem="7dc-fh-jJ9" firstAttribute="top" secondItem="Bbu-x9-6wA" secondAttribute="bottom" constant="15" id="10r-M8-B4z"/>
+                            <constraint firstItem="7dc-fh-jJ9" firstAttribute="top" secondItem="M3v-EH-JRb" secondAttribute="bottom" constant="16" id="224-qZ-Uz4"/>
                             <constraint firstItem="wBz-kV-bB8" firstAttribute="trailing" secondItem="7dc-fh-jJ9" secondAttribute="trailing" constant="24" id="3TI-be-gyR"/>
+                            <constraint firstItem="M3v-EH-JRb" firstAttribute="leading" secondItem="qu3-0f-WmJ" secondAttribute="trailing" constant="4" id="6QB-1m-5Qg"/>
+                            <constraint firstItem="wBz-kV-bB8" firstAttribute="trailing" secondItem="M3v-EH-JRb" secondAttribute="trailing" constant="16" id="6fL-9X-zDD"/>
                             <constraint firstAttribute="trailing" secondItem="qsy-Mq-t8B" secondAttribute="trailing" constant="24" id="A2r-Xz-1sN"/>
                             <constraint firstItem="wBz-kV-bB8" firstAttribute="trailing" secondItem="XUL-Yl-HLf" secondAttribute="trailing" constant="16" id="DW3-Iw-ZXQ"/>
                             <constraint firstItem="XUL-Yl-HLf" firstAttribute="leading" secondItem="wBz-kV-bB8" secondAttribute="leading" constant="16" id="FM4-Ks-dg0"/>
-                            <constraint firstItem="7dc-fh-jJ9" firstAttribute="top" secondItem="XUL-Yl-HLf" secondAttribute="bottom" id="Gg9-CP-qJY"/>
                             <constraint firstItem="WG2-R6-Ec7" firstAttribute="top" secondItem="qsy-Mq-t8B" secondAttribute="bottom" constant="8" id="H77-qb-LT0"/>
+                            <constraint firstItem="wBz-kV-bB8" firstAttribute="bottom" secondItem="7dc-fh-jJ9" secondAttribute="bottom" constant="32" id="Rcl-AX-2jR"/>
                             <constraint firstItem="qsy-Mq-t8B" firstAttribute="top" secondItem="wBz-kV-bB8" secondAttribute="top" constant="64" id="Rfp-n1-Vtt"/>
                             <constraint firstItem="DMf-kA-n3k" firstAttribute="leading" secondItem="wBz-kV-bB8" secondAttribute="leading" constant="16" id="UVM-QT-cWl"/>
                             <constraint firstItem="7dc-fh-jJ9" firstAttribute="leading" secondItem="wBz-kV-bB8" secondAttribute="leading" constant="24" id="UlE-QK-tzT"/>
                             <constraint firstItem="qsy-Mq-t8B" firstAttribute="leading" secondItem="wBz-kV-bB8" secondAttribute="leading" constant="24" id="Xgd-vB-0zs"/>
+                            <constraint firstItem="Bbu-x9-6wA" firstAttribute="leading" secondItem="wBz-kV-bB8" secondAttribute="leading" constant="8" id="a5S-Yy-d8p"/>
+                            <constraint firstItem="qu3-0f-WmJ" firstAttribute="top" secondItem="M3v-EH-JRb" secondAttribute="top" constant="7" id="j7G-mR-HCw"/>
                             <constraint firstItem="WG2-R6-Ec7" firstAttribute="leading" secondItem="wBz-kV-bB8" secondAttribute="leading" constant="24" id="lyB-wh-fVh"/>
                             <constraint firstItem="DMf-kA-n3k" firstAttribute="top" secondItem="wBz-kV-bB8" secondAttribute="top" constant="20" id="mqy-ts-xVq"/>
+                            <constraint firstItem="qu3-0f-WmJ" firstAttribute="leading" secondItem="wBz-kV-bB8" secondAttribute="leading" constant="24" id="naC-qN-yhX"/>
                             <constraint firstItem="wBz-kV-bB8" firstAttribute="trailing" secondItem="WG2-R6-Ec7" secondAttribute="trailing" constant="24" id="pVj-mE-oAD"/>
+                            <constraint firstItem="Bbu-x9-6wA" firstAttribute="top" secondItem="M3v-EH-JRb" secondAttribute="top" id="q58-Mg-BEb"/>
                             <constraint firstItem="XUL-Yl-HLf" firstAttribute="top" secondItem="WG2-R6-Ec7" secondAttribute="bottom" constant="40" id="xfe-hE-f5R"/>
+                            <constraint firstItem="wBz-kV-bB8" firstAttribute="trailing" secondItem="Bbu-x9-6wA" secondAttribute="trailing" constant="8" id="yXd-Fy-fCd"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acceptRulesCheckBox" destination="qu3-0f-WmJ" id="a2f-l3-Mym"/>
                         <outlet property="currencyNameLabel" destination="H7g-QP-mPW" id="fEA-jT-vNi"/>
                         <outlet property="currencySelectorHeightConstraint" destination="2z6-1e-fBO" id="elu-UG-duC"/>
                         <outlet property="currencySelectorView" destination="XUL-Yl-HLf" id="2Qt-Uu-cwF"/>
                         <outlet property="currencySymbolLabel" destination="egS-ZU-UCB" id="oIu-1l-aT5"/>
+                        <outlet property="rulesTextView" destination="M3v-EH-JRb" id="PgO-Dc-cGz"/>
                         <outlet property="saveButton" destination="7dc-fh-jJ9" id="DDI-TB-rYQ"/>
                         <outlet property="subtitleLabel" destination="WG2-R6-Ec7" id="fSb-wA-ZEc"/>
                         <outlet property="titleLabel" destination="qsy-Mq-t8B" id="ylb-Hh-kB5"/>
@@ -912,6 +963,14 @@
             <point key="canvasLocation" x="-298" y="1534"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="M3v-EH-JRb">
+            <size key="intrinsicContentSize" width="439" height="33"/>
+        </designable>
+        <designable name="qu3-0f-WmJ">
+            <size key="intrinsicContentSize" width="20" height="20"/>
+        </designable>
+    </designables>
     <resources>
         <image name="adviser-pose1" width="196" height="248"/>
         <image name="adviser-pose2" width="276" height="226.5"/>
@@ -945,5 +1004,8 @@
         <namedColor name="white 1.0">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

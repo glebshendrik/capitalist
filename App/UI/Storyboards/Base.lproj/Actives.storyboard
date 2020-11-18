@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,7 +23,7 @@
         <!--Dependent Income Source Info View Controller-->
         <scene sceneID="zuM-TZ-Q7p">
             <objects>
-                <viewController storyboardIdentifier="DependentIncomeSourceInfoViewController" id="sLH-Qx-fei" customClass="DependentIncomeSourceInfoViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DependentIncomeSourceInfoViewController" id="sLH-Qx-fei" customClass="DependentIncomeSourceInfoViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1n2-GU-xQE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,7 +37,7 @@
                                         <color key="textColor" name="white 0.64"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xF2-Mo-Qa5" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xF2-Mo-Qa5" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="24" y="559" width="327" height="48"/>
                                         <color key="backgroundColor" name="blue 1"/>
                                         <constraints>
@@ -127,6 +127,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="IOf-eb-SrE"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="joT-bx-9gb" firstAttribute="top" secondItem="IOf-eb-SrE" secondAttribute="top" id="P5H-Df-LE6"/>
@@ -134,7 +135,6 @@
                             <constraint firstItem="joT-bx-9gb" firstAttribute="leading" secondItem="IOf-eb-SrE" secondAttribute="leading" id="frP-Ip-Fa2"/>
                             <constraint firstItem="IOf-eb-SrE" firstAttribute="bottom" secondItem="joT-bx-9gb" secondAttribute="bottom" id="nEf-bG-Tpx"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="IOf-eb-SrE"/>
                     </view>
                     <connections>
                         <outlet property="basketImageView" destination="Hh2-DX-KJY" id="cWa-a5-nvy"/>
@@ -150,7 +150,7 @@
         <!--Active Edit View Controller-->
         <scene sceneID="28g-jZ-dt1">
             <objects>
-                <viewController storyboardIdentifier="ActiveEditViewController" id="ell-WH-Xgs" customClass="ActiveEditViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActiveEditViewController" id="ell-WH-Xgs" customClass="ActiveEditViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q4U-pO-P4S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -162,7 +162,7 @@
                                     <segue destination="7dG-tz-VWF" kind="embed" identifier="showEditTableView" id="5qH-cC-rfF"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfI-fX-dLh" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfI-fX-dLh" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
                                 <rect key="frame" x="24" y="551" width="327" height="48"/>
                                 <color key="backgroundColor" name="blue 1"/>
                                 <constraints>
@@ -188,6 +188,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="VgX-VE-xTd"/>
                         <color key="backgroundColor" name="dark 2A314B"/>
                         <constraints>
                             <constraint firstItem="zNB-zK-tmk" firstAttribute="leading" secondItem="VgX-VE-xTd" secondAttribute="leading" id="0Ya-1I-LDt"/>
@@ -198,7 +199,6 @@
                             <constraint firstItem="zNB-zK-tmk" firstAttribute="bottom" secondItem="VgX-VE-xTd" secondAttribute="bottom" id="acg-wM-f0P"/>
                             <constraint firstItem="DfI-fX-dLh" firstAttribute="leading" secondItem="VgX-VE-xTd" secondAttribute="leading" constant="24" id="dOk-ji-rW6"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="VgX-VE-xTd"/>
                     </view>
                     <navigationItem key="navigationItem" id="qKB-4a-7AH">
                         <barButtonItem key="backBarButtonItem" title=" " id="zCB-Nb-leb"/>
@@ -227,7 +227,7 @@
         <!--Colorable Navigation Controller-->
         <scene sceneID="hN7-Pk-aqZ">
             <objects>
-                <navigationController storyboardIdentifier="ActiveEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="f4s-xd-qhY" customClass="ColorableNavigationController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ActiveEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="f4s-xd-qhY" customClass="ColorableNavigationController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="1j9-01-xgK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -245,7 +245,7 @@
         <!--Категория трат-->
         <scene sceneID="ygP-ac-juF">
             <objects>
-                <tableViewController storyboardIdentifier="ActiveEditTableController" id="7dG-tz-VWF" customClass="ActiveEditTableController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ActiveEditTableController" id="7dG-tz-VWF" customClass="ActiveEditTableController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="28" id="X2w-J0-bUh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -299,7 +299,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9y-oq-njl" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9y-oq-njl" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="155.5" y="27.5" width="64" height="64"/>
                                                     <color key="backgroundColor" name="gray 1"/>
                                                     <constraints>
@@ -352,7 +352,7 @@
                                                         <constraint firstAttribute="height" constant="1" id="LG6-xT-zLp"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A96-vi-guA">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A96-vi-guA">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                                                     <connections>
                                                         <action selector="didTapIcon:" destination="7dG-tz-VWF" eventType="touchUpInside" id="ov6-Rb-icY"/>
@@ -385,7 +385,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wRj-mt-nEw" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wRj-mt-nEw" customClass="FormTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
@@ -410,7 +410,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fe7-eZ-knv" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fe7-eZ-knv" customClass="FormTapField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -431,7 +431,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bbu-h0-zRK" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bbu-h0-zRK" customClass="FormTapField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
@@ -459,7 +459,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pue-Cj-rV9" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pue-Cj-rV9" customClass="FormMoneyTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -480,7 +480,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L5S-tm-Kpr" customClass="FormSwitchValueField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L5S-tm-Kpr" customClass="FormSwitchValueField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -501,7 +501,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m58-Jl-ghu" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m58-Jl-ghu" customClass="FormTapField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
@@ -526,7 +526,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nN-Oe-yC2" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nN-Oe-yC2" customClass="FormMoneyTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -547,7 +547,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uMb-02-8z0" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uMb-02-8z0" customClass="FormMoneyTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -568,7 +568,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7q-6m-bSY" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7q-6m-bSY" customClass="FormMoneyTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -589,7 +589,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1m-7a-qvp" customClass="FormSwitchValueField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1m-7a-qvp" customClass="FormSwitchValueField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -610,7 +610,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1c5-eQ-EvA" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1c5-eQ-EvA" customClass="FormTapField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -631,7 +631,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tid-VY-3jJ" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tid-VY-3jJ" customClass="FormMoneyTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -652,7 +652,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Umi-RM-YIn" customClass="FormPercentTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Umi-RM-YIn" customClass="FormPercentTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -673,7 +673,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0R-X6-5jR" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0R-X6-5jR" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="4" width="327" height="48"/>
                                                     <color key="backgroundColor" name="blue 1"/>
                                                     <constraints>
@@ -834,7 +834,7 @@
         <!--Active Select View Controller-->
         <scene sceneID="NRR-QQ-h1N">
             <objects>
-                <viewController storyboardIdentifier="ActiveSelectViewController" id="ERv-Bx-G6K" customClass="ActiveSelectViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActiveSelectViewController" id="ERv-Bx-G6K" customClass="ActiveSelectViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rjW-Qp-A8T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -849,6 +849,7 @@
                                 <rect key="frame" x="0.0" y="29" width="375" height="638"/>
                             </containerView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="4C8-bZ-YaS"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="iwA-0o-hxW" firstAttribute="leading" secondItem="rjW-Qp-A8T" secondAttribute="leading" constant="16" id="2sk-s5-bHr"/>
@@ -859,7 +860,6 @@
                             <constraint firstItem="p3o-db-lQe" firstAttribute="leading" secondItem="4C8-bZ-YaS" secondAttribute="leading" id="eTj-gA-4nC"/>
                             <constraint firstItem="4C8-bZ-YaS" firstAttribute="trailing" secondItem="p3o-db-lQe" secondAttribute="trailing" id="nqj-2w-vBg"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="4C8-bZ-YaS"/>
                     </view>
                     <connections>
                         <outlet property="container" destination="p3o-db-lQe" id="31g-zZ-J4T"/>
@@ -872,7 +872,7 @@
         <!--Actives View Controller-->
         <scene sceneID="tMv-b7-our">
             <objects>
-                <viewController storyboardIdentifier="ActivesViewController" id="W2G-Uz-opR" customClass="ActivesViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActivesViewController" id="W2G-Uz-opR" customClass="ActivesViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C8K-gA-dKS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -897,14 +897,14 @@
                                 <rect key="frame" x="0.0" y="24" width="375" height="643"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddingItemTableViewCell" rowHeight="64" id="4fg-Z6-X6Z" customClass="AddingItemTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddingItemTableViewCell" rowHeight="64" id="4fg-Z6-X6Z" customClass="AddingItemTableViewCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4fg-Z6-X6Z" id="SzN-Vf-Md7">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvg-jw-epU" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvg-jw-epU" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="8" width="48" height="48"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -949,7 +949,7 @@
                                             <outlet property="iconView" destination="Hvg-jw-epU" id="ZlT-UH-BbD"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActiveTableViewCell" id="gWq-Me-tSX" customClass="ActiveTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActiveTableViewCell" id="gWq-Me-tSX" customClass="ActiveTableViewCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gWq-Me-tSX" id="bDl-NW-6zF">
@@ -971,7 +971,7 @@
                                                     <color key="textColor" name="white 0.4"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eln-AV-vio" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eln-AV-vio" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="8.5" width="48" height="48"/>
                                                     <color key="backgroundColor" name="gray 1"/>
                                                     <constraints>
@@ -1012,6 +1012,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="3hF-GY-pMp"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="yrl-Bg-FdQ" firstAttribute="top" secondItem="QRy-9u-qOC" secondAttribute="bottom" id="2Ow-IR-zYF"/>
@@ -1027,7 +1028,6 @@
                             <constraint firstItem="QRy-9u-qOC" firstAttribute="top" secondItem="3hF-GY-pMp" secondAttribute="top" constant="16" id="xtu-mX-JvA"/>
                             <constraint firstAttribute="trailing" secondItem="QRy-9u-qOC" secondAttribute="trailing" constant="16" id="ylr-fd-anl"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="3hF-GY-pMp"/>
                     </view>
                     <connections>
                         <outlet property="loader" destination="vvm-U0-Qag" id="gGa-6M-sfY"/>
@@ -1043,7 +1043,7 @@
         <!--Active Info View Controller-->
         <scene sceneID="4Uz-fC-AOV">
             <objects>
-                <navigationController storyboardIdentifier="ActiveInfoViewController" id="NNm-8a-XeZ" customClass="ActiveInfoViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ActiveInfoViewController" id="NNm-8a-XeZ" customClass="ActiveInfoViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wgE-GK-2jE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1087,6 +1087,11 @@
             <point key="canvasLocation" x="-612" y="2836"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="MiO-9d-ZUu">
+            <size key="intrinsicContentSize" width="16" height="16"/>
+        </designable>
+    </designables>
     <resources>
         <image name="adviser-message" width="140" height="140"/>
         <image name="bank-icon" width="17" height="17"/>
