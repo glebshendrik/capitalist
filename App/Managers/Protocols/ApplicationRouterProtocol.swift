@@ -21,7 +21,6 @@ protocol ApplicationRouterProtocol {
     func route()
     func viewController(_ type: Infrastructure.ViewController) -> UIViewController
     func initDependencies(with resolver: Resolver)
-    func setWindow(blurred: Bool)
     func showPasscodeScreen()
     func dismissPresentedAlerts()
     func postDataUpdated()

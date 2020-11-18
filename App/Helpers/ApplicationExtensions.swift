@@ -824,25 +824,25 @@ extension UICollectionView {
     }
 }
 
-extension UIWindow {
-    func addBlur(with id: Int) {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        blurView.frame = self.frame
-        blurView.tag = id
-        self.addSubview(blurView)
-    }
-    
-    func removeBlur(with id: Int) {
-        guard let blurView = self.viewWithTag(id) else { return }
-        UIView.animate(withDuration: 0.2, animations: {
-            blurView.alpha = 0
-        }) { _ in
-            blurView.removeFromSuperview()
-        }
-    }
-}
+//extension UIWindow {
+//    func addBlur(with id: Int) {
+//        let blurEffect = UIBlurEffect(style: .dark)
+//        let blurView = UIVisualEffectView(effect: blurEffect)
+//        blurView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+//        blurView.frame = self.frame
+//        blurView.tag = id
+//        self.addSubview(blurView)
+//    }
+//    
+//    func removeBlur(with id: Int) {
+//        guard let blurView = self.viewWithTag(id) else { return }
+//        UIView.animate(withDuration: 0.2, animations: {
+//            blurView.alpha = 0
+//        }) { _ in
+//            blurView.removeFromSuperview()
+//        }
+//    }
+//}
 
 extension Date {
     func replacing(hour: Int, minute: Int) -> Date? {

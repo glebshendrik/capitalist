@@ -469,11 +469,6 @@ extension ApplicationRouter {
         window.switchRootViewController(to: viewController, animated: animated, duration: 0.2, options: .transitionCrossDissolve, completion)
     }
     
-    func setWindow(blurred: Bool) {
-        let blurViewTagId = 999
-        blurred ? window.addBlur(with: blurViewTagId) : window.removeBlur(with: blurViewTagId)
-    }
-    
     func dismissPresentedAlerts() {
         window.rootViewController?.topmostPresentedViewController.dismissIfAlert()
     }
