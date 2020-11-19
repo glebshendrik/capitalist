@@ -12,6 +12,10 @@ import PromiseKit
 class FiltersViewModel {
     public private(set) var transactionableFilters: [TransactionableFilter] = []    
     
+    var hasFilters: Bool {
+        return numberOfTransactionableFilters > 0
+    }
+    
     var numberOfTransactionableFilters: Int {
         return transactionableFilters.count
     }

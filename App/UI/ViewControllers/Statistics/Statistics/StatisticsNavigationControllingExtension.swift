@@ -167,3 +167,9 @@ extension StatisticsViewController : GraphTableViewCellDelegate {
         updateUI()
     }
 }
+
+extension StatisticsViewController : ClearFiltersTableViewCellDelegate {
+    func didTapClearFilters() {
+        didSelect(filters: [])
+    }
+}

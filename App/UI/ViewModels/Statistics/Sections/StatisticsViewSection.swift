@@ -11,6 +11,7 @@ import Foundation
 enum StatisticsViewSectionType {
     case graph
     case graphFilters
+    case clearFilters
     case transactionsLoader
     case transactionsHeader
     case transactions

@@ -104,7 +104,7 @@ class TransactionablesCreationViewModel {
                                                            isUsed: nil)
             }.map { examples in
                 examples
-                    .sorted(by: { ($0.order ?? 0) < ($1.order ?? 0) })
+                    .sorted(by: { $0.order < $1.order })
                     .map { TransactionableExampleViewModel(example: $0) }
             }
     }

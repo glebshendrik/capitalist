@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -205,8 +206,41 @@
                                             <outlet property="loaderImageView" destination="UDw-yg-bym" id="QgA-kv-5nq"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ClearFiltersTableViewCell" id="bc8-kS-25b" customClass="ClearFiltersTableViewCell" customModule="Capitalist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="522.5" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bc8-kS-25b" id="Z8k-Ld-s6g">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ugp-3q-NVw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="Tfg-OS-Hoy"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                                    <state key="normal" title="Убрать фильтры (1)">
+                                                        <color key="titleColor" name="red 1"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapClearFiltersButton:" destination="bc8-kS-25b" eventType="touchUpInside" id="tAg-dh-zOf"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Ugp-3q-NVw" secondAttribute="trailing" id="94S-w1-7S9"/>
+                                                <constraint firstItem="Ugp-3q-NVw" firstAttribute="top" secondItem="Z8k-Ld-s6g" secondAttribute="top" id="Ebb-bU-okg"/>
+                                                <constraint firstItem="Ugp-3q-NVw" firstAttribute="leading" secondItem="Z8k-Ld-s6g" secondAttribute="leading" id="IK6-jF-YVK"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ugp-3q-NVw" secondAttribute="bottom" id="il6-B7-O1G"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="clearFiltersButton" destination="Ugp-3q-NVw" id="tir-aW-VpO"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GraphFilterTableViewCell" id="yjq-4C-fML" customClass="GraphFilterTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="522.5" width="414" height="68"/>
+                                        <rect key="frame" x="0.0" y="566.5" width="414" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yjq-4C-fML" id="sI3-uI-J5X">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
@@ -288,7 +322,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionsHeaderTableViewCell" id="PR7-Na-oq4" customClass="TransactionsHeaderTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="590.5" width="414" height="49.5"/>
+                                        <rect key="frame" x="0.0" y="634.5" width="414" height="49.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PR7-Na-oq4" id="LYc-0d-zRs">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
@@ -321,7 +355,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionTableViewCell" id="kBR-pa-Ide" customClass="TransactionTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="640" width="414" height="76.5"/>
+                                        <rect key="frame" x="0.0" y="684" width="414" height="76.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kBR-pa-Ide" id="oEe-qq-rCJ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="76.5"/>
@@ -444,7 +478,7 @@
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKG-T3-Yan">
                                 <rect key="frame" x="0.0" y="-100" width="414" height="996"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wM-YG-cuo">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wM-YG-cuo">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="996"/>
                                         <connections>
                                             <action selector="didTapMainOverlay:" destination="ACm-3q-bxC" eventType="touchUpInside" id="GTa-dJ-tU9"/>
@@ -465,6 +499,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="5NP-Zg-AdE"/>
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstItem="RDT-GG-LXA" firstAttribute="centerX" secondItem="oFO-fT-vZS" secondAttribute="centerX" id="4ZM-EG-YCk"/>
@@ -480,7 +515,6 @@
                             <constraint firstAttribute="trailing" secondItem="X4l-DK-AlF" secondAttribute="trailing" constant="32" id="dAp-8c-Q9A"/>
                             <constraint firstItem="5NP-Zg-AdE" firstAttribute="bottom" secondItem="AAA-Y3-NVh" secondAttribute="bottom" id="hCN-N1-Joo"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="5NP-Zg-AdE"/>
                     </view>
                     <navigationItem key="navigationItem" id="GZP-tx-Its">
                         <barButtonItem key="backBarButtonItem" title=" " id="X2x-R0-cNF"/>
@@ -594,7 +628,7 @@
                                 <rect key="frame" x="179.5" y="432.5" width="55" height="31"/>
                                 <color key="tintColor" name="blue 1"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nB6-RD-jK0">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nB6-RD-jK0">
                                 <rect key="frame" x="0.0" y="814" width="414" height="48"/>
                                 <color key="backgroundColor" name="blue 1"/>
                                 <constraints>
@@ -613,6 +647,7 @@
                                 <color key="backgroundColor" name="blue 1"/>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="SCN-jm-zFO"/>
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstItem="ege-40-g2e" firstAttribute="top" secondItem="SCN-jm-zFO" secondAttribute="top" id="6x7-jW-s2v"/>
@@ -629,7 +664,6 @@
                             <constraint firstAttribute="bottom" secondItem="Ex9-VT-RxY" secondAttribute="bottom" id="pQL-TY-kZK"/>
                             <constraint firstItem="Ex9-VT-RxY" firstAttribute="top" secondItem="nB6-RD-jK0" secondAttribute="bottom" id="u0a-BW-Vrn"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="SCN-jm-zFO"/>
                     </view>
                     <navigationItem key="navigationItem" title="Фильтр" id="y2X-Ra-aqJ">
                         <barButtonItem key="backBarButtonItem" title=" " id="qlY-mL-sLs"/>
@@ -852,7 +886,7 @@
                                     <segue destination="ulQ-Nr-Xc5" kind="embed" identifier="showEditTableView" id="I7A-79-oFe"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYz-Fh-44s">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYz-Fh-44s">
                                 <rect key="frame" x="0.0" y="814" width="414" height="48"/>
                                 <color key="backgroundColor" name="blue 1"/>
                                 <constraints>
@@ -872,7 +906,8 @@
                                 <color key="backgroundColor" name="blue 1"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="nG4-BQ-JTe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="eu0-xd-RPb" firstAttribute="top" secondItem="nG4-BQ-JTe" secondAttribute="top" id="1KA-tq-npY"/>
                             <constraint firstItem="BYz-Fh-44s" firstAttribute="leading" secondItem="nG4-BQ-JTe" secondAttribute="leading" id="4ZI-70-DOW"/>
@@ -886,7 +921,6 @@
                             <constraint firstItem="vsW-Js-Unp" firstAttribute="leading" secondItem="nqI-ce-0KY" secondAttribute="leading" id="rwZ-6r-fHk"/>
                             <constraint firstAttribute="trailing" secondItem="vsW-Js-Unp" secondAttribute="trailing" id="xoD-nM-VjO"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="nG4-BQ-JTe"/>
                     </view>
                     <navigationItem key="navigationItem" title="Выбор периода" id="C8c-b4-I7E">
                         <barButtonItem key="backBarButtonItem" title=" " id="Yls-4i-5TY"/>
@@ -927,6 +961,9 @@
         <namedColor name="blue 1">
             <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="red 1">
+            <color red="1" green="0.40000000000000002" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="white 0.04">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -942,5 +979,8 @@
         <namedColor name="white 1.0">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

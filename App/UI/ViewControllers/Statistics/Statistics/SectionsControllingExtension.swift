@@ -28,6 +28,8 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
             return self.tableView(tableView, graphCellForRowAt: indexPath)
         case is GraphFiltersSection:
             return self.tableView(tableView, graphFiltersCellForRowAt: indexPath)
+        case is ClearFiltersSection:
+            return self.tableView(tableView, clearFiltersCellForRowAt: indexPath)
         case is TransactionsLoadingSection:
             return self.tableView(tableView, transactionsLoadingCellForRowAt: indexPath)
         case is TransactionsHeaderSection:
@@ -52,6 +54,14 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
                 let filterViewModel = viewModel.graphFilterViewModel(at: indexPath.row) else { return UITableViewCell() }
         
         cell.viewModel = filterViewModel
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, clearFiltersCellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ClearFiltersTableViewCell") as? ClearFiltersTableViewCell else { return UITableViewCell() }
+                
+        cell.delegate = self
+        cell.filtersNumber = viewModel.numberOfTransactionableFilters
         return cell
     }
     

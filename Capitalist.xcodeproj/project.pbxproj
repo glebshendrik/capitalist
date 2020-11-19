@@ -124,6 +124,8 @@
 		FA53B12023D823FD008B9A1F /* TransactionableExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53B11F23D823FD008B9A1F /* TransactionableExampleViewModel.swift */; };
 		FA54891825627FCE002AC516 /* OnboardCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA54891725627FCE002AC516 /* OnboardCurrencyViewController.swift */; };
 		FA54891C25628227002AC516 /* OnboardCurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA54891B25628227002AC516 /* OnboardCurrencyViewModel.swift */; };
+		FA54892125667529002AC516 /* ClearFiltersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA54892025667529002AC516 /* ClearFiltersTableViewCell.swift */; };
+		FA548924256679E8002AC516 /* ClearFiltersSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA548923256679E8002AC516 /* ClearFiltersSection.swift */; };
 		FA557FFD2514AA43004D5252 /* SubscriptionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA557FFC2514AA43004D5252 /* SubscriptionProduct.swift */; };
 		FA5580002514CD3E004D5252 /* SubscriptionPlanItemTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA557FFF2514CD3E004D5252 /* SubscriptionPlanItemTitleCell.swift */; };
 		FA5580022514CE43004D5252 /* SubscriptionPlanItemDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5580012514CE43004D5252 /* SubscriptionPlanItemDescriptionCell.swift */; };
@@ -643,6 +645,8 @@
 		FA53B11F23D823FD008B9A1F /* TransactionableExampleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExampleViewModel.swift; sourceTree = "<group>"; };
 		FA54891725627FCE002AC516 /* OnboardCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardCurrencyViewController.swift; sourceTree = "<group>"; };
 		FA54891B25628227002AC516 /* OnboardCurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardCurrencyViewModel.swift; sourceTree = "<group>"; };
+		FA54892025667529002AC516 /* ClearFiltersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearFiltersTableViewCell.swift; sourceTree = "<group>"; };
+		FA548923256679E8002AC516 /* ClearFiltersSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearFiltersSection.swift; sourceTree = "<group>"; };
 		FA557FFC2514AA43004D5252 /* SubscriptionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProduct.swift; sourceTree = "<group>"; };
 		FA557FFF2514CD3E004D5252 /* SubscriptionPlanItemTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemTitleCell.swift; sourceTree = "<group>"; };
 		FA5580012514CE43004D5252 /* SubscriptionPlanItemDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanItemDescriptionCell.swift; sourceTree = "<group>"; };
@@ -1627,6 +1631,7 @@
 				FA835D652265F21F00A592F2 /* GraphSection.swift */,
 				FA7177022269DEC6008ADF94 /* GraphFiltersSection.swift */,
 				FA835D672265F23F00A592F2 /* TransactionsSection.swift */,
+				FA548923256679E8002AC516 /* ClearFiltersSection.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -1851,6 +1856,7 @@
 				FACC0200224CCDEE0044A747 /* StatisticsTitleView.xib */,
 				FA7276DF2254A4A70086D4D1 /* FiltersSelectionSectionHeaderView.swift */,
 				FA7276DD2254A0400086D4D1 /* SelectableFilterCollectionViewCell.swift */,
+				FA54892025667529002AC516 /* ClearFiltersTableViewCell.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -2540,6 +2546,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FABE54DA233A757F00DF2B70 /* Credit.swift in Sources */,
+				FA548924256679E8002AC516 /* ClearFiltersSection.swift in Sources */,
 				FA6DDE8522D60401008D14FF /* FormEditViewController.swift in Sources */,
 				FA9485D12466E185005EB7B9 /* ActivesViewController.swift in Sources */,
 				FA56AB97235EE82C00E4D0E3 /* ActiveUIExtension.swift in Sources */,
@@ -2727,6 +2734,7 @@
 				FA7276DA22539F510086D4D1 /* FiltersSelectionViewSection.swift in Sources */,
 				FA0A4E84246A7DB300886277 /* FormImageValueField.swift in Sources */,
 				FA5751C9237C2C0C00912443 /* SwitchInfoTableViewCell.swift in Sources */,
+				FA54892125667529002AC516 /* ClearFiltersTableViewCell.swift in Sources */,
 				FA2847E722E9C216003F114A /* FormMoneyTextField.swift in Sources */,
 				FA66FB772226D2E000708C71 /* ExchangeRatesCoordinatorProtocol.swift in Sources */,
 				FAAC99CA23B8DFF6009ADB84 /* DatePeriodSelectionTableController.swift in Sources */,
@@ -3311,7 +3319,7 @@
 				CODE_SIGN_ENTITLEMENTS = Capitalist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 78;
+				CURRENT_PROJECT_VERSION = 79;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				EXCLUDED_ARCHS = "";
@@ -3420,7 +3428,7 @@
 				CODE_SIGN_ENTITLEMENTS = Capitalist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 78;
+				CURRENT_PROJECT_VERSION = 79;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";

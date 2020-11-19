@@ -19,7 +19,7 @@ struct TransactionableExample : Decodable {
     let basketType: BasketType?
     let prototypeKey: String
     let providerCodes: [String]?
-    let order: Int?
+    let order: Int
     
     enum CodingKeys: String, CodingKey {
         case id
