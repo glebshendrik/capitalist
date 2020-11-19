@@ -11,6 +11,8 @@ import PromiseKit
 
 class TransactionableExamplesService : Service, TransactionableExamplesServiceProtocol {
     func indexBy(_ transactioableType: TransactionableType, basketType: BasketType?, isUsed: Bool?) -> Promise<[TransactionableExample]> {
-        return requestCollection(APIRoute.indexTransactionableExamples(transactionableType: transactioableType, basketType: basketType, isUsed: isUsed))
+        return requestCollection(APIRoute.indexTransactionableExamples(transactionableType: transactioableType,
+                                                                       basketType: basketType,
+                                                                       isUsed: isUsed))
     }
 }

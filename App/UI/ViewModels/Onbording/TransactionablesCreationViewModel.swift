@@ -103,7 +103,9 @@ class TransactionablesCreationViewModel {
                                                            basketType: nil,
                                                            isUsed: nil)
             }.map { examples in
-                examples.map { TransactionableExampleViewModel(example: $0) }
+                examples
+                    .sorted(by: { ($0.order ?? 0) < ($1.order ?? 0) })
+                    .map { TransactionableExampleViewModel(example: $0) }
             }
     }
     

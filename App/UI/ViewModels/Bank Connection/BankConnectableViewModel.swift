@@ -79,8 +79,8 @@ class BankConnectableViewModel {
     }
     
     var canConnectBank: Bool {
-        return true
-//        return accountCoordinator.hasPlatinumSubscription
+//        return true
+        return accountCoordinator.hasPlatinumSubscription
     }
     
     var reconnectNeeded: Bool {
