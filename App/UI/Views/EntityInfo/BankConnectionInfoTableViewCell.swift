@@ -1,5 +1,5 @@
 //
-//  BankWarningInfoTableViewCell.swift
+//  BankConnectionInfoTableViewCell.swift
 //  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 16.06.2020.
@@ -8,11 +8,13 @@
 
 import UIKit
 
-protocol BankWarningInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
-    func didTapBankWarningInfoButton(field: BankWarningInfoField?)
+protocol BankConnectionInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
+    func didTapConnectBankButton(field: BankConnectionInfoField?)
+    func didTapDisconnectBankButton(field: BankConnectionInfoField?)
+    func didTapSendInteractiveFieldsButton(field: BankConnectionInfoField?)
 }
 
-class BankWarningInfoTableViewCell : EntityInfoTableViewCell, InteractiveFieldViewDelegate {
+class BankConnectionInfoTableViewCell : EntityInfoTableViewCell, InteractiveFieldViewDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var connectButton: HighlightButton!
@@ -21,12 +23,12 @@ class BankWarningInfoTableViewCell : EntityInfoTableViewCell, InteractiveFieldVi
     @IBOutlet weak var stackView: UIStackView!
     var interactiveFieldViews: [InteractiveFieldView] = []    
     
-    var bankWarningDelegate: BankWarningInfoTableViewCellDelegate? {
-        return delegate as? BankWarningInfoTableViewCellDelegate
+    var bankConnectionDelegate: BankConnectionInfoTableViewCellDelegate? {
+        return delegate as? BankConnectionInfoTableViewCellDelegate
     }
     
-    var bankWarningField: BankWarningInfoField? {
-        return field as? BankWarningInfoField
+    var bankWarningField: BankConnectionInfoField? {
+        return field as? BankConnectionInfoField
     }
     
     override func prepareForReuse() {
@@ -67,7 +69,7 @@ class BankWarningInfoTableViewCell : EntityInfoTableViewCell, InteractiveFieldVi
         else {
             return
         }        
-        bankWarningDelegate?.didTapBankWarningInfoButton(field: bankWarningField)
+        bankConnectionDelegate?.didTapSendInteractiveFieldsButton(field: bankWarningField)
     }
     
     func didChangeFieldValue(field: InteractiveFieldView) {

@@ -8,8 +8,17 @@
 
 import Foundation
 
-class BankWarningInfoField : EntityInfoField {
+class BankConnectionInfoField : EntityInfoField {
     private let fieldId: String
+    
+    var type: EntityInfoFieldType {
+        return .bankConnection
+    }
+    
+    var identifier: String {
+        return fieldId
+    }
+    
     let isSyncing: Bool
     let stage: ConnectionStage
     
@@ -34,13 +43,7 @@ class BankWarningInfoField : EntityInfoField {
         }
     }
 
-    var type: EntityInfoFieldType {
-        return .bankWarning
-    }
     
-    var identifier: String {
-        return fieldId
-    }
     
     var isWarningIconHidden: Bool {
         return isSyncing

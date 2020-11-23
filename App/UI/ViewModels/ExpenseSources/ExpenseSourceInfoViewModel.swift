@@ -125,7 +125,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                     canEditIcon: canEditIcon))
         
         if bankConnectableViewModel.reconnectNeeded || bankConnectableViewModel.isSyncingWithBank {
-            fields.append(BankWarningInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
+            fields.append(BankConnectionInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
                                                isSyncing: bankConnectableViewModel.isSyncingWithBank,
                                                stage: bankConnectableViewModel.syncingWithBankStage,
                                                interactiveCredentials: bankConnectableViewModel.interactiveCredentials))

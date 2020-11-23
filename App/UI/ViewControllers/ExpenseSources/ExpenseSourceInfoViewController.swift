@@ -59,7 +59,7 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
         }
     }
     
-    override func didTapBankWarningInfoButton(field: BankWarningInfoField?) {
+    override func didTapSendInteractiveFieldsButton(field: BankConnectionInfoField?) {
         guard
             bankConnectableViewModel.canConnectBank
         else {

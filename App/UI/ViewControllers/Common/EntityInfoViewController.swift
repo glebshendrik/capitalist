@@ -234,7 +234,7 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
         
         cell.delegate = entityInfoNavigationController
         cell.field = field
-        if field.type == .bankWarning {
+        if field.type == .bankConnection {
             cell.selectionStyle = .none
         }
         return cell

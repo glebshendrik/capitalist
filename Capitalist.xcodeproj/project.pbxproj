@@ -236,8 +236,8 @@
 		FA7EE00022CDA1940054EAD3 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EDFFF22CDA1940054EAD3 /* AccountViewModel.swift */; };
 		FA7EE00222CDA1A10054EAD3 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EE00122CDA1A10054EAD3 /* AccountsViewModel.swift */; };
 		FA7EE00422CDA1B30054EAD3 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7EE00322CDA1B30054EAD3 /* AccountCell.swift */; };
-		FA7FC37F2499176000C1ACCD /* BankWarningInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FC37E2499176000C1ACCD /* BankWarningInfoTableViewCell.swift */; };
-		FA7FC38124991B6900C1ACCD /* BankWarningInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FC38024991B6900C1ACCD /* BankWarningInfoField.swift */; };
+		FA7FC37F2499176000C1ACCD /* BankConnectionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FC37E2499176000C1ACCD /* BankConnectionInfoTableViewCell.swift */; };
+		FA7FC38124991B6900C1ACCD /* BankConnectionInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FC38024991B6900C1ACCD /* BankConnectionInfoField.swift */; };
 		FA7FC38324A3062400C1ACCD /* TransactionEditCalculatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FC38224A3062400C1ACCD /* TransactionEditCalculatorExtension.swift */; };
 		FA7FC38524AB410D00C1ACCD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7FC38424AB410C00C1ACCD /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FA7FC38724AB411700C1ACCD /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7FC38624AB411600C1ACCD /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -759,8 +759,8 @@
 		FA7EDFFF22CDA1940054EAD3 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		FA7EE00122CDA1A10054EAD3 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
 		FA7EE00322CDA1B30054EAD3 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
-		FA7FC37E2499176000C1ACCD /* BankWarningInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWarningInfoTableViewCell.swift; sourceTree = "<group>"; };
-		FA7FC38024991B6900C1ACCD /* BankWarningInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankWarningInfoField.swift; sourceTree = "<group>"; };
+		FA7FC37E2499176000C1ACCD /* BankConnectionInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionInfoTableViewCell.swift; sourceTree = "<group>"; };
+		FA7FC38024991B6900C1ACCD /* BankConnectionInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionInfoField.swift; sourceTree = "<group>"; };
 		FA7FC38224A3062400C1ACCD /* TransactionEditCalculatorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEditCalculatorExtension.swift; sourceTree = "<group>"; };
 		FA7FC38424AB410C00C1ACCD /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		FA7FC38624AB411600C1ACCD /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -1359,7 +1359,7 @@
 				FA5751BD237C15D200912443 /* SwitchInfoField.swift */,
 				FA5751BF237C15EA00912443 /* ButtonInfoField.swift */,
 				FA5751C1237C160400912443 /* ReminderInfoField.swift */,
-				FA7FC38024991B6900C1ACCD /* BankWarningInfoField.swift */,
+				FA7FC38024991B6900C1ACCD /* BankConnectionInfoField.swift */,
 				FA940DB52535BEA000C72F8A /* DescriptionInfoField.swift */,
 			);
 			path = EntityInfo;
@@ -1398,7 +1398,7 @@
 				FA5751CA237C2C8A00912443 /* ButtonInfoTableViewCell.swift */,
 				FA5751CC237C2D3400912443 /* ReminderInfoTableViewCell.swift */,
 				FA0A4E8E2477D58100886277 /* CombinedInfoTableViewCell.swift */,
-				FA7FC37E2499176000C1ACCD /* BankWarningInfoTableViewCell.swift */,
+				FA7FC37E2499176000C1ACCD /* BankConnectionInfoTableViewCell.swift */,
 				FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */,
 				FA3FD0422552A61000D2D5BC /* InteractiveFieldView.swift */,
 			);
@@ -2615,7 +2615,7 @@
 				FA835D5A2265BC4500A592F2 /* GraphTransactionFilter.swift in Sources */,
 				FA0A4E8B246DB81E00886277 /* FanMenu.swift in Sources */,
 				FA36E98923F182CA00B340AA /* AnalyticsManagerProtocol.swift in Sources */,
-				FA7FC37F2499176000C1ACCD /* BankWarningInfoTableViewCell.swift in Sources */,
+				FA7FC37F2499176000C1ACCD /* BankConnectionInfoTableViewCell.swift in Sources */,
 				FAA5D57A238FA9CD00CC53AD /* BorrowInfoViewModel.swift in Sources */,
 				FA7EE00022CDA1940054EAD3 /* AccountViewModel.swift in Sources */,
 				FA940DB62535BEA000C72F8A /* DescriptionInfoField.swift in Sources */,
@@ -2701,7 +2701,7 @@
 				FA0A4E80246A752400886277 /* CardTypesViewModel.swift in Sources */,
 				FAED7D9821EC4C0D00BF6FE1 /* Basket.swift in Sources */,
 				FABE54F7233F854600DF2B70 /* CreditType.swift in Sources */,
-				FA7FC38124991B6900C1ACCD /* BankWarningInfoField.swift in Sources */,
+				FA7FC38124991B6900C1ACCD /* BankConnectionInfoField.swift in Sources */,
 				FA66FB6F22250C8F00708C71 /* TransactionEditViewController.swift in Sources */,
 				FA84E7EB225DA9EF00C0A274 /* LineChartAreasRenderer.swift in Sources */,
 				FA7DB73122102F1200559878 /* CurrenciesService.swift in Sources */,
@@ -3319,7 +3319,7 @@
 				CODE_SIGN_ENTITLEMENTS = Capitalist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 79;
+				CURRENT_PROJECT_VERSION = 80;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				EXCLUDED_ARCHS = "";
@@ -3428,7 +3428,7 @@
 				CODE_SIGN_ENTITLEMENTS = Capitalist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 79;
+				CURRENT_PROJECT_VERSION = 80;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";

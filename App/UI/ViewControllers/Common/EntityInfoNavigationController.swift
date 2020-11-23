@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EntityInfoNavigationController : UINavigationController, UIFactoryDependantProtocol, UIMessagePresenterManagerDependantProtocol, CombinedInfoTableViewCellDelegate, IconInfoTableViewCellDelegate, SwitchInfoTableViewCellDelegate, ButtonInfoTableViewCellDelegate, ReminderInfoTableViewCellDelegate, BankWarningInfoTableViewCellDelegate, TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate, CreditEditViewControllerDelegate, Updatable, Navigatable {
+class EntityInfoNavigationController : UINavigationController, UIFactoryDependantProtocol, UIMessagePresenterManagerDependantProtocol, CombinedInfoTableViewCellDelegate, IconInfoTableViewCellDelegate, SwitchInfoTableViewCellDelegate, ButtonInfoTableViewCellDelegate, ReminderInfoTableViewCellDelegate, BankConnectionInfoTableViewCellDelegate, TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate, CreditEditViewControllerDelegate, Updatable, Navigatable {
 
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var factory: UIFactoryProtocol!
@@ -72,7 +72,15 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
         
     }
     
-    func didTapBankWarningInfoButton(field: BankWarningInfoField?) {
+    func didTapConnectBankButton(field: BankConnectionInfoField?) {
+        
+    }
+    
+    func didTapDisconnectBankButton(field: BankConnectionInfoField?) {
+        
+    }
+    
+    func didTapSendInteractiveFieldsButton(field: BankConnectionInfoField?) {
         
     }
     

@@ -15,7 +15,7 @@ enum EntityInfoFieldType {
     case bool
     case button
     case reminder
-    case bankWarning
+    case bankConnection
     case description
     
     var identifier: String {
@@ -32,8 +32,8 @@ enum EntityInfoFieldType {
                 return "ButtonInfoTableViewCell"
             case .reminder:
                 return "ReminderInfoTableViewCell"
-            case .bankWarning:
-                return "BankWarningInfoTableViewCell"
+            case .bankConnection:
+                return "BankConnectionInfoTableViewCell"
             case .description:
                 return "DescriptionInfoTableViewCell"
         }
