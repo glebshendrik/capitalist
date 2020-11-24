@@ -105,6 +105,6 @@ extension ExpenseSourceEditViewController : TransactionableExamplesViewControlle
         sheet(title: alertTitle,
               actions: actions,
               preferredStyle: .alert,
-              addCancel: false)
+              addCancel: true)
     }
 }
