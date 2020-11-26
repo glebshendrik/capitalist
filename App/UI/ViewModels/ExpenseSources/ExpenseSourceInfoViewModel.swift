@@ -124,22 +124,8 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                     placeholder: TransactionableType.expenseSource.defaultIconName,
                                     canEditIcon: canEditIcon))
         
-        if bankConnectableViewModel.reconnectNeeded || bankConnectableViewModel.isSyncingWithBank {
-            fields.append(BankConnectionInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
-                                               isSyncing: bankConnectableViewModel.isSyncingWithBank,
-                                               stage: bankConnectableViewModel.syncingWithBankStage,
-                                               interactiveCredentials: bankConnectableViewModel.interactiveCredentials))
-        }
-        
-        if let nextUpdatePossibleAt = bankConnectableViewModel.nextUpdatePossibleAt {
-            fields.append(DescriptionInfoField(fieldId: ExpenseCategoryInfoField.description.rawValue,
-                                               description: nextUpdatePossibleAt))
-        }
-        
-        fields.append(ButtonInfoField(fieldId: ExpenseSourceInfoField.bank.rawValue,
-                                      title: bankButtonTitle,
-                                      iconName: nil,
-                                      isEnabled: true))
+        fields.append(BankConnectionInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
+                                              bankConnectableViewModel: bankConnectableViewModel))
         
         fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
                                      title: NSLocalizedString("Баланс", comment: "Баланс"),

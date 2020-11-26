@@ -34,7 +34,7 @@ class BankConnectableViewModel {
 //    var shouldUseExperimentalFeature: Bool = false
     var shouldDestroyConnection: Bool = false
     
-    var interactiveCredentials: [ConnectionInteractiveCredentials] = []
+    var interactiveCredentials: [InteractiveCredentialsField] = []
     var hasInteractiveCredentials: Bool {
         return !interactiveCredentials.isEmpty
     }

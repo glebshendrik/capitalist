@@ -287,8 +287,6 @@
 		FA8AD0E222C5F48B0084AD19 /* ProvidersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */; };
 		FA8AD0E422C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */; };
 		FA8AD0E622C5F5E60084AD19 /* BankConnectionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */; };
-		FA940DB32535BE5700C72F8A /* DescriptionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */; };
-		FA940DB62535BEA000C72F8A /* DescriptionInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940DB52535BEA000C72F8A /* DescriptionInfoField.swift */; };
 		FA940DBA2536D39C00C72F8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA940DB92536D39C00C72F8A /* GoogleService-Info.plist */; };
 		FA940E492538594100C72F8A /* TransactionableExamplesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940E482538594100C72F8A /* TransactionableExamplesViewModel.swift */; };
 		FA940E4C25385F9200C72F8A /* TransactionableExamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940E4B25385F9200C72F8A /* TransactionableExamplesViewController.swift */; };
@@ -327,6 +325,8 @@
 		FAA9127D220D249100F2C251 /* SettingsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA9127C220D249100F2C251 /* SettingsCoordinatorProtocol.swift */; };
 		FAA9127F220D24AD00F2C251 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA9127E220D24AD00F2C251 /* SettingsCoordinator.swift */; };
 		FAA993DD23CF5265002456C2 /* AppUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA993DC23CF5265002456C2 /* AppUpdateViewController.swift */; };
+		FAAA04EA256F8558009CE467 /* DescriptionInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAA04E9256F8558009CE467 /* DescriptionInfoField.swift */; };
+		FAAA04ED256F856F009CE467 /* DescriptionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAA04EC256F856F009CE467 /* DescriptionInfoTableViewCell.swift */; };
 		FAAC99B123B31A59009ADB84 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAC99A423B31A59009ADB84 /* Roboto-Medium.ttf */; };
 		FAAC99B223B31A59009ADB84 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAC99A523B31A59009ADB84 /* Roboto-Light.ttf */; };
 		FAAC99B323B31A59009ADB84 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAC99A623B31A59009ADB84 /* Roboto-Regular.ttf */; };
@@ -809,8 +809,6 @@
 		FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewModel.swift; sourceTree = "<group>"; };
 		FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionsCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionsCoordinator.swift; sourceTree = "<group>"; };
-		FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionInfoTableViewCell.swift; sourceTree = "<group>"; };
-		FA940DB52535BEA000C72F8A /* DescriptionInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionInfoField.swift; sourceTree = "<group>"; };
 		FA940DB92536D39C00C72F8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA940E482538594100C72F8A /* TransactionableExamplesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExamplesViewModel.swift; sourceTree = "<group>"; };
 		FA940E4B25385F9200C72F8A /* TransactionableExamplesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExamplesViewController.swift; sourceTree = "<group>"; };
@@ -849,6 +847,8 @@
 		FAA9127C220D249100F2C251 /* SettingsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FAA9127E220D24AD00F2C251 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		FAA993DC23CF5265002456C2 /* AppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdateViewController.swift; sourceTree = "<group>"; };
+		FAAA04E9256F8558009CE467 /* DescriptionInfoField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionInfoField.swift; sourceTree = "<group>"; };
+		FAAA04EC256F856F009CE467 /* DescriptionInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FAAC99A423B31A59009ADB84 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		FAAC99A523B31A59009ADB84 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		FAAC99A623B31A59009ADB84 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -1348,6 +1348,7 @@
 		FA503DBD2375D15C005AEFE7 /* EntityInfo */ = {
 			isa = PBXGroup;
 			children = (
+				FAAA04E9256F8558009CE467 /* DescriptionInfoField.swift */,
 				FA503DBB23759DE2005AEFE7 /* EntityInfoViewModel.swift */,
 				FA503DBE2375D1B3005AEFE7 /* EntityInfoSection.swift */,
 				FA503DC22375D29B005AEFE7 /* EntityInfoTransactionsSection.swift */,
@@ -1360,7 +1361,6 @@
 				FA5751BF237C15EA00912443 /* ButtonInfoField.swift */,
 				FA5751C1237C160400912443 /* ReminderInfoField.swift */,
 				FA7FC38024991B6900C1ACCD /* BankConnectionInfoField.swift */,
-				FA940DB52535BEA000C72F8A /* DescriptionInfoField.swift */,
 			);
 			path = EntityInfo;
 			sourceTree = "<group>";
@@ -1398,8 +1398,8 @@
 				FA5751CA237C2C8A00912443 /* ButtonInfoTableViewCell.swift */,
 				FA5751CC237C2D3400912443 /* ReminderInfoTableViewCell.swift */,
 				FA0A4E8E2477D58100886277 /* CombinedInfoTableViewCell.swift */,
+				FAAA04EC256F856F009CE467 /* DescriptionInfoTableViewCell.swift */,
 				FA7FC37E2499176000C1ACCD /* BankConnectionInfoTableViewCell.swift */,
-				FA940DB22535BE5700C72F8A /* DescriptionInfoTableViewCell.swift */,
 				FA3FD0422552A61000D2D5BC /* InteractiveFieldView.swift */,
 			);
 			path = EntityInfo;
@@ -2618,7 +2618,6 @@
 				FA7FC37F2499176000C1ACCD /* BankConnectionInfoTableViewCell.swift in Sources */,
 				FAA5D57A238FA9CD00CC53AD /* BorrowInfoViewModel.swift in Sources */,
 				FA7EE00022CDA1940054EAD3 /* AccountViewModel.swift in Sources */,
-				FA940DB62535BEA000C72F8A /* DescriptionInfoField.swift in Sources */,
 				FA0A4E8F2477D58200886277 /* CombinedInfoTableViewCell.swift in Sources */,
 				FA0CAE2821D67B7F00805288 /* IconsViewModel.swift in Sources */,
 				FAF7528F24408AC900A0B5B7 /* CountriesViewModel.swift in Sources */,
@@ -2850,6 +2849,7 @@
 				FAC3B9D421C2796C0015A12F /* IncomeSourceCollectionViewCell.swift in Sources */,
 				FA7276C7225256EE0086D4D1 /* DataControllingExtension.swift in Sources */,
 				FA8AD0D822BB503C0084AD19 /* SaltEdgeManagerProtocol.swift in Sources */,
+				FAAA04ED256F856F009CE467 /* DescriptionInfoTableViewCell.swift in Sources */,
 				FA53B11E23D74D05008B9A1F /* TransactionablesCreationViewModel.swift in Sources */,
 				FAD88F5D21AEC28300BE7BC1 /* User.swift in Sources */,
 				FA02F4DE248A53C000C536E3 /* Account.swift in Sources */,
@@ -2889,7 +2889,6 @@
 				FAD88F3721AEB8F200BE7BC1 /* UIFlowManager.swift in Sources */,
 				FA7276B9225250040086D4D1 /* UISettingExtension.swift in Sources */,
 				FA0CADF721CBE56100805288 /* LoaderView.swift in Sources */,
-				FA940DB32535BE5700C72F8A /* DescriptionInfoTableViewCell.swift in Sources */,
 				FA28480322F19EB6003F114A /* UIFactory.swift in Sources */,
 				FA56AB9F235EEBD800E4D0E3 /* ActivesViewModel.swift in Sources */,
 				FA9485CD245FD1C0005EB7B9 /* AddingItemTableViewCell.swift in Sources */,
@@ -2969,6 +2968,7 @@
 				FAAC99C223B5C02C009ADB84 /* DateRangeTransactionFilter.swift in Sources */,
 				FA5751BA237C15A900912443 /* IconInfoField.swift in Sources */,
 				FAED7DB621F0E35100BF6FE1 /* ExpenseCategoryEditViewModel.swift in Sources */,
+				FAAA04EA256F8558009CE467 /* DescriptionInfoField.swift in Sources */,
 				FA7DB738221032BC00559878 /* CurrencyCollectionViewCell.swift in Sources */,
 				FA2847F622F0564B003F114A /* IncomeSourceUIExtension.swift in Sources */,
 				FA5751BE237C15D200912443 /* SwitchInfoField.swift in Sources */,

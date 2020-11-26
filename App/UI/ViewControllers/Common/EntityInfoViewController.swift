@@ -42,7 +42,7 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
     
     func setupNavigationBar() {
         setupNavigationBarAppearance()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "edit-info-icon"), style: .plain, target: self, action: #selector(didTapEditButton(sender:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "pen2-icon"), style: .plain, target: self, action: #selector(didTapEditButton(sender:)))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.by(.blue1)
         updateNavigationBarUI()
     }

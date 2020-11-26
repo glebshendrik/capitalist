@@ -197,12 +197,12 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
             }
     }
     
-    func updateConnection(id: Int, saltedgeId: String?, session: ConnectionSession?, interactiveCredentials: [ConnectionInteractiveCredentials]) -> Promise<Void> {
+    func updateConnection(id: Int, saltedgeId: String?, session: ConnectionSession?, interactiveCredentials: [InteractiveCredentialsField]) -> Promise<Void> {
         let form = ConnectionUpdatingForm(id: id, saltedgeId: saltedgeId, session: session, interactiveCredentials: interactiveCredentials)
         return connectionsService.update(with: form)
     }
     
-    func updatedConnection(id: Int, saltedgeId: String?, session: ConnectionSession?, interactiveCredentials: [ConnectionInteractiveCredentials]) -> Promise<Connection> {
+    func updatedConnection(id: Int, saltedgeId: String?, session: ConnectionSession?, interactiveCredentials: [InteractiveCredentialsField]) -> Promise<Connection> {
         return
             firstly {
                 updateConnection(id: id, saltedgeId: saltedgeId, session: session, interactiveCredentials: interactiveCredentials)

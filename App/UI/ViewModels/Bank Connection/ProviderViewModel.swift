@@ -46,17 +46,17 @@ class ProviderViewModel {
     
     var connectURL: URL? = nil
     
-    var interactiveCredentials: [ConnectionInteractiveCredentials] {
+    var interactiveCredentials: [InteractiveCredentialsField] {
         guard
             let interactiveFields = provider.interactiveFields
         else {
             return []
         }
         return interactiveFields.map {
-            ConnectionInteractiveCredentials(name: $0.name,
+            InteractiveCredentialsField(name: $0.name,
                                              value: nil,
                                              displayName: $0.localizedName,
-                                             nature: ConnectionInteractiveFieldNature(rawValue: $0.nature),
+                                             nature: InteractiveCredentialsFieldNature(rawValue: $0.nature),
                                              options: $0.fieldOptions,
                                              position: $0.position,
                                              optional: $0.purpleOptional) }

@@ -202,7 +202,7 @@ struct ConnectionUpdatingForm : Encodable {
     let id: Int?
     let saltedgeId: String?
     let session: ConnectionSession?
-    let interactiveCredentials: [ConnectionInteractiveCredentials]
+    let interactiveCredentials: [InteractiveCredentialsField]
     
     enum CodingKeys: String, CodingKey {
         case saltedgeId = "salt_edge_connection_id"
@@ -221,11 +221,11 @@ struct ConnectionUpdatingForm : Encodable {
     }
 }
 
-struct ConnectionInteractiveCredentials : Encodable {
+struct InteractiveCredentialsField : Encodable {
     let name: String
     var value: String?
     let displayName: String
-    let nature: ConnectionInteractiveFieldNature?
+    let nature: InteractiveCredentialsFieldNature?
     let options: [SEProviderFieldOption]?
     let position: Int
     let optional: Bool
@@ -236,7 +236,7 @@ struct ConnectionInteractiveCredentials : Encodable {
     }
 }
 
-enum ConnectionInteractiveFieldNature : String, Codable {
+enum InteractiveCredentialsFieldNature : String, Codable {
     case text
     case password
     case select
@@ -248,7 +248,7 @@ enum ConnectionInteractiveFieldNature : String, Codable {
         return self != .dynamicSelect && self != .file
     }
     
-    static func nature(rawValue: String?) -> ConnectionInteractiveFieldNature? {
+    static func nature(rawValue: String?) -> InteractiveCredentialsFieldNature? {
         guard
             let rawValue = rawValue
         else {

@@ -21,7 +21,7 @@ class InteractiveFieldView : CustomView {
     
     weak var delegate: InteractiveFieldViewDelegate? = nil
     
-    var interactiveCredentials: ConnectionInteractiveCredentials? = nil {
+    var interactiveCredentialsField: InteractiveCredentialsField? = nil {
         didSet {
             updateUI()
         }
@@ -105,7 +105,7 @@ class InteractiveFieldView : CustomView {
         titleLabel.textAlignment = .left
         titleLabel.font = labelFont
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.text = interactiveCredentials?.displayName
+        titleLabel.text = interactiveCredentialsField?.displayName
         titleLabel.textColor = labelColor
     }
     
@@ -117,7 +117,7 @@ class InteractiveFieldView : CustomView {
         fieldTextField.backgroundColor = .clear
         fieldContainer.cornerRadius = fieldCornerRadius
         guard
-            let interactiveCredentials = interactiveCredentials
+            let interactiveCredentials = interactiveCredentialsField
         else {
             return
         }
@@ -134,11 +134,12 @@ class InteractiveFieldView : CustomView {
                 return
         }
         fieldTextField.text = interactiveCredentials.value
-        fieldTextField.placeholder = interactiveCredentials.displayName
+        let enterText = NSLocalizedString("Введите", comment: "")
+        fieldTextField.placeholder = "\(enterText) \(interactiveCredentials.displayName)"
     }
     
     @objc private func didChangeFieldValue(_ sender: Any) {        
-        interactiveCredentials?.value = value
+        interactiveCredentialsField?.value = value
         delegate?.didChangeFieldValue(field: self)
     }
     
@@ -203,7 +204,7 @@ extension InteractiveFieldView : UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         guard
-            let options = interactiveCredentials?.options
+            let options = interactiveCredentialsField?.options
         else {
             return 0
         }
@@ -212,7 +213,7 @@ extension InteractiveFieldView : UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         guard
-            let option = interactiveCredentials?.options?[row]
+            let option = interactiveCredentialsField?.options?[row]
         else {
             return nil
         }
@@ -221,7 +222,7 @@ extension InteractiveFieldView : UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         guard
-            var interactiveCredentials = interactiveCredentials,
+            var interactiveCredentials = interactiveCredentialsField,
             let option = interactiveCredentials.options?[row]
         else {
             return

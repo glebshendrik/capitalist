@@ -15,19 +15,25 @@ protocol BankConnectionInfoTableViewCellDelegate : EntityInfoTableViewCellDelega
 }
 
 class BankConnectionInfoTableViewCell : EntityInfoTableViewCell, InteractiveFieldViewDelegate {
+    @IBOutlet weak var reconnectView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var connectButton: HighlightButton!
     @IBOutlet weak var warningIconImageView: UIImageView!
     @IBOutlet weak var syncActivityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var stackView: UIStackView!
-    var interactiveFieldViews: [InteractiveFieldView] = []    
     
+    @IBOutlet weak var reconnectItemsStackView: UIStackView!
+    @IBOutlet weak var messageLabel: UILabel!
+    var interactiveFieldViews: [InteractiveFieldView] = []
+    @IBOutlet weak var dividerView: UIView!
+    @IBOutlet weak var reconnectButton: HighlightButton!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var connectButton: HighlightButton!
+            
     var bankConnectionDelegate: BankConnectionInfoTableViewCellDelegate? {
         return delegate as? BankConnectionInfoTableViewCellDelegate
     }
     
-    var bankWarningField: BankConnectionInfoField? {
+    var bankConnectionField: BankConnectionInfoField? {
         return field as? BankConnectionInfoField
     }
     
@@ -37,43 +43,84 @@ class BankConnectionInfoTableViewCell : EntityInfoTableViewCell, InteractiveFiel
     }
     
     override func updateUI() {
-        guard let bankWarningField = bankWarningField else { return }
+        guard let bankConnectionField = bankConnectionField else { return }
         
-        titleLabel.text = bankWarningField.title
-        messageLabel.text = bankWarningField.message
-        connectButton.setTitle(bankWarningField.buttonText, for: .normal)
+        // Titles
+        titleLabel.text = bankConnectionField.title
+        messageLabel.text = bankConnectionField.message
+        reconnectButton.setTitle(bankConnectionField.reconnectButtonText, for: .normal)
+        connectButton.setTitle(bankConnectionField.connectButtonText, for: .normal)
+        descriptionLabel.text = bankConnectionField.description
         
-        warningIconImageView.isHidden = bankWarningField.isWarningIconHidden
-        syncActivityIndicator.isHidden = bankWarningField.isSyncingIndicatorHidden
-        connectButton.isEnabled = bankWarningField.isButtonEnabled
-        connectButton.isUserInteractionEnabled = bankWarningField.isButtonEnabled
+        // Visibility
+        warningIconImageView.isHidden = bankConnectionField.isWarningIconHidden
+        syncActivityIndicator.isHidden = bankConnectionField.isSyncingIndicatorHidden
+        
+        
         interactiveFieldViews.forEach { $0.removeFromSuperview() }
-        if !bankWarningField.areCredentialsFieldsHidden {
-            interactiveFieldViews = bankWarningField.interactiveCredentials
+        dividerView.removeFromSuperview()
+        reconnectButton.removeFromSuperview()
+        if !bankConnectionField.areCredentialsFieldsHidden {
+            interactiveFieldViews = bankConnectionField.interactiveCredentials
                 .sorted(by: { $0.position < $1.position })
                 .compactMap {
                     let fieldView = InteractiveFieldView()
-                    fieldView.interactiveCredentials = $0
+                    fieldView.interactiveCredentialsField = $0
                     fieldView.delegate = self
                     return fieldView
                 }
             interactiveFieldViews
-                .forEach { self.stackView.addArrangedSubview($0) }
-        }        
+                .forEach { self.reconnectItemsStackView.addArrangedSubview($0) }
+        }
+        
+        // Permissions
+        connectButton.isEnabled = bankConnectionField.isConnectButtonEnabled
+        connectButton.isUserInteractionEnabled = bankConnectionField.isConnectButtonEnabled
     }
     
-    @IBAction func didTapButton(_ sender: Any) {
-        guard
-            let bankWarningField = bankWarningField,
-            bankWarningField.isButtonEnabled
-        else {
-            return
-        }        
-        bankConnectionDelegate?.didTapSendInteractiveFieldsButton(field: bankWarningField)
+    @IBAction func didTapConnectButton(_ sender: Any) {
+//        guard
+//            let bankWarningField = bankConnectionField,
+//            bankWarningField.isButtonEnabled
+//        else {
+//            return
+//        }
+//        bankConnectionDelegate?.didTapSendInteractiveFieldsButton(field: bankWarningField)
+    }
+    
+    @IBAction func didTapDisconnectButton(_ sender: Any) {
+//        guard
+//            let bankWarningField = bankConnectionField,
+//            bankWarningField.isButtonEnabled
+//        else {
+//            return
+//        }
+//        bankConnectionDelegate?.didTapSendInteractiveFieldsButton(field: bankWarningField)
+    }
+    
+    @IBAction func didTapReconnectButton(_ sender: Any) {
+//        guard
+//            let bankWarningField = bankConnectionField,
+//            bankWarningField.isButtonEnabled
+//        else {
+//            return
+//        }
+//        bankConnectionDelegate?.didTapSendInteractiveFieldsButton(field: bankWarningField)
+    }
+    
+    @IBAction func didTapSendInteractiveFieldsButton(_ sender: Any) {
+//        guard
+//            let bankWarningField = bankConnectionField,
+//            bankWarningField.isButtonEnabled
+//        else {
+//            return
+//        }
+//        bankConnectionDelegate?.didTapSendInteractiveFieldsButton(field: bankWarningField)
     }
     
     func didChangeFieldValue(field: InteractiveFieldView) {
-        guard let bankWarningField = bankWarningField else { return }
+        guard let bankConnectionField = bankConnectionField else { return }
+        bankConnectionField.
         bankWarningField.interactiveCredentials = interactiveFieldViews.compactMap { $0.interactiveCredentials }
         connectButton.isEnabled = bankWarningField.isButtonEnabled
         connectButton.isUserInteractionEnabled = bankWarningField.isButtonEnabled
