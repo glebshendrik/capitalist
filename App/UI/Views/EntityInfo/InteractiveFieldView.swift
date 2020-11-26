@@ -14,8 +14,8 @@ protocol InteractiveFieldViewDelegate : class {
 }
 
 class InteractiveFieldView : CustomView {
-    lazy var titleLabel: UILabel = { return UILabel() }()
     lazy var fieldContainer: UIView = { return UIView() }()
+    lazy var titleLabel: UILabel = { return UILabel() }()
     lazy var fieldTextField: UITextField = { return UITextField() }()
     lazy var selectPicker: UIPickerView = { return UIPickerView() }()
     
@@ -27,13 +27,13 @@ class InteractiveFieldView : CustomView {
         }
     }
     
-    var fieldCornerRadius: CGFloat = 6.0 {
+    var fieldCornerRadius: CGFloat = 8.0 {
         didSet {
             fieldContainer.cornerRadius = fieldCornerRadius
         }
     }
     
-    var labelColor: UIColor = UIColor.by(.white100) {
+    var labelColor: UIColor = UIColor.by(.white64) {
         didSet {
             titleLabel.textColor = labelColor
         }
@@ -45,20 +45,20 @@ class InteractiveFieldView : CustomView {
         }
     }
     
-    var fieldBackgroundColor: UIColor = UIColor.by(.white12) {
+    var fieldBackgroundColor: UIColor = UIColor.by(.black1) {
         didSet {
             fieldContainer.backgroundColor = fieldBackgroundColor
             fieldTextField.backgroundColor = fieldBackgroundColor
         }
     }
     
-    var fieldTextColor: UIColor = UIColor.by(.white100) {
+    var fieldTextColor: UIColor = UIColor.by(.white64) {
         didSet {
             fieldTextField.textColor = fieldTextColor
         }
     }
     
-    var fieldFont: UIFont? = UIFont(name: "Roboto-Light", size: 16) {
+    var fieldFont: UIFont? = UIFont(name: "Roboto-Regular", size: 18) {
         didSet {
             fieldTextField.font = fieldFont
         }
@@ -76,14 +76,13 @@ class InteractiveFieldView : CustomView {
     }
     
     override func setupConstraints() {
-        setupTitleConstraints()
         setupFieldContainerConstraints()
+        setupTitleConstraints()
         setupFieldConstraints()
     }
     
     private func setupTitle() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(titleLabel)
         updateTitleUI()
     }
     
@@ -91,6 +90,7 @@ class InteractiveFieldView : CustomView {
         fieldContainer.translatesAutoresizingMaskIntoConstraints = false
         fieldTextField.translatesAutoresizingMaskIntoConstraints = false
         addSubview(fieldContainer)
+        fieldContainer.addSubview(titleLabel)
         fieldContainer.addSubview(fieldTextField)
         fieldTextField.addTarget(self, action: #selector(didChangeFieldValue), for: .editingChanged)
         updateFieldUI()
@@ -175,23 +175,25 @@ class InteractiveFieldView : CustomView {
     
     func setupTitleConstraints() {
         titleLabel.snp.makeConstraints { make in
-            make.left.top.right.equalToSuperview()
-            make.bottom.equalTo(fieldContainer.snp_top).offset(-4)
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
+            make.top.equalToSuperview().offset(12)
+            make.bottom.equalTo(fieldTextField.snp_top).offset(0)
         }
     }
     
     func setupFieldContainerConstraints() {
         fieldContainer.snp.makeConstraints { make in
-            make.left.bottom.right.equalToSuperview()
+            make.left.bottom.right.top.equalToSuperview()
         }
     }
     
     func setupFieldConstraints() {
         fieldTextField.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(8)
-            make.right.equalToSuperview().offset(-8)
-            make.top.equalToSuperview().offset(4)
-            make.bottom.equalToSuperview().offset(-4)
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
+//            make.top.equalToSuperview().offset(4)
+            make.bottom.equalToSuperview().offset(-8)
             make.height.equalTo(34)
         }
     }
