@@ -71,7 +71,7 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
     }
     
     func didTapBankButton() {
-        toggleConnectionFlow(providerCodes: viewModel.providerCodes)
+        connectTo(providerCodes: viewModel.providerCodes)
     }
 }
 
@@ -83,7 +83,7 @@ extension ExpenseSourceEditViewController : TransactionableExamplesViewControlle
     
     func suggestBankConnection() {
         guard
-            viewModel.connectable
+            viewModel.isNew && viewModel.connectable
         else {
             updateUI()
             return
@@ -95,7 +95,7 @@ extension ExpenseSourceEditViewController : TransactionableExamplesViewControlle
                                                       style: .default,
                                                       handler: { _ in
                                                         self.updateUI()
-                                                        self.toggleConnectionFlow(providerCodes: self.viewModel.providerCodes)
+                                                        self.connectTo(providerCodes: self.viewModel.providerCodes)
                                                       }),
                                         UIAlertAction(title: NSLocalizedString("Ввести данные вручную", comment: ""),
                                                       style: .default,

@@ -34,17 +34,17 @@ class BankConnectableViewModel {
 //    var shouldUseExperimentalFeature: Bool = false
     var shouldDestroyConnection: Bool = false
     
-    var interactiveCredentials: [InteractiveCredentialsField] = []
-    var hasInteractiveCredentials: Bool {
-        return !interactiveCredentials.isEmpty
+    var interactiveCredentialsFields: [InteractiveCredentialsField] = []
+    var hasInteractiveCredentialsFields: Bool {
+        return !interactiveCredentialsFields.isEmpty
     }
     var hasInteractiveCredentialsValues: Bool {
         guard
-            hasInteractiveCredentials
+            hasInteractiveCredentialsFields
         else {
             return false
         }
-        return interactiveCredentials.all { credentials in
+        return interactiveCredentialsFields.all { credentials in
             guard
                 let nature = credentials.nature,
                 let value = credentials.value
@@ -54,8 +54,6 @@ class BankConnectableViewModel {
             return nature.isPresentable && !value.isEmpty && !value.isWhitespace
         }
     }
-    
-    var hasActionIntent: Bool = false
     
     var isGoingToConnect: Bool {
         return !connectionConnected && connection != nil
@@ -111,6 +109,18 @@ class BankConnectableViewModel {
         return "\(nextSyncTitle)\n\(nextRefreshPossibleAt.dateTimeString(ofStyle: .short))"
     }
     
+    var providerCodes: [String]? {
+        return expenseSource?.providerCodes
+    }
+    
+    var prototypeKey: String? {
+        return expenseSource?.prototypeKey
+    }
+    
+    var connectable: Bool {
+        return !(prototypeKey != nil && providerCodes == nil)
+    }
+    
     var fetchingStarted: Bool = false
     var intentToSave: Bool = false
     
@@ -124,8 +134,6 @@ class BankConnectableViewModel {
     
     func set(expenseSource: ExpenseSourceViewModel?) {
         self.expenseSourceViewModel = expenseSource
-        // ???
-//        self.accountViewModel = nil
         if let accountConnection = expenseSourceViewModel?.accountConnection {
             accountConnectionAttributes =
                 AccountConnectionNestedAttributes(id: accountConnection.id,
@@ -158,7 +166,7 @@ class BankConnectableViewModel {
             }.then { provider -> Promise<Connection> in
                 let providerViewModel = ProviderViewModel(provider: provider)
                 self.providerViewModel = providerViewModel
-                self.interactiveCredentials = providerViewModel.interactiveCredentials
+                self.interactiveCredentialsFields = providerViewModel.interactiveCredentials
                     .filter { credentials in
                         return
                             connection.requiredInteractiveFieldsNames.contains(credentials.name) &&
@@ -171,23 +179,8 @@ class BankConnectableViewModel {
     }
     
     func loadConnection() -> Promise<Connection> {
-        if let connection = connection,
-           let connectionId = connection.id {
-            guard
-                hasActionIntent,
-                hasInteractiveCredentialsValues
-            else {
-                return connectionWithProvider(connection)
-            }
-            return
-                firstly {
-                    bankConnectionsCoordinator.updatedConnection(id: connectionId,
-                                                                 saltedgeId: nil,
-                                                                 session: nil,
-                                                                 interactiveCredentials: interactiveCredentials)
-                }.then { connection in
-                    self.connectionWithProvider(connection)
-                }
+        if let connection = connection {
+            return connectionWithProvider(connection)
         }
         
         guard
@@ -202,6 +195,26 @@ class BankConnectableViewModel {
                 self.connection = connection
             }
     }
+    
+    func sendInteractiveCredentials() -> Promise<Connection> {
+        guard
+            let connection = connection,
+            let connectionId = connection.id,
+            hasInteractiveCredentialsValues
+        else {
+            return Promise(error: BankConnectionError.canNotUpdateInteractiveCredentials)
+        }
+        return
+            firstly {
+                bankConnectionsCoordinator.updatedConnection(id: connectionId,
+                                                             saltedgeId: nil,
+                                                             session: nil,
+                                                             interactiveCredentials: interactiveCredentialsFields)
+            }.then { connection in
+                self.connectionWithProvider(connection)
+            }
+    }
+    
     
     func creatingConnectionSession() -> Promise<ConnectionSession> {
         if let connection = connection,
@@ -287,5 +300,11 @@ class BankConnectableViewModel {
         accountViewModel = nil
         accountConnectionAttributes?.id = expenseSourceViewModel?.accountConnection?.id
         accountConnectionAttributes?.shouldDestroy = true
+    }
+    
+    func update(_ field: InteractiveCredentialsField) {
+        interactiveCredentialsFields = interactiveCredentialsFields.map {
+            $0.name == field.name ? field : $0
+        }        
     }
 }

@@ -15,6 +15,7 @@ import SwiftyBeaver
 enum BankConnectionError : Error {
     case connectionNotFound
     case canNotCreateConnection
+    case canNotUpdateInteractiveCredentials
     case allBankAccountsAlreadyUsed
     case noProviderToLoadConnection
 }

@@ -16,8 +16,7 @@ enum ExpenseSourceInfoField : String {
     case balance
     case creditLimit
     case credit
-    case bank
-    case bankWarning
+    case bankConnection
     case statistics
     case transactionIncome
     case transactionExpense
@@ -53,13 +52,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     }
     
     var canEditIcon: Bool {
-        return !bankConnectableViewModel.connectionConnected
-    }
-    
-    var bankButtonTitle: String {
-        return bankConnectableViewModel.connectionConnected
-            ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
-            : NSLocalizedString("Подключить банк", comment: "Подключить банк")
+        return !bankConnectableViewModel.connectionConnected && !bankConnectableViewModel.connectable
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
@@ -124,7 +117,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                     placeholder: TransactionableType.expenseSource.defaultIconName,
                                     canEditIcon: canEditIcon))
         
-        fields.append(BankConnectionInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
+        fields.append(BankConnectionInfoField(fieldId: ExpenseSourceInfoField.bankConnection.rawValue,
                                               bankConnectableViewModel: bankConnectableViewModel))
         
         fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,

@@ -19,7 +19,7 @@ protocol BankConnectableProtocol : UIFactoryDependantProtocol,
     
     var bankConnectableViewModel: BankConnectableViewModel! { get }
     
-    func toggleConnectionFlow(providerCodes: [String]?)
+    func connectTo(providerCodes: [String]?)
     func setupConnection()
     func showAccounts()
     
@@ -28,11 +28,10 @@ protocol BankConnectableProtocol : UIFactoryDependantProtocol,
 }
 
 extension BankConnectableProtocol {
-    func toggleConnectionFlow(providerCodes: [String]?) {
+    func connectTo(providerCodes: [String]?) {
         guard
             !bankConnectableViewModel.connectionConnected
         else {
-            disconnectAccount()
             return
         }
         
@@ -106,9 +105,7 @@ extension BankConnectableProtocol {
             self.messagePresenterManager.dismissHUD()
         }.get { _ in
             self.updateConnection()
-            self.bankConnectableViewModel.hasActionIntent = false
         }.catch { error in
-            self.bankConnectableViewModel.hasActionIntent = false
             if case BankConnectionError.connectionNotFound = error {
                 self.showConnectionSession(type: .creating)
             } else {
@@ -141,12 +138,12 @@ extension BankConnectableProtocol {
                         refreshData()
                         return
                     }
-                    guard
-                        !bankConnectableViewModel.hasActionIntent
-                    else {
-                        refreshData()
-                        return
-                    }
+//                    guard
+//                        !bankConnectableViewModel.hasActionIntent
+//                    else {
+//                        refreshData()
+//                        return
+//                    }
                     if let session = connection.session,
                        session.expiresAt.isInFuture {                        
                         showConnectionViewController(session: session)
@@ -193,6 +190,26 @@ extension BankConnectableProtocol {
     private func programmaticallySave() {
         bankConnectableViewModel.intentToSave = true
         save()
+    }
+    
+    func sendInteractiveCredentials() {
+        messagePresenterManager.showHUD(with: NSLocalizedString("Загрузка подключения к банку...",
+                                                                comment: "Загрузка подключения к банку..."))
+        firstly {
+            bankConnectableViewModel.sendInteractiveCredentials()
+        }.ensure {
+            self.messagePresenterManager.dismissHUD()
+        }.get { _ in
+            self.updateConnection()
+        }.catch { error in
+            if case BankConnectionError.connectionNotFound = error {
+                self.showConnectionSession(type: .creating)
+            } else {
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось загрузить подключение к банку",
+                                                                                   comment: "Не удалось загрузить подключение к банку"),
+                                                  theme: .error)
+            }
+        }
     }
 }
 

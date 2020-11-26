@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol InteractiveFieldViewDelegate : class {
-    func didChangeFieldValue(field: InteractiveFieldView)
+    func didChangeFieldValue(fieldView: InteractiveFieldView)
 }
 
 class InteractiveFieldView : CustomView {
@@ -140,7 +140,7 @@ class InteractiveFieldView : CustomView {
     
     @objc private func didChangeFieldValue(_ sender: Any) {        
         interactiveCredentialsField?.value = value
-        delegate?.didChangeFieldValue(field: self)
+        delegate?.didChangeFieldValue(fieldView: self)
     }
     
     private func updateFieldTextUI() {

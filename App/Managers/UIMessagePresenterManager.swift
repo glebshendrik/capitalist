@@ -15,6 +15,8 @@ import SwifterSwift
 class UIMessagePresenterManager : UIMessagePresenterManagerProtocol {
     
     func showHUD() {
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.setDefaultMaskType(.black)
         SVProgressHUD.show()
     }
     

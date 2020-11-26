@@ -354,14 +354,14 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BankConnectionInfoTableViewCell" id="iPv-Mv-zJc" customClass="BankConnectionInfoTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="238"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="254"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iPv-Mv-zJc" id="KTw-Ve-SWo">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="238"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="254"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Jeg-Cz-eYQ">
-                                                    <rect key="frame" x="24" y="0.0" width="327" height="238"/>
+                                                    <rect key="frame" x="24" y="8" width="327" height="238"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I0r-Qo-a6Z">
                                                             <rect key="frame" x="0.0" y="0.0" width="327" height="160"/>
@@ -425,7 +425,6 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                             <connections>
                                                                                 <action selector="didTapReconnectButton:" destination="iPv-Mv-zJc" eventType="touchUpInside" id="VoR-NW-1XC"/>
-                                                                                <action selector="didTapSendInteractiveFieldsButton:" destination="iPv-Mv-zJc" eventType="touchUpInside" id="y5t-Pg-smh"/>
                                                                             </connections>
                                                                         </button>
                                                                     </subviews>
@@ -491,8 +490,8 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Jeg-Cz-eYQ" secondAttribute="trailing" constant="24" id="41o-lj-YRp"/>
                                                 <constraint firstItem="Jeg-Cz-eYQ" firstAttribute="leading" secondItem="KTw-Ve-SWo" secondAttribute="leading" constant="24" id="UWc-Oh-HNm"/>
-                                                <constraint firstItem="Jeg-Cz-eYQ" firstAttribute="top" secondItem="KTw-Ve-SWo" secondAttribute="top" id="YTb-kf-UVP"/>
-                                                <constraint firstAttribute="bottom" secondItem="Jeg-Cz-eYQ" secondAttribute="bottom" id="rfN-sT-7aN"/>
+                                                <constraint firstItem="Jeg-Cz-eYQ" firstAttribute="top" secondItem="KTw-Ve-SWo" secondAttribute="top" constant="8" id="YTb-kf-UVP"/>
+                                                <constraint firstAttribute="bottom" secondItem="Jeg-Cz-eYQ" secondAttribute="bottom" constant="8" id="rfN-sT-7aN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -510,7 +509,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IconInfoTableViewCell" id="Q9x-hN-sNf" customClass="IconInfoTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="266" width="375" height="96"/>
+                                        <rect key="frame" x="0.0" y="282" width="375" height="96"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q9x-hN-sNf" id="Lqj-Cc-Y8h">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
@@ -590,7 +589,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DescriptionInfoTableViewCell" id="gPP-3r-qZD" customClass="DescriptionInfoTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="362" width="375" height="46"/>
+                                        <rect key="frame" x="0.0" y="378" width="375" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gPP-3r-qZD" id="A1Q-kw-qrZ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
@@ -617,7 +616,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CombinedInfoTableViewCell" id="CYk-tU-4OH" customClass="CombinedInfoTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="408" width="375" height="198"/>
+                                        <rect key="frame" x="0.0" y="424" width="375" height="198"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CYk-tU-4OH" id="1c6-QP-dHT">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
@@ -884,7 +883,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BasicInfoTableViewCell" id="aXZ-1q-adp" customClass="BasicInfoTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="606" width="375" height="153"/>
+                                        <rect key="frame" x="0.0" y="622" width="375" height="153"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aXZ-1q-adp" id="RGf-rA-cHF">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
@@ -893,13 +892,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PA5-rx-gPf">
                                                     <rect key="frame" x="24" y="8" width="327" height="137"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="top" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label $999 999k Label Label $999 999k" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFk-aK-a1i">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="Label Label Label Label Label Label Label Label $999 999k Label Label $999 999k" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFk-aK-a1i">
                                                             <rect key="frame" x="16" y="16" width="169.5" height="105"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                             <color key="textColor" name="white 0.64"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="$999 999.99k" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpU-hs-j2T">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" text="$999 999.99k" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpU-hs-j2T">
                                                             <rect key="frame" x="201.5" y="16" width="109.5" height="21"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                             <color key="textColor" name="white 1.0"/>
@@ -938,7 +937,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReminderInfoTableViewCell" id="V3x-hH-SrZ" customClass="ReminderInfoTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="759" width="375" height="135.5"/>
+                                        <rect key="frame" x="0.0" y="775" width="375" height="135.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V3x-hH-SrZ" id="SRq-6n-jEb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="135.5"/>
@@ -1012,7 +1011,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SwitchInfoTableViewCell" id="SBL-XI-Ml6" customClass="SwitchInfoTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="894.5" width="375" height="59"/>
+                                        <rect key="frame" x="0.0" y="910.5" width="375" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SBL-XI-Ml6" id="6bl-Cj-pYn">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
@@ -1066,7 +1065,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ButtonInfoTableViewCell" id="fCK-07-K85" customClass="ButtonInfoTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="953.5" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="969.5" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fCK-07-K85" id="FUt-aR-mRf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1115,7 +1114,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionsHeaderTableViewCell" id="8EI-VI-NM3" customClass="TransactionsHeaderTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1017.5" width="375" height="64.5"/>
+                                        <rect key="frame" x="0.0" y="1033.5" width="375" height="64.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8EI-VI-NM3" id="H3j-ki-f4c">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
@@ -1150,7 +1149,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TransactionTableViewCell" id="ctE-lo-fnT" customClass="TransactionTableViewCell" customModule="Capitalist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1082" width="375" height="76.5"/>
+                                        <rect key="frame" x="0.0" y="1098" width="375" height="76.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ctE-lo-fnT" id="grt-2O-rgV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
@@ -2336,9 +2335,6 @@
         </namedColor>
         <namedColor name="white 0.4">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="white 0.64">
-            <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.63999998569488525" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white 0.64">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.63999998569488525" colorSpace="custom" customColorSpace="sRGB"/>

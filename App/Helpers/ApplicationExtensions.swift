@@ -657,6 +657,10 @@ extension Locale {
 extension UIViewController {
     func modal(_ viewController: UIViewController?, animated: Bool = true, completion: (() -> Void)? = nil) {
         guard let viewController = viewController else { return }
+        UIApplication
+            .shared
+            .sendAction(#selector(UIApplication.resignFirstResponder),
+                        to: nil, from: nil, for: nil)
         present(viewController, animated: animated, completion: completion)
     }
     

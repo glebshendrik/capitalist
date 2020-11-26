@@ -113,7 +113,7 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
     }
         
     func refreshData() {
-//        closeButtonHandler()
+        loadData()
     }
 }
 
@@ -124,5 +124,11 @@ extension ExpenseSourceEditViewController {
     
     func set(expenseSource: ExpenseSource) {
         viewModel.set(expenseSource: expenseSource)
+    }
+}
+
+extension ExpenseSourceEditViewController : Updatable {
+    func update() {
+        refreshData()
     }
 }

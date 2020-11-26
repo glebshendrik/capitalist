@@ -24,12 +24,28 @@ class BankConnectionInfoField : EntityInfoField {
         self.fieldId = fieldId
         self.bankConnectableViewModel = bankConnectableViewModel
     }
+    
+    func update(_ field: InteractiveCredentialsField) {
+        bankConnectableViewModel.update(field)
+    }
 }
 
 // Bank Connectable Properties
 extension BankConnectionInfoField {
+    var isReconnectNeeded: Bool {
+        return bankConnectableViewModel.reconnectNeeded
+    }
+    
+    var isConnectionConnected: Bool {
+        return bankConnectableViewModel.connectionConnected
+    }
+    
     var isSyncing: Bool {
         return bankConnectableViewModel.isSyncingWithBank
+    }
+    
+    var isInteractiveStage: Bool {
+        return stage.isInteractive
     }
     
     var stage: ConnectionStage {
@@ -37,15 +53,15 @@ extension BankConnectionInfoField {
     }
     
     var interactiveCredentials: [InteractiveCredentialsField] {
-        return bankConnectableViewModel.interactiveCredentials
+        return bankConnectableViewModel.interactiveCredentialsFields
     }
     
     var hasInteractiveCredentials: Bool {
-        return bankConnectableViewModel.hasInteractiveCredentials
+        return bankConnectableViewModel.hasInteractiveCredentialsFields && isInteractiveStage
     }
     
     var hasInteractiveCredentialsValues: Bool {
-        return bankConnectableViewModel.hasInteractiveCredentialsValues
+        return bankConnectableViewModel.hasInteractiveCredentialsValues && isInteractiveStage
     }
 }
 
@@ -65,30 +81,35 @@ extension BankConnectionInfoField {
     }
     
     var reconnectButtonText: String? {
-        let syncingButtonText = stage.isInteractive && hasInteractiveCredentials
-            ? NSLocalizedString("Отправить", comment: "")
-            : NSLocalizedString("Синхронизация...", comment: "")
         return isSyncing
-            ? syncingButtonText
+            ? NSLocalizedString("Отправить", comment: "")
             : NSLocalizedString("Подключиться", comment: "")
     }
     
     var connectButtonText: String? {
-        let syncingButtonText = stage.isInteractive && hasInteractiveCredentials
-            ? NSLocalizedString("Отправить", comment: "")
-            : NSLocalizedString("Синхронизация...", comment: "")
-        return isSyncing
-            ? syncingButtonText
-            : NSLocalizedString("Подключиться", comment: "")
+        return bankConnectableViewModel.connectionConnected
+            ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
+            : NSLocalizedString("Подключить банк", comment: "Подключить банк")
     }
     
     var description: String? {
         return bankConnectableViewModel.nextUpdatePossibleAt
     }
+    
+    var connectButtonBackgroundColorAsset: ColorAsset? {
+        return
+            isConnectionConnected && (isReconnectNeeded || isSyncing)
+                ? nil
+                : .blue1
+    }
 }
 
 // Visibility
 extension BankConnectionInfoField {
+    var isReconnectViewHidden: Bool {
+        return !isReconnectNeeded && !isSyncing
+    }
+    
     var isWarningIconHidden: Bool {
         return isSyncing
     }
@@ -98,15 +119,15 @@ extension BankConnectionInfoField {
     }
         
     var areCredentialsFieldsHidden: Bool {
-        return !(isSyncing && stage.isInteractive && hasInteractiveCredentials)
+        return !hasInteractiveCredentials
     }
     
     var isDividerHidden: Bool {
-        return !areCredentialsFieldsHidden || isReconnectButtonHidden
+        return hasInteractiveCredentials || isSyncing
     }
     
     var isReconnectButtonHidden: Bool {
-        return false
+        return isSyncing && !hasInteractiveCredentials
     }
     
     var isDescriptionHidden: Bool {
@@ -114,21 +135,17 @@ extension BankConnectionInfoField {
     }
     
     var isConnectButtonHidden: Bool {
-        return false
+        return !bankConnectableViewModel.connectable
     }
 }
 
 // Permissions
 extension BankConnectionInfoField {    
     var isReconnectButtonEnabled: Bool {
-        return
-            !isSyncing ||
-            (hasInteractiveCredentialsValues && stage.isInteractive)
+        return !isSyncing || hasInteractiveCredentialsValues
     }
     
     var isConnectButtonEnabled: Bool {
-        return
-            !isSyncing ||
-            (hasInteractiveCredentialsValues && stage.isInteractive)
+        return true
     }
 }

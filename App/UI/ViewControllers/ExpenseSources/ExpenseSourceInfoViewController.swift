@@ -46,8 +46,6 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
     override func didTapInfoButton(field: ButtonInfoField?) {
         guard let field = field else { return }
         switch field.identifier {
-        case ExpenseSourceInfoField.bank.identifier:
-            didTapBankButton()
         case ExpenseSourceInfoField.statistics.identifier:
             modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
         case ExpenseSourceInfoField.transactionIncome.identifier:        
@@ -59,24 +57,22 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
         }
     }
     
-    override func didTapSendInteractiveFieldsButton(field: BankConnectionInfoField?) {
-        guard
-            bankConnectableViewModel.canConnectBank
-        else {
-            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
-            return
-        }
-        guard
-            let field = field,
-            bankConnectableViewModel.reconnectNeeded
-        else {
-            return
-        }
-        bankConnectableViewModel.interactiveCredentials = field.interactiveCredentials
-        bankConnectableViewModel.hasActionIntent = field.hasInteractiveCredentialsValues
+    override func didTapConnectBankButton(field: BankConnectionInfoField) {
+        connectTo(providerCodes: viewModel.expenseSourceViewModel?.providerCodes)
+    }
+    
+    override func didTapDisconnectBankButton(field: BankConnectionInfoField) {
+        disconnectAccount()
+    }
+    
+    override func didTapReconnectBankButton(field: BankConnectionInfoField) {
         setupConnection()
     }
-        
+    
+    override func didTapSendInteractiveFieldsButton(field: BankConnectionInfoField) {
+        sendInteractiveCredentials()
+    }
+    
     override func showEditScreen() {
         modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: viewModel.expenseSource, shouldSkipExamplesPrompt: false))
     }
@@ -85,11 +81,7 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConn
         super.didUpdateData()
         showAccounts()
     }
-    
-    func didTapBankButton() {
-        toggleConnectionFlow(providerCodes: viewModel.expenseSourceViewModel?.providerCodes)        
-    }
-    
+        
     override var isSelectingTransactionables: Bool {
         return false
     }

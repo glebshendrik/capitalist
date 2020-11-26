@@ -144,7 +144,7 @@ extension TransactionablesCreationViewController : UICollectionViewDelegate, UIC
             showNewExpenseSource(with: example)
             return
         }
-        edit(expenseSource)
+        show(expenseSource)
     }
 }
 
@@ -160,9 +160,13 @@ extension TransactionablesCreationViewController {
                                                       example: example))
     }
     
-    func edit(_ expenseSource: ExpenseSourceViewModel) {
-        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource.expenseSource, shouldSkipExamplesPrompt: false))
+    func show(_ expenseSource: ExpenseSourceViewModel) {
+        modal(factory.expenseSourceInfoViewController(expenseSource: expenseSource))
     }
+    
+//    func edit(_ expenseSource: ExpenseSourceViewModel) {
+//        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource.expenseSource, shouldSkipExamplesPrompt: false))
+//    }
 }
 
 extension TransactionablesCreationViewController : ExpenseSourceEditViewControllerDelegate {

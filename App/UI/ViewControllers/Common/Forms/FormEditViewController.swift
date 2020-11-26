@@ -58,7 +58,7 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
         operationStarted()
         
         firstly {
-                loadDataPromise()
+            loadDataPromise()
         }.done {
             self.didLoadData()
         }

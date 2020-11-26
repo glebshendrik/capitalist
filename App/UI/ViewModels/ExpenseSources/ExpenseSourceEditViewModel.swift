@@ -79,7 +79,7 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     // Permissions
     
     var canChangeIcon: Bool {
-        return !connectionConnected
+        return !connectionConnected && !connectable
     }
     
     var canChangeCurrency: Bool {
@@ -105,13 +105,17 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     }
         
     var bankButtonHidden: Bool {
-        return connectionConnected || !connectable
+        return connectionConnected || !(isNew && connectable)
     }
                     
     var removeButtonHidden: Bool {
         return isNew
     }
         
+    var bankButtonTitle: String {
+        return NSLocalizedString("Подключить банк", comment: "Подключить банк")
+    }
+    
     var currentUser: User? = nil
     
     var numberOfUnusedExamples: Int = 0
@@ -127,15 +131,15 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     var shouldSkipExamplesPrompt: Bool = false
     
     var providerCodes: [String]? {
-        return expenseSource?.providerCodes ?? example?.providerCodes
+        return bankConnectableViewModel.providerCodes ?? example?.providerCodes
     }
     
     var prototypeKey: String? {
-        return expenseSource?.prototypeKey ?? example?.prototypeKey
+        return bankConnectableViewModel.prototypeKey ?? example?.prototypeKey
     }
     
     var connectable: Bool {
-        return isNew && !(prototypeKey != nil && providerCodes == nil)
+        return !(prototypeKey != nil && providerCodes == nil)
     }
     
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
@@ -151,24 +155,26 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
                                                                  accountCoordinator: accountCoordinator)
     }
     
-    func loadProvider() -> Promise<ProviderViewModel?> {
-        guard
-            let providerCodes = providerCodes,
-            providerCodes.count == 1,
-            let code = providerCodes.first
-        else {
-            return Promise.value(nil)
-        }
-        return
-            firstly {
-                bankConnectionsCoordinator.loadProvider(code: code)
-            }.then { provider -> Promise<ProviderViewModel?> in
-                return Promise.value(ProviderViewModel(provider: provider))
-            }
-    }
+//    func loadProvider() -> Promise<ProviderViewModel?> {
+//        guard
+//            let providerCodes = providerCodes,
+//            providerCodes.count == 1,
+//            let code = providerCodes.first
+//        else {
+//            return Promise.value(nil)
+//        }
+//        return
+//            firstly {
+//                bankConnectionsCoordinator.loadProvider(code: code)
+//            }.then { provider -> Promise<ProviderViewModel?> in
+//                return Promise.value(ProviderViewModel(provider: provider))
+//            }
+//    }
     
     func loadData() -> Promise<Void> {
-        return when(fulfilled: loadDefaultCurrency(), loadExamples())
+        return isNew
+            ? when(fulfilled: loadDefaultCurrency(), loadExamples())
+            : loadExpenseSource()
     }
     
     func loadDefaultCurrency() -> Promise<Void> {
@@ -178,6 +184,20 @@ class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
                     self.selectedCurrency = user.currency
                     self.currentUser = user
                 }
+    }
+    
+    func loadExpenseSource() -> Promise<Void> {
+        guard
+            let expenseSourceId = expenseSource?.id
+        else {
+            return Promise.value(())
+        }
+        return
+            firstly {
+                expenseSourcesCoordinator.show(by: expenseSourceId)
+            }.get {
+                self.set(expenseSource: $0)
+            }.asVoid()
     }
     
     func set(expenseSource: ExpenseSource) {

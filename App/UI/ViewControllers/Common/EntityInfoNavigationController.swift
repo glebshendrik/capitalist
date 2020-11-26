@@ -72,15 +72,19 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
         
     }
     
-    func didTapConnectBankButton(field: BankConnectionInfoField?) {
+    func didTapConnectBankButton(field: BankConnectionInfoField) {
         
     }
     
-    func didTapDisconnectBankButton(field: BankConnectionInfoField?) {
+    func didTapDisconnectBankButton(field: BankConnectionInfoField) {
         
     }
     
-    func didTapSendInteractiveFieldsButton(field: BankConnectionInfoField?) {
+    func didTapReconnectBankButton(field: BankConnectionInfoField) {
+        
+    }
+    
+    func didTapSendInteractiveFieldsButton(field: BankConnectionInfoField) {
         
     }
     

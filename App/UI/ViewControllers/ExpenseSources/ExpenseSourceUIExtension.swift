@@ -12,12 +12,13 @@ import SDWebImageSVGCoder
 
 extension ExpenseSourceEditViewController {
     func focusFirstEmptyField() {
-        if viewModel.name == nil && isCurrentTopmostPresentedViewController {
-            tableController.nameField.textField.becomeFirstResponder()
-        }
-        else {
-            tableController.amountField.textField.becomeFirstResponder()
-        }
+        guard isCurrentTopmostPresentedViewController else { return }
+//        if viewModel.name == nil {
+//            tableController.nameField.textField.becomeFirstResponder()
+//        }
+//        else {
+//            tableController.amountField.textField.becomeFirstResponder()
+//        }
     }
     
     func updateIconUI() {
@@ -54,10 +55,10 @@ extension ExpenseSourceEditViewController {
     }
     
     func updateBankUI() {
-//        tableController.bankButton.backgroundColor = viewModel.connectionConnected
-//            ? UIColor.by(.gray1)
-//            : UIColor.by(.blue1)        
-//        tableController.bankButton.setTitle(viewModel.bankButtonTitle, for: .normal)
+        tableController.bankButton.backgroundColor = viewModel.connectionConnected
+            ? UIColor.by(.gray1)
+            : UIColor.by(.blue1)
+        tableController.bankButton.setTitle(viewModel.bankButtonTitle, for: .normal)
     }
     
     func updateRemoveButtonUI() {
