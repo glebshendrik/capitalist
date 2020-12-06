@@ -9,8 +9,8 @@
 import UIKit
 import PromiseKit
 
-class RegistrationViewController : FormSubmitViewController {
-    
+class RegistrationViewController : FormSubmitViewController, ApplicationRouterDependantProtocol {
+    var router: ApplicationRouterProtocol!
     var viewModel: RegistrationViewModel!
     var tableController: RegistrationTableController!
     

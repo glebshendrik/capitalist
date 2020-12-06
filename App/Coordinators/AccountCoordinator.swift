@@ -20,6 +20,7 @@ enum AuthProviderError : Error {
     case authenticationIsCancelled
     case canNotGetProviderSessionData
     case canNotGetProviderUserData
+    case subscriptionError
 }
 
 class AccountCoordinator : AccountCoordinatorProtocol {
@@ -35,17 +36,31 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return userSessionManager.currentSession
     }
     
+    var hasActiveSubscription: Bool {
+        #if targetEnvironment(simulator)
+        return true
+        #else
+        return subscription != nil || hasPremiumUnlimitedSubscription
+        #endif
+    }
+    
+    var premiumFeaturesAvailable: Bool {
+        return hasPremiumSubscription || hasPlatinumSubscription
+    }
+    
+    var platinumFeaturesAvailable: Bool {
+        return hasPlatinumSubscription
+    }
+
     var hasPremiumSubscription: Bool {
         #if targetEnvironment(simulator)
         return true
         #else
-        return !([activePremiumMonthly,
-                  activePremiumYearly,
-                  activePremiumSixMonths,
-                  activePremiumUnlimitedCIS,
-                  activePremiumUnlimitedNonCIS]
-                    .compactMap { $0 }
-                    .isEmpty)
+        return
+            hasPremiumUnlimitedSubscription ||
+            isActive(.premium(.month)) ||
+            isActive(.premium(.year)) ||
+            isActive(.premium(.sixMonths))
         #endif
     }
     
@@ -53,10 +68,9 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         #if targetEnvironment(simulator)
         return true
         #else
-        return !([activePremiumUnlimitedCIS,
-                  activePremiumUnlimitedNonCIS]
-                    .compactMap { $0 }
-                    .isEmpty)
+        return
+            isActive(.premiumUnlimited(.cis)) ||
+            isActive(.premiumUnlimited(.nonCis))
         #endif
     }
     
@@ -64,30 +78,15 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         #if targetEnvironment(simulator)
         return true
         #else
-        let hasPlatinum = !([activePlatinumMonthly,
-                             activePlatinumYearly]
-                                .compactMap { $0 }
-                                .isEmpty)
+            
+        let hasPlatinum = isActive(.platinum(.month)) || isActive(.platinum(.year))
         
-        let hasPlatinumPure = !([activePlatinumPureMonthly,
-                                 activePlatinumPureYearly]
-                                    .compactMap { $0 }
-                                    .isEmpty)
-        
-        
-        
+        let hasPlatinumPure = isActive(.platinumPure(.month)) || isActive(.platinumPure(.year))
+                
         return hasPlatinum || (hasPremiumUnlimitedSubscription && hasPlatinumPure)
         #endif
     }
-    
-    var currentUserHasActiveSubscription: Bool {
-        #if targetEnvironment(simulator)
-        return true
-        #else
-        return Apphud.hasActiveSubscription()
-        #endif
-    }
-    
+        
     var subscription: ApphudSubscription? {
         #if targetEnvironment(simulator)
         return nil
@@ -101,9 +100,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         }
         
         if hasPremiumUnlimitedSubscription {
-            return
-                activePremiumUnlimitedCIS ??
-                activePremiumUnlimitedNonCIS
+            return nil
         }
         
         return
@@ -112,25 +109,34 @@ class AccountCoordinator : AccountCoordinatorProtocol {
             activePremiumYearly
         #endif
     }
+        
+    var activeSubscriptionProduct: SKProduct? {
+        #if targetEnvironment(simulator)
+        return nil
+        #else
+        func subscriptionProduct() -> SKProduct? {
+            guard
+                let subscription = subscription
+            else {
+                return nil
+            }
+            return subscriptionProducts.first { $0.productIdentifier == subscription.productId }
+        }
+        
+        if hasPlatinumSubscription {
+            return subscriptionProduct()
+        }
+        
+        if hasPremiumUnlimitedSubscription {
+            return subscriptionProducts.first { SubscriptionProduct.isUnlimited($0.productIdentifier) }
+        }
+        
+        return subscriptionProduct()
+        #endif
+    }
     
     var subscriptionProducts: [SKProduct] {
         return Apphud.products() ?? []
-    }
-    
-    var premiumFeaturesAvailable: Bool {
-        return hasPremiumSubscription || hasPlatinumSubscription
-    }
-    
-    var platinumFeaturesAvailable: Bool {
-        return hasPlatinumSubscription        
-    }
-    
-    var hasActiveSubscription: Bool {
-        #if targetEnvironment(simulator)
-        return true
-        #else
-        return subscription != nil
-        #endif
     }
     
     init(userSessionManager: UserSessionManagerProtocol,
@@ -150,8 +156,24 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         self.saltEdgeManager = saltEdgeManager
     }
     
-    private func getActiveSubscription(_ subscription: SubscriptionProduct) -> ApphudSubscription? {
-        return Apphud.subscriptions()?.first(where: { $0.isActive() && $0.productId == subscription.id })
+    private func isActive(_ product: SubscriptionProduct) -> Bool {
+        guard
+            !Apphud.isNonRenewingPurchaseActive(productIdentifier: product.id)
+        else {
+            return true
+        }
+        
+        let activeSubscriptionProducts = Apphud.subscriptions()?.filtered({ (s) -> Bool in
+            return s.isActive()
+        }, map: { (sub) -> String in
+            sub.productId
+        }) ?? []
+                
+        return activeSubscriptionProducts.contains(product.id)
+    }
+    
+    private func getActiveSubscription(_ product: SubscriptionProduct) -> ApphudSubscription? {
+        return Apphud.subscriptions()?.first(where: { $0.isActive() && $0.productId == product.id })
     }
     
     func joinAsGuest() -> Promise<Session> {
@@ -232,7 +254,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return  firstly {
             usersService.loadUser(with: currentUserId)
         }.then { user -> Promise<User> in
-            if user.hasActiveSubscription != self.currentUserHasActiveSubscription {
+            if user.hasActiveSubscription != self.hasActiveSubscription {
                 return self.updateUserSubscription().map { user }
             }
             return Promise.value(user)
@@ -298,22 +320,40 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
-        let form = UserSubscriptionUpdatingForm(userId: currentUserId, hasActiveSubscription: currentUserHasActiveSubscription)
+        let form = UserSubscriptionUpdatingForm(userId: currentUserId, hasActiveSubscription: hasActiveSubscription)
         return usersService.updateUserSubscription(with: form)
     }
     
-    func purchase(product: SKProduct) -> Promise<ApphudSubscription?> {
+    func purchase(product: SKProduct) -> Promise<ApphudPurchaseResult> {
         return Promise { seal in
             Apphud.purchase(product) { result in
-                seal.resolve(result.subscription, result.error)
+                if let subscription = result.subscription,
+                   subscription.isActive() {
+                    seal.fulfill(result)
+                }
+                else if let nonRenewingPurchase = result.nonRenewingPurchase,
+                        nonRenewingPurchase.isActive() {
+                    seal.fulfill(result)
+                }
+                else {
+                    seal.reject(result.error ?? AuthProviderError.subscriptionError)
+                }
             }
         }
     }
     
-    func restoreSubscriptions() -> Promise<[ApphudSubscription]?> {
+    func restoreSubscriptions() -> Promise<Void> {
         return Promise { seal in
-            Apphud.restorePurchases { subscriptions, nonRenewingPurchases, error in
-                seal.resolve(subscriptions, error)
+            Apphud.restorePurchases { _, _, error in
+                if Apphud.hasActiveSubscription() {
+                    seal.fulfill(())
+                }
+                else if self.isActive(.premiumUnlimited(.cis)) || self.isActive(.premiumUnlimited(.nonCis)) {
+                    seal.fulfill(())
+                }
+                else {
+                    seal.reject(error ?? AuthProviderError.subscriptionError)
+                }
             }
         }
     }
@@ -343,15 +383,7 @@ extension AccountCoordinator {
     var activePremiumYearly: ApphudSubscription? {
         return getActiveSubscription(.premium(.year))
     }
-    
-    var activePremiumUnlimitedCIS: ApphudSubscription? {
-        return getActiveSubscription(.premiumUnlimited(.cis))
-    }
-    
-    var activePremiumUnlimitedNonCIS: ApphudSubscription? {
-        return getActiveSubscription(.premiumUnlimited(.nonCis))
-    }
-    
+        
     var activePlatinumMonthly: ApphudSubscription? {
         return getActiveSubscription(.platinum(.month))
     }

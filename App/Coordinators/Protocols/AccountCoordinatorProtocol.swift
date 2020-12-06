@@ -21,6 +21,7 @@ protocol AccountCoordinatorProtocol {
     var premiumFeaturesAvailable: Bool { get }
     var platinumFeaturesAvailable: Bool { get }
     var hasActiveSubscription: Bool { get }
+    var activeSubscriptionProduct: SKProduct? { get }
     var subscription: ApphudSubscription? { get }
     var subscriptionProducts: [SKProduct] { get }
     
@@ -42,8 +43,8 @@ protocol AccountCoordinatorProtocol {
     // Subscription
     func updateUserSubscription() -> Promise<Void>
     func checkIntroductoryEligibility() -> Promise<[String : Bool]>
-    func purchase(product: SKProduct) -> Promise<ApphudSubscription?>
-    func restoreSubscriptions() -> Promise<[ApphudSubscription]?>
+    func purchase(product: SKProduct) -> Promise<ApphudPurchaseResult>
+    func restoreSubscriptions() -> Promise<Void>
     func silentRestoreSubscriptions() -> Promise<Void>
 }
 

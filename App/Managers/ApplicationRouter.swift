@@ -139,71 +139,82 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         route()
     }
     
+    var needToSetServerPath: Bool {
+        return !(UIApplication.shared.inferredEnvironment == .appStore ||
+                    APIRoute.storedBaseURLString != nil)
+    }
+    
     func route() {
-        guard UIApplication.shared.inferredEnvironment == .appStore || APIRoute.storedBaseURLString != nil else {
+        if needToSetServerPath {
             showServerPathAlert()
-            return
         }
-        guard
-            userSessionManager.isUserAuthenticated
+        else if !userSessionManager.isUserAuthenticated {
+            unauthorizedRoute()
+        }
         else {
-            showJoiningAsGuestScreen()
-            _ = accountCoordinator.joinAsGuest().catch { _ in
-                self.route()
-            }
-            return
+            authorizedRoute()
         }
-        if let session = userSessionManager.currentSession {
-            SwiftyBeaver.info("ROUTE /users/\(session.userId) Token token=\(session.token)")
-        }
-                
-        showLandingScreen()
+    }
+    
+    private func unauthorizedRoute() {
+        showJoiningAsGuestScreen()
         
-        authorizedRoute()
+        firstly {
+            accountCoordinator.joinAsGuest()
+        }.catch { _ in
+            self.showRegistrationViewController()
+        }
     }
     
     private func authorizedRoute() {
+        showLandingScreen()
+        
         firstly {
             accountCoordinator.loadCurrentUser()
         }.done { user in
-            
-            guard
-                UIFlowManager.reached(point: .onboarding) || user.onboarded
-            else {
-                self.showOnboardingViewController()
-                return
-            }
-            
-            guard
-                UIFlowManager.reached(point: .dataSetup) || user.onboarded
-            else {
-                self.showOnboardCurrencyViewController()
-                return
-            }
-            
-            self.notificationsCoordinator.enableNotifications()
-            
-            guard
-                UIFlowManager.reached(point: .walletsSetup)
-            else {
-                self.showDataSetupViewController()
-                return
-            }
-               
-            guard
-                UIFlowManager.reached(point: .subscription) || self.accountCoordinator.hasActiveSubscription
-            else {
-                self.showSubscriptionScreen()
-                return
-            }
-            
-            self.showMainViewController()
+            self.route(user: user)
         }.catch { error in
             if self.errorIsNotFoundOrNotAuthorized(error: error) {
                 self.userSessionManager.forgetSession()
+                self.route()
             }
-            self.route()
+            else {
+                self.showRegistrationViewController()
+            }
         }
+    }
+    
+    private func route(user: User) {
+        switch destination(for: user) {
+            case .OnboardingViewController:
+                showOnboardingViewController()
+            case .OnboardCurrencyViewController:
+                showOnboardCurrencyViewController()
+            case .SubscriptionViewController:
+                showSubscriptionScreen()
+            case .TransactionablesCreationViewController:
+                self.showDataSetupViewController()
+            case .MainViewController:
+                self.showMainViewController()
+            default:
+                return
+        }
+    }
+    
+    private func destination(for user: User) -> Infrastructure.ViewController {
+        if !(UIFlowManager.reached(point: .onboarding) || user.onboarded) {
+            return .OnboardingViewController
+        }
+        if !(UIFlowManager.reached(point: .dataSetup) || user.onboarded) {
+            return .OnboardCurrencyViewController
+        }
+        if !(UIFlowManager.reached(point: .subscription) || self.accountCoordinator.hasActiveSubscription) {
+            return .SubscriptionViewController
+        }
+        if !UIFlowManager.reached(point: .walletsSetup) {
+            return .TransactionablesCreationViewController
+        }
+        return .MainViewController
     }
     
     private func errorIsNotFoundOrNotAuthorized(error: Error) -> Bool {
@@ -390,6 +401,7 @@ extension ApplicationRouter {
     
     func showMainViewController() {
 //        Crashlytics.crashlytics().log("showMainViewController")
+        notificationsCoordinator.enableNotifications()
         show(.MainViewController) { [weak self] in
             guard let self = self else { return }
             self.showPasscodeScreen()            
@@ -409,11 +421,17 @@ extension ApplicationRouter {
         show(.OnboardingViewController)
     }
     
+    private func showRegistrationViewController() {
+        let registrationViewController = viewController(.RegistrationViewController)
+        show(UINavigationController(rootViewController: registrationViewController))
+    }
+    
     private func showOnboardCurrencyViewController() {
         show(.OnboardCurrencyViewController)
     }
     
     private func showDataSetupViewController() {
+        notificationsCoordinator.enableNotifications()
         show(.TransactionablesCreationViewController)
     }
         

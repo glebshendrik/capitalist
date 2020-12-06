@@ -14,13 +14,14 @@ protocol ProfileViewOutputProtocol {
     var user: User? { get }
 }
 
-class ProfileViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol {
-    
+class ProfileViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol, UIFactoryDependantProtocol {
+
     var navigationBarTintColor: UIColor? = UIColor.by(.black2)
 
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: ProfileViewModel!
     var router: ApplicationRouterProtocol!
+    var factory: UIFactoryProtocol!
     
     @IBOutlet weak var firstnameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
@@ -123,7 +124,7 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
     }
     
     @IBAction func didTapGetSubscriptionButton(_ sender: Any) {
-        push(router.viewController(.SubscriptionViewController))
+        push(factory.subscriptionViewController(requiredPlans: [.premium, .platinum]))
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

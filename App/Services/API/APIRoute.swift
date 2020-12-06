@@ -26,7 +26,8 @@ enum APIRoute: URLRequestConvertible {
 //            return "https://api.threebaskets.net"
 //            return "https://skrudzh-staging.herokuapp.com"
 //            return "https://test.threebaskets.net"
-            return storedBaseURLString ?? "https://skrudz.tempio.app"
+//            return storedBaseURLString ?? "https://skrudz.tempio.app"
+            return storedBaseURLString ?? "https://staging.threebaskets.net"
 //            return "https://staging.threebaskets.net"
 //            return "https://api.threebaskets.net"
         case .testFlight:

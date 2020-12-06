@@ -20,6 +20,11 @@ enum SubscriptionProduct : CaseIterable, Hashable {
                 .platinumPure(.year)]
     }
     
+    private static var unlimitedIds: [String] {
+        return [SubscriptionProduct.premiumUnlimited(.cis).id,
+                SubscriptionProduct.premiumUnlimited(.nonCis).id]
+    }
+    
     case premium(RenewalInterval)
     case premiumUnlimited(Region)
     case platinum(RenewalInterval)
@@ -64,6 +69,10 @@ enum SubscriptionProduct : CaseIterable, Hashable {
         case .platinum, .platinumPure:
             return .platinum
         }
+    }
+    
+    static func isUnlimited(_ productId: String) -> Bool {
+        return unlimitedIds.contains(productId)
     }
 }
 

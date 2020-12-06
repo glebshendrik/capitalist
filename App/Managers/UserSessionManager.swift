@@ -7,6 +7,7 @@
 //
 
 import Locksmith
+import SwiftyBeaver
 
 private enum SessionKeys : String {
     ///ProviderName key for saving Provider.name which is a string representation of auth provider
@@ -31,6 +32,7 @@ class UserSessionManager: UserSessionManagerProtocol {
         saveData(session.joyBasketId, withKey: SessionKeys.JoyBasketId.rawValue, inService: SessionKeys.Tokens.rawValue)
         saveData(session.riskBasketId, withKey: SessionKeys.RiskBasketId.rawValue, inService: SessionKeys.Tokens.rawValue)
         saveData(session.safeBasketId, withKey: SessionKeys.SafeBasketId.rawValue, inService: SessionKeys.Tokens.rawValue)
+        SwiftyBeaver.info("ROUTE /users/\(session.userId) Token token=\(session.token)")
     }
     
     func loadStoredSession() -> Session? {
