@@ -28,7 +28,7 @@ struct APIResource {
              .confirmUser:
             return APIResource(singular: "user", plural: "users")
         case .createCustomer:
-            return APIResource(singular: "salt_edge_curtomer", plural: "salt_edge_curtomers")
+            return APIResource(singular: "salt_edge_customer", plural: "salt_edge_customers")
         case .createPasswordResetCode:
             return APIResource(singular: "password_reset_code", plural: "password_reset_codes")
         case .createSession,
