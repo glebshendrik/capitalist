@@ -258,7 +258,7 @@ extension BankConnectionsCoordinator {
             firstly {
                 accountCoordinator.loadCurrentUser()
             }.then { user -> Promise<String> in
-                if let customerSecret = user.saltEdgeCustomerSecret {
+                if let customerSecret = user.customer?.secret {
                     return self.setCustomerSecret(customerSecret: customerSecret)
                 }
                 return self.createCustomerSecret(user: user)
@@ -277,19 +277,7 @@ extension BankConnectionsCoordinator {
             }.then { customer in
                 return self.setCustomerSecret(customerSecret: customer.secret)
             }
-    }
-    
-//    private func updateUser(user: User, saltEdgeCustomerSecret: String) -> Promise<String> {
-//        let form = UserUpdatingForm(userId: user.id,
-//                                    firstname: user.firstname,
-//                                    saltEdgeCustomerSecret: saltEdgeCustomerSecret)
-//        return
-//            firstly {
-//                accountCoordinator.updateUser(with: form)
-//            }.then {
-//                return self.setCustomerSecret(customerSecret: saltEdgeCustomerSecret)
-//            }
-//    }
+    }    
 }
 
 extension BankConnectionsCoordinator {
