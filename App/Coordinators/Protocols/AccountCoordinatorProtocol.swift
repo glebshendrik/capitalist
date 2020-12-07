@@ -46,5 +46,7 @@ protocol AccountCoordinatorProtocol {
     func purchase(product: SKProduct) -> Promise<ApphudPurchaseResult>
     func restoreSubscriptions() -> Promise<Void>
     func silentRestoreSubscriptions() -> Promise<Void>
+    
+    func createSaltEdgeCustomer() -> Promise<SaltEdgeCustomer>
 }
 

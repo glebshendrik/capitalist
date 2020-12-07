@@ -287,6 +287,9 @@
 		FA8AD0E222C5F48B0084AD19 /* ProvidersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */; };
 		FA8AD0E422C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */; };
 		FA8AD0E622C5F5E60084AD19 /* BankConnectionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */; };
+		FA8DC0DC257DEBFA00D4BC2A /* SaltEdgeCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DC0DB257DEBFA00D4BC2A /* SaltEdgeCustomer.swift */; };
+		FA8DC0DF257DEE0F00D4BC2A /* SaltEdgeCustomersServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DC0DE257DEE0F00D4BC2A /* SaltEdgeCustomersServiceProtocol.swift */; };
+		FA8DC0E2257DEE3900D4BC2A /* SaltEdgeCustomersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DC0E1257DEE3900D4BC2A /* SaltEdgeCustomersService.swift */; };
 		FA940DBA2536D39C00C72F8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA940DB92536D39C00C72F8A /* GoogleService-Info.plist */; };
 		FA940E492538594100C72F8A /* TransactionableExamplesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940E482538594100C72F8A /* TransactionableExamplesViewModel.swift */; };
 		FA940E4C25385F9200C72F8A /* TransactionableExamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA940E4B25385F9200C72F8A /* TransactionableExamplesViewController.swift */; };
@@ -809,6 +812,9 @@
 		FA8AD0E122C5F48B0084AD19 /* ProvidersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewModel.swift; sourceTree = "<group>"; };
 		FA8AD0E322C5F5030084AD19 /* BankConnectionsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionsCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FA8AD0E522C5F5E60084AD19 /* BankConnectionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionsCoordinator.swift; sourceTree = "<group>"; };
+		FA8DC0DB257DEBFA00D4BC2A /* SaltEdgeCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltEdgeCustomer.swift; sourceTree = "<group>"; };
+		FA8DC0DE257DEE0F00D4BC2A /* SaltEdgeCustomersServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltEdgeCustomersServiceProtocol.swift; sourceTree = "<group>"; };
+		FA8DC0E1257DEE3900D4BC2A /* SaltEdgeCustomersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltEdgeCustomersService.swift; sourceTree = "<group>"; };
 		FA940DB92536D39C00C72F8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA940E482538594100C72F8A /* TransactionableExamplesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExamplesViewModel.swift; sourceTree = "<group>"; };
 		FA940E4B25385F9200C72F8A /* TransactionableExamplesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionableExamplesViewController.swift; sourceTree = "<group>"; };
@@ -2004,6 +2010,7 @@
 				FAB5BE44235213E2000466AE /* ActiveTypesService.swift */,
 				FAB5BE48235217ED000466AE /* ActivesService.swift */,
 				FAA8619A23D72C90009DF88F /* TransactionableExamplesService.swift */,
+				FA8DC0E1257DEE3900D4BC2A /* SaltEdgeCustomersService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2043,6 +2050,7 @@
 				FA6F2E8622434D59008C160F /* Transaction.swift */,
 				FAD88F5C21AEC28300BE7BC1 /* User.swift */,
 				FAA8619623D72A5A009DF88F /* TransactionableExample.swift */,
+				FA8DC0DB257DEBFA00D4BC2A /* SaltEdgeCustomer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2121,6 +2129,7 @@
 				FAB5BE42235213B5000466AE /* ActiveTypesServiceProtocol.swift */,
 				FAB5BE462352176B000466AE /* ActivesServiceProtocol.swift */,
 				FAA8619823D72C24009DF88F /* TransactionableExamplesServiceProtocol.swift */,
+				FA8DC0DE257DEE0F00D4BC2A /* SaltEdgeCustomersServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2681,6 +2690,7 @@
 				FA7276B322524C990086D4D1 /* ExpenseCategoryEditDelegateExtension.swift in Sources */,
 				FA6F2E942244D033008C160F /* TransactionViewModel.swift in Sources */,
 				FAD88F0D21AEB24F00BE7BC1 /* ApplicationAssembly.swift in Sources */,
+				FA8DC0E2257DEE3900D4BC2A /* SaltEdgeCustomersService.swift in Sources */,
 				FA5751CB237C2C8A00912443 /* ButtonInfoTableViewCell.swift in Sources */,
 				FAB5BE5523533D87000466AE /* TransactionEditDataExtension.swift in Sources */,
 				FA835D4C226078E300A592F2 /* ExpensesGraphExtension.swift in Sources */,
@@ -2759,6 +2769,7 @@
 				FA85238623889857008C09AB /* IncomeSourceInfoViewModel.swift in Sources */,
 				FA6DDE8222D4D0E6008D14FF /* ExpenseSourceUIExtension.swift in Sources */,
 				FABE54E2233BEFF100DF2B70 /* CreditsCoordinator.swift in Sources */,
+				FA8DC0DF257DEE0F00D4BC2A /* SaltEdgeCustomersServiceProtocol.swift in Sources */,
 				FAD88F4621AEBE7400BE7BC1 /* NotificationsCoordinator.swift in Sources */,
 				FA835D682265F23F00A592F2 /* TransactionsSection.swift in Sources */,
 				FA54891C25628227002AC516 /* OnboardCurrencyViewModel.swift in Sources */,
@@ -2835,6 +2846,7 @@
 				FAA5D570238E5B7700CC53AD /* ExpenseCategoryInfoViewController.swift in Sources */,
 				FA9485D3246A6500005EB7B9 /* CardTypesViewController.swift in Sources */,
 				FA6F2E8F224350E7008C160F /* TransactionsCoordinator.swift in Sources */,
+				FA8DC0DC257DEBFA00D4BC2A /* SaltEdgeCustomer.swift in Sources */,
 				FA814F52235D63180039471A /* ActiveEditDelegateExtension.swift in Sources */,
 				FAA6964123990F6000C134D1 /* TransactionableCell.swift in Sources */,
 				FABE54F3233F808000DF2B70 /* CreditEditViewModel.swift in Sources */,

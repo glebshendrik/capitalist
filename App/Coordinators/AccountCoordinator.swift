@@ -31,6 +31,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     private let notificationsCoordinator: NotificationsCoordinatorProtocol
     private let analyticsManager: AnalyticsManagerProtocol
     private let saltEdgeManager: SaltEdgeManagerProtocol
+    private let saltEdgeCustomersService: SaltEdgeCustomersServiceProtocol
     
     var currentSession: Session? {
         return userSessionManager.currentSession
@@ -145,7 +146,8 @@ class AccountCoordinator : AccountCoordinatorProtocol {
          router: ApplicationRouterProtocol,
          notificationsCoordinator: NotificationsCoordinatorProtocol,
          analyticsManager: AnalyticsManagerProtocol,
-         saltEdgeManager: SaltEdgeManagerProtocol) {
+         saltEdgeManager: SaltEdgeManagerProtocol,
+         saltEdgeCustomersService: SaltEdgeCustomersServiceProtocol) {
         
         self.userSessionManager = userSessionManager
         self.authenticationService = authenticationService
@@ -154,6 +156,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         self.notificationsCoordinator = notificationsCoordinator
         self.analyticsManager = analyticsManager
         self.saltEdgeManager = saltEdgeManager
+        self.saltEdgeCustomersService = saltEdgeCustomersService
     }
     
     private func isActive(_ product: SubscriptionProduct) -> Bool {
@@ -314,6 +317,13 @@ class AccountCoordinator : AccountCoordinatorProtocol {
             return .value(())
         }
         return self.authenticationService.destroy(session: session)
+    }
+    
+    func createSaltEdgeCustomer() -> Promise<SaltEdgeCustomer> {
+        guard let currentUserId = userSessionManager.currentSession?.userId else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        return saltEdgeCustomersService.createSaltEdgeCustomer(userId: currentUserId)
     }
     
     func updateUserSubscription() -> Promise<Void> {

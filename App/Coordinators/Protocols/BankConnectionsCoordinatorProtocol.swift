@@ -46,5 +46,5 @@ protocol BankConnectionsCoordinatorProtocol {
     
 //    func getSaltEdgeConnection(secret: String) -> Promise<SEConnection>
 //    func removeSaltEdgeConnection(secret: String) -> Promise<Void>
-    func loadProvider(code: String) -> Promise<SEProvider>
+    func loadProvider(code: String) -> Promise<SEProvider>    
 }

@@ -46,6 +46,7 @@ struct User : Decodable {
     let onboarded: Bool
     let hasActiveSubscription: Bool
     let oldestTransactionGotAt: Date?
+    let customer: SaltEdgeCustomer?
     
     var fullname: String? {
         if let firstname = firstname, !firstname.isEmpty, let lastname = lastname, !lastname.isEmpty {
@@ -77,16 +78,7 @@ struct User : Decodable {
         case onboarded
         case hasActiveSubscription = "has_active_subscription"
         case oldestTransactionGotAt = "oldest_transaction_got_at"
-    }
-}
-
-extension User {
-    var saltEdgeIdentifier: String {
-        #if DEBUG
-        return "3b_staging_user_\(id)"
-        #else
-        return "3b_production_user_\(id)"
-        #endif
+        case customer = "salt_edge_customer"
     }
 }
 

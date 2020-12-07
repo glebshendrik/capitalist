@@ -76,9 +76,11 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
         }
         return
             firstly {
-                connectionFetchFromDate(provider: provider,
-                                        expenseSource: expenseSource,
-                                        useMaxFetchInterval: useMaxFetchInterval)
+                updateCustomerSecret()
+            }.then { secret in
+                self.connectionFetchFromDate(provider: provider,
+                                             expenseSource: expenseSource,
+                                             useMaxFetchInterval: useMaxFetchInterval)
             }.then { fromDate in
                 self.createCreatingConnectionSession(providerCode: (provider?.code ?? oldConnection?.providerCode)!,
                                                      countryCode: (provider?.countryCode ?? oldConnection?.countryCode)!,
@@ -89,17 +91,27 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
     func createCreatingConnectionSession(providerCode: String,
                                          countryCode: String,
                                          fromDate: Date?) -> Promise<ConnectionSession> {
-        return saltEdgeManager.createCreatingConnectionSession(providerCode: providerCode,
-                                                               countryCode: countryCode,
-                                                               fromDate: fromDate ?? Date(),
-                                                               languageCode: languageCode)
+        return
+            firstly {
+                updateCustomerSecret()
+            }.then { secret in
+                self.saltEdgeManager.createCreatingConnectionSession(providerCode: providerCode,
+                                                                     countryCode: countryCode,
+                                                                     fromDate: fromDate ?? Date(),
+                                                                     languageCode: self.languageCode)
+            }
     }
     
     func createRefreshingConnectionSession(connection: Connection,
                                            fromDate: Date?) -> Promise<ConnectionSession> {
-        return saltEdgeManager.createRefreshingConnectionSession(connectionSecret: connection.secret,
-                                                                 fromDate: fromDate ?? Date(),
-                                                                 languageCode: languageCode)
+        return
+            firstly {
+                updateCustomerSecret()
+            }.then { secret in
+                self.saltEdgeManager.createRefreshingConnectionSession(connectionSecret: connection.secret,
+                                                                       fromDate: fromDate ?? Date(),
+                                                                       languageCode: self.languageCode)
+            }
     }
     
     func createReconnectingConnectionSession(connection: Connection,
@@ -110,9 +122,14 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
             
             return Promise.value(session)
         }
-        return saltEdgeManager.createReconnectingConnectionSession(connectionSecret: connection.secret,
-                                                                   fromDate: fromDate ?? Date(),
-                                                                   languageCode: languageCode)
+        return
+            firstly {
+                updateCustomerSecret()
+            }.then { secret in
+                self.saltEdgeManager.createReconnectingConnectionSession(connectionSecret: connection.secret,
+                                                                         fromDate: fromDate ?? Date(),
+                                                                         languageCode: self.languageCode)
+            }
     }
     
     private func connectionFetchFromDate(provider: SEProvider?,
@@ -256,23 +273,23 @@ extension BankConnectionsCoordinator {
     private func createCustomerSecret(user: User) -> Promise<String> {
         return
             firstly {
-                saltEdgeManager.createCustomer(identifier: user.saltEdgeIdentifier)
-            }.then { secret in
-                return self.updateUser(user: user, saltEdgeCustomerSecret: secret)
+                accountCoordinator.createSaltEdgeCustomer()
+            }.then { customer in
+                return self.setCustomerSecret(customerSecret: customer.secret)
             }
     }
     
-    private func updateUser(user: User, saltEdgeCustomerSecret: String) -> Promise<String> {
-        let form = UserUpdatingForm(userId: user.id,
-                                    firstname: user.firstname,
-                                    saltEdgeCustomerSecret: saltEdgeCustomerSecret)
-        return
-            firstly {
-                accountCoordinator.updateUser(with: form)
-            }.then {
-                return self.setCustomerSecret(customerSecret: saltEdgeCustomerSecret)
-            }
-    }
+//    private func updateUser(user: User, saltEdgeCustomerSecret: String) -> Promise<String> {
+//        let form = UserUpdatingForm(userId: user.id,
+//                                    firstname: user.firstname,
+//                                    saltEdgeCustomerSecret: saltEdgeCustomerSecret)
+//        return
+//            firstly {
+//                accountCoordinator.updateUser(with: form)
+//            }.then {
+//                return self.setCustomerSecret(customerSecret: saltEdgeCustomerSecret)
+//            }
+//    }
 }
 
 extension BankConnectionsCoordinator {

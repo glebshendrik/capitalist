@@ -36,6 +36,7 @@ struct APIRoutePath {
         case .createLoan(let form):                         return collection(route, userId: form.userId)
         case .createCredit(let form):                       return collection(route, userId: form.userId)
         case .createActive(let form):                       return collection(route, basketId: form.basketId)
+        case .createCustomer(let userId):                   return collection(route, userId: userId)
         
         // Index
         case .indexIcons,

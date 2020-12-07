@@ -23,7 +23,8 @@ struct APIRouteMethod {
              .createDebt,
              .createLoan,
              .createCredit,
-             .createActive:
+             .createActive,
+             .createCustomer:
             return .post
         case .showUser,
              .showIncomeSource,

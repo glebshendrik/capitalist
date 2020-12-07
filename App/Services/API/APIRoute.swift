@@ -55,6 +55,9 @@ enum APIRoute: URLRequestConvertible {
     case destroyUserData(id: Int)
     case confirmUser(id: Int)
     
+    // SaltEdgeCustomers
+    case createCustomer(userId: Int)
+    
     // Sessions
     case createSession(form: SessionCreationForm)
     case destroySession(session: Session)
