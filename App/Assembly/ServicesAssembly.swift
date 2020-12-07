@@ -51,5 +51,7 @@ class ServicesAssembly: Assembly {
         container.autoregister(ActivesServiceProtocol.self, initializer: ActivesService.init)
         
         container.autoregister(TransactionableExamplesServiceProtocol.self, initializer: TransactionableExamplesService.init)
+        
+        container.autoregister(SaltEdgeCustomersServiceProtocol.self, initializer: SaltEdgeCustomersService.init)
     }
 }
