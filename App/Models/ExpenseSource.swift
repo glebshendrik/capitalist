@@ -165,6 +165,7 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
     let amountCents: Int?
     let creditLimitCents: Int?
     let cardType: CardType?
+    let prototypeKey: String?
     let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -174,6 +175,7 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
         case amountCents = "amount_cents"
         case creditLimitCents = "credit_limit_cents"
         case cardType = "card_type"
+        case prototypeKey = "prototype_key"
         case accountConnectionAttributes = "account_connection_attributes"
     }
     

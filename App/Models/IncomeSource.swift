@@ -94,6 +94,7 @@ struct IncomeSourceUpdatingForm : Encodable, Validatable {
     let name: String?
     let monthlyPlannedCents: Int?
     let description: String?
+    let prototypeKey: String?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -101,6 +102,7 @@ struct IncomeSourceUpdatingForm : Encodable, Validatable {
         case name
         case monthlyPlannedCents = "monthly_planned_cents"
         case description
+        case prototypeKey = "prototype_key"
         case reminderAttributes = "reminder_attributes"
     }
     

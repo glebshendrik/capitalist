@@ -97,6 +97,7 @@ struct ExpenseCategoryUpdatingForm : Encodable, Validatable {
     let name: String?    
     let monthlyPlannedCents: Int?
     let description: String?
+    let prototypeKey: String?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -104,6 +105,7 @@ struct ExpenseCategoryUpdatingForm : Encodable, Validatable {
         case iconURL = "icon_url"
         case monthlyPlannedCents = "monthly_planned_cents"
         case description
+        case prototypeKey = "prototype_key"
         case reminderAttributes = "reminder_attributes"
     }
     
