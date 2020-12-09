@@ -31,13 +31,14 @@ enum APIRoute: URLRequestConvertible {
 //            return "https://staging.threebaskets.net"
 //            return "https://api.threebaskets.net"
         case .testFlight:
-            return "https://skrudz.tempio.app"
+//            return "https://skrudz.tempio.app"
+            return storedBaseURLString ?? "https://api.threebaskets.net"
 //            return storedBaseURLString ?? "https://api.threebaskets.net"
 //            return "https://skrudz.tempio.app"
 //            return "https://test.threebaskets.net"
         case .appStore:
-            return "https://skrudz.tempio.app"
-//            return "https://api.threebaskets.net"
+//            return "https://skrudz.tempio.app"
+            return "https://api.threebaskets.net"
         }
     }
     

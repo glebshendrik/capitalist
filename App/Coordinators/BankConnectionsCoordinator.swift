@@ -46,11 +46,11 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
     
     func setup() {
         // Test account
-        saltEdgeManager.set(appId: "7vMi6aIbqc9yjaxViEzvOlDWGWa3n1CYsbY5TH5Z32Q",
-                            appSecret: "tjtZVMKT16TM7TUl-Lb5HjJb7Tf9tNr5IfVFRMRp-Tw")
+//        saltEdgeManager.set(appId: "7vMi6aIbqc9yjaxViEzvOlDWGWa3n1CYsbY5TH5Z32Q",
+//                            appSecret: "tjtZVMKT16TM7TUl-Lb5HjJb7Tf9tNr5IfVFRMRp-Tw")
         // Live account
-        //        saltEdgeManager.set(appId: "eKNImuTofAJB4l6dGvcTr95ghTTh3zDa0HwNkVv8AL8",
-        //                            appSecret: "z3_Hs33KX1DDa-kj2bwLlSIjWzFzif3ScebPRqzHzOA")
+        saltEdgeManager.set(appId: "eKNImuTofAJB4l6dGvcTr95ghTTh3zDa0HwNkVv8AL8",
+                            appSecret: "z3_Hs33KX1DDa-kj2bwLlSIjWzFzif3ScebPRqzHzOA")
     }
     
     func loadProviders(country: String?) -> Promise<[SEProvider]> {
