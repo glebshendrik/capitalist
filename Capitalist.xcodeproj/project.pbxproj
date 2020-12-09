@@ -502,6 +502,9 @@
 		FAED7DB021EFA0CE00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */; };
 		FAED7DB221EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */; };
 		FAED7DB621F0E35100BF6FE1 /* ExpenseCategoryEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAED7DB521F0E35000BF6FE1 /* ExpenseCategoryEditViewModel.swift */; };
+		FAF155632580C43200B983A6 /* PrototypesLinkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF155622580C43200B983A6 /* PrototypesLinkingViewController.swift */; };
+		FAF155662580F9FA00B983A6 /* PrototypeLinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF155652580F9FA00B983A6 /* PrototypeLinkTableViewCell.swift */; };
+		FAF1556A2580FD4E00B983A6 /* PrototypesLinkingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF155692580FD4E00B983A6 /* PrototypesLinkingViewModel.swift */; };
 		FAF31CAD2403700300D4CFB3 /* Actives.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF31CAF2403700300D4CFB3 /* Actives.storyboard */; };
 		FAF31CB42403703100D4CFB3 /* Borrows.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF31CB62403703100D4CFB3 /* Borrows.storyboard */; };
 		FAF31CBB2403705C00D4CFB3 /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF31CBD2403705C00D4CFB3 /* Common.storyboard */; };
@@ -1034,6 +1037,9 @@
 		FAED7DAF21EFA0CD00BF6FE1 /* ExpenseCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAED7DB121EFA52900BF6FE1 /* ExpenseCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryViewModel.swift; sourceTree = "<group>"; };
 		FAED7DB521F0E35000BF6FE1 /* ExpenseCategoryEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryEditViewModel.swift; sourceTree = "<group>"; };
+		FAF155622580C43200B983A6 /* PrototypesLinkingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypesLinkingViewController.swift; sourceTree = "<group>"; };
+		FAF155652580F9FA00B983A6 /* PrototypeLinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypeLinkTableViewCell.swift; sourceTree = "<group>"; };
+		FAF155692580FD4E00B983A6 /* PrototypesLinkingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypesLinkingViewModel.swift; sourceTree = "<group>"; };
 		FAF31CAE2403700300D4CFB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Actives.storyboard; sourceTree = "<group>"; };
 		FAF31CB12403701900D4CFB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Actives.strings; sourceTree = "<group>"; };
 		FAF31CB32403701D00D4CFB3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Actives.strings; sourceTree = "<group>"; };
@@ -1160,6 +1166,7 @@
 				FA8722792446DFA600B093AA /* IconView.swift */,
 				FA87227B2446E2D000B093AA /* CustomView.swift */,
 				FA9485CC245FD1C0005EB7B9 /* AddingItemTableViewCell.swift */,
+				FAF155652580F9FA00B983A6 /* PrototypeLinkTableViewCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1553,6 +1560,7 @@
 				FA8AD0DF22C5F4040084AD19 /* ProvidersViewController.swift */,
 				FAC9BA6722AFD2E200310F6B /* ConnectionViewController.swift */,
 				FA7EDFFD22CDA0BD0054EAD3 /* AccountsViewController.swift */,
+				FAF155622580C43200B983A6 /* PrototypesLinkingViewController.swift */,
 			);
 			path = "Bank Connection";
 			sourceTree = "<group>";
@@ -1766,6 +1774,7 @@
 				FA7EDFFF22CDA1940054EAD3 /* AccountViewModel.swift */,
 				FA7EE00122CDA1A10054EAD3 /* AccountsViewModel.swift */,
 				FA780ED82530754C007D394B /* BankConnectableViewModel.swift */,
+				FAF155692580FD4E00B983A6 /* PrototypesLinkingViewModel.swift */,
 			);
 			path = "Bank Connection";
 			sourceTree = "<group>";
@@ -2698,6 +2707,7 @@
 				FAED7DA021EC65B200BF6FE1 /* BasketsCoordinator.swift in Sources */,
 				FABE54F1233D3B9B00DF2B70 /* FormSliderField.swift in Sources */,
 				FA7DB72B22102B6D00559878 /* CurrencyViewModel.swift in Sources */,
+				FAF155632580C43200B983A6 /* PrototypesLinkingViewController.swift in Sources */,
 				FAB5BE472352176B000466AE /* ActivesServiceProtocol.swift in Sources */,
 				FAE05FAE235C4D850014D034 /* BasketItemIcon.swift in Sources */,
 				FA780ED92530754C007D394B /* BankConnectableViewModel.swift in Sources */,
@@ -2716,6 +2726,7 @@
 				FA7DB73122102F1200559878 /* CurrenciesService.swift in Sources */,
 				FA630C2E2293CAA700242AB3 /* ReminderViewModel.swift in Sources */,
 				FA630C2822939FEA00242AB3 /* ReminderEditTableViewController.swift in Sources */,
+				FAF155662580F9FA00B983A6 /* PrototypeLinkTableViewCell.swift in Sources */,
 				FAB5BE5323533D2A000466AE /* TransactionEditUpdatingExtenson.swift in Sources */,
 				FAC3B9C521C0EB7A0015A12F /* IncomeSource.swift in Sources */,
 				FA9485CF24669F1A005EB7B9 /* ExpenseSourcesViewController.swift in Sources */,
@@ -2838,6 +2849,7 @@
 				FA16FC71223A82930053C273 /* ExpenseSourceTableViewCell.swift in Sources */,
 				FABE54DC233BE50D00DF2B70 /* CreditsServiceProtocol.swift in Sources */,
 				FAA5D57C238FE55900CC53AD /* BorrowInfoViewController.swift in Sources */,
+				FAF1556A2580FD4E00B983A6 /* PrototypesLinkingViewModel.swift in Sources */,
 				FAD88F1721AEB53F00BE7BC1 /* CoordinatorsAssembly.swift in Sources */,
 				FA5751BC237C15BD00912443 /* BasicInfoField.swift in Sources */,
 				FABE54EA233CFFA600DF2B70 /* CreditsViewController.swift in Sources */,
