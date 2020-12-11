@@ -953,6 +953,16 @@ extension UIScrollView {
     }
 }
 
+extension Data {
+    var prettyPrintedJSONString: String? { /// NSString gives us a nice sanitized debugDescription
+        guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
+              let data = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+              let prettyPrintedString = String(data: data, encoding: String.Encoding.utf8) else { return nil }
+        
+        return prettyPrintedString
+    }
+}
+
 extension ESRefreshHeaderAnimator {
     var titleLabel: UILabel? {
         return self.view.subviews.first { $0 is UILabel } as? UILabel

@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import ESPullToRefresh
 
 class PrototypesLinkingViewController : UIViewController,
                                         UIFactoryDependantProtocol,
@@ -56,7 +57,7 @@ extension PrototypesLinkingViewController {
         firstly {
             viewModel.loadData()
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("", comment: ""), theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки списка", comment: ""), theme: .error)
         }.finally {
             self.updateUI()
             self.dismissHUD()
@@ -73,7 +74,7 @@ extension PrototypesLinkingViewController {
         firstly {
             viewModel.link(linkingTransactionable, example: prototype)
         }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("", comment: ""), theme: .error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка связывания", comment: ""), theme: .error)
         }.finally {
             self.updateUI()
             self.dismissHUD()
@@ -85,11 +86,20 @@ extension PrototypesLinkingViewController {
     private func setupUI() {
         setupNavigationBarAppearance()
         setupTableView()
+        setupPullToRefresh()
     }
     
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+    }
+    
+    private func setupPullToRefresh() {
+        tableView.es.addPullToRefresh {
+            [weak self] in
+            self?.loadData()
+        }
+        tableView.setupPullToRefreshAppearance()
     }
 }
 
@@ -97,6 +107,8 @@ extension PrototypesLinkingViewController {
     private func updateUI() {
         updateTitleUI()
         updateDescriptionUI()
+        updateTableUI()
+        stopPullToRefresh()
     }
     
     private func updateTitleUI() {
@@ -109,6 +121,11 @@ extension PrototypesLinkingViewController {
     
     private func updateTableUI() {
         tableView.reloadData(with: .automatic)
+    }
+    
+    private func stopPullToRefresh() {
+        tableView.es.stopPullToRefresh()
+        tableView.refreshControl?.endRefreshing()
     }
 }
 

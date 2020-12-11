@@ -150,6 +150,13 @@ class APIClient : APIClientProtocol {
             if let build = UIApplication.shared.buildNumber {
                 request.addValue(build, forHTTPHeaderField: "X-iOS-Build")
             }
+                        
+            log(method: request.httpMethod?.uppercased(),
+                url: request.url?.absoluteString,
+                statusCode: nil,
+                data: request.httpBody?.prettyPrintedJSONString,
+                errors: [],
+                level: .info)
             
             return Alamofire
                 .request(request)
@@ -267,11 +274,15 @@ class APIClient : APIClientProtocol {
         }
                 
         if let data = data {
+            SwiftyBeaver.custom(level: level, message: message)
+            
+            let extendedMessage = message.appending("Data: \(data)\n")
             if level == .error {
-                SwiftyBeaver.error(message)
+                SwiftyBeaver.warning(extendedMessage)
             }
-            message.append("Data: \(data)\n")
-            SwiftyBeaver.custom(level: level == .error ? .warning : level, message: message)
+            if level == .info {
+                SwiftyBeaver.verbose(extendedMessage)
+            }
         }
         else {
             SwiftyBeaver.custom(level: level, message: message)

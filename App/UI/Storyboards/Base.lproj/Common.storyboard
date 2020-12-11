@@ -2293,19 +2293,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Связывание источников доходов" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJU-nM-r1W">
-                                <rect key="frame" x="32" y="30" width="311" height="56"/>
+                                <rect key="frame" x="32" y="0.0" width="311" height="56"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
                                 <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Для определения ваших источников доходов в транзакциях, свяжите их с источниками из нашего списка" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahT-pr-j05">
-                                <rect key="frame" x="32" y="102" width="311" height="56"/>
+                                <rect key="frame" x="32" y="72" width="311" height="56"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
                                 <color key="textColor" name="white 0.64"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="czn-X9-D9i">
-                                <rect key="frame" x="0.0" y="168" width="375" height="499"/>
+                                <rect key="frame" x="0.0" y="138" width="375" height="529"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PrototypeLinkTableViewCell" id="sNj-1q-1Nd" customClass="PrototypeLinkTableViewCell" customModule="Capitalist" customModuleProvider="target">
@@ -2390,12 +2390,12 @@
                             <constraint firstItem="ahT-pr-j05" firstAttribute="leading" secondItem="eJg-hT-d9l" secondAttribute="leading" constant="32" id="Cp1-QK-ODY"/>
                             <constraint firstItem="eJg-hT-d9l" firstAttribute="trailing" secondItem="czn-X9-D9i" secondAttribute="trailing" id="Dmo-o1-Gj1"/>
                             <constraint firstItem="eJg-hT-d9l" firstAttribute="trailing" secondItem="JJU-nM-r1W" secondAttribute="trailing" constant="32" id="OF9-9O-J8l"/>
+                            <constraint firstItem="JJU-nM-r1W" firstAttribute="top" secondItem="0Uo-jw-2IR" secondAttribute="top" id="Rd3-Gx-Jxx"/>
                             <constraint firstItem="eJg-hT-d9l" firstAttribute="bottom" secondItem="czn-X9-D9i" secondAttribute="bottom" id="Yeb-z2-7NH"/>
                             <constraint firstItem="JJU-nM-r1W" firstAttribute="leading" secondItem="eJg-hT-d9l" secondAttribute="leading" constant="32" id="bVb-c4-0mk"/>
                             <constraint firstItem="ahT-pr-j05" firstAttribute="top" secondItem="JJU-nM-r1W" secondAttribute="bottom" constant="16" id="bl3-dM-4gk"/>
                             <constraint firstItem="eJg-hT-d9l" firstAttribute="trailing" secondItem="ahT-pr-j05" secondAttribute="trailing" constant="32" id="cvC-sf-sSf"/>
                             <constraint firstItem="czn-X9-D9i" firstAttribute="leading" secondItem="eJg-hT-d9l" secondAttribute="leading" id="kOx-Fo-rmT"/>
-                            <constraint firstItem="JJU-nM-r1W" firstAttribute="top" secondItem="eJg-hT-d9l" secondAttribute="top" constant="30" id="tbp-nW-hUP"/>
                         </constraints>
                     </view>
                     <connections>

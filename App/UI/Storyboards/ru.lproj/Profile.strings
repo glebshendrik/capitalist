@@ -86,3 +86,15 @@
 /* Class = "UIButton"; normalTitle = "Удалить данные о финансах"; ObjectID = "Qub-pM-zSq"; */
 "Qub-pM-zSq.normalTitle" = "Удалить данные о финансах";
 
+/* Class = "UILabel"; text = "СВЯЗАННЫЕ СУЩНОСТИ"; ObjectID = "Pxr-ie-gAO"; */
+"Pxr-ie-gAO.text" = "СВЯЗАННЫЕ СУЩНОСТИ";
+
+/* Class = "UILabel"; text = "Связать источники доходов"; ObjectID = "mTp-3O-Coh"; */
+"mTp-3O-Coh.text" = "Связать источники доходов";
+
+/* Class = "UILabel"; text = "Связать кошельки"; ObjectID = "bdS-Cm-Gg4"; */
+"bdS-Cm-Gg4.text" = "Связать кошельки";
+
+/* Class = "UILabel"; text = "Связать категории расходов"; ObjectID = "WIq-Tg-FAf"; */
+"WIq-Tg-FAf.text" = "Связать категории расходов";
+

@@ -208,6 +208,7 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
         try container.encode(amountCents, forKey: .amountCents)
         try container.encode(creditLimitCents, forKey: .creditLimitCents)
         try container.encode(cardType, forKey: .cardType)
+        try container.encode(prototypeKey, forKey: .prototypeKey)
         try container.encode(accountConnectionAttributes, forKey: .accountConnectionAttributes)
     }
     

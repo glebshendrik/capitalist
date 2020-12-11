@@ -128,6 +128,8 @@ struct ExpenseCategoryUpdatingForm : Encodable, Validatable {
         try container.encode(name, forKey: .name)
         try container.encode(iconURL, forKey: .iconURL)        
         try container.encode(monthlyPlannedCents, forKey: .monthlyPlannedCents)
+        try container.encode(description, forKey: .description)
+        try container.encode(prototypeKey, forKey: .prototypeKey)
         try container.encode(reminderAttributes, forKey: .reminderAttributes)
     }
     

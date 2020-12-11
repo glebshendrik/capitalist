@@ -133,9 +133,9 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
                 prepareProfileEdit(segue)
             case "showLinkingIncomeSources":
                 prepareLinking(.incomeSource, segue: segue)
-            case "showLinkingExpenseSource":
+            case "showLinkingExpenseSources":
                 prepareLinking(.expenseSource, segue: segue)
-            case "showLinkingExpenseCategory":
+            case "showLinkingExpenseCategories":
                 prepareLinking(.expenseCategory, segue: segue)
             default:
                 return
