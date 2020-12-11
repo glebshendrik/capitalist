@@ -28,6 +28,18 @@ class LinkingTransactionableViewModel {
         return transactionable.prototypeKey != nil
     }
     
+    var linkButtonTitle: String {
+        return isLinked
+            ? NSLocalizedString("Отвязать", comment: "")
+            : NSLocalizedString("Связать", comment: "")
+    }
+    
+    var linkButtonColorAsset: ColorAsset {
+        return isLinked
+            ? .white4
+            : .blue1
+    }
+    
     init(transactionable: Transactionable) {
         self.transactionable = transactionable
     }
@@ -41,7 +53,37 @@ class PrototypesLinkingViewModel {
     
     var linkingType: TransactionableType = .incomeSource
     private var linkingTransactionables: [LinkingTransactionableViewModel] = []
-    var linkingTransactionable: LinkingTransactionableViewModel?
+    var linkingTransactionable: LinkingTransactionableViewModel? = nil
+    
+    var numberOfLinkingTransactionables: Int {
+        return linkingTransactionables.count
+    }
+    
+    var title: String? {
+        switch linkingType {
+            case .incomeSource:
+                return NSLocalizedString("Связывание источников доходов", comment: "")
+            case .expenseSource:
+                return NSLocalizedString("Связывание кошельков", comment: "")
+            case .expenseCategory:
+                return NSLocalizedString("Связывание категорий расходов", comment: "")
+            default:
+                return nil
+        }
+    }
+    
+    var description: String? {
+        switch linkingType {
+            case .incomeSource:
+                return NSLocalizedString("Для определения ваших источников доходов в транзакциях, свяжите их с источниками из нашего списка", comment: "")
+            case .expenseSource:
+                return NSLocalizedString("Чтобы вам было проще подключить ваши кошельки к банкам, свяжите их с банками из нашего списка", comment: "")
+            case .expenseCategory:
+                return NSLocalizedString("Для определения ваших категорий расходов в транзакциях, свяжите их с категориями из нашего списка", comment: "")
+            default:
+                return nil
+        }
+    }
     
     init(transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol,
          incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
@@ -67,50 +109,14 @@ class PrototypesLinkingViewModel {
         return linkingTransactionables[safe: indexPath.row]
     }
     
-    func link(_ linkingTransactionable: LinkingTransactionableViewModel, prototypeKey: String) -> Promise<Void> {
-        return Promise.value(())
-    }
-    
-    func unlink(_ linkingTransactionable: LinkingTransactionableViewModel) -> Promise<Void> {
-        return Promise.value(())
-    }
-    
-    private func set(_ linkingTransactionable: LinkingTransactionableViewModel, prototypeKey: String?) -> Promise<Void> {
-        switch linkingType {
-            case .incomeSource:
-                return loadIncomeSources()
-            case .expenseSource:
-                return loadExpenseSources()
-            case .expenseCategory:
-                return loadExpenseCategories()
-            default:
-                return Promise.value([])
-        }
-    }
-    
-    private func set(linkingIncomeSource: LinkingTransactionableViewModel, prototypeKey: String?) -> Promise<Void> {
-        let linkingIncomeSource = (linkingIncomeSource.transactionable as? IncomeSourceViewModel)?.incomeSource
-        return incomeSourcesCoordinator.update(with: IncomeSourceUpdatingForm(id: linkingIncomeSource., iconURL: <#T##URL?#>, name: <#T##String?#>, monthlyPlannedCents: <#T##Int?#>, description: <#T##String?#>, prototypeKey: <#T##String?#>, reminderAttributes: <#T##ReminderNestedAttributes?#>))
-    }
-    
-    private func loadExpenseSources() -> Promise<[Transactionable]> {
+    func link(_ linkingTransactionable: LinkingTransactionableViewModel, example: TransactionableExample?) -> Promise<Void> {
         return
             firstly {
-                expenseSourcesCoordinator.index(currency: nil)
-            }.map {
-                $0.map { ExpenseSourceViewModel(expenseSource: $0) }
+                set(linkingTransactionable.transactionable, example: example)
+            }.then {
+                self.loadData()
             }
     }
-    
-    private func loadExpenseCategories() -> Promise<[Transactionable]> {
-        return
-            firstly {
-                expenseCategoriesCoordinator.index(noBorrows: true)
-            }.map {
-                $0.map { ExpenseCategoryViewModel(expenseCategory: $0) }
-            }
-    }
-    
 }
 
 extension PrototypesLinkingViewModel {
@@ -155,4 +161,38 @@ extension PrototypesLinkingViewModel {
     }
 }
 
+extension PrototypesLinkingViewModel {
+    private func set(_ transactionable: Transactionable, example: TransactionableExample?) -> Promise<Void> {
+        switch transactionable {
+            case let incomeSourceViewModel as IncomeSourceViewModel:
+                return set(incomeSource: incomeSourceViewModel.incomeSource, example: example)
+            case let expenseSourceViewModel as ExpenseSourceViewModel:
+                return set(expenseSource: expenseSourceViewModel.expenseSource, example: example)
+            case let expenseCategoryViewModel as ExpenseCategoryViewModel:
+                return set(expenseCategory: expenseCategoryViewModel.expenseCategory, example: example)
+            default:
+                return Promise.value(())
+        }
+    }
+    
+    private func set(incomeSource: IncomeSource, example: TransactionableExample?) -> Promise<Void> {
+        var updatingForm = incomeSource.toUpdatingForm()
+        updatingForm.description = example?.localizedDescription
+        updatingForm.prototypeKey = example?.prototypeKey
+        return incomeSourcesCoordinator.update(with: updatingForm)
+    }
+    
+    private func set(expenseSource: ExpenseSource, example: TransactionableExample?) -> Promise<Void> {
+        var updatingForm = expenseSource.toUpdatingForm()
+        updatingForm.prototypeKey = example?.prototypeKey
+        return expenseSourcesCoordinator.update(with: updatingForm)
+    }
+    
+    private func set(expenseCategory: ExpenseCategory, example: TransactionableExample?) -> Promise<Void> {
+        var updatingForm = expenseCategory.toUpdatingForm()
+        updatingForm.description = example?.localizedDescription
+        updatingForm.prototypeKey = example?.prototypeKey
+        return expenseCategoriesCoordinator.update(with: updatingForm)
+    }
+}
 

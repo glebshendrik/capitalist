@@ -11,13 +11,13 @@ import AttributedTextView
 
 extension MainViewController : TitleViewDelegate {
     var total: NSAttributedString {
-        if isSelecting {
-            return (NSLocalizedString("Из ", comment: "Из ").color(UIColor.by(.white40))
-                    + viewModel.selectedSourceName.color(UIColor.by(.white100))
-                    + NSLocalizedString(" в ", comment: " в ").color(UIColor.by(.white40))
-                    + viewModel.selectedDestinationName.color(UIColor.by(.white100)))
-                        .all.fontName("Roboto-Light").size(12).attributedText
-        }
+//        if isSelecting {
+//            return (NSLocalizedString("Из ", comment: "Из ").color(UIColor.by(.white40))
+//                    + viewModel.selectedSourceName.color(UIColor.by(.white100))
+//                    + NSLocalizedString(" в ", comment: " в ").color(UIColor.by(.white40))
+//                    + viewModel.selectedDestinationName.color(UIColor.by(.white100)))
+//                        .all.fontName("Roboto-Light").size(12).attributedText
+//        }
         return (self.viewModel.basketTotalExpensesTitle.color(UIColor.by(.white40))
                 + self.viewModel.basketTotalExpenses.color(UIColor.by(.white100))
                 + self.viewModel.basketTotalTitle.color(UIColor.by(.white40))

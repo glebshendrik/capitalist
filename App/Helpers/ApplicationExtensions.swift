@@ -29,6 +29,39 @@ extension UITableView {
     }
 }
 
+protocol Home : UIViewController {
+    func cameHome(from: Infrastructure.ViewController)
+}
+
+protocol Away : UIViewController {
+    var home: Home? { get set }
+    var id: String { get }
+}
+
+extension Away where Self : UIViewController {
+    func notifyCameHome(from: Infrastructure.ViewController) {
+        self.home?.cameHome(from: from)
+    }
+}
+
+extension UIViewController {
+    var away: Away? {
+        let selfAway = self as? Away
+        let presentingAway = (self as? UINavigationController)?.presentedViewController as? Away
+        let pushingAway = (self as? UINavigationController)?.topViewController as? Away
+        return selfAway ?? presentingAway ?? pushingAway
+    }
+    
+    var isAway: Bool {
+        return away != nil
+    }
+    
+    func from(home: Home?) -> UIViewController {
+        away?.home = home
+        return self
+    }
+}
+
 extension String {
     var decimalFloat: Float? {
         let formatter = NumberFormatter()

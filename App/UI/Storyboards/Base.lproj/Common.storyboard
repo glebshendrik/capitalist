@@ -2287,7 +2287,7 @@
         <!--Prototypes Linking View Controller-->
         <scene sceneID="tgf-bt-Bql">
             <objects>
-                <viewController storyboardIdentifier="PrototypeKeysLinkingViewController" id="cJO-iH-rYw" customClass="PrototypesLinkingViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PrototypesLinkingViewController" id="cJO-iH-rYw" customClass="PrototypesLinkingViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Uo-jw-2IR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2352,6 +2352,9 @@
                                                             <real key="value" value="6"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapLinkingButton:" destination="sNj-1q-1Nd" eventType="touchUpInside" id="cnU-Uj-XqD"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -2381,7 +2384,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eJg-hT-d9l"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstItem="czn-X9-D9i" firstAttribute="top" secondItem="ahT-pr-j05" secondAttribute="bottom" constant="10" id="CMy-rA-9uz"/>
                             <constraint firstItem="ahT-pr-j05" firstAttribute="leading" secondItem="eJg-hT-d9l" secondAttribute="leading" constant="32" id="Cp1-QK-ODY"/>

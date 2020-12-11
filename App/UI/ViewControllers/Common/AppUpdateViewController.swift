@@ -8,11 +8,21 @@
 
 import UIKit
 
-class AppUpdateViewController : UIViewController {
+class AppUpdateViewController : UIViewController, Away {
+    weak var home: Home?
+    
+    var id: String {
+        return Infrastructure.ViewController.AppUpdateViewController.identifier
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBarAppearance()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        home?.cameHome(from: .AppInfoViewController)
     }
     
     @IBAction func didTapUpdateButton(_ sender: Any) {

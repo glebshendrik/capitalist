@@ -90,6 +90,10 @@ class ExpenseSourceViewModel {
         return expenseSource.providerCodes
     }
     
+    var isTreatedAsUnlinked: Bool {
+        return !isVirtual && prototypeKey == nil
+    }
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         if let account = accountConnection?.account {

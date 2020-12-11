@@ -16,7 +16,8 @@ import EasyTipView
 class MainViewController : UIViewController,
                            UIMessagePresenterManagerDependantProtocol,
                            NavigationBarColorable,
-                           UIFactoryDependantProtocol {
+                           UIFactoryDependantProtocol,
+                           Home {
     
     var navigationBarTintColor: UIColor? = UIColor.by(.black2)
     
@@ -70,14 +71,22 @@ class MainViewController : UIViewController,
     var tutorialTip: EasyTipView?
     @IBOutlet weak var menuTutorialAnchor: UIView!
     
+    var waitingQueue: [UIViewController] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        loadData()
+        loadData()        
 //        UIFlowManager.set(point: .incomeSourcesTutorial, reached: false)
 //        UIFlowManager.set(point: .debtsAndCreditsTutorial, reached: false)
 //        UIFlowManager.set(point: .settingsTutorial, reached: false)
+        UIFlowManager.set(point: .transactionCreationInfoMessage, reached: false)
+        UIFlowManager.set(point: .linkingIncomeSources, reached: false)
+        UIFlowManager.set(point: .linkingExpenseSources, reached: false)
+        UIFlowManager.set(point: .linkingExpenseCategories, reached: false)
         show(tutorials)
+        show(factory.transactionCreationInfoViewController()?.from(home: self),
+                      await: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -94,11 +103,13 @@ class MainViewController : UIViewController,
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !UIFlowManager.reached(point: .transactionCreationInfoMessage) {
-            modal(factory.transactionCreationInfoViewController())
-        }
         adviserTip?.show(animated: true, forView: titleView.tipAnchor, withinSuperview: titleView)
-        checkAppUpdateNeeded()
+        showWaiting()
+    }
+    
+    func cameHome(from: Infrastructure.ViewController) {
+        showWaiting()
+        loadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

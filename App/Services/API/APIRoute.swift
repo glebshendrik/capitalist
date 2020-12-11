@@ -23,12 +23,9 @@ enum APIRoute: URLRequestConvertible {
     static var baseURLString: String {
         switch UIApplication.shared.inferredEnvironment {
         case .debug:
-//            return "https://api.threebaskets.net"
-//            return "https://skrudzh-staging.herokuapp.com"
-//            return "https://test.threebaskets.net"
 //            return storedBaseURLString ?? "https://skrudz.tempio.app"
-            return storedBaseURLString ?? "https://staging.threebaskets.net"
-//            return "https://staging.threebaskets.net"
+//            return storedBaseURLString ?? "https://staging.threebaskets.net"
+            return "https://staging.threebaskets.net"
 //            return "https://api.threebaskets.net"
         case .testFlight:
 //            return "https://skrudz.tempio.app"

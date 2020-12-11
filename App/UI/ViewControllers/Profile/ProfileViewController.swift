@@ -128,12 +128,32 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == "ShowProfileEditScreen",
-            let destinationNavigationController = segue.destination as? UINavigationController,
+        switch segue.identifier {
+            case "ShowProfileEditScreen":
+                prepareProfileEdit(segue)
+            case "showLinkingIncomeSources":
+                prepareLinking(.incomeSource, segue: segue)
+            case "showLinkingExpenseSource":
+                prepareLinking(.expenseSource, segue: segue)
+            case "showLinkingExpenseCategory":
+                prepareLinking(.expenseCategory, segue: segue)
+            default:
+                return
+        }
+    }
+    
+    private func prepareProfileEdit(_ segue: UIStoryboardSegue) {
+        if  let destinationNavigationController = segue.destination as? UINavigationController,
             let destination = destinationNavigationController.topViewController as? ProfileEditViewController {
             
-                destination.set(user: viewModel.user)
-                destination.delegate = self
+            destination.set(user: viewModel.user)
+            destination.delegate = self
+        }
+    }
+    
+    private func prepareLinking(_ type: TransactionableType, segue: UIStoryboardSegue) {
+        if  let destination = segue.destination as? PrototypesLinkingViewController {
+            destination.viewModel.linkingType = type
         }
     }
     

@@ -26,8 +26,104 @@ extension MainViewController {
 }
 
 extension MainViewController {
-    func showAppUpdateScreen() {
-        modal(factory.appUpdateViewController())
+    func show(_ viewController: UIViewController?, await: Bool = true, prioritized: Bool = false) {
+        guard
+            let away = viewController?.away
+        else {
+            showViewController(viewController, await: await, prioritized: prioritized)
+            return
+        }
+        
+        switch away {
+            case let prototypeLinkingAway as PrototypesLinkingViewController:
+                showIncomeSourceLinking(prototypeLinkingAway, viewController, await, prioritized)
+            case is TransactionCreationInfoViewController:
+                showTransactionTutorial(viewController, await, prioritized)
+            case is AppUpdateViewController:
+                showAppUpdate(viewController, await, prioritized)
+            default:
+                showViewController(viewController, await: await, prioritized: prioritized)
+        }
+    }
+    
+    func showWaiting() {
+        guard
+            !waitingQueue.isEmpty,
+            isCurrentTopmostPresentedViewController,
+            !viewModel.isUpdatingData
+        else {
+            return
+        }
+        show(waitingQueue.removeFirst(), await: false)
+    }
+    
+    private func showViewController(_ viewController: UIViewController?, await: Bool = true, prioritized: Bool = false) {
+        if await {
+            showAwait(viewController, prioritized: prioritized)
+        }
+        else {
+            modal(viewController)
+        }
+    }
+    
+    private func showAwait(_ controller: UIViewController?, prioritized: Bool = false) {
+        guard
+            let controller = controller,
+            controller.isAway
+        else {
+            showWaiting()
+            return
+        }
+        let waitingsContain = waitingQueue.any { $0.away?.id == controller.away?.id }
+        if !waitingsContain {
+            if prioritized {
+                waitingQueue.insert(controller, at: 0)
+            }
+            else {
+                waitingQueue.append(controller)
+            }
+        }
+        showWaiting()
+    }
+    
+    private func showIncomeSourceLinking(_ prototypeLinkingAway: PrototypesLinkingViewController, _ viewController: UIViewController?, _ await: Bool, _ prioritized: Bool) {
+        let shouldShowIncomeSourcesLinking: Bool = prototypeLinkingAway.viewModel.linkingType == .incomeSource &&
+            viewModel.hasUnlinkedIncomeSources &&
+            !UIFlowManager.reached(point: .linkingIncomeSources)
+        let shouldShowExpenseSourcesLinking: Bool = prototypeLinkingAway.viewModel.linkingType == .expenseSource &&
+            viewModel.hasUnlinkedExpenseSources &&
+            !UIFlowManager.reached(point: .linkingExpenseSources)
+        let shouldShowExpenseCategoriesLinking: Bool = prototypeLinkingAway.viewModel.linkingType == .expenseCategory &&
+            viewModel.hasUnlinkedExpenseCategories &&
+            !UIFlowManager.reached(point: .linkingExpenseCategories)
+        
+        if shouldShowIncomeSourcesLinking ||
+            shouldShowExpenseSourcesLinking ||
+            shouldShowExpenseCategoriesLinking {
+            
+            showViewController(viewController, await: await, prioritized: prioritized)
+        }
+        else {
+            showWaiting()
+        }
+    }
+    
+    private func showTransactionTutorial(_ viewController: UIViewController?, _ await: Bool, _ prioritized: Bool) {
+        if !UIFlowManager.reached(point: .transactionCreationInfoMessage) {
+            showViewController(viewController, await: await, prioritized: prioritized)
+        }
+        else {
+            showWaiting()
+        }
+    }
+    
+    private func showAppUpdate(_ viewController: UIViewController?, _ await: Bool, _ prioritized: Bool) {
+        if viewModel.isAppUpdateNeeded {
+            showViewController(viewController, await: await, prioritized: prioritized)
+        }
+        else {
+            showWaiting()
+        }
     }
 }
 

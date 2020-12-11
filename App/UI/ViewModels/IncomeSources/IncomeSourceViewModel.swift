@@ -108,6 +108,10 @@ class IncomeSourceViewModel : TransactionSource {
         return incomeSource.description
     }
     
+    var isTreatedAsUnlinked: Bool {
+        return !isVirtual && !isBorrowOrReturn && !isChild && prototypeKey == nil
+    }
+    
     init(incomeSource: IncomeSource) {
         self.incomeSource = incomeSource
         waitingDebts = incomeSource.waitingDebts.map { BorrowViewModel(borrow: $0) }

@@ -15,8 +15,6 @@ extension MainViewController {
     
     @objc func didRecognizeRearrangeGesture(gesture: UILongPressGestureRecognizer) {
         
-        guard !isSelecting else { return }
-        
         rearrangeController.movingCollectionView = gesture.view as? UICollectionView
         
         guard let movingCollectionView = rearrangeController.movingCollectionView else { return }

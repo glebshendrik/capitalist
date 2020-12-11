@@ -314,5 +314,10 @@ extension ApplicationAssembly {
         container.registerForSkrudzhStoryboard(TransactionableExamplesViewController.self) { (r, c) in
             c.viewModel = r.resolve(TransactionableExamplesViewModel.self)
         }
+        
+        // PrototypesLinkingViewController
+        container.registerForSkrudzhStoryboard(PrototypesLinkingViewController.self) { (r, c) in
+            c.viewModel = r.resolve(PrototypesLinkingViewModel.self)
+        }
     }
 }

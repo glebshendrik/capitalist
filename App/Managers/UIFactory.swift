@@ -548,4 +548,10 @@ class UIFactory : UIFactoryProtocol {
         transactionableExamplesViewController.viewModel.isUsed = isUsed
         return transactionableExamplesViewController
     }
+    
+    func prototypesLinkingViewController(linkingType: TransactionableType) -> UINavigationController? {
+        guard let prototypesLinkingViewController = router.viewController(.PrototypesLinkingViewController) as? PrototypesLinkingViewController else { return nil }
+        prototypesLinkingViewController.viewModel.linkingType = linkingType
+        return UINavigationController(rootViewController: prototypesLinkingViewController)
+    }
 }

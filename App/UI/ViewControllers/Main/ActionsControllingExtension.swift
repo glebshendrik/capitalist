@@ -16,7 +16,7 @@ extension MainViewController {
             setEditingItems(false, animated: true)
         }
         else {
-            setSelecting(!isSelecting, animated: true)
+//            setSelecting(!isSelecting, animated: true)
         }
     }
     
@@ -32,24 +32,24 @@ extension MainViewController {
         view.haptic()
     }
     
-    func setSelecting(_ selecting: Bool, animated: Bool) {
-        guard selecting != isSelecting else { return }
-        
-        viewModel.set(selecting: selecting)
-        updateMainButtonUI()
-        updateTotalUI(animated: true)
-        if isSelecting {
-//            updateAdviserTip()
-        }
-        else {
-            completeTransactionInteraction()            
-        }
-        updateCollectionViews()
-        view.haptic()
-    }
+//    func setSelecting(_ selecting: Bool, animated: Bool) {
+//        guard selecting != isSelecting else { return }
+//        
+//        viewModel.set(selecting: selecting)
+//        updateMainButtonUI()
+//        updateTotalUI(animated: true)
+//        if isSelecting {
+////            updateAdviserTip()
+//        }
+//        else {
+//            completeTransactionInteraction()            
+//        }
+//        updateCollectionViews()
+//        view.haptic()
+//    }
     
     func updateMainButtonUI() {
-        let isCancelState = isEditingItems || isSelecting
+        let isCancelState = isEditingItems
         plusMenu.isHidden = isCancelState
         plusMenu.isUserInteractionEnabled = !isCancelState
         let transform = isCancelState ? CGAffineTransform(rotationAngle: CGFloat(3 * Double.pi / 4)) : .identity
@@ -137,6 +137,7 @@ extension MainViewController {
 
 extension MainViewController {
     @objc func appMovedToForeground() {
+        checkAppUpdateNeeded()
         setVisibleCells(editing: isEditingItems)        
     }
 }

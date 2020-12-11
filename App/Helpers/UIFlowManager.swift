@@ -26,6 +26,9 @@ enum UIFlowPoint : String {
     case statisticsFiltersTutorial
     case statisticsPeriodTutorial
     case bankExperimentalFeature
+    case linkingIncomeSources
+    case linkingExpenseSources
+    case linkingExpenseCategories
 }
 
 class UIFlowManager {
@@ -36,6 +39,10 @@ class UIFlowManager {
     
     static var wasShownOnboarding: Bool {
         return reach(point: .onboarding)
+    }
+    
+    static func reach(_ point: UIFlowPoint) {
+        set(point: point, reached: true)
     }
     
     static func reach(point: UIFlowPoint) -> Bool {

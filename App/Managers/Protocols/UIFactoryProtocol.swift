@@ -171,4 +171,6 @@ protocol UIFactoryProtocol {
     func transactionableExamplesViewController(delegate: TransactionableExamplesViewControllerDelegate,
                                                transactionableType: TransactionableType,
                                                isUsed: Bool) -> TransactionableExamplesViewController?
+    
+    func prototypesLinkingViewController(linkingType: TransactionableType) -> UINavigationController?
 }

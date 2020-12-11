@@ -35,12 +35,7 @@ extension MainViewController {
         if viewModel.isAddExpenseSourceItem(indexPath: indexPath) {
             showNewExpenseSourceScreen()
         } else if let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) {
-            if isSelecting {
-                select(expenseSourceViewModel, collectionView: expenseSourcesCollectionView, indexPath: indexPath)
-            }
-            else {
-                showExpenseSourceInfoScreen(expenseSource: expenseSourceViewModel)
-            }            
+            showExpenseSourceInfoScreen(expenseSource: expenseSourceViewModel)
         }
     }
     

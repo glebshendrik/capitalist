@@ -90,6 +90,22 @@ struct ExpenseSource : Decodable {
         case providerCodes = "provider_codes"
         case hasTransactions = "has_transactions"
     }
+    
+    func toUpdatingForm() -> ExpenseSourceUpdatingForm {
+        return
+            ExpenseSourceUpdatingForm(id: id,
+                                      name: name,
+                                      iconURL: iconURL,
+                                      currency: currency.code,
+                                      amountCents: amountCents,
+                                      creditLimitCents: creditLimitCents,
+                                      cardType: cardType,
+                                      prototypeKey: prototypeKey,
+                                      accountConnectionAttributes: AccountConnectionNestedAttributes(id: accountConnection?.id,
+                                                                                                     connectionId: accountConnection?.connection.id,
+                                                                                                     accountId: accountConnection?.account?.id,
+                                                                                                     shouldDestroy: false))
+    }
 }
 
 struct ExpenseSourceCreationForm : Encodable, Validatable {
@@ -165,7 +181,7 @@ struct ExpenseSourceUpdatingForm : Encodable, Validatable {
     let amountCents: Int?
     let creditLimitCents: Int?
     let cardType: CardType?
-    let prototypeKey: String?
+    var prototypeKey: String?
     let accountConnectionAttributes: AccountConnectionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {

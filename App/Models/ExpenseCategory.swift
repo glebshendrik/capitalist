@@ -49,6 +49,20 @@ struct ExpenseCategory : Decodable {
         case description
     }
     
+    func toUpdatingForm() -> ExpenseCategoryUpdatingForm {
+        return
+            ExpenseCategoryUpdatingForm(id: id,
+                                        iconURL: iconURL,
+                                        name: name,
+                                        monthlyPlannedCents: monthlyPlannedCents,
+                                        description: description,
+                                        prototypeKey: prototypeKey,
+                                        reminderAttributes: ReminderNestedAttributes(id: reminder?.id,
+                                                                                     startDate: reminder?.startDate,
+                                                                                     recurrenceRule: reminder?.recurrenceRule,
+                                                                                     message: reminder?.message))
+    }
+    
 }
 
 struct ExpenseCategoryCreationForm : Encodable, Validatable {
@@ -96,8 +110,8 @@ struct ExpenseCategoryUpdatingForm : Encodable, Validatable {
     let iconURL: URL?
     let name: String?    
     let monthlyPlannedCents: Int?
-    let description: String?
-    let prototypeKey: String?
+    var description: String?
+    var prototypeKey: String?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {

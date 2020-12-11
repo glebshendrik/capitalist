@@ -127,6 +127,7 @@ struct Infrastructure {
         case CountriesViewController
         case AppInfoViewController
         case TransactionableExamplesViewController
+        case PrototypesLinkingViewController
         
         // Profile
         case ProfileViewController
@@ -214,7 +215,8 @@ struct Infrastructure {
                  .PasscodeViewController,
                  .CountriesViewController,
                  .AppInfoViewController,
-                 .TransactionableExamplesViewController:
+                 .TransactionableExamplesViewController,
+                 .PrototypesLinkingViewController:
                 return .Common
             case .ProfileViewController,
                  .ChangePasswordViewController:

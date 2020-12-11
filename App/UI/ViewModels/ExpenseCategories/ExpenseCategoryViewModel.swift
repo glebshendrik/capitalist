@@ -108,6 +108,10 @@ class ExpenseCategoryViewModel {
         return expenseCategory.description
     }
     
+    var isTreatedAsUnlinked: Bool {
+        return !isVirtual && !isBorrowOrReturn && !isCredit && prototypeKey == nil
+    }
+    
     init(expenseCategory: ExpenseCategory) {
         self.expenseCategory = expenseCategory
         waitingLoans = expenseCategory.waitingLoans.map { BorrowViewModel(borrow: $0) }

@@ -9,8 +9,14 @@
 import UIKit
 import SwiftyGif
 
-class TransactionCreationInfoViewController : UIViewController {    
+class TransactionCreationInfoViewController : UIViewController, Away {
+    weak var home: Home?
+    
     @IBOutlet weak var tutorialImageView: UIImageView!
+    
+    var id: String {
+        return Infrastructure.ViewController.TransactionCreationInfoViewController.identifier
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()        
@@ -18,9 +24,10 @@ class TransactionCreationInfoViewController : UIViewController {
         setupNavigationBarAppearance()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         _ = UIFlowManager.reach(point: .transactionCreationInfoMessage)
+        home?.cameHome(from: .TransactionCreationInfoViewController)
     }
     
     @IBAction func didTapGetItButton(_ sender: Any) {

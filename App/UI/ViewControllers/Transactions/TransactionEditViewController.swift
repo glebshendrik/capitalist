@@ -10,8 +10,7 @@ import UIKit
 import PromiseKit
 import SwiftDate
 
-protocol TransactionEditViewControllerDelegate : class {
-    var isSelectingTransactionables: Bool { get }
+protocol TransactionEditViewControllerDelegate : class {    
     func didCreateTransaction(id: Int, type: TransactionType)
     func didUpdateTransaction(id: Int, type: TransactionType)
     func didRemoveTransaction(id: Int, type: TransactionType)

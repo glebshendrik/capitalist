@@ -108,6 +108,8 @@ extension ApplicationAssembly {
         
         container.autoregister(CardTypesViewModel.self, initializer: CardTypesViewModel.init)
         
-        container.autoregister(TransactionableExamplesViewModel.self, initializer: TransactionableExamplesViewModel.init)        
+        container.autoregister(TransactionableExamplesViewModel.self, initializer: TransactionableExamplesViewModel.init)
+        
+        container.autoregister(PrototypesLinkingViewModel.self, initializer: PrototypesLinkingViewModel.init)        
     }
 }

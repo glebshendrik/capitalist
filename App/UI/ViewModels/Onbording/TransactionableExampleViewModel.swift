@@ -9,12 +9,14 @@
 import Foundation
 
 class TransactionableExampleViewModel {
+    
     public private(set) var name: String
     public private(set)var iconURL: URL?
     public private(set)var defaultIconName: String
     public private(set)var description: String?
     public private(set)var prototypeKey: String?
     public private(set)var providerCodes: [String]?
+    public private(set)var example: TransactionableExample?
     public private(set)var transactionable: Transactionable?
     
     var selected: Bool = false
@@ -26,6 +28,7 @@ class TransactionableExampleViewModel {
         defaultIconName = example.transactionableType.defaultIconName(basketType: example.basketType)
         prototypeKey = example.prototypeKey
         providerCodes = example.providerCodes
+        self.example = example
     }
     
     init(transactionable: Transactionable) {

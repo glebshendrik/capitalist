@@ -10,10 +10,6 @@ import UIKit
 
 extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate, CreditEditViewControllerDelegate {
         
-    var isSelectingTransactionables: Bool {
-        return isSelecting
-    }
-    
     func didCreateDebt() {
         soundsManager.playTransactionCompletedSound()
         updateDebtDependentData()
@@ -87,7 +83,7 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     }
     
     private func updateIncomeDependentData() {
-        setSelecting(false, animated: true)
+//        setSelecting(false, animated: true)
         loadBudget()
         loadBaskets()
         loadExpenseSources()
@@ -96,7 +92,7 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     }
     
     private func updateFundsMoveDependentData() {
-        setSelecting(false, animated: true)
+//        setSelecting(false, animated: true)
         loadBudget()
         loadBaskets()
         loadExpenseSources()
@@ -105,7 +101,7 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     }
     
     private func updateExpenseDependentData() {
-        setSelecting(false, animated: true)
+//        setSelecting(false, animated: true)
         loadBudget()
         loadBaskets()
         loadExpenseSources()
@@ -115,7 +111,7 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     }
     
     private func updateDebtDependentData() {
-        setSelecting(false, animated: true)
+//        setSelecting(false, animated: true)
         loadBudget()
         loadBaskets()
         loadExpenseSources()
@@ -123,7 +119,7 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     }
     
     private func updateLoanDependentData() {
-        setSelecting(false, animated: true)
+//        setSelecting(false, animated: true)
         loadBudget()
         loadBaskets()
         loadExpenseSources()
@@ -131,7 +127,7 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     }
     
     private func updateCreditDependentData() {
-        setSelecting(false, animated: true)
+//        setSelecting(false, animated: true)
         loadBudget()
         loadBaskets()
         loadExpenseSources()
