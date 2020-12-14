@@ -3343,7 +3343,7 @@
 				CODE_SIGN_ENTITLEMENTS = Capitalist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 29;
+				CURRENT_PROJECT_VERSION = 82;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				EXCLUDED_ARCHS = "";
@@ -3452,7 +3452,7 @@
 				CODE_SIGN_ENTITLEMENTS = Capitalist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 29;
+				CURRENT_PROJECT_VERSION = 82;
 				DEVELOPMENT_TEAM = Y76LGJ4Q6Q;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/App/Info.plist";

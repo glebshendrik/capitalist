@@ -228,7 +228,7 @@ class APIClient : APIClientProtocol {
             log(request: request, response: response, errors: [APIRequestError.upgradeRequired], level: .warning)
             return .failure(APIRequestError.upgradeRequired)
         default:
-            log(request: request, response: response, level: .info)
+            log(request: request, response: response, data: data?.prettyPrintedJSONString, level: .info)
             return .success
         }
     }

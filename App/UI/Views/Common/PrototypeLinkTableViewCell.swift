@@ -58,6 +58,8 @@ extension PrototypeLinkTableViewCell {
     
     private func updateLinkButtonUI(_ viewModel: LinkingTransactionableViewModel) {
         linkButton.setTitle(viewModel.linkButtonTitle, for: .normal)
+        linkButton.backgroundColor = UIColor.by(viewModel.linkButtonColorAsset)
         linkButton.backgroundColorForNormal = UIColor.by(viewModel.linkButtonColorAsset)
+        linkButton.backgroundColorForHighlighted = UIColor.by(.white12)
     }
 }
