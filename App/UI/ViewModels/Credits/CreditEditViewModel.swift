@@ -49,7 +49,7 @@ class CreditEditViewModel {
     var selectedDestination: ExpenseSourceViewModel? = nil
     var creditingTransactionAttributes: CreditingTransactionNestedAttributes? {
         guard
-            isNew, shouldRecordOnBalance
+            isNew
         else {
             return nil            
         }
