@@ -171,6 +171,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                          amountCents: amountCents,
                                          creditLimitCents: creditLimitCents,
                                          cardType: cardType,
+                                         prototypeKey: bankConnectableViewModel.prototypeKey,
                                          accountConnectionAttributes: bankConnectableViewModel.accountConnectionAttributes)
     }
 }
