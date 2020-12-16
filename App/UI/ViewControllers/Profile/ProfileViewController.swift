@@ -67,6 +67,35 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
         }
     }
     
+    @IBAction func didTapDestroyDataButton(_ sender: Any) {
+        let destroyDataAction = UIAlertAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
+                                              style: .destructive,
+                                              handler: { _ in
+                                                    self.destroyUserData()
+                                                })
+        
+        sheet(title: NSLocalizedString("Удалить данные о финансах?", comment: ""),
+              actions: [destroyDataAction],
+              message: NSLocalizedString("Вы собираетесь удалить все ваши данные о финансах. Будут удалены: источники доходов, кошельки, категории трат, активы, долги, кредиты и все транзакции.", comment: ""),
+              preferredStyle: .alert)
+    }
+    
+    func destroyUserData() {
+        self.setActivityIndicator(hidden: false)
+        logoutButton.isEnabled = false
+        
+        firstly {
+            viewModel.destroyUserData()
+        }.catch { error in
+            print(error)
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось удалить финансовые данные", comment: ""), theme: .error)
+            
+        }.finally {
+            self.setActivityIndicator(hidden: true)
+            self.logoutButton.isEnabled = true
+        }
+    }
+    
     @IBAction func didTapManageSubscriptionButton(_ sender: Any) {
         guard   let url = URL(string: "itms-apps://apps.apple.com/account/subscriptions"),
                 UIApplication.shared.canOpenURL(url) else { return }

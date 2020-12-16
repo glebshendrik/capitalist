@@ -14,6 +14,9 @@ class ApplicationAssembly: Assembly {
     
     func assemble(container: Container) {
         
+        // Adjust logging function
+        setContainerLoggingFunction()
+        
         // UIStoryboard
         registerStoryboards(in: container)
         
@@ -41,6 +44,31 @@ class ApplicationAssembly: Assembly {
         appDelegate.window = resolver.resolve(UIWindow.self)
         appDelegate.router = resolver.resolve(ApplicationRouterProtocol.self)
         appDelegate.notificationsCoordinator = resolver.resolve(NotificationsCoordinatorProtocol.self)
+    }
+    
+    private func setContainerLoggingFunction() {
+        Container.loggingFunction = {
+
+            // Find the text that contains the missing registration.
+            if let startOfMissingRegistration = $0.range(of: "Swinject: Resolution failed. Expected registration:\n\t")?.upperBound,
+                let startOfAvailableOptions = $0.range(of: "\nAvailable registrations:")?.lowerBound {
+                let missingRegistration = $0[startOfMissingRegistration ..< startOfAvailableOptions]
+
+                // Ignore all reports for UIKit classes.
+                if missingRegistration.contains("Storyboard: UI")
+                    || missingRegistration.contains("Storyboard: MyApp.IgnoreThisViewController")
+                    /* || other classes you want to ignore here */  {
+                    return
+                }
+
+                // Print the missing registration.
+                print("Swinject failed to find registration for \(missingRegistration)")
+                return
+            }
+
+            // Some other message so just print it.
+            print($0)
+        }
     }
 }
 

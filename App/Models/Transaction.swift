@@ -76,6 +76,8 @@ struct Transaction : Decodable {
     let sourceActiveTitle: String?
     let sourceActiveIconURL: URL?
     let active: Active?
+    let profitCents: Int?
+    let sourceIncomeSourceId: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -107,13 +109,14 @@ struct Transaction : Decodable {
         case isVirtualDestination = "is_virtual_destination"
         case isBorrowOrReturnSource = "is_borrow_or_return_source"
         case isBorrowOrReturnDestination = "is_borrow_or_return_destination"
-        case isAssetSource = "is_asset_source"
+        case isAssetSource = "is_active_source"
         case sourceActiveId = "source_active_id"
         case sourceActiveTitle = "source_active_title"
         case sourceActiveIconURL = "source_active_icon_url"
         case active = "active"
-    }
-    
+        case profitCents = "profit"
+        case sourceIncomeSourceId = "source_income_source_id"
+    }    
 }
 
 struct TransactionCreationForm : Encodable, Validatable {

@@ -13,6 +13,15 @@ import SwiftDate
 import AlamofireImage
 import Haptica
 import ESPullToRefresh
+import SafariServices
+import EasyTipView
+import SwiftyBeaver
+
+extension SwiftyBeaver {
+    static var cloud: SBPlatformDestination? {
+        return SwiftyBeaver.destinations.first(where: { $0 is SBPlatformDestination } ) as? SBPlatformDestination
+    }
+}
 
 extension UITableView {
     func reloadData(with animation: UITableView.RowAnimation) {        
@@ -677,6 +686,59 @@ extension UIViewController {
         if isAlert {
             dismiss(animated: false, completion: nil)
         }
+    }
+    
+    func show(url: String) {
+        guard let url = URL(string: url) else { return }
+        let browser = SFSafariViewController(url: url)
+        browser.modalPresentationStyle = .popover
+        modal(browser)
+    }
+    
+    func open(url: String) {
+        guard   let urlString = url.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed),
+                let url = URL(string: urlString),
+                UIApplication.shared.canOpenURL(url) else { return }
+        
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    func tip(_ text: String, position: EasyTipView.ArrowPosition, offset: CGPoint? = nil, inset: CGPoint? = nil, for anchor: UIAppearance, within container: UIView?, delegate: EasyTipViewDelegate?, show: Bool = true) -> EasyTipView {
+        
+        let tip = createTip(text, position: position, offset: offset, inset: inset, delegate: delegate)
+        if show {
+            if let anchorView = anchor as? UIView {
+                tip.show(animated: true, forView: anchorView, withinSuperview: container)
+            }
+            else if let anchorItem = anchor as? UIBarItem {
+                tip.show(animated: true, forItem: anchorItem, withinSuperView: container)
+            }
+        }
+        return tip
+    }
+        
+    private func createTip(_ text: String, position: EasyTipView.ArrowPosition, offset: CGPoint? = nil, inset: CGPoint? = nil, delegate: EasyTipViewDelegate?) -> EasyTipView {
+        var preferences = EasyTipView.Preferences()
+        preferences.drawing.font = UIFont(name: "Roboto-Light", size: 14)!
+        preferences.drawing.foregroundColor = UIColor.by(.white100)
+        preferences.drawing.backgroundColor = UIColor.by(.blue1)
+        preferences.drawing.arrowPosition = position
+        preferences.drawing.cornerRadius = 8
+        preferences.drawing.textAlignment = .left
+        
+        if let inset = inset {
+            preferences.positioning.contentVInset = inset.y
+            preferences.positioning.contentHInset = inset.x
+        }
+        
+        if let offset = offset {
+            preferences.positioning.bubbleVInset = offset.y
+            preferences.positioning.bubbleHInset = offset.x
+        }
+        
+        preferences.animating.showDuration = 0.3
+        preferences.animating.dismissDuration = 0.2
+        return EasyTipView(text: text, preferences: preferences, delegate: delegate)
     }
 }
 

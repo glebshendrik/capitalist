@@ -33,13 +33,14 @@ class PieChartCollectionViewCell : UICollectionViewCell {
         pieChartView.holeColor = UIColor.by(.black2)
         pieChartView.rotationAngle = 0
         pieChartView.rotationEnabled = false
-        
+        pieChartView.noDataText = ""
     }
     
     func set(chartData: PieChartData?) {
         pieChartView.clear()
         guard let chartData = chartData else { return }
         pieChartView.data = chartData
+        
 //        pieChartView.animate(xAxisDuration: 0.0, yAxisDuration: 0.3)
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale

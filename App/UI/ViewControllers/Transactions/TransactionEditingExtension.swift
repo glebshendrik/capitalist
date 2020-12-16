@@ -68,7 +68,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         guard viewModel.canChangeSource else { return }
         didTap(transactionableType: viewModel.sourceType,
                transactionPart: .source,
-               skipTransactionable: nil,
+               skipTransactionable: viewModel.destination,
                currency: viewModel.sourceFilterCurrency,
                transactionableTypeCases: sourceTransactionableTypeCases())
     }
@@ -83,7 +83,7 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
         guard viewModel.canChangeDestination else { return }
         didTap(transactionableType: viewModel.destinationType,
                transactionPart: .destination,
-               skipTransactionable: nil,
+               skipTransactionable: viewModel.source,
                currency: viewModel.destinationFilterCurrency,
                transactionableTypeCases: destinationTransactionableTypeCases())
     }
@@ -137,7 +137,7 @@ extension TransactionEditViewController {
                               currency: String?) {
         let viewController = transactionableSelectControllerFor(transactionableType: transactionableType,
                                                                 transactionPart: transactionPart,
-                                                                skipTransactionable: skipTransactionable,
+                                                                skipTransactionable: nil,
                                                                 currency: currency)
 
         slideUp(viewController)

@@ -129,15 +129,15 @@ extension TransactionEditViewModel {
     
     var isBuyingAssetFieldHidden: Bool {
         guard   isNew,
-                let transactionType = transactionType,
-                let destination = destination else { return true }
+                let destination = destination,
+                let source = source else { return true }
         
         var onlyBuyingAssets = false
         if let destination = destination as? ActiveViewModel {
             onlyBuyingAssets = destination.activeType.onlyBuyingAssets
         }
         
-        return transactionType == .income || destination.type != .active || onlyBuyingAssets
+        return source.type != .expenseSource || destination.type != .active || onlyBuyingAssets
     }
     
     var isSellingAssetFieldHidden: Bool {
@@ -275,11 +275,11 @@ extension TransactionType {
         guard let sourceType = sourceType, let destinationType = destinationType else { return nil }
         
         switch (sourceType, destinationType, byingAsset) {
-        case (.incomeSource, .expenseSource, _),
-             (.incomeSource, .active, _):               return .income
+        case (.incomeSource, .expenseSource, _):        return .income
         case (.expenseSource, .expenseSource, _),
              (.active, .expenseSource, _),
-             (.expenseSource, .active, true):           return .fundsMove
+             (.expenseSource, .active, true),
+             (.incomeSource, .active, _):               return .fundsMove
         case (.expenseSource, .expenseCategory, _),
              (.expenseSource, .active, false):          return .expense
         default:                                        return nil

@@ -23,7 +23,8 @@ struct APIResource {
              .changePassword,
              .resetPassword,
              .updateDeviceToken,
-             .onboardUser:
+             .onboardUser,
+             .destroyUserData:
             return APIResource(singular: "user", plural: "users")
         case .createPasswordResetCode:
             return APIResource(singular: "password_reset_code", plural: "password_reset_codes")

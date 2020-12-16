@@ -17,6 +17,16 @@ protocol IconInfoTableViewCellDelegate : EntityInfoTableViewCellDelegate {
 
 class IconInfoTableViewCell : EntityInfoTableViewCell {
     @IBOutlet weak var iconView: IconView!
+    @IBOutlet weak var headerLabelsStackView: UIStackView!
+    @IBOutlet weak var mainValueLabel: UILabel!
+    @IBOutlet weak var mainValueTitleLabel: UILabel!
+    @IBOutlet weak var subLabelsStackView: UIStackView!
+    @IBOutlet weak var firstSubLabelsView: UIView!
+    @IBOutlet weak var firstSubValueLabel: UILabel!
+    @IBOutlet weak var firstSubTitleLabel: UILabel!
+    @IBOutlet weak var secondSubLabelsView: UIView!
+    @IBOutlet weak var secondSubValueLabel: UILabel!
+    @IBOutlet weak var secondSubTitleLabel: UILabel!
     
     var iconDelegate: IconInfoTableViewCellDelegate? {
         return delegate as? IconInfoTableViewCellDelegate

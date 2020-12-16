@@ -1143,7 +1143,7 @@
             <color red="0.34099999070167542" green="0.34900000691413879" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="red 1">
-            <color red="1" green="0.40000000596046448" blue="0.21199999749660492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.40000000000000002" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white 0.04">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>

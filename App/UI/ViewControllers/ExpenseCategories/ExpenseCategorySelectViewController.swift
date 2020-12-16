@@ -212,18 +212,25 @@ extension ExpenseCategorySelectViewController : SwipeTableViewCellDelegate {
                                                       handler: removeWithTransactionsAction)]
         sheet(title: alertTitle, actions: actions)
     }
+    
+    func postFinantialDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+    }
 }
 
 extension ExpenseCategorySelectViewController : ExpenseCategoryEditViewControllerDelegate {
     func didCreateExpenseCategory(with basketType: BasketType, name: String) {
         refreshData()
+        postFinantialDataUpdated()
     }
     
     func didUpdateExpenseCategory(with basketType: BasketType) {
         refreshData()
+        postFinantialDataUpdated()
     }
     
     func didRemoveExpenseCategory(with basketType: BasketType) {
         refreshData()
+        postFinantialDataUpdated()
     }
 }

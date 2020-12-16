@@ -47,6 +47,7 @@ struct Active : Decodable {
     let incomeSource: IncomeSource?
     let prototypeKey: String?
     let accountConnection: AccountConnection? = nil
+    let fullSaleProfitCents: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -73,6 +74,7 @@ struct Active : Decodable {
         case alreadyPaidCents = "already_paid_cents"
         case incomeSource = "income_source"
         case prototypeKey = "prototype_key"
+        case fullSaleProfitCents = "full_sale_profit"
 //        case accountConnection = "account_connection"
     }
 }
@@ -134,7 +136,7 @@ struct ActiveCreationForm : Encodable, Validatable {
         case plannedIncomeType = "planned_income_type"
         case isIncomePlanned = "is_income_planned"
         case reminderAttributes = "reminder_attributes"
-        case activeCreationTransactionAttributes = "active_creation_transaction_attributes"
+        case activeCreationTransactionAttributes = "active_transaction_attributes"
 //        case accountConnectionAttributes = "account_connection_attributes"
     }
     

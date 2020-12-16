@@ -212,18 +212,25 @@ extension IncomeSourceSelectViewController : SwipeTableViewCellDelegate {
                                                       handler: removeWithTransactionsAction)]
         sheet(title: alertTitle, actions: actions)
     }
+    
+    func postFinantialDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+    }
 }
 
 extension IncomeSourceSelectViewController : IncomeSourceEditViewControllerDelegate {
     func didCreateIncomeSource() {
+        postFinantialDataUpdated()
         refreshData()
     }
     
     func didUpdateIncomeSource() {
+        postFinantialDataUpdated()
         refreshData()
     }
     
     func didRemoveIncomeSource() {
+        postFinantialDataUpdated()
         refreshData()
     }
 }

@@ -100,12 +100,22 @@ extension MainViewController {
         }
     }
     
-    func setMenuOverlay(hidden: Bool) {
+    func setMenuOverlay(hidden: Bool, opacity: CGFloat = 0.5) {
         self.navigationController?.navigationBar.layer.zPosition = hidden ? 0 : -1
         self.navigationController?.navigationBar.isUserInteractionEnabled = hidden
-        let newValue: CGFloat = hidden ? 0.0 : 0.5
+        let newValue: CGFloat = hidden ? 0.0 : opacity
         UIView.animate(withDuration: 0.2, animations: {
             self.plusOverlay.alpha = newValue
+        })
+        view.haptic()
+    }
+    
+    func setMainOverlay(hidden: Bool, opacity: CGFloat = 0.8) {
+        self.navigationController?.navigationBar.layer.zPosition = hidden ? 0 : -1
+        self.navigationController?.navigationBar.isUserInteractionEnabled = hidden
+        let newValue: CGFloat = hidden ? 0.0 : opacity
+        UIView.animate(withDuration: 0.2, animations: {
+            self.mainOverlay.alpha = newValue
         })
         view.haptic()
     }

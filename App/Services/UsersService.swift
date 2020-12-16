@@ -50,4 +50,8 @@ class UsersService : Service, UsersServiceProtocol {
     func onboardUser(with id: Int) -> Promise<Void> {
         return request(APIRoute.onboardUser(id: id))
     }
+    
+    func destroyUserData(by id: Int) -> Promise<Void> {
+        return request(APIRoute.destroyUserData(id: id))
+    }
 }

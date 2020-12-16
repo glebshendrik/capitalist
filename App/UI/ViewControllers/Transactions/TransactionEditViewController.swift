@@ -73,6 +73,7 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         tableController.amountSaveButton.backgroundColorForNormal = highlightColor        
         
         registerFormFields().values.forEach { $0.focusedBackgroundColor = highlightColor }
+        tableController.exchangeField.focusedFieldBackgroundColor = highlightColor
     }
     
     override func updateUI() {

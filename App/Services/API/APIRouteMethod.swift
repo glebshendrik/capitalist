@@ -90,7 +90,8 @@ struct APIRouteMethod {
              .destroyDebt,
              .destroyLoan,
              .destroyCredit,
-             .destroyActive:
+             .destroyActive,
+             .destroyUserData:
             return .delete
         }
     }

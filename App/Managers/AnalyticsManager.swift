@@ -10,11 +10,12 @@ import Foundation
 import Firebase
 import FBSDKCoreKit
 import MyTrackerSDK
+import FirebaseMessaging
 
 class AnalyticsManager : AnalyticsManagerProtocol {    
     func setup() {
         FirebaseApp.configure()
-        FirebaseConfiguration.shared.setLoggerLevel(.max)
+        FirebaseConfiguration.shared.setLoggerLevel(.error)
         MRMyTracker.setupTracker("86955137780758326245")
     }
         
@@ -29,5 +30,15 @@ class AnalyticsManager : AnalyticsManagerProtocol {
         Analytics.logEvent(event, parameters: parameters)
         AppEvents.logEvent(AppEvents.Name(event), parameters: parameters ?? [:])
         MRMyTracker.trackEvent(withName: event, eventParams: parameters?.compactMapValues { "\($0)" })
+    }
+    
+    func trackSignUp(user: User) {
+        Analytics.logEvent(AnalyticsEventSignUp, parameters: [AnalyticsParameterSignUpMethod: "email"])
+        
+        AppEvents.logEvent(.completedRegistration)
+        AppEvents.setUser(email: user.email, firstName: user.firstname, lastName: user.lastname, phone: nil, dateOfBirth: nil, gender: nil, city: nil, state: nil, zip: nil, country: nil)
+        
+        MRMyTracker.trackRegistrationEvent()
+        MRMyTracker.trackerParams().email = user.email
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 import PromiseKit
 import StoreKit
 import ApphudSDK
+import SwiftyBeaver
 
 enum AuthProviderError : Error {
     case emailHasAlreadyUsed
@@ -94,7 +95,9 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     func createAndAuthenticateUser(with userForm: UserCreationForm) -> Promise<Session> {
         return  firstly {
                     usersService.createUser(with: userForm)
-                }.then { user in
+                }.get { user in
+                    self.analyticsManager.trackSignUp(user: user)
+                }.then { user in                    
                     self.authenticate(with: SessionCreationForm(email: userForm.email, password: userForm.password))
                 }
     }
@@ -141,6 +144,7 @@ class AccountCoordinator : AccountCoordinatorProtocol {
                 }.get { user in
                     self.router.setMinimumAllowed(version: user.minVersion, build: user.minBuild)
                     self.analyticsManager.set(userId: String(user.id))
+                    SwiftyBeaver.cloud?.analyticsUserName = "user_id:\(user.id)"
                     Apphud.updateUserID(String(user.id))
                 }
     }
@@ -159,10 +163,24 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return usersService.onboardUser(with: currentUserId)
     }
     
+    func destroyCurrentUserData() -> Promise<Void> {
+        guard let currentUserId = userSessionManager.currentSession?.userId else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        return  firstly {
+                    usersService.destroyUserData(by: currentUserId)
+                }.done {
+                    UIFlowManager.set(point: .dataSetup, reached: false)
+                    self.router.route()
+                }
+    }
+    
     func logout() -> Promise<Void> {
         let previousSession = userSessionManager.currentSession
         userSessionManager.forgetSession()
         notificationsCoordinator.cancelAllSceduledNotifications()
+        UIFlowManager.set(point: .onboarding, reached: false)
+        UIFlowManager.set(point: .dataSetup, reached: false)
         router.route()
         guard let session = previousSession else {
             return .value(())

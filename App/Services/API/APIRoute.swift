@@ -19,8 +19,11 @@ enum APIRoute: URLRequestConvertible {
 //            return "https://skrudzh-staging.herokuapp.com"
 //            return "https://test.threebaskets.net"
 //            return "https://skrudz.tempio.app"
+//            return "https://staging.threebaskets.net"
+//            return "https://prod.threebaskets.net"
         case .testFlight:
             return "https://api.threebaskets.net"
+//            return "https://skrudz.tempio.app"
 //            return "https://test.threebaskets.net"
         case .appStore:
             return "https://api.threebaskets.net"
@@ -38,6 +41,7 @@ enum APIRoute: URLRequestConvertible {
     case createPasswordResetCode(form: PasswordResetCodeForm)
     case updateDeviceToken(form: UserDeviceTokenUpdatingForm)
     case onboardUser(id: Int)
+    case destroyUserData(id: Int)
     
     // Sessions
     case createSession(form: SessionCreationForm)

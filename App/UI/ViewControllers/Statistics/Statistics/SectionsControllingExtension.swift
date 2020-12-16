@@ -115,7 +115,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
         guard   let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TransactionsSectionHeaderView.reuseIdentifier) as? TransactionsSectionHeaderView,
             let section = viewModel.section(at: section) as? TransactionsSection else { return nil }
         
-        headerView.title = section.title
+        headerView.section = section
         headerView.contentView.backgroundColor = UIColor.clear
         return headerView
     }

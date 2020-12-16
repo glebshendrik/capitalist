@@ -76,5 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationsCoordinator.updateBadges()
         router.showPasscodeScreen()
         router.setWindow(blurred: false)
+        router.postDataUpdated()
     }
 }

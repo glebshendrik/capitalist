@@ -85,3 +85,15 @@
 
 /* Class = "UILabel"; text = "Выберите страну"; ObjectID = "EEG-eH-USG"; */
 "EEG-eH-USG.text" = "Выберите страну";
+
+/* Class = "UILabel"; text = "Оцените приложение"; ObjectID = "DQW-TH-rGb"; */
+"DQW-TH-rGb.text" = "Rate the app";
+
+/* Class = "UILabel"; text = "Правила пользования"; ObjectID = "b6v-AZ-KZb"; */
+"b6v-AZ-KZb.text" = "Terms of use";
+
+/* Class = "UILabel"; text = "Политика конфиденциальности"; ObjectID = "GOU-Ty-P1t"; */
+"GOU-Ty-P1t.text" = "Privacy policy";
+
+/* Class = "UILabel"; text = "ОБРАТНАЯ СВЯЗЬ"; ObjectID = "Vmd-F6-ks0"; */
+"Vmd-F6-ks0.text" = "CONTACT US";

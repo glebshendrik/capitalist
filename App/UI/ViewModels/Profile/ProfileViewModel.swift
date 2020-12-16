@@ -79,4 +79,8 @@ class ProfileViewModel {
     func logOut() -> Promise<Void> {
         return accountCoordinator.logout()
     }
+    
+    func destroyUserData() -> Promise<Void> {
+        return accountCoordinator.destroyCurrentUserData()
+    }
 }

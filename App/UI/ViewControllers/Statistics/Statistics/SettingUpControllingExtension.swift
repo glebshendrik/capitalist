@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import BadgeHub
+import EasyTipView
 
 extension StatisticsViewController {
     func loadData(financialDataInvalidated: Bool = true) {
@@ -146,6 +147,16 @@ extension StatisticsViewController {
         }
         tableView.setupPullToRefreshAppearance()
     }
+    
+    func setMainOverlay(hidden: Bool, opacity: CGFloat = 0.8) {
+        self.navigationController?.navigationBar.layer.zPosition = hidden ? 0 : -1
+        self.navigationController?.navigationBar.isUserInteractionEnabled = hidden
+        let newValue: CGFloat = hidden ? 0.0 : opacity
+        UIView.animate(withDuration: 0.2, animations: {
+            self.mainOverlay.alpha = newValue
+        })
+        view.haptic()
+    }
 }
 
 extension StatisticsViewController {
@@ -165,4 +176,42 @@ extension StatisticsViewController {
     private func updateTableUI() {
         tableView.reloadData()
     }    
+}
+
+extension StatisticsViewController : EasyTipViewDelegate {
+    var tutorials: [TutorialPayload] {        
+        return [TutorialPayload(point: .statisticsFiltersTutorial,
+                                message: NSLocalizedString("Гибкий фильтр отображения транзакций по источникам и назначениям", comment: ""),
+                                anchor: navigationItem.rightBarButtonItem!,
+                                position: .top,
+                                offset: CGPoint(x: 15, y: 0),
+                                inset: nil),
+                TutorialPayload(point: .statisticsPeriodTutorial,
+                                message: NSLocalizedString("Отображение статистики за выбранный период", comment: ""),
+                                anchor: navigationItem.titleView!,
+                                position: .top,
+                                offset: nil,
+                                inset: nil)]
+    }
+    
+    func show(_ tutorials: [TutorialPayload]) {
+        guard let tutorial = tutorials.first(where: { !UIFlowManager.reached(point: $0.point) }) else { return }
+        
+        setMainOverlay(hidden: false)
+        tutorialTip = tip(tutorial.message,
+                          position: tutorial.position,
+                          offset: tutorial.offset,
+                          inset: tutorial.inset,
+                          for: tutorial.anchor,
+                          within: nil,
+                          delegate: self)
+        UIFlowManager.set(point: tutorial.point, reached: true)
+    }
+            
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {        
+        if tipView == tutorialTip {
+            setMainOverlay(hidden: true)
+            show(tutorials)
+        }
+    }
 }

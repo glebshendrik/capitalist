@@ -20,6 +20,7 @@ import FirebaseCoreDiagnostics
 import FBSDKCoreKit
 import FirebaseDynamicLinks
 import MyTrackerSDK
+import SwiftyBeaver
 
 class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private let storyboards: [Infrastructure.Storyboard: UIStoryboard]
@@ -84,7 +85,6 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     }
     
     private func continueMyTrackerUserActivity(_ userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        
         return MRMyTracker.continue(userActivity) { params -> Void in
             guard let restorationHandlerParams = params as? [UIUserActivityRestoring]? else { return }
             restorationHandler(restorationHandlerParams)
@@ -199,6 +199,10 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             return false
         }
     }
+    
+    func postDataUpdated() {
+        NotificationCenter.default.post(name: MainViewController.finantialDataInvalidatedNotification, object: nil)
+    }
 }
 
 extension ApplicationRouter {
@@ -212,6 +216,7 @@ extension ApplicationRouter {
         setupApphud()
         setupMyTracker()
         setupAnalytics()
+        setupLogger()
     }
     
     func setupAppearance() {
@@ -273,6 +278,13 @@ extension ApplicationRouter {
         if !UIFlowManager.reach(point: .verificationManagerInitialization) {            
             biometricVerificationManager.setInAppBiometricVerification(enabled: true)
         }        
+    }
+    
+    private func setupLogger() {
+//        let console = ConsoleDestination()
+        let cloud = SBPlatformDestination(appID: "9GzNgj", appSecret: "fbu0pHuwbvvaLjDllk14njfkwuflluta", encryptionKey: "ancdIrinQlbaycys7xzmofxwuubo2fg9")
+//        SwiftyBeaver.addDestination(console)
+        SwiftyBeaver.addDestination(cloud)
     }
     
     private func handleFirstAppLaunch() {

@@ -73,7 +73,7 @@ extension MainViewController {
     func didSetSource(cell: UICollectionViewCell?, animated: Bool) {
         if isSelecting {
             cell?.set(selected: true, animated: animated)
-            updateAdviserTip()
+//            updateAdviserTip()
         }
         else {
             cell?.set(selected: true, animated: animated)
@@ -84,7 +84,7 @@ extension MainViewController {
     func didSetDestination(cell: UICollectionViewCell?, animated: Bool) {
         if isSelecting {
             cell?.set(selected: true, animated: animated)
-            updateAdviserTip()
+//            updateAdviserTip()
         }
         else {
             cell?.set(selected: true, animated: animated)
@@ -141,8 +141,7 @@ extension MainViewController {
         transactionController.sourceCollectionView = nil
         transactionController.sourceCell = nil
         transactionController.destinationCollectionView = nil
-        transactionController.destinationCell = nil
-        adviserTip?.dismiss()
+        transactionController.destinationCell = nil        
         viewModel.resetTransactionables()
     }
 }

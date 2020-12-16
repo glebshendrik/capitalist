@@ -39,6 +39,9 @@ PODS:
   - Firebase/DynamicLinks (6.19.0):
     - Firebase/CoreOnly
     - FirebaseDynamicLinks (~> 4.0.7)
+  - Firebase/Messaging (6.19.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 4.3.0)
   - FirebaseAnalytics (6.3.1):
     - FirebaseCore (~> 6.6)
     - FirebaseInstallations (~> 1.1)
@@ -73,6 +76,20 @@ PODS:
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.5)
     - PromisesObjC (~> 1.2)
+  - FirebaseInstanceID (4.3.4):
+    - FirebaseCore (~> 6.6)
+    - FirebaseInstallations (~> 1.0)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/UserDefaults (~> 6.5)
+  - FirebaseMessaging (4.3.1):
+    - FirebaseAnalyticsInterop (~> 1.5)
+    - FirebaseCore (~> 6.6)
+    - FirebaseInstanceID (~> 4.3)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.5)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Reachability (~> 6.5)
+    - GoogleUtilities/UserDefaults (~> 6.5)
+    - Protobuf (>= 3.9.2, ~> 3.9)
   - GoogleAppMeasurement (6.3.1):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -131,6 +148,7 @@ PODS:
   - PromiseKit/UIKit (6.5.2):
     - PromiseKit/CorePromise
   - PromisesObjC (1.2.8)
+  - Protobuf (3.12.0)
   - RandomColorSwift (1.0.0)
   - RecurrencePicker (0.3.0)
   - SaltEdge-iOS-Swift (3.3.1):
@@ -171,6 +189,7 @@ PODS:
   - SwiftMessages (6.0.0):
     - SwiftMessages/App (= 6.0.0)
   - SwiftMessages/App (6.0.0)
+  - SwiftyBeaver (1.9.1)
   - SwiftyGif (5.2.0)
   - Swinject (2.6.2)
   - SwinjectAutoregistration (2.6.0):
@@ -201,6 +220,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
   - Firebase/DynamicLinks
+  - Firebase/Messaging
   - Haptica
   - InfiniteLayout
   - IQKeyboardManager
@@ -223,6 +243,7 @@ DEPENDENCIES:
   - SwiftDate (~> 6.1)
   - SwifterSwift (~> 5.1)
   - SwiftMessages
+  - SwiftyBeaver
   - SwiftyGif
   - Swinject (= 2.6.2)
   - SwinjectAutoregistration (= 2.6.0)
@@ -273,6 +294,8 @@ SPEC REPOS:
     - FirebaseCrashlytics
     - FirebaseDynamicLinks
     - FirebaseInstallations
+    - FirebaseInstanceID
+    - FirebaseMessaging
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
@@ -283,8 +306,10 @@ SPEC REPOS:
     - myTrackerSDK
     - nanopb
     - PromisesObjC
+    - Protobuf
     - SaltEdge-iOS-Swift
     - SwifterSwift
+    - SwiftyBeaver
     - SwiftyGif
     - Swinject
     - SwinjectStoryboard
@@ -342,6 +367,8 @@ SPEC CHECKSUMS:
   FirebaseCrashlytics: 7c95218730d1debf493e987233c7b41dd7ba1329
   FirebaseDynamicLinks: 417dc6dbb6013233c77558290d73296f429656a6
   FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
+  FirebaseInstanceID: cef67c4967c7cecb56ea65d8acbb4834825c587b
+  FirebaseMessaging: 828e66eb357a893e3cebd9ee0f6bc1941447cc94
   GoogleAppMeasurement: c29d405ff76e18551b5d158eaba6753fda8c7542
   GoogleDataTransport: a857c6a002d201b524dd4bc2ed7e7355ed07e785
   GoogleDataTransportCCTSupport: 32f75fbe904c82772fcbb6b6bd4525bfb6f2a862
@@ -356,6 +383,7 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   RandomColorSwift: 9f6b61247b17eafe0fd75e4a0977f2af1abd68d1
   RecurrencePicker: 72c4ad5bbf0e75c73b7ed9eddd60f307e3b1eba6
   SaltEdge-iOS-Swift: f6f2e2815345c96b2865be2500ac2848f5de2ab4
@@ -370,6 +398,7 @@ SPEC CHECKSUMS:
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
   SwifterSwift: a9e8e144832638c2850b43da5feaf9598c6ad65b
   SwiftMessages: da7c981256a65b3e58022d9027a36584cf4eccf5
+  SwiftyBeaver: a1f5691458561414bcfab51874b2b7445451602b
   SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   Swinject: cf7458774b1b00323080a9c67e47a1ee7f9d2af1
   SwinjectAutoregistration: 93a908f7543c401b0c315305ac0ae501efdbce89
@@ -378,6 +407,6 @@ SPEC CHECKSUMS:
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
 
-PODFILE CHECKSUM: 1279c20783bdad8167b4211315af9b3dd6406762
+PODFILE CHECKSUM: fa45d0663f004c226c997e1a2d3d74ec4d272138
 
 COCOAPODS: 1.8.0

@@ -24,25 +24,50 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <color key="backgroundColor" name="black 2"/>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZG-fQ-ZKQ">
-                    <rect key="frame" x="24" y="29.5" width="335" height="16.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZG-fQ-ZKQ">
+                    <rect key="frame" x="24" y="29.5" width="34.5" height="16.5"/>
+                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="14"/>
+                    <color key="textColor" name="white 0.4"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8f-GT-Q3g">
+                    <rect key="frame" x="66.5" y="28" width="16" height="20"/>
+                    <color key="backgroundColor" name="white 0.12"/>
+                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="13"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="2" maxX="8" maxY="2"/>
+                    <state key="normal">
+                        <color key="titleColor" name="white 1.0"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdh-vE-RWt">
+                    <rect key="frame" x="93.5" y="38" width="257.5" height="0.0"/>
                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="14"/>
                     <color key="textColor" name="white 0.4"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <constraints>
+                <constraint firstItem="kdh-vE-RWt" firstAttribute="centerY" secondItem="U8f-GT-Q3g" secondAttribute="centerY" id="AFJ-yu-qdY"/>
                 <constraint firstItem="aYl-6v-qqs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CaI-zN-e4b"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="GZG-fQ-ZKQ" secondAttribute="trailing" constant="16" id="Mfp-kS-y8R"/>
+                <constraint firstItem="U8f-GT-Q3g" firstAttribute="centerY" secondItem="GZG-fQ-ZKQ" secondAttribute="centerY" id="DeW-gC-4x1"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="GZG-fQ-ZKQ" secondAttribute="bottom" constant="4" id="MhW-Y5-8FX"/>
                 <constraint firstItem="GZG-fQ-ZKQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="Tcs-p1-ZOF"/>
                 <constraint firstItem="aYl-6v-qqs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bl9-Gy-hqh"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aYl-6v-qqs" secondAttribute="trailing" id="gwE-XU-kwT"/>
+                <constraint firstItem="kdh-vE-RWt" firstAttribute="leading" secondItem="U8f-GT-Q3g" secondAttribute="trailing" constant="11" id="ksd-5e-cYf"/>
+                <constraint firstItem="U8f-GT-Q3g" firstAttribute="leading" secondItem="GZG-fQ-ZKQ" secondAttribute="trailing" constant="8" id="rwi-ZY-Flb"/>
+                <constraint firstAttribute="trailing" secondItem="kdh-vE-RWt" secondAttribute="trailing" constant="24" id="vG7-JT-iT0"/>
                 <constraint firstAttribute="bottom" secondItem="aYl-6v-qqs" secondAttribute="bottom" id="yKu-ac-G18"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="amountButton" destination="U8f-GT-Q3g" id="dEb-ya-03p"/>
                 <outlet property="dateLabel" destination="GZG-fQ-ZKQ" id="6sL-uk-qxU"/>
             </connections>
             <point key="canvasLocation" x="138" y="85"/>
@@ -52,8 +77,14 @@
         <namedColor name="black 2">
             <color red="0.125" green="0.13300000131130219" blue="0.14900000393390656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="white 0.12">
+            <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.11999999731779099" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="white 0.4">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white 1.0">
+            <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
