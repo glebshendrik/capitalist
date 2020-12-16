@@ -23,7 +23,6 @@ extension MainViewController : ExpenseSourceEditViewControllerDelegate {
         loadExpenseSources()
         loadBudget()
         loadBaskets()
-        loadIncomeSources()
         loadExpenseCategories(by: .joy)
         loadExpenseCategories(by: .safe)
         loadExpenseCategories(by: .risk)

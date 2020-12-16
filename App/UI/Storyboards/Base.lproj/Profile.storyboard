@@ -415,7 +415,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Профиль" id="SWu-J2-TUw">
                         <barButtonItem key="backBarButtonItem" title=" " id="sej-V8-3o1"/>
-                        <barButtonItem key="rightBarButtonItem" title="Изм." image="pen-edit-icon" id="RIb-UX-y0w">
+                        <barButtonItem key="rightBarButtonItem" title="Изм." image="edit-info-icon" id="RIb-UX-y0w">
                             <color key="tintColor" name="blue 1"/>
                             <connections>
                                 <segue destination="gFR-U7-GKz" kind="presentation" identifier="ShowProfileEditScreen" id="GEj-uE-oHc"/>
@@ -580,6 +580,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="save-icon" id="mHV-nu-Gwl">
+                            <color key="tintColor" name="blue 1"/>
                             <connections>
                                 <action selector="didTapSaveButton:" destination="A7X-Rr-QMF" id="hFy-ml-3IM"/>
                             </connections>
@@ -851,8 +852,8 @@
     <resources>
         <image name="arrow-right-small-icon" width="7" height="12"/>
         <image name="close-icon" width="14.5" height="14.5"/>
+        <image name="edit-info-icon" width="21" height="21"/>
         <image name="loader-1" width="55" height="31"/>
-        <image name="pen-edit-icon" width="14" height="14"/>
         <image name="save-icon" width="16" height="14"/>
         <namedColor name="black 2">
             <color red="0.125" green="0.13300000131130219" blue="0.14900000393390656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

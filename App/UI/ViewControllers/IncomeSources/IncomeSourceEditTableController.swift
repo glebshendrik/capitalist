@@ -9,7 +9,6 @@
 import UIKit
 
 protocol IncomeSourceEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
-    func didAppear()
     func didTapIcon()
     func didChange(name: String?)
     func didTapCurrency()
@@ -19,8 +18,7 @@ protocol IncomeSourceEditTableControllerDelegate : FormFieldsTableViewController
 }
 
 class IncomeSourceEditTableController : FormFieldsTableViewController {
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var iconBackgroundImageView: UIImageView!
+    @IBOutlet weak var icon: IconView!
     
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!
@@ -35,12 +33,7 @@ class IncomeSourceEditTableController : FormFieldsTableViewController {
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        delegate?.didAppear()
-    }
-    
+        
     override func setupUI() {
         super.setupUI()
         setupNameField()

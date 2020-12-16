@@ -63,4 +63,8 @@ extension RegistrationViewController : RegistrationTableControllerDelegate {
     func didTapSignIn() {
         push(factory.loginViewController())
     }
+    
+    func didAppear() {
+         
+    }
 }

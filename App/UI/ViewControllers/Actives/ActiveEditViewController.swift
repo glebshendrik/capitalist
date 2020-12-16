@@ -31,6 +31,7 @@ class ActiveEditViewController : FormTransactionsDependableEditViewController {
         return [ActiveCreationForm.CodingKeys.name.rawValue : tableController.nameField,
                 "active_type" : tableController.activeTypeField,
                 ActiveCreationForm.CodingKeys.currency.rawValue : tableController.currencyField,
+                ActiveCreationTransactionNestedAttributes.CodingKeys.sourceId.rawValue : tableController.expenseSourceField,
                 ActiveCreationForm.CodingKeys.costCents.rawValue : tableController.costField,
                 ActiveCreationForm.CodingKeys.alreadyPaidCents.rawValue : tableController.alreadyPaidField,
                 ActiveCreationForm.CodingKeys.goalAmountCents.rawValue : tableController.goalAmountField,
@@ -76,6 +77,7 @@ class ActiveEditViewController : FormTransactionsDependableEditViewController {
         updateActiveTypeUI()
         updateTextFieldsUI()
         updateCurrencyUI()
+        updateExpenseSourceUI()
         updateIsIncomePlannedUI()
         updateActiveIncomeTypeUI()
         updateReminderUI()
@@ -101,5 +103,9 @@ extension ActiveEditViewController {
     
     func set(active: Active) {        
         viewModel.set(active: active)
+    }
+    
+    func set(costCents: Int?) {
+        viewModel.set(costCents: costCents)
     }
 }

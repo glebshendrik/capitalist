@@ -15,12 +15,13 @@ enum APIRoute: URLRequestConvertible {
     static var baseURLString: String {
         switch UIApplication.shared.inferredEnvironment {
         case .debug:
-//            return "https://api.threebaskets.net"
-            return "https://skrudzh-staging.herokuapp.com"
+            return "https://api.threebaskets.net"
+//            return "https://skrudzh-staging.herokuapp.com"
 //            return "https://test.threebaskets.net"
+//            return "https://skrudz.tempio.app"
         case .testFlight:
-//            return "https://api.threebaskets.net"
-            return "https://test.threebaskets.net"
+            return "https://api.threebaskets.net"
+//            return "https://test.threebaskets.net"
         case .appStore:
             return "https://api.threebaskets.net"
         }
@@ -89,7 +90,9 @@ enum APIRoute: URLRequestConvertible {
                             borrowId: Int?,
                             borrowType: BorrowType?,
                             count: Int?,
-                            lastGotAt: Date?)
+                            lastGotAt: Date?,
+                            fromGotAt: Date?,
+                            toGotAt: Date?)
     case createTransaction(form: TransactionCreationForm)
     case showTransaction(id: Int)
     case updateTransaction(form: TransactionUpdatingForm)
@@ -133,6 +136,7 @@ enum APIRoute: URLRequestConvertible {
     
     // ExchangeRates
     case findExchangeRate(from: String, to: String)
+    case indexExchangeRates(userId: Int)
     
     // Budget
     case showBudget(userId: Int)

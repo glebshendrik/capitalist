@@ -15,12 +15,16 @@ protocol TransactionEditViewControllerDelegate {
     func didCreateTransaction(id: Int, type: TransactionType)
     func didUpdateTransaction(id: Int, type: TransactionType)
     func didRemoveTransaction(id: Int, type: TransactionType)
+    func shouldShowCreditEditScreen(destination: TransactionDestination)
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination)
 }
 
 class TransactionEditViewController : FormNavBarButtonsEditViewController {
     var viewModel: TransactionEditViewModel!
     var tableController: TransactionEditTableController!
     var delegate: TransactionEditViewControllerDelegate?
+    
+    var titleView: TransactionEditTitleView!
     
     override var canSave: Bool { return viewModel.canSave }
     override var shouldLoadData: Bool { return true }
@@ -31,7 +35,6 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         super.keyboardWillAppear()
         viewModel.resetCalculator()
     }
-
     
     override func registerFormFields() -> [String : FormField] {
         return [Transaction.CodingKeys.sourceId.rawValue : tableController.sourceField,
@@ -43,6 +46,33 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     override func setup(tableController: FormFieldsTableViewController) {
         self.tableController = tableController as? TransactionEditTableController
         self.tableController.delegate = self
+    }
+    
+    override func setupNavigationBar() {
+        self.titleView = TransactionEditTitleView(frame: CGRect.zero)
+        navigationItem.titleView = titleView
+        super.setupNavigationBar()
+    }
+    
+    override func updateNavigationItemUI() {
+        titleView.set(title: viewModel.title)
+        
+        let highlightColor = UIColor.by(viewModel.highlightColor)
+        titleView.set(highlightColor: highlightColor)
+        
+        navigationItem.rightBarButtonItem?.tintColor = highlightColor
+        saveBarButton.tintColor = highlightColor
+        
+        saveButton?.backgroundColor = highlightColor
+        saveButton?.backgroundColorForNormal = highlightColor
+        
+        tableController.saveButton.backgroundColor = highlightColor
+        tableController.saveButton.backgroundColorForNormal = highlightColor
+        
+        tableController.amountSaveButton.backgroundColor = highlightColor
+        tableController.amountSaveButton.backgroundColorForNormal = highlightColor        
+        
+        registerFormFields().values.forEach { $0.focusedBackgroundColor = highlightColor }
     }
     
     override func updateUI() {
@@ -62,6 +92,15 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     
     override func loadDataPromise() -> Promise<Void> {
         return viewModel.loadData()
+    }
+    
+    override func save() {
+        if viewModel.shouldAskForReestimateAsset {
+            askForReestimateAsset()
+        }
+        else {
+            super.save()
+        }
     }
     
     override func savePromise() -> Promise<Void> {
@@ -96,12 +135,12 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         self.delegate = delegate
     }
     
-    func set(transactionId: Int) {
-        viewModel.set(transactionId: transactionId)
+    func set(transactionId: Int, transactionType: TransactionType?) {
+        viewModel.set(transactionId: transactionId, transactionType: transactionType)
     }
     
-    func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?) {
-        viewModel.set(source: source, destination: destination, returningBorrow: returningBorrow)
+    func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?, transactionType: TransactionType?) {
+        viewModel.set(source: source, destination: destination, returningBorrow: returningBorrow, transactionType: transactionType)
     }
     
     func loadExchangeRate() {
@@ -118,17 +157,20 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
         }
     }
     
-    func loadSource(id: Int, type: TransactionableType) {
+    func loadSource(id: Int, type: TransactionableType, completion: (() -> Void)? = nil) {
         operationStarted()
         
         firstly {
             viewModel.loadSource(id: id, type: type)
-        }.catch { _ in
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка при загрузке источника", comment: "Ошибка при загрузке источника"),
-                                              theme: .error)
-        }.finally {
+        }.done {
             self.operationFinished()
             self.updateUI()
+            completion?()
+        }.catch { _ in
+            self.operationFinished()
+            self.updateUI()
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка при загрузке источника", comment: "Ошибка при загрузке источника"),
+                                              theme: .error)
         }
     }
     

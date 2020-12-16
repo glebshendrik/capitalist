@@ -10,11 +10,12 @@ import UIKit
 import SDWebImageSVGCoder
 
 protocol ActiveEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
-    func didAppear()
     func didTapIcon()
     func didTapActiveType()
     func didChange(name: String?)
     func didTapCurrency()
+    func didTapExpenseSource()
+    func didChange(isMovingFundsFromWallet: Bool)
     func didChange(cost: String?)
     func didChange(alreadyPaid: String?)
     func didChange(goalAmount: String?)
@@ -29,14 +30,15 @@ protocol ActiveEditTableControllerDelegate : FormFieldsTableViewControllerDelega
 }
 
 class ActiveEditTableController : FormFieldsTableViewController {
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var bankIconView: SVGKFastImageView!
-    @IBOutlet weak var iconPen: UIView!
-    @IBOutlet weak var iconBackgroundView: UIView!
     
+    @IBOutlet weak var icon: IconView!
+    @IBOutlet weak var iconPen: UIView!
+        
     @IBOutlet weak var activeTypeField: FormTapField!
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!
+    @IBOutlet weak var isMovingFundsFromWalletSwitchField: FormSwitchValueField!
+    @IBOutlet weak var expenseSourceField: FormTapField!
     @IBOutlet weak var costField: FormMoneyTextField!
     @IBOutlet weak var goalAmountField: FormMoneyTextField!
     @IBOutlet weak var alreadyPaidField: FormMoneyTextField!    
@@ -53,6 +55,8 @@ class ActiveEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var reminderCell: UITableViewCell!
     
+    @IBOutlet weak var isMovingFundsFromWalletCell: UITableViewCell!
+    @IBOutlet weak var expenseSourceCell: UITableViewCell!
     @IBOutlet weak var activeIncomeTypeCell: UITableViewCell!
     @IBOutlet weak var alreadyPaidCell: UITableViewCell!
     @IBOutlet weak var goalAmountCell: UITableViewCell!
@@ -66,17 +70,14 @@ class ActiveEditTableController : FormFieldsTableViewController {
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        delegate?.didAppear()
-    }
-    
+        
     override func setupUI() {
         super.setupUI()
         setupActiveTypeField()
         setupNameField()
         setupCurrencyField()
+        setupOnBalanceSwitchField()
+        setupExpenseSourceField()
         setupCostField()
         setupAlreadyPaidField()
         setupGoalAmountField()
@@ -109,6 +110,22 @@ class ActiveEditTableController : FormFieldsTableViewController {
         currencyField.imageName = "currency-icon"
         currencyField.didTap { [weak self] in
             self?.delegate?.didTapCurrency()
+        }
+    }
+    
+    func setupOnBalanceSwitchField() {
+        isMovingFundsFromWalletSwitchField.placeholder = NSLocalizedString("Списать сумму с кошелька", comment: "")
+        isMovingFundsFromWalletSwitchField.imageName = "included_in_balance_icon"
+        isMovingFundsFromWalletSwitchField.didSwitch { [weak self] isMovingFundsFromWallet in
+            self?.delegate?.didChange(isMovingFundsFromWallet: isMovingFundsFromWallet)
+        }
+    }
+    
+    func setupExpenseSourceField() {
+        expenseSourceField.placeholder = NSLocalizedString("Кошелек", comment: "Кошелек")
+        expenseSourceField.imageName = TransactionableType.expenseSource.defaultIconName
+        expenseSourceField.didTap { [weak self] in
+            self?.delegate?.didTapExpenseSource()
         }
     }
     

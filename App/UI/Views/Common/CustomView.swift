@@ -1,22 +1,18 @@
 //
-//  NavigationBarCustomTitleView.swift
+//  CustomView.swift
 //  Three Baskets
 //
-//  Created by Alexander Petropavlovsky on 28/03/2019.
-//  Copyright © 2019 Real Tranzit. All rights reserved.
+//  Created by Alexander Petropavlovsky on 15.04.2020.
+//  Copyright © 2020 Real Tranzit. All rights reserved.
 //
 
 import UIKit
 
 class CustomView : UIView {
-    @IBOutlet var contentView: UIView!
+    var didSetupConstraints = false
     
-    var nibName: String {
-        return String(describing: type(of: self))
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        return UIView.layoutFittingExpandedSize
+    convenience init() {
+        self.init(frame: CGRect.zero)
     }
     
     override init(frame: CGRect) {
@@ -29,10 +25,19 @@ class CustomView : UIView {
         setup()
     }
     
+    override func updateConstraints() {
+        if !didSetupConstraints {
+            setupConstraints()
+            didSetupConstraints = true
+        }
+        super.updateConstraints()
+    }
+    
     func setup() {
-        Bundle.main.loadNibNamed(nibName, owner: self, options: nil)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func setupConstraints() {
+        
     }
 }

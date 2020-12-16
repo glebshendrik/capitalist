@@ -22,6 +22,7 @@ class ExpenseSourceEditViewModel {
     
     var selectedIconURL: URL? = nil
     var selectedCurrency: Currency? = nil
+    var selectedCardType: CardType? = nil
     var name: String? = nil
     var amount: String? = nil
     var creditLimit: String? = nil
@@ -48,7 +49,11 @@ class ExpenseSourceEditViewModel {
     var defaultIconName: String {
         return TransactionableType.expenseSource.defaultIconName
     }
-
+    
+    var selectedCardTypeImageName: String? {
+        return selectedCardType?.imageName
+    }
+    
     var selectedCurrencyName: String? {
         return selectedCurrency?.translatedName
     }
@@ -111,6 +116,10 @@ class ExpenseSourceEditViewModel {
         return isNew
     }
     
+    var iconType: IconType {
+        return expenseSource?.accountConnection != nil ? .vector : .raster
+    }
+    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
@@ -132,6 +141,7 @@ class ExpenseSourceEditViewModel {
         
         selectedIconURL = expenseSource.iconURL
         selectedCurrency = expenseSource.currency
+        selectedCardType = expenseSource.cardType
         name = expenseSource.name
         amount = expenseSource.amountCents.moneyDecimalString(with: selectedCurrency)
         creditLimit = expenseSource.creditLimitCents?.moneyDecimalString(with: selectedCurrency)
@@ -195,6 +205,7 @@ extension ExpenseSourceEditViewModel {
                                          currency: selectedCurrency?.code,
                                          amountCents: amountToSave.intMoney(with: selectedCurrency),
                                          creditLimitCents: creditLimitToSave.intMoney(with: selectedCurrency),
+                                         cardType: selectedCardType,
                                          accountConnectionAttributes: accountConnectionAttributes)
     }
 }
@@ -215,6 +226,7 @@ extension ExpenseSourceEditViewModel {
                                          iconURL: selectedIconURL,
                                          amountCents: amountToSave.intMoney(with: selectedCurrency),          
                                          creditLimitCents: creditLimitToSave.intMoney(with: selectedCurrency),
+                                         cardType: selectedCardType,
                                          accountConnectionAttributes: accountConnectionAttributes)
     }
 }

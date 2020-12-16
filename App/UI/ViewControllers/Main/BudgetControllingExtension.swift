@@ -35,7 +35,6 @@ extension MainViewController : TitleViewDelegate {
                           options: .transitionCrossDissolve,
                           animations: {
                             
-            self.incomeSourcesAmountLabel.text = self.viewModel.incomesAmountRounded
             self.expenseSourcesAmountLabel.text = self.viewModel.expenseSourcesAmountRounded
             self.basketTotalLabel.attributedText = self.total
         })

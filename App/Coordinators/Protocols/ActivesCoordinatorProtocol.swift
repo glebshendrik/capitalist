@@ -13,6 +13,7 @@ protocol ActivesCoordinatorProtocol {
     func indexActiveTypes() -> Promise<[ActiveType]>
     func indexActives(for basketType: BasketType) -> Promise<[Active]>
     func indexUserActives() -> Promise<[Active]>
+    func first(for basketType: BasketType) -> Promise<Active?>
     func createActive(with creationForm: ActiveCreationForm) -> Promise<Active>
     func showActive(by id: Int) -> Promise<Active>
     func updateActive(with updatingForm: ActiveUpdatingForm) -> Promise<Void>

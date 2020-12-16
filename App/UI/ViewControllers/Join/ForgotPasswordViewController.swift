@@ -61,5 +61,9 @@ extension ForgotPasswordViewController : ForgotPasswordTableControllerDelegate {
     
     func didTapSave() {
         save()
-    }    
+    }
+    
+    func didAppear() {
+         
+    }
 }

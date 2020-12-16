@@ -19,14 +19,22 @@ class TransactionsCoordinator : TransactionsCoordinatorProtocol {
         self.transactionsService = transactionsService
     }
     
-    func index() -> Promise<[Transaction]> {
-        return index(transactionableId: nil,
-                     transactionableType: nil,
-                     creditId: nil,
-                     borrowId: nil,
-                     borrowType: nil,
-                     count: nil,
-                     lastGotAt: nil)
+    func index(fromGotAt: Date?,
+               toGotAt: Date?) -> Promise<[Transaction]> {
+        guard let currentUserId = userSessionManager.currentSession?.userId else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        return transactionsService.index(for: currentUserId,
+                                         type: nil,
+                                         transactionableId: nil,
+                                         transactionableType: nil,
+                                         creditId: nil,
+                                         borrowId: nil,
+                                         borrowType: nil,
+                                         count: nil,
+                                         lastGotAt: nil,
+                                         fromGotAt: fromGotAt,
+                                         toGotAt: toGotAt)
     }
     
     func index(transactionableId: Int?,
@@ -47,7 +55,9 @@ class TransactionsCoordinator : TransactionsCoordinatorProtocol {
                                          borrowId: borrowId,
                                          borrowType: borrowType,
                                          count: count,
-                                         lastGotAt: lastGotAt)
+                                         lastGotAt: lastGotAt,
+                                         fromGotAt: nil,
+                                         toGotAt: nil)
     }
     
     func index(by type: TransactionType) -> Promise<[Transaction]> {
@@ -62,7 +72,9 @@ class TransactionsCoordinator : TransactionsCoordinatorProtocol {
                                          borrowId: nil,
                                          borrowType: nil,
                                          count: nil,
-                                         lastGotAt: nil)
+                                         lastGotAt: nil,
+                                         fromGotAt: nil,
+                                         toGotAt: nil)
     }
     
     func create(with creationForm: TransactionCreationForm) -> Promise<Transaction> {

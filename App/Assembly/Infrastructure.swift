@@ -69,16 +69,19 @@ struct Infrastructure {
         case IncomeSourceEditNavigationController
         case IncomeSourceSelectViewController
         case IncomeSourceInfoViewController
+        case IncomeSourcesViewController
         
         // Expense Sources
         case ExpenseSourceEditNavigationController
         case ExpenseSourceEditViewController
         case ExpenseSourceSelectViewController
+        case ExpenseSourcesViewController
         case ExpenseSourceInfoViewController
         case BankConnectionViewController
         case ProvidersViewController
         case ProviderConnectionViewController
         case AccountsViewController
+        case CardTypesViewController
         
         // Expense Categories
         case ExpenseCategoryEditNavigationController
@@ -109,6 +112,7 @@ struct Infrastructure {
         case ActiveSelectViewController
         case DependentIncomeSourceInfoViewController
         case ActiveInfoViewController
+        case ActivesViewController
         
         // Common
         case IconsViewController
@@ -173,7 +177,8 @@ struct Infrastructure {
             case .IncomeSourceEditViewController,
                  .IncomeSourceEditNavigationController,
                  .IncomeSourceSelectViewController,
-                 .IncomeSourceInfoViewController:
+                 .IncomeSourceInfoViewController,
+                 .IncomeSourcesViewController:
                 return .IncomeSources
             case .ExpenseSourceEditNavigationController,
                  .ExpenseSourceEditViewController,
@@ -182,7 +187,9 @@ struct Infrastructure {
                  .BankConnectionViewController,
                  .ProvidersViewController,
                  .ProviderConnectionViewController,
-                 .AccountsViewController:
+                 .AccountsViewController,
+                 .ExpenseSourcesViewController,
+                 .CardTypesViewController:
                 return .ExpenseSources
             case .ExpenseCategoryEditNavigationController,
                  .ExpenseCategoryEditViewController,
@@ -243,7 +250,8 @@ struct Infrastructure {
                  .ActiveEditViewController,
                  .ActiveSelectViewController,
                  .DependentIncomeSourceInfoViewController,                 
-                 .ActiveInfoViewController:
+                 .ActiveInfoViewController,
+                 .ActivesViewController:
                 return .Actives
             }
         }

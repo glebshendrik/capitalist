@@ -7,11 +7,10 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class ActiveTableViewCell : UITableViewCell {
-    
-    @IBOutlet weak var iconBackgroundView: UIView!
-    @IBOutlet weak var iconImageView: UIImageView!
+class ActiveTableViewCell : SwipeTableViewCell {
+    @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
     
@@ -26,10 +25,11 @@ class ActiveTableViewCell : UITableViewCell {
                 
         nameLabel.text = viewModel.name
         costLabel.text = viewModel.costRounded
-        iconImageView.setImage(with: viewModel.iconURL,
-                               placeholderName: viewModel.defaultIconName,
-                               renderingMode: .alwaysTemplate)        
-        iconImageView.tintColor = UIColor.by(.white100)
-        iconBackgroundView.backgroundColor = viewModel.basketType.iconBackgroundColor
+        
+        iconView.iconType = viewModel.iconType
+        iconView.vectorIconMode = .fullsize
+        iconView.iconURL = viewModel.iconURL
+        iconView.defaultIconName = viewModel.defaultIconName
+        iconView.backgroundViewColor = viewModel.basketType.iconBackgroundColor
     }
 }

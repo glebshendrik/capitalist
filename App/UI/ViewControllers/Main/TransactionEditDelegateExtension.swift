@@ -65,6 +65,14 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
         updateDataWith(transactionId: id, transactionType: type)
     }
     
+    func shouldShowCreditEditScreen(destination: TransactionDestination) {
+        showCreditEditScreen(destination: destination)
+    }
+
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+        showBorrowEditScreen(type: type, source: source, destination: destination)
+    }
+        
     private func updateDataWith(transactionId: Int, transactionType: TransactionType) {
         switch transactionType {
         case .income:
@@ -78,7 +86,6 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     
     private func updateIncomeDependentData() {
         setSelecting(false, animated: true)
-        loadIncomeSources()
         loadBudget()
         loadBaskets()
         loadExpenseSources()
@@ -89,7 +96,10 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     private func updateFundsMoveDependentData() {
         setSelecting(false, animated: true)
         loadBudget()
+        loadBaskets()
         loadExpenseSources()
+        loadActives(by: .risk)
+        loadActives(by: .safe)
     }
     
     private func updateExpenseDependentData() {
@@ -104,7 +114,6 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     
     private func updateDebtDependentData() {
         setSelecting(false, animated: true)
-        loadIncomeSources()
         loadBudget()
         loadBaskets()
         loadExpenseSources()
@@ -113,7 +122,6 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     
     private func updateLoanDependentData() {
         setSelecting(false, animated: true)
-        loadIncomeSources()
         loadBudget()
         loadBaskets()
         loadExpenseSources()
@@ -122,7 +130,6 @@ extension MainViewController: TransactionEditViewControllerDelegate, BorrowEditV
     
     private func updateCreditDependentData() {
         setSelecting(false, animated: true)
-        loadIncomeSources()
         loadBudget()
         loadBaskets()
         loadExpenseSources()

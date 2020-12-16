@@ -90,8 +90,7 @@ class FormSliderField : FormTextField {
         self.didChange = didChange
     }
     
-    func convert(value: Float) -> Float {
-        
+    func convert(value: Float) -> Float {        
         return Float(Int((value + step / 2) / step) * Int(step))
     }
     

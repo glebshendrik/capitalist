@@ -38,8 +38,8 @@
 /* Class = "UILabel"; text = "98 000 ₽"; ObjectID = "YLL-t9-8ZH"; */
 "YLL-t9-8ZH.text" = "98 000 ₽";
 
-/* Class = "UILabel"; text = "РАСХОДЫ"; ObjectID = "dB1-hV-29K"; */
-"dB1-hV-29K.text" = "РАСХОДЫ";
+/* Class = "UILabel"; text = "РАСХОДЫ И ИНВЕСТИЦИИ"; ObjectID = "dB1-hV-29K"; */
+"dB1-hV-29K.text" = "РАСХОДЫ И ИНВЕСТИЦИИ";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "dvu-UH-vXw"; */
 "dvu-UH-vXw.text" = "0";

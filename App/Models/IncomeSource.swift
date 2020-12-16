@@ -24,6 +24,7 @@ struct IncomeSource : Decodable {
     let waitingDebts: [Borrow]
     let reminder: Reminder?
     let prototypeKey: String?
+    let isVirtual: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -41,6 +42,7 @@ struct IncomeSource : Decodable {
         case waitingDebts = "waiting_debts"
         case reminder
         case prototypeKey = "prototype_key"
+        case isVirtual = "is_virtual"
     }
 
 }

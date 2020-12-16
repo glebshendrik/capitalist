@@ -41,6 +41,7 @@ class TransactionEditViewModel {
     var exchangeRate: Float = 1.0 { didSet { didSetExchangeRate() } }
     var accumulator: Int? = nil
     var previousOperation: OperationType? = nil
+    var requiredTransactionType: TransactionType? = nil
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
@@ -60,17 +61,19 @@ class TransactionEditViewModel {
         self.currencyConverter = currencyConverter
     }
     
-    func set(transactionId: Int) {
+    func set(transactionId: Int, transactionType: TransactionType?) {
         self.transactionId = transactionId
+        self.requiredTransactionType = transactionType
     }
     
-    func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?) {
+    func set(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel?, transactionType: TransactionType?) {
         self.returningBorrow = returningBorrow
         self.source = source
         self.destination = destination
         if let destination = destination as? ActiveViewModel {
             self.isBuyingAsset = destination.activeType.buyingAssetsDefault
         }
+        self.requiredTransactionType = transactionType
     }
         
     func set(transaction: Transaction, source: Transactionable, destination: Transactionable) {

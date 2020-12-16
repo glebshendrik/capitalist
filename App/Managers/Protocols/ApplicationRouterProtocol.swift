@@ -24,4 +24,5 @@ protocol ApplicationRouterProtocol {
     func setMinimumAllowed(version: String?, build: String?)
     func setWindow(blurred: Bool)
     func showPasscodeScreen()
+    func dismissPresentedAlerts()
 }

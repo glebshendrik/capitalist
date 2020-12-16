@@ -416,6 +416,10 @@ extension ApplicationRouter {
         blurred ? window.addBlur(with: blurViewTagId) : window.removeBlur(with: blurViewTagId)
     }
     
+    func dismissPresentedAlerts() {
+        window.rootViewController?.topmostPresentedViewController.dismissIfAlert()
+    }
+    
     func viewController(_ viewController: Infrastructure.ViewController) -> UIViewController {
         let storyboard = self.storyboards[viewController.storyboard]
         return storyboard!.instantiateViewController(withIdentifier: viewController.identifier)

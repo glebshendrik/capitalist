@@ -74,6 +74,23 @@ class AccountCoordinator : AccountCoordinatorProtocol {
                 }
     }
     
+    func authenticate(with json: String) -> Promise<Session> {        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
+        guard  let data = json.data(using: .utf8),
+            let objectDictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+            let object = try? decoder.decode(Session.self, withJSONObject: objectDictionary) else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        return  firstly {
+                    Promise.value(object)
+                }.get { session in
+                    self.userSessionManager.save(session: session)
+                }.get { session in
+                    self.router.route()
+                }
+    }
+    
     func createAndAuthenticateUser(with userForm: UserCreationForm) -> Promise<Session> {
         return  firstly {
                     usersService.createUser(with: userForm)

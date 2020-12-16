@@ -68,6 +68,7 @@ class DatePickerViewController : UIViewController, DatePickerViewControllerInput
         let closeButton = UIBarButtonItem(image: UIImage(named: "close-icon")?.withRenderingMode(.alwaysTemplate), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.didTapCloseButton(_:)))
         
         let saveButton = UIBarButtonItem(image: UIImage(named: "save-icon"), style: UIBarButtonItem.Style.done, target: self, action: #selector(self.didTapSaveButton(_:)))
+        saveButton.tintColor = UIColor.by(.blue1)
         
         let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         

@@ -11,8 +11,7 @@ import PromiseKit
 
 extension MainViewController {
     func loadData() {
-        loadBudget()
-        loadIncomeSources()
+        loadBudget()        
         loadExpenseSources()
         loadBaskets()
         loadExpenseCategories(by: .joy)
@@ -58,56 +57,56 @@ extension MainViewController {
     }
 }
 
-extension MainViewController {
-    func loadIncomeSources(scrollToEndWhenUpdated: Bool = false) {
-        set(incomeSourcesActivityIndicator, hidden: false)
-        firstly {
-            viewModel.loadIncomeSources()
-        }.done {
-            self.update(self.incomeSourcesCollectionView,
-                        scrollToEnd: scrollToEndWhenUpdated)
-        }
-        .catch { e in
-            print(e)
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки источников доходов", comment: "Ошибка загрузки источников доходов"), theme: .error)
-        }.finally {
-            self.set(self.incomeSourcesActivityIndicator, hidden: true)
-        }
-    }
-    
-    func moveIncomeSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        set(incomeSourcesActivityIndicator, hidden: false)
-        firstly {
-            viewModel.moveIncomeSource(from: sourceIndexPath,
-                                       to: destinationIndexPath)
-        }.done {
-            self.update(self.incomeSourcesCollectionView)
-        }
-        .catch { _ in
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка обновления порядка источников доходов", comment: "Ошибка обновления порядка источников доходов"), theme: .error)
-        }.finally {
-            self.set(self.incomeSourcesActivityIndicator, hidden: true)
-        }
-    }
-    
-    func removeIncomeSource(by id: Int, deleteTransactions: Bool) {
-        set(incomeSourcesActivityIndicator, hidden: false)
-        firstly {
-            viewModel.removeIncomeSource(by: id, deleteTransactions: deleteTransactions)
-        }.done {
-            self.didRemoveIncomeSource()
-        }
-        .catch { error in
-            self.set(self.incomeSourcesActivityIndicator, hidden: true)
-            switch error {
-            case APIRequestError.unprocessedEntity(let errors):
-                self.show(errors: errors)
-            default:
-                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка удаления источника дохода", comment: "Ошибка удаления источника дохода"), theme: .error)
-            }
-        }
-    }
-}
+//extension MainViewController {
+//    func loadIncomeSources(scrollToEndWhenUpdated: Bool = false) {
+//        set(incomeSourcesActivityIndicator, hidden: false)
+//        firstly {
+//            viewModel.loadIncomeSources()
+//        }.done {
+//            self.update(self.incomeSourcesCollectionView,
+//                        scrollToEnd: scrollToEndWhenUpdated)
+//        }
+//        .catch { e in
+//            print(e)
+//            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки источников доходов", comment: "Ошибка загрузки источников доходов"), theme: .error)
+//        }.finally {
+//            self.set(self.incomeSourcesActivityIndicator, hidden: true)
+//        }
+//    }
+//    
+//    func moveIncomeSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        set(incomeSourcesActivityIndicator, hidden: false)
+//        firstly {
+//            viewModel.moveIncomeSource(from: sourceIndexPath,
+//                                       to: destinationIndexPath)
+//        }.done {
+//            self.update(self.incomeSourcesCollectionView)
+//        }
+//        .catch { _ in
+//            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка обновления порядка источников доходов", comment: "Ошибка обновления порядка источников доходов"), theme: .error)
+//        }.finally {
+//            self.set(self.incomeSourcesActivityIndicator, hidden: true)
+//        }
+//    }
+//    
+//    func removeIncomeSource(by id: Int, deleteTransactions: Bool) {
+//        set(incomeSourcesActivityIndicator, hidden: false)
+//        firstly {
+//            viewModel.removeIncomeSource(by: id, deleteTransactions: deleteTransactions)
+//        }.done {
+//            self.didRemoveIncomeSource()
+//        }
+//        .catch { error in
+//            self.set(self.incomeSourcesActivityIndicator, hidden: true)
+//            switch error {
+//            case APIRequestError.unprocessedEntity(let errors):
+//                self.show(errors: errors)
+//            default:
+//                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка удаления источника дохода", comment: "Ошибка удаления источника дохода"), theme: .error)
+//            }
+//        }
+//    }
+//}
 
 extension MainViewController {
     func loadExpenseSources(scrollToEndWhenUpdated: Bool = false) {

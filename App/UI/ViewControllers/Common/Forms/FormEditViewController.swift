@@ -161,15 +161,20 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     
     func setupNavigationBar() {
         setupNavigationBarAppearance()
-        navigationItem.title = formTitle
+        updateNavigationItemUI()
     }
     
     func updateUI() {
-        
+        updateNavigationItemUI()
     }
     
     func updateNavBarUI() {
-        navigationController?.navigationBar.barTintColor = UIColor.by(.black2)        
+        navigationController?.navigationBar.barTintColor = UIColor.by(.black2)
+        
+    }
+    
+    func updateNavigationItemUI() {
+        navigationItem.title = formTitle
     }
     
     func setup(tableController: FormFieldsTableViewController) {

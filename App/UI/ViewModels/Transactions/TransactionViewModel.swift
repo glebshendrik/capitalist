@@ -50,11 +50,7 @@ class TransactionViewModel {
     var destinationIconURL: URL? {
         return transaction.destinationIconURL
     }
-    
-    var iconBackgroundImageName: String? {
-        return nil
-    }
-        
+            
 //    var amount: String {
 //        return amountCents.moneyCurrencyString(with: currency, shouldRound: false) ?? ""
 //    }
@@ -107,6 +103,10 @@ class TransactionViewModel {
     var isReturningLoan: Bool {
         guard let returningBorrow = transaction.returningBorrow else { return false }
         return returningBorrow.type == .loan
+    }
+    
+    var isActiveCreation: Bool {
+        return transaction.active != nil
     }
     
     var currency: Currency {
@@ -201,7 +201,169 @@ class TransactionViewModel {
         if isReturningLoan {
             return NSLocalizedString("Вы вернули", comment: "")
         }
+        if isCrediting {
+            return NSLocalizedString("Вы взяли кредит", comment: "")
+        }
+        if transaction.isAssetSource {
+            return NSLocalizedString("Дивиденды", comment: "Дивиденды")
+        }
+        
         return comment?.isEmpty ?? true ? nil : " "
+    }
+    
+    var isVirtualSource: Bool {
+        return transaction.isVirtualSource
+    }
+    
+    var isVirtualDestination: Bool {
+        return transaction.isVirtualDestination
+    }
+    
+    var isVirtual: Bool {
+        return isVirtualSource || isVirtualDestination
+    }
+    
+    var isBorrowOrReturnSource: Bool {
+        return transaction.isBorrowOrReturnSource
+    }
+    
+    var isBorrowOrReturnDestination: Bool {
+        return transaction.isBorrowOrReturnDestination
+    }
+    
+    var isAssetSource: Bool {
+        return transaction.isAssetSource
+    }
+    
+    var sourceActiveId: Int? {
+        return transaction.sourceActiveId
+    }
+    
+    var sourceActiveTitle: String? {
+        return transaction.sourceActiveTitle
+    }
+    
+    var sourceActiveIconURL: URL? {
+        return transaction.sourceActiveIconURL
+    }
+    
+    var titleTransactionPart: TransactionPart {
+        switch (type, sourceType, destinationType) {
+        case (.income, .incomeSource, _):
+            return isVirtualSource ? .destination : .source
+        case (.expense, .expenseSource, _):
+            return isVirtualDestination ? .source : .destination
+        case (.fundsMove, .expenseSource, .expenseSource):
+            if isVirtualDestination {
+                return .source
+            }
+            if isVirtualSource {
+                return .destination
+            }
+            return .source
+        case (.fundsMove, .expenseSource, .active):
+            return .destination
+        case (.fundsMove, .active, .expenseSource):
+            return .source
+        default:
+            return .source
+        }
+    }
+    
+    var title: String {
+        let title = titleTransactionPart == .source ? sourceTitle : destinationTitle
+        
+        if let credit = transaction.credit {
+            return credit.name
+        }
+        if let borrow = transaction.borrow {
+            return borrow.name
+        }
+        if let returningBorrow = transaction.returningBorrow {
+            return returningBorrow.name
+        }
+        
+        return title
+    }
+    
+    var subtitle: String {
+        let subtitle = titleTransactionPart == .source ? destinationTitle : sourceTitle
+        let creditWord = NSLocalizedString("Кредит", comment: "Кредит")
+        let loanWord = NSLocalizedString("Займ", comment: "Займ")
+        let debtWord = NSLocalizedString("Долг", comment: "Долг")
+        let assetPurchaseWord = NSLocalizedString("Покупка актива", comment: "Покупка актива")
+        let assetExpenseWord = NSLocalizedString("Расход по активу", comment: "")
+        let assetSaleWord = NSLocalizedString("Продажа актива", comment: "")
+
+        if isCrediting {
+            return isVirtual ? creditWord : "\(creditWord) · \(subtitle)"
+        }
+        if isLoan {
+            return isVirtual ? loanWord : "\(loanWord) · \(subtitle)"
+        }
+        if isDebt {
+            return isVirtual ? debtWord : "\(debtWord) · \(subtitle)"
+        }
+        if isActiveCreation {
+            return isVirtual ? assetPurchaseWord : "\(assetPurchaseWord) · \(subtitle)"
+        }
+        if isVirtual {
+            if sourceType == .active || destinationType == .active {
+                return NSLocalizedString("Переоценка актива", comment: "Переоценка актива")
+            }
+            if sourceType == .expenseSource && destinationType == .expenseSource {
+                return NSLocalizedString("Создание кошелька", comment: "Создание кошелька")
+            }
+            return NSLocalizedString("Изменено Вами", comment: "Изменено Вами")
+        }
+        if type == .expense && destinationType == .active {
+            return "\(assetExpenseWord) · \(subtitle)"
+        }
+        if type == .fundsMove && destinationType == .active {
+            return "\(assetPurchaseWord) · \(subtitle)"
+        }
+        if type == .fundsMove && sourceType == .active {
+            return "\(assetSaleWord) · \(subtitle)"
+        }
+        
+        return subtitle
+    }
+    
+    var iconURL: URL? {
+        let iconURL = titleTransactionPart == .source ? sourceIconURL : destinationIconURL
+        
+        if let credit = transaction.credit {
+            return credit.iconURL
+        }
+        if let borrow = transaction.borrow {
+            return borrow.iconURL
+        }
+        if let returningBorrow = transaction.returningBorrow {
+            return returningBorrow.iconURL
+        }
+        
+        return iconURL
+    }
+    
+    var transactionableType: TransactionableType {
+        return titleTransactionPart == .source ? sourceType : destinationType
+    }
+    
+    var iconPlaceholder: String {
+        let iconPlaceholder = transactionableType.defaultIconName(basketType: basketType)
+        
+        if isCrediting {
+            return "credit-default-icon"
+        }
+        if isBorrowing || isReturn {
+            return "borrow-default-icon"
+        }
+        
+        return iconPlaceholder
+    }
+    
+    var iconType: IconType {
+        return iconURL?.absoluteString.components(separatedBy: ".").last == "svg" ? .vector : .raster
     }
     
     init(transaction: Transaction) {

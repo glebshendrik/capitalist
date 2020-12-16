@@ -60,6 +60,28 @@ extension StatisticsViewController : TransactionEditViewControllerDelegate, Borr
     func didRemoveTransaction(id: Int, type: TransactionType) {
         loadData()
     }
+    
+    func shouldShowCreditEditScreen(destination: TransactionDestination) {
+        showCreditEditScreen(destination: destination)
+    }
+
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+        showBorrowEditScreen(type: type, source: source, destination: destination)
+    }
+    
+    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+        modal(factory.borrowEditViewController(delegate: self,
+                                               type: type,
+                                               borrowId: nil,
+                                               source: source,
+                                               destination: destination))
+    }
+    
+    func showCreditEditScreen(destination: TransactionDestination) {
+        modal(factory.creditEditViewController(delegate: self,
+                                               creditId: nil,
+                                               destination: destination))
+    }
 }
 
 extension StatisticsViewController : FiltersSelectionViewControllerDelegate {
@@ -86,12 +108,12 @@ extension StatisticsViewController {
             showCreditInfoScreen(creditId: creditId)
         }
         else {
-            showTransactionEditScreen(transactionId: transaction.id)
+            showTransactionEditScreen(transactionId: transaction.id, transactionType: transaction.type)
         }
     }
     
-    private func showTransactionEditScreen(transactionId: Int) {
-        modal(factory.transactionEditViewController(delegate: self, transactionId: transactionId))
+    private func showTransactionEditScreen(transactionId: Int, transactionType: TransactionType?) {
+        modal(factory.transactionEditViewController(delegate: self, transactionId: transactionId, transactionType: transactionType))
     }
         
     func showBorrowInfoScreen(borrowId: Int, borrowType: BorrowType) {
@@ -116,19 +138,23 @@ extension StatisticsViewController : DatePeriodSelectionViewControllerDelegate {
     func didSelect(period: DateRangeTransactionFilter?) {
         guard let period = period else { return }
         viewModel.updatePeriods(dateRangeFilter: period)
-        viewModel.updatePresentationData()
-        updateUI()
+        clearTransactions()
+        loadData()
+//        viewModel.updatePresentationData()
+//        updateUI()
     }
     
 }
 
 extension StatisticsViewController : GraphTableViewCellDelegate {
     func didChangeRange() {
-        viewModel.updatePresentationData()
-        updateUI()
+        loadTransactions()
+//        viewModel.updatePresentationData()
+//        updateUI()
     }
     
     func didTapGraphTypeButton() {
+//        viewModel.set(filters: [])
         viewModel.updatePresentationData()
         updateUI()
     }

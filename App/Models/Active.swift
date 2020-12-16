@@ -77,6 +77,31 @@ struct Active : Decodable {
     }
 }
 
+struct ActiveCreationTransactionNestedAttributes : Encodable {
+    let id: Int?
+    let sourceId: Int?
+    let sourceType: TransactionableType = .expenseSource
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case sourceId = "source_id"
+        case sourceType = "source_type"
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        if let id = id {
+            try container.encode(id, forKey: .id)
+        }
+        if let sourceId = sourceId {
+            try container.encode(sourceId, forKey: .sourceId)
+        }
+        try container.encode(sourceType, forKey: .sourceType)
+    }
+}
+
+
 struct ActiveCreationForm : Encodable, Validatable {
     var basketId: Int?
     let activeTypeId: Int?
@@ -93,6 +118,7 @@ struct ActiveCreationForm : Encodable, Validatable {
     let isIncomePlanned: Bool
     let reminderAttributes: ReminderNestedAttributes?
     let accountConnectionAttributes: AccountConnectionNestedAttributes?
+    let activeCreationTransactionAttributes: ActiveCreationTransactionNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case activeTypeId = "active_type_id"
@@ -108,6 +134,7 @@ struct ActiveCreationForm : Encodable, Validatable {
         case plannedIncomeType = "planned_income_type"
         case isIncomePlanned = "is_income_planned"
         case reminderAttributes = "reminder_attributes"
+        case activeCreationTransactionAttributes = "active_creation_transaction_attributes"
 //        case accountConnectionAttributes = "account_connection_attributes"
     }
     

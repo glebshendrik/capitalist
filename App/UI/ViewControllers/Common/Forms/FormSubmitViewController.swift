@@ -9,7 +9,7 @@
 import UIKit
 
 class FormSubmitViewController : FormEditViewController {
-    @IBOutlet weak var saveButton: UIButton?
+    @IBOutlet weak var saveButton: HighlightButton?
     var saveButtonTitle: String { return NSLocalizedString("Save", comment: "Save") }
     
     var canSave: Bool { return true }

@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import BadgeHub
 
 extension StatisticsViewController {
     func loadData(financialDataInvalidated: Bool = true) {
@@ -16,6 +17,27 @@ extension StatisticsViewController {
         }
         refreshData()
     }
+    
+    func clearTransactions() {
+        viewModel.clearTransactions()
+        updateUI()
+    }
+    
+    func loadTransactions(shouldClear: Bool = true) {
+        if shouldClear {
+            clearTransactions()
+        }
+        setLoading()
+        _ = firstly {
+                viewModel.loadTransactions()
+            }.catch { _ in
+                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки данных", comment: "Ошибка загрузки данных"), theme: .error)
+            }.finally {
+                self.updateUI()
+                self.stopPullToRefresh()
+            }
+    }
+    
     
     @objc func refreshData() {
         setLoading()
@@ -49,6 +71,11 @@ extension StatisticsViewController {
         viewModel.setDataLoading()
         updateUI()
     }
+    
+    private func stopPullToRefresh() {
+        tableView.es.stopPullToRefresh()
+        tableView.refreshControl?.endRefreshing()
+    }
 }
 
 extension StatisticsViewController {
@@ -63,6 +90,7 @@ extension StatisticsViewController {
     func setupUI() {
         setupNavigationBar()
         setupTableUI()
+        setupPullToRefresh()
         setupNotifications()
     }
         
@@ -77,7 +105,20 @@ extension StatisticsViewController {
         
         setupNavigationBarAppearance()
         // TODO
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "filters-icon"), style: .plain, target: self, action: #selector(didTapFiltersButton(_:)))
+        let filtersButton = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 26)))
+        filtersButton.setImage(UIImage(named: "filters-icon"), for: .normal)
+        filtersButton.addTarget(self, action: #selector(didTapFiltersButton(_:)), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: filtersButton)
+        setupFiltersBadgeUI()
+    }
+    
+    private func setupFiltersBadgeUI() {
+        if let badgeable = navigationItem.rightBarButtonItem?.customView {
+            filtersBadge = BadgeHub(view: badgeable)
+            filtersBadge?.setCircleColor(UIColor.by(.blue1), label: UIColor.by(.white100))
+            filtersBadge?.scaleCircleSize(by: 0.6)
+            filtersBadge?.setCountLabel(UIFont(name: "Roboto-Light", size: 12)!)
+        }
     }
     
     @objc func didTapFiltersButton(_ sender: Any) {
@@ -97,6 +138,14 @@ extension StatisticsViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100        
     }
+    
+    private func setupPullToRefresh() {
+        tableView.es.addPullToRefresh {
+            [weak self] in
+            self?.loadTransactions(shouldClear: false)
+        }
+        tableView.setupPullToRefreshAppearance()
+    }
 }
 
 extension StatisticsViewController {
@@ -107,52 +156,13 @@ extension StatisticsViewController {
     
     private func updateNavigationBar() {
         titleView.dateRangeFilter = viewModel.dateRangeFilter
-        navigationItem.rightBarButtonItem?.image = UIImage(named: viewModel.hasTransactionableFilters ? "filters-dot-icon" : "filters-icon")        
+        filtersBadge?.setCount(viewModel.numberOfTransactionableFilters)
+        if viewModel.hasTransactionableFilters {
+            filtersBadge?.pop()
+        }
     }
     
     private func updateTableUI() {
         tableView.reloadData()
     }    
 }
-
-//        func reloadFilterAndData() {
-//            postFinantialDataUpdated()
-//            setLoading()
-//            _ = firstly {
-//                    viewModel.reloadFilterAndData()
-//                }.catch { _ in
-//                    self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
-//                }.finally {
-//                    self.updateUI()
-//            }
-//        }
-    
-//    func reloadFilter() {
-//        setLoading()
-//        _ = firstly {
-//                viewModel.reloadFilter()
-//            }.catch { _ in
-//                self.messagePresenterManager.show(navBarMessage: "Ошибка загрузки данных", theme: .error)
-//            }.finally {
-//                self.updateUI()
-//        }
-//    }
-//func updateGraphFiltersSection() {
-//    viewModel.updateGraphFiltersSection()
-//}
-//
-//func updateGraphFilters(updateGraph: Bool = false) {
-//    updateGraphFiltersSection()
-//    if let graphFiltersSectionIndex = viewModel.graphFiltersSectionIndex {
-//        var indexSet = IndexSet(integer: graphFiltersSectionIndex)
-//        
-//        if  let graphSectionIndex = viewModel.graphSectionIndex,
-//            updateGraph {
-//            indexSet = IndexSet(arrayLiteral: graphSectionIndex, graphFiltersSectionIndex)
-//        }
-//        
-//        UIView.performWithoutAnimation {
-//            self.tableView.reloadSections(indexSet, with: .none)
-//        }
-//    }
-//}

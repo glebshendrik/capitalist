@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class BasketItemDescription : BasketItemView {
+class BasketItemDescription : CustomView {
     lazy var titleLabel: UILabel = { return UILabel() }()
     lazy var amountLabel: UILabel = { return UILabel() }()
     lazy var subAmountLabel: UILabel = { return UILabel() }()

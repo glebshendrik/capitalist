@@ -102,6 +102,8 @@ extension ApplicationAssembly {
         
         container.autoregister(ProviderConnectionViewModel.self, initializer: ProviderConnectionViewModel.init)
         
-        container.autoregister(CountriesViewModel.self, initializer: CountriesViewModel.init)        
+        container.autoregister(CountriesViewModel.self, initializer: CountriesViewModel.init)
+        
+        container.autoregister(CardTypesViewModel.self, initializer: CardTypesViewModel.init)        
     }
 }

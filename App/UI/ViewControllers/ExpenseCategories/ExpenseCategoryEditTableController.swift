@@ -9,7 +9,6 @@
 import UIKit
 
 protocol ExpenseCategoryEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
-    func didAppear()
     func didTapIcon()
     func didChange(name: String?)
     func didChange(monthlyPlanned: String?)
@@ -19,8 +18,7 @@ protocol ExpenseCategoryEditTableControllerDelegate : FormFieldsTableViewControl
 }
 
 class ExpenseCategoryEditTableController : FormFieldsTableViewController {
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var iconBackgroundView: UIView!
+    @IBOutlet weak var icon: IconView!
     
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!
@@ -37,12 +35,7 @@ class ExpenseCategoryEditTableController : FormFieldsTableViewController {
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        delegate?.didAppear()
-    }
-    
+        
     override func setupUI() {
         super.setupUI()
         setupNameField()

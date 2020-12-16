@@ -31,7 +31,7 @@ extension MainViewController {
     }
     
     func didTapBasket(with basketType: BasketType) {
-        scrollBasketAtTopIfNeeded(basketType: basketType)
+//        scrollBasketAtTopIfNeeded(basketType: basketType)
         viewModel.basketsViewModel.selectBasketType(basketType)
         updateBasketsUI()
     }

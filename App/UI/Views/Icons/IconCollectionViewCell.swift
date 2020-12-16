@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 
 class IconCollectionViewCell : UICollectionViewCell {
-    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var iconView: IconView!
     
     var viewModel: IconViewModel? {
         didSet {
@@ -21,8 +21,12 @@ class IconCollectionViewCell : UICollectionViewCell {
     func updateUI() {
         guard let viewModel = viewModel else { return }
         
-        iconImageView.setImage(with: viewModel.url, placeholderName: viewModel.category.defaultIconName, renderingMode: .alwaysTemplate)        
-        iconImageView.tintColor = UIColor.by(.white100)
+        iconView.iconURL = viewModel.url
+        iconView.defaultIconName = viewModel.category.defaultIconName
+        iconView.backgroundViewColor = UIColor.by(.black1)
+        iconView.iconTintColor = UIColor.by(.white100)
+        iconView.iconType = .raster
+
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale        
     }

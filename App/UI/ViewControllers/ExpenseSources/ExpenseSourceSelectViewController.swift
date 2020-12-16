@@ -8,99 +8,47 @@
 
 import UIKit
 import PromiseKit
+import SwipeCellKit
+import SnapKit
 
-protocol ExpenseSourceSelectViewControllerDelegate {
-    func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel)
-    func didSelect(destinationExpenseSourceViewModel: ExpenseSourceViewModel)
-}
+class ExpenseSourceSelectViewController : UIViewController, ApplicationRouterDependantProtocol {
 
-class ExpenseSourceSelectViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
+    @IBOutlet weak var containerView: UIView!
     
-    @IBOutlet weak var loader: UIImageView!
-    @IBOutlet weak var tableView: UITableView!
-    
-    private var delegate: ExpenseSourceSelectViewControllerDelegate? = nil
-    private var selectionType: TransactionPart = .destination
-    
-    var viewModel: ExpenseSourcesViewModel!
-    var messagePresenterManager: UIMessagePresenterManagerProtocol!
-    
+    var router: ApplicationRouterProtocol!
+    lazy var expenseSourcesViewController: ExpenseSourcesViewController! = {
+        return router.viewController(.ExpenseSourcesViewController) as! ExpenseSourcesViewController
+    }()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        loadExpenseSources()
+        embedChildren()
+        setupChildrenUI()
     }
     
-    func set(delegate: ExpenseSourceSelectViewControllerDelegate,
+    private func embedChildren() {
+        addChild(expenseSourcesViewController)
+        containerView.addSubview(expenseSourcesViewController.view)
+        expenseSourcesViewController.view.snp.makeConstraints { make in
+            make.left.top.right.bottom.equalToSuperview()
+        }
+        expenseSourcesViewController.didMove(toParent: self)
+    }
+    
+    private func setupChildrenUI() {
+        expenseSourcesViewController.viewModel.shouldCalculateTotal = false
+        expenseSourcesViewController.viewModel.isAddingAllowed = true
+    }
+        
+    func set(delegate: ExpenseSourcesViewControllerDelegate,
              skipExpenseSourceId: Int?,
              selectionType: TransactionPart,
              currency: String?) {
-        self.delegate = delegate
-        self.viewModel.skipExpenseSourceId = skipExpenseSourceId
-        self.viewModel.currency = currency
-        self.selectionType = selectionType
-    }
-    
-    private func loadExpenseSources() {
-        set(loader, hidden: false, animated: false)
-        firstly {
-            viewModel.loadExpenseSources()
-        }.done {
-            self.updateUI()
-        }
-        .catch { e in
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки кошельков", comment: "Ошибка загрузки кошельков"), theme: .error)
-            self.close()
-        }.finally {
-            self.set(self.loader, hidden: true)
-        }
-    }
-    
-    private func close() {
-        presentingViewController?.dismiss(animated: true, completion: nil)
-    }
-    
-    private func updateUI() {
-        tableView.reloadData(with: .automatic)
-    }
-    
-    private func setupUI() {
-        loader.showLoader()
-        tableView.delegate = self
-        tableView.dataSource = self
+        
+        expenseSourcesViewController.set(delegate: delegate,
+                                         skipExpenseSourceId: skipExpenseSourceId,
+                                         selectionType: selectionType,
+                                         currency: currency)
     }
 }
 
-extension ExpenseSourceSelectViewController : UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfExpenseSources
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseSourceTableViewCell", for: indexPath) as? ExpenseSourceTableViewCell,
-            let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) else {
-                return UITableViewCell()
-        }
-        cell.viewModel = expenseSourceViewModel
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) else { return }
-        switch selectionType {
-        case .source:
-            delegate?.didSelect(sourceExpenseSourceViewModel: expenseSourceViewModel)
-        case .destination:
-            delegate?.didSelect(destinationExpenseSourceViewModel: expenseSourceViewModel)
-        }
-        close()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
-    }
-}

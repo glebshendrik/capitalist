@@ -28,6 +28,14 @@ class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
         return expenseSourcesService.show(by: id)
     }
     
+    func first() -> Promise<ExpenseSource?> {
+        return  firstly {
+                    index(currency: nil)
+                }.map { expenseSources in
+                    expenseSources.first
+                }
+    }
+    
     func first(currency: String, isVirtual: Bool) -> Promise<ExpenseSource> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)

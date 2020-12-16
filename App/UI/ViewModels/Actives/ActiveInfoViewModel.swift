@@ -78,6 +78,10 @@ class ActiveInfoViewModel : EntityInfoViewModel {
             : NSLocalizedString("Подключить банк", comment: "Подключить банк")
     }
     
+    var iconType: IconType {
+        return .raster
+    }
+    
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          creditsCoordinator: CreditsCoordinatorProtocol,
          borrowsCoordinator: BorrowsCoordinatorProtocol,
@@ -129,7 +133,8 @@ class ActiveInfoViewModel : EntityInfoViewModel {
         var fields: [EntityInfoField] = [IconInfoField(fieldId: ActiveInfoField.icon.rawValue,
                                                        iconType: .raster,
                                                        iconURL: selectedIconURL,           
-                                                       placeholder: activeViewModel.defaultIconName),
+                                                       placeholder: activeViewModel.defaultIconName,
+                                                       backgroundColor: basketType.iconBackgroundColor),
                                          BasicInfoField(fieldId: ActiveInfoField.activeType.rawValue,
                                                         title: NSLocalizedString("Тип актива", comment: "Тип актива"),
                                                         value: activeViewModel.activeTypeName)]

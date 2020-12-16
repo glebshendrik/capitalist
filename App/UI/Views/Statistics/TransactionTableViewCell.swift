@@ -9,7 +9,8 @@
 import UIKit
 
 class TransactionTableViewCell : UITableViewCell {
-    @IBOutlet weak var destinationIconImageView: UIImageView!
+    
+    @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var sourceTitleLabel: UILabel!
     @IBOutlet weak var destinationTitleLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
@@ -27,12 +28,16 @@ class TransactionTableViewCell : UITableViewCell {
         guard let viewModel = viewModel else { return }
         
         delimeter?.alpha = 0.3
-                
-        updateIconUI(url: viewModel.destinationIconURL,
-                     placeholder: viewModel.destinationType.defaultIconName(basketType: viewModel.basketType))
+                                
+        iconView.iconType = viewModel.iconType
+        iconView.vectorIconMode = .compact
+        iconView.iconURL = viewModel.iconURL
+        iconView.defaultIconName = viewModel.iconPlaceholder
+        iconView.backgroundViewColor = .clear
+        iconView.iconTintColor = UIColor.by(.gray1)
         
-        sourceTitleLabel.text = viewModel.sourceTitle
-        destinationTitleLabel.text = viewModel.destinationTitle
+        sourceTitleLabel.text = viewModel.title
+        destinationTitleLabel.text = viewModel.subtitle
         amountLabel.text = viewModel.amount
         
         typeLabel.text = viewModel.typeDescription
@@ -40,12 +45,6 @@ class TransactionTableViewCell : UITableViewCell {
         
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
-    }
-    
-    func updateIconUI(url: URL?, placeholder: String?) {
-        destinationIconImageView.setImage(with: url,
-                                          placeholderName: placeholder,
-                                          renderingMode: .alwaysTemplate)
     }
 }
 

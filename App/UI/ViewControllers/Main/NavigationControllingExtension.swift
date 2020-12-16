@@ -25,17 +25,17 @@ extension MainViewController {
 }
 
 extension MainViewController {
-    func showNewIncomeSourceScreen() {
-        showEditScreen(incomeSource: nil)
-    }
+//    func showNewIncomeSourceScreen() {
+//        showEditScreen(incomeSource: nil)
+//    }
     
-    func showEditScreen(incomeSource: IncomeSource?) {
-        modal(factory.incomeSourceEditViewController(delegate: self, incomeSource: incomeSource))
-    }
+//    func showEditScreen(incomeSource: IncomeSource?) {
+//        modal(factory.incomeSourceEditViewController(delegate: self, incomeSource: incomeSource))
+//    }
     
-    func showIncomeSourceInfoScreen(incomeSource: IncomeSourceViewModel?) {
-        modal(factory.incomeSourceInfoViewController(incomeSource: incomeSource))
-    }
+//    func showIncomeSourceInfoScreen(incomeSource: IncomeSourceViewModel?) {
+//        modal(factory.incomeSourceInfoViewController(incomeSource: incomeSource))
+//    }
 }
 
 extension MainViewController {
@@ -88,7 +88,7 @@ extension MainViewController {
     }
     
     func showActiveEditScreen(active: Active?, basketType: BasketType) {    
-        modal(factory.activeEditViewController(delegate: self, active: active, basketType: basketType))
+        modal(factory.activeEditViewController(delegate: self, active: active, basketType: basketType, costCents: nil))
     }
     
     func showActiveInfo(active: ActiveViewModel) {
@@ -126,15 +126,16 @@ extension MainViewController {
         }
     }
     
-    private func showTransactionEditScreen(source: Transactionable?, destination: Transactionable?) {
-        modal(factory.transactionEditViewController(delegate: self, source: source, destination: destination))
+    func showTransactionEditScreen(source: Transactionable? = nil, destination: Transactionable? = nil, transactionType: TransactionType? = nil) {
+        modal(factory.transactionEditViewController(delegate: self, source: source, destination: destination, transactionType: transactionType))
     }
        
     private func showReturnTransactionEditScreen(source: Transactionable, destination: Transactionable, returningBorrow: BorrowViewModel?) {
         modal(factory.transactionEditViewController(delegate: self,
                                                     source: source,
                                                     destination: destination,
-                                                    returningBorrow: returningBorrow))
+                                                    returningBorrow: returningBorrow,
+                                                    transactionType: nil))
     }
         
     private func showExpenseEditScreen(source: ExpenseSourceViewModel, destination: ExpenseCategoryViewModel) {
@@ -191,7 +192,7 @@ extension MainViewController {
         sheet(title: nil, actions: [debtAction, returnAction])
     }
     
-    private func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
         modal(factory.borrowEditViewController(delegate: self,
                                                type: type,
                                                borrowId: nil,
@@ -199,7 +200,7 @@ extension MainViewController {
                                                destination: destination))
     }
     
-    private func showCreditEditScreen(destination: TransactionDestination) {
+    func showCreditEditScreen(destination: TransactionDestination) {
         modal(factory.creditEditViewController(delegate: self,
                                                creditId: nil,
                                                destination: destination))

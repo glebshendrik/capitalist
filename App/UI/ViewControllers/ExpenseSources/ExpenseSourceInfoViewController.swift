@@ -18,7 +18,17 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     override func didTapIcon(field: IconInfoField?) {
         modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSource))
     }
-                
+         
+    override func didTapInfoField(field: BasicInfoField?) {
+        guard let field = field else { return }
+        switch field.identifier {
+        case ExpenseSourceInfoField.balance.identifier:
+            showEditScreen()
+        default:
+            return
+        }
+    }
+    
     override func didTapInfoButton(field: ButtonInfoField?) {
         guard let field = field else { return }
         switch field.identifier {
@@ -27,9 +37,9 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
         case ExpenseSourceInfoField.statistics.identifier:
             modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
         case ExpenseSourceInfoField.transactionIncome.identifier:        
-            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.expenseSourceViewModel))
+            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.expenseSourceViewModel, transactionType: .income))
         case ExpenseSourceInfoField.transactionExpense.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.expenseSourceViewModel, destination: nil))
+            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.expenseSourceViewModel, destination: nil, transactionType: .expense))
         default:
             return
         }
@@ -45,6 +55,22 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
         } else {
             showProviders()
         }
+    }
+    
+    override var isSelectingTransactionables: Bool {
+        return false
+    }
+    
+    override func didCreateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+    
+    override func didUpdateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+    
+    override func didRemoveTransaction(id: Int, type: TransactionType) {
+        refreshData()
     }
 }
 
@@ -99,23 +125,5 @@ extension ExpenseSourceInfoViewController : ExpenseSourceEditViewControllerDeleg
     func didRemoveExpenseSource() {
         viewModel.setAsDeleted()
         closeButtonHandler()
-    }
-}
-
-extension ExpenseSourceInfoViewController : TransactionEditViewControllerDelegate {
-    var isSelectingTransactionables: Bool {
-        return false
-    }
-    
-    func didCreateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-    
-    func didUpdateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-    
-    func didRemoveTransaction(id: Int, type: TransactionType) {
-        refreshData()
     }
 }

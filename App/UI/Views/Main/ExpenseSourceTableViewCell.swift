@@ -7,20 +7,17 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class ExpenseSourceTableViewCell : UITableViewCell {
+class ExpenseSourceTableViewCell : SwipeTableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var iconView: IconView!    
     
     var placeholderName: String {
         return "expense-source-default-icon"
     }
-    
-    var imageTintColor: UIColor {        
-        return UIColor.by(.white100)
-    }
-    
+        
     var viewModel: ExpenseSourceViewModel? {
         didSet {
             updateUI()
@@ -28,12 +25,17 @@ class ExpenseSourceTableViewCell : UITableViewCell {
     }
     
     func updateUI() {
-        nameLabel.text = viewModel?.name
-        amountLabel.text = viewModel?.amountRounded
-        iconImageView.setImage(with: viewModel?.iconURL,
-                               placeholderName: placeholderName,
-                               renderingMode: .alwaysTemplate)
-        iconImageView.tintColor = imageTintColor
-    }    
+        guard let viewModel = viewModel else { return }
+        
+        nameLabel.text = viewModel.name
+        amountLabel.text = viewModel.amountRounded
+        
+        iconView.iconType = viewModel.iconType
+        iconView.vectorIconMode = .fullsize
+        iconView.iconURL = viewModel.iconURL
+        iconView.defaultIconName = viewModel.defaultIconName
+        iconView.backgroundViewColor = UIColor.by(.gray1)
+        iconView.iconTintColor = UIColor.by(.white100)
+    }
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EntityInfoNavigationController : UINavigationController, UIFactoryDependantProtocol, UIMessagePresenterManagerDependantProtocol, IconInfoTableViewCellDelegate, SwitchInfoTableViewCellDelegate, ButtonInfoTableViewCellDelegate, ReminderInfoTableViewCellDelegate {
+class EntityInfoNavigationController : UINavigationController, UIFactoryDependantProtocol, UIMessagePresenterManagerDependantProtocol, IconInfoTableViewCellDelegate, SwitchInfoTableViewCellDelegate, ButtonInfoTableViewCellDelegate, ReminderInfoTableViewCellDelegate, TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate, CreditEditViewControllerDelegate {
     
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var factory: UIFactoryProtocol!
@@ -66,5 +66,79 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
     
     func didTapReminderButton(field: ReminderInfoField?) {
         
+    }
+    
+    var isSelectingTransactionables: Bool {
+        return false
+    }
+    
+    func didCreateCredit() {
+
+    }
+
+    func didCreateDebt() {
+
+    }
+
+    func didCreateLoan() {
+
+    }
+
+    func didUpdateCredit() {
+        
+    }
+
+    func didRemoveCredit() {
+        
+    }
+
+    func didUpdateDebt() {
+        
+    }
+
+    func didUpdateLoan() {
+        
+    }
+
+    func didRemoveDebt() {
+        
+    }
+
+    func didRemoveLoan() {
+        
+    }
+
+    func didCreateTransaction(id: Int, type: TransactionType) {
+        
+    }
+
+    func didUpdateTransaction(id: Int, type: TransactionType) {
+        
+    }
+
+    func didRemoveTransaction(id: Int, type: TransactionType) {
+        
+    }
+    
+    func shouldShowCreditEditScreen(destination: TransactionDestination) {
+        showCreditEditScreen(destination: destination)
+    }
+
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+        showBorrowEditScreen(type: type, source: source, destination: destination)
+    }
+    
+    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+        modal(factory.borrowEditViewController(delegate: self,
+                                               type: type,
+                                               borrowId: nil,
+                                               source: source,
+                                               destination: destination))
+    }
+    
+    func showCreditEditScreen(destination: TransactionDestination) {
+        modal(factory.creditEditViewController(delegate: self,
+                                               creditId: nil,
+                                               destination: destination))
     }
 }

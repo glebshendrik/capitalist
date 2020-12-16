@@ -45,28 +45,31 @@ protocol UIFactoryProtocol {
     
     func incomeSourceSelectViewController(delegate: IncomeSourceSelectViewControllerDelegate) -> IncomeSourceSelectViewController?
     
-    func expenseSourceSelectViewController(delegate: ExpenseSourceSelectViewControllerDelegate,
+    func expenseSourceSelectViewController(delegate: ExpenseSourcesViewControllerDelegate,
                                            skipExpenseSourceId: Int?,
                                            selectionType: TransactionPart,
                                            currency: String?) -> ExpenseSourceSelectViewController?
     
     func expenseCategorySelectViewController(delegate: ExpenseCategorySelectViewControllerDelegate) -> ExpenseCategorySelectViewController?
     
-    func activeSelectViewController(delegate: ActiveSelectViewControllerDelegate,
+    func activeSelectViewController(delegate: ActivesViewControllerDelegate,
                                     skipActiveId: Int?,
                                     selectionType: TransactionPart) -> ActiveSelectViewController?
     
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
                                        source: Transactionable?,
                                        destination: Transactionable?,
-                                       returningBorrow: BorrowViewModel?) -> UINavigationController?
+                                       returningBorrow: BorrowViewModel?,
+                                       transactionType: TransactionType?) -> UINavigationController?
     
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
                                        source: Transactionable?,
-                                       destination: Transactionable?) -> UINavigationController?
+                                       destination: Transactionable?,
+                                       transactionType: TransactionType?) -> UINavigationController?
     
     func transactionEditViewController(delegate: TransactionEditViewControllerDelegate,
-                                       transactionId: Int) -> UINavigationController?
+                                       transactionId: Int,
+                                       transactionType: TransactionType?) -> UINavigationController?
     
     func recurrencePicker(delegate: RecurrencePickerDelegate,
                           recurrenceRule: RecurrenceRule?,
@@ -133,6 +136,8 @@ protocol UIFactoryProtocol {
     
     func expenseSourceInfoViewController(expenseSource: ExpenseSourceViewModel?) -> UINavigationController?
     
+    func cardTypesViewController(delegate: CardTypesViewControllerDelegate) -> UINavigationController?
+    
     func expenseCategoryEditViewController(delegate: ExpenseCategoryEditViewControllerDelegate,
                                            expenseCategory: ExpenseCategory?,
                                            basketType: BasketType) -> UINavigationController?
@@ -145,7 +150,8 @@ protocol UIFactoryProtocol {
         
     func activeEditViewController(delegate: ActiveEditViewControllerDelegate,
                                   active: Active?,
-                                  basketType: BasketType) -> UINavigationController?
+                                  basketType: BasketType,
+                                  costCents: Int?) -> UINavigationController?
     
     func activeInfoViewController(active: ActiveViewModel?) -> UINavigationController?
     

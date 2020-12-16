@@ -26,6 +26,7 @@ extension TransactionEditViewController {
     
     func update(isBuyingAsset: Bool) {
         viewModel.isBuyingAsset = isBuyingAsset
+        updateNavigationItemUI()
         updateIsBuyingAssetUI()
     }
     
@@ -37,6 +38,7 @@ extension TransactionEditViewController {
     func update(gotAt: Date?) {
         viewModel.gotAt = gotAt
         updateToolbarUI()
+        focusAmountField()
     }
     
     func update(source: Transactionable?) {
@@ -50,11 +52,19 @@ extension TransactionEditViewController {
         updateUI()
         loadExchangeRate()
     }
+    
+    func update(source: Transactionable?, destination: Transactionable?, returningBorrow: BorrowViewModel? = nil) {
+        viewModel.source = source
+        viewModel.destination = destination
+        viewModel.returningBorrow = returningBorrow
+        updateUI()
+        loadExchangeRate()
+    }
 }
 
 extension TransactionEditViewController {
-    func focusAmountField() {
-        guard viewModel.hasBothTransactionables else { return }
+    func focusAmountField() {        
+        guard viewModel.hasBothTransactionables, !topmostPresentedViewController.isAlert else { return }
         if viewModel.needCurrencyExchange {
             tableController.exchangeField.amountField.becomeFirstResponder()
         }
@@ -75,6 +85,7 @@ extension TransactionEditViewController {
         tableController.sourceField.subValue = viewModel.sourceAmount
         tableController.sourceField.imageName = viewModel.sourceIconDefaultImageName
         tableController.sourceField.imageURL = viewModel.sourceIconURL
+        tableController.set(cell: tableController.sourceCell, hidden: viewModel.sourceFieldHidden, animated: false, reload: false)
     }
     
     func updateDestinationUI() {
@@ -83,6 +94,7 @@ extension TransactionEditViewController {
         tableController.destinationField.subValue = viewModel.destinationAmount
         tableController.destinationField.imageName = viewModel.destinationIconDefaultImageName
         tableController.destinationField.imageURL = viewModel.destinationIconURL
+        tableController.set(cell: tableController.destinationCell, hidden: viewModel.destinationFieldHidden, animated: false, reload: false)
     }
     
     func updateAmountUI() {

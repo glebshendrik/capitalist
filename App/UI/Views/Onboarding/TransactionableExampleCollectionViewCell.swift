@@ -10,7 +10,7 @@ import UIKit
 
 class TransactionableExampleCollectionViewCell : UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var selectionIndicator: UIView!
     
     var viewModel: TransactionableExampleViewModel? {
@@ -23,8 +23,9 @@ class TransactionableExampleCollectionViewCell : UICollectionViewCell {
         guard let viewModel = viewModel else { return }
         
         nameLabel.text = viewModel.name
-        iconImageView.setImage(with: viewModel.iconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)
-        iconImageView.tintColor = UIColor.by(.white100)
+        iconView.defaultIconName = viewModel.defaultIconName
+        iconView.iconURL = viewModel.iconURL
+        iconView.iconType = .raster
         selectionIndicator.alpha = viewModel.selected ? 1.0 : 0.0
     }
 }

@@ -40,13 +40,53 @@ class ExpenseCategoryInfoViewController : EntityInfoNavigationController {
             modal(factory.borrowEditViewController(delegate: self, type: .debt, borrowId: nil, source: nil, destination: viewModel.expenseCategoryViewModel))
         }
         else {
-            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel.expenseCategoryViewModel))
+            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel.expenseCategoryViewModel, transactionType: .expense))
         }
         
     }
     
     override func showEditScreen() {
         modal(factory.expenseCategoryEditViewController(delegate: self, expenseCategory: viewModel.expenseCategory, basketType: viewModel.basketType))
+    }
+    
+    override func didCreateDebt() {
+        refreshData()
+    }
+    
+    override func didCreateLoan() {
+        refreshData()
+    }
+    
+    override func didUpdateDebt() {
+        refreshData()
+    }
+    
+    override func didUpdateLoan() {
+        refreshData()
+    }
+    
+    override func didRemoveDebt() {
+        refreshData()
+    }
+    
+    override func didRemoveLoan() {
+        refreshData()
+    }
+    
+    override var isSelectingTransactionables: Bool {
+        return false
+    }
+    
+    override func didCreateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+    
+    override func didUpdateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+    
+    override func didRemoveTransaction(id: Int, type: TransactionType) {
+        refreshData()
     }
 }
 
@@ -64,32 +104,6 @@ extension ExpenseCategoryInfoViewController : ReminderEditViewControllerDelegate
     }
 }
 
-extension ExpenseCategoryInfoViewController : BorrowEditViewControllerDelegate {
-    func didCreateDebt() {
-        refreshData()
-    }
-    
-    func didCreateLoan() {
-        refreshData()
-    }
-    
-    func didUpdateDebt() {
-        refreshData()
-    }
-    
-    func didUpdateLoan() {
-        refreshData()
-    }
-    
-    func didRemoveDebt() {
-        refreshData()
-    }
-    
-    func didRemoveLoan() {
-        refreshData()
-    }
-}
-
 extension ExpenseCategoryInfoViewController : ExpenseCategoryEditViewControllerDelegate {
     func didCreateExpenseCategory(with basketType: BasketType, name: String) {
         
@@ -102,23 +116,5 @@ extension ExpenseCategoryInfoViewController : ExpenseCategoryEditViewControllerD
     func didRemoveExpenseCategory(with basketType: BasketType) {
         viewModel.setAsDeleted()
         closeButtonHandler()
-    }
-}
-
-extension ExpenseCategoryInfoViewController : TransactionEditViewControllerDelegate {
-    var isSelectingTransactionables: Bool {
-        return false
-    }
-    
-    func didCreateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-    
-    func didUpdateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-    
-    func didRemoveTransaction(id: Int, type: TransactionType) {
-        refreshData()
     }
 }

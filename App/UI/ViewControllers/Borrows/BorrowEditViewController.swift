@@ -146,7 +146,8 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
         modal(factory.transactionEditViewController(delegate: self,
                                                     source: nil,
                                                     destination: nil,
-                                                    returningBorrow: viewModel.asReturningBorrow()))
+                                                    returningBorrow: viewModel.asReturningBorrow(),
+                                                    transactionType: nil))
     }
     
     func didChange(name: String?) {
@@ -208,7 +209,7 @@ class PaydayDateSelectionDelegate : DatePickerViewControllerDelegate {
     }
 }
 
-extension BorrowEditViewController : ExpenseSourceSelectViewControllerDelegate {
+extension BorrowEditViewController : ExpenseSourcesViewControllerDelegate {
     func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
         update(expenseSource: sourceExpenseSourceViewModel)
     }
@@ -249,8 +250,10 @@ extension BorrowEditViewController {
     }
     
     func updateIconUI() {
-        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.iconDefaultImageName, renderingMode: .alwaysTemplate)        
-        tableController.iconView.tintColor = UIColor.by(.white100)
+        tableController.iconView.iconURL = viewModel.selectedIconURL
+        tableController.iconView.defaultIconName = viewModel.iconDefaultImageName
+        tableController.iconView.iconTintColor = UIColor.by(.white100)
+        tableController.iconView.iconType = .raster
     }
     
     func updateTextFieldsUI() {
@@ -343,4 +346,12 @@ extension BorrowEditViewController: TransactionEditViewControllerDelegate {
     func didRemoveTransaction(id: Int, type: TransactionType) {
 
     }
+    
+    func shouldShowCreditEditScreen(destination: TransactionDestination) {
+        
+    }
+
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+        
+    }    
 }

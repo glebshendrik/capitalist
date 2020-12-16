@@ -10,9 +10,9 @@ import UIKit
 import SDWebImageSVGCoder
 
 protocol ExpenseSourceEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
-    func didAppear()
     func didTapIcon()
     func didTapCurrency()
+    func didTapCardType()
     func didChange(name: String?)
     func didChange(amount: String?)
     func didChange(creditLimit: String?)
@@ -25,10 +25,9 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var currencyField: FormTapField!
     @IBOutlet weak var amountField: FormMoneyTextField!
     @IBOutlet weak var creditLimitField: FormMoneyTextField!
-
-    @IBOutlet weak var iconContainer: UIView!
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var bankIconView: SVGKFastImageView!
+    @IBOutlet weak var cardTypeField: FormImageValueField!
+    
+    @IBOutlet weak var icon: IconView!
     @IBOutlet weak var iconPen: UIView!
     
     @IBOutlet weak var bankButton: UIButton!
@@ -55,15 +54,11 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
         
         return nameField.textField
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        delegate?.didAppear()
-    }
-    
+        
     override func setupUI() {
         super.setupUI()
         setupNameField()
+        setupCardTypeField()
         setupCurrencyField()
         setupAmountField()
         setupCreditLimitField()
@@ -75,6 +70,14 @@ class ExpenseSourceEditTableController : FormFieldsTableViewController {
         nameField.imageName = "type-icon"
         nameField.didChange { [weak self] text in
             self?.delegate?.didChange(name: text)
+        }
+    }
+    
+    private func setupCardTypeField() {
+        cardTypeField.placeholder = NSLocalizedString("Тип карты", comment: "")
+        cardTypeField.imageName = "credit-type-icon"
+        cardTypeField.didTap { [weak self] in
+            self?.delegate?.didTapCardType()
         }
     }
     

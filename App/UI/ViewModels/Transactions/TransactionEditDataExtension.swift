@@ -12,7 +12,39 @@ import PromiseKit
 // Loading
 extension TransactionEditViewModel {    
     func loadDefaults() -> Promise<Void> {
-        return isReturn ? loadReturningTransactionDefaults() : loadExchangeRate()
+        if isReturn {
+            return loadReturningTransactionDefaults()
+        }
+        if let requiredTransactionType = requiredTransactionType {
+            return  firstly {
+                        loadTransactionables(requiredTransactionType: requiredTransactionType)
+                    }.then {
+                        self.loadExchangeRate()
+                    }
+        }
+        return loadExchangeRate()
+    }
+    
+    func loadTransactionables(requiredTransactionType: TransactionType) -> Promise<Void> {
+        var promises: [Promise<Void>] = []
+        switch requiredTransactionType {
+        case .income:
+            if source       == nil { promises.append(loadSource(type: .incomeSource)) }
+            if destination  == nil { promises.append(loadDestination(type: .expenseSource)) }
+        case .expense:
+            if source       == nil { promises.append(loadSource(type: .expenseSource)) }
+            if destination  == nil { promises.append(loadDestination(type: .expenseCategory)) }
+        case .fundsMove:
+            if source == nil && destination == nil {
+                promises.append(loadSource(type: .expenseSource, index: 0))
+                promises.append(loadDestination(type: .expenseSource, index: 1))
+            }
+            else {
+                if source       == nil { promises.append(loadSource(type: .expenseSource)) }
+                if destination  == nil { promises.append(loadDestination(type: .expenseSource)) }
+            }
+        }
+        return when(fulfilled: promises)
     }
     
     func loadTransactionData() -> Promise<Void> {
@@ -92,16 +124,67 @@ extension TransactionEditViewModel {
                 }
     }
     
+    func loadTransactionable(type: TransactionableType, basketType: BasketType = .joy, index: Int = 0) -> Promise<Transactionable?> {
+        switch type {
+        case .incomeSource:         return loadIncomeSource(index: index)
+        case .expenseSource:        return loadExpenseSource(index: index)
+        case .expenseCategory:      return loadExpenseCategory(basketType: basketType, index: index)
+        case .active:               return loadActive(basketType: basketType, index: index)
+        }
+    }
+    
+    func loadIncomeSource(index: Int = 0) -> Promise<Transactionable?> {
+        return  firstly {
+                    incomeSourcesCoordinator.index(noBorrows: true)
+                }.map { incomeSources in
+                    guard let incomeSource = incomeSources[safe: index] else { return nil }
+                    return IncomeSourceViewModel(incomeSource: incomeSource)
+                }
+    }
+    
+    func loadExpenseSource(index: Int = 0) -> Promise<Transactionable?> {
+        return  firstly {
+                    expenseSourcesCoordinator.index(currency: nil)
+                }.map { expenseSources in
+                    guard let expenseSource = expenseSources[safe: index] else { return nil }
+                    return ExpenseSourceViewModel(expenseSource: expenseSource)
+                }
+    }
+    
+    func loadExpenseCategory(basketType: BasketType, index: Int = 0) -> Promise<Transactionable?> {
+        return  firstly {
+                    expenseCategoriesCoordinator.index(for: basketType, noBorrows: true)
+                }.map { expenseCategories in
+                    guard let expenseCategory = expenseCategories[safe: index] else { return nil }
+                    return ExpenseCategoryViewModel(expenseCategory: expenseCategory)
+                }
+    }
+    
+    func loadActive(basketType: BasketType, index: Int = 0) -> Promise<Transactionable?> {
+        return  firstly {
+                    activesCoordinator.indexActives(for: basketType)
+                }.map { actives in
+                    guard let active = actives[safe: index] else { return nil }
+                    return ActiveViewModel(active: active)
+                }
+    }
+    
     func loadExchangeRate() -> Promise<Void> {
         guard   needCurrencyExchange,
             let sourceCurrencyCode = sourceCurrencyCode,
             let destinationCurrencyCode = destinationCurrencyCode else {
+                if self.returningBorrow != nil {
+                    self.setAmounts()
+                }
                 return Promise.value(())
         }
         return  firstly {
                     exchangeRatesCoordinator.show(from: sourceCurrencyCode, to: destinationCurrencyCode)
                 }.done { exchangeRate in
                     self.exchangeRate = exchangeRate.rate
+                    if self.returningBorrow != nil {
+                        self.setAmounts()
+                    }                    
                 }
     }
     
@@ -120,17 +203,21 @@ extension TransactionEditViewModel {
                     self.destination = transactionable
                 }.asVoid()
     }
-}
-
-// Creation
-extension TransactionEditViewModel {
-    func deleteAsset() -> Promise<Void> {
-        guard   let assetId = self.sourceId,
-                let sourceType = sourceType,
-                let destinationType = destinationType,
-                sourceType == .active,
-                destinationType == .expenseSource else { return Promise.value(()) }
-        return activesCoordinator.destroyActive(by: assetId, deleteTransactions: false)
+    
+    func loadSource(type: TransactionableType, basketType: BasketType = .joy, index: Int = 0) -> Promise<Void> {
+        return  firstly {
+                    loadTransactionable(type: type, basketType: basketType, index: index)
+                }.get { transactionable in
+                    self.source = transactionable
+                }.asVoid()
+    }
+    
+    func loadDestination(type: TransactionableType, basketType: BasketType = .joy, index: Int = 0) -> Promise<Void> {
+        return  firstly {
+                    loadTransactionable(type: type, basketType: basketType, index: index)
+                }.get { transactionable in
+                    self.destination = transactionable
+                }.asVoid()
     }
 }
 
@@ -139,13 +226,9 @@ extension TransactionEditViewModel {
     func create() -> Promise<Void> {
         return  firstly {
                     transactionsCoordinator.create(with: creationForm())
-                }.then { [weak self] transaction -> Promise<Void> in
-                    self?.transaction = transaction
-                    guard let weakSelf = self,
-                          weakSelf.isSellingAsset else { return Promise.value(()) }
-                    
-                    return weakSelf.deleteAsset()
-                }
+                }.done { transaction in
+                    self.transaction = transaction
+                }.asVoid()
     }
     
     func isCreationFormValid() -> Bool {

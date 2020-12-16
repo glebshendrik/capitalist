@@ -181,7 +181,7 @@ extension CreditEditViewController : CurrenciesViewControllerDelegate {
     }
 }
 
-extension CreditEditViewController : ExpenseSourceSelectViewControllerDelegate {
+extension CreditEditViewController : ExpenseSourcesViewControllerDelegate {
     func didSelect(sourceExpenseSourceViewModel: ExpenseSourceViewModel) {
         update(expenseSource: sourceExpenseSourceViewModel)
     }
@@ -247,8 +247,12 @@ extension CreditEditViewController {
     }
     
     func updateIconUI() {
-        tableController.iconView.setImage(with: viewModel.selectedIconURL, placeholderName: viewModel.iconDefaultImageName, renderingMode: .alwaysTemplate)        
         tableController.iconView.tintColor = UIColor.by(.white100)
+        tableController.iconView.iconURL = viewModel.selectedIconURL
+        tableController.iconView.defaultIconName = viewModel.iconDefaultImageName
+        tableController.iconView.iconTintColor = UIColor.by(.white100)
+        tableController.iconView.iconType = .raster
+        tableController.iconView.vectorIconMode = .fullsize
     }
     
     func updateTextFieldsUI() {

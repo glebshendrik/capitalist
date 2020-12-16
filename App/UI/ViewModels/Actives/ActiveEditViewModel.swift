@@ -16,6 +16,7 @@ enum ActiveError : Error {
 class ActiveEditViewModel {
     let activesCoordinator: ActivesCoordinatorProtocol
     let accountCoordinator: AccountCoordinatorProtocol
+    let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
     
     private var active: Active? = nil
@@ -40,6 +41,11 @@ class ActiveEditViewModel {
                 !cost.isEmpty  else { return "0" }
         return cost
     }
+    var costCentsToSave: Int {
+        return costToSave.intMoney(with: selectedCurrency) ?? 0
+    }
+    var passedCostCents: Int?
+    
     var goal: String? = nil
     var alreadyPaid: String? = nil
     var monthlyPayment: String? = nil
@@ -56,6 +62,13 @@ class ActiveEditViewModel {
     var monthlyPlannedIncome: String? = nil
     
     var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
+    
+    var isMovingFundsFromWallet: Bool = true
+    var selectedSource: ExpenseSourceViewModel? = nil
+    var activeCreationTransactionAttributes: ActiveCreationTransactionNestedAttributes? {
+        guard isNew, costCentsToSave > 0 else { return nil }
+        return ActiveCreationTransactionNestedAttributes(id: nil, sourceId: isMovingFundsFromWallet ? selectedSource?.id : nil)
+    }
     
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
@@ -99,6 +112,13 @@ class ActiveEditViewModel {
             : NSLocalizedString("Подключить банк", comment: "Подключить банк")
     }
     
+    var expenseSourceIconURL: URL? { return selectedSource?.iconURL }
+    var expenseSourceIconDefaultImageName: String { return TransactionableType.expenseSource.defaultIconName }
+    var expenseSourceName: String? { return selectedSource?.name }
+    var expenseSourceAmount: String? { return selectedSource?.amount }
+    var expenseSourceCurrency: Currency? { return selectedSource?.currency }
+    var expenseSourceCurrencyCode: String? { return expenseSourceCurrency?.code }
+    
     // Visibility
     var goalAmountFieldHidden: Bool {
         guard let selectedActiveType = selectedActiveType else { return true }
@@ -141,6 +161,14 @@ class ActiveEditViewModel {
     
     var removeButtonHidden: Bool { return isNew }
         
+    var movingFundsFromWalletSelectionHidden: Bool {
+        return !isNew
+    }
+    
+    var expenseSourceFieldHidden: Bool {
+        return !isNew || !isMovingFundsFromWallet
+    }
+    
     // Permissions
     
     var canChangeIcon: Bool {
@@ -157,12 +185,18 @@ class ActiveEditViewModel {
     
     var canChangeActiveType: Bool { return isNew }
         
+    var iconType: IconType {
+        return .raster
+    }
+    
     init(activesCoordinator: ActivesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
-         bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
+         bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol,
+         expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol) {
         self.activesCoordinator = activesCoordinator
         self.accountCoordinator = accountCoordinator
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
+        self.expenseSourcesCoordinator = expenseSourcesCoordinator
     }
       
     func set(basketType: BasketType) {
@@ -181,7 +215,7 @@ class ActiveEditViewModel {
         self.selectedIconURL = active.iconURL
         self.name = active.name
         self.selectedCurrency = active.currency
-        self.cost = active.costCents.moneyDecimalString(with: active.currency)
+        self.cost = (passedCostCents ?? active.costCents).moneyDecimalString(with: active.currency)
         self.goal = active.goalAmountCents?.moneyDecimalString(with: active.currency)
         self.alreadyPaid = active.alreadyPaidCents?.moneyDecimalString(with: active.currency)
         self.monthlyPayment = active.monthlyPaymentCents?.moneyDecimalString(with: active.currency)
@@ -205,12 +239,16 @@ class ActiveEditViewModel {
         }
     }
     
+    func set(costCents: Int?) {
+        self.passedCostCents = costCents
+    }
+    
     func loadData() -> Promise<Void> {
         return isNew ? loadDefaults() : loadActive()
     }
     
     func loadDefaults() -> Promise<Void> {
-        return when(fulfilled: loadDefaultCurrency(), loadActiveTypes()).asVoid()
+        return when(fulfilled: loadDefaultCurrency(), loadDefaultExpenseSource(), loadActiveTypes()).asVoid()
     }
     
     func loadDefaultCurrency() -> Promise<Void> {
@@ -219,6 +257,18 @@ class ActiveEditViewModel {
                 }.done { user in
                     self.selectedCurrency = user.currency
                 }
+    }
+    
+    func loadDefaultExpenseSource() -> Promise<Void> {
+        return  firstly {
+                    expenseSourcesCoordinator.first()
+                }.get { expenseSource in
+                    guard let expenseSource = expenseSource else {
+                        self.selectedSource = nil
+                        return
+                    }
+                    self.selectedSource = ExpenseSourceViewModel(expenseSource: expenseSource)
+                }.asVoid()
     }
     
     private func loadActiveTypes() -> Promise<[ActiveType]> {
@@ -276,7 +326,7 @@ extension ActiveEditViewModel {
                                   name: name,
                                   iconURL: selectedIconURL,
                                   currency: selectedCurrency?.code,
-                                  costCents: costToSave.intMoney(with: selectedCurrency),
+                                  costCents: costCentsToSave,
                                   monthlyPaymentCents: monthlyPayment?.intMoney(with: selectedCurrency),
                                   annualIncomePercent: annualPercent?.intPercent(),
                                   monthlyPlannedIncomeCents: monthlyPlannedIncome?.intMoney(with: selectedCurrency),
@@ -285,7 +335,8 @@ extension ActiveEditViewModel {
                                   plannedIncomeType: selectedActiveIncomeType,
                                   isIncomePlanned: isIncomePlanned,
                                   reminderAttributes: reminderViewModel.reminderAttributes,
-                                  accountConnectionAttributes: accountConnectionAttributes)
+                                  accountConnectionAttributes: accountConnectionAttributes,
+                                  activeCreationTransactionAttributes: activeCreationTransactionAttributes)
     }
     
     private func basketId(by basketType: BasketType) -> Int? {

@@ -28,6 +28,14 @@ class IncomeSourcesCoordinator : IncomeSourcesCoordinatorProtocol {
         return incomeSourcesService.show(by: id)
     }
     
+    func first(noBorrows: Bool) -> Promise<IncomeSource?> {
+        return  firstly {
+                    index(noBorrows: noBorrows)
+                }.map { incomeSources in
+                    incomeSources.first
+                }
+    }
+    
     func firstBorrow(currency: String) -> Promise<IncomeSource> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)

@@ -25,6 +25,7 @@ struct ExpenseCategory : Decodable {
     let isBorrowOrReturn: Bool    
     let waitingLoans: [Borrow]
     let prototypeKey: String?
+    let isVirtual: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -43,6 +44,7 @@ struct ExpenseCategory : Decodable {
         case isBorrowOrReturn = "is_borrow_or_return"        
         case waitingLoans = "waiting_loans"
         case prototypeKey = "prototype_key"
+        case isVirtual = "is_virtual"
     }
     
 }

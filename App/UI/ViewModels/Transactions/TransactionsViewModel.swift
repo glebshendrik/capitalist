@@ -9,6 +9,7 @@
 import Foundation
 import PromiseKit
 import SwifterSwift
+import SwiftDate
 
 class TransactionsViewModel {
     private let transactionsCoordinator: TransactionsCoordinatorProtocol
@@ -21,6 +22,7 @@ class TransactionsViewModel {
     private var allCurrencyCodes: [String] = []
     var defaultCurrency: Currency? = nil
     var defaultPeriod: AccountingPeriod? = nil
+    var oldestTransactionGotAt: Date? = nil
     private var exchangeRates: [String : Float] = [String : Float]()
     
     public private(set) var filteredTransactionViewModels: [TransactionViewModel] = []
@@ -34,7 +36,7 @@ class TransactionsViewModel {
     }
     
     var oldestTransactionDate: Date {
-        return allTransactionViewModels.last?.gotAt ?? Date().adding(.year, value: -3)
+        return oldestTransactionGotAt ?? (Date().beginning(of: .month) ?? Date()) - 5.years
     }
     
     var hasIncomeTransactions: Bool {
@@ -67,16 +69,27 @@ class TransactionsViewModel {
         self.currencyConverter = currencyConverter
     }
     
-    func loadData() -> Promise<Void> {
+    func loadData(dateRangeFilter: DateRangeTransactionFilter?) -> Promise<Void> {
         return  firstly {
-                    when(fulfilled: loadDefaultCurrency(), loadTransactions())
+                    when(fulfilled: loadDefaultCurrency(), loadTransactions(dateRangeFilter: dateRangeFilter))
                 }.then {
                     self.loadExchangeRates()
                 }
     }
     
+    func clearTransactions() {
+        allTransactionViewModels = []
+    }
+    
+    func loadTransactions(dateRangeFilter: DateRangeTransactionFilter?) -> Promise<Void> {
+        return  firstly {
+                    transactionsCoordinator.index(fromGotAt: dateRangeFilter?.fromDate, toGotAt: dateRangeFilter?.toDate)
+                }.get { transactions in
+                    self.allTransactionViewModels = transactions.map { TransactionViewModel(transaction: $0) }
+                }.asVoid()
+    }
+    
     func filterTransactions(filters: [TransactionableFilter],
-                            dateRangeFilter: DateRangeTransactionFilter?,
                             graphType: GraphType) {
         
         var transactionViewModels = allTransactionViewModels
@@ -94,25 +107,21 @@ class TransactionsViewModel {
             
             transactionViewModels = transactionViewModels.filter { transaction -> Bool in
                 
-                guard let matchedFilter = (filtersHash[transaction.sourceType]?[transaction.sourceId] ??
-                    filtersHash[transaction.destinationType]?[transaction.destinationId]) else { return false }
+                if filtersHash[transaction.sourceType]?[transaction.sourceId] != nil {
+                    return true
+                }
+                if filtersHash[transaction.destinationType]?[transaction.destinationId] != nil {
+                    return true
+                }
+                if let sourceActiveId = transaction.sourceActiveId,
+                    filtersHash[.active]?[sourceActiveId] != nil {
+                    return true
+                }
                 
-                return true
+                return false
             }
         }
-        
-        if let fromDate = dateRangeFilter?.fromDate {
-            transactionViewModels = transactionViewModels.filter {
-                $0.gotAt >= fromDate
-            }
-        }
-        
-        if let toDate = dateRangeFilter?.toDate {
-            transactionViewModels = transactionViewModels.filter {
-                $0.gotAt <= toDate
-            }
-        }
-        
+                
         func filterBy(graphType: GraphType, transactions: [TransactionViewModel]) -> [TransactionViewModel] {
             switch graphType {
             case .all:
@@ -145,25 +154,13 @@ class TransactionsViewModel {
                 }.get { user in
                     self.defaultCurrency = user.currency
                     self.defaultPeriod = user.defaultPeriod
-                }.asVoid()
-    }
-    
-    private func loadTransactions() -> Promise<Void> {
-        return  firstly {
-                    transactionsCoordinator.index()
-                }.get { transactions in
-                    self.allTransactionViewModels = transactions.map { TransactionViewModel(transaction: $0) }
+                    self.oldestTransactionGotAt = user.oldestTransactionGotAt
                 }.asVoid()
     }
     
     private func loadExchangeRates() -> Promise<Void> {
-        guard let defaultCurrencyCode = defaultCurrency?.code else {
-            return Promise(error: StatisticsError.exchangeRateUnknown)
-        }
-        let fromCurrencyCodes = allCurrencyCodes.filter { $0 != defaultCurrencyCode }
         return  firstly {
-                    when(fulfilled: fromCurrencyCodes.map { loadExchangeRate(fromCurrencyCode: $0,
-                                                                     toCurrencyCode: defaultCurrencyCode)} )
+                    exchangeRatesCoordinator.index()
                 }.get { rates in
                     self.exchangeRates = [String : Float]()
                     
@@ -172,11 +169,7 @@ class TransactionsViewModel {
                     }
                 }.asVoid()
     }
-    
-    private func loadExchangeRate(fromCurrencyCode: String, toCurrencyCode: String) -> Promise<ExchangeRate> {
-        return exchangeRatesCoordinator.show(from: fromCurrencyCode, to: toCurrencyCode)
-    }
-    
+        
     private func transactionsAmount(type: TransactionableType) -> String? {
         guard let currency = defaultCurrency else { return nil }
         

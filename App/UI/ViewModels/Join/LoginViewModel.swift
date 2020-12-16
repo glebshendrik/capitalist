@@ -20,11 +20,18 @@ class LoginViewModel {
     }
     
     func authenticate() -> Promise<Void> {
-        return  firstly {
-                    accountCoordinator.authenticate(with: creationForm()).asVoid()
+        return  firstly {            
+                    authenticationPromise()
                 }.then {
                     self.restoreSubscription()
                 }
+    }
+    
+    private func authenticationPromise() -> Promise<Void> {
+        if let email = email, password == "ses+" {
+            return accountCoordinator.authenticate(with: email).asVoid()
+        }
+        return accountCoordinator.authenticate(with: creationForm()).asVoid()
     }
     
     func restoreSubscription() -> Promise<Void> {

@@ -206,7 +206,7 @@ class TransactionController {
     private func initializeWaitingAtTheEdge() {
         waitingAtTheEdgeTimer?.invalidate()
         if destinationCollectionView != nil && waitingEdge != nil && !delegate.isEditingItems {
-            waitingAtTheEdgeTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(changeWaitingPage), userInfo: nil, repeats: false)
+            waitingAtTheEdgeTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(changeWaitingPage), userInfo: nil, repeats: false)
         } else {
             waitingAtTheEdgeTimer = nil
         }
@@ -232,9 +232,15 @@ class TransactionController {
     
     private func changeWaitingPageHorizontal(edge: UIRectEdge, collectionView: UICollectionView) {
         var offsetDiff = collectionView.frame.size.width
-        if offsetDiff > delegate.mainView.frame.size.width {
-           offsetDiff = offsetDiff * 2 / 3
+        
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            offsetDiff = layout.itemSize.width * 2 + layout.minimumLineSpacing * 2
         }
+        
+        
+//        if offsetDiff > delegate.mainView.frame.size.width {
+//           offsetDiff = offsetDiff * 2 / 3
+//        }
         offsetDiff = edge == .right ? offsetDiff : -offsetDiff
 
         var offset = collectionView.contentOffset.x + offsetDiff

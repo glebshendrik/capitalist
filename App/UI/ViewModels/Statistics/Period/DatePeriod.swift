@@ -11,12 +11,13 @@ import Foundation
 enum DatePeriod {
     case entire
     case year
+    case quarter
     case month
     case week
     case custom
         
     static var all: [DatePeriod] {
-        return [.entire, .year, .month, .week, .custom]
+        return [.entire, .year, .quarter, .month, .week, .custom]
     }
     
     var title: String {
@@ -25,6 +26,8 @@ enum DatePeriod {
             return NSLocalizedString("Весь период", comment: "Весь период")
         case .year:
             return NSLocalizedString("Год", comment: "Год")
+        case .quarter:
+            return NSLocalizedString("Квартал", comment: "Квартал")
         case .month:
             return NSLocalizedString("Месяц", comment: "Месяц")
         case .week:
@@ -36,7 +39,7 @@ enum DatePeriod {
     
     var dateFormat: String {
         switch self {
-        case .week, .entire, .custom:
+        case .week, .entire, .quarter, .custom:
             return "dd.MM.yy"
         case .month:
             return "LLLL yyyy"
@@ -51,6 +54,8 @@ enum DatePeriod {
             return .weekOfYear
         case .month:
             return .month
+        case .quarter:
+            return .quarter
         case .year:
             return .year
         default:
@@ -62,8 +67,28 @@ enum DatePeriod {
         return asUnit
     }
     
+    var addingComponents: DateComponents? {
+        switch self {
+        case .week:
+            return addingValue.weeks
+        case .month:
+            return addingValue.months
+        case .quarter:
+            return addingValue.months
+        case .year:
+            return addingValue.years
+        default:
+            return nil
+        }
+    }
+    
     var addingValue: Int {
-        return 1
+        switch self {
+        case .quarter:
+            return 3
+        default:
+            return 1
+        }
     }
     
     func formatPeriod(from: Date?, to: Date?) -> String {
@@ -74,10 +99,25 @@ enum DatePeriod {
         let toFormatted = to.string(withFormat: dateFormat)
         
         switch self {
-        case .entire, .custom, .week:
+        case .entire, .custom, .week, .quarter:
             return "\(fromFormatted)–\(toFormatted)"
         case .year, .month:
             return fromFormatted
+        }
+    }
+    
+    static func fromAccountingPeriod(_ accountingPeriod: AccountingPeriod?) -> DatePeriod? {
+        guard let accountingPeriod = accountingPeriod else { return nil }
+        
+        switch accountingPeriod {
+        case .week:
+            return .week
+        case .month:
+            return .month
+        case .quarter:
+            return .quarter
+        case .year:
+            return .year
         }
     }
 }

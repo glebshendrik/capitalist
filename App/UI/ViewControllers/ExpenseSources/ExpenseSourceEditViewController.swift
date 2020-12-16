@@ -39,6 +39,7 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
     
     override func registerFormFields() -> [String : FormField] {
         return [ExpenseSource.CodingKeys.name.rawValue : tableController.nameField,
+                ExpenseSource.CodingKeys.cardType.rawValue : tableController.cardTypeField,
                 ExpenseSource.CodingKeys.currency.rawValue : tableController.currencyField,
                 ExpenseSource.CodingKeys.amountCents.rawValue : tableController.amountField,
                 ExpenseSource.CodingKeys.creditLimitCents.rawValue : tableController.creditLimitField]
@@ -77,6 +78,7 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
     
     override func updateUI() {
         updateTextFieldsUI()
+        updateCardTypeUI()
         updateCurrencyUI()
         updateIconUI()
         updateBankUI()

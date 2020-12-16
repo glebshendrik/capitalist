@@ -49,18 +49,18 @@ class ActiveInfoViewController : EntityInfoNavigationController {
         case ActiveInfoField.costChange.identifier:
             showEditScreen()
         case ActiveInfoField.transactionDevidents.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.incomeSourceViewModel, destination: nil))
+            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.incomeSourceViewModel, destination: nil, transactionType: .income))
         case ActiveInfoField.transactionInvest.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.activeViewModel))
+            modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel?.activeViewModel, transactionType: .fundsMove))
         case ActiveInfoField.transactionSell.identifier:
-            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.activeViewModel, destination: nil))
+            modal(factory.transactionEditViewController(delegate: self, source: viewModel?.activeViewModel, destination: nil, transactionType: .fundsMove))
         default:
             return
         }
     }
     
     override func showEditScreen() {
-        modal(factory.activeEditViewController(delegate: self, active: viewModel.active, basketType: viewModel.basketType))
+        modal(factory.activeEditViewController(delegate: self, active: viewModel.active, basketType: viewModel.basketType, costCents: nil))
     }
     
     func didTapBankButton() {
@@ -69,6 +69,22 @@ class ActiveInfoViewController : EntityInfoNavigationController {
         } else {
             showProviders()
         }
+    }
+    
+    override var isSelectingTransactionables: Bool {
+        return false
+    }
+    
+    override func didCreateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+    
+    override func didUpdateTransaction(id: Int, type: TransactionType) {
+        refreshData()
+    }
+    
+    override func didRemoveTransaction(id: Int, type: TransactionType) {
+        refreshData()
     }
 }
 
@@ -129,23 +145,5 @@ extension ActiveInfoViewController : ActiveEditViewControllerDelegate {
     func didRemoveActive(with basketType: BasketType) {
         viewModel.setAsDeleted()
         closeButtonHandler()
-    }
-}
-
-extension ActiveInfoViewController : TransactionEditViewControllerDelegate {
-    var isSelectingTransactionables: Bool {
-        return false
-    }
-    
-    func didCreateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-    
-    func didUpdateTransaction(id: Int, type: TransactionType) {
-        refreshData()
-    }
-    
-    func didRemoveTransaction(id: Int, type: TransactionType) {
-        refreshData()
     }
 }

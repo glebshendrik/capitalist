@@ -15,6 +15,10 @@ class BudgetViewModel {
         return budget.incomesAtPeriodCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""
     }
     
+    var incomesAmount: String {
+        return budget.incomesAtPeriodCents.moneyCurrencyString(with: budget.currency, shouldRound: false) ?? ""
+    }
+    
     var incomesAmountPlannedRounded: String {
         guard budget.incomesPlannedAtPeriodCents > 0 else { return "" }
         return budget.incomesPlannedAtPeriodCents.moneyCurrencyString(with: budget.currency, shouldRound: true) ?? ""

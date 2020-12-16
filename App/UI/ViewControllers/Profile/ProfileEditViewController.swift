@@ -21,10 +21,6 @@ class ProfileEditViewController : FormNavBarButtonsEditViewController {
     override var formTitle: String { return NSLocalizedString("Редактирование профиля", comment: "Редактирование профиля") }
     override var saveErrorMessage: String { return NSLocalizedString("Невозможно изменить данные профиля", comment: "Невозможно изменить данные профиля") }
         
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        focusNameField()
-    }
     override func registerFormFields() -> [String : FormField] {
         return [UserUpdatingForm.CodingKeys.firstname.rawValue : tableController.nameField]
     }
@@ -64,5 +60,9 @@ extension ProfileEditViewController : ProfileEditTableControllerDelegate {
     
     func didTapSave() {
         save()
+    }
+    
+    func didAppear() {
+         focusNameField()
     }
 }

@@ -131,10 +131,27 @@ extension ApplicationAssembly {
             c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
         }
         
+        // IncomeSourcesViewController
+        container.registerForSkrudzhStoryboard(IncomeSourcesViewController.self) { (r, c) in
+            c.viewModel = r.resolve(IncomeSourcesViewModel.self)
+            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
+        
         // ExpenseSourceSelectViewController
         container.registerForSkrudzhStoryboard(ExpenseSourceSelectViewController.self) { (r, c) in
+//            c.viewModel = r.resolve(ExpenseSourcesViewModel.self)
+//            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
+        
+        // ExpenseSourcesViewController
+        container.registerForSkrudzhStoryboard(ExpenseSourcesViewController.self) { (r, c) in
             c.viewModel = r.resolve(ExpenseSourcesViewModel.self)
-            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+//            c.messagePresenterManager = r.resolve(UIMessagePresenterManagerProtocol.self)
+        }
+        
+        // CardTypesViewController
+        container.registerForSkrudzhStoryboard(CardTypesViewController.self) { (r, c) in
+            c.viewModel = r.resolve(CardTypesViewModel.self)
         }
         
         // ExpenseCategorySelectViewController
@@ -215,8 +232,14 @@ extension ApplicationAssembly {
         
         // ActiveSelectViewController
         container.registerForSkrudzhStoryboard(ActiveSelectViewController.self) { (r, c) in
+//            c.viewModel = r.resolve(ActivesViewModel.self)
+        }
+        
+        // ActivesViewController
+        container.registerForSkrudzhStoryboard(ActivesViewController.self) { (r, c) in
             c.viewModel = r.resolve(ActivesViewModel.self)
         }
+        
         
         // EntityInfoViewController
         container.registerForSkrudzhStoryboard(EntityInfoViewController.self) { (r, c) in

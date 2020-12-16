@@ -12,6 +12,7 @@ import SwifterSwift
 import SwiftDate
 import AlamofireImage
 import Haptica
+import ESPullToRefresh
 
 extension UITableView {
     func reloadData(with animation: UITableView.RowAnimation) {        
@@ -350,12 +351,12 @@ extension UIViewController {
         closeButtonHandler()
     }
             
-    func closeButtonHandler() {
+    func closeButtonHandler(completion: (() -> Void)? = nil) {
         if isRoot {
             (self as? ApplicationRouterDependantProtocol)?.router.route()
         }
         else {
-            (navigationController ?? self).dismiss(animated: true)
+            (navigationController ?? self).dismiss(animated: true, completion: completion)
         }
     }
 }
@@ -652,21 +653,30 @@ extension UIViewController {
         navigationController?.pushViewController(viewController, animated: animated)
     }
     
-    func sheet(title: String?, actions: [UIAlertAction]) {
+    func sheet(title: String?, actions: [UIAlertAction], message: String? = nil, preferredStyle: UIAlertController.Style = .actionSheet) {
         let alertController = UIAlertController(title: title,
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
+                                                message: message,
+                                                preferredStyle: preferredStyle)
         
         for action in actions {
             alertController.addAction(action)
         }
         
-        alertController.addAction(title: "Отмена",
+        alertController.addAction(title: NSLocalizedString("Отмена", comment: "Отмена"),
                                   style: .cancel,
                                   isEnabled: true,
                                   handler: nil)
-        
         modal(alertController, animated: true)
+    }
+    
+    var isAlert: Bool {
+        return self.isMember(of: UIAlertController.self)
+    }
+    
+    func dismissIfAlert() {
+        if isAlert {
+            dismiss(animated: false, completion: nil)
+        }
     }
 }
 
@@ -779,6 +789,8 @@ extension Date {
                     second: 0,
                     nanosecond: 0)
     }
+    
+    
 }
 
 extension Array {
@@ -799,5 +811,81 @@ extension UIView {
         } else {
             Haptic.impact(.heavy).generate()
         }
+    }
+}
+
+extension UIScrollView {
+    var refreshControlHeaderTitleLabel: UILabel? {
+        return (header?.animator as? ESRefreshHeaderAnimator)?.titleLabel
+    }
+    
+    var refreshControlHeaderImageView: UIImageView? {
+        return (header?.animator as? ESRefreshHeaderAnimator)?.imageView
+    }
+    
+    var refreshControlHeaderIndicatorView: UIActivityIndicatorView? {
+        return (header?.animator as? ESRefreshHeaderAnimator)?.indicatorView
+    }
+    
+    var refreshControlFooterTitleLabel: UILabel? {
+        return (footer?.animator as? ESRefreshFooterAnimator)?.titleLabel
+    }
+        
+    var refreshControlFooterIndicatorView: UIActivityIndicatorView? {
+        return (footer?.animator as? ESRefreshFooterAnimator)?.indicatorView
+    }
+    
+    func setupPullToRefreshAppearance() {
+        refreshControlHeaderTitleLabel?.textColor = UIColor.by(.white64)
+        refreshControlHeaderIndicatorView?.color = UIColor.by(.white64)
+        refreshControlHeaderImageView?.tintColor = UIColor.by(.white64)
+        refreshControlHeaderTitleLabel?.font = UIFont(name: "Roboto-Light", size: 13)
+        refreshControlFooterTitleLabel?.textColor = UIColor.by(.white64)
+        refreshControlFooterIndicatorView?.color = UIColor.by(.white64)
+        refreshControlFooterTitleLabel?.font = UIFont(name: "Roboto-Light", size: 13)
+        refreshControl = UIRefreshControl(frame: .zero)
+        refreshControl?.tintColor = .clear
+    }
+}
+
+extension ESRefreshHeaderAnimator {
+    var titleLabel: UILabel? {
+        return self.view.subviews.first { $0 is UILabel } as? UILabel
+    }
+    
+    var imageView: UIImageView? {
+        return self.view.subviews.first { $0 is UIImageView } as? UIImageView
+    }
+    
+    var indicatorView: UIActivityIndicatorView? {
+        return self.view.subviews.first { $0 is UIActivityIndicatorView } as? UIActivityIndicatorView
+    }
+}
+
+extension ESRefreshFooterAnimator {
+    var titleLabel: UILabel? {
+        return self.view.subviews.first { $0 is UILabel } as? UILabel
+    }
+        
+    var indicatorView: UIActivityIndicatorView? {
+        return self.view.subviews.first { $0 is UIActivityIndicatorView } as? UIActivityIndicatorView
+    }
+}
+
+class Once {
+  var already: Bool = false
+
+  func run(block: () -> Void) {
+    guard !already else { return }
+
+    block()
+    already = true
+  }
+}
+
+extension UIDevice {
+    var hasNotch: Bool {
+        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        return bottom > 0
     }
 }

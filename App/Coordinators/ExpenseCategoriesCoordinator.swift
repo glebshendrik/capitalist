@@ -27,6 +27,14 @@ class ExpenseCategoriesCoordinator : ExpenseCategoriesCoordinatorProtocol {
         return expenseCategoriesService.show(by: id)
     }
     
+    func first(for basketType: BasketType, noBorrows: Bool) -> Promise<ExpenseCategory?> {
+        return  firstly {
+                    index(for: basketType, noBorrows: noBorrows)
+                }.map { expenseCategories in
+                    expenseCategories.first
+                }
+    }
+    
     func firstBorrow(for basketType: BasketType, currency: String) -> Promise<ExpenseCategory> {
         guard let currentSession = userSessionManager.currentSession else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)

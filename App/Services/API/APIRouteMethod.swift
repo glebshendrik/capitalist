@@ -57,7 +57,8 @@ struct APIRouteMethod {
              .indexUserActives,
              .showActive,
              .indexActiveTypes,
-             .indexTransactionableExamples:
+             .indexTransactionableExamples,
+             .indexExchangeRates:
             return .get
         case .updateUser,
              .changePassword,

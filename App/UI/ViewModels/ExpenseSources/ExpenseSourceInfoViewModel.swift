@@ -60,6 +60,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
             : NSLocalizedString("Подключить банк", comment: "Подключить банк")
     }
     
+    var iconType: IconType {
+        return expenseSourceViewModel?.iconType ?? .raster
+    }
+    
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          creditsCoordinator: CreditsCoordinatorProtocol,
          borrowsCoordinator: BorrowsCoordinatorProtocol,
@@ -151,6 +155,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                          iconURL: selectedIconURL,
                                          amountCents: amountCents,
                                          creditLimitCents: creditLimitCents,
+                                         cardType: expenseSourceViewModel?.expenseSource.cardType,
                                          accountConnectionAttributes: accountConnectionAttributes)
     }
 }

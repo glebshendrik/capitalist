@@ -33,6 +33,10 @@ class ExpenseSourceViewModel {
         return amount(shouldRound: false)
     }
     
+    var amountCents: Int {
+        return expenseSource.amountCents
+    }
+    
     var inCredit: Bool {
         guard let creditLimitCents = expenseSource.creditLimitCents else { return false }
         return expenseSource.amountCents < creditLimitCents
@@ -72,6 +76,14 @@ class ExpenseSourceViewModel {
         return expenseSource.isVirtual
     }
         
+    var iconType: IconType {
+        return expenseSource.accountConnection != nil ? .vector : .raster
+    }
+    
+    var cardTypeImageName: String? {
+        return expenseSource.cardType?.imageName
+    }
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
     }
@@ -81,7 +93,7 @@ class ExpenseSourceViewModel {
     }
     
     private func amount(shouldRound: Bool) -> String {
-        return expenseSource.amountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
+        return amountCents.moneyCurrencyString(with: currency, shouldRound: shouldRound) ?? ""
     }
 }
 

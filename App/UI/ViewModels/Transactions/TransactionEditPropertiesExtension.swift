@@ -30,7 +30,7 @@ extension TransactionEditViewModel {
     }
     
     var transactionType: TransactionType? {
-        return TransactionType.typeFor(sourceType: sourceType, destinationType: destinationType)
+        return TransactionType.typeFor(sourceType: sourceType, destinationType: destinationType, byingAsset: isBuyingAsset) ?? requiredTransactionType
     }
     
     var amountToSave: String? {
@@ -106,6 +106,10 @@ extension TransactionEditViewModel {
     var canSave: Bool {
         return hasBothTransactionables        
     }
+        
+    var shouldAskForReestimateAsset: Bool {
+        return canSave && isSellingAsset && source!.amountCents != amountCents
+    }
     
     var hasBothTransactionables: Bool {
         return source != nil && destination != nil
@@ -133,7 +137,7 @@ extension TransactionEditViewModel {
             onlyBuyingAssets = destination.activeType.onlyBuyingAssets
         }
         
-        return transactionType != .expense || destination.type != .active || onlyBuyingAssets
+        return transactionType == .income || destination.type != .active || onlyBuyingAssets
     }
     
     var isSellingAssetFieldHidden: Bool {
@@ -142,34 +146,50 @@ extension TransactionEditViewModel {
                 let destination = destination,
                 let source = source else { return true }
         
-        return transactionType != .income || destination.type != .expenseSource || source.type != .active
+        return transactionType != .fundsMove || destination.type != .expenseSource || source.type != .active
     }
     
     var removeButtonHidden: Bool {
         return isNew        
     }
     
+    var sourceFieldHidden: Bool {
+        return isVirtualSource
+    }
+    
+    var destinationFieldHidden: Bool {
+        return isVirtualDestination
+    }
+    
     var canChangeSource: Bool {
-        return !isReturningDebt && !anyVirtualTransactionable
+        return !anyVirtualTransactionable
     }
     
     var canChangeDestination: Bool {
-        return !isReturningLoan && !anyVirtualTransactionable
+        return !anyVirtualTransactionable
     }
     
     var anyVirtualTransactionable: Bool {
-        return isSourceVirtualExpenseSource || isDestinationVirtualExpenseSource
+        return isVirtualSource || isVirtualDestination
     }
     
-    var isSourceVirtualExpenseSource: Bool {
-        guard let expenseSourceSource = source as? ExpenseSourceViewModel else { return false }
-        return expenseSourceSource.isVirtual
+    var isVirtualSource: Bool {
+        return transaction?.isVirtualSource ?? false
     }
     
-    var isDestinationVirtualExpenseSource: Bool {
-        guard let expenseSourceSource = destination as? ExpenseSourceViewModel else { return false }
-        return expenseSourceSource.isVirtual
+    var isVirtualDestination: Bool {
+        return transaction?.isVirtualDestination ?? false
     }
+    
+//    var isSourceVirtualExpenseSource: Bool {
+//        guard let expenseSourceSource = source as? ExpenseSourceViewModel else { return false }
+//        return expenseSourceSource.isVirtual
+//    }
+//
+//    var isDestinationVirtualExpenseSource: Bool {
+//        guard let expenseSourceSource = destination as? ExpenseSourceViewModel else { return false }
+//        return expenseSourceSource.isVirtual
+//    }
 }
 
 extension TransactionEditViewModel {
@@ -183,6 +203,10 @@ extension TransactionEditViewModel {
         case   (false, false):  return NSLocalizedString("Изменить перевод", comment: "Изменить перевод")
         case   (false,  true):   return NSLocalizedString("Изменить возврат", comment: "Изменить возврат")
         }
+    }
+    
+    var highlightColor: ColorAsset {
+        return transactionType?.highlightColor ?? .blue1
     }
         
     var removeTitle: String? {
@@ -203,10 +227,11 @@ extension TransactionEditViewModel {
     var sourceIconDefaultImageName: String {
         return source?.defaultIconName ?? sourceType?.defaultIconName ?? "lamp-icon"
     }
-    var sourceName: String? { return isSourceVirtualExpenseSource ? NSLocalizedString("Из ниоткуда", comment: "Из ниоткуда") : source?.name }
-    var sourceAmount: String? { return isSourceVirtualExpenseSource ? nil : source?.amountRounded }
+    var sourceName: String? { return isVirtualSource ? NSLocalizedString("Из ниоткуда", comment: "Из ниоткуда") : source?.name }
+    var sourceAmount: String? { return isVirtualSource ? nil : source?.amountRounded }
     var sourceCurrency: Currency? { return source?.currency }
     var sourceCurrencyCode: String? { return sourceCurrency?.code }
+    var sourceBasketType: BasketType? { return (source as? ActiveViewModel)?.basketType }
     
     var destinationTitle: String? {
         return destinationType?.title(as: .destination) ?? NSLocalizedString("Выберите назначение", comment: "Выберите назначение")
@@ -217,8 +242,8 @@ extension TransactionEditViewModel {
     var destinationIconDefaultImageName: String {
         return destination?.defaultIconName ?? destinationType?.defaultIconName ?? "lamp-icon"        
     }
-    var destinationName: String? { return isDestinationVirtualExpenseSource ? NSLocalizedString("В никуда", comment: "В никуда") : destination?.name }
-    var destinationAmount: String? { return isDestinationVirtualExpenseSource ? nil : destination?.amountRounded }
+    var destinationName: String? { return isVirtualDestination ? NSLocalizedString("В никуда", comment: "В никуда") : destination?.name }
+    var destinationAmount: String? { return isVirtualDestination ? nil : destination?.amountRounded }
     var destinationCurrency: Currency? { return destination?.currency }
     var destinationCurrencyCode: String? { return destinationCurrency?.code }
 }
@@ -245,18 +270,19 @@ extension TransactionableType {
 }
 
 extension TransactionType {
-    static func typeFor(sourceType: TransactionableType?, destinationType: TransactionableType?) -> TransactionType? {
+    static func typeFor(sourceType: TransactionableType?, destinationType: TransactionableType?, byingAsset: Bool) -> TransactionType? {
         
         guard let sourceType = sourceType, let destinationType = destinationType else { return nil }
         
-        switch (sourceType, destinationType) {
-        case (.incomeSource, .expenseSource),
-             (.incomeSource, .active),
-             (.active, .expenseSource):             return .income
-        case (.expenseSource, .expenseSource):      return .fundsMove
-        case (.expenseSource, .expenseCategory),
-             (.expenseSource, .active):             return .expense
-        default:                                    return nil
+        switch (sourceType, destinationType, byingAsset) {
+        case (.incomeSource, .expenseSource, _),
+             (.incomeSource, .active, _):               return .income
+        case (.expenseSource, .expenseSource, _),
+             (.active, .expenseSource, _),
+             (.expenseSource, .active, true):           return .fundsMove
+        case (.expenseSource, .expenseCategory, _),
+             (.expenseSource, .active, false):          return .expense
+        default:                                        return nil
         }
     }
     
@@ -284,5 +310,16 @@ extension TransactionType {
     
     func removeQuestion(isReturn: Bool) -> String {
         return "\(removeTitle(isReturn: isReturn))?"
+    }
+    
+    var highlightColor: ColorAsset {
+        switch self {
+        case .income:
+            return .green2
+        case .fundsMove:
+            return .blue1
+        case .expense:
+            return .red2
+        }
     }
 }

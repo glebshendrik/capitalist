@@ -69,6 +69,14 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return cost(shouldRound: false)
     }
     
+    var costCents: Int {
+        return active.costCents
+    }
+    
+    var amountCents: Int {
+        return costCents
+    }
+    
     var costRounded: String {
         return amountRounded
     }
@@ -166,6 +174,10 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
     
     var incomeSourceId: Int? {
         return active.incomeSource?.id
+    }
+    
+    var iconType: IconType {
+        return .raster
     }
     
     init(active: Active) {

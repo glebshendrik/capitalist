@@ -12,7 +12,7 @@ import AlamofireImage
 class CreditTableViewCell : UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var monthlyPaymentLabel: UILabel!
     @IBOutlet weak var nextDateLabel: UILabel!
     @IBOutlet weak var progressView: ProgressView!
@@ -37,20 +37,24 @@ class CreditTableViewCell : UITableViewCell {
     }
     
     func updateUI() {
-        nameLabel.text = viewModel?.name
-        typeLabel.text = viewModel?.typeName
-        monthlyPaymentLabel.text = viewModel?.monthlyPayment
-        nextDateLabel.text = viewModel?.nextPaymentDate
-        iconImageView.setImage(with: viewModel?.iconURL,
-                               placeholderName: placeholderName,
-                               renderingMode: .alwaysTemplate)
-        iconImageView.tintColor = imageTintColor
+        guard let viewModel = viewModel else { return }
+        
+        nameLabel.text = viewModel.name
+        typeLabel.text = viewModel.typeName
+        monthlyPaymentLabel.text = viewModel.monthlyPayment
+        nextDateLabel.text = viewModel.nextPaymentDate
+        
         
         progressView.progressColor = UIColor.by(.blue1)
-        progressView.limitText = viewModel?.returnAmountRounded        
-        progressView.progressText = viewModel?.paidAmountRounded
+        progressView.limitText = viewModel.returnAmountRounded
+        progressView.progressText = viewModel.paidAmountRounded
         progressView.labelsColor = UIColor.by(.white100)
         progressView.progressWidth = progressView.bounds.width * paymentsProgress
-//        contentView.layoutIfNeeded()
+        
+        iconView.iconType = .raster
+        iconView.vectorIconMode = .fullsize
+        iconView.iconURL = viewModel.iconURL
+        iconView.defaultIconName = placeholderName
+        iconView.iconTintColor = UIColor.by(.white100)
     }
 }

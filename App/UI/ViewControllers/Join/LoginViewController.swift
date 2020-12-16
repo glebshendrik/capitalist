@@ -73,4 +73,8 @@ extension LoginViewController : LoginTableControllerDelegate {
     func didTapSave() {
         save()
     }
+    
+    func didAppear() {
+         
+    }
 }

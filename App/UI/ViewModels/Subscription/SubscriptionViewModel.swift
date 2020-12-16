@@ -18,26 +18,37 @@ enum SubscriptionError : Error {
 }
 
 enum SubscriptionProductId : String {
-    case first = "com.realtransitapps.threebaskets.subscriptions.main.monthly"
-    case second = "com.realtransitapps.threebaskets.subscriptions.main.halfofyear"
-    case third = "com.realtransitapps.threebaskets.subscriptions.main.yearly"
+    case monthly = "com.realtransitapps.threebaskets.subscriptions.main.monthly"
+    case halfofyear = "com.realtransitapps.threebaskets.subscriptions.main.halfofyear"
+    case yearly = "com.realtransitapps.threebaskets.subscriptions.main.yearly"
     
     var id: String {
         return rawValue
     }
 }
 
+struct FeatureDescriptionViewModel {
+    var description: String
+    var imageName: String
+}
+
 class SubscriptionViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
     
     private var productViewModels: [String : ProductViewModel] = [:]
-    private var featureDescriptions: [String] = [NSLocalizedString("Неограниченное количество транзакций в день", comment: "Неограниченное количество транзакций в день"),
-                                                 NSLocalizedString("Неограниченное количество сбережений и инвестиций", comment: "Неограниченное количество сбережений и инвестиций"),
-                                                 NSLocalizedString("Возможность управлять долгами и займами", comment: "Возможность управлять долгами и займами"),
-                                                 NSLocalizedString("Возможность управлять кредитами", comment: "Возможность управлять кредитами"),
-                                                 NSLocalizedString("Статистика за все время с возможностью фильтрации операций", comment: "Статистика за все время с возможностью фильтрации операций")]
+    private var featureDescriptionViewModels: [FeatureDescriptionViewModel] =
+        [FeatureDescriptionViewModel(description: NSLocalizedString("Неограниченное количество транзакций в день", comment: "Неограниченное количество транзакций в день"),
+                                     imageName: "subscription-transactions"),
+         FeatureDescriptionViewModel(description:  NSLocalizedString("Неограниченное количество сбережений и инвестиций", comment: "Неограниченное количество сбережений и инвестиций"),
+                                     imageName: "subscription-assets"),
+         FeatureDescriptionViewModel(description: NSLocalizedString("Статистика за все время с возможностью фильтрации операций", comment: "Статистика за все время с возможностью фильтрации операций"),
+                                     imageName: "subscription-statistics"),
+         FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять кредитами", comment: "Возможность управлять кредитами"),
+                                     imageName: "subscription-credits"),
+         FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять долгами и займами", comment: "Возможность управлять долгами и займами"),
+                                     imageName: "subscription-debts")]
     
-    var selectedProductId: SubscriptionProductId = .first {
+    var selectedProductId: SubscriptionProductId = .yearly {
         didSet {
             updateSelectedProduct()
         }
@@ -48,7 +59,7 @@ class SubscriptionViewModel {
     }
     
     var numberOfFeatureDescriptions: Int {
-        return featureDescriptions.count
+        return featureDescriptionViewModels.count
     }
     
     var privacyURLString: String {
@@ -63,8 +74,8 @@ class SubscriptionViewModel {
         self.accountCoordinator = accountCoordinator
     }
     
-    func featureDescription(by indexPath: IndexPath) -> String? {        
-        return featureDescriptions[safe: indexPath.row]
+    func featureDescriptionViewModel(by indexPath: IndexPath) -> FeatureDescriptionViewModel? {
+        return featureDescriptionViewModels[safe: indexPath.row]
     }
     
     func productViewModel(by productId: SubscriptionProductId) -> ProductViewModel? {
@@ -121,7 +132,7 @@ class SubscriptionViewModel {
     }
     
     private func updateDiscountPercents() {
-        guard let basicProduct = productViewModels[SubscriptionProductId.first.id] else { return }
+        guard let basicProduct = productViewModels[SubscriptionProductId.monthly.id] else { return }
         productViewModels.values.forEach {
             $0.savingPercent = $0.product.savingPercentAgainst(basicProduct.product)
             $0.baseProduct = basicProduct.product

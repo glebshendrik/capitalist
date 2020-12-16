@@ -9,7 +9,6 @@
 import UIKit
 
 protocol BorrowEditTableControllerDelegate : FormFieldsTableViewControllerDelegate {
-    func didAppear()
     func didTapIcon()
     func didChange(name: String?)
     func didChange(amount: String?)
@@ -24,9 +23,8 @@ protocol BorrowEditTableControllerDelegate : FormFieldsTableViewControllerDelega
 }
 
 class BorrowEditTableController : FormFieldsTableViewController {
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var iconBackgroundImageView: UIImageView!
     
+    @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var nameField: FormTextField!
     @IBOutlet weak var currencyField: FormTapField!
     @IBOutlet weak var amountField: FormMoneyTextField!
@@ -49,12 +47,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        delegate?.didAppear()
-    }
-    
+        
     override func setupUI() {
         super.setupUI()
         setupNameField()

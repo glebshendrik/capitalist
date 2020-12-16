@@ -17,6 +17,7 @@ protocol Transactionable : class {
     var currency: Currency { get }
     var amountRounded: String { get }
     var amount: String { get }
+    var amountCents: Int { get }
     var isDeleted: Bool { get }
     var isSelected: Bool { get set }
     var defaultIconName: String { get }

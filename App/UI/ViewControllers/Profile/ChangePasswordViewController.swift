@@ -47,7 +47,7 @@ class ChangePasswordViewController : FormSubmitViewController {
     }
 }
 
-extension ChangePasswordViewController : ChangePasswordTableControllerDelegate {    
+extension ChangePasswordViewController : ChangePasswordTableControllerDelegate {
     func didChange(oldPassword: String?) {
         viewModel.oldPassword = oldPassword
     }
@@ -62,5 +62,9 @@ extension ChangePasswordViewController : ChangePasswordTableControllerDelegate {
     
     func didTapSave() {
         save()
+    }
+    
+    func didAppear() {
+         
     }
 }

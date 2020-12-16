@@ -107,7 +107,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
                                   style: .cancel,
                                   isEnabled: true,
                                   handler: nil)
-        
+                
         present(alertController, animated: true)
     }
     

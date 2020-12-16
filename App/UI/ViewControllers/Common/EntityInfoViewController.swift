@@ -59,6 +59,7 @@ class EntityInfoViewController : UIViewController, UIFactoryDependantProtocol, U
         }
         tableView.es.noticeNoMoreData()
         tableView.es.stopLoadingMore()
+        tableView.setupPullToRefreshAppearance()
     }
     
     private func setupNotifications() {
@@ -149,6 +150,7 @@ extension EntityInfoViewController {
     private func stopLoading() {
         tableView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
         tableView.es.resetNoMoreData()
+        tableView.refreshControl?.endRefreshing()
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
@@ -200,7 +202,7 @@ extension EntityInfoViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, section: EntityInfoTransactionsSection, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell") as? EntityTransactionTableViewCell,
+         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell") as? TransactionTableViewCell,
                 let transactionViewModel = section.transactionViewModel(at: indexPath.row) else { return UITableViewCell() }
                    
         cell.viewModel = transactionViewModel
@@ -300,12 +302,12 @@ extension EntityInfoViewController {
             showCreditInfoScreen(creditId: creditId)
         }
         else {
-            showTransactionEditScreen(transactionId: transaction.id)
+            showTransactionEditScreen(transactionId: transaction.id, transactionType: transaction.type)
         }
     }
     
-    private func showTransactionEditScreen(transactionId: Int) {
-        modal(factory.transactionEditViewController(delegate: self, transactionId: transactionId))
+    private func showTransactionEditScreen(transactionId: Int, transactionType: TransactionType?) {
+        modal(factory.transactionEditViewController(delegate: self, transactionId: transactionId, transactionType: transactionType))
     }
         
     func showBorrowInfoScreen(borrowId: Int, borrowType: BorrowType) {
@@ -369,5 +371,27 @@ extension EntityInfoViewController : TransactionEditViewControllerDelegate, Borr
 
     func didRemoveTransaction(id: Int, type: TransactionType) {
         postFinantialDataUpdated()
+    }
+    
+    func shouldShowCreditEditScreen(destination: TransactionDestination) {
+        showCreditEditScreen(destination: destination)
+    }
+
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+        showBorrowEditScreen(type: type, source: source, destination: destination)
+    }
+    
+    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+        modal(factory.borrowEditViewController(delegate: self,
+                                               type: type,
+                                               borrowId: nil,
+                                               source: source,
+                                               destination: destination))
+    }
+    
+    func showCreditEditScreen(destination: TransactionDestination) {
+        modal(factory.creditEditViewController(delegate: self,
+                                               creditId: nil,
+                                               destination: destination))
     }
 }

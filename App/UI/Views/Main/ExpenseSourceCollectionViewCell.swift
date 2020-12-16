@@ -13,19 +13,10 @@ import CircleProgressView
 class ExpenseSourceCollectionViewCell : TransactionableCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var creditContainer: UIView?
-    @IBOutlet weak var creditLabel: UILabel?
     @IBOutlet weak var background: UIView!
+    @IBOutlet weak var iconView: IconView!
+    @IBOutlet weak var cardTypeImageView: UIImageView!
     
-    @IBOutlet weak var iconWidthConstraint: NSLayoutConstraint?
-    @IBOutlet weak var iconHeightConstraint: NSLayoutConstraint?
-    @IBOutlet weak var iconVerticalConstraint: NSLayoutConstraint?
-    let largeIconWidth: CGFloat = 18
-    let smallIconWidth: CGFloat = 18
-    let largeIconOffset: CGFloat = 0
-    let smallIconOffset: CGFloat = 0
-        
     var viewModel: ExpenseSourceViewModel? {
         didSet {
             updateUI()
@@ -39,7 +30,7 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
     override func updateUI() {
         updateLabels()
         updateIcon()
-        updateCreditLimit()
+        updateCardTypeUI()
         super.updateUI()
     }
     
@@ -51,21 +42,21 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
     
     func updateIcon() {
         guard let viewModel = viewModel else { return }
-        iconImageView.setImage(with: viewModel.iconURL, placeholderName: viewModel.defaultIconName, renderingMode: .alwaysTemplate)
-        iconImageView.tintColor = UIColor.by(.white100)
-        
-        iconWidthConstraint?.constant = viewModel.inCredit ? smallIconWidth : largeIconWidth
-        iconHeightConstraint?.constant = viewModel.inCredit ? smallIconWidth : largeIconWidth
-        iconVerticalConstraint?.constant = viewModel.inCredit ? smallIconOffset : largeIconOffset
+        iconView.iconURL = viewModel.iconURL
+        iconView.defaultIconName = viewModel.defaultIconName
+        iconView.iconType = viewModel.iconType
+        iconView.vectorIconMode = .compact        
         contentView.layoutIfNeeded()
     }
     
-    func updateCreditLimit() {
-        guard let viewModel = viewModel else { return }
-        creditContainer?.isHidden = !viewModel.inCredit
-        creditLabel?.text = viewModel.credit
+    func updateCardTypeUI() {
+        guard let cardTypeImageName = viewModel?.cardTypeImageName else {
+            cardTypeImageView.image = nil
+            return
+        }
+        cardTypeImageView.image = UIImage(named: cardTypeImageName)
     }
-    
+        
     override func setupSelectionIndicator() {
         selectionIndicator.isHidden = true
         selectionIndicator.cornerRadius = 8

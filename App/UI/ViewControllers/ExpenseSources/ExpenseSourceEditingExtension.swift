@@ -26,7 +26,18 @@ extension ExpenseSourceEditViewController : CurrenciesViewControllerDelegate {
     }
 }
 
+extension ExpenseSourceEditViewController : CardTypesViewControllerDelegate {
+    func didSelect(cardType: CardType?) {
+        viewModel.selectedCardType = cardType
+        updateCardTypeUI()
+    }
+}
+
 extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDelegate {
+    func didTapCardType() {
+        modal(factory.cardTypesViewController(delegate: self))
+    }
+    
     func didAppear() {
         focusFirstEmptyField()
     }
