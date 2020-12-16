@@ -88,10 +88,17 @@ struct APIRouteQueryParameters {
                 params["to_got_at"] = Formatter.iso8601.string(from: toGotAt)
             }
             return params
-        case .indexProviderConnections(_, let providerId):
+        case .indexConnections(_, let providerId):
             return [ "provider_id" : providerId ]
-        case .indexAccountConnections(_, let connectionId):
-            return [ "connection_id" : connectionId ]
+        case .indexAccounts(_, let currencyCode, let connectionId, let providerId, let notUsed, let nature):
+            if let currencyCode = currencyCode {
+                params["currency"] = currencyCode
+            }
+            params["connection_id"] = connectionId
+            params["provider_id"] = providerId
+            params["not_attached"] = notUsed.string
+            params["nature_type"] = nature.rawValue
+            return params
         default:
             break
         }

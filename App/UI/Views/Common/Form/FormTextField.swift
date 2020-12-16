@@ -242,9 +242,9 @@ class FormTextField : FormField {
         
         let appearanceOptions = self.appearanceOptions()
         
-        iconContainer.backgroundColor = appearanceOptions.iconBackgroundColor
+
+        iconContainer.backgroundColor = isVector ? UIColor.by(.white100) : appearanceOptions.iconBackgroundColor
         icon.tintColor = appearanceOptions.iconTint
-        
     }
     
     override func updateErrorLabel() {

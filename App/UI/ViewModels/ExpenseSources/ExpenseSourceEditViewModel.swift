@@ -79,6 +79,10 @@ class ExpenseSourceEditViewModel {
             ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
             : NSLocalizedString("Подключить банк", comment: "Подключить банк")
     }
+        
+    var iconType: IconType {
+        return selectedIconURL?.iconType ?? .raster
+    }
     
     // Permissions
     
@@ -95,6 +99,10 @@ class ExpenseSourceEditViewModel {
     }
     
     var canChangeCreditLimit: Bool {
+        return !accountConnected
+    }
+    
+    var canCardType: Bool {
         return !accountConnected
     }
     
@@ -116,10 +124,6 @@ class ExpenseSourceEditViewModel {
         return isNew
     }
     
-    var iconType: IconType {
-        return expenseSource?.accountConnection != nil ? .vector : .raster
-    }
-    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
          bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
@@ -139,7 +143,7 @@ class ExpenseSourceEditViewModel {
     func set(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         
-        selectedIconURL = expenseSource.iconURL
+        selectedIconURL = expenseSource.accountConnection?.account.connection.providerLogoURL ?? expenseSource.iconURL
         selectedCurrency = expenseSource.currency
         selectedCardType = expenseSource.cardType
         name = expenseSource.name
@@ -149,13 +153,7 @@ class ExpenseSourceEditViewModel {
         if let accountConnection = expenseSource.accountConnection {
             accountConnectionAttributes =
                 AccountConnectionNestedAttributes(id: accountConnection.id,
-                                                  providerConnectionId: accountConnection.providerConnection.id,
-                                                  accountId: accountConnection.accountId,
-                                                  accountName: accountConnection.accountName,
-                                                  nature: accountConnection.nature,
-                                                  currencyCode: accountConnection.currencyCode,
-                                                  balance: accountConnection.balance,
-                                                  connectionId: accountConnection.connectionId,
+                                                  accountId: accountConnection.account.id,                                                  
                                                   shouldDestroy: nil)
         }
         
@@ -233,15 +231,16 @@ extension ExpenseSourceEditViewModel {
 
 // Bank Connection
 extension ExpenseSourceEditViewModel {
-    func connect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
+    func connect(accountViewModel: AccountViewModel, connection: Connection) {
         selectedCurrency = accountViewModel.currency
-        selectedIconURL = providerConnection.logoURL
+        selectedIconURL = connection.providerLogoURL
+        selectedCardType = accountViewModel.cardType
         
-        if name == nil {
+        if name == nil || isNew {
             name = accountViewModel.name
         }
         
-        amount = accountViewModel.amount
+        amount = accountViewModel.amountDecimal
         
         if let creditLimit = accountViewModel.creditLimit {
             self.creditLimit = creditLimit
@@ -256,13 +255,7 @@ extension ExpenseSourceEditViewModel {
         
         accountConnectionAttributes =
             AccountConnectionNestedAttributes(id: accountConnectionId,
-                                              providerConnectionId: providerConnection.id,
                                               accountId: accountViewModel.id,
-                                              accountName: accountViewModel.name,
-                                              nature: accountViewModel.nature,
-                                              currencyCode: accountViewModel.currencyCode,
-                                              balance: accountViewModel.amountCents ?? 0,
-                                              connectionId: providerConnection.connectionId,
                                               shouldDestroy: nil)
     }
     

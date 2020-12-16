@@ -12,6 +12,7 @@ import SwifterSwift
 enum ColorAsset : String {
     case black1 = "black 1"
     case black2 = "black 2"
+    case black3 = "black 3"
     case blue1 = "blue 1"
     case gray1 = "gray 1"
     case gray2 = "gray 2"

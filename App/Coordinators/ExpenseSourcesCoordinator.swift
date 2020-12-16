@@ -12,12 +12,15 @@ import PromiseKit
 class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
     private let userSessionManager: UserSessionManagerProtocol
     private let expenseSourcesService: ExpenseSourcesServiceProtocol
+    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
     
     init(userSessionManager: UserSessionManagerProtocol,
-         expenseSourcesService: ExpenseSourcesServiceProtocol) {
+         expenseSourcesService: ExpenseSourcesServiceProtocol,
+         bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         
         self.userSessionManager = userSessionManager
         self.expenseSourcesService = expenseSourcesService
+        self.bankConnectionsCoordinator = bankConnectionsCoordinator
     }
     
     func create(with creationForm: ExpenseSourceCreationForm) -> Promise<ExpenseSource> {
@@ -25,7 +28,33 @@ class ExpenseSourcesCoordinator : ExpenseSourcesCoordinatorProtocol {
     }
     
     func show(by id: Int) -> Promise<ExpenseSource> {
-        return expenseSourcesService.show(by: id)
+        return  firstly {
+                    expenseSourcesService.show(by: id)
+                }.then { expenseSource in
+                    self.syncedWithConnection(expenseSource: expenseSource)
+                }
+    }
+    
+    func syncedWithConnection(expenseSource: ExpenseSource) -> Promise<ExpenseSource> {
+        guard   let accountConnection = expenseSource.accountConnection,
+                let connectionId = accountConnection.account.connection.id else {
+            return Promise.value(expenseSource)
+        }
+        return  firstly {
+                    bankConnectionsCoordinator.updateConnection(id: connectionId,
+                                                                saltedgeId: accountConnection.account.connection.saltedgeId)
+                }.then {
+                    self.expenseSourcesService.show(by: expenseSource.id)
+                }
+    }
+    
+    func refreshConnection(expenseSource: ExpenseSource) -> Promise<Void> {
+        guard   let accountConnection = expenseSource.accountConnection,
+                let connectionId = accountConnection.account.connection.id else {
+            return Promise.value(())
+        }
+        return bankConnectionsCoordinator.updateConnection(id: connectionId,
+                                                           saltedgeId: accountConnection.account.connection.saltedgeId)
     }
     
     func first() -> Promise<ExpenseSource?> {

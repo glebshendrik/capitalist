@@ -462,7 +462,7 @@ class TransactionViewModel {
     }
     
     var iconType: IconType {
-        return iconURL?.absoluteString.components(separatedBy: ".").last == "svg" ? .vector : .raster
+        return iconURL?.iconType ?? .raster
     }
     
     init(transaction: Transaction) {

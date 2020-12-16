@@ -316,7 +316,7 @@ class FormExchangeField : FormField {
         
         let appearanceOptions = self.appearanceOptions()
         
-        iconContainer.backgroundColor = appearanceOptions.fieldAppearance.iconBackgroundColor
+        iconContainer.backgroundColor = isVector ? UIColor.by(.white100) : appearanceOptions.fieldAppearance.iconBackgroundColor
         icon.tintColor = appearanceOptions.fieldAppearance.iconTint
     }
     

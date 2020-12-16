@@ -20,7 +20,6 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-
 import Foundation
 
 open class SEBaseSessionsParams: Encodable, ParametersEncodable {
@@ -37,6 +36,7 @@ open class SEBaseSessionsParams: Encodable, ParametersEncodable {
     public let lostConnectionNotify: Bool?
     public let showConsentConfirmation: Bool?
     public let attempt: SEAttempt?
+    public let theme: String?
 
     init(attempt: SEAttempt? = nil,
          customFields: String? = nil,
@@ -50,7 +50,8 @@ open class SEBaseSessionsParams: Encodable, ParametersEncodable {
          javascriptCallbackType: String? = nil,
          includeFakeProviders: Bool? = nil,
          lostConnectionNotify: Bool? = nil,
-         showConsentConfirmation: Bool? = nil) {
+         showConsentConfirmation: Bool? = nil,
+         theme: String? = nil) {
         self.attempt = attempt
         self.customFields = customFields
         self.dailyRefresh = dailyRefresh
@@ -64,6 +65,7 @@ open class SEBaseSessionsParams: Encodable, ParametersEncodable {
         self.includeFakeProviders = includeFakeProviders
         self.lostConnectionNotify = lostConnectionNotify
         self.showConsentConfirmation = showConsentConfirmation
+        self.theme = theme
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -80,6 +82,7 @@ open class SEBaseSessionsParams: Encodable, ParametersEncodable {
         case includeFakeProviders = "include_fake_providers"
         case lostConnectionNotify = "lost_connection_notify"
         case showConsentConfirmation = "show_consent_confirmation"
+        case theme = "theme"
     }
 }
 
@@ -104,6 +107,7 @@ open class SEConnectSessionsParams: SEBaseSessionsParams {
                 includeFakeProviders: Bool? = nil,
                 lostConnectionNotify: Bool? = nil,
                 showConsentConfirmation: Bool? = nil,
+                theme: String? = nil,
                 credentialsStrategy: String? = nil,
                 consent: SEConsent) {
         self.allowedCountries = allowedCountries
@@ -122,7 +126,8 @@ open class SEConnectSessionsParams: SEBaseSessionsParams {
                    javascriptCallbackType: javascriptCallbackType,
                    includeFakeProviders: includeFakeProviders,
                    lostConnectionNotify: lostConnectionNotify,
-                   showConsentConfirmation: showConsentConfirmation)
+                   showConsentConfirmation: showConsentConfirmation,
+                   theme: theme)
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -158,7 +163,8 @@ public class SERefreshSessionsParams: SEBaseSessionsParams {
                 javascriptCallbackType: String? = nil,
                 includeFakeProviders: Bool? = nil,
                 lostConnectionNotify: Bool? = nil,
-                showConsentConfirmation: Bool? = nil) {
+                showConsentConfirmation: Bool? = nil,
+                theme: String? = nil) {
         self.excludeAccounts = excludeAccounts
 
         super.init(attempt: attempt,
@@ -172,7 +178,8 @@ public class SERefreshSessionsParams: SEBaseSessionsParams {
                    javascriptCallbackType: javascriptCallbackType,
                    includeFakeProviders: includeFakeProviders,
                    lostConnectionNotify: lostConnectionNotify,
-                   showConsentConfirmation: showConsentConfirmation)
+                   showConsentConfirmation: showConsentConfirmation,
+                   theme: theme)
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -191,6 +198,7 @@ public class SERefreshSessionsParams: SEBaseSessionsParams {
 public class SEReconnectSessionsParams: SEBaseSessionsParams {
     public let excludeAccounts: [Int]?
     public let credentialsStrategy: String?
+    public let overrideCredentialsStrategy: String?
     public let consent: SEConsent
     
     public init(excludeAccounts: [Int]? = nil,
@@ -206,11 +214,14 @@ public class SEReconnectSessionsParams: SEBaseSessionsParams {
                 includeFakeProviders: Bool? = nil,
                 lostConnectionNotify: Bool? = nil,
                 showConsentConfirmation: Bool? = nil,
+                theme: String? = nil,
                 credentialsStrategy: String? = nil,
+                overrideCredentialsStrategy: String? = nil,
                 consent: SEConsent) {
         self.excludeAccounts = excludeAccounts
         self.credentialsStrategy = credentialsStrategy
-        self.consent = consent
+        self.overrideCredentialsStrategy = overrideCredentialsStrategy
+        self.consent = consent        
         
         super.init(attempt: attempt,
                    customFields: customFields,
@@ -223,12 +234,14 @@ public class SEReconnectSessionsParams: SEBaseSessionsParams {
                    javascriptCallbackType: javascriptCallbackType,
                    includeFakeProviders: includeFakeProviders,
                    lostConnectionNotify: lostConnectionNotify,
-                   showConsentConfirmation: showConsentConfirmation)
+                   showConsentConfirmation: showConsentConfirmation,
+                   theme: theme)
     }
     
     private enum CodingKeys: String, CodingKey {
         case excludeAccounts = "exclude_accounts"
         case credentialsStrategy = "credentials_strategy"
+        case overrideCredentialsStrategy = "override_credentials_strategy"
         case consent = "consent"
     }
     
@@ -236,6 +249,7 @@ public class SEReconnectSessionsParams: SEBaseSessionsParams {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(excludeAccounts, forKey: .excludeAccounts)
         try container.encodeIfPresent(credentialsStrategy, forKey: .credentialsStrategy)
+        try container.encodeIfPresent(overrideCredentialsStrategy, forKey: .overrideCredentialsStrategy)
         try container.encode(consent, forKey: .consent)
         
         try super.encode(to: encoder)

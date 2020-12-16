@@ -15,14 +15,14 @@ enum APIRoute: URLRequestConvertible {
     static var baseURLString: String {
         switch UIApplication.shared.inferredEnvironment {
         case .debug:
-            return "https://api.threebaskets.net"
+//            return "https://api.threebaskets.net"
 //            return "https://skrudzh-staging.herokuapp.com"
 //            return "https://test.threebaskets.net"
-//            return "https://skrudz.tempio.app"
+            return "http://localhost:8090"
 //            return "https://staging.threebaskets.net"
-//            return "https://prod.threebaskets.net"
+//            return "https://api.threebaskets.net"
         case .testFlight:
-            return "https://api.threebaskets.net"
+            return "http://localhost:8090"
 //            return "https://skrudz.tempio.app"
 //            return "https://test.threebaskets.net"
         case .appStore:
@@ -145,14 +145,14 @@ enum APIRoute: URLRequestConvertible {
     // Budget
     case showBudget(userId: Int)
         
-    // AccountConnections
-    case indexAccountConnections(userId: Int, connectionId: String)
-    case destroyAccountConnection(id: Int)
+    // Accounts
+    case indexAccounts(userId: Int, currencyCode: String?, connectionId: String, providerId: String, notUsed: Bool, nature: AccountNatureType)
     
-    // ProviderConnections
-    case indexProviderConnections(userId: Int, providerId: String)
-    case createProviderConnection(form: ProviderConnectionCreationForm)
-//    case createSaltEdgeSession(userId: Int)
+    // Connections
+    case indexConnections(userId: Int, providerId: String)
+    case showConnection(id: Int)
+    case createConnection(form: ConnectionCreationForm)
+    case updateConnection(form: ConnectionUpdatingForm)
     
     // TransactionableExamples
     case indexTransactionableExamples(transactionableType: TransactionableType, basketType: BasketType?)

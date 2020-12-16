@@ -116,12 +116,27 @@ extension MainViewController {
         }.done {
             self.update(self.expenseSourcesCollectionView,
                         scrollToEnd: scrollToEndWhenUpdated)
+            self.refreshExpenseSourcesConnections()
         }
         .catch { _ in
             self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Ошибка загрузки источников трат", comment: "Ошибка загрузки источников трат"), theme: .error)
         }.finally {
             self.set(self.expenseSourcesActivityIndicator, hidden: true)
         }
+    }
+    
+    func refreshExpenseSourcesConnections() {
+        _ = firstly {
+                startRefreshExpenseSourcesConnections()
+            }.ensure {
+                self.update(self.expenseSourcesCollectionView)
+            }
+    }
+    
+    func startRefreshExpenseSourcesConnections() -> Promise<Void> {
+        let promise = viewModel.refreshExpenseSourcesConnections()
+        self.update(self.expenseSourcesCollectionView)
+        return promise
     }
     
     func moveExpenseSource(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

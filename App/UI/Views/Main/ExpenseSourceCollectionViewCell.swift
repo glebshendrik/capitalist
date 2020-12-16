@@ -16,6 +16,9 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
     @IBOutlet weak var background: UIView!
     @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var cardTypeImageView: UIImageView!
+    @IBOutlet weak var cardNumberLabel: UILabel!
+    @IBOutlet weak var connectionActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var warningIndicatorImageView: UIImageView!
     
     var viewModel: ExpenseSourceViewModel? {
         didSet {
@@ -31,6 +34,7 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
         updateLabels()
         updateIcon()
         updateCardTypeUI()
+        updateConnectionUI()
         super.updateUI()
     }
     
@@ -38,6 +42,7 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
         guard let viewModel = viewModel else { return }
         nameLabel.text = viewModel.name
         amountLabel.text = viewModel.amountRounded
+        cardNumberLabel.text = viewModel.cardLastNumbers
     }
     
     func updateIcon() {
@@ -57,6 +62,12 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
         cardTypeImageView.image = UIImage(named: cardTypeImageName)
     }
         
+    func updateConnectionUI() {
+        iconView.isHidden = viewModel?.iconHidden ?? false
+        connectionActivityIndicator.isHidden = viewModel?.connectionIndicatorHidden ?? true
+        warningIndicatorImageView.isHidden = viewModel?.reconnectWarningHidden ?? true
+    }
+    
     override func setupSelectionIndicator() {
         selectionIndicator.isHidden = true
         selectionIndicator.cornerRadius = 8

@@ -951,3 +951,9 @@ extension UIDevice {
         return bottom > 0
     }
 }
+
+extension URL {
+    var iconType: IconType {
+        return absoluteString.components(separatedBy: ".").last == "svg" ? .vector : .raster
+    }
+}

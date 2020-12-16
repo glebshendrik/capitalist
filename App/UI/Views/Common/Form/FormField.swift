@@ -66,8 +66,8 @@ class FormField : UIView {
         didSet { updateErrorLabel() }
     }
     
-    @IBInspectable var isVector: Bool = false {
-        didSet { updateIcon() }
+    var isVector: Bool {
+        return (imageURL?.iconType ?? .raster) == .vector
     }
     
     @IBInspectable var imageName: String? = nil {
@@ -149,7 +149,7 @@ class FormField : UIView {
     
     func setupVectorIconConstraints() {
         vectorIcon.snp.makeConstraints { make in
-            make.width.height.lessThanOrEqualTo(20)
+            make.width.height.lessThanOrEqualTo(28)
             make.center.equalToSuperview()
         }
     }
@@ -210,7 +210,7 @@ class FormField : UIView {
     
     func updateIcon(forceImageUpdate: Bool = true) {
         
-        iconContainer.backgroundColor = unfocusedBackgroundColor
+        iconContainer.backgroundColor = isVector ? UIColor.by(.white100) : unfocusedBackgroundColor
         icon.tintColor = unfocusedIconTint
         
         icon.isHidden = isVector
@@ -230,7 +230,7 @@ class FormField : UIView {
         }
         else {
             icon.setImage(with: url, placeholderName: imageName, renderingMode: .alwaysTemplate)
-        }
+        }        
     }
     
     func setupErrorLabel() {

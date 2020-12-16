@@ -10,6 +10,7 @@
 		<string>webcredentials:test.threebaskets.net</string>
 		<string>applinks:threebasketsapp.page.link</string>
 		<string>applinks:threebasketsapp.mytrk.link</string>
+		<string>applinks:bndk.adj.st</string>
 	</array>
 </dict>
 </plist>

@@ -150,8 +150,7 @@ class APIClient : APIClientProtocol {
                 .request(request)
                 .validate(requestValidator)
                 .responseJSON()
-        } catch {
-            SwiftyBeaver.error(error)
+        } catch {            
             return Promise(error: error)
         }
     }

@@ -53,25 +53,35 @@ class UIFactory : UIFactoryProtocol {
         providersViewController?.delegate = delegate
         return providersViewController
     }
-    
+        
     func accountsViewController(delegate: AccountsViewControllerDelegate,
-                                providerConnection: ProviderConnection,
-                                currencyCode: String?) -> AccountsViewController? {
+                                connection: Connection,
+                                currencyCode: String?,
+                                nature: AccountNatureType) -> AccountsViewController? {
         
         let accountsViewController = router.viewController(Infrastructure.ViewController.AccountsViewController) as? AccountsViewController
         accountsViewController?.delegate = delegate
-        accountsViewController?.viewModel.providerConnection = providerConnection
+        accountsViewController?.viewModel.connection = connection
         accountsViewController?.viewModel.currencyCode = currencyCode
+        accountsViewController?.viewModel.nature = nature
         return accountsViewController
     }
     
-    func providerConnectionViewController(delegate: ProviderConnectionViewControllerDelegate,
-                                          providerViewModel: ProviderViewModel) -> ProviderConnectionViewController? {
+    func connectionViewController(delegate: ConnectionViewControllerDelegate,
+                                  providerViewModel: ProviderViewModel?,
+                                  connectionType: ProviderConnectionType,
+                                  connectionURL: URL,
+                                  connection: Connection?) -> UINavigationController? {
         
-        let providerConnectionViewController = router.viewController(Infrastructure.ViewController.ProviderConnectionViewController) as? ProviderConnectionViewController
-        providerConnectionViewController?.delegate = delegate
-        providerConnectionViewController?.providerViewModel = providerViewModel
-        return providerConnectionViewController        
+        guard let connectionViewController = router.viewController(Infrastructure.ViewController.ConnectionViewController) as? ConnectionViewController else { return nil }
+        connectionViewController.delegate = delegate
+        connectionViewController.viewModel.providerViewModel = providerViewModel
+        connectionViewController.viewModel.connectionType = connectionType
+        connectionViewController.viewModel.connectionURL = connectionURL
+        connectionViewController.viewModel.connection = connection
+        let navigationController = UINavigationController(rootViewController: connectionViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        return navigationController
     }
     
     func commentViewController(delegate: CommentViewControllerDelegate,

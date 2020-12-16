@@ -90,26 +90,28 @@ class ActiveInfoViewController : EntityInfoNavigationController {
 
 extension ActiveInfoViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
     func showProviders() {
-        slideUp(factory.providersViewController(delegate: self))
+        guard let providersViewController = factory.providersViewController(delegate: self) else { return }
+        modal(UINavigationController(rootViewController: providersViewController))
     }
     
-    func didConnectTo(_ providerViewModel: ProviderViewModel, providerConnection: ProviderConnection) {
-        showAccountsViewController(for: providerConnection)
+    func didConnectTo(_ providerViewModel: ProviderViewModel?, connection: Connection) {
+        showAccountsViewController(for: connection)
     }
     
-    func showAccountsViewController(for providerConnection: ProviderConnection) {
-        let currencyCode = viewModel.activeViewModel?.currency.code
+    func showAccountsViewController(for connection: Connection) {
+        let currencyCode = viewModel.activeViewModel?.currency.code        
         slideUp(factory.accountsViewController(delegate: self,
-                                               providerConnection: providerConnection,
-                                               currencyCode: currencyCode))
+                                               connection: connection,
+                                               currencyCode: currencyCode,
+                                               nature: .investment))
     }
     
-    func didSelect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
-        connect(accountViewModel, providerConnection)
+    func didSelect(accountViewModel: AccountViewModel, connection: Connection) {
+        connect(accountViewModel, connection)
     }
     
-    func connect(_ accountViewModel: AccountViewModel, _ providerConnection: ProviderConnection) {
-        viewModel.connect(accountViewModel: accountViewModel, providerConnection: providerConnection)
+    func connect(_ accountViewModel: AccountViewModel, _ connection: Connection) {
+        viewModel.connect(accountViewModel: accountViewModel, connection: connection)
         save()
     }
     

@@ -30,7 +30,7 @@
                     <color key="textColor" name="white 0.4"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8f-GT-Q3g">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8f-GT-Q3g">
                     <rect key="frame" x="66.5" y="28" width="16" height="20"/>
                     <color key="backgroundColor" name="white 0.12"/>
                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="13"/>

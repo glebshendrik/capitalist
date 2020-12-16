@@ -8,6 +8,8 @@
 
 import Foundation
 import PromiseKit
+import SaltEdge
+import SwiftyBeaver
 
 enum ExpenseSourceInfoField : String {
     case icon
@@ -15,6 +17,7 @@ enum ExpenseSourceInfoField : String {
     case creditLimit
     case credit
     case bank
+    case bankWarning
     case statistics
     case transactionIncome
     case transactionExpense
@@ -64,6 +67,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         return expenseSourceViewModel?.iconType ?? .raster
     }
     
+    var canEditIcon: Bool {
+        return !(expenseSourceViewModel?.accountConnected ?? false)
+    }
+    
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          creditsCoordinator: CreditsCoordinatorProtocol,
          borrowsCoordinator: BorrowsCoordinatorProtocol,
@@ -82,13 +89,7 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         if let accountConnection = expenseSource?.expenseSource.accountConnection {
             accountConnectionAttributes =
                 AccountConnectionNestedAttributes(id: accountConnection.id,
-                                                  providerConnectionId: accountConnection.providerConnection.id,
-                                                  accountId: accountConnection.accountId,
-                                                  accountName: accountConnection.accountName,
-                                                  nature: accountConnection.nature,
-                                                  currencyCode: accountConnection.currencyCode,
-                                                  balance: accountConnection.balance,
-                                                  connectionId: accountConnection.connectionId,
+                                                  accountId: accountConnection.account.id,
                                                   shouldDestroy: nil)
         }
     }
@@ -97,19 +98,31 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         guard let entityId = expenseSourceViewModel?.id else { return Promise(error: ExpenseSourceInfoError.expenseSourceIsNotSpecified)}
         return  firstly {
                     expenseSourcesCoordinator.show(by: entityId)
-                }.get { expenseSource in
+                }.done { expenseSource in
                     self.set(expenseSource: ExpenseSourceViewModel(expenseSource: expenseSource))
-                }.asVoid()
+                }
     }
     
     override func entityInfoFields() -> [EntityInfoField] {
-        var fields: [EntityInfoField] = [IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
-                                                       iconType: .raster,
-                                                       iconURL: selectedIconURL,
-                                                       placeholder: TransactionableType.expenseSource.defaultIconName),
-                                         BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
-                                                        title: NSLocalizedString("Баланс", comment: "Баланс"),
-                                                        value: expenseSourceViewModel?.amount)]
+        var fields = [EntityInfoField]()
+        
+        if expenseSourceViewModel?.reconnectNeeded ?? false {
+            fields.append(BankWarningInfoField(fieldId: ExpenseSourceInfoField.bankWarning.rawValue,
+                                               title: NSLocalizedString("Нет подключения к банку", comment: ""),
+                                               message: NSLocalizedString("Провайдер подключения к банку не может установить соединение. Для обновления данных требуется подключиться к банку", comment: ""),
+                                               buttonText: NSLocalizedString("Подключиться", comment: "")))
+        }
+        
+        fields.append(IconInfoField(fieldId: ExpenseSourceInfoField.icon.rawValue,
+                                    iconType: iconType,
+                                    iconURL: selectedIconURL,
+                                    placeholder: TransactionableType.expenseSource.defaultIconName,
+                                    canEditIcon: canEditIcon))
+        
+        fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.balance.rawValue,
+                                     title: NSLocalizedString("Баланс", comment: "Баланс"),
+                                     value: expenseSourceViewModel?.amount))
+        
         if let expenseSourceViewModel = expenseSourceViewModel, expenseSourceViewModel.hasCreditLimit {
             fields.append(BasicInfoField(fieldId: ExpenseSourceInfoField.creditLimit.rawValue,
                                          title: NSLocalizedString("Кредитный лимит", comment: "Кредитный лимит"),
@@ -121,10 +134,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
                                          value: expenseSourceViewModel.credit))
         }
         
-//        fields.append(ButtonInfoField(fieldId: ExpenseSourceInfoField.bank.rawValue,
-//                                      title: bankButtonTitle,
-//                                      iconName: nil,
-//                                      isEnabled: true))
+        fields.append(ButtonInfoField(fieldId: ExpenseSourceInfoField.bank.rawValue,
+                                      title: bankButtonTitle,
+                                      iconName: nil,
+                                      isEnabled: true))
         
         
         fields.append(contentsOf: [ButtonInfoField(fieldId: ExpenseSourceInfoField.statistics.rawValue,
@@ -161,9 +174,72 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
 }
 
 // Bank Connection
+
+extension ExpenseSourceInfoViewModel : SEConnectionFetchingDelegate {
+    func failedToFetch(connection: SEConnection?, message: String) {
+        SwiftyBeaver.error(message)
+    }
+    
+    func interactiveInputRequested(for connection: SEConnection) {
+        SwiftyBeaver.info("interactiveInputRequested: \(connection)")
+    }
+    
+    func successfullyFinishedFetching(connection: SEConnection) {
+        SwiftyBeaver.info("successfullyFinishedFetching: \(connection)")
+    }
+    
+    var connection: Connection? {
+        return expenseSourceViewModel?.accountViewModel?.connection
+    }
+    
+    func createConnectionSession() -> Promise<URL> {
+        guard let providerCode = connection?.providerCode, let countryCode = connection?.countryCode else {
+            return Promise(error: BankConnectionError.canNotCreateConnection)
+        }        
+        return bankConnectionsCoordinator.createConnectSession(providerCode: providerCode, countryCode: countryCode)
+    }
+    
+    func createReconnectSession() -> Promise<URL> {
+        guard let connection = connection else {
+            return Promise(error: BankConnectionError.canNotCreateConnection)
+        }
+        return bankConnectionsCoordinator.createReconnectSession(connection: connection)
+    }
+    
+    func createRefreshConnectionSession() -> Promise<URL> {
+        guard let connection = connection else {
+            return Promise(error: BankConnectionError.canNotCreateConnection)
+        }
+        return bankConnectionsCoordinator.createRefreshConnectionSession(connection: connection)
+    }
+    
+    func reconnectSessionURL() -> Promise<URL> {
+        guard let reconnectType = expenseSourceViewModel?.reconnectType else {
+            return Promise(error: BankConnectionError.canNotCreateConnection)
+        }
+        
+        switch reconnectType {
+        case .create:
+            return createConnectionSession()
+        case .refresh:
+            return createRefreshConnectionSession()
+        case .reconnect:
+            return createReconnectSession()
+        }
+    }
+    
+    var reconnectType: ProviderConnectionType {
+        return expenseSourceViewModel?.reconnectType ?? .create
+    }
+    
+    var reconnectNeeded: Bool {
+        return expenseSourceViewModel?.reconnectNeeded ?? false
+    }
+}
+
 extension ExpenseSourceInfoViewModel {
-    func connect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
-        selectedIconURL = providerConnection.logoURL
+    func connect(accountViewModel: AccountViewModel, connection: Connection) {
+        selectedIconURL = connection.providerLogoURL
         selectedAccountViewModel = accountViewModel
         
         var accountConnectionId: Int? = nil
@@ -175,13 +251,7 @@ extension ExpenseSourceInfoViewModel {
         
         accountConnectionAttributes =
             AccountConnectionNestedAttributes(id: accountConnectionId,
-                                              providerConnectionId: providerConnection.id,
                                               accountId: accountViewModel.id,
-                                              accountName: accountViewModel.name,
-                                              nature: accountViewModel.nature,
-                                              currencyCode: accountViewModel.currencyCode,
-                                              balance: accountViewModel.amountCents ?? 0,
-                                              connectionId: providerConnection.connectionId,
                                               shouldDestroy: nil)
     }
     

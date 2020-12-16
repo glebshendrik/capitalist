@@ -1,4 +1,7 @@
 PODS:
+  - Adjust (4.22.1):
+    - Adjust/Core (= 4.22.1)
+  - Adjust/Core (4.22.1)
   - Alamofire (4.7.3)
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
@@ -201,6 +204,7 @@ PODS:
   - TrustKit (1.6.5)
 
 DEPENDENCIES:
+  - Adjust (~> 4.22.1)
   - AlamofireImage
   - AlignedCollectionViewFlowLayout
   - ALTextInputBar
@@ -232,7 +236,7 @@ DEPENDENCIES:
   - PromiseKit/Alamofire (~> 6.5)
   - RandomColorSwift (from `https://github.com/onevcat/RandomColorSwift`, branch `master`)
   - RecurrencePicker (from `https://github.com/petalvlad/RecurrencePicker`, branch `master`)
-  - SaltEdge-iOS-Swift (~> 3.3.1)
+  - SaltEdge-iOS-Swift (from `https://github.com/petalvlad/saltedge-ios-swift`, branch `v3.3.1`)
   - SDWebImageSVGCoder (~> 0.3)
   - SideMenu (from `https://github.com/jonkykong/SideMenu`, branch `master`)
   - SkyFloatingLabelTextField
@@ -276,6 +280,7 @@ SPEC REPOS:
     - SwiftMessages
     - SwinjectAutoregistration
   trunk:
+    - Adjust
     - ALTextInputBar
     - ApphudSDK
     - AttributedTextView
@@ -307,7 +312,6 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
-    - SaltEdge-iOS-Swift
     - SwifterSwift
     - SwiftyBeaver
     - SwiftyGif
@@ -324,6 +328,9 @@ EXTERNAL SOURCES:
   RecurrencePicker:
     :branch: master
     :git: https://github.com/petalvlad/RecurrencePicker
+  SaltEdge-iOS-Swift:
+    :branch: v3.3.1
+    :git: https://github.com/petalvlad/saltedge-ios-swift
   SideMenu:
     :branch: master
     :git: https://github.com/jonkykong/SideMenu
@@ -335,11 +342,15 @@ CHECKOUT OPTIONS:
   RecurrencePicker:
     :commit: aae70cc22ce643ba2311be0d7ac5a6d6cc6cc8ac
     :git: https://github.com/petalvlad/RecurrencePicker
+  SaltEdge-iOS-Swift:
+    :commit: c7fda540153ae984198e6b140df0bda74c47d09b
+    :git: https://github.com/petalvlad/saltedge-ios-swift
   SideMenu:
     :commit: 138103093176154f84ae9a2a63e58b9ae78bc6d7
     :git: https://github.com/jonkykong/SideMenu
 
 SPEC CHECKSUMS:
+  Adjust: 7cd2d1cf61dff44d2d15541d83ffde87abbcd193
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   AlignedCollectionViewFlowLayout: ee2ef451e741ec08f8e0967d828001e2f051c20a
@@ -407,6 +418,6 @@ SPEC CHECKSUMS:
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
 
-PODFILE CHECKSUM: fa45d0663f004c226c997e1a2d3d74ec4d272138
+PODFILE CHECKSUM: c9cfb4f83b70211003b6a03304f57f590e5c70b7
 
 COCOAPODS: 1.8.0

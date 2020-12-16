@@ -864,24 +864,24 @@
             </objects>
             <point key="canvasLocation" x="-745" y="2540"/>
         </scene>
-        <!--Provider Connection View Controller-->
+        <!--Connection View Controller-->
         <scene sceneID="38p-cA-yXf">
             <objects>
-                <viewController storyboardIdentifier="ProviderConnectionViewController" id="6g8-qx-tlt" customClass="ProviderConnectionViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConnectionViewController" modalPresentationStyle="fullScreen" id="6g8-qx-tlt" customClass="ConnectionViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xlo-wb-Ien">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dyr-Sp-Vu8" customClass="SEWebView" customModule="SaltEdge">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="black 2"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstItem="jmD-w5-xeq" firstAttribute="bottom" secondItem="Dyr-Sp-Vu8" secondAttribute="bottom" id="8ZP-39-wbG"/>
                             <constraint firstItem="Dyr-Sp-Vu8" firstAttribute="leading" secondItem="jmD-w5-xeq" secondAttribute="leading" id="WdY-7a-b2N"/>
@@ -913,47 +913,56 @@
                                 <color key="textColor" name="white 1.0"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EKG-DY-vT0">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" estimatedRowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EKG-DY-vT0">
                                 <rect key="frame" x="0.0" y="33" width="375" height="634"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AccountCell" rowHeight="54" id="0lK-Hg-9kQ" customClass="AccountCell" customModule="Three_Baskets" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="54"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AccountCell" rowHeight="64" id="0lK-Hg-9kQ" customClass="AccountCell" customModule="Three_Baskets" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0lK-Hg-9kQ" id="ZiU-tM-MaH">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lh3-V4-5Cz">
-                                                    <rect key="frame" x="16" y="8" width="44.5" height="22.5"/>
+                                                    <rect key="frame" x="16" y="8" width="44.5" height="32.5"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                     <color key="textColor" name="white 1.0"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggn-8d-2G2">
-                                                    <rect key="frame" x="314.5" y="8" width="44.5" height="22.5"/>
+                                                    <rect key="frame" x="314.5" y="21.5" width="44.5" height="21"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                                                     <color key="textColor" name="white 0.64"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="asd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hit-5o-QYW">
-                                                    <rect key="frame" x="16" y="30.5" width="343" height="15.5"/>
+                                                    <rect key="frame" x="16" y="40.5" width="343" height="15.5"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="13"/>
                                                     <color key="textColor" name="white 0.64"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BuL-RB-qdt">
+                                                    <rect key="frame" x="0.0" y="63" width="375" height="1"/>
+                                                    <color key="backgroundColor" name="white 0.04"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="aLS-Kq-dVf"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="hit-5o-QYW" firstAttribute="top" secondItem="Ggn-8d-2G2" secondAttribute="bottom" id="1uv-Sd-vTr"/>
+                                                <constraint firstItem="Ggn-8d-2G2" firstAttribute="centerY" secondItem="ZiU-tM-MaH" secondAttribute="centerY" id="2GN-aV-BRa"/>
                                                 <constraint firstItem="hit-5o-QYW" firstAttribute="top" secondItem="lh3-V4-5Cz" secondAttribute="bottom" id="2q2-Y5-sjY"/>
+                                                <constraint firstAttribute="trailing" secondItem="BuL-RB-qdt" secondAttribute="trailing" id="MYJ-nC-klJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="hit-5o-QYW" secondAttribute="bottom" constant="8" id="N9Y-ym-hPW"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ggn-8d-2G2" secondAttribute="trailing" constant="16" id="QQ8-Vo-yyU"/>
                                                 <constraint firstItem="hit-5o-QYW" firstAttribute="leading" secondItem="ZiU-tM-MaH" secondAttribute="leading" constant="16" id="VZ0-XX-XdP"/>
                                                 <constraint firstItem="lh3-V4-5Cz" firstAttribute="top" secondItem="ZiU-tM-MaH" secondAttribute="top" constant="8" id="d5H-zu-PLC"/>
+                                                <constraint firstItem="BuL-RB-qdt" firstAttribute="leading" secondItem="ZiU-tM-MaH" secondAttribute="leading" id="fhm-kf-7K4"/>
+                                                <constraint firstAttribute="bottom" secondItem="BuL-RB-qdt" secondAttribute="bottom" id="jWx-e1-llP"/>
                                                 <constraint firstItem="lh3-V4-5Cz" firstAttribute="leading" secondItem="ZiU-tM-MaH" secondAttribute="leading" constant="16" id="pHy-bT-Hil"/>
                                                 <constraint firstAttribute="trailing" secondItem="hit-5o-QYW" secondAttribute="trailing" constant="16" id="qGm-MA-JR2"/>
-                                                <constraint firstItem="Ggn-8d-2G2" firstAttribute="top" secondItem="ZiU-tM-MaH" secondAttribute="top" constant="8" id="ycR-Hk-guT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

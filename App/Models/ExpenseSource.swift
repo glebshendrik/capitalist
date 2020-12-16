@@ -78,7 +78,7 @@ struct ExpenseSource : Decodable {
         case order = "row_order"
         case deletedAt = "deleted_at"
         case isVirtual = "is_virtual"
-        case accountConnection = "account_connection"
+        case accountConnection = "salt_edge_account_connection"
         case prototypeKey = "prototype_key"
         case cardType = "card_type"
     }

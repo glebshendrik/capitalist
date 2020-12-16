@@ -518,6 +518,15 @@
                                                                                         <constraint firstAttribute="width" constant="48" id="yNn-Ru-IFR"/>
                                                                                     </constraints>
                                                                                 </view>
+                                                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="BJq-rQ-9aE">
+                                                                                    <rect key="frame" x="18" y="17" width="20" height="20"/>
+                                                                                    <color key="tintColor" name="white 1.0"/>
+                                                                                    <color key="color" name="white 1.0"/>
+                                                                                </activityIndicatorView>
+                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Gku-Ak-QTT">
+                                                                                    <rect key="frame" x="17.5" y="17" width="21" height="20.5"/>
+                                                                                    <color key="tintColor" name="yellow 1"/>
+                                                                                </imageView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зарплата" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1sx-Bw-Jfj">
                                                                                     <rect key="frame" x="56" y="12" width="89" height="14"/>
                                                                                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
@@ -528,6 +537,12 @@
                                                                                     <rect key="frame" x="56" y="30" width="89" height="19"/>
                                                                                     <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
                                                                                     <color key="textColor" name="white 1.0"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xAn-BD-8m9">
+                                                                                    <rect key="frame" x="16" y="74" width="76" height="0.0"/>
+                                                                                    <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
+                                                                                    <color key="textColor" name="white 0.64"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visa_icon" translatesAutoresizingMaskIntoConstraints="NO" id="5y5-Oo-g0k">
@@ -541,13 +556,20 @@
                                                                             <color key="backgroundColor" name="white 0.04"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="trailing" secondItem="EX0-AK-HGH" secondAttribute="trailing" constant="8" id="73Y-fO-bVs"/>
+                                                                                <constraint firstItem="Gku-Ak-QTT" firstAttribute="centerX" secondItem="BJq-rQ-9aE" secondAttribute="centerX" id="8QO-ZI-svj"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="5y5-Oo-g0k" secondAttribute="bottom" constant="8" id="EmV-cj-lCb"/>
+                                                                                <constraint firstItem="xAn-BD-8m9" firstAttribute="centerY" secondItem="5y5-Oo-g0k" secondAttribute="centerY" id="HAm-Gs-twy"/>
+                                                                                <constraint firstItem="Gku-Ak-QTT" firstAttribute="centerY" secondItem="BJq-rQ-9aE" secondAttribute="centerY" id="KOb-ia-Bpl"/>
                                                                                 <constraint firstItem="TK1-KI-f5z" firstAttribute="top" secondItem="pfa-b1-5kr" secondAttribute="top" constant="3" id="L2t-Zz-2fh"/>
                                                                                 <constraint firstItem="TK1-KI-f5z" firstAttribute="leading" secondItem="pfa-b1-5kr" secondAttribute="leading" constant="4" id="TBG-qA-mKw"/>
                                                                                 <constraint firstItem="EX0-AK-HGH" firstAttribute="top" secondItem="1sx-Bw-Jfj" secondAttribute="bottom" constant="4" id="ULD-0Q-mGH"/>
+                                                                                <constraint firstItem="BJq-rQ-9aE" firstAttribute="centerY" secondItem="TK1-KI-f5z" secondAttribute="centerY" id="XmM-9t-YAi"/>
                                                                                 <constraint firstItem="1sx-Bw-Jfj" firstAttribute="top" secondItem="pfa-b1-5kr" secondAttribute="top" constant="12" id="bs0-Bp-pGa"/>
+                                                                                <constraint firstItem="BJq-rQ-9aE" firstAttribute="centerX" secondItem="TK1-KI-f5z" secondAttribute="centerX" id="cRE-ns-ESI"/>
+                                                                                <constraint firstItem="5y5-Oo-g0k" firstAttribute="leading" secondItem="xAn-BD-8m9" secondAttribute="trailing" constant="8" id="ijr-Q6-4Lg"/>
                                                                                 <constraint firstItem="EX0-AK-HGH" firstAttribute="leading" secondItem="1sx-Bw-Jfj" secondAttribute="leading" id="iwc-WL-lUb"/>
                                                                                 <constraint firstItem="1sx-Bw-Jfj" firstAttribute="leading" secondItem="TK1-KI-f5z" secondAttribute="trailing" constant="4" id="jsG-cY-lXT"/>
+                                                                                <constraint firstItem="xAn-BD-8m9" firstAttribute="leading" secondItem="pfa-b1-5kr" secondAttribute="leading" constant="16" id="lWq-X3-MH3"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="1sx-Bw-Jfj" secondAttribute="trailing" constant="8" id="qT2-oo-7ix"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="5y5-Oo-g0k" secondAttribute="trailing" constant="16" id="wzO-AM-QlK"/>
                                                                             </constraints>
@@ -578,9 +600,12 @@
                                                         <connections>
                                                             <outlet property="amountLabel" destination="EX0-AK-HGH" id="BWc-Qb-nFT"/>
                                                             <outlet property="background" destination="pfa-b1-5kr" id="e6V-mB-0Ir"/>
+                                                            <outlet property="cardNumberLabel" destination="xAn-BD-8m9" id="RFR-7w-Jmw"/>
                                                             <outlet property="cardTypeImageView" destination="5y5-Oo-g0k" id="3fi-jy-sBR"/>
+                                                            <outlet property="connectionActivityIndicator" destination="BJq-rQ-9aE" id="gkW-fe-jkB"/>
                                                             <outlet property="iconView" destination="TK1-KI-f5z" id="Quo-fw-Iyr"/>
                                                             <outlet property="nameLabel" destination="1sx-Bw-Jfj" id="h3y-e5-NCT"/>
+                                                            <outlet property="warningIndicatorImageView" destination="Gku-Ak-QTT" id="a4T-eb-PC7"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddExpenseSourceCollectionViewCell" id="sQT-0m-Nf0">
@@ -1515,6 +1540,7 @@
         <image name="statistics-menu-item-icon" width="22" height="22"/>
         <image name="text-arrow" width="7" height="12"/>
         <image name="visa_icon" width="37" height="12"/>
+        <image name="warning-icon" width="21" height="20.5"/>
         <namedColor name="black 1">
             <color red="0.090000003576278687" green="0.093999996781349182" blue="0.11400000005960464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

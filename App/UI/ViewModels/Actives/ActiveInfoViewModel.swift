@@ -296,13 +296,7 @@ class ActiveInfoViewModel : EntityInfoViewModel {
         if let accountConnection = active?.active.accountConnection {
             accountConnectionAttributes =
                 AccountConnectionNestedAttributes(id: accountConnection.id,
-                                                  providerConnectionId: accountConnection.providerConnection.id,
-                                                  accountId: accountConnection.accountId,
-                                                  accountName: accountConnection.accountName,
-                                                  nature: accountConnection.nature,
-                                                  currencyCode: accountConnection.currencyCode,
-                                                  balance: accountConnection.balance,
-                                                  connectionId: accountConnection.connectionId,
+                                                  accountId: accountConnection.account.id,                                                  
                                                   shouldDestroy: nil)
         }
     }
@@ -384,8 +378,8 @@ class ActiveInfoViewModel : EntityInfoViewModel {
 
 // Bank Connection
 extension ActiveInfoViewModel {
-    func connect(accountViewModel: AccountViewModel, providerConnection: ProviderConnection) {
-        selectedIconURL = providerConnection.logoURL
+    func connect(accountViewModel: AccountViewModel, connection: Connection) {
+        selectedIconURL = connection.providerLogoURL
         selectedAccountViewModel = accountViewModel
         
         var accountConnectionId: Int? = nil
@@ -397,13 +391,7 @@ extension ActiveInfoViewModel {
         
         accountConnectionAttributes =
             AccountConnectionNestedAttributes(id: accountConnectionId,
-                                              providerConnectionId: providerConnection.id,
                                               accountId: accountViewModel.id,
-                                              accountName: accountViewModel.name,
-                                              nature: accountViewModel.nature,
-                                              currencyCode: accountViewModel.currencyCode,
-                                              balance: accountViewModel.amountCents ?? 0,
-                                              connectionId: providerConnection.connectionId,
                                               shouldDestroy: nil)
     }
     

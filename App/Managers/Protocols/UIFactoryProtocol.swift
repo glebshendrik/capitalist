@@ -27,11 +27,15 @@ protocol UIFactoryProtocol {
     func providersViewController(delegate: ProvidersViewControllerDelegate) -> ProvidersViewController?
     
     func accountsViewController(delegate: AccountsViewControllerDelegate,
-                                providerConnection: ProviderConnection,
-                                currencyCode: String?) -> AccountsViewController?
+                                connection: Connection,
+                                currencyCode: String?,
+                                nature: AccountNatureType) -> AccountsViewController?
     
-    func providerConnectionViewController(delegate: ProviderConnectionViewControllerDelegate,
-                                          providerViewModel: ProviderViewModel) -> ProviderConnectionViewController?
+    func connectionViewController(delegate: ConnectionViewControllerDelegate,
+                                  providerViewModel: ProviderViewModel?,
+                                  connectionType: ProviderConnectionType,
+                                  connectionURL: URL,
+                                  connection: Connection?) -> UINavigationController?
     
     func commentViewController(delegate: CommentViewControllerDelegate,
                                text: String?,
