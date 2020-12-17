@@ -65,7 +65,11 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
         updateTextFieldsUI()
     }
             
-    func didTapBankButton() {
+    func didTapBankButton() {        
+        guard viewModel.hasActiveSubscription else {
+            modal(factory.subscriptionViewController())
+            return
+        }
         if viewModel.accountConnected {
             removeAccountConnection()
         } else {

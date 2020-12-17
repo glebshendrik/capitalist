@@ -25,8 +25,7 @@ class ActiveTableViewCell : SwipeTableViewCell {
                 
         nameLabel.text = viewModel.name
         costLabel.text = viewModel.costRounded
-        
-        iconView.iconType = viewModel.iconType
+                
         iconView.vectorIconMode = .fullsize
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = viewModel.defaultIconName

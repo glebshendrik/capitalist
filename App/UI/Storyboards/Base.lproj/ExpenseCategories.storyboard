@@ -126,7 +126,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" name="dark 2A314B"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Jvm-EB-afz">
-                            <rect key="frame" x="0.0" y="566" width="375" height="100"/>
+                            <rect key="frame" x="0.0" y="631" width="375" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC0-RV-Nk9">
@@ -385,6 +385,15 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="65" id="oCA-13-6oa">
+                                        <rect key="frame" x="0.0" y="538" width="375" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oCA-13-6oa" id="N3M-OD-FcT">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -627,7 +636,7 @@
         <image name="remove-icon" width="17" height="20"/>
         <image name="save-icon" width="16" height="14"/>
         <namedColor name="black 2">
-            <color red="0.125" green="0.13300000131130219" blue="0.14900000393390656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="blue 1">
             <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -636,10 +645,10 @@
             <color red="0.12549019607843137" green="0.13333333333333333" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gray 1">
-            <color red="0.34099999070167542" green="0.34900000691413879" blue="0.36899998784065247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.33725490196078434" green="0.34509803921568627" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="red 1">
-            <color red="1" green="0.40000000596046448" blue="0.21199999749660492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.40000000000000002" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white 0.04">
             <color red="0.9179999828338623" green="0.93300002813339233" blue="0.9570000171661377" alpha="0.039999999105930328" colorSpace="custom" customColorSpace="sRGB"/>

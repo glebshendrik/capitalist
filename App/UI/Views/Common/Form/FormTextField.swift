@@ -145,7 +145,7 @@ class FormTextField : FormField {
             make.top.equalTo(10)
             make.right.equalTo(subValueLabel.snp.left).offset(-8)
             make.bottom.equalTo(-16)
-            make.left.equalTo(iconContainer.snp.right).offset(20)
+            make.left.equalTo(icon.snp.right).offset(20)
         }
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -242,9 +242,9 @@ class FormTextField : FormField {
         
         let appearanceOptions = self.appearanceOptions()
         
-
-        iconContainer.backgroundColor = isVector ? UIColor.by(.white100) : appearanceOptions.iconBackgroundColor
-        icon.tintColor = appearanceOptions.iconTint
+        icon.backgroundViewColor = appearanceOptions.iconBackgroundColor
+        icon.backgroundColor = appearanceOptions.iconBackgroundColor
+        icon.iconTintColor = appearanceOptions.iconTint
     }
     
     override func updateErrorLabel() {

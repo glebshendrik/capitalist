@@ -34,8 +34,7 @@ class BorrowTableViewCell : UITableViewCell {
         
         borrowedAtLabel.text = viewModel.borrowedAtFormatted
         paydayLabel.text = viewModel.paydayText
-        
-        iconView.iconType = .raster
+                
         iconView.vectorIconMode = .fullsize
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = placeholderName

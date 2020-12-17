@@ -41,15 +41,15 @@ class AppInfoViewController : UITableViewController, MFMailComposeViewController
     }
     
     var telegramUsername: String {
-        return "threebaskets"
+        return "capitalistapp"
     }
     
     var contactEmail: String {
-        return "help@threebaskets.net"
+        return "contact@capitalistapp.net"
     }
     
     var instagramUsername: String {
-        return "threebasketsapp"
+        return "capitalistapp"
     }
     
     var defaultMessage: String {
@@ -111,13 +111,15 @@ class AppInfoViewController : UITableViewController, MFMailComposeViewController
     }
     
     @IBAction func didTapEmailButton(_ sender: Any) {
+        guard MFMailComposeViewController.canSendMail() else {
+            
+            return
+        }
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
-
         composeVC.setToRecipients([contactEmail])
         composeVC.setSubject("Three Baskets Feedback")
         composeVC.setMessageBody(defaultMessage, isHTML: false)
-
         modal(composeVC)
     }
     

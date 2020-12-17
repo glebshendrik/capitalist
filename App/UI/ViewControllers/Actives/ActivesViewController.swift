@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 import SwipeCellKit
 
-protocol ActivesViewControllerDelegate {
+protocol ActivesViewControllerDelegate : class {
     func didSelect(sourceActiveViewModel: ActiveViewModel)
     func didSelect(destinationActiveViewModel: ActiveViewModel)
 }
@@ -22,7 +22,7 @@ class ActivesViewController : UIViewController, UIMessagePresenterManagerDependa
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var totalSubtitleLabel: UILabel!
     
-    private var delegate: ActivesViewControllerDelegate? = nil
+    private weak var delegate: ActivesViewControllerDelegate? = nil
     private var selectionType: TransactionPart = .destination
         
     var viewModel: ActivesViewModel!
@@ -274,24 +274,17 @@ extension ActivesViewController : SwipeTableViewCellDelegate {
     func didTapDeleteButton(activeViewModel: ActiveViewModel?) {
         var alertTitle = ""
         var removeAction: ((UIAlertAction) -> Void)? = nil
-        var removeWithTransactionsAction: ((UIAlertAction) -> Void)? = nil
         
         if let activeId = activeViewModel?.id {
             alertTitle = TransactionableType.active.removeQuestion
             removeAction = { _ in
                 self.removeActive(by: activeId, deleteTransactions: false)
             }
-            removeWithTransactionsAction = { _ in
-                self.removeActive(by: activeId, deleteTransactions: true)
-            }
         }
         
         let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
                                                       style: .destructive,
-                                                      handler: removeAction),
-                                        UIAlertAction(title: NSLocalizedString("Удалить вместе с транзакциями", comment: "Удалить вместе с транзакциями"),
-                                                      style: .destructive,
-                                                      handler: removeWithTransactionsAction)]
+                                                      handler: removeAction)]
         sheet(title: alertTitle, actions: actions)
     }
     

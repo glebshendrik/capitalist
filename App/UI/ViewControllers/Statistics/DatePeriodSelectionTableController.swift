@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DatePeriodSelectionTableControllerDelegate {
+protocol DatePeriodSelectionTableControllerDelegate : class {
     func didTapPeriod()
     func didChange(useCustomPeriod: Bool)
     func didTapFrom()
@@ -21,7 +21,7 @@ class DatePeriodSelectionTableController : FormFieldsTableViewController {
     @IBOutlet weak var fromField: FormTapField!
     @IBOutlet weak var toField: FormTapField!
     
-    var delegate: DatePeriodSelectionTableControllerDelegate?
+    weak var delegate: DatePeriodSelectionTableControllerDelegate?
     
     override func setupUI() {
         super.setupUI()

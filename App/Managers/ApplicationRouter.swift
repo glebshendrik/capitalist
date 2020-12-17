@@ -104,13 +104,13 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private func continueFirebaseUserActivity(_ userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         guard let url = userActivity.webpageURL else { return false }
         
-        return DynamicLinks.dynamicLinks().handleUniversalLink(url) { (dynamicLink, error) in
+        return DynamicLinks.dynamicLinks().handleUniversalLink(url) { [weak self] (dynamicLink, error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
             if let dynamicLink = dynamicLink {
-                self.handleIncomingDynamicLink(dynamicLink)
+                self?.handleIncomingDynamicLink(dynamicLink)
             }
         }
     }
@@ -135,18 +135,17 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             route()
             return
         }
+        startAnimationViewController.delegate = self        
         show(startAnimationViewController)
-        do {
-            isAnimating = true
-            try startAnimationViewController.startAnimationWith(delegate: self)
-        }
-        catch {
-            isAnimating = false
-        }
+        isAnimating = true
         route()
     }
     
     func route() {
+        guard UIApplication.shared.inferredEnvironment == .appStore || APIRoute.storedBaseURLString != nil else {
+            showServerPathAlert()
+            return
+        }
         guard userSessionManager.isUserAuthenticated else {
             showJoiningAsGuestScreen()
             _ = accountCoordinator.joinAsGuest().catch { _ in
@@ -186,12 +185,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
                 self.showDataSetupViewController()
                 return
             }
-            
-            guard UIFlowManager.reached(point: .subscription) || self.accountCoordinator.currentUserHasActiveSubscription else {
-                self.showSubscriptionScreen()
-                return
-            }
-            
+                        
             self.showMainViewController()
         }.catch { error in
             if self.errorIsNotFoundOrNotAuthorized(error: error) {
@@ -352,6 +346,24 @@ extension ApplicationRouter {
 }
 
 extension ApplicationRouter {
+    private func showServerPathAlert() {
+        let alert = UIAlertController(title: "Set server address", message: nil, preferredStyle: .alert)
+
+        alert.addTextField { (textField) in
+            textField.placeholder = "Address"
+            textField.text = APIRoute.baseURLString
+        }
+
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+            let textField = alert.textFields![0]
+            UserDefaults.standard.set(textField.text, forKey: APIRoute.baseURLKey)
+            UserDefaults.standard.synchronize()
+            self.route()
+        }))
+        
+        window.rootViewController?.topmostPresentedViewController.modal(alert)
+    }
+    
     private func showAppUpdateScreen() {
         show(.AppUpdateViewController)
     }
@@ -359,11 +371,7 @@ extension ApplicationRouter {
     private func showLandingScreen() {
         show(.LandingViewController)
     }
-    
-    private func showSubscriptionScreen() {
-        show(UINavigationController(rootViewController: viewController(.SubscriptionViewController)))
-    }
-    
+        
     private func showJoiningAsGuestScreen() {
         guard let landingViewController = viewController(.LandingViewController) as? LandingViewController else { return }
         landingViewController.loadingMessage = NSLocalizedString("Creating guest account", comment: "Создание учетной записи гостя...")
@@ -371,7 +379,8 @@ extension ApplicationRouter {
     }
     
     func showMainViewController() {
-        show(.MainViewController) {
+        show(.MainViewController) { [weak self] in
+            guard let self = self else { return }
             self.showPasscodeScreen()
             if let menuLeftNavigationController = self.viewController(.MenuNavigationController) as? SideMenuNavigationController {
                 SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
@@ -503,25 +512,8 @@ extension ApplicationRouter : AdjustDelegate {
     }
 }
 
-extension ApplicationRouter : SwiftyGifDelegate {
-    func gifURLDidFinish(sender: UIImageView) {
-        print("gifURLDidFinish")
-    }
-
-    func gifURLDidFail(sender: UIImageView) {
-        print("gifURLDidFail")
-//        showPendings()
-    }
-
-    func gifDidStart(sender: UIImageView) {
-        print("gifDidStart")
-    }
-    
-    func gifDidLoop(sender: UIImageView) {
-        print("gifDidLoop")
-    }
-    
-    func gifDidStop(sender: UIImageView) {
+extension ApplicationRouter : StartAnimationViewControllerDelegate {
+    func animationDidStop() {
         showPendings()
     }
 }

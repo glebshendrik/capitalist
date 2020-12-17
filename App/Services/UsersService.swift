@@ -54,4 +54,8 @@ class UsersService : Service, UsersServiceProtocol {
     func destroyUserData(by id: Int) -> Promise<Void> {
         return request(APIRoute.destroyUserData(id: id))
     }
+    
+    func sendConfirmationEmail(by id: Int) -> Promise<Void> {
+        return request(APIRoute.confirmUser(id: id))
+    }
 }

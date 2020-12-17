@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-protocol IncomeSourceEditViewControllerDelegate {
+protocol IncomeSourceEditViewControllerDelegate : class {
     func didCreateIncomeSource()
     func didUpdateIncomeSource()
     func didRemoveIncomeSource()
@@ -18,7 +18,7 @@ protocol IncomeSourceEditViewControllerDelegate {
 class IncomeSourceEditViewController : FormTransactionsDependableEditViewController {
 
     var viewModel: IncomeSourceEditViewModel!
-    private var delegate: IncomeSourceEditViewControllerDelegate?
+    private weak var delegate: IncomeSourceEditViewControllerDelegate?
     var tableController: IncomeSourceEditTableController!
         
     override var shouldLoadData: Bool { return viewModel.isNew }

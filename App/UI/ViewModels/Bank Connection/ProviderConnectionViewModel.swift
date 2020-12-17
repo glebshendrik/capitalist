@@ -22,15 +22,14 @@ class ProviderConnectionViewModel {
     var providerViewModel: ProviderViewModel? = nil
     var connectionType: ProviderConnectionType = .create
     var connectionURL: URL? = nil    
-    var connection: Connection? = nil    
+    var connection: Connection? = nil
+    var shouldAskClose: Bool {
+        return connectionType == .refresh
+    }
     
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
     }
-    
-//    func createConnection(_ connection: SEConnection, providerViewModel: ProviderViewModel) -> Promise<Connection> {
-//        return bankConnectionsCoordinator.createConnection(connection, provider: providerViewModel.provider)
-//    }
     
     func setupConnection(id: String, secret: String) -> Promise<Connection> {
         if let connectionId = connection?.id {

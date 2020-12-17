@@ -11,7 +11,7 @@ import SaltEdge
 import PromiseKit
 import SwiftyBeaver
 
-protocol ConnectionViewControllerDelegate {
+protocol ConnectionViewControllerDelegate : class {
     func didConnectToConnection(_ providerViewModel: ProviderViewModel?, connection: Connection)
     func didNotConnect()
     func didNotConnect(error: Error)
@@ -22,7 +22,7 @@ class ConnectionViewController : UIViewController, UIMessagePresenterManagerDepe
     @IBOutlet weak var webView: SEWebView!
     
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
-    var delegate: ConnectionViewControllerDelegate?
+    weak var delegate: ConnectionViewControllerDelegate?
     var viewModel: ProviderConnectionViewModel!
     
     override func viewDidLoad() {
@@ -30,7 +30,7 @@ class ConnectionViewController : UIViewController, UIMessagePresenterManagerDepe
         setupUI()
         connect()
     }
-    
+        
     private func setupUI() {
         webView.stateDelegate = self
         setupNavigationBar()
@@ -47,10 +47,31 @@ class ConnectionViewController : UIViewController, UIMessagePresenterManagerDepe
             webView.load(request)
         }
     }
+        
+    override func closeButtonHandler(completion: (() -> Void)? = nil) {
+        guard viewModel.shouldAskClose else {
+            close(completion: completion)
+            return
+        }
+        askClose(completion: completion)
+    }
+        
+    func askClose(completion: (() -> Void)? = nil) {
+        let closeAction = UIAlertAction(title: NSLocalizedString("Закрыть", comment: ""),
+                                              style: .destructive,
+                                              handler: { _ in
+                                                    self.close(completion: completion)
+                                                })
+        
+        sheet(title: NSLocalizedString("Необходимо дождаться шага ввода кода подтверждения", comment: ""),
+              actions: [closeAction],
+              message: nil,
+              preferredStyle: .alert)
+    }
     
-    private func close(completion: (() -> Void)? = nil) {
+    func close(completion: (() -> Void)? = nil) {
         postFinantialDataUpdated()
-        presentingViewController?.dismiss(animated: true, completion: completion)
+        super.closeButtonHandler(completion: completion)
     }
     
     private func postFinantialDataUpdated() {
@@ -103,7 +124,7 @@ extension ConnectionViewController {
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { connection in
-            self.close() {                
+            self.close() {
                 delegate.didConnectToConnection(self.viewModel.providerViewModel, connection: connection)
             }
         }.catch { error in

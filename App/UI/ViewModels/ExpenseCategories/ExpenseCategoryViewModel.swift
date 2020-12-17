@@ -90,6 +90,10 @@ class ExpenseCategoryViewModel {
         return expenseCategory.creditId
     }
     
+    var isVirtual: Bool {
+        return expenseCategory.isVirtual
+    }
+    
     var defaultIconName: String {
         return type.defaultIconName(basketType: basketType)
     }

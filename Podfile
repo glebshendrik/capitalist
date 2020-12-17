@@ -1,7 +1,7 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '11.2'
 
-target 'Three Baskets' do
+target 'Capitalist' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
@@ -56,6 +56,7 @@ target 'Three Baskets' do
   pod 'Macaw'
   pod 'SwiftyBeaver'
   pod 'Adjust', '~> 4.22.1'
+  pod 'lottie-ios'
 end
 
 post_install do |installer|

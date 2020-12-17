@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol OnboardingPagesViewControllerDelegate {
+protocol OnboardingPagesViewControllerDelegate : class {
     func didPresentPage()
 }
 
 class OnboardingPagesViewController : UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, ApplicationRouterDependantProtocol {
     
     var router: ApplicationRouterProtocol!
-    var onboardingDelegate: OnboardingPagesViewControllerDelegate? = nil
+    weak var onboardingDelegate: OnboardingPagesViewControllerDelegate? = nil
     
     var isLastPageShown: Bool {
         let page = viewControllers?.first

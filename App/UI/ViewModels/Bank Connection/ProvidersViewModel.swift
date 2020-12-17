@@ -47,6 +47,8 @@ class ProvidersViewModel {
     
     var selectedCountryViewModel: CountryViewModel? = nil
     
+    var fetchDataFrom: Date? = nil
+    
     init(bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
         setupCountry()
@@ -83,14 +85,17 @@ class ProvidersViewModel {
     }
     
     func createConnectionSession(for providerViewModel: ProviderViewModel) -> Promise<URL> {
-        return bankConnectionsCoordinator.createConnectSession(providerCode: providerViewModel.provider.code, countryCode: providerViewModel.provider.countryCode)
+        return bankConnectionsCoordinator.createConnectSession(providerCode: providerViewModel.provider.code,
+                                                               countryCode: providerViewModel.provider.countryCode,
+                                                               fromDate: fetchDataFrom)
     }
     
     func createReconnectSession(for providerViewModel: ProviderViewModel, connection: Connection?) -> Promise<URL> {
         guard let connection = connection else {
             return Promise(error: BankConnectionError.canNotCreateConnection)
         }
-        return bankConnectionsCoordinator.createReconnectSession(connection: connection)
+        return bankConnectionsCoordinator.createReconnectSession(connection: connection,
+                                                                 fromDate: fetchDataFrom)
     }
     
     func createRefreshConnectionSession(for providerViewModel: ProviderViewModel, connection: Connection?) -> Promise<URL> {

@@ -360,7 +360,7 @@ extension UIViewController {
         closeButtonHandler()
     }
             
-    func closeButtonHandler(completion: (() -> Void)? = nil) {
+    @objc func closeButtonHandler(completion: (() -> Void)? = nil) {
         if isRoot {
             (self as? ApplicationRouterDependantProtocol)?.router.route()
         }
@@ -699,7 +699,6 @@ extension UIViewController {
         guard   let urlString = url.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed),
                 let url = URL(string: urlString),
                 UIApplication.shared.canOpenURL(url) else { return }
-        
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     

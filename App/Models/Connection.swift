@@ -39,7 +39,7 @@ enum ConnectionStage : String, Codable {
 
 struct Connection : Decodable {
     let id: Int?
-    let saltedgeId: String
+    let saltedgeId: String?
     let secret: String
     let providerId: String?
     let providerCode: String
@@ -49,7 +49,7 @@ struct Connection : Decodable {
     let status: ConnectionStatus
     let interactive: Bool?
     let nextRefreshPossibleAt: Date?
-    let lastStage: ConnectionStage = .finish
+    let lastStage: ConnectionStage?
     let createdAt: Date?
     let updatedAt: Date?
         

@@ -40,6 +40,10 @@ class MainViewModel {
         }
     }
     
+    var currentUserHasActiveSubscription: Bool {
+        return accountCoordinator.currentUserHasActiveSubscription
+    }
+    
     var adviserTip: String? {
         guard selecting else { return nil }
         
@@ -310,7 +314,7 @@ class MainViewModel {
     
     func refreshExpenseSourcesConnections() -> Promise<Void> {
         let promises = expenseSourceViewModels
-            .filter { $0.reconnectNeeded }
+            .filter { $0.accountConnected }
             .map { refreshConnection(expenseSourceViewModel: $0) }
         guard promises.count > 0 else { return Promise.value(()) }
         return  firstly {

@@ -50,4 +50,8 @@ class TransactionsService : Service, TransactionsServiceProtocol {
     func destroy(by id: Int) -> Promise<Void> {
         return request(APIRoute.destroyTransaction(id: id))
     }
+    
+    func duplicate(by id: Int) -> Promise<Void> {
+        return request(APIRoute.duplicateTransaction(id: id))
+    }
 }

@@ -170,6 +170,13 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return usersService.onboardUser(with: currentUserId)
     }
     
+    func sendConfirmationEmailToCurrentUser() -> Promise<Void> {
+        guard let currentUserId = userSessionManager.currentSession?.userId else {
+            return Promise(error: SessionError.noSessionInAuthorizedContext)
+        }
+        return usersService.sendConfirmationEmail(by: currentUserId)
+    }
+    
     func destroyCurrentUserData() -> Promise<Void> {
         guard let currentUserId = userSessionManager.currentSession?.userId else {
             return Promise(error: SessionError.noSessionInAuthorizedContext)

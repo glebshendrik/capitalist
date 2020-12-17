@@ -146,6 +146,9 @@ class APIClient : APIClientProtocol {
                     forHTTPHeaderField: "Authorization")
             }
             request.addValue(TimeZone.autoupdatingCurrent.identifier, forHTTPHeaderField: "X-Timezone")
+            if let country = Locale.autoupdatingCurrent.regionCode {
+                request.addValue(country, forHTTPHeaderField: "X_REGION")
+            }
             return Alamofire
                 .request(request)
                 .validate(requestValidator)
@@ -165,6 +168,7 @@ class APIClient : APIClientProtocol {
         case 402:
             return .failure(APIRequestError.paymentRequired)
         case 403:
+            SwiftyBeaver.error(response)
             return .failure(APIRequestError.forbidden)
         case 404:
             SwiftyBeaver.error(response)

@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import SwipeCellKit
 
 extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource {
     
@@ -70,45 +71,8 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
                 let transactionViewModel = section.transactionViewModel(at: indexPath.row) else { return UITableViewCell() }
                    
         cell.viewModel = transactionViewModel
+        cell.delegate = self
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard let section = viewModel.section(at: indexPath.section) else {
-            return false
-        }        
-        return section is TransactionsSection
-    }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-
-        guard   editingStyle == .delete,
-                let section = viewModel.section(at: indexPath.section) as? TransactionsSection,
-                let transactionViewModel = section.transactionViewModel(at: indexPath.row) else {
-            return
-        }
-        askToDelete(transactionViewModel: transactionViewModel)
-    }
-    
-    func askToDelete(transactionViewModel: TransactionViewModel) {
-        let alertController = UIAlertController(title: transactionViewModel.removeTitle,
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        alertController.addAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: { [weak self] _ in
-                                    self?.removeTransaction(transactionViewModel: transactionViewModel)
-                                })
-        
-        
-        alertController.addAction(title: NSLocalizedString("Отмена", comment: "Отмена"),
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: nil)
-                
-        present(alertController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -164,4 +128,66 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     
+}
+
+extension StatisticsViewController : SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+       
+        guard   orientation == .right,
+                let section = viewModel.section(at: indexPath.section) as? TransactionsSection,
+                let transactionViewModel = section.transactionViewModel(at: indexPath.row)
+        else {
+            return nil
+        }
+        
+        var actions = [SwipeAction]()
+        
+        if transactionViewModel.canDelete {
+            let deleteAction = SwipeAction(style: .destructive, title: NSLocalizedString("Удалить", comment: "Удалить")) { action, indexPath in
+                let transactionViewModel = section.transactionViewModel(at: indexPath.row)
+                self.didTapDeleteButton(transactionViewModel: transactionViewModel)
+            }
+            // customize the action appearance
+            deleteAction.image = UIImage(named: "remove-icon")
+            deleteAction.hidesWhenSelected = true
+            actions.append(deleteAction)
+        }
+                
+        if transactionViewModel.canDuplicate {
+            let duplicateAction = SwipeAction(style: .default, title: NSLocalizedString("Дубликат", comment: "")) { action, indexPath in
+                let transactionViewModel = section.transactionViewModel(at: indexPath.row)
+                self.didTapDuplicateButton(transactionViewModel: transactionViewModel)
+            }
+            // customize the action appearance
+            duplicateAction.image = UIImage(named: "edit-info-icon")
+            duplicateAction.hidesWhenSelected = true
+            actions.append(duplicateAction)
+        }
+        
+        return actions
+    }
+    
+    func didTapDeleteButton(transactionViewModel: TransactionViewModel?) {
+        guard   let transactionViewModel = transactionViewModel,
+                transactionViewModel.canDelete else { return }
+                        
+        let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
+                                                      style: .destructive,
+                                                      handler: { _ in
+                                                        self.removeTransaction(transactionViewModel: transactionViewModel)
+                                        })]
+        sheet(title: transactionViewModel.removeTitle, actions: actions)
+    }
+    
+    func didTapDuplicateButton(transactionViewModel: TransactionViewModel?) {
+        guard   let transactionViewModel = transactionViewModel,
+                transactionViewModel.canDuplicate else { return }
+                        
+        let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Дубликат", comment: ""),
+                                                      style: .destructive,
+                                                      handler: { _ in
+                                                        self.duplicateTransaction(transactionViewModel: transactionViewModel)
+                                        })]
+        sheet(title: NSLocalizedString("Пометить транзакцию как дубликат", comment: ""), actions: actions)
+    }
 }

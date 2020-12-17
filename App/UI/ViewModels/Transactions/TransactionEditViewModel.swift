@@ -42,6 +42,8 @@ class TransactionEditViewModel {
     var accumulator: Int? = nil
     var previousOperation: OperationType? = nil
     var requiredTransactionType: TransactionType? = nil
+    var isSourceInitiallyConnected: Bool = false
+    var isDestinationInitiallyConnected: Bool = false
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
@@ -86,12 +88,10 @@ class TransactionEditViewModel {
         }
         self.source = source
         self.destination = destination
+        self.isSourceInitiallyConnected = isRemoteTransaction && (source as? ExpenseSourceViewModel)?.accountViewModel?.account.id == transaction.accountId
+        self.isDestinationInitiallyConnected = isRemoteTransaction && (destination as? ExpenseSourceViewModel)?.accountViewModel?.account.id == transaction.accountId
         self.amount = transaction.amountCents.moneyDecimalString(with: sourceCurrency)
         self.convertedAmount = transaction.convertedAmountCents.moneyDecimalString(with: destinationCurrency)
-    }
-    
-    func loadData() -> Promise<Void> {
-        return isNew ? loadDefaults() : loadTransactionData()
     }
     
     func save() -> Promise<Void> {
@@ -102,45 +102,36 @@ class TransactionEditViewModel {
         return removeTransaction()
     }
     
-    func handleAmount(operation: OperationType) {
-        guard let amountCents = amountCents else { return }
-        let newAmountCents = operate(previousOperation, base: accumulator, operand: amountCents)
-        amount = newAmountCents?.moneyDecimalString(with: sourceCurrency)
-        updateCalculator(operation: operation, value: newAmountCents)
+    func loadData() -> Promise<Void> {
+        return isNew ? loadDefaults() : loadTransactionData()
     }
     
-    func handleConvertedAmount(operation: OperationType) {
-        guard let convertedAmountCents = convertedAmountCents else { return }
-        let newConvertedAmountCents = operate(previousOperation, base: accumulator, operand: convertedAmountCents)
-        convertedAmount = newConvertedAmountCents?.moneyDecimalString(with: destinationCurrency)
-        updateCalculator(operation: operation, value: newConvertedAmountCents)
-    }
-    
-    private func operate(_ operation: OperationType?, base: Int?, operand: Int) -> Int? {
-        guard let base = base, let operation = operation else {
-            return operand
+    func loadDefaults() -> Promise<Void> {
+        if isReturn {
+            return loadReturningTransactionDefaults()
         }
-        switch operation {
-        case .plus:
-            return base + operand
-        case .minus:
-            return base - operand
-        case .equal:
-            return base
+        if let requiredTransactionType = requiredTransactionType {
+            return  firstly {
+                        loadTransactionables(requiredTransactionType: requiredTransactionType)
+                    }.then {
+                        self.loadExchangeRate()
+                    }
         }
+        return loadExchangeRate()
     }
     
-    private func updateCalculator(operation: OperationType, value: Int?) {
-        accumulator = value
-        previousOperation = operation
-        
-        if operation == .equal {
-            resetCalculator()
+    func loadTransactionData() -> Promise<Void> {
+        guard let transactionId = transactionId else {
+            return Promise(error: TransactionError.transactionIsNotSpecified)
         }
-    }
-    
-    func resetCalculator() {
-        accumulator = nil
-        previousOperation = nil
+        return  firstly {
+                    loadTransaction(transactionId: transactionId)
+                }.then { transaction in
+                    self.loadTransactionablesFor(transaction: transaction)
+                }.get { transaction, source, destination in
+                    self.set(transaction: transaction, source: source, destination: destination)
+                }.then { _ in
+                    self.loadExchangeRate()
+                }
     }
 }

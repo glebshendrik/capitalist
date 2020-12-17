@@ -12,7 +12,7 @@ import SnapKit
 import SwiftyBeaver
 import SwiftDate
 
-protocol ProvidersViewControllerDelegate {
+protocol ProvidersViewControllerDelegate : class {
     func didConnectTo(_ providerViewModel: ProviderViewModel?, connection: Connection)
 }
 
@@ -21,7 +21,7 @@ class ProvidersViewController : UIViewController, UIMessagePresenterManagerDepen
     var viewModel: ProvidersViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var factory: UIFactoryProtocol!
-    var delegate: ProvidersViewControllerDelegate?
+    weak var delegate: ProvidersViewControllerDelegate?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loader: UIImageView!
@@ -194,10 +194,7 @@ extension ProvidersViewController : ConnectionViewControllerDelegate {
         }.ensure {
             self.messagePresenterManager.dismissHUD()
         }.get { connection in
-            guard connection.lastStage == .finish else {
-                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
-                return
-            }
+            
             switch connection.status {
             case .active:
                 guard   let nextRefreshPossibleAt = connection.nextRefreshPossibleAt,
@@ -206,7 +203,11 @@ extension ProvidersViewController : ConnectionViewControllerDelegate {
                         return
                 }
                 if nextRefreshPossibleAt.isInPast,
-                   interactive {                    
+                   interactive {
+                    guard connection.lastStage == .finish else {
+                        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
+                        return
+                    }
                     self.showConnectionSession(for: providerViewModel, connectionType: .refresh, connection: connection)
                 }
                 else {

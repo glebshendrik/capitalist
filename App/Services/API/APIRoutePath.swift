@@ -14,13 +14,14 @@ struct APIRoutePath {
         // Custom        
         case .changePassword(let form):                     return "/users/\(form.userId!)/password"
         case .onboardUser(let id):                          return "/users/\(id)/onboard"
+        case .confirmUser(let id):                          return "/users/\(id)/confirm"
         case .destroyUserData(let id):                      return "/users/\(id)/destroy_data"
         case .resetPassword:                                return "/users/new_password"
         case .findExchangeRate:                             return "/exchange_rates/find_by"
         case .firstExpenseSource(let userId, _, _):         return "\(collection(route, userId: userId))/first"
         case .firstBorrowIncomeSource(let userId, _):       return "\(collection(route, userId: userId))/first_borrow"
         case .firstBorrowExpenseCategory(let basketId, _):  return "\(collection(route, basketId: basketId))/first_borrow"
-        
+        case .duplicateTransaction(let id):                 return "/transactions/\(id)/duplicate"        
             
         // Create
         case .createUser:                                   return collection(route)

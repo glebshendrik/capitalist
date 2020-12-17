@@ -11,57 +11,6 @@ import PromiseKit
 
 // Loading
 extension TransactionEditViewModel {    
-    func loadDefaults() -> Promise<Void> {
-        if isReturn {
-            return loadReturningTransactionDefaults()
-        }
-        if let requiredTransactionType = requiredTransactionType {
-            return  firstly {
-                        loadTransactionables(requiredTransactionType: requiredTransactionType)
-                    }.then {
-                        self.loadExchangeRate()
-                    }
-        }
-        return loadExchangeRate()
-    }
-    
-    func loadTransactionables(requiredTransactionType: TransactionType) -> Promise<Void> {
-        var promises: [Promise<Void>] = []
-        switch requiredTransactionType {
-        case .income:
-            if source       == nil { promises.append(loadSource(type: .incomeSource)) }
-            if destination  == nil { promises.append(loadDestination(type: .expenseSource)) }
-        case .expense:
-            if source       == nil { promises.append(loadSource(type: .expenseSource)) }
-            if destination  == nil { promises.append(loadDestination(type: .expenseCategory)) }
-        case .fundsMove:
-            if source == nil && destination == nil {
-                promises.append(loadSource(type: .expenseSource, index: 0))
-                promises.append(loadDestination(type: .expenseSource, index: 1))
-            }
-            else {
-                if source       == nil { promises.append(loadSource(type: .expenseSource)) }
-                if destination  == nil { promises.append(loadDestination(type: .expenseSource)) }
-            }
-        }
-        return when(fulfilled: promises)
-    }
-    
-    func loadTransactionData() -> Promise<Void> {
-        guard let transactionId = transactionId else {
-            return Promise(error: TransactionError.transactionIsNotSpecified)
-        }
-        return  firstly {
-                    loadTransaction(transactionId: transactionId)
-                }.then { transaction in
-                    self.loadTransactionablesFor(transaction: transaction)
-                }.get { transaction, source, destination in
-                    self.set(transaction: transaction, source: source, destination: destination)
-                }.then { _ in
-                    self.loadExchangeRate()
-                }
-    }
-    
     func loadTransaction(transactionId: Int) -> Promise<Transaction> {
         return transactionsCoordinator.show(by: transactionId)
     }
@@ -123,6 +72,47 @@ extension TransactionEditViewModel {
                     ActiveViewModel(active: active)
                 }
     }
+}
+
+extension TransactionEditViewModel {
+
+    func loadTransactionables(requiredTransactionType: TransactionType) -> Promise<Void> {
+        var promises: [Promise<Void>] = []
+        switch requiredTransactionType {
+        case .income:
+            if source       == nil { promises.append(loadSource(type: .incomeSource)) }
+            if destination  == nil { promises.append(loadDestination(type: .expenseSource)) }
+        case .expense:
+            if source       == nil { promises.append(loadSource(type: .expenseSource)) }
+            if destination  == nil { promises.append(loadDestination(type: .expenseCategory)) }
+        case .fundsMove:
+            if source == nil && destination == nil {
+                promises.append(loadSource(type: .expenseSource, index: 0))
+                promises.append(loadDestination(type: .expenseSource, index: 1))
+            }
+            else {
+                if source       == nil { promises.append(loadSource(type: .expenseSource)) }
+                if destination  == nil { promises.append(loadDestination(type: .expenseSource)) }
+            }
+        }
+        return when(fulfilled: promises)
+    }
+        
+    func loadSource(type: TransactionableType, basketType: BasketType = .joy, index: Int = 0) -> Promise<Void> {
+        return  firstly {
+                    loadTransactionable(type: type, basketType: basketType, index: index)
+                }.get { transactionable in
+                    self.source = transactionable
+                }.asVoid()
+    }
+    
+    func loadDestination(type: TransactionableType, basketType: BasketType = .joy, index: Int = 0) -> Promise<Void> {
+        return  firstly {
+                    loadTransactionable(type: type, basketType: basketType, index: index)
+                }.get { transactionable in
+                    self.destination = transactionable
+                }.asVoid()
+    }
     
     func loadTransactionable(type: TransactionableType, basketType: BasketType = .joy, index: Int = 0) -> Promise<Transactionable?> {
         switch type {
@@ -146,8 +136,9 @@ extension TransactionEditViewModel {
         return  firstly {
                     expenseSourcesCoordinator.index(currency: nil)
                 }.map { expenseSources in
-                    guard let expenseSource = expenseSources[safe: index] else { return nil }
-                    return ExpenseSourceViewModel(expenseSource: expenseSource)
+                    let expenseSourceViewModels = expenseSources.map { ExpenseSourceViewModel(expenseSource: $0) }
+                                                                .filter { !$0.accountConnected }
+                    return expenseSourceViewModels[safe: index]
                 }
     }
     
@@ -168,25 +159,9 @@ extension TransactionEditViewModel {
                     return ActiveViewModel(active: active)
                 }
     }
-    
-    func loadExchangeRate() -> Promise<Void> {
-        guard   needCurrencyExchange,
-            let sourceCurrencyCode = sourceCurrencyCode,
-            let destinationCurrencyCode = destinationCurrencyCode else {
-                if self.returningBorrow != nil {
-                    self.setAmounts()
-                }
-                return Promise.value(())
-        }
-        return  firstly {
-                    exchangeRatesCoordinator.show(from: sourceCurrencyCode, to: destinationCurrencyCode)
-                }.done { exchangeRate in
-                    self.exchangeRate = exchangeRate.rate
-                    if self.returningBorrow != nil {
-                        self.setAmounts()
-                    }                    
-                }
-    }
+}
+
+extension TransactionEditViewModel {
     
     func loadSource(id: Int, type: TransactionableType) -> Promise<Void> {
         return  firstly {
@@ -204,20 +179,23 @@ extension TransactionEditViewModel {
                 }.asVoid()
     }
     
-    func loadSource(type: TransactionableType, basketType: BasketType = .joy, index: Int = 0) -> Promise<Void> {
+    func loadExchangeRate() -> Promise<Void> {
+        guard   needCurrencyExchange,
+            let sourceCurrencyCode = sourceCurrencyCode,
+            let destinationCurrencyCode = destinationCurrencyCode else {
+                if self.returningBorrow != nil && isNew {
+                    self.setBorrowLeftAmounts()
+                }
+                return Promise.value(())
+        }
         return  firstly {
-                    loadTransactionable(type: type, basketType: basketType, index: index)
-                }.get { transactionable in
-                    self.source = transactionable
-                }.asVoid()
-    }
-    
-    func loadDestination(type: TransactionableType, basketType: BasketType = .joy, index: Int = 0) -> Promise<Void> {
-        return  firstly {
-                    loadTransactionable(type: type, basketType: basketType, index: index)
-                }.get { transactionable in
-                    self.destination = transactionable
-                }.asVoid()
+                    exchangeRatesCoordinator.show(from: sourceCurrencyCode, to: destinationCurrencyCode)
+                }.done { exchangeRate in
+                    self.exchangeRate = exchangeRate.rate
+                    if self.returningBorrow != nil && self.isNew {
+                        self.setBorrowLeftAmounts()
+                    }
+                }
     }
 }
 
@@ -273,7 +251,9 @@ extension TransactionEditViewModel {
                                        convertedAmountCents: convertedAmountCents,
                                        convertedAmountCurrency: convertedAmountCurrency,
                                        gotAt: gotAt,
-                                       comment: comment)
+                                       comment: comment,
+                                       returningBorrowId: returningBorrowId,
+                                       isBuyingAsset: isBuyingAsset)
     }
 }
 

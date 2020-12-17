@@ -19,6 +19,7 @@ enum IconType {
 
 enum VectorIconMode {
     case fullsize
+    case medium
     case compact
 }
 
@@ -28,10 +29,8 @@ class IconView : CustomView {
     lazy var vectorBackgroundView: UIView = { return UIView() }()
     lazy var vectorImageView: SVGKFastImageView = { return SVGKFastImageView(frame: CGRect.zero) }()
         
-    var iconType: IconType = .raster {
-        didSet {
-            updateIcons()
-        }
+    var iconType: IconType {
+        return iconURL?.iconType ?? .raster
     }
     
     var iconURL: URL? = nil {
@@ -78,6 +77,7 @@ class IconView : CustomView {
     }
     
     private var vectorFullsizeConstraints: [Constraint] = []
+    private var vectorMediumConstraints: [Constraint] = []
     private var vectorCompactConstraints: [Constraint] = []
     
     override func setup() {
@@ -162,6 +162,7 @@ class IconView : CustomView {
     func setupVectorIconConstraints() {
         vectorImageView.snp.makeConstraints { make in
             vectorFullsizeConstraints.append(make.width.height.equalTo(32).constraint)
+            vectorMediumConstraints.append(make.width.height.equalTo(30).constraint)
             vectorCompactConstraints.append(make.width.height.equalTo(18).constraint)
             make.center.equalToSuperview()
         }
@@ -170,6 +171,8 @@ class IconView : CustomView {
     func setupVectorBackgroundConstraints() {
         vectorBackgroundView.snp.makeConstraints { make in
             vectorFullsizeConstraints.append(make.left.top.right.bottom.equalToSuperview().constraint)
+            vectorMediumConstraints.append(make.width.height.equalTo(36).constraint)
+            vectorMediumConstraints.append(make.center.equalToSuperview().constraint)
             vectorCompactConstraints.append(make.width.height.equalTo(24).constraint)
             vectorCompactConstraints.append(make.center.equalToSuperview().constraint)
         }
@@ -177,6 +180,10 @@ class IconView : CustomView {
     
     private func setVectorFullsizeConstraints(active: Bool) {
         vectorFullsizeConstraints.forEach { $0.isActive = active }
+    }
+    
+    private func setMediumCompactConstraints(active: Bool) {
+        vectorMediumConstraints.forEach { $0.isActive = active }
     }
     
     private func setVectorCompactConstraints(active: Bool) {
@@ -203,6 +210,7 @@ class IconView : CustomView {
     
     private func updateVectorConstraints() {
         setVectorFullsizeConstraints(active: vectorIconMode == .fullsize)
+        setMediumCompactConstraints(active: vectorIconMode == .medium)
         setVectorCompactConstraints(active: vectorIconMode == .compact)
         self.updateConstraints()
         self.layoutIfNeeded()

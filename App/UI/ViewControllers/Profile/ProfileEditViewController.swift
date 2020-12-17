@@ -9,14 +9,14 @@
 import UIKit
 import PromiseKit
 
-protocol ProfileEditViewControllerDelegate {
+protocol ProfileEditViewControllerDelegate : class {
     func didUpdateProfile()
 }
 
 class ProfileEditViewController : FormNavBarButtonsEditViewController {    
     var viewModel: ProfileEditViewModel!
     var tableController: ProfileEditTableController!
-    var delegate: ProfileEditViewControllerDelegate?
+    weak var delegate: ProfileEditViewControllerDelegate?
     
     override var formTitle: String { return NSLocalizedString("Редактирование профиля", comment: "Редактирование профиля") }
     override var saveErrorMessage: String { return NSLocalizedString("Невозможно изменить данные профиля", comment: "Невозможно изменить данные профиля") }

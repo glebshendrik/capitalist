@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-protocol IconsViewControllerDelegate {
+protocol IconsViewControllerDelegate : class {
     func didSelectIcon(icon: Icon)
 }
 
@@ -22,7 +22,7 @@ class IconsViewController : UIViewController, UIMessagePresenterManagerDependant
     var viewModel: IconsViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     
-    var delegate: IconsViewControllerDelegate?
+    weak var delegate: IconsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

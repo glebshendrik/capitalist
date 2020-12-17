@@ -27,6 +27,8 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var activityIndicatorCell: UITableViewCell!
     @IBOutlet weak var loaderImageView: UIImageView!
+    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var confirmCell: UITableViewCell!
     @IBOutlet weak var subscriptionCell: UITableViewCell!
     @IBOutlet weak var subscriptionStatusCell: UITableViewCell!
     @IBOutlet weak var subscriptionManageCell: UITableViewCell!
@@ -50,6 +52,24 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
         updateUI()
         refreshData()
         self.setActivityIndicator(hidden: true, animated: false)
+    }
+    
+    @IBAction func didTapConfirmButton(_ sender: Any) {
+        self.setActivityIndicator(hidden: false)
+        logoutButton.isEnabled = false
+        
+        firstly {
+            viewModel.sendConfirmation()
+        }.done {
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Мы отправили вам письмо с инструкцией для подтверждения вашей учетной записи", comment: ""), theme: .success)
+        }
+        .catch { _ in
+            
+            
+        }.finally {
+            self.setActivityIndicator(hidden: true)
+            self.logoutButton.isEnabled = true
+        }
     }
     
     @IBAction func didTapLogoutButton(_ sender: Any) {
@@ -143,6 +163,8 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
     private func updateCommonInfoUI() {
         firstnameLabel.text = viewModel.currentUserFirstname
         emailLabel.text = viewModel.currentUserEmail
+        confirmButton.setTitle(NSLocalizedString("Отправить подтверждение", comment: ""), for: .normal)
+        set(cells: confirmCell, hidden: viewModel.confirmButtonHidden)
     }
     
     private func updateSubscriptionUI() {

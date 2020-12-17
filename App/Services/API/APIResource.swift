@@ -24,7 +24,8 @@ struct APIResource {
              .resetPassword,
              .updateDeviceToken,
              .onboardUser,
-             .destroyUserData:
+             .destroyUserData,
+             .confirmUser:
             return APIResource(singular: "user", plural: "users")
         case .createPasswordResetCode:
             return APIResource(singular: "password_reset_code", plural: "password_reset_codes")
@@ -67,7 +68,8 @@ struct APIResource {
              .createTransaction,
              .showTransaction,
              .updateTransaction,
-             .destroyTransaction:
+             .destroyTransaction,
+             .duplicateTransaction:
             return APIResource(singular: "transaction", plural: "transactions")
         case .findExchangeRate,
              .indexExchangeRates:

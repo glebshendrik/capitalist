@@ -28,8 +28,7 @@ class BasketItemCollectionViewCell : TransactionableCell {
     func setupIcon() {
         icon.backgroundViewColor = UIColor.by(.black2)
         icon.backgroundCornerRadius = 4
-        icon.iconTintColor = UIColor.by(.white100)
-        icon.iconType = .raster
+        icon.iconTintColor = UIColor.by(.white100)        
         icon.vectorIconMode = .compact
         contentView.addSubview(icon)
     }

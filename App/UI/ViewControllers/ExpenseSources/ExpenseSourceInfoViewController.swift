@@ -16,7 +16,13 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     override var entityInfoViewModel: EntityInfoViewModel! {
         return viewModel
     }
-        
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if viewModel.accountConnected {
+            refreshData()
+        }        
+    }
+    
     override func didTapIcon(field: IconInfoField?) {
         guard viewModel.canEditIcon else { return }
         modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSource))
@@ -58,6 +64,10 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     }
     
     func didTapBankButton() {
+        guard viewModel.hasActiveSubscription else {
+            modal(factory.subscriptionViewController())
+            return
+        }
         if viewModel.accountConnected {
             removeAccountConnection()
         } else {
@@ -125,7 +135,7 @@ extension ExpenseSourceInfoViewController : ConnectionViewControllerDelegate {
 
 extension ExpenseSourceInfoViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
     func showProviders() {
-        guard let providersViewController = factory.providersViewController(delegate: self) else { return }
+        guard let providersViewController = factory.providersViewController(delegate: self, fetchDataFrom: viewModel.fetchDataFrom) else { return }
         modal(UINavigationController(rootViewController: providersViewController))
     }
     

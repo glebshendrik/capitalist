@@ -47,10 +47,11 @@ class UIFactory : UIFactoryProtocol {
         return reminderEditNavigationController
     }
     
-    func providersViewController(delegate: ProvidersViewControllerDelegate) -> ProvidersViewController? {
+    func providersViewController(delegate: ProvidersViewControllerDelegate, fetchDataFrom: Date?) -> ProvidersViewController? {
         
         let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController
         providersViewController?.delegate = delegate
+        providersViewController?.viewModel.fetchDataFrom = fetchDataFrom
         return providersViewController
     }
         

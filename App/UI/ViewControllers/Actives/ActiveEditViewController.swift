@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-protocol ActiveEditViewControllerDelegate {
+protocol ActiveEditViewControllerDelegate : class {
     func didCreateActive(with basketType: BasketType, name: String, isIncomePlanned: Bool)
     func didUpdateActive(with basketType: BasketType)
     func didRemoveActive(with basketType: BasketType)
@@ -19,7 +19,7 @@ class ActiveEditViewController : FormTransactionsDependableEditViewController {
         
     var viewModel: ActiveEditViewModel!
     var tableController: ActiveEditTableController!
-    var delegate: ActiveEditViewControllerDelegate?
+    weak var delegate: ActiveEditViewControllerDelegate?
     
     override var shouldLoadData: Bool { return true }
     override var formTitle: String { return viewModel.title }

@@ -87,7 +87,7 @@ class ExpenseSourceViewModel {
     }
     
     var cardType: CardType? {
-        return accountViewModel?.cardType ?? expenseSource.cardType
+        return expenseSource.cardType
     }
     
     var cardTypeImageName: String? {
@@ -122,6 +122,14 @@ class ExpenseSourceViewModel {
         return !isConnectionLoading
     }
     
+//    var accountConnectionCreatedAt: Date? {
+//        return expenseSource.accountConnection?.createdAt
+//    }
+    
+    var accountConnectionFetchDataFrom: Date? {
+        return expenseSource.fetchDataFrom
+    }
+    
     init(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         if let account = expenseSource.accountConnection?.account {
@@ -148,10 +156,13 @@ extension ExpenseSourceViewModel : TransactionSource, TransactionDestination {
     }
     
     var isTransactionSource: Bool {
-        return true
+        return !accountConnected
     }
     
     func isTransactionDestinationFor(transactionSource: TransactionSource) -> Bool {
+        if accountConnected {
+            return false
+        }
         if let sourceExpenseSourceViewModel = transactionSource as? ExpenseSourceViewModel {
             return sourceExpenseSourceViewModel.id != self.id
         }

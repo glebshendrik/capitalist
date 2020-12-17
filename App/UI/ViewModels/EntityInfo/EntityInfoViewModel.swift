@@ -14,13 +14,14 @@ class EntityInfoViewModel {
     private let transactionsCoordinator: TransactionsCoordinatorProtocol
     private let creditsCoordinator: CreditsCoordinatorProtocol
     private let borrowsCoordinator: BorrowsCoordinatorProtocol
-    private let accountCoordinator: AccountCoordinatorProtocol
+    let accountCoordinator: AccountCoordinatorProtocol
     
     var isUpdatingData: Bool = false
     public private(set) var isDeleted: Bool = false
     var hasMoreData: Bool = true
     var needToSaveData: Bool = false
     var transactionToDelete: TransactionViewModel? = nil
+    var transactionToDuplicate: TransactionViewModel? = nil
     var defaultPeriod: AccountingPeriod = .month
     
     var transactionable: Transactionable? { return nil }
@@ -84,6 +85,9 @@ class EntityInfoViewModel {
         }
         if let transactionToDelete = transactionToDelete {
             return removeTransaction(transactionViewModel: transactionToDelete)
+        }
+        if let transactionToDuplicate = transactionToDuplicate {
+            return duplicateTransaction(transactionViewModel: transactionToDuplicate)
         }
         return loadData()
     }
@@ -202,6 +206,18 @@ extension EntityInfoViewModel {
                     self.loadData()
                 }.done {
                     self.transactionToDelete = nil
+                }
+    }
+    
+    private func duplicateTransaction(transactionViewModel: TransactionViewModel) -> Promise<Void> {
+        return  firstly {
+                    transactionsCoordinator.duplicate(by: transactionViewModel.id)
+                }.get {
+                    self.postFinantialDataUpdated()
+                }.then {
+                    self.loadData()
+                }.done {
+                    self.transactionToDuplicate = nil
                 }
     }
     

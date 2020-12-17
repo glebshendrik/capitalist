@@ -20,7 +20,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     private var customerSecret: String? = nil
     
     var includeFakeProviders: Bool {
-        return UIApplication.shared.inferredEnvironment == .debug
+        return UIApplication.shared.inferredEnvironment != .appStore
     }
     
     func set(appId: String, appSecret: String) {
@@ -96,27 +96,27 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         }
     }
     
-    func createConnectSession(providerCode: String, countryCode: String, languageCode: String) -> Promise<URL> {
-//        if  let customerSecret = self.customerSecret,
-//            let cachedSessionResponse = createConnectSessionCache[customerSecret]?[providerCode],
-//            let url = URL(string: cachedSessionResponse.connectUrl),
-//            cachedSessionResponse.expiresAt.isInFuture {
-//
-//            return Promise.value(url)
-//        }
+    func createConnectSession(providerCode: String, countryCode: String, fromDate: Date, languageCode: String) -> Promise<URL> {
+        if  let customerSecret = self.customerSecret,
+            let cachedSessionResponse = createConnectSessionCache[customerSecret]?[providerCode],
+            let url = URL(string: cachedSessionResponse.connectUrl),
+            cachedSessionResponse.expiresAt.isInFuture {
+
+            return Promise.value(url)
+        }
         let connectSessionsParams = SEConnectSessionsParams(allowedCountries: [countryCode],
                                                             attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
                                                                                locale: languageCode,
-                                                                               returnTo: "http://tempio.app"),
+                                                                               returnTo: "https://capitalistapp.net"),
                                                             providerCode: providerCode,
                                                             dailyRefresh: true,
-                                                            fromDate: Date(),
+                                                            fromDate: fromDate,
                                                             javascriptCallbackType: "iframe",
                                                             includeFakeProviders: includeFakeProviders,
                                                             theme: "dark",
                                                             consent: SEConsent(scopes: ["account_details", "transactions_details"],
-                                                                               fromDate: Date()))
+                                                                               fromDate: fromDate))
         
         return Promise { seal in
             SERequestManager.shared.createConnectSession(params: connectSessionsParams) { response in
@@ -126,12 +126,12 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                         seal.reject(SaltEdgeError.cannotCreateConnectSession)
                         return
                     }
-//                    if let customerSecret = self.customerSecret {
-//                        if self.createConnectSessionCache[customerSecret] == nil {
-//                            self.createConnectSessionCache[customerSecret] = [:]
-//                        }
-//                        self.createConnectSessionCache[customerSecret]?[providerCode] = value.data
-//                    }
+                    if let customerSecret = self.customerSecret {
+                        if self.createConnectSessionCache[customerSecret] == nil {
+                            self.createConnectSessionCache[customerSecret] = [:]
+                        }
+                        self.createConnectSessionCache[customerSecret]?[providerCode] = value.data
+                    }
                     
                     seal.fulfill(url)
                 case .failure(let error):
@@ -152,7 +152,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         let refreshSessionsParams = SERefreshSessionsParams(attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
                                                                                locale: languageCode,
-                                                                               returnTo: "http://tempio.app"),
+                                                                               returnTo: "https://capitalistapp.net"),
                                                             dailyRefresh: true,
                                                             javascriptCallbackType: "iframe",
                                                             includeFakeProviders: includeFakeProviders,
@@ -175,25 +175,25 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         }
     }
     
-    func createReconnectSession(connectionSecret: String, languageCode: String) -> Promise<URL> {
-//        if  let cachedSessionResponse = reconnectConnectSessionCache[connectionSecret],
-//            let url = URL(string: cachedSessionResponse.connectUrl),
-//            cachedSessionResponse.expiresAt.isInFuture {
-//
-//            return Promise.value(url)
-//        }
+    func createReconnectSession(connectionSecret: String, fromDate: Date, languageCode: String) -> Promise<URL> {
+        if  let cachedSessionResponse = reconnectConnectSessionCache[connectionSecret],
+            let url = URL(string: cachedSessionResponse.connectUrl),
+            cachedSessionResponse.expiresAt.isInFuture {
+
+            return Promise.value(url)
+        }
         
         let reconnectSessionsParams = SEReconnectSessionsParams(attempt: SEAttempt(automaticFetch: true,
                                                                                    dailyRefresh: true,
                                                                                    locale: languageCode,
-                                                                                   returnTo: "http://tempio.app"),
+                                                                                   returnTo: "https://capitalistapp.net"),
                                                                 dailyRefresh: true,
                                                                 javascriptCallbackType: "iframe",
                                                                 includeFakeProviders: includeFakeProviders,
                                                                 theme: "dark",
                                                                 overrideCredentialsStrategy: "override",
                                                                 consent: SEConsent(scopes: ["account_details", "transactions_details"],
-                                                                                   fromDate: Date()))
+                                                                                   fromDate: fromDate))
         
         return Promise { seal in
             SERequestManager.shared.reconnectSession(with: connectionSecret, params: reconnectSessionsParams) { response in
@@ -203,7 +203,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                         seal.reject(SaltEdgeError.cannotCreateConnectSession)
                         return
                     }
-//                    self.reconnectConnectSessionCache[connectionSecret] = value.data
+                    self.reconnectConnectSessionCache[connectionSecret] = value.data
                     seal.fulfill(url)
                 case .failure(let error):
                     seal.reject(error)
@@ -241,27 +241,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
             }
         }
     }
-    
-    func refreshConnection(secret: String, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void> {
-        let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: "AppDelegate.applicationURLString"))
         
-        return Promise { seal in
-            SERequestManager.shared.refreshConnection(
-                with: secret,
-                params: params,
-                fetchingDelegate: fetchingDelegate
-            ) { response in
-                switch response {
-                case .success:
-                    seal.fulfill(())
-                case .failure(let error):
-                    seal.reject(error)
-                }
-            }
-        }
-        
-    }
-    
     func getProvider(code: String) -> Promise<SEProvider> {
         return Promise { seal in
             SERequestManager.shared.getProvider(code: code) { response in

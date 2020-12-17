@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 import SwipeCellKit
 
-protocol ExpenseCategorySelectViewControllerDelegate {
+protocol ExpenseCategorySelectViewControllerDelegate : class {
     func didSelect(expenseCategoryViewModel: ExpenseCategoryViewModel)
 }
 
@@ -19,7 +19,7 @@ class ExpenseCategorySelectViewController : UIViewController, UIMessagePresenter
     @IBOutlet weak var loader: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    private var delegate: ExpenseCategorySelectViewControllerDelegate? = nil
+    private weak var delegate: ExpenseCategorySelectViewControllerDelegate? = nil
     
     var viewModel: ExpenseCategoriesViewModel!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
@@ -192,24 +192,17 @@ extension ExpenseCategorySelectViewController : SwipeTableViewCellDelegate {
     func didTapDeleteButton(expenseCategoryViewModel: ExpenseCategoryViewModel?) {
         var alertTitle = ""
         var removeAction: ((UIAlertAction) -> Void)? = nil
-        var removeWithTransactionsAction: ((UIAlertAction) -> Void)? = nil
         
         if let expenseCategoryId = expenseCategoryViewModel?.id {
             alertTitle = TransactionableType.expenseCategory.removeQuestion
             removeAction = { _ in
                 self.removeExpenseCategory(by: expenseCategoryId, deleteTransactions: false)
             }
-            removeWithTransactionsAction = { _ in
-                self.removeExpenseCategory(by: expenseCategoryId, deleteTransactions: true)
-            }
         }
         
         let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Удалить", comment: "Удалить"),
                                                       style: .destructive,
-                                                      handler: removeAction),
-                                        UIAlertAction(title: NSLocalizedString("Удалить вместе с транзакциями", comment: "Удалить вместе с транзакциями"),
-                                                      style: .destructive,
-                                                      handler: removeWithTransactionsAction)]
+                                                      handler: removeAction)]
         sheet(title: alertTitle, actions: actions)
     }
     

@@ -25,8 +25,7 @@ class IconCollectionViewCell : UICollectionViewCell {
         iconView.defaultIconName = viewModel.category.defaultIconName
         iconView.backgroundViewColor = UIColor.by(.black1)
         iconView.iconTintColor = UIColor.by(.white100)
-        iconView.iconType = .raster
-
+        
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale        
     }

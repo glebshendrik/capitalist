@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-protocol BorrowEditViewControllerDelegate {
+protocol BorrowEditViewControllerDelegate : class {
     func didCreateDebt()
     func didCreateLoan()
     func didUpdateDebt()
@@ -21,8 +21,16 @@ protocol BorrowEditViewControllerDelegate {
 class BorrowEditViewController : FormTransactionsDependableEditViewController {
     var viewModel: BorrowEditViewModel!
     var tableController: BorrowEditTableController!
-    var delegate: BorrowEditViewControllerDelegate?
+    weak var delegate: BorrowEditViewControllerDelegate?
     
+    lazy var borrowedAtDateSelectionDelegate = {
+        return BorrowedAtDateSelectionDelegate(delegate: self)
+    }()
+    
+    lazy var paydayDateSelectionDelegate = {
+        return PaydayDateSelectionDelegate(delegate: self)
+    }()
+        
     override var shouldLoadData: Bool { return true }
     override var formTitle: String { return viewModel.title }
     override var saveErrorMessage: String { return NSLocalizedString("Ошибка при сохранении", comment: "Ошибка при сохранении") }
@@ -114,17 +122,15 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
     }
     
     func didTapBorrowedAt() {
-        let delegate = BorrowedAtDateSelectionDelegate(delegate: self)
-        modal(factory.datePickerViewController(delegate: delegate,
+        modal(factory.datePickerViewController(delegate: borrowedAtDateSelectionDelegate,
                                                date: viewModel.borrowedAt,
                                                minDate: nil,
                                                maxDate: Date(),
                                                mode: .date), animated: true)
     }
     
-    func didTapPayday() {
-        let delegate = PaydayDateSelectionDelegate(delegate: self)
-        modal(factory.datePickerViewController(delegate: delegate,
+    func didTapPayday() {        
+        modal(factory.datePickerViewController(delegate: paydayDateSelectionDelegate,
                                                date: viewModel.payday,
                                                minDate: Date(),
                                                maxDate: nil,
@@ -186,7 +192,7 @@ extension BorrowEditViewController : CurrenciesViewControllerDelegate {
 }
 
 class BorrowedAtDateSelectionDelegate : DatePickerViewControllerDelegate {
-    let delegate: BorrowEditViewController?
+    weak var delegate: BorrowEditViewController? = nil
     
     init(delegate: BorrowEditViewController?) {
         self.delegate = delegate
@@ -198,7 +204,7 @@ class BorrowedAtDateSelectionDelegate : DatePickerViewControllerDelegate {
 }
 
 class PaydayDateSelectionDelegate : DatePickerViewControllerDelegate {
-    let delegate: BorrowEditViewController?
+    weak var delegate: BorrowEditViewController? = nil
     
     init(delegate: BorrowEditViewController?) {
         self.delegate = delegate
@@ -253,7 +259,6 @@ extension BorrowEditViewController {
         tableController.iconView.iconURL = viewModel.selectedIconURL
         tableController.iconView.defaultIconName = viewModel.iconDefaultImageName
         tableController.iconView.iconTintColor = UIColor.by(.white100)
-        tableController.iconView.iconType = .raster
     }
     
     func updateTextFieldsUI() {

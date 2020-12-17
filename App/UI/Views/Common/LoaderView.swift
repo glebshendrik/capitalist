@@ -10,5 +10,5 @@ import UIKit
 
 class LoaderView: UIView {
     
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
 }

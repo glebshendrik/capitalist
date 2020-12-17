@@ -63,6 +63,32 @@ extension TransactionEditViewModel {
     var buyingAssetsTitle: String? {
         return (destination as? ActiveViewModel)?.activeType.buyingAssetsTitle
     }
+    
+    var isRemoteTransaction: Bool {
+        return transaction?.saltedgeTransactionId != nil
+    }
+    
+    var isChangeableTransaction: Bool {
+        return transaction?.isChangeable ?? true
+    }
+    
+    var isPendingTransaction: Bool {
+        return transaction?.saltedgeTransactionStatus == TransactionRemoteStatus.pending
+    }
+    
+    var anyVirtualTransactionable: Bool {
+        return isVirtualSource || isVirtualDestination
+    }
+    
+    var isVirtualSource: Bool {
+        return source?.isVirtual ?? false 
+//        return transaction?.isVirtualSource ?? false
+    }
+    
+    var isVirtualDestination: Bool {
+        return destination?.isVirtual ?? false
+//        return transaction?.isVirtualDestination ?? false
+    }
 }
 
 extension TransactionEditViewModel {
@@ -119,6 +145,8 @@ extension TransactionEditViewModel {
         return sourceCurrencyCode != destinationCurrencyCode
     }
     
+    // Visibility
+    
     var amountFieldHidden: Bool {
         return needCurrencyExchange || !hasBothTransactionables
     }
@@ -128,7 +156,7 @@ extension TransactionEditViewModel {
     }
     
     var isBuyingAssetFieldHidden: Bool {
-        guard   isNew,
+        guard   isNew || isRemoteTransaction,
                 let destination = destination,
                 let source = source else { return true }
         
@@ -150,35 +178,37 @@ extension TransactionEditViewModel {
     }
     
     var removeButtonHidden: Bool {
-        return isNew        
+        return isNew || isRemoteTransaction || !isChangeableTransaction
     }
     
     var sourceFieldHidden: Bool {
-        return isVirtualSource
+        return isVirtualSource && !isRemoteTransaction
     }
     
     var destinationFieldHidden: Bool {
-        return isVirtualDestination
+        return isVirtualDestination && !isRemoteTransaction
     }
     
+    // Permissions
+    
     var canChangeSource: Bool {
-        return !anyVirtualTransactionable
+        guard isRemoteTransaction else { return !anyVirtualTransactionable && isChangeableTransaction }
+        return !isPendingTransaction && isDestinationInitiallyConnected && !isSourceInitiallyConnected
     }
     
     var canChangeDestination: Bool {
-        return !anyVirtualTransactionable
+        guard isRemoteTransaction else { return !anyVirtualTransactionable && isChangeableTransaction }
+        return !isPendingTransaction && isSourceInitiallyConnected && !isDestinationInitiallyConnected
     }
     
-    var anyVirtualTransactionable: Bool {
-        return isVirtualSource || isVirtualDestination
+    var canChangeAmount: Bool {
+        guard isRemoteTransaction else { return isChangeableTransaction }
+        return needCurrencyExchange && isDestinationInitiallyConnected
     }
     
-    var isVirtualSource: Bool {
-        return transaction?.isVirtualSource ?? false
-    }
-    
-    var isVirtualDestination: Bool {
-        return transaction?.isVirtualDestination ?? false
+    var canChangeConvertedAmount: Bool {
+        guard isRemoteTransaction else { return isChangeableTransaction }
+        return needCurrencyExchange && isSourceInitiallyConnected
     }
     
 //    var isSourceVirtualExpenseSource: Bool {

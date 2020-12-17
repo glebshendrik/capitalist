@@ -149,6 +149,10 @@ class ActiveViewModel : TransactionSource, TransactionDestination {
         return activeType.isGoalAmountRequired
     }
     
+    var isVirtual: Bool {
+        return false
+    }
+    
     var onlyBuyingAssets: Bool {
         return activeType.onlyBuyingAssets
     }

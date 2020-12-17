@@ -79,7 +79,11 @@ class ExpenseSourceEditViewModel {
             ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
             : NSLocalizedString("Подключить банк", comment: "Подключить банк")
     }
-        
+       
+    var fetchDataFrom: Date? {
+        return isNew ? Date()?.adding(.year, value: -1).adding(.day, value: 1).adding(.minute, value: 5) : expenseSource?.fetchDataFrom
+    }
+    
     var iconType: IconType {
         return selectedIconURL?.iconType ?? .raster
     }
@@ -122,6 +126,10 @@ class ExpenseSourceEditViewModel {
                     
     var removeButtonHidden: Bool {
         return isNew
+    }
+    
+    var hasActiveSubscription: Bool {
+        return accountCoordinator.currentUserHasActiveSubscription
     }
     
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
@@ -242,7 +250,7 @@ extension ExpenseSourceEditViewModel {
         
         amount = accountViewModel.amountDecimal
         
-        if let creditLimit = accountViewModel.creditLimit {
+        if let creditLimit = accountViewModel.creditLimitDecimal {
             self.creditLimit = creditLimit
         }
         

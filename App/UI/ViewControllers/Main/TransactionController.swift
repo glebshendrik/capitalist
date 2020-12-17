@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol TransactionControllerDelegate {
+protocol TransactionControllerDelegate : class {
     var mainView: UIView { get }
     var isEditingItems: Bool { get }
     var isSelecting: Bool { get }
@@ -22,7 +22,7 @@ protocol TransactionControllerDelegate {
 
 class TransactionController {
     
-    let delegate: TransactionControllerDelegate
+    weak var delegate: TransactionControllerDelegate? = nil
     
     var isTransactionStarted: Bool {
         return sourceCollectionView != nil
@@ -70,8 +70,8 @@ class TransactionController {
     var sourceCell: UICollectionViewCell? = nil {
         didSet {
             if sourceCell != oldValue {
-                delegate.didSetNormal(cell: oldValue, animated: true)
-                delegate.didSetSource(cell: sourceCell, animated: true)
+                delegate?.didSetNormal(cell: oldValue, animated: true)
+                delegate?.didSetSource(cell: sourceCell, animated: true)
             }
         }
     }
@@ -96,8 +96,8 @@ class TransactionController {
     var destinationCell: UICollectionViewCell? = nil {
         didSet {
             if destinationCell != oldValue {
-                delegate.didSetNormal(cell: oldValue, animated: true)
-                delegate.didSetDestination(cell: destinationCell, animated: true)
+                delegate?.didSetNormal(cell: oldValue, animated: true)
+                delegate?.didSetDestination(cell: destinationCell, animated: true)
             }
         }
     }
@@ -145,7 +145,7 @@ class TransactionController {
             let destinationCell = destinationCell as? TransactionableCell,
             let source = sourceCell.transactionable as? TransactionSource,
             let destination = destinationCell.transactionable as? TransactionDestination {
-            delegate.didSetTransactionables(source: source, destination: destination)
+            delegate?.didSetTransactionables(source: source, destination: destination)
         }
     }
     
@@ -156,29 +156,29 @@ class TransactionController {
     func syncStateOf(_ collectionView: UICollectionView, cell: UICollectionViewCell, at indexPath: IndexPath, animated: Bool) {
         if collectionView == sourceCollectionView && collectionView == destinationCollectionView {
             if indexPath == sourceIndexPath {
-                delegate.didSetSource(cell: cell, animated: animated)
+                delegate?.didSetSource(cell: cell, animated: animated)
             }
             else if indexPath == destinationIndexPath {
-                delegate.didSetDestination(cell: cell, animated: animated)
+                delegate?.didSetDestination(cell: cell, animated: animated)
             }
             else {
-                delegate.didSetNormal(cell: cell, animated: animated)
+                delegate?.didSetNormal(cell: cell, animated: animated)
             }
         }
         else if collectionView == sourceCollectionView {
             if indexPath == sourceIndexPath {
-                delegate.didSetSource(cell: cell, animated: animated)
+                delegate?.didSetSource(cell: cell, animated: animated)
             }
             else {
-                delegate.didSetNormal(cell: cell, animated: animated)
+                delegate?.didSetNormal(cell: cell, animated: animated)
             }
         }
         else if collectionView == destinationCollectionView {
             if indexPath == destinationIndexPath {
-                delegate.didSetDestination(cell: cell, animated: animated)
+                delegate?.didSetDestination(cell: cell, animated: animated)
             }
             else {
-                delegate.didSetNormal(cell: cell, animated: animated)
+                delegate?.didSetNormal(cell: cell, animated: animated)
             }
         }
     }
@@ -205,7 +205,11 @@ class TransactionController {
     
     private func initializeWaitingAtTheEdge() {
         waitingAtTheEdgeTimer?.invalidate()
-        if destinationCollectionView != nil && waitingEdge != nil && !delegate.isEditingItems {
+        if let delegate = delegate,
+            destinationCollectionView != nil,
+            waitingEdge != nil,
+            !delegate.isEditingItems {
+            
             waitingAtTheEdgeTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(changeWaitingPage), userInfo: nil, repeats: false)
         } else {
             waitingAtTheEdgeTimer = nil
@@ -213,9 +217,10 @@ class TransactionController {
     }
     
     @objc private func changeWaitingPage() {
-        guard   !delegate.isEditingItems,
-            let edge = waitingEdge,
-            let dropCandidateCollectionView = destinationCollectionView else {
+        guard   let delegate = delegate,
+                !delegate.isEditingItems,
+                let edge = waitingEdge,
+                let dropCandidateCollectionView = destinationCollectionView else {
                 
                 initializeWaitingAtTheEdge()
                 return

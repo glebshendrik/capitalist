@@ -128,4 +128,8 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
         tutorialTip?.dismiss()
         setMainOverlay(hidden: true)
     }
+    
+    deinit {        
+        NotificationCenter.default.removeObserver(self)
+    }
 }

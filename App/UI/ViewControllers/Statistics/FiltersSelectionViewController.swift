@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 import AlignedCollectionViewFlowLayout
 
-protocol FiltersSelectionViewControllerDelegate {
+protocol FiltersSelectionViewControllerDelegate : class {
     func didSelect(filters: [TransactionableFilter])
 }
 
@@ -18,7 +18,7 @@ class FiltersSelectionViewController : UIViewController, UIMessagePresenterManag
     
     var navigationBarTintColor: UIColor? = UIColor.by(.black2)
     
-    var delegate: FiltersSelectionViewControllerDelegate? = nil
+    weak var delegate: FiltersSelectionViewControllerDelegate? = nil
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: FiltersSelectionViewModel!
     

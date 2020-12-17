@@ -54,7 +54,7 @@ class AccountViewModel {
         return account.nature
     }
     
-    var connectionId: String {
+    var connectionId: String? {
         return connection.saltedgeId
     }
     
@@ -66,6 +66,10 @@ class AccountViewModel {
     
     var creditLimit: String? {
         return creditLimitCents?.moneyCurrencyString(with: currency, shouldRound: false)
+    }
+    
+    var creditLimitDecimal: String? {
+        return creditLimitCents?.moneyDecimalString(with: currency)
     }
     
     var cards: String? {
@@ -91,12 +95,12 @@ class AccountViewModel {
     
     var reconnectNeeded: Bool {
         guard connection.lastStage == .finish else { return false }
+        guard connection.status == .active else { return true }
         
-        guard   connection.status == .active,
-                let interactive = connection.interactive,
-                let nextRefreshPossibleAt = connection.nextRefreshPossibleAt else {
-                    
-            return true
+        guard   let interactive = connection.interactive,
+                let nextRefreshPossibleAt = connection.nextRefreshPossibleAt
+        else {
+            return false
         }
         return interactive && nextRefreshPossibleAt.isInPast
     }

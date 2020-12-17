@@ -34,6 +34,7 @@ enum ExpenseSourceInfoError : Error {
 class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
+//    private let accountCoordinator: AccountCoordinatorProtocol
     
     var expenseSourceViewModel: ExpenseSourceViewModel?
     var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
@@ -57,6 +58,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         return accountConnectionAttributes.shouldDestroy == nil
     }
     
+    var fetchDataFrom: Date? {
+        return expenseSourceViewModel?.accountConnectionFetchDataFrom
+    }
+    
     var bankButtonTitle: String {
         return accountConnected
             ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
@@ -69,6 +74,10 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     
     var canEditIcon: Bool {
         return !(expenseSourceViewModel?.accountConnected ?? false)
+    }
+    
+    var hasActiveSubscription: Bool {        
+        return accountCoordinator.currentUserHasActiveSubscription
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,
@@ -162,13 +171,14 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
     private func updateForm() -> ExpenseSourceUpdatingForm {
         let amountCents = selectedAccountViewModel?.amountCents ?? expenseSourceViewModel?.expenseSource.amountCents   
         let creditLimitCents = selectedAccountViewModel?.creditLimitCents ?? expenseSourceViewModel?.expenseSource.creditLimitCents
-
+        let cardType = selectedAccountViewModel?.cardType ?? expenseSourceViewModel?.expenseSource.cardType
+        
         return ExpenseSourceUpdatingForm(id: expenseSourceViewModel?.id,
                                          name: expenseSourceViewModel?.name,
                                          iconURL: selectedIconURL,
                                          amountCents: amountCents,
                                          creditLimitCents: creditLimitCents,
-                                         cardType: expenseSourceViewModel?.expenseSource.cardType,
+                                         cardType: cardType,
                                          accountConnectionAttributes: accountConnectionAttributes)
     }
 }
@@ -196,14 +206,17 @@ extension ExpenseSourceInfoViewModel : SEConnectionFetchingDelegate {
         guard let providerCode = connection?.providerCode, let countryCode = connection?.countryCode else {
             return Promise(error: BankConnectionError.canNotCreateConnection)
         }        
-        return bankConnectionsCoordinator.createConnectSession(providerCode: providerCode, countryCode: countryCode)
+        return bankConnectionsCoordinator.createConnectSession(providerCode: providerCode,
+                                                               countryCode: countryCode,
+                                                               fromDate: fetchDataFrom)
     }
     
     func createReconnectSession() -> Promise<URL> {
         guard let connection = connection else {
             return Promise(error: BankConnectionError.canNotCreateConnection)
         }
-        return bankConnectionsCoordinator.createReconnectSession(connection: connection)
+        return bankConnectionsCoordinator.createReconnectSession(connection: connection,
+                                                                 fromDate: fetchDataFrom)
     }
     
     func createRefreshConnectionSession() -> Promise<URL> {

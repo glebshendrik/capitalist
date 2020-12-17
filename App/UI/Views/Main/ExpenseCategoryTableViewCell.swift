@@ -26,8 +26,7 @@ class ExpenseCategoryTableViewCell : SwipeTableViewCell {
                 
         nameLabel.text = viewModel.name
         spentLabel.text = viewModel.spentRounded
-        
-        iconView.iconType = .raster
+                
         iconView.vectorIconMode = .fullsize
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = viewModel.defaultIconName

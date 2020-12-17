@@ -46,12 +46,12 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
         return saltEdgeManager.loadProviders(country: country)
     }
     
-    func createConnectSession(providerCode: String, countryCode: String) -> Promise<URL> {
-        return saltEdgeManager.createConnectSession(providerCode: providerCode, countryCode: countryCode, languageCode: languageCode)
+    func createConnectSession(providerCode: String, countryCode: String, fromDate: Date?) -> Promise<URL> {
+        return saltEdgeManager.createConnectSession(providerCode: providerCode, countryCode: countryCode, fromDate: fromDate ?? Date(), languageCode: languageCode)
     }
     
-    func createReconnectSession(connection: Connection) -> Promise<URL> {
-        return saltEdgeManager.createReconnectSession(connectionSecret: connection.secret, languageCode: languageCode)
+    func createReconnectSession(connection: Connection, fromDate: Date?) -> Promise<URL> {
+        return saltEdgeManager.createReconnectSession(connectionSecret: connection.secret, fromDate: fromDate ?? Date(), languageCode: languageCode)
     }
     
     func createRefreshConnectionSession(connection: Connection) -> Promise<URL> {
@@ -134,11 +134,7 @@ class BankConnectionsCoordinator : BankConnectionsCoordinatorProtocol {
             return Promise(error: SessionError.noSessionInAuthorizedContext)
         }
         return accountsService.index(for: currentUserId, currencyCode: currencyCode, connectionId: connectionId, providerId: providerId, notUsed: notUsed, nature: nature)
-    }
-    
-    func refreshSaltEdgeConnection(secret: String, fetchingDelegate: SEConnectionFetchingDelegate) -> Promise<Void> {
-        return saltEdgeManager.refreshConnection(secret: secret, fetchingDelegate: fetchingDelegate)
-    }
+    }    
 }
 
 extension BankConnectionsCoordinator {

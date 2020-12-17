@@ -18,11 +18,11 @@ class FormField : UIView {
     
     // Subviews
     
-    lazy var iconContainer: UIView = { return UIView() }()
+//    lazy var iconContainer: UIView = { return UIView() }()
     
-    lazy var icon: UIImageView = { return UIImageView() }()
+    lazy var icon: IconView = { return IconView() }()
     
-    lazy var vectorIcon: SVGKFastImageView = { return SVGKFastImageView(frame: CGRect.zero) }()
+//    lazy var vectorIcon: SVGKFastImageView = { return SVGKFastImageView(frame: CGRect.zero) }()
     
     lazy var errorLabel: UILabel = { return UILabel() }()
     
@@ -66,14 +66,14 @@ class FormField : UIView {
         didSet { updateErrorLabel() }
     }
     
-    var isVector: Bool {
-        return (imageURL?.iconType ?? .raster) == .vector
-    }
+//    var isVector: Bool {
+//        return (imageURL?.iconType ?? .raster) == .vector
+//    }
     
     @IBInspectable var imageName: String? = nil {
         didSet { updateIcon() }
     }
-    
+
     var imageURL: URL? = nil {
         didSet { updateIcon() }
     }
@@ -125,34 +125,39 @@ class FormField : UIView {
     }
     
     func setupConstraints() {
-        setupIconContainerConstraints()
+//        setupIconContainerConstraints()
         setupIconConstraints()
-        setupVectorIconConstraints()
+//        setupVectorIconConstraints()
         setupSeparatorConstraints()
         setupErrorLabelConstraints()
     }
     
-    func setupIconContainerConstraints() {
-        iconContainer.snp.makeConstraints { make in
+//    func setupIconContainerConstraints() {
+//        iconContainer.snp.makeConstraints { make in
+//            make.width.height.equalTo(36)
+//            make.left.equalTo(16)
+//            make.centerY.equalToSuperview().offset(3)
+//        }
+//    }
+    
+    func setupIconConstraints() {
+        icon.snp.makeConstraints { make in
             make.width.height.equalTo(36)
             make.left.equalTo(16)
             make.centerY.equalToSuperview().offset(3)
         }
+//        icon.snp.makeConstraints { make in
+//            make.width.height.lessThanOrEqualTo(20)
+//            make.center.equalToSuperview()
+//        }
     }
     
-    func setupIconConstraints() {
-        icon.snp.makeConstraints { make in
-            make.width.height.lessThanOrEqualTo(20)
-            make.center.equalToSuperview()
-        }
-    }
-    
-    func setupVectorIconConstraints() {
-        vectorIcon.snp.makeConstraints { make in
-            make.width.height.lessThanOrEqualTo(28)
-            make.center.equalToSuperview()
-        }
-    }
+//    func setupVectorIconConstraints() {
+//        vectorIcon.snp.makeConstraints { make in
+//            make.width.height.lessThanOrEqualTo(28)
+//            make.center.equalToSuperview()
+//        }
+//    }
     
     func setupSeparatorConstraints() {
         separator.snp.makeConstraints { make in
@@ -198,39 +203,46 @@ class FormField : UIView {
     }
     
     func setupIcon() {
-        iconContainer.translatesAutoresizingMaskIntoConstraints = false
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        vectorIcon.translatesAutoresizingMaskIntoConstraints = false
-        iconContainer.addSubview(icon)
-        iconContainer.addSubview(vectorIcon)
-        addSubview(iconContainer)
-        iconContainer.cornerRadius = 18
-        icon.contentMode = .scaleAspectFit
+//        iconContainer.translatesAutoresizingMaskIntoConstraints = false
+//        icon.translatesAutoresizingMaskIntoConstraints = false
+//        vectorIcon.translatesAutoresizingMaskIntoConstraints = false
+//        iconContainer.addSubview(icon)
+//        iconContainer.addSubview(vectorIcon)
+        addSubview(icon)
+        icon.vectorIconMode = .medium
+//        iconContainer.cornerRadius = 18
+//        icon.contentMode = .scaleAspectFit
     }
     
     func updateIcon(forceImageUpdate: Bool = true) {
+//        icon.backgroundColor = unfocusedBackgroundColor
+        icon.backgroundViewColor = unfocusedBackgroundColor
+        icon.vectorBackgroundViewColor = UIColor.by(.white100)
+        icon.iconTintColor = unfocusedIconTint
+//        iconContainer.backgroundColor = isVector ? UIColor.by(.white100) : unfocusedBackgroundColor
+//        icon.tintColor = unfocusedIconTint
         
-        iconContainer.backgroundColor = isVector ? UIColor.by(.white100) : unfocusedBackgroundColor
-        icon.tintColor = unfocusedIconTint
-        
-        icon.isHidden = isVector
-        vectorIcon.isHidden = !isVector
+//        icon.isHidden = isVector
+//        vectorIcon.isHidden = !isVector
         
         guard forceImageUpdate else { return }
         
-        guard let url = imageURL else {
-            if let imageName = imageName {
-                icon.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
-            }
-            return
-        }
+        icon.iconURL = imageURL
+        icon.defaultIconName = imageName
         
-        if isVector {
-            vectorIcon.sd_setImage(with: url, completed: nil)
-        }
-        else {
-            icon.setImage(with: url, placeholderName: imageName, renderingMode: .alwaysTemplate)
-        }        
+//        guard let url = imageURL else {
+//            if let imageName = imageName {
+//                icon.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+//            }
+//            return
+//        }
+//        
+//        if isVector {
+//            vectorIcon.sd_setImage(with: url, completed: nil)
+//        }
+//        else {
+//            icon.setImage(with: url, placeholderName: imageName, renderingMode: .alwaysTemplate)
+//        }        
     }
     
     func setupErrorLabel() {

@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-protocol CreditEditViewControllerDelegate {
+protocol CreditEditViewControllerDelegate : class {
     func didCreateCredit()
     func didUpdateCredit()
     func didRemoveCredit()
@@ -18,7 +18,7 @@ protocol CreditEditViewControllerDelegate {
 class CreditEditViewController : FormTransactionsDependableEditViewController {
     var viewModel: CreditEditViewModel!
     var tableController: CreditEditTableController!
-    var delegate: CreditEditViewControllerDelegate?
+    weak var delegate: CreditEditViewControllerDelegate?
     
     override var shouldLoadData: Bool { return true }
     override var formTitle: String { return viewModel.title }
@@ -251,7 +251,6 @@ extension CreditEditViewController {
         tableController.iconView.iconURL = viewModel.selectedIconURL
         tableController.iconView.defaultIconName = viewModel.iconDefaultImageName
         tableController.iconView.iconTintColor = UIColor.by(.white100)
-        tableController.iconView.iconType = .raster
         tableController.iconView.vectorIconMode = .fullsize
     }
     

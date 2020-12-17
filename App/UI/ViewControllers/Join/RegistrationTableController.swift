@@ -24,7 +24,7 @@ class RegistrationTableController : SaveAccessoryFormFieldsTableViewController {
     @IBOutlet weak var registerCell: UITableViewCell!
     @IBOutlet weak var registerButton: HighlightButton!
     
-    var delegate: RegistrationTableControllerDelegate?
+    weak var delegate: RegistrationTableControllerDelegate?
     
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate

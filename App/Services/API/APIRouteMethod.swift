@@ -72,7 +72,8 @@ struct APIRouteMethod {
              .updateLoan,
              .updateCredit,
              .updateActive,
-             .onboardUser:
+             .onboardUser,
+             .confirmUser:
             return .put
         case .updateIncomeSourcePosition,
              .updateExpenseSourcePosition,
@@ -81,7 +82,8 @@ struct APIRouteMethod {
              .updateUserSubscription,
              .updateDeviceToken,
              .updateActivePosition,
-             .updateConnection:
+             .updateConnection,
+             .duplicateTransaction:
             return .patch
         case .destroySession,
              .destroyIncomeSource,

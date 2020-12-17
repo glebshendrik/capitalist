@@ -12,17 +12,25 @@ import SwiftDate
 import SwifterSwift
 
 enum APIRoute: URLRequestConvertible {
+    static var baseURLKey: String {
+        return "baseURLString"
+    }
+    
+    static var storedBaseURLString: String? {
+        return UserDefaults.standard.string(forKey: APIRoute.baseURLKey)
+    }
+    
     static var baseURLString: String {
         switch UIApplication.shared.inferredEnvironment {
         case .debug:
 //            return "https://api.threebaskets.net"
 //            return "https://skrudzh-staging.herokuapp.com"
 //            return "https://test.threebaskets.net"
-            return "http://localhost:8090"
+            return storedBaseURLString ?? "https://skrudz.tempio.app"
 //            return "https://staging.threebaskets.net"
 //            return "https://api.threebaskets.net"
         case .testFlight:
-            return "http://localhost:8090"
+            return storedBaseURLString ?? "https://api.threebaskets.net"
 //            return "https://skrudz.tempio.app"
 //            return "https://test.threebaskets.net"
         case .appStore:
@@ -42,6 +50,7 @@ enum APIRoute: URLRequestConvertible {
     case updateDeviceToken(form: UserDeviceTokenUpdatingForm)
     case onboardUser(id: Int)
     case destroyUserData(id: Int)
+    case confirmUser(id: Int)
     
     // Sessions
     case createSession(form: SessionCreationForm)
@@ -101,6 +110,7 @@ enum APIRoute: URLRequestConvertible {
     case showTransaction(id: Int)
     case updateTransaction(form: TransactionUpdatingForm)
     case destroyTransaction(id: Int)
+    case duplicateTransaction(id: Int)
         
     // Debts
     case createDebt(form: BorrowCreationForm)

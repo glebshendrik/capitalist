@@ -22,6 +22,7 @@ protocol Transactionable : class {
     var isSelected: Bool { get set }
     var defaultIconName: String { get }
     var prototypeKey: String? { get }
+    var isVirtual: Bool { get }
 }
 
 extension Transactionable {

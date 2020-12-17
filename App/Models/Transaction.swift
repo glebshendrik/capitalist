@@ -40,6 +40,11 @@ enum TransactionableType : String, Codable {
     }
 }
 
+enum TransactionRemoteStatus : String, Codable {
+    case pending = "pending"
+    case posted = "posted"
+}
+
 struct Transaction : Decodable {
     let id: Int
     let userId: Int
@@ -78,6 +83,11 @@ struct Transaction : Decodable {
     let active: Active?
     let profitCents: Int?
     let sourceIncomeSourceId: Int?
+    let accountId: Int?
+    let saltedgeTransactionId: String?
+    let saltedgeTransactionStatus: TransactionRemoteStatus?
+    let isAutoCategorized: Bool = false
+    let isChangeable: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -116,6 +126,11 @@ struct Transaction : Decodable {
         case active = "active"
         case profitCents = "profit"
         case sourceIncomeSourceId = "source_income_source_id"
+        case saltedgeTransactionId = "salt_edge_transaction_id"
+        case accountId = "account_id"
+        case saltedgeTransactionStatus = "salt_edge_transaction_status"
+        case isAutoCategorized = "is_auto_categorized"
+        case isChangeable = "is_changeable"
     }    
 }
 
@@ -201,6 +216,8 @@ struct TransactionUpdatingForm : Encodable, Validatable {
     let convertedAmountCurrency: String?
     let gotAt: Date?
     let comment: String?
+    let returningBorrowId: Int?
+    let isBuyingAsset: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -214,6 +231,8 @@ struct TransactionUpdatingForm : Encodable, Validatable {
         case convertedAmountCurrency = "converted_amount_currency"
         case gotAt = "got_at"
         case comment
+        case returningBorrowId = "returning_borrow_id"
+        case isBuyingAsset = "buying_asset"
     }
     
     func validate() -> [String : String]? {

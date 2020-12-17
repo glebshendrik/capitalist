@@ -42,7 +42,7 @@ class BorrowEditTableController : FormFieldsTableViewController {
     @IBOutlet weak var returnCell: UITableViewCell!
     @IBOutlet weak var removeCell: UITableViewCell!
     
-    var delegate: BorrowEditTableControllerDelegate?
+    weak var delegate: BorrowEditTableControllerDelegate?
     
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate

@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol StatisticsTitleViewDelegate {
+protocol StatisticsTitleViewDelegate : class {
     func didTapTitle()
 }
 
 class StatisticsTitleView : CustomXibView {
     @IBOutlet weak var titleLabel: UILabel!
     
-    var delegate: StatisticsTitleViewDelegate?
+    weak var delegate: StatisticsTitleViewDelegate?
     
     var dateRangeFilter: DateRangeTransactionFilter? {
         didSet {

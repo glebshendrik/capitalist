@@ -21,7 +21,7 @@ class ResetPasswordTableController : SaveAccessoryFormFieldsTableViewController 
     @IBOutlet weak var resetPasswordCell: UITableViewCell!
     @IBOutlet weak var resetPasswordButton: HighlightButton!
     
-    var delegate: ResetPasswordTableControllerDelegate?
+    weak var delegate: ResetPasswordTableControllerDelegate?
     
     override var formFieldsTableViewControllerDelegate: FormFieldsTableViewControllerDelegate? {
         return delegate

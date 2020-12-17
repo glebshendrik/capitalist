@@ -51,7 +51,6 @@ class CreditTableViewCell : UITableViewCell {
         progressView.labelsColor = UIColor.by(.white100)
         progressView.progressWidth = progressView.bounds.width * paymentsProgress
         
-        iconView.iconType = .raster
         iconView.vectorIconMode = .fullsize
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = placeholderName

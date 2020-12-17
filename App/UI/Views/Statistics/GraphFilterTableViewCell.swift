@@ -32,7 +32,6 @@ class GraphFilterTableViewCell : UITableViewCell {
         iconView.iconTintColor = viewModel.coloringType == .icon ? viewModel.color : UIColor.by(.white100)
         iconView.vectorBackgroundViewColor = viewModel.coloringType == .icon ? viewModel.color : UIColor.by(.white100)
         iconView.vectorIconMode = .compact
-        iconView.iconType = viewModel.iconType
         
         titleLabel.text = viewModel.title
         valueLabel.text = viewModel.amountFormatted

@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 import SwiftDate
 
-protocol TransactionEditViewControllerDelegate {
+protocol TransactionEditViewControllerDelegate : class {
     var isSelectingTransactionables: Bool { get }
     func didCreateTransaction(id: Int, type: TransactionType)
     func didUpdateTransaction(id: Int, type: TransactionType)
@@ -22,7 +22,7 @@ protocol TransactionEditViewControllerDelegate {
 class TransactionEditViewController : FormNavBarButtonsEditViewController {
     var viewModel: TransactionEditViewModel!
     var tableController: TransactionEditTableController!
-    var delegate: TransactionEditViewControllerDelegate?
+    weak var delegate: TransactionEditViewControllerDelegate?
     
     var titleView: TransactionEditTitleView!
     

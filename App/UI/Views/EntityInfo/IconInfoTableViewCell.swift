@@ -40,7 +40,6 @@ class IconInfoTableViewCell : EntityInfoTableViewCell {
     override func updateUI() {
         guard let field = iconField else { return }
         
-        iconView.iconType = field.iconType
         iconView.vectorIconMode = .fullsize
         iconView.iconURL = field.iconURL
         iconView.defaultIconName = field.placeholder

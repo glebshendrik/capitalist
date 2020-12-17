@@ -45,7 +45,7 @@ class ProductViewModel {
     
     var discountTitle: String? {
         guard let savingPercent = savingPercent else { return nil }
-        return "\(NSLocalizedString("Скидка", comment: "Скидка")) ≈\(formattedPercent(savingPercent))"
+        return "\(NSLocalizedString("Скидка", comment: "")) ≈\(formattedPercent(savingPercent))"
     }
     
     var discountDescription: String? {

@@ -102,6 +102,7 @@ extension TransactionEditViewController {
         tableController.amountField.placeholder = viewModel.destinationAmountTitle
         tableController.amountField.subValue = viewModel.destinationCurrencyCode
         tableController.amountField.currency = viewModel.sourceCurrency
+        tableController.amountField.isEnabled = viewModel.canChangeAmount
         tableController.set(cell: tableController.amountCell, hidden: viewModel.amountFieldHidden, animated: false, reload: false)
     }
     
@@ -114,6 +115,8 @@ extension TransactionEditViewController {
         tableController.exchangeField.convertedAmountPlaceholder = viewModel.convertedAmountPlaceholder
         tableController.exchangeField.convertedAmountSelectedTitle = viewModel.destinationAmountTitle
         tableController.exchangeField.convertedCurrency = viewModel.destinationCurrency
+        tableController.exchangeField.amountField.isEnabled = viewModel.canChangeAmount
+        tableController.exchangeField.convertedAmountField.isEnabled = viewModel.canChangeConvertedAmount
         tableController.set(cell: tableController.exchangeCell, hidden: viewModel.exchangeAmountsFieldHidden, animated: false, reload: false)
     }
         

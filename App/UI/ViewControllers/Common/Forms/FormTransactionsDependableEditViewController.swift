@@ -25,15 +25,7 @@ class FormTransactionsDependableEditViewController : FormNavBarButtonsEditViewCo
                                     self.deleteTransactions = false
                                     self.remove()
         })
-        
-        alertController.addAction(title: NSLocalizedString("Удалить вместе с транзакциями", comment: "Удалить вместе с транзакциями"),
-                                  style: .destructive,
-                                  isEnabled: true,
-                                  handler: { _ in
-                                    self.deleteTransactions = true
-                                    self.remove()
-        })
-        
+                
         alertController.addAction(title: NSLocalizedString("Отмена", comment: "Отмена"),
                                   style: .cancel,
                                   isEnabled: true,

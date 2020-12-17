@@ -115,14 +115,16 @@ class TransactionableCell : UICollectionViewCell, TransactionableCellProtocol {
     }
     
     func setupDeleteButton() {
-        (deleteButton as? EditableCellButton)?.didTap {
+        (deleteButton as? EditableCellButton)?.didTap { [weak self] in
+            guard let self = self else { return }
             self.delegate?.didTapDeleteButton(cell: self)
         }
         contentView.addSubview(deleteButton)
     }
     
     func setupEditButton() {
-        (editButton as? EditableCellButton)?.didTap {
+        (editButton as? EditableCellButton)?.didTap { [weak self] in
+            guard let self = self else { return }
             self.delegate?.didTapEditButton(cell: self)
         }
         contentView.addSubview(editButton)

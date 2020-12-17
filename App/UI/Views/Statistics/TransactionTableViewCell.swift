@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class TransactionTableViewCell : UITableViewCell {
+class TransactionTableViewCell : SwipeTableViewCell {
     
     @IBOutlet weak var iconView: IconView!
     @IBOutlet weak var sourceTitleLabel: UILabel!
@@ -17,6 +18,8 @@ class TransactionTableViewCell : UITableViewCell {
     @IBOutlet weak var delimeter: UIView?
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var bankTransactionIndicatorContainer: UIView!
+    @IBOutlet weak var bankTransactionIndicator: UIImageView!
     
     var viewModel: TransactionViewModel? {
         didSet {
@@ -29,8 +32,7 @@ class TransactionTableViewCell : UITableViewCell {
         
         delimeter?.alpha = 0.3
                                 
-        iconView.iconType = viewModel.iconType
-        iconView.vectorIconMode = .compact
+        iconView.vectorIconMode = .medium
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = viewModel.iconPlaceholder
         iconView.backgroundViewColor = .clear
@@ -43,6 +45,17 @@ class TransactionTableViewCell : UITableViewCell {
         typeLabel.text = viewModel.typeDescription
         commentLabel.text = viewModel.comment
         typeLabel.textColor = UIColor.by(viewModel.typeDescriptionColorAsset)
+        
+        bankTransactionIndicatorContainer.isHidden = viewModel.remoteIndicatorHidden
+        if  let bankTransactionIndicatorName = viewModel.remoteIndicatorName,
+            let bankTransactionIndicatorColor = viewModel.remoteIndicatorColor {
+            
+            bankTransactionIndicator.image = UIImage(named: bankTransactionIndicatorName)
+            bankTransactionIndicator.tintColor = UIColor.by(bankTransactionIndicatorColor)
+        }
+        else {
+            bankTransactionIndicator.image = nil
+        }
         
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale

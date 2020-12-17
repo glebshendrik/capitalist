@@ -26,7 +26,6 @@ class IncomeSourceTableViewCell : SwipeTableViewCell {
         nameLabel.text = viewModel.name
         incomeAmountLabel.text = viewModel.amountRounded
         
-        iconView.iconType = .raster
         iconView.vectorIconMode = .fullsize
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = viewModel.defaultIconName
