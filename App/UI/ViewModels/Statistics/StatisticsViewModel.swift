@@ -1,6 +1,6 @@
 //
 //  StatisticsViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 22/03/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -28,6 +28,7 @@ class StatisticsViewModel {
     private var sections: [StatisticsViewSection] = []
     private var transactionsSections: [TransactionsSection] = []    
     private let graphFiltersSection: GraphFiltersSection
+    private let clearFiltersSection: ClearFiltersSection
     
     var numberOfSections: Int {
         return sections.count
@@ -55,6 +56,7 @@ class StatisticsViewModel {
         self.accountCoordinator = accountCoordinator
         graphViewModel = GraphViewModel(transactionsViewModel: self.transactionsViewModel, periodsViewModel: self.periodsViewModel)
         graphFiltersSection = GraphFiltersSection(viewModel: graphViewModel)
+        clearFiltersSection = ClearFiltersSection()
     }
     
     func section(at index: Int) -> StatisticsViewSection? {
@@ -147,6 +149,10 @@ class StatisticsViewModel {
         
         if isDataLoading {
             sections.append(TransactionsLoadingSection())
+        }
+
+        if hasTransactionableFilters {
+            sections.append(clearFiltersSection)
         }
         
         if graphViewModel.hasData {

@@ -1,6 +1,6 @@
 //
 //  FormEditViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 10/07/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -57,17 +57,20 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     func loadData() {
         operationStarted()
         
-        _ = firstly {
-                loadDataPromise()
-            }.catch { _ in
-                if let loadErrorMessage = self.loadErrorMessage {
-                    self.messagePresenterManager.show(navBarMessage: loadErrorMessage, theme: .error)
-                }
+        firstly {
+            loadDataPromise()
+        }.done {
+            self.didLoadData()
+        }
+        .catch { _ in
+            if let loadErrorMessage = self.loadErrorMessage {
+                self.messagePresenterManager.show(navBarMessage: loadErrorMessage, theme: .error)
             }
-            .finally {
-                self.updateUI()
-                self.operationFinished()
-            }
+        }
+        .finally {
+            self.updateUI()
+            self.operationFinished()
+        }
     }
     
     func save() {
@@ -141,8 +144,8 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     }
     
     func close(completion: (() -> Void)? = nil) {
-        if isModal {
-            navigationController?.dismiss(animated: true, completion: completion)
+        if isModal || isRoot {
+            closeButtonHandler(completion: completion)
         }
         else {
             navigationController?.popViewController(animated: true, completion)
@@ -201,6 +204,10 @@ class FormEditViewController : UIViewController, UIMessagePresenterManagerDepend
     
     func removePromise() -> Promise<Void> {
         return Promise.value(())
+    }
+    
+    func didLoadData() {
+        
     }
     
     func didSave() {

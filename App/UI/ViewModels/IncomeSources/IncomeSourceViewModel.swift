@@ -1,6 +1,6 @@
 //
 //  IncomeSourceViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 13/12/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -102,6 +102,14 @@ class IncomeSourceViewModel : TransactionSource {
     
     var activeId: Int? {
         return incomeSource.activeId
+    }
+    
+    var description: String? {
+        return incomeSource.description
+    }
+    
+    var isTreatedAsUnlinked: Bool {
+        return !isVirtual && !isBorrowOrReturn && !isChild && prototypeKey == nil
     }
     
     init(incomeSource: IncomeSource) {

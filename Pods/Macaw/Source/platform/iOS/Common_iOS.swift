@@ -11,6 +11,7 @@ import Foundation
 #if os(iOS)
 import UIKit
 
+public typealias MWindow = UIWindow
 public typealias MRectCorner = UIRectCorner
 public typealias MFont = UIFont
 public typealias MFontDescriptor = UIFontDescriptor
@@ -95,6 +96,12 @@ extension MFont {
 extension UIScreen {
     var mScale: CGFloat {
         return self.scale
+    }
+}
+
+extension UIBezierPath {
+    var mUsesEvenOddFillRule: Bool {
+        return self.usesEvenOddFillRule
     }
 }
 

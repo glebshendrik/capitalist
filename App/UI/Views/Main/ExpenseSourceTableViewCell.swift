@@ -1,6 +1,6 @@
 //
 //  ExpenseSourceTableViewCell.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 14/03/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -34,6 +34,7 @@ class ExpenseSourceTableViewCell : SwipeTableViewCell {
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = viewModel.defaultIconName
         iconView.backgroundViewColor = UIColor.by(.gray1)
+        iconView.vectorBackgroundViewColor = UIColor.by(.white100)
         iconView.iconTintColor = UIColor.by(.white100)
     }
 }

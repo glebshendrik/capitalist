@@ -1,6 +1,6 @@
 //
 //  ServicesAssembly.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -51,5 +51,7 @@ class ServicesAssembly: Assembly {
         container.autoregister(ActivesServiceProtocol.self, initializer: ActivesService.init)
         
         container.autoregister(TransactionableExamplesServiceProtocol.self, initializer: TransactionableExamplesService.init)
+        
+        container.autoregister(SaltEdgeCustomersServiceProtocol.self, initializer: SaltEdgeCustomersService.init)
     }
 }

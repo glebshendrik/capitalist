@@ -1,6 +1,6 @@
 //
 //  ApplicationExtensions.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -26,6 +26,39 @@ extension SwiftyBeaver {
 extension UITableView {
     func reloadData(with animation: UITableView.RowAnimation) {        
         reloadSections(IndexSet(integersIn: 0..<numberOfSections), with: animation)
+    }
+}
+
+protocol Home : UIViewController {
+    func cameHome(from: Infrastructure.ViewController)
+}
+
+protocol Away : UIViewController {
+    var home: Home? { get set }
+    var id: String { get }
+}
+
+extension Away where Self : UIViewController {
+    func notifyCameHome(from: Infrastructure.ViewController) {
+        self.home?.cameHome(from: from)
+    }
+}
+
+extension UIViewController {
+    var away: Away? {
+        let selfAway = self as? Away
+        let presentingAway = (self as? UINavigationController)?.presentedViewController as? Away
+        let pushingAway = (self as? UINavigationController)?.topViewController as? Away
+        return selfAway ?? presentingAway ?? pushingAway
+    }
+    
+    var isAway: Bool {
+        return away != nil
+    }
+    
+    func from(home: Home?) -> UIViewController {
+        away?.home = home
+        return self
     }
 }
 
@@ -114,6 +147,10 @@ extension UIViewController {
         } else {
             return self
         }
+    }
+    
+    var isCurrentTopmostPresentedViewController: Bool {
+        return topmostPresentedViewController == self
     }
 }
 
@@ -653,6 +690,10 @@ extension Locale {
 extension UIViewController {
     func modal(_ viewController: UIViewController?, animated: Bool = true, completion: (() -> Void)? = nil) {
         guard let viewController = viewController else { return }
+        UIApplication
+            .shared
+            .sendAction(#selector(UIApplication.resignFirstResponder),
+                        to: nil, from: nil, for: nil)
         present(viewController, animated: animated, completion: completion)
     }
     
@@ -662,7 +703,7 @@ extension UIViewController {
         navigationController?.pushViewController(viewController, animated: animated)
     }
     
-    func sheet(title: String?, actions: [UIAlertAction], message: String? = nil, preferredStyle: UIAlertController.Style = .actionSheet) {
+    func sheet(title: String?, actions: [UIAlertAction], message: String? = nil, preferredStyle: UIAlertController.Style = .actionSheet, addCancel: Bool = true, cancel: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title,
                                                 message: message,
                                                 preferredStyle: preferredStyle)
@@ -671,10 +712,13 @@ extension UIViewController {
             alertController.addAction(action)
         }
         
-        alertController.addAction(title: NSLocalizedString("Отмена", comment: "Отмена"),
-                                  style: .cancel,
-                                  isEnabled: true,
-                                  handler: nil)
+        if addCancel {
+            alertController.addAction(title: NSLocalizedString("Отмена", comment: "Отмена"),
+                                      style: .cancel,
+                                      isEnabled: true,
+                                      handler: cancel)
+        }
+        
         modal(alertController, animated: true)
     }
     
@@ -817,25 +861,25 @@ extension UICollectionView {
     }
 }
 
-extension UIWindow {
-    func addBlur(with id: Int) {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        blurView.frame = self.frame
-        blurView.tag = id
-        self.addSubview(blurView)
-    }
-    
-    func removeBlur(with id: Int) {
-        guard let blurView = self.viewWithTag(id) else { return }
-        UIView.animate(withDuration: 0.2, animations: {
-            blurView.alpha = 0
-        }) { _ in
-            blurView.removeFromSuperview()
-        }
-    }
-}
+//extension UIWindow {
+//    func addBlur(with id: Int) {
+//        let blurEffect = UIBlurEffect(style: .dark)
+//        let blurView = UIVisualEffectView(effect: blurEffect)
+//        blurView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+//        blurView.frame = self.frame
+//        blurView.tag = id
+//        self.addSubview(blurView)
+//    }
+//    
+//    func removeBlur(with id: Int) {
+//        guard let blurView = self.viewWithTag(id) else { return }
+//        UIView.animate(withDuration: 0.2, animations: {
+//            blurView.alpha = 0
+//        }) { _ in
+//            blurView.removeFromSuperview()
+//        }
+//    }
+//}
 
 extension Date {
     func replacing(hour: Int, minute: Int) -> Date? {
@@ -906,6 +950,16 @@ extension UIScrollView {
         refreshControlFooterTitleLabel?.font = UIFont(name: "Roboto-Light", size: 13)
         refreshControl = UIRefreshControl(frame: .zero)
         refreshControl?.tintColor = .clear
+    }
+}
+
+extension Data {
+    var prettyPrintedJSONString: String? { /// NSString gives us a nice sanitized debugDescription
+        guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
+              let data = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+              let prettyPrintedString = String(data: data, encoding: String.Encoding.utf8) else { return nil }
+        
+        return prettyPrintedString
     }
 }
 

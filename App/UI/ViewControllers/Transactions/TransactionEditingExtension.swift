@@ -1,6 +1,6 @@
 //
 //  TransactionEditingExtension.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 06/08/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -58,12 +58,6 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
     
     func didTapSource() {
-        guard   let delegate = delegate,
-                !delegate.isSelectingTransactionables else {
-            close()
-            return
-        }
-        
         guard viewModel.canChangeSource else { return }
         didTap(transactionableType: viewModel.sourceType,
                transactionPart: .source,
@@ -73,12 +67,6 @@ extension TransactionEditViewController : TransactionEditTableControllerDelegate
     }
         
     func didTapDestination() {
-        guard   let delegate = delegate,
-                !delegate.isSelectingTransactionables else {
-            close()
-            return
-        }
-        
         guard viewModel.canChangeDestination else { return }
         didTap(transactionableType: viewModel.destinationType,
                transactionPart: .destination,
@@ -276,6 +264,30 @@ extension TransactionEditViewController {
                                                basketType: active.basketType,
                                                costCents: viewModel.amountCents))
     }
+    
+    func askForUpdateSimilars() {
+        let updateSimilarsAction = UIAlertAction(title: NSLocalizedString("Обновить", comment: ""),
+                                                  style: .default,
+                                                  handler: { _ in
+                                                    self.viewModel.updateSimilarTransactions = true
+                                                    super.save()
+                                                  })
+        let keepSimilarsAction = UIAlertAction(title: NSLocalizedString("Не обновлять", comment: ""),
+                                                 style: .default,
+                                                 handler: { _ in
+                                                    self.viewModel.updateSimilarTransactions = false
+                                                    super.save()
+                                                 })
+        
+        var message = NSLocalizedString("Похожие транзакции с комментарием:", comment: "")
+        message = "\(message)\n\(viewModel.comment ?? "")"
+        
+        sheet(title: NSLocalizedString("Обновить похожие транзакции?", comment: ""),
+              actions: [updateSimilarsAction, keepSimilarsAction],
+              message: message,
+              preferredStyle: .alert,
+              addCancel: false)
+    }
 }
 
 extension TransactionEditViewController : ActiveEditViewControllerDelegate {
@@ -427,7 +439,7 @@ extension TransactionEditViewController {
     
     private func showBorrowingIncomeSheet(source: IncomeSourceViewModel, destination: ExpenseSourceViewModel) {
         let creditAction = UIAlertAction(title: NSLocalizedString("Взять в кредит", comment: "Взять в кредит"), style: .default) { _ in
-            self.showCreditEditScreen(destination: destination)
+            self.showCreditEditScreen(source: source, destination: destination)
         }
         
         let loanAction = UIAlertAction(title: NSLocalizedString("Занять", comment: "Занять"), style: .default) { _ in
@@ -477,14 +489,19 @@ extension TransactionEditViewController {
     }
     
     private func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
-        closeButtonHandler() {
-            self.delegate?.shouldShowBorrowEditScreen(type: type, source: source, destination: destination)
+        closeButtonHandler() {            
+            self.delegate?.shouldShowBorrowEditScreen(type: type,
+                                                      source: source,
+                                                      destination: destination,
+                                                      borrowingTransaction: self.viewModel.transaction)
         }
     }
     
-    private func showCreditEditScreen(destination: TransactionDestination) {
+    private func showCreditEditScreen(source: IncomeSourceViewModel, destination: TransactionDestination) {
         closeButtonHandler() {
-            self.delegate?.shouldShowCreditEditScreen(destination: destination)
+            self.delegate?.shouldShowCreditEditScreen(source: source,
+                                                      destination: destination,
+                                                      creditingTransaction: self.viewModel.transaction)
         }
     }
 }
@@ -492,6 +509,7 @@ extension TransactionEditViewController {
 extension TransactionEditViewController : WaitingBorrowsViewControllerDelegate {
     func didSelect(borrow: BorrowViewModel, source: TransactionSource, destination: TransactionDestination) {
         update(source: source, destination: destination, returningBorrow: borrow)
+        save()
     }
 }
 

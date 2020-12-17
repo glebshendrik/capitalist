@@ -1,6 +1,6 @@
 //
 //  APIResourceKeyPath.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -27,6 +27,8 @@ struct APIResource {
              .destroyUserData,
              .confirmUser:
             return APIResource(singular: "user", plural: "users")
+        case .createCustomer:
+            return APIResource(singular: "salt_edge_customer", plural: "salt_edge_customers")
         case .createPasswordResetCode:
             return APIResource(singular: "password_reset_code", plural: "password_reset_codes")
         case .createSession,
@@ -46,6 +48,7 @@ struct APIResource {
              .indexExpenseSources,
              .updateExpenseSource,
              .updateExpenseSourcePosition,
+             .updateExpenseSourceMaxFetchInterval,
              .destroyExpenseSource:
             return APIResource(singular: "expense_source", plural: "expense_sources")
         case .createExpenseCategory,

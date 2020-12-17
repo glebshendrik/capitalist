@@ -1,6 +1,6 @@
 //
 //  NotificationsHandler.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -18,25 +18,33 @@ class NotificationsHandler: NotificationsHandlerProtocol {
     
     func handleNotification(category: NotificationCategory?,
                             action: NotificationAction?,
-                            applicationStateWhenReceivedNotification state: UIApplication.State) {
+                            applicationStateWhenReceivedNotification state: UIApplication.State) -> NotificationHandleDecision {
         
         navigator.updateBadges()
+        navigator.triggerDestinationUpdate()
         
         let applicationWasActive = state == UIApplication.State.active
         
         if  applicationWasActive,
-            let viewController = category?.destinationViewController(with: action),
-            navigator.isDestinationViewControllerVisible(viewController) {
-            
-            navigator.triggerDestinationUpdate()
+            let category = category,
+            let viewController = category.destinationViewController(with: action),
+            navigator.isDestinationViewControllerVisible(viewController, with: category) {
+                        
+            return .update
         }
         else {
-            navigateToDestination(of: category, with: action)
+//            navigateToDestination(of: category, with: action)
+            return .navigate(category: category, action: action)
         }
     }
     
-    private func navigateToDestination(of category: NotificationCategory?, with action: NotificationAction?) {
-        guard let viewController = category?.destinationViewController(with: action) else { return }
-        navigator.navigate(to: viewController)
+    func navigateToDestination(of category: NotificationCategory?, with action: NotificationAction?) {
+        guard
+            let category = category,
+            let viewController = category.destinationViewController(with: action)
+        else {
+            return
+        }
+        navigator.navigate(to: viewController, with: category)
     }
 }

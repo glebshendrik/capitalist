@@ -1,6 +1,6 @@
 //
 //  UIFactoryProtocol.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 31/07/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -14,6 +14,7 @@ protocol UIFactoryDependantProtocol {
 }
 
 protocol UIFactoryProtocol {
+    func appUpdateViewController() -> UINavigationController?
     func iconsViewController(delegate: IconsViewControllerDelegate,
                              iconCategory: IconCategory) -> UINavigationController?
     
@@ -24,22 +25,16 @@ protocol UIFactoryProtocol {
     func reminderEditViewController(delegate: ReminderEditViewControllerDelegate,
                                     viewModel: ReminderViewModel) -> UINavigationController?
     
-    func providersViewController(delegate: ProvidersViewControllerDelegate, fetchDataFrom: Date?) -> ProvidersViewController?
-    
-    func accountsViewController(delegate: AccountsViewControllerDelegate,
-                                connection: Connection,
-                                currencyCode: String?,
-                                nature: AccountNatureType) -> AccountsViewController?
+    func providersViewController(delegate: ProvidersViewControllerDelegate,
+                                 codes: [String]) -> UINavigationController?
     
     func connectionViewController(delegate: ConnectionViewControllerDelegate,
                                   providerViewModel: ProviderViewModel?,
-                                  connectionType: ProviderConnectionType,
-                                  connectionURL: URL,
-                                  connection: Connection?) -> UINavigationController?
+                                  connection: Connection?,
+                                  connectionSession: ConnectionSession) -> UINavigationController?
     
-    func commentViewController(delegate: CommentViewControllerDelegate,
-                               text: String?,
-                               placeholder: String) -> CommentViewController?
+    func accountsViewController(delegate: AccountsViewControllerDelegate,
+                                expenseSource: ExpenseSource) -> AccountsViewController?
     
     func datePickerViewController(delegate: DatePickerViewControllerDelegate,
                                   date: Date?,
@@ -91,7 +86,8 @@ protocol UIFactoryProtocol {
                                   type: BorrowType,
                                   borrowId: Int?,
                                   source: TransactionSource?,
-                                  destination: TransactionDestination?) -> UINavigationController?
+                                  destination: TransactionDestination?,
+                                  borrowingTransaction: Transaction?) -> UINavigationController?
     
     func borrowInfoViewController(borrowId: Int?,
                                   borrowType: BorrowType?,
@@ -99,7 +95,9 @@ protocol UIFactoryProtocol {
     
     func creditEditViewController(delegate: CreditEditViewControllerDelegate,
                                   creditId: Int?,
-                                  destination: TransactionDestination?) -> UINavigationController?
+                                  source: IncomeSourceViewModel?,
+                                  destination: TransactionDestination?,
+                                  creditingTransaction: Transaction?) -> UINavigationController?
     
     func creditInfoViewController(creditId: Int?, credit: CreditViewModel?) -> UINavigationController?
         
@@ -133,7 +131,8 @@ protocol UIFactoryProtocol {
     func incomeSourceInfoViewController(incomeSource: IncomeSourceViewModel?) -> UINavigationController?
     
     func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
-                                         expenseSource: ExpenseSource?) -> UINavigationController?
+                                         expenseSource: ExpenseSource?,
+                                         shouldSkipExamplesPrompt: Bool) -> UINavigationController?
     
     func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
                                          example: TransactionableExampleViewModel) -> UINavigationController?
@@ -166,4 +165,12 @@ protocol UIFactoryProtocol {
     func subscriptionNavigationViewController(requiredPlans: [SubscriptionPlan]) -> UINavigationController?
     
     func subscriptionViewController(requiredPlans: [SubscriptionPlan]) -> SubscriptionViewController?
+    
+    func experimentalBankFeatureViewController(delegate: ExperimentalBankFeatureViewControllerDelegate) -> UINavigationController?
+    
+    func transactionableExamplesViewController(delegate: TransactionableExamplesViewControllerDelegate,
+                                               transactionableType: TransactionableType,
+                                               isUsed: Bool) -> TransactionableExamplesViewController?
+    
+    func prototypesLinkingViewController(linkingType: TransactionableType) -> UINavigationController?
 }

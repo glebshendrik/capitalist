@@ -1,6 +1,6 @@
 //
 //  ExpenseSourceEditViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 26/12/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -13,12 +13,15 @@ enum ExpenseSourceUpdatingError : Error {
     case updatingExpenseSourceIsNotSpecified
 }
 
-class ExpenseSourceEditViewModel {
+class ExpenseSourceEditViewModel : TransactionableExamplesDependantProtocol {
     private let expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
-    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol
+    private let bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol    
+    var transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol
     
     private var expenseSource: ExpenseSource? = nil
+    
+    let bankConnectableViewModel: BankConnectableViewModel
     
     var selectedIconURL: URL? = nil
     var selectedCurrency: Currency? = nil
@@ -26,7 +29,6 @@ class ExpenseSourceEditViewModel {
     var name: String? = nil
     var amount: String? = nil
     var creditLimit: String? = nil
-    var accountConnectionAttributes: AccountConnectionNestedAttributes? = nil
     
     var amountToSave: String {
         guard   let amount = amount,
@@ -66,24 +68,10 @@ class ExpenseSourceEditViewModel {
         return .expenseSource
     }
     
-    var accountConnected: Bool {
-        guard let accountConnectionAttributes = accountConnectionAttributes else {
-            return false
-        }
+    var connectionConnected: Bool {
+        return bankConnectableViewModel.connectionConnected
+    }
         
-        return accountConnectionAttributes.shouldDestroy == nil
-    }
-    
-    var bankButtonTitle: String {
-        return accountConnected
-            ? NSLocalizedString("Отключить банк", comment: "Отключить банк")
-            : NSLocalizedString("Подключить банк", comment: "Подключить банк")
-    }
-       
-    var fetchDataFrom: Date? {
-        return isNew ? Date()?.adding(.year, value: -1).adding(.day, value: 1).adding(.minute, value: 5) : expenseSource?.fetchDataFrom
-    }
-    
     var iconType: IconType {
         return selectedIconURL?.iconType ?? .raster
     }
@@ -91,62 +79,102 @@ class ExpenseSourceEditViewModel {
     // Permissions
     
     var canChangeIcon: Bool {
-        return !accountConnected
+        return !connectionConnected && !connectable
     }
     
     var canChangeCurrency: Bool {
-        return !accountConnected && isNew
+        return !(expenseSource?.hasTransactions ?? false) && !bankConnectableViewModel.accountConnected
     }
     
     var canChangeAmount: Bool {
-        return !accountConnected
+        return !connectionConnected
     }
     
     var canChangeCreditLimit: Bool {
-        return !accountConnected
+        return !connectionConnected
     }
     
-    var canCardType: Bool {
-        return !accountConnected
+    var canChangeCardType: Bool {
+        return !connectionConnected
     }
-    
-    var canConnectBank: Bool {
-        return accountCoordinator.hasPlatinumSubscription
-    }
-    
+        
     // Visibility
         
     var iconPenHidden: Bool {
         return !canChangeIcon
     }
-    
-    var customIconHidden: Bool {
-        return accountConnected
-    }
-    
-    var bankIconHidden: Bool {
-        return !accountConnected
+        
+    var bankButtonHidden: Bool {
+        return connectionConnected || !(isNew && connectable)
     }
                     
     var removeButtonHidden: Bool {
         return isNew
     }
-    
-    var bankButtonHidden: Bool {
-        guard let currentUser = currentUser else {
-            return true
-        }
-        return !currentUser.onboarded
+        
+    var bankButtonTitle: String {
+        return NSLocalizedString("Подключить банк", comment: "Подключить банк")
     }
     
     var currentUser: User? = nil
     
+    var numberOfUnusedExamples: Int = 0
+    
+    var basketType: BasketType = .joy
+    
+    var example: TransactionableExampleViewModel? = nil
+    
+    var transactionableType: TransactionableType {
+        return .expenseSource
+    }
+    
+    var shouldSkipExamplesPrompt: Bool = false
+    
+    var providerCodes: [String]? {
+        return bankConnectableViewModel.providerCodes ?? example?.providerCodes
+    }
+    
+    var prototypeKey: String? {
+        return bankConnectableViewModel.prototypeKey ?? example?.prototypeKey
+    }
+    
+    var connectable: Bool {
+        return !(prototypeKey != nil && providerCodes == nil)
+    }
+    
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
+         transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol,
          bankConnectionsCoordinator: BankConnectionsCoordinatorProtocol) {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
         self.accountCoordinator = accountCoordinator
+        self.transactionableExamplesCoordinator = transactionableExamplesCoordinator
         self.bankConnectionsCoordinator = bankConnectionsCoordinator
+        self.bankConnectableViewModel = BankConnectableViewModel(bankConnectionsCoordinator: bankConnectionsCoordinator,
+                                                                 expenseSourcesCoordinator: expenseSourcesCoordinator,
+                                                                 accountCoordinator: accountCoordinator)
+    }
+    
+//    func loadProvider() -> Promise<ProviderViewModel?> {
+//        guard
+//            let providerCodes = providerCodes,
+//            providerCodes.count == 1,
+//            let code = providerCodes.first
+//        else {
+//            return Promise.value(nil)
+//        }
+//        return
+//            firstly {
+//                bankConnectionsCoordinator.loadProvider(code: code)
+//            }.then { provider -> Promise<ProviderViewModel?> in
+//                return Promise.value(ProviderViewModel(provider: provider))
+//            }
+//    }
+    
+    func loadData() -> Promise<Void> {
+        return isNew
+            ? when(fulfilled: loadDefaultCurrency(), loadExamples())
+            : loadExpenseSource()
     }
     
     func loadDefaultCurrency() -> Promise<Void> {
@@ -158,26 +186,34 @@ class ExpenseSourceEditViewModel {
                 }
     }
     
+    func loadExpenseSource() -> Promise<Void> {
+        guard
+            let expenseSourceId = expenseSource?.id
+        else {
+            return Promise.value(())
+        }
+        return
+            firstly {
+                expenseSourcesCoordinator.show(by: expenseSourceId)
+            }.get {
+                self.set(expenseSource: $0)
+            }.asVoid()
+    }
+    
     func set(expenseSource: ExpenseSource) {
         self.expenseSource = expenseSource
         
-        selectedIconURL = expenseSource.accountConnection?.account.connection.providerLogoURL ?? expenseSource.iconURL
+        selectedIconURL = expenseSource.accountConnection?.connection.providerLogoURL ?? expenseSource.iconURL
         selectedCurrency = expenseSource.currency
         selectedCardType = expenseSource.cardType
         name = expenseSource.name
         amount = expenseSource.amountCents.moneyDecimalString(with: selectedCurrency)
         creditLimit = expenseSource.creditLimitCents?.moneyDecimalString(with: selectedCurrency)
-        
-        if let accountConnection = expenseSource.accountConnection {
-            accountConnectionAttributes =
-                AccountConnectionNestedAttributes(id: accountConnection.id,
-                                                  accountId: accountConnection.account.id,                                                  
-                                                  shouldDestroy: nil)
-        }
-        
+        bankConnectableViewModel.set(expenseSource: ExpenseSourceViewModel(expenseSource: expenseSource))
     }
     
     func set(example: TransactionableExampleViewModel) {
+        self.example = example
         selectedIconURL = example.iconURL
         name = example.name
     }
@@ -200,14 +236,17 @@ class ExpenseSourceEditViewModel {
         }
         return expenseSourcesCoordinator.destroy(by: expenseSourceId, deleteTransactions: deleteTransactions)
     }
-    
-    
 }
 
 // Creation
 extension ExpenseSourceEditViewModel {
     private func create() -> Promise<Void> {
-        return expenseSourcesCoordinator.create(with: creationForm()).asVoid()
+        return
+            firstly {
+                expenseSourcesCoordinator.create(with: creationForm())
+            }.get {
+                self.set(expenseSource: $0)
+            }.asVoid()
     }
     
     private func isCreationFormValid() -> Bool {
@@ -215,21 +254,41 @@ extension ExpenseSourceEditViewModel {
     }
     
     private func creationForm() -> ExpenseSourceCreationForm {
+        let amountCents = bankConnectableViewModel.accountViewModel?.amountCents ?? amountToSave.intMoney(with: selectedCurrency)
+        let creditLimitCents = bankConnectableViewModel.accountViewModel?.creditLimitCents ?? creditLimitToSave.intMoney(with: selectedCurrency)
+        let cardType = bankConnectableViewModel.accountViewModel?.cardType ?? selectedCardType
+        selectedIconURL = bankConnectableViewModel.connection?.providerLogoURL ?? selectedIconURL
+        name = bankConnectableViewModel.accountViewModel?.name ?? bankConnectableViewModel.connection?.providerName ?? name
         return ExpenseSourceCreationForm(userId: accountCoordinator.currentSession?.userId,
                                          name: name,
                                          iconURL: selectedIconURL,
                                          currency: selectedCurrency?.code,
-                                         amountCents: amountToSave.intMoney(with: selectedCurrency),
-                                         creditLimitCents: creditLimitToSave.intMoney(with: selectedCurrency),
-                                         cardType: selectedCardType,
-                                         accountConnectionAttributes: accountConnectionAttributes)
+                                         amountCents: amountCents,
+                                         creditLimitCents: creditLimitCents,
+                                         cardType: cardType,
+                                         prototypeKey: example?.prototypeKey,
+                                         maxFetchInterval: bankConnectableViewModel.providerViewModel?.maxFetchInterval,
+                                         accountConnectionAttributes: bankConnectableViewModel.accountConnectionAttributes)
     }
 }
 
 // Updating
 extension ExpenseSourceEditViewModel {
     private func update() -> Promise<Void> {
-        return expenseSourcesCoordinator.update(with: updatingForm())
+        guard
+            let expenseSourceId = expenseSource?.id
+        else {
+            return Promise(error: ExpenseSourceUpdatingError.updatingExpenseSourceIsNotSpecified)
+        }
+        return
+            firstly {
+                expenseSourcesCoordinator.update(with: updatingForm())
+            }.then {
+                self.expenseSourcesCoordinator.show(by: expenseSourceId)
+            }.get {
+                self.set(expenseSource: $0)
+            }.asVoid()
+            
     }
     
     private func isUpdatingFormValid() -> Bool {
@@ -237,49 +296,19 @@ extension ExpenseSourceEditViewModel {
     }
     
     private func updatingForm() -> ExpenseSourceUpdatingForm {
+        var currencyCode = selectedCurrency?.code
+        if bankConnectableViewModel.accountConnected &&
+            expenseSource?.currency.code != bankConnectableViewModel.accountViewModel?.currencyCode {
+            currencyCode = bankConnectableViewModel.accountViewModel?.currencyCode
+        }
         return ExpenseSourceUpdatingForm(id: expenseSource?.id,
                                          name: name,
                                          iconURL: selectedIconURL,
+                                         currency: currencyCode,
                                          amountCents: amountToSave.intMoney(with: selectedCurrency),          
                                          creditLimitCents: creditLimitToSave.intMoney(with: selectedCurrency),
                                          cardType: selectedCardType,
-                                         accountConnectionAttributes: accountConnectionAttributes)
-    }
-}
-
-// Bank Connection
-extension ExpenseSourceEditViewModel {
-    func connect(accountViewModel: AccountViewModel, connection: Connection) {
-        selectedCurrency = accountViewModel.currency
-        selectedIconURL = connection.providerLogoURL
-        selectedCardType = accountViewModel.cardType
-        
-        if name == nil || isNew {
-            name = accountViewModel.name
-        }
-        
-        amount = accountViewModel.amountDecimal
-        
-        if let creditLimit = accountViewModel.creditLimitDecimal {
-            self.creditLimit = creditLimit
-        }
-        
-        var accountConnectionId: Int? = nil
-        if  let accountConnectionAttributes = accountConnectionAttributes,
-            accountConnectionAttributes.accountId == accountViewModel.id {
-            
-            accountConnectionId = accountConnectionAttributes.id
-        }
-        
-        accountConnectionAttributes =
-            AccountConnectionNestedAttributes(id: accountConnectionId,
-                                              accountId: accountViewModel.id,
-                                              shouldDestroy: nil)
-    }
-    
-    func removeAccountConnection() {
-        accountConnectionAttributes?.id = expenseSource?.accountConnection?.id
-        accountConnectionAttributes?.shouldDestroy = true
-        selectedIconURL = nil
+                                         prototypeKey: prototypeKey,
+                                         accountConnectionAttributes: bankConnectableViewModel.accountConnectionAttributes)
     }
 }

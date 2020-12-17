@@ -1,6 +1,6 @@
 //
 //  APIClient.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -33,7 +33,7 @@ extension Formatter {
         formatter.calendar = Calendar(identifier: .iso8601)
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXX"
         return formatter
     }()
 }
@@ -71,21 +71,20 @@ class APIClient : APIClientProtocol {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
             
-            do {
-                if  let jsonDictionary = json as? [String : Any],
-                    let objectDictionary = jsonDictionary[resource.resource.singular] as? [String : Any],
-                    let object = try? decoder.decode(T.self, withJSONObject: objectDictionary) {
-                    return object
-                }
-                SwiftyBeaver.error(response)
-                if let jsonDictionary = json as? [String : Any] {
-                    SwiftyBeaver.error(jsonDictionary)
-                }
+            guard
+                let jsonDictionary = json as? [String : Any],
+                let objectDictionary = jsonDictionary[resource.resource.singular] as? [String : Any]
+            else {
+                self.log(response: response, json: json, errors: [APIRequestError.mappingFailed])
                 throw APIRequestError.mappingFailed
             }
-            catch {                
-                SwiftyBeaver.error(error)
-                throw error
+            
+            do {
+                return try decoder.decode(T.self, withJSONObject: objectDictionary)
+            }
+            catch {
+                self.log(response: response, json: json, errors: [APIRequestError.mappingFailed, error])
+                throw APIRequestError.mappingFailed
             }
         }
     }
@@ -102,23 +101,22 @@ class APIClient : APIClientProtocol {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
             
-            do {
-                if  let jsonDictionary = json as? [String : Any],
-                    let arrayOfDictionaries = jsonDictionary[resource.resource.plural] as? [[String : Any]],
-                    let objects = try? decoder.decode([T].self, withJSONObject: arrayOfDictionaries) {
-                    
-                    let totalCount = (response.response?.allHeaderFields["Items_total_count"] as? String)?.int
-                    return (objects, totalCount)
-                }
-                SwiftyBeaver.error(response)
-                if let jsonDictionary = json as? [String : Any] {
-                    SwiftyBeaver.error(jsonDictionary)
-                }
+            guard
+                let jsonDictionary = json as? [String : Any],
+                let arrayOfDictionaries = jsonDictionary[resource.resource.plural] as? [[String : Any]]
+            else {
+                self.log(response: response, json: json, errors: [APIRequestError.mappingFailed])
                 throw APIRequestError.mappingFailed
             }
+            
+            do {
+                let objects = try decoder.decode([T].self, withJSONObject: arrayOfDictionaries)
+                let totalCount = (response.response?.allHeaderFields["Items_total_count"] as? String)?.int
+                return (objects, totalCount)
+            }
             catch {
-                SwiftyBeaver.error(error)
-                throw error
+                self.log(response: response, json: json, errors: [APIRequestError.mappingFailed, error])
+                throw APIRequestError.mappingFailed
             }
         }
     }
@@ -149,31 +147,46 @@ class APIClient : APIClientProtocol {
             if let country = Locale.autoupdatingCurrent.regionCode {
                 request.addValue(country, forHTTPHeaderField: "X-REGION")
             }
+            if let build = UIApplication.shared.buildNumber {
+                request.addValue(build, forHTTPHeaderField: "X-iOS-Build")
+            }
+                        
+            log(method: request.httpMethod?.uppercased(),
+                url: request.url?.absoluteString,
+                statusCode: nil,
+                data: request.httpBody?.prettyPrintedJSONString,
+                errors: [],
+                level: .info)
+            
             return Alamofire
                 .request(request)
                 .validate(requestValidator)
                 .responseJSON()
-        } catch {            
+        } catch {
+            log(route: resource, errors: [APIRequestError.mappingFailed, error])
             return Promise(error: error)
         }
     }
     
     private func requestValidator(request: URLRequest?, response: HTTPURLResponse, data: Data?) -> Request.ValidationResult {
         if response.statusCode >= 500 {
-            SwiftyBeaver.error(response)
+            log(request: request, response: response)
         }
         switch response.statusCode {
         case 401:
+            log(request: request, response: response, errors: [APIRequestError.notAuthorized], level: .warning)
             return .failure(APIRequestError.notAuthorized)
         case 402:
+            log(request: request, response: response, errors: [APIRequestError.paymentRequired], level: .warning)
             return .failure(APIRequestError.paymentRequired)
         case 403:
-            SwiftyBeaver.error(response)
+            log(request: request, response: response, errors: [APIRequestError.forbidden], level: .warning)
             return .failure(APIRequestError.forbidden)
         case 404:
-            SwiftyBeaver.error(response)
+            log(request: request, response: response, errors: [APIRequestError.notFound], level: .warning)
             return .failure(APIRequestError.notFound)
         case 405:
+            log(request: request, response: response, errors: [APIRequestError.methodNotAllowed], level: .warning)
             return .failure(APIRequestError.methodNotAllowed)
         case 422:
             if let validData = data {
@@ -198,23 +211,81 @@ class APIClient : APIClientProtocol {
                     } else {
                         errorMessages["error"] = NSLocalizedString("Common server error", comment: "Common server error message")
                     }
+                    log(request: request, response: response, data: errorMessages.description, level: .warning)
                     return .failure(APIRequestError.unprocessedEntity(errors: errorMessages))
                 } catch {
-                    SwiftyBeaver.error(response)
-                    SwiftyBeaver.error(error)
+                    log(request: request, response: response, errors: [error])
                     return .failure(
                         AFError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)))
                 }
             }
+            log(request: request, response: response, level: .warning)
             return .failure(APIRequestError.unprocessedEntity(errors: [:]))
         case 423:
-            SwiftyBeaver.error(response)
+            log(request: request, response: response, errors: [APIRequestError.locked], level: .warning)
             return .failure(APIRequestError.locked)
         case 426:
-            SwiftyBeaver.error(response)
+            log(request: request, response: response, errors: [APIRequestError.upgradeRequired], level: .warning)
             return .failure(APIRequestError.upgradeRequired)
-        default: return .success
+        default:
+            log(request: request, response: response, data: data?.prettyPrintedJSONString, level: .info)
+            return .success
         }
     }
     
+    private func log(response: PMKAlamofireDataResponse, json: Any, errors: [Error] = [], level: SwiftyBeaver.Level = .error) {
+        log(method: response.request?.httpMethod,
+            url: response.request?.url?.absoluteString,
+            statusCode: response.response?.statusCode,
+            data: (json as? [String : Any])?.debugDescription,
+            errors: errors,
+            level: level)
+    }
+    
+    private func log(request: URLRequest?, response: HTTPURLResponse, errors: [Error] = [], data: String? = nil, level: SwiftyBeaver.Level = .error) {
+        log(method: request?.httpMethod,
+            url: request?.url?.absoluteString,
+            statusCode: response.statusCode,
+            data: data,
+            errors: errors,
+            level: level)
+    }
+    
+    private func log(route: APIRoute, errors: [Error] = [], level: SwiftyBeaver.Level = .error) {
+        log(method: "\(route.method)",
+            url: "\(route.path) \(route.urlStringQueryParameters)",
+            statusCode: nil,
+            data: "\(route)",
+            errors: errors,
+            level: level)
+    }
+    
+    private func log(method: String?, url: String?, statusCode: Int?, data: String?, errors: [Error], level: SwiftyBeaver.Level) {
+        var message = ""
+        if let statusCode = statusCode {
+            message.append("\(statusCode) ")
+        }
+        if let method = method,
+           let url = url {
+            message.append("\(method) \(url)\n")
+        }
+        errors.forEach {
+            message.append("Error: \($0)\n")
+        }
+                
+        if let data = data {
+            SwiftyBeaver.custom(level: level, message: message)
+            
+            let extendedMessage = message.appending("Data: \(data)\n")
+            if level == .error {
+                SwiftyBeaver.warning(extendedMessage)
+            }
+            if level == .info {
+                SwiftyBeaver.verbose(extendedMessage)
+            }
+        }
+        else {
+            SwiftyBeaver.custom(level: level, message: message)
+        }
+    }
 }

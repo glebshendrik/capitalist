@@ -1,6 +1,6 @@
 //
 //  TransactionsControllingExtension.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 01/04/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -68,38 +68,17 @@ extension MainViewController {
     }
 }
 
-extension MainViewController {
-    
+extension MainViewController {    
     func didSetSource(cell: UICollectionViewCell?, animated: Bool) {
-        if isSelecting {
-            cell?.set(selected: true, animated: animated)
-//            updateAdviserTip()
-        }
-        else {
-            cell?.set(selected: true, animated: animated)
-//            cell?.scaleDown(animated: animated)
-        }
+        cell?.set(selected: true, animated: animated)
     }
 
     func didSetDestination(cell: UICollectionViewCell?, animated: Bool) {
-        if isSelecting {
-            cell?.set(selected: true, animated: animated)
-//            updateAdviserTip()
-        }
-        else {
-            cell?.set(selected: true, animated: animated)
-//            cell?.scaleUp(animated: animated)
-        }
+        cell?.set(selected: true, animated: animated)
     }
 
     func didSetNormal(cell: UICollectionViewCell?, animated: Bool) {
-        if isSelecting {
-            cell?.set(selected: false, animated: animated)
-        }
-        else {
-            cell?.set(selected: false, animated: animated)
-//            cell?.unscale(animated: animated)
-        }
+        cell?.set(selected: false, animated: animated)
     }
     
     func animateTransactionCompleted(from fromCell: UICollectionViewCell?, to toCell: UICollectionViewCell, completed: (() -> Void)?) {
@@ -186,10 +165,6 @@ extension MainViewController {
 
 
 extension MainViewController : TransactionControllerDelegate {
-    var isSelecting: Bool {
-        return viewModel.selecting
-    }
-    
     var isEditingItems: Bool {
         return viewModel.editing
     }
@@ -213,44 +188,14 @@ extension MainViewController : TransactionControllerDelegate {
                 riskActivesCollectionView,
                 safeActivesCollectionView]
     }
-    
-    func select(_ transactionable: Transactionable, collectionView: UICollectionView, indexPath: IndexPath) {
-        let wasSelected = transactionable.isSelected
-        viewModel.select(transactionable)
-        if wasSelected != transactionable.isSelected {            
-            updateTotalUI(animated: true)
-            let cell = (collectionView.cellForItem(at: indexPath) as? TransactionableCell)
-            
-            if viewModel.selectedSource == nil {
-                transactionController.sourceCell = nil
-            }
-            else if transactionable.id == viewModel.selectedSource?.id && transactionable.type == viewModel.selectedSource?.type  {
-                transactionController.sourceCell = cell
-            }
-            
-            if viewModel.selectedDestination == nil {
-                transactionController.destinationCell = nil
-            }
-            else if transactionable.id == viewModel.selectedDestination?.id && transactionable.type == viewModel.selectedDestination?.type  {
-                transactionController.destinationCell = cell
-            }
-            
-            if let source = viewModel.selectedSource as? TransactionSource,
-                let destination = viewModel.selectedDestination as? TransactionDestination {
-                showTransactionEditScreen(transactionSource: source, transactionDestination: destination)
-            }
-        }
-    }
-    
-    func didSetTransactionables(source: TransactionSource, destination: TransactionDestination) {
-        showTransactionEditScreen(transactionSource: source, transactionDestination: destination)
-        setSelecting(false, animated: true)
-        completeTransactionInteraction()
-    }
-    
+        
     @objc func didRecognizeTransactionGesture(gesture: UILongPressGestureRecognizer) {
         
-        guard !isEditingItems && !isSelecting else { return }
+        guard
+            !isEditingItems
+        else {
+            return            
+        }
         
         let locationInView = gesture.location(in: self.view)
                     

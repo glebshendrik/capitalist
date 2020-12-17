@@ -1,6 +1,6 @@
 //
 //  TransactionEditViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 26/02/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -10,13 +10,17 @@ import UIKit
 import PromiseKit
 import SwiftDate
 
-protocol TransactionEditViewControllerDelegate : class {
-    var isSelectingTransactionables: Bool { get }
+protocol TransactionEditViewControllerDelegate : class {    
     func didCreateTransaction(id: Int, type: TransactionType)
     func didUpdateTransaction(id: Int, type: TransactionType)
     func didRemoveTransaction(id: Int, type: TransactionType)
-    func shouldShowCreditEditScreen(destination: TransactionDestination)
-    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination)
+    func shouldShowCreditEditScreen(source: IncomeSourceViewModel?,
+                                    destination: TransactionDestination,
+                                    creditingTransaction: Transaction?)
+    func shouldShowBorrowEditScreen(type: BorrowType,
+                                    source: TransactionSource,
+                                    destination: TransactionDestination,
+                                    borrowingTransaction: Transaction?)
 }
 
 class TransactionEditViewController : FormNavBarButtonsEditViewController {
@@ -96,8 +100,16 @@ class TransactionEditViewController : FormNavBarButtonsEditViewController {
     }
     
     override func save() {
+        if viewModel.isNewTransactionWithConnectedExpenseSource {
+            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Нельзя выбрать привязанный к банку кошелек", comment: ""),
+                                              theme: .error)
+            return
+        }
         if viewModel.shouldAskForReestimateAsset {
             askForReestimateAsset()
+        }
+        else if viewModel.shouldAskForBatchUpdateSimilars {
+            askForUpdateSimilars()
         }
         else {
             super.save()

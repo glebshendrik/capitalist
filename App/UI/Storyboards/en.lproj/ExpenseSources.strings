@@ -49,3 +49,21 @@
 
 /* Class = "UINavigationItem"; title = "Источник трат"; ObjectID = "qug-Oi-Z5f"; */
 "qug-Oi-Z5f.title" = "Wallet";
+
+/* Class = "UILabel"; text = "Экспериментальная функция"; ObjectID = "bdY-Rh-bXM"; */
+"bdY-Rh-bXM.text" = "Experimental feature";
+
+/* Class = "UILabel"; text = "Категоризация исторических транзакций из банка"; ObjectID = "WQr-5o-vZF"; */
+"WQr-5o-vZF.text" = "Categorization of bank transactions";
+
+/* Class = "UILabel"; text = "По желанию, используй функцию загрузки исторических данных по банковским транзакциям. Категории транзакций расходов и доходов будут определены автоматически. Мы гарантируем корректность транзакций в 60%, над точностью работаем. Вы можете исправить категории любых транзакций вручную."; ObjectID = "jwb-d6-BIG"; */
+"jwb-d6-BIG.text" = "Categories of income and expense transactions will be determined automatically. \n\nWe can guarantee up to 60% of correct determinations. We’re working on the algorythm’s accuracy. \n\nRemember that you can manually change a category of any transaction.";
+
+/* Class = "UILabel"; text = "Воспользоваться экспериментальной функцией?"; ObjectID = "Op3-Un-25i"; */
+"Op3-Un-25i.text" = "Use experimental feature?";
+
+/* Class = "UIButton"; normalTitle = "Да"; ObjectID = "A5V-sA-qTk"; */
+"A5V-sA-qTk.normalTitle" = "Continue";
+
+/* Class = "UIButton"; normalTitle = "Нет"; ObjectID = "Peh-Y5-bfo"; */
+"Peh-Y5-bfo.normalTitle" = "No";

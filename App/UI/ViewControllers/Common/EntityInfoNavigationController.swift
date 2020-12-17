@@ -1,6 +1,6 @@
 //
 //  EntityInfoNavigationController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 20.11.2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class EntityInfoNavigationController : UINavigationController, UIFactoryDependantProtocol, UIMessagePresenterManagerDependantProtocol, CombinedInfoTableViewCellDelegate, IconInfoTableViewCellDelegate, SwitchInfoTableViewCellDelegate, ButtonInfoTableViewCellDelegate, ReminderInfoTableViewCellDelegate, BankWarningInfoTableViewCellDelegate, TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate, CreditEditViewControllerDelegate {
-    
+class EntityInfoNavigationController : UINavigationController, UIFactoryDependantProtocol, UIMessagePresenterManagerDependantProtocol, CombinedInfoTableViewCellDelegate, IconInfoTableViewCellDelegate, SwitchInfoTableViewCellDelegate, ButtonInfoTableViewCellDelegate, ReminderInfoTableViewCellDelegate, BankConnectionInfoTableViewCellDelegate, TransactionEditViewControllerDelegate, BorrowEditViewControllerDelegate, CreditEditViewControllerDelegate, Updatable, Navigatable {
+
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var factory: UIFactoryProtocol!
     
@@ -48,6 +48,10 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
         
     }
     
+    func didUpdateData() {
+        
+    }
+    
     func didTapIcon(field: IconInfoField?) {
         
     }
@@ -68,7 +72,19 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
         
     }
     
-    func didTapBankWarningInfoButton(field: BankWarningInfoField?) {
+    func didTapConnectBankButton(field: BankConnectionInfoField) {
+        
+    }
+    
+    func didTapDisconnectBankButton(field: BankConnectionInfoField) {
+        
+    }
+    
+    func didTapReconnectBankButton(field: BankConnectionInfoField) {
+        
+    }
+    
+    func didTapSendInteractiveFieldsButton(field: BankConnectionInfoField) {
         
     }
     
@@ -124,25 +140,48 @@ class EntityInfoNavigationController : UINavigationController, UIFactoryDependan
         
     }
     
-    func shouldShowCreditEditScreen(destination: TransactionDestination) {
-        showCreditEditScreen(destination: destination)
+    func shouldShowCreditEditScreen(source: IncomeSourceViewModel?,
+                                    destination: TransactionDestination,
+                                    creditingTransaction: Transaction?) {
+        showCreditEditScreen(source: source, destination: destination, creditingTransaction: creditingTransaction)
     }
 
-    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
-        showBorrowEditScreen(type: type, source: source, destination: destination)
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination, borrowingTransaction: Transaction?) {
+        showBorrowEditScreen(type: type, source: source, destination: destination, borrowingTransaction: borrowingTransaction)
     }
     
-    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination, borrowingTransaction: Transaction?) {
         modal(factory.borrowEditViewController(delegate: self,
                                                type: type,
                                                borrowId: nil,
                                                source: source,
-                                               destination: destination))
+                                               destination: destination,
+                                               borrowingTransaction: borrowingTransaction))
     }
     
-    func showCreditEditScreen(destination: TransactionDestination) {
+    func showCreditEditScreen(source: IncomeSourceViewModel?,
+                              destination: TransactionDestination,
+                              creditingTransaction: Transaction?) {
         modal(factory.creditEditViewController(delegate: self,
                                                creditId: nil,
-                                               destination: destination))
+                                               source: source,
+                                               destination: destination,
+                                               creditingTransaction: creditingTransaction))
+    }
+    
+    var viewController: Infrastructure.ViewController {
+        return .EntityInfoViewController
+    }
+    
+    var presentingCategories: [NotificationCategory] {
+        return []
+    }
+    
+    func navigate(to viewController: Infrastructure.ViewController, with category: NotificationCategory) {
+        
+    }
+    
+    func update() {
+        refreshData()
     }
 }

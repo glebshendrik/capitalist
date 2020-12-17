@@ -1,6 +1,6 @@
 //
 //  IncomeSourceEditingExtension.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 30/07/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -62,4 +62,11 @@ extension IncomeSourceEditViewController : ReminderEditViewControllerDelegate {
         viewModel.reminderViewModel = reminderViewModel
         updateReminderUI()
     }
+}
+
+extension IncomeSourceEditViewController : TransactionableExamplesViewControllerDelegate {
+    func didSelect(exampleViewModel: TransactionableExampleViewModel) {
+        viewModel.set(example: exampleViewModel)
+        updateUI()
+    }    
 }

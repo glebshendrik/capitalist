@@ -1,12 +1,13 @@
 //
 //  ExpenseSourceEditingExtension.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 09/07/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
 //
 
 import UIKit
+import PopupDialog
 
 extension ExpenseSourceEditViewController : IconsViewControllerDelegate {
     func didSelectIcon(icon: Icon) {
@@ -64,20 +65,46 @@ extension ExpenseSourceEditViewController : ExpenseSourceEditTableControllerDele
         viewModel.creditLimit = creditLimit
         updateTextFieldsUI()
     }
-            
-    func didTapBankButton() {        
-        guard viewModel.canConnectBank else {
-            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
-            return
-        }
-        if viewModel.accountConnected {
-            removeAccountConnection()
-        } else {
-            showProviders()
-        }
-    }
-    
+                
     func didTapSave() {
         save()
+    }
+    
+    func didTapBankButton() {
+        connectTo(providerCodes: viewModel.providerCodes)
+    }
+}
+
+extension ExpenseSourceEditViewController : TransactionableExamplesViewControllerDelegate {
+    func didSelect(exampleViewModel: TransactionableExampleViewModel) {
+        viewModel.set(example: exampleViewModel)
+        suggestBankConnection()
+    }
+    
+    func suggestBankConnection() {
+        guard
+            viewModel.isNew && viewModel.connectable
+        else {
+            updateUI()
+            return
+        }
+        
+        let alertTitle = NSLocalizedString("Вы можете воспользоваться функцией интеграции с банками", comment: "")
+        
+        let actions: [UIAlertAction] = [UIAlertAction(title: NSLocalizedString("Подключиться к банку", comment: ""),
+                                                      style: .default,
+                                                      handler: { _ in
+                                                        self.updateUI()
+                                                        self.connectTo(providerCodes: self.viewModel.providerCodes)
+                                                      }),
+                                        UIAlertAction(title: NSLocalizedString("Ввести данные вручную", comment: ""),
+                                                      style: .default,
+                                                      handler: { _ in
+                                                        self.updateUI()
+                                                      })]
+        sheet(title: alertTitle,
+              actions: actions,
+              preferredStyle: .alert,
+              addCancel: true)
     }
 }

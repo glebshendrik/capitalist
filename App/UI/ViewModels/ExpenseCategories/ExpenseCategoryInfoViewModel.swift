@@ -1,6 +1,6 @@
 //
 //  ExpenseCategoryInfoViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 27.11.2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -16,6 +16,7 @@ enum ExpenseCategoryInfoField : String {
     case plannedExpense
     case statistics
     case transaction
+    case description
     
     var identifier: String {
         return rawValue
@@ -74,21 +75,30 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
     override func loadEntity() -> Promise<Void> {
         guard let entityId = expenseCategoryViewModel?.id else { return Promise(error: ExpenseCategoryInfoError.expenseCategoryIsNotSpecified)}
         return  firstly {
-                    expenseCategoriesCoordinator.show(by: entityId)
-                }.get { expenseCategory in
-                    self.set(expenseCategory: ExpenseCategoryViewModel(expenseCategory: expenseCategory))
-                }.asVoid()
+            expenseCategoriesCoordinator.show(by: entityId)
+        }.get { expenseCategory in
+            self.set(expenseCategory: ExpenseCategoryViewModel(expenseCategory: expenseCategory))
+        }.asVoid()
     }
     
     override func entityInfoFields() -> [EntityInfoField] {
-        var fields: [EntityInfoField] = [IconInfoField(fieldId: ExpenseCategoryInfoField.icon.rawValue,
-                                                       iconType: .raster,
-                                                       iconURL: selectedIconURL,
-                                                       placeholder: TransactionableType.expenseCategory.defaultIconName(basketType: basketType),
-                                                       backgroundColor: basketType.iconBackgroundColor),
-                                         BasicInfoField(fieldId: ExpenseCategoryInfoField.expense.rawValue,
-                                                        title: NSLocalizedString("Расход в этом месяце", comment: "Расход в этом месяце"),
-                                                        value: expenseCategoryViewModel?.amount)]
+        var fields = [EntityInfoField]()
+        
+        fields.append(IconInfoField(fieldId: ExpenseCategoryInfoField.icon.rawValue,
+                                    iconType: .raster,
+                                    iconURL: selectedIconURL,
+                                    placeholder: TransactionableType.expenseCategory.defaultIconName(basketType: basketType),
+                                    backgroundColor: basketType.iconBackgroundColor))
+        
+        if let description = expenseCategoryViewModel?.description {
+            fields.append(DescriptionInfoField(fieldId: ExpenseCategoryInfoField.description.rawValue,
+                                               description: description))
+        }
+        
+        fields.append(BasicInfoField(fieldId: ExpenseCategoryInfoField.expense.rawValue,
+                                     title: NSLocalizedString("Расход в этом месяце", comment: "Расход в этом месяце"),
+                                     value: expenseCategoryViewModel?.amount))
+        
         if let plannedAtPeriod = expenseCategoryViewModel?.plannedAtPeriod {
             fields.append(BasicInfoField(fieldId: ExpenseCategoryInfoField.plannedExpense.rawValue,
                                          title: NSLocalizedString("Запланировано", comment: "Запланировано"),
@@ -110,12 +120,13 @@ class ExpenseCategoryInfoViewModel : EntityInfoViewModel {
     override func saveEntity() -> Promise<Void> {
         return expenseCategoriesCoordinator.update(with: updateForm())
     }
-         
+    
     private func updateForm() -> ExpenseCategoryUpdatingForm {
         return ExpenseCategoryUpdatingForm(id: expenseCategoryViewModel?.id,
-                                        iconURL: selectedIconURL,
-                                        name: expenseCategoryViewModel?.name,
-                                        monthlyPlannedCents: expenseCategoryViewModel?.expenseCategory.plannedCentsAtPeriod,
-                                        reminderAttributes: reminder.reminderAttributes)
+                                           iconURL: selectedIconURL,
+                                           name: expenseCategoryViewModel?.name,
+                                           monthlyPlannedCents: expenseCategoryViewModel?.expenseCategory.plannedCentsAtPeriod,
+                                           description: expenseCategoryViewModel?.description,
+                                           reminderAttributes: reminder.reminderAttributes)
     }
 }

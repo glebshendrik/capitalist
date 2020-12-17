@@ -18,7 +18,7 @@ open class Shape: Node {
         set(val) { fillVar.value = val }
     }
 
-    public let strokeVar: AnimatableVariable<Stroke?>
+    public let strokeVar: StrokeAnimatableVariable
     open var stroke: Stroke? {
         get { return strokeVar.value }
         set(val) { strokeVar.value = val }
@@ -27,7 +27,7 @@ open class Shape: Node {
     public init(form: Locus, fill: Fill? = nil, stroke: Stroke? = nil, place: Transform = Transform.identity, opaque: Bool = true, opacity: Double = 1, clip: Locus? = nil, mask: Node? = nil, effect: Effect? = nil, visible: Bool = true, tag: [String] = []) {
         self.formVar = AnimatableVariable<Locus>(form)
         self.fillVar = AnimatableVariable<Fill?>(fill)
-        self.strokeVar = AnimatableVariable<Stroke?>(stroke)
+        self.strokeVar = StrokeAnimatableVariable(stroke)
         super.init(
             place: place,
             opaque: opaque,
@@ -40,8 +40,8 @@ open class Shape: Node {
         )
 
         self.formVar.node = self
-        self.strokeVar.node = self
         self.fillVar.node = self
+        self.strokeVar.node = self
     }
 
     override open var bounds: Rect? {
@@ -57,6 +57,7 @@ open class Shape: Node {
         }
 
         RenderUtils.setGeometry(self.form, ctx: ctx)
+        RenderUtils.setClip(self.clip, ctx: ctx)
 
         let point = ctx.currentPointOfPath
 
@@ -67,7 +68,7 @@ open class Shape: Node {
         var rect = ctx.boundingBoxOfPath
 
         if rect.height == 0,
-            rect.width == 0 && (rect.origin.x == CGFloat.infinity || rect.origin.y == CGFloat.infinity) {
+           rect.width == 0 && (rect.origin.x == CGFloat.infinity || rect.origin.y == CGFloat.infinity) {
 
             rect.origin = point
         }
@@ -83,10 +84,10 @@ open class Shape: Node {
     }
 
     fileprivate func createContext() -> CGContext? {
-
+        let screenScale: CGFloat = MMainScreen()?.mScale ?? 1.0
         let smallSize = CGSize(width: 1.0, height: 1.0)
 
-        MGraphicsBeginImageContextWithOptions(smallSize, false, 1.0)
+        MGraphicsBeginImageContextWithOptions(smallSize, false, screenScale)
 
         return MGraphicsGetCurrentContext()
     }

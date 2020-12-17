@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -465,7 +465,7 @@
                                     <constraint firstAttribute="width" constant="1" id="Xwk-GI-D3m"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ux-Ej-c8V">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ux-Ej-c8V" userLabel="wallets">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" verticalHuggingPriority="251" text="КОШЕЛЬКИ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jig-hk-zD0">
@@ -527,7 +527,7 @@
                                                                                     <rect key="frame" x="17.5" y="17" width="21" height="20.5"/>
                                                                                     <color key="tintColor" name="yellow 1"/>
                                                                                 </imageView>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зарплата" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1sx-Bw-Jfj">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зарплата" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1sx-Bw-Jfj">
                                                                                     <rect key="frame" x="56" y="12" width="89" height="14"/>
                                                                                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
                                                                                     <color key="textColor" name="white 0.64"/>
@@ -690,7 +690,7 @@
                                             <constraint firstItem="P2v-Xs-sMl" firstAttribute="leading" secondItem="Pqg-XA-9pr" secondAttribute="leading" id="iWL-qe-zMU"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76l-id-B6I">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76l-id-B6I">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <connections>
@@ -1306,7 +1306,7 @@
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zya-14-hoF">
                                 <rect key="frame" x="0.0" y="-100" width="375" height="723"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDa-Tl-UPu">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDa-Tl-UPu">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="723"/>
                                         <connections>
                                             <action selector="didTapPlusMenuOverlay:" destination="527-2C-xUs" eventType="touchUpInside" id="ZeL-44-eoD"/>
@@ -1352,7 +1352,7 @@
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oyb-sB-AfK">
                                 <rect key="frame" x="0.0" y="-100" width="375" height="723"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPN-o3-NkU">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPN-o3-NkU">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="723"/>
                                         <connections>
                                             <action selector="didTapMainOverlay:" destination="527-2C-xUs" eventType="touchUpInside" id="8Xh-Xh-t8n"/>
@@ -1374,6 +1374,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="uZP-da-pZ0"/>
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Oyb-sB-AfK" secondAttribute="bottom" id="0Lz-ZB-Tig"/>
@@ -1410,7 +1411,6 @@
                             <constraint firstItem="bCO-eg-Aiy" firstAttribute="top" secondItem="0ux-Ej-c8V" secondAttribute="bottom" constant="12" id="sDv-0R-ORg"/>
                             <constraint firstItem="foz-3R-fXQ" firstAttribute="trailing" secondItem="uZP-da-pZ0" secondAttribute="trailing" id="wYE-92-UVb"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="uZP-da-pZ0"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="Feu-pv-oBa">

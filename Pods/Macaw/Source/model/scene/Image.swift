@@ -64,7 +64,9 @@ open class Image: Node {
             tag: tag
         )
 
-        srcVar.onChange { _ in self.mImage = nil }
+        srcVar.onChange { [weak self] _ in
+            self?.mImage = nil
+        }
     }
 
     public init(image: MImage, xAlign: Align = .min, yAlign: Align = .min, aspectRatio: AspectRatio = .none, w: Int = 0, h: Int = 0, place: Transform = Transform.identity, opaque: Bool = true, opacity: Double = 1, clip: Locus? = nil, effect: Effect? = nil, visible: Bool = true, tag: [String] = []) {
@@ -93,7 +95,9 @@ open class Image: Node {
             tag: tag
         )
 
-        srcVar.onChange { _ in self.mImage = nil }
+        srcVar.onChange { [weak self] _ in
+            self?.mImage = nil
+        }
     }
 
     override open var bounds: Rect? {
@@ -146,7 +150,7 @@ open class Image: Node {
         }
 
         // Base64 image
-        let decodableFormat = ["image/png", "image/jpg"]
+        let decodableFormat = ["image/png", "image/jpg", "image/svg+xml"]
         for format in decodableFormat {
             let prefix = "data:\(format);base64,"
             if src.hasPrefix(prefix) {
@@ -159,6 +163,10 @@ open class Image: Node {
             }
         }
 
+        #if os(iOS)
         return MImage(named: src)
+        #elseif os(OSX)
+        return MImage(contentsOfFile: src)
+        #endif
     }
 }

@@ -1,6 +1,6 @@
 //
 //  ExpenseCategoryEditDelegateExtension.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 01/04/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -33,12 +33,7 @@ extension MainViewController {
         if viewModel.isAddCategoryItem(indexPath: indexPath) {
             showNewExpenseCategoryScreen(basketType: basketType)
         } else if let expenseCategoryViewModel = viewModel.expenseCategoryViewModel(at: indexPath) {
-            if isSelecting {
-                select(expenseCategoryViewModel, collectionView: joyExpenseCategoriesCollectionView, indexPath: indexPath)
-            }
-            else {
-                showExpenseCategoryInfo(expenseCategory: expenseCategoryViewModel)
-            }
+            showExpenseCategoryInfo(expenseCategory: expenseCategoryViewModel)
         }
     }
     

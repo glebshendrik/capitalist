@@ -1,6 +1,6 @@
 //
 //  CreditInfoViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28.11.2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -36,7 +36,11 @@ class CreditInfoViewController : EntityInfoNavigationController {
     }
     
     override func showEditScreen() {
-        modal(factory.creditEditViewController(delegate: self, creditId: viewModel.creditId, destination: nil))
+        modal(factory.creditEditViewController(delegate: self,
+                                               creditId: viewModel.creditId,
+                                               source: nil,
+                                               destination: nil,
+                                               creditingTransaction: nil))
     }
     
     override func didCreateCredit() {

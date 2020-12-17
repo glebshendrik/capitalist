@@ -1,6 +1,6 @@
 //
 //  ProfileViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 04/12/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -14,13 +14,14 @@ protocol ProfileViewOutputProtocol {
     var user: User? { get }
 }
 
-class ProfileViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol {
-    
+class ProfileViewController : StaticTableViewController, UIMessagePresenterManagerDependantProtocol, ProfileViewOutputProtocol, NavigationBarColorable, ApplicationRouterDependantProtocol, UIFactoryDependantProtocol {
+
     var navigationBarTintColor: UIColor? = UIColor.by(.black2)
 
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var viewModel: ProfileViewModel!
     var router: ApplicationRouterProtocol!
+    var factory: UIFactoryProtocol!
     
     @IBOutlet weak var firstnameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
@@ -123,16 +124,36 @@ class ProfileViewController : StaticTableViewController, UIMessagePresenterManag
     }
     
     @IBAction func didTapGetSubscriptionButton(_ sender: Any) {
-        push(router.viewController(.SubscriptionViewController))
+        push(factory.subscriptionViewController(requiredPlans: [.premium, .platinum]))
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == "ShowProfileEditScreen",
-            let destinationNavigationController = segue.destination as? UINavigationController,
+        switch segue.identifier {
+            case "ShowProfileEditScreen":
+                prepareProfileEdit(segue)
+            case "showLinkingIncomeSources":
+                prepareLinking(.incomeSource, segue: segue)
+            case "showLinkingExpenseSources":
+                prepareLinking(.expenseSource, segue: segue)
+            case "showLinkingExpenseCategories":
+                prepareLinking(.expenseCategory, segue: segue)
+            default:
+                return
+        }
+    }
+    
+    private func prepareProfileEdit(_ segue: UIStoryboardSegue) {
+        if  let destinationNavigationController = segue.destination as? UINavigationController,
             let destination = destinationNavigationController.topViewController as? ProfileEditViewController {
             
-                destination.set(user: viewModel.user)
-                destination.delegate = self
+            destination.set(user: viewModel.user)
+            destination.delegate = self
+        }
+    }
+    
+    private func prepareLinking(_ type: TransactionableType, segue: UIStoryboardSegue) {
+        if  let destination = segue.destination as? PrototypesLinkingViewController {
+            destination.viewModel.linkingType = type
         }
     }
     

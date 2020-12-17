@@ -1,6 +1,6 @@
 //
 //  EntityInfoViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 08/11/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -17,6 +17,7 @@ class EntityInfoViewModel {
     let accountCoordinator: AccountCoordinatorProtocol
     
     var isUpdatingData: Bool = false
+    var isUpdateQueued: Bool = false
     public private(set) var isDeleted: Bool = false
     var hasMoreData: Bool = true
     var needToSaveData: Bool = false
@@ -27,7 +28,7 @@ class EntityInfoViewModel {
     var transactionable: Transactionable? { return nil }
 
     var transactionViewModels: [TransactionViewModel] = []
-    var transactionsBatchSize: Int = 10
+    var transactionsBatchSize: Int = 100
     
     private var sections: [EntityInfoSection] = []
     private var transactionsSections: [EntityInfoTransactionsSection] = []
@@ -79,7 +80,7 @@ class EntityInfoViewModel {
     
     func updateData() -> Promise<Void> {
         guard !isDeleted else { return Promise.value(()) }
-        isUpdatingData = true
+        isUpdatingData = true        
         if needToSaveData {
             return saveAndLoadData()
         }

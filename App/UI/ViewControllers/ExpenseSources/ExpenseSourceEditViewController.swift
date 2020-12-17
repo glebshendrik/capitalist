@@ -1,6 +1,6 @@
 //
 //  ExpenseSourceEditViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 26/12/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import PopupDialog
 
 protocol ExpenseSourceEditViewControllerDelegate : class {
     func didCreateExpenseSource()
@@ -15,9 +16,13 @@ protocol ExpenseSourceEditViewControllerDelegate : class {
     func didRemoveExpenseSource()
 }
 
-class ExpenseSourceEditViewController : FormTransactionsDependableEditViewController {
-
+class ExpenseSourceEditViewController : FormTransactionsDependableEditViewController, BankConnectableProtocol {
+    
     var viewModel: ExpenseSourceEditViewModel!
+    var bankConnectableViewModel: BankConnectableViewModel! {
+        return viewModel.bankConnectableViewModel
+    }
+    
     weak var delegate: ExpenseSourceEditViewControllerDelegate?
     var tableController: ExpenseSourceEditTableController!
     
@@ -51,9 +56,9 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
     }
     
     override func loadDataPromise() -> Promise<Void> {
-        return viewModel.loadDefaultCurrency()
+        return viewModel.loadData()
     }
-    
+        
     override func savePromise() -> Promise<Void> {
         return viewModel.save()
     }
@@ -62,14 +67,34 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
         return viewModel.removeExpenseSource(deleteTransactions: deleteTransactions)
     }
     
+    override func didLoadData() {
+        super.didLoadData()
+        if viewModel.needToShowExamples {
+            view.endEditing(true)
+            slideUp(factory.transactionableExamplesViewController(delegate: self,
+                                                                  transactionableType: .expenseSource,
+                                                                  isUsed: false))
+        }
+        else {
+            suggestBankConnection()
+        }
+    }
+    
     override func didSave() {
-        super.didSave()
+        updateUI()
         if viewModel.isNew {
             delegate?.didCreateExpenseSource()
         }
         else {
             delegate?.didUpdateExpenseSource()
         }
+        if !bankConnectableViewModel.intentToSave || !isCurrentTopmostPresentedViewController && bankConnectableViewModel.fetchingStarted {
+            // formally will close the form
+            super.didSave()
+        } else if bankConnectableViewModel.reconnectNeeded {
+            setupConnection()
+        }
+        bankConnectableViewModel.intentToSave = false        
     }
     
     override func didRemove() {
@@ -86,6 +111,10 @@ class ExpenseSourceEditViewController : FormTransactionsDependableEditViewContro
         updateTableUI(animated: false)
         focusFirstEmptyField()
     }
+        
+    func refreshData() {
+        loadData()
+    }
 }
 
 extension ExpenseSourceEditViewController {
@@ -95,5 +124,11 @@ extension ExpenseSourceEditViewController {
     
     func set(expenseSource: ExpenseSource) {
         viewModel.set(expenseSource: expenseSource)
+    }
+}
+
+extension ExpenseSourceEditViewController : Updatable {
+    func update() {
+        refreshData()
     }
 }

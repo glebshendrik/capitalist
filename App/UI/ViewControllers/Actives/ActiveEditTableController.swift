@@ -1,6 +1,6 @@
 //
 //  ActiveEditTableController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 22/10/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -26,7 +26,6 @@ protocol ActiveEditTableControllerDelegate : FormFieldsTableViewControllerDelega
     func didChange(annualPercent: String?)
     func didTapSetReminder()
     func didTapRemoveButton()
-    func didTapBankButton()
 }
 
 class ActiveEditTableController : FormFieldsTableViewController {
@@ -212,6 +211,6 @@ class ActiveEditTableController : FormFieldsTableViewController {
     }
     
     @IBAction func didTapBankButton(_ sender: Any) {
-        delegate?.didTapBankButton()
+        
     }
 }

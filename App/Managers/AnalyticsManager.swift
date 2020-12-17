@@ -1,6 +1,6 @@
 //
 //  AnalyticsManager.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 10.02.2020.
 //  Copyright © 2020 Real Tranzit. All rights reserved.
@@ -24,8 +24,7 @@ class AnalyticsManager : AnalyticsManagerProtocol {
         Crashlytics.crashlytics().setUserID(userId)
         Analytics.setUserID(userId)
         AppEvents.userID = userId
-        MRMyTracker.trackerParams().customUserId = userId
-        
+        MRMyTracker.trackerParams().customUserId = userId        
     }
     
     func track(event: String, parameters: [String : Any]?) {

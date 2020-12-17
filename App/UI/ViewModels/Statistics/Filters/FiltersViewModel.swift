@@ -1,6 +1,6 @@
 //
 //  FiltersViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 27/03/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -11,6 +11,10 @@ import PromiseKit
 
 class FiltersViewModel {
     public private(set) var transactionableFilters: [TransactionableFilter] = []    
+    
+    var hasFilters: Bool {
+        return numberOfTransactionableFilters > 0
+    }
     
     var numberOfTransactionableFilters: Int {
         return transactionableFilters.count

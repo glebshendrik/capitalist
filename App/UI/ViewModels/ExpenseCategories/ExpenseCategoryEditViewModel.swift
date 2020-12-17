@@ -1,6 +1,6 @@
 //
 //  ExpenseCategoryEditViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 17/01/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -17,17 +17,19 @@ enum ExpenseCategoryUpdatingError : Error {
     case updatingExpenseCategoryIsNotSpecified
 }
 
-class ExpenseCategoryEditViewModel {
+class ExpenseCategoryEditViewModel : TransactionableExamplesDependantProtocol {
     private let expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
+    var transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol
     
     public private(set) var expenseCategory: ExpenseCategory? = nil
-    public private(set) var basketType: BasketType = .joy
+    var basketType: BasketType = .joy
     
     var selectedIconURL: URL? = nil
     var name: String? = nil
     var selectedCurrency: Currency? = nil
     var monthlyPlanned: String? = nil
+    var description: String? = nil
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
     // Computed
@@ -82,10 +84,26 @@ class ExpenseCategoryEditViewModel {
         return basketType == .joy
     }
     
+    var numberOfUnusedExamples: Int = 0
+        
+    var example: TransactionableExampleViewModel? = nil
+    
+    var transactionableType: TransactionableType {
+        return .expenseCategory
+    }
+    
+    var shouldSkipExamplesPrompt: Bool = false
+    
     init(expenseCategoriesCoordinator: ExpenseCategoriesCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol,
+         transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {
         self.expenseCategoriesCoordinator = expenseCategoriesCoordinator
         self.accountCoordinator = accountCoordinator
+        self.transactionableExamplesCoordinator = transactionableExamplesCoordinator
+    }
+    
+    func loadData() -> Promise<Void> {
+        return when(fulfilled: loadDefaultCurrency(), loadExamples())
     }
     
     func loadDefaultCurrency() -> Promise<Void> {
@@ -95,7 +113,7 @@ class ExpenseCategoryEditViewModel {
                     self.selectedCurrency = user.currency
                 }
     }
-    
+        
     func set(expenseCategory: ExpenseCategory) {
         self.expenseCategory = expenseCategory
         basketType = expenseCategory.basketType
@@ -103,12 +121,15 @@ class ExpenseCategoryEditViewModel {
         selectedIconURL = expenseCategory.iconURL
         selectedCurrency = expenseCategory.currency        
         monthlyPlanned = expenseCategory.monthlyPlannedCents?.moneyDecimalString(with: selectedCurrency)
+        description = expenseCategory.description
         reminderViewModel = ReminderViewModel(reminder: expenseCategory.reminder)
     }
     
     func set(example: TransactionableExampleViewModel) {
+        self.example = example
         selectedIconURL = example.iconURL
         name = example.name
+        description = example.description
     }
     
     func set(basketType: BasketType) {
@@ -134,8 +155,13 @@ class ExpenseCategoryEditViewModel {
         return expenseCategoriesCoordinator.destroy(by: expenseCategoryId, deleteTransactions: deleteTransactions)
     }
     
-    func basketId(by basketType: BasketType) -> Int? {
-        guard let session = accountCoordinator.currentSession else { return nil }
+    func basketId(by basketType: BasketType?) -> Int? {
+        guard
+            let session = accountCoordinator.currentSession,
+            let basketType = basketType
+        else {
+            return nil
+        }
         
         switch basketType {
         case .joy:
@@ -166,6 +192,8 @@ extension ExpenseCategoryEditViewModel {
                                            name: name,
                                            currency: selectedCurrencyCode,
                                            monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
+                                           description: description,
+                                           prototypeKey: example?.prototypeKey,
                                            reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }
@@ -185,6 +213,7 @@ extension ExpenseCategoryEditViewModel {
                                            iconURL: selectedIconURL,
                                            name: name,
                                            monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
+                                           description: description,
                                            reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }

@@ -1,6 +1,6 @@
 //
 //  StatisticsViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 27/03/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -26,6 +26,8 @@ class StatisticsViewController : UIViewController, UIMessagePresenterManagerDepe
     @IBOutlet weak var rangeTutorialAnchor: UIView!
     @IBOutlet weak var filtersTutorialAnchor: UIView!
     weak var tutorialTip: EasyTipView?
+    
+    var shouldScrollTop: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

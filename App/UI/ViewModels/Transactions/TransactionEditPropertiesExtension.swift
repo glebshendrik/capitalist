@@ -1,6 +1,6 @@
 //
 //  TransactionEditComputablesExtension.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 13/10/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -145,6 +145,15 @@ extension TransactionEditViewModel {
         return sourceCurrencyCode != destinationCurrencyCode
     }
     
+    var shouldAskForBatchUpdateSimilars: Bool {
+        return
+            !isNew &&
+            isRemoteTransaction &&
+            hasComment &&
+            (source?.compareId != initialSource?.compareId ||
+                destination?.compareId != initialDestination?.compareId)
+    }
+    
     // Visibility
     
     var amountFieldHidden: Bool {
@@ -209,6 +218,20 @@ extension TransactionEditViewModel {
     var canChangeConvertedAmount: Bool {
         guard isRemoteTransaction else { return isChangeableTransaction }
         return needCurrencyExchange && isSourceInitiallyConnected
+    }
+    
+    var isNewTransactionWithConnectedExpenseSource: Bool {
+        guard isNew else { return false }
+        if let sourceExpenseSourceViewModel = source as? ExpenseSourceViewModel,
+           sourceExpenseSourceViewModel.connectionConnected {
+            return true
+        }
+        if let destinationExpenseSourceViewModel = destination as? ExpenseSourceViewModel,
+           destinationExpenseSourceViewModel.connectionConnected {
+            
+            return true
+        }
+        return false
     }
     
 //    var isSourceVirtualExpenseSource: Bool {

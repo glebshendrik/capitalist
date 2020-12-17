@@ -1,12 +1,13 @@
 //
 //  NavigationControllingExtension.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 01/04/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
 //
 
 import UIKit
+import PromiseKit
 
 extension MainViewController {
     func showStatistics(with filterViewModel: TransactionableFilter?) {
@@ -25,17 +26,105 @@ extension MainViewController {
 }
 
 extension MainViewController {
-//    func showNewIncomeSourceScreen() {
-//        showEditScreen(incomeSource: nil)
-//    }
+    func show(_ viewController: UIViewController?, await: Bool = true, prioritized: Bool = false) {
+        guard
+            let away = viewController?.away
+        else {
+            showViewController(viewController, await: await, prioritized: prioritized)
+            return
+        }
+        
+        switch away {
+            case let prototypeLinkingAway as PrototypesLinkingViewController:
+                showIncomeSourceLinking(prototypeLinkingAway, viewController, await, prioritized)
+            case is TransactionCreationInfoViewController:
+                showTransactionTutorial(viewController, await, prioritized)
+            case is AppUpdateViewController:
+                showAppUpdate(viewController, await, prioritized)
+            default:
+                showViewController(viewController, await: await, prioritized: prioritized)
+        }
+    }
     
-//    func showEditScreen(incomeSource: IncomeSource?) {
-//        modal(factory.incomeSourceEditViewController(delegate: self, incomeSource: incomeSource))
-//    }
+    func showWaiting() {
+        guard
+            !waitingQueue.isEmpty,
+            isCurrentTopmostPresentedViewController,
+            !viewModel.isUpdatingData
+        else {
+            return
+        }
+        show(waitingQueue.removeFirst(), await: false)
+    }
     
-//    func showIncomeSourceInfoScreen(incomeSource: IncomeSourceViewModel?) {
-//        modal(factory.incomeSourceInfoViewController(incomeSource: incomeSource))
-//    }
+    private func showViewController(_ viewController: UIViewController?, await: Bool = true, prioritized: Bool = false) {
+        if await {
+            showAwait(viewController, prioritized: prioritized)
+        }
+        else {
+            modal(viewController)
+        }
+    }
+    
+    private func showAwait(_ controller: UIViewController?, prioritized: Bool = false) {
+        guard
+            let controller = controller,
+            controller.isAway
+        else {
+            showWaiting()
+            return
+        }
+        let waitingsContain = waitingQueue.any { $0.away?.id == controller.away?.id }
+        if !waitingsContain {
+            if prioritized {
+                waitingQueue.insert(controller, at: 0)
+            }
+            else {
+                waitingQueue.append(controller)
+            }
+        }
+        showWaiting()
+    }
+    
+    private func showIncomeSourceLinking(_ prototypeLinkingAway: PrototypesLinkingViewController, _ viewController: UIViewController?, _ await: Bool, _ prioritized: Bool) {
+        let shouldShowIncomeSourcesLinking: Bool = prototypeLinkingAway.viewModel.linkingType == .incomeSource &&
+            viewModel.hasUnlinkedIncomeSources &&
+            !UIFlowManager.reached(point: .linkingIncomeSources)
+        let shouldShowExpenseSourcesLinking: Bool = prototypeLinkingAway.viewModel.linkingType == .expenseSource &&
+            viewModel.hasUnlinkedExpenseSources &&
+            !UIFlowManager.reached(point: .linkingExpenseSources)
+        let shouldShowExpenseCategoriesLinking: Bool = prototypeLinkingAway.viewModel.linkingType == .expenseCategory &&
+            viewModel.hasUnlinkedExpenseCategories &&
+            !UIFlowManager.reached(point: .linkingExpenseCategories)
+        
+        if shouldShowIncomeSourcesLinking ||
+            shouldShowExpenseSourcesLinking ||
+            shouldShowExpenseCategoriesLinking {
+            
+            showViewController(viewController, await: await, prioritized: prioritized)
+        }
+        else {
+            showWaiting()
+        }
+    }
+    
+    private func showTransactionTutorial(_ viewController: UIViewController?, _ await: Bool, _ prioritized: Bool) {
+        if !UIFlowManager.reached(point: .transactionCreationInfoMessage) {
+            showViewController(viewController, await: await, prioritized: prioritized)
+        }
+        else {
+            showWaiting()
+        }
+    }
+    
+    private func showAppUpdate(_ viewController: UIViewController?, _ await: Bool, _ prioritized: Bool) {
+        if viewModel.isAppUpdateNeeded {
+            showViewController(viewController, await: await, prioritized: prioritized)
+        }
+        else {
+            showWaiting()
+        }
+    }
 }
 
 extension MainViewController {
@@ -44,11 +133,27 @@ extension MainViewController {
     }
     
     func showEditScreen(expenseSource: ExpenseSource?) {
-        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource))
+        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource, shouldSkipExamplesPrompt: false))
     }
     
     func showExpenseSourceInfoScreen(expenseSource: ExpenseSourceViewModel?) {
         modal(factory.expenseSourceInfoViewController(expenseSource: expenseSource))
+    }
+    
+    func showExpenseSourceInfoScreen(expenseSourceId: Int?) {
+        guard
+            let expenseSourceId = expenseSourceId
+        else {
+            return
+        }
+        messagePresenterManager.showHUD()
+        _ = firstly {
+                viewModel.loadExpenseSource(id: expenseSourceId)
+            }.ensure {
+                self.messagePresenterManager.dismissHUD()
+            }.done {
+                self.modal(self.factory.expenseSourceInfoViewController(expenseSource: $0))
+            }
     }
 }
 
@@ -78,7 +183,11 @@ extension MainViewController {
     }
     
     func showCreditEditScreen(creditId: Int) {
-        modal(factory.creditEditViewController(delegate: self, creditId: creditId, destination: nil))
+        modal(factory.creditEditViewController(delegate: self,
+                                               creditId: creditId,
+                                               source: nil,
+                                               destination: nil,
+                                               creditingTransaction: nil))
     }
 }
 
@@ -143,7 +252,7 @@ extension MainViewController {
             showBorrowingExpenseSheet(source: source, destination: destination)
         }
         else if destination.isBorrowOrReturn {
-            showBorrowEditScreen(type: .debt, source: source, destination: destination)
+            showBorrowEditScreen(type: .debt, source: source, destination: destination, borrowingTransaction: nil)
         }
         else {
             showTransactionEditScreen(source: source, destination: destination)
@@ -152,11 +261,11 @@ extension MainViewController {
     
     private func showBorrowingIncomeSheet(source: IncomeSourceViewModel, destination: ExpenseSourceViewModel) {
         let creditAction = UIAlertAction(title: NSLocalizedString("Взять в кредит", comment: "Взять в кредит"), style: .default) { _ in
-            self.showCreditEditScreen(destination: destination)
+            self.showCreditEditScreen(source: source, destination: destination, creditingTransaction: nil)
         }
         
         let loanAction = UIAlertAction(title: NSLocalizedString("Занять", comment: "Занять"), style: .default) { _ in
-            self.showBorrowEditScreen(type: .loan, source: source, destination: destination)
+            self.showBorrowEditScreen(type: .loan, source: source, destination: destination, borrowingTransaction: nil)
         }
         
         let returnAction = UIAlertAction(title: NSLocalizedString("Возвращение долга", comment: "Возвращение долга"), style: .default) { _ in
@@ -179,7 +288,7 @@ extension MainViewController {
         guard destination.hasWaitingLoans else { return }
         
         let debtAction = UIAlertAction(title: NSLocalizedString("Одолжить", comment: "Одолжить"), style: .default) { _ in
-            self.showBorrowEditScreen(type: .debt, source: source, destination: destination)
+            self.showBorrowEditScreen(type: .debt, source: source, destination: destination, borrowingTransaction: nil)
         }
         
         let returnAction = UIAlertAction(title: NSLocalizedString("Возвращение займа", comment: "Возвращение займа"), style: .default) { _ in
@@ -192,18 +301,23 @@ extension MainViewController {
         sheet(title: nil, actions: [debtAction, returnAction])
     }
     
-    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination, borrowingTransaction: Transaction?) {
         modal(factory.borrowEditViewController(delegate: self,
                                                type: type,
                                                borrowId: nil,
                                                source: source,
-                                               destination: destination))
+                                               destination: destination,
+                                               borrowingTransaction: borrowingTransaction))
     }
     
-    func showCreditEditScreen(destination: TransactionDestination) {
+    func showCreditEditScreen(source: IncomeSourceViewModel?,
+                              destination: TransactionDestination,
+                              creditingTransaction: Transaction?) {
         modal(factory.creditEditViewController(delegate: self,
                                                creditId: nil,
-                                               destination: destination))
+                                               source: source,
+                                               destination: destination,
+                                               creditingTransaction: creditingTransaction))
     }
     
     private func showWaitingBorrows(_ waitingBorrows: [BorrowViewModel], source: TransactionSource, destination: TransactionDestination, borrowType: BorrowType) {
@@ -219,5 +333,33 @@ extension MainViewController {
 extension MainViewController : WaitingBorrowsViewControllerDelegate {
     func didSelect(borrow: BorrowViewModel, source: TransactionSource, destination: TransactionDestination) {
         showReturnTransactionEditScreen(source: source, destination: destination, returningBorrow: borrow)
+    }
+}
+
+extension MainViewController : Navigatable, Updatable {
+    func update() {
+        loadData()
+    }
+    
+    var viewController: Infrastructure.ViewController {
+        return Infrastructure.ViewController.MainViewController
+    }
+    
+    var presentingCategories: [NotificationCategory] {
+        return []
+    }
+    
+    func navigate(to viewController: Infrastructure.ViewController, with category: NotificationCategory) {
+        switch category {
+            case .saltedgeNotification(let expenseSourceId):
+                guard
+                    viewController == .ExpenseSourceInfoViewController
+                else {
+                    return
+                }
+                showExpenseSourceInfoScreen(expenseSourceId: expenseSourceId)
+            default:
+                return
+        }
     }
 }

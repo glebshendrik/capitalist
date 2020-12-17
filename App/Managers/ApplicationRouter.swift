@@ -1,6 +1,6 @@
 //
 //  ApplicationRouter.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -35,9 +35,7 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
     private var biometricVerificationManager: BiometricVerificationManagerProtocol
     private var userPreferencesManager: UserPreferencesManagerProtocol
     
-    private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
-    private var minVersion: String?
-    private var minBuild: String?
+    private var launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil    
     private var isAnimating: Bool = false
     private var pendingScreen: UIViewController? = nil
     private var pendingModalScreen: UIViewController? = nil
@@ -141,63 +139,82 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
         route()
     }
     
+    var needToSetServerPath: Bool {
+        return !(UIApplication.shared.inferredEnvironment == .appStore ||
+                    APIRoute.storedBaseURLString != nil)
+    }
+    
     func route() {
-        guard UIApplication.shared.inferredEnvironment == .appStore || APIRoute.storedBaseURLString != nil else {
+        if needToSetServerPath {
             showServerPathAlert()
-            return
         }
-        guard userSessionManager.isUserAuthenticated else {
-            showJoiningAsGuestScreen()
-            _ = accountCoordinator.joinAsGuest().catch { _ in
-                self.route()
-            }
-            return
+        else if !userSessionManager.isUserAuthenticated {
+            unauthorizedRoute()
         }
-        
-        if isAppUpdateNeeded() {
-            showAppUpdateScreen()
-            return
+        else {
+            authorizedRoute()
         }
+    }
+    
+    private func unauthorizedRoute() {
+        showJoiningAsGuestScreen()
         
-        showLandingScreen()
-        
-        authorizedRoute()
+        firstly {
+            accountCoordinator.joinAsGuest()
+        }.catch { _ in
+            self.showRegistrationViewController()
+        }
     }
     
     private func authorizedRoute() {
+        showLandingScreen()
+        
         firstly {
             accountCoordinator.loadCurrentUser()
         }.done { user in
-            
-            if self.isAppUpdateNeeded() {
-                self.showAppUpdateScreen()
-                return
-            }
-            
-            guard UIFlowManager.reached(point: .onboarding) || user.onboarded else {
-                self.showOnboardingViewController()
-                return
-            }
-            
-            self.notificationsCoordinator.enableNotifications()
-            
-            guard UIFlowManager.reached(point: .dataSetup) || user.onboarded else {
-                self.showDataSetupViewController()
-                return
-            }
-               
-            guard UIFlowManager.reached(point: .subscription) || self.accountCoordinator.hasActiveSubscription else {
-                self.showSubscriptionScreen()
-                return
-            }
-            
-            self.showMainViewController()
+            self.route(user: user)
         }.catch { error in
             if self.errorIsNotFoundOrNotAuthorized(error: error) {
                 self.userSessionManager.forgetSession()
+                self.route()
             }
-            self.route()
+            else {
+                self.showRegistrationViewController()
+            }
         }
+    }
+    
+    private func route(user: User) {
+        switch destination(for: user) {
+            case .OnboardingViewController:
+                showOnboardingViewController()
+            case .OnboardCurrencyViewController:
+                showOnboardCurrencyViewController()
+            case .SubscriptionViewController:
+                showSubscriptionScreen()
+            case .TransactionablesCreationViewController:
+                self.showDataSetupViewController()
+            case .MainViewController:
+                self.showMainViewController()
+            default:
+                return
+        }
+    }
+    
+    private func destination(for user: User) -> Infrastructure.ViewController {
+        if !(UIFlowManager.reached(point: .onboarding) || user.onboarded) {
+            return .OnboardingViewController
+        }
+        if !(UIFlowManager.reached(point: .dataSetup) || user.onboarded) {
+            return .OnboardCurrencyViewController
+        }
+        if !(UIFlowManager.reached(point: .subscription) || self.accountCoordinator.hasActiveSubscription) {
+            return .SubscriptionViewController
+        }
+        if !UIFlowManager.reached(point: .walletsSetup) {
+            return .TransactionablesCreationViewController
+        }
+        return .MainViewController
     }
     
     private func errorIsNotFoundOrNotAuthorized(error: Error) -> Bool {
@@ -298,9 +315,12 @@ extension ApplicationRouter {
     }
     
     private func setupLogger() {
-//        let console = ConsoleDestination()
-        let cloud = SBPlatformDestination(appID: "9GzNgj", appSecret: "fbu0pHuwbvvaLjDllk14njfkwuflluta", encryptionKey: "ancdIrinQlbaycys7xzmofxwuubo2fg9")
-//        SwiftyBeaver.addDestination(console)
+        let console = ConsoleDestination()
+        let cloud = SBPlatformDestination(appID: "9GzNgj",
+                                          appSecret: "fbu0pHuwbvvaLjDllk14njfkwuflluta",
+                                          encryptionKey: "ancdIrinQlbaycys7xzmofxwuubo2fg9")
+        
+        SwiftyBeaver.addDestination(console)
         SwiftyBeaver.addDestination(cloud)
     }
     
@@ -368,11 +388,7 @@ extension ApplicationRouter {
         
         window.rootViewController?.topmostPresentedViewController.modal(alert)
     }
-    
-    private func showAppUpdateScreen() {
-        show(.AppUpdateViewController)
-    }
-    
+        
     private func showLandingScreen() {
         show(.LandingViewController)
     }
@@ -384,9 +400,11 @@ extension ApplicationRouter {
     }
     
     func showMainViewController() {
+//        Crashlytics.crashlytics().log("showMainViewController")
+        notificationsCoordinator.enableNotifications()
         show(.MainViewController) { [weak self] in
             guard let self = self else { return }
-            self.showPasscodeScreen()
+            self.showPasscodeScreen()            
             if let menuLeftNavigationController = self.viewController(.MenuNavigationController) as? SideMenuNavigationController {
                 SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
             }
@@ -403,7 +421,17 @@ extension ApplicationRouter {
         show(.OnboardingViewController)
     }
     
+    private func showRegistrationViewController() {
+        let registrationViewController = viewController(.RegistrationViewController)
+        show(UINavigationController(rootViewController: registrationViewController))
+    }
+    
+    private func showOnboardCurrencyViewController() {
+        show(.OnboardCurrencyViewController)
+    }
+    
     private func showDataSetupViewController() {
+        notificationsCoordinator.enableNotifications()
         show(.TransactionablesCreationViewController)
     }
         
@@ -459,11 +487,6 @@ extension ApplicationRouter {
         window.switchRootViewController(to: viewController, animated: animated, duration: 0.2, options: .transitionCrossDissolve, completion)
     }
     
-    func setWindow(blurred: Bool) {
-        let blurViewTagId = 999
-        blurred ? window.addBlur(with: blurViewTagId) : window.removeBlur(with: blurViewTagId)
-    }
-    
     func dismissPresentedAlerts() {
         window.rootViewController?.topmostPresentedViewController.dismissIfAlert()
     }
@@ -471,26 +494,6 @@ extension ApplicationRouter {
     func viewController(_ viewController: Infrastructure.ViewController) -> UIViewController {
         let storyboard = self.storyboards[viewController.storyboard]
         return storyboard!.instantiateViewController(withIdentifier: viewController.identifier)
-    }
-}
-
-extension ApplicationRouter {
-    func setMinimumAllowed(version: String?, build: String?) {
-        minVersion = version
-        minBuild = build
-        if isAppUpdateNeeded() {
-            route()
-        }
-    }
-    
-    private func isAppUpdateNeeded() -> Bool {
-        guard   let minBuild = minBuild,
-                let appBuild = UIApplication.shared.buildNumber,
-                let minBuildNumber = Int(minBuild),
-                let appBuildNumber = Int(appBuild) else {
-            return false
-        }
-        return appBuildNumber < minBuildNumber
     }
 }
 

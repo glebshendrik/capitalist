@@ -1,6 +1,6 @@
 //
 //  ActiveUIExtension.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 22/10/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -47,7 +47,7 @@ extension ActiveEditViewController {
 
 extension ActiveEditViewController {
     func focusFirstEmptyField() {
-        if viewModel.name == nil {
+        if viewModel.name == nil && isCurrentTopmostPresentedViewController {
             tableController.nameField.textField.becomeFirstResponder()
         }
         else {

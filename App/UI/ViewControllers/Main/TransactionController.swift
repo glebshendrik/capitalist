@@ -1,6 +1,6 @@
 //
 //  TransactionController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 01/04/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -11,13 +11,12 @@ import UIKit
 protocol TransactionControllerDelegate : class {
     var mainView: UIView { get }
     var isEditingItems: Bool { get }
-    var isSelecting: Bool { get }
     
     func didSetSource(cell: UICollectionViewCell?, animated: Bool)
     func didSetDestination(cell: UICollectionViewCell?, animated: Bool)
     func didSetNormal(cell: UICollectionViewCell?, animated: Bool)
     
-    func didSetTransactionables(source: TransactionSource, destination: TransactionDestination)
+//    func didSetTransactionables(source: TransactionSource, destination: TransactionDestination)
 }
 
 class TransactionController {
@@ -119,35 +118,35 @@ class TransactionController {
         self.delegate = delegate
     }
     
-    func select(collectionView: UICollectionView, indexPath: IndexPath, transactionPart: TransactionPart?) {
-        guard   let cell = collectionView.cellForItem(at: indexPath) as? TransactionableCell,
-                let transactionable = cell.transactionable else { return }
-        if sourceCell == nil && destinationCell == nil {
-            sourceCollectionView = collectionView
-            sourceIndexPath = indexPath            
-//            transactionable.isSelected = true
-            sourceCell = cell
-        }
-        else if sourceCell == nil {
-            sourceCollectionView = collectionView
-            sourceIndexPath = indexPath
-//            transactionable.isSelected = true
-            sourceCell = cell
-        }
-        else if destinationCell == nil {
-            destinationCollectionView = collectionView
-            destinationIndexPath = indexPath
-//            transactionable.isSelected = true
-            destinationCell = cell
-        }
-        
-        if  let sourceCell = sourceCell as? TransactionableCell,
-            let destinationCell = destinationCell as? TransactionableCell,
-            let source = sourceCell.transactionable as? TransactionSource,
-            let destination = destinationCell.transactionable as? TransactionDestination {
-            delegate?.didSetTransactionables(source: source, destination: destination)
-        }
-    }
+//    func select(collectionView: UICollectionView, indexPath: IndexPath, transactionPart: TransactionPart?) {
+//        guard   let cell = collectionView.cellForItem(at: indexPath) as? TransactionableCell,
+//                let transactionable = cell.transactionable else { return }
+//        if sourceCell == nil && destinationCell == nil {
+//            sourceCollectionView = collectionView
+//            sourceIndexPath = indexPath
+////            transactionable.isSelected = true
+//            sourceCell = cell
+//        }
+//        else if sourceCell == nil {
+//            sourceCollectionView = collectionView
+//            sourceIndexPath = indexPath
+////            transactionable.isSelected = true
+//            sourceCell = cell
+//        }
+//        else if destinationCell == nil {
+//            destinationCollectionView = collectionView
+//            destinationIndexPath = indexPath
+////            transactionable.isSelected = true
+//            destinationCell = cell
+//        }
+//
+//        if  let sourceCell = sourceCell as? TransactionableCell,
+//            let destinationCell = destinationCell as? TransactionableCell,
+//            let source = sourceCell.transactionable as? TransactionSource,
+//            let destination = destinationCell.transactionable as? TransactionDestination {
+//            delegate?.didSetTransactionables(source: source, destination: destination)
+//        }
+//    }
     
     func updateWaitingEdge(at location: CGPoint, in view: UIView, locationInCollectionView: CGPoint, direction: UICollectionView.ScrollDirection?) {
         waitingEdge = getWaitingEdge(at: location, in: view, locationInCollectionView: locationInCollectionView, direction: direction)

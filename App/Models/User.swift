@@ -1,6 +1,6 @@
 //
 //  User.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -46,6 +46,7 @@ struct User : Decodable {
     let onboarded: Bool
     let hasActiveSubscription: Bool
     let oldestTransactionGotAt: Date?
+    let customer: SaltEdgeCustomer?
     
     var fullname: String? {
         if let firstname = firstname, !firstname.isEmpty, let lastname = lastname, !lastname.isEmpty {
@@ -77,16 +78,7 @@ struct User : Decodable {
         case onboarded
         case hasActiveSubscription = "has_active_subscription"
         case oldestTransactionGotAt = "oldest_transaction_got_at"
-    }
-}
-
-extension User {
-    var saltEdgeIdentifier: String {
-        #if DEBUG
-        return "3b_staging_user_\(id)"
-        #else
-        return "3b_production_user_\(id)"
-        #endif
+        case customer = "salt_edge_customer"
     }
 }
 
@@ -143,13 +135,8 @@ struct UserSettingsUpdatingForm : Encodable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        if let currency = currency {
-            try container.encode(currency, forKey: .currency)
-        }
-        if let defaultPeriod = defaultPeriod {
-            try container.encode(defaultPeriod, forKey: .defaultPeriod)
-        }
-        
+        try container.encodeIfPresent(currency, forKey: .currency)
+        try container.encodeIfPresent(defaultPeriod, forKey: .defaultPeriod)
     }
 }
 

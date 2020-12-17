@@ -1,6 +1,6 @@
 //
 //  ExpenseCategoryViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 17/01/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -102,6 +102,14 @@ class ExpenseCategoryViewModel {
     
     var hasWaitingLoans: Bool {
         return waitingLoans.count > 0
+    }
+    
+    var description: String? {
+        return expenseCategory.description
+    }
+    
+    var isTreatedAsUnlinked: Bool {
+        return !isVirtual && !isBorrowOrReturn && !isCredit && prototypeKey == nil
     }
     
     init(expenseCategory: ExpenseCategory) {

@@ -1,6 +1,6 @@
 //
 //  ExpenseSourceInfoViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 25.11.2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -10,19 +10,24 @@ import UIKit
 import PromiseKit
 import SwiftyBeaver
 
-class ExpenseSourceInfoViewController : EntityInfoNavigationController {
+class ExpenseSourceInfoViewController : EntityInfoNavigationController, BankConnectableProtocol {
+    
     var viewModel: ExpenseSourceInfoViewModel!
     
     override var entityInfoViewModel: EntityInfoViewModel! {
         return viewModel
     }
     
+    var bankConnectableViewModel: BankConnectableViewModel! {
+        return viewModel.bankConnectableViewModel
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
-        if viewModel.accountConnected {
+        if bankConnectableViewModel.accountConnected {
             refreshData()
         }        
     }
-    
+        
     override func didTapIcon(field: IconInfoField?) {
         guard viewModel.canEditIcon else { return }
         modal(factory.iconsViewController(delegate: self, iconCategory: IconCategory.expenseSource))
@@ -41,8 +46,6 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     override func didTapInfoButton(field: ButtonInfoField?) {
         guard let field = field else { return }
         switch field.identifier {
-        case ExpenseSourceInfoField.bank.identifier:
-            didTapBankButton()
         case ExpenseSourceInfoField.statistics.identifier:
             modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
         case ExpenseSourceInfoField.transactionIncome.identifier:        
@@ -54,31 +57,31 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
         }
     }
     
-    override func didTapBankWarningInfoButton(field: BankWarningInfoField?) {
-        guard viewModel.canConnectBank else {
-            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
-            return
-        }
-        guard viewModel.reconnectNeeded else { return }
-        showConnectionSession()
+    override func didTapConnectBankButton(field: BankConnectionInfoField) {
+        connectTo(providerCodes: viewModel.expenseSourceViewModel?.providerCodes)
+    }
+    
+    override func didTapDisconnectBankButton(field: BankConnectionInfoField) {
+        disconnectAccount()
+    }
+    
+    override func didTapReconnectBankButton(field: BankConnectionInfoField) {
+        setupConnection()
+    }
+    
+    override func didTapSendInteractiveFieldsButton(field: BankConnectionInfoField) {
+        sendInteractiveCredentials()
+    }
+    
+    override func showEditScreen() {
+        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: viewModel.expenseSource, shouldSkipExamplesPrompt: false))
+    }
+    
+    override func didUpdateData() {
+        super.didUpdateData()
+        showAccounts()
     }
         
-    override func showEditScreen() {
-        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: viewModel.expenseSource))
-    }
-    
-    func didTapBankButton() {
-        guard viewModel.canConnectBank else {           
-            modal(factory.subscriptionNavigationViewController(requiredPlans: [.platinum]))
-            return
-        }
-        if viewModel.accountConnected {
-            removeAccountConnection()
-        } else {
-            showProviders()
-        }
-    }
-    
     override var isSelectingTransactionables: Bool {
         return false
     }
@@ -94,80 +97,18 @@ class ExpenseSourceInfoViewController : EntityInfoNavigationController {
     override func didRemoveTransaction(id: Int, type: TransactionType) {
         refreshData()
     }
-}
-
-extension ExpenseSourceInfoViewController : ConnectionViewControllerDelegate {
-    func showConnectionSession() {
-        messagePresenterManager.showHUD(with: NSLocalizedString("Подготовка подключения к банку...", comment: "Подготовка подключения к банку..."))
+    
+    override var viewController: Infrastructure.ViewController {
+        return Infrastructure.ViewController.ExpenseSourceInfoViewController
+    }
+    
+    override var presentingCategories: [NotificationCategory] {
+        return [NotificationCategory.saltedgeNotification(expenseSourceId: viewModel.expenseSource?.id)]
+    }
+    
+    override func navigate(to viewController: Infrastructure.ViewController, with category: NotificationCategory) {
         
-        firstly {
-            viewModel.reconnectSessionURL()
-        }.ensure {
-            self.messagePresenterManager.dismissHUD()
-        }.get { connectionURL in
-            self.showConnectionViewController(connectionURL: connectionURL)
-        }.catch { e in
-            print(e)
-            SwiftyBeaver.error(e)
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
-        }
-    }
-    
-    func showConnectionViewController(connectionURL: URL) {
-        
-        let connectionViewController = factory.connectionViewController(delegate: self,
-                                                                              providerViewModel: nil,
-                                                                              connectionType: viewModel.reconnectType,
-                                                                              connectionURL: connectionURL,
-                                                                              connection: viewModel.connection)
-        modal(connectionViewController)
-    }
-        
-    func didConnectToConnection(_ providerViewModel: ProviderViewModel?, connection: Connection) {
-        
-        refreshData()
-    }
-        
-    func didNotConnect() {
-        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
-    }
-    
-    func didNotConnect(error: Error) {
-        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
-    }
-}
-
-extension ExpenseSourceInfoViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
-    func showProviders() {
-        guard let providersViewController = factory.providersViewController(delegate: self, fetchDataFrom: viewModel.fetchDataFrom) else { return }
-        modal(UINavigationController(rootViewController: providersViewController))
-    }
-    
-    func didConnectTo(_ providerViewModel: ProviderViewModel?, connection: Connection) {
-        showAccountsViewController(for: connection)
-    }
-    
-    func showAccountsViewController(for connection: Connection) {
-        let currencyCode = viewModel.expenseSourceViewModel?.currency.code
-        slideUp(factory.accountsViewController(delegate: self,
-                                               connection: connection,
-                                               currencyCode: currencyCode,
-                                               nature: .account))
-    }
-    
-    func didSelect(accountViewModel: AccountViewModel, connection: Connection) {
-        connect(accountViewModel, connection)
-    }
-    
-    func connect(_ accountViewModel: AccountViewModel, _ connection: Connection) {
-        viewModel.connect(accountViewModel: accountViewModel, connection: connection)
-        save()
-    }
-    
-    func removeAccountConnection() {
-        viewModel.removeAccountConnection()
-        save()
-    }
+    }    
 }
 
 extension ExpenseSourceInfoViewController : IconsViewControllerDelegate {

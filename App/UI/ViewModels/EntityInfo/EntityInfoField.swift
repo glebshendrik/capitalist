@@ -1,6 +1,6 @@
 //
 //  EntityInfoField.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 13.11.2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -15,24 +15,27 @@ enum EntityInfoFieldType {
     case bool
     case button
     case reminder
-    case bankWarning
+    case bankConnection
+    case description
     
     var identifier: String {
         switch self {
-        case .combined:
-            return "CombinedInfoTableViewCell"
-        case .icon:
-            return "IconInfoTableViewCell"
-        case .basic:
-            return "BasicInfoTableViewCell"
-        case .bool:
-            return "SwitchInfoTableViewCell"
-        case .button:
-            return "ButtonInfoTableViewCell"
-        case .reminder:
-            return "ReminderInfoTableViewCell"
-        case .bankWarning:
-            return "BankWarningInfoTableViewCell"
+            case .combined:
+                return "CombinedInfoTableViewCell"
+            case .icon:
+                return "IconInfoTableViewCell"
+            case .basic:
+                return "BasicInfoTableViewCell"
+            case .bool:
+                return "SwitchInfoTableViewCell"
+            case .button:
+                return "ButtonInfoTableViewCell"
+            case .reminder:
+                return "ReminderInfoTableViewCell"
+            case .bankConnection:
+                return "BankConnectionInfoTableViewCell"
+            case .description:
+                return "DescriptionInfoTableViewCell"
         }
     }
 }

@@ -1,6 +1,6 @@
 //
 //  ExpenseCategoryInfoViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 27.11.2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -37,7 +37,12 @@ class ExpenseCategoryInfoViewController : EntityInfoNavigationController {
     
     private func didTapTransactionButton() {
         if viewModel.isBorrow {
-            modal(factory.borrowEditViewController(delegate: self, type: .debt, borrowId: nil, source: nil, destination: viewModel.expenseCategoryViewModel))
+            modal(factory.borrowEditViewController(delegate: self,
+                                                   type: .debt,
+                                                   borrowId: nil,
+                                                   source: nil,
+                                                   destination: viewModel.expenseCategoryViewModel,
+                                                   borrowingTransaction: nil))
         }
         else {
             modal(factory.transactionEditViewController(delegate: self, source: nil, destination: viewModel.expenseCategoryViewModel, transactionType: .expense))

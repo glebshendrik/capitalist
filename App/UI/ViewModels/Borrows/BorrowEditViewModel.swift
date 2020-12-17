@@ -1,6 +1,6 @@
 //
 //  BorrowEditViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 13/09/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -179,7 +179,7 @@ class BorrowEditViewModel {
     var expenseSourceCurrencyCode: String? { return expenseSourceCurrency?.code }
     
     // Visibility
-    var removeButtonHidden: Bool { return isNew }
+    var removeButtonHidden: Bool { return isNew || isBorrowingTransactionRemote }
     
     var returnButtonHidden: Bool {
         guard !isNew, let borrow = borrow else { return true }
@@ -187,7 +187,7 @@ class BorrowEditViewModel {
     }
     
     var onBalanceSwitchHidden: Bool {
-        return !isNew || selectedCurrency == nil
+        return !isNew || selectedCurrency == nil || borrowingTransaction != nil
     }
     
     var expenseSourceFieldHidden: Bool {
@@ -195,7 +195,21 @@ class BorrowEditViewModel {
     }
     
     // Permissions
-    var canChangeCurrency: Bool { return isNew }
+    var canChangeCurrency: Bool { return isNew && borrowingTransaction == nil }
+    
+    var canChangeAmount: Bool { return (isNew && borrowingTransaction == nil) || (!isNew && !isBorrowingTransactionRemote) }
+    
+    var canChangeExpenseSource: Bool { return isNew && borrowingTransaction == nil }
+    
+    var canChangeBorrowedAt: Bool { return !isNew || (isNew && borrowingTransaction == nil) }
+    
+    var shouldSaveBorrowingTransaction: Bool {
+        return isNew && borrowingTransaction != nil
+    }
+    
+    var isBorrowingTransactionRemote: Bool {
+        return borrowingTransaction?.isRemote ?? false
+    }
     
     init(borrowsCoordinator: BorrowsCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
@@ -207,11 +221,21 @@ class BorrowEditViewModel {
         self.expenseSourcesCoordinator = expenseSourcesCoordinator
     }
     
-    func set(type: BorrowType, source: TransactionSource?, destination: TransactionDestination?) {
+    func set(type: BorrowType,
+             source: TransactionSource?,
+             destination: TransactionDestination?,
+             borrowingTransaction: Transaction?) {
         self.type = type
         selectedCurrency = type == .debt ? source?.currency : destination?.currency
         selectedSource = source
         selectedDestination = destination
+        if let borrowingTransaction = borrowingTransaction {
+            self.borrowingTransaction = TransactionViewModel(transaction: borrowingTransaction)
+        }        
+        let amountCents = type == .debt ? borrowingTransaction?.amountCents : borrowingTransaction?.convertedAmountCents
+        amount = amountCents?.moneyDecimalString(with: selectedCurrency)
+        self.name = borrowingTransaction?.comment
+        self.borrowedAt = borrowingTransaction?.gotAt ?? Date()        
         shouldRecordOnBalance = source != nil && destination != nil
     }
     
@@ -333,13 +357,44 @@ class BorrowEditViewModel {
 // Creation
 extension BorrowEditViewModel {
     func create() -> Promise<Void> {
-        guard let type = type else {
+        guard
+            let type = type
+        else {
             return Promise(error: BorrowError.borrowIsNotSpecified)
         }
-        if type == .debt {
-            return borrowsCoordinator.createDebt(with: creationForm()).asVoid()
+        return
+            firstly {
+                saveBorrowingTransaction()
+            }.then { () -> Promise<Void> in
+                if type == .debt {
+                    return self.borrowsCoordinator.createDebt(with: self.creationForm()).asVoid()
+                }
+                return self.borrowsCoordinator.createLoan(with: self.creationForm()).asVoid()
+            }.asVoid()
+        
+    }
+    
+    func saveBorrowingTransaction() -> Promise<Void> {
+        guard
+            shouldSaveBorrowingTransaction,
+            let borrowingTransaction = borrowingTransaction
+        else {
+            return Promise.value(())
         }
-        return borrowsCoordinator.createLoan(with: creationForm()).asVoid()
+        return transactionsCoordinator.update(with: TransactionUpdatingForm(id: borrowingTransaction.id,
+                                                                            sourceId: selectedSource?.id,
+                                                                            sourceType: selectedSource?.type,
+                                                                            destinationId: selectedDestination?.id,
+                                                                            destinationType: selectedDestination?.type,
+                                                                            amountCents: borrowingTransaction.amountCents,
+                                                                            amountCurrency: borrowingTransaction.currency.code,
+                                                                            convertedAmountCents: borrowingTransaction.convertedAmountCents,
+                                                                            convertedAmountCurrency: borrowingTransaction.convertedCurrency.code,
+                                                                            gotAt: borrowingTransaction.gotAt,
+                                                                            comment: borrowingTransaction.comment,
+                                                                            returningBorrowId: borrowingTransaction.transaction.returningBorrow?.id,
+                                                                            isBuyingAsset: borrowingTransaction.transaction.isBuyingAsset,
+                                                                            updateSimilarTransactions: false))
     }
     
     func isCreationFormValid() -> Bool {

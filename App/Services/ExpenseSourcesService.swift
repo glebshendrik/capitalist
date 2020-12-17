@@ -1,6 +1,6 @@
 //
 //  ExpenseSourcesService.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 25/12/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -32,6 +32,10 @@ class ExpenseSourcesService : Service, ExpenseSourcesServiceProtocol {
     
     func updatePosition(with updatingForm: ExpenseSourcePositionUpdatingForm) -> Promise<Void> {
         return request(APIRoute.updateExpenseSourcePosition(form: updatingForm))
+    }
+    
+    func updateMaxFetchInterval(with updatingForm: ExpenseSourceMaxFetchIntervalUpdatingForm) -> Promise<Void> {
+        return request(APIRoute.updateExpenseSourceMaxFetchInterval(form: updatingForm))
     }
     
     func destroy(by id: Int, deleteTransactions: Bool) -> Promise<Void> {

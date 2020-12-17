@@ -1,6 +1,6 @@
 //
 //  MainViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 30/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -13,7 +13,11 @@ import SwifterSwift
 import BetterSegmentedControl
 import EasyTipView
 
-class MainViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, NavigationBarColorable, UIFactoryDependantProtocol {
+class MainViewController : UIViewController,
+                           UIMessagePresenterManagerDependantProtocol,
+                           NavigationBarColorable,
+                           UIFactoryDependantProtocol,
+                           Home {
     
     var navigationBarTintColor: UIColor? = UIColor.by(.black2)
     
@@ -67,14 +71,22 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     var tutorialTip: EasyTipView?
     @IBOutlet weak var menuTutorialAnchor: UIView!
     
+    var waitingQueue: [UIViewController] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        loadData()
+        loadData()        
 //        UIFlowManager.set(point: .incomeSourcesTutorial, reached: false)
 //        UIFlowManager.set(point: .debtsAndCreditsTutorial, reached: false)
 //        UIFlowManager.set(point: .settingsTutorial, reached: false)
+//        UIFlowManager.set(point: .transactionCreationInfoMessage, reached: false)
+//        UIFlowManager.set(point: .linkingIncomeSources, reached: false)
+//        UIFlowManager.set(point: .linkingExpenseSources, reached: false)
+//        UIFlowManager.set(point: .linkingExpenseCategories, reached: false)
         show(tutorials)
+        show(factory.transactionCreationInfoViewController()?.from(home: self),
+                      await: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -91,10 +103,13 @@ class MainViewController : UIViewController, UIMessagePresenterManagerDependantP
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !UIFlowManager.reached(point: .transactionCreationInfoMessage) {
-            modal(factory.transactionCreationInfoViewController())
-        }
         adviserTip?.show(animated: true, forView: titleView.tipAnchor, withinSuperview: titleView)
+        showWaiting()
+    }
+    
+    func cameHome(from: Infrastructure.ViewController) {
+        showWaiting()
+        loadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

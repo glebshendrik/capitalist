@@ -25,14 +25,14 @@ target 'Capitalist' do
   pod 'CircleProgressView', '~> 1.0'
   pod 'BEMCheckBox'
   pod 'AlignedCollectionViewFlowLayout'
-  pod 'ALTextInputBar' #, git: 'https://github.com/bclymer/ALTextInputBar', branch: 'master'
+#  pod 'ALTextInputBar' #, git: 'https://github.com/bclymer/ALTextInputBar', branch: 'master'
   pod 'Charts'
   pod 'RandomColorSwift', git: 'https://github.com/onevcat/RandomColorSwift', branch: 'master'
   pod 'MSPeekCollectionViewDelegateImplementation', '~> 2.0'
   pod 'CSV.swift'
   pod 'RecurrencePicker', git: 'https://github.com/petalvlad/RecurrencePicker', branch: 'master' 
-  pod 'SaltEdge-iOS-Swift', git: 'https://github.com/petalvlad/saltedge-ios-swift', branch: 'v3.3.1'
-#  pod 'SaltEdge-iOS-Swift', '~> 3.3.1'
+#  pod 'SaltEdge-iOS-Swift', git: 'https://github.com/petalvlad/saltedge-ios-swift', branch: 'v3.3.1'
+  pod 'SaltEdge-iOS-Swift', '3.3.9'
   pod 'SVGKit', '~> 2.1'
   pod 'SDWebImageSVGCoder', '~> 0.3'
   pod 'SnapKit', '~> 4.2.0'
@@ -53,16 +53,26 @@ target 'Capitalist' do
   pod "Haptica"
   pod 'SwipeCellKit'
   pod 'BadgeHub'
-  pod 'Macaw'
+  pod 'Macaw', git: 'https://github.com/petalvlad/Macaw', branch: 'master'
   pod 'SwiftyBeaver'
   pod 'Adjust', '~> 4.22.1'
   pod 'lottie-ios'
   pod 'UPCarouselFlowLayout'
+  pod 'PopupDialog', git: 'https://github.com/petalvlad/PopupDialog', branch: 'master'
 end
 
 post_install do |installer|
     installer.pods_project.build_configurations.each do |config|
         config.build_settings.delete('CODE_SIGNING_ALLOWED')
         config.build_settings.delete('CODE_SIGNING_REQUIRED')
+        config.build_settings["ONLY_ACTIVE_ARCH"] = "YES"
+#        config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 9.0
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+        end
+      end
     end
 end

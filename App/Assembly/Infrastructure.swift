@@ -1,6 +1,6 @@
 //
 //  Infrastructure.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 20/05/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -82,6 +82,7 @@ struct Infrastructure {
         case ConnectionViewController
         case AccountsViewController
         case CardTypesViewController
+        case ExperimentalBankFeatureViewController
         
         // Expense Categories
         case ExpenseCategoryEditNavigationController
@@ -125,6 +126,8 @@ struct Infrastructure {
         case PasscodeViewController
         case CountriesViewController
         case AppInfoViewController
+        case TransactionableExamplesViewController
+        case PrototypesLinkingViewController
         
         // Profile
         case ProfileViewController
@@ -144,6 +147,7 @@ struct Infrastructure {
         case OnboardingPage6ViewController
         case OnboardingPage7ViewController
         case OnboardingPage8ViewController
+        case OnboardCurrencyViewController
         case TransactionablesCreationViewController
         case TransactionCreationInfoViewController
         
@@ -190,7 +194,8 @@ struct Infrastructure {
                  .ConnectionViewController,
                  .AccountsViewController,
                  .ExpenseSourcesViewController,
-                 .CardTypesViewController:
+                 .CardTypesViewController,
+                 .ExperimentalBankFeatureViewController:
                 return .ExpenseSources
             case .ExpenseCategoryEditNavigationController,
                  .ExpenseCategoryEditViewController,
@@ -209,7 +214,9 @@ struct Infrastructure {
                  .AppUpdateViewController,
                  .PasscodeViewController,
                  .CountriesViewController,
-                 .AppInfoViewController:
+                 .AppInfoViewController,
+                 .TransactionableExamplesViewController,
+                 .PrototypesLinkingViewController:
                 return .Common
             case .ProfileViewController,
                  .ChangePasswordViewController:
@@ -224,6 +231,7 @@ struct Infrastructure {
                  .OnboardingPage6ViewController,
                  .OnboardingPage7ViewController,
                  .OnboardingPage8ViewController,
+                 .OnboardCurrencyViewController,
                  .TransactionablesCreationViewController,
                  .TransactionCreationInfoViewController:
                 return .Onboarding

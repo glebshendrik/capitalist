@@ -1,6 +1,6 @@
 //
 //  UIMessagePresenterManagerProtocol.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -43,4 +43,14 @@ protocol UIMessagePresenterManagerProtocol {
         message: String,
         actions: [MessageDialogAction],
         from viewController: UIViewController) -> Promise<MessageDialogAction>
+}
+
+extension UIMessagePresenterManagerDependantProtocol {
+    func showHUD() {
+        messagePresenterManager.showHUD()
+    }
+    
+    func dismissHUD() {
+        messagePresenterManager.dismissHUD()
+    }
 }

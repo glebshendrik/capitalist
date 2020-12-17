@@ -1,6 +1,6 @@
 //
 //  ApplicationRouterProtocol.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -21,8 +21,6 @@ protocol ApplicationRouterProtocol {
     func route()
     func viewController(_ type: Infrastructure.ViewController) -> UIViewController
     func initDependencies(with resolver: Resolver)
-    func setMinimumAllowed(version: String?, build: String?)
-    func setWindow(blurred: Bool)
     func showPasscodeScreen()
     func dismissPresentedAlerts()
     func postDataUpdated()

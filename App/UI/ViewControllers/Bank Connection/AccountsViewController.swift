@@ -1,6 +1,6 @@
 //
 //  AccountsViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 04/07/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 
 protocol AccountsViewControllerDelegate : class {
-    func didSelect(accountViewModel: AccountViewModel, connection: Connection)
+    func didSelect(account: AccountViewModel)
 }
 
 class AccountsViewController : UIViewController, UIMessagePresenterManagerDependantProtocol {
@@ -83,10 +83,10 @@ extension AccountsViewController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard   let accountViewModel = viewModel.accountViewModel(at: indexPath),
-                let connection = viewModel.connection else { return }
+        guard let accountViewModel = viewModel.accountViewModel(at: indexPath) else { return }
         
-        close()
-        delegate?.didSelect(accountViewModel: accountViewModel, connection: connection)
+        closeButtonHandler {            
+            self.delegate?.didSelect(account: accountViewModel)
+        }        
     }
 }

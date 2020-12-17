@@ -1,6 +1,6 @@
 //
 //  IncomeSourceTableViewCell.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 14/03/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -29,7 +29,7 @@ class IncomeSourceTableViewCell : SwipeTableViewCell {
         iconView.vectorIconMode = .fullsize
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = viewModel.defaultIconName
-        iconView.backgroundViewColor = UIColor.by(.gray1)
+        iconView.backgroundViewColor = .clear
         iconView.iconTintColor = UIColor.by(.white100)
     }
 }

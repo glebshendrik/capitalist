@@ -1,12 +1,13 @@
 //
 //  UserSessionManager.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
 //
 
 import Locksmith
+import SwiftyBeaver
 
 private enum SessionKeys : String {
     ///ProviderName key for saving Provider.name which is a string representation of auth provider
@@ -31,6 +32,7 @@ class UserSessionManager: UserSessionManagerProtocol {
         saveData(session.joyBasketId, withKey: SessionKeys.JoyBasketId.rawValue, inService: SessionKeys.Tokens.rawValue)
         saveData(session.riskBasketId, withKey: SessionKeys.RiskBasketId.rawValue, inService: SessionKeys.Tokens.rawValue)
         saveData(session.safeBasketId, withKey: SessionKeys.SafeBasketId.rawValue, inService: SessionKeys.Tokens.rawValue)
+        SwiftyBeaver.info("ROUTE /users/\(session.userId) Token token=\(session.token)")
     }
     
     func loadStoredSession() -> Session? {

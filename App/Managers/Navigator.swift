@@ -1,12 +1,13 @@
 //
 //  Navigator.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
 //
 
 import UIKit
+import Foundation
 
 class Navigator: NavigatorProtocol {
     
@@ -20,12 +21,35 @@ class Navigator: NavigatorProtocol {
         self.window = window
     }
     
-    func isDestinationViewControllerVisible(_ viewController: Infrastructure.ViewController) -> Bool {
-        guard let visibleViewController = (visibleViewController as? Navigatable) else { return false }
+    func isDestinationViewControllerVisible(_ viewController: Infrastructure.ViewController, with category: NotificationCategory) -> Bool {
+        guard
+            let visibleViewController = (visibleViewController as? Navigatable)
+        else {
+            return false
+        }
         
-        return visibleViewController.viewController.identifier == viewController.identifier
+        return  visibleViewController.viewController.identifier == viewController.identifier &&
+                visibleViewController.presentingCategories.any(matching: { $0.notificationIdentifier == category.notificationIdentifier })
     }
     
+    var rootNavigatable: Navigatable? {
+        return
+            (window.rootViewController as? Navigatable) ??
+            ((window.rootViewController as? UINavigationController)?.topViewController as? Navigatable) ??
+            ((window.rootViewController as? UITabBarController)?.selectedViewController as? Navigatable)
+    }
+    
+    func navigate(to viewController: Infrastructure.ViewController, with category: NotificationCategory) {
+        if isDestinationViewControllerVisible(viewController, with: category) {
+            triggerDestinationUpdate()
+        }
+        else {            
+            if let rootViewController = rootNavigatable {
+                rootViewController.navigate(to: viewController, with: category)
+            }
+        }
+    }
+        
     func triggerDestinationUpdate() {
         guard let visibleViewController = (visibleViewController as? Updatable) else { return }
         visibleViewController.update()
@@ -35,18 +59,7 @@ class Navigator: NavigatorProtocol {
         guard let visibleViewController = (window.rootViewController as? Badgeable) else { return }
         visibleViewController.updateBadge()
     }
-    
-    func navigate(to viewController: Infrastructure.ViewController) {
-        if isDestinationViewControllerVisible(viewController) {
-            triggerDestinationUpdate()
-        }
-        else {
-            if let rootViewController = (window.rootViewController as? Navigatable) {
-                rootViewController.navigate(to: viewController)
-            }
-        }
-    }
-    
+        
     private func topViewController(of rootViewController: UIViewController?) -> UIViewController? {
         if let navigationController = (rootViewController as? UINavigationController) {
             return topViewController(of: navigationController.visibleViewController)

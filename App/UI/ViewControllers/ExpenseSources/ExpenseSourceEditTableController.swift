@@ -1,6 +1,6 @@
 //
 //  ExpenseSourceEditTableController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 26/12/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -16,8 +16,8 @@ protocol ExpenseSourceEditTableControllerDelegate : FormFieldsTableViewControlle
     func didChange(name: String?)
     func didChange(amount: String?)
     func didChange(creditLimit: String?)
-    func didTapBankButton()
     func didTapRemoveButton()
+    func didTapBankButton()
 }
 
 class ExpenseSourceEditTableController : FormFieldsTableViewController {

@@ -1,6 +1,6 @@
 //
 //  APIResource.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -23,17 +23,18 @@ enum APIRoute: URLRequestConvertible {
     static var baseURLString: String {
         switch UIApplication.shared.inferredEnvironment {
         case .debug:
-//            return "https://api.threebaskets.net"
-//            return "https://skrudzh-staging.herokuapp.com"
-//            return "https://test.threebaskets.net"
-            return storedBaseURLString ?? "https://skrudz.tempio.app"
-//            return "https://staging.threebaskets.net"
+//            return storedBaseURLString ?? "https://skrudz.tempio.app"
+//            return storedBaseURLString ?? "https://staging.threebaskets.net"
+            return "https://staging.threebaskets.net"
 //            return "https://api.threebaskets.net"
         case .testFlight:
+//            return "https://skrudz.tempio.app"
             return storedBaseURLString ?? "https://api.threebaskets.net"
+//            return storedBaseURLString ?? "https://api.threebaskets.net"
 //            return "https://skrudz.tempio.app"
 //            return "https://test.threebaskets.net"
         case .appStore:
+//            return "https://skrudz.tempio.app"
             return "https://api.threebaskets.net"
         }
     }
@@ -51,6 +52,9 @@ enum APIRoute: URLRequestConvertible {
     case onboardUser(id: Int)
     case destroyUserData(id: Int)
     case confirmUser(id: Int)
+    
+    // SaltEdgeCustomers
+    case createCustomer(userId: Int)
     
     // Sessions
     case createSession(form: SessionCreationForm)
@@ -72,6 +76,7 @@ enum APIRoute: URLRequestConvertible {
     case indexExpenseSources(userId: Int, currency: String?)
     case updateExpenseSource(form: ExpenseSourceUpdatingForm)
     case updateExpenseSourcePosition(form: ExpenseSourcePositionUpdatingForm)
+    case updateExpenseSourceMaxFetchInterval(form: ExpenseSourceMaxFetchIntervalUpdatingForm)
     case destroyExpenseSource(id: Int, deleteTransactions: Bool)
     
     // ExpenseCategories
@@ -165,7 +170,9 @@ enum APIRoute: URLRequestConvertible {
     case updateConnection(form: ConnectionUpdatingForm)
     
     // TransactionableExamples
-    case indexTransactionableExamples(transactionableType: TransactionableType, basketType: BasketType?)
+    case indexTransactionableExamples(transactionableType: TransactionableType,
+                                      basketType: BasketType?,
+                                      isUsed: Bool?)
     
     var method: HTTPMethod {
         return APIRouteMethod.method(for: self)

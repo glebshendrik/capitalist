@@ -1,6 +1,6 @@
 //
 //  NavigatorProtocol.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -8,7 +8,9 @@
 
 protocol Navigatable {
     var viewController: Infrastructure.ViewController { get }
-    func navigate(to viewController: Infrastructure.ViewController)
+    var presentingCategories: [NotificationCategory] { get }
+    func navigate(to viewController: Infrastructure.ViewController,
+                  with category: NotificationCategory)
 }
 
 protocol Updatable {
@@ -24,8 +26,10 @@ protocol Scrollable {
 }
 
 protocol NavigatorProtocol {
-    func isDestinationViewControllerVisible(_ viewController: Infrastructure.ViewController) -> Bool
-    func navigate(to viewController: Infrastructure.ViewController)
+    func isDestinationViewControllerVisible(_ viewController: Infrastructure.ViewController,
+                                            with category: NotificationCategory) -> Bool
+    func navigate(to viewController: Infrastructure.ViewController,
+                  with category: NotificationCategory)
     func triggerDestinationUpdate()
     func updateBadges()
 }

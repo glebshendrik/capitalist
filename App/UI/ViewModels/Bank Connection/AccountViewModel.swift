@@ -1,6 +1,6 @@
 //
 //  AccountViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 04/07/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -54,10 +54,6 @@ class AccountViewModel {
         return account.nature
     }
     
-    var connectionId: String? {
-        return connection.saltedgeId
-    }
-    
     var creditLimitCents: Int? {
         return account.creditLimit
 //        guard let creditLimit = account.extra?.creditLimit else { return nil }
@@ -76,10 +72,6 @@ class AccountViewModel {
         return account.cardNumbers?.joined(separator: ", ")
     }
     
-    var providerLogoURL: URL? {
-        return connection.providerLogoURL
-    }
-    
     var cardLastNumbers: String? {
         guard let numbers = account.cardNumbers?.first?.components(separatedBy: "*").last else { return nil }
         return "•••• \(numbers)"
@@ -87,33 +79,6 @@ class AccountViewModel {
     
     var cardType: CardType? {
         return account.cardType
-    }
-    
-    var connection: Connection {
-        return account.connection
-    }
-    
-    var reconnectNeeded: Bool {
-        guard connection.lastStage == .finish else { return false }
-        guard connection.status == .active else { return true }
-        
-        guard   let interactive = connection.interactive,
-                let nextRefreshPossibleAt = connection.nextRefreshPossibleAt
-        else {
-            return false
-        }
-        return interactive && nextRefreshPossibleAt.isInPast
-    }
-    
-    var reconnectType: ProviderConnectionType {
-        switch connection.status {
-        case .active:
-            return .refresh
-        case .inactive:
-            return .reconnect
-        case .deleted:
-            return .create
-        }
     }
     
     init(account: Account) {

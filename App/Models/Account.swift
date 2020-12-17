@@ -1,6 +1,6 @@
 //
 //  Account.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 05.06.2020.
 //  Copyright © 2020 Real Tranzit. All rights reserved.
@@ -39,7 +39,6 @@ struct Account : Decodable {
     let balance: Int
     let cardType: CardType?
     let cardNumbers: [String]?
-    let connection: Connection
     let currency: Currency
     let nature: AccountNature
     let creditLimit: Int?
@@ -70,7 +69,6 @@ struct Account : Decodable {
         case balance = "balance"
         case cardType = "card_type"
         case cardNumbers = "cards"
-        case connection = "connection"
         case currency = "currency"
         case nature = "nature"
         case creditLimit = "credit_limit"

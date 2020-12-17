@@ -1,6 +1,6 @@
 //
 //  ViewControllersRegistration.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 20/05/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -274,6 +274,11 @@ extension ApplicationAssembly {
         container.registerForSkrudzhStoryboard(BorrowInfoViewController.self) { (r, c) in
             c.viewModel = r.resolve(BorrowInfoViewModel.self)
         }
+                
+        // OnboardCurrencyViewController
+        container.registerForSkrudzhStoryboard(OnboardCurrencyViewController.self) { (r, c) in
+            c.viewModel = r.resolve(OnboardCurrencyViewModel.self)
+        }
         
         // TransactionablesCreationViewController
         container.registerForSkrudzhStoryboard(TransactionablesCreationViewController.self) { (r, c) in
@@ -298,6 +303,21 @@ extension ApplicationAssembly {
         // AppInfoViewController
         container.registerForSkrudzhStoryboard(AppInfoViewController.self) { (r, c) in
             c.accountCoordinator = r.resolve(AccountCoordinatorProtocol.self)
+        }
+        
+        // ExperimentalBankFeatureViewController
+        container.registerForSkrudzhStoryboard(ExperimentalBankFeatureViewController.self) { (r, c) in
+            
+        }
+        
+        // TransactionableExamplesViewController
+        container.registerForSkrudzhStoryboard(TransactionableExamplesViewController.self) { (r, c) in
+            c.viewModel = r.resolve(TransactionableExamplesViewModel.self)
+        }
+        
+        // PrototypesLinkingViewController
+        container.registerForSkrudzhStoryboard(PrototypesLinkingViewController.self) { (r, c) in
+            c.viewModel = r.resolve(PrototypesLinkingViewModel.self)
         }
     }
 }

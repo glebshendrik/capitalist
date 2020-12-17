@@ -1,6 +1,6 @@
 //
 //  Transaction.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 21/03/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -218,6 +218,7 @@ struct TransactionUpdatingForm : Encodable, Validatable {
     let comment: String?
     let returningBorrowId: Int?
     let isBuyingAsset: Bool
+    let updateSimilarTransactions: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -231,8 +232,9 @@ struct TransactionUpdatingForm : Encodable, Validatable {
         case convertedAmountCurrency = "converted_amount_currency"
         case gotAt = "got_at"
         case comment
-        case returningBorrowId = "returning_borrow_id"
+        case returningBorrowId = "borrow_id"
         case isBuyingAsset = "buying_asset"
+        case updateSimilarTransactions = "update_similar_transactions"
     }
     
     func validate() -> [String : String]? {

@@ -1,6 +1,6 @@
 //
 //  SubscriptionViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 26.02.2020.
 //  Copyright © 2020 Real Tranzit. All rights reserved.

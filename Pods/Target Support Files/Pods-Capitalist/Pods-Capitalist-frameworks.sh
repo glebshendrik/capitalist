@@ -161,7 +161,6 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/ALTextInputBar/ALTextInputBar.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
@@ -177,6 +176,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Charts/Charts.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ESPullToRefresh/ESPullToRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework"
@@ -187,6 +187,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MSPeekCollectionViewDelegateImplementation/MSPeekCollectionViewDelegateImplementation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Macaw/Macaw.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework"
@@ -217,7 +218,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/ALTextInputBar/ALTextInputBar.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework"
@@ -233,6 +233,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Charts/Charts.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ESPullToRefresh/ESPullToRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework"
@@ -243,6 +244,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MSPeekCollectionViewDelegateImplementation/MSPeekCollectionViewDelegateImplementation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Macaw/Macaw.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework"

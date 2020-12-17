@@ -1,6 +1,6 @@
 //
 //  ExpenseCategory.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 14/01/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -26,6 +26,7 @@ struct ExpenseCategory : Decodable {
     let waitingLoans: [Borrow]
     let prototypeKey: String?
     let isVirtual: Bool
+    let description: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -45,6 +46,21 @@ struct ExpenseCategory : Decodable {
         case waitingLoans = "waiting_loans"
         case prototypeKey = "prototype_key"
         case isVirtual = "is_virtual"
+        case description
+    }
+    
+    func toUpdatingForm() -> ExpenseCategoryUpdatingForm {
+        return
+            ExpenseCategoryUpdatingForm(id: id,
+                                        iconURL: iconURL,
+                                        name: name,
+                                        monthlyPlannedCents: monthlyPlannedCents,
+                                        description: description,
+                                        prototypeKey: prototypeKey,
+                                        reminderAttributes: ReminderNestedAttributes(id: reminder?.id,
+                                                                                     startDate: reminder?.startDate,
+                                                                                     recurrenceRule: reminder?.recurrenceRule,
+                                                                                     message: reminder?.message))
     }
     
 }
@@ -54,7 +70,9 @@ struct ExpenseCategoryCreationForm : Encodable, Validatable {
     let iconURL: URL?
     let name: String?
     let currency: String?
-    let monthlyPlannedCents: Int?    
+    let monthlyPlannedCents: Int?
+    let description: String?
+    let prototypeKey: String?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
@@ -63,6 +81,8 @@ struct ExpenseCategoryCreationForm : Encodable, Validatable {
         case basketId = "basket_id"
         case currency = "currency"
         case monthlyPlannedCents = "monthly_planned_cents"
+        case description
+        case prototypeKey = "prototype_key"
         case reminderAttributes = "reminder_attributes"
     }
     
@@ -90,12 +110,16 @@ struct ExpenseCategoryUpdatingForm : Encodable, Validatable {
     let iconURL: URL?
     let name: String?    
     let monthlyPlannedCents: Int?
+    var description: String?
+    var prototypeKey: String?
     let reminderAttributes: ReminderNestedAttributes?
     
     enum CodingKeys: String, CodingKey {
         case name
         case iconURL = "icon_url"
         case monthlyPlannedCents = "monthly_planned_cents"
+        case description
+        case prototypeKey = "prototype_key"
         case reminderAttributes = "reminder_attributes"
     }
     
@@ -104,6 +128,8 @@ struct ExpenseCategoryUpdatingForm : Encodable, Validatable {
         try container.encode(name, forKey: .name)
         try container.encode(iconURL, forKey: .iconURL)        
         try container.encode(monthlyPlannedCents, forKey: .monthlyPlannedCents)
+        try container.encode(description, forKey: .description)
+        try container.encode(prototypeKey, forKey: .prototypeKey)
         try container.encode(reminderAttributes, forKey: .reminderAttributes)
     }
     

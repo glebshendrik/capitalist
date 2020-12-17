@@ -8,8 +8,6 @@ import AppKit
 
 class ShapeLayer: CAShapeLayer {
     weak var renderer: NodeRenderer?
-    var renderTransform: CGAffineTransform?
-    weak var animationCache: AnimationCache?
     var shouldRenderContent = true
     var isForceRenderingEnabled = true
 
@@ -19,13 +17,38 @@ class ShapeLayer: CAShapeLayer {
             return
         }
 
-        let renderContext = RenderContext(view: .none)
-        renderContext.cgContext = ctx
-
-        if let renderTransform = renderTransform {
-            ctx.concatenate(renderTransform)
-        }
-
         renderer?.directRender(in: ctx, force: isForceRenderingEnabled)
     }
+}
+
+extension ShapeLayer {
+
+    func setupStrokeAndFill(_ shape: Shape) {
+
+        // Stroke
+        if let stroke = shape.stroke {
+            if let color = stroke.fill as? Color {
+                strokeColor = color.toCG()
+            } else {
+                strokeColor = MColor.black.cgColor
+            }
+
+            lineWidth = CGFloat(stroke.width)
+            lineCap = MCAShapeLayerLineCap.mapToGraphics(model: stroke.cap)
+            lineJoin = MCAShapeLayerLineJoin.mapToGraphics(model: stroke.join)
+            lineDashPattern = stroke.dashes.map { NSNumber(value: $0) }
+            lineDashPhase = CGFloat(stroke.offset)
+        } else if shape.fill == nil {
+            strokeColor = MColor.black.cgColor
+            lineWidth = 1.0
+        }
+
+        // Fill
+        if let color = shape.fill as? Color {
+            fillColor = color.toCG()
+        } else {
+            fillColor = MColor.clear.cgColor
+        }
+    }
+
 }

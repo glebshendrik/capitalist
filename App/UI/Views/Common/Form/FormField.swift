@@ -1,6 +1,6 @@
 //
 //  FormField.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 02/08/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -217,7 +217,7 @@ class FormField : UIView {
     func updateIcon(forceImageUpdate: Bool = true) {
 //        icon.backgroundColor = unfocusedBackgroundColor
         icon.backgroundViewColor = unfocusedBackgroundColor
-        icon.vectorBackgroundViewColor = UIColor.by(.white100)
+//        icon.vectorBackgroundViewColor = UIColor.by(.white100)
         icon.iconTintColor = unfocusedIconTint
 //        iconContainer.backgroundColor = isVector ? UIColor.by(.white100) : unfocusedBackgroundColor
 //        icon.tintColor = unfocusedIconTint

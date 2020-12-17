@@ -1,6 +1,6 @@
 //
 //  SaltEdgeManager.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 22/06/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -9,6 +9,7 @@
 import Foundation
 import PromiseKit
 import SaltEdge
+import SwiftyBeaver
 
 class SaltEdgeManager : SaltEdgeManagerProtocol {
     static let applicationURLString: String = "saltedge-api-three-baskets://home.local"
@@ -41,6 +42,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                     seal.fulfill(value.data.secret)
 //                    SERequestManager.shared.set(customerSecret: value.data.secret)
                 case .failure(let error):
+                    SwiftyBeaver.error(error)
                     seal.reject(error)
                 }
             }
@@ -65,19 +67,21 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
     }
     
     private func loadSaltEdgeProviders(_ country: String?) -> Promise<[SEProvider]> {
-        if let country = country, let providers = providersCache[country] {
+        if let country = country,
+           let providers = providersCache[country] {
             return Promise.value(providers)
         }
-        return  firstly {
-                    when(fulfilled: loadSaltEdgeProviders(country, mode: "web"),
-                                    loadSaltEdgeProviders(country, mode: "oauth"))
-                }.map { web, oauth in
-                    let providers = web + oauth
-                    if let country = country {
-                        self.providersCache[country] = providers
-                    }
-                    return providers
+        return
+            firstly {
+                when(fulfilled: loadSaltEdgeProviders(country, mode: "web"),
+                     loadSaltEdgeProviders(country, mode: "oauth"))
+            }.map { web, oauth in
+                let providers = web + oauth
+                if let country = country {
+                    self.providersCache[country] = providers
                 }
+                return providers
+            }
     }
     
     private func loadSaltEdgeProviders(_ country: String?, mode: String) -> Promise<[SEProvider]> {
@@ -90,19 +94,25 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                 case .success(let value):
                     seal.fulfill(value.data)
                 case .failure(let error):
+                    SwiftyBeaver.error(error)
                     seal.reject(error)
                 }
             }
         }
     }
     
-    func createConnectSession(providerCode: String, countryCode: String, fromDate: Date, languageCode: String) -> Promise<URL> {
+    func createCreatingConnectionSession(providerCode: String,
+                                         countryCode: String,
+                                         fromDate: Date,
+                                         languageCode: String) -> Promise<ConnectionSession> {
         if  let customerSecret = self.customerSecret,
             let cachedSessionResponse = createConnectSessionCache[customerSecret]?[providerCode],
             let url = URL(string: cachedSessionResponse.connectUrl),
             cachedSessionResponse.expiresAt.isInFuture {
 
-            return Promise.value(url)
+            return Promise.value(ConnectionSession(url: url,
+                                                   type: .creating,
+                                                   expiresAt: cachedSessionResponse.expiresAt))
         }
         let connectSessionsParams = SEConnectSessionsParams(allowedCountries: [countryCode],
                                                             attempt: SEAttempt(automaticFetch: true,
@@ -115,33 +125,42 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                             javascriptCallbackType: "iframe",
                                                             includeFakeProviders: includeFakeProviders,
                                                             theme: "dark",
-                                                            consent: SEConsent(scopes: ["account_details", "transactions_details"],
+                                                            consent: SEConsent(scopes: ["account_details",
+                                                                                        "transactions_details"],
                                                                                fromDate: fromDate))
         
-        return Promise { seal in
-            SERequestManager.shared.createConnectSession(params: connectSessionsParams) { response in
-                switch response {
-                case .success(let value):
-                    guard let url = URL(string: value.data.connectUrl) else {
-                        seal.reject(SaltEdgeError.cannotCreateConnectSession)
-                        return
+        return
+            Promise { seal in
+                SERequestManager.shared.createConnectSession(params: connectSessionsParams) { response in
+                    switch response {
+                        case .success(let value):
+                            guard
+                                let url = URL(string: value.data.connectUrl)
+                            else {
+                                seal.reject(SaltEdgeError.cannotCreateConnectSession)
+                                return
+                            }
+                            if let customerSecret = self.customerSecret {
+                                if self.createConnectSessionCache[customerSecret] == nil {
+                                    self.createConnectSessionCache[customerSecret] = [:]
+                                }
+                                self.createConnectSessionCache[customerSecret]?[providerCode] = value.data
+                            }
+                            
+                            seal.fulfill(ConnectionSession(url: url,
+                                                           type: .creating,
+                                                           expiresAt: value.data.expiresAt))
+                        case .failure(let error):
+                            SwiftyBeaver.error(error)
+                            seal.reject(error)
                     }
-                    if let customerSecret = self.customerSecret {
-                        if self.createConnectSessionCache[customerSecret] == nil {
-                            self.createConnectSessionCache[customerSecret] = [:]
-                        }
-                        self.createConnectSessionCache[customerSecret]?[providerCode] = value.data
-                    }
-                    
-                    seal.fulfill(url)
-                case .failure(let error):
-                    seal.reject(error)
                 }
             }
-        }
     }
     
-    func createRefreshConnectionSession(connectionSecret: String, languageCode: String) -> Promise<URL> {
+    func createRefreshingConnectionSession(connectionSecret: String,
+                                           fromDate: Date,
+                                           languageCode: String) -> Promise<ConnectionSession> {
 //        if  let cachedSessionResponse = refreshConnectSessionCache[connectionSecret],
 //            let url = URL(string: cachedSessionResponse.connectUrl),
 //            cachedSessionResponse.expiresAt.isInFuture {
@@ -152,35 +171,45 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
         let refreshSessionsParams = SERefreshSessionsParams(attempt: SEAttempt(automaticFetch: true,
                                                                                dailyRefresh: true,
                                                                                locale: languageCode,
-                                                                               returnTo: "https://capitalistapp.net"),
+                                                                               returnTo: "https://capitalistapp.net",
+                                                                               fromDate: fromDate),
                                                             dailyRefresh: true,
+                                                            fromDate: fromDate,
                                                             javascriptCallbackType: "iframe",
                                                             includeFakeProviders: includeFakeProviders,
                                                             theme: "dark")
         
-        return Promise { seal in
-            SERequestManager.shared.refreshSession(with: connectionSecret, params: refreshSessionsParams) { response in
-                switch response {
-                case .success(let value):
-                    guard let url = URL(string: value.data.connectUrl) else {
-                        seal.reject(SaltEdgeError.cannotCreateConnectSession)
-                        return
+        return
+            Promise { seal in
+                SERequestManager.shared.refreshSession(with: connectionSecret, params: refreshSessionsParams) { response in
+                    switch response {
+                        case .success(let value):
+                            guard let url = URL(string: value.data.connectUrl) else {
+                                seal.reject(SaltEdgeError.cannotCreateConnectSession)
+                                return
+                            }
+                            //                    self.refreshConnectSessionCache[connectionSecret] = value.data
+                            seal.fulfill(ConnectionSession(url: url,
+                                                           type: .refreshing,
+                                                           expiresAt: value.data.expiresAt))
+                        case .failure(let error):
+                            SwiftyBeaver.error(error)
+                            seal.reject(error)
                     }
-//                    self.refreshConnectSessionCache[connectionSecret] = value.data
-                    seal.fulfill(url)
-                case .failure(let error):
-                    seal.reject(error)
                 }
             }
-        }
     }
     
-    func createReconnectSession(connectionSecret: String, fromDate: Date, languageCode: String) -> Promise<URL> {
+    func createReconnectingConnectionSession(connectionSecret: String,
+                                             fromDate: Date,
+                                             languageCode: String) -> Promise<ConnectionSession> {
         if  let cachedSessionResponse = reconnectConnectSessionCache[connectionSecret],
             let url = URL(string: cachedSessionResponse.connectUrl),
             cachedSessionResponse.expiresAt.isInFuture {
 
-            return Promise.value(url)
+            return Promise.value(ConnectionSession(url: url,
+                                                   type: .reconnecting,
+                                                   expiresAt: cachedSessionResponse.expiresAt))
         }
         
         let reconnectSessionsParams = SEReconnectSessionsParams(attempt: SEAttempt(automaticFetch: true,
@@ -192,68 +221,95 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                                                                 includeFakeProviders: includeFakeProviders,
                                                                 theme: "dark",
                                                                 overrideCredentialsStrategy: "override",
-                                                                consent: SEConsent(scopes: ["account_details", "transactions_details"],
+                                                                consent: SEConsent(scopes: ["account_details",
+                                                                                            "transactions_details"],
                                                                                    fromDate: fromDate))
         
-        return Promise { seal in
-            SERequestManager.shared.reconnectSession(with: connectionSecret, params: reconnectSessionsParams) { response in
-                switch response {
-                case .success(let value):
-                    guard let url = URL(string: value.data.connectUrl) else {
-                        seal.reject(SaltEdgeError.cannotCreateConnectSession)
-                        return
+        return
+            Promise { seal in
+                SERequestManager.shared.reconnectSession(with: connectionSecret, params: reconnectSessionsParams) { response in
+                    switch response {
+                        case .success(let value):
+                            guard let url = URL(string: value.data.connectUrl) else {
+                                seal.reject(SaltEdgeError.cannotCreateConnectSession)
+                                return
+                            }
+                            self.reconnectConnectSessionCache[connectionSecret] = value.data
+                            seal.fulfill(ConnectionSession(url: url,
+                                                           type: .reconnecting,
+                                                           expiresAt: value.data.expiresAt))
+                        case .failure(let error):
+                            SwiftyBeaver.error(error)
+                            seal.reject(error)
                     }
-                    self.reconnectConnectSessionCache[connectionSecret] = value.data
-                    seal.fulfill(url)
-                case .failure(let error):
-                    seal.reject(error)
                 }
             }
-        }
     }
     
     func getConnection(secret: String) -> Promise<SEConnection> {
-        return Promise { seal in
-            SERequestManager.shared.getConnection(with: secret) { response in
-                switch response {
-                case .success(let value):
-                    seal.fulfill(value.data)
-                case .failure(let error):
-                    seal.reject(error)
+        return
+            Promise { seal in
+                SERequestManager.shared.getConnection(with: secret) { response in
+                    switch response {
+                        case .success(let value):
+                            seal.fulfill(value.data)
+                        case .failure(let error):
+                            SwiftyBeaver.error(error)
+                            seal.reject(error)
+                    }
                 }
             }
-        }
+    }
+    
+    func confirm(connectionSecret: String, with code: String, delegate: SEConnectionFetchingDelegate) -> Promise<SEConnection> {
+        return
+            Promise { seal in
+                SERequestManager.shared.confirmConnection(with: connectionSecret,
+                                                          params: SEConnectionInteractiveParams(credentials: ["sms" : code]),
+                                                          fetchingDelegate: delegate) { response in
+                    switch response {
+                        case .success(let value):
+                            seal.fulfill(value.data)
+                        case .failure(let error):
+                            SwiftyBeaver.error(error)
+                            seal.reject(error)
+                    }
+                }
+            }
     }
     
     func removeConnection(secret: String) -> Promise<Void> {
-        return Promise { seal in
-            SERequestManager.shared.removeConnection(with: secret) { response in
-                switch response {
-                case .success(let value):
-                    guard value.data.removed else {
-                        seal.reject(SaltEdgeError.connectionNotRemoved)
-                        return
+        return
+            Promise { seal in
+                SERequestManager.shared.removeConnection(with: secret) { response in
+                    switch response {
+                        case .success(let value):
+                            guard value.data.removed else {
+                                seal.reject(SaltEdgeError.connectionNotRemoved)
+                                return
+                            }
+                            seal.fulfill(())
+                        case .failure(let error):                            
+                            SwiftyBeaver.error(error)
+                            seal.reject(error)
                     }
-                    seal.fulfill(())
-                case .failure(let error):
-                    seal.reject(error)
                 }
             }
-        }
     }
         
     func getProvider(code: String) -> Promise<SEProvider> {
-        return Promise { seal in
-            SERequestManager.shared.getProvider(code: code) { response in
-                switch response {
-                case .success(let value):
-                    seal.fulfill(value.data)
-                case .failure(let error):
-                    seal.reject(error)
+        return
+            Promise { seal in
+                SERequestManager.shared.getProvider(code: code) { response in
+                    switch response {
+                        case .success(let value):
+                            seal.fulfill(value.data)
+                        case .failure(let error):
+                            SwiftyBeaver.error(error)
+                            seal.reject(error)
+                    }
                 }
-            }
-        }
-        
+            }        
     }
     
     func loadAccounts(for connectionSecret: String) -> Promise<[SEAccount]> {
@@ -263,6 +319,7 @@ class SaltEdgeManager : SaltEdgeManagerProtocol {
                 case .success(let value):
                     seal.fulfill(value.data)
                 case .failure(let error):
+                    SwiftyBeaver.error(error)
                     seal.reject(error)
                 }
             }

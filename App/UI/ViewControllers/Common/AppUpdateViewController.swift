@@ -1,6 +1,6 @@
 //
 //  AppUpdateViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 15.01.2020.
 //  Copyright © 2020 Real Tranzit. All rights reserved.
@@ -8,7 +8,23 @@
 
 import UIKit
 
-class AppUpdateViewController : UIViewController {    
+class AppUpdateViewController : UIViewController, Away {
+    weak var home: Home?
+    
+    var id: String {
+        return Infrastructure.ViewController.AppUpdateViewController.identifier
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigationBarAppearance()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        home?.cameHome(from: .AppInfoViewController)
+    }
+    
     @IBAction func didTapUpdateButton(_ sender: Any) {
         gotoApp(appID: "1457533341")
     }

@@ -1,6 +1,6 @@
 //
 //  BorrowEditViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 12/09/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -102,8 +102,14 @@ extension BorrowEditViewController {
         viewModel.set(borrowId: borrowId, type: type)
     }
     
-    func set(type: BorrowType, source: TransactionSource?, destination: TransactionDestination?) {        
-        viewModel.set(type: type, source: source, destination: destination)
+    func set(type: BorrowType,
+             source: TransactionSource?,
+             destination: TransactionDestination?,
+             borrowingTransaction: Transaction?) {
+        viewModel.set(type: type,
+                      source: source,
+                      destination: destination,
+                      borrowingTransaction: borrowingTransaction)
     }
 }
 
@@ -122,6 +128,7 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
     }
     
     func didTapBorrowedAt() {
+        guard viewModel.canChangeBorrowedAt else { return }
         modal(factory.datePickerViewController(delegate: borrowedAtDateSelectionDelegate,
                                                date: viewModel.borrowedAt,
                                                minDate: nil,
@@ -138,6 +145,7 @@ extension BorrowEditViewController : BorrowEditTableControllerDelegate {
     }
     
     func didTapExpenseSource() {
+        guard viewModel.canChangeExpenseSource else { return }
         slideUp(factory.expenseSourceSelectViewController(delegate: self,
                                                           skipExpenseSourceId: nil,
                                                           selectionType: viewModel.expenseSourceSelectionType,
@@ -250,7 +258,7 @@ extension BorrowEditViewController {
 
 extension BorrowEditViewController {
     func focusFirstEmptyField() {
-        if viewModel.name == nil {
+        if viewModel.name == nil && isCurrentTopmostPresentedViewController {
             tableController.nameField.textField.becomeFirstResponder()
         }
     }
@@ -268,6 +276,7 @@ extension BorrowEditViewController {
         tableController.amountField.text = viewModel.amount
         tableController.amountField.placeholder = viewModel.amountTitle
         tableController.amountField.currency = viewModel.selectedCurrency
+        tableController.amountField.isEnabled = viewModel.canChangeAmount
         
         tableController.commentView.text = viewModel.comment ?? ""
     }
@@ -293,6 +302,7 @@ extension BorrowEditViewController {
         tableController.expenseSourceField.subValue = viewModel.expenseSourceAmount
         tableController.expenseSourceField.imageName = viewModel.expenseSourceIconDefaultImageName
         tableController.expenseSourceField.imageURL = viewModel.expenseSourceIconURL
+        tableController.expenseSourceField.isEnabled = viewModel.canChangeExpenseSource
         if reload {
             tableController.reloadData(animated: animated)
         }
@@ -301,6 +311,7 @@ extension BorrowEditViewController {
     func updateDatesUI() {
         tableController.borrowedAtField.text = viewModel.borrowedAtFormatted
         tableController.borrowedAtField.placeholder = viewModel.borrowedAtTitle
+        tableController.borrowedAtField.isEnabled = viewModel.canChangeBorrowedAt
         
         tableController.paydayField.text = viewModel.paydayFormatted
         tableController.paydayField.placeholder = NSLocalizedString("Дата возврата", comment: "Дата возврата")
@@ -352,11 +363,13 @@ extension BorrowEditViewController: TransactionEditViewControllerDelegate {
 
     }
     
-    func shouldShowCreditEditScreen(destination: TransactionDestination) {
+    func shouldShowCreditEditScreen(source: IncomeSourceViewModel?,
+                                    destination: TransactionDestination,
+                                    creditingTransaction: Transaction?) {
         
     }
 
-    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination, borrowingTransaction: Transaction?) {
         
     }    
 }

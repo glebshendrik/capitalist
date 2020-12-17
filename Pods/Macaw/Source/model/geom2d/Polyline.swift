@@ -4,6 +4,10 @@ open class Polyline: Locus {
 
     public let points: [Double]
 
+    public init(_ points: [Double]) {
+        self.points = points
+    }
+
     public init(points: [Double] = []) {
         self.points = points
     }
@@ -55,5 +59,12 @@ open class Polyline: Locus {
             }
         }
         return pb.build()
+    }
+
+    override func equals<T>(other: T) -> Bool where T: Locus {
+        guard let other = other as? Polyline else {
+            return false
+        }
+        return points == other.points
     }
 }

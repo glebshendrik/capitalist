@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,7 +23,7 @@
         <!--Источник доходов-->
         <scene sceneID="bkG-Sv-TaS">
             <objects>
-                <tableViewController storyboardIdentifier="IncomeSourceEditTableController" id="Hsl-CQ-JmL" customClass="IncomeSourceEditTableController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="IncomeSourceEditTableController" id="Hsl-CQ-JmL" customClass="IncomeSourceEditTableController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HiE-xx-YOh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -77,7 +77,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJh-hq-LiI" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJh-hq-LiI" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="155.5" y="27.5" width="64" height="64"/>
                                                     <color key="backgroundColor" name="gray 1"/>
                                                     <constraints>
@@ -130,7 +130,7 @@
                                                         <constraint firstAttribute="height" constant="1" id="FRr-vg-KkC"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ST-Rd-MTm">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ST-Rd-MTm">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                                                     <connections>
                                                         <action selector="didTapIcon:" destination="Hsl-CQ-JmL" eventType="touchUpInside" id="GkM-hG-Z0j"/>
@@ -160,7 +160,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2Z-rT-5I8" customClass="FormTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2Z-rT-5I8" customClass="FormTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -181,7 +181,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VKO-iK-tGB" customClass="FormTapField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VKO-iK-tGB" customClass="FormTapField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -205,7 +205,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1G-lm-2Pp" customClass="FormMoneyTextField" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1G-lm-2Pp" customClass="FormMoneyTextField" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -323,7 +323,7 @@
         <!--Income Source Edit View Controller-->
         <scene sceneID="CxF-9s-GZJ">
             <objects>
-                <viewController storyboardIdentifier="IncomeSourceEditViewController" id="XSV-72-Slk" customClass="IncomeSourceEditViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IncomeSourceEditViewController" id="XSV-72-Slk" customClass="IncomeSourceEditViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fal-46-alb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -335,7 +335,7 @@
                                     <segue destination="Hsl-CQ-JmL" kind="embed" identifier="showEditTableView" id="RbB-Rn-KfO"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOl-py-ZGb" customClass="HighlightButton" customModule="Three_Baskets" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOl-py-ZGb" customClass="HighlightButton" customModule="Capitalist" customModuleProvider="target">
                                 <rect key="frame" x="24" y="551" width="327" height="48"/>
                                 <color key="backgroundColor" name="blue 1"/>
                                 <constraints>
@@ -361,6 +361,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="fZZ-E3-wFU"/>
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstItem="bOl-py-ZGb" firstAttribute="leading" secondItem="fZZ-E3-wFU" secondAttribute="leading" constant="24" id="61Z-Uu-iiN"/>
@@ -371,7 +372,6 @@
                             <constraint firstItem="fZZ-E3-wFU" firstAttribute="bottom" secondItem="bOl-py-ZGb" secondAttribute="bottom" constant="24" id="sl1-Pi-hjW"/>
                             <constraint firstItem="fZZ-E3-wFU" firstAttribute="trailing" secondItem="bOl-py-ZGb" secondAttribute="trailing" constant="24" id="xxV-Pf-EHj"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="fZZ-E3-wFU"/>
                     </view>
                     <navigationItem key="navigationItem" id="0J7-tA-y5z">
                         <barButtonItem key="backBarButtonItem" title=" " id="CE8-T8-AnT"/>
@@ -400,7 +400,7 @@
         <!--Colorable Navigation Controller-->
         <scene sceneID="KqG-Bc-tum">
             <objects>
-                <navigationController storyboardIdentifier="IncomeSourceEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="3XU-fL-51n" customClass="ColorableNavigationController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="IncomeSourceEditNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="3XU-fL-51n" customClass="ColorableNavigationController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="G9P-Ex-5TZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -418,7 +418,7 @@
         <!--Income Source Select View Controller-->
         <scene sceneID="A1x-yw-mmD">
             <objects>
-                <viewController storyboardIdentifier="IncomeSourceSelectViewController" id="1Xd-fV-sc1" customClass="IncomeSourceSelectViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IncomeSourceSelectViewController" id="1Xd-fV-sc1" customClass="IncomeSourceSelectViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X2N-SN-3Yi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -437,14 +437,14 @@
                                 <rect key="frame" x="0.0" y="33" width="375" height="634"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddingItemTableViewCell" rowHeight="64" id="1Lm-Df-sI4" customClass="AddingItemTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddingItemTableViewCell" rowHeight="64" id="1Lm-Df-sI4" customClass="AddingItemTableViewCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Lm-Df-sI4" id="7d9-N1-QAr">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCP-yv-rUd" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCP-yv-rUd" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="8" width="48" height="48"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -489,14 +489,14 @@
                                             <outlet property="iconView" destination="cCP-yv-rUd" id="qob-K0-rb1"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IncomeSourceTableViewCell" rowHeight="64" id="PJR-gw-NAb" customClass="IncomeSourceTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IncomeSourceTableViewCell" rowHeight="64" id="PJR-gw-NAb" customClass="IncomeSourceTableViewCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PJR-gw-NAb" id="4CE-fN-UCy">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCr-gL-tgB" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCr-gL-tgB" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="8" width="48" height="48"/>
                                                     <color key="backgroundColor" name="gray 1"/>
                                                     <constraints>
@@ -553,6 +553,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="YGL-jy-uoK"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="zab-T9-nnv" firstAttribute="centerY" secondItem="X2N-SN-3Yi" secondAttribute="centerY" id="2lx-WN-kdJ"/>
@@ -565,7 +566,6 @@
                             <constraint firstItem="Gyv-hC-fs9" firstAttribute="top" secondItem="eTL-e8-6qX" secondAttribute="bottom" constant="4" id="pFN-7q-D3e"/>
                             <constraint firstAttribute="trailing" secondItem="eTL-e8-6qX" secondAttribute="trailing" constant="16" id="wMK-gF-meC"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="YGL-jy-uoK"/>
                     </view>
                     <connections>
                         <outlet property="loader" destination="zab-T9-nnv" id="2qO-II-cLE"/>
@@ -587,7 +587,7 @@
         <!--Income Source Info View Controller-->
         <scene sceneID="vcV-Mo-LKx">
             <objects>
-                <navigationController storyboardIdentifier="IncomeSourceInfoViewController" id="7CR-sh-brd" customClass="IncomeSourceInfoViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="IncomeSourceInfoViewController" id="7CR-sh-brd" customClass="IncomeSourceInfoViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="af9-3i-0kp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -613,7 +613,7 @@
         <!--Income Sources View Controller-->
         <scene sceneID="MT8-8e-jmJ">
             <objects>
-                <viewController storyboardIdentifier="IncomeSourcesViewController" id="UY3-N5-lJI" customClass="IncomeSourcesViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IncomeSourcesViewController" id="UY3-N5-lJI" customClass="IncomeSourcesViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x5j-m8-YBF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -622,14 +622,14 @@
                                 <rect key="frame" x="0.0" y="76" width="375" height="591"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddingItemTableViewCell" rowHeight="64" id="dXG-ST-u6b" customClass="AddingItemTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddingItemTableViewCell" rowHeight="64" id="dXG-ST-u6b" customClass="AddingItemTableViewCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dXG-ST-u6b" id="xoA-uY-M76">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7o-UL-iKE" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7o-UL-iKE" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="8" width="48" height="48"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -674,14 +674,14 @@
                                             <outlet property="iconView" destination="r7o-UL-iKE" id="hfa-sz-Xq5"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IncomeSourceTableViewCell" rowHeight="64" id="r4C-dX-imB" customClass="IncomeSourceTableViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IncomeSourceTableViewCell" rowHeight="64" id="r4C-dX-imB" customClass="IncomeSourceTableViewCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r4C-dX-imB" id="Qad-Kx-7J6">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X62-WG-jQR" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X62-WG-jQR" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="8" width="48" height="48"/>
                                                     <color key="backgroundColor" name="gray 1"/>
                                                     <constraints>
@@ -754,6 +754,7 @@
                                 <color key="tintColor" name="blue 1"/>
                             </imageView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Kfr-Ri-KZu"/>
                         <color key="backgroundColor" name="black 2"/>
                         <constraints>
                             <constraint firstItem="Kfr-Ri-KZu" firstAttribute="bottom" secondItem="7a1-7d-1xs" secondAttribute="bottom" id="2Zm-ve-p6t"/>
@@ -769,7 +770,6 @@
                             <constraint firstAttribute="trailing" secondItem="qT0-eb-ogw" secondAttribute="trailing" constant="16" id="j44-fj-iBC"/>
                             <constraint firstItem="qT0-eb-ogw" firstAttribute="leading" secondItem="x5j-m8-YBF" secondAttribute="leading" constant="16" id="yOM-6b-auT"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Kfr-Ri-KZu"/>
                     </view>
                     <navigationItem key="navigationItem" id="del-QI-Erq">
                         <barButtonItem key="backBarButtonItem" title=" " id="5So-aH-rn6"/>

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/11/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -70,13 +70,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         notificationsCoordinator.rescheduleKeepAliveNotifications()
         router.dismissPresentedAlerts()
-        router.setWindow(blurred: true)
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         notificationsCoordinator.updateBadges()
-        router.showPasscodeScreen()
-        router.setWindow(blurred: false)
+        router.showPasscodeScreen()        
         router.postDataUpdated()
     }
 }

@@ -13,19 +13,21 @@ import AppKit
 
 extension AnimationProducer {
 
-    func createChildAnimations(_ combineAnimation: Animation, globalToPosition: Transform = .identity, animations: [Animation] = []) -> [Animation] {
+    func createChildAnimations(_ combineAnimation: Animation, animations: [Animation] = []) -> [Animation] {
         guard let combine = combineAnimation as? CombineAnimation else {
             return animations
         }
 
-        let globalToPosition = globalToPosition
         let during = combine.duration
         let delay = combine.delay
         let fromNode = combine.node as! Group
         let to = combine.toNodes
 
+        let fromContentsCopy = fromNode.contents.compactMap { SceneUtils.copyNode($0) }
+        fromNode.contents = fromContentsCopy
+
         // Shapes on same hierarhy level
-        let fromShapes = fromNode.contents.compactMap { $0 as? Shape }
+        let fromShapes = fromContentsCopy.compactMap { $0 as? Shape }
         let toShapes = to.compactMap { $0 as? Shape }
         let minPathsNumber = min(fromShapes.count, toShapes.count)
 
@@ -34,7 +36,7 @@ extension AnimationProducer {
             let fromShape = fromShapes[i]
             let toShape = toShapes[i]
 
-            let animation = ShapeAnimation(animatedNode: fromShape, finalValue: toShape, toParentGlobalTransfrom: globalToPosition, animationDuration: during, delay: delay)
+            let animation = ShapeAnimation(animatedNode: fromShape, finalValue: toShape, animationDuration: during, delay: delay)
             animations.append(animation)
         }
 
@@ -66,7 +68,7 @@ extension AnimationProducer {
             let toGroup = toGroups[i]
 
             let groupAnimation = fromGroup.contentsVar.animation(to: toGroup.contents, during: during, delay: delay)
-            let groupAnimations = createChildAnimations(groupAnimation, globalToPosition: globalToPosition.concat(with: toGroup.place), animations: animations)
+            let groupAnimations = createChildAnimations(groupAnimation, animations: animations)
             animations.append(contentsOf: groupAnimations)
         }
 
@@ -113,15 +115,14 @@ extension AnimationProducer {
     // MARK: - Combine animation
     func addCombineAnimation(_ combineAnimation: Animation, _ context: AnimationContext) {
         guard let combine = combineAnimation as? CombineAnimation,
-            let renderer = combine.nodeRenderer,
-            let view = renderer.view else {
-                return
+              let _ = combine.nodeRenderer,
+              let node = combine.node else {
+            return
         }
 
         var animations = combine.animations
-        if let toBounds = combine.toNodes.group().bounds {
-            let globalTransform = view.contentLayout.layout(rect: toBounds, into: view.frame.size.toMacaw())
-            let childAnimations = createChildAnimations(combine, globalToPosition: globalTransform) as! [BasicAnimation]
+        if let _ = combine.node?.bounds, let _ = combine.toNodes.group().bounds {
+            let childAnimations = createChildAnimations(combine) as! [BasicAnimation]
             animations.append(contentsOf: childAnimations)
         }
 
@@ -175,9 +176,15 @@ extension AnimationProducer {
         }
 
         combine.removeFunc = {
+            node.animations.removeAll { $0 === combine }
             animations.forEach { animation in
                 animation.removeFunc?()
             }
+        }
+
+        CATransaction.setDisableActions(true)
+        defer {
+            CATransaction.commit()
         }
 
         // Launching

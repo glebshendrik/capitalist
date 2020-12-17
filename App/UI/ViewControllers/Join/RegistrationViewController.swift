@@ -1,6 +1,6 @@
 //
 //  RegistrationViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 03/12/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -9,8 +9,8 @@
 import UIKit
 import PromiseKit
 
-class RegistrationViewController : FormSubmitViewController {
-    
+class RegistrationViewController : FormSubmitViewController, ApplicationRouterDependantProtocol {
+    var router: ApplicationRouterProtocol!
     var viewModel: RegistrationViewModel!
     var tableController: RegistrationTableController!
     

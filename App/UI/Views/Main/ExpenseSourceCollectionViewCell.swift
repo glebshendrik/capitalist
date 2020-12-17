@@ -1,6 +1,6 @@
 //
 //  ExpenseSourceCollectionViewCell.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 26/12/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -38,6 +38,11 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
         super.updateUI()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        connectionActivityIndicator.startAnimating()
+    }
+    
     func updateLabels() {
         guard let viewModel = viewModel else { return }
         nameLabel.text = viewModel.name
@@ -49,7 +54,7 @@ class ExpenseSourceCollectionViewCell : TransactionableCell {
         guard let viewModel = viewModel else { return }
         iconView.iconURL = viewModel.iconURL
         iconView.defaultIconName = viewModel.defaultIconName
-        iconView.vectorIconMode = .compact
+        iconView.vectorIconMode = .medium        
         contentView.layoutIfNeeded()
     }
     

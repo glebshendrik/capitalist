@@ -16,19 +16,15 @@ class RenderUtils {
         return p
     }
 
-    class func createNodeRenderer(
-        _ node: Node,
-        view: MacawView?,
-        animationCache: AnimationCache?
-        ) -> NodeRenderer {
+    class func createNodeRenderer(_ node: Node, view: DrawingView?, parentRenderer: GroupRenderer? = nil) -> NodeRenderer {
         if let group = node as? Group {
-            return GroupRenderer(group: group, view: view, animationCache: animationCache)
+            return GroupRenderer(group: group, view: view, parentRenderer: parentRenderer)
         } else if let shape = node as? Shape {
-            return ShapeRenderer(shape: shape, view: view, animationCache: animationCache)
+            return ShapeRenderer(shape: shape, view: view, parentRenderer: parentRenderer)
         } else if let text = node as? Text {
-            return TextRenderer(text: text, view: view, animationCache: animationCache)
+            return TextRenderer(text: text, view: view, parentRenderer: parentRenderer)
         } else if let image = node as? Image {
-            return ImageRenderer(image: image, view: view, animationCache: animationCache)
+            return ImageRenderer(image: image, view: view, parentRenderer: parentRenderer)
         }
         fatalError("Unsupported node: \(node)")
     }
@@ -58,7 +54,9 @@ class RenderUtils {
         let lowerWeight = weight?.lowercased()
         if lowerWeight == "bold" || lowerWeight == "bolder" {
             #if os(iOS)
-            fontDesc = fontDesc.withSymbolicTraits(.traitBold)!
+            if let boldDesc = fontDesc.withSymbolicTraits(.traitBold) {
+                fontDesc = boldDesc
+            }
             #elseif os(OSX)
             fontDesc = fontDesc.withSymbolicTraits(.bold)
             #endif
@@ -105,7 +103,7 @@ class RenderUtils {
         if let round = locus as? RoundRect {
             let corners = CGSize(width: CGFloat(round.rx), height: CGFloat(round.ry))
             return MBezierPath(roundedRect: round.rect.toCG(), byRoundingCorners:
-                MRectCorner.allCorners, cornerRadii: corners)
+                                MRectCorner.allCorners, cornerRadii: corners)
         } else if let arc = locus as? Arc {
             if arc.ellipse.rx == arc.ellipse.ry {
                 return arcToPath(arc)
@@ -559,7 +557,7 @@ class RenderUtils {
         } else if let round = locus as? RoundRect {
             let corners = CGSize(width: CGFloat(round.rx), height: CGFloat(round.ry))
             let path = MBezierPath(roundedRect: round.rect.toCG(), byRoundingCorners:
-                MRectCorner.allCorners, cornerRadii: corners).cgPath
+                                    MRectCorner.allCorners, cornerRadii: corners).cgPath
             ctx.addPath(path)
         } else if let circle = locus as? Circle {
             let cx = circle.cx
@@ -574,6 +572,14 @@ class RenderUtils {
             ctx.addEllipse(in: CGRect(x: cx - rx, y: cy - ry, width: rx * 2, height: ry * 2))
         } else {
             ctx.addPath(locus.toCGPath())
+        }
+    }
+
+    internal class func setClip(_ clip: Locus?, ctx: CGContext) {
+        if let rect = clip as? Rect {
+            ctx.clip(to: CGRect(x: rect.x, y: rect.y, width: rect.w, height: rect.h))
+        } else if let clip = clip {
+            RenderUtils.toBezierPath(clip).addClip()
         }
     }
 }

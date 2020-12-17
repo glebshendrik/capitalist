@@ -1,6 +1,6 @@
 //
 //  SubscriptionViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 26.02.2020.
 //  Copyright © 2020 Real Tranzit. All rights reserved.
@@ -67,9 +67,8 @@ class SubscriptionViewModel {
         let premiumProducts = [productViewModels[SubscriptionProduct.premium(.month).id],
                                productViewModels[SubscriptionProduct.premium(.year).id]].compactMap { $0 }
         let premiumUnlimitedProduct = productViewModels[unlimitedPremiumSubscriptionProduct.id]
-        let platinumProducts = [productViewModels[SubscriptionProduct.platinum(.month).id],
-                                productViewModels[SubscriptionProduct.platinum(.year).id]].compactMap { $0 }
-        
+        let platinumProducts = [productViewModels[firstPlatinumSubscriptionProduct.id],
+                                productViewModels[secondPlatinumSubscriptionProduct.id]].compactMap { $0 }        
         
         let freeFeatures = [PlanFeatureItemViewModel(description: NSLocalizedString("Создание кошельков", comment: ""),
                                                      imageName: "feature-wallet"),
@@ -145,9 +144,6 @@ class SubscriptionViewModel {
     func purchase(product: SKProduct) -> Promise<Void> {
         return  firstly {
                     accountCoordinator.purchase(product: product)
-                }.map { subscription -> ApphudSubscription in
-                    guard let subscription = subscription, subscription.isActive() else { throw SubscriptionError.purchaseFailed }
-                    return subscription
                 }.then { _ in
                     return self.accountCoordinator.updateUserSubscription()
                 }
@@ -156,9 +152,6 @@ class SubscriptionViewModel {
     func restore() -> Promise<Void> {
         return  firstly {
                     accountCoordinator.restoreSubscriptions()
-                }.map { subscriptions -> [ApphudSubscription] in
-                    guard let subscriptions = subscriptions, subscriptions.any(matching: { $0.isActive() }) else { throw SubscriptionError.restoreFailed }
-                    return subscriptions
                 }.then { _ in
                     return self.accountCoordinator.updateUserSubscription()
                 }

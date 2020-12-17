@@ -1,6 +1,6 @@
 //
 //  SaltEdgeManagerProtocol.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 20/06/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -21,11 +21,19 @@ protocol SaltEdgeManagerProtocol {
     func set(customerSecret: String)
     func createCustomer(identifier: String) -> Promise<String>
     func loadProviders(country: String?) -> Promise<[SEProvider]>
-    func createConnectSession(providerCode: String, countryCode: String, fromDate: Date, languageCode: String) -> Promise<URL>
-    func createRefreshConnectionSession(connectionSecret: String, languageCode: String) -> Promise<URL>
-    func createReconnectSession(connectionSecret: String, fromDate: Date, languageCode: String) -> Promise<URL>
+    func createCreatingConnectionSession(providerCode: String,
+                                         countryCode: String,
+                                         fromDate: Date,
+                                         languageCode: String) -> Promise<ConnectionSession>
+    func createRefreshingConnectionSession(connectionSecret: String,
+                                           fromDate: Date,
+                                           languageCode: String) -> Promise<ConnectionSession>
+    func createReconnectingConnectionSession(connectionSecret: String,
+                                             fromDate: Date,
+                                             languageCode: String) -> Promise<ConnectionSession>
     func getConnection(secret: String) -> Promise<SEConnection>
     func removeConnection(secret: String) -> Promise<Void>
     func getProvider(code: String) -> Promise<SEProvider>
-    func loadAccounts(for connectionSecret: String) -> Promise<[SEAccount]>
+    func confirm(connectionSecret: String, with code: String, delegate: SEConnectionFetchingDelegate) -> Promise<SEConnection>
+//    func loadAccounts(for connectionSecret: String) -> Promise<[SEAccount]>
 }

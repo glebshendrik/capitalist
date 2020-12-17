@@ -1,6 +1,6 @@
 //
 //  TransactionableExampleCollectionViewCell.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 21.01.2020.
 //  Copyright © 2020 Real Tranzit. All rights reserved.
@@ -25,6 +25,8 @@ class TransactionableExampleCollectionViewCell : UICollectionViewCell {
         nameLabel.text = viewModel.name
         iconView.defaultIconName = viewModel.defaultIconName
         iconView.iconURL = viewModel.iconURL
+        iconView.vectorIconMode = .fullsize
+        iconView.vectorBackgroundViewColor = .clear
         selectionIndicator.alpha = viewModel.selected ? 1.0 : 0.0
     }
 }

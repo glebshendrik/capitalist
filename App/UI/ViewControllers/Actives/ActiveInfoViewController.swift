@@ -1,6 +1,6 @@
 //
 //  ActiveInfoViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 27.11.2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -42,8 +42,6 @@ class ActiveInfoViewController : EntityInfoNavigationController {
     override func didTapInfoButton(field: ButtonInfoField?) {
         guard let field = field else { return }
         switch field.identifier {
-        case ActiveInfoField.bank.identifier:
-            didTapBankButton()
         case ActiveInfoField.statistics.identifier:
             modal(factory.statisticsModalViewController(filter: viewModel.asFilter()))
         case ActiveInfoField.costChange.identifier:
@@ -62,15 +60,7 @@ class ActiveInfoViewController : EntityInfoNavigationController {
     override func showEditScreen() {
         modal(factory.activeEditViewController(delegate: self, active: viewModel.active, basketType: viewModel.basketType, costCents: nil))
     }
-    
-    func didTapBankButton() {
-        if viewModel.accountConnected {
-            removeAccountConnection()
-        } else {
-            showProviders()
-        }
-    }
-    
+        
     override var isSelectingTransactionables: Bool {
         return false
     }
@@ -85,39 +75,6 @@ class ActiveInfoViewController : EntityInfoNavigationController {
     
     override func didRemoveTransaction(id: Int, type: TransactionType) {
         refreshData()
-    }
-}
-
-extension ActiveInfoViewController : ProvidersViewControllerDelegate, AccountsViewControllerDelegate {
-    func showProviders() {
-        guard let providersViewController = factory.providersViewController(delegate: self, fetchDataFrom: Date()) else { return }
-        modal(UINavigationController(rootViewController: providersViewController))
-    }
-    
-    func didConnectTo(_ providerViewModel: ProviderViewModel?, connection: Connection) {
-        showAccountsViewController(for: connection)
-    }
-    
-    func showAccountsViewController(for connection: Connection) {
-        let currencyCode = viewModel.activeViewModel?.currency.code        
-        slideUp(factory.accountsViewController(delegate: self,
-                                               connection: connection,
-                                               currencyCode: currencyCode,
-                                               nature: .investment))
-    }
-    
-    func didSelect(accountViewModel: AccountViewModel, connection: Connection) {
-        connect(accountViewModel, connection)
-    }
-    
-    func connect(_ accountViewModel: AccountViewModel, _ connection: Connection) {
-        viewModel.connect(accountViewModel: accountViewModel, connection: connection)
-        save()
-    }
-    
-    func removeAccountConnection() {
-        viewModel.removeAccountConnection()
-        save()
     }
 }
 

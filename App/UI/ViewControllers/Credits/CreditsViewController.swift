@@ -1,6 +1,6 @@
 //
 //  CreditsViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 26/09/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -128,7 +128,11 @@ extension CreditsViewController : CreditEditViewControllerDelegate {
     }
 
     func showNewCredit() {
-        modal(factory.creditEditViewController(delegate: self, creditId: nil, destination: nil))
+        modal(factory.creditEditViewController(delegate: self,
+                                               creditId: nil,
+                                               source: nil,
+                                               destination: nil,
+                                               creditingTransaction: nil))
     }
 }
 

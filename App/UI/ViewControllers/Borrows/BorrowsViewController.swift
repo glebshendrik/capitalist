@@ -1,6 +1,6 @@
 //
 //  BorrowsViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 10/09/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -198,7 +198,12 @@ extension BorrowsViewController : BorrowEditViewControllerDelegate {
     }
     
     func showNewBorrow() {
-        modal(factory.borrowEditViewController(delegate: self, type: viewModel.selectedBorrowType, borrowId: nil, source: nil, destination: nil))
+        modal(factory.borrowEditViewController(delegate: self,
+                                               type: viewModel.selectedBorrowType,
+                                               borrowId: nil,
+                                               source: nil,
+                                               destination: nil,
+                                               borrowingTransaction: nil))
     }
 }
 

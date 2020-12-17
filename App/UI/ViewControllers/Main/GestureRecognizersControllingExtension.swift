@@ -1,6 +1,6 @@
 //
 //  GestureRecognizersControllingExtension.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 01/04/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -16,7 +16,7 @@ extension MainViewController: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         
-        if touch.view is UIButton || isSelecting {
+        if touch.view is UIButton {
             return false
         }
         
@@ -52,7 +52,9 @@ extension MainViewController: UIGestureRecognizerDelegate {
     
     func updateLongPressureRecognizers() {
         longPressureRecognizers.forEach {
-            $0.minimumPressDuration = (isEditingItems || isSelecting) ? fastPressDuration : slowPressDuration
+            $0.minimumPressDuration = isEditingItems
+                ? fastPressDuration
+                : slowPressDuration
         }
         transactionRecognizer?.minimumPressDuration = fastPressDuration
     }

@@ -12,6 +12,7 @@ import Foundation
 import Cocoa
 import Quartz
 
+public typealias MWindow = NSWindow
 public typealias MFont = NSFont
 public typealias MFontDescriptor = NSFontDescriptor
 public typealias MColor = NSColor
@@ -157,6 +158,35 @@ extension MBezierPath {
         )
 
         self.transform(using: affineTransform)
+    }
+}
+
+extension CGContext {
+    private struct CGContextScale {
+        static var _scale: CGFloat = 0.0
+    }
+
+    var scale: CGFloat {
+        get {
+            return CGContextScale._scale
+        }
+
+        set(newValue) {
+            CGContextScale._scale = newValue
+        }
+    }
+}
+
+extension NSWindow {
+
+    func addSubview(_ subview: NSView) {
+        contentView?.addSubview(subview)
+    }
+}
+
+extension NSBezierPath {
+    var mUsesEvenOddFillRule: Bool {
+        return self.windingRule == .evenOdd
     }
 }
 

@@ -1,6 +1,6 @@
 //
 //  ProfileViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 04/12/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -44,14 +44,24 @@ class ProfileViewModel {
     }
     
     var subscriptionTitle: String? {
-        guard let subscriptionProduct = subscriptionProduct else {
+        guard
+            let product = accountCoordinator.activeSubscriptionProduct
+        else {
             return NSLocalizedString("Устаревшая версия подписки", comment: "Устаревшая версия подписки")
         }
-        return "\(subscriptionProduct.localizedTitle): \(subscriptionProduct.localizedPricePerPeriod)"
+        return accountCoordinator.subscription == nil
+            ? "\(product.localizedTitle): \(product.localizedPrice)"
+            : "\(product.localizedTitle): \(product.localizedPricePerPeriod)"
     }
     
     var subscriptionStatus: String? {
-        guard let subscription = accountCoordinator.subscription else { return nil }
+        guard
+            let subscription = accountCoordinator.subscription
+        else {
+            return accountCoordinator.hasPremiumUnlimitedSubscription
+                ? NSLocalizedString("Активна навсегда", comment: "")
+                : nil
+        }
         if let cancelledAt = subscription.canceledAt {
             return String.localizedStringWithFormat(NSLocalizedString("Отменена с %@", comment: "Отменена с %@"), cancelledAt.dateString(ofStyle: .medium))
         }
@@ -60,12 +70,7 @@ class ProfileViewModel {
         }
         return String.localizedStringWithFormat(NSLocalizedString("Активна до %@", comment: "Активна до %@"), subscription.expiresDate.dateString(ofStyle: .medium))
     }
-    
-    var subscriptionProduct: SKProduct? {
-        guard let productId = accountCoordinator.subscription?.productId else { return nil }
-        return accountCoordinator.subscriptionProducts.first { $0.productIdentifier == productId }
-    }
-    
+        
     var confirmButtonHidden: Bool {
         return currentUser?.registrationConfirmed ?? true
     }

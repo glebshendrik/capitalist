@@ -1,5 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-Capitalist/Pods-Capitalist-frameworks.sh
-${BUILT_PRODUCTS_DIR}/ALTextInputBar/ALTextInputBar.framework
 ${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework
@@ -15,6 +14,7 @@ ${BUILT_PRODUCTS_DIR}/CWStatusBarNotification/CWStatusBarNotification.framework
 ${BUILT_PRODUCTS_DIR}/Charts/Charts.framework
 ${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework
 ${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework
+${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework
 ${BUILT_PRODUCTS_DIR}/ESPullToRefresh/ESPullToRefresh.framework
 ${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework
 ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework
@@ -25,6 +25,7 @@ ${BUILT_PRODUCTS_DIR}/InfiniteLayout/InfiniteLayout.framework
 ${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework
 ${BUILT_PRODUCTS_DIR}/MSPeekCollectionViewDelegateImplementation/MSPeekCollectionViewDelegateImplementation.framework
 ${BUILT_PRODUCTS_DIR}/Macaw/Macaw.framework
+${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework
 ${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework
 ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
 ${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework

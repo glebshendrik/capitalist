@@ -3,7 +3,7 @@ import UIKit
 #elseif os(OSX)
 import AppKit
 #endif
-
+@objc(MCText)
 open class Text: Node {
 
     public let textVar: Variable<String>

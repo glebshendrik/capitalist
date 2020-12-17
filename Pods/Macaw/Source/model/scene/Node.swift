@@ -1,5 +1,5 @@
 import Foundation
-
+@objc(MCNode)
 open class Node: Drawable {
 
     public let placeVar: AnimatableVariable<Transform>
@@ -38,17 +38,26 @@ open class Node: Drawable {
         set(val) { effectVar.value = val }
     }
 
+    var animations: [BasicAnimation] = []
+
     // MARK: - Searching
     public func nodeBy(tag: String) -> Node? {
-        if self.tag.contains(tag) {
-            return self
-        }
-
-        return .none
+        return nodeBy(predicate: { $0.tag.contains(tag) })
     }
 
     public func nodesBy(tag: String) -> [Node] {
-        return [nodeBy(tag: tag)].compactMap { $0 }
+        return nodesBy(predicate: { $0.tag.contains(tag) })
+    }
+
+    public func nodeBy(predicate: (Node) -> Bool) -> Node? {
+        if predicate(self) {
+            return self
+        }
+        return .none
+    }
+
+    public func nodesBy(predicate: (Node) -> Bool) -> [Node] {
+        return [nodeBy(predicate: predicate)].compactMap { $0 }
     }
 
     // MARK: - Events
@@ -109,11 +118,11 @@ open class Node: Drawable {
 
     @discardableResult public func onTap(tapCount: Int = 1, f: @escaping (TapEvent) -> Void) -> Disposable {
         let handler = ChangeHandler<TapEvent>(f)
-        if var handlers = tapHandlers[tapCount] {
-            handlers.append(handler)
-        } else {
-            tapHandlers[tapCount] = [handler]
-        }
+
+        var handlers = tapHandlers[tapCount] ?? []
+        handlers.append(handler)
+
+        tapHandlers[tapCount] = handlers
 
         return Disposable { [weak self, unowned handler]  in
             guard let index = self?.tapHandlers[tapCount]?.firstIndex(of: handler) else {

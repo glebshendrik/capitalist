@@ -1,6 +1,6 @@
 //
 //  IncomeSourceSelectViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 14/03/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -20,6 +20,10 @@ class SlideUpContainerViewController : UIViewController {
     
     private var isPresenting = false
     private var originalPosition: CGPoint = CGPoint.zero
+    
+    override var disablesAutomaticKeyboardDismissal: Bool {
+        return false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,16 +57,20 @@ class SlideUpContainerViewController : UIViewController {
         guard let viewController = viewControllerToAdd else { return }
         addChild(viewController)
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(viewController.view)
+        contentView.insertSubview(viewController.view, at: 0)
         
         NSLayoutConstraint.activate([
             viewController.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             viewController.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            viewController.view.topAnchor.constraint(equalTo: pullDownImage.bottomAnchor, constant: 3),
+            viewController.view.topAnchor.constraint(equalTo: pullDownImage.bottomAnchor, constant: 2),
             viewController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)
             ])
         
         viewController.didMove(toParent: self)
+    }
+    
+    @IBAction func didTapCloseButon(_ sender: Any) {
+        close()
     }
     
     @objc func didTapBackgroundView(_ sender: UITapGestureRecognizer) {

@@ -1,6 +1,6 @@
 //
 //  ViewModelsRegistration.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 20/05/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -96,6 +96,8 @@ extension ApplicationAssembly {
         
         container.autoregister(PeriodsViewModel.self, initializer: PeriodsViewModel.init)
                 
+        container.autoregister(OnboardCurrencyViewModel.self, initializer: OnboardCurrencyViewModel.init)
+        
         container.autoregister(TransactionablesCreationViewModel.self, initializer: TransactionablesCreationViewModel.init)
         
         container.autoregister(SubscriptionViewModel.self, initializer: SubscriptionViewModel.init)
@@ -104,6 +106,10 @@ extension ApplicationAssembly {
         
         container.autoregister(CountriesViewModel.self, initializer: CountriesViewModel.init)
         
-        container.autoregister(CardTypesViewModel.self, initializer: CardTypesViewModel.init)        
+        container.autoregister(CardTypesViewModel.self, initializer: CardTypesViewModel.init)
+        
+        container.autoregister(TransactionableExamplesViewModel.self, initializer: TransactionableExamplesViewModel.init)
+        
+        container.autoregister(PrototypesLinkingViewModel.self, initializer: PrototypesLinkingViewModel.init)        
     }
 }

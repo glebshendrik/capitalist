@@ -1,6 +1,6 @@
 //
 //  ProvidersViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/06/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -13,7 +13,7 @@ import SwiftyBeaver
 import SwiftDate
 
 protocol ProvidersViewControllerDelegate : class {
-    func didConnectTo(_ providerViewModel: ProviderViewModel?, connection: Connection)
+    func didSelectProvider(_ providerViewModel: ProviderViewModel)
 }
 
 class ProvidersViewController : UIViewController, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol {
@@ -181,103 +181,121 @@ extension ProvidersViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let providerViewModel = viewModel.providerViewModel(at: indexPath) else { return }
-                
-        setupProviderConnection(for: providerViewModel)
+        
+        closeButtonHandler {
+            self.delegate?.didSelectProvider(providerViewModel)
+        }
     }
+    
+    
 }
 
-extension ProvidersViewController : ConnectionViewControllerDelegate {
-    func setupProviderConnection(for providerViewModel: ProviderViewModel) {
-        messagePresenterManager.showHUD(with: NSLocalizedString("Загрузка подключения к банку...", comment: "Загрузка подключения к банку..."))
-        firstly {
-            viewModel.loadConnection(for: providerViewModel)
-        }.ensure {
-            self.messagePresenterManager.dismissHUD()
-        }.get { connection in
-            
-            switch connection.status {
-            case .active:
-                guard   let nextRefreshPossibleAt = connection.nextRefreshPossibleAt,
-                        let interactive = connection.interactive else {
-                        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
-                        return
-                }
-                if nextRefreshPossibleAt.isInPast,
-                   interactive {
-                    guard connection.lastStage == .finish else {
-                        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
-                        return
-                    }
-                    self.showConnectionSession(for: providerViewModel, connectionType: .refresh, connection: connection)
-                }
-                else {
-                    self.close()
-                    self.delegate?.didConnectTo(providerViewModel, connection: connection)
-                }
-            case .inactive:
-                self.showConnectionSession(for: providerViewModel, connectionType: .reconnect, connection: connection)
-            case .deleted:
-                self.showConnectionSession(for: providerViewModel, connectionType: .create, connection: connection)
-            }
-        }.catch { error in
-            if case BankConnectionError.connectionNotFound = error {
-                self.showConnectionSession(for: providerViewModel, connectionType: .create)
-            } else {
-                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось загрузить подключение к банку", comment: "Не удалось загрузить подключение к банку"), theme: .error)
-            }
-        }
-    }
-    
-    func showConnectionSession(for providerViewModel: ProviderViewModel, connectionType: ProviderConnectionType, connection: Connection? = nil) {
-        messagePresenterManager.showHUD(with: NSLocalizedString("Подготовка подключения к банку...", comment: "Подготовка подключения к банку..."))
-        
-        func sessionURL() -> Promise<URL> {
-            switch connectionType {
-            case .create:
-                return viewModel.createConnectionSession(for: providerViewModel)
-            case .refresh:
-                return viewModel.createRefreshConnectionSession(for: providerViewModel, connection: connection)
-            case .reconnect:
-                return viewModel.createReconnectSession(for: providerViewModel, connection: connection)
-            }
-        }
-        
-        firstly {
-            sessionURL()
-        }.ensure {
-            self.messagePresenterManager.dismissHUD()
-        }.get { connectionURL in
-            self.showConnectionViewController(for: providerViewModel,
-                                              connectionURL: connectionURL,
-                                              connectionType: connectionType,
-                                              connection: connection)
-        }.catch { e in
-            print(e)
-            SwiftyBeaver.error(e)
-            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
-        }
-    }
-    
-    func showConnectionViewController(for providerViewModel: ProviderViewModel, connectionURL: URL, connectionType: ProviderConnectionType = .create, connection: Connection? = nil) {
-        
-        let connectionViewController = factory.connectionViewController(delegate: self,
-                                                                              providerViewModel: providerViewModel,
-                                                                              connectionType: connectionType,
-                                                                              connectionURL: connectionURL,
-                                                                              connection: connection)
-        modal(connectionViewController)
-    }
-        
-    func didConnectToConnection(_ providerViewModel: ProviderViewModel?, connection: Connection) {
-        self.close()
-        delegate?.didConnectTo(providerViewModel, connection: connection)
-    }
-        
-    func didNotConnect() {
-        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
-    }
-    
-    func didNotConnect(error: Error) {        
-        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
-    }
-}
+//extension ProvidersViewController: ExperimentalBankFeatureViewControllerDelegate {
+//    func didChooseUseFeature() {
+//        guard let providerViewModel = viewModel.selectedProviderViewModel else { return }
+//        setupProviderConnection(for: providerViewModel)
+//    }
+//
+//    func didChooseDontUseFeature() {
+//        guard let providerViewModel = viewModel.selectedProviderViewModel else { return }
+//        setupProviderConnection(for: providerViewModel)
+//    }
+//
+//}
+
+//extension ProvidersViewController : ConnectionViewControllerDelegate {
+//
+//    func setupProviderConnection(for providerViewModel: ProviderViewModel) {
+//        messagePresenterManager.showHUD(with: NSLocalizedString("Загрузка подключения к банку...", comment: "Загрузка подключения к банку..."))
+//        firstly {
+//            viewModel.loadConnection(for: providerViewModel)
+//        }.ensure {
+//            self.messagePresenterManager.dismissHUD()
+//        }.get { connection in
+//
+//            switch connection.status {
+//            case .active:
+//                guard   let nextRefreshPossibleAt = connection.nextRefreshPossibleAt,
+//                        let interactive = connection.interactive else {
+//                        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
+//                        return
+//                }
+//                if nextRefreshPossibleAt.isInPast,
+//                   interactive {
+//                    guard connection.lastStage == .finish else {
+//                        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
+//                        return
+//                    }
+//                    self.showConnectionSession(for: providerViewModel, connectionType: .refresh, connection: connection)
+//                }
+//                else {
+//                    self.close()
+//                    self.delegate?.didConnectTo(providerViewModel, connection: connection)
+//                }
+//            case .inactive:
+//                self.showConnectionSession(for: providerViewModel, connectionType: .reconnect, connection: connection)
+//            case .deleted:
+//                self.showConnectionSession(for: providerViewModel, connectionType: .create, connection: connection)
+//            }
+//        }.catch { error in
+//            if case BankConnectionError.connectionNotFound = error {
+//                self.showConnectionSession(for: providerViewModel, connectionType: .create)
+//            } else {
+//                self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось загрузить подключение к банку", comment: "Не удалось загрузить подключение к банку"), theme: .error)
+//            }
+//        }
+//    }
+//
+//    func showConnectionSession(for providerViewModel: ProviderViewModel, connectionType: ProviderConnectionType, connection: Connection? = nil) {
+//        messagePresenterManager.showHUD(with: NSLocalizedString("Подготовка подключения к банку...", comment: "Подготовка подключения к банку..."))
+//
+//        func sessionURL() -> Promise<URL> {
+//            switch connectionType {
+//            case .create:
+//                return viewModel.createConnectionSession(for: providerViewModel)
+//            case .refresh:
+//                return viewModel.createRefreshConnectionSession(for: providerViewModel, connection: connection)
+//            case .reconnect:
+//                return viewModel.createReconnectSession(for: providerViewModel, connection: connection)
+//            }
+//        }
+//
+//        firstly {
+//            sessionURL()
+//        }.ensure {
+//            self.messagePresenterManager.dismissHUD()
+//        }.get { connectionURL in
+//            self.showConnectionViewController(for: providerViewModel,
+//                                              connectionURL: connectionURL,
+//                                              connectionType: connectionType,
+//                                              connection: connection)
+//        }.catch { e in
+//            print(e)
+//            SwiftyBeaver.error(e)
+//            self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось создать подключение к банку", comment: "Не удалось создать подключение к банку"), theme: .error)
+//        }
+//    }
+//
+//    func showConnectionViewController(for providerViewModel: ProviderViewModel, connectionURL: URL, connectionType: ProviderConnectionType = .create, connection: Connection? = nil) {
+//
+//        let connectionViewController = factory.connectionViewController(delegate: self,
+//                                                                              providerViewModel: providerViewModel,
+//                                                                              connectionType: connectionType,
+//                                                                              connectionURL: connectionURL,
+//                                                                              connection: connection)
+//        modal(connectionViewController)
+//    }
+//
+//    func didConnectToConnection(_ providerViewModel: ProviderViewModel?, connection: Connection) {
+//        self.close()
+//        delegate?.didConnectTo(providerViewModel, connection: connection)
+//    }
+//
+//    func didNotConnect() {
+//        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
+//    }
+//
+//    func didNotConnect(error: Error) {
+//        self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Не удалось подключиться к банку", comment: "Не удалось подключиться к банку"), theme: .error)
+//    }
+//}

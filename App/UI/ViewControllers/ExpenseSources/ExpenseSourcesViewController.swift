@@ -1,6 +1,6 @@
 //
 //  ExpenseSourcesViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 09.05.2020.
 //  Copyright © 2020 Real Tranzit. All rights reserved.
@@ -153,7 +153,7 @@ class ExpenseSourcesViewController : UIViewController, UIMessagePresenterManager
     }
     
     func showEditScreen(expenseSource: ExpenseSource?) {
-        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource))
+        modal(factory.expenseSourceEditViewController(delegate: self, expenseSource: expenseSource, shouldSkipExamplesPrompt: false))
     }
     
     func showExpenseSourceInfoScreen(expenseSource: ExpenseSourceViewModel?) {

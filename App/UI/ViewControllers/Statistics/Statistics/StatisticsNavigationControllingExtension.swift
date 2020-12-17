@@ -1,6 +1,6 @@
 //
 //  StatisticsNavigationControllingExtension.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 02/04/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -15,15 +15,15 @@ extension StatisticsViewController : TransactionEditViewControllerDelegate, Borr
     }
     
     func didCreateCredit() {
-        
+        loadData()
     }
     
     func didCreateDebt() {
-        
+        loadData()
     }
     
     func didCreateLoan() {
-        
+        loadData()
     }
     
     func didUpdateCredit() {
@@ -61,26 +61,33 @@ extension StatisticsViewController : TransactionEditViewControllerDelegate, Borr
         loadData()
     }
     
-    func shouldShowCreditEditScreen(destination: TransactionDestination) {
-        showCreditEditScreen(destination: destination)
+    func shouldShowCreditEditScreen(source: IncomeSourceViewModel?,
+                                    destination: TransactionDestination,
+                                    creditingTransaction: Transaction?) {
+        showCreditEditScreen(source: source, destination: destination, creditingTransaction: creditingTransaction)
     }
 
-    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
-        showBorrowEditScreen(type: type, source: source, destination: destination)
+    func shouldShowBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination, borrowingTransaction: Transaction?) {
+        showBorrowEditScreen(type: type, source: source, destination: destination, borrowingTransaction: borrowingTransaction)
     }
     
-    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination) {
+    func showBorrowEditScreen(type: BorrowType, source: TransactionSource, destination: TransactionDestination, borrowingTransaction: Transaction?) {
         modal(factory.borrowEditViewController(delegate: self,
                                                type: type,
                                                borrowId: nil,
                                                source: source,
-                                               destination: destination))
+                                               destination: destination,
+                                               borrowingTransaction: borrowingTransaction))
     }
     
-    func showCreditEditScreen(destination: TransactionDestination) {
+    func showCreditEditScreen(source: IncomeSourceViewModel?,
+                              destination: TransactionDestination,
+                              creditingTransaction: Transaction?) {
         modal(factory.creditEditViewController(delegate: self,
                                                creditId: nil,
-                                               destination: destination))
+                                               source: source,
+                                               destination: destination,
+                                               creditingTransaction: creditingTransaction))
     }
 }
 
@@ -139,6 +146,7 @@ extension StatisticsViewController : DatePeriodSelectionViewControllerDelegate {
         guard let period = period else { return }
         viewModel.updatePeriods(dateRangeFilter: period)
         clearTransactions()
+        shouldScrollTop = true
         loadData()
 //        viewModel.updatePresentationData()
 //        updateUI()
@@ -157,5 +165,11 @@ extension StatisticsViewController : GraphTableViewCellDelegate {
 //        viewModel.set(filters: [])
         viewModel.updatePresentationData()
         updateUI()
+    }
+}
+
+extension StatisticsViewController : ClearFiltersTableViewCellDelegate {
+    func didTapClearFilters() {
+        didSelect(filters: [])
     }
 }

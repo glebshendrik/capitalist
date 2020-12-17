@@ -1,6 +1,6 @@
 //
 //  ExpenseSourceEditDelegateExtension.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 01/04/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -35,12 +35,7 @@ extension MainViewController {
         if viewModel.isAddExpenseSourceItem(indexPath: indexPath) {
             showNewExpenseSourceScreen()
         } else if let expenseSourceViewModel = viewModel.expenseSourceViewModel(at: indexPath) {
-            if isSelecting {
-                select(expenseSourceViewModel, collectionView: expenseSourcesCollectionView, indexPath: indexPath)
-            }
-            else {
-                showExpenseSourceInfoScreen(expenseSource: expenseSourceViewModel)
-            }            
+            showExpenseSourceInfoScreen(expenseSource: expenseSourceViewModel)
         }
     }
     

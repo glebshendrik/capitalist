@@ -1,6 +1,6 @@
 //
 //  UIFactory.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 31/07/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -14,6 +14,11 @@ class UIFactory : UIFactoryProtocol {
     
     init(router: ApplicationRouterProtocol) {
         self.router = router
+    }
+    
+    func appUpdateViewController() -> UINavigationController? {
+        guard let appUpdateViewController = router.viewController(.AppUpdateViewController) as? AppUpdateViewController else { return nil }
+        return UINavigationController(rootViewController: appUpdateViewController)
     }
     
     func iconsViewController(delegate: IconsViewControllerDelegate,
@@ -47,53 +52,41 @@ class UIFactory : UIFactoryProtocol {
         return reminderEditNavigationController
     }
     
-    func providersViewController(delegate: ProvidersViewControllerDelegate, fetchDataFrom: Date?) -> ProvidersViewController? {
-        
-        let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController
-        providersViewController?.delegate = delegate
-        providersViewController?.viewModel.fetchDataFrom = fetchDataFrom
-        return providersViewController
-    }
-        
-    func accountsViewController(delegate: AccountsViewControllerDelegate,
-                                connection: Connection,
-                                currencyCode: String?,
-                                nature: AccountNatureType) -> AccountsViewController? {
-        
-        let accountsViewController = router.viewController(Infrastructure.ViewController.AccountsViewController) as? AccountsViewController
-        accountsViewController?.delegate = delegate
-        accountsViewController?.viewModel.connection = connection
-        accountsViewController?.viewModel.currencyCode = currencyCode
-        accountsViewController?.viewModel.nature = nature
-        return accountsViewController
+    func providersViewController(delegate: ProvidersViewControllerDelegate,
+                                 codes: [String]) -> UINavigationController? {
+        guard let providersViewController = router.viewController(.ProvidersViewController) as? ProvidersViewController else { return nil }
+        providersViewController.delegate = delegate
+        providersViewController.viewModel.codes = codes
+        let navigationController = UINavigationController(rootViewController: providersViewController)
+//        navigationController.modalPresentationStyle = .fullScreen
+        return navigationController
     }
     
     func connectionViewController(delegate: ConnectionViewControllerDelegate,
                                   providerViewModel: ProviderViewModel?,
-                                  connectionType: ProviderConnectionType,
-                                  connectionURL: URL,
-                                  connection: Connection?) -> UINavigationController? {
-        
-        guard let connectionViewController = router.viewController(Infrastructure.ViewController.ConnectionViewController) as? ConnectionViewController else { return nil }
+                                  connection: Connection?,
+                                  connectionSession: ConnectionSession) -> UINavigationController? {
+        guard
+            let connectionViewController = router.viewController(Infrastructure.ViewController.ConnectionViewController) as? ConnectionViewController
+        else {
+            return nil
+        }
         connectionViewController.delegate = delegate
         connectionViewController.viewModel.providerViewModel = providerViewModel
-        connectionViewController.viewModel.connectionType = connectionType
-        connectionViewController.viewModel.connectionURL = connectionURL
         connectionViewController.viewModel.connection = connection
+        connectionViewController.viewModel.connectionSession = connectionSession
+        
         let navigationController = UINavigationController(rootViewController: connectionViewController)
         navigationController.modalPresentationStyle = .fullScreen
         return navigationController
     }
     
-    func commentViewController(delegate: CommentViewControllerDelegate,
-                               text: String?,
-                               placeholder: String) -> CommentViewController? {
-        
-        let commentController = CommentViewController()
-        commentController.set(delegate: delegate)        
-        commentController.set(comment: text, placeholder: placeholder)
-        commentController.modalPresentationStyle = .custom
-        return commentController
+    func accountsViewController(delegate: AccountsViewControllerDelegate,
+                                expenseSource: ExpenseSource) -> AccountsViewController? {
+        let accountsViewController = router.viewController(Infrastructure.ViewController.AccountsViewController) as? AccountsViewController
+        accountsViewController?.delegate = delegate
+        accountsViewController?.viewModel.expenseSource = expenseSource
+        return accountsViewController
     }
     
     func datePickerViewController(delegate: DatePickerViewControllerDelegate,
@@ -238,7 +231,8 @@ class UIFactory : UIFactoryProtocol {
                                   type: BorrowType,
                                   borrowId: Int?,
                                   source: TransactionSource?,
-                                  destination: TransactionDestination?) -> UINavigationController? {
+                                  destination: TransactionDestination?,
+                                  borrowingTransaction: Transaction?) -> UINavigationController? {
         
         let borrowEditNavigationController = router.viewController(.BorrowEditNavigationController) as? UINavigationController
         let borrowEditViewController = borrowEditNavigationController?.topViewController as? BorrowEditViewController
@@ -248,14 +242,19 @@ class UIFactory : UIFactoryProtocol {
             borrowEditViewController?.set(borrowId: borrowId, type: type)
         }
         else {            
-            borrowEditViewController?.set(type: type, source: source, destination: destination)
+            borrowEditViewController?.set(type: type,
+                                          source: source,
+                                          destination: destination,
+                                          borrowingTransaction: borrowingTransaction)
         }
         return borrowEditNavigationController
     }
     
     func creditEditViewController(delegate: CreditEditViewControllerDelegate,
                                   creditId: Int?,
-                                  destination: TransactionDestination?) -> UINavigationController? {
+                                  source: IncomeSourceViewModel?,
+                                  destination: TransactionDestination?,
+                                  creditingTransaction: Transaction?) -> UINavigationController? {
         
         let creditEditNavigationController = router.viewController(.CreditEditNavigationController) as? UINavigationController
         let creditEditViewController = creditEditNavigationController?.topViewController as? CreditEditViewController
@@ -265,7 +264,9 @@ class UIFactory : UIFactoryProtocol {
             creditEditViewController?.set(creditId: creditId)
         }
         else {
-            creditEditViewController?.set(destination: destination)
+            creditEditViewController?.set(source: source,
+                                          destination: destination,
+                                          creditingTransaction: creditingTransaction)
         }
         return creditEditNavigationController
     }
@@ -359,7 +360,8 @@ class UIFactory : UIFactoryProtocol {
     }
     
     func expenseSourceEditViewController(delegate: ExpenseSourceEditViewControllerDelegate,
-                                         expenseSource: ExpenseSource?) -> UINavigationController? {
+                                         expenseSource: ExpenseSource?,
+                                         shouldSkipExamplesPrompt: Bool) -> UINavigationController? {
         let expenseSourceEditNavigationController = router.viewController(.ExpenseSourceEditNavigationController) as? UINavigationController
         let expenseSourceEditViewController = expenseSourceEditNavigationController?.topViewController as? ExpenseSourceEditViewController
             
@@ -368,6 +370,8 @@ class UIFactory : UIFactoryProtocol {
         if let expenseSource = expenseSource {
             expenseSourceEditViewController?.set(expenseSource: expenseSource)
         }
+        
+        expenseSourceEditViewController?.viewModel.shouldSkipExamplesPrompt = shouldSkipExamplesPrompt
         
         return expenseSourceEditNavigationController
     }
@@ -523,5 +527,31 @@ class UIFactory : UIFactoryProtocol {
         guard let subscriptionViewController = router.viewController(.SubscriptionViewController) as? SubscriptionViewController else { return nil }
         subscriptionViewController.viewModel.requiredPlans = requiredPlans
         return subscriptionViewController
+    }
+    
+    func experimentalBankFeatureViewController(delegate: ExperimentalBankFeatureViewControllerDelegate) -> UINavigationController? {
+        guard let experimentalBankFeatureViewController = router.viewController(.ExperimentalBankFeatureViewController) as? ExperimentalBankFeatureViewController else { return nil }
+        experimentalBankFeatureViewController.delegate = delegate
+        return UINavigationController(rootViewController: experimentalBankFeatureViewController)
+    }
+    
+    func transactionableExamplesViewController(delegate: TransactionableExamplesViewControllerDelegate,
+                                               transactionableType: TransactionableType,
+                                               isUsed: Bool) -> TransactionableExamplesViewController? {
+        guard
+            let transactionableExamplesViewController = router.viewController(.TransactionableExamplesViewController) as? TransactionableExamplesViewController
+        else {
+            return nil
+        }
+        transactionableExamplesViewController.delegate = delegate
+        transactionableExamplesViewController.viewModel.transactionableType = transactionableType
+        transactionableExamplesViewController.viewModel.isUsed = isUsed
+        return transactionableExamplesViewController
+    }
+    
+    func prototypesLinkingViewController(linkingType: TransactionableType) -> UINavigationController? {
+        guard let prototypesLinkingViewController = router.viewController(.PrototypesLinkingViewController) as? PrototypesLinkingViewController else { return nil }
+        prototypesLinkingViewController.viewModel.linkingType = linkingType
+        return UINavigationController(rootViewController: prototypesLinkingViewController)
     }
 }

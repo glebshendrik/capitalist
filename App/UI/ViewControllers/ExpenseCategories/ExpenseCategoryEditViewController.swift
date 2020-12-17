@@ -1,6 +1,6 @@
 //
 //  ExpenseCategoryEditViewController.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 18/01/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -49,7 +49,7 @@ class ExpenseCategoryEditViewController : FormTransactionsDependableEditViewCont
     }
     
     override func loadDataPromise() -> Promise<Void> {
-        return viewModel.loadDefaultCurrency()
+        return viewModel.loadData()
     }
     
     override func savePromise() -> Promise<Void> {
@@ -58,6 +58,16 @@ class ExpenseCategoryEditViewController : FormTransactionsDependableEditViewCont
     
     override func removePromise() -> Promise<Void> {
         return viewModel.removeExpenseCategory(deleteTransactions: deleteTransactions)
+    }
+    
+    override func didLoadData() {
+        super.didLoadData()
+        if viewModel.needToShowExamples {
+            view.endEditing(true)
+            slideUp(factory.transactionableExamplesViewController(delegate: self,
+                                                                  transactionableType: .expenseCategory,
+                                                                  isUsed: false))
+        }
     }
     
     override func didSave() {

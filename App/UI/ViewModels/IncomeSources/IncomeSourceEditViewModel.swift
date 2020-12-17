@@ -1,6 +1,6 @@
 //
 //  IncomeSourceEditViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 13/12/2018.
 //  Copyright © 2018 Real Tranzit. All rights reserved.
@@ -13,9 +13,10 @@ enum IncomeSourceUpdatingError : Error {
     case updatingIncomeSourceIsNotSpecified
 }
 
-class IncomeSourceEditViewModel {
+class IncomeSourceEditViewModel : TransactionableExamplesDependantProtocol {
     private let incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol
     private let accountCoordinator: AccountCoordinatorProtocol
+    var transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol
     
     private var incomeSource: IncomeSource? = nil
     
@@ -23,6 +24,7 @@ class IncomeSourceEditViewModel {
     var name: String? = nil
     var selectedCurrency: Currency? = nil
     var monthlyPlanned: String?
+    var description: String?
     var reminderViewModel: ReminderViewModel = ReminderViewModel()
     
     // Computed
@@ -73,10 +75,24 @@ class IncomeSourceEditViewModel {
         return isNew || incomeSource!.isChild
     }
     
+    var numberOfUnusedExamples: Int = 0
+    var basketType: BasketType = .joy
+    var example: TransactionableExampleViewModel? = nil
+    var transactionableType: TransactionableType {
+        return .incomeSource
+    }
+    var shouldSkipExamplesPrompt: Bool = false
+    
     init(incomeSourcesCoordinator: IncomeSourcesCoordinatorProtocol,
-         accountCoordinator: AccountCoordinatorProtocol) {
+         accountCoordinator: AccountCoordinatorProtocol,
+         transactionableExamplesCoordinator: TransactionableExamplesCoordinatorProtocol) {
         self.incomeSourcesCoordinator = incomeSourcesCoordinator
         self.accountCoordinator = accountCoordinator
+        self.transactionableExamplesCoordinator = transactionableExamplesCoordinator
+    }
+    
+    func loadData() -> Promise<Void> {
+        return when(fulfilled: loadDefaultCurrency(), loadExamples())
     }
     
     func loadDefaultCurrency() -> Promise<Void> {
@@ -93,12 +109,15 @@ class IncomeSourceEditViewModel {
         reminderViewModel = ReminderViewModel(reminder: incomeSource.reminder)
         selectedCurrency = incomeSource.currency
         name = incomeSource.name
+        description = incomeSource.description
         monthlyPlanned = incomeSource.monthlyPlannedCents?.moneyDecimalString(with: incomeSource.currency)
     }
     
     func set(example: TransactionableExampleViewModel) {
+        self.example = example
         selectedIconURL = example.iconURL
         name = example.name
+        description = example.description
     }
     
     func isFormValid() -> Bool {
@@ -137,6 +156,8 @@ extension IncomeSourceEditViewModel {
                                          name: name,
                                          currency: selectedCurrencyCode,
                                          monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
+                                         description: description,
+                                         prototypeKey: example?.prototypeKey,
                                          reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }
@@ -156,6 +177,7 @@ extension IncomeSourceEditViewModel {
                                         iconURL: selectedIconURL,
                                         name: name,
                                         monthlyPlannedCents: monthlyPlanned?.intMoney(with: selectedCurrency),
+                                        description: description,
                                         reminderAttributes: reminderViewModel.reminderAttributes)
     }
 }

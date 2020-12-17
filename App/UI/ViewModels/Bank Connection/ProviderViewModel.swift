@@ -1,6 +1,6 @@
 //
 //  ProviderViewModel.swift
-//  Three Baskets
+//  Capitalist
 //
 //  Created by Alexander Petropavlovsky on 28/06/2019.
 //  Copyright © 2019 Real Tranzit. All rights reserved.
@@ -32,7 +32,35 @@ class ProviderViewModel {
         return provider.isOAuth
     }
     
+    var maxFetchInterval: Int {
+        return provider.maxFetchInterval
+    }
+    
+    var fetchDataFrom: Date {        
+        var interval = maxFetchInterval
+        if interval < 0 {
+            interval = 0
+        }
+        return Date().adding(.day, value: -interval)
+    }
+    
     var connectURL: URL? = nil
+    
+    var interactiveCredentials: [InteractiveCredentialsField] {
+        guard
+            let interactiveFields = provider.interactiveFields
+        else {
+            return []
+        }
+        return interactiveFields.map {
+            InteractiveCredentialsField(name: $0.name,
+                                             value: nil,
+                                             displayName: $0.localizedName,
+                                             nature: InteractiveCredentialsFieldNature(rawValue: $0.nature),
+                                             options: $0.fieldOptions,
+                                             position: $0.position,
+                                             optional: $0.purpleOptional) }
+    }
     
     init(provider: SEProvider) {
         self.provider = provider
