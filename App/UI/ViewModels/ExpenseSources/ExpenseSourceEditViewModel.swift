@@ -110,6 +110,10 @@ class ExpenseSourceEditViewModel {
         return !accountConnected
     }
     
+    var canConnectBank: Bool {
+        return accountCoordinator.hasPlatinumSubscription
+    }
+    
     // Visibility
         
     var iconPenHidden: Bool {
@@ -128,9 +132,14 @@ class ExpenseSourceEditViewModel {
         return isNew
     }
     
-    var hasActiveSubscription: Bool {
-        return accountCoordinator.currentUserHasActiveSubscription
+    var bankButtonHidden: Bool {
+        guard let currentUser = currentUser else {
+            return true
+        }
+        return !currentUser.onboarded
     }
+    
+    var currentUser: User? = nil
     
     init(expenseSourcesCoordinator: ExpenseSourcesCoordinatorProtocol,
          accountCoordinator: AccountCoordinatorProtocol,
@@ -145,6 +154,7 @@ class ExpenseSourceEditViewModel {
                     accountCoordinator.loadCurrentUser()
                 }.done { user in
                     self.selectedCurrency = user.currency
+                    self.currentUser = user
                 }
     }
     

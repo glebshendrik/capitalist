@@ -137,6 +137,7 @@ extension StatisticsViewController {
     }
     
     @objc func didTapFiltersButton(_ sender: Any) {
+//        showSubscription()
         if viewModel.canShowFilters {
             showFilters()
         }

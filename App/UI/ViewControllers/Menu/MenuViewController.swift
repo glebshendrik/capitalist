@@ -39,8 +39,12 @@ class MenuViewController : StaticTableViewController, UIMessagePresenterManagerD
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {        
-        if !viewModel.hasActiveSubscription && (identifier == "showBorrows" || identifier == "showCredits") {
-            modal(factory.subscriptionViewController())
+        if !viewModel.premiumFeaturesAvailable && (identifier == "showBorrows" || identifier == "showCredits") {
+            modal(factory.subscriptionNavigationViewController(requiredPlans: [.premium, .platinum]))
+            return false
+        }
+        if !viewModel.requiredPlans.isEmpty && identifier == "showSubscription" {
+            push(factory.subscriptionViewController(requiredPlans: viewModel.requiredPlans))
             return false
         }
         return true
@@ -50,6 +54,7 @@ class MenuViewController : StaticTableViewController, UIMessagePresenterManagerD
         updateIncomesProgressUI()
         updateExpensesProgressUI()
         updateProfileUI()
+        updateSubscriptionUI()
         updateTableUI(animated: animated)
     }
     
@@ -67,14 +72,18 @@ class MenuViewController : StaticTableViewController, UIMessagePresenterManagerD
     
     func updateProfileUI () {
         profileCell.textLabel?.text = viewModel.profileTitle
-        profileCell.textLabel?.textColor = UIColor.by(viewModel.hasActiveSubscription ? .yellow1 : .white100)
-        profileCell.imageView?.image = UIImage(named: viewModel.hasActiveSubscription ? "premium-icon" : "profile-menu-item-icon")
+        profileCell.textLabel?.textColor = UIColor.by(viewModel.premiumFeaturesAvailable ? .yellow1 : .white100)
+        profileCell.imageView?.image = UIImage(named: viewModel.premiumFeaturesAvailable ? "premium-icon" : "profile-menu-item-icon")
+    }
+    
+    func updateSubscriptionUI() {
+        premiumCell.textLabel?.text = viewModel.subscriptionItemTitle
     }
     
     func updateTableUI(animated: Bool = false) {
         set(cells: joinCell, hidden: viewModel.joinItemHidden)
         set(cells: profileCell, hidden: viewModel.profileItemHidden)
-        set(cells: premiumCell, hidden: viewModel.premiumItemHidden)
+        set(cells: premiumCell, hidden: viewModel.subscriptionItemHidden)
         reloadData(animated: animated)
     }
     

@@ -34,16 +34,69 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         return userSessionManager.currentSession
     }
     
+    var hasPremiumSubscription: Bool {
+        return !([activePremiumMonthly,
+                  activePremiumYearly,
+                  activePremiumSixMonths,
+                  activePremiumUnlimitedCIS,
+                  activePremiumUnlimitedNonCIS]
+                    .compactMap { $0 }
+                    .isEmpty)
+    }
+    
+    var hasPremiumUnlimitedSubscription: Bool {
+        return !([activePremiumUnlimitedCIS,
+                  activePremiumUnlimitedNonCIS]
+                    .compactMap { $0 }
+                    .isEmpty)
+    }
+    
+    var hasPlatinumSubscription: Bool {
+        let hasPlatinum = !([activePlatinumMonthly,
+                             activePlatinumYearly]
+                                .compactMap { $0 }
+                                .isEmpty)
+        
+        let hasPlatinumPure = !([activePlatinumPureMonthly,
+                                 activePlatinumPureYearly]
+                                    .compactMap { $0 }
+                                    .isEmpty)
+        
+        
+        
+        return hasPlatinum || (hasPremiumUnlimitedSubscription && hasPlatinumPure)
+    }
+    
     var currentUserHasActiveSubscription: Bool {
         return Apphud.hasActiveSubscription()
     }
     
     var subscription: ApphudSubscription? {
-        return Apphud.subscription()
+        if hasPlatinumSubscription {
+            return activePlatinumMonthly ?? activePlatinumYearly ?? activePlatinumPureMonthly ?? activePlatinumPureYearly
+        }
+        
+        if hasPremiumUnlimitedSubscription {
+            return activePremiumUnlimitedCIS ?? activePremiumUnlimitedNonCIS
+        }
+        
+        return activePremiumMonthly ?? activePremiumSixMonths ?? activePremiumYearly
     }
     
     var subscriptionProducts: [SKProduct] {
         return Apphud.products() ?? []
+    }
+    
+    var premiumFeaturesAvailable: Bool {
+        return hasPremiumSubscription || hasPlatinumSubscription
+    }
+    
+    var platinumFeaturesAvailable: Bool {
+        return hasPlatinumSubscription        
+    }
+    
+    var hasActiveSubscription: Bool {
+        return subscription != nil
     }
     
     init(userSessionManager: UserSessionManagerProtocol,
@@ -63,6 +116,10 @@ class AccountCoordinator : AccountCoordinatorProtocol {
         self.saltEdgeManager = saltEdgeManager
     }
         
+    private func getActiveSubscription(_ subscription: SubscriptionProduct) -> ApphudSubscription? {
+        return Apphud.subscriptions()?.first(where: { $0.isActive() && $0.productId == subscription.id })
+    }
+    
     func joinAsGuest() -> Promise<Session> {
         return authenticate(with: SessionCreationForm(email: nil, password: nil, skipValidation: true))
     }
@@ -236,5 +293,43 @@ class AccountCoordinator : AccountCoordinatorProtocol {
     
     func checkIntroductoryEligibility() -> Promise<[String : Bool]> {
         return Promise { Apphud.checkEligibilitiesForIntroductoryOffers(products: self.subscriptionProducts, callback: $0.fulfill) }
+    }
+}
+
+extension AccountCoordinator {
+    var activePremiumMonthly: ApphudSubscription? {
+        return getActiveSubscription(.premium(.month))
+    }
+    
+    var activePremiumSixMonths: ApphudSubscription? {
+        return getActiveSubscription(.premium(.sixMonths))
+    }
+    
+    var activePremiumYearly: ApphudSubscription? {
+        return getActiveSubscription(.premium(.year))
+    }
+    
+    var activePremiumUnlimitedCIS: ApphudSubscription? {
+        return getActiveSubscription(.premiumUnlimited(.cis))
+    }
+    
+    var activePremiumUnlimitedNonCIS: ApphudSubscription? {
+        return getActiveSubscription(.premiumUnlimited(.nonCis))
+    }
+    
+    var activePlatinumMonthly: ApphudSubscription? {
+        return getActiveSubscription(.platinum(.month))
+    }
+    
+    var activePlatinumYearly: ApphudSubscription? {
+        return getActiveSubscription(.platinum(.year))
+    }
+    
+    var activePlatinumPureMonthly: ApphudSubscription? {
+        return getActiveSubscription(.platinumPure(.month))
+    }
+    
+    var activePlatinumPureYearly: ApphudSubscription? {
+        return getActiveSubscription(.platinumPure(.year))
     }
 }

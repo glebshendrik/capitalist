@@ -147,7 +147,7 @@ class APIClient : APIClientProtocol {
             }
             request.addValue(TimeZone.autoupdatingCurrent.identifier, forHTTPHeaderField: "X-Timezone")
             if let country = Locale.autoupdatingCurrent.regionCode {
-                request.addValue(country, forHTTPHeaderField: "X_REGION")
+                request.addValue(country, forHTTPHeaderField: "X-REGION")
             }
             return Alamofire
                 .request(request)

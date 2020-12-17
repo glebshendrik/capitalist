@@ -23,7 +23,7 @@
         <!--Menu View Controller-->
         <scene sceneID="n2S-H5-SHy">
             <objects>
-                <tableViewController id="QiM-ZW-5Ox" customClass="MenuViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="QiM-ZW-5Ox" customClass="MenuViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="56" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ISQ-SE-Fat">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -103,7 +103,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <segue destination="6V1-xL-ECu" kind="show" id="cND-LM-Myo"/>
+                                            <segue destination="6V1-xL-ECu" kind="show" identifier="showSubscription" id="cND-LM-Myo"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="u21-Jw-Xay" imageView="5w6-IU-KlG" rowHeight="56" style="IBUITableViewCellStyleDefault" id="xVd-E0-lqY">
@@ -294,7 +294,7 @@
                                                     <color key="textColor" name="white 0.4"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJM-vV-HjA" customClass="ProgressView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJM-vV-HjA" customClass="ProgressView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="40" width="343" height="24"/>
                                                     <color key="backgroundColor" name="white 0.12"/>
                                                     <constraints>
@@ -312,7 +312,7 @@
                                                     <color key="textColor" name="white 0.4"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALV-1f-aiF" customClass="ProgressView" customModule="Three_Baskets" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALV-1f-aiF" customClass="ProgressView" customModule="Capitalist" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="108" width="343" height="24"/>
                                                     <color key="backgroundColor" name="white 0.12"/>
                                                     <constraints>
@@ -452,7 +452,7 @@
         <!--Main View Controller-->
         <scene sceneID="lXX-sC-DZf">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="527-2C-xUs" customClass="MainViewController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="527-2C-xUs" customClass="MainViewController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D5A-mu-huD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -497,7 +497,7 @@
                                                     <inset key="sectionInset" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseSourceCollectionViewCell" id="2cF-xZ-Dlq" customClass="ExpenseSourceCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseSourceCollectionViewCell" id="2cF-xZ-Dlq" customClass="ExpenseSourceCollectionViewCell" customModule="Capitalist" customModuleProvider="target">
                                                         <rect key="frame" x="12" y="5" width="161" height="96"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -510,7 +510,7 @@
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pfa-b1-5kr">
                                                                             <rect key="frame" x="4" y="4" width="153" height="88"/>
                                                                             <subviews>
-                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TK1-KI-f5z" customClass="IconView" customModule="Three_Baskets" customModuleProvider="target">
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TK1-KI-f5z" customClass="IconView" customModule="Capitalist" customModuleProvider="target">
                                                                                     <rect key="frame" x="4" y="3" width="48" height="48"/>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <constraints>
@@ -770,7 +770,7 @@
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseCategoryCollectionViewCell" id="s22-FT-zsz" customClass="ExpenseCategoryCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExpenseCategoryCollectionViewCell" id="s22-FT-zsz" customClass="ExpenseCategoryCollectionViewCell" customModule="Capitalist" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -912,7 +912,7 @@
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActiveCollectionViewCell" id="lnQ-xQ-wgq" customClass="ActiveCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActiveCollectionViewCell" id="lnQ-xQ-wgq" customClass="ActiveCollectionViewCell" customModule="Capitalist" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1055,7 +1055,7 @@
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActiveCollectionViewCell" id="HIx-fB-aL6" customClass="ActiveCollectionViewCell" customModule="Three_Baskets" customModuleProvider="target">
+                                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActiveCollectionViewCell" id="HIx-fB-aL6" customClass="ActiveCollectionViewCell" customModule="Capitalist" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="68" height="105"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1326,7 +1326,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-xG-79w" customClass="FanMenu" customModule="Three_Baskets" customModuleProvider="target">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-xG-79w" customClass="FanMenu" customModule="Capitalist" customModuleProvider="target">
                                 <rect key="frame" x="118" y="383" width="400" height="400"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1463,7 +1463,7 @@
         <!--Colorable Navigation Controller-->
         <scene sceneID="YX2-C6-VaL">
             <objects>
-                <navigationController storyboardIdentifier="MainViewController" id="Kfi-BE-rMg" customClass="ColorableNavigationController" customModule="Three_Baskets" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainViewController" id="Kfi-BE-rMg" customClass="ColorableNavigationController" customModule="Capitalist" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="jLH-eK-5ml">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1542,10 +1542,10 @@
         <image name="visa_icon" width="37" height="12"/>
         <image name="warning-icon" width="21" height="20.5"/>
         <namedColor name="black 1">
-            <color red="0.090000003576278687" green="0.093999996781349182" blue="0.11400000005960464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.086274509803921567" green="0.090196078431372548" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="black 2">
-            <color red="0.125" green="0.13300000131130219" blue="0.14900000393390656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="blue 1">
             <color red="0.0" green="0.45899999141693115" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

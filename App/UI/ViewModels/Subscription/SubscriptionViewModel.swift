@@ -17,94 +17,132 @@ enum SubscriptionError : Error {
     case restoreFailed
 }
 
-enum SubscriptionProductId : String {
-    case monthly = "com.realtransitapps.threebaskets.subscriptions.main.monthly"
-    case halfofyear = "com.realtransitapps.threebaskets.subscriptions.main.halfofyear"
-    case yearly = "com.realtransitapps.threebaskets.subscriptions.main.yearly"
-    
-    var id: String {
-        return rawValue
-    }
-}
-
-struct FeatureDescriptionViewModel {
-    var description: String
-    var imageName: String
-}
-
 class SubscriptionViewModel {
     private let accountCoordinator: AccountCoordinatorProtocol
+    private var subscriptionPlanViewModels: [SubscriptionPlanViewModel] = []
     
-    private var productViewModels: [String : ProductViewModel] = [:]
-    private var featureDescriptionViewModels: [FeatureDescriptionViewModel] =
-        [FeatureDescriptionViewModel(description: NSLocalizedString("Неограниченное количество транзакций в день", comment: "Неограниченное количество транзакций в день"),
-                                     imageName: "subscription-transactions"),
-         FeatureDescriptionViewModel(description:  NSLocalizedString("Неограниченное количество сбережений и инвестиций", comment: "Неограниченное количество сбережений и инвестиций"),
-                                     imageName: "subscription-assets"),
-         FeatureDescriptionViewModel(description: NSLocalizedString("Статистика за все время с возможностью фильтрации операций", comment: "Статистика за все время с возможностью фильтрации операций"),
-                                     imageName: "subscription-statistics"),
-         FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять кредитами", comment: "Возможность управлять кредитами"),
-                                     imageName: "subscription-credits"),
-         FeatureDescriptionViewModel(description: NSLocalizedString("Возможность управлять долгами и займами", comment: "Возможность управлять долгами и займами"),
-                                     imageName: "subscription-debts")]
-    
-    var selectedProductId: SubscriptionProductId = .yearly {
-        didSet {
-            updateSelectedProduct()
-        }
+    var numberOfSubscriptionPlans: Int {
+        return subscriptionPlanViewModels.count
     }
     
-    var selectedProduct: ProductViewModel? {
-        return productViewModels[selectedProductId.id]
+    var requiredPlans: [SubscriptionPlan] = []
+    
+    private var userHasRegionDiscount: Bool {
+        return ["AZ", "AM", "BY", "KZ", "RU", "TJ", "TM", "UA", "UZ"]
+                .map { $0.lowercased() }
+                .contains(Locale.autoupdatingCurrent.regionCode?.lowercased())
     }
     
-    var numberOfFeatureDescriptions: Int {
-        return featureDescriptionViewModels.count
+    private var unlimitedPremiumSubscriptionProduct: SubscriptionProduct {
+        return userHasRegionDiscount ? .premiumUnlimited(.cis) : .premiumUnlimited(.nonCis)
     }
     
-    var privacyURLString: String {
-        return NSLocalizedString("privacy policy url", comment: "privacy policy url")
+    private var firstPlatinumSubscriptionProduct: SubscriptionProduct {
+        return accountCoordinator.hasPremiumUnlimitedSubscription ? .platinumPure(.month) : .platinum(.month)
     }
     
-    var termsURLString: String {
-        return NSLocalizedString("terms of service url", comment: "terms of service url")
+    private var secondPlatinumSubscriptionProduct: SubscriptionProduct {
+        return accountCoordinator.hasPremiumUnlimitedSubscription ? .platinumPure(.year) : .platinum(.year)
     }
     
     init(accountCoordinator: AccountCoordinatorProtocol) {
-        self.accountCoordinator = accountCoordinator
+        self.accountCoordinator = accountCoordinator        
     }
     
-    func featureDescriptionViewModel(by indexPath: IndexPath) -> FeatureDescriptionViewModel? {
-        return featureDescriptionViewModels[safe: indexPath.row]
-    }
-    
-    func productViewModel(by productId: SubscriptionProductId) -> ProductViewModel? {
-        return productViewModels[productId.id]
+    func subscriptionPlanViewModel(by indexPath: IndexPath) -> SubscriptionPlanViewModel? {
+        return subscriptionPlanViewModels[safe: indexPath.item]
     }
     
     func updateProducts() {
+        if requiredPlans.isEmpty {
+            requiredPlans = [.free, .premium, .platinum]
+        }
+        subscriptionPlanViewModels = []
         let products = accountCoordinator.subscriptionProducts
-        productViewModels = [String : ProductViewModel]()
+        var productViewModels = [String : ProductViewModel]()
         for product in products {
             productViewModels[product.productIdentifier] = ProductViewModel(product: product)
         }
-        productViewModels[selectedProductId.id]?.isSelected = true
-        updateDiscountPercents()
+        
+        let premiumProducts = [productViewModels[SubscriptionProduct.premium(.month).id],
+                               productViewModels[SubscriptionProduct.premium(.year).id]].compactMap { $0 }
+        let premiumUnlimitedProduct = productViewModels[unlimitedPremiumSubscriptionProduct.id]
+        let platinumProducts = [productViewModels[SubscriptionProduct.platinum(.month).id],
+                                productViewModels[SubscriptionProduct.platinum(.year).id]].compactMap { $0 }
+        
+        
+        let freeFeatures = [PlanFeatureItemViewModel(description: NSLocalizedString("Создание кошельков", comment: ""),
+                                                     imageName: "feature-wallet"),
+                            PlanFeatureItemViewModel(description:  NSLocalizedString("Создание источников доходов и категорий трат", comment: ""),
+                                                     imageName: "feature-calculator"),
+                            PlanFeatureItemViewModel(description: NSLocalizedString("До 30 транзакций в день", comment: ""),
+                                                     imageName: "feature-transfer"),
+                            PlanFeatureItemViewModel(description: NSLocalizedString("Просмотр статистики за текущий и прошлый месяц", comment: ""),
+                                                     imageName: "feature-statistics"),
+                            PlanFeatureItemViewModel(description: NSLocalizedString("Создание одного актива сбережения и одного актива инвестиции", comment: ""),
+                                                     imageName: "feature-assets")]
+        
+        let premiumFeatures = [PlanFeatureItemViewModel(description: NSLocalizedString("Неограниченное количество транзакций в день", comment: ""),
+                                                        imageName: "feature-transfer"),
+                               PlanFeatureItemViewModel(description:  NSLocalizedString("Просмотр статистики за все время с возможностью фильтрации", comment: ""),
+                                                        imageName: "feature-statistics"),
+                               PlanFeatureItemViewModel(description: NSLocalizedString("Неограниченное количество сбережений и инвестиций", comment: ""),
+                                                        imageName: "feature-assets"),
+                               PlanFeatureItemViewModel(description: NSLocalizedString("Управление кредитами, долгами и займами", comment: ""),
+                                                        imageName: "feature-credits")]
+        
+        let platinumFeatures = [PlanFeatureItemViewModel(description: NSLocalizedString("Интеграция с банками", comment: ""),
+                                                         imageName: "feature-bank")]
+//        ,
+//                                PlanFeatureItemViewModel(description:  NSLocalizedString("Анализ банковской деятельности за прошлый год", comment: ""),
+//                                                         imageName: "feature-analysis")]
+        
+        if requiredPlans.contains(.free) {
+            subscriptionPlanViewModels = [SubscriptionPlanViewModel(title: NSLocalizedString("Бесплатная", comment: ""),
+                                                                    description: NSLocalizedString("Бесплатная", comment: ""),
+                                                                    features: freeFeatures,
+                                                                    isFree: true)]
+        }
+        
+        if !premiumProducts.isEmpty && requiredPlans.contains(.premium) {
+            subscriptionPlanViewModels.append(SubscriptionPlanViewModel(title: NSLocalizedString("Premium", comment: ""),
+                                                                        description: NSLocalizedString("Включает в себя все функции предыдущего плана", comment: ""),
+                                                                        features: premiumFeatures,
+                                                                        firstProduct: .premium(.month),
+                                                                        secondProduct: .premium(.year),
+                                                                        products: premiumProducts,
+                                                                        basicProduct: .premium(.month),
+                                                                        selectedProduct: .premium(.year),
+                                                                        unlimitedProduct: premiumUnlimitedProduct))
+        }
+        
+        if !platinumProducts.isEmpty && requiredPlans.contains(.platinum) {
+            subscriptionPlanViewModels.append(SubscriptionPlanViewModel(title: NSLocalizedString("Platinum", comment: ""),
+                                                                        description: NSLocalizedString("Включает в себя все функции предыдущего плана", comment: ""),
+                                                                        features: platinumFeatures,
+                                                                        firstProduct: firstPlatinumSubscriptionProduct,
+                                                                        secondProduct: secondPlatinumSubscriptionProduct,
+                                                                        products: platinumProducts,
+                                                                        basicProduct: firstPlatinumSubscriptionProduct,
+                                                                        selectedProduct: secondPlatinumSubscriptionProduct))
+        }
     }
+    
     
     func checkIntroductoryEligibility() -> Promise<Void> {
         return  firstly {
                     accountCoordinator.checkIntroductoryEligibility()
-                }.get { result in
+                }.get { eligibilities in
                     self.updateProducts()
-                    result.forEach { self.productViewModels[$0.key]?.isTrialAvailable = $0.value }
+                    eligibilities.forEach { eligibility in
+                        self.subscriptionPlanViewModels.forEach { plan in
+                            plan.updateEligibility(productId: eligibility.key, isTrialAvailable: eligibility.value)
+                        }
+                    }
                 }.asVoid()
     }
     
-    func purchase() -> Promise<Void> {
-        guard let product = productViewModels[selectedProductId.id]?.product else {
-            return Promise(error: SubscriptionError.productIsNotChosen)
-        }
+    func purchase(product: SKProduct) -> Promise<Void> {
         return  firstly {
                     accountCoordinator.purchase(product: product)
                 }.map { subscription -> ApphudSubscription in
@@ -124,19 +162,6 @@ class SubscriptionViewModel {
                 }.then { _ in
                     return self.accountCoordinator.updateUserSubscription()
                 }
-    }
-    
-    private func updateSelectedProduct() {
-        productViewModels.values.forEach { $0.isSelected = false }
-        productViewModels[selectedProductId.id]?.isSelected = true
-    }
-    
-    private func updateDiscountPercents() {
-        guard let basicProduct = productViewModels[SubscriptionProductId.monthly.id] else { return }
-        productViewModels.values.forEach {
-            $0.savingPercent = $0.product.savingPercentAgainst(basicProduct.product)
-            $0.baseProduct = basicProduct.product
-        }
     }
 }
 

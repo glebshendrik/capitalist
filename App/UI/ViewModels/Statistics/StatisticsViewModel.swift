@@ -42,7 +42,7 @@ class StatisticsViewModel {
     }
     
     var canShowFilters: Bool {
-        return accountCoordinator.currentUserHasActiveSubscription
+        return accountCoordinator.premiumFeaturesAvailable
     }
     
     init(transactionsViewModel: TransactionsViewModel,

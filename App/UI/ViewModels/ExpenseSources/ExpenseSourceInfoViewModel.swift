@@ -76,8 +76,12 @@ class ExpenseSourceInfoViewModel : EntityInfoViewModel {
         return !(expenseSourceViewModel?.accountConnected ?? false)
     }
     
-    var hasActiveSubscription: Bool {        
-        return accountCoordinator.currentUserHasActiveSubscription
+//    var hasActiveSubscription: Bool {        
+//        return accountCoordinator.currentUserHasActiveSubscription
+//    }
+    
+    var canConnectBank: Bool {
+        return accountCoordinator.hasPlatinumSubscription
     }
     
     init(transactionsCoordinator: TransactionsCoordinatorProtocol,

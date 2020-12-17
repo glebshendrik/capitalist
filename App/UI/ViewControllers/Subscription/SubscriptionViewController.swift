@@ -10,122 +10,93 @@ import UIKit
 import InfiniteLayout
 import ApphudSDK
 import PromiseKit
+import StoreKit
+import UPCarouselFlowLayout
 
-class FeatureDescriptionCollectionViewCell : UICollectionViewCell {
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var descriptionImageView: UIImageView!
-    
-    var viewModel: FeatureDescriptionViewModel? {
-        didSet {
-            updateUI()
-        }
-    }
-    
-    func updateUI() {
-        descriptionLabel.text = viewModel?.description
-        guard let viewModel = viewModel else { return }
-        descriptionImageView.image = UIImage(named: viewModel.imageName)
-    }
-}
-
-typealias ProductViewContainer = (background: UIView, title: UILabel, subtitle: UILabel, titleContainer: UIView, subtitleContainer: UIView, delimiter: UIView, discountButton: UIButton)
-
-class SubscriptionViewController : FormFieldsTableViewController, ApplicationRouterDependantProtocol, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol {
+class SubscriptionViewController : UIViewController, ApplicationRouterDependantProtocol, UIMessagePresenterManagerDependantProtocol, UIFactoryDependantProtocol {
     
     var router: ApplicationRouterProtocol!
     var messagePresenterManager: UIMessagePresenterManagerProtocol!
     var factory: UIFactoryProtocol!
     var viewModel: SubscriptionViewModel!
     
-    @IBOutlet weak var featuresCollectionView: InfiniteCollectionView!
-    @IBOutlet weak var featuresPageControl: UIPageControl!
+    @IBOutlet weak var plansCollectionView: UICollectionView!
+    @IBOutlet weak var plansPageControl: UIPageControl!
     
-    @IBOutlet weak var firstProductBackground: UIView!
-    @IBOutlet weak var firstProductDiscountButton: UIButton!
-    @IBOutlet weak var firstProductTitleLabel: UILabel!
-    @IBOutlet weak var firstProductSubtitleLabel: UILabel!
-    @IBOutlet weak var firstProductDelimeter: UIView!
-    @IBOutlet weak var firstProductSubtitleContainer: UIView!
-    @IBOutlet weak var firstProductTitleContainer: UIView!
+    var privacyURLString: String {
+        return NSLocalizedString("privacy policy url", comment: "privacy policy url")
+    }
     
-    @IBOutlet weak var secondProductBackground: UIView!
-    @IBOutlet weak var secondProductDiscountButton: UIButton!
-    @IBOutlet weak var secondProductTitleLabel: UILabel!
-    @IBOutlet weak var secondProductSubtitleLabel: UILabel!
-    @IBOutlet weak var secondProductDelimeter: UIView!
-    @IBOutlet weak var secondProductSubtitleContainer: UIView!
-    @IBOutlet weak var secondProductTitleContainer: UIView!
+    var termsURLString: String {
+        return NSLocalizedString("terms of service url", comment: "terms of service url")
+    }
     
-    @IBOutlet weak var productsCell: UITableViewCell!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        loadData()
+    }
     
-    @IBOutlet weak var purchaseSubtitleLabel: UILabel!
-    @IBOutlet weak var discountDescriptionLabel: UILabel!
-    
-    private var productContainers: [SubscriptionProductId : ProductViewContainer] = [:]
+    override func viewDidLayoutSubviews() {
+        setupPlansUI()
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         _ = UIFlowManager.reach(point: .subscription)
     }
     
-    override func setupUI() {
-        super.setupUI()
-        setupNavigationBarAppearance()
-        setupFeaturesUI()
-        setupProductsUI()
+    func setupUI() {        
+        setupNavigationBar()
+        setupPlansUI()
         setupNotifications()
-        loadData()
     }
     
-    @IBAction func didTapFirstProduct(_ sender: Any) {
-        viewModel.selectedProductId = .monthly
-        updateUI()
+    func setupNavigationBar() {
+        setupNavigationBarAppearance()
+        navigationItem.title = NSLocalizedString("Подписка", comment: "")
     }
     
-    @IBAction func didTapSecondProduct(_ sender: Any) {
-        viewModel.selectedProductId = .yearly
-        updateUI()
-    }
-        
-    @IBAction func didTapContinueButton(_ sender: Any) {
-        purchase()
+    private func updateUI() {
+        plansPageControl.numberOfPages = viewModel.numberOfSubscriptionPlans
+        plansCollectionView.reloadData()
     }
     
-    @IBAction func didTapRestoreButton(_ sender: Any) {
-        restore()
+    func showActivityIndicator() {
+        messagePresenterManager.showHUD()
     }
     
-    @IBAction func didTapTermsButton(_ sender: Any) {
-        show(url: viewModel.termsURLString)
-    }
-    
-    @IBAction func didTapPrivacyButton(_ sender: Any) {
-        show(url: viewModel.privacyURLString)
+    func hideActivityIndicator() {
+        messagePresenterManager.dismissHUD()
     }
     
     @objc private func loadData() {
         viewModel.updateProducts()
-        updateUI(reload: false)
+        updateUI()
         showActivityIndicator()
         _ = firstly {
                 viewModel.checkIntroductoryEligibility()
             }.ensure {
-                self.updateUI(reload: false)
+                self.updateUI()
                 self.hideActivityIndicator()
             }
     }
     
-    private func purchase() {
+    private func close() {
+        if isModal || isRoot {
+            closeButtonHandler()
+        }
+        else {
+            navigationController?.popViewController()
+        }
+    }
+    
+    private func purchase(product: SKProduct) {
         showActivityIndicator()
         _ = firstly {
-                viewModel.purchase()
+                viewModel.purchase(product: product)
             }.done {
-                if self.isModal || self.isRoot {
-                    self.closeButtonHandler()
-                }
-                else {
-                    self.navigationController?.popViewController()
-                }
+                self.close()
                 self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Подписка оформлена! Теперь у вас неограниченный доступ!", comment: ""), theme: .success, duration: .normal)
             }.catch { error in
                 self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Невозможно оформить подписку", comment: ""), theme: .error, duration: .short)
@@ -139,12 +110,7 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
         _ = firstly {
                 viewModel.restore()
             }.done {
-                if self.isModal || self.isRoot {
-                    self.closeButtonHandler()
-                }
-                else {
-                    self.navigationController?.popViewController()
-                }
+                self.close()
                 self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Подписка восстановлена! Теперь у вас снова неограниченный доступ!", comment: ""), theme: .success, duration: .normal)
             }.catch { error in
                 self.messagePresenterManager.show(navBarMessage: NSLocalizedString("Невозможно восстановить подписку", comment: ""), theme: .error, duration: .short)
@@ -157,81 +123,17 @@ class SubscriptionViewController : FormFieldsTableViewController, ApplicationRou
         NotificationCenter.default.addObserver(self, selector: #selector(loadData), name: Apphud.didFetchProductsNotification(), object: nil)
     }
     
-    private func setupFeaturesUI() {
-        featuresCollectionView.delegate = self
-        featuresCollectionView.dataSource = self
-        featuresCollectionView.isItemPagingEnabled = true
-        featuresPageControl.numberOfPages = viewModel.numberOfFeatureDescriptions
-        scheduledCarouselTimerWithTimeInterval()
-    }
-    
-    private func scheduledCarouselTimerWithTimeInterval() {
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
-            self?.showNextFeatureDescription()
-        }
-    }
-    
-    @objc private func showNextFeatureDescription() {
+    private func setupPlansUI() {
+        plansCollectionView.delegate = self
+        plansCollectionView.dataSource = self
         
-        guard var currentPage = featuresCollectionView.centeredIndexPath?.row else { return }
-        if currentPage > featuresCollectionView.numberOfItems(inSection: 0) - 2 {
-           currentPage = 0
-        } else {
-           currentPage = currentPage + 1
-        }
-        featuresCollectionView.scrollToItem(at: IndexPath(item: currentPage, section: 0), at: .centeredHorizontally, animated: true)
+        guard let layout = plansCollectionView.collectionViewLayout as? UPCarouselFlowLayout else { return }
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: plansCollectionView.frame.size.width - 64, height: plansCollectionView.frame.size.height)
+        layout.sideItemScale = 0.8
+        layout.sideItemAlpha = 1.0
+        layout.spacingMode = .fixed(spacing: 8)
     }
-    
-    private func setupProductsUI() {
-        productContainers = [.monthly : (background: firstProductBackground,
-                                         title: firstProductTitleLabel,
-                                         subtitle: firstProductSubtitleLabel,
-                                         titleContainer: firstProductTitleContainer,
-                                         subtitleContainer: firstProductSubtitleContainer,
-                                         delimiter: firstProductDelimeter,
-                                         discountButton: firstProductDiscountButton),
-                             .yearly : (background: secondProductBackground,
-                                        title: secondProductTitleLabel,
-                                        subtitle: secondProductSubtitleLabel,
-                                        titleContainer: secondProductTitleContainer,
-                                        subtitleContainer: secondProductSubtitleContainer,
-                                        delimiter: secondProductDelimeter,
-                                        discountButton: secondProductDiscountButton)]
-    }
-    
-    private func updateUI(reload: Bool = true) {
-        updatePurchaseUI()
-        updateDiscountDescriptionUI()
-        updateProductUI(by: .monthly)
-        updateProductUI(by: .yearly)
-        if reload {
-            updateTable(animated: false)
-        }
-    }
-    
-    private func updatePurchaseUI() {
-        purchaseSubtitleLabel.text = viewModel.selectedProduct?.purchaseTitle
-    }
-    
-    private func updateDiscountDescriptionUI() {
-        discountDescriptionLabel.text = viewModel.selectedProduct?.discountDescription
-    }
-    
-    private func updateProductUI(by id: SubscriptionProductId) {
-        guard let productViewModel = viewModel.productViewModel(by: id) else {
-            return
-        }
-        productContainers[id]?.background.borderColor = UIColor.by(.blue1)
-        productContainers[id]?.background.borderWidth = productViewModel.isSelected ? 3.0 : 0.0
-        productContainers[id]?.title.text = productViewModel.pricePerPeriod
-        productContainers[id]?.subtitle.text = productViewModel.trialTitle
-        productContainers[id]?.subtitleContainer.isHidden = !productViewModel.hasTrial
-        productContainers[id]?.delimiter.isHidden = !productViewModel.hasTrial
-        productContainers[id]?.discountButton.isHidden = !productViewModel.hasDiscount
-        productContainers[id]?.discountButton.setTitle(productViewModel.discountTitle, for: .normal)
-    }
-        
-    
 }
 
 extension SubscriptionViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -240,24 +142,56 @@ extension SubscriptionViewController : UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfFeatureDescriptions
+        return viewModel.numberOfSubscriptionPlans
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard   let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeatureDescriptionCollectionViewCell", for: featuresCollectionView.indexPath(from: indexPath)) as? FeatureDescriptionCollectionViewCell,
-                let featureDescriptionViewModel = viewModel.featureDescriptionViewModel(by: featuresCollectionView.indexPath(from: indexPath)) else { return UICollectionViewCell() }
+        guard   let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SubscriptionPlanCollectionViewCell", for: indexPath) as? SubscriptionPlanCollectionViewCell,
+            let subscriptionPlanViewModel = viewModel.subscriptionPlanViewModel(by: indexPath) else { return UICollectionViewCell() }
         
-        cell.viewModel = featureDescriptionViewModel
-        
+        cell.viewModel = subscriptionPlanViewModel
+        cell.delegate = self
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageIndex = round(scrollView.contentOffset.x / (scrollView.frame.size.width - 64))
+        plansPageControl.currentPage = Int(pageIndex)
         
-        return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
+//        guard   lastPage != plansPageControl.currentPage,
+//                let cell = plansCollectionView.dequeueReusableCell(withReuseIdentifier: "SubscriptionPlanCollectionViewCell", for: IndexPath(item: plansPageControl.currentPage, section: 0)) as? SubscriptionPlanCollectionViewCell else { return }
+//        cell.tableView.scrollToTop()
+    }
+}
+
+extension SubscriptionViewController : SubscriptionPlanCollectionViewCellDelegate {
+    func didTapUnlimitedContinueButton(product: ProductViewModel) {
+        purchase(product: product.product)
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        featuresPageControl.currentPage = featuresCollectionView.indexPath(from: indexPath).item
+    func didTapPurchaseButton(product: ProductViewModel) {
+        purchase(product: product.product)
+    }
+    
+    func didTapFreeContinueButton() {
+        close()
+    }
+    
+    func didTapRestorePurchaseButton() {
+        restore()
+    }
+    
+    func didTapPrivacyPolicyButton() {
+        open(url: privacyURLString)
+    }
+    
+    func didTapTermsOfUseButton() {
+        open(url: termsURLString)
+    }
+    
+    func didChangeContent() {
+        plansCollectionView.performBatchUpdates({
+            plansCollectionView.reloadItems(at: [IndexPath(item: plansPageControl.currentPage, section: 0)])
+        })
     }
 }

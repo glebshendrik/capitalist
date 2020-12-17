@@ -185,7 +185,12 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
                 self.showDataSetupViewController()
                 return
             }
-                        
+               
+            guard UIFlowManager.reached(point: .subscription) || self.accountCoordinator.hasActiveSubscription else {
+                self.showSubscriptionScreen()
+                return
+            }
+            
             self.showMainViewController()
         }.catch { error in
             if self.errorIsNotFoundOrNotAuthorized(error: error) {
@@ -402,6 +407,10 @@ extension ApplicationRouter {
         show(.TransactionablesCreationViewController)
     }
         
+    private func showSubscriptionScreen() {
+        show(UINavigationController(rootViewController: viewController(.SubscriptionViewController)))
+    }
+    
     private func show(_ viewController: Infrastructure.ViewController, animated: Bool = true, _ completion: (() -> Void)? = nil) {
         show(self.viewController(viewController), animated: animated, completion)
     }

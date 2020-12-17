@@ -163,5 +163,7 @@ protocol UIFactoryProtocol {
     
     func transactionCreationInfoViewController() -> UINavigationController?
     
-    func subscriptionViewController() -> UINavigationController?
+    func subscriptionNavigationViewController(requiredPlans: [SubscriptionPlan]) -> UINavigationController?
+    
+    func subscriptionViewController(requiredPlans: [SubscriptionPlan]) -> SubscriptionViewController?
 }
