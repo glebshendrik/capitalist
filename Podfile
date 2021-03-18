@@ -66,6 +66,7 @@ post_install do |installer|
         config.build_settings.delete('CODE_SIGNING_ALLOWED')
         config.build_settings.delete('CODE_SIGNING_REQUIRED')
         config.build_settings["ONLY_ACTIVE_ARCH"] = "YES"
+        config.build_settings['CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER'] = 'NO'
 #        config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
     end
     installer.pods_project.targets.each do |target|

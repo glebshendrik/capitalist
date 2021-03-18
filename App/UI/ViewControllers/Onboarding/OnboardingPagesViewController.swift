@@ -35,9 +35,7 @@ class OnboardingPagesViewController : UIPageViewController, UIPageViewController
             router.viewController(.OnboardingPage1ViewController),
             router.viewController(.OnboardingPage2ViewController),
             router.viewController(.OnboardingPage3ViewController),
-            router.viewController(.OnboardingPage4ViewController),
-            router.viewController(.OnboardingPage5ViewController),
-            router.viewController(.OnboardingPage6ViewController),
+            router.viewController(.OnboardingPage4ViewController)
         ]
     }()
     

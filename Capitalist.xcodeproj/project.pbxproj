@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5EDFB791E5D420B93BE3A777 /* Pods_Capitalist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01DA18D9E71FE9AC610E5EB0 /* Pods_Capitalist.framework */; };
+		B53ED8B82603441F0063F55B /* LayoutElementOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53ED8B72603441F0063F55B /* LayoutElementOnboarding.swift */; };
 		FA02F4DC248A141700C536E3 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02F4DB248A141700C536E3 /* Connection.swift */; };
 		FA02F4DE248A53C000C536E3 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02F4DD248A53C000C536E3 /* Account.swift */; };
 		FA0570E6232A338F002B4706 /* BorrowsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0570E5232A338F002B4706 /* BorrowsServiceProtocol.swift */; };
@@ -535,6 +536,7 @@
 		01DA18D9E71FE9AC610E5EB0 /* Pods_Capitalist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Capitalist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		144AB8B9A407BE6DC4FD2A2D /* Pods-Capitalist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.release.xcconfig"; path = "Target Support Files/Pods-Capitalist/Pods-Capitalist.release.xcconfig"; sourceTree = "<group>"; };
 		26F6EDE3F64F130E7AD18761 /* Pods-Capitalist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.debug.xcconfig"; path = "Target Support Files/Pods-Capitalist/Pods-Capitalist.debug.xcconfig"; sourceTree = "<group>"; };
+		B53ED8B72603441F0063F55B /* LayoutElementOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutElementOnboarding.swift; sourceTree = "<group>"; };
 		FA02F4DB248A141700C536E3 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		FA02F4DD248A53C000C536E3 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		FA0570E5232A338F002B4706 /* BorrowsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -1382,6 +1384,7 @@
 			isa = PBXGroup;
 			children = (
 				FA53B11923D74486008B9A1F /* TransactionableExampleCollectionViewCell.swift */,
+				B53ED8B72603441F0063F55B /* LayoutElementOnboarding.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -2840,6 +2843,7 @@
 				FA165CE421B65F2F00EAA16B /* ValidationResult.swift in Sources */,
 				FA0570E6232A338F002B4706 /* BorrowsServiceProtocol.swift in Sources */,
 				FA8722742444BEEF00B093AA /* UserPreferencesManager.swift in Sources */,
+				B53ED8B82603441F0063F55B /* LayoutElementOnboarding.swift in Sources */,
 				FAD88F4F21AEC1A500BE7BC1 /* UsersService.swift in Sources */,
 				FA9F962821C2818E00FD64C1 /* IncomeSourceViewModel.swift in Sources */,
 				FA30B473228474EE0017470C /* BalanceViewController.swift in Sources */,

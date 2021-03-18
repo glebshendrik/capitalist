@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class OnboardingViewController : UIViewController, OnboardingPagesViewControllerDelegate, UIFactoryDependantProtocol {
     var factory: UIFactoryProtocol!
     @IBOutlet var button: HighlightButton!
+    @IBOutlet weak var loginButton: UIButton!
     var pagesController: OnboardingPagesViewController!
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -30,16 +32,30 @@ class OnboardingViewController : UIViewController, OnboardingPagesViewController
     
     func setupUI() {
         pageControl.numberOfPages = pagesController.numberOfPages
+        if let font = UIFont(name: "Roboto-Regular", size: 14) {
+            let attributedTitle = NSMutableAttributedString(string: NSLocalizedString("Есть аккаунт?", comment: "Есть аккаунт?"), attributes: [.font: font, .foregroundColor: UIColor(red: 0.918, green: 0.933, blue: 0.957, alpha: 0.64)])
+            attributedTitle.append(NSAttributedString(string: NSLocalizedString(" Войдите", comment: " Войдите"), attributes: [.font: font, .foregroundColor: UIColor(red:0.91, green:0.93, blue:0.96, alpha:1.00)]))
+            loginButton.setAttributedTitle(attributedTitle, for: .normal)
+        }
+        
+        let marginPControl = view.frame.height*0.02
+        let marginLoginB = view.frame.height*0.02
+        
+        loginButton.snp.makeConstraints { (make) in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-marginLoginB)
+        }
+        
+        button.snp.makeConstraints { (make) in
+            make.bottom.equalTo(loginButton.snp.top).offset(-marginLoginB)
+        }
+        
+        pageControl.snp.makeConstraints { (make) in
+            make.bottom.equalTo(button.snp.top).offset(-marginPControl)
+        }
+        
     }
     
     func updateUI() {
-        button.setTitle(pagesController.isLastPageShown
-            ? NSLocalizedString("Отлично, начать!", comment: "Отлично, начать!")
-            : NSLocalizedString("Далее", comment: "Далее"),
-                        for: .normal)
-        button.backgroundColor = pagesController.isLastPageShown ? UIColor.by(.blue1) : UIColor.clear
-        button.backgroundColorForNormal = pagesController.isLastPageShown ? UIColor.by(.blue1) : UIColor.clear
-        button.backgroundColorForHighlighted = pagesController.isLastPageShown ? UIColor.by(.white40) : UIColor.clear
         pageControl.currentPage = pagesController.currentPageIndex
     }
     
