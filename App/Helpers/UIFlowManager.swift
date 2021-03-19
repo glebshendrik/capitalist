@@ -11,6 +11,7 @@ import Foundation
 enum UIFlowPoint : String {
     case appLaunch = "com.rubiconapp.skrudzh.first-launch-key"
     case onboarding = "com.rubiconapp.skrudzh.onboarding"
+    case welcome
     case subscription
     case dataSetup
     case agreedRules
@@ -39,6 +40,10 @@ class UIFlowManager {
     
     static var wasShownOnboarding: Bool {
         return reach(point: .onboarding)
+    }
+    
+    static var wasShownWelcome: Bool {
+        return reach(point: .welcome)
     }
     
     static func reach(_ point: UIFlowPoint) {

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5EDFB791E5D420B93BE3A777 /* Pods_Capitalist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01DA18D9E71FE9AC610E5EB0 /* Pods_Capitalist.framework */; };
 		B53ED8B82603441F0063F55B /* LayoutElementOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53ED8B72603441F0063F55B /* LayoutElementOnboarding.swift */; };
+		B5DB21FD260485EB00856C32 /* video-sample.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B5DB21FC260485EB00856C32 /* video-sample.mp4 */; };
+		B5DB220026048B9500856C32 /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DB21FF26048B9500856C32 /* OnboardingWelcomeViewController.swift */; };
 		FA02F4DC248A141700C536E3 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02F4DB248A141700C536E3 /* Connection.swift */; };
 		FA02F4DE248A53C000C536E3 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02F4DD248A53C000C536E3 /* Account.swift */; };
 		FA0570E6232A338F002B4706 /* BorrowsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0570E5232A338F002B4706 /* BorrowsServiceProtocol.swift */; };
@@ -537,6 +539,8 @@
 		144AB8B9A407BE6DC4FD2A2D /* Pods-Capitalist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.release.xcconfig"; path = "Target Support Files/Pods-Capitalist/Pods-Capitalist.release.xcconfig"; sourceTree = "<group>"; };
 		26F6EDE3F64F130E7AD18761 /* Pods-Capitalist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.debug.xcconfig"; path = "Target Support Files/Pods-Capitalist/Pods-Capitalist.debug.xcconfig"; sourceTree = "<group>"; };
 		B53ED8B72603441F0063F55B /* LayoutElementOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutElementOnboarding.swift; sourceTree = "<group>"; };
+		B5DB21FC260485EB00856C32 /* video-sample.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "video-sample.mp4"; sourceTree = "<group>"; };
+		B5DB21FF26048B9500856C32 /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
 		FA02F4DB248A141700C536E3 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		FA02F4DD248A53C000C536E3 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		FA0570E5232A338F002B4706 /* BorrowsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -1134,6 +1138,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B5DB21FB260485AA00856C32 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				B5DB21FC260485EB00856C32 /* video-sample.mp4 */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		FA0570F3232A6D8B002B4706 /* Borrows */ = {
 			isa = PBXGroup;
 			children = (
@@ -1268,6 +1280,7 @@
 		FA26813121B178A100FADED1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B5DB21FB260485AA00856C32 /* Video */,
 				FAF3BC80241A1CBA007F46FE /* Images */,
 				FAAC99A323B31A59009ADB84 /* Roboto */,
 				FA16FC7E223BBDF40053C273 /* Sounds */,
@@ -1822,6 +1835,7 @@
 				FAA69642239A952F00C134D1 /* TransactionCreationInfoViewController.swift */,
 				FA54891725627FCE002AC516 /* OnboardCurrencyViewController.swift */,
 				FA53B11B23D7471C008B9A1F /* TransactionablesCreationViewController.swift */,
+				B5DB21FF26048B9500856C32 /* OnboardingWelcomeViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -2445,6 +2459,7 @@
 				FAA4261A22365DEE00B64925 /* TitleView.xib in Resources */,
 				FAF31CFC240371B800D4CFB3 /* Settings.storyboard in Resources */,
 				FAAC99B923B31A59009ADB84 /* LICENSE.txt in Resources */,
+				B5DB21FD260485EB00856C32 /* video-sample.mp4 in Resources */,
 				FAAC99BB23B31A59009ADB84 /* Roboto-Bold.ttf in Resources */,
 				FA0CADF921CBE58F00805288 /* LoaderView.xib in Resources */,
 				FA26814721B178D300FADED1 /* Rubik-Regular.ttf in Resources */,
@@ -2660,6 +2675,7 @@
 				FA8382B621F89FE800307ECD /* DependentIncomeSourceInfoViewController.swift in Sources */,
 				FA0CAE1F21D6785E00805288 /* IconCollectionViewCell.swift in Sources */,
 				FA56AB99235EE85900E4D0E3 /* ActiveSelectViewController.swift in Sources */,
+				B5DB220026048B9500856C32 /* OnboardingWelcomeViewController.swift in Sources */,
 				FA8AD0DC22C5F18C0084AD19 /* ProviderCell.swift in Sources */,
 				FA6910AA2300F0B6001209FC /* LoginTableController.swift in Sources */,
 				FA2847E922EED208003F114A /* FormTapField.swift in Sources */,

@@ -33,8 +33,8 @@ class OnboardingViewController : UIViewController, OnboardingPagesViewController
     func setupUI() {
         pageControl.numberOfPages = pagesController.numberOfPages
         if let font = UIFont(name: "Roboto-Regular", size: 14) {
-            let attributedTitle = NSMutableAttributedString(string: NSLocalizedString("Есть аккаунт?", comment: "Есть аккаунт?"), attributes: [.font: font, .foregroundColor: ColorAsset.white64])
-            attributedTitle.append(NSAttributedString(string: NSLocalizedString(" Войдите", comment: " Войдите"), attributes: [.font: font, .foregroundColor: ColorAsset.white100]))
+            let attributedTitle = NSMutableAttributedString(string: NSLocalizedString("Есть аккаунт?", comment: "Есть аккаунт?"), attributes: [.font: font, .foregroundColor: UIColor.by(.white64)])
+            attributedTitle.append(NSAttributedString(string: NSLocalizedString(" Войдите", comment: " Войдите"), attributes: [.font: font, .foregroundColor: UIColor.by(.white100)]))
             loginButton.setAttributedTitle(attributedTitle, for: .normal)
         }
         
