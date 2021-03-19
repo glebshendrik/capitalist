@@ -12,19 +12,19 @@ import SnapKit
 class LayoutElementOnboarding: UIView {
 
     override func draw(_ rect: CGRect) {
-        let images = self.subviews.filter{$0 is UIImageView}
-        let labels = self.subviews.filter{$0 is UILabel}
+        guard let image = self.subviews.first(where: {$0 is UIImageView}) else {return}
+        guard let label = self.subviews.first(where: {$0 is UILabel}) else {return}
         
         let isSe = frame.height < 667
-        let marginImage = isSe ? frame.height*0.12 : frame.height*0.14
-        let marginLabel = isSe ? 10 : frame.height*0.75
+        let imageTopMargin = isSe ? frame.height * 0.12 : frame.height * 0.14
+        let labelTopMargin = isSe ? 10 : frame.height * 0.75
         
-        images[0].snp.makeConstraints { (make) in
-            make.top.equalTo(safeAreaLayoutGuide).offset(marginImage)
+        image.snp.makeConstraints { (make) in
+            make.top.equalTo(safeAreaLayoutGuide).offset(imageTopMargin)
         }
-        
-        labels[0].snp.makeConstraints { (make) in
-            make.top.equalTo(images[0].snp.bottom).offset(marginLabel)
+
+        label.snp.makeConstraints { (make) in
+            make.top.equalTo(image.snp.bottom).offset(labelTopMargin)
         }
     }
 }

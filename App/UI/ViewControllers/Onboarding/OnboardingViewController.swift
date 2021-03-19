@@ -33,24 +33,24 @@ class OnboardingViewController : UIViewController, OnboardingPagesViewController
     func setupUI() {
         pageControl.numberOfPages = pagesController.numberOfPages
         if let font = UIFont(name: "Roboto-Regular", size: 14) {
-            let attributedTitle = NSMutableAttributedString(string: NSLocalizedString("Есть аккаунт?", comment: "Есть аккаунт?"), attributes: [.font: font, .foregroundColor: UIColor(red: 0.918, green: 0.933, blue: 0.957, alpha: 0.64)])
-            attributedTitle.append(NSAttributedString(string: NSLocalizedString(" Войдите", comment: " Войдите"), attributes: [.font: font, .foregroundColor: UIColor(red:0.91, green:0.93, blue:0.96, alpha:1.00)]))
+            let attributedTitle = NSMutableAttributedString(string: NSLocalizedString("Есть аккаунт?", comment: "Есть аккаунт?"), attributes: [.font: font, .foregroundColor: ColorAsset.white64])
+            attributedTitle.append(NSAttributedString(string: NSLocalizedString(" Войдите", comment: " Войдите"), attributes: [.font: font, .foregroundColor: ColorAsset.white100]))
             loginButton.setAttributedTitle(attributedTitle, for: .normal)
         }
         
-        let marginPControl = view.frame.height*0.02
-        let marginLoginB = view.frame.height*0.02
+        let pageControlBottomMargin = view.frame.height * 0.02
+        let loginButtonBottomMargin = view.frame.height * 0.02
         
         loginButton.snp.makeConstraints { (make) in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-marginLoginB)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-loginButtonBottomMargin)
         }
         
         button.snp.makeConstraints { (make) in
-            make.bottom.equalTo(loginButton.snp.top).offset(-marginLoginB)
+            make.bottom.equalTo(loginButton.snp.top).offset(-loginButtonBottomMargin)
         }
         
         pageControl.snp.makeConstraints { (make) in
-            make.bottom.equalTo(button.snp.top).offset(-marginPControl)
+            make.bottom.equalTo(button.snp.top).offset(-pageControlBottomMargin)
         }
         
     }
