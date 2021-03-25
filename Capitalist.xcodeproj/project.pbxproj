@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		5EDFB791E5D420B93BE3A777 /* Pods_Capitalist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01DA18D9E71FE9AC610E5EB0 /* Pods_Capitalist.framework */; };
 		B53ED8B82603441F0063F55B /* LayoutElementOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53ED8B72603441F0063F55B /* LayoutElementOnboarding.swift */; };
+		B53FC755260C717F0098C737 /* ReportTotalPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53FC754260C717F0098C737 /* ReportTotalPollViewController.swift */; };
+		B53FC758260C71E00098C737 /* ReportTotalPollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53FC757260C71E00098C737 /* ReportTotalPollViewModel.swift */; };
+		B57CB5422609C0BC00973E0C /* WelcomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57CB5412609C0BC00973E0C /* WelcomeCollectionViewCell.swift */; };
+		B57CB5452609C0F600973E0C /* TutorPollCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57CB5442609C0F600973E0C /* TutorPollCollectionViewCell.swift */; };
+		B57CB5482609C11300973E0C /* QuestionPollCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57CB5472609C11300973E0C /* QuestionPollCollectionViewCell.swift */; };
+		B57CB54B2609C27100973E0C /* WelcomePollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57CB54A2609C27100973E0C /* WelcomePollViewModel.swift */; };
 		B5DB21FD260485EB00856C32 /* video-sample.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B5DB21FC260485EB00856C32 /* video-sample.mp4 */; };
 		B5DB220026048B9500856C32 /* OnboardingWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DB21FF26048B9500856C32 /* OnboardingWelcomeViewController.swift */; };
 		FA02F4DC248A141700C536E3 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02F4DB248A141700C536E3 /* Connection.swift */; };
@@ -539,6 +545,12 @@
 		144AB8B9A407BE6DC4FD2A2D /* Pods-Capitalist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.release.xcconfig"; path = "Target Support Files/Pods-Capitalist/Pods-Capitalist.release.xcconfig"; sourceTree = "<group>"; };
 		26F6EDE3F64F130E7AD18761 /* Pods-Capitalist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitalist.debug.xcconfig"; path = "Target Support Files/Pods-Capitalist/Pods-Capitalist.debug.xcconfig"; sourceTree = "<group>"; };
 		B53ED8B72603441F0063F55B /* LayoutElementOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutElementOnboarding.swift; sourceTree = "<group>"; };
+		B53FC754260C717F0098C737 /* ReportTotalPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTotalPollViewController.swift; sourceTree = "<group>"; };
+		B53FC757260C71E00098C737 /* ReportTotalPollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTotalPollViewModel.swift; sourceTree = "<group>"; };
+		B57CB5412609C0BC00973E0C /* WelcomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		B57CB5442609C0F600973E0C /* TutorPollCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorPollCollectionViewCell.swift; sourceTree = "<group>"; };
+		B57CB5472609C11300973E0C /* QuestionPollCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPollCollectionViewCell.swift; sourceTree = "<group>"; };
+		B57CB54A2609C27100973E0C /* WelcomePollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePollViewModel.swift; sourceTree = "<group>"; };
 		B5DB21FC260485EB00856C32 /* video-sample.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "video-sample.mp4"; sourceTree = "<group>"; };
 		B5DB21FF26048B9500856C32 /* OnboardingWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeViewController.swift; sourceTree = "<group>"; };
 		FA02F4DB248A141700C536E3 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
@@ -1398,6 +1410,9 @@
 			children = (
 				FA53B11923D74486008B9A1F /* TransactionableExampleCollectionViewCell.swift */,
 				B53ED8B72603441F0063F55B /* LayoutElementOnboarding.swift */,
+				B57CB5412609C0BC00973E0C /* WelcomeCollectionViewCell.swift */,
+				B57CB5442609C0F600973E0C /* TutorPollCollectionViewCell.swift */,
+				B57CB5472609C11300973E0C /* QuestionPollCollectionViewCell.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1697,6 +1712,8 @@
 				FA54891B25628227002AC516 /* OnboardCurrencyViewModel.swift */,
 				FA53B11D23D74D05008B9A1F /* TransactionablesCreationViewModel.swift */,
 				FA53B11F23D823FD008B9A1F /* TransactionableExampleViewModel.swift */,
+				B57CB54A2609C27100973E0C /* WelcomePollViewModel.swift */,
+				B53FC757260C71E00098C737 /* ReportTotalPollViewModel.swift */,
 			);
 			path = Onbording;
 			sourceTree = "<group>";
@@ -1836,6 +1853,7 @@
 				FA54891725627FCE002AC516 /* OnboardCurrencyViewController.swift */,
 				FA53B11B23D7471C008B9A1F /* TransactionablesCreationViewController.swift */,
 				B5DB21FF26048B9500856C32 /* OnboardingWelcomeViewController.swift */,
+				B53FC754260C717F0098C737 /* ReportTotalPollViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -2589,6 +2607,7 @@
 				FAF31D122406544700D4CFB3 /* SubscriptionViewController.swift in Sources */,
 				FA835D5C2265BDD100A592F2 /* GraphPresentingExtension.swift in Sources */,
 				FAE3BBCF2236668300FF1397 /* TitleView.swift in Sources */,
+				B53FC758260C71E00098C737 /* ReportTotalPollViewModel.swift in Sources */,
 				FAB5BE45235213E2000466AE /* ActiveTypesService.swift in Sources */,
 				FA6DDE7E22D4D0B1008D14FF /* ExpenseSourceEditingExtension.swift in Sources */,
 				FA0CAE2A21D69E2600805288 /* PagedCollectionViewLayout.swift in Sources */,
@@ -2654,6 +2673,7 @@
 				FA7FC37F2499176000C1ACCD /* BankConnectionInfoTableViewCell.swift in Sources */,
 				FAA5D57A238FA9CD00CC53AD /* BorrowInfoViewModel.swift in Sources */,
 				FA7EE00022CDA1940054EAD3 /* AccountViewModel.swift in Sources */,
+				B57CB5422609C0BC00973E0C /* WelcomeCollectionViewCell.swift in Sources */,
 				FA0A4E8F2477D58200886277 /* CombinedInfoTableViewCell.swift in Sources */,
 				FA0CAE2821D67B7F00805288 /* IconsViewModel.swift in Sources */,
 				FAF7528F24408AC900A0B5B7 /* CountriesViewModel.swift in Sources */,
@@ -2732,6 +2752,7 @@
 				FA780ED92530754C007D394B /* BankConnectableViewModel.swift in Sources */,
 				FA6918A221F0EE2D003639F6 /* ExpenseCategoryEditViewController.swift in Sources */,
 				FA0CAE2621D67A7100805288 /* IconViewModel.swift in Sources */,
+				B57CB54B2609C27100973E0C /* WelcomePollViewModel.swift in Sources */,
 				FAAC99C023B4C9F4009ADB84 /* PeriodsViewModel.swift in Sources */,
 				FA56AB93235EE7F400E4D0E3 /* ActiveEditTableController.swift in Sources */,
 				FA835D622265C0D600A592F2 /* PieChartPresentingExtension.swift in Sources */,
@@ -2772,6 +2793,7 @@
 				FAF34BCA24FF523300430585 /* SubscriptionPlanViewModel.swift in Sources */,
 				FA7276DA22539F510086D4D1 /* FiltersSelectionViewSection.swift in Sources */,
 				FA0A4E84246A7DB300886277 /* FormImageValueField.swift in Sources */,
+				B57CB5452609C0F600973E0C /* TutorPollCollectionViewCell.swift in Sources */,
 				FA5751C9237C2C0C00912443 /* SwitchInfoTableViewCell.swift in Sources */,
 				FA54892125667529002AC516 /* ClearFiltersTableViewCell.swift in Sources */,
 				FA2847E722E9C216003F114A /* FormMoneyTextField.swift in Sources */,
@@ -2834,6 +2856,7 @@
 				FAD88F1F21AEB6CD00BE7BC1 /* UIMessagePresenterManagerProtocol.swift in Sources */,
 				FADD04C92420FE4F00FB542D /* BiometricVerificationManager.swift in Sources */,
 				FA02F4DC248A141700C536E3 /* Connection.swift in Sources */,
+				B57CB5482609C11300973E0C /* QuestionPollCollectionViewCell.swift in Sources */,
 				FADD04C5241F91E400FB542D /* BiometricVerificationManagerProtocol.swift in Sources */,
 				FAB5BE3F2351FE75000466AE /* ActiveType.swift in Sources */,
 				FA0A4E912477E14600886277 /* CombinedInfoField.swift in Sources */,
@@ -2925,6 +2948,7 @@
 				FAC3B9CD21C0F7670015A12F /* IncomeSourcesCoordinator.swift in Sources */,
 				FA940E492538594100C72F8A /* TransactionableExamplesViewModel.swift in Sources */,
 				FA717707226EF8CF008ADF94 /* ExportManager.swift in Sources */,
+				B53FC755260C717F0098C737 /* ReportTotalPollViewController.swift in Sources */,
 				FAA9127D220D249100F2C251 /* SettingsCoordinatorProtocol.swift in Sources */,
 				FA7276AF22524B190086D4D1 /* IncomeSourceEditDelegateExtension.swift in Sources */,
 				FAD88F2421AEB71000BE7BC1 /* NotificationsManagerProtocol.swift in Sources */,

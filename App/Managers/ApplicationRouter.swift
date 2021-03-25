@@ -192,6 +192,8 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
                 showOnboardCurrencyViewController()
             case .OnboardingWelcomeViewController:
                 showOnboardingWelcomeViewController()
+            case .ReportTotalPollViewController:
+                showReportTotalPollViewController()
             case .SubscriptionViewController:
                 showSubscriptionScreen()
             case .TransactionablesCreationViewController:
@@ -208,7 +210,8 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             return .OnboardingViewController
         }
         if !(UIFlowManager.reached(point: .welcome) || user.onboarded) {
-            return .OnboardingWelcomeViewController
+//            return .OnboardingWelcomeViewController
+            return .ReportTotalPollViewController
         }
         if !(UIFlowManager.reached(point: .dataSetup) || user.onboarded) {
             return .OnboardCurrencyViewController
@@ -428,6 +431,10 @@ extension ApplicationRouter {
     
     private func showOnboardingWelcomeViewController() {
         show(.OnboardingWelcomeViewController)
+    }
+    
+    private func showReportTotalPollViewController() {
+        show(.ReportTotalPollViewController)
     }
     
     private func showRegistrationViewController() {

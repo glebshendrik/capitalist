@@ -12,8 +12,12 @@ import SnapKit
 class LayoutElementOnboarding: UIView {
 
     override func draw(_ rect: CGRect) {
-        guard let image = self.subviews.first(where: {$0 is UIImageView}) else {return}
-        guard let label = self.subviews.first(where: {$0 is UILabel}) else {return}
+        guard
+            let image = self.subviews.first(where: { $0 is UIImageView }),
+            let label = self.subviews.first(where: { $0 is UILabel })
+        else {
+            return
+        }
         
         let isSe = frame.height < 667
         let imageTopMargin = isSe ? frame.height * 0.12 : frame.height * 0.14

@@ -33,6 +33,7 @@ enum ColorAsset : String {
     case purple24 = "purple 0.24"
     case purple64 = "purple 0.64"
     case yellow1 = "yellow 1"
+    case solitude = "solitude"
 }
 
 extension UIColor {
