@@ -554,4 +554,10 @@ class UIFactory : UIFactoryProtocol {
         prototypesLinkingViewController.viewModel.linkingType = linkingType
         return UINavigationController(rootViewController: prototypesLinkingViewController)
     }
+    
+    func reportTotalPollViewController() -> ReportTotalPollViewController? {
+        guard let reportTotalPollViewController = router.viewController(.ReportTotalPollViewController) as? ReportTotalPollViewController else { return nil }
+        
+        return reportTotalPollViewController
+    }
 }

@@ -173,4 +173,6 @@ protocol UIFactoryProtocol {
                                                isUsed: Bool) -> TransactionableExamplesViewController?
     
     func prototypesLinkingViewController(linkingType: TransactionableType) -> UINavigationController?
+    
+    func reportTotalPollViewController() -> ReportTotalPollViewController?
 }

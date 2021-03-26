@@ -32,10 +32,10 @@ class ReportTotalPollViewController: UIViewController {
     
     private func setupUI() {
         saleLabel.text = saleLabel.text?.uppercased()
-        saleLabel.backgroundColor = UIColor.by(.solitude)
+        saleLabel.backgroundColor = UIColor.by(.white100)
         saleLabel.cornerRadius = 14
         saleLabel.snp.makeConstraints { (make) in
-            make.width.equalTo(saleLabel.frame.width + 40)
+            make.width.equalTo(saleLabel.frame.width + 60)
         }
         
         capitalistCaptionLabel.text = capitalistCaptionLabel.text?.uppercased()

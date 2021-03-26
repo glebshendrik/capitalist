@@ -210,8 +210,8 @@ class ApplicationRouter : NSObject, ApplicationRouterProtocol {
             return .OnboardingViewController
         }
         if !(UIFlowManager.reached(point: .welcome) || user.onboarded) {
-//            return .OnboardingWelcomeViewController
-            return .ReportTotalPollViewController
+            return .OnboardingWelcomeViewController
+//            return .ReportTotalPollViewController
         }
         if !(UIFlowManager.reached(point: .dataSetup) || user.onboarded) {
             return .OnboardCurrencyViewController
@@ -430,7 +430,9 @@ extension ApplicationRouter {
     }
     
     private func showOnboardingWelcomeViewController() {
-        show(.OnboardingWelcomeViewController)
+        let onboardingWelcomeViewController = viewController(.OnboardingWelcomeViewController)
+        show(UINavigationController(rootViewController: onboardingWelcomeViewController))
+        
     }
     
     private func showReportTotalPollViewController() {

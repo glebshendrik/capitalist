@@ -24,8 +24,3 @@ class TutorPollCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension UICollectionViewCell {
-    static var cellIdentifier : String {
-        return String(describing: Self.self)
-    }
-}

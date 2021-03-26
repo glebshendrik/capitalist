@@ -11,37 +11,45 @@ import PromiseKit
 
 class WelcomePollViewModel {
     
-    var title: String {
-        return NSLocalizedString("Привет, я Ник \nСЕО приложения Capitalist", comment: "")
-    }
-    
-    var subtitle: String {
-        return NSLocalizedString("Рад, что тебя интересует тема финансового роста и уверен сто с нами ты сможешь больше.\n \nСмотри видео, где за минуту расскажу почему именно я знаю как тебе помочь.", comment: "")
-    }
-    
     enum PollCellType: String {
-        case TITLE = "WelcomeCollectionViewCell"
-        case TEXT = "TutorPollCollectionViewCell"
-        case FIELD = "QuestionPollCollectionViewCell"
+        case title = "WelcomeCollectionViewCell"
+        case text = "TutorPollCollectionViewCell"
+        case field = "QuestionPollCollectionViewCell"
     }
     
-    typealias PollScreenData = (title: String, value: String, type: PollCellType)
-    
-    var questions: [PollScreenData] {
-        get {
-            return [
-                (NSLocalizedString("Привет, я Ник,\nCEO приложения Capitalist", comment: ""), NSLocalizedString("Рад, что тебя интересует тема финансового роста и уверен сто с нами ты сможешь больше.\n \nСмотри видео, где за минуту расскажу почему именно я знаю как тебе помочь.", comment: ""), .TITLE),
-                (NSLocalizedString("И чтоб не быть голословным, давай я тебя покажу на примере", comment: ""), NSLocalizedString("Всего 3-и вопроса. И потом на примере будет лучше видна польза от приложения. \nГотов?", comment: ""), .TEXT),
-                (NSLocalizedString("Какую сумму пассивного дохода хочешь в месяц?", comment: ""), "", .FIELD),
-                (NSLocalizedString("Сколько зарабатываешь сейчас?", comment: ""), "", .FIELD),
-                (NSLocalizedString("Сколько остается после всех расходов?", comment: ""), "", .FIELD),
-            ]
-        }
+    private var questions: [QuestionViewModel] {
+        return [
+            QuestionViewModel(title: NSLocalizedString("Привет, я Ник,\nCEO приложения Capitalist", comment: ""), subtitle: NSLocalizedString("Рад, что тебя интересует тема финансового роста и уверен сто с нами ты сможешь больше.\n \nСмотри видео, где за минуту расскажу почему именно я знаю как тебе помочь.", comment: ""), type: .title),
+            QuestionViewModel(title: NSLocalizedString("И чтоб не быть голословным, давай я тебя покажу на примере", comment: ""), subtitle: NSLocalizedString("Всего 3-и вопроса. И потом на примере будет лучше видна польза от приложения. \nГотов?", comment: ""), type: .text),
+            QuestionViewModel(title: NSLocalizedString("Какую сумму пассивного дохода хочешь в месяц?", comment: ""), type: .field),
+            QuestionViewModel(title: NSLocalizedString("Сколько зарабатываешь сейчас?", comment: ""), type: .field),
+            QuestionViewModel(title: NSLocalizedString("Сколько остается после всех расходов?", comment: ""), type: .field),
+        ]
     }
     
     
     var numberOfPollQuestions: Int {
         return questions.count
+    }
+    
+    var currentIndex: Int = 0
+    
+    var nextIndexPath: IndexPath {
+        currentIndex += 1
+        return IndexPath(row: currentIndex, section: 0)
+    }
+    
+    var backIndexPath: IndexPath {
+        currentIndex -= currentIndex != 0 ? 1 : 0
+        return IndexPath(row: currentIndex, section: 0)
+    }
+    
+    var dataCell: QuestionViewModel {
+        return questions[currentIndex]
+    }
+    
+    var isLastPageShown: Bool {
+        return currentIndex + 1 == questions.count ? true : false
     }
     
     init() {

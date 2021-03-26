@@ -81,14 +81,13 @@ extension ApplicationAssembly {
         }
         
         // OnboardingWelcomeViewController
-//        FIXME: Promisekit viewmodel
         container.registerForSkrudzhStoryboard(OnboardingWelcomeViewController.self) { (r, c) in
-            c.viewModel = WelcomePollViewModel()
+            c.viewModel = r.resolve(WelcomePollViewModel.self)
         }
         
         // ReportTotalPollViewController
         container.registerForSkrudzhStoryboard(ReportTotalPollViewController.self) { (r, c) in
-            c.viewModel = ReportTotalPollViewModel()
+            c.viewModel = r.resolve(ReportTotalPollViewModel.self)
         }
         
         // IncomeSourceEditViewController

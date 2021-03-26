@@ -9,8 +9,11 @@
 import UIKit
 import AVKit
 import SnapKit
+import SwifterSwift
 
-class OnboardingWelcomeViewController: UIViewController, UIFactoryDependantProtocol {
+class OnboardingWelcomeViewController: UIViewController, UIFactoryDependantProtocol, ApplicationRouterDependantProtocol {
+    
+    var router: ApplicationRouterProtocol!
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
@@ -18,11 +21,10 @@ class OnboardingWelcomeViewController: UIViewController, UIFactoryDependantProto
     
     @IBOutlet weak var pollCollection: UICollectionView!
     var viewModel: WelcomePollViewModel!
-    private var currentIndex: Int = 0
+    
     private var oldCell: UICollectionViewCell?
     
     var factory: UIFactoryProtocol!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +36,6 @@ class OnboardingWelcomeViewController: UIViewController, UIFactoryDependantProto
     }
     
     private func setupWelcomePollCollectionView() {
-        //        pollCollection.configureForPeekingDelegate()
         pollCollection.delegate = self
         pollCollection.dataSource = self
     }
@@ -60,7 +61,7 @@ extension OnboardingWelcomeViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let data = viewModel.questions[indexPath.row]
+        let data = viewModel.dataCell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: data.type.rawValue, for: indexPath)
         
         switch cell {
@@ -78,33 +79,31 @@ extension OnboardingWelcomeViewController: UICollectionViewDelegate, UICollectio
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cvRect = self.view.frame.size
-        if indexPath.row == 0 {
-            return CGSize(width: cvRect.width, height: cvRect.height)
-        } else {
-            return CGSize(width: cvRect.width, height: cvRect.height - 150)
-        }
+        let diff = indexPath.row == 0
+            ? .zero
+            : CGSize(width: 0, height: 150.0)
+
+        return view.frame.size - diff
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        
     }
     
-    private func configure(_ cell: WelcomeCollectionViewCell, data: WelcomePollViewModel.PollScreenData) {
+    private func configure(_ cell: WelcomeCollectionViewCell, data: QuestionViewModel) {
         cell.delegate = self
         cell.delegatePoll = self
         cell.titleCell.text = data.title
-        cell.subtitle.text = data.value
+        cell.subtitle.text = data.subtitle
     }
     
-    private func configure(_ cell: TutorPollCollectionViewCell, data: WelcomePollViewModel.PollScreenData) {
+    private func configure(_ cell: TutorPollCollectionViewCell, data: QuestionViewModel) {
         cell.delegate = self
         cell.titleCell.text = data.title
-        cell.subtitle.text = data.value
+        cell.subtitle.text = data.subtitle
     }
     
-    private func configure(_ cell: QuestionPollCollectionViewCell, data: WelcomePollViewModel.PollScreenData) {
+    private func configure(_ cell: QuestionPollCollectionViewCell, data: QuestionViewModel) {
         cell.delegate = self
         cell.titleCell.text = data.title
     }
@@ -128,28 +127,15 @@ extension OnboardingWelcomeViewController: PlayVideoCellProtocol {
 
 extension OnboardingWelcomeViewController: WelcomePollSlideProtocol {
     func next() {
-        if currentIndex + 1 == viewModel.numberOfPollQuestions {
-            //            next screen
-            
-            push(OnboardingViewController())
-//            self.navigationController?.pushViewController(OnboardingViewController())
+        if viewModel.isLastPageShown {
+            push(factory.reportTotalPollViewController())
         } else {
-            
-            currentIndex += 1
-            let nextIndexPath = IndexPath(row: currentIndex, section: 0)
-            pollCollection.scrollToItem(at: nextIndexPath, at: .bottom, animated: true)
+            pollCollection.scrollToItem(at: viewModel.nextIndexPath, at: .bottom, animated: true)
         }
     }
     
     func back() {
-        if currentIndex == 0 {
-            
-        } else {
-            currentIndex -= 1
-            let backIndexPath = IndexPath(row: currentIndex, section: 0)
-            pollCollection.scrollToItem(at: backIndexPath, at: .bottom, animated: true)
-        }
-        
+        pollCollection.scrollToItem(at: viewModel.backIndexPath, at: .bottom, animated: true)
     }
     
 }

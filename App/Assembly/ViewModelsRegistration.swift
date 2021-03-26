@@ -98,6 +98,10 @@ extension ApplicationAssembly {
                 
         container.autoregister(OnboardCurrencyViewModel.self, initializer: OnboardCurrencyViewModel.init)
         
+        container.autoregister(WelcomePollViewModel.self, initializer: WelcomePollViewModel.init)
+        
+        container.autoregister(ReportTotalPollViewModel.self, initializer: ReportTotalPollViewModel.init)
+        
         container.autoregister(TransactionablesCreationViewModel.self, initializer: TransactionablesCreationViewModel.init)
         
         container.autoregister(SubscriptionViewModel.self, initializer: SubscriptionViewModel.init)

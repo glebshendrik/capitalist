@@ -106,6 +106,22 @@ extension Float {
     }
 }
 
+extension Formatter {
+    static let number = NumberFormatter()
+    
+    static let withSeparator: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = " "
+        formatter.maximumIntegerDigits = 10
+        return formatter
+    }()
+}
+
+extension Numeric {
+    var formattedWithSeparator: String { Formatter.withSeparator.string(for: self) ?? "" }
+}
+
 extension String {
     
     func isLastCharacterWhiteSpace() -> Bool {
@@ -129,7 +145,7 @@ extension UIViewController {
     
     var concreteViewController: UIViewController {
         if let navVC = self as? UINavigationController,
-            let navRootVC = navVC.viewControllers.first {
+           let navRootVC = navVC.viewControllers.first {
             return navRootVC
         }
         return self
@@ -137,10 +153,10 @@ extension UIViewController {
     
     var topmostPresentedViewController: UIViewController {
         if let tabVC = self as? UITabBarController,
-            let selectedVC = tabVC.selectedViewController {
+           let selectedVC = tabVC.selectedViewController {
             return selectedVC.topmostPresentedViewController
         } else if let navVC = self as? UINavigationController,
-            let selectedVC = navVC.viewControllers.last {
+                  let selectedVC = navVC.viewControllers.last {
             return selectedVC.topmostPresentedViewController
         } else if let presentedVC = self.presentedViewController {
             return presentedVC.topmostPresentedViewController
@@ -243,28 +259,28 @@ extension Date {
         return Calendar.current.dateComponents([.day], from: self, to: Date()).day!
     }
     
-//    var ageVerbose: String {
-//        let components: [Calendar.Component] = [.year, .month, .day, .hour]
-//        let diff = (Date() - self).in(components).filter { $0.value > 0 }
-//        if diff.count == 0 { return "Just created" }
-//        return components
-//            .compactMap {
-//                guard let value = diff[$0] else { return nil }
-//                switch $0 {
-//                case .year:
-//                    return "\(value) years"
-//                case .month:
-//                    return "\(value) months"
-//                case .day:
-//                    return "\(value) days"
-//                case .hour:
-//                    return "\(value) hours"
-//                default:
-//                    return nil
-//                }
-//            }
-//            .joined(separator: ", ")
-//    }
+    //    var ageVerbose: String {
+    //        let components: [Calendar.Component] = [.year, .month, .day, .hour]
+    //        let diff = (Date() - self).in(components).filter { $0.value > 0 }
+    //        if diff.count == 0 { return "Just created" }
+    //        return components
+    //            .compactMap {
+    //                guard let value = diff[$0] else { return nil }
+    //                switch $0 {
+    //                case .year:
+    //                    return "\(value) years"
+    //                case .month:
+    //                    return "\(value) months"
+    //                case .day:
+    //                    return "\(value) days"
+    //                case .hour:
+    //                    return "\(value) hours"
+    //                default:
+    //                    return nil
+    //                }
+    //            }
+    //            .joined(separator: ", ")
+    //    }
 }
 
 extension UILabel {
@@ -374,7 +390,7 @@ extension UIViewController {
         let presentingIsModal = presentingViewController != nil
         let presentingIsNavigation = navigationController?.presentingViewController?.presentedViewController == navigationController
         let presentingIsTabBar = tabBarController?.presentingViewController is UITabBarController
-
+        
         return presentingIsModal || presentingIsNavigation || presentingIsTabBar
     }
     
@@ -392,11 +408,11 @@ extension UIViewController {
             navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close-icon"), style: .plain, target: self, action: #selector(didTapCloseButton(sender:)))
         }
     }
-        
+    
     @objc func didTapCloseButton(sender: Any) {
         closeButtonHandler()
     }
-            
+    
     @objc func closeButtonHandler(completion: (() -> Void)? = nil) {
         if isRoot {
             (self as? ApplicationRouterDependantProtocol)?.router.route()
@@ -480,10 +496,10 @@ extension UIView {
             border.translatesAutoresizingMaskIntoConstraints = false
             addSubview(border)
             addConstraints(formats.flatMap {
-                NSLayoutConstraint.constraints(withVisualFormat: $0,
-                                               options: [],
-                                               metrics: ["inset": inset, "thickness": thickness],
-                                               views: ["border": border]) })
+                            NSLayoutConstraint.constraints(withVisualFormat: $0,
+                                                           options: [],
+                                                           metrics: ["inset": inset, "thickness": thickness],
+                                                           views: ["border": border]) })
             borders.append(border)
             return border
         }
@@ -549,7 +565,7 @@ extension UIColor {
             var (r2, g2, b2, a2): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
             guard self.getRed(&r1, green: &g1, blue: &b1, alpha: &a1) else { return self }
             guard color.getRed(&r2, green: &g2, blue: &b2, alpha: &a2) else { return self }
-
+            
             return UIColor(red: CGFloat(r1 + (r2 - r1) * ratio),
                            green: CGFloat(g1 + (g2 - g1) * ratio),
                            blue: CGFloat(b1 + (b2 - b1) * ratio),
@@ -569,7 +585,7 @@ extension UIViewController {
                           options: .transitionCrossDissolve,
                           animations: {
                             activityIndicator.isHidden = hidden
-        })
+                          })
     }
     
     func update(_ collectionView: UICollectionView, animated: Bool = true, scrollToEnd: Bool = false, section: Int = 0) {
@@ -647,9 +663,10 @@ extension NSLayoutConstraint {
 }
 
 extension UICollectionViewCell {
-    
+    static var cellIdentifier : String {
+        return String(describing: Self.self)
+    }
 }
-
 
 extension UIView {
     
@@ -759,7 +776,7 @@ extension UIViewController {
         }
         return tip
     }
-        
+    
     private func createTip(_ text: String, position: EasyTipView.ArrowPosition, offset: CGPoint? = nil, inset: CGPoint? = nil, delegate: EasyTipViewDelegate?) -> EasyTipView {
         var preferences = EasyTipView.Preferences()
         preferences.drawing.font = UIFont(name: "Roboto-Light", size: 14)!
@@ -824,7 +841,7 @@ extension UISegmentedControl {
         
         setDividerImage(imageWithColor(color: UIColor.clear), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
     }
-
+    
     // create a 1x1 image with this color
     private func imageWithColor(color: UIColor) -> UIImage? {
         let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 36.0)
@@ -935,7 +952,7 @@ extension UIScrollView {
     var refreshControlFooterTitleLabel: UILabel? {
         return (footer?.animator as? ESRefreshFooterAnimator)?.titleLabel
     }
-        
+    
     var refreshControlFooterIndicatorView: UIActivityIndicatorView? {
         return (footer?.animator as? ESRefreshFooterAnimator)?.indicatorView
     }
@@ -981,21 +998,21 @@ extension ESRefreshFooterAnimator {
     var titleLabel: UILabel? {
         return self.view.subviews.first { $0 is UILabel } as? UILabel
     }
-        
+    
     var indicatorView: UIActivityIndicatorView? {
         return self.view.subviews.first { $0 is UIActivityIndicatorView } as? UIActivityIndicatorView
     }
 }
 
 class Once {
-  var already: Bool = false
-
-  func run(block: () -> Void) {
-    guard !already else { return }
-
-    block()
-    already = true
-  }
+    var already: Bool = false
+    
+    func run(block: () -> Void) {
+        guard !already else { return }
+        
+        block()
+        already = true
+    }
 }
 
 extension UIDevice {

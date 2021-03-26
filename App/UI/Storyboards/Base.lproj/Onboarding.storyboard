@@ -1516,33 +1516,33 @@ CEO приложения Capitalist</string>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="QuestionPollCollectionViewCell" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="QuestionPollCollectionViewCell" id="Oel-FS-pGq" customClass="QuestionPollCollectionViewCell" customModule="Capitalist" customModuleProvider="target">
                                         <rect key="frame" x="1" y="1226" width="373" height="613"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="Pyh-qd-cNj">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Pyh-qd-cNj">
                                             <rect key="frame" x="0.0" y="0.0" width="373" height="613"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="equalCentering" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="sa6-bq-TS6">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="sa6-bq-TS6">
                                                     <rect key="frame" x="16" y="403.5" width="341" height="159.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Какую сумму пассивного дохода хочешь в месяц?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uyD-K1-Wbu">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Какую сумму пассивного дохода хочешь в месяц?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uyD-K1-Wbu">
                                                             <rect key="frame" x="3.5" y="0.0" width="337.5" height="56.5"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="24"/>
                                                             <color key="textColor" name="white 1.0"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Сумма, ₽:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LXa-ZF-NL0">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Сумма, ₽:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LXa-ZF-NL0">
                                                             <rect key="frame" x="3.5" y="72.5" width="337.5" height="19"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
                                                             <color key="textColor" name="white 0.64"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dqy-Fk-CDD">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dqy-Fk-CDD">
                                                             <rect key="frame" x="16" y="111.5" width="309" height="48"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="48" id="OXQ-89-e8w"/>
                                                             </constraints>
                                                             <color key="textColor" name="white 1.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                            <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
@@ -1553,7 +1553,7 @@ CEO приложения Capitalist</string>
                                                         <constraint firstItem="Dqy-Fk-CDD" firstAttribute="leading" secondItem="sa6-bq-TS6" secondAttribute="leading" constant="16" id="zJG-mc-2NG"/>
                                                     </constraints>
                                                 </stackView>
-                                                <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CbR-9C-g9R">
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CbR-9C-g9R">
                                                     <rect key="frame" x="0.0" y="0.0" width="373" height="613"/>
                                                     <color key="backgroundColor" red="0.090386606750000001" green="0.093701504170000005" blue="0.1137281582" alpha="0.7701088626" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </view>
@@ -1752,8 +1752,8 @@ CEO приложения Capitalist</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Скидка 20%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fON-9t-J29">
-                                        <rect key="frame" x="138.5" y="106" width="98" height="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Самостоятельно" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fON-9t-J29">
+                                        <rect key="frame" x="121.5" y="106" width="132.5" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="IqK-p2-UK6"/>
                                         </constraints>
